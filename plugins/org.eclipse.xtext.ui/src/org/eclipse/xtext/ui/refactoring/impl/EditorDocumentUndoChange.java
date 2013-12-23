@@ -142,7 +142,6 @@ public class EditorDocumentUndoChange extends Change {
 	}
 
 	protected void releaseDocument(IDocument document, IProgressMonitor pm) throws CoreException {
-		document = null;
 	}
 
 	protected Change createUndoChange(UndoEdit edit) {

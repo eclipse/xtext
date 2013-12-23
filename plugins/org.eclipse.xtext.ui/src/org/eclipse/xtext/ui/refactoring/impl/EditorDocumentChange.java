@@ -96,7 +96,6 @@ public class EditorDocumentChange extends TextChange {
 
 	@Override
 	protected void releaseDocument(IDocument document, IProgressMonitor pm) throws CoreException {
-		document = null;
 	}
 
 	@Override
