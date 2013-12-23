@@ -20,8 +20,8 @@
 			</sourcePath>
 			<fileset dir="${jarsLocation}" id="clazz">
 				<include name="org.eclipse.xte*.jar" />
-				<exclude name="org.eclipse.xtend.jar" />
-				<exclude name="org.eclipse.xtend.shared.ui.jar" />
+				<exclude name="org.eclipse.xtend_*.jar" />
+				<exclude name="org.eclipse.xtend.shared.ui_*.jar" />
 				<exclude name="*.source*" />
 				<exclude name="*.doc.*" />
 			</fileset>
