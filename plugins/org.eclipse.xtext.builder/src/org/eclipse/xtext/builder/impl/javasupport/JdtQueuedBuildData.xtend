@@ -47,7 +47,7 @@ class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 		switch delta {
 			UnconfirmedStructuralChangesDelta: {
 				val project = delta.project
-				var state = javaBuildState.get(project)
+				var state = javaBuildState.get(project.name)
 				if (state == null) {
 					javaBuildState.put(project.name, state = project.lastBuiltState)
 				}
