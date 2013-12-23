@@ -134,6 +134,23 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 		annotationType.child(0, "bar : int").numChildren(0);
 		annotationType.child(1, "foo : String").numChildren(0);
 	}
+	
+	@Test public void testCreateExtensionInfo() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def create 'lalala' foo() {} }");
+		AssertBuilder type = assertBuilder.numChildren(1).child(0, "Foo").numChildren(1);
+		type.child(0, "foo() : String");
+	}
+	
+	@Test public void testCreateExtensionInfo_dispatch() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { " +
+				"dispatch def create value : 'foo' foo(String it) {} " +
+				"dispatch def create value : 'bar' foo(Integer it) {} " +
+				"}");
+		AssertBuilder type = assertBuilder.numChildren(1).child(0, "Foo").numChildren(1);
+		AssertBuilder dispatchMethod = type.child(0, "foo(Object) : String").numChildren(2);
+		dispatchMethod.child(0, "foo(String) : String");
+		dispatchMethod.child(1, "foo(Integer) : String");
+	}
 
 	protected AssertBuilder newAssertBuilder(String model) throws Exception, CoreException {
 		XtendFile file = workbenchTestHelper.xtendFile("Foo", model);
