@@ -48,8 +48,9 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 	private static final Logger log = Logger.getLogger(AbstractDeclarativeValueConverterService.class);
 
 	private Grammar grammar;
-
-	private Map<String, IValueConverter<Object>> converters;
+	
+	// volatile because of http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html
+	private volatile Map<String, IValueConverter<Object>> converters;
 
 	@Inject 
 	protected DefaultTerminalConverter.Factory defaultTerminalConverterFactory;
