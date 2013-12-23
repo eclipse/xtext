@@ -18,6 +18,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -113,7 +114,7 @@ public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider impl
 							dispatcher, inheritanceDepth);
 					if (dispatcherNode != null) {
 						dispatcherNode.setDispatch(true);
-						processedFeatures.add(dispatcher);
+						addJvmFeature(processedFeatures, dispatcher);
 						boolean inheritsDispatchCases = false;
 						Iterable<JvmOperation> dispatchCases;
 						if (getCurrentMode() == SHOW_INHERITED_MODE)
@@ -136,7 +137,7 @@ public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider impl
 								createNodeForFeature(dispatcherNode, baseType, dispatchCase, xtendFunction,
 										inheritanceDepth);
 							}
-							processedFeatures.add(dispatchCase);
+							addJvmFeature(processedFeatures, dispatchCase);
 						}
 						if(inheritsDispatchCases) 
 							dispatcherNode.setImageDescriptor(images.forDispatcherFunction(dispatcher.getVisibility(), 
@@ -150,6 +151,7 @@ public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider impl
 				EObject primarySourceElement = associations.getPrimarySourceElement(feature);
 				createNodeForFeature(parentNode, baseType, feature,
 						primarySourceElement != null ? primarySourceElement : feature, inheritanceDepth);
+				addJvmFeature(processedFeatures, feature);
 			}
 		}
 		if (getCurrentMode() == SHOW_INHERITED_MODE) {
@@ -162,6 +164,34 @@ public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider impl
 					createInheritedFeatureNodes(parentNode, baseType, processedFeatures, inheritanceDepth,
 							extendedInterface);
 				}
+			}
+		}
+	}
+
+	private void addJvmFeature(Set<JvmFeature> processedFeatures, JvmFeature feature) {
+		processedFeatures.add(feature);
+		addCreateExtensionJvmFeatures(processedFeatures, feature);
+	}
+
+	private void addCreateExtensionJvmFeatures(Set<JvmFeature> processedFeatures, JvmFeature feature) {
+		EObject sourceElement = associations.getPrimarySourceElement(feature);
+		if (!(sourceElement instanceof XtendFunction)) {
+			return;
+		}
+		XtendFunction function = (XtendFunction) sourceElement;
+		if (function.getCreateExtensionInfo() == null) {
+			return;
+		}
+		for (EObject jvmElement : associations.getJvmElements(function)) {
+			if (jvmElement == feature || !(jvmElement instanceof JvmFeature)) {
+				continue;
+			}
+			JvmFeature jvmFeature = (JvmFeature) jvmElement;
+			if (jvmFeature.getSimpleName().startsWith(XtendJvmModelInferrer.CREATE_CHACHE_VARIABLE_PREFIX)) {
+				processedFeatures.add(jvmFeature);
+			}
+			if (jvmFeature.getSimpleName().startsWith(XtendJvmModelInferrer.CREATE_INITIALIZER_PREFIX)) {
+				processedFeatures.add(jvmFeature);
 			}
 		}
 	}
