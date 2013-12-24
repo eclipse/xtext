@@ -33,7 +33,7 @@ import java.util.Map
 abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Inject
-	extension IXtendJvmAssociations
+	protected extension IXtendJvmAssociations
 	
 	override getDeclaredTypeParameters() {
 		emptyList
