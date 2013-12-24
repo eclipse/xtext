@@ -45,7 +45,7 @@ import org.junit.Assert;
 public abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwner {
   @Inject
   @Extension
-  private IXtendJvmAssociations _iXtendJvmAssociations;
+  protected IXtendJvmAssociations _iXtendJvmAssociations;
   
   public List<JvmTypeParameter> getDeclaredTypeParameters() {
     List<JvmTypeParameter> _emptyList = CollectionLiterals.<JvmTypeParameter>emptyList();

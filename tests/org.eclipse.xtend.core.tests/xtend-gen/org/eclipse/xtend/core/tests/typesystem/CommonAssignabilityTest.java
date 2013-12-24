@@ -684,12 +684,14 @@ public abstract class CommonAssignabilityTest extends AbstractAssignabilityTest 
     this.isAssignableFrom(_mappedTo, "A");
   }
   
+  @Ignore("Substitutions are not applied recursively according to JLS - see ticket 395002")
   @Test
   public void testBug395002_02() {
     String _selfBound = this.selfBound("$<? extends $<?, A>, ?>");
     String _selfBound_1 = this.selfBound("A extends $<?,A>");
     Pair<String,String> _mappedTo = Pair.<String, String>of(_selfBound, _selfBound_1);
-    this.isAssignableFrom(_mappedTo, "$<?, A>");
+    String _selfBound_2 = this.selfBound("$<?, A>");
+    this.isAssignableFrom(_mappedTo, _selfBound_2);
   }
   
   @Ignore("Substitutions are not applied recursively according to JLS - see ticket 395002")
@@ -702,8 +704,7 @@ public abstract class CommonAssignabilityTest extends AbstractAssignabilityTest 
   }
   
   private String selfBound(final String typeName) {
-    String _replace = typeName.replace("$", "org.eclipse.xtend.core.tests.typesystem.ScenarioBug395002$SelfBound");
-    return _replace;
+    return typeName.replace("$", "org.eclipse.xtend.core.tests.typesystem.ScenarioBug395002$SelfBound");
   }
   
   @Test

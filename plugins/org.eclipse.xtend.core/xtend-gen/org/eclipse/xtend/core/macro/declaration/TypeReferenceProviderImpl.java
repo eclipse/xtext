@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
@@ -15,15 +16,18 @@ import org.eclipse.xtend.lib.macro.declaration.PrimitiveType;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -54,10 +58,9 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
   
   public TypeReference getObject() {
     TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
-    TypeReferences _typeReferences_1 = this.compilationUnit.getTypeReferences();
     XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-    JvmType _findDeclaredType = _typeReferences_1.findDeclaredType(Object.class, _xtendFile);
-    JvmParameterizedTypeReference _createTypeRef = _typeReferences.createTypeRef(_findDeclaredType);
+    JvmType _findDeclaredType = _typeReferences.findDeclaredType(Object.class, _xtendFile);
+    JvmParameterizedTypeReference _createTypeRef = this.createTypeRef(_findDeclaredType);
     TypeReference _typeReference = this.compilationUnit.toTypeReference(_createTypeRef);
     return _typeReference;
   }
@@ -141,7 +144,6 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       if (_equals) {
         return null;
       }
-      TypeReferences _typeReferences_1 = this.compilationUnit.getTypeReferences();
       final Function1<TypeReference,JvmTypeReference> _function = new Function1<TypeReference,JvmTypeReference>() {
         public JvmTypeReference apply(final TypeReference it) {
           JvmTypeReference _jvmTypeReference = TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
@@ -149,11 +151,57 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         }
       };
       List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
-      JvmParameterizedTypeReference _createTypeRef = _typeReferences_1.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
+      JvmParameterizedTypeReference _createTypeRef = this.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
       TypeReference _typeReference = this.compilationUnit.toTypeReference(_createTypeRef);
       _xblockexpression = (_typeReference);
     }
     return _xblockexpression;
+  }
+  
+  public JvmParameterizedTypeReference createTypeRef(final JvmType type, final JvmTypeReference... typeArgs) {
+    boolean _equals = Objects.equal(type, null);
+    if (_equals) {
+      NullPointerException _nullPointerException = new NullPointerException("type");
+      throw _nullPointerException;
+    }
+    final JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+    reference.setType(type);
+    for (final JvmTypeReference typeArg : typeArgs) {
+      EList<JvmTypeReference> _arguments = reference.getArguments();
+      JvmTypeReference _cloneIfContained = EcoreUtil2.<JvmTypeReference>cloneIfContained(typeArg);
+      _arguments.add(_cloneIfContained);
+    }
+    if ((type instanceof JvmGenericType)) {
+      final EList<JvmTypeParameter> list = ((JvmGenericType)type).getTypeParameters();
+      boolean _and = false;
+      EList<JvmTypeReference> _arguments_1 = reference.getArguments();
+      boolean _isEmpty = _arguments_1.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (!_not) {
+        _and = false;
+      } else {
+        int _size = list.size();
+        EList<JvmTypeReference> _arguments_2 = reference.getArguments();
+        int _size_1 = _arguments_2.size();
+        boolean _notEquals = (_size != _size_1);
+        _and = (_not && _notEquals);
+      }
+      if (_and) {
+        String _identifier = ((JvmGenericType)type).getIdentifier();
+        String _plus = ("The type " + _identifier);
+        String _plus_1 = (_plus + " expects ");
+        int _size_2 = list.size();
+        String _plus_2 = (_plus_1 + Integer.valueOf(_size_2));
+        String _plus_3 = (_plus_2 + " type arguments, but was ");
+        EList<JvmTypeReference> _arguments_3 = reference.getArguments();
+        int _size_3 = _arguments_3.size();
+        String _plus_4 = (_plus_3 + Integer.valueOf(_size_3));
+        String _plus_5 = (_plus_4 + ". Either pass zero arguments (raw type) or the correct number.");
+        IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus_5);
+        throw _illegalArgumentException;
+      }
+    }
+    return reference;
   }
   
   public TypeReference newTypeReference(final Type typeDeclaration, final TypeReference... typeArguments) {
@@ -266,7 +314,6 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       if (_equals) {
         return null;
       }
-      TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       final Function1<TypeReference,JvmTypeReference> _function = new Function1<TypeReference,JvmTypeReference>() {
         public JvmTypeReference apply(final TypeReference it) {
           JvmTypeReference _jvmTypeReference = TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
@@ -274,7 +321,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         }
       };
       List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
-      JvmParameterizedTypeReference _createTypeRef = _typeReferences.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
+      JvmParameterizedTypeReference _createTypeRef = this.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
       TypeReference _typeReference = this.compilationUnit.toTypeReference(_createTypeRef);
       _xblockexpression = (_typeReference);
     }
