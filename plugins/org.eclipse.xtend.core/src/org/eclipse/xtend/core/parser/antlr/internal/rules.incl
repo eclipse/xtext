@@ -1,0 +1,4 @@
+<YYINITIAL> {ERROR_PATTERN} { return 0; /* antlr <invalid> */ }
+
+
+

@@ -8,23 +8,33 @@
 package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.common.base.Objects;
-import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
+import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.tests.typesystem.AbstractAnnotationCompilerSmokeTest;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class SkipTokensInBetweenAnnotationCompilerSmokeTest extends AbstractAnnotationCompilerSmokeTest {
-  @Inject
-  private Provider<Lexer> lexerProvider;
+  private Provider<? extends Lexer> lexerProvider = new Function0<Provider<? extends Lexer>>() {
+    public Provider<? extends Lexer> apply() {
+      final Provider<InternalXtendLexer> _function = new Provider<InternalXtendLexer>() {
+        public InternalXtendLexer get() {
+          InternalXtendLexer _internalXtendLexer = new InternalXtendLexer(null);
+          return _internalXtendLexer;
+        }
+      };
+      return _function;
+    }
+  }.apply();
   
   public void assertNonSmoking(final CharSequence input) throws Exception {
     final String string = input.toString();

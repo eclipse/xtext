@@ -1204,6 +1204,46 @@ class ErrorTest extends AbstractXtendTestCase {
 		assertNotNull(resolvedTypes.getActualType(casted))
 	}
 	
+	@Test
+	def void testErrorModel_78() throws Exception {
+		'''
+			package org.eclipse.xtend.core.tests.smoke
+			
+			class Case_4 {
+				def richStrings_01() {
+					''«»'foobar'«»'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_79() throws Exception {
+		'''
+			package org.eclipse.xtend.core.tests.smoke
+			
+			class Case_4 {
+				def richStrings_01() {
+					''«»'foobar''«»'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_80() throws Exception {
+		'''
+			package org.eclipse.xtend.core.tests.smoke
+			
+			class Case_4 {
+				def richStrings_01() {
+					''«»'foobar'«» '''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_81() throws Exception {
+		'''
+			package org.eclipse.xtend.core.tests.smoke
+			
+			class Case_4 {
+				def richStrings_01() {
+					''«»'foobar''«» '''.processWithoutException
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)

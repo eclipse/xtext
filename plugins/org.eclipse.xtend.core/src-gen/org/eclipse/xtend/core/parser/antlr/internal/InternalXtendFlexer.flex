@@ -70,7 +70,7 @@ COMMENT_RICH_TEXT_END="лл"[^\r\n]*(("\r"?"\n"{IN_RICH_STRING} {RICH_TEXT_FINISH}
 IN_RICH_STRING=([^л\']|("'""'"?[^л\']))+
 
 RICH_TEXT_DELIM=("'""'"?)?"л"
-RICH_TEXT_FINISH="'''"
+RICH_TEXT_FINISH="'"("'"("'")?)?
 
 %%
 
@@ -175,6 +175,10 @@ RICH_TEXT_FINISH="'''"
 
 
 <YYINITIAL> {ERROR_PATTERN} { return 0; /* antlr <invalid> */ }
+
+
+
+
 
 <YYINITIAL> {ID} { return RULE_ID; }
 <YYINITIAL> {RICH_TEXT} { return RULE_RICH_TEXT; }

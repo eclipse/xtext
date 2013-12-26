@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.parser;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.mwe2.runtime.Mandatory;
@@ -19,6 +18,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.Generator;
 
+import com.google.common.collect.Lists;
 import com.google.common.io.CharStreams;
 import com.google.common.io.InputSupplier;
 
@@ -30,6 +30,8 @@ public class JFlexGeneratorFragment extends AbstractGeneratorFragment {
 	private JFlexMain main;
 	
 	private String patternPath;
+	
+	private String additionalRulePath;
 	
 	@Mandatory
 	public void setJFlexMain(JFlexMain main) {
@@ -53,21 +55,29 @@ public class JFlexGeneratorFragment extends AbstractGeneratorFragment {
 		this.patternPath = patternPath;
 	}
 	
+	public void setAdditionalRulePath(String rulePath) {
+		this.additionalRulePath = rulePath;
+	}
+	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		if (patternPath != null) {
+		return Lists.<Object>newArrayList(read(patternPath), read(additionalRulePath));
+	}
+
+	private String read(final String path) {
+		if (path != null) {
 			try {
 				String patterns = CharStreams.toString(new InputSupplier<InputStreamReader>() {
 					public InputStreamReader getInput() throws IOException {
-						return new InputStreamReader(getClass().getResourceAsStream(patternPath), "ISO-8859-1");
+						return new InputStreamReader(getClass().getResourceAsStream(path), "ISO-8859-1");
 					}
 				});
-				return Collections.<Object>singletonList(patterns);	
+				return patterns;	
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
 		}
-		return Collections.<Object>singletonList("");
+		return null;
 	}
 	
 }

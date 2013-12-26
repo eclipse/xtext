@@ -2275,6 +2275,76 @@ public class ErrorTest extends AbstractXtendTestCase {
     Assert.assertNotNull(_actualType);
   }
   
+  @Test
+  public void testErrorModel_78() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package org.eclipse.xtend.core.tests.smoke");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Case_4 {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def richStrings_01() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'\'");
+    _builder.append("\'foobar\'");
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_79() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package org.eclipse.xtend.core.tests.smoke");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Case_4 {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def richStrings_01() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'\'");
+    _builder.append("\'foobar\'\'");
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_80() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package org.eclipse.xtend.core.tests.smoke");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Case_4 {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def richStrings_01() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'\'");
+    _builder.append("\'foobar\'");
+    _builder.append(" ");
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_81() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package org.eclipse.xtend.core.tests.smoke");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Case_4 {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def richStrings_01() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'\'");
+    _builder.append("\'foobar\'\'");
+    _builder.append(" ");
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");

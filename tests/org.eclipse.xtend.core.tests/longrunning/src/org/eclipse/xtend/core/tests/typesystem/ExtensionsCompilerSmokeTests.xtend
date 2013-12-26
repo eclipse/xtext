@@ -14,6 +14,7 @@ import org.antlr.runtime.ANTLRStringStream
 import org.antlr.runtime.CommonToken
 import org.antlr.runtime.Token
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
 import org.eclipse.xtend.core.tests.compiler.ExtensionsCompilerTest
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.parser.antlr.Lexer
@@ -107,8 +108,7 @@ class SkipThreeCharactersInBetweenExtensionsCompilerSmokeTest extends AbstractEx
  */
 class SkipTokensInBetweenExtensionsCompilerSmokeTest extends AbstractExtensionsCompilerSmokeTest {
 	
-	@Inject
-	Provider<Lexer> lexerProvider
+	Provider<? extends Lexer> lexerProvider = [| new InternalXtendLexer(null) ]
 	
 	override void assertNonSmoking(CharSequence input) throws Exception {
 		val string = input.toString
