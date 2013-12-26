@@ -23,6 +23,7 @@ import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 import org.eclipse.xtext.xbase.junit.typesystem.Oven
 import org.junit.Test
+import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -215,8 +216,7 @@ class SkipThreeCharactersInBetweenCompilerBug410767SmokeTest extends AbstractCom
  */
 class SkipTokensInBetweenCompilerBug410767SmokeTest extends AbstractCompilerBug410767SmokeTest {
 	
-	@Inject
-	Provider<Lexer> lexerProvider
+	Provider<? extends Lexer> lexerProvider = [| new InternalXtendLexer(null) ]
 	
 	override void assertNonSmoking(CharSequence input) throws Exception {
 		val string = input.toString

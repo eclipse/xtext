@@ -18,7 +18,7 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 
-«DEFINE generate(String macros) FOR Grammar»
+«DEFINE generate(String macros, String rules) FOR Grammar»
 «FILE (getGrammarFileName().toJavaPackage() + "." + getGrammarFileName().toSimpleName()).asPath()+"Flexer.flex" SRC_GEN-»
 /*
 «fileHeader()»
@@ -65,7 +65,9 @@ return Token.EOF;
 
 «EXPAND tokens-»
 
-<YYINITIAL> {ERROR_PATTERN} { return 0; /* antlr <invalid> */ }
+«IF rules != null -»
+«rules»
+«ENDIF-»
 
 «FOREACH allTerminalRules().select(r | !r.fragment ) AS rule-»
 <YYINITIAL> {«rule.name»} { return RULE_«rule.name»; }
@@ -100,8 +102,8 @@ return Token.EOF;
 «ENDDEFINE»
 
 
-«DEFINE addToPluginXmlRt(String macros) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(String macros, String rules) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(String macros) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(String macros, String rules) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(String macros) FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(String macros, String rules) FOR Grammar»«ENDDEFINE»
