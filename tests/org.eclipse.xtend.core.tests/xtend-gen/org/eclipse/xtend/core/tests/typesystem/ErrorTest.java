@@ -2345,6 +2345,158 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_82() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x");
+    _builder.newLine();
+    _builder.append("class Y {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static int j");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int i");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this(j)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new(int i) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.i = i");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static invokeMe() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("j = 4ew Y().i");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_83() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x");
+    _builder.newLine();
+    _builder.append("class Y {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@com.google.inject.Inject extension test.GenericExtensionMethods<String,Integer> x");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String arg) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("arg.method");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("4ethod");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return x.result");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_84() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(int bar) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("switch(bar) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case 1bar\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_85() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("/**/");
+    _builder.newLine();
+    _builder.append("/***/");
+    _builder.newLine();
+    _builder.append("/** valid */");
+    _builder.newLine();
+    _builder.append("/** valid **/");
+    _builder.newLine();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* invalid/");
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("1 + 1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_86() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/*");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_87() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");

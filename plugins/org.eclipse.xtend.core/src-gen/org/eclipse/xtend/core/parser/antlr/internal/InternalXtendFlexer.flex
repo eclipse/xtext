@@ -45,6 +45,7 @@ UNICODE_ESCAPE=\\ "u" ( {HEX_DIGIT} ( {HEX_DIGIT} ( {HEX_DIGIT} {HEX_DIGIT}? )? 
 HEX_DIGIT = [0-9A-Fa-f]
 
 ML_COMMENT="/*" ~"*/"
+COMMENT_ERROR_PATTERN="/*" ( [^*/] | \* [^/]? | [^*] "/" )* 
 SL_COMMENT="/""/"[^\r\n]*(\r?\n)?
 
 DIGIT = [0-9]
@@ -52,10 +53,11 @@ DIGIT_OR_UNDERSCORE = [_0-9]
 INT = {DIGIT} | {DIGIT} {DIGIT_OR_UNDERSCORE}*
 HEX_DIGIT_OR_UNDERSCORE = [_0-9A-Fa-f]
 
+DECIMAL_ERROR_PATTERN = {INT} (([eE] ([^0-9] | [bB])) ([bB][^iIdD])? | ([bB][^iIdD]))
 DECIMAL = {INT} ([eE] [+-]? {INT})? ([bB][iIdD] | [lLdDfF])?
 HEX = 0 [Xx] ( {HEX_DIGIT_OR_UNDERSCORE}+ ("#" ([bB][iI] | [lL] ))? )?
 			 
-ERROR_PATTERN=("'"([^\\\']|{ESCAPE_SEQUENCE})+)|(\"([^\\\"]|{ESCAPE_SEQUENCE})+)
+STRING_ERROR_PATTERN=("'"([^\\\']|{ESCAPE_SEQUENCE})+)|(\"([^\\\"]|{ESCAPE_SEQUENCE})+)
 STRING=("'"([^\\\']|{ESCAPE_SEQUENCE})*"'")|(\"([^\\\"]|{ESCAPE_SEQUENCE})*\")
 ESCAPE_SEQUENCE=\\[btnfru\"\'\\]
 
@@ -174,8 +176,9 @@ RICH_TEXT_FINISH="'"("'"("'")?)?
 <YYINITIAL> "}" { return KW_RightCurlyBracket; }
 
 
-<YYINITIAL> {ERROR_PATTERN} { return 0; /* antlr <invalid> */ }
-
+<YYINITIAL> {STRING_ERROR_PATTERN} { return 0; /* antlr <invalid> */ }
+<YYINITIAL> {DECIMAL_ERROR_PATTERN} { return 0; /* antlr <invalid> */ }
+<YYINITIAL> {COMMENT_ERROR_PATTERN} { return 0; /* antlr <invalid> */ }
 
 
 

@@ -1244,6 +1244,87 @@ class ErrorTest extends AbstractXtendTestCase {
 					''«»'foobar''«» '''.processWithoutException
 	}
 	
+	@Test
+	def void testErrorModel_82() throws Exception {
+		'''
+			package x
+			class Y {
+				static int j
+				int i
+				new() {
+					this(j)
+				}
+				new(int i) {
+					this.i = i
+				}
+				def static invokeMe() {
+					j = 4ew Y().i
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_83() throws Exception {
+		'''
+			package x
+			class Y {
+				@com.google.inject.Inject extension test.GenericExtensionMethods<String,Integer> x
+				def foo(String arg) {
+					arg.method
+					4ethod
+					return x.result
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_84() throws Exception {
+		'''
+			package foo
+			class Bar {
+				def foo(int bar) {
+					switch(bar) {
+						case 1bar'
+					}
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_85() throws Exception {
+		'''
+			package foo
+			/**/
+			/***/
+			/** valid */
+			/** valid **/
+			/**
+			 * invalid/
+			class Bar {
+				def foo(){
+					1 + 1
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_86() throws Exception {
+		'''
+			/*
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_87() throws Exception {
+		'''
+			/
+		'''.processWithoutException
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)

@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
@@ -71,8 +72,11 @@ public class SmokeTest extends AbstractSmokeTest {
 	@Inject
 	private Provider<ResourceValidatorImpl> resourceValidatorProvider;
 	
-	@Inject
-	private Provider<Lexer> lexerProvider;
+	private Provider<Lexer> lexerProvider = new Provider<Lexer>() {
+		public Lexer get() {
+			return new InternalXtendLexer(null);
+		}
+	};
 	
 	@Test public void testResourceUpdateSkipLastCharacters() throws Exception {
 		for(String string: smokeTestModels) {
