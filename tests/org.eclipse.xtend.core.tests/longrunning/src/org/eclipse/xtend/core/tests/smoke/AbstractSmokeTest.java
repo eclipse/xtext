@@ -18,6 +18,7 @@ import org.antlr.runtime.Token;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
@@ -53,8 +54,11 @@ public abstract class AbstractSmokeTest extends AbstractXtendTestCase {
 	@Inject
 	protected IResourceFactory resourceFactory;
 
-	@Inject
-	private Provider<Lexer> lexerProvider;
+	private Provider<Lexer> lexerProvider = new Provider<Lexer>() {
+		public Lexer get() {
+			return new InternalXtendLexer(null);
+		}
+	};
 	
 	@Before
 	public void setUp() throws Exception {

@@ -6,7 +6,7 @@ UNICODE_ESCAPE=\\ "u" ( {HEX_DIGIT} ( {HEX_DIGIT} ( {HEX_DIGIT} {HEX_DIGIT}? )? 
 HEX_DIGIT = [0-9A-Fa-f]
 
 ML_COMMENT="/*" ~"*/"
-COMMENT_ERROR_PATTERN="/*" ( [^*/] | \* [^/]? | [^*] "/" )* 
+COMMENT_ERROR_PATTERN="/*" ( [^*/] | \* [^/] | [^*] "/" )* 
 SL_COMMENT="/""/"[^\r\n]*(\r?\n)?
 
 DIGIT = [0-9]
