@@ -1338,6 +1338,28 @@ class ErrorTest extends AbstractXtendTestCase {
 		'''.processWithoutException
 	}
 	
+	@Test
+	def void testErrorModel_89() throws Exception {
+		'''/*'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_90() throws Exception {
+		'''/'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_91() throws Exception {
+		'''/**'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_92() throws Exception {
+		'''
+			/*
+			 *'''.processWithoutException
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
