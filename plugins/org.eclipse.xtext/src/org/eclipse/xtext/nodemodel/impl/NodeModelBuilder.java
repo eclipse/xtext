@@ -384,5 +384,13 @@ public class NodeModelBuilder {
 		this.forcedGrammarElement = ruleCall;
 		compressRoot = false;
 	}
+	
+	/**
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	protected void setLookAhead(CompositeNode node, int lookAhead) {
+		node.basicSetLookAhead(lookAhead);
+	}
 
 }
