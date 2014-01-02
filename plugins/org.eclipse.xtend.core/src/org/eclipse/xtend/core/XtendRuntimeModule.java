@@ -21,8 +21,10 @@ import org.eclipse.xtend.core.linking.LinkingProxyAwareResource;
 import org.eclipse.xtend.core.linking.URIEncoder;
 import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider;
+import org.eclipse.xtend.core.parser.CustomXtendParser;
 import org.eclipse.xtend.core.parser.FlexTokenRegionProvider;
-import org.eclipse.xtend.core.parser.ParserWithoutPartialParsing;
+import org.eclipse.xtend.core.parser.XtendPartialParsingHelper;
+import org.eclipse.xtend.core.parser.XtendNodeModelBuilder;
 import org.eclipse.xtend.core.parser.antlr.internal.DisabledAntlrLexer;
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.resource.XtendLocationInFileProvider;
@@ -49,7 +51,9 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.antlr.IPartialParsingHelper;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.parser.impl.TokenRegionProvider;
@@ -263,7 +267,7 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 
 	@Override
 	public Class<? extends IParser> bindIParser() {
-		return ParserWithoutPartialParsing.class;
+		return CustomXtendParser.class;
 	}
 
 	@Override
@@ -302,5 +306,14 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public Class<? extends TokenRegionProvider> bindTokenRegionProvider() {
 		return FlexTokenRegionProvider.class;
+	}
+	
+	@Override
+	public Class<? extends IPartialParsingHelper> bindIPartialParserHelper() {
+		return XtendPartialParsingHelper.class;
+	}
+	
+	public Class<? extends NodeModelBuilder> bindNodeModelBuilder() {
+		return XtendNodeModelBuilder.class;
 	}
 }
