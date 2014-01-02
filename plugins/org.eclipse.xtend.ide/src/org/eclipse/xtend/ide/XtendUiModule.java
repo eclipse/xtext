@@ -11,6 +11,7 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtend.core.formatting.FormatterPreferenceValuesProvider;
+import org.eclipse.xtend.core.linking.Linker;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.ide.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
@@ -481,6 +482,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	@Override
 	public Class<? extends IProposalConflictHelper> bindIProposalConflictHelper() {
 		return FlexProposalConflictHelper.class;
+	}
+	
+	public Class<? extends Linker> bindLinker() {
+		return EclipseBuilderAwareLinker.class;
 	}
 
 }

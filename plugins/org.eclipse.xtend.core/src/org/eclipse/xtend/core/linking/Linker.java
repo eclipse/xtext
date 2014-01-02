@@ -74,17 +74,25 @@ public class Linker extends XbaseLazyLinker {
 		getCache().execWithoutCacheClear((LinkingProxyAwareResource) model.eResource(), new IUnitOfWork.Void<LinkingProxyAwareResource>() {
 			@Override
 			public void process(LinkingProxyAwareResource state) throws Exception {
+				boolean clearReferencesRequired = isClearReferencesRequired(state);
 				state.clearEncodeURIs();
-				clearReferences(model);
+				if (clearReferencesRequired)
+					clearReferences(model);
 				installProxies(state, model, producer);
 				TreeIterator<EObject> iterator = getAllNonDerivedContents(model);
 				while (iterator.hasNext()) {
 					EObject eObject = iterator.next();
-					clearReferences(eObject);
+					if (clearReferencesRequired)
+						clearReferences(eObject);
 					installProxies(state, eObject, producer);
 				}
 			}
 		});
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=424541
+	protected boolean isClearReferencesRequired(LinkingProxyAwareResource resource) {
+		return false;
 	}
 	
 	private TreeIterator<EObject> getAllNonDerivedContents(EObject root) {

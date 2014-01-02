@@ -13,6 +13,7 @@ import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtend.core.parser.antlr.XtendParser;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parser.IParseResult;
@@ -41,6 +42,7 @@ public class ParserWithoutPartialParsing extends XtendParser {
 	
 	@Override
 	protected boolean isReparseSupported() {
+		// see Linker.doLinkModel(EObject, IDiagnosticConsumer)
 		return false;
 	}
 	
@@ -51,6 +53,12 @@ public class ParserWithoutPartialParsing extends XtendParser {
 			return flexerFactory.createTokenSource(reader);
 		}
 		throw new IllegalArgumentException(stream.getClass().getName());
+	}
+	
+	@Override
+	public IParseResult parse(ParserRule rule, Reader reader) {
+		IParseResult parseResult = parse(rule.getName(), new ReaderCharStream(reader));
+		return parseResult;
 	}
 	
 	@Override
