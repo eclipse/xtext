@@ -244,7 +244,44 @@ Task 'DeclaratorTypeArgumentCollector.getTypeParameterMapping' took 187ms (57940
 Task 'ResourceValidatorImpl.validation' took 3901ms (280 measurements).
 Task 'LightweightTypeReference#collectSuperTypes' took 10ms (305 measurements).
 -------------------------------------------------------------------------------------------------------------------------
-
+2014-01-02 / Sebastian - Baseline
+Task 'XtextBuilder.build[AUTO]' took 11257ms (1 measurements).
+Task 'AbstractParser.parse' took 1604ms (280 measurements).
+Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 838ms (280 measurements).
+Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 3646ms (560 measurements).
+Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 2656ms (560 measurements).
+Task 'resolve annotations (JdtBasedTypeFactory)' took 379ms (20775 measurements).
+Task 'resolve members (JdtBasedTypeFactory)' took 2387ms (1175 measurements).
+Task 'resolve typeParams (JdtBasedTypeFactory)' took 25ms (2465 measurements).
+Task 'resolve binding (JdtBasedTypeFactory)' took 291ms (405 measurements).
+Task 'JdtBasedTypeFactory.createType (JdtBasedTypeFactory)' took 2557ms (405 measurements).
+Task 'resolve param names (JdtBasedTypeFactory)' took 0ms (0 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 4ms (560 measurements).
+Task 'DefaultReentrantTypeResolver.resolve' took 8206ms (560 measurements).
+Task 'ResourceValidatorImpl.validation' took 2526ms (280 measurements).
+Task 'XtextBuilder.build[FULL]' took 15285ms (4 measurements).
+Task 'DebugSourceInstallingCompilationParticipant.install' took 1097ms (4 measurements).
+Task 'XtextBuilder.build[INCREMENTAL]' took 3ms (3 measurements).
+-------------------------------------------------------------------------------------------------------------------------
+2014-01-02 / Sebastian - Skip Linker#clearReferences in builder context
+Task 'XtextBuilder.build[AUTO]' took 11261ms (1 measurements).
+Task 'AbstractParser.parse' took 1665ms (280 measurements).
+Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 635ms (280 measurements).
+Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 3604ms (560 measurements).
+Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 2677ms (560 measurements).
+Task 'resolve annotations (JdtBasedTypeFactory)' took 435ms (20775 measurements).
+Task 'resolve members (JdtBasedTypeFactory)' took 2573ms (1175 measurements).
+Task 'resolve typeParams (JdtBasedTypeFactory)' took 33ms (2465 measurements).
+Task 'resolve binding (JdtBasedTypeFactory)' took 349ms (405 measurements).
+Task 'JdtBasedTypeFactory.createType (JdtBasedTypeFactory)' took 2740ms (405 measurements).
+Task 'resolve param names (JdtBasedTypeFactory)' took 0ms (0 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (560 measurements).
+Task 'DefaultReentrantTypeResolver.resolve' took 8586ms (560 measurements).
+Task 'ResourceValidatorImpl.validation' took 2706ms (280 measurements).
+Task 'XtextBuilder.build[FULL]' took 15560ms (4 measurements).
+Task 'DebugSourceInstallingCompilationParticipant.install' took 1219ms (4 measurements).
+Task 'XtextBuilder.build[INCREMENTAL]' took 3ms (3 measurements).
+-------------------------------------------------------------------------------------------------------------------------
  */
 
 public class PerformanceTest extends AbstractXtendUITestCase {
