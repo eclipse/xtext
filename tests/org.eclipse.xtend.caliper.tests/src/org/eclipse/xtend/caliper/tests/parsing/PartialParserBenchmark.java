@@ -103,7 +103,7 @@ public class PartialParserBenchmark {
 	
 	public static void main(String[] args) throws Exception {
 		String[] fileNames = { 
-//			"CopyOfAbstractTypeResolverTest.txt",
+			"CopyOfAbstractTypeResolverTest.txt",
 			"CopyOfAnnotationProcessor.txt",
 			"CopyOfDataTypes.txt",
 			"CopyOfJvmModelGenerator.txt",

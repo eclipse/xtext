@@ -1597,6 +1597,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testIfExpression_34() throws Exception {
+    this.resolvesTo("if(true) true else Boolean.TRUE", "Boolean");
+  }
+  
+  @Test
   public void testSwitchExpression() throws Exception {
     this.resolvesTo("switch true { case true : \'s\' case false : \'foo\' default: \'bar\'}", "String");
     this.resolvesTo("switch true { case true : \'s\' case false : new Object() default: \'bar\'}", "Object");

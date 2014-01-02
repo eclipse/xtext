@@ -664,7 +664,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			LightweightTypeReference other = types.get(i);
 			if (result != other) {
 				// if we stumble across unbound references without any hints, assume they are compatible and add respective hints
-				int conformance = isConformant(result, other, ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | UNBOUND_COMPUTATION_ADDS_HINTS | ALLOW_RAW_TYPE_CONVERSION);
+				int conformance = isConformant(result, other, ALLOW_BOXING | ALLOW_PRIMITIVE_WIDENING | UNBOUND_COMPUTATION_ADDS_HINTS | ALLOW_RAW_TYPE_CONVERSION);
 				if ((conformance & SUCCESS) != 0) {
 					boolean resultIsFunctionType = result instanceof FunctionTypeReference;
 					if (!resultIsFunctionType && (other instanceof FunctionTypeReference) &&

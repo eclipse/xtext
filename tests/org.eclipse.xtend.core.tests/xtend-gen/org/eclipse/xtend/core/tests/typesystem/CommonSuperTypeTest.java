@@ -661,4 +661,14 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   public void testCommonSuperType_73() {
     this.isSuperTypeOf("Iterable<?>", "Iterable<? super CharSequence>", "Iterable<String>");
   }
+  
+  @Test
+  public void testCommonSuperType_74() {
+    this.isSuperTypeOf("Boolean", "boolean", "Boolean");
+  }
+  
+  @Test
+  public void testCommonSuperType_75() {
+    this.isSuperTypeOf("Boolean", "Boolean", "boolean");
+  }
 }

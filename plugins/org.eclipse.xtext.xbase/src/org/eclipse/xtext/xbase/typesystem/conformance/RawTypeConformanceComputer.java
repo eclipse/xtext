@@ -80,15 +80,27 @@ public class RawTypeConformanceComputer {
 	public final static int ALLOW_RAW_TYPE_CONVERSION = AS_TYPE_ARGUMENT << 1;
 	
 	/**
+	 * If this bit is set, boxing conversion may be applied to primitives
+	 * and wrapper types.
+	 */
+	public final static int ALLOW_BOXING = ALLOW_RAW_TYPE_CONVERSION << 1;
+	
+	/**
+	 * If this bit is set, unboxing conversion may be applied to primitives
+	 * and wrapper types.
+	 */
+	public final static int ALLOW_UNBOXING = ALLOW_BOXING << 1;
+	
+	/**
 	 * If this bit is set, boxing and unboxing conversion may be applied to primitives
 	 * and wrapper types.
 	 */
-	public final static int ALLOW_BOXING_UNBOXING = ALLOW_RAW_TYPE_CONVERSION << 1;
+	public final static int ALLOW_BOXING_UNBOXING = ALLOW_BOXING | ALLOW_UNBOXING;
 	
 	/**
 	 * Indicates that widening conversion may be taken into account.
 	 */
-	public final static int ALLOW_PRIMITIVE_WIDENING = ALLOW_BOXING_UNBOXING << 1;
+	public final static int ALLOW_PRIMITIVE_WIDENING = ALLOW_UNBOXING << 1;
 	
 	/**
 	 * If otherwise unspecified {@link UnboundTypeReference unbound references} are given,
@@ -489,7 +501,7 @@ public class RawTypeConformanceComputer {
 		if (left.getType() == right.getType() || left.isType(Object.class)) {
 			return flags | SUCCESS;
 		}
-		if ((flags & ALLOW_BOXING_UNBOXING) == 0 && left.isPrimitive()) {
+		if ((flags & ALLOW_UNBOXING) == 0 && left.isPrimitive()) {
 			return flags;
 		}
 		boolean doesNotHaveSignificantHints = false;
@@ -698,7 +710,7 @@ public class RawTypeConformanceComputer {
 							return flags | SUCCESS | PRIMITIVE_WIDENING;
 						}
 					}
-				} else if ((flags & ALLOW_BOXING_UNBOXING) != 0) {
+				} else if ((flags & ALLOW_UNBOXING) != 0) {
 					rightPrimitiveKind = right.getPrimitiveKindIfWrapperType();
 					if (rightPrimitiveKind != null) {
 						if (rightPrimitiveKind == leftPrimitiveKind || isWideningConversion(leftPrimitiveKind, rightPrimitiveKind)) {
@@ -708,7 +720,7 @@ public class RawTypeConformanceComputer {
 				}
 				if (!(right.getType().eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER))
 					return flags;
-			} else if ((flags & ALLOW_BOXING_UNBOXING) != 0) {
+			} else if ((flags & ALLOW_BOXING) != 0) {
 				Primitive rightPrimitiveKind = right.getPrimitiveKind();
 				if (rightPrimitiveKind != null) {
 					if (left.isType(Object.class)) {
