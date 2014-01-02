@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import org.eclipse.xtend.core.XtendStandaloneSetup;
-import org.eclipse.xtend.core.parser.ParserWithoutPartialParsing;
+import org.eclipse.xtend.core.parser.CustomXtendParser;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -25,35 +25,34 @@ import com.google.common.io.CharStreams;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-/**
- 
+/*
+
+Sebastian - 2014/01/02 - Baseline
+-------------------------------------------------------------------------------------------------------------------------
 Task 'with    - CopyOfAnnotationProcessor.txt' took 136ms (1 measurements).
 Task 'without - CopyOfAnnotationProcessor.txt' took 5089ms (1 measurements).
 Task 'with    - CopyOfDataTypes.txt' took 93ms (1 measurements).
 Task 'without - CopyOfDataTypes.txt' took 2834ms (1 measurements).
 Task 'with    - CopyOfJvmModelGenerator.txt' took 7323ms (1 measurements).
 Task 'without - CopyOfJvmModelGenerator.txt' took 366623ms (1 measurements).
+-------------------------------------------------------------------------------------------------------------------------
+Sebastian - 2014/01/02 - Partial parsing selectively enabled
+-------------------------------------------------------------------------------------------------------------------------
+Task 'CopyOfAbstractTypeResolverTest.txt' took 142217ms (1 measurements).
+Task 'CopyOfAnnotationProcessor.txt' took 113ms (1 measurements).
+Task 'CopyOfDataTypes.txt' took 67ms (1 measurements).
+Task 'CopyOfJvmModelGenerator.txt' took 11426ms (1 measurements).
+Task 'CopyOfXbaseFormatter.txt' took 15250ms (1 measurements).
+Task 'CopyOfXbaseFormatterTest.txt' took 3144ms (1 measurements).
+-------------------------------------------------------------------------------------------------------------------------
 
- * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class PartialParserBenchmark {
 
-	public static class ParserWithPartialParsing extends ParserWithoutPartialParsing {
-		
-		@Override
-		protected boolean isReparseSupported() {
-			return true;
-		}
-		
-	}
-	
 	private String contentToParse;
 	
 	@Inject
-	private ParserWithPartialParsing withPartialParsing;
-	
-	@Inject
-	private ParserWithoutPartialParsing withoutPartialParsing;
+	private CustomXtendParser parser;
 
 	private IParseResult parseResult;
 
@@ -75,7 +74,7 @@ public class PartialParserBenchmark {
 
 	protected void setUp() {
 		contentToParse = loadString(fileName);
-		parseResult = withoutPartialParsing.doParse(contentToParse);
+		parseResult = parser.doParse(contentToParse);
 	}
 	
 	public int doTime(IParser parser, int windowSize) {
@@ -90,24 +89,12 @@ public class PartialParserBenchmark {
 		return result;
 	}
 
-	public int timeWithPartialParsing() throws Exception {
-		System.out.println("with - " + fileName);
-		StoppedTask task = Stopwatches.forTask("with    - " + fileName);
+	public int measure() throws Exception {
+		System.out.println(fileName);
+		StoppedTask task = Stopwatches.forTask(fileName);
 		try {
 			task.start();
-			return doTime(withPartialParsing, 1);
-		} finally {
-			task.stop();
-			System.out.println("done");
-		}
-	}
-	
-	public int timeWithoutPartialParsing() throws Exception {
-		System.out.println("without - " + fileName);
-		StoppedTask task = Stopwatches.forTask("without - " + fileName);
-		try {
-			task.start();
-			return doTime(withoutPartialParsing, 1);
+			return doTime(parser, 1);
 		} finally {
 			task.stop();
 			System.out.println("done");
@@ -120,8 +107,8 @@ public class PartialParserBenchmark {
 			"CopyOfAnnotationProcessor.txt",
 			"CopyOfDataTypes.txt",
 			"CopyOfJvmModelGenerator.txt",
-//			"CopyOfXbaseFormatter.txt", 
-//			"CopyOfXbaseFormatterTest.txt"
+			"CopyOfXbaseFormatter.txt", 
+			"CopyOfXbaseFormatterTest.txt"
 		};
 		Injector injector = new XtendStandaloneSetup().createInjectorAndDoEMFRegistration();
 		Stopwatches.setEnabled(true);
@@ -129,8 +116,7 @@ public class PartialParserBenchmark {
 			PartialParserBenchmark benchmark = new PartialParserBenchmark(fileName);
 			injector.injectMembers(benchmark);
 			benchmark.setUp();
-			System.out.println(benchmark.timeWithPartialParsing());
-			System.out.println(benchmark.timeWithoutPartialParsing());
+			benchmark.measure();
 		}
 		System.out.println(Stopwatches.getPrintableStopwatchData());
 	}

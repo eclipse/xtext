@@ -20,7 +20,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.tests.RuntimeInjectorProviderWithResourceUpdates;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -42,6 +44,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@InjectWith(RuntimeInjectorProviderWithResourceUpdates.class)
 public abstract class AbstractSmokeTest extends AbstractXtendTestCase {
 
 	private static final Logger logger = Logger.getLogger(AbstractSmokeTest.class);

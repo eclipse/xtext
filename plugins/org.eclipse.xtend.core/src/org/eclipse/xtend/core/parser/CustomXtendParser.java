@@ -23,15 +23,14 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
- * Disable partial parsing for Xtend. The partial parsing regions
- * almost always covered the complete file anyway and it is conceptually
- * hard to get the lookahead right.
+ * Custom XtendParser that uses a JFlex based lexer implementation rather
+ * than Antlr's lexer.
  * 
  * @since 2.5
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
-public class ParserWithoutPartialParsing extends XtendParser {
+public class CustomXtendParser extends XtendParser {
 
 	// TODO make the provider's #get from the super type available
 	@Inject
@@ -39,12 +38,6 @@ public class ParserWithoutPartialParsing extends XtendParser {
 	
 	@Inject
 	private FlexerFactory flexerFactory;
-	
-	@Override
-	protected boolean isReparseSupported() {
-		// see Linker.doLinkModel(EObject, IDiagnosticConsumer)
-		return false;
-	}
 	
 	@Override
 	protected TokenSource createLexer(CharStream stream) {
