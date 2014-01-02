@@ -21,6 +21,7 @@ import org.eclipse.xtend.core.linking.LinkingProxyAwareResource;
 import org.eclipse.xtend.core.linking.URIEncoder;
 import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider;
+import org.eclipse.xtend.core.parser.FlexTokenRegionProvider;
 import org.eclipse.xtend.core.parser.ParserWithoutPartialParsing;
 import org.eclipse.xtend.core.parser.antlr.internal.DisabledAntlrLexer;
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
@@ -51,6 +52,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.parser.impl.TokenRegionProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
@@ -296,5 +298,9 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public Class<? extends STRINGValueConverter> bindSTRINGValueConverter() {
 		return StringValueConverter.class;
+	}
+	
+	public Class<? extends TokenRegionProvider> bindTokenRegionProvider() {
+		return FlexTokenRegionProvider.class;
 	}
 }

@@ -395,4 +395,20 @@ public class PerformanceTest extends AbstractXtendTestCase {
     this.doCompile();
     this.doCompile();
   }
+  
+  @Test
+  @Ignore
+  public void doCompileTenTimes() {
+    this.doCompileFiveTimes();
+    this.doCompileFiveTimes();
+  }
+  
+  @Test
+  @Ignore
+  public void doCompileTwentyTimes() {
+    this.doCompileFiveTimes();
+    this.doCompileFiveTimes();
+    this.doCompileFiveTimes();
+    this.doCompileFiveTimes();
+  }
 }

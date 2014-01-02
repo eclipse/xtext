@@ -75,12 +75,14 @@ public class Linker extends XbaseLazyLinker {
 			@Override
 			public void process(LinkingProxyAwareResource state) throws Exception {
 				state.clearEncodeURIs();
-				clearReferences(model);
+				// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=424541
+				// and ParserWithoutPartialParsing.isReparseSupported()
+//				clearReferences(model);
 				installProxies(state, model, producer);
 				TreeIterator<EObject> iterator = getAllNonDerivedContents(model);
 				while (iterator.hasNext()) {
 					EObject eObject = iterator.next();
-					clearReferences(eObject);
+//					clearReferences(eObject);
 					installProxies(state, eObject, producer);
 				}
 			}
