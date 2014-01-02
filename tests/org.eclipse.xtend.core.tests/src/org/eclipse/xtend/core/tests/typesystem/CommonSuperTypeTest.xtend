@@ -458,6 +458,16 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	def void testCommonSuperType_73() {
 		"Iterable<?>".isSuperTypeOf("Iterable<? super CharSequence>", "Iterable<String>")
 	}
+	
+	@Test
+	def void testCommonSuperType_74() {
+		"Boolean".isSuperTypeOf("boolean", "Boolean")
+	}
+	
+	@Test
+	def void testCommonSuperType_75() {
+		"Boolean".isSuperTypeOf("Boolean", "boolean")
+	}
 }
 
 /**
