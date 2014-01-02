@@ -1417,6 +1417,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"if(true) #{'f'} else emptySet".resolvesTo("Set<String>")
 	}
 	
+	@Test def void testIfExpression_34() throws Exception {
+		"if(true) true else Boolean.TRUE".resolvesTo("Boolean")
+	}
+	
 	@Test def void testSwitchExpression() throws Exception {
 		"switch true { case true : 's' case false : 'foo' default: 'bar'}".resolvesTo("String")
 		"switch true { case true : 's' case false : new Object() default: 'bar'}".resolvesTo("Object")
