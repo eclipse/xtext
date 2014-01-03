@@ -115,9 +115,14 @@ public class RawTypeConformanceComputer {
 	public final static int ALLOW_SYNONYMS = UNBOUND_COMPUTATION_ADDS_HINTS << 1;
 	
 	/**
+	 * Set this bit if synonym types should be considered.
+	 */
+	public final static int ALLOW_FUNCTION_CONVERSION = ALLOW_SYNONYMS << 1;
+	
+	/**
 	 * This bit indicates a successful check for conformance.
 	 */
-	public final static int SUCCESS = ALLOW_SYNONYMS << 1;
+	public final static int SUCCESS = ALLOW_FUNCTION_CONVERSION << 1;
 	
 	/**
 	 * If the result has this bit set, a demand conversion had to be applied to make
@@ -401,7 +406,7 @@ public class RawTypeConformanceComputer {
 	protected int doIsConformant(ArrayTypeReference left, ArrayTypeReference right, int flags) {
 		LightweightTypeReference leftComponent = left.getComponentType();
 		LightweightTypeReference rightComponent = right.getComponentType();
-		return doIsConformant(leftComponent, rightComponent, flags & ~(ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS));
+		return doIsConformant(leftComponent, rightComponent, flags & ~(ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION));
 	}
 	
 	protected int doIsConformant(ArrayTypeReference left, ParameterizedTypeReference right, int flags) {
@@ -410,7 +415,7 @@ public class RawTypeConformanceComputer {
 			if (rightAsArray != null) {
 				LightweightTypeReference leftComponent = left.getComponentType().getWrapperTypeIfPrimitive();
 				LightweightTypeReference rightComponent = rightAsArray.getComponentType();
-				int result = doIsConformant(leftComponent, rightComponent, flags & ~(ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS));
+				int result = doIsConformant(leftComponent, rightComponent, flags & ~(ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION));
 				if ((result & SUCCESS) != 0) {
 					return result | DEMAND_CONVERSION | SYNONYM;
 				}
@@ -435,7 +440,7 @@ public class RawTypeConformanceComputer {
 		if ((flags & AS_TYPE_ARGUMENT) != 0) {
 			LightweightTypeReference lowerBound = left.getLowerBound();
 			if (lowerBound != null) {
-				int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS);
+				int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION);
 				if (right.isRawType()) {
 					newFlags |= ALLOW_RAW_TYPE_CONVERSION;
 				}
@@ -445,7 +450,7 @@ public class RawTypeConformanceComputer {
 				}
 			}
 			for(LightweightTypeReference leftUpperBound: left.getUpperBounds()) {
-				int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS);
+				int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION);
 				if (leftUpperBound.isRawType()) {
 					newFlags |= ALLOW_RAW_TYPE_CONVERSION;
 				}
@@ -465,7 +470,7 @@ public class RawTypeConformanceComputer {
 			if (leftLowerBound != null) {
 				LightweightTypeReference rightLowerBound = right.getLowerBound();
 				if (rightLowerBound != null) {
-					int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS);
+					int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION);
 					if (rightLowerBound.isRawType()) {
 						newFlags |= ALLOW_RAW_TYPE_CONVERSION;
 					}
@@ -476,7 +481,7 @@ public class RawTypeConformanceComputer {
 			}
 			int subtypeOrRawConversion = 0;
 			for(LightweightTypeReference leftUpperBound: left.getUpperBounds()) {
-				int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS);
+				int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION);
 				if (leftUpperBound.isRawType()) {
 					newFlags |= ALLOW_RAW_TYPE_CONVERSION;
 				}
@@ -635,6 +640,8 @@ public class RawTypeConformanceComputer {
 	}
 	
 	protected int doIsConformant(ParameterizedTypeReference left, FunctionTypeReference right, int flags) {
+		if ((flags & ALLOW_FUNCTION_CONVERSION) == 0)
+			return doIsConformant(left, (ParameterizedTypeReference) right, flags);
 		// TODO don't convert if not necessary:
 		// right.getType == left.getType -> doIsConformant optimized to function types -> declarator == procedure, ignore return type etc
 		
@@ -661,6 +668,8 @@ public class RawTypeConformanceComputer {
 		if (left.getType() == right.getType()) {
 			return flags | SUCCESS;
 		}
+		if ((flags & ALLOW_FUNCTION_CONVERSION) == 0)
+			return flags;
 		// function types can be converted to native function types which will be raw assignable if their
 		// number of parameters matches and the function type kind
 		if (left.getParameterTypes().size() == right.getParameterTypes().size()) {
@@ -677,6 +686,8 @@ public class RawTypeConformanceComputer {
 	}
 	
 	protected int doIsConformant(FunctionTypeReference left, ParameterizedTypeReference right, int flags) {
+		if ((flags & ALLOW_FUNCTION_CONVERSION) == 0)
+			return doIsConformant((ParameterizedTypeReference) left, right, flags);
 		FunctionTypeReference convertedRight = right.getAsFunctionTypeReference();
 		if (convertedRight != null) {
 			return doIsConformant(left, convertedRight, flags);
@@ -776,7 +787,8 @@ public class RawTypeConformanceComputer {
 	
 	protected int isAssignableAsFunctionType(ParameterizedTypeReference left,
 			ParameterizedTypeReference right, int flags) {
-		// TODO only if flags allow conversion, e.g. not AS_TYPE_ARGUMENT or better javaConformance?
+		if ((flags & ALLOW_FUNCTION_CONVERSION) == 0)
+			return flags;
 		FunctionTypeReference leftFunctionType = left.getAsFunctionTypeReference();
 		if (leftFunctionType != null) {
 			FunctionTypeReference rightFunctionType = right.getAsFunctionTypeReference();

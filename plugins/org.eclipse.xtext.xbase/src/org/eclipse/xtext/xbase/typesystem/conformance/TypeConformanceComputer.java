@@ -55,7 +55,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	private RawTypeConformanceComputer rawTypeConformanceComputer = new RawTypeConformanceComputer();
 	
 	public boolean isConformant(LightweightTypeReference left, LightweightTypeReference right) {
-		return (isConformant(left, right, ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_RAW_TYPE_CONVERSION) & SUCCESS) != 0;
+		return (isConformant(left, right, ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION | ALLOW_RAW_TYPE_CONVERSION) & SUCCESS) != 0;
 	}
 	
 	public TypeConformanceResult isConformant(LightweightTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument argument) {
@@ -100,7 +100,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	}
 
 	protected int toFlags(TypeConformanceComputationArgument argument) {
-		int flags = ALLOW_RAW_TYPE_CONVERSION;
+		int flags = ALLOW_RAW_TYPE_CONVERSION | ALLOW_FUNCTION_CONVERSION;
 		if (argument.allowPrimitiveConversion) {
 			flags |= ALLOW_BOXING_UNBOXING;
 		}
@@ -152,7 +152,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		List<LightweightTypeReference> rightTypeArguments = right.getTypeArguments();
 		int size = leftTypeArguments.size();
 		if (size == rightTypeArguments.size()) {
-			int argumentFlags = (flags | AS_TYPE_ARGUMENT) & ~(ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_RAW_TYPE_CONVERSION);  
+			int argumentFlags = (flags | AS_TYPE_ARGUMENT) & ~(ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION | ALLOW_RAW_TYPE_CONVERSION);  
 			for(int i = 0; i < size; i++) {
 				if ((doIsConformant(leftTypeArguments.get(i), rightTypeArguments.get(i), argumentFlags) & SUCCESS) == 0) {
 					return flags;
@@ -170,6 +170,8 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	
 	@Override
 	protected int doIsConformant(FunctionTypeReference left, FunctionTypeReference right, int flags) {
+		if ((flags & ALLOW_FUNCTION_CONVERSION) == 0)
+			return doIsConformant((ParameterizedTypeReference)left, (ParameterizedTypeReference)right, flags);
 		List<LightweightTypeReference> leftParameterTypes = left.getParameterTypes();
 		List<LightweightTypeReference> rightParameterTypes = right.getParameterTypes();
 		if (leftParameterTypes.size() != rightParameterTypes.size()) {
@@ -189,7 +191,8 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		} else if (rightIsVoid) {
 			return flags;
 		}
-		if (leftReturnType != rightReturnType && !leftIsVoid && (doIsConformant(leftReturnType, rightReturnType, flags & ~ALLOW_PRIMITIVE_WIDENING | ALLOW_BOXING_UNBOXING) & SUCCESS) == 0) {
+		if (leftReturnType != rightReturnType && !leftIsVoid && (doIsConformant(leftReturnType, rightReturnType, 
+				flags & ~(ALLOW_PRIMITIVE_WIDENING | ALLOW_FUNCTION_CONVERSION | ALLOW_SYNONYMS)) & SUCCESS) == 0) {
 			return flags;
 		}
 		for(int i = 0; i < leftParameterTypes.size(); i++) {
@@ -198,7 +201,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			if (leftParameterType!=rightParameterType && (leftParameterType == null || rightParameterType == null)) {
 				return flags;
 			}
-			if ((doIsConformant(rightParameterType, leftParameterType, flags & ~ALLOW_PRIMITIVE_WIDENING | ALLOW_BOXING_UNBOXING) & SUCCESS) == 0) {
+			if ((doIsConformant(rightParameterType, leftParameterType, flags & ~(ALLOW_PRIMITIVE_WIDENING | ALLOW_FUNCTION_CONVERSION | ALLOW_SYNONYMS )) & SUCCESS) == 0) {
 				return flags;
 			} 
 		}
@@ -278,7 +281,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 					result = getTypeParametersForSupertype(all, rawType, owner, types);
 					for(LightweightTypeReference alreadyCollected: referencesWithSameDistance) {
 						if ((isConformant(result, alreadyCollected,
-								RawTypeConformanceComputer.RAW_TYPE | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_RAW_TYPE_CONVERSION) & SUCCESS) != 0) {
+								RawTypeConformanceComputer.RAW_TYPE | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION | ALLOW_RAW_TYPE_CONVERSION) & SUCCESS) != 0) {
 							classSeen = classSeen || isClass(rawType);
 							continue outer;
 						}
@@ -664,7 +667,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			LightweightTypeReference other = types.get(i);
 			if (result != other) {
 				// if we stumble across unbound references without any hints, assume they are compatible and add respective hints
-				int conformance = isConformant(result, other, ALLOW_BOXING | ALLOW_PRIMITIVE_WIDENING | UNBOUND_COMPUTATION_ADDS_HINTS | ALLOW_RAW_TYPE_CONVERSION);
+				int conformance = isConformant(result, other, ALLOW_BOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_FUNCTION_CONVERSION | UNBOUND_COMPUTATION_ADDS_HINTS | ALLOW_RAW_TYPE_CONVERSION);
 				if ((conformance & SUCCESS) != 0) {
 					boolean resultIsFunctionType = result instanceof FunctionTypeReference;
 					if (!resultIsFunctionType && (other instanceof FunctionTypeReference) &&

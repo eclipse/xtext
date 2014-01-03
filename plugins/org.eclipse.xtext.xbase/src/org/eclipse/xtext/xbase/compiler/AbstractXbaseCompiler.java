@@ -35,6 +35,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -47,6 +48,7 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.conformance.RawTypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -492,6 +494,16 @@ public abstract class AbstractXbaseCompiler {
 
 	protected String makeJavaIdentifier(String name) {
 		return javaUtils.isJavaKeyword(name) ? name+"_" : name;
+	}
+	
+	protected boolean isJavaConformant(JvmTypeReference left, JvmTypeReference right, EObject context) {
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
+		OwnedConverter converter = new OwnedConverter(owner);
+		LightweightTypeReference convertedLeft = converter.toLightweightReference(left);
+		LightweightTypeReference convertedRight = converter.toLightweightReference(right);
+		boolean result = (services.getTypeConformanceComputer().isConformant(
+				convertedLeft, convertedRight, RawTypeConformanceComputer.ALLOW_RAW_TYPE_CONVERSION) & RawTypeConformanceComputer.SUCCESS) != 0;
+		return result;
 	}
 	
 	protected void declareSyntheticVariable(final XExpression expr, ITreeAppendable b) {
