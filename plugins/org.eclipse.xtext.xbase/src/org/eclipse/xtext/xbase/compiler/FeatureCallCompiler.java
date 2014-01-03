@@ -321,6 +321,14 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				return !((XMemberFeatureCall) featureCall).isNullSafe();
 			}
 			return true;
+		} else if (expression instanceof XConstructorCall) {
+			XConstructorCall constructorCall = (XConstructorCall) expression;
+			for (XExpression arg : constructorCall.getArguments()) {
+				if (!this.internalCanCompileToJavaExpression(arg, appendable)) {
+					return false;
+				}
+			}
+			return true;
 		}
 		return super.internalCanCompileToJavaExpression(expression, appendable);
 	}

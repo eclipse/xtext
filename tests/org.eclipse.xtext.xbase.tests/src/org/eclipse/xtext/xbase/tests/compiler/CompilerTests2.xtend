@@ -124,8 +124,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			int _xtrycatchfinallyexpression = (int) 0;
 			try {
-			  int _length = "foo".length();
-			  _xtrycatchfinallyexpression = _length;
+			  _xtrycatchfinallyexpression = "foo".length();
 			} catch (final Throwable _t) {
 			  if (_t instanceof RuntimeException) {
 			    final RuntimeException assert_ = (RuntimeException)_t;

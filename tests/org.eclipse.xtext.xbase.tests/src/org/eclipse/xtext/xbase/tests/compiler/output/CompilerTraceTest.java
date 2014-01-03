@@ -196,24 +196,16 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	@Test
 	public void testFeatureCall_10() throws Exception {
 		assertTrace( 
-				"\nArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();\n" + 
-				"return _ne#wArray#List;", 
+				"\n" +
+				"return CollectionLiterals.<String>new#ArrayL#ist();", 
 				"{ <String>#newArrayList#(); }");
 	}
 	
 	@Test
 	public void testFeatureCall_11() throws Exception {
 		assertTrace( 
-				"\nArrayList<String> _newArrayList = CollectionLiterals.<Stri#ng>newAr#rayList();\n" + 
-				"return _newArrayList;", 
-				"{ #<String>newArrayList()#; }");
-	}
-	
-	@Test
-	public void testFeatureCall_12() throws Exception {
-		assertTrace( 
-				"\nArrayList<String> _newA#r#rayList = CollectionLiterals.<String>newArrayList();\n" + 
-				"return _newArrayList;", 
+				"\n" +
+				"return CollectionLiterals.<Stri#ng>newAr#rayList();", 
 				"{ #<String>newArrayList()#; }");
 	}
 	
