@@ -487,7 +487,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				@Override
 				@Nullable
 				protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type, Set<JvmTypeParameter> visiting) {
-					if (isBoundTypeArgumentSkipped(type, getTypeParameterMapping(), getOwner())) {
+					if (isBoundTypeArgumentSkipped(type, super.getTypeParameterMapping(), getOwner())) {
 						return null;
 					}
 					return super.getBoundTypeArgument(reference, type, visiting);

@@ -247,6 +247,35 @@ public class JvmTypesBuilder {
 		documentationAdapter.setDocumentation(documentation);
 		jvmElement.eAdapters().add(documentationAdapter);
 	}
+	
+	/**
+	 * Attaches the given documentation of the source element to the given jvmElement.
+	 * 
+	 * The documentation is computed lazily.
+	 */
+	public void copyDocumentationTo(@Nullable final EObject source, @Nullable JvmIdentifiableElement jvmElement) {
+		if(source == null || jvmElement == null)
+			return;
+		
+		DocumentationAdapter documentationAdapter = new DocumentationAdapter() {
+			private boolean computed = false;
+			@Override
+			public String getDocumentation() {
+				if (computed) {
+					return super.getDocumentation();
+				}
+				String result = JvmTypesBuilder.this.getDocumentation(source);
+				setDocumentation(result);
+				return result;
+			}
+			@Override
+			public void setDocumentation(String documentation) {
+				computed = true;
+				super.setDocumentation(documentation);
+			}
+		};
+		jvmElement.eAdapters().add(documentationAdapter);
+	}
 
 	/**
 	 * Attaches the given headText to the given {@link JvmDeclaredType}.
