@@ -150,7 +150,11 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		} else if (getTypeReferences().isArray(right) && isList(left)) {
 			convertArrayToList(left, appendable, context, expression);
 		} else if (isJavaConformant(left, right, context)) {
-			expression.exec(appendable);
+			if (mustInsertTypeCast(context, left)) {
+				doCastConversion(left, appendable, context, expression);
+			} else {
+				expression.exec(appendable);
+			}
 		} else if (isList(right) && getTypeReferences().isArray(left)) {
 			convertListToArray(left, appendable, context, expression);
 		} else if (isFunction(right) || (isFunction(left) && closures.findImplementingOperation(right, context.eResource()) != null)) {

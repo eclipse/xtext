@@ -201,6 +201,9 @@ public class RenameRefactoringController {
 				try {
 					EObject targetElement = state.getResourceSet().getEObject(renameElementContext.getTargetElementURI(),
 						false);
+					if (targetElement == null) {
+						return null;
+					}
 					IRenameStrategy.Provider strategyProvider = globalServiceProvider.findService(targetElement,
 							IRenameStrategy.Provider.class);
 					if (strategyProvider != null) {
