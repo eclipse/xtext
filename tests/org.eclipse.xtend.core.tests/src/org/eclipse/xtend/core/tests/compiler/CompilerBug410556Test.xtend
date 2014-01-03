@@ -95,8 +95,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final String[] args) {
-			    BugTypeInference<Object> _bugTypeInference = new BugTypeInference<Object>(Object.class);
-			    final BugTypeInference<Object> b = _bugTypeInference;
+			    final BugTypeInference<Object> b = new BugTypeInference<Object>(Object.class);
 			    b.toString();
 			  }
 			}
@@ -121,8 +120,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final String[] args) {
-			    BugTypeInference _bugTypeInference = new BugTypeInference(Iterable.class);
-			    final BugTypeInference<Iterable<String>> b = _bugTypeInference;
+			    final BugTypeInference<Iterable<String>> b = new BugTypeInference(Iterable.class);
 			    b.toString();
 			  }
 			}
@@ -148,8 +146,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    Class<? extends Class> _class = Object.class.getClass();
-			    BugTypeInference<? extends Class> _bugTypeInference = new BugTypeInference(_class);
-			    final BugTypeInference<? extends Class> b = _bugTypeInference;
+			    final BugTypeInference<? extends Class> b = new BugTypeInference(_class);
 			    b.toString();
 			  }
 			}
@@ -174,8 +171,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static void main(final String[] args) {
-			    BugTypeInference<Iterable> _bugTypeInference = new BugTypeInference<Iterable>(Iterable.class);
-			    final BugTypeInference<Iterable> b = _bugTypeInference;
+			    final BugTypeInference<Iterable> b = new BugTypeInference<Iterable>(Iterable.class);
 			    b.toString();
 			  }
 			}
@@ -201,8 +197,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    Class<? extends Class> _class = Object.class.getClass();
-			    BugTypeInference _bugTypeInference = new BugTypeInference(_class);
-			    final BugTypeInference<Class> b = _bugTypeInference;
+			    final BugTypeInference<Class> b = new BugTypeInference(_class);
 			    b.toString();
 			  }
 			}
@@ -228,8 +223,7 @@ class CompilerBug410556Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    Class<? extends Class> _class = Object.class.getClass();
-			    BugTypeInference<? extends Class> _bugTypeInference = new BugTypeInference(_class);
-			    final BugTypeInference b = _bugTypeInference;
+			    final BugTypeInference b = new BugTypeInference(_class);
 			    b.toString();
 			  }
 			}

@@ -40,8 +40,7 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			    String _xblockexpression = null;
 			    {
 			      String string = this.repository.findByStringId(Long.valueOf(1L));
-			      String _save = this.repository.<String>save(string);
-			      _xblockexpression = (_save);
+			      _xblockexpression = (this.repository.<String>save(string));
 			    }
 			    return _xblockexpression;
 			  }
@@ -74,8 +73,7 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			  private StringRepository repository;
 			  
 			  public Iterable<String> m() {
-			    Iterable<String> _save = this.repository.<String>save(Collections.<String>unmodifiableList(Lists.<String>newArrayList()));
-			    return _save;
+			    return this.repository.<String>save(Collections.<String>unmodifiableList(Lists.<String>newArrayList()));
 			  }
 			}
 		''')
@@ -106,8 +104,7 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			  
 			  public Iterable<String> m() {
 			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-			    Iterable<String> _save = this.repository.<String>save(_newArrayList);
-			    return _save;
+			    return this.repository.<String>save(_newArrayList);
 			  }
 			}
 		''')
@@ -137,8 +134,7 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			  private CharSeqRepository repository;
 			  
 			  public Iterable<String> m() {
-			    Iterable<String> _save = this.repository.<String>save(Collections.<String>unmodifiableList(Lists.<String>newArrayList("a")));
-			    return _save;
+			    return this.repository.<String>save(Collections.<String>unmodifiableList(Lists.<String>newArrayList("a")));
 			  }
 			}
 		''')

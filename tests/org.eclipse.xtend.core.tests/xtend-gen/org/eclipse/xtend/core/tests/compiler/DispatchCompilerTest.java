@@ -47,10 +47,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("protected String _m(@Extension final String s) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("String _substring = s.substring(4);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _substring;");
+    _builder_1.append("return s.substring(4);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

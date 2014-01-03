@@ -585,10 +585,7 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("String _simpleName = _class.getSimpleName();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("String _lowerCase = _simpleName.toLowerCase();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _lowerCase;");
+    _builder_1.append("return _simpleName.toLowerCase();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

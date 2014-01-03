@@ -44,6 +44,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	CompilerBug424839Test.class,
 	CompilerTraceTest.class,
 	ConfiguredCompilerTest.class,
+	DispatchCompilerTest.class,
 	ExtensionsCompilerTest.class,
 	DataCompilerTest.class,
 	Java8OverloadCompilerTest.class,

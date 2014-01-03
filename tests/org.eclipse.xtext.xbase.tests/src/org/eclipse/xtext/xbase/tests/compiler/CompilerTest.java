@@ -50,8 +50,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"if (!_matched) {\n" + 
 				"  if (list instanceof java.util.ArrayList) {\n" + 
 				"    _matched=true;\n" + 
-				"    Object _get = ((java.util.ArrayList)list).get(1);\n" + 
-				"    _switchResult = _get;\n" + 
+				"    _switchResult = ((java.util.ArrayList)list).get(1);\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"final Object it = _switchResult;\n" + 
@@ -99,8 +98,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"if (!_matched) {\n" + 
 				"  if (list instanceof java.util.ArrayList) {\n" + 
 				"    _matched=true;\n" + 
-				"    String _get = ((java.util.ArrayList<String>)list).get(1);\n" + 
-				"    _switchResult = _get;\n" + 
+				"    _switchResult = ((java.util.ArrayList<String>)list).get(1);\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"final String it = _switchResult;\n" + 
@@ -299,8 +297,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	@Test public void testBlockHasNoSuperfluousBraces_04() throws Exception {
 		assertCompilesTo(
 				"\n" + 
-				"Object _object = new Object();\n" +
-				"Object it = _object;\n" +
+				"Object it = new Object();\n" +
 				"it.notify();",
 				"{ var it = new Object() notify }");
 	}
@@ -309,13 +306,11 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				"\n" + 
 				"{\n" +
-				"  Object _object = new Object();\n" +
-				"  Object it = _object;\n" +
+				"  Object it = new Object();\n" +
 				"  it.notify();\n" +
 				"}\n" +
 				"{\n" +
-				"  Object _object = new Object();\n" +
-				"  Object it = _object;\n" +
+				"  Object it = new Object();\n" +
 				"  it.notify();\n" +
 				"}",
 				"{ { var it = new Object() notify } { var it = new Object() notify } }");
@@ -324,11 +319,9 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	@Test public void testBlockHasNoSuperfluousBraces_06() throws Exception {
 		assertCompilesTo(
 				"\n" + 
-				"Object _object = new Object();\n" + 
-				"Object it = _object;\n" + 
+				"Object it = new Object();\n" + 
 				"{\n" + 
-				"  Object _object_1 = new Object();\n" + 
-				"  Object it_1 = _object_1;\n" + 
+				"  Object it_1 = new Object();\n" + 
 				"  it_1.notify();\n" + 
 				"}\n" + 
 				"it.notify();",
@@ -338,10 +331,9 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	@Test public void testBlockHasNoSuperfluousBraces_07() throws Exception {
 		assertCompilesTo(
 				"\n" + 
+				"Object it = new Object();\n" + 
 				"Object _object = new Object();\n" + 
-				"Object it = _object;\n" + 
-				"Object _object_1 = new Object();\n" + 
-				"_object_1.notify();\n" + 
+				"_object.notify();\n" + 
 				"it.notify();",
 				"{ var it = new Object() { new Object().notify() } notify }");
 	}
@@ -351,10 +343,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				"String _xblockexpression = null;\n" + 
 				"{\n" + 
-				"  testdata.Properties1 _properties1 = new testdata.Properties1();\n" + 
-				"  final testdata.Properties1 x = _properties1;\n" + // this one is not necessary 
-				"  String _string = x.toString();\n" + 
-				"  _xblockexpression = (_string);\n" + 
+				"  final testdata.Properties1 x = new testdata.Properties1();\n" +  
+				"  _xblockexpression = (x.toString());\n" + 
 				"}\n" + 
 				"return _xblockexpression;",
 				"{ val x = new testdata.Properties1() x.toString()}");
@@ -364,10 +354,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				"\nint _xblockexpression = (int) 0;\n" +
 				"{\n" +
-				"  java.util.ArrayList<String> _arrayList = new java.util.ArrayList<String>();\n" + 
-				"  final java.util.ArrayList<String> it = _arrayList;\n" +
-				"  int _size = it.size();\n" + 
-				"  _xblockexpression = (_size);\n" +
+				"  final java.util.ArrayList<String> it = new java.util.ArrayList<String>();\n" +
+				"  _xblockexpression = (it.size());\n" +
 				"}\n" +
 				"return _xblockexpression;"
 				, "{ val it = new java.util.ArrayList<String>(); size;}");
@@ -499,13 +487,12 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	@Test public void testNullSafeFeatureCall_06() throws Exception {
 		assertCompilesTo(
 				"\n" + 
-				"String _string = new String();\n" + 
-				"String s = _string;\n" + 
-				"String _string_1 = null;\n" + 
+				"String s = new String();\n" + 
+				"String _string = null;\n" + 
 				"if (s!=null) {\n" + 
-				"  _string_1=s.toString();\n" + 
+				"  _string=s.toString();\n" + 
 				"}\n" + 
-				"return _string_1;", 
+				"return _string;", 
 				"{ var s = new String; return s?.toString() }");
 	}
 	
@@ -573,8 +560,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"  if (x instanceof String) {\n" + 
 				"    _matched=true;\n" + 
 				"    String _substring = ((String)x).substring(3);\n" + 
-				"    String _plus = (_substring + ((String)x));\n" + 
-				"    _switchResult = _plus;\n" + 
+				"    _switchResult = (_substring + ((String)x));\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
@@ -583,8 +569,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"    int _compareTo = ((Comparable)x).compareTo(\"jho\");\n" + 
 				"    String _plus = (\"\" + Integer.valueOf(_compareTo));\n" + 
 				"    String _string = x.toString();\n" + 
-				"    String _plus_1 = (_plus + _string);\n" + 
-				"    _switchResult = _plus_1;\n" + 
+				"    _switchResult = (_plus + _string);\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"return _switchResult;"
@@ -604,8 +589,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"  if (x instanceof String) {\n" + 
 				"    _matched=true;\n" + 
 				"    String _substring = ((String)x).substring(3);\n" + 
-				"    String _plus = (_substring + ((String)x));\n" + 
-				"    _switchResult = _plus;\n" + 
+				"    _switchResult = (_substring + ((String)x));\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
@@ -614,8 +598,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"    int _compareTo = ((Comparable<String>)x).compareTo(\"jho\");\n" + 
 				"    String _plus = (\"\" + Integer.valueOf(_compareTo));\n" + 
 				"    int _length = x.length();\n" + 
-				"    String _plus_1 = (_plus + Integer.valueOf(_length));\n" + 
-				"    _switchResult = _plus_1;\n" + 
+				"    _switchResult = (_plus + Integer.valueOf(_length));\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"return _switchResult;"

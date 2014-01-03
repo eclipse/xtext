@@ -787,10 +787,7 @@ public class CompilerBug419050Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Iterable<String> _filter = IterableExtensions.<String>filter(iter, _function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _filter;");
+    _builder_1.append("return IterableExtensions.<String>filter(iter, _function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

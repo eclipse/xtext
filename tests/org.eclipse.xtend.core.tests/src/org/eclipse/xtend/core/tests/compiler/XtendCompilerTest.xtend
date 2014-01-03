@@ -129,8 +129,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class A {
 			  public Set<String> doStuff(final String Collections) {
-			    Set<String> _emptySet = java.util.Collections.<String>emptySet();
-			    return _emptySet;
+			    return java.util.Collections.<String>emptySet();
 			  }
 			}
 		''')
@@ -175,8 +174,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  
 			  public LightweightTypeReference substitute(final LightweightTypeReference original) {
 			    HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet();
-			    LightweightTypeReference _accept = original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);
-			    return _accept;
+			    return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);
 			  }
 			  
 			  protected Set<JvmTypeParameter> createVisiting() {
@@ -211,13 +209,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  protected int _testFunction1(final String s) {
-			    int _length = s.length();
-			    return _length;
+			    return s.length();
 			  }
 			  
 			  protected int _testFunction1(final Integer i) {
-			    int _intValue = i.intValue();
-			    return _intValue;
+			    return i.intValue();
 			  }
 			  
 			  public int testFunction1(final Object i) {
@@ -630,8 +626,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public void foo(final Function1<? super String,? extends String> func) {
 			    final Function1<String,String> _function = new Function1<String,String>() {
 			      public String apply(final String it) {
-			        String _apply = this.apply(it);
-			        return _apply;
+			        return this.apply(it);
 			      }
 			    };
 			    this.foo(_function);
@@ -741,8 +736,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        {
 			          Foo.this.toString();
 			          Foo.super.toString();
-			          String _string = this.toString();
-			          _xblockexpression = (_string);
+			          _xblockexpression = (this.toString());
 			        }
 			        return _xblockexpression;
 			      }
@@ -782,8 +776,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        T _elvis = null;
 			        final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
 			          public Boolean apply(final T it) {
-			            boolean _tripleNotEquals = (it != null);
-			            return Boolean.valueOf(_tripleNotEquals);
+			            return Boolean.valueOf((it != null));
 			          }
 			        };
 			        T _findFirst = IteratorExtensions.<T>findFirst(iter, _function);
@@ -835,8 +828,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				        T _elvis = null;
 				        final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
 				          public Boolean apply(final T it) {
-				            boolean _notEquals = (!Objects.equal(it, null));
-				            return Boolean.valueOf(_notEquals);
+				            return Boolean.valueOf((!Objects.equal(it, null)));
 				          }
 				        };
 				        T _findFirst = IteratorExtensions.<T>findFirst(it, _function);
@@ -913,8 +905,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public Function0<String> m() {
 			    final Function0<String> _function = new Function0<String>() {
 			      public String apply() {
-			        String _println = InputOutput.<String>println("");
-			        return _println;
+			        return InputOutput.<String>println("");
 			      }
 			    };
 			    return _function;
@@ -955,8 +946,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    try {
 			      T _xtrycatchfinallyexpression = null;
 			      try {
-			        T _apply = proc.apply();
-			        _xtrycatchfinallyexpression = _apply;
+			        _xtrycatchfinallyexpression = proc.apply();
 			      } catch (final Throwable _t) {
 			        if (_t instanceof Exception) {
 			          final Exception e = (Exception)_t;
@@ -999,28 +989,19 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class Client {
-			  private final URI uri = new Function0<URI>() {
+			  private final URI uri = Throwables.<URI>propagate(new Function0<URI>() {
 			    public URI apply() {
-			      final Function0<URI> _function = new Function0<URI>() {
-			        public URI apply() {
-			          try {
-			            URI _uRI = new URI("");
-			            return _uRI;
-			          } catch (Throwable _e) {
-			            throw Exceptions.sneakyThrow(_e);
-			          }
-			        }
-			      };
-			      final Function1<Exception,IllegalArgumentException> _function_1 = new Function1<Exception,IllegalArgumentException>() {
-			        public IllegalArgumentException apply(final Exception it) {
-			          IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(it);
-			          return _illegalArgumentException;
-			        }
-			      };
-			      URI _propagate = Throwables.<URI>propagate(_function, _function_1);
-			      return _propagate;
+			      try {
+			        return new URI("");
+			      } catch (Throwable _e) {
+			        throw Exceptions.sneakyThrow(_e);
+			      }
 			    }
-			  }.apply();
+			  }, new Function1<Exception,IllegalArgumentException>() {
+			    public IllegalArgumentException apply(final Exception it) {
+			      return new IllegalArgumentException(it);
+			    }
+			  });
 			}
 		''')
 	}
@@ -1073,8 +1054,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class MyClass {
 			  public void throwsSomething() {
 			    try {
-			      Throwable _throwable = new Throwable();
-			      throw _throwable;
+			      throw new Throwable();
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
@@ -1471,20 +1451,17 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        public File apply(final String f) {
 			          try {
 			            File _file = new File(f);
-			            File _canonicalFile = _file.getCanonicalFile();
-			            return _canonicalFile;
+			            return _file.getCanonicalFile();
 			          } catch (Throwable _e) {
 			            throw Exceptions.sneakyThrow(_e);
 			          }
 			        }
 			      };
-			      List<File> _map = ListExtensions.<String, File>map(_newArrayList, _function);
-			      _xtrycatchfinallyexpression = _map;
+			      _xtrycatchfinallyexpression = ListExtensions.<String, File>map(_newArrayList, _function);
 			    } catch (final Throwable _t) {
 			      if (_t instanceof IOException) {
 			        final IOException o = (IOException)_t;
-			        List<File> _emptyList = Collections.<File>emptyList();
-			        _xtrycatchfinallyexpression = _emptyList;
+			        _xtrycatchfinallyexpression = Collections.<File>emptyList();
 			      } else {
 			        throw Exceptions.sneakyThrow(_t);
 			      }
@@ -1521,15 +1498,13 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    final Function1<String,Object> _function = new Function1<String,Object>() {
 			      public Object apply(final String it) {
 			        try {
-			          Object _foo = Foo.this.getFoo(it);
-			          return _foo;
+			          return Foo.this.getFoo(it);
 			        } catch (Throwable _e) {
 			          throw Exceptions.sneakyThrow(_e);
 			        }
 			      }
 			    };
-			    Map<Object,String> _map = IterableExtensions.<Object, String>toMap(_newArrayList, _function);
-			    return _map;
+			    return IterableExtensions.<Object, String>toMap(_newArrayList, _function);
 			  }
 			}
 		''')
@@ -1713,8 +1688,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class Bar {
 			  public void doStuff() {
 			    try {
-			      IOException _iOException = new IOException();
-			      throw _iOException;
+			      throw new IOException();
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
@@ -1743,8 +1717,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bar {
 			  public void doStuff() throws IOException {
-			    IOException _iOException = new IOException();
-			    throw _iOException;
+			    throw new IOException();
 			  }
 			}
 		''')
@@ -1772,8 +1745,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public void doStuff(final File file) {
 			    try {
 			      String _canonicalPath = file.getCanonicalPath();
-			      IllegalStateException _illegalStateException = new IllegalStateException(_canonicalPath);
-			      throw _illegalStateException;
+			      throw new IllegalStateException(_canonicalPath);
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
@@ -1804,8 +1776,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public Object doStuff(final File file) {
 			    try {
 			      String _canonicalPath = file.getCanonicalPath();
-			      IllegalStateException _illegalStateException = new IllegalStateException(_canonicalPath);
-			      return _illegalStateException;
+			      return new IllegalStateException(_canonicalPath);
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
@@ -1835,8 +1806,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class Bar {
 			  public void doStuff(final File file) throws IOException {
 			    String _canonicalPath = file.getCanonicalPath();
-			    IllegalStateException _illegalStateException = new IllegalStateException(_canonicalPath);
-			    throw _illegalStateException;
+			    throw new IllegalStateException(_canonicalPath);
 			  }
 			}
 		''')
@@ -1855,8 +1825,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bar {
 			  public Integer doStuff(final String x) {
-			    int _length = x.length();
-			    return Integer.valueOf(_length);
+			    return Integer.valueOf(x.length());
 			  }
 			}
 		''')
@@ -1875,8 +1844,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bar {
 			  public String foo() {
-			    String _string = new String();
-			    return _string;
+			    return new String();
 			  }
 			}
 		''')
@@ -2147,8 +2115,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bar {
 			  public HashMap<String,Serializable> foo() {
-			    HashMap<String,Serializable> _hashMap = new HashMap<String, Serializable>();
-			    return _hashMap;
+			    return new HashMap<String, Serializable>();
 			  }
 			}
 		''')
@@ -2175,8 +2142,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  
 			  public C<IOException> m() {
 			    try {
-			      C<IOException> _c = new C<IOException>();
-			      return _c;
+			      return new C<IOException>();
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
@@ -2304,8 +2270,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    if (_equals) {
 			      return true;
 			    } else {
-			      boolean _equals_1 = super.equals(p);
-			      _xifexpression = _equals_1;
+			      _xifexpression = super.equals(p);
 			    }
 			    return _xifexpression;
 			  }
@@ -2350,8 +2315,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      this.getThing();
 			      this.getThing("");
 			      this.getThing();
-			      String _thing = this.getThing("");
-			      _xblockexpression = (_thing);
+			      _xblockexpression = (this.getThing(""));
 			    }
 			    return _xblockexpression;
 			  }
@@ -2408,8 +2372,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      super.getThing("");
 			      super.getThing();
 			      super.getThing();
-			      String _thing = super.getThing();
-			      _xblockexpression = (_thing);
+			      _xblockexpression = (super.getThing());
 			    }
 			    return _xblockexpression;
 			  }
@@ -2644,18 +2607,15 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bar<T extends CharSequence> {
 			  public static Bar<CharSequence> factory() {
-			    Bar<CharSequence> _bar = new Bar<CharSequence>();
-			    return _bar;
+			    return new Bar<CharSequence>();
 			  }
 			  
 			  public static Bar<StringBuilder> concreteFactory() {
-			    Bar<StringBuilder> _bar = new Bar<StringBuilder>();
-			    return _bar;
+			    return new Bar<StringBuilder>();
 			  }
 			  
 			  public static <X extends String> Bar<X> parameterizedFactory() {
-			    Bar<X> _bar = new Bar<X>();
-			    return _bar;
+			    return new Bar<X>();
 			  }
 			}
 		''');
@@ -2677,23 +2637,19 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bar<T extends CharSequence> {
 			  public Bar<CharSequence> factory() {
-			    Bar<CharSequence> _bar = new Bar<CharSequence>();
-			    return _bar;
+			    return new Bar<CharSequence>();
 			  }
 			  
 			  public Bar<String> concreteFactory() {
-			    Bar<String> _bar = new Bar<String>();
-			    return _bar;
+			    return new Bar<String>();
 			  }
 			  
 			  public Bar<T> parameterizedFactory() {
-			    Bar<T> _bar = new Bar<T>();
-			    return _bar;
+			    return new Bar<T>();
 			  }
 			  
 			  public <X extends T> Bar<X> concreteParameterizedFactory() {
-			    Bar<X> _bar = new Bar<X>();
-			    return _bar;
+			    return new Bar<X>();
 			  }
 			}
 		''');
@@ -2740,13 +2696,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			              return it;
 			            }
 			          };
-			          String _apply = _function.apply(it);
-			          return _apply;
+			          return _function.apply(it);
 			        }
 			      };
 			      final Function1<? super String,? extends String> function = _function;
-			      String _apply = function.apply("foo");
-			      _xblockexpression = (_apply);
+			      _xblockexpression = (function.apply("foo"));
 			    }
 			    return _xblockexpression;
 			  }
@@ -2772,16 +2726,13 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      public String apply() {
 			        final Function0<String> _function = new Function0<String>() {
 			          public String apply() {
-			            String _string = X.super.toString();
-			            return _string;
+			            return X.super.toString();
 			          }
 			        };
-			        String _apply = _function.apply();
-			        return _apply;
+			        return _function.apply();
 			      }
 			    };
-			    String _apply = _function.apply();
-			    return _apply;
+			    return _function.apply();
 			  }
 			}
 		''')
@@ -2799,8 +2750,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class X {
 			  public Object foo(final int p0, final Integer p1) {
-			    Object _foo = this.foo((p1).intValue(), Integer.valueOf(p0));
-			    return _foo;
+			    return this.foo((p1).intValue(), Integer.valueOf(p0));
 			  }
 			}
 		''')
@@ -2817,8 +2767,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class X {
 			  public Object foo(final int p0, final Integer p1) {
-			    Object _foo = this.foo((p1).intValue(), Integer.valueOf(p0));
-			    return _foo;
+			    return this.foo((p1).intValue(), Integer.valueOf(p0));
 			  }
 			}
 		''')
@@ -2843,8 +2792,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public Object foo(final Object o) {
 			    Object _xifexpression = null;
 			    if ((o instanceof Long)) {
-			      Object _bar = this.bar(((Long) o).longValue());
-			      _xifexpression = _bar;
+			      _xifexpression = this.bar(((Long) o).longValue());
 			    }
 			    return _xifexpression;
 			  }
@@ -2878,8 +2826,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    if (!_matched) {
 			      if (o instanceof Long) {
 			        _matched=true;
-			        Object _bar = this.bar(((Long) o).longValue());
-			        _switchResult = _bar;
+			        _switchResult = this.bar(((Long) o).longValue());
 			      }
 			    }
 			    return _switchResult;
@@ -3082,12 +3029,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				  public <T extends Object> T useExtension(final Iterable<T> it) {
 				    final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
 				      public Boolean apply(final T it) {
-				        boolean _tripleNotEquals = (it != null);
-				        return Boolean.valueOf(_tripleNotEquals);
+				        return Boolean.valueOf((it != null));
 				      }
 				    };
-				    T _findFirst = IterableExtensions.<T>findFirst(it, _function);
-				    return _findFirst;
+				    return IterableExtensions.<T>findFirst(it, _function);
 				  }
 				}
 			''')
@@ -3172,8 +3117,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class B extends A {
 			  public String client(final CharSequence c) {
 			    CharSequence _m = this.m();
-			    String _client = this.client(_m);
-			    return _client;
+			    return this.client(_m);
 			  }
 			  
 			  public CharSequence m() {
@@ -3214,8 +3158,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				  public String test() {
 				    StringConcatenation _builder = new StringConcatenation();
 				    _builder.append("SomeString");
-				    String _println = InputOutput.<String>println(_builder.toString());
-				    return _println;
+				    return InputOutput.<String>println(_builder.toString());
 				  }
 				}
 			''')
@@ -3280,8 +3223,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				  public String test() {
 				    StringConcatenation _builder = new StringConcatenation();
 				    _builder.append("SomeString");
-				    String _string = _builder.toString();
-				    return _string;
+				    return _builder.toString();
 				  }
 				}
 			''')
@@ -3318,8 +3260,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				  public String test() {
 				    StringConcatenation _builder = new StringConcatenation();
 				    _builder.append("SomeString");
-				    String _println = InputOutput.<String>println(_builder.toString());
-				    return _println;
+				    return InputOutput.<String>println(_builder.toString());
 				  }
 				}
 			''')
@@ -3875,8 +3816,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					}
 				''', '''
 					import java.util.AbstractCollection;
-					import java.util.ArrayList;
-					import java.util.HashSet;
 					import java.util.List;
 					import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 					import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -3886,11 +3825,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					  public List<String> getAnzuwendendeModi(final String source) {
 					    AbstractCollection<String> _xifexpression = null;
 					    if (true) {
-					      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-					      _xifexpression = _newArrayList;
+					      _xifexpression = CollectionLiterals.<String>newArrayList();
 					    } else {
-					      HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
-					      _xifexpression = _newHashSet;
+					      _xifexpression = CollectionLiterals.<String>newHashSet();
 					    }
 					    List<String> _list = null;
 					    if (_xifexpression!=null) {

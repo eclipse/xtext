@@ -52,8 +52,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Assert.<String>assertThat(_name, _is);
 			      }
 			    };
-			    MyEntity _doubleArrow = ObjectExtensions.<MyEntity>operator_doubleArrow(_myEntity, _function);
-			    return _doubleArrow;
+			    return ObjectExtensions.<MyEntity>operator_doubleArrow(_myEntity, _function);
 			  }
 			  
 			  public static <T extends Object> Matcher<T> nullValue() {
@@ -99,8 +98,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
-			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
-			    return _doubleArrow;
+			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			  }
 			}
 		''')
@@ -141,8 +139,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
-			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
-			    return _doubleArrow;
+			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			  }
 			}
 		''')
@@ -183,8 +180,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
-			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
-			    return _doubleArrow;
+			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			  }
 			}
 		''')
@@ -225,8 +221,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
-			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
-			    return _doubleArrow;
+			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			  }
 			}
 		''')
@@ -311,8 +306,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
-			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
-			    return _doubleArrow;
+			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			  }
 			}
 		''')
@@ -353,8 +347,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
-			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
-			    return _doubleArrow;
+			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			  }
 			}
 		''')

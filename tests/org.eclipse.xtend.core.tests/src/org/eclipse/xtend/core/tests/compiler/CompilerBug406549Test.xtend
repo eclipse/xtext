@@ -102,8 +102,7 @@ class CompilerBug406549Test extends AbstractXtendCompilerTest {
 			        _test.m(it, _long);
 			      }
 			    };
-			    StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
-			    return _doubleArrow;
+			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
 			  }
 			}
 		''')
@@ -128,8 +127,7 @@ class CompilerBug406549Test extends AbstractXtendCompilerTest {
 			  public Object m() {
 			    Test<Object> _test = new Test<Object>();
 			    Long _long = new Long(0);
-			    Object _m = _test.m(null, _long);
-			    return _m;
+			    return _test.m(null, _long);
 			  }
 			}
 		''')
@@ -154,8 +152,7 @@ class CompilerBug406549Test extends AbstractXtendCompilerTest {
 			  public Object m() {
 			    Test<Object> _test = new Test<Object>();
 			    Long _long = new Long(0);
-			    Object _m = _test.m("", _long);
-			    return _m;
+			    return _test.m("", _long);
 			  }
 			}
 		''')

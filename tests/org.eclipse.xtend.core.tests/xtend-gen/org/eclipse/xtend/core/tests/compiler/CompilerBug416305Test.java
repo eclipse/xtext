@@ -87,10 +87,7 @@ public class CompilerBug416305Test extends AbstractXtendCompilerTest {
     _builder_1.append("final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList(\"abc\", \"def\"));");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("A<String> _a = new A<String>();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("final A<String> a = _a;");
+    _builder_1.append("final A<String> a = new A<String>();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("a.<String>f(list);");
@@ -174,10 +171,7 @@ public class CompilerBug416305Test extends AbstractXtendCompilerTest {
     _builder_1.append("final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList(\"abc\", \"def\"));");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("A<CharSequence> _a = new A<CharSequence>();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("final A<CharSequence> a = _a;");
+    _builder_1.append("final A<CharSequence> a = new A<CharSequence>();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("a.<String>f(list);");
@@ -261,10 +255,7 @@ public class CompilerBug416305Test extends AbstractXtendCompilerTest {
     _builder_1.append("final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList());");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("A<String> _a = new A<String>();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("final A<String> a = _a;");
+    _builder_1.append("final A<String> a = new A<String>();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("a.<String>f(list);");

@@ -89,8 +89,7 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			        return e;
 			      }
 			    };
-			    List<String> _sortBy = IterableExtensions.<String, String>sortBy(list, _function);
-			    return _sortBy;
+			    return IterableExtensions.<String, String>sortBy(list, _function);
 			  }
 			}
 		''')
@@ -117,8 +116,7 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			        return e;
 			      }
 			    };
-			    List<String> _sortBy = IterableExtensions.<String, String>sortBy(list, _function);
-			    return _sortBy;
+			    return IterableExtensions.<String, String>sortBy(list, _function);
 			  }
 			}
 		''')
@@ -177,12 +175,10 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			        public Pair<QualifiedName,T> apply(final IEObjectDescription eod) {
 			          QualifiedName _qualifiedName = eod.getQualifiedName();
 			          T _resolve = Dummy.this.<T>resolve(eod, resourceSet);
-			          Pair<QualifiedName,T> _mappedTo = Pair.<QualifiedName, T>of(_qualifiedName, _resolve);
-			          return _mappedTo;
+			          return Pair.<QualifiedName, T>of(_qualifiedName, _resolve);
 			        }
 			      };
-			      List<Pair<QualifiedName,T>> _map = ListExtensions.<IEObjectDescription, Pair<QualifiedName,T>>map(c, _function);
-			      _xblockexpression = (_map);
+			      _xblockexpression = (ListExtensions.<IEObjectDescription, Pair<QualifiedName,T>>map(c, _function));
 			    }
 			    return _xblockexpression;
 			  }

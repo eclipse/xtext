@@ -641,10 +641,7 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public Object woot(final List<U> list) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Object _woot = super.woot(list);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _woot;");
+    _builder_1.append("return super.woot(list);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

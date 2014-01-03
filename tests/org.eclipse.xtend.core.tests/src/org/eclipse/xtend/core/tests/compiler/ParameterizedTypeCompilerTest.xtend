@@ -335,8 +335,7 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public Object woot(final List<U> list) {
-			    Object _woot = super.woot(list);
-			    return _woot;
+			    return super.woot(list);
 			  }
 			}
 		''')

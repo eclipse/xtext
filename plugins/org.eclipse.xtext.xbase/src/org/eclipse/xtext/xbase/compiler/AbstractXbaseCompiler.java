@@ -244,7 +244,9 @@ public abstract class AbstractXbaseCompiler {
 		TreeIterator<EObject> iterator = EcoreUtil2.eAll(expression);
 		while (iterator.hasNext()) {
 			EObject next = iterator.next();
-			if (next instanceof XExpression) {
+			if (next instanceof XClosure) {
+				iterator.prune();
+			} else if (next instanceof XExpression) {
 				if (!internalCanCompileToJavaExpression((XExpression) next, appendable))
 					return false;
 			}

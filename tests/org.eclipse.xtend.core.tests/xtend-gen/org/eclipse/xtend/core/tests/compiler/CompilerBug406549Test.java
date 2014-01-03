@@ -220,10 +220,7 @@ public class CompilerBug406549Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("StringBuilder _doubleArrow = ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _doubleArrow;");
+    _builder_1.append("return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -278,10 +275,7 @@ public class CompilerBug406549Test extends AbstractXtendCompilerTest {
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Object _m = _test.m(null, _long);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _m;");
+    _builder_1.append("return _test.m(null, _long);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -336,10 +330,7 @@ public class CompilerBug406549Test extends AbstractXtendCompilerTest {
     _builder_1.append("Long _long = new Long(0);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Object _m = _test.m(\"\", _long);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _m;");
+    _builder_1.append("return _test.m(\"\", _long);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

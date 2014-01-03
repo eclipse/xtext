@@ -31,8 +31,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  protected String _m(@Extension final String s) {
-			    String _substring = s.substring(4);
-			    return _substring;
+			    return s.substring(4);
 			  }
 			  
 			  public String m(final String s) {

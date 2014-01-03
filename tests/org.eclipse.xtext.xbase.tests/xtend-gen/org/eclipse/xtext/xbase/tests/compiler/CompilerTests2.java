@@ -230,10 +230,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("int _length = \"foo\".length();");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("_xtrycatchfinallyexpression = _length;");
+    _builder_1.append("_xtrycatchfinallyexpression = \"foo\".length();");
     _builder_1.newLine();
     _builder_1.append("} catch (final Throwable _t) {");
     _builder_1.newLine();

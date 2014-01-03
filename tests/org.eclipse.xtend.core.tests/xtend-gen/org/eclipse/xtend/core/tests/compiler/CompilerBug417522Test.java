@@ -53,10 +53,7 @@ public class CompilerBug417522Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Instance<Bug> demo(final Instance<Bug> instance) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Instance<Bug> _select = instance.<Bug>select(Bug.class);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _select;");
+    _builder_1.append("return instance.<Bug>select(Bug.class);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -105,10 +102,7 @@ public class CompilerBug417522Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Instance<Sub> demo(final Instance<Bug> instance) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Instance<Sub> _select = instance.<Sub>select(Sub.class);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _select;");
+    _builder_1.append("return instance.<Sub>select(Sub.class);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -190,10 +184,7 @@ public class CompilerBug417522Test extends AbstractXtendCompilerTest {
     _builder_1.append("this.instance.select(new Annotation[] {});");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("Instance<Bug> _select = this.instance.<Bug>select(Bug.class, new Annotation[] {});");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (_select);");
+    _builder_1.append("_xblockexpression = (this.instance.<Bug>select(Bug.class, new Annotation[] {}));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -248,10 +239,7 @@ public class CompilerBug417522Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Instance<Sub> demo(final Instance<Bug> instance) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Instance<Sub> _select = instance.<Sub>select(Sub.class);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _select;");
+    _builder_1.append("return instance.<Sub>select(Sub.class);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
