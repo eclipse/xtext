@@ -348,8 +348,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			        return null;
 			      }
 			    };
-			    Iterable<String> _filter = IterableExtensions.<String>filter(iter, _function);
-			    return _filter;
+			    return IterableExtensions.<String>filter(iter, _function);
 			  }
 			}
 		''')

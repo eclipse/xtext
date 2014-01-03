@@ -31,8 +31,7 @@ class CompilerBug417522Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  public Instance<Bug> demo(final Instance<Bug> instance) {
-			    Instance<Bug> _select = instance.<Bug>select(Bug.class);
-			    return _select;
+			    return instance.<Bug>select(Bug.class);
 			  }
 			}
 		''')
@@ -56,8 +55,7 @@ class CompilerBug417522Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  public Instance<Sub> demo(final Instance<Bug> instance) {
-			    Instance<Sub> _select = instance.<Sub>select(Sub.class);
-			    return _select;
+			    return instance.<Sub>select(Sub.class);
 			  }
 			}
 		''')
@@ -93,8 +91,7 @@ class CompilerBug417522Test extends AbstractXtendCompilerTest {
 			      this.instance.<Bug>select(Bug.class);
 			      this.instance.select();
 			      this.instance.select(new Annotation[] {});
-			      Instance<Bug> _select = this.instance.<Bug>select(Bug.class, new Annotation[] {});
-			      _xblockexpression = (_select);
+			      _xblockexpression = (this.instance.<Bug>select(Bug.class, new Annotation[] {}));
 			    }
 			    return _xblockexpression;
 			  }
@@ -120,8 +117,7 @@ class CompilerBug417522Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Bug {
 			  public Instance<Sub> demo(final Instance<Bug> instance) {
-			    Instance<Sub> _select = instance.<Sub>select(Sub.class);
-			    return _select;
+			    return instance.<Sub>select(Sub.class);
 			  }
 			}
 		''')

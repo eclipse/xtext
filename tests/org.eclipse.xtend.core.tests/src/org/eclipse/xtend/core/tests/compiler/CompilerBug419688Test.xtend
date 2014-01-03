@@ -34,8 +34,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public D m() {
-			    D _m = super.m();
-			    return _m;
+			    return super.m();
 			  }
 			}
 		''')
@@ -61,8 +60,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public Iterable<D> m() {
-			    Iterable<D> _m = super.m();
-			    return _m;
+			    return super.m();
 			  }
 			}
 		''')
@@ -88,8 +86,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public D m() {
-			    D _m2 = super.m2();
-			    return _m2;
+			    return super.m2();
 			  }
 			}
 		''')
@@ -119,8 +116,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  public Iterable<D> m() {
 			    Iterable<D> _m2 = super.m2();
 			    Iterable<D> _m2_1 = this.m2();
-			    Iterable<D> _plus = Iterables.<D>concat(_m2, _m2_1);
-			    return _plus;
+			    return Iterables.<D>concat(_m2, _m2_1);
 			  }
 			}
 		''')
@@ -146,8 +142,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public D m() {
-			    D _m2 = super.<D>m2();
-			    return _m2;
+			    return super.<D>m2();
 			  }
 			}
 		''')
@@ -174,8 +169,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public E m() {
-			    E _m2 = super.<E>m2();
-			    return _m2;
+			    return super.<E>m2();
 			  }
 			}
 		''')
@@ -201,8 +195,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public Iterable<D> m() {
-			    Iterable<D> _m2 = super.<Iterable<D>>m2();
-			    return _m2;
+			    return super.<Iterable<D>>m2();
 			  }
 			}
 		''')
@@ -229,8 +222,7 @@ class CompilerBug419688Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public DIter m() {
-			    DIter _m2 = super.<DIter>m2();
-			    return _m2;
+			    return super.<DIter>m2();
 			  }
 			}
 		''')

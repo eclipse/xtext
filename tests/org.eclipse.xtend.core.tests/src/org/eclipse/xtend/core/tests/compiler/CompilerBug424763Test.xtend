@@ -66,9 +66,8 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public JAVA_TYPE apply() {
-			    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(
+			    throw new UnsupportedOperationException(
 			      (("Instances of type " + this.type) + " cannot be created (without parameters?)"));
-			    throw _unsupportedOperationException;
 			  }
 			}
 		''')
@@ -117,19 +116,13 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			public class Test<JAVA_TYPE extends Object> {
 			  private final Function0<JAVA_TYPE> constructor;
 			  
-			  private final ArrayList<Object> list = new Function0<ArrayList<Object>>() {
-			    public ArrayList<Object> apply() {
-			      ArrayList<Object> _arrayList = new ArrayList<Object>(1);
-			      return _arrayList;
-			    }
-			  }.apply();
+			  private final ArrayList<Object> list = new ArrayList<Object>(1);
 			  
 			  public Test(final Function0<JAVA_TYPE> theConstructor, final Class<JAVA_TYPE> theType) {
 			    Function0<JAVA_TYPE> _xifexpression = null;
 			    boolean _equals = Objects.equal(theConstructor, null);
 			    if (_equals) {
-			      NoConstructor<JAVA_TYPE> _noConstructor = new NoConstructor<JAVA_TYPE>(theType);
-			      _xifexpression = _noConstructor;
+			      _xifexpression = new NoConstructor<JAVA_TYPE>(theType);
 			    } else {
 			      _xifexpression = theConstructor;
 			    }
@@ -137,8 +130,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static Test<String> test() {
-			    Test<String> _test = new Test<String>(null, String.class);
-			    return _test;
+			    return new Test<String>(null, String.class);
 			  }
 			}
 		''')
@@ -263,8 +255,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			        _xtrycatchfinallyexpression = theType;
 			      } finally {
 			      }
-			      NoConstructor<JAVA_TYPE> _noConstructor = new NoConstructor<JAVA_TYPE>(_xtrycatchfinallyexpression);
-			      _xifexpression = _noConstructor;
+			      _xifexpression = new NoConstructor<JAVA_TYPE>(_xtrycatchfinallyexpression);
 			    } else {
 			      _xifexpression = theConstructor;
 			    }
@@ -272,8 +263,7 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static Test<String> test() {
-			    Test<String> _test = new Test<String>(null, String.class);
-			    return _test;
+			    return new Test<String>(null, String.class);
 			  }
 			}
 		''')

@@ -44,8 +44,7 @@ class CompilerBug416305Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList("abc", "def"));
-			    A<String> _a = new A<String>();
-			    final A<String> a = _a;
+			    final A<String> a = new A<String>();
 			    a.<String>f(list);
 			  }
 			}
@@ -82,8 +81,7 @@ class CompilerBug416305Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList("abc", "def"));
-			    A<CharSequence> _a = new A<CharSequence>();
-			    final A<CharSequence> a = _a;
+			    final A<CharSequence> a = new A<CharSequence>();
 			    a.<String>f(list);
 			  }
 			}
@@ -120,8 +118,7 @@ class CompilerBug416305Test extends AbstractXtendCompilerTest {
 			  
 			  public static void main(final String[] args) {
 			    final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList());
-			    A<String> _a = new A<String>();
-			    final A<String> a = _a;
+			    final A<String> a = new A<String>();
 			    a.<String>f(list);
 			  }
 			}
