@@ -114,7 +114,7 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 				return null;
 			} else if (Character.isUpperCase(name.charAt(0))) {
 				// the first character is upper case, it is not valid property sugar, e.g.
-				// Class.CanonicalName does not map to Class.getName
+				// Class.CanonicalName does not map to Class.getCanonicalName
 				return null;
 			} else {
 				// code from java.beans.NameGenerator.capitalize()
