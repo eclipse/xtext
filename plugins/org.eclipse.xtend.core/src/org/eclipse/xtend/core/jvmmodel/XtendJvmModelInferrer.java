@@ -254,7 +254,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	protected void initialize(XtendAnnotationType source, JvmAnnotationType inferredJvmType) {
 		inferredJvmType.setVisibility(source.getVisibility());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
-		jvmTypesBuilder.setDocumentation(inferredJvmType, jvmTypesBuilder.getDocumentation(source));
+		jvmTypesBuilder.copyDocumentationTo(source, inferredJvmType);
 		for (XtendMember member : source.getMembers()) {
 			if (member instanceof XtendField) {
 				XtendField field = (XtendField) member;
@@ -277,7 +277,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 					}
 					operation.setVisibility(JvmVisibility.PUBLIC);
 					translateAnnotationsTo(member.getAnnotations(), operation);
-					jvmTypesBuilder.setDocumentation(operation, jvmTypesBuilder.getDocumentation(member));
+					jvmTypesBuilder.copyDocumentationTo(member, operation);
 					inferredJvmType.getMembers().add(operation);
 				}
 			}
@@ -320,7 +320,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 		
 		appendSyntheticDispatchMethods(source, inferredJvmType);
-		jvmTypesBuilder.setDocumentation(inferredJvmType, jvmTypesBuilder.getDocumentation(source));
+		jvmTypesBuilder.copyDocumentationTo(source, inferredJvmType);
 		if (isDataObject) {
 			addDataObjectMethods(source, inferredJvmType);
 		}
@@ -342,7 +342,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 				transform(member, inferredJvmType, false);
 			}
 		}
-		jvmTypesBuilder.setDocumentation(inferredJvmType, jvmTypesBuilder.getDocumentation(source));
+		jvmTypesBuilder.copyDocumentationTo(source, inferredJvmType);
 		nameClashResolver.resolveNameClashes(inferredJvmType);
 	}
 	
@@ -353,7 +353,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			if (member instanceof XtendEnumLiteral) 
 				transform((XtendEnumLiteral) member, inferredJvmType);
 		}
-		jvmTypesBuilder.setDocumentation(inferredJvmType, jvmTypesBuilder.getDocumentation(source));
+		jvmTypesBuilder.copyDocumentationTo(source, inferredJvmType);
 	}
 	
 
@@ -627,7 +627,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		} else {
 			associator.associateLogicalContainer(source.getExpression(), operation);
 		}
-		jvmTypesBuilder.setDocumentation(operation, jvmTypesBuilder.getDocumentation(source));
+		jvmTypesBuilder.copyDocumentationTo(source, operation);
 	}
 
 	protected void transformCreateExtension(XtendFunction source, CreateExtensionInfo createExtensionInfo,
@@ -709,7 +709,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 		translateAnnotationsTo(source.getAnnotations(), constructor);
 		associator.associateLogicalContainer(source.getExpression(), constructor);
-		jvmTypesBuilder.setDocumentation(constructor, jvmTypesBuilder.getDocumentation(source));
+		jvmTypesBuilder.copyDocumentationTo(source, constructor);
 	}
 	
 	protected void transform(XtendField source, JvmGenericType container) {
@@ -752,18 +752,18 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 				field.setSimpleName("_"+computeFieldName);
 				final JvmOperation getter = jvmTypesBuilder.toGetter(source, computeFieldName, field.getSimpleName(), field.getType());
 				typeExtensions.setSynthetic(getter, true);
-				jvmTypesBuilder.setDocumentation(getter, jvmTypesBuilder.getDocumentation(source));
+				jvmTypesBuilder.copyDocumentationTo(source, getter);
 				if (getter != null && !hasMethod((XtendClass)source.eContainer(), getter.getSimpleName(), getter.getParameters()))
 					container.getMembers().add( getter);
 				if (!source.isFinal() && ! isDataObject) {
 					final JvmOperation setter = jvmTypesBuilder.toSetter(source, computeFieldName, field.getSimpleName(), field.getType());
 					typeExtensions.setSynthetic(setter, true);
-					jvmTypesBuilder.setDocumentation(setter, jvmTypesBuilder.getDocumentation(source));
+					jvmTypesBuilder.copyDocumentationTo(source, setter);
 					if (setter != null && !hasMethod((XtendClass)source.eContainer(), setter.getSimpleName(), setter.getParameters()))
 						container.getMembers().add( setter);
 				}
 			}
-			jvmTypesBuilder.setDocumentation(field, jvmTypesBuilder.getDocumentation(source));
+			jvmTypesBuilder.copyDocumentationTo(source, field);
 			jvmTypesBuilder.setInitializer(field, source.getInitialValue());
 			
 		}
