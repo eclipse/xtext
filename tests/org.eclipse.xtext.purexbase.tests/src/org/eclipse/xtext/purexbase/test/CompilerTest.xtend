@@ -119,8 +119,7 @@ class CompilerTest {
 			@SuppressWarnings("all")
 			public class MyFile {
 			  public void myMethod() throws Throwable {
-			    Person _person = new Person();
-			    final Person person = _person;
+			    final Person person = new Person();
 			    person.setForename("Jimi");
 			    person.setName("Hendrix");
 			    String _forename = person.getForename();
@@ -224,8 +223,7 @@ class CompilerTest {
 			    int _xblockexpression = (int) 0;
 			    {
 			      final CharSequence s = "foo";
-			      int _length = ((String) s).length();
-			      _xblockexpression = (_length);
+			      _xblockexpression = (((String) s).length());
 			    }
 			    return _xblockexpression;
 			  }
@@ -290,20 +288,17 @@ class CompilerTest {
 			      final ArrayList<String> list = CollectionLiterals.<String>newArrayList("a", "b", "c");
 			      final Function1<String,String> _function_1 = new Function1<String,String>() {
 			        public String apply(final String e) {
-			          String _upperCase = e.toUpperCase();
-			          return _upperCase;
+			          return e.toUpperCase();
 			        }
 			      };
 			      /* ListExtensions.<String, String>map(list, _function_1); */
 			      final Function1<String,String> _function_2 = new Function1<String,String>() {
 			        public String apply(final String e) {
-			          String _upperCase = e.toUpperCase();
-			          return _upperCase;
+			          return e.toUpperCase();
 			        }
 			      };
 			      final Function1<? super String,? extends String> f2 = _function_2;
-			      String _apply = f2.apply("simsalabim");
-			      _xblockexpression = (_apply);
+			      _xblockexpression = (f2.apply("simsalabim"));
 			    }
 			    return _xblockexpression;
 			  }
@@ -405,13 +400,10 @@ class CompilerTest {
 			  public Amount myMethod() throws Throwable {
 			    Amount _xblockexpression = null;
 			    {
-			      Amount _amount = new Amount("12.80");
-			      final Amount a = _amount;
-			      Amount _amount_1 = new Amount("0.20");
-			      final Amount b = _amount_1;
+			      final Amount a = new Amount("12.80");
+			      final Amount b = new Amount("0.20");
 			      Amount _multiply = b.operator_multiply(3);
-			      Amount _plus = a.operator_plus(_multiply);
-			      _xblockexpression = (_plus);
+			      _xblockexpression = (a.operator_plus(_multiply));
 			    }
 			    return _xblockexpression;
 			  }
@@ -456,8 +448,7 @@ class CompilerTest {
 			    ArrayList<String> _xblockexpression = null;
 			    {
 			      final ArrayList<String> list = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
-			      ArrayList<String> _arrayList = new ArrayList<String>();
-			      final ArrayList<String> result = _arrayList;
+			      final ArrayList<String> result = new ArrayList<String>();
 			      List<String> _reverse = ListExtensions.<String>reverse(list);
 			      for (final String x : _reverse) {
 			        String _upperCase = x.toUpperCase();
@@ -525,8 +516,7 @@ class CompilerTest {
 			      } catch (final Throwable _t) {
 			        if (_t instanceof NullPointerException) {
 			          final NullPointerException e = (NullPointerException)_t;
-			          RuntimeException _runtimeException = new RuntimeException(e);
-			          throw _runtimeException;
+			          throw new RuntimeException(e);
 			        } else {
 			          throw Exceptions.sneakyThrow(_t);
 			        }
@@ -646,8 +636,7 @@ class CompilerTest {
 			          return _switchResult;
 			        }
 			      };
-			      List<String> _map = ListExtensions.<Shape, String>map(list2, _function);
-			      _xblockexpression = (_map);
+			      _xblockexpression = (ListExtensions.<Shape, String>map(list2, _function));
 			    }
 			    return _xblockexpression;
 			  }
@@ -722,8 +711,7 @@ class CompilerTest {
 			      public int compare(final String a, final String b) {
 			        int _length = a.length();
 			        int _length_1 = b.length();
-			        int _compareTo = Integer.valueOf(_length).compareTo(Integer.valueOf(_length_1));
-			        return _compareTo;
+			        return Integer.valueOf(_length).compareTo(Integer.valueOf(_length_1));
 			      }
 			    };
 			    final Comparator<String> comparator = _function;

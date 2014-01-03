@@ -36,8 +36,7 @@ class CompilerBug410767Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Map<C1<C1<? extends Object>>,C1<C1<? extends Object>>> m(final C1<? extends Object> p) {
-			    Map<C1<C1<? extends Object>>,C1<C1<? extends Object>>> _map = p.toMap();
-			    return _map;
+			    return p.toMap();
 			  }
 			}
 		''')
@@ -63,8 +62,7 @@ class CompilerBug410767Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class C<T extends Object> implements C1<T> {
 			  public Map<T,C1<T>> m() {
-			    Map<T,C1<T>> _map = this.toMap();
-			    return _map;
+			    return this.toMap();
 			  }
 			}
 		''')
@@ -90,8 +88,7 @@ class CompilerBug410767Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public abstract class C<T extends Object> implements C1<T> {
 			  public Map<? extends String,? extends C1<? extends String>> m(final C<? extends String> p) {
-			    Map<? extends String,? extends C1<? extends String>> _map = p.toMap();
-			    return _map;
+			    return p.toMap();
 			  }
 			}
 		''')
@@ -121,8 +118,7 @@ class CompilerBug410767Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Map<? extends Object,C1<? extends Object>> m(final C1<? extends Object> p) {
-			    Map<? extends Object,C1<? extends Object>> _map = p.toMap();
-			    return _map;
+			    return p.toMap();
 			  }
 			}
 		''')

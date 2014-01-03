@@ -78,10 +78,7 @@ public class CompilerBug413138Test extends AbstractXtendCompilerTest {
     _builder_1.append("String string = this.repository.findByStringId(Long.valueOf(1L));");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("String _save = this.repository.<String>save(string);");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (_save);");
+    _builder_1.append("_xblockexpression = (this.repository.<String>save(string));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -152,10 +149,7 @@ public class CompilerBug413138Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Iterable<String> m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Iterable<String> _save = this.repository.<String>save(Collections.<String>unmodifiableList(Lists.<String>newArrayList()));");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _save;");
+    _builder_1.append("return this.repository.<String>save(Collections.<String>unmodifiableList(Lists.<String>newArrayList()));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -220,10 +214,7 @@ public class CompilerBug413138Test extends AbstractXtendCompilerTest {
     _builder_1.append("ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Iterable<String> _save = this.repository.<String>save(_newArrayList);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _save;");
+    _builder_1.append("return this.repository.<String>save(_newArrayList);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -285,10 +276,7 @@ public class CompilerBug413138Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Iterable<String> m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Iterable<String> _save = this.repository.<String>save(Collections.<String>unmodifiableList(Lists.<String>newArrayList(\"a\")));");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _save;");
+    _builder_1.append("return this.repository.<String>save(Collections.<String>unmodifiableList(Lists.<String>newArrayList(\"a\")));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

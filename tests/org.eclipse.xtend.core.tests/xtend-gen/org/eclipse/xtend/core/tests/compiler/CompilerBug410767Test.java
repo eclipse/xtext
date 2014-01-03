@@ -53,10 +53,7 @@ public class CompilerBug410767Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Map<C1<C1<? extends Object>>,C1<C1<? extends Object>>> m(final C1<? extends Object> p) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Map<C1<C1<? extends Object>>,C1<C1<? extends Object>>> _map = p.toMap();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _map;");
+    _builder_1.append("return p.toMap();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -107,10 +104,7 @@ public class CompilerBug410767Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Map<T,C1<T>> m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Map<T,C1<T>> _map = this.toMap();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _map;");
+    _builder_1.append("return this.toMap();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -161,10 +155,7 @@ public class CompilerBug410767Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Map<? extends String,? extends C1<? extends String>> m(final C<? extends String> p) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Map<? extends String,? extends C1<? extends String>> _map = p.toMap();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _map;");
+    _builder_1.append("return p.toMap();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -215,10 +206,7 @@ public class CompilerBug410767Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Map<? extends Object,C1<? extends Object>> m(final C1<? extends Object> p) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Map<? extends Object,C1<? extends Object>> _map = p.toMap();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _map;");
+    _builder_1.append("return p.toMap();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

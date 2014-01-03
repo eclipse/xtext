@@ -177,10 +177,7 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("List<String> _sortBy = IterableExtensions.<String, String>sortBy(list, _function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _sortBy;");
+    _builder_1.append("return IterableExtensions.<String, String>sortBy(list, _function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -237,10 +234,7 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("List<String> _sortBy = IterableExtensions.<String, String>sortBy(list, _function);");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return _sortBy;");
+    _builder_1.append("return IterableExtensions.<String, String>sortBy(list, _function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -372,10 +366,7 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("T _resolve = Dummy.this.<T>resolve(eod, resourceSet);");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("Pair<QualifiedName,T> _mappedTo = Pair.<QualifiedName, T>of(_qualifiedName, _resolve);");
-    _builder_1.newLine();
-    _builder_1.append("          ");
-    _builder_1.append("return _mappedTo;");
+    _builder_1.append("return Pair.<QualifiedName, T>of(_qualifiedName, _resolve);");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("}");
@@ -384,10 +375,7 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("List<Pair<QualifiedName,T>> _map = ListExtensions.<IEObjectDescription, Pair<QualifiedName,T>>map(c, _function);");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (_map);");
+    _builder_1.append("_xblockexpression = (ListExtensions.<IEObjectDescription, Pair<QualifiedName,T>>map(c, _function));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");

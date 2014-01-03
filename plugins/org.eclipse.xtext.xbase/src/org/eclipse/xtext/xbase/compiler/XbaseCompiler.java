@@ -798,84 +798,88 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaStatement(final XConstructorCall expr, ITreeAppendable b, final boolean isReferenced) {
 		for (XExpression arg : expr.getArguments()) {
-			internalToJavaStatement(arg, b, true);
+			prepareExpression(arg, b);
 		}
 		
-		Later later = new Later() {
-			public void exec(ITreeAppendable constructorCallAppendable) {
-				ILocationData locationWithNewKeyword = getLocationWithNewKeyword(expr);
-				ITreeAppendable appendableWithNewKeyword = locationWithNewKeyword != null ? constructorCallAppendable.trace(locationWithNewKeyword) : constructorCallAppendable;
-				appendableWithNewKeyword.append("new ");
-				List<LightweightTypeReference> typeArguments = batchTypeResolver.resolveTypes(expr).getActualTypeArguments(expr);
-				JvmConstructor constructor = expr.getConstructor();
-				JvmDeclaredType declaringType = constructor.getDeclaringType();
-				List<JvmTypeParameter> typeParameters = declaringType instanceof JvmTypeParameterDeclarator 
-						? ((JvmTypeParameterDeclarator) declaringType).getTypeParameters() 
-						: Collections.<JvmTypeParameter>emptyList(); 
-				List<JvmTypeParameter> constructorTypeParameters = constructor.getTypeParameters();
-				boolean hasTypeArguments = !typeArguments.isEmpty() && (typeParameters.size() + constructorTypeParameters.size() == typeArguments.size());
-				List<JvmTypeReference> explicitTypeArguments = expr.getTypeArguments();
-				List<LightweightTypeReference> constructorTypeArguments = Collections.emptyList();
-				if (hasTypeArguments) {
-					constructorTypeArguments = typeArguments.subList(0, constructorTypeParameters.size());
-					typeArguments = typeArguments.subList(constructorTypeParameters.size(), typeArguments.size());
-					hasTypeArguments = !typeArguments.isEmpty();
-					for(LightweightTypeReference typeArgument: typeArguments) {
-						if (typeArgument.isWildcard()) {
-							// cannot serialize wildcard as constructor type argument in Java5 as explicit type argument, skip all
-							hasTypeArguments = false;
-							break;
-							// diamond operator would work in later versions
-						}
-					}
-					for(LightweightTypeReference typeArgument: constructorTypeArguments) {
-						if (typeArgument.isWildcard()) {
-							// cannot serialize wildcard as constructor type argument in Java5 as explicit type argument, skip all
-							constructorTypeArguments = Collections.emptyList();
-							break;
-							// diamond operator would work in later versions
-						}
-					}
-				}
-				
-				if (!constructorTypeArguments.isEmpty()) {
-					appendableWithNewKeyword.append("<");
-					for(int i = 0; i < constructorTypeArguments.size(); i++) {
-						if (i != 0) {
-							appendableWithNewKeyword.append(", ");
-						}
-						appendableWithNewKeyword.append(constructorTypeArguments.get(i));
-					}
-					appendableWithNewKeyword.append(">");
-				}
-				ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
-				typeAppendable.append(declaringType);
-				if (hasTypeArguments) {
-					typeAppendable.append("<");
-					for(int i = 0; i < typeArguments.size(); i++) {
-						if (i != 0) {
-							typeAppendable.append(", ");
-						}
-						if (explicitTypeArguments.isEmpty()) {
-							typeAppendable.append(typeArguments.get(i));
-						} else {
-							typeAppendable.trace(explicitTypeArguments.get(i), false).append(typeArguments.get(i));
-						}
-					}
-					typeAppendable.append(">");
-				}
-				constructorCallAppendable.append("(");
-				appendArguments(expr.getArguments(), constructorCallAppendable);
-				constructorCallAppendable.append(")");
-			}
-		};
-		if (isReferenced) {
-			declareFreshLocalVariable(expr, b, later);
-		} else {
+		if (!isReferenced) {
 			b.newLine();
-			later.exec(b);
+			constructorCallToJavaExpression(expr, b);
 			b.append(";");
+		} else if (isVariableDeclarationRequired(expr, b)) {
+			Later later = new Later() {
+				public void exec(ITreeAppendable appendable) {
+					constructorCallToJavaExpression(expr, appendable);
+				}
+			};
+			declareFreshLocalVariable(expr, b, later);
 		}
+	}
+	
+	private void constructorCallToJavaExpression(final XConstructorCall expr, ITreeAppendable b) {
+		ILocationData locationWithNewKeyword = getLocationWithNewKeyword(expr);
+		ITreeAppendable appendableWithNewKeyword = locationWithNewKeyword != null ? b.trace(locationWithNewKeyword) : b;
+		appendableWithNewKeyword.append("new ");
+		List<LightweightTypeReference> typeArguments = batchTypeResolver.resolveTypes(expr).getActualTypeArguments(expr);
+		JvmConstructor constructor = expr.getConstructor();
+		JvmDeclaredType declaringType = constructor.getDeclaringType();
+		List<JvmTypeParameter> typeParameters = declaringType instanceof JvmTypeParameterDeclarator 
+				? ((JvmTypeParameterDeclarator) declaringType).getTypeParameters() 
+				: Collections.<JvmTypeParameter>emptyList(); 
+		List<JvmTypeParameter> constructorTypeParameters = constructor.getTypeParameters();
+		boolean hasTypeArguments = !typeArguments.isEmpty() && (typeParameters.size() + constructorTypeParameters.size() == typeArguments.size());
+		List<JvmTypeReference> explicitTypeArguments = expr.getTypeArguments();
+		List<LightweightTypeReference> constructorTypeArguments = Collections.emptyList();
+		if (hasTypeArguments) {
+			constructorTypeArguments = typeArguments.subList(0, constructorTypeParameters.size());
+			typeArguments = typeArguments.subList(constructorTypeParameters.size(), typeArguments.size());
+			hasTypeArguments = !typeArguments.isEmpty();
+			for(LightweightTypeReference typeArgument: typeArguments) {
+				if (typeArgument.isWildcard()) {
+					// cannot serialize wildcard as constructor type argument in Java5 as explicit type argument, skip all
+					hasTypeArguments = false;
+					break;
+					// diamond operator would work in later versions
+				}
+			}
+			for(LightweightTypeReference typeArgument: constructorTypeArguments) {
+				if (typeArgument.isWildcard()) {
+					// cannot serialize wildcard as constructor type argument in Java5 as explicit type argument, skip all
+					constructorTypeArguments = Collections.emptyList();
+					break;
+					// diamond operator would work in later versions
+				}
+			}
+		}
+		
+		if (!constructorTypeArguments.isEmpty()) {
+			appendableWithNewKeyword.append("<");
+			for(int i = 0; i < constructorTypeArguments.size(); i++) {
+				if (i != 0) {
+					appendableWithNewKeyword.append(", ");
+				}
+				appendableWithNewKeyword.append(constructorTypeArguments.get(i));
+			}
+			appendableWithNewKeyword.append(">");
+		}
+		ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
+		typeAppendable.append(declaringType);
+		if (hasTypeArguments) {
+			typeAppendable.append("<");
+			for(int i = 0; i < typeArguments.size(); i++) {
+				if (i != 0) {
+					typeAppendable.append(", ");
+				}
+				if (explicitTypeArguments.isEmpty()) {
+					typeAppendable.append(typeArguments.get(i));
+				} else {
+					typeAppendable.trace(explicitTypeArguments.get(i), false).append(typeArguments.get(i));
+				}
+			}
+			typeAppendable.append(">");
+		}
+		b.append("(");
+		appendArguments(expr.getArguments(), b);
+		b.append(")");
 	}
 	
 	@Nullable
@@ -894,8 +898,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaExpression(XConstructorCall expr, ITreeAppendable b) {
-		String varName = getVarName(expr, b);
-		b.trace(expr, false).append(varName);
+		String varName = getReferenceName(expr, b);
+		if (varName != null) {
+			b.trace(expr, false).append(varName);
+		} else {
+			constructorCallToJavaExpression(expr, b);
+		}
 	}
 	
 	/**
@@ -1356,8 +1364,37 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		final EObject container = expr.eContainer();
 		if ((container instanceof XVariableDeclaration)
 			|| (container instanceof XReturnExpression) 
-			|| (container instanceof XThrowExpression)){
+			|| (container instanceof XThrowExpression)) {
 			return false;
+		}
+		if (container instanceof XIfExpression) {
+			XIfExpression ifExpression = (XIfExpression) container;
+			if (ifExpression.getThen() == expr || ifExpression.getElse() == expr) {
+				return false;
+			}
+		}
+		if (container instanceof XCasePart) {
+			XCasePart casePart = (XCasePart) container;
+			if (casePart.getThen() == expr) {
+				return false;
+			}
+		}
+		if (container instanceof XSwitchExpression) {
+			XSwitchExpression switchExpression = (XSwitchExpression) container;
+			if (switchExpression.getDefault() == expr) {
+				return false;
+			}
+		}
+		if (container instanceof XBlockExpression) {
+			List<XExpression> siblings = ((XBlockExpression) container).getExpressions();
+			if (siblings.get(siblings.size() - 1) == expr) {
+				return false;
+			}
+		}
+		if (container instanceof XClosure) {
+			if (((XClosure) container).getExpression() == expr) {
+				return false;
+			}
 		}
 		return super.isVariableDeclarationRequired(expr, b);
 	}
