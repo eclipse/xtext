@@ -52,7 +52,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   @Inject
   protected IFilePostProcessor postProcessor;
   
-  protected boolean useJavaCompiler = false;
+  protected boolean useJavaCompiler = true;
   
   @Before
   public void setupCompiler() {
