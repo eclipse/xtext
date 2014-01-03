@@ -57,6 +57,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -160,56 +161,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			generateShortCircuitInvocation(expr, b);
 		} else {
 			if (expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isNullSafe()) {
-				XExpression memberCallTarget = normalizeBlockExpression(((XMemberFeatureCall) expr).getMemberCallTarget());
-				if (!isReferenced) {
-					if (!expressionHelper.hasSideEffects(expr, false)) {
-						b.append("/* ");
-					}
-					try {
-						if (nullSafeMemberFeatureCallExpressionNeedsPreparation(memberCallTarget, b))
-							prepareExpression(memberCallTarget, b);
-						b.newLine().append("if (");
-						internalToJavaExpression(memberCallTarget, b);
-						b.append("!=null) {").increaseIndentation();
-						for (XExpression arg : getActualArguments(expr)) {
-							if (nullSafeMemberFeatureCallExpressionNeedsPreparation(arg, b))
-								prepareExpression(arg, b);
-						}
-						b.newLine();
-						featureCalltoJavaExpression(expr, b, false);
-						b.append(";");
-					} finally {
-						b.decreaseIndentation().newLine().append("}");
-						if (!expressionHelper.hasSideEffects(expr, false)) {
-							b.append(" */");
-						}
-					}
-				} else if (isVariableDeclarationRequired(expr, b)) {
-					Later later = new Later() {
-						public void exec(ITreeAppendable appendable) {
-							appendNullValueUntyped(getTypeForVariableDeclaration(expr), expr, appendable);
-						}
-					};
-					if (nullSafeMemberFeatureCallExpressionNeedsPreparation(memberCallTarget, b))
-						prepareExpression(memberCallTarget, b);
-					declareFreshLocalVariable(expr, b, later);
-					b.newLine().append("if (");
-					internalToJavaExpression(memberCallTarget, b);
-					b.append("!=null) {").increaseIndentation();
-					try {
-						for (XExpression arg : getActualArguments(expr)) {
-							if (nullSafeMemberFeatureCallExpressionNeedsPreparation(arg, b))
-								prepareExpression(arg, b);
-						}
-						b.newLine();
-						b.append(b.getName(expr));
-						b.append("=");
-						featureCalltoJavaExpression(expr, b, true);
-						b.append(";");
-					} finally {
-						b.decreaseIndentation().newLine().append("}");
-					}
-				}
+				compileNullSafeFeatureCall((XMemberFeatureCall) expr, b, isReferenced);
 			} else {
 				XExpression receiver = getActualReceiver(expr);
 				if (receiver != null) {
@@ -239,6 +191,59 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					};
 					declareFreshLocalVariable(expr, b, later);
 				}
+			}
+		}
+	}
+
+	private void compileNullSafeFeatureCall(final XMemberFeatureCall expr, ITreeAppendable b, final boolean isReferenced) {
+		XExpression memberCallTarget = normalizeBlockExpression(expr.getMemberCallTarget());
+		if (!isReferenced) {
+			if (!expressionHelper.hasSideEffects(expr, false)) {
+				b.append("/* ");
+			}
+			try {
+				if (nullSafeMemberFeatureCallExpressionNeedsPreparation(memberCallTarget, b))
+					prepareExpression(memberCallTarget, b);
+				b.newLine().append("if (");
+				internalToJavaExpression(memberCallTarget, b);
+				b.append("!=null) {").increaseIndentation();
+				for (XExpression arg : getActualArguments(expr)) {
+					if (nullSafeMemberFeatureCallExpressionNeedsPreparation(arg, b))
+						prepareExpression(arg, b);
+				}
+				b.newLine();
+				featureCalltoJavaExpression(expr, b, false);
+				b.append(";");
+			} finally {
+				b.decreaseIndentation().newLine().append("}");
+				if (!expressionHelper.hasSideEffects(expr, false)) {
+					b.append(" */");
+				}
+			}
+		} else if (isVariableDeclarationRequired(expr, b)) {
+			Later later = new Later() {
+				public void exec(ITreeAppendable appendable) {
+					appendNullValueUntyped(getTypeForVariableDeclaration(expr), expr, appendable);
+				}
+			};
+			if (nullSafeMemberFeatureCallExpressionNeedsPreparation(memberCallTarget, b))
+				prepareExpression(memberCallTarget, b);
+			declareFreshLocalVariable(expr, b, later);
+			b.newLine().append("if (");
+			internalToJavaExpression(memberCallTarget, b);
+			b.append("!=null) {").increaseIndentation();
+			try {
+				for (XExpression arg : getActualArguments(expr)) {
+					if (nullSafeMemberFeatureCallExpressionNeedsPreparation(arg, b))
+						prepareExpression(arg, b);
+				}
+				b.newLine();
+				b.append(b.getName(expr));
+				b.append("=");
+				featureCalltoJavaExpression(expr, b, true);
+				b.append(";");
+			} finally {
+				b.decreaseIndentation().newLine().append("}");
 			}
 		}
 	}
@@ -311,6 +316,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 			if (featureCall.getActualReceiver() != null && !internalCanCompileToJavaExpression(featureCall.getActualReceiver(), appendable)) {
 				return false;
+			}
+			if (featureCall instanceof XMemberFeatureCall) {
+				return !((XMemberFeatureCall) featureCall).isNullSafe();
 			}
 			return true;
 		}

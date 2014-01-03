@@ -19,6 +19,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	AnnotationCompilerTest.class,
 	AnnotationsCompilerTest.class,
+	AnnotationValueCompilerTest.class,
 	CompilerTest.class,
 	CompilerBugTest.class,
 	CompilerBug342021Test.class,
@@ -39,6 +40,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	CompilerBug423631Test.class,
 	CompilerBug423907Test.class,
 	CompilerBug424329Test.class,
+	CompilerBug424763Test.class,
+	CompilerBug424839Test.class,
 	CompilerTraceTest.class,
 	ConfiguredCompilerTest.class,
 	ExtensionsCompilerTest.class,
