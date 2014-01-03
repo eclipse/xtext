@@ -106,11 +106,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 			'myannotation/ConfigurableAnnotation.xtend' -> '''
 				package myannotation
 
-				import java.util.List
 				import org.eclipse.xtend.lib.macro.*
 				import org.eclipse.xtend.lib.macro.declaration.*
-				
-				import static com.google.common.base.Preconditions.*
 				
 				@Active(ConfigurableAnnotationProcessor)
 				annotation ConfigurableAnnotation {

@@ -25,8 +25,8 @@ public class XtendDocumentationProvider extends MultiLineCommentDocumentationPro
   public String getDocumentation(final EObject o) {
     String _xblockexpression = null;
     {
-      boolean _shouldBeHandeled = this.shouldBeHandeled(o);
-      boolean _not = (!_shouldBeHandeled);
+      boolean _shouldBeHandled = this.shouldBeHandled(o);
+      boolean _not = (!_shouldBeHandled);
       if (_not) {
         return null;
       }
@@ -39,8 +39,8 @@ public class XtendDocumentationProvider extends MultiLineCommentDocumentationPro
   public List<INode> getDocumentationNodes(final EObject o) {
     List<INode> _xblockexpression = null;
     {
-      boolean _shouldBeHandeled = this.shouldBeHandeled(o);
-      boolean _not = (!_shouldBeHandeled);
+      boolean _shouldBeHandled = this.shouldBeHandled(o);
+      boolean _not = (!_shouldBeHandled);
       if (_not) {
         return CollectionLiterals.<INode>emptyList();
       }
@@ -53,7 +53,7 @@ public class XtendDocumentationProvider extends MultiLineCommentDocumentationPro
   /**
    * The Xtend parser constructs a synthetic nested AST element to hold annotations which should be ignored as a documentation provider
    */
-  public boolean shouldBeHandeled(final EObject o) {
+  public boolean shouldBeHandled(final EObject o) {
     boolean _and = false;
     if (!(o instanceof XtendAnnotationTarget)) {
       _and = false;

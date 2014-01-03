@@ -18,14 +18,14 @@ import org.eclipse.xtext.documentation.impl.MultiLineCommentDocumentationProvide
 class XtendDocumentationProvider extends MultiLineCommentDocumentationProvider {
 	
 	override getDocumentation(EObject o) {
-		if (!shouldBeHandeled(o)) {
+		if (!shouldBeHandled(o)) {
 			return null;
 		}
 		super.getDocumentation(o)
 	}
 	
 	override getDocumentationNodes(EObject o) {
-		if (!shouldBeHandeled(o)) {
+		if (!shouldBeHandled(o)) {
 			return emptyList;
 		}
 		super.getDocumentationNodes(o)
@@ -34,7 +34,7 @@ class XtendDocumentationProvider extends MultiLineCommentDocumentationProvider {
 	/**
 	 * The Xtend parser constructs a synthetic nested AST element to hold annotations which should be ignored as a documentation provider
 	 */
-	def boolean shouldBeHandeled(EObject o) {
+	def boolean shouldBeHandled(EObject o) {
 		!(o instanceof XtendAnnotationTarget && o.eContainingFeature == XtendPackage.Literals.XTEND_MEMBER__ANNOTATION_INFO)
 	}
 	

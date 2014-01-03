@@ -223,14 +223,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("package myannotation");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("import java.util.List");
-    _builder.newLine();
     _builder.append("import org.eclipse.xtend.lib.macro.*");
     _builder.newLine();
     _builder.append("import org.eclipse.xtend.lib.macro.declaration.*");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("import static com.google.common.base.Preconditions.*");
     _builder.newLine();
     _builder.newLine();
     _builder.append("@Active(ConfigurableAnnotationProcessor)");
