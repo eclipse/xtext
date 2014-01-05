@@ -783,4 +783,49 @@ public class CompilerBug424329Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testBug_424886_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class B {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def execute() {");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("A.myVar = \"myVar\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("def static setMyVar(String param) {");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class B {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object execute() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return A.setMyVar(\"myVar\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
 }

@@ -363,5 +363,26 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test def void testBug_424886_01() {
+		assertCompilesTo('''
+			class B {
+			  def execute() {
+			     A.myVar = "myVar"
+			  }
+			}
+			class A {
+			   def static setMyVar(String param) {
+			   }
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class B {
+			  public Object execute() {
+			    return A.setMyVar("myVar");
+			  }
+			}
+		''')
+	}
 }
 
