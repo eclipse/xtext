@@ -25,9 +25,18 @@ interface IFeatureCallArguments {
 	
 	def IFeatureCallArgumentSlot getNextUnprocessedArgumentSlot()
 	
+	/**
+	 * Returns the argument expression at index {@code idx}.
+	 * If there is a receiver, the index {@code 0} returns 
+	 * {@code null}.
+	 */
 	@Nullable
 	def XExpression getArgument(int idx)
 	
+	/**
+	 * Returns the number of argument expressions where the receiver
+	 * is considered to be an argument, too.
+	 */
 	def int getArgumentCount()
 	
 	def boolean isProcessed(int argumentIndex)

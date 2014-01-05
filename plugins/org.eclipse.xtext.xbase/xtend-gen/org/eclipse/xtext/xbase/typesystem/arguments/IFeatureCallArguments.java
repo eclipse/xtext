@@ -24,9 +24,18 @@ public interface IFeatureCallArguments {
   
   public abstract IFeatureCallArgumentSlot getNextUnprocessedArgumentSlot();
   
+  /**
+   * Returns the argument expression at index {@code idx}.
+   * If there is a receiver, the index {@code 0} returns
+   * {@code null}.
+   */
   @Nullable
   public abstract XExpression getArgument(final int idx);
   
+  /**
+   * Returns the number of argument expressions where the receiver
+   * is considered to be an argument, too.
+   */
   public abstract int getArgumentCount();
   
   public abstract boolean isProcessed(final int argumentIndex);

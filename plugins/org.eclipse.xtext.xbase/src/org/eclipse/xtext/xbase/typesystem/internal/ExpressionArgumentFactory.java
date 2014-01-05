@@ -78,7 +78,7 @@ public class ExpressionArgumentFactory {
 	protected void reorder(boolean varArgs, List<XExpression> copiedArgumentList, List<JvmFormalParameter> copiedParameterList,
 			List<XExpression> shiftedArgumentList, List<JvmFormalParameter> shiftedParameterList) {
 		int max = Math.min(copiedArgumentList.size(), copiedParameterList.size());
-		if (varArgs)
+		if (varArgs && copiedArgumentList.size() >= copiedParameterList.size())
 			max = max - 1;
 		for(int i = 0; i < max; i++) {
 			XExpression expression = copiedArgumentList.get(i);
