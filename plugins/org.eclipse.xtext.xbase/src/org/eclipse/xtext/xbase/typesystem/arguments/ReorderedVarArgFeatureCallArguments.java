@@ -40,15 +40,10 @@ public class ReorderedVarArgFeatureCallArguments extends ReorderedFeatureCallArg
 			}
 			return new StandardFeatureCallArgumentSlot(this, nextUnprocessedArgument); 
 		}
-		if (nextUnprocessedArgument == parameters.size() - 1) {
+		if (nextUnprocessedArgument == parameters.size() - 1 && nextUnprocessedArgument < arguments.size()) {
 			return new VarArgsFeatureCallArgumentSlot(this, nextUnprocessedArgument);
 		}
 		return new StandardFeatureCallArgumentSlot(this, nextUnprocessedArgument);
-	}
-	
-	@Override
-	public int getArgumentCount() {
-		return super.getArgumentCount() + shiftedArguments.size();
 	}
 	
 	@Override
@@ -62,7 +57,9 @@ public class ReorderedVarArgFeatureCallArguments extends ReorderedFeatureCallArg
 	@Override
 	@Nullable
 	protected LightweightTypeReference internalGetParameterType(int idx) {
-		if (idx >= parameters.size()) {
+		if (idx >= arguments.size()) {
+			// idx is the index of the arguments thus idx - arguments.size to get
+			// the shifted index
 			JvmFormalParameter parameter = shiftedParameters.get(idx - arguments.size());
 			return toLightweightTypeReference(parameter);
 		}

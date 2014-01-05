@@ -62,26 +62,52 @@ public class ReorderedFeatureCallArguments extends StandardFeatureCallArguments 
 	
 	@Override
 	public XExpression internalGetArgument(int idx) {
-		if (idx >= parameters.size()) {
-			if (idx >= shiftedParameters.size() + parameters.size()) {
-				return arguments.get(idx - shiftedParameters.size());
+		int unshiftedParameterSize = parameters.size();
+		int unshiftedArgumentSize = arguments.size();
+		if (idx >= unshiftedParameterSize || idx >= unshiftedArgumentSize) {
+			// number of args matches number of parameters
+			if (unshiftedParameterSize == unshiftedArgumentSize) {
+				return shiftedArguments.get(idx - unshiftedParameterSize);
 			}
-			return shiftedArguments.get(idx - parameters.size());
+			// superfluous args available
+			if (unshiftedParameterSize < unshiftedArgumentSize) {
+				int shiftedIdx = idx - unshiftedParameterSize;
+				if (shiftedIdx >= shiftedArguments.size())
+					return arguments.get(idx - shiftedArguments.size());
+				return shiftedArguments.get(shiftedIdx);
+			}
+			// too few args available
+			return shiftedArguments.get(idx - unshiftedArgumentSize);
 		}
-		if (idx>=arguments.size())
-			return null;
 		return arguments.get(idx);
 	}
 	
 	@Override
 	@Nullable
 	protected LightweightTypeReference internalGetParameterType(int idx) {
-		if (idx >= parameters.size()) {
-			JvmFormalParameter parameter = shiftedParameters.get(idx - parameters.size());
-			return toLightweightTypeReference(parameter);
-		}
-		JvmFormalParameter parameter = parameters.get(idx);
+		JvmFormalParameter parameter = internalGetParameter(idx);
 		return toLightweightTypeReference(parameter);
+	}
+	
+	protected JvmFormalParameter internalGetParameter(int idx) {
+		int unshiftedParameterSize = parameters.size();
+		int unshiftedArgumentSize = arguments.size();
+		if (idx >= unshiftedParameterSize || idx >= unshiftedArgumentSize) {
+			// number of args matches number of parameters
+			if (unshiftedParameterSize == unshiftedArgumentSize) {
+				return shiftedParameters.get(idx - unshiftedParameterSize);
+			}
+			// superfluous args available
+			if (unshiftedParameterSize < unshiftedArgumentSize) {
+				int shiftedIdx = idx - unshiftedParameterSize;
+				if (shiftedIdx >= shiftedArguments.size())
+					return parameters.get(idx - shiftedArguments.size());
+				return shiftedParameters.get(shiftedIdx);
+			}
+			// too few args available
+			return shiftedParameters.get(idx - unshiftedArgumentSize);
+		}
+		return parameters.get(idx);
 	}
 
 }
