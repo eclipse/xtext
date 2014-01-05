@@ -15,8 +15,7 @@ import org.antlr.runtime.Token;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
-import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendFlexer;
+import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendFlexer;
 import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
@@ -32,7 +31,7 @@ public class FlexerBasedContentAssistContextFactory extends ParserBasedContentAs
 	private static final Logger log = Logger.getLogger(FlexerBasedContentAssistContextFactory.class);
 	
 	@Inject
-	private FlexerFactory flexerFactory;
+	private ContentAssistFlexerFactory flexerFactory;
 	
 	@Override
 	protected void createContextsForLastCompleteNode(EObject previousModel, boolean strict) throws BadLocationException {

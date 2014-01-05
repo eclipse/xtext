@@ -13,10 +13,13 @@ import java.util.List;
 
 import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xpand2.XpandExecutionContext;
+import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment;
+import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.CharStreams;
@@ -33,16 +36,32 @@ public class JFlexGeneratorFragment extends AbstractGeneratorFragment {
 	
 	private String additionalRulePath;
 	
+	private boolean ui = false;
+	
 	@Mandatory
 	public void setJFlexMain(JFlexMain main) {
 		this.main = main;
 	}
 	
+	public void setUi(boolean ui) {
+		this.ui = ui;
+	}
+	
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
-		super.generate(grammar, ctx);
-		final String srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath();
-		final String directory = srcGenPath + '/' + getNaming().asPath(getNaming().basePackageRuntime(grammar) + ".parser.antlr.internal");
+		final String srcGenPath;
+		final String directory;
+		final String template;
+		if (!ui) {
+			srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath();
+			directory = srcGenPath + '/' + getNaming().asPath(getNaming().basePackageRuntime(grammar) + ".parser.antlr.internal");
+			template = getTemplate() + "::generate";
+		} else {
+			srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN_UI).getPath();
+			directory = srcGenPath + '/' + getNaming().asPath(getNaming().basePackageUi(grammar) + ".contentassist.antlr.internal");
+			template = getTemplate() + "::generateUI";
+		}
+		XpandFacade.create(ctx).evaluate2(template, grammar, getParameters(grammar));
 		String fileName = "Internal" + GrammarUtil.getName(grammar)	+ "Flexer.flex";
 		main.runJFlex(new String[] {
 				"-d",
@@ -61,7 +80,10 @@ public class JFlexGeneratorFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Lists.<Object>newArrayList(read(patternPath), read(additionalRulePath));
+		String parserName = ui 
+				? XtextAntlrUiGeneratorFragment.getGrammarFileName(grammar, getNaming())
+				: XtextAntlrGeneratorFragment.getGrammarFileName(grammar, getNaming());
+		return Lists.<Object>newArrayList(read(patternPath), read(additionalRulePath), parserName);
 	}
 
 	private String read(final String path) {
