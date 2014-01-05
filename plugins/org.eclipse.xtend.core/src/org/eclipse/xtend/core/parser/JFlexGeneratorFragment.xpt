@@ -18,14 +18,25 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 
-«DEFINE generate(String macros, String rules) FOR Grammar»
-«FILE (getGrammarFileName().toJavaPackage() + "." + getGrammarFileName().toSimpleName()).asPath()+"Flexer.flex" SRC_GEN-»
+«DEFINE generate(String macros, String rules, String parserName) FOR Grammar»
+«FILE parserName.asPath()+"Flexer.flex" SRC_GEN-»
+«EXPAND doGenerate(macros, rules, parserName)-»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE generateUI(String macros, String rules, String parserName) FOR Grammar»
+«FILE parserName.asPath()+"Flexer.flex" SRC_GEN_UI-»
+«EXPAND doGenerate(macros, rules, parserName)-»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE doGenerate(String macros, String rules, String parserName) FOR Grammar-»
 /*
 «fileHeader()»
 */
-package «getGrammarFileName().toJavaPackage()»;
+package «parserName.toJavaPackage()»;
 
-import static «getGrammarFileName()»Parser.*;
+import static «parserName»Parser.*;
 
 import org.antlr.runtime.Token;
 import org.antlr.runtime.CommonToken;
@@ -73,8 +84,7 @@ return Token.EOF;
 <YYINITIAL> {«rule.name»} { return RULE_«rule.name»; }
 «ENDFOREACH-»
 
-«ENDFILE»
-«ENDDEFINE»
+«ENDDEFINE-»
 
 «DEFINE tokens FOR Grammar-»
 «LET {} AS allKeywords-»
@@ -102,8 +112,8 @@ return Token.EOF;
 «ENDDEFINE»
 
 
-«DEFINE addToPluginXmlRt(String macros, String rules) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(String macros, String rules, String parserName) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(String macros, String rules) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(String macros, String rules, String parserName) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(String macros, String rules) FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(String macros, String rules, String parserName) FOR Grammar»«ENDDEFINE»

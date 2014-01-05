@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.contentassist.javadoc;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedContentAssistContextFactory;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -34,7 +35,7 @@ public class XtendJavaDocContentAssistContextFactory extends ParserBasedContentA
 		}
 	}
 
-	public static class JavaDocStateFullFactory extends StatefulFactory {
+	public static class JavaDocStateFullFactory extends FlexerBasedContentAssistContextFactory {
 
 		@Override
 		public String getPrefix(INode node) {

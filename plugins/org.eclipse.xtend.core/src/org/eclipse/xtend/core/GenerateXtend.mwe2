@@ -120,6 +120,11 @@ Workflow {
 				patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
 				additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
 			}
+			fragment = parser.JFlexGeneratorFragment auto-inject {
+				ui = true
+				patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
+				additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
+			}
 		}
 	}
 }
