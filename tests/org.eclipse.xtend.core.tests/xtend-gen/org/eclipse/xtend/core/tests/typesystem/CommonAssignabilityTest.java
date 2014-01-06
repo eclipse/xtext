@@ -162,6 +162,26 @@ public abstract class CommonAssignabilityTest extends AbstractAssignabilityTest 
   }
   
   @Test
+  public void testArrayType_05() {
+    this.isAssignableFrom("Iterable<?>[]", "Iterable<?>[]");
+    this.isAssignableFrom("Iterable<?>[]", "Iterable<? extends CharSequence>[]");
+    this.isAssignableFrom("Iterable<?>[]", "Iterable[]");
+    this.isAssignableFrom("Iterable[]", "Iterable<?>[]");
+    this.isAssignableFrom("Iterable[]", "Iterable<? extends CharSequence>[]");
+    Pair<String,String> _mappedTo = Pair.<String, String>of("Iterable<?>[]", "T");
+    this.isAssignableFrom(_mappedTo, "Iterable<? extends T>[]");
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("Iterable<?>[]", "T extends Iterable<?>");
+    this.isAssignableFrom(_mappedTo_1, "T[]");
+  }
+  
+  @Test
+  public void testArrayType_06() {
+    this.isAssignableFrom("Iterable<Iterable<?>>", "Iterable<?>[]");
+    Pair<String,String> _mappedTo = Pair.<String, String>of("Iterable<T>", "T extends Iterable<?>");
+    this.isAssignableFrom(_mappedTo, "T[]");
+  }
+  
+  @Test
   public void testIterableToArrayType_01() {
     this.isAssignableFrom("int[]", "Iterable<Integer>");
     this.isAssignableFrom("int[]", "Iterable<? extends Integer>");

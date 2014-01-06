@@ -279,6 +279,23 @@ abstract class CommonAssignabilityTest extends AbstractAssignabilityTest {
 	}
 	
 	@Test
+	def void testArrayType_05() {
+		"Iterable<?>[]".isAssignableFrom("Iterable<?>[]")
+		"Iterable<?>[]".isAssignableFrom("Iterable<? extends CharSequence>[]")
+		"Iterable<?>[]".isAssignableFrom("Iterable[]")
+		"Iterable[]".isAssignableFrom("Iterable<?>[]")
+		"Iterable[]".isAssignableFrom("Iterable<? extends CharSequence>[]")
+		("Iterable<?>[]"->"T").isAssignableFrom("Iterable<? extends T>[]")
+		("Iterable<?>[]"->"T extends Iterable<?>").isAssignableFrom("T[]")
+	}
+	
+	@Test
+	def void testArrayType_06() {
+		"Iterable<Iterable<?>>".isAssignableFrom("Iterable<?>[]")
+		("Iterable<T>"->"T extends Iterable<?>").isAssignableFrom("T[]")
+	}
+	
+	@Test
 	def void testIterableToArrayType_01() {
 		"int[]".isAssignableFrom("Iterable<Integer>")
 		"int[]".isAssignableFrom("Iterable<? extends Integer>")

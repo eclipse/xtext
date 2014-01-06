@@ -1124,7 +1124,6 @@ public class CompilerTest extends AbstractXtendTestCase {
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
 	 */
-	@Ignore("TODO deferred typing of local vars which are currently 'any'")
 	@Test public void testBug_350932_13() throws Exception {
 		String code = 
 				"package x class Z {" +
@@ -1142,7 +1141,6 @@ public class CompilerTest extends AbstractXtendTestCase {
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
 	 */
-	@Ignore("TODO deferred typing of local vars which are currently 'any'")
 	@Test public void testBug_350932_14() throws Exception {
 		String code = 
 				"package x class Z {" +
