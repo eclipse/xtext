@@ -85,6 +85,74 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testBug424839() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val a = bug424839.Bug424839");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val b = bug424839.sub.Bug424839.Inner");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import bug424839.Bug424839;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final Class<Bug424839> a = Bug424839.class;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final Class<bug424839.sub.Bug424839.Inner> b = bug424839.sub.Bug424839.Inner.class;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug424839_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val b = bug424839.sub.Bug424839.Inner");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val a = bug424839.Bug424839");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import bug424839.sub.Bug424839;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final Class<Bug424839.Inner> b = Bug424839.Inner.class;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final Class<bug424839.Bug424839> a = bug424839.Bug424839.class;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug411861() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class Test {");

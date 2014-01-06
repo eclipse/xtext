@@ -115,6 +115,7 @@ public class ImportManager {
 			final String qualifiedName = type.getQualifiedName(innerTypeSeparator);
 			String nameToImport = qualifiedName;
 			String shortName = type.getSimpleName();
+			String outerShortName = shortName;
 			if (shouldUseQualifiedNestedName(qualifiedName)) {
 				JvmType outerContainer = type;
 				while (outerContainer.eContainer() instanceof JvmType) {
@@ -122,10 +123,11 @@ public class ImportManager {
 				}
 				if (type != outerContainer) {
 					nameToImport = outerContainer.getQualifiedName(innerTypeSeparator);
-					shortName = outerContainer.getSimpleName()+qualifiedName.substring(nameToImport.length());
+					outerShortName = outerContainer.getSimpleName();
+					shortName = outerShortName + qualifiedName.substring(nameToImport.length());
 				}
 			}
-			appendType(qualifiedName, shortName, nameToImport, builder);
+			appendType(qualifiedName, shortName, outerShortName, nameToImport, builder);
 		}
 	}
 
@@ -143,6 +145,7 @@ public class ImportManager {
 			final String qualifiedName = type.getCanonicalName();
 			String nameToImport = qualifiedName;
 			String shortName = type.getSimpleName();
+			String outerShortName = shortName;
 			if (shouldUseQualifiedNestedName(qualifiedName)) {
 				Class<?> outerContainer = type;
 				while (outerContainer.getDeclaringClass() != null) {
@@ -150,27 +153,32 @@ public class ImportManager {
 				}
 				if (type != outerContainer) {
 					nameToImport = outerContainer.getCanonicalName();
-					shortName = outerContainer.getSimpleName()+qualifiedName.substring(nameToImport.length());
+					outerShortName =  outerContainer.getSimpleName();
+					shortName = outerShortName + qualifiedName.substring(nameToImport.length());
 				}
 			}
-			appendType(qualifiedName, shortName, nameToImport, builder);
+			appendType(qualifiedName, shortName, outerShortName, nameToImport, builder);
 		}
 	}
 
 	protected void appendType(final String qualifiedName, final String shortName, final String namespaceImport, StringBuilder builder) {
+		appendType(qualifiedName, shortName, shortName, namespaceImport, builder);
+	}
+
+	protected void appendType(final String qualifiedName, final String shortName, final String outerShortName, final String namespaceImport, StringBuilder builder) {
 		if (allowsSimpleName(namespaceImport, shortName)) {
 			builder.append(shortName);
 		} else if (needsQualifiedName(namespaceImport, shortName)) {
 			builder.append(qualifiedName);
 		} else {
-			if (imports.containsKey(shortName)) {
-				if (namespaceImport.equals(imports.get(shortName))) {
+			if (imports.containsKey(outerShortName)) {
+				if (namespaceImport.equals(imports.get(outerShortName))) {
 					builder.append(shortName);
 				} else {
 					builder.append(qualifiedName);
 				}
 			} else {
-				imports.put(shortName, namespaceImport);
+				imports.put(outerShortName, namespaceImport);
 				builder.append(shortName);
 			}
 		}
