@@ -25,7 +25,8 @@ public interface FileSystemSupport {
 	/**
 	 * @param path
 	 * @return the children of the folder the given path points to; 
-	 * 		   empty iterable if the path points to a non existent resource or to an existent file 
+	 * 		   empty iterable if the path points to a non existent resource or to an existent file
+	 * @exception IllegalArgumentException if it is not possible to get children of a given path for some reason 
 	 */
 	Iterable<? extends Path> getChildren(Path path);
 	
@@ -62,6 +63,7 @@ public interface FileSystemSupport {
 	 * 
 	 * @param path the path
 	 * @return the name of a charset
+	 * @exception IllegalArgumentException if it is not possible to get charset of a given path for some reason
 	 */
 	String getCharset(Path path);
 
