@@ -108,9 +108,12 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 
 	protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
 		LightweightTypeReference wrapped = getStricterConstraint(typeParameter, reference.getWrapperTypeIfPrimitive());
-		typeParameter.acceptHint(wrapped, BoundTypeArgumentSource.INFERRED_LATER, getOrigin(), getExpectedVariance(), getActualVariance());
+		typeParameter.acceptHint(wrapped, getTypeArgumentSource(), getOrigin(), getExpectedVariance(), getActualVariance());
 	}
-	
+
+	protected BoundTypeArgumentSource getTypeArgumentSource() {
+		return BoundTypeArgumentSource.INFERRED_LATER;
+	}
 
 	protected LightweightTypeReference getStricterConstraint(UnboundTypeReference typeParameter, LightweightTypeReference hint) {
 		JvmTypeParameter parameter = typeParameter.getTypeParameter();

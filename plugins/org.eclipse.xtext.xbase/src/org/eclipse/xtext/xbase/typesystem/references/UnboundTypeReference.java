@@ -22,7 +22,9 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
+import org.eclipse.xtext.xbase.typesystem.util.TypeArgumentFromComputedTypeCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
@@ -325,11 +327,15 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	protected boolean resolveWithHints(List<LightweightBoundTypeArgument> allHints) {
 		List<LightweightBoundTypeArgument> inferredHints = Lists.newArrayListWithCapacity(allHints.size());
 		List<LightweightBoundTypeArgument> effectiveHints = Lists.newArrayListWithCapacity(allHints.size());
+		boolean hasContraintHints = false;
 		EnumSet<VarianceInfo> varianceHints = EnumSet.noneOf(VarianceInfo.class);
 		for(LightweightBoundTypeArgument hint: allHints) {
 			if (hint.getOrigin() instanceof VarianceInfo) {
 				varianceHints.add((VarianceInfo) hint.getOrigin());
 			} else {
+				if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+					hasContraintHints = true;
+				}
 				effectiveHints.add(hint);
 				if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
 					inferredHints.add(hint);
@@ -346,10 +352,38 @@ public class UnboundTypeReference extends LightweightTypeReference {
 					resolvedTo = resolvedTo.getUpperBoundSubstitute();
 				}
 			}
-			getOwner().acceptHint(getHandle(), new LightweightBoundTypeArgument(resolvedTo, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, typeArgument.getVariance()));
+			if (hasContraintHints) {
+				propageResolvedTypeToConstraints(allHints);
+			}
+			getOwner().acceptHint(getHandle(), new LightweightBoundTypeArgument(
+					resolvedTo,
+					BoundTypeArgumentSource.RESOLVED,
+					this,
+					VarianceInfo.INVARIANT,
+					typeArgument.getVariance()));
 			return true;
 		}
 		return false;
+	}
+
+	protected void propageResolvedTypeToConstraints(List<LightweightBoundTypeArgument> hints) {
+		for(LightweightBoundTypeArgument hint: hints) {
+			if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+				LightweightTypeReference hintReference = hint.getTypeReference();
+				DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getOwner()) {
+					@Override
+					protected BoundTypeArgumentSource getTypeArgumentSource() {
+						return BoundTypeArgumentSource.INFERRED_CONSTRAINT;
+					}
+					@Override
+					protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
+						if (typeParameter.getHandle() != getHandle())
+							super.addHint(typeParameter, reference);
+					}
+				};
+				collector.processPairedReferences(hintReference, resolvedTo);
+			}
+		}
 	}
 
 	/**

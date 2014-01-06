@@ -561,7 +561,13 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			if (!typeParameters.isEmpty()) {
 				// TODO actualType -(hint for)-> declared type == inferred
 				// declared type -(hint for)-> actual type == expected
-				TypeArgumentFromComputedTypeCollector.resolveAgainstActualType(declaredType, actualType, typeParameters, getTypeParameterMapping(), BoundTypeArgumentSource.EXPECTATION, state.getReferenceOwner());
+				TypeArgumentFromComputedTypeCollector.resolveAgainstActualType(
+						declaredType,
+						actualType,
+						typeParameters,
+						getTypeParameterMapping(),
+						BoundTypeArgumentSource.EXPECTATION,
+						state.getReferenceOwner());
 			}
 		}
 	}
