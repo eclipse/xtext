@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IWorkspaceRoot
+import org.eclipse.core.runtime.CoreException
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
@@ -66,8 +67,12 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 		val container = path.eclipseContainer
 		if (!container.exists) {
 			return emptyList
-		} 
-		container.members.map[new Path(fullPath.toString)]
+		}
+		try {
+			container.members.map[new Path(fullPath.toString)]
+		} catch (CoreException exc) {
+			throw new IllegalArgumentException(exc.message, exc)
+		}
 	}
 
 	override boolean exists(Path path) {
@@ -83,29 +88,45 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	}
 
 	override long getLastModification(Path path) {
-		path.findResource.modificationStamp
+		val resource = path.findResource
+		if (resource == null) {
+			return 0L
+		}
+		resource.modificationStamp
 	}
 
 	override String getCharset(Path path) {
-		if (path.isFile) {
-			return path.eclipseFile.charset
-		} else if (path.isFolder) {
-			return path.eclipseContainer.defaultCharset
-		} else {
-			return path.parent.getCharset
+		try {
+			if (path.isFile) {
+				return path.eclipseFile.charset
+			} else if (path.isFolder) {
+				return path.eclipseContainer.defaultCharset
+			} else {
+				return path.parent.getCharset
+			}
+		} catch (CoreException exc) {
+			throw new IllegalArgumentException(exc.message, exc)
 		}
 	}
 
 	override InputStream getContentsAsStream(Path path) {
-		path.eclipseFile.contents
+		try {
+			path.eclipseFile.contents
+		} catch (CoreException exc) {
+			throw new IllegalArgumentException(exc.message, exc)
+		}
 	}
 	
 	override delete(Path path) {
-		if (path.exists) {
-			path.findResource.delete(true, null)
-			return true
+		try {
+			if (path.exists) {
+				path.findResource.delete(true, null)
+				return true
+			}
+			return false
+		} catch (CoreException exc) {
+			throw new IllegalArgumentException(exc.message, exc)
 		}
-		return false
 	}
 	
 	override mkdir(Path path) {
@@ -114,26 +135,34 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 		if (!path.parent.exists) {
 			path.parent.mkdir
 		}
-		switch container : path.eclipseContainer {
-			IFolder: {
-				container.create(true, true, null)
-				true
+		try {
+			switch container : path.eclipseContainer {
+				IFolder: {
+						container.create(true, true, null)
+					true
+				}
+				IProject: {
+					container.create(null)
+					true
+				}
+				default: 
+					false
 			}
-			IProject: {
-				container.create(null)
-				true
-			}
-			default: 
-				false
+		} catch (CoreException exc) {
+			throw new IllegalArgumentException(exc.message, exc)
 		}
 	}
 	
 	override setContentsAsStream(Path path, InputStream stream) {
-		if (path.exists) {
-			path.eclipseFile.setContents(stream, true, true, null)
-		} else {
-			path.parent.mkdir
-			path.eclipseFile.create(stream, true, null)
+		try {
+			if (path.exists) {
+				path.eclipseFile.setContents(stream, true, true, null)
+			} else {
+				path.parent.mkdir
+				path.eclipseFile.create(stream, true, null)
+			}
+		} catch (CoreException exc) {
+			throw new IllegalArgumentException(exc.message, exc)
 		}
 	}
 	

@@ -43,8 +43,7 @@ public class JavaIoFileSystemTest {
       String _parent = _createTempFile.getParent();
       Class<? extends JavaIoFileSystemTest> _class = this.getClass();
       String _simpleName = _class.getSimpleName();
-      File _file = new File(_parent, _simpleName);
-      final File tempDir = _file;
+      final File tempDir = new File(_parent, _simpleName);
       boolean _exists = tempDir.exists();
       if (_exists) {
         Files.sweepFolder(tempDir);
@@ -71,8 +70,7 @@ public class JavaIoFileSystemTest {
                   it.addProjectConfig(_doubleArrow);
                 }
               };
-              WorkspaceConfig _doubleArrow = ObjectExtensions.<WorkspaceConfig>operator_doubleArrow(_workspaceConfig, _function);
-              return _doubleArrow;
+              return ObjectExtensions.<WorkspaceConfig>operator_doubleArrow(_workspaceConfig, _function);
             }
           };
           it.setProjectInformationProvider(_function);
@@ -91,8 +89,7 @@ public class JavaIoFileSystemTest {
   
   @Test
   public void testMakeandDeleteFolder() {
-    Path _path = new Path("/foo/bar");
-    final Path someFolder = _path;
+    final Path someFolder = new Path("/foo/bar");
     boolean _exists = this.fs.exists(someFolder);
     Assert.assertFalse(_exists);
     boolean _isFile = this.fs.isFile(someFolder);
@@ -113,8 +110,7 @@ public class JavaIoFileSystemTest {
   
   @Test
   public void testMakeandDeleteFile() {
-    Path _path = new Path("/foo/src/my/pack/Foo.txt");
-    final Path path = _path;
+    final Path path = new Path("/foo/src/my/pack/Foo.txt");
     boolean _exists = this.fs.exists(path);
     Assert.assertFalse(_exists);
     this.fs.setContents(path, "Hello Foo");
@@ -138,18 +134,19 @@ public class JavaIoFileSystemTest {
   @Test
   public void testModificationStamp() {
     try {
-      Path _path = new Path("/foo/src/my/pack/Foo.txt");
-      final Path path = _path;
+      final Path path = new Path("/foo/src/my/pack/Foo.txt");
+      long _lastModification = this.fs.getLastModification(path);
+      Assert.assertEquals(0L, _lastModification);
       this.fs.setContents(path, "Hello Foo");
       final long mod = this.fs.getLastModification(path);
       CharSequence _contents = this.fs.getContents(path);
       Assert.assertEquals("Hello Foo", _contents);
-      long _lastModification = this.fs.getLastModification(path);
-      Assert.assertEquals(mod, _lastModification);
+      long _lastModification_1 = this.fs.getLastModification(path);
+      Assert.assertEquals(mod, _lastModification_1);
       Thread.sleep(1000);
       this.fs.setContents(path, "Hello Foo");
-      long _lastModification_1 = this.fs.getLastModification(path);
-      boolean _lessThan = (mod < _lastModification_1);
+      long _lastModification_2 = this.fs.getLastModification(path);
+      boolean _lessThan = (mod < _lastModification_2);
       Assert.assertTrue(_lessThan);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -171,15 +168,14 @@ public class JavaIoFileSystemTest {
   
   @Test
   public void testGetProjectChildren() {
-    Path _path = new Path("/foo");
-    final Path projectFolder = _path;
+    final Path projectFolder = new Path("/foo");
     boolean _exists = this.fs.exists(projectFolder);
     Assert.assertTrue(_exists);
     Iterable<? extends Path> _children = this.fs.getChildren(projectFolder);
     int _size = IterableExtensions.size(_children);
     final int expectedChildrenSize = (_size + 1);
-    Path _path_1 = new Path("/foo/Foo.text");
-    this.fs.setContents(_path_1, "Hello Foo");
+    Path _path = new Path("/foo/Foo.text");
+    this.fs.setContents(_path, "Hello Foo");
     Iterable<? extends Path> _children_1 = this.fs.getChildren(projectFolder);
     int _size_1 = IterableExtensions.size(_children_1);
     Assert.assertEquals(expectedChildrenSize, _size_1);
@@ -187,8 +183,7 @@ public class JavaIoFileSystemTest {
   
   @Test
   public void testGetFolderChildren() {
-    Path _path = new Path("/foo/bar");
-    final Path folder = _path;
+    final Path folder = new Path("/foo/bar");
     boolean _exists = this.fs.exists(folder);
     Assert.assertFalse(_exists);
     this.fs.mkdir(folder);
@@ -197,8 +192,8 @@ public class JavaIoFileSystemTest {
     Iterable<? extends Path> _children = this.fs.getChildren(folder);
     int _size = IterableExtensions.size(_children);
     Assert.assertEquals(0, _size);
-    Path _path_1 = new Path("/foo/bar/Foo.text");
-    this.fs.setContents(_path_1, "Hello Foo");
+    Path _path = new Path("/foo/bar/Foo.text");
+    this.fs.setContents(_path, "Hello Foo");
     Iterable<? extends Path> _children_1 = this.fs.getChildren(folder);
     int _size_1 = IterableExtensions.size(_children_1);
     Assert.assertEquals(1, _size_1);
@@ -206,8 +201,7 @@ public class JavaIoFileSystemTest {
   
   @Test
   public void testGetFileChildren() {
-    Path _path = new Path("/foo/bar/Foo.text");
-    final Path file = _path;
+    final Path file = new Path("/foo/bar/Foo.text");
     boolean _exists = this.fs.exists(file);
     Assert.assertFalse(_exists);
     Iterable<? extends Path> _children = this.fs.getChildren(file);
@@ -224,8 +218,7 @@ public class JavaIoFileSystemTest {
   @Test
   public void testGetURI() {
     try {
-      Path _path = new Path("/foo/bar/Foo.text");
-      final Path file = _path;
+      final Path file = new Path("/foo/bar/Foo.text");
       boolean _exists = this.fs.exists(file);
       Assert.assertFalse(_exists);
       URI _uRI = this.fs.toURI(file);
@@ -236,14 +229,12 @@ public class JavaIoFileSystemTest {
       URI _uRI_1 = this.fs.toURI(file);
       Assert.assertNotNull(_uRI_1);
       URI _uRI_2 = this.fs.toURI(file);
-      File _file = new File(_uRI_2);
-      final File javaIoFile = _file;
+      final File javaIoFile = new File(_uRI_2);
       boolean _exists_2 = javaIoFile.exists();
       Assert.assertTrue(_exists_2);
       long _length = javaIoFile.length();
       final byte[] data = new byte[((int) _length)];
-      FileInputStream _fileInputStream = new FileInputStream(javaIoFile);
-      final FileInputStream fis = _fileInputStream;
+      final FileInputStream fis = new FileInputStream(javaIoFile);
       fis.read(data);
       fis.close();
       String _string = new String(data);

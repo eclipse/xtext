@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
@@ -32,26 +33,37 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
         public InputStreamReader getInput() throws IOException {
           InputStream _contentsAsStream = AbstractFileSystemSupport.this.getContentsAsStream(path);
           String _charset = AbstractFileSystemSupport.this.getCharset(path);
-          InputStreamReader _inputStreamReader = new InputStreamReader(_contentsAsStream, _charset);
-          return _inputStreamReader;
+          return new InputStreamReader(_contentsAsStream, _charset);
         }
       };
       return CharStreams.<InputStreamReader>toString(_function);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof IOException) {
+        final IOException exc = (IOException)_t;
+        String _message = exc.getMessage();
+        throw new IllegalArgumentException(_message, exc);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
   public void setContents(final Path path, final CharSequence contents) {
+    Path _parent = path.getParent();
+    this.mkdir(_parent);
     try {
-      Path _parent = path.getParent();
-      this.mkdir(_parent);
       String _string = contents.toString();
       String _charset = this.getCharset(path);
       StringInputStream _stringInputStream = new StringInputStream(_string, _charset);
       this.setContentsAsStream(path, _stringInputStream);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof UnsupportedEncodingException) {
+        final UnsupportedEncodingException exc = (UnsupportedEncodingException)_t;
+        String _message = exc.getMessage();
+        throw new IllegalArgumentException(_message, exc);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   

@@ -21,6 +21,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.macro.file.Path;
@@ -56,16 +57,14 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
     String _string = path.toString();
     org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
-    IFile _file = _workspaceRoot.getFile(_path);
-    return _file;
+    return _workspaceRoot.getFile(_path);
   }
   
   protected IFolder getEclipseFolder(final Path path) {
     IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
     String _string = path.toString();
     org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
-    IFolder _folder = _workspaceRoot.getFolder(_path);
-    return _folder;
+    return _workspaceRoot.getFolder(_path);
   }
   
   protected IContainer getEclipseContainer(final Path path) {
@@ -86,8 +85,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
         boolean _equals = (_size == 0);
         if (_equals) {
           _matched=true;
-          IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
-          _switchResult = _workspaceRoot;
+          _switchResult = this.getWorkspaceRoot();
         }
       }
       if (!_matched) {
@@ -95,19 +93,17 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
         boolean _equals_1 = (_size_1 == 1);
         if (_equals_1) {
           _matched=true;
-          IWorkspaceRoot _workspaceRoot_1 = this.getWorkspaceRoot();
+          IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
           List<String> _segments_1 = path.getSegments();
           String _head = IterableExtensions.<String>head(_segments_1);
-          IProject _project = _workspaceRoot_1.getProject(_head);
-          _switchResult = _project;
+          _switchResult = _workspaceRoot.getProject(_head);
         }
       }
       if (!_matched) {
-        IWorkspaceRoot _workspaceRoot_2 = this.getWorkspaceRoot();
+        IWorkspaceRoot _workspaceRoot_1 = this.getWorkspaceRoot();
         String _string = path.toString();
         org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
-        IFolder _folder = _workspaceRoot_2.getFolder(_path);
-        _switchResult = _folder;
+        _switchResult = _workspaceRoot_1.getFolder(_path);
       }
       _xblockexpression = (_switchResult);
     }
@@ -118,48 +114,51 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
     String _string = path.toString();
     org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
-    IResource _findMember = _workspaceRoot.findMember(_path);
-    return _findMember;
+    return _workspaceRoot.findMember(_path);
   }
   
   protected org.eclipse.core.runtime.Path toEclipsePath(final Path path) {
     String _string = path.toString();
-    org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
-    return _path;
+    return new org.eclipse.core.runtime.Path(_string);
   }
   
   public Iterable<? extends Path> getChildren(final Path path) {
-    try {
-      List<Path> _xblockexpression = null;
-      {
-        final IContainer container = this.getEclipseContainer(path);
-        boolean _exists = container.exists();
-        boolean _not = (!_exists);
-        if (_not) {
-          return CollectionLiterals.<Path>emptyList();
-        }
+    List<Path> _xblockexpression = null;
+    {
+      final IContainer container = this.getEclipseContainer(path);
+      boolean _exists = container.exists();
+      boolean _not = (!_exists);
+      if (_not) {
+        return CollectionLiterals.<Path>emptyList();
+      }
+      List<Path> _xtrycatchfinallyexpression = null;
+      try {
         IResource[] _members = container.members();
         final Function1<IResource,Path> _function = new Function1<IResource,Path>() {
           public Path apply(final IResource it) {
             IPath _fullPath = it.getFullPath();
             String _string = _fullPath.toString();
-            Path _path = new Path(_string);
-            return _path;
+            return new Path(_string);
           }
         };
-        List<Path> _map = ListExtensions.<IResource, Path>map(((List<IResource>)Conversions.doWrapArray(_members)), _function);
-        _xblockexpression = (_map);
+        _xtrycatchfinallyexpression = ListExtensions.<IResource, Path>map(((List<IResource>)Conversions.doWrapArray(_members)), _function);
+      } catch (final Throwable _t) {
+        if (_t instanceof CoreException) {
+          final CoreException exc = (CoreException)_t;
+          String _message = exc.getMessage();
+          throw new IllegalArgumentException(_message, exc);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      _xblockexpression = (_xtrycatchfinallyexpression);
     }
+    return _xblockexpression;
   }
   
   public boolean exists(final Path path) {
     IResource _findResource = this.findResource(path);
-    boolean _notEquals = (!Objects.equal(_findResource, null));
-    return _notEquals;
+    return (!Objects.equal(_findResource, null));
   }
   
   public boolean isFolder(final Path path) {
@@ -173,9 +172,16 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   }
   
   public long getLastModification(final Path path) {
-    IResource _findResource = this.findResource(path);
-    long _modificationStamp = _findResource.getModificationStamp();
-    return _modificationStamp;
+    long _xblockexpression = (long) 0;
+    {
+      final IResource resource = this.findResource(path);
+      boolean _equals = Objects.equal(resource, null);
+      if (_equals) {
+        return 0L;
+      }
+      _xblockexpression = (resource.getModificationStamp());
+    }
+    return _xblockexpression;
   }
   
   public String getCharset(final Path path) {
@@ -194,19 +200,32 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
           return this.getCharset(_parent);
         }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof CoreException) {
+        final CoreException exc = (CoreException)_t;
+        String _message = exc.getMessage();
+        throw new IllegalArgumentException(_message, exc);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
   public InputStream getContentsAsStream(final Path path) {
+    InputStream _xtrycatchfinallyexpression = null;
     try {
       IFile _eclipseFile = this.getEclipseFile(path);
-      InputStream _contents = _eclipseFile.getContents();
-      return _contents;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      _xtrycatchfinallyexpression = _eclipseFile.getContents();
+    } catch (final Throwable _t) {
+      if (_t instanceof CoreException) {
+        final CoreException exc = (CoreException)_t;
+        String _message = exc.getMessage();
+        throw new IllegalArgumentException(_message, exc);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
+    return _xtrycatchfinallyexpression;
   }
   
   public boolean delete(final Path path) {
@@ -218,26 +237,33 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
         return true;
       }
       return false;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof CoreException) {
+        final CoreException exc = (CoreException)_t;
+        String _message = exc.getMessage();
+        throw new IllegalArgumentException(_message, exc);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
   public boolean mkdir(final Path path) {
-    try {
-      boolean _xblockexpression = false;
-      {
-        boolean _exists = this.exists(path);
-        if (_exists) {
-          return false;
-        }
-        Path _parent = path.getParent();
-        boolean _exists_1 = this.exists(_parent);
-        boolean _not = (!_exists_1);
-        if (_not) {
-          Path _parent_1 = path.getParent();
-          this.mkdir(_parent_1);
-        }
+    boolean _xblockexpression = false;
+    {
+      boolean _exists = this.exists(path);
+      if (_exists) {
+        return false;
+      }
+      Path _parent = path.getParent();
+      boolean _exists_1 = this.exists(_parent);
+      boolean _not = (!_exists_1);
+      if (_not) {
+        Path _parent_1 = path.getParent();
+        this.mkdir(_parent_1);
+      }
+      boolean _xtrycatchfinallyexpression = false;
+      try {
         boolean _switchResult = false;
         IContainer _eclipseContainer = this.getEclipseContainer(path);
         final IContainer container = _eclipseContainer;
@@ -267,12 +293,19 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
         if (!_matched) {
           _switchResult = false;
         }
-        _xblockexpression = (_switchResult);
+        _xtrycatchfinallyexpression = _switchResult;
+      } catch (final Throwable _t) {
+        if (_t instanceof CoreException) {
+          final CoreException exc = (CoreException)_t;
+          String _message = exc.getMessage();
+          throw new IllegalArgumentException(_message, exc);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      _xblockexpression = (_xtrycatchfinallyexpression);
     }
+    return _xblockexpression;
   }
   
   public void setContentsAsStream(final Path path, final InputStream stream) {
@@ -287,15 +320,20 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
         IFile _eclipseFile_1 = this.getEclipseFile(path);
         _eclipseFile_1.create(stream, true, null);
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof CoreException) {
+        final CoreException exc = (CoreException)_t;
+        String _message = exc.getMessage();
+        throw new IllegalArgumentException(_message, exc);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
   public URI toURI(final Path path) {
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-    URI _uRI = this.toURI(path, _newArrayList);
-    return _uRI;
+    return this.toURI(path, _newArrayList);
   }
   
   protected URI toURI(final Path path, final List<String> trailingSegments) {
@@ -313,13 +351,11 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
       IPath _location = resource.getLocation();
       final Function2<IPath,String,IPath> _function = new Function2<IPath,String,IPath>() {
         public IPath apply(final IPath location, final String segment) {
-          IPath _append = location.append(segment);
-          return _append;
+          return location.append(segment);
         }
       };
       IPath _fold = IterableExtensions.<String, IPath>fold(_reverse, _location, _function);
-      URI _uRI = URIUtil.toURI(_fold);
-      _xblockexpression = (_uRI);
+      _xblockexpression = (URIUtil.toURI(_fold));
     }
     return _xblockexpression;
   }
@@ -331,12 +367,10 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     if (_not) {
       org.eclipse.emf.common.util.URI _uRI_1 = res.getURI();
       String _plus = ("Expecting platform URI but was : " + _uRI_1);
-      IllegalStateException _illegalStateException = new IllegalStateException(_plus);
-      throw _illegalStateException;
+      throw new IllegalStateException(_plus);
     }
     org.eclipse.emf.common.util.URI _uRI_2 = res.getURI();
     String _platformString = _uRI_2.toPlatformString(false);
-    Path _path = new Path(_platformString);
-    return _path;
+    return new Path(_platformString);
   }
 }

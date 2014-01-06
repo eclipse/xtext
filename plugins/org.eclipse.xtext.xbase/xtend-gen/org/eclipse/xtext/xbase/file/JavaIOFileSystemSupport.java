@@ -17,6 +17,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,12 +69,10 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
       String[] _list = _javaIOFile.list();
       final Function1<String,Path> _function = new Function1<String,Path>() {
         public Path apply(final String it) {
-          Path _absolutePath = path.getAbsolutePath(it);
-          return _absolutePath;
+          return path.getAbsolutePath(it);
         }
       };
-      List<Path> _map = ListExtensions.<String, Path>map(((List<String>)Conversions.doWrapArray(_list)), _function);
-      _xblockexpression = (_map);
+      _xblockexpression = (ListExtensions.<String, Path>map(((List<String>)Conversions.doWrapArray(_list)), _function));
     }
     return _xblockexpression;
   }
@@ -83,32 +82,27 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     WorkspaceConfig _get = _projectInformationProvider.get();
     String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
     String _string = path.toString();
-    File _file = new File(_absoluteFileSystemPath, _string);
-    return _file;
+    return new File(_absoluteFileSystemPath, _string);
   }
   
   public boolean exists(final Path path) {
     File _javaIOFile = this.getJavaIOFile(path);
-    boolean _exists = _javaIOFile.exists();
-    return _exists;
+    return _javaIOFile.exists();
   }
   
   public boolean isFolder(final Path path) {
     File _javaIOFile = this.getJavaIOFile(path);
-    boolean _isDirectory = _javaIOFile.isDirectory();
-    return _isDirectory;
+    return _javaIOFile.isDirectory();
   }
   
   public boolean isFile(final Path path) {
     File _javaIOFile = this.getJavaIOFile(path);
-    boolean _isFile = _javaIOFile.isFile();
-    return _isFile;
+    return _javaIOFile.isFile();
   }
   
   public long getLastModification(final Path path) {
     File _javaIOFile = this.getJavaIOFile(path);
-    long _lastModified = _javaIOFile.lastModified();
-    return _lastModified;
+    return _javaIOFile.lastModified();
   }
   
   public String getCharset(final Path path) {
@@ -123,10 +117,15 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     try {
       File _javaIOFile = this.getJavaIOFile(path);
       FileInputStream _fileInputStream = new FileInputStream(_javaIOFile);
-      BufferedInputStream _bufferedInputStream = new BufferedInputStream(_fileInputStream);
-      return _bufferedInputStream;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      return new BufferedInputStream(_fileInputStream);
+    } catch (final Throwable _t) {
+      if (_t instanceof FileNotFoundException) {
+        final FileNotFoundException exc = (FileNotFoundException)_t;
+        String _message = exc.getMessage();
+        throw new IllegalArgumentException(_message, exc);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
@@ -146,30 +145,36 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   }
   
   public boolean delete(final Path path) {
-    try {
-      boolean _exists = this.exists(path);
-      boolean _not = (!_exists);
-      if (_not) {
-        return false;
-      }
-      File _javaIOFile = this.getJavaIOFile(path);
-      boolean _isDirectory = _javaIOFile.isDirectory();
-      if (_isDirectory) {
+    boolean _exists = this.exists(path);
+    boolean _not = (!_exists);
+    if (_not) {
+      return false;
+    }
+    File _javaIOFile = this.getJavaIOFile(path);
+    boolean _isDirectory = _javaIOFile.isDirectory();
+    if (_isDirectory) {
+      try {
         File _javaIOFile_1 = this.getJavaIOFile(path);
         Files.sweepFolder(_javaIOFile_1);
+      } catch (final Throwable _t) {
+        if (_t instanceof FileNotFoundException) {
+          final FileNotFoundException exc = (FileNotFoundException)_t;
+          String _message = exc.getMessage();
+          throw new IllegalArgumentException(_message, exc);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
-      File _javaIOFile_2 = this.getJavaIOFile(path);
-      _javaIOFile_2.delete();
-      return true;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
     }
+    File _javaIOFile_2 = this.getJavaIOFile(path);
+    _javaIOFile_2.delete();
+    return true;
   }
   
   public void setContentsAsStream(final Path path, final InputStream stream) {
+    Path _parent = path.getParent();
+    this.mkdir(_parent);
     try {
-      Path _parent = path.getParent();
-      this.mkdir(_parent);
       final InputSupplier<InputStream> _function = new InputSupplier<InputStream>() {
         public InputStream getInput() throws IOException {
           return stream;
@@ -179,20 +184,24 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
         public BufferedOutputStream getOutput() throws IOException {
           File _javaIOFile = JavaIOFileSystemSupport.this.getJavaIOFile(path);
           FileOutputStream _fileOutputStream = new FileOutputStream(_javaIOFile);
-          BufferedOutputStream _bufferedOutputStream = new BufferedOutputStream(_fileOutputStream);
-          return _bufferedOutputStream;
+          return new BufferedOutputStream(_fileOutputStream);
         }
       };
       ByteStreams.copy(_function, _function_1);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof IOException) {
+        final IOException exc = (IOException)_t;
+        String _message = exc.getMessage();
+        throw new IllegalArgumentException(_message, exc);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
   public java.net.URI toURI(final Path path) {
     File _javaIOFile = this.getJavaIOFile(path);
-    java.net.URI _uRI = _javaIOFile.toURI();
-    return _uRI;
+    return _javaIOFile.toURI();
   }
   
   public Path getPath(final Resource res) {
@@ -215,15 +224,13 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
       boolean _startsWith = absolutefilePath.startsWith(workspacePath);
       boolean _not = (!_startsWith);
       if (_not) {
-        IllegalStateException _illegalStateException = new IllegalStateException((((("Couldn\'t determine file path. The file (\'" + absolutefilePath) + "\') doesn\'t seem to be contained in the workspace (\'") + workspacePath) + "\')"));
-        throw _illegalStateException;
+        throw new IllegalStateException((((("Couldn\'t determine file path. The file (\'" + absolutefilePath) + "\') doesn\'t seem to be contained in the workspace (\'") + workspacePath) + "\')"));
       }
       int _length = workspacePath.length();
       final String filePath = absolutefilePath.substring(_length);
       String _string = filePath.toString();
       String _plus = ("/" + _string);
-      Path _path = new Path(_plus);
-      return _path;
+      return new Path(_plus);
     }
     return null;
   }
