@@ -181,7 +181,6 @@ public class XtendInstallDebugInfoMojoIT {
 		xpt1.append("      \n");
 		xpt1.append("      void newJavaB() { // XtendA.java:14, XtendA.xtend:10\n");
 		xpt1.append("        void this;\n");
-		xpt1.append("        void _javaB;\n");
 		xpt1.append("      }\n");
 		xpt1.append("      \n");
 		xpt1.append("    }\n");
@@ -219,7 +218,6 @@ public class XtendInstallDebugInfoMojoIT {
 		xpt2.append("      \n");
 		xpt2.append("      void newJavaB() { // FooClass.java:12, FooClass.xtend:12\n");
 		xpt2.append("        void this;\n");
-		xpt2.append("        void _javaB;\n");
 		xpt2.append("      }\n");
 		xpt2.append("      \n");
 		xpt2.append("    }\n");
