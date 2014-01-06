@@ -47,8 +47,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
    * Public for testing purpose
    */
   public Collection<UnconfirmedStructuralChangesDelta> getUnconfirmedDeltas() {
-    Collection<UnconfirmedStructuralChangesDelta> _unmodifiableCollection = Collections.<UnconfirmedStructuralChangesDelta>unmodifiableCollection(this.unconfirmedDeltas);
-    return _unmodifiableCollection;
+    return Collections.<UnconfirmedStructuralChangesDelta>unmodifiableCollection(this.unconfirmedDeltas);
   }
   
   public boolean queueChange(final IResourceDescription.Delta delta) {
@@ -123,8 +122,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
       } else {
         _xifexpression = null;
       }
-      boolean _doNeedRebuild = this.doNeedRebuild(newState, _xifexpression);
-      _xblockexpression = (_doNeedRebuild);
+      _xblockexpression = (this.doNeedRebuild(newState, _xifexpression));
     }
     return _xblockexpression;
   }
@@ -162,8 +160,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
         _while = _hasNext_1;
       }
       int _size = this.unconfirmedDeltas.size();
-      boolean _notEquals = (_size != 0);
-      _xblockexpression = (_notEquals);
+      _xblockexpression = ((_size != 0));
     }
     return _xblockexpression;
   }

@@ -146,8 +146,7 @@ public class DebugGraphGenerator {
     String _plus_1 = (_plus + _lowerCase);
     String _plus_2 = (_plus_1 + "_");
     String _plus_3 = (_plus_2 + name);
-    String _plus_4 = (_plus_3 + "/");
-    return _plus_4;
+    return (_plus_3 + "/");
   }
   
   public String file(final String name, final EObject ctx, final EClass type) {
@@ -160,15 +159,13 @@ public class DebugGraphGenerator {
       _name=type.getName();
     }
     String _plus_2 = (_plus_1 + _name);
-    String _plus_3 = (_plus_2 + ".dot");
-    return _plus_3;
+    return (_plus_2 + ".dot");
   }
   
   public String file(final String name, final EObject ctx) {
     String _directory = this.directory(name);
     String _contextName = this.nameFunction.getContextName(ctx);
     String _plus = (_directory + _contextName);
-    String _plus_1 = (_plus + ".dot");
-    return _plus_1;
+    return (_plus + ".dot");
   }
 }

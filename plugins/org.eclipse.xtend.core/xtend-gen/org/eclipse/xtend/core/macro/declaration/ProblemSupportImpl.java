@@ -83,8 +83,7 @@ public class ProblemSupportImpl implements ProblemSupport {
       public Boolean apply(final EObjectDiagnosticImpl diag) {
         EObject _problematicObject = diag.getProblematicObject();
         EObject _value = resAndObj.getValue();
-        boolean _equals = Objects.equal(_problematicObject, _value);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_problematicObject, _value));
       }
     };
     Iterable<EObjectDiagnosticImpl> _filter = IterableExtensions.<EObjectDiagnosticImpl>filter(issues, _function);
@@ -108,29 +107,25 @@ public class ProblemSupportImpl implements ProblemSupport {
     if (!_matched) {
       if (obj instanceof XtendTypeDeclaration) {
         _matched=true;
-        EAttribute _xtendTypeDeclaration_Name = XtendPackage.eINSTANCE.getXtendTypeDeclaration_Name();
-        _switchResult = _xtendTypeDeclaration_Name;
+        _switchResult = XtendPackage.eINSTANCE.getXtendTypeDeclaration_Name();
       }
     }
     if (!_matched) {
       if (obj instanceof XtendField) {
         _matched=true;
-        EAttribute _xtendField_Name = XtendPackage.eINSTANCE.getXtendField_Name();
-        _switchResult = _xtendField_Name;
+        _switchResult = XtendPackage.eINSTANCE.getXtendField_Name();
       }
     }
     if (!_matched) {
       if (obj instanceof XtendFunction) {
         _matched=true;
-        EAttribute _xtendFunction_Name = XtendPackage.eINSTANCE.getXtendFunction_Name();
-        _switchResult = _xtendFunction_Name;
+        _switchResult = XtendPackage.eINSTANCE.getXtendFunction_Name();
       }
     }
     if (!_matched) {
       if (obj instanceof JvmFormalParameter) {
         _matched=true;
-        EAttribute _jvmFormalParameter_Name = TypesPackage.eINSTANCE.getJvmFormalParameter_Name();
-        _switchResult = _jvmFormalParameter_Name;
+        _switchResult = TypesPackage.eINSTANCE.getJvmFormalParameter_Name();
       }
     }
     return _switchResult;
@@ -160,8 +155,7 @@ public class ProblemSupportImpl implements ProblemSupport {
         }
       }
     }
-    IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("You can only add issues on locally declared elements.");
-    throw _illegalArgumentException;
+    throw new IllegalArgumentException("You can only add issues on locally declared elements.");
   }
   
   private Problem.Severity translateSeverity(final Severity severity) {

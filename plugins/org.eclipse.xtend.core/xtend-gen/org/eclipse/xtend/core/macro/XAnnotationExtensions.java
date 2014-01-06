@@ -127,8 +127,7 @@ public class XAnnotationExtensions {
     if (!_matched) {
       if (container instanceof XAnnotation) {
         _matched=true;
-        XtendAnnotationTarget _annotatedTarget = this.getAnnotatedTarget(((XAnnotation)container));
-        _switchResult = _annotatedTarget;
+        _switchResult = this.getAnnotatedTarget(((XAnnotation)container));
       }
     }
     if (!_matched) {
@@ -192,8 +191,7 @@ public class XAnnotationExtensions {
           _identifier=_annotation.getIdentifier();
         }
         String _name = Active.class.getName();
-        boolean _equals = Objects.equal(_identifier, _name);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_identifier, _name));
       }
     };
     final JvmAnnotationReference activeAnnotation = IterableExtensions.<JvmAnnotationReference>findFirst(_annotations, _function);

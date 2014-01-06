@@ -12,7 +12,6 @@ public class ExpressionImpl extends AbstractElementImpl<XExpression> implements 
     XExpression _delegate = this.getDelegate();
     ICompositeNode _node = NodeModelUtils.getNode(_delegate);
     String _text = _node.getText();
-    String _trim = _text.trim();
-    return _trim;
+    return _text.trim();
   }
 }

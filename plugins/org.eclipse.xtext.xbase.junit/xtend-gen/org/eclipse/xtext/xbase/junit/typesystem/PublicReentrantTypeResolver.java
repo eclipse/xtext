@@ -23,7 +23,6 @@ public class PublicReentrantTypeResolver extends DefaultReentrantTypeResolver {
   }
   
   public IBatchScopeProvider getBatchScopeProvider() {
-    IBatchScopeProvider _batchScopeProvider = super.getBatchScopeProvider();
-    return _batchScopeProvider;
+    return super.getBatchScopeProvider();
   }
 }

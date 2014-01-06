@@ -71,8 +71,7 @@ public abstract class AbstractXbaseFormatterTest {
       }
     };
     List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_split)), _function);
-    String _join = IterableExtensions.join(_map, "\n");
-    return _join;
+    return IterableExtensions.join(_map, "\n");
   }
   
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation) {

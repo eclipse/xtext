@@ -45,8 +45,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   
   public String getSimpleName() {
     T _delegate = this.getDelegate();
-    String _name = _delegate.getName();
-    return _name;
+    return _delegate.getName();
   }
   
   public String getQualifiedName() {
@@ -57,11 +56,9 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
       String _packageName_1 = this.getPackageName();
       String _plus = (_packageName_1 + ".");
       String _simpleName = this.getSimpleName();
-      String _plus_1 = (_plus + _simpleName);
-      _xifexpression = _plus_1;
+      _xifexpression = (_plus + _simpleName);
     } else {
-      String _simpleName_1 = this.getSimpleName();
-      _xifexpression = _simpleName_1;
+      _xifexpression = this.getSimpleName();
     }
     return _xifexpression;
   }
@@ -79,8 +76,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     final Function1<XtendMember,MemberDeclaration> _function = new Function1<XtendMember,MemberDeclaration>() {
       public MemberDeclaration apply(final XtendMember it) {
         CompilationUnitImpl _compilationUnit = XtendTypeDeclarationImpl.this.getCompilationUnit();
-        MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(it);
-        return _xtendMemberDeclaration;
+        return _compilationUnit.toXtendMemberDeclaration(it);
       }
     };
     return ListExtensions.<XtendMember, MemberDeclaration>map(_members, _function);
@@ -107,19 +103,16 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
         Iterable<? extends ParameterDeclaration> _parameters = constructor.getParameters();
         final Function1<ParameterDeclaration,TypeReference> _function = new Function1<ParameterDeclaration,TypeReference>() {
           public TypeReference apply(final ParameterDeclaration it) {
-            TypeReference _type = it.getType();
-            return _type;
+            return it.getType();
           }
         };
         Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
         List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
         List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-        boolean _equals = Objects.equal(_list, _list_1);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_list, _list_1));
       }
     };
-    ConstructorDeclaration _findFirst = IterableExtensions.findFirst(_declaredConstructors, _function);
-    return _findFirst;
+    return IterableExtensions.findFirst(_declaredConstructors, _function);
   }
   
   public FieldDeclaration findDeclaredField(final String name) {
@@ -127,12 +120,10 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     final Function1<FieldDeclaration,Boolean> _function = new Function1<FieldDeclaration,Boolean>() {
       public Boolean apply(final FieldDeclaration field) {
         String _simpleName = field.getSimpleName();
-        boolean _equals = Objects.equal(_simpleName, name);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_simpleName, name));
       }
     };
-    FieldDeclaration _findFirst = IterableExtensions.findFirst(_declaredFields, _function);
-    return _findFirst;
+    return IterableExtensions.findFirst(_declaredFields, _function);
   }
   
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
@@ -148,8 +139,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
           Iterable<? extends ParameterDeclaration> _parameters = method.getParameters();
           final Function1<ParameterDeclaration,TypeReference> _function = new Function1<ParameterDeclaration,TypeReference>() {
             public TypeReference apply(final ParameterDeclaration it) {
-              TypeReference _type = it.getType();
-              return _type;
+              return it.getType();
             }
           };
           Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
@@ -161,37 +151,31 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
         return Boolean.valueOf(_and);
       }
     };
-    MethodDeclaration _findFirst = IterableExtensions.findFirst(_declaredMethods, _function);
-    return _findFirst;
+    return IterableExtensions.findFirst(_declaredMethods, _function);
   }
   
   public Iterable<? extends MethodDeclaration> getDeclaredMethods() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    Iterable<MethodDeclaration> _filter = Iterables.<MethodDeclaration>filter(_declaredMembers, MethodDeclaration.class);
-    return _filter;
+    return Iterables.<MethodDeclaration>filter(_declaredMembers, MethodDeclaration.class);
   }
   
   public Iterable<? extends FieldDeclaration> getDeclaredFields() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    Iterable<FieldDeclaration> _filter = Iterables.<FieldDeclaration>filter(_declaredMembers, FieldDeclaration.class);
-    return _filter;
+    return Iterables.<FieldDeclaration>filter(_declaredMembers, FieldDeclaration.class);
   }
   
   public Iterable<? extends ClassDeclaration> getDeclaredClasses() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    Iterable<ClassDeclaration> _filter = Iterables.<ClassDeclaration>filter(_declaredMembers, ClassDeclaration.class);
-    return _filter;
+    return Iterables.<ClassDeclaration>filter(_declaredMembers, ClassDeclaration.class);
   }
   
   public Iterable<? extends ConstructorDeclaration> getDeclaredConstructors() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    Iterable<ConstructorDeclaration> _filter = Iterables.<ConstructorDeclaration>filter(_declaredMembers, ConstructorDeclaration.class);
-    return _filter;
+    return Iterables.<ConstructorDeclaration>filter(_declaredMembers, ConstructorDeclaration.class);
   }
   
   public Iterable<? extends InterfaceDeclaration> getDeclaredInterfaces() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    Iterable<InterfaceDeclaration> _filter = Iterables.<InterfaceDeclaration>filter(_declaredMembers, InterfaceDeclaration.class);
-    return _filter;
+    return Iterables.<InterfaceDeclaration>filter(_declaredMembers, InterfaceDeclaration.class);
   }
 }

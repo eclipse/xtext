@@ -18,8 +18,7 @@ public class CommentInfo extends LeafInfo {
   public boolean endsWithNewLine() {
     ILeafNode _node = this.getNode();
     String _text = _node.getText();
-    boolean _endsWith = _text.endsWith("\n");
-    return _endsWith;
+    return _text.endsWith("\n");
   }
   
   public boolean isMultiline() {

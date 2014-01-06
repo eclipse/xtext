@@ -67,8 +67,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
         public Integer apply(final XConstructorCall it) {
           List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
           INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
-          int _offset = _head.getOffset();
-          return Integer.valueOf(_offset);
+          return Integer.valueOf(_head.getOffset());
         }
       };
       return IterableExtensions.<XConstructorCall, Integer>sortBy(closures, _function);
@@ -86,8 +85,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
       if (_not) {
         Assert.fail(("Duplicate expression under test: " + expression));
       }
-      XExpression _expression = super.expression(expression, resolve);
-      _xblockexpression = (_expression);
+      _xblockexpression = (super.expression(expression, resolve));
     }
     return _xblockexpression;
   }

@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.generator.contentAssist;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -90,8 +89,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   public Set<Binding> getGuiceBindingsUi(final Grammar grammar) {
     Set<Binding> _xblockexpression = null;
     {
-      BindFactory _bindFactory = new BindFactory();
-      final BindFactory bindFactory = _bindFactory;
+      final BindFactory bindFactory = new BindFactory();
       boolean _isGenerateStub = this.isGenerateStub();
       if (_isGenerateStub) {
         String _proposalProviderName = this.getProposalProviderName(grammar);
@@ -100,26 +98,22 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
         String _genProposalProviderName = this.getGenProposalProviderName();
         bindFactory.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider", _genProposalProviderName);
       }
-      Set<Binding> _bindings = bindFactory.getBindings();
-      _xblockexpression = (_bindings);
+      _xblockexpression = (bindFactory.getBindings());
     }
     return _xblockexpression;
   }
   
   public String[] getRequiredBundlesUi(final Grammar grammar) {
-    List<String> _singletonList = Collections.<String>singletonList("org.eclipse.xtext.ui");
-    return ((String[])Conversions.unwrapArray(_singletonList, String.class));
+    return ((String[])Conversions.unwrapArray(Collections.<String>singletonList("org.eclipse.xtext.ui"), String.class));
   }
   
   public String[] getImportedPackagesUi(final Grammar grammar) {
     Collection<String> _xifexpression = null;
     boolean _isGenerateStub = this.isGenerateStub();
     if (_isGenerateStub) {
-      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("org.apache.log4j", "org.eclipse.xtext.xbase.lib");
-      _xifexpression = _newArrayList;
+      _xifexpression = CollectionLiterals.<String>newArrayList("org.apache.log4j", "org.eclipse.xtext.xbase.lib");
     } else {
-      Set<String> _singleton = Collections.<String>singleton("org.apache.log4j");
-      _xifexpression = _singleton;
+      _xifexpression = Collections.<String>singleton("org.apache.log4j");
     }
     return ((String[])Conversions.unwrapArray(_xifexpression, String.class));
   }
@@ -127,8 +121,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   public String[] getExportedPackagesUi(final Grammar grammar) {
     String _proposalProviderName = this.getProposalProviderName(grammar);
     String _packageName = this._naming.packageName(_proposalProviderName);
-    List<String> _singletonList = Collections.<String>singletonList(_packageName);
-    return ((String[])Conversions.unwrapArray(_singletonList, String.class));
+    return ((String[])Conversions.unwrapArray(Collections.<String>singletonList(_packageName), String.class));
   }
   
   public String getSuperClassName() {
@@ -146,8 +139,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
         _and = (_isInheritImplementation && _notEquals);
       }
       if (_and) {
-        String _proposalProviderName = this.getProposalProviderName(superGrammar);
-        _xifexpression = _proposalProviderName;
+        _xifexpression = this.getProposalProviderName(superGrammar);
       } else {
         _xifexpression = "org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider";
       }

@@ -16,8 +16,7 @@ public class WhitespaceData extends FormattingData {
   
   public boolean isEmpty() {
     String _space = this.getSpace();
-    boolean _equals = Objects.equal(_space, null);
-    return _equals;
+    return Objects.equal(_space, null);
   }
   
   public WhitespaceData(final int offset, final int length, final int increaseIndentationChange, final int decreaseIndentationChange, final Throwable trace, final String space) {

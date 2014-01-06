@@ -76,15 +76,13 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
   private final ArrayList<String> composedChecks = CollectionLiterals.<String>newArrayList();
   
   public boolean addComposedCheck(final String composedCheckValidator) {
-    boolean _add = this.composedChecks.add(composedCheckValidator);
-    return _add;
+    return this.composedChecks.add(composedCheckValidator);
   }
   
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
     Set<Binding> _xblockexpression = null;
     {
-      BindFactory _bindFactory = new BindFactory();
-      final BindFactory bindFactory = _bindFactory;
+      final BindFactory bindFactory = new BindFactory();
       boolean _isGenerateStub = this.isGenerateStub();
       if (_isGenerateStub) {
         String _validatorName = this._validatorNaming.getValidatorName(grammar);
@@ -95,8 +93,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
         String _abstractValidatorName_1 = this._validatorNaming.getAbstractValidatorName();
         bindFactory.addTypeToTypeEagerSingleton(_abstractValidatorName, _abstractValidatorName_1);
       }
-      Set<Binding> _bindings = bindFactory.getBindings();
-      _xblockexpression = (_bindings);
+      _xblockexpression = (bindFactory.getBindings());
     }
     return _xblockexpression;
   }
@@ -286,12 +283,10 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(_metamodelDeclarations, GeneratedMetamodel.class);
     final Function1<GeneratedMetamodel,EPackage> _function = new Function1<GeneratedMetamodel,EPackage>() {
       public EPackage apply(final GeneratedMetamodel it) {
-        EPackage _ePackage = it.getEPackage();
-        return _ePackage;
+        return it.getEPackage();
       }
     };
-    Iterable<EPackage> _map = IterableExtensions.<GeneratedMetamodel, EPackage>map(_filter, _function);
-    return _map;
+    return IterableExtensions.<GeneratedMetamodel, EPackage>map(_filter, _function);
   }
   
   protected Collection<EPackage> getRegistryPackagesToValidate() {
@@ -302,8 +297,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
       Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(_allMetamodelDeclarations, GeneratedMetamodel.class);
       final Function1<GeneratedMetamodel,EPackage> _function = new Function1<GeneratedMetamodel,EPackage>() {
         public EPackage apply(final GeneratedMetamodel it) {
-          EPackage _ePackage = it.getEPackage();
-          return _ePackage;
+          return it.getEPackage();
         }
       };
       Iterable<EPackage> _map = IterableExtensions.<GeneratedMetamodel, EPackage>map(_filter, _function);

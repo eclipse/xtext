@@ -79,8 +79,7 @@ public class ActiveAnnotationContext {
             if (_isEmpty) {
               _xifexpression = target;
             } else {
-              XAnnotation _head = IterableExtensions.<XAnnotation>head(annotations);
-              _xifexpression = _head;
+              _xifexpression = IterableExtensions.<XAnnotation>head(annotations);
             }
             EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, _xifexpression, null, (-1), null);
             errors.add(_eObjectDiagnosticImpl);
@@ -116,14 +115,12 @@ public class ActiveAnnotationContext {
             }
           };
           final StringWriter writer = ObjectExtensions.<StringWriter>operator_doubleArrow(_stringWriter, _function);
-          String _string = writer.toString();
-          _xblockexpression = (_string);
+          _xblockexpression = (writer.toString());
         }
         return _xblockexpression;
       }
     };
-    String _messageWithReducedStackTrace = this.getMessageWithReducedStackTrace(t, _function);
-    return _messageWithReducedStackTrace;
+    return this.getMessageWithReducedStackTrace(t, _function);
   }
   
   public String getMessageWithReducedStackTrace(final Throwable t, final Function1<? super Throwable,? extends String> getMessage) {

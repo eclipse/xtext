@@ -47,8 +47,7 @@ public class BuckminsterFilesCreator {
       this.createProjectCquery(projectInfo);
       this.createPlatformCquery(projectInfo);
       this.createPlatformRmap(projectInfo);
-      IFile _createProjectRmap = this.createProjectRmap(projectInfo);
-      _xblockexpression = (_createProjectRmap);
+      _xblockexpression = (this.createProjectRmap(projectInfo));
     }
     return _xblockexpression;
   }
@@ -111,8 +110,7 @@ public class BuckminsterFilesCreator {
     _builder.append(_siteFeatureProjectName, "");
     _builder.append("#site.p2\"");
     _builder.newLineIfNotEmpty();
-    IFile _writeToFile = this.writeToFile(_builder, BuckminsterFilesCreator.COMMANDS_FILE_NAME);
-    return _writeToFile;
+    return this.writeToFile(_builder, BuckminsterFilesCreator.COMMANDS_FILE_NAME);
   }
   
   /**
@@ -142,8 +140,7 @@ public class BuckminsterFilesCreator {
     _builder.newLine();
     _builder.append("</cs:cspec>");
     _builder.newLine();
-    IFile _writeToFile = this.writeToFile(_builder, BuckminsterFilesCreator.CSPEC_FILE_NAME);
-    return _writeToFile;
+    return this.writeToFile(_builder, BuckminsterFilesCreator.CSPEC_FILE_NAME);
   }
   
   /**
@@ -166,8 +163,7 @@ public class BuckminsterFilesCreator {
     _builder.newLineIfNotEmpty();
     _builder.append("</cq:componentQuery>");
     _builder.newLine();
-    IFile _writeToFile = this.writeToFile(_builder, BuckminsterFilesCreator.PROJECT_CQUERY_NAME);
-    return _writeToFile;
+    return this.writeToFile(_builder, BuckminsterFilesCreator.PROJECT_CQUERY_NAME);
   }
   
   /**
@@ -203,8 +199,7 @@ public class BuckminsterFilesCreator {
     _builder.append("</cq:componentQuery>");
     _builder.newLine();
     _builder.newLine();
-    IFile _writeToFile = this.writeToFile(_builder, BuckminsterFilesCreator.PLATFORM_CQUERY_NAME);
-    return _writeToFile;
+    return this.writeToFile(_builder, BuckminsterFilesCreator.PLATFORM_CQUERY_NAME);
   }
   
   /**
@@ -302,8 +297,7 @@ public class BuckminsterFilesCreator {
     _builder.newLine();
     _builder.append("</rm:rmap>");
     _builder.newLine();
-    IFile _writeToFile = this.writeToFile(_builder, BuckminsterFilesCreator.PLATFORM_RMAP_NAME);
-    return _writeToFile;
+    return this.writeToFile(_builder, BuckminsterFilesCreator.PLATFORM_RMAP_NAME);
   }
   
   /**
@@ -355,8 +349,7 @@ public class BuckminsterFilesCreator {
     _builder.newLine();
     _builder.append("</rm:rmap>");
     _builder.newLine();
-    IFile _writeToFile = this.writeToFile(_builder, BuckminsterFilesCreator.PROJECT_RMAP_NAME);
-    return _writeToFile;
+    return this.writeToFile(_builder, BuckminsterFilesCreator.PROJECT_RMAP_NAME);
   }
   
   /**
@@ -428,7 +421,6 @@ public class BuckminsterFilesCreator {
     _builder.newLine();
     _builder.append("</launchConfiguration>");
     _builder.newLine();
-    IFile _writeToFile = this.writeToFile(_builder, BuckminsterFilesCreator.INSTALL_BUCKY_LAUNCH);
-    return _writeToFile;
+    return this.writeToFile(_builder, BuckminsterFilesCreator.INSTALL_BUCKY_LAUNCH);
   }
 }

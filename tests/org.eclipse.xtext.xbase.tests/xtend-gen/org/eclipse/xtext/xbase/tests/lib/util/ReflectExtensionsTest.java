@@ -2,7 +2,6 @@ package org.eclipse.xtext.xbase.tests.lib.util;
 
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.junit.Assert;
@@ -11,19 +10,9 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ReflectExtensionsTest {
   @Extension
-  public ReflectExtensions ext = new Function0<ReflectExtensions>() {
-    public ReflectExtensions apply() {
-      ReflectExtensions _reflectExtensions = new ReflectExtensions();
-      return _reflectExtensions;
-    }
-  }.apply();
+  public ReflectExtensions ext = new ReflectExtensions();
   
-  private ReflectExtensions privateExt = new Function0<ReflectExtensions>() {
-    public ReflectExtensions apply() {
-      ReflectExtensions _reflectExtensions = new ReflectExtensions();
-      return _reflectExtensions;
-    }
-  }.apply();
+  private ReflectExtensions privateExt = new ReflectExtensions();
   
   @Test
   public void testInvoke_01() {
@@ -77,8 +66,7 @@ public class ReflectExtensionsTest {
   @Test
   public void testInvokeWithOverloadedMethods() {
     try {
-      StringBuilder _stringBuilder = new StringBuilder();
-      final StringBuilder x = _stringBuilder;
+      final StringBuilder x = new StringBuilder();
       try {
         this.ext.invoke(x, "append", "foo");
         Assert.fail();
@@ -126,8 +114,7 @@ public class ReflectExtensionsTest {
   @Test
   public void testGet_01() {
     try {
-      ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
-      final ReflectExtensionsTest x = _reflectExtensionsTest;
+      final ReflectExtensionsTest x = new ReflectExtensionsTest();
       Object _get = this.ext.<Object>get(x, "ext");
       Assert.assertNotNull(_get);
     } catch (Throwable _e) {
@@ -138,8 +125,7 @@ public class ReflectExtensionsTest {
   @Test
   public void testGet_02() {
     try {
-      ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
-      final ReflectExtensionsTest x = _reflectExtensionsTest;
+      final ReflectExtensionsTest x = new ReflectExtensionsTest();
       try {
         Object _get = this.ext.<Object>get(x, "foo");
         Assert.assertNotNull(_get);
@@ -159,8 +145,7 @@ public class ReflectExtensionsTest {
   @Test
   public void testGet_03() {
     try {
-      ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
-      final ReflectExtensionsTest x = _reflectExtensionsTest;
+      final ReflectExtensionsTest x = new ReflectExtensionsTest();
       Object _get = this.ext.<Object>get(x, "privateExt");
       Assert.assertSame(x.privateExt, _get);
     } catch (Throwable _e) {
@@ -171,8 +156,7 @@ public class ReflectExtensionsTest {
   @Test
   public void testSet_01() {
     try {
-      ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
-      final ReflectExtensionsTest x = _reflectExtensionsTest;
+      final ReflectExtensionsTest x = new ReflectExtensionsTest();
       this.ext.set(x, "ext", null);
       Assert.assertNull(x.ext);
     } catch (Throwable _e) {
@@ -183,8 +167,7 @@ public class ReflectExtensionsTest {
   @Test
   public void testSet_02() {
     try {
-      ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
-      final ReflectExtensionsTest x = _reflectExtensionsTest;
+      final ReflectExtensionsTest x = new ReflectExtensionsTest();
       try {
         this.ext.set(x, "foo", "bar");
         Assert.fail();
@@ -203,8 +186,7 @@ public class ReflectExtensionsTest {
   @Test
   public void testSet_03() {
     try {
-      ReflectExtensionsTest _reflectExtensionsTest = new ReflectExtensionsTest();
-      final ReflectExtensionsTest x = _reflectExtensionsTest;
+      final ReflectExtensionsTest x = new ReflectExtensionsTest();
       this.ext.set(x, "privateExt", null);
       Assert.assertNull(x.privateExt);
     } catch (Throwable _e) {

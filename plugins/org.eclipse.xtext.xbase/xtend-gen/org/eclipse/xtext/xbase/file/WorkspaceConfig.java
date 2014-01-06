@@ -24,8 +24,7 @@ public class WorkspaceConfig {
   public ProjectConfig addProjectConfig(final ProjectConfig config) {
     Map<String,ProjectConfig> _projects = this.getProjects();
     String _name = config.getName();
-    ProjectConfig _put = _projects.put(_name, config);
-    return _put;
+    return _projects.put(_name, config);
   }
   
   public WorkspaceConfig(final String absoluteFileSystemPath) {

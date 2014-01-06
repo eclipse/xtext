@@ -91,8 +91,7 @@ public abstract class AbstractURIHandlerTest extends Assert {
     try {
       byte[] _xblockexpression = null;
       {
-        ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream(1024);
-        final ByteArrayOutputStream out = _byteArrayOutputStream;
+        final ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
         resource.save(out, null);
         final byte[] bytes = out.toByteArray();
         _xblockexpression = (bytes);
@@ -105,8 +104,7 @@ public abstract class AbstractURIHandlerTest extends Assert {
   
   protected void load(final Resource resource, final byte[] bytes) {
     try {
-      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(bytes);
-      final ByteArrayInputStream in = _byteArrayInputStream;
+      final ByteArrayInputStream in = new ByteArrayInputStream(bytes);
       ResourceSet _resourceSet = resource.getResourceSet();
       Map<Object,Object> _loadOptions = _resourceSet.getLoadOptions();
       resource.load(in, _loadOptions);
@@ -129,15 +127,13 @@ public abstract class AbstractURIHandlerTest extends Assert {
     int _size = _resources.size();
     boolean _notEquals = (_size != 2);
     if (_notEquals) {
-      UnexpectedResourcesException _unexpectedResourcesException = new UnexpectedResourcesException(otherResourceSet);
-      throw _unexpectedResourcesException;
+      throw new UnexpectedResourcesException(otherResourceSet);
     }
     final Map<EObject,Collection<EStructuralFeature.Setting>> unresolved = EcoreUtil.UnresolvedProxyCrossReferencer.find(otherResourceSet);
     boolean _isEmpty = unresolved.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      UnexpectedProxiesException _unexpectedProxiesException = new UnexpectedProxiesException(unresolved);
-      throw _unexpectedProxiesException;
+      throw new UnexpectedProxiesException(unresolved);
     }
   }
   

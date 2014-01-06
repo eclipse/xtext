@@ -38,13 +38,11 @@ public class UnconfirmedStructuralChangesDelta extends ChangedResourceDescriptio
   }
   
   public int setBuildNumber(final int buildNumber) {
-    int _buildNumber = this.buildNumber = buildNumber;
-    return _buildNumber;
+    return this.buildNumber = buildNumber;
   }
   
   public IProject getProject() {
     IJavaProject _javaProject = this.type.getJavaProject();
-    IProject _project = _javaProject.getProject();
-    return _project;
+    return _javaProject.getProject();
   }
 }

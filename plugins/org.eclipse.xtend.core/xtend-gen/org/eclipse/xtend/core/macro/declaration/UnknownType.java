@@ -32,11 +32,9 @@ public class UnknownType implements Type {
       String _xifexpression = null;
       if ((idx > 0)) {
         String _qualifiedName_1 = this.getQualifiedName();
-        String _substring = _qualifiedName_1.substring(idx);
-        _xifexpression = _substring;
+        _xifexpression = _qualifiedName_1.substring(idx);
       } else {
-        String _qualifiedName_2 = this.getQualifiedName();
-        _xifexpression = _qualifiedName_2;
+        _xifexpression = this.getQualifiedName();
       }
       _xblockexpression = (_xifexpression);
     }

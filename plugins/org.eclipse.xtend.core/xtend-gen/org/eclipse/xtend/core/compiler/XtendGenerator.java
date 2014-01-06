@@ -75,8 +75,7 @@ public class XtendGenerator extends JvmModelGenerator {
             final Function1<XtendAnnotationTarget,MemberDeclaration> _function_1 = new Function1<XtendAnnotationTarget,MemberDeclaration>() {
               public MemberDeclaration apply(final XtendAnnotationTarget it) {
                 CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
-                MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
-                return _xtendMemberDeclaration;
+                return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
               }
             };
             final List<MemberDeclaration> elements = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function_1);
@@ -100,7 +99,6 @@ public class XtendGenerator extends JvmModelGenerator {
    * Unicode escaping is handled by the {@link UnicodeAwarePostProcessor}.
    */
   public String doConvertToJavaString(final String input) {
-    String _convertToJavaString = Strings.convertToJavaString(input, false);
-    return _convertToJavaString;
+    return Strings.convertToJavaString(input, false);
   }
 }

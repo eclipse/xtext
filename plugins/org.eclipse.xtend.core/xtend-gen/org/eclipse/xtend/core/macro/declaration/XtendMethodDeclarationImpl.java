@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
@@ -35,26 +34,22 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
   public boolean isAbstract() {
     XtendFunction _delegate = this.getDelegate();
     XExpression _expression = _delegate.getExpression();
-    boolean _equals = Objects.equal(_expression, null);
-    return _equals;
+    return Objects.equal(_expression, null);
   }
   
   public boolean isFinal() {
     XtendFunction _delegate = this.getDelegate();
-    boolean _isFinal = _delegate.isFinal();
-    return _isFinal;
+    return _delegate.isFinal();
   }
   
   public boolean isOverride() {
     XtendFunction _delegate = this.getDelegate();
-    boolean _isOverride = _delegate.isOverride();
-    return _isOverride;
+    return _delegate.isOverride();
   }
   
   public boolean isStatic() {
     XtendFunction _delegate = this.getDelegate();
-    boolean _isStatic = _delegate.isStatic();
-    return _isStatic;
+    return _delegate.isStatic();
   }
   
   public boolean isSynchronized() {
@@ -77,22 +72,19 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendFunction _delegate = this.getDelegate();
     JvmTypeReference _returnType = _delegate.getReturnType();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_returnType);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_returnType);
   }
   
   public Visibility getVisibility() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendFunction _delegate = this.getDelegate();
     JvmVisibility _visibility = _delegate.getVisibility();
-    Visibility _visibility_1 = _compilationUnit.toVisibility(_visibility);
-    return _visibility_1;
+    return _compilationUnit.toVisibility(_visibility);
   }
   
   public String getSimpleName() {
     XtendFunction _delegate = this.getDelegate();
-    String _name = _delegate.getName();
-    return _name;
+    return _delegate.getName();
   }
   
   public Expression getBody() {
@@ -113,12 +105,10 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
     EList<XtendParameter> _parameters = _delegate.getParameters();
     final Function1<XtendParameter,Boolean> _function = new Function1<XtendParameter,Boolean>() {
       public Boolean apply(final XtendParameter it) {
-        boolean _isVarArgs = XtendMethodDeclarationImpl.this.isVarArgs();
-        return Boolean.valueOf(_isVarArgs);
+        return Boolean.valueOf(XtendMethodDeclarationImpl.this.isVarArgs());
       }
     };
-    boolean _exists = IterableExtensions.<XtendParameter>exists(_parameters, _function);
-    return _exists;
+    return IterableExtensions.<XtendParameter>exists(_parameters, _function);
   }
   
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
@@ -127,12 +117,10 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
     final Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl>() {
       public XtendTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
         CompilationUnitImpl _compilationUnit = XtendMethodDeclarationImpl.this.getCompilationUnit();
-        XtendTypeParameterDeclarationImpl _xtendTypeParameterDeclaration = _compilationUnit.toXtendTypeParameterDeclaration(it);
-        return _xtendTypeParameterDeclaration;
+        return _compilationUnit.toXtendTypeParameterDeclaration(it);
       }
     };
-    List<XtendTypeParameterDeclarationImpl> _map = ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(_typeParameters, _function);
-    return _map;
+    return ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(_typeParameters, _function);
   }
   
   public Iterable<? extends TypeReference> getExceptions() {
@@ -141,12 +129,10 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
       public TypeReference apply(final JvmTypeReference it) {
         CompilationUnitImpl _compilationUnit = XtendMethodDeclarationImpl.this.getCompilationUnit();
-        TypeReference _typeReference = _compilationUnit.toTypeReference(it);
-        return _typeReference;
+        return _compilationUnit.toTypeReference(it);
       }
     };
-    List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(_exceptions, _function);
-    return _map;
+    return ListExtensions.<JvmTypeReference, TypeReference>map(_exceptions, _function);
   }
   
   public Iterable<? extends ParameterDeclaration> getParameters() {
@@ -155,11 +141,9 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
     final Function1<XtendParameter,XtendParameterDeclarationImpl> _function = new Function1<XtendParameter,XtendParameterDeclarationImpl>() {
       public XtendParameterDeclarationImpl apply(final XtendParameter it) {
         CompilationUnitImpl _compilationUnit = XtendMethodDeclarationImpl.this.getCompilationUnit();
-        XtendParameterDeclarationImpl _xtendParameterDeclaration = _compilationUnit.toXtendParameterDeclaration(it);
-        return _xtendParameterDeclaration;
+        return _compilationUnit.toXtendParameterDeclaration(it);
       }
     };
-    List<XtendParameterDeclarationImpl> _map = ListExtensions.<XtendParameter, XtendParameterDeclarationImpl>map(_parameters, _function);
-    return _map;
+    return ListExtensions.<XtendParameter, XtendParameterDeclarationImpl>map(_parameters, _function);
   }
 }

@@ -35,6 +35,7 @@ public interface MutableFileSystemSupport extends FileSystemSupport {
 	 *
 	 * @param path the path to the file
 	 * @param source an input stream containing the new contents of the file
+	 * @throws IllegalArgumentException if it is not possible to set content for a given path for some reason
 	 */
 	void setContentsAsStream(Path path, InputStream source);
 	
@@ -48,10 +49,11 @@ public interface MutableFileSystemSupport extends FileSystemSupport {
 	
 	/**
 	 * Deletes the file or folder the given path points to. 
-	 * If path points to a folder this method will also delet all its contents.
+	 * If path points to a folder this method will also delete all its contents.
 	 * 
 	 * @param path
-	 * @return <code>true</code> if the resource was deleted, <code>false</code> if it didn't exist 
+	 * @return <code>true</code> if the resource was deleted, <code>false</code> if it didn't exist
+	 * @throws IllegalArgumentException if it is not possible to delete a resource for a given path for some reason 
 	 */
 	boolean delete(Path path);
 

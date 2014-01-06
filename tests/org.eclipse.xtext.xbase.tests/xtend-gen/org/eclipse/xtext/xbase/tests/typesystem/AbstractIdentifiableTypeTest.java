@@ -67,8 +67,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
           if (!_matched) {
             if (it instanceof XClosure) {
               _matched=true;
-              JvmFormalParameter _implicitParameter = ((XClosure)it).getImplicitParameter();
-              _switchResult = _implicitParameter;
+              _switchResult = ((XClosure)it).getImplicitParameter();
             }
           }
           if (!_matched) {
@@ -129,13 +128,11 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
             int _xifexpression = (int) 0;
             boolean _notEquals = (!Objects.equal(node, null));
             if (_notEquals) {
-              int _offset = node.getOffset();
-              _xifexpression = _offset;
+              _xifexpression = node.getOffset();
             } else {
               EObject _eContainer = it.eContainer();
               ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(_eContainer);
-              int _offset_1 = _findActualNodeFor.getOffset();
-              _xifexpression = _offset_1;
+              _xifexpression = _findActualNodeFor.getOffset();
             }
             _xblockexpression = (_xifexpression);
           }
@@ -157,8 +154,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
       if (_not) {
         Assert.fail(("Duplicate expression under test: " + expression));
       }
-      XExpression _expression = super.expression(expression, resolve);
-      _xblockexpression = (_expression);
+      _xblockexpression = (super.expression(expression, resolve));
     }
     return _xblockexpression;
   }

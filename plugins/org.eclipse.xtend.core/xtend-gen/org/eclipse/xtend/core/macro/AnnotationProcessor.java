@@ -16,7 +16,6 @@ import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.RegisterGlobalsContextImpl;
 import org.eclipse.xtend.core.macro.TransformationContextImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendParameterDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
@@ -75,16 +74,14 @@ public class AnnotationProcessor {
                   final Function1<XtendAnnotationTarget,MemberDeclaration> _function = new Function1<XtendAnnotationTarget,MemberDeclaration>() {
                     public MemberDeclaration apply(final XtendAnnotationTarget it) {
                       CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                      MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
-                      return _xtendMemberDeclaration;
+                      return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
                     }
                   };
                   List<MemberDeclaration> _map = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function);
                   ((RegisterGlobalsParticipant<NamedElement>)processor).doRegisterGlobals(_map, registerGlobalsCtx);
                 }
               };
-              Object _runWithCancelIndiciator = this.runWithCancelIndiciator(ctx, monitor, _function);
-              _xblockexpression_1 = (_runWithCancelIndiciator);
+              _xblockexpression_1 = (this.runWithCancelIndiciator(ctx, monitor, _function));
             }
             _switchResult = _xblockexpression_1;
           }
@@ -128,16 +125,14 @@ public class AnnotationProcessor {
                         if (it instanceof XtendMember) {
                           _matched=true;
                           CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                          MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember)it));
-                          _switchResult = _xtendMemberDeclaration;
+                          _switchResult = _compilationUnit.toXtendMemberDeclaration(((XtendMember)it));
                         }
                       }
                       if (!_matched) {
                         if (it instanceof XtendParameter) {
                           _matched=true;
                           CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                          XtendParameterDeclarationImpl _xtendParameterDeclaration = _compilationUnit.toXtendParameterDeclaration(((XtendParameter)it));
-                          _switchResult = _xtendParameterDeclaration;
+                          _switchResult = _compilationUnit.toXtendParameterDeclaration(((XtendParameter)it));
                         }
                       }
                       final Declaration xtendMember = _switchResult;
@@ -148,8 +143,7 @@ public class AnnotationProcessor {
                   ((TransformationParticipant<MutableNamedElement>)processor).doTransform(map, modifyCtx);
                 }
               };
-              Object _runWithCancelIndiciator = this.runWithCancelIndiciator(ctx, monitor, _function);
-              _xblockexpression_1 = (_runWithCancelIndiciator);
+              _xblockexpression_1 = (this.runWithCancelIndiciator(ctx, monitor, _function));
             }
             _switchResult = _xblockexpression_1;
           }
@@ -170,8 +164,7 @@ public class AnnotationProcessor {
   private Object runWithCancelIndiciator(final ActiveAnnotationContext ctx, final CancelIndicator cancelIndicator, final Runnable runnable) {
     Object _xblockexpression = null;
     {
-      AtomicBoolean _atomicBoolean = new AtomicBoolean(false);
-      final AtomicBoolean isFinished = _atomicBoolean;
+      final AtomicBoolean isFinished = new AtomicBoolean(false);
       final Runnable _function = new Runnable() {
         public void run() {
           try {

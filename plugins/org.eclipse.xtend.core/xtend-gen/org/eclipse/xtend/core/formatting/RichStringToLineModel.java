@@ -18,7 +18,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.formatting.NodeModelAccess;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -31,12 +30,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   
   private final NodeModelAccess nodeModelAccess;
   
-  private final LineModel _model = new Function0<LineModel>() {
-    public LineModel apply() {
-      LineModel _lineModel = new LineModel();
-      return _lineModel;
-    }
-  }.apply();
+  private final LineModel _model = new LineModel();
   
   public LineModel getModel() {
     return this._model;
@@ -48,12 +42,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   
   private int contentStartColumn = (-1);
   
-  private Stack<Chunk> indentationStack = new Function0<Stack<Chunk>>() {
-    public Stack<Chunk> apply() {
-      Stack<Chunk> _stack = new Stack<Chunk>();
-      return _stack;
-    }
-  }.apply();
+  private Stack<Chunk> indentationStack = new Stack<Chunk>();
   
   private boolean content = false;
   
@@ -75,11 +64,9 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   public boolean outdentThisLine() {
     boolean _xifexpression = false;
     if (this.indentNextLine) {
-      boolean _indentNextLine = this.indentNextLine = false;
-      _xifexpression = _indentNextLine;
+      _xifexpression = this.indentNextLine = false;
     } else {
-      boolean __outdentThisLine = this._outdentThisLine = true;
-      _xifexpression = __outdentThisLine;
+      _xifexpression = this._outdentThisLine = true;
     }
     return _xifexpression;
   }

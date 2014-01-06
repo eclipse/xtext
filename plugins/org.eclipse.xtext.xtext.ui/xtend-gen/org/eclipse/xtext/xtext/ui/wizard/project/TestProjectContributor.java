@@ -40,8 +40,7 @@ public class TestProjectContributor extends DefaultProjectFactoryContributor {
     _builder.append("       ");
     _builder.append(".");
     _builder.newLine();
-    IFile _writeToFile = this.writeToFile(_builder, fileWriter, "build.properties");
-    return _writeToFile;
+    return this.writeToFile(_builder, fileWriter, "build.properties");
   }
   
   private IFile contributeLaunchConfig(final IProjectFactoryContributor.IFileCreator fileWriter) {
@@ -83,7 +82,6 @@ public class TestProjectContributor extends DefaultProjectFactoryContributor {
     _builder.newLine();
     String _testProjectName_3 = this.projectInfo.getTestProjectName();
     String _plus = (_testProjectName_3 + ".launch");
-    IFile _writeToFile = this.writeToFile(_builder, fileWriter, _plus);
-    return _writeToFile;
+    return this.writeToFile(_builder, fileWriter, _plus);
   }
 }

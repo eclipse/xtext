@@ -65,8 +65,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
       final Function1<XClosure,Integer> _function = new Function1<XClosure,Integer>() {
         public Integer apply(final XClosure it) {
           ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
-          int _offset = _findActualNodeFor.getOffset();
-          return Integer.valueOf(_offset);
+          return Integer.valueOf(_findActualNodeFor.getOffset());
         }
       };
       return IterableExtensions.<XClosure, Integer>sortBy(Closures, _function);
@@ -84,8 +83,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
       if (_not) {
         Assert.fail(("Duplicate expression under test: " + expression));
       }
-      XExpression _expression = super.expression(expression, resolve);
-      _xblockexpression = (_expression);
+      _xblockexpression = (super.expression(expression, resolve));
     }
     return _xblockexpression;
   }

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
@@ -29,32 +28,27 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
       public TypeReference apply(final JvmTypeReference it) {
         CompilationUnitImpl _compilationUnit = XtendClassDeclarationImpl.this.getCompilationUnit();
-        TypeReference _typeReference = _compilationUnit.toTypeReference(it);
-        return _typeReference;
+        return _compilationUnit.toTypeReference(it);
       }
     };
-    List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(_implements, _function);
-    return _map;
+    return ListExtensions.<JvmTypeReference, TypeReference>map(_implements, _function);
   }
   
   public TypeReference getExtendedClass() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendClass _delegate = this.getDelegate();
     JvmTypeReference _extends = _delegate.getExtends();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_extends);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_extends);
   }
   
   public boolean isAbstract() {
     XtendClass _delegate = this.getDelegate();
-    boolean _isAbstract = _delegate.isAbstract();
-    return _isAbstract;
+    return _delegate.isAbstract();
   }
   
   public boolean isFinal() {
     XtendClass _delegate = this.getDelegate();
-    boolean _isFinal = _delegate.isFinal();
-    return _isFinal;
+    return _delegate.isFinal();
   }
   
   public boolean isStatic() {
@@ -71,11 +65,9 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
     final Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl>() {
       public XtendTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
         CompilationUnitImpl _compilationUnit = XtendClassDeclarationImpl.this.getCompilationUnit();
-        XtendTypeParameterDeclarationImpl _xtendTypeParameterDeclaration = _compilationUnit.toXtendTypeParameterDeclaration(it);
-        return _xtendTypeParameterDeclaration;
+        return _compilationUnit.toXtendTypeParameterDeclaration(it);
       }
     };
-    List<XtendTypeParameterDeclarationImpl> _map = ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(_typeParameters, _function);
-    return _map;
+    return ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(_typeParameters, _function);
   }
 }

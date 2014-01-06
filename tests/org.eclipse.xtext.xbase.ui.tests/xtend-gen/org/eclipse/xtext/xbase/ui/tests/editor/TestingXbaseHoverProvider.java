@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider;
 public class TestingXbaseHoverProvider extends XbaseHoverProvider {
   public XtextBrowserInformationControlInput getHoverInfo(final EObject element) {
     Region _region = new Region(0, 0);
-    XtextBrowserInformationControlInput _hoverInfo = super.getHoverInfo(element, _region, null);
-    return _hoverInfo;
+    return super.getHoverInfo(element, _region, null);
   }
 }

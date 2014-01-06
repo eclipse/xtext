@@ -143,8 +143,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       final Function1<JvmOperation,Boolean> _function_1 = new Function1<JvmOperation,Boolean>() {
         public Boolean apply(final JvmOperation it) {
           String _simpleName = it.getSimpleName();
-          boolean _equals = Objects.equal(_simpleName, property);
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(Objects.equal(_simpleName, property));
         }
       };
       final JvmOperation op = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function_1);
@@ -211,8 +210,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       _name=_class.getName();
     }
     String _plus = ("Cannot set annotation values of type " + _name);
-    IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus);
-    throw _illegalArgumentException;
+    throw new IllegalArgumentException(_plus);
   }
   
   protected void _internalSet(final String name, final String value) {
@@ -471,8 +469,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
         if (!_matched) {
           if (it instanceof XtendEnumerationValueDeclarationImpl) {
             _matched=true;
-            IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("Cannot set source elements.");
-            throw _illegalArgumentException;
+            throw new IllegalArgumentException("Cannot set source elements.");
           }
         }
       }
@@ -543,8 +540,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
         if (!_matched) {
           if (it instanceof XtendAnnotationReferenceImpl) {
             _matched=true;
-            IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("Multiple source annotations cannot be set as values. Please the the expression not the value.");
-            throw _illegalArgumentException;
+            throw new IllegalArgumentException("Multiple source annotations cannot be set as values. Please the the expression not the value.");
           }
         }
       }
@@ -568,11 +564,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
           _xifexpression = "value";
         } else {
           JvmOperation _operation_1 = it.getOperation();
-          String _simpleName = _operation_1.getSimpleName();
-          _xifexpression = _simpleName;
+          _xifexpression = _operation_1.getSimpleName();
         }
-        boolean _equals_1 = Objects.equal(_xifexpression, name);
-        return Boolean.valueOf(_equals_1);
+        return Boolean.valueOf(Objects.equal(_xifexpression, name));
       }
     };
     final JvmAnnotationValue found = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
@@ -593,8 +587,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     final Function1<JvmOperation,Boolean> _function = new Function1<JvmOperation,Boolean>() {
       public Boolean apply(final JvmOperation it) {
         String _simpleName = it.getSimpleName();
-        boolean _equals = Objects.equal(_simpleName, name);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_simpleName, name));
       }
     };
     final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function);
@@ -603,8 +596,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       String _identifier = jvmAnnoType.getIdentifier();
       String _plus = ((("The annotation property \'" + name) + "\' is not declared on the annotation type \'") + _identifier);
       String _plus_1 = (_plus + "\'.");
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus_1);
-      throw _illegalArgumentException;
+      throw new IllegalArgumentException(_plus_1);
     }
     return jvmOperation;
   }

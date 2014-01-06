@@ -18,14 +18,12 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 public class DisableCodeGenerationAdapter extends AdapterImpl {
   public boolean isAdapterForType(final Object type) {
     Class<? extends DisableCodeGenerationAdapter> _class = this.getClass();
-    boolean _equals = Objects.equal(_class, type);
-    return _equals;
+    return Objects.equal(_class, type);
   }
   
   public static boolean isDisabled(final JvmDeclaredType type) {
     Adapter _adapter = DisableCodeGenerationAdapter.getAdapter(type);
-    boolean _notEquals = (!Objects.equal(_adapter, null));
-    return _notEquals;
+    return (!Objects.equal(_adapter, null));
   }
   
   public static void disableCodeGeneration(final JvmDeclaredType declaredType) {

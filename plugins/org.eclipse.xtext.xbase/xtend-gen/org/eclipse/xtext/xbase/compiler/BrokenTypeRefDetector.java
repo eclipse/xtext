@@ -48,8 +48,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
       EList<JvmTypeReference> _references = it.getReferences();
       final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
         public Boolean apply(final JvmTypeReference it) {
-          Boolean _visit = BrokenTypeRefDetector.this.visit(it);
-          return _visit;
+          return BrokenTypeRefDetector.this.visit(it);
         }
       };
       boolean _exists = IterableExtensions.<JvmTypeReference>exists(_references, _function);
@@ -67,8 +66,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
       EList<JvmTypeReference> _arguments = it.getArguments();
       final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
         public Boolean apply(final JvmTypeReference it) {
-          Boolean _visit = BrokenTypeRefDetector.this.visit(it);
-          return _visit;
+          return BrokenTypeRefDetector.this.visit(it);
         }
       };
       boolean _exists = IterableExtensions.<JvmTypeReference>exists(_arguments, _function);
@@ -82,11 +80,9 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
     final Function1<JvmTypeConstraint,Boolean> _function = new Function1<JvmTypeConstraint,Boolean>() {
       public Boolean apply(final JvmTypeConstraint it) {
         JvmTypeReference _typeReference = it.getTypeReference();
-        Boolean _visit = BrokenTypeRefDetector.this.visit(_typeReference);
-        return _visit;
+        return BrokenTypeRefDetector.this.visit(_typeReference);
       }
     };
-    boolean _exists = IterableExtensions.<JvmTypeConstraint>exists(_constraints, _function);
-    return Boolean.valueOf(_exists);
+    return Boolean.valueOf(IterableExtensions.<JvmTypeConstraint>exists(_constraints, _function));
   }
 }

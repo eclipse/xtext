@@ -31,8 +31,7 @@ class UnicodeTerminalsGenerator {
     _builder.append("\t");
     final Function1<Integer,Boolean> _function = new Function1<Integer,Boolean>() {
       public Boolean apply(final Integer it) {
-        boolean _isJavaIdentifierStart = Character.isJavaIdentifierStart((it).intValue());
-        return Boolean.valueOf(_isJavaIdentifierStart);
+        return Boolean.valueOf(Character.isJavaIdentifierStart((it).intValue()));
       }
     };
     StringWriter _generateUnicodeRules = UnicodeTerminalsGenerator.generateUnicodeRules(_function);
@@ -79,10 +78,8 @@ class UnicodeTerminalsGenerator {
     boolean run = false;
     boolean first = true;
     char c = Character.MIN_VALUE;
-    StringWriter _stringWriter = new StringWriter();
-    final StringWriter result = _stringWriter;
-    PrintWriter _printWriter = new PrintWriter(result, true);
-    final PrintWriter printer = _printWriter;
+    final StringWriter result = new StringWriter();
+    final PrintWriter printer = new PrintWriter(result, true);
     boolean _while = true;
     while (_while) {
       {

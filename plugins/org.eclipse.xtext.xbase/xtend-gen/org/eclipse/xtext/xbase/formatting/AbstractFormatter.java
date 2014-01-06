@@ -45,8 +45,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
       IParseResult _parseResult = res.getParseResult();
       ICompositeNode _rootNode = _parseResult.getRootNode();
       final String doc = _rootNode.getText();
-      FormattableDocument _formattableDocument = new FormattableDocument(cfg, doc);
-      final FormattableDocument format = _formattableDocument;
+      final FormattableDocument format = new FormattableDocument(cfg, doc);
       EList<EObject> _contents = res.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents);
       this.format(_head, format);
@@ -59,8 +58,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
         _and = (_isDiagnoseConflicts && _isConflictOccurred);
       }
       if (_and) {
-        FormattableDocument _formattableDocument_1 = new FormattableDocument(cfg, doc);
-        final FormattableDocument debug = _formattableDocument_1;
+        final FormattableDocument debug = new FormattableDocument(cfg, doc);
         RuntimeException _runtimeException = new RuntimeException();
         debug.setRootTrace(_runtimeException);
         EList<EObject> _contents_1 = res.getContents();
@@ -83,13 +81,11 @@ public abstract class AbstractFormatter implements IBasicFormatter {
             int _plus = (_offset_1 + _length);
             String _substring = doc.substring(_offset, _plus);
             String _text = it.getText();
-            boolean _notEquals = (!Objects.equal(_substring, _text));
-            return Boolean.valueOf(_notEquals);
+            return Boolean.valueOf((!Objects.equal(_substring, _text)));
           }
         };
         Iterable<TextReplacement> _filter = IterableExtensions.<TextReplacement>filter(edits, _function);
-        List<TextReplacement> _list = IterableExtensions.<TextReplacement>toList(_filter);
-        _xifexpression = _list;
+        _xifexpression = IterableExtensions.<TextReplacement>toList(_filter);
       }
       _xblockexpression = (_xifexpression);
     }

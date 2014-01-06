@@ -32,8 +32,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class XFunctionTypeRefs {
   public static URI computeTypeUri(final boolean procedure, final int functionParamCount) {
     String _buildUri = XFunctionTypeRefs.buildUri(procedure, functionParamCount);
-    URI _createURI = URI.createURI(_buildUri);
-    return _createURI;
+    return URI.createURI(_buildUri);
   }
   
   public static String buildUri(final boolean procedure, final int functionParamCount) {
@@ -64,8 +63,7 @@ public class XFunctionTypeRefs {
   
   public static URI computeTypeUri(final Class<? extends Object> topLevelClass) {
     ClassURIHelper _classURIHelper = new ClassURIHelper();
-    URI _fullURI = _classURIHelper.getFullURI(topLevelClass);
-    return _fullURI;
+    return _classURIHelper.getFullURI(topLevelClass);
   }
   
   public static JvmTypeReference wrapIfNecessary(final JvmTypeReference reference, final JvmType type) {
@@ -88,8 +86,7 @@ public class XFunctionTypeRefs {
                 it.setType(wrappedType);
               }
             };
-            JvmParameterizedTypeReference _doubleArrow = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
-            _xifexpression = _doubleArrow;
+            _xifexpression = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
           }
           _xblockexpression = (_xifexpression);
         }
@@ -109,8 +106,7 @@ public class XFunctionTypeRefs {
               it.setType(_type);
             }
           };
-          JvmParameterizedTypeReference _doubleArrow = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
-          _switchResult = _doubleArrow;
+          _switchResult = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
         }
       }
     }
@@ -130,64 +126,56 @@ public class XFunctionTypeRefs {
         boolean _equals = "int".equals(name);
         if (_equals) {
           _matched=true;
-          JvmType _type = XFunctionTypeRefs.getType(Integer.class, type);
-          _switchResult = _type;
+          _switchResult = XFunctionTypeRefs.getType(Integer.class, type);
         }
       }
       if (!_matched) {
         boolean _equals_1 = "boolean".equals(name);
         if (_equals_1) {
           _matched=true;
-          JvmType _type_1 = XFunctionTypeRefs.getType(Boolean.class, type);
-          _switchResult = _type_1;
+          _switchResult = XFunctionTypeRefs.getType(Boolean.class, type);
         }
       }
       if (!_matched) {
         boolean _equals_2 = "char".equals(name);
         if (_equals_2) {
           _matched=true;
-          JvmType _type_2 = XFunctionTypeRefs.getType(Character.class, type);
-          _switchResult = _type_2;
+          _switchResult = XFunctionTypeRefs.getType(Character.class, type);
         }
       }
       if (!_matched) {
         boolean _equals_3 = "long".equals(name);
         if (_equals_3) {
           _matched=true;
-          JvmType _type_3 = XFunctionTypeRefs.getType(Long.class, type);
-          _switchResult = _type_3;
+          _switchResult = XFunctionTypeRefs.getType(Long.class, type);
         }
       }
       if (!_matched) {
         boolean _equals_4 = "double".equals(name);
         if (_equals_4) {
           _matched=true;
-          JvmType _type_4 = XFunctionTypeRefs.getType(Double.class, type);
-          _switchResult = _type_4;
+          _switchResult = XFunctionTypeRefs.getType(Double.class, type);
         }
       }
       if (!_matched) {
         boolean _equals_5 = "byte".equals(name);
         if (_equals_5) {
           _matched=true;
-          JvmType _type_5 = XFunctionTypeRefs.getType(Byte.class, type);
-          _switchResult = _type_5;
+          _switchResult = XFunctionTypeRefs.getType(Byte.class, type);
         }
       }
       if (!_matched) {
         boolean _equals_6 = "float".equals(name);
         if (_equals_6) {
           _matched=true;
-          JvmType _type_6 = XFunctionTypeRefs.getType(Float.class, type);
-          _switchResult = _type_6;
+          _switchResult = XFunctionTypeRefs.getType(Float.class, type);
         }
       }
       if (!_matched) {
         boolean _equals_7 = "short".equals(name);
         if (_equals_7) {
           _matched=true;
-          JvmType _type_7 = XFunctionTypeRefs.getType(Short.class, type);
-          _switchResult = _type_7;
+          _switchResult = XFunctionTypeRefs.getType(Short.class, type);
         }
       }
       if (!_matched) {

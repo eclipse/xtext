@@ -14,7 +14,6 @@ import java.io.File;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -26,14 +25,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
-  private File _workspaceRoot = new Function0<File>() {
-    public File apply() {
-      File _file = new File(".");
-      File _absoluteFile = _file.getAbsoluteFile();
-      File _parentFile = _absoluteFile.getParentFile();
-      return _parentFile;
-    }
-  }.apply();
+  private File _workspaceRoot = new File(".").getAbsoluteFile().getParentFile();
   
   public File getWorkspaceRoot() {
     return this._workspaceRoot;
@@ -66,8 +58,7 @@ public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig>
           File[] _listFiles = _workspaceRoot.listFiles();
           final Function1<File,Boolean> _function = new Function1<File,Boolean>() {
             public Boolean apply(final File it) {
-              boolean _isDirectory = it.isDirectory();
-              return Boolean.valueOf(_isDirectory);
+              return Boolean.valueOf(it.isDirectory());
             }
           };
           Iterable<File> _filter = IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(_listFiles)), _function);

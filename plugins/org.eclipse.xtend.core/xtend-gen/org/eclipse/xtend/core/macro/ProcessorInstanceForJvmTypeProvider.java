@@ -53,8 +53,7 @@ public class ProcessorInstanceForJvmTypeProvider {
         String _plus_1 = (_plus + " : ");
         String _message = e.getMessage();
         String _plus_2 = (_plus_1 + _message);
-        IllegalStateException _illegalStateException = new IllegalStateException(_plus_2, e);
-        throw _illegalStateException;
+        throw new IllegalStateException(_plus_2, e);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

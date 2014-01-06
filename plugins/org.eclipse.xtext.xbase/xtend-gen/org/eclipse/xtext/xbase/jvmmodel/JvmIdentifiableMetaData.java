@@ -16,7 +16,6 @@ public class JvmIdentifiableMetaData extends AdapterImpl {
   }
   
   public boolean isAdapterForType(final Object type) {
-    boolean _equals = Objects.equal(JvmIdentifiableMetaData.class, type);
-    return _equals;
+    return Objects.equal(JvmIdentifiableMetaData.class, type);
   }
 }

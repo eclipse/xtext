@@ -10,8 +10,7 @@ public class Xbase09_Exceptions {
       } catch (final Throwable _t) {
         if (_t instanceof NullPointerException) {
           final NullPointerException e = (NullPointerException)_t;
-          RuntimeException _runtimeException = new RuntimeException(e);
-          throw _runtimeException;
+          throw new RuntimeException(e);
         } else {
           throw Exceptions.sneakyThrow(_t);
         }

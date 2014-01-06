@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
@@ -23,12 +22,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class RecursionGuardTest {
   @Extension
-  private ReflectExtensions _reflectExtensions = new Function0<ReflectExtensions>() {
-    public ReflectExtensions apply() {
-      ReflectExtensions _reflectExtensions = new ReflectExtensions();
-      return _reflectExtensions;
-    }
-  }.apply();
+  private ReflectExtensions _reflectExtensions = new ReflectExtensions();
   
   @Test
   public void tryNextAndDoneYieldsEmpty() {

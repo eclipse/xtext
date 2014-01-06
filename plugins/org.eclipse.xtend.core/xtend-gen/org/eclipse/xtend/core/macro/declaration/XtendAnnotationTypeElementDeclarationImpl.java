@@ -21,8 +21,7 @@ import org.eclipse.xtext.xbase.XExpression;
 public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> implements AnnotationTypeElementDeclaration {
   public String getSimpleName() {
     XtendField _delegate = this.getDelegate();
-    String _name = _delegate.getName();
-    return _name;
+    return _delegate.getName();
   }
   
   public Object getDefaultValue() {
@@ -39,8 +38,7 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
       XExpression _initialValue_1 = _delegate_1.getInitialValue();
       XtendField _delegate_2 = this.getDelegate();
       JvmTypeReference _type = _delegate_2.getType();
-      Object _evaluate = _compilationUnit.evaluate(_initialValue_1, _type);
-      _xblockexpression = (_evaluate);
+      _xblockexpression = (_compilationUnit.evaluate(_initialValue_1, _type));
     }
     return _xblockexpression;
   }
@@ -57,8 +55,7 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
       XtendField _delegate_1 = this.getDelegate();
       XExpression _initialValue_1 = _delegate_1.getInitialValue();
-      Expression _expression = _compilationUnit.toExpression(_initialValue_1);
-      _xblockexpression = (_expression);
+      _xblockexpression = (_compilationUnit.toExpression(_initialValue_1));
     }
     return _xblockexpression;
   }
@@ -67,7 +64,6 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendField _delegate = this.getDelegate();
     JvmTypeReference _type = _delegate.getType();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_type);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_type);
   }
 }

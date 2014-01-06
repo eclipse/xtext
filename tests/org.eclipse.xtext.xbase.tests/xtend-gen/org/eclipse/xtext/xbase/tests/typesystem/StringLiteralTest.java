@@ -74,8 +74,7 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
       final Function1<XStringLiteral,Integer> _function = new Function1<XStringLiteral,Integer>() {
         public Integer apply(final XStringLiteral it) {
           ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
-          int _offset = _findActualNodeFor.getOffset();
-          return Integer.valueOf(_offset);
+          return Integer.valueOf(_findActualNodeFor.getOffset());
         }
       };
       return IterableExtensions.<XStringLiteral, Integer>sortBy(featureCalls, _function);

@@ -24,14 +24,12 @@ public class XtendParameterDeclarationImpl extends XtendAnnotationTargetImpl<Xte
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendParameter _delegate = this.getDelegate();
     JvmTypeReference _parameterType = _delegate.getParameterType();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_parameterType);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_parameterType);
   }
   
   public String getSimpleName() {
     XtendParameter _delegate = this.getDelegate();
-    String _name = _delegate.getName();
-    return _name;
+    return _delegate.getName();
   }
   
   public ExecutableDeclaration getDeclaringExecutable() {

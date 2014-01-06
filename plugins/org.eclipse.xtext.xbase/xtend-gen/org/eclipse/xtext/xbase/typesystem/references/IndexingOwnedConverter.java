@@ -57,8 +57,7 @@ public class IndexingOwnedConverter extends OwnedConverter {
     Class<? extends JvmTypeReference> _class = it.getClass();
     String _name = _class.getName();
     _builder.append(_name, "");
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_builder.toString());
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException(_builder.toString());
   }
   
   protected JvmType _getType(final JvmGenericArrayTypeReferenceImplCustom it) {
@@ -76,8 +75,7 @@ public class IndexingOwnedConverter extends OwnedConverter {
       if (!_matched) {
         if (componentType instanceof JvmComponentType) {
           _matched=true;
-          JvmArrayType _arrayType = ((JvmComponentType)componentType).getArrayType();
-          _switchResult = _arrayType;
+          _switchResult = ((JvmComponentType)componentType).getArrayType();
         }
       }
       if (!_matched) {
@@ -89,13 +87,11 @@ public class IndexingOwnedConverter extends OwnedConverter {
   }
   
   protected JvmType _getType(final JvmParameterizedTypeReference it) {
-    JvmType _type = this.getType(it, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-    return _type;
+    return this.getType(it, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
   }
   
   protected JvmType _getType(final XFunctionTypeRef it) {
-    JvmType _type = this.getType(it, XtypePackage.Literals.XFUNCTION_TYPE_REF__TYPE);
-    return _type;
+    return this.getType(it, XtypePackage.Literals.XFUNCTION_TYPE_REF__TYPE);
   }
   
   protected JvmType _getType(final XFunctionTypeRefImplCustom it) {
@@ -164,8 +160,7 @@ public class IndexingOwnedConverter extends OwnedConverter {
   public LightweightTypeReference doVisitFunctionTypeReference(final XFunctionTypeRef reference) {
     ITypeReferenceOwner _owner = this.getOwner();
     JvmType _type = this.getType(reference);
-    FunctionTypeReference _functionTypeReference = new FunctionTypeReference(_owner, _type);
-    final FunctionTypeReference result = _functionTypeReference;
+    final FunctionTypeReference result = new FunctionTypeReference(_owner, _type);
     EList<JvmTypeReference> _paramTypes = reference.getParamTypes();
     for (final JvmTypeReference parameter : _paramTypes) {
       {
@@ -173,8 +168,7 @@ public class IndexingOwnedConverter extends OwnedConverter {
         final LightweightTypeReference parameterType = this.visit(_wrapIfNecessary);
         result.addParameterType(parameterType);
         ITypeReferenceOwner _owner_1 = this.getOwner();
-        WildcardTypeReference _wildcardTypeReference = new WildcardTypeReference(_owner_1);
-        final WildcardTypeReference typeArgument = _wildcardTypeReference;
+        final WildcardTypeReference typeArgument = new WildcardTypeReference(_owner_1);
         typeArgument.setLowerBound(parameterType);
         ParameterizedTypeReference _javaLangObjectTypeReference = this.getJavaLangObjectTypeReference(reference);
         typeArgument.addUpperBound(_javaLangObjectTypeReference);
@@ -189,8 +183,7 @@ public class IndexingOwnedConverter extends OwnedConverter {
       final LightweightTypeReference returnType = this.visit(_wrapIfNecessary);
       result.setReturnType(returnType);
       ITypeReferenceOwner _owner_1 = this.getOwner();
-      WildcardTypeReference _wildcardTypeReference = new WildcardTypeReference(_owner_1);
-      final WildcardTypeReference typeArgument = _wildcardTypeReference;
+      final WildcardTypeReference typeArgument = new WildcardTypeReference(_owner_1);
       typeArgument.addUpperBound(returnType);
       result.addTypeArgument(typeArgument);
     }
@@ -205,8 +198,7 @@ public class IndexingOwnedConverter extends OwnedConverter {
         return null;
       }
       final JvmType type = this.getType(reference);
-      JvmTypeReference _wrapIfNecessary = XFunctionTypeRefs.wrapIfNecessary(reference, type);
-      _xblockexpression = (_wrapIfNecessary);
+      _xblockexpression = (XFunctionTypeRefs.wrapIfNecessary(reference, type));
     }
     return _xblockexpression;
   }
@@ -217,8 +209,7 @@ public class IndexingOwnedConverter extends OwnedConverter {
     CommonTypeComputationServices _services = _owner_1.getServices();
     TypeReferences _typeReferences = _services.getTypeReferences();
     JvmType _findDeclaredType = _typeReferences.findDeclaredType(Object.class, reference);
-    ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(_owner, _findDeclaredType);
-    return _parameterizedTypeReference;
+    return new ParameterizedTypeReference(_owner, _findDeclaredType);
   }
   
   public JvmType getType(final JvmTypeReference it) {

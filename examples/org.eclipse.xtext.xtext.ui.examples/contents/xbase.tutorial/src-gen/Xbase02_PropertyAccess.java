@@ -4,8 +4,7 @@ import java.util.Collections;
 @SuppressWarnings("all")
 public class Xbase02_PropertyAccess {
   public void myMethod() throws Throwable {
-    Person _person = new Person();
-    final Person person = _person;
+    final Person person = new Person();
     person.setForename("Jimi");
     person.setName("Hendrix");
     String _forename = person.getForename();

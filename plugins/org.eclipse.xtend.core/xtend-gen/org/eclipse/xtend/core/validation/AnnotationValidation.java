@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.validation;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
@@ -43,8 +42,7 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
   private AnnotationValueValidator annotationValueValidator;
   
   protected List<EPackage> getEPackages() {
-    ArrayList<EPackage> _newArrayList = CollectionLiterals.<EPackage>newArrayList(XtendPackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
-    return _newArrayList;
+    return CollectionLiterals.<EPackage>newArrayList(XtendPackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
   }
   
   @Check
@@ -86,8 +84,7 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
     if (!_matched) {
       if (reference instanceof JvmGenericArrayTypeReference) {
         _matched=true;
-        JvmTypeReference _componentType = ((JvmGenericArrayTypeReference)reference).getComponentType();
-        _switchResult = _componentType;
+        _switchResult = ((JvmGenericArrayTypeReference)reference).getComponentType();
       }
     }
     if (!_matched) {

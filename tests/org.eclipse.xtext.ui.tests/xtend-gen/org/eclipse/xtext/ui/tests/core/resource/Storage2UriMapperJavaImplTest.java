@@ -71,8 +71,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       Set<String> _keySet = cachedPackageFragmentRootData.keySet();
       final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
         public Boolean apply(final String it) {
-          boolean _contains = it.contains("foo.jar");
-          return Boolean.valueOf(_contains);
+          return Boolean.valueOf(it.contains("foo.jar"));
         }
       };
       String _findFirst = IterableExtensions.<String>findFirst(_keySet, _function);
@@ -85,8 +84,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       Set<String> _keySet_1 = cachedPackageFragmentRootData.keySet();
       final Function1<String,Boolean> _function_1 = new Function1<String,Boolean>() {
         public Boolean apply(final String it) {
-          boolean _contains = it.contains("foo.jar");
-          return Boolean.valueOf(_contains);
+          return Boolean.valueOf(it.contains("foo.jar"));
         }
       };
       String _findFirst_1 = IterableExtensions.<String>findFirst(_keySet_1, _function_1);
@@ -114,8 +112,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       Set<String> _keySet_2 = cachedPackageFragmentRootData.keySet();
       final Function1<String,Boolean> _function_3 = new Function1<String,Boolean>() {
         public Boolean apply(final String it) {
-          boolean _contains = it.contains("foo.jar");
-          return Boolean.valueOf(_contains);
+          return Boolean.valueOf(it.contains("foo.jar"));
         }
       };
       String _findFirst_2 = IterableExtensions.<String>findFirst(_keySet_2, _function_3);
@@ -162,8 +159,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       Set<String> _keySet_3 = cachedPackageFragmentRootData.keySet();
       final Function1<String,Boolean> _function_5 = new Function1<String,Boolean>() {
         public Boolean apply(final String it) {
-          boolean _contains = it.contains("foo.jar");
-          return Boolean.valueOf(_contains);
+          return Boolean.valueOf(it.contains("foo.jar"));
         }
       };
       String _findFirst_3 = IterableExtensions.<String>findFirst(_keySet_3, _function_5);
@@ -224,8 +220,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       Set<String> _keySet_4 = cachedPackageFragmentRootData.keySet();
       final Function1<String,Boolean> _function_7 = new Function1<String,Boolean>() {
         public Boolean apply(final String it) {
-          boolean _contains = it.contains("foo.jar");
-          return Boolean.valueOf(_contains);
+          return Boolean.valueOf(it.contains("foo.jar"));
         }
       };
       String _findFirst_4 = IterableExtensions.<String>findFirst(_keySet_4, _function_7);
@@ -335,8 +330,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       Set<String> _keySet = _cachedPackageFragmentRootData_2.keySet();
       final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
         public Boolean apply(final String it) {
-          boolean _contains = it.contains("foo.jar");
-          return Boolean.valueOf(_contains);
+          return Boolean.valueOf(it.contains("foo.jar"));
         }
       };
       String _findFirst = IterableExtensions.<String>findFirst(_keySet, _function);
@@ -374,8 +368,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       Set<String> _keySet = _cachedPackageFragmentRootData_2.keySet();
       final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
         public Boolean apply(final String it) {
-          boolean _contains = it.contains("foo.jar");
-          return Boolean.valueOf(_contains);
+          return Boolean.valueOf(it.contains("foo.jar"));
         }
       };
       String _findFirst = IterableExtensions.<String>findFirst(_keySet, _function);
@@ -437,8 +430,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
         }
       }
     };
-    IFile _doubleArrow = ObjectExtensions.<IFile>operator_doubleArrow(_file, _function);
-    return _doubleArrow;
+    return ObjectExtensions.<IFile>operator_doubleArrow(_file, _function);
   }
   
   public Map<String,Storage2UriMapperJavaImpl.PackageFragmentRootData> getCachedPackageFragmentRootData() {
@@ -448,8 +440,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       final Function1<Field,Boolean> _function = new Function1<Field,Boolean>() {
         public Boolean apply(final Field it) {
           String _name = it.getName();
-          boolean _equals = Objects.equal(_name, "cachedPackageFragmentRootData");
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(Objects.equal(_name, "cachedPackageFragmentRootData"));
         }
       };
       Field _findFirst = IterableExtensions.<Field>findFirst(((Iterable<Field>)Conversions.doWrapArray(_declaredFields)), _function);

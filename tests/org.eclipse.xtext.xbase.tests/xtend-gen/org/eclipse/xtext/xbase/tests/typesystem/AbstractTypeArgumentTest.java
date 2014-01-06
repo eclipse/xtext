@@ -106,8 +106,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
       if (_not) {
         Assert.fail(("Duplicate expression under test: " + expression));
       }
-      XExpression _expression = super.expression(string, resolve);
-      _xblockexpression = (_expression);
+      _xblockexpression = (super.expression(string, resolve));
     }
     return _xblockexpression;
   }
@@ -157,8 +156,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
                       _matched_1=true;
                       EList<JvmTypeParameter> _typeParameters = ((JvmTypeParameterDeclarator)feature).getTypeParameters();
                       boolean _isEmpty_1 = _typeParameters.isEmpty();
-                      boolean _not_3 = (!_isEmpty_1);
-                      _switchResult_1 = _not_3;
+                      _switchResult_1 = (!_isEmpty_1);
                     }
                   }
                   if (!_matched_1) {

@@ -47,7 +47,6 @@ public class ActiveAnnotationContexts extends AdapterImpl {
   public static ActiveAnnotationContexts find(final Resource resource) {
     EList<Adapter> _eAdapters = resource.eAdapters();
     Iterable<ActiveAnnotationContexts> _filter = Iterables.<ActiveAnnotationContexts>filter(_eAdapters, ActiveAnnotationContexts.class);
-    ActiveAnnotationContexts _head = IterableExtensions.<ActiveAnnotationContexts>head(_filter);
-    return _head;
+    return IterableExtensions.<ActiveAnnotationContexts>head(_filter);
   }
 }

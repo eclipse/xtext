@@ -46,8 +46,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     String _languageNameAbbreviation = this.projectInfo.getLanguageNameAbbreviation();
     String _plus_2 = (_plus_1 + _languageNameAbbreviation);
     String _plus_3 = (_plus_2 + ".mwe2");
-    IFile _writeToFile = creator.writeToFile(_workflow, _plus_3);
-    return _writeToFile;
+    return creator.writeToFile(_workflow, _plus_3);
   }
   
   public IFile createGrammarFile(final IProjectFactoryContributor.IFileCreator creator) {
@@ -55,8 +54,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     CharSequence _grammar = _ecore2XtextGrammarCreator.grammar(this.projectInfo);
     String _grammarFilePath = this.projectInfo.getGrammarFilePath();
     String _plus = ((this.modelFolder + "/") + _grammarFilePath);
-    IFile _writeToFile = creator.writeToFile(_grammar, _plus);
-    return _writeToFile;
+    return creator.writeToFile(_grammar, _plus);
   }
   
   private CharSequence workflow() {
@@ -115,8 +113,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
       Collection<EPackageInfo> _ePackageInfos = this.projectInfo.getEPackageInfos();
       final Function1<EPackageInfo,String> _function = new Function1<EPackageInfo,String>() {
         public String apply(final EPackageInfo it) {
-          String _ePackageJavaFQN = it.getEPackageJavaFQN();
-          return _ePackageJavaFQN;
+          return it.getEPackageJavaFQN();
         }
       };
       Iterable<String> _map = IterableExtensions.<EPackageInfo, String>map(_ePackageInfos, _function);
@@ -134,8 +131,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
       final Function1<EPackageInfo,String> _function_1 = new Function1<EPackageInfo,String>() {
         public String apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
-          String _string = _genmodelURI.toString();
-          return _string;
+          return _genmodelURI.toString();
         }
       };
       Iterable<String> _map_1 = IterableExtensions.<EPackageInfo, String>map(_ePackageInfos_1, _function_1);

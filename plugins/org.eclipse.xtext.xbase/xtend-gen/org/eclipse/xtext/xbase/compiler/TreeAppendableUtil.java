@@ -17,15 +17,13 @@ public class TreeAppendableUtil {
   private ILocationInFileProvider locationProvider;
   
   public ITreeAppendable traceSignificant(final ITreeAppendable appendable, final EObject source) {
-    ITreeAppendable _traceSignificant = this.traceSignificant(appendable, source, false);
-    return _traceSignificant;
+    return this.traceSignificant(appendable, source, false);
   }
   
   public ITreeAppendable traceSignificant(final ITreeAppendable appendable, final EObject source, final boolean useForDebugging) {
     ITreeAppendable _xifexpression = null;
     if ((appendable instanceof TreeAppendable)) {
-      TreeAppendable _trace = ((TreeAppendable) appendable).trace(source, ILocationInFileProviderExtension.RegionDescription.SIGNIFICANT, useForDebugging);
-      _xifexpression = _trace;
+      _xifexpression = ((TreeAppendable) appendable).trace(source, ILocationInFileProviderExtension.RegionDescription.SIGNIFICANT, useForDebugging);
     } else {
       ITreeAppendable _xblockexpression = null;
       {
@@ -39,8 +37,7 @@ public class TreeAppendableUtil {
           int _lineNumber = it.getLineNumber();
           int _endLineNumber = it.getEndLineNumber();
           LocationData _locationData = new LocationData(_offset, _length, _lineNumber, _endLineNumber, null);
-          ITreeAppendable _trace_1 = appendable.trace(_locationData, useForDebugging);
-          _xifexpression_1 = _trace_1;
+          _xifexpression_1 = appendable.trace(_locationData, useForDebugging);
         } else {
           _xifexpression_1 = appendable;
         }
@@ -54,8 +51,7 @@ public class TreeAppendableUtil {
   public ITreeAppendable traceWithComments(final ITreeAppendable appendable, final EObject source) {
     ITreeAppendable _xifexpression = null;
     if ((appendable instanceof TreeAppendable)) {
-      TreeAppendable _trace = ((TreeAppendable) appendable).trace(source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS, false);
-      _xifexpression = _trace;
+      _xifexpression = ((TreeAppendable) appendable).trace(source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS, false);
     } else {
       ITreeAppendable _xblockexpression = null;
       {
@@ -65,13 +61,11 @@ public class TreeAppendableUtil {
         if (!_matched) {
           if (locationProvider instanceof ILocationInFileProviderExtension) {
             _matched=true;
-            ITextRegion _textRegion = ((ILocationInFileProviderExtension)this.locationProvider).getTextRegion(source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS);
-            _switchResult = _textRegion;
+            _switchResult = ((ILocationInFileProviderExtension)this.locationProvider).getTextRegion(source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS);
           }
         }
         if (!_matched) {
-          ITextRegion _fullTextRegion = this.locationProvider.getFullTextRegion(source);
-          _switchResult = _fullTextRegion;
+          _switchResult = this.locationProvider.getFullTextRegion(source);
         }
         final ITextRegionWithLineInformation it = ((ITextRegionWithLineInformation) _switchResult);
         ITreeAppendable _xifexpression_1 = null;
@@ -82,8 +76,7 @@ public class TreeAppendableUtil {
           int _lineNumber = it.getLineNumber();
           int _endLineNumber = it.getEndLineNumber();
           LocationData _locationData = new LocationData(_offset, _length, _lineNumber, _endLineNumber, null);
-          ITreeAppendable _trace_1 = appendable.trace(_locationData);
-          _xifexpression_1 = _trace_1;
+          _xifexpression_1 = appendable.trace(_locationData);
         } else {
           _xifexpression_1 = appendable;
         }

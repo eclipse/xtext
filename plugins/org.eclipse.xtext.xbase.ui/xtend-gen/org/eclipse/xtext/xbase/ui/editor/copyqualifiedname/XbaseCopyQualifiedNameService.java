@@ -50,13 +50,11 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
   private IBatchTypeResolver typeResolver;
   
   protected String _getQualifiedName(final JvmExecutable it, final EObject context) {
-    String _qualifiedName = this.toQualifiedName(it);
-    return _qualifiedName;
+    return this.toQualifiedName(it);
   }
   
   protected String _getQualifiedName(final JvmExecutable it, final Void context) {
-    String _qualifiedName = this.toQualifiedName(it);
-    return _qualifiedName;
+    return this.toQualifiedName(it);
   }
   
   protected String toQualifiedName(final JvmExecutable it) {
@@ -68,8 +66,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     final Function1<JvmFormalParameter,String> _function = new Function1<JvmFormalParameter,String>() {
       public String apply(final JvmFormalParameter it) {
         JvmTypeReference _parameterType = it.getParameterType();
-        String _simpleName = _parameterType.getSimpleName();
-        return _simpleName;
+        return _parameterType.getSimpleName();
       }
     };
     CharSequence _qualifiedNames = this.<JvmFormalParameter>toQualifiedNames(_parameters, _function);
@@ -91,8 +88,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
       final Function1<XExpression,String> _function = new Function1<XExpression,String>() {
         public String apply(final XExpression it) {
           EList<XExpression> _actualArguments = featureCall.getActualArguments();
-          String _qualifiedName = XbaseCopyQualifiedNameService.this.toQualifiedName(it, resolvedExecutable, executable, resolvedTypes, _actualArguments);
-          return _qualifiedName;
+          return XbaseCopyQualifiedNameService.this.toQualifiedName(it, resolvedExecutable, executable, resolvedTypes, _actualArguments);
         }
       };
       CharSequence _qualifiedNames = this.<XExpression>toQualifiedNames(_actualArguments, _function);
@@ -116,8 +112,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
       final Function1<XExpression,String> _function = new Function1<XExpression,String>() {
         public String apply(final XExpression it) {
           EList<XExpression> _arguments = constructorCall.getArguments();
-          String _qualifiedName = XbaseCopyQualifiedNameService.this.toQualifiedName(it, resolvedExecutable, constructor, resolvedTypes, _arguments);
-          return _qualifiedName;
+          return XbaseCopyQualifiedNameService.this.toQualifiedName(it, resolvedExecutable, constructor, resolvedTypes, _arguments);
         }
       };
       CharSequence _qualifiedNames = this.<XExpression>toQualifiedNames(_arguments, _function);
@@ -164,10 +159,8 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
   }
   
   protected IResolvedExecutable _resolveExecutable(final JvmConstructor constructor, final XConstructorCall it, @Extension final IResolvedTypes resolvedTypes) {
-    IResolvedConstructor _head = null;
-    Iterable<IResolvedConstructor> _filter = null;
-    ResolvedOperations _resolvedOperations = null;
     LightweightTypeReference _actualType = resolvedTypes.getActualType(it);
+    ResolvedOperations _resolvedOperations = null;
     if (_actualType!=null) {
       _resolvedOperations=this.overrideHelper.getResolvedOperations(_actualType);
     }
@@ -175,16 +168,17 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     if (_resolvedOperations!=null) {
       _declaredConstructors=_resolvedOperations.getDeclaredConstructors();
     }
+    Iterable<IResolvedConstructor> _filter = null;
     if (_declaredConstructors!=null) {
       final Function1<IResolvedConstructor,Boolean> _function = new Function1<IResolvedConstructor,Boolean>() {
         public Boolean apply(final IResolvedConstructor it) {
           JvmConstructor _declaration = it.getDeclaration();
-          boolean _equals = _declaration.equals(constructor);
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(_declaration.equals(constructor));
         }
       };
       _filter=IterableExtensions.<IResolvedConstructor>filter(_declaredConstructors, _function);
     }
+    IResolvedConstructor _head = null;
     if (_filter!=null) {
       _head=IterableExtensions.<IResolvedConstructor>head(_filter);
     }
@@ -192,14 +186,12 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
   }
   
   protected IResolvedExecutable _resolveExecutable(final JvmOperation operation, final XAbstractFeatureCall it, @Extension final IResolvedTypes resolvedTypes) {
-    IResolvedOperation _head = null;
-    Iterable<IResolvedOperation> _filter = null;
-    ResolvedOperations _resolvedOperations = null;
-    LightweightTypeReference _actualType = null;
     XExpression _actualReceiver = it.getActualReceiver();
+    LightweightTypeReference _actualType = null;
     if (_actualReceiver!=null) {
       _actualType=resolvedTypes.getActualType(_actualReceiver);
     }
+    ResolvedOperations _resolvedOperations = null;
     if (_actualType!=null) {
       _resolvedOperations=this.overrideHelper.getResolvedOperations(_actualType);
     }
@@ -207,16 +199,17 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     if (_resolvedOperations!=null) {
       _allOperations=_resolvedOperations.getAllOperations();
     }
+    Iterable<IResolvedOperation> _filter = null;
     if (_allOperations!=null) {
       final Function1<IResolvedOperation,Boolean> _function = new Function1<IResolvedOperation,Boolean>() {
         public Boolean apply(final IResolvedOperation it) {
           JvmOperation _declaration = it.getDeclaration();
-          boolean _equals = _declaration.equals(operation);
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(_declaration.equals(operation));
         }
       };
       _filter=IterableExtensions.<IResolvedOperation>filter(_allOperations, _function);
     }
+    IResolvedOperation _head = null;
     if (_filter!=null) {
       _head=IterableExtensions.<IResolvedOperation>head(_filter);
     }
@@ -224,14 +217,12 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
   }
   
   protected IResolvedExecutable _resolveExecutable(final JvmConstructor consturctor, final XAbstractFeatureCall it, @Extension final IResolvedTypes resolvedTypes) {
-    IResolvedConstructor _head = null;
-    Iterable<IResolvedConstructor> _filter = null;
-    ResolvedOperations _resolvedOperations = null;
-    LightweightTypeReference _actualType = null;
     XExpression _actualReceiver = it.getActualReceiver();
+    LightweightTypeReference _actualType = null;
     if (_actualReceiver!=null) {
       _actualType=resolvedTypes.getActualType(_actualReceiver);
     }
+    ResolvedOperations _resolvedOperations = null;
     if (_actualType!=null) {
       _resolvedOperations=this.overrideHelper.getResolvedOperations(_actualType);
     }
@@ -239,16 +230,17 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     if (_resolvedOperations!=null) {
       _declaredConstructors=_resolvedOperations.getDeclaredConstructors();
     }
+    Iterable<IResolvedConstructor> _filter = null;
     if (_declaredConstructors!=null) {
       final Function1<IResolvedConstructor,Boolean> _function = new Function1<IResolvedConstructor,Boolean>() {
         public Boolean apply(final IResolvedConstructor it) {
           JvmConstructor _declaration = it.getDeclaration();
-          boolean _equals = _declaration.equals(consturctor);
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(_declaration.equals(consturctor));
         }
       };
       _filter=IterableExtensions.<IResolvedConstructor>filter(_declaredConstructors, _function);
     }
+    IResolvedConstructor _head = null;
     if (_filter!=null) {
       _head=IterableExtensions.<IResolvedConstructor>head(_filter);
     }

@@ -30,14 +30,12 @@ public class P2DirectorLaunch {
    * Returns all the information as program args
    */
   public static String args() {
-    String _args = P2DirectorLaunch.args(P2DirectorLaunch.DESTINATION_JAVA);
-    return _args;
+    return P2DirectorLaunch.args(P2DirectorLaunch.DESTINATION_JAVA);
   }
   
   private static String args(final String destination) {
     String _join = IterableExtensions.join(P2DirectorLaunch.IUS, " -i ");
-    String _plus = ((((((("-repository  " + P2DirectorLaunch.REPOSITORY) + " -destination \"") + destination) + "\" -profile ") + P2DirectorLaunch.PROFILE) + " -i ") + _join);
-    return _plus;
+    return ((((((("-repository  " + P2DirectorLaunch.REPOSITORY) + " -destination \"") + destination) + "\" -profile ") + P2DirectorLaunch.PROFILE) + " -i ") + _join);
   }
   
   public static void setupLaunchConfiguration(final ILaunchConfigurationWorkingCopy launchConfiguration, final String destinationPath) {

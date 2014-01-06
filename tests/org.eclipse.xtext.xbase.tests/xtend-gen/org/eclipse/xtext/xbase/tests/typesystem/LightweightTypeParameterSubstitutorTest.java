@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeParameterSubstitutorTest;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -34,12 +33,7 @@ public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParamet
   private CommonTypeComputationServices services;
   
   @Extension
-  private OwnedConverter _ownedConverter = new Function0<OwnedConverter>() {
-    public OwnedConverter apply() {
-      OwnedConverter _ownedConverter = new OwnedConverter(LightweightTypeParameterSubstitutorTest.this);
-      return _ownedConverter;
-    }
-  }.apply();
+  private OwnedConverter _ownedConverter = new OwnedConverter(this);
   
   public String resolve(final JvmTypeReference declaration, final JvmTypeReference reference) {
     DeclaratorTypeArgumentCollector _declaratorTypeArgumentCollector = new DeclaratorTypeArgumentCollector();
@@ -56,18 +50,15 @@ public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParamet
   }
   
   public void acceptHint(final Object reference, final LightweightBoundTypeArgument boundTypeArgument) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Should not be invoked");
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException("Should not be invoked");
   }
   
   public List<LightweightBoundTypeArgument> getAllHints(final Object reference) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Should not be invoked");
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException("Should not be invoked");
   }
   
   public List<JvmTypeParameter> getDeclaredTypeParameters() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Should not be invoked");
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException("Should not be invoked");
   }
   
   public ResourceSet getContextResourceSet() {
@@ -75,7 +66,6 @@ public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParamet
   }
   
   public boolean isResolved(final Object handle) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Should not be invoked");
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException("Should not be invoked");
   }
 }

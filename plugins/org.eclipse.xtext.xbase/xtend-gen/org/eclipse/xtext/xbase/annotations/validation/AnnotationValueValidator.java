@@ -51,8 +51,7 @@ public class AnnotationValueValidator extends ConstantExpressionValidator {
       EList<XExpression> _elements_1 = expression.getElements();
       final Function1<XExpression,Boolean> _function = new Function1<XExpression,Boolean>() {
         public Boolean apply(final XExpression it) {
-          boolean _isValidAnnotationValue = AnnotationValueValidator.this.isValidAnnotationValue(it);
-          return Boolean.valueOf(_isValidAnnotationValue);
+          return Boolean.valueOf(AnnotationValueValidator.this.isValidAnnotationValue(it));
         }
       };
       boolean _forall = IterableExtensions.<XExpression>forall(_elements_1, _function);

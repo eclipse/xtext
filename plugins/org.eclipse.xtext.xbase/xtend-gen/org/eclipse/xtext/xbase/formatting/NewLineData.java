@@ -16,8 +16,7 @@ public class NewLineData extends FormattingData {
   
   public boolean isEmpty() {
     Integer _newLines = this.getNewLines();
-    boolean _equals = Objects.equal(_newLines, null);
-    return _equals;
+    return Objects.equal(_newLines, null);
   }
   
   public NewLineData(final int offset, final int length, final int increaseIndentationChange, final int decreaseIndentationChange, final Throwable trace, final Integer newLines) {

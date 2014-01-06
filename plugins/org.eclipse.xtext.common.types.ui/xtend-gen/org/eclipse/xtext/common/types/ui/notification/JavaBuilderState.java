@@ -75,8 +75,7 @@ public class JavaBuilderState {
         return null;
       }
       IProject _project = javaProject.getProject();
-      JavaBuilderState _lastBuiltState = JavaBuilderState.getLastBuiltState(_project);
-      _xblockexpression = (_lastBuiltState);
+      _xblockexpression = (JavaBuilderState.getLastBuiltState(_project));
     }
     return _xblockexpression;
   }
@@ -96,8 +95,7 @@ public class JavaBuilderState {
     if (!_matched) {
       _switchResult = null;
     }
-    JavaBuilderState _javaBuilderState = new JavaBuilderState(it, _switchResult);
-    return _javaBuilderState;
+    return new JavaBuilderState(it, _switchResult);
   }
   
   public Long getLastStructuralBuildTime() {
@@ -112,8 +110,7 @@ public class JavaBuilderState {
         return this.lastStructuralBuildTime = Long.valueOf((-1l));
       }
       Object _readField = this.readField(this.state, "lastStructuralBuildTime", Long.valueOf((-1l)));
-      Long _lastStructuralBuildTime = this.lastStructuralBuildTime = ((Long) _readField);
-      _xblockexpression = (_lastStructuralBuildTime);
+      _xblockexpression = (this.lastStructuralBuildTime = ((Long) _readField));
     }
     return _xblockexpression;
   }
@@ -130,8 +127,7 @@ public class JavaBuilderState {
         return this.buildNumber = Integer.valueOf((-1));
       }
       Object _readField = this.readField(this.state, "buildNumber", Integer.valueOf((-1)));
-      Integer _buildNumber = this.buildNumber = ((Integer) _readField);
-      _xblockexpression = (_buildNumber);
+      _xblockexpression = (this.buildNumber = ((Integer) _readField));
     }
     return _xblockexpression;
   }
@@ -232,8 +228,7 @@ public class JavaBuilderState {
     String _typeLocator = this.getTypeLocator(it);
     String _packageName = this.getPackageName(it);
     String _simplePrimaryTypeName = this.getSimplePrimaryTypeName(it);
-    LinkedHashSet<String> _qualifiedTypeNames = this.getQualifiedTypeNames(_typeLocator, _packageName, _simplePrimaryTypeName);
-    return _qualifiedTypeNames;
+    return this.getQualifiedTypeNames(_typeLocator, _packageName, _simplePrimaryTypeName);
   }
   
   private IPackageFragmentRoot getPackageFragmentRoot(final IJavaElement it) {
@@ -248,8 +243,7 @@ public class JavaBuilderState {
       }
     }
     if (!_matched) {
-      IPackageFragmentRoot _packageFragmentRoot = this.getPackageFragmentRoot(parent);
-      _switchResult = _packageFragmentRoot;
+      _switchResult = this.getPackageFragmentRoot(parent);
     }
     return _switchResult;
   }
@@ -300,8 +294,7 @@ public class JavaBuilderState {
   private String getTypeLocator(final ICompilationUnit it) {
     IResource _resource = it.getResource();
     IPath _projectRelativePath = _resource.getProjectRelativePath();
-    String _string = _projectRelativePath.toString();
-    return _string;
+    return _projectRelativePath.toString();
   }
   
   private String getPackageName(final ICompilationUnit it) {
@@ -315,8 +308,7 @@ public class JavaBuilderState {
         boolean _not = (!_isDefaultPackage);
         if (_not) {
           _matched=true;
-          String _elementName = ((IPackageFragment)parent).getElementName();
-          _switchResult = _elementName;
+          _switchResult = ((IPackageFragment)parent).getElementName();
         }
       }
     }
@@ -331,8 +323,7 @@ public class JavaBuilderState {
     {
       final String elementName = it.getElementName();
       int _lastIndexOf = elementName.lastIndexOf(".");
-      String _substring = elementName.substring(0, _lastIndexOf);
-      _xblockexpression = (_substring);
+      _xblockexpression = (elementName.substring(0, _lastIndexOf));
     }
     return _xblockexpression;
   }
@@ -361,8 +352,7 @@ public class JavaBuilderState {
       if (!_matched) {
         _switchResult = null;
       }
-      SimpleLookupTable _references = this.references = _switchResult;
-      _xblockexpression = (_references);
+      _xblockexpression = (this.references = _switchResult);
     }
     return _xblockexpression;
   }

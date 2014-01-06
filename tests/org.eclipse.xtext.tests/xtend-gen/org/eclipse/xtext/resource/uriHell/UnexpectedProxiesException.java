@@ -11,13 +11,11 @@ import com.google.common.collect.Iterables;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -28,23 +26,11 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class UnexpectedProxiesException extends RuntimeException {
   public UnexpectedProxiesException(final Map<EObject,Collection<EStructuralFeature.Setting>> unresolved) {
-    super(new Function0<String>() {
-      public String apply() {
-        Collection<Collection<EStructuralFeature.Setting>> _values = unresolved.values();
-        Iterable<EStructuralFeature.Setting> _flatten = Iterables.<EStructuralFeature.Setting>concat(_values);
-        final Function1<EStructuralFeature.Setting,List<URI>> _function = new Function1<EStructuralFeature.Setting,List<URI>>() {
-          public List<URI> apply(final EStructuralFeature.Setting it) {
-            List<URI> _uRIs = UnexpectedProxiesException.getURIs(it);
-            return _uRIs;
-          }
-        };
-        Iterable<List<URI>> _map = IterableExtensions.<EStructuralFeature.Setting, List<URI>>map(_flatten, _function);
-        Iterable<URI> _flatten_1 = Iterables.<URI>concat(_map);
-        Set<URI> _set = IterableExtensions.<URI>toSet(_flatten_1);
-        String _string = _set.toString();
-        return _string;
+    super(IterableExtensions.<URI>toSet(Iterables.<URI>concat(IterableExtensions.<EStructuralFeature.Setting, List<URI>>map(Iterables.<EStructuralFeature.Setting>concat(unresolved.values()), new Function1<EStructuralFeature.Setting,List<URI>>() {
+      public List<URI> apply(final EStructuralFeature.Setting it) {
+        return UnexpectedProxiesException.getURIs(it);
       }
-    }.apply());
+    }))).toString());
   }
   
   public static List<URI> getURIs(final EStructuralFeature.Setting setting) {
@@ -56,8 +42,7 @@ public class UnexpectedProxiesException extends RuntimeException {
       if (it instanceof EObject) {
         _matched=true;
         URI _uRI = EcoreUtil.getURI(((EObject)it));
-        List<URI> _newImmutableList = CollectionLiterals.<URI>newImmutableList(_uRI);
-        _switchResult = _newImmutableList;
+        _switchResult = CollectionLiterals.<URI>newImmutableList(_uRI);
       }
     }
     if (!_matched) {
@@ -65,12 +50,10 @@ public class UnexpectedProxiesException extends RuntimeException {
         _matched=true;
         final Function1<EObject,URI> _function = new Function1<EObject,URI>() {
           public URI apply(final EObject it) {
-            URI _uRI = EcoreUtil.getURI(it);
-            return _uRI;
+            return EcoreUtil.getURI(it);
           }
         };
-        List<URI> _map = ListExtensions.<EObject, URI>map(((List<EObject>)it), _function);
-        _switchResult = _map;
+        _switchResult = ListExtensions.<EObject, URI>map(((List<EObject>)it), _function);
       }
     }
     return _switchResult;

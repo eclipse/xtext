@@ -52,8 +52,7 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
   protected JvmTypeReference _type(final XBinaryOperation binaryOperation, final JvmTypeReference rawExpectation, final boolean rawType) {
     JvmTypeReference _xifexpression = null;
     if (true) {
-      RuntimeException _runtimeException = new RuntimeException("This is expected");
-      throw _runtimeException;
+      throw new RuntimeException("This is expected");
     } else {
       _xifexpression = ((JvmTypeReference) null);
     }
@@ -63,8 +62,7 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
   protected JvmTypeReference _expectedType(final XMemberFeatureCall container, final EReference reference, final int index, final boolean rawType) {
     JvmTypeReference _xifexpression = null;
     if (true) {
-      RuntimeException _runtimeException = new RuntimeException("This is expected");
-      throw _runtimeException;
+      throw new RuntimeException("This is expected");
     } else {
       _xifexpression = ((JvmTypeReference) null);
     }
@@ -74,8 +72,7 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
   protected JvmTypeReference _typeForIdentifiable(final JvmDeclaredType identifiable, final boolean rawType) {
     JvmTypeReference _xifexpression = null;
     if (true) {
-      RuntimeException _runtimeException = new RuntimeException("This is expected");
-      throw _runtimeException;
+      throw new RuntimeException("This is expected");
     } else {
       _xifexpression = ((JvmTypeReference) null);
     }

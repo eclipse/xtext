@@ -19,20 +19,17 @@ public class Xbase05_Closures {
       final ArrayList<String> list = CollectionLiterals.<String>newArrayList("a", "b", "c");
       final Function1<String,String> _function_1 = new Function1<String,String>() {
         public String apply(final String e) {
-          String _upperCase = e.toUpperCase();
-          return _upperCase;
+          return e.toUpperCase();
         }
       };
       /* ListExtensions.<String, String>map(list, _function_1); */
       final Function1<String,String> _function_2 = new Function1<String,String>() {
         public String apply(final String e) {
-          String _upperCase = e.toUpperCase();
-          return _upperCase;
+          return e.toUpperCase();
         }
       };
       final Function1<? super String,? extends String> f2 = _function_2;
-      String _apply = f2.apply("simsalabim");
-      _xblockexpression = (_apply);
+      _xblockexpression = (f2.apply("simsalabim"));
     }
     return _xblockexpression;
   }

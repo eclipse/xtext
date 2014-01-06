@@ -41,14 +41,12 @@ public class CodeGenerationContextImpl implements CodeGenerationContext {
   
   public boolean delete(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    boolean _delete = _fileSystemSupport.delete(path);
-    return _delete;
+    return _fileSystemSupport.delete(path);
   }
   
   public boolean mkdir(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    boolean _mkdir = _fileSystemSupport.mkdir(path);
-    return _mkdir;
+    return _fileSystemSupport.mkdir(path);
   }
   
   public void setContents(final Path path, final CharSequence contents) {
@@ -63,73 +61,61 @@ public class CodeGenerationContextImpl implements CodeGenerationContext {
   
   public boolean exists(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    boolean _exists = _fileSystemSupport.exists(path);
-    return _exists;
+    return _fileSystemSupport.exists(path);
   }
   
   public String getCharset(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    String _charset = _fileSystemSupport.getCharset(path);
-    return _charset;
+    return _fileSystemSupport.getCharset(path);
   }
   
   public Iterable<? extends Path> getChildren(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    Iterable<? extends Path> _children = _fileSystemSupport.getChildren(path);
-    return _children;
+    return _fileSystemSupport.getChildren(path);
   }
   
   public CharSequence getContents(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    CharSequence _contents = _fileSystemSupport.getContents(path);
-    return _contents;
+    return _fileSystemSupport.getContents(path);
   }
   
   public InputStream getContentsAsStream(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    InputStream _contentsAsStream = _fileSystemSupport.getContentsAsStream(path);
-    return _contentsAsStream;
+    return _fileSystemSupport.getContentsAsStream(path);
   }
   
   public long getLastModification(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    long _lastModification = _fileSystemSupport.getLastModification(path);
-    return _lastModification;
+    return _fileSystemSupport.getLastModification(path);
   }
   
   public Path getProjectFolder(final Path path) {
     FileLocations _fileLocations = this.getFileLocations();
-    Path _projectFolder = _fileLocations.getProjectFolder(path);
-    return _projectFolder;
+    return _fileLocations.getProjectFolder(path);
   }
   
   public Path getSourceFolder(final Path path) {
     FileLocations _fileLocations = this.getFileLocations();
-    Path _sourceFolder = _fileLocations.getSourceFolder(path);
-    return _sourceFolder;
+    return _fileLocations.getSourceFolder(path);
   }
   
   public Path getTargetFolder(final Path sourceFolder) {
     FileLocations _fileLocations = this.getFileLocations();
-    Path _targetFolder = _fileLocations.getTargetFolder(sourceFolder);
-    return _targetFolder;
+    return _fileLocations.getTargetFolder(sourceFolder);
   }
   
   public boolean isFile(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    boolean _isFile = _fileSystemSupport.isFile(path);
-    return _isFile;
+    return _fileSystemSupport.isFile(path);
   }
   
   public boolean isFolder(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    boolean _isFolder = _fileSystemSupport.isFolder(path);
-    return _isFolder;
+    return _fileSystemSupport.isFolder(path);
   }
   
   public URI toURI(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    URI _uRI = _fileSystemSupport.toURI(path);
-    return _uRI;
+    return _fileSystemSupport.toURI(path);
   }
 }

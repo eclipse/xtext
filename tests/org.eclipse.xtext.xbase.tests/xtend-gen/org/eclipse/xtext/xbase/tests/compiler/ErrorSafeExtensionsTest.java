@@ -265,15 +265,13 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   
   protected TreeAppendable createTreeAppendable(final EObject source) {
     ImportManager _importManager = new ImportManager(true);
-    TreeAppendable _treeAppendable = new TreeAppendable(_importManager, this.converter, this.locationProvider, this.jvmModelAssociations, source, " ", "<newline>");
-    return _treeAppendable;
+    return new TreeAppendable(_importManager, this.converter, this.locationProvider, this.jvmModelAssociations, source, " ", "<newline>");
   }
   
   protected String getText(final EObject object) {
     ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(object);
     String _text = _findActualNodeFor.getText();
-    String _trim = _text.trim();
-    return _trim;
+    return _text.trim();
   }
   
   protected Procedure1<? super LoopParams> getLoopInitializer() {

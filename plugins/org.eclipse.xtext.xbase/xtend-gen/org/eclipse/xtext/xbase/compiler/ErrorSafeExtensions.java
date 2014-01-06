@@ -54,12 +54,10 @@ public class ErrorSafeExtensions {
       final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
         public Boolean apply(final Issue it) {
           Severity _severity = it.getSeverity();
-          boolean _equals = Objects.equal(_severity, Severity.ERROR);
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
         }
       };
-      Iterable<Issue> _filter = IterableExtensions.<Issue>filter(_issues, _function);
-      _xblockexpression = (_filter);
+      _xblockexpression = (IterableExtensions.<Issue>filter(_issues, _function));
     }
     return _xblockexpression;
   }
@@ -73,12 +71,10 @@ public class ErrorSafeExtensions {
       final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
         public Boolean apply(final Issue it) {
           Severity _severity = it.getSeverity();
-          boolean _equals = Objects.equal(_severity, Severity.ERROR);
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
         }
       };
-      boolean _exists = IterableExtensions.<Issue>exists(_issues, _function);
-      _xblockexpression = (_exists);
+      _xblockexpression = (IterableExtensions.<Issue>exists(_issues, _function));
     }
     return _xblockexpression;
   }
@@ -92,8 +88,7 @@ public class ErrorSafeExtensions {
     final LoopParams loopParams = ObjectExtensions.<LoopParams>operator_doubleArrow(_loopParams, loopInitializer);
     final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
       public Boolean apply(final T it) {
-        boolean _hasErrors = ErrorSafeExtensions.this.hasErrors(it);
-        return Boolean.valueOf(_hasErrors);
+        return Boolean.valueOf(ErrorSafeExtensions.this.hasErrors(it));
       }
     };
     Iterable<T> _filter = IterableExtensions.<T>filter(elements, _function);
@@ -103,8 +98,7 @@ public class ErrorSafeExtensions {
     ITreeAppendable _xifexpression = null;
     if (allElementsBroken) {
       T _head = IterableExtensions.<T>head(elements);
-      ITreeAppendable _openErrorAppendable = this.openErrorAppendable(appendable, null, _head);
-      _xifexpression = _openErrorAppendable;
+      _xifexpression = this.openErrorAppendable(appendable, null, _head);
     } else {
       _xifexpression = appendable;
     }
@@ -125,8 +119,8 @@ public class ErrorSafeExtensions {
         body.apply(element, appendable);
       } else {
         if ((!allElementsBroken)) {
-          ITreeAppendable _openErrorAppendable_1 = this.openErrorAppendable(appendable, currentAppendable, element);
-          currentAppendable = _openErrorAppendable_1;
+          ITreeAppendable _openErrorAppendable = this.openErrorAppendable(appendable, currentAppendable, element);
+          currentAppendable = _openErrorAppendable;
         }
         boolean _or = false;
         if ((!isFirst)) {
@@ -153,8 +147,7 @@ public class ErrorSafeExtensions {
     if (allElementsBroken) {
       _xifexpression_1 = currentAppendable;
     } else {
-      ITreeAppendable _closeErrorAppendable_1 = this.closeErrorAppendable(appendable, currentAppendable);
-      _xifexpression_1 = _closeErrorAppendable_1;
+      _xifexpression_1 = this.closeErrorAppendable(appendable, currentAppendable);
     }
     currentAppendable = _xifexpression_1;
     loopParams.appendSuffix(currentAppendable);
@@ -165,8 +158,7 @@ public class ErrorSafeExtensions {
     ITreeAppendable _xifexpression = null;
     if ((!(child instanceof ErrorTreeAppendable))) {
       ErrorTreeAppendable _errorChild = parent.errorChild(context);
-      ITreeAppendable _append = _errorChild.append("/* ");
-      _xifexpression = _append;
+      _xifexpression = _errorChild.append("/* ");
     } else {
       _xifexpression = child;
     }

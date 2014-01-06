@@ -74,8 +74,7 @@ public class RichStringFormatter {
     if (_hasSyntaxError) {
       return;
     }
-    RichStringToLineModel _richStringToLineModel = new RichStringToLineModel(this._nodeModelAccess, richString);
-    final RichStringToLineModel impl = _richStringToLineModel;
+    final RichStringToLineModel impl = new RichStringToLineModel(this._nodeModelAccess, richString);
     DefaultIndentationHandler _defaultIndentationHandler = new DefaultIndentationHandler();
     this.richStringProcessor.process(richString, impl, _defaultIndentationHandler);
     impl.finish();
@@ -134,11 +133,9 @@ public class RichStringFormatter {
         if (_isLeadingSemanticNewLine) {
           int _offset = line.getOffset();
           int _newLineCharCount = line.getNewLineCharCount();
-          int _plus = (_offset + _newLineCharCount);
-          _xifexpression_2 = _plus;
+          _xifexpression_2 = (_offset + _newLineCharCount);
         } else {
-          int _offset_1 = line.getOffset();
-          _xifexpression_2 = _offset_1;
+          _xifexpression_2 = line.getOffset();
         }
         final int nloffset = _xifexpression_2;
         int _indentLength = line.getIndentLength();
@@ -151,8 +148,7 @@ public class RichStringFormatter {
           _xifexpression_3 = i;
         } else {
           int _newLineCharCount_1 = line.getNewLineCharCount();
-          int _plus_1 = (_newLineCharCount_1 + i);
-          _xifexpression_3 = _plus_1;
+          _xifexpression_3 = (_newLineCharCount_1 + i);
         }
         final int nllength = _xifexpression_3;
         boolean _isLeadingSemanticNewLine_2 = line.isLeadingSemanticNewLine();
@@ -160,8 +156,7 @@ public class RichStringFormatter {
           RuntimeException _xifexpression_4 = null;
           boolean _isDebugConflicts = doc.isDebugConflicts();
           if (_isDebugConflicts) {
-            RuntimeException _runtimeException = new RuntimeException();
-            _xifexpression_4 = _runtimeException;
+            _xifexpression_4 = new RuntimeException();
           }
           NewLineData _newLineData = new NewLineData(nloffset, nllength, increaseIndentationChange, decraseIndentationChange, _xifexpression_4, Integer.valueOf(0));
           doc.operator_add(_newLineData);
@@ -169,8 +164,7 @@ public class RichStringFormatter {
           RuntimeException _xifexpression_5 = null;
           boolean _isDebugConflicts_1 = doc.isDebugConflicts();
           if (_isDebugConflicts_1) {
-            RuntimeException _runtimeException_1 = new RuntimeException();
-            _xifexpression_5 = _runtimeException_1;
+            _xifexpression_5 = new RuntimeException();
           }
           NewLineData _newLineData_1 = new NewLineData(nloffset, nllength, increaseIndentationChange, decraseIndentationChange, _xifexpression_5, Integer.valueOf(1));
           doc.operator_add(_newLineData_1);
@@ -192,15 +186,13 @@ public class RichStringFormatter {
               if (!_matched) {
                 if (chunk instanceof SemanticWhitespace) {
                   _matched=true;
-                  CharSequence _text = ((SemanticWhitespace)chunk).getText();
-                  _switchResult = _text;
+                  _switchResult = ((SemanticWhitespace)chunk).getText();
                 }
               }
               if (!_matched) {
                 if (chunk instanceof TemplateWhitespace) {
                   _matched=true;
-                  String _indentation = doc.getIndentation(1);
-                  _switchResult = _indentation;
+                  _switchResult = doc.getIndentation(1);
                 }
               }
               return _switchResult;
@@ -211,8 +203,7 @@ public class RichStringFormatter {
           RuntimeException _xifexpression_6 = null;
           boolean _isDebugConflicts_2 = doc.isDebugConflicts();
           if (_isDebugConflicts_2) {
-            RuntimeException _runtimeException_2 = new RuntimeException();
-            _xifexpression_6 = _runtimeException_2;
+            _xifexpression_6 = new RuntimeException();
           }
           WhitespaceData _whitespaceData = new WhitespaceData(offset, length, 0, 0, _xifexpression_6, text);
           doc.operator_add(_whitespaceData);
@@ -241,12 +232,10 @@ public class RichStringFormatter {
       final Function1<INode,Boolean> _function = new Function1<INode,Boolean>() {
         public Boolean apply(final INode it) {
           SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
-          boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
-          return Boolean.valueOf(_notEquals);
+          return Boolean.valueOf((!Objects.equal(_syntaxErrorMessage, null)));
         }
       };
-      boolean _exists = IterableExtensions.<INode>exists(_asTreeIterable, _function);
-      _xblockexpression = (_exists);
+      _xblockexpression = (IterableExtensions.<INode>exists(_asTreeIterable, _function));
     }
     return _xblockexpression;
   }

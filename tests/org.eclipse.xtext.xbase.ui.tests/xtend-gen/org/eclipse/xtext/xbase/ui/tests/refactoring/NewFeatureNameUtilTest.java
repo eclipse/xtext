@@ -127,8 +127,7 @@ public class NewFeatureNameUtilTest extends AbstractXbaseTestCase {
   }
   
   protected void assertInvalidName(final String name, final int severity, final String messageFragment) {
-    RefactoringStatus _refactoringStatus = new RefactoringStatus();
-    final RefactoringStatus status = _refactoringStatus;
+    final RefactoringStatus status = new RefactoringStatus();
     final NewFeatureNameUtil nameUtil = this.nameUtilProvider.get();
     nameUtil.checkNewFeatureName(name, false, status);
     int _severity = status.getSeverity();

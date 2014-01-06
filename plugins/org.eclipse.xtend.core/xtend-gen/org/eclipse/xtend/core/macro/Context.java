@@ -47,8 +47,7 @@ public class Context {
     ClassFinder _classFinder = this.getClassFinder();
     Map<String,JvmIdentifiableElement> _visibleFeatures = this.getVisibleFeatures();
     Set<XExpression> _alreadyEvaluating = this.getAlreadyEvaluating();
-    Context _context = new Context(newExpectation, _classFinder, _visibleFeatures, _alreadyEvaluating);
-    return _context;
+    return new Context(newExpectation, _classFinder, _visibleFeatures, _alreadyEvaluating);
   }
   
   public Context(final JvmTypeReference expectedType, final ClassFinder classFinder, final Map<String,JvmIdentifiableElement> visibleFeatures, final Set<XExpression> alreadyEvaluating) {

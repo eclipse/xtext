@@ -9,8 +9,7 @@ public class TemplateWhitespace extends Chunk {
   public String toString() {
     CharSequence _text = this.getText();
     int _length = _text.length();
-    String _plus = ("T" + Integer.valueOf(_length));
-    return _plus;
+    return ("T" + Integer.valueOf(_length));
   }
   
   public TemplateWhitespace(final CharSequence text) {

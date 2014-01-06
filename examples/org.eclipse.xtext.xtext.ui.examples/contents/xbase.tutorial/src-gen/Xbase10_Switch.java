@@ -64,8 +64,7 @@ public class Xbase10_Switch {
           return _switchResult;
         }
       };
-      List<String> _map = ListExtensions.<Shape, String>map(list2, _function);
-      _xblockexpression = (_map);
+      _xblockexpression = (ListExtensions.<Shape, String>map(list2, _function));
     }
     return _xblockexpression;
   }

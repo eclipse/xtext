@@ -126,280 +126,240 @@ public class TransformationContextImpl implements TransformationContext {
   public List<Problem> getProblems(final Element element) {
     CompilationUnitImpl _unit = this.getUnit();
     ProblemSupport _problemSupport = _unit.getProblemSupport();
-    List<Problem> _problems = _problemSupport.getProblems(element);
-    return _problems;
+    return _problemSupport.getProblems(element);
   }
   
   public TypeReference getAnyType() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _anyType = _typeReferenceProvider.getAnyType();
-    return _anyType;
+    return _typeReferenceProvider.getAnyType();
   }
   
   public TypeReference getList(final TypeReference param) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _list = _typeReferenceProvider.getList(param);
-    return _list;
+    return _typeReferenceProvider.getList(param);
   }
   
   public TypeReference getObject() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _object = _typeReferenceProvider.getObject();
-    return _object;
+    return _typeReferenceProvider.getObject();
   }
   
   public TypeReference getPrimitiveBoolean() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _primitiveBoolean = _typeReferenceProvider.getPrimitiveBoolean();
-    return _primitiveBoolean;
+    return _typeReferenceProvider.getPrimitiveBoolean();
   }
   
   public TypeReference getPrimitiveByte() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _primitiveByte = _typeReferenceProvider.getPrimitiveByte();
-    return _primitiveByte;
+    return _typeReferenceProvider.getPrimitiveByte();
   }
   
   public TypeReference getPrimitiveChar() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _primitiveChar = _typeReferenceProvider.getPrimitiveChar();
-    return _primitiveChar;
+    return _typeReferenceProvider.getPrimitiveChar();
   }
   
   public TypeReference getPrimitiveDouble() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _primitiveDouble = _typeReferenceProvider.getPrimitiveDouble();
-    return _primitiveDouble;
+    return _typeReferenceProvider.getPrimitiveDouble();
   }
   
   public TypeReference getPrimitiveFloat() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _primitiveFloat = _typeReferenceProvider.getPrimitiveFloat();
-    return _primitiveFloat;
+    return _typeReferenceProvider.getPrimitiveFloat();
   }
   
   public TypeReference getPrimitiveInt() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _primitiveInt = _typeReferenceProvider.getPrimitiveInt();
-    return _primitiveInt;
+    return _typeReferenceProvider.getPrimitiveInt();
   }
   
   public TypeReference getPrimitiveLong() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _primitiveLong = _typeReferenceProvider.getPrimitiveLong();
-    return _primitiveLong;
+    return _typeReferenceProvider.getPrimitiveLong();
   }
   
   public TypeReference getPrimitiveShort() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _primitiveShort = _typeReferenceProvider.getPrimitiveShort();
-    return _primitiveShort;
+    return _typeReferenceProvider.getPrimitiveShort();
   }
   
   public TypeReference getPrimitiveVoid() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _primitiveVoid = _typeReferenceProvider.getPrimitiveVoid();
-    return _primitiveVoid;
+    return _typeReferenceProvider.getPrimitiveVoid();
   }
   
   public TypeReference getSet(final TypeReference param) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _set = _typeReferenceProvider.getSet(param);
-    return _set;
+    return _typeReferenceProvider.getSet(param);
   }
   
   public TypeReference getString() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _string = _typeReferenceProvider.getString();
-    return _string;
+    return _typeReferenceProvider.getString();
   }
   
   public TypeReference newArrayTypeReference(final TypeReference componentType) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _newArrayTypeReference = _typeReferenceProvider.newArrayTypeReference(componentType);
-    return _newArrayTypeReference;
+    return _typeReferenceProvider.newArrayTypeReference(componentType);
   }
   
   public TypeReference newTypeReference(final String typeName, final TypeReference... typeArguments) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference(typeName, typeArguments);
-    return _newTypeReference;
+    return _typeReferenceProvider.newTypeReference(typeName, typeArguments);
   }
   
   public TypeReference newTypeReference(final Type typeDeclaration, final TypeReference... typeArguments) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference(typeDeclaration, typeArguments);
-    return _newTypeReference;
+    return _typeReferenceProvider.newTypeReference(typeDeclaration, typeArguments);
   }
   
   public TypeReference newTypeReference(final Class<? extends Object> clazz, final TypeReference... typeArguments) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference(clazz, typeArguments);
-    return _newTypeReference;
+    return _typeReferenceProvider.newTypeReference(clazz, typeArguments);
   }
   
   public TypeReference newWildcardTypeReference() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _newWildcardTypeReference = _typeReferenceProvider.newWildcardTypeReference();
-    return _newWildcardTypeReference;
+    return _typeReferenceProvider.newWildcardTypeReference();
   }
   
   public TypeReference newWildcardTypeReference(final TypeReference upperBound) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _newWildcardTypeReference = _typeReferenceProvider.newWildcardTypeReference(upperBound);
-    return _newWildcardTypeReference;
+    return _typeReferenceProvider.newWildcardTypeReference(upperBound);
   }
   
   public TypeReference newWildcardTypeReferenceWithLowerBound(final TypeReference upperBound) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
-    TypeReference _newWildcardTypeReferenceWithLowerBound = _typeReferenceProvider.newWildcardTypeReferenceWithLowerBound(upperBound);
-    return _newWildcardTypeReferenceWithLowerBound;
+    return _typeReferenceProvider.newWildcardTypeReferenceWithLowerBound(upperBound);
   }
   
   public MutableInterfaceDeclaration findInterface(final String qualifiedName) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeLookupImpl _typeLookup = _unit.getTypeLookup();
-    MutableInterfaceDeclaration _findInterface = _typeLookup.findInterface(qualifiedName);
-    return _findInterface;
+    return _typeLookup.findInterface(qualifiedName);
   }
   
   public MutableClassDeclaration findClass(final String qualifiedName) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeLookupImpl _typeLookup = _unit.getTypeLookup();
-    MutableClassDeclaration _findClass = _typeLookup.findClass(qualifiedName);
-    return _findClass;
+    return _typeLookup.findClass(qualifiedName);
   }
   
   public MutableAnnotationTypeDeclaration findAnnotationType(final String qualifiedName) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeLookupImpl _typeLookup = _unit.getTypeLookup();
-    MutableAnnotationTypeDeclaration _findAnnotationType = _typeLookup.findAnnotationType(qualifiedName);
-    return _findAnnotationType;
+    return _typeLookup.findAnnotationType(qualifiedName);
   }
   
   public MutableEnumerationTypeDeclaration findEnumerationType(final String qualifiedName) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeLookupImpl _typeLookup = _unit.getTypeLookup();
-    MutableEnumerationTypeDeclaration _findEnumerationType = _typeLookup.findEnumerationType(qualifiedName);
-    return _findEnumerationType;
+    return _typeLookup.findEnumerationType(qualifiedName);
   }
   
   public Type findTypeGlobally(final Class<? extends Object> clazz) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeLookupImpl _typeLookup = _unit.getTypeLookup();
-    Type _findTypeGlobally = _typeLookup.findTypeGlobally(clazz);
-    return _findTypeGlobally;
+    return _typeLookup.findTypeGlobally(clazz);
   }
   
   public Type findTypeGlobally(final String typeName) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeLookupImpl _typeLookup = _unit.getTypeLookup();
-    Type _findTypeGlobally = _typeLookup.findTypeGlobally(typeName);
-    return _findTypeGlobally;
+    return _typeLookup.findTypeGlobally(typeName);
   }
   
   public boolean exists(final Path path) {
     CompilationUnitImpl _unit = this.getUnit();
     MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
-    boolean _exists = _fileSystemSupport.exists(path);
-    return _exists;
+    return _fileSystemSupport.exists(path);
   }
   
   public String getCharset(final Path path) {
     CompilationUnitImpl _unit = this.getUnit();
     MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
-    String _charset = _fileSystemSupport.getCharset(path);
-    return _charset;
+    return _fileSystemSupport.getCharset(path);
   }
   
   public Iterable<? extends Path> getChildren(final Path path) {
     CompilationUnitImpl _unit = this.getUnit();
     MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
-    Iterable<? extends Path> _children = _fileSystemSupport.getChildren(path);
-    return _children;
+    return _fileSystemSupport.getChildren(path);
   }
   
   public CharSequence getContents(final Path path) {
     CompilationUnitImpl _unit = this.getUnit();
     MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
-    CharSequence _contents = _fileSystemSupport.getContents(path);
-    return _contents;
+    return _fileSystemSupport.getContents(path);
   }
   
   public InputStream getContentsAsStream(final Path path) {
     CompilationUnitImpl _unit = this.getUnit();
     MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
-    InputStream _contentsAsStream = _fileSystemSupport.getContentsAsStream(path);
-    return _contentsAsStream;
+    return _fileSystemSupport.getContentsAsStream(path);
   }
   
   public long getLastModification(final Path path) {
     CompilationUnitImpl _unit = this.getUnit();
     MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
-    long _lastModification = _fileSystemSupport.getLastModification(path);
-    return _lastModification;
+    return _fileSystemSupport.getLastModification(path);
   }
   
   public Path getProjectFolder(final Path path) {
     CompilationUnitImpl _unit = this.getUnit();
     FileLocations _fileLocations = _unit.getFileLocations();
-    Path _projectFolder = _fileLocations.getProjectFolder(path);
-    return _projectFolder;
+    return _fileLocations.getProjectFolder(path);
   }
   
   public Path getSourceFolder(final Path path) {
     CompilationUnitImpl _unit = this.getUnit();
     FileLocations _fileLocations = _unit.getFileLocations();
-    Path _sourceFolder = _fileLocations.getSourceFolder(path);
-    return _sourceFolder;
+    return _fileLocations.getSourceFolder(path);
   }
   
   public Path getTargetFolder(final Path sourceFolder) {
     CompilationUnitImpl _unit = this.getUnit();
     FileLocations _fileLocations = _unit.getFileLocations();
-    Path _targetFolder = _fileLocations.getTargetFolder(sourceFolder);
-    return _targetFolder;
+    return _fileLocations.getTargetFolder(sourceFolder);
   }
   
   public boolean isFile(final Path path) {
     CompilationUnitImpl _unit = this.getUnit();
     MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
-    boolean _isFile = _fileSystemSupport.isFile(path);
-    return _isFile;
+    return _fileSystemSupport.isFile(path);
   }
   
   public boolean isFolder(final Path path) {
     CompilationUnitImpl _unit = this.getUnit();
     MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
-    boolean _isFolder = _fileSystemSupport.isFolder(path);
-    return _isFolder;
+    return _fileSystemSupport.isFolder(path);
   }
   
   public URI toURI(final Path path) {
     CompilationUnitImpl _unit = this.getUnit();
     MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
-    URI _uRI = _fileSystemSupport.toURI(path);
-    return _uRI;
+    return _fileSystemSupport.toURI(path);
   }
 }

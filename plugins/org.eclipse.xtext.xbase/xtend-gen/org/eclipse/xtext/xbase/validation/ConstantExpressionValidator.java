@@ -146,8 +146,7 @@ public class ConstantExpressionValidator {
             _xifexpression = true;
           } else {
             XExpression _actualReceiver_1 = expression.getActualReceiver();
-            boolean _isConstant = this.isConstant(_actualReceiver_1);
-            _xifexpression = _isConstant;
+            _xifexpression = this.isConstant(_actualReceiver_1);
           }
           final boolean receiverConstant = _xifexpression;
           boolean _and = false;
@@ -157,8 +156,7 @@ public class ConstantExpressionValidator {
             EList<XExpression> _actualArguments = expression.getActualArguments();
             final Function1<XExpression,Boolean> _function_1 = new Function1<XExpression,Boolean>() {
               public Boolean apply(final XExpression it) {
-                boolean _isConstant = ConstantExpressionValidator.this.isConstant(it);
-                return Boolean.valueOf(_isConstant);
+                return Boolean.valueOf(ConstantExpressionValidator.this.isConstant(it));
               }
             };
             boolean _forall = IterableExtensions.<XExpression>forall(_actualArguments, _function_1);

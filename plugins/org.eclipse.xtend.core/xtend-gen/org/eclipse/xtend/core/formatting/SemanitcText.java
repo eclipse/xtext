@@ -8,8 +8,7 @@ import org.eclipse.xtend.lib.Data;
 public class SemanitcText extends Chunk {
   public String toString() {
     CharSequence _text = this.getText();
-    String _string = _text.toString();
-    return _string;
+    return _text.toString();
   }
   
   public SemanitcText(final CharSequence text) {

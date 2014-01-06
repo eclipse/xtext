@@ -34,8 +34,7 @@ public class ValidatorNaming extends Naming {
     String _name = GrammarUtil.getName(g);
     _builder.append(_name, "");
     _builder.append("Validator");
-    String _string = _builder.toString();
-    return _string;
+    return _builder.toString();
   }
   
   public String getAbstractValidatorName() {
@@ -46,8 +45,7 @@ public class ValidatorNaming extends Naming {
     String _name = GrammarUtil.getName(this.grammar);
     _builder.append(_name, "");
     _builder.append("Validator");
-    String _string = _builder.toString();
-    return _string;
+    return _builder.toString();
   }
   
   public String getValidatorSuperClassName(final boolean isInheritImplementation) {
@@ -63,8 +61,7 @@ public class ValidatorNaming extends Naming {
         _and = (isInheritImplementation && _notEquals);
       }
       if (_and) {
-        String _validatorName = this.getValidatorName(superGrammar);
-        _xifexpression = _validatorName;
+        _xifexpression = this.getValidatorName(superGrammar);
       } else {
         _xifexpression = "org.eclipse.xtext.validation.AbstractDeclarativeValidator";
       }

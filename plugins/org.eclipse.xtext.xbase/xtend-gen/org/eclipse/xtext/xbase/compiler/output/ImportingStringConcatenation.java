@@ -43,8 +43,7 @@ public class ImportingStringConcatenation extends StringConcatenation {
   }
   
   protected String _getStringRepresentation(final Object object) {
-    String _stringRepresentation = super.getStringRepresentation(object);
-    return _stringRepresentation;
+    return super.getStringRepresentation(object);
   }
   
   protected String _getStringRepresentation(final JvmType object) {
@@ -59,10 +58,8 @@ public class ImportingStringConcatenation extends StringConcatenation {
   }
   
   protected String _getStringRepresentation(final LightweightTypeReference object) {
-    StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(this.importManager);
-    final StringBuilderBasedAppendable appender = _stringBuilderBasedAppendable;
-    LightweightTypeReferenceSerializer _lightweightTypeReferenceSerializer = new LightweightTypeReferenceSerializer(appender);
-    final LightweightTypeReferenceSerializer serializer = _lightweightTypeReferenceSerializer;
+    final StringBuilderBasedAppendable appender = new StringBuilderBasedAppendable(this.importManager);
+    final LightweightTypeReferenceSerializer serializer = new LightweightTypeReferenceSerializer(appender);
     object.accept(serializer);
     return appender.toString();
   }

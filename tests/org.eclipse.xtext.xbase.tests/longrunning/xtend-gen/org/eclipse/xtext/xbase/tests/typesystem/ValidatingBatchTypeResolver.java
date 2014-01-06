@@ -22,7 +22,6 @@ public class ValidatingBatchTypeResolver extends DefaultBatchTypeResolver {
   private Provider<ValidatingReentrantTypeResolver> resolverProvider;
   
   public AbstractRootedReentrantTypeResolver createResolver() {
-    ValidatingReentrantTypeResolver _get = this.resolverProvider.get();
-    return _get;
+    return this.resolverProvider.get();
   }
 }

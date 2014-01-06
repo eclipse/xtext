@@ -100,8 +100,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     final Function1<IResolvedOperation,Boolean> _function = new Function1<IResolvedOperation,Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
-        boolean _isAbstract = _declaration.isAbstract();
-        return Boolean.valueOf(_isAbstract);
+        return Boolean.valueOf(_declaration.isAbstract());
       }
     };
     Iterable<IResolvedOperation> _filter = IterableExtensions.<IResolvedOperation>filter(all, _function);
@@ -121,8 +120,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     final Function1<IResolvedOperation,Boolean> _function = new Function1<IResolvedOperation,Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
-        boolean _isAbstract = _declaration.isAbstract();
-        return Boolean.valueOf(_isAbstract);
+        return Boolean.valueOf(_declaration.isAbstract());
       }
     };
     Iterable<IResolvedOperation> _filter = IterableExtensions.<IResolvedOperation>filter(all, _function);
@@ -132,8 +130,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     final Function1<IResolvedOperation,Boolean> _function_1 = new Function1<IResolvedOperation,Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
-        boolean _isFinal = _declaration.isFinal();
-        return Boolean.valueOf(_isFinal);
+        return Boolean.valueOf(_declaration.isFinal());
       }
     };
     Iterable<IResolvedOperation> _filter_1 = IterableExtensions.<IResolvedOperation>filter(all, _function_1);
@@ -154,8 +151,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     final Function1<IResolvedOperation,Boolean> _function = new Function1<IResolvedOperation,Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
-        boolean _isAbstract = _declaration.isAbstract();
-        return Boolean.valueOf(_isAbstract);
+        return Boolean.valueOf(_declaration.isAbstract());
       }
     };
     Iterable<IResolvedOperation> _filter = IterableExtensions.<IResolvedOperation>filter(all, _function);
@@ -165,8 +161,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     final Function1<IResolvedOperation,Boolean> _function_1 = new Function1<IResolvedOperation,Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
-        boolean _isAbstract = _declaration.isAbstract();
-        return Boolean.valueOf(_isAbstract);
+        return Boolean.valueOf(_declaration.isAbstract());
       }
     };
     Iterable<IResolvedOperation> _filter_1 = IterableExtensions.<IResolvedOperation>filter(declared, _function_1);

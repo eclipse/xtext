@@ -17,7 +17,6 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
 @SuppressWarnings("all")
 public class ValidatingReentrantTypeResolver extends DefaultReentrantTypeResolver {
   public RootResolvedTypes createResolvedTypes() {
-    ValidatingRootResolvedTypes _validatingRootResolvedTypes = new ValidatingRootResolvedTypes(this);
-    return _validatingRootResolvedTypes;
+    return new ValidatingRootResolvedTypes(this);
   }
 }

@@ -90,8 +90,7 @@ public class TypeLookupImpl implements TypeLookup {
     Type _xifexpression = null;
     boolean _notEquals = (!Objects.equal(result, null));
     if (_notEquals) {
-      Type _type = this.compilationUnit.toType(result);
-      _xifexpression = _type;
+      _xifexpression = this.compilationUnit.toType(result);
     }
     return _xifexpression;
   }
@@ -127,8 +126,7 @@ public class TypeLookupImpl implements TypeLookup {
   
   public Type findTypeGlobally(final Class<? extends Object> clazz) {
     String _canonicalName = clazz.getCanonicalName();
-    Type _findTypeGlobally = this.findTypeGlobally(_canonicalName);
-    return _findTypeGlobally;
+    return this.findTypeGlobally(_canonicalName);
   }
   
   public Type findTypeGlobally(final String typeName) {
@@ -147,8 +145,7 @@ public class TypeLookupImpl implements TypeLookup {
         if (_equals) {
           _xifexpression = null;
         } else {
-          Type _type = this.compilationUnit.toType(result);
-          _xifexpression = _type;
+          _xifexpression = this.compilationUnit.toType(result);
         }
         _xblockexpression = (_xifexpression);
       }

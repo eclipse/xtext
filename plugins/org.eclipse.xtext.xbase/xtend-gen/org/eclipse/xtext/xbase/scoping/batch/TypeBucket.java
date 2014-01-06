@@ -45,8 +45,7 @@ public class TypeBucket {
   }
   
   public EnumSet<ConformanceHint> getHints() {
-    EnumSet<ConformanceHint> _of = EnumSet.<ConformanceHint>of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
-    return _of;
+    return EnumSet.<ConformanceHint>of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
   }
   
   public TypeBucket(final int id, final List<? extends JvmType> types, final IResolvedFeatures.Provider resolvedFeaturesProvider) {

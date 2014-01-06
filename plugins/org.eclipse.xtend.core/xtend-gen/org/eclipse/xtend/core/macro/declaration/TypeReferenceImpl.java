@@ -23,14 +23,12 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> implements TypeReference {
   public String getName() {
     LightweightTypeReference _delegate = this.getDelegate();
-    String _javaIdentifier = _delegate.getJavaIdentifier();
-    return _javaIdentifier;
+    return _delegate.getJavaIdentifier();
   }
   
   public String getSimpleName() {
     LightweightTypeReference _delegate = this.getDelegate();
-    String _simpleName = _delegate.getSimpleName();
-    return _simpleName;
+    return _delegate.getSimpleName();
   }
   
   public Type getType() {
@@ -48,15 +46,13 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
         String _plus = (_packageName + ".");
         String _simpleName = it.getSimpleName();
         String _plus_1 = (_plus + _simpleName);
-        UnknownType _unknownType = new UnknownType(_compilationUnit, _plus_1);
-        _switchResult = _unknownType;
+        _switchResult = new UnknownType(_compilationUnit, _plus_1);
       }
     }
     if (!_matched) {
       CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
       JvmType _type = it.getType();
-      Type _type_1 = _compilationUnit_2.toType(_type);
-      _switchResult = _type_1;
+      _switchResult = _compilationUnit_2.toType(_type);
     }
     return _switchResult;
   }
@@ -72,12 +68,10 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
     final Function1<LightweightTypeReference,TypeReference> _function = new Function1<LightweightTypeReference,TypeReference>() {
       public TypeReference apply(final LightweightTypeReference it) {
         CompilationUnitImpl _compilationUnit = TypeReferenceImpl.this.getCompilationUnit();
-        TypeReference _typeReference = _compilationUnit.toTypeReference(it);
-        return _typeReference;
+        return _compilationUnit.toTypeReference(it);
       }
     };
-    List<TypeReference> _map = ListExtensions.<LightweightTypeReference, TypeReference>map(_typeArguments, _function);
-    return _map;
+    return ListExtensions.<LightweightTypeReference, TypeReference>map(_typeArguments, _function);
   }
   
   public TypeReference getArrayComponentType() {
@@ -95,8 +89,7 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     LightweightTypeReference _delegate = this.getDelegate();
     LightweightTypeReference _lowerBoundSubstitute = _delegate.getLowerBoundSubstitute();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_lowerBoundSubstitute);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_lowerBoundSubstitute);
   }
   
   public TypeReference getPrimitiveIfWrapper() {
@@ -110,8 +103,7 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
       LightweightTypeReference _delegate = this.getDelegate();
       LightweightTypeReference _primitiveIfWrapperType = _delegate.getPrimitiveIfWrapperType();
-      TypeReference _typeReference = _compilationUnit.toTypeReference(_primitiveIfWrapperType);
-      _xblockexpression = (_typeReference);
+      _xblockexpression = (_compilationUnit.toTypeReference(_primitiveIfWrapperType));
     }
     return _xblockexpression;
   }
@@ -120,64 +112,54 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     LightweightTypeReference _delegate = this.getDelegate();
     LightweightTypeReference _upperBoundSubstitute = _delegate.getUpperBoundSubstitute();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_upperBoundSubstitute);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_upperBoundSubstitute);
   }
   
   public TypeReference getWrapperIfPrimitive() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     LightweightTypeReference _delegate = this.getDelegate();
     LightweightTypeReference _wrapperTypeIfPrimitive = _delegate.getWrapperTypeIfPrimitive();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_wrapperTypeIfPrimitive);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_wrapperTypeIfPrimitive);
   }
   
   public boolean isAnyType() {
     LightweightTypeReference _delegate = this.getDelegate();
-    boolean _isAny = _delegate.isAny();
-    return _isAny;
+    return _delegate.isAny();
   }
   
   public boolean isArray() {
     LightweightTypeReference _delegate = this.getDelegate();
-    boolean _isArray = _delegate.isArray();
-    return _isArray;
+    return _delegate.isArray();
   }
   
   public boolean isAssignableFrom(final TypeReference typeReference) {
     LightweightTypeReference _delegate = this.getDelegate();
     LightweightTypeReference _delegate_1 = ((TypeReferenceImpl) typeReference).getDelegate();
-    boolean _isAssignableFrom = _delegate.isAssignableFrom(_delegate_1);
-    return _isAssignableFrom;
+    return _delegate.isAssignableFrom(_delegate_1);
   }
   
   public boolean isPrimitive() {
     LightweightTypeReference _delegate = this.getDelegate();
-    boolean _isPrimitive = _delegate.isPrimitive();
-    return _isPrimitive;
+    return _delegate.isPrimitive();
   }
   
   public boolean isVoid() {
     LightweightTypeReference _delegate = this.getDelegate();
-    boolean _isPrimitiveVoid = _delegate.isPrimitiveVoid();
-    return _isPrimitiveVoid;
+    return _delegate.isPrimitiveVoid();
   }
   
   public boolean isWildCard() {
     LightweightTypeReference _delegate = this.getDelegate();
-    boolean _isWildcard = _delegate.isWildcard();
-    return _isWildcard;
+    return _delegate.isWildcard();
   }
   
   public boolean isWrapper() {
     LightweightTypeReference _delegate = this.getDelegate();
-    boolean _isWrapper = _delegate.isWrapper();
-    return _isWrapper;
+    return _delegate.isWrapper();
   }
   
   public LightweightTypeReference getLightWeightTypeReference() {
-    LightweightTypeReference _delegate = this.getDelegate();
-    return _delegate;
+    return this.getDelegate();
   }
   
   public boolean equals(final Object obj) {
@@ -203,7 +185,6 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
     LightweightTypeReference _delegate = this.getDelegate();
     JvmType _type = _delegate.getType();
     String _qualifiedName = _type.getQualifiedName();
-    int _hashCode = _qualifiedName.hashCode();
-    return _hashCode;
+    return _qualifiedName.hashCode();
   }
 }

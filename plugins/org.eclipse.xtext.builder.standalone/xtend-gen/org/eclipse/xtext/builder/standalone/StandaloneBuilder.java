@@ -156,8 +156,7 @@ public class StandaloneBuilder {
     Collection<LanguageAccess> _values = _languages.values();
     final Function1<LanguageAccess,Boolean> _function = new Function1<LanguageAccess,Boolean>() {
       public Boolean apply(final LanguageAccess it) {
-        boolean _isLinksAgainstJava = it.isLinksAgainstJava();
-        return Boolean.valueOf(_isLinksAgainstJava);
+        return Boolean.valueOf(it.isLinksAgainstJava());
       }
     };
     final boolean needsJava = IterableExtensions.<LanguageAccess>exists(_values, _function);
@@ -178,8 +177,7 @@ public class StandaloneBuilder {
       final Function1<String,Boolean> _function_1 = new Function1<String,Boolean>() {
         public Boolean apply(final String root) {
           Matcher _matcher = cpLookUpFilter.matcher(root);
-          boolean _matches = _matcher.matches();
-          return Boolean.valueOf(_matches);
+          return Boolean.valueOf(_matcher.matches());
         }
       };
       Iterable<String> _filter = IterableExtensions.<String>filter(_classPathEntries, _function_1);
@@ -254,13 +252,11 @@ public class StandaloneBuilder {
       public IResourceDescription apply(final Resource it) {
         LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
         IResourceDescription.Manager _resourceDescriptionManager = _languageAccess.getResourceDescriptionManager();
-        IResourceDescription _resourceDescription = _resourceDescriptionManager.getResourceDescription(it);
-        return _resourceDescription;
+        return _resourceDescriptionManager.getResourceDescription(it);
       }
     };
     final List<IResourceDescription> descriptions = ListExtensions.<Resource, IResourceDescription>map(_arrayList, _function);
-    ResourceDescriptionsData _resourceDescriptionsData = new ResourceDescriptionsData(descriptions);
-    final ResourceDescriptionsData index = _resourceDescriptionsData;
+    final ResourceDescriptionsData index = new ResourceDescriptionsData(descriptions);
     ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(set, index);
     return index;
   }
@@ -309,8 +305,7 @@ public class StandaloneBuilder {
     final Function1<Resource,Boolean> _function = new Function1<Resource,Boolean>() {
       public Boolean apply(final Resource it) {
         LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
-        boolean _isLinksAgainstJava = _languageAccess.isLinksAgainstJava();
-        return Boolean.valueOf(_isLinksAgainstJava);
+        return Boolean.valueOf(_languageAccess.isLinksAgainstJava());
       }
     };
     final Iterable<? extends Resource> generateStubs = IterableExtensions.filter(resources, _function);
@@ -386,15 +381,13 @@ public class StandaloneBuilder {
     Map<String,LanguageAccess> _languages = this.getLanguages();
     URI _uRI = resource.getURI();
     String _fileExtension = _uRI.fileExtension();
-    LanguageAccess _get = _languages.get(_fileExtension);
-    return _get;
+    return _languages.get(_fileExtension);
   }
   
   protected File createTempDir(final String subDir) {
     try {
       File _tempDir = this.getTempDir();
-      File _file = new File(_tempDir, subDir);
-      final File file = _file;
+      final File file = new File(_tempDir, subDir);
       boolean _and = false;
       boolean _mkdirs = file.mkdirs();
       boolean _not = (!_mkdirs);
@@ -409,8 +402,7 @@ public class StandaloneBuilder {
         String _absolutePath = file.getAbsolutePath();
         String _plus = ("Failed to create directory \'" + _absolutePath);
         String _plus_1 = (_plus + "\'");
-        IOException _iOException = new IOException(_plus_1);
-        throw _iOException;
+        throw new IOException(_plus_1);
       }
       return file;
     } catch (Throwable _e) {
@@ -430,24 +422,21 @@ public class StandaloneBuilder {
         try {
           File _file = new File(str);
           java.net.URI _uRI = _file.toURI();
-          URL _uRL = _uRI.toURL();
-          return _uRL;
+          return _uRI.toURL();
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
       }
     };
     final Iterable<URL> classPathUrls = IterableExtensions.<String, URL>map(classPathEntries, _function);
-    URLClassLoader _uRLClassLoader = new URLClassLoader(((URL[])Conversions.unwrapArray(classPathUrls, URL.class)));
-    return _uRLClassLoader;
+    return new URLClassLoader(((URL[])Conversions.unwrapArray(classPathUrls, URL.class)));
   }
   
   protected List<Resource> collectResources(final Iterable<String> roots, final ResourceSet resourceSet) {
     Map<String,LanguageAccess> _languages = this.getLanguages();
     Set<String> _keySet = _languages.keySet();
     final String extensions = IterableExtensions.join(_keySet, "|");
-    NameBasedFilter _nameBasedFilter = new NameBasedFilter();
-    final NameBasedFilter nameBasedFilter = _nameBasedFilter;
+    final NameBasedFilter nameBasedFilter = new NameBasedFilter();
     nameBasedFilter.setRegularExpression(((".*\\.(?:(" + extensions) + "))$"));
     final List<Resource> resources = CollectionLiterals.<Resource>newArrayList();
     PathTraverser _pathTraverser = new PathTraverser();

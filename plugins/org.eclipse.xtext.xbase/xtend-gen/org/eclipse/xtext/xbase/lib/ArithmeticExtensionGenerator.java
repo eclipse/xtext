@@ -50,8 +50,7 @@ public class ArithmeticExtensionGenerator {
           String _className = this.className(type);
           String _plus = (path + _className);
           String _plus_1 = (_plus + ".java");
-          File _file_1 = new File(_plus_1);
-          final File file = _file_1;
+          final File file = new File(_plus_1);
           CharSequence _xifexpression = null;
           boolean _exists = file.exists();
           if (_exists) {
@@ -81,12 +80,10 @@ public class ArithmeticExtensionGenerator {
             }
             _xifexpression = _xblockexpression;
           } else {
-            CharSequence _generate = this.generate(type);
-            _xifexpression = _generate;
+            _xifexpression = this.generate(type);
           }
           final CharSequence newContent = _xifexpression;
-          FileWriter _fileWriter = new FileWriter(file);
-          final FileWriter writer = _fileWriter;
+          final FileWriter writer = new FileWriter(file);
           writer.append(newContent);
           writer.close();
         }
@@ -579,23 +576,20 @@ public class ArithmeticExtensionGenerator {
       }
     }
     if (!_matched) {
-      String _firstUpper = StringExtensions.toFirstUpper(it);
-      _switchResult = _firstUpper;
+      _switchResult = StringExtensions.toFirstUpper(it);
     }
     return _switchResult;
   }
   
   public String className(final String it) {
     String _wrapperType = this.wrapperType(it);
-    String _plus = (_wrapperType + "Extensions");
-    return _plus;
+    return (_wrapperType + "Extensions");
   }
   
   public String toHtml(final QualifiedName it) {
     String _string = it.toString();
     String _replace = _string.replace("<", "&lt;");
-    String _replace_1 = _replace.replace(">", "&gt;");
-    return _replace_1;
+    return _replace.replace(">", "&gt;");
   }
   
   public String startMarker() {

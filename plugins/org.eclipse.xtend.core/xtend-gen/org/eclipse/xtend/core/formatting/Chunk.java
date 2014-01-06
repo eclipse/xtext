@@ -14,8 +14,7 @@ public abstract class Chunk {
   
   public int getLength() {
     CharSequence _text = this.getText();
-    int _length = _text.length();
-    return _length;
+    return _text.length();
   }
   
   public Chunk(final CharSequence text) {

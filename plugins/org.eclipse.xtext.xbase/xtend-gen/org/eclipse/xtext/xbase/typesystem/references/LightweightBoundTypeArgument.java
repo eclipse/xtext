@@ -55,8 +55,7 @@ public class LightweightBoundTypeArgument {
     VarianceInfo _declaredVariance = this.getDeclaredVariance();
     VarianceInfo _actualVariance = this.getActualVariance();
     VarianceInfo _mergeDeclaredWithActual = _declaredVariance.mergeDeclaredWithActual(_actualVariance);
-    boolean _notEquals = (!Objects.equal(_mergeDeclaredWithActual, null));
-    return _notEquals;
+    return (!Objects.equal(_mergeDeclaredWithActual, null));
   }
   
   public LightweightBoundTypeArgument(final LightweightTypeReference typeReference, final BoundTypeArgumentSource source, final Object origin, final VarianceInfo declaredVariance, final VarianceInfo actualVariance) {

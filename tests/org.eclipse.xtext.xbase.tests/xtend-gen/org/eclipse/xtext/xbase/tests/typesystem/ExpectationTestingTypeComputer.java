@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNullLiteral;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractExpectationTest;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
@@ -30,16 +29,11 @@ public class ExpectationTestingTypeComputer extends XbaseTypeComputer {
     this._test = test;
   }
   
-  private Function1<? super XExpression,? extends Boolean> _predicate = new Function0<Function1<? super XExpression,? extends Boolean>>() {
-    public Function1<? super XExpression,? extends Boolean> apply() {
-      final Function1<XExpression,Boolean> _function = new Function1<XExpression,Boolean>() {
-        public Boolean apply(final XExpression it) {
-          return Boolean.valueOf((it instanceof XNullLiteral));
-        }
-      };
-      return _function;
+  private Function1<? super XExpression,? extends Boolean> _predicate = new Function1<XExpression,Boolean>() {
+    public Boolean apply(final XExpression it) {
+      return Boolean.valueOf((it instanceof XNullLiteral));
     }
-  }.apply();
+  };
   
   public Function1<? super XExpression,? extends Boolean> getPredicate() {
     return this._predicate;

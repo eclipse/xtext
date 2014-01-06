@@ -27,7 +27,6 @@ import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -40,12 +39,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class PerformanceTest extends AbstractXtendUITestCase {
   @Rule
-  public final StopwatchRule rule = new Function0<StopwatchRule>() {
-    public StopwatchRule apply() {
-      StopwatchRule _stopwatchRule = new StopwatchRule(true);
-      return _stopwatchRule;
-    }
-  }.apply();
+  public final StopwatchRule rule = new StopwatchRule(true);
   
   @BeforeClass
   public static void createTestProject() {

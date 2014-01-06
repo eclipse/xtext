@@ -18,8 +18,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class NodeModelAccess {
   public INode nodeForEObject(final EObject obj) {
-    ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(obj);
-    return _findActualNodeFor;
+    return NodeModelUtils.findActualNodeFor(obj);
   }
   
   public ILeafNode nodeForKeyword(final EObject obj, final String kw) {
@@ -83,27 +82,23 @@ public class NodeModelAccess {
           return Boolean.valueOf(_and);
         }
       };
-      Iterable<ILeafNode> _filter_1 = IterableExtensions.<ILeafNode>filter(_filter, _function);
-      _xblockexpression = (_filter_1);
+      _xblockexpression = (IterableExtensions.<ILeafNode>filter(_filter, _function));
     }
     return _xblockexpression;
   }
   
   public INode nodeForFeature(final EObject obj, final EStructuralFeature feature) {
     List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(obj, feature);
-    INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
-    return _head;
+    return IterableExtensions.<INode>head(_findNodesForFeature);
   }
   
   public Iterable<INode> nodesForFeature(final EObject obj, final EStructuralFeature feature) {
-    List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(obj, feature);
-    return _findNodesForFeature;
+    return NodeModelUtils.findNodesForFeature(obj, feature);
   }
   
   public ILeafNode immediatelyFollowingKeyword(final EObject obj, final String kw) {
     INode _nodeForEObject = this.nodeForEObject(obj);
-    ILeafNode _immediatelyFollowingKeyword = this.immediatelyFollowingKeyword(_nodeForEObject, kw);
-    return _immediatelyFollowingKeyword;
+    return this.immediatelyFollowingKeyword(_nodeForEObject, kw);
   }
   
   public ILeafNode immediatelyFollowingKeyword(final INode node, final String kw) {
@@ -163,8 +158,7 @@ public class NodeModelAccess {
       if (_and) {
         return ((ILeafNode) node);
       }
-      NodeIterator _nodeIterator = new NodeIterator(node);
-      final NodeIterator ni = _nodeIterator;
+      final NodeIterator ni = new NodeIterator(node);
       boolean _hasNext = ni.hasNext();
       boolean _while = _hasNext;
       while (_while) {

@@ -4,8 +4,7 @@ public class Xbase04_Casts {
     int _xblockexpression = (int) 0;
     {
       final CharSequence s = "foo";
-      int _length = ((String) s).length();
-      _xblockexpression = (_length);
+      _xblockexpression = (((String) s).length());
     }
     return _xblockexpression;
   }

@@ -24,17 +24,14 @@ public class XtendEnumerationDeclarationImpl extends XtendTypeDeclarationImpl<Xt
     final Function1<EnumerationValueDeclaration,Boolean> _function = new Function1<EnumerationValueDeclaration,Boolean>() {
       public Boolean apply(final EnumerationValueDeclaration value) {
         String _simpleName = value.getSimpleName();
-        boolean _equals = Objects.equal(_simpleName, name);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_simpleName, name));
       }
     };
-    EnumerationValueDeclaration _findFirst = IterableExtensions.findFirst(_declaredValues, _function);
-    return _findFirst;
+    return IterableExtensions.findFirst(_declaredValues, _function);
   }
   
   public Iterable<? extends EnumerationValueDeclaration> getDeclaredValues() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    Iterable<EnumerationValueDeclaration> _filter = Iterables.<EnumerationValueDeclaration>filter(_declaredMembers, EnumerationValueDeclaration.class);
-    return _filter;
+    return Iterables.<EnumerationValueDeclaration>filter(_declaredMembers, EnumerationValueDeclaration.class);
   }
 }

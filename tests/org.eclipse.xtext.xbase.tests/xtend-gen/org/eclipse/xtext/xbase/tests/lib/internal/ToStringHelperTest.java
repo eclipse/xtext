@@ -13,8 +13,7 @@ import org.junit.Test;
 public class ToStringHelperTest {
   @Test
   public void testToString() {
-    ToStringHelper _toStringHelper = new ToStringHelper();
-    final ToStringHelper helper = _toStringHelper;
+    final ToStringHelper helper = new ToStringHelper();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("MyEntity [");
     _builder.newLine();
@@ -67,10 +66,8 @@ public class ToStringHelperTest {
   
   @Test
   public void recursionHandling() {
-    ToStringHelper _toStringHelper = new ToStringHelper();
-    final ToStringHelper helper = _toStringHelper;
-    OtherClass _otherClass = new OtherClass();
-    final OtherClass obj = _otherClass;
+    final ToStringHelper helper = new ToStringHelper();
+    final OtherClass obj = new OtherClass();
     obj.name = "foo";
     obj.other = obj;
     StringConcatenation _builder = new StringConcatenation();
@@ -92,12 +89,9 @@ public class ToStringHelperTest {
   
   @Test
   public void recursionHandling_02() {
-    ToStringHelper _toStringHelper = new ToStringHelper();
-    final ToStringHelper helper = _toStringHelper;
-    Wrapper<DataClass> _wrapper = new Wrapper<DataClass>();
-    final Wrapper<DataClass> ref = _wrapper;
-    DataClass _dataClass = new DataClass(ref, "test");
-    final DataClass obj = _dataClass;
+    final ToStringHelper helper = new ToStringHelper();
+    final Wrapper<DataClass> ref = new Wrapper<DataClass>();
+    final DataClass obj = new DataClass(ref, "test");
     ref.set(obj);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("DataClass [");

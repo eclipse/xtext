@@ -20,7 +20,6 @@ public class XtendResourceDescriptionManager extends DerivedStateAwareResourceDe
   
   public IResourceDescription createResourceDescription(final Resource resource, final IDefaultResourceDescriptionStrategy strategy) {
     IResourceScopeCache _cache = this.getCache();
-    XtendResourceDescription _xtendResourceDescription = new XtendResourceDescription(resource, strategy, _cache, this.typeResolver, this.nameConverter);
-    return _xtendResourceDescription;
+    return new XtendResourceDescription(resource, strategy, _cache, this.typeResolver, this.nameConverter);
   }
 }

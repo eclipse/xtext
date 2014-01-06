@@ -77,8 +77,7 @@ public class XbaseEditorInputRedirector {
                 public Boolean apply(final IPackageFragmentRoot it) {
                   try {
                     int _kind = it.getKind();
-                    boolean _equals = (_kind == IPackageFragmentRoot.K_SOURCE);
-                    return Boolean.valueOf(_equals);
+                    return Boolean.valueOf((_kind == IPackageFragmentRoot.K_SOURCE));
                   } catch (Throwable _e) {
                     throw Exceptions.sneakyThrow(_e);
                   }
@@ -94,8 +93,7 @@ public class XbaseEditorInputRedirector {
                   final IFile newFile = _project_1.getFile(fullPath);
                   boolean _exists_1 = newFile.exists();
                   if (_exists_1) {
-                    FileEditorInput _fileEditorInput = new FileEditorInput(newFile);
-                    return _fileEditorInput;
+                    return new FileEditorInput(newFile);
                   }
                 }
               }
@@ -104,8 +102,7 @@ public class XbaseEditorInputRedirector {
             final Function1<IClasspathEntry,Boolean> _function_1 = new Function1<IClasspathEntry,Boolean>() {
               public Boolean apply(final IClasspathEntry it) {
                 int _entryKind = it.getEntryKind();
-                boolean _equals = (_entryKind == IClasspathEntry.CPE_SOURCE);
-                return Boolean.valueOf(_equals);
+                return Boolean.valueOf((_entryKind == IClasspathEntry.CPE_SOURCE));
               }
             };
             Iterable<IClasspathEntry> _filter_1 = IterableExtensions.<IClasspathEntry>filter(((Iterable<IClasspathEntry>)Conversions.doWrapArray(_rawClasspath)), _function_1);
@@ -135,8 +132,7 @@ public class XbaseEditorInputRedirector {
                 final IFile newFile = _project_1.getFile(fullPath);
                 boolean _exists_1 = newFile.exists();
                 if (_exists_1) {
-                  FileEditorInput _fileEditorInput = new FileEditorInput(newFile);
-                  return _fileEditorInput;
+                  return new FileEditorInput(newFile);
                 }
               }
             }
@@ -203,12 +199,10 @@ public class XbaseEditorInputRedirector {
       if (!_matched) {
         if (originalStorage instanceof IFile) {
           _matched=true;
-          FileEditorInput _fileEditorInput = new FileEditorInput(((IFile)originalStorage));
-          return _fileEditorInput;
+          return new FileEditorInput(((IFile)originalStorage));
         }
       }
-      XtextReadonlyEditorInput _xtextReadonlyEditorInput = new XtextReadonlyEditorInput(originalStorage);
-      return _xtextReadonlyEditorInput;
+      return new XtextReadonlyEditorInput(originalStorage);
     }
     return input;
   }
@@ -223,8 +217,7 @@ public class XbaseEditorInputRedirector {
   }
   
   protected IPackageFragmentRoot _getPackageFragmentRoot(final Void element) {
-    IllegalStateException _illegalStateException = new IllegalStateException("couldn\'t find source package fragment root.");
-    throw _illegalStateException;
+    throw new IllegalStateException("couldn\'t find source package fragment root.");
   }
   
   public IPackageFragmentRoot getPackageFragmentRoot(final IJavaElement element) {

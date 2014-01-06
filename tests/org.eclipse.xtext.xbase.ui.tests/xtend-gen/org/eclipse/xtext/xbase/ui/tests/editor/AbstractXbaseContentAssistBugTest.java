@@ -108,8 +108,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
   protected void initializeTypeProvider(final XtextResource result) {
     ResourceSet _resourceSet = result.getResourceSet();
     final XtextResourceSet resourceSet = ((XtextResourceSet) _resourceSet);
-    JdtTypeProviderFactory _jdtTypeProviderFactory = new JdtTypeProviderFactory(this);
-    final JdtTypeProviderFactory typeProviderFactory = _jdtTypeProviderFactory;
+    final JdtTypeProviderFactory typeProviderFactory = new JdtTypeProviderFactory(this);
     typeProviderFactory.findOrCreateTypeProvider(resourceSet);
     IJavaProject _javaProject = this.getJavaProject(resourceSet);
     resourceSet.setClasspathURIContext(_javaProject);
@@ -117,7 +116,6 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
   
   protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
     Injector _injector = this.getInjector();
-    ContentAssistProcessorTestBuilder _contentAssistProcessorTestBuilder = new ContentAssistProcessorTestBuilder(_injector, this);
-    return _contentAssistProcessorTestBuilder;
+    return new ContentAssistProcessorTestBuilder(_injector, this);
   }
 }

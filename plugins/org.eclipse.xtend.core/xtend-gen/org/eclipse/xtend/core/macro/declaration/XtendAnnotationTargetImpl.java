@@ -31,13 +31,11 @@ public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget>
     final Function1<XAnnotation,AnnotationReference> _function = new Function1<XAnnotation,AnnotationReference>() {
       public AnnotationReference apply(final XAnnotation it) {
         CompilationUnitImpl _compilationUnit = XtendAnnotationTargetImpl.this.getCompilationUnit();
-        AnnotationReference _annotationReference = _compilationUnit.toAnnotationReference(it);
-        return _annotationReference;
+        return _compilationUnit.toAnnotationReference(it);
       }
     };
     List<AnnotationReference> _map = ListExtensions.<XAnnotation, AnnotationReference>map(_annotations, _function);
-    ImmutableList<AnnotationReference> _copyOf = ImmutableList.<AnnotationReference>copyOf(_map);
-    return _copyOf;
+    return ImmutableList.<AnnotationReference>copyOf(_map);
   }
   
   public AnnotationReference findAnnotation(final Type annotationType) {
@@ -45,11 +43,9 @@ public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget>
     final Function1<AnnotationReference,Boolean> _function = new Function1<AnnotationReference,Boolean>() {
       public Boolean apply(final AnnotationReference it) {
         AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
-        boolean _equals = Objects.equal(_annotationTypeDeclaration, annotationType);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_annotationTypeDeclaration, annotationType));
       }
     };
-    AnnotationReference _findFirst = IterableExtensions.findFirst(_annotations, _function);
-    return _findFirst;
+    return IterableExtensions.findFirst(_annotations, _function);
   }
 }

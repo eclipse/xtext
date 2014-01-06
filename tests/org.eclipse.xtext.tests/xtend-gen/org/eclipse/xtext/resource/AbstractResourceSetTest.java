@@ -19,8 +19,7 @@ public abstract class AbstractResourceSetTest {
       public Resource createResource(final URI uri) {
         NullResource _xblockexpression = null;
         {
-          NullResource _nullResource = new NullResource();
-          final NullResource result = _nullResource;
+          final NullResource result = new NullResource();
           result.setURI(uri);
           _xblockexpression = (result);
         }

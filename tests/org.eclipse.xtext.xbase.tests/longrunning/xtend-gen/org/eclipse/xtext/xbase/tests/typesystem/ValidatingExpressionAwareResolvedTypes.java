@@ -34,18 +34,15 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   }
   
   public StackedResolvedTypes pushReassigningTypes() {
-    ValidatingReassigningResolvedTypes _validatingReassigningResolvedTypes = new ValidatingReassigningResolvedTypes(this);
-    return _validatingReassigningResolvedTypes;
+    return new ValidatingReassigningResolvedTypes(this);
   }
   
   public StackedResolvedTypes pushTypes() {
-    ValidatingStackedResolvedTypes _validatingStackedResolvedTypes = new ValidatingStackedResolvedTypes(this);
-    return _validatingStackedResolvedTypes;
+    return new ValidatingStackedResolvedTypes(this);
   }
   
   public ExpressionAwareStackedResolvedTypes pushTypes(final XExpression context) {
-    ValidatingExpressionAwareResolvedTypes _validatingExpressionAwareResolvedTypes = new ValidatingExpressionAwareResolvedTypes(this, context);
-    return _validatingExpressionAwareResolvedTypes;
+    return new ValidatingExpressionAwareResolvedTypes(this, context);
   }
   
   public void setType(final JvmIdentifiableElement identifiable, final LightweightTypeReference reference) {
@@ -53,8 +50,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
     boolean _isOwnedBy = reference.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("reference is not owned by this resolved types");
-      throw _illegalArgumentException;
+      throw new IllegalArgumentException("reference is not owned by this resolved types");
     }
     super.setType(identifiable, reference);
   }
@@ -71,8 +67,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
       _and = (_notEquals && _not);
     }
     if (_and) {
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("reference is not owned by this resolved types");
-      throw _illegalArgumentException;
+      throw new IllegalArgumentException("reference is not owned by this resolved types");
     }
     super.reassignType(identifiable, reference);
   }
@@ -91,8 +86,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
       _and = (_notEquals && _not);
     }
     if (_and) {
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("reference is not owned by this resolved types");
-      throw _illegalArgumentException;
+      throw new IllegalArgumentException("reference is not owned by this resolved types");
     }
     super.acceptHint(handle, boundTypeArgument);
   }
@@ -114,8 +108,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
           _and = (_notEquals && _not);
         }
         if (_and) {
-          IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("reference is not owned by this resolved types");
-          throw _illegalArgumentException;
+          throw new IllegalArgumentException("reference is not owned by this resolved types");
         }
       }
     };
@@ -130,18 +123,15 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
       boolean _isOwnedBy = expectation.isOwnedBy(_referenceOwner);
       boolean _not = (!_isOwnedBy);
       if (_not) {
-        IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("expectation is not owned by this resolved types");
-        throw _illegalArgumentException;
+        throw new IllegalArgumentException("expectation is not owned by this resolved types");
       }
       ITypeReferenceOwner _referenceOwner_1 = this.getReferenceOwner();
       boolean _isOwnedBy_1 = type.isOwnedBy(_referenceOwner_1);
       boolean _not_1 = (!_isOwnedBy_1);
       if (_not_1) {
-        IllegalArgumentException _illegalArgumentException_1 = new IllegalArgumentException("type is not owned by this resolved types");
-        throw _illegalArgumentException_1;
+        throw new IllegalArgumentException("type is not owned by this resolved types");
       }
-      LightweightTypeReference _acceptType = super.acceptType(expression, expectation, type, returnType, hints);
-      _xblockexpression = (_acceptType);
+      _xblockexpression = (super.acceptType(expression, expectation, type, returnType, hints));
     }
     return _xblockexpression;
   }
@@ -163,8 +153,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
           _and = (_notEquals && _not);
         }
         if (_and) {
-          IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("hint is not owned by this resolved types");
-          throw _illegalArgumentException;
+          throw new IllegalArgumentException("hint is not owned by this resolved types");
         }
       }
     };
@@ -178,8 +167,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
-      throw _illegalArgumentException;
+      throw new IllegalArgumentException("result is not owned by this resolved types");
     }
     return result;
   }
@@ -190,8 +178,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
-      throw _illegalArgumentException;
+      throw new IllegalArgumentException("result is not owned by this resolved types");
     }
     return result;
   }
@@ -202,8 +189,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
-      throw _illegalArgumentException;
+      throw new IllegalArgumentException("result is not owned by this resolved types");
     }
     return result;
   }
@@ -214,8 +200,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
-      throw _illegalArgumentException;
+      throw new IllegalArgumentException("result is not owned by this resolved types");
     }
     return result;
   }
@@ -233,8 +218,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
       _and = (_notEquals && _not);
     }
     if (_and) {
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
-      throw _illegalArgumentException;
+      throw new IllegalArgumentException("result is not owned by this resolved types");
     }
     return result;
   }
@@ -246,8 +230,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
         boolean _isOwnedBy = it.isOwnedBy(_owner);
         boolean _not = (!_isOwnedBy);
         if (_not) {
-          IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
-          throw _illegalArgumentException;
+          throw new IllegalArgumentException("result is not owned by this resolved types");
         }
       }
     };
@@ -257,8 +240,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
     boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
     boolean _not = (!_isOwnedBy);
     if (_not) {
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
-      throw _illegalArgumentException;
+      throw new IllegalArgumentException("result is not owned by this resolved types");
     }
     return result;
   }
@@ -270,8 +252,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
         boolean _isOwnedBy = it.isOwnedBy(_referenceOwner);
         boolean _not = (!_isOwnedBy);
         if (_not) {
-          IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
-          throw _illegalArgumentException;
+          throw new IllegalArgumentException("result is not owned by this resolved types");
         }
       }
     };
@@ -288,8 +269,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
       _and = (_notEquals && _not);
     }
     if (_and) {
-      IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("result is not owned by this resolved types");
-      throw _illegalArgumentException;
+      throw new IllegalArgumentException("result is not owned by this resolved types");
     }
     return result;
   }

@@ -9,7 +9,6 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.util.ProjectFactory;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
@@ -32,19 +31,9 @@ public class FeatureProjectFactory extends ProjectFactory {
   
   private static String FEAT_ENDING = ".feature";
   
-  private List<String> containedBundles = new Function0<List<String>>() {
-    public List<String> apply() {
-      ArrayList<String> _arrayList = new ArrayList<String>();
-      return _arrayList;
-    }
-  }.apply();
+  private List<String> containedBundles = new ArrayList<String>();
   
-  private List<String> includedFeatures = new Function0<List<String>>() {
-    public List<String> apply() {
-      ArrayList<String> _arrayList = new ArrayList<String>();
-      return _arrayList;
-    }
-  }.apply();
+  private List<String> includedFeatures = new ArrayList<String>();
   
   private String mainCategoryName;
   

@@ -59,12 +59,10 @@ public class HiddenLeafs {
         if (_node!=null) {
           _length=_node.getLength();
         }
-        int _plus = ((x).intValue() + _length);
-        return Integer.valueOf(_plus);
+        return Integer.valueOf(((x).intValue() + _length));
       }
     };
-    Integer _fold = IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);
-    return (_fold).intValue();
+    return (IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function)).intValue();
   }
   
   public int getNewLines() {
@@ -72,12 +70,10 @@ public class HiddenLeafs {
     final Function2<Integer,LeafInfo,Integer> _function = new Function2<Integer,LeafInfo,Integer>() {
       public Integer apply(final Integer x, final LeafInfo i) {
         int _newLines = i.getNewLines();
-        int _plus = ((x).intValue() + _newLines);
-        return Integer.valueOf(_plus);
+        return Integer.valueOf(((x).intValue() + _newLines));
       }
     };
-    Integer _fold = IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);
-    return (_fold).intValue();
+    return (IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function)).intValue();
   }
   
   public int getNewLinesInComments() {
@@ -86,20 +82,17 @@ public class HiddenLeafs {
     final Function2<Integer,CommentInfo,Integer> _function = new Function2<Integer,CommentInfo,Integer>() {
       public Integer apply(final Integer x, final CommentInfo i) {
         int _newLines = i.getNewLines();
-        int _plus = ((x).intValue() + _newLines);
-        return Integer.valueOf(_plus);
+        return Integer.valueOf(((x).intValue() + _newLines));
       }
     };
-    Integer _fold = IterableExtensions.<CommentInfo, Integer>fold(_filter, Integer.valueOf(0), _function);
-    return (_fold).intValue();
+    return (IterableExtensions.<CommentInfo, Integer>fold(_filter, Integer.valueOf(0), _function)).intValue();
   }
   
   public boolean containsComment() {
     List<LeafInfo> _leafs = this.getLeafs();
     Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(_leafs, CommentInfo.class);
     int _size = IterableExtensions.size(_filter);
-    boolean _greaterThan = (_size > 0);
-    return _greaterThan;
+    return (_size > 0);
   }
   
   public HiddenLeafs(final int offset) {

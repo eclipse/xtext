@@ -3,7 +3,6 @@ package org.eclipse.xtext.xbase.ui.tests.quickfix;
 import com.google.common.base.Objects;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import java.io.InputStream;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -19,7 +18,6 @@ import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.XbaseRuntimeModule;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
 import org.eclipse.xtext.xbase.ui.tests.quickfix.TestQuickfixXbaseUIModule;
@@ -29,17 +27,9 @@ import org.junit.Assert;
 public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase implements IJavaProjectProvider {
   private IProject demandCreateProject;
   
-  private static Injector injector = new Function0<Injector>() {
-    public Injector apply() {
-      XbaseRuntimeModule _xbaseRuntimeModule = new XbaseRuntimeModule();
-      SharedStateModule _sharedStateModule = new SharedStateModule();
-      XtypeActivator _instance = XtypeActivator.getInstance();
-      TestQuickfixXbaseUIModule _testQuickfixXbaseUIModule = new TestQuickfixXbaseUIModule(_instance);
-      Module _mixin = Modules2.mixin(_xbaseRuntimeModule, _sharedStateModule, _testQuickfixXbaseUIModule);
-      Injector _createInjector = Guice.createInjector(_mixin);
-      return _createInjector;
-    }
-  }.apply();
+  private static Injector injector = Guice.createInjector(
+    Modules2.mixin(new XbaseRuntimeModule(), new SharedStateModule(), 
+      new TestQuickfixXbaseUIModule(XtypeActivator.getInstance())));
   
   public void tearDown() throws Exception {
     boolean _notEquals = (!Objects.equal(this.demandCreateProject, null));
@@ -100,8 +90,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;
-        RuntimeException _runtimeException = new RuntimeException(e);
-        throw _runtimeException;
+        throw new RuntimeException(e);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

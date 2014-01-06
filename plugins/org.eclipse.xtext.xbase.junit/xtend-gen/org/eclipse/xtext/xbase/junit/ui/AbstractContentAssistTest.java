@@ -76,8 +76,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
   }
   
   protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-    ContentAssistProcessorTestBuilder _contentAssistProcessorTestBuilder = new ContentAssistProcessorTestBuilder(this.injector, this);
-    return _contentAssistProcessorTestBuilder;
+    return new ContentAssistProcessorTestBuilder(this.injector, this);
   }
   
   public XtextResource getResourceFor(final InputStream stream) {
@@ -100,8 +99,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
   }
   
   protected void initializeTypeProvider(final XtextResourceSet set) {
-    JdtTypeProviderFactory _jdtTypeProviderFactory = new JdtTypeProviderFactory(this);
-    final JdtTypeProviderFactory typeProviderFactory = _jdtTypeProviderFactory;
+    final JdtTypeProviderFactory typeProviderFactory = new JdtTypeProviderFactory(this);
     typeProviderFactory.findOrCreateTypeProvider(set);
     IJavaProject _javaProject = this.getJavaProject(set);
     set.setClasspathURIContext(_javaProject);

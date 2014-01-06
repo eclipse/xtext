@@ -49,8 +49,7 @@ public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig>
     IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
     IPath _location = _workspaceRoot.getLocation();
     final String wsRoot = _location.toString();
-    WorkspaceConfig _workspaceConfig = new WorkspaceConfig(wsRoot);
-    final WorkspaceConfig result = _workspaceConfig;
+    final WorkspaceConfig result = new WorkspaceConfig(wsRoot);
     IWorkspaceRoot _workspaceRoot_1 = this.getWorkspaceRoot();
     IProject[] _projects = _workspaceRoot_1.getProjects();
     final Procedure1<IProject> _function = new Procedure1<IProject>() {

@@ -99,8 +99,7 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
       final Function1<LightweightTypeReference,Boolean> _function = new Function1<LightweightTypeReference,Boolean>() {
         public Boolean apply(final LightweightTypeReference it) {
           String _identifier = it.getIdentifier();
-          boolean _notEquals = (!Objects.equal("java.lang.Object", _identifier));
-          return Boolean.valueOf(_notEquals);
+          return Boolean.valueOf((!Objects.equal("java.lang.Object", _identifier)));
         }
       };
       final Iterable<LightweightTypeReference> relevantUpperBounds = IterableExtensions.<LightweightTypeReference>filter(_upperBounds, _function);

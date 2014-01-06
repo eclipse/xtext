@@ -54,13 +54,11 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   }
   
   protected ImageDescriptor _imageDescriptor(final XImportSection importSection) {
-    ImageDescriptor _forImportContainer = this.images.forImportContainer();
-    return _forImportContainer;
+    return this.images.forImportContainer();
   }
   
   protected ImageDescriptor _imageDescriptor(final XImportDeclaration importDeclaration) {
-    ImageDescriptor _forImport = this.images.forImport();
-    return _forImport;
+    return this.images.forImport();
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmGenericType genericType) {
@@ -69,13 +67,11 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     if (_isInterface) {
       JvmVisibility _visibility = genericType.getVisibility();
       int _get = this.adornments.get(genericType);
-      ImageDescriptor _forInterface = this.images.forInterface(_visibility, _get);
-      _xifexpression = _forInterface;
+      _xifexpression = this.images.forInterface(_visibility, _get);
     } else {
       JvmVisibility _visibility_1 = genericType.getVisibility();
       int _get_1 = this.adornments.get(genericType);
-      ImageDescriptor _forClass = this.images.forClass(_visibility_1, _get_1);
-      _xifexpression = _forClass;
+      _xifexpression = this.images.forClass(_visibility_1, _get_1);
     }
     return _xifexpression;
   }
@@ -83,53 +79,45 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   protected ImageDescriptor _imageDescriptor(final JvmEnumerationType enumerationType) {
     JvmVisibility _visibility = enumerationType.getVisibility();
     int _get = this.adornments.get(enumerationType);
-    ImageDescriptor _forEnum = this.images.forEnum(_visibility, _get);
-    return _forEnum;
+    return this.images.forEnum(_visibility, _get);
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmAnnotationType annotationType) {
     JvmVisibility _visibility = annotationType.getVisibility();
     int _get = this.adornments.get(annotationType);
-    ImageDescriptor _forAnnotation = this.images.forAnnotation(_visibility, _get);
-    return _forAnnotation;
+    return this.images.forAnnotation(_visibility, _get);
   }
   
   protected String text(final JvmGenericType genericType) {
-    String _simpleName = genericType.getSimpleName();
-    return _simpleName;
+    return genericType.getSimpleName();
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmOperation operation) {
     JvmVisibility _visibility = operation.getVisibility();
     int _get = this.adornments.get(operation);
-    ImageDescriptor _forOperation = this.images.forOperation(_visibility, _get);
-    return _forOperation;
+    return this.images.forOperation(_visibility, _get);
   }
   
   protected Object text(final JvmOperation element) {
     String _simpleName = element.getSimpleName();
-    StyledString _signature = this.signature(_simpleName, element);
-    return _signature;
+    return this.signature(_simpleName, element);
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmConstructor constructor) {
     JvmVisibility _visibility = constructor.getVisibility();
     int _get = this.adornments.get(constructor);
-    ImageDescriptor _forConstructor = this.images.forConstructor(_visibility, _get);
-    return _forConstructor;
+    return this.images.forConstructor(_visibility, _get);
   }
   
   protected String text(final JvmConstructor constructor) {
     String _parameters = this.uiStrings.parameters(constructor);
-    String _plus = ("new" + _parameters);
-    return _plus;
+    return ("new" + _parameters);
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmField field) {
     JvmVisibility _visibility = field.getVisibility();
     int _get = this.adornments.get(field);
-    ImageDescriptor _forField = this.images.forField(_visibility, _get);
-    return _forField;
+    return this.images.forField(_visibility, _get);
   }
   
   protected String text(final JvmField field) {
@@ -137,14 +125,12 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     String _plus = (_simpleName + " : ");
     JvmTypeReference _type = field.getType();
     String _simpleName_1 = _type.getSimpleName();
-    String _plus_1 = (_plus + _simpleName_1);
-    return _plus_1;
+    return (_plus + _simpleName_1);
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmFormalParameter parameter) {
     int _get = this.adornments.get(parameter);
-    ImageDescriptor _forLocalVariable = this.images.forLocalVariable(_get);
-    return _forLocalVariable;
+    return this.images.forLocalVariable(_get);
   }
   
   protected String text(final JvmFormalParameter parameter) {
@@ -154,14 +140,12 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       String _xifexpression = null;
       boolean _equals = Objects.equal(parameterType, null);
       if (_equals) {
-        String _name = parameter.getName();
-        _xifexpression = _name;
+        _xifexpression = parameter.getName();
       } else {
         String _simpleName = parameterType.getSimpleName();
         String _plus = (_simpleName + " ");
-        String _name_1 = parameter.getName();
-        String _plus_1 = (_plus + _name_1);
-        _xifexpression = _plus_1;
+        String _name = parameter.getName();
+        _xifexpression = (_plus + _name);
       }
       _xblockexpression = (_xifexpression);
     }
@@ -170,8 +154,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   
   protected ImageDescriptor _imageDescriptor(final XVariableDeclaration variableDeclaration) {
     int _get = this.adornments.get(variableDeclaration);
-    ImageDescriptor _forLocalVariable = this.images.forLocalVariable(_get);
-    return _forLocalVariable;
+    return this.images.forLocalVariable(_get);
   }
   
   protected String text(final XImportDeclaration importDeclaration) {
@@ -179,11 +162,9 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     String _importedNamespace = importDeclaration.getImportedNamespace();
     boolean _notEquals = (!Objects.equal(_importedNamespace, null));
     if (_notEquals) {
-      String _importedNamespace_1 = importDeclaration.getImportedNamespace();
-      _xifexpression = _importedNamespace_1;
+      _xifexpression = importDeclaration.getImportedNamespace();
     } else {
-      String _importedTypeName = importDeclaration.getImportedTypeName();
-      _xifexpression = _importedTypeName;
+      _xifexpression = importDeclaration.getImportedTypeName();
     }
     return _xifexpression;
   }
@@ -203,11 +184,9 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
         String _simpleName = type.getSimpleName();
         String _plus = (_simpleName + " ");
         String _name = variableDeclaration.getName();
-        String _plus_1 = (_plus + _name);
-        _xifexpression = _plus_1;
+        _xifexpression = (_plus + _name);
       } else {
-        String _name_1 = variableDeclaration.getName();
-        _xifexpression = _name_1;
+        _xifexpression = variableDeclaration.getName();
       }
       _xblockexpression = (_xifexpression);
     }
@@ -216,8 +195,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   
   protected ImageDescriptor _imageDescriptor(final JvmTypeParameter parameter) {
     int _get = this.adornments.get(parameter);
-    ImageDescriptor _forTypeParameter = this.images.forTypeParameter(_get);
-    return _forTypeParameter;
+    return this.images.forTypeParameter(_get);
   }
   
   protected String text(final XCasePart casePart) {
@@ -262,16 +240,14 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       if (_equals) {
         _xifexpression = "void";
       } else {
-        String _simpleName = returnType.getSimpleName();
-        _xifexpression = _simpleName;
+        _xifexpression = returnType.getSimpleName();
       }
       final String returnTypeString = _xifexpression;
       String _parameters = this.uiStrings.parameters(element);
       String _plus = (simpleName + _parameters);
       StyledString _styledString = new StyledString(_plus);
       StyledString _styledString_1 = new StyledString((" : " + returnTypeString), StyledString.DECORATIONS_STYLER);
-      StyledString _append = _styledString.append(_styledString_1);
-      _xblockexpression = (_append);
+      _xblockexpression = (_styledString.append(_styledString_1));
     }
     return _xblockexpression;
   }

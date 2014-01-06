@@ -119,8 +119,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       public Boolean apply(final XAnnotationElementValuePair it) {
         JvmOperation _element = it.getElement();
         String _simpleName = _element.getSimpleName();
-        boolean _equals = Objects.equal(_simpleName, property);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_simpleName, property));
       }
     };
     XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
@@ -160,8 +159,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       public Boolean apply(final XAnnotationElementValuePair it) {
         JvmOperation _element = it.getElement();
         String _simpleName = _element.getSimpleName();
-        boolean _equals = Objects.equal(_simpleName, property);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_simpleName, property));
       }
     };
     final XAnnotationElementValuePair annoValue = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);

@@ -17,8 +17,7 @@ public class AssertingFormatterData {
   
   public FormattingPreferenceValues getCfg() {
     MapBasedPreferenceValues _config = this.getConfig();
-    FormattingPreferenceValues _formattingPreferenceValues = new FormattingPreferenceValues(_config);
-    return _formattingPreferenceValues;
+    return new FormattingPreferenceValues(_config);
   }
   
   private CharSequence _expectation;

@@ -29,22 +29,18 @@ public class PublicResolvedTypes extends RootResolvedTypes {
   }
   
   public UnboundTypeReference createUnboundTypeReference(final XExpression expression, final JvmTypeParameter type) {
-    UnboundTypeReference _createUnboundTypeReference = super.createUnboundTypeReference(expression, type);
-    return _createUnboundTypeReference;
+    return super.createUnboundTypeReference(expression, type);
   }
   
   public UnboundTypeReference getUnboundTypeReference(final Object handle) {
-    UnboundTypeReference _unboundTypeReference = super.getUnboundTypeReference(handle);
-    return _unboundTypeReference;
+    return super.getUnboundTypeReference(handle);
   }
   
   public List<LightweightBoundTypeArgument> getHints(final Object handle) {
-    List<LightweightBoundTypeArgument> _hints = super.getHints(handle);
-    return _hints;
+    return super.getHints(handle);
   }
   
   public Map<XExpression,List<TypeData>> basicGetExpressionTypes() {
-    Map<XExpression,List<TypeData>> _basicGetExpressionTypes = super.basicGetExpressionTypes();
-    return _basicGetExpressionTypes;
+    return super.basicGetExpressionTypes();
   }
 }

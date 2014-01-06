@@ -40,11 +40,9 @@ public class FormattingDataFactory {
   protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final Procedure1<? super FormattingDataInit> init) {
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _xblockexpression = null;
     {
-      FormattingDataInit _formattingDataInit = new FormattingDataInit();
-      final FormattingDataInit data = _formattingDataInit;
+      final FormattingDataInit data = new FormattingDataInit();
       init.apply(data);
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(leafs, data.key, data);
-      _xblockexpression = (_newFormattingData);
+      _xblockexpression = (this.newFormattingData(leafs, data.key, data));
     }
     return _xblockexpression;
   }
@@ -112,8 +110,7 @@ public class FormattingDataFactory {
           final int min = (blankline + 1);
           final int max = Math.max((preserve + 1), min);
           boolean _isDebugConflicts = doc.isDebugConflicts();
-          Iterable<FormattingData> _newNewLineData = FormattingDataFactory.this.newNewLineData(leafs, min, max, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
-          _xblockexpression = (_newNewLineData);
+          _xblockexpression = (FormattingDataFactory.this.newNewLineData(leafs, min, max, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts));
         }
         return _xblockexpression;
       }
@@ -149,8 +146,7 @@ public class FormattingDataFactory {
             _xifexpression_1 = 0;
           }
           boolean _isDebugConflicts = doc.isDebugConflicts();
-          Iterable<FormattingData> _newNewLineData = FormattingDataFactory.this.newNewLineData(leafs, _xifexpression, _xifexpression_1, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
-          _xblockexpression = (_newNewLineData);
+          _xblockexpression = (FormattingDataFactory.this.newNewLineData(leafs, _xifexpression, _xifexpression_1, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts));
         }
         return _xblockexpression;
       }
@@ -173,8 +169,7 @@ public class FormattingDataFactory {
           }
           final int minmax = _xifexpression;
           boolean _isDebugConflicts = doc.isDebugConflicts();
-          Iterable<FormattingData> _newNewLineData = FormattingDataFactory.this.newNewLineData(leafs, minmax, minmax, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
-          _xblockexpression = (_newNewLineData);
+          _xblockexpression = (FormattingDataFactory.this.newNewLineData(leafs, minmax, minmax, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts));
         }
         return _xblockexpression;
       }
@@ -185,8 +180,7 @@ public class FormattingDataFactory {
   protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataInit it) {
     Class<? extends PreferenceKey> _class = key.getClass();
     String _plus = ("Unknown configuration key kind: " + _class);
-    RuntimeException _runtimeException = new RuntimeException(_plus);
-    throw _runtimeException;
+    throw new RuntimeException(_plus);
   }
   
   protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final WhitespaceKey key, final FormattingDataInit it) {
@@ -203,8 +197,7 @@ public class FormattingDataFactory {
             _xifexpression = "";
           }
           boolean _isDebugConflicts = doc.isDebugConflicts();
-          Iterable<FormattingData> _newWhitespaceData = FormattingDataFactory.this.newWhitespaceData(leafs, _xifexpression, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
-          _xblockexpression = (_newWhitespaceData);
+          _xblockexpression = (FormattingDataFactory.this.newWhitespaceData(leafs, _xifexpression, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts));
         }
         return _xblockexpression;
       }
@@ -239,8 +232,7 @@ public class FormattingDataFactory {
             }
             RuntimeException _xifexpression_2 = null;
             if (trace) {
-              RuntimeException _runtimeException = new RuntimeException();
-              _xifexpression_2 = _runtimeException;
+              _xifexpression_2 = new RuntimeException();
             }
             WhitespaceData _whitespaceData = new WhitespaceData(_offset, _length, _xifexpression, _xifexpression_1, _xifexpression_2, space);
             result.add(_whitespaceData);
@@ -307,8 +299,7 @@ public class FormattingDataFactory {
               int _length = ((WhitespaceInfo)leaf).getLength();
               RuntimeException _xifexpression_2 = null;
               if (trace) {
-                RuntimeException _runtimeException = new RuntimeException();
-                _xifexpression_2 = _runtimeException;
+                _xifexpression_2 = new RuntimeException();
               }
               WhitespaceData _whitespaceData = new WhitespaceData(_offset_1, _length, 0, 0, _xifexpression_2, space);
               result.add(_whitespaceData);
@@ -375,8 +366,7 @@ public class FormattingDataFactory {
                   int _length_1 = ((WhitespaceInfo)leaf).getLength();
                   RuntimeException _xifexpression_3 = null;
                   if (trace) {
-                    RuntimeException _runtimeException_1 = new RuntimeException();
-                    _xifexpression_3 = _runtimeException_1;
+                    _xifexpression_3 = new RuntimeException();
                   }
                   String _xifexpression_4 = null;
                   int _offset_4 = ((WhitespaceInfo)leaf).getOffset();
@@ -410,8 +400,7 @@ public class FormattingDataFactory {
                     int _length_2 = ((WhitespaceInfo)leaf).getLength();
                     RuntimeException _xifexpression_6 = null;
                     if (trace) {
-                      RuntimeException _runtimeException_2 = new RuntimeException();
-                      _xifexpression_6 = _runtimeException_2;
+                      _xifexpression_6 = new RuntimeException();
                     }
                     NewLineData _newLineData = new NewLineData(_offset_5, _length_2, increaseIndentationChange, decreaseIndentationChange, _xifexpression_6, Integer.valueOf(newLines));
                     result.add(_newLineData);
@@ -432,8 +421,7 @@ public class FormattingDataFactory {
                     }
                     RuntimeException _xifexpression_9 = null;
                     if (trace) {
-                      RuntimeException _runtimeException_3 = new RuntimeException();
-                      _xifexpression_9 = _runtimeException_3;
+                      _xifexpression_9 = new RuntimeException();
                     }
                     NewLineData _newLineData_1 = new NewLineData(_offset_6, _length_3, _xifexpression_7, _xifexpression_8, _xifexpression_9, Integer.valueOf(newLines));
                     result.add(_newLineData_1);
@@ -464,8 +452,7 @@ public class FormattingDataFactory {
                   int _length_4 = ((WhitespaceInfo)leaf).getLength();
                   RuntimeException _xifexpression_10 = null;
                   if (trace) {
-                    RuntimeException _runtimeException_4 = new RuntimeException();
-                    _xifexpression_10 = _runtimeException_4;
+                    _xifexpression_10 = new RuntimeException();
                   }
                   NewLineData _newLineData_2 = new NewLineData(_offset_7, _length_4, increaseIndentationChange, decreaseIndentationChange, _xifexpression_10, Integer.valueOf(newLines_1));
                   result.add(_newLineData_2);
@@ -474,8 +461,7 @@ public class FormattingDataFactory {
                   int _length_5 = ((WhitespaceInfo)leaf).getLength();
                   RuntimeException _xifexpression_11 = null;
                   if (trace) {
-                    RuntimeException _runtimeException_5 = new RuntimeException();
-                    _xifexpression_11 = _runtimeException_5;
+                    _xifexpression_11 = new RuntimeException();
                   }
                   NewLineData _newLineData_3 = new NewLineData(_offset_8, _length_5, 0, 0, _xifexpression_11, Integer.valueOf(newLines_1));
                   result.add(_newLineData_3);
@@ -500,8 +486,7 @@ public class FormattingDataFactory {
     boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsAfter = this._hiddenLeafAccess.getHiddenLeafsAfter(node);
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(_hiddenLeafsAfter, init);
-      _xifexpression = _newFormattingData;
+      _xifexpression = this.newFormattingData(_hiddenLeafsAfter, init);
     }
     return _xifexpression;
   }
@@ -511,8 +496,7 @@ public class FormattingDataFactory {
     boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsBefore = this._hiddenLeafAccess.getHiddenLeafsBefore(node);
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(_hiddenLeafsBefore, init);
-      _xifexpression = _newFormattingData;
+      _xifexpression = this.newFormattingData(_hiddenLeafsBefore, init);
     }
     return _xifexpression;
   }

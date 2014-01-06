@@ -717,8 +717,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
   protected String lookahead(final FormattableDocument fmt, final EObject expression) {
     String _xblockexpression = null;
     {
-      FormattableDocument _formattableDocument = new FormattableDocument(fmt);
-      final FormattableDocument lookahead = _formattableDocument;
+      final FormattableDocument lookahead = new FormattableDocument(fmt);
       this.format(expression, lookahead);
       final INode node = this._nodeModelAccess.nodeForEObject(expression);
       String _xifexpression = null;
@@ -729,8 +728,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
           final ITextRegion textRegion = node.getTextRegion();
           int _offset = textRegion.getOffset();
           int _length = textRegion.getLength();
-          String _renderToString = lookahead.renderToString(_offset, _length);
-          _xblockexpression_1 = (_renderToString);
+          _xblockexpression_1 = (lookahead.renderToString(_offset, _length));
         }
         _xifexpression = _xblockexpression_1;
       } else {
@@ -932,8 +930,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       if (_notEquals) {
         int _size = params.size();
         int _minus = (_size - 1);
-        Iterable<XExpression> _take = IterableExtensions.<XExpression>take(params, _minus);
-        _xifexpression = _take;
+        _xifexpression = IterableExtensions.<XExpression>take(params, _minus);
       } else {
         _xifexpression = params;
       }
@@ -1557,8 +1554,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         final ITextRegionWithLineInformation textRegion = node.getTextRegionWithLineInformation();
         int _lineNumber = textRegion.getLineNumber();
         int _endLineNumber = textRegion.getEndLineNumber();
-        boolean _notEquals_1 = (_lineNumber != _endLineNumber);
-        _xblockexpression = (_notEquals_1);
+        _xblockexpression = ((_lineNumber != _endLineNumber));
       }
       _and = (_notEquals && _xblockexpression);
     }
@@ -1671,8 +1667,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
     }
     XExpression _then = expr.getThen();
     final INode thennode = this._nodeModelAccess.nodeForEObject(_then);
-    INode _nodeForEObject_1 = null;
     XExpression _else = expr.getElse();
+    INode _nodeForEObject_1 = null;
     if (_else!=null) {
       _nodeForEObject_1=this._nodeModelAccess.nodeForEObject(_else);
     }
@@ -2535,8 +2531,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
           INode _nodeForEObject = XbaseFormatter2.this._nodeModelAccess.nodeForEObject(it);
           String _text = _nodeForEObject.getText();
           String _trim = _text.trim();
-          boolean _contains = _trim.contains("\n");
-          return Boolean.valueOf(_contains);
+          return Boolean.valueOf(_trim.contains("\n"));
         }
       };
       boolean _exists = IterableExtensions.<XCasePart>exists(_cases_1, _function_1);
@@ -2546,8 +2541,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if (!_and_2) {
       _and_1 = false;
     } else {
-      INode _nodeForEObject_1 = null;
       XExpression _default = expr.getDefault();
+      INode _nodeForEObject_1 = null;
       if (_default!=null) {
         _nodeForEObject_1=this._nodeModelAccess.nodeForEObject(_default);
       }
@@ -2953,13 +2948,11 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if (!_matched) {
       if (x instanceof XBlockExpression) {
         _matched=true;
-        EList<XExpression> _expressions = ((XBlockExpression)x).getExpressions();
-        _switchResult = _expressions;
+        _switchResult = ((XBlockExpression)x).getExpressions();
       }
     }
     if (!_matched) {
-      ArrayList<XExpression> _newArrayList = CollectionLiterals.<XExpression>newArrayList(x);
-      _switchResult = _newArrayList;
+      _switchResult = CollectionLiterals.<XExpression>newArrayList(x);
     }
     final List<XExpression> children = _switchResult;
     boolean _and = false;

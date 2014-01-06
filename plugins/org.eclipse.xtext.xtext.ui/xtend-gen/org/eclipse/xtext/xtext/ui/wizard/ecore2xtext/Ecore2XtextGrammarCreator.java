@@ -142,21 +142,18 @@ public class Ecore2XtextGrammarCreator {
       Iterable<EClass> list = Iterables.<EClass>concat(_newArrayList, _subClasses);
       final Function1<EClass,Boolean> _function = new Function1<EClass,Boolean>() {
         public Boolean apply(final EClass c) {
-          boolean _needsConcreteRule = Ecore2XtextExtensions.needsConcreteRule(c);
-          return Boolean.valueOf(_needsConcreteRule);
+          return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(c));
         }
       };
       Iterable<EClass> _filter = IterableExtensions.<EClass>filter(list, _function);
       list = _filter;
       final Function1<EClass,String> _function_1 = new Function1<EClass,String>() {
         public String apply(final EClass it) {
-          String _concreteRuleName = Ecore2XtextExtensions.concreteRuleName(it);
-          return _concreteRuleName;
+          return Ecore2XtextExtensions.concreteRuleName(it);
         }
       };
       Iterable<String> _map = IterableExtensions.<EClass, String>map(list, _function_1);
-      String _join = IterableExtensions.join(_map, " | ");
-      _xblockexpression = (_join);
+      _xblockexpression = (IterableExtensions.join(_map, " | "));
     }
     return _xblockexpression;
   }
@@ -251,8 +248,7 @@ public class Ecore2XtextGrammarCreator {
     if (!_matched) {
       if (it instanceof EAttribute) {
         _matched=true;
-        String _assignedRuleCall = Ecore2XtextExtensions.assignedRuleCall(((EAttribute)it));
-        _switchResult = _assignedRuleCall;
+        _switchResult = Ecore2XtextExtensions.assignedRuleCall(((EAttribute)it));
       }
     }
     if (!_matched) {
@@ -262,8 +258,7 @@ public class Ecore2XtextGrammarCreator {
         boolean _isContainment = ((EReference)it).isContainment();
         if (_isContainment) {
           EClass _eReferenceType = ((EReference)it).getEReferenceType();
-          String _uniqueName = UniqueNameUtil.uniqueName(_eReferenceType);
-          _xifexpression = _uniqueName;
+          _xifexpression = UniqueNameUtil.uniqueName(_eReferenceType);
         } else {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("[");
@@ -320,8 +315,7 @@ public class Ecore2XtextGrammarCreator {
       _and = (_notEquals && _needsConcreteRule);
     }
     if (_and) {
-      CharSequence _rule = this.rule(it);
-      _xifexpression = _rule;
+      _xifexpression = this.rule(it);
     }
     return _xifexpression;
   }
@@ -462,8 +456,7 @@ public class Ecore2XtextGrammarCreator {
             String _plus = (_name + " = \'");
             String _name_1 = it.getName();
             String _plus_1 = (_plus + _name_1);
-            String _plus_2 = (_plus_1 + "\'");
-            return _plus_2;
+            return (_plus_1 + "\'");
           }
         };
         List<String> _map = ListExtensions.<EEnumLiteral, String>map(_eLiterals, _function);
@@ -474,8 +467,7 @@ public class Ecore2XtextGrammarCreator {
       }
     }
     if (!_matched) {
-      IllegalStateException _illegalStateException = new IllegalStateException(("No rule template for " + it));
-      throw _illegalStateException;
+      throw new IllegalStateException(("No rule template for " + it));
     }
     return _switchResult;
   }

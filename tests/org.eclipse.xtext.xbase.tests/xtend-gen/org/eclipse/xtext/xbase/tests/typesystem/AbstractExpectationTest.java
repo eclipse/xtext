@@ -138,15 +138,13 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
     this.pendingAssert = false;
     final Function1<XExpression,LightweightTypeReference> _function = new Function1<XExpression,LightweightTypeReference>() {
       public LightweightTypeReference apply(final XExpression it) {
-        LightweightTypeReference _expectedType = AbstractExpectationTest.this.resolvedTypes.getExpectedType(it);
-        return _expectedType;
+        return AbstractExpectationTest.this.resolvedTypes.getExpectedType(it);
       }
     };
     final List<LightweightTypeReference> expectedTypes = ListExtensions.<XExpression, LightweightTypeReference>map(this.expressions, _function);
     final Function1<LightweightTypeReference,String> _function_1 = new Function1<LightweightTypeReference,String>() {
       public String apply(final LightweightTypeReference it) {
-        String _simpleName = it.getSimpleName();
-        return _simpleName;
+        return it.getSimpleName();
       }
     };
     List<String> _map = ListExtensions.<LightweightTypeReference, String>map(expectedTypes, _function_1);
@@ -157,8 +155,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
     Set<String> _set = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names)));
     final Function1<LightweightTypeReference,String> _function_2 = new Function1<LightweightTypeReference,String>() {
       public String apply(final LightweightTypeReference it) {
-        String _simpleName = it.getSimpleName();
-        return _simpleName;
+        return it.getSimpleName();
       }
     };
     List<String> _map_1 = ListExtensions.<LightweightTypeReference, String>map(expectedTypes, _function_2);

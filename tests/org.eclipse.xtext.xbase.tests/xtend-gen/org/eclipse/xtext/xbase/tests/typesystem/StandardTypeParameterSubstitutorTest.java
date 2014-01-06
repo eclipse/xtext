@@ -64,8 +64,7 @@ public class StandardTypeParameterSubstitutorTest extends AbstractXbaseTestCase 
     _builder.append(componentType, "");
     _builder.append(">");
     final LightweightTypeReference typeReference = this.toTypeReference(_builder);
-    DeclaratorTypeArgumentCollector _declaratorTypeArgumentCollector = new DeclaratorTypeArgumentCollector();
-    final DeclaratorTypeArgumentCollector collector = _declaratorTypeArgumentCollector;
+    final DeclaratorTypeArgumentCollector collector = new DeclaratorTypeArgumentCollector();
     final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> mapping = collector.getTypeParameterMapping(typeReference);
     int _size = mapping.size();
     Assert.assertEquals(1, _size);
@@ -78,8 +77,7 @@ public class StandardTypeParameterSubstitutorTest extends AbstractXbaseTestCase 
     ITypeReferenceOwner _owner = typeReference.getOwner();
     ITypeReferenceOwner _owner_1 = typeReference.getOwner();
     ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(_owner_1, typeParameter);
-    ArrayTypeReference _arrayTypeReference = new ArrayTypeReference(_owner, _parameterizedTypeReference);
-    final ArrayTypeReference originalArray = _arrayTypeReference;
+    final ArrayTypeReference originalArray = new ArrayTypeReference(_owner, _parameterizedTypeReference);
     String _simpleName_1 = originalArray.getSimpleName();
     Assert.assertEquals("T[]", _simpleName_1);
     ITypeReferenceOwner _owner_2 = typeReference.getOwner();

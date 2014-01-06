@@ -61,11 +61,9 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
     try {
       this.resolver.setTypeComputer(this);
       final XExpression expression = this.expression("{ null }");
-      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
-      final PublicResolvedTypes resolution = _publicResolvedTypes;
+      final PublicResolvedTypes resolution = new PublicResolvedTypes(this.resolver);
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
-      AnyTypeReference _anyTypeReference = new AnyTypeReference(_referenceOwner);
-      final AnyTypeReference any = _anyTypeReference;
+      final AnyTypeReference any = new AnyTypeReference(_referenceOwner);
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
@@ -91,11 +89,9 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
     try {
       this.resolver.setTypeComputer(this);
       final XExpression expression = this.expression("{ null }");
-      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
-      final PublicResolvedTypes resolution = _publicResolvedTypes;
+      final PublicResolvedTypes resolution = new PublicResolvedTypes(this.resolver);
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
-      AnyTypeReference _anyTypeReference = new AnyTypeReference(_referenceOwner);
-      final AnyTypeReference any = _anyTypeReference;
+      final AnyTypeReference any = new AnyTypeReference(_referenceOwner);
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
@@ -108,8 +104,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       String _string = typesForNullLiteral.toString();
       final Function1<TypeData,Boolean> _function = new Function1<TypeData,Boolean>() {
         public Boolean apply(final TypeData it) {
-          boolean _isReturnType = it.isReturnType();
-          return Boolean.valueOf(_isReturnType);
+          return Boolean.valueOf(it.isReturnType());
         }
       };
       Iterable<TypeData> _filter = IterableExtensions.<TypeData>filter(typesForNullLiteral, _function);
@@ -119,8 +114,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       final Function1<TypeData,Boolean> _function_1 = new Function1<TypeData,Boolean>() {
         public Boolean apply(final TypeData it) {
           boolean _isReturnType = it.isReturnType();
-          boolean _not = (!_isReturnType);
-          return Boolean.valueOf(_not);
+          return Boolean.valueOf((!_isReturnType));
         }
       };
       Iterable<TypeData> _filter_1 = IterableExtensions.<TypeData>filter(typesForNullLiteral, _function_1);
@@ -130,8 +124,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       String _string_2 = typesForBlock.toString();
       final Function1<TypeData,Boolean> _function_2 = new Function1<TypeData,Boolean>() {
         public Boolean apply(final TypeData it) {
-          boolean _isReturnType = it.isReturnType();
-          return Boolean.valueOf(_isReturnType);
+          return Boolean.valueOf(it.isReturnType());
         }
       };
       Iterable<TypeData> _filter_2 = IterableExtensions.<TypeData>filter(typesForBlock, _function_2);
@@ -141,8 +134,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       final Function1<TypeData,Boolean> _function_3 = new Function1<TypeData,Boolean>() {
         public Boolean apply(final TypeData it) {
           boolean _isReturnType = it.isReturnType();
-          boolean _not = (!_isReturnType);
-          return Boolean.valueOf(_not);
+          return Boolean.valueOf((!_isReturnType));
         }
       };
       Iterable<TypeData> _filter_3 = IterableExtensions.<TypeData>filter(typesForBlock, _function_3);
@@ -159,11 +151,9 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       XExpression _expression = this.expression("1.toString");
       final XMemberFeatureCall expression = ((XMemberFeatureCall) _expression);
       this.resolver.initializeFrom(expression);
-      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
-      final PublicResolvedTypes resolution = _publicResolvedTypes;
+      final PublicResolvedTypes resolution = new PublicResolvedTypes(this.resolver);
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
-      AnyTypeReference _anyTypeReference = new AnyTypeReference(_referenceOwner);
-      final AnyTypeReference any = _anyTypeReference;
+      final AnyTypeReference any = new AnyTypeReference(_referenceOwner);
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
@@ -178,8 +168,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
           final Function1<TypeData,Boolean> _function = new Function1<TypeData,Boolean>() {
             public Boolean apply(final TypeData it) {
               boolean _isReturnType = it.isReturnType();
-              boolean _not = (!_isReturnType);
-              return Boolean.valueOf(_not);
+              return Boolean.valueOf((!_isReturnType));
             }
           };
           Iterable<TypeData> _filter = IterableExtensions.<TypeData>filter(types, _function);
@@ -200,11 +189,9 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       XExpression _expression = this.expression("<String>newArrayList.map[toUpperCase]");
       final XMemberFeatureCall expression = ((XMemberFeatureCall) _expression);
       this.resolver.initializeFrom(expression);
-      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
-      final PublicResolvedTypes resolution = _publicResolvedTypes;
+      final PublicResolvedTypes resolution = new PublicResolvedTypes(this.resolver);
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
-      AnyTypeReference _anyTypeReference = new AnyTypeReference(_referenceOwner);
-      final AnyTypeReference any = _anyTypeReference;
+      final AnyTypeReference any = new AnyTypeReference(_referenceOwner);
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
@@ -220,8 +207,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
           String _plus_1 = (_plus + _string);
           final Function1<TypeData,Boolean> _function = new Function1<TypeData,Boolean>() {
             public Boolean apply(final TypeData it) {
-              boolean _isReturnType = it.isReturnType();
-              return Boolean.valueOf(_isReturnType);
+              return Boolean.valueOf(it.isReturnType());
             }
           };
           Iterable<TypeData> _filter = IterableExtensions.<TypeData>filter(typesForMemberFeatureCall, _function);
@@ -231,8 +217,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
           final Function1<TypeData,Boolean> _function_1 = new Function1<TypeData,Boolean>() {
             public Boolean apply(final TypeData it) {
               boolean _isReturnType = it.isReturnType();
-              boolean _not = (!_isReturnType);
-              return Boolean.valueOf(_not);
+              return Boolean.valueOf((!_isReturnType));
             }
           };
           Iterable<TypeData> _filter_1 = IterableExtensions.<TypeData>filter(typesForMemberFeatureCall, _function_1);

@@ -41,8 +41,7 @@ public abstract class FormattingData {
   public int getIndentationChange() {
     int _increaseIndentationChange = this.getIncreaseIndentationChange();
     int _decreaseIndentationChange = this.getDecreaseIndentationChange();
-    int _plus = (_increaseIndentationChange + _decreaseIndentationChange);
-    return _plus;
+    return (_increaseIndentationChange + _decreaseIndentationChange);
   }
   
   public FormattingData(final int offset, final int length, final int increaseIndentationChange, final int decreaseIndentationChange, final Throwable trace) {

@@ -196,8 +196,7 @@ public class ConstantExpressionsInterpreter {
     if (!_matched_1) {
       if (cont instanceof JvmMember) {
         _matched_1=true;
-        JvmDeclaredType _declaringType = ((JvmMember)cont).getDeclaringType();
-        _switchResult_1 = _declaringType;
+        _switchResult_1 = ((JvmMember)cont).getDeclaringType();
       }
     }
     JvmDeclaredType container = _switchResult_1;
@@ -249,24 +248,20 @@ public class ConstantExpressionsInterpreter {
     String _text = this.toText(expression);
     String _plus = ("Not a constant expression : \'" + _text);
     String _plus_1 = (_plus + "\'");
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(_plus_1, expression);
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(_plus_1, expression);
   }
   
   protected Object _internalEvaluate(final XCastedExpression expression, final Context ctx) {
     XExpression _target = expression.getTarget();
-    Object _internalEvaluate = this.internalEvaluate(_target, ctx);
-    return _internalEvaluate;
+    return this.internalEvaluate(_target, ctx);
   }
   
   protected Object _internalEvaluate(final XStringLiteral it, final Context ctx) {
-    String _value = it.getValue();
-    return _value;
+    return it.getValue();
   }
   
   protected Object _internalEvaluate(final XBooleanLiteral it, final Context ctx) {
-    boolean _isIsTrue = it.isIsTrue();
-    return Boolean.valueOf(_isIsTrue);
+    return Boolean.valueOf(it.isIsTrue());
   }
   
   protected Object _internalEvaluate(final XNumberLiteral it, final Context ctx) {
@@ -277,18 +272,16 @@ public class ConstantExpressionsInterpreter {
         JvmTypeReference _expectedType = ctx.getExpectedType();
         boolean _equals = Objects.equal(_expectedType, null);
         if (_equals) {
-          Class<? extends Number> _javaType = this.numberLiterals.getJavaType(it);
-          _xifexpression = _javaType;
+          _xifexpression = this.numberLiterals.getJavaType(it);
         } else {
           JvmTypeReference _expectedType_1 = ctx.getExpectedType();
           JvmType _type = _expectedType_1.getType();
           ClassFinder _classFinder = ctx.getClassFinder();
-          Class<? extends Object> _javaType_1 = this.getJavaType(_type, _classFinder);
-          _xifexpression = ((Class<? extends Number>) _javaType_1);
+          Class<? extends Object> _javaType = this.getJavaType(_type, _classFinder);
+          _xifexpression = ((Class<? extends Number>) _javaType);
         }
         final Class<? extends Number> type = _xifexpression;
-        Number _numberValue = this.numberLiterals.numberValue(it, type);
-        _xblockexpression = (_numberValue);
+        _xblockexpression = (this.numberLiterals.numberValue(it, type));
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -300,8 +293,7 @@ public class ConstantExpressionsInterpreter {
     JvmType _type = it.getType();
     EList<String> _arrayDimensions = it.getArrayDimensions();
     int _size = _arrayDimensions.size();
-    JvmTypeReference _typeReference = this.toTypeReference(_type, _size);
-    return _typeReference;
+    return this.toTypeReference(_type, _size);
   }
   
   protected Object _internalEvaluate(final XAnnotation literal, final Context ctx) {
@@ -317,8 +309,7 @@ public class ConstantExpressionsInterpreter {
       if (!_matched) {
         if (exp instanceof JvmGenericArrayTypeReference) {
           _matched=true;
-          JvmTypeReference _componentType = ((JvmGenericArrayTypeReference)exp).getComponentType();
-          _switchResult = _componentType;
+          _switchResult = ((JvmGenericArrayTypeReference)exp).getComponentType();
         }
       }
       final JvmTypeReference expectedComponentType = _switchResult;
@@ -326,8 +317,7 @@ public class ConstantExpressionsInterpreter {
       final Function1<XExpression,Object> _function = new Function1<XExpression,Object>() {
         public Object apply(final XExpression it) {
           Context _cloneWithExpectation = ctx.cloneWithExpectation(expectedComponentType);
-          Object _internalEvaluate = ConstantExpressionsInterpreter.this.internalEvaluate(it, _cloneWithExpectation);
-          return _internalEvaluate;
+          return ConstantExpressionsInterpreter.this.internalEvaluate(it, _cloneWithExpectation);
         }
       };
       final List<Object> elements = ListExtensions.<XExpression, Object>map(_elements, _function);
@@ -336,8 +326,7 @@ public class ConstantExpressionsInterpreter {
       if (_notEquals) {
         JvmType _type = expectedComponentType.getType();
         ClassFinder _classFinder = ctx.getClassFinder();
-        Class<? extends Object> _javaType = this.getJavaType(_type, _classFinder);
-        _xifexpression = _javaType;
+        _xifexpression = this.getJavaType(_type, _classFinder);
       } else {
         Class<? extends Object> _xifexpression_1 = null;
         boolean _isEmpty = elements.isEmpty();
@@ -425,8 +414,7 @@ public class ConstantExpressionsInterpreter {
       if (!_matched) {
         if (feature instanceof JvmField) {
           _matched=true;
-          Object _evaluateField = this.evaluateField(it, ((JvmField)feature), ctx);
-          _switchResult = _evaluateField;
+          _switchResult = this.evaluateField(it, ((JvmField)feature), ctx);
         }
       }
       return _switchResult;
@@ -436,8 +424,7 @@ public class ConstantExpressionsInterpreter {
     if (_notEquals) {
       return this.toTypeReference(type, 0);
     }
-    UnresolvableFeatureException _unresolvableFeatureException = new UnresolvableFeatureException(("Couldn\'t resolve feature " + featureName), it);
-    throw _unresolvableFeatureException;
+    throw new UnresolvableFeatureException(("Couldn\'t resolve feature " + featureName), it);
   }
   
   protected Object _internalEvaluate(final XMemberFeatureCall it, final Context ctx) {
@@ -459,8 +446,7 @@ public class ConstantExpressionsInterpreter {
               final Function1<JvmEnumerationLiteral,Boolean> _function = new Function1<JvmEnumerationLiteral,Boolean>() {
                 public Boolean apply(final JvmEnumerationLiteral it) {
                   String _simpleName = it.getSimpleName();
-                  boolean _equals = Objects.equal(_simpleName, featureName);
-                  return Boolean.valueOf(_equals);
+                  return Boolean.valueOf(Objects.equal(_simpleName, featureName));
                 }
               };
               final JvmEnumerationLiteral enumValue = IterableExtensions.<JvmEnumerationLiteral>findFirst(_literals, _function);
@@ -468,8 +454,7 @@ public class ConstantExpressionsInterpreter {
               if (_equals) {
                 String _simpleName = ((JvmTypeReference)receiver).getSimpleName();
                 String _plus = ((("Couldn\'t find enum value " + featureName) + " on enum ") + _simpleName);
-                ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(_plus, it);
-                throw _constantExpressionEvaluationException;
+                throw new ConstantExpressionEvaluationException(_plus, it);
               }
               return enumValue;
             }
@@ -482,8 +467,7 @@ public class ConstantExpressionsInterpreter {
               final Function1<JvmField,Boolean> _function = new Function1<JvmField,Boolean>() {
                 public Boolean apply(final JvmField it) {
                   String _simpleName = it.getSimpleName();
-                  boolean _equals = Objects.equal(_simpleName, featureName);
-                  return Boolean.valueOf(_equals);
+                  return Boolean.valueOf(Objects.equal(_simpleName, featureName));
                 }
               };
               final JvmField field = IterableExtensions.<JvmField>findFirst(_filter, _function);
@@ -491,16 +475,14 @@ public class ConstantExpressionsInterpreter {
               if (_equals) {
                 String _simpleName = ((JvmTypeReference)receiver).getSimpleName();
                 String _plus = ((("Couldn\'t find field " + featureName) + " on type ") + _simpleName);
-                ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(_plus, it);
-                throw _constantExpressionEvaluationException;
+                throw new ConstantExpressionEvaluationException(_plus, it);
               }
               return this.evaluateField(it, field, ctx);
             }
           }
         }
       }
-      UnresolvableFeatureException _unresolvableFeatureException = new UnresolvableFeatureException(((("Unresolvable feature " + featureName) + " on ") + receiver), it);
-      throw _unresolvableFeatureException;
+      throw new UnresolvableFeatureException(((("Unresolvable feature " + featureName) + " on ") + receiver), it);
     } catch (final Throwable _t) {
       if (_t instanceof UnresolvableFeatureException) {
         final UnresolvableFeatureException e = (UnresolvableFeatureException)_t;
@@ -510,8 +492,7 @@ public class ConstantExpressionsInterpreter {
         if (_notEquals) {
           return this.toTypeReference(type, 0);
         } else {
-          UnresolvableFeatureException _unresolvableFeatureException_1 = new UnresolvableFeatureException(("Unresolvable type " + typeName), it);
-          throw _unresolvableFeatureException_1;
+          throw new UnresolvableFeatureException(("Unresolvable type " + typeName), it);
         }
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -523,8 +504,7 @@ public class ConstantExpressionsInterpreter {
     String _text = this.toText(call);
     String _plus = ("The expression \'" + _text);
     String _plus_1 = (_plus + "\' cannot be used as a receiver within a constant expression.");
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(_plus_1);
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(_plus_1);
   }
   
   protected String _getFullName(final XMemberFeatureCall call) {
@@ -535,8 +515,7 @@ public class ConstantExpressionsInterpreter {
   }
   
   protected String _getFullName(final XFeatureCall call) {
-    String _concreteSyntaxFeatureName = call.getConcreteSyntaxFeatureName();
-    return _concreteSyntaxFeatureName;
+    return call.getConcreteSyntaxFeatureName();
   }
   
   protected Object evaluateField(final XAbstractFeatureCall call, final JvmField field, final Context context) {
@@ -558,25 +537,21 @@ public class ConstantExpressionsInterpreter {
       Set<XExpression> _alreadyEvaluating = context.getAlreadyEvaluating();
       boolean _contains = _alreadyEvaluating.contains(expression);
       if (_contains) {
-        ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException("Endless recursive evaluation detected.");
-        throw _constantExpressionEvaluationException;
+        throw new ConstantExpressionEvaluationException("Endless recursive evaluation detected.");
       }
       try {
         final Map<String,JvmIdentifiableElement> visibleFeatures = this.findVisibleFeatures(expression);
         Set<XExpression> _alreadyEvaluating_1 = context.getAlreadyEvaluating();
-        LinkedHashSet<XExpression> _linkedHashSet = new LinkedHashSet<XExpression>(_alreadyEvaluating_1);
-        final LinkedHashSet<XExpression> set = _linkedHashSet;
+        final LinkedHashSet<XExpression> set = new LinkedHashSet<XExpression>(_alreadyEvaluating_1);
         set.add(expression);
         JvmTypeReference _type = field.getType();
         ClassFinder _classFinder_1 = context.getClassFinder();
-        Context _context = new Context(_type, _classFinder_1, visibleFeatures, set);
-        final Context ctx = _context;
+        final Context ctx = new Context(_type, _classFinder_1, visibleFeatures, set);
         return this.internalEvaluate(expression, ctx);
       } catch (final Throwable _t) {
         if (_t instanceof ConstantExpressionEvaluationException) {
           final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
-          StackedConstantExpressionEvaluationException _stackedConstantExpressionEvaluationException = new StackedConstantExpressionEvaluationException(call, field, e);
-          throw _stackedConstantExpressionEvaluationException;
+          throw new StackedConstantExpressionEvaluationException(call, field, e);
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -599,97 +574,83 @@ public class ConstantExpressionsInterpreter {
       if (!_matched) {
         if (Objects.equal(op,"+")) {
           _matched=true;
-          Object _plus = this.constantOperators.plus(left, right);
-          _switchResult = _plus;
+          _switchResult = this.constantOperators.plus(left, right);
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"-")) {
           _matched=true;
-          Object _minus = this.constantOperators.minus(left, right);
-          _switchResult = _minus;
+          _switchResult = this.constantOperators.minus(left, right);
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"*")) {
           _matched=true;
-          Object _multiply = this.constantOperators.multiply(left, right);
-          _switchResult = _multiply;
+          _switchResult = this.constantOperators.multiply(left, right);
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"/")) {
           _matched=true;
-          Object _divide = this.constantOperators.divide(left, right);
-          _switchResult = _divide;
+          _switchResult = this.constantOperators.divide(left, right);
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"%")) {
           _matched=true;
-          Object _modulo = this.constantOperators.modulo(left, right);
-          _switchResult = _modulo;
+          _switchResult = this.constantOperators.modulo(left, right);
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"<")) {
           _matched=true;
-          boolean _lessThan = this.constantOperators.lessThan(left, right);
-          _switchResult = Boolean.valueOf(_lessThan);
+          _switchResult = Boolean.valueOf(this.constantOperators.lessThan(left, right));
         }
       }
       if (!_matched) {
         if (Objects.equal(op,">")) {
           _matched=true;
-          boolean _greaterThan = this.constantOperators.greaterThan(left, right);
-          _switchResult = Boolean.valueOf(_greaterThan);
+          _switchResult = Boolean.valueOf(this.constantOperators.greaterThan(left, right));
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"<=")) {
           _matched=true;
-          boolean _lessEquals = this.constantOperators.lessEquals(left, right);
-          _switchResult = Boolean.valueOf(_lessEquals);
+          _switchResult = Boolean.valueOf(this.constantOperators.lessEquals(left, right));
         }
       }
       if (!_matched) {
         if (Objects.equal(op,">=")) {
           _matched=true;
-          boolean _greaterEquals = this.constantOperators.greaterEquals(left, right);
-          _switchResult = Boolean.valueOf(_greaterEquals);
+          _switchResult = Boolean.valueOf(this.constantOperators.greaterEquals(left, right));
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"===")) {
           _matched=true;
-          boolean _same = this.constantOperators.same(left, right);
-          _switchResult = Boolean.valueOf(_same);
+          _switchResult = Boolean.valueOf(this.constantOperators.same(left, right));
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"!==")) {
           _matched=true;
-          boolean _notSame = this.constantOperators.notSame(left, right);
-          _switchResult = Boolean.valueOf(_notSame);
+          _switchResult = Boolean.valueOf(this.constantOperators.notSame(left, right));
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"==")) {
           _matched=true;
-          ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException("Please use the identity comparison operator \'===\' in constant expressions.");
-          throw _constantExpressionEvaluationException;
+          throw new ConstantExpressionEvaluationException("Please use the identity comparison operator \'===\' in constant expressions.");
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"!=")) {
           _matched=true;
-          ConstantExpressionEvaluationException _constantExpressionEvaluationException_1 = new ConstantExpressionEvaluationException("Please use the identity comparison operator \'!==\' in constant expressions.");
-          throw _constantExpressionEvaluationException_1;
+          throw new ConstantExpressionEvaluationException("Please use the identity comparison operator \'!==\' in constant expressions.");
         }
       }
       if (!_matched) {
-        ConstantExpressionEvaluationException _constantExpressionEvaluationException_2 = new ConstantExpressionEvaluationException(((((("Couldn\'t evaluate binary operator \'" + op) + "\' on values ") + left) + " and ") + right));
-        throw _constantExpressionEvaluationException_2;
+        throw new ConstantExpressionEvaluationException(((((("Couldn\'t evaluate binary operator \'" + op) + "\' on values ") + left) + " and ") + right));
       }
       _xblockexpression = (_switchResult);
     }
@@ -707,8 +668,7 @@ public class ConstantExpressionsInterpreter {
       if (!_matched) {
         if (Objects.equal(op,"-")) {
           _matched=true;
-          Object _minus = this.constantOperators.minus(value);
-          _switchResult = _minus;
+          _switchResult = this.constantOperators.minus(value);
         }
       }
       if (!_matched) {
@@ -738,8 +698,7 @@ public class ConstantExpressionsInterpreter {
         }
       }
       if (!_matched) {
-        ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(((("Couldn\'t evaluate unary operator \'" + value) + "\' on value ") + value));
-        throw _constantExpressionEvaluationException;
+        throw new ConstantExpressionEvaluationException(((("Couldn\'t evaluate unary operator \'" + value) + "\' on value ") + value));
       }
       _xblockexpression = (_switchResult);
     }
@@ -804,8 +763,7 @@ public class ConstantExpressionsInterpreter {
   
   protected String toText(final XExpression expression) {
     ICompositeNode _node = NodeModelUtils.getNode(expression);
-    String _text = _node.getText();
-    return _text;
+    return _node.getText();
   }
   
   public Object internalEvaluate(final XExpression it, final Context ctx) {

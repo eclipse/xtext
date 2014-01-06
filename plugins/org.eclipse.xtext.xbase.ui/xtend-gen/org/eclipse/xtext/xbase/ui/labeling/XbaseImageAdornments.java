@@ -30,8 +30,7 @@ public class XbaseImageAdornments {
     boolean _isStatic = it.isStatic();
     int _or_2 = this.or(_or_1, _isStatic, JavaElementImageDescriptor.STATIC);
     boolean _isDeprecated = DeprecationUtil.isDeprecated(it);
-    int _or_3 = this.or(_or_2, _isDeprecated, JavaElementImageDescriptor.DEPRECATED);
-    return _or_3;
+    return this.or(_or_2, _isDeprecated, JavaElementImageDescriptor.DEPRECATED);
   }
   
   protected int _get(final JvmField it) {
@@ -44,14 +43,12 @@ public class XbaseImageAdornments {
     boolean _isVolatile = it.isVolatile();
     int _or_3 = this.or(_or_2, _isVolatile, JavaElementImageDescriptor.VOLATILE);
     boolean _isTransient = it.isTransient();
-    int _or_4 = this.or(_or_3, _isTransient, JavaElementImageDescriptor.TRANSIENT);
-    return _or_4;
+    return this.or(_or_3, _isTransient, JavaElementImageDescriptor.TRANSIENT);
   }
   
   protected int _get(final JvmConstructor it) {
     boolean _isDeprecated = DeprecationUtil.isDeprecated(it);
-    int _or = this.or(JavaElementImageDescriptor.CONSTRUCTOR, _isDeprecated, JavaElementImageDescriptor.DEPRECATED);
-    return _or;
+    return this.or(JavaElementImageDescriptor.CONSTRUCTOR, _isDeprecated, JavaElementImageDescriptor.DEPRECATED);
   }
   
   protected int _get(final JvmOperation it) {
@@ -117,8 +114,7 @@ public class XbaseImageAdornments {
   protected int or(final int adornment, final boolean condition, final int oredValue) {
     int _xifexpression = (int) 0;
     if (condition) {
-      int _bitwiseOr = (adornment | oredValue);
-      _xifexpression = _bitwiseOr;
+      _xifexpression = (adornment | oredValue);
     } else {
       _xifexpression = adornment;
     }

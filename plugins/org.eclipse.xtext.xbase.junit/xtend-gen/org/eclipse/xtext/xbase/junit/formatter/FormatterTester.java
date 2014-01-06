@@ -46,8 +46,7 @@ public class FormatterTester {
   
   @SuppressWarnings("unchecked")
   public void assertFormatted(final Procedure1<? super AssertingFormatterData> init) {
-    AssertingFormatterData _assertingFormatterData = new AssertingFormatterData();
-    final AssertingFormatterData data = _assertingFormatterData;
+    final AssertingFormatterData data = new AssertingFormatterData();
     HashMap<String,String> _newHashMap = CollectionLiterals.<String, String>newHashMap();
     MapBasedPreferenceValues _mapBasedPreferenceValues = new MapBasedPreferenceValues(_newHashMap);
     data.setConfig(_mapBasedPreferenceValues);
@@ -109,8 +108,7 @@ public class FormatterTester {
           _matched_1=true;
           boolean _isConflictOccurred = ((AbstractFormatter)this.formatter).isConflictOccurred();
           if (_isConflictOccurred) {
-            RuntimeException _runtimeException = new RuntimeException("There are conflicting text edits, see console for details.");
-            throw _runtimeException;
+            throw new RuntimeException("There are conflicting text edits, see console for details.");
           }
         }
       }
@@ -184,12 +182,10 @@ public class FormatterTester {
     String _xblockexpression = null;
     {
       int lastOffset = 0;
-      StringBuilder _stringBuilder = new StringBuilder();
-      final StringBuilder newDocument = _stringBuilder;
+      final StringBuilder newDocument = new StringBuilder();
       final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
         public Integer apply(final TextReplacement it) {
-          int _offset = it.getOffset();
-          return Integer.valueOf(_offset);
+          return Integer.valueOf(it.getOffset());
         }
       };
       List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function);
@@ -209,8 +205,7 @@ public class FormatterTester {
       int _length = oldDocument.length();
       String _substring = oldDocument.substring(lastOffset, _length);
       newDocument.append(_substring);
-      String _string = newDocument.toString();
-      _xblockexpression = (_string);
+      _xblockexpression = (newDocument.toString());
     }
     return _xblockexpression;
   }
@@ -219,12 +214,10 @@ public class FormatterTester {
     String _xblockexpression = null;
     {
       int lastOffset = 0;
-      StringBuilder _stringBuilder = new StringBuilder();
-      final StringBuilder debugTrace = _stringBuilder;
+      final StringBuilder debugTrace = new StringBuilder();
       final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
         public Integer apply(final TextReplacement it) {
-          int _offset = it.getOffset();
-          return Integer.valueOf(_offset);
+          return Integer.valueOf(it.getOffset());
         }
       };
       List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function);
@@ -255,8 +248,7 @@ public class FormatterTester {
       int _length = oldDocument.length();
       String _substring = oldDocument.substring(lastOffset, _length);
       debugTrace.append(_substring);
-      String _string = debugTrace.toString();
-      _xblockexpression = (_string);
+      _xblockexpression = (debugTrace.toString());
     }
     return _xblockexpression;
   }
@@ -266,8 +258,7 @@ public class FormatterTester {
     {
       final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
         public Integer apply(final TextReplacement it) {
-          int _offset = it.getOffset();
-          return Integer.valueOf(_offset);
+          return Integer.valueOf(it.getOffset());
         }
       };
       Iterable<Integer> _map = IterableExtensions.<TextReplacement, Integer>map(edits, _function);

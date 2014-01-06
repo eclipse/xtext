@@ -76,8 +76,7 @@ public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> imp
   
   public String getSimpleName() {
     JvmPrimitiveType _delegate = this.getDelegate();
-    String _identifier = _delegate.getIdentifier();
-    return _identifier;
+    return _delegate.getIdentifier();
   }
   
   public boolean isAssignableFrom(final Type otherType) {
@@ -95,7 +94,6 @@ public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> imp
   }
   
   public String getQualifiedName() {
-    String _simpleName = this.getSimpleName();
-    return _simpleName;
+    return this.getSimpleName();
   }
 }

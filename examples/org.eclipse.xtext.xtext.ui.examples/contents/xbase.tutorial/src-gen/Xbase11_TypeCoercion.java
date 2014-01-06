@@ -21,13 +21,11 @@ public class Xbase11_TypeCoercion {
         public int compare(final String a, final String b) {
           int _length = a.length();
           int _length_1 = b.length();
-          int _compareTo = Integer.valueOf(_length).compareTo(Integer.valueOf(_length_1));
-          return _compareTo;
+          return Integer.valueOf(_length).compareTo(Integer.valueOf(_length_1));
         }
       };
       final Comparator<String> comparator = _function;
-      int _compare = comparator.compare("1", " 2");
-      _xblockexpression = (_compare);
+      _xblockexpression = (comparator.compare("1", " 2"));
     }
     return _xblockexpression;
   }

@@ -36,8 +36,7 @@ public class CachingResourceValidatorImpl extends ResourceValidatorImpl {
               _and = (_notEquals && _isCanceled);
             }
             if (_and) {
-              OperationCanceledException _operationCanceledException = new OperationCanceledException();
-              throw _operationCanceledException;
+              throw new OperationCanceledException();
             } else {
               _xifexpression = result;
             }

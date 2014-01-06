@@ -56,8 +56,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   private final Joiner.MapJoiner mapJoiner = Joiner.on("\n").withKeyValueSeparator("=");
   
   public RootResolvedTypes createResolvedTypes() {
-    RecordingRootResolvedTypes _recordingRootResolvedTypes = new RecordingRootResolvedTypes(this);
-    return _recordingRootResolvedTypes;
+    return new RecordingRootResolvedTypes(this);
   }
   
   public IResolvedTypes resolve() {
@@ -333,15 +332,13 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   public void assertEqualReferences(final String message, final List<LightweightTypeReference> left, final List<LightweightTypeReference> right) {
     final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
       public String apply(final LightweightTypeReference it) {
-        String _string = it.toString();
-        return _string;
+        return it.toString();
       }
     };
     List<String> _map = ListExtensions.<LightweightTypeReference, String>map(left, _function);
     final Function1<LightweightTypeReference,String> _function_1 = new Function1<LightweightTypeReference,String>() {
       public String apply(final LightweightTypeReference it) {
-        String _string = it.toString();
-        return _string;
+        return it.toString();
       }
     };
     List<String> _map_1 = ListExtensions.<LightweightTypeReference, String>map(right, _function_1);

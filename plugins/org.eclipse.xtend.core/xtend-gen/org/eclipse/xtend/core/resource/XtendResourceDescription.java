@@ -75,8 +75,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
         Iterator<XExpression> _filter = Iterators.<XExpression>filter(_allContents, XExpression.class);
         final Function1<XExpression,LightweightTypeReference> _function = new Function1<XExpression,LightweightTypeReference>() {
           public LightweightTypeReference apply(final XExpression it) {
-            LightweightTypeReference _actualType = types.getActualType(it);
-            return _actualType;
+            return types.getActualType(it);
           }
         };
         Iterator<LightweightTypeReference> _map = IteratorExtensions.<XExpression, LightweightTypeReference>map(_filter, _function);
@@ -89,8 +88,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
               public Boolean apply(final String it) {
                 QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
                 QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-                boolean _add = result.add(_lowerCase);
-                return Boolean.valueOf(_add);
+                return Boolean.valueOf(result.add(_lowerCase));
               }
             };
             this.registerAllTypes(_type, _function_1);
@@ -108,8 +106,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
               _or = ((!(it instanceof JvmType)) || (it instanceof JvmDeclaredType));
             }
             if (_or) {
-              LightweightTypeReference _actualType = types.getActualType(it);
-              _xifexpression = _actualType;
+              _xifexpression = types.getActualType(it);
             }
             return _xifexpression;
           }
@@ -124,8 +121,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
               public Boolean apply(final String it) {
                 QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
                 QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-                boolean _add = result.add(_lowerCase);
-                return Boolean.valueOf(_add);
+                return Boolean.valueOf(result.add(_lowerCase));
               }
             };
             this.registerAllTypes(_type_1, _function_3);
@@ -139,8 +135,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
       public Boolean apply(final QualifiedName it) {
         String _lastSegment = it.getLastSegment();
         boolean _contains = XtendResourceDescription.primitivesFilter.contains(_lastSegment);
-        boolean _not = (!_contains);
-        return Boolean.valueOf(_not);
+        return Boolean.valueOf((!_contains));
       }
     };
     Iterable<QualifiedName> _filter = IterableExtensions.<QualifiedName>filter(result, _function);

@@ -91,13 +91,11 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   }
   
   public boolean setGenerateDebugData(final boolean doGenerate) {
-    boolean _generateDebugData = this.generateDebugData = doGenerate;
-    return _generateDebugData;
+    return this.generateDebugData = doGenerate;
   }
   
   public boolean setSrcGenOnly(final boolean srcGen) {
-    boolean _srcGenOnly = this.srcGenOnly = srcGen;
-    return _srcGenOnly;
+    return this.srcGenOnly = srcGen;
   }
   
   public void setGenerateStub(final boolean generateStub) {
@@ -109,8 +107,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   }
   
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
-    BindFactory _bindFactory = new BindFactory();
-    final BindFactory bf = _bindFactory;
+    final BindFactory bf = new BindFactory();
     String _name = ISemanticSequencer.class.getName();
     SerializerGenFileNames.GenFileName _semanticSequencer = this.names.getSemanticSequencer();
     String _qualifiedName = _semanticSequencer.getQualifiedName();
@@ -184,8 +181,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     List<String> _xifexpression = null;
     boolean _isGenerateXtendStub = this.isGenerateXtendStub();
     if (_isGenerateXtendStub) {
-      List<String> _singletonList = Collections.<String>singletonList("org.eclipse.xtext.xbase.lib");
-      _xifexpression = _singletonList;
+      _xifexpression = Collections.<String>singletonList("org.eclipse.xtext.xbase.lib");
     } else {
       _xifexpression = null;
     }

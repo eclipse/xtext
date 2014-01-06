@@ -16,19 +16,13 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class CompilationContextImpl implements CompilationStrategy.CompilationContext {
   @Extension
-  private ReflectExtensions reflectExtensions = new Function0<ReflectExtensions>() {
-    public ReflectExtensions apply() {
-      ReflectExtensions _reflectExtensions = new ReflectExtensions();
-      return _reflectExtensions;
-    }
-  }.apply();
+  private ReflectExtensions reflectExtensions = new ReflectExtensions();
   
   private ITreeAppendable appendable;
   
@@ -45,12 +39,12 @@ public class CompilationContextImpl implements CompilationStrategy.CompilationCo
   
   public ImportManager getImportManager(final ITreeAppendable appendable) {
     try {
-      ImportManager _get = null;
-      Object _get_1 = this.reflectExtensions.<Object>get(appendable, "state");
-      if (_get_1!=null) {
-        _get=this.reflectExtensions.<ImportManager>get(_get_1, "importManager");
+      Object _get = this.reflectExtensions.<Object>get(appendable, "state");
+      ImportManager _get_1 = null;
+      if (_get!=null) {
+        _get_1=this.reflectExtensions.<ImportManager>get(_get, "importManager");
       }
-      return _get;
+      return _get_1;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -60,11 +54,9 @@ public class CompilationContextImpl implements CompilationStrategy.CompilationCo
     StringBuilderBasedAppendable _xifexpression = null;
     boolean _notEquals = (!Objects.equal(this.importManager, null));
     if (_notEquals) {
-      StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(this.importManager);
-      _xifexpression = _stringBuilderBasedAppendable;
+      _xifexpression = new StringBuilderBasedAppendable(this.importManager);
     } else {
-      StringBuilderBasedAppendable _stringBuilderBasedAppendable_1 = new StringBuilderBasedAppendable();
-      _xifexpression = _stringBuilderBasedAppendable_1;
+      _xifexpression = new StringBuilderBasedAppendable();
     }
     final StringBuilderBasedAppendable appendable = _xifexpression;
     final LightweightTypeReference typeRef = this.compilationUnit.toLightweightTypeReference(typeref);

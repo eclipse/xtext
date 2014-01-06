@@ -41,7 +41,6 @@ public class FormattingDataInit {
   
   public String toString() {
     ToStringHelper _toStringHelper = new ToStringHelper();
-    String _string = _toStringHelper.toString(this);
-    return _string;
+    return _toStringHelper.toString(this);
   }
 }

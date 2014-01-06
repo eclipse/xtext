@@ -353,8 +353,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
         it.addTypeArgument(listOfCharSequence);
         ITypeReferenceOwner _owner = it.getOwner();
         ParameterizedTypeReference _typeRef_5 = LightweightTypeReferenceSerializerTest.this.typeRef(Object.class);
-        ArrayTypeReference _arrayTypeReference = new ArrayTypeReference(_owner, _typeRef_5);
-        final ArrayTypeReference arrayOfObject = _arrayTypeReference;
+        final ArrayTypeReference arrayOfObject = new ArrayTypeReference(_owner, _typeRef_5);
         it.addParameterType(arrayOfObject);
         it.addTypeArgument(arrayOfObject);
       }
@@ -422,8 +421,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
         it.addTypeArgument(listOfCharSequence);
         ITypeReferenceOwner _owner = it.getOwner();
         ParameterizedTypeReference _typeRef_3 = LightweightTypeReferenceSerializerTest.this.typeRef(Object.class);
-        ArrayTypeReference _arrayTypeReference = new ArrayTypeReference(_owner, _typeRef_3);
-        final ArrayTypeReference arrayOfObject = _arrayTypeReference;
+        final ArrayTypeReference arrayOfObject = new ArrayTypeReference(_owner, _typeRef_3);
         it.addParameterType(arrayOfObject);
         it.addTypeArgument(arrayOfObject);
       }
@@ -507,50 +505,42 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
   }
   
   protected StandardTypeReferenceOwner getOwner() {
-    StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, this.resourceSet);
-    return _standardTypeReferenceOwner;
+    return new StandardTypeReferenceOwner(this.services, this.resourceSet);
   }
   
   protected ParameterizedTypeReference typeRef(final Class<? extends Object> type) {
     StandardTypeReferenceOwner _owner = this.getOwner();
     JvmType _type = this.type(type);
-    ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(_owner, _type);
-    return _parameterizedTypeReference;
+    return new ParameterizedTypeReference(_owner, _type);
   }
   
   protected JvmType type(final Class<? extends Object> type) {
     TypeReferences _typeReferences = this.services.getTypeReferences();
-    JvmType _findDeclaredType = _typeReferences.findDeclaredType(type, this.resourceSet);
-    return _findDeclaredType;
+    return _typeReferences.findDeclaredType(type, this.resourceSet);
   }
   
   protected LightweightTypeReference assertInXtendAndJava(final LightweightTypeReference ref, final String expectation) {
     LightweightTypeReference _xblockexpression = null;
     {
       this.assertInXtend(ref, expectation);
-      LightweightTypeReference _assertInJava = this.assertInJava(ref, expectation);
-      _xblockexpression = (_assertInJava);
+      _xblockexpression = (this.assertInJava(ref, expectation));
     }
     return _xblockexpression;
   }
   
   protected LightweightTypeReference assertInXtend(final LightweightTypeReference ref, final String expectation) {
-    LightweightTypeReference _assertIn = this.assertIn(ref, expectation, false);
-    return _assertIn;
+    return this.assertIn(ref, expectation, false);
   }
   
   protected LightweightTypeReference assertInJava(final LightweightTypeReference ref, final String expectation) {
-    LightweightTypeReference _assertIn = this.assertIn(ref, expectation, true);
-    return _assertIn;
+    return this.assertIn(ref, expectation, true);
   }
   
   protected LightweightTypeReference assertIn(final LightweightTypeReference ref, final String expectation, final boolean isJava) {
     LightweightTypeReference _xblockexpression = null;
     {
-      TestAppender _testAppender = new TestAppender(isJava);
-      final TestAppender appender = _testAppender;
-      LightweightTypeReferenceSerializer _lightweightTypeReferenceSerializer = new LightweightTypeReferenceSerializer(appender);
-      final LightweightTypeReferenceSerializer serializer = _lightweightTypeReferenceSerializer;
+      final TestAppender appender = new TestAppender(isJava);
+      final LightweightTypeReferenceSerializer serializer = new LightweightTypeReferenceSerializer(appender);
       ref.accept(serializer);
       String _string = appender.toString();
       Assert.assertEquals(expectation, _string);

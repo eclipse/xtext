@@ -25,8 +25,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Map<URI,Resource> _uRIResourceMap = rs.getURIResourceMap();
     int _size = _uRIResourceMap.size();
     Assert.assertEquals(0, _size);
-    XtextResource _xtextResource = new XtextResource();
-    final XtextResource resource = _xtextResource;
+    final XtextResource resource = new XtextResource();
     URI _createURI = URI.createURI("foo");
     resource.setURI(_createURI);
     EList<Resource> _resources = rs.getResources();
@@ -50,8 +49,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Map<URI,Resource> _uRIResourceMap = rs.getURIResourceMap();
     int _size = _uRIResourceMap.size();
     Assert.assertEquals(0, _size);
-    XtextResource _xtextResource = new XtextResource();
-    final XtextResource resource = _xtextResource;
+    final XtextResource resource = new XtextResource();
     URI _createURI = URI.createURI("foo");
     resource.setURI(_createURI);
     EList<Resource> _resources = rs.getResources();
@@ -76,8 +74,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Map<URI,Resource> _uRIResourceMap = rs.getURIResourceMap();
     int _size = _uRIResourceMap.size();
     Assert.assertEquals(0, _size);
-    XtextResource _xtextResource = new XtextResource();
-    final XtextResource resource = _xtextResource;
+    final XtextResource resource = new XtextResource();
     EList<Resource> _resources = rs.getResources();
     _resources.add(resource);
     Map<URI,Resource> _uRIResourceMap_1 = rs.getURIResourceMap();
@@ -145,8 +142,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Map<URI,Resource> _uRIResourceMap = rs.getURIResourceMap();
     int _size = _uRIResourceMap.size();
     Assert.assertEquals(0, _size);
-    XtextResource _xtextResource = new XtextResource();
-    final XtextResource resource = _xtextResource;
+    final XtextResource resource = new XtextResource();
     URI _createURI = URI.createURI("foo");
     resource.setURI(_createURI);
     EList<Resource> _resources = rs.getResources();
@@ -171,8 +167,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Map<URI,Resource> _uRIResourceMap = rs.getURIResourceMap();
     int _size = _uRIResourceMap.size();
     Assert.assertEquals(0, _size);
-    XtextResource _xtextResource = new XtextResource();
-    final XtextResource resource = _xtextResource;
+    final XtextResource resource = new XtextResource();
     URI _createURI = URI.createURI("foo");
     resource.setURI(_createURI);
     EList<Resource> _resources = rs.getResources();
@@ -198,8 +193,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Map<URI,Resource> _uRIResourceMap = rs.getURIResourceMap();
     int _size = _uRIResourceMap.size();
     Assert.assertEquals(0, _size);
-    XtextResource _xtextResource = new XtextResource();
-    final XtextResource resource = _xtextResource;
+    final XtextResource resource = new XtextResource();
     URI _createURI = URI.createURI("/a/../foo");
     resource.setURI(_createURI);
     EList<Resource> _resources = rs.getResources();
@@ -223,8 +217,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Map<URI,Resource> _uRIResourceMap = rs.getURIResourceMap();
     int _size = _uRIResourceMap.size();
     Assert.assertEquals(0, _size);
-    XtextResource _xtextResource = new XtextResource();
-    final XtextResource resource = _xtextResource;
+    final XtextResource resource = new XtextResource();
     URI _createURI = URI.createURI("/a/../foo");
     resource.setURI(_createURI);
     EList<Resource> _resources = rs.getResources();
@@ -249,8 +242,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Map<URI,Resource> _uRIResourceMap = rs.getURIResourceMap();
     int _size = _uRIResourceMap.size();
     Assert.assertEquals(0, _size);
-    XtextResource _xtextResource = new XtextResource();
-    final XtextResource resource = _xtextResource;
+    final XtextResource resource = new XtextResource();
     EList<Resource> _resources = rs.getResources();
     _resources.add(resource);
     Map<URI,Resource> _uRIResourceMap_1 = rs.getURIResourceMap();
@@ -318,8 +310,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Map<URI,Resource> _uRIResourceMap = rs.getURIResourceMap();
     int _size = _uRIResourceMap.size();
     Assert.assertEquals(0, _size);
-    XtextResource _xtextResource = new XtextResource();
-    final XtextResource resource = _xtextResource;
+    final XtextResource resource = new XtextResource();
     URI _createURI = URI.createURI("/a/../foo");
     resource.setURI(_createURI);
     EList<Resource> _resources = rs.getResources();
@@ -344,8 +335,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     Map<URI,Resource> _uRIResourceMap = rs.getURIResourceMap();
     int _size = _uRIResourceMap.size();
     Assert.assertEquals(0, _size);
-    XtextResource _xtextResource = new XtextResource();
-    final XtextResource resource = _xtextResource;
+    final XtextResource resource = new XtextResource();
     URI _createURI = URI.createURI("//a/../foo");
     resource.setURI(_createURI);
     EList<Resource> _resources = rs.getResources();

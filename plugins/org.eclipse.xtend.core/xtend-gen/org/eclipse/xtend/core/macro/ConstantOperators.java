@@ -24,8 +24,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 @SuppressWarnings("all")
 public class ConstantOperators {
   protected Object _minus(final Object operand) {
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(("Unsupported operator \'-\' for operand " + operand));
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(("Unsupported operator \'-\' for operand " + operand));
   }
   
   protected Object _minus(final Integer e) {
@@ -33,8 +32,7 @@ public class ConstantOperators {
   }
   
   protected Object _minus(final Double e) {
-    double _minus = DoubleExtensions.operator_minus(e);
-    return _minus;
+    return DoubleExtensions.operator_minus(e);
   }
   
   protected Object _minus(final Long e) {
@@ -147,2830 +145,2423 @@ public class ConstantOperators {
   }
   
   protected Object _plus(final Object left, final Object right) {
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(((("Unsupported operator \'+\' for operands " + left) + " and ") + right));
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(((("Unsupported operator \'+\' for operands " + left) + " and ") + right));
   }
   
   protected Object _plus(final Byte left, final Byte right) {
     byte _byteValue = left.byteValue();
     byte _byteValue_1 = right.byteValue();
-    int _plus = (_byteValue + _byteValue_1);
-    return _plus;
+    return (_byteValue + _byteValue_1);
   }
   
   protected Object _plus(final Byte left, final Double right) {
     byte _byteValue = left.byteValue();
     double _doubleValue = right.doubleValue();
-    double _plus = (_byteValue + _doubleValue);
-    return _plus;
+    return (_byteValue + _doubleValue);
   }
   
   protected Object _plus(final Byte left, final Float right) {
     byte _byteValue = left.byteValue();
     float _floatValue = right.floatValue();
-    float _plus = (_byteValue + _floatValue);
-    return _plus;
+    return (_byteValue + _floatValue);
   }
   
   protected Object _plus(final Byte left, final Long right) {
     byte _byteValue = left.byteValue();
     long _longValue = right.longValue();
-    long _plus = (_byteValue + _longValue);
-    return _plus;
+    return (_byteValue + _longValue);
   }
   
   protected Object _plus(final Byte left, final Short right) {
     byte _byteValue = left.byteValue();
     short _shortValue = right.shortValue();
-    int _plus = (_byteValue + _shortValue);
-    return _plus;
+    return (_byteValue + _shortValue);
   }
   
   protected Object _plus(final Byte left, final Integer right) {
     byte _byteValue = left.byteValue();
     int _intValue = right.intValue();
-    int _plus = (_byteValue + _intValue);
-    return _plus;
+    return (_byteValue + _intValue);
   }
   
   protected Object _plus(final Double left, final Byte right) {
     double _doubleValue = left.doubleValue();
     byte _byteValue = right.byteValue();
-    double _plus = (_doubleValue + _byteValue);
-    return _plus;
+    return (_doubleValue + _byteValue);
   }
   
   protected Object _plus(final Double left, final Double right) {
     double _doubleValue = left.doubleValue();
     double _doubleValue_1 = right.doubleValue();
-    double _plus = (_doubleValue + _doubleValue_1);
-    return _plus;
+    return (_doubleValue + _doubleValue_1);
   }
   
   protected Object _plus(final Double left, final Float right) {
     double _doubleValue = left.doubleValue();
     float _floatValue = right.floatValue();
-    double _plus = (_doubleValue + _floatValue);
-    return _plus;
+    return (_doubleValue + _floatValue);
   }
   
   protected Object _plus(final Double left, final Long right) {
     double _doubleValue = left.doubleValue();
     long _longValue = right.longValue();
-    double _plus = (_doubleValue + _longValue);
-    return _plus;
+    return (_doubleValue + _longValue);
   }
   
   protected Object _plus(final Double left, final Short right) {
     double _doubleValue = left.doubleValue();
     short _shortValue = right.shortValue();
-    double _plus = (_doubleValue + _shortValue);
-    return _plus;
+    return (_doubleValue + _shortValue);
   }
   
   protected Object _plus(final Double left, final Integer right) {
     double _doubleValue = left.doubleValue();
     int _intValue = right.intValue();
-    double _plus = (_doubleValue + _intValue);
-    return _plus;
+    return (_doubleValue + _intValue);
   }
   
   protected Object _plus(final Float left, final Byte right) {
     float _floatValue = left.floatValue();
     byte _byteValue = right.byteValue();
-    float _plus = (_floatValue + _byteValue);
-    return _plus;
+    return (_floatValue + _byteValue);
   }
   
   protected Object _plus(final Float left, final Double right) {
     float _floatValue = left.floatValue();
     double _doubleValue = right.doubleValue();
-    double _plus = (_floatValue + _doubleValue);
-    return _plus;
+    return (_floatValue + _doubleValue);
   }
   
   protected Object _plus(final Float left, final Float right) {
     float _floatValue = left.floatValue();
     float _floatValue_1 = right.floatValue();
-    float _plus = (_floatValue + _floatValue_1);
-    return _plus;
+    return (_floatValue + _floatValue_1);
   }
   
   protected Object _plus(final Float left, final Long right) {
     float _floatValue = left.floatValue();
     long _longValue = right.longValue();
-    float _plus = (_floatValue + _longValue);
-    return _plus;
+    return (_floatValue + _longValue);
   }
   
   protected Object _plus(final Float left, final Short right) {
     float _floatValue = left.floatValue();
     short _shortValue = right.shortValue();
-    float _plus = (_floatValue + _shortValue);
-    return _plus;
+    return (_floatValue + _shortValue);
   }
   
   protected Object _plus(final Float left, final Integer right) {
     float _floatValue = left.floatValue();
     int _intValue = right.intValue();
-    float _plus = (_floatValue + _intValue);
-    return _plus;
+    return (_floatValue + _intValue);
   }
   
   protected Object _plus(final Long left, final Byte right) {
     long _longValue = left.longValue();
     byte _byteValue = right.byteValue();
-    long _plus = (_longValue + _byteValue);
-    return _plus;
+    return (_longValue + _byteValue);
   }
   
   protected Object _plus(final Long left, final Double right) {
     long _longValue = left.longValue();
     double _doubleValue = right.doubleValue();
-    double _plus = (_longValue + _doubleValue);
-    return _plus;
+    return (_longValue + _doubleValue);
   }
   
   protected Object _plus(final Long left, final Float right) {
     long _longValue = left.longValue();
     float _floatValue = right.floatValue();
-    float _plus = (_longValue + _floatValue);
-    return _plus;
+    return (_longValue + _floatValue);
   }
   
   protected Object _plus(final Long left, final Long right) {
     long _longValue = left.longValue();
     long _longValue_1 = right.longValue();
-    long _plus = (_longValue + _longValue_1);
-    return _plus;
+    return (_longValue + _longValue_1);
   }
   
   protected Object _plus(final Long left, final Short right) {
     long _longValue = left.longValue();
     short _shortValue = right.shortValue();
-    long _plus = (_longValue + _shortValue);
-    return _plus;
+    return (_longValue + _shortValue);
   }
   
   protected Object _plus(final Long left, final Integer right) {
     long _longValue = left.longValue();
     int _intValue = right.intValue();
-    long _plus = (_longValue + _intValue);
-    return _plus;
+    return (_longValue + _intValue);
   }
   
   protected Object _plus(final Short left, final Byte right) {
     short _shortValue = left.shortValue();
     byte _byteValue = right.byteValue();
-    int _plus = (_shortValue + _byteValue);
-    return _plus;
+    return (_shortValue + _byteValue);
   }
   
   protected Object _plus(final Short left, final Double right) {
     short _shortValue = left.shortValue();
     double _doubleValue = right.doubleValue();
-    double _plus = (_shortValue + _doubleValue);
-    return _plus;
+    return (_shortValue + _doubleValue);
   }
   
   protected Object _plus(final Short left, final Float right) {
     short _shortValue = left.shortValue();
     float _floatValue = right.floatValue();
-    float _plus = (_shortValue + _floatValue);
-    return _plus;
+    return (_shortValue + _floatValue);
   }
   
   protected Object _plus(final Short left, final Long right) {
     short _shortValue = left.shortValue();
     long _longValue = right.longValue();
-    long _plus = (_shortValue + _longValue);
-    return _plus;
+    return (_shortValue + _longValue);
   }
   
   protected Object _plus(final Short left, final Short right) {
     short _shortValue = left.shortValue();
     short _shortValue_1 = right.shortValue();
-    int _plus = (_shortValue + _shortValue_1);
-    return _plus;
+    return (_shortValue + _shortValue_1);
   }
   
   protected Object _plus(final Short left, final Integer right) {
     short _shortValue = left.shortValue();
     int _intValue = right.intValue();
-    int _plus = (_shortValue + _intValue);
-    return _plus;
+    return (_shortValue + _intValue);
   }
   
   protected Object _plus(final Integer left, final Byte right) {
     int _intValue = left.intValue();
     byte _byteValue = right.byteValue();
-    int _plus = (_intValue + _byteValue);
-    return _plus;
+    return (_intValue + _byteValue);
   }
   
   protected Object _plus(final Integer left, final Double right) {
     int _intValue = left.intValue();
     double _doubleValue = right.doubleValue();
-    double _plus = (_intValue + _doubleValue);
-    return _plus;
+    return (_intValue + _doubleValue);
   }
   
   protected Object _plus(final Integer left, final Float right) {
     int _intValue = left.intValue();
     float _floatValue = right.floatValue();
-    float _plus = (_intValue + _floatValue);
-    return _plus;
+    return (_intValue + _floatValue);
   }
   
   protected Object _plus(final Integer left, final Long right) {
     int _intValue = left.intValue();
     long _longValue = right.longValue();
-    long _plus = (_intValue + _longValue);
-    return _plus;
+    return (_intValue + _longValue);
   }
   
   protected Object _plus(final Integer left, final Short right) {
     int _intValue = left.intValue();
     short _shortValue = right.shortValue();
-    int _plus = (_intValue + _shortValue);
-    return _plus;
+    return (_intValue + _shortValue);
   }
   
   protected Object _plus(final Integer left, final Integer right) {
     int _intValue = left.intValue();
     int _intValue_1 = right.intValue();
-    int _plus = (_intValue + _intValue_1);
-    return _plus;
+    return (_intValue + _intValue_1);
   }
   
   protected boolean _lessThan(final Object left, final Object right) {
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(((("Unsupported operator \'<\' for operands " + left) + " and ") + right));
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(((("Unsupported operator \'<\' for operands " + left) + " and ") + right));
   }
   
   protected boolean _lessThan(final Byte left, final Byte right) {
     byte _byteValue = left.byteValue();
     byte _byteValue_1 = right.byteValue();
-    boolean _lessThan = (_byteValue < _byteValue_1);
-    return _lessThan;
+    return (_byteValue < _byteValue_1);
   }
   
   protected boolean _lessThan(final Byte left, final Double right) {
     byte _byteValue = left.byteValue();
     double _doubleValue = right.doubleValue();
-    boolean _lessThan = (_byteValue < _doubleValue);
-    return _lessThan;
+    return (_byteValue < _doubleValue);
   }
   
   protected boolean _lessThan(final Byte left, final Float right) {
     byte _byteValue = left.byteValue();
     float _floatValue = right.floatValue();
-    boolean _lessThan = (_byteValue < _floatValue);
-    return _lessThan;
+    return (_byteValue < _floatValue);
   }
   
   protected boolean _lessThan(final Byte left, final Long right) {
     byte _byteValue = left.byteValue();
     long _longValue = right.longValue();
-    boolean _lessThan = (_byteValue < _longValue);
-    return _lessThan;
+    return (_byteValue < _longValue);
   }
   
   protected boolean _lessThan(final Byte left, final Short right) {
     byte _byteValue = left.byteValue();
     short _shortValue = right.shortValue();
-    boolean _lessThan = (_byteValue < _shortValue);
-    return _lessThan;
+    return (_byteValue < _shortValue);
   }
   
   protected boolean _lessThan(final Byte left, final Integer right) {
     byte _byteValue = left.byteValue();
     int _intValue = right.intValue();
-    boolean _lessThan = (_byteValue < _intValue);
-    return _lessThan;
+    return (_byteValue < _intValue);
   }
   
   protected boolean _lessThan(final Double left, final Byte right) {
     double _doubleValue = left.doubleValue();
     byte _byteValue = right.byteValue();
-    boolean _lessThan = (_doubleValue < _byteValue);
-    return _lessThan;
+    return (_doubleValue < _byteValue);
   }
   
   protected boolean _lessThan(final Double left, final Double right) {
     double _doubleValue = left.doubleValue();
     double _doubleValue_1 = right.doubleValue();
-    boolean _lessThan = (_doubleValue < _doubleValue_1);
-    return _lessThan;
+    return (_doubleValue < _doubleValue_1);
   }
   
   protected boolean _lessThan(final Double left, final Float right) {
     double _doubleValue = left.doubleValue();
     float _floatValue = right.floatValue();
-    boolean _lessThan = (_doubleValue < _floatValue);
-    return _lessThan;
+    return (_doubleValue < _floatValue);
   }
   
   protected boolean _lessThan(final Double left, final Long right) {
     double _doubleValue = left.doubleValue();
     long _longValue = right.longValue();
-    boolean _lessThan = (_doubleValue < _longValue);
-    return _lessThan;
+    return (_doubleValue < _longValue);
   }
   
   protected boolean _lessThan(final Double left, final Short right) {
     double _doubleValue = left.doubleValue();
     short _shortValue = right.shortValue();
-    boolean _lessThan = (_doubleValue < _shortValue);
-    return _lessThan;
+    return (_doubleValue < _shortValue);
   }
   
   protected boolean _lessThan(final Double left, final Integer right) {
     double _doubleValue = left.doubleValue();
     int _intValue = right.intValue();
-    boolean _lessThan = (_doubleValue < _intValue);
-    return _lessThan;
+    return (_doubleValue < _intValue);
   }
   
   protected boolean _lessThan(final Float left, final Byte right) {
     float _floatValue = left.floatValue();
     byte _byteValue = right.byteValue();
-    boolean _lessThan = (_floatValue < _byteValue);
-    return _lessThan;
+    return (_floatValue < _byteValue);
   }
   
   protected boolean _lessThan(final Float left, final Double right) {
     float _floatValue = left.floatValue();
     double _doubleValue = right.doubleValue();
-    boolean _lessThan = (_floatValue < _doubleValue);
-    return _lessThan;
+    return (_floatValue < _doubleValue);
   }
   
   protected boolean _lessThan(final Float left, final Float right) {
     float _floatValue = left.floatValue();
     float _floatValue_1 = right.floatValue();
-    boolean _lessThan = (_floatValue < _floatValue_1);
-    return _lessThan;
+    return (_floatValue < _floatValue_1);
   }
   
   protected boolean _lessThan(final Float left, final Long right) {
     float _floatValue = left.floatValue();
     long _longValue = right.longValue();
-    boolean _lessThan = (_floatValue < _longValue);
-    return _lessThan;
+    return (_floatValue < _longValue);
   }
   
   protected boolean _lessThan(final Float left, final Short right) {
     float _floatValue = left.floatValue();
     short _shortValue = right.shortValue();
-    boolean _lessThan = (_floatValue < _shortValue);
-    return _lessThan;
+    return (_floatValue < _shortValue);
   }
   
   protected boolean _lessThan(final Float left, final Integer right) {
     float _floatValue = left.floatValue();
     int _intValue = right.intValue();
-    boolean _lessThan = (_floatValue < _intValue);
-    return _lessThan;
+    return (_floatValue < _intValue);
   }
   
   protected boolean _lessThan(final Long left, final Byte right) {
     long _longValue = left.longValue();
     byte _byteValue = right.byteValue();
-    boolean _lessThan = (_longValue < _byteValue);
-    return _lessThan;
+    return (_longValue < _byteValue);
   }
   
   protected boolean _lessThan(final Long left, final Double right) {
     long _longValue = left.longValue();
     double _doubleValue = right.doubleValue();
-    boolean _lessThan = (_longValue < _doubleValue);
-    return _lessThan;
+    return (_longValue < _doubleValue);
   }
   
   protected boolean _lessThan(final Long left, final Float right) {
     long _longValue = left.longValue();
     float _floatValue = right.floatValue();
-    boolean _lessThan = (_longValue < _floatValue);
-    return _lessThan;
+    return (_longValue < _floatValue);
   }
   
   protected boolean _lessThan(final Long left, final Long right) {
     long _longValue = left.longValue();
     long _longValue_1 = right.longValue();
-    boolean _lessThan = (_longValue < _longValue_1);
-    return _lessThan;
+    return (_longValue < _longValue_1);
   }
   
   protected boolean _lessThan(final Long left, final Short right) {
     long _longValue = left.longValue();
     short _shortValue = right.shortValue();
-    boolean _lessThan = (_longValue < _shortValue);
-    return _lessThan;
+    return (_longValue < _shortValue);
   }
   
   protected boolean _lessThan(final Long left, final Integer right) {
     long _longValue = left.longValue();
     int _intValue = right.intValue();
-    boolean _lessThan = (_longValue < _intValue);
-    return _lessThan;
+    return (_longValue < _intValue);
   }
   
   protected boolean _lessThan(final Short left, final Byte right) {
     short _shortValue = left.shortValue();
     byte _byteValue = right.byteValue();
-    boolean _lessThan = (_shortValue < _byteValue);
-    return _lessThan;
+    return (_shortValue < _byteValue);
   }
   
   protected boolean _lessThan(final Short left, final Double right) {
     short _shortValue = left.shortValue();
     double _doubleValue = right.doubleValue();
-    boolean _lessThan = (_shortValue < _doubleValue);
-    return _lessThan;
+    return (_shortValue < _doubleValue);
   }
   
   protected boolean _lessThan(final Short left, final Float right) {
     short _shortValue = left.shortValue();
     float _floatValue = right.floatValue();
-    boolean _lessThan = (_shortValue < _floatValue);
-    return _lessThan;
+    return (_shortValue < _floatValue);
   }
   
   protected boolean _lessThan(final Short left, final Long right) {
     short _shortValue = left.shortValue();
     long _longValue = right.longValue();
-    boolean _lessThan = (_shortValue < _longValue);
-    return _lessThan;
+    return (_shortValue < _longValue);
   }
   
   protected boolean _lessThan(final Short left, final Short right) {
     short _shortValue = left.shortValue();
     short _shortValue_1 = right.shortValue();
-    boolean _lessThan = (_shortValue < _shortValue_1);
-    return _lessThan;
+    return (_shortValue < _shortValue_1);
   }
   
   protected boolean _lessThan(final Short left, final Integer right) {
     short _shortValue = left.shortValue();
     int _intValue = right.intValue();
-    boolean _lessThan = (_shortValue < _intValue);
-    return _lessThan;
+    return (_shortValue < _intValue);
   }
   
   protected boolean _lessThan(final Integer left, final Byte right) {
     int _intValue = left.intValue();
     byte _byteValue = right.byteValue();
-    boolean _lessThan = (_intValue < _byteValue);
-    return _lessThan;
+    return (_intValue < _byteValue);
   }
   
   protected boolean _lessThan(final Integer left, final Double right) {
     int _intValue = left.intValue();
     double _doubleValue = right.doubleValue();
-    boolean _lessThan = (_intValue < _doubleValue);
-    return _lessThan;
+    return (_intValue < _doubleValue);
   }
   
   protected boolean _lessThan(final Integer left, final Float right) {
     int _intValue = left.intValue();
     float _floatValue = right.floatValue();
-    boolean _lessThan = (_intValue < _floatValue);
-    return _lessThan;
+    return (_intValue < _floatValue);
   }
   
   protected boolean _lessThan(final Integer left, final Long right) {
     int _intValue = left.intValue();
     long _longValue = right.longValue();
-    boolean _lessThan = (_intValue < _longValue);
-    return _lessThan;
+    return (_intValue < _longValue);
   }
   
   protected boolean _lessThan(final Integer left, final Short right) {
     int _intValue = left.intValue();
     short _shortValue = right.shortValue();
-    boolean _lessThan = (_intValue < _shortValue);
-    return _lessThan;
+    return (_intValue < _shortValue);
   }
   
   protected boolean _lessThan(final Integer left, final Integer right) {
     int _intValue = left.intValue();
     int _intValue_1 = right.intValue();
-    boolean _lessThan = (_intValue < _intValue_1);
-    return _lessThan;
+    return (_intValue < _intValue_1);
   }
   
   protected Object _minus(final Object left, final Object right) {
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(((("Unsupported operator \'-\' for operands " + left) + " and ") + right));
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(((("Unsupported operator \'-\' for operands " + left) + " and ") + right));
   }
   
   protected Object _minus(final Byte left, final Byte right) {
     byte _byteValue = left.byteValue();
     byte _byteValue_1 = right.byteValue();
-    int _minus = (_byteValue - _byteValue_1);
-    return _minus;
+    return (_byteValue - _byteValue_1);
   }
   
   protected Object _minus(final Byte left, final Double right) {
     byte _byteValue = left.byteValue();
     double _doubleValue = right.doubleValue();
-    double _minus = (_byteValue - _doubleValue);
-    return _minus;
+    return (_byteValue - _doubleValue);
   }
   
   protected Object _minus(final Byte left, final Float right) {
     byte _byteValue = left.byteValue();
     float _floatValue = right.floatValue();
-    float _minus = (_byteValue - _floatValue);
-    return _minus;
+    return (_byteValue - _floatValue);
   }
   
   protected Object _minus(final Byte left, final Long right) {
     byte _byteValue = left.byteValue();
     long _longValue = right.longValue();
-    long _minus = (_byteValue - _longValue);
-    return _minus;
+    return (_byteValue - _longValue);
   }
   
   protected Object _minus(final Byte left, final Short right) {
     byte _byteValue = left.byteValue();
     short _shortValue = right.shortValue();
-    int _minus = (_byteValue - _shortValue);
-    return _minus;
+    return (_byteValue - _shortValue);
   }
   
   protected Object _minus(final Byte left, final Integer right) {
     byte _byteValue = left.byteValue();
     int _intValue = right.intValue();
-    int _minus = (_byteValue - _intValue);
-    return _minus;
+    return (_byteValue - _intValue);
   }
   
   protected Object _minus(final Double left, final Byte right) {
     double _doubleValue = left.doubleValue();
     byte _byteValue = right.byteValue();
-    double _minus = (_doubleValue - _byteValue);
-    return _minus;
+    return (_doubleValue - _byteValue);
   }
   
   protected Object _minus(final Double left, final Double right) {
     double _doubleValue = left.doubleValue();
     double _doubleValue_1 = right.doubleValue();
-    double _minus = (_doubleValue - _doubleValue_1);
-    return _minus;
+    return (_doubleValue - _doubleValue_1);
   }
   
   protected Object _minus(final Double left, final Float right) {
     double _doubleValue = left.doubleValue();
     float _floatValue = right.floatValue();
-    double _minus = (_doubleValue - _floatValue);
-    return _minus;
+    return (_doubleValue - _floatValue);
   }
   
   protected Object _minus(final Double left, final Long right) {
     double _doubleValue = left.doubleValue();
     long _longValue = right.longValue();
-    double _minus = (_doubleValue - _longValue);
-    return _minus;
+    return (_doubleValue - _longValue);
   }
   
   protected Object _minus(final Double left, final Short right) {
     double _doubleValue = left.doubleValue();
     short _shortValue = right.shortValue();
-    double _minus = (_doubleValue - _shortValue);
-    return _minus;
+    return (_doubleValue - _shortValue);
   }
   
   protected Object _minus(final Double left, final Integer right) {
     double _doubleValue = left.doubleValue();
     int _intValue = right.intValue();
-    double _minus = (_doubleValue - _intValue);
-    return _minus;
+    return (_doubleValue - _intValue);
   }
   
   protected Object _minus(final Float left, final Byte right) {
     float _floatValue = left.floatValue();
     byte _byteValue = right.byteValue();
-    float _minus = (_floatValue - _byteValue);
-    return _minus;
+    return (_floatValue - _byteValue);
   }
   
   protected Object _minus(final Float left, final Double right) {
     float _floatValue = left.floatValue();
     double _doubleValue = right.doubleValue();
-    double _minus = (_floatValue - _doubleValue);
-    return _minus;
+    return (_floatValue - _doubleValue);
   }
   
   protected Object _minus(final Float left, final Float right) {
     float _floatValue = left.floatValue();
     float _floatValue_1 = right.floatValue();
-    float _minus = (_floatValue - _floatValue_1);
-    return _minus;
+    return (_floatValue - _floatValue_1);
   }
   
   protected Object _minus(final Float left, final Long right) {
     float _floatValue = left.floatValue();
     long _longValue = right.longValue();
-    float _minus = (_floatValue - _longValue);
-    return _minus;
+    return (_floatValue - _longValue);
   }
   
   protected Object _minus(final Float left, final Short right) {
     float _floatValue = left.floatValue();
     short _shortValue = right.shortValue();
-    float _minus = (_floatValue - _shortValue);
-    return _minus;
+    return (_floatValue - _shortValue);
   }
   
   protected Object _minus(final Float left, final Integer right) {
     float _floatValue = left.floatValue();
     int _intValue = right.intValue();
-    float _minus = (_floatValue - _intValue);
-    return _minus;
+    return (_floatValue - _intValue);
   }
   
   protected Object _minus(final Long left, final Byte right) {
     long _longValue = left.longValue();
     byte _byteValue = right.byteValue();
-    long _minus = (_longValue - _byteValue);
-    return _minus;
+    return (_longValue - _byteValue);
   }
   
   protected Object _minus(final Long left, final Double right) {
     long _longValue = left.longValue();
     double _doubleValue = right.doubleValue();
-    double _minus = (_longValue - _doubleValue);
-    return _minus;
+    return (_longValue - _doubleValue);
   }
   
   protected Object _minus(final Long left, final Float right) {
     long _longValue = left.longValue();
     float _floatValue = right.floatValue();
-    float _minus = (_longValue - _floatValue);
-    return _minus;
+    return (_longValue - _floatValue);
   }
   
   protected Object _minus(final Long left, final Long right) {
     long _longValue = left.longValue();
     long _longValue_1 = right.longValue();
-    long _minus = (_longValue - _longValue_1);
-    return _minus;
+    return (_longValue - _longValue_1);
   }
   
   protected Object _minus(final Long left, final Short right) {
     long _longValue = left.longValue();
     short _shortValue = right.shortValue();
-    long _minus = (_longValue - _shortValue);
-    return _minus;
+    return (_longValue - _shortValue);
   }
   
   protected Object _minus(final Long left, final Integer right) {
     long _longValue = left.longValue();
     int _intValue = right.intValue();
-    long _minus = (_longValue - _intValue);
-    return _minus;
+    return (_longValue - _intValue);
   }
   
   protected Object _minus(final Short left, final Byte right) {
     short _shortValue = left.shortValue();
     byte _byteValue = right.byteValue();
-    int _minus = (_shortValue - _byteValue);
-    return _minus;
+    return (_shortValue - _byteValue);
   }
   
   protected Object _minus(final Short left, final Double right) {
     short _shortValue = left.shortValue();
     double _doubleValue = right.doubleValue();
-    double _minus = (_shortValue - _doubleValue);
-    return _minus;
+    return (_shortValue - _doubleValue);
   }
   
   protected Object _minus(final Short left, final Float right) {
     short _shortValue = left.shortValue();
     float _floatValue = right.floatValue();
-    float _minus = (_shortValue - _floatValue);
-    return _minus;
+    return (_shortValue - _floatValue);
   }
   
   protected Object _minus(final Short left, final Long right) {
     short _shortValue = left.shortValue();
     long _longValue = right.longValue();
-    long _minus = (_shortValue - _longValue);
-    return _minus;
+    return (_shortValue - _longValue);
   }
   
   protected Object _minus(final Short left, final Short right) {
     short _shortValue = left.shortValue();
     short _shortValue_1 = right.shortValue();
-    int _minus = (_shortValue - _shortValue_1);
-    return _minus;
+    return (_shortValue - _shortValue_1);
   }
   
   protected Object _minus(final Short left, final Integer right) {
     short _shortValue = left.shortValue();
     int _intValue = right.intValue();
-    int _minus = (_shortValue - _intValue);
-    return _minus;
+    return (_shortValue - _intValue);
   }
   
   protected Object _minus(final Integer left, final Byte right) {
     int _intValue = left.intValue();
     byte _byteValue = right.byteValue();
-    int _minus = (_intValue - _byteValue);
-    return _minus;
+    return (_intValue - _byteValue);
   }
   
   protected Object _minus(final Integer left, final Double right) {
     int _intValue = left.intValue();
     double _doubleValue = right.doubleValue();
-    double _minus = (_intValue - _doubleValue);
-    return _minus;
+    return (_intValue - _doubleValue);
   }
   
   protected Object _minus(final Integer left, final Float right) {
     int _intValue = left.intValue();
     float _floatValue = right.floatValue();
-    float _minus = (_intValue - _floatValue);
-    return _minus;
+    return (_intValue - _floatValue);
   }
   
   protected Object _minus(final Integer left, final Long right) {
     int _intValue = left.intValue();
     long _longValue = right.longValue();
-    long _minus = (_intValue - _longValue);
-    return _minus;
+    return (_intValue - _longValue);
   }
   
   protected Object _minus(final Integer left, final Short right) {
     int _intValue = left.intValue();
     short _shortValue = right.shortValue();
-    int _minus = (_intValue - _shortValue);
-    return _minus;
+    return (_intValue - _shortValue);
   }
   
   protected Object _minus(final Integer left, final Integer right) {
     int _intValue = left.intValue();
     int _intValue_1 = right.intValue();
-    int _minus = (_intValue - _intValue_1);
-    return _minus;
+    return (_intValue - _intValue_1);
   }
   
   protected boolean _greaterThan(final Object left, final Object right) {
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(((("Unsupported operator \'>\' for operands " + left) + " and ") + right));
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(((("Unsupported operator \'>\' for operands " + left) + " and ") + right));
   }
   
   protected boolean _greaterThan(final Byte left, final Byte right) {
     byte _byteValue = left.byteValue();
     byte _byteValue_1 = right.byteValue();
-    boolean _greaterThan = (_byteValue > _byteValue_1);
-    return _greaterThan;
+    return (_byteValue > _byteValue_1);
   }
   
   protected boolean _greaterThan(final Byte left, final Double right) {
     byte _byteValue = left.byteValue();
     double _doubleValue = right.doubleValue();
-    boolean _greaterThan = (_byteValue > _doubleValue);
-    return _greaterThan;
+    return (_byteValue > _doubleValue);
   }
   
   protected boolean _greaterThan(final Byte left, final Float right) {
     byte _byteValue = left.byteValue();
     float _floatValue = right.floatValue();
-    boolean _greaterThan = (_byteValue > _floatValue);
-    return _greaterThan;
+    return (_byteValue > _floatValue);
   }
   
   protected boolean _greaterThan(final Byte left, final Long right) {
     byte _byteValue = left.byteValue();
     long _longValue = right.longValue();
-    boolean _greaterThan = (_byteValue > _longValue);
-    return _greaterThan;
+    return (_byteValue > _longValue);
   }
   
   protected boolean _greaterThan(final Byte left, final Short right) {
     byte _byteValue = left.byteValue();
     short _shortValue = right.shortValue();
-    boolean _greaterThan = (_byteValue > _shortValue);
-    return _greaterThan;
+    return (_byteValue > _shortValue);
   }
   
   protected boolean _greaterThan(final Byte left, final Integer right) {
     byte _byteValue = left.byteValue();
     int _intValue = right.intValue();
-    boolean _greaterThan = (_byteValue > _intValue);
-    return _greaterThan;
+    return (_byteValue > _intValue);
   }
   
   protected boolean _greaterThan(final Double left, final Byte right) {
     double _doubleValue = left.doubleValue();
     byte _byteValue = right.byteValue();
-    boolean _greaterThan = (_doubleValue > _byteValue);
-    return _greaterThan;
+    return (_doubleValue > _byteValue);
   }
   
   protected boolean _greaterThan(final Double left, final Double right) {
     double _doubleValue = left.doubleValue();
     double _doubleValue_1 = right.doubleValue();
-    boolean _greaterThan = (_doubleValue > _doubleValue_1);
-    return _greaterThan;
+    return (_doubleValue > _doubleValue_1);
   }
   
   protected boolean _greaterThan(final Double left, final Float right) {
     double _doubleValue = left.doubleValue();
     float _floatValue = right.floatValue();
-    boolean _greaterThan = (_doubleValue > _floatValue);
-    return _greaterThan;
+    return (_doubleValue > _floatValue);
   }
   
   protected boolean _greaterThan(final Double left, final Long right) {
     double _doubleValue = left.doubleValue();
     long _longValue = right.longValue();
-    boolean _greaterThan = (_doubleValue > _longValue);
-    return _greaterThan;
+    return (_doubleValue > _longValue);
   }
   
   protected boolean _greaterThan(final Double left, final Short right) {
     double _doubleValue = left.doubleValue();
     short _shortValue = right.shortValue();
-    boolean _greaterThan = (_doubleValue > _shortValue);
-    return _greaterThan;
+    return (_doubleValue > _shortValue);
   }
   
   protected boolean _greaterThan(final Double left, final Integer right) {
     double _doubleValue = left.doubleValue();
     int _intValue = right.intValue();
-    boolean _greaterThan = (_doubleValue > _intValue);
-    return _greaterThan;
+    return (_doubleValue > _intValue);
   }
   
   protected boolean _greaterThan(final Float left, final Byte right) {
     float _floatValue = left.floatValue();
     byte _byteValue = right.byteValue();
-    boolean _greaterThan = (_floatValue > _byteValue);
-    return _greaterThan;
+    return (_floatValue > _byteValue);
   }
   
   protected boolean _greaterThan(final Float left, final Double right) {
     float _floatValue = left.floatValue();
     double _doubleValue = right.doubleValue();
-    boolean _greaterThan = (_floatValue > _doubleValue);
-    return _greaterThan;
+    return (_floatValue > _doubleValue);
   }
   
   protected boolean _greaterThan(final Float left, final Float right) {
     float _floatValue = left.floatValue();
     float _floatValue_1 = right.floatValue();
-    boolean _greaterThan = (_floatValue > _floatValue_1);
-    return _greaterThan;
+    return (_floatValue > _floatValue_1);
   }
   
   protected boolean _greaterThan(final Float left, final Long right) {
     float _floatValue = left.floatValue();
     long _longValue = right.longValue();
-    boolean _greaterThan = (_floatValue > _longValue);
-    return _greaterThan;
+    return (_floatValue > _longValue);
   }
   
   protected boolean _greaterThan(final Float left, final Short right) {
     float _floatValue = left.floatValue();
     short _shortValue = right.shortValue();
-    boolean _greaterThan = (_floatValue > _shortValue);
-    return _greaterThan;
+    return (_floatValue > _shortValue);
   }
   
   protected boolean _greaterThan(final Float left, final Integer right) {
     float _floatValue = left.floatValue();
     int _intValue = right.intValue();
-    boolean _greaterThan = (_floatValue > _intValue);
-    return _greaterThan;
+    return (_floatValue > _intValue);
   }
   
   protected boolean _greaterThan(final Long left, final Byte right) {
     long _longValue = left.longValue();
     byte _byteValue = right.byteValue();
-    boolean _greaterThan = (_longValue > _byteValue);
-    return _greaterThan;
+    return (_longValue > _byteValue);
   }
   
   protected boolean _greaterThan(final Long left, final Double right) {
     long _longValue = left.longValue();
     double _doubleValue = right.doubleValue();
-    boolean _greaterThan = (_longValue > _doubleValue);
-    return _greaterThan;
+    return (_longValue > _doubleValue);
   }
   
   protected boolean _greaterThan(final Long left, final Float right) {
     long _longValue = left.longValue();
     float _floatValue = right.floatValue();
-    boolean _greaterThan = (_longValue > _floatValue);
-    return _greaterThan;
+    return (_longValue > _floatValue);
   }
   
   protected boolean _greaterThan(final Long left, final Long right) {
     long _longValue = left.longValue();
     long _longValue_1 = right.longValue();
-    boolean _greaterThan = (_longValue > _longValue_1);
-    return _greaterThan;
+    return (_longValue > _longValue_1);
   }
   
   protected boolean _greaterThan(final Long left, final Short right) {
     long _longValue = left.longValue();
     short _shortValue = right.shortValue();
-    boolean _greaterThan = (_longValue > _shortValue);
-    return _greaterThan;
+    return (_longValue > _shortValue);
   }
   
   protected boolean _greaterThan(final Long left, final Integer right) {
     long _longValue = left.longValue();
     int _intValue = right.intValue();
-    boolean _greaterThan = (_longValue > _intValue);
-    return _greaterThan;
+    return (_longValue > _intValue);
   }
   
   protected boolean _greaterThan(final Short left, final Byte right) {
     short _shortValue = left.shortValue();
     byte _byteValue = right.byteValue();
-    boolean _greaterThan = (_shortValue > _byteValue);
-    return _greaterThan;
+    return (_shortValue > _byteValue);
   }
   
   protected boolean _greaterThan(final Short left, final Double right) {
     short _shortValue = left.shortValue();
     double _doubleValue = right.doubleValue();
-    boolean _greaterThan = (_shortValue > _doubleValue);
-    return _greaterThan;
+    return (_shortValue > _doubleValue);
   }
   
   protected boolean _greaterThan(final Short left, final Float right) {
     short _shortValue = left.shortValue();
     float _floatValue = right.floatValue();
-    boolean _greaterThan = (_shortValue > _floatValue);
-    return _greaterThan;
+    return (_shortValue > _floatValue);
   }
   
   protected boolean _greaterThan(final Short left, final Long right) {
     short _shortValue = left.shortValue();
     long _longValue = right.longValue();
-    boolean _greaterThan = (_shortValue > _longValue);
-    return _greaterThan;
+    return (_shortValue > _longValue);
   }
   
   protected boolean _greaterThan(final Short left, final Short right) {
     short _shortValue = left.shortValue();
     short _shortValue_1 = right.shortValue();
-    boolean _greaterThan = (_shortValue > _shortValue_1);
-    return _greaterThan;
+    return (_shortValue > _shortValue_1);
   }
   
   protected boolean _greaterThan(final Short left, final Integer right) {
     short _shortValue = left.shortValue();
     int _intValue = right.intValue();
-    boolean _greaterThan = (_shortValue > _intValue);
-    return _greaterThan;
+    return (_shortValue > _intValue);
   }
   
   protected boolean _greaterThan(final Integer left, final Byte right) {
     int _intValue = left.intValue();
     byte _byteValue = right.byteValue();
-    boolean _greaterThan = (_intValue > _byteValue);
-    return _greaterThan;
+    return (_intValue > _byteValue);
   }
   
   protected boolean _greaterThan(final Integer left, final Double right) {
     int _intValue = left.intValue();
     double _doubleValue = right.doubleValue();
-    boolean _greaterThan = (_intValue > _doubleValue);
-    return _greaterThan;
+    return (_intValue > _doubleValue);
   }
   
   protected boolean _greaterThan(final Integer left, final Float right) {
     int _intValue = left.intValue();
     float _floatValue = right.floatValue();
-    boolean _greaterThan = (_intValue > _floatValue);
-    return _greaterThan;
+    return (_intValue > _floatValue);
   }
   
   protected boolean _greaterThan(final Integer left, final Long right) {
     int _intValue = left.intValue();
     long _longValue = right.longValue();
-    boolean _greaterThan = (_intValue > _longValue);
-    return _greaterThan;
+    return (_intValue > _longValue);
   }
   
   protected boolean _greaterThan(final Integer left, final Short right) {
     int _intValue = left.intValue();
     short _shortValue = right.shortValue();
-    boolean _greaterThan = (_intValue > _shortValue);
-    return _greaterThan;
+    return (_intValue > _shortValue);
   }
   
   protected boolean _greaterThan(final Integer left, final Integer right) {
     int _intValue = left.intValue();
     int _intValue_1 = right.intValue();
-    boolean _greaterThan = (_intValue > _intValue_1);
-    return _greaterThan;
+    return (_intValue > _intValue_1);
   }
   
   protected Object _modulo(final Object left, final Object right) {
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(((("Unsupported operator \'%\' for operands " + left) + " and ") + right));
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(((("Unsupported operator \'%\' for operands " + left) + " and ") + right));
   }
   
   protected Object _modulo(final Byte left, final Byte right) {
     byte _byteValue = left.byteValue();
     byte _byteValue_1 = right.byteValue();
-    int _modulo = (_byteValue % _byteValue_1);
-    return _modulo;
+    return (_byteValue % _byteValue_1);
   }
   
   protected Object _modulo(final Byte left, final Double right) {
     byte _byteValue = left.byteValue();
     double _doubleValue = right.doubleValue();
-    double _modulo = (_byteValue % _doubleValue);
-    return _modulo;
+    return (_byteValue % _doubleValue);
   }
   
   protected Object _modulo(final Byte left, final Float right) {
     byte _byteValue = left.byteValue();
     float _floatValue = right.floatValue();
-    float _modulo = (_byteValue % _floatValue);
-    return _modulo;
+    return (_byteValue % _floatValue);
   }
   
   protected Object _modulo(final Byte left, final Long right) {
     byte _byteValue = left.byteValue();
     long _longValue = right.longValue();
-    long _modulo = (_byteValue % _longValue);
-    return _modulo;
+    return (_byteValue % _longValue);
   }
   
   protected Object _modulo(final Byte left, final Short right) {
     byte _byteValue = left.byteValue();
     short _shortValue = right.shortValue();
-    int _modulo = (_byteValue % _shortValue);
-    return _modulo;
+    return (_byteValue % _shortValue);
   }
   
   protected Object _modulo(final Byte left, final Integer right) {
     byte _byteValue = left.byteValue();
     int _intValue = right.intValue();
-    int _modulo = (_byteValue % _intValue);
-    return _modulo;
+    return (_byteValue % _intValue);
   }
   
   protected Object _modulo(final Double left, final Byte right) {
     double _doubleValue = left.doubleValue();
     byte _byteValue = right.byteValue();
-    double _modulo = (_doubleValue % _byteValue);
-    return _modulo;
+    return (_doubleValue % _byteValue);
   }
   
   protected Object _modulo(final Double left, final Double right) {
     double _doubleValue = left.doubleValue();
     double _doubleValue_1 = right.doubleValue();
-    double _modulo = (_doubleValue % _doubleValue_1);
-    return _modulo;
+    return (_doubleValue % _doubleValue_1);
   }
   
   protected Object _modulo(final Double left, final Float right) {
     double _doubleValue = left.doubleValue();
     float _floatValue = right.floatValue();
-    double _modulo = (_doubleValue % _floatValue);
-    return _modulo;
+    return (_doubleValue % _floatValue);
   }
   
   protected Object _modulo(final Double left, final Long right) {
     double _doubleValue = left.doubleValue();
     long _longValue = right.longValue();
-    double _modulo = (_doubleValue % _longValue);
-    return _modulo;
+    return (_doubleValue % _longValue);
   }
   
   protected Object _modulo(final Double left, final Short right) {
     double _doubleValue = left.doubleValue();
     short _shortValue = right.shortValue();
-    double _modulo = (_doubleValue % _shortValue);
-    return _modulo;
+    return (_doubleValue % _shortValue);
   }
   
   protected Object _modulo(final Double left, final Integer right) {
     double _doubleValue = left.doubleValue();
     int _intValue = right.intValue();
-    double _modulo = (_doubleValue % _intValue);
-    return _modulo;
+    return (_doubleValue % _intValue);
   }
   
   protected Object _modulo(final Float left, final Byte right) {
     float _floatValue = left.floatValue();
     byte _byteValue = right.byteValue();
-    float _modulo = (_floatValue % _byteValue);
-    return _modulo;
+    return (_floatValue % _byteValue);
   }
   
   protected Object _modulo(final Float left, final Double right) {
     float _floatValue = left.floatValue();
     double _doubleValue = right.doubleValue();
-    double _modulo = (_floatValue % _doubleValue);
-    return _modulo;
+    return (_floatValue % _doubleValue);
   }
   
   protected Object _modulo(final Float left, final Float right) {
     float _floatValue = left.floatValue();
     float _floatValue_1 = right.floatValue();
-    float _modulo = (_floatValue % _floatValue_1);
-    return _modulo;
+    return (_floatValue % _floatValue_1);
   }
   
   protected Object _modulo(final Float left, final Long right) {
     float _floatValue = left.floatValue();
     long _longValue = right.longValue();
-    float _modulo = (_floatValue % _longValue);
-    return _modulo;
+    return (_floatValue % _longValue);
   }
   
   protected Object _modulo(final Float left, final Short right) {
     float _floatValue = left.floatValue();
     short _shortValue = right.shortValue();
-    float _modulo = (_floatValue % _shortValue);
-    return _modulo;
+    return (_floatValue % _shortValue);
   }
   
   protected Object _modulo(final Float left, final Integer right) {
     float _floatValue = left.floatValue();
     int _intValue = right.intValue();
-    float _modulo = (_floatValue % _intValue);
-    return _modulo;
+    return (_floatValue % _intValue);
   }
   
   protected Object _modulo(final Long left, final Byte right) {
     long _longValue = left.longValue();
     byte _byteValue = right.byteValue();
-    long _modulo = (_longValue % _byteValue);
-    return _modulo;
+    return (_longValue % _byteValue);
   }
   
   protected Object _modulo(final Long left, final Double right) {
     long _longValue = left.longValue();
     double _doubleValue = right.doubleValue();
-    double _modulo = (_longValue % _doubleValue);
-    return _modulo;
+    return (_longValue % _doubleValue);
   }
   
   protected Object _modulo(final Long left, final Float right) {
     long _longValue = left.longValue();
     float _floatValue = right.floatValue();
-    float _modulo = (_longValue % _floatValue);
-    return _modulo;
+    return (_longValue % _floatValue);
   }
   
   protected Object _modulo(final Long left, final Long right) {
     long _longValue = left.longValue();
     long _longValue_1 = right.longValue();
-    long _modulo = (_longValue % _longValue_1);
-    return _modulo;
+    return (_longValue % _longValue_1);
   }
   
   protected Object _modulo(final Long left, final Short right) {
     long _longValue = left.longValue();
     short _shortValue = right.shortValue();
-    long _modulo = (_longValue % _shortValue);
-    return _modulo;
+    return (_longValue % _shortValue);
   }
   
   protected Object _modulo(final Long left, final Integer right) {
     long _longValue = left.longValue();
     int _intValue = right.intValue();
-    long _modulo = (_longValue % _intValue);
-    return _modulo;
+    return (_longValue % _intValue);
   }
   
   protected Object _modulo(final Short left, final Byte right) {
     short _shortValue = left.shortValue();
     byte _byteValue = right.byteValue();
-    int _modulo = (_shortValue % _byteValue);
-    return _modulo;
+    return (_shortValue % _byteValue);
   }
   
   protected Object _modulo(final Short left, final Double right) {
     short _shortValue = left.shortValue();
     double _doubleValue = right.doubleValue();
-    double _modulo = (_shortValue % _doubleValue);
-    return _modulo;
+    return (_shortValue % _doubleValue);
   }
   
   protected Object _modulo(final Short left, final Float right) {
     short _shortValue = left.shortValue();
     float _floatValue = right.floatValue();
-    float _modulo = (_shortValue % _floatValue);
-    return _modulo;
+    return (_shortValue % _floatValue);
   }
   
   protected Object _modulo(final Short left, final Long right) {
     short _shortValue = left.shortValue();
     long _longValue = right.longValue();
-    long _modulo = (_shortValue % _longValue);
-    return _modulo;
+    return (_shortValue % _longValue);
   }
   
   protected Object _modulo(final Short left, final Short right) {
     short _shortValue = left.shortValue();
     short _shortValue_1 = right.shortValue();
-    int _modulo = (_shortValue % _shortValue_1);
-    return _modulo;
+    return (_shortValue % _shortValue_1);
   }
   
   protected Object _modulo(final Short left, final Integer right) {
     short _shortValue = left.shortValue();
     int _intValue = right.intValue();
-    int _modulo = (_shortValue % _intValue);
-    return _modulo;
+    return (_shortValue % _intValue);
   }
   
   protected Object _modulo(final Integer left, final Byte right) {
     int _intValue = left.intValue();
     byte _byteValue = right.byteValue();
-    int _modulo = (_intValue % _byteValue);
-    return _modulo;
+    return (_intValue % _byteValue);
   }
   
   protected Object _modulo(final Integer left, final Double right) {
     int _intValue = left.intValue();
     double _doubleValue = right.doubleValue();
-    double _modulo = (_intValue % _doubleValue);
-    return _modulo;
+    return (_intValue % _doubleValue);
   }
   
   protected Object _modulo(final Integer left, final Float right) {
     int _intValue = left.intValue();
     float _floatValue = right.floatValue();
-    float _modulo = (_intValue % _floatValue);
-    return _modulo;
+    return (_intValue % _floatValue);
   }
   
   protected Object _modulo(final Integer left, final Long right) {
     int _intValue = left.intValue();
     long _longValue = right.longValue();
-    long _modulo = (_intValue % _longValue);
-    return _modulo;
+    return (_intValue % _longValue);
   }
   
   protected Object _modulo(final Integer left, final Short right) {
     int _intValue = left.intValue();
     short _shortValue = right.shortValue();
-    int _modulo = (_intValue % _shortValue);
-    return _modulo;
+    return (_intValue % _shortValue);
   }
   
   protected Object _modulo(final Integer left, final Integer right) {
     int _intValue = left.intValue();
     int _intValue_1 = right.intValue();
-    int _modulo = (_intValue % _intValue_1);
-    return _modulo;
+    return (_intValue % _intValue_1);
   }
   
   protected Object _multiply(final Object left, final Object right) {
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(((("Unsupported operator \'*\' for operands " + left) + " and ") + right));
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(((("Unsupported operator \'*\' for operands " + left) + " and ") + right));
   }
   
   protected Object _multiply(final Byte left, final Byte right) {
     byte _byteValue = left.byteValue();
     byte _byteValue_1 = right.byteValue();
-    int _multiply = (_byteValue * _byteValue_1);
-    return _multiply;
+    return (_byteValue * _byteValue_1);
   }
   
   protected Object _multiply(final Byte left, final Double right) {
     byte _byteValue = left.byteValue();
     double _doubleValue = right.doubleValue();
-    double _multiply = (_byteValue * _doubleValue);
-    return _multiply;
+    return (_byteValue * _doubleValue);
   }
   
   protected Object _multiply(final Byte left, final Float right) {
     byte _byteValue = left.byteValue();
     float _floatValue = right.floatValue();
-    float _multiply = (_byteValue * _floatValue);
-    return _multiply;
+    return (_byteValue * _floatValue);
   }
   
   protected Object _multiply(final Byte left, final Long right) {
     byte _byteValue = left.byteValue();
     long _longValue = right.longValue();
-    long _multiply = (_byteValue * _longValue);
-    return _multiply;
+    return (_byteValue * _longValue);
   }
   
   protected Object _multiply(final Byte left, final Short right) {
     byte _byteValue = left.byteValue();
     short _shortValue = right.shortValue();
-    int _multiply = (_byteValue * _shortValue);
-    return _multiply;
+    return (_byteValue * _shortValue);
   }
   
   protected Object _multiply(final Byte left, final Integer right) {
     byte _byteValue = left.byteValue();
     int _intValue = right.intValue();
-    int _multiply = (_byteValue * _intValue);
-    return _multiply;
+    return (_byteValue * _intValue);
   }
   
   protected Object _multiply(final Double left, final Byte right) {
     double _doubleValue = left.doubleValue();
     byte _byteValue = right.byteValue();
-    double _multiply = (_doubleValue * _byteValue);
-    return _multiply;
+    return (_doubleValue * _byteValue);
   }
   
   protected Object _multiply(final Double left, final Double right) {
     double _doubleValue = left.doubleValue();
     double _doubleValue_1 = right.doubleValue();
-    double _multiply = (_doubleValue * _doubleValue_1);
-    return _multiply;
+    return (_doubleValue * _doubleValue_1);
   }
   
   protected Object _multiply(final Double left, final Float right) {
     double _doubleValue = left.doubleValue();
     float _floatValue = right.floatValue();
-    double _multiply = (_doubleValue * _floatValue);
-    return _multiply;
+    return (_doubleValue * _floatValue);
   }
   
   protected Object _multiply(final Double left, final Long right) {
     double _doubleValue = left.doubleValue();
     long _longValue = right.longValue();
-    double _multiply = (_doubleValue * _longValue);
-    return _multiply;
+    return (_doubleValue * _longValue);
   }
   
   protected Object _multiply(final Double left, final Short right) {
     double _doubleValue = left.doubleValue();
     short _shortValue = right.shortValue();
-    double _multiply = (_doubleValue * _shortValue);
-    return _multiply;
+    return (_doubleValue * _shortValue);
   }
   
   protected Object _multiply(final Double left, final Integer right) {
     double _doubleValue = left.doubleValue();
     int _intValue = right.intValue();
-    double _multiply = (_doubleValue * _intValue);
-    return _multiply;
+    return (_doubleValue * _intValue);
   }
   
   protected Object _multiply(final Float left, final Byte right) {
     float _floatValue = left.floatValue();
     byte _byteValue = right.byteValue();
-    float _multiply = (_floatValue * _byteValue);
-    return _multiply;
+    return (_floatValue * _byteValue);
   }
   
   protected Object _multiply(final Float left, final Double right) {
     float _floatValue = left.floatValue();
     double _doubleValue = right.doubleValue();
-    double _multiply = (_floatValue * _doubleValue);
-    return _multiply;
+    return (_floatValue * _doubleValue);
   }
   
   protected Object _multiply(final Float left, final Float right) {
     float _floatValue = left.floatValue();
     float _floatValue_1 = right.floatValue();
-    float _multiply = (_floatValue * _floatValue_1);
-    return _multiply;
+    return (_floatValue * _floatValue_1);
   }
   
   protected Object _multiply(final Float left, final Long right) {
     float _floatValue = left.floatValue();
     long _longValue = right.longValue();
-    float _multiply = (_floatValue * _longValue);
-    return _multiply;
+    return (_floatValue * _longValue);
   }
   
   protected Object _multiply(final Float left, final Short right) {
     float _floatValue = left.floatValue();
     short _shortValue = right.shortValue();
-    float _multiply = (_floatValue * _shortValue);
-    return _multiply;
+    return (_floatValue * _shortValue);
   }
   
   protected Object _multiply(final Float left, final Integer right) {
     float _floatValue = left.floatValue();
     int _intValue = right.intValue();
-    float _multiply = (_floatValue * _intValue);
-    return _multiply;
+    return (_floatValue * _intValue);
   }
   
   protected Object _multiply(final Long left, final Byte right) {
     long _longValue = left.longValue();
     byte _byteValue = right.byteValue();
-    long _multiply = (_longValue * _byteValue);
-    return _multiply;
+    return (_longValue * _byteValue);
   }
   
   protected Object _multiply(final Long left, final Double right) {
     long _longValue = left.longValue();
     double _doubleValue = right.doubleValue();
-    double _multiply = (_longValue * _doubleValue);
-    return _multiply;
+    return (_longValue * _doubleValue);
   }
   
   protected Object _multiply(final Long left, final Float right) {
     long _longValue = left.longValue();
     float _floatValue = right.floatValue();
-    float _multiply = (_longValue * _floatValue);
-    return _multiply;
+    return (_longValue * _floatValue);
   }
   
   protected Object _multiply(final Long left, final Long right) {
     long _longValue = left.longValue();
     long _longValue_1 = right.longValue();
-    long _multiply = (_longValue * _longValue_1);
-    return _multiply;
+    return (_longValue * _longValue_1);
   }
   
   protected Object _multiply(final Long left, final Short right) {
     long _longValue = left.longValue();
     short _shortValue = right.shortValue();
-    long _multiply = (_longValue * _shortValue);
-    return _multiply;
+    return (_longValue * _shortValue);
   }
   
   protected Object _multiply(final Long left, final Integer right) {
     long _longValue = left.longValue();
     int _intValue = right.intValue();
-    long _multiply = (_longValue * _intValue);
-    return _multiply;
+    return (_longValue * _intValue);
   }
   
   protected Object _multiply(final Short left, final Byte right) {
     short _shortValue = left.shortValue();
     byte _byteValue = right.byteValue();
-    int _multiply = (_shortValue * _byteValue);
-    return _multiply;
+    return (_shortValue * _byteValue);
   }
   
   protected Object _multiply(final Short left, final Double right) {
     short _shortValue = left.shortValue();
     double _doubleValue = right.doubleValue();
-    double _multiply = (_shortValue * _doubleValue);
-    return _multiply;
+    return (_shortValue * _doubleValue);
   }
   
   protected Object _multiply(final Short left, final Float right) {
     short _shortValue = left.shortValue();
     float _floatValue = right.floatValue();
-    float _multiply = (_shortValue * _floatValue);
-    return _multiply;
+    return (_shortValue * _floatValue);
   }
   
   protected Object _multiply(final Short left, final Long right) {
     short _shortValue = left.shortValue();
     long _longValue = right.longValue();
-    long _multiply = (_shortValue * _longValue);
-    return _multiply;
+    return (_shortValue * _longValue);
   }
   
   protected Object _multiply(final Short left, final Short right) {
     short _shortValue = left.shortValue();
     short _shortValue_1 = right.shortValue();
-    int _multiply = (_shortValue * _shortValue_1);
-    return _multiply;
+    return (_shortValue * _shortValue_1);
   }
   
   protected Object _multiply(final Short left, final Integer right) {
     short _shortValue = left.shortValue();
     int _intValue = right.intValue();
-    int _multiply = (_shortValue * _intValue);
-    return _multiply;
+    return (_shortValue * _intValue);
   }
   
   protected Object _multiply(final Integer left, final Byte right) {
     int _intValue = left.intValue();
     byte _byteValue = right.byteValue();
-    int _multiply = (_intValue * _byteValue);
-    return _multiply;
+    return (_intValue * _byteValue);
   }
   
   protected Object _multiply(final Integer left, final Double right) {
     int _intValue = left.intValue();
     double _doubleValue = right.doubleValue();
-    double _multiply = (_intValue * _doubleValue);
-    return _multiply;
+    return (_intValue * _doubleValue);
   }
   
   protected Object _multiply(final Integer left, final Float right) {
     int _intValue = left.intValue();
     float _floatValue = right.floatValue();
-    float _multiply = (_intValue * _floatValue);
-    return _multiply;
+    return (_intValue * _floatValue);
   }
   
   protected Object _multiply(final Integer left, final Long right) {
     int _intValue = left.intValue();
     long _longValue = right.longValue();
-    long _multiply = (_intValue * _longValue);
-    return _multiply;
+    return (_intValue * _longValue);
   }
   
   protected Object _multiply(final Integer left, final Short right) {
     int _intValue = left.intValue();
     short _shortValue = right.shortValue();
-    int _multiply = (_intValue * _shortValue);
-    return _multiply;
+    return (_intValue * _shortValue);
   }
   
   protected Object _multiply(final Integer left, final Integer right) {
     int _intValue = left.intValue();
     int _intValue_1 = right.intValue();
-    int _multiply = (_intValue * _intValue_1);
-    return _multiply;
+    return (_intValue * _intValue_1);
   }
   
   protected Object _divide(final Object left, final Object right) {
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(((("Unsupported operator \'/\' for operands " + left) + " and ") + right));
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(((("Unsupported operator \'/\' for operands " + left) + " and ") + right));
   }
   
   protected Object _divide(final Byte left, final Byte right) {
     byte _byteValue = left.byteValue();
     byte _byteValue_1 = right.byteValue();
-    int _divide = (_byteValue / _byteValue_1);
-    return _divide;
+    return (_byteValue / _byteValue_1);
   }
   
   protected Object _divide(final Byte left, final Double right) {
     byte _byteValue = left.byteValue();
     double _doubleValue = right.doubleValue();
-    double _divide = (_byteValue / _doubleValue);
-    return _divide;
+    return (_byteValue / _doubleValue);
   }
   
   protected Object _divide(final Byte left, final Float right) {
     byte _byteValue = left.byteValue();
     float _floatValue = right.floatValue();
-    float _divide = (_byteValue / _floatValue);
-    return _divide;
+    return (_byteValue / _floatValue);
   }
   
   protected Object _divide(final Byte left, final Long right) {
     byte _byteValue = left.byteValue();
     long _longValue = right.longValue();
-    long _divide = (_byteValue / _longValue);
-    return _divide;
+    return (_byteValue / _longValue);
   }
   
   protected Object _divide(final Byte left, final Short right) {
     byte _byteValue = left.byteValue();
     short _shortValue = right.shortValue();
-    int _divide = (_byteValue / _shortValue);
-    return _divide;
+    return (_byteValue / _shortValue);
   }
   
   protected Object _divide(final Byte left, final Integer right) {
     byte _byteValue = left.byteValue();
     int _intValue = right.intValue();
-    int _divide = (_byteValue / _intValue);
-    return _divide;
+    return (_byteValue / _intValue);
   }
   
   protected Object _divide(final Double left, final Byte right) {
     double _doubleValue = left.doubleValue();
     byte _byteValue = right.byteValue();
-    double _divide = (_doubleValue / _byteValue);
-    return _divide;
+    return (_doubleValue / _byteValue);
   }
   
   protected Object _divide(final Double left, final Double right) {
     double _doubleValue = left.doubleValue();
     double _doubleValue_1 = right.doubleValue();
-    double _divide = (_doubleValue / _doubleValue_1);
-    return _divide;
+    return (_doubleValue / _doubleValue_1);
   }
   
   protected Object _divide(final Double left, final Float right) {
     double _doubleValue = left.doubleValue();
     float _floatValue = right.floatValue();
-    double _divide = (_doubleValue / _floatValue);
-    return _divide;
+    return (_doubleValue / _floatValue);
   }
   
   protected Object _divide(final Double left, final Long right) {
     double _doubleValue = left.doubleValue();
     long _longValue = right.longValue();
-    double _divide = (_doubleValue / _longValue);
-    return _divide;
+    return (_doubleValue / _longValue);
   }
   
   protected Object _divide(final Double left, final Short right) {
     double _doubleValue = left.doubleValue();
     short _shortValue = right.shortValue();
-    double _divide = (_doubleValue / _shortValue);
-    return _divide;
+    return (_doubleValue / _shortValue);
   }
   
   protected Object _divide(final Double left, final Integer right) {
     double _doubleValue = left.doubleValue();
     int _intValue = right.intValue();
-    double _divide = (_doubleValue / _intValue);
-    return _divide;
+    return (_doubleValue / _intValue);
   }
   
   protected Object _divide(final Float left, final Byte right) {
     float _floatValue = left.floatValue();
     byte _byteValue = right.byteValue();
-    float _divide = (_floatValue / _byteValue);
-    return _divide;
+    return (_floatValue / _byteValue);
   }
   
   protected Object _divide(final Float left, final Double right) {
     float _floatValue = left.floatValue();
     double _doubleValue = right.doubleValue();
-    double _divide = (_floatValue / _doubleValue);
-    return _divide;
+    return (_floatValue / _doubleValue);
   }
   
   protected Object _divide(final Float left, final Float right) {
     float _floatValue = left.floatValue();
     float _floatValue_1 = right.floatValue();
-    float _divide = (_floatValue / _floatValue_1);
-    return _divide;
+    return (_floatValue / _floatValue_1);
   }
   
   protected Object _divide(final Float left, final Long right) {
     float _floatValue = left.floatValue();
     long _longValue = right.longValue();
-    float _divide = (_floatValue / _longValue);
-    return _divide;
+    return (_floatValue / _longValue);
   }
   
   protected Object _divide(final Float left, final Short right) {
     float _floatValue = left.floatValue();
     short _shortValue = right.shortValue();
-    float _divide = (_floatValue / _shortValue);
-    return _divide;
+    return (_floatValue / _shortValue);
   }
   
   protected Object _divide(final Float left, final Integer right) {
     float _floatValue = left.floatValue();
     int _intValue = right.intValue();
-    float _divide = (_floatValue / _intValue);
-    return _divide;
+    return (_floatValue / _intValue);
   }
   
   protected Object _divide(final Long left, final Byte right) {
     long _longValue = left.longValue();
     byte _byteValue = right.byteValue();
-    long _divide = (_longValue / _byteValue);
-    return _divide;
+    return (_longValue / _byteValue);
   }
   
   protected Object _divide(final Long left, final Double right) {
     long _longValue = left.longValue();
     double _doubleValue = right.doubleValue();
-    double _divide = (_longValue / _doubleValue);
-    return _divide;
+    return (_longValue / _doubleValue);
   }
   
   protected Object _divide(final Long left, final Float right) {
     long _longValue = left.longValue();
     float _floatValue = right.floatValue();
-    float _divide = (_longValue / _floatValue);
-    return _divide;
+    return (_longValue / _floatValue);
   }
   
   protected Object _divide(final Long left, final Long right) {
     long _longValue = left.longValue();
     long _longValue_1 = right.longValue();
-    long _divide = (_longValue / _longValue_1);
-    return _divide;
+    return (_longValue / _longValue_1);
   }
   
   protected Object _divide(final Long left, final Short right) {
     long _longValue = left.longValue();
     short _shortValue = right.shortValue();
-    long _divide = (_longValue / _shortValue);
-    return _divide;
+    return (_longValue / _shortValue);
   }
   
   protected Object _divide(final Long left, final Integer right) {
     long _longValue = left.longValue();
     int _intValue = right.intValue();
-    long _divide = (_longValue / _intValue);
-    return _divide;
+    return (_longValue / _intValue);
   }
   
   protected Object _divide(final Short left, final Byte right) {
     short _shortValue = left.shortValue();
     byte _byteValue = right.byteValue();
-    int _divide = (_shortValue / _byteValue);
-    return _divide;
+    return (_shortValue / _byteValue);
   }
   
   protected Object _divide(final Short left, final Double right) {
     short _shortValue = left.shortValue();
     double _doubleValue = right.doubleValue();
-    double _divide = (_shortValue / _doubleValue);
-    return _divide;
+    return (_shortValue / _doubleValue);
   }
   
   protected Object _divide(final Short left, final Float right) {
     short _shortValue = left.shortValue();
     float _floatValue = right.floatValue();
-    float _divide = (_shortValue / _floatValue);
-    return _divide;
+    return (_shortValue / _floatValue);
   }
   
   protected Object _divide(final Short left, final Long right) {
     short _shortValue = left.shortValue();
     long _longValue = right.longValue();
-    long _divide = (_shortValue / _longValue);
-    return _divide;
+    return (_shortValue / _longValue);
   }
   
   protected Object _divide(final Short left, final Short right) {
     short _shortValue = left.shortValue();
     short _shortValue_1 = right.shortValue();
-    int _divide = (_shortValue / _shortValue_1);
-    return _divide;
+    return (_shortValue / _shortValue_1);
   }
   
   protected Object _divide(final Short left, final Integer right) {
     short _shortValue = left.shortValue();
     int _intValue = right.intValue();
-    int _divide = (_shortValue / _intValue);
-    return _divide;
+    return (_shortValue / _intValue);
   }
   
   protected Object _divide(final Integer left, final Byte right) {
     int _intValue = left.intValue();
     byte _byteValue = right.byteValue();
-    int _divide = (_intValue / _byteValue);
-    return _divide;
+    return (_intValue / _byteValue);
   }
   
   protected Object _divide(final Integer left, final Double right) {
     int _intValue = left.intValue();
     double _doubleValue = right.doubleValue();
-    double _divide = (_intValue / _doubleValue);
-    return _divide;
+    return (_intValue / _doubleValue);
   }
   
   protected Object _divide(final Integer left, final Float right) {
     int _intValue = left.intValue();
     float _floatValue = right.floatValue();
-    float _divide = (_intValue / _floatValue);
-    return _divide;
+    return (_intValue / _floatValue);
   }
   
   protected Object _divide(final Integer left, final Long right) {
     int _intValue = left.intValue();
     long _longValue = right.longValue();
-    long _divide = (_intValue / _longValue);
-    return _divide;
+    return (_intValue / _longValue);
   }
   
   protected Object _divide(final Integer left, final Short right) {
     int _intValue = left.intValue();
     short _shortValue = right.shortValue();
-    int _divide = (_intValue / _shortValue);
-    return _divide;
+    return (_intValue / _shortValue);
   }
   
   protected Object _divide(final Integer left, final Integer right) {
     int _intValue = left.intValue();
     int _intValue_1 = right.intValue();
-    int _divide = (_intValue / _intValue_1);
-    return _divide;
+    return (_intValue / _intValue_1);
   }
   
   protected boolean _same(final Object left, final Object right) {
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(((("Unsupported operator \'===\' for operands " + left) + " and ") + right));
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(((("Unsupported operator \'===\' for operands " + left) + " and ") + right));
   }
   
   protected boolean _same(final Byte left, final Byte right) {
     byte _byteValue = left.byteValue();
     byte _byteValue_1 = right.byteValue();
-    boolean _tripleEquals = (_byteValue == _byteValue_1);
-    return _tripleEquals;
+    return (_byteValue == _byteValue_1);
   }
   
   protected boolean _same(final Byte left, final Double right) {
     byte _byteValue = left.byteValue();
     double _doubleValue = right.doubleValue();
-    boolean _tripleEquals = (_byteValue == _doubleValue);
-    return _tripleEquals;
+    return (_byteValue == _doubleValue);
   }
   
   protected boolean _same(final Byte left, final Float right) {
     byte _byteValue = left.byteValue();
     float _floatValue = right.floatValue();
-    boolean _tripleEquals = (_byteValue == _floatValue);
-    return _tripleEquals;
+    return (_byteValue == _floatValue);
   }
   
   protected boolean _same(final Byte left, final Long right) {
     byte _byteValue = left.byteValue();
     long _longValue = right.longValue();
-    boolean _tripleEquals = (_byteValue == _longValue);
-    return _tripleEquals;
+    return (_byteValue == _longValue);
   }
   
   protected boolean _same(final Byte left, final Short right) {
     byte _byteValue = left.byteValue();
     short _shortValue = right.shortValue();
-    boolean _tripleEquals = (_byteValue == _shortValue);
-    return _tripleEquals;
+    return (_byteValue == _shortValue);
   }
   
   protected boolean _same(final Byte left, final Integer right) {
     byte _byteValue = left.byteValue();
     int _intValue = right.intValue();
-    boolean _tripleEquals = (_byteValue == _intValue);
-    return _tripleEquals;
+    return (_byteValue == _intValue);
   }
   
   protected boolean _same(final Double left, final Byte right) {
     double _doubleValue = left.doubleValue();
     byte _byteValue = right.byteValue();
-    boolean _tripleEquals = (_doubleValue == _byteValue);
-    return _tripleEquals;
+    return (_doubleValue == _byteValue);
   }
   
   protected boolean _same(final Double left, final Double right) {
     double _doubleValue = left.doubleValue();
     double _doubleValue_1 = right.doubleValue();
-    boolean _tripleEquals = (_doubleValue == _doubleValue_1);
-    return _tripleEquals;
+    return (_doubleValue == _doubleValue_1);
   }
   
   protected boolean _same(final Double left, final Float right) {
     double _doubleValue = left.doubleValue();
     float _floatValue = right.floatValue();
-    boolean _tripleEquals = (_doubleValue == _floatValue);
-    return _tripleEquals;
+    return (_doubleValue == _floatValue);
   }
   
   protected boolean _same(final Double left, final Long right) {
     double _doubleValue = left.doubleValue();
     long _longValue = right.longValue();
-    boolean _tripleEquals = (_doubleValue == _longValue);
-    return _tripleEquals;
+    return (_doubleValue == _longValue);
   }
   
   protected boolean _same(final Double left, final Short right) {
     double _doubleValue = left.doubleValue();
     short _shortValue = right.shortValue();
-    boolean _tripleEquals = (_doubleValue == _shortValue);
-    return _tripleEquals;
+    return (_doubleValue == _shortValue);
   }
   
   protected boolean _same(final Double left, final Integer right) {
     double _doubleValue = left.doubleValue();
     int _intValue = right.intValue();
-    boolean _tripleEquals = (_doubleValue == _intValue);
-    return _tripleEquals;
+    return (_doubleValue == _intValue);
   }
   
   protected boolean _same(final Float left, final Byte right) {
     float _floatValue = left.floatValue();
     byte _byteValue = right.byteValue();
-    boolean _tripleEquals = (_floatValue == _byteValue);
-    return _tripleEquals;
+    return (_floatValue == _byteValue);
   }
   
   protected boolean _same(final Float left, final Double right) {
     float _floatValue = left.floatValue();
     double _doubleValue = right.doubleValue();
-    boolean _tripleEquals = (_floatValue == _doubleValue);
-    return _tripleEquals;
+    return (_floatValue == _doubleValue);
   }
   
   protected boolean _same(final Float left, final Float right) {
     float _floatValue = left.floatValue();
     float _floatValue_1 = right.floatValue();
-    boolean _tripleEquals = (_floatValue == _floatValue_1);
-    return _tripleEquals;
+    return (_floatValue == _floatValue_1);
   }
   
   protected boolean _same(final Float left, final Long right) {
     float _floatValue = left.floatValue();
     long _longValue = right.longValue();
-    boolean _tripleEquals = (_floatValue == _longValue);
-    return _tripleEquals;
+    return (_floatValue == _longValue);
   }
   
   protected boolean _same(final Float left, final Short right) {
     float _floatValue = left.floatValue();
     short _shortValue = right.shortValue();
-    boolean _tripleEquals = (_floatValue == _shortValue);
-    return _tripleEquals;
+    return (_floatValue == _shortValue);
   }
   
   protected boolean _same(final Float left, final Integer right) {
     float _floatValue = left.floatValue();
     int _intValue = right.intValue();
-    boolean _tripleEquals = (_floatValue == _intValue);
-    return _tripleEquals;
+    return (_floatValue == _intValue);
   }
   
   protected boolean _same(final Long left, final Byte right) {
     long _longValue = left.longValue();
     byte _byteValue = right.byteValue();
-    boolean _tripleEquals = (_longValue == _byteValue);
-    return _tripleEquals;
+    return (_longValue == _byteValue);
   }
   
   protected boolean _same(final Long left, final Double right) {
     long _longValue = left.longValue();
     double _doubleValue = right.doubleValue();
-    boolean _tripleEquals = (_longValue == _doubleValue);
-    return _tripleEquals;
+    return (_longValue == _doubleValue);
   }
   
   protected boolean _same(final Long left, final Float right) {
     long _longValue = left.longValue();
     float _floatValue = right.floatValue();
-    boolean _tripleEquals = (_longValue == _floatValue);
-    return _tripleEquals;
+    return (_longValue == _floatValue);
   }
   
   protected boolean _same(final Long left, final Long right) {
     long _longValue = left.longValue();
     long _longValue_1 = right.longValue();
-    boolean _tripleEquals = (_longValue == _longValue_1);
-    return _tripleEquals;
+    return (_longValue == _longValue_1);
   }
   
   protected boolean _same(final Long left, final Short right) {
     long _longValue = left.longValue();
     short _shortValue = right.shortValue();
-    boolean _tripleEquals = (_longValue == _shortValue);
-    return _tripleEquals;
+    return (_longValue == _shortValue);
   }
   
   protected boolean _same(final Long left, final Integer right) {
     long _longValue = left.longValue();
     int _intValue = right.intValue();
-    boolean _tripleEquals = (_longValue == _intValue);
-    return _tripleEquals;
+    return (_longValue == _intValue);
   }
   
   protected boolean _same(final Short left, final Byte right) {
     short _shortValue = left.shortValue();
     byte _byteValue = right.byteValue();
-    boolean _tripleEquals = (_shortValue == _byteValue);
-    return _tripleEquals;
+    return (_shortValue == _byteValue);
   }
   
   protected boolean _same(final Short left, final Double right) {
     short _shortValue = left.shortValue();
     double _doubleValue = right.doubleValue();
-    boolean _tripleEquals = (_shortValue == _doubleValue);
-    return _tripleEquals;
+    return (_shortValue == _doubleValue);
   }
   
   protected boolean _same(final Short left, final Float right) {
     short _shortValue = left.shortValue();
     float _floatValue = right.floatValue();
-    boolean _tripleEquals = (_shortValue == _floatValue);
-    return _tripleEquals;
+    return (_shortValue == _floatValue);
   }
   
   protected boolean _same(final Short left, final Long right) {
     short _shortValue = left.shortValue();
     long _longValue = right.longValue();
-    boolean _tripleEquals = (_shortValue == _longValue);
-    return _tripleEquals;
+    return (_shortValue == _longValue);
   }
   
   protected boolean _same(final Short left, final Short right) {
     short _shortValue = left.shortValue();
     short _shortValue_1 = right.shortValue();
-    boolean _tripleEquals = (_shortValue == _shortValue_1);
-    return _tripleEquals;
+    return (_shortValue == _shortValue_1);
   }
   
   protected boolean _same(final Short left, final Integer right) {
     short _shortValue = left.shortValue();
     int _intValue = right.intValue();
-    boolean _tripleEquals = (_shortValue == _intValue);
-    return _tripleEquals;
+    return (_shortValue == _intValue);
   }
   
   protected boolean _same(final Integer left, final Byte right) {
     int _intValue = left.intValue();
     byte _byteValue = right.byteValue();
-    boolean _tripleEquals = (_intValue == _byteValue);
-    return _tripleEquals;
+    return (_intValue == _byteValue);
   }
   
   protected boolean _same(final Integer left, final Double right) {
     int _intValue = left.intValue();
     double _doubleValue = right.doubleValue();
-    boolean _tripleEquals = (_intValue == _doubleValue);
-    return _tripleEquals;
+    return (_intValue == _doubleValue);
   }
   
   protected boolean _same(final Integer left, final Float right) {
     int _intValue = left.intValue();
     float _floatValue = right.floatValue();
-    boolean _tripleEquals = (_intValue == _floatValue);
-    return _tripleEquals;
+    return (_intValue == _floatValue);
   }
   
   protected boolean _same(final Integer left, final Long right) {
     int _intValue = left.intValue();
     long _longValue = right.longValue();
-    boolean _tripleEquals = (_intValue == _longValue);
-    return _tripleEquals;
+    return (_intValue == _longValue);
   }
   
   protected boolean _same(final Integer left, final Short right) {
     int _intValue = left.intValue();
     short _shortValue = right.shortValue();
-    boolean _tripleEquals = (_intValue == _shortValue);
-    return _tripleEquals;
+    return (_intValue == _shortValue);
   }
   
   protected boolean _same(final Integer left, final Integer right) {
     int _intValue = left.intValue();
     int _intValue_1 = right.intValue();
-    boolean _tripleEquals = (_intValue == _intValue_1);
-    return _tripleEquals;
+    return (_intValue == _intValue_1);
   }
   
   protected boolean _lessEquals(final Object left, final Object right) {
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(((("Unsupported operator \'<=\' for operands " + left) + " and ") + right));
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(((("Unsupported operator \'<=\' for operands " + left) + " and ") + right));
   }
   
   protected boolean _lessEquals(final Byte left, final Byte right) {
     byte _byteValue = left.byteValue();
     byte _byteValue_1 = right.byteValue();
-    boolean _lessEqualsThan = (_byteValue <= _byteValue_1);
-    return _lessEqualsThan;
+    return (_byteValue <= _byteValue_1);
   }
   
   protected boolean _lessEquals(final Byte left, final Double right) {
     byte _byteValue = left.byteValue();
     double _doubleValue = right.doubleValue();
-    boolean _lessEqualsThan = (_byteValue <= _doubleValue);
-    return _lessEqualsThan;
+    return (_byteValue <= _doubleValue);
   }
   
   protected boolean _lessEquals(final Byte left, final Float right) {
     byte _byteValue = left.byteValue();
     float _floatValue = right.floatValue();
-    boolean _lessEqualsThan = (_byteValue <= _floatValue);
-    return _lessEqualsThan;
+    return (_byteValue <= _floatValue);
   }
   
   protected boolean _lessEquals(final Byte left, final Long right) {
     byte _byteValue = left.byteValue();
     long _longValue = right.longValue();
-    boolean _lessEqualsThan = (_byteValue <= _longValue);
-    return _lessEqualsThan;
+    return (_byteValue <= _longValue);
   }
   
   protected boolean _lessEquals(final Byte left, final Short right) {
     byte _byteValue = left.byteValue();
     short _shortValue = right.shortValue();
-    boolean _lessEqualsThan = (_byteValue <= _shortValue);
-    return _lessEqualsThan;
+    return (_byteValue <= _shortValue);
   }
   
   protected boolean _lessEquals(final Byte left, final Integer right) {
     byte _byteValue = left.byteValue();
     int _intValue = right.intValue();
-    boolean _lessEqualsThan = (_byteValue <= _intValue);
-    return _lessEqualsThan;
+    return (_byteValue <= _intValue);
   }
   
   protected boolean _lessEquals(final Double left, final Byte right) {
     double _doubleValue = left.doubleValue();
     byte _byteValue = right.byteValue();
-    boolean _lessEqualsThan = (_doubleValue <= _byteValue);
-    return _lessEqualsThan;
+    return (_doubleValue <= _byteValue);
   }
   
   protected boolean _lessEquals(final Double left, final Double right) {
     double _doubleValue = left.doubleValue();
     double _doubleValue_1 = right.doubleValue();
-    boolean _lessEqualsThan = (_doubleValue <= _doubleValue_1);
-    return _lessEqualsThan;
+    return (_doubleValue <= _doubleValue_1);
   }
   
   protected boolean _lessEquals(final Double left, final Float right) {
     double _doubleValue = left.doubleValue();
     float _floatValue = right.floatValue();
-    boolean _lessEqualsThan = (_doubleValue <= _floatValue);
-    return _lessEqualsThan;
+    return (_doubleValue <= _floatValue);
   }
   
   protected boolean _lessEquals(final Double left, final Long right) {
     double _doubleValue = left.doubleValue();
     long _longValue = right.longValue();
-    boolean _lessEqualsThan = (_doubleValue <= _longValue);
-    return _lessEqualsThan;
+    return (_doubleValue <= _longValue);
   }
   
   protected boolean _lessEquals(final Double left, final Short right) {
     double _doubleValue = left.doubleValue();
     short _shortValue = right.shortValue();
-    boolean _lessEqualsThan = (_doubleValue <= _shortValue);
-    return _lessEqualsThan;
+    return (_doubleValue <= _shortValue);
   }
   
   protected boolean _lessEquals(final Double left, final Integer right) {
     double _doubleValue = left.doubleValue();
     int _intValue = right.intValue();
-    boolean _lessEqualsThan = (_doubleValue <= _intValue);
-    return _lessEqualsThan;
+    return (_doubleValue <= _intValue);
   }
   
   protected boolean _lessEquals(final Float left, final Byte right) {
     float _floatValue = left.floatValue();
     byte _byteValue = right.byteValue();
-    boolean _lessEqualsThan = (_floatValue <= _byteValue);
-    return _lessEqualsThan;
+    return (_floatValue <= _byteValue);
   }
   
   protected boolean _lessEquals(final Float left, final Double right) {
     float _floatValue = left.floatValue();
     double _doubleValue = right.doubleValue();
-    boolean _lessEqualsThan = (_floatValue <= _doubleValue);
-    return _lessEqualsThan;
+    return (_floatValue <= _doubleValue);
   }
   
   protected boolean _lessEquals(final Float left, final Float right) {
     float _floatValue = left.floatValue();
     float _floatValue_1 = right.floatValue();
-    boolean _lessEqualsThan = (_floatValue <= _floatValue_1);
-    return _lessEqualsThan;
+    return (_floatValue <= _floatValue_1);
   }
   
   protected boolean _lessEquals(final Float left, final Long right) {
     float _floatValue = left.floatValue();
     long _longValue = right.longValue();
-    boolean _lessEqualsThan = (_floatValue <= _longValue);
-    return _lessEqualsThan;
+    return (_floatValue <= _longValue);
   }
   
   protected boolean _lessEquals(final Float left, final Short right) {
     float _floatValue = left.floatValue();
     short _shortValue = right.shortValue();
-    boolean _lessEqualsThan = (_floatValue <= _shortValue);
-    return _lessEqualsThan;
+    return (_floatValue <= _shortValue);
   }
   
   protected boolean _lessEquals(final Float left, final Integer right) {
     float _floatValue = left.floatValue();
     int _intValue = right.intValue();
-    boolean _lessEqualsThan = (_floatValue <= _intValue);
-    return _lessEqualsThan;
+    return (_floatValue <= _intValue);
   }
   
   protected boolean _lessEquals(final Long left, final Byte right) {
     long _longValue = left.longValue();
     byte _byteValue = right.byteValue();
-    boolean _lessEqualsThan = (_longValue <= _byteValue);
-    return _lessEqualsThan;
+    return (_longValue <= _byteValue);
   }
   
   protected boolean _lessEquals(final Long left, final Double right) {
     long _longValue = left.longValue();
     double _doubleValue = right.doubleValue();
-    boolean _lessEqualsThan = (_longValue <= _doubleValue);
-    return _lessEqualsThan;
+    return (_longValue <= _doubleValue);
   }
   
   protected boolean _lessEquals(final Long left, final Float right) {
     long _longValue = left.longValue();
     float _floatValue = right.floatValue();
-    boolean _lessEqualsThan = (_longValue <= _floatValue);
-    return _lessEqualsThan;
+    return (_longValue <= _floatValue);
   }
   
   protected boolean _lessEquals(final Long left, final Long right) {
     long _longValue = left.longValue();
     long _longValue_1 = right.longValue();
-    boolean _lessEqualsThan = (_longValue <= _longValue_1);
-    return _lessEqualsThan;
+    return (_longValue <= _longValue_1);
   }
   
   protected boolean _lessEquals(final Long left, final Short right) {
     long _longValue = left.longValue();
     short _shortValue = right.shortValue();
-    boolean _lessEqualsThan = (_longValue <= _shortValue);
-    return _lessEqualsThan;
+    return (_longValue <= _shortValue);
   }
   
   protected boolean _lessEquals(final Long left, final Integer right) {
     long _longValue = left.longValue();
     int _intValue = right.intValue();
-    boolean _lessEqualsThan = (_longValue <= _intValue);
-    return _lessEqualsThan;
+    return (_longValue <= _intValue);
   }
   
   protected boolean _lessEquals(final Short left, final Byte right) {
     short _shortValue = left.shortValue();
     byte _byteValue = right.byteValue();
-    boolean _lessEqualsThan = (_shortValue <= _byteValue);
-    return _lessEqualsThan;
+    return (_shortValue <= _byteValue);
   }
   
   protected boolean _lessEquals(final Short left, final Double right) {
     short _shortValue = left.shortValue();
     double _doubleValue = right.doubleValue();
-    boolean _lessEqualsThan = (_shortValue <= _doubleValue);
-    return _lessEqualsThan;
+    return (_shortValue <= _doubleValue);
   }
   
   protected boolean _lessEquals(final Short left, final Float right) {
     short _shortValue = left.shortValue();
     float _floatValue = right.floatValue();
-    boolean _lessEqualsThan = (_shortValue <= _floatValue);
-    return _lessEqualsThan;
+    return (_shortValue <= _floatValue);
   }
   
   protected boolean _lessEquals(final Short left, final Long right) {
     short _shortValue = left.shortValue();
     long _longValue = right.longValue();
-    boolean _lessEqualsThan = (_shortValue <= _longValue);
-    return _lessEqualsThan;
+    return (_shortValue <= _longValue);
   }
   
   protected boolean _lessEquals(final Short left, final Short right) {
     short _shortValue = left.shortValue();
     short _shortValue_1 = right.shortValue();
-    boolean _lessEqualsThan = (_shortValue <= _shortValue_1);
-    return _lessEqualsThan;
+    return (_shortValue <= _shortValue_1);
   }
   
   protected boolean _lessEquals(final Short left, final Integer right) {
     short _shortValue = left.shortValue();
     int _intValue = right.intValue();
-    boolean _lessEqualsThan = (_shortValue <= _intValue);
-    return _lessEqualsThan;
+    return (_shortValue <= _intValue);
   }
   
   protected boolean _lessEquals(final Integer left, final Byte right) {
     int _intValue = left.intValue();
     byte _byteValue = right.byteValue();
-    boolean _lessEqualsThan = (_intValue <= _byteValue);
-    return _lessEqualsThan;
+    return (_intValue <= _byteValue);
   }
   
   protected boolean _lessEquals(final Integer left, final Double right) {
     int _intValue = left.intValue();
     double _doubleValue = right.doubleValue();
-    boolean _lessEqualsThan = (_intValue <= _doubleValue);
-    return _lessEqualsThan;
+    return (_intValue <= _doubleValue);
   }
   
   protected boolean _lessEquals(final Integer left, final Float right) {
     int _intValue = left.intValue();
     float _floatValue = right.floatValue();
-    boolean _lessEqualsThan = (_intValue <= _floatValue);
-    return _lessEqualsThan;
+    return (_intValue <= _floatValue);
   }
   
   protected boolean _lessEquals(final Integer left, final Long right) {
     int _intValue = left.intValue();
     long _longValue = right.longValue();
-    boolean _lessEqualsThan = (_intValue <= _longValue);
-    return _lessEqualsThan;
+    return (_intValue <= _longValue);
   }
   
   protected boolean _lessEquals(final Integer left, final Short right) {
     int _intValue = left.intValue();
     short _shortValue = right.shortValue();
-    boolean _lessEqualsThan = (_intValue <= _shortValue);
-    return _lessEqualsThan;
+    return (_intValue <= _shortValue);
   }
   
   protected boolean _lessEquals(final Integer left, final Integer right) {
     int _intValue = left.intValue();
     int _intValue_1 = right.intValue();
-    boolean _lessEqualsThan = (_intValue <= _intValue_1);
-    return _lessEqualsThan;
+    return (_intValue <= _intValue_1);
   }
   
   protected boolean _greaterEquals(final Object left, final Object right) {
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(((("Unsupported operator \'>=\' for operands " + left) + " and ") + right));
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(((("Unsupported operator \'>=\' for operands " + left) + " and ") + right));
   }
   
   protected boolean _greaterEquals(final Byte left, final Byte right) {
     byte _byteValue = left.byteValue();
     byte _byteValue_1 = right.byteValue();
-    boolean _greaterEqualsThan = (_byteValue >= _byteValue_1);
-    return _greaterEqualsThan;
+    return (_byteValue >= _byteValue_1);
   }
   
   protected boolean _greaterEquals(final Byte left, final Double right) {
     byte _byteValue = left.byteValue();
     double _doubleValue = right.doubleValue();
-    boolean _greaterEqualsThan = (_byteValue >= _doubleValue);
-    return _greaterEqualsThan;
+    return (_byteValue >= _doubleValue);
   }
   
   protected boolean _greaterEquals(final Byte left, final Float right) {
     byte _byteValue = left.byteValue();
     float _floatValue = right.floatValue();
-    boolean _greaterEqualsThan = (_byteValue >= _floatValue);
-    return _greaterEqualsThan;
+    return (_byteValue >= _floatValue);
   }
   
   protected boolean _greaterEquals(final Byte left, final Long right) {
     byte _byteValue = left.byteValue();
     long _longValue = right.longValue();
-    boolean _greaterEqualsThan = (_byteValue >= _longValue);
-    return _greaterEqualsThan;
+    return (_byteValue >= _longValue);
   }
   
   protected boolean _greaterEquals(final Byte left, final Short right) {
     byte _byteValue = left.byteValue();
     short _shortValue = right.shortValue();
-    boolean _greaterEqualsThan = (_byteValue >= _shortValue);
-    return _greaterEqualsThan;
+    return (_byteValue >= _shortValue);
   }
   
   protected boolean _greaterEquals(final Byte left, final Integer right) {
     byte _byteValue = left.byteValue();
     int _intValue = right.intValue();
-    boolean _greaterEqualsThan = (_byteValue >= _intValue);
-    return _greaterEqualsThan;
+    return (_byteValue >= _intValue);
   }
   
   protected boolean _greaterEquals(final Double left, final Byte right) {
     double _doubleValue = left.doubleValue();
     byte _byteValue = right.byteValue();
-    boolean _greaterEqualsThan = (_doubleValue >= _byteValue);
-    return _greaterEqualsThan;
+    return (_doubleValue >= _byteValue);
   }
   
   protected boolean _greaterEquals(final Double left, final Double right) {
     double _doubleValue = left.doubleValue();
     double _doubleValue_1 = right.doubleValue();
-    boolean _greaterEqualsThan = (_doubleValue >= _doubleValue_1);
-    return _greaterEqualsThan;
+    return (_doubleValue >= _doubleValue_1);
   }
   
   protected boolean _greaterEquals(final Double left, final Float right) {
     double _doubleValue = left.doubleValue();
     float _floatValue = right.floatValue();
-    boolean _greaterEqualsThan = (_doubleValue >= _floatValue);
-    return _greaterEqualsThan;
+    return (_doubleValue >= _floatValue);
   }
   
   protected boolean _greaterEquals(final Double left, final Long right) {
     double _doubleValue = left.doubleValue();
     long _longValue = right.longValue();
-    boolean _greaterEqualsThan = (_doubleValue >= _longValue);
-    return _greaterEqualsThan;
+    return (_doubleValue >= _longValue);
   }
   
   protected boolean _greaterEquals(final Double left, final Short right) {
     double _doubleValue = left.doubleValue();
     short _shortValue = right.shortValue();
-    boolean _greaterEqualsThan = (_doubleValue >= _shortValue);
-    return _greaterEqualsThan;
+    return (_doubleValue >= _shortValue);
   }
   
   protected boolean _greaterEquals(final Double left, final Integer right) {
     double _doubleValue = left.doubleValue();
     int _intValue = right.intValue();
-    boolean _greaterEqualsThan = (_doubleValue >= _intValue);
-    return _greaterEqualsThan;
+    return (_doubleValue >= _intValue);
   }
   
   protected boolean _greaterEquals(final Float left, final Byte right) {
     float _floatValue = left.floatValue();
     byte _byteValue = right.byteValue();
-    boolean _greaterEqualsThan = (_floatValue >= _byteValue);
-    return _greaterEqualsThan;
+    return (_floatValue >= _byteValue);
   }
   
   protected boolean _greaterEquals(final Float left, final Double right) {
     float _floatValue = left.floatValue();
     double _doubleValue = right.doubleValue();
-    boolean _greaterEqualsThan = (_floatValue >= _doubleValue);
-    return _greaterEqualsThan;
+    return (_floatValue >= _doubleValue);
   }
   
   protected boolean _greaterEquals(final Float left, final Float right) {
     float _floatValue = left.floatValue();
     float _floatValue_1 = right.floatValue();
-    boolean _greaterEqualsThan = (_floatValue >= _floatValue_1);
-    return _greaterEqualsThan;
+    return (_floatValue >= _floatValue_1);
   }
   
   protected boolean _greaterEquals(final Float left, final Long right) {
     float _floatValue = left.floatValue();
     long _longValue = right.longValue();
-    boolean _greaterEqualsThan = (_floatValue >= _longValue);
-    return _greaterEqualsThan;
+    return (_floatValue >= _longValue);
   }
   
   protected boolean _greaterEquals(final Float left, final Short right) {
     float _floatValue = left.floatValue();
     short _shortValue = right.shortValue();
-    boolean _greaterEqualsThan = (_floatValue >= _shortValue);
-    return _greaterEqualsThan;
+    return (_floatValue >= _shortValue);
   }
   
   protected boolean _greaterEquals(final Float left, final Integer right) {
     float _floatValue = left.floatValue();
     int _intValue = right.intValue();
-    boolean _greaterEqualsThan = (_floatValue >= _intValue);
-    return _greaterEqualsThan;
+    return (_floatValue >= _intValue);
   }
   
   protected boolean _greaterEquals(final Long left, final Byte right) {
     long _longValue = left.longValue();
     byte _byteValue = right.byteValue();
-    boolean _greaterEqualsThan = (_longValue >= _byteValue);
-    return _greaterEqualsThan;
+    return (_longValue >= _byteValue);
   }
   
   protected boolean _greaterEquals(final Long left, final Double right) {
     long _longValue = left.longValue();
     double _doubleValue = right.doubleValue();
-    boolean _greaterEqualsThan = (_longValue >= _doubleValue);
-    return _greaterEqualsThan;
+    return (_longValue >= _doubleValue);
   }
   
   protected boolean _greaterEquals(final Long left, final Float right) {
     long _longValue = left.longValue();
     float _floatValue = right.floatValue();
-    boolean _greaterEqualsThan = (_longValue >= _floatValue);
-    return _greaterEqualsThan;
+    return (_longValue >= _floatValue);
   }
   
   protected boolean _greaterEquals(final Long left, final Long right) {
     long _longValue = left.longValue();
     long _longValue_1 = right.longValue();
-    boolean _greaterEqualsThan = (_longValue >= _longValue_1);
-    return _greaterEqualsThan;
+    return (_longValue >= _longValue_1);
   }
   
   protected boolean _greaterEquals(final Long left, final Short right) {
     long _longValue = left.longValue();
     short _shortValue = right.shortValue();
-    boolean _greaterEqualsThan = (_longValue >= _shortValue);
-    return _greaterEqualsThan;
+    return (_longValue >= _shortValue);
   }
   
   protected boolean _greaterEquals(final Long left, final Integer right) {
     long _longValue = left.longValue();
     int _intValue = right.intValue();
-    boolean _greaterEqualsThan = (_longValue >= _intValue);
-    return _greaterEqualsThan;
+    return (_longValue >= _intValue);
   }
   
   protected boolean _greaterEquals(final Short left, final Byte right) {
     short _shortValue = left.shortValue();
     byte _byteValue = right.byteValue();
-    boolean _greaterEqualsThan = (_shortValue >= _byteValue);
-    return _greaterEqualsThan;
+    return (_shortValue >= _byteValue);
   }
   
   protected boolean _greaterEquals(final Short left, final Double right) {
     short _shortValue = left.shortValue();
     double _doubleValue = right.doubleValue();
-    boolean _greaterEqualsThan = (_shortValue >= _doubleValue);
-    return _greaterEqualsThan;
+    return (_shortValue >= _doubleValue);
   }
   
   protected boolean _greaterEquals(final Short left, final Float right) {
     short _shortValue = left.shortValue();
     float _floatValue = right.floatValue();
-    boolean _greaterEqualsThan = (_shortValue >= _floatValue);
-    return _greaterEqualsThan;
+    return (_shortValue >= _floatValue);
   }
   
   protected boolean _greaterEquals(final Short left, final Long right) {
     short _shortValue = left.shortValue();
     long _longValue = right.longValue();
-    boolean _greaterEqualsThan = (_shortValue >= _longValue);
-    return _greaterEqualsThan;
+    return (_shortValue >= _longValue);
   }
   
   protected boolean _greaterEquals(final Short left, final Short right) {
     short _shortValue = left.shortValue();
     short _shortValue_1 = right.shortValue();
-    boolean _greaterEqualsThan = (_shortValue >= _shortValue_1);
-    return _greaterEqualsThan;
+    return (_shortValue >= _shortValue_1);
   }
   
   protected boolean _greaterEquals(final Short left, final Integer right) {
     short _shortValue = left.shortValue();
     int _intValue = right.intValue();
-    boolean _greaterEqualsThan = (_shortValue >= _intValue);
-    return _greaterEqualsThan;
+    return (_shortValue >= _intValue);
   }
   
   protected boolean _greaterEquals(final Integer left, final Byte right) {
     int _intValue = left.intValue();
     byte _byteValue = right.byteValue();
-    boolean _greaterEqualsThan = (_intValue >= _byteValue);
-    return _greaterEqualsThan;
+    return (_intValue >= _byteValue);
   }
   
   protected boolean _greaterEquals(final Integer left, final Double right) {
     int _intValue = left.intValue();
     double _doubleValue = right.doubleValue();
-    boolean _greaterEqualsThan = (_intValue >= _doubleValue);
-    return _greaterEqualsThan;
+    return (_intValue >= _doubleValue);
   }
   
   protected boolean _greaterEquals(final Integer left, final Float right) {
     int _intValue = left.intValue();
     float _floatValue = right.floatValue();
-    boolean _greaterEqualsThan = (_intValue >= _floatValue);
-    return _greaterEqualsThan;
+    return (_intValue >= _floatValue);
   }
   
   protected boolean _greaterEquals(final Integer left, final Long right) {
     int _intValue = left.intValue();
     long _longValue = right.longValue();
-    boolean _greaterEqualsThan = (_intValue >= _longValue);
-    return _greaterEqualsThan;
+    return (_intValue >= _longValue);
   }
   
   protected boolean _greaterEquals(final Integer left, final Short right) {
     int _intValue = left.intValue();
     short _shortValue = right.shortValue();
-    boolean _greaterEqualsThan = (_intValue >= _shortValue);
-    return _greaterEqualsThan;
+    return (_intValue >= _shortValue);
   }
   
   protected boolean _greaterEquals(final Integer left, final Integer right) {
     int _intValue = left.intValue();
     int _intValue_1 = right.intValue();
-    boolean _greaterEqualsThan = (_intValue >= _intValue_1);
-    return _greaterEqualsThan;
+    return (_intValue >= _intValue_1);
   }
   
   protected boolean _notSame(final Object left, final Object right) {
-    ConstantExpressionEvaluationException _constantExpressionEvaluationException = new ConstantExpressionEvaluationException(((("Unsupported operator \'!==\' for operands " + left) + " and ") + right));
-    throw _constantExpressionEvaluationException;
+    throw new ConstantExpressionEvaluationException(((("Unsupported operator \'!==\' for operands " + left) + " and ") + right));
   }
   
   protected boolean _notSame(final Byte left, final Byte right) {
     byte _byteValue = left.byteValue();
     byte _byteValue_1 = right.byteValue();
-    boolean _tripleNotEquals = (_byteValue != _byteValue_1);
-    return _tripleNotEquals;
+    return (_byteValue != _byteValue_1);
   }
   
   protected boolean _notSame(final Byte left, final Double right) {
     byte _byteValue = left.byteValue();
     double _doubleValue = right.doubleValue();
-    boolean _tripleNotEquals = (_byteValue != _doubleValue);
-    return _tripleNotEquals;
+    return (_byteValue != _doubleValue);
   }
   
   protected boolean _notSame(final Byte left, final Float right) {
     byte _byteValue = left.byteValue();
     float _floatValue = right.floatValue();
-    boolean _tripleNotEquals = (_byteValue != _floatValue);
-    return _tripleNotEquals;
+    return (_byteValue != _floatValue);
   }
   
   protected boolean _notSame(final Byte left, final Long right) {
     byte _byteValue = left.byteValue();
     long _longValue = right.longValue();
-    boolean _tripleNotEquals = (_byteValue != _longValue);
-    return _tripleNotEquals;
+    return (_byteValue != _longValue);
   }
   
   protected boolean _notSame(final Byte left, final Short right) {
     byte _byteValue = left.byteValue();
     short _shortValue = right.shortValue();
-    boolean _tripleNotEquals = (_byteValue != _shortValue);
-    return _tripleNotEquals;
+    return (_byteValue != _shortValue);
   }
   
   protected boolean _notSame(final Byte left, final Integer right) {
     byte _byteValue = left.byteValue();
     int _intValue = right.intValue();
-    boolean _tripleNotEquals = (_byteValue != _intValue);
-    return _tripleNotEquals;
+    return (_byteValue != _intValue);
   }
   
   protected boolean _notSame(final Double left, final Byte right) {
     double _doubleValue = left.doubleValue();
     byte _byteValue = right.byteValue();
-    boolean _tripleNotEquals = (_doubleValue != _byteValue);
-    return _tripleNotEquals;
+    return (_doubleValue != _byteValue);
   }
   
   protected boolean _notSame(final Double left, final Double right) {
     double _doubleValue = left.doubleValue();
     double _doubleValue_1 = right.doubleValue();
-    boolean _tripleNotEquals = (_doubleValue != _doubleValue_1);
-    return _tripleNotEquals;
+    return (_doubleValue != _doubleValue_1);
   }
   
   protected boolean _notSame(final Double left, final Float right) {
     double _doubleValue = left.doubleValue();
     float _floatValue = right.floatValue();
-    boolean _tripleNotEquals = (_doubleValue != _floatValue);
-    return _tripleNotEquals;
+    return (_doubleValue != _floatValue);
   }
   
   protected boolean _notSame(final Double left, final Long right) {
     double _doubleValue = left.doubleValue();
     long _longValue = right.longValue();
-    boolean _tripleNotEquals = (_doubleValue != _longValue);
-    return _tripleNotEquals;
+    return (_doubleValue != _longValue);
   }
   
   protected boolean _notSame(final Double left, final Short right) {
     double _doubleValue = left.doubleValue();
     short _shortValue = right.shortValue();
-    boolean _tripleNotEquals = (_doubleValue != _shortValue);
-    return _tripleNotEquals;
+    return (_doubleValue != _shortValue);
   }
   
   protected boolean _notSame(final Double left, final Integer right) {
     double _doubleValue = left.doubleValue();
     int _intValue = right.intValue();
-    boolean _tripleNotEquals = (_doubleValue != _intValue);
-    return _tripleNotEquals;
+    return (_doubleValue != _intValue);
   }
   
   protected boolean _notSame(final Float left, final Byte right) {
     float _floatValue = left.floatValue();
     byte _byteValue = right.byteValue();
-    boolean _tripleNotEquals = (_floatValue != _byteValue);
-    return _tripleNotEquals;
+    return (_floatValue != _byteValue);
   }
   
   protected boolean _notSame(final Float left, final Double right) {
     float _floatValue = left.floatValue();
     double _doubleValue = right.doubleValue();
-    boolean _tripleNotEquals = (_floatValue != _doubleValue);
-    return _tripleNotEquals;
+    return (_floatValue != _doubleValue);
   }
   
   protected boolean _notSame(final Float left, final Float right) {
     float _floatValue = left.floatValue();
     float _floatValue_1 = right.floatValue();
-    boolean _tripleNotEquals = (_floatValue != _floatValue_1);
-    return _tripleNotEquals;
+    return (_floatValue != _floatValue_1);
   }
   
   protected boolean _notSame(final Float left, final Long right) {
     float _floatValue = left.floatValue();
     long _longValue = right.longValue();
-    boolean _tripleNotEquals = (_floatValue != _longValue);
-    return _tripleNotEquals;
+    return (_floatValue != _longValue);
   }
   
   protected boolean _notSame(final Float left, final Short right) {
     float _floatValue = left.floatValue();
     short _shortValue = right.shortValue();
-    boolean _tripleNotEquals = (_floatValue != _shortValue);
-    return _tripleNotEquals;
+    return (_floatValue != _shortValue);
   }
   
   protected boolean _notSame(final Float left, final Integer right) {
     float _floatValue = left.floatValue();
     int _intValue = right.intValue();
-    boolean _tripleNotEquals = (_floatValue != _intValue);
-    return _tripleNotEquals;
+    return (_floatValue != _intValue);
   }
   
   protected boolean _notSame(final Long left, final Byte right) {
     long _longValue = left.longValue();
     byte _byteValue = right.byteValue();
-    boolean _tripleNotEquals = (_longValue != _byteValue);
-    return _tripleNotEquals;
+    return (_longValue != _byteValue);
   }
   
   protected boolean _notSame(final Long left, final Double right) {
     long _longValue = left.longValue();
     double _doubleValue = right.doubleValue();
-    boolean _tripleNotEquals = (_longValue != _doubleValue);
-    return _tripleNotEquals;
+    return (_longValue != _doubleValue);
   }
   
   protected boolean _notSame(final Long left, final Float right) {
     long _longValue = left.longValue();
     float _floatValue = right.floatValue();
-    boolean _tripleNotEquals = (_longValue != _floatValue);
-    return _tripleNotEquals;
+    return (_longValue != _floatValue);
   }
   
   protected boolean _notSame(final Long left, final Long right) {
     long _longValue = left.longValue();
     long _longValue_1 = right.longValue();
-    boolean _tripleNotEquals = (_longValue != _longValue_1);
-    return _tripleNotEquals;
+    return (_longValue != _longValue_1);
   }
   
   protected boolean _notSame(final Long left, final Short right) {
     long _longValue = left.longValue();
     short _shortValue = right.shortValue();
-    boolean _tripleNotEquals = (_longValue != _shortValue);
-    return _tripleNotEquals;
+    return (_longValue != _shortValue);
   }
   
   protected boolean _notSame(final Long left, final Integer right) {
     long _longValue = left.longValue();
     int _intValue = right.intValue();
-    boolean _tripleNotEquals = (_longValue != _intValue);
-    return _tripleNotEquals;
+    return (_longValue != _intValue);
   }
   
   protected boolean _notSame(final Short left, final Byte right) {
     short _shortValue = left.shortValue();
     byte _byteValue = right.byteValue();
-    boolean _tripleNotEquals = (_shortValue != _byteValue);
-    return _tripleNotEquals;
+    return (_shortValue != _byteValue);
   }
   
   protected boolean _notSame(final Short left, final Double right) {
     short _shortValue = left.shortValue();
     double _doubleValue = right.doubleValue();
-    boolean _tripleNotEquals = (_shortValue != _doubleValue);
-    return _tripleNotEquals;
+    return (_shortValue != _doubleValue);
   }
   
   protected boolean _notSame(final Short left, final Float right) {
     short _shortValue = left.shortValue();
     float _floatValue = right.floatValue();
-    boolean _tripleNotEquals = (_shortValue != _floatValue);
-    return _tripleNotEquals;
+    return (_shortValue != _floatValue);
   }
   
   protected boolean _notSame(final Short left, final Long right) {
     short _shortValue = left.shortValue();
     long _longValue = right.longValue();
-    boolean _tripleNotEquals = (_shortValue != _longValue);
-    return _tripleNotEquals;
+    return (_shortValue != _longValue);
   }
   
   protected boolean _notSame(final Short left, final Short right) {
     short _shortValue = left.shortValue();
     short _shortValue_1 = right.shortValue();
-    boolean _tripleNotEquals = (_shortValue != _shortValue_1);
-    return _tripleNotEquals;
+    return (_shortValue != _shortValue_1);
   }
   
   protected boolean _notSame(final Short left, final Integer right) {
     short _shortValue = left.shortValue();
     int _intValue = right.intValue();
-    boolean _tripleNotEquals = (_shortValue != _intValue);
-    return _tripleNotEquals;
+    return (_shortValue != _intValue);
   }
   
   protected boolean _notSame(final Integer left, final Byte right) {
     int _intValue = left.intValue();
     byte _byteValue = right.byteValue();
-    boolean _tripleNotEquals = (_intValue != _byteValue);
-    return _tripleNotEquals;
+    return (_intValue != _byteValue);
   }
   
   protected boolean _notSame(final Integer left, final Double right) {
     int _intValue = left.intValue();
     double _doubleValue = right.doubleValue();
-    boolean _tripleNotEquals = (_intValue != _doubleValue);
-    return _tripleNotEquals;
+    return (_intValue != _doubleValue);
   }
   
   protected boolean _notSame(final Integer left, final Float right) {
     int _intValue = left.intValue();
     float _floatValue = right.floatValue();
-    boolean _tripleNotEquals = (_intValue != _floatValue);
-    return _tripleNotEquals;
+    return (_intValue != _floatValue);
   }
   
   protected boolean _notSame(final Integer left, final Long right) {
     int _intValue = left.intValue();
     long _longValue = right.longValue();
-    boolean _tripleNotEquals = (_intValue != _longValue);
-    return _tripleNotEquals;
+    return (_intValue != _longValue);
   }
   
   protected boolean _notSame(final Integer left, final Short right) {
     int _intValue = left.intValue();
     short _shortValue = right.shortValue();
-    boolean _tripleNotEquals = (_intValue != _shortValue);
-    return _tripleNotEquals;
+    return (_intValue != _shortValue);
   }
   
   protected boolean _notSame(final Integer left, final Integer right) {
     int _intValue = left.intValue();
     int _intValue_1 = right.intValue();
-    boolean _tripleNotEquals = (_intValue != _intValue_1);
-    return _tripleNotEquals;
+    return (_intValue != _intValue_1);
   }
   
   public Object minus(final Object e) {

@@ -16,7 +16,6 @@ public class TestAppender extends AbstractStringBuilderBasedAppendable {
   }
   
   public List<String> getImports() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("TODO: auto-generated method stub");
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
 }

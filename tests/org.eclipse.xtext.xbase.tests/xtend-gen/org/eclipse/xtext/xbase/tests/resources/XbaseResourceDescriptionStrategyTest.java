@@ -56,8 +56,7 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
     final Function1<IEObjectDescription,Boolean> _function_1 = new Function1<IEObjectDescription,Boolean>() {
       public Boolean apply(final IEObjectDescription it) {
         String _userData = it.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE);
-        boolean _equals = Objects.equal("true", _userData);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal("true", _userData));
       }
     };
     boolean _exists = IterableExtensions.<IEObjectDescription>exists(list, _function_1);
@@ -80,8 +79,7 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
     final Function1<IEObjectDescription,Boolean> _function_1 = new Function1<IEObjectDescription,Boolean>() {
       public Boolean apply(final IEObjectDescription it) {
         String _userData = it.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE);
-        boolean _equals = Objects.equal("true", _userData);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal("true", _userData));
       }
     };
     boolean _exists = IterableExtensions.<IEObjectDescription>exists(list, _function_1);
@@ -98,8 +96,7 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
       final Function1<IReferenceDescription,String> _function = new Function1<IReferenceDescription,String>() {
         public String apply(final IReferenceDescription it) {
           URI _targetEObjectUri = it.getTargetEObjectUri();
-          String _string = _targetEObjectUri.toString();
-          return _string;
+          return _targetEObjectUri.toString();
         }
       };
       Iterable<String> _map = IterableExtensions.<IReferenceDescription, String>map(_referenceDescriptions, _function);

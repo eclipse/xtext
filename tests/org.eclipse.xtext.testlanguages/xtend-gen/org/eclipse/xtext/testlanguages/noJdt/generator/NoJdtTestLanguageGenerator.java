@@ -26,8 +26,7 @@ public class NoJdtTestLanguageGenerator implements IGenerator {
     Iterator<Greeting> _filter = Iterators.<Greeting>filter(_allContents, Greeting.class);
     final Function1<Greeting,String> _function = new Function1<Greeting,String>() {
       public String apply(final Greeting it) {
-        String _name = it.getName();
-        return _name;
+        return it.getName();
       }
     };
     Iterator<String> _map = IteratorExtensions.<Greeting, String>map(_filter, _function);

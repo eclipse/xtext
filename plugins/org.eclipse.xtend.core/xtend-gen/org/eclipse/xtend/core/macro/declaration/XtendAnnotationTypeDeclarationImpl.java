@@ -29,12 +29,10 @@ public class XtendAnnotationTypeDeclarationImpl extends XtendTypeDeclarationImpl
     final Function1<AnnotationTypeElementDeclaration,Boolean> _function = new Function1<AnnotationTypeElementDeclaration,Boolean>() {
       public Boolean apply(final AnnotationTypeElementDeclaration it) {
         String _simpleName = it.getSimpleName();
-        boolean _equals = Objects.equal(_simpleName, name);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_simpleName, name));
       }
     };
-    AnnotationTypeElementDeclaration _findFirst = IterableExtensions.findFirst(_declaredAnnotationTypeElements, _function);
-    return _findFirst;
+    return IterableExtensions.findFirst(_declaredAnnotationTypeElements, _function);
   }
   
   public Iterable<? extends AnnotationTypeElementDeclaration> getDeclaredAnnotationTypeElements() {
@@ -43,12 +41,10 @@ public class XtendAnnotationTypeDeclarationImpl extends XtendTypeDeclarationImpl
     final Function1<XtendMember,MemberDeclaration> _function = new Function1<XtendMember,MemberDeclaration>() {
       public MemberDeclaration apply(final XtendMember it) {
         CompilationUnitImpl _compilationUnit = XtendAnnotationTypeDeclarationImpl.this.getCompilationUnit();
-        MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(it);
-        return _xtendMemberDeclaration;
+        return _compilationUnit.toXtendMemberDeclaration(it);
       }
     };
     List<MemberDeclaration> _map = ListExtensions.<XtendMember, MemberDeclaration>map(_members, _function);
-    Iterable<AnnotationTypeElementDeclaration> _filter = Iterables.<AnnotationTypeElementDeclaration>filter(_map, AnnotationTypeElementDeclaration.class);
-    return _filter;
+    return Iterables.<AnnotationTypeElementDeclaration>filter(_map, AnnotationTypeElementDeclaration.class);
   }
 }

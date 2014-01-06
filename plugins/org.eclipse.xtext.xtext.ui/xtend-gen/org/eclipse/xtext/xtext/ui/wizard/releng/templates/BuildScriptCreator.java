@@ -73,8 +73,7 @@ public class BuildScriptCreator {
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_buckyLocation);
     boolean _not = (!_isNullOrEmpty);
     if (_not) {
-      String _buckyLocation_1 = projectInfo.getBuckyLocation();
-      _xifexpression = _buckyLocation_1;
+      _xifexpression = projectInfo.getBuckyLocation();
     } else {
       _xifexpression = "Add_buckminster_headless_location_here";
     }

@@ -32,13 +32,11 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
   private IQualifiedNameConverter qualifiedNameConverter;
   
   protected String _getQualifiedName(final EObject it, final EObject context) {
-    String _fullyQualifiedName = this.toFullyQualifiedName(it);
-    return _fullyQualifiedName;
+    return this.toFullyQualifiedName(it);
   }
   
   protected String _getQualifiedName(final EObject it, final Void context) {
-    String _fullyQualifiedName = this.toFullyQualifiedName(it);
-    return _fullyQualifiedName;
+    return this.toFullyQualifiedName(it);
   }
   
   protected String _getQualifiedName(final Void it, final EObject context) {
@@ -90,8 +88,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
         return null;
       }
       QualifiedName _fullyQualifiedName = this.getFullyQualifiedName(it);
-      String _string = this.toString(it, _fullyQualifiedName);
-      _xblockexpression = (_string);
+      _xblockexpression = (this.toString(it, _fullyQualifiedName));
     }
     return _xblockexpression;
   }
@@ -103,8 +100,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
       if (_equals) {
         return null;
       }
-      QualifiedName _fullyQualifiedName = this.qualifiedNameProvider.getFullyQualifiedName(it);
-      _xblockexpression = (_fullyQualifiedName);
+      _xblockexpression = (this.qualifiedNameProvider.getFullyQualifiedName(it));
     }
     return _xblockexpression;
   }
@@ -116,8 +112,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
       if (_equals) {
         return null;
       }
-      String _string = this.qualifiedNameConverter.toString(fullyQualifiedName);
-      _xblockexpression = (_string);
+      _xblockexpression = (this.qualifiedNameConverter.toString(fullyQualifiedName));
     }
     return _xblockexpression;
   }

@@ -80,8 +80,7 @@ public class ActiveAnnotationContextProvider {
               boolean _containsKey = _contexts.containsKey(_key);
               boolean _not = (!_containsKey);
               if (_not) {
-                ActiveAnnotationContext _activeAnnotationContext = new ActiveAnnotationContext();
-                final ActiveAnnotationContext fa = _activeAnnotationContext;
+                final ActiveAnnotationContext fa = new ActiveAnnotationContext();
                 fa.setCompilationUnit(compilationUnit);
                 JvmAnnotationType _key_1 = it.getKey();
                 final JvmType processorType = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getProcessorType(_key_1);
@@ -92,8 +91,7 @@ public class ActiveAnnotationContextProvider {
                     String _identifier = processorType.getIdentifier();
                     String _plus = ("Couldn\'t instantiate the annotation processor of type \'" + _identifier);
                     String _plus_1 = (_plus + "\'. This is usually the case when the processor resides in the same project as the annotated element.");
-                    IllegalStateException _illegalStateException = new IllegalStateException(_plus_1);
-                    throw _illegalStateException;
+                    throw new IllegalStateException(_plus_1);
                   }
                   fa.setProcessorInstance(processorInstance);
                 } catch (final Throwable _t) {
@@ -108,13 +106,11 @@ public class ActiveAnnotationContextProvider {
                       if (e_1 instanceof ExceptionInInitializerError) {
                         _matched=true;
                         Throwable _exception = ((ExceptionInInitializerError)e_1).getException();
-                        String _message = _exception.getMessage();
-                        _switchResult = _message;
+                        _switchResult = _exception.getMessage();
                       }
                     }
                     if (!_matched) {
-                      String _message = e_1.getMessage();
-                      _switchResult = _message;
+                      _switchResult = e_1.getMessage();
                     }
                     final String msg = _switchResult;
                     Resource _eResource = file.eResource();
@@ -272,8 +268,7 @@ public class ActiveAnnotationContextProvider {
     EList<XAnnotation> _annotations = candidate.getAnnotations();
     final Function1<XAnnotation,Boolean> _function = new Function1<XAnnotation,Boolean>() {
       public Boolean apply(final XAnnotation it) {
-        boolean _isProcessed = ActiveAnnotationContextProvider.this._xAnnotationExtensions.isProcessed(it);
-        return Boolean.valueOf(_isProcessed);
+        return Boolean.valueOf(ActiveAnnotationContextProvider.this._xAnnotationExtensions.isProcessed(it));
       }
     };
     Iterable<XAnnotation> _filter = IterableExtensions.<XAnnotation>filter(_annotations, _function);

@@ -61,8 +61,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
         public Integer apply(final XAbstractFeatureCall it) {
           List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
           INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
-          int _offset = _head.getOffset();
-          return Integer.valueOf(_offset);
+          return Integer.valueOf(_head.getOffset());
         }
       };
       return IterableExtensions.<XAbstractFeatureCall, Integer>sortBy(featureCalls, _function);
@@ -87,8 +86,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
         return Boolean.valueOf(_and);
       }
     };
-    Iterable<XAbstractFeatureCall> _filter = IterableExtensions.<XAbstractFeatureCall>filter(featureCalls, _function);
-    return _filter;
+    return IterableExtensions.<XAbstractFeatureCall>filter(featureCalls, _function);
   }
   
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {
@@ -100,8 +98,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
       if (_not) {
         Assert.fail(("Duplicate expression under test: " + expression));
       }
-      XExpression _expression = super.expression(expression, resolve);
-      _xblockexpression = (_expression);
+      _xblockexpression = (super.expression(expression, resolve));
     }
     return _xblockexpression;
   }

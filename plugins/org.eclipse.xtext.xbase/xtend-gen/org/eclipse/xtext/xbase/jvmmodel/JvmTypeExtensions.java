@@ -93,8 +93,7 @@ public class JvmTypeExtensions {
   
   public boolean isSynthetic(final JvmIdentifiableElement element) {
     JvmIdentifiableMetaData _metaData = this.getMetaData(element);
-    boolean _isSynthetic = _metaData.isSynthetic();
-    return _isSynthetic;
+    return _metaData.isSynthetic();
   }
   
   public void setSynthetic(final JvmIdentifiableElement element, final boolean isSynthetic) {

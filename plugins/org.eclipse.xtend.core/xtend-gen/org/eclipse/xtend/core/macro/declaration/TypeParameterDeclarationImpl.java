@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
@@ -40,25 +39,21 @@ public class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypePar
       public TypeReference apply(final JvmUpperBound it) {
         CompilationUnitImpl _compilationUnit = TypeParameterDeclarationImpl.this.getCompilationUnit();
         JvmTypeReference _typeReference = it.getTypeReference();
-        TypeReference _typeReference_1 = _compilationUnit.toTypeReference(_typeReference);
-        return _typeReference_1;
+        return _compilationUnit.toTypeReference(_typeReference);
       }
     };
     Iterable<TypeReference> _map = IterableExtensions.<JvmUpperBound, TypeReference>map(_filter, _function);
-    List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
-    return _list;
+    return IterableExtensions.<TypeReference>toList(_map);
   }
   
   public String getSimpleName() {
     JvmTypeParameter _delegate = this.getDelegate();
-    String _name = _delegate.getName();
-    return _name;
+    return _delegate.getName();
   }
   
   public String getQualifiedName() {
     JvmTypeParameter _delegate = this.getDelegate();
-    String _identifier = _delegate.getIdentifier();
-    return _identifier;
+    return _delegate.getIdentifier();
   }
   
   public TypeParameterDeclarator getTypeParameterDeclarator() {
@@ -70,8 +65,7 @@ public class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypePar
   }
   
   public Iterable<? extends AnnotationReference> getAnnotations() {
-    List<AnnotationReference> _emptyList = CollectionLiterals.<AnnotationReference>emptyList();
-    return _emptyList;
+    return CollectionLiterals.<AnnotationReference>emptyList();
   }
   
   public AnnotationReference findAnnotation(final Type annotationType) {

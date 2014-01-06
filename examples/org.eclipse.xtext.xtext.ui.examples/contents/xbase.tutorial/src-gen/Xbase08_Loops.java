@@ -9,8 +9,7 @@ public class Xbase08_Loops {
     ArrayList<String> _xblockexpression = null;
     {
       final ArrayList<String> list = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
-      ArrayList<String> _arrayList = new ArrayList<String>();
-      final ArrayList<String> result = _arrayList;
+      final ArrayList<String> result = new ArrayList<String>();
       List<String> _reverse = ListExtensions.<String>reverse(list);
       for (final String x : _reverse) {
         String _upperCase = x.toUpperCase();

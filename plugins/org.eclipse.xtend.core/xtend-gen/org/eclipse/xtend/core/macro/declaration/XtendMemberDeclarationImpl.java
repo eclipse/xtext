@@ -25,8 +25,7 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     IEObjectDocumentationProvider _documentationProvider = _compilationUnit.getDocumentationProvider();
     T _delegate = this.getDelegate();
-    String _documentation = _documentationProvider.getDocumentation(_delegate);
-    return _documentation;
+    return _documentationProvider.getDocumentation(_delegate);
   }
   
   public TypeDeclaration getDeclaringType() {
@@ -39,8 +38,7 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
       if (container instanceof XtendTypeDeclaration) {
         _matched=true;
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _xtendTypeDeclaration = _compilationUnit.toXtendTypeDeclaration(((XtendTypeDeclaration)container));
-        _switchResult = _xtendTypeDeclaration;
+        _switchResult = _compilationUnit.toXtendTypeDeclaration(((XtendTypeDeclaration)container));
       }
     }
     if (!_matched) {
@@ -53,7 +51,6 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
     JvmVisibility _visibility = _delegate.getVisibility();
-    Visibility _visibility_1 = _compilationUnit.toVisibility(_visibility);
-    return _visibility_1;
+    return _compilationUnit.toVisibility(_visibility);
   }
 }

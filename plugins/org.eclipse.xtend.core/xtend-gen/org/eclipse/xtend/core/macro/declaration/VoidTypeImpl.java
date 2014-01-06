@@ -37,7 +37,6 @@ public class VoidTypeImpl extends AbstractElementImpl<JvmVoid> implements VoidTy
   }
   
   public String getQualifiedName() {
-    String _simpleName = this.getSimpleName();
-    return _simpleName;
+    return this.getSimpleName();
   }
 }

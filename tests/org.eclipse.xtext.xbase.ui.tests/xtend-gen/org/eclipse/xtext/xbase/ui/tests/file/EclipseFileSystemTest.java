@@ -69,8 +69,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
     try {
       IWorkspace _workspace = ResourcesPlugin.getWorkspace();
       final IWorkspaceRoot root = _workspace.getRoot();
-      ProjectDescription _projectDescription = new ProjectDescription();
-      final ProjectDescription description = _projectDescription;
+      final ProjectDescription description = new ProjectDescription();
       description.setName("bar");
       IPath _location = root.getLocation();
       IPath _append = _location.append("foo/bar");
@@ -78,8 +77,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
       final IProject project = root.getProject("bar");
       project.create(description, null);
       project.open(null);
-      Path _path = new Path("/bar/Foo.text");
-      final Path file = _path;
+      final Path file = new Path("/bar/Foo.text");
       boolean _exists = this.fs.exists(file);
       Assert.assertFalse(_exists);
       URI _uRI = this.fs.toURI(file);
@@ -92,14 +90,12 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
       String _string = uri.toString();
       boolean _endsWith = _string.endsWith("/foo/bar/Foo.text");
       Assert.assertTrue(("" + uri), _endsWith);
-      File _file = new File(uri);
-      final File javaIoFile = _file;
+      final File javaIoFile = new File(uri);
       boolean _exists_2 = javaIoFile.exists();
       Assert.assertTrue(_exists_2);
       long _length = javaIoFile.length();
       final byte[] data = new byte[((int) _length)];
-      FileInputStream _fileInputStream = new FileInputStream(javaIoFile);
-      final FileInputStream fis = _fileInputStream;
+      final FileInputStream fis = new FileInputStream(javaIoFile);
       fis.read(data);
       fis.close();
       String _string_1 = new String(data);

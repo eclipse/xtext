@@ -27,14 +27,12 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendField _delegate = this.getDelegate();
     JvmVisibility _visibility = _delegate.getVisibility();
-    Visibility _visibility_1 = _compilationUnit.toVisibility(_visibility);
-    return _visibility_1;
+    return _compilationUnit.toVisibility(_visibility);
   }
   
   public String getSimpleName() {
     XtendField _delegate = this.getDelegate();
-    String _name = _delegate.getName();
-    return _name;
+    return _delegate.getName();
   }
   
   public Expression getInitializer() {
@@ -52,14 +50,12 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
   
   public boolean isFinal() {
     XtendField _delegate = this.getDelegate();
-    boolean _isFinal = _delegate.isFinal();
-    return _isFinal;
+    return _delegate.isFinal();
   }
   
   public boolean isStatic() {
     XtendField _delegate = this.getDelegate();
-    boolean _isStatic = _delegate.isStatic();
-    return _isStatic;
+    return _delegate.isStatic();
   }
   
   public boolean isTransient() {
@@ -74,8 +70,7 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendField _delegate = this.getDelegate();
     JvmTypeReference _type = _delegate.getType();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_type);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_type);
   }
   
   public ClassDeclaration getDeclaringType() {

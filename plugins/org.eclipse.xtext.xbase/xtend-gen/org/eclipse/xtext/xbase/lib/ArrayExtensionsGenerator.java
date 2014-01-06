@@ -40,13 +40,11 @@ public class ArrayExtensionsGenerator {
     try {
       String _xblockexpression = null;
       {
-        File _file = new File("../org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ArrayExtensions.java");
-        final File file = _file;
+        final File file = new File("../org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ArrayExtensions.java");
         boolean _exists = file.exists();
         boolean _not = (!_exists);
         if (_not) {
-          IllegalStateException _illegalStateException = new IllegalStateException((("file " + file) + " doesn\'t exist."));
-          throw _illegalStateException;
+          throw new IllegalStateException((("file " + file) + " doesn\'t exist."));
         }
         String _absolutePath = file.getAbsolutePath();
         final String content = Files.readFileIntoString(_absolutePath);
@@ -54,8 +52,7 @@ public class ArrayExtensionsGenerator {
         int _indexOf = content.indexOf(_startMarker);
         boolean _equals = (_indexOf == (-1));
         if (_equals) {
-          IllegalStateException _illegalStateException_1 = new IllegalStateException((("File " + file) + " doesn\'t contain \'// BEGIN generated code\' marker."));
-          throw _illegalStateException_1;
+          throw new IllegalStateException((("File " + file) + " doesn\'t contain \'// BEGIN generated code\' marker."));
         }
         StringConcatenation _builder = new StringConcatenation();
         String _startMarker_1 = this.startMarker();
@@ -78,12 +75,10 @@ public class ArrayExtensionsGenerator {
         _builder.append(_substring_1, "");
         _builder.newLineIfNotEmpty();
         final String newContent = _builder.toString();
-        FileWriter _fileWriter = new FileWriter(file);
-        final FileWriter writer = _fileWriter;
+        final FileWriter writer = new FileWriter(file);
         writer.append(newContent);
         writer.close();
-        String _println = InputOutput.<String>println("generation finished");
-        _xblockexpression = (_println);
+        _xblockexpression = (InputOutput.<String>println("generation finished"));
       }
       return _xblockexpression;
     } catch (Throwable _e) {

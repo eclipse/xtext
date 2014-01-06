@@ -195,22 +195,19 @@ public class LoopExtensionsTest extends AbstractXbaseTestCase {
     final ArrayList<String> all = CollectionLiterals.<String>newArrayList("jan", "hein", "class", "pit");
     final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
       public Boolean apply(final String it) {
-        boolean _equals = Objects.equal(it, "jan");
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(it, "jan"));
       }
     };
     this.assertForEachWithSkip(all, _function, "{hein, class, pit}");
     final Function1<String,Boolean> _function_1 = new Function1<String,Boolean>() {
       public Boolean apply(final String it) {
-        boolean _equals = Objects.equal(it, "hein");
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(it, "hein"));
       }
     };
     this.assertForEachWithSkip(all, _function_1, "{jan, class, pit}");
     final Function1<String,Boolean> _function_2 = new Function1<String,Boolean>() {
       public Boolean apply(final String it) {
-        boolean _equals = Objects.equal(it, "pit");
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(it, "pit"));
       }
     };
     this.assertForEachWithSkip(all, _function_2, "{jan, hein, class}");
@@ -233,8 +230,7 @@ public class LoopExtensionsTest extends AbstractXbaseTestCase {
   }
   
   protected void assertForEach(final Iterable<String> elements, final Procedure1<? super LoopParams> params, final String expectedResult) {
-    FakeTreeAppendable _fakeTreeAppendable = new FakeTreeAppendable();
-    final FakeTreeAppendable app = _fakeTreeAppendable;
+    final FakeTreeAppendable app = new FakeTreeAppendable();
     final Procedure1<String> _function = new Procedure1<String>() {
       public void apply(final String it) {
         app.append(it);
@@ -246,8 +242,7 @@ public class LoopExtensionsTest extends AbstractXbaseTestCase {
   }
   
   protected void assertForEachWithSkip(final Iterable<String> elements, final Function1<? super String,? extends Boolean> append, final String expectedResult) {
-    FakeTreeAppendable _fakeTreeAppendable = new FakeTreeAppendable();
-    final FakeTreeAppendable app = _fakeTreeAppendable;
+    final FakeTreeAppendable app = new FakeTreeAppendable();
     final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
       public void apply(final LoopParams it) {
         it.setPrefix("{");
@@ -270,8 +265,7 @@ public class LoopExtensionsTest extends AbstractXbaseTestCase {
   }
   
   protected void assertForEachWithShortcut(final Iterable<String> elements, final String expectedResult) {
-    FakeTreeAppendable _fakeTreeAppendable = new FakeTreeAppendable();
-    final FakeTreeAppendable app = _fakeTreeAppendable;
+    final FakeTreeAppendable app = new FakeTreeAppendable();
     final Procedure1<String> _function = new Procedure1<String>() {
       public void apply(final String it) {
         app.append(it);

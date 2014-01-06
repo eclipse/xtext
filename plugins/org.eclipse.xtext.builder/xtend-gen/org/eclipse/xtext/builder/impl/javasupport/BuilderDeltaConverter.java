@@ -27,7 +27,6 @@ public class BuilderDeltaConverter extends DeltaConverter {
   }
   
   public IResourceDescription.Delta createStructureChangeDelta(final IType type, final IResourceDescription oldDescription, final IResourceDescription newDescription) {
-    UnconfirmedStructuralChangesDelta _unconfirmedStructuralChangesDelta = new UnconfirmedStructuralChangesDelta(type, oldDescription, newDescription);
-    return _unconfirmedStructuralChangesDelta;
+    return new UnconfirmedStructuralChangesDelta(type, oldDescription, newDescription);
   }
 }

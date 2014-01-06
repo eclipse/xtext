@@ -70,7 +70,6 @@ public class Line {
     String _join = IterableExtensions.join(_chunks);
     String _plus_1 = (_plus + _join);
     String _content = this.getContent();
-    String _plus_2 = (_plus_1 + _content);
-    return _plus_2;
+    return (_plus_1 + _content);
   }
 }
