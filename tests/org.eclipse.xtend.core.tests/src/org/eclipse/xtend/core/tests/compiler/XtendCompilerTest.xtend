@@ -47,6 +47,46 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test def testBug424839() {
+		'''
+			class Foo {
+				val a = bug424839.Bug424839
+				val b = bug424839.sub.Bug424839.Inner
+			}
+		'''.assertCompilesTo(
+			'''
+				import bug424839.Bug424839;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  private final Class<Bug424839> a = Bug424839.class;
+				  
+				  private final Class<bug424839.sub.Bug424839.Inner> b = bug424839.sub.Bug424839.Inner.class;
+				}
+			'''
+		)
+	}
+	
+	@Test def testBug424839_2() {
+		'''
+			class Foo {
+				val b = bug424839.sub.Bug424839.Inner
+				val a = bug424839.Bug424839
+			}
+		'''.assertCompilesTo(
+			'''
+				import bug424839.sub.Bug424839;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  private final Class<Bug424839.Inner> b = Bug424839.Inner.class;
+				  
+				  private final Class<bug424839.Bug424839> a = bug424839.Bug424839.class;
+				}
+			'''
+		)
+	}
 
 	@Test
 	def testBug411861() {
