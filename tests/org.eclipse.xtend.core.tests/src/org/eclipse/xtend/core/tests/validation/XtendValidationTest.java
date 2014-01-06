@@ -1921,7 +1921,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	@Test 
 	public void testInvalidTypeParameterConstraint_0() throws Exception {
 		XtendFunction function = function("def <T extends String[]> foo(T x) {}");
-		helper.assertError(function, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE, INVALID_TYPE_PARAMETER_BOUNDS);
+		helper.assertError(function, TypesPackage.Literals.JVM_GENERIC_ARRAY_TYPE_REFERENCE, INVALID_TYPE_PARAMETER_BOUNDS, " String[]");
 	}
 	
 	@Test 
