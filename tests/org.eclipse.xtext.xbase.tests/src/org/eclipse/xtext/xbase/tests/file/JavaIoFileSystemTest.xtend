@@ -74,6 +74,8 @@ class JavaIoFileSystemTest {
 	
 	@Test def void testModificationStamp() {
 		val path = new Path('/foo/src/my/pack/Foo.txt')
+		assertEquals(0L, path.lastModification)
+		
 		path.contents = "Hello Foo"
 		val mod = path.lastModification
 		assertEquals("Hello Foo",path.contents)

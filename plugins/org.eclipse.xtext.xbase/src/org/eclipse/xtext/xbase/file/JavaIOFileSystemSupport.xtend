@@ -20,6 +20,8 @@ import com.google.inject.Provider
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import org.eclipse.emf.ecore.resource.Resource
+import java.io.FileNotFoundException
+import java.io.IOException
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -63,7 +65,11 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 	}
 
 	override InputStream getContentsAsStream(Path path) {
-		return new BufferedInputStream(new FileInputStream(path.javaIOFile))
+		try {
+			return new BufferedInputStream(new FileInputStream(path.javaIOFile))
+		} catch (FileNotFoundException exc) {
+			throw new IllegalArgumentException(exc.message, exc)
+		}
 	}
 	
 	override boolean mkdir(Path path) {
@@ -81,7 +87,11 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 		if (!path.exists)
 			return false;
 		if (path.javaIOFile.directory) {
-			Files.sweepFolder(path.javaIOFile)
+			try {
+				Files.sweepFolder(path.javaIOFile)
+			} catch (FileNotFoundException exc) {
+				throw new IllegalArgumentException(exc.message, exc)
+			}
 		}
 		path.javaIOFile.delete
 		return true
@@ -89,7 +99,11 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 
 	override void setContentsAsStream(Path path, InputStream stream) {
 		path.parent.mkdir
-		ByteStreams.copy(|stream) [| new BufferedOutputStream(new FileOutputStream(path.javaIOFile))]
+		try {
+			ByteStreams.copy(|stream) [| new BufferedOutputStream(new FileOutputStream(path.javaIOFile))]
+		} catch (IOException exc) {
+			throw new IllegalArgumentException(exc.message, exc)
+		}
 	}
 	
 	override toURI(Path path) {
