@@ -43,8 +43,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
       List<TypeUsage> _unresolvedTypeUsages = typeUsages.getUnresolvedTypeUsages();
       final Function1<TypeUsage,String> _function = new Function1<TypeUsage,String>() {
         public String apply(final TypeUsage it) {
-          String _usedTypeName = it.getUsedTypeName();
-          return _usedTypeName;
+          return it.getUsedTypeName();
         }
       };
       List<String> _map = ListExtensions.<TypeUsage, String>map(_unresolvedTypeUsages, _function);
@@ -65,8 +64,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
       List<TypeUsage> _unresolvedTypeUsages = typeUsages.getUnresolvedTypeUsages();
       final Function1<TypeUsage,String> _function = new Function1<TypeUsage,String>() {
         public String apply(final TypeUsage it) {
-          String _suffix = it.getSuffix();
-          return _suffix;
+          return it.getSuffix();
         }
       };
       List<String> _map = ListExtensions.<TypeUsage, String>map(_unresolvedTypeUsages, _function);

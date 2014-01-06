@@ -31,8 +31,7 @@ public abstract class JvmElementImpl<T extends EObject> extends AbstractElementI
       T _delegate_3 = this.getDelegate();
       String _string = _delegate_3.toString();
       String _plus = ("Couldn\'t remove " + _string);
-      IllegalStateException _illegalStateException = new IllegalStateException(_plus);
-      throw _illegalStateException;
+      throw new IllegalStateException(_plus);
     }
   }
 }

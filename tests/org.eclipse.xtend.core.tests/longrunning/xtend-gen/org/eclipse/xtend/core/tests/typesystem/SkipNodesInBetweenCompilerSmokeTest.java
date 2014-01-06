@@ -77,8 +77,7 @@ public class SkipNodesInBetweenCompilerSmokeTest extends AbstractCompilerSmokeTe
             if (_or) {
               ReplaceRegion _replaceRegion = new ReplaceRegion(offset, length, "");
               region = _replaceRegion;
-              StringBuilder _stringBuilder = new StringBuilder(input);
-              final StringBuilder builder = _stringBuilder;
+              final StringBuilder builder = new StringBuilder(input);
               region.applyTo(builder);
               String _string = builder.toString();
               this.processFile(_string);

@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -43,18 +42,15 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {
       public MutableTypeParameterDeclaration apply(final JvmTypeParameter it) {
         CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
-        MutableTypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
-        return _typeParameterDeclaration;
+        return _compilationUnit.toTypeParameterDeclaration(it);
       }
     };
-    List<MutableTypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, MutableTypeParameterDeclaration>map(_typeParameters, _function);
-    return _map;
+    return ListExtensions.<JvmTypeParameter, MutableTypeParameterDeclaration>map(_typeParameters, _function);
   }
   
   public boolean isVarArgs() {
     T _delegate = this.getDelegate();
-    boolean _isVarArgs = _delegate.isVarArgs();
-    return _isVarArgs;
+    return _delegate.isVarArgs();
   }
   
   public Iterable<? extends MutableParameterDeclaration> getParameters() {
@@ -63,12 +59,10 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     final Function1<JvmFormalParameter,MutableParameterDeclaration> _function = new Function1<JvmFormalParameter,MutableParameterDeclaration>() {
       public MutableParameterDeclaration apply(final JvmFormalParameter it) {
         CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
-        MutableParameterDeclaration _parameterDeclaration = _compilationUnit.toParameterDeclaration(it);
-        return _parameterDeclaration;
+        return _compilationUnit.toParameterDeclaration(it);
       }
     };
-    List<MutableParameterDeclaration> _map = ListExtensions.<JvmFormalParameter, MutableParameterDeclaration>map(_parameters, _function);
-    return _map;
+    return ListExtensions.<JvmFormalParameter, MutableParameterDeclaration>map(_parameters, _function);
   }
   
   public Iterable<? extends TypeReference> getExceptions() {
@@ -77,12 +71,10 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
       public TypeReference apply(final JvmTypeReference it) {
         CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
-        TypeReference _typeReference = _compilationUnit.toTypeReference(it);
-        return _typeReference;
+        return _compilationUnit.toTypeReference(it);
       }
     };
-    List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(_exceptions, _function);
-    return _map;
+    return ListExtensions.<JvmTypeReference, TypeReference>map(_exceptions, _function);
   }
   
   public Expression getBody() {
@@ -93,8 +85,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
       T _delegate = this.getDelegate();
       final XExpression expression = _jvmTypesBuilder.getExpression(_delegate);
       CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-      Expression _expression = _compilationUnit_1.toExpression(expression);
-      _xblockexpression = (_expression);
+      _xblockexpression = (_compilationUnit_1.toExpression(expression));
     }
     return _xblockexpression;
   }

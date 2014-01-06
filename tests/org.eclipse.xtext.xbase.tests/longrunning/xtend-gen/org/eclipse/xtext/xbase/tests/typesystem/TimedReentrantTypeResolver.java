@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
 public class TimedReentrantTypeResolver extends DefaultReentrantTypeResolver {
   public RootResolvedTypes createResolvedTypes() {
     TypeResolutionTimes _typeResolutionTimes = new TypeResolutionTimes();
-    TimedRootResolvedTypes _timedRootResolvedTypes = new TimedRootResolvedTypes(this, _typeResolutionTimes);
-    return _timedRootResolvedTypes;
+    return new TimedRootResolvedTypes(this, _typeResolutionTimes);
   }
 }

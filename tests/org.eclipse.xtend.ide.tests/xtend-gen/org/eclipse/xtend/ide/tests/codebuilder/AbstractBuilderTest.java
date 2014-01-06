@@ -104,22 +104,19 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
   
   protected LightweightTypeReference createTypeRef(final JvmType type) {
     StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, type);
-    ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(_standardTypeReferenceOwner, type);
-    return _parameterizedTypeReference;
+    return new ParameterizedTypeReference(_standardTypeReferenceOwner, type);
   }
   
   protected LightweightTypeReference createTypeRef(final Class<? extends Object> clazz, final EObject context) {
     StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, context);
     JvmType _findDeclaredType = this._typeReferences.findDeclaredType(clazz, context);
-    ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(_standardTypeReferenceOwner, _findDeclaredType);
-    return _parameterizedTypeReference;
+    return new ParameterizedTypeReference(_standardTypeReferenceOwner, _findDeclaredType);
   }
   
   protected void assertBuilds(final ICodeBuilder builder, final String expectedCode) {
     boolean _isValid = builder.isValid();
     Assert.assertTrue(_isValid);
-    StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable();
-    final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
+    final StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
     builder.build(appendable);
     String _string = appendable.toString();
     Assert.assertEquals(expectedCode, _string);

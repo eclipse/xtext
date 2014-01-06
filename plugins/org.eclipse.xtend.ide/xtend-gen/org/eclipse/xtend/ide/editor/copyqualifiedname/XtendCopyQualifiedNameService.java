@@ -29,13 +29,11 @@ import org.eclipse.xtext.xbase.ui.editor.copyqualifiedname.XbaseCopyQualifiedNam
 @SuppressWarnings("all")
 public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService {
   protected String _getQualifiedName(final XtendFunction it, final EObject context) {
-    String _qualifiedName = this.toQualifiedName(it);
-    return _qualifiedName;
+    return this.toQualifiedName(it);
   }
   
   protected String _getQualifiedName(final XtendFunction it, final Void context) {
-    String _qualifiedName = this.toQualifiedName(it);
-    return _qualifiedName;
+    return this.toQualifiedName(it);
   }
   
   protected String toQualifiedName(final XtendFunction it) {
@@ -47,8 +45,7 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
     final Function1<XtendParameter,String> _function = new Function1<XtendParameter,String>() {
       public String apply(final XtendParameter it) {
         JvmTypeReference _parameterType = it.getParameterType();
-        String _simpleName = _parameterType.getSimpleName();
-        return _simpleName;
+        return _parameterType.getSimpleName();
       }
     };
     CharSequence _qualifiedNames = this.<XtendParameter>toQualifiedNames(_parameters, _function);
@@ -58,13 +55,11 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
   }
   
   protected String _getQualifiedName(final XtendConstructor it, final EObject context) {
-    String _qualifiedName = this.toQualifiedName(it);
-    return _qualifiedName;
+    return this.toQualifiedName(it);
   }
   
   protected String _getQualifiedName(final XtendConstructor it, final Void context) {
-    String _qualifiedName = this.toQualifiedName(it);
-    return _qualifiedName;
+    return this.toQualifiedName(it);
   }
   
   protected String toQualifiedName(final XtendConstructor it) {
@@ -76,8 +71,7 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
     final Function1<XtendParameter,String> _function = new Function1<XtendParameter,String>() {
       public String apply(final XtendParameter it) {
         JvmTypeReference _parameterType = it.getParameterType();
-        String _simpleName = _parameterType.getSimpleName();
-        return _simpleName;
+        return _parameterType.getSimpleName();
       }
     };
     CharSequence _qualifiedNames = this.<XtendParameter>toQualifiedNames(_parameters, _function);

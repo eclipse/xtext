@@ -143,8 +143,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       this.builder.<JvmGenericType>operator_add(_contents, clazz);
       Resource _eResource_2 = expression.eResource();
       _eResource_2.eSetDeliver(true);
-      InMemoryFileSystemAccess _inMemoryFileSystemAccess = new InMemoryFileSystemAccess();
-      final InMemoryFileSystemAccess fsa = _inMemoryFileSystemAccess;
+      final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
       Resource _eResource_3 = expression.eResource();
       this.generator.doGenerate(_eResource_3, fsa);
       Map<String,CharSequence> _files = fsa.getFiles();
@@ -279,8 +278,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Function1<Method,Boolean> _function_1 = new Function1<Method,Boolean>() {
         public Boolean apply(final Method it) {
           String _name = it.getName();
-          boolean _equals = Objects.equal(_name, "value");
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(Objects.equal(_name, "value"));
         }
       };
       Method _findFirst = IterableExtensions.<Method>findFirst(((Iterable<Method>)Conversions.doWrapArray(_methods)), _function_1);
@@ -290,8 +288,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Function1<Method,Boolean> _function_2 = new Function1<Method,Boolean>() {
         public Boolean apply(final Method it) {
           String _name = it.getName();
-          boolean _equals = Objects.equal(_name, "otherValue");
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(Objects.equal(_name, "otherValue"));
         }
       };
       Method _findFirst_1 = IterableExtensions.<Method>findFirst(((Iterable<Method>)Conversions.doWrapArray(_methods_1)), _function_2);
@@ -716,8 +713,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Function1<Class<? extends Object>,Boolean> _function_1 = new Function1<Class<? extends Object>,Boolean>() {
         public Boolean apply(final Class<? extends Object> it) {
           String _name = it.getName();
-          boolean _endsWith = _name.endsWith("AbstractClass");
-          return Boolean.valueOf(_endsWith);
+          return Boolean.valueOf(_name.endsWith("AbstractClass"));
         }
       };
       Class<? extends Object> _findFirst = IterableExtensions.<Class<? extends Object>>findFirst(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(classes)), _function_1);
@@ -727,8 +723,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Function1<Class<? extends Object>,Boolean> _function_2 = new Function1<Class<? extends Object>,Boolean>() {
         public Boolean apply(final Class<? extends Object> it) {
           String _name = it.getName();
-          boolean _endsWith = _name.endsWith("StaticClass");
-          return Boolean.valueOf(_endsWith);
+          return Boolean.valueOf(_name.endsWith("StaticClass"));
         }
       };
       Class<? extends Object> _findFirst_1 = IterableExtensions.<Class<? extends Object>>findFirst(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(classes)), _function_2);
@@ -738,8 +733,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Function1<Class<? extends Object>,Boolean> _function_3 = new Function1<Class<? extends Object>,Boolean>() {
         public Boolean apply(final Class<? extends Object> it) {
           String _name = it.getName();
-          boolean _endsWith = _name.endsWith("FinalClass");
-          return Boolean.valueOf(_endsWith);
+          return Boolean.valueOf(_name.endsWith("FinalClass"));
         }
       };
       Class<? extends Object> _findFirst_2 = IterableExtensions.<Class<? extends Object>>findFirst(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(classes)), _function_3);
@@ -959,8 +953,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   
   public Class<? extends Object> compile(final Resource res, final JvmDeclaredType type) {
     String _generate = this.generate(res, type);
-    Class<? extends Object> _compileToClass = this.compileToClass(res, type, _generate);
-    return _compileToClass;
+    return this.compileToClass(res, type, _generate);
   }
   
   public String generate(final Resource res, final JvmDeclaredType type) {
@@ -970,8 +963,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       EList<EObject> _contents = res.getContents();
       this.builder.<JvmDeclaredType>operator_add(_contents, type);
       res.eSetDeliver(true);
-      InMemoryFileSystemAccess _inMemoryFileSystemAccess = new InMemoryFileSystemAccess();
-      final InMemoryFileSystemAccess fsa = _inMemoryFileSystemAccess;
+      final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
       this.generator.doGenerate(res, fsa);
       Map<String,CharSequence> _files = fsa.getFiles();
       String _identifier = type.getIdentifier();
@@ -979,8 +971,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       String _plus = (IFileSystemAccess.DEFAULT_OUTPUT + _replace);
       String _plus_1 = (_plus + ".java");
       CharSequence _get = _files.get(_plus_1);
-      String _string = _get.toString();
-      _xblockexpression = (_string);
+      _xblockexpression = (_get.toString());
     }
     return _xblockexpression;
   }

@@ -359,8 +359,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
   public XtendFunction getFirstMethod(final XtendFile file) {
     TreeIterator<EObject> _eAllContents = file.eAllContents();
     Iterator<XtendFunction> _filter = Iterators.<XtendFunction>filter(_eAllContents, XtendFunction.class);
-    XtendFunction _head = IteratorExtensions.<XtendFunction>head(_filter);
-    return _head;
+    return IteratorExtensions.<XtendFunction>head(_filter);
   }
   
   @Test
@@ -819,8 +818,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
     Injector _injector = this.getInjector();
     IResourceSetProvider _instance = _injector.<IResourceSetProvider>getInstance(IResourceSetProvider.class);
     IProject _project = this.testHelper.getProject();
-    ResourceSet _get = _instance.get(_project);
-    return _get;
+    return _instance.get(_project);
   }
   
   @After

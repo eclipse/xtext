@@ -34,8 +34,7 @@ public class Case_0 {
       String _xifexpression = null;
       boolean _isUpper = this.isUpper(a);
       if (_isUpper) {
-        String _another = this.another(a, (b + "holla"));
-        _xifexpression = _another;
+        _xifexpression = this.another(a, (b + "holla"));
       } else {
         String _xblockexpression_1 = null;
         {
@@ -55,8 +54,7 @@ public class Case_0 {
   
   public boolean isUpper(final String s) {
     String _upperCase = s.toUpperCase();
-    boolean _equals = Objects.equal(_upperCase, s);
-    return _equals;
+    return Objects.equal(_upperCase, s);
   }
   
   public String another(final String x, final String y) {

@@ -47,13 +47,11 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
     XtendFile _xtendFile = this.compilationUnit.getXtendFile();
     JvmAnyTypeReference _createAnyTypeReference = _typeReferences.createAnyTypeReference(_xtendFile);
-    TypeReference _typeReference = this.compilationUnit.toTypeReference(_createAnyTypeReference);
-    return _typeReference;
+    return this.compilationUnit.toTypeReference(_createAnyTypeReference);
   }
   
   public TypeReference getList(final TypeReference param) {
-    TypeReference _newTypeReference = this.newTypeReference("java.util.List", param);
-    return _newTypeReference;
+    return this.newTypeReference("java.util.List", param);
   }
   
   public TypeReference getObject() {
@@ -61,63 +59,51 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     XtendFile _xtendFile = this.compilationUnit.getXtendFile();
     JvmType _findDeclaredType = _typeReferences.findDeclaredType(Object.class, _xtendFile);
     JvmParameterizedTypeReference _createTypeRef = this.createTypeRef(_findDeclaredType);
-    TypeReference _typeReference = this.compilationUnit.toTypeReference(_createTypeRef);
-    return _typeReference;
+    return this.compilationUnit.toTypeReference(_createTypeRef);
   }
   
   public TypeReference getPrimitiveBoolean() {
-    TypeReference _newTypeReference = this.newTypeReference("boolean");
-    return _newTypeReference;
+    return this.newTypeReference("boolean");
   }
   
   public TypeReference getPrimitiveByte() {
-    TypeReference _newTypeReference = this.newTypeReference("byte");
-    return _newTypeReference;
+    return this.newTypeReference("byte");
   }
   
   public TypeReference getPrimitiveChar() {
-    TypeReference _newTypeReference = this.newTypeReference("char");
-    return _newTypeReference;
+    return this.newTypeReference("char");
   }
   
   public TypeReference getPrimitiveDouble() {
-    TypeReference _newTypeReference = this.newTypeReference("double");
-    return _newTypeReference;
+    return this.newTypeReference("double");
   }
   
   public TypeReference getPrimitiveFloat() {
-    TypeReference _newTypeReference = this.newTypeReference("float");
-    return _newTypeReference;
+    return this.newTypeReference("float");
   }
   
   public TypeReference getPrimitiveInt() {
-    TypeReference _newTypeReference = this.newTypeReference("int");
-    return _newTypeReference;
+    return this.newTypeReference("int");
   }
   
   public TypeReference getPrimitiveLong() {
-    TypeReference _newTypeReference = this.newTypeReference("long");
-    return _newTypeReference;
+    return this.newTypeReference("long");
   }
   
   public TypeReference getPrimitiveShort() {
-    TypeReference _newTypeReference = this.newTypeReference("short");
-    return _newTypeReference;
+    return this.newTypeReference("short");
   }
   
   public TypeReference getPrimitiveVoid() {
-    TypeReference _newTypeReference = this.newTypeReference("void");
-    return _newTypeReference;
+    return this.newTypeReference("void");
   }
   
   public TypeReference getSet(final TypeReference param) {
-    TypeReference _newTypeReference = this.newTypeReference("java.util.Set", param);
-    return _newTypeReference;
+    return this.newTypeReference("java.util.Set", param);
   }
   
   public TypeReference getString() {
-    TypeReference _newTypeReference = this.newTypeReference("java.lang.String");
-    return _newTypeReference;
+    return this.newTypeReference("java.lang.String");
   }
   
   public TypeReference newArrayTypeReference(final TypeReference componentType) {
@@ -127,8 +113,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       JvmTypeReference _jvmTypeReference = this.compilationUnit.toJvmTypeReference(componentType);
       JvmGenericArrayTypeReference _createArrayType = _typeReferences.createArrayType(_jvmTypeReference);
-      TypeReference _typeReference = this.compilationUnit.toTypeReference(_createArrayType);
-      _xblockexpression = (_typeReference);
+      _xblockexpression = (this.compilationUnit.toTypeReference(_createArrayType));
     }
     return _xblockexpression;
   }
@@ -146,14 +131,12 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       }
       final Function1<TypeReference,JvmTypeReference> _function = new Function1<TypeReference,JvmTypeReference>() {
         public JvmTypeReference apply(final TypeReference it) {
-          JvmTypeReference _jvmTypeReference = TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
-          return _jvmTypeReference;
+          return TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
         }
       };
       List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
       JvmParameterizedTypeReference _createTypeRef = this.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
-      TypeReference _typeReference = this.compilationUnit.toTypeReference(_createTypeRef);
-      _xblockexpression = (_typeReference);
+      _xblockexpression = (this.compilationUnit.toTypeReference(_createTypeRef));
     }
     return _xblockexpression;
   }
@@ -161,8 +144,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
   public JvmParameterizedTypeReference createTypeRef(final JvmType type, final JvmTypeReference... typeArgs) {
     boolean _equals = Objects.equal(type, null);
     if (_equals) {
-      NullPointerException _nullPointerException = new NullPointerException("type");
-      throw _nullPointerException;
+      throw new NullPointerException("type");
     }
     final JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
     reference.setType(type);
@@ -197,8 +179,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         int _size_3 = _arguments_3.size();
         String _plus_4 = (_plus_3 + Integer.valueOf(_size_3));
         String _plus_5 = (_plus_4 + ". Either pass zero arguments (raw type) or the correct number.");
-        IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus_5);
-        throw _illegalArgumentException;
+        throw new IllegalArgumentException(_plus_5);
       }
     }
     return reference;
@@ -213,8 +194,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       if (!_matched) {
         if (typeDeclaration instanceof JvmTypeDeclarationImpl) {
           _matched=true;
-          JvmDeclaredType _delegate = ((JvmTypeDeclarationImpl<? extends JvmDeclaredType>)typeDeclaration).getDelegate();
-          _switchResult = _delegate;
+          _switchResult = ((JvmTypeDeclarationImpl<? extends JvmDeclaredType>)typeDeclaration).getDelegate();
         }
       }
       if (!_matched) {
@@ -222,15 +202,13 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
           _matched=true;
           IXtendJvmAssociations _jvmAssociations = this.compilationUnit.getJvmAssociations();
           XtendTypeDeclaration _delegate = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)typeDeclaration).getDelegate();
-          JvmDeclaredType _inferredType = _jvmAssociations.getInferredType(_delegate);
-          _switchResult = _inferredType;
+          _switchResult = _jvmAssociations.getInferredType(_delegate);
         }
       }
       if (!_matched) {
         if (typeDeclaration instanceof JvmTypeParameterDeclarationImpl) {
           _matched=true;
-          JvmTypeParameter _delegate = ((JvmTypeParameterDeclarationImpl)typeDeclaration).getDelegate();
-          _switchResult = _delegate;
+          _switchResult = ((JvmTypeParameterDeclarationImpl)typeDeclaration).getDelegate();
         }
       }
       if (!_matched) {
@@ -243,57 +221,49 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
           if (!_matched_1) {
             if (Objects.equal(_switchValue,PrimitiveType.Kind.BOOLEAN)) {
               _matched_1=true;
-              TypeReference _primitiveBoolean = this.getPrimitiveBoolean();
-              _switchResult_1 = _primitiveBoolean;
+              _switchResult_1 = this.getPrimitiveBoolean();
             }
           }
           if (!_matched_1) {
             if (Objects.equal(_switchValue,PrimitiveType.Kind.BYTE)) {
               _matched_1=true;
-              TypeReference _primitiveByte = this.getPrimitiveByte();
-              _switchResult_1 = _primitiveByte;
+              _switchResult_1 = this.getPrimitiveByte();
             }
           }
           if (!_matched_1) {
             if (Objects.equal(_switchValue,PrimitiveType.Kind.CHAR)) {
               _matched_1=true;
-              TypeReference _primitiveChar = this.getPrimitiveChar();
-              _switchResult_1 = _primitiveChar;
+              _switchResult_1 = this.getPrimitiveChar();
             }
           }
           if (!_matched_1) {
             if (Objects.equal(_switchValue,PrimitiveType.Kind.DOUBLE)) {
               _matched_1=true;
-              TypeReference _primitiveDouble = this.getPrimitiveDouble();
-              _switchResult_1 = _primitiveDouble;
+              _switchResult_1 = this.getPrimitiveDouble();
             }
           }
           if (!_matched_1) {
             if (Objects.equal(_switchValue,PrimitiveType.Kind.FLOAT)) {
               _matched_1=true;
-              TypeReference _primitiveFloat = this.getPrimitiveFloat();
-              _switchResult_1 = _primitiveFloat;
+              _switchResult_1 = this.getPrimitiveFloat();
             }
           }
           if (!_matched_1) {
             if (Objects.equal(_switchValue,PrimitiveType.Kind.INT)) {
               _matched_1=true;
-              TypeReference _primitiveInt = this.getPrimitiveInt();
-              _switchResult_1 = _primitiveInt;
+              _switchResult_1 = this.getPrimitiveInt();
             }
           }
           if (!_matched_1) {
             if (Objects.equal(_switchValue,PrimitiveType.Kind.LONG)) {
               _matched_1=true;
-              TypeReference _primitiveLong = this.getPrimitiveLong();
-              _switchResult_1 = _primitiveLong;
+              _switchResult_1 = this.getPrimitiveLong();
             }
           }
           if (!_matched_1) {
             if (Objects.equal(_switchValue,PrimitiveType.Kind.SHORT)) {
               _matched_1=true;
-              TypeReference _primitiveShort = this.getPrimitiveShort();
-              _switchResult_1 = _primitiveShort;
+              _switchResult_1 = this.getPrimitiveShort();
             }
           }
           return _switchResult_1;
@@ -306,8 +276,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         }
       }
       if (!_matched) {
-        IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(("couldn\'t construct type reference for type " + typeDeclaration));
-        throw _illegalArgumentException;
+        throw new IllegalArgumentException(("couldn\'t construct type reference for type " + typeDeclaration));
       }
       final JvmComponentType type = _switchResult;
       boolean _equals = Objects.equal(type, null);
@@ -316,21 +285,18 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       }
       final Function1<TypeReference,JvmTypeReference> _function = new Function1<TypeReference,JvmTypeReference>() {
         public JvmTypeReference apply(final TypeReference it) {
-          JvmTypeReference _jvmTypeReference = TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
-          return _jvmTypeReference;
+          return TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
         }
       };
       List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
       JvmParameterizedTypeReference _createTypeRef = this.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
-      TypeReference _typeReference = this.compilationUnit.toTypeReference(_createTypeRef);
-      _xblockexpression = (_typeReference);
+      _xblockexpression = (this.compilationUnit.toTypeReference(_createTypeRef));
     }
     return _xblockexpression;
   }
   
   public TypeReference newWildcardTypeReference() {
-    TypeReference _newWildcardTypeReference = this.newWildcardTypeReference(null);
-    return _newWildcardTypeReference;
+    return this.newWildcardTypeReference(null);
   }
   
   public TypeReference newWildcardTypeReference(final TypeReference upperBound) {
@@ -339,14 +305,12 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     if (_equals) {
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       JvmWildcardTypeReference _wildCard = _typeReferences.wildCard();
-      TypeReference _typeReference = this.compilationUnit.toTypeReference(_wildCard);
-      _xifexpression = _typeReference;
+      _xifexpression = this.compilationUnit.toTypeReference(_wildCard);
     } else {
       TypeReferences _typeReferences_1 = this.compilationUnit.getTypeReferences();
       JvmTypeReference _jvmTypeReference = this.compilationUnit.toJvmTypeReference(upperBound);
       JvmWildcardTypeReference _wildCardExtends = _typeReferences_1.wildCardExtends(_jvmTypeReference);
-      TypeReference _typeReference_1 = this.compilationUnit.toTypeReference(_wildCardExtends);
-      _xifexpression = _typeReference_1;
+      _xifexpression = this.compilationUnit.toTypeReference(_wildCardExtends);
     }
     return _xifexpression;
   }
@@ -357,21 +321,18 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     if (_equals) {
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       JvmWildcardTypeReference _wildCard = _typeReferences.wildCard();
-      TypeReference _typeReference = this.compilationUnit.toTypeReference(_wildCard);
-      _xifexpression = _typeReference;
+      _xifexpression = this.compilationUnit.toTypeReference(_wildCard);
     } else {
       TypeReferences _typeReferences_1 = this.compilationUnit.getTypeReferences();
       JvmTypeReference _jvmTypeReference = this.compilationUnit.toJvmTypeReference(lowerBound);
       JvmWildcardTypeReference _wildCardSuper = _typeReferences_1.wildCardSuper(_jvmTypeReference);
-      TypeReference _typeReference_1 = this.compilationUnit.toTypeReference(_wildCardSuper);
-      _xifexpression = _typeReference_1;
+      _xifexpression = this.compilationUnit.toTypeReference(_wildCardSuper);
     }
     return _xifexpression;
   }
   
   public TypeReference newTypeReference(final Class<? extends Object> clazz, final TypeReference... typeArguments) {
     String _name = clazz.getName();
-    TypeReference _newTypeReference = this.newTypeReference(_name, typeArguments);
-    return _newTypeReference;
+    return this.newTypeReference(_name, typeArguments);
   }
 }

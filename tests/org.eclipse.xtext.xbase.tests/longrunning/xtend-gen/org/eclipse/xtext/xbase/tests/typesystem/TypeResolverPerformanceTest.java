@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.tests.typesystem.BatchTypeResolverTest;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -26,12 +25,7 @@ import org.junit.rules.Timeout;
 @SuppressWarnings("all")
 public class TypeResolverPerformanceTest extends BatchTypeResolverTest {
   @Rule
-  public final Timeout timeout = new Function0<Timeout>() {
-    public Timeout apply() {
-      Timeout _timeout = new Timeout(100);
-      return _timeout;
-    }
-  }.apply();
+  public final Timeout timeout = new Timeout(100);
   
   public LightweightTypeReference resolvesTo(final String expression, final String type) {
     try {

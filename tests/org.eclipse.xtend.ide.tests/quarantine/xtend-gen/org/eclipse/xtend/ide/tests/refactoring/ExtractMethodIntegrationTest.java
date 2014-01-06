@@ -1232,8 +1232,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
               NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
               Change _createChange = refactoring.createChange(_nullProgressMonitor_2);
               NullProgressMonitor _nullProgressMonitor_3 = new NullProgressMonitor();
-              Change _perform = _createChange.perform(_nullProgressMonitor_3);
-              _xblockexpression = (_perform);
+              _xblockexpression = (_createChange.perform(_nullProgressMonitor_3));
             }
             return _xblockexpression;
           }

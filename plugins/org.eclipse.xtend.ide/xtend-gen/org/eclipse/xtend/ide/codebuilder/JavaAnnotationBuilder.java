@@ -30,8 +30,7 @@ public class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements 
     ISourceAppender _append_1 = _append.append(_annotationName);
     ISourceAppender _append_2 = _append_1.append(" {");
     ISourceAppender _newLine = _append_2.newLine();
-    ISourceAppender _append_3 = _newLine.append("}");
-    return _append_3;
+    return _newLine.append("}");
   }
   
   public IType getIType() {

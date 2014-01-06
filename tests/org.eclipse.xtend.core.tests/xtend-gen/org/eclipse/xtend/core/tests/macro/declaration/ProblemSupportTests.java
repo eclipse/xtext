@@ -103,8 +103,7 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
   public XtendFile validFile(final CharSequence code) {
     try {
       String _string = code.toString();
-      XtendFile _file = this.file(_string, true);
-      return _file;
+      return this.file(_string, true);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

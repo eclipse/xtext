@@ -63,8 +63,7 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
         _builder.append(" vs ");
         final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
           public String apply(final LightweightTypeReference it) {
-            String _simpleName = it.getSimpleName();
-            return _simpleName;
+            return it.getSimpleName();
           }
         };
         List<String> _map = ListExtensions.<LightweightTypeReference, String>map(actualTypeArguments, _function);

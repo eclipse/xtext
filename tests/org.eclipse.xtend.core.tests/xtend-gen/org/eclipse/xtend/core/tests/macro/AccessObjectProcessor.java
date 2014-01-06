@@ -83,8 +83,7 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
           _and = (_notEquals && _notEquals_1);
         }
         if (_and) {
-          LinkedList<TypeReference> _linkedList = new LinkedList<TypeReference>();
-          final LinkedList<TypeReference> pIfcs = _linkedList;
+          final LinkedList<TypeReference> pIfcs = new LinkedList<TypeReference>();
           pIfcs.add(ser);
           p.setImplementedInterfaces(pIfcs);
         }
@@ -104,8 +103,7 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
           _and_1 = (_notEquals_2 && _notEquals_3);
         }
         if (_and_1) {
-          LinkedList<TypeReference> _linkedList_1 = new LinkedList<TypeReference>();
-          final LinkedList<TypeReference> gIfcs = _linkedList_1;
+          final LinkedList<TypeReference> gIfcs = new LinkedList<TypeReference>();
           gIfcs.add(ser);
           g.setImplementedInterfaces(gIfcs);
         }

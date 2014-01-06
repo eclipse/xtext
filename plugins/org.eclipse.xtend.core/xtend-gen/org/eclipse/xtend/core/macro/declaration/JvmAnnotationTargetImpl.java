@@ -34,13 +34,11 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
     final Function1<JvmAnnotationReference,MutableAnnotationReference> _function = new Function1<JvmAnnotationReference,MutableAnnotationReference>() {
       public MutableAnnotationReference apply(final JvmAnnotationReference it) {
         CompilationUnitImpl _compilationUnit = JvmAnnotationTargetImpl.this.getCompilationUnit();
-        MutableAnnotationReference _annotationReference = _compilationUnit.toAnnotationReference(it);
-        return _annotationReference;
+        return _compilationUnit.toAnnotationReference(it);
       }
     };
     List<MutableAnnotationReference> _map = ListExtensions.<JvmAnnotationReference, MutableAnnotationReference>map(_annotations, _function);
-    ImmutableList<MutableAnnotationReference> _copyOf = ImmutableList.<MutableAnnotationReference>copyOf(_map);
-    return _copyOf;
+    return ImmutableList.<MutableAnnotationReference>copyOf(_map);
   }
   
   public MutableAnnotationReference addAnnotation(final Type annotationType) {
@@ -58,8 +56,7 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
         return _compilationUnit.toAnnotationReference(result);
       }
     }
-    IllegalArgumentException _illegalArgumentException = new IllegalArgumentException((("" + annotationType) + " is not an annotation type."));
-    throw _illegalArgumentException;
+    throw new IllegalArgumentException((("" + annotationType) + " is not an annotation type."));
   }
   
   public MutableAnnotationReference findAnnotation(final Type annotationType) {
@@ -67,11 +64,9 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
     final Function1<MutableAnnotationReference,Boolean> _function = new Function1<MutableAnnotationReference,Boolean>() {
       public Boolean apply(final MutableAnnotationReference it) {
         AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
-        boolean _equals = Objects.equal(_annotationTypeDeclaration, annotationType);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_annotationTypeDeclaration, annotationType));
       }
     };
-    MutableAnnotationReference _findFirst = IterableExtensions.findFirst(_annotations, _function);
-    return _findFirst;
+    return IterableExtensions.findFirst(_annotations, _function);
   }
 }

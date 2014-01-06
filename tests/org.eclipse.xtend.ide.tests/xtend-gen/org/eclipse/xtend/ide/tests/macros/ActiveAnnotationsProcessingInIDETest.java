@@ -51,7 +51,6 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -183,8 +182,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         final Function1<XtendField,Boolean> _function = new Function1<XtendField,Boolean>() {
           public Boolean apply(final XtendField it) {
             String _name = it.getName();
-            boolean _equals = _name.equals("object");
-            return Boolean.valueOf(_equals);
+            return Boolean.valueOf(_name.equals("object"));
           }
         };
         Iterable<XtendField> _filter_2 = IterableExtensions.<XtendField>filter(_filter_1, _function);
@@ -210,12 +208,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   private Provider<CompilationUnitImpl> compilationUnitProvider;
   
   @Rule
-  public StopwatchRule stopwatch = new Function0<StopwatchRule>() {
-    public StopwatchRule apply() {
-      StopwatchRule _stopwatchRule = new StopwatchRule(true);
-      return _stopwatchRule;
-    }
-  }.apply();
+  public StopwatchRule stopwatch = new StopwatchRule(true);
   
   @After
   public void tearDown() throws Exception {
@@ -265,8 +258,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         public Boolean apply(final IMarker it) {
           try {
             Object _attribute = it.getAttribute(IMarker.SEVERITY);
-            boolean _equals = Objects.equal(_attribute, Integer.valueOf(IMarker.SEVERITY_ERROR));
-            return Boolean.valueOf(_equals);
+            return Boolean.valueOf(Objects.equal(_attribute, Integer.valueOf(IMarker.SEVERITY_ERROR)));
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -282,8 +274,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
             String _plus = ("file" + _lastSegment);
             String _plus_1 = (_plus + " - ");
             Object _attribute = it.getAttribute(IMarker.MESSAGE);
-            String _plus_2 = (_plus_1 + _attribute);
-            return _plus_2;
+            return (_plus_1 + _attribute);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -299,20 +290,17 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         public Boolean apply(final IMarker it) {
           try {
             Object _attribute = it.getAttribute(IMarker.SEVERITY);
-            boolean _equals = Objects.equal(_attribute, Integer.valueOf(IMarker.SEVERITY_ERROR));
-            return Boolean.valueOf(_equals);
+            return Boolean.valueOf(Objects.equal(_attribute, Integer.valueOf(IMarker.SEVERITY_ERROR)));
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
         }
       };
       final Iterable<IMarker> markers2 = IterableExtensions.<IMarker>filter(((Iterable<IMarker>)Conversions.doWrapArray(_findMarkers_1)), _function_2);
-      StringBuilder _stringBuilder = new StringBuilder();
-      final StringBuilder buffer = _stringBuilder;
+      final StringBuilder buffer = new StringBuilder();
       final Function1<IMarker,IResource> _function_3 = new Function1<IMarker,IResource>() {
         public IResource apply(final IMarker it) {
-          IResource _resource = it.getResource();
-          return _resource;
+          return it.getResource();
         }
       };
       Iterable<IResource> _map_1 = IterableExtensions.<IMarker, IResource>map(markers2, _function_3);
@@ -325,8 +313,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
               public InputStreamReader getInput() throws IOException {
                 try {
                   InputStream _contents = it.getContents();
-                  InputStreamReader _inputStreamReader = new InputStreamReader(_contents);
-                  return _inputStreamReader;
+                  return new InputStreamReader(_contents);
                 } catch (Throwable _e) {
                   throw Exceptions.sneakyThrow(_e);
                 }
@@ -348,8 +335,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
             String _plus = ("file" + _lastSegment);
             String _plus_1 = (_plus + " - ");
             Object _attribute = it.getAttribute(IMarker.MESSAGE);
-            String _plus_2 = (_plus_1 + _attribute);
-            return _plus_2;
+            return (_plus_1 + _attribute);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -403,8 +389,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       IProject _project = pluginProject.getProject();
       final IFile manifestFile = _project.getFile("META-INF/MANIFEST.MF");
       InputStream _contents = manifestFile.getContents();
-      Manifest _manifest = new Manifest(_contents);
-      final Manifest manifest = _manifest;
+      final Manifest manifest = new Manifest(_contents);
       final Attributes attrs = manifest.getMainAttributes();
       boolean _containsKey = attrs.containsKey("Export-Package");
       if (_containsKey) {
@@ -417,12 +402,10 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         String _join_1 = IterableExtensions.join(((Iterable<? extends Object>)Conversions.doWrapArray(exportedPackages)), ",");
         attrs.putValue("Export-Package", _join_1);
       }
-      ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream();
-      final ByteArrayOutputStream out = _byteArrayOutputStream;
+      final ByteArrayOutputStream out = new ByteArrayOutputStream();
       manifest.write(out);
       byte[] _byteArray = out.toByteArray();
-      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
-      final ByteArrayInputStream in = _byteArrayInputStream;
+      final ByteArrayInputStream in = new ByteArrayInputStream(_byteArray);
       BufferedInputStream _bufferedInputStream = new BufferedInputStream(in);
       manifestFile.setContents(_bufferedInputStream, true, true, null);
     } catch (Throwable _e) {

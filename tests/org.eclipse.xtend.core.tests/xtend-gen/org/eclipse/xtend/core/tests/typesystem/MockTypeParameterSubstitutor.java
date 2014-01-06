@@ -37,8 +37,7 @@ public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<J
   }
   
   public Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> getTypeParameterMapping() {
-    Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _typeParameterMapping = super.getTypeParameterMapping();
-    return _typeParameterMapping;
+    return super.getTypeParameterMapping();
   }
   
   public LightweightTypeReference doVisitParameterizedTypeReference(final ParameterizedTypeReference reference, final Set<JvmTypeParameter> visiting) {
@@ -59,8 +58,7 @@ public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<J
         } else {
           ITypeReferenceOwner _owner = this.getOwner();
           Object _object = new Object();
-          SimpleUnboundTypeReference _simpleUnboundTypeReference = new SimpleUnboundTypeReference(_owner, ((JvmTypeParameter)type), _object);
-          final SimpleUnboundTypeReference result = _simpleUnboundTypeReference;
+          final SimpleUnboundTypeReference result = new SimpleUnboundTypeReference(_owner, ((JvmTypeParameter)type), _object);
           Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _typeParameterMapping_1 = this.getTypeParameterMapping();
           LightweightMergedBoundTypeArgument _lightweightMergedBoundTypeArgument = new LightweightMergedBoundTypeArgument(result, VarianceInfo.INVARIANT);
           _typeParameterMapping_1.put(((JvmTypeParameter)type), _lightweightMergedBoundTypeArgument);
@@ -80,8 +78,7 @@ public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<J
   
   public LightweightTypeReference substitute(final LightweightTypeReference original) {
     HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet();
-    LightweightTypeReference _accept = original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);
-    return _accept;
+    return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);
   }
   
   protected Set<JvmTypeParameter> createVisiting() {

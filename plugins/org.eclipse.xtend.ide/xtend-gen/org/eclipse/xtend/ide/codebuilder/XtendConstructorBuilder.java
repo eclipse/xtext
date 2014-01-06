@@ -29,15 +29,13 @@ public class XtendConstructorBuilder extends AbstractConstructorBuilder implemen
     ISourceAppender _append = _appendVisibility.append("new");
     ISourceAppender _appendParameters = this.appendParameters(_append);
     ISourceAppender _appendThrowsClause = this.appendThrowsClause(_appendParameters);
-    ISourceAppender _appendBody = this.appendBody(_appendThrowsClause, "");
-    return _appendBody;
+    return this.appendBody(_appendThrowsClause, "");
   }
   
   public int getInsertOffset() {
     EObject _context = this.getContext();
     XtendTypeDeclaration _xtendType = this.getXtendType();
-    int _newConstructorInsertOffset = this._insertionOffsets.getNewConstructorInsertOffset(_context, _xtendType);
-    return _newConstructorInsertOffset;
+    return this._insertionOffsets.getNewConstructorInsertOffset(_context, _xtendType);
   }
   
   public int getIndentationLevel() {

@@ -62,13 +62,10 @@ public abstract class AbstractOverloadedStaticMethodTest extends AbstractXtendTe
       final XAbstractFeatureCall featureCall = ((XAbstractFeatureCall) _last);
       JvmIdentifiableElement _feature = featureCall.getFeature();
       final JvmOperation operation = ((JvmOperation) _feature);
-      StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, file);
-      final StandardTypeReferenceOwner owner = _standardTypeReferenceOwner;
+      final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, file);
       JvmDeclaredType _declaringType = operation.getDeclaringType();
-      ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(owner, _declaringType);
-      final ParameterizedTypeReference declaration = _parameterizedTypeReference;
-      BottomResolvedOperation _bottomResolvedOperation = new BottomResolvedOperation(operation, declaration, this.overrideTester);
-      final BottomResolvedOperation resolved = _bottomResolvedOperation;
+      final ParameterizedTypeReference declaration = new ParameterizedTypeReference(owner, _declaringType);
+      final BottomResolvedOperation resolved = new BottomResolvedOperation(operation, declaration, this.overrideTester);
       String _simpleSignature = resolved.getSimpleSignature();
       Assert.assertEquals(method, _simpleSignature);
       Resource _eResource = file.eResource();

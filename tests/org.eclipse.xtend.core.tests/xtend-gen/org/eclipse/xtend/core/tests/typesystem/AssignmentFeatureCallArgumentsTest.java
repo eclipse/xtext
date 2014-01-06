@@ -108,14 +108,11 @@ public class AssignmentFeatureCallArgumentsTest extends AbstractTestingTypeRefer
       final JvmTypeReference declaredType = _parameterType;
       boolean _tripleNotEquals = (declaredType != null);
       if (_tripleNotEquals) {
-        OwnedConverter _ownedConverter = new OwnedConverter(this);
-        final OwnedConverter converter = _ownedConverter;
+        final OwnedConverter converter = new OwnedConverter(this);
         LightweightTypeReference _lightweightReference = converter.toLightweightReference(declaredType);
-        AssignmentFeatureCallArguments _assignmentFeatureCallArguments = new AssignmentFeatureCallArguments(value, _lightweightReference);
-        return _assignmentFeatureCallArguments;
+        return new AssignmentFeatureCallArguments(value, _lightweightReference);
       } else {
-        AssignmentFeatureCallArguments _assignmentFeatureCallArguments_1 = new AssignmentFeatureCallArguments(value, null);
-        return _assignmentFeatureCallArguments_1;
+        return new AssignmentFeatureCallArguments(value, null);
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

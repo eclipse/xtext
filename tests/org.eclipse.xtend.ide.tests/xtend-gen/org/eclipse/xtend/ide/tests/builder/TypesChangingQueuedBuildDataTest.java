@@ -342,7 +342,6 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
         }
       }
     };
-    String _waitForPostChangeEvent = this._javaEditorExtension.waitForPostChangeEvent(_function);
-    return _waitForPostChangeEvent;
+    return this._javaEditorExtension.waitForPostChangeEvent(_function);
   }
 }

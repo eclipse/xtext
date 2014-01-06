@@ -112,8 +112,7 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
         ClassLoader _classLoader = _class.getClassLoader();
         this.instanceForJvmTypeProvider.setClassLoader(_classLoader);
         String _string = code.toString();
-        XtendFile _file = this.file(_string, true);
-        _xblockexpression = (_file);
+        _xblockexpression = (this.file(_string, true));
       }
       return _xblockexpression;
     } catch (Throwable _e) {

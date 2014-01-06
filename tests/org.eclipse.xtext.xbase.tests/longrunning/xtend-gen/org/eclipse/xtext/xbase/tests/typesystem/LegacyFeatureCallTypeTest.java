@@ -33,8 +33,7 @@ public class LegacyFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest
   protected List<XAbstractFeatureCall> findFeatureCalls(final CharSequence expression) {
     List<XAbstractFeatureCall> _findFeatureCalls = super.findFeatureCalls(expression);
     Iterable<XAbstractFeatureCall> _filterTypeLiteralsAndPackageFragments = this.filterTypeLiteralsAndPackageFragments(_findFeatureCalls);
-    List<XAbstractFeatureCall> _list = IterableExtensions.<XAbstractFeatureCall>toList(_filterTypeLiteralsAndPackageFragments);
-    return _list;
+    return IterableExtensions.<XAbstractFeatureCall>toList(_filterTypeLiteralsAndPackageFragments);
   }
   
   @Test

@@ -156,7 +156,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -172,8 +171,7 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 @SuppressWarnings("all")
 public class CompilationUnitImpl implements CompilationUnit {
   public Iterable<? extends AnnotationReference> getAnnotations() {
-    List<AnnotationReference> _emptyList = CollectionLiterals.<AnnotationReference>emptyList();
-    return _emptyList;
+    return CollectionLiterals.<AnnotationReference>emptyList();
   }
   
   public AnnotationReference findAnnotation(final Type annotationType) {
@@ -185,8 +183,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     Resource _eResource = _xtendFile.eResource();
     URI _uRI = _eResource.getURI();
     String _lastSegment = _uRI.lastSegment();
-    String _string = _lastSegment.toString();
-    return _string;
+    return _lastSegment.toString();
   }
   
   public CompilationUnit getCompilationUnit() {
@@ -194,14 +191,12 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public String getDocComment() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException("Auto-generated function stub");
   }
   
   public String getPackageName() {
     XtendFile _xtendFile = this.getXtendFile();
-    String _package = _xtendFile.getPackage();
-    return _package;
+    return _xtendFile.getPackage();
   }
   
   public Iterable<? extends TypeDeclaration> getSourceTypeDeclarations() {
@@ -209,25 +204,21 @@ public class CompilationUnitImpl implements CompilationUnit {
     EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
     final Function1<XtendTypeDeclaration,XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = new Function1<XtendTypeDeclaration,XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>() {
       public XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> apply(final XtendTypeDeclaration it) {
-        XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _xtendTypeDeclaration = CompilationUnitImpl.this.toXtendTypeDeclaration(it);
-        return _xtendTypeDeclaration;
+        return CompilationUnitImpl.this.toXtendTypeDeclaration(it);
       }
     };
-    List<XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _map = ListExtensions.<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>map(_xtendTypes, _function);
-    return _map;
+    return ListExtensions.<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>map(_xtendTypes, _function);
   }
   
   private boolean canceled = false;
   
   public boolean setCanceled(final boolean canceled) {
-    boolean _canceled = this.canceled = canceled;
-    return _canceled;
+    return this.canceled = canceled;
   }
   
   public void checkCanceled() {
     if (this.canceled) {
-      CancellationException _cancellationException = new CancellationException("compilation was canceled.");
-      throw _cancellationException;
+      throw new CancellationException("compilation was canceled.");
     }
   }
   
@@ -277,34 +268,19 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Extension
   private IWhitespaceInformationProvider _iWhitespaceInformationProvider;
   
-  private final ProblemSupport _problemSupport = new Function0<ProblemSupport>() {
-    public ProblemSupport apply() {
-      ProblemSupportImpl _problemSupportImpl = new ProblemSupportImpl(CompilationUnitImpl.this);
-      return _problemSupportImpl;
-    }
-  }.apply();
+  private final ProblemSupport _problemSupport = new ProblemSupportImpl(this);
   
   public ProblemSupport getProblemSupport() {
     return this._problemSupport;
   }
   
-  private final TypeReferenceProvider _typeReferenceProvider = new Function0<TypeReferenceProvider>() {
-    public TypeReferenceProvider apply() {
-      TypeReferenceProviderImpl _typeReferenceProviderImpl = new TypeReferenceProviderImpl(CompilationUnitImpl.this);
-      return _typeReferenceProviderImpl;
-    }
-  }.apply();
+  private final TypeReferenceProvider _typeReferenceProvider = new TypeReferenceProviderImpl(this);
   
   public TypeReferenceProvider getTypeReferenceProvider() {
     return this._typeReferenceProvider;
   }
   
-  private final TypeLookupImpl _typeLookup = new Function0<TypeLookupImpl>() {
-    public TypeLookupImpl apply() {
-      TypeLookupImpl _typeLookupImpl = new TypeLookupImpl(CompilationUnitImpl.this);
-      return _typeLookupImpl;
-    }
-  }.apply();
+  private final TypeLookupImpl _typeLookup = new TypeLookupImpl(this);
   
   public TypeLookupImpl getTypeLookup() {
     return this._typeLookup;
@@ -356,8 +332,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     this._xtendFile = xtendFile;
     Resource _eResource = xtendFile.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
-    StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, _resourceSet);
-    final StandardTypeReferenceOwner standardTypeReferenceOwner = _standardTypeReferenceOwner;
+    final StandardTypeReferenceOwner standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, _resourceSet);
     boolean _isIndexing = this.isIndexing();
     if (_isIndexing) {
       IndexingOwnedConverter _indexingOwnedConverter = new IndexingOwnedConverter(standardTypeReferenceOwner);
@@ -370,8 +345,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public boolean isIndexing() {
     XtendFile _xtendFile = this.getXtendFile();
-    boolean _isIndexing = this.compilerPhases.isIndexing(_xtendFile);
-    return _isIndexing;
+    return this.compilerPhases.isIndexing(_xtendFile);
   }
   
   private <IN extends EObject, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN,? extends OUT> provider) {
@@ -428,15 +402,13 @@ public class CompilationUnitImpl implements CompilationUnit {
         if (!_matched) {
           if (delegate instanceof JvmDeclaredType) {
             _matched=true;
-            MutableTypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(((JvmDeclaredType)delegate));
-            _switchResult = _typeDeclaration;
+            _switchResult = CompilationUnitImpl.this.toTypeDeclaration(((JvmDeclaredType)delegate));
           }
         }
         if (!_matched) {
           if (delegate instanceof JvmTypeParameter) {
             _matched=true;
-            MutableTypeParameterDeclaration _typeParameterDeclaration = CompilationUnitImpl.this.toTypeParameterDeclaration(((JvmTypeParameter)delegate));
-            _switchResult = _typeParameterDeclaration;
+            _switchResult = CompilationUnitImpl.this.toTypeParameterDeclaration(((JvmTypeParameter)delegate));
           }
         }
         if (!_matched) {
@@ -449,8 +421,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            VoidTypeImpl _doubleArrow = ObjectExtensions.<VoidTypeImpl>operator_doubleArrow(_voidTypeImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<VoidTypeImpl>operator_doubleArrow(_voidTypeImpl, _function);
           }
         }
         if (!_matched) {
@@ -463,15 +434,13 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            PrimitiveTypeImpl _doubleArrow = ObjectExtensions.<PrimitiveTypeImpl>operator_doubleArrow(_primitiveTypeImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<PrimitiveTypeImpl>operator_doubleArrow(_primitiveTypeImpl, _function);
           }
         }
         return _switchResult;
       }
     };
-    Type _orCreate = this.<JvmType, Type>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<JvmType, Type>getOrCreate(delegate, _function);
   }
   
   public MutableTypeDeclaration toTypeDeclaration(final JvmDeclaredType delegate) {
@@ -491,8 +460,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                   it.setCompilationUnit(CompilationUnitImpl.this);
                 }
               };
-              JvmInterfaceDeclarationImpl _doubleArrow = ObjectExtensions.<JvmInterfaceDeclarationImpl>operator_doubleArrow(_jvmInterfaceDeclarationImpl, _function);
-              _switchResult = _doubleArrow;
+              _switchResult = ObjectExtensions.<JvmInterfaceDeclarationImpl>operator_doubleArrow(_jvmInterfaceDeclarationImpl, _function);
             }
           }
         }
@@ -506,8 +474,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            JvmClassDeclarationImpl _doubleArrow = ObjectExtensions.<JvmClassDeclarationImpl>operator_doubleArrow(_jvmClassDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<JvmClassDeclarationImpl>operator_doubleArrow(_jvmClassDeclarationImpl, _function);
           }
         }
         if (!_matched) {
@@ -520,8 +487,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            JvmAnnotationTypeDeclarationImpl _doubleArrow = ObjectExtensions.<JvmAnnotationTypeDeclarationImpl>operator_doubleArrow(_jvmAnnotationTypeDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<JvmAnnotationTypeDeclarationImpl>operator_doubleArrow(_jvmAnnotationTypeDeclarationImpl, _function);
           }
         }
         if (!_matched) {
@@ -534,15 +500,13 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            JvmEnumerationTypeDeclarationImpl _doubleArrow = ObjectExtensions.<JvmEnumerationTypeDeclarationImpl>operator_doubleArrow(_jvmEnumerationTypeDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<JvmEnumerationTypeDeclarationImpl>operator_doubleArrow(_jvmEnumerationTypeDeclarationImpl, _function);
           }
         }
         return _switchResult;
       }
     };
-    JvmTypeDeclarationImpl<? extends JvmDeclaredType> _orCreate = this.<JvmDeclaredType, JvmTypeDeclarationImpl<? extends JvmDeclaredType>>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<JvmDeclaredType, JvmTypeDeclarationImpl<? extends JvmDeclaredType>>getOrCreate(delegate, _function);
   }
   
   public MutableTypeParameterDeclaration toTypeParameterDeclaration(final JvmTypeParameter delegate) {
@@ -555,12 +519,10 @@ public class CompilationUnitImpl implements CompilationUnit {
             it.setCompilationUnit(CompilationUnitImpl.this);
           }
         };
-        JvmTypeParameterDeclarationImpl _doubleArrow = ObjectExtensions.<JvmTypeParameterDeclarationImpl>operator_doubleArrow(_jvmTypeParameterDeclarationImpl, _function);
-        return _doubleArrow;
+        return ObjectExtensions.<JvmTypeParameterDeclarationImpl>operator_doubleArrow(_jvmTypeParameterDeclarationImpl, _function);
       }
     };
-    JvmTypeParameterDeclarationImpl _orCreate = this.<JvmTypeParameter, JvmTypeParameterDeclarationImpl>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<JvmTypeParameter, JvmTypeParameterDeclarationImpl>getOrCreate(delegate, _function);
   }
   
   public MutableParameterDeclaration toParameterDeclaration(final JvmFormalParameter delegate) {
@@ -573,12 +535,10 @@ public class CompilationUnitImpl implements CompilationUnit {
             it.setCompilationUnit(CompilationUnitImpl.this);
           }
         };
-        JvmParameterDeclarationImpl _doubleArrow = ObjectExtensions.<JvmParameterDeclarationImpl>operator_doubleArrow(_jvmParameterDeclarationImpl, _function);
-        return _doubleArrow;
+        return ObjectExtensions.<JvmParameterDeclarationImpl>operator_doubleArrow(_jvmParameterDeclarationImpl, _function);
       }
     };
-    JvmParameterDeclarationImpl _orCreate = this.<JvmFormalParameter, JvmParameterDeclarationImpl>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<JvmFormalParameter, JvmParameterDeclarationImpl>getOrCreate(delegate, _function);
   }
   
   public MutableMemberDeclaration toMemberDeclaration(final JvmMember delegate) {
@@ -589,8 +549,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         if (!_matched) {
           if (delegate instanceof JvmDeclaredType) {
             _matched=true;
-            MutableTypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(((JvmDeclaredType)delegate));
-            _switchResult = _typeDeclaration;
+            _switchResult = CompilationUnitImpl.this.toTypeDeclaration(((JvmDeclaredType)delegate));
           }
         }
         if (!_matched) {
@@ -606,8 +565,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                   it.setCompilationUnit(CompilationUnitImpl.this);
                 }
               };
-              JvmAnnotationTypeElementDeclarationImpl _doubleArrow = ObjectExtensions.<JvmAnnotationTypeElementDeclarationImpl>operator_doubleArrow(_jvmAnnotationTypeElementDeclarationImpl, _function);
-              _xifexpression = _doubleArrow;
+              _xifexpression = ObjectExtensions.<JvmAnnotationTypeElementDeclarationImpl>operator_doubleArrow(_jvmAnnotationTypeElementDeclarationImpl, _function);
             } else {
               JvmMethodDeclarationImpl _jvmMethodDeclarationImpl = new JvmMethodDeclarationImpl();
               final Procedure1<JvmMethodDeclarationImpl> _function_1 = new Procedure1<JvmMethodDeclarationImpl>() {
@@ -616,8 +574,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                   it.setCompilationUnit(CompilationUnitImpl.this);
                 }
               };
-              JvmMethodDeclarationImpl _doubleArrow_1 = ObjectExtensions.<JvmMethodDeclarationImpl>operator_doubleArrow(_jvmMethodDeclarationImpl, _function_1);
-              _xifexpression = _doubleArrow_1;
+              _xifexpression = ObjectExtensions.<JvmMethodDeclarationImpl>operator_doubleArrow(_jvmMethodDeclarationImpl, _function_1);
             }
             _switchResult = _xifexpression;
           }
@@ -632,8 +589,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            JvmConstructorDeclarationImpl _doubleArrow = ObjectExtensions.<JvmConstructorDeclarationImpl>operator_doubleArrow(_jvmConstructorDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<JvmConstructorDeclarationImpl>operator_doubleArrow(_jvmConstructorDeclarationImpl, _function);
           }
         }
         if (!_matched) {
@@ -646,8 +602,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            JvmEnumerationValueDeclarationImpl _doubleArrow = ObjectExtensions.<JvmEnumerationValueDeclarationImpl>operator_doubleArrow(_jvmEnumerationValueDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<JvmEnumerationValueDeclarationImpl>operator_doubleArrow(_jvmEnumerationValueDeclarationImpl, _function);
           }
         }
         if (!_matched) {
@@ -660,15 +615,13 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            JvmFieldDeclarationImpl _doubleArrow = ObjectExtensions.<JvmFieldDeclarationImpl>operator_doubleArrow(_jvmFieldDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<JvmFieldDeclarationImpl>operator_doubleArrow(_jvmFieldDeclarationImpl, _function);
           }
         }
         return _switchResult;
       }
     };
-    MutableMemberDeclaration _orCreate = this.<JvmMember, MutableMemberDeclaration>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<JvmMember, MutableMemberDeclaration>getOrCreate(delegate, _function);
   }
   
   public MutableNamedElement toNamedElement(final JvmIdentifiableElement delegate) {
@@ -679,33 +632,28 @@ public class CompilationUnitImpl implements CompilationUnit {
         if (!_matched) {
           if (delegate instanceof JvmMember) {
             _matched=true;
-            MutableMemberDeclaration _memberDeclaration = CompilationUnitImpl.this.toMemberDeclaration(((JvmMember)delegate));
-            _switchResult = _memberDeclaration;
+            _switchResult = CompilationUnitImpl.this.toMemberDeclaration(((JvmMember)delegate));
           }
         }
         if (!_matched) {
           if (delegate instanceof JvmTypeParameter) {
             _matched=true;
-            MutableTypeParameterDeclaration _typeParameterDeclaration = CompilationUnitImpl.this.toTypeParameterDeclaration(((JvmTypeParameter)delegate));
-            _switchResult = _typeParameterDeclaration;
+            _switchResult = CompilationUnitImpl.this.toTypeParameterDeclaration(((JvmTypeParameter)delegate));
           }
         }
         if (!_matched) {
           if (delegate instanceof JvmFormalParameter) {
             _matched=true;
-            MutableParameterDeclaration _parameterDeclaration = CompilationUnitImpl.this.toParameterDeclaration(((JvmFormalParameter)delegate));
-            _switchResult = _parameterDeclaration;
+            _switchResult = CompilationUnitImpl.this.toParameterDeclaration(((JvmFormalParameter)delegate));
           }
         }
         if (!_matched) {
-          UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(("Couldn\'t translate \'" + delegate));
-          throw _unsupportedOperationException;
+          throw new UnsupportedOperationException(("Couldn\'t translate \'" + delegate));
         }
         return _switchResult;
       }
     };
-    MutableDeclaration _orCreate = this.<JvmIdentifiableElement, MutableDeclaration>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<JvmIdentifiableElement, MutableDeclaration>getOrCreate(delegate, _function);
   }
   
   public TypeReference toTypeReference(final JvmTypeReference delegate) {
@@ -718,12 +666,10 @@ public class CompilationUnitImpl implements CompilationUnit {
       final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
         public TypeReference apply(final JvmTypeReference it) {
           LightweightTypeReference _lightweightReference = CompilationUnitImpl.this.typeRefConverter.toLightweightReference(delegate);
-          TypeReference _typeReference = CompilationUnitImpl.this.toTypeReference(_lightweightReference);
-          return _typeReference;
+          return CompilationUnitImpl.this.toTypeReference(_lightweightReference);
         }
       };
-      TypeReference _orCreate = this.<JvmTypeReference, TypeReference>getOrCreate(delegate, _function);
-      _xblockexpression = (_orCreate);
+      _xblockexpression = (this.<JvmTypeReference, TypeReference>getOrCreate(delegate, _function));
     }
     return _xblockexpression;
   }
@@ -743,8 +689,7 @@ public class CompilationUnitImpl implements CompilationUnit {
           it.setCompilationUnit(CompilationUnitImpl.this);
         }
       };
-      TypeReferenceImpl _doubleArrow = ObjectExtensions.<TypeReferenceImpl>operator_doubleArrow(_typeReferenceImpl, _function);
-      _xblockexpression = (_doubleArrow);
+      _xblockexpression = (ObjectExtensions.<TypeReferenceImpl>operator_doubleArrow(_typeReferenceImpl, _function));
     }
     return _xblockexpression;
   }
@@ -764,8 +709,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            XtendClassDeclarationImpl _doubleArrow = ObjectExtensions.<XtendClassDeclarationImpl>operator_doubleArrow(_xtendClassDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<XtendClassDeclarationImpl>operator_doubleArrow(_xtendClassDeclarationImpl, _function);
           }
         }
         if (!_matched) {
@@ -778,8 +722,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            XtendInterfaceDeclarationImpl _doubleArrow = ObjectExtensions.<XtendInterfaceDeclarationImpl>operator_doubleArrow(_xtendInterfaceDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<XtendInterfaceDeclarationImpl>operator_doubleArrow(_xtendInterfaceDeclarationImpl, _function);
           }
         }
         if (!_matched) {
@@ -792,8 +735,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            XtendAnnotationTypeDeclarationImpl _doubleArrow = ObjectExtensions.<XtendAnnotationTypeDeclarationImpl>operator_doubleArrow(_xtendAnnotationTypeDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<XtendAnnotationTypeDeclarationImpl>operator_doubleArrow(_xtendAnnotationTypeDeclarationImpl, _function);
           }
         }
         if (!_matched) {
@@ -806,15 +748,13 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            XtendEnumerationDeclarationImpl _doubleArrow = ObjectExtensions.<XtendEnumerationDeclarationImpl>operator_doubleArrow(_xtendEnumerationDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<XtendEnumerationDeclarationImpl>operator_doubleArrow(_xtendEnumerationDeclarationImpl, _function);
           }
         }
         return _switchResult;
       }
     };
-    XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _orCreate = this.<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>getOrCreate(delegate, _function);
   }
   
   public MemberDeclaration toXtendMemberDeclaration(final XtendMember delegate) {
@@ -825,8 +765,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         if (!_matched) {
           if (delegate instanceof XtendTypeDeclaration) {
             _matched=true;
-            XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _xtendTypeDeclaration = CompilationUnitImpl.this.toXtendTypeDeclaration(((XtendTypeDeclaration)delegate));
-            _switchResult = _xtendTypeDeclaration;
+            _switchResult = CompilationUnitImpl.this.toXtendTypeDeclaration(((XtendTypeDeclaration)delegate));
           }
         }
         if (!_matched) {
@@ -839,8 +778,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            XtendMethodDeclarationImpl _doubleArrow = ObjectExtensions.<XtendMethodDeclarationImpl>operator_doubleArrow(_xtendMethodDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<XtendMethodDeclarationImpl>operator_doubleArrow(_xtendMethodDeclarationImpl, _function);
           }
         }
         if (!_matched) {
@@ -853,8 +791,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            XtendConstructorDeclarationImpl _doubleArrow = ObjectExtensions.<XtendConstructorDeclarationImpl>operator_doubleArrow(_xtendConstructorDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<XtendConstructorDeclarationImpl>operator_doubleArrow(_xtendConstructorDeclarationImpl, _function);
           }
         }
         if (!_matched) {
@@ -870,8 +807,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                   it.setCompilationUnit(CompilationUnitImpl.this);
                 }
               };
-              XtendAnnotationTypeElementDeclarationImpl _doubleArrow = ObjectExtensions.<XtendAnnotationTypeElementDeclarationImpl>operator_doubleArrow(_xtendAnnotationTypeElementDeclarationImpl, _function);
-              _xifexpression = _doubleArrow;
+              _xifexpression = ObjectExtensions.<XtendAnnotationTypeElementDeclarationImpl>operator_doubleArrow(_xtendAnnotationTypeElementDeclarationImpl, _function);
             } else {
               XtendFieldDeclarationImpl _xtendFieldDeclarationImpl = new XtendFieldDeclarationImpl();
               final Procedure1<XtendFieldDeclarationImpl> _function_1 = new Procedure1<XtendFieldDeclarationImpl>() {
@@ -880,8 +816,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                   it.setCompilationUnit(CompilationUnitImpl.this);
                 }
               };
-              XtendFieldDeclarationImpl _doubleArrow_1 = ObjectExtensions.<XtendFieldDeclarationImpl>operator_doubleArrow(_xtendFieldDeclarationImpl, _function_1);
-              _xifexpression = _doubleArrow_1;
+              _xifexpression = ObjectExtensions.<XtendFieldDeclarationImpl>operator_doubleArrow(_xtendFieldDeclarationImpl, _function_1);
             }
             _switchResult = _xifexpression;
           }
@@ -896,15 +831,13 @@ public class CompilationUnitImpl implements CompilationUnit {
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-            XtendEnumerationValueDeclarationImpl _doubleArrow = ObjectExtensions.<XtendEnumerationValueDeclarationImpl>operator_doubleArrow(_xtendEnumerationValueDeclarationImpl, _function);
-            _switchResult = _doubleArrow;
+            _switchResult = ObjectExtensions.<XtendEnumerationValueDeclarationImpl>operator_doubleArrow(_xtendEnumerationValueDeclarationImpl, _function);
           }
         }
         return _switchResult;
       }
     };
-    XtendMemberDeclarationImpl<? extends XtendMember> _orCreate = this.<XtendMember, XtendMemberDeclarationImpl<? extends XtendMember>>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<XtendMember, XtendMemberDeclarationImpl<? extends XtendMember>>getOrCreate(delegate, _function);
   }
   
   public XtendParameterDeclarationImpl toXtendParameterDeclaration(final XtendParameter delegate) {
@@ -917,12 +850,10 @@ public class CompilationUnitImpl implements CompilationUnit {
             it.setCompilationUnit(CompilationUnitImpl.this);
           }
         };
-        XtendParameterDeclarationImpl _doubleArrow = ObjectExtensions.<XtendParameterDeclarationImpl>operator_doubleArrow(_xtendParameterDeclarationImpl, _function);
-        return _doubleArrow;
+        return ObjectExtensions.<XtendParameterDeclarationImpl>operator_doubleArrow(_xtendParameterDeclarationImpl, _function);
       }
     };
-    XtendParameterDeclarationImpl _orCreate = this.<XtendParameter, XtendParameterDeclarationImpl>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<XtendParameter, XtendParameterDeclarationImpl>getOrCreate(delegate, _function);
   }
   
   public XtendTypeParameterDeclarationImpl toXtendTypeParameterDeclaration(final JvmTypeParameter delegate) {
@@ -935,12 +866,10 @@ public class CompilationUnitImpl implements CompilationUnit {
             it.setCompilationUnit(CompilationUnitImpl.this);
           }
         };
-        XtendTypeParameterDeclarationImpl _doubleArrow = ObjectExtensions.<XtendTypeParameterDeclarationImpl>operator_doubleArrow(_xtendTypeParameterDeclarationImpl, _function);
-        return _doubleArrow;
+        return ObjectExtensions.<XtendTypeParameterDeclarationImpl>operator_doubleArrow(_xtendTypeParameterDeclarationImpl, _function);
       }
     };
-    XtendTypeParameterDeclarationImpl _orCreate = this.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>getOrCreate(delegate, _function);
   }
   
   public JvmTypeReference toJvmTypeReference(final TypeReference typeRef) {
@@ -964,20 +893,17 @@ public class CompilationUnitImpl implements CompilationUnit {
             it.setCompilationUnit(CompilationUnitImpl.this);
           }
         };
-        ExpressionImpl _doubleArrow = ObjectExtensions.<ExpressionImpl>operator_doubleArrow(_expressionImpl, _function);
-        return _doubleArrow;
+        return ObjectExtensions.<ExpressionImpl>operator_doubleArrow(_expressionImpl, _function);
       }
     };
-    ExpressionImpl _orCreate = this.<XExpression, ExpressionImpl>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<XExpression, ExpressionImpl>getOrCreate(delegate, _function);
   }
   
   public void setCompilationStrategy(final JvmExecutable executable, final CompilationStrategy compilationStrategy) {
     this.checkCanceled();
     final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
       public void apply(final ITreeAppendable it) {
-        CompilationContextImpl _compilationContextImpl = new CompilationContextImpl(it, CompilationUnitImpl.this);
-        final CompilationContextImpl context = _compilationContextImpl;
+        final CompilationContextImpl context = new CompilationContextImpl(it, CompilationUnitImpl.this);
         CharSequence _compile = compilationStrategy.compile(context);
         CharSequence _trimTrailingLinebreak = CompilationUnitImpl.this.trimTrailingLinebreak(_compile, executable);
         it.append(_trimTrailingLinebreak);
@@ -994,7 +920,6 @@ public class CompilationUnitImpl implements CompilationUnit {
   protected CharSequence trimTrailingLinebreak(final CharSequence sequence, final EObject context) {
     CharSequence _xblockexpression = null;
     {
-      ILineSeparatorInformation _lineSeparatorInformation = null;
       Resource _eResource = null;
       if (context!=null) {
         _eResource=context.eResource();
@@ -1003,6 +928,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (_eResource!=null) {
         _uRI=_eResource.getURI();
       }
+      ILineSeparatorInformation _lineSeparatorInformation = null;
       if (_uRI!=null) {
         _lineSeparatorInformation=this._iWhitespaceInformationProvider.getLineSeparatorInformation(_uRI);
       }
@@ -1045,8 +971,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         int _length_5 = sequence.length();
         int _length_6 = lineBreak.length();
         int _minus_1 = (_length_5 - _length_6);
-        CharSequence _subSequence_1 = sequence.subSequence(0, _minus_1);
-        _xifexpression = _subSequence_1;
+        _xifexpression = sequence.subSequence(0, _minus_1);
       } else {
         _xifexpression = sequence;
       }
@@ -1059,8 +984,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     this.checkCanceled();
     final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
       public void apply(final ITreeAppendable it) {
-        CompilationContextImpl _compilationContextImpl = new CompilationContextImpl(it, CompilationUnitImpl.this);
-        final CompilationContextImpl context = _compilationContextImpl;
+        final CompilationContextImpl context = new CompilationContextImpl(it, CompilationUnitImpl.this);
         CharSequence _compile = compilationStrategy.compile(context);
         it.append(_compile);
       }
@@ -1083,12 +1007,10 @@ public class CompilationUnitImpl implements CompilationUnit {
             it.setCompilationUnit(CompilationUnitImpl.this);
           }
         };
-        XtendAnnotationReferenceImpl _doubleArrow = ObjectExtensions.<XtendAnnotationReferenceImpl>operator_doubleArrow(_xtendAnnotationReferenceImpl, _function);
-        return _doubleArrow;
+        return ObjectExtensions.<XtendAnnotationReferenceImpl>operator_doubleArrow(_xtendAnnotationReferenceImpl, _function);
       }
     };
-    XtendAnnotationReferenceImpl _orCreate = this.<XAnnotation, XtendAnnotationReferenceImpl>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<XAnnotation, XtendAnnotationReferenceImpl>getOrCreate(delegate, _function);
   }
   
   public MutableAnnotationReference toAnnotationReference(final JvmAnnotationReference delegate) {
@@ -1101,12 +1023,10 @@ public class CompilationUnitImpl implements CompilationUnit {
             it.setCompilationUnit(CompilationUnitImpl.this);
           }
         };
-        JvmAnnotationReferenceImpl _doubleArrow = ObjectExtensions.<JvmAnnotationReferenceImpl>operator_doubleArrow(_jvmAnnotationReferenceImpl, _function);
-        return _doubleArrow;
+        return ObjectExtensions.<JvmAnnotationReferenceImpl>operator_doubleArrow(_jvmAnnotationReferenceImpl, _function);
       }
     };
-    JvmAnnotationReferenceImpl _orCreate = this.<JvmAnnotationReference, JvmAnnotationReferenceImpl>getOrCreate(delegate, _function);
-    return _orCreate;
+    return this.<JvmAnnotationReference, JvmAnnotationReferenceImpl>getOrCreate(delegate, _function);
   }
   
   public Object translateAnnotationValue(final JvmAnnotationValue value, final boolean isArray) {
@@ -1120,8 +1040,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         Iterable<XExpression> _filter = Iterables.<XExpression>filter(_values, XExpression.class);
         final Function1<XExpression,Object> _function = new Function1<XExpression,Object>() {
           public Object apply(final XExpression it) {
-            Object _evaluate = CompilationUnitImpl.this.evaluate(it, expectedType);
-            return _evaluate;
+            return CompilationUnitImpl.this.evaluate(it, expectedType);
           }
         };
         Iterable<Object> _map = IterableExtensions.<XExpression, Object>map(_filter, _function);
@@ -1134,13 +1053,11 @@ public class CompilationUnitImpl implements CompilationUnit {
         EList<JvmTypeReference> _values = ((JvmTypeAnnotationValue)value).getValues();
         final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
           public TypeReference apply(final JvmTypeReference it) {
-            TypeReference _typeReference = CompilationUnitImpl.this.toTypeReference(it);
-            return _typeReference;
+            return CompilationUnitImpl.this.toTypeReference(it);
           }
         };
         List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(_values, _function);
-        Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_map, TypeReference.class);
-        _switchResult = _mappedTo;
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_map, TypeReference.class);
       }
     }
     if (!_matched) {
@@ -1149,61 +1066,53 @@ public class CompilationUnitImpl implements CompilationUnit {
         EList<JvmAnnotationReference> _values = ((JvmAnnotationAnnotationValue)value).getValues();
         final Function1<JvmAnnotationReference,MutableAnnotationReference> _function = new Function1<JvmAnnotationReference,MutableAnnotationReference>() {
           public MutableAnnotationReference apply(final JvmAnnotationReference it) {
-            MutableAnnotationReference _annotationReference = CompilationUnitImpl.this.toAnnotationReference(it);
-            return _annotationReference;
+            return CompilationUnitImpl.this.toAnnotationReference(it);
           }
         };
         List<MutableAnnotationReference> _map = ListExtensions.<JvmAnnotationReference, MutableAnnotationReference>map(_values, _function);
-        Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_map, AnnotationReference.class);
-        _switchResult = _mappedTo;
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_map, AnnotationReference.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmStringAnnotationValue) {
         _matched=true;
         EList<String> _values = ((JvmStringAnnotationValue)value).getValues();
-        Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, String.class);
-        _switchResult = _mappedTo;
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, String.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmBooleanAnnotationValue) {
         _matched=true;
         EList<Boolean> _values = ((JvmBooleanAnnotationValue)value).getValues();
-        Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, boolean.class);
-        _switchResult = _mappedTo;
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, boolean.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmIntAnnotationValue) {
         _matched=true;
         EList<Integer> _values = ((JvmIntAnnotationValue)value).getValues();
-        Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, int.class);
-        _switchResult = _mappedTo;
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, int.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmByteAnnotationValue) {
         _matched=true;
         EList<Byte> _values = ((JvmByteAnnotationValue)value).getValues();
-        Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, byte.class);
-        _switchResult = _mappedTo;
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, byte.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmCharAnnotationValue) {
         _matched=true;
         EList<Character> _values = ((JvmCharAnnotationValue)value).getValues();
-        Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, char.class);
-        _switchResult = _mappedTo;
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, char.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmDoubleAnnotationValue) {
         _matched=true;
         EList<Double> _values = ((JvmDoubleAnnotationValue)value).getValues();
-        Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, double.class);
-        _switchResult = _mappedTo;
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, double.class);
       }
     }
     if (!_matched) {
@@ -1212,43 +1121,37 @@ public class CompilationUnitImpl implements CompilationUnit {
         EList<JvmEnumerationLiteral> _values = ((JvmEnumAnnotationValue)value).getValues();
         final Function1<JvmEnumerationLiteral,MutableNamedElement> _function = new Function1<JvmEnumerationLiteral,MutableNamedElement>() {
           public MutableNamedElement apply(final JvmEnumerationLiteral it) {
-            MutableNamedElement _namedElement = CompilationUnitImpl.this.toNamedElement(it);
-            return _namedElement;
+            return CompilationUnitImpl.this.toNamedElement(it);
           }
         };
         List<MutableNamedElement> _map = ListExtensions.<JvmEnumerationLiteral, MutableNamedElement>map(_values, _function);
-        Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_map, EnumerationValueDeclaration.class);
-        _switchResult = _mappedTo;
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_map, EnumerationValueDeclaration.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmFloatAnnotationValue) {
         _matched=true;
         EList<Float> _values = ((JvmFloatAnnotationValue)value).getValues();
-        Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, float.class);
-        _switchResult = _mappedTo;
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, float.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmLongAnnotationValue) {
         _matched=true;
         EList<Long> _values = ((JvmLongAnnotationValue)value).getValues();
-        Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, long.class);
-        _switchResult = _mappedTo;
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, long.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmShortAnnotationValue) {
         _matched=true;
         EList<Short> _values = ((JvmShortAnnotationValue)value).getValues();
-        Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, short.class);
-        _switchResult = _mappedTo;
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, short.class);
       }
     }
     if (!_matched) {
       List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
-      Pair<List<? extends Object>,Class<? extends Object>> _mappedTo = Pair.<List<? extends Object>, Class<? extends Object>>of(_emptyList, Object.class);
-      _switchResult = _mappedTo;
+      _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_emptyList, Object.class);
     }
     final Pair<List<?>,Class<?>> result = _switchResult;
     if (isArray) {
@@ -1275,8 +1178,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     if (!_matched) {
       if (container instanceof JvmOperation) {
         _matched=true;
-        JvmTypeReference _returnType = ((JvmOperation)container).getReturnType();
-        _switchResult = _returnType;
+        _switchResult = ((JvmOperation)container).getReturnType();
       }
     }
     if (!_matched) {
@@ -1291,8 +1193,7 @@ public class CompilationUnitImpl implements CompilationUnit {
           JvmTypeReference _xifexpression = null;
           boolean _notEquals_1 = (!Objects.equal(defaultOp, null));
           if (_notEquals_1) {
-            JvmTypeReference _returnType = defaultOp.getReturnType();
-            _xifexpression = _returnType;
+            _xifexpression = defaultOp.getReturnType();
           }
           _xblockexpression = (_xifexpression);
         }
@@ -1307,8 +1208,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     if ((iterable instanceof Collection<?>)) {
       _xifexpression = ((Collection<? extends Object>)iterable);
     } else {
-      List<? extends Object> _list = IterableExtensions.toList(iterable);
-      _xifexpression = _list;
+      _xifexpression = IterableExtensions.toList(iterable);
     }
     final Collection<?> collection = _xifexpression;
     Object _switchResult = null;
@@ -1316,62 +1216,53 @@ public class CompilationUnitImpl implements CompilationUnit {
     if (!_matched) {
       if (Objects.equal(componentType,int.class)) {
         _matched=true;
-        int[] _array = Ints.toArray(((List<Integer>) collection));
-        _switchResult = _array;
+        _switchResult = Ints.toArray(((List<Integer>) collection));
       }
     }
     if (!_matched) {
       if (Objects.equal(componentType,long.class)) {
         _matched=true;
-        long[] _array_1 = Longs.toArray(((List<Long>) collection));
-        _switchResult = _array_1;
+        _switchResult = Longs.toArray(((List<Long>) collection));
       }
     }
     if (!_matched) {
       if (Objects.equal(componentType,char.class)) {
         _matched=true;
-        char[] _array_2 = Chars.toArray(((List<Character>) collection));
-        _switchResult = _array_2;
+        _switchResult = Chars.toArray(((List<Character>) collection));
       }
     }
     if (!_matched) {
       if (Objects.equal(componentType,boolean.class)) {
         _matched=true;
-        boolean[] _array_3 = Booleans.toArray(((List<Boolean>) collection));
-        _switchResult = _array_3;
+        _switchResult = Booleans.toArray(((List<Boolean>) collection));
       }
     }
     if (!_matched) {
       if (Objects.equal(componentType,byte.class)) {
         _matched=true;
-        byte[] _array_4 = Bytes.toArray(((List<Byte>) collection));
-        _switchResult = _array_4;
+        _switchResult = Bytes.toArray(((List<Byte>) collection));
       }
     }
     if (!_matched) {
       if (Objects.equal(componentType,short.class)) {
         _matched=true;
-        short[] _array_5 = Shorts.toArray(((List<Short>) collection));
-        _switchResult = _array_5;
+        _switchResult = Shorts.toArray(((List<Short>) collection));
       }
     }
     if (!_matched) {
       if (Objects.equal(componentType,float.class)) {
         _matched=true;
-        float[] _array_6 = Floats.toArray(((List<Float>) collection));
-        _switchResult = _array_6;
+        _switchResult = Floats.toArray(((List<Float>) collection));
       }
     }
     if (!_matched) {
       if (Objects.equal(componentType,double.class)) {
         _matched=true;
-        double[] _array_7 = Doubles.toArray(((List<Double>) collection));
-        _switchResult = _array_7;
+        _switchResult = Doubles.toArray(((List<Double>) collection));
       }
     }
     if (!_matched) {
-      Object[] _array_8 = Iterables.<Object>toArray(collection, ((Class<Object>) componentType));
-      _switchResult = _array_8;
+      _switchResult = Iterables.<Object>toArray(collection, ((Class<Object>) componentType));
     }
     return ((Serializable)_switchResult);
   }
@@ -1384,8 +1275,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (_t instanceof ConstantExpressionEvaluationException) {
         final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
         String _message = e.getMessage();
-        EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "constant_expression_evaluation_problem", _message, expression, null, (-1), null);
-        final EObjectDiagnosticImpl error = _eObjectDiagnosticImpl;
+        final EObjectDiagnosticImpl error = new EObjectDiagnosticImpl(Severity.ERROR, "constant_expression_evaluation_problem", _message, expression, null, (-1), null);
         Resource _eResource = expression.eResource();
         EList<Resource.Diagnostic> _errors = _eResource.getErrors();
         _errors.add(error);

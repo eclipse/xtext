@@ -21,8 +21,7 @@ import org.junit.Test;
 public class PathTest {
   @Test
   public void testPath() {
-    Path _path = new Path("/foo/bar/baz.txt");
-    final Path p = _path;
+    final Path p = new Path("/foo/bar/baz.txt");
     boolean _isAbsolute = p.isAbsolute();
     Assert.assertTrue(_isAbsolute);
     String _lastSegment = p.getLastSegment();
@@ -174,15 +173,13 @@ public class PathTest {
   
   @Test
   public void testRelativizeBothDirections() {
-    Path _path = new Path("/hubba/bubba");
-    final Path base = _path;
-    Path _path_1 = new Path("/hubba/bubba/bar");
-    final Path child = _path_1;
-    Path _path_2 = new Path("bar");
+    final Path base = new Path("/hubba/bubba");
+    final Path child = new Path("/hubba/bubba/bar");
+    Path _path = new Path("bar");
     Path _relativize = base.relativize(child);
-    Assert.assertEquals(_path_2, _relativize);
-    Path _path_3 = new Path("bar");
+    Assert.assertEquals(_path, _relativize);
+    Path _path_1 = new Path("bar");
     Path _relativize_1 = child.relativize(base);
-    Assert.assertEquals(_path_3, _relativize_1);
+    Assert.assertEquals(_path_1, _relativize_1);
   }
 }

@@ -83,8 +83,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
           final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
             public Boolean apply(final URI element) {
               URI _uRI = EcoreUtil.getURI(it);
-              boolean _equals = Objects.equal(element, _uRI);
-              return Boolean.valueOf(_equals);
+              return Boolean.valueOf(Objects.equal(element, _uRI));
             }
           };
           boolean _exists = IterableExtensions.<URI>exists(dependentElementURIs, _function);
@@ -144,8 +143,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
           final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
             public Boolean apply(final URI element) {
               URI _uRI = EcoreUtil.getURI(it);
-              boolean _equals = Objects.equal(element, _uRI);
-              return Boolean.valueOf(_equals);
+              return Boolean.valueOf(Objects.equal(element, _uRI));
             }
           };
           boolean _exists = IterableExtensions.<URI>exists(dependentElementURIs, _function);

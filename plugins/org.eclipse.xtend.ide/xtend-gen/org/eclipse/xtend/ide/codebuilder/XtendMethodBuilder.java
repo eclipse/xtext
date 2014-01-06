@@ -82,8 +82,7 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBu
   public int getInsertOffset() {
     EObject _context = this.getContext();
     XtendTypeDeclaration _xtendType = this.getXtendType();
-    int _newMethodInsertOffset = this._insertionOffsets.getNewMethodInsertOffset(_context, _xtendType);
-    return _newMethodInsertOffset;
+    return this._insertionOffsets.getNewMethodInsertOffset(_context, _xtendType);
   }
   
   public int getIndentationLevel() {

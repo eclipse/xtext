@@ -74,8 +74,7 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
       }
       ISourceAppender _append = appendable.append(" ");
       String _name = this.getName();
-      ISourceAppender _append_1 = _append.append(_name);
-      _xblockexpression = (_append_1);
+      _xblockexpression = (_append.append(_name));
     }
     return _xblockexpression;
   }

@@ -81,8 +81,7 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
       Iterable<LightweightTypeReference> _collectSuperTypes = this.collectSuperTypes(subtype);
       final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
         public String apply(final LightweightTypeReference it) {
-          String _simpleName = it.getSimpleName();
-          return _simpleName;
+          return it.getSimpleName();
         }
       };
       Iterable<String> _map = IterableExtensions.<LightweightTypeReference, String>map(_collectSuperTypes, _function);

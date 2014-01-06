@@ -17,12 +17,10 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 @SuppressWarnings("all")
 public class SaveWithoutReconciliationQueuedBuildDataTest extends AbstractSingleEditorQueuedBuildTest {
   public ITextEditor doSave(final ITextEditor editor, final Function1<? super ITextEditor,? extends ITextEditor> consumer) {
-    ITextEditor _save = this._javaEditorExtension.save(editor, consumer);
-    return _save;
+    return this._javaEditorExtension.save(editor, consumer);
   }
   
   public ITextEditor doClose(final ITextEditor editor, final Function1<? super ITextEditor,? extends ITextEditor> consumer) {
-    ITextEditor _close = this._javaEditorExtension.close(editor, consumer);
-    return _close;
+    return this._javaEditorExtension.close(editor, consumer);
   }
 }

@@ -48,16 +48,14 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
   public void findReferences(final Set<URI> targetURIs, final IResourceDescription resourceDescription, final IAcceptor<IReferenceDescription> acceptor, final IProgressMonitor monitor, final IReferenceFinder.ILocalResourceAccess localResourceAccess) {
     final Function1<URI,URI> _function = new Function1<URI,URI>() {
       public URI apply(final URI it) {
-        URI _trimFragment = it.trimFragment();
-        return _trimFragment;
+        return it.trimFragment();
       }
     };
     Iterable<URI> _map = IterableExtensions.<URI, URI>map(targetURIs, _function);
     final Function1<URI,Boolean> _function_1 = new Function1<URI,Boolean>() {
       public Boolean apply(final URI it) {
         URI _uRI = resourceDescription.getURI();
-        boolean _equals = Objects.equal(it, _uRI);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(it, _uRI));
       }
     };
     boolean _exists = IterableExtensions.<URI>exists(_map, _function_1);
@@ -78,8 +76,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
               String _identifier = obj.getIdentifier();
               QualifiedName _qualifiedName = XtendReferenceFinder.this.nameConverter.toQualifiedName(_identifier);
               QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-              boolean _add = names.add(_lowerCase);
-              _xifexpression = _add;
+              _xifexpression = names.add(_lowerCase);
             }
             _xblockexpression = (_xifexpression);
           }
@@ -92,8 +89,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     final Set<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(_importedNames);
     final Function1<QualifiedName,Boolean> _function_3 = new Function1<QualifiedName,Boolean>() {
       public Boolean apply(final QualifiedName it) {
-        boolean _contains = importedNames.contains(it);
-        return Boolean.valueOf(_contains);
+        return Boolean.valueOf(importedNames.contains(it));
       }
     };
     boolean _exists_1 = IterableExtensions.<QualifiedName>exists(names, _function_3);

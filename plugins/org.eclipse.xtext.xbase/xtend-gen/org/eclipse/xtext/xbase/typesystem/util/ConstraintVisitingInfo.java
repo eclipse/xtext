@@ -52,8 +52,7 @@ public class ConstraintVisitingInfo {
   public void pushInfo(final JvmTypeParameterDeclarator declarator, final int idx) {
     boolean _equals = Objects.equal(declarator, null);
     if (_equals) {
-      NullPointerException _nullPointerException = new NullPointerException("declarator may not be null");
-      throw _nullPointerException;
+      throw new NullPointerException("declarator may not be null");
     }
     this.declarator = declarator;
     this.idx = idx;

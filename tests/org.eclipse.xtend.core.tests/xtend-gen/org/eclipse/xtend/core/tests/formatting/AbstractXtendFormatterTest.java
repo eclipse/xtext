@@ -134,8 +134,7 @@ public abstract class AbstractXtendFormatterTest {
     String _string = seq.toString();
     String _replace = _string.replace("<<", "«");
     String _replace_1 = _replace.replace(">>", "»");
-    String _replace_2 = _replace_1.replace("```", "\'\'\'");
-    return _replace_2;
+    return _replace_1.replace("```", "\'\'\'");
   }
   
   public void assertFormattedRichStringExpression(final CharSequence seq) {

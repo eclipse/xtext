@@ -37,24 +37,21 @@ public class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jvm
     String _simpleName = this.getSimpleName();
     String _plus = ("The annotation \'" + _simpleName);
     String _plus_1 = (_plus + "\' cannot declare any constructors.");
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_plus_1);
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException(_plus_1);
   }
   
   public MutableFieldDeclaration addField(final String name, final Procedure1<MutableFieldDeclaration> initializer) {
     String _simpleName = this.getSimpleName();
     String _plus = ("The annotation \'" + _simpleName);
     String _plus_1 = (_plus + "\' cannot declare any fields.");
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_plus_1);
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException(_plus_1);
   }
   
   public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
     String _simpleName = this.getSimpleName();
     String _plus = ("The annotation \'" + _simpleName);
     String _plus_1 = (_plus + "\' cannot declare any methods.");
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_plus_1);
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException(_plus_1);
   }
   
   public MutableAnnotationTypeElementDeclaration addAnnotationTypeElement(final String name, final Procedure1<MutableAnnotationTypeElementDeclaration> initializer) {
@@ -79,12 +76,10 @@ public class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jvm
     final Function1<MutableAnnotationTypeElementDeclaration,Boolean> _function = new Function1<MutableAnnotationTypeElementDeclaration,Boolean>() {
       public Boolean apply(final MutableAnnotationTypeElementDeclaration it) {
         String _simpleName = it.getSimpleName();
-        boolean _equals = Objects.equal(_simpleName, name);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_simpleName, name));
       }
     };
-    MutableAnnotationTypeElementDeclaration _findFirst = IterableExtensions.findFirst(_declaredAnnotationTypeElements, _function);
-    return _findFirst;
+    return IterableExtensions.findFirst(_declaredAnnotationTypeElements, _function);
   }
   
   public Iterable<? extends MutableAnnotationTypeElementDeclaration> getDeclaredAnnotationTypeElements() {
@@ -93,12 +88,10 @@ public class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jvm
     final Function1<JvmMember,MutableMemberDeclaration> _function = new Function1<JvmMember,MutableMemberDeclaration>() {
       public MutableMemberDeclaration apply(final JvmMember it) {
         CompilationUnitImpl _compilationUnit = JvmAnnotationTypeDeclarationImpl.this.getCompilationUnit();
-        MutableMemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(it);
-        return _memberDeclaration;
+        return _compilationUnit.toMemberDeclaration(it);
       }
     };
     List<MutableMemberDeclaration> _map = ListExtensions.<JvmMember, MutableMemberDeclaration>map(_members, _function);
-    Iterable<MutableAnnotationTypeElementDeclaration> _filter = Iterables.<MutableAnnotationTypeElementDeclaration>filter(_map, MutableAnnotationTypeElementDeclaration.class);
-    return _filter;
+    return Iterables.<MutableAnnotationTypeElementDeclaration>filter(_map, MutableAnnotationTypeElementDeclaration.class);
   }
 }

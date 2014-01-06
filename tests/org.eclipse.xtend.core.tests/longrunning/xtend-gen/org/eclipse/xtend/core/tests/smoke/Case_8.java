@@ -27,8 +27,7 @@ public class Case_8 {
   
   public EList<Resource.Diagnostic> getErrors(final EObject obj) {
     Resource _eResource = obj.eResource();
-    EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-    return _errors;
+    return _eResource.getErrors();
   }
   
   public void resolve(final EObject obj) {
@@ -40,8 +39,7 @@ public class Case_8 {
     try {
       EObject _parse = this.helper.parse(seq);
       EList<EObject> _eContents = _parse.eContents();
-      EObject _head = IterableExtensions.<EObject>head(_eContents);
-      return _head;
+      return IterableExtensions.<EObject>head(_eContents);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

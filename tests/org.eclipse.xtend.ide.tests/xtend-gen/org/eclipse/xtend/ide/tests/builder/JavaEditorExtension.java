@@ -42,19 +42,16 @@ public class JavaEditorExtension {
   
   public ITextEditor reconcile(final String fileName, final String oldText, final String newText) {
     ITextEditor _openJavaEditor = this.openJavaEditor(fileName);
-    ITextEditor _reconcile = this.reconcile(_openJavaEditor, oldText, newText);
-    return _reconcile;
+    return this.reconcile(_openJavaEditor, oldText, newText);
   }
   
   public ITextEditor reconcile(final ITextEditor editor, final String oldText, final String newText) {
     final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
       public ITextEditor apply(final ITextEditor it) {
-        ITextEditor _changeContent = JavaEditorExtension.this.changeContent(it, oldText, newText);
-        return _changeContent;
+        return JavaEditorExtension.this.changeContent(it, oldText, newText);
       }
     };
-    ITextEditor _reconcile = this.reconcile(editor, _function);
-    return _reconcile;
+    return this.reconcile(editor, _function);
   }
   
   public ITextEditor reconcile(final ITextEditor editor, final Function1<? super ITextEditor,? extends ITextEditor> consumer) {
@@ -76,8 +73,7 @@ public class JavaEditorExtension {
   }
   
   public ITextEditor save(final ITextEditor editor) {
-    ITextEditor _save = this.save(editor, null);
-    return _save;
+    return this.save(editor, null);
   }
   
   public ITextEditor save(final ITextEditor editor, final Function1<? super ITextEditor,? extends ITextEditor> consumer) {
@@ -100,8 +96,7 @@ public class JavaEditorExtension {
   }
   
   public ITextEditor close(final ITextEditor editor) {
-    ITextEditor _close = this.close(editor, null);
-    return _close;
+    return this.close(editor, null);
   }
   
   public ITextEditor close(final ITextEditor editor, final Function1<? super ITextEditor,? extends ITextEditor> consumer) {
@@ -124,13 +119,11 @@ public class JavaEditorExtension {
   }
   
   public String waitForPostReconcileEvent(final Procedure0 producer) {
-    String _waitForElementChangedEvent = this.waitForElementChangedEvent(ElementChangedEvent.POST_RECONCILE, producer);
-    return _waitForElementChangedEvent;
+    return this.waitForElementChangedEvent(ElementChangedEvent.POST_RECONCILE, producer);
   }
   
   public String waitForPostChangeEvent(final Procedure0 producer) {
-    String _waitForElementChangedEvent = this.waitForElementChangedEvent(ElementChangedEvent.POST_CHANGE, producer);
-    return _waitForElementChangedEvent;
+    return this.waitForElementChangedEvent(ElementChangedEvent.POST_CHANGE, producer);
   }
   
   public String waitForElementChangedEvent(final int eventMask, final Procedure0 producer) {
@@ -171,8 +164,7 @@ public class JavaEditorExtension {
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("end waiting for an element changed event: ");
         _builder_1.append(eventMask, "");
-        String _println = InputOutput.<String>println(_builder_1.toString());
-        _xifexpression = _println;
+        _xifexpression = InputOutput.<String>println(_builder_1.toString());
       }
       _xblockexpression = (_xifexpression);
     }
@@ -182,8 +174,7 @@ public class JavaEditorExtension {
   public ITextEditor openJavaEditor(final String fileName) {
     try {
       IFile _file = this._workbenchTestHelper.getFile(fileName);
-      ITextEditor _openLikeTextEditor = this._workbenchTestHelper.openLikeTextEditor(_file);
-      return _openLikeTextEditor;
+      return this._workbenchTestHelper.openLikeTextEditor(_file);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

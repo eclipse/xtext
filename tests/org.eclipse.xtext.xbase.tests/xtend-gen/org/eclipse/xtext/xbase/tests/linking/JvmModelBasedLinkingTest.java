@@ -195,7 +195,6 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
   }
   
   public JvmTypeReference stringType(final EObject ctx) {
-    JvmTypeReference _typeForName = this.refs.getTypeForName(String.class, ctx);
-    return _typeForName;
+    return this.refs.getTypeForName(String.class, ctx);
   }
 }

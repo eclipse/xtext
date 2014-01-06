@@ -82,11 +82,9 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   
   public Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> in(final String typeParameters, final String expectedType, final String actualType) {
     final JvmOperation operation = this.operation(typeParameters, expectedType, actualType);
-    DeferredTypeParameterHintCollector _deferredTypeParameterHintCollector = new DeferredTypeParameterHintCollector(this);
-    final DeferredTypeParameterHintCollector collector = _deferredTypeParameterHintCollector;
+    final DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(this);
     PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
-    MockTypeParameterSubstitutor _mockTypeParameterSubstitutor = new MockTypeParameterSubstitutor(this, _publicResolvedTypes);
-    final MockTypeParameterSubstitutor substitutor = _mockTypeParameterSubstitutor;
+    final MockTypeParameterSubstitutor substitutor = new MockTypeParameterSubstitutor(this, _publicResolvedTypes);
     EList<JvmFormalParameter> _parameters = operation.getParameters();
     JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
     JvmTypeReference _parameterType = _head.getParameterType();
@@ -127,8 +125,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     Set<JvmTypeParameter> _keySet = mapping.keySet();
     final Function1<JvmTypeParameter,String> _function_1 = new Function1<JvmTypeParameter,String>() {
       public String apply(final JvmTypeParameter it) {
-        String _simpleName = it.getSimpleName();
-        return _simpleName;
+        return it.getSimpleName();
       }
     };
     Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function_1);
@@ -158,8 +155,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
           Set<JvmTypeParameter> _keySet = mapping.keySet();
           final Function1<JvmTypeParameter,String> _function = new Function1<JvmTypeParameter,String>() {
             public String apply(final JvmTypeParameter it) {
-              String _simpleName = it.getSimpleName();
-              return _simpleName;
+              return it.getSimpleName();
             }
           };
           Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function);
@@ -200,8 +196,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
         String _string = _typeReference.toString();
         VarianceInfo _declaredVariance = it.getDeclaredVariance();
         VarianceInfo _actualVariance = it.getActualVariance();
-        Triple<String,VarianceInfo,VarianceInfo> _create = Tuples.<String, VarianceInfo, VarianceInfo>create(_string, _declaredVariance, _actualVariance);
-        return _create;
+        return Tuples.<String, VarianceInfo, VarianceInfo>create(_string, _declaredVariance, _actualVariance);
       }
     };
     List<Triple<String,VarianceInfo,VarianceInfo>> _map_1 = ListExtensions.<LightweightBoundTypeArgument, Triple<String,VarianceInfo,VarianceInfo>>map(mappingData, _function_1);
@@ -215,8 +210,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   }
   
   public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
-    List<LightweightBoundTypeArgument> _get = this.hints.get(handle);
-    return _get;
+    return this.hints.get(handle);
   }
   
   public boolean isResolved(final Object handle) {
@@ -226,8 +220,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   public Triple<String,VarianceInfo,VarianceInfo> operator_mappedTo(final Pair<String,VarianceInfo> pair, final VarianceInfo third) {
     String _key = pair.getKey();
     VarianceInfo _value = pair.getValue();
-    Triple<String,VarianceInfo,VarianceInfo> _create = Tuples.<String, VarianceInfo, VarianceInfo>create(_key, _value, third);
-    return _create;
+    return Tuples.<String, VarianceInfo, VarianceInfo>create(_key, _value, third);
   }
   
   @Test

@@ -558,8 +558,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       JvmTypeReference _xifexpression = null;
       boolean _notEquals = (!Objects.equal(type, null));
       if (_notEquals) {
-        JvmTypeReference _returnType = function.getReturnType();
-        _xifexpression = _returnType;
+        _xifexpression = function.getReturnType();
       }
       final Object value = this.interpreter.evaluate(expr, _xifexpression);
       assertions.apply(value);

@@ -23,8 +23,7 @@ public class ConsoleHyperlinking implements IPatternMatchListenerDelegate {
       final int length = event.getLength();
       IDocument _document = this.console.getDocument();
       String _get = _document.get(offset, length);
-      XtendFileHyperlink _xtendFileHyperlink = new XtendFileHyperlink(_get, this.workbench, this.console);
-      final XtendFileHyperlink link = _xtendFileHyperlink;
+      final XtendFileHyperlink link = new XtendFileHyperlink(_get, this.workbench, this.console);
       this.console.addHyperlink(link, offset, length);
     } catch (final Throwable _t) {
       if (_t instanceof BadLocationException) {

@@ -22,38 +22,32 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation> implements MutableMethodDeclaration {
   public boolean isAbstract() {
     JvmOperation _delegate = this.getDelegate();
-    boolean _isAbstract = _delegate.isAbstract();
-    return _isAbstract;
+    return _delegate.isAbstract();
   }
   
   public boolean isFinal() {
     JvmOperation _delegate = this.getDelegate();
-    boolean _isFinal = _delegate.isFinal();
-    return _isFinal;
+    return _delegate.isFinal();
   }
   
   public boolean isStatic() {
     JvmOperation _delegate = this.getDelegate();
-    boolean _isStatic = _delegate.isStatic();
-    return _isStatic;
+    return _delegate.isStatic();
   }
   
   public boolean isSynchronized() {
     JvmOperation _delegate = this.getDelegate();
-    boolean _isSynchronized = _delegate.isSynchronized();
-    return _isSynchronized;
+    return _delegate.isSynchronized();
   }
   
   public boolean isDefault() {
     JvmOperation _delegate = this.getDelegate();
-    boolean _isDefault = _delegate.isDefault();
-    return _isDefault;
+    return _delegate.isDefault();
   }
   
   public boolean isStrictFloatingPoint() {
     JvmOperation _delegate = this.getDelegate();
-    boolean _isStrictFloatingPoint = _delegate.isStrictFloatingPoint();
-    return _isStrictFloatingPoint;
+    return _delegate.isStrictFloatingPoint();
   }
   
   public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
@@ -63,8 +57,7 @@ public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOp
   
   public boolean isNative() {
     JvmOperation _delegate = this.getDelegate();
-    boolean _isNative = _delegate.isNative();
-    return _isNative;
+    return _delegate.isNative();
   }
   
   public void setNative(final boolean isNative) {
@@ -76,8 +69,7 @@ public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOp
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmOperation _delegate = this.getDelegate();
     JvmTypeReference _returnType = _delegate.getReturnType();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_returnType);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_returnType);
   }
   
   public void setReturnType(final TypeReference type) {

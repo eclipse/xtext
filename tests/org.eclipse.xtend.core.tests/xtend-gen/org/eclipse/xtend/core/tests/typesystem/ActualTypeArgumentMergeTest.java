@@ -79,8 +79,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       EList<JvmTypeParameter> _typeParameters = operation.getTypeParameters();
-      ActualTypeArgumentCollector _actualTypeArgumentCollector = new ActualTypeArgumentCollector(_typeParameters, BoundTypeArgumentSource.INFERRED, this);
-      final ActualTypeArgumentCollector collector = _actualTypeArgumentCollector;
+      final ActualTypeArgumentCollector collector = new ActualTypeArgumentCollector(_typeParameters, BoundTypeArgumentSource.INFERRED, this);
       int _size = ((List<String>)Conversions.doWrapArray(alternatingTypeReferences)).size();
       int _minus = (_size - 1);
       IntegerRange _upTo = new IntegerRange(0, _minus);
@@ -120,8 +119,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
     Set<JvmTypeParameter> _keySet = mapping.keySet();
     final Function1<JvmTypeParameter,String> _function = new Function1<JvmTypeParameter,String>() {
       public String apply(final JvmTypeParameter it) {
-        String _simpleName = it.getSimpleName();
-        return _simpleName;
+        return it.getSimpleName();
       }
     };
     Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function);
@@ -147,15 +145,13 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
         VarianceInfo _variance = _value_2.getVariance();
         Assert.assertEquals(variance, _variance);
       }
-      Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> _key = merged.getKey();
-      _xblockexpression = (_key);
+      _xblockexpression = (merged.getKey());
     }
     return _xblockexpression;
   }
   
   public List<JvmTypeParameter> getDeclaredTypeParameters() {
-    List<JvmTypeParameter> _emptyList = CollectionLiterals.<JvmTypeParameter>emptyList();
-    return _emptyList;
+    return CollectionLiterals.<JvmTypeParameter>emptyList();
   }
   
   @Test

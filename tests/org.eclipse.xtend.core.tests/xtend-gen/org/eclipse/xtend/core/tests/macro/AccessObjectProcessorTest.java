@@ -46,8 +46,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
             Type _type = it.getType();
             TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
             Type _type_1 = _newTypeReference.getType();
-            boolean _equals = Objects.equal(_type, _type_1);
-            return Boolean.valueOf(_equals);
+            return Boolean.valueOf(Objects.equal(_type, _type_1));
           }
         };
         TypeReference _findFirst = IterableExtensions.findFirst(_implementedInterfaces, _function);
@@ -59,8 +58,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
             Type _type = it.getType();
             TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
             Type _type_1 = _newTypeReference.getType();
-            boolean _equals = Objects.equal(_type, _type_1);
-            return Boolean.valueOf(_equals);
+            return Boolean.valueOf(Objects.equal(_type, _type_1));
           }
         };
         TypeReference _findFirst_1 = IterableExtensions.findFirst(_implementedInterfaces_1, _function_1);
@@ -100,8 +98,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
             Type _type = it.getType();
             TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
             Type _type_1 = _newTypeReference.getType();
-            boolean _equals = Objects.equal(_type, _type_1);
-            return Boolean.valueOf(_equals);
+            return Boolean.valueOf(Objects.equal(_type, _type_1));
           }
         };
         TypeReference _findFirst = IterableExtensions.findFirst(_implementedInterfaces, _function);
@@ -113,8 +110,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
             Type _type = it.getType();
             TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
             Type _type_1 = _newTypeReference.getType();
-            boolean _equals = Objects.equal(_type, _type_1);
-            return Boolean.valueOf(_equals);
+            return Boolean.valueOf(Objects.equal(_type, _type_1));
           }
         };
         TypeReference _findFirst_1 = IterableExtensions.findFirst(_implementedInterfaces_1, _function_1);

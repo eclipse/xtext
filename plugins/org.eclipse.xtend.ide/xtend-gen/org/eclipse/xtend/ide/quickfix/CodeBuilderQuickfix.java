@@ -16,9 +16,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IAnnotatable;
 import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IMember;
-import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -68,15 +66,13 @@ public class CodeBuilderQuickfix {
       if (!_matched) {
         if (builder instanceof ICodeBuilder.Xtend) {
           _matched=true;
-          IModification _xtendModification = this.getXtendModification(((ICodeBuilder.Xtend)builder));
-          _switchResult = _xtendModification;
+          _switchResult = this.getXtendModification(((ICodeBuilder.Xtend)builder));
         }
       }
       if (!_matched) {
         if (builder instanceof ICodeBuilder.Java) {
           _matched=true;
-          IModification _javaModification = this.getJavaModification(((ICodeBuilder.Java)builder));
-          _switchResult = _javaModification;
+          _switchResult = this.getJavaModification(((ICodeBuilder.Java)builder));
         }
       }
       final IModification modification = _switchResult;
@@ -157,10 +153,8 @@ public class CodeBuilderQuickfix {
       public void apply(final IModificationContext it) throws Exception {
         final IType type = builder.getIType();
         char _charAt = ".".charAt(0);
-        ImportManager _importManager = new ImportManager(true, _charAt);
-        final ImportManager importManager = _importManager;
-        StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(importManager);
-        final StringBuilderBasedAppendable content = _stringBuilderBasedAppendable;
+        final ImportManager importManager = new ImportManager(true, _charAt);
+        final StringBuilderBasedAppendable content = new StringBuilderBasedAppendable(importManager);
         builder.build(content);
         List<String> _imports = importManager.getImports();
         final Procedure1<String> _function = new Procedure1<String>() {
@@ -182,8 +176,7 @@ public class CodeBuilderQuickfix {
             _matched=true;
             String _string = content.toString();
             NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-            IField _createField = type.createField(_string, null, true, _nullProgressMonitor);
-            _switchResult = _createField;
+            _switchResult = type.createField(_string, null, true, _nullProgressMonitor);
           }
         }
         if (!_matched) {
@@ -191,8 +184,7 @@ public class CodeBuilderQuickfix {
             _matched=true;
             String _string = content.toString();
             NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-            IMethod _createMethod = type.createMethod(_string, null, true, _nullProgressMonitor);
-            _switchResult = _createMethod;
+            _switchResult = type.createMethod(_string, null, true, _nullProgressMonitor);
           }
         }
         if (!_matched) {
@@ -200,8 +192,7 @@ public class CodeBuilderQuickfix {
             _matched=true;
             String _string = content.toString();
             NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-            IMethod _createMethod = type.createMethod(_string, null, true, _nullProgressMonitor);
-            _switchResult = _createMethod;
+            _switchResult = type.createMethod(_string, null, true, _nullProgressMonitor);
           }
         }
         if (!_matched) {

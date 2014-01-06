@@ -29,17 +29,14 @@ public class TimedReassigningResolvedTypes extends ReassigningStackedResolvedTyp
   }
   
   public StackedResolvedTypes pushReassigningTypes() {
-    TimedReassigningResolvedTypes _timedReassigningResolvedTypes = new TimedReassigningResolvedTypes(this, this.times);
-    return _timedReassigningResolvedTypes;
+    return new TimedReassigningResolvedTypes(this, this.times);
   }
   
   public StackedResolvedTypes pushTypes() {
-    TimedStackedResolvedTypes _timedStackedResolvedTypes = new TimedStackedResolvedTypes(this, this.times);
-    return _timedStackedResolvedTypes;
+    return new TimedStackedResolvedTypes(this, this.times);
   }
   
   public ExpressionAwareStackedResolvedTypes pushTypes(final XExpression context) {
-    TimedExpressionAwareResolvedTypes _timedExpressionAwareResolvedTypes = new TimedExpressionAwareResolvedTypes(this, context, this.times);
-    return _timedExpressionAwareResolvedTypes;
+    return new TimedExpressionAwareResolvedTypes(this, context, this.times);
   }
 }

@@ -50,8 +50,7 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
   private SynonymTypesProvider _synonymTypesProvider;
   
   public List<JvmTypeParameter> getDeclaredTypeParameters() {
-    List<JvmTypeParameter> _emptyList = CollectionLiterals.<JvmTypeParameter>emptyList();
-    return _emptyList;
+    return CollectionLiterals.<JvmTypeParameter>emptyList();
   }
   
   public void hasSynonyms(final String type, final String... expectedSynonyms) {
@@ -89,11 +88,9 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
         EList<JvmFormalParameter> _parameters = operation.getParameters();
         JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
         JvmTypeReference _parameterType = _head.getParameterType();
-        LightweightTypeReference _lightweightReference = this.toLightweightReference(_parameterType);
-        _xifexpression = _lightweightReference;
+        _xifexpression = this.toLightweightReference(_parameterType);
       } else {
-        AnyTypeReference _anyTypeReference = new AnyTypeReference(this);
-        _xifexpression = _anyTypeReference;
+        _xifexpression = new AnyTypeReference(this);
       }
       final LightweightTypeReference primary = _xifexpression;
       final HashSet<String> actualSynonyms = CollectionLiterals.<String>newHashSet();
@@ -101,8 +98,7 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
         @Override
         protected boolean accept(final LightweightTypeReference type, final EnumSet<ConformanceHint> conformance) {
           String _simpleName = type.getSimpleName();
-          boolean _add = actualSynonyms.add(_simpleName);
-          return _add;
+          return actualSynonyms.add(_simpleName);
         }
       };
       this._synonymTypesProvider.collectSynonymTypes(primary, _function);

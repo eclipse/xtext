@@ -57,8 +57,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
     JvmVisibility _visibility = _delegate.getVisibility();
-    Visibility _visibility_1 = _compilationUnit.toVisibility(_visibility);
-    return _visibility_1;
+    return _compilationUnit.toVisibility(_visibility);
   }
   
   public void setVisibility(final Visibility visibility) {
@@ -96,8 +95,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
     JvmDeclaredType _declaringType = _delegate.getDeclaringType();
-    MutableTypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(_declaringType);
-    return _typeDeclaration;
+    return _compilationUnit.toTypeDeclaration(_declaringType);
   }
   
   public void setSimpleName(final String name) {

@@ -19,22 +19,18 @@ public class SaveWithReconciliationQueuedBuildDataTest extends AbstractSingleEdi
   public ITextEditor doSave(final ITextEditor editor, final Function1<? super ITextEditor,? extends ITextEditor> consumer) {
     final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
       public ITextEditor apply(final ITextEditor it) {
-        ITextEditor _reconcile = SaveWithReconciliationQueuedBuildDataTest.this._javaEditorExtension.reconcile(it, consumer);
-        return _reconcile;
+        return SaveWithReconciliationQueuedBuildDataTest.this._javaEditorExtension.reconcile(it, consumer);
       }
     };
-    ITextEditor _save = this._javaEditorExtension.save(editor, _function);
-    return _save;
+    return this._javaEditorExtension.save(editor, _function);
   }
   
   public ITextEditor doClose(final ITextEditor editor, final Function1<? super ITextEditor,? extends ITextEditor> consumer) {
     final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
       public ITextEditor apply(final ITextEditor it) {
-        ITextEditor _reconcile = SaveWithReconciliationQueuedBuildDataTest.this._javaEditorExtension.reconcile(it, consumer);
-        return _reconcile;
+        return SaveWithReconciliationQueuedBuildDataTest.this._javaEditorExtension.reconcile(it, consumer);
       }
     };
-    ITextEditor _close = this._javaEditorExtension.close(editor, _function);
-    return _close;
+    return this._javaEditorExtension.close(editor, _function);
   }
 }

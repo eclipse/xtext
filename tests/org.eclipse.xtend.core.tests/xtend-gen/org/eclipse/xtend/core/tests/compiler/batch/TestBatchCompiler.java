@@ -185,8 +185,7 @@ public class TestBatchCompiler {
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path,String> _function = new Function1<Path,String>() {
         public String apply(final Path it) {
-          String _lastSegment = it.getLastSegment();
-          return _lastSegment;
+          return it.getLastSegment();
         }
       };
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
@@ -250,8 +249,7 @@ public class TestBatchCompiler {
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path,String> _function = new Function1<Path,String>() {
         public String apply(final Path it) {
-          String _lastSegment = it.getLastSegment();
-          return _lastSegment;
+          return it.getLastSegment();
         }
       };
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
@@ -315,8 +313,7 @@ public class TestBatchCompiler {
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path,String> _function = new Function1<Path,String>() {
         public String apply(final Path it) {
-          String _lastSegment = it.getLastSegment();
-          return _lastSegment;
+          return it.getLastSegment();
         }
       };
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
@@ -380,8 +377,7 @@ public class TestBatchCompiler {
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path,String> _function = new Function1<Path,String>() {
         public String apply(final Path it) {
-          String _lastSegment = it.getLastSegment();
-          return _lastSegment;
+          return it.getLastSegment();
         }
       };
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
@@ -445,8 +441,7 @@ public class TestBatchCompiler {
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path,String> _function = new Function1<Path,String>() {
         public String apply(final Path it) {
-          String _lastSegment = it.getLastSegment();
-          return _lastSegment;
+          return it.getLastSegment();
         }
       };
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
@@ -514,8 +509,7 @@ public class TestBatchCompiler {
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path,String> _function = new Function1<Path,String>() {
         public String apply(final Path it) {
-          String _lastSegment = it.getLastSegment();
-          return _lastSegment;
+          return it.getLastSegment();
         }
       };
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
@@ -597,8 +591,7 @@ public class TestBatchCompiler {
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path,String> _function = new Function1<Path,String>() {
         public String apply(final Path it) {
-          String _lastSegment = it.getLastSegment();
-          return _lastSegment;
+          return it.getLastSegment();
         }
       };
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
@@ -674,8 +667,7 @@ public class TestBatchCompiler {
     this.batchCompiler.setOutputPath(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
     this.batchCompiler.setClassPath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
     this.batchCompiler.compile();
-    File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES + "/test"));
-    final File compilerOutputDir = _file;
+    final File compilerOutputDir = new File((TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES + "/test"));
     boolean _exists = compilerOutputDir.exists();
     Assert.assertTrue("Compiler output exists", _exists);
     String[] _list = compilerOutputDir.list();
@@ -707,13 +699,12 @@ public class TestBatchCompiler {
   
   @Test
   public void bug417177() {
-    File _file = new File(TestBatchCompiler.BUG417177_OUTPUT_DIRECTORY);
-    final File outputDir = _file;
+    final File outputDir = new File(TestBatchCompiler.BUG417177_OUTPUT_DIRECTORY);
     outputDir.mkdirs();
-    File _file_1 = new File(outputDir, "mypackage/Bug417177_1.java");
+    File _file = new File(outputDir, "mypackage/Bug417177_1.java");
+    _file.delete();
+    File _file_1 = new File(outputDir, "mypackage/Bug417177_2.java");
     _file_1.delete();
-    File _file_2 = new File(outputDir, "mypackage/Bug417177_2.java");
-    _file_2.delete();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(TestBatchCompiler.BUG417177_SRC_DIRECTORY_1, "");
     _builder.append(File.pathSeparator, "");
@@ -722,11 +713,11 @@ public class TestBatchCompiler {
     this.batchCompiler.setOutputPath(TestBatchCompiler.BUG417177_OUTPUT_DIRECTORY);
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue("Compiling files from multiple source directories", _compile);
-    File _file_3 = new File(outputDir, "mypackage/Bug417177_1.java");
-    boolean _exists = _file_3.exists();
+    File _file_2 = new File(outputDir, "mypackage/Bug417177_1.java");
+    boolean _exists = _file_2.exists();
     Assert.assertTrue(_exists);
-    File _file_4 = new File(outputDir, "mypackage/Bug417177_2.java");
-    boolean _exists_1 = _file_4.exists();
+    File _file_3 = new File(outputDir, "mypackage/Bug417177_2.java");
+    boolean _exists_1 = _file_3.exists();
     Assert.assertTrue(_exists_1);
   }
   
@@ -738,8 +729,7 @@ public class TestBatchCompiler {
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage"));
     final FilenameFilter _function = new FilenameFilter() {
       public boolean accept(final File dir, final String name) {
-        boolean _endsWith = name.endsWith(".java");
-        return _endsWith;
+        return name.endsWith(".java");
       }
     };
     String[] _list = _file.list(_function);
@@ -755,8 +745,7 @@ public class TestBatchCompiler {
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage"));
     final FilenameFilter _function = new FilenameFilter() {
       public boolean accept(final File dir, final String name) {
-        boolean _endsWith = name.endsWith(".java");
-        return _endsWith;
+        return name.endsWith(".java");
       }
     };
     String[] _list = _file.list(_function);
@@ -779,8 +768,7 @@ public class TestBatchCompiler {
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function = new FilenameFilter() {
       public boolean accept(final File dir, final String name) {
-        boolean _endsWith = name.endsWith(".java");
-        return _endsWith;
+        return name.endsWith(".java");
       }
     };
     String[] _list = _file.list(_function);
@@ -789,8 +777,7 @@ public class TestBatchCompiler {
     File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function_1 = new FilenameFilter() {
       public boolean accept(final File dir, final String name) {
-        boolean _endsWith = name.endsWith("._trace");
-        return _endsWith;
+        return name.endsWith("._trace");
       }
     };
     String[] _list_1 = _file_1.list(_function_1);
@@ -805,8 +792,7 @@ public class TestBatchCompiler {
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function = new FilenameFilter() {
       public boolean accept(final File dir, final String name) {
-        boolean _endsWith = name.endsWith(".java");
-        return _endsWith;
+        return name.endsWith(".java");
       }
     };
     String[] _list = _file.list(_function);
@@ -815,8 +801,7 @@ public class TestBatchCompiler {
     File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function_1 = new FilenameFilter() {
       public boolean accept(final File dir, final String name) {
-        boolean _endsWith = name.endsWith("._trace");
-        return _endsWith;
+        return name.endsWith("._trace");
       }
     };
     String[] _list_1 = _file_1.list(_function_1);

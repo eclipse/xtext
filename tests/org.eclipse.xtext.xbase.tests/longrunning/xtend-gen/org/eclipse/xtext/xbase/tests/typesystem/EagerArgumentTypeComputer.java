@@ -32,8 +32,7 @@ public class EagerArgumentTypeComputer extends XbaseTypeComputer {
         }
       };
       IterableExtensions.forEach(candidates, _function);
-      ILinkingCandidate _bestCandidate = super.getBestCandidate(candidates);
-      _xblockexpression = (_bestCandidate);
+      _xblockexpression = (super.getBestCandidate(candidates));
     }
     return _xblockexpression;
   }

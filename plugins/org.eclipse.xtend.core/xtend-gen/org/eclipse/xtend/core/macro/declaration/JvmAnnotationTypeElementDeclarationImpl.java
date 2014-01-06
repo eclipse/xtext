@@ -35,8 +35,7 @@ public class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclaratio
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmOperation _delegate = this.getDelegate();
     JvmTypeReference _returnType = _delegate.getReturnType();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_returnType);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_returnType);
   }
   
   public Expression getDefaultValueExpression() {

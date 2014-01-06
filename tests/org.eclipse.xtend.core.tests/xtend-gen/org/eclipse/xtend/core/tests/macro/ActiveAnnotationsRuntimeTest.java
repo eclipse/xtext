@@ -142,14 +142,12 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       boolean _delete = tempDir.delete();
       boolean _not = (!_delete);
       if (_not) {
-        IllegalStateException _illegalStateException = new IllegalStateException("couldn\'t delete temp file.");
-        throw _illegalStateException;
+        throw new IllegalStateException("couldn\'t delete temp file.");
       }
       boolean _mkdir = tempDir.mkdir();
       boolean _not_1 = (!_mkdir);
       if (_not_1) {
-        IllegalStateException _illegalStateException_1 = new IllegalStateException("couldn\'t create temp dir.");
-        throw _illegalStateException_1;
+        throw new IllegalStateException("couldn\'t create temp dir.");
       }
       return tempDir;
     } catch (Throwable _e) {
@@ -160,8 +158,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   protected URI copyToDisk(final String projectName, final Pair<String,String> fileRepresentation) {
     String _key = fileRepresentation.getKey();
     String _plus = ((("/" + projectName) + "/src/") + _key);
-    Path _path = new Path(_plus);
-    final Path path = _path;
+    final Path path = new Path(_plus);
     String _value = fileRepresentation.getValue();
     this.fileSystemSupport.setContents(path, _value);
     WorkspaceConfig _workspaceConfig = this.configProvider.getWorkspaceConfig();
@@ -231,12 +228,10 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
           ClassLoader _classLoader = _class.getClassLoader();
           final Function1<String,Class<? extends Object>> _function = new Function1<String,Class<? extends Object>>() {
             public Class<? extends Object> apply(final String it) {
-              Class<? extends Object> _compiledClass = result.getCompiledClass(it);
-              return _compiledClass;
+              return result.getCompiledClass(it);
             }
           };
-          DelegatingClassloader _delegatingClassloader = new DelegatingClassloader(_classLoader, _function);
-          final DelegatingClassloader classLoader = _delegatingClassloader;
+          final DelegatingClassloader classLoader = new DelegatingClassloader(_classLoader, _function);
           resourceSet.setClasspathURIContext(classLoader);
           ActiveAnnotationsRuntimeTest.this.processorProvider.setClassLoader(classLoader);
         }

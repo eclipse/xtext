@@ -318,10 +318,8 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
         final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
         int _indexOf_1 = model.indexOf("bar");
         final DocumentRewriter.Section beforeBar = it.newSection(_indexOf_1, 0);
-        StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(DocumentRewriterTest.this.services, r);
-        final StandardTypeReferenceOwner owner = _standardTypeReferenceOwner;
-        OwnedConverter _ownedConverter = new OwnedConverter(owner);
-        final OwnedConverter converter = _ownedConverter;
+        final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(DocumentRewriterTest.this.services, r);
+        final OwnedConverter converter = new OwnedConverter(owner);
         TypeReferences _typeReferences = DocumentRewriterTest.this.services.getTypeReferences();
         JvmWildcardTypeReference _createJvmWildcardTypeReference = DocumentRewriterTest.this._typesFactory.createJvmWildcardTypeReference();
         final JvmTypeReference list = _typeReferences.getTypeForName(List.class, r, _createJvmWildcardTypeReference);
@@ -385,10 +383,8 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
         final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
         int _indexOf_1 = model.indexOf("bar");
         final DocumentRewriter.Section beforeBar = it.newSection(_indexOf_1, 0);
-        StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(DocumentRewriterTest.this.services, r);
-        final StandardTypeReferenceOwner owner = _standardTypeReferenceOwner;
-        OwnedConverter _ownedConverter = new OwnedConverter(owner);
-        final OwnedConverter converter = _ownedConverter;
+        final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(DocumentRewriterTest.this.services, r);
+        final OwnedConverter converter = new OwnedConverter(owner);
         TypeReferences _typeReferences = DocumentRewriterTest.this.services.getTypeReferences();
         TypeReferences _typeReferences_1 = DocumentRewriterTest.this.services.getTypeReferences();
         JvmTypeReference _typeForName = _typeReferences_1.getTypeForName(String.class, r);
@@ -556,16 +552,14 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
               final DocumentRewriter rewriter = DocumentRewriterTest.this.factory.create(document, it);
               test.apply(rewriter, it);
               List<ReplaceRegion> _changes = rewriter.getChanges();
-              TextEdit _convertToTextEdit = DocumentRewriterTest.this._replaceConverter.convertToTextEdit(_changes);
-              _xblockexpression = (_convertToTextEdit);
+              _xblockexpression = (DocumentRewriterTest.this._replaceConverter.convertToTextEdit(_changes));
             }
             return _xblockexpression;
           }
         };
         TextEdit _readOnly = document.<TextEdit>readOnly(_function);
         _readOnly.apply(document);
-        String _get = document.get();
-        _xblockexpression = (_get);
+        _xblockexpression = (document.get());
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -626,8 +620,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
         }
       };
       final XtendDocumentTokenSource source = ObjectExtensions.<XtendDocumentTokenSource>operator_doubleArrow(_xtendDocumentTokenSource, _function);
-      XtextDocument _xtextDocument = new XtextDocument(source, null);
-      final XtextDocument document = _xtextDocument;
+      final XtextDocument document = new XtextDocument(source, null);
       document.set(content);
       document.setInput(((XtextResource) resource));
       _xblockexpression = (document);

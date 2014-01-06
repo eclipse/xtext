@@ -30,8 +30,7 @@ public class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuild
     ISourceAppender _append_1 = _append.append(_className);
     ISourceAppender _append_2 = _append_1.append(" {");
     ISourceAppender _newLine = _append_2.newLine();
-    ISourceAppender _append_3 = _newLine.append("}");
-    return _append_3;
+    return _newLine.append("}");
   }
   
   public IType getIType() {

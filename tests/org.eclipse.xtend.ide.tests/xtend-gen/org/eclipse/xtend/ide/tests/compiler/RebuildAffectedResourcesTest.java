@@ -23,7 +23,6 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -38,12 +37,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
   private WorkbenchTestHelper workbenchTestHelper;
   
   @Rule
-  public StopwatchRule rule = new Function0<StopwatchRule>() {
-    public StopwatchRule apply() {
-      StopwatchRule _stopwatchRule = new StopwatchRule(true);
-      return _stopwatchRule;
-    }
-  }.apply();
+  public StopwatchRule rule = new StopwatchRule(true);
   
   @After
   public void tearDown() {
@@ -299,8 +293,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
     final Function1<Map.Entry<String,Stopwatches.NumbersForTask>,Boolean> _function = new Function1<Map.Entry<String,Stopwatches.NumbersForTask>,Boolean>() {
       public Boolean apply(final Map.Entry<String,Stopwatches.NumbersForTask> it) {
         String _key = it.getKey();
-        boolean _equals = Objects.equal(_key, "XtextBuilder.build");
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_key, "XtextBuilder.build"));
       }
     };
     Iterable<Map.Entry<String,Stopwatches.NumbersForTask>> _filter = IterableExtensions.<Map.Entry<String,Stopwatches.NumbersForTask>>filter(_entrySet, _function);
@@ -338,8 +331,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       String _plus_1 = (_plus + " but found ");
       final Function1<IMarker,String> _function = new Function1<IMarker,String>() {
         public String apply(final IMarker it) {
-          String _message = MarkerUtilities.getMessage(it);
-          return _message;
+          return MarkerUtilities.getMessage(it);
         }
       };
       List<String> _map = ListExtensions.<IMarker, String>map(((List<IMarker>)Conversions.doWrapArray(findMarkers)), _function);

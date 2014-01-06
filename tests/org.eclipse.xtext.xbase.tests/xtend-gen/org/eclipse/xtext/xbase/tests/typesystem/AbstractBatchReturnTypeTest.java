@@ -125,8 +125,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
           if (!_matched) {
             if (content instanceof XExpression) {
               _matched=true;
-              boolean _hasReturnExpression = AbstractBatchReturnTypeTest.this.hasReturnExpression(((XExpression)content));
-              _switchResult = _hasReturnExpression;
+              _switchResult = AbstractBatchReturnTypeTest.this.hasReturnExpression(((XExpression)content));
             }
           }
           if (!_matched) {
@@ -135,8 +134,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
           return Boolean.valueOf(_switchResult);
         }
       };
-      boolean _exists = IterableExtensions.<EObject>exists(_eContents, _function);
-      _switchResult = _exists;
+      _switchResult = IterableExtensions.<EObject>exists(_eContents, _function);
     }
     return _switchResult;
   }
@@ -155,8 +153,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     List<LightweightTypeReference> _typeArguments = type.getTypeArguments();
     final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
       public String apply(final LightweightTypeReference it) {
-        String _simpleName = it.getSimpleName();
-        return _simpleName;
+        return it.getSimpleName();
       }
     };
     String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments, "<", ", ", ">", _function);

@@ -595,8 +595,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder.append(" }");
       XtendInterface _interfaze = this.interfaze(_builder.toString());
       EList<XtendMember> _members = _interfaze.getMembers();
-      XtendMember _get = _members.get(0);
-      return _get;
+      return _members.get(0);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -610,8 +609,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder.append(" }");
       XtendAnnotationType _annotationType = this.annotationType(_builder.toString());
       EList<XtendMember> _members = _annotationType.getMembers();
-      XtendMember _get = _members.get(0);
-      return _get;
+      return _members.get(0);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

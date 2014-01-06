@@ -15,7 +15,6 @@ import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.typesystem.AssignabilityTest;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -78,11 +77,9 @@ public class OldAPIAssignabilityTest extends AssignabilityTest {
       if (_notEquals) {
         EList<JvmFormalParameter> _parameters = operation.getParameters();
         JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
-        JvmTypeReference _parameterType = _head.getParameterType();
-        _xifexpression = _parameterType;
+        _xifexpression = _head.getParameterType();
       } else {
-        JvmAnyTypeReference _createJvmAnyTypeReference = TypesFactory.eINSTANCE.createJvmAnyTypeReference();
-        _xifexpression = _createJvmAnyTypeReference;
+        _xifexpression = TypesFactory.eINSTANCE.createJvmAnyTypeReference();
       }
       final JvmTypeReference lhsType = _xifexpression;
       JvmTypeReference _xifexpression_1 = null;
@@ -90,11 +87,9 @@ public class OldAPIAssignabilityTest extends AssignabilityTest {
       if (_notEquals_1) {
         EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
         JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);
-        JvmTypeReference _parameterType_1 = _last.getParameterType();
-        _xifexpression_1 = _parameterType_1;
+        _xifexpression_1 = _last.getParameterType();
       } else {
-        JvmAnyTypeReference _createJvmAnyTypeReference_1 = TypesFactory.eINSTANCE.createJvmAnyTypeReference();
-        _xifexpression_1 = _createJvmAnyTypeReference_1;
+        _xifexpression_1 = TypesFactory.eINSTANCE.createJvmAnyTypeReference();
       }
       final JvmTypeReference rhsType = _xifexpression_1;
       boolean _isConformant = this.conformanceComputer.isConformant(lhsType, rhsType);

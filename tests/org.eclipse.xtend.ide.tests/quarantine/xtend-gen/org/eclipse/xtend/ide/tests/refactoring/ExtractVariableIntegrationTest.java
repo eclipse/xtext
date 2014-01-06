@@ -507,8 +507,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
               int _lastIndexOf = inputString.lastIndexOf("$");
               int _minus = (_lastIndexOf - 1);
               final int length = (_minus - offset);
-              TextSelection _textSelection = new TextSelection(offset, length);
-              final TextSelection textSelection = _textSelection;
+              final TextSelection textSelection = new TextSelection(offset, length);
               final XExpression selection = ExtractVariableIntegrationTest.this.util.findSelectedExpression(it, textSelection);
               final ExtractVariableRefactoring refactoring = ExtractVariableIntegrationTest.this.refactoringProvider.get();
               refactoring.setFinal(isFinal);
@@ -521,8 +520,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
               NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
               Change _createChange = refactoring.createChange(_nullProgressMonitor_1);
               NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
-              Change _perform = _createChange.perform(_nullProgressMonitor_2);
-              _xblockexpression = (_perform);
+              _xblockexpression = (_createChange.perform(_nullProgressMonitor_2));
             }
             return _xblockexpression;
           }
