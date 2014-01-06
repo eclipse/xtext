@@ -1,12 +1,16 @@
 package org.eclipse.xtend.core.macro.declaration
 
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.PrimitiveType
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtend.lib.macro.declaration.PrimitiveType
+import org.eclipse.xtext.common.types.TypesFactory
 
 class TypeReferenceProviderImpl implements TypeReferenceProvider {
 	
@@ -25,7 +29,7 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 	}
 	
 	override getObject() {
-		toTypeReference(typeReferences.createTypeRef(typeReferences.findDeclaredType(Object, xtendFile)))
+		toTypeReference(createTypeRef(typeReferences.findDeclaredType(Object, xtendFile)))
 	}
 	
 	override getPrimitiveBoolean() {
@@ -82,7 +86,27 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 		val type = typeReferences.findDeclaredType(typeName, xtendFile)
 		if (type == null)
 			return null
-		toTypeReference(typeReferences.createTypeRef(type, typeArguments.map[toJvmTypeReference] as JvmTypeReference[]))
+		toTypeReference(createTypeRef(type, typeArguments.map[toJvmTypeReference] as JvmTypeReference[]))
+	}
+	
+	def createTypeRef(JvmType type, JvmTypeReference... typeArgs) {
+		if (type == null) {
+			throw new NullPointerException("type")
+		}
+		val reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		reference.type = type
+		for (typeArg : typeArgs) {
+			reference.arguments.add(EcoreUtil2.cloneIfContained(typeArg))
+		}
+		if (type instanceof JvmGenericType) {
+			val list = type.typeParameters
+			if (!reference.arguments.empty && list.size != reference.arguments.size) {
+				throw new IllegalArgumentException(
+					"The type " + type.getIdentifier() + " expects " + list.size() + " type arguments, but was " +
+						reference.arguments.size + ". Either pass zero arguments (raw type) or the correct number.");
+			}
+		}
+		return reference
 	}
 	
 	override newTypeReference(Type typeDeclaration, TypeReference... typeArguments) {
@@ -119,7 +143,7 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 		
 		if (type == null)
 			return null
-		toTypeReference(typeReferences.createTypeRef(type, typeArguments.map[toJvmTypeReference] as JvmTypeReference[]))
+		toTypeReference(createTypeRef(type, typeArguments.map[toJvmTypeReference] as JvmTypeReference[]))
 	}
 	
 	override newWildcardTypeReference() {

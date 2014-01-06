@@ -33,7 +33,7 @@ import java.util.Map
 abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwner {
 	
 	@Inject
-	extension IXtendJvmAssociations
+	protected extension IXtendJvmAssociations
 	
 	override getDeclaredTypeParameters() {
 		emptyList
@@ -740,9 +740,10 @@ abstract class CommonAssignabilityTest extends AbstractAssignabilityTest {
 		("$<?, A>".selfBound->"A extends $<?,A>".selfBound).isAssignableFrom("A")
 	}
 	
+	@Ignore("Substitutions are not applied recursively according to JLS - see ticket 395002")
 	@Test
 	def void testBug395002_02() {
-		("$<? extends $<?, A>, ?>".selfBound->"A extends $<?,A>".selfBound).isAssignableFrom("$<?, A>")
+		("$<? extends $<?, A>, ?>".selfBound->"A extends $<?,A>".selfBound).isAssignableFrom("$<?, A>".selfBound)
 	}
 	
 	@Ignore("Substitutions are not applied recursively according to JLS - see ticket 395002")
