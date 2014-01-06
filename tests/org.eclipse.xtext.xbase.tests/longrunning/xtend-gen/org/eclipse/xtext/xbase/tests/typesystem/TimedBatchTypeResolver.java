@@ -22,7 +22,6 @@ public class TimedBatchTypeResolver extends DefaultBatchTypeResolver {
   private Provider<TimedReentrantTypeResolver> resolverProvider;
   
   public AbstractRootedReentrantTypeResolver createResolver() {
-    TimedReentrantTypeResolver _get = this.resolverProvider.get();
-    return _get;
+    return this.resolverProvider.get();
   }
 }

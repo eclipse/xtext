@@ -53,8 +53,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
   private BoundTypeArgumentMerger merger;
   
   public LightweightMergedBoundTypeArgument merge(final Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
-    LightweightMergedBoundTypeArgument _mergeWithSource = this.mergeWithSource(null, mergeUs);
-    return _mergeWithSource;
+    return this.mergeWithSource(null, mergeUs);
   }
   
   public LightweightMergedBoundTypeArgument mergeWithSource(final Object source, final Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
@@ -63,8 +62,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       _builder.append("def void method(");
       final Function1<Triple<String,VarianceInfo,VarianceInfo>,String> _function = new Function1<Triple<String,VarianceInfo,VarianceInfo>,String>() {
         public String apply(final Triple<String,VarianceInfo,VarianceInfo> it) {
-          String _first = it.getFirst();
-          return _first;
+          return it.getFirst();
         }
       };
       String _join = IterableExtensions.<Triple<String,VarianceInfo,VarianceInfo>>join(((Iterable<Triple<String,VarianceInfo,VarianceInfo>>)Conversions.doWrapArray(mergeUs)), null, " p, ", " p", _function);
@@ -110,8 +108,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       _builder.append("def void method(");
       final Function1<Triple<String,VarianceInfo,VarianceInfo>,String> _function = new Function1<Triple<String,VarianceInfo,VarianceInfo>,String>() {
         public String apply(final Triple<String,VarianceInfo,VarianceInfo> it) {
-          String _first = it.getFirst();
-          return _first;
+          return it.getFirst();
         }
       };
       String _join = IterableExtensions.<Triple<String,VarianceInfo,VarianceInfo>>join(((Iterable<Triple<String,VarianceInfo,VarianceInfo>>)Conversions.doWrapArray(mergeUs)), null, " p, ", " p", _function);
@@ -180,8 +177,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
   public Triple<String,VarianceInfo,VarianceInfo> operator_mappedTo(final Pair<String,VarianceInfo> pair, final VarianceInfo third) {
     String _key = pair.getKey();
     VarianceInfo _value = pair.getValue();
-    Triple<String,VarianceInfo,VarianceInfo> _create = Tuples.<String, VarianceInfo, VarianceInfo>create(_key, _value, third);
-    return _create;
+    return Tuples.<String, VarianceInfo, VarianceInfo>create(_key, _value, third);
   }
   
   @Test

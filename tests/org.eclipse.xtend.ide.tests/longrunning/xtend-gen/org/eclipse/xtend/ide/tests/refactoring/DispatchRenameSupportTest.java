@@ -782,8 +782,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       final XtendClass xtendClass = ((XtendClass) _get);
       EList<XtendMember> _members = xtendClass.getMembers();
       Iterable<XtendFunction> _filter = Iterables.<XtendFunction>filter(_members, XtendFunction.class);
-      XtendFunction _get_1 = Iterables.<XtendFunction>get(_filter, 0);
-      _xblockexpression = (_get_1);
+      _xblockexpression = (Iterables.<XtendFunction>get(_filter, 0));
     }
     return _xblockexpression;
   }
@@ -794,8 +793,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
     Iterable<JvmOperation> _allDispatchOperations = this.dispatchRenameSupport.getAllDispatchOperations(_firstMethod);
     final Function1<JvmOperation,String> _function = new Function1<JvmOperation,String>() {
       public String apply(final JvmOperation it) {
-        String _signature = DispatchRenameSupportTest.this.signature(it);
-        return _signature;
+        return DispatchRenameSupportTest.this.signature(it);
       }
     };
     final Iterable<String> dispatchOperations = IterableExtensions.<JvmOperation, String>map(_allDispatchOperations, _function);
@@ -836,7 +834,6 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       }
     }
     _builder.append(")");
-    String _string = _builder.toString();
-    return _string;
+    return _builder.toString();
   }
 }

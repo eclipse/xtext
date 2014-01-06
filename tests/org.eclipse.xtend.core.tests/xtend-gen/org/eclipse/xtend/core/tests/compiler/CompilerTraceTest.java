@@ -1584,21 +1584,19 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
       URI _uRI_1 = _eResource_1.getURI();
       List<AbstractTraceRegion> _invertFor = _traceRegion.invertFor(_uRI, _uRI_1);
       AbstractTraceRegion _merge = this.merge(_invertFor);
-      SimpleTrace _simpleTrace = new SimpleTrace(_merge);
-      final SimpleTrace trace = _simpleTrace;
+      final SimpleTrace trace = new SimpleTrace(_merge);
       int _length = xtendGroup1.length();
       int _length_1 = xtendGroup2.length();
       TextRegion _textRegion = new TextRegion(_length, _length_1);
       final Iterable<ILocationInResource> locations = trace.getAllAssociatedLocations(_textRegion);
       int _length_2 = javaGroup1.length();
       int _length_3 = javaGroup2.length();
-      TextRegion _textRegion_1 = new TextRegion(_length_2, _length_3);
-      final TextRegion expectedRegion = _textRegion_1;
+      final TextRegion expectedRegion = new TextRegion(_length_2, _length_3);
       boolean _isEmpty = IterableExtensions.isEmpty(locations);
       Assert.assertFalse(_isEmpty);
       for (final ILocationInResource location : locations) {
-        ITextRegionWithLineInformation _textRegion_2 = location.getTextRegion();
-        boolean _equals = Objects.equal(_textRegion_2, expectedRegion);
+        ITextRegionWithLineInformation _textRegion_1 = location.getTextRegion();
+        boolean _equals = Objects.equal(_textRegion_1, expectedRegion);
         if (_equals) {
           return;
         }
@@ -1635,8 +1633,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
           }
         }
       }
-      RootTraceRegionForTesting _rootTraceRegionForTesting = new RootTraceRegionForTesting(rootLocation, associated);
-      final RootTraceRegionForTesting root = _rootTraceRegionForTesting;
+      final RootTraceRegionForTesting root = new RootTraceRegionForTesting(rootLocation, associated);
       for (final AbstractTraceRegion child_1 : regions) {
         child_1.setParent(root);
       }

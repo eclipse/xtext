@@ -40,12 +40,10 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       final XtendFile xtendFile = this._workbenchTestHelper.xtendFile(fileName, _string_1);
       Resource _eResource = xtendFile.eResource();
       final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
-      StringBuilder _stringBuilder = new StringBuilder(model);
-      final StringBuilder builder = _stringBuilder;
+      final StringBuilder builder = new StringBuilder(model);
       final Function1<ReplaceRegion,Integer> _function = new Function1<ReplaceRegion,Integer>() {
         public Integer apply(final ReplaceRegion it) {
-          int _offset = it.getOffset();
-          return Integer.valueOf(_offset);
+          return Integer.valueOf(it.getOffset());
         }
       };
       List<ReplaceRegion> _sortBy = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);

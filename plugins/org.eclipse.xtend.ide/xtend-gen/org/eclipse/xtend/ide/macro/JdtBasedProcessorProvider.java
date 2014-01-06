@@ -53,8 +53,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
         String _plus_1 = (_plus + " : ");
         String _message = e.getMessage();
         String _plus_2 = (_plus_1 + _message);
-        IllegalStateException _illegalStateException = new IllegalStateException(_plus_2, e);
-        throw _illegalStateException;
+        throw new IllegalStateException(_plus_2, e);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -80,8 +79,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
           return _class.getClassLoader();
         }
         final IJavaProject projectToUse = type.getJavaProject();
-        URLClassLoader _createClassLoaderForJavaProject = this.createClassLoaderForJavaProject(projectToUse);
-        _xblockexpression = (_createClassLoaderForJavaProject);
+        _xblockexpression = (this.createClassLoaderForJavaProject(projectToUse));
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -128,13 +126,11 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
               boolean _notEquals = (!Objects.equal(library, null));
               if (_notEquals) {
                 URI _rawLocationURI = library.getRawLocationURI();
-                URL _uRL = _rawLocationURI.toURL();
-                _xifexpression = _uRL;
+                _xifexpression = _rawLocationURI.toURL();
               } else {
                 File _file = path_1.toFile();
                 URI _uRI = _file.toURI();
-                URL _uRL_1 = _uRI.toURL();
-                _xifexpression = _uRL_1;
+                _xifexpression = _uRI.toURL();
               }
               url = _xifexpression;
             }
@@ -144,8 +140,8 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
               IPath path_2 = entry.getPath();
               File _file_1 = path_2.toFile();
               URI _uRI_1 = _file_1.toURI();
-              URL _uRL_2 = _uRI_1.toURL();
-              url = _uRL_2;
+              URL _uRL = _uRI_1.toURL();
+              url = _uRL;
             }
           }
           boolean _notEquals_1 = (!Objects.equal(url, null));
@@ -156,8 +152,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       }
       Class<? extends JdtBasedProcessorProvider> _class = this.getClass();
       ClassLoader _classLoader = _class.getClassLoader();
-      URLClassLoader _uRLClassLoader = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
-      return _uRLClassLoader;
+      return new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -166,8 +161,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
   private IWorkspaceRoot getWorkspaceRoot(final IJavaProject javaProject) {
     IProject _project = javaProject.getProject();
     IWorkspace _workspace = _project.getWorkspace();
-    IWorkspaceRoot _root = _workspace.getRoot();
-    return _root;
+    return _workspace.getRoot();
   }
   
   private List<URL> getOutputFolders(final IJavaProject javaProject) {
@@ -178,8 +172,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       String _string = path.toString();
       org.eclipse.emf.common.util.URI _createPlatformResourceURI = org.eclipse.emf.common.util.URI.createPlatformResourceURI(_string, true);
       String _string_1 = _createPlatformResourceURI.toString();
-      URL _uRL = new URL(_string_1);
-      URL url = _uRL;
+      URL url = new URL(_string_1);
       result.add(url);
       IClasspathEntry[] _rawClasspath = javaProject.getRawClasspath();
       for (final IClasspathEntry entry : _rawClasspath) {
@@ -197,8 +190,8 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
               String _string_2 = _addTrailingSeparator.toString();
               org.eclipse.emf.common.util.URI _createPlatformResourceURI_1 = org.eclipse.emf.common.util.URI.createPlatformResourceURI(_string_2, true);
               String _string_3 = _createPlatformResourceURI_1.toString();
-              URL _uRL_1 = new URL(_string_3);
-              url = _uRL_1;
+              URL _uRL = new URL(_string_3);
+              url = _uRL;
               result.add(url);
             }
           }

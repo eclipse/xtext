@@ -42,21 +42,18 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
       final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
         public Boolean apply(final JvmTypeReference it) {
           JvmType _type = it.getType();
-          boolean _isInterface = ((JvmGenericType) _type).isInterface();
-          return Boolean.valueOf(_isInterface);
+          return Boolean.valueOf(((JvmGenericType) _type).isInterface());
         }
       };
       final Iterable<JvmTypeReference> filtered = IterableExtensions.<JvmTypeReference>filter(_superTypes, _function);
       final Function1<JvmTypeReference,TypeReference> _function_1 = new Function1<JvmTypeReference,TypeReference>() {
         public TypeReference apply(final JvmTypeReference it) {
           CompilationUnitImpl _compilationUnit = JvmInterfaceDeclarationImpl.this.getCompilationUnit();
-          TypeReference _typeReference = _compilationUnit.toTypeReference(it);
-          return _typeReference;
+          return _compilationUnit.toTypeReference(it);
         }
       };
       Iterable<TypeReference> _map = IterableExtensions.<JvmTypeReference, TypeReference>map(filtered, _function_1);
-      List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
-      _xblockexpression = (_list);
+      _xblockexpression = (IterableExtensions.<TypeReference>toList(_map));
     }
     return _xblockexpression;
   }
@@ -87,12 +84,10 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {
       public MutableTypeParameterDeclaration apply(final JvmTypeParameter it) {
         CompilationUnitImpl _compilationUnit = JvmInterfaceDeclarationImpl.this.getCompilationUnit();
-        MutableTypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
-        return _typeParameterDeclaration;
+        return _compilationUnit.toTypeParameterDeclaration(it);
       }
     };
-    List<MutableTypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, MutableTypeParameterDeclaration>map(_typeParameters, _function);
-    return _map;
+    return ListExtensions.<JvmTypeParameter, MutableTypeParameterDeclaration>map(_typeParameters, _function);
   }
   
   public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
@@ -102,8 +97,7 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
   
   public boolean isStrictFloatingPoint() {
     JvmGenericType _delegate = this.getDelegate();
-    boolean _isStrictFloatingPoint = _delegate.isStrictFloatingPoint();
-    return _isStrictFloatingPoint;
+    return _delegate.isStrictFloatingPoint();
   }
   
   public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
@@ -116,8 +110,7 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     String _simpleName = this.getSimpleName();
     String _plus = ("The interface \'" + _simpleName);
     String _plus_1 = (_plus + "\' cannot declare any constructors.");
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_plus_1);
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException(_plus_1);
   }
   
   public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {

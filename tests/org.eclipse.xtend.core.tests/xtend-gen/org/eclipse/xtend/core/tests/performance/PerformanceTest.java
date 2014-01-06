@@ -13,7 +13,6 @@ import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -27,12 +26,7 @@ public class PerformanceTest extends AbstractXtendTestCase {
   private XtendFileGenerator fileGenerator;
   
   @Rule
-  public final StopwatchRule rule = new Function0<StopwatchRule>() {
-    public StopwatchRule apply() {
-      StopwatchRule _stopwatchRule = new StopwatchRule(true);
-      return _stopwatchRule;
-    }
-  }.apply();
+  public final StopwatchRule rule = new StopwatchRule(true);
   
   /**
    * Sven 2013-01-24 (old typesystem)
@@ -340,14 +334,12 @@ public class PerformanceTest extends AbstractXtendTestCase {
       Collection<? extends CharSequence> _values = map.values();
       final Function1<CharSequence,String> _function = new Function1<CharSequence,String>() {
         public String apply(final CharSequence it) {
-          String _string = it.toString();
-          return _string;
+          return it.toString();
         }
       };
       Iterable<String> _map = IterableExtensions.map(_values, _function);
       Iterables.<String>addAll(files, _map);
-      GeneratorConfig _generatorConfig = new GeneratorConfig();
-      final GeneratorConfig config = _generatorConfig;
+      final GeneratorConfig config = new GeneratorConfig();
       config.packageName = "generated";
       config.noTypeInference = false;
       IntegerRange _upTo = new IntegerRange(0, num);
@@ -397,6 +389,7 @@ public class PerformanceTest extends AbstractXtendTestCase {
   }
   
   @Test
+  @Ignore
   public void doCompileTenTimes() {
     this.doCompileFiveTimes();
     this.doCompileFiveTimes();

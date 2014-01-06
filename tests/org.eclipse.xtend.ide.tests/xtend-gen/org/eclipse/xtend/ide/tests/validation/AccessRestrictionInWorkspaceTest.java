@@ -246,15 +246,12 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
       IProject _project = pluginProject.getProject();
       final IFile manifestFile = _project.getFile("META-INF/MANIFEST.MF");
       InputStream _contents = manifestFile.getContents();
-      MergeableManifest _mergeableManifest = new MergeableManifest(_contents);
-      final MergeableManifest manifest = _mergeableManifest;
+      final MergeableManifest manifest = new MergeableManifest(_contents);
       manifest.addExportedPackages(Collections.<String>unmodifiableSet(Sets.<String>newHashSet("allowed", "discouraged;x-internal:=true")));
-      ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream();
-      final ByteArrayOutputStream out = _byteArrayOutputStream;
+      final ByteArrayOutputStream out = new ByteArrayOutputStream();
       manifest.write(out);
       byte[] _byteArray = out.toByteArray();
-      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
-      final ByteArrayInputStream in = _byteArrayInputStream;
+      final ByteArrayInputStream in = new ByteArrayInputStream(_byteArray);
       manifestFile.setContents(in, true, true, null);
       return pluginProject;
     } catch (Throwable _e) {

@@ -115,13 +115,11 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
           EList<XtendTypeDeclaration> _xtendTypes_1 = file.getXtendTypes();
           XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes_1);
           String _name = _head.getName();
-          String _plus_1 = (_plus + _name);
-          _xifexpression = _plus_1;
+          _xifexpression = (_plus + _name);
         } else {
           EList<XtendTypeDeclaration> _xtendTypes_2 = file.getXtendTypes();
           XtendTypeDeclaration _head_1 = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes_2);
-          String _name_1 = _head_1.getName();
-          _xifexpression = _name_1;
+          _xifexpression = _head_1.getName();
         }
         final String typeName = _xifexpression;
         String _string_3 = expected.toString();

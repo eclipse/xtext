@@ -20,8 +20,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class AllSuperTypesTest extends AbstractSuperTypesTest {
   public Iterable<LightweightTypeReference> collectSuperTypes(final LightweightTypeReference reference) {
-    List<LightweightTypeReference> _allSuperTypes = reference.getAllSuperTypes();
-    return _allSuperTypes;
+    return reference.getAllSuperTypes();
   }
   
   @Test

@@ -106,8 +106,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     ISourceAppender _append_2 = _append_1.append(statementSeparator);
     ISourceAppender _decreaseIndentation = _append_2.decreaseIndentation();
     ISourceAppender _newLine_1 = _decreaseIndentation.newLine();
-    ISourceAppender _append_3 = _newLine_1.append("}");
-    return _append_3;
+    return _newLine_1.append("}");
   }
   
   protected String defaultBody() {
@@ -166,8 +165,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
         {
           List<AbstractParameterBuilder> _parameterBuilders_3 = this.getParameterBuilders();
           final AbstractParameterBuilder parameterBuilder = _parameterBuilders_3.get((i).intValue());
-          VariableNameAcceptor _variableNameAcceptor = new VariableNameAcceptor(notAllowed);
-          final VariableNameAcceptor acceptor = _variableNameAcceptor;
+          final VariableNameAcceptor acceptor = new VariableNameAcceptor(notAllowed);
           String _name = parameterBuilder.getName();
           boolean _equals = Objects.equal(_name, null);
           if (_equals) {
@@ -189,8 +187,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
           }
         }
       }
-      ISourceAppender _append = appendable.append(")");
-      _xblockexpression = (_append);
+      _xblockexpression = (appendable.append(")"));
     }
     return _xblockexpression;
   }
@@ -261,8 +258,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     List<AbstractParameterBuilder> _parameterBuilders = this.getParameterBuilders();
     final Function1<AbstractParameterBuilder,Boolean> _function = new Function1<AbstractParameterBuilder,Boolean>() {
       public Boolean apply(final AbstractParameterBuilder it) {
-        boolean _isValid = it.isValid();
-        return Boolean.valueOf(_isValid);
+        return Boolean.valueOf(it.isValid());
       }
     };
     boolean _forall = IterableExtensions.<AbstractParameterBuilder>forall(_parameterBuilders, _function);

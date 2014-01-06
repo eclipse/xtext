@@ -284,13 +284,11 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
   }
   
   protected IFeatureCallArguments toArgumentsWithoutReceiver(final String signature, final String invocation) {
-    IFeatureCallArguments _arguments = this.toArguments(signature, invocation, false);
-    return _arguments;
+    return this.toArguments(signature, invocation, false);
   }
   
   protected IFeatureCallArguments toArgumentsWithReceiver(final String signature, final String invocation) {
-    IFeatureCallArguments _arguments = this.toArguments(signature, invocation, true);
-    return _arguments;
+    return this.toArguments(signature, invocation, true);
   }
   
   protected IFeatureCallArguments toArguments(final String signature, final String invocation, final boolean receiver) {

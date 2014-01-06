@@ -106,11 +106,9 @@ public class CodeBuilderFactory {
       final Object ownerSource = this.getSource(owner);
       AbstractClassBuilder _xifexpression = null;
       if ((ownerSource instanceof XtendTypeDeclaration)) {
-        XtendClassBuilder _get = this.xtendClassBuilderProvider.get();
-        _xifexpression = _get;
+        _xifexpression = this.xtendClassBuilderProvider.get();
       } else {
-        JavaClassBuilder _get_1 = this.javaClassBuilderProvider.get();
-        _xifexpression = _get_1;
+        _xifexpression = this.javaClassBuilderProvider.get();
       }
       final AbstractClassBuilder builder = _xifexpression;
       builder.setOwner(owner);
@@ -126,11 +124,9 @@ public class CodeBuilderFactory {
       final Object ownerSource = this.getSource(owner);
       AbstractInterfaceBuilder _xifexpression = null;
       if ((ownerSource instanceof XtendTypeDeclaration)) {
-        XtendInterfaceBuilder _get = this.xtendInterfaceBuilderProvider.get();
-        _xifexpression = _get;
+        _xifexpression = this.xtendInterfaceBuilderProvider.get();
       } else {
-        JavaInterfaceBuilder _get_1 = this.javaInterfaceBuilderProvider.get();
-        _xifexpression = _get_1;
+        _xifexpression = this.javaInterfaceBuilderProvider.get();
       }
       final AbstractInterfaceBuilder builder = _xifexpression;
       builder.setOwner(owner);
@@ -146,11 +142,9 @@ public class CodeBuilderFactory {
       final Object ownerSource = this.getSource(owner);
       AbstractAnnotationBuilder _xifexpression = null;
       if ((ownerSource instanceof XtendTypeDeclaration)) {
-        XtendAnnotationBuilder _get = this.xtendAnnotationBuilderProvider.get();
-        _xifexpression = _get;
+        _xifexpression = this.xtendAnnotationBuilderProvider.get();
       } else {
-        JavaAnnotationBuilder _get_1 = this.javaAnnotationBuilderProvider.get();
-        _xifexpression = _get_1;
+        _xifexpression = this.javaAnnotationBuilderProvider.get();
       }
       final AbstractAnnotationBuilder builder = _xifexpression;
       builder.setOwner(owner);
@@ -166,11 +160,9 @@ public class CodeBuilderFactory {
       final Object ownerSource = this.getSource(owner);
       AbstractFieldBuilder _xifexpression = null;
       if ((ownerSource instanceof XtendTypeDeclaration)) {
-        XtendFieldBuilder _get = this.xtendFieldBuilderProvider.get();
-        _xifexpression = _get;
+        _xifexpression = this.xtendFieldBuilderProvider.get();
       } else {
-        JavaFieldBuilder _get_1 = this.javaFieldBuilderProvider.get();
-        _xifexpression = _get_1;
+        _xifexpression = this.javaFieldBuilderProvider.get();
       }
       final AbstractFieldBuilder builder = _xifexpression;
       builder.setOwner(owner);
@@ -186,11 +178,9 @@ public class CodeBuilderFactory {
       final Object ownerSource = this.getSource(owner);
       AbstractConstructorBuilder _xifexpression = null;
       if ((ownerSource instanceof XtendTypeDeclaration)) {
-        XtendConstructorBuilder _get = this.xtendConstructorBuilderProvider.get();
-        _xifexpression = _get;
+        _xifexpression = this.xtendConstructorBuilderProvider.get();
       } else {
-        JavaConstructorBuilder _get_1 = this.javaConstructorBuilderProvider.get();
-        _xifexpression = _get_1;
+        _xifexpression = this.javaConstructorBuilderProvider.get();
       }
       final AbstractConstructorBuilder builder = _xifexpression;
       builder.setOwner(owner);
@@ -206,11 +196,9 @@ public class CodeBuilderFactory {
       final Object ownerSource = this.getSource(owner);
       AbstractMethodBuilder _xifexpression = null;
       if ((ownerSource instanceof XtendTypeDeclaration)) {
-        XtendMethodBuilder _get = this.xtendMethodBuilderProvider.get();
-        _xifexpression = _get;
+        _xifexpression = this.xtendMethodBuilderProvider.get();
       } else {
-        JavaMethodBuilder _get_1 = this.javaMethodBuilderProvider.get();
-        _xifexpression = _get_1;
+        _xifexpression = this.javaMethodBuilderProvider.get();
       }
       final AbstractMethodBuilder builder = _xifexpression;
       builder.setOwner(owner);
@@ -226,11 +214,9 @@ public class CodeBuilderFactory {
       final Object ownerSource = this.getSource(owner);
       AbstractParameterBuilder _xifexpression = null;
       if ((ownerSource instanceof XtendTypeDeclaration)) {
-        XtendParameterBuilder _get = this.xtendParameterBuilderProvider.get();
-        _xifexpression = _get;
+        _xifexpression = this.xtendParameterBuilderProvider.get();
       } else {
-        JavaParameterBuilder _get_1 = this.javaParameterBuilderProvider.get();
-        _xifexpression = _get_1;
+        _xifexpression = this.javaParameterBuilderProvider.get();
       }
       final AbstractParameterBuilder builder = _xifexpression;
       builder.setOwner(owner);

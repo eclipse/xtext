@@ -15,8 +15,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 public abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends JvmElementImpl<T> implements MutableNamedElement {
   public String getSimpleName() {
     T _delegate = this.getDelegate();
-    String _simpleName = _delegate.getSimpleName();
-    return _simpleName;
+    return _delegate.getSimpleName();
   }
   
   public String toString() {
@@ -25,7 +24,6 @@ public abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> exte
     String _plus = (_name + "[");
     String _simpleName = this.getSimpleName();
     String _plus_1 = (_plus + _simpleName);
-    String _plus_2 = (_plus_1 + "]");
-    return _plus_2;
+    return (_plus_1 + "]");
   }
 }

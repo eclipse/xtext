@@ -139,8 +139,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
           }
           _while = _and_1;
         }
-        IResourceDescription.Event _head_1 = IterableExtensions.<IResourceDescription.Event>head(event);
-        _xblockexpression = (_head_1);
+        _xblockexpression = (IterableExtensions.<IResourceDescription.Event>head(event));
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -190,8 +189,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
           }
           _while = _and_1;
         }
-        IResourceDescription.Event _head_1 = IterableExtensions.<IResourceDescription.Event>head(event);
-        _xblockexpression = (_head_1);
+        _xblockexpression = (IterableExtensions.<IResourceDescription.Event>head(event));
       }
       return _xblockexpression;
     } catch (Throwable _e) {

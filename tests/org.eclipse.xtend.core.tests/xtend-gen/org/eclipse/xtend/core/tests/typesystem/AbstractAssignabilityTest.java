@@ -48,8 +48,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   protected IXtendJvmAssociations _iXtendJvmAssociations;
   
   public List<JvmTypeParameter> getDeclaredTypeParameters() {
-    List<JvmTypeParameter> _emptyList = CollectionLiterals.<JvmTypeParameter>emptyList();
-    return _emptyList;
+    return CollectionLiterals.<JvmTypeParameter>emptyList();
   }
   
   public void isAssignableFrom(final Class<? extends Object> lhs, final String rhs) {
@@ -139,11 +138,9 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
         EList<JvmFormalParameter> _parameters = operation.getParameters();
         JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
         JvmTypeReference _parameterType = _head.getParameterType();
-        LightweightTypeReference _lightweightReference = this.toLightweightReference(_parameterType);
-        _xifexpression = _lightweightReference;
+        _xifexpression = this.toLightweightReference(_parameterType);
       } else {
-        AnyTypeReference _anyTypeReference = new AnyTypeReference(this);
-        _xifexpression = _anyTypeReference;
+        _xifexpression = new AnyTypeReference(this);
       }
       final LightweightTypeReference lhsType = _xifexpression;
       LightweightTypeReference _xifexpression_1 = null;
@@ -152,11 +149,9 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
         EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
         JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);
         JvmTypeReference _parameterType_1 = _last.getParameterType();
-        LightweightTypeReference _lightweightReference_1 = this.toLightweightReference(_parameterType_1);
-        _xifexpression_1 = _lightweightReference_1;
+        _xifexpression_1 = this.toLightweightReference(_parameterType_1);
       } else {
-        AnyTypeReference _anyTypeReference_1 = new AnyTypeReference(this);
-        _xifexpression_1 = _anyTypeReference_1;
+        _xifexpression_1 = new AnyTypeReference(this);
       }
       final LightweightTypeReference rhsType = _xifexpression_1;
       String _simpleName = lhsType.getSimpleName();
@@ -241,14 +236,12 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     boolean _isPrimitiveVoid = rhs.isPrimitiveVoid();
     boolean _not = (!_isPrimitiveVoid);
     if (_not) {
-      WildcardTypeReference _wildcardTypeReference = new WildcardTypeReference(this);
-      final WildcardTypeReference wcRhs = _wildcardTypeReference;
+      final WildcardTypeReference wcRhs = new WildcardTypeReference(this);
       LightweightTypeReference _wrapperTypeIfPrimitive = rhs.getWrapperTypeIfPrimitive();
       wcRhs.addUpperBound(_wrapperTypeIfPrimitive);
       boolean _doIsAssignable_3 = this.doIsAssignable(lhs, wcRhs);
       Assert.assertEquals(Boolean.valueOf(result), Boolean.valueOf(_doIsAssignable_3));
-      CompoundTypeReference _compoundTypeReference = new CompoundTypeReference(this, true);
-      final CompoundTypeReference compoundRhs = _compoundTypeReference;
+      final CompoundTypeReference compoundRhs = new CompoundTypeReference(this, true);
       compoundRhs.addComponent(rhs);
       ITypeReferenceOwner _owner = rhs.getOwner();
       CommonTypeComputationServices _services = _owner.getServices();

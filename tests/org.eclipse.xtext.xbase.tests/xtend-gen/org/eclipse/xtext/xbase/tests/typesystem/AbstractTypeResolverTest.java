@@ -58,8 +58,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
         this.handleDuplicateExpression(expression);
         return null;
       }
-      XExpression _expression = super.expression(string, resolve);
-      _xblockexpression = (_expression);
+      _xblockexpression = (super.expression(string, resolve));
     }
     return _xblockexpression;
   }
@@ -77,8 +76,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
         return Boolean.valueOf(_or);
       }
     };
-    Iterable<Resource.Diagnostic> _filter = IterableExtensions.<Resource.Diagnostic>filter(_errors, _function);
-    return _filter;
+    return IterableExtensions.<Resource.Diagnostic>filter(_errors, _function);
   }
   
   protected void handleDuplicateExpression(final CharSequence expression) {

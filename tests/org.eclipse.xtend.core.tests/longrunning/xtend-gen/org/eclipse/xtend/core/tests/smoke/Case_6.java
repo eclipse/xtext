@@ -20,20 +20,17 @@ public class Case_6 {
     EList<EObject> _eContents = packageDecl.eContents();
     final Function1<EObject,Object> _function = new Function1<EObject,Object>() {
       public Object apply(final EObject e) {
-        Object _transform = Case_6.this.transform(((EStructuralFeature) e));
-        return _transform;
+        return Case_6.this.transform(((EStructuralFeature) e));
       }
     };
-    List<Object> _map = ListExtensions.<EObject, Object>map(_eContents, _function);
-    return _map;
+    return ListExtensions.<EObject, Object>map(_eContents, _function);
   }
   
   protected List<? extends Object> _transform(final EStructuralFeature entity) {
     ArrayList<EObject> _xblockexpression = null;
     {
       final List<? extends Object> inferredType = null;
-      ArrayList<EObject> _newArrayList = CollectionLiterals.<EObject>newArrayList(((EObject) inferredType));
-      _xblockexpression = (_newArrayList);
+      _xblockexpression = (CollectionLiterals.<EObject>newArrayList(((EObject) inferredType)));
     }
     return _xblockexpression;
   }
@@ -42,12 +39,10 @@ public class Case_6 {
     EList<ETypeParameter> _eTypeParameters = model.getETypeParameters();
     final Function1<ETypeParameter,Object> _function = new Function1<ETypeParameter,Object>() {
       public Object apply(final ETypeParameter e) {
-        Object _transform = Case_6.this.transform(e);
-        return _transform;
+        return Case_6.this.transform(e);
       }
     };
-    List<Object> _map = ListExtensions.<ETypeParameter, Object>map(_eTypeParameters, _function);
-    return _map;
+    return ListExtensions.<ETypeParameter, Object>map(_eTypeParameters, _function);
   }
   
   public Object transform(final ENamedElement model) {

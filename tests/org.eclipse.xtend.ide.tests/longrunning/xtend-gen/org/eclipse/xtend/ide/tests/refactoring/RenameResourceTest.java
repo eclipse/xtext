@@ -86,11 +86,9 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
     try {
       IFile _xblockexpression = null;
       {
-        RenameResourceProcessor _renameResourceProcessor = new RenameResourceProcessor(file);
-        final RenameResourceProcessor renameResourceProcessor = _renameResourceProcessor;
+        final RenameResourceProcessor renameResourceProcessor = new RenameResourceProcessor(file);
         renameResourceProcessor.setNewResourceName(newFileName);
-        RenameRefactoring _renameRefactoring = new RenameRefactoring(renameResourceProcessor);
-        final RenameRefactoring renameRefactoring = _renameRefactoring;
+        final RenameRefactoring renameRefactoring = new RenameRefactoring(renameResourceProcessor);
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         renameRefactoring.checkAllConditions(_nullProgressMonitor);
         NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();

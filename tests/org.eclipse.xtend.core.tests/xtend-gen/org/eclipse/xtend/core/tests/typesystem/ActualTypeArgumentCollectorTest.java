@@ -53,8 +53,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
   public Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> mappedBy(final String typeParameters, final String... alternatingTypeReferences) {
     final JvmOperation operation = this.operation(typeParameters, alternatingTypeReferences);
     EList<JvmTypeParameter> _typeParameters = operation.getTypeParameters();
-    ActualTypeArgumentCollector _actualTypeArgumentCollector = new ActualTypeArgumentCollector(_typeParameters, BoundTypeArgumentSource.INFERRED, this);
-    final ActualTypeArgumentCollector collector = _actualTypeArgumentCollector;
+    final ActualTypeArgumentCollector collector = new ActualTypeArgumentCollector(_typeParameters, BoundTypeArgumentSource.INFERRED, this);
     int _size = ((List<String>)Conversions.doWrapArray(alternatingTypeReferences)).size();
     int _minus = (_size - 1);
     IntegerRange _upTo = new IntegerRange(0, _minus);
@@ -108,8 +107,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
             String _string = _typeReference.toString();
             VarianceInfo _declaredVariance = it.getDeclaredVariance();
             VarianceInfo _actualVariance = it.getActualVariance();
-            Triple<String,VarianceInfo,VarianceInfo> _create = Tuples.<String, VarianceInfo, VarianceInfo>create(_string, _declaredVariance, _actualVariance);
-            return _create;
+            return Tuples.<String, VarianceInfo, VarianceInfo>create(_string, _declaredVariance, _actualVariance);
           }
         };
         List<Triple<String,VarianceInfo,VarianceInfo>> _map_1 = ListExtensions.<LightweightBoundTypeArgument, Triple<String,VarianceInfo,VarianceInfo>>map(mappingData, _function_1);
@@ -127,8 +125,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
       Set<JvmTypeParameter> _keySet = mapping.keySet();
       final Function1<JvmTypeParameter,String> _function_2 = new Function1<JvmTypeParameter,String>() {
         public String apply(final JvmTypeParameter it) {
-          String _simpleName = it.getSimpleName();
-          return _simpleName;
+          return it.getSimpleName();
         }
       };
       Iterable<String> _map_2 = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function_2);
@@ -148,8 +145,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
         final List<LightweightBoundTypeArgument> mappingData = mapping.get(key);
         final Function1<LightweightBoundTypeArgument,Object> _function = new Function1<LightweightBoundTypeArgument,Object>() {
           public Object apply(final LightweightBoundTypeArgument it) {
-            Object _origin = it.getOrigin();
-            return _origin;
+            return it.getOrigin();
           }
         };
         List<Object> _map = ListExtensions.<LightweightBoundTypeArgument, Object>map(mappingData, _function);
@@ -199,15 +195,13 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
   }
   
   public List<JvmTypeParameter> getDeclaredTypeParameters() {
-    List<JvmTypeParameter> _emptyList = CollectionLiterals.<JvmTypeParameter>emptyList();
-    return _emptyList;
+    return CollectionLiterals.<JvmTypeParameter>emptyList();
   }
   
   public Triple<String,VarianceInfo,VarianceInfo> operator_mappedTo(final Pair<String,VarianceInfo> pair, final VarianceInfo third) {
     String _key = pair.getKey();
     VarianceInfo _value = pair.getValue();
-    Triple<String,VarianceInfo,VarianceInfo> _create = Tuples.<String, VarianceInfo, VarianceInfo>create(_key, _value, third);
-    return _create;
+    return Tuples.<String, VarianceInfo, VarianceInfo>create(_key, _value, third);
   }
   
   @Test

@@ -31,7 +31,6 @@ import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -49,12 +48,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
   private WorkbenchTestHelper workbenchTestHelper;
   
   @Rule
-  public StopwatchRule rule = new Function0<StopwatchRule>() {
-    public StopwatchRule apply() {
-      StopwatchRule _stopwatchRule = new StopwatchRule(true);
-      return _stopwatchRule;
-    }
-  }.apply();
+  public StopwatchRule rule = new StopwatchRule(true);
   
   @After
   public void tearDown() {
@@ -552,8 +546,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       String _plus_1 = (_plus + " but found ");
       final Function1<IMarker,String> _function = new Function1<IMarker,String>() {
         public String apply(final IMarker it) {
-          String _message = MarkerUtilities.getMessage(it);
-          return _message;
+          return MarkerUtilities.getMessage(it);
         }
       };
       List<String> _map = ListExtensions.<IMarker, String>map(((List<IMarker>)Conversions.doWrapArray(findMarkers)), _function);

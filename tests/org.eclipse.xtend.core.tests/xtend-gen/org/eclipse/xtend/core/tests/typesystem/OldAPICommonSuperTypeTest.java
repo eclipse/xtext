@@ -98,13 +98,11 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
       EList<JvmFormalParameter> _parameters = operation.getParameters();
       final Function1<JvmFormalParameter,JvmTypeReference> _function = new Function1<JvmFormalParameter,JvmTypeReference>() {
         public JvmTypeReference apply(final JvmFormalParameter it) {
-          JvmTypeReference _parameterType = it.getParameterType();
-          return _parameterType;
+          return it.getParameterType();
         }
       };
       List<JvmTypeReference> _map = ListExtensions.<JvmFormalParameter, JvmTypeReference>map(_parameters, _function);
-      ArrayList<JvmTypeReference> _arrayList = new ArrayList<JvmTypeReference>(_map);
-      final ArrayList<JvmTypeReference> typeReferences = _arrayList;
+      final ArrayList<JvmTypeReference> typeReferences = new ArrayList<JvmTypeReference>(_map);
       JvmTypeReference computedSuperType = this.typeConformanceComputer.getCommonSuperType(typeReferences);
       String _key = superTypeAndParam.getKey();
       String _simpleName = null;

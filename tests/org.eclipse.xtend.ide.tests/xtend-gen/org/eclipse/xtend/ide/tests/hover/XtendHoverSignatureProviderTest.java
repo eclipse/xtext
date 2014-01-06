@@ -846,8 +846,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
     Injector _injector = this.getInjector();
     IResourceSetProvider _instance = _injector.<IResourceSetProvider>getInstance(IResourceSetProvider.class);
     IProject _project = this.testHelper.getProject();
-    ResourceSet _get = _instance.get(_project);
-    return _get;
+    return _instance.get(_project);
   }
   
   @After

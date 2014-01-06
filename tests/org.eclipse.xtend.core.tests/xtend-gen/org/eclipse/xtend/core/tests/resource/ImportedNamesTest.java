@@ -95,8 +95,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       final Function1<QualifiedName,Boolean> _function = new Function1<QualifiedName,Boolean>() {
         public Boolean apply(final QualifiedName it) {
           String _lastSegment = it.getLastSegment();
-          boolean _contains = ImportedNamesTest.this.primitives.contains(_lastSegment);
-          return Boolean.valueOf(_contains);
+          return Boolean.valueOf(ImportedNamesTest.this.primitives.contains(_lastSegment));
         }
       };
       boolean _exists = IterableExtensions.<QualifiedName>exists(_importedNames, _function);
@@ -128,8 +127,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       final Function1<QualifiedName,Boolean> _function = new Function1<QualifiedName,Boolean>() {
         public Boolean apply(final QualifiedName it) {
           String _lastSegment = it.getLastSegment();
-          boolean _equals = _lastSegment.equals("collection");
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(_lastSegment.equals("collection"));
         }
       };
       boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);

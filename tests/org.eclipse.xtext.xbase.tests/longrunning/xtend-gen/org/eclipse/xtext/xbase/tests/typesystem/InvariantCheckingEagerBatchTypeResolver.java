@@ -22,7 +22,6 @@ public class InvariantCheckingEagerBatchTypeResolver extends DefaultBatchTypeRes
   private Provider<InvariantCheckingEagerReentrantTypeResolver> resolverProvider;
   
   protected AbstractRootedReentrantTypeResolver createResolver() {
-    InvariantCheckingEagerReentrantTypeResolver _get = this.resolverProvider.get();
-    return _get;
+    return this.resolverProvider.get();
   }
 }

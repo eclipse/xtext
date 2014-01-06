@@ -173,84 +173,72 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   public boolean exists(final Path path) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    boolean _exists = _fileSystemSupport.exists(path);
-    return _exists;
+    return _fileSystemSupport.exists(path);
   }
   
   public String getCharset(final Path path) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    String _charset = _fileSystemSupport.getCharset(path);
-    return _charset;
+    return _fileSystemSupport.getCharset(path);
   }
   
   public Iterable<? extends Path> getChildren(final Path path) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    Iterable<? extends Path> _children = _fileSystemSupport.getChildren(path);
-    return _children;
+    return _fileSystemSupport.getChildren(path);
   }
   
   public CharSequence getContents(final Path path) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    CharSequence _contents = _fileSystemSupport.getContents(path);
-    return _contents;
+    return _fileSystemSupport.getContents(path);
   }
   
   public InputStream getContentsAsStream(final Path path) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    InputStream _contentsAsStream = _fileSystemSupport.getContentsAsStream(path);
-    return _contentsAsStream;
+    return _fileSystemSupport.getContentsAsStream(path);
   }
   
   public long getLastModification(final Path path) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    long _lastModification = _fileSystemSupport.getLastModification(path);
-    return _lastModification;
+    return _fileSystemSupport.getLastModification(path);
   }
   
   public Path getProjectFolder(final Path path) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     FileLocations _fileLocations = _compilationUnit.getFileLocations();
-    Path _projectFolder = _fileLocations.getProjectFolder(path);
-    return _projectFolder;
+    return _fileLocations.getProjectFolder(path);
   }
   
   public Path getSourceFolder(final Path path) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     FileLocations _fileLocations = _compilationUnit.getFileLocations();
-    Path _sourceFolder = _fileLocations.getSourceFolder(path);
-    return _sourceFolder;
+    return _fileLocations.getSourceFolder(path);
   }
   
   public Path getTargetFolder(final Path sourceFolder) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     FileLocations _fileLocations = _compilationUnit.getFileLocations();
-    Path _targetFolder = _fileLocations.getTargetFolder(sourceFolder);
-    return _targetFolder;
+    return _fileLocations.getTargetFolder(sourceFolder);
   }
   
   public boolean isFile(final Path path) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    boolean _isFile = _fileSystemSupport.isFile(path);
-    return _isFile;
+    return _fileSystemSupport.isFile(path);
   }
   
   public boolean isFolder(final Path path) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    boolean _isFolder = _fileSystemSupport.isFolder(path);
-    return _isFolder;
+    return _fileSystemSupport.isFolder(path);
   }
   
   public URI toURI(final Path path) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-    URI _uRI = _fileSystemSupport.toURI(path);
-    return _uRI;
+    return _fileSystemSupport.toURI(path);
   }
 }

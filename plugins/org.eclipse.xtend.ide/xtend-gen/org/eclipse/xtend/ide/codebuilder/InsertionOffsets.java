@@ -33,8 +33,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class InsertionOffsets {
   public int getNewTypeInsertOffset(@Nullable final EObject call, final XtendTypeDeclaration ownerType) {
-    int _after = this.after(ownerType);
-    return _after;
+    return this.after(ownerType);
   }
   
   public int getNewFieldInsertOffset(@Nullable final EObject call, final XtendTypeDeclaration ownerType) {
@@ -96,16 +95,14 @@ public class InsertionOffsets {
   
   protected int before(final EObject element) {
     ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(element);
-    int _offset = _findActualNodeFor.getOffset();
-    return _offset;
+    return _findActualNodeFor.getOffset();
   }
   
   protected int after(final EObject element) {
     int _xblockexpression = (int) 0;
     {
       final ICompositeNode node = NodeModelUtils.findActualNodeFor(element);
-      int _endOffset = node.getEndOffset();
-      _xblockexpression = (_endOffset);
+      _xblockexpression = (node.getEndOffset());
     }
     return _xblockexpression;
   }
@@ -118,8 +115,7 @@ public class InsertionOffsets {
       final Function1<ILeafNode,Boolean> _function = new Function1<ILeafNode,Boolean>() {
         public Boolean apply(final ILeafNode it) {
           String _text = it.getText();
-          boolean _equals = Objects.equal(_text, "{");
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(Objects.equal(_text, "{"));
         }
       };
       final ILeafNode openingBraceNode = IterableExtensions.<ILeafNode>findFirst(_leafNodes, _function);
@@ -127,11 +123,9 @@ public class InsertionOffsets {
       boolean _notEquals = (!Objects.equal(openingBraceNode, null));
       if (_notEquals) {
         int _offset = openingBraceNode.getOffset();
-        int _plus = (_offset + 1);
-        _xifexpression = _plus;
+        _xifexpression = (_offset + 1);
       } else {
-        int _endOffset = classNode.getEndOffset();
-        _xifexpression = _endOffset;
+        _xifexpression = classNode.getEndOffset();
       }
       _xblockexpression = (_xifexpression);
     }

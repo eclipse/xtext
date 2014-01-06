@@ -16,7 +16,6 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -34,12 +33,7 @@ public abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTes
   
   private ResourceSet contextResourceSet;
   
-  private OwnedConverter owner = new Function0<OwnedConverter>() {
-    public OwnedConverter apply() {
-      OwnedConverter _ownedConverter = new OwnedConverter(AbstractTestingTypeReferenceOwner.this);
-      return _ownedConverter;
-    }
-  }.apply();
+  private OwnedConverter owner = new OwnedConverter(this);
   
   public LightweightTypeReference toLightweightReference(final JvmTypeReference reference) {
     return this.owner.toLightweightReference(reference);
@@ -59,13 +53,11 @@ public abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTes
   }
   
   public void acceptHint(final Object handle, final LightweightBoundTypeArgument boundTypeArgument) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException("Auto-generated function stub");
   }
   
   public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException("Auto-generated function stub");
   }
   
   public List<JvmTypeParameter> getDeclaredTypeParameters() {
@@ -81,7 +73,6 @@ public abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTes
   }
   
   public boolean isResolved(final Object handle) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException("Auto-generated function stub");
   }
 }

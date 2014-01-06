@@ -135,8 +135,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
           KeepLocalHistoryTest.this.assertGeneratedFiles(expectedLocalHistorySize);
         }
       };
-      IFile _doubleArrow = ObjectExtensions.<IFile>operator_doubleArrow(_createFile, _function);
-      return _doubleArrow;
+      return ObjectExtensions.<IFile>operator_doubleArrow(_createFile, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

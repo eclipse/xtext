@@ -62,8 +62,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
       JvmTypeParameter _delegate_3 = this.getDelegate();
       String _string = _delegate_3.toString();
       String _plus = ("Couldn\'t remove " + _string);
-      IllegalStateException _illegalStateException = new IllegalStateException(_plus);
-      throw _illegalStateException;
+      throw new IllegalStateException(_plus);
     }
   }
   
@@ -82,8 +81,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
   }
   
   public MutableAnnotationReference addAnnotation(final Type annotationType) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("TODO: auto-generated method stub");
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   public MutableAnnotationReference findAnnotation(final Type annotationType) {
@@ -96,8 +94,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
   
   public String getQualifiedName() {
     JvmTypeParameter _delegate = this.getDelegate();
-    String _identifier = _delegate.getIdentifier();
-    return _identifier;
+    return _delegate.getIdentifier();
   }
   
   public void setUpperBounds(final Iterable<? extends TypeReference> upperBounds) {

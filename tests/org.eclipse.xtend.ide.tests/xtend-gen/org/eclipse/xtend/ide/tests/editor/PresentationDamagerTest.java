@@ -29,8 +29,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
   private FlexerFactory flexerFactory;
   
   protected Lexer createLexer() {
-    InternalXtendLexer _internalXtendLexer = new InternalXtendLexer();
-    return _internalXtendLexer;
+    return new InternalXtendLexer();
   }
   
   @Test
@@ -190,8 +189,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
           it.setTokenDefProvider(_doubleArrow);
           final Provider<Lexer> _function_1 = new Provider<Lexer>() {
             public Lexer get() {
-              Lexer _createLexer = PresentationDamagerTest.this.createLexer();
-              return _createLexer;
+              return PresentationDamagerTest.this.createLexer();
             }
           };
           it.setLexer(_function_1);
@@ -199,8 +197,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
         }
       };
       final XtendDocumentTokenSource source = ObjectExtensions.<XtendDocumentTokenSource>operator_doubleArrow(_xtendDocumentTokenSource, _function);
-      XtextDocument _xtextDocument = new XtextDocument(source, null);
-      final XtextDocument document = _xtextDocument;
+      final XtextDocument document = new XtextDocument(source, null);
       document.set(before);
       _xblockexpression = (document);
     }

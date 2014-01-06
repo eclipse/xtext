@@ -16,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
@@ -45,12 +44,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
   }
   
   @Rule
-  public ErrorCollector collector = new Function0<ErrorCollector>() {
-    public ErrorCollector apply() {
-      ErrorCollector _errorCollector = new ErrorCollector();
-      return _errorCollector;
-    }
-  }.apply();
+  public ErrorCollector collector = new ErrorCollector();
   
   public List<Object> resolvesClosuresTo(final String expression, final String... types) {
     final List<XClosure> closures = this.findClosures(expression);
@@ -136,8 +130,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
     List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
     final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
       public String apply(final LightweightTypeReference it) {
-        String _simpleName = it.getSimpleName();
-        return _simpleName;
+        return it.getSimpleName();
       }
     };
     String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments_1, ", ", _function);

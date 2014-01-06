@@ -78,8 +78,7 @@ public class SkipNodesInBetweenDataCompilerSmokeTest extends AbstractDataCompile
               ReplaceRegion _replaceRegion = new ReplaceRegion(offset, length, "");
               region = _replaceRegion;
               String _text = rootNode.getText();
-              StringBuilder _stringBuilder = new StringBuilder(_text);
-              final StringBuilder builder = _stringBuilder;
+              final StringBuilder builder = new StringBuilder(_text);
               region.applyTo(builder);
               String _string = builder.toString();
               this.processFile(_string);

@@ -20,14 +20,12 @@ public class DelegatingClassloader extends ClassLoader {
       if (_notEquals) {
         return result;
       }
-      Class<? extends Object> _findClass = super.findClass(name);
-      _xblockexpression = (_findClass);
+      _xblockexpression = (super.findClass(name));
     }
     return _xblockexpression;
   }
   
   public Class<? extends Object> loadClass(final String name) throws ClassNotFoundException {
-    Class<? extends Object> _loadClass = super.loadClass(name);
-    return _loadClass;
+    return super.loadClass(name);
   }
 }

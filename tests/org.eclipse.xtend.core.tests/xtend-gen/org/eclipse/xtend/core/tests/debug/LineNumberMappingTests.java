@@ -353,8 +353,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     try {
       String _string = xtendCode.toString();
       final XtendClass clazz = super.clazz(_string);
-      AbstractTraceRegionFSA _abstractTraceRegionFSA = new AbstractTraceRegionFSA();
-      final AbstractTraceRegionFSA fsa = _abstractTraceRegionFSA;
+      final AbstractTraceRegionFSA fsa = new AbstractTraceRegionFSA();
       Resource _eResource = clazz.eResource();
       this.generator.doGenerate(_eResource, fsa);
       final AbstractTraceRegion result = ((ITraceRegionProvider) fsa.charSequence).getTraceRegion();

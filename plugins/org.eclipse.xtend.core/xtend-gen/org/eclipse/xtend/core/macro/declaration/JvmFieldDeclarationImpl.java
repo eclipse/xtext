@@ -32,8 +32,7 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
     JvmTypesBuilder _jvmTypesBuilder = _compilationUnit_1.getJvmTypesBuilder();
     JvmField _delegate = this.getDelegate();
     XExpression _expression = _jvmTypesBuilder.getExpression(_delegate);
-    Expression _expression_1 = _compilationUnit.toExpression(_expression);
-    return _expression_1;
+    return _compilationUnit.toExpression(_expression);
   }
   
   public void setInitializer(final Expression initializer) {
@@ -70,34 +69,29 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
   
   public boolean isFinal() {
     JvmField _delegate = this.getDelegate();
-    boolean _isFinal = _delegate.isFinal();
-    return _isFinal;
+    return _delegate.isFinal();
   }
   
   public boolean isStatic() {
     JvmField _delegate = this.getDelegate();
-    boolean _isStatic = _delegate.isStatic();
-    return _isStatic;
+    return _delegate.isStatic();
   }
   
   public boolean isTransient() {
     JvmField _delegate = this.getDelegate();
-    boolean _isTransient = _delegate.isTransient();
-    return _isTransient;
+    return _delegate.isTransient();
   }
   
   public boolean isVolatile() {
     JvmField _delegate = this.getDelegate();
-    boolean _isVolatile = _delegate.isVolatile();
-    return _isVolatile;
+    return _delegate.isVolatile();
   }
   
   public TypeReference getType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmField _delegate = this.getDelegate();
     JvmTypeReference _type = _delegate.getType();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_type);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_type);
   }
   
   public void setFinal(final boolean isFinal) {

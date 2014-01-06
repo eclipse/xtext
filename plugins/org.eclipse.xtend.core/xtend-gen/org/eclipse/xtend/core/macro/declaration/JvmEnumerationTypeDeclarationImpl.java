@@ -30,8 +30,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class JvmEnumerationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmEnumerationType> implements MutableEnumerationTypeDeclaration {
   public Iterable<? extends MutableEnumerationValueDeclaration> getDeclaredValues() {
     Iterable<? extends MutableMemberDeclaration> _declaredMembers = this.getDeclaredMembers();
-    Iterable<MutableEnumerationValueDeclaration> _filter = Iterables.<MutableEnumerationValueDeclaration>filter(_declaredMembers, MutableEnumerationValueDeclaration.class);
-    return _filter;
+    return Iterables.<MutableEnumerationValueDeclaration>filter(_declaredMembers, MutableEnumerationValueDeclaration.class);
   }
   
   public MutableEnumerationValueDeclaration addValue(final String name, final Procedure1<MutableEnumerationValueDeclaration> initializer) {
@@ -56,11 +55,9 @@ public class JvmEnumerationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jv
     final Function1<MutableEnumerationValueDeclaration,Boolean> _function = new Function1<MutableEnumerationValueDeclaration,Boolean>() {
       public Boolean apply(final MutableEnumerationValueDeclaration value) {
         String _simpleName = value.getSimpleName();
-        boolean _equals = Objects.equal(_simpleName, name);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_simpleName, name));
       }
     };
-    MutableEnumerationValueDeclaration _findFirst = IterableExtensions.findFirst(_declaredValues, _function);
-    return _findFirst;
+    return IterableExtensions.findFirst(_declaredValues, _function);
   }
 }

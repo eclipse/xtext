@@ -54,8 +54,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   
   public Object isSuperTypeOf(final String superType, final String... types) {
     Pair<String,String> _mappedTo = Pair.<String, String>of(superType, null);
-    Object _isSuperTypeOf = this.isSuperTypeOf(_mappedTo, types);
-    return _isSuperTypeOf;
+    return this.isSuperTypeOf(_mappedTo, types);
   }
   
   public Object isSuperTypeOf(final Pair<String,String> superTypeAndParam, final String... types) {
@@ -96,13 +95,11 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       final Function1<JvmFormalParameter,LightweightTypeReference> _function = new Function1<JvmFormalParameter,LightweightTypeReference>() {
         public LightweightTypeReference apply(final JvmFormalParameter it) {
           JvmTypeReference _parameterType = it.getParameterType();
-          LightweightTypeReference _lightweightReference = CommonSuperTypeTest.this.toLightweightReference(_parameterType);
-          return _lightweightReference;
+          return CommonSuperTypeTest.this.toLightweightReference(_parameterType);
         }
       };
       List<LightweightTypeReference> _map = ListExtensions.<JvmFormalParameter, LightweightTypeReference>map(_parameters, _function);
-      ArrayList<LightweightTypeReference> _arrayList = new ArrayList<LightweightTypeReference>(_map);
-      final ArrayList<LightweightTypeReference> typeReferences = _arrayList;
+      final ArrayList<LightweightTypeReference> typeReferences = new ArrayList<LightweightTypeReference>(_map);
       CommonTypeComputationServices _services = this.getServices();
       final TypeConformanceComputer conformanceComputer = _services.getTypeConformanceComputer();
       LightweightTypeReference computedSuperType = conformanceComputer.getCommonSuperType(typeReferences, this);
@@ -222,8 +219,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
     List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
     final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
       public String apply(final LightweightTypeReference it) {
-        String _simpleName = it.getSimpleName();
-        return _simpleName;
+        return it.getSimpleName();
       }
     };
     String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments_1, ", ", _function);

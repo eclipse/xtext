@@ -248,8 +248,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
       String _string = model.toString();
       XtendFile _file = this.file(_string);
       Resource _eResource = _file.eResource();
-      RewritableImportSection _parse = this._rewritableImportSection$Factory.parse(((XtextResource) _eResource));
-      return _parse;
+      return this._rewritableImportSection$Factory.parse(((XtextResource) _eResource));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -257,38 +256,32 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
   
   protected boolean addImport(final RewritableImportSection section, final Class<? extends Object> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    boolean _addImport = section.addImport(_jvmType);
-    return _addImport;
+    return section.addImport(_jvmType);
   }
   
   protected boolean removeImport(final RewritableImportSection section, final Class<? extends Object> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    boolean _removeImport = section.removeImport(_jvmType);
-    return _removeImport;
+    return section.removeImport(_jvmType);
   }
   
   protected boolean addStaticImport(final RewritableImportSection section, final Class<? extends Object> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    boolean _addStaticImport = section.addStaticImport(_jvmType);
-    return _addStaticImport;
+    return section.addStaticImport(_jvmType);
   }
   
   protected boolean removeStaticImport(final RewritableImportSection section, final Class<? extends Object> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    boolean _removeStaticImport = section.removeStaticImport(_jvmType);
-    return _removeStaticImport;
+    return section.removeStaticImport(_jvmType);
   }
   
   protected boolean addExtensionImport(final RewritableImportSection section, final Class<? extends Object> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    boolean _addStaticExtensionImport = section.addStaticExtensionImport(_jvmType);
-    return _addStaticExtensionImport;
+    return section.addStaticExtensionImport(_jvmType);
   }
   
   protected boolean removeExtensionImport(final RewritableImportSection section, final Class<? extends Object> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    boolean _removeStaticExtensionImport = section.removeStaticExtensionImport(_jvmType);
-    return _removeStaticExtensionImport;
+    return section.removeStaticExtensionImport(_jvmType);
   }
   
   protected JvmDeclaredType jvmType(final Class<? extends Object> javaClass) {
@@ -311,8 +304,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
         XtendFile _file = this.file(this.model);
         this.xtendFile = _file;
         Resource _eResource = this.xtendFile.eResource();
-        RewritableImportSection _parse = this._rewritableImportSection$Factory.parse(((XtextResource) _eResource));
-        _xblockexpression = (_parse);
+        _xblockexpression = (this._rewritableImportSection$Factory.parse(((XtextResource) _eResource)));
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -321,13 +313,11 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
   }
   
   protected void assertEquals(final RewritableImportSection section, final CharSequence sectionAsString) {
-    StringBuilder _stringBuilder = new StringBuilder(this.model);
-    final StringBuilder builder = _stringBuilder;
+    final StringBuilder builder = new StringBuilder(this.model);
     final List<ReplaceRegion> changes = section.rewrite();
     final Function1<ReplaceRegion,Integer> _function = new Function1<ReplaceRegion,Integer>() {
       public Integer apply(final ReplaceRegion it) {
-        int _offset = it.getOffset();
-        return Integer.valueOf(_offset);
+        return Integer.valueOf(it.getOffset());
       }
     };
     List<ReplaceRegion> _sortBy = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);
@@ -358,11 +348,9 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
       boolean _isIgnoreLinebreaks = this.isIgnoreLinebreaks();
       if (_isIgnoreLinebreaks) {
         String _string = sequence.toString();
-        String _replaceAll = _string.replaceAll((("(" + lineSeparator) + ")+"), " ");
-        _xifexpression = _replaceAll;
+        _xifexpression = _string.replaceAll((("(" + lineSeparator) + ")+"), " ");
       } else {
-        String _string_1 = sequence.toString();
-        _xifexpression = _string_1;
+        _xifexpression = sequence.toString();
       }
       _xblockexpression = (_xifexpression);
     }

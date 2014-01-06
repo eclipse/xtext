@@ -146,8 +146,7 @@ public class MemberFromSuperImplementor {
       EList<JvmFormalParameter> _parameters = overriddenOperation.getParameters();
       final Function1<JvmFormalParameter,String> _function_1 = new Function1<JvmFormalParameter,String>() {
         public String apply(final JvmFormalParameter it) {
-          String _simpleName = it.getSimpleName();
-          return _simpleName;
+          return it.getSimpleName();
         }
       };
       List<String> _map_1 = ListExtensions.<JvmFormalParameter, String>map(_parameters, _function_1);
@@ -178,8 +177,7 @@ public class MemberFromSuperImplementor {
       EList<JvmFormalParameter> _parameters_1 = superConstructor.getParameters();
       final Function1<JvmFormalParameter,String> _function = new Function1<JvmFormalParameter,String>() {
         public String apply(final JvmFormalParameter it) {
-          String _simpleName = it.getSimpleName();
-          return _simpleName;
+          return it.getSimpleName();
         }
       };
       List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_parameters_1, _function);
@@ -221,8 +219,7 @@ public class MemberFromSuperImplementor {
     EList<JvmTypeReference> _exceptions = overridden.getExceptions();
     final Function1<JvmTypeReference,LightweightTypeReference> _function_1 = new Function1<JvmTypeReference,LightweightTypeReference>() {
       public LightweightTypeReference apply(final JvmTypeReference it) {
-        LightweightTypeReference _substitute = substitutor.substitute(it);
-        return _substitute;
+        return substitutor.substitute(it);
       }
     };
     List<LightweightTypeReference> _map = ListExtensions.<JvmTypeReference, LightweightTypeReference>map(_exceptions, _function_1);
@@ -232,10 +229,8 @@ public class MemberFromSuperImplementor {
   protected StandardTypeParameterSubstitutor createSubstitutor(final JvmDeclaredType jvmOverrider) {
     StandardTypeParameterSubstitutor _xblockexpression = null;
     {
-      StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, jvmOverrider);
-      final StandardTypeReferenceOwner owner = _standardTypeReferenceOwner;
-      ParameterizedTypeReference _parameterizedTypeReference = new ParameterizedTypeReference(owner, jvmOverrider);
-      final ParameterizedTypeReference lightweightOverrider = _parameterizedTypeReference;
+      final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, jvmOverrider);
+      final ParameterizedTypeReference lightweightOverrider = new ParameterizedTypeReference(owner, jvmOverrider);
       if ((jvmOverrider instanceof JvmGenericType)) {
         EList<JvmTypeParameter> _typeParameters = ((JvmGenericType) jvmOverrider).getTypeParameters();
         final Procedure1<JvmTypeParameter> _function = new Procedure1<JvmTypeParameter>() {
@@ -248,8 +243,7 @@ public class MemberFromSuperImplementor {
       }
       DeclaratorTypeArgumentCollector _declaratorTypeArgumentCollector = new DeclaratorTypeArgumentCollector();
       final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> parameterMapping = _declaratorTypeArgumentCollector.getTypeParameterMapping(lightweightOverrider);
-      StandardTypeParameterSubstitutor _standardTypeParameterSubstitutor = new StandardTypeParameterSubstitutor(parameterMapping, owner);
-      _xblockexpression = (_standardTypeParameterSubstitutor);
+      _xblockexpression = (new StandardTypeParameterSubstitutor(parameterMapping, owner));
     }
     return _xblockexpression;
   }

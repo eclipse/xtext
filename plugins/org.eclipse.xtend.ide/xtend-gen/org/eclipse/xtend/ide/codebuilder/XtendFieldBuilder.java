@@ -51,8 +51,7 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuil
       ISourceAppender _appendType = this.appendType(appendable, _fieldType, "Object");
       ISourceAppender _append = _appendType.append(" ");
       String _fieldName = this.getFieldName();
-      ISourceAppender _append_1 = _append.append(_fieldName);
-      _xblockexpression = (_append_1);
+      _xblockexpression = (_append.append(_fieldName));
     }
     return _xblockexpression;
   }
@@ -60,8 +59,7 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuil
   public int getInsertOffset() {
     EObject _context = this.getContext();
     XtendTypeDeclaration _xtendType = this.getXtendType();
-    int _newFieldInsertOffset = this._insertionOffsets.getNewFieldInsertOffset(_context, _xtendType);
-    return _newFieldInsertOffset;
+    return this._insertionOffsets.getNewFieldInsertOffset(_context, _xtendType);
   }
   
   public int getIndentationLevel() {

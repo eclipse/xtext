@@ -31,8 +31,7 @@ public class VariableNameAcceptor implements JdtVariableCompletions.CompletionDa
       public int compare(final String left, final String right) {
         int _length = left.length();
         int _length_1 = right.length();
-        int _minus = (_length - _length_1);
-        return _minus;
+        return (_length - _length_1);
       }
     };
     Collections.<String>sort(candidates, _function);

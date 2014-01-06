@@ -80,8 +80,7 @@ public abstract class AbstractOldAPITypeArgumentTest extends AbstractTypeArgumen
     boolean _notEquals = (!Objects.equal(receiver, null));
     if (_notEquals) {
       ITypeProvider _typeProvider = this.getTypeProvider();
-      JvmTypeReference _type = _typeProvider.getType(receiver);
-      _xifexpression = _type;
+      _xifexpression = _typeProvider.getType(receiver);
     }
     final JvmTypeReference receiverType = _xifexpression;
     ITypeProvider _typeProvider_1 = this.getTypeProvider();
@@ -90,8 +89,8 @@ public abstract class AbstractOldAPITypeArgumentTest extends AbstractTypeArgumen
     List<XExpression> _actualArguments = this.featureCallToJavaMapping.getActualArguments(call);
     for (final XExpression argument : _actualArguments) {
       ITypeProvider _typeProvider_2 = this.getTypeProvider();
-      JvmTypeReference _type_1 = _typeProvider_2.getType(argument);
-      argumentTypes.add(_type_1);
+      JvmTypeReference _type = _typeProvider_2.getType(argument);
+      argumentTypes.add(_type);
     }
     TypeArgumentContextProvider _typeArgumentContextProvider = this.getTypeArgumentContextProvider();
     FeatureCallRequest _featureCallRequest = new FeatureCallRequest(call, executable, receiverType, expectedType, argumentTypes, this.logicalContainerProvider);

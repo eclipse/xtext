@@ -41,8 +41,7 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
             _matched_1=true;
             boolean _isIndexing = this.compilerPhases.isIndexing(resourceSet);
             if (_isIndexing) {
-              IResourceDescriptions.NullImpl _nullImpl = new IResourceDescriptions.NullImpl();
-              return _nullImpl;
+              return new IResourceDescriptions.NullImpl();
             }
             final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
               public Boolean apply(final URI uri) {
@@ -56,16 +55,15 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
                   _or = (_equals || _lessThan);
                 }
                 if (_or) {
-                  return Boolean.valueOf(false);
+                  return false;
                 }
                 String _segment = uri.segment(1);
                 IProject _project = project.getProject();
                 String _name = _project.getName();
-                return Boolean.valueOf(Objects.equal(_segment, _name));
+                return Objects.equal(_segment, _name);
               }
             };
-            FilteringResourceDescriptions _filteringResourceDescriptions = new FilteringResourceDescriptions(result, _function);
-            return _filteringResourceDescriptions;
+            return new FilteringResourceDescriptions(result, _function);
           }
         }
       }
@@ -84,16 +82,15 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
             _or = (_equals || _lessThan);
           }
           if (_or) {
-            return Boolean.valueOf(false);
+            return false;
           }
           String _segment = uri.segment(1);
           IProject _project = project.getProject();
           String _name = _project.getName();
-          return Boolean.valueOf((!Objects.equal(_segment, _name)));
+          return (!Objects.equal(_segment, _name));
         }
       };
-      FilteringResourceDescriptions _filteringResourceDescriptions = new FilteringResourceDescriptions(result, _function);
-      return _filteringResourceDescriptions;
+      return new FilteringResourceDescriptions(result, _function);
     } else {
       return result;
     }

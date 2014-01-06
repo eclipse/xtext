@@ -25,8 +25,7 @@ public class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmForm
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmFormalParameter _delegate = this.getDelegate();
     JvmTypeReference _parameterType = _delegate.getParameterType();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_parameterType);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_parameterType);
   }
   
   public MutableExecutableDeclaration getDeclaringExecutable() {

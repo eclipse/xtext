@@ -163,8 +163,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           final Function1<IField,Boolean> _function = new Function1<IField,Boolean>() {
             public Boolean apply(final IField it) {
               String _elementName = it.getElementName();
-              boolean _equals = Objects.equal(_elementName, "x");
-              return Boolean.valueOf(_equals);
+              return Boolean.valueOf(Objects.equal(_elementName, "x"));
             }
           };
           boolean _exists = IterableExtensions.<IField>exists(_filter, _function);
@@ -173,8 +172,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           final Function1<IMethod,Boolean> _function_1 = new Function1<IMethod,Boolean>() {
             public Boolean apply(final IMethod it) {
               String _elementName = it.getElementName();
-              boolean _equals = Objects.equal(_elementName, "foo");
-              return Boolean.valueOf(_equals);
+              return Boolean.valueOf(Objects.equal(_elementName, "foo"));
             }
           };
           boolean _exists_1 = IterableExtensions.<IMethod>exists(_filter_1, _function_1);
@@ -183,8 +181,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           final Function1<IMethod,Boolean> _function_2 = new Function1<IMethod,Boolean>() {
             public Boolean apply(final IMethod it) {
               String _elementName = it.getElementName();
-              boolean _equals = Objects.equal(_elementName, "bar");
-              return Boolean.valueOf(_equals);
+              return Boolean.valueOf(Objects.equal(_elementName, "bar"));
             }
           };
           boolean _exists_2 = IterableExtensions.<IMethod>exists(_filter_2, _function_2);
@@ -193,8 +190,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           final Function1<IMethod,Boolean> _function_3 = new Function1<IMethod,Boolean>() {
             public Boolean apply(final IMethod it) {
               String _elementName = it.getElementName();
-              boolean _equals = Objects.equal(_elementName, "baz");
-              return Boolean.valueOf(_equals);
+              return Boolean.valueOf(Objects.equal(_elementName, "baz"));
             }
           };
           boolean _exists_3 = IterableExtensions.<IMethod>exists(_filter_3, _function_3);
@@ -1094,12 +1090,10 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                   final Function1<MatchFilter,Boolean> _function = new Function1<MatchFilter,Boolean>() {
                     public Boolean apply(final MatchFilter it) {
                       boolean _filters = it.filters(m);
-                      boolean _not = (!_filters);
-                      return Boolean.valueOf(_not);
+                      return Boolean.valueOf((!_filters));
                     }
                   };
-                  boolean _forall = IterableExtensions.<MatchFilter>forall(((Iterable<MatchFilter>)Conversions.doWrapArray(filters)), _function);
-                  return Boolean.valueOf(_forall);
+                  return Boolean.valueOf(IterableExtensions.<MatchFilter>forall(((Iterable<MatchFilter>)Conversions.doWrapArray(filters)), _function));
                 }
               };
               final Iterable<Match> matches = IterableExtensions.<Match>filter(((Iterable<Match>)Conversions.doWrapArray(_matches)), _function);

@@ -1976,8 +1976,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
         final Function1<MutableParameterDeclaration,Boolean> _function = new Function1<MutableParameterDeclaration,Boolean>() {
           public Boolean apply(final MutableParameterDeclaration it) {
             String _simpleName = it.getSimpleName();
-            boolean _endsWith = _simpleName.endsWith("foo");
-            return Boolean.valueOf(_endsWith);
+            return Boolean.valueOf(_simpleName.endsWith("foo"));
           }
         };
         boolean _forall = IterableExtensions.forall(_parameters, _function);

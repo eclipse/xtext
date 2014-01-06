@@ -48,21 +48,18 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
       final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
         public Boolean apply(final JvmTypeReference it) {
           JvmType _type = it.getType();
-          boolean _isInterface = ((JvmGenericType) _type).isInterface();
-          return Boolean.valueOf(_isInterface);
+          return Boolean.valueOf(((JvmGenericType) _type).isInterface());
         }
       };
       final Iterable<JvmTypeReference> filtered = IterableExtensions.<JvmTypeReference>filter(_superTypes, _function);
       final Function1<JvmTypeReference,TypeReference> _function_1 = new Function1<JvmTypeReference,TypeReference>() {
         public TypeReference apply(final JvmTypeReference it) {
           CompilationUnitImpl _compilationUnit = JvmClassDeclarationImpl.this.getCompilationUnit();
-          TypeReference _typeReference = _compilationUnit.toTypeReference(it);
-          return _typeReference;
+          return _compilationUnit.toTypeReference(it);
         }
       };
       Iterable<TypeReference> _map = IterableExtensions.<JvmTypeReference, TypeReference>map(filtered, _function_1);
-      List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
-      _xblockexpression = (_list);
+      _xblockexpression = (IterableExtensions.<TypeReference>toList(_map));
     }
     return _xblockexpression;
   }
@@ -94,32 +91,27 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
       }
     };
     JvmTypeReference _findFirst = IterableExtensions.<JvmTypeReference>findFirst(_superTypes, _function);
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_findFirst);
-    return _typeReference;
+    return _compilationUnit.toTypeReference(_findFirst);
   }
   
   public boolean isAbstract() {
     JvmGenericType _delegate = this.getDelegate();
-    boolean _isAbstract = _delegate.isAbstract();
-    return _isAbstract;
+    return _delegate.isAbstract();
   }
   
   public boolean isFinal() {
     JvmGenericType _delegate = this.getDelegate();
-    boolean _isFinal = _delegate.isFinal();
-    return _isFinal;
+    return _delegate.isFinal();
   }
   
   public boolean isStatic() {
     JvmGenericType _delegate = this.getDelegate();
-    boolean _isStatic = _delegate.isStatic();
-    return _isStatic;
+    return _delegate.isStatic();
   }
   
   public boolean isStrictFloatingPoint() {
     JvmGenericType _delegate = this.getDelegate();
-    boolean _isStrictFloatingPoint = _delegate.isStrictFloatingPoint();
-    return _isStrictFloatingPoint;
+    return _delegate.isStrictFloatingPoint();
   }
   
   public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
@@ -133,12 +125,10 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {
       public MutableTypeParameterDeclaration apply(final JvmTypeParameter it) {
         CompilationUnitImpl _compilationUnit = JvmClassDeclarationImpl.this.getCompilationUnit();
-        MutableTypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
-        return _typeParameterDeclaration;
+        return _compilationUnit.toTypeParameterDeclaration(it);
       }
     };
-    List<MutableTypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, MutableTypeParameterDeclaration>map(_typeParameters, _function);
-    return _map;
+    return ListExtensions.<JvmTypeParameter, MutableTypeParameterDeclaration>map(_typeParameters, _function);
   }
   
   public void setAbstract(final boolean isAbstract) {
@@ -163,8 +153,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
       if (superclass instanceof TypeReferenceImpl) {
         _matched=true;
         LightweightTypeReference _delegate = ((TypeReferenceImpl)superclass).getDelegate();
-        JvmTypeReference _javaCompliantTypeReference = _delegate.toJavaCompliantTypeReference();
-        _switchResult = _javaCompliantTypeReference;
+        _switchResult = _delegate.toJavaCompliantTypeReference();
       }
     }
     if (!_matched) {
@@ -174,8 +163,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
         TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
         CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
         XtendFile _xtendFile = _compilationUnit_1.getXtendFile();
-        JvmTypeReference _typeForName = _typeReferences.getTypeForName(Object.class, _xtendFile);
-        _switchResult = _typeForName;
+        _switchResult = _typeReferences.getTypeForName(Object.class, _xtendFile);
       }
     }
     final JvmTypeReference newTypeRef = _switchResult;
@@ -236,8 +224,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     final Function1<TypeReferenceImpl,JvmTypeReference> _function_1 = new Function1<TypeReferenceImpl,JvmTypeReference>() {
       public JvmTypeReference apply(final TypeReferenceImpl it) {
         LightweightTypeReference _delegate = it.getDelegate();
-        JvmTypeReference _javaCompliantTypeReference = _delegate.toJavaCompliantTypeReference();
-        return _javaCompliantTypeReference;
+        return _delegate.toJavaCompliantTypeReference();
       }
     };
     Iterable<JvmTypeReference> _map = IterableExtensions.<TypeReferenceImpl, JvmTypeReference>map(_filter, _function_1);
@@ -250,12 +237,10 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     final Function1<MutableFieldDeclaration,Boolean> _function = new Function1<MutableFieldDeclaration,Boolean>() {
       public Boolean apply(final MutableFieldDeclaration it) {
         String _simpleName = it.getSimpleName();
-        boolean _equals = Objects.equal(_simpleName, name);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_simpleName, name));
       }
     };
-    MutableFieldDeclaration _findFirst = IterableExtensions.<MutableFieldDeclaration>findFirst(_filter, _function);
-    return _findFirst;
+    return IterableExtensions.<MutableFieldDeclaration>findFirst(_filter, _function);
   }
   
   public MutableMethodDeclaration findDeclaredMethod(final String name, final TypeReference[] parameterTypes) {
@@ -275,8 +260,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
             Iterable<? extends MutableParameterDeclaration> _parameters = it.getParameters();
             final Function1<MutableParameterDeclaration,TypeReference> _function = new Function1<MutableParameterDeclaration,TypeReference>() {
               public TypeReference apply(final MutableParameterDeclaration it) {
-                TypeReference _type = it.getType();
-                return _type;
+                return it.getType();
               }
             };
             Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
@@ -288,8 +272,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
           return Boolean.valueOf(_and);
         }
       };
-      MutableMethodDeclaration _findFirst = IterableExtensions.<MutableMethodDeclaration>findFirst(_filter, _function);
-      _xblockexpression = (_findFirst);
+      _xblockexpression = (IterableExtensions.<MutableMethodDeclaration>findFirst(_filter, _function));
     }
     return _xblockexpression;
   }

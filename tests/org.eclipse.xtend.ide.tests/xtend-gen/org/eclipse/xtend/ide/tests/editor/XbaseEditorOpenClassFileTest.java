@@ -173,8 +173,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
     boolean _xtrycatchfinallyexpression = false;
     try {
       Class<? extends Object> _forName = Class.forName("org.eclipse.ui.ide.IEditorAssociationOverride");
-      boolean _notEquals = (!Objects.equal(_forName, null));
-      _xtrycatchfinallyexpression = _notEquals;
+      _xtrycatchfinallyexpression = (!Objects.equal(_forName, null));
     } catch (final Throwable _t) {
       if (_t instanceof ClassNotFoundException) {
         final ClassNotFoundException e = (ClassNotFoundException)_t;

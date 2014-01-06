@@ -19,8 +19,7 @@ public class Case_9 extends Case_8 {
     boolean _notEquals = (!Objects.equal(_eContainer, null));
     if (_notEquals) {
       EObject _eContainer_1 = c.eContainer();
-      CharSequence _generateTypeRef = this.generateTypeRef(_eContainer_1);
-      _xifexpression = _generateTypeRef;
+      _xifexpression = this.generateTypeRef(_eContainer_1);
     } else {
       CharSequence _xifexpression_1 = null;
       boolean _eIsProxy = c.eIsProxy();
@@ -40,8 +39,7 @@ public class Case_9 extends Case_8 {
   
   protected CharSequence _generateTypeRef(final EObject o) {
     EObject _eContainer = o.eContainer();
-    CharSequence _generateTypeRef = this.generateTypeRef(_eContainer);
-    return _generateTypeRef;
+    return this.generateTypeRef(_eContainer);
   }
   
   public <T1 extends Object> List<List<T1>> foo(final T1 t) {

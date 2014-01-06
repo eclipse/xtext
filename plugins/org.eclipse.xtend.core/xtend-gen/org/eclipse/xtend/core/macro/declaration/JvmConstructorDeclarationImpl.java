@@ -16,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 public class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmConstructor> implements MutableConstructorDeclaration {
   public String getSimpleName() {
     MutableTypeDeclaration _declaringType = this.getDeclaringType();
-    String _simpleName = _declaringType.getSimpleName();
-    return _simpleName;
+    return _declaringType.getSimpleName();
   }
 }

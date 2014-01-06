@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 import com.google.inject.Inject;
 import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.junit4.internal.Timed;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractBatchTypeResolverTest;
 import org.eclipse.xtext.xbase.tests.typesystem.TimedBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -25,12 +24,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class TimedBatchTypeResolverTest extends AbstractBatchTypeResolverTest {
   @Rule
-  public final StopwatchRule rule = new Function0<StopwatchRule>() {
-    public StopwatchRule apply() {
-      StopwatchRule _stopwatchRule = new StopwatchRule(false);
-      return _stopwatchRule;
-    }
-  }.apply();
+  public final StopwatchRule rule = new StopwatchRule(false);
   
   @Inject
   private TimedBatchTypeResolver typeResolver;

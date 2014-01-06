@@ -183,8 +183,7 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
             final Function1<JvmGenericType,Boolean> _function = new Function1<JvmGenericType,Boolean>() {
               public Boolean apply(final JvmGenericType it) {
                 String _identifier = it.getIdentifier();
-                boolean _equals = Objects.equal(_identifier, "foo.Bar");
-                return Boolean.valueOf(_equals);
+                return Boolean.valueOf(Objects.equal(_identifier, "foo.Bar"));
               }
             };
             JvmGenericType _findFirst = IterableExtensions.<JvmGenericType>findFirst(_filter, _function);

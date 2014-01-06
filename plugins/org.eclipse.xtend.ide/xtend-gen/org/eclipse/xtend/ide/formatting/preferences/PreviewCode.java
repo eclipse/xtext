@@ -50,8 +50,7 @@ public class PreviewCode {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    return _string;
+    return _builder.toString();
   }
   
   public static String defaultPreviewText() {
@@ -88,8 +87,7 @@ public class PreviewCode {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    return _string;
+    return _builder.toString();
   }
   
   public static String newLinePreviewText() {
@@ -114,7 +112,6 @@ public class PreviewCode {
   }
   
   public static String bracesPreviewText() {
-    String _defaultPreviewText = PreviewCode.defaultPreviewText();
-    return _defaultPreviewText;
+    return PreviewCode.defaultPreviewText();
   }
 }

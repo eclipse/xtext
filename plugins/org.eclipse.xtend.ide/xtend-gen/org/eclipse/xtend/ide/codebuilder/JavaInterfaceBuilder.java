@@ -30,8 +30,7 @@ public class JavaInterfaceBuilder extends AbstractInterfaceBuilder implements IC
     ISourceAppender _append_1 = _append.append(_interfaceName);
     ISourceAppender _append_2 = _append_1.append(" {");
     ISourceAppender _newLine = _append_2.newLine();
-    ISourceAppender _append_3 = _newLine.append("}");
-    return _append_3;
+    return _newLine.append("}");
   }
   
   public IType getIType() {

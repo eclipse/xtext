@@ -27,7 +27,7 @@ public class Case_3 {
     if (_notEquals) {
       final Function1<Integer,Integer> _function = new Function1<Integer,Integer>() {
         public Integer apply(final Integer i) {
-          return i;
+          return (i).intValue();
         }
       };
       final Function1<? super Integer,? extends Integer> closure = _function;

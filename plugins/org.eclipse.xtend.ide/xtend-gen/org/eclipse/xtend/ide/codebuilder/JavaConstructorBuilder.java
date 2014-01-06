@@ -24,8 +24,7 @@ public class JavaConstructorBuilder extends AbstractConstructorBuilder implement
     ISourceAppender _append = _appendVisibility.append(_simpleName);
     ISourceAppender _appendParameters = this.appendParameters(_append);
     ISourceAppender _appendThrowsClause = this.appendThrowsClause(_appendParameters);
-    ISourceAppender _appendBody = this.appendBody(_appendThrowsClause, ";");
-    return _appendBody;
+    return this.appendBody(_appendThrowsClause, ";");
   }
   
   public IType getIType() {

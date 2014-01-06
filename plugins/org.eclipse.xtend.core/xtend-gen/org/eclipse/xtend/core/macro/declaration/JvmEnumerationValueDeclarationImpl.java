@@ -17,8 +17,7 @@ import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 @SuppressWarnings("all")
 public class JvmEnumerationValueDeclarationImpl extends JvmMemberDeclarationImpl<JvmEnumerationLiteral> implements MutableEnumerationValueDeclaration {
   public void setVisibility(final Visibility visibility) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("It is not possible to change visibility of enumeration value.");
-    throw _unsupportedOperationException;
+    throw new UnsupportedOperationException("It is not possible to change visibility of enumeration value.");
   }
   
   public MutableEnumerationTypeDeclaration getDeclaringType() {

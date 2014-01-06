@@ -115,8 +115,7 @@ public class FeatureCallRequest extends XbaseTypeArgumentContextProvider.Abstrac
     if (!_matched) {
       if (f instanceof JvmOperation) {
         _matched=true;
-        JvmTypeReference _returnType = ((JvmOperation)f).getReturnType();
-        _switchResult = _returnType;
+        _switchResult = ((JvmOperation)f).getReturnType();
       }
     }
     if (!_matched) {
@@ -126,8 +125,7 @@ public class FeatureCallRequest extends XbaseTypeArgumentContextProvider.Abstrac
   }
   
   public XAbstractFeatureCall getFeatureCall() {
-    XAbstractFeatureCall _call = this.getCall();
-    return _call;
+    return this.getCall();
   }
   
   public FeatureCallRequest(final XAbstractFeatureCall call, final JvmExecutable feature, final JvmTypeReference receiverType, final JvmTypeReference expectedType, final List<JvmTypeReference> argumentTypes, final ILogicalContainerProvider contextProvider) {

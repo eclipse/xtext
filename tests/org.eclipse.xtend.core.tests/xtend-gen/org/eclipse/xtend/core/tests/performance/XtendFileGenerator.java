@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.tests.performance;
 
-import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.xtend.core.tests.performance.GeneratorConfig;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -968,8 +967,7 @@ public class XtendFileGenerator {
     Pair<String,String> _person = this.getPerson();
     Pair<String,String> _rectangle = this.getRectangle();
     Pair<String,String> _shape = this.getShape();
-    HashMap<String,String> _newHashMap = CollectionLiterals.<String, String>newHashMap(_amount, _circle, _netNode, _person, _rectangle, _shape);
-    return _newHashMap;
+    return CollectionLiterals.<String, String>newHashMap(_amount, _circle, _netNode, _person, _rectangle, _shape);
   }
   
   public Pair<String,String> getAmount() {
@@ -1067,8 +1065,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("xtend/tutorial/util/Amount.xtend", _builder.toString());
-    return _mappedTo;
+    return Pair.<String, String>of("xtend/tutorial/util/Amount.xtend", _builder.toString());
   }
   
   public Pair<String,String> getCircle() {
@@ -1098,8 +1095,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("xtend/tutorial/util/Circle.xtend", _builder.toString());
-    return _mappedTo;
+    return Pair.<String, String>of("xtend/tutorial/util/Circle.xtend", _builder.toString());
   }
   
   public Pair<String,String> getNetNode() {
@@ -1166,8 +1162,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("xtend/tutorial/util/NetNode.xtend", _builder.toString());
-    return _mappedTo;
+    return Pair.<String, String>of("xtend/tutorial/util/NetNode.xtend", _builder.toString());
   }
   
   public Pair<String,String> getPerson() {
@@ -1285,8 +1280,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("xtend/tutorial/util/Person.xtend", _builder.toString());
-    return _mappedTo;
+    return Pair.<String, String>of("xtend/tutorial/util/Person.xtend", _builder.toString());
   }
   
   public Pair<String,String> getRectangle() {
@@ -1324,8 +1318,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("xtend/tutorial/util/Rectangle.xtend", _builder.toString());
-    return _mappedTo;
+    return Pair.<String, String>of("xtend/tutorial/util/Rectangle.xtend", _builder.toString());
   }
   
   public Pair<String,String> getShape() {
@@ -1337,7 +1330,6 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("xtend/tutorial/util/Shape.xtend", _builder.toString());
-    return _mappedTo;
+    return Pair.<String, String>of("xtend/tutorial/util/Shape.xtend", _builder.toString());
   }
 }

@@ -133,15 +133,13 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   public String getPreview() {
     String _xblockexpression = null;
     {
-      StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable();
-      final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
+      final StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
       IAppendable _append = appendable.append("...");
       IAppendable _newLine = _append.newLine();
       ISourceAppender _build = this.build(_newLine);
       ISourceAppender _newLine_1 = _build.newLine();
       _newLine_1.append("...");
-      String _string = appendable.toString();
-      _xblockexpression = (_string);
+      _xblockexpression = (appendable.toString());
     }
     return _xblockexpression;
   }
@@ -176,8 +174,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     if (!_matched) {
       _switchResult = "";
     }
-    ISourceAppender _append = appendable.append(_switchResult);
-    return _append;
+    return appendable.append(_switchResult);
   }
   
   protected ISourceAppender appendType(final ISourceAppender appendable, final LightweightTypeReference typeRef, final String surrogate) {
@@ -213,8 +210,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
               public Boolean apply(final JvmUpperBound it) {
                 JvmTypeReference _typeReference = it.getTypeReference();
                 String _identifier = _typeReference.getIdentifier();
-                boolean _notEquals = (!Objects.equal(_identifier, "java.lang.Object"));
-                return Boolean.valueOf(_notEquals);
+                return Boolean.valueOf((!Objects.equal(_identifier, "java.lang.Object")));
               }
             };
             final Iterable<JvmUpperBound> upperBounds = IterableExtensions.<JvmUpperBound>filter(_filter, _function);
@@ -224,10 +220,8 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
               appendable.append(" extends ");
               boolean isFirst = true;
               EObject _context = this.getContext();
-              StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, _context);
-              final StandardTypeReferenceOwner owner = _standardTypeReferenceOwner;
-              OwnedConverter _ownedConverter = new OwnedConverter(owner);
-              final OwnedConverter converter = _ownedConverter;
+              final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, _context);
+              final OwnedConverter converter = new OwnedConverter(owner);
               for (final JvmUpperBound upperBound : upperBounds) {
                 {
                   if ((!isFirst)) {
@@ -265,8 +259,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
       }
     }
     if (!_matched) {
-      String _identifier = typeReference.getIdentifier();
-      _switchResult = _identifier;
+      _switchResult = typeReference.getIdentifier();
     }
     return _switchResult;
   }
@@ -277,8 +270,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     if (!_matched) {
       if (t instanceof JvmGenericType) {
         _matched=true;
-        boolean _isInterface = ((JvmGenericType)t).isInterface();
-        _switchResult = _isInterface;
+        _switchResult = ((JvmGenericType)t).isInterface();
       }
     }
     if (!_matched) {
