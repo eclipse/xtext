@@ -371,6 +371,9 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 			final Pair<String, String> packageAndType = typeNameGuesser.guessPackageAndTypeName(contextType, typeName);
 			final String wantedPackageName = packageAndType.getFirst();
 			final String wantedTypeName = packageAndType.getSecond();
+			if (typeName.endsWith(wantedTypeName)) {
+				return false;
+			}
 			BasicSearchEngine searchEngine = new BasicSearchEngine();
 			final char[] wantedPackageChars = (isEmpty(wantedPackageName)) ? null : wantedPackageName.toCharArray();
 			searchEngine.searchAllTypeNames(wantedPackageChars, SearchPattern.R_EXACT_MATCH, wantedTypeName.toCharArray(),
