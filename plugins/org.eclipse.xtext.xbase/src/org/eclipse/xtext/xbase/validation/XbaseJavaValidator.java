@@ -991,20 +991,24 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		final Map<String, JvmType> importedNames = Maps.newHashMap();
 		
 		populateMaps(importSection, imports, staticImports, extensionImports, importedNames);
-		Set<EObject> primarySourceElements = collectPrimarySourceElements(importSection, imports, importedNames);
 		if(!isIgnored(IMPORT_UNUSED)) {
-			for(EObject primarySourceElement: primarySourceElements) {
-				ICompositeNode node = NodeModelUtils.findActualNodeFor(primarySourceElement);
-				if (node != null) {
-					for (INode n : node.getAsTreeIterable()) {
-						if (n.getGrammarElement() instanceof CrossReference) {
-							handleTypeUsageInCrossReference(imports, importedNames, n);
-						} else if (n.getGrammarElement() instanceof TerminalRule && ((TerminalRule) n.getGrammarElement()).getName().equals("ML_COMMENT")){
-							handleTypeUsageInComment(imports, importedNames, n);
-						} else if (n.hasDirectSemanticElement() && n.getSemanticElement() instanceof XAbstractFeatureCall) {
-							handleTypeUsageInTypeLiteral(imports, importedNames, (XAbstractFeatureCall) n.getSemanticElement(), n);
-							handleTypeUsageInStaticFeatureCall(staticImports, extensionImports, n);
-						}
+			ICompositeNode importSectionNode = NodeModelUtils.getNode(importSection);
+			if (importSectionNode != null) {
+				ICompositeNode node = importSectionNode.getRootNode();
+				BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
+				while (iterator.hasNext()) {
+					INode n = iterator.next();
+					if (n == importSectionNode) {
+						iterator.prune();
+						continue;
+					}
+					if (n.getGrammarElement() instanceof CrossReference) {
+						handleTypeUsageInCrossReference(imports, importedNames, n);
+					} else if (n.getGrammarElement() instanceof TerminalRule && ((TerminalRule) n.getGrammarElement()).getName().equals("ML_COMMENT")) {
+						handleTypeUsageInComment(imports, importedNames, n);
+					} else if (n.hasDirectSemanticElement() && n.getSemanticElement() instanceof XAbstractFeatureCall) {
+						handleTypeUsageInTypeLiteral(imports, importedNames, (XAbstractFeatureCall) n.getSemanticElement(), n);
+						handleTypeUsageInStaticFeatureCall(staticImports, extensionImports, n);
 					}
 				}
 			}

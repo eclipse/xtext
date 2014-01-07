@@ -67,6 +67,9 @@ public class TypeUsage {
 	}
 	
 	protected String getPackageName(JvmMember context) {
+		if (context == null) {
+			return null;
+		}
 		if(context.getDeclaringType() != null)
 			return getPackageName(context.getDeclaringType());
 		if(context instanceof JvmDeclaredType) 

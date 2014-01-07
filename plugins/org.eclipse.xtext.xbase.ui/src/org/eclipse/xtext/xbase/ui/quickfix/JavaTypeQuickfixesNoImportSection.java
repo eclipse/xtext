@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.quickfix;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -26,6 +27,12 @@ public class JavaTypeQuickfixesNoImportSection extends JavaTypeQuickfixes {
 	@Override
 	protected void createImportProposals(JvmDeclaredType contextType, Issue issue, String typeSimpleName,
 			IJavaSearchScope searchScope, IssueResolutionAcceptor acceptor) throws JavaModelException {
+	}
+	
+	@Override
+	protected void createImportProposals(JvmDeclaredType contextType, Issue issue, String typeName,
+			IJavaSearchScope searchScope, IssueResolutionAcceptor acceptor, Resource resource)
+			throws JavaModelException {
 	}
 
 	@Override

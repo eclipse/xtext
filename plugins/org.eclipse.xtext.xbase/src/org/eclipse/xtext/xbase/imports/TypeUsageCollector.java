@@ -404,19 +404,19 @@ public class TypeUsageCollector {
 	}
 	
 	protected void acceptType(JvmType type, JvmType usedType, ITextRegion refRegion) {
-		if(currentContext != null) {
+//		if(currentContext != null) {
 			if (type == null || type.eIsProxy()) {
 				throw new IllegalArgumentException();
 			} else if (type instanceof JvmDeclaredType) {
 				typeUsages.addTypeUsage((JvmDeclaredType) type, (JvmDeclaredType) usedType, refRegion, currentContext);
 			}
-		}
+//		}
 	}
 	
 	protected void acceptUnresolvedType(String usedTypeName, String suffix, ITextRegion refRegion) {
-		if(currentContext != null) {
+//		if(currentContext != null) {
 			typeUsages.addUnresolved(usedTypeName, suffix, refRegion, currentContext);
-		}
+//		}
 	}
 	
 	protected void acceptStaticImport(JvmMember member) {
