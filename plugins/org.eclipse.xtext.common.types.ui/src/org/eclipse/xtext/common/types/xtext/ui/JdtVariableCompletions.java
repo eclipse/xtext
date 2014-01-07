@@ -21,6 +21,7 @@ import org.eclipse.jdt.internal.ui.JavaPluginImages;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
@@ -169,7 +170,10 @@ public class JdtVariableCompletions {
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(ctx, refToTypeRef);
 		StringBuilder sb = new StringBuilder();
 		for (INode n : nodes) {
-			sb.append(n.getText().trim());
+			for (ILeafNode leafNode : n.getLeafNodes()) {
+				if (!leafNode.isHidden()) 
+					sb.append(leafNode.getText());
+			}
 		}
 		return sb.toString();
 	}
