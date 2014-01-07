@@ -831,6 +831,72 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	def void missingConstructorCallParentheses_2() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					new ArrayList|
+				}
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Import 'ArrayList' (java.util)")
+		.assertModelAfterQuickfix("Import 'ArrayList' (java.util)", '''
+			import java.util.ArrayList
+			
+			class Foo {
+				def foo() {
+					new ArrayList
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void missingConstructorCallParentheses_3() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					new ArrayList|()
+				}
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Import 'ArrayList' (java.util)")
+		.assertModelAfterQuickfix("Import 'ArrayList' (java.util)", '''
+			import java.util.ArrayList
+			
+			class Foo {
+				def foo() {
+					new ArrayList()
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void missingConstructorCallParentheses_4() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					new ArrayList|().size
+				}
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Import 'ArrayList' (java.util)")
+		.assertModelAfterQuickfix("Import 'ArrayList' (java.util)", '''
+			import java.util.ArrayList
+			
+			class Foo {
+				def foo() {
+					new ArrayList().size
+				}
+			}
+		''')
+	}
+	
+	@Test
 	def void missingConcreteMembers() {
 		create('Foo.xtend', '''
 			abstract class Foo {
