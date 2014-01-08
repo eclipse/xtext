@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -24,10 +23,8 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputation
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
-import org.eclipse.xtext.xbase.typesystem.util.TypeArgumentFromComputedTypeCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
-import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
@@ -277,33 +274,6 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		resolvedTo = substitute;
 	}
 	
-	public boolean isConformantToConstraints(final LightweightTypeReference typeReference) {
-		List<LightweightBoundTypeArgument> hints = getAllHints();
-		return isConformantToConstraints(typeReference, hints);
-	}
-	
-	public boolean isConformantToConstraints(final LightweightTypeReference typeReference, List<LightweightBoundTypeArgument> hints) {
-		UnboundTypeParameterPreservingSubstitutor unboundSubstitutor = new UnboundTypeParameterPreservingSubstitutor(
-				Collections.singletonMap(typeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT)), getOwner()) {
-			@Override
-			public LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference, Set<JvmTypeParameter> visiting) {
-				if (reference.getHandle() == getHandle()) {
-					return typeReference;
-				}
-				return super.doVisitUnboundTypeReference(reference, visiting);
-			}
-		};
-		for(LightweightBoundTypeArgument hint: hints) {
-			if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
-				LightweightTypeReference constraintReference = unboundSubstitutor.substitute(hint.getTypeReference());
-				if (!constraintReference.isAssignableFrom(typeReference)) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-	
 	protected boolean canResolveTo(LightweightTypeReference reference, List<LightweightBoundTypeArgument> allHints) {
 		List<LightweightBoundTypeArgument> inferredHints = Lists.newArrayListWithCapacity(allHints.size());
 		List<LightweightBoundTypeArgument> effectiveHints = Lists.newArrayListWithCapacity(allHints.size());
@@ -350,6 +320,13 @@ public class UnboundTypeReference extends LightweightTypeReference {
 			if (resolvedTo != null) {
 				if (varianceHints.contains(VarianceInfo.OUT) && varianceHints.size() == 1 && typeArgument.getVariance() == VarianceInfo.INVARIANT && (resolvedTo instanceof WildcardTypeReference)) {
 					resolvedTo = resolvedTo.getUpperBoundSubstitute();
+				} else if (varianceHints.isEmpty() && typeArgument.getVariance() == VarianceInfo.OUT && allHints.size() == 1) {
+					LightweightBoundTypeArgument singleHint = allHints.get(0);
+					if (singleHint.getDeclaredVariance() == VarianceInfo.INVARIANT && singleHint.getSource() == BoundTypeArgumentSource.INFERRED_LATER) {
+						WildcardTypeReference wildcard = new WildcardTypeReference(resolvedTo.getOwner());
+						wildcard.addUpperBound(resolvedTo);
+						resolvedTo = wildcard;
+					}
 				}
 			}
 			if (hasContraintHints) {

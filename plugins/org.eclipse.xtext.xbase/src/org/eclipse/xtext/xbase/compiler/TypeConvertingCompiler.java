@@ -323,14 +323,20 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	protected void convertArrayToList(final JvmTypeReference left, final ITreeAppendable appendable, XExpression context,
 			final Later expression) {
-		appendable.append("((");
-		serialize(left, context, appendable);
-		appendable.append(")");
+		if (!(context.eContainer() instanceof XCastedExpression)) {
+			appendable.append("((");
+			serialize(left, context, appendable);
+			appendable.append(")");
+		}
 		JvmTypeReference conversions = getTypeReferences().getTypeForName(Conversions.class, context);
 		serialize(conversions, context, appendable);
 		appendable.append(".doWrapArray(");
 		expression.exec(appendable);
-		appendable.append("))");
+		if (!(context.eContainer() instanceof XCastedExpression)) {
+			appendable.append("))");
+		} else {
+			appendable.append(")");
+		}
 	}
 
 	/**

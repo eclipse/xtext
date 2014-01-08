@@ -44,7 +44,9 @@ import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.RawTypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -211,7 +213,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			for(int i=0; i<typeArguments.size(); ++i) {
 				b.append(typeArguments.get(i).getSimpleName());
 				if(i < typeArguments.size()-1)
-					b.append(",");
+					b.append(", ");
 			}
 			b.append(">");
 			return b.toString();
@@ -669,11 +671,13 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		for(int i = 0; i < max; i++) {
 			LightweightTypeReference argument = typeArguments.get(i);
 			JvmTypeParameter declaration = typeParameters.get(i);
+			TypeConformanceComputer conformanceComputer = argument.getOwner().getServices().getTypeConformanceComputer();
 			if (argument.getType() != declaration) {
 				LightweightTypeReference reference = new ParameterizedTypeReference(argument.getOwner(), declaration);
 				for(LightweightTypeReference superType: reference.getSuperTypes()) {
 					LightweightTypeReference substitutedSuperType = substitutor.substitute(superType);
-					if (!substitutedSuperType.isAssignableFrom(argument)) {
+					if ((conformanceComputer.isConformant(substitutedSuperType, argument, 
+							RawTypeConformanceComputer.ALLOW_BOXING | RawTypeConformanceComputer.ALLOW_RAW_TYPE_CONVERSION ) & RawTypeConformanceComputer.SUCCESS) == 0) {
 						failures++;
 					}
 				}
