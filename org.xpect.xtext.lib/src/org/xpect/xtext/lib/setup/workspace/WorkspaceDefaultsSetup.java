@@ -67,18 +67,7 @@ public class WorkspaceDefaultsSetup {
 		initializer.initialize(this);
 		if (workspace == null)
 			add(createWorkspace());
-		GrammarAnalyzer ga = new GrammarAnalyzer(injector.getInstance(IGrammarAccess.class).getGrammar());
-		switch (ga.getLanguageKind()) {
-		case XBASE:
-			initializeXbaseProject();
-			break;
-		case JAVA:
-			initializeJavaProject();
-			break;
-		default:
-			initializeDefaultProject();
-			break;
-		}
+		initializeProject(injector);
 	}
 
 	protected void initializeDefaultProject() {
@@ -106,6 +95,21 @@ public class WorkspaceDefaultsSetup {
 			srcFolder.add(convert(res));
 		if (workspace.getThisFile() == null)
 			srcFolder.add(new org.xpect.xtext.lib.setup.workspace.ThisFile());
+	}
+
+	protected void initializeProject(Injector injector) {
+		GrammarAnalyzer ga = new GrammarAnalyzer(injector.getInstance(IGrammarAccess.class).getGrammar());
+		switch (ga.getLanguageKind()) {
+		case XBASE:
+			initializeXbaseProject();
+			break;
+		case JAVA:
+			initializeJavaProject();
+			break;
+		default:
+			initializeDefaultProject();
+			break;
+		}
 	}
 
 	protected void initializeXbaseProject() {

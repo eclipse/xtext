@@ -140,12 +140,12 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 				ImportNormalizer in = new ImportNormalizer(QualifiedName.create(pkg.split("\\.")), true, false);
 				scope = new ImportScope(Collections.singletonList(in), scope, null, reference.getEReferenceType(), false);
 			}
-			ImportNormalizer in = new ImportNormalizer(QualifiedName.create("org.xpect.xtext.lib.setup.emf.ResourceSet".split("\\.")),
-					false, false);
+			ImportNormalizer in = new ImportNormalizer(QualifiedName.create("org.xpect.xtext.lib.setup.emf".split("\\.")), true, false);
+			ImportNormalizer in2 = new ImportNormalizer(QualifiedName.create("org.xpect.xtext.lib.setup.workspace".split("\\.")), true, false);
+			ImportNormalizer in3 = new ImportNormalizer(QualifiedName.create("org.xpect.xtext.lib.setup.generic".split("\\.")), true, false);
 			scope = new ImportScope(Collections.singletonList(in), scope, null, reference.getEReferenceType(), false);
-			ImportNormalizer in2 = new ImportNormalizer(QualifiedName.create("org.xpect.xtext.lib.setup.workspace.Workspace".split("\\.")),
-					false, false);
 			scope = new ImportScope(Collections.singletonList(in2), scope, null, reference.getEReferenceType(), false);
+			scope = new ImportScope(Collections.singletonList(in3), scope, null, reference.getEReferenceType(), false);
 			return scope;
 		}
 		return IScope.NULLSCOPE;

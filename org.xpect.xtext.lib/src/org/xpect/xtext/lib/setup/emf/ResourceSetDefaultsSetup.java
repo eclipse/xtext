@@ -46,7 +46,8 @@ public class ResourceSetDefaultsSetup {
 		else if (res instanceof org.xpect.xtext.lib.setup.generic.Folder)
 			for (Resource child : ((org.xpect.xtext.lib.setup.generic.Folder) res).getChildren())
 				convert(child);
-		throw new IllegalStateException();
+		else
+			throw new IllegalStateException();
 	}
 
 	protected ResourceSet createResourceSet() {

@@ -11,7 +11,10 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.validation.CompositeEValidator;
+import org.xpect.scoping.XpectImportedNamespaceAwareLocalScopeProvider;
 import org.xpect.services.NullResourceDescriptions;
 import org.xpect.services.XpectFragmentProvider;
 import org.xpect.services.XpectValueConverter;
@@ -43,9 +46,11 @@ public class XpectRuntimeModule extends AbstractXpectRuntimeModule {
 	}
 
 	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
-		binder.bind(IResourceDescriptions.class)
-				.annotatedWith(com.google.inject.name.Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE))
-				.to(NullResourceDescriptions.class);
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(NullResourceDescriptions.class);
+	}
+
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(XpectImportedNamespaceAwareLocalScopeProvider.class);
 	}
 
 }
