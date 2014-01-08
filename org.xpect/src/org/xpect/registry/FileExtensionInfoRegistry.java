@@ -135,8 +135,8 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 		private final LazyClass<Module> sharedModule;
 
 		public XtextFileExtensionInfo(Set<String> fileExtensions, LazyClass<Factory> resourceFactory, String languageID,
-				LazyClass<IResourceServiceProvider> resourceServiceProvider, LazyClass<IResourceServiceProvider> resourceUIServiceProvider,
-				LazyClass<Module> runtimeModule, LazyClass<Module> uiModule, LazyClass<Module> sharedModule, Set<IExtensionInfo> traces) {
+				LazyClass<IResourceServiceProvider> resourceServiceProvider, LazyClass<IResourceServiceProvider> resourceUIServiceProvider, LazyClass<Module> runtimeModule,
+				LazyClass<Module> uiModule, LazyClass<Module> sharedModule, Set<IExtensionInfo> traces) {
 			super(fileExtensions, resourceFactory, traces);
 
 			this.languageID = languageID;
@@ -236,7 +236,7 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 		Multimap<String, ExtensionPointData> ext2info = HashMultimap.create();
 		for (ExtensionPointData info : infos)
 			for (String ext : info.fileExtensions)
-				if (ext != null && !ext.startsWith("__") && !"xt".equals(ext))
+				if (ext != null && !"___xbase".equals(ext) && !"xt".equals(ext))
 					ext2info.put(ext, info);
 
 		List<IEmfFileExtensionInfo> allInfos = Lists.newArrayList();
