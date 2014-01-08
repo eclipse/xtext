@@ -112,6 +112,18 @@ public class LexingTest extends AbstractXtendTestCase {
 		assertLexing("╗ 'л'", pair("╗ 'л", "RULE_RICH_TEXT_INBETWEEN"), pair("'", "RULE_ANY_OTHER"));
 	}
 	
+	@Test public void testRichString_10() throws Exception {
+		assertLexing("лл lalala\n", pair("лл lalala\n", "RULE_COMMENT_RICH_TEXT_END"));
+		assertLexing("лл lalala\n'''", pair("лл lalala\n'''", "RULE_COMMENT_RICH_TEXT_END"));
+		assertLexing("лл lalala\n\n", pair("лл lalala\n\n", "RULE_COMMENT_RICH_TEXT_END"));
+		assertLexing("лл lalala\n\n'''", pair("лл lalala\n\n'''", "RULE_COMMENT_RICH_TEXT_END"));
+	}
+	
+	@Test public void testRichString_11() throws Exception {
+		assertLexing("лл lalala\nл", pair("лл lalala\nл", "RULE_COMMENT_RICH_TEXT_INBETWEEN"));
+		assertLexing("лл lalala\n\nл", pair("лл lalala\n\nл", "RULE_COMMENT_RICH_TEXT_INBETWEEN"));
+	}
+	
 	@Test public void testFunctionSig() throws Exception {
 		assertLexing("class X { foo() ''' foo ''' }",
 				pair("class","'class'"),
