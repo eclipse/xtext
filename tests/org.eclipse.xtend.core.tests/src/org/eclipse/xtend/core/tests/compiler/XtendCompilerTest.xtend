@@ -805,7 +805,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			import java.util.Iterator;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 			
 			@SuppressWarnings("all")
 			public class Foo {
@@ -824,7 +823,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			          _elvis = _findFirst;
 			        } else {
 			          T _endOfData = this.endOfData();
-			          _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
+			          _elvis = _endOfData;
 			        }
 			        return _elvis;
 			      }
@@ -857,7 +856,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				import java.util.Iterator;
 				import org.eclipse.xtext.xbase.lib.Functions.Function1;
 				import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-				import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 				
 				@SuppressWarnings("all")
 				public class FindFirstOnIt {
@@ -876,7 +874,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				          _elvis = _findFirst;
 				        } else {
 				          T _endOfData = this.endOfData();
-				          _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
+				          _elvis = _endOfData;
 				        }
 				        return _elvis;
 				      }
@@ -1353,6 +1351,130 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    return null;
 			  }
 			}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithBooleanExpression() {
+		'''
+		class Foo {
+			def foo(int x) {
+				switch x {
+					case x == 1 || x == 2 || x == 3: true
+					default: false
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo(final int x) {
+		    boolean _switchResult = false;
+		    boolean _matched = false;
+		    if (!_matched) {
+		      if ((((x == 1) || (x == 2)) || (x == 3))) {
+		        _matched=true;
+		        _switchResult = true;
+		      }
+		    }
+		    if (!_matched) {
+		      _switchResult = false;
+		    }
+		    return _switchResult;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithBooleanExpression_2() {
+		'''
+		class Foo {
+			def foo(int x) {
+				switch x {
+					case x == 1 || try { x == 2 } finally { }: true
+					default: false
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo(final int x) {
+		    boolean _switchResult = false;
+		    boolean _matched = false;
+		    if (!_matched) {
+		      boolean _or = false;
+		      if ((x == 1)) {
+		        _or = true;
+		      } else {
+		        boolean _xtrycatchfinallyexpression = false;
+		        try {
+		          _xtrycatchfinallyexpression = (x == 2);
+		        } finally {
+		        }
+		        _or = _xtrycatchfinallyexpression;
+		      }
+		      if (_or) {
+		        _matched=true;
+		        _switchResult = true;
+		      }
+		    }
+		    if (!_matched) {
+		      _switchResult = false;
+		    }
+		    return _switchResult;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithBooleanExpression_3() {
+		'''
+		class Foo {
+			def foo(int x) { 
+				switch x {
+					case [|1 == x].apply || x == 2: true
+					default: false
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		import org.eclipse.xtext.xbase.lib.Functions.Function0;
+		
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo(final int x) {
+		    boolean _switchResult = false;
+		    boolean _matched = false;
+		    if (!_matched) {
+		      boolean _or = false;
+		      final Function0<Boolean> _function = new Function0<Boolean>() {
+		        public Boolean apply() {
+		          return (1 == x);
+		        }
+		      };
+		      Boolean _apply = _function.apply();
+		      if ((_apply).booleanValue()) {
+		        _or = true;
+		      } else {
+		        _or = (x == 2);
+		      }
+		      if (_or) {
+		        _matched=true;
+		        _switchResult = true;
+		      }
+		    }
+		    if (!_matched) {
+		      _switchResult = false;
+		    }
+		    return _switchResult;
+		  }
+		}
 		''')
 	}
 	
@@ -3772,8 +3894,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 						}
 					}
 				''', '''
-					import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-					
 					@SuppressWarnings("all")
 					public class Foo {
 					  private String field;
@@ -3793,7 +3913,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					    if (_substring != null) {
 					      _elvis = _substring;
 					    } else {
-					      _elvis = ObjectExtensions.<String>operator_elvis(_substring, "");
+					      _elvis = "";
 					    }
 					    return _elvis;
 					  }
