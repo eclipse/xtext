@@ -85,7 +85,7 @@ public class IssueVisualizer {
 					result.append(issueToString(issue));
 				}
 			}
-			offset += line.length() + document.getNL().length();
+			offset += line.length() + document.currentLineEndLenght(offset);
 		}
 		return result.toString();
 	}

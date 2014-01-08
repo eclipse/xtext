@@ -39,6 +39,13 @@ public class Text {
 		return nl;
 	}
 
+	public int currentLineEndLenght(int offset) {
+		int nl = indexOf('\n', offset);
+		if (nl > 0)
+			return text.charAt(nl - 1) == '\r' ? 2 : 1;
+		return 0;
+	}
+
 	public int currentLineStart(int offset) {
 		return lastIndexOf('\n', offset) + 1;
 	}
