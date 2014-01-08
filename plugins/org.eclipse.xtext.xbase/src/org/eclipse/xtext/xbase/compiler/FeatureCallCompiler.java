@@ -268,8 +268,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected void generateShortCircuitInvocation(final XAbstractFeatureCall binaryOperation, final ITreeAppendable b) {
-		final XExpression leftOperand = ((XBinaryOperation) binaryOperation).getLeftOperand();
+	protected void generateShortCircuitInvocation(final XAbstractFeatureCall featureCall, final ITreeAppendable b) {
+		final XBinaryOperation binaryOperation = (XBinaryOperation) featureCall;
+		final XExpression leftOperand = binaryOperation.getLeftOperand();
+		final XExpression rightOperand = binaryOperation.getRightOperand();
+		if (!isPreparationRequired(leftOperand, b) && !isPreparationRequired(rightOperand, b)) {
+			return;
+		}
 		declareSyntheticVariable(binaryOperation, b);
 		boolean isElvis = binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getElvisOperator());
 		prepareExpression(leftOperand, b);
@@ -287,20 +292,16 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 			toJavaExpression(leftOperand, b);
 			b.append(") {").increaseIndentation();
-			boolean rightOperand = binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getOrOperator());
 			b.newLine().append(b.getName(binaryOperation)).append(" = ");
-			b.append(Boolean.toString(rightOperand)).append(";");
+			b.append(Boolean.toString(binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getOrOperator()))).append(";");
 		}
 		b.decreaseIndentation().newLine().append("} else {").increaseIndentation();
 		if (binaryOperation.getImplicitReceiver() != null) {
 			internalToJavaStatement(binaryOperation.getImplicitReceiver(), b, true);
 		}
-		for (XExpression arg : binaryOperation.getExplicitArguments()) {
-			if (arg != leftOperand)
-				prepareExpression(arg, b);
-		}
+		prepareExpression(rightOperand, b);
 		b.newLine().append(b.getName(binaryOperation)).append(" = ");
-		featureCalltoJavaExpression(binaryOperation, b, true);
+		toJavaExpression(rightOperand, b);
 		b.append(";");
 		b.decreaseIndentation().newLine().append("}");
 	}
@@ -424,6 +425,29 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		} else {
 			internalToJavaStatement(arg, b, true);
 		}
+	}
+	
+	protected boolean isPreparationRequired(XExpression arg, ITreeAppendable b) {
+		if (arg instanceof XAbstractFeatureCall && !(((XAbstractFeatureCall) arg).getFeature() instanceof JvmField)
+				&& !isVariableDeclarationRequired(arg, b)) {
+			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) arg;
+			if (featureCall.getFeature() instanceof XVariableDeclaration) {
+				XVariableDeclaration variableDeclaration = (XVariableDeclaration) featureCall.getFeature();
+				if (!variableDeclaration.isWriteable()) {
+					return true;
+				}
+			} else if (featureCall.getFeature() instanceof JvmFormalParameter) {
+				return true;
+			}
+			JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
+			JvmTypeReference type = getType(arg);
+			if (expectedType != null && !jvmConformance.isConformant(expectedType, type)) {
+				return true;
+			}
+		} else {
+			return true;
+		}
+		return false;
 	}
 
 	protected void _toJavaExpression(XAbstractFeatureCall call, ITreeAppendable b) {
