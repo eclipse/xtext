@@ -284,8 +284,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			class B extends A {}
 			class C extends A {}
 		''', '''
-			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-			
 			@SuppressWarnings("all")
 			public class TestTypes {
 			  public A foo() {
@@ -303,7 +301,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			            _elvis = _bar;
 			          } else {
 			            C _baz = this.baz(tmp);
-			            _elvis = ObjectExtensions.<A>operator_elvis(_bar, _baz);
+			            _elvis = _baz;
 			          }
 			          _switchResult = tmp = _elvis;
 			        }
@@ -2328,7 +2326,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			          _and = false;
 			        } else {
 			          boolean _remove = L.this.remove(it);
-			          _and = (_add && _remove);
+			          _and = _remove;
 			        }
 			      }
 			    };
@@ -2361,7 +2359,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			          _and = false;
 			        } else {
 			          boolean _remove = L.this.remove(it);
-			          _and = (_add && _remove);
+			          _and = _remove;
 			        }
 			      }
 			    };

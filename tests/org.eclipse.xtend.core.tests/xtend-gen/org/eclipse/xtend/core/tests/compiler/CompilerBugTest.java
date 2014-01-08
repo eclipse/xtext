@@ -662,9 +662,6 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder.append("class C extends A {}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
-    _builder_1.newLine();
-    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class TestTypes {");
@@ -715,7 +712,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("C _baz = this.baz(tmp);");
     _builder_1.newLine();
     _builder_1.append("            ");
-    _builder_1.append("_elvis = ObjectExtensions.<A>operator_elvis(_bar, _baz);");
+    _builder_1.append("_elvis = _baz;");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("}");
@@ -5312,7 +5309,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _remove = L.this.remove(it);");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("_and = (_add && _remove);");
+    _builder_1.append("_and = _remove;");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("}");
@@ -5390,7 +5387,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _remove = L.this.remove(it);");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("_and = (_add && _remove);");
+    _builder_1.append("_and = _remove;");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("}");
