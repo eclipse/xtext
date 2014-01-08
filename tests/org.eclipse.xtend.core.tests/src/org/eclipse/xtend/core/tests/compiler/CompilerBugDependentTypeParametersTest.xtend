@@ -20,6 +20,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 				def <I extends Iterable<?>> nonEmpty(I i) {
 					i
 				}
+				
 				def m(java.util.Collection<String> c) {
 					c.nonEmpty
 				}
@@ -247,6 +248,124 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			  
 			  public Collection<? super String> m(final Collection<? super String> c) {
 			    return this.<Object, Collection<? super String>>nonEmpty(c);
+			  }
+			}
+		''')
+	}
+	
+	@Test def void test_09() {
+		assertCompilesTo('''
+			class C {
+				def <E, I extends Iterable<E>> nonEmpty(I i) {
+					i
+				}
+				def nonEmpty(String s) {
+					s
+				}
+				def m(java.util.List<Iterable<?>> o) {
+					nonEmpty(o)
+				}
+			}
+		''', '''
+			import java.util.List;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <E extends Object, I extends Iterable<E>> I nonEmpty(final I i) {
+			    return i;
+			  }
+			  
+			  public String nonEmpty(final String s) {
+			    return s;
+			  }
+			  
+			  public List<Iterable<? extends Object>> m(final List<Iterable<? extends Object>> o) {
+			    return this.<Iterable<? extends Object>, List<Iterable<? extends Object>>>nonEmpty(o);
+			  }
+			}
+		''')
+	}
+	
+	@Test def void test_10() {
+		assertCompilesTo('''
+			class C {
+				def <E, I extends Iterable<E>> nonEmpty(I i) {
+					i
+				}
+				def nonEmpty(String s) {
+					s
+				}
+				def <T> m(Iterable<? extends T> o) {
+					nonEmpty(o)
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public <E extends Object, I extends Iterable<E>> I nonEmpty(final I i) {
+			    return i;
+			  }
+			  
+			  public String nonEmpty(final String s) {
+			    return s;
+			  }
+			  
+			  public <T extends Object> Iterable<? extends T> m(final Iterable<? extends T> o) {
+			    return this.nonEmpty(o);
+			  }
+			}
+		''')
+	}
+	
+	@Test def void test_11() {
+		assertCompilesTo('''
+			class C {
+				def <I extends Iterable<?>> nonEmpty(I i) {
+					i
+				}
+				def m(Object[] o) {
+					(o as java.util.List<Object>).nonEmpty
+				}
+			}
+		''', '''
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Conversions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <I extends Iterable<?>> I nonEmpty(final I i) {
+			    return i;
+			  }
+			  
+			  public List<Object> m(final Object[] o) {
+			    return this.<List<Object>>nonEmpty(((List<Object>) Conversions.doWrapArray(o)));
+			  }
+			}
+		''')
+	}
+	
+	@Test def void test_12() {
+		assertCompilesTo('''
+			class C {
+				def <I extends Iterable<?>> nonEmpty(I i) {
+					i
+				}
+				def m(CharSequence[] o) {
+					(o as java.util.Collection<String>).nonEmpty
+				}
+			}
+		''', '''
+			import java.util.Collection;
+			import org.eclipse.xtext.xbase.lib.Conversions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <I extends Iterable<?>> I nonEmpty(final I i) {
+			    return i;
+			  }
+			  
+			  public Collection<String> m(final CharSequence[] o) {
+			    return this.<Collection<String>>nonEmpty(((Collection<String>) Conversions.doWrapArray(o)));
 			  }
 			}
 		''')

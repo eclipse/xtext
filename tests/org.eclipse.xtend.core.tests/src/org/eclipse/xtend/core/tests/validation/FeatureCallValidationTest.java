@@ -572,7 +572,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 				"}\n");
 		helper.assertError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
 				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
-				"Bounds mismatch: The type arguments <String,CharSequence> are not a valid substitute " +
+				"Bounds mismatch: The type arguments <String, CharSequence> are not a valid substitute " +
 				"for the bounded type parameters <T, E extends T> of the method set(T[], int, E)");
 	}
 	
@@ -585,7 +585,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 				"}\n");
 		helper.assertError(file, XbasePackage.Literals.XFEATURE_CALL,
 				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
-				"Bounds mismatch: The type arguments <String,Integer> are not a valid substitute " +
+				"Bounds mismatch: The type arguments <String, Integer> are not a valid substitute " +
 				"for the bounded type parameters <T, E extends T> of the method set(T[], int, E)");
 	}
 	
@@ -671,6 +671,57 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}\n");
 		helper.assertNoErrors(file);
+	}
+	
+	@Test public void testFeatureCallTypeBounds_16() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"	def <I extends Iterable<?>> nonEmpty(I i) {\n" + 
+				"		i\n" + 
+				"	}\n" + 
+				"	def m(Object[] o) {\n" + 
+				"		o.nonEmpty\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
+				"Bounds mismatch: The type argument <Object[]> is not a valid substitute " +
+				"for the bounded type parameter <I extends Iterable<?>> of the method nonEmpty(I)");
+	}
+	
+	@Test public void testFeatureCallTypeBounds_17() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"	def <I extends Iterable<?>> nonEmpty(I i) {\n" + 
+				"		i\n" + 
+				"	}\n" + 
+				"	def m(Iterable<?>[] o) {\n" + 
+				"		o.nonEmpty\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
+				"Bounds mismatch: The type argument <Iterable<?>[]> is not a valid substitute " +
+				"for the bounded type parameter <I extends Iterable<?>> of the method nonEmpty(I)");
+	}
+	
+	@Test public void testFeatureCallTypeBounds_18() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"	def <E, I extends Iterable<E>> nonEmpty(I i) {\n" + 
+				"		i\n" + 
+				"	}\n" + 
+				"	def nonEmpty(String s) {\n" + 
+				"		s\n" + 
+				"	}\n" + 
+				"	def m(Iterable<?>[] o) {\n" + 
+				"		nonEmpty(o)\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertError(file, XbasePackage.Literals.XFEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
+				"Bounds mismatch: The type arguments <Object, Iterable<?>[]> are not a valid substitute " +
+				"for the bounded type parameters <E, I extends Iterable<E>> of the method nonEmpty(I)");
 	}
 	
 	@Test public void testConstructorCallTypeBounds_01() throws Exception {

@@ -11,13 +11,16 @@ import static org.eclipse.xtext.xbase.typesystem.references.LightweightTypeRefer
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
@@ -32,6 +35,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Lists;
@@ -594,7 +598,9 @@ public class RawTypeConformanceComputer {
 		if (leftHints.isEmpty() && (flags & UNBOUND_COMPUTATION_ADDS_HINTS) == 0) {
 			return flags; 
 		}
-		if (!left.isConformantToConstraints(right, leftHints)) {
+		int result = isConformantToConstraints(left, right, leftHints, 
+				flags & ~(AS_TYPE_ARGUMENT | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION));
+		if ((result & SUCCESS) == 0) {
 			return flags;
 		}
 		Helper state = new Helper(leftHints);
@@ -607,6 +613,35 @@ public class RawTypeConformanceComputer {
 			}
 		}
 		return flags;
+	}
+	
+	protected int isConformantToConstraints(
+			final UnboundTypeReference left, 
+			final LightweightTypeReference right, 
+			List<LightweightBoundTypeArgument> hints, 
+			int flags) {
+		UnboundTypeParameterPreservingSubstitutor unboundSubstitutor = new UnboundTypeParameterPreservingSubstitutor(
+				Collections.singletonMap(left.getTypeParameter(), new LightweightMergedBoundTypeArgument(right, VarianceInfo.INVARIANT)), right.getOwner()) {
+			@Override
+			public LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference, Set<JvmTypeParameter> visiting) {
+				if (reference.getHandle() == left.getHandle()) {
+					return right;
+				}
+				return super.doVisitUnboundTypeReference(reference, visiting);
+			}
+		};
+		int result = flags;
+		for(LightweightBoundTypeArgument hint: hints) {
+			if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+				LightweightTypeReference constraintReference = unboundSubstitutor.substitute(hint.getTypeReference());
+				int constraintResult = doIsConformant(constraintReference, right, flags);
+				if ((constraintResult & SUCCESS) == 0) {
+					return flags;
+				}
+				result |= constraintResult;
+			}
+		}
+		return result | SUCCESS;
 	}
 	
 	protected int addHintAndAnnounceSuccess(UnboundTypeReference left, LightweightTypeReference hint,

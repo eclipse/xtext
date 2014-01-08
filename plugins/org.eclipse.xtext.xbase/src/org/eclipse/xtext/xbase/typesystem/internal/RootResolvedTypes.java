@@ -148,7 +148,11 @@ public class RootResolvedTypes extends ResolvedTypes {
 						EnumSet<ConformanceHint> conformanceHints = getConformanceHints(typeData, false);
 						if (!isSuccess(conformanceHints)) {
 							AbstractDiagnostic diagnostic = createTypeDiagnostic(expression, actualType, expectedType);
-							acceptor.accept(diagnostic);
+							if (diagnostic == null) {
+								typeData.getConformanceHints().add(ConformanceHint.UNCHECKED);
+							} else {
+								acceptor.accept(diagnostic);
+							}
 						}
 					}
 				} else if (!expectation.isVoidTypeAllowed() && actualType.isPrimitiveVoid()) {
@@ -179,6 +183,13 @@ public class RootResolvedTypes extends ResolvedTypes {
 	
 	protected AbstractDiagnostic createTypeDiagnostic(XExpression expression, LightweightTypeReference actualType, LightweightTypeReference expectedType) {
 		if (!expectedType.isAny()) {
+			String actualName = actualType.getSimpleName();
+			String expectedName = expectedType.getSimpleName();
+			if (actualName.equals(expectedName)) {
+				if (expectedType.isAssignableFrom(actualType)) {
+					return null;
+				}
+			}
 			if (expression.eContainingFeature() == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT) {
 				return new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, String.format(
 						"Type mismatch: cannot convert implicit first argument from %s to %s", actualType.getSimpleName(), expectedType.getSimpleName()),
