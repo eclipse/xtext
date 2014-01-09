@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XTypeLiteral;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -164,6 +165,13 @@ public class ConstantExpressionValidator {
           }
           return _and;
         }
+      }
+    }
+    if (!_matched) {
+      if (feature instanceof XVariableDeclaration) {
+        _matched=true;
+        boolean _isWriteable = ((XVariableDeclaration)feature).isWriteable();
+        return (!_isWriteable);
       }
     }
     return false;
