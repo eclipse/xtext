@@ -96,8 +96,8 @@ public class ClosureTypeTest1 extends AbstractClosureTypeTest2 {
   
   @Test
   public void testScenario_1_1_b_01() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval iter = null as Iterable<StringBuffer>\n\t\t\tval testData = null as ClosureTypeResolutionTestData1 \n\t\t\tval Iterable<String> res = testData.method_1_1_b(iter) []\n\t\t}", "(List<StringBuffer>)=>List<String>");
-    this.withEquivalents(_resolvesClosuresTo, "ListFunction1<StringBuffer, String>");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval iter = null as Iterable<StringBuffer>\n\t\t\tval testData = null as ClosureTypeResolutionTestData1 \n\t\t\tval Iterable<String> res = testData.method_1_1_b(iter) []\n\t\t}", "(List<StringBuffer>)=>List<? extends String>");
+    this.withEquivalents(_resolvesClosuresTo, "ListFunction1<StringBuffer, ? extends String>");
   }
   
   @Test
