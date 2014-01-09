@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.util.XExpressionHelper
+import org.eclipse.xtext.xbase.XVariableDeclaration
 
 /**
  * Checks whether a given XExpression is a a constant expression.
@@ -71,6 +72,9 @@ class ConstantExpressionValidator {
 					}
 					return receiverConstant && expression.actualArguments.forall[isConstant]
 				}
+			}
+			XVariableDeclaration: {
+				return !feature.writeable
 			}
 		}
 		return false;
