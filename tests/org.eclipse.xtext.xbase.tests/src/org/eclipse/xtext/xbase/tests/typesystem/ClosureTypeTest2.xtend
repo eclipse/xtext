@@ -41,8 +41,8 @@ class ClosureTypeTest2 extends AbstractClosureTypeTest2 {
 		"{
 			val iter = null as Iterable<StringBuffer>
 			val testData = null as ClosureTypeResolutionTestData2<StringBuffer>
-			val Iterable<String> res = testData.method_1_1_b(iter) []
-		}".resolvesClosuresTo("(List<StringBuffer>)=>List<String>").withEquivalents("ListFunction1<StringBuffer, String>")
+			val Iterable<String> res = testData.method_1_1_b(iter) [] // actually invalid since List<? extends OUT> is returned
+		}".resolvesClosuresTo("(List<StringBuffer>)=>List<? extends String>").withEquivalents("ListFunction1<StringBuffer, ? extends String>")
 	}
 	
 	@Test def void testScenario_1_1_b_02() throws Exception {
