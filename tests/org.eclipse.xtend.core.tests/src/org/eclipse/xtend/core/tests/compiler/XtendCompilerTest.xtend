@@ -1528,6 +1528,298 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def testSwitchWithConstantExpressions() {
+		'''
+		class Foo {
+			def foo() {
+				switch x : 1 + 2 {
+					case 1: 1
+					case 2: 2
+					case 3: 3
+					default: 4
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		@SuppressWarnings("all")
+		public class Foo {
+		  public int foo() {
+		    int _switchResult = (int) 0;
+		    final int x = (1 + 2);
+		    switch (x) {
+		      case 1:
+		        _switchResult = 1;
+		        break;
+		      case 2:
+		        _switchResult = 2;
+		        break;
+		      case 3:
+		        _switchResult = 3;
+		        break;
+		      default:
+		        _switchResult = 4;
+		        break;
+		    }
+		    return _switchResult;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithConstantExpressions_2() {
+		'''
+		class Foo {
+			def foo() {
+				switch x : 1d + 2 {
+					case 1: 1
+					default: 2
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		import com.google.common.base.Objects;
+
+		@SuppressWarnings("all")
+		public class Foo {
+		  public int foo() {
+		    int _switchResult = (int) 0;
+		    final double x = (1d + 2);
+		    boolean _matched = false;
+		    if (!_matched) {
+		      if (Objects.equal(x,1)) {
+		        _matched=true;
+		        _switchResult = 1;
+		      }
+		    }
+		    if (!_matched) {
+		      _switchResult = 2;
+		    }
+		    return _switchResult;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithConstantExpressions_3() {
+		'''
+		class Foo {
+			def foo() {
+				switch x : 1 {
+					case 1d: 1
+					default: 2
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		import com.google.common.base.Objects;
+		
+		@SuppressWarnings("all")
+		public class Foo {
+		  public int foo() {
+		    int _switchResult = (int) 0;
+		    final int x = 1;
+		    boolean _matched = false;
+		    if (!_matched) {
+		      if (Objects.equal(x,1d)) {
+		        _matched=true;
+		        _switchResult = 1;
+		      }
+		    }
+		    if (!_matched) {
+		      _switchResult = 2;
+		    }
+		    return _switchResult;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithConstantExpressions_4() {
+		'''
+		class Foo {
+			def foo() {
+				val char c = 'a'
+				switch c {
+					case c: true
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo() {
+		    boolean _xblockexpression = false;
+		    {
+		      final char c = 'a';
+		      boolean _switchResult = false;
+		      switch (c) {
+		        case c:
+		          _switchResult = true;
+		          break;
+		      }
+		      _xblockexpression = (_switchResult);
+		    }
+		    return _xblockexpression;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithConstantExpressions_5() {
+		'''
+		class Foo {
+			def foo() {
+				val char c = 'a'
+				switch x : 1 {
+					case c: true
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo() {
+		    boolean _xblockexpression = false;
+		    {
+		      final char c = 'a';
+		      boolean _switchResult = false;
+		      final int x = 1;
+		      switch (x) {
+		        case c:
+		          _switchResult = true;
+		          break;
+		      }
+		      _xblockexpression = (_switchResult);
+		    }
+		    return _xblockexpression;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithConstantExpressions_6() {
+		'''
+		class Foo {
+			def foo() {
+				switch x : [|1].apply {
+					case 1: true
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		import org.eclipse.xtext.xbase.lib.Functions.Function0;
+		
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo() {
+		    boolean _switchResult = false;
+		    final Function0<Integer> _function = new Function0<Integer>() {
+		      public Integer apply() {
+		        return 1;
+		      }
+		    };
+		    Integer _apply = _function.apply();
+		    final Integer x = _apply;
+		    switch (x) {
+		      case 1:
+		        _switchResult = true;
+		        break;
+		    }
+		    return _switchResult;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithConstantExpressions_7() {
+		'''
+		class Foo {
+			def foo() {
+				switch x : 1 {
+					case [|1].apply: true
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		import com.google.common.base.Objects;
+		import org.eclipse.xtext.xbase.lib.Functions.Function0;
+		
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo() {
+		    boolean _switchResult = false;
+		    final int x = 1;
+		    boolean _matched = false;
+		    if (!_matched) {
+		      final Function0<Integer> _function = new Function0<Integer>() {
+		        public Integer apply() {
+		          return 1;
+		        }
+		      };
+		      Integer _apply = _function.apply();
+		      if (Objects.equal(x,_apply)) {
+		        _matched=true;
+		        _switchResult = true;
+		      }
+		    }
+		    return _switchResult;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithConstantExpressions_8() {
+		'''
+		class Foo {
+			def foo() {
+				switch x : Thread.State.NEW {
+					case Thread.State.NEW: true
+					case Thread.State.RUNNABLE: false
+					case BLOCKED: true
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo() {
+		    boolean _switchResult = false;
+		    final Thread.State x = Thread.State.NEW;
+		    switch (x) {
+		      case NEW:
+		        _switchResult = true;
+		        break;
+		      case RUNNABLE:
+		        _switchResult = false;
+		        break;
+		      case BLOCKED:
+		        _switchResult = true;
+		        break;
+		      default:
+		        break;
+		    }
+		    return _switchResult;
+		  }
+		}
+		''')
+	}
+	
+	@Test
 	def testTryCatch() { 
 		assertCompilesTo('''
 			package foo

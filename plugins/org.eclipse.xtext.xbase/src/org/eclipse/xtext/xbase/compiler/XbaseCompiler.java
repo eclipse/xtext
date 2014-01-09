@@ -26,6 +26,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -89,6 +90,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
+import org.eclipse.xtext.xbase.validation.ConstantExpressionValidator;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
@@ -119,6 +121,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
+	
+	@Inject
+	private ConstantExpressionValidator constantExpressionValidator;
 	
 	/**
 	 * @param isReferenced unused in this context but necessary for dispatch signature 
@@ -1000,22 +1005,57 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
-		// declare variable
-		JvmTypeReference type = getTypeForVariableDeclaration(expr);
-		String switchResultName = b.declareSyntheticVariable(getSwitchExpressionKey(expr), "_switchResult");
-		if (isReferenced) {
-			b.newLine();
-			serialize(type, expr, b);
-			b.append(" ").append(switchResultName).append(" = ");
-			b.append(getDefaultValueLiteral(expr));
-			b.append(";");
+		if (isCompiledToJavaSwitch(expr)) {
+			_toJavaSwitchStatement(expr, b, isReferenced);
+		} else {
+			_toJavaIfElseStatement(expr, b, isReferenced);
 		}
-		
-		internalToJavaStatement(expr.getSwitch(), b, true);
-		
-		// declare the matched variable outside the pseudo scope
-		String matchedVariable = b.declareSyntheticVariable(Tuples.pair(expr, "matches"), "_matched");
+	}
 
+	protected void _toJavaSwitchStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
+		final LightweightTypeReference switchType = batchTypeResolver.resolveTypes(expr).getActualType(expr.getSwitch());
+		final boolean enumeration = switchType.isSubtypeOf(Enum.class);
+		
+		final String switchResultName = declareSwitchResultVariable(expr, b, isReferenced);
+		internalToJavaStatement(expr.getSwitch(), b, true);
+		final String variableName = declareLocalVariable(expr, b);
+		
+		b.newLine().append("switch (").append(variableName).append(") {").increaseIndentation();
+		for (XCasePart casePart : expr.getCases()) {
+			ITreeAppendable caseAppendable = b.trace(casePart, true);
+			caseAppendable.newLine().increaseIndentation().append("case ");
+			
+			ITreeAppendable conditionAppendable = caseAppendable.trace(casePart.getCase(), true);
+			if (!enumeration) {
+				internalToJavaExpression(casePart.getCase(), conditionAppendable);
+			} else {
+				XAbstractFeatureCall featureCall = (XAbstractFeatureCall) casePart.getCase();
+				JvmEnumerationLiteral enumerationLiteral = (JvmEnumerationLiteral) featureCall.getFeature();
+				conditionAppendable.append(enumerationLiteral.getSimpleName());
+			}
+			
+			caseAppendable.append(":");
+
+			executeThenPart(expr, switchResultName, casePart.getThen(), caseAppendable, isReferenced);
+			
+			caseAppendable.newLine().append("break;").decreaseIndentation();
+		}
+		if (expr.getDefault() != null || enumeration) {
+			ILocationData location = getLocationOfDefault(expr);
+			ITreeAppendable defaultAppendable = location != null ? b.trace(location) : b;
+			
+			defaultAppendable.newLine().increaseIndentation().append("default:");
+
+			if (expr.getDefault() != null) {
+				executeThenPart(expr, switchResultName, expr.getDefault(), defaultAppendable, isReferenced);
+			}
+			
+			defaultAppendable.newLine().append("break;").decreaseIndentation();
+		}
+		b.decreaseIndentation().newLine().append("}");
+	}
+
+	protected String declareLocalVariable(XSwitchExpression expr, ITreeAppendable b) {
 		// declare local var for the switch expression
 		String variableName = null;
 		if(expr.getLocalVarName() == null && expr.getSwitch() instanceof XFeatureCall) {
@@ -1044,6 +1084,42 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaExpression(expr.getSwitch(), b);
 			b.append(";");
 		}
+		return variableName;
+	}
+
+	protected String declareSwitchResultVariable(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
+		JvmTypeReference type = getTypeForVariableDeclaration(expr);
+		String switchResultName = b.declareSyntheticVariable(getSwitchExpressionKey(expr), "_switchResult");
+		if (isReferenced) {
+			b.newLine();
+			serialize(type, expr, b);
+			b.append(" ").append(switchResultName).append(" = ");
+			b.append(getDefaultValueLiteral(expr));
+			b.append(";");
+		}
+		return switchResultName;
+	}
+
+	protected void executeThenPart(XSwitchExpression expr, String switchResultName, XExpression then,
+			ITreeAppendable b, boolean isReferenced) {
+		final boolean canBeReferenced = isReferenced && !isPrimitiveVoid(then);
+		internalToJavaStatement(then, b, canBeReferenced);
+		if (canBeReferenced) {
+			b.newLine().append(switchResultName).append(" = ");
+			internalToConvertedExpression(then, b, getType(expr));
+			b.append(";");
+		}
+	}
+
+	protected void _toJavaIfElseStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
+		String switchResultName = declareSwitchResultVariable(expr, b, isReferenced);
+		internalToJavaStatement(expr.getSwitch(), b, true);
+		
+		// declare the matched variable outside the pseudo scope
+		String matchedVariable = b.declareSyntheticVariable(Tuples.pair(expr, "matches"), "_matched");
+		
+		String variableName = declareLocalVariable(expr, b);
+
 		// declare 'boolean matched' to check whether a case has matched already
 		b.newLine().append("boolean ");
 		b.append(matchedVariable).append(" = false;");
@@ -1082,14 +1158,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			// set matched to true
 			caseAppendable.newLine().append(matchedVariable).append("=true;");
 
-			// execute then part
-			final boolean canBeReferenced = isReferenced && !isPrimitiveVoid(casePart.getThen());
-			internalToJavaStatement(casePart.getThen(), caseAppendable, canBeReferenced);
-			if (canBeReferenced) {
-				caseAppendable.newLine().append(switchResultName).append(" = ");
-				internalToConvertedExpression(casePart.getThen(), caseAppendable, getType(expr));
-				caseAppendable.append(";");
-			}
+			executeThenPart(expr, switchResultName, casePart.getThen(), caseAppendable, isReferenced);
 
 			// close surrounding if statements
 			if (casePart.getCase() != null) {
@@ -1110,13 +1179,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				defaultAppendable.newLine().append("if (!").append(matchedVariable).append(") {");
 				defaultAppendable.increaseIndentation();
 			}
-			final boolean canBeReferenced = isReferenced && !isPrimitiveVoid(expr.getDefault());
-			internalToJavaStatement(expr.getDefault(), defaultAppendable, canBeReferenced);
-			if (canBeReferenced) {
-				defaultAppendable.newLine().append(switchResultName).append(" = ");
-				internalToConvertedExpression(expr.getDefault(), defaultAppendable, getType(expr));
-				defaultAppendable.append(";");
-			}
+			executeThenPart(expr, switchResultName, expr.getDefault(), defaultAppendable, isReferenced);
 			if(needsMatcherIf) {
 				defaultAppendable.decreaseIndentation();
 				defaultAppendable.newLine().append("}");
@@ -1124,6 +1187,38 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 	
+	protected boolean isCompiledToJavaSwitch(XSwitchExpression expr) {
+		IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(expr);
+		LightweightTypeReference switchType = resolvedTypes.getActualType(expr.getSwitch());
+		if (switchType == null) {
+			return false;
+		}
+		if (!(switchType.isSubtypeOf(Integer.TYPE) || switchType.isSubtypeOf(Enum.class))) {
+			return false;
+		}
+		EList<XCasePart> cases = expr.getCases();
+		for (XCasePart casePart : cases) {
+			if (casePart.getTypeGuard() != null) {
+				return false;
+			}
+			XExpression caseExpression = casePart.getCase();
+			if (caseExpression == null) {
+				return false;
+			}
+			if (!constantExpressionValidator.isConstant(caseExpression)) {
+				return false;
+			}
+			LightweightTypeReference caseType = resolvedTypes.getActualType(caseExpression);
+			if (caseType == null) {
+				return false;
+			}
+			if (!switchType.isAssignableFrom(caseType)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	protected boolean allCasesAreExitedEarly(XSwitchExpression expr) {
 		for(XCasePart casePart: expr.getCases()) {
 			if(!earlyExitComputer.isEarlyExit(casePart.getThen())) {
