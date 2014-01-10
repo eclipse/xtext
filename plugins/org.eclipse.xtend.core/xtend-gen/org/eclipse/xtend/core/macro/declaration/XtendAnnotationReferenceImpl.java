@@ -105,7 +105,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       XAnnotation _delegate = this.getDelegate();
       XExpression _value = _delegate.getValue();
       boolean _notEquals = (!Objects.equal(_value, null));
-      _and = (_equals && _notEquals);
+      _and = _notEquals;
     }
     if (_and) {
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -145,7 +145,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       XAnnotation _delegate = this.getDelegate();
       XExpression _value = _delegate.getValue();
       boolean _notEquals = (!Objects.equal(_value, null));
-      _and = (_equals && _notEquals);
+      _and = _notEquals;
     }
     if (_and) {
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

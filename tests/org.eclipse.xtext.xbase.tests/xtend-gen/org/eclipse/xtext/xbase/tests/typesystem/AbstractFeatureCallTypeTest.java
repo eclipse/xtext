@@ -81,7 +81,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
         } else {
           boolean _isTypeLiteral = it.isTypeLiteral();
           boolean _not_1 = (!_isTypeLiteral);
-          _and = (_not && _not_1);
+          _and = _not_1;
         }
         return Boolean.valueOf(_and);
       }

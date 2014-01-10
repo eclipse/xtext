@@ -15,7 +15,6 @@ import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
@@ -204,7 +203,7 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
       _elvis = _findDeclaredMethod;
     } else {
       MutableMethodDeclaration _addMethod = it.addMethod(name, (Procedure1<MutableMethodDeclaration>)initializer);
-      _elvis = ObjectExtensions.<MutableMethodDeclaration>operator_elvis(_findDeclaredMethod, _addMethod);
+      _elvis = _addMethod;
     }
     return _elvis;
   }

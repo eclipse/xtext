@@ -49,7 +49,7 @@ public class ArithmeticsValidator extends AbstractArithmeticsValidator {
     if ((expr instanceof NumberLiteral)) {
       _or = true;
     } else {
-      _or = ((expr instanceof NumberLiteral) || (expr instanceof FunctionCall));
+      _or = (expr instanceof FunctionCall);
     }
     if (_or) {
       return;

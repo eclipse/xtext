@@ -133,14 +133,14 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     } else {
       boolean _isAny = actualType.isAny();
       boolean _not = (!_isAny);
-      _and_1 = (_notEquals && _not);
+      _and_1 = _not;
     }
     if (!_and_1) {
       _and = false;
     } else {
       boolean _isUnknown = actualType.isUnknown();
       boolean _not_1 = (!_isUnknown);
-      _and = (_and_1 && _not_1);
+      _and = _not_1;
     }
     if (_and) {
       return actualType.getSimpleName();

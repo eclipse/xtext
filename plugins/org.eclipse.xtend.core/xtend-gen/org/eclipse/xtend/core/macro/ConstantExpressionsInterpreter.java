@@ -158,7 +158,7 @@ public class ConstantExpressionsInterpreter {
                     _and = false;
                   } else {
                     boolean _isFinal = it.isFinal();
-                    _and = (_isStatic && _isFinal);
+                    _and = _isFinal;
                   }
                   return Boolean.valueOf(_and);
                 }
@@ -214,7 +214,7 @@ public class ConstantExpressionsInterpreter {
               _and = false;
             } else {
               boolean _isFinal = it.isFinal();
-              _and = (_isStatic && _isFinal);
+              _and = _isFinal;
             }
             return Boolean.valueOf(_and);
           }
@@ -677,7 +677,7 @@ public class ConstantExpressionsInterpreter {
         if (!_equals) {
           _and = false;
         } else {
-          _and = (_equals && (value instanceof Boolean));
+          _and = (value instanceof Boolean);
         }
         if (_and) {
           _matched=true;
@@ -690,7 +690,7 @@ public class ConstantExpressionsInterpreter {
         if (!_equals_1) {
           _and_1 = false;
         } else {
-          _and_1 = (_equals_1 && (value instanceof Number));
+          _and_1 = (value instanceof Number);
         }
         if (_and_1) {
           _matched=true;

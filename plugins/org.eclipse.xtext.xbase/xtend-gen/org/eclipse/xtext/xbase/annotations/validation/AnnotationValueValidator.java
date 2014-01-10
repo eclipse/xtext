@@ -55,7 +55,7 @@ public class AnnotationValueValidator extends ConstantExpressionValidator {
         }
       };
       boolean _forall = IterableExtensions.<XExpression>forall(_elements_1, _function);
-      _or = (_isEmpty || _forall);
+      _or = _forall;
     }
     return _or;
   }

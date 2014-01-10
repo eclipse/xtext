@@ -58,7 +58,7 @@ public class XtendDocumentationProvider extends MultiLineCommentDocumentationPro
     } else {
       EStructuralFeature _eContainingFeature = o.eContainingFeature();
       boolean _equals = Objects.equal(_eContainingFeature, XtendPackage.Literals.XTEND_MEMBER__ANNOTATION_INFO);
-      _and = ((o instanceof XtendAnnotationTarget) && _equals);
+      _and = _equals;
     }
     return (!_and);
   }

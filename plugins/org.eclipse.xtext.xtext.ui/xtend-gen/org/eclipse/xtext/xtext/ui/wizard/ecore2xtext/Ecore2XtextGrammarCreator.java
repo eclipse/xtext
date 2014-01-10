@@ -63,7 +63,7 @@ public class Ecore2XtextGrammarCreator {
             } else {
               String _uniqueName_1 = UniqueNameUtil.uniqueName(it_1);
               boolean _notEquals_1 = (!Objects.equal(_uniqueName_1, ""));
-              _and = (_notEquals && _notEquals_1);
+              _and = _notEquals_1;
             }
             if (_and) {
               _builder.append("as ");
@@ -292,7 +292,7 @@ public class Ecore2XtextGrammarCreator {
           _and = false;
         } else {
           boolean _isPrefixBooleanFeature = Ecore2XtextExtensions.isPrefixBooleanFeature(it);
-          _and = (_isBoolean && _isPrefixBooleanFeature);
+          _and = _isPrefixBooleanFeature;
         }
         if (_and) {
           _builder.append("?=");
@@ -312,7 +312,7 @@ public class Ecore2XtextGrammarCreator {
       _and = false;
     } else {
       boolean _needsConcreteRule = Ecore2XtextExtensions.needsConcreteRule(it);
-      _and = (_notEquals && _needsConcreteRule);
+      _and = _needsConcreteRule;
     }
     if (_and) {
       _xifexpression = this.rule(it);

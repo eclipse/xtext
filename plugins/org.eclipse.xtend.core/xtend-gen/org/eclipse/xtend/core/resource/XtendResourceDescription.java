@@ -103,7 +103,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
             if ((!(it instanceof JvmType))) {
               _or = true;
             } else {
-              _or = ((!(it instanceof JvmType)) || (it instanceof JvmDeclaredType));
+              _or = (it instanceof JvmDeclaredType);
             }
             if (_or) {
               _xifexpression = types.getActualType(it);

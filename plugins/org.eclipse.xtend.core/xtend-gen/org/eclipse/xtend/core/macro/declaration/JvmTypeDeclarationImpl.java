@@ -212,7 +212,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
             List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
             List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
             boolean _equals_1 = Objects.equal(_list, _list_1);
-            _and = (_equals && _equals_1);
+            _and = _equals_1;
           }
           return Boolean.valueOf(_and);
         }

@@ -86,27 +86,19 @@ public class CodeBuilderQuickfix {
     String _switchResult = null;
     JvmVisibility _visibility = builder.getVisibility();
     final JvmVisibility _switchValue = _visibility;
-    boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(_switchValue,JvmVisibility.PRIVATE)) {
-        _matched=true;
+    switch (_switchValue) {
+      case PRIVATE:
         _switchResult = "fix_private_obj.gif";
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_switchValue,JvmVisibility.PUBLIC)) {
-        _matched=true;
+        break;
+      case PUBLIC:
         _switchResult = "fix_public_obj.gif";
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_switchValue,JvmVisibility.PROTECTED)) {
-        _matched=true;
+        break;
+      case PROTECTED:
         _switchResult = "fix_protected_obj.gif";
-      }
-    }
-    if (!_matched) {
-      _switchResult = "fix_default_obj.gif";
+        break;
+      default:
+        _switchResult = "fix_default_obj.gif";
+        break;
     }
     return _switchResult;
   }

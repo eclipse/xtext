@@ -36,14 +36,14 @@ public class NodeModelAccess {
             _and_1 = false;
           } else {
             EObject _grammarElement = it.getGrammarElement();
-            _and_1 = (_equals && (_grammarElement instanceof Keyword));
+            _and_1 = (_grammarElement instanceof Keyword);
           }
           if (!_and_1) {
             _and = false;
           } else {
             String _text = it.getText();
             boolean _equals_1 = Objects.equal(_text, kw);
-            _and = (_and_1 && _equals_1);
+            _and = _equals_1;
           }
           return Boolean.valueOf(_and);
         }
@@ -70,14 +70,14 @@ public class NodeModelAccess {
             _and_1 = false;
           } else {
             EObject _grammarElement = it.getGrammarElement();
-            _and_1 = (_equals && (_grammarElement instanceof Keyword));
+            _and_1 = (_grammarElement instanceof Keyword);
           }
           if (!_and_1) {
             _and = false;
           } else {
             String _text = it.getText();
             boolean _equals_1 = Objects.equal(_text, kw);
-            _and = (_and_1 && _equals_1);
+            _and = _equals_1;
           }
           return Boolean.valueOf(_and);
         }
@@ -120,7 +120,7 @@ public class NodeModelAccess {
             _and = false;
           } else {
             EObject _grammarElement = it.getGrammarElement();
-            _and = (_notEquals && (_grammarElement instanceof Keyword));
+            _and = (_grammarElement instanceof Keyword);
           }
           return Boolean.valueOf(_and);
         }
@@ -134,7 +134,7 @@ public class NodeModelAccess {
       } else {
         String _text = result.getText();
         boolean _equals = Objects.equal(_text, kw);
-        _and = (_notEquals && _equals);
+        _and = _equals;
       }
       if (_and) {
         _xifexpression = result;
@@ -153,7 +153,7 @@ public class NodeModelAccess {
         _and = false;
       } else {
         Boolean _apply = matches.apply(((ILeafNode) node));
-        _and = ((node instanceof ILeafNode) && (_apply).booleanValue());
+        _and = (_apply).booleanValue();
       }
       if (_and) {
         return ((ILeafNode) node);
@@ -169,7 +169,7 @@ public class NodeModelAccess {
             _and_1 = false;
           } else {
             Boolean _apply_1 = matches.apply(((ILeafNode) next));
-            _and_1 = ((next instanceof ILeafNode) && (_apply_1).booleanValue());
+            _and_1 = (_apply_1).booleanValue();
           }
           if (_and_1) {
             return ((ILeafNode) next);

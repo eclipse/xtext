@@ -63,7 +63,7 @@ public class XbaseContentProposalPriorities extends ContentProposalPriorities {
             } else {
               String _replacementString_1 = ((ConfigurableCompletionProposal)proposal).getReplacementString();
               boolean _notEquals_1 = (!Objects.equal(_replacementString_1, "super"));
-              _and = (_notEquals && _notEquals_1);
+              _and = _notEquals_1;
             }
             if (_and) {
               _matched_1=true;

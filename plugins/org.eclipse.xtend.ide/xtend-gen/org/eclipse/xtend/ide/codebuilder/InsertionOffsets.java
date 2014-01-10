@@ -64,7 +64,7 @@ public class InsertionOffsets {
     } else {
       EList<XtendMember> _members = ownerType.getMembers();
       boolean _contains = _members.contains(callingMember);
-      _and = (_notEquals && _contains);
+      _and = _contains;
     }
     if (_and) {
       return this.after(callingMember);

@@ -72,7 +72,7 @@ public class FeatureCallRequest extends XbaseTypeArgumentContextProvider.Abstrac
       _and = false;
     } else {
       boolean _equals = Objects.equal(result, null);
-      _and = (_notEquals && _equals);
+      _and = _equals;
     }
     boolean _while = _and;
     while (_while) {
@@ -95,7 +95,7 @@ public class FeatureCallRequest extends XbaseTypeArgumentContextProvider.Abstrac
         _and_1 = false;
       } else {
         boolean _equals_1 = Objects.equal(result, null);
-        _and_1 = (_notEquals_2 && _equals_1);
+        _and_1 = _equals_1;
       }
       _while = _and_1;
     }

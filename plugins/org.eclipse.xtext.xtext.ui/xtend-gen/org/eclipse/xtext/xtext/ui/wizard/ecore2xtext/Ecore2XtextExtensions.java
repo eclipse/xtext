@@ -185,9 +185,9 @@ public class Ecore2XtextExtensions {
                 _or = true;
               } else {
                 boolean _isContainment = Ecore2XtextExtensions.isContainment(f);
-                _or = (includeCrossRefs || _isContainment);
+                _or = _isContainment;
               }
-              _and = (_needsAssignment && _or);
+              _and = _or;
             }
             return Boolean.valueOf(_and);
           }
@@ -282,7 +282,7 @@ public class Ecore2XtextExtensions {
           _and = false;
         } else {
           boolean _isPrefixBooleanFeature = Ecore2XtextExtensions.isPrefixBooleanFeature(f);
-          _and = (_needsAssignment && _isPrefixBooleanFeature);
+          _and = _isPrefixBooleanFeature;
         }
         return Boolean.valueOf(_and);
       }
@@ -555,7 +555,7 @@ public class Ecore2XtextExtensions {
             } else {
               String _name = a.getName();
               boolean _equals = Objects.equal(_name, "name");
-              _and_2 = (_needsAssignment && _equals);
+              _and_2 = _equals;
             }
             if (!_and_2) {
               _and_1 = false;
@@ -563,14 +563,14 @@ public class Ecore2XtextExtensions {
               EClassifier _eType = a.getEType();
               String _name_1 = _eType.getName();
               boolean _equals_1 = Objects.equal(_name_1, "EString");
-              _and_1 = (_and_2 && _equals_1);
+              _and_1 = _equals_1;
             }
             if (!_and_1) {
               _and = false;
             } else {
               boolean _isMany = a.isMany();
               boolean _not = (!_isMany);
-              _and = (_and_1 && _not);
+              _and = _not;
             }
             return Boolean.valueOf(_and);
           }
@@ -592,7 +592,7 @@ public class Ecore2XtextExtensions {
           _and = false;
         } else {
           boolean _isID = a.isID();
-          _and = (_needsAssignment && _isID);
+          _and = _isID;
         }
         return Boolean.valueOf(_and);
       }
@@ -609,13 +609,13 @@ public class Ecore2XtextExtensions {
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("EBoolean", "EBooleanObject");
       String _name = it.getName();
       boolean _contains = _newArrayList.contains(_name);
-      _and_1 = ((it instanceof EDataType) && _contains);
+      _and_1 = _contains;
     }
     if (!_and_1) {
       _and = false;
     } else {
       boolean _isEcoreType = Ecore2XtextExtensions.isEcoreType(it);
-      _and = (_and_1 && _isEcoreType);
+      _and = _isEcoreType;
     }
     return _and;
   }
@@ -630,14 +630,14 @@ public class Ecore2XtextExtensions {
     } else {
       boolean _isMany = it.isMany();
       boolean _not = (!_isMany);
-      _and_1 = (_isBoolean && _not);
+      _and_1 = _not;
     }
     if (!_and_1) {
       _and = false;
     } else {
       String _defaultValueLiteral = it.getDefaultValueLiteral();
       boolean _notEquals = (!Objects.equal(_defaultValueLiteral, "true"));
-      _and = (_and_1 && _notEquals);
+      _and = _notEquals;
     }
     return _and;
   }
@@ -650,13 +650,13 @@ public class Ecore2XtextExtensions {
     } else {
       String _name = it.getName();
       boolean _equals = Objects.equal(_name, "EString");
-      _and_1 = ((it instanceof EDataType) && _equals);
+      _and_1 = _equals;
     }
     if (!_and_1) {
       _and = false;
     } else {
       boolean _isEcoreType = Ecore2XtextExtensions.isEcoreType(it);
-      _and = (_and_1 && _isEcoreType);
+      _and = _isEcoreType;
     }
     return _and;
   }
@@ -674,7 +674,7 @@ public class Ecore2XtextExtensions {
     } else {
       EAttribute _cast = EAttribute.class.cast(it);
       boolean _isID = _cast.isID();
-      _and = ((it instanceof EAttribute) && _isID);
+      _and = _isID;
     }
     return _and;
   }
@@ -690,7 +690,7 @@ public class Ecore2XtextExtensions {
     } else {
       boolean _isTransient = it.isTransient();
       boolean _not_1 = (!_isTransient);
-      _and_2 = (_not && _not_1);
+      _and_2 = _not_1;
     }
     if (!_and_2) {
       _and_1 = false;
@@ -701,10 +701,10 @@ public class Ecore2XtextExtensions {
       } else {
         EReference _cast = EReference.class.cast(it);
         boolean _isContainer = _cast.isContainer();
-        _and_3 = ((it instanceof EReference) && _isContainer);
+        _and_3 = _isContainer;
       }
       boolean _not_2 = (!_and_3);
-      _and_1 = (_and_2 && _not_2);
+      _and_1 = _not_2;
     }
     if (!_and_1) {
       _and = false;
@@ -718,10 +718,10 @@ public class Ecore2XtextExtensions {
         EDataType _cast_1 = EDataType.class.cast(_eType_1);
         boolean _isSerializable = _cast_1.isSerializable();
         boolean _not_3 = (!_isSerializable);
-        _and_4 = ((_eType instanceof EDataType) && _not_3);
+        _and_4 = _not_3;
       }
       boolean _not_4 = (!_and_4);
-      _and = (_and_1 && _not_4);
+      _and = _not_4;
     }
     return _and;
   }
@@ -744,7 +744,7 @@ public class Ecore2XtextExtensions {
         } else {
           boolean _isInterface = ((EClass)eClassifier).isInterface();
           boolean _not_1 = (!_isInterface);
-          _and = (_not && _not_1);
+          _and = _not_1;
         }
         _switchResult = _and;
       }

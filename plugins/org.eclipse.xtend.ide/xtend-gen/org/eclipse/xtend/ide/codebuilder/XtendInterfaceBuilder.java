@@ -26,14 +26,14 @@ public class XtendInterfaceBuilder extends AbstractInterfaceBuilder implements I
     } else {
       String _interfaceName = this.getInterfaceName();
       boolean _notEquals = (!Objects.equal(_interfaceName, null));
-      _and_1 = (_isValid && _notEquals);
+      _and_1 = _notEquals;
     }
     if (!_and_1) {
       _and = false;
     } else {
       JvmVisibility _visibility = this.getVisibility();
       boolean _equals = Objects.equal(_visibility, JvmVisibility.PUBLIC);
-      _and = (_and_1 && _equals);
+      _and = _equals;
     }
     return _and;
   }

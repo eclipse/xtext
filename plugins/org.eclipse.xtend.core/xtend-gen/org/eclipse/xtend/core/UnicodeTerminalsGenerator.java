@@ -60,7 +60,7 @@ class UnicodeTerminalsGenerator {
         } else {
           boolean _isJavaIdentifierStart = Character.isJavaIdentifierStart((it).intValue());
           boolean _not = (!_isJavaIdentifierStart);
-          _and = (_isJavaIdentifierPart && _not);
+          _and = _not;
         }
         return Boolean.valueOf(_and);
       }

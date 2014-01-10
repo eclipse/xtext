@@ -166,7 +166,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         EList<JvmTypeReference> _arguments_2 = reference.getArguments();
         int _size_1 = _arguments_2.size();
         boolean _notEquals = (_size != _size_1);
-        _and = (_not && _notEquals);
+        _and = _notEquals;
       }
       if (_and) {
         String _identifier = ((JvmGenericType)type).getIdentifier();
@@ -217,54 +217,33 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
           TypeReference _switchResult_1 = null;
           PrimitiveType.Kind _kind = ((PrimitiveTypeImpl)typeDeclaration).getKind();
           final PrimitiveType.Kind _switchValue = _kind;
-          boolean _matched_1 = false;
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,PrimitiveType.Kind.BOOLEAN)) {
-              _matched_1=true;
+          switch (_switchValue) {
+            case BOOLEAN:
               _switchResult_1 = this.getPrimitiveBoolean();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,PrimitiveType.Kind.BYTE)) {
-              _matched_1=true;
+              break;
+            case BYTE:
               _switchResult_1 = this.getPrimitiveByte();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,PrimitiveType.Kind.CHAR)) {
-              _matched_1=true;
+              break;
+            case CHAR:
               _switchResult_1 = this.getPrimitiveChar();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,PrimitiveType.Kind.DOUBLE)) {
-              _matched_1=true;
+              break;
+            case DOUBLE:
               _switchResult_1 = this.getPrimitiveDouble();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,PrimitiveType.Kind.FLOAT)) {
-              _matched_1=true;
+              break;
+            case FLOAT:
               _switchResult_1 = this.getPrimitiveFloat();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,PrimitiveType.Kind.INT)) {
-              _matched_1=true;
+              break;
+            case INT:
               _switchResult_1 = this.getPrimitiveInt();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,PrimitiveType.Kind.LONG)) {
-              _matched_1=true;
+              break;
+            case LONG:
               _switchResult_1 = this.getPrimitiveLong();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,PrimitiveType.Kind.SHORT)) {
-              _matched_1=true;
+              break;
+            case SHORT:
               _switchResult_1 = this.getPrimitiveShort();
-            }
+              break;
+            default:
+              break;
           }
           return _switchResult_1;
         }

@@ -366,30 +366,21 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public Visibility toVisibility(final JvmVisibility delegate) {
     Visibility _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(delegate,JvmVisibility.DEFAULT)) {
-        _matched=true;
+    switch (delegate) {
+      case DEFAULT:
         _switchResult = Visibility.DEFAULT;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(delegate,JvmVisibility.PRIVATE)) {
-        _matched=true;
+        break;
+      case PRIVATE:
         _switchResult = Visibility.PRIVATE;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(delegate,JvmVisibility.PROTECTED)) {
-        _matched=true;
+        break;
+      case PROTECTED:
         _switchResult = Visibility.PROTECTED;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(delegate,JvmVisibility.PUBLIC)) {
-        _matched=true;
+        break;
+      case PUBLIC:
         _switchResult = Visibility.PUBLIC;
-      }
+        break;
+      default:
+        break;
     }
     return _switchResult;
   }
@@ -946,7 +937,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         _and_2 = false;
       } else {
         boolean _notEquals_1 = (!Objects.equal(lineBreak, null));
-        _and_2 = (_notEquals && _notEquals_1);
+        _and_2 = _notEquals_1;
       }
       if (!_and_2) {
         _and_1 = false;
@@ -954,7 +945,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         int _length = sequence.length();
         int _length_1 = lineBreak.length();
         boolean _greaterEqualsThan = (_length >= _length_1);
-        _and_1 = (_and_2 && _greaterEqualsThan);
+        _and_1 = _greaterEqualsThan;
       }
       if (!_and_1) {
         _and = false;
@@ -965,7 +956,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         int _length_4 = sequence.length();
         CharSequence _subSequence = sequence.subSequence(_minus, _length_4);
         boolean _equals = lineBreak.equals(_subSequence);
-        _and = (_and_1 && _equals);
+        _and = _equals;
       }
       if (_and) {
         int _length_5 = sequence.length();

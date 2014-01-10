@@ -97,7 +97,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
         Long _lastStructuralBuildTime = oldState.getLastStructuralBuildTime();
         Long _lastStructuralBuildTime_1 = newState.getLastStructuralBuildTime();
         boolean _notEquals = (!Objects.equal(_lastStructuralBuildTime, _lastStructuralBuildTime_1));
-        _or = (_equals || _notEquals);
+        _or = _notEquals;
       }
       if (_or) {
         final Procedure1<IResourceDescription.Delta> _function = new Procedure1<IResourceDescription.Delta>() {
@@ -111,7 +111,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
             } else {
               IResourceDescription _old = it.getOld();
               boolean _namesIntersect_1 = JdtQueuedBuildData.this.namesIntersect(_old, structurallyChangedTypes);
-              _or = (_namesIntersect || _namesIntersect_1);
+              _or = _namesIntersect_1;
             }
             if (_or) {
               deltas.add(it);
@@ -146,7 +146,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
             IProject _project = unconfirmed.getProject();
             IProject _project_1 = it.getProject();
             boolean _equals = _project.equals(_project_1);
-            _and = (_lessThan && _equals);
+            _and = _equals;
           }
           if (_and) {
             i.remove();

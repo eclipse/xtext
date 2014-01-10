@@ -534,7 +534,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
             _and = false;
           } else {
             boolean _contains = message.contains(msgPart);
-            _and = (_equals && _contains);
+            _and = _contains;
           }
           if (_and) {
             return;

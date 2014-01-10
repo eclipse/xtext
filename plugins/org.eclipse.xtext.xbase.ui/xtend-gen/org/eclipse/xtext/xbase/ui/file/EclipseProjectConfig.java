@@ -55,7 +55,7 @@ public class EclipseProjectConfig extends ProjectConfig {
           } else {
             IResource _underlyingResource = root.getUnderlyingResource();
             boolean _notEquals = (!Objects.equal(_underlyingResource, null));
-            _and = (_equals && _notEquals);
+            _and = _notEquals;
           }
           if (_and) {
             IResource _underlyingResource_1 = root.getUnderlyingResource();

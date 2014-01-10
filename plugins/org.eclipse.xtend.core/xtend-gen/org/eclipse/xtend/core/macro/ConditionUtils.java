@@ -59,7 +59,7 @@ public class ConditionUtils {
       } else {
         int _length = string.length();
         boolean _equals_1 = (_length == 0);
-        _or = (_equals || _equals_1);
+        _or = _equals_1;
       }
       if (_or) {
         return false;
@@ -87,7 +87,7 @@ public class ConditionUtils {
       } else {
         int _length = string.length();
         boolean _equals_1 = (_length == 0);
-        _or = (_equals || _equals_1);
+        _or = _equals_1;
       }
       if (_or) {
         return false;

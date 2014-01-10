@@ -1,6 +1,5 @@
 package org.eclipse.xtend.ide.tests.smoke;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.IWorkbench;
@@ -2497,30 +2496,19 @@ public class ReconcilerSmokeTest extends AbstractXtendUITestCase {
           int _plus = (_minus + (i).intValue());
           String _switchResult = null;
           final int _switchValue = ((i).intValue() % 4);
-          boolean _matched = false;
-          if (!_matched) {
-            if (Objects.equal(_switchValue,0)) {
-              _matched=true;
+          switch (_switchValue) {
+            case 0:
               _switchResult = "\"\"";
-            }
-          }
-          if (!_matched) {
-            if (Objects.equal(_switchValue,1)) {
-              _matched=true;
+              break;
+            case 1:
               _switchResult = "\n\n";
-            }
-          }
-          if (!_matched) {
-            if (Objects.equal(_switchValue,2)) {
-              _matched=true;
+              break;
+            case 2:
               _switchResult = "\n\t\n";
-            }
-          }
-          if (!_matched) {
-            if (Objects.equal(_switchValue,3)) {
-              _matched=true;
+              break;
+            case 3:
               _switchResult = "\" \"";
-            }
+              break;
           }
           _document.replace(_plus, 0, _switchResult);
           double _random = Math.random();

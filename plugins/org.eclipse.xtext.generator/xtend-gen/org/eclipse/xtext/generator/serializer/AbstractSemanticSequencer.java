@@ -118,7 +118,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         } else {
           EPackage _ePackage = e.getEPackage();
           boolean _equals = Objects.equal(_ePackage, pkg);
-          _and = (_notEquals && _equals);
+          _and = _equals;
         }
         return Boolean.valueOf(_and);
       }
@@ -218,7 +218,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           } else {
             boolean _contains = superConstraints.contains(e);
             boolean _not = (!_contains);
-            _and = (_notEquals && _not);
+            _and = _not;
           }
           return Boolean.valueOf(_and);
         }

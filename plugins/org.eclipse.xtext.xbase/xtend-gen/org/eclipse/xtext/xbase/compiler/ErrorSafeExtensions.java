@@ -122,13 +122,7 @@ public class ErrorSafeExtensions {
           ITreeAppendable _openErrorAppendable = this.openErrorAppendable(appendable, currentAppendable, element);
           currentAppendable = _openErrorAppendable;
         }
-        boolean _or = false;
-        if ((!isFirst)) {
-          _or = true;
-        } else {
-          _or = ((!isFirst) || (!isFirstBroken));
-        }
-        if (_or) {
+        if (((!isFirst) || (!isFirstBroken))) {
           loopParams.appendSeparator(currentAppendable);
         }
         isFirstBroken = false;
@@ -173,7 +167,7 @@ public class ErrorSafeExtensions {
         _and = false;
       } else {
         boolean _notEquals = (!Objects.equal(child, parent));
-        _and = ((child instanceof ErrorTreeAppendable) && _notEquals);
+        _and = _notEquals;
       }
       if (_and) {
         child.append(" */");
@@ -195,7 +189,7 @@ public class ErrorSafeExtensions {
     } else {
       JvmType _type = typeRef.getType();
       boolean _equals_1 = Objects.equal(_type, null);
-      _or = (_equals || _equals_1);
+      _or = _equals_1;
     }
     if (_or) {
       boolean _matched = false;
@@ -256,7 +250,7 @@ public class ErrorSafeExtensions {
     } else {
       JvmAnnotationType _annotation = annotationRef.getAnnotation();
       boolean _equals_1 = Objects.equal(_annotation, null);
-      _or = (_equals || _equals_1);
+      _or = _equals_1;
     }
     if (_or) {
       final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable, annotationRef);

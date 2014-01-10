@@ -69,7 +69,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
     } else {
       boolean _exists = javaProject.exists();
       boolean _not = (!_exists);
-      _or = (_equals || _not);
+      _or = _not;
     }
     if (_or) {
       try {

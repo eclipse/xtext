@@ -26,14 +26,14 @@ public class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuil
     } else {
       String _className = this.getClassName();
       boolean _notEquals = (!Objects.equal(_className, null));
-      _and_1 = (_isValid && _notEquals);
+      _and_1 = _notEquals;
     }
     if (!_and_1) {
       _and = false;
     } else {
       JvmVisibility _visibility = this.getVisibility();
       boolean _equals = Objects.equal(_visibility, JvmVisibility.PUBLIC);
-      _and = (_and_1 && _equals);
+      _and = _equals;
     }
     return _and;
   }

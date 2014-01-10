@@ -252,7 +252,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IField) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "y");
-                _and = ((it instanceof IField) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -267,7 +267,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "bar");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -349,7 +349,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IField) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "bar");
-                _and = ((it instanceof IField) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -364,7 +364,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "baz");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -379,7 +379,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "fooBar_0");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -394,7 +394,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "fooBar_1");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -474,7 +474,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IField) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "bar");
-                _and = ((it instanceof IField) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -489,7 +489,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "baz");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -504,7 +504,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "fooBar");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -519,7 +519,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "getFoo");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -534,7 +534,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "setFoo");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -635,7 +635,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "foo_1");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -650,7 +650,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "baz");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -665,7 +665,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "foo");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -738,7 +738,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IField) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "foo");
-                _and = ((it instanceof IField) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -753,7 +753,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "bar");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -768,7 +768,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "baz");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -809,7 +809,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IType) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "Xtend");
-                _and = ((it instanceof IType) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -859,7 +859,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "foo");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -906,7 +906,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IField) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "foo");
-                _and = ((it instanceof IField) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -953,7 +953,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "getFoo");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -968,7 +968,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "setFoo");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -983,7 +983,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IField) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "_foo");
-                _and = ((it instanceof IField) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -1040,7 +1040,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "_foo");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }
@@ -1055,7 +1055,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               } else {
                 String _elementName = ((IMethod) it).getElementName();
                 boolean _equals = Objects.equal(_elementName, "foo");
-                _and = ((it instanceof IMethod) && _equals);
+                _and = _equals;
               }
               return Boolean.valueOf(_and);
             }

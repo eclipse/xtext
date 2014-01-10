@@ -17,7 +17,7 @@ public class JavaInterfaceBuilder extends AbstractInterfaceBuilder implements IC
     } else {
       String _interfaceName = this.getInterfaceName();
       boolean _notEquals = (!Objects.equal(_interfaceName, null));
-      _and = (_isValid && _notEquals);
+      _and = _notEquals;
     }
     return _and;
   }

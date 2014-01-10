@@ -25,7 +25,7 @@ public class JavaParameterBuilder extends AbstractParameterBuilder {
       _and = false;
     } else {
       boolean _isValid = super.isValid();
-      _and = (_not && _isValid);
+      _and = _isValid;
     }
     return _and;
   }

@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -84,7 +83,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
             _elvis = source;
           } else {
             Object _object = new Object();
-            _elvis = ObjectExtensions.<Object>operator_elvis(source, _object);
+            _elvis = _object;
           }
           VarianceInfo _second = input.getSecond();
           VarianceInfo _third = input.getThird();

@@ -112,7 +112,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
             if (!_matched) {
               _switchResult = false;
             }
-            _and = (_notEquals && _switchResult);
+            _and = _switchResult;
           }
           return Boolean.valueOf(_and);
         }

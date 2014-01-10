@@ -52,7 +52,7 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
                 } else {
                   int _segmentCount = uri.segmentCount();
                   boolean _lessThan = (_segmentCount < 2);
-                  _or = (_equals || _lessThan);
+                  _or = _lessThan;
                 }
                 if (_or) {
                   return false;
@@ -79,7 +79,7 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
           } else {
             int _segmentCount = uri.segmentCount();
             boolean _lessThan = (_segmentCount < 2);
-            _or = (_equals || _lessThan);
+            _or = _lessThan;
           }
           if (_or) {
             return false;

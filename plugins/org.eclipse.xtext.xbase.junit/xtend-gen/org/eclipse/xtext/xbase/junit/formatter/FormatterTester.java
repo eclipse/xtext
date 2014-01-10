@@ -30,7 +30,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Assert;
@@ -279,7 +278,7 @@ public class FormatterTester {
         _elvis = _leafNodes;
       } else {
         List<ILeafNode> _emptyList = CollectionLiterals.<ILeafNode>emptyList();
-        _elvis = ObjectExtensions.<Iterable<ILeafNode>>operator_elvis(_leafNodes, _emptyList);
+        _elvis = _emptyList;
       }
       for (final ILeafNode leaf : _elvis) {
         boolean _or = false;
@@ -292,7 +291,7 @@ public class FormatterTester {
           String _trim = _text.trim();
           boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_trim);
           boolean _not_1 = (!_isNullOrEmpty);
-          _or = (_not || _not_1);
+          _or = _not_1;
         }
         if (_or) {
           final ITextRegion leafRegion = leaf.getTextRegion();
@@ -303,14 +302,14 @@ public class FormatterTester {
           } else {
             int _offset = leafRegion.getOffset();
             boolean _lessEqualsThan = (_offset <= (offset + length));
-            _and_1 = ((lastOffset >= offset) && _lessEqualsThan);
+            _and_1 = _lessEqualsThan;
           }
           if (!_and_1) {
             _and = false;
           } else {
             boolean _contains = offsets.contains(Integer.valueOf(lastOffset));
             boolean _not_2 = (!_contains);
-            _and = (_and_1 && _not_2);
+            _and = _not_2;
           }
           if (_and) {
             int _offset_1 = leafRegion.getOffset();

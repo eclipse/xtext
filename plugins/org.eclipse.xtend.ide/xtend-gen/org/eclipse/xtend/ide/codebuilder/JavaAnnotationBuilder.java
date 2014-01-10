@@ -17,7 +17,7 @@ public class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements 
     } else {
       String _annotationName = this.getAnnotationName();
       boolean _notEquals = (!Objects.equal(_annotationName, null));
-      _and = (_isValid && _notEquals);
+      _and = _notEquals;
     }
     return _and;
   }

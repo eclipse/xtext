@@ -207,7 +207,7 @@ public class XAnnotationExtensions {
           JvmOperation _operation_1 = it.getOperation();
           String _simpleName = _operation_1.getSimpleName();
           boolean _equals_1 = Objects.equal(_simpleName, "value");
-          _or = (_equals || _equals_1);
+          _or = _equals_1;
         }
         return Boolean.valueOf(_or);
       }

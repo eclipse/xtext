@@ -105,7 +105,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
           _and = false;
         } else {
           JvmIdentifiableElement _feature = it.getFeature();
-          _and = (_notEquals && (_feature instanceof JvmOperation));
+          _and = (_feature instanceof JvmOperation);
         }
         return Boolean.valueOf(_and);
       }

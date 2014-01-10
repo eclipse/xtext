@@ -89,9 +89,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
             _and = false;
           } else {
             boolean _equals_2 = Objects.equal(property, "value");
-            _and = (_equals_1 && _equals_2);
+            _and = _equals_2;
           }
-          _or = (_equals || _and);
+          _or = _and;
         }
         return Boolean.valueOf(_or);
       }
@@ -129,9 +129,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
               _and = false;
             } else {
               boolean _equals_2 = Objects.equal(property, "value");
-              _and = (_equals_1 && _equals_2);
+              _and = _equals_2;
             }
-            _or = (_equals || _and);
+            _or = _and;
           }
           return Boolean.valueOf(_or);
         }
@@ -156,7 +156,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
         TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
         JvmTypeReference _returnType = op.getReturnType();
         boolean _isArray = _typeReferences.isArray(_returnType);
-        _and = (_notEquals && _isArray);
+        _and = _isArray;
       }
       final boolean isArrayType = _and;
       boolean _notEquals_1 = (!Objects.equal(annotationValue, null));
@@ -171,7 +171,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       } else {
         JvmAnnotationValue _defaultValue = op.getDefaultValue();
         boolean _notEquals_3 = (!Objects.equal(_defaultValue, null));
-        _and_1 = (_notEquals_2 && _notEquals_3);
+        _and_1 = _notEquals_3;
       }
       if (_and_1) {
         CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();

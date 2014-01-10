@@ -90,7 +90,7 @@ public class RichStringFormatter {
       Line _last = IterableExtensions.<Line>last(lines);
       String _content = _last.getContent();
       boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_content);
-      _and = (_not && _isNullOrEmpty);
+      _and = _isNullOrEmpty;
     }
     final boolean canIndent = _and;
     for (final Line line : lines) {
@@ -105,7 +105,7 @@ public class RichStringFormatter {
         } else {
           Line _head = IterableExtensions.<Line>head(lines);
           boolean _equals = Objects.equal(line, _head);
-          _and_1 = (canIndent && _equals);
+          _and_1 = _equals;
         }
         if (_and_1) {
           _xifexpression = 1;
@@ -120,7 +120,7 @@ public class RichStringFormatter {
         } else {
           Line _last_1 = IterableExtensions.<Line>last(lines);
           boolean _equals_1 = Objects.equal(line, _last_1);
-          _and_2 = (canIndent && _equals_1);
+          _and_2 = _equals_1;
         }
         if (_and_2) {
           _xifexpression_1 = (-1);
@@ -223,7 +223,7 @@ public class RichStringFormatter {
       } else {
         SyntaxErrorMessage _syntaxErrorMessage = node.getSyntaxErrorMessage();
         boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
-        _or = (_equals || _notEquals);
+        _or = _notEquals;
       }
       if (_or) {
         return true;

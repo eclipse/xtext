@@ -312,7 +312,7 @@ public class QuickfixTestBuilder {
           Integer _length = it.getLength();
           int _plus = ((_offset_1).intValue() + (_length).intValue());
           boolean _greaterEqualsThan = (_plus >= QuickfixTestBuilder.this.caretOffset);
-          _and = (_lessEqualsThan && _greaterEqualsThan);
+          _and = _greaterEqualsThan;
         }
         return Boolean.valueOf(_and);
       }

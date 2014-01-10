@@ -55,7 +55,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
         _and = false;
       } else {
         boolean _isConflictOccurred = format.isConflictOccurred();
-        _and = (_isDiagnoseConflicts && _isConflictOccurred);
+        _and = _isConflictOccurred;
       }
       if (_and) {
         final FormattableDocument debug = new FormattableDocument(cfg, doc);

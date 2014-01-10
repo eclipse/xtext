@@ -642,30 +642,21 @@ public class JvmModelGenerator implements IGenerator {
     boolean _notEquals = (!Objects.equal(visibility, null));
     if (_notEquals) {
       String _switchResult = null;
-      boolean _matched = false;
-      if (!_matched) {
-        if (Objects.equal(visibility,JvmVisibility.PRIVATE)) {
-          _matched=true;
+      switch (visibility) {
+        case PRIVATE:
           _switchResult = "private ";
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(visibility,JvmVisibility.PUBLIC)) {
-          _matched=true;
+          break;
+        case PUBLIC:
           _switchResult = "public ";
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(visibility,JvmVisibility.PROTECTED)) {
-          _matched=true;
+          break;
+        case PROTECTED:
           _switchResult = "protected ";
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(visibility,JvmVisibility.DEFAULT)) {
-          _matched=true;
+          break;
+        case DEFAULT:
           _switchResult = "";
-        }
+          break;
+        default:
+          break;
       }
       return _switchResult;
     } else {
@@ -706,9 +697,9 @@ public class JvmModelGenerator implements IGenerator {
         _and = false;
       } else {
         boolean _isInterface = ((JvmGenericType) it).isInterface();
-        _and = ((it instanceof JvmGenericType) && _isInterface);
+        _and = _isInterface;
       }
-      _or = ((it instanceof JvmAnnotationType) || _and);
+      _or = _and;
     }
     if (_or) {
       EList<JvmTypeReference> _superTypes = it.getSuperTypes();
@@ -751,7 +742,7 @@ public class JvmModelGenerator implements IGenerator {
             JvmType _type_1 = typeRef.getType();
             boolean _isInterface = ((JvmGenericType) _type_1).isInterface();
             boolean _not = (!_isInterface);
-            _and = ((_type instanceof JvmGenericType) && _not);
+            _and = _not;
           }
           return Boolean.valueOf(_and);
         }
@@ -878,7 +869,7 @@ public class JvmModelGenerator implements IGenerator {
       } else {
         boolean _hasBody = this.hasBody(it);
         boolean _not = (!_hasBody);
-        _or = (_isAbstract || _not);
+        _or = _not;
       }
       if (_or) {
         tracedAppendable.append(";");
@@ -943,7 +934,7 @@ public class JvmModelGenerator implements IGenerator {
           _and = false;
         } else {
           boolean _isGenerateExpressions = config.isGenerateExpressions();
-          _and = (_notEquals_2 && _isGenerateExpressions);
+          _and = _isGenerateExpressions;
         }
         if (_and) {
           boolean _hasErrors = this._errorSafeExtensions.hasErrors(expression);
@@ -1055,7 +1046,7 @@ public class JvmModelGenerator implements IGenerator {
             _and = false;
           } else {
             boolean _isVarArgs = it.isVarArgs();
-            _and = (last && _isVarArgs);
+            _and = _isVarArgs;
           }
           this.generateParameter(p, appendable, _and, config);
           if ((!last)) {
@@ -1103,14 +1094,14 @@ public class JvmModelGenerator implements IGenerator {
     } else {
       Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(it);
       boolean _notEquals_1 = (!Objects.equal(_compilationStrategy, null));
-      _or_1 = (_notEquals || _notEquals_1);
+      _or_1 = _notEquals_1;
     }
     if (_or_1) {
       _or = true;
     } else {
       XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(it);
       boolean _notEquals_2 = (!Objects.equal(_associatedExpression, null));
-      _or = (_or_1 || _notEquals_2);
+      _or = _notEquals_2;
     }
     return _or;
   }
@@ -1158,7 +1149,7 @@ public class JvmModelGenerator implements IGenerator {
           _and = false;
         } else {
           boolean _isGenerateExpressions = config.isGenerateExpressions();
-          _and = (_notEquals_2 && _isGenerateExpressions);
+          _and = _isGenerateExpressions;
         }
         if (_and) {
           final Iterable<Issue> errors_2 = this._errorSafeExtensions.getErrors(expression);
@@ -1190,12 +1181,12 @@ public class JvmModelGenerator implements IGenerator {
               EList<XExpression> _expressions = ((XBlockExpression) expression).getExpressions();
               int _size = _expressions.size();
               boolean _notEquals_3 = (_size != 1);
-              _and_2 = ((expression instanceof XBlockExpression) && _notEquals_3);
+              _and_2 = _notEquals_3;
             }
             if (!_and_2) {
               _and_1 = false;
             } else {
-              _and_1 = (_and_2 && (returnType instanceof JvmVoid));
+              _and_1 = (returnType instanceof JvmVoid);
             }
             if (_and_1) {
               final XBlockExpression block = ((XBlockExpression) expression);
@@ -1317,7 +1308,7 @@ public class JvmModelGenerator implements IGenerator {
       if (!_equals) {
         _and = false;
       } else {
-        _and = (_equals && (this.documentationProvider instanceof IEObjectDocumentationProviderExtension));
+        _and = (this.documentationProvider instanceof IEObjectDocumentationProviderExtension);
       }
       if (_and) {
         EObject _head = IterableExtensions.<EObject>head(sourceElements);
@@ -1346,7 +1337,7 @@ public class JvmModelGenerator implements IGenerator {
           } else {
             int _length = text.length();
             boolean _greaterThan = (_length > 0);
-            _and = (_notEquals && _greaterThan);
+            _and = _greaterThan;
           }
           if (_and) {
             final QualifiedName fqn = this.qualifiedNameConverter.toQualifiedName(text);
@@ -1358,7 +1349,7 @@ public class JvmModelGenerator implements IGenerator {
               _and_1 = false;
             } else {
               boolean _notEquals_1 = (!Objects.equal(context, null));
-              _and_1 = (_equals && _notEquals_1);
+              _and_1 = _notEquals_1;
             }
             if (_and_1) {
               final IScope scope = this.scopeProvider.getScope(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
@@ -1381,7 +1372,7 @@ public class JvmModelGenerator implements IGenerator {
                 } else {
                   boolean _eIsProxy_1 = jvmType.eIsProxy();
                   boolean _not = (!_eIsProxy_1);
-                  _and_2 = ((jvmType instanceof JvmDeclaredType) && _not);
+                  _and_2 = _not;
                 }
                 if (_and_2) {
                   final JvmDeclaredType referencedType = ((JvmDeclaredType) jvmType);
@@ -1808,7 +1799,7 @@ public class JvmModelGenerator implements IGenerator {
           } else {
             String _identifier = it.getIdentifier();
             boolean _contains = syntheticEnumMethods.contains(_identifier);
-            _and = ((it instanceof JvmOperation) && _contains);
+            _and = _contains;
           }
           return Boolean.valueOf((!_and));
         }
@@ -1827,7 +1818,7 @@ public class JvmModelGenerator implements IGenerator {
           _and = false;
         } else {
           boolean _isSingleSyntheticDefaultConstructor = JvmModelGenerator.this._jvmTypeExtensions.isSingleSyntheticDefaultConstructor(((JvmConstructor) it));
-          _and = ((it instanceof JvmConstructor) && _isSingleSyntheticDefaultConstructor);
+          _and = _isSingleSyntheticDefaultConstructor;
         }
         return Boolean.valueOf((!_and));
       }

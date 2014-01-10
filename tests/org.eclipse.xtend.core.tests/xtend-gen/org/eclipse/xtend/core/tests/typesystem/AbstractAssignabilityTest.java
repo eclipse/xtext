@@ -26,7 +26,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
@@ -173,7 +172,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
             boolean _isArray_2 = lhsType.isArray();
             boolean _isArray_3 = rhsType.isArray();
             boolean _equals_1 = (_isArray_2 == _isArray_3);
-            _or = (_equals || _equals_1);
+            _or = _equals_1;
           }
           if (_or) {
             String _string_1 = superType.toString();
@@ -216,7 +215,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     if (_replace_5 != null) {
       _elvis = _replace_5;
     } else {
-      _elvis = ObjectExtensions.<String>operator_elvis(_replace_5, "Object");
+      _elvis = "Object";
     }
     return _elvis;
   }

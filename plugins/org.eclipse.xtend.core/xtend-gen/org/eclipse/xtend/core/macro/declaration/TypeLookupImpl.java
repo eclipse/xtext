@@ -18,7 +18,6 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class TypeLookupImpl implements TypeLookup {
@@ -112,7 +111,7 @@ public class TypeLookupImpl implements TypeLookup {
           int _length = name.length();
           char _charAt = qualifiedName.charAt(_length);
           boolean _equals_1 = (_charAt == dot);
-          _and = (_startsWith && _equals_1);
+          _and = _equals_1;
         }
         if (_and) {
           EList<JvmMember> _members = type.getMembers();
@@ -149,7 +148,7 @@ public class TypeLookupImpl implements TypeLookup {
         }
         _xblockexpression = (_xifexpression);
       }
-      _elvis = ObjectExtensions.<Type>operator_elvis(_findType, _xblockexpression);
+      _elvis = _xblockexpression;
     }
     return _elvis;
   }

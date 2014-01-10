@@ -103,7 +103,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
         EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
         int _size = _xtendTypes.size();
         boolean _equals = (_size == 1);
-        _and = (this.useJavaCompiler && _equals);
+        _and = _equals;
       }
       if (_and) {
         String _xifexpression = null;

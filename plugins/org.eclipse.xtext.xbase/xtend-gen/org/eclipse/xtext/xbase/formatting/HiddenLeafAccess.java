@@ -211,7 +211,7 @@ public class HiddenLeafAccess {
       _and = false;
     } else {
       Boolean _apply = matches.apply(((ILeafNode) current));
-      _and = ((current instanceof ILeafNode) && (_apply).booleanValue());
+      _and = (_apply).booleanValue();
     }
     if (_and) {
       return ((ILeafNode) current);
@@ -229,7 +229,7 @@ public class HiddenLeafAccess {
             _and_1 = false;
           } else {
             Boolean _apply_1 = matches.apply(((ILeafNode) previous));
-            _and_1 = ((previous instanceof ILeafNode) && (_apply_1).booleanValue());
+            _and_1 = (_apply_1).booleanValue();
           }
           if (_and_1) {
             return ((ILeafNode) previous);
@@ -266,7 +266,7 @@ public class HiddenLeafAccess {
             if (!_notEquals_1) {
               _and = false;
             } else {
-              _and = (_notEquals_1 && (previous instanceof ILeafNode));
+              _and = (previous instanceof ILeafNode);
             }
             if (_and) {
               boolean _isHidden = ((ILeafNode) previous).isHidden();

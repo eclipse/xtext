@@ -33,7 +33,7 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuil
     } else {
       String _fieldName = this.getFieldName();
       boolean _notEquals = (!Objects.equal(_fieldName, null));
-      _and = (_isValid && _notEquals);
+      _and = _notEquals;
     }
     return _and;
   }

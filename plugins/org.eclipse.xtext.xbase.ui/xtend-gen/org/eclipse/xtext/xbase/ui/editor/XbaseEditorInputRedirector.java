@@ -116,7 +116,7 @@ public class XbaseEditorInputRedirector {
                 IPath _outputLocation_3 = sourceFolder.getOutputLocation();
                 IPath _fullPath_3 = resource.getFullPath();
                 boolean _isPrefixOf_1 = _outputLocation_3.isPrefixOf(_fullPath_3);
-                _and = (_notEquals_1 && _isPrefixOf_1);
+                _and = _isPrefixOf_1;
               }
               if (_and) {
                 IPath _fullPath_4 = resource.getFullPath();
@@ -168,7 +168,7 @@ public class XbaseEditorInputRedirector {
         _and = false;
       } else {
         boolean _equals_1 = Objects.equal(sourceInformation, null);
-        _and = (_hasNext && _equals_1);
+        _and = _equals_1;
       }
       boolean _while = _and;
       while (_while) {
@@ -186,7 +186,7 @@ public class XbaseEditorInputRedirector {
           _and_1 = false;
         } else {
           boolean _equals_2 = Objects.equal(sourceInformation, null);
-          _and_1 = (_hasNext_1 && _equals_2);
+          _and_1 = _equals_2;
         }
         _while = _and_1;
       }

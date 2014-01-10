@@ -413,7 +413,7 @@ public class XtendFormatter extends XbaseFormatter2 {
             if (!(current instanceof XtendField)) {
               _and = false;
             } else {
-              _and = ((current instanceof XtendField) && (next instanceof XtendField));
+              _and = (next instanceof XtendField);
             }
             if (_and) {
               INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(current);
@@ -429,7 +429,7 @@ public class XtendFormatter extends XbaseFormatter2 {
               if (!(current instanceof XtendFunction)) {
                 _and_1 = false;
               } else {
-                _and_1 = ((current instanceof XtendFunction) && (next instanceof XtendFunction));
+                _and_1 = (next instanceof XtendFunction);
               }
               if (_and_1) {
                 INode _nodeForEObject_1 = this._nodeModelAccess.nodeForEObject(current);

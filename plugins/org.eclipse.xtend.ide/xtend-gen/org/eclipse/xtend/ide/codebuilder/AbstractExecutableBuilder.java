@@ -21,7 +21,6 @@ import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -100,7 +99,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
       _elvis = _body;
     } else {
       String _defaultBody = this.defaultBody();
-      _elvis = ObjectExtensions.<String>operator_elvis(_body, _defaultBody);
+      _elvis = _defaultBody;
     }
     ISourceAppender _append_1 = _newLine.append(_elvis);
     ISourceAppender _append_2 = _append_1.append(statementSeparator);
@@ -226,27 +225,19 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     String _switchResult = null;
     JvmVisibility _visibility = this.getVisibility();
     final JvmVisibility getVisibility = _visibility;
-    boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(getVisibility,JvmVisibility.PRIVATE)) {
-        _matched=true;
+    switch (getVisibility) {
+      case PRIVATE:
         _switchResult = "methpri_obj.gif";
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(getVisibility,JvmVisibility.PROTECTED)) {
-        _matched=true;
+        break;
+      case PROTECTED:
         _switchResult = "methpro_obj.gif";
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(getVisibility,JvmVisibility.PUBLIC)) {
-        _matched=true;
+        break;
+      case PUBLIC:
         _switchResult = "methpub_obj.gif";
-      }
-    }
-    if (!_matched) {
-      _switchResult = "methdef_obj.gif";
+        break;
+      default:
+        _switchResult = "methdef_obj.gif";
+        break;
     }
     return _switchResult;
   }
@@ -268,7 +259,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
       List<LightweightTypeReference> _exceptions = this.getExceptions();
       boolean _contains = _exceptions.contains(null);
       boolean _not = (!_contains);
-      _and_2 = (_forall && _not);
+      _and_2 = _not;
     }
     if (!_and_2) {
       _and_1 = false;
@@ -276,13 +267,13 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
       List<JvmTypeParameter> _typeParameters = this.getTypeParameters();
       boolean _contains_1 = _typeParameters.contains(null);
       boolean _not_1 = (!_contains_1);
-      _and_1 = (_and_2 && _not_1);
+      _and_1 = _not_1;
     }
     if (!_and_1) {
       _and = false;
     } else {
       boolean _isValid = super.isValid();
-      _and = (_and_1 && _isValid);
+      _and = _isValid;
     }
     return _and;
   }

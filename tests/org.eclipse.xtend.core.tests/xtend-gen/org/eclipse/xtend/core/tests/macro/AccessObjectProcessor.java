@@ -80,7 +80,7 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
           _and = false;
         } else {
           boolean _notEquals_1 = (!Objects.equal(ser, null));
-          _and = (_notEquals && _notEquals_1);
+          _and = _notEquals_1;
         }
         if (_and) {
           final LinkedList<TypeReference> pIfcs = new LinkedList<TypeReference>();
@@ -100,7 +100,7 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
           _and_1 = false;
         } else {
           boolean _notEquals_3 = (!Objects.equal(ser, null));
-          _and_1 = (_notEquals_2 && _notEquals_3);
+          _and_1 = _notEquals_3;
         }
         if (_and_1) {
           final LinkedList<TypeReference> gIfcs = new LinkedList<TypeReference>();

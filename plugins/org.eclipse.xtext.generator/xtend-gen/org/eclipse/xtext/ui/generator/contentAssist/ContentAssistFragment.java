@@ -136,7 +136,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
         _and = false;
       } else {
         boolean _notEquals = (!Objects.equal(superGrammar, null));
-        _and = (_isInheritImplementation && _notEquals);
+        _and = _notEquals;
       }
       if (_and) {
         _xifexpression = this.getProposalProviderName(superGrammar);

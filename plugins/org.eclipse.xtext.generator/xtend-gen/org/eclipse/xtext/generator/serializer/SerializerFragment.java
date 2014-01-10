@@ -85,7 +85,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
       _and = false;
     } else {
       boolean _isGenerateStub = this.isGenerateStub();
-      _and = (_isGenerateXtendStub && _isGenerateStub);
+      _and = _isGenerateStub;
     }
     _annotatedWith.toInstance(Boolean.valueOf(_and));
   }

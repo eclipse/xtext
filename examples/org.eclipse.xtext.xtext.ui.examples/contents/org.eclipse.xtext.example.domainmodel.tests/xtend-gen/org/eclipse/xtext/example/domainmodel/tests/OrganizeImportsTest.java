@@ -60,7 +60,7 @@ public class OrganizeImportsTest {
             int _endOffset = lastChange.getEndOffset();
             int _offset = it.getOffset();
             boolean _greaterThan = (_endOffset > _offset);
-            _and = (_notEquals && _greaterThan);
+            _and = _greaterThan;
           }
           if (_and) {
             Assert.fail(((("Overlapping text edits: " + lastChange) + " and ") + it));

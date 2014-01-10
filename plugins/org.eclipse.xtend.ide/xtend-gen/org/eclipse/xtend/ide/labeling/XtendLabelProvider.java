@@ -209,7 +209,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
         _and = false;
       } else {
         boolean _isExtension = element.isExtension();
-        _and = (_equals && _isExtension);
+        _and = _isExtension;
       }
       if (_and) {
         JvmTypeReference _type = element.getType();

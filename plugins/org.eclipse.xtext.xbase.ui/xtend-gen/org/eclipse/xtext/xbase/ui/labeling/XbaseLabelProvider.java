@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -266,7 +265,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       _elvis = _imageDescriptor;
     } else {
       Object _doGetImage = super.doGetImage(element);
-      _elvis = ObjectExtensions.<Object>operator_elvis(_imageDescriptor, _doGetImage);
+      _elvis = _doGetImage;
     }
     return _elvis;
   }

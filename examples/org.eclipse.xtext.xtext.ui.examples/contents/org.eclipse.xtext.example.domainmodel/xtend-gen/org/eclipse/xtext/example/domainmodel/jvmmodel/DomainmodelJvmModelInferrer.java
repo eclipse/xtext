@@ -27,7 +27,6 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -118,7 +117,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                 _elvis = _type;
               } else {
                 JvmTypeReference _inferredType = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.inferredType();
-                _elvis = ObjectExtensions.<JvmTypeReference>operator_elvis(_type, _inferredType);
+                _elvis = _inferredType;
               }
               final Procedure1<JvmOperation> _function_2 = new Procedure1<JvmOperation>() {
                 public void apply(final JvmOperation it) {

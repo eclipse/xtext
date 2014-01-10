@@ -31,7 +31,7 @@ public class CommentInfo extends LeafInfo {
       ILeafNode _node = this.getNode();
       String _text = _node.getText();
       boolean _contains = _text.contains("\n");
-      _and = (_not && _contains);
+      _and = _contains;
     }
     return _and;
   }

@@ -134,7 +134,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
           _and = false;
         } else {
           boolean _isStatic = ((XFeatureCall)sourceCandidate).isStatic();
-          _and = (_equals && _isStatic);
+          _and = _isStatic;
         }
         if (_and) {
           _matched_1=true;
@@ -152,7 +152,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
         } else {
           boolean _isStaticWithDeclaringType = ((XMemberFeatureCall)sourceCandidate).isStaticWithDeclaringType();
           boolean _not = (!_isStaticWithDeclaringType);
-          _and = (_isStatic && _not);
+          _and = _not;
         }
         if (_and) {
           this.addReferenceToTypeFromStaticImport(((XAbstractFeatureCall)sourceCandidate), targetURISet, acceptor, currentExportedContainerURI);

@@ -414,7 +414,7 @@ public class FormattableDocument {
             int _length = f.getLength();
             int _plus_1 = (_offset_1 + _length);
             boolean _lessEqualsThan = (_plus_1 <= (offset + length));
-            _and = (_greaterEqualsThan && _lessEqualsThan);
+            _and = _lessEqualsThan;
           }
           if (_and) {
             int _offset_2 = f.getOffset();

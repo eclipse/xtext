@@ -133,7 +133,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
             _or = true;
           } else {
             boolean _startsWith_1 = head.startsWith("=testProject2/");
-            _or = (_startsWith || _startsWith_1);
+            _or = _startsWith_1;
           }
           Assert.assertTrue(head, _or);
           Storage2UriMapperJavaImpl.PackageFragmentRootData _value_2 = it.getValue();
@@ -146,7 +146,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
             _or_1 = true;
           } else {
             boolean _startsWith_3 = head.startsWith("=testProject2/");
-            _or_1 = (_startsWith_2 || _startsWith_3);
+            _or_1 = _startsWith_3;
           }
           Assert.assertTrue(head2, _or_1);
         }
@@ -193,7 +193,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
               _or = true;
             } else {
               boolean _startsWith_2 = head_1.startsWith("=testProject2/");
-              _or = (_startsWith_1 || _startsWith_2);
+              _or = _startsWith_2;
             }
             Assert.assertTrue(head_1, _or);
             Storage2UriMapperJavaImpl.PackageFragmentRootData _value_4 = it.getValue();
@@ -206,7 +206,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
               _or_1 = true;
             } else {
               boolean _startsWith_4 = head_1.startsWith("=testProject2/");
-              _or_1 = (_startsWith_3 || _startsWith_4);
+              _or_1 = _startsWith_4;
             }
             Assert.assertTrue(head2, _or_1);
           }
@@ -241,7 +241,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
             _or = true;
           } else {
             boolean _startsWith_1 = head.startsWith("=testProject2/");
-            _or = (_startsWith || _startsWith_1);
+            _or = _startsWith_1;
           }
           Assert.assertTrue(head, _or);
           Storage2UriMapperJavaImpl.PackageFragmentRootData _value_2 = it.getValue();
@@ -254,7 +254,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
             _or_1 = true;
           } else {
             boolean _startsWith_3 = head.startsWith("=testProject2/");
-            _or_1 = (_startsWith_2 || _startsWith_3);
+            _or_1 = _startsWith_3;
           }
           Assert.assertTrue(head2, _or_1);
         }
@@ -390,7 +390,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
             _or = true;
           } else {
             boolean _startsWith_1 = head.startsWith("=testProject2/");
-            _or = (_startsWith || _startsWith_1);
+            _or = _startsWith_1;
           }
           Assert.assertTrue(head, _or);
           Storage2UriMapperJavaImpl.PackageFragmentRootData _value_2 = it.getValue();
@@ -403,7 +403,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
             _or_1 = true;
           } else {
             boolean _startsWith_3 = head.startsWith("=testProject2/");
-            _or_1 = (_startsWith_2 || _startsWith_3);
+            _or_1 = _startsWith_3;
           }
           Assert.assertTrue(head2, _or_1);
         }

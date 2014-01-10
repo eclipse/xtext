@@ -141,7 +141,7 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
         if (computedSuperType!=null) {
           _isPrimitive=this._primitives.isPrimitive(computedSuperType);
         }
-        _or = (_is || _isPrimitive);
+        _or = _isPrimitive;
       }
       boolean _not_1 = (!_or);
       if (_not_1) {

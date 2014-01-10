@@ -65,7 +65,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
       ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
       boolean _isOwnedBy = reference.isOwnedBy(_referenceOwner);
       boolean _not = (!_isOwnedBy);
-      _and = (_notEquals && _not);
+      _and = _not;
     }
     if (_and) {
       throw new IllegalArgumentException("reference is not owned by this resolved types");
@@ -84,7 +84,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
       ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
       boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
       boolean _not = (!_isOwnedBy);
-      _and = (_notEquals && _not);
+      _and = _not;
     }
     if (_and) {
       throw new IllegalArgumentException("reference is not owned by this resolved types");
@@ -106,7 +106,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
           ITypeReferenceOwner _referenceOwner = ValidatingReassigningResolvedTypes.this.getReferenceOwner();
           boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
           boolean _not = (!_isOwnedBy);
-          _and = (_notEquals && _not);
+          _and = _not;
         }
         if (_and) {
           throw new IllegalArgumentException("reference is not owned by this resolved types");
@@ -151,7 +151,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
           ITypeReferenceOwner _referenceOwner = ValidatingReassigningResolvedTypes.this.getReferenceOwner();
           boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
           boolean _not = (!_isOwnedBy);
-          _and = (_notEquals && _not);
+          _and = _not;
         }
         if (_and) {
           throw new IllegalArgumentException("hint is not owned by this resolved types");
@@ -194,7 +194,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
       ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
       boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
       boolean _not = (!_isOwnedBy);
-      _and = (_notEquals && _not);
+      _and = _not;
     }
     if (_and) {
       throw new IllegalArgumentException("result is not owned by this resolved types");
@@ -223,7 +223,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
       ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
       boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
       boolean _not = (!_isOwnedBy);
-      _and = (_notEquals && _not);
+      _and = _not;
     }
     if (_and) {
       throw new IllegalArgumentException("result is not owned by this resolved types");

@@ -179,7 +179,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
           JvmType _type_1 = it.getType();
           boolean _isInterface = ((JvmGenericType) _type_1).isInterface();
           boolean _not = (!_isInterface);
-          _and = ((_type instanceof JvmGenericType) && _not);
+          _and = _not;
         }
         return Boolean.valueOf(_and);
       }
@@ -209,7 +209,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
         } else {
           JvmType _type_1 = it.getType();
           boolean _isInterface = ((JvmGenericType) _type_1).isInterface();
-          _and = ((_type instanceof JvmGenericType) && _isInterface);
+          _and = _isInterface;
         }
         return Boolean.valueOf(_and);
       }
@@ -267,7 +267,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
             List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
             List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
             boolean _equals_1 = Objects.equal(_list, _list_1);
-            _and = (_equals && _equals_1);
+            _and = _equals_1;
           }
           return Boolean.valueOf(_and);
         }

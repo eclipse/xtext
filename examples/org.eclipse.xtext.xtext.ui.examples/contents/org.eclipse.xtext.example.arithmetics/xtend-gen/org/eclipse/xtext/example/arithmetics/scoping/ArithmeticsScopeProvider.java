@@ -38,7 +38,7 @@ public class ArithmeticsScopeProvider extends AbstractDeclarativeScopeProvider {
           } else {
             QualifiedName _name = it.getName();
             boolean _notEquals_1 = (!Objects.equal(_name, null));
-            _and_1 = (_notEquals && _notEquals_1);
+            _and_1 = _notEquals_1;
           }
           if (!_and_1) {
             _and = false;
@@ -46,7 +46,7 @@ public class ArithmeticsScopeProvider extends AbstractDeclarativeScopeProvider {
             QualifiedName _name_1 = it.getName();
             int _segmentCount = _name_1.getSegmentCount();
             boolean _equals = (_segmentCount == 1);
-            _and = (_and_1 && _equals);
+            _and = _equals;
           }
           return _and;
         }

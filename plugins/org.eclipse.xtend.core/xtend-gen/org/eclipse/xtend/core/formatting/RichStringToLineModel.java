@@ -141,13 +141,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   
   public void announceNextLiteral(final RichStringLiteral object) {
     super.announceNextLiteral(object);
-    boolean _and = false;
-    if (!(this.lastLiteralEndOffset > 0)) {
-      _and = false;
-    } else {
-      _and = ((this.lastLiteralEndOffset > 0) && (this.contentStartOffset < 0));
-    }
-    if (_and) {
+    if (((this.lastLiteralEndOffset > 0) && (this.contentStartOffset < 0))) {
       this.contentStartOffset = this.lastLiteralEndOffset;
     }
     final INode node = this.nodeModelAccess.nodeForFeature(object, XbasePackage.Literals.XSTRING_LITERAL__VALUE);
@@ -279,13 +273,13 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
               char _charAt = text.charAt((i).intValue());
               boolean _isWhitespace = Character.isWhitespace(_charAt);
               boolean _not = (!_isWhitespace);
-              _or = ((v).booleanValue() || _not);
+              _or = _not;
             }
             return Boolean.valueOf(_or);
           }
         };
         Boolean _fold = IterableExtensions.<Integer, Boolean>fold(_upTo, Boolean.valueOf(false), _function);
-        _and = (_greaterThan && (_fold).booleanValue());
+        _and = (_fold).booleanValue();
       }
       if (_and) {
         this.startContent();

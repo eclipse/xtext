@@ -17,7 +17,7 @@ public class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuild
     } else {
       String _className = this.getClassName();
       boolean _notEquals = (!Objects.equal(_className, null));
-      _and = (_isValid && _notEquals);
+      _and = _notEquals;
     }
     return _and;
   }

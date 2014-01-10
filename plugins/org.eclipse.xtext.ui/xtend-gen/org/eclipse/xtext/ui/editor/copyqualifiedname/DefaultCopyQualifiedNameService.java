@@ -57,7 +57,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
       } else {
         int _size = it.size();
         boolean _equals_1 = (_size == 0);
-        _or = (_equals || _equals_1);
+        _or = _equals_1;
       }
       if (_or) {
         return "";

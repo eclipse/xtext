@@ -34,7 +34,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
     } else {
       JvmType _type_1 = it.getType();
       boolean _eIsProxy = _type_1.eIsProxy();
-      _or = (_equals || _eIsProxy);
+      _or = _eIsProxy;
     }
     return Boolean.valueOf(_or);
   }
@@ -52,7 +52,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
         }
       };
       boolean _exists = IterableExtensions.<JvmTypeReference>exists(_references, _function);
-      _or = ((_doVisitTypeReference).booleanValue() || _exists);
+      _or = _exists;
     }
     return Boolean.valueOf(_or);
   }
@@ -70,7 +70,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
         }
       };
       boolean _exists = IterableExtensions.<JvmTypeReference>exists(_arguments, _function);
-      _or = ((_doVisitTypeReference).booleanValue() || _exists);
+      _or = _exists;
     }
     return Boolean.valueOf(_or);
   }

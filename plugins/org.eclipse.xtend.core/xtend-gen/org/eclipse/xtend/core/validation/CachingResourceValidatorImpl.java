@@ -33,7 +33,7 @@ public class CachingResourceValidatorImpl extends ResourceValidatorImpl {
               _and = false;
             } else {
               boolean _isCanceled = mon.isCanceled();
-              _and = (_notEquals && _isCanceled);
+              _and = _isCanceled;
             }
             if (_and) {
               throw new OperationCanceledException();

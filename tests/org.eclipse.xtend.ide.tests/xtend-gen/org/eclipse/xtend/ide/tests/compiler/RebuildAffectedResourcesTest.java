@@ -320,7 +320,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
         } else {
           String _message = MarkerUtilities.getMessage(iMarker);
           boolean _contains = _message.contains(msgPart);
-          _and = (_equals && _contains);
+          _and = _contains;
         }
         if (_and) {
           return;

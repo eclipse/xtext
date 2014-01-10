@@ -83,7 +83,7 @@ public class ConstantExpressionValidator {
     } else {
       JvmTypeReference _type_1 = expression.getType();
       boolean _is = this._typeReferences.is(_type_1, String.class);
-      _or = (_isPrimitive || _is);
+      _or = _is;
     }
     return _or;
   }
@@ -101,7 +101,7 @@ public class ConstantExpressionValidator {
           _and = false;
         } else {
           boolean _isFinal = ((JvmField)feature).isFinal();
-          _and = (_isStatic && _isFinal);
+          _and = _isFinal;
         }
         return _and;
       }
@@ -133,7 +133,7 @@ public class ConstantExpressionValidator {
               EList<Boolean> _values = it.getValues();
               Boolean _head = IterableExtensions.<Boolean>head(_values);
               boolean _booleanValue = _head.booleanValue();
-              _and = (_equals && _booleanValue);
+              _and = _booleanValue;
             }
             return Boolean.valueOf(_and);
           }
@@ -161,7 +161,7 @@ public class ConstantExpressionValidator {
               }
             };
             boolean _forall = IterableExtensions.<XExpression>forall(_actualArguments, _function_1);
-            _and = (receiverConstant && _forall);
+            _and = _forall;
           }
           return _and;
         }

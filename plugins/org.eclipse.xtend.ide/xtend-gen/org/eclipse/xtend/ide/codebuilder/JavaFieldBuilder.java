@@ -26,14 +26,14 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuild
     } else {
       String _fieldName = this.getFieldName();
       boolean _notEquals = (!Objects.equal(_fieldName, null));
-      _and_1 = (_isValid && _notEquals);
+      _and_1 = _notEquals;
     }
     if (!_and_1) {
       _and = false;
     } else {
       LightweightTypeReference _fieldType = this.getFieldType();
       boolean _notEquals_1 = (!Objects.equal(_fieldType, null));
-      _and = (_and_1 && _notEquals_1);
+      _and = _notEquals_1;
     }
     return _and;
   }

@@ -43,9 +43,9 @@ public class HiddenLeafs {
       } else {
         List<LeafInfo> _leafs_2 = this.getLeafs();
         LeafInfo _head = IterableExtensions.<LeafInfo>head(_leafs_2);
-        _and = (_equals && (_head instanceof WhitespaceInfo));
+        _and = (_head instanceof WhitespaceInfo);
       }
-      _or = (_isEmpty || _and);
+      _or = _and;
     }
     return _or;
   }

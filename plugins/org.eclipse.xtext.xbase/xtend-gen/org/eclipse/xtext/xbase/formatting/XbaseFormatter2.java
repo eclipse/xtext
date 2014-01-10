@@ -105,7 +105,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _elvis = _nodeForKeyword_1;
     } else {
       ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(literal, "{");
-      _elvis = ObjectExtensions.<ILeafNode>operator_elvis(_nodeForKeyword_1, _nodeForKeyword_2);
+      _elvis = _nodeForKeyword_2;
     }
     final ILeafNode open = _elvis;
     ILeafNode _elvis_1 = null;
@@ -114,7 +114,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _elvis_1 = _nodeForKeyword_3;
     } else {
       ILeafNode _nodeForKeyword_4 = this._nodeModelAccess.nodeForKeyword(literal, "}");
-      _elvis_1 = ObjectExtensions.<ILeafNode>operator_elvis(_nodeForKeyword_3, _nodeForKeyword_4);
+      _elvis_1 = _nodeForKeyword_4;
     }
     final ILeafNode close = _elvis_1;
     EList<XExpression> _elements = literal.getElements();
@@ -664,7 +664,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         } else {
           String _text = n.getText();
           boolean _equals = Objects.equal(_text, "::");
-          _and = ((_grammarElement instanceof Keyword) && _equals);
+          _and = _equals;
         }
         if (_and) {
           final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
@@ -699,7 +699,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _or = true;
     } else {
       boolean _contains = lookahead.contains("\n");
-      _or = (_equals || _contains);
+      _or = _contains;
     }
     if (_or) {
       return false;
@@ -900,7 +900,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
           XbaseGrammarAccess.XFeatureCallElements _xFeatureCallAccess = this._xbaseGrammarAccess.getXFeatureCallAccess();
           RuleCall _featureCallArgumentsXClosureParserRuleCall_4_0 = _xFeatureCallAccess.getFeatureCallArgumentsXClosureParserRuleCall_4_0();
           boolean _equals_1 = Objects.equal(grammarElement, _featureCallArgumentsXClosureParserRuleCall_4_0);
-          _or_1 = (_equals || _equals_1);
+          _or_1 = _equals_1;
         }
         if (_or_1) {
           _or = true;
@@ -908,7 +908,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
           XbaseGrammarAccess.XConstructorCallElements _xConstructorCallAccess = this._xbaseGrammarAccess.getXConstructorCallAccess();
           RuleCall _argumentsXClosureParserRuleCall_5_0 = _xConstructorCallAccess.getArgumentsXClosureParserRuleCall_5_0();
           boolean _equals_2 = Objects.equal(grammarElement, _argumentsXClosureParserRuleCall_5_0);
-          _or = (_or_1 || _equals_2);
+          _or = _equals_2;
         }
         if (_or) {
           XExpression _last_2 = IterableExtensions.<XExpression>last(params);
@@ -1057,7 +1057,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         } else {
           EList<XExpression> _expressions_1 = ((XBlockExpression)block).getExpressions();
           boolean _isEachExpressionInOwnLine = this.isEachExpressionInOwnLine(_expressions_1);
-          _and = (_greaterThan && _isEachExpressionInOwnLine);
+          _and = _isEachExpressionInOwnLine;
         }
         _switchResult = _and;
       }
@@ -1244,7 +1244,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _and = false;
     } else {
       boolean _isEachExpressionInOwnLine = this.isEachExpressionInOwnLine(params);
-      _and = (_greaterThan && _isEachExpressionInOwnLine);
+      _and = _isEachExpressionInOwnLine;
     }
     return _and;
   }
@@ -1270,7 +1270,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _and = false;
     } else {
       boolean _isEachExpressionInOwnLine = this.isEachExpressionInOwnLine(params);
-      _and = (_greaterThan && _isEachExpressionInOwnLine);
+      _and = _isEachExpressionInOwnLine;
     }
     return _and;
   }
@@ -1296,7 +1296,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _and = false;
     } else {
       boolean _isEachExpressionInOwnLine = this.isEachExpressionInOwnLine(params);
-      _and = (_greaterThan && _isEachExpressionInOwnLine);
+      _and = _isEachExpressionInOwnLine;
     }
     return _and;
   }
@@ -1418,7 +1418,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
                   }
                 };
                 boolean _fitsIntoLine = format.fitsIntoLine(callOffset, callLength, _function_4);
-                _or = (_lessThan_1 || _fitsIntoLine);
+                _or = _fitsIntoLine;
               }
               if (_or) {
                 final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
@@ -1530,7 +1530,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _and = false;
     } else {
       EObject _grammarElement = node.getGrammarElement();
-      _and = (_notEquals && (_grammarElement instanceof CrossReference));
+      _and = (_grammarElement instanceof CrossReference);
     }
     if (_and) {
       EObject _grammarElement_1 = node.getGrammarElement();
@@ -1556,7 +1556,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         int _endLineNumber = textRegion.getEndLineNumber();
         _xblockexpression = ((_lineNumber != _endLineNumber));
       }
-      _and = (_notEquals && _xblockexpression);
+      _and = _xblockexpression;
     }
     return _and;
   }
@@ -1599,7 +1599,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         } else {
           XExpression _rightOperand_1 = call.getRightOperand();
           boolean _fitsIntoLine = this.fitsIntoLine(format, _rightOperand_1);
-          _or = (_isMultiline || _fitsIntoLine);
+          _or = _fitsIntoLine;
         }
         if (_or) {
           final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
@@ -1699,7 +1699,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         _newLines=_hiddenLeafsBefore.getNewLines();
       }
       boolean _greaterThan = (_newLines > 0);
-      _or_1 = (_contains || _greaterThan);
+      _or_1 = _greaterThan;
     }
     if (_or_1) {
       _or = true;
@@ -1716,7 +1716,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       if (_trim_1!=null) {
         _contains_1=_trim_1.contains("\n");
       }
-      _or = (_or_1 || _contains_1);
+      _or = _contains_1;
     }
     final boolean multiline = _or;
     INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, XbasePackage.Literals.XIF_EXPRESSION__IF);
@@ -1732,7 +1732,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if ((_then_1 instanceof XBlockExpression)) {
       _or_2 = true;
     } else {
-      _or_2 = ((_then_1 instanceof XBlockExpression) || multiline);
+      _or_2 = multiline;
     }
     if (_or_2) {
       ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(expr, "if");
@@ -1839,7 +1839,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       if ((_else_5 instanceof XIfExpression)) {
         _or_3 = true;
       } else {
-        _or_3 = ((_else_5 instanceof XIfExpression) || (!multiline));
+        _or_3 = (!multiline);
       }
       if (_or_3) {
         final Procedure1<FormattingDataInit> _function_13 = new Procedure1<FormattingDataInit>() {
@@ -2111,7 +2111,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _and = false;
     } else {
       boolean _notEquals_1 = (!Objects.equal(close, null));
-      _and = (_notEquals && _notEquals_1);
+      _and = _notEquals_1;
     }
     if (_and) {
       EList<XExpression> _expressions = expr.getExpressions();
@@ -2159,7 +2159,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
               _or = true;
             } else {
               boolean _notEquals_3 = (!Objects.equal(close, null));
-              _or = (_notEquals_2 || _notEquals_3);
+              _or = _notEquals_3;
             }
             if (_or) {
               final INode childNode = this._nodeModelAccess.nodeForEObject(child);
@@ -2342,7 +2342,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         } else {
           XExpression _finallyExpression = expr.getFinallyExpression();
           boolean _notEquals_1 = (!Objects.equal(_finallyExpression, null));
-          _or = (_notEquals || _notEquals_1);
+          _or = _notEquals_1;
         }
         if (_or) {
           XExpression _expression_3 = cc.getExpression();
@@ -2517,7 +2517,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       String _trim = _text.trim();
       boolean _contains = _trim.contains("\n");
       boolean _not = (!_contains);
-      _and = ((!containsBlockExpr) && _not);
+      _and = _not;
     }
     final boolean switchSL = _and;
     boolean _and_1 = false;
@@ -2536,7 +2536,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       };
       boolean _exists = IterableExtensions.<XCasePart>exists(_cases_1, _function_1);
       boolean _not_1 = (!_exists);
-      _and_2 = ((!containsBlockExpr) && _not_1);
+      _and_2 = _not_1;
     }
     if (!_and_2) {
       _and_1 = false;
@@ -2555,7 +2555,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         _contains_1=_text_1.contains("\n");
       }
       boolean _not_2 = (!_contains_1);
-      _and_1 = (_and_2 && _not_2);
+      _and_1 = _not_2;
     }
     final boolean caseSL = _and_1;
     final ILeafNode open = this._nodeModelAccess.nodeForKeyword(expr, "{");
@@ -2742,7 +2742,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
                 EList<XCasePart> _cases_5 = expr.getCases();
                 XCasePart _last = IterableExtensions.<XCasePart>last(_cases_5);
                 boolean _notEquals_3 = (!Objects.equal(c_2, _last));
-                _or = (_notEquals_2 || _notEquals_3);
+                _or = _notEquals_3;
               }
               if (_or) {
                 final Procedure1<FormattingDataInit> _function_16 = new Procedure1<FormattingDataInit>() {
@@ -2780,7 +2780,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
                 EList<XCasePart> _cases_6 = expr.getCases();
                 XCasePart _last_1 = IterableExtensions.<XCasePart>last(_cases_6);
                 boolean _notEquals_5 = (!Objects.equal(c_2, _last_1));
-                _or_1 = (_notEquals_4 || _notEquals_5);
+                _or_1 = _notEquals_5;
               }
               if (_or_1) {
                 final Procedure1<FormattingDataInit> _function_19 = new Procedure1<FormattingDataInit>() {
@@ -2864,7 +2864,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         } else {
           XExpression _case = c_3.getCase();
           boolean _notEquals_4 = (!Objects.equal(_case, null));
-          _and_3 = (_notEquals_3 && _notEquals_4);
+          _and_3 = _notEquals_4;
         }
         if (_and_3) {
           final INode typenode = this._nodeModelAccess.nodeForFeature(c_3, XbasePackage.Literals.XCASE_PART__TYPE_GUARD);
@@ -2962,7 +2962,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       _and = false;
     } else {
       boolean _isEmpty_1 = children.isEmpty();
-      _and = (_isEmpty && _isEmpty_1);
+      _and = _isEmpty_1;
     }
     if (_and) {
       HiddenLeafs _hiddenLeafsAfter = this._hiddenLeafAccess.getHiddenLeafsAfter(open);
@@ -3052,7 +3052,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
           if (semicolon != null) {
             _elvis = semicolon;
           } else {
-            _elvis = ObjectExtensions.<INode>operator_elvis(semicolon, node);
+            _elvis = node;
           }
           final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {

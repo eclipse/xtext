@@ -135,7 +135,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
               } else {
                 boolean _isPackageFragment = ((XAbstractFeatureCall)it).isPackageFragment();
                 boolean _not_1 = (!_isPackageFragment);
-                _and_1 = (_not && _not_1);
+                _and_1 = _not_1;
               }
               if (!_and_1) {
                 _and = false;
@@ -162,9 +162,9 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
                   if (!_matched_1) {
                     _switchResult_1 = false;
                   }
-                  _or = (_not_2 || _switchResult_1);
+                  _or = _switchResult_1;
                 }
-                _and = (_and_1 && _or);
+                _and = _or;
               }
               _switchResult = _and;
             }
@@ -184,7 +184,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
                 EList<JvmTypeParameter> _typeParameters = ((JvmGenericType) _declaringType).getTypeParameters();
                 boolean _isEmpty_1 = _typeParameters.isEmpty();
                 boolean _not_1 = (!_isEmpty_1);
-                _or = (_not || _not_1);
+                _or = _not_1;
               }
               _switchResult = _or;
             }

@@ -83,7 +83,7 @@ public class ImportingStringConcatenation extends StringConcatenation {
       String _lineDelimiter = this.getLineDelimiter();
       String _last = IterableExtensions.<String>last(result);
       boolean _equals = Objects.equal(_lineDelimiter, _last);
-      _and = (_greaterEqualsThan && _equals);
+      _and = _equals;
     }
     if (_and) {
       int _size_1 = result.size();

@@ -130,7 +130,7 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
                 boolean _isArray_2 = lhsType.isArray();
                 boolean _isArray_3 = rhsType.isArray();
                 boolean _equals_1 = (_isArray_2 == _isArray_3);
-                _or = (_equals || _equals_1);
+                _or = _equals_1;
               }
               if (_or) {
                 String _string = superType.toString();

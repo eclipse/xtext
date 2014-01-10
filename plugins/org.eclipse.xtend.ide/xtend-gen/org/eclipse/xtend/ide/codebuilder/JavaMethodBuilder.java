@@ -27,7 +27,7 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBui
     } else {
       String _methodName = this.getMethodName();
       boolean _notEquals = (!Objects.equal(_methodName, null));
-      _and = (_isValid && _notEquals);
+      _and = _notEquals;
     }
     return _and;
   }

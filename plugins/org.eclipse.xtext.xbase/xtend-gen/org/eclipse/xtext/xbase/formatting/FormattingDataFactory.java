@@ -28,7 +28,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -54,7 +53,7 @@ public class FormattingDataFactory {
         if (it.newLines != null) {
           _elvis = it.newLines;
         } else {
-          _elvis = ObjectExtensions.<Integer>operator_elvis(it.newLines, Integer.valueOf(0));
+          _elvis = Integer.valueOf(0);
         }
         final int newLines2 = (_elvis).intValue();
         boolean _or = false;
@@ -64,7 +63,7 @@ public class FormattingDataFactory {
           _and = false;
         } else {
           boolean _equals_1 = Objects.equal(it.newLines, null);
-          _and = (_equals && _equals_1);
+          _and = _equals_1;
         }
         if (_and) {
           _or = true;
@@ -80,11 +79,11 @@ public class FormattingDataFactory {
               _or_1 = true;
             } else {
               boolean _equals_3 = Objects.equal(it.space, "");
-              _or_1 = ((newLines2 == 0) || _equals_3);
+              _or_1 = _equals_3;
             }
-            _and_1 = (_equals_2 && _or_1);
+            _and_1 = _or_1;
           }
-          _or = (_and || _and_1);
+          _or = _and_1;
         }
         if (_or) {
           boolean _isDebugConflicts = doc.isDebugConflicts();
@@ -138,7 +137,7 @@ public class FormattingDataFactory {
           if (preserve) {
             _or = true;
           } else {
-            _or = (preserve || newLine);
+            _or = newLine;
           }
           if (_or) {
             _xifexpression_1 = 1;
@@ -277,7 +276,7 @@ public class FormattingDataFactory {
                 _isMultiline=_trailingComment_1.isMultiline();
               }
               boolean _not = (!_isMultiline);
-              _and = (_isTrailing && _not);
+              _and = _not;
             }
             if (_and) {
               String _xifexpression = null;
@@ -315,7 +314,7 @@ public class FormattingDataFactory {
                 } else {
                   int _offset_2 = ((WhitespaceInfo)leaf).getOffset();
                   boolean _greaterThan = (_offset_2 > 0);
-                  _and_2 = ((newLines < 1) && _greaterThan);
+                  _and_2 = _greaterThan;
                 }
                 if (!_and_2) {
                   _and_1 = false;
@@ -334,9 +333,9 @@ public class FormattingDataFactory {
                     if (_trailingComment_2!=null) {
                       _isMultiline_2=_trailingComment_2.isMultiline();
                     }
-                    _or = (_isMultiline_1 || _isMultiline_2);
+                    _or = _isMultiline_2;
                   }
-                  _and_1 = (_and_2 && _or);
+                  _and_1 = _or;
                 }
                 if (_and_1) {
                   newLines = 1;
@@ -359,7 +358,7 @@ public class FormattingDataFactory {
                 if (!_not_1) {
                   _and_3 = false;
                 } else {
-                  _and_3 = (_not_1 && (newLines == 0));
+                  _and_3 = (newLines == 0);
                 }
                 if (_and_3) {
                   int _offset_3 = ((WhitespaceInfo)leaf).getOffset();
@@ -393,7 +392,7 @@ public class FormattingDataFactory {
                     List<LeafInfo> _leafs_1 = leafs.getLeafs();
                     LeafInfo _last = IterableExtensions.<LeafInfo>last(_leafs_1);
                     boolean _notEquals = (!Objects.equal(_last, leaf));
-                    _and_4 = (equalIndentationChange && _notEquals);
+                    _and_4 = _notEquals;
                   }
                   if (_and_4) {
                     int _offset_5 = ((WhitespaceInfo)leaf).getOffset();
@@ -445,7 +444,7 @@ public class FormattingDataFactory {
                   List<LeafInfo> _leafs_2 = leafs.getLeafs();
                   LeafInfo _last_1 = IterableExtensions.<LeafInfo>last(_leafs_2);
                   boolean _notEquals_1 = (!Objects.equal(_last_1, leaf));
-                  _and_5 = (equalIndentationChange && _notEquals_1);
+                  _and_5 = _notEquals_1;
                 }
                 if (_and_5) {
                   int _offset_7 = ((WhitespaceInfo)leaf).getOffset();
@@ -520,7 +519,7 @@ public class FormattingDataFactory {
               _elvis = _apply;
             } else {
               List<FormattingData> _emptyList = CollectionLiterals.<FormattingData>emptyList();
-              _elvis = ObjectExtensions.<Iterable<FormattingData>>operator_elvis(_apply, _emptyList);
+              _elvis = _emptyList;
             }
             Iterables.<FormattingData>addAll(result, _elvis);
             Iterable<FormattingData> _elvis_1 = null;
@@ -534,7 +533,7 @@ public class FormattingDataFactory {
               _elvis_1 = _apply_1;
             } else {
               List<FormattingData> _emptyList_1 = CollectionLiterals.<FormattingData>emptyList();
-              _elvis_1 = ObjectExtensions.<Iterable<FormattingData>>operator_elvis(_apply_1, _emptyList_1);
+              _elvis_1 = _emptyList_1;
             }
             Iterables.<FormattingData>addAll(result, _elvis_1);
           }
@@ -565,7 +564,7 @@ public class FormattingDataFactory {
               _elvis = _apply;
             } else {
               List<FormattingData> _emptyList = CollectionLiterals.<FormattingData>emptyList();
-              _elvis = ObjectExtensions.<Iterable<FormattingData>>operator_elvis(_apply, _emptyList);
+              _elvis = _emptyList;
             }
             Iterables.<FormattingData>addAll(result, _elvis);
             Iterable<FormattingData> _elvis_1 = null;
@@ -579,7 +578,7 @@ public class FormattingDataFactory {
               _elvis_1 = _apply_1;
             } else {
               List<FormattingData> _emptyList_1 = CollectionLiterals.<FormattingData>emptyList();
-              _elvis_1 = ObjectExtensions.<Iterable<FormattingData>>operator_elvis(_apply_1, _emptyList_1);
+              _elvis_1 = _emptyList_1;
             }
             Iterables.<FormattingData>addAll(result, _elvis_1);
           }

@@ -96,15 +96,15 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
         _or = true;
       } else {
         LightweightTypeReference _type_1 = this.getType();
-        _or = (_not || (_type_1 instanceof ArrayTypeReference));
+        _or = (_type_1 instanceof ArrayTypeReference);
       }
-      _and_1 = (_notEquals && _or);
+      _and_1 = _or;
     }
     if (!_and_1) {
       _and = false;
     } else {
       boolean _isValid = super.isValid();
-      _and = (_and_1 && _isValid);
+      _and = _isValid;
     }
     return _and;
   }

@@ -32,7 +32,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -545,7 +544,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       if (type != null) {
         _elvis = type;
       } else {
-        _elvis = ObjectExtensions.<String>operator_elvis(type, "void");
+        _elvis = "void";
       }
       String _plus = ("def " + _elvis);
       String _plus_1 = (_plus + " testFoo() { ");

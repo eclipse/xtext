@@ -279,7 +279,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         _or = true;
       } else {
         boolean _isBooleanAssignment = GrammarUtil.isBooleanAssignment(ass);
-        _or = (_equals || _isBooleanAssignment);
+        _or = _isBooleanAssignment;
       }
       _xblockexpression = (_or);
     }
@@ -411,7 +411,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           String _trim = _text.trim();
           int _length = _trim.length();
           boolean _equals = (_length == 0);
-          _or = (_not || _equals);
+          _or = _equals;
         }
         if (_or) {
           _matched=true;

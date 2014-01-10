@@ -104,7 +104,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
             if (!(_head).booleanValue()) {
               _and = false;
             } else {
-              _and = ((_head).booleanValue() && (e instanceof IResourceDescription.CoarseGrainedEvent));
+              _and = (e instanceof IResourceDescription.CoarseGrainedEvent);
             }
             if (_and) {
               listenToEvent.set(0, Boolean.valueOf(false));
@@ -122,7 +122,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
         if (!(_head).booleanValue()) {
           _and = false;
         } else {
-          _and = ((_head).booleanValue() && (attempt < maxAttempts));
+          _and = (attempt < maxAttempts);
         }
         boolean _while = _and;
         while (_while) {
@@ -135,7 +135,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
           if (!(_head_1).booleanValue()) {
             _and_1 = false;
           } else {
-            _and_1 = ((_head_1).booleanValue() && (attempt < maxAttempts));
+            _and_1 = (attempt < maxAttempts);
           }
           _while = _and_1;
         }
@@ -172,7 +172,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
         if (!(_head).booleanValue()) {
           _and = false;
         } else {
-          _and = ((_head).booleanValue() && (attempt < maxAttempts));
+          _and = (attempt < maxAttempts);
         }
         boolean _while = _and;
         while (_while) {
@@ -185,7 +185,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
           if (!(_head_1).booleanValue()) {
             _and_1 = false;
           } else {
-            _and_1 = ((_head_1).booleanValue() && (attempt < maxAttempts));
+            _and_1 = (attempt < maxAttempts);
           }
           _while = _and_1;
         }

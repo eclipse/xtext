@@ -58,7 +58,7 @@ public class ValidatorNaming extends Naming {
         _and = false;
       } else {
         boolean _notEquals = (!Objects.equal(superGrammar, null));
-        _and = (isInheritImplementation && _notEquals);
+        _and = _notEquals;
       }
       if (_and) {
         _xifexpression = this.getValidatorName(superGrammar);

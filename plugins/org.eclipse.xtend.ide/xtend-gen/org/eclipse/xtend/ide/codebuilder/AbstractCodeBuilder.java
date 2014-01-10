@@ -104,28 +104,28 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     } else {
       boolean _isReadOnly = javaElement.isReadOnly();
       boolean _not = (!_isReadOnly);
-      _or = (_equals || _not);
+      _or = _not;
     }
     if (!_or) {
       _and_2 = false;
     } else {
       Object _ownerSource = this.getOwnerSource();
       boolean _notEquals = (!Objects.equal(_ownerSource, null));
-      _and_2 = (_or && _notEquals);
+      _and_2 = _notEquals;
     }
     if (!_and_2) {
       _and_1 = false;
     } else {
       JvmDeclaredType _owner_1 = this.getOwner();
       boolean _notEquals_1 = (!Objects.equal(_owner_1, null));
-      _and_1 = (_and_2 && _notEquals_1);
+      _and_1 = _notEquals_1;
     }
     if (!_and_1) {
       _and = false;
     } else {
       EObject _context = this.getContext();
       boolean _notEquals_2 = (!Objects.equal(_context, null));
-      _and = (_and_1 && _notEquals_2);
+      _and = _notEquals_2;
     }
     return _and;
   }

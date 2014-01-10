@@ -71,7 +71,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
         if ((it instanceof XtextSyntaxDiagnostic)) {
           _or = true;
         } else {
-          _or = ((it instanceof XtextSyntaxDiagnostic) || (it instanceof XtextLinkingDiagnostic));
+          _or = (it instanceof XtextLinkingDiagnostic);
         }
         return Boolean.valueOf(_or);
       }

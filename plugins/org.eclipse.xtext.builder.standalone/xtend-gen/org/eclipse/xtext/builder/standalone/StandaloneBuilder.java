@@ -236,7 +236,7 @@ public class StandaloneBuilder {
     if (!_isFailOnValidationError) {
       _and = false;
     } else {
-      _and = (_isFailOnValidationError && (!isErrorFree));
+      _and = (!isErrorFree);
     }
     if (_and) {
       return isErrorFree;
@@ -273,18 +273,15 @@ public class StandaloneBuilder {
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_absolutePath_1);
     Iterable<String> _plus_1 = Iterables.<String>concat(_sourceDirs, _newArrayList);
     final IJavaCompiler.CompilationResult result = this.compiler.compile(_plus_1, stubsClasses);
-    boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(result,IJavaCompiler.CompilationResult.SKIPPED)) {
-        _matched=true;
+    switch (result) {
+      case SKIPPED:
         StandaloneBuilder.LOG.info("Nothing to compile. Stubs compilation was skipped.");
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(result,IJavaCompiler.CompilationResult.FAILED)) {
-        _matched=true;
+        break;
+      case FAILED:
         StandaloneBuilder.LOG.debug("Stubs compilation finished with errors.");
-      }
+        break;
+      default:
+        break;
     }
     return stubsClasses.getAbsolutePath();
   }
@@ -396,7 +393,7 @@ public class StandaloneBuilder {
       } else {
         boolean _exists = file.exists();
         boolean _not_1 = (!_exists);
-        _and = (_not && _not_1);
+        _and = _not_1;
       }
       if (_and) {
         String _absolutePath = file.getAbsolutePath();

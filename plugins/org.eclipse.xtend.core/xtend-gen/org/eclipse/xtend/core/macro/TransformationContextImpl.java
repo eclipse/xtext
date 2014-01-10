@@ -65,7 +65,7 @@ public class TransformationContextImpl implements TransformationContext {
     } else {
       boolean _isGenerated = this.isGenerated(element);
       boolean _not_1 = (!_isGenerated);
-      _and = (_not && _not_1);
+      _and = _not_1;
     }
     return _and;
   }

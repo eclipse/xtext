@@ -144,7 +144,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         if (computedSuperType!=null) {
           _isPrimitive=computedSuperType.isPrimitive();
         }
-        _or = (_isPrimitiveVoid || _isPrimitive);
+        _or = _isPrimitive;
       }
       boolean _not_1 = (!_or);
       if (_not_1) {
@@ -257,7 +257,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
     if (_replace_5 != null) {
       _elvis = _replace_5;
     } else {
-      _elvis = ObjectExtensions.<String>operator_elvis(_replace_5, "Object");
+      _elvis = "Object";
     }
     return _elvis;
   }

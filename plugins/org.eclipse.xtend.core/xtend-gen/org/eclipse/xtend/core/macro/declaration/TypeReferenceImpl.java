@@ -174,7 +174,7 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
         _and = false;
       } else {
         boolean _isAssignableFrom_1 = this.isAssignableFrom(((TypeReference)obj));
-        _and = (_isAssignableFrom && _isAssignableFrom_1);
+        _and = _isAssignableFrom_1;
       }
       return _and;
     }

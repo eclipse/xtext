@@ -62,21 +62,21 @@ public class JvmTypeExtensions {
     } else {
       XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(it);
       boolean _equals = Objects.equal(_associatedExpression, null);
-      _and_3 = (_isEmpty && _equals);
+      _and_3 = _equals;
     }
     if (!_and_3) {
       _and_2 = false;
     } else {
       Procedure1<? super ITreeAppendable> _compilationStrategy = this.getCompilationStrategy(it);
       boolean _equals_1 = Objects.equal(_compilationStrategy, null);
-      _and_2 = (_and_3 && _equals_1);
+      _and_2 = _equals_1;
     }
     if (!_and_2) {
       _and_1 = false;
     } else {
       StringConcatenationClient _compilationTemplate = this.getCompilationTemplate(it);
       boolean _equals_2 = Objects.equal(_compilationTemplate, null);
-      _and_1 = (_and_2 && _equals_2);
+      _and_1 = _equals_2;
     }
     if (!_and_1) {
       _and = false;
@@ -86,7 +86,7 @@ public class JvmTypeExtensions {
       Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
       int _size = IterableExtensions.size(_filter);
       boolean _equals_3 = (_size == 1);
-      _and = (_and_1 && _equals_3);
+      _and = _equals_3;
     }
     return _and;
   }
