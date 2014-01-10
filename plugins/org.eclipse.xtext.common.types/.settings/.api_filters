@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.common.types" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Added JvmField.isConstant" id="923795461">
+            <message_arguments>
+                <message_argument value="2.5.1"/>
+                <message_argument value="2.5.0"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added JvmField.isConstant" id="924844039">
+            <message_arguments>
+                <message_argument value="2.5.1"/>
+                <message_argument value="2.5.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java" type="org.eclipse.xtext.common.types.JvmTypeReference">
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ITypeReferenceVisitor&lt;Result&gt;"/>
+                <message_argument value="JvmTypeReference"/>
+                <message_argument value="accept(ITypeReferenceVisitor&lt;Result&gt;)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage">
+        <filter id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_ENUMERATION_LITERAL_FEATURE_COUNT"/>
+                <message_argument value="10"/>
+            </message_arguments>
+        </filter>
+        <filter id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_FIELD_FEATURE_COUNT"/>
+                <message_argument value="10"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
