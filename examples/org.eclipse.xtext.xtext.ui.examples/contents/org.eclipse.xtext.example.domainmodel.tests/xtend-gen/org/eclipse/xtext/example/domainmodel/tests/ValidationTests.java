@@ -291,8 +291,7 @@ public class ValidationTests {
   
   protected DomainModel parse(final CharSequence modelAsText) {
     try {
-      DomainModel _parse = this.parseHelper.parse(modelAsText);
-      return _parse;
+      return this.parseHelper.parse(modelAsText);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

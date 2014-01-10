@@ -68,8 +68,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
       {
         final DomainModel parse = this.parseHelper.parse((("entity Foo { op doStuff() : Object { " + expression) + " } } "));
         this.validationHelper.assertNoErrors(parse);
-        InMemoryFileSystemAccess _inMemoryFileSystemAccess = new InMemoryFileSystemAccess();
-        final InMemoryFileSystemAccess fsa = _inMemoryFileSystemAccess;
+        final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
         Resource _eResource = parse.eResource();
         this.generator.doGenerate(_eResource, fsa);
         Map<String,CharSequence> _files = fsa.getFiles();
@@ -80,8 +79,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
         final Class<? extends Object> clazz = this.javaCompiler.compileToClass("Foo", _string);
         final Object foo = clazz.newInstance();
         final Method method = clazz.getDeclaredMethod("doStuff");
-        Object _invoke = method.invoke(foo);
-        _xblockexpression = (_invoke);
+        _xblockexpression = (method.invoke(foo));
       }
       return _xblockexpression;
     } catch (Throwable _e) {

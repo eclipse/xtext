@@ -51,8 +51,7 @@ public class ArithmeticsScopeProvider extends AbstractDeclarativeScopeProvider {
           return _and;
         }
       };
-      FilteringScope _filteringScope = new FilteringScope(scope, _function);
-      _xblockexpression = (_filteringScope);
+      _xblockexpression = (new FilteringScope(scope, _function));
     }
     return _xblockexpression;
   }

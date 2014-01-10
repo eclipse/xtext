@@ -257,8 +257,7 @@ public class StatemachineGenerator implements IGenerator {
     final Function1<Transition,String> _function = new Function1<Transition,String>() {
       public String apply(final Transition t) {
         Event _event = t.getEvent();
-        String _name = _event.getName();
-        return _name;
+        return _event.getName();
       }
     };
     List<String> _map = ListExtensions.<Transition, String>map(_transitions, _function);

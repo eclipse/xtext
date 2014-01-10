@@ -24,11 +24,9 @@ public class ArithmeticsDescriptionLabelProvider extends DefaultDescriptionLabel
     Image _xifexpression = null;
     if ((element instanceof IEObjectDescription)) {
       EObject _eObjectOrProxy = ((IEObjectDescription) element).getEObjectOrProxy();
-      Image _image = this.labelProvider.getImage(_eObjectOrProxy);
-      _xifexpression = _image;
+      _xifexpression = this.labelProvider.getImage(_eObjectOrProxy);
     } else {
-      Image _image_1 = super.getImage(element);
-      _xifexpression = _image_1;
+      _xifexpression = super.getImage(element);
     }
     return _xifexpression;
   }

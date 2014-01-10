@@ -42,8 +42,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
         final String initializer = this.getInitializerAsString(field);
         MessageFormat _xtrycatchfinallyexpression = null;
         try {
-          MessageFormat _messageFormat = new MessageFormat(initializer);
-          _xtrycatchfinallyexpression = _messageFormat;
+          _xtrycatchfinallyexpression = new MessageFormat(initializer);
         } catch (final Throwable _t) {
           if (_t instanceof IllegalArgumentException) {
             final IllegalArgumentException e = (IllegalArgumentException)_t;
@@ -53,8 +52,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
               String _message = e.getMessage();
               String _plus = ("invalid format : " + _message);
               context.addError(_initializer, _plus);
-              MessageFormat _messageFormat_1 = new MessageFormat("");
-              _xblockexpression = (_messageFormat_1);
+              _xblockexpression = (new MessageFormat(""));
             }
             _xtrycatchfinallyexpression = _xblockexpression;
           } else {
@@ -81,20 +79,17 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
                 if (!_matched) {
                   if (format instanceof NumberFormat) {
                     _matched=true;
-                    TypeReference _primitiveInt = context.getPrimitiveInt();
-                    _switchResult = _primitiveInt;
+                    _switchResult = context.getPrimitiveInt();
                   }
                 }
                 if (!_matched) {
                   if (format instanceof DateFormat) {
                     _matched=true;
-                    TypeReference _newTypeReference = context.newTypeReference(Date.class);
-                    _switchResult = _newTypeReference;
+                    _switchResult = context.newTypeReference(Date.class);
                   }
                 }
                 if (!_matched) {
-                  TypeReference _string = context.getString();
-                  _switchResult = _string;
+                  _switchResult = context.getString();
                 }
                 it.addParameter(("arg" + idx), _switchResult);
               }
@@ -128,8 +123,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
                     _builder.append(".format(msg,");
                     final Function1<MutableParameterDeclaration,String> _function = new Function1<MutableParameterDeclaration,String>() {
                       public String apply(final MutableParameterDeclaration it) {
-                        String _simpleName = it.getSimpleName();
-                        return _simpleName;
+                        return it.getSimpleName();
                       }
                     };
                     Iterable<String> _map = IterableExtensions.map(params, _function);

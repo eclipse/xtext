@@ -34,8 +34,7 @@ public class ExtractProcessor extends AbstractClassProcessor {
   
   public String getInterfaceName(final ClassDeclaration annotatedClass) {
     String _qualifiedName = annotatedClass.getQualifiedName();
-    String _plus = (_qualifiedName + "Interface");
-    return _plus;
+    return (_qualifiedName + "Interface");
   }
   
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {

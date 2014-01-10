@@ -34,13 +34,11 @@ public class ArithmeticsLabelProvider extends DefaultEObjectLabelProvider {
     EList<DeclaredParameter> _args = ele.getArgs();
     final Function1<DeclaredParameter,String> _function = new Function1<DeclaredParameter,String>() {
       public String apply(final DeclaredParameter it) {
-        String _name = it.getName();
-        return _name;
+        return it.getName();
       }
     };
     String _join = IterableExtensions.<DeclaredParameter>join(_args, "(", ",", ")", _function);
-    String _plus = (_name + _join);
-    return _plus;
+    return (_name + _join);
   }
   
   public String image(final Module ele) {

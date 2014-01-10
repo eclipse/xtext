@@ -22,7 +22,6 @@ public class StatemachineLabelProvider extends DefaultEObjectLabelProvider {
   
   public String text(final State state) {
     String _name = state.getName();
-    String _plus = ("state " + _name);
-    return _plus;
+    return ("state " + _name);
   }
 }
