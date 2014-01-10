@@ -7,20 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.macro.declaration
 
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
-import org.eclipse.xtext.common.types.JvmAnnotationReference
-import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
-import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException
-import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
-import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
-import org.eclipse.xtext.EcoreUtil2
-
-import static org.eclipse.xtend.core.macro.ConditionUtils.*
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.expression.Expression
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.common.types.JvmAnnotationReference
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
+import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
+
+import static org.eclipse.xtend.core.macro.ConditionUtils.*
 
 class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> implements MutableAnnotationReference {
 	
