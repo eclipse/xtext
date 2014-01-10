@@ -89,6 +89,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
+import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -109,6 +110,7 @@ import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithNon
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
+import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -116,9 +118,11 @@ import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -161,6 +165,12 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject 
 	private IImportsConfiguration importsConfiguration;
+	
+	@Inject 
+	private XSwitchExpressions switchExpressions;
+	
+	@Inject
+	private SwitchConstantExpressionsInterpreter switchConstantExpressionsInterpreter; 
 	
 	protected CommonTypeComputationServices getServices() {
 		return services;
@@ -1313,6 +1323,29 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	protected boolean isHidden(INode child) {
 		return child instanceof ILeafNode && ((ILeafNode) child).isHidden();
+	}
+	
+	@Check
+	public void checkDuplicatedCases(XSwitchExpression switchExpression) {
+		if (!switchExpressions.isJavaSwitchExpression(switchExpression)) {
+			return;
+		}
+		Multimap<Object, XCasePart> duplicatedCases = HashMultimap.create();
+		for (XCasePart casePart : switchExpression.getCases()) {
+			if (!switchExpressions.isJavaCaseExpression(switchExpression, casePart)) {
+				continue;
+			}
+			Object result = switchConstantExpressionsInterpreter.evaluate(casePart.getCase());
+			duplicatedCases.put(result, casePart);
+		}
+		for (Object result : duplicatedCases.keySet()) {
+			Collection<XCasePart> cases = duplicatedCases.get(result);
+			if (cases.size() > 1) {
+				for (XCasePart casePart : cases) {
+					error("Duplicate case", casePart.getCase(), null, IssueCodes.DUPLICATE_CASE);
+				}
+			}
+		}
 	}
 	
 }

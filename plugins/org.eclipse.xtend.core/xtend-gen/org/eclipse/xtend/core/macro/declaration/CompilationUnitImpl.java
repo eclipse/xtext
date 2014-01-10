@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.CompilationContextImpl;
-import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException;
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
@@ -150,6 +149,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -366,21 +366,30 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public Visibility toVisibility(final JvmVisibility delegate) {
     Visibility _switchResult = null;
-    switch (delegate) {
-      case DEFAULT:
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(delegate,JvmVisibility.DEFAULT)) {
+        _matched=true;
         _switchResult = Visibility.DEFAULT;
-        break;
-      case PRIVATE:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(delegate,JvmVisibility.PRIVATE)) {
+        _matched=true;
         _switchResult = Visibility.PRIVATE;
-        break;
-      case PROTECTED:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(delegate,JvmVisibility.PROTECTED)) {
+        _matched=true;
         _switchResult = Visibility.PROTECTED;
-        break;
-      case PUBLIC:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(delegate,JvmVisibility.PUBLIC)) {
+        _matched=true;
         _switchResult = Visibility.PUBLIC;
-        break;
-      default:
-        break;
+      }
     }
     return _switchResult;
   }

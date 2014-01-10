@@ -20,12 +20,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException;
-import org.eclipse.xtend.core.macro.ConstantOperators;
-import org.eclipse.xtend.core.macro.Context;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
-import org.eclipse.xtend.core.macro.StackedConstantExpressionEvaluationException;
-import org.eclipse.xtend.core.macro.UnresolvableFeatureException;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
@@ -47,8 +42,6 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
@@ -67,6 +60,11 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
+import org.eclipse.xtext.xbase.interpreter.AbstractConstantExpressionsInterpreter;
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
+import org.eclipse.xtext.xbase.interpreter.Context;
+import org.eclipse.xtext.xbase.interpreter.StackedConstantExpressionEvaluationException;
+import org.eclipse.xtext.xbase.interpreter.UnresolvableFeatureException;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -89,7 +87,7 @@ import org.eclipse.xtext.xtype.XImportSection;
  * @author Sven Efftinge
  */
 @SuppressWarnings("all")
-public class ConstantExpressionsInterpreter {
+public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpreter {
   @Inject
   private ILogicalContainerProvider containerProvider;
   
@@ -99,9 +97,6 @@ public class ConstantExpressionsInterpreter {
   @Inject
   @Extension
   private NumberLiterals numberLiterals;
-  
-  @Inject
-  private ConstantOperators constantOperators;
   
   @Inject
   private IScopeProvider scopeProvider;
@@ -244,26 +239,6 @@ public class ConstantExpressionsInterpreter {
     return ((JvmType) _eObjectOrProxy);
   }
   
-  protected Object _internalEvaluate(final XExpression expression, final Context ctx) {
-    String _text = this.toText(expression);
-    String _plus = ("Not a constant expression : \'" + _text);
-    String _plus_1 = (_plus + "\'");
-    throw new ConstantExpressionEvaluationException(_plus_1, expression);
-  }
-  
-  protected Object _internalEvaluate(final XCastedExpression expression, final Context ctx) {
-    XExpression _target = expression.getTarget();
-    return this.internalEvaluate(_target, ctx);
-  }
-  
-  protected Object _internalEvaluate(final XStringLiteral it, final Context ctx) {
-    return it.getValue();
-  }
-  
-  protected Object _internalEvaluate(final XBooleanLiteral it, final Context ctx) {
-    return Boolean.valueOf(it.isIsTrue());
-  }
-  
   protected Object _internalEvaluate(final XNumberLiteral it, final Context ctx) {
     try {
       Number _xblockexpression = null;
@@ -294,10 +269,6 @@ public class ConstantExpressionsInterpreter {
     EList<String> _arrayDimensions = it.getArrayDimensions();
     int _size = _arrayDimensions.size();
     return this.toTypeReference(_type, _size);
-  }
-  
-  protected Object _internalEvaluate(final XAnnotation literal, final Context ctx) {
-    return literal;
   }
   
   protected Object _internalEvaluate(final XListLiteral it, final Context ctx) {
@@ -561,150 +532,6 @@ public class ConstantExpressionsInterpreter {
     }
   }
   
-  protected Object _internalEvaluate(final XBinaryOperation it, final Context ctx) {
-    Object _xblockexpression = null;
-    {
-      XExpression _leftOperand = it.getLeftOperand();
-      final Object left = this.internalEvaluate(_leftOperand, ctx);
-      XExpression _rightOperand = it.getRightOperand();
-      final Object right = this.internalEvaluate(_rightOperand, ctx);
-      final String op = it.getConcreteSyntaxFeatureName();
-      Object _switchResult = null;
-      boolean _matched = false;
-      if (!_matched) {
-        if (Objects.equal(op,"+")) {
-          _matched=true;
-          _switchResult = this.constantOperators.plus(left, right);
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op,"-")) {
-          _matched=true;
-          _switchResult = this.constantOperators.minus(left, right);
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op,"*")) {
-          _matched=true;
-          _switchResult = this.constantOperators.multiply(left, right);
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op,"/")) {
-          _matched=true;
-          _switchResult = this.constantOperators.divide(left, right);
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op,"%")) {
-          _matched=true;
-          _switchResult = this.constantOperators.modulo(left, right);
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op,"<")) {
-          _matched=true;
-          _switchResult = Boolean.valueOf(this.constantOperators.lessThan(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op,">")) {
-          _matched=true;
-          _switchResult = Boolean.valueOf(this.constantOperators.greaterThan(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op,"<=")) {
-          _matched=true;
-          _switchResult = Boolean.valueOf(this.constantOperators.lessEquals(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op,">=")) {
-          _matched=true;
-          _switchResult = Boolean.valueOf(this.constantOperators.greaterEquals(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op,"===")) {
-          _matched=true;
-          _switchResult = Boolean.valueOf(this.constantOperators.same(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op,"!==")) {
-          _matched=true;
-          _switchResult = Boolean.valueOf(this.constantOperators.notSame(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op,"==")) {
-          _matched=true;
-          throw new ConstantExpressionEvaluationException("Please use the identity comparison operator \'===\' in constant expressions.");
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op,"!=")) {
-          _matched=true;
-          throw new ConstantExpressionEvaluationException("Please use the identity comparison operator \'!==\' in constant expressions.");
-        }
-      }
-      if (!_matched) {
-        throw new ConstantExpressionEvaluationException(((((("Couldn\'t evaluate binary operator \'" + op) + "\' on values ") + left) + " and ") + right));
-      }
-      _xblockexpression = (_switchResult);
-    }
-    return _xblockexpression;
-  }
-  
-  protected Object _internalEvaluate(final XUnaryOperation it, final Context ctx) {
-    Object _xblockexpression = null;
-    {
-      XExpression _operand = it.getOperand();
-      final Object value = this.internalEvaluate(_operand, ctx);
-      final String op = it.getConcreteSyntaxFeatureName();
-      Object _switchResult = null;
-      boolean _matched = false;
-      if (!_matched) {
-        if (Objects.equal(op,"-")) {
-          _matched=true;
-          _switchResult = this.constantOperators.minus(value);
-        }
-      }
-      if (!_matched) {
-        boolean _and = false;
-        boolean _equals = Objects.equal(op, "!");
-        if (!_equals) {
-          _and = false;
-        } else {
-          _and = (value instanceof Boolean);
-        }
-        if (_and) {
-          _matched=true;
-          _switchResult = Boolean.valueOf((!(((Boolean) value)).booleanValue()));
-        }
-      }
-      if (!_matched) {
-        boolean _and_1 = false;
-        boolean _equals_1 = Objects.equal(op, "+");
-        if (!_equals_1) {
-          _and_1 = false;
-        } else {
-          _and_1 = (value instanceof Number);
-        }
-        if (_and_1) {
-          _matched=true;
-          _switchResult = value;
-        }
-      }
-      if (!_matched) {
-        throw new ConstantExpressionEvaluationException(((("Couldn\'t evaluate unary operator \'" + value) + "\' on value ") + value));
-      }
-      _xblockexpression = (_switchResult);
-    }
-    return _xblockexpression;
-  }
-  
   protected JvmTypeReference toTypeReference(final JvmType type, final int arrayDimensions) {
     boolean _equals = Objects.equal(type, null);
     if (_equals) {
@@ -759,11 +586,6 @@ public class ConstantExpressionsInterpreter {
     }
     String _identifier_1 = type.getIdentifier();
     return classFinder.forName(_identifier_1);
-  }
-  
-  protected String toText(final XExpression expression) {
-    ICompositeNode _node = NodeModelUtils.getNode(expression);
-    return _node.getText();
   }
   
   public Object internalEvaluate(final XExpression it, final Context ctx) {

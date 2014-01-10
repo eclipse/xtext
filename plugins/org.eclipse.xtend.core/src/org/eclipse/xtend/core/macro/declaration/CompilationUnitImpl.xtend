@@ -25,7 +25,6 @@ import java.util.concurrent.CancellationException
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.macro.CompilationContextImpl
-import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
@@ -104,6 +103,7 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
 import org.eclipse.xtext.xbase.file.WorkspaceConfig
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Pair

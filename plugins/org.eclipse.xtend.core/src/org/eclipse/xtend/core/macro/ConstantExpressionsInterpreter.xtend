@@ -8,8 +8,10 @@
 package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
+import java.util.LinkedHashSet
 import java.util.Map
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmArrayType
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtext.common.types.JvmEnumerationType
@@ -25,45 +27,39 @@ import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.common.types.access.TypeResource
 import org.eclipse.xtext.common.types.access.impl.ClassFinder
 import org.eclipse.xtext.naming.IQualifiedNameConverter
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.xbase.XBinaryOperation
-import org.eclipse.xtext.xbase.XBooleanLiteral
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XListLiteral
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
-import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.XTypeLiteral
-import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration
+import org.eclipse.xtext.xbase.interpreter.AbstractConstantExpressionsInterpreter
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
+import org.eclipse.xtext.xbase.interpreter.Context
+import org.eclipse.xtext.xbase.interpreter.StackedConstantExpressionEvaluationException
+import org.eclipse.xtext.xbase.interpreter.UnresolvableFeatureException
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.lib.Conversions
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals
 import org.eclipse.xtext.xtype.XComputedTypeReference
-import java.util.Set
-import java.util.LinkedHashSet
-import org.eclipse.xtext.common.types.JvmAnnotationType
-import org.eclipse.xtext.xbase.XCastedExpression
 
 /**
  * An interpreter for evaluating constant expressions in annotation values.
  * 
  * @author Sven Efftinge
  */
-class ConstantExpressionsInterpreter {
+class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpreter {
 
 	@Inject ILogicalContainerProvider containerProvider
 
 	@Inject ProcessorInstanceForJvmTypeProvider classLoaderProvider
 
 	@Inject extension NumberLiterals numberLiterals
-
-	@Inject ConstantOperators constantOperators
 
 	@Inject IScopeProvider scopeProvider
 
@@ -139,22 +135,6 @@ class ConstantExpressionsInterpreter {
 		return scope.getSingleElement(qn)?.getEObjectOrProxy as JvmType
 	}
 
-	def dispatch Object internalEvaluate(XExpression expression, Context ctx) {
-		throw new ConstantExpressionEvaluationException("Not a constant expression : '" + expression.toText + "'", expression)
-	}
-	
-	def dispatch Object internalEvaluate(XCastedExpression expression, Context ctx) {
-		internalEvaluate(expression.target, ctx)
-	}
-
-	def dispatch Object internalEvaluate(XStringLiteral it, Context ctx) {
-		value
-	}
-
-	def dispatch Object internalEvaluate(XBooleanLiteral it, Context ctx) {
-		isTrue
-	}
-
 	def dispatch Object internalEvaluate(XNumberLiteral it, Context ctx) {
 		val type = if (ctx.expectedType == null) 
 			javaType
@@ -166,10 +146,6 @@ class ConstantExpressionsInterpreter {
 
 	def dispatch Object internalEvaluate(XTypeLiteral it, Context ctx) {
 		toTypeReference(type, arrayDimensions.size)
-	}
-
-	def dispatch Object internalEvaluate(XAnnotation literal, Context ctx) {
-		literal
 	}
 
 	def dispatch Object internalEvaluate(XListLiteral it, Context ctx) {
@@ -288,39 +264,6 @@ class ConstantExpressionsInterpreter {
 		}
 	}
 
-	def dispatch Object internalEvaluate(XBinaryOperation it, Context ctx) {
-		val left = leftOperand.internalEvaluate(ctx)
-		val right = rightOperand.internalEvaluate(ctx)
-		val op = concreteSyntaxFeatureName
-		switch op {
-			case '+': constantOperators.plus(left, right)
-			case '-': constantOperators.minus(left, right)
-			case '*': constantOperators.multiply(left, right)
-			case '/': constantOperators.divide(left, right)
-			case '%': constantOperators.modulo(left, right)
-			case '<': constantOperators.lessThan(left, right)
-			case '>': constantOperators.greaterThan(left, right)
-			case '<=': constantOperators.lessEquals(left, right)
-			case '>=': constantOperators.greaterEquals(left, right)
-			case '===': constantOperators.same(left, right)
-			case '!==': constantOperators.notSame(left, right)
-			case '==': throw new ConstantExpressionEvaluationException("Please use the identity comparison operator '===' in constant expressions.")
-			case '!=': throw new ConstantExpressionEvaluationException("Please use the identity comparison operator '!==' in constant expressions.")
-			default: throw new ConstantExpressionEvaluationException("Couldn't evaluate binary operator '" + op + "' on values " + left + " and " + right)
-		}
-	}
-
-	def dispatch Object internalEvaluate(XUnaryOperation it, Context ctx) {
-		val value = operand.internalEvaluate(ctx)
-		val op = concreteSyntaxFeatureName
-		switch op {
-			case '-': constantOperators.minus(value)
-			case op=='!' && value instanceof Boolean: !(value as Boolean)
-			case op=='+' && value instanceof Number: value
-			default: throw new ConstantExpressionEvaluationException("Couldn't evaluate unary operator '" + value + "' on value " + value)
-		}
-	}
-
 	protected def toTypeReference(JvmType type, int arrayDimensions) {
 		if (type == null)
 			return null
@@ -358,62 +301,4 @@ class ConstantExpressionsInterpreter {
 		return classFinder.forName(type.identifier)
 	}
 
-	protected def toText(XExpression expression) {
-		NodeModelUtils.getNode(expression).text
-	}
-
-}
-
-@Data class Context {
-	JvmTypeReference expectedType
-	ClassFinder classFinder
-	Map<String, JvmIdentifiableElement> visibleFeatures
-	Set<XExpression> alreadyEvaluating
-	
-	def cloneWithExpectation(JvmTypeReference newExpectation) {
-		return new Context(newExpectation, classFinder, visibleFeatures, alreadyEvaluating)
-	}
-	
-}
-
-/**
- * Indicates a problem during evaluation
- */
-class ConstantExpressionEvaluationException extends RuntimeException {
-
-	XExpression expression
-	
-	new(String message) {
-		super(message)
-	}
-	
-	new(String message, XExpression expression) {
-		this(message)
-		this.expression = expression
-	}
-
-	def getExpression() {
-		expression
-	}
-}
-
-class UnresolvableFeatureException extends ConstantExpressionEvaluationException {
-	
-	new(String message, XExpression expression) {
-		super(message, expression)
-	}
-	
-}
-
-class StackedConstantExpressionEvaluationException extends ConstantExpressionEvaluationException {
-	
-	JvmField field
-	ConstantExpressionEvaluationException cause
-	
-	new(XExpression expression, JvmField field, ConstantExpressionEvaluationException cause) {
-		super('Error during call to '+field.simpleName+' : ' +cause.message, expression)
-		this.field = field
-		this.cause = cause
-	}
-	
 }

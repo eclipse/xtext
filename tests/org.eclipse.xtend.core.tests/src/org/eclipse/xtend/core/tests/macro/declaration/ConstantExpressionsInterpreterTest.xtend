@@ -15,10 +15,11 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
-import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+import test.Constants1
 
 /**
  * @author Sven Efftinge
@@ -60,8 +61,8 @@ class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
 		''')
 		val stringField = file.xtendTypes.head.members.filter(XtendField).head
 		val intField = file.xtendTypes.head.members.filter(XtendField).get(1)
-		assertEquals(test.Constants1.STRING_CONSTANT, interpreter.evaluate(stringField.initialValue, null))
-		assertEquals(test.Constants1.INT_CONSTANT, interpreter.evaluate(intField.initialValue, null))
+		assertEquals(Constants1.STRING_CONSTANT, interpreter.evaluate(stringField.initialValue, null))
+		assertEquals(Constants1.INT_CONSTANT, interpreter.evaluate(intField.initialValue, null))
 	}
 	
 	@Test def void testConstants_WithStaticImport_01() {
@@ -77,7 +78,7 @@ class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
 			}
 		''')
 		val stringField = file.xtendTypes.head.members.filter(XtendField).head
-		assertEquals(test.Constants1.STRING_CONSTANT+'-'+test.Constants1.STRING_CONSTANT, interpreter.evaluate(stringField.initialValue, null))
+		assertEquals(Constants1.STRING_CONSTANT+'-'+Constants1.STRING_CONSTANT, interpreter.evaluate(stringField.initialValue, null))
 	}
 	
 	@Test def void testConstants_RecursionFails() {
@@ -160,8 +161,8 @@ class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
 	}
 	
 	@Test def void testConstantsReference() {
-		'test.Constants1.STRING_CONSTANT'.evaluatesTo(test.Constants1.STRING_CONSTANT)
-		'test.Constants1.INT_CONSTANT'.evaluatesTo(test.Constants1.INT_CONSTANT)
+		'test.Constants1.STRING_CONSTANT'.evaluatesTo(Constants1.STRING_CONSTANT)
+		'test.Constants1.INT_CONSTANT'.evaluatesTo(Constants1.INT_CONSTANT)
 	}
 	
 	@Test def void testBooleanLiteral() {

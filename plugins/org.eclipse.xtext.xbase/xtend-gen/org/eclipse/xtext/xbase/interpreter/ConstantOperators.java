@@ -1,11 +1,11 @@
 /**
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.macro;
+package org.eclipse.xtext.xbase.interpreter;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -13,8 +13,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.xtend.core.macro.ConstantExpressionEvaluationException;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
