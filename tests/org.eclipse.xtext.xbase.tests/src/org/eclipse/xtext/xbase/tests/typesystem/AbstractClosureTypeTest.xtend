@@ -936,7 +936,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testClosure_52() throws Exception {
-		"[return].apply()".resolvesClosuresTo("(Object)=>Object").withEquivalents("Procedure1<Object>")
+		"[return].apply()".resolvesClosuresTo("(Object)=>void").withEquivalents("Procedure1<Object>")
 	}
 	
 	@Test def void testClosure_54() throws Exception {
@@ -1444,7 +1444,6 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			.withEquivalents("Function1<String, Integer>", "Function1<Integer, Integer>")
 	}
 	
-	@Ignore("Too slow")
 	@Test def void testFeatureCall_055() throws Exception {
 		"newArrayList('').map[ length + 1 * 5 - length + 1 * 5 ].map [ it / 5 + 1 / it ).head"
 			.resolvesClosuresTo("(String)=>int", "(Integer)=>int")
@@ -1896,7 +1895,6 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			.withEquivalents("Function1<String, Integer>", "Function1<Integer, Integer>")
 	}
 	
-	@Ignore("Too slow")
 	@Test def void testFeatureCall_125() throws Exception {
 		"newArrayList('').map[ return length + 1 * 5 - length + 1 * 5 ].map [ return it / 5 + 1 / it ).head"
 			.resolvesClosuresTo("(String)=>int", "(Integer)=>int")
