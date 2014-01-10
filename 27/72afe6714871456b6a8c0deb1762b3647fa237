@@ -1,0 +1,9 @@
+Code-Review-1: Dennis Huebner <dennis.huebner@itemis.de>
+Code-Review+2: Anton Kosyakov <anton.kosyakov@itemis.de>
+IP-Clean+1: Anton Kosyakov <anton.kosyakov@itemis.de>
+Verified+1: Anton Kosyakov <anton.kosyakov@itemis.de>
+Submitted-by: Anton Kosyakov <anton.kosyakov@itemis.de>
+Submitted-at: Fri, 10 Jan 2014 09:32:44 -0500
+Reviewed-on: https://git.eclipse.org/r/20484
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
