@@ -59,7 +59,7 @@ class ConstantExpressionValidator {
 				if (feature.static && feature.final) {
 					val associatedExpression = feature.associatedExpression
 					if (associatedExpression == null) {
-						return true
+						return false
 					} else {
 						return associatedExpression.constant
 					}
@@ -91,7 +91,7 @@ class ConstantExpressionValidator {
 				}
 				val right = feature.right
 				if (right == null) {
-					return true
+					return false
 				}
 				return right.constant
 			}
