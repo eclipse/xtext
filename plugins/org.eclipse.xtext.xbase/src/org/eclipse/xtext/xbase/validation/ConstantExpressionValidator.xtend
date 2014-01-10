@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.util.XExpressionHelper
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 
 /**
  * Checks whether a given XExpression is a a constant expression.
@@ -34,6 +35,7 @@ class ConstantExpressionValidator {
 	@Inject extension TypeReferences
 	@Inject extension Primitives
 	@Inject extension XExpressionHelper
+	@Inject extension ILogicalContainerProvider
 	
 	def dispatch boolean isConstant(XExpression expression) {
 		return false
@@ -51,8 +53,18 @@ class ConstantExpressionValidator {
 	def dispatch boolean isConstant(XAbstractFeatureCall expression) {
 		switch feature : expression.feature {
 			JvmField : {
-				// assume that static final fields are constants for now.
-				return feature.static && feature.final
+				if (feature.setConstant) {
+					return feature.constant
+				}
+				if (feature.static && feature.final) {
+					val associatedExpression = feature.associatedExpression
+					if (associatedExpression == null) {
+						return true
+					} else {
+						return associatedExpression.constant
+					}
+				}
+				return false
 			}
 			JvmEnumerationLiteral : {
 				return true
@@ -74,7 +86,14 @@ class ConstantExpressionValidator {
 				}
 			}
 			XVariableDeclaration: {
-				return !feature.writeable
+				if (feature.writeable) {
+					return false
+				}
+				val right = feature.right
+				if (right == null) {
+					return true
+				}
+				return right.constant
 			}
 		}
 		return false;
