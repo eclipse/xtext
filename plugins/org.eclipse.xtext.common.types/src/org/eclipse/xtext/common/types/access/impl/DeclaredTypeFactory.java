@@ -593,14 +593,34 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	protected JvmField createField(Field field) {
 		JvmField result;
-		if (!field.isEnumConstant())
+		int modifiers = field.getModifiers();
+		if (!field.isEnumConstant()) {
 			result = TypesFactory.eINSTANCE.createJvmField();
-		else
+			int staticFinal = Modifier.FINAL | Modifier.STATIC;
+			try {
+				if ((modifiers & staticFinal) == staticFinal) {
+					Class<?> fieldType = field.getType();
+					if (fieldType.isPrimitive() || String.class.equals(fieldType)) {
+						Object value = field.get(null);
+						if (value != null) {
+							result.setConstant(true);
+							result.setConstantValue(value);
+						} else {
+							result.setConstant(false);
+						}
+					} else {
+						result.setConstant(false);
+					}
+				}
+			} catch(Exception e) {
+				result.setConstant(false);
+				// don't care
+			}
+		} else
 			result = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
 		String fieldName = field.getName();
 		result.internalSetIdentifier(field.getDeclaringClass().getName() + "." + fieldName);
 		result.setSimpleName(fieldName);
-		int modifiers = field.getModifiers();
 		result.setFinal(Modifier.isFinal(modifiers));
 		result.setStatic(Modifier.isStatic(modifiers));
 		result.setTransient(Modifier.isTransient(modifiers));
