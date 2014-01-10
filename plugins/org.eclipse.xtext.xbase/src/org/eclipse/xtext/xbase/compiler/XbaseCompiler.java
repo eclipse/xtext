@@ -90,7 +90,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
-import org.eclipse.xtext.xbase.validation.ConstantExpressionValidator;
+import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
@@ -123,7 +123,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	private ILogicalContainerProvider logicalContainerProvider;
 	
 	@Inject
-	private ConstantExpressionValidator constantExpressionValidator;
+	private XSwitchExpressions switchExpressions;
 	
 	/**
 	 * @param isReferenced unused in this context but necessary for dispatch signature 
@@ -1194,31 +1194,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 	
 	protected boolean isCompiledToJavaSwitch(XSwitchExpression expr) {
-		IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(expr);
-		LightweightTypeReference switchType = resolvedTypes.getActualType(expr.getSwitch());
-		if (switchType == null) {
+		if (!switchExpressions.isJavaSwitchExpression(expr)) {
 			return false;
 		}
-		if (!(switchType.isSubtypeOf(Integer.TYPE) || switchType.isSubtypeOf(Enum.class))) {
-			return false;
-		}
-		EList<XCasePart> cases = expr.getCases();
-		for (XCasePart casePart : cases) {
-			if (casePart.getTypeGuard() != null) {
-				return false;
-			}
-			XExpression caseExpression = casePart.getCase();
-			if (caseExpression == null) {
-				return false;
-			}
-			if (!constantExpressionValidator.isConstant(caseExpression)) {
-				return false;
-			}
-			LightweightTypeReference caseType = resolvedTypes.getActualType(caseExpression);
-			if (caseType == null) {
-				return false;
-			}
-			if (!switchType.isAssignableFrom(caseType)) {
+		for (XCasePart casePart : expr.getCases()) {
+			if (!switchExpressions.isJavaCaseExpression(expr, casePart)) {
 				return false;
 			}
 		}
