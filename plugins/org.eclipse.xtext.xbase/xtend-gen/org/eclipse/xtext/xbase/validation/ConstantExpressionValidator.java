@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -53,6 +54,10 @@ public class ConstantExpressionValidator {
   @Inject
   @Extension
   private XExpressionHelper _xExpressionHelper;
+  
+  @Inject
+  @Extension
+  private ILogicalContainerProvider _iLogicalContainerProvider;
   
   protected boolean _isConstant(final XExpression expression) {
     return false;
@@ -95,6 +100,10 @@ public class ConstantExpressionValidator {
     if (!_matched) {
       if (feature instanceof JvmField) {
         _matched=true;
+        boolean _isSetConstant = ((JvmField)feature).isSetConstant();
+        if (_isSetConstant) {
+          return ((JvmField)feature).isConstant();
+        }
         boolean _and = false;
         boolean _isStatic = ((JvmField)feature).isStatic();
         if (!_isStatic) {
@@ -103,7 +112,16 @@ public class ConstantExpressionValidator {
           boolean _isFinal = ((JvmField)feature).isFinal();
           _and = _isFinal;
         }
-        return _and;
+        if (_and) {
+          final XExpression associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
+          boolean _equals = Objects.equal(associatedExpression, null);
+          if (_equals) {
+            return true;
+          } else {
+            return this.isConstant(associatedExpression);
+          }
+        }
+        return false;
       }
     }
     if (!_matched) {
@@ -171,7 +189,15 @@ public class ConstantExpressionValidator {
       if (feature instanceof XVariableDeclaration) {
         _matched=true;
         boolean _isWriteable = ((XVariableDeclaration)feature).isWriteable();
-        return (!_isWriteable);
+        if (_isWriteable) {
+          return false;
+        }
+        final XExpression right = ((XVariableDeclaration)feature).getRight();
+        boolean _equals = Objects.equal(right, null);
+        if (_equals) {
+          return true;
+        }
+        return this.isConstant(right);
       }
     }
     return false;
