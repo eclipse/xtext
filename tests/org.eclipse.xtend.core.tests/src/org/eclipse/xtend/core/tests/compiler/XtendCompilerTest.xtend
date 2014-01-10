@@ -1899,6 +1899,58 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def testSwitchWithConstantExpressions_11() {
+		'''
+		class Foo {
+			def foo() {
+				val y = try { 3 } finally {}
+				val z = if (y == true) { 1 } else { 2 }
+				switch x : 1 {
+					case z: true
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		import com.google.common.base.Objects;
+		
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo() {
+		    boolean _xblockexpression = false;
+		    {
+		      int _xtrycatchfinallyexpression = (int) 0;
+		      try {
+		        _xtrycatchfinallyexpression = 3;
+		      } finally {
+		      }
+		      final int y = _xtrycatchfinallyexpression;
+		      int _xifexpression = (int) 0;
+		      boolean _equals = Objects.equal(Integer.valueOf(y), Boolean.valueOf(true));
+		      if (_equals) {
+		        _xifexpression = 1;
+		      } else {
+		        _xifexpression = 2;
+		      }
+		      final int z = _xifexpression;
+		      boolean _switchResult = false;
+		      final int x = 1;
+		      boolean _matched = false;
+		      if (!_matched) {
+		        if (Objects.equal(x,z)) {
+		          _matched=true;
+		          _switchResult = true;
+		        }
+		      }
+		      _xblockexpression = (_switchResult);
+		    }
+		    return _xblockexpression;
+		  }
+		}
+		''')
+	}
+	
+	@Test
 	def testTryCatch() { 
 		assertCompilesTo('''
 			package foo
