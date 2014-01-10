@@ -29,6 +29,7 @@ SuperClass.java.txt
 TestAnnotation.java.txt
 TestAnnotationWithDefaults.java.txt
 TestAnnotationWithStringDefault.java.txt
+TestConstants.java.txt
 TestEnum.java.txt
 TestScenario.java.txt
 TypeParamEndsWithDollar.java.txt
