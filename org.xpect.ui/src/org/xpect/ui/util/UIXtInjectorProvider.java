@@ -3,7 +3,8 @@ package org.xpect.ui.util;
 import java.util.List;
 
 import org.xpect.XtRuntimeModule;
-import org.xpect.ui.XtUIModule;
+import org.xpect.ui.XtTestUIModule;
+import org.xpect.ui.XtWorkbenchUIModule;
 import org.xpect.util.EnvironmentUtil;
 import org.xpect.util.IXtInjectorProvider.RuntimeXtInjectorProvider;
 
@@ -19,11 +20,11 @@ public class UIXtInjectorProvider extends RuntimeXtInjectorProvider {
 			break;
 		case PLUGIN_TEST:
 			moduleClasses.add(XtRuntimeModule.class);
-			moduleClasses.add(XtUIModule.class);
+			moduleClasses.add(XtTestUIModule.class);
 			break;
 		case WORKBENCH:
 			moduleClasses.add(XtRuntimeModule.class);
-			moduleClasses.add(XtUIModule.class);
+			moduleClasses.add(XtWorkbenchUIModule.class);
 			break;
 		}
 	}

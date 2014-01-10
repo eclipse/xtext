@@ -29,7 +29,7 @@ import com.google.inject.Binder;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class XtUIModule extends AbstractDelegatingModule {
+public class XtWorkbenchUIModule extends AbstractDelegatingModule {
 
 	public void configure(Binder binder) {
 		overrideAndBackup(binder, IHighlightingConfiguration.class, XtHighlightingConfiguration.class);
