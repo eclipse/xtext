@@ -1118,9 +1118,16 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	 */
 	protected JvmField createField(StringBuilder typeName, IVariableBinding field) {
 		JvmField result;
-		if (!field.isEnumConstant())
+		if (!field.isEnumConstant()) {
 			result = TypesFactory.eINSTANCE.createJvmField();
-		else
+			Object constantValue = field.getConstantValue();
+			if (constantValue != null) {
+				result.setConstant(true);
+				result.setConstantValue(constantValue);
+			} else {
+				result.setConstant(false);
+			}
+		} else
 			result = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
 		String name = field.getName();
 		result.internalSetIdentifier(typeName.append(name).toString());

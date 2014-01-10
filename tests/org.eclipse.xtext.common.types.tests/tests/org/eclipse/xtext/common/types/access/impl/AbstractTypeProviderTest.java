@@ -91,6 +91,7 @@ import org.eclipse.xtext.common.types.testSetups.StaticNestedTypes;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotationWithDefaults;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotationWithStringDefault;
+import org.eclipse.xtext.common.types.testSetups.TestConstants;
 import org.eclipse.xtext.common.types.testSetups.TestEnum;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerEnum;
@@ -2902,5 +2903,61 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmFormalParameter parameter = function.getParameters().get(0);
 		JvmType parameterType = parameter.getParameterType().getType();
 		assertEquals(function.getTypeParameters().get(0), parameterType);
+	}
+	
+	protected JvmField doTestConstantValue(String fieldName, Object fieldValue) {
+		String typeName = "org.eclipse.xtext.common.types.testSetups.TestConstants";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmField field = getFieldFromType(type, TestConstants.class, fieldName);
+		assertTrue(field.isSetConstant());
+		assertTrue(field.isConstant());
+		assertEquals(fieldValue, field.getConstantValue());
+		return field;
+	}
+
+	@Test
+	public void testConstantValue_01() {
+		JvmField field = doTestConstantValue("stringConstant", TestConstants.stringConstant);
+		assertEquals(TestConstants.stringConstant, field.getConstantValueAsString());
+	}
+	@Test
+	public void testConstantValue_02() {
+		JvmField field = doTestConstantValue("longConstant", TestConstants.longConstant);
+		assertEquals(TestConstants.longConstant, field.getConstantValueAsLong());
+	}
+	@Test
+	public void testConstantValue_03() {
+		JvmField field = doTestConstantValue("intConstant", TestConstants.intConstant);
+		assertEquals(TestConstants.intConstant, field.getConstantValueAsInt());
+	}
+	@Test
+	public void testConstantValue_04() {
+		JvmField field = doTestConstantValue("shortConstant", TestConstants.shortConstant);
+		assertEquals(TestConstants.shortConstant, field.getConstantValueAsShort());
+	}
+	@Test
+	public void testConstantValue_05() {
+		JvmField field = doTestConstantValue("charConstant", TestConstants.charConstant);
+		assertEquals(TestConstants.charConstant, field.getConstantValueAsChar());
+	}
+	@Test
+	public void testConstantValue_06() {
+		JvmField field = doTestConstantValue("byteConstant", TestConstants.byteConstant);
+		assertEquals(TestConstants.byteConstant, field.getConstantValueAsByte());
+	}
+	@Test
+	public void testConstantValue_07() {
+		JvmField field = doTestConstantValue("doubleConstant", TestConstants.doubleConstant);
+		assertEquals(TestConstants.doubleConstant, field.getConstantValueAsDouble(), 0.00000001);
+	}
+	@Test
+	public void testConstantValue_08() {
+		JvmField field = doTestConstantValue("floatConstant", TestConstants.floatConstant);
+		assertEquals(TestConstants.floatConstant, field.getConstantValueAsFloat(), 0.00000001);
+	}
+	@Test
+	public void testConstantValue_09() {
+		JvmField field = doTestConstantValue("booleanConstant", TestConstants.booleanConstant);
+		assertEquals(TestConstants.booleanConstant, field.getConstantValueAsBoolean());
 	}
 }
