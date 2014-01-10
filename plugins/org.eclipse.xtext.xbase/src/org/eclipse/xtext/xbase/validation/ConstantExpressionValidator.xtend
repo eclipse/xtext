@@ -52,22 +52,14 @@ class ConstantExpressionValidator {
 	
 	def dispatch boolean isConstant(XAbstractFeatureCall expression) {
 		switch feature : expression.feature {
+			JvmEnumerationLiteral : {
+				return true
+			}
 			JvmField : {
 				if (feature.setConstant) {
 					return feature.constant
 				}
-				if (feature.static && feature.final) {
-					val associatedExpression = feature.associatedExpression
-					if (associatedExpression == null) {
-						return false
-					} else {
-						return associatedExpression.constant
-					}
-				}
-				return false
-			}
-			JvmEnumerationLiteral : {
-				return true
+				return feature.static && feature.final && feature.associatedExpression.constantExpression
 			}
 			JvmOperation : {
 				val annotationReference = expression.findInlineAnnotation
@@ -86,16 +78,25 @@ class ConstantExpressionValidator {
 				}
 			}
 			XVariableDeclaration: {
-				if (feature.writeable) {
-					return false
-				}
-				val right = feature.right
-				if (right == null) {
-					return false
-				}
-				return right.constant
+				return !feature.writeable && feature.right.constantExpression
 			}
 		}
-		return false;
+		return false
 	}
+	
+	def dispatch boolean isConstantExpression(Void it) {
+		false
+	}
+	
+	def dispatch boolean isConstantExpression(XExpression it) {
+		constant
+	}
+	
+	def dispatch boolean isConstantExpression(XAbstractFeatureCall it) {
+		switch feature {
+			JvmEnumerationLiteral : false
+			default: constant
+		}
+	}
+
 }
