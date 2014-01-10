@@ -116,7 +116,7 @@ public class ConstantExpressionValidator {
           final XExpression associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
           boolean _equals = Objects.equal(associatedExpression, null);
           if (_equals) {
-            return true;
+            return false;
           } else {
             return this.isConstant(associatedExpression);
           }
@@ -195,7 +195,7 @@ public class ConstantExpressionValidator {
         final XExpression right = ((XVariableDeclaration)feature).getRight();
         boolean _equals = Objects.equal(right, null);
         if (_equals) {
-          return true;
+          return false;
         }
         return this.isConstant(right);
       }
