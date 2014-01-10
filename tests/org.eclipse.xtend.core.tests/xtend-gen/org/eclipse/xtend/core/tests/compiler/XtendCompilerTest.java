@@ -4549,6 +4549,95 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testSwitchWithConstantExpressions_12() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val state = Thread.State.NEW");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("switch x : Thread.State.NEW {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("case state: true");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public boolean foo() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("boolean _xblockexpression = false;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("{");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("final Thread.State state = Thread.State.NEW;");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("boolean _switchResult = false;");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("final Thread.State x = Thread.State.NEW;");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("boolean _matched = false;");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("if (!_matched) {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("if (Objects.equal(x,state)) {");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("_matched=true;");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("_switchResult = true;");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_xblockexpression = (_switchResult);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _xblockexpression;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testTryCatch() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");

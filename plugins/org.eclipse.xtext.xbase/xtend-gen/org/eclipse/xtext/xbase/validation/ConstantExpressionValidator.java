@@ -98,6 +98,12 @@ public class ConstantExpressionValidator {
     final JvmIdentifiableElement feature = _feature;
     boolean _matched = false;
     if (!_matched) {
+      if (feature instanceof JvmEnumerationLiteral) {
+        _matched=true;
+        return true;
+      }
+    }
+    if (!_matched) {
       if (feature instanceof JvmField) {
         _matched=true;
         boolean _isSetConstant = ((JvmField)feature).isSetConstant();
@@ -105,29 +111,22 @@ public class ConstantExpressionValidator {
           return ((JvmField)feature).isConstant();
         }
         boolean _and = false;
+        boolean _and_1 = false;
         boolean _isStatic = ((JvmField)feature).isStatic();
         if (!_isStatic) {
-          _and = false;
+          _and_1 = false;
         } else {
           boolean _isFinal = ((JvmField)feature).isFinal();
-          _and = _isFinal;
+          _and_1 = _isFinal;
         }
-        if (_and) {
-          final XExpression associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
-          boolean _equals = Objects.equal(associatedExpression, null);
-          if (_equals) {
-            return false;
-          } else {
-            return this.isConstant(associatedExpression);
-          }
+        if (!_and_1) {
+          _and = false;
+        } else {
+          XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
+          boolean _isConstantExpression = this.isConstantExpression(_associatedExpression);
+          _and = _isConstantExpression;
         }
-        return false;
-      }
-    }
-    if (!_matched) {
-      if (feature instanceof JvmEnumerationLiteral) {
-        _matched=true;
-        return true;
+        return _and;
       }
     }
     if (!_matched) {
@@ -188,19 +187,45 @@ public class ConstantExpressionValidator {
     if (!_matched) {
       if (feature instanceof XVariableDeclaration) {
         _matched=true;
+        boolean _and = false;
         boolean _isWriteable = ((XVariableDeclaration)feature).isWriteable();
-        if (_isWriteable) {
-          return false;
+        boolean _not = (!_isWriteable);
+        if (!_not) {
+          _and = false;
+        } else {
+          XExpression _right = ((XVariableDeclaration)feature).getRight();
+          boolean _isConstantExpression = this.isConstantExpression(_right);
+          _and = _isConstantExpression;
         }
-        final XExpression right = ((XVariableDeclaration)feature).getRight();
-        boolean _equals = Objects.equal(right, null);
-        if (_equals) {
-          return false;
-        }
-        return this.isConstant(right);
+        return _and;
       }
     }
     return false;
+  }
+  
+  protected boolean _isConstantExpression(final Void it) {
+    return false;
+  }
+  
+  protected boolean _isConstantExpression(final XExpression it) {
+    return this.isConstant(it);
+  }
+  
+  protected boolean _isConstantExpression(final XAbstractFeatureCall it) {
+    boolean _switchResult = false;
+    JvmIdentifiableElement _feature = it.getFeature();
+    final JvmIdentifiableElement getFeature = _feature;
+    boolean _matched = false;
+    if (!_matched) {
+      if (getFeature instanceof JvmEnumerationLiteral) {
+        _matched=true;
+        _switchResult = false;
+      }
+    }
+    if (!_matched) {
+      _switchResult = this.isConstant(it);
+    }
+    return _switchResult;
   }
   
   public boolean isConstant(final XExpression expression) {
@@ -221,6 +246,19 @@ public class ConstantExpressionValidator {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(expression).toString());
+    }
+  }
+  
+  public boolean isConstantExpression(final XExpression it) {
+    if (it instanceof XAbstractFeatureCall) {
+      return _isConstantExpression((XAbstractFeatureCall)it);
+    } else if (it != null) {
+      return _isConstantExpression(it);
+    } else if (it == null) {
+      return _isConstantExpression((Void)null);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it).toString());
     }
   }
 }

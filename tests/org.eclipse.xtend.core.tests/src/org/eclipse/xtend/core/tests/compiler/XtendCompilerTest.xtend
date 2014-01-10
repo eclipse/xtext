@@ -1951,6 +1951,44 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def testSwitchWithConstantExpressions_12() {
+		'''
+		class Foo {
+			def foo() {
+				val state = Thread.State.NEW
+				switch x : Thread.State.NEW {
+					case state: true
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		import com.google.common.base.Objects;
+		
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo() {
+		    boolean _xblockexpression = false;
+		    {
+		      final Thread.State state = Thread.State.NEW;
+		      boolean _switchResult = false;
+		      final Thread.State x = Thread.State.NEW;
+		      boolean _matched = false;
+		      if (!_matched) {
+		        if (Objects.equal(x,state)) {
+		          _matched=true;
+		          _switchResult = true;
+		        }
+		      }
+		      _xblockexpression = (_switchResult);
+		    }
+		    return _xblockexpression;
+		  }
+		}
+		''')
+	}
+	
+	@Test
 	def testTryCatch() { 
 		assertCompilesTo('''
 			package foo
