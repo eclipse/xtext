@@ -226,15 +226,6 @@ class BatchClosureTypeTest extends AbstractClosureTypeTest {
 		return '''«type.type.simpleName»<«type.typeArguments.join(', ') [simpleName]»>'''
 	}
 	
-	@Ignore("TODO the assertion should hold") 
-	@Test override void testClosure_51() throws Exception {
-		super.testClosure_51
-	}
-	
-	@Ignore("TODO the assertion should hold") 
-	@Test override void testClosure_52() throws Exception {
-		super.testClosure_52
-	}
 }
 
 /**
@@ -368,12 +359,6 @@ class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
 	@Ignore("TODO Fix me")
 	override testRawType_05() throws Exception {
 		super.testRawType_05()
-	}
-	
-	@Test
-	@Ignore("TODO Fix me")
-	override testFeatureCallWithExpectation_01() throws Exception {
-		super.testFeatureCallWithExpectation_01()
 	}
 	
 }

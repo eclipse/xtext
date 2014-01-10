@@ -94,10 +94,4 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
   public void testRawType_05() throws Exception {
     super.testRawType_05();
   }
-  
-  @Test
-  @Ignore("TODO Fix me")
-  public void testFeatureCallWithExpectation_01() throws Exception {
-    super.testFeatureCallWithExpectation_01();
-  }
 }

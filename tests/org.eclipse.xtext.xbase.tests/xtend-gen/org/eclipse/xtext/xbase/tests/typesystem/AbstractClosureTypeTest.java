@@ -963,7 +963,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testClosure_52() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[return].apply()", "(Object)=>Object");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[return].apply()", "(Object)=>void");
     this.withEquivalents(_resolvesClosuresTo, "Procedure1<Object>");
   }
   
@@ -1463,7 +1463,6 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
-  @Ignore("Too slow")
   @Test
   public void testFeatureCall_055() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map[ length + 1 * 5 - length + 1 * 5 ].map [ it / 5 + 1 / it ).head", "(String)=>int", "(Integer)=>int");
@@ -1890,7 +1889,6 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
-  @Ignore("Too slow")
   @Test
   public void testFeatureCall_125() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map[ return length + 1 * 5 - length + 1 * 5 ].map [ return it / 5 + 1 / it ).head", "(String)=>int", "(Integer)=>int");
