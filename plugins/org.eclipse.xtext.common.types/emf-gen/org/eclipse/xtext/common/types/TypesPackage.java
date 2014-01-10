@@ -1095,13 +1095,33 @@ public interface TypesPackage extends EPackage
 	int JVM_FIELD__TRANSIENT = JVM_FEATURE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Constant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.5
+	 */
+	int JVM_FIELD__CONSTANT = JVM_FEATURE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.5
+	 */
+	int JVM_FIELD__CONSTANT_VALUE = JVM_FEATURE_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FIELD_FEATURE_COUNT = JVM_FEATURE_FEATURE_COUNT + 5;
+	int JVM_FIELD_FEATURE_COUNT = JVM_FEATURE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmEnumerationLiteralImpl <em>Jvm Enumeration Literal</em>}' class.
@@ -1201,9 +1221,28 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.4
 	 */
 	int JVM_ENUMERATION_LITERAL__TRANSIENT = JVM_FIELD__TRANSIENT;
+
+	/**
+	 * The feature id for the '<em><b>Constant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.5
+	 */
+	int JVM_ENUMERATION_LITERAL__CONSTANT = JVM_FIELD__CONSTANT;
+
+	/**
+	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.5
+	 */
+	int JVM_ENUMERATION_LITERAL__CONSTANT_VALUE = JVM_FIELD__CONSTANT_VALUE;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Enumeration Literal</em>' class.
@@ -3380,6 +3419,30 @@ public interface TypesPackage extends EPackage
 	EAttribute getJvmField_Transient();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmField#isConstant <em>Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Constant</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmField#isConstant()
+	 * @see #getJvmField()
+	 * @generated
+	 * @since 2.5
+	 */
+	EAttribute getJvmField_Constant();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmField#getConstantValue <em>Constant Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Constant Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmField#getConstantValue()
+	 * @see #getJvmField()
+	 * @generated
+	 * @since 2.5
+	 */
+	EAttribute getJvmField_ConstantValue();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmExecutable <em>Jvm Executable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4622,6 +4685,24 @@ public interface TypesPackage extends EPackage
 		 * @since 2.4
 		 */
 		EAttribute JVM_FIELD__TRANSIENT = eINSTANCE.getJvmField_Transient();
+
+		/**
+		 * The meta object literal for the '<em><b>Constant</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 * @since 2.5
+		 */
+		EAttribute JVM_FIELD__CONSTANT = eINSTANCE.getJvmField_Constant();
+
+		/**
+		 * The meta object literal for the '<em><b>Constant Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 * @since 2.5
+		 */
+		EAttribute JVM_FIELD__CONSTANT_VALUE = eINSTANCE.getJvmField_ConstantValue();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl <em>Jvm Executable</em>}' class.

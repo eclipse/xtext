@@ -73,6 +73,8 @@ public class JvmFieldItemProvider
 			addFinalPropertyDescriptor(object);
 			addVolatilePropertyDescriptor(object);
 			addTransientPropertyDescriptor(object);
+			addConstantPropertyDescriptor(object);
+			addConstantValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -172,6 +174,54 @@ public class JvmFieldItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Constant feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.5
+	 */
+	protected void addConstantPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmField_constant_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmField_constant_feature", "_UI_JvmField_type"),
+				 TypesPackage.Literals.JVM_FIELD__CONSTANT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Constant Value feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.5
+	 */
+	protected void addConstantValuePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmField_constantValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmField_constantValue_feature", "_UI_JvmField_type"),
+				 TypesPackage.Literals.JVM_FIELD__CONSTANT_VALUE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -230,6 +280,7 @@ public class JvmFieldItemProvider
 			getString("_UI_JvmField_type") :
 			getString("_UI_JvmField_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -249,6 +300,8 @@ public class JvmFieldItemProvider
 			case TypesPackage.JVM_FIELD__FINAL:
 			case TypesPackage.JVM_FIELD__VOLATILE:
 			case TypesPackage.JVM_FIELD__TRANSIENT:
+			case TypesPackage.JVM_FIELD__CONSTANT:
+			case TypesPackage.JVM_FIELD__CONSTANT_VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.JVM_FIELD__TYPE:

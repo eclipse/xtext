@@ -22,7 +22,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *
  * @generated
  */
-public class JvmEnumerationLiteralImpl extends JvmFieldImpl implements JvmEnumerationLiteral
+public class JvmEnumerationLiteralImpl extends JvmFieldImplCustom implements JvmEnumerationLiteral
 {
 	/**
 	 * <!-- begin-user-doc -->

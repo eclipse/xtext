@@ -21,12 +21,16 @@ package org.eclipse.xtext.common.types;
  *   <li>{@link org.eclipse.xtext.common.types.JvmField#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmField#isVolatile <em>Volatile</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmField#isTransient <em>Transient</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmField#isConstant <em>Constant</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmField#getConstantValue <em>Constant Value</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmField()
  * @model
  * @generated
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmField extends JvmFeature
 {
@@ -163,5 +167,171 @@ public interface JvmField extends JvmFeature
 	 * @since 2.4
 	 */
 	void setTransient(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Constant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Constant</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Constant</em>' attribute.
+	 * @see #isSetConstant()
+	 * @see #unsetConstant()
+	 * @see #setConstant(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmField_Constant()
+	 * @model unsettable="true"
+	 * @generated
+	 * @since 2.5
+	 */
+	boolean isConstant();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmField#isConstant <em>Constant</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Constant</em>' attribute.
+	 * @see #isSetConstant()
+	 * @see #unsetConstant()
+	 * @see #isConstant()
+	 * @generated
+	 * @since 2.5
+	 */
+	void setConstant(boolean value);
+
+	/**
+	 * Unsets the value of the '{@link org.eclipse.xtext.common.types.JvmField#isConstant <em>Constant</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetConstant()
+	 * @see #isConstant()
+	 * @see #setConstant(boolean)
+	 * @generated
+	 * @since 2.5
+	 */
+	void unsetConstant();
+
+	/**
+	 * Returns whether the value of the '{@link org.eclipse.xtext.common.types.JvmField#isConstant <em>Constant</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Constant</em>' attribute is set.
+	 * @see #unsetConstant()
+	 * @see #isConstant()
+	 * @see #setConstant(boolean)
+	 * @generated
+	 * @since 2.5
+	 */
+	boolean isSetConstant();
+
+	/**
+	 * Returns the value of the '<em><b>Constant Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Constant Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Constant Value</em>' attribute.
+	 * @see #setConstantValue(Object)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmField_ConstantValue()
+	 * @model
+	 * @generated
+	 * @since 2.5
+	 */
+	Object getConstantValue();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmField#getConstantValue <em>Constant Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Constant Value</em>' attribute.
+	 * @see #getConstantValue()
+	 * @generated
+	 * @since 2.5
+	 */
+	void setConstantValue(Object value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 * @since 2.5
+	 */
+	long getConstantValueAsLong();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 * @since 2.5
+	 */
+	int getConstantValueAsInt();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 * @since 2.5
+	 */
+	short getConstantValueAsShort();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 * @since 2.5
+	 */
+	byte getConstantValueAsByte();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 * @since 2.5
+	 */
+	double getConstantValueAsDouble();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 * @since 2.5
+	 */
+	float getConstantValueAsFloat();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 * @since 2.5
+	 */
+	char getConstantValueAsChar();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 * @since 2.5
+	 */
+	boolean getConstantValueAsBoolean();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 * @since 2.5
+	 */
+	String getConstantValueAsString();
 
 } // JvmField

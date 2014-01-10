@@ -323,7 +323,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 */
 	public JvmField createJvmField()
 	{
-		JvmFieldImpl jvmField = new JvmFieldImpl();
+		JvmFieldImplCustom jvmField = new JvmFieldImplCustom();
 		return jvmField;
 	}
 

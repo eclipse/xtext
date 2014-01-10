@@ -31,6 +31,8 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#isVolatile <em>Volatile</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#isTransient <em>Transient</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#isConstant <em>Constant</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#getConstantValue <em>Constant Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -129,6 +131,55 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	protected boolean transient_ = TRANSIENT_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #isConstant() <em>Constant</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isConstant()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean CONSTANT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isConstant() <em>Constant</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isConstant()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean constant = CONSTANT_EDEFAULT;
+
+	/**
+	 * This is true if the Constant attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean constantESet;
+
+	/**
+	 * The default value of the '{@link #getConstantValue() <em>Constant Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstantValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Object CONSTANT_VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getConstantValue() <em>Constant Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstantValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected Object constantValue = CONSTANT_VALUE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -154,6 +205,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isStatic()
 	{
 		return static_;
@@ -294,6 +346,187 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isConstant()
+	{
+		return constant;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setConstant(boolean newConstant)
+	{
+		boolean oldConstant = constant;
+		constant = newConstant;
+		boolean oldConstantESet = constantESet;
+		constantESet = true;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_FIELD__CONSTANT, oldConstant, constant, !oldConstantESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void unsetConstant()
+	{
+		boolean oldConstant = constant;
+		boolean oldConstantESet = constantESet;
+		constant = CONSTANT_EDEFAULT;
+		constantESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, TypesPackage.JVM_FIELD__CONSTANT, oldConstant, CONSTANT_EDEFAULT, oldConstantESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetConstant()
+	{
+		return constantESet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object getConstantValue()
+	{
+		return constantValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setConstantValue(Object newConstantValue)
+	{
+		Object oldConstantValue = constantValue;
+		constantValue = newConstantValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_FIELD__CONSTANT_VALUE, oldConstantValue, constantValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public long getConstantValueAsLong()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getConstantValueAsInt()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public short getConstantValueAsShort()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public byte getConstantValueAsByte()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public double getConstantValueAsDouble()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public float getConstantValueAsFloat()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public char getConstantValueAsChar()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean getConstantValueAsBoolean()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getConstantValueAsString()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -325,6 +558,10 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 				return isVolatile();
 			case TypesPackage.JVM_FIELD__TRANSIENT:
 				return isTransient();
+			case TypesPackage.JVM_FIELD__CONSTANT:
+				return isConstant();
+			case TypesPackage.JVM_FIELD__CONSTANT_VALUE:
+				return getConstantValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -353,6 +590,12 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 				return;
 			case TypesPackage.JVM_FIELD__TRANSIENT:
 				setTransient((Boolean)newValue);
+				return;
+			case TypesPackage.JVM_FIELD__CONSTANT:
+				setConstant((Boolean)newValue);
+				return;
+			case TypesPackage.JVM_FIELD__CONSTANT_VALUE:
+				setConstantValue(newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -383,6 +626,12 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 			case TypesPackage.JVM_FIELD__TRANSIENT:
 				setTransient(TRANSIENT_EDEFAULT);
 				return;
+			case TypesPackage.JVM_FIELD__CONSTANT:
+				unsetConstant();
+				return;
+			case TypesPackage.JVM_FIELD__CONSTANT_VALUE:
+				setConstantValue(CONSTANT_VALUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -407,6 +656,10 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 				return volatile_ != VOLATILE_EDEFAULT;
 			case TypesPackage.JVM_FIELD__TRANSIENT:
 				return transient_ != TRANSIENT_EDEFAULT;
+			case TypesPackage.JVM_FIELD__CONSTANT:
+				return isSetConstant();
+			case TypesPackage.JVM_FIELD__CONSTANT_VALUE:
+				return CONSTANT_VALUE_EDEFAULT == null ? constantValue != null : !CONSTANT_VALUE_EDEFAULT.equals(constantValue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -430,6 +683,10 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 		result.append(volatile_);
 		result.append(", transient: ");
 		result.append(transient_);
+		result.append(", constant: ");
+		if (constantESet) result.append(constant); else result.append("<unset>");
+		result.append(", constantValue: ");
+		result.append(constantValue);
 		result.append(')');
 		return result.toString();
 	}
