@@ -17,7 +17,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
 import org.eclipse.xtext.xdoc.xdoc.Document;
 import org.eclipse.xtext.xdoc.xdoc.Identifiable;
@@ -31,14 +30,12 @@ public class TargetPaths {
   public boolean splitAt(final Document document, final Function1<? super AbstractSection,? extends Boolean> predicate, final String prefix) {
     boolean _xblockexpression = false;
     {
-      TargetPathAdapter _targetPathAdapter = new TargetPathAdapter();
-      final TargetPathAdapter adapter = _targetPathAdapter;
+      final TargetPathAdapter adapter = new TargetPathAdapter();
       this.traverseChildren(document, adapter, prefix, "", predicate);
       Resource _eResource = document.eResource();
       ResourceSet _resourceSet = _eResource.getResourceSet();
       EList<Adapter> _eAdapters = _resourceSet.eAdapters();
-      boolean _add = _eAdapters.add(adapter);
-      _xblockexpression = (_add);
+      _xblockexpression = (_eAdapters.add(adapter));
     }
     return _xblockexpression;
   }
@@ -57,7 +54,7 @@ public class TargetPaths {
     if (_get != null) {
       _elvis = _get;
     } else {
-      _elvis = ObjectExtensions.<String>operator_elvis(_get, "");
+      _elvis = "";
     }
     return _elvis;
   }
@@ -74,8 +71,7 @@ public class TargetPaths {
       boolean _xifexpression = false;
       boolean _notEquals = (!Objects.equal(targetFileRoots, null));
       if (_notEquals) {
-        boolean _contains = targetFileRoots.contains(element);
-        _xifexpression = _contains;
+        _xifexpression = targetFileRoots.contains(element);
       } else {
         _xifexpression = (element instanceof Document);
       }
@@ -95,7 +91,7 @@ public class TargetPaths {
       _elvis = _targetFileRoots;
     } else {
       ArrayList<Document> _newArrayList = CollectionLiterals.<Document>newArrayList(document);
-      _elvis = ObjectExtensions.<List<? extends AbstractSection>>operator_elvis(_targetFileRoots, _newArrayList);
+      _elvis = _newArrayList;
     }
     return _elvis;
   }
@@ -120,8 +116,7 @@ public class TargetPaths {
           List<AbstractSection> _targetFileRoots_1 = adapter.getTargetFileRoots();
           int _size = _targetFileRoots_1.size();
           String _plus = (prefix + Integer.valueOf(_size));
-          String _plus_1 = (_plus + ".html");
-          _xifexpression = _plus_1;
+          _xifexpression = (_plus + ".html");
         }
         thisPath = _xifexpression;
         List<AbstractSection> _targetFileRoots_2 = adapter.getTargetFileRoots();
@@ -138,8 +133,6 @@ public class TargetPaths {
   }
   
   protected TargetPathAdapter getTargetPathAdapter(final Identifiable element) {
-    TargetPathAdapter _head = null;
-    Iterable<TargetPathAdapter> _filter = null;
     Resource _eResource = null;
     if (element!=null) {
       _eResource=element.eResource();
@@ -152,9 +145,11 @@ public class TargetPaths {
     if (_resourceSet!=null) {
       _eAdapters=_resourceSet.eAdapters();
     }
+    Iterable<TargetPathAdapter> _filter = null;
     if (_eAdapters!=null) {
       _filter=Iterables.<TargetPathAdapter>filter(_eAdapters, TargetPathAdapter.class);
     }
+    TargetPathAdapter _head = null;
     if (_filter!=null) {
       _head=IterableExtensions.<TargetPathAdapter>head(_filter);
     }

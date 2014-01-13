@@ -29,10 +29,10 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
+import org.eclipse.xtext.builder.impl.IToBeBuiltComputerContribution;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
-import org.eclipse.xtext.builder.impl.IToBeBuiltComputerContribution;
-import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
@@ -50,9 +50,6 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 	
 	private final static Logger log = Logger.getLogger(JdtToBeBuiltComputer.class);
 
-	@Inject
-	private TypeURIHelper typeURIHelper;
-	
 	@Inject
 	private QueuedBuildData queuedBuildData;
 	
@@ -166,9 +163,9 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 		// structural java changes will be queued in a fine grained fashion by the JavaChangeQueueFiller
 		return false;
 	}
-
+	
 	protected void queueJavaChange(String typeName) {
-		URI typeURI = typeURIHelper.createResourceURIForFQN(typeName);
+		URI typeURI = URIHelperConstants.OBJECTS_URI.appendSegment(typeName);
 		TypeResourceDescription oldDescription = new TypeResourceDescription(typeURI, Collections.<IEObjectDescription>emptyList());
 		Delta delta = new ChangedResourceDescriptionDelta(oldDescription, null);
 		queuedBuildData.queueChange(delta);

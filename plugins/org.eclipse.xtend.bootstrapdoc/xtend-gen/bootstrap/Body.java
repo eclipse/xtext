@@ -35,8 +35,7 @@ public class Body {
       final Function1<AbstractSection,Boolean> _function = new Function1<AbstractSection,Boolean>() {
         public Boolean apply(final AbstractSection it) {
           boolean _isTargetRootElement = Body.this._targetPaths.isTargetRootElement(it);
-          boolean _not = (!_isTargetRootElement);
-          return Boolean.valueOf(_not);
+          return Boolean.valueOf((!_isTargetRootElement));
         }
       };
       Iterable<? extends AbstractSection> _filter = IterableExtensions.filter(_sections, _function);

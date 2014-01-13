@@ -46,8 +46,7 @@ public class DocumentLoad {
     final Predicate<URI> _function = new Predicate<URI>() {
       public boolean apply(final URI it) {
         String _fileExtension = it.fileExtension();
-        boolean _equals = Objects.equal(_fileExtension, "xdoc");
-        return _equals;
+        return Objects.equal(_fileExtension, "xdoc");
       }
     };
     Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(((List<String>)Conversions.doWrapArray(baseDirs)), _function);
@@ -74,15 +73,13 @@ public class DocumentLoad {
               {
                 IResourceServiceProvider _resourceServiceProvider = ((XtextResource)it).getResourceServiceProvider();
                 final IResourceValidator validator = _resourceServiceProvider.getResourceValidator();
-                List<Issue> _validate = validator.validate(it, CheckMode.ALL, null);
-                _xblockexpression = (_validate);
+                _xblockexpression = (validator.validate(it, CheckMode.ALL, null));
               }
               _switchResult = _xblockexpression;
             }
           }
           if (!_matched) {
-            List<Issue> _emptyList = CollectionLiterals.<Issue>emptyList();
-            _switchResult = _emptyList;
+            _switchResult = CollectionLiterals.<Issue>emptyList();
           }
           return _switchResult;
         }
@@ -92,8 +89,7 @@ public class DocumentLoad {
       final Function1<Issue,Boolean> _function_2 = new Function1<Issue,Boolean>() {
         public Boolean apply(final Issue i) {
           Severity _severity = i.getSeverity();
-          boolean _equals = Objects.equal(_severity, Severity.ERROR);
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
         }
       };
       boolean _exists = IterableExtensions.<Issue>exists(issues, _function_2);
@@ -101,22 +97,19 @@ public class DocumentLoad {
         final Function1<Issue,String> _function_3 = new Function1<Issue,String>() {
           public String apply(final Issue it) {
             String _string = it.toString();
-            String _plus = ("\n\t" + _string);
-            return _plus;
+            return ("\n\t" + _string);
           }
         };
         Iterable<String> _map_1 = IterableExtensions.<Issue, String>map(issues, _function_3);
         String _join = IterableExtensions.join(_map_1);
-        IllegalStateException _illegalStateException = new IllegalStateException(_join);
-        throw _illegalStateException;
+        throw new IllegalStateException(_join);
       } else {
         boolean _isEmpty = IterableExtensions.isEmpty(issues);
         boolean _not = (!_isEmpty);
         if (_not) {
           final Function1<Issue,String> _function_4 = new Function1<Issue,String>() {
             public String apply(final Issue it) {
-              String _string = it.toString();
-              return _string;
+              return it.toString();
             }
           };
           Iterable<String> _map_2 = IterableExtensions.<Issue, String>map(issues, _function_4);
@@ -141,13 +134,11 @@ public class DocumentLoad {
       final Predicate<URI> _function = new Predicate<URI>() {
         public boolean apply(final URI it) {
           String _fileExtension = it.fileExtension();
-          boolean _equals = Objects.equal(_fileExtension, "xtend");
-          return _equals;
+          return Objects.equal(_fileExtension, "xtend");
         }
       };
       Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(((List<String>)Conversions.doWrapArray(entries)), _function);
-      Collection<URI> _values = _resolvePathes.values();
-      _xblockexpression = (_values);
+      _xblockexpression = (_resolvePathes.values());
     }
     return _xblockexpression;
   }

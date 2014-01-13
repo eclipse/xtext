@@ -25,8 +25,7 @@ public class DomSerializer {
     if (!_matched) {
       if (n instanceof Contents) {
         _matched=true;
-        CharSequence _text = ((Contents)n).getText();
-        _switchResult = _text;
+        _switchResult = ((Contents)n).getText();
       }
     }
     if (!_matched) {
@@ -65,18 +64,17 @@ public class DomSerializer {
   }
   
   private String applyContents(final Node n) {
-    String _join = null;
-    List<CharSequence> _map = null;
     ArrayList<Node> _contents = n.getContents();
+    List<CharSequence> _map = null;
     if (_contents!=null) {
       final Function1<Node,CharSequence> _function = new Function1<Node,CharSequence>() {
         public CharSequence apply(final Node it) {
-          CharSequence _text = DomSerializer.this.toText(it);
-          return _text;
+          return DomSerializer.this.toText(it);
         }
       };
       _map=ListExtensions.<Node, CharSequence>map(_contents, _function);
     }
+    String _join = null;
     if (_map!=null) {
       _join=IterableExtensions.join(_map);
     }

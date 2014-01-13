@@ -94,19 +94,15 @@ public class GenerateBootstrapDoc {
   public void generate() {
     try {
       final Document document = this.loadDocument();
-      File _file = new File(this.targetDirectory);
-      final File targetDir = _file;
-      File _file_1 = new File(this.documentRoot);
-      final File sourceDir = _file_1;
-      File _file_2 = new File(targetDir, "index.html");
-      final File file = _file_2;
+      final File targetDir = new File(this.targetDirectory);
+      final File sourceDir = new File(this.documentRoot);
+      final File file = new File(targetDir, "index.html");
       this.copyImages(document, sourceDir, targetDir);
       File _absoluteFile = file.getAbsoluteFile();
       InputOutput.<File>println(_absoluteFile);
       File _parentFile = file.getParentFile();
       _parentFile.mkdirs();
-      FileWriter _fileWriter = new FileWriter(file);
-      final FileWriter writer = _fileWriter;
+      final FileWriter writer = new FileWriter(file);
       String _main = this.main(document);
       writer.append(_main);
       writer.close();
@@ -125,8 +121,7 @@ public class GenerateBootstrapDoc {
       public void apply(final ImageRef it) {
         try {
           String _path = it.getPath();
-          File _file = new File(sourceDir, _path);
-          final File source = _file;
+          final File source = new File(sourceDir, _path);
           boolean _exists = source.exists();
           boolean _not = (!_exists);
           if (_not) {
@@ -141,12 +136,10 @@ public class GenerateBootstrapDoc {
             ICompositeNode _node = NodeModelUtils.getNode(it);
             int _startLine = _node.getStartLine();
             String _plus_4 = (_plus_3 + Integer.valueOf(_startLine));
-            IllegalStateException _illegalStateException = new IllegalStateException(_plus_4);
-            throw _illegalStateException;
+            throw new IllegalStateException(_plus_4);
           }
           String _path_1 = it.getPath();
-          File _file_1 = new File(targetDir, _path_1);
-          final File target = _file_1;
+          final File target = new File(targetDir, _path_1);
           String _canonicalPath_1 = target.getCanonicalPath();
           InputOutput.<String>println(_canonicalPath_1);
           InputSupplier<FileInputStream> _newInputStreamSupplier = Files.newInputStreamSupplier(source);
@@ -166,8 +159,7 @@ public class GenerateBootstrapDoc {
     final Predicate<URI> _function = new Predicate<URI>() {
       public boolean apply(final URI it) {
         String _fileExtension = it.fileExtension();
-        boolean _equals = Objects.equal(_fileExtension, "xdoc");
-        return _equals;
+        return Objects.equal(_fileExtension, "xdoc");
       }
     };
     Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(_singletonList, _function);
@@ -182,8 +174,7 @@ public class GenerateBootstrapDoc {
     EList<Resource> _resources = rs.getResources();
     final Function1<Resource,List<Issue>> _function_1 = new Function1<Resource,List<Issue>>() {
       public List<Issue> apply(final Resource it) {
-        List<Issue> _validate = GenerateBootstrapDoc.this.validator.validate(it, CheckMode.ALL, null);
-        return _validate;
+        return GenerateBootstrapDoc.this.validator.validate(it, CheckMode.ALL, null);
       }
     };
     List<List<Issue>> _map = ListExtensions.<Resource, List<Issue>>map(_resources, _function_1);
@@ -191,8 +182,7 @@ public class GenerateBootstrapDoc {
     final Function1<Issue,Boolean> _function_2 = new Function1<Issue,Boolean>() {
       public Boolean apply(final Issue i) {
         Severity _severity = i.getSeverity();
-        boolean _equals = Objects.equal(_severity, Severity.ERROR);
-        return Boolean.valueOf(_equals);
+        return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
       }
     };
     boolean _exists = IterableExtensions.<Issue>exists(issues, _function_2);
@@ -200,22 +190,19 @@ public class GenerateBootstrapDoc {
       final Function1<Issue,String> _function_3 = new Function1<Issue,String>() {
         public String apply(final Issue it) {
           String _string = it.toString();
-          String _plus = ("\n\t" + _string);
-          return _plus;
+          return ("\n\t" + _string);
         }
       };
       Iterable<String> _map_1 = IterableExtensions.<Issue, String>map(issues, _function_3);
       String _join = IterableExtensions.join(_map_1);
-      IllegalStateException _illegalStateException = new IllegalStateException(_join);
-      throw _illegalStateException;
+      throw new IllegalStateException(_join);
     } else {
       boolean _isEmpty = IterableExtensions.isEmpty(issues);
       boolean _not = (!_isEmpty);
       if (_not) {
         final Function1<Issue,String> _function_4 = new Function1<Issue,String>() {
           public String apply(final Issue it) {
-            String _string = it.toString();
-            return _string;
+            return it.toString();
           }
         };
         Iterable<String> _map_2 = IterableExtensions.<Issue, String>map(issues, _function_4);
@@ -244,7 +231,6 @@ public class GenerateBootstrapDoc {
     CharSequence _footer = this.mainSite.footer("../bootstrap");
     _builder.append(_footer, "");
     _builder.newLineIfNotEmpty();
-    String _postProcess = this._postProcessor.postProcess(_builder);
-    return _postProcess;
+    return this._postProcessor.postProcess(_builder);
   }
 }

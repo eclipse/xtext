@@ -24,8 +24,7 @@ public class Node {
   public String tagName() {
     Class<? extends Node> _class = this.getClass();
     String _simpleName = _class.getSimpleName();
-    String _lowerCase = _simpleName.toLowerCase();
-    return _lowerCase;
+    return _simpleName.toLowerCase();
   }
   
   public Node() {

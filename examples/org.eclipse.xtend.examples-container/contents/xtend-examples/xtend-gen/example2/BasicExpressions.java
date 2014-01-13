@@ -42,8 +42,7 @@ public class BasicExpressions {
     final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList("Hello", "World"));
     final Function1<String,String> _function = new Function1<String,String>() {
       public String apply(final String it) {
-        String _upperCase = it.toUpperCase();
-        return _upperCase;
+        return it.toUpperCase();
       }
     };
     List<String> _map = ListExtensions.<String, String>map(list, _function);

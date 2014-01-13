@@ -9,7 +9,6 @@
  */
 package example3;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
@@ -17,32 +16,25 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class BottleSupport {
   public static String bottles(final int i) {
     String _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(i,0)) {
-        _matched=true;
+    switch (i) {
+      case 0:
         _switchResult = "no more bottles";
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(i,1)) {
-        _matched=true;
+        break;
+      case 1:
         _switchResult = "one bottle";
-      }
+        break;
+      default:
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append(i, "");
+        _builder.append(" bottles");
+        _switchResult = _builder.toString();
+        break;
     }
-    if (!_matched) {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append(i, "");
-      _builder.append(" bottles");
-      _switchResult = _builder.toString();
-    }
-    String _string = _switchResult.toString();
-    return _string;
+    return _switchResult.toString();
   }
   
   public static String Bottles(final int i) {
     String _bottles = BottleSupport.bottles(i);
-    String _firstUpper = StringExtensions.toFirstUpper(_bottles);
-    return _firstUpper;
+    return StringExtensions.toFirstUpper(_bottles);
   }
 }

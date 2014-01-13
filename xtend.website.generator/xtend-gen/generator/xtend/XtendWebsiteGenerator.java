@@ -16,8 +16,7 @@ public class XtendWebsiteGenerator {
   public static void main(final String[] args) {
     System.setProperty("java.awt.headless", "true");
     XtendStandaloneSetup.doSetup();
-    File _file = new File("website");
-    final File out = _file;
+    final File out = new File("website");
     Index _index = new Index();
     News _news = new News();
     Download _download = new Download();

@@ -26,11 +26,9 @@ public class DomBuilder {
   public boolean $(final Node it, final CharSequence contents) {
     boolean _xblockexpression = false;
     {
-      Contents _contents = new Contents(contents);
-      final Contents text = _contents;
-      ArrayList<Node> _contents_1 = it.getContents();
-      boolean _add = _contents_1.add(text);
-      _xblockexpression = (_add);
+      final Contents text = new Contents(contents);
+      ArrayList<Node> _contents = it.getContents();
+      _xblockexpression = (_contents.add(text));
     }
     return _xblockexpression;
   }
@@ -61,8 +59,7 @@ public class DomBuilder {
   }
   
   public void a(final Node it, final String href, final Procedure1<? super A> init) {
-    A _a = new A(href);
-    final A a = _a;
+    final A a = new A(href);
     this.<A>addAndApply(it, a, init);
   }
   

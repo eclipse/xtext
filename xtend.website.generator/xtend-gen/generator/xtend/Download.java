@@ -17,8 +17,7 @@ public class Download extends AbstractXtendWebsite {
   public String getLink(final String platform) {
     String _fileExtension = this.fileExtension(platform);
     String _plus = (("http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-kepler-R-" + platform) + _fileExtension);
-    String _plus_1 = (_plus + "&r=1");
-    return _plus_1;
+    return (_plus + "&r=1");
   }
   
   public String fileExtension(final String platform) {
@@ -29,7 +28,7 @@ public class Download extends AbstractXtendWebsite {
       _or = true;
     } else {
       boolean _equals_1 = Objects.equal(platform, Download.WIN_64);
-      _or = (_equals || _equals_1);
+      _or = _equals_1;
     }
     if (_or) {
       _xifexpression = ".zip";

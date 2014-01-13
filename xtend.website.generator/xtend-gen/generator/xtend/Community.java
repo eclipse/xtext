@@ -249,8 +249,7 @@ public class Community extends AbstractXtendWebsite {
     List<Article> _articles = this.articles(_function, _function_1, _function_2, _function_3, _function_4, _function_5, _function_6, _function_7, _function_8, _function_9, _function_10, _function_11, _function_12, _function_13, _function_14, _function_15, _function_16);
     final Function1<Article,CharSequence> _function_17 = new Function1<Article,CharSequence>() {
       public CharSequence apply(final Article it) {
-        CharSequence _printArticle = Community.this.printArticle(it);
-        return _printArticle;
+        return Community.this.printArticle(it);
       }
     };
     List<CharSequence> _map = ListExtensions.<Article, CharSequence>map(_articles, _function_17);
@@ -365,11 +364,9 @@ public class Community extends AbstractXtendWebsite {
             f.apply(it);
           }
         };
-        Article _doubleArrow = ObjectExtensions.<Article>operator_doubleArrow(_article, _function);
-        return _doubleArrow;
+        return ObjectExtensions.<Article>operator_doubleArrow(_article, _function);
       }
     };
-    List<Article> _map = ListExtensions.<Procedure1<? super Article>, Article>map(((List<Procedure1<? super Article>>)Conversions.doWrapArray(articles)), _function);
-    return _map;
+    return ListExtensions.<Procedure1<? super Article>, Article>map(((List<Procedure1<? super Article>>)Conversions.doWrapArray(articles)), _function);
   }
 }

@@ -19,8 +19,7 @@ public class Config extends XdocStandaloneSetup implements Module {
   
   public Injector createInjector() {
     XdocRuntimeModule _xdocRuntimeModule = new XdocRuntimeModule();
-    Injector _createInjector = Guice.createInjector(_xdocRuntimeModule, this);
-    return _createInjector;
+    return Guice.createInjector(_xdocRuntimeModule, this);
   }
   
   public void configure(final Binder binder) {

@@ -9,7 +9,6 @@ import com.google.inject.Injector;
 import generator.Resource;
 import java.io.File;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -26,15 +25,13 @@ public abstract class AbstractWebsite implements Resource {
   }
   
   public XdocStandaloneSetup getStandaloneSetup() {
-    XdocStandaloneSetup _xdocStandaloneSetup = new XdocStandaloneSetup();
-    return _xdocStandaloneSetup;
+    return new XdocStandaloneSetup();
   }
   
   public void generateTo(final File targetDir) {
     try {
       String _path = this.path();
-      File _file = new File(targetDir, _path);
-      final File file = _file;
+      final File file = new File(targetDir, _path);
       boolean _exists = file.exists();
       if (_exists) {
         InputOutput.<String>print("overwriting ");
@@ -299,8 +296,7 @@ public abstract class AbstractWebsite implements Resource {
     Pair<String,String> _mappedTo_4 = Pair.<String, String>of("community.html", "Community");
     Pair<String,String> _mappedTo_5 = Pair.<String, String>of("http://xtend-lang.org", "Xtend");
     Pair<String,String> _mappedTo_6 = Pair.<String, String>of("http://www.eclipse.org", "Eclipse.org");
-    ArrayList<Pair<String,String>> _newArrayList = CollectionLiterals.<Pair<String,String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6);
-    return _newArrayList;
+    return CollectionLiterals.<Pair<String,String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6);
   }
   
   public CharSequence navBar() {

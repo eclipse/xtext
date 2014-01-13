@@ -20,16 +20,13 @@ public class ImageExtensions {
       URI _createURI = URI.createURI(_path);
       final URI imageURI = _createURI.resolve(resourceURI);
       String _fileString = imageURI.toFileString();
-      File _file = new File(_fileString);
-      final File imageFile = _file;
-      FileInputStream _fileInputStream = new FileInputStream(imageFile);
-      final FileInputStream stream = _fileInputStream;
+      final File imageFile = new File(_fileString);
+      final FileInputStream stream = new FileInputStream(imageFile);
       try {
         final BufferedImage image = ImageIO.read(stream);
         int _width = image.getWidth();
         int _height = image.getHeight();
-        ImageDimension _imageDimension = new ImageDimension(_width, _height);
-        return _imageDimension;
+        return new ImageDimension(_width, _height);
       } finally {
         if (stream!=null) {
           stream.close();

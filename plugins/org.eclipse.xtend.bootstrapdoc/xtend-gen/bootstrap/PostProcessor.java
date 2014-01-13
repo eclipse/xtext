@@ -76,7 +76,6 @@ public class PostProcessor {
   }
   
   public String postProcess(final CharSequence it) {
-    String _unindentCodeBlocks = this.unindentCodeBlocks(it);
-    return _unindentCodeBlocks;
+    return this.unindentCodeBlocks(it);
   }
 }

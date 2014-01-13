@@ -53,7 +53,7 @@ public class CodeRefs {
                 _and = false;
               } else {
                 boolean _startsWith = identifier.startsWith(it);
-                _and = (_notEquals && _startsWith);
+                _and = _startsWith;
               }
               _xblockexpression = (_and);
             }
@@ -62,7 +62,7 @@ public class CodeRefs {
         };
         boolean _exists = IterableExtensions.<String>exists(CodeRefs.NO_JAVADOC_PACKAGE_PREFIXES, _function);
         boolean _not = (!_exists);
-        _and = (_isNullOrEmpty && _not);
+        _and = _not;
       }
       if (_and) {
         String _identifier = element.getIdentifier();
@@ -87,14 +87,14 @@ public class CodeRefs {
         _or = true;
       } else {
         boolean _contains = uri.contains("broken-link");
-        _or = (_equals || _contains);
+        _or = _contains;
       }
       if (!_or) {
         _and_1 = false;
       } else {
         String _identifier = element.getIdentifier();
         boolean _notEquals = (!Objects.equal(_identifier, null));
-        _and_1 = (_or && _notEquals);
+        _and_1 = _notEquals;
       }
       if (!_and_1) {
         _and = false;
@@ -102,13 +102,12 @@ public class CodeRefs {
         final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
           public Boolean apply(final String it) {
             String _identifier = element.getIdentifier();
-            boolean _startsWith = _identifier.startsWith(it);
-            return Boolean.valueOf(_startsWith);
+            return Boolean.valueOf(_identifier.startsWith(it));
           }
         };
         boolean _exists = IterableExtensions.<String>exists(CodeRefs.NO_SOURCE_PACKAGE_PREFIXES, _function);
         boolean _not = (!_exists);
-        _and = (_and_1 && _not);
+        _and = _not;
       }
       if (_and) {
         String _identifier_1 = element.getIdentifier();

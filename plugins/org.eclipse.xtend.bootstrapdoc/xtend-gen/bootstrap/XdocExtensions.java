@@ -26,8 +26,7 @@ public class XdocExtensions {
     EList<Part> _parts = document.getParts();
     final Function1<Part,EList<Chapter>> _function = new Function1<Part,EList<Chapter>>() {
       public EList<Chapter> apply(final Part it) {
-        EList<Chapter> _chapters = it.getChapters();
-        return _chapters;
+        return it.getChapters();
       }
     };
     List<EList<Chapter>> _map = ListExtensions.<Part, EList<Chapter>>map(_parts, _function);
@@ -39,8 +38,7 @@ public class XdocExtensions {
         return ((Chapter) _resolve);
       }
     };
-    Iterable<Chapter> _map_1 = IterableExtensions.<Chapter, Chapter>map(_plus, _function_1);
-    return _map_1;
+    return IterableExtensions.<Chapter, Chapter>map(_plus, _function_1);
   }
   
   public Iterable<? extends AbstractSection> getSections(final AbstractSection section) {
@@ -51,8 +49,7 @@ public class XdocExtensions {
     if (!_matched) {
       if (it instanceof Document) {
         _matched=true;
-        Iterable<Chapter> _allChapters = this.getAllChapters(((Document)it));
-        _switchResult = _allChapters;
+        _switchResult = this.getAllChapters(((Document)it));
       }
     }
     if (!_matched) {
@@ -61,12 +58,10 @@ public class XdocExtensions {
         EList<Chapter> _chapters = ((Part)it).getChapters();
         final Function1<Chapter,AbstractSection> _function = new Function1<Chapter,AbstractSection>() {
           public AbstractSection apply(final Chapter it) {
-            AbstractSection _resolve = XdocExtensions.this.resolve(it);
-            return _resolve;
+            return XdocExtensions.this.resolve(it);
           }
         };
-        List<AbstractSection> _map = ListExtensions.<Chapter, AbstractSection>map(_chapters, _function);
-        _switchResult = _map;
+        _switchResult = ListExtensions.<Chapter, AbstractSection>map(_chapters, _function);
       }
     }
     if (!_matched) {
@@ -75,12 +70,10 @@ public class XdocExtensions {
         EList<Section> _subSections = ((Chapter)it).getSubSections();
         final Function1<Section,AbstractSection> _function = new Function1<Section,AbstractSection>() {
           public AbstractSection apply(final Section it) {
-            AbstractSection _resolve = XdocExtensions.this.resolve(it);
-            return _resolve;
+            return XdocExtensions.this.resolve(it);
           }
         };
-        List<AbstractSection> _map = ListExtensions.<Section, AbstractSection>map(_subSections, _function);
-        _switchResult = _map;
+        _switchResult = ListExtensions.<Section, AbstractSection>map(_subSections, _function);
       }
     }
     if (!_matched) {
@@ -89,12 +82,10 @@ public class XdocExtensions {
         EList<Section2> _subSections = ((Section)it).getSubSections();
         final Function1<Section2,AbstractSection> _function = new Function1<Section2,AbstractSection>() {
           public AbstractSection apply(final Section2 it) {
-            AbstractSection _resolve = XdocExtensions.this.resolve(it);
-            return _resolve;
+            return XdocExtensions.this.resolve(it);
           }
         };
-        List<AbstractSection> _map = ListExtensions.<Section2, AbstractSection>map(_subSections, _function);
-        _switchResult = _map;
+        _switchResult = ListExtensions.<Section2, AbstractSection>map(_subSections, _function);
       }
     }
     if (!_matched) {
@@ -103,12 +94,10 @@ public class XdocExtensions {
         EList<Section3> _subSections = ((Section2)it).getSubSections();
         final Function1<Section3,AbstractSection> _function = new Function1<Section3,AbstractSection>() {
           public AbstractSection apply(final Section3 it) {
-            AbstractSection _resolve = XdocExtensions.this.resolve(it);
-            return _resolve;
+            return XdocExtensions.this.resolve(it);
           }
         };
-        List<AbstractSection> _map = ListExtensions.<Section3, AbstractSection>map(_subSections, _function);
-        _switchResult = _map;
+        _switchResult = ListExtensions.<Section3, AbstractSection>map(_subSections, _function);
       }
     }
     if (!_matched) {
@@ -117,19 +106,16 @@ public class XdocExtensions {
         EList<Section4> _subSections = ((Section3)it).getSubSections();
         final Function1<Section4,AbstractSection> _function = new Function1<Section4,AbstractSection>() {
           public AbstractSection apply(final Section4 it) {
-            AbstractSection _resolve = XdocExtensions.this.resolve(it);
-            return _resolve;
+            return XdocExtensions.this.resolve(it);
           }
         };
-        List<AbstractSection> _map = ListExtensions.<Section4, AbstractSection>map(_subSections, _function);
-        _switchResult = _map;
+        _switchResult = ListExtensions.<Section4, AbstractSection>map(_subSections, _function);
       }
     }
     if (!_matched) {
       if (it instanceof Section4) {
         _matched=true;
-        List<AbstractSection> _emptyList = CollectionLiterals.<AbstractSection>emptyList();
-        _switchResult = _emptyList;
+        _switchResult = CollectionLiterals.<AbstractSection>emptyList();
       }
     }
     return _switchResult;
@@ -141,22 +127,19 @@ public class XdocExtensions {
     if (!_matched) {
       if (section instanceof ChapterRef) {
         _matched=true;
-        Chapter _chapter = ((ChapterRef)section).getChapter();
-        _switchResult = _chapter;
+        _switchResult = ((ChapterRef)section).getChapter();
       }
     }
     if (!_matched) {
       if (section instanceof SectionRef) {
         _matched=true;
-        Section _section = ((SectionRef)section).getSection();
-        _switchResult = _section;
+        _switchResult = ((SectionRef)section).getSection();
       }
     }
     if (!_matched) {
       if (section instanceof Section2Ref) {
         _matched=true;
-        Section2 _section2 = ((Section2Ref)section).getSection2();
-        _switchResult = _section2;
+        _switchResult = ((Section2Ref)section).getSection2();
       }
     }
     if (!_matched) {
@@ -166,7 +149,6 @@ public class XdocExtensions {
   }
   
   public String id(final AbstractSection section) {
-    String _name = section.getName();
-    return _name;
+    return section.getName();
   }
 }

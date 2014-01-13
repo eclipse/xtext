@@ -37,8 +37,7 @@ public class Movies {
     final Function1<Movie,Boolean> _function = new Function1<Movie,Boolean>() {
       public Boolean apply(final Movie it) {
         Set<String> _categories = it.getCategories();
-        boolean _contains = _categories.contains("Action");
-        return Boolean.valueOf(_contains);
+        return Boolean.valueOf(_categories.contains("Action"));
       }
     };
     Iterable<Movie> _filter = IterableExtensions.<Movie>filter(this.movies, _function);
@@ -55,15 +54,13 @@ public class Movies {
       public Boolean apply(final Movie it) {
         IntegerRange _upTo = new IntegerRange(1980, 1989);
         int _year = it.getYear();
-        boolean _contains = _upTo.contains(_year);
-        return Boolean.valueOf(_contains);
+        return Boolean.valueOf(_upTo.contains(_year));
       }
     };
     Iterable<Movie> _filter = IterableExtensions.<Movie>filter(this.movies, _function);
     final Function1<Movie,Double> _function_1 = new Function1<Movie,Double>() {
       public Double apply(final Movie it) {
-        double _rating = it.getRating();
-        return Double.valueOf(_rating);
+        return Double.valueOf(it.getRating());
       }
     };
     List<Movie> _sortBy = IterableExtensions.<Movie, Double>sortBy(_filter, _function_1);
@@ -80,16 +77,14 @@ public class Movies {
     final Function1<Movie,Double> _function = new Function1<Movie,Double>() {
       public Double apply(final Movie it) {
         double _rating = it.getRating();
-        double _minus = (-_rating);
-        return Double.valueOf(_minus);
+        return Double.valueOf((-_rating));
       }
     };
     List<Movie> _sortBy = IterableExtensions.<Movie, Double>sortBy(this.movies, _function);
     Iterable<Movie> _take = IterableExtensions.<Movie>take(_sortBy, 2);
     final Function1<Movie,Long> _function_1 = new Function1<Movie,Long>() {
       public Long apply(final Movie it) {
-        long _numberOfVotes = it.getNumberOfVotes();
-        return Long.valueOf(_numberOfVotes);
+        return Long.valueOf(it.getNumberOfVotes());
       }
     };
     Iterable<Long> _map = IterableExtensions.<Movie, Long>map(_take, _function_1);
@@ -119,8 +114,7 @@ public class Movies {
             String _next_3 = segments.next();
             long _parseLong = Long.parseLong(_next_3);
             Set<String> _set = IteratorExtensions.<String>toSet(segments);
-            Movie _movie = new Movie(_next, _parseInt, _parseDouble, _parseLong, _set);
-            return _movie;
+            return new Movie(_next, _parseInt, _parseDouble, _parseLong, _set);
           }
         };
         List<Movie> _map = ListExtensions.<String, Movie>map(_readLines, _function);

@@ -27,58 +27,49 @@ public class Time {
     BigDecimal _msec = this.getMsec();
     BigDecimal _msec_1 = other.getMsec();
     BigDecimal _plus = _msec.add(_msec_1);
-    Time _time = new Time(_plus);
-    return _time;
+    return new Time(_plus);
   }
   
   public Time operator_minus(final Time other) {
     BigDecimal _msec = this.getMsec();
     BigDecimal _msec_1 = other.getMsec();
     BigDecimal _minus = _msec.subtract(_msec_1);
-    Time _time = new Time(_minus);
-    return _time;
+    return new Time(_minus);
   }
   
   public Time operator_multiply(final int times) {
     BigDecimal _msec = this.getMsec();
     BigDecimal _bigDecimal = new BigDecimal(times);
     BigDecimal _multiply = _msec.multiply(_bigDecimal);
-    Time _time = new Time(_multiply);
-    return _time;
+    return new Time(_multiply);
   }
   
   public Time operator_divide(final int times) {
     BigDecimal _msec = this.getMsec();
     BigDecimal _bigDecimal = new BigDecimal(times);
     BigDecimal _divide = _msec.divide(_bigDecimal, MathContext.DECIMAL128);
-    Time _time = new Time(_divide);
-    return _time;
+    return new Time(_divide);
   }
   
   public static Time msec(final int msec) {
     BigDecimal _bigDecimal = new BigDecimal(msec);
-    Time _time = new Time(_bigDecimal);
-    return _time;
+    return new Time(_bigDecimal);
   }
   
   public static Time sec(final int sec) {
-    Time _msec = Time.msec((sec * 1000));
-    return _msec;
+    return Time.msec((sec * 1000));
   }
   
   public static Time min(final int min) {
-    Time _sec = Time.sec((min * 60));
-    return _sec;
+    return Time.sec((min * 60));
   }
   
   public static Time h(final int h) {
-    Time _min = Time.min((h * 60));
-    return _min;
+    return Time.min((h * 60));
   }
   
   public static Time h() {
-    Time _h = Time.h(1);
-    return _h;
+    return Time.h(1);
   }
   
   public Time(final BigDecimal msec) {

@@ -53,14 +53,14 @@ public abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
               } else {
                 String _name_1 = lang.getName();
                 boolean _equalsIgnoreCase_1 = _name_1.equalsIgnoreCase("xml");
-                _or_1 = (_equalsIgnoreCase || _equalsIgnoreCase_1);
+                _or_1 = _equalsIgnoreCase_1;
               }
               if (_or_1) {
                 _or = true;
               } else {
                 String _name_2 = lang.getName();
                 boolean _equalsIgnoreCase_2 = _name_2.equalsIgnoreCase("xtend");
-                _or = (_or_1 || _equalsIgnoreCase_2);
+                _or = _equalsIgnoreCase_2;
               }
               boolean _not = (!_or);
               if (_not) {

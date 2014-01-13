@@ -44,8 +44,7 @@ public class Documentation extends AbstractXtendWebsite {
   }
   
   public XdocStandaloneSetup getStandaloneSetup() {
-    DocumentationSetup _documentationSetup = new DocumentationSetup();
-    return _documentationSetup;
+    return new DocumentationSetup();
   }
   
   public String getXdocDocumentRootFolder() {
@@ -88,8 +87,7 @@ public class Documentation extends AbstractXtendWebsite {
   
   public CharSequence website() {
     CharSequence _website = super.website();
-    String _postProcess = this.processor.postProcess(_website);
-    return _postProcess;
+    return this.processor.postProcess(_website);
   }
   
   public void generateTo(final File targetDir) {
@@ -110,8 +108,7 @@ public class Documentation extends AbstractXtendWebsite {
           URI _trimSegments = _uRI.trimSegments(1);
           String _fileString = _trimSegments.toFileString();
           String _path = it.getPath();
-          File _file = new File(_fileString, _path);
-          final File source = _file;
+          final File source = new File(_fileString, _path);
           boolean _exists = source.exists();
           boolean _not = (!_exists);
           if (_not) {
@@ -126,12 +123,10 @@ public class Documentation extends AbstractXtendWebsite {
             ICompositeNode _node = NodeModelUtils.getNode(it);
             int _startLine = _node.getStartLine();
             String _plus_4 = (_plus_3 + Integer.valueOf(_startLine));
-            IllegalStateException _illegalStateException = new IllegalStateException(_plus_4);
-            throw _illegalStateException;
+            throw new IllegalStateException(_plus_4);
           }
           String _path_1 = it.getPath();
-          File _file_1 = new File(targetDir, _path_1);
-          final File target = _file_1;
+          final File target = new File(targetDir, _path_1);
           String _canonicalPath_1 = target.getCanonicalPath();
           InputOutput.<String>println(_canonicalPath_1);
           InputSupplier<FileInputStream> _newInputStreamSupplier = Files.newInputStreamSupplier(source);

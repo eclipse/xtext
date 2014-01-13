@@ -29,8 +29,7 @@ public class Speed {
     BigDecimal _mm = d.getMm();
     BigDecimal _msec = t.getMsec();
     BigDecimal _divide = _mm.divide(_msec, MathContext.DECIMAL128);
-    Speed _speed = new Speed(_divide);
-    return _speed;
+    return new Speed(_divide);
   }
   
   public Speed(final BigDecimal mmPerMsec) {

@@ -25,8 +25,7 @@ public class News extends AbstractXtendWebsite {
     _builder.newLine();
     CharSequence _javaScriptDocumentStart = super.javaScriptDocumentStart();
     String _string = _javaScriptDocumentStart.toString();
-    String _plus = (_builder.toString() + _string);
-    return _plus;
+    return (_builder.toString() + _string);
   }
   
   public CharSequence jsOnLoad() {
@@ -93,8 +92,7 @@ public class News extends AbstractXtendWebsite {
     _builder.newLine();
     CharSequence _jsOnLoad = super.jsOnLoad();
     String _string = _jsOnLoad.toString();
-    String _plus = (_builder.toString() + _string);
-    return _plus;
+    return (_builder.toString() + _string);
   }
   
   public CharSequence contents() {

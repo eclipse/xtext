@@ -18,7 +18,6 @@ import example4.Html;
 import example4.P;
 import example4.Title;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -33,20 +32,10 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class DomExample {
   @Extension
-  private DomBuilder db = new Function0<DomBuilder>() {
-    public DomBuilder apply() {
-      DomBuilder _domBuilder = new DomBuilder();
-      return _domBuilder;
-    }
-  }.apply();
+  private DomBuilder db = new DomBuilder();
   
   @Extension
-  private DomSerializer ds = new Function0<DomSerializer>() {
-    public DomSerializer apply() {
-      DomSerializer _domSerializer = new DomSerializer();
-      return _domSerializer;
-    }
-  }.apply();
+  private DomSerializer ds = new DomSerializer();
   
   @Test
   public void processDom() {
@@ -121,7 +110,6 @@ public class DomExample {
         DomExample.this.db.body(it, _function_1);
       }
     };
-    Html _doubleArrow = ObjectExtensions.<Html>operator_doubleArrow(_html, _function);
-    return _doubleArrow;
+    return ObjectExtensions.<Html>operator_doubleArrow(_html, _function);
   }
 }

@@ -1,7 +1,6 @@
 package generator.xtend;
 
 import generator.AbstractWebsite;
-import java.util.ArrayList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -35,8 +34,7 @@ public abstract class AbstractXtendWebsite extends AbstractWebsite {
     Pair<String,String> _mappedTo_3 = Pair.<String, String>of("community.html", "Community");
     Pair<String,String> _mappedTo_4 = Pair.<String, String>of("http://xtext.org", "Xtext");
     Pair<String,String> _mappedTo_5 = Pair.<String, String>of("http://www.eclipse.org", "Eclipse.org");
-    ArrayList<Pair<String,String>> _newArrayList = CollectionLiterals.<Pair<String,String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5);
-    return _newArrayList;
+    return CollectionLiterals.<Pair<String,String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5);
   }
   
   public CharSequence quickLinksAndTweets() {

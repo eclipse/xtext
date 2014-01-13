@@ -27,53 +27,45 @@ public class Distance {
     BigDecimal _mm = this.getMm();
     BigDecimal _mm_1 = other.getMm();
     BigDecimal _plus = _mm.add(_mm_1);
-    Distance _distance = new Distance(_plus);
-    return _distance;
+    return new Distance(_plus);
   }
   
   public Distance operator_minus(final Distance other) {
     BigDecimal _mm = this.getMm();
     BigDecimal _mm_1 = other.getMm();
     BigDecimal _minus = _mm.subtract(_mm_1);
-    Distance _distance = new Distance(_minus);
-    return _distance;
+    return new Distance(_minus);
   }
   
   public Distance operator_multiply(final int times) {
     BigDecimal _mm = this.getMm();
     BigDecimal _bigDecimal = new BigDecimal(times);
     BigDecimal _multiply = _mm.multiply(_bigDecimal);
-    Distance _distance = new Distance(_multiply);
-    return _distance;
+    return new Distance(_multiply);
   }
   
   public Distance operator_divide(final int times) {
     BigDecimal _mm = this.getMm();
     BigDecimal _bigDecimal = new BigDecimal(times);
     BigDecimal _divide = _mm.divide(_bigDecimal, MathContext.DECIMAL128);
-    Distance _distance = new Distance(_divide);
-    return _distance;
+    return new Distance(_divide);
   }
   
   public static Distance mm(final int millimeters) {
     BigDecimal _bigDecimal = new BigDecimal(millimeters);
-    Distance _distance = new Distance(_bigDecimal);
-    return _distance;
+    return new Distance(_bigDecimal);
   }
   
   public static Distance cm(final int centimeters) {
-    Distance _mm = Distance.mm((centimeters * 10));
-    return _mm;
+    return Distance.mm((centimeters * 10));
   }
   
   public static Distance m(final int meters) {
-    Distance _cm = Distance.cm((meters * 100));
-    return _cm;
+    return Distance.cm((meters * 100));
   }
   
   public static Distance km(final int kilometers) {
-    Distance _m = Distance.m((kilometers * 1000));
-    return _m;
+    return Distance.m((kilometers * 1000));
   }
   
   public Distance(final BigDecimal mm) {
