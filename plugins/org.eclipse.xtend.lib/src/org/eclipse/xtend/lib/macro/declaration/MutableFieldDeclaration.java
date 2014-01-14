@@ -61,6 +61,8 @@ public interface MutableFieldDeclaration extends MutableMemberDeclaration, Field
 	 * sets the 'initializer' expression of this field declaration.
 	 * Automatically detaches any previously assigned initializers from this field declaration.
 	 * 
+	 * <b>The given {@link CompilationStrategy} will be executed later during code generation, not immediately.</b>
+	 * 
 	 * @param initializer the compilation strategy, must not be <code>null</code>
 	 * @exception IllegalArgumentException if the <code>initializer</code> is <code>null</code>
 	 */
@@ -69,6 +71,8 @@ public interface MutableFieldDeclaration extends MutableMemberDeclaration, Field
 	/**
 	 * sets the 'initializer' expression of this field declaration.
 	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * 
+	 * <b>The given {@link StringConcatenationClient} will be executed later during code generation, not immediately.</b>
 	 * 
 	 * @param template the compilation template, must not be <code>null</code>
 	 * @exception IllegalArgumentException if the <code>initializer</code> is <code>null</code>

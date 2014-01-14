@@ -40,6 +40,8 @@ public interface MutableExecutableDeclaration extends MutableTypeParameterDeclar
 	/**
 	 * Sets the given {@link CompilationStrategy} as the body.
 	 * 
+	 * <b>The given {@link CompilationStrategy} will be executed later during code generation, not immediately.</b>
+	 * 
 	 * If this {@link MutableExecutableDeclaration} has already set another expression or compilation strategy the old one will be detached.
 	 * 
 	 * @param compilationStrategy the compilation strategy, must not be <code>null</code>
@@ -49,6 +51,8 @@ public interface MutableExecutableDeclaration extends MutableTypeParameterDeclar
 	
 	/**
 	 * Sets the given {@link StringConcatenationClient} as the body.
+	 * 
+	 * <b>The given {@link StringConcatenationClient} will be executed later during code generation, not immediately.</b>
 	 * 
 	 * If this {@link MutableExecutableDeclaration} has already set another expression or compilation strategy the old one will be detached.
 	 * 
