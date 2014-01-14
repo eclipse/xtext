@@ -1064,7 +1064,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected String declareLocalVariable(XSwitchExpression expr, ITreeAppendable b) {
 		// declare local var for the switch expression
 		String variableName = null;
-		if(expr.getLocalVarName() == null && expr.getSwitch() instanceof XFeatureCall) {
+		if (expr.getLocalVarName() == null && b.hasName(expr.getSwitch())) {
+			variableName = b.getName(expr.getSwitch());
+		} else if (expr.getLocalVarName() == null && expr.getSwitch() instanceof XFeatureCall) {
 			JvmIdentifiableElement feature = ((XFeatureCall) expr.getSwitch()).getFeature();
 			if (b.hasName(feature))
 				variableName = b.getName(feature);
