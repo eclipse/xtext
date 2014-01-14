@@ -321,5 +321,36 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			return _subSequence;
 		''')
 	}
+	
+	@Test def void testSwitch() throws Exception {
+		'''
+			{
+				val it = String
+				switch name {
+					CharSequence : name
+					default : 'noname'
+				}
+			}
+		'''.compilesTo('''
+			String _xblockexpression = null;
+			{
+			  final Class<String> it = String.class;
+			  String _switchResult = null;
+			  String _name = it.getName();
+			  boolean _matched = false;
+			  if (!_matched) {
+			    if (_name instanceof CharSequence) {
+			      _matched=true;
+			      _switchResult = it.getName();
+			    }
+			  }
+			  if (!_matched) {
+			    _switchResult = "noname";
+			  }
+			  _xblockexpression = (_switchResult);
+			}
+			return _xblockexpression;
+		''')
+	}
 }
 
