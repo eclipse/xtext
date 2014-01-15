@@ -985,7 +985,7 @@ public class JvmTypesBuilder {
 			if (value instanceof String) {
 				JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
 				annotationValue.getValues().add((String) value);
-				result.getValues().add(annotationValue);
+				result.getExplicitValues().add(annotationValue);
 			}
 		}
 		return result;
@@ -1264,13 +1264,23 @@ public class JvmTypesBuilder {
 				JvmOperation op = (JvmOperation) val.eGet(
 						XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT, false);
 				annotationValue.setOperation(op);
-				reference.getValues().add(annotationValue);
+				reference.getExplicitValues().add(annotationValue);
 			}
 		}
 		if (anno.getValue() != null) {
 			JvmAnnotationValue value = toJvmAnnotationValue(anno.getValue());
 			if (value != null) {
-				reference.getValues().add(value);
+				if (!annotation.eIsProxy()) {
+					// TODO if the annotation type is still a proxy, we'd have to set a proxy to the operation, here too
+					Iterable<JvmOperation> declaredOperations = ((JvmAnnotationType)annotation).getDeclaredOperations();
+					for(JvmOperation operation: declaredOperations) {
+						if ("value".equals(operation.getSimpleName())) {
+							value.setOperation(operation);
+							break;
+						}
+					}
+				}
+				reference.getExplicitValues().add(value);
 			}
 		}
 		associate(anno, reference);

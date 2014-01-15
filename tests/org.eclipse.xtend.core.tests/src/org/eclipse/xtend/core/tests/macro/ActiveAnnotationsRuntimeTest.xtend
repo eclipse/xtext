@@ -6,9 +6,11 @@ import com.google.inject.Provider
 import java.io.File
 import java.util.List
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.core.macro.AnnotationProcessor
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
+import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
@@ -34,8 +36,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtend.core.validation.IssueCodes
-import org.eclipse.xtend.core.macro.AnnotationProcessor
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
@@ -127,9 +127,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 		resourceSet.createResource(clientURI)
 		
 		compiler.compile(macroResourceSet) [ result |
-			val classLoader = new DelegatingClassloader(getClass().classLoader) [
-				result.getCompiledClass(it)
-			]
+			val classLoader = new DelegatingClassloader(getClass().classLoader, result)
 			resourceSet.classpathURIContext = classLoader
 			processorProvider.classLoader = classLoader
 		]
@@ -182,15 +180,20 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 }
 
 class DelegatingClassloader extends ClassLoader {
-	(String)=>Class<?> classFinder
+	CompilationTestHelper.Result classFinder
 
-	new(ClassLoader parent, (String)=>Class<?> classFinder) {
+	new(ClassLoader parent, CompilationTestHelper.Result classFinder) {
 		super(parent)
 		this.classFinder = classFinder
 	}
-
+	
+	override protected findResource(String name) {
+		val result = classFinder.classLoader.getResource(name)
+		return result ?: super.findResource(name)
+	}
+	
 	override findClass(String name) throws ClassNotFoundException {
-		val result = classFinder.apply(name)
+		val result = classFinder.getCompiledClass(name)
 		if (result != null)
 			return result
 		super.findClass(name)
