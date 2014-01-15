@@ -35,6 +35,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Visibility
+import org.eclipse.xtext.validation.ComposedChecks
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -389,11 +390,11 @@ class CheckMutableClassDeclarationProcessor extends AbstractClassProcessor {
 
 }
 
-@Active(CheckMutableIterfaceDeclarationProcessor)
+@Active(CheckMutableInterfaceDeclarationProcessor)
 annotation CheckMutableInterfaceDeclaration {
 }
 
-class CheckMutableIterfaceDeclarationProcessor implements RegisterGlobalsParticipant<InterfaceDeclaration>, TransformationParticipant<MutableInterfaceDeclaration>, CodeGenerationParticipant<MutableInterfaceDeclaration> {
+class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobalsParticipant<InterfaceDeclaration>, TransformationParticipant<MutableInterfaceDeclaration>, CodeGenerationParticipant<MutableInterfaceDeclaration> {
 
 	override doRegisterGlobals(List<? extends InterfaceDeclaration> annotatedSourceElements,
 		RegisterGlobalsContext context) {
@@ -420,15 +421,51 @@ class CheckMutableIterfaceDeclarationProcessor implements RegisterGlobalsPartici
 			]
 			annotatedTargetElement.extendedInterfaces = emptyList
 			val annotationReference = annotatedTargetElement.addAnnotation(Deprecated.newTypeReference.type)
-			annotationReference.set(null, null)
-			annotationReference.set(null, "foo")
-			// TODO remove workaround (cast) below
-			annotationReference.set(null, { val String[] array = #["foo"]; array })
-			annotationReference.set(null, true)
-			annotationReference.set(null, #[true] as boolean[])
-			annotationReference.set(null, 0)
-			annotationReference.set(null, #[0] as int[])
+			
+			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+				annotationReference.set(null, null)
+			]
+			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+				annotationReference.set(null, "foo")
+			]
+			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+				// TODO remove workaround (cast) below
+				annotationReference.set(null, { val String[] array = #["foo"]; array })
+			]
+			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+				annotationReference.set(null, true)
+			]
+			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+				annotationReference.set(null, #[true] as boolean[])
+			]
+			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+				annotationReference.set(null, 0)
+			]
+			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+				annotationReference.set(null, #[0] as int[])
+			]
+			assertThrowable(IllegalArgumentException, "The annotation property 'doesNotExist' is not declared on the annotation type 'java.lang.Deprecated'.") [ |
+				annotationReference.set('doesNotExist', { val String[] array = #["foo"]; array })
+			]
 			annotationReference.remove
+			val otherAnnotationReference = annotatedTargetElement.addAnnotation(SuppressWarnings.newTypeReference.type)
+			otherAnnotationReference.set('value', { val String[] array = #["foo"]; array })
+			assertThrowable(IllegalArgumentException, 'int[] is not applicable at this location. Expected java.lang.String[]') [|
+				otherAnnotationReference.set('value', { val int[] array = #[1]; array })
+			]
+			otherAnnotationReference.remove
+			
+			val composedChecksReference = annotatedTargetElement.addAnnotation(ComposedChecks.newTypeReference.type)
+			composedChecksReference.set('validators', <TypeReference>newArrayOfSize(0))
+			// concrete class type is intentionally not checked since the hierarchy may still be incomplete
+			composedChecksReference.set('validators', String.newTypeReference) 
+			assertThrowable(IllegalArgumentException, 'java.lang.String[] is not applicable at this location. Expected org.eclipse.xtend.lib.macro.declaration.TypeReference[]') [|
+				composedChecksReference.set('validators', <String>newArrayOfSize(0))
+			]
+			assertThrowable(IllegalArgumentException, 'Cannot set annotation values of type java.lang.Object[]') [|
+				composedChecksReference.set('validators', <Object>newArrayOfSize(0))
+			]
+			composedChecksReference.remove
 		}
 	}
 

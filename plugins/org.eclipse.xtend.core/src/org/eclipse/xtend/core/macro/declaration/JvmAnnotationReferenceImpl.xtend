@@ -21,6 +21,10 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 
 import static org.eclipse.xtend.core.macro.ConditionUtils.*
+import org.eclipse.xtext.common.types.JvmOperation
+import com.google.common.collect.Iterators
+import org.eclipse.xtext.common.types.TypesPackage
+import org.eclipse.xtext.common.types.JvmType
 
 class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> implements MutableAnnotationReference {
 	
@@ -29,9 +33,8 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getExpression(String property) {
-		val annotationValue = delegate.values.findFirst[
-			valueName == property || (valueName == null && property == 'value')
-		]
+		val op = findOperation(property)
+		val annotationValue = delegate.values.findFirst[ operation == op || (operation == null && op.simpleName == 'value') ]
 		switch annotationValue {
 			JvmCustomAnnotationValue : {
 				return compilationUnit.toExpression(annotationValue.values.head as XExpression)
@@ -42,17 +45,11 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getValue(String property) {
 		try {
-			val annotationValue = delegate.values.findFirst[
-				valueName == property || (valueName == null && property == 'value')
-			]
-			val op = delegate.annotation.declaredOperations.findFirst[simpleName == property]
+			val op = findOperation(property)
+			val annotationValue = delegate.values.findFirst[ operation == op || (operation == null && op.simpleName == 'value') ]
 			val isArrayType = op!=null && compilationUnit.typeReferences.isArray(op.returnType)
 			if (annotationValue != null)
 				return compilationUnit.translateAnnotationValue(annotationValue, isArrayType)
-			
-			if (op != null && op.defaultValue != null) {
-				return compilationUnit.translateAnnotationValue(op.defaultValue, isArrayType)
-			}
 		} catch (ConstantExpressionEvaluationException e) {
 			compilationUnit.problemSupport.addError(this, e.getMessage)
 		}
@@ -60,161 +57,161 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override set(String name, Object value) {
-		internalSet(name, value)
+		internalSet(name, value, false)
 	}
 	
-	def dispatch void internalSet(String name, Void value) {
+	def dispatch void internalSet(String name, Void value, boolean mustBeArray) {
 		remove(name)
 	}
 	
-	def dispatch void internalSet(String name, Object values) {
-		throw new IllegalArgumentException("Cannot set annotation values of type "+values?.class?.name) 
+	def dispatch void internalSet(String name, Object values, boolean mustBeArray) {
+		throw new IllegalArgumentException("Cannot set annotation values of type "+values.class.canonicalName) 
 	}
 	
-	def dispatch void internalSet(String name, String value) {
+	def dispatch void internalSet(String name, String value, boolean mustBeArray) {
 		val String[] arr = #[value]
-		_internalSet(name, arr)
+		_internalSet(name, arr, false)
 	}
 	
-	def dispatch void internalSet(String name, String[] values) {
+	def dispatch void internalSet(String name, String[] values, boolean mustBeArray) {
 		checkIterable(values, "values")
+		val op = findOperation(name, String.name, mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, Boolean value) {
+	def dispatch void internalSet(String name, Boolean value, boolean mustBeArray) {
 		val boolean[] arr = #[value.booleanValue]
-		_internalSet(name, arr)
+		_internalSet(name, arr, false)
 	}
 	
-	def dispatch void internalSet(String name, boolean[] values) {
+	def dispatch void internalSet(String name, boolean[] values, boolean mustBeArray) {
 		checkIterable(values, "values")
+		val op = findOperation(name, "boolean", mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, Integer value) {
+	def dispatch void internalSet(String name, Integer value, boolean mustBeArray) {
 		val int[] arr = #[value.intValue]
-		_internalSet(name, arr)
+		_internalSet(name, arr, false)
 	}
 	
-	def dispatch void internalSet(String name, int[] values) {
+	def dispatch void internalSet(String name, int[] values, boolean mustBeArray) {
 		checkIterable(values, "values")
+		val op = findOperation(name, "int", mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmIntAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, Short value) {
+	def dispatch void internalSet(String name, Short value, boolean mustBeArray) {
 		val short[] arr = #[value.shortValue]
-		_internalSet(name, arr)
+		_internalSet(name, arr, false)
 	}
 	
-	def dispatch void internalSet(String name, short[] values) {
+	def dispatch void internalSet(String name, short[] values, boolean mustBeArray) {
 		checkIterable(values, "values")
+		val op = findOperation(name, "short", mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmShortAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, Long value) {
+	def dispatch void internalSet(String name, Long value, boolean mustBeArray) {
 		val long[] arr = #[value.longValue]
-		_internalSet(name, arr)
+		_internalSet(name, arr, false)
 	}
 	
-	def dispatch void internalSet(String name, long[] values) {
+	def dispatch void internalSet(String name, long[] values, boolean mustBeArray) {
 		checkIterable(values, "values")
+		val op = findOperation(name, "long", mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmLongAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, Double value) {
+	def dispatch void internalSet(String name, Double value, boolean mustBeArray) {
 		val double[] arr = #[value.doubleValue]
-		_internalSet(name, arr)
+		_internalSet(name, arr, false)
 	}
 	
-	def dispatch void internalSet(String name, double[] values) {
+	def dispatch void internalSet(String name, double[] values, boolean mustBeArray) {
 		checkIterable(values, "values")
+		val op = findOperation(name, "double", mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, Float value) {
+	def dispatch void internalSet(String name, Float value, boolean mustBeArray) {
 		val float[] arr = #[value.floatValue]
-		_internalSet(name, arr)
+		_internalSet(name, arr, false)
 	}
 	
-	def dispatch void internalSet(String name, float[] values) {
+	def dispatch void internalSet(String name, float[] values, boolean mustBeArray) {
 		checkIterable(values, "values")
+		val op = findOperation(name, "float", mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, Character value) {
+	def dispatch void internalSet(String name, Character value, boolean mustBeArray) {
 		val char[] arr = #[value.charValue]
-		_internalSet(name, arr)
+		_internalSet(name, arr, false)
 	}
 	
-	def dispatch void internalSet(String name, char[] values) {
+	def dispatch void internalSet(String name, char[] values, boolean mustBeArray) {
 		checkIterable(values, "values")
+		val op = findOperation(name, "char", mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmCharAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, Byte value) {
+	def dispatch void internalSet(String name, Byte value, boolean mustBeArray) {
 		val byte[] arr = #[value.byteValue]
-		_internalSet(name, arr)
+		_internalSet(name, arr, false)
 	}
 	
-	def dispatch void internalSet(String name, byte[] values) {
+	def dispatch void internalSet(String name, byte[] values, boolean mustBeArray) {
 		checkIterable(values, "values")
+		val op = findOperation(name, "byte", mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmByteAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		newValue.values.addAll(values)
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, TypeReference value) {
-		_internalSet(name, #[value])
+	def dispatch void internalSet(String name, TypeReference value, boolean mustBeArray) {
+		_internalSet(name, #[value], false)
 	}
 	
-	def dispatch void internalSet(String name, TypeReference[] values) {
+	def dispatch void internalSet(String name, TypeReference[] values, boolean mustBeArray) {
 		checkIterable(values, "values")
+		val op = findOperation(name, TypeReference.name, mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		values.forEach[
 			switch it {
 				TypeReferenceImpl : {
@@ -222,19 +219,23 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 				}
 			}
 		]
-		remove(name);
-		delegate.getValues.add(newValue)
+		
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, EnumerationValueDeclaration value) {
-		_internalSet(name, #[value])
+	def dispatch void internalSet(String name, EnumerationValueDeclaration value, boolean mustBeArray) {
+		_internalSet(name, #[value], false)
 	}
 	
-	def dispatch void internalSet(String name, EnumerationValueDeclaration[] values) {
+	def dispatch void internalSet(String name, EnumerationValueDeclaration[] values, boolean mustBeArray) {
 		checkIterable(values, "values")
+		val op = if (values.length >= 1)
+			findOperation(name, values.get(0).declaringType.qualifiedName, mustBeArray) 
+		else
+			findOperation(name, null, mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmEnumAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		values.forEach[
 			switch it {
 				JvmEnumerationValueDeclarationImpl : {
@@ -245,37 +246,40 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 				}
 			}
 		]
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, XtendAnnotationReferenceImpl value) {
+	def dispatch void internalSet(String name, XtendAnnotationReferenceImpl value, boolean mustBeArray) {
+		val op = findOperation(name, null, mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmCustomAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		newValue.values.add(value.delegate)
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, ExpressionImpl value) {
+	def dispatch void internalSet(String name, ExpressionImpl value, boolean mustBeArray) {
+		val op = findOperation(name, null, mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmCustomAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		newValue.values.add(value.delegate)
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
-	def dispatch void internalSet(String name, AnnotationReference value) {
-		_internalSet(name, #[value])
+	def dispatch void internalSet(String name, AnnotationReference value, boolean mustBeArray) {
+		_internalSet(name, #[value], false)
 	}
 	
-	def dispatch void internalSet(String name, AnnotationReference[] values) {
+	def dispatch void internalSet(String name, AnnotationReference[] values, boolean mustBeArray) {
 		checkIterable(values, "values")
+		val op = if (values.length >= 1)
+			findOperation(name, values.get(0).annotationTypeDeclaration.qualifiedName, mustBeArray) 
+		else
+			findOperation(name, null, mustBeArray)
 		val newValue = TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue
-		if (name != null)
-			newValue.setOperation(findOperation(name))
+		newValue.setOperation(op)
 		values.forEach[
 			switch it {
 				JvmAnnotationReferenceImpl : {
@@ -286,20 +290,45 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 				}
 			}
 		]
-		remove(name);
-		delegate.getValues.add(newValue)
+		remove(op);
+		delegate.explicitValues.add(newValue)
 	}
 	
 	override remove(String name) {
-		val found = delegate.values.findFirst[(if (operation==null) 'value' else operation.simpleName)==name]
-		if (found != null) {
-			delegate.values.remove(found)
-			return true;
+		val op = findOperation(name) // IllegalArgument if it doesn't exist
+		return remove(op)
+	}
+	
+	private def remove(JvmOperation op) {
+		return Iterators.removeIf(delegate.explicitValues.iterator) [ op == operation || (operation == null && op.simpleName == 'value') ]
+	}
+	
+	private def findOperation(String name, String componentType, boolean mustBeArray) {
+		val result = findOperation(name)
+		val returnType = result.returnType?.type
+		if (componentType !== null) {
+			if (mustBeArray || returnType?.eClass == TypesPackage.Literals.JVM_ARRAY_TYPE) {
+				checkTypeName(returnType.annotationValueTypeName, componentType + "[]")
+			} else {
+				checkTypeName(returnType.annotationValueTypeName, componentType)
+			}
+		} else if (mustBeArray && returnType?.eClass != TypesPackage.Literals.JVM_ARRAY_TYPE) {
+			throw new IllegalArgumentException("Cannot assign array value to simple annotation property")
 		}
-		return false;
+		return result
+	}
+	
+	private def getAnnotationValueTypeName(JvmType type) {
+		switch result: type?.identifier {
+			case 'java.lang.Class': TypeReference.name
+			case 'java.lang.Class[]': TypeReference.name + "[]"
+			default: result
+		}
 	}
 	
 	private def findOperation(String name) {
+		checkJavaIdentifier(name, "name")
+		
 		val jvmAnnoType = (annotationTypeDeclaration as JvmAnnotationTypeDeclarationImpl).delegate
 		val jvmOperation = jvmAnnoType.declaredOperations.findFirst[it.simpleName == name]
 		if (jvmOperation == null) {
@@ -309,55 +338,55 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override setExpression(String name, Expression value) {
-		internalSet(name, value)
+		internalSet(name, value, false)
 	}
 	
 	override setAnnotationValue(String name, AnnotationReference... value) {
-		internalSet(name, value)
+		internalSet(name, value, value.length != 1)
 	}
 	
 	override setBooleanValue(String name, boolean... value) {
-		internalSet(name, value)
+		_internalSet(name, value, value.length != 1)
 	}
 	
 	override setByteValue(String name, byte... value) {
-		internalSet(name, value)
+		_internalSet(name, value, value.length != 1)
 	}
 	
 	override setCharValue(String name, char... value) {
-		internalSet(name, value)
+		_internalSet(name, value, value.length != 1)
 	}
 	
 	override setClassValue(String name, TypeReference... value) {
-		internalSet(name, value)
+		_internalSet(name, value, value.length != 1)
 	}
 	
 	override setDoubleValue(String name, double... value) {
-		internalSet(name, value)
+		_internalSet(name, value, value.length != 1)
 	}
 	
 	override setEnumValue(String name, EnumerationValueDeclaration... value) {
-		internalSet(name, value)
+		_internalSet(name, value, value.length != 1)
 	}
 	
 	override setFloatValue(String name, float... value) {
-		internalSet(name, value)
+		_internalSet(name, value, value.length != 1)
 	}
 	
 	override setIntValue(String name, int... value) {
-		internalSet(name, value)
+		_internalSet(name, value, value.length != 1)
 	}
 	
 	override setLongValue(String name, long... value) {
-		internalSet(name, value)
+		_internalSet(name, value, value.length != 1)
 	}
 	
 	override setShortValue(String name, short... value) {
-		internalSet(name, value)
+		_internalSet(name, value, value.length != 1)
 	}
 	
 	override setStringValue(String name, String... value) {
-		internalSet(name, value)
+		_internalSet(name, value, value.length != 1)
 	}
 	
 	override getAnnotationValue(String name) {
