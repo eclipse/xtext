@@ -36,8 +36,8 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
-import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
+import org.eclipse.xtext.common.types.access.reflect.ReflectURIHelper;
+import org.eclipse.xtext.common.types.access.reflect.ReflectionTypeFactory;
 import org.eclipse.xtext.common.types.testSetups.RawIterable;
 import org.junit.After;
 import org.junit.Assert;
@@ -56,10 +56,10 @@ import com.google.inject.Module;
 @SuppressWarnings("deprecation")
 public abstract class AbstractTypeConformanceComputerTest extends Assert {
 
-	protected static class AccessibleDeclaredTypeFactory extends DeclaredTypeFactory {
+	protected static class AccessibleReflectionTypeFactory extends ReflectionTypeFactory {
 
 		@Inject
-		public AccessibleDeclaredTypeFactory(ClassURIHelper uriHelper) {
+		public AccessibleReflectionTypeFactory(ReflectURIHelper uriHelper) {
 			super(uriHelper);
 		}
 		
@@ -74,7 +74,7 @@ public abstract class AbstractTypeConformanceComputerTest extends Assert {
 	private TypeConformanceComputer computer;
 	
 	@Inject
-	private AccessibleDeclaredTypeFactory factory;
+	private AccessibleReflectionTypeFactory factory;
 	
 	@Inject
 	private ResourceSetImpl resourceSet;

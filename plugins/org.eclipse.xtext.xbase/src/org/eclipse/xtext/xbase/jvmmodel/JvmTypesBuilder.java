@@ -49,6 +49,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
@@ -985,7 +986,7 @@ public class JvmTypesBuilder {
 			if (value instanceof String) {
 				JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
 				annotationValue.getValues().add((String) value);
-				result.getValues().add(annotationValue);
+				result.getExplicitValues().add(annotationValue);
 			}
 		}
 		return result;
@@ -1099,9 +1100,9 @@ public class JvmTypesBuilder {
 	}
 	
 	private JvmTypeReference newObjectReference() {
-		URI objectURI = new ClassURIHelper().getFullURI(Object.class);
 		JvmType objectType = typesFactory.createJvmGenericType();
-		((InternalEObject)objectType).eSetProxyURI(objectURI);
+		String objectClassName = Object.class.getName();
+		((InternalEObject) objectType).eSetProxyURI(URIHelperConstants.OBJECTS_URI.appendSegment(objectClassName).appendFragment(objectClassName));
 		JvmParameterizedTypeReference result = typesFactory.createJvmParameterizedTypeReference();
 		result.setType(objectType);
 		return result;
@@ -1264,13 +1265,13 @@ public class JvmTypesBuilder {
 				JvmOperation op = (JvmOperation) val.eGet(
 						XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT, false);
 				annotationValue.setOperation(op);
-				reference.getValues().add(annotationValue);
+				reference.getExplicitValues().add(annotationValue);
 			}
 		}
 		if (anno.getValue() != null) {
 			JvmAnnotationValue value = toJvmAnnotationValue(anno.getValue());
 			if (value != null) {
-				reference.getValues().add(value);
+				reference.getExplicitValues().add(value);
 			}
 		}
 		associate(anno, reference);

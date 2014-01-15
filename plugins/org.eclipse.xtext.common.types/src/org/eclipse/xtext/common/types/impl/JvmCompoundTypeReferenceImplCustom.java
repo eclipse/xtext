@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.ITypeReferenceVisitor;
 import org.eclipse.xtext.common.types.util.ITypeReferenceVisitorWithParameter;
 
@@ -49,7 +50,8 @@ public class JvmCompoundTypeReferenceImplCustom extends JvmCompoundTypeReference
 			}
 			if (type == null) {
 				JvmGenericType objectType = TypesFactory.eINSTANCE.createJvmGenericType();
-				((InternalEObject) objectType).eSetProxyURI(new ClassURIHelper().getFullURI(Object.class));
+				String objectClassName = Object.class.getName();
+				((InternalEObject) objectType).eSetProxyURI(URIHelperConstants.OBJECTS_URI.appendSegment(objectClassName).appendFragment(objectClassName));
 				type = objectType;
 			}
 		}

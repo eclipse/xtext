@@ -18,9 +18,9 @@ import org.eclipse.xtext.resource.IFragmentProvider;
  */
 public class PrimitiveMirror extends AbstractClassMirror {
 	
-	private final ITypeFactory<Class<?>> typeFactory;
+	private final ITypeFactory<Class<?>, JvmType> typeFactory;
 
-	public PrimitiveMirror(ITypeFactory<Class<?>> typeProvider) {
+	public PrimitiveMirror(ITypeFactory<Class<?>, JvmType> typeProvider) {
 		this.typeFactory = typeProvider;
 	}
 

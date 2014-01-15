@@ -53,6 +53,10 @@ public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 		return classLoader;
 	}
 	
+	boolean isDefaultClassLoader(ClassLoader loader) {
+		return classLoader == loader;
+	}
+	
 	@Override
 	public ClasspathTypeProvider createTypeProvider() {
 		return (ClasspathTypeProvider) super.createTypeProvider();

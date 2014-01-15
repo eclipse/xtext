@@ -14,5 +14,4 @@ import org.eclipse.xtext.common.types.access.IMirrorExtension;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IClassMirror extends IMirror, IMirrorExtension {
-
 }

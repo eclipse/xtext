@@ -7,14 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.access.impl.ClassMirror;
+import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClassMirrorTest extends Assert implements ITypeFactory<Class<?>> {
+@SuppressWarnings("deprecation")
+public class ClassMirrorTest extends Assert implements ITypeFactory<Class<?>, JvmDeclaredType> {
 
 	@Test public void testCreateClassMirror_01() {
 		ClassMirror mirror = ClassMirror.createClassMirror(String.class, this);
@@ -48,7 +51,7 @@ public class ClassMirrorTest extends Assert implements ITypeFactory<Class<?>> {
 		}
 	}
 
-	public JvmType createType(Class<?> clazz) {
+	public JvmDeclaredType createType(Class<?> clazz) {
 		fail("Unexpected call");
 		return null;
 	}

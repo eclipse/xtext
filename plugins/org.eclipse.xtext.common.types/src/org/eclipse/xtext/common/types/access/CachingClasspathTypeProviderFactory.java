@@ -8,9 +8,9 @@
 package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.access.binary.ClassFileReaderAccess;
 import org.eclipse.xtext.common.types.access.impl.CachingClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.CachingDeclaredTypeFactory;
-import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
 
@@ -28,13 +28,26 @@ public class CachingClasspathTypeProviderFactory extends ClasspathTypeProviderFa
 	@Inject
 	public CachingClasspathTypeProviderFactory(ClassLoader classLoader) {
 		super(classLoader);
-		DeclaredTypeFactory factoryDelegate = new DeclaredTypeFactory(new ClassURIHelper());
-		reusedFactory = new CachingDeclaredTypeFactory(factoryDelegate);
+		reusedFactory = newClassReaderTypeFactory(classLoader);
+	}
+
+	private CachingDeclaredTypeFactory newClassReaderTypeFactory(ClassLoader classLoader) {
+		DeclaredTypeFactory factoryDelegate = new DeclaredTypeFactory(new ClassFileReaderAccess(), classLoader);
+		return new CachingDeclaredTypeFactory(factoryDelegate);
 	}
 	
 	@Override
 	protected ClasspathTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
-		return new CachingClasspathTypeProvider(getClassLoader(resourceSet), resourceSet, getIndexedJvmTypeAccess(), reusedFactory);
+		ClassLoader classLoader = getClassLoader(resourceSet);
+		CachingDeclaredTypeFactory actualFactoryToUse = reusedFactory;
+		if (!isDefaultClassLoader(classLoader)) {
+			actualFactoryToUse = newClassReaderTypeFactory(classLoader);
+		}
+		return new CachingClasspathTypeProvider(
+				classLoader, 
+				resourceSet, 
+				getIndexedJvmTypeAccess(),
+				actualFactoryToUse);
 	}
 	
 }

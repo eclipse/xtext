@@ -263,9 +263,18 @@
         eType="#//JvmAnnotationReference" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationReference">
+    <eOperations name="getValues" upperBound="-1" eType="#//JvmAnnotationValue">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns all annotation values. That is, default values are not included if not explicitely given.&lt;/p>"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="#//JvmAnnotationType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
-        eType="#//JvmAnnotationValue" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="explicitValues" upperBound="-1"
+        eType="#//JvmAnnotationValue" containment="true" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns the explicit annotation values. That is, default values are not expected to be contained in that list.&lt;/p>&#xA;&lt;p>Important note: Some implementations don't have enough information about default values on annotations.&#xA;They may choose to consider all available values as explicit values.&lt;/p>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationValue" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
