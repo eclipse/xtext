@@ -547,7 +547,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			if (sourceElement != annotation) {
 				computeTypes(resolvedTypes, featureScopeSession, sourceElement);
 			} else {
-				for(JvmAnnotationValue value: annotation.getValues()) {
+				for(JvmAnnotationValue value: annotation.getExplicitValues()) {
 					if (value instanceof JvmCustomAnnotationValue) {
 						JvmCustomAnnotationValue custom = (JvmCustomAnnotationValue) value;
 						for(Object object: custom.getValues()) {

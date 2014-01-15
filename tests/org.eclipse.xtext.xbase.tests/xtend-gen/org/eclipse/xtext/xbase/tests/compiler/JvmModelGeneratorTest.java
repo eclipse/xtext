@@ -504,8 +504,8 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
               EList<JvmAnnotationReference> _values_2 = annotationAnnotationValue.getValues();
               JvmAnnotationReference _annotation_2 = JvmModelGeneratorTest.this.builder.toAnnotation(expression, TestAnnotation.class);
               JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_values_2, _annotation_2);
-              EList<JvmAnnotationValue> _values_3 = annotation.getValues();
-              JvmModelGeneratorTest.this.builder.<JvmAnnotationAnnotationValue>operator_add(_values_3, annotationAnnotationValue);
+              EList<JvmAnnotationValue> _explicitValues = annotation.getExplicitValues();
+              JvmModelGeneratorTest.this.builder.<JvmAnnotationAnnotationValue>operator_add(_explicitValues, annotationAnnotationValue);
               EList<JvmAnnotationReference> _annotations = it.getAnnotations();
               JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_annotations, annotation);
             }
@@ -579,8 +579,8 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
               EList<JvmAnnotationReference> _values_2 = annotationAnnotationValue.getValues();
               JvmAnnotationReference _annotation_2 = JvmModelGeneratorTest.this.builder.toAnnotation(expression, TestAnnotation.class);
               JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_values_2, _annotation_2);
-              EList<JvmAnnotationValue> _values_3 = annotation.getValues();
-              JvmModelGeneratorTest.this.builder.<JvmAnnotationAnnotationValue>operator_add(_values_3, annotationAnnotationValue);
+              EList<JvmAnnotationValue> _explicitValues = annotation.getExplicitValues();
+              JvmModelGeneratorTest.this.builder.<JvmAnnotationAnnotationValue>operator_add(_explicitValues, annotationAnnotationValue);
               EList<JvmAnnotationReference> _annotations = it.getAnnotations();
               JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_annotations, annotation);
             }

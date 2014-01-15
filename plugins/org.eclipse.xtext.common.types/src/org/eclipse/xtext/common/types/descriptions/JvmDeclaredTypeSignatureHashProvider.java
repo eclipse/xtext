@@ -55,6 +55,7 @@ import com.google.inject.Singleton;
  *
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 @Singleton
 public class JvmDeclaredTypeSignatureHashProvider {
 
