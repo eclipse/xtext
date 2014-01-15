@@ -10,7 +10,6 @@ package org.eclipse.xtext.common.types.access.jdt;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.SegmentSequence;
@@ -85,7 +84,6 @@ import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.osgi.framework.Version;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 /**
  * Internal implementation that allows to convert Java top-level classes that
@@ -541,32 +539,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
 		ITypeBinding annotationType = annotation.getAnnotationType();
 		annotationReference.setAnnotation(createAnnotationProxy(annotationType));
-		InternalEList<JvmAnnotationValue> values = (InternalEList<JvmAnnotationValue>)annotationReference.getValues();
-		try {
-			IMemberValuePairBinding[] allMemberValuePairs = annotation.getAllMemberValuePairs();
-			for (IMemberValuePairBinding memberValuePair : allMemberValuePairs) {
-				IMethodBinding methodBinding = memberValuePair.getMethodBinding();
-				values.addUnique(createAnnotationValue(annotationType, memberValuePair.getValue(), methodBinding));
-			}
-		} catch(NullPointerException npe) {
-			log.debug("NPE in IAnnotationBinding#getAllMemberValuePairs ?", npe);
-			IMemberValuePairBinding[] declaredMemberValuePairs = annotation.getDeclaredMemberValuePairs();
-			Set<IMethodBinding> seenMethodBindings = Sets.newHashSet();
-			for (IMemberValuePairBinding memberValuePair : declaredMemberValuePairs) {
-				IMethodBinding methodBinding = memberValuePair.getMethodBinding();
-				seenMethodBindings.add(methodBinding);
-				values.addUnique(createAnnotationValue(annotationType, memberValuePair.getValue(), methodBinding));
-			}
-			IMethodBinding[] allAnnotationMethods = annotationType.getDeclaredMethods();
-			for(IMethodBinding methodBinding: allAnnotationMethods) {
-				if (seenMethodBindings.add(methodBinding)) {
-					try {
-						values.addUnique(createAnnotationValue(annotationType, methodBinding.getDefaultValue(), methodBinding));
-					} catch(NullPointerException nestedNPE) {
-						log.debug("NPE in IMethodBinding#getDefaultValue ?", npe);
-					}
-				}
-			}
+		InternalEList<JvmAnnotationValue> values = (InternalEList<JvmAnnotationValue>)annotationReference.getExplicitValues();
+		IMemberValuePairBinding[] allMemberValuePairs = annotation.getDeclaredMemberValuePairs();
+		for (IMemberValuePairBinding memberValuePair : allMemberValuePairs) {
+			IMethodBinding methodBinding = memberValuePair.getMethodBinding();
+			values.addUnique(createAnnotationValue(annotationType, memberValuePair.getValue(), methodBinding));
 		}
 		return annotationReference;
 	}

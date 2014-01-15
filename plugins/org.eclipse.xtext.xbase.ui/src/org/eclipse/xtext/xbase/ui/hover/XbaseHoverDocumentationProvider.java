@@ -266,9 +266,9 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 					buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil
 							.getURI(annotationReference.getAnnotation()), annotationReference.getAnnotation()
 							.getSimpleName()));
-					if (annotationReference.getValues().size() > 0) {
+					if (annotationReference.getExplicitValues().size() > 0) {
 						buffer.append("(");
-						for (JvmAnnotationValue value : annotationReference.getValues()) {
+						for (JvmAnnotationValue value : annotationReference.getExplicitValues()) {
 							ITreeAppendable appendable = new FakeTreeAppendable();
 							jvmModelGenerator.toJava(value, appendable, generatorConfigProvider.get(object));
 							String java = appendable.getContent();

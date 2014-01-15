@@ -7,52 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
-import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.util.Strings;
-
-import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
+public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
-	protected static class TypeInResourceSetAdapter extends AdapterImpl {
-		
-		private Map<String, JvmType> typeByQueryString = Maps.newHashMap();
-		
-		@Override
-		public boolean isAdapterForType(Object type) {
-			return TypeInResourceSetAdapter.class.equals(type);
-		}
-		
-		protected JvmType tryFindTypeInIndex(String name, ClasspathTypeProvider typeProvider, boolean binaryNestedTypeDelimiter) {
-			JvmType result = typeByQueryString.get(name);
-			if (result != null)
-				return result;
-			JvmType candidate = typeProvider.doTryFindInIndex(name, binaryNestedTypeDelimiter);
-			if (candidate != null) {
-				typeByQueryString.put(name, candidate);
-				return candidate;
-			}
-			return null;
-		}
-		
-	}
-	
 	private final ClassFinder classFinder;
 	
 	private final DeclaredTypeFactory declaredTypeFactory;
@@ -71,12 +39,6 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 		this(classLoader, resourceSet, null);
 	}
 	
-	@Override
-	protected void registerProtocol(ResourceSet resourceSet) {
-		super.registerProtocol(resourceSet);
-		resourceSet.eAdapters().add(new TypeInResourceSetAdapter());
-	}
-
 	protected ClassFinder createClassFinder(ClassLoader classLoader) {
 		return new ClassFinder(classLoader);
 	}
@@ -190,36 +152,6 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 		}
 	}
 
-	@Nullable
-	private JvmType doTryFindInIndex(String name, boolean binaryNestedTypeDelimiter) {
-		IndexedJvmTypeAccess indexAccess = getIndexedJvmTypeAccess();
-		if (indexAccess != null) {
-			JvmType result = doTryFindInIndex(name, indexAccess);
-			if (result == null && !isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter)) {
-				ClassNameVariants variants = new ClassNameVariants(name);
-				while(result == null && variants.hasNext()) {
-					String nextVariant = variants.next();
-					result = doTryFindInIndex(nextVariant, indexAccess);
-				}
-			}
-			return result;
-		}
-		return null;
-	}
-
-	private JvmType doTryFindInIndex(String name, IndexedJvmTypeAccess indexAccess) {
-		int index = name.indexOf('$');
-		if (index < 0)
-			index = name.indexOf('[');
-		String qualifiedNameString = index < 0 ? name : name.substring(0, index);
-		List<String> nameSegments = Strings.split(qualifiedNameString, '.');
-		QualifiedName qualifiedName = QualifiedName.create(nameSegments);
-		EObject candidate = indexAccess.getIndexedJvmType(qualifiedName, name, getResourceSet());
-		if (candidate instanceof JvmType)
-			return (JvmType) candidate;
-		return null;
-	}
-	
 	@Override
 	protected IMirror createMirrorForFQN(String name) {
 		try {
