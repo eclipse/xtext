@@ -12,12 +12,16 @@ Require-Bundle:
  com.google.inject;bundle-version="3.0.0",
  org.eclipse.xtext,
  org.eclipse.emf.mwe2.lib;bundle-version="2.2.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;visibility:=reexport
+ org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;visibility:=reexport,
+ org.eclipse.jdt.core;bundle-version="3.5.0";resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.common.types,
- org.eclipse.xtext.common.types.access;x-internal:=true,
- org.eclipse.xtext.common.types.access.impl;x-internal:=true,
+ org.eclipse.xtext.common.types.access;x-friends:="org.eclipse.xtext.common.types.ui",
+ org.eclipse.xtext.common.types.access.binary;x-internal:=true,
+ org.eclipse.xtext.common.types.access.binary.signatures;x-internal:=true,
+ org.eclipse.xtext.common.types.access.impl;x-friends:="org.eclipse.xtext.common.types.ui",
+ org.eclipse.xtext.common.types.access.reflect;x-internal:=true,
  org.eclipse.xtext.common.types.descriptions;x-internal:=true,
  org.eclipse.xtext.common.types.impl;x-internal:=true,
  org.eclipse.xtext.common.types.util;x-friends:="org.eclipse.xtext.common.types.edit",

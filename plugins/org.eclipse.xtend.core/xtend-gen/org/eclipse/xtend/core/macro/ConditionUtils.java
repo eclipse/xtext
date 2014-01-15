@@ -49,6 +49,15 @@ public class ConditionUtils {
     Preconditions.checkArgument(_isValidJavaIdentifier, _builder);
   }
   
+  public static void checkTypeName(final String typeName, final String valueType) {
+    boolean _equals = Objects.equal(typeName, valueType);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(valueType, "");
+    _builder.append(" is not applicable at this location. Expected ");
+    _builder.append(typeName, "");
+    Preconditions.checkArgument(_equals, _builder);
+  }
+  
   public static boolean isValidQualifiedName(final String string) {
     boolean _xblockexpression = false;
     {

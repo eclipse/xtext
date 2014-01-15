@@ -13,7 +13,6 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -33,7 +32,6 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeResource;
-import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -53,9 +51,6 @@ public class TypeReferences {
 
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
-
-	@Inject
-	private ClassURIHelper uriHelper;
 
 	@Inject
 	private SuperTypeCollector superTypeCollector;
@@ -177,11 +172,6 @@ public class TypeReferences {
 		upperBound.setTypeReference(getTypeForName(Object.class, clone.getType()));
 		result.getConstraints().add(lowerBound);
 		result.getConstraints().add(upperBound);
-		return result;
-	}
-
-	protected URI toCommonTypesUri(Class<?> clazz) {
-		URI result = uriHelper.getFullURI(clazz);
 		return result;
 	}
 

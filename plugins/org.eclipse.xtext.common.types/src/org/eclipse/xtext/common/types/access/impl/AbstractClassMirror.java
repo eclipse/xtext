@@ -26,6 +26,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.resource.IFragmentProvider;
 
 /**
+ * A mirror that is used at runtime to allow lazy initialization of resource contents.
+ * Also it implements the contract of fragments and EObject retrieval by identifier.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractClassMirror implements IClassMirror {

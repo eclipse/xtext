@@ -7,28 +7,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.access.binary.BinaryClass;
+import org.eclipse.xtext.common.types.access.binary.BinaryClassMirror;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClassMirror extends AbstractClassMirror {
+@Deprecated
+public class ClassMirror extends BinaryClassMirror {
 
 	private final Class<?> clazz;
 	
-	private final ITypeFactory<Class<?>> typeFactory;
+	private final ITypeFactory<Class<?>, JvmDeclaredType> typeFactory;
 
-	public static ClassMirror createClassMirror(Class<?> clazz, ITypeFactory<Class<?>> typeProvider) {
+	public static ClassMirror createClassMirror(Class<?> clazz, ITypeFactory<Class<?>, JvmDeclaredType> typeProvider) {
 		if (clazz.isPrimitive() || clazz.isArray() || clazz.isMemberClass())
 			throw new IllegalArgumentException("Cannot create class mirror for " + clazz.getName());
 		return new ClassMirror(clazz, typeProvider);
 	}
 	
-	protected ClassMirror(Class<?> clazz, ITypeFactory<Class<?>> typeFactory) {
+	protected ClassMirror(Class<?> clazz, ITypeFactory<Class<?>, JvmDeclaredType> typeFactory) {
+		super(null, null);
 		this.clazz = clazz;
 		this.typeFactory = typeFactory;
 	}
 
+	@Override
 	public Class<?> getMirroredClass() {
 		return clazz;
 	}
@@ -37,15 +43,15 @@ public class ClassMirror extends AbstractClassMirror {
 	protected String getTypeName() {
 		return clazz.getName();
 	}
+	
+	@Override
+	public BinaryClass getMirroredBinaryClass() {
+		return new BinaryClass(getTypeName(), clazz.getClassLoader());
+	}
 
+	@Override
 	public void initialize(TypeResource typeResource) {
 		typeResource.getContents().add(typeFactory.createType(clazz));
 	}
 
-	/**
-	 * @since 2.3
-	 */
-	public boolean isSealed() {
-		return true;
-	}
 }

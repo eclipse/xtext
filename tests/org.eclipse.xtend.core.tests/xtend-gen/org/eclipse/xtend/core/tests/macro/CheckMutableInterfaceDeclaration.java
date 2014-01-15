@@ -7,9 +7,9 @@
  */
 package org.eclipse.xtend.core.tests.macro;
 
-import org.eclipse.xtend.core.tests.macro.CheckMutableIterfaceDeclarationProcessor;
+import org.eclipse.xtend.core.tests.macro.CheckMutableInterfaceDeclarationProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
-@Active(CheckMutableIterfaceDeclarationProcessor.class)
+@Active(CheckMutableInterfaceDeclarationProcessor.class)
 public @interface CheckMutableInterfaceDeclaration {
 }

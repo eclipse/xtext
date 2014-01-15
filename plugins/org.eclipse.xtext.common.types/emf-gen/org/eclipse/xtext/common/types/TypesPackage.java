@@ -2084,13 +2084,14 @@ public interface TypesPackage extends EPackage
 	int JVM_ANNOTATION_REFERENCE__ANNOTATION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Explicit Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.5
 	 */
-	int JVM_ANNOTATION_REFERENCE__VALUES = 1;
+	int JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES = 1;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Annotation Reference</em>' class.
@@ -3683,15 +3684,16 @@ public interface TypesPackage extends EPackage
 	EReference getJvmAnnotationReference_Annotation();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getValues <em>Values</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getExplicitValues <em>Explicit Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Values</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmAnnotationReference#getValues()
+	 * @return the meta object for the containment reference list '<em>Explicit Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationReference#getExplicitValues()
 	 * @see #getJvmAnnotationReference()
 	 * @generated
+	 * @since 2.5
 	 */
-	EReference getJvmAnnotationReference_Values();
+	EReference getJvmAnnotationReference_ExplicitValues();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmAnnotationValue <em>Jvm Annotation Value</em>}'.
@@ -4897,12 +4899,13 @@ public interface TypesPackage extends EPackage
 		EReference JVM_ANNOTATION_REFERENCE__ANNOTATION = eINSTANCE.getJvmAnnotationReference_Annotation();
 
 		/**
-		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Explicit Values</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
+		 * @since 2.5
 		 */
-		EReference JVM_ANNOTATION_REFERENCE__VALUES = eINSTANCE.getJvmAnnotationReference_Values();
+		EReference JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES = eINSTANCE.getJvmAnnotationReference_ExplicitValues();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationValueImpl <em>Jvm Annotation Value</em>}' class.
