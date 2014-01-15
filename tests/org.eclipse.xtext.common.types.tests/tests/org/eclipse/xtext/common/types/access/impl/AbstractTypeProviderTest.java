@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EValidatorRegistryImpl;
@@ -67,7 +68,6 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedClassWithStringDefault;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedInterfaceWithStringDefault;
@@ -97,8 +97,6 @@ import org.eclipse.xtext.common.types.testSetups.TypeWithInnerAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerEnum;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Function;
@@ -118,10 +116,6 @@ public abstract class AbstractTypeProviderTest extends Assert {
 
 	protected abstract IJvmTypeProvider getTypeProvider();
 
-	@BeforeClass public static void createMockJavaProject() throws Exception {
-		MockJavaProjectProvider.setUp();
-	}
-	
 	@Before
 	public void setUp() throws Exception {
 		EValidator.Registry registry = new EValidatorRegistryImpl(EValidator.Registry.INSTANCE);
@@ -133,10 +127,56 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		Resource resource = object.eResource();
 		for (EObject content : resource.getContents()) {
 			Diagnostic diagnostic = diagnostician.validate(content);
-			assertTrue(diagnostic.toString(), diagnostic.getSeverity() == Diagnostic.OK);
+			if (diagnostic.getSeverity() != Diagnostic.OK) {
+				diagnose(diagnostic);
+			}
+			
+		}
+	}
+
+	protected void diagnose(Diagnostic diagnostic) {
+		if (diagnostic.getChildren().isEmpty()) {
+			assertEquals(String.valueOf(diagnostic), diagnostic.getSeverity() == Diagnostic.OK);
+		} else {
+			for(Diagnostic child: diagnostic.getChildren()) {
+				diagnose(child);
+			}
 		}
 	}
 	
+	protected void diagnose(EObject object, String... expectedUnresolvedProxies) {
+		Resource resource = object.eResource();
+		for (EObject content : resource.getContents()) {
+			Diagnostic diagnostic = diagnostician.validate(content);
+			if (diagnostic.getSeverity() != Diagnostic.OK) {
+				URI[] expectedUnresolvedProxyURIs = new URI[expectedUnresolvedProxies.length];
+				for(int i = 0; i < expectedUnresolvedProxies.length; i++) {
+					expectedUnresolvedProxyURIs[i] = URI.createURI(expectedUnresolvedProxies[i]);
+				}
+				diagnose(diagnostic, expectedUnresolvedProxyURIs);
+			}
+			
+		}
+	}
+	
+	protected void diagnose(Diagnostic diagnostic, URI[] expectedUnresolvedProxies) {
+		if (diagnostic.getChildren().isEmpty()) {
+			if (diagnostic.getSeverity() != Diagnostic.OK) {
+				if (diagnostic.getCode() == EObjectValidator.EOBJECT__EVERY_PROXY_RESOLVES) {
+					EObject proxy = (EObject) diagnostic.getData().get(2); // magic number ...
+					if (org.eclipse.xtext.util.Arrays.contains(expectedUnresolvedProxies, EcoreUtil.getURI(proxy))) {
+						return;
+					}
+				}
+				assertEquals(String.valueOf(diagnostic), diagnostic.getSeverity() == Diagnostic.OK);
+			}
+		} else {
+			for(Diagnostic child: diagnostic.getChildren()) {
+				diagnose(child, expectedUnresolvedProxies);
+			}
+		}
+	}
+
 	protected void recomputeAndCheckIdentifiers(Resource resource) {
 		Iterator<JvmMember> iter = Iterators.filter(EcoreUtil.getAllContents(resource, false), JvmMember.class);
 		while(iter.hasNext()) {
@@ -144,7 +184,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 			String identifier = member.getIdentifier();
 			member.internalSetIdentifier(null);
 			String computed = member.getIdentifier();
-			assertNotNull(computed);
+			assertNotNull(String.valueOf(member), computed);
 			assertEquals(identifier, computed);
 		}
 		Iterator<JvmFormalParameter> params = Iterators.filter(EcoreUtil.getAllContents(resource, false), JvmFormalParameter.class);
@@ -1480,7 +1520,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertNotNull(type);
 	}
 
-	private JvmField getFieldFromType(EObject context, Class<?> type, String field) {
+	protected JvmField getFieldFromType(EObject context, Class<?> type, String field) {
 		String fieldName = type.getName() + "." + field;
 		assertNotNull(context);
 		JvmField result = (JvmField) context.eResource().getEObject(fieldName);
@@ -1944,25 +1984,27 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(1, target.getAnnotations().size());
 		JvmAnnotationReference annotationReference = target.getAnnotations().get(0);
 		assertSame(annotationType, annotationReference.getAnnotation());
+		if (isDefaultValueSupported())
+			assertEquals(13, annotationReference.getExplicitValues().size());
 		assertEquals(14, annotationReference.getValues().size());
 	}
-	
+
 	@Test public void testIntAnnotationValue_01() throws Exception {
-		JvmIntAnnotationValue value = (JvmIntAnnotationValue) getAnnotationValue("intValue");
+		JvmIntAnnotationValue value = (JvmIntAnnotationValue) getAnnotationValue("intValue", true);
 		assertEquals(1, value.getValues().size());
 		Integer integer = value.getValues().get(0);
 		assertEquals(34, integer.intValue());
 	}
 	
 	@Test public void testIntAnnotationValue_02() throws Exception {
-		JvmIntAnnotationValue value = (JvmIntAnnotationValue) getMethodParameterAnnotationValue("intValue");
+		JvmIntAnnotationValue value = (JvmIntAnnotationValue) getMethodParameterAnnotationValue("intValue", true);
 		assertEquals(1, value.getValues().size());
 		Integer integer = value.getValues().get(0);
 		assertEquals(34, integer.intValue());
 	}
 	
 	@Test public void testIntAnnotationValue_03() throws Exception {
-		JvmIntAnnotationValue value = (JvmIntAnnotationValue) getConstructorParameterAnnotationValue("intValue");
+		JvmIntAnnotationValue value = (JvmIntAnnotationValue) getConstructorParameterAnnotationValue("intValue", true);
 		assertEquals(1, value.getValues().size());
 		Integer integer = value.getValues().get(0);
 		assertEquals(34, integer.intValue());
@@ -2296,7 +2338,23 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	public JvmAnnotationValue getAnnotationValue(String name) {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmAnnotationTarget target = (JvmAnnotationTarget) getTypeProvider().findTypeByName(typeName);
-		return getAnnotationValue(name, target);
+		return getExplicitAnnotationValue(name, target);
+	}
+	
+	public JvmAnnotationValue getAnnotationValue(String name, boolean defaultValue) {
+		String typeName = TestAnnotation.Annotated.class.getName();
+		JvmAnnotationTarget target = (JvmAnnotationTarget) getTypeProvider().findTypeByName(typeName);
+		JvmAnnotationValue result = getDefaultOrExplicitAnnotationValue(name, target);
+		if (defaultValue) {
+			if (isDefaultValueSupported()) {
+				assertTrue(result.eContainer() instanceof JvmOperation);
+			} else {
+				assertFalse(result.eContainer() instanceof JvmOperation);
+			}
+		} else {
+			assertFalse(result.eContainer() instanceof JvmOperation);
+		}
+		return result;
 	}
 	
 	public JvmAnnotationValue getConstructorParameterAnnotationValue(String name) {
@@ -2304,7 +2362,25 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated(java.lang.String,java.lang.String,java.lang.String)");
 		JvmAnnotationTarget target = constructor.getParameters().get(0);
-		return getAnnotationValue(name, target);
+		return getExplicitAnnotationValue(name, target);
+	}
+	
+	public JvmAnnotationValue getConstructorParameterAnnotationValue(String name, boolean defaultValue) {
+		String typeName = TestAnnotation.Annotated.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated(java.lang.String,java.lang.String,java.lang.String)");
+		JvmAnnotationTarget target = constructor.getParameters().get(0);
+		JvmAnnotationValue result = getDefaultOrExplicitAnnotationValue(name, target);
+		if (defaultValue) {
+			if (isDefaultValueSupported()) {
+				assertTrue(result.eContainer() instanceof JvmOperation);
+			} else {
+				assertFalse(result.eContainer() instanceof JvmOperation);
+			}
+		} else {
+			assertFalse(result.eContainer() instanceof JvmOperation);
+		}
+		return result;
 	}
 	
 	public JvmAnnotationValue getMethodParameterAnnotationValue(String name) {
@@ -2312,12 +2388,44 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation method = getMethodFromType(type, TestAnnotation.Annotated.class, "method(java.lang.String,java.lang.String,java.lang.String)");
 		JvmAnnotationTarget target = method.getParameters().get(0);
-		return getAnnotationValue(name, target);
+		return getExplicitAnnotationValue(name, target);
+	}
+	
+	public JvmAnnotationValue getMethodParameterAnnotationValue(String name, boolean defaultValue) {
+		String typeName = TestAnnotation.Annotated.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation method = getMethodFromType(type, TestAnnotation.Annotated.class, "method(java.lang.String,java.lang.String,java.lang.String)");
+		JvmAnnotationTarget target = method.getParameters().get(0);
+		JvmAnnotationValue result = getDefaultOrExplicitAnnotationValue(name, target);
+		if (defaultValue) {
+			if (isDefaultValueSupported()) {
+				assertTrue(result.eContainer() instanceof JvmOperation);
+			} else {
+				assertFalse(result.eContainer() instanceof JvmOperation);
+			}
+		} else {
+			assertFalse(result.eContainer() instanceof JvmOperation);
+		}
+		return result;
+	}
+	
+	protected boolean isDefaultValueSupported() {
+		return true;
 	}
 
-	public JvmAnnotationValue getAnnotationValue(String name, JvmAnnotationTarget target) {
+	public JvmAnnotationValue getDefaultOrExplicitAnnotationValue(String name, JvmAnnotationTarget target) {
 		JvmAnnotationReference annotationReference = target.getAnnotations().get(0);
 		for(JvmAnnotationValue value: annotationReference.getValues()) {
+			if (name.equals(value.getValueName()))
+				return value;
+		}
+		fail("Cannot find annotationValue " + name);
+		return null;
+	}
+	
+	public JvmAnnotationValue getExplicitAnnotationValue(String name, JvmAnnotationTarget target) {
+		JvmAnnotationReference annotationReference = target.getAnnotations().get(0);
+		for(JvmAnnotationValue value: annotationReference.getExplicitValues()) {
 			if (name.equals(value.getValueName()))
 				return value;
 		}
@@ -2330,7 +2438,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmOperation operation = getMethodFromType(type, TestAnnotation.Annotated.class, "method()");
 		assertNotNull(operation);
-		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("value", operation);
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getExplicitAnnotationValue("value", operation);
 		assertEquals(1, value.getValues().size());
 		String s = value.getValues().get(0);
 		assertEquals("method", s);
@@ -2341,7 +2449,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated()");
 		assertNotNull(constructor);
-		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("value", constructor);
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getExplicitAnnotationValue("value", constructor);
 		assertEquals(1, value.getValues().size());
 		String s = value.getValues().get(0);
 		assertEquals("constructor", s);
@@ -2352,7 +2460,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated(java.lang.String)");
 		assertNotNull(constructor);
-		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("value", constructor);
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getExplicitAnnotationValue("value", constructor);
 		assertEquals(1, value.getValues().size());
 		String s = value.getValues().get(0);
 		assertEquals("secondConstructor", s);
@@ -2363,7 +2471,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated(java.lang.String,T)");
 		assertNotNull(constructor);
-		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("value", constructor);
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getExplicitAnnotationValue("value", constructor);
 		assertEquals(1, value.getValues().size());
 		String s = value.getValues().get(0);
 		assertEquals("parameterizedConstructor", s);
@@ -2374,7 +2482,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated(java.lang.String,java.lang.String)");
 		assertNotNull(constructor);
-		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("value", constructor);
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getExplicitAnnotationValue("value", constructor);
 		assertEquals(1, value.getValues().size());
 		String s = value.getValues().get(0);
 		assertEquals("thirdConstructorWithBody", s);
@@ -2385,7 +2493,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		JvmField field = getFieldFromType(type, TestAnnotation.Annotated.class, "field");
 		assertNotNull(field);
-		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("value", field);
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getDefaultOrExplicitAnnotationValue("value", field);
 		assertEquals(1, value.getValues().size());
 		String s = value.getValues().get(0);
 		assertEquals("MyString", s);
@@ -2603,7 +2711,6 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	}
 	
 	@Test
-	@Ignore("JDT Bug 334943 - No default value for annotation binding")
 	public void testDefaultAnnotationAnnotationValueByReference() throws Exception {
 		String typeName = Bug334943Client.class.getName();
 		JvmDeclaredType client = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
@@ -2852,10 +2959,20 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		String typeName = "com.google.common.collect.AbstractMultimap";
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
-		diagnose(type);
+		diagnose(type, "java:/Objects/javax.annotation.Nullable#javax.annotation.Nullable");
 		Resource resource = type.eResource();
 		getAndResolveAllFragments(resource);
 		recomputeAndCheckIdentifiers(resource);
+	}
+	
+	@Test
+	public void testFindTypeByName_AbstractMultimap_02() {
+		String typeName = "com.google.common.collect.AbstractMultimap";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation containsValue = (JvmOperation) Iterables.getOnlyElement(type.findAllFeaturesByName("containsValue"));
+		assertNotNull(containsValue);
+		JvmFormalParameter firstParam = containsValue.getParameters().get(0);
+		assertEquals(0, firstParam.getAnnotations().size());
 	}
 	
 	@Test

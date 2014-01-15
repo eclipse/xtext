@@ -22,6 +22,13 @@
                 <message_argument value="accept(ITypeReferenceVisitor&lt;Result&gt;)"/>
             </message_arguments>
         </filter>
+        <filter id="643846161">
+            <message_arguments>
+                <message_argument value="ITypeReferenceVisitorWithParameter&lt;Parameter, Result&gt;"/>
+                <message_argument value="JvmTypeReference"/>
+                <message_argument value="accept(ITypeReferenceVisitorWithParameter&lt;Parameter,Result&gt;, Parameter)"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage">
         <filter id="388194388">
@@ -36,6 +43,26 @@
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
                 <message_argument value="JVM_FIELD_FEATURE_COUNT"/>
                 <message_argument value="10"/>
+            </message_arguments>
+        </filter>
+        <filter comment="JvmAnnotationReference.getValues is now an EOperation" id="405864542">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_ANNOTATION_REFERENCE__VALUES"/>
+            </message_arguments>
+        </filter>
+        <filter comment="JvmAnnotationReference.getValues() became an EOperation" id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="getJvmAnnotationReference_Values()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage$Literals">
+        <filter comment="JvmAnnotationReference#getExplicitValues" id="405864542">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_ANNOTATION_REFERENCE__VALUES"/>
             </message_arguments>
         </filter>
     </resource>

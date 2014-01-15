@@ -15,12 +15,17 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
 import org.eclipse.xtext.common.types.testSetups.TestEnum;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractJdtTypeProviderTest extends AbstractTypeProviderTest {
+	
+	@BeforeClass public static void createMockJavaProject() throws Exception {
+		MockJavaProjectProvider.setUp();
+	}
 	
 	@Test public void testEnum_05() throws Exception {
 		doTestEnum_05("string");

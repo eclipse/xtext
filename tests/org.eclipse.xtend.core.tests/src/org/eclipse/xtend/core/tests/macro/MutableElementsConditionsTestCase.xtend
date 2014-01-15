@@ -389,11 +389,11 @@ class CheckMutableClassDeclarationProcessor extends AbstractClassProcessor {
 
 }
 
-@Active(CheckMutableIterfaceDeclarationProcessor)
+@Active(CheckMutableInterfaceDeclarationProcessor)
 annotation CheckMutableInterfaceDeclaration {
 }
 
-class CheckMutableIterfaceDeclarationProcessor implements RegisterGlobalsParticipant<InterfaceDeclaration>, TransformationParticipant<MutableInterfaceDeclaration>, CodeGenerationParticipant<MutableInterfaceDeclaration> {
+class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobalsParticipant<InterfaceDeclaration>, TransformationParticipant<MutableInterfaceDeclaration>, CodeGenerationParticipant<MutableInterfaceDeclaration> {
 
 	override doRegisterGlobals(List<? extends InterfaceDeclaration> annotatedSourceElements,
 		RegisterGlobalsContext context) {

@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler.CompilationResult
-import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
 import org.eclipse.xtext.generator.AbstractFileSystemAccess
 import org.eclipse.xtext.generator.IFileSystemAccess
@@ -27,6 +26,7 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import com.google.common.io.Files
 import java.util.regex.Pattern
+import org.eclipse.xtext.common.types.access.binary.ClassReaderTypeProvider
 
 class StandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(StandaloneBuilder);
@@ -174,7 +174,7 @@ class StandaloneBuilder {
 	def protected void installTypeProvider(Iterable<String> classPathRoots, XtextResourceSet resSet,
 		IndexedJvmTypeAccess typeAccess) {
 		val classLoader = createURLClassLoader(classPathRoots)
-		new ClasspathTypeProvider(classLoader, resSet, typeAccess)
+		new ClassReaderTypeProvider(classLoader, resSet, typeAccess)
 		resSet.setClasspathURIContext(classLoader);
 	}
 

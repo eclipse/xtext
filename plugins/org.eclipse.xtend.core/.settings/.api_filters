@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtend.core" version="2">
+    <resource path="src/org/eclipse/xtend/core/parser/XtendNodeModelBuilder.java" type="org.eclipse.xtend.core.parser.XtendNodeModelBuilder">
+        <filter comment="Customizing necessary" id="571473929">
+            <message_arguments>
+                <message_argument value="NodeModelBuilder"/>
+                <message_argument value="XtendNodeModelBuilder"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

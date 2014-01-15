@@ -190,7 +190,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		annotationReference.setAnnotation(createAnnotationProxy(type));
 		Method[] declaredMethods = type.getDeclaredMethods();
 		if (declaredMethods.length > 0) {
-			InternalEList<JvmAnnotationValue> values = (InternalEList<JvmAnnotationValue>)annotationReference.getValues();
+			InternalEList<JvmAnnotationValue> values = (InternalEList<JvmAnnotationValue>)annotationReference.getExplicitValues();
 			for (Method method : declaredMethods) {
 				try {
 					Object value = method.invoke(annotation, EMPTY_ARRAY);
@@ -596,26 +596,6 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		int modifiers = field.getModifiers();
 		if (!field.isEnumConstant()) {
 			result = TypesFactory.eINSTANCE.createJvmField();
-			int staticFinal = Modifier.FINAL | Modifier.STATIC;
-			try {
-				if ((modifiers & staticFinal) == staticFinal) {
-					Class<?> fieldType = field.getType();
-					if (fieldType.isPrimitive() || String.class.equals(fieldType)) {
-						Object value = field.get(null);
-						if (value != null) {
-							result.setConstant(true);
-							result.setConstantValue(value);
-						} else {
-							result.setConstant(false);
-						}
-					} else {
-						result.setConstant(false);
-					}
-				}
-			} catch(Exception e) {
-				result.setConstant(false);
-				// don't care
-			}
 		} else
 			result = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
 		String fieldName = field.getName();

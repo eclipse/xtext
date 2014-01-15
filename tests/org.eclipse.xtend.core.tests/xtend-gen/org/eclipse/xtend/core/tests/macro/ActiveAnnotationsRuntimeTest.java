@@ -41,7 +41,6 @@ import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -226,12 +225,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
         public void accept(final CompilationTestHelper.Result result) {
           Class<? extends ActiveAnnotationsRuntimeTest> _class = ActiveAnnotationsRuntimeTest.this.getClass();
           ClassLoader _classLoader = _class.getClassLoader();
-          final Function1<String,Class<? extends Object>> _function = new Function1<String,Class<? extends Object>>() {
-            public Class<? extends Object> apply(final String it) {
-              return result.getCompiledClass(it);
-            }
-          };
-          final DelegatingClassloader classLoader = new DelegatingClassloader(_classLoader, _function);
+          final DelegatingClassloader classLoader = new DelegatingClassloader(_classLoader, result);
           resourceSet.setClasspathURIContext(classLoader);
           ActiveAnnotationsRuntimeTest.this.processorProvider.setClassLoader(classLoader);
         }
