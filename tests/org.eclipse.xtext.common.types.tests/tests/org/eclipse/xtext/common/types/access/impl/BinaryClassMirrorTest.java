@@ -8,7 +8,8 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.access.impl.ClassMirror;
+import org.eclipse.xtext.common.types.access.binary.BinaryClass;
+import org.eclipse.xtext.common.types.access.binary.BinaryClassMirror;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,17 +17,16 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
-public class ClassMirrorTest extends Assert implements ITypeFactory<Class<?>, JvmDeclaredType> {
+public class BinaryClassMirrorTest extends Assert implements ITypeFactory<BinaryClass, JvmDeclaredType> {
 
 	@Test public void testCreateClassMirror_01() {
-		ClassMirror mirror = ClassMirror.createClassMirror(String.class, this);
+		BinaryClassMirror mirror = BinaryClassMirror.createClassMirror(new BinaryClass("java.lang.String", null), this);
 		assertNotNull(mirror);
 	}
 	
 	@Test public void testCreateClassMirror_02() {
 		try {
-			ClassMirror.createClassMirror(int.class, this);
+			BinaryClassMirror.createClassMirror(new BinaryClass.Primitive(int.class), this);
 			fail("Expected IllegalArgumentException");
 		} catch(IllegalArgumentException ex) {
 			// OK
@@ -35,7 +35,7 @@ public class ClassMirrorTest extends Assert implements ITypeFactory<Class<?>, Jv
 	
 	@Test public void testCreateClassMirror_03() {
 		try {
-			ClassMirror.createClassMirror(String[].class, this);
+			BinaryClassMirror.createClassMirror(new BinaryClass.Array(new BinaryClass("java.lang.String", null), 1, ""), this);
 			fail("Expected IllegalArgumentException");
 		} catch(IllegalArgumentException ex) {
 			// OK
@@ -43,15 +43,11 @@ public class ClassMirrorTest extends Assert implements ITypeFactory<Class<?>, Jv
 	}
 	
 	@Test public void testCreateClassMirror_04() {
-		try {
-			ClassMirror.createClassMirror(java.util.Map.Entry.class, this);
-			fail("Expected IllegalArgumentException");
-		} catch(IllegalArgumentException ex) {
-			// OK
-		}
+		BinaryClassMirror mirror = BinaryClassMirror.createClassMirror(new BinaryClass("java.util.Map$Entry", null), this);
+		assertNotNull(mirror);
 	}
 
-	public JvmDeclaredType createType(Class<?> clazz) {
+	public JvmDeclaredType createType(BinaryClass clazz) {
 		fail("Unexpected call");
 		return null;
 	}

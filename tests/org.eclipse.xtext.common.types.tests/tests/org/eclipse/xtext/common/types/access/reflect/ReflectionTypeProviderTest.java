@@ -5,26 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.impl;
+package org.eclipse.xtext.common.types.access.reflect;
 
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
-import org.eclipse.xtext.common.types.access.binary.BinaryClassMirror;
+import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
+import org.eclipse.xtext.common.types.access.impl.ClassMirror;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.common.types.access.impl.PrimitiveMirror;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.common.types.testSetups.TestConstants;
 import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -32,15 +33,15 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 @RunWith(XtextRunner.class)
 @InjectWith(RefactoringTestLanguageInjectorProvider.class)
-public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
+public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 
 	@Inject
 	private ResourceSet resourceSet;
@@ -48,7 +49,7 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	@Inject
 	private IndexedJvmTypeAccess indexedJvmTypeAccess;
 
-	private ClasspathTypeProvider typeProvider;
+	private ReflectionTypeProvider typeProvider;
 
 	@Override
 	public void setUp() throws Exception {
@@ -56,8 +57,8 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 		typeProvider = createTypeProvider();
 	}
 
-	protected ClasspathTypeProvider createTypeProvider() {
-		return new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess);
+	protected ReflectionTypeProvider createTypeProvider() {
+		return new ReflectionTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess);
 	}
 
 	protected ResourceSet getResourceSet() {
@@ -67,6 +68,11 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	@After
 	public void tearDown() throws Exception {
 		typeProvider = null;
+	}
+
+	@Override
+	protected boolean isDefaultValueSupported() {
+		return false;
 	}
 
 	@Test
@@ -134,8 +140,8 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 		URI uri = URI.createURI("java:/Objects/java.util.Map");
 		IMirror mirror = getTypeProvider().createMirror(uri);
 		assertNotNull(mirror);
-		assertTrue(mirror instanceof BinaryClassMirror);
-		assertEquals("java.util.Map", ((BinaryClassMirror) mirror).getMirroredClass().getName());
+		assertTrue(mirror instanceof ClassMirror);
+		assertEquals("java.util.Map", ((ClassMirror) mirror).getMirroredClass().getName());
 	}
 
 	@Test
@@ -266,7 +272,7 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	}
 
 	@Override
-	public ClasspathTypeProvider getTypeProvider() {
+	public ReflectionTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
 
@@ -277,16 +283,66 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 
 	@Override
 	@Test
-	public void testFindTypeByName_AbstractMultimap_02() {
-		String typeName = "com.google.common.collect.AbstractMultimap";
-		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
-		JvmOperation containsValue = (JvmOperation) Iterables.getOnlyElement(type.findAllFeaturesByName("containsValue"));
-		assertNotNull(containsValue);
-		JvmFormalParameter firstParam = containsValue.getParameters().get(0);
-		assertEquals(1, firstParam.getAnnotations().size());
-		JvmAnnotationReference annotationReference = firstParam.getAnnotations().get(0);
-		JvmAnnotationType annotationType = annotationReference.getAnnotation();
-		assertTrue(annotationType.eIsProxy());
-		assertEquals("java:/Objects/javax.annotation.Nullable", EcoreUtil.getURI(annotationType).trimFragment().toString());
+	public void testConstantValue_01() {
+		doTestConstantValue("stringConstant", TestConstants.stringConstant);
 	}
+
+	@Override
+	protected JvmField doTestConstantValue(String fieldName, Object fieldValue) {
+		String typeName = "org.eclipse.xtext.common.types.testSetups.TestConstants";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmField field = getFieldFromType(type, TestConstants.class, fieldName);
+		assertFalse(field.isSetConstant());
+		assertNull(field.getConstantValue());
+		return field;
+	}
+
+	@Override
+	@Test
+	public void testConstantValue_02() {
+		doTestConstantValue("longConstant", TestConstants.longConstant);
+	}
+
+	@Override
+	@Test
+	public void testConstantValue_03() {
+		doTestConstantValue("intConstant", TestConstants.intConstant);
+	}
+
+	@Override
+	@Test
+	public void testConstantValue_04() {
+		doTestConstantValue("shortConstant", TestConstants.shortConstant);
+	}
+
+	@Override
+	@Test
+	public void testConstantValue_05() {
+		doTestConstantValue("charConstant", TestConstants.charConstant);
+	}
+
+	@Override
+	@Test
+	public void testConstantValue_06() {
+		doTestConstantValue("byteConstant", TestConstants.byteConstant);
+	}
+
+	@Override
+	@Test
+	public void testConstantValue_07() {
+		doTestConstantValue("doubleConstant", TestConstants.doubleConstant);
+	}
+
+	@Override
+	@Test
+	public void testConstantValue_08() {
+		doTestConstantValue("floatConstant", TestConstants.floatConstant);
+	}
+
+	@Override
+	@Test
+	public void testConstantValue_09() {
+		doTestConstantValue("booleanConstant", TestConstants.booleanConstant);
+	}
+	
 }

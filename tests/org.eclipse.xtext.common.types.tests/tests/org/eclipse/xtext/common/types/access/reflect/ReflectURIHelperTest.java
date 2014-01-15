@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.impl;
+package org.eclipse.xtext.common.types.access.reflect;
 
 import java.util.Map;
 
@@ -18,13 +18,14 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClassURIHelperTest extends Assert {
+@SuppressWarnings("deprecation")
+public class ReflectURIHelperTest extends Assert {
 
-	private ClassURIHelper uriHelper;
+	private ReflectURIHelper uriHelper;
 
 	@Before
 	public void setUp() throws Exception {
-		uriHelper = new ClassURIHelper();
+		uriHelper = new ReflectURIHelper();
 	}
 	
 	@After

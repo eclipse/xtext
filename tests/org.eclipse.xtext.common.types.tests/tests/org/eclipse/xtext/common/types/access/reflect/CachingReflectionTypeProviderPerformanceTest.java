@@ -5,11 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.impl;
+package org.eclipse.xtext.common.types.access.reflect;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
+import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderPerformanceTest;
 import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -24,18 +24,19 @@ import com.google.inject.Inject;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(RefactoringTestLanguageInjectorProvider.class)
-public class CachingClasspathTypeProviderPerformanceTest extends AbstractTypeProviderPerformanceTest {
+@SuppressWarnings("deprecation")
+public class CachingReflectionTypeProviderPerformanceTest extends AbstractTypeProviderPerformanceTest {
 
 	@Inject
 	private ResourceSet resourceSet;
 
-	private ClasspathTypeProvider typeProvider;
+	private ReflectionTypeProvider typeProvider;
 	
-	private CachingClasspathTypeProviderFactory typeProviderFactory;
+	private CachingReflectionTypeProviderFactory typeProviderFactory;
 
 	@Before
 	public void setUp() throws Exception {
-		typeProviderFactory = new CachingClasspathTypeProviderFactory(getClass().getClassLoader()); 
+		typeProviderFactory = new CachingReflectionTypeProviderFactory(getClass().getClassLoader()); 
 		typeProvider = typeProviderFactory.createTypeProvider(resourceSet);
 	}
 	
@@ -45,7 +46,7 @@ public class CachingClasspathTypeProviderPerformanceTest extends AbstractTypePro
 	}
 	
 	@Override
-	public ClasspathTypeProvider getTypeProvider() {
+	public ReflectionTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
 	

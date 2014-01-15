@@ -5,11 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.impl;
+package org.eclipse.xtext.common.types.access.reflect;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
+import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderPerformanceTest;
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -22,21 +23,22 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 @RunWith(XtextRunner.class)
 @InjectWith(RefactoringTestLanguageInjectorProvider.class)
-public class CachingClasspathTypeProviderPerformanceTest extends AbstractTypeProviderPerformanceTest {
+public class ReflectionTypeProviderPerformanceTest extends AbstractTypeProviderPerformanceTest {
 
 	@Inject
 	private ResourceSet resourceSet;
 
-	private ClasspathTypeProvider typeProvider;
+	@Inject
+	private IndexedJvmTypeAccess indexedJvmTypeAccess;
 	
-	private CachingClasspathTypeProviderFactory typeProviderFactory;
+	private ReflectionTypeProvider typeProvider;
 
 	@Before
 	public void setUp() throws Exception {
-		typeProviderFactory = new CachingClasspathTypeProviderFactory(getClass().getClassLoader()); 
-		typeProvider = typeProviderFactory.createTypeProvider(resourceSet);
+		typeProvider = new ReflectionTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess);
 	}
 	
 	@After
@@ -45,7 +47,7 @@ public class CachingClasspathTypeProviderPerformanceTest extends AbstractTypePro
 	}
 	
 	@Override
-	public ClasspathTypeProvider getTypeProvider() {
+	public ReflectionTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
 	

@@ -16,7 +16,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class PrimitiveTypeFactoryTest extends Assert implements ITypeFactory<Class<?>> {
+public class PrimitiveTypeFactoryTest extends Assert implements ITypeFactory<Class<?>, JvmType> {
 
 	private PrimitiveTypeFactory provider;
 
