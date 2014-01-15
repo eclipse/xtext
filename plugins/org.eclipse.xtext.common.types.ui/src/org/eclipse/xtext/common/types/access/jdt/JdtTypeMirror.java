@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
@@ -24,10 +25,10 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 
 	private IType mirroredType;
-	private final ITypeFactory<IType> typeFactory;
+	private final ITypeFactory<IType, JvmDeclaredType> typeFactory;
 	private TypeResource typeResource;
 
-	public JdtTypeMirror(IType type, ITypeFactory<IType> typeFactory) {
+	public JdtTypeMirror(IType type, ITypeFactory<IType, JvmDeclaredType> typeFactory) {
 		this.mirroredType = type;
 		this.typeFactory = typeFactory;
 	}

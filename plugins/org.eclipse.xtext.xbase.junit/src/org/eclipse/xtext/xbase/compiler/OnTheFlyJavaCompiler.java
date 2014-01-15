@@ -290,6 +290,10 @@ public class OnTheFlyJavaCompiler {
 	}
 	
 	public Map<String,Class<?>> compileToClasses(Map<String,String> sources) {
+		return internalCompileToClasses(sources).getSecond();
+	}
+	
+	public Pair<ClassLoader, Map<String,Class<?>>> internalCompileToClasses(Map<String,String> sources) {
 		File tempDir = com.google.common.io.Files.createTempDir();
 		try {
 			for (Entry<String, String> entry : sources.entrySet()) {
@@ -321,7 +325,7 @@ public class OnTheFlyJavaCompiler {
 				Class<?> clazz = loader.loadClass(name.replace('/','.'));
 				result.put(name, clazz);
 			}
-			return result;
+			return Tuples.<ClassLoader, Map<String,Class<?>>>create(loader, result);
 		} catch (IllegalArgumentException e) {
 			throw e;
 		} catch (Exception e) {
@@ -330,7 +334,6 @@ public class OnTheFlyJavaCompiler {
 			cleanUpTmpFolder(tempDir);
 		}
 	}
-
 	
 	protected void cleanUpTmpFolder(File tempDir) {
 		try {

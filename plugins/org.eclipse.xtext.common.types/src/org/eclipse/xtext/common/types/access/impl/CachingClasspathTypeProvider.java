@@ -8,34 +8,39 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.access.binary.BinaryClass;
+import org.eclipse.xtext.common.types.access.binary.BinaryClassMirror;
+import org.eclipse.xtext.common.types.access.binary.ClassFileReaderAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class CachingClasspathTypeProvider extends ClasspathTypeProvider {
 
-	private DeclaredTypeFactory reusedFactory;
+	private ITypeFactory<BinaryClass, JvmDeclaredType> reusedFactory;
 
 	public CachingClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet,
-			IndexedJvmTypeAccess indexedJvmTypeAccess, DeclaredTypeFactory reusedFactory) {
+			IndexedJvmTypeAccess indexedJvmTypeAccess, ITypeFactory<BinaryClass, JvmDeclaredType> reusedFactory) {
 		super(classLoader, resourceSet, indexedJvmTypeAccess);
 		this.reusedFactory = reusedFactory;
 	}
 	
 	@Override
-	protected DeclaredTypeFactory createDeclaredTypeFactory() {
+	protected DeclaredTypeFactory createDeclaredTypeFactory(ClassFileReaderAccess readerAccess,
+			ClassLoader classLoader) {
 		// we don't have the reusedFactory at hand at this point thus null is sufficient
 		return null;
 	}
 	
 	@Override
-	public DeclaredTypeFactory getDeclaredTypeFactory() {
+	public ITypeFactory<BinaryClass, JvmDeclaredType> getDeclaredTypeFactory() {
 		return reusedFactory;
 	}
 	
 	@Override
-	public ClassMirror createMirror(Class<?> clazz) {
-		return ClassMirror.createClassMirror(clazz, reusedFactory);
+	public BinaryClassMirror createMirror(BinaryClass clazz) {
+		return BinaryClassMirror.createClassMirror(clazz, reusedFactory);
 	}
 
 }

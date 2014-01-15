@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.annotations.AnnotationsCompilerTest;
+import org.eclipse.xtend.core.tests.compiler.batch.TestBatchCompiler;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -53,6 +54,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	OverloadedExtensionCompilerTest.class,
 	ParameterizedTypeCompilerTest.class,
 	PropertyCompilerTest.class,
+	TestBatchCompiler.class,
 	XtendCompilerTest.class,
 	XtendCompilerErrorHandlingTest.class,
 	XbaseIntegrationTest.class

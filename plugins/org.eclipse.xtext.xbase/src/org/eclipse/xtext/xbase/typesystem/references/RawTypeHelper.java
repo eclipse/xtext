@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper;
 
 import com.google.common.collect.Lists;
@@ -169,9 +170,9 @@ public class RawTypeHelper implements IRawTypeHelper {
 
 		protected List<JvmType> createObjectReference(ResourceSet resourceSet) {
 			// no upper bound found - seems to be an invalid - assume object as upper bound
-			URI objectURI = new ClassURIHelper().getFullURI(Object.class);
 			JvmType objectType = factory.createJvmGenericType();
-			((InternalEObject)objectType).eSetProxyURI(objectURI);
+			String objectClassName = Object.class.getName();
+			((InternalEObject) objectType).eSetProxyURI(URIHelperConstants.OBJECTS_URI.appendSegment(objectClassName).appendFragment(objectClassName));
 			objectType = (JvmType) EcoreUtil.resolve(objectType, resourceSet);
 			return Collections.singletonList(objectType);
 		}
@@ -289,9 +290,9 @@ public class RawTypeHelper implements IRawTypeHelper {
 
 		protected LightweightTypeReference createObjectReference(ITypeReferenceOwner owner, ResourceSet resourceSet) {
 			// no upper bound found - seems to be an invalid - assume object as upper bound
-			URI objectURI = new ClassURIHelper().getFullURI(Object.class);
 			JvmType objectType = factory.createJvmGenericType();
-			((InternalEObject)objectType).eSetProxyURI(objectURI);
+			String objectClassName = Object.class.getName();
+			((InternalEObject) objectType).eSetProxyURI(URIHelperConstants.OBJECTS_URI.appendSegment(objectClassName).appendFragment(objectClassName));
 			objectType = (JvmType) EcoreUtil.resolve(objectType, resourceSet);
 			return new ParameterizedTypeReference(owner, objectType);
 		}

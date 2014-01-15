@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.access.binary.BinaryClass;
 
 import com.google.common.collect.Maps;
 
@@ -34,21 +35,19 @@ import com.google.common.collect.Maps;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CachingDeclaredTypeFactory extends DeclaredTypeFactory {
+public class CachingDeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclaredType> {
 
 	private static final Logger log = Logger.getLogger(CachingDeclaredTypeFactory.class);
 
 	private final DeclaredTypeFactory delegate;
 
-	private final Map<Class<?>, JvmDeclaredType> typeCache = Maps.newHashMap();
+	private final Map<String, JvmDeclaredType> typeCache = Maps.newHashMap();
 
 	public CachingDeclaredTypeFactory(DeclaredTypeFactory delegate) {
-		super(delegate.getUriHelper());
 		this.delegate = delegate;
 	}
-
-	@Override
-	public JvmDeclaredType createType(Class<?> clazz) {
+	
+	public JvmDeclaredType createType(BinaryClass clazz) {
 		try {
 			JvmDeclaredType cachedResult = get(clazz);
 			// the cached result contains proxies and is not 
@@ -65,18 +64,19 @@ public class CachingDeclaredTypeFactory extends DeclaredTypeFactory {
 		}
 	}
 
-	private JvmDeclaredType get(Class<?> key) {
-		JvmDeclaredType cachedResult = typeCache.get(key);
+	private JvmDeclaredType get(BinaryClass clazz) {
+		String name = clazz.getName();
+		JvmDeclaredType cachedResult = typeCache.get(name);
 		if (cachedResult == null) {
-			cachedResult = load(key);
-			typeCache.put(key, cachedResult);
+			cachedResult = load(clazz);
+			typeCache.put(name, cachedResult);
 		}
 		return cachedResult;
 	}
 
-	private JvmDeclaredType load(Class<?> key) {
+	private JvmDeclaredType load(BinaryClass key) {
 		if (log.isDebugEnabled())
-			log.debug("Hit:" + key.getCanonicalName());
+			log.debug("Hit:" + key.getName());
 		return delegate.createType(key);
 	}
 	

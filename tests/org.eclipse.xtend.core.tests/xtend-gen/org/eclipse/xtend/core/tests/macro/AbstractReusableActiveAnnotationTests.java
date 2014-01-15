@@ -2233,7 +2233,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("addAnnotation(typeof(MyAnnotation).findTypeGlobally) => [");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("set(null, #[\'foo\',\'bar\',\'baz\'] as String[])");
+    _builder.append("set(\'value\', #[\'foo\',\'bar\',\'baz\'] as String[])");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("set(\'singleValue\', \'foo\')");
@@ -2292,11 +2292,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("@myannotation.AddAnnotationValue");
     _builder_1.newLine();
-    _builder_1.append("class MyClass {");
-    _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.newLine();
-    _builder_1.append("}");
+    _builder_1.append("class MyClass {}");
     _builder_1.newLine();
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {

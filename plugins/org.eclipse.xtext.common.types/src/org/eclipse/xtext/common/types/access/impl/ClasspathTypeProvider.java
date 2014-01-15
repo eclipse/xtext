@@ -7,97 +7,155 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Map;
 
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
-import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.util.Strings;
-
-import com.google.common.collect.Maps;
+import org.eclipse.xtext.common.types.access.binary.BinaryClass;
+import org.eclipse.xtext.common.types.access.binary.BinaryClassFinder;
+import org.eclipse.xtext.common.types.access.binary.BinaryClassMirror;
+import org.eclipse.xtext.common.types.access.binary.ClassFileReaderAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
+public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
-	protected static class TypeInResourceSetAdapter extends AdapterImpl {
-		
-		private Map<String, JvmType> typeByQueryString = Maps.newHashMap();
-		
-		@Override
-		public boolean isAdapterForType(Object type) {
-			return TypeInResourceSetAdapter.class.equals(type);
+	private static class JavaURIConverter implements URIConverter {
+		private final URIConverter existing;
+		private ClassLoader classLoader;
+
+		private JavaURIConverter(URIConverter existing) {
+			this.existing = existing;
 		}
-		
-		protected JvmType tryFindTypeInIndex(String name, ClasspathTypeProvider typeProvider, boolean binaryNestedTypeDelimiter) {
-			JvmType result = typeByQueryString.get(name);
-			if (result != null)
-				return result;
-			JvmType candidate = typeProvider.doTryFindInIndex(name, binaryNestedTypeDelimiter);
-			if (candidate != null) {
-				typeByQueryString.put(name, candidate);
-				return candidate;
+
+		public URI normalize(URI uri) {
+			if (URIHelperConstants.PROTOCOL.equals(uri.scheme())) {
+				String qualifiedName = uri.lastSegment();
+				if (qualifiedName.lastIndexOf('$') != -1) {
+					String outermostClassName = new BinaryClass(qualifiedName, classLoader).getOutermostClassName();
+					return URIHelperConstants.OBJECTS_URI.appendSegment(outermostClassName);
+				}
+				return uri;
 			}
-			return null;
+			return existing.normalize(uri);
 		}
-		
+
+		public Map<URI, URI> getURIMap() {
+			return existing.getURIMap();
+		}
+
+		public EList<URIHandler> getURIHandlers() {
+			return existing.getURIHandlers();
+		}
+
+		public URIHandler getURIHandler(URI uri) {
+			return existing.getURIHandler(uri);
+		}
+
+		public EList<ContentHandler> getContentHandlers() {
+			return existing.getContentHandlers();
+		}
+
+		public InputStream createInputStream(URI uri) throws IOException {
+			return existing.createInputStream(uri);
+		}
+
+		public InputStream createInputStream(URI uri, Map<?, ?> options) throws IOException {
+			return existing.createInputStream(uri, options);
+		}
+
+		public OutputStream createOutputStream(URI uri) throws IOException {
+			return existing.createOutputStream(uri);
+		}
+
+		public OutputStream createOutputStream(URI uri, Map<?, ?> options) throws IOException {
+			return existing.createOutputStream(uri, options);
+		}
+
+		public void delete(URI uri, Map<?, ?> options) throws IOException {
+			existing.delete(uri, options);
+		}
+
+		public Map<String, ?> contentDescription(URI uri, Map<?, ?> options) throws IOException {
+			return existing.contentDescription(uri, options);
+		}
+
+		public boolean exists(URI uri, Map<?, ?> options) {
+			return existing.exists(uri, options);
+		}
+
+		public Map<String, ?> getAttributes(URI uri, Map<?, ?> options) {
+			return existing.getAttributes(uri, options);
+		}
+
+		public void setAttributes(URI uri, Map<String, ?> attributes, Map<?, ?> options) throws IOException {
+			existing.setAttributes(uri, attributes, options);
+		}
+
 	}
+
+	private final BinaryClassFinder classFinder;
 	
-	private final ClassFinder classFinder;
+	private final ITypeFactory<BinaryClass, JvmDeclaredType> typeFactory;
 	
-	private final DeclaredTypeFactory declaredTypeFactory;
+	private final ClassLoader classLoader;
 	
-	private final ClassURIHelper uriHelper;
+	private final ClassFileReaderAccess readerAccess;
 	
 	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
 		super(resourceSet, indexedJvmTypeAccess);
-		classFinder = createClassFinder(classLoader);
-		uriHelper = createClassURIHelper();
-		declaredTypeFactory = createDeclaredTypeFactory();
+		this.classLoader = classLoader;
+		readerAccess = createClassFileReaderAccess(); 
+		classFinder = createBinaryClassFinder(classLoader);
+		typeFactory = createDeclaredTypeFactory(readerAccess, classLoader);
+		((JavaURIConverter)resourceSet.getURIConverter()).classLoader = classLoader;
 	}
 	
-	@Deprecated
-	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet) {
-		this(classLoader, resourceSet, null);
+	protected ClassFileReaderAccess createClassFileReaderAccess() {
+		return new ClassFileReaderAccess();
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Also registers an URI converter that can resolve resource URIs that point
+	 * to nested types to their outermost declarator.
+	 */
 	@Override
 	protected void registerProtocol(ResourceSet resourceSet) {
 		super.registerProtocol(resourceSet);
-		resourceSet.eAdapters().add(new TypeInResourceSetAdapter());
-	}
-
-	protected ClassFinder createClassFinder(ClassLoader classLoader) {
-		return new ClassFinder(classLoader);
-	}
-
-	protected DeclaredTypeFactory createDeclaredTypeFactory() {
-		return new DeclaredTypeFactory(uriHelper);
-	}
-
-	protected ClassURIHelper createClassURIHelper() {
-		return new ClassURIHelper();
+		final URIConverter existing = resourceSet.getURIConverter();
+		resourceSet.setURIConverter(new JavaURIConverter(existing));
 	}
 	
-	public ClassURIHelper getClassURIHelper() {
-		return uriHelper;
-	}
-	
-	public DeclaredTypeFactory getDeclaredTypeFactory() {
-		return declaredTypeFactory;
+	protected BinaryClassFinder createBinaryClassFinder(ClassLoader classLoader) {
+		return new BinaryClassFinder(classLoader);
 	}
 
-	public ClassFinder getClassFinder() {
+	protected ITypeFactory<BinaryClass, JvmDeclaredType> createDeclaredTypeFactory(ClassFileReaderAccess readerAccess, ClassLoader classLoader) {
+		return new DeclaredTypeFactory(readerAccess, classLoader);
+	}
+
+	public ITypeFactory<BinaryClass, JvmDeclaredType> getDeclaredTypeFactory() {
+		return typeFactory;
+	}
+
+	public BinaryClassFinder getClassFinder() {
 		return classFinder;
 	}
 	
@@ -106,22 +164,23 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 		try {
 			// seems to be the only reliable way to locate nested types
 			// since dollar signs are a quite good indicator but not necessarily the best
-			Class<?> clazz = classFinder.forName(name);
+			BinaryClass clazz = classFinder.forName(name);
 			return findTypeByClass(clazz);
 		} catch (ClassNotFoundException e) {
 			return tryFindTypeInIndex(name, true);
-		} catch (NoClassDefFoundError e) { 
-			/* 
-			 * Error will be thrown if the contents of the binary class file does not match the expectation (transitively).
-			 * See java.lang.ClassLoader.defineClass(String, byte[], int, int, ProtectionDomain)
-			 */
-			return tryFindTypeInIndex(name, true);
 		}
 	}
+	
+	@Override
+	public TypeResource createResource(URI uri) {
+		String qualifiedName = uri.lastSegment();
+		if (qualifiedName.lastIndexOf('$') != -1) {
+			String outermostClassName = new BinaryClass(qualifiedName, classLoader).getOutermostClassName();
+			return super.createResource(URIHelperConstants.OBJECTS_URI.appendSegment(outermostClassName));
+		}
+		return super.createResource(uri);
+	}
 
-	/**
-	 * @since 2.4
-	 */
 	@Override
 	public JvmType findTypeByName(String name, boolean binaryNestedTypeDelimiter) {
 		if (isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter)) {
@@ -134,24 +193,18 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 		try {
 			// seems to be the only reliable way to locate nested types
 			// since dollar signs are a quite good indicator but not necessarily the best
-			Class<?> clazz = findClassByName(name);
+			BinaryClass clazz = findClassByName(name);
 			return findTypeByClass(clazz);
 		} catch (ClassNotFoundException e) {
-			return tryFindTypeInIndex(name, false);
-		} catch (NoClassDefFoundError e) { 
-			/* 
-			 * Error will be thrown if the contents of the binary class file does not match the expectation (transitively).
-			 * See java.lang.ClassLoader.defineClass(String, byte[], int, int, ProtectionDomain)
-			 */
 			return tryFindTypeInIndex(name, false);
 		}
 	}
 
-	private JvmType findTypeByClass(Class<?> clazz) {
+	private JvmType findTypeByClass(BinaryClass clazz) {
 		IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
-		URI resourceURI = uriHelper.createResourceURI(clazz);
+		URI resourceURI = clazz.getResourceURI();
 		if (indexedJvmTypeAccess != null) {
-			URI proxyURI = resourceURI.appendFragment(uriHelper.getFragment(clazz));
+			URI proxyURI = resourceURI.appendFragment(clazz.getURIFragment());
 			EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, getResourceSet());
 			if (candidate instanceof JvmType)
 				return (JvmType) candidate;
@@ -160,9 +213,9 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 		return findTypeByClass(clazz, result);
 	}
 
-	private Class<?> findClassByName(String name) throws ClassNotFoundException {
+	private BinaryClass findClassByName(String name) throws ClassNotFoundException {
 		try {
-			Class<?> clazz = classFinder.forName(name);
+			BinaryClass clazz = classFinder.forName(name);
 			return clazz;
 		} catch(ClassNotFoundException exception) {
 			int index = name.lastIndexOf('.');
@@ -171,12 +224,12 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 			}
 			String baseName = name.substring(0, index);
 			try {
-				Class<?> resolvedOuterClass = findClassByName(baseName);
+				BinaryClass resolvedOuterClass = findClassByName(baseName);
 				baseName = resolvedOuterClass.getName();
 			} catch (ClassNotFoundException baseNameException) {
 				throw exception;
 			}
-			Class<?> clazz = classFinder.forName(baseName + '$' + name.substring(index + 1));
+			BinaryClass clazz = classFinder.forName(baseName + '$' + name.substring(index + 1));
 			return clazz;
 		}
 	}
@@ -190,53 +243,23 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 		}
 	}
 
-	@Nullable
-	private JvmType doTryFindInIndex(String name, boolean binaryNestedTypeDelimiter) {
-		IndexedJvmTypeAccess indexAccess = getIndexedJvmTypeAccess();
-		if (indexAccess != null) {
-			JvmType result = doTryFindInIndex(name, indexAccess);
-			if (result == null && !isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter)) {
-				ClassNameVariants variants = new ClassNameVariants(name);
-				while(result == null && variants.hasNext()) {
-					String nextVariant = variants.next();
-					result = doTryFindInIndex(nextVariant, indexAccess);
-				}
-			}
-			return result;
-		}
-		return null;
-	}
-
-	private JvmType doTryFindInIndex(String name, IndexedJvmTypeAccess indexAccess) {
-		int index = name.indexOf('$');
-		if (index < 0)
-			index = name.indexOf('[');
-		String qualifiedNameString = index < 0 ? name : name.substring(0, index);
-		List<String> nameSegments = Strings.split(qualifiedNameString, '.');
-		QualifiedName qualifiedName = QualifiedName.create(nameSegments);
-		EObject candidate = indexAccess.getIndexedJvmType(qualifiedName, name, getResourceSet());
-		if (candidate instanceof JvmType)
-			return (JvmType) candidate;
-		return null;
-	}
-	
 	@Override
 	protected IMirror createMirrorForFQN(String name) {
 		try {
-			Class<?> clazz = classFinder.forName(name);
+			BinaryClass clazz = classFinder.forName(name);
 			return createMirror(clazz);
 		} catch (ClassNotFoundException e) {
 			return null;
 		}
 	}
 	
-	public ClassMirror createMirror(Class<?> clazz) {
-		return ClassMirror.createClassMirror(clazz, declaredTypeFactory);
+	public BinaryClassMirror createMirror(BinaryClass clazz) {
+		return BinaryClassMirror.createClassMirror(clazz, typeFactory);
 	}
 	
-	public JvmType findTypeByClass(Class<?> clazz, Resource resource) {
+	public JvmType findTypeByClass(BinaryClass clazz, Resource resource) {
 		// TODO: Maybe iterate the resource without computing a fragment
-		String fragment = uriHelper.getFragment(clazz);
+		String fragment = clazz.getURIFragment();
 		JvmType result = (JvmType) resource.getEObject(fragment);
 		if (result == null) {
 			throw new IllegalStateException("Resource has not been loaded");

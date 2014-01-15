@@ -28,6 +28,10 @@ class ConditionUtils {
 	static def checkJavaIdentifier(String string, String name) {
 		Preconditions.checkArgument(isValidJavaIdentifier(string), '''«name» has to be a valid java identifier''')
 	}
+	
+	static def checkTypeName(String typeName, String valueType) {
+		Preconditions.checkArgument(typeName == valueType, '''«valueType» is not applicable at this location. Expected «typeName»''')
+	}
 
 	static def isValidQualifiedName(String string) {
 		if (string == null || string.length == 0) {
