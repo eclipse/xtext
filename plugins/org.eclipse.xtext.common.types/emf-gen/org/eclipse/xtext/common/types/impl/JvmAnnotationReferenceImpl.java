@@ -36,7 +36,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl#getAnnotation <em>Annotation</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl#getExplicitValues <em>Explicit Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,14 +55,14 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 	protected JvmAnnotationType annotation;
 
 	/**
-	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
+	 * The cached value of the '{@link #getExplicitValues() <em>Explicit Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValues()
+	 * @see #getExplicitValues()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<JvmAnnotationValue> values;
+	protected EList<JvmAnnotationValue> explicitValues;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,13 +133,25 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<JvmAnnotationValue> getExplicitValues()
+	{
+		if (explicitValues == null)
+		{
+			explicitValues = new EObjectContainmentEList<JvmAnnotationValue>(JvmAnnotationValue.class, this, TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES);
+		}
+		return explicitValues;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<JvmAnnotationValue> getValues()
 	{
-		if (values == null)
-		{
-			values = new EObjectContainmentEList<JvmAnnotationValue>(JvmAnnotationValue.class, this, TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES);
-		}
-		return values;
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -152,8 +164,8 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
-				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
+			case TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES:
+				return ((InternalEList<?>)getExplicitValues()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -171,8 +183,8 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__ANNOTATION:
 				if (resolve) return getAnnotation();
 				return basicGetAnnotation();
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
-				return getValues();
+			case TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES:
+				return getExplicitValues();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -191,9 +203,9 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__ANNOTATION:
 				setAnnotation((JvmAnnotationType)newValue);
 				return;
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
-				getValues().clear();
-				getValues().addAll((Collection<? extends JvmAnnotationValue>)newValue);
+			case TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES:
+				getExplicitValues().clear();
+				getExplicitValues().addAll((Collection<? extends JvmAnnotationValue>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -212,8 +224,8 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__ANNOTATION:
 				setAnnotation((JvmAnnotationType)null);
 				return;
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
-				getValues().clear();
+			case TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES:
+				getExplicitValues().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -231,8 +243,8 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 		{
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__ANNOTATION:
 				return annotation != null;
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
-				return values != null && !values.isEmpty();
+			case TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES:
+				return explicitValues != null && !explicitValues.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

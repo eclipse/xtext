@@ -26,7 +26,6 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
 import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
 import org.eclipse.xtext.common.types.util.jdt.JavaElementFinder;
 import org.eclipse.xtext.util.Files;
@@ -37,7 +36,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SourceBasedJdtTypeProviderTest extends AbstractTypeProviderTest {
+public class SourceBasedJdtTypeProviderTest extends AbstractJdtTypeProviderTest {
 
 	private ResourceSet resourceSet;
 	private JdtTypeProvider typeProvider;

@@ -25,8 +25,11 @@ import org.eclipse.xtend.core.scoping.XtendScopeProvider;
 import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
-import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.binary.CachingClassReaderTypeProviderFactory;
+import org.eclipse.xtext.common.types.access.binary.ClassReaderTypeProviderFactory;
+import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
+import org.eclipse.xtext.common.types.xtext.ClassReaderBasedTypeScopeProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.PreferenceKey;
@@ -66,8 +69,22 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 			return XtendFactory.eINSTANCE;
 		}
 
-		public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
-			return CachingClasspathTypeProviderFactory.class;
+//		public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
+//			return CachingClasspathTypeProviderFactory.class;
+//		}
+		
+		@Override
+		public Class<? extends IJvmTypeProvider.Factory> bindIJvmTypeProvider$Factory() {
+			return ClassReaderTypeProviderFactory.class;
+		}
+
+		@Override
+		public Class<? extends AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
+			return ClassReaderBasedTypeScopeProvider.class;
+		}
+		
+		public Class<? extends ClassReaderTypeProviderFactory> bindClassReaderTypeProviderFactory() {
+			return CachingClassReaderTypeProviderFactory.class;
 		}
 
 		public Class<? extends IPreferenceValuesProvider> bindIPreferenceValuesProvider() {

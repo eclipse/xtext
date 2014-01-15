@@ -20,13 +20,15 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getAnnotation <em>Annotation</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getValues <em>Values</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getExplicitValues <em>Explicit Values</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmAnnotationReference()
  * @model
  * @generated
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmAnnotationReference extends EObject
 {
@@ -57,17 +59,30 @@ public interface JvmAnnotationReference extends EObject
 	void setAnnotation(JvmAnnotationType value);
 
 	/**
-	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Explicit Values</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmAnnotationValue}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Values</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Values</em>' containment reference list.
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmAnnotationReference_Values()
+	 * <!-- begin-model-doc -->
+	 * <p>Returns the explicit annotation values. That is, default values are not expected to be contained in that list.</p>
+	 * <p>Important note: Some implementations don't have enough information about default values on annotations.
+	 * They may choose to consider all available values as explicit values.</p>
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Explicit Values</em>' containment reference list.
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmAnnotationReference_ExplicitValues()
 	 * @model containment="true"
+	 * @generated
+	 * @since 2.5
+	 */
+	EList<JvmAnnotationValue> getExplicitValues();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>Returns all annotation values. That is, default values are not included if not explicitely given.</p>
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
 	 * @generated
 	 */
 	EList<JvmAnnotationValue> getValues();

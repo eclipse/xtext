@@ -26,7 +26,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
-import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.common.types.access.binary.ClassReaderTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
@@ -409,7 +409,7 @@ public class StandaloneBuilder {
   
   protected void installTypeProvider(final Iterable<String> classPathRoots, final XtextResourceSet resSet, final IndexedJvmTypeAccess typeAccess) {
     final URLClassLoader classLoader = this.createURLClassLoader(classPathRoots);
-    new ClasspathTypeProvider(classLoader, resSet, typeAccess);
+    new ClassReaderTypeProvider(classLoader, resSet, typeAccess);
     resSet.setClasspathURIContext(classLoader);
   }
   

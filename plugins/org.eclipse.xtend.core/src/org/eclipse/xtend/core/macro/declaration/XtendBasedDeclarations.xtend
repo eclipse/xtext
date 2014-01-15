@@ -506,7 +506,7 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 		return annotationTypeDeclaration.findDeclaredAnnotationTypeElement(property).defaultValue
 	}
 	
-		override getAnnotationValue(String name) {
+	override getAnnotationValue(String name) {
 		getValue(name) as AnnotationReference
 	}
 	

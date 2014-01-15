@@ -132,6 +132,8 @@ public class CompilationTestHelper {
 		Class<?> getCompiledClass();
 		
 		Class<?> getCompiledClass(String className);
+		
+		ClassLoader getClassLoader();
 
 		Map<String, CharSequence> getAllGeneratedResources();
 	}
@@ -205,18 +207,32 @@ public class CompilationTestHelper {
 			}
 			acceptor.accept(new Result() {
 				
+				private ClassLoader classLoader;
 				private Map<String,Class<?>> compiledClasses;
 				private Map<String,String> generatedCode;
 				
 				public Map<String,Class<?>> getCompiledClasses() {
 					if (compiledClasses == null) {
-						try {
-							compiledClasses = javaCompiler.compileToClasses(getGeneratedCode());
-						} catch (IllegalArgumentException e) {
-							throw new AssertionError(e);
-						}
+						compile();
 					}
 					return compiledClasses;
+				}
+				
+				private void compile() {
+					try {
+						org.eclipse.xtext.util.Pair<ClassLoader, Map<String, Class<?>>> compilationResult = javaCompiler.internalCompileToClasses(getGeneratedCode());
+						this.classLoader = compilationResult.getFirst();
+						this.compiledClasses = compilationResult.getSecond();
+					} catch (IllegalArgumentException e) {
+						throw new AssertionError(e);
+					}
+				}
+				
+				public ClassLoader getClassLoader() {
+					if (classLoader == null) {
+						compile();
+					}
+					return classLoader;
 				}
 				
 				public Map<String,String> getGeneratedCode() {
