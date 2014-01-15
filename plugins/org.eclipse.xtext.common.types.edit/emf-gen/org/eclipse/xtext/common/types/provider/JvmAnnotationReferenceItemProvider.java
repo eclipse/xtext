@@ -113,7 +113,7 @@ public class JvmAnnotationReferenceItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES);
+			childrenFeatures.add(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES);
 		}
 		return childrenFeatures;
 	}
@@ -155,6 +155,7 @@ public class JvmAnnotationReferenceItemProvider
 	{
 		return getString("_UI_JvmAnnotationReference_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -170,7 +171,7 @@ public class JvmAnnotationReferenceItemProvider
 
 		switch (notification.getFeatureID(JvmAnnotationReference.class))
 		{
-			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
+			case TypesPackage.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -191,67 +192,67 @@ public class JvmAnnotationReferenceItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmIntAnnotationValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmByteAnnotationValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmShortAnnotationValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmLongAnnotationValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmFloatAnnotationValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmCharAnnotationValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmStringAnnotationValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmTypeAnnotationValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmEnumAnnotationValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__VALUES,
+				(TypesPackage.Literals.JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES,
 				 TypesFactory.eINSTANCE.createJvmCustomAnnotationValue()));
 	}
 

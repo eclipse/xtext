@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.resource.DescriptionFlags;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtext.common.types.access.binary.ClassReaderTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
@@ -130,7 +131,7 @@ public class IndexingTest extends AbstractXtendTestCase {
 	
 	private void doTestResourceDescriptionWithoutGetContents(final String input) throws IOException {
 		XtextResourceSet resourceSet = getResourceSet();
-		new ClasspathTypeProvider(classLoader, resourceSet, null);
+		new ClassReaderTypeProvider(classLoader, resourceSet, null);
 		final Wrapper<Boolean> wrapper = Wrapper.wrap(Boolean.FALSE);
 		for (int i = 0; i < 10; i++) {
 			DerivedStateAwareResource resource = (DerivedStateAwareResource) resourceSet.createResource(URI.createURI("Dummy" + i + ".xtend"));

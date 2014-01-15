@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -111,22 +113,24 @@ public class ConstantExpressionValidator {
           return ((JvmField)feature).isConstant();
         }
         boolean _and = false;
-        boolean _and_1 = false;
         boolean _isStatic = ((JvmField)feature).isStatic();
         if (!_isStatic) {
-          _and_1 = false;
-        } else {
-          boolean _isFinal = ((JvmField)feature).isFinal();
-          _and_1 = _isFinal;
-        }
-        if (!_and_1) {
           _and = false;
         } else {
-          XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
-          boolean _isConstantExpression = this.isConstantExpression(_associatedExpression);
-          _and = _isConstantExpression;
+          boolean _isFinal = ((JvmField)feature).isFinal();
+          _and = _isFinal;
         }
-        return _and;
+        final boolean potentiallyConstant = _and;
+        if (potentiallyConstant) {
+          Resource _eResource = ((JvmField)feature).eResource();
+          if ((_eResource instanceof TypeResource)) {
+            return true;
+          } else {
+            XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
+            return this.isConstantExpression(_associatedExpression);
+          }
+        }
+        return false;
       }
     }
     if (!_matched) {

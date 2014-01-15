@@ -7,60 +7,38 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import static com.google.common.collect.Maps.*;
-
-import java.util.Map;
+import java.util.HashMap;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClassFinder {
-	
+public class ClassFinder extends AbstractClassFinder<Class<?>> {
+
 	private static final Class<?> NULL_CLASS;
 
-	static
-	{
-		class Null
-		{
-			
+	static {
+		class Null {
 		}
 		NULL_CLASS = Null.class;
 	}
-	
-	private static final ClassNotFoundException CACHED_EXCEPTION = new ClassNotFoundException(); 
-	
-	private final ClassLoader classLoader;
-	private final ClassNameUtil classNameUtil;
-	
+
+	@SuppressWarnings("serial")
+	private static class Cache extends HashMap<String, Class<?>> {
+		public Cache() {
+			super(500);
+			for (Class<?> primitiveType : Primitives.ALL_PRIMITIVE_TYPES) {
+				put(primitiveType.getName(), primitiveType);
+			}
+		}
+	}
+
 	public ClassFinder(ClassLoader classLoader) {
-		this.classLoader = classLoader;
-		this.classNameUtil = new ClassNameUtil();
-	}
-	
-	private Map<String, Class<?>> cache = newHashMapWithExpectedSize(500);
-	
-	{
-		for (Class<?> primitiveType : Primitives.ALL_PRIMITIVE_TYPES) {
-			cache.put(primitiveType.getName(), primitiveType);
-		}
+		super(classLoader, NULL_CLASS, new Cache());
 	}
 
-	public Class<?> forName(String name) throws ClassNotFoundException {
-		Class<?> result = cache.get(name);
-		if (result != null) {
-			if (result == NULL_CLASS)
-				throw CACHED_EXCEPTION;
-			return result;
-		}
-
-		try {
-			result = Class.forName(classNameUtil.normalizeClassName(name), false, classLoader);
-			cache.put(name, result);
-			return result;
-		} catch(ClassNotFoundException e) {
-			cache.put(name, NULL_CLASS);
-			throw e;
-		}
+	@Override
+	protected Class<?> forName(String name, ClassLoader classLoader) throws ClassNotFoundException {
+		return Class.forName(name, false, classLoader);
 	}
-	
+
 }

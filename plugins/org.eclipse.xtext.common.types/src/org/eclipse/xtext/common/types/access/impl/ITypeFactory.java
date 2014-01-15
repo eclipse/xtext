@@ -7,15 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.common.types.JvmType;
 
 /**
+ * SPI to implement a custom type provider that produces
+ * {@link JvmType}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noimplement This interface is not intended to be implemented by clients.
  * @noextend This interface is not intended to be extended by clients.
  */
 public interface ITypeFactory<Arg> {
 
+	/**
+	 * Produce a JvmType for the given source, e.g. a {@code java.lang.Class<?>},
+	 * {@code byte[]} or {@link IType}.
+	 */
 	JvmType createType(Arg arg);
 	
 }
