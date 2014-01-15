@@ -39,4 +39,18 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage$Literals">
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_FIELD__CONSTANT"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_FIELD__CONSTANT_VALUE"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
