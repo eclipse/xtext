@@ -1350,7 +1350,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getJvmAnnotationReference_Values()
+	public EReference getJvmAnnotationReference_ExplicitValues()
 	{
 		return (EReference)jvmAnnotationReferenceEClass.getEStructuralFeatures().get(1);
 	}
@@ -1917,7 +1917,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		jvmAnnotationReferenceEClass = createEClass(JVM_ANNOTATION_REFERENCE);
 		createEReference(jvmAnnotationReferenceEClass, JVM_ANNOTATION_REFERENCE__ANNOTATION);
-		createEReference(jvmAnnotationReferenceEClass, JVM_ANNOTATION_REFERENCE__VALUES);
+		createEReference(jvmAnnotationReferenceEClass, JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES);
 
 		jvmAnnotationValueEClass = createEClass(JVM_ANNOTATION_VALUE);
 		createEReference(jvmAnnotationValueEClass, JVM_ANNOTATION_VALUE__OPERATION);
@@ -2305,7 +2305,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		initEClass(jvmAnnotationReferenceEClass, JvmAnnotationReference.class, "JvmAnnotationReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmAnnotationReference_Annotation(), this.getJvmAnnotationType(), null, "annotation", null, 0, 1, JvmAnnotationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJvmAnnotationReference_Values(), this.getJvmAnnotationValue(), null, "values", null, 0, -1, JvmAnnotationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJvmAnnotationReference_ExplicitValues(), this.getJvmAnnotationValue(), null, "explicitValues", null, 0, -1, JvmAnnotationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(jvmAnnotationReferenceEClass, this.getJvmAnnotationValue(), "getValues", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(jvmAnnotationValueEClass, JvmAnnotationValue.class, "JvmAnnotationValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmAnnotationValue_Operation(), this.getJvmOperation(), null, "operation", null, 0, 1, JvmAnnotationValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2464,6 +2466,20 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		   new String[] 
 		   {
 			 "documentation", "<p>Returns the default value for the annotation member represented by this JvmOperation instance.</p>\n<p>Returns null if no default is associated with the member, or if the operation does not represent a declared member of an annotation type.</p>"
+		   });	
+		addAnnotation
+		  (jvmAnnotationReferenceEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>Returns all annotation values. That is, default values are not included if not explicitely given.</p>"
+		   });	
+		addAnnotation
+		  (getJvmAnnotationReference_ExplicitValues(), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>Returns the explicit annotation values. That is, default values are not expected to be contained in that list.</p>\n<p>Important note: Some implementations don\'t have enough information about default values on annotations.\nThey may choose to consider all available values as explicit values.</p>"
 		   });	
 		addAnnotation
 		  (jvmAnnotationValueEClass, 
