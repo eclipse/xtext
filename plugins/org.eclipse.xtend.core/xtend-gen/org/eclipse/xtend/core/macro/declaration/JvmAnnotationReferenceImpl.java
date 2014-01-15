@@ -59,7 +59,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> implements MutableAnnotationReference {
@@ -429,9 +428,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
           if (it instanceof TypeReferenceImpl) {
             _matched=true;
             EList<JvmTypeReference> _values = newValue.getValues();
-            LightweightTypeReference _delegate = ((TypeReferenceImpl)it).getDelegate();
-            JvmTypeReference _typeReference = _delegate.toTypeReference();
-            _values.add(_typeReference);
+            CompilationUnitImpl _compilationUnit = ((TypeReferenceImpl)it).getCompilationUnit();
+            JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(it);
+            _values.add(_jvmTypeReference);
           }
         }
       }

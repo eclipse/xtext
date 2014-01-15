@@ -138,6 +138,10 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     _typeParameters.add(param);
     for (final TypeReference upper : upperBounds) {
       {
+        boolean _isInferred = upper.isInferred();
+        if (_isInferred) {
+          throw new IllegalArgumentException("Cannot use inferred type as parameter type.");
+        }
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
         final JvmTypeReference typeRef = _compilationUnit.toJvmTypeReference(upper);
         final JvmUpperBound jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
@@ -170,6 +174,10 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     ConditionUtils.checkJavaIdentifier(name, "name");
     boolean _notEquals = (!Objects.equal(type, null));
     Preconditions.checkArgument(_notEquals, "type cannot be null");
+    boolean _isInferred = type.isInferred();
+    if (_isInferred) {
+      throw new IllegalArgumentException("Cannot use inferred type as parameter type.");
+    }
     final JvmFormalParameter param = TypesFactory.eINSTANCE.createJvmFormalParameter();
     param.setName(name);
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

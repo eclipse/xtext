@@ -11,12 +11,10 @@ import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmExecutableDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation> implements MutableMethodDeclaration {
@@ -76,9 +74,9 @@ public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOp
     boolean _notEquals = (!Objects.equal(type, null));
     Preconditions.checkArgument(_notEquals, "returnType cannot be null");
     JvmOperation _delegate = this.getDelegate();
-    LightweightTypeReference _lightWeightTypeReference = ((TypeReferenceImpl) type).getLightWeightTypeReference();
-    JvmTypeReference _javaCompliantTypeReference = _lightWeightTypeReference.toJavaCompliantTypeReference();
-    _delegate.setReturnType(_javaCompliantTypeReference);
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(type);
+    _delegate.setReturnType(_jvmTypeReference);
   }
   
   public void setAbstract(final boolean isAbstract) {

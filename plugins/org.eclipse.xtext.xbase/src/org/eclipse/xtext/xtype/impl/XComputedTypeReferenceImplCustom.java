@@ -67,4 +67,7 @@ public class XComputedTypeReferenceImplCustom extends XComputedTypeReferenceImpl
 		return equivalent;
 	}
 	
+	public boolean isEquivalentComputed() {
+		return equivalent != null;
+	}
 }

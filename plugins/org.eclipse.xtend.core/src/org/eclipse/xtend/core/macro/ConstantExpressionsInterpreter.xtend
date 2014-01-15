@@ -284,7 +284,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			var String dimensions = '' 
 			while (t instanceof JvmArrayType) {
 				dimensions = dimensions + '[]'
-				t = (t as JvmArrayType).componentType
+				t = t.componentType
 			}
 			val componentClass = getJavaType(t, classFinder)
 			return classFinder.forName(componentClass.name+dimensions)

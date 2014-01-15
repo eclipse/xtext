@@ -12,7 +12,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
@@ -30,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements MutableInterfaceDeclaration {
@@ -64,16 +62,16 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
     _superTypes.clear();
     for (final TypeReference typeRef : superinterfaces) {
-      boolean _matched = false;
-      if (!_matched) {
-        if (typeRef instanceof TypeReferenceImpl) {
-          _matched=true;
-          JvmGenericType _delegate_1 = this.getDelegate();
-          EList<JvmTypeReference> _superTypes_1 = _delegate_1.getSuperTypes();
-          LightweightTypeReference _delegate_2 = ((TypeReferenceImpl)typeRef).getDelegate();
-          JvmTypeReference _javaCompliantTypeReference = _delegate_2.toJavaCompliantTypeReference();
-          _superTypes_1.add(_javaCompliantTypeReference);
+      {
+        boolean _isInferred = typeRef.isInferred();
+        if (_isInferred) {
+          throw new IllegalArgumentException("Cannot use inferred type as extended interface.");
         }
+        JvmGenericType _delegate_1 = this.getDelegate();
+        EList<JvmTypeReference> _superTypes_1 = _delegate_1.getSuperTypes();
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(typeRef);
+        _superTypes_1.add(_jvmTypeReference);
       }
     }
   }

@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
@@ -36,7 +35,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements MutableClassDeclaration {
@@ -147,26 +145,27 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
   }
   
   public void setExtendedClass(final TypeReference superclass) {
-    JvmTypeReference _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (superclass instanceof TypeReferenceImpl) {
-        _matched=true;
-        LightweightTypeReference _delegate = ((TypeReferenceImpl)superclass).getDelegate();
-        _switchResult = _delegate.toJavaCompliantTypeReference();
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(superclass,null)) {
-        _matched=true;
+    JvmTypeReference _xifexpression = null;
+    boolean _notEquals = (!Objects.equal(superclass, null));
+    if (_notEquals) {
+      JvmTypeReference _xblockexpression = null;
+      {
+        boolean _isInferred = superclass.isInferred();
+        if (_isInferred) {
+          throw new IllegalArgumentException("Cannot use and inferred type as extended class.");
+        }
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
-        CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-        XtendFile _xtendFile = _compilationUnit_1.getXtendFile();
-        _switchResult = _typeReferences.getTypeForName(Object.class, _xtendFile);
+        _xblockexpression = (_compilationUnit.toJvmTypeReference(superclass));
       }
+      _xifexpression = _xblockexpression;
+    } else {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
+      CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+      XtendFile _xtendFile = _compilationUnit_1.getXtendFile();
+      _xifexpression = _typeReferences.getTypeForName(Object.class, _xtendFile);
     }
-    final JvmTypeReference newTypeRef = _switchResult;
+    final JvmTypeReference newTypeRef = _xifexpression;
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
     final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
@@ -185,8 +184,8 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
       }
     };
     final JvmTypeReference oldType = IterableExtensions.<JvmTypeReference>findFirst(_superTypes, _function);
-    boolean _notEquals = (!Objects.equal(oldType, null));
-    if (_notEquals) {
+    boolean _notEquals_1 = (!Objects.equal(oldType, null));
+    if (_notEquals_1) {
       JvmGenericType _delegate_1 = this.getDelegate();
       EList<JvmTypeReference> _superTypes_1 = _delegate_1.getSuperTypes();
       _superTypes_1.remove(oldType);
@@ -220,14 +219,21 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     CollectionExtensions.<JvmTypeReference>removeAll(_superTypes_1, oldInterfaces);
     JvmGenericType _delegate_2 = this.getDelegate();
     EList<JvmTypeReference> _superTypes_2 = _delegate_2.getSuperTypes();
-    Iterable<TypeReferenceImpl> _filter = Iterables.<TypeReferenceImpl>filter(superInterfaces, TypeReferenceImpl.class);
-    final Function1<TypeReferenceImpl,JvmTypeReference> _function_1 = new Function1<TypeReferenceImpl,JvmTypeReference>() {
-      public JvmTypeReference apply(final TypeReferenceImpl it) {
-        LightweightTypeReference _delegate = it.getDelegate();
-        return _delegate.toJavaCompliantTypeReference();
+    final Function1<TypeReference,JvmTypeReference> _function_1 = new Function1<TypeReference,JvmTypeReference>() {
+      public JvmTypeReference apply(final TypeReference it) {
+        JvmTypeReference _xblockexpression = null;
+        {
+          boolean _isInferred = it.isInferred();
+          if (_isInferred) {
+            throw new IllegalArgumentException("Cannot use and inferred type as implemented interface.");
+          }
+          CompilationUnitImpl _compilationUnit = JvmClassDeclarationImpl.this.getCompilationUnit();
+          _xblockexpression = (_compilationUnit.toJvmTypeReference(it));
+        }
+        return _xblockexpression;
       }
     };
-    Iterable<JvmTypeReference> _map = IterableExtensions.<TypeReferenceImpl, JvmTypeReference>map(_filter, _function_1);
+    Iterable<JvmTypeReference> _map = IterableExtensions.map(superInterfaces, _function_1);
     Iterables.<JvmTypeReference>addAll(_superTypes_2, _map);
   }
   

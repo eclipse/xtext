@@ -18,7 +18,6 @@ import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import com.google.common.primitives.Shorts;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -29,10 +28,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.CompilationContextImpl;
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
+import org.eclipse.xtend.core.macro.declaration.InferredTypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeElementDeclarationImpl;
@@ -148,7 +149,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
@@ -167,6 +167,8 @@ import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xtype.XComputedTypeReference;
+import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 @SuppressWarnings("all")
 public class CompilationUnitImpl implements CompilationUnit {
@@ -260,9 +262,6 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   @Inject
   private FileLocations fileLocations;
-  
-  @Inject
-  private Provider<WorkspaceConfig> workspaceConfigProvider;
   
   @Inject
   @Extension
@@ -656,8 +655,30 @@ public class CompilationUnitImpl implements CompilationUnit {
       }
       final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
         public TypeReference apply(final JvmTypeReference it) {
-          LightweightTypeReference _lightweightReference = CompilationUnitImpl.this.typeRefConverter.toLightweightReference(delegate);
-          return CompilationUnitImpl.this.toTypeReference(_lightweightReference);
+          TypeReference _switchResult = null;
+          boolean _matched = false;
+          if (!_matched) {
+            if (delegate instanceof XComputedTypeReferenceImplCustom) {
+              boolean _isEquivalentComputed = ((XComputedTypeReferenceImplCustom)delegate).isEquivalentComputed();
+              boolean _not = (!_isEquivalentComputed);
+              if (_not) {
+                _matched=true;
+                InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
+                final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
+                  public void apply(final InferredTypeReferenceImpl it) {
+                    it.setDelegate(((XComputedTypeReference)delegate));
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+                _switchResult = ObjectExtensions.<InferredTypeReferenceImpl>operator_doubleArrow(_inferredTypeReferenceImpl, _function);
+              }
+            }
+          }
+          if (!_matched) {
+            LightweightTypeReference _lightweightReference = CompilationUnitImpl.this.typeRefConverter.toLightweightReference(delegate);
+            _switchResult = CompilationUnitImpl.this.toTypeReference(_lightweightReference);
+          }
+          return _switchResult;
         }
       };
       _xblockexpression = (this.<JvmTypeReference, TypeReference>getOrCreate(delegate, _function));
@@ -865,13 +886,42 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public JvmTypeReference toJvmTypeReference(final TypeReference typeRef) {
     this.checkCanceled();
-    LightweightTypeReference _lightWeightTypeReference = ((TypeReferenceImpl) typeRef).getLightWeightTypeReference();
-    return _lightWeightTypeReference.toJavaCompliantTypeReference();
+    JvmTypeReference _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (typeRef instanceof TypeReferenceImpl) {
+        _matched=true;
+        LightweightTypeReference _lightWeightTypeReference = ((TypeReferenceImpl)typeRef).getLightWeightTypeReference();
+        _switchResult = _lightWeightTypeReference.toJavaCompliantTypeReference();
+      }
+    }
+    if (!_matched) {
+      if (typeRef instanceof InferredTypeReferenceImpl) {
+        _matched=true;
+        XComputedTypeReference _delegate = ((InferredTypeReferenceImpl)typeRef).getDelegate();
+        _switchResult = EcoreUtil.<XComputedTypeReference>copy(_delegate);
+      }
+    }
+    return _switchResult;
   }
   
   public LightweightTypeReference toLightweightTypeReference(final TypeReference typeRef) {
     this.checkCanceled();
-    return ((TypeReferenceImpl) typeRef).getLightWeightTypeReference();
+    LightweightTypeReference _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (typeRef instanceof TypeReferenceImpl) {
+        _matched=true;
+        _switchResult = ((TypeReferenceImpl)typeRef).getLightWeightTypeReference();
+      }
+    }
+    if (!_matched) {
+      if (typeRef instanceof InferredTypeReferenceImpl) {
+        _matched=true;
+        _switchResult = null;
+      }
+    }
+    return _switchResult;
   }
   
   public Expression toExpression(final XExpression delegate) {

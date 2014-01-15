@@ -563,7 +563,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       while (_while) {
         {
           dimensions = (dimensions + "[]");
-          JvmComponentType _componentType = ((JvmArrayType) t).getComponentType();
+          JvmComponentType _componentType = ((JvmArrayType)t).getComponentType();
           t = _componentType;
         }
         _while = (t instanceof JvmArrayType);

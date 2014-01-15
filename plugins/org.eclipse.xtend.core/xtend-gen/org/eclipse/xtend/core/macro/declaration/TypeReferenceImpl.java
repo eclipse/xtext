@@ -133,9 +133,17 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
   }
   
   public boolean isAssignableFrom(final TypeReference typeReference) {
-    LightweightTypeReference _delegate = this.getDelegate();
-    LightweightTypeReference _delegate_1 = ((TypeReferenceImpl) typeReference).getDelegate();
-    return _delegate.isAssignableFrom(_delegate_1);
+    boolean _xblockexpression = false;
+    {
+      boolean _isInferred = typeReference.isInferred();
+      if (_isInferred) {
+        throw new UnsupportedOperationException("Cannot check assignability with an inferred type reference.");
+      }
+      LightweightTypeReference _delegate = this.getDelegate();
+      LightweightTypeReference _delegate_1 = ((TypeReferenceImpl) typeReference).getDelegate();
+      _xblockexpression = (_delegate.isAssignableFrom(_delegate_1));
+    }
+    return _xblockexpression;
   }
   
   public boolean isPrimitive() {
@@ -186,5 +194,9 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
     JvmType _type = _delegate.getType();
     String _qualifiedName = _type.getQualifiedName();
     return _qualifiedName.hashCode();
+  }
+  
+  public boolean isInferred() {
+    return false;
   }
 }

@@ -261,9 +261,9 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 		checkIterable(superinterfaces, "superinterfaces")
 		delegate.superTypes.clear
 		for (typeRef : superinterfaces) {
-			switch typeRef { TypeReferenceImpl : {
-				delegate.superTypes += typeRef.delegate.toJavaCompliantTypeReference
-			}}
+			if (typeRef.inferred)
+				throw new IllegalArgumentException("Cannot use inferred type as extended interface.")
+			delegate.superTypes += compilationUnit.toJvmTypeReference(typeRef)
 		}
 	}
 	
@@ -420,9 +420,12 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 	
 	override setExtendedClass(TypeReference superclass) {
 		val newTypeRef = 
-			switch superclass {
-				TypeReferenceImpl : superclass.delegate.toJavaCompliantTypeReference
-				case null : compilationUnit.typeReferences.getTypeForName(Object, compilationUnit.xtendFile)
+			if (superclass != null) {
+				if (superclass.inferred)
+					throw new IllegalArgumentException("Cannot use and inferred type as extended class.")
+				compilationUnit.toJvmTypeReference(superclass)
+			} else {
+				compilationUnit.typeReferences.getTypeForName(Object, compilationUnit.xtendFile)
 			}
 		val oldType = delegate.superTypes.findFirst[it.type instanceof JvmGenericType && !(type as JvmGenericType).isInterface]
 		if (oldType != null)
@@ -434,7 +437,11 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 		checkIterable(superInterfaces, "superIntefaces")
 		val oldInterfaces = delegate.superTypes.filter[it.type instanceof JvmGenericType && (type as JvmGenericType).isInterface]
 		delegate.superTypes.removeAll(oldInterfaces)
-		delegate.superTypes.addAll(superInterfaces.filter(TypeReferenceImpl).map[delegate.toJavaCompliantTypeReference])
+		delegate.superTypes.addAll(superInterfaces.map [
+			if (inferred)
+				throw new IllegalArgumentException("Cannot use and inferred type as implemented interface.")
+			compilationUnit.toJvmTypeReference(it)
+		])
 	}
 
 	override findDeclaredField(String name) {
@@ -518,6 +525,8 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		param.name = name
 		delegate.typeParameters.add(param)
 		for (upper : upperBounds) {
+			if (upper.inferred)
+				throw new IllegalArgumentException("Cannot use inferred type as parameter type.")
 			val typeRef = compilationUnit.toJvmTypeReference(upper)
 			val jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound
 			jvmUpperBound.setTypeReference(typeRef)
@@ -539,6 +548,8 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	override addParameter(String name, TypeReference type) {
 		checkJavaIdentifier(name, "name");
 		Preconditions.checkArgument(type != null, "type cannot be null");
+		if (type.inferred)
+			throw new IllegalArgumentException("Cannot use inferred type as parameter type.")
 		val param = TypesFactory.eINSTANCE.createJvmFormalParameter
 		param.name = name
 		param.parameterType = compilationUnit.toJvmTypeReference(type)
@@ -613,7 +624,7 @@ class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation
 
 	override setReturnType(TypeReference type) {
 		Preconditions.checkArgument(type != null, "returnType cannot be null");
-		delegate.setReturnType((type as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference)
+		delegate.setReturnType(compilationUnit.toJvmTypeReference(type))
 	}
 	
 	override setAbstract(boolean isAbstract) {
@@ -724,7 +735,7 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 	
 	override setType(TypeReference type) {
 		Preconditions.checkArgument(type != null, "type cannot be null");
-		delegate.setType((type as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference)
+		delegate.setType(compilationUnit.toJvmTypeReference(type))
 	}
 	
 }

@@ -2568,6 +2568,196 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
   
   @Test
+  public void testMovingComputedTypes() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationParticipant");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(Field2MethodProcessor)");
+    _builder.newLine();
+    _builder.append("annotation Field2Method { }");
+    _builder.newLine();
+    _builder.append("class Field2MethodProcessor implements TransformationParticipant<MutableFieldDeclaration> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(List<? extends MutableFieldDeclaration> annotatedFields, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("annotatedFields.forEach [ field |");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("field.declaringType.addMethod(field.simpleName) [");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("returnType = field.type");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("body = field.initializer");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("field.remove");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val foo = \'foo\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@myannotation.Field2Method");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val x = foo");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@myannotation.Field2Method");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val y = x");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
+        Iterable<? extends MutableMethodDeclaration> _declaredMethods = type.getDeclaredMethods();
+        final MutableMethodDeclaration method = ((MutableMethodDeclaration[])Conversions.unwrapArray(_declaredMethods, MutableMethodDeclaration.class))[1];
+        TypeReference _returnType = method.getReturnType();
+        String _name = _returnType.getName();
+        Assert.assertEquals("java.lang.String", _name);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
+  public void testMovingComputedTypes_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationParticipant");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(Method2FieldProcessor)");
+    _builder.newLine();
+    _builder.append("annotation Method2Field { }");
+    _builder.newLine();
+    _builder.append("class Method2FieldProcessor implements TransformationParticipant<MutableMethodDeclaration> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(List<? extends MutableMethodDeclaration> annotatedMethods, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("annotatedMethods.forEach [ method |");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("method.declaringType.addField(method.simpleName) [");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("type = method.returnType");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("initializer = method.body");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("method.remove");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val foo = \'foo\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@myannotation.Method2Field");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def x() { foo }");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@myannotation.Method2Field");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def y() { x }");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
+        Iterable<? extends MutableFieldDeclaration> _declaredFields = type.getDeclaredFields();
+        final MutableFieldDeclaration field = ((MutableFieldDeclaration[])Conversions.unwrapArray(_declaredFields, MutableFieldDeclaration.class))[1];
+        TypeReference _type = field.getType();
+        String _name = _type.getName();
+        Assert.assertEquals("java.lang.String", _name);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
   public void testValidation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myannotation");

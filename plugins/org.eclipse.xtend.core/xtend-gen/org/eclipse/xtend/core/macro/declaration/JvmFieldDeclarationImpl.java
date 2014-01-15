@@ -12,7 +12,6 @@ import com.google.common.base.Preconditions;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> implements MutableFieldDeclaration {
@@ -118,8 +116,8 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
     boolean _notEquals = (!Objects.equal(type, null));
     Preconditions.checkArgument(_notEquals, "type cannot be null");
     JvmField _delegate = this.getDelegate();
-    LightweightTypeReference _lightWeightTypeReference = ((TypeReferenceImpl) type).getLightWeightTypeReference();
-    JvmTypeReference _javaCompliantTypeReference = _lightWeightTypeReference.toJavaCompliantTypeReference();
-    _delegate.setType(_javaCompliantTypeReference);
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(type);
+    _delegate.setType(_jvmTypeReference);
   }
 }
