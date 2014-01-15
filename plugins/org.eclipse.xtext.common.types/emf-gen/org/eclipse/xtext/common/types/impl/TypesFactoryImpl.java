@@ -367,7 +367,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 */
 	public JvmAnnotationReference createJvmAnnotationReference()
 	{
-		JvmAnnotationReferenceImpl jvmAnnotationReference = new JvmAnnotationReferenceImpl();
+		JvmAnnotationReferenceImplCustom jvmAnnotationReference = new JvmAnnotationReferenceImplCustom();
 		return jvmAnnotationReference;
 	}
 

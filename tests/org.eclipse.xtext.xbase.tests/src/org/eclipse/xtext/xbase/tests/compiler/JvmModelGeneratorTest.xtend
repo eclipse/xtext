@@ -232,7 +232,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
 				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
 				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
-				annotation.values += annotationAnnotationValue
+				annotation.explicitValues += annotationAnnotationValue
 				annotations += annotation
 			]
 		]
@@ -266,7 +266,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
 				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
 				annotationAnnotationValue.values += expression.toAnnotation(typeof(TestAnnotation))
-				annotation.values += annotationAnnotationValue
+				annotation.explicitValues += annotationAnnotationValue
 				annotations += annotation
 			]
 		]
