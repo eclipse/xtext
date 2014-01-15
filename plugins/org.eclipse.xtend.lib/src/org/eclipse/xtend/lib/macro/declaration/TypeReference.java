@@ -113,5 +113,21 @@ public interface TypeReference extends Element {
 	 */
 	boolean isAssignableFrom(TypeReference typeReference);
 	
+	/**
+	 * Whether the given type reference is an inferred reference. 
+	 * That is the type is to be computed from some Expression, e.g. a method body or a field initializer.
+	 * 
+	 * Inferred type references can only be used as handles, and will through an {@link UnsupportedOperationException} on every method other than
+	 * 
+	 * <ul>
+	 *  <li>{@link #toString()}</li>
+	 *  <li>{@link #equals(Object)}</li>
+	 *  <li>{@link #hashCode()}</li>
+	 * </ul>
+	 * 
+	 * @return whether this type reference is an inferred type reference.
+	 */
+	boolean isInferred();
+	
 	// TODO super types, features
 }
