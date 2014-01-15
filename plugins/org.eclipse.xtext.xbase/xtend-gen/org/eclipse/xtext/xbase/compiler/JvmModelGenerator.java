@@ -1484,7 +1484,7 @@ public class JvmModelGenerator implements IGenerator {
     appendable.append("@");
     JvmAnnotationType _annotation = it.getAnnotation();
     appendable.append(_annotation);
-    EList<JvmAnnotationValue> _values = it.getValues();
+    EList<JvmAnnotationValue> _explicitValues = it.getExplicitValues();
     final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
       public void apply(final LoopParams it) {
         it.setPrefix("(");
@@ -1497,7 +1497,7 @@ public class JvmModelGenerator implements IGenerator {
         JvmModelGenerator.this.toJava(it, appendable, config);
       }
     };
-    this._loopExtensions.<JvmAnnotationValue>forEach(appendable, _values, _function, _function_1);
+    this._loopExtensions.<JvmAnnotationValue>forEach(appendable, _explicitValues, _function, _function_1);
   }
   
   public void toJava(final JvmAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
@@ -1510,8 +1510,8 @@ public class JvmModelGenerator implements IGenerator {
       appendable.append(" = ");
     } else {
       EObject _eContainer = it.eContainer();
-      EList<JvmAnnotationValue> _values = ((JvmAnnotationReference) _eContainer).getValues();
-      int _size = _values.size();
+      EList<JvmAnnotationValue> _explicitValues = ((JvmAnnotationReference) _eContainer).getExplicitValues();
+      int _size = _explicitValues.size();
       boolean _greaterThan = (_size > 1);
       if (_greaterThan) {
         appendable.append("value = ");

@@ -45,14 +45,10 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			val annotationValue = delegate.values.findFirst[
 				valueName == property || (valueName == null && property == 'value')
 			]
-			val op = delegate.annotation.declaredOperations.findFirst[simpleName == property]
+			val op = annotationValue.operation
 			val isArrayType = op!=null && compilationUnit.typeReferences.isArray(op.returnType)
 			if (annotationValue != null)
 				return compilationUnit.translateAnnotationValue(annotationValue, isArrayType)
-			
-			if (op != null && op.defaultValue != null) {
-				return compilationUnit.translateAnnotationValue(op.defaultValue, isArrayType)
-			}
 		} catch (ConstantExpressionEvaluationException e) {
 			compilationUnit.problemSupport.addError(this, e.getMessage)
 		}
@@ -83,7 +79,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, Boolean value) {
@@ -98,7 +94,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, Integer value) {
@@ -113,7 +109,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, Short value) {
@@ -128,7 +124,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, Long value) {
@@ -143,7 +139,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, Double value) {
@@ -158,7 +154,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, Float value) {
@@ -173,7 +169,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, Character value) {
@@ -188,7 +184,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, Byte value) {
@@ -203,7 +199,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, TypeReference value) {
@@ -223,7 +219,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			}
 		]
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, EnumerationValueDeclaration value) {
@@ -246,7 +242,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			}
 		]
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, XtendAnnotationReferenceImpl value) {
@@ -255,7 +251,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			newValue.setOperation(findOperation(name))
 		newValue.values.add(value.delegate)
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, ExpressionImpl value) {
@@ -264,7 +260,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			newValue.setOperation(findOperation(name))
 		newValue.values.add(value.delegate)
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	def dispatch void internalSet(String name, AnnotationReference value) {
@@ -287,13 +283,13 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 			}
 		]
 		remove(name);
-		delegate.getValues.add(newValue)
+		delegate.explicitValues.add(newValue)
 	}
 	
 	override remove(String name) {
 		val found = delegate.values.findFirst[(if (operation==null) 'value' else operation.simpleName)==name]
 		if (found != null) {
-			delegate.values.remove(found)
+			delegate.explicitValues.remove(found)
 			return true;
 		}
 		return false;

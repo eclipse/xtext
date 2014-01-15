@@ -721,7 +721,7 @@ class JvmModelGenerator implements IGenerator {
 	def void generateAnnotation(JvmAnnotationReference it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.append("@")
 		appendable.append(annotation)
-		appendable.forEach(values, [
+		appendable.forEach(explicitValues, [
 				prefix = '(' separator = ', ' suffix = ')'
 			], [
 				toJava(appendable, config)
@@ -732,7 +732,7 @@ class JvmModelGenerator implements IGenerator {
 		if (operation != null) {
 			appendable.append(operation.simpleName)
 			appendable.append(" = ")
-		} else if ((eContainer as JvmAnnotationReference).values.size > 1) { // more than one value
+		} else if ((eContainer as JvmAnnotationReference).explicitValues.size > 1) { // more than one value
 			appendable.append("value = ")
 		}
 		toJavaLiteral(appendable, config)
