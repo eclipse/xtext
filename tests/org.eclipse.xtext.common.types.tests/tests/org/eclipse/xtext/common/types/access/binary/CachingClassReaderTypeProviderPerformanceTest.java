@@ -1,0 +1,61 @@
+/*******************************************************************************
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.common.types.access.binary;
+
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderPerformanceTest;
+import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageInjectorProvider;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+
+import com.google.inject.Inject;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@RunWith(XtextRunner.class)
+@InjectWith(RefactoringTestLanguageInjectorProvider.class)
+public class CachingClassReaderTypeProviderPerformanceTest extends AbstractTypeProviderPerformanceTest {
+
+	@Inject
+	private ResourceSet resourceSet;
+
+	private ClassReaderTypeProvider typeProvider;
+	
+	private CachingClassReaderTypeProviderFactory typeProviderFactory;
+
+	@Before
+	public void setUp() throws Exception {
+		typeProviderFactory = new CachingClassReaderTypeProviderFactory(getClass().getClassLoader()); 
+		typeProvider = typeProviderFactory.createTypeProvider(resourceSet);
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		typeProvider = null;
+	}
+	
+	@Override
+	public ClassReaderTypeProvider getTypeProvider() {
+		return typeProvider;
+	}
+	
+	@Override
+	protected JvmDeclaredType loadAndResolve(String name, boolean accessMembers, boolean accessAnnotations,
+			boolean accessTypeParams, boolean accessParameter, boolean accessParameterNames) {
+		resourceSet.getResources().clear();
+		return super.loadAndResolve(name, accessMembers, accessAnnotations, accessTypeParams, accessParameter,
+				accessParameterNames);
+	}
+	
+
+}

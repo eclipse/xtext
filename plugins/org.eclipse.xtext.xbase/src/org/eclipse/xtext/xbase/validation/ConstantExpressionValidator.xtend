@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.util.XExpressionHelper
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
+import org.eclipse.xtext.common.types.access.TypeResource
 
 /**
  * Checks whether a given XExpression is a a constant expression.
@@ -59,7 +60,15 @@ class ConstantExpressionValidator {
 				if (feature.setConstant) {
 					return feature.constant
 				}
-				return feature.static && feature.final && feature.associatedExpression.constantExpression
+				val potentiallyConstant = feature.static && feature.final
+				if (potentiallyConstant) {
+					if (feature.eResource instanceof TypeResource) {
+						return true
+					} else {
+						return feature.associatedExpression.constantExpression
+					}
+				}
+				return false
 			}
 			JvmOperation : {
 				val annotationReference = expression.findInlineAnnotation
@@ -69,7 +78,7 @@ class ConstantExpressionValidator {
 				if (annotationReference.values.filter(JvmBooleanAnnotationValue).exists [
 					valueName=='constantExpression' && values.head.booleanValue
 				]) {
-					val receiverConstant =if (expression.actualReceiver == null) {
+					val receiverConstant = if (expression.actualReceiver == null) {
 						true
 					} else {
 						expression.actualReceiver.isConstant

@@ -1100,7 +1100,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 					override doTransform(List<? extends MutableAnnotationTarget> annotationTargets, extension TransformationContext context) {
 						annotationTargets.forEach [
 							addAnnotation(typeof(MyAnnotation).findTypeGlobally) => [
-								set(null, #['foo','bar','baz'] as String[])
+								set('value', #['foo','bar','baz'] as String[])
 								set('singleValue', 'foo')
 								set('booleans', #[true, false, true] as boolean[])
 								set('singleBoolean', true)
@@ -1124,9 +1124,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				package myusercode
 				
 				@myannotation.AddAnnotationValue
-				class MyClass {
-					
-				}
+				class MyClass {}
 			'''
 		) [
 			val clazz = typeLookup.findClass('myusercode.MyClass')
