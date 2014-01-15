@@ -21,11 +21,13 @@ import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.internal.StopwatchRule
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider
+import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.After
@@ -35,6 +37,7 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.junit.Assert.*
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
@@ -149,8 +152,9 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 		
 		val resourceSet = resourceSetProvider.get(userProject.project)
 		val resource = resourceSet.getResource(URI.createPlatformResourceURI(sourceFile.fullPath.toString, true), true)
+		EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
 		val unit = compilationUnitProvider.get
-		unit.xtendFile = resource.contents.filter(typeof(XtendFile)).head
+		unit.xtendFile = resource.contents.filter(XtendFile).head
 		expectations.apply(unit)
 	}
 

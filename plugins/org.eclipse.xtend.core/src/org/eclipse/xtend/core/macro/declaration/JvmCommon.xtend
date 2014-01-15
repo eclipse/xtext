@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.xtext.xtype.XComputedTypeReference
 
 abstract class AbstractElementImpl<T> {
 	@Property T delegate
@@ -94,6 +95,9 @@ class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> im
 	}
 	
 	override isAssignableFrom(TypeReference typeReference) {
+		if (typeReference.isInferred) {
+			throw new UnsupportedOperationException("Cannot check assignability with an inferred type reference.")
+		}
 		delegate.isAssignableFrom((typeReference as TypeReferenceImpl).delegate)
 	}
 	
@@ -130,6 +134,90 @@ class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> im
 	override hashCode() {
 		// TODO type may be null, e.g. for wildcards or unknown types
 		delegate.type.qualifiedName.hashCode
+	}
+	
+	override isInferred() {
+		return false
+	}
+	
+}
+
+class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReference> implements TypeReference {
+	
+	override getActualTypeArguments() {
+		throw new UnsupportedOperationException(message('getActualTypeArguments()'))
+	}
+	
+	private def String message(String methodName) {
+		"Cannot call method '"+methodName+"' on a inferred type reference. Check isInferred() before calling any methods."
+	}
+	
+	override getArrayComponentType() {
+		throw new UnsupportedOperationException(message('getArrayComponentType()'))
+	}
+	
+	override getLowerBound() {
+		throw new UnsupportedOperationException(message('getLowerBound()'))
+	}
+	
+	override getName() {
+		throw new UnsupportedOperationException(message('getName()'))
+	}
+	
+	override getPrimitiveIfWrapper() {
+		throw new UnsupportedOperationException(message('getPrimitiveIfWrapper()'))
+	}
+	
+	override getSimpleName() {
+		throw new UnsupportedOperationException(message('getSimpleName()'))
+	}
+	
+	override getType() {
+		throw new UnsupportedOperationException(message('getType()'))
+	}
+	
+	override getUpperBound() {
+		throw new UnsupportedOperationException(message('getUpperBound()'))
+	}
+	
+	override getWrapperIfPrimitive() {
+		throw new UnsupportedOperationException(message('getWrapperIfPrimitive()'))
+	}
+	
+	override isAnyType() {
+		throw new UnsupportedOperationException(message('isAnyType()'))
+	}
+	
+	override isArray() {
+		throw new UnsupportedOperationException(message('isArray()'))
+	}
+	
+	override isAssignableFrom(TypeReference typeReference) {
+		throw new UnsupportedOperationException(message('isAssignableFrom()'))
+	}
+	
+	override isPrimitive() {
+		throw new UnsupportedOperationException(message('isPrimitive()'))
+	}
+	
+	override isVoid() {
+		throw new UnsupportedOperationException(message('isVoid()'))
+	}
+	
+	override isWildCard() {
+		throw new UnsupportedOperationException(message('isWildCard()'))
+	}
+	
+	override isWrapper() {
+		throw new UnsupportedOperationException(message('isWrapper()'))
+	}
+	
+	override isInferred() {
+		true
+	}
+	
+	override toString() {
+		delegate.toString
 	}
 	
 }

@@ -218,7 +218,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		values.forEach[
 			switch it {
 				TypeReferenceImpl : {
-					newValue.values.add(delegate.toTypeReference)
+					newValue.values += compilationUnit.toJvmTypeReference(it)
 				}
 			}
 		]

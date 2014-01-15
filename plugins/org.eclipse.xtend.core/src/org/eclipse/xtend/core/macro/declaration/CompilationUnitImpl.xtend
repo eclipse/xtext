@@ -112,6 +112,8 @@ import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -168,7 +170,6 @@ class CompilationUnitImpl implements CompilationUnit {
 
 	@Inject AbstractFileSystemSupport fileSystemSupport
 	@Inject FileLocations fileLocations
-	@Inject Provider<WorkspaceConfig> workspaceConfigProvider
 	
 	@Inject extension IWhitespaceInformationProvider 
 	
@@ -369,8 +370,17 @@ class CompilationUnitImpl implements CompilationUnit {
 		if (delegate == null)
 			return null
 		getOrCreate(delegate) [
-			toTypeReference(typeRefConverter.toLightweightReference(delegate))
-		]}
+			switch delegate {
+				XComputedTypeReferenceImplCustom case !delegate.isEquivalentComputed: {
+					new InferredTypeReferenceImpl => [
+						it.delegate = delegate
+						compilationUnit = this
+					]
+				}
+				default : toTypeReference(typeRefConverter.toLightweightReference(delegate))
+			}
+		]
+	}
 
 	def TypeReference toTypeReference(LightweightTypeReference delegate) {
 		checkCanceled
@@ -462,12 +472,18 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def JvmTypeReference toJvmTypeReference(TypeReference typeRef) {
 		checkCanceled
-		return (typeRef as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference
+		return switch typeRef {
+			TypeReferenceImpl : typeRef.lightWeightTypeReference.toJavaCompliantTypeReference
+			InferredTypeReferenceImpl : EcoreUtil.copy(typeRef.delegate)
+		}
 	}
 	
 	def LightweightTypeReference toLightweightTypeReference(TypeReference typeRef) {
 		checkCanceled
-		return (typeRef as TypeReferenceImpl).lightWeightTypeReference
+		return switch typeRef {
+			TypeReferenceImpl : typeRef.lightWeightTypeReference
+			InferredTypeReferenceImpl : null
+		}
 	}
 	
 	def Expression toExpression(XExpression delegate) {

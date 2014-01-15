@@ -1290,6 +1290,96 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals(1, method.exceptions.size)
 		]
 	}
+	
+	@Test def void testMovingComputedTypes() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+				
+				@Active(Field2MethodProcessor)
+				annotation Field2Method { }
+				class Field2MethodProcessor implements TransformationParticipant<MutableFieldDeclaration> {
+					
+					override doTransform(List<? extends MutableFieldDeclaration> annotatedFields, extension TransformationContext context) {
+						annotatedFields.forEach [ field |
+							field.declaringType.addMethod(field.simpleName) [
+								returnType = field.type
+								body = field.initializer
+							]
+							field.remove
+						]
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				class MyClass {
+					val foo = 'foo'
+					@myannotation.Field2Method
+					val x = foo
+					@myannotation.Field2Method
+					val y = x
+				}
+			'''
+		) [
+			val type = typeLookup.findClass('myusercode.MyClass')
+			val method = type.declaredMethods.get(1)
+			assertEquals('java.lang.String', method.returnType.name)
+		]
+	}
+	
+	@Test def void testMovingComputedTypes_02() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
+				
+				@Active(Method2FieldProcessor)
+				annotation Method2Field { }
+				class Method2FieldProcessor implements TransformationParticipant<MutableMethodDeclaration> {
+					
+					override doTransform(List<? extends MutableMethodDeclaration> annotatedMethods, extension TransformationContext context) {
+						annotatedMethods.forEach [ method |
+							method.declaringType.addField(method.simpleName) [
+								type = method.returnType
+								initializer = method.body
+							]
+							method.remove
+						]
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				class MyClass {
+					val foo = 'foo'
+					@myannotation.Method2Field
+					def x() { foo }
+					@myannotation.Method2Field
+					def y() { x }
+				}
+			'''
+		) [
+			val type = typeLookup.findClass('myusercode.MyClass')
+			val field = type.declaredFields.get(1)
+			assertEquals('java.lang.String', field.type.name)
+		]
+	}
 
 	@Test def void testValidation() {
 		assertProcessing(
