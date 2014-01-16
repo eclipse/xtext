@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.conversion;
 
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
+import org.eclipse.xtext.conversion.impl.KeywordAlternativeConverter;
 import org.eclipse.xtext.xbase.conversion.XbaseValueConverterService;
 
 import com.google.inject.Inject;
@@ -68,5 +69,13 @@ public class XtendValueConverterService extends XbaseValueConverterService {
 	@ValueConverter(rule = "COMMENT_RICH_TEXT_END")
 	public IValueConverter<String> getCommentRichTextEndValueConverter() {
 		return commentRichTextEndValueConverter;
+	}
+	
+	@Inject
+	private KeywordAlternativeConverter innerVarIDConverter;
+	
+	@ValueConverter(rule = "InnerVarID")
+	public IValueConverter<String> getInnerVarIDValueConverter() {
+		return innerVarIDConverter;
 	}
 }

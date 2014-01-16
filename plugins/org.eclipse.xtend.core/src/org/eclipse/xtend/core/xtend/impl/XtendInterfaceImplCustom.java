@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.xtend.impl;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -20,6 +22,15 @@ public class XtendInterfaceImplCustom extends XtendInterfaceImpl {
 
 	@Override
 	public boolean isFinal() {
+		return false;
+	}
+	
+	@Override
+	public boolean isStrictFloatingPoint() {
+		for(String modifier: getModifiers()) { 
+			if(equal(modifier, "strictfp")) 
+				return true;
+		}
 		return false;
 	}
 	

@@ -134,7 +134,12 @@ ruleCommonModifier :
 	'abstract' |
 	'static' |
 	'dispatch' |
-	'final'
+	'final' |
+	'strictfp' |
+	'native' |
+	'volatile' |
+	'synchronized' |
+	'transient'
 ;
 
 // Rule FieldModifier
@@ -165,6 +170,12 @@ ruleValidID :
 
 // Rule FeatureCallID
 ruleFeatureCallID :
+	ruleInnerVarID |
+	'extension'
+;
+
+// Rule InnerVarID
+ruleInnerVarID :
 	RULE_ID |
 	'abstract' |
 	'annotation' |
@@ -174,7 +185,6 @@ ruleFeatureCallID :
 	'dispatch' |
 	'enum' |
 	'extends' |
-	'extension' |
 	'final' |
 	'implements' |
 	'import' |
@@ -185,7 +195,12 @@ ruleFeatureCallID :
 	'private' |
 	'protected' |
 	'static' |
-	'throws'
+	'throws' |
+	'strictfp' |
+	'native' |
+	'volatile' |
+	'synchronized' |
+	'transient'
 ;
 
 // Rule Parameter
@@ -217,11 +232,11 @@ ruleXVariableDeclaration :
 		)
 	) ) (
 		( (
-		ruleJvmTypeReference ruleValidID
+		ruleJvmTypeReference ruleInnerVarID
 		) => (
-			ruleJvmTypeReference ruleValidID
+			ruleJvmTypeReference ruleInnerVarID
 		) ) |
-		ruleValidID
+		ruleInnerVarID
 	) (
 		'=' ruleXExpression
 	)?
@@ -229,12 +244,12 @@ ruleXVariableDeclaration :
 
 // Rule JvmFormalParameter
 ruleJvmFormalParameter :
-	'extension'? ruleJvmTypeReference? ruleValidID
+	'extension'? ruleJvmTypeReference? ruleInnerVarID
 ;
 
 // Rule FullJvmFormalParameter
 ruleFullJvmFormalParameter :
-	'extension'? ruleJvmTypeReference ruleValidID
+	'extension'? ruleJvmTypeReference ruleInnerVarID
 ;
 
 // Rule XStringLiteral

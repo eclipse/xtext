@@ -151,6 +151,7 @@ RICH_TEXT_FINISH="'"("'"("'")?)?
 <YYINITIAL> "import" { return KW_Import; }
 <YYINITIAL> "instanceof" { return KW_Instanceof; }
 <YYINITIAL> "interface" { return KW_Interface; }
+<YYINITIAL> "native" { return KW_Native; }
 <YYINITIAL> "new" { return KW_New; }
 <YYINITIAL> "null" { return KW_Null; }
 <YYINITIAL> "override" { return KW_Override; }
@@ -160,15 +161,19 @@ RICH_TEXT_FINISH="'"("'"("'")?)?
 <YYINITIAL> "public" { return KW_Public; }
 <YYINITIAL> "return" { return KW_Return; }
 <YYINITIAL> "static" { return KW_Static; }
+<YYINITIAL> "strictfp" { return KW_Strictfp; }
 <YYINITIAL> "super" { return KW_Super; }
 <YYINITIAL> "switch" { return KW_Switch; }
+<YYINITIAL> "synchronized" { return KW_Synchronized; }
 <YYINITIAL> "throw" { return KW_Throw; }
 <YYINITIAL> "throws" { return KW_Throws; }
+<YYINITIAL> "transient" { return KW_Transient; }
 <YYINITIAL> "true" { return KW_True; }
 <YYINITIAL> "try" { return KW_Try; }
 <YYINITIAL> "typeof" { return KW_Typeof; }
 <YYINITIAL> "val" { return KW_Val; }
 <YYINITIAL> "var" { return KW_Var; }
+<YYINITIAL> "volatile" { return KW_Volatile; }
 <YYINITIAL> "while" { return KW_While; }
 <YYINITIAL> "{" { return KW_LeftCurlyBracket; }
 <YYINITIAL> "|" { return KW_VerticalLine; }
