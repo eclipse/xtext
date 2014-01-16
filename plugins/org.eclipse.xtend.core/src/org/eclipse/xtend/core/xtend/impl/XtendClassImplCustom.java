@@ -24,5 +24,14 @@ public class XtendClassImplCustom extends XtendClassImpl {
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean isStrictFloatingPoint() {
+		for(String modifier: getModifiers()) { 
+			if(equal(modifier, "strictfp")) 
+				return true;
+		}
+		return false;
+	}
 
 }

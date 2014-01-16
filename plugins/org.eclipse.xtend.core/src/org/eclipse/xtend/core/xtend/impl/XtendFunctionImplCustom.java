@@ -34,7 +34,34 @@ public class XtendFunctionImplCustom extends XtendFunctionImpl {
 	
 	@Override
 	public boolean isAbstract() {
-		return getExpression() == null;
+		return getExpression() == null && !isNative();
+	}
+	
+	@Override
+	public boolean isStrictFloatingPoint() {
+		for(String modifier: getModifiers()) { 
+			if(equal(modifier, "strictfp")) 
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean isNative() {
+		for(String modifier: getModifiers()) { 
+			if(equal(modifier, "native")) 
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean isSynchonized() {
+		for(String modifier: getModifiers()) { 
+			if(equal(modifier, "synchronized")) 
+				return true;
+		}
+		return false;
 	}
 	
 }

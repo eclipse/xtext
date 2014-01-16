@@ -16,7 +16,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -41,12 +40,10 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -87,6 +84,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		ImmutableSet.Builder<Keyword> builder = ImmutableSet.builder();
 		collectKeywordsFromRule(grammarAccess, "ValidID", builder);
 		collectKeywordsFromRule(grammarAccess, "FeatureCallID", builder);
+		collectKeywordsFromRule(grammarAccess, "InnerVarID", builder);
 		contextualKeywords = builder.build();
 	}
 

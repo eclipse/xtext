@@ -1362,15 +1362,15 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     }
     
     @Test public void testKeywordConflict() throws Exception {
-    	XtendClass clazz = clazz("class assert { def dispatch volatile(Object x) {} }");
+    	XtendClass clazz = clazz("class assert { def dispatch assert(Object x) {} }");
     	helper.assertError(clazz, XTEND_CLASS, INVALID_IDENTIFIER, "assert");
-    	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, INVALID_IDENTIFIER, "volatile");
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, INVALID_IDENTIFIER, "assert");
     }
     
     @Test public void testKeywordConflict_02() throws Exception {
-    	XtendClass clazz = clazz("class Foo<assert> { def <volatile> bar(Object x) {} }");
+    	XtendClass clazz = clazz("class Foo<assert> { def <assert> bar(Object x) {} }");
     	helper.assertError(clazz, TypesPackage.Literals.JVM_TYPE_PARAMETER, INVALID_IDENTIFIER, "assert");
-    	helper.assertError(clazz.getMembers().get(0), TypesPackage.Literals.JVM_TYPE_PARAMETER, INVALID_IDENTIFIER, "volatile");
+    	helper.assertError(clazz.getMembers().get(0), TypesPackage.Literals.JVM_TYPE_PARAMETER, INVALID_IDENTIFIER, "assert");
     }
     
     @Test public void testKeywordConflict_03() throws Exception {
@@ -1381,7 +1381,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     }
     
     @Test public void testKeywordConflict_04() throws Exception {
-    	XtendFile file = file("interface assert {} enum volatile {} annotation ^null {}");
+    	XtendFile file = file("interface assert {} enum ^volatile {} annotation ^null {}");
     	helper.assertError(file, XTEND_INTERFACE, INVALID_IDENTIFIER, "assert");
     	helper.assertError(file, XTEND_ENUM, INVALID_IDENTIFIER, "volatile");
     	helper.assertError(file, XTEND_ANNOTATION_TYPE, INVALID_IDENTIFIER, "null");
