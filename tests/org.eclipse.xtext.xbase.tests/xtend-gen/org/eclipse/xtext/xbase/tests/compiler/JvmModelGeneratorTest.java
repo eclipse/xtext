@@ -667,6 +667,107 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testNestedAnnotationType() {
+    try {
+      final XExpression expression = this.expression("42");
+      final JvmGenericType outerClass = this.builder.toClass(expression, "my.outer.Clazz");
+      EList<JvmMember> _members = outerClass.getMembers();
+      final Procedure1<JvmAnnotationType> _function = new Procedure1<JvmAnnotationType>() {
+        public void apply(final JvmAnnotationType it) {
+          EList<JvmMember> _members = it.getMembers();
+          JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(int.class, expression);
+          final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+            public void apply(final JvmOperation it) {
+              JvmModelGeneratorTest.this.builder.setBody(it, expression);
+            }
+          };
+          JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "theTruth", _typeForName, _function);
+          JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+        }
+      };
+      JvmAnnotationType _annotationType = this.builder.toAnnotationType(expression, "MyAnnotation", _function);
+      this.builder.<JvmAnnotationType>operator_add(_members, _annotationType);
+      Resource _eResource = expression.eResource();
+      Class<? extends Object> _compile = this.compile(_eResource, outerClass);
+      Class<? extends Object>[] _declaredClasses = _compile.getDeclaredClasses();
+      final Class<? extends Object> compiled = IterableExtensions.<Class<? extends Object>>head(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(_declaredClasses)));
+      String _canonicalName = compiled.getCanonicalName();
+      Assert.assertEquals("my.outer.Clazz.MyAnnotation", _canonicalName);
+      Method[] _declaredMethods = compiled.getDeclaredMethods();
+      Method _head = IterableExtensions.<Method>head(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)));
+      Object _defaultValue = _head.getDefaultValue();
+      Assert.assertEquals(Integer.valueOf(42), _defaultValue);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNestedEnumerationType() {
+    try {
+      final XExpression expression = this.expression("null");
+      final JvmGenericType outerClass = this.builder.toClass(expression, "my.outer.Clazz");
+      EList<JvmMember> _members = outerClass.getMembers();
+      final Procedure1<JvmEnumerationType> _function = new Procedure1<JvmEnumerationType>() {
+        public void apply(final JvmEnumerationType it) {
+          EList<JvmMember> _members = it.getMembers();
+          final Procedure1<JvmEnumerationLiteral> _function = new Procedure1<JvmEnumerationLiteral>() {
+            public void apply(final JvmEnumerationLiteral literal) {
+              JvmParameterizedTypeReference _createTypeRef = JvmModelGeneratorTest.this.references.createTypeRef(it);
+              literal.setType(_createTypeRef);
+            }
+          };
+          JvmEnumerationLiteral _enumerationLiteral = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "WARN", _function);
+          JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
+          EList<JvmMember> _members_1 = it.getMembers();
+          final Procedure1<JvmEnumerationLiteral> _function_1 = new Procedure1<JvmEnumerationLiteral>() {
+            public void apply(final JvmEnumerationLiteral literal) {
+              JvmParameterizedTypeReference _createTypeRef = JvmModelGeneratorTest.this.references.createTypeRef(it);
+              literal.setType(_createTypeRef);
+            }
+          };
+          JvmEnumerationLiteral _enumerationLiteral_1 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "ERROR", _function_1);
+          JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
+          EList<JvmMember> _members_2 = it.getMembers();
+          final Procedure1<JvmEnumerationLiteral> _function_2 = new Procedure1<JvmEnumerationLiteral>() {
+            public void apply(final JvmEnumerationLiteral literal) {
+              JvmParameterizedTypeReference _createTypeRef = JvmModelGeneratorTest.this.references.createTypeRef(it);
+              literal.setType(_createTypeRef);
+            }
+          };
+          JvmEnumerationLiteral _enumerationLiteral_2 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "DEBUG", _function_2);
+          JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members_2, _enumerationLiteral_2);
+          EList<JvmMember> _members_3 = it.getMembers();
+          JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName("java.lang.Object", expression);
+          final Procedure1<JvmOperation> _function_3 = new Procedure1<JvmOperation>() {
+            public void apply(final JvmOperation it) {
+              JvmModelGeneratorTest.this.builder.setBody(it, expression);
+            }
+          };
+          JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function_3);
+          JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members_3, _method);
+        }
+      };
+      JvmEnumerationType _enumerationType = this.builder.toEnumerationType(expression, "Level", _function);
+      this.builder.<JvmEnumerationType>operator_add(_members, _enumerationType);
+      Resource _eResource = expression.eResource();
+      Class<? extends Object> _compile = this.compile(_eResource, outerClass);
+      Class<? extends Object>[] _declaredClasses = _compile.getDeclaredClasses();
+      final Class<? extends Object> compiled = IterableExtensions.<Class<? extends Object>>head(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(_declaredClasses)));
+      Field _field = compiled.getField("WARN");
+      Assert.assertNotNull(_field);
+      Field _field_1 = compiled.getField("ERROR");
+      Assert.assertNotNull(_field_1);
+      Field _field_2 = compiled.getField("DEBUG");
+      Assert.assertNotNull(_field_2);
+      Method _method = compiled.getMethod("doStuff");
+      Assert.assertNotNull(_method);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testClassModifiers() {
     try {
       final XExpression expression = this.expression("null");

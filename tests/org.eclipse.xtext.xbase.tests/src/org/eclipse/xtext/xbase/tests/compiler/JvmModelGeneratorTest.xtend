@@ -302,6 +302,47 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         assertNotNull(compiled.getField("DEBUG"))
         assertNotNull(compiled.getMethod("doStuff"))
     }
+    
+    @Test
+    def void testNestedAnnotationType(){
+        val expression = expression("42")
+        val outerClass = expression.toClass('my.outer.Clazz')
+        outerClass.members += expression.toAnnotationType("MyAnnotation") [
+        	members += expression.toMethod("theTruth", references.getTypeForName(typeof(int), expression)) [
+				setBody(expression)
+			]
+        ]
+        
+        val compiled = compile(expression.eResource, outerClass).declaredClasses.head
+        assertEquals('my.outer.Clazz.MyAnnotation',compiled.canonicalName)
+        assertEquals(42, compiled.declaredMethods.head.defaultValue)
+    }
+    
+    @Test
+    def void testNestedEnumerationType(){
+        val expression = expression("null")
+        val outerClass = expression.toClass('my.outer.Clazz')
+        outerClass.members += expression.toEnumerationType("Level") [
+            members += expression.toEnumerationLiteral("WARN") [ literal |
+				literal.type = references.createTypeRef(it)
+			]
+            members += expression.toEnumerationLiteral("ERROR") [ literal |
+				literal.type = references.createTypeRef(it)
+			]
+            members += expression.toEnumerationLiteral("DEBUG") [ literal |
+				literal.type = references.createTypeRef(it)
+			]
+            members += expression.toMethod("doStuff", references.getTypeForName("java.lang.Object", expression)) [
+                setBody(expression)
+            ]
+        ]
+        
+        val compiled = compile(expression.eResource, outerClass).declaredClasses.head
+        assertNotNull(compiled.getField("WARN"))
+        assertNotNull(compiled.getField("ERROR"))
+        assertNotNull(compiled.getField("DEBUG"))
+        assertNotNull(compiled.getMethod("doStuff"))
+    }
 
 	@Test def void testClassModifiers() {
 		val expression = expression("null")
