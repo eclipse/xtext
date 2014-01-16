@@ -244,4 +244,12 @@ public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider impl
 		if(newIndex != -1)
 			currentModeIndex = newIndex;
 	}
+	
+	@Override
+	protected boolean isLeaf(EObject modelElement) {
+		if (modelElement instanceof XtendTypeDeclaration) {
+			return ((XtendTypeDeclaration) modelElement).getMembers().isEmpty();
+		}
+		return super.isLeaf(modelElement);
+	}
 }
