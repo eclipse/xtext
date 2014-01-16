@@ -814,6 +814,24 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
+  protected ITreeAppendable _generateMember(final JvmEnumerationType it, final ITreeAppendable appendable, final GeneratorConfig config) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      appendable.newLine();
+      _xblockexpression = (this.generateBody(it, appendable, config));
+    }
+    return _xblockexpression;
+  }
+  
+  protected ITreeAppendable _generateMember(final JvmAnnotationType it, final ITreeAppendable appendable, final GeneratorConfig config) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      appendable.newLine();
+      _xblockexpression = (this.generateBody(it, appendable, config));
+    }
+    return _xblockexpression;
+  }
+  
   protected ITreeAppendable _generateMember(final JvmField it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -1874,6 +1892,10 @@ public class JvmModelGenerator implements IGenerator {
       return _generateMember((JvmConstructor)it, appendable, config);
     } else if (it instanceof JvmOperation) {
       return _generateMember((JvmOperation)it, appendable, config);
+    } else if (it instanceof JvmAnnotationType) {
+      return _generateMember((JvmAnnotationType)it, appendable, config);
+    } else if (it instanceof JvmEnumerationType) {
+      return _generateMember((JvmEnumerationType)it, appendable, config);
     } else if (it instanceof JvmField) {
       return _generateMember((JvmField)it, appendable, config);
     } else if (it instanceof JvmGenericType) {

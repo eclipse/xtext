@@ -401,6 +401,16 @@ class JvmModelGenerator implements IGenerator {
 		generateBody(it, appendable, config)
 	}
 	
+	def dispatch generateMember(JvmEnumerationType it, ITreeAppendable appendable, GeneratorConfig config) {
+		appendable.newLine
+		generateBody(it, appendable, config)
+	}
+	
+	def dispatch generateMember(JvmAnnotationType it, ITreeAppendable appendable, GeneratorConfig config) {
+		appendable.newLine
+		generateBody(it, appendable, config)
+	}
+	
 	def dispatch generateMember(JvmField it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.newLine
 		generateJavaDoc(appendable, config)
