@@ -59,14 +59,12 @@
         </filter>
     </resource>
     <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage$Literals">
-        <filter comment="JvmAnnotationReference#getExplicitValues" id="405864542">
+        <filter id="403767336">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
-                <message_argument value="JVM_ANNOTATION_REFERENCE__VALUES"/>
+                <message_argument value="JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES"/>
             </message_arguments>
         </filter>
-    </resource>
-    <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage$Literals">
         <filter id="403767336">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
@@ -77,6 +75,12 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
                 <message_argument value="JVM_FIELD__CONSTANT_VALUE"/>
+            </message_arguments>
+        </filter>
+        <filter comment="JvmAnnotationReference#getExplicitValues" id="405864542">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_ANNOTATION_REFERENCE__VALUES"/>
             </message_arguments>
         </filter>
     </resource>
