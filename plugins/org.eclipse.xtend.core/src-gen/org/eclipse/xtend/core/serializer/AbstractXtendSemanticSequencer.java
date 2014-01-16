@@ -1298,7 +1298,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     (extension?='extension'? parameterType=JvmTypeReference name=ValidID)
+	 *     (extension?='extension'? parameterType=JvmTypeReference name=InnerVarID)
 	 */
 	protected void sequence_FullJvmFormalParameter(EObject context, XtendFormalParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1316,7 +1316,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     (extension?='extension'? parameterType=JvmTypeReference? name=ValidID)
+	 *     (extension?='extension'? parameterType=JvmTypeReference? name=InnerVarID)
 	 */
 	protected void sequence_JvmFormalParameter(EObject context, XtendFormalParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1638,7 +1638,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 * Constraint:
 	 *     (
 	 *         ((writeable?='var'? extension?='extension'?) | (extension?='extension' writeable?='var'?)) 
-	 *         ((type=JvmTypeReference name=ValidID) | name=ValidID) 
+	 *         ((type=JvmTypeReference name=InnerVarID) | name=InnerVarID) 
 	 *         right=XExpression?
 	 *     )
 	 */

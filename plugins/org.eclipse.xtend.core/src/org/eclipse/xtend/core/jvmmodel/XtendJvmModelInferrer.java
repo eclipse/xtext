@@ -291,6 +291,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	protected void initialize(XtendClass source, JvmGenericType inferredJvmType) {
 		inferredJvmType.setVisibility(source.getVisibility());
 		inferredJvmType.setAbstract(source.isAbstract());
+		inferredJvmType.setStrictFloatingPoint(source.isStrictFloatingPoint());
 		if (!inferredJvmType.isAbstract()) {
 			inferredJvmType.setFinal(source.isFinal());
 		}
@@ -331,6 +332,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	protected void initialize(XtendInterface source, JvmGenericType inferredJvmType) {
 		inferredJvmType.setVisibility(source.getVisibility());
 		inferredJvmType.setInterface(true);
+		inferredJvmType.setStrictFloatingPoint(source.isStrictFloatingPoint());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		for (JvmTypeReference intf : source.getExtends()) {
 			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
@@ -592,6 +594,9 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	protected void transform(XtendFunction source, JvmGenericType container, boolean allowDispatch) {
 		JvmOperation operation = typesFactory.createJvmOperation();
 		operation.setAbstract(source.isAbstract());
+		operation.setNative(source.isNative());
+		operation.setSynchronized(source.isSynchonized());
+		operation.setStrictFloatingPoint(source.isStrictFloatingPoint());
 		if (!source.isAbstract())
 			operation.setFinal(source.isFinal());
 		container.getMembers().add(operation);
@@ -721,6 +726,8 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			associator.associatePrimary(source, field);
 			field.setVisibility(source.getVisibility());
 			field.setStatic(source.isStatic());
+			field.setTransient(source.isTransient());
+			field.setVolatile(source.isVolatile());
 			final boolean isDataObject = hasAnnotation((XtendAnnotationTarget) source.eContainer(), Data.class);
 			if (isDataObject) {
 				if (!field.isStatic())

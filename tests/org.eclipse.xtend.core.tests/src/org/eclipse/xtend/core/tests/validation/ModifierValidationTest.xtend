@@ -87,8 +87,10 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		memberInInterface('''abstract def int foo()''').assertNoErrors	
 		memberInInterface('''dispatch def foo (int i){}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
 		memberInInterface('''final def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		memberInInterface('''strictfp def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		memberInInterface('''synchronized def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 	}
-
+	
 	@Test def void testConstructorAllowedModifiers() {
 		constructor('''private new() {}''').assertNoErrors
 		constructor('''package new() {}''').assertNoErrors
@@ -98,6 +100,8 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		constructor('''abstract new() {}''').assertError(XTEND_CONSTRUCTOR, INVALID_MODIFIER)
 		constructor('''dispatch new (){}''').assertError(XTEND_CONSTRUCTOR, INVALID_MODIFIER)
 		constructor('''final new() {}''').assertError(XTEND_CONSTRUCTOR, INVALID_MODIFIER)
+		constructor('''strictfp new() {}''').assertError(XTEND_CONSTRUCTOR, INVALID_MODIFIER)
+		constructor('''synchronized new() {}''').assertError(XTEND_CONSTRUCTOR, INVALID_MODIFIER)
 	}
 	
 	@Test def void testFieldAllowedModifiers() {
@@ -110,6 +114,9 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		field('''dispatch int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		field('''final int foo = 42''').assertNoErrors
 		field('''extension Integer foo''').assertNoErrors
+		field('''final volatile int foo = 42''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		field('''volatile transient int foo''').assertNoErrors
+		field('''private transient volatile int foo''').assertNoErrors
 	}
 	
 	@Test def void testFieldInInterfaceAllowedModifiers() {
@@ -122,6 +129,10 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		memberInInterface('''dispatch int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInInterface('''final int foo = 42''').assertNoErrors
 		memberInInterface('''extension int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInInterface('''transient int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInInterface('''volatile int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInInterface('''strictfp int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInInterface('''synchronized int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 	}
 	
 	@Test def void testFieldInAnnotationAllowedModifiers() {
@@ -133,6 +144,10 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		memberInAnnotation('''abstract int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInAnnotation('''dispatch int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInAnnotation('''final int foo = 42''').assertNoErrors
+		memberInAnnotation('''transient int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInAnnotation('''volatile int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInAnnotation('''strictfp int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInAnnotation('''synchronized int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 	}
 	
 	@Test def void testDuplicateModifier() {
@@ -144,6 +159,8 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		function('''abstract abstract def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
 		function('''dispatch dispatch def foo (int i){}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
 		function('''final final def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
+		function('''strictfp strictfp def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
+		function('''synchronized synchronized def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
 	}
 
 	@Test def void testDuplicateVisibility() {
@@ -167,6 +184,21 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 	@Test def void testAbstractVsNoBody() {
 		function('''abstract def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		function('''abstract def foo()''').assertNoError(INVALID_MODIFIER)
+	}
+	
+	@Test def void testNativeVsNoBody() {
+		function('''native def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		function('''native def foo()''').assertNoError(INVALID_MODIFIER)
+	}
+	
+	@Test def void testStaticVsNative() {
+		field('''native static int foo=42''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		field('''static native int foo=42''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+	}
+
+	@Test def void testFinalVsNative() {
+		function('''native final def foo() ''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		function('''final native def foo() ''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 	}
 	
 	@Test def void testFinalVsNoBody() {

@@ -273,6 +273,14 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     _builder_8.append("final def foo() {}");
     XtendMember _memberInInterface_8 = this.memberInInterface(_builder_8.toString());
     this._validationTestHelper.assertError(_memberInInterface_8, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+    StringConcatenation _builder_9 = new StringConcatenation();
+    _builder_9.append("strictfp def foo() {}");
+    XtendMember _memberInInterface_9 = this.memberInInterface(_builder_9.toString());
+    this._validationTestHelper.assertError(_memberInInterface_9, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+    StringConcatenation _builder_10 = new StringConcatenation();
+    _builder_10.append("synchronized def foo() {}");
+    XtendMember _memberInInterface_10 = this.memberInInterface(_builder_10.toString());
+    this._validationTestHelper.assertError(_memberInInterface_10, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
   }
   
   @Test
@@ -310,6 +318,14 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_7.append("final new() {}");
       XtendConstructor _constructor_7 = this.constructor(_builder_7.toString());
       this._validationTestHelper.assertError(_constructor_7, XtendPackage.Literals.XTEND_CONSTRUCTOR, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_8 = new StringConcatenation();
+      _builder_8.append("strictfp new() {}");
+      XtendConstructor _constructor_8 = this.constructor(_builder_8.toString());
+      this._validationTestHelper.assertError(_constructor_8, XtendPackage.Literals.XTEND_CONSTRUCTOR, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_9 = new StringConcatenation();
+      _builder_9.append("synchronized new() {}");
+      XtendConstructor _constructor_9 = this.constructor(_builder_9.toString());
+      this._validationTestHelper.assertError(_constructor_9, XtendPackage.Literals.XTEND_CONSTRUCTOR, IssueCodes.INVALID_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -354,6 +370,18 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_8.append("extension Integer foo");
       XtendField _field_8 = this.field(_builder_8.toString());
       this._validationTestHelper.assertNoErrors(_field_8);
+      StringConcatenation _builder_9 = new StringConcatenation();
+      _builder_9.append("final volatile int foo = 42");
+      XtendField _field_9 = this.field(_builder_9.toString());
+      this._validationTestHelper.assertError(_field_9, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_10 = new StringConcatenation();
+      _builder_10.append("volatile transient int foo");
+      XtendField _field_10 = this.field(_builder_10.toString());
+      this._validationTestHelper.assertNoErrors(_field_10);
+      StringConcatenation _builder_11 = new StringConcatenation();
+      _builder_11.append("private transient volatile int foo");
+      XtendField _field_11 = this.field(_builder_11.toString());
+      this._validationTestHelper.assertNoErrors(_field_11);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -397,6 +425,22 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     _builder_8.append("extension int foo");
     XtendMember _memberInInterface_8 = this.memberInInterface(_builder_8.toString());
     this._validationTestHelper.assertError(_memberInInterface_8, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    StringConcatenation _builder_9 = new StringConcatenation();
+    _builder_9.append("transient int foo");
+    XtendMember _memberInInterface_9 = this.memberInInterface(_builder_9.toString());
+    this._validationTestHelper.assertError(_memberInInterface_9, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    StringConcatenation _builder_10 = new StringConcatenation();
+    _builder_10.append("volatile int foo");
+    XtendMember _memberInInterface_10 = this.memberInInterface(_builder_10.toString());
+    this._validationTestHelper.assertError(_memberInInterface_10, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    StringConcatenation _builder_11 = new StringConcatenation();
+    _builder_11.append("strictfp int foo");
+    XtendMember _memberInInterface_11 = this.memberInInterface(_builder_11.toString());
+    this._validationTestHelper.assertError(_memberInInterface_11, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    StringConcatenation _builder_12 = new StringConcatenation();
+    _builder_12.append("synchronized int foo");
+    XtendMember _memberInInterface_12 = this.memberInInterface(_builder_12.toString());
+    this._validationTestHelper.assertError(_memberInInterface_12, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
   }
   
   @Test
@@ -433,6 +477,22 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     _builder_7.append("final int foo = 42");
     XtendMember _memberInAnnotation_7 = this.memberInAnnotation(_builder_7.toString());
     this._validationTestHelper.assertNoErrors(_memberInAnnotation_7);
+    StringConcatenation _builder_8 = new StringConcatenation();
+    _builder_8.append("transient int foo");
+    XtendMember _memberInAnnotation_8 = this.memberInAnnotation(_builder_8.toString());
+    this._validationTestHelper.assertError(_memberInAnnotation_8, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    StringConcatenation _builder_9 = new StringConcatenation();
+    _builder_9.append("volatile int foo");
+    XtendMember _memberInAnnotation_9 = this.memberInAnnotation(_builder_9.toString());
+    this._validationTestHelper.assertError(_memberInAnnotation_9, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    StringConcatenation _builder_10 = new StringConcatenation();
+    _builder_10.append("strictfp int foo");
+    XtendMember _memberInAnnotation_10 = this.memberInAnnotation(_builder_10.toString());
+    this._validationTestHelper.assertError(_memberInAnnotation_10, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    StringConcatenation _builder_11 = new StringConcatenation();
+    _builder_11.append("synchronized int foo");
+    XtendMember _memberInAnnotation_11 = this.memberInAnnotation(_builder_11.toString());
+    this._validationTestHelper.assertError(_memberInAnnotation_11, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
   }
   
   @Test
@@ -470,6 +530,14 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_7.append("final final def foo() {}");
       XtendFunction _function_7 = this.function(_builder_7.toString());
       this._validationTestHelper.assertError(_function_7, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_8 = new StringConcatenation();
+      _builder_8.append("strictfp strictfp def foo() {}");
+      XtendFunction _function_8 = this.function(_builder_8.toString());
+      this._validationTestHelper.assertError(_function_8, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_9 = new StringConcatenation();
+      _builder_9.append("synchronized synchronized def foo() {}");
+      XtendFunction _function_9 = this.function(_builder_9.toString());
+      this._validationTestHelper.assertError(_function_9, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -542,6 +610,54 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_1.append("abstract def foo()");
       XtendFunction _function_1 = this.function(_builder_1.toString());
       this._validationTestHelper.assertNoError(_function_1, IssueCodes.INVALID_MODIFIER);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNativeVsNoBody() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("native def foo() {}");
+      XtendFunction _function = this.function(_builder.toString());
+      this._validationTestHelper.assertError(_function, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("native def foo()");
+      XtendFunction _function_1 = this.function(_builder_1.toString());
+      this._validationTestHelper.assertNoError(_function_1, IssueCodes.INVALID_MODIFIER);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testStaticVsNative() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("native static int foo=42");
+      XtendField _field = this.field(_builder.toString());
+      this._validationTestHelper.assertError(_field, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("static native int foo=42");
+      XtendField _field_1 = this.field(_builder_1.toString());
+      this._validationTestHelper.assertError(_field_1, XtendPackage.Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFinalVsNative() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("native final def foo() ");
+      XtendFunction _function = this.function(_builder.toString());
+      this._validationTestHelper.assertError(_function, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final native def foo() ");
+      XtendFunction _function_1 = this.function(_builder_1.toString());
+      this._validationTestHelper.assertError(_function_1, XtendPackage.Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

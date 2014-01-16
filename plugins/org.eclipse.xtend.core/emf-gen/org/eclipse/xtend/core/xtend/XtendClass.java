@@ -98,4 +98,12 @@ public interface XtendClass extends XtendTypeDeclaration
 	 */
 	boolean isAbstract();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isStrictFloatingPoint();
+
 } // XtendClass

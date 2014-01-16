@@ -51,4 +51,22 @@ public class XtendFieldImplCustom extends XtendFieldImpl {
 		return super.isStatic() ? true 
 				: getDeclaringType() instanceof XtendInterface || getDeclaringType() instanceof XtendAnnotationType;
 	}
+	
+	@Override
+	public boolean isVolatile() {
+		for(String modifier: getModifiers()) { 
+			if(equal(modifier, "volatile")) 
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean isTransient() {
+		for(String modifier: getModifiers()) { 
+			if(equal(modifier, "transient")) 
+				return true;
+		}
+		return false;
+	}
 }
