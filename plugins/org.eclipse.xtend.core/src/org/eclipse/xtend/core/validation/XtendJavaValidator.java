@@ -916,12 +916,12 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					error("The 'create'-method " + function.getName() + " in type " + declarator.getName() + " must not be abstract",XTEND_FUNCTION__NAME, -1, CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
 					return;
 				}
-				if (!declarator.isAbstract()) {
+				if (!declarator.isAbstract() && !function.isNative()) {
 					error("The abstract method " + function.getName() + " in type " + declarator.getName() + " can only be defined by an abstract class.", 
 							XTEND_FUNCTION__NAME, -1, MISSING_ABSTRACT);
 				}
-				if(function.getReturnType() == null) {
-					error("The abstract method " + function.getName() + " in type " + declarator.getName() + " must declare a return type",
+				if (function.getReturnType() == null && !function.isOverride()) {
+					error("The "+(function.isNative()?"native":"abstract")+" method " + function.getName() + " in type " + declarator.getName() + " must declare a return type",
 							XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
 				}
 			} else if(function.eContainer() instanceof XtendInterface) {
@@ -1460,16 +1460,16 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	private ModifierValidator classModifierValidator = new ModifierValidator(
-			newArrayList("public", "package", "static", "final", "abstract"), this);
+			newArrayList("public", "package", "static", "final", "abstract", "strictfp"), this);
 		
 	private ModifierValidator interfaceModifierValidator = new ModifierValidator(
-			newArrayList("public", "package", "abstract"), this);
+			newArrayList("public", "package", "abstract", "strictfp"), this);
 		
 	private ModifierValidator enumModifierValidator = new ModifierValidator(
 			newArrayList("public", "package"), this);
 		
 	private ModifierValidator fieldModifierValidator = new ModifierValidator(
-			newArrayList("public", "protected", "package", "private", "static", "final", "val", "var", "extension"), this);
+			newArrayList("public", "protected", "package", "private", "static", "final", "val", "var", "extension", "volatile", "transient"), this);
 		
 	private ModifierValidator fieldInInterfaceModifierValidator = new ModifierValidator(
 			newArrayList("public", "static", "final", "val"), this);
@@ -1478,7 +1478,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			newArrayList(visibilityModifers), this);
 		
 	private ModifierValidator methodModifierValidator = new ModifierValidator(
-			newArrayList("public", "protected", "package", "private", "static", "abstract", "dispatch", "final", "def", "override"), this);
+			newArrayList("public", "protected", "package", "private", "static", "abstract", "dispatch", "final", "def", "override", "strictfp", "native", "synchronized"), this);
 		
 	private ModifierValidator methodInInterfaceModifierValidator = new ModifierValidator(
 			newArrayList("public", "abstract", "def", "override"), this);
@@ -1503,8 +1503,12 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	protected void checkModifiers(XtendField field) {
-		if(field.getDeclaringType() instanceof XtendClass)
+		if(field.getDeclaringType() instanceof XtendClass) {
+			if (field.isFinal() && field.isVolatile()) {
+				error("The field " + field.getName() + " can be either final or volatile, not both.", XTEND_FIELD__NAME, -1, INVALID_MODIFIER);
+			}
 			fieldModifierValidator.checkModifiers(field, "field " + field.getName());
+		}
 		else if(field.getDeclaringType() instanceof XtendInterface 
 				|| field.getDeclaringType() instanceof XtendAnnotationType)
 			fieldInInterfaceModifierValidator.checkModifiers(field,  "field " + field.getName());
@@ -1519,15 +1523,17 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			constructorModifierValidator.checkModifiers(constructor, "type " + typeName);
 		}
 	}
-
+	
 	@Check
 	protected void checkModifiers(XtendFunction method) {
 		if(method.getDeclaringType() instanceof XtendClass) {
 			methodModifierValidator.checkModifiers(method, "method " + method.getName());
 			int abstractIndex = method.getModifiers().indexOf("abstract");
 			if (method.getExpression() != null) {
-				if (abstractIndex != -1) 
+				if (abstractIndex != -1) {
 					error("Method " + method.getName() + " with a body cannot be abstract", XTEND_MEMBER__MODIFIERS, abstractIndex, INVALID_MODIFIER);
+				} else if (method.isNative()) 
+					error("NAtive methods do not specify a body", XTEND_FUNCTION__NAME, -1, INVALID_MODIFIER);
 			} else {
 				int finalIndex = method.getModifiers().indexOf("final");
 				if(finalIndex != -1) 

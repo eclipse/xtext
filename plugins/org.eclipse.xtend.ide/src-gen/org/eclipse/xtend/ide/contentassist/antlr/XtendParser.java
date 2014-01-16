@@ -50,6 +50,7 @@ public class XtendParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMethodModifierAccess().getAlternatives(), "rule__MethodModifier__Alternatives");
 					put(grammarAccess.getValidIDAccess().getAlternatives(), "rule__ValidID__Alternatives");
 					put(grammarAccess.getFeatureCallIDAccess().getAlternatives(), "rule__FeatureCallID__Alternatives");
+					put(grammarAccess.getInnerVarIDAccess().getAlternatives(), "rule__InnerVarID__Alternatives");
 					put(grammarAccess.getXVariableDeclarationAccess().getAlternatives_0_0_1(), "rule__XVariableDeclaration__Alternatives_0_0_1");
 					put(grammarAccess.getXVariableDeclarationAccess().getAlternatives_0_0_1_0_0(), "rule__XVariableDeclaration__Alternatives_0_0_1_0_0");
 					put(grammarAccess.getXVariableDeclarationAccess().getAlternatives_0_0_1_1_1(), "rule__XVariableDeclaration__Alternatives_0_0_1_1_1");

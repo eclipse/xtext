@@ -1314,12 +1314,19 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cStaticKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		private final Keyword cDispatchKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
 		private final Keyword cFinalKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
+		private final Keyword cStrictfpKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
+		private final Keyword cNativeKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final Keyword cVolatileKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
+		private final Keyword cSynchronizedKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+		private final Keyword cTransientKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
 		
 		//CommonModifier:
-		//	"public" | "private" | "protected" | "package" | "abstract" | "static" | "dispatch" | "final";
+		//	"public" | "private" | "protected" | "package" | "abstract" | "static" | "dispatch" | "final" | "strictfp" | "native"
+		//	| "volatile" | "synchronized" | "transient";
 		public ParserRule getRule() { return rule; }
 
-		//"public" | "private" | "protected" | "package" | "abstract" | "static" | "dispatch" | "final"
+		//"public" | "private" | "protected" | "package" | "abstract" | "static" | "dispatch" | "final" | "strictfp" | "native" |
+		//"volatile" | "synchronized" | "transient"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"public"
@@ -1345,6 +1352,21 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"final"
 		public Keyword getFinalKeyword_7() { return cFinalKeyword_7; }
+
+		//"strictfp"
+		public Keyword getStrictfpKeyword_8() { return cStrictfpKeyword_8; }
+
+		//"native"
+		public Keyword getNativeKeyword_9() { return cNativeKeyword_9; }
+
+		//"volatile"
+		public Keyword getVolatileKeyword_10() { return cVolatileKeyword_10; }
+
+		//"synchronized"
+		public Keyword getSynchronizedKeyword_11() { return cSynchronizedKeyword_11; }
+
+		//"transient"
+		public Keyword getTransientKeyword_12() { return cTransientKeyword_12; }
 	}
 
 	public class FieldModifierElements extends AbstractParserRuleElementFinder {
@@ -1454,6 +1476,27 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	public class FeatureCallIDElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureCallID");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cInnerVarIDParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Keyword cExtensionKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		
+		//// For feature calls we add 'extension' since there are method such as 'isExtension' or 'getExtension' out there.
+		//FeatureCallID:
+		//	InnerVarID | "extension";
+		public ParserRule getRule() { return rule; }
+
+		//InnerVarID | "extension"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//InnerVarID
+		public RuleCall getInnerVarIDParserRuleCall_0() { return cInnerVarIDParserRuleCall_0; }
+
+		//"extension"
+		public Keyword getExtensionKeyword_1() { return cExtensionKeyword_1; }
+	}
+
+	public class InnerVarIDElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InnerVarID");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Keyword cAbstractKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		private final Keyword cAnnotationKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
@@ -1463,28 +1506,32 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cDispatchKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
 		private final Keyword cEnumKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
 		private final Keyword cExtendsKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
-		private final Keyword cExtensionKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
-		private final Keyword cFinalKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
-		private final Keyword cImplementsKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
-		private final Keyword cImportKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
-		private final Keyword cInterfaceKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
-		private final Keyword cOverrideKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
-		private final Keyword cPackageKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
-		private final Keyword cPublicKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
-		private final Keyword cPrivateKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
-		private final Keyword cProtectedKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
-		private final Keyword cStaticKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
-		private final Keyword cThrowsKeyword_20 = (Keyword)cAlternatives.eContents().get(20);
+		private final Keyword cFinalKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final Keyword cImplementsKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
+		private final Keyword cImportKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+		private final Keyword cInterfaceKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
+		private final Keyword cOverrideKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
+		private final Keyword cPackageKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
+		private final Keyword cPublicKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
+		private final Keyword cPrivateKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
+		private final Keyword cProtectedKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
+		private final Keyword cStaticKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
+		private final Keyword cThrowsKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
+		private final Keyword cStrictfpKeyword_20 = (Keyword)cAlternatives.eContents().get(20);
+		private final Keyword cNativeKeyword_21 = (Keyword)cAlternatives.eContents().get(21);
+		private final Keyword cVolatileKeyword_22 = (Keyword)cAlternatives.eContents().get(22);
+		private final Keyword cSynchronizedKeyword_23 = (Keyword)cAlternatives.eContents().get(23);
+		private final Keyword cTransientKeyword_24 = (Keyword)cAlternatives.eContents().get(24);
 		
-		//FeatureCallID:
-		//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "extension" | "final"
-		//	| "implements" | "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" |
-		//	"throws";
+		//InnerVarID:
+		//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "final" | "implements"
+		//	| "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" | "throws" |
+		//	"strictfp" | "native" | "volatile" | "synchronized" | "transient";
 		public ParserRule getRule() { return rule; }
 
-		//ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "extension" | "final" |
-		//"implements" | "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" |
-		//"throws"
+		//ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "final" | "implements" |
+		//"import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" | "throws" | "strictfp"
+		//| "native" | "volatile" | "synchronized" | "transient"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ID
@@ -1514,41 +1561,53 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//"extends"
 		public Keyword getExtendsKeyword_8() { return cExtendsKeyword_8; }
 
-		//"extension"
-		public Keyword getExtensionKeyword_9() { return cExtensionKeyword_9; }
-
 		//"final"
-		public Keyword getFinalKeyword_10() { return cFinalKeyword_10; }
+		public Keyword getFinalKeyword_9() { return cFinalKeyword_9; }
 
 		//"implements"
-		public Keyword getImplementsKeyword_11() { return cImplementsKeyword_11; }
+		public Keyword getImplementsKeyword_10() { return cImplementsKeyword_10; }
 
 		//"import"
-		public Keyword getImportKeyword_12() { return cImportKeyword_12; }
+		public Keyword getImportKeyword_11() { return cImportKeyword_11; }
 
 		//"interface"
-		public Keyword getInterfaceKeyword_13() { return cInterfaceKeyword_13; }
+		public Keyword getInterfaceKeyword_12() { return cInterfaceKeyword_12; }
 
 		//"override"
-		public Keyword getOverrideKeyword_14() { return cOverrideKeyword_14; }
+		public Keyword getOverrideKeyword_13() { return cOverrideKeyword_13; }
 
 		//"package"
-		public Keyword getPackageKeyword_15() { return cPackageKeyword_15; }
+		public Keyword getPackageKeyword_14() { return cPackageKeyword_14; }
 
 		//"public"
-		public Keyword getPublicKeyword_16() { return cPublicKeyword_16; }
+		public Keyword getPublicKeyword_15() { return cPublicKeyword_15; }
 
 		//"private"
-		public Keyword getPrivateKeyword_17() { return cPrivateKeyword_17; }
+		public Keyword getPrivateKeyword_16() { return cPrivateKeyword_16; }
 
 		//"protected"
-		public Keyword getProtectedKeyword_18() { return cProtectedKeyword_18; }
+		public Keyword getProtectedKeyword_17() { return cProtectedKeyword_17; }
 
 		//"static"
-		public Keyword getStaticKeyword_19() { return cStaticKeyword_19; }
+		public Keyword getStaticKeyword_18() { return cStaticKeyword_18; }
 
 		//"throws"
-		public Keyword getThrowsKeyword_20() { return cThrowsKeyword_20; }
+		public Keyword getThrowsKeyword_19() { return cThrowsKeyword_19; }
+
+		//"strictfp"
+		public Keyword getStrictfpKeyword_20() { return cStrictfpKeyword_20; }
+
+		//"native"
+		public Keyword getNativeKeyword_21() { return cNativeKeyword_21; }
+
+		//"volatile"
+		public Keyword getVolatileKeyword_22() { return cVolatileKeyword_22; }
+
+		//"synchronized"
+		public Keyword getSynchronizedKeyword_23() { return cSynchronizedKeyword_23; }
+
+		//"transient"
+		public Keyword getTransientKeyword_24() { return cTransientKeyword_24; }
 	}
 
 	public class ParameterElements extends AbstractParserRuleElementFinder {
@@ -1644,9 +1703,9 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cTypeAssignment_1_0_0_0 = (Assignment)cGroup_1_0_0.eContents().get(0);
 		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_1_0_0_0_0 = (RuleCall)cTypeAssignment_1_0_0_0.eContents().get(0);
 		private final Assignment cNameAssignment_1_0_0_1 = (Assignment)cGroup_1_0_0.eContents().get(1);
-		private final RuleCall cNameValidIDParserRuleCall_1_0_0_1_0 = (RuleCall)cNameAssignment_1_0_0_1.eContents().get(0);
+		private final RuleCall cNameInnerVarIDParserRuleCall_1_0_0_1_0 = (RuleCall)cNameAssignment_1_0_0_1.eContents().get(0);
 		private final Assignment cNameAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final RuleCall cNameValidIDParserRuleCall_1_1_0 = (RuleCall)cNameAssignment_1_1.eContents().get(0);
+		private final RuleCall cNameInnerVarIDParserRuleCall_1_1_0 = (RuleCall)cNameAssignment_1_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cEqualsSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cRightAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
@@ -1654,11 +1713,11 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XVariableDeclaration returns xbase::XExpression:
 		//	=> ({XtendVariableDeclaration} ((writeable?="var" | "val") extension?="extension"? | extension?="extension"
-		//	(writeable?="var" | "val"))) (=> (type=JvmTypeReference name=ValidID) | name=ValidID) ("=" right=XExpression)?;
+		//	(writeable?="var" | "val"))) (=> (type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ("=" right=XExpression)?;
 		public ParserRule getRule() { return rule; }
 
 		//=> ({XtendVariableDeclaration} ((writeable?="var" | "val") extension?="extension"? | extension?="extension"
-		//(writeable?="var" | "val"))) (=> (type=JvmTypeReference name=ValidID) | name=ValidID) ("=" right=XExpression)?
+		//(writeable?="var" | "val"))) (=> (type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ("=" right=XExpression)?
 		public Group getGroup() { return cGroup; }
 
 		//=> ({XtendVariableDeclaration} ((writeable?="var" | "val") extension?="extension"? | extension?="extension"
@@ -1717,13 +1776,13 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//"val"
 		public Keyword getValKeyword_0_0_1_1_1_1() { return cValKeyword_0_0_1_1_1_1; }
 
-		//=> (type=JvmTypeReference name=ValidID) | name=ValidID
+		//=> (type=JvmTypeReference name=InnerVarID) | name=InnerVarID
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//=> (type=JvmTypeReference name=ValidID)
+		//=> (type=JvmTypeReference name=InnerVarID)
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//type=JvmTypeReference name=ValidID
+		//type=JvmTypeReference name=InnerVarID
 		public Group getGroup_1_0_0() { return cGroup_1_0_0; }
 
 		//type=JvmTypeReference
@@ -1732,17 +1791,17 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//JvmTypeReference
 		public RuleCall getTypeJvmTypeReferenceParserRuleCall_1_0_0_0_0() { return cTypeJvmTypeReferenceParserRuleCall_1_0_0_0_0; }
 
-		//name=ValidID
+		//name=InnerVarID
 		public Assignment getNameAssignment_1_0_0_1() { return cNameAssignment_1_0_0_1; }
 
-		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_1_0_0_1_0() { return cNameValidIDParserRuleCall_1_0_0_1_0; }
+		//InnerVarID
+		public RuleCall getNameInnerVarIDParserRuleCall_1_0_0_1_0() { return cNameInnerVarIDParserRuleCall_1_0_0_1_0; }
 
-		//name=ValidID
+		//name=InnerVarID
 		public Assignment getNameAssignment_1_1() { return cNameAssignment_1_1; }
 
-		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_1_1_0() { return cNameValidIDParserRuleCall_1_1_0; }
+		//InnerVarID
+		public RuleCall getNameInnerVarIDParserRuleCall_1_1_0() { return cNameInnerVarIDParserRuleCall_1_1_0; }
 
 		//("=" right=XExpression)?
 		public Group getGroup_2() { return cGroup_2; }
@@ -1765,13 +1824,13 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cParameterTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cParameterTypeJvmTypeReferenceParserRuleCall_1_0 = (RuleCall)cParameterTypeAssignment_1.eContents().get(0);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameValidIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final RuleCall cNameInnerVarIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//JvmFormalParameter returns XtendFormalParameter:
-		//	extension?="extension"? parameterType=JvmTypeReference? name=ValidID;
+		//	extension?="extension"? parameterType=JvmTypeReference? name=InnerVarID;
 		public ParserRule getRule() { return rule; }
 
-		//extension?="extension"? parameterType=JvmTypeReference? name=ValidID
+		//extension?="extension"? parameterType=JvmTypeReference? name=InnerVarID
 		public Group getGroup() { return cGroup; }
 
 		//extension?="extension"?
@@ -1786,11 +1845,11 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//JvmTypeReference
 		public RuleCall getParameterTypeJvmTypeReferenceParserRuleCall_1_0() { return cParameterTypeJvmTypeReferenceParserRuleCall_1_0; }
 
-		//name=ValidID
+		//name=InnerVarID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_2_0() { return cNameValidIDParserRuleCall_2_0; }
+		//InnerVarID
+		public RuleCall getNameInnerVarIDParserRuleCall_2_0() { return cNameInnerVarIDParserRuleCall_2_0; }
 	}
 
 	public class FullJvmFormalParameterElements extends AbstractParserRuleElementFinder {
@@ -1801,13 +1860,13 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cParameterTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cParameterTypeJvmTypeReferenceParserRuleCall_1_0 = (RuleCall)cParameterTypeAssignment_1.eContents().get(0);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameValidIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final RuleCall cNameInnerVarIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//FullJvmFormalParameter returns XtendFormalParameter:
-		//	extension?="extension"? parameterType=JvmTypeReference name=ValidID;
+		//	extension?="extension"? parameterType=JvmTypeReference name=InnerVarID;
 		public ParserRule getRule() { return rule; }
 
-		//extension?="extension"? parameterType=JvmTypeReference name=ValidID
+		//extension?="extension"? parameterType=JvmTypeReference name=InnerVarID
 		public Group getGroup() { return cGroup; }
 
 		//extension?="extension"?
@@ -1822,11 +1881,11 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//JvmTypeReference
 		public RuleCall getParameterTypeJvmTypeReferenceParserRuleCall_1_0() { return cParameterTypeJvmTypeReferenceParserRuleCall_1_0; }
 
-		//name=ValidID
+		//name=InnerVarID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_2_0() { return cNameValidIDParserRuleCall_2_0; }
+		//InnerVarID
+		public RuleCall getNameInnerVarIDParserRuleCall_2_0() { return cNameInnerVarIDParserRuleCall_2_0; }
 	}
 
 	public class XStringLiteralElements extends AbstractParserRuleElementFinder {
@@ -2360,6 +2419,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	private CreateExtensionInfoElements pCreateExtensionInfo;
 	private ValidIDElements pValidID;
 	private FeatureCallIDElements pFeatureCallID;
+	private InnerVarIDElements pInnerVarID;
 	private ParameterElements pParameter;
 	private XVariableDeclarationElements pXVariableDeclaration;
 	private JvmFormalParameterElements pJvmFormalParameter;
@@ -2503,7 +2563,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//CommonModifier:
-	//	"public" | "private" | "protected" | "package" | "abstract" | "static" | "dispatch" | "final";
+	//	"public" | "private" | "protected" | "package" | "abstract" | "static" | "dispatch" | "final" | "strictfp" | "native"
+	//	| "volatile" | "synchronized" | "transient";
 	public CommonModifierElements getCommonModifierAccess() {
 		return (pCommonModifier != null) ? pCommonModifier : (pCommonModifier = new CommonModifierElements());
 	}
@@ -2552,16 +2613,27 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getValidIDAccess().getRule();
 	}
 
+	//// For feature calls we add 'extension' since there are method such as 'isExtension' or 'getExtension' out there.
 	//FeatureCallID:
-	//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "extension" | "final"
-	//	| "implements" | "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" |
-	//	"throws";
+	//	InnerVarID | "extension";
 	public FeatureCallIDElements getFeatureCallIDAccess() {
 		return (pFeatureCallID != null) ? pFeatureCallID : (pFeatureCallID = new FeatureCallIDElements());
 	}
 	
 	public ParserRule getFeatureCallIDRule() {
 		return getFeatureCallIDAccess().getRule();
+	}
+
+	//InnerVarID:
+	//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "final" | "implements"
+	//	| "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" | "throws" |
+	//	"strictfp" | "native" | "volatile" | "synchronized" | "transient";
+	public InnerVarIDElements getInnerVarIDAccess() {
+		return (pInnerVarID != null) ? pInnerVarID : (pInnerVarID = new InnerVarIDElements());
+	}
+	
+	public ParserRule getInnerVarIDRule() {
+		return getInnerVarIDAccess().getRule();
 	}
 
 	//Parameter returns XtendParameter:
@@ -2577,7 +2649,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 
 	//XVariableDeclaration returns xbase::XExpression:
 	//	=> ({XtendVariableDeclaration} ((writeable?="var" | "val") extension?="extension"? | extension?="extension"
-	//	(writeable?="var" | "val"))) (=> (type=JvmTypeReference name=ValidID) | name=ValidID) ("=" right=XExpression)?;
+	//	(writeable?="var" | "val"))) (=> (type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ("=" right=XExpression)?;
 	public XVariableDeclarationElements getXVariableDeclarationAccess() {
 		return (pXVariableDeclaration != null) ? pXVariableDeclaration : (pXVariableDeclaration = new XVariableDeclarationElements());
 	}
@@ -2587,7 +2659,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//JvmFormalParameter returns XtendFormalParameter:
-	//	extension?="extension"? parameterType=JvmTypeReference? name=ValidID;
+	//	extension?="extension"? parameterType=JvmTypeReference? name=InnerVarID;
 	public JvmFormalParameterElements getJvmFormalParameterAccess() {
 		return (pJvmFormalParameter != null) ? pJvmFormalParameter : (pJvmFormalParameter = new JvmFormalParameterElements());
 	}
@@ -2597,7 +2669,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FullJvmFormalParameter returns XtendFormalParameter:
-	//	extension?="extension"? parameterType=JvmTypeReference name=ValidID;
+	//	extension?="extension"? parameterType=JvmTypeReference name=InnerVarID;
 	public FullJvmFormalParameterElements getFullJvmFormalParameterAccess() {
 		return (pFullJvmFormalParameter != null) ? pFullJvmFormalParameter : (pFullJvmFormalParameter = new FullJvmFormalParameterElements());
 	}

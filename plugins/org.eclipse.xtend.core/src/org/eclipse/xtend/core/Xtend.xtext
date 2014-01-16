@@ -111,7 +111,8 @@ XtendEnumLiteral:
 
 
 CommonModifier:
-		'public' | 'private' | 'protected' | 'package' | 'abstract' | 'static' | 'dispatch' | 'final'
+		'public' | 'private' | 'protected' | 'package' | 'abstract' | 'static' | 'dispatch' | 'final' 
+		| 'strictfp' | 'native' |'volatile' | 'synchronized' | 'transient'
 ;
 
 FieldModifier:
@@ -130,10 +131,15 @@ ValidID:
 	ID | 'create' | 'annotation'
 ;
 
+// For feature calls we add 'extension' since there are method such as 'isExtension' or 'getExtension' out there.
 FeatureCallID:
-	ID | 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'extension' 
+	InnerVarID | 'extension'
+;
+
+InnerVarID:
+	ID | 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' 
 	   | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' 
-	   | 'protected' | 'static' | 'throws'
+	   | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient'
 ;
 
 Parameter returns XtendParameter:
@@ -143,13 +149,13 @@ Parameter returns XtendParameter:
 XVariableDeclaration returns xbase::XExpression:
 	=>({XtendVariableDeclaration}
 	(((writeable?='var'|'val') extension?='extension'?) | (extension?='extension' (writeable?='var'|'val'))))
-	(=>(type=JvmTypeReference name=ValidID) | name=ValidID) ('=' right=XExpression)?;
+	(=>(type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ('=' right=XExpression)?;
 
 JvmFormalParameter returns XtendFormalParameter:
-	extension?='extension'? (parameterType=JvmTypeReference)? name=ValidID;
+	extension?='extension'? (parameterType=JvmTypeReference)? name=InnerVarID;
 	
 FullJvmFormalParameter returns XtendFormalParameter:
-	extension?='extension'? parameterType=JvmTypeReference name=ValidID;
+	extension?='extension'? parameterType=JvmTypeReference name=InnerVarID;
 
 XStringLiteral returns xbase::XExpression:
 	SimpleStringLiteral | RichString
