@@ -588,16 +588,15 @@ class CompilerTest {
 			    {
 			      final ArrayList<String> list = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
 			      String _head = IterableExtensions.<String>head(list);
-			      final String _switchValue = _head;
 			      boolean _matched = false;
 			      if (!_matched) {
-			        if (Objects.equal(_switchValue,"foo")) {
+			        if (Objects.equal(_head,"foo")) {
 			          _matched=true;
 			          /* "it\'s foo" */
 			        }
 			      }
 			      if (!_matched) {
-			        if (Objects.equal(_switchValue,"bar")) {
+			        if (Objects.equal(_head,"bar")) {
 			          _matched=true;
 			          /* "a bar" */
 			        }
