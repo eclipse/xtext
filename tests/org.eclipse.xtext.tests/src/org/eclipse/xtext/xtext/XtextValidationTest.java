@@ -1534,6 +1534,24 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
+	@Test public void testEmptyKeyword() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"A: foo='';";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, true, false);
+		Assignment valueAssignment = (Assignment) grammar.getRules().get(0).getAlternatives();
+		messageAcceptor.expectedContext(
+				valueAssignment.getTerminal()
+		);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkKeywordNotEmpty((Keyword) valueAssignment.getTerminal());
+		messageAcceptor.validate();
+	}
+	
 	public class ValidatingMessageAcceptor extends AbstractValidationMessageAcceptor {
 
 		private final Set<EObject> contexts;

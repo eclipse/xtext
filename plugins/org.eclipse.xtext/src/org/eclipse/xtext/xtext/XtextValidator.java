@@ -97,6 +97,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public static final String INVALID_METAMODEL_NAME = "org.eclipse.xtext.grammar.InvalidMetaModelName";
 	public static final String INVALID_ACTION_USAGE = "org.eclipse.xtext.grammar.InvalidActionUsage";
 	public static final String EMPTY_ENUM_LITERAL= "org.eclipse.xtext.grammar.EmptyEnumLiteral";
+	public static final String EMPTY_KEYWORD= "org.eclipse.xtext.grammar.EmptyKeyword";
 	public static final String INVALID_HIDDEN_TOKEN = "org.eclipse.xtext.grammar.InvalidHiddenToken";
 	public static final String INVALID_HIDDEN_TOKEN_FRAGMENT = "org.eclipse.xtext.grammar.InvalidHiddenTokenFragment";
 	public static final String INVALID_PACKAGE_REFERENCE_INHERITED = "org.eclipse.xtext.grammar.InvalidPackageReference.inherited";
@@ -982,6 +983,18 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	public void checkInstanceCreatedForEntryRule(final ParserRule rule) {
 		ValidEntryRuleInspector inspector = new ValidEntryRuleInspector(this);
 		inspector.inspect(rule);
+	}
+	
+	@Check
+	public void checkKeywordNotEmpty(final Keyword keyword) {
+		if (keyword.getValue().length()==0 && !(keyword.eContainer() instanceof EnumLiteralDeclaration)) {
+			error(
+					"A keyword cannot be empty.", 
+					keyword, 
+					null,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+					XtextValidator.EMPTY_KEYWORD);
+		}
 	}
 	
 	@Check
