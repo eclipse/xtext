@@ -18,6 +18,14 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 /**
+ * A path points to some file or folder within a {@link FileSystemSupport} and {@link MutableFileSystemSupport}.
+ * 
+ * A path either starts with a slash which denotes an absolute path or a segment which denotes a relative path.
+ * Note that this is an abstraction over different 'real' file systems and doesn't understand platform specific things like, e.g. 
+ * "c://" on windows.
+ * 
+ * The path segment separator is '/'.
+ * 
  * @author Sven Efftinge
  */
 @Beta
