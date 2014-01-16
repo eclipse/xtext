@@ -129,10 +129,20 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testAnnotationType() throws Exception {
-		AssertBuilder assertBuilder = newAssertBuilder("annotation Foo { int bar String foo = '' }");
+		AssertBuilder assertBuilder = newAssertBuilder("@java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME) annotation Foo { int bar String foo = '' }");
 		AssertBuilder annotationType = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2);
 		annotationType.child(0, "bar : int").numChildren(0);
 		annotationType.child(1, "foo : String").numChildren(0);
+	}
+	
+	@Test public void testAnnotationTypeNoMembers() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("@java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME) annotation Foo { }");
+		assertBuilder.numChildren(1).child(0, "Foo").numChildren(0);
+	}
+	
+	@Test public void testInterfaceNoMembers() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("@SuppressWarnings('foo') interface Foo { }");
+		assertBuilder.numChildren(1).child(0, "Foo").numChildren(0);
 	}
 	
 	@Test public void testCreateExtensionInfo() throws Exception {

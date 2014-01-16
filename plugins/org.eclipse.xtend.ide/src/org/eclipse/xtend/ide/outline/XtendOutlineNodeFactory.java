@@ -16,7 +16,6 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeFactory;
-import org.eclipse.xtext.util.TextRegion;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
