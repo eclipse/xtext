@@ -1379,16 +1379,13 @@ public class CompilerTest {
       _builder_1.append("String _head = IterableExtensions.<String>head(list);");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("final String _switchValue = _head;");
-      _builder_1.newLine();
-      _builder_1.append("      ");
       _builder_1.append("boolean _matched = false;");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("if (!_matched) {");
       _builder_1.newLine();
       _builder_1.append("        ");
-      _builder_1.append("if (Objects.equal(_switchValue,\"foo\")) {");
+      _builder_1.append("if (Objects.equal(_head,\"foo\")) {");
       _builder_1.newLine();
       _builder_1.append("          ");
       _builder_1.append("_matched=true;");
@@ -1406,7 +1403,7 @@ public class CompilerTest {
       _builder_1.append("if (!_matched) {");
       _builder_1.newLine();
       _builder_1.append("        ");
-      _builder_1.append("if (Objects.equal(_switchValue,\"bar\")) {");
+      _builder_1.append("if (Objects.equal(_head,\"bar\")) {");
       _builder_1.newLine();
       _builder_1.append("          ");
       _builder_1.append("_matched=true;");
