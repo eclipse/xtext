@@ -94,6 +94,9 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	}
 	interface StringIterable extends Iterable<String> {}
 	interface CharSequenceIterable<C extends CharSequence> extends Iterable<C> {}
+	@SuppressWarnings("rawtypes")
+	interface StrangeIterable<C> extends Iterable {}
+	interface StrangeStringIterable<C> extends Iterable<String> {}
 	interface ListIteratorIterable<E> extends Iterable<E> {
 		ListIterator<E> iterator();
 	}

@@ -43,6 +43,57 @@ class ArrayTypesTest extends AbstractXbaseTestCase {
 		assertEquals('Object[]', arrayType.simpleName)
 	}
 	
+	@Test
+	def void testTryConvertToArray_04() {
+		val typeReference = 'org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.StringIterable'.toTypeReference
+		val arrayType = typeReference.tryConvertToArray
+		assertEquals('String[]', arrayType.simpleName)
+	}
+	
+	@Test
+	def void testTryConvertToArray_05() {
+		val typeReference = 'org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.CharSequenceIterable'.toTypeReference
+		val arrayType = typeReference.tryConvertToArray
+		// intuitively one would assume CharSequence[] but Object[] fulfills the raw type contract of Java
+		assertEquals('Object[]', arrayType.simpleName)
+	}
+	
+	@Test
+	def void testTryConvertToArray_06() {
+		val typeReference = 'org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.CharSequenceIterable<StringBuffer>'.toTypeReference
+		val arrayType = typeReference.tryConvertToArray
+		assertEquals('StringBuffer[]', arrayType.simpleName)
+	}
+	
+	@Test
+	def void testTryConvertToArray_07() {
+		val typeReference = 'org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.StrangeIterable'.toTypeReference
+		val arrayType = typeReference.tryConvertToArray
+		assertEquals('Object[]', arrayType.simpleName)
+	}
+	
+	@Test
+	def void testTryConvertToArray_08() {
+		val typeReference = 'org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.StrangeIterable<String>'.toTypeReference
+		val arrayType = typeReference.tryConvertToArray
+		assertEquals('Object[]', arrayType.simpleName)
+	}
+	
+	@Test
+	def void testTryConvertToArray_09() {
+		val typeReference = 'org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.StrangeStringIterable'.toTypeReference
+		val arrayType = typeReference.tryConvertToArray
+		// intuitively one would assume String[] but Object[] fulfills the raw type contract of Java
+		assertEquals('Object[]', arrayType.simpleName)
+	}
+	
+	@Test
+	def void testTryConvertToArray_10() {
+		val typeReference = 'org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest.StrangeStringIterable<Integer>'.toTypeReference
+		val arrayType = typeReference.tryConvertToArray
+		assertEquals('String[]', arrayType.simpleName)
+	}
+	
 	protected def LightweightTypeReference toTypeReference(String reference) {
 		val expression = '''null as «reference»'''
 		val castExpression = expression.expression as XCastedExpression
