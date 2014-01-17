@@ -75,6 +75,18 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 				processTypeParameter(reference.getTypeParameter(), declaration);
 			}
 		}
+		
+		@Override
+		protected void doVisitWildcardTypeReference(WildcardTypeReference reference, ArrayTypeReference declaration) {
+			LightweightTypeReference lowerBound = reference.getLowerBound();
+			if (lowerBound != null) {
+				outerVisit(declaration, lowerBound, declaration, expectedVariance, VarianceInfo.IN);
+			} else {
+				for(LightweightTypeReference upperBound: reference.getUpperBounds()) {
+					outerVisit(declaration, upperBound, declaration, expectedVariance, VarianceInfo.OUT);
+				}
+			}
+		}
 	}
 	
 	protected class CompoundTypeReferenceTraverser extends TypeReferenceVisitorWithParameter<CompoundTypeReference> {
