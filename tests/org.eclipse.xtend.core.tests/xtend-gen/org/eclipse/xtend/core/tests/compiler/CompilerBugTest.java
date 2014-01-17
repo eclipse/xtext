@@ -17,6 +17,123 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class CompilerBugTest extends AbstractXtendCompilerTest {
   @Test
+  public void testBug424145_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(java.util.List<String[]> arg) { arg.head }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def n() {");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("m(#[]).get(5)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import com.google.common.collect.Lists;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Collections;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.List;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String[] m(final List<String[]> arg) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return IterableExtensions.<String[]>head(arg);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String n() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String[] _m = this.m(Collections.<String[]>unmodifiableList(Lists.<String[]>newArrayList()));");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _m[5];");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug424145_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(java.util.List<String[]> arg) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def n() {");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("m(#[#[\'a\', \'a\']])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import com.google.common.collect.Lists;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Collections;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.List;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object m(final List<String[]> arg) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object n() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this.m(Collections.<String[]>unmodifiableList(Lists.<String[]>newArrayList(new String[] { \"a\", \"a\" })));");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testReturnExpressionConverted_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");

@@ -14,6 +14,60 @@ import org.junit.Test
  */
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
+	@Test def void testBug424145_01() {
+		assertCompilesTo('''
+			class C {
+				def m(java.util.List<String[]> arg) { arg.head }
+				def n() {
+				  m(#[]).get(5)
+				}
+			}
+		''','''
+			import com.google.common.collect.Lists;
+			import java.util.Collections;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String[] m(final List<String[]> arg) {
+			    return IterableExtensions.<String[]>head(arg);
+			  }
+			  
+			  public String n() {
+			    String[] _m = this.m(Collections.<String[]>unmodifiableList(Lists.<String[]>newArrayList()));
+			    return _m[5];
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug424145_02() {
+		assertCompilesTo('''
+			class C {
+				def m(java.util.List<String[]> arg) {}
+				def n() {
+				  m(#[#['a', 'a']])
+				}
+			}
+		''','''
+			import com.google.common.collect.Lists;
+			import java.util.Collections;
+			import java.util.List;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public Object m(final List<String[]> arg) {
+			    return null;
+			  }
+			  
+			  public Object n() {
+			    return this.m(Collections.<String[]>unmodifiableList(Lists.<String[]>newArrayList(new String[] { "a", "a" })));
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testReturnExpressionConverted_01() {
 		assertCompilesTo('''
 			class C {
