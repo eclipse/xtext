@@ -73,6 +73,9 @@ public class IssueCodes {
 	public static final String UNEXPECTED_INVOCATION_ON_TYPE_LITERAL = ISSUE_CODE_PREFIX + "unexpected_invocation_on_type_literal";
 	public static final String UNHANDLED_EXCEPTION = ISSUE_CODE_PREFIX + "unhandled_exception";
 	public static final String UNREACHABLE_CODE = ISSUE_CODE_PREFIX + "unreachable_code";
+	public static final String UNREACHABLE_CASE = ISSUE_CODE_PREFIX + "unreachable_case";
+	public static final String UNREACHABLE_IF_BLOCK = ISSUE_CODE_PREFIX + "unreachable_instance_of";
+	public static final String UNREACHABLE_CATCH_BLOCK = ISSUE_CODE_PREFIX + "unreachable_catch_block";
 	public static final String VARIABLE_NAME_SHADOWING = ISSUE_CODE_PREFIX + "variable_name_shadowing";
 	public static final String VARIABLE_NAME_DISALLOWED = ISSUE_CODE_PREFIX + "variable_name_disallowed";
 	public static final String VARIABLE_NAME_DISCOURAGED = ISSUE_CODE_PREFIX + "variable_name_discouraged";

@@ -1832,6 +1832,302 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Test def void unreachableCase() {
+		create('Foo.xtend', '''
+		class Foo {
+		
+			def foo() {
+				switch x : new Exception {
+					Exception: 1
+					java.io.IOExce|ption: 2
+					java.io.FileNotFoundException: 3
+				}
+			}
+		
+		}
+		''')
+		.assertIssueCodes(UNREACHABLE_CASE)
+		.assertResolutionLabels('Remove case', 'Move case up')
+		.assertModelAfterQuickfix('Remove case', '''
+		class Foo {
+		
+			def foo() {
+				switch x : new Exception {
+					Exception: 1
+					java.io.FileNotFoundException: 3
+				}
+			}
+		
+		}
+		''')
+		.assertModelAfterQuickfix('Move case up', '''
+		class Foo {
+		
+			def foo() {
+				switch x : new Exception {
+					java.io.IOException: 2
+					Exception: 1
+					java.io.FileNotFoundException: 3
+				}
+			}
+		
+		}
+		''')
+	}
+	
+	@Test def void unreachableCase_2() {
+		create('Foo.xtend', '''
+		class Foo {
+		
+			def foo() {
+				switch x : new Exception {
+					Exception: 1
+					java.io.IOException: 2
+					java.io.FileNo|tFoundException: 3
+				}
+			}
+		
+		}
+		''')
+		.assertIssueCodes(UNREACHABLE_CASE)
+		.assertResolutionLabels('Remove case', 'Move case up')
+		.assertModelAfterQuickfix('Remove case', '''
+		class Foo {
+		
+			def foo() {
+				switch x : new Exception {
+					Exception: 1
+					java.io.IOException: 2
+				}
+			}
+		
+		}
+		''')
+		.assertModelAfterQuickfix('Move case up', '''
+		class Foo {
+		
+			def foo() {
+				switch x : new Exception {
+					java.io.FileNotFoundException: 3
+					Exception: 1
+					java.io.IOException: 2
+				}
+			}
+		
+		}
+		''')
+	}
+	
+	@Test def void unreachableCatchBlock() {
+		create('Foo.xtend', '''
+		class Foo {
+		
+			def foo() {
+				try {
+				
+				} catch (Exception e) {
+					
+				} catch (java.io.IOExc|eption e) {
+					
+				} catch (java.io.FileNotFoundException e) {
+					
+				}
+			}
+		
+		}
+		''')
+		.assertIssueCodes(UNREACHABLE_CATCH_BLOCK)
+		.assertResolutionLabels('Remove catch block', 'Move catch block up')
+		.assertModelAfterQuickfix('Remove catch block', '''
+		class Foo {
+		
+			def foo() {
+				try {
+				
+				} catch (Exception e) {
+					
+				} catch (java.io.FileNotFoundException e) {
+					
+				}
+			}
+		
+		}
+		''')
+		.assertModelAfterQuickfix('Move catch block up', '''
+		class Foo {
+		
+			def foo() {
+				try {
+				
+				} catch (java.io.IOException e) {
+					
+				} catch (Exception e) {
+					
+				} catch (java.io.FileNotFoundException e) {
+					
+				}
+			}
+		
+		}
+		''')
+	}
+	
+	@Test def void unreachableCatchBlock_2() {
+		create('Foo.xtend', '''
+		class Foo {
+		
+			def foo() {
+				try {
+				
+				} catch (Exception e) {
+					
+				} catch (java.io.IOException e) {
+					
+				} catch (java.io.FileNo|tFoundException e) {
+					
+				}
+			}
+		
+		}
+		''')
+		.assertIssueCodes(UNREACHABLE_CATCH_BLOCK)
+		.assertResolutionLabels('Remove catch block', 'Move catch block up')
+		.assertModelAfterQuickfix('Remove catch block', '''
+		class Foo {
+		
+			def foo() {
+				try {
+				
+				} catch (Exception e) {
+					
+				} catch (java.io.IOException e) {
+					
+				}
+			}
+		
+		}
+		''')
+		.assertModelAfterQuickfix('Move catch block up', '''
+		class Foo {
+		
+			def foo() {
+				try {
+				
+				} catch (java.io.FileNotFoundException e) {
+					
+				} catch (Exception e) {
+					
+				} catch (java.io.IOException e) {
+					
+				}
+			}
+		
+		}
+		''')
+	}
+	
+	@Test def void unreachableIfBlock() {
+		create('Foo.xtend', '''
+		class Foo {
+		
+			def foo() {
+				val x = new Object
+				if (x instanceof Exception) {
+					
+				} else if (x instanceof java.io.IOExc|eption) {
+					
+				} else if (x instanceof java.io.FileNotFoundException) {
+					
+				}
+			}
+		
+		}
+		''')
+		.assertIssueCodes(UNREACHABLE_IF_BLOCK)
+		.assertResolutionLabels("Remove if block", "Move if block up")
+		.assertModelAfterQuickfix("Remove if block", '''
+		class Foo {
+		
+			def foo() {
+				val x = new Object
+				if (x instanceof Exception) {
+					
+				} else if (x instanceof java.io.FileNotFoundException) {
+					
+				}
+			}
+		
+		}
+		''')
+		.assertModelAfterQuickfix("Move if block up", '''
+		class Foo {
+		
+			def foo() {
+				val x = new Object
+				if (x instanceof java.io.IOException) {
+					
+				} else if (x instanceof Exception) {
+					
+				} else if (x instanceof java.io.FileNotFoundException) {
+					
+				}
+			}
+		
+		}
+		''')
+	}
+	
+	@Test def void unreachableIfBlock_2() {
+		create('Foo.xtend', '''
+		class Foo {
+		
+			def foo() {
+				val x = new Object
+				if (x instanceof Exception) {
+					
+				} else if (x instanceof java.io.IOException) {
+					
+				} else if (x instanceof java.io.FileNo|tFoundException) {
+					
+				}
+			}
+		
+		}
+		''')
+		.assertIssueCodes(UNREACHABLE_IF_BLOCK)
+		.assertResolutionLabels("Remove if block", "Move if block up")
+		.assertModelAfterQuickfix("Remove if block", '''
+		class Foo {
+		
+			def foo() {
+				val x = new Object
+				if (x instanceof Exception) {
+					
+				} else if (x instanceof java.io.IOException) {
+					
+				}
+			}
+		
+		}
+		''')
+		.assertModelAfterQuickfix("Move if block up", '''
+		class Foo {
+		
+			def foo() {
+				val x = new Object
+				if (x instanceof java.io.FileNotFoundException) {
+					
+				} else if (x instanceof Exception) {
+					
+				} else if (x instanceof java.io.IOException) {
+					
+				}
+			}
+		
+		}
+		''')
+	}
 
 }
 

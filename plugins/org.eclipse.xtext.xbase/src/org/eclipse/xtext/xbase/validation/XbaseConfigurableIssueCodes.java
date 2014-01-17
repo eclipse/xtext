@@ -68,6 +68,9 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		iAcceptor.accept(create(IssueCodes.JAVA_STYLE_TYPE_CAST, SeverityConverter.SEVERITY_ERROR));
 		
 		iAcceptor.accept(create(IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, SeverityConverter.SEVERITY_WARNING));
+		
+		iAcceptor.accept(create(IssueCodes.UNREACHABLE_CASE, SeverityConverter.SEVERITY_ERROR));
+		iAcceptor.accept(create(IssueCodes.UNREACHABLE_IF_BLOCK, SeverityConverter.SEVERITY_ERROR));
 	}
 
 	protected final PreferenceKey create(String id, String defaultValue) {

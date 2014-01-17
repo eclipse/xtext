@@ -75,6 +75,8 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 		comboBoxBuilder.addComboBox(IssueCodes.JAVA_STYLE_TYPE_CAST, "Type cast with Java syntax:");
 		comboBoxBuilder.addComboBox(IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, "Method overloading with multiple implicit receivers:");
 		comboBoxBuilder.addComboBox(IssueCodes.VARIABLE_NAME_DISCOURAGED, "Discouraged usage of variable name 'self':");
+		comboBoxBuilder.addComboBox(IssueCodes.UNREACHABLE_CASE, "Unreachable case:");
+		comboBoxBuilder.addComboBox(IssueCodes.UNREACHABLE_IF_BLOCK, "Unreachable if block:");
 	}
 
 	protected void fillRestrictedApiSection(ComboBoxBuilder comboBoxBuilder) {

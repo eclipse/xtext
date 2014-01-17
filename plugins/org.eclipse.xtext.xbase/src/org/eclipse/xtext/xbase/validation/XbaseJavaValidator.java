@@ -13,6 +13,7 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -1346,6 +1347,98 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				}
 			}
 		}
+	}
+	
+	@Check
+	public void checkTypeGuardsOrder(XSwitchExpression expression) {
+		if (isIgnored(IssueCodes.UNREACHABLE_CASE)) {
+			return;
+		}
+		OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(getServices(), expression));
+		List<LightweightTypeReference> previousTypeReferences = new ArrayList<LightweightTypeReference>();
+		for (XCasePart casePart : expression.getCases()) {
+			JvmTypeReference typeGuard = casePart.getTypeGuard();
+			if (typeGuard == null) {
+				continue;
+			}
+			LightweightTypeReference actualType = converter.toLightweightReference(typeGuard);
+			if (actualType == null) {
+				continue;
+			}
+			if (isHandled(actualType, previousTypeReferences)) {
+				addIssue("Unreachable code: The case can never match. It is already handled by a previous condition.", typeGuard, IssueCodes.UNREACHABLE_CASE);
+				continue;
+			}
+			if (casePart.getCase() == null) {
+				previousTypeReferences.add(actualType);
+			}
+		}
+	}
+	
+	@Check
+	public void checkInstanceOfOrder(XIfExpression expression) {
+		if (isIgnored(IssueCodes.UNREACHABLE_IF_BLOCK)) {
+			return;
+		}
+		if (expression.eContainer() instanceof XIfExpression) {
+			XIfExpression container = (XIfExpression) expression.eContainer();
+			if (container.getElse() == expression) {
+				return;
+			}
+		}
+		List<XExpression> ifParts = collectIfParts(expression, new ArrayList<XExpression>());
+		OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(getServices(), expression));
+		List<LightweightTypeReference> previousTypeReferences = new ArrayList<LightweightTypeReference>();
+		for (XExpression ifPart : ifParts) {
+			if (!(ifPart instanceof XInstanceOfExpression)) {
+				continue;
+			}
+			XInstanceOfExpression instanceOfExpression = (XInstanceOfExpression) ifPart;
+			JvmTypeReference type = instanceOfExpression.getType();
+			LightweightTypeReference actualType = converter.toLightweightReference(type);
+			if (actualType == null) {
+				continue;
+			}
+			if (isHandled(actualType, previousTypeReferences)) {
+				addIssue("Unreachable code: The if condition can never match. It is already handled by a previous condition.", type, IssueCodes.UNREACHABLE_IF_BLOCK);
+				continue;
+			}
+			previousTypeReferences.add(actualType);
+		}
+	}
+	
+	private List<XExpression> collectIfParts(XIfExpression expression, List<XExpression> result) {
+		result.add(expression.getIf());
+		if (expression.getElse() instanceof XIfExpression) {
+			collectIfParts((XIfExpression) expression.getElse(), result);
+		}
+		return result;
+	}
+
+	@Check
+	public void checkCatchClausesOrder(XTryCatchFinallyExpression expression) {
+		OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(getServices(), expression));
+		List<LightweightTypeReference> previousTypeReferences = new ArrayList<LightweightTypeReference>();
+		for (XCatchClause catchClause : expression.getCatchClauses()) {
+			LightweightTypeReference actualTypeReference = converter.toLightweightReference(catchClause.getDeclaredParam().getParameterType());
+			if (actualTypeReference == null) {
+				continue;
+			}
+			if (isHandled(actualTypeReference, previousTypeReferences)) {
+				error("Unreachable code: The catch block can never match. It is already handled by a previous condition.", catchClause.getDeclaredParam().getParameterType(), null, IssueCodes.UNREACHABLE_CATCH_BLOCK);
+				continue;
+			}
+			previousTypeReferences.add(actualTypeReference);
+		}
+	}
+
+	private boolean isHandled(LightweightTypeReference actualTypeReference, List<LightweightTypeReference> previousTypeReferences) {
+		for (LightweightTypeReference previousTypeReference : previousTypeReferences) {
+			if (actualTypeReference.isSubtypeOf(previousTypeReference.getType())) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }
