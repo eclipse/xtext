@@ -8,11 +8,12 @@
 package org.eclipse.xtext.xbase.tests.validation
 
 import com.google.inject.Inject
+import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.eclipse.xtext.xbase.validation.IssueCodes
 import org.junit.Test
+import org.eclipse.xtext.xbase.validation.IssueCodes
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -154,6 +155,187 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 				case 'A': 1
 				case 'A': 1
 			}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testUnreachableCase() {
+		'''
+			switch x : new Exception {
+				Exception: 1
+				java.io.IOException: 2
+				java.io.FileNotFoundException: 3
+			}
+		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE)
+	}
+	
+	@Test def void testUnreachableCase_2() {
+		'''
+			switch x : new Exception {
+				java.io.IOException: 2
+				Exception: 1
+				java.io.FileNotFoundException: 3
+			}
+		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE)
+	}
+	
+	@Test def void testUnreachableCase_3() {
+		'''
+			switch x : new Exception {
+				java.io.IOException: 2
+				java.io.FileNotFoundException: 3
+				Exception: 1
+			}
+		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE)
+	}
+	
+	@Test def void testUnreachableCase_4() {
+		'''
+			switch x : new Exception {
+				java.io.FileNotFoundException: 3
+				java.io.IOException: 2
+				Exception: 1
+			}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testUnreachableCase_5() {
+		'''
+			switch x : new Exception {
+				Exception case true: 1
+				java.io.IOException case false: 2
+				java.io.FileNotFoundException: 3
+			}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testUnreachableCatchClause() {
+		'''
+			try {
+				
+			} catch (Exception e) {
+				
+			} catch (java.io.IOException e) {
+				
+			} catch (java.io.FileNotFoundException e) {
+				
+			}
+		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CATCH_BLOCK)
+	}
+	
+	@Test def void testUnreachableCatchClause_2() {
+		'''
+			try {
+				
+			} catch (java.io.IOException e) {
+				
+			} catch (Exception e) {
+				
+			} catch (java.io.FileNotFoundException e) {
+				
+			}
+		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CATCH_BLOCK)
+	}
+	
+	@Test def void testUnreachableCatchClause_3() {
+		'''
+			try {
+				
+			} catch (java.io.IOException e) {
+
+			} catch (java.io.FileNotFoundException e) {
+				
+			} catch (Exception e) {
+				
+			}
+		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CATCH_BLOCK)
+	}
+	
+	@Test def void testUnreachableCatchClause_4() {
+		'''
+			try {
+				
+			} catch (java.io.FileNotFoundException e) {
+				
+			} catch (java.io.IOException e) {
+
+			} catch (Exception e) {
+				
+			}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testUnreachableInstanceOf() {
+		'''
+		{
+			val x = new Object
+			if (x instanceof Exception) {
+				1
+			} else if (x instanceof java.io.IOException) {
+				2
+			} else if (x instanceof java.io.FileNotFoundException) {
+				3
+			}
+		}
+		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK)
+	}
+	
+	@Test def void testUnreachableInstanceOf_2() {
+		'''
+		{
+			val x = new Object
+			if (x instanceof java.io.IOException) {
+				2
+			} else if (x instanceof Exception) {
+				1
+			} else if (x instanceof java.io.FileNotFoundException) {
+				3
+			}
+		}
+		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK)
+	}
+	
+	@Test def void testUnreachableInstanceOf_3() {
+		'''
+		{
+			val x = new Object
+			if (x instanceof java.io.IOException) {
+				2
+			} else if (x instanceof java.io.FileNotFoundException) {
+				3
+			} else if (x instanceof Exception) {
+				1
+			}
+		}
+		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK)
+	}
+	
+	@Test def void testUnreachableInstanceOf_4() {
+		'''
+		{
+			val x = new Object
+			if (x instanceof java.io.FileNotFoundException) {
+				3
+			} else if (x instanceof java.io.IOException) {
+				2
+			} else if (x instanceof Exception) {
+				1
+			}
+		}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testUnreachableInstanceOf_5() {
+		'''
+		{
+			val x = new Object
+			if (x instanceof Exception && true) {
+				1
+			} else if (x instanceof java.io.IOException && false) {
+				2
+			} else if (x instanceof java.io.FileNotFoundException) {
+				3
+			}
+		}
 		'''.expression.assertNoErrors
 	}
 

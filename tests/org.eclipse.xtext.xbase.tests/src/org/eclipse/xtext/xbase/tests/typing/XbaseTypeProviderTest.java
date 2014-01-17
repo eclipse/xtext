@@ -658,11 +658,11 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testTryCatchFinallyExpression_1() throws Exception {
-		assertResolvedType("java.lang.String", "try 'foo' catch (java.lang.Exception e) 'bar' catch(java.lang.RuntimeException e) 'baz'");	
+		assertResolvedType("java.lang.String", "try 'foo' catch (java.lang.RuntimeException e) 'bar' catch(java.lang.Exception e) 'baz'");	
 	}
 	
 	@Test public void testTryCatchFinallyExpression_2() throws Exception {
-		assertResolvedType("java.lang.String", "try 'foo' catch (java.lang.Exception e) 'bar' catch(java.lang.RuntimeException e) 'baz' finally println(true)");	
+		assertResolvedType("java.lang.String", "try 'foo' catch (java.lang.RuntimeException e) 'bar' catch(java.lang.Exception e) 'baz' finally println(true)");	
 	}
 
 	@Test public void testForExpression() throws Exception {

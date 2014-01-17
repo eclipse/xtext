@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests.validation;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -350,6 +351,435 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("case \'A\': 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableCase() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch x : new Exception {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Exception: 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.io.IOException: 2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.io.FileNotFoundException: 3");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableCase_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch x : new Exception {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.io.IOException: 2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Exception: 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.io.FileNotFoundException: 3");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableCase_3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch x : new Exception {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.io.IOException: 2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.io.FileNotFoundException: 3");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Exception: 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CASE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableCase_4() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch x : new Exception {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.io.FileNotFoundException: 3");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.io.IOException: 2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Exception: 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableCase_5() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch x : new Exception {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Exception case true: 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.io.IOException case false: 2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("java.io.FileNotFoundException: 3");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableCatchClause() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("try {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("} catch (Exception e) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("} catch (java.io.IOException e) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("} catch (java.io.FileNotFoundException e) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CATCH_BLOCK);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableCatchClause_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("try {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("} catch (java.io.IOException e) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("} catch (Exception e) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("} catch (java.io.FileNotFoundException e) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CATCH_BLOCK);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableCatchClause_3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("try {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("} catch (java.io.IOException e) {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("} catch (java.io.FileNotFoundException e) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("} catch (Exception e) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_CATCH_BLOCK);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableCatchClause_4() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("try {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("} catch (java.io.FileNotFoundException e) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("} catch (java.io.IOException e) {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("} catch (Exception e) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableInstanceOf() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val x = new Object");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (x instanceof Exception) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (x instanceof java.io.IOException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (x instanceof java.io.FileNotFoundException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("3");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableInstanceOf_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val x = new Object");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (x instanceof java.io.IOException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (x instanceof Exception) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (x instanceof java.io.FileNotFoundException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("3");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableInstanceOf_3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val x = new Object");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (x instanceof java.io.IOException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (x instanceof java.io.FileNotFoundException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("3");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (x instanceof Exception) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableInstanceOf_4() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val x = new Object");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (x instanceof java.io.FileNotFoundException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("3");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (x instanceof java.io.IOException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (x instanceof Exception) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableInstanceOf_5() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val x = new Object");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (x instanceof Exception && true) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (x instanceof java.io.IOException && false) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (x instanceof java.io.FileNotFoundException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("3");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
