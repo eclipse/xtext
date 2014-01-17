@@ -94,7 +94,8 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		newArrayList(anno).translateAnnotationsTo(type)
 		
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
-		assertTrue(type.annotations.head.values.empty)
+		assertTrue(type.annotations.head.explicitValues.empty)
+		assertFalse(type.annotations.head.values.empty)
 	}
 	
 	@Test

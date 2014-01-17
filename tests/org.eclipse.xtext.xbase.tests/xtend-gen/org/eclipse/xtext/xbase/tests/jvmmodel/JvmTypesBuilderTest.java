@@ -175,9 +175,14 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       Assert.assertEquals(_annotationType, _annotation);
       EList<JvmAnnotationReference> _annotations_1 = type.getAnnotations();
       JvmAnnotationReference _head_1 = IterableExtensions.<JvmAnnotationReference>head(_annotations_1);
-      EList<JvmAnnotationValue> _values = _head_1.getValues();
-      boolean _isEmpty = _values.isEmpty();
+      EList<JvmAnnotationValue> _explicitValues = _head_1.getExplicitValues();
+      boolean _isEmpty = _explicitValues.isEmpty();
       Assert.assertTrue(_isEmpty);
+      EList<JvmAnnotationReference> _annotations_2 = type.getAnnotations();
+      JvmAnnotationReference _head_2 = IterableExtensions.<JvmAnnotationReference>head(_annotations_2);
+      EList<JvmAnnotationValue> _values = _head_2.getValues();
+      boolean _isEmpty_1 = _values.isEmpty();
+      Assert.assertFalse(_isEmpty_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
