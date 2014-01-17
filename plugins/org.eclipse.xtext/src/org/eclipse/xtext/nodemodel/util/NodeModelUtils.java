@@ -22,6 +22,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
@@ -246,8 +247,12 @@ public class NodeModelUtils {
 			while(sibling != node) {
 				EObject siblingGrammarElement = sibling.getGrammarElement();
 				if (siblingGrammarElement != null && GrammarUtil.containingAssignment(siblingGrammarElement) == null) {
-					if (GrammarUtil.isEObjectRuleCall(siblingGrammarElement))
+					if (GrammarUtil.isEObjectRuleCall(siblingGrammarElement)) {
 						return findActualSemanticObjectFor(sibling);
+					}
+					if (siblingGrammarElement.eClass() == XtextPackage.Literals.ACTION) {
+						return findActualSemanticObjectFor(sibling);
+					}
 				}
 				sibling = sibling.getNextSibling();
 			}
