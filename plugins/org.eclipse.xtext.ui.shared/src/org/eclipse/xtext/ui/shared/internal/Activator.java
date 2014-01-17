@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.shared.internal;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
@@ -17,7 +16,9 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.ui.JavaUI;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceUnloader;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Binder;
@@ -40,9 +41,6 @@ public class Activator extends Plugin {
 	}
 
 	private Injector injector;
-
-	@Inject
-	private IWorkspace workspace;
 
 	@Inject
 	private EagerContributionInitializer initializer;
@@ -85,8 +83,20 @@ public class Activator extends Plugin {
 	public static boolean isJavaEnabled() {
 		try {
 			JavaCore.class.getName();
-			JavaUI.class.getName();
 			TypeResourceUnloader.class.getName();
+			// Activating JavaUI needs the Display Thread, which is not available on early start ups.
+			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=342711
+			if (Display.getCurrent() == null) {
+				Bundle[] bundles = plugin.getBundle().getBundleContext().getBundles();
+				for (Bundle bundle :bundles) {
+					if ("org.eclipse.jdt.ui".equals(bundle.getSymbolicName())) {
+						return true;
+					}
+				}
+				return false;
+			} else {
+				JavaUI.class.getName();
+			}
 			return true;
 		} catch (Throwable e) {
 			log.warn("Disabling JDT use. : " + e.getMessage());
@@ -113,7 +123,6 @@ public class Activator extends Plugin {
 		injector = null;
 		initializer.discard();
 		initializer = null;
-		workspace = null;
 		super.stop(context);
 	}
 
