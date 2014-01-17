@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.compiler.ast.ASTNode;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
@@ -981,9 +982,23 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 		int annotationOffset = 0;
 		if (signature == null) {
 			signature = method.getMethodDescriptor();
-		} else {
+			if (offset == 1) {
+				int descriptorParameterCount = Signature.getParameterCount(signature);
+				try {
+					method.getParameterAnnotations(descriptorParameterCount - 1);
+				} catch(ArrayIndexOutOfBoundsException e) {
+					annotationOffset = -1;
+				}
+			}
+		} else if (offset == 1) {
 			annotationOffset = offset;
 			offset = 0;
+			int descriptorParameterCount = Signature.getParameterCount(signature);
+			try {
+				method.getParameterAnnotations(descriptorParameterCount - 1 + annotationOffset);
+			} catch(ArrayIndexOutOfBoundsException e) {
+				annotationOffset = 0;
+			}
 		}
 		BinaryMethodSignature binarySignature = BinarySignatures.createMethodSignature(signature);
 		typeParameters = createTypeParameters(binarySignature, result, typeParameters);
