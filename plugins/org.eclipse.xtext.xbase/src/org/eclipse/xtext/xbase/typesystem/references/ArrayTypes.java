@@ -89,6 +89,7 @@ public class ArrayTypes {
 		if (parameterizedIterable != null) {
 			ITypeReferenceOwner owner = typeReference.getOwner();
 			if (parameterizedIterable.isRawType()) {
+				// return Object[]
 				LightweightTypeReference objectType = parameterizedIterable.getSuperTypes().get(0);
 				ArrayTypeReference array = new ArrayTypeReference(owner, objectType);
 				return array;
