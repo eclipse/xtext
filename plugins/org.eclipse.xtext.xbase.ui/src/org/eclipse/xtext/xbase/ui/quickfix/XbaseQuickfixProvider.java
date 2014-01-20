@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -38,6 +40,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler;
+import org.eclipse.xtext.xbase.util.TypesOrderUtil;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.inject.Inject;
@@ -55,6 +58,9 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Inject
 	private CommonTypeComputationServices services;
+	
+	@Inject
+	private TypesOrderUtil typesOrderUtil;
 	
 	@Fix(IssueCodes.IMPORT_DUPLICATE)
 	public void fixDuplicateImport(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -118,7 +124,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 						continue;
 					}
 					LightweightTypeReference previousTypeReference = converter.toLightweightReference(typeGuard);
-					if (actualTypeReference.isSubtypeOf(previousTypeReference.getType())) {
+					if (typesOrderUtil.isHandled(actualTypeReference, previousTypeReference)) {
 						ICompositeNode previousCaseNode = NodeModelUtils.findActualNodeFor(previousCasePart);
 						if (previousCaseNode == null) {
 							return;
@@ -163,7 +169,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 						return;
 					}
 					LightweightTypeReference previousTypeReference = converter.toLightweightReference(previousCatchClause.getDeclaredParam().getParameterType());
-					if (actualTypeReference.isSubtypeOf(previousTypeReference.getType())) {
+					if (typesOrderUtil.isHandled(actualTypeReference, previousTypeReference)) {
 						ICompositeNode previousNode = NodeModelUtils.findActualNodeFor(previousCatchClause);
 						if (previousNode == null) {
 							return;
@@ -211,6 +217,8 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 					return;
 				}
 				XInstanceOfExpression actualIfPart = (XInstanceOfExpression) ifExpression.getIf();
+				XAbstractFeatureCall actualFeatureCall = (XAbstractFeatureCall) actualIfPart.getExpression();
+				JvmIdentifiableElement actualFeature = actualFeatureCall.getFeature();
 				OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(services, firstIfExpression));
 				LightweightTypeReference actualTypeReference = converter.toLightweightReference(actualIfPart.getType());
 				List<XExpression> ifParts = collectIfParts(firstIfExpression, new ArrayList<XExpression>());
@@ -222,8 +230,15 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 						continue;
 					}
 					XInstanceOfExpression instanceOfExpression = (XInstanceOfExpression) previousIfPart;
+					if (!(instanceOfExpression.getExpression() instanceof XAbstractFeatureCall)) {
+						continue;
+					}
+					XAbstractFeatureCall previousFeatureCall = (XAbstractFeatureCall) instanceOfExpression.getExpression();
+					if (previousFeatureCall.getFeature() != actualFeature) {
+						continue;
+					}
 					LightweightTypeReference previousTypeReference = converter.toLightweightReference(instanceOfExpression.getType());
-					if (actualTypeReference.isSubtypeOf(previousTypeReference.getType())) {
+					if (typesOrderUtil.isHandled(actualTypeReference, previousTypeReference)) {
 						ICompositeNode previousNode = NodeModelUtils.findActualNodeFor(instanceOfExpression.eContainer());
 						if (previousNode == null) {
 							return;
