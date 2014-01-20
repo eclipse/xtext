@@ -360,118 +360,117 @@ public class Ecore2XtextExtensions {
   public static String dataTypeRuleBody(final EDataType it) {
     String _switchResult = null;
     String _name = it.getName();
-    final String getName = _name;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(getName,"EBigDecimal")) {
+      if (Objects.equal(_name,"EBigDecimal")) {
         _matched=true;
         _switchResult = "INT? \'.\' INT";
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EBigInteger")) {
+      if (Objects.equal(_name,"EBigInteger")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EBoolean")) {
+      if (Objects.equal(_name,"EBoolean")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.booleanRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EBooleanObject")) {
+      if (Objects.equal(_name,"EBooleanObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.booleanRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EByte")) {
+      if (Objects.equal(_name,"EByte")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EByteObject")) {
+      if (Objects.equal(_name,"EByteObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EChar")) {
+      if (Objects.equal(_name,"EChar")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"ECharObject")) {
+      if (Objects.equal(_name,"ECharObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EDouble")) {
+      if (Objects.equal(_name,"EDouble")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.decimalRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EDoubleObject")) {
+      if (Objects.equal(_name,"EDoubleObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.decimalRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EFloat")) {
+      if (Objects.equal(_name,"EFloat")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.decimalRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EFloatObject")) {
+      if (Objects.equal(_name,"EFloatObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.decimalRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EInt")) {
+      if (Objects.equal(_name,"EInt")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EIntegerObject")) {
+      if (Objects.equal(_name,"EIntegerObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"ELong")) {
+      if (Objects.equal(_name,"ELong")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"ELongObject")) {
+      if (Objects.equal(_name,"ELongObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EShort")) {
+      if (Objects.equal(_name,"EShort")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EShortObject")) {
+      if (Objects.equal(_name,"EShortObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"EString")) {
+      if (Objects.equal(_name,"EString")) {
         _matched=true;
         _switchResult = "STRING | ID";
       }

@@ -522,34 +522,33 @@ public class ArithmeticExtensionGenerator {
     String _switchResult = null;
     String _lowerCase = it.toLowerCase();
     String _substring = _lowerCase.substring(0, 1);
-    final String _switchValue = _substring;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(_switchValue,"a")) {
+      if (Objects.equal(_substring,"a")) {
         _matched=true;
         _switchResult = "an";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_switchValue,"e")) {
+      if (Objects.equal(_substring,"e")) {
         _matched=true;
         _switchResult = "an";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_switchValue,"i")) {
+      if (Objects.equal(_substring,"i")) {
         _matched=true;
         _switchResult = "an";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_switchValue,"o")) {
+      if (Objects.equal(_substring,"o")) {
         _matched=true;
         _switchResult = "an";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_switchValue,"u")) {
+      if (Objects.equal(_substring,"u")) {
         _matched=true;
         _switchResult = "an";
       }
