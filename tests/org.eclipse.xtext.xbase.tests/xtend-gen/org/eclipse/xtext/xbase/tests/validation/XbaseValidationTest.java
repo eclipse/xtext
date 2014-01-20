@@ -789,4 +789,121 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testUnreachableInstanceOf_6() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val x = new Object");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (x instanceof java.util.List) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (x instanceof int[]) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableInstanceOf_7() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val x = new Object");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val y = new Object");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (x instanceof java.io.IOException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (y instanceof java.io.FileNotFoundException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUnreachableInstanceOf_8() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val x = new Object");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val y = new Object");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (x instanceof java.io.IOException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (y instanceof java.io.IOException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (x instanceof java.io.FileNotFoundException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("3");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} else if (y instanceof java.io.FileNotFoundException) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("4");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
