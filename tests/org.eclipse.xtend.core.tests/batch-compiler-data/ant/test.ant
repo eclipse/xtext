@@ -29,6 +29,8 @@
 	<path id="xtend.deps">
 		<fileset dir="${deps.dir}">
 			<include name="org.apache.log4j*.jar" />
+			<include name="org.eclipse.core.resources.*.jar" />
+			<include name="org.eclipse.core.jobs.*.jar" />
 			<include name="org.eclipse.emf.ecore_*.jar" />
 			<include name="org.eclipse.emf.ecore*.jar" />
 			<include name="org.eclipse.emf.common_*.jar" />
