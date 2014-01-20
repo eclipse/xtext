@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.core.compiler.CharOperation;
-import org.eclipse.jdt.internal.core.util.Util;
 
 import com.google.common.collect.Lists;
 
@@ -22,7 +21,6 @@ import com.google.common.collect.Lists;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@SuppressWarnings("restriction")
 public class BinaryMethodSignature extends AbstractBinarySignature {
 
 	BinaryMethodSignature(char[] signature) {
@@ -35,7 +33,7 @@ public class BinaryMethodSignature extends AbstractBinarySignature {
 			throw new IllegalArgumentException();
 		}
 		// there could be thrown exceptions behind, thus scan one type exactly
-		int last = Util.scanTypeSignature(chars, paren+1);
+		int last = JdtCompilerUtil.scanTypeSignature(chars, paren+1);
 		return new BinaryGenericTypeSignature(chars, paren + 1, last - paren);
 	}
 	
@@ -48,7 +46,7 @@ public class BinaryMethodSignature extends AbstractBinarySignature {
 				throw new IllegalArgumentException();
 			}
 			// ignore return type
-			exceptionStart = Util.scanTypeSignature(chars, paren+1) + 1;
+			exceptionStart = JdtCompilerUtil.scanTypeSignature(chars, paren+1) + 1;
 			int length = offset + this.length;
 			if (exceptionStart == length) return Collections.emptyList();
 		}
@@ -63,7 +61,7 @@ public class BinaryMethodSignature extends AbstractBinarySignature {
 			} else {
 				throw new IllegalArgumentException();
 			}
-			i = Util.scanTypeSignature(chars, i) + 1;
+			i = JdtCompilerUtil.scanTypeSignature(chars, i) + 1;
 			result.add(new BinaryGenericTypeSignature(chars, exceptionStart, i - exceptionStart));
 			exceptionStart = i;
 		}
@@ -86,7 +84,7 @@ public class BinaryMethodSignature extends AbstractBinarySignature {
 				if (chars[i] == Signature.C_PARAM_END) {
 					return result;
 				}
-				int e = Util.scanTypeSignature(chars, i);
+				int e = JdtCompilerUtil.scanTypeSignature(chars, i);
 				if (e < 0) {
 					throw new IllegalArgumentException();
 				}

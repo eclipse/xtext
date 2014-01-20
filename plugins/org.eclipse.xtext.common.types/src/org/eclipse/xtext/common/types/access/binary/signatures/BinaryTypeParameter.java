@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.core.compiler.CharOperation;
-import org.eclipse.jdt.internal.core.util.Util;
 
 import com.google.common.collect.Lists;
 
@@ -22,7 +21,6 @@ import com.google.common.collect.Lists;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@SuppressWarnings("restriction")
 public class BinaryTypeParameter extends AbstractBinarySignature {
 
 	BinaryTypeParameter(char[] chars, int offset, int length) {
@@ -48,14 +46,14 @@ public class BinaryTypeParameter extends AbstractBinarySignature {
 			List<BinaryGenericTypeSignature> result = Lists.newArrayListWithCapacity(3);
 			int nextInterface = afterTypeParameterName + 2;
 			while(nextInterface <= end) {
-				int afterInterfaceBound = Util.scanTypeSignature(chars, nextInterface) + 1;
+				int afterInterfaceBound = JdtCompilerUtil.scanTypeSignature(chars, nextInterface) + 1;
 				BinaryGenericTypeSignature intf = new BinaryGenericTypeSignature(chars, nextInterface, afterInterfaceBound - nextInterface);
 				result.add(intf);
 				nextInterface = afterInterfaceBound + 1;
 			}
 			return result;
 		} else {
-			int afterClassBound = Util.scanTypeSignature(chars, afterTypeParameterName + 1);
+			int afterClassBound = JdtCompilerUtil.scanTypeSignature(chars, afterTypeParameterName + 1);
 			BinaryGenericTypeSignature classBound = new BinaryGenericTypeSignature(chars, afterTypeParameterName + 1, afterClassBound - afterTypeParameterName);
 			if (afterClassBound == end - 1) {
 				return Collections.singletonList(classBound);
@@ -79,7 +77,7 @@ public class BinaryTypeParameter extends AbstractBinarySignature {
 
 	private int scanTypeSignature(char[] chars, int i) {
 		try {
-			return Util.scanTypeSignature(chars, i);
+			return JdtCompilerUtil.scanTypeSignature(chars, i);
 		} catch(IllegalArgumentException e) {
 //			e.printStackTrace();
 			throw e;

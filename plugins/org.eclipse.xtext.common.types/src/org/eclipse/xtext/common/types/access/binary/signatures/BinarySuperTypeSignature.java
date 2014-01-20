@@ -9,8 +9,6 @@ package org.eclipse.xtext.common.types.access.binary.signatures;
 
 import java.util.List;
 
-import org.eclipse.jdt.internal.core.util.Util;
-
 import com.google.common.collect.Lists;
 
 /**
@@ -19,7 +17,6 @@ import com.google.common.collect.Lists;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@SuppressWarnings("restriction")
 public class BinarySuperTypeSignature extends AbstractBinarySignature {
 
 	BinarySuperTypeSignature(char[] chars) {
@@ -44,7 +41,7 @@ public class BinarySuperTypeSignature extends AbstractBinarySignature {
 		}
 		List<BinaryGenericTypeSignature> result = Lists.newArrayListWithCapacity(2);
 		while(index != offset + length) {
-			int end = Util.scanTypeSignature(chars, index) + 1;
+			int end = JdtCompilerUtil.scanTypeSignature(chars, index) + 1;
 			result.add(new BinaryGenericTypeSignature(chars, index, end - index));
 			index = end;
 		}

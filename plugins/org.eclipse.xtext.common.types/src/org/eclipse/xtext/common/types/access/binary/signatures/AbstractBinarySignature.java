@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.core.compiler.CharOperation;
-import org.eclipse.jdt.internal.core.util.Util;
 
 import com.google.common.collect.Lists;
 
@@ -21,7 +20,6 @@ import com.google.common.collect.Lists;
  * @since 2.5
  * @noextend This class is not intended to be subclassed by clients.
  */
-@SuppressWarnings("restriction")
 public abstract class AbstractBinarySignature {
 
 	protected final char[] chars;
@@ -99,7 +97,7 @@ public abstract class AbstractBinarySignature {
 						case Signature.C_ARRAY:
 						case Signature.C_TYPE_VARIABLE:
 							try {
-								i = Util.scanTypeSignature(chars, i);
+								i = JdtCompilerUtil.scanTypeSignature(chars, i);
 								i++; // position at start of next param if any
 							} catch (IllegalArgumentException e) {
 								// not a class type signature -> it is a new type parameter
