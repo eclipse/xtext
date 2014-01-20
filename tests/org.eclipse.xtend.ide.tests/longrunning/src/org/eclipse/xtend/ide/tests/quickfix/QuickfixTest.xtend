@@ -2128,6 +2128,195 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		}
 		''')
 	}
+	
+	@Test def void unreachableIfBlock_3() {
+		create('Foo.xtend', '''
+		import java.io.IOException
+
+		class Foo {
+		
+			Object y
+		
+			def foo(Object x) {
+				if (x instanceof Exception) {
+					1
+				} else if (y instanceof Exception) {
+					2
+				} else if (Bar.z instanceof Exception) {
+					1
+				} else if (x instanceof IOExc|eption) {
+					2
+				} else if (y instanceof IOException) {
+					2
+				} else if (Bar.z instanceof IOException) {
+					2
+				}
+			}
+		
+		}
+		
+		class Bar {
+			public static Object z
+		}
+		''')
+		.assertIssueCodes(UNREACHABLE_IF_BLOCK)
+		.assertResolutionLabels("Remove if block", "Move if block up")
+		.assertModelAfterQuickfix("Move if block up", '''
+		import java.io.IOException
+
+		class Foo {
+		
+			Object y
+		
+			def foo(Object x) {
+				if (x instanceof IOException) {
+					2
+				} else if (x instanceof Exception) {
+					1
+				} else if (y instanceof Exception) {
+					2
+				} else if (Bar.z instanceof Exception) {
+					1
+				} else if (y instanceof IOException) {
+					2
+				} else if (Bar.z instanceof IOException) {
+					2
+				}
+			}
+		
+		}
+		
+		class Bar {
+			public static Object z
+		}
+		''')
+	}
+	
+	@Test def void unreachableIfBlock_4() {
+		create('Foo.xtend', '''
+		import java.io.IOException
+
+		class Foo {
+		
+			Object y
+		
+			def foo(Object x) {
+				if (x instanceof Exception) {
+					1
+				} else if (y instanceof Exception) {
+					2
+				} else if (Bar.z instanceof Exception) {
+					1
+				} else if (x instanceof IOException) {
+					2
+				} else if (y instanceof IOExc|eption) {
+					2
+				} else if (Bar.z instanceof IOException) {
+					2
+				}
+			}
+		
+		}
+		
+		class Bar {
+			public static Object z
+		}
+		''')
+		.assertIssueCodes(UNREACHABLE_IF_BLOCK)
+		.assertResolutionLabels("Remove if block", "Move if block up")
+		.assertModelAfterQuickfix("Move if block up", '''
+		import java.io.IOException
+
+		class Foo {
+		
+			Object y
+		
+			def foo(Object x) {
+				if (x instanceof Exception) {
+					1
+				} else if (y instanceof IOException) {
+					2
+				} else if (y instanceof Exception) {
+					2
+				} else if (Bar.z instanceof Exception) {
+					1
+				} else if (x instanceof IOException) {
+					2
+				} else if (Bar.z instanceof IOException) {
+					2
+				}
+			}
+		
+		}
+		
+		class Bar {
+			public static Object z
+		}
+		''')
+	}
+	
+	@Test def void unreachableIfBlock_5() {
+		create('Foo.xtend', '''
+		import java.io.IOException
+
+		class Foo {
+		
+			Object y
+		
+			def foo(Object x) {
+				if (x instanceof Exception) {
+					1
+				} else if (y instanceof Exception) {
+					2
+				} else if (Bar.z instanceof Exception) {
+					1
+				} else if (x instanceof IOException) {
+					2
+				} else if (y instanceof IOException) {
+					2
+				} else if (Bar.z instanceof IOExc|eption) {
+					2
+				}
+			}
+		
+		}
+		
+		class Bar {
+			public static Object z
+		}
+		''')
+		.assertIssueCodes(UNREACHABLE_IF_BLOCK)
+		.assertResolutionLabels("Remove if block", "Move if block up")
+		.assertModelAfterQuickfix("Move if block up", '''
+		import java.io.IOException
+
+		class Foo {
+		
+			Object y
+		
+			def foo(Object x) {
+				if (x instanceof Exception) {
+					1
+				} else if (y instanceof Exception) {
+					2
+				} else if (Bar.z instanceof IOException) {
+					2
+				} else if (Bar.z instanceof Exception) {
+					1
+				} else if (x instanceof IOException) {
+					2
+				} else if (y instanceof IOException) {
+					2
+				}
+			}
+		
+		}
+		
+		class Bar {
+			public static Object z
+		}
+		''')
+	}
 
 }
 
