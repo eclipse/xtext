@@ -49,7 +49,8 @@ public class InternalBuilderTest {
 		for (IMarker marker : markers) {
 			String msg = MarkerUtilities.getMessage(marker);
 			if (MarkerUtilities.getSeverity(marker) == IMarker.SEVERITY_ERROR) {
-				errors.add(msg);
+				errors.add(msg + " in " + marker.getResource().getFullPath() + " line: "
+						+ MarkerUtilities.getLineNumber(marker));
 			}
 		}
 
@@ -67,8 +68,7 @@ public class InternalBuilderTest {
 	private void clearJdtIndex() throws FileNotFoundException {
 		File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
 		boolean success = Files.sweepFolder(jdtMetadata);
-		System.out.println("Clean up index " + jdtMetadata.getAbsolutePath() + ": "
-				+ (success ? "success" : "fail"));
+		System.out.println("Clean up index " + jdtMetadata.getAbsolutePath() + ": " + (success ? "success" : "fail"));
 	}
 
 	private void reportMemoryState(String reportName) {
