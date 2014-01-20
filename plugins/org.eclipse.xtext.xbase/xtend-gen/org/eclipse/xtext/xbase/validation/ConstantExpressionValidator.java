@@ -218,10 +218,9 @@ public class ConstantExpressionValidator {
   protected boolean _isConstantExpression(final XAbstractFeatureCall it) {
     boolean _switchResult = false;
     JvmIdentifiableElement _feature = it.getFeature();
-    final JvmIdentifiableElement getFeature = _feature;
     boolean _matched = false;
     if (!_matched) {
-      if (getFeature instanceof JvmEnumerationLiteral) {
+      if (_feature instanceof JvmEnumerationLiteral) {
         _matched=true;
         _switchResult = false;
       }

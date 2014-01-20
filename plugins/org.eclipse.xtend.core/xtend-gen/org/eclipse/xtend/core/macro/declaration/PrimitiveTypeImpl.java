@@ -21,52 +21,51 @@ public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> imp
   public PrimitiveType.Kind getKind() {
     PrimitiveType.Kind _switchResult = null;
     String _simpleName = this.getSimpleName();
-    final String getSimpleName = _simpleName;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(getSimpleName,"boolean")) {
+      if (Objects.equal(_simpleName,"boolean")) {
         _matched=true;
         _switchResult = PrimitiveType.Kind.BOOLEAN;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getSimpleName,"int")) {
+      if (Objects.equal(_simpleName,"int")) {
         _matched=true;
         _switchResult = PrimitiveType.Kind.INT;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getSimpleName,"char")) {
+      if (Objects.equal(_simpleName,"char")) {
         _matched=true;
         _switchResult = PrimitiveType.Kind.CHAR;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getSimpleName,"double")) {
+      if (Objects.equal(_simpleName,"double")) {
         _matched=true;
         _switchResult = PrimitiveType.Kind.DOUBLE;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getSimpleName,"long")) {
+      if (Objects.equal(_simpleName,"long")) {
         _matched=true;
         _switchResult = PrimitiveType.Kind.LONG;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getSimpleName,"short")) {
+      if (Objects.equal(_simpleName,"short")) {
         _matched=true;
         _switchResult = PrimitiveType.Kind.SHORT;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getSimpleName,"float")) {
+      if (Objects.equal(_simpleName,"float")) {
         _matched=true;
         _switchResult = PrimitiveType.Kind.FLOAT;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getSimpleName,"byte")) {
+      if (Objects.equal(_simpleName,"byte")) {
         _matched=true;
         _switchResult = PrimitiveType.Kind.BYTE;
       }
