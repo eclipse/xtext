@@ -7,7 +7,6 @@
 		<relativePath>../org.eclipse.xtext.parent</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.standalone.parent</artifactId>
 	<name>Xtext Standalone Library parent</name>
 	<packaging>pom</packaging>
