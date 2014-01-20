@@ -59,15 +59,19 @@ public class FolderAwareTrace extends AbstractTrace {
 	}
 
 	protected File findFile(File container, String candiadate) {
-		for (File child : container.listFiles())
-			if (child.isFile()) {
-				if (child.getAbsolutePath().endsWith(candiadate))
-					return child;
-			} else if (child.isDirectory()) {
-				File result = findFile(child, candiadate);
-				if (result != null)
-					return result;
+		File[] files = container.listFiles();
+		if (files != null) {
+			for (File child : files) {
+				if (child.isFile()) {
+					if (child.getAbsolutePath().endsWith(candiadate))
+						return child;
+				} else if (child.isDirectory()) {
+					File result = findFile(child, candiadate);
+					if (result != null)
+						return result;
+				}
 			}
+		}
 		return null;
 	}
 
