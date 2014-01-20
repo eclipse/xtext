@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.internal.compiler.util.Util;
+import org.eclipse.xtext.common.types.access.binary.signatures.JdtCompilerUtil;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
 import com.google.common.base.Strings;
@@ -30,7 +30,6 @@ import com.google.common.base.Strings;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class BinaryClass {
 
 	private final String name;
@@ -74,7 +73,7 @@ public class BinaryClass {
 		InputStream stream = null;
 		try {
 			stream = classLoader.getResourceAsStream(toClassFile(name));
-			return Util.getInputStreamAsByteArray(stream, -1);
+			return JdtCompilerUtil.getInputStreamAsByteArray(stream, -1);
 		} catch (IOException e) {
 			throw new IllegalStateException("Cannot read bytes for " + e);
 		} finally {
@@ -86,7 +85,7 @@ public class BinaryClass {
 			}
 		}
 	}
-
+	
 	public boolean isPrimitive() {
 		return false;
 	}

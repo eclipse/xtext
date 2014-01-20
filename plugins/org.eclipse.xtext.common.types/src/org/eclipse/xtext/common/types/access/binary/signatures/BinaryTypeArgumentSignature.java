@@ -8,7 +8,6 @@
 package org.eclipse.xtext.common.types.access.binary.signatures;
 
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.jdt.internal.core.util.Util;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,7 +15,6 @@ import org.eclipse.jdt.internal.core.util.Util;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@SuppressWarnings("restriction")
 public class BinaryTypeArgumentSignature extends BinaryGenericTypeSignature {
 
 	BinaryTypeArgumentSignature(char[] chars, int offset, int length) {
@@ -35,7 +33,7 @@ public class BinaryTypeArgumentSignature extends BinaryGenericTypeSignature {
 	
 	public BinaryGenericTypeSignature getUpperBound() {
 		if (chars[offset] == Signature.C_EXTENDS) {
-			int end = Util.scanTypeSignature(chars, offset + 1);
+			int end = JdtCompilerUtil.scanTypeSignature(chars, offset + 1);
 			return new BinaryGenericTypeSignature(chars, offset + 1, end - offset);
 		}
 		return null;
@@ -43,7 +41,7 @@ public class BinaryTypeArgumentSignature extends BinaryGenericTypeSignature {
 	
 	public BinaryGenericTypeSignature getLowerBound() {
 		if (chars[offset] == Signature.C_SUPER) {
-			int end = Util.scanTypeSignature(chars, offset + 1);
+			int end = JdtCompilerUtil.scanTypeSignature(chars, offset + 1);
 			return new BinaryGenericTypeSignature(chars, offset + 1, end - offset);
 		}
 		return null;

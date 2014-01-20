@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.core.compiler.CharOperation;
-import org.eclipse.jdt.internal.core.util.Util;
 
 import com.google.common.collect.Lists;
 
@@ -22,7 +21,6 @@ import com.google.common.collect.Lists;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@SuppressWarnings("restriction")
 public class BinaryGenericTypeSignature extends BinaryTypeSignature {
 
 	BinaryGenericTypeSignature(char[] chars) {
@@ -108,7 +106,7 @@ public class BinaryGenericTypeSignature extends BinaryTypeSignature {
 			if (c == Signature.C_GENERIC_END) {
 				return result;
 			}
-			int end = Util.scanTypeSignature(chars, p);
+			int end = JdtCompilerUtil.scanTypeSignature(chars, p);
 			result.add(new BinaryTypeArgumentSignature(chars, p, end + 1 - p));
 			p = end + 1;
 		}
