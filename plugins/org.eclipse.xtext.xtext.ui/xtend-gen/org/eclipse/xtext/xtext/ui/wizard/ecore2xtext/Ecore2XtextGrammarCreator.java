@@ -412,30 +412,6 @@ public class Ecore2XtextGrammarCreator {
       }
     }
     if (!_matched) {
-      if (it instanceof EDataType) {
-        _matched=true;
-        CharSequence _xifexpression = null;
-        boolean _isSerializable = ((EDataType)it).isSerializable();
-        if (_isSerializable) {
-          StringConcatenation _builder = new StringConcatenation();
-          String _uniqueName = UniqueNameUtil.uniqueName(it);
-          _builder.append(_uniqueName, "");
-          _builder.append(" returns ");
-          String _fqn = Ecore2XtextExtensions.fqn(it);
-          _builder.append(_fqn, "");
-          _builder.append(":");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          String _dataTypeRuleBody = Ecore2XtextExtensions.dataTypeRuleBody(((EDataType)it));
-          _builder.append(_dataTypeRuleBody, "\t");
-          _builder.append(";");
-          _builder.newLineIfNotEmpty();
-          _xifexpression = _builder;
-        }
-        _switchResult = _xifexpression;
-      }
-    }
-    if (!_matched) {
       if (it instanceof EEnum) {
         _matched=true;
         StringConcatenation _builder = new StringConcatenation();
@@ -464,6 +440,30 @@ public class Ecore2XtextGrammarCreator {
         _builder.append(_join, "\t\t\t\t");
         _builder.append(";");
         _switchResult = _builder;
+      }
+    }
+    if (!_matched) {
+      if (it instanceof EDataType) {
+        _matched=true;
+        CharSequence _xifexpression = null;
+        boolean _isSerializable = ((EDataType)it).isSerializable();
+        if (_isSerializable) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _uniqueName = UniqueNameUtil.uniqueName(it);
+          _builder.append(_uniqueName, "");
+          _builder.append(" returns ");
+          String _fqn = Ecore2XtextExtensions.fqn(it);
+          _builder.append(_fqn, "");
+          _builder.append(":");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          String _dataTypeRuleBody = Ecore2XtextExtensions.dataTypeRuleBody(((EDataType)it));
+          _builder.append(_dataTypeRuleBody, "\t");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _xifexpression = _builder;
+        }
+        _switchResult = _xifexpression;
       }
     }
     if (!_matched) {

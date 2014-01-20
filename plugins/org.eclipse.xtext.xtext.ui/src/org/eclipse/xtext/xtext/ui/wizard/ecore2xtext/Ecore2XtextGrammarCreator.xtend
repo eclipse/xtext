@@ -124,6 +124,9 @@ import java.util.List
 						«ENDFOR»
 					'}'«ENDIF»;
 				'''
+			EEnum:
+				'''enum «name.quoteIfNeccesary» returns «fqn»:
+				«it.ELiterals.map([name+" = '"+name+"'"]).join(' | ')»;'''
 			EDataType:
 				if (it.serializable) {
 				'''
@@ -131,9 +134,6 @@ import java.util.List
 					«it.dataTypeRuleBody»;
 				'''
 				}
-			EEnum:
-				'''enum «name.quoteIfNeccesary» returns «fqn»:
-				«it.ELiterals.map([name+" = '"+name+"'"]).join(' | ')»;'''
 			
 			default:	
 				throw new IllegalStateException("No rule template for "+it)
