@@ -338,5 +338,50 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		}
 		'''.expression.assertNoErrors
 	}
+	
+	@Test def void testUnreachableInstanceOf_6() {
+		'''
+		{
+			val x = new Object
+			if (x instanceof java.util.List) {
+				1
+			} else if (x instanceof int[]) {
+				2
+			}
+		}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testUnreachableInstanceOf_7() {
+		'''
+		{
+			val x = new Object
+			val y = new Object
+			if (x instanceof java.io.IOException) {
+				1
+			} else if (y instanceof java.io.FileNotFoundException) {
+				2
+			}
+		}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testUnreachableInstanceOf_8() {
+		'''
+		{
+			val x = new Object
+			val y = new Object
+			if (x instanceof java.io.IOException) {
+				1
+			} else if (y instanceof java.io.IOException) {
+				2
+			} else if (x instanceof java.io.FileNotFoundException) {
+				3
+			} else if (y instanceof java.io.FileNotFoundException) {
+				4
+			}
+		}
+		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK)
+	}
 
 }

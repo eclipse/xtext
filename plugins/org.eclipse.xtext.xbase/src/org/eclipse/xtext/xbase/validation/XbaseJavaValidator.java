@@ -110,6 +110,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithNonNullResult;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.util.TypesOrderUtil;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
@@ -169,6 +170,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject 
 	private XSwitchExpressions switchExpressions;
+	
+	@Inject 
+	private TypesOrderUtil typesOrderUtil;
 	
 	@Inject
 	private SwitchConstantExpressionsInterpreter switchConstantExpressionsInterpreter; 
@@ -1388,22 +1392,32 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 		List<XExpression> ifParts = collectIfParts(expression, new ArrayList<XExpression>());
 		OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(getServices(), expression));
-		List<LightweightTypeReference> previousTypeReferences = new ArrayList<LightweightTypeReference>();
+		Multimap<JvmIdentifiableElement, LightweightTypeReference> previousTypeReferences = HashMultimap.create();
 		for (XExpression ifPart : ifParts) {
 			if (!(ifPart instanceof XInstanceOfExpression)) {
 				continue;
 			}
 			XInstanceOfExpression instanceOfExpression = (XInstanceOfExpression) ifPart;
+			if (!(instanceOfExpression.getExpression() instanceof XAbstractFeatureCall)) {
+				continue;
+			}
+			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) instanceOfExpression.getExpression();
+			JvmIdentifiableElement feature = featureCall.getFeature();
+			if (!(feature instanceof XVariableDeclaration)
+					&& !(feature instanceof JvmField)
+					&& !(feature instanceof JvmFormalParameter)) {
+				continue;
+			}
 			JvmTypeReference type = instanceOfExpression.getType();
 			LightweightTypeReference actualType = converter.toLightweightReference(type);
 			if (actualType == null) {
 				continue;
 			}
-			if (isHandled(actualType, previousTypeReferences)) {
+			if (isHandled(actualType, previousTypeReferences.get(feature))) {
 				addIssue("Unreachable code: The if condition can never match. It is already handled by a previous condition.", type, IssueCodes.UNREACHABLE_IF_BLOCK);
 				continue;
 			}
-			previousTypeReferences.add(actualType);
+			previousTypeReferences.put(feature, actualType);
 		}
 	}
 	
@@ -1432,13 +1446,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 
-	private boolean isHandled(LightweightTypeReference actualTypeReference, List<LightweightTypeReference> previousTypeReferences) {
-		for (LightweightTypeReference previousTypeReference : previousTypeReferences) {
-			if (actualTypeReference.isSubtypeOf(previousTypeReference.getType())) {
-				return true;
-			}
-		}
-		return false;
+	protected boolean isHandled(LightweightTypeReference actualTypeReference, Collection<LightweightTypeReference> collection) {
+		return typesOrderUtil.isHandled(actualTypeReference, collection);
 	}
 	
 }
