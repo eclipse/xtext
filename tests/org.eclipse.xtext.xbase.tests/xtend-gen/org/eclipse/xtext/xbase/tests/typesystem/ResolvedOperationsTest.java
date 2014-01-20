@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.UnmodifiableIterator;
 import com.google.inject.Inject;
@@ -184,22 +185,27 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
         EList<JvmFormalParameter> _parameters = _declaration.getParameters();
         int _size = _parameters.size();
         final int _switchValue = _size;
-        switch (_switchValue) {
-          case 1:
+        boolean _matched = false;
+        if (!_matched) {
+          if (Objects.equal(_switchValue,1)) {
+            _matched=true;
             String _resolvedSignature = it.getResolvedSignature();
             Assert.assertEquals("SoftReference(T)", _resolvedSignature);
             String _resolvedErasureSignature = it.getResolvedErasureSignature();
             Assert.assertEquals("SoftReference(java.lang.Object)", _resolvedErasureSignature);
-            break;
-          case 2:
+          }
+        }
+        if (!_matched) {
+          if (Objects.equal(_switchValue,2)) {
+            _matched=true;
             String _resolvedSignature_1 = it.getResolvedSignature();
             Assert.assertEquals("SoftReference(T,java.lang.ref.ReferenceQueue<? super T>)", _resolvedSignature_1);
             String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
             Assert.assertEquals("SoftReference(java.lang.Object,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
-            break;
-          default:
-            Assert.fail(("Unexpected constructor: " + it));
-            break;
+          }
+        }
+        if (!_matched) {
+          Assert.fail(("Unexpected constructor: " + it));
         }
       }
     };
@@ -222,22 +228,27 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
         EList<JvmFormalParameter> _parameters = _declaration.getParameters();
         int _size = _parameters.size();
         final int _switchValue = _size;
-        switch (_switchValue) {
-          case 1:
+        boolean _matched = false;
+        if (!_matched) {
+          if (Objects.equal(_switchValue,1)) {
+            _matched=true;
             String _resolvedSignature = it.getResolvedSignature();
             Assert.assertEquals("SoftReference(java.lang.String)", _resolvedSignature);
             String _resolvedErasureSignature = it.getResolvedErasureSignature();
             Assert.assertEquals("SoftReference(java.lang.String)", _resolvedErasureSignature);
-            break;
-          case 2:
+          }
+        }
+        if (!_matched) {
+          if (Objects.equal(_switchValue,2)) {
+            _matched=true;
             String _resolvedSignature_1 = it.getResolvedSignature();
             Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue<? super java.lang.String>)", _resolvedSignature_1);
             String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
             Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
-            break;
-          default:
-            Assert.fail(("Unexpected constructor: " + it));
-            break;
+          }
+        }
+        if (!_matched) {
+          Assert.fail(("Unexpected constructor: " + it));
         }
       }
     };

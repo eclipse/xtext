@@ -365,21 +365,30 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public Visibility toVisibility(final JvmVisibility delegate) {
     Visibility _switchResult = null;
-    switch (delegate) {
-      case DEFAULT:
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(delegate,JvmVisibility.DEFAULT)) {
+        _matched=true;
         _switchResult = Visibility.DEFAULT;
-        break;
-      case PRIVATE:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(delegate,JvmVisibility.PRIVATE)) {
+        _matched=true;
         _switchResult = Visibility.PRIVATE;
-        break;
-      case PROTECTED:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(delegate,JvmVisibility.PROTECTED)) {
+        _matched=true;
         _switchResult = Visibility.PROTECTED;
-        break;
-      case PUBLIC:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(delegate,JvmVisibility.PUBLIC)) {
+        _matched=true;
         _switchResult = Visibility.PUBLIC;
-        break;
-      default:
-        break;
+      }
     }
     return _switchResult;
   }

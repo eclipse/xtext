@@ -98,10 +98,15 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
           URL url = null;
           int _entryKind = entry.getEntryKind();
           final int _switchValue = _entryKind;
-          switch (_switchValue) {
-            case IClasspathEntry.CPE_SOURCE:
-              break;
-            case IClasspathEntry.CPE_PROJECT:
+          boolean _matched = false;
+          if (!_matched) {
+            if (Objects.equal(_switchValue,IClasspathEntry.CPE_SOURCE)) {
+              _matched=true;
+            }
+          }
+          if (!_matched) {
+            if (Objects.equal(_switchValue,IClasspathEntry.CPE_PROJECT)) {
+              _matched=true;
               IPath path = entry.getPath();
               IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot(projectToUse);
               final IResource project = _workspaceRoot.findMember(path);
@@ -109,8 +114,11 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
               IJavaProject _create = JavaCore.create(_project);
               List<URL> _outputFolders_1 = this.getOutputFolders(_create);
               urls.addAll(_outputFolders_1);
-              break;
-            case IClasspathEntry.CPE_LIBRARY:
+            }
+          }
+          if (!_matched) {
+            if (Objects.equal(_switchValue,IClasspathEntry.CPE_LIBRARY)) {
+              _matched=true;
               IPath path_1 = entry.getPath();
               IWorkspaceRoot _workspaceRoot_1 = this.getWorkspaceRoot(projectToUse);
               final IResource library = _workspaceRoot_1.findMember(path_1);
@@ -125,16 +133,16 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
                 _xifexpression = _uRI.toURL();
               }
               url = _xifexpression;
-              break;
-            default:
-              {
-                IPath path_2 = entry.getPath();
-                File _file_1 = path_2.toFile();
-                URI _uRI_1 = _file_1.toURI();
-                URL _uRL = _uRI_1.toURL();
-                url = _uRL;
-              }
-              break;
+            }
+          }
+          if (!_matched) {
+            {
+              IPath path_2 = entry.getPath();
+              File _file_1 = path_2.toFile();
+              URI _uRI_1 = _file_1.toURI();
+              URL _uRL = _uRI_1.toURL();
+              url = _uRL;
+            }
           }
           boolean _notEquals_1 = (!Objects.equal(url, null));
           if (_notEquals_1) {
@@ -170,8 +178,10 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       for (final IClasspathEntry entry : _rawClasspath) {
         int _entryKind = entry.getEntryKind();
         final int _switchValue = _entryKind;
-        switch (_switchValue) {
-          case IClasspathEntry.CPE_SOURCE:
+        boolean _matched = false;
+        if (!_matched) {
+          if (Objects.equal(_switchValue,IClasspathEntry.CPE_SOURCE)) {
+            _matched=true;
             IPath _outputLocation_1 = entry.getOutputLocation();
             path = _outputLocation_1;
             boolean _notEquals = (!Objects.equal(path, null));
@@ -184,7 +194,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
               url = _uRL;
               result.add(url);
             }
-            break;
+          }
         }
       }
       return result;

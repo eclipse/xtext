@@ -225,19 +225,27 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     String _switchResult = null;
     JvmVisibility _visibility = this.getVisibility();
     final JvmVisibility getVisibility = _visibility;
-    switch (getVisibility) {
-      case PRIVATE:
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(getVisibility,JvmVisibility.PRIVATE)) {
+        _matched=true;
         _switchResult = "methpri_obj.gif";
-        break;
-      case PROTECTED:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(getVisibility,JvmVisibility.PROTECTED)) {
+        _matched=true;
         _switchResult = "methpro_obj.gif";
-        break;
-      case PUBLIC:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(getVisibility,JvmVisibility.PUBLIC)) {
+        _matched=true;
         _switchResult = "methpub_obj.gif";
-        break;
-      default:
-        _switchResult = "methdef_obj.gif";
-        break;
+      }
+    }
+    if (!_matched) {
+      _switchResult = "methdef_obj.gif";
     }
     return _switchResult;
   }

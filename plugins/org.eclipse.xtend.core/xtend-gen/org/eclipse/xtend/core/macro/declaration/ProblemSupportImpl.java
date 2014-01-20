@@ -160,21 +160,30 @@ public class ProblemSupportImpl implements ProblemSupport {
   
   private Problem.Severity translateSeverity(final Severity severity) {
     Problem.Severity _switchResult = null;
-    switch (severity) {
-      case ERROR:
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(severity,Severity.ERROR)) {
+        _matched=true;
         _switchResult = Problem.Severity.ERROR;
-        break;
-      case WARNING:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(severity,Severity.WARNING)) {
+        _matched=true;
         _switchResult = Problem.Severity.WARNING;
-        break;
-      case INFO:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(severity,Severity.INFO)) {
+        _matched=true;
         _switchResult = Problem.Severity.INFO;
-        break;
-      case IGNORE:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(severity,Severity.IGNORE)) {
+        _matched=true;
         _switchResult = Problem.Severity.IGNORE;
-        break;
-      default:
-        break;
+      }
     }
     return _switchResult;
   }

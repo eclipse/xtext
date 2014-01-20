@@ -63,21 +63,30 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
   public void setVisibility(final Visibility visibility) {
     T _delegate = this.getDelegate();
     JvmVisibility _switchResult = null;
-    switch (visibility) {
-      case DEFAULT:
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(visibility,Visibility.DEFAULT)) {
+        _matched=true;
         _switchResult = JvmVisibility.DEFAULT;
-        break;
-      case PUBLIC:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(visibility,Visibility.PUBLIC)) {
+        _matched=true;
         _switchResult = JvmVisibility.PUBLIC;
-        break;
-      case PRIVATE:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(visibility,Visibility.PRIVATE)) {
+        _matched=true;
         _switchResult = JvmVisibility.PRIVATE;
-        break;
-      case PROTECTED:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(visibility,Visibility.PROTECTED)) {
+        _matched=true;
         _switchResult = JvmVisibility.PROTECTED;
-        break;
-      default:
-        break;
+      }
     }
     _delegate.setVisibility(_switchResult);
   }

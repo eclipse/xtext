@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -50,19 +51,27 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
     String _switchResult = null;
     JvmVisibility _visibility = this.getVisibility();
     final JvmVisibility getVisibility = _visibility;
-    switch (getVisibility) {
-      case PRIVATE:
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(getVisibility,JvmVisibility.PRIVATE)) {
+        _matched=true;
         _switchResult = "field_private_obj.gif";
-        break;
-      case PROTECTED:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(getVisibility,JvmVisibility.PROTECTED)) {
+        _matched=true;
         _switchResult = "field_protected_obj.gif";
-        break;
-      case PUBLIC:
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(getVisibility,JvmVisibility.PUBLIC)) {
+        _matched=true;
         _switchResult = "field_public_obj.gif";
-        break;
-      default:
-        _switchResult = "field_default_obj.gif";
-        break;
+      }
+    }
+    if (!_matched) {
+      _switchResult = "field_default_obj.gif";
     }
     return _switchResult;
   }
