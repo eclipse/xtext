@@ -78,7 +78,6 @@ import com.google.inject.Inject;
  * @noinstantiate This class is not intended to be instantiated by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
 @SuppressWarnings("restriction")
 public class ReflectionTypeFactory implements ITypeFactory<Class<?>, JvmDeclaredType> {
 
