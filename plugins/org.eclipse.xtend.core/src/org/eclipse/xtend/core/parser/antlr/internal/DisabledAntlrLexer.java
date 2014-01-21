@@ -17,17 +17,14 @@ import org.antlr.runtime.Token;
 public class DisabledAntlrLexer extends InternalXtendLexer {
 
 	public DisabledAntlrLexer() {
-		throw new UnsupportedOperationException("Missing binding or override");
 	}
 
 	public DisabledAntlrLexer(CharStream input, RecognizerSharedState state) {
 		super(input, state);
-		throw new UnsupportedOperationException("Missing binding or override");
 	}
 
 	public DisabledAntlrLexer(CharStream input) {
 		super(input);
-		throw new UnsupportedOperationException("Missing binding or override");
 	}
 
 	@Override
