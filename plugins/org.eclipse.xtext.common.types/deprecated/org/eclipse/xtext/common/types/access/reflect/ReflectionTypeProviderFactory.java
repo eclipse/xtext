@@ -16,7 +16,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
 public class ReflectionTypeProviderFactory extends AbstractTypeProviderFactory {
 
 	private final ClassLoader classLoader;

@@ -23,7 +23,6 @@ import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
 public class ReflectionTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
 	private final ClassFinder classFinder;

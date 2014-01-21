@@ -23,7 +23,6 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Deprecated
 public class ReflectURIHelper implements URIHelperConstants {
 
 	public URI createResourceURI(Type type) {
