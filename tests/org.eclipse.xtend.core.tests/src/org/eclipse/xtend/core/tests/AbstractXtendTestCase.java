@@ -24,6 +24,7 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -51,6 +52,8 @@ public abstract class AbstractXtendTestCase extends Assert {
 
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
+
+	private static final boolean CONVERTION_TO_UNIX_LN_NEEDED = !StringConcatenation.DEFAULT_LINE_DELIMITER.equals("\n");
 
 	protected XtendClass clazz(String string) throws Exception {
 		return (XtendClass) file(string).getXtendTypes().get(0);
@@ -146,4 +149,16 @@ public abstract class AbstractXtendTestCase extends Assert {
 		return (XtendField) clazz.getMembers().get(0);
 	}
 
+	/**
+	 * Convert platform newlines to internal newlines.
+	 * <pre>
+	 * System.getProperty("line.separator") =&gt; "\n"
+	 * </pre>
+	 */
+	protected String toUnixLn(String multilineString) {
+		if (CONVERTION_TO_UNIX_LN_NEEDED) {
+			return multilineString.replace(StringConcatenation.DEFAULT_LINE_DELIMITER, "\n");
+		}
+		return multilineString;
+	}
 }

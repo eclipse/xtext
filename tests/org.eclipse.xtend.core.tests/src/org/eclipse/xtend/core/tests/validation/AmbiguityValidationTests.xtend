@@ -8,19 +8,19 @@
 package org.eclipse.xtend.core.tests.validation
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.xbase.validation.IssueCodes
-import org.eclipse.xtext.diagnostics.AbstractDiagnostic
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtend.core.xtend.XtendFunction
-import org.eclipse.xtext.xbase.XBlockExpression
-import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate
-import org.junit.Test
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic
+import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
+import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
+import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate
+import org.eclipse.xtext.xbase.validation.IssueCodes
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -37,7 +37,7 @@ abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
 		assertEquals(errors.toString, 1, errors.size)
 		val singleError = errors.head as AbstractDiagnostic
 		assertEquals(singleError.message, IssueCodes.AMBIGUOUS_FEATURE_CALL, singleError.code)
-		messageParts.forEach [
+		messageParts.map[toUnixLn].forEach [
 			val message = singleError.message
 			if (!message.contains(it)) {
 				assertEquals(it, message)
