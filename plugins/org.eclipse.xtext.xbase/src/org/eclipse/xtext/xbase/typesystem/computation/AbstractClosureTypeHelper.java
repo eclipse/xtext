@@ -11,6 +11,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -84,7 +85,7 @@ public abstract class AbstractClosureTypeHelper {
 			// specializations or it may be possible that this specialization is no longer necessary.
 			ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(expectation.getReferenceOwner()) {
 				
-				class UnboundTypeReferencePreserver extends DeferredParameterizedTypeReferenceTraverser {
+				class UnboundParameterizedTypeReferencePreserver extends DeferredParameterizedTypeReferenceTraverser {
 					@Override
 					public void doVisitUnboundTypeReference(UnboundTypeReference reference,
 							ParameterizedTypeReference declaration) {
@@ -95,7 +96,18 @@ public abstract class AbstractClosureTypeHelper {
 							addHint(reference, declaration);
 						}
 					}
-					
+				}
+				class UnboundArrayTypeReferencePreserver extends DeferredArrayTypeReferenceTraverser {
+					@Override
+					public void doVisitUnboundTypeReference(UnboundTypeReference reference,
+							ArrayTypeReference declaration) {
+						if (reference.internalIsResolved() || getOwner().isResolved(reference.getHandle())) {
+							reference.tryResolve();
+							outerVisit(reference, declaration);
+						} else {
+							addHint(reference, declaration);
+						}
+					}
 				}
 				
 				@Override
@@ -109,7 +121,11 @@ public abstract class AbstractClosureTypeHelper {
 				
 				@Override
 				protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
-					return new UnboundTypeReferencePreserver();
+					return new UnboundParameterizedTypeReferencePreserver();
+				}
+				@Override
+				protected ArrayTypeReferenceTraverser createArrayTypeReferenceTraverser() {
+					return new UnboundArrayTypeReferencePreserver();
 				}
 			};
 			collector.processPairedReferences(declared, actual);

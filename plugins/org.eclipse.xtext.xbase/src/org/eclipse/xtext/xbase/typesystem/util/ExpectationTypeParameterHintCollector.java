@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -120,6 +121,54 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 			super.doVisitUnboundTypeReference(reference, declaration);
 		}
 	}
+	
+	protected class DeferredArrayTypeReferenceTraverser extends ArrayTypeReferenceTraverser {
+		@Override
+		public void doVisitUnboundTypeReference(UnboundTypeReference reference, ArrayTypeReference declaration) {
+			boolean constraintSeen = false;
+			boolean constraintsMatch = true;
+			boolean othersSeen = false;
+			boolean declarationMatches = getExpectedVariance() != VarianceInfo.OUT;
+			List<LightweightBoundTypeArgument> hints = reference.getAllHints();
+			for(int i = 0; i < hints.size(); i++) {
+				LightweightBoundTypeArgument hint = hints.get(i);
+				if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+					constraintSeen = true;
+					outerVisit(hint.getTypeReference(), declaration, hint.getSource(), hint.getDeclaredVariance(), hint.getActualVariance());
+					if (constraintsMatch && !hint.getTypeReference().isAssignableFrom(declaration)) {
+						constraintsMatch = false;
+					}
+				} else {
+					othersSeen = true;
+					// we don't break the list traversal here since we want to do the paired outerVisit for all constraints
+					if (declarationMatches) {
+						if (hint.getActualVariance() == VarianceInfo.OUT && hint.getDeclaredVariance() == VarianceInfo.OUT && 
+								(hint.getSource() == BoundTypeArgumentSource.INFERRED || hint.getSource() == BoundTypeArgumentSource.INFERRED_LATER)) {
+							if (!declaration.isAssignableFrom(hint.getTypeReference())) {
+								declarationMatches = false;
+							}
+						} else {
+							declarationMatches = false;
+						}
+					}
+				}
+			}
+			if (constraintSeen && constraintsMatch && !othersSeen) {
+				reference.acceptHint(declaration, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+			} else if (!constraintSeen && !reference.internalIsResolved() && declaration.isResolved() && !getOwner().isResolved(reference.getHandle()) && reference.canResolveTo(declaration)) {
+				reference.acceptHint(declaration, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+			} else if (othersSeen && declarationMatches) {
+				reference.acceptHint(declaration, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+			} else {
+				reference.tryResolve();
+				if (reference.internalIsResolved()) {
+					outerVisit(reference, declaration);
+				} else {
+					addHint(reference, declaration);
+				}
+			}
+		}
+	}
 
 	public ExpectationTypeParameterHintCollector(ITypeReferenceOwner owner) {
 		super(owner);
@@ -139,6 +188,11 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 	@Override
 	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
 		return new DeferredParameterizedTypeReferenceTraverser();
+	}
+	
+	@Override
+	protected ArrayTypeReferenceTraverser createArrayTypeReferenceTraverser() {
+		return new DeferredArrayTypeReferenceTraverser();
 	}
 	
 }
