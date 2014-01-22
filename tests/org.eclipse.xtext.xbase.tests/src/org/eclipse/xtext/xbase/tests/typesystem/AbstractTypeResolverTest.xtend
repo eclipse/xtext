@@ -1133,6 +1133,14 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 			val fun = [ x | x ]
 			val java.util.List<String> list = newArrayList(fun.apply(null))
 			fun
+		}".resolvesTo("(String[])=>String[]").isFunctionAndEquivalentTo("Function1<String[], String[]>")
+	}
+	
+	@Test def void testClosure_16_02() throws Exception {
+		"{ 
+			val fun = [ x | x ]
+			val java.util.List<String> list = newArrayList(fun.apply(null), fun.apply(null))
+			fun
 		}".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
 	}
 	
