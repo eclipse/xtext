@@ -120,7 +120,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	protected boolean isZipFile(IPath path) {
 		if (path.getFileExtension() == null)
 			return false;
-		String ext = path.getFileExtension().toLowerCase();
+		String ext = path.getFileExtension();
 		return "jar".equalsIgnoreCase(ext) || "zip".equalsIgnoreCase(ext);
 	}
 
