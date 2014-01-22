@@ -312,7 +312,7 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 			val fun = [ x | x ]
 			val java.util.List<String> list = newArrayList(fun.apply(null))
 			fun
-		}".resolvesIdentifiablesTo("(String)=>String", "String", "List<String>")
+		}".resolvesIdentifiablesTo("(String[])=>String[]", "String[]", "List<String>")
 	}
 	
 	@Test def void testClosure_17() throws Exception {

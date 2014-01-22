@@ -1281,7 +1281,13 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testClosure_16() throws Exception {
-    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null))\n\t\t\tfun\n\t\t}", "(String)=>String");
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null))\n\t\t\tfun\n\t\t}", "(String[])=>String[]");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String[], String[]>");
+  }
+  
+  @Test
+  public void testClosure_16_02() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null), fun.apply(null))\n\t\t\tfun\n\t\t}", "(String)=>String");
     this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
   }
   

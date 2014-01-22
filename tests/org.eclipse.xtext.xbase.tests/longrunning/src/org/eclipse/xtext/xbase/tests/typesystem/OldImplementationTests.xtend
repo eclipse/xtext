@@ -325,6 +325,9 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testClosure_16() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testClosure_16_02() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testClosure_17() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -2053,6 +2056,12 @@ class OldAPIClosureTypeTest extends AbstractOldAPIClosureTypeTest {
 	
 	@Ignore("fails in old impl")
 	@Test
+	override testClosure_09_2() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
 	override testClosure_10() throws Exception {
 		fail("fails in old impl")
 	}
@@ -2192,6 +2201,12 @@ class OldAPIClosureTypeTest extends AbstractOldAPIClosureTypeTest {
 	@Ignore("fails in old impl")
 	@Test
 	override testClosure_37() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testClosure_37_02() throws Exception {
 		fail("fails in old impl")
 	}
 	

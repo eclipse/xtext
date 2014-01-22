@@ -233,6 +233,12 @@ public class OldAPIClosureTypeTest extends AbstractOldAPIClosureTypeTest {
   
   @Ignore("fails in old impl")
   @Test
+  public void testClosure_09_2() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore("fails in old impl")
+  @Test
   public void testClosure_10() throws Exception {
     Assert.fail("fails in old impl");
   }
@@ -372,6 +378,12 @@ public class OldAPIClosureTypeTest extends AbstractOldAPIClosureTypeTest {
   @Ignore("fails in old impl")
   @Test
   public void testClosure_37() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore("fails in old impl")
+  @Test
+  public void testClosure_37_02() throws Exception {
     Assert.fail("fails in old impl");
   }
   

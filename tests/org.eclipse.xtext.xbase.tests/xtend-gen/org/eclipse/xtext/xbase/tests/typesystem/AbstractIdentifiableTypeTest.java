@@ -404,7 +404,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   
   @Test
   public void testClosure_16() throws Exception {
-    this.resolvesIdentifiablesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null))\n\t\t\tfun\n\t\t}", "(String)=>String", "String", "List<String>");
+    this.resolvesIdentifiablesTo("{ \n\t\t\tval fun = [ x | x ]\n\t\t\tval java.util.List<String> list = newArrayList(fun.apply(null))\n\t\t\tfun\n\t\t}", "(String[])=>String[]", "String[]", "List<String>");
   }
   
   @Test

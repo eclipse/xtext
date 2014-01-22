@@ -634,6 +634,14 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			val fun = [ x | x ]
 			val java.util.List<String> list = newArrayList(fun.apply(null))
 			fun
+		}".resolvesClosuresTo("(String[])=>String[]").withEquivalents("Function1<String[], String[]>")
+	}
+	
+	@Test def void testClosure_09_2() throws Exception {
+		"{ 
+			val fun = [ x | x ]
+			val java.util.List<String> list = newArrayList(fun.apply(null), fun.apply(null))
+			fun
 		}".resolvesClosuresTo("(String)=>String").withEquivalents("Function1<String, String>")
 	}
 	
@@ -830,6 +838,14 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 		"{ 
 			val fun = [ x | return x ]
 			val java.util.List<String> list = newArrayList(fun.apply(null))
+			fun
+		}".resolvesClosuresTo("(String[])=>String[]").withEquivalents("Function1<String[], String[]>")
+	}
+	
+	@Test def void testClosure_37_02() throws Exception {
+		"{ 
+			val fun = [ x | return x ]
+			val java.util.List<String> list = newArrayList(fun.apply(null), fun.apply(null))
 			fun
 		}".resolvesClosuresTo("(String)=>String").withEquivalents("Function1<String, String>")
 	}
