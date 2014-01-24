@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.net.URL;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.common.types.access.binary.signatures.JdtCompilerUtil;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
 import com.google.common.base.Strings;
@@ -73,7 +72,7 @@ public class BinaryClass {
 		InputStream stream = null;
 		try {
 			stream = classLoader.getResourceAsStream(toClassFile(name));
-			return JdtCompilerUtil.getInputStreamAsByteArray(stream, -1);
+			return getInputStreamAsByteArray(stream, -1);
 		} catch (IOException e) {
 			throw new IllegalStateException("Cannot read bytes for " + e);
 		} finally {
@@ -84,6 +83,68 @@ public class BinaryClass {
 				// ignore
 			}
 		}
+	}
+	
+	private static final int DEFAULT_READING_SIZE = 8192;
+	
+	/**
+	 * Returns the given input stream's contents as a byte array.
+	 * If a length is specified (i.e. if length != -1), only length bytes
+	 * are returned. Otherwise all bytes in the stream are returned.
+	 * Note this doesn't close the stream.
+	 * @throws IOException if a problem occured reading the stream.
+	 */
+	private byte[] getInputStreamAsByteArray(InputStream stream, int length)
+			throws IOException {
+		byte[] contents;
+		if (length == -1) {
+			contents = new byte[0];
+			int contentsLength = 0;
+			int amountRead = -1;
+			do {
+				int amountRequested = Math.max(stream.available(), DEFAULT_READING_SIZE);  // read at least 8K
+
+				// resize contents if needed
+				if (contentsLength + amountRequested > contents.length) {
+					System.arraycopy(
+						contents,
+						0,
+						contents = new byte[contentsLength + amountRequested],
+						0,
+						contentsLength);
+				}
+
+				// read as many bytes as possible
+				amountRead = stream.read(contents, contentsLength, amountRequested);
+
+				if (amountRead > 0) {
+					// remember length of contents
+					contentsLength += amountRead;
+				}
+			} while (amountRead != -1);
+
+			// resize contents if necessary
+			if (contentsLength < contents.length) {
+				System.arraycopy(
+					contents,
+					0,
+					contents = new byte[contentsLength],
+					0,
+					contentsLength);
+			}
+		} else {
+			contents = new byte[length];
+			int len = 0;
+			int readSize = 0;
+			while ((readSize != -1) && (len != length)) {
+				// See PR 1FMS89U
+				// We record first the read size. In this case len is the actual read size.
+				len += readSize;
+				readSize = stream.read(contents, len, length - len);
+			}
+		}
+
+		return contents;
 	}
 	
 	public boolean isPrimitive() {

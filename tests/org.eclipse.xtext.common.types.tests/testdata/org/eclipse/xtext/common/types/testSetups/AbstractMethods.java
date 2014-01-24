@@ -14,5 +14,7 @@ public abstract class AbstractMethods {
 
 	abstract void abstractMethod();
 	
+	abstract void abstractMethodWithParameter(String parameterName);
+	
 	void concreteMethod() {}
 }

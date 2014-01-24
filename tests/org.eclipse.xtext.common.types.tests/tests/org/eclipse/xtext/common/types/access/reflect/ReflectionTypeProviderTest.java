@@ -25,6 +25,9 @@ import org.eclipse.xtext.common.types.access.impl.ClassMirror;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.PrimitiveMirror;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
+import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
+import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.common.types.testSetups.TestConstants;
 import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -344,5 +347,20 @@ public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 	public void testConstantValue_09() {
 		doTestConstantValue("booleanConstant", TestConstants.booleanConstant);
 	}
-	
+
+	@Override
+	@Test
+	public void testParameterNames_01() {
+		doTestParameterName(Bug347739ThreeTypeParamsSuperSuper.class, "getToken(A)", "arg0");
+	}
+	@Override
+	@Test
+	public void testParameterNames_02() {
+		doTestParameterName(AbstractMethods.class, "abstractMethodWithParameter(java.lang.String)", "arg0");
+	}
+	@Override
+	@Test
+	public void testParameterNames_03() {
+		doTestParameterName(ClassWithVarArgs.class, "method(java.lang.String[])", "arg0");
+	}
 }

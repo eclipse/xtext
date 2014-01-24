@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtend.caliper.tests.clazz;
 
 /**
  * Facade to obtain instances of binary signatures from char arrays.
@@ -15,7 +15,7 @@ package org.eclipse.xtext.common.types.access.binary.signatures;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-public class BinarySignatures {
+class BinarySignatures {
 
 	private BinarySignatures() {
 		throw new UnsupportedOperationException("only static utilities");

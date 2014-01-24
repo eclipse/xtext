@@ -35,6 +35,8 @@ import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.PrimitiveMirror;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
+import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
 import org.eclipse.xtext.common.types.util.jdt.JavaElementFinder;
 import org.junit.After;
 import org.junit.Ignore;
@@ -297,5 +299,16 @@ public class JdtTypeProviderTest extends AbstractJdtTypeProviderTest {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	@Test
+	public void testParameterNames_01() {
+		doTestParameterName(Bug347739ThreeTypeParamsSuperSuper.class, "getToken(A)", "arg0");
+	}
+	@Override
+	@Test
+	public void testParameterNames_02() {
+		doTestParameterName(AbstractMethods.class, "abstractMethodWithParameter(java.lang.String)", "arg0");
 	}
 }

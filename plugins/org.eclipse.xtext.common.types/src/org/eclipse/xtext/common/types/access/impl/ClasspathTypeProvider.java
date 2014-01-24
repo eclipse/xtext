@@ -28,7 +28,7 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.binary.BinaryClass;
 import org.eclipse.xtext.common.types.access.binary.BinaryClassFinder;
 import org.eclipse.xtext.common.types.access.binary.BinaryClassMirror;
-import org.eclipse.xtext.common.types.access.binary.ClassFileReaderAccess;
+import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -115,7 +115,7 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	
 	private final ClassLoader classLoader;
 	
-	private final ClassFileReaderAccess readerAccess;
+	private final ClassFileBytesAccess readerAccess;
 	
 	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
 		super(resourceSet, indexedJvmTypeAccess);
@@ -126,8 +126,8 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		((JavaURIConverter)resourceSet.getURIConverter()).classLoader = classLoader;
 	}
 	
-	protected ClassFileReaderAccess createClassFileReaderAccess() {
-		return new ClassFileReaderAccess();
+	protected ClassFileBytesAccess createClassFileReaderAccess() {
+		return new ClassFileBytesAccess();
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		return new BinaryClassFinder(classLoader);
 	}
 
-	protected ITypeFactory<BinaryClass, JvmDeclaredType> createDeclaredTypeFactory(ClassFileReaderAccess readerAccess, ClassLoader classLoader) {
+	protected ITypeFactory<BinaryClass, JvmDeclaredType> createDeclaredTypeFactory(ClassFileBytesAccess readerAccess, ClassLoader classLoader) {
 		return new DeclaredTypeFactory(readerAccess, classLoader);
 	}
 
@@ -266,5 +266,6 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		} 
 		return result;
 	}
+
 
 }

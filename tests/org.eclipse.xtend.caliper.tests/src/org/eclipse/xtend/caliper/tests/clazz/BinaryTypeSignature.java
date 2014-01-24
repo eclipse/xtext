@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtend.caliper.tests.clazz;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +20,7 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-public class BinaryTypeSignature extends AbstractBinarySignature {
+class BinaryTypeSignature extends AbstractBinarySignature {
 	
 	protected int arrayDimensions = -1;
 	
