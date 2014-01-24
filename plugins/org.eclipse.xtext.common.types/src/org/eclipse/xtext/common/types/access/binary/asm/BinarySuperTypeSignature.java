@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtext.common.types.access.binary.asm;
 
 import java.util.List;
 
@@ -19,16 +19,16 @@ import com.google.common.collect.Lists;
  */
 public class BinarySuperTypeSignature extends AbstractBinarySignature {
 
-	BinarySuperTypeSignature(char[] chars) {
+	BinarySuperTypeSignature(String chars) {
 		super(chars);
 	}
 
 	public List<BinaryGenericTypeSignature> getSuperTypes() {
 		int index = offset;
-		if (chars[offset] == '<') {
+		if (chars.charAt(offset) == '<') {
 			int count = 1;
 			while (count > 0 && ++index < offset + length) {
-				switch (chars[index]) {
+				switch (chars.charAt(index)) {
 					case '<':
 						count++;
 						break;
@@ -41,7 +41,7 @@ public class BinarySuperTypeSignature extends AbstractBinarySignature {
 		}
 		List<BinaryGenericTypeSignature> result = Lists.newArrayListWithCapacity(2);
 		while(index != offset + length) {
-			int end = JdtCompilerUtil.scanTypeSignature(chars, index) + 1;
+			int end = SignatureUtil.scanTypeSignature(chars, index) + 1;
 			result.add(new BinaryGenericTypeSignature(chars, index, end - index));
 			index = end;
 		}

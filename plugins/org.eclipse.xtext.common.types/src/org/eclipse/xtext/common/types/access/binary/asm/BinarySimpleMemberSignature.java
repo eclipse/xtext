@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtext.common.types.access.binary.asm;
 
 import org.eclipse.emf.common.util.URI;
 
@@ -20,7 +20,7 @@ public class BinarySimpleMemberSignature extends AbstractBinarySignature {
 	private final BinaryTypeSignature type;
 	private boolean operation;
 
-	BinarySimpleMemberSignature(BinaryTypeSignature type, char[] field, boolean operation) {
+	BinarySimpleMemberSignature(BinaryTypeSignature type, String field, boolean operation) {
 		super(field);
 		this.type = type;
 		this.operation = operation;

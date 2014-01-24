@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtend.caliper.tests.clazz;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +18,7 @@ import org.eclipse.jdt.core.Signature;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-public class BinaryErasureTypeSignature extends BinaryGenericTypeSignature {
+class BinaryErasureTypeSignature extends BinaryGenericTypeSignature {
 
 	BinaryErasureTypeSignature(BinaryGenericTypeSignature genericSignature, int arrayDimensions) {
 		super(genericSignature.chars, genericSignature.offset + arrayDimensions, genericSignature.length - arrayDimensions);

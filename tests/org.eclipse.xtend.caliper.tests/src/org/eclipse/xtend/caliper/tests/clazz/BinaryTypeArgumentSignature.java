@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtend.caliper.tests.clazz;
 
 import org.eclipse.jdt.core.Signature;
 
@@ -15,7 +15,7 @@ import org.eclipse.jdt.core.Signature;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-public class BinaryTypeArgumentSignature extends BinaryGenericTypeSignature {
+class BinaryTypeArgumentSignature extends BinaryGenericTypeSignature {
 
 	BinaryTypeArgumentSignature(char[] chars, int offset, int length) {
 		super(chars, offset, length);
