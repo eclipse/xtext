@@ -1,12 +1,18 @@
-package org.eclipse.xtext.common.types.access.binary.signatures;
+/*******************************************************************************
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.common.types.access.binary.asm;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import org.eclipse.jdt.internal.compiler.util.SuffixConstants;
-
-@SuppressWarnings("restriction")
-public class JdtCompilerUtil implements SuffixConstants {
+/**
+ * Initially copied from org.eclipse.jdt.internal.compiler.util.Util
+ * 
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+class SignatureUtil {
 
 	/**
 	 * Character constant indicating the primitive type boolean in a signature.
@@ -144,69 +150,6 @@ public class JdtCompilerUtil implements SuffixConstants {
 	 */
 	private static final char C_CAPTURE	= '!';
 
-	private static final int DEFAULT_READING_SIZE = 8192;
-	
-	/**
-	 * Returns the given input stream's contents as a byte array.
-	 * If a length is specified (i.e. if length != -1), only length bytes
-	 * are returned. Otherwise all bytes in the stream are returned.
-	 * Note this doesn't close the stream.
-	 * @throws IOException if a problem occured reading the stream.
-	 */
-	public static byte[] getInputStreamAsByteArray(InputStream stream, int length)
-			throws IOException {
-		byte[] contents;
-		if (length == -1) {
-			contents = new byte[0];
-			int contentsLength = 0;
-			int amountRead = -1;
-			do {
-				int amountRequested = Math.max(stream.available(), DEFAULT_READING_SIZE);  // read at least 8K
-
-				// resize contents if needed
-				if (contentsLength + amountRequested > contents.length) {
-					System.arraycopy(
-						contents,
-						0,
-						contents = new byte[contentsLength + amountRequested],
-						0,
-						contentsLength);
-				}
-
-				// read as many bytes as possible
-				amountRead = stream.read(contents, contentsLength, amountRequested);
-
-				if (amountRead > 0) {
-					// remember length of contents
-					contentsLength += amountRead;
-				}
-			} while (amountRead != -1);
-
-			// resize contents if necessary
-			if (contentsLength < contents.length) {
-				System.arraycopy(
-					contents,
-					0,
-					contents = new byte[contentsLength],
-					0,
-					contentsLength);
-			}
-		} else {
-			contents = new byte[length];
-			int len = 0;
-			int readSize = 0;
-			while ((readSize != -1) && (len != length)) {
-				// See PR 1FMS89U
-				// We record first the read size. In this case len is the actual read size.
-				len += readSize;
-				readSize = stream.read(contents, len, length - len);
-			}
-		}
-
-		return contents;
-	}
-
-
 	/**
 	 * Scans the given string for a type signature starting at the given index
 	 * and returns the index of the last character.
@@ -223,12 +166,12 @@ public class JdtCompilerUtil implements SuffixConstants {
 	 * @return the 0-based character index of the last character
 	 * @exception IllegalArgumentException if this is not a type signature
 	 */
-	static int scanTypeSignature(char[] string, int start) {
+	static int scanTypeSignature(String string, int start) {
 		// need a minimum 1 char
-		if (start >= string.length) {
+		if (start >= string.length()) {
 			throw new IllegalArgumentException();
 		}
-		char c = string[start];
+		char c = string.charAt(start);
 		switch (c) {
 			case C_ARRAY :
 				return scanArrayTypeSignature(string, start);
@@ -275,12 +218,12 @@ public class JdtCompilerUtil implements SuffixConstants {
 	 * @return the 0-based character index of the last character
 	 * @exception IllegalArgumentException if this is not a base type signature
 	 */
-	private static int scanBaseTypeSignature(char[] string, int start) {
+	private static int scanBaseTypeSignature(String string, int start) {
 		// need a minimum 1 char
-		if (start >= string.length) {
+		if (start >= string.length()) {
 			throw new IllegalArgumentException();
 		}
-		char c = string[start];
+		char c = string.charAt(start);
 		if ("BCDFIJSVZ".indexOf(c) >= 0) { //$NON-NLS-1$
 			return start;
 		} else {
@@ -301,24 +244,24 @@ public class JdtCompilerUtil implements SuffixConstants {
 	 * @return the 0-based character index of the last character
 	 * @exception IllegalArgumentException if this is not an array type signature
 	 */
-	private static int scanArrayTypeSignature(char[] string, int start) {
-		int length = string.length;
+	private static int scanArrayTypeSignature(String string, int start) {
+		int length = string.length();
 		// need a minimum 2 char
 		if (start >= length - 1) {
 			throw new IllegalArgumentException();
 		}
-		char c = string[start];
+		char c = string.charAt(start);
 		if (c != C_ARRAY) {
 			throw new IllegalArgumentException();
 		}
 	
-		c = string[++start];
+		c = string.charAt(++start);
 		while(c == C_ARRAY) {
 			// need a minimum 2 char
 			if (start >= length - 1) {
 				throw new IllegalArgumentException();
 			}
-			c = string[++start];
+			c = string.charAt(++start);
 		}
 		return scanTypeSignature(string, start);
 	}
@@ -336,12 +279,12 @@ public class JdtCompilerUtil implements SuffixConstants {
 	 * @return the 0-based character index of the last character
 	 * @exception IllegalArgumentException if this is not a capture type signature
 	 */
-	private static int scanCaptureTypeSignature(char[] string, int start) {
+	private static int scanCaptureTypeSignature(String string, int start) {
 		// need a minimum 2 char
-		if (start >= string.length - 1) {
+		if (start >= string.length() - 1) {
 			throw new IllegalArgumentException();
 		}
-		char c = string[start];
+		char c = string.charAt(start);
 		if (c != C_CAPTURE) {
 			throw new IllegalArgumentException();
 		}
@@ -361,18 +304,18 @@ public class JdtCompilerUtil implements SuffixConstants {
 	 * @return the 0-based character index of the last character
 	 * @exception IllegalArgumentException if this is not a type variable signature
 	 */
-	private static int scanTypeVariableSignature(char[] string, int start) {
+	private static int scanTypeVariableSignature(String string, int start) {
 		// need a minimum 3 chars "Tx;"
-		if (start >= string.length - 2) {
+		if (start >= string.length() - 2) {
 			throw new IllegalArgumentException();
 		}
 		// must start in "T"
-		char c = string[start];
+		char c = string.charAt(start);
 		if (c != C_TYPE_VARIABLE) {
 			throw new IllegalArgumentException();
 		}
 		int id = scanIdentifier(string, start + 1);
-		c = string[id + 1];
+		c = string.charAt(id + 1);
 		if (c == C_SEMICOLON) {
 			return id + 1;
 		} else {
@@ -390,19 +333,19 @@ public class JdtCompilerUtil implements SuffixConstants {
 	 * @return the 0-based character index of the last character
 	 * @exception IllegalArgumentException if this is not an identifier
 	 */
-	private static int scanIdentifier(char[] string, int start) {
+	private static int scanIdentifier(String string, int start) {
 		// need a minimum 1 char
-		if (start >= string.length) {
+		if (start >= string.length()) {
 			throw new IllegalArgumentException();
 		}
 		int p = start;
 		while (true) {
-			char c = string[p];
+			char c = string.charAt(p);
 			if (c == '<' || c == '>' || c == ':' || c == ';' || c == '.' || c == '/') {
 				return p - 1;
 			}
 			p++;
-			if (p == string.length) {
+			if (p == string.length()) {
 				return p - 1;
 			}
 		}
@@ -426,22 +369,22 @@ public class JdtCompilerUtil implements SuffixConstants {
 	 * @return the 0-based character index of the last character
 	 * @exception IllegalArgumentException if this is not a class type signature
 	 */
-	private static int scanClassTypeSignature(char[] string, int start) {
+	private static int scanClassTypeSignature(String string, int start) {
 		// need a minimum 3 chars "Lx;"
-		if (start >= string.length - 2) {
+		if (start >= string.length() - 2) {
 			throw new IllegalArgumentException();
 		}
 		// must start in "L" or "Q"
-		char c = string[start];
+		char c = string.charAt(start);
 		if (c != C_RESOLVED && c != C_UNRESOLVED) {
 			return -1;
 		}
 		int p = start + 1;
 		while (true) {
-			if (p >= string.length) {
+			if (p >= string.length()) {
 				throw new IllegalArgumentException();
 			}
-			c = string[p];
+			c = string.charAt(p);
 			if (c == C_SEMICOLON) {
 				// all done
 				return p;
@@ -470,19 +413,19 @@ public class JdtCompilerUtil implements SuffixConstants {
 	 * @return the 0-based character index of the last character
 	 * @exception IllegalArgumentException if this is not a type variable signature
 	 */
-	private static int scanTypeBoundSignature(char[] string, int start) {
+	private static int scanTypeBoundSignature(String string, int start) {
 		// need a minimum 1 char for wildcard
-		if (start >= string.length) {
+		if (start >= string.length()) {
 			throw new IllegalArgumentException();
 		}
-		char c = string[start];
+		char c = string.charAt(start);
 		switch (c) {
 			case C_STAR :
 				return start;
 			case C_SUPER :
 			case C_EXTENDS :
 				// need a minimum 3 chars "+[I"
-				if (start >= string.length - 2) {
+				if (start >= string.length() - 2) {
 					throw new IllegalArgumentException();
 				}
 				break;
@@ -491,7 +434,7 @@ public class JdtCompilerUtil implements SuffixConstants {
 					throw new IllegalArgumentException();
 	
 		}
-		c = string[++start];
+		c = string.charAt(++start);
 		switch (c) {
 			case C_CAPTURE :
 				return scanCaptureTypeSignature(string, start);
@@ -529,21 +472,21 @@ public class JdtCompilerUtil implements SuffixConstants {
 	 * @exception IllegalArgumentException if this is not a list of type arguments
 	 * signatures
 	 */
-	private static int scanTypeArgumentSignatures(char[] string, int start) {
+	private static int scanTypeArgumentSignatures(String string, int start) {
 		// need a minimum 2 char "<>"
-		if (start >= string.length - 1) {
+		if (start >= string.length() - 1) {
 			throw new IllegalArgumentException();
 		}
-		char c = string[start];
+		char c = string.charAt(start);
 		if (c != C_GENERIC_START) {
 			throw new IllegalArgumentException();
 		}
 		int p = start + 1;
 		while (true) {
-			if (p >= string.length) {
+			if (p >= string.length()) {
 				throw new IllegalArgumentException();
 			}
-			c = string[p];
+			c = string.charAt(p);
 			if (c == C_GENERIC_END) {
 				return p;
 			}
@@ -570,12 +513,12 @@ public class JdtCompilerUtil implements SuffixConstants {
 	 * @return the 0-based character index of the last character
 	 * @exception IllegalArgumentException if this is not a type argument signature
 	 */
-	private static int scanTypeArgumentSignature(char[] string, int start) {
+	static int scanTypeArgumentSignature(String string, int start) {
 		// need a minimum 1 char
-		if (start >= string.length) {
+		if (start >= string.length()) {
 			throw new IllegalArgumentException();
 		}
-		char c = string[start];
+		char c = string.charAt(start);
 		switch (c) {
 			case C_STAR :
 				return start;

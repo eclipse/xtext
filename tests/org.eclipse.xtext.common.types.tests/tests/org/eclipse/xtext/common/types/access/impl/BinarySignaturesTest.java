@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import org.eclipse.xtext.common.types.access.binary.signatures.BinarySignatures;
-import org.eclipse.xtext.common.types.access.binary.signatures.BinaryTypeSignature;
+import org.eclipse.xtext.common.types.access.binary.asm.BinarySignatures;
+import org.eclipse.xtext.common.types.access.binary.asm.BinaryTypeSignature;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class BinarySignaturesTest {
 
 	@Test
 	public void testNestedTypeWithOuterGenerics() {
-		char[] signature = "Lcom/google/common/collect/AbstractMultimap<TK;TV;>.WrappedCollection;".toCharArray();
+		String signature = "Lcom/google/common/collect/AbstractMultimap<TK;TV;>.WrappedCollection;";
 		BinaryTypeSignature typeSignature = BinarySignatures.createTypeSignature(signature);
 		BinaryTypeSignature typeErasure = typeSignature.getTypeErasure();
 		String identifier = typeErasure.toIdentifier();

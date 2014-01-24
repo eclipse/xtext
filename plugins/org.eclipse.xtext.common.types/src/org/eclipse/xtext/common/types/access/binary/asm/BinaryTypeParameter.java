@@ -5,13 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtext.common.types.access.binary.asm;
 
 import java.util.Collections;
 import java.util.List;
-
-import org.eclipse.jdt.core.Signature;
-import org.eclipse.jdt.core.compiler.CharOperation;
 
 import com.google.common.collect.Lists;
 
@@ -23,37 +20,37 @@ import com.google.common.collect.Lists;
  */
 public class BinaryTypeParameter extends AbstractBinarySignature {
 
-	BinaryTypeParameter(char[] chars, int offset, int length) {
+	BinaryTypeParameter(String chars, int offset, int length) {
 		super(chars, offset, length);
 	}
 
 	public String getName() {
-		int p = CharOperation.indexOf(Signature.C_COLON, chars, offset);
-		return String.valueOf(chars, offset, p - offset);
+		int p = chars.indexOf(':', offset);
+		return chars.substring(offset, p);
 	}
 
 	public List<BinaryGenericTypeSignature> getBounds() {
 		final int end = offset + length;
-		int afterTypeParameterName = CharOperation.indexOf(Signature.C_COLON, chars, offset, end);
-		if (afterTypeParameterName < 0) {
+		int afterTypeParameterName = chars.indexOf(':', offset);
+		if (afterTypeParameterName >= end) {
 			throw new IllegalArgumentException();
 		}
-		if (afterTypeParameterName == chars.length - 1) {
+		if (afterTypeParameterName == chars.length() - 1) {
 			return Collections.emptyList();
 		}
-		if (chars[afterTypeParameterName + 1] == Signature.C_COLON) {
+		if (chars.charAt(afterTypeParameterName + 1) == ':') {
 			// no class bound
 			List<BinaryGenericTypeSignature> result = Lists.newArrayListWithCapacity(3);
 			int nextInterface = afterTypeParameterName + 2;
 			while(nextInterface <= end) {
-				int afterInterfaceBound = JdtCompilerUtil.scanTypeSignature(chars, nextInterface) + 1;
+				int afterInterfaceBound = SignatureUtil.scanTypeSignature(chars, nextInterface) + 1;
 				BinaryGenericTypeSignature intf = new BinaryGenericTypeSignature(chars, nextInterface, afterInterfaceBound - nextInterface);
 				result.add(intf);
 				nextInterface = afterInterfaceBound + 1;
 			}
 			return result;
 		} else {
-			int afterClassBound = JdtCompilerUtil.scanTypeSignature(chars, afterTypeParameterName + 1);
+			int afterClassBound = SignatureUtil.scanTypeSignature(chars, afterTypeParameterName + 1);
 			BinaryGenericTypeSignature classBound = new BinaryGenericTypeSignature(chars, afterTypeParameterName + 1, afterClassBound - afterTypeParameterName);
 			if (afterClassBound == end - 1) {
 				return Collections.singletonList(classBound);
@@ -75,9 +72,9 @@ public class BinaryTypeParameter extends AbstractBinarySignature {
 		}
 	}
 
-	private int scanTypeSignature(char[] chars, int i) {
+	private int scanTypeSignature(String chars, int i) {
 		try {
-			return JdtCompilerUtil.scanTypeSignature(chars, i);
+			return SignatureUtil.scanTypeSignature(chars, i);
 		} catch(IllegalArgumentException e) {
 //			e.printStackTrace();
 			throw e;

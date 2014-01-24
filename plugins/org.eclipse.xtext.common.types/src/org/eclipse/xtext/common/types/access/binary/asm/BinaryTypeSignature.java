@@ -5,13 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtext.common.types.access.binary.asm;
 
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.core.Signature;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
 /**
@@ -24,7 +23,7 @@ public class BinaryTypeSignature extends AbstractBinarySignature {
 	
 	protected int arrayDimensions = -1;
 	
-	BinaryTypeSignature(char[] chars) {
+	BinaryTypeSignature(String chars) {
 		super(chars);
 //		checkInvariant();
 	}
@@ -35,7 +34,7 @@ public class BinaryTypeSignature extends AbstractBinarySignature {
 //		}
 //	}
 
-	BinaryTypeSignature(char[] chars, int offset, int length) {
+	BinaryTypeSignature(String chars, int offset, int length) {
 		super(chars, offset, length);
 //		checkInvariant();
 	}
@@ -45,7 +44,7 @@ public class BinaryTypeSignature extends AbstractBinarySignature {
 	 * {@code java.lang.String} or {@code java.util.Map$Entry}.
 	 */
 	public String toIdentifier() {
-		StringBuilder result = new StringBuilder(chars.length);
+		StringBuilder result = new StringBuilder(chars.length());
 		toIdentifier(result, 0);
 		return result.toString();
 	}
@@ -60,7 +59,7 @@ public class BinaryTypeSignature extends AbstractBinarySignature {
 			}
 		} else {
 			if (length == 1) {
-				switch(chars[offset]) {
+				switch(chars.charAt(offset)) {
 					case 'B':
 						builder.append("byte");
 						return;
@@ -91,7 +90,7 @@ public class BinaryTypeSignature extends AbstractBinarySignature {
 				}
 			}
 			for(int i = offset + identifierFixup, max = offset + length - identifierFixup; i < max; i++) {
-				char c = chars[i];
+				char c = chars.charAt(i);
 				if (c == '/') {
 					builder.append('.');
 				} else {
@@ -105,7 +104,7 @@ public class BinaryTypeSignature extends AbstractBinarySignature {
 		if (arrayDimensions == -1) {
 			try {
 				int count = 0;
-				while (chars[count + offset] == Signature.C_ARRAY) {
+				while (chars.charAt(count + offset) == '[') {
 					++count;
 				}
 				return arrayDimensions = count;
@@ -133,7 +132,7 @@ public class BinaryTypeSignature extends AbstractBinarySignature {
 
 	public URI getURI() {
 		BinaryTypeSignature typeErasure = getArrayComponentType().getTypeErasure();
-		switch(typeErasure.chars[typeErasure.offset]) {
+		switch(typeErasure.chars.charAt(typeErasure.offset)) {
 			case 'B':
 			case 'C':
 			case 'D':
@@ -155,11 +154,11 @@ public class BinaryTypeSignature extends AbstractBinarySignature {
 		return null;
 	}
 
-	public BinarySimpleMemberSignature appendField(char[] fieldName) {
+	public BinarySimpleMemberSignature appendField(String fieldName) {
 		return new BinarySimpleMemberSignature(this, fieldName, false);
 	}
 
-	public BinarySimpleMemberSignature appendMethod(char[] methodName) {
+	public BinarySimpleMemberSignature appendMethod(String methodName) {
 		return new BinarySimpleMemberSignature(this, methodName, true);
 	}
 	

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtext.common.types.access.binary.asm;
 
 /**
  * Facade to obtain instances of binary signatures from char arrays.
@@ -29,8 +29,8 @@ public class BinarySignatures {
 	 * @param signature the binary type name, e.g. {@code java/lang/String} or a binary signature
 	 *  e.g {@code Ljava/lang/String;}
 	 */
-	public static BinaryTypeSignature createTypeSignature(char[] signature) {
-		if (signature[signature.length - 1] != ';')
+	public static BinaryTypeSignature createTypeSignature(String signature) {
+		if (signature.charAt(signature.length() - 1) != ';')
 			return new BinaryTypeSignature(signature);
 		return new BinaryGenericTypeSignature(signature);
 	}
@@ -40,7 +40,7 @@ public class BinarySignatures {
 	 * array of chars. The array is not copied thus subsequent changes to the
 	 * array contents should be avoided.
 	 */
-	public static BinaryMethodSignature createMethodSignature(char[] signature) {
+	public static BinaryMethodSignature createMethodSignature(String signature) {
 		return new BinaryMethodSignature(signature);
 	}
 
@@ -49,7 +49,7 @@ public class BinarySignatures {
 	 * array of chars. The array is not copied thus subsequent changes to the
 	 * array contents should be avoided.
 	 */
-	public static BinarySuperTypeSignature createSuperTypeSignature(char[] signature) {
+	public static BinarySuperTypeSignature createSuperTypeSignature(String signature) {
 		return new BinarySuperTypeSignature(signature);
 	}
 	

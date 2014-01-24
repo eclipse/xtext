@@ -5,13 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtext.common.types.access.binary.asm;
 
 import java.util.Collections;
 import java.util.List;
-
-import org.eclipse.jdt.core.Signature;
-import org.eclipse.jdt.core.compiler.CharOperation;
 
 import com.google.common.collect.Lists;
 
@@ -22,16 +19,16 @@ import com.google.common.collect.Lists;
  */
 public abstract class AbstractBinarySignature {
 
-	protected final char[] chars;
+	protected final String chars;
 	protected final int offset;
 	protected final int length;
 	private int hashCode;
 	
-	AbstractBinarySignature(char[] chars) {
-		this(chars, 0, chars.length);
+	AbstractBinarySignature(String chars) {
+		this(chars, 0, chars.length());
 	}
 
-	AbstractBinarySignature(char[] chars, int offset, int length) {
+	AbstractBinarySignature(String chars, int offset, int length) {
 		this.chars = chars;
 		this.offset = offset;
 		this.length = length;
@@ -58,11 +55,7 @@ public abstract class AbstractBinarySignature {
         if (length != other.length)
             return false;
 
-        for (int i=offset, j = other.offset, max = offset + length; i<max; i++, j++)
-            if (chars[i] != other.chars[j])
-                return false;
-
-        return true;
+        return chars.regionMatches(offset, other.chars, other.offset, length);
 	}
 	
 	public List<BinaryTypeParameter> getTypeParameters() {
@@ -73,31 +66,31 @@ public abstract class AbstractBinarySignature {
 		try {
 			int length = this.length;
 			if (length == 0) return Collections.emptyList();
-			if (chars[offset] != Signature.C_GENERIC_START) return Collections.emptyList();
+			if (chars.charAt(offset) != '<') return Collections.emptyList();
 
 			List<BinaryTypeParameter> result = Lists.newArrayListWithCapacity(2);
 			int paramStart = offset + 1, i = offset + 1;  // start after leading '<'
 			while (i < length) {
-				if (chars[i] == Signature.C_GENERIC_END) {
+				if (chars.charAt(i) == '>') {
 					return result;
 				}
-				i = CharOperation.indexOf(Signature.C_COLON, chars, i);
+				i = chars.indexOf(':', i);
 				if (i < 0 || i >= length)
 					throw new IllegalArgumentException();
 				// iterate over bounds
-				while (chars[i] == ':') {
+				while (chars.charAt(i) == ':') {
 					i++; // skip colon
-					switch (chars[i]) {
+					switch (chars.charAt(i)) {
 						case ':':
 							// no class bound
 							break;
-						case Signature.C_GENERIC_END:
+						case '>':
 							break;
-						case Signature.C_RESOLVED:
-						case Signature.C_ARRAY:
-						case Signature.C_TYPE_VARIABLE:
+						case 'L':
+						case '[':
+						case 'T':
 							try {
-								i = JdtCompilerUtil.scanTypeSignature(chars, i);
+								i = SignatureUtil.scanTypeSignature(chars, i);
 								i++; // position at start of next param if any
 							} catch (IllegalArgumentException e) {
 								// not a class type signature -> it is a new type parameter
@@ -118,14 +111,14 @@ public abstract class AbstractBinarySignature {
 	private int computeHashCode() {
         int result = 1;
         for (int i = offset, max = offset + length; i < max; i++)
-            result = 31 * result + chars[i];
+            result = 31 * result + chars.charAt(i);
 
         return result;
     }
 
 	@Override
 	public String toString() {
-		return String.format("%s: %s", getClass().getSimpleName(), String.valueOf(chars, offset, length));
+		return String.format("%s: %s", getClass().getSimpleName(), chars.substring(offset, offset + length));
 	}
 	
 	public int getLength() {
@@ -133,21 +126,7 @@ public abstract class AbstractBinarySignature {
 	}
 	
 	public char getChar(int offset) {
-		return chars[offset + this.offset];
+		return chars.charAt(offset + this.offset);
 	}
 	
-	public boolean isEqualToSignature(char[] signature) {
-		if (signature.length != length)
-			return false;
-		for(int i = 0; i < length; i++) {
-			if (signature[i] != chars[i + offset]) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	public boolean isEqualToSignature(String signature) {
-		return String.valueOf(chars, offset, length).equals(signature);
-	}
 }

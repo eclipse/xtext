@@ -5,13 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtext.common.types.access.binary.asm;
 
 import java.util.Collections;
 import java.util.List;
-
-import org.eclipse.jdt.core.Signature;
-import org.eclipse.jdt.core.compiler.CharOperation;
 
 import com.google.common.collect.Lists;
 
@@ -23,12 +20,12 @@ import com.google.common.collect.Lists;
  */
 public class BinaryGenericTypeSignature extends BinaryTypeSignature {
 
-	BinaryGenericTypeSignature(char[] chars) {
+	BinaryGenericTypeSignature(String chars) {
 		super(chars);
 //		checkInvariant();
 	}
 	
-	BinaryGenericTypeSignature(char[] chars, int offset, int length) {
+	BinaryGenericTypeSignature(String chars, int offset, int length) {
 		super(chars, offset, length);
 //		checkInvariant();
 	}
@@ -64,7 +61,7 @@ public class BinaryGenericTypeSignature extends BinaryTypeSignature {
 	
 	@Override
 	public String toIdentifier() {
-		StringBuilder result = new StringBuilder(chars.length);
+		StringBuilder result = new StringBuilder(chars.length());
 		toIdentifier(result, 1);
 		return result.toString();
 	}
@@ -79,17 +76,17 @@ public class BinaryGenericTypeSignature extends BinaryTypeSignature {
 	
 	@Override
 	public List<BinaryTypeArgumentSignature> getTypeArguments() {
-		if (length < 2 || chars[offset+length-2] != Signature.C_GENERIC_END)
+		if (length < 2 || chars.charAt(offset+length-2) != '>')
 			// cannot have type arguments otherwise signature would end by ">;"
 			return Collections.emptyList();
 		int count = 1; // start to count generic end/start peers
 		int start = offset+length - 2;
 		while (start >= offset && count > 0) {
-			switch (chars[--start]) {
-				case Signature.C_GENERIC_START:
+			switch (chars.charAt(--start)) {
+				case '<':
 					count--;
 					break;
-				case Signature.C_GENERIC_END:
+				case '>':
 					count++;
 					break;
 			}
@@ -102,11 +99,11 @@ public class BinaryGenericTypeSignature extends BinaryTypeSignature {
 			if (p >= offset + length) {
 				throw new IllegalArgumentException(toString());
 			}
-			char c = chars[p];
-			if (c == Signature.C_GENERIC_END) {
+			char c = chars.charAt(p);
+			if (c == '>') {
 				return result;
 			}
-			int end = JdtCompilerUtil.scanTypeSignature(chars, p);
+			int end = SignatureUtil.scanTypeSignature(chars, p);
 			result.add(new BinaryTypeArgumentSignature(chars, p, end + 1 - p));
 			p = end + 1;
 		}
@@ -114,8 +111,8 @@ public class BinaryGenericTypeSignature extends BinaryTypeSignature {
 
 	@Override
 	public BinaryGenericTypeSignature getTypeErasure() {
-		int end = CharOperation.indexOf(Signature.C_GENERIC_START, chars, offset, offset + length);
-		if (end == -1)
+		int end = chars.indexOf('<', offset);
+		if (end == -1 || end > offset + length)
 			return this;
 		return new BinaryErasureTypeSignature(this, getArrayDimensions());
 	}
@@ -127,10 +124,14 @@ public class BinaryGenericTypeSignature extends BinaryTypeSignature {
 
 	@Override
 	public String getTypeVariableName() {
-		if (chars[offset] == 'T') {
-			return String.valueOf(chars, offset + 1, length - 2);
+		if (chars.charAt(offset) == 'T') {
+			return chars.substring(offset + 1, offset + length - 1);
 		}
 		return null;
+	}
+
+	public boolean isEqualToSignature(String string) {
+		return chars.regionMatches(offset, string, 0, string.length());
 	}
 
 }

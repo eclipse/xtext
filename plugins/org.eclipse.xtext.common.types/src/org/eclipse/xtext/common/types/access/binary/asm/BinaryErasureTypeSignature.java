@@ -5,12 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtext.common.types.access.binary.asm;
 
 import java.util.Collections;
 import java.util.List;
-
-import org.eclipse.jdt.core.Signature;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -38,10 +36,10 @@ public class BinaryErasureTypeSignature extends BinaryGenericTypeSignature {
 			int depth = 0;
 			boolean wasGenericEnd = false;
 			for(int i = offset + fixup, max = offset + length - fixup; i < max; i++) {
-				char c = chars[i];
-				if (c == Signature.C_GENERIC_START) {
+				char c = chars.charAt(i);
+				if (c == '<') {
 					depth++;
-				} else if (c == Signature.C_GENERIC_END) {
+				} else if (c == '>') {
 					depth--;
 					wasGenericEnd = true;
 				} else if (depth == 0) {

@@ -5,13 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary.signatures;
+package org.eclipse.xtext.common.types.access.binary.asm;
 
 import java.util.Collections;
 import java.util.List;
-
-import org.eclipse.jdt.core.Signature;
-import org.eclipse.jdt.core.compiler.CharOperation;
 
 import com.google.common.collect.Lists;
 
@@ -23,30 +20,30 @@ import com.google.common.collect.Lists;
  */
 public class BinaryMethodSignature extends AbstractBinarySignature {
 
-	BinaryMethodSignature(char[] signature) {
+	BinaryMethodSignature(String signature) {
 		super(signature);
 	}
 
 	public BinaryGenericTypeSignature getReturnType() {
-		int paren = CharOperation.lastIndexOf(Signature.C_PARAM_END, chars);
+		int paren = chars.lastIndexOf(')');
 		if (paren == -1) {
 			throw new IllegalArgumentException();
 		}
 		// there could be thrown exceptions behind, thus scan one type exactly
-		int last = JdtCompilerUtil.scanTypeSignature(chars, paren+1);
+		int last = SignatureUtil.scanTypeSignature(chars, paren+1);
 		return new BinaryGenericTypeSignature(chars, paren + 1, last - paren);
 	}
 	
 	public List<BinaryGenericTypeSignature> getExceptionTypes() {
 		// skip type parameters
-		int exceptionStart = CharOperation.indexOf(Signature.C_EXCEPTION_START, chars, offset);
+		int exceptionStart = chars.indexOf('^', offset);
 		if (exceptionStart == -1) {
-			int paren = CharOperation.lastIndexOf(Signature.C_PARAM_END, chars, offset);
+			int paren = chars.lastIndexOf(')');
 			if (paren == -1) {
 				throw new IllegalArgumentException();
 			}
 			// ignore return type
-			exceptionStart = JdtCompilerUtil.scanTypeSignature(chars, paren+1) + 1;
+			exceptionStart = SignatureUtil.scanTypeSignature(chars, paren+1) + 1;
 			int length = offset + this.length;
 			if (exceptionStart == length) return Collections.emptyList();
 		}
@@ -55,13 +52,13 @@ public class BinaryMethodSignature extends AbstractBinarySignature {
 		int i = exceptionStart;
 		List<BinaryGenericTypeSignature> result = Lists.newArrayListWithCapacity(2);
 		while (i < length) {
-			if (chars[i] == Signature.C_EXCEPTION_START) {
+			if (chars.charAt(i) == '^') {
 				exceptionStart++;
 				i++;
 			} else {
 				throw new IllegalArgumentException();
 			}
-			i = JdtCompilerUtil.scanTypeSignature(chars, i) + 1;
+			i = SignatureUtil.scanTypeSignature(chars, i) + 1;
 			result.add(new BinaryGenericTypeSignature(chars, exceptionStart, i - exceptionStart));
 			exceptionStart = i;
 		}
@@ -70,21 +67,21 @@ public class BinaryMethodSignature extends AbstractBinarySignature {
 
 	public List<BinaryGenericTypeSignature> getParameterTypes() {
 		try {
-			int i = CharOperation.indexOf(Signature.C_PARAM_START, chars, offset);
+			int i =  chars.indexOf('(', offset);
 			if (i < 0) {
 				throw new IllegalArgumentException();
 			} else {
 				i++;
 			}
-			if (chars[i] == Signature.C_PARAM_END) {
+			if (chars.charAt(i) == ')') {
 				return Collections.emptyList();
 			}
 			List<BinaryGenericTypeSignature> result = Lists.newArrayListWithExpectedSize(3);
 			for (;;) {
-				if (chars[i] == Signature.C_PARAM_END) {
+				if (chars.charAt(i) == ')') {
 					return result;
 				}
-				int e = JdtCompilerUtil.scanTypeSignature(chars, i);
+				int e = SignatureUtil.scanTypeSignature(chars, i);
 				if (e < 0) {
 					throw new IllegalArgumentException();
 				}

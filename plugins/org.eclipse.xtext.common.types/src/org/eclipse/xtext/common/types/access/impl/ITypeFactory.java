@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.common.types.JvmType;
 
 /**
@@ -22,7 +21,7 @@ public interface ITypeFactory<TypeData, Type extends JvmType> {
 
 	/**
 	 * Produce a JvmType for the given source, e.g. a {@code java.lang.Class<?>},
-	 * {@code byte[]} or {@link IType}.
+	 * {@code byte[]} or {@code org.eclipse.jdt.core.IType}.
 	 */
 	Type createType(TypeData arg);
 	

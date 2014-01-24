@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.binary.BinaryClass;
 import org.eclipse.xtext.common.types.access.binary.BinaryClassMirror;
-import org.eclipse.xtext.common.types.access.binary.ClassFileReaderAccess;
+import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,7 +27,7 @@ public class CachingClasspathTypeProvider extends ClasspathTypeProvider {
 	}
 	
 	@Override
-	protected DeclaredTypeFactory createDeclaredTypeFactory(ClassFileReaderAccess readerAccess,
+	protected DeclaredTypeFactory createDeclaredTypeFactory(ClassFileBytesAccess readerAccess,
 			ClassLoader classLoader) {
 		// we don't have the reusedFactory at hand at this point thus null is sufficient
 		return null;
