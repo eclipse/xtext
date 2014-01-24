@@ -5,13 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.binary;
+package org.eclipse.xtext.common.types.access.binary.asm;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
-import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
+import org.eclipse.xtext.common.types.access.binary.BinaryClass;
 
 import com.google.common.collect.Maps;
 
@@ -25,34 +24,33 @@ import com.google.common.collect.Maps;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
-public class ClassFileReaderAccess {
+public class ClassFileBytesAccess {
 
 	/**
 	 * A map of binary class names to the struct of information.
 	 */
-	private final Map<String, ClassFileReader> cache;
+	private final Map<String, byte[]> cache;
 
-	public ClassFileReaderAccess() {
+	public ClassFileBytesAccess() {
 		this.cache = createCache();
 	}
 
-	protected HashMap<String, ClassFileReader> createCache() {
+	protected HashMap<String, byte[]> createCache() {
 		return Maps.newHashMap();
 	}
 	
-	protected Map<String, ClassFileReader> getCache() {
+	protected Map<String, byte[]> getCache() {
 		return cache;
 	}
 	
-	public ClassFileReader getClassFileReader(BinaryClass clazz) throws ClassFormatException {
+	public byte[] getBytes(BinaryClass clazz)  {
 		String className = clazz.getName();
-		Map<String, ClassFileReader> cache = getCache();
-		ClassFileReader result = cache.get(className);
+		Map<String, byte[]> cache = getCache();
+		byte[] result = cache.get(className);
 		if (result != null) {
 			return result;
 		}
-		result = new ClassFileReader(clazz.getBytes(), className.toCharArray(), true /* release byte array afterwards */);
+		result = clazz.getBytes();
 		cache.put(className, result);
 		return result;
 	}
