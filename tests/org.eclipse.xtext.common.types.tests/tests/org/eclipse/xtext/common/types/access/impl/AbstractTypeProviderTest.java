@@ -2610,7 +2610,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testAbstractMethod() throws Exception {
 		String typeName = AbstractMethods.class.getName();
 		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
-		assertEquals(2, size(type.getDeclaredOperations()));
+		assertEquals(3, size(type.getDeclaredOperations()));
 		for (JvmOperation op : type.getDeclaredOperations()) {
 			if (op.getSimpleName().startsWith("abstract")) {
 				assertTrue(op.isAbstract());
@@ -3031,6 +3031,13 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(fieldValue, field.getConstantValue());
 		return field;
 	}
+	
+	protected void doTestParameterName(Class<?> type, String methodSignature, String parameterName) {
+		JvmGenericType jvmType = (JvmGenericType) getTypeProvider().findTypeByName(type.getCanonicalName());
+		JvmOperation method = getMethodFromType(jvmType, type, methodSignature);
+		JvmFormalParameter singleParameter = method.getParameters().get(0);
+		assertEquals(parameterName, singleParameter.getSimpleName());
+	}
 
 	@Test
 	public void testConstantValue_01() {
@@ -3076,5 +3083,18 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	public void testConstantValue_09() {
 		JvmField field = doTestConstantValue("booleanConstant", TestConstants.booleanConstant);
 		assertEquals(TestConstants.booleanConstant, field.getConstantValueAsBoolean());
+	}
+	
+	@Test
+	public void testParameterNames_01() {
+		doTestParameterName(Bug347739ThreeTypeParamsSuperSuper.class, "getToken(A)", "owner");
+	}
+	@Test
+	public void testParameterNames_02() {
+		doTestParameterName(AbstractMethods.class, "abstractMethodWithParameter(java.lang.String)", "parameterName");
+	}
+	@Test
+	public void testParameterNames_03() {
+		doTestParameterName(ClassWithVarArgs.class, "method(java.lang.String[])", "strings");
 	}
 }

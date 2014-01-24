@@ -8,7 +8,7 @@
 package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.common.types.access.binary.ClassFileReaderAccess;
+import org.eclipse.xtext.common.types.access.binary.asm.ClassFileBytesAccess;
 import org.eclipse.xtext.common.types.access.impl.CachingClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.CachingDeclaredTypeFactory;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
@@ -32,7 +32,7 @@ public class CachingClasspathTypeProviderFactory extends ClasspathTypeProviderFa
 	}
 
 	private CachingDeclaredTypeFactory newClassReaderTypeFactory(ClassLoader classLoader) {
-		DeclaredTypeFactory factoryDelegate = new DeclaredTypeFactory(new ClassFileReaderAccess(), classLoader);
+		DeclaredTypeFactory factoryDelegate = new DeclaredTypeFactory(new ClassFileBytesAccess(), classLoader);
 		return new CachingDeclaredTypeFactory(factoryDelegate);
 	}
 	
