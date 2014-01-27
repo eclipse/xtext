@@ -76,7 +76,7 @@ public class TransformationContextImpl implements TransformationContext {
     if (!_matched) {
       if (element instanceof JvmNamedElementImpl) {
         _matched=true;
-        JvmIdentifiableElement _delegate = ((JvmNamedElementImpl<? extends JvmIdentifiableElement>)element).getDelegate();
+        JvmIdentifiableElement _delegate = ((JvmNamedElementImpl<JvmIdentifiableElement>)element).getDelegate();
         Resource _eResource = _delegate.eResource();
         CompilationUnitImpl _unit = this.getUnit();
         XtendFile _xtendFile = _unit.getXtendFile();
@@ -105,7 +105,8 @@ public class TransformationContextImpl implements TransformationContext {
       boolean _notEquals = (!Objects.equal(derivedElement, null));
       if (_notEquals) {
         CompilationUnitImpl _unit = this.getUnit();
-        return _unit.toNamedElement(derivedElement);
+        NamedElement _namedElement = _unit.toNamedElement(derivedElement);
+        return ((MutableNamedElement) _namedElement);
       }
     }
     return null;

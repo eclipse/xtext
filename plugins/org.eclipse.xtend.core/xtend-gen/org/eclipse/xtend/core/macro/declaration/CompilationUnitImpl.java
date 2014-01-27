@@ -43,11 +43,21 @@ import org.eclipse.xtend.core.macro.declaration.JvmEnumerationTypeDeclarationImp
 import org.eclipse.xtend.core.macro.declaration.JvmEnumerationValueDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmInterfaceDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMethodDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeParameterDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.MutableJvmAnnotationTypeDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.MutableJvmAnnotationTypeElementDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.MutableJvmConstructorDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.MutableJvmEnumerationTypeDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.MutableJvmEnumerationValueDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.MutableJvmInterfaceDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.MutableJvmParameterDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.MutableJvmTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
@@ -83,17 +93,14 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
+import org.eclipse.xtend.lib.macro.declaration.Declaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
-import org.eclipse.xtend.lib.macro.declaration.MutableDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
-import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.NamedElement;
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
@@ -433,9 +440,9 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this.<JvmType, Type>getOrCreate(delegate, _function);
   }
   
-  public MutableTypeDeclaration toTypeDeclaration(final JvmDeclaredType delegate) {
-    final Function1<JvmDeclaredType,JvmTypeDeclarationImpl<? extends JvmDeclaredType>> _function = new Function1<JvmDeclaredType,JvmTypeDeclarationImpl<? extends JvmDeclaredType>>() {
-      public JvmTypeDeclarationImpl<? extends JvmDeclaredType> apply(final JvmDeclaredType it) {
+  public TypeDeclaration toTypeDeclaration(final JvmDeclaredType delegate) {
+    final Function1<JvmDeclaredType,TypeDeclaration> _function = new Function1<JvmDeclaredType,TypeDeclaration>() {
+      public TypeDeclaration apply(final JvmDeclaredType it) {
         JvmTypeDeclarationImpl<? extends JvmDeclaredType> _switchResult = null;
         boolean _matched = false;
         if (!_matched) {
@@ -443,98 +450,200 @@ public class CompilationUnitImpl implements CompilationUnit {
             boolean _isInterface = ((JvmGenericType)delegate).isInterface();
             if (_isInterface) {
               _matched=true;
-              JvmInterfaceDeclarationImpl _jvmInterfaceDeclarationImpl = new JvmInterfaceDeclarationImpl();
-              final Procedure1<JvmInterfaceDeclarationImpl> _function = new Procedure1<JvmInterfaceDeclarationImpl>() {
-                public void apply(final JvmInterfaceDeclarationImpl it) {
-                  it.setDelegate(((JvmGenericType)delegate));
-                  it.setCompilationUnit(CompilationUnitImpl.this);
-                }
-              };
-              _switchResult = ObjectExtensions.<JvmInterfaceDeclarationImpl>operator_doubleArrow(_jvmInterfaceDeclarationImpl, _function);
+              JvmInterfaceDeclarationImpl _xifexpression = null;
+              Resource _eResource = ((JvmGenericType)delegate).eResource();
+              XtendFile _xtendFile = CompilationUnitImpl.this.getXtendFile();
+              Resource _eResource_1 = _xtendFile.eResource();
+              boolean _equals = Objects.equal(_eResource, _eResource_1);
+              if (_equals) {
+                MutableJvmInterfaceDeclarationImpl _mutableJvmInterfaceDeclarationImpl = new MutableJvmInterfaceDeclarationImpl();
+                final Procedure1<MutableJvmInterfaceDeclarationImpl> _function = new Procedure1<MutableJvmInterfaceDeclarationImpl>() {
+                  public void apply(final MutableJvmInterfaceDeclarationImpl it) {
+                    it.setDelegate(((JvmGenericType)delegate));
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+                _xifexpression = ObjectExtensions.<MutableJvmInterfaceDeclarationImpl>operator_doubleArrow(_mutableJvmInterfaceDeclarationImpl, _function);
+              } else {
+                JvmInterfaceDeclarationImpl _jvmInterfaceDeclarationImpl = new JvmInterfaceDeclarationImpl();
+                final Procedure1<JvmInterfaceDeclarationImpl> _function_1 = new Procedure1<JvmInterfaceDeclarationImpl>() {
+                  public void apply(final JvmInterfaceDeclarationImpl it) {
+                    it.setDelegate(((JvmGenericType)delegate));
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+                _xifexpression = ObjectExtensions.<JvmInterfaceDeclarationImpl>operator_doubleArrow(_jvmInterfaceDeclarationImpl, _function_1);
+              }
+              _switchResult = _xifexpression;
             }
           }
         }
         if (!_matched) {
           if (delegate instanceof JvmGenericType) {
             _matched=true;
-            JvmClassDeclarationImpl _jvmClassDeclarationImpl = new JvmClassDeclarationImpl();
-            final Procedure1<JvmClassDeclarationImpl> _function = new Procedure1<JvmClassDeclarationImpl>() {
-              public void apply(final JvmClassDeclarationImpl it) {
-                it.setDelegate(((JvmGenericType)delegate));
-                it.setCompilationUnit(CompilationUnitImpl.this);
-              }
-            };
-            _switchResult = ObjectExtensions.<JvmClassDeclarationImpl>operator_doubleArrow(_jvmClassDeclarationImpl, _function);
+            JvmClassDeclarationImpl _xifexpression = null;
+            Resource _eResource = ((JvmGenericType)delegate).eResource();
+            XtendFile _xtendFile = CompilationUnitImpl.this.getXtendFile();
+            Resource _eResource_1 = _xtendFile.eResource();
+            boolean _equals = Objects.equal(_eResource, _eResource_1);
+            if (_equals) {
+              MutableJvmClassDeclarationImpl _mutableJvmClassDeclarationImpl = new MutableJvmClassDeclarationImpl();
+              final Procedure1<MutableJvmClassDeclarationImpl> _function = new Procedure1<MutableJvmClassDeclarationImpl>() {
+                public void apply(final MutableJvmClassDeclarationImpl it) {
+                  it.setDelegate(((JvmGenericType)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<MutableJvmClassDeclarationImpl>operator_doubleArrow(_mutableJvmClassDeclarationImpl, _function);
+            } else {
+              JvmClassDeclarationImpl _jvmClassDeclarationImpl = new JvmClassDeclarationImpl();
+              final Procedure1<JvmClassDeclarationImpl> _function_1 = new Procedure1<JvmClassDeclarationImpl>() {
+                public void apply(final JvmClassDeclarationImpl it) {
+                  it.setDelegate(((JvmGenericType)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<JvmClassDeclarationImpl>operator_doubleArrow(_jvmClassDeclarationImpl, _function_1);
+            }
+            _switchResult = _xifexpression;
           }
         }
         if (!_matched) {
           if (delegate instanceof JvmAnnotationType) {
             _matched=true;
-            JvmAnnotationTypeDeclarationImpl _jvmAnnotationTypeDeclarationImpl = new JvmAnnotationTypeDeclarationImpl();
-            final Procedure1<JvmAnnotationTypeDeclarationImpl> _function = new Procedure1<JvmAnnotationTypeDeclarationImpl>() {
-              public void apply(final JvmAnnotationTypeDeclarationImpl it) {
-                it.setDelegate(((JvmAnnotationType)delegate));
-                it.setCompilationUnit(CompilationUnitImpl.this);
-              }
-            };
-            _switchResult = ObjectExtensions.<JvmAnnotationTypeDeclarationImpl>operator_doubleArrow(_jvmAnnotationTypeDeclarationImpl, _function);
+            JvmAnnotationTypeDeclarationImpl _xifexpression = null;
+            Resource _eResource = ((JvmAnnotationType)delegate).eResource();
+            XtendFile _xtendFile = CompilationUnitImpl.this.getXtendFile();
+            Resource _eResource_1 = _xtendFile.eResource();
+            boolean _equals = Objects.equal(_eResource, _eResource_1);
+            if (_equals) {
+              MutableJvmAnnotationTypeDeclarationImpl _mutableJvmAnnotationTypeDeclarationImpl = new MutableJvmAnnotationTypeDeclarationImpl();
+              final Procedure1<MutableJvmAnnotationTypeDeclarationImpl> _function = new Procedure1<MutableJvmAnnotationTypeDeclarationImpl>() {
+                public void apply(final MutableJvmAnnotationTypeDeclarationImpl it) {
+                  it.setDelegate(((JvmAnnotationType)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<MutableJvmAnnotationTypeDeclarationImpl>operator_doubleArrow(_mutableJvmAnnotationTypeDeclarationImpl, _function);
+            } else {
+              JvmAnnotationTypeDeclarationImpl _jvmAnnotationTypeDeclarationImpl = new JvmAnnotationTypeDeclarationImpl();
+              final Procedure1<JvmAnnotationTypeDeclarationImpl> _function_1 = new Procedure1<JvmAnnotationTypeDeclarationImpl>() {
+                public void apply(final JvmAnnotationTypeDeclarationImpl it) {
+                  it.setDelegate(((JvmAnnotationType)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<JvmAnnotationTypeDeclarationImpl>operator_doubleArrow(_jvmAnnotationTypeDeclarationImpl, _function_1);
+            }
+            _switchResult = _xifexpression;
           }
         }
         if (!_matched) {
           if (delegate instanceof JvmEnumerationType) {
             _matched=true;
-            JvmEnumerationTypeDeclarationImpl _jvmEnumerationTypeDeclarationImpl = new JvmEnumerationTypeDeclarationImpl();
-            final Procedure1<JvmEnumerationTypeDeclarationImpl> _function = new Procedure1<JvmEnumerationTypeDeclarationImpl>() {
-              public void apply(final JvmEnumerationTypeDeclarationImpl it) {
-                it.setDelegate(((JvmEnumerationType)delegate));
-                it.setCompilationUnit(CompilationUnitImpl.this);
-              }
-            };
-            _switchResult = ObjectExtensions.<JvmEnumerationTypeDeclarationImpl>operator_doubleArrow(_jvmEnumerationTypeDeclarationImpl, _function);
+            JvmEnumerationTypeDeclarationImpl _xifexpression = null;
+            Resource _eResource = ((JvmEnumerationType)delegate).eResource();
+            XtendFile _xtendFile = CompilationUnitImpl.this.getXtendFile();
+            Resource _eResource_1 = _xtendFile.eResource();
+            boolean _equals = Objects.equal(_eResource, _eResource_1);
+            if (_equals) {
+              MutableJvmEnumerationTypeDeclarationImpl _mutableJvmEnumerationTypeDeclarationImpl = new MutableJvmEnumerationTypeDeclarationImpl();
+              final Procedure1<MutableJvmEnumerationTypeDeclarationImpl> _function = new Procedure1<MutableJvmEnumerationTypeDeclarationImpl>() {
+                public void apply(final MutableJvmEnumerationTypeDeclarationImpl it) {
+                  it.setDelegate(((JvmEnumerationType)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<MutableJvmEnumerationTypeDeclarationImpl>operator_doubleArrow(_mutableJvmEnumerationTypeDeclarationImpl, _function);
+            } else {
+              JvmEnumerationTypeDeclarationImpl _jvmEnumerationTypeDeclarationImpl = new JvmEnumerationTypeDeclarationImpl();
+              final Procedure1<JvmEnumerationTypeDeclarationImpl> _function_1 = new Procedure1<JvmEnumerationTypeDeclarationImpl>() {
+                public void apply(final JvmEnumerationTypeDeclarationImpl it) {
+                  it.setDelegate(((JvmEnumerationType)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<JvmEnumerationTypeDeclarationImpl>operator_doubleArrow(_jvmEnumerationTypeDeclarationImpl, _function_1);
+            }
+            _switchResult = _xifexpression;
           }
         }
-        return _switchResult;
+        return ((TypeDeclaration) _switchResult);
       }
     };
-    return this.<JvmDeclaredType, JvmTypeDeclarationImpl<? extends JvmDeclaredType>>getOrCreate(delegate, _function);
+    return this.<JvmDeclaredType, TypeDeclaration>getOrCreate(delegate, _function);
   }
   
-  public MutableTypeParameterDeclaration toTypeParameterDeclaration(final JvmTypeParameter delegate) {
+  public TypeParameterDeclaration toTypeParameterDeclaration(final JvmTypeParameter delegate) {
     final Function1<JvmTypeParameter,JvmTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,JvmTypeParameterDeclarationImpl>() {
       public JvmTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
-        JvmTypeParameterDeclarationImpl _jvmTypeParameterDeclarationImpl = new JvmTypeParameterDeclarationImpl();
-        final Procedure1<JvmTypeParameterDeclarationImpl> _function = new Procedure1<JvmTypeParameterDeclarationImpl>() {
-          public void apply(final JvmTypeParameterDeclarationImpl it) {
-            it.setDelegate(delegate);
-            it.setCompilationUnit(CompilationUnitImpl.this);
-          }
-        };
-        return ObjectExtensions.<JvmTypeParameterDeclarationImpl>operator_doubleArrow(_jvmTypeParameterDeclarationImpl, _function);
+        JvmTypeParameterDeclarationImpl _xifexpression = null;
+        Resource _eResource = delegate.eResource();
+        XtendFile _xtendFile = CompilationUnitImpl.this.getXtendFile();
+        Resource _eResource_1 = _xtendFile.eResource();
+        boolean _equals = Objects.equal(_eResource, _eResource_1);
+        if (_equals) {
+          MutableJvmTypeParameterDeclarationImpl _mutableJvmTypeParameterDeclarationImpl = new MutableJvmTypeParameterDeclarationImpl();
+          final Procedure1<MutableJvmTypeParameterDeclarationImpl> _function = new Procedure1<MutableJvmTypeParameterDeclarationImpl>() {
+            public void apply(final MutableJvmTypeParameterDeclarationImpl it) {
+              it.setDelegate(delegate);
+              it.setCompilationUnit(CompilationUnitImpl.this);
+            }
+          };
+          _xifexpression = ObjectExtensions.<MutableJvmTypeParameterDeclarationImpl>operator_doubleArrow(_mutableJvmTypeParameterDeclarationImpl, _function);
+        } else {
+          JvmTypeParameterDeclarationImpl _jvmTypeParameterDeclarationImpl = new JvmTypeParameterDeclarationImpl();
+          final Procedure1<JvmTypeParameterDeclarationImpl> _function_1 = new Procedure1<JvmTypeParameterDeclarationImpl>() {
+            public void apply(final JvmTypeParameterDeclarationImpl it) {
+              it.setDelegate(delegate);
+              it.setCompilationUnit(CompilationUnitImpl.this);
+            }
+          };
+          _xifexpression = ObjectExtensions.<JvmTypeParameterDeclarationImpl>operator_doubleArrow(_jvmTypeParameterDeclarationImpl, _function_1);
+        }
+        return _xifexpression;
       }
     };
     return this.<JvmTypeParameter, JvmTypeParameterDeclarationImpl>getOrCreate(delegate, _function);
   }
   
-  public MutableParameterDeclaration toParameterDeclaration(final JvmFormalParameter delegate) {
+  public ParameterDeclaration toParameterDeclaration(final JvmFormalParameter delegate) {
     final Function1<JvmFormalParameter,JvmParameterDeclarationImpl> _function = new Function1<JvmFormalParameter,JvmParameterDeclarationImpl>() {
       public JvmParameterDeclarationImpl apply(final JvmFormalParameter it) {
-        JvmParameterDeclarationImpl _jvmParameterDeclarationImpl = new JvmParameterDeclarationImpl();
-        final Procedure1<JvmParameterDeclarationImpl> _function = new Procedure1<JvmParameterDeclarationImpl>() {
-          public void apply(final JvmParameterDeclarationImpl it) {
-            it.setDelegate(delegate);
-            it.setCompilationUnit(CompilationUnitImpl.this);
-          }
-        };
-        return ObjectExtensions.<JvmParameterDeclarationImpl>operator_doubleArrow(_jvmParameterDeclarationImpl, _function);
+        JvmParameterDeclarationImpl _xifexpression = null;
+        Resource _eResource = delegate.eResource();
+        XtendFile _xtendFile = CompilationUnitImpl.this.getXtendFile();
+        Resource _eResource_1 = _xtendFile.eResource();
+        boolean _equals = Objects.equal(_eResource, _eResource_1);
+        if (_equals) {
+          MutableJvmParameterDeclarationImpl _mutableJvmParameterDeclarationImpl = new MutableJvmParameterDeclarationImpl();
+          final Procedure1<MutableJvmParameterDeclarationImpl> _function = new Procedure1<MutableJvmParameterDeclarationImpl>() {
+            public void apply(final MutableJvmParameterDeclarationImpl it) {
+              it.setDelegate(delegate);
+              it.setCompilationUnit(CompilationUnitImpl.this);
+            }
+          };
+          _xifexpression = ObjectExtensions.<MutableJvmParameterDeclarationImpl>operator_doubleArrow(_mutableJvmParameterDeclarationImpl, _function);
+        } else {
+          JvmParameterDeclarationImpl _jvmParameterDeclarationImpl = new JvmParameterDeclarationImpl();
+          final Procedure1<JvmParameterDeclarationImpl> _function_1 = new Procedure1<JvmParameterDeclarationImpl>() {
+            public void apply(final JvmParameterDeclarationImpl it) {
+              it.setDelegate(delegate);
+              it.setCompilationUnit(CompilationUnitImpl.this);
+            }
+          };
+          _xifexpression = ObjectExtensions.<JvmParameterDeclarationImpl>operator_doubleArrow(_jvmParameterDeclarationImpl, _function_1);
+        }
+        return _xifexpression;
       }
     };
     return this.<JvmFormalParameter, JvmParameterDeclarationImpl>getOrCreate(delegate, _function);
   }
   
-  public MutableMemberDeclaration toMemberDeclaration(final JvmMember delegate) {
-    final Function1<JvmMember,MutableMemberDeclaration> _function = new Function1<JvmMember,MutableMemberDeclaration>() {
-      public MutableMemberDeclaration apply(final JvmMember it) {
-        MutableMemberDeclaration _switchResult = null;
+  public MemberDeclaration toMemberDeclaration(final JvmMember delegate) {
+    final Function1<JvmMember,MemberDeclaration> _function = new Function1<JvmMember,MemberDeclaration>() {
+      public MemberDeclaration apply(final JvmMember it) {
+        MemberDeclaration _switchResult = null;
         boolean _matched = false;
         if (!_matched) {
           if (delegate instanceof JvmDeclaredType) {
@@ -545,26 +654,60 @@ public class CompilationUnitImpl implements CompilationUnit {
         if (!_matched) {
           if (delegate instanceof JvmOperation) {
             _matched=true;
-            JvmMemberDeclarationImpl<JvmOperation> _xifexpression = null;
+            MemberDeclaration _xifexpression = null;
             JvmDeclaredType _declaringType = ((JvmOperation)delegate).getDeclaringType();
             if ((_declaringType instanceof JvmAnnotationType)) {
-              JvmAnnotationTypeElementDeclarationImpl _jvmAnnotationTypeElementDeclarationImpl = new JvmAnnotationTypeElementDeclarationImpl();
-              final Procedure1<JvmAnnotationTypeElementDeclarationImpl> _function = new Procedure1<JvmAnnotationTypeElementDeclarationImpl>() {
-                public void apply(final JvmAnnotationTypeElementDeclarationImpl it) {
-                  it.setDelegate(((JvmOperation)delegate));
-                  it.setCompilationUnit(CompilationUnitImpl.this);
-                }
-              };
-              _xifexpression = ObjectExtensions.<JvmAnnotationTypeElementDeclarationImpl>operator_doubleArrow(_jvmAnnotationTypeElementDeclarationImpl, _function);
+              JvmAnnotationTypeElementDeclarationImpl _xifexpression_1 = null;
+              Resource _eResource = ((JvmOperation)delegate).eResource();
+              XtendFile _xtendFile = CompilationUnitImpl.this.getXtendFile();
+              Resource _eResource_1 = _xtendFile.eResource();
+              boolean _equals = Objects.equal(_eResource, _eResource_1);
+              if (_equals) {
+                MutableJvmAnnotationTypeElementDeclarationImpl _mutableJvmAnnotationTypeElementDeclarationImpl = new MutableJvmAnnotationTypeElementDeclarationImpl();
+                final Procedure1<MutableJvmAnnotationTypeElementDeclarationImpl> _function = new Procedure1<MutableJvmAnnotationTypeElementDeclarationImpl>() {
+                  public void apply(final MutableJvmAnnotationTypeElementDeclarationImpl it) {
+                    it.setDelegate(((JvmOperation)delegate));
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+                _xifexpression_1 = ObjectExtensions.<MutableJvmAnnotationTypeElementDeclarationImpl>operator_doubleArrow(_mutableJvmAnnotationTypeElementDeclarationImpl, _function);
+              } else {
+                JvmAnnotationTypeElementDeclarationImpl _jvmAnnotationTypeElementDeclarationImpl = new JvmAnnotationTypeElementDeclarationImpl();
+                final Procedure1<JvmAnnotationTypeElementDeclarationImpl> _function_1 = new Procedure1<JvmAnnotationTypeElementDeclarationImpl>() {
+                  public void apply(final JvmAnnotationTypeElementDeclarationImpl it) {
+                    it.setDelegate(((JvmOperation)delegate));
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+                _xifexpression_1 = ObjectExtensions.<JvmAnnotationTypeElementDeclarationImpl>operator_doubleArrow(_jvmAnnotationTypeElementDeclarationImpl, _function_1);
+              }
+              _xifexpression = _xifexpression_1;
             } else {
-              JvmMethodDeclarationImpl _jvmMethodDeclarationImpl = new JvmMethodDeclarationImpl();
-              final Procedure1<JvmMethodDeclarationImpl> _function_1 = new Procedure1<JvmMethodDeclarationImpl>() {
-                public void apply(final JvmMethodDeclarationImpl it) {
-                  it.setDelegate(((JvmOperation)delegate));
-                  it.setCompilationUnit(CompilationUnitImpl.this);
-                }
-              };
-              _xifexpression = ObjectExtensions.<JvmMethodDeclarationImpl>operator_doubleArrow(_jvmMethodDeclarationImpl, _function_1);
+              JvmMethodDeclarationImpl _xifexpression_2 = null;
+              Resource _eResource_2 = ((JvmOperation)delegate).eResource();
+              XtendFile _xtendFile_1 = CompilationUnitImpl.this.getXtendFile();
+              Resource _eResource_3 = _xtendFile_1.eResource();
+              boolean _equals_1 = Objects.equal(_eResource_2, _eResource_3);
+              if (_equals_1) {
+                MutableJvmMethodDeclarationImpl _mutableJvmMethodDeclarationImpl = new MutableJvmMethodDeclarationImpl();
+                final Procedure1<MutableJvmMethodDeclarationImpl> _function_2 = new Procedure1<MutableJvmMethodDeclarationImpl>() {
+                  public void apply(final MutableJvmMethodDeclarationImpl it) {
+                    it.setDelegate(((JvmOperation)delegate));
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+                _xifexpression_2 = ObjectExtensions.<MutableJvmMethodDeclarationImpl>operator_doubleArrow(_mutableJvmMethodDeclarationImpl, _function_2);
+              } else {
+                JvmMethodDeclarationImpl _jvmMethodDeclarationImpl = new JvmMethodDeclarationImpl();
+                final Procedure1<JvmMethodDeclarationImpl> _function_3 = new Procedure1<JvmMethodDeclarationImpl>() {
+                  public void apply(final JvmMethodDeclarationImpl it) {
+                    it.setDelegate(((JvmOperation)delegate));
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+                _xifexpression_2 = ObjectExtensions.<JvmMethodDeclarationImpl>operator_doubleArrow(_jvmMethodDeclarationImpl, _function_3);
+              }
+              _xifexpression = ((MemberDeclaration) _xifexpression_2);
             }
             _switchResult = _xifexpression;
           }
@@ -572,52 +715,103 @@ public class CompilationUnitImpl implements CompilationUnit {
         if (!_matched) {
           if (delegate instanceof JvmConstructor) {
             _matched=true;
-            JvmConstructorDeclarationImpl _jvmConstructorDeclarationImpl = new JvmConstructorDeclarationImpl();
-            final Procedure1<JvmConstructorDeclarationImpl> _function = new Procedure1<JvmConstructorDeclarationImpl>() {
-              public void apply(final JvmConstructorDeclarationImpl it) {
-                it.setDelegate(((JvmConstructor)delegate));
-                it.setCompilationUnit(CompilationUnitImpl.this);
-              }
-            };
-            _switchResult = ObjectExtensions.<JvmConstructorDeclarationImpl>operator_doubleArrow(_jvmConstructorDeclarationImpl, _function);
+            JvmConstructorDeclarationImpl _xifexpression = null;
+            Resource _eResource = ((JvmConstructor)delegate).eResource();
+            XtendFile _xtendFile = CompilationUnitImpl.this.getXtendFile();
+            Resource _eResource_1 = _xtendFile.eResource();
+            boolean _equals = Objects.equal(_eResource, _eResource_1);
+            if (_equals) {
+              MutableJvmConstructorDeclarationImpl _mutableJvmConstructorDeclarationImpl = new MutableJvmConstructorDeclarationImpl();
+              final Procedure1<MutableJvmConstructorDeclarationImpl> _function = new Procedure1<MutableJvmConstructorDeclarationImpl>() {
+                public void apply(final MutableJvmConstructorDeclarationImpl it) {
+                  it.setDelegate(((JvmConstructor)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<MutableJvmConstructorDeclarationImpl>operator_doubleArrow(_mutableJvmConstructorDeclarationImpl, _function);
+            } else {
+              JvmConstructorDeclarationImpl _jvmConstructorDeclarationImpl = new JvmConstructorDeclarationImpl();
+              final Procedure1<JvmConstructorDeclarationImpl> _function_1 = new Procedure1<JvmConstructorDeclarationImpl>() {
+                public void apply(final JvmConstructorDeclarationImpl it) {
+                  it.setDelegate(((JvmConstructor)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<JvmConstructorDeclarationImpl>operator_doubleArrow(_jvmConstructorDeclarationImpl, _function_1);
+            }
+            _switchResult = _xifexpression;
           }
         }
         if (!_matched) {
           if (delegate instanceof JvmEnumerationLiteral) {
             _matched=true;
-            JvmEnumerationValueDeclarationImpl _jvmEnumerationValueDeclarationImpl = new JvmEnumerationValueDeclarationImpl();
-            final Procedure1<JvmEnumerationValueDeclarationImpl> _function = new Procedure1<JvmEnumerationValueDeclarationImpl>() {
-              public void apply(final JvmEnumerationValueDeclarationImpl it) {
-                it.setDelegate(((JvmEnumerationLiteral)delegate));
-                it.setCompilationUnit(CompilationUnitImpl.this);
-              }
-            };
-            _switchResult = ObjectExtensions.<JvmEnumerationValueDeclarationImpl>operator_doubleArrow(_jvmEnumerationValueDeclarationImpl, _function);
+            JvmEnumerationValueDeclarationImpl _xifexpression = null;
+            Resource _eResource = ((JvmEnumerationLiteral)delegate).eResource();
+            XtendFile _xtendFile = CompilationUnitImpl.this.getXtendFile();
+            Resource _eResource_1 = _xtendFile.eResource();
+            boolean _equals = Objects.equal(_eResource, _eResource_1);
+            if (_equals) {
+              MutableJvmEnumerationValueDeclarationImpl _mutableJvmEnumerationValueDeclarationImpl = new MutableJvmEnumerationValueDeclarationImpl();
+              final Procedure1<MutableJvmEnumerationValueDeclarationImpl> _function = new Procedure1<MutableJvmEnumerationValueDeclarationImpl>() {
+                public void apply(final MutableJvmEnumerationValueDeclarationImpl it) {
+                  it.setDelegate(((JvmEnumerationLiteral)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<MutableJvmEnumerationValueDeclarationImpl>operator_doubleArrow(_mutableJvmEnumerationValueDeclarationImpl, _function);
+            } else {
+              JvmEnumerationValueDeclarationImpl _jvmEnumerationValueDeclarationImpl = new JvmEnumerationValueDeclarationImpl();
+              final Procedure1<JvmEnumerationValueDeclarationImpl> _function_1 = new Procedure1<JvmEnumerationValueDeclarationImpl>() {
+                public void apply(final JvmEnumerationValueDeclarationImpl it) {
+                  it.setDelegate(((JvmEnumerationLiteral)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<JvmEnumerationValueDeclarationImpl>operator_doubleArrow(_jvmEnumerationValueDeclarationImpl, _function_1);
+            }
+            _switchResult = _xifexpression;
           }
         }
         if (!_matched) {
           if (delegate instanceof JvmField) {
             _matched=true;
-            JvmFieldDeclarationImpl _jvmFieldDeclarationImpl = new JvmFieldDeclarationImpl();
-            final Procedure1<JvmFieldDeclarationImpl> _function = new Procedure1<JvmFieldDeclarationImpl>() {
-              public void apply(final JvmFieldDeclarationImpl it) {
-                it.setDelegate(((JvmField)delegate));
-                it.setCompilationUnit(CompilationUnitImpl.this);
-              }
-            };
-            _switchResult = ObjectExtensions.<JvmFieldDeclarationImpl>operator_doubleArrow(_jvmFieldDeclarationImpl, _function);
+            JvmFieldDeclarationImpl _xifexpression = null;
+            Resource _eResource = ((JvmField)delegate).eResource();
+            XtendFile _xtendFile = CompilationUnitImpl.this.getXtendFile();
+            Resource _eResource_1 = _xtendFile.eResource();
+            boolean _equals = Objects.equal(_eResource, _eResource_1);
+            if (_equals) {
+              MutableJvmFieldDeclarationImpl _mutableJvmFieldDeclarationImpl = new MutableJvmFieldDeclarationImpl();
+              final Procedure1<MutableJvmFieldDeclarationImpl> _function = new Procedure1<MutableJvmFieldDeclarationImpl>() {
+                public void apply(final MutableJvmFieldDeclarationImpl it) {
+                  it.setDelegate(((JvmField)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<MutableJvmFieldDeclarationImpl>operator_doubleArrow(_mutableJvmFieldDeclarationImpl, _function);
+            } else {
+              JvmFieldDeclarationImpl _jvmFieldDeclarationImpl = new JvmFieldDeclarationImpl();
+              final Procedure1<JvmFieldDeclarationImpl> _function_1 = new Procedure1<JvmFieldDeclarationImpl>() {
+                public void apply(final JvmFieldDeclarationImpl it) {
+                  it.setDelegate(((JvmField)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<JvmFieldDeclarationImpl>operator_doubleArrow(_jvmFieldDeclarationImpl, _function_1);
+            }
+            _switchResult = _xifexpression;
           }
         }
         return _switchResult;
       }
     };
-    return this.<JvmMember, MutableMemberDeclaration>getOrCreate(delegate, _function);
+    return this.<JvmMember, MemberDeclaration>getOrCreate(delegate, _function);
   }
   
-  public MutableNamedElement toNamedElement(final JvmIdentifiableElement delegate) {
-    final Function1<JvmIdentifiableElement,MutableDeclaration> _function = new Function1<JvmIdentifiableElement,MutableDeclaration>() {
-      public MutableDeclaration apply(final JvmIdentifiableElement it) {
-        MutableDeclaration _switchResult = null;
+  public NamedElement toNamedElement(final JvmIdentifiableElement delegate) {
+    final Function1<JvmIdentifiableElement,Declaration> _function = new Function1<JvmIdentifiableElement,Declaration>() {
+      public Declaration apply(final JvmIdentifiableElement it) {
+        Declaration _switchResult = null;
         boolean _matched = false;
         if (!_matched) {
           if (delegate instanceof JvmMember) {
@@ -643,7 +837,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         return _switchResult;
       }
     };
-    return this.<JvmIdentifiableElement, MutableDeclaration>getOrCreate(delegate, _function);
+    return this.<JvmIdentifiableElement, Declaration>getOrCreate(delegate, _function);
   }
   
   public TypeReference toTypeReference(final JvmTypeReference delegate) {
@@ -1054,7 +1248,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this.<XAnnotation, XtendAnnotationReferenceImpl>getOrCreate(delegate, _function);
   }
   
-  public MutableAnnotationReference toAnnotationReference(final JvmAnnotationReference delegate) {
+  public AnnotationReference toAnnotationReference(final JvmAnnotationReference delegate) {
     final Function1<JvmAnnotationReference,JvmAnnotationReferenceImpl> _function = new Function1<JvmAnnotationReference,JvmAnnotationReferenceImpl>() {
       public JvmAnnotationReferenceImpl apply(final JvmAnnotationReference it) {
         JvmAnnotationReferenceImpl _jvmAnnotationReferenceImpl = new JvmAnnotationReferenceImpl();
@@ -1105,12 +1299,12 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (value instanceof JvmAnnotationAnnotationValue) {
         _matched=true;
         EList<JvmAnnotationReference> _values = ((JvmAnnotationAnnotationValue)value).getValues();
-        final Function1<JvmAnnotationReference,MutableAnnotationReference> _function = new Function1<JvmAnnotationReference,MutableAnnotationReference>() {
-          public MutableAnnotationReference apply(final JvmAnnotationReference it) {
+        final Function1<JvmAnnotationReference,AnnotationReference> _function = new Function1<JvmAnnotationReference,AnnotationReference>() {
+          public AnnotationReference apply(final JvmAnnotationReference it) {
             return CompilationUnitImpl.this.toAnnotationReference(it);
           }
         };
-        List<MutableAnnotationReference> _map = ListExtensions.<JvmAnnotationReference, MutableAnnotationReference>map(_values, _function);
+        List<AnnotationReference> _map = ListExtensions.<JvmAnnotationReference, AnnotationReference>map(_values, _function);
         _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_map, AnnotationReference.class);
       }
     }
@@ -1160,12 +1354,12 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (value instanceof JvmEnumAnnotationValue) {
         _matched=true;
         EList<JvmEnumerationLiteral> _values = ((JvmEnumAnnotationValue)value).getValues();
-        final Function1<JvmEnumerationLiteral,MutableNamedElement> _function = new Function1<JvmEnumerationLiteral,MutableNamedElement>() {
-          public MutableNamedElement apply(final JvmEnumerationLiteral it) {
+        final Function1<JvmEnumerationLiteral,NamedElement> _function = new Function1<JvmEnumerationLiteral,NamedElement>() {
+          public NamedElement apply(final JvmEnumerationLiteral it) {
             return CompilationUnitImpl.this.toNamedElement(it);
           }
         };
-        List<MutableNamedElement> _map = ListExtensions.<JvmEnumerationLiteral, MutableNamedElement>map(_values, _function);
+        List<NamedElement> _map = ListExtensions.<JvmEnumerationLiteral, NamedElement>map(_values, _function);
         _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_map, EnumerationValueDeclaration.class);
       }
     }

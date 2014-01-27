@@ -11,10 +11,9 @@ import com.google.common.base.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
-import org.eclipse.xtend.lib.macro.declaration.MutableElement;
 
 @SuppressWarnings("all")
-public abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
+public abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> {
   public void remove() {
     T _delegate = this.getDelegate();
     EObject _eContainer = _delegate.eContainer();

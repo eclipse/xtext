@@ -11,14 +11,26 @@ import com.google.common.base.Preconditions
 import com.google.common.collect.ImmutableList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
+import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration
+import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
+import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeElementDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableElement
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationValueDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration
@@ -26,12 +38,13 @@ import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Type
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.expression.Expression
@@ -56,10 +69,11 @@ import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 
 import static org.eclipse.xtend.core.macro.ConditionUtils.*
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
 
-abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> implements MutableElement {
+abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> {
 	
-	override remove() {
+	def remove() {
 		if (delegate.eContainer == null)
 			return;
 		EcoreUtil.remove(delegate)
@@ -69,9 +83,9 @@ abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> 
 	
 }
 
-abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends JvmElementImpl<T> implements MutableNamedElement {
+abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends JvmElementImpl<T> {
 	
-	override getSimpleName() {
+	def getSimpleName() {
 		delegate.simpleName
 	}
 	
@@ -81,37 +95,42 @@ abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends Jvm
 	
 }
 
-abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends JvmNamedElementImpl<T> implements MutableAnnotationTarget {
-	override getAnnotations() {
-		ImmutableList.copyOf(delegate.annotations.map[compilationUnit.toAnnotationReference(it)])
+abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends JvmNamedElementImpl<T> {
+
+	def Iterable<? extends AnnotationReference> getAnnotations() {
+		getAnnotations(AnnotationReference)
+	}	
+
+	def <R extends AnnotationReference> Iterable<? extends R> getAnnotations(Class<R> type) {
+		ImmutableList.copyOf(delegate.annotations.map[compilationUnit.toAnnotationReference(it) as R])
 	}	
 	
-	override addAnnotation(Type annotationType) {
+	def MutableAnnotationReference addAnnotation(Type annotationType) {
 		switch annotationType { 
 			JvmAnnotationTypeDeclarationImpl : {
 				val result = TypesFactory.eINSTANCE.createJvmAnnotationReference
 				result.setAnnotation(annotationType.delegate)
 				this.delegate.annotations.add(result)
-				return compilationUnit.toAnnotationReference(result)
+				return compilationUnit.toAnnotationReference(result) as MutableAnnotationReference
 			}
 			default : throw new IllegalArgumentException(""+annotationType+" is not an annotation type.")
 		}
 	}
 	
-	override findAnnotation(Type annotationType) {
+	def findAnnotation(Type annotationType) {
 		annotations.findFirst[annotationTypeDeclaration == annotationType]
 	}
 
 }
 
-abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MutableMemberDeclaration {
+abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> {
 	
-	override getDocComment() {
+	def getDocComment() {
 		val adapter = EcoreUtil.getAdapter(delegate.eAdapters(), DocumentationAdapter) as DocumentationAdapter;
 		return adapter?.getDocumentation();
 	}
 	
-	override setDocComment(String docComment) {
+	def setDocComment(String docComment) {
 		var adapter = EcoreUtil.getAdapter(delegate.eAdapters(), DocumentationAdapter) as DocumentationAdapter;
 		if (adapter == null) {
 			adapter = new DocumentationAdapter
@@ -120,11 +139,11 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 		adapter.setDocumentation(docComment)
 	}
 	
-	override getVisibility() {
+	def getVisibility() {
 		compilationUnit.toVisibility(delegate.visibility)
 	}
 	
-	override setVisibility(Visibility visibility) {
+	def setVisibility(Visibility visibility) {
 		delegate.visibility = switch visibility {
 			case Visibility.DEFAULT : JvmVisibility.DEFAULT
 			case Visibility.PUBLIC : JvmVisibility.PUBLIC
@@ -133,11 +152,11 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 		}
 	}
 	
-	override getDeclaringType() {
+	def getDeclaringType() {
 		compilationUnit.toTypeDeclaration(delegate.declaringType)
 	}
 	
-	override setSimpleName(String name) {
+	def setSimpleName(String name) {
 		checkJavaIdentifier(name, "name");
 		switch (it: delegate) {
 			JvmMemberImplCustom : clearIdentifierCache
@@ -147,29 +166,33 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 	
 }
 
-abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemberDeclarationImpl<T> implements MutableTypeDeclaration {
+abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemberDeclarationImpl<T> {
 	
-	override getDeclaredMembers() {
-		ImmutableList.copyOf(delegate.members.map[compilationUnit.toMemberDeclaration(it)])
+	def Iterable<? extends MemberDeclaration> getDeclaredMembers() {
+		getDeclaredMembers(MemberDeclaration)
+	}
+	
+	def <R extends MemberDeclaration> Iterable<? extends R> getDeclaredMembers(Class<R> type) {
+		ImmutableList.copyOf(delegate.members.map[compilationUnit.toMemberDeclaration(it) as R])
 	}
 	
 	override getSimpleName() {
 		delegate.simpleName
 	}
 	
-	override getQualifiedName() {
+	def getQualifiedName() {
 		delegate.identifier
 	}
 	
-	override isAssignableFrom(Type otherType) {
+	def isAssignableFrom(Type otherType) {
 		if (otherType == null)
 			return false;
-		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
+		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this as Type)
 		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
 		return thisTypeRef.isAssignableFrom(thatTypeRef);
 	}
 	
-	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
+	def addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
 		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		// remove default constructor
 		val constructor = delegate.members.filter(JvmConstructor).findFirst[compilationUnit.typeExtensions.isSingleSyntheticDefaultConstructor(it)]
@@ -185,7 +208,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		return mutableConstructorDeclaration
 	}
 	
-	override addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
+	def addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
 		checkJavaIdentifier(name, "name")
 		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		val newField = TypesFactory.eINSTANCE.createJvmField
@@ -197,7 +220,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		return mutableFieldDeclaration
 	}
 	
-	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
+	def addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
 		checkJavaIdentifier(name, "name")
 		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
 		val newMethod = TypesFactory.eINSTANCE.createJvmOperation
@@ -210,38 +233,38 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		return mutableMethodDeclaration
 	}
 	
-	override findDeclaredConstructor(TypeReference... parameterTypes) {
+	def findDeclaredConstructor(TypeReference... parameterTypes) {
 		checkIterable(parameterTypes, "parameterTypes")
 		declaredConstructors.findFirst[constructor | constructor.parameters.map[type].toList == parameterTypes.toList]
 	}
 	
-	override findDeclaredField(String name) {
+	def findDeclaredField(String name) {
 		declaredFields.findFirst[field | field.simpleName == name]
 	}
 	
-	override findDeclaredMethod(String name, TypeReference... parameterTypes) {
+	def findDeclaredMethod(String name, TypeReference... parameterTypes) {
 		checkIterable(parameterTypes, "parameterTypes")
 		declaredMethods.findFirst[method | method.simpleName == name && method.parameters.map[type].toList == parameterTypes.toList]
 	}
 	
-	override getDeclaredMethods() {
-		declaredMembers.filter(MutableMethodDeclaration)
+	def Iterable<? extends MethodDeclaration> getDeclaredMethods() {
+		declaredMembers.filter(MethodDeclaration)
 	}
 	
-	override getDeclaredFields() {
-		declaredMembers.filter(MutableFieldDeclaration)
+	def Iterable<? extends FieldDeclaration> getDeclaredFields() {
+		declaredMembers.filter(FieldDeclaration)
 	}
 	
-	override getDeclaredClasses() {
-		declaredMembers.filter(MutableClassDeclaration)
+	def Iterable<? extends ClassDeclaration> getDeclaredClasses() {
+		declaredMembers.filter(ClassDeclaration)
 	}
 	
-	override getDeclaredConstructors() {
-		declaredMembers.filter(MutableConstructorDeclaration)
+	def Iterable<? extends ConstructorDeclaration> getDeclaredConstructors() {
+		declaredMembers.filter(ConstructorDeclaration)
 	}
 	
-	override getDeclaredInterfaces() {
-		declaredMembers.filter(MutableInterfaceDeclaration)
+	def Iterable<? extends InterfaceDeclaration> getDeclaredInterfaces() {
+		declaredMembers.filter(InterfaceDeclaration)
 	}
 	
 	override setSimpleName(String name) {
@@ -250,11 +273,58 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	
 }
 
-class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements MutableInterfaceDeclaration {
+class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationImpl implements MutableInterfaceDeclaration {
 	
-	override getExtendedInterfaces() {
-		val filtered = delegate.superTypes.filter[(it.type as JvmGenericType).interface]
-		filtered.map[compilationUnit.toTypeReference(it)].toList
+	override MutableMethodDeclaration findDeclaredMethod(String name, TypeReference... parameterTypes) {
+		super.findDeclaredMethod(name, parameterTypes) as MutableMethodDeclaration
+	}
+	
+	override MutableFieldDeclaration findDeclaredField(String name) {
+		super.findDeclaredField(name) as MutableFieldDeclaration
+	}
+	
+	override MutableConstructorDeclaration findDeclaredConstructor(TypeReference... parameterTypes) {
+		super.findDeclaredConstructor(parameterTypes) as MutableConstructorDeclaration
+	}
+	
+	override Iterable<? extends MutableMethodDeclaration> getDeclaredMethods() {
+		super.declaredMethods as Iterable<? extends MutableMethodDeclaration>
+	}
+	
+	override Iterable<? extends MutableFieldDeclaration> getDeclaredFields() {
+		super.declaredFields as Iterable<? extends MutableFieldDeclaration>
+	}
+	
+	override Iterable<? extends MutableClassDeclaration> getDeclaredClasses() {
+		super.declaredClasses as Iterable<? extends MutableClassDeclaration>
+	}
+	
+	override Iterable<? extends MutableConstructorDeclaration> getDeclaredConstructors() {
+		super.declaredConstructors as Iterable<? extends MutableConstructorDeclaration>
+	}
+	
+	override Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
+		super.declaredInterfaces as Iterable<? extends MutableInterfaceDeclaration>
+	}
+	
+	override MutableAnnotationReference findAnnotation(Type annotationType) {
+		super.findAnnotation(annotationType) as MutableAnnotationReference
+	}
+	
+	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
+		getAnnotations(MutableAnnotationReference)
+	}
+	
+	override MutableTypeDeclaration getDeclaringType() {
+		super.declaringType as MutableTypeDeclaration
+	}
+	
+	override Iterable<? extends MutableMemberDeclaration> getDeclaredMembers() {
+		getDeclaredMembers(MutableMemberDeclaration)
+	}
+	
+	override Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters() {
+		super.typeParameters as Iterable<? extends MutableTypeParameterDeclaration>
 	}
 	
 	override setExtendedInterfaces(Iterable<? extends TypeReference> superinterfaces) {
@@ -267,12 +337,36 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 		}
 	}
 	
-	override getTypeParameters() {
-		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
-	}
-	
 	override setStrictFloatingPoint(boolean isStrictFloatingPoint) {
 		delegate.setStrictFloatingPoint(isStrictFloatingPoint)
+	}
+	
+	override addTypeParameter(String name, TypeReference... upperBounds) {
+		checkJavaIdentifier(name, "name");
+		checkIterable(upperBounds, "upperBounds")
+		val param = TypesFactory.eINSTANCE.createJvmTypeParameter
+		param.name = name
+		delegate.typeParameters.add(param)
+		for (upper : upperBounds) {
+			val typeRef = compilationUnit.toJvmTypeReference(upper)
+			val jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound
+			jvmUpperBound.setTypeReference(typeRef)
+			param.constraints.add(jvmUpperBound)
+		}
+		return compilationUnit.toTypeParameterDeclaration(param) as MutableTypeParameterDeclaration
+	}
+	
+}
+
+class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements InterfaceDeclaration {
+	
+	override getExtendedInterfaces() {
+		val filtered = delegate.superTypes.filter[(it.type as JvmGenericType).interface]
+		filtered.map[compilationUnit.toTypeReference(it)].toList
+	}
+	
+	override getTypeParameters() {
+		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
 	}
 	
 	override isStrictFloatingPoint() {
@@ -288,36 +382,57 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
 		throw new UnsupportedOperationException("The interface '"+simpleName+"' cannot declare any constructors.")
 	}
-	
-	override addTypeParameter(String name, TypeReference... upperBounds) {
-		checkJavaIdentifier(name, "name");
-		checkIterable(upperBounds, "upperBounds")
-		val param = TypesFactory.eINSTANCE.createJvmTypeParameter
-		param.name = name
-		delegate.typeParameters.add(param)
-		for (upper : upperBounds) {
-			val typeRef = compilationUnit.toJvmTypeReference(upper)
-			val jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound
-			jvmUpperBound.setTypeReference(typeRef)
-			param.constraints.add(jvmUpperBound)
-		}
-		return compilationUnit.toTypeParameterDeclaration(param)
-	}
 
 }
 
-class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmAnnotationType> implements MutableAnnotationTypeDeclaration {
+class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDeclarationImpl implements MutableAnnotationTypeDeclaration {
 	
-	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
-		throw new UnsupportedOperationException("The annotation '"+simpleName+"' cannot declare any constructors.")
+	override MutableMethodDeclaration findDeclaredMethod(String name, TypeReference... parameterTypes) {
+		super.findDeclaredMethod(name, parameterTypes) as MutableMethodDeclaration
 	}
 	
-	override addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
-		throw new UnsupportedOperationException("The annotation '"+simpleName+"' cannot declare any fields.")
+	override MutableFieldDeclaration findDeclaredField(String name) {
+		super.findDeclaredField(name) as MutableFieldDeclaration
 	}
 	
-	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
-		throw new UnsupportedOperationException("The annotation '"+simpleName+"' cannot declare any methods.")
+	override MutableConstructorDeclaration findDeclaredConstructor(TypeReference... parameterTypes) {
+		super.findDeclaredConstructor(parameterTypes) as MutableConstructorDeclaration
+	}
+	
+	override Iterable<? extends MutableMethodDeclaration> getDeclaredMethods() {
+		super.declaredMethods as Iterable<? extends MutableMethodDeclaration>
+	}
+	
+	override Iterable<? extends MutableFieldDeclaration> getDeclaredFields() {
+		super.declaredFields as Iterable<? extends MutableFieldDeclaration>
+	}
+	
+	override Iterable<? extends MutableClassDeclaration> getDeclaredClasses() {
+		super.declaredClasses as Iterable<? extends MutableClassDeclaration>
+	}
+	
+	override Iterable<? extends MutableConstructorDeclaration> getDeclaredConstructors() {
+		super.declaredConstructors as Iterable<? extends MutableConstructorDeclaration>
+	}
+	
+	override Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
+		super.declaredInterfaces as Iterable<? extends MutableInterfaceDeclaration>
+	}
+	
+	override MutableAnnotationReference findAnnotation(Type annotationType) {
+		super.findAnnotation(annotationType) as MutableAnnotationReference
+	}
+	
+	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
+		getAnnotations(MutableAnnotationReference)
+	}
+	
+	override MutableTypeDeclaration getDeclaringType() {
+		super.declaringType as MutableTypeDeclaration
+	}
+	
+	override Iterable<? extends MutableMemberDeclaration> getDeclaredMembers() {
+		getDeclaredMembers(MutableMemberDeclaration)
 	}
 	
 	override MutableAnnotationTypeElementDeclaration addAnnotationTypeElement(String name, Procedure1<MutableAnnotationTypeElementDeclaration> initializer) {
@@ -342,10 +457,86 @@ class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmAnnotat
 	
 }
 
-class JvmEnumerationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmEnumerationType> implements MutableEnumerationTypeDeclaration {
+class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmAnnotationType> implements AnnotationTypeDeclaration {
 	
-	override getDeclaredValues() {
+	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
+		throw new UnsupportedOperationException("The annotation '"+simpleName+"' cannot declare any constructors.")
+	}
+	
+	override addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
+		throw new UnsupportedOperationException("The annotation '"+simpleName+"' cannot declare any fields.")
+	}
+	
+	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
+		throw new UnsupportedOperationException("The annotation '"+simpleName+"' cannot declare any methods.")
+	}
+	
+	override AnnotationTypeElementDeclaration findDeclaredAnnotationTypeElement(String name) {
+		declaredAnnotationTypeElements.findFirst[simpleName == name]
+	}
+	
+	override Iterable<? extends AnnotationTypeElementDeclaration> getDeclaredAnnotationTypeElements() {
+		delegate.members.map[compilationUnit.toMemberDeclaration(it)].filter(AnnotationTypeElementDeclaration)
+	}
+	
+}
+
+class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationTypeDeclarationImpl implements MutableEnumerationTypeDeclaration {
+	
+	override MutableMethodDeclaration findDeclaredMethod(String name, TypeReference... parameterTypes) {
+		super.findDeclaredMethod(name, parameterTypes) as MutableMethodDeclaration
+	}
+	
+	override MutableFieldDeclaration findDeclaredField(String name) {
+		super.findDeclaredField(name) as MutableFieldDeclaration
+	}
+	
+	override MutableConstructorDeclaration findDeclaredConstructor(TypeReference... parameterTypes) {
+		super.findDeclaredConstructor(parameterTypes) as MutableConstructorDeclaration
+	}
+	
+	override Iterable<? extends MutableMethodDeclaration> getDeclaredMethods() {
+		super.declaredMethods as Iterable<? extends MutableMethodDeclaration>
+	}
+	
+	override Iterable<? extends MutableFieldDeclaration> getDeclaredFields() {
+		super.declaredFields as Iterable<? extends MutableFieldDeclaration>
+	}
+	
+	override Iterable<? extends MutableClassDeclaration> getDeclaredClasses() {
+		super.declaredClasses as Iterable<? extends MutableClassDeclaration>
+	}
+	
+	override Iterable<? extends MutableConstructorDeclaration> getDeclaredConstructors() {
+		super.declaredConstructors as Iterable<? extends MutableConstructorDeclaration>
+	}
+	
+	override Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
+		super.declaredInterfaces as Iterable<? extends MutableInterfaceDeclaration>
+	}
+	
+	override MutableAnnotationReference findAnnotation(Type annotationType) {
+		super.findAnnotation(annotationType) as MutableAnnotationReference
+	}
+	
+	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
+		getAnnotations(MutableAnnotationReference)
+	}
+	
+	override MutableTypeDeclaration getDeclaringType() {
+		super.declaringType as MutableTypeDeclaration
+	}
+	
+	override Iterable<? extends MutableMemberDeclaration> getDeclaredMembers() {
+		getDeclaredMembers(MutableMemberDeclaration)
+	}
+	
+	override Iterable<? extends MutableEnumerationValueDeclaration> getDeclaredValues() {
 		declaredMembers.filter(MutableEnumerationValueDeclaration)
+	}
+	
+	override MutableEnumerationValueDeclaration findDeclaredValue(String name) {
+		declaredValues.findFirst[value | value.simpleName == name]
 	}
 	
 	override addValue(String name, Procedure1<MutableEnumerationValueDeclaration> initializer) {
@@ -360,50 +551,76 @@ class JvmEnumerationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmEnumer
 		return mutableEnumerationValueDeclaration
 	}
 	
+}
+
+class JvmEnumerationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmEnumerationType> implements EnumerationTypeDeclaration {
+	
+	override getDeclaredValues() {
+		declaredMembers.filter(EnumerationValueDeclaration)
+	}
+	
 	override findDeclaredValue(String name) {
 		declaredValues.findFirst[value | value.simpleName == name]
 	}
 	
 }
 
-class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements MutableClassDeclaration {
+class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements MutableClassDeclaration {
 	
-	override getImplementedInterfaces() {
-		val filtered = delegate.superTypes.filter[(it.type as JvmGenericType).interface]
-		filtered.map[compilationUnit.toTypeReference(it)].toList
+	override MutableMethodDeclaration findDeclaredMethod(String name, TypeReference... parameterTypes) {
+		super.findDeclaredMethod(name, parameterTypes) as MutableMethodDeclaration
 	}
 	
-	override getExtendedClass() {
-		compilationUnit.toTypeReference(delegate.superTypes.findFirst[
-			switch it: type {
-				JvmGenericType case !interface : true
-				default : false
-			}
-		])
+	override MutableFieldDeclaration findDeclaredField(String name) {
+		super.findDeclaredField(name) as MutableFieldDeclaration
 	}
 	
-	override isAbstract() {
-		delegate.isAbstract
+	override MutableConstructorDeclaration findDeclaredConstructor(TypeReference... parameterTypes) {
+		super.findDeclaredConstructor(parameterTypes) as MutableConstructorDeclaration
 	}
 	
-	override isFinal() {
-		delegate.isFinal
+	override Iterable<? extends MutableMethodDeclaration> getDeclaredMethods() {
+		super.declaredMethods as Iterable<? extends MutableMethodDeclaration>
 	}
 	
-	override isStatic() {
-		delegate.isStatic
+	override Iterable<? extends MutableFieldDeclaration> getDeclaredFields() {
+		super.declaredFields as Iterable<? extends MutableFieldDeclaration>
 	}
 	
-	override isStrictFloatingPoint() {
-		delegate.isStrictFloatingPoint	
+	override Iterable<? extends MutableClassDeclaration> getDeclaredClasses() {
+		super.declaredClasses as Iterable<? extends MutableClassDeclaration>
 	}
 	
-	override setStrictFloatingPoint(boolean isStrictFloatingPoint) {
-		delegate.setStrictFloatingPoint(isStrictFloatingPoint)
+	override Iterable<? extends MutableConstructorDeclaration> getDeclaredConstructors() {
+		super.declaredConstructors as Iterable<? extends MutableConstructorDeclaration>
+	}
+	
+	override Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
+		super.declaredInterfaces as Iterable<? extends MutableInterfaceDeclaration>
+	}
+	
+	override MutableAnnotationReference findAnnotation(Type annotationType) {
+		super.findAnnotation(annotationType) as MutableAnnotationReference
+	}
+	
+	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
+		getAnnotations(MutableAnnotationReference)
+	}
+	
+	override MutableTypeDeclaration getDeclaringType() {
+		super.declaringType as MutableTypeDeclaration
+	}
+	
+	override Iterable<? extends MutableMemberDeclaration> getDeclaredMembers() {
+		getDeclaredMembers(MutableMemberDeclaration)
+	}
+	
+	override Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters() {
+		super.typeParameters as Iterable<? extends MutableTypeParameterDeclaration> 
 	}
 
-	override getTypeParameters() {
-		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
+	override setStrictFloatingPoint(boolean isStrictFloatingPoint) {
+		delegate.setStrictFloatingPoint(isStrictFloatingPoint)
 	}
 
 	override setAbstract(boolean isAbstract) {
@@ -443,18 +660,6 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 			compilationUnit.toJvmTypeReference(it)
 		])
 	}
-
-	override findDeclaredField(String name) {
-		declaredMembers.filter(MutableFieldDeclaration).findFirst[it.simpleName == name]
-	}
-	
-	override findDeclaredMethod(String name, TypeReference[] parameterTypes) {
-		checkIterable(parameterTypes, "parameterTypes")
-		declaredMembers.filter(MutableMethodDeclaration).findFirst[
-			it.simpleName == name 
-			&& it.parameters.map[type].toList == parameterTypes.toList
-		]
-	}
 	
 	override addTypeParameter(String name, TypeReference... upperBounds) {
 		checkJavaIdentifier(name, "name")
@@ -468,35 +673,93 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 			jvmUpperBound.setTypeReference(typeRef)
 			param.constraints.add(jvmUpperBound)
 		}
-		return compilationUnit.toTypeParameterDeclaration(param)
+		return compilationUnit.toTypeParameterDeclaration(param) as MutableTypeParameterDeclaration
 	}
 	
 }
 
-abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends JvmMemberDeclarationImpl<T> implements MutableExecutableDeclaration {
+class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements ClassDeclaration {
 	
+	override getImplementedInterfaces() {
+		val filtered = delegate.superTypes.filter[(it.type as JvmGenericType).interface]
+		filtered.map[compilationUnit.toTypeReference(it)].toList
+	}
+	
+	override getExtendedClass() {
+		compilationUnit.toTypeReference(delegate.superTypes.findFirst[
+			switch it: type {
+				JvmGenericType case !interface : true
+				default : false
+			}
+		])
+	}
+	
+	override isAbstract() {
+		delegate.isAbstract
+	}
+	
+	override isFinal() {
+		delegate.isFinal
+	}
+	
+	override isStatic() {
+		delegate.isStatic
+	}
+	
+	override isStrictFloatingPoint() {
+		delegate.isStrictFloatingPoint	
+	}
+
 	override getTypeParameters() {
 		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
 	}
+
+	override findDeclaredField(String name) {
+		declaredMembers.filter(FieldDeclaration).findFirst[it.simpleName == name]
+	}
 	
-	override isVarArgs() {
+	override findDeclaredMethod(String name, TypeReference... parameterTypes) {
+		checkIterable(parameterTypes, "parameterTypes")
+		declaredMembers.filter(MethodDeclaration).findFirst[
+			it.simpleName == name 
+			&& it.parameters.map[type].toList == parameterTypes.toList
+		]
+	}
+	
+}
+
+abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends JvmMemberDeclarationImpl<T> {
+	
+	def Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
+		getTypeParameters(TypeParameterDeclaration)
+	}
+	
+	def <R extends TypeParameterDeclaration> Iterable<? extends R> getTypeParameters(Class<R> type) {
+		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it) as R]
+	}
+	
+	def isVarArgs() {
 		delegate.varArgs
 	}
 	
-	override getParameters() {
-		delegate.parameters.map[compilationUnit.toParameterDeclaration(it)]
+	def Iterable<? extends ParameterDeclaration> getParameters() {
+		getParameters(ParameterDeclaration)
 	}
 	
-	override getExceptions() {
+	def <R extends ParameterDeclaration> Iterable<? extends R> getParameters(Class<R> type) {
+		delegate.parameters.map[compilationUnit.toParameterDeclaration(it) as R]
+	}
+	
+	def getExceptions() {
 		delegate.exceptions.map[compilationUnit.toTypeReference(it)]
 	}
 	
-	override getBody() {
+	def getBody() {
 		val expression = compilationUnit.jvmTypesBuilder.getExpression(delegate)
 		compilationUnit.toExpression(expression)
 	}
 	
-	override setBody(Expression body) {
+	def setBody(Expression body) {
 		if (body == null) {
 			compilationUnit.jvmTypesBuilder.removeExistingBody(delegate)
 		} else {
@@ -504,7 +767,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		}
 	}
 	
-	override setExceptions(TypeReference... exceptions) {
+	def setExceptions(TypeReference... exceptions) {
 		checkIterable(exceptions, "exceptions")
 		delegate.exceptions.clear
 		for (exceptionType : exceptions) {
@@ -514,11 +777,11 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		}
 	}
 	
-	override setVarArgs(boolean isVarArgs) {
+	def setVarArgs(boolean isVarArgs) {
 		delegate.setVarArgs(isVarArgs)
 	}
 	
-	override addTypeParameter(String name, TypeReference... upperBounds) {
+	def MutableTypeParameterDeclaration addTypeParameter(String name, TypeReference... upperBounds) {
 		checkJavaIdentifier(name, "name")
 		checkIterable(upperBounds, "upperBounds")
 		val param = TypesFactory.eINSTANCE.createJvmTypeParameter
@@ -532,20 +795,20 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 			jvmUpperBound.setTypeReference(typeRef)
 			param.constraints.add(jvmUpperBound)
 		}
-		return compilationUnit.toTypeParameterDeclaration(param)
+		return compilationUnit.toTypeParameterDeclaration(param) as MutableTypeParameterDeclaration
 	}
 	
-	override setBody(CompilationStrategy compilationStrategy) {
+	def setBody(CompilationStrategy compilationStrategy) {
 		Preconditions.checkArgument(compilationStrategy != null, "compilationStrategy cannot be null")
 		compilationUnit.setCompilationStrategy(delegate, compilationStrategy)
 	}
 	
-	override setBody(StringConcatenationClient compilationTemplate) {
+	def setBody(StringConcatenationClient compilationTemplate) {
 		Preconditions.checkArgument(compilationTemplate != null, "compilationTemplate cannot be null")
 		compilationUnit.setCompilationTemplate(delegate, compilationTemplate)
 	}
 	
-	override addParameter(String name, TypeReference type) {
+	def MutableParameterDeclaration addParameter(String name, TypeReference type) {
 		checkJavaIdentifier(name, "name");
 		Preconditions.checkArgument(type != null, "type cannot be null");
 		if (type.inferred)
@@ -554,19 +817,23 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		param.name = name
 		param.parameterType = compilationUnit.toJvmTypeReference(type)
 		delegate.parameters.add(param)
-		return compilationUnit.toParameterDeclaration(param)
+		return compilationUnit.toParameterDeclaration(param) as MutableParameterDeclaration 
 	}
 	
 }
 
-class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmFormalParameter> implements MutableParameterDeclaration {
-
-	override getType() {
-		compilationUnit.toTypeReference(delegate.parameterType)
+class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationImpl implements MutableParameterDeclaration {
+	
+	override MutableExecutableDeclaration getDeclaringExecutable() {
+		super.declaringExecutable as MutableExecutableDeclaration
 	}
 	
-	override getDeclaringExecutable() {
-		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmMember) as MutableExecutableDeclaration
+	override MutableAnnotationReference findAnnotation(Type annotationType) {
+		super.findAnnotation(annotationType) as MutableAnnotationReference
+	}
+	
+	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
+		getAnnotations(MutableAnnotationReference)
 	}
 	
 	override setSimpleName(String name) {
@@ -576,50 +843,46 @@ class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmFormalParam
 	
 }
 
-class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation> implements MutableMethodDeclaration {
-	
-	override isAbstract() {
-		delegate.isAbstract
+class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmFormalParameter> implements ParameterDeclaration {
+
+	override getType() {
+		compilationUnit.toTypeReference(delegate.parameterType)
 	}
 	
-	override isFinal() {
-		delegate.isFinal
+	override getDeclaringExecutable() {
+		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmMember) as ExecutableDeclaration
 	}
 	
-//	override isOverride() {
-//		throw new UnsupportedOperationException("Auto-Jvm function stub")
-//	}
+}
+
+class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implements MutableMethodDeclaration {
 	
-	override isStatic() {
-		delegate.isStatic
+	override Iterable<? extends MutableParameterDeclaration> getParameters() {
+		getParameters(MutableParameterDeclaration)
 	}
 	
-	override isSynchronized() {
-		delegate.isSynchronized
+	override Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters() {
+		getTypeParameters(MutableTypeParameterDeclaration)
 	}
 	
-	override isDefault() {
-		delegate.isDefault
+	override MutableAnnotationReference findAnnotation(Type annotationType) {
+		super.findAnnotation(annotationType) as MutableAnnotationReference
 	}
 	
-	override isStrictFloatingPoint() {
-		delegate.isStrictFloatingPoint	
+	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
+		getAnnotations(MutableAnnotationReference)
+	}
+	
+	override MutableTypeDeclaration getDeclaringType() {
+		super.declaringType as MutableTypeDeclaration
 	}
 	
 	override setStrictFloatingPoint(boolean isStrictFloatingPoint) {
 		delegate.setStrictFloatingPoint(isStrictFloatingPoint)
 	}
-	
-	override isNative() {
-		delegate.isNative	
-	}
 
 	override setNative(boolean isNative) {
 		delegate.setNative(isNative)
-	}
-	
-	override getReturnType() {
-		compilationUnit.toTypeReference(delegate.returnType)
 	}
 
 	override setReturnType(TypeReference type) {
@@ -653,7 +916,71 @@ class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation
 	
 }
 
-class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmConstructor> implements MutableConstructorDeclaration {
+class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation> implements MethodDeclaration {
+	
+	override isAbstract() {
+		delegate.isAbstract
+	}
+	
+	override isFinal() {
+		delegate.isFinal
+	}
+	
+//	override isOverride() {
+//		throw new UnsupportedOperationException("Auto-Jvm function stub")
+//	}
+	
+	override isStatic() {
+		delegate.isStatic
+	}
+	
+	override isSynchronized() {
+		delegate.isSynchronized
+	}
+	
+	override isDefault() {
+		delegate.isDefault
+	}
+	
+	override isStrictFloatingPoint() {
+		delegate.isStrictFloatingPoint	
+	}
+	
+	override isNative() {
+		delegate.isNative	
+	}
+	
+	override getReturnType() {
+		compilationUnit.toTypeReference(delegate.returnType)
+	}
+	
+}
+
+class MutableJvmConstructorDeclarationImpl extends JvmConstructorDeclarationImpl implements MutableConstructorDeclaration {
+	
+	override Iterable<? extends MutableParameterDeclaration> getParameters() {
+		getParameters(MutableParameterDeclaration)
+	}
+	
+	override Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters() {
+		getTypeParameters(MutableTypeParameterDeclaration)
+	}
+	
+	override MutableAnnotationReference findAnnotation(Type annotationType) {
+		super.findAnnotation(annotationType) as MutableAnnotationReference
+	}
+	
+	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
+		getAnnotations(MutableAnnotationReference)
+	}
+	
+	override MutableTypeDeclaration getDeclaringType() {
+		super.declaringType as MutableTypeDeclaration
+	}
+	
+}
+
+class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmConstructor> implements ConstructorDeclaration {
 	
 	override getSimpleName() {
 		declaringType.simpleName
@@ -661,22 +988,46 @@ class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmCons
 	
 }
 
-class JvmEnumerationValueDeclarationImpl extends JvmMemberDeclarationImpl<JvmEnumerationLiteral> implements MutableEnumerationValueDeclaration {
+class MutableJvmEnumerationValueDeclarationImpl extends JvmEnumerationValueDeclarationImpl implements MutableEnumerationValueDeclaration {
 	
-	override setVisibility(Visibility visibility) {
-		throw new UnsupportedOperationException("It is not possible to change visibility of enumeration value.")
+	override MutableAnnotationReference findAnnotation(Type annotationType) {
+		super.findAnnotation(annotationType) as MutableAnnotationReference
+	}
+	
+	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
+		getAnnotations(MutableAnnotationReference)
 	}
 	
 	override MutableEnumerationTypeDeclaration getDeclaringType() {
 		super.getDeclaringType() as MutableEnumerationTypeDeclaration
 	}
+	
+}
+
+class JvmEnumerationValueDeclarationImpl extends JvmMemberDeclarationImpl<JvmEnumerationLiteral> implements EnumerationValueDeclaration {
+	
+	override setVisibility(Visibility visibility) {
+		throw new UnsupportedOperationException("It is not possible to change visibility of enumeration value.")
+	}
+	
+	override EnumerationTypeDeclaration getDeclaringType() {
+		super.getDeclaringType() as EnumerationTypeDeclaration
+	}
 
 }
 
-class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> implements MutableFieldDeclaration {
+class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements MutableFieldDeclaration {
 	
-	override getInitializer() {
-		compilationUnit.toExpression(compilationUnit.jvmTypesBuilder.getExpression(delegate))
+	override MutableAnnotationReference findAnnotation(Type annotationType) {
+		super.findAnnotation(annotationType) as MutableAnnotationReference
+	}
+	
+	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
+		getAnnotations(MutableAnnotationReference)
+	}	
+	
+	override MutableTypeDeclaration getDeclaringType() {
+		super.declaringType as MutableTypeDeclaration
 	}
 	
 	override setInitializer(Expression initializer) {
@@ -695,26 +1046,6 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 	override setInitializer(StringConcatenationClient template) {
 		Preconditions.checkArgument(template != null, "template cannot be null")
 		compilationUnit.setCompilationTemplate(delegate, template)
-	}
-	
-	override isFinal() {
-		delegate.isFinal
-	}
-	
-	override isStatic() {
-		delegate.isStatic
-	}
-	
-	override isTransient() {
-		delegate.isTransient
-	}
-	
-	override isVolatile() {
-		delegate.isVolatile
-	}
-	
-	override getType() {
-		compilationUnit.toTypeReference(delegate.type)
 	}
 
 	override setFinal(boolean isFinal) {
@@ -740,10 +1071,46 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 	
 }
 
-class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl implements MutableAnnotationTarget, MutableTypeParameterDeclaration {
+class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> implements FieldDeclaration {
+	
+	override getInitializer() {
+		compilationUnit.toExpression(compilationUnit.jvmTypesBuilder.getExpression(delegate))
+	}
+	
+	override isFinal() {
+		delegate.isFinal
+	}
+	
+	override isStatic() {
+		delegate.isStatic
+	}
+	
+	override isTransient() {
+		delegate.isTransient
+	}
+	
+	override isVolatile() {
+		delegate.isVolatile
+	}
+	
+	override getType() {
+		compilationUnit.toTypeReference(delegate.type)
+	}
+	
+}
+
+class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclarationImpl implements MutableAnnotationTarget, MutableTypeParameterDeclaration {
 	
 	override MutableTypeParameterDeclarator getTypeParameterDeclarator() {
-		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmExecutable) as MutableTypeParameterDeclarator
+		super.typeParameterDeclarator as MutableTypeParameterDeclarator
+	}
+	
+	override MutableAnnotationReference findAnnotation(Type annotationType) {
+		super.findAnnotation(annotationType) as MutableAnnotationReference
+	}
+	
+	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
+		super.annotations as Iterable<? extends MutableAnnotationReference> 
 	}
 	
 	override setSimpleName(String name) {
@@ -759,28 +1126,8 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 			throw new IllegalStateException("Couldn't remove "+delegate.toString)
 	}
 	
-	override isAssignableFrom(Type otherType) {
-		if (otherType == null)
-			return false;
-		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
-		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
-		return thisTypeRef.isAssignableFrom(thatTypeRef);
-	}
-	
 	override addAnnotation(Type annotationType) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	override MutableAnnotationReference findAnnotation(Type annotationType) {
-		return null
-	}
-	
-	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
-		return emptyList
-	}
-	
-	override getQualifiedName() {
-		delegate.identifier
 	}
 	
 	override setUpperBounds(Iterable<? extends TypeReference> upperBounds) {
@@ -796,7 +1143,43 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 	
 }
 
-class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<JvmOperation> implements MutableAnnotationTypeElementDeclaration {
+class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl implements AnnotationTarget, TypeParameterDeclaration {
+	
+	override TypeParameterDeclarator getTypeParameterDeclarator() {
+		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmExecutable) as TypeParameterDeclarator
+	}
+	
+	override isAssignableFrom(Type otherType) {
+		if (otherType == null)
+			return false;
+		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
+		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
+		return thisTypeRef.isAssignableFrom(thatTypeRef);
+	}
+	
+	override getQualifiedName() {
+		delegate.identifier
+	}
+	
+}
+
+class MutableJvmAnnotationTypeElementDeclarationImpl extends JvmAnnotationTypeElementDeclarationImpl implements MutableAnnotationTypeElementDeclaration {
+	
+	override MutableAnnotationReference findAnnotation(Type annotationType) {
+		super.findAnnotation(annotationType) as MutableAnnotationReference
+	}
+	
+	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
+		getAnnotations(MutableAnnotationReference)
+	}
+	
+	override MutableTypeDeclaration getDeclaringType() {
+		super.declaringType as MutableTypeDeclaration
+	}
+
+}
+
+class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<JvmOperation> implements AnnotationTypeElementDeclaration {
 	
 	override getDefaultValue() {
 		return compilationUnit.translateAnnotationValue(delegate.defaultValue, compilationUnit.typeReferences.isArray(delegate.returnType))
