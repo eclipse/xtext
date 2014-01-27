@@ -29,7 +29,7 @@ import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
@@ -73,7 +73,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmAnnotationReference _delegate = this.getDelegate();
     JvmAnnotationType _annotation = _delegate.getAnnotation();
-    MutableTypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(_annotation);
+    TypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(_annotation);
     return ((AnnotationTypeDeclaration) _typeDeclaration);
   }
   

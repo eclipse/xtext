@@ -8,20 +8,20 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
-import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationValueDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 
 @SuppressWarnings("all")
-public class JvmEnumerationValueDeclarationImpl extends JvmMemberDeclarationImpl<JvmEnumerationLiteral> implements MutableEnumerationValueDeclaration {
+public class JvmEnumerationValueDeclarationImpl extends JvmMemberDeclarationImpl<JvmEnumerationLiteral> implements EnumerationValueDeclaration {
   public void setVisibility(final Visibility visibility) {
     throw new UnsupportedOperationException("It is not possible to change visibility of enumeration value.");
   }
   
-  public MutableEnumerationTypeDeclaration getDeclaringType() {
-    MutableTypeDeclaration _declaringType = super.getDeclaringType();
-    return ((MutableEnumerationTypeDeclaration) _declaringType);
+  public EnumerationTypeDeclaration getDeclaringType() {
+    TypeDeclaration _declaringType = super.getDeclaringType();
+    return ((EnumerationTypeDeclaration) _declaringType);
   }
 }

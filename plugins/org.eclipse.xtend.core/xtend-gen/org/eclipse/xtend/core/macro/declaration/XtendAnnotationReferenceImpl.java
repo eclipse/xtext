@@ -20,7 +20,7 @@ import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -46,7 +46,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       if (type instanceof JvmAnnotationType) {
         _matched=true;
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        MutableTypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(((JvmDeclaredType)type));
+        TypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(((JvmDeclaredType)type));
         _switchResult = ((AnnotationTypeDeclaration) _typeDeclaration);
       }
     }

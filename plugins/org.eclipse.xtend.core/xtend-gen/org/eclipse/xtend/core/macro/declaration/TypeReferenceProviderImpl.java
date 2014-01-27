@@ -194,7 +194,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       if (!_matched) {
         if (typeDeclaration instanceof JvmTypeDeclarationImpl) {
           _matched=true;
-          _switchResult = ((JvmTypeDeclarationImpl<? extends JvmDeclaredType>)typeDeclaration).getDelegate();
+          _switchResult = ((JvmTypeDeclarationImpl<JvmDeclaredType>)typeDeclaration).getDelegate();
         }
       }
       if (!_matched) {

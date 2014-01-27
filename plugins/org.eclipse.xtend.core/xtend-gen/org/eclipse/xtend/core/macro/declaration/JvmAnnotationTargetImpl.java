@@ -14,9 +14,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -27,18 +27,18 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
-public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends JvmNamedElementImpl<T> implements MutableAnnotationTarget {
-  public Iterable<? extends MutableAnnotationReference> getAnnotations() {
+public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends JvmNamedElementImpl<T> {
+  public Iterable<? extends AnnotationReference> getAnnotations() {
     T _delegate = this.getDelegate();
     EList<JvmAnnotationReference> _annotations = _delegate.getAnnotations();
-    final Function1<JvmAnnotationReference,MutableAnnotationReference> _function = new Function1<JvmAnnotationReference,MutableAnnotationReference>() {
-      public MutableAnnotationReference apply(final JvmAnnotationReference it) {
+    final Function1<JvmAnnotationReference,AnnotationReference> _function = new Function1<JvmAnnotationReference,AnnotationReference>() {
+      public AnnotationReference apply(final JvmAnnotationReference it) {
         CompilationUnitImpl _compilationUnit = JvmAnnotationTargetImpl.this.getCompilationUnit();
         return _compilationUnit.toAnnotationReference(it);
       }
     };
-    List<MutableAnnotationReference> _map = ListExtensions.<JvmAnnotationReference, MutableAnnotationReference>map(_annotations, _function);
-    return ImmutableList.<MutableAnnotationReference>copyOf(_map);
+    List<AnnotationReference> _map = ListExtensions.<JvmAnnotationReference, AnnotationReference>map(_annotations, _function);
+    return ImmutableList.<AnnotationReference>copyOf(_map);
   }
   
   public MutableAnnotationReference addAnnotation(final Type annotationType) {
@@ -53,16 +53,17 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
         EList<JvmAnnotationReference> _annotations = _delegate_1.getAnnotations();
         _annotations.add(result);
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        return _compilationUnit.toAnnotationReference(result);
+        AnnotationReference _annotationReference = _compilationUnit.toAnnotationReference(result);
+        return ((MutableAnnotationReference) _annotationReference);
       }
     }
     throw new IllegalArgumentException((("" + annotationType) + " is not an annotation type."));
   }
   
-  public MutableAnnotationReference findAnnotation(final Type annotationType) {
-    Iterable<? extends MutableAnnotationReference> _annotations = this.getAnnotations();
-    final Function1<MutableAnnotationReference,Boolean> _function = new Function1<MutableAnnotationReference,Boolean>() {
-      public Boolean apply(final MutableAnnotationReference it) {
+  public AnnotationReference findAnnotation(final Type annotationType) {
+    Iterable<? extends AnnotationReference> _annotations = this.getAnnotations();
+    final Function1<AnnotationReference,Boolean> _function = new Function1<AnnotationReference,Boolean>() {
+      public Boolean apply(final AnnotationReference it) {
         AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
         return Boolean.valueOf(Objects.equal(_annotationTypeDeclaration, annotationType));
       }

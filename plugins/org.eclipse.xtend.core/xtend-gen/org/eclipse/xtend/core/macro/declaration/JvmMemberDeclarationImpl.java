@@ -14,8 +14,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTargetImpl;
-import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -24,7 +23,7 @@ import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 
 @SuppressWarnings("all")
-public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MutableMemberDeclaration {
+public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> {
   public String getDocComment() {
     T _delegate = this.getDelegate();
     EList<Adapter> _eAdapters = _delegate.eAdapters();
@@ -82,7 +81,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     _delegate.setVisibility(_switchResult);
   }
   
-  public MutableTypeDeclaration getDeclaringType() {
+  public TypeDeclaration getDeclaringType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
     JvmDeclaredType _declaringType = _delegate.getDeclaringType();
