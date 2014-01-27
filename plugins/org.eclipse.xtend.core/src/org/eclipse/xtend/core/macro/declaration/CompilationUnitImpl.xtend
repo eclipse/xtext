@@ -17,12 +17,12 @@ import com.google.common.primitives.Ints
 import com.google.common.primitives.Longs
 import com.google.common.primitives.Shorts
 import com.google.inject.Inject
-import com.google.inject.Provider
 import java.util.Collection
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CancellationException
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.macro.CompilationContextImpl
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter
@@ -43,13 +43,11 @@ import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
-import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
-import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.NamedElement
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Type
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.expression.Expression
@@ -102,7 +100,6 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
-import org.eclipse.xtext.xbase.file.WorkspaceConfig
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
@@ -113,7 +110,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
-import org.eclipse.emf.ecore.util.EcoreUtil
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -270,85 +266,166 @@ class CompilationUnitImpl implements CompilationUnit {
 			}
 		]}
 
-	def MutableTypeDeclaration toTypeDeclaration(JvmDeclaredType delegate) {
+	def TypeDeclaration toTypeDeclaration(JvmDeclaredType delegate) {
 		getOrCreate(delegate) [
 			switch delegate {
 				JvmGenericType case delegate.isInterface:
-					new JvmInterfaceDeclarationImpl => [
-						it.delegate = delegate 
-						it.compilationUnit = this
-					]
+					if (delegate.belongedToCompilationUnit) {
+						new MutableJvmInterfaceDeclarationImpl => [
+							it.delegate = delegate 
+							it.compilationUnit = this
+						]
+					} else {
+						new JvmInterfaceDeclarationImpl => [
+							it.delegate = delegate 
+							it.compilationUnit = this
+						]
+					}
 				JvmGenericType:
-					new JvmClassDeclarationImpl => [
-						it.delegate = delegate
-						it.compilationUnit = this
-					]
+					if (delegate.belongedToCompilationUnit) {
+						new MutableJvmClassDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this
+						]
+					} else {
+						new JvmClassDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this
+						]
+					}
 				JvmAnnotationType:
-					new JvmAnnotationTypeDeclarationImpl => [
-						it.delegate = delegate
-						it.compilationUnit = this
-					]
+					if (delegate.belongedToCompilationUnit) {
+						new MutableJvmAnnotationTypeDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this
+						]
+					} else {
+						new JvmAnnotationTypeDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this
+						]
+					}
 				JvmEnumerationType:
-					new JvmEnumerationTypeDeclarationImpl => [
-						it.delegate = delegate
-						it.compilationUnit = this
-					]
+					if (delegate.belongedToCompilationUnit) {
+						new MutableJvmEnumerationTypeDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this
+						]
+					} else {
+						new JvmEnumerationTypeDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this
+						]
+					}
+			} as TypeDeclaration
+		]}
+
+	def TypeParameterDeclaration toTypeParameterDeclaration(JvmTypeParameter delegate) {
+		getOrCreate(delegate) [
+			if (delegate.belongedToCompilationUnit) {
+				new MutableJvmTypeParameterDeclarationImpl => [
+					it.delegate = delegate
+					it.compilationUnit = this
+				]
+			} else {
+				new JvmTypeParameterDeclarationImpl => [
+					it.delegate = delegate
+					it.compilationUnit = this
+				]
 			}
 		]}
 
-	def MutableTypeParameterDeclaration toTypeParameterDeclaration(JvmTypeParameter delegate) {
+	def ParameterDeclaration toParameterDeclaration(JvmFormalParameter delegate) {
 		getOrCreate(delegate) [
-			new JvmTypeParameterDeclarationImpl => [
-				it.delegate = delegate
-				it.compilationUnit = this
-			]
+			if (delegate.belongedToCompilationUnit) {
+				new MutableJvmParameterDeclarationImpl => [
+					it.delegate = delegate
+					it.compilationUnit = this
+				]
+			} else {
+				new JvmParameterDeclarationImpl => [
+					it.delegate = delegate
+					it.compilationUnit = this
+				]
+			}
 		]}
 
-	def MutableParameterDeclaration toParameterDeclaration(JvmFormalParameter delegate) {
-		getOrCreate(delegate) [
-			new JvmParameterDeclarationImpl => [
-				it.delegate = delegate
-				it.compilationUnit = this
-			]
-		]}
-
-	def MutableMemberDeclaration toMemberDeclaration(JvmMember delegate) {
+	def MemberDeclaration toMemberDeclaration(JvmMember delegate) {
 		getOrCreate(delegate) [
 			switch delegate {
 				JvmDeclaredType:
 					toTypeDeclaration(delegate)
 				JvmOperation: {
 					if (delegate.declaringType instanceof JvmAnnotationType) {
-						new JvmAnnotationTypeElementDeclarationImpl => [
+						if (delegate.belongedToCompilationUnit) {
+							new MutableJvmAnnotationTypeElementDeclarationImpl => [
+								it.delegate = delegate
+								it.compilationUnit = this
+							]
+						} else {
+							new JvmAnnotationTypeElementDeclarationImpl => [
+								it.delegate = delegate
+								it.compilationUnit = this
+							]
+						}
+					} else {
+						if (delegate.belongedToCompilationUnit) {
+							new MutableJvmMethodDeclarationImpl => [
+								it.delegate = delegate
+								it.compilationUnit = this
+							]
+						} else {
+							new JvmMethodDeclarationImpl => [
+								it.delegate = delegate
+								it.compilationUnit = this
+							]
+						}
+					} as MemberDeclaration
+				} 
+				JvmConstructor:
+					if (delegate.belongedToCompilationUnit) {
+						new MutableJvmConstructorDeclarationImpl => [
 							it.delegate = delegate
 							it.compilationUnit = this
 						]
 					} else {
-						new JvmMethodDeclarationImpl => [
+						new JvmConstructorDeclarationImpl => [
 							it.delegate = delegate
 							it.compilationUnit = this
 						]
 					}
-				} 
-				JvmConstructor:
-					new JvmConstructorDeclarationImpl => [
-						it.delegate = delegate
-						it.compilationUnit = this
-					]
 				JvmEnumerationLiteral:
-					new JvmEnumerationValueDeclarationImpl => [
-						it.delegate = delegate
-						it.compilationUnit = this		
-					]
+					if (delegate.belongedToCompilationUnit) {
+						new MutableJvmEnumerationValueDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this		
+						]
+					} else {
+						new JvmEnumerationValueDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this		
+						]
+					}
 				JvmField:
-					new JvmFieldDeclarationImpl => [
-						it.delegate = delegate
-						it.compilationUnit = this
-					]
+					if (delegate.belongedToCompilationUnit) {
+						new MutableJvmFieldDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this
+						]
+					} else {
+						new JvmFieldDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this
+						]
+					}
 			}
 		]}
 	
-	def MutableNamedElement toNamedElement(JvmIdentifiableElement delegate) {
+	def isBelongedToCompilationUnit(JvmIdentifiableElement element) {
+		element.eResource == xtendFile.eResource
+	}
+	
+	def NamedElement toNamedElement(JvmIdentifiableElement delegate) {
 		getOrCreate(delegate) [
 			switch delegate {
 				JvmMember : toMemberDeclaration(delegate)
@@ -541,7 +618,7 @@ class CompilationUnitImpl implements CompilationUnit {
 		]
 	}
 	
-	def MutableAnnotationReference toAnnotationReference(JvmAnnotationReference delegate) {
+	def AnnotationReference toAnnotationReference(JvmAnnotationReference delegate) {
 		getOrCreate(delegate) [
 			new JvmAnnotationReferenceImpl => [
 				it.delegate = delegate

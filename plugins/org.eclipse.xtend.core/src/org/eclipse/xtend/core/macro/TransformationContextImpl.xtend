@@ -19,6 +19,7 @@ import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtend.lib.macro.file.Path
+import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 
 class TransformationContextImpl implements TransformationContext {
 
@@ -49,7 +50,7 @@ class TransformationContextImpl implements TransformationContext {
 			val derivedElement = associations.getJvmElements((source as XtendNamedElementImpl<?>).delegate).filter(
 				JvmIdentifiableElement).head
 			if (derivedElement != null)
-				return unit.toNamedElement(derivedElement)
+				return unit.toNamedElement(derivedElement) as MutableNamedElement
 		}
 		return null
 	}
