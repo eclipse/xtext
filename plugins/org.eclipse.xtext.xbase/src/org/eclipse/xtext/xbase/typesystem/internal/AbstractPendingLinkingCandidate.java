@@ -841,28 +841,69 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				if (!rightResolved) {
 					rightExpectedArgumentType = rightExpectedArgumentType.getRawTypeReference();
 				}
-				TypeConformanceResult rightToLeftConformance = expectedArgumentType.internalIsAssignableFrom(rightExpectedArgumentType, new TypeConformanceComputationArgument());
-				if (rightToLeftConformance.isConformant()) {
-					if (!rightExpectedArgumentType.isAssignableFrom(expectedArgumentType) && 
-							(!leftResolved || !rightResolved || !rightToLeftConformance.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION))) {
-						result++;
-					}
-				} else {
-					TypeConformanceResult leftToRightConformance = rightExpectedArgumentType.internalIsAssignableFrom(expectedArgumentType, new TypeConformanceComputationArgument());
-					if (leftToRightConformance.isConformant() && 
-							(!leftResolved || !rightResolved || !leftToRightConformance.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION))) {
-						result--;
-					}
-				}
+				result += compareDeclaredTypes(expectedArgumentType, rightExpectedArgumentType, leftResolved, rightResolved);
 			}
 		}
 		if (result == 0) {
+			if (!getDeclaredTypeParameters().isEmpty() || !right.getDeclaredTypeParameters().isEmpty()) {
+				return compareDeclaredParameterTypes(right);
+			}
 			return CandidateCompareResult.AMBIGUOUS;
 		} else if (result < 0) {
 			return CandidateCompareResult.THIS;
 		} else {
 			return getExpectedTypeCompareResultOther(right);
 		}
+	}
+
+	protected int compareDeclaredTypes(LightweightTypeReference left, LightweightTypeReference right, boolean leftResolved, boolean rightResolved) {
+		TypeConformanceResult rightToLeftConformance = left.internalIsAssignableFrom(right, new TypeConformanceComputationArgument());
+		if (rightToLeftConformance.isConformant()) {
+			if (!right.isAssignableFrom(left) && 
+					(!leftResolved || !rightResolved || !rightToLeftConformance.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION))) {
+				return 1;
+			}
+		} else {
+			TypeConformanceResult leftToRightConformance = right.internalIsAssignableFrom(left, new TypeConformanceComputationArgument());
+			if (leftToRightConformance.isConformant() && 
+					(!leftResolved || !rightResolved || !leftToRightConformance.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION))) {
+				return -1;
+			}
+		}
+		return 0;
+	}
+
+	private CandidateCompareResult compareDeclaredParameterTypes(AbstractPendingLinkingCandidate<?> right) {
+		if(getFeature() instanceof JvmExecutable && right.getFeature() instanceof JvmExecutable) {
+			List<JvmFormalParameter> parameters = ((JvmExecutable) getFeature()).getParameters();
+			List<JvmFormalParameter> rightParameters = ((JvmExecutable) right.getFeature()).getParameters();
+			if (parameters.size() == rightParameters.size()) {
+				int result = 0;
+				OwnedConverter converter = new OwnedConverter(getState().getReferenceOwner());
+				OwnedConverter rightConverter = new OwnedConverter(right.getState().getReferenceOwner());
+				TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(getDeclaratorParameterMapping(), getState().getReferenceOwner());
+				TypeParameterByConstraintSubstitutor rightSubstitutor = new TypeParameterByConstraintSubstitutor(right.getDeclaratorParameterMapping(), right.getState().getReferenceOwner());
+				for(int i = 0; i < parameters.size(); i++) {
+					LightweightTypeReference parameterType = converter.toLightweightReference(parameters.get(i).getParameterType());
+					LightweightTypeReference rightParameterType = rightConverter.toLightweightReference(rightParameters.get(i).getParameterType());
+					if (!parameterType.isResolved() || !rightParameterType.isResolved()) {
+						result += compareDeclaredTypes(
+								substitutor.substitute(parameterType),
+								rightSubstitutor.substitute(rightParameterType),
+								false,
+								false);
+					}
+				}
+				if (result == 0) {
+					return CandidateCompareResult.AMBIGUOUS;
+				} else if (result < 0) {
+					return CandidateCompareResult.THIS;
+				} else {
+					return getExpectedTypeCompareResultOther(right);
+				}
+			}
+		}
+		return CandidateCompareResult.AMBIGUOUS;
 	}
 
 	/**
