@@ -11,13 +11,14 @@
 
 	<!-- add newest (sorted by name) version -->
 	<resources id="keep.dirs.res_id">
-		<first count="1">
+		<last count="1">
 			<sort>
 				<fileset dir="${deps.dir}" includes="org.eclipse.xtend.core_*.jar" />
 				<name />
 			</sort>
-		</first>
+		</last>
 	</resources>
+	
 	<pathconvert property="xtext-version" pathsep="," refid="keep.dirs.res_id">
 		<chainedmapper>
 			<flattenmapper />
