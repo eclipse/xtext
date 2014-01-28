@@ -36,6 +36,7 @@
 		<mavenVersion>3.0.4</mavenVersion>
 		<tycho-version>0.17.0</tycho-version>
 		<emf.version>[2.9.0,)</emf.version>
+		<asm.version>[3.3.0,4.0.0)</asm.version>
 		<guava.version>[10.0.1,14.0]</guava.version>
 		<javax-inject.version>1</javax-inject.version>
 		<google-inject.version>3.0</google-inject.version>
