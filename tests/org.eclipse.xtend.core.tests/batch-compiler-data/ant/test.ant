@@ -46,6 +46,7 @@
 			<include name="org.eclipse.xtext.xbase*${xtext-version}.jar" />
 			<include name="org.eclipse.xtend.lib_${xtext-version}.jar" />
 			<include name="org.eclipse.xtend.core_${xtext-version}.jar" />
+			<include name="org.objectweb.asm*.jar" />
 			<exclude name="*.source*.jar" />
 			<exclude name="*.gwt*.jar" />
 		</fileset>
