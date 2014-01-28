@@ -168,8 +168,11 @@ public class XbaseTypeComputer implements ITypeComputer {
 		return state.getConverter().toLightweightReference(typeReference);
 	}
 	
-	protected ParameterizedTypeReference getRawTypeForName(Class<?> clazz, ITypeReferenceOwner owner) {
+	protected LightweightTypeReference getRawTypeForName(Class<?> clazz, ITypeReferenceOwner owner) {
 		JvmType clazzType = services.getTypeReferences().findDeclaredType(clazz, owner.getContextResourceSet());
+		if (clazzType == null) {
+			return new UnknownTypeReference(owner, clazz.getName());
+		}
 		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, clazzType);
 		return result;
 	}
@@ -583,6 +586,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 	
 	protected void _computeTypes(XListLiteral literal, ITypeComputationState state) {
 		JvmGenericType listType = (JvmGenericType) services.getTypeReferences().findDeclaredType(List.class, literal);
+		if (listType == null) {
+			state.acceptActualType(new UnknownTypeReference(state.getReferenceOwner(), List.class.getName()));
+			return;
+		}
 		for(ITypeExpectation expectation: state.getExpectations()) {
 			LightweightTypeReference elementTypeExpectation = null;
 			LightweightTypeReference expectedType = expectation.getExpectedType();
@@ -869,6 +876,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 				Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping(reference);
 				TypeParameterSubstitutor<?> substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, state.getReferenceOwner());
 				JvmGenericType iterable = (JvmGenericType) services.getTypeReferences().findDeclaredType(Iterable.class, iterableOrArray.getOwner().getContextResourceSet());
+				if (iterable == null) {
+					return new UnknownTypeReference(iterableOrArray.getOwner());
+				}
 				ParameterizedTypeReference substituteMe = new ParameterizedTypeReference(state.getReferenceOwner(), iterable.getTypeParameters().get(0));
 				LightweightTypeReference substitutedArgument = substitutor.substitute(substituteMe).getUpperBoundSubstitute();
 				if (substitutedArgument.getType() instanceof JvmTypeParameter && 
@@ -959,8 +969,11 @@ public class XbaseTypeComputer implements ITypeComputer {
 				clazz = clazz.getWrapperTypeIfPrimitive();
 			}
 		}
-		ParameterizedTypeReference result = getRawTypeForName(Class.class, owner);
-		result.addTypeArgument(clazz);
+		LightweightTypeReference result = getRawTypeForName(Class.class, owner);
+		if (result instanceof ParameterizedTypeReference) {
+			ParameterizedTypeReference parameterizedTypeReference = (ParameterizedTypeReference) result;
+			parameterizedTypeReference.addTypeArgument(clazz);
+		}
 		state.acceptActualType(result);
 	}
 	
