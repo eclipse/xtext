@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ecore;
 
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.resource.generic.AbstractGenericResourceSupport;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.google.inject.Module;
 
 /**
@@ -35,11 +38,21 @@ import com.google.inject.Module;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class EcoreSupport extends AbstractGenericResourceSupport {
+public class EcoreSupport extends AbstractGenericResourceSupport implements ISetup {
 
 	@Override
 	protected Module createGuiceModule() {
 		return new EcoreRuntimeModule();
+	}
+
+	/**
+	 * @since 2.5
+	 */
+	public Injector createInjectorAndDoEMFRegistration() {
+		Injector injector = Guice.createInjector(getGuiceModule());
+		injector.injectMembers(this);
+		registerInRegistry(false);
+		return injector;
 	}
 
 }
