@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal.util;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.Nullable;
@@ -29,7 +31,11 @@ public class WrapperTypeLookup {
 		ITypeReferenceOwner owner = context.getOwner();
 		ResourceSet resourceSet = owner.getContextResourceSet();
 		Resource typeResource = resourceSet.getResource(URIHelperConstants.OBJECTS_URI.appendSegment(typeName), true);
-		JvmType type = (JvmType) typeResource.getContents().get(0);
+		EList<EObject> contents = typeResource.getContents();
+		if (contents.isEmpty()) {
+			return null;
+		}
+		JvmType type = (JvmType) contents.get(0);
 		if (type == null)
 			return null;
 		return new ParameterizedTypeReference(owner, type);
