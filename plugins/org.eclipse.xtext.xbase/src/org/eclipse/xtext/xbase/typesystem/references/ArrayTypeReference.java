@@ -180,7 +180,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public ParameterizedTypeReference tryConvertToListType() {
+	public LightweightTypeReference tryConvertToListType() {
 		ArrayTypes arrayTypes = getServices().getArrayTypes();
 		return arrayTypes.convertToList(this);
 	}

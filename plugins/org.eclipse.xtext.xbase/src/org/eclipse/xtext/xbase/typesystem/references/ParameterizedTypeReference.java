@@ -388,6 +388,9 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 				JvmTypeReference upperBound = constraint.getTypeReference();
 				if (upperBound != null) {
 					JvmType upperBoundType = upperBound.getType();
+					if (upperBoundType == null) {
+						return false;
+					}
 					if (upperBoundType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 						return isWrapper((JvmGenericType)upperBoundType);
 					}

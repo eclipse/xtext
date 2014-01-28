@@ -102,10 +102,13 @@ public class ArrayTypes {
 		return null;
 	}
 
-	public ParameterizedTypeReference convertToList(ArrayTypeReference type) {
+	public LightweightTypeReference convertToList(ArrayTypeReference type) {
 		LightweightTypeReference componentType = type.getComponentType();
 		LightweightTypeReference wrapper = componentType.getWrapperTypeIfPrimitive();
 		JvmType listType = type.getServices().getTypeReferences().findDeclaredType(List.class, type.getOwner().getContextResourceSet());
+		if (listType == null) {
+			return new UnknownTypeReference(type.getOwner(), List.class.getName());
+		}
 		ParameterizedTypeReference result = new ParameterizedTypeReference(type.getOwner(), listType);
 		result.addTypeArgument(wrapper);
 		return result;

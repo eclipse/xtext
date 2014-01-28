@@ -54,7 +54,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 					processTypeParameter(typeParameter, declaration);
 				}
 			} else {
-				ParameterizedTypeReference declarationAsList = declaration.tryConvertToListType();
+				LightweightTypeReference declarationAsList = declaration.tryConvertToListType();
 				outerVisit(declarationAsList, reference);
 			}
 		}
