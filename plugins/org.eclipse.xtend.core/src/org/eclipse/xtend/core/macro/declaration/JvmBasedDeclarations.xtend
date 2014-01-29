@@ -336,6 +336,7 @@ class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationImpl imp
 	override addTypeParameter(String name, TypeReference... upperBounds) {
 		checkJavaIdentifier(name, "name");
 		checkIterable(upperBounds, "upperBounds")
+		checkInferredTypeReferences("parameter type", upperBounds)
 		val param = TypesFactory.eINSTANCE.createJvmTypeParameter
 		param.name = name
 		delegate.typeParameters.add(param)
@@ -628,10 +629,9 @@ class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements 
 	}
 	
 	override setExtendedClass(TypeReference superclass) {
+		checkInferredTypeReferences("extended class", superclass)
 		val newTypeRef = 
 			if (superclass != null) {
-				if (superclass.inferred)
-					throw new IllegalArgumentException("Cannot use and inferred type as extended class.")
 				compilationUnit.toJvmTypeReference(superclass)
 			} else {
 				compilationUnit.typeReferences.getTypeForName(Object, compilationUnit.xtendFile)
@@ -644,11 +644,10 @@ class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements 
 	
 	override setImplementedInterfaces(Iterable<? extends TypeReference> superInterfaces) {
 		checkIterable(superInterfaces, "superIntefaces")
+		checkInferredTypeReferences("implemented interface", superInterfaces)
 		val oldInterfaces = delegate.superTypes.filter[it.type instanceof JvmGenericType && (type as JvmGenericType).isInterface]
 		delegate.superTypes.removeAll(oldInterfaces)
 		delegate.superTypes.addAll(superInterfaces.map [
-			if (inferred)
-				throw new IllegalArgumentException("Cannot use and inferred type as implemented interface.")
 			compilationUnit.toJvmTypeReference(it)
 		])
 	}
@@ -656,6 +655,7 @@ class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements 
 	override addTypeParameter(String name, TypeReference... upperBounds) {
 		checkJavaIdentifier(name, "name")
 		checkIterable(upperBounds, "upperBounds")
+		checkInferredTypeReferences("parameter type", upperBounds)
 		val param = TypesFactory.eINSTANCE.createJvmTypeParameter
 		param.name = name
 		delegate.typeParameters.add(param)
@@ -753,6 +753,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	
 	def setExceptions(TypeReference... exceptions) {
 		checkIterable(exceptions, "exceptions")
+		checkInferredTypeReferences("exception type", exceptions)
 		delegate.exceptions.clear
 		for (exceptionType : exceptions) {
 			if (exceptionType != null) {
@@ -768,12 +769,11 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	def MutableTypeParameterDeclaration addTypeParameter(String name, TypeReference... upperBounds) {
 		checkJavaIdentifier(name, "name")
 		checkIterable(upperBounds, "upperBounds")
+		checkInferredTypeReferences("parameter type", upperBounds)
 		val param = TypesFactory.eINSTANCE.createJvmTypeParameter
 		param.name = name
 		delegate.typeParameters.add(param)
 		for (upper : upperBounds) {
-			if (upper.inferred)
-				throw new IllegalArgumentException("Cannot use inferred type as parameter type.")
 			val typeRef = compilationUnit.toJvmTypeReference(upper)
 			val jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound
 			jvmUpperBound.setTypeReference(typeRef)
@@ -1116,6 +1116,7 @@ class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclaration
 	
 	override setUpperBounds(Iterable<? extends TypeReference> upperBounds) {
 		checkIterable(upperBounds, "upperBounds")
+		checkInferredTypeReferences("parameter type", upperBounds)
 		delegate.constraints.clear
 		for (upper : upperBounds) {
 			val typeRef = compilationUnit.toJvmTypeReference(upper)

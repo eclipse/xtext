@@ -8,11 +8,20 @@
 package org.eclipse.xtend.core.macro
 
 import com.google.common.base.Preconditions
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 class ConditionUtils {
+	
+	static def checkInferredTypeReferences(String typeName, TypeReference ... types) {
+		for (type : types) {
+			if (type != null && type.inferred) {
+				throw new IllegalArgumentException('''Cannot use inferred type as «typeName».''')
+			}
+		}
+	}
 
 	static def checkIterable(Iterable<?> values, String name) {
 		Preconditions.checkArgument(values != null, '''«name» cannot be null''')
