@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.macro;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
+import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -18,6 +19,26 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class ConditionUtils {
+  public static void checkInferredTypeReferences(final String typeName, final TypeReference... types) {
+    for (final TypeReference type : types) {
+      boolean _and = false;
+      boolean _notEquals = (!Objects.equal(type, null));
+      if (!_notEquals) {
+        _and = false;
+      } else {
+        boolean _isInferred = type.isInferred();
+        _and = _isInferred;
+      }
+      if (_and) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Cannot use inferred type as ");
+        _builder.append(typeName, "");
+        _builder.append(".");
+        throw new IllegalArgumentException(_builder.toString());
+      }
+    }
+  }
+  
   public static void checkIterable(final Iterable<? extends Object> values, final String name) {
     boolean _notEquals = (!Objects.equal(values, null));
     StringConcatenation _builder = new StringConcatenation();

@@ -135,24 +135,17 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
   }
   
   public void setExtendedClass(final TypeReference superclass) {
+    ConditionUtils.checkInferredTypeReferences("extended class", superclass);
     JvmTypeReference _xifexpression = null;
     boolean _notEquals = (!Objects.equal(superclass, null));
     if (_notEquals) {
-      JvmTypeReference _xblockexpression = null;
-      {
-        boolean _isInferred = superclass.isInferred();
-        if (_isInferred) {
-          throw new IllegalArgumentException("Cannot use and inferred type as extended class.");
-        }
-        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        _xblockexpression = (_compilationUnit.toJvmTypeReference(superclass));
-      }
-      _xifexpression = _xblockexpression;
-    } else {
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
+      _xifexpression = _compilationUnit.toJvmTypeReference(superclass);
+    } else {
       CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-      XtendFile _xtendFile = _compilationUnit_1.getXtendFile();
+      TypeReferences _typeReferences = _compilationUnit_1.getTypeReferences();
+      CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
+      XtendFile _xtendFile = _compilationUnit_2.getXtendFile();
       _xifexpression = _typeReferences.getTypeForName(Object.class, _xtendFile);
     }
     final JvmTypeReference newTypeRef = _xifexpression;
@@ -187,6 +180,7 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
   
   public void setImplementedInterfaces(final Iterable<? extends TypeReference> superInterfaces) {
     ConditionUtils.checkIterable(superInterfaces, "superIntefaces");
+    ConditionUtils.checkInferredTypeReferences("implemented interface", ((TypeReference[])Conversions.unwrapArray(superInterfaces, TypeReference.class)));
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
     final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
@@ -211,16 +205,8 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     EList<JvmTypeReference> _superTypes_2 = _delegate_2.getSuperTypes();
     final Function1<TypeReference,JvmTypeReference> _function_1 = new Function1<TypeReference,JvmTypeReference>() {
       public JvmTypeReference apply(final TypeReference it) {
-        JvmTypeReference _xblockexpression = null;
-        {
-          boolean _isInferred = it.isInferred();
-          if (_isInferred) {
-            throw new IllegalArgumentException("Cannot use and inferred type as implemented interface.");
-          }
-          CompilationUnitImpl _compilationUnit = MutableJvmClassDeclarationImpl.this.getCompilationUnit();
-          _xblockexpression = (_compilationUnit.toJvmTypeReference(it));
-        }
-        return _xblockexpression;
+        CompilationUnitImpl _compilationUnit = MutableJvmClassDeclarationImpl.this.getCompilationUnit();
+        return _compilationUnit.toJvmTypeReference(it);
       }
     };
     Iterable<JvmTypeReference> _map = IterableExtensions.map(superInterfaces, _function_1);
@@ -230,6 +216,7 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
   public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {
     ConditionUtils.checkJavaIdentifier(name, "name");
     ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(upperBounds)), "upperBounds");
+    ConditionUtils.checkInferredTypeReferences("parameter type", upperBounds);
     final JvmTypeParameter param = TypesFactory.eINSTANCE.createJvmTypeParameter();
     param.setName(name);
     JvmGenericType _delegate = this.getDelegate();

@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.lib.Conversions;
 
 @SuppressWarnings("all")
 public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclarationImpl implements MutableAnnotationTarget, MutableTypeParameterDeclaration {
@@ -77,6 +78,7 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
   
   public void setUpperBounds(final Iterable<? extends TypeReference> upperBounds) {
     ConditionUtils.checkIterable(upperBounds, "upperBounds");
+    ConditionUtils.checkInferredTypeReferences("parameter type", ((TypeReference[])Conversions.unwrapArray(upperBounds, TypeReference.class)));
     JvmTypeParameter _delegate = this.getDelegate();
     EList<JvmTypeConstraint> _constraints = _delegate.getConstraints();
     _constraints.clear();

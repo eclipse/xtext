@@ -110,6 +110,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   
   public void setExceptions(final TypeReference... exceptions) {
     ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(exceptions)), "exceptions");
+    ConditionUtils.checkInferredTypeReferences("exception type", exceptions);
     T _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     _exceptions.clear();
@@ -133,6 +134,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {
     ConditionUtils.checkJavaIdentifier(name, "name");
     ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(upperBounds)), "upperBounds");
+    ConditionUtils.checkInferredTypeReferences("parameter type", upperBounds);
     final JvmTypeParameter param = TypesFactory.eINSTANCE.createJvmTypeParameter();
     param.setName(name);
     T _delegate = this.getDelegate();
@@ -140,10 +142,6 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     _typeParameters.add(param);
     for (final TypeReference upper : upperBounds) {
       {
-        boolean _isInferred = upper.isInferred();
-        if (_isInferred) {
-          throw new IllegalArgumentException("Cannot use inferred type as parameter type.");
-        }
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
         final JvmTypeReference typeRef = _compilationUnit.toJvmTypeReference(upper);
         final JvmUpperBound jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
