@@ -74,7 +74,7 @@
 		<dependency>
 			<groupId>asm</groupId>
 			<artifactId>asm-commons</artifactId>
-			<version>3.2</version>
+			<version>${asm.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
