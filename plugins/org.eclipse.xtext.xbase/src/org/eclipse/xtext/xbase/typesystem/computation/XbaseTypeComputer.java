@@ -646,6 +646,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 	
 	protected void _computeTypes(XSetLiteral literal, ITypeComputationState state) {
 		JvmGenericType setType = (JvmGenericType) services.getTypeReferences().findDeclaredType(Set.class, literal);
+		if (setType == null) {
+			state.acceptActualType(new UnknownTypeReference(state.getReferenceOwner(), Set.class.getName()));
+			return;
+		}
 		JvmGenericType mapType = (JvmGenericType) services.getTypeReferences().findDeclaredType(Map.class, literal);
 		for(ITypeExpectation expectation: state.getExpectations()) {
 			LightweightTypeReference elementTypeExpectation = null;
