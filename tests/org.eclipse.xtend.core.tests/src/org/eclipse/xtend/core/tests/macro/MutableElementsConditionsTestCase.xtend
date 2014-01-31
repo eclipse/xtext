@@ -307,14 +307,26 @@ class CheckMutableClassDeclarationProcessor extends AbstractClassProcessor {
 		assertValidQualifiedName("qualifiedName", "foo.Bar") [ String qualifiedName |
 			registerClass(qualifiedName)
 		]
+		assertThrowable(IllegalArgumentException, "The type 'foo.Bar' has already been registered.") [ |
+			registerClass("foo.Bar")
+		]
 		assertValidQualifiedName("qualifiedName", "foo.Bar2") [ String qualifiedName |
 			registerAnnotationType(qualifiedName)
+		]
+		assertThrowable(IllegalArgumentException, "The type 'foo.Bar2' has already been registered.") [ |
+			registerAnnotationType("foo.Bar2")
 		]
 		assertValidQualifiedName("qualifiedName", "foo.Bar3") [ String qualifiedName |
 			registerEnumerationType(qualifiedName)
 		]
+		assertThrowable(IllegalArgumentException, "The type 'foo.Bar3' has already been registered.") [ |
+			registerEnumerationType("foo.Bar3")
+		]
 		assertValidQualifiedName("qualifiedName", "foo.Bar4") [ String qualifiedName |
 			registerInterface(qualifiedName)
+		]
+		assertThrowable(IllegalArgumentException, "The type 'foo.Bar4' has already been registered.") [ |
+			registerInterface("foo.Bar4")
 		]
 	}
 

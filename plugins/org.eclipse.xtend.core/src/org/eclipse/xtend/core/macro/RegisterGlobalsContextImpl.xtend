@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.lib.Pair
 
 import static org.eclipse.xtend.core.macro.ConditionUtils.*
+import com.google.common.base.Preconditions
 
 class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	
@@ -51,6 +52,7 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	
 	private def void setNameAndAccept(JvmDeclaredType newType, String qualifiedName) {
 		checkQualifiedName(qualifiedName, "qualifiedName")
+		Preconditions.checkArgument(qualifiedName.findType == null, '''The type '«qualifiedName»' has already been registered.''');
 		compilationUnit.checkCanceled
 		val namespaceAndName = getNameParts(qualifiedName)
 		val headerText = compilationUnit.fileHeaderProvider.getFileHeader(compilationUnit.xtendFile.eResource)
