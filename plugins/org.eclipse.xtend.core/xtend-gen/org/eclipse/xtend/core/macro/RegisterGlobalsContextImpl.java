@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import java.io.InputStream;
 import java.net.URI;
@@ -21,6 +22,7 @@ import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -91,6 +93,13 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   
   private void setNameAndAccept(final JvmDeclaredType newType, final String qualifiedName) {
     ConditionUtils.checkQualifiedName(qualifiedName, "qualifiedName");
+    JvmDeclaredType _findType = this.findType(qualifiedName);
+    boolean _equals = Objects.equal(_findType, null);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("The type \'");
+    _builder.append(qualifiedName, "");
+    _builder.append("\' has already been registered.");
+    Preconditions.checkArgument(_equals, _builder);
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     _compilationUnit.checkCanceled();
     final Pair<String,String> namespaceAndName = this.getNameParts(qualifiedName);

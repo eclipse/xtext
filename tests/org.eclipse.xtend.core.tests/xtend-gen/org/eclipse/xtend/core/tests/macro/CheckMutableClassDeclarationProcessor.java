@@ -35,24 +35,48 @@ public class CheckMutableClassDeclarationProcessor extends AbstractClassProcesso
       }
     };
     MutableAssert.assertValidQualifiedName("qualifiedName", "foo.Bar", _function);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
+    final Procedure0 _function_1 = new Procedure0() {
+      public void apply() {
+        context.registerClass("foo.Bar");
+      }
+    };
+    MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "The type \'foo.Bar\' has already been registered.", _function_1);
+    final Procedure1<String> _function_2 = new Procedure1<String>() {
       public void apply(final String qualifiedName) {
         context.registerAnnotationType(qualifiedName);
       }
     };
-    MutableAssert.assertValidQualifiedName("qualifiedName", "foo.Bar2", _function_1);
-    final Procedure1<String> _function_2 = new Procedure1<String>() {
+    MutableAssert.assertValidQualifiedName("qualifiedName", "foo.Bar2", _function_2);
+    final Procedure0 _function_3 = new Procedure0() {
+      public void apply() {
+        context.registerAnnotationType("foo.Bar2");
+      }
+    };
+    MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "The type \'foo.Bar2\' has already been registered.", _function_3);
+    final Procedure1<String> _function_4 = new Procedure1<String>() {
       public void apply(final String qualifiedName) {
         context.registerEnumerationType(qualifiedName);
       }
     };
-    MutableAssert.assertValidQualifiedName("qualifiedName", "foo.Bar3", _function_2);
-    final Procedure1<String> _function_3 = new Procedure1<String>() {
+    MutableAssert.assertValidQualifiedName("qualifiedName", "foo.Bar3", _function_4);
+    final Procedure0 _function_5 = new Procedure0() {
+      public void apply() {
+        context.registerEnumerationType("foo.Bar3");
+      }
+    };
+    MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "The type \'foo.Bar3\' has already been registered.", _function_5);
+    final Procedure1<String> _function_6 = new Procedure1<String>() {
       public void apply(final String qualifiedName) {
         context.registerInterface(qualifiedName);
       }
     };
-    MutableAssert.assertValidQualifiedName("qualifiedName", "foo.Bar4", _function_3);
+    MutableAssert.assertValidQualifiedName("qualifiedName", "foo.Bar4", _function_6);
+    final Procedure0 _function_7 = new Procedure0() {
+      public void apply() {
+        context.registerInterface("foo.Bar4");
+      }
+    };
+    MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "The type \'foo.Bar4\' has already been registered.", _function_7);
   }
   
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
