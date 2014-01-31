@@ -12,11 +12,14 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -362,5 +365,16 @@ public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 	@Test
 	public void testParameterNames_03() {
 		doTestParameterName(ClassWithVarArgs.class, "method(java.lang.String[])", "arg0");
+	}
+	
+	@Override
+	protected JvmTypeAnnotationValue getClassArrayAnnotationValue(JvmAnnotationReference annotationReference) {
+		for(JvmAnnotationValue candidate: annotationReference.getExplicitValues()) {
+			if (candidate instanceof JvmTypeAnnotationValue && candidate.getValueName().equals("classArray")) {
+				return (JvmTypeAnnotationValue) candidate;
+			}
+		}
+		fail("Cannot find annotation value 'classArray'");
+		return null;
 	}
 }
