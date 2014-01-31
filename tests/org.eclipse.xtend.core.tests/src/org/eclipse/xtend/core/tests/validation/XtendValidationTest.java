@@ -418,12 +418,16 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testBug_357230() throws Exception {
-		XtendClass clazz = clazz(
-				"package x class Z {" +
-				"  def dispatch _foo(Object x, boolean b) {}\n" +
-				"  def dispatch _foo(String x, boolean b) {}\n" +
-				"}\n");
-		helper.assertError(clazz, XTEND_FUNCTION, DISPATCH_FUNC_NAME_STARTS_WITH_UNDERSCORE);
+		runExtensive(new NewLineTest() {
+			public void test(NewLineProvider p) throws Exception {
+				XtendClass clazz = clazz(
+						"package x class Z {" +
+						"  def dispatch _foo(Object x, boolean b) {}" + p.nl() +
+						"  def dispatch _foo(String x, boolean b) {}" + p.nl() +
+						"}" + p.nl());
+				helper.assertError(clazz, XTEND_FUNCTION, DISPATCH_FUNC_NAME_STARTS_WITH_UNDERSCORE);
+			}
+		});
 	}
 	
 	@Test public void testAnnotationTarget_00() throws Exception {
@@ -661,14 +665,18 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testReturnTypeCompatibility_07() throws Exception {
-		XtendClass clazz = clazz(
-				"class Foo { " +
-				"  def void a() {" +
-				"    val closure = [Integer i| return i]\n" + 
-				"    for (x : 1..100) closure.apply(x)" +
-				"  }" +
-				"}");
-		helper.assertNoErrors(clazz);
+		runExtensive(new NewLineTest() {
+			public void test(NewLineProvider p) throws Exception {
+				XtendClass clazz = clazz(
+						"class Foo { " +
+								"  def void a() {" +
+								"    val closure = [Integer i| return i]" + p.nl() + 
+								"    for (x : 1..100) closure.apply(x)" +
+								"  }" +
+						"}");
+				helper.assertNoErrors(clazz);
+			}
+		});
 	}
 	
 	@Test public void testReturnTypeCompatibility_08() throws Exception {

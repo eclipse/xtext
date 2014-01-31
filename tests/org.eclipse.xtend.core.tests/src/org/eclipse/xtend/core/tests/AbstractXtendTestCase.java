@@ -11,6 +11,7 @@ import static com.google.common.collect.Lists.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,6 +49,14 @@ import com.google.inject.Provider;
 @RunWith(XtextRunner.class)
 @InjectWith(RuntimeInjectorProvider.class)
 public abstract class AbstractXtendTestCase extends Assert {
+	protected static final int MAX_NEWLINE_COUNT_FOR_EXTENSIVE_TEST = 5;
+
+	protected interface NewLineProvider {
+		String nl();
+	}
+	protected interface NewLineTest {
+		void test(NewLineProvider p) throws Exception;
+	}
 
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
@@ -146,4 +155,49 @@ public abstract class AbstractXtendTestCase extends Assert {
 		return (XtendField) clazz.getMembers().get(0);
 	}
 
+	/**
+	 * Extensively run a test fragment, that uses a small amount of new lines.
+	 * 
+	 * The test fragment should acquire each new line from the passed {@link NewLineProvider} instance.
+	 * Up to {@link #MAX_NEWLINE_COUNT_FOR_EXTENSIVE_TEST} new lines are supported.
+	 * The test fragment will be run multiple (2^n) times with all possible combinations of Windows
+	 * and Linux/Mac new lines ("\n" and "\r\n").
+	 * 
+	 * @param test the test fragment
+	 * @throws Exception exceptions from the test fragment 
+	 */
+	public void runExtensive(NewLineTest test) throws Exception {
+		int newLines = runOncesAndReturnNewLineCount(test, "\n");
+		
+		int effectiveNewLines = Math.min(MAX_NEWLINE_COUNT_FOR_EXTENSIVE_TEST, newLines);
+		int countOfRuns = 1 << effectiveNewLines;
+		for (int runNumber = 1; runNumber < countOfRuns; runNumber++) {
+			runTest(test, runNumber);
+		}
+	}
+
+	private void runTest(NewLineTest test, final int runNumber) throws Exception {
+		NewLineProvider provider = new NewLineProvider() {
+			int newLineIndex;
+			public String nl() {
+				if (newLineIndex > 31 || (runNumber & (1 << newLineIndex++)) == 0) {
+					return "\n";
+				}
+				return "\r\n";
+			}
+		};
+		test.test(provider);
+	}
+
+	private int runOncesAndReturnNewLineCount(NewLineTest test, final String nl) throws Exception {
+		final AtomicInteger count = new AtomicInteger();
+		NewLineProvider provider = new NewLineProvider() {
+			public String nl() {
+				count.set(count.get() + 1);
+				return nl;
+			}
+		};
+		test.test(provider);
+		return count.get();
+	}
 }
