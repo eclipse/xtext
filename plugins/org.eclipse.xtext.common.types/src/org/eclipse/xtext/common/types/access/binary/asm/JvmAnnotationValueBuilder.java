@@ -39,8 +39,9 @@ public abstract class JvmAnnotationValueBuilder extends AbstractJvmAnnotationVal
 		} else {
 			if (value instanceof Type) {
 				Type type = (Type) value;
+				String typeName = type.getSort() == Type.OBJECT ? type.getInternalName() : type.getDescriptor();
 				((InternalEList<JvmTypeReference>) ((JvmTypeAnnotationValue) result).getValues()).addUnique(createTypeReference(
-						BinarySignatures.createTypeSignature(type.getInternalName()), null));
+						BinarySignatures.createTypeSignature(typeName), null));
 			} else {
 				@SuppressWarnings("unchecked")
 				InternalEList<Object> list = (InternalEList<Object>) result.eGet(result.eClass().getEStructuralFeature("values"));

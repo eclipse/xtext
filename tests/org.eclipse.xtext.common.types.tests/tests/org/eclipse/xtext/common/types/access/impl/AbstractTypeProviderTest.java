@@ -77,6 +77,7 @@ import org.eclipse.xtext.common.types.testSetups.Bug347739OneTypeParam;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParams;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuper;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
+import org.eclipse.xtext.common.types.testSetups.Bug427098;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
 import org.eclipse.xtext.common.types.testSetups.Fields;
@@ -3096,5 +3097,29 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test
 	public void testParameterNames_03() {
 		doTestParameterName(ClassWithVarArgs.class, "method(java.lang.String[])", "strings");
+	}
+	@Test
+	public void testBug427098() {
+		String typeName = Bug427098.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		JvmAnnotationReference annotationReference = type.getAnnotations().get(0);
+		JvmTypeAnnotationValue annotationValue = getClassArrayAnnotationValue(annotationReference);
+		assertEquals("classArray", annotationValue.getOperation().getSimpleName());
+		List<JvmTypeReference> typeReferences = annotationValue.getValues();
+		assertEquals(5, typeReferences.size());
+		assertTypeReference("int", typeReferences, 0);
+		assertTypeReference("void", typeReferences, 1);
+		assertTypeReference("double[][][]", typeReferences, 2);
+		assertTypeReference("CharSequence[]", typeReferences, 3);
+		assertTypeReference("Iterable", typeReferences, 4);
+	}
+
+	protected JvmTypeAnnotationValue getClassArrayAnnotationValue(JvmAnnotationReference annotationReference) {
+		return (JvmTypeAnnotationValue) annotationReference.getExplicitValues().get(0);
+	}
+	
+	protected void assertTypeReference(String name, List<JvmTypeReference> references, int idx) {
+		JvmTypeReference typeReference = references.get(idx);
+		assertEquals(name, typeReference.getSimpleName());
 	}
 }
