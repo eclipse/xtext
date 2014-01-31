@@ -91,8 +91,9 @@ public abstract class AbstractJvmAnnotationValueBuilder extends AbstractJvmEleme
 		if (valueClass == Type.class) {
 			JvmTypeAnnotationValue result = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
 			Type type = (Type) value;
+			String typeName = type.getSort() == Type.OBJECT ? type.getInternalName() : type.getDescriptor();
 			((InternalEList<JvmTypeReference>) result.getValues()).addUnique(createTypeReference(
-					BinarySignatures.createTypeSignature(type.getInternalName()), null));
+					BinarySignatures.createTypeSignature(typeName), null));
 			return result;
 		}
 		String className = valueClass.getName();
