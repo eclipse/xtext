@@ -47,11 +47,26 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testAnnotationWithValueArray() {
+	def testAnnotationWithValueArray_01() {
 		val generatorConfig = generatorConfigProvider.get(null)
 		generatorConfig.setGenerateSyntheticSuppressWarnings(false)
 		assertCompilesTo('''
 			@SuppressWarnings(#[ 'abc', 'efg' ])
+			class C {
+			}
+		''', '''
+			@SuppressWarnings({ "abc", "efg" })
+			public class C {
+			}
+		''', generatorConfig)
+	}
+	
+	@Test
+	def testAnnotationWithValueArray_02() {
+		val generatorConfig = generatorConfigProvider.get(null)
+		generatorConfig.setGenerateSyntheticSuppressWarnings(false)
+		assertCompilesTo('''
+			@SuppressWarnings('abc', 'efg')
 			class C {
 			}
 		''', '''

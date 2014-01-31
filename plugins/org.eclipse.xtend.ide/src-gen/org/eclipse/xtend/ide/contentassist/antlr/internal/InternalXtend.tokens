@@ -128,8 +128,8 @@ KW_Instanceof=64
 'extension'=18
 'volatile'=32
 ';'=5
-'return'=100
 '==='=62
+'return'=100
 'create'=39
 '<>'=71
 'protected'=25

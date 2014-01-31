@@ -23,7 +23,6 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 @RunWith(XtextRunner.class)
 @InjectWith(RefactoringTestLanguageInjectorProvider.class)
 public class ReflectionTypeProviderPerformanceTest extends AbstractTypeProviderPerformanceTest {

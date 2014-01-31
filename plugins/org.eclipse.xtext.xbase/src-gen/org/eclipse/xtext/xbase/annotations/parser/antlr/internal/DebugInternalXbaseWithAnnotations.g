@@ -16,7 +16,7 @@ ruleXAnnotation :
 				ruleValidID '='
 				) => ruleXAnnotationElementValuePair )
 			)* |
-			ruleXAnnotationElementValue
+			ruleXAnnotationElementValueOrCommaList
 		)? ')'
 	)?
 ;
@@ -30,16 +30,41 @@ ruleXAnnotationElementValuePair :
 	) ) ruleXAnnotationElementValue
 ;
 
+// Rule XAnnotationElementValueOrCommaList
+ruleXAnnotationElementValueOrCommaList :
+	( (
+	'#' '['
+	) => (
+		'#' '['
+	) ) (
+		ruleXAnnotationOrExpression (
+			',' ruleXAnnotationOrExpression
+		)*
+	)? ']' |
+	ruleXAnnotationOrExpression (
+		(
+			',' ruleXAnnotationOrExpression
+		)+
+	)?
+;
+
 // Rule XAnnotationElementValue
 ruleXAnnotationElementValue :
-	ruleXAnnotation |
 	( (
-	'#' '[' ruleXAnnotation
+	'#' '['
 	) => (
-		'#' '[' ruleXAnnotation
+		'#' '['
 	) ) (
-		',' ruleXAnnotation
-	)* ']' |
+		ruleXAnnotationOrExpression (
+			',' ruleXAnnotationOrExpression
+		)*
+	)? ']' |
+	ruleXAnnotationOrExpression
+;
+
+// Rule XAnnotationOrExpression
+ruleXAnnotationOrExpression :
+	ruleXAnnotation |
 	ruleXExpression
 ;
 
