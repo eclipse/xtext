@@ -337,4 +337,48 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Test def implicitImport() {
+		'''
+			package repro
+			
+			class Foo {
+			
+				def Pair<Integer, Integer> m() {}
+			
+			}
+		'''.assertIsOrganizedTo("repro/Foo", '''
+			package repro
+			
+			class Foo {
+			
+				def Pair<Integer, Integer> m() {}
+			
+			}
+		''')
+	}
+	
+	@Test def implicitImport_1() {
+		'''
+			package repro
+			
+			import java.lang.Integer;
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			class Foo {
+			
+				def Pair<Integer, Integer> m() {}
+			
+			}
+		'''.assertIsOrganizedTo("repro/Foo", '''
+			package repro
+			
+			class Foo {
+			
+				def Pair<Integer, Integer> m() {}
+			
+			}
+		''')
+	}
+
 }
