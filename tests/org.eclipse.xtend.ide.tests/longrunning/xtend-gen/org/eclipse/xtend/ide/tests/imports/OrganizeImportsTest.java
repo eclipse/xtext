@@ -628,4 +628,71 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, "repro/Foo", _builder_1);
   }
+  
+  @Test
+  public void implicitImport() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package repro");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Pair<Integer, Integer> m() {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package repro");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def Pair<Integer, Integer> m() {}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, "repro/Foo", _builder_1);
+  }
+  
+  @Test
+  public void implicitImport_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package repro");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.lang.Integer;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Pair<Integer, Integer> m() {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package repro");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def Pair<Integer, Integer> m() {}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, "repro/Foo", _builder_1);
+  }
 }
