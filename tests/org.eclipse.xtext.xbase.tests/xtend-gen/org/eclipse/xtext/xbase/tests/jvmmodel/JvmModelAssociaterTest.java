@@ -143,8 +143,17 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
         final JvmGenericType secondType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
         Resource _eResource = secondType.eResource();
         Assert.assertNull(_eResource);
-        IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(firstType);
+        final IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> postIndexingInitializing = acceptor.<JvmGenericType>accept(firstType);
+        IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept = acceptor.<JvmGenericType>accept(secondType);
         final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            it.setAbstract(true);
+            Resource _eResource = firstType.eResource();
+            Assert.assertNotNull(_eResource);
+          }
+        };
+        _accept.initializeLater(_function);
+        final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
           public void apply(final JvmGenericType it) {
             it.setAbstract(true);
             Resource _eResource = firstType.eResource();
@@ -153,16 +162,7 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
             Assert.assertNotNull(_eResource_1);
           }
         };
-        _accept.initializeLater(_function);
-        IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmGenericType> _accept_1 = acceptor.<JvmGenericType>accept(secondType);
-        final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
-          public void apply(final JvmGenericType it) {
-            it.setAbstract(true);
-            Resource _eResource = firstType.eResource();
-            Assert.assertNotNull(_eResource);
-          }
-        };
-        _accept_1.initializeLater(_function_1);
+        postIndexingInitializing.initializeLater(_function_1);
       }
     };
     this.assoc.setInferrer(_function);

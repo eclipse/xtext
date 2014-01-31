@@ -76,14 +76,15 @@ class JvmModelAssociaterTest extends AbstractJvmModelTest {
 			val firstType = obj.toClass('foo.Bar')
 			val secondType = obj.toClass('foo.Baz') 
 			assertNull(secondType.eResource)
-			acceptor.accept(firstType).initializeLater[
-				^abstract = true
-				assertNotNull(firstType.eResource)
-				assertNotNull(secondType.eResource)
-			]
+			val postIndexingInitializing = acceptor.accept(firstType)
 			acceptor.accept(secondType).initializeLater[
 				^abstract = true
 				assertNotNull(firstType.eResource)
+			]
+			postIndexingInitializing.initializeLater[
+				^abstract = true
+				assertNotNull(firstType.eResource)
+				assertNotNull(secondType.eResource)
 			]
 		]
 		JvmModelInferrerRegistry::INSTANCE.register('txt') [obj, acceptor, preIndexing|

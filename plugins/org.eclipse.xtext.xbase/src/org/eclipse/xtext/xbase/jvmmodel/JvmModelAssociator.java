@@ -356,9 +356,8 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		getLogicalContainerMapping(resource).clear();
 	}
 	
-	public static class JvmDeclaredTypeAcceptor implements IJvmDeclaredTypeAcceptor, IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmDeclaredType> {
-		public List<Pair<JvmDeclaredType,Procedure1<? super JvmDeclaredType>>> later = Lists.newArrayList();
-		private JvmDeclaredType lastAccepted = null;
+	public static class JvmDeclaredTypeAcceptor implements IJvmDeclaredTypeAcceptor {
+		public List<Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>>> later = Lists.newArrayList();
 		private DerivedStateAwareResource resource;
 
 		public JvmDeclaredTypeAcceptor(DerivedStateAwareResource resource) {
@@ -367,17 +366,28 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 		@SuppressWarnings("unchecked")
 		public <T extends JvmDeclaredType> IPostIndexingInitializing<T> accept(T type) {
-			lastAccepted = type;
 			if(type != null)
 				resource.getContents().add(type);
-			return (IPostIndexingInitializing<T>) this;
+			return (IPostIndexingInitializing<T>) new JvmPostIndexingInitializing(type);
 		}
 		
-		public void initializeLater(Procedure1<? super JvmDeclaredType> lateInitialization) {
-			if (lateInitialization != null && lastAccepted != null) {
-				later.add(new Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>>(lastAccepted, lateInitialization));
+		private class JvmPostIndexingInitializing implements IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmDeclaredType> {
+
+			private JvmDeclaredType type;
+
+			public JvmPostIndexingInitializing(JvmDeclaredType type) {
+				this.type = type;
 			}
+
+			public void initializeLater(Procedure1<? super JvmDeclaredType> lateInitialization) {
+				if (lateInitialization != null && type != null) {
+					later.add(new Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>>(type, lateInitialization));
+				}
+			}
+			
 		}
+
 	}
+
 }
 
