@@ -17,7 +17,7 @@ XAnnotation :
 	'@' annotationType=[types::JvmAnnotationType | QualifiedName] (=>'('
 		(
 			elementValuePairs+=XAnnotationElementValuePair (',' elementValuePairs+=XAnnotationElementValuePair)* 
-		|	value=XAnnotationElementValue
+		|	value=XAnnotationElementValueOrCommaList
 		)?
 	')')?
 ;
@@ -26,8 +26,18 @@ XAnnotationElementValuePair :
 	=>(element=[types::JvmOperation|ValidID] '=') value=XAnnotationElementValue	
 ;
 
+XAnnotationElementValueOrCommaList returns xbase::XExpression:
+	  =>({xbase::XListLiteral} '#' '[') (elements+=XAnnotationOrExpression (',' elements+=XAnnotationOrExpression )*)? ']'
+	| XAnnotationOrExpression ({xbase::XListLiteral.elements+=current} (',' elements+=XAnnotationOrExpression )+)?
+;
+
 XAnnotationElementValue returns xbase::XExpression :
+	  =>({xbase::XListLiteral} '#' '[') (elements+=XAnnotationOrExpression (',' elements+=XAnnotationOrExpression )*)? ']'
+	| XAnnotationOrExpression
+;
+
+XAnnotationOrExpression returns xbase::XExpression:
 	XAnnotation |
-	{xbase::XListLiteral} =>('#' '[' elements+=XAnnotation) (',' elements+=XAnnotation )* ']' |
 	XExpression
 ;
+

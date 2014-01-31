@@ -18,7 +18,6 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class ReflectURIHelperTest extends Assert {
 
 	private ReflectURIHelper uriHelper;
