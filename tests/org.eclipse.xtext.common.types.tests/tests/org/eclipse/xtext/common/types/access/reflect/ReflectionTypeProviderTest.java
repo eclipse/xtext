@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
 import org.eclipse.xtext.common.types.access.impl.ClassMirror;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
@@ -50,12 +51,12 @@ import com.google.inject.Inject;
 public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 
 	@Inject
-	private ResourceSet resourceSet;
+	protected ResourceSet resourceSet;
 
 	@Inject
-	private IndexedJvmTypeAccess indexedJvmTypeAccess;
+	protected IndexedJvmTypeAccess indexedJvmTypeAccess;
 
-	private ReflectionTypeProvider typeProvider;
+	private AbstractRuntimeJvmTypeProvider typeProvider;
 
 	@Override
 	public void setUp() throws Exception {
@@ -63,7 +64,7 @@ public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 		typeProvider = createTypeProvider();
 	}
 
-	protected ReflectionTypeProvider createTypeProvider() {
+	protected AbstractRuntimeJvmTypeProvider createTypeProvider() {
 		return new ReflectionTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess);
 	}
 
@@ -278,7 +279,7 @@ public class ReflectionTypeProviderTest extends AbstractTypeProviderTest {
 	}
 
 	@Override
-	public ReflectionTypeProvider getTypeProvider() {
+	public AbstractRuntimeJvmTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
 
