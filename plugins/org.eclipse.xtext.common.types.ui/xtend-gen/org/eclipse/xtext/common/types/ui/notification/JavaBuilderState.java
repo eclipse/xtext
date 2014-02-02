@@ -180,11 +180,15 @@ public class JavaBuilderState {
         return qualifiedTypeNames;
       }
       final String packageName = it.getElementName();
-      IResource _resource = it.getResource();
-      final IPath packagePath = _resource.getProjectRelativePath();
+      final IResource resource = it.getResource();
+      boolean _equals_1 = Objects.equal(resource, null);
+      if (_equals_1) {
+        return qualifiedTypeNames;
+      }
+      final IPath packagePath = resource.getProjectRelativePath();
       IPackageFragmentRoot _packageFragmentRoot = this.getPackageFragmentRoot(it);
-      IResource _resource_1 = _packageFragmentRoot.getResource();
-      IPath _projectRelativePath = _resource_1.getProjectRelativePath();
+      IResource _resource = _packageFragmentRoot.getResource();
+      IPath _projectRelativePath = _resource.getProjectRelativePath();
       final int srcPathSegmentCount = _projectRelativePath.segmentCount();
       for (final Object key : references.keyTable) {
         final Object typeLocator = key;
@@ -203,8 +207,8 @@ public class JavaBuilderState {
               IPath _removeLastSegments = qulifiedPath.removeLastSegments(1);
               String _string = _removeLastSegments.toString();
               final String typePackageName = _string.replace("/", ".");
-              boolean _equals_1 = packageName.equals(typePackageName);
-              if (_equals_1) {
+              boolean _equals_2 = packageName.equals(typePackageName);
+              if (_equals_2) {
                 String _lastSegment = qulifiedPath.lastSegment();
                 final String simpleTypeName = _lastSegment.toString();
                 LinkedHashSet<String> _qualifiedTypeNames = this.getQualifiedTypeNames(((String)typeLocator), packageName, simpleTypeName);

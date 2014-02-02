@@ -116,6 +116,9 @@ class JavaBuilderState {
 			return qualifiedTypeNames
 		}
 		val packageName = elementName
+		val resource = it.resource
+		if (resource == null)
+			return qualifiedTypeNames
 		val packagePath = resource.projectRelativePath
 		val srcPathSegmentCount = packageFragmentRoot.resource.projectRelativePath.segmentCount
 		for (key : references.keyTable) {
