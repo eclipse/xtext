@@ -81,16 +81,21 @@ ruleMember :
 				ruleJvmTypeReference ruleCreateExtensionInfo ruleValidID '('
 			) ) |
 			( (
-			ruleJvmTypeReference ruleValidID '('
+			ruleJvmTypeReference ruleFunctionID '('
 			) => (
-				ruleJvmTypeReference ruleValidID '('
+				ruleJvmTypeReference ruleFunctionID '('
+			) ) |
+			( (
+			ruleTypeReferenceNoTypeArgs ruleFunctionID '('
+			) => (
+				ruleTypeReferenceNoTypeArgs ruleFunctionID '('
 			) ) |
 			( (
 			ruleCreateExtensionInfo ruleValidID '('
 			) => (
 				ruleCreateExtensionInfo ruleValidID '('
 			) ) |
-			ruleValidID '('
+			ruleFunctionID '('
 		) (
 			ruleParameter (
 				',' ruleParameter
@@ -118,6 +123,29 @@ ruleMember :
 			)*
 		)? ruleXBlockExpression
 	)
+;
+
+// Rule TypeReferenceNoTypeArgs
+ruleTypeReferenceNoTypeArgs :
+	ruleQualifiedName
+;
+
+// Rule FunctionID
+ruleFunctionID :
+	ruleValidID |
+	ruleOperators
+;
+
+// Rule Operators
+ruleOperators :
+	ruleOpMultiAssign |
+	ruleOpOr |
+	ruleOpAnd |
+	ruleOpEquality |
+	ruleOpCompare |
+	ruleOpOther |
+	ruleOpMulti |
+	ruleOpUnary
 ;
 
 // Rule XtendEnumLiteral

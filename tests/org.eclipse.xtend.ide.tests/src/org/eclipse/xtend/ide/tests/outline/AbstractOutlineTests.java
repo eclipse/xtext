@@ -97,13 +97,23 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 	}
 	
 	@Test public void testMethodWithReturnType() throws Exception {
-		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def java.lang.Object foo() {null} }");
-		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Object").numChildren(0);
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def java.lang.String foo() {null} }");
+		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : String").numChildren(0);
 	}
 	
 	@Test public void testMethodWithTypeParameter() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def <T> foo() {null} }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Object").numChildren(0);
+	}
+	
+	@Test public void testOperatorDeclarationWithSymbol() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def java.lang.String !(Object o) {null} }");
+		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "!(Object) : String (operator_not)").numChildren(0);
+	}
+	
+	@Test public void testOperatorDeclarationWithName() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def java.lang.String operator_not(Object o) {null} }");
+		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "!(Object) : String (operator_not)").numChildren(0);
 	}
 	
 	@Test public void testDispatchMethod() throws Exception {

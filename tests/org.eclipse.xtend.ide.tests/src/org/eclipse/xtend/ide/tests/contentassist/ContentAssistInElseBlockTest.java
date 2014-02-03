@@ -83,6 +83,20 @@ public class ContentAssistInElseBlockTest extends ContentAssistTest {
 		super.testEmptyInput();
 	}
 	
+	@Ignore
+	@Override
+	@Test
+	public void testStaticFeatures_02() throws Exception {
+		super.testStaticFeatures_02();
+	}
+	
+	@Ignore
+	@Override
+	@Test
+	public void testOnStringLiteral_33() throws Exception {
+		super.testOnStringLiteral_33();
+	}
+	
 	@Override
 	@Test public void testAfterBinaryOperation_10() throws Exception {
 		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", "null", "!=", "!==", "==", "===", "->", "=>", "+", "?:", "nullOrEmpty");

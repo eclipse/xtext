@@ -20,6 +20,8 @@ import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider
 import org.eclipse.xtext.xbase.validation.UIStrings
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
+import org.eclipse.xtext.naming.QualifiedName
 
 /**
  * Provides labels for Xtend elements.
@@ -37,6 +39,8 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	@Inject XbaseImageAdornments adornments
 	
 	@Inject extension DispatchHelper
+	
+	@Inject OperatorMapping operatorMapping
 
 	@Inject
 	new(AdapterFactoryLabelProvider delegate) {
@@ -113,7 +117,17 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	}
 	
 	protected def text(XtendFunction element) {
-		signature(element.name, element.directlyInferredOperation)
+		val simpleName = element.name
+		if (simpleName != null) {
+			val qnName = QualifiedName.create(simpleName)
+			val operator = operatorMapping.getOperator(qnName)
+			if (operator != null) {
+				val result = signature(operator.firstSegment, element.directlyInferredOperation)
+				result.append(' (' + simpleName + ')', StyledString.COUNTER_STYLER)
+				return result
+			}
+		}
+		return signature(element.name, element.directlyInferredOperation)
 	}
 	
 	protected def text(XtendField element) {
@@ -142,7 +156,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 			if(i.hasNext) {
 				val next = i.next
 				if(next instanceof JvmOperation)
-					return (next as JvmOperation).getReturnType
+					return next.getReturnType
 			}
 		}
 		null

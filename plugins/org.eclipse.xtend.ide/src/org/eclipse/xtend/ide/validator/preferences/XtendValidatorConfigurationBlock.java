@@ -42,5 +42,11 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 		super.fillUnusedCodeSection(builder);
 		builder.addJavaDelegatingComboBox(UNUSED_PRIVATE_MEMBER, "Unused private member:");
 	}
+	
+	@Override
+	protected void fillPotentialProgrammingProblemsSection(ComboBoxBuilder builder) {
+		super.fillPotentialProgrammingProblemsSection(builder);
+		builder.addComboBox(INVALID_OPERATOR_SIGNATURE, "Unexpected operator declaration:");
+	}
 
 }

@@ -77,6 +77,7 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -102,6 +103,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
@@ -176,6 +178,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
+	
+	@Inject
+	private OperatorMapping operatorMapping;
 	
 	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
 	protected final Map<Class<?>, ElementType> targetInfos;
@@ -937,6 +942,50 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			}
 		} else if(function.getDeclaringType() instanceof XtendInterface) {
 			error("Abstract methods do not specify a body", XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_WITH_BODY);
+		}
+	}
+	
+	@Check
+	public void checkOperatorSignature(XtendFunction function) {
+		String functionName = function.getName();
+		if (functionName != null) {
+			QualifiedName qualifiedName = QualifiedName.create(functionName);
+			QualifiedName operator = operatorMapping.getOperator(qualifiedName);
+			if (operator != null) {
+				JvmOperation operation = associations.getDirectlyInferredOperation(function);
+				if (operation != null) {
+					int parameterSize = operation.getParameters().size();
+					if (function.isStatic()) {
+						if (OperatorMapping.NOT.equals(operator)) {
+							if (parameterSize != 1) {
+								addIssue("The static unary operator '!' requires exactly one argument.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
+							}
+						} else if (OperatorMapping.PLUS.equals(operator) || OperatorMapping.MINUS.equals(operator)) {
+							if (parameterSize < 1) {
+								addIssue("The static operator '" + operator + "' requires at least one argument.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
+							} else if (parameterSize > 2) {
+								addIssue("The static operator '" + operator + "' allows at most two arguments.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
+							}
+						} else if (parameterSize != 2) {
+							addIssue("The static binary operator '" + operator + "' requires exactly two arguments.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
+						}
+					} else {
+						if (OperatorMapping.NOT.equals(operator)) {
+							if (parameterSize > 1) {
+								addIssue("The unary operator '!' allows at most one argument.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
+							}
+						} else if (OperatorMapping.PLUS.equals(operator) || OperatorMapping.MINUS.equals(operator)) {
+							if (parameterSize > 2) {
+								addIssue("The operator '" + operator + "' allows at most two arguments.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
+							}
+						} else if (parameterSize > 2) {
+							addIssue("The binary operator '" + operator + "' allows at most two arguments.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
+						} else if (parameterSize < 1) {
+							addIssue("The binary operator '" + operator + "' requires at least one additional argument.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
+						}
+					}
+				}
+			}
 		}
 	}
 	

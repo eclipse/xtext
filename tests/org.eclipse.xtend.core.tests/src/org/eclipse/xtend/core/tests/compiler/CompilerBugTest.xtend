@@ -3089,6 +3089,34 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test def void testBug400823_02() {
+		'''
+			package test.plugin
+			import static extension test.plugin.Foo.*
+			class Foo {
+				def foo() {
+					this - this
+				}
+				def static -(Foo x, Foo y) {
+					1
+				}
+			}
+		'''.assertCompilesTo('''
+			package test.plugin;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int foo() {
+			    return Foo.operator_minus(this, this);
+			  }
+			  
+			  public static int operator_minus(final Foo x, final Foo y) {
+			    return 1;
+			  }
+			}
+		''')
+	}
 
 	@Test def void testBug401269_01() {
 		'''
