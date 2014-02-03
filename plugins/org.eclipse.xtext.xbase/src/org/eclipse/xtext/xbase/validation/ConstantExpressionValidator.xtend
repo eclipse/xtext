@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.util.XExpressionHelper
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.common.types.access.TypeResource
+import org.eclipse.xtext.xbase.XSwitchExpression
 
 /**
  * Checks whether a given XExpression is a a constant expression.
@@ -88,6 +89,9 @@ class ConstantExpressionValidator {
 			}
 			XVariableDeclaration: {
 				return !feature.writeable && feature.right.constantExpression
+			}
+			XSwitchExpression: {
+				return feature.^switch.constantExpression;
 			}
 		}
 		return false

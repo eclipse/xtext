@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals
+import org.eclipse.xtext.xbase.XSwitchExpression
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -31,7 +32,7 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 	}
 
 	def dispatch Object internalEvaluate(XNumberLiteral it, Context ctx) {
-		numberValue(Integer)
+		numberValue(javaType)
 	}
 
 	def dispatch Object internalEvaluate(XAbstractFeatureCall it, Context ctx) {
@@ -47,6 +48,9 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 			}
 			XVariableDeclaration: {
 				return feature.right.internalEvaluate(ctx)
+			}
+			XSwitchExpression: {
+				return feature.^switch.internalEvaluate(ctx)
 			}
 		}
 		throw new UnresolvableFeatureException("Couldn't resolve feature "+ feature.simpleName, it)
