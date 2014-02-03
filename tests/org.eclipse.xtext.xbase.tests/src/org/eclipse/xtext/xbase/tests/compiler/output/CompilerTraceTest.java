@@ -857,13 +857,13 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"  if (Objects.equal(_switchValue,\" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"return _switchResult;", 
-				"switch('') { #case '': ''# case '': '' }");
+				"switch('') { #case '': ''# case ' ': '' }");
 	}
 	
 	@Test
@@ -880,13 +880,13 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"  if (Objects.equal(_switchValue,\" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"return _switchResult;", 
-				"switch('') { case #''#: '' case '': '' }");
+				"switch('') { case #''#: '' case ' ': '' }");
 	}
 	
 	@Test
@@ -903,13 +903,13 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"  if (Objects.equal(_switchValue,\" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"return _switchResult;", 
-				"switch('') { case '': #''# case '': '' }");
+				"switch('') { case '': #''# case ' ': '' }");
 	}
 	
 	@Test
@@ -926,13 +926,13 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"  if (Objects.equal(_switchValue,\" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"return _switchResult;", 
-				"switch(#''#) { case '': '' case '': '' }");
+				"switch(#''#) { case '': '' case ' ': '' }");
 	}
 	
 	@Test
@@ -949,13 +949,13 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"  if (Objects.equal(_switchValue,\" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"return _switchResult;", 
-				"#switch '' { case '': '' case '': '' }#");
+				"#switch '' { case '': '' case ' ': '' }#");
 	}
 	
 	@Test

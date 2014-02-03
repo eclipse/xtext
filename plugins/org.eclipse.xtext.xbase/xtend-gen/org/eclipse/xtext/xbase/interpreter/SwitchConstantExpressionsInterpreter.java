@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -47,7 +48,8 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
   }
   
   protected Object _internalEvaluate(final XNumberLiteral it, final Context ctx) {
-    return this.numberLiterals.numberValue(it, Integer.class);
+    Class<? extends Number> _javaType = this.numberLiterals.getJavaType(it);
+    return this.numberLiterals.numberValue(it, _javaType);
   }
   
   protected Object _internalEvaluate(final XAbstractFeatureCall it, final Context ctx) {
@@ -76,6 +78,13 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
         _matched=true;
         XExpression _right = ((XVariableDeclaration)feature).getRight();
         return this.internalEvaluate(_right, ctx);
+      }
+    }
+    if (!_matched) {
+      if (feature instanceof XSwitchExpression) {
+        _matched=true;
+        XExpression _switch = ((XSwitchExpression)feature).getSwitch();
+        return this.internalEvaluate(_switch, ctx);
       }
     }
     JvmIdentifiableElement _feature_1 = it.getFeature();
