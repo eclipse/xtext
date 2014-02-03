@@ -4,6 +4,7 @@ package org.eclipse.xtext.xbase.ui.quickfix;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -35,10 +36,12 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler;
 import org.eclipse.xtext.xbase.util.TypesOrderUtil;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
@@ -61,6 +64,9 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Inject
 	private TypesOrderUtil typesOrderUtil;
+	
+	@Inject 
+	private ReplacingAppendable.Factory appendableFactory; 
 	
 	@Fix(IssueCodes.IMPORT_DUPLICATE)
 	public void fixDuplicateImport(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -87,6 +93,53 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 			String replaceLabel = "Change to '" + replacement + "'";
 			acceptor.accept(issue, replaceLabel, replaceLabel, null, new ReplaceModification(issue, replacement));
 		}
+	}
+	
+	@Fix(IssueCodes.INCOMPLETE_CASES_ON_ENUM)
+	public void fixIncompleteCasesOnEnum(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Add 'default' case", "Add 'default' case", null, new ISemanticModification() {
+			
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				XSwitchExpression switchExpression = EcoreUtil2.getContainerOfType(element, XSwitchExpression.class);
+				if (switchExpression == null) {
+					return;
+				}
+				EList<XCasePart> cases = switchExpression.getCases();
+				XCasePart casePart = IterableExtensions.last(cases);
+				ICompositeNode caseNode = NodeModelUtils.findActualNodeFor(casePart);
+				if (caseNode == null) {
+					return;
+				}
+				IXtextDocument document = context.getXtextDocument();
+				ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) element.eResource(), caseNode.getEndOffset(), 0);
+				appendable.newLine().append("default: {");
+				appendable.newLine().append("}");
+				appendable.commitChanges();
+			}
+			
+		});
+		acceptor.accept(issue, "Add missing cases", "Add missing cases", null, new ISemanticModification() {
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				XSwitchExpression switchExpression = EcoreUtil2.getContainerOfType(element, XSwitchExpression.class);
+				if (switchExpression == null) {
+					return;
+				}
+				EList<XCasePart> cases = switchExpression.getCases();
+				XCasePart casePart = IterableExtensions.last(cases);
+				ICompositeNode caseNode = NodeModelUtils.findActualNodeFor(casePart);
+				if (caseNode == null) {
+					return;
+				}
+				IXtextDocument document = context.getXtextDocument();
+				ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) element.eResource(), caseNode.getEndOffset(), 0);
+				for (String expectedEnumerationLiteral : issue.getData()) {
+					appendable.newLine().append("case ").append(expectedEnumerationLiteral).append(": {");
+					appendable.newLine().append("}");
+				}
+				appendable.commitChanges();
+			}
+			
+		});
 	}
 	
 	@Fix(IssueCodes.UNREACHABLE_CASE)
