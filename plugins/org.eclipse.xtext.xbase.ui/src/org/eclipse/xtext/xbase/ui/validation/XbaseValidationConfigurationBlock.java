@@ -77,6 +77,7 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 		comboBoxBuilder.addComboBox(IssueCodes.VARIABLE_NAME_DISCOURAGED, "Discouraged usage of variable name 'self':");
 		comboBoxBuilder.addComboBox(IssueCodes.UNREACHABLE_CASE, "Unreachable case:");
 		comboBoxBuilder.addComboBox(IssueCodes.UNREACHABLE_IF_BLOCK, "Unreachable if block:");
+		comboBoxBuilder.addComboBox(IssueCodes.INCOMPLETE_CASES_ON_ENUM, "Incomplete 'switch' cases on enum:");
 	}
 
 	protected void fillRestrictedApiSection(ComboBoxBuilder comboBoxBuilder) {

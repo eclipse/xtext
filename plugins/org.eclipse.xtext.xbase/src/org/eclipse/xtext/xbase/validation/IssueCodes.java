@@ -76,6 +76,7 @@ public class IssueCodes {
 	public static final String UNREACHABLE_CASE = ISSUE_CODE_PREFIX + "unreachable_case";
 	public static final String UNREACHABLE_IF_BLOCK = ISSUE_CODE_PREFIX + "unreachable_instance_of";
 	public static final String UNREACHABLE_CATCH_BLOCK = ISSUE_CODE_PREFIX + "unreachable_catch_block";
+	public static final String INCOMPLETE_CASES_ON_ENUM = ISSUE_CODE_PREFIX + "incomplete_cases_on_enum";
 	public static final String VARIABLE_NAME_SHADOWING = ISSUE_CODE_PREFIX + "variable_name_shadowing";
 	public static final String VARIABLE_NAME_DISALLOWED = ISSUE_CODE_PREFIX + "variable_name_disallowed";
 	public static final String VARIABLE_NAME_DISCOURAGED = ISSUE_CODE_PREFIX + "variable_name_discouraged";
