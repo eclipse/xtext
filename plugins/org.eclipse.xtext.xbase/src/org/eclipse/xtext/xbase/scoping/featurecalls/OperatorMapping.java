@@ -11,6 +11,7 @@ import static org.eclipse.xtext.naming.QualifiedName.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Set;
 
 import org.eclipse.xtext.naming.QualifiedName;
 
@@ -144,6 +145,10 @@ public class OperatorMapping {
 	
 	public QualifiedName getOperator(QualifiedName methodName) {
 		return map.inverse().get(methodName);
+	}
+	
+	public Set<QualifiedName> getOperators() {
+		return map.keySet();
 	}
 	
 	/**
