@@ -2317,6 +2317,67 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		}
 		''')
 	}
+	
+	@Test def void incompleteCasesOnEnum() {
+		create('Foo.xtend', 
+		'''
+		class Foo {
+		
+			def foo(Color x) {
+				switch |x {
+					case RED: {
+					}
+				}
+			}
+		
+		}
+		
+		enum Color {
+			RED, GREEN, BLUE
+		}
+		''')
+		.assertIssueCodes(INCOMPLETE_CASES_ON_ENUM)
+		.assertResolutionLabels("Add 'default' case", "Add missing cases")
+		.assertModelAfterQuickfix("Add 'default' case",
+		'''
+		class Foo {
+		
+			def foo(Color x) {
+				switch x {
+					case RED: {
+					}
+					default: {
+					}
+				}
+			}
+		
+		}
+		
+		enum Color {
+			RED, GREEN, BLUE
+		}
+		''')
+		.assertModelAfterQuickfix("Add missing cases",
+		'''
+		class Foo {
+		
+			def foo(Color x) {
+				switch x {
+					case RED: {
+					}
+					case GREEN: {
+					}
+					case BLUE: {
+					}
+				}
+			}
+		
+		}
+		
+		enum Color {
+			RED, GREEN, BLUE
+		}
+		''')
+	}
 
 }
-
