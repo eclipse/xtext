@@ -93,6 +93,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
@@ -1336,22 +1337,39 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Check
 	public void checkDuplicatedCases(XSwitchExpression switchExpression) {
-		if (!switchExpressions.isJavaSwitchExpression(switchExpression)) {
+		LightweightTypeReference switchType = typeResolver.resolveTypes(switchExpression).getActualType(switchExpression.getSwitch());
+		if (switchType == null) {
 			return;
 		}
-		Multimap<Object, XCasePart> duplicatedCases = HashMultimap.create();
+		Map<String, Multimap<Object, XCasePart>> typeGuards = Maps.newHashMap();
 		for (XCasePart casePart : switchExpression.getCases()) {
-			if (!switchExpressions.isJavaCaseExpression(switchExpression, casePart)) {
+			if (!switchExpressions.isConstant(casePart)) {
 				continue;
 			}
-			Object result = switchConstantExpressionsInterpreter.evaluate(casePart.getCase());
-			duplicatedCases.put(result, casePart);
+			String typeGuardName = switchType.getType().getQualifiedName();
+			JvmTypeReference typeGuard = casePart.getTypeGuard();
+			if (typeGuard != null) {
+				typeGuardName = typeGuard.getQualifiedName();
+			}
+			try {
+				Object result = switchConstantExpressionsInterpreter.evaluate(casePart.getCase());
+				Multimap<Object, XCasePart> duplicatedCases = typeGuards.get(typeGuardName);
+				if (duplicatedCases == null) {
+					duplicatedCases = HashMultimap.create();
+					typeGuards.put(typeGuardName, duplicatedCases);
+				}
+				duplicatedCases.put(result, casePart);
+			} catch (ConstantExpressionEvaluationException e) {
+				// do nothing
+			}
 		}
-		for (Object result : duplicatedCases.keySet()) {
-			Collection<XCasePart> cases = duplicatedCases.get(result);
-			if (cases.size() > 1) {
-				for (XCasePart casePart : cases) {
-					error("Duplicate case", casePart.getCase(), null, IssueCodes.DUPLICATE_CASE);
+		for (Multimap<Object, XCasePart> duplicatedCases : typeGuards.values()) {
+			for (Object result : duplicatedCases.keySet()) {
+				Collection<XCasePart> cases = duplicatedCases.get(result);
+				if (cases.size() > 1) {
+					for (XCasePart casePart : cases) {
+						error("Duplicate case", casePart.getCase(), null, IssueCodes.DUPLICATE_CASE);
+					}
 				}
 			}
 		}

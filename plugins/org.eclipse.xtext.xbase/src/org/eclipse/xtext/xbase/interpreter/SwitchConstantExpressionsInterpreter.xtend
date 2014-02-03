@@ -31,7 +31,7 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 	}
 
 	def dispatch Object internalEvaluate(XNumberLiteral it, Context ctx) {
-		numberValue(Integer)
+		numberValue(javaType)
 	}
 
 	def dispatch Object internalEvaluate(XAbstractFeatureCall it, Context ctx) {
