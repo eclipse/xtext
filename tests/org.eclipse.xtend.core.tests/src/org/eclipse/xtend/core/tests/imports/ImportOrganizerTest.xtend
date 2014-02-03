@@ -795,7 +795,7 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
-	@Test def testLocalOperator() {
+	@Test def testLocalOperator_01() {
 		'''
 			class Foo {
 				def foo() {
@@ -814,8 +814,50 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
+	@Test def testLocalOperator_02() {
+		'''
+			class Foo {
+				def foo() {
+					'' * ''
+				}
+				def *(String x, String y) {
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				def foo() {
+					'' * ''
+				}
+				def operator_multiply(String x, String y) {
+				}
+			}
+		''')
+	}
 
-	@Test def testStaticLocalOperator() {
+	@Test def testStaticLocalOperator_01() {
+		'''
+			class Foo {
+				def foo() {
+					'' * ''
+				}
+				def static *(String x, String y) {
+					
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				def foo() {
+					'' * ''
+				}
+				def static operator_multiply(String x, String y) {
+					
+				}
+			}
+		''')
+	}
+	
+	@Test def testStaticLocalOperator_02() {
 		'''
 			class Foo {
 				def foo() {

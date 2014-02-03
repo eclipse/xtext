@@ -108,6 +108,10 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 					sequence_JvmParameterizedTypeReference(context, (JvmParameterizedTypeReference) semanticObject); 
 					return; 
 				}
+				else if(context == grammarAccess.getTypeReferenceNoTypeArgsRule()) {
+					sequence_TypeReferenceNoTypeArgs(context, (JvmParameterizedTypeReference) semanticObject); 
+					return; 
+				}
 				else break;
 			case TypesPackage.JVM_TYPE_PARAMETER:
 				if(context == grammarAccess.getJvmTypeParameterRule()) {
@@ -1503,9 +1507,10 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
 	 *         (
 	 *             (returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo name=ValidID) | 
-	 *             (returnType=JvmTypeReference name=ValidID) | 
+	 *             (returnType=JvmTypeReference name=FunctionID) | 
+	 *             (returnType=TypeReferenceNoTypeArgs name=FunctionID) | 
 	 *             (createExtensionInfo=CreateExtensionInfo name=ValidID) | 
-	 *             name=ValidID
+	 *             name=FunctionID
 	 *         ) 
 	 *         (parameters+=Parameter parameters+=Parameter*)? 
 	 *         (exceptions+=JvmTypeReference exceptions+=JvmTypeReference*)? 
@@ -1650,6 +1655,15 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getSimpleStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0(), semanticObject.getValue());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     type=[JvmType|QualifiedName]
+	 */
+	protected void sequence_TypeReferenceNoTypeArgs(EObject context, JvmParameterizedTypeReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

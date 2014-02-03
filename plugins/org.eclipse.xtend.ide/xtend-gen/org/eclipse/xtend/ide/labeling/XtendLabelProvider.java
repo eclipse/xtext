@@ -36,8 +36,10 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
@@ -67,6 +69,9 @@ public class XtendLabelProvider extends XbaseLabelProvider {
   @Inject
   @Extension
   private DispatchHelper _dispatchHelper;
+  
+  @Inject
+  private OperatorMapping operatorMapping;
   
   @Inject
   public XtendLabelProvider(final AdapterFactoryLabelProvider delegate) {
@@ -194,9 +199,23 @@ public class XtendLabelProvider extends XbaseLabelProvider {
   }
   
   protected StyledString text(final XtendFunction element) {
+    final String simpleName = element.getName();
+    boolean _notEquals = (!Objects.equal(simpleName, null));
+    if (_notEquals) {
+      final QualifiedName qnName = QualifiedName.create(simpleName);
+      final QualifiedName operator = this.operatorMapping.getOperator(qnName);
+      boolean _notEquals_1 = (!Objects.equal(operator, null));
+      if (_notEquals_1) {
+        String _firstSegment = operator.getFirstSegment();
+        JvmOperation _directlyInferredOperation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
+        final StyledString result = this.signature(_firstSegment, _directlyInferredOperation);
+        result.append(((" (" + simpleName) + ")"), StyledString.COUNTER_STYLER);
+        return result;
+      }
+    }
     String _name = element.getName();
-    JvmOperation _directlyInferredOperation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
-    return this.signature(_name, _directlyInferredOperation);
+    JvmOperation _directlyInferredOperation_1 = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
+    return this.signature(_name, _directlyInferredOperation_1);
   }
   
   protected StyledString text(final XtendField element) {
@@ -253,7 +272,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
         if (_hasNext) {
           final EObject next = i.next();
           if ((next instanceof JvmOperation)) {
-            return ((JvmOperation) next).getReturnType();
+            return ((JvmOperation)next).getReturnType();
           }
         }
       }
