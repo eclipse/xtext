@@ -30,10 +30,10 @@ class XSwitchExpressions {
 		if (switchType == null) {
 			return false
 		}
-		if (switchType.isSubtypeOf(Integer.TYPE)) {
+		if (switchType.isType(Integer.TYPE)) {
 			return true
 		}
-		if (switchType.isSubtypeOf(Enum)) {
+		if (switchType.isType(Enum)) {
 			return true
 		}
 		false
@@ -43,15 +43,11 @@ class XSwitchExpressions {
 		if (casePart.typeGuard != null) {
 			return false
 		}
-		val ^case = casePart.^case
-		if (^case == null) {
+		if (!casePart.constant) {
 			return false
-		}
-		if (!^case.constant) {
-			return false
-		}
+		} 
 		extension val resolvedTypes = resolveTypes
-		val caseType = ^case.actualType
+		val caseType = casePart.^case.actualType
 		if (caseType == null) {
 			return false
 		}
@@ -60,6 +56,14 @@ class XSwitchExpressions {
 			return false
 		}
 		true
+	}
+	
+	def isConstant(XCasePart casePart) {
+		val ^case = casePart.^case
+		if (^case == null) {
+			return false
+		}
+		return ^case.constant
 	}
 
 }

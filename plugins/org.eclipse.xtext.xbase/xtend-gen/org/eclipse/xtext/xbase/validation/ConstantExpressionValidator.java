@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
@@ -202,6 +203,13 @@ public class ConstantExpressionValidator {
           _and = _isConstantExpression;
         }
         return _and;
+      }
+    }
+    if (!_matched) {
+      if (feature instanceof XSwitchExpression) {
+        _matched=true;
+        XExpression _switch = ((XSwitchExpression)feature).getSwitch();
+        return this.isConstantExpression(_switch);
       }
     }
     return false;

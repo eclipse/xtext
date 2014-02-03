@@ -43,12 +43,12 @@ public class XSwitchExpressions {
       if (_equals) {
         return false;
       }
-      boolean _isSubtypeOf = switchType.isSubtypeOf(Integer.TYPE);
-      if (_isSubtypeOf) {
+      boolean _isType = switchType.isType(Integer.TYPE);
+      if (_isType) {
         return true;
       }
-      boolean _isSubtypeOf_1 = switchType.isSubtypeOf(Enum.class);
-      if (_isSubtypeOf_1) {
+      boolean _isType_1 = switchType.isType(Enum.class);
+      if (_isType_1) {
         return true;
       }
       _xblockexpression = (false);
@@ -64,21 +64,17 @@ public class XSwitchExpressions {
       if (_notEquals) {
         return false;
       }
-      final XExpression case_ = casePart.getCase();
-      boolean _equals = Objects.equal(case_, null);
-      if (_equals) {
-        return false;
-      }
-      boolean _isConstant = this._constantExpressionValidator.isConstant(case_);
+      boolean _isConstant = this.isConstant(casePart);
       boolean _not = (!_isConstant);
       if (_not) {
         return false;
       }
       @Extension
       final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(it);
-      final LightweightTypeReference caseType = resolvedTypes.getActualType(case_);
-      boolean _equals_1 = Objects.equal(caseType, null);
-      if (_equals_1) {
+      XExpression _case = casePart.getCase();
+      final LightweightTypeReference caseType = resolvedTypes.getActualType(_case);
+      boolean _equals = Objects.equal(caseType, null);
+      if (_equals) {
         return false;
       }
       XExpression _switch = it.getSwitch();
@@ -91,5 +87,14 @@ public class XSwitchExpressions {
       _xblockexpression = (true);
     }
     return _xblockexpression;
+  }
+  
+  public boolean isConstant(final XCasePart casePart) {
+    final XExpression case_ = casePart.getCase();
+    boolean _equals = Objects.equal(case_, null);
+    if (_equals) {
+      return false;
+    }
+    return this._constantExpressionValidator.isConstant(case_);
   }
 }

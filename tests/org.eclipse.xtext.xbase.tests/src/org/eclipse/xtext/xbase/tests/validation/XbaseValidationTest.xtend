@@ -12,8 +12,8 @@ import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.junit.Test
 import org.eclipse.xtext.xbase.validation.IssueCodes
+import org.junit.Test
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -86,6 +86,41 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertNoErrors
 	}
 
+	@Test def void testDuplicateCases_int_6() {
+		'''
+			{
+				val Integer x = 1
+				switch x {
+					Integer case 1: 1
+					Integer case 1: 1
+				}
+			}
+		'''.expression.assertError(XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE)
+	}
+
+	@Test def void testDuplicateCases_int_7() {
+		'''
+			{
+				val Integer x = 1
+				switch x {
+					Integer case 1: 1
+					case 1: 1
+				}
+			}
+		'''.expression.assertError(XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE)
+	}
+
+	@Test def void testDuplicateCases_int_8() {
+		'''
+			{
+				switch x : 1 {
+					case x: ''
+					case x: '1'
+				}
+			}
+		'''.expression.assertError(XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE)
+	}
+
 	@Test def void testDuplicateCases_enum() {
 		'''
 			{
@@ -137,16 +172,45 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 				case 1: 1
 				case 1: 1
 			}
+		'''.expression.assertError(XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE)
+	}
+
+	@Test def void testDuplicateCases_double_2() {
+		'''
+			switch x : 1.5d {
+				case 1.5d: 1
+				case 1.5d: 1
+			}
+		'''.expression.assertError(XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.DUPLICATE_CASE)
+	}
+
+	@Test def void testDuplicateCases_double_3() {
+		'''
+			switch x : 1.5d {
+				case 1.5d: 1
+				case 1.6d: 1
+			}
 		'''.expression.assertNoErrors
 	}
 
+	@Test def void testDuplicateCases_number() {
+		'''
+			switch x : 1 {
+				case 1: 1
+				case 1l: 1
+				case 1f: 1
+				case 1d: 1
+			}
+		'''.expression.assertNoErrors
+	}
+	
 	@Test def void testDuplicateCases_string() {
 		'''
 			switch x : 'lalala' {
 				case 'A': 1
 				case 'A': 1
 			}
-		'''.expression.assertNoErrors
+		'''.expression.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.DUPLICATE_CASE)
 	}
 
 	@Test def void testDuplicateCases_object() {
@@ -155,7 +219,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 				case 'A': 1
 				case 'A': 1
 			}
-		'''.expression.assertNoErrors
+		'''.expression.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.DUPLICATE_CASE)
 	}
 	
 	@Test def void testUnreachableCase() {
