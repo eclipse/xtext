@@ -8,7 +8,9 @@
 package org.eclipse.xtext.xbase.ui.hover;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.internal.debug.ui.JavaDebugHover;
 import org.eclipse.jdt.internal.ui.text.JavaWordFinder;
+import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
@@ -18,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.Pair;
@@ -35,6 +38,26 @@ public class XbaseDispatchingEObjectTextHover extends DispatchingEObjectTextHove
 	
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
+	
+	@Inject 
+	private JavaDebugHover javaDebugHover;
+	
+	@Override
+	public Object getHoverInfo2(ITextViewer textViewer, IRegion hoverRegion) {
+		final Object hoverInfo = javaDebugHover.getHoverInfo2(textViewer, hoverRegion);
+		if (hoverInfo != null) {
+			lastCreatorProvider = new IEObjectHoverProvider.IInformationControlCreatorProvider() {
+				public IInformationControlCreator getHoverControlCreator() {
+					return javaDebugHover.getHoverControlCreator();
+				}
+				public Object getInfo() {
+					return hoverInfo;
+				}
+			};
+			return hoverInfo;
+		}
+		return super.getHoverInfo2(textViewer, hoverRegion);
+	}
 	
 	@Override
 	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
