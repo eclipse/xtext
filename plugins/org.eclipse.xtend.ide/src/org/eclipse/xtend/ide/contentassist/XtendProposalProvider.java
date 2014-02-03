@@ -14,21 +14,24 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions.VariableType;
 import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
@@ -36,6 +39,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
@@ -50,10 +54,13 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	private JdtVariableCompletions completions;
 
 	@Inject
-	private IGrammarAccess grammarAccess;
+	private XtendGrammarAccess grammarAccess;
 
 	@Inject
 	private ImplementMemberFromSuperAssist overrideAssist;
+	
+	@Inject
+	private OperatorMapping operatorMapping;
 
 	@Override
 	public void completeMember_Name(final EObject model, Assignment assignment, final ContentAssistContext context,
@@ -72,6 +79,17 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 							acceptor.accept(createCompletionProposal(replaceText, label, img, context));
 						}
 					});
+		} else if (model instanceof XtendFunction) {
+			for(QualifiedName operator: operatorMapping.getOperators()) {
+				StyledString displayString = new StyledString(operator.getFirstSegment());
+				displayString.append(" " + operatorMapping.getMethodName(operator), StyledString.DECORATIONS_STYLER);
+				acceptor.accept(createCompletionProposal(
+						operator.getFirstSegment(),
+						displayString,
+						getImage(model),
+						context));
+			}
+			super.completeMember_Name(model, assignment, context, acceptor);
 		} else {
 			super.completeMember_Name(model, assignment, context, acceptor);
 		}
@@ -114,8 +132,14 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeMember_ReturnType(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
-				getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
+		if (context.getPrefix().length() == 0) {
+			EObject previousGrammarElement = context.getLastCompleteNode().getGrammarElement();
+			AbstractRule rule = GrammarUtil.containingRule(previousGrammarElement);
+			if (rule != grammarAccess.getValidIDRule()) {
+				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
+						getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
+			}
+		}
 	}
 
 	protected Set<String> getAllKeywords() {

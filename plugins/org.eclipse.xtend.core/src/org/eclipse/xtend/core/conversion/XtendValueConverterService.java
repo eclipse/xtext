@@ -78,4 +78,18 @@ public class XtendValueConverterService extends XbaseValueConverterService {
 	public IValueConverter<String> getInnerVarIDValueConverter() {
 		return innerVarIDConverter;
 	}
+	
+	@Inject
+	private FunctionIDValueConverter functionIDConverter;
+
+	@ValueConverter(rule = "FunctionID")
+	public IValueConverter<String> getFunctionIDValueConverter() {
+		return functionIDConverter;
+	}
+	
+	// overridden to be visible
+	@Override
+	protected IValueConverter<Object> getConverter(String lexerRule) {
+		return super.getConverter(lexerRule);
+	}
 }

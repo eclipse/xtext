@@ -83,6 +83,8 @@ public final class IssueCodes {
 
 	public static final String INVALID_EXTENSION_TYPE = ISSUE_CODE_PREFIX +  "invalid_extension_type";
 	
+	public static final String INVALID_OPERATOR_SIGNATURE = ISSUE_CODE_PREFIX +  "invalid_operator_signature";
+	
 	public static final String PROCESSING_ERROR = ISSUE_CODE_PREFIX +  "processing_error";
 	
 	public static final String ACTIVE_ANNOTAION_IN_SAME_CONTAINER = ISSUE_CODE_PREFIX +  "active_annotation_in_same_project";

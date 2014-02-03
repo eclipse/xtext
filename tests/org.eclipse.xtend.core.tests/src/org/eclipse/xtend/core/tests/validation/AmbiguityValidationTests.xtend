@@ -860,13 +860,61 @@ class AmbiguousOperatorsTest extends AmbiguityValidationTest {
 	}
 	
 	@Test
-	def void testUnambiguousOperators() {
+	def void testAmbiguousOperators_03() {
+		'''
+			class C {
+				def void m(C c1, C c2) {
+					c1 + c2
+				}
+				def void +(C c, Object o) {}
+				def void operator_plus(Object o, C c) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous binary operation.
+			The operator declarations
+				operator_plus(C, Object) in C and
+				operator_plus(Object, C) in C
+			both match.''')
+	}
+	
+	@Test
+	def void testAmbiguousOperators_04() {
+		'''
+			class C {
+				def void n(String s) {
+					-s
+				}
+				def void operator_minus(CharSequence c) {}
+				def void -(java.io.Serializable s) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous unary operation.
+			The operator declarations
+				operator_minus(CharSequence) in C and
+				operator_minus(Serializable) in C
+			both match.''')
+	}
+	
+	@Test
+	def void testUnambiguousOperators_01() {
 		'''
 			class C {
 				def void n(String s) {
 					s+s
 				}
 				def void operator_plus(String s1, String s2) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousOperators_02() {
+		'''
+			class C {
+				def void n(String s) {
+					s+s
+				}
+				def void +(String s1, String s2) {}
 			}
 		'''.assertUnambiguous
 	}

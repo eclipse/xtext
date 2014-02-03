@@ -86,9 +86,10 @@ Member returns XtendMember:
 			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
 			( 
 				=>(returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo name=ValidID '(')
-			  | =>(returnType=JvmTypeReference name=ValidID '(')
+			  | =>(returnType=JvmTypeReference name=FunctionID '(')
+			  | =>(returnType=TypeReferenceNoTypeArgs name=FunctionID '(')
 			  | =>(createExtensionInfo=CreateExtensionInfo name=ValidID '(')
-			  | name=ValidID '('
+			  | name=FunctionID '('
 			)
 			(parameters+=Parameter (',' parameters+=Parameter)*)? ')'
 			('throws' exceptions+=JvmTypeReference (',' exceptions+=JvmTypeReference)*)?
@@ -105,10 +106,29 @@ Member returns XtendMember:
 	)
 ;
 
+TypeReferenceNoTypeArgs returns types::JvmParameterizedTypeReference:
+  type=[types::JvmType|QualifiedName]
+;
+
+FunctionID:
+	ValidID | Operators
+;
+
+Operators:
+	  OpMultiAssign
+	| OpOr
+	| OpAnd
+	| OpEquality
+	| OpCompare
+	| OpOther
+//	| OpAdd completely contained in OpUnary
+	| OpMulti
+	| OpUnary
+;
+
 XtendEnumLiteral: 
 	name=ValidID
 ;
-
 
 CommonModifier:
 		'public' | 'private' | 'protected' | 'package' | 'abstract' | 'static' | 'dispatch' | 'final' 

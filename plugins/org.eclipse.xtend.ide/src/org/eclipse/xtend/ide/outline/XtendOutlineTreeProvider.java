@@ -216,7 +216,7 @@ public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider impl
 				StyledString label = (text instanceof StyledString) ? (StyledString) text : new StyledString(
 						text.toString());
 				label.append(new StyledString(" - " + jvmFeature.getDeclaringType().getIdentifier(),
-						StyledString.COUNTER_STYLER));
+						StyledString.QUALIFIER_STYLER));
 				return factory.createXtendFeatureNode(parentNode, jvmFeature, image, label, true, synthetic, inheritanceDepth);
 			}
 			return null;

@@ -4460,7 +4460,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				''');
 	}
 	
-	@Test def void testBug412642() throws Exception {
+	@Test def void testBug412642_01() throws Exception {
 		'''
 			package org.xtext.example.mydsl
 
@@ -4497,6 +4497,86 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 				val public static staticPair = "Mango" -> 4
 				
+				def static methodStaticPair () {
+					staticPair
+				}
+			
+			}
+		'''.assertCompilesTo('''
+			package org.xtext.example.mydsl;
+
+			import com.google.common.collect.Maps;
+			import com.google.common.collect.Sets;
+			import java.util.Collections;
+			import java.util.Map;
+			import java.util.Set;
+			import org.eclipse.xtext.xbase.lib.Pair;
+			import org.xtext.example.mydsl.Bug412642_2;
+			
+			@SuppressWarnings("all")
+			public class Bug412642 {
+			  private final Pair<String,Integer> pairField = Pair.<String, Integer>of("Orange", Integer.valueOf(3));
+			  
+			  public void bar() {
+			    final Pair<String,Integer> pair = Pair.<String, Integer>of("Apple", Integer.valueOf(1));
+			    final Pair<String,Integer> _pair = pair;
+			    Map<Object,Object> _xsetliteral = null;
+			    Pair<String,Integer> _methodStaticPair = Bug412642_2.methodStaticPair();
+			    Pair<Object,Object> _plus = this.operator_plus(
+			      1, 2);
+			    Map<Object,Object> _tempMap = Maps.<Object, Object>newHashMap();
+			    _tempMap.put(pair == null ? null : pair.getKey(), pair == null ? null : pair.getValue());
+			    _tempMap.put(_pair == null ? null : _pair.getKey(), _pair == null ? null : _pair.getValue());
+			    _tempMap.put("Banana", Integer.valueOf(2));
+			    _tempMap.put(Bug412642_2.staticPair == null ? null : Bug412642_2.staticPair.getKey(), Bug412642_2.staticPair == null ? null : Bug412642_2.staticPair.getValue());
+			    _tempMap.put(this.pairField == null ? null : this.pairField.getKey(), this.pairField == null ? null : this.pairField.getValue());
+			    _tempMap.put(_methodStaticPair == null ? null : _methodStaticPair.getKey(), _methodStaticPair == null ? null : _methodStaticPair.getValue());
+			    _tempMap.put(_plus == null ? null : _plus.getKey(), _plus == null ? null : _plus.getValue());
+			    _xsetliteral = Collections.<Object, Object>unmodifiableMap(_tempMap);
+			    final Map<Object,Object> map2 = _xsetliteral;
+			    Pair<String,Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
+			    final Set<? extends Object> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));
+			  }
+			  
+			  public Pair<Object,Object> operator_plus(final int operant, final int operand2) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug412642_02() throws Exception {
+		'''
+			package org.xtext.example.mydsl
+
+			class Bug412642 {
+			
+				val pairField = "Orange" -> 3
+				def bar() {
+					val pair = "Apple" -> 1
+					val _pair = pair;
+					val map2 = #{
+						pair,
+						_pair,
+						"Banana" -> 2,
+						Bug412642_2.staticPair,
+						pairField,
+						Bug412642_2.methodStaticPair,
+						1 + 2
+					}
+					val map3 = #{
+						1 * 2,
+						"Banana" -> 2
+					}
+				}
+				def Pair<Object, Object> +(int operant, int operand2) {
+				}
+			
+			}
+			
+			class Bug412642_2 {
+			
+				val public static staticPair = "Mango" -> 4
 				def static methodStaticPair () {
 					staticPair
 				}
