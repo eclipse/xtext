@@ -383,5 +383,66 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		}
 		'''.expression.assertError(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.UNREACHABLE_IF_BLOCK)
 	}
+	
+	@Test def void testIncompleteCasesOnEnum() {
+		'''
+		{
+			switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
+				case RED: {
+					1
+				}
+			}
+		}
+		'''.expression.assertWarning(XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM)
+	}
+	
+	@Test def void testIncompleteCasesOnEnum_2() {
+		'''
+		{
+			switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
+				case RED: {
+					1
+				}
+				case GREEN: {
+					1
+				}
+				case BLUE: {
+					1
+				}
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testIncompleteCasesOnEnum_3() {
+		'''
+		{
+			val y = 1
+			switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
+				case RED: {
+					1
+				}
+				case y == 2: {
+					2
+				}
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testIncompleteCasesOnEnum_4() {
+		'''
+		{
+			switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
+				case RED: {
+					1
+				}
+				default: {
+					2
+				}
+			}
+		}
+		'''.expression.assertNoIssues
+	}
 
 }
