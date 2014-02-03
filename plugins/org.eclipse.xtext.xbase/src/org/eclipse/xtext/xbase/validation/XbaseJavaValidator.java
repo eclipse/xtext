@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.validation;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
+import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.io.Serializable;
@@ -35,6 +36,8 @@ import org.eclipse.xtext.EcoreUtil2.ElementReferenceAcceptor;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
@@ -93,6 +96,7 @@ import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
@@ -1448,6 +1452,56 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	protected boolean isHandled(LightweightTypeReference actualTypeReference, Collection<LightweightTypeReference> collection) {
 		return typesOrderUtil.isHandled(actualTypeReference, collection);
+	}
+	
+	@Check
+	public void checkIncompleteCasesOnEnum(XSwitchExpression switchExpression) {
+		if (isIgnored(IssueCodes.INCOMPLETE_CASES_ON_ENUM)) {
+			return;
+		}
+		if (switchExpression.getDefault() != null) {
+			return;
+		}
+		LightweightTypeReference switchType = typeResolver.resolveTypes(switchExpression).getActualType(switchExpression.getSwitch());
+		if (switchType == null) {
+			return;
+		}
+		if (!switchType.isSubtypeOf(Enum.class)) {
+			return;
+		}
+		JvmEnumerationType enumerationType = (JvmEnumerationType) switchType.getType();
+		List<String> expectedEnumerationLiterals = toList(map(enumerationType.getLiterals(), new Functions.Function1<JvmEnumerationLiteral, String>() {
+
+			public String apply(JvmEnumerationLiteral enumerationLiteral) {
+				return enumerationLiteral.getSimpleName();
+			}
+			
+		}));
+		for (XCasePart casePart : switchExpression.getCases()) {
+			if (!switchExpressions.isJavaCaseExpression(switchExpression, casePart)) {
+				return;
+			}
+			Object result = switchConstantExpressionsInterpreter.evaluate(casePart.getCase());
+			if (!(result instanceof JvmEnumerationLiteral)) {
+				return;
+			}
+			JvmEnumerationLiteral enumerationLiteral = (JvmEnumerationLiteral) result;
+			expectedEnumerationLiterals.remove(enumerationLiteral.getSimpleName());
+		}
+		if (expectedEnumerationLiterals.isEmpty()) {
+			return;
+		}
+		StringBuilder builder = new StringBuilder();
+		for (String expectedEnumerationLiteral : expectedEnumerationLiterals) {
+			if (builder.length() != 0) {
+				builder.append(", ");
+			}
+			builder.append(expectedEnumerationLiteral);
+		}
+		builder.insert(0, "The enum constants ");
+		builder.append(" need a corresponding case labels in this enum switch on ").append(enumerationType.getQualifiedName());
+		String message = builder.toString();
+		addIssue(message, switchExpression.getSwitch(), null, IssueCodes.INCOMPLETE_CASES_ON_ENUM, expectedEnumerationLiterals.toArray(new String[0]));
 	}
 	
 }

@@ -906,4 +906,163 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testIncompleteCasesOnEnum() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("case RED: {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertWarning(_expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIncompleteCasesOnEnum_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("case RED: {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("case GREEN: {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("case BLUE: {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoIssues(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIncompleteCasesOnEnum_3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val y = 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("case RED: {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("case y == 2: {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("2");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoIssues(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIncompleteCasesOnEnum_4() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch x : org.eclipse.xtext.xbase.tests.validation.Color.RED {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("case RED: {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("1");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("default: {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("2");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoIssues(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
