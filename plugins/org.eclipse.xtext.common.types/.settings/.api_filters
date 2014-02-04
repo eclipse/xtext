@@ -3,14 +3,14 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter comment="Added JvmField.isConstant" id="923795461">
             <message_arguments>
+                <message_argument value="2.6.0"/>
                 <message_argument value="2.5.1"/>
-                <message_argument value="2.5.0"/>
             </message_arguments>
         </filter>
         <filter comment="Added JvmField.isConstant" id="924844039">
             <message_arguments>
+                <message_argument value="2.6.0"/>
                 <message_argument value="2.5.1"/>
-                <message_argument value="2.5.0"/>
             </message_arguments>
         </filter>
     </resource>
