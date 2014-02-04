@@ -2047,6 +2047,93 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"{ val int[][] myArray = #[#[1,2]] switch it : myArray as Object { int[][] : it.get(0).get(0) default : 42 }}");
 	}
 	
+	@Test public void testSwitchExpression_33() throws Exception {
+		assertEvaluatesTo(1, 
+				"{ switch x : 0 { case 0: 1 " +
+								"case 1, case 2: 2 " +
+								"case 3, default: 3 } }");
+	}
+	
+	@Test public void testSwitchExpression_34() throws Exception {
+		assertEvaluatesTo(2, 
+				"{ switch x : 1 { case 0: 1 " +
+								"case 1, case 2: 2 " +
+								"case 3, default: 3 } }");
+	}
+	
+	@Test public void testSwitchExpression_35() throws Exception {
+		assertEvaluatesTo(2, 
+				"{ switch x : 2 { case 0: 1 " +
+								"case 1, case 2: 2 " +
+								"case 3, default: 3 } }");
+	}
+	
+	@Test public void testSwitchExpression_36() throws Exception {
+		assertEvaluatesTo(3, 
+				"{ switch x : 3 { case 0: 1 " +
+								"case 1, case 2: 2 " +
+								"case 3, default: 3 } }");
+	}
+	
+	@Test public void testSwitchExpression_37() throws Exception {
+		assertEvaluatesTo(3,
+				"{ switch x : 4 { case 0: 1 " +
+								"case 1, case 2: 2 " +
+								"case 3, default: 3 } }");
+	}
+
+	@Test public void testSwitchExpression_38() throws Exception {
+		assertEvaluatesTo(1, 
+				"{ switch x : 'a' { case 'a': 1 " +
+									"case 'b', case 'c': 2 " +
+									"case 'd', default: 3 " +
+				"} }");
+	}
+	
+	@Test public void testSwitchExpression_39() throws Exception {
+		assertEvaluatesTo(2, 
+				"{ switch x : 'b' { case 'a': 1 " +
+									"case 'b', case 'c': 2 " +
+									"case 'd', default: 3 " +
+				"} }");
+	}
+	
+	@Test public void testSwitchExpression_40() throws Exception {
+		assertEvaluatesTo(2, 
+				"{ switch x : 'c' { case 'a': 1 " +
+									"case 'b', case 'c': 2 " +
+									"case 'd', default: 3 " +
+				"} }");
+	}
+	
+	@Test public void testSwitchExpression_41() throws Exception {
+		assertEvaluatesTo(3, 
+				"{ switch x : 'd' { case 'a': 1 " +
+									"case 'b', case 'c': 2 " +
+									"case 'd', default: 3 " +
+				"} }");
+	}
+	
+	@Test public void testSwitchExpression_42() throws Exception {
+		assertEvaluatesTo(3, 
+				"{ switch x : 'e' { case 'a': 1 " +
+									"case 'b', case 'c': 2 " +
+									"case 'd', default: 3 " +
+				"} }");
+	}
+	
+	@Test public void testSwitchExpression_44() throws Exception {
+		assertEvaluatesTo(0, 
+				"{ switch x : 'lalala' as Object { String, Integer case 1: 0 " +
+												"Integer, default: 1 } }");
+	}
+	
+	@Test public void testSwitchExpression_45() throws Exception {
+		assertEvaluatesTo(1, 
+				"{ switch x : Integer.valueOf(2) as Object { String, Integer case 1: 0 " +
+												"Integer, default: 1 } }");
+	}
+	
 	@Test public void testCastedExpression_01() throws Exception {
 		assertEvaluatesTo("literal", "'literal' as String");
 	}
