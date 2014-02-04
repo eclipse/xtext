@@ -131,10 +131,11 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 	}
 
 	public void configureXCasePart(FormattingConfig c, XCasePartElements ele) {
-		c.setNoSpace().before(ele.getColonKeyword_2());
-		c.setIndentationIncrement().before(ele.getThenAssignment_3());
-		c.setLinewrap().around(ele.getThenAssignment_3());
-		c.setIndentationDecrement().after(ele.getThenAssignment_3());
+		c.setNoSpace().before(ele.getColonKeyword_3_0_0());
+		c.setNoSpace().before(ele.getCommaKeyword_3_1());
+		c.setIndentationIncrement().before(ele.getThenAssignment_3_0_1());
+		c.setLinewrap().around(ele.getThenAssignment_3_0_1());
+		c.setIndentationDecrement().after(ele.getThenAssignment_3_0_1());
 	}
 
 	public void configureXForLoopExpression(FormattingConfig c, XForLoopExpressionElements ele) {

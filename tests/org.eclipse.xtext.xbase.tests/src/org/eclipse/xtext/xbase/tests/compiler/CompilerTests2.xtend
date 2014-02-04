@@ -352,5 +352,281 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			return _xblockexpression;
 		''')
 	}
+	
+	@Test def void testFallThroughSwitch() {
+		'''
+			{
+				switch x : 1 {
+					case 1,
+					case 2:
+						'lalala'
+				}
+			}
+		'''.compilesTo(
+		'''
+			String _switchResult = null;
+			final int x = 1;
+			switch (x) {
+			  case 1:
+			  case 2:
+			    _switchResult = "lalala";
+			    break;
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testFallThroughSwitch_2() {
+		'''
+			{
+				switch x : 'lalala' {
+					case 'a',
+					case 'b',
+					case 'c':
+						'lalala'
+				}
+			}
+		'''.compilesTo(
+		'''
+			String _switchResult = null;
+			final String x = "lalala";
+			boolean _matched = false;
+			if (!_matched) {
+			  if (com.google.common.base.Objects.equal(x,"a")) {
+			    _matched=true;
+			  }
+			  if (!_matched) {
+			    if (com.google.common.base.Objects.equal(x,"b")) {
+			      _matched=true;
+			    }
+			  }
+			  if (!_matched) {
+			    if (com.google.common.base.Objects.equal(x,"c")) {
+			      _matched=true;
+			    }
+			  }
+			  if (_matched) {
+			    _switchResult = "lalala";
+			  }
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testFallThroughSwitch_3() {
+		'''
+			{
+				switch x : 1 {
+					case 1,
+					case 2,
+					default:
+						'lalala'
+				}
+			}
+		'''.compilesTo(
+		'''
+			String _switchResult = null;
+			final int x = 1;
+			switch (x) {
+			  case 1:
+			  case 2:
+			  default:
+			    _switchResult = "lalala";
+			    break;
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testFallThroughSwitch_4() {
+		'''
+			{
+				switch x : 'lalala' {
+					case 'a',
+					case 'b',
+					default:
+						'lalala'
+				}
+			}
+		'''.compilesTo(
+		'''
+			String _switchResult = null;
+			final String x = "lalala";
+			boolean _matched = false;
+			if (!_matched) {
+			  if (com.google.common.base.Objects.equal(x,"a")) {
+			    _matched=true;
+			  }
+			  if (!_matched) {
+			    if (com.google.common.base.Objects.equal(x,"b")) {
+			      _matched=true;
+			    }
+			  }
+			  if (_matched) {
+			    _switchResult = "lalala";
+			  }
+			}
+			if (!_matched) {
+			  _switchResult = "lalala";
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testFallThroughSwitch_5() {
+		'''
+			{
+				switch x : 1 {
+					case 1:
+						'blabla'
+					case 2,
+					default:
+						'lalala'
+				}
+			}
+		'''.compilesTo(
+		'''
+			String _switchResult = null;
+			final int x = 1;
+			switch (x) {
+			  case 1:
+			    _switchResult = "blabla";
+			    break;
+			  case 2:
+			  default:
+			    _switchResult = "lalala";
+			    break;
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testFallThroughSwitch_6() {
+		'''
+			{
+				switch x : new Object {
+					String case 'a':
+						'blabla'
+					Integer case 1,
+					case 2,
+					default:
+						'lalala'
+				}
+			}
+		'''.compilesTo(
+		'''
+			String _switchResult = null;
+			Object _object = new Object();
+			final Object x = _object;
+			boolean _matched = false;
+			if (!_matched) {
+			  if (x instanceof String) {
+			    if (com.google.common.base.Objects.equal(x,"a")) {
+			      _matched=true;
+			      _switchResult = "blabla";
+			    }
+			  }
+			}
+			if (!_matched) {
+			  if (x instanceof Integer) {
+			    if (com.google.common.base.Objects.equal(x,1)) {
+			      _matched=true;
+			    }
+			  }
+			  if (!_matched) {
+			    if (com.google.common.base.Objects.equal(x,2)) {
+			      _matched=true;
+			    }
+			  }
+			  if (_matched) {
+			    _switchResult = "lalala";
+			  }
+			}
+			if (!_matched) {
+			  _switchResult = "lalala";
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testFallThroughSwitch_7() {
+		'''
+			{
+				switch x : 'lalala' as Object { 
+					String, Integer case 1: 0
+					Integer, default: 1
+				}
+			}
+		'''.compilesTo(
+		'''
+			int _switchResult = (int) 0;
+			final Object x = ((Object) "lalala");
+			boolean _matched = false;
+			if (!_matched) {
+			  if (x instanceof String) {
+			    _matched=true;
+			  }
+			  if (!_matched) {
+			    if (x instanceof Integer) {
+			      if (com.google.common.base.Objects.equal(x,1)) {
+			        _matched=true;
+			      }
+			    }
+			  }
+			  if (_matched) {
+			    _switchResult = 0;
+			  }
+			}
+			if (!_matched) {
+			  if (x instanceof Integer) {
+			    _matched=true;
+			    _switchResult = 1;
+			  }
+			}
+			if (!_matched) {
+			  _switchResult = 1;
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testFallThroughSwitch_8() {
+		'''
+			{
+				switch x : 1 as Object {
+					Integer,
+					Double: x
+				}
+			}
+		'''.compilesTo(
+		'''
+			Number _switchResult = null;
+			final Object x = ((Object) Integer.valueOf(1));
+			boolean _matched = false;
+			if (!_matched) {
+			  if (x instanceof Integer) {
+			    _matched=true;
+			  }
+			  if (!_matched) {
+			    if (x instanceof Double) {
+			      _matched=true;
+			    }
+			  }
+			  if (_matched) {
+			    _switchResult = ((Number)x);
+			  }
+			}
+			return _switchResult;
+		'''
+		)
+	}
+
 }
 

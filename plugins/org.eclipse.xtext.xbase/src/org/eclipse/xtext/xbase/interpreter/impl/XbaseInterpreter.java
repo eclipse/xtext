@@ -95,6 +95,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
+import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -149,6 +150,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 
 	@Inject
 	private IBatchTypeResolver typeResolver;
+	
+	@Inject
+	private XSwitchExpressions switchExpressions;
 	
 	private ClassFinder classFinder;
 
@@ -471,10 +475,12 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				if (casePart.getCase() != null) {
 					Object casePartResult = internalEvaluate(casePart.getCase(), forkedContext, indicator);
 					if (Boolean.TRUE.equals(casePartResult) || eq(conditionResult, casePartResult)) {
-						return internalEvaluate(casePart.getThen(), forkedContext, indicator);
+						XExpression then = switchExpressions.getThen(casePart, switchExpression);
+						return internalEvaluate(then, forkedContext, indicator);
 					}
 				} else {
-					return internalEvaluate(casePart.getThen(), forkedContext, indicator);
+					XExpression then = switchExpressions.getThen(casePart, switchExpression);
+					return internalEvaluate(then, forkedContext, indicator);
 				}
 			}
 		}

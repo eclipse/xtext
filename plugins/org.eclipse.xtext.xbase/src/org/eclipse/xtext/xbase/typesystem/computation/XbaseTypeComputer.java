@@ -65,6 +65,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
@@ -84,6 +85,7 @@ import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.ExtendedEarlyExitComputer;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
+import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Lists;
@@ -103,6 +105,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 
 	@Inject
 	private NumberLiterals numberLiterals;
+	
+	@Inject 
+	private XSwitchExpressions switchExpressions;
 	
 	@Inject 
 	private CommonTypeComputationServices services;
@@ -347,6 +352,8 @@ public class XbaseTypeComputer implements ITypeComputer {
 					return "Missing default branch for switch expression with primitive type";
 				}
 		}: null;
+		
+		LightweightTypeReference thenTypeReference = null;
 		// TODO case expressions may influence the expected type of other cases
 		for(XCasePart casePart: getCases(object)) {
 			// assign the type for the switch expression if possible and use that one for the remaining things
@@ -361,7 +368,19 @@ public class XbaseTypeComputer implements ITypeComputer {
 					refinable = getRefinableCandidate(object.getSwitch(), casePartState);
 				}
 				if (refinable != null) {
-					casePartState.reassignType(refinable, casePartState.getConverter().toLightweightReference(casePart.getTypeGuard()));
+					LightweightTypeReference lightweightReference = casePartState.getConverter().toLightweightReference(casePart.getTypeGuard());
+					casePartState.reassignType(refinable, lightweightReference);
+					if (thenTypeReference == null) {
+						thenTypeReference = lightweightReference;
+					} else {
+						ITypeReferenceOwner owner = thenTypeReference.getOwner();
+						TypeConformanceComputer typeConformanceComputer = owner.getServices().getTypeConformanceComputer();
+						List<LightweightTypeReference> types = Lists.newArrayList(thenTypeReference, lightweightReference);
+						thenTypeReference = typeConformanceComputer.getCommonSuperType(types, owner);
+						if (thenTypeReference == null) {
+							thenTypeReference = lightweightReference;
+						}
+					}
 				}
 				if (!localIsEnum) {
 					JvmType typeGuard = casePart.getTypeGuard().getType();
@@ -391,9 +410,25 @@ public class XbaseTypeComputer implements ITypeComputer {
 				}
 				caseState.computeTypes(casePart.getCase());
 			}
-			ITypeComputationResult thenResult = casePartState.computeTypes(casePart.getThen());
-			if (branchExpressionProcessor != null) {
-				branchExpressionProcessor.process(thenResult);
+			XExpression then = casePart.getThen();
+			if (then != null) {
+				ITypeComputationState thenState = allCasePartsState.withTypeCheckpoint(then);
+				if (thenTypeReference != null) {
+					JvmIdentifiableElement refinable = null;
+					if (object.getLocalVarName() != null) {
+						refinable = getRefinableCandidate(object, thenState);
+					} else {
+						refinable = getRefinableCandidate(object.getSwitch(), thenState);
+					}
+					if (refinable != null) {
+						thenState.reassignType(refinable, thenTypeReference);
+						thenTypeReference = null;
+					}
+				}
+				ITypeComputationResult thenResult = thenState.computeTypes(then);
+				if (branchExpressionProcessor != null) {
+					branchExpressionProcessor.process(thenResult);
+				}
 			}
 		}
 		XExpression defaultCase = object.getDefault();

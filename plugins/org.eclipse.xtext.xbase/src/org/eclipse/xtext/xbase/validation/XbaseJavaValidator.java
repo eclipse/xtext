@@ -615,7 +615,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					checkInitializationRec(casepart.getCase(), fields, initializedForSure, initializedMaybe, visited);
 				Set<JvmField> initializedInCaseForSure = Sets.newLinkedHashSet(initializedForSure);
 				Set<JvmField> initializedInCaseMaybe = Sets.newLinkedHashSet(initializedMaybe);
-				checkInitializationRec(casepart.getThen(), fields, initializedInCaseForSure, initializedInCaseMaybe, visited);
+				XExpression then = 	switchExpressions.getThen(casepart, switchExpr);
+				checkInitializationRec(then, fields, initializedInCaseForSure, initializedInCaseMaybe, visited);
 				if (initializedAllCasesForSure == null)
 					initializedAllCasesForSure = initializedInCaseForSure;
 				else {
