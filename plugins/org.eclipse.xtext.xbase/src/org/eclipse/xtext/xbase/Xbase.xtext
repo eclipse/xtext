@@ -179,8 +179,9 @@ XSwitchExpression returns XExpression:
 	'}';
 
 XCasePart:
+	{XCasePart}
 	typeGuard=JvmTypeReference? ('case' case=XExpression)? 
-		':' then=XExpression ;
+		(':' then=XExpression | ',') ;
 
 XForLoopExpression returns XExpression:
 	{XForLoopExpression}

@@ -1574,6 +1574,14 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("CharSequence")
 	}
 	
+	@Test def void testTypeGuardedCase_3() throws Exception {
+		"switch s: new Object() { String, StringBuffer: s}".resolvesTo("Serializable & CharSequence")
+	}
+	
+	@Test def void testTypeGuardedCase_4() throws Exception {
+		"switch s: '' as CharSequence { Cloneable, String: s }".resolvesTo("CharSequence")
+	}
+	
 	@Test def void testSwitchExpression_Bug343100() throws Exception {
 		"switch 'a' {
 		  case null: typeof(String) 

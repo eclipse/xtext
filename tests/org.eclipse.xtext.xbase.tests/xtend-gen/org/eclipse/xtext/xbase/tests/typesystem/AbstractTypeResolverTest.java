@@ -1688,6 +1688,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testTypeGuardedCase_3() throws Exception {
+    this.resolvesTo("switch s: new Object() { String, StringBuffer: s}", "Serializable & CharSequence");
+  }
+  
+  @Test
+  public void testTypeGuardedCase_4() throws Exception {
+    this.resolvesTo("switch s: \'\' as CharSequence { Cloneable, String: s }", "CharSequence");
+  }
+  
+  @Test
   public void testSwitchExpression_Bug343100() throws Exception {
     this.resolvesTo("switch \'a\' {\n\t\t  case null: typeof(String) \n\t\t  case \'a\': typeof(Void)\n\t\t}", "Class<?>");
   }

@@ -365,7 +365,10 @@ ruleXSwitchExpression :
 ruleXCasePart :
 	ruleJvmTypeReference? (
 		'case' ruleXExpression
-	)? ':' ruleXExpression
+	)? (
+		':' ruleXExpression |
+		','
+	)
 ;
 
 // Rule XForLoopExpression

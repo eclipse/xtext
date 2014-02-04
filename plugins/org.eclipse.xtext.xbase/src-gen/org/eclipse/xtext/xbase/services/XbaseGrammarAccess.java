@@ -1837,49 +1837,65 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	public class XCasePartElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XCasePart");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cTypeGuardAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cTypeGuardJvmTypeReferenceParserRuleCall_0_0 = (RuleCall)cTypeGuardAssignment_0.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cCaseKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cCaseAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cCaseXExpressionParserRuleCall_1_1_0 = (RuleCall)cCaseAssignment_1_1.eContents().get(0);
-		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cThenAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cThenXExpressionParserRuleCall_3_0 = (RuleCall)cThenAssignment_3.eContents().get(0);
+		private final Action cXCasePartAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cTypeGuardAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeGuardJvmTypeReferenceParserRuleCall_1_0 = (RuleCall)cTypeGuardAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cCaseKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cCaseAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cCaseXExpressionParserRuleCall_2_1_0 = (RuleCall)cCaseAssignment_2_1.eContents().get(0);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Group cGroup_3_0 = (Group)cAlternatives_3.eContents().get(0);
+		private final Keyword cColonKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
+		private final Assignment cThenAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
+		private final RuleCall cThenXExpressionParserRuleCall_3_0_1_0 = (RuleCall)cThenAssignment_3_0_1.eContents().get(0);
+		private final Keyword cCommaKeyword_3_1 = (Keyword)cAlternatives_3.eContents().get(1);
 		
 		//XCasePart:
-		//	typeGuard=JvmTypeReference? ("case" case=XExpression)? ":" then=XExpression;
+		//	{XCasePart} typeGuard=JvmTypeReference? ("case" case=XExpression)? (":" then=XExpression | ",");
 		public ParserRule getRule() { return rule; }
 
-		//typeGuard=JvmTypeReference? ("case" case=XExpression)? ":" then=XExpression
+		//{XCasePart} typeGuard=JvmTypeReference? ("case" case=XExpression)? (":" then=XExpression | ",")
 		public Group getGroup() { return cGroup; }
 
+		//{XCasePart}
+		public Action getXCasePartAction_0() { return cXCasePartAction_0; }
+
 		//typeGuard=JvmTypeReference?
-		public Assignment getTypeGuardAssignment_0() { return cTypeGuardAssignment_0; }
+		public Assignment getTypeGuardAssignment_1() { return cTypeGuardAssignment_1; }
 
 		//JvmTypeReference
-		public RuleCall getTypeGuardJvmTypeReferenceParserRuleCall_0_0() { return cTypeGuardJvmTypeReferenceParserRuleCall_0_0; }
+		public RuleCall getTypeGuardJvmTypeReferenceParserRuleCall_1_0() { return cTypeGuardJvmTypeReferenceParserRuleCall_1_0; }
 
 		//("case" case=XExpression)?
-		public Group getGroup_1() { return cGroup_1; }
+		public Group getGroup_2() { return cGroup_2; }
 
 		//"case"
-		public Keyword getCaseKeyword_1_0() { return cCaseKeyword_1_0; }
+		public Keyword getCaseKeyword_2_0() { return cCaseKeyword_2_0; }
 
 		//case=XExpression
-		public Assignment getCaseAssignment_1_1() { return cCaseAssignment_1_1; }
+		public Assignment getCaseAssignment_2_1() { return cCaseAssignment_2_1; }
 
 		//XExpression
-		public RuleCall getCaseXExpressionParserRuleCall_1_1_0() { return cCaseXExpressionParserRuleCall_1_1_0; }
+		public RuleCall getCaseXExpressionParserRuleCall_2_1_0() { return cCaseXExpressionParserRuleCall_2_1_0; }
+
+		//":" then=XExpression | ","
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+
+		//":" then=XExpression
+		public Group getGroup_3_0() { return cGroup_3_0; }
 
 		//":"
-		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		public Keyword getColonKeyword_3_0_0() { return cColonKeyword_3_0_0; }
 
 		//then=XExpression
-		public Assignment getThenAssignment_3() { return cThenAssignment_3; }
+		public Assignment getThenAssignment_3_0_1() { return cThenAssignment_3_0_1; }
 
 		//XExpression
-		public RuleCall getThenXExpressionParserRuleCall_3_0() { return cThenXExpressionParserRuleCall_3_0; }
+		public RuleCall getThenXExpressionParserRuleCall_3_0_1_0() { return cThenXExpressionParserRuleCall_3_0_1_0; }
+
+		//","
+		public Keyword getCommaKeyword_3_1() { return cCommaKeyword_3_1; }
 	}
 
 	public class XForLoopExpressionElements extends AbstractParserRuleElementFinder {
@@ -3429,7 +3445,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XCasePart:
-	//	typeGuard=JvmTypeReference? ("case" case=XExpression)? ":" then=XExpression;
+	//	{XCasePart} typeGuard=JvmTypeReference? ("case" case=XExpression)? (":" then=XExpression | ",");
 	public XCasePartElements getXCasePartAccess() {
 		return (pXCasePart != null) ? pXCasePart : (pXCasePart = new XCasePartElements());
 	}

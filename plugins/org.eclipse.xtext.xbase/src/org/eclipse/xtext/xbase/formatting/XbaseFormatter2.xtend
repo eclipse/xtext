@@ -760,9 +760,13 @@ class XbaseFormatter2 extends AbstractFormatter {
 			format += open.prepend[oneSpace]
 			format += open.append[oneSpace]
 			for (c : expr.cases) {
-				val cnode = c.then.nodeForEObject
-				format += cnode.prepend[oneSpace]
-				format += cnode.append[oneSpace]
+				if (c.then == null) {
+					format += c.nodeForEObject.append[oneSpace]
+				} else {
+					val cnode = c.then.nodeForEObject
+					format += cnode.prepend[oneSpace]
+					format += cnode.append[oneSpace]
+				}
 			}
 			if(expr.^default != null) {
 				format += expr.nodeForKeyword("default").append[noSpace]

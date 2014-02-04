@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.XCasePart
 import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.validation.ConstantExpressionValidator
+import org.eclipse.xtext.xbase.XExpression
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -64,6 +65,25 @@ class XSwitchExpressions {
 			return false
 		}
 		return ^case.constant
+	}
+	
+	def XExpression getThen(XCasePart casePart, XSwitchExpression switchExpression) {
+		val then = casePart.then
+		if (then != null) {
+			return then
+		}
+		val casePartIndex = switchExpression.cases.indexOf(casePart)
+		if (casePartIndex == -1) {
+			return null
+		}
+		val count = switchExpression.cases.size
+		if (casePartIndex == count - 1) {
+			return switchExpression.^default
+		}
+		if (casePartIndex + 1 < count) {
+			return switchExpression.cases.get(casePartIndex + 1).getThen(switchExpression)
+		}
+		return null
 	}
 
 }

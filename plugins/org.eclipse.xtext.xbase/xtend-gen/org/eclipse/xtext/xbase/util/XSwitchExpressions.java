@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.util;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
@@ -96,5 +97,29 @@ public class XSwitchExpressions {
       return false;
     }
     return this._constantExpressionValidator.isConstant(case_);
+  }
+  
+  public XExpression getThen(final XCasePart casePart, final XSwitchExpression switchExpression) {
+    final XExpression then = casePart.getThen();
+    boolean _notEquals = (!Objects.equal(then, null));
+    if (_notEquals) {
+      return then;
+    }
+    EList<XCasePart> _cases = switchExpression.getCases();
+    final int casePartIndex = _cases.indexOf(casePart);
+    if ((casePartIndex == (-1))) {
+      return null;
+    }
+    EList<XCasePart> _cases_1 = switchExpression.getCases();
+    final int count = _cases_1.size();
+    if ((casePartIndex == (count - 1))) {
+      return switchExpression.getDefault();
+    }
+    if (((casePartIndex + 1) < count)) {
+      EList<XCasePart> _cases_2 = switchExpression.getCases();
+      XCasePart _get = _cases_2.get((casePartIndex + 1));
+      return this.getThen(_get, switchExpression);
+    }
+    return null;
   }
 }

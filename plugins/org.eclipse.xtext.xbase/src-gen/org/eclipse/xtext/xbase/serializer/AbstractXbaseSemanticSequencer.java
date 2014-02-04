@@ -1072,7 +1072,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (typeGuard=JvmTypeReference? case=XExpression? then=XExpression)
+	 *     (typeGuard=JvmTypeReference? case=XExpression? then=XExpression?)
 	 */
 	protected void sequence_XCasePart(EObject context, XCasePart semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
