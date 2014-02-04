@@ -4,7 +4,7 @@
         <filter comment="Guava Update" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.collect.EvictionListeners"/>
-                <message_argument value="org.eclipse.xtext.builder_2.5.0"/>
+                <message_argument value="org.eclipse.xtext.builder_2.5.1"/>
             </message_arguments>
         </filter>
     </resource>
@@ -12,7 +12,7 @@
         <filter comment="Guava Update" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.collect.MapEvictionListener"/>
-                <message_argument value="org.eclipse.xtext.builder_2.5.0"/>
+                <message_argument value="org.eclipse.xtext.builder_2.5.1"/>
             </message_arguments>
         </filter>
     </resource>
@@ -20,7 +20,7 @@
         <filter comment="Guava Update" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.collect.SortedMaps"/>
-                <message_argument value="org.eclipse.xtext.builder_2.5.0"/>
+                <message_argument value="org.eclipse.xtext.builder_2.5.1"/>
             </message_arguments>
         </filter>
     </resource>
@@ -28,7 +28,7 @@
         <filter comment="Guava Update" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.util.concurrent.AbstractListenableFuture"/>
-                <message_argument value="org.eclipse.xtext.builder_2.5.0"/>
+                <message_argument value="org.eclipse.xtext.builder_2.5.1"/>
             </message_arguments>
         </filter>
     </resource>
@@ -36,7 +36,7 @@
         <filter comment="Guava Update" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.util.concurrent.UninterruptibleFuture"/>
-                <message_argument value="org.eclipse.xtext.builder_2.5.0"/>
+                <message_argument value="org.eclipse.xtext.builder_2.5.1"/>
             </message_arguments>
         </filter>
     </resource>
