@@ -4,7 +4,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.grammarAccess.GrammarAccess"/>
-                <message_argument value="org.eclipse.xtext.generator_2.5.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.6.0"/>
             </message_arguments>
         </filter>
     </resource>
@@ -12,7 +12,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.validation.ValidatorFragment"/>
-                <message_argument value="org.eclipse.xtext.generator_2.5.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.6.0"/>
             </message_arguments>
         </filter>
     </resource>
@@ -20,7 +20,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.validation.ValidatorNaming"/>
-                <message_argument value="org.eclipse.xtext.generator_2.5.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.6.0"/>
             </message_arguments>
         </filter>
     </resource>
@@ -28,7 +28,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.ui.generator.contentAssist.ContentAssistFragment"/>
-                <message_argument value="org.eclipse.xtext.generator_2.5.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.6.0"/>
             </message_arguments>
         </filter>
     </resource>

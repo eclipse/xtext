@@ -4,7 +4,7 @@
         <filter comment="Removed @Beta API" id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.resource.IndexingOrderer"/>
-                <message_argument value="org.eclipse.xtext_2.5.0"/>
+                <message_argument value="org.eclipse.xtext_2.5.1"/>
             </message_arguments>
         </filter>
     </resource>
