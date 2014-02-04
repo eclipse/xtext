@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.docs"
       label="Xtext Documentation "
-     version="2.5.1.qualifier"
+     version="2.6.0.qualifier"
       provider-name="Eclipse.org"
       plugin="org.eclipse.xtext.doc">
 
