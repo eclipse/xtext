@@ -18,7 +18,6 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -26,7 +25,8 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -39,10 +39,7 @@ import com.google.inject.Inject;
 public class TypeProviderTest extends AbstractXtendTestCase {
 
 	@Inject
-	private ITypeProvider typeProvider;
-	
-	@Inject
-	private MockedXtendTypeProvider mockedTypeProvider;
+	private IBatchTypeResolver typeResolver;
 	
 	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
@@ -50,10 +47,6 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Override
 	protected XtendFile file(String string) throws Exception {
 		return file(string, true);
-	}
-	
-	protected ITypeProvider getTypeProvider() {
-		return typeProvider;
 	}
 	
 	protected XtendConstructor constructor(String string, boolean validate) throws Exception {
@@ -93,18 +86,31 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XBlockExpression body = (XBlockExpression) function.getExpression();
 		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
 		XExpression firstArgument = featureCall.getFeatureCallArguments().get(0);
-		assertEquals(expectation, typeProvider.getType(firstArgument).getSimpleName());
+		assertEquals(expectation, getType(firstArgument).getSimpleName());
 		XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) body.getExpressions().get(1);
 		XExpression target = memberFeatureCall.getMemberCallTarget();
-		assertEquals(expectation, typeProvider.getType(target).getSimpleName());
+		assertEquals(expectation, getType(target).getSimpleName());
 		XFeatureCall deferredFeatureCall = (XFeatureCall) body.getExpressions().get(3);
 		XExpression deferredFirstArgument = deferredFeatureCall.getFeatureCallArguments().get(0);
-		assertEquals(expectation, typeProvider.getType(deferredFirstArgument).getSimpleName());
+		assertEquals(expectation, getType(deferredFirstArgument).getSimpleName());
 		XMemberFeatureCall deferredMemberFeatureCall = (XMemberFeatureCall) body.getExpressions().get(4);
 		XExpression deferredTarget = deferredMemberFeatureCall.getMemberCallTarget();
-		assertEquals(expectation, typeProvider.getType(deferredTarget).getSimpleName());
+		assertEquals(expectation, getType(deferredTarget).getSimpleName());
 	}
 	
+	private LightweightTypeReference getType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getActualType(expression);
+	}
+	private LightweightTypeReference getExpectedType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getExpectedType(expression);
+	}
+	private LightweightTypeReference getExpectedReturnType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getExpectedReturnType(expression);
+	}
+	private LightweightTypeReference getType(JvmIdentifiableElement identifiable) {
+		return typeResolver.resolveTypes(identifiable).getActualType(identifiable);
+	}
+
 	@Test public void testResolvedMultiType_01() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
@@ -119,7 +125,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendFunction function = (XtendFunction) c.getMembers().get(0);
 		Set<EObject> jvmElements = jvmModelAssociations.getJvmElements(function);
 		JvmIdentifiableElement operation = (JvmIdentifiableElement) jvmElements.iterator().next();
-		assertEquals("AbstractList<String>", typeProvider.getTypeForIdentifiable(operation).getSimpleName());
+		assertEquals("AbstractList<String>", getType(operation).getSimpleName());
 	}
 	
 	@Test public void testResolvedMultiType_02() throws Exception {
@@ -136,7 +142,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendFunction function = (XtendFunction) c.getMembers().get(0);
 		Set<EObject> jvmElements = jvmModelAssociations.getJvmElements(function);
 		JvmIdentifiableElement operation = (JvmIdentifiableElement) jvmElements.iterator().next();
-		assertEquals("List<AbstractList<String>>", typeProvider.getTypeForIdentifiable(operation).getSimpleName());
+		assertEquals("List<AbstractList<String>>", getType(operation).getSimpleName());
 	}
 	
 	@Test public void testClosureType_01() throws Exception {
@@ -151,7 +157,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendFunction function = (XtendFunction) c.getMembers().get(0);
 		XBlockExpression body = (XBlockExpression) function.getExpression();
 		XExpression lambda = body.getExpressions().get(0);
-		assertEquals("(T1)=>T3", typeProvider.getType(lambda).getSimpleName());
+		assertEquals("(T1)=>T3", getType(lambda).getSimpleName());
 	}
 	
 	@Test public void testDeferredTypeArgumentResolution_01() throws Exception {
@@ -165,7 +171,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall next = findSingleFeatureCall(c);
 		assertEquals("java.util.Iterator.next()", next.getFeature().getIdentifier());
-		assertEquals("String", typeProvider.getType(next).getSimpleName());
+		assertEquals("String", getType(next).getSimpleName());
 	}
 	
 	@Test public void testDeferredTypeArgumentResolution_02() throws Exception {
@@ -179,7 +185,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall get = findSingleFeatureCall(c);
 		assertEquals("java.util.ArrayList.get(int)", get.getFeature().getIdentifier());
-		assertEquals("CharSequence", typeProvider.getType(get).getSimpleName());
+		assertEquals("CharSequence", getType(get).getSimpleName());
 	}
 	
 	@Test public void testDeferredTypeArgumentResolution_03() throws Exception {
@@ -193,7 +199,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall head = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.head(java.lang.Iterable)", head.getFeature().getIdentifier());
-		assertEquals("String", typeProvider.getType(head).getSimpleName());
+		assertEquals("String", getType(head).getSimpleName());
 	}
 	
 	@Ignore("TODO")
@@ -208,7 +214,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall head = findSingleFeatureCall(c);
-		assertEquals("CharSequence", typeProvider.getType(head).getSimpleName());
+		assertEquals("CharSequence", getType(head).getSimpleName());
 	}
 	
 	@Ignore("TODO")
@@ -223,7 +229,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall head = findSingleFeatureCall(c);
-		assertEquals("CharSequence", typeProvider.getType(head).getSimpleName());
+		assertEquals("CharSequence", getType(head).getSimpleName());
 	}
 	
 	@Test public void testParameterizedExtension_01() throws Exception {
@@ -240,7 +246,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
-		assertEquals("XtendFile", typeProvider.getType(parse).getSimpleName());
+		assertEquals("XtendFile", getType(parse).getSimpleName());
 	}
 	
 	@Test public void testParameterizedExtension_02() throws Exception {
@@ -257,7 +263,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
-		assertEquals("XtendFile", typeProvider.getType(parse).getSimpleName());
+		assertEquals("XtendFile", getType(parse).getSimpleName());
 	}
 	
 	@Test public void testParameterizedExtension_03() throws Exception {
@@ -274,7 +280,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
-		assertEquals("T", typeProvider.getType(parse).getSimpleName());
+		assertEquals("T", getType(parse).getSimpleName());
 	}
 	
 	@Test public void testParameterizedExtension_04() throws Exception {
@@ -291,7 +297,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
-		assertEquals("F", typeProvider.getType(parse).getSimpleName());
+		assertEquals("F", getType(parse).getSimpleName());
 	}
 	
 	@Test public void testParameterizedExtension_05() throws Exception {
@@ -307,7 +313,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
-		assertEquals("F", typeProvider.getType(parse).getSimpleName());
+		assertEquals("F", getType(parse).getSimpleName());
 	}
 	
 	@Test public void testParameterizedExtension_06() throws Exception {
@@ -323,7 +329,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
-		assertEquals("XtendFile", typeProvider.getType(parse).getSimpleName());
+		assertEquals("XtendFile", getType(parse).getSimpleName());
 	}
 	
 
@@ -340,7 +346,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
-		assertEquals("F", typeProvider.getType(parse).getSimpleName());
+		assertEquals("F", getType(parse).getSimpleName());
 	}
 	
 	@Test public void testParameterizedExtension_08() throws Exception {
@@ -356,7 +362,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
-		assertEquals("XtendFile", typeProvider.getType(parse).getSimpleName());
+		assertEquals("XtendFile", getType(parse).getSimpleName());
 	}
 	
 
@@ -374,7 +380,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
-		assertEquals("XtendFile", typeProvider.getType(parse).getSimpleName());
+		assertEquals("XtendFile", getType(parse).getSimpleName());
 	}
 	
 	@Test public void testParameterizedExtension_10() throws Exception {
@@ -391,7 +397,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
-		assertEquals("XtendFile", typeProvider.getType(parse).getSimpleName());
+		assertEquals("XtendFile", getType(parse).getSimpleName());
 	}
 	
 	@Test public void testParameterizedExtension_11() throws Exception {
@@ -408,7 +414,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
-		assertEquals("T", typeProvider.getType(parse).getSimpleName());
+		assertEquals("T", getType(parse).getSimpleName());
 	}
 	
 	@Test public void testParameterizedExtension_12() throws Exception {
@@ -425,7 +431,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
 		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
-		assertEquals("F", typeProvider.getType(parse).getSimpleName());
+		assertEquals("F", getType(parse).getSimpleName());
 	}
 	
 	private XAbstractFeatureCall findSingleFeatureCall(XtendClass xtendClass) {
@@ -449,8 +455,8 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
 		XFeatureCall newHashSet = (XFeatureCall) invocation.getActualArguments().get(1);
 		assertEquals("newHashSet", newHashSet.getFeature().getSimpleName());
-		assertEquals("Set<String>", typeProvider.getExpectedType(newHashSet).getSimpleName());
-		assertEquals("HashSet<String>", typeProvider.getType(newHashSet).getSimpleName());
+		assertEquals("Set<String>", getExpectedType(newHashSet).getSimpleName());
+		assertEquals("HashSet<String>", getType(newHashSet).getSimpleName());
 	}
 	
 	@Test public void testExpectationRelevantExpressionType_02() throws Exception {
@@ -468,8 +474,8 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
 		XFeatureCall newHashSet = (XFeatureCall) invocation.getActualArguments().get(1);
 		assertEquals("newHashSet", newHashSet.getFeature().getSimpleName());
-		assertEquals("HashSet<T>", typeProvider.getType(newHashSet).getSimpleName());
-		assertEquals("Set<T>", typeProvider.getExpectedType(newHashSet).getSimpleName());
+		assertEquals("HashSet<T>", getType(newHashSet).getSimpleName());
+		assertEquals("Set<T>", getExpectedType(newHashSet).getSimpleName());
 	}
 	
 	@Test public void testExpectationRelevantExpressionType_03() throws Exception {
@@ -485,8 +491,8 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
 		XFeatureCall newArrayList = (XFeatureCall) invocation.getActualArguments().get(1);
 		assertEquals("newArrayList", newArrayList.getFeature().getSimpleName());
-		assertEquals("Class<?>[]", typeProvider.getExpectedType(newArrayList).getSimpleName());
-		assertEquals("ArrayList<Class<?>>", typeProvider.getType(newArrayList).getSimpleName());
+		assertEquals("Class<?>[]", getExpectedType(newArrayList).getSimpleName());
+		assertEquals("ArrayList<Class<?>>", getType(newArrayList).getSimpleName());
 	}
 	
 	@Test public void testExpectationRelevantExpressionType_04() throws Exception {
@@ -502,8 +508,8 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
 		XFeatureCall newArrayList = (XFeatureCall) invocation.getActualArguments().get(1);
 		assertEquals("newArrayList", newArrayList.getFeature().getSimpleName());
-		assertEquals("Class<T>[]", typeProvider.getExpectedType(newArrayList).getSimpleName());
-		assertEquals("ArrayList<Class<T>>", typeProvider.getType(newArrayList).getSimpleName());
+		assertEquals("Class<T>[]", getExpectedType(newArrayList).getSimpleName());
+		assertEquals("ArrayList<Class<T>>", getType(newArrayList).getSimpleName());
 	}
 	
 	@Test public void testExpectationRelevantExpressionType_05() throws Exception {
@@ -519,8 +525,8 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
 		XFeatureCall newArrayList = (XFeatureCall) invocation.getActualArguments().get(1);
 		assertEquals("newArrayList", newArrayList.getFeature().getSimpleName());
-		assertEquals("Class<? super T>[]", typeProvider.getExpectedType(newArrayList).getSimpleName());
-		assertEquals("ArrayList<Class<? super T>>", typeProvider.getType(newArrayList).getSimpleName());
+		assertEquals("Class<? super T>[]", getExpectedType(newArrayList).getSimpleName());
+		assertEquals("ArrayList<Class<? super T>>", getType(newArrayList).getSimpleName());
 	}
 	
 	@Test public void testExpectationRelevantExpressionType_06() throws Exception {
@@ -536,8 +542,8 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
 		XFeatureCall newArrayList = (XFeatureCall) invocation.getActualArguments().get(1);
 		assertEquals("newArrayList", newArrayList.getFeature().getSimpleName());
-		assertEquals("Class<? extends T>[]", typeProvider.getExpectedType(newArrayList).getSimpleName());
-		assertEquals("ArrayList<Class<? extends T>>", typeProvider.getType(newArrayList).getSimpleName());
+		assertEquals("Class<? extends T>[]", getExpectedType(newArrayList).getSimpleName());
+		assertEquals("ArrayList<Class<? extends T>>", getType(newArrayList).getSimpleName());
 	}
 	
 	@Test public void testReturnTypeInConstructor_01() throws Exception {
@@ -546,11 +552,11 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"	''.toString\n" + 
 				"}\n");
 		XBlockExpression body = (XBlockExpression) constructor.getExpression();
-		assertEquals("void", typeProvider.getExpectedType(body).getIdentifier());
-		assertEquals("void", typeProvider.getExpectedReturnType(body, true).getIdentifier());
+		assertEquals("void", getExpectedType(body).getIdentifier());
+		assertEquals("void", getExpectedReturnType(body).getIdentifier());
 		XMemberFeatureCall toString = (XMemberFeatureCall) body.getExpressions().get(0);
-		assertNull(typeProvider.getExpectedType(toString));
-		assertNull(typeProvider.getExpectedReturnType(toString, true));
+		assertNull(getExpectedType(toString));
+		assertNull(getExpectedReturnType(toString));
 	}
 	
 	@Test public void testReturnTypeInConstructor_02() throws Exception {
@@ -559,12 +565,12 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"	return ''.toString\n" + 
 				"}\n", false);
 		XBlockExpression body = (XBlockExpression) constructor.getExpression();
-		assertEquals("void", typeProvider.getExpectedType(body).getIdentifier());
-		assertEquals("void", typeProvider.getExpectedReturnType(body, true).getIdentifier());
+		assertEquals("void", getExpectedType(body).getIdentifier());
+		assertEquals("void", getExpectedReturnType(body).getIdentifier());
 		XReturnExpression returnExpression = (XReturnExpression) body.getExpressions().get(0);
 		XMemberFeatureCall toString = (XMemberFeatureCall) returnExpression.getExpression();
-		assertEquals("void", typeProvider.getExpectedType(toString).getIdentifier());
-		assertEquals("void", typeProvider.getExpectedReturnType(toString, true).getIdentifier());
+		assertEquals("void", getExpectedType(toString).getIdentifier());
+		assertEquals("void", getExpectedReturnType(toString).getIdentifier());
 	}
 	
 	@Test public void testTypeOfSuperInConstructor() throws Exception {
@@ -574,9 +580,9 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n");
 		XBlockExpression body = (XBlockExpression) constructor.getExpression();
 		XFeatureCall superCall = (XFeatureCall) body.getExpressions().get(0);
-		assertEquals("void", typeProvider.getType(superCall).getIdentifier());
-		assertNull(typeProvider.getExpectedType(superCall));
-		assertNull(typeProvider.getExpectedReturnType(superCall, true));
+		assertEquals("void", getType(superCall).getIdentifier());
+		assertNull(getExpectedType(superCall));
+		assertNull(getExpectedReturnType(superCall));
 	}
 	
 	@Test public void testTypeOfThisInConstructor() throws Exception {
@@ -587,9 +593,9 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"new() {}");
 		XBlockExpression body = (XBlockExpression) constructor.getExpression();
 		XFeatureCall thisCall = (XFeatureCall) body.getExpressions().get(0);
-		assertEquals("void", typeProvider.getType(thisCall).getIdentifier());
-		assertNull(typeProvider.getExpectedType(thisCall));
-		assertNull(typeProvider.getExpectedReturnType(thisCall, true));
+		assertEquals("void", getType(thisCall).getIdentifier());
+		assertNull(getExpectedType(thisCall));
+		assertNull(getExpectedReturnType(thisCall));
 	}
 
 	@Test public void testBug380063NoException() throws Exception {
@@ -601,7 +607,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendParameter xtendParameter = function.getParameters().get(0);
 		XBlockExpression expr = (XBlockExpression) function.getExpression();
 		XMemberFeatureCall call = (XMemberFeatureCall) expr.getExpressions().get(0);
-		JvmTypeReference type = typeProvider.getType(call.getMemberCallTarget());
+		LightweightTypeReference type = getType(call.getMemberCallTarget());
 		assertEquals("List<? extends T>", type.getSimpleName());
 		assertEquals("List<? extends T>", xtendParameter.getParameterType().getSimpleName());
 	}
@@ -611,7 +617,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"SomeString" +
 				"'''");
 		XExpression expression = function.getExpression();
-		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
+		assertEquals("java.lang.String", getType(expression).getIdentifier());
 	}
 
 	@Test public void testTypeOfRichStringWithExpectedString_1() throws Exception {
@@ -621,7 +627,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XBlockExpression block = (XBlockExpression) function.getExpression();
 		XAbstractFeatureCall call = (XAbstractFeatureCall) block.getExpressions().get(0);
 		XExpression expression = call.getExplicitArguments().get(0);
-		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
+		assertEquals("java.lang.String", getType(expression).getIdentifier());
 	}
 
 	@Ignore("TODO improve expectation if the expected type is an unresolved type parameter")
@@ -632,7 +638,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XBlockExpression block = (XBlockExpression) function.getExpression();
 		XAbstractFeatureCall call = (XAbstractFeatureCall) block.getExpressions().get(0);
 		XExpression expression = call.getExplicitArguments().get(0);
-		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
+		assertEquals("java.lang.String", getType(expression).getIdentifier());
 	}
 
 	@Ignore("TODO improve expectation if the expected type is an unresolved type parameter")
@@ -643,7 +649,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XBlockExpression block = (XBlockExpression) function.getExpression();
 		XMemberFeatureCall call = (XMemberFeatureCall) block.getExpressions().get(0);
 		XExpression expression = call.getMemberCallArguments().get(0);
-		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
+		assertEquals("java.lang.String", getType(expression).getIdentifier());
 	}
 
 	@Test public void testTypeOfRichStringWithNoExpectedString() throws Exception {
@@ -651,7 +657,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"SomeString" +
 				"'''");
 		XExpression expression = function.getExpression();
-		assertEquals("java.lang.CharSequence", typeProvider.getType(expression).getIdentifier());
+		assertEquals("java.lang.CharSequence", getType(expression).getIdentifier());
 	}
 
 	@Test public void testTypeOfRichStringWithNoExpectedString_1() throws Exception {
@@ -663,13 +669,13 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XExpression expression = call.getExplicitArguments().get(0);
 		// TODO propagate the expectation better via unbound type parameters
 		// could still be a charsequence, here
-		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
+		assertEquals("java.lang.String", getType(expression).getIdentifier());
 	}
 
 	@Test public void testTypeOfRichStringDelegatingType() throws Exception {
-		XtendFunction function = function("def foo()'''someString'''");
+		XtendFunction function = function("def String foo()'''someString'''");
 		XExpression expression = function.getExpression();
-		assertEquals("java.lang.String", mockedTypeProvider.getType(expression).getIdentifier());
+		assertEquals("java.lang.String", getType(expression).getIdentifier());
 	}
 	
 	@Test public void testTypeOfRichStringWithExpectedStringConcatenation() throws Exception {
@@ -677,7 +683,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"SomeString" +
 				"'''");
 		XExpression expression = function.getExpression();
-		assertEquals(StringConcatenation.class.getCanonicalName(), typeProvider.getType(expression).getIdentifier());
+		assertEquals(StringConcatenation.class.getCanonicalName(), getType(expression).getIdentifier());
 	}
 
 }

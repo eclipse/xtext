@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.RandomAccess;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -20,7 +21,9 @@ import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.IExpressionScope.Anchor;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -121,7 +124,27 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		}
 		return IResolvedTypes.NULL;
 	}
-
+	
+	protected IResolvedTypes getDelegate(EObject object) {
+		for(int i = 0; i < resolvers.size(); i++) {
+			AbstractRootedReentrantTypeResolver resolver = resolvers.get(i);
+			if (resolver.isHandled(object)) {
+				return getDelegate(i);
+			}
+		}
+		return IResolvedTypes.NULL;
+	}
+	
+	public IExpressionScope getExpressionScope(EObject context, EReference reference, Anchor anchor) {
+		IResolvedTypes delegate = getDelegate(context);
+		return delegate.getExpressionScope(context, reference, anchor);
+	}
+	
+	public boolean hasExpressionScope(EObject context, Anchor anchor) {
+		IResolvedTypes delegate = getDelegate(context);
+		return delegate.hasExpressionScope(context, anchor);
+	}
+	
 	@Nullable
 	public LightweightTypeReference getReturnType(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
@@ -144,6 +167,11 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 	public LightweightTypeReference getExpectedType(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.getExpectedType(expression);
+	}
+	
+	public List<LightweightTypeReference> getThrownExceptions(XExpression obj) {
+		IResolvedTypes delegate = getDelegate(obj);
+		return delegate.getThrownExceptions(obj);
 	}
 
 	public boolean isVoidTypeAllowed(XExpression expression) {

@@ -159,6 +159,7 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 //		if (knownType != null && knownType instanceof JvmGenericType) {
 //			result.assignType(IFeatureNames.SELF, knownType, incompleteClosureType);
 //		}
+		result.withinScope(getClosure());
 		return result;
 	}
 

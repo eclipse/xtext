@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.beans.Introspector;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -54,6 +55,9 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 		this.featureCall = featureCall;
 	}
 	
+	@Override
+	protected abstract Iterable<IEObjectDescription> getAllLocalElements();
+	
 	protected IFeatureScopeSession getSession() {
 		return session;
 	}
@@ -72,20 +76,35 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	}
 	
 	protected void processAsPropertyNames(QualifiedName name, NameAcceptor acceptor) {
-		String nameAsPropertyName = tryGetAsPropertyName(name.toString());
-		if (nameAsPropertyName != null) {
-			if (getFeatureCall() instanceof XAssignment) {
-				String aliasedSetter = "set" + nameAsPropertyName;
-				acceptor.accept(aliasedSetter, 2);
-			} else {
-				if (!getFeatureCall().isExplicitOperationCallOrBuilderSyntax()) {
-					String aliasedGetter = "get" + nameAsPropertyName;
-					acceptor.accept(aliasedGetter, 2);
-					String aliasedBooleanGetter = "is" + nameAsPropertyName;
-					acceptor.accept(aliasedBooleanGetter, 2);
+		if (featureCall != null) {
+			String nameAsPropertyName = tryGetAsPropertyName(name.toString());
+			if (nameAsPropertyName != null) {
+				if (featureCall instanceof XAssignment) {
+					String aliasedSetter = "set" + nameAsPropertyName;
+					acceptor.accept(aliasedSetter, 2);
+				} else {
+					if (!getFeatureCall().isExplicitOperationCallOrBuilderSyntax()) {
+						String aliasedGetter = "get" + nameAsPropertyName;
+						acceptor.accept(aliasedGetter, 2);
+						String aliasedBooleanGetter = "is" + nameAsPropertyName;
+						acceptor.accept(aliasedBooleanGetter, 2);
+					}
 				}
 			}
 		}
+	}
+	
+	protected String toProperty(String methodName, JvmFeature feature) {
+		if (feature instanceof JvmOperation) {
+			JvmOperation operation = (JvmOperation) feature;
+			if (methodName.length() > 3 && (methodName.startsWith("get") && operation.getParameters().isEmpty() || methodName.startsWith("set") && operation.getParameters().size() == 1) && Character.isUpperCase(methodName.charAt(3))) {
+				return Introspector.decapitalize(methodName.substring(3));
+			}
+			if (methodName.length() > 3 && methodName.startsWith("is") && Character.isUpperCase(methodName.charAt(2)) && operation.getParameters().isEmpty()) {
+				return Introspector.decapitalize(methodName.substring(2));
+			}
+		}
+		return null;
 	}
 	
 	/**

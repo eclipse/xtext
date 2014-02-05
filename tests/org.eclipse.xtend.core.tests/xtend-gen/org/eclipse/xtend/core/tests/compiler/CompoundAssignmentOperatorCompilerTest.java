@@ -7,10 +7,8 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
-import compound.IntCompoundExtensions;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -18,16 +16,6 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
-  @Before
-  public void setupCompiler() {
-    Class<? extends CompoundAssignmentOperatorCompilerTest> _class = this.getClass();
-    this.compiler.addClassPathOfClass(_class);
-    this.compiler.addClassPathOfClass(IntCompoundExtensions.class);
-    Class<? extends CompoundAssignmentOperatorCompilerTest> _class_1 = this.getClass();
-    ClassLoader _classLoader = _class_1.getClassLoader();
-    this.compiler.setParentClassLoader(_classLoader);
-  }
-  
   @Test
   public void test_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -75,7 +63,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.append("int _multiplyAssign = i *= 2;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (i += _multiplyAssign);");
+    _builder_1.append("_xblockexpression = i += _multiplyAssign;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -138,7 +126,7 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.append("int _add = i += 2;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (i *= _add);");
+    _builder_1.append("_xblockexpression = i *= _add;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");

@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.tests.codebuilder;
 import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtend.ide.codebuilder.MemberFromSuperImplementor;
@@ -20,7 +21,17 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.override.BottomResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideTester;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedConstructor;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,6 +42,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("null")
 public class SuperMemberImplementorTest extends AbstractXtendUITestCase {
 
 	private XtendClass xtendClass;
@@ -43,6 +55,12 @@ public class SuperMemberImplementorTest extends AbstractXtendUITestCase {
 	
 	@Inject 
 	private WorkbenchTestHelper testHelper;
+	
+	@Inject
+	private IXtendJvmAssociations associations;
+	
+	@Inject
+	private CommonTypeComputationServices services;
 
 	private JvmGenericType implementedInterface;
 
@@ -130,8 +148,9 @@ public class SuperMemberImplementorTest extends AbstractXtendUITestCase {
 
 	protected void checkOverrideMethodCode(String operationName, String overrideCode) {
 		StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
-		implementor.appendOverrideFunction(xtendClass,
-				(JvmOperation) findExecutable(implementedInterface, operationName), appendable);
+		LightweightTypeReference contextType = getContextType();
+		IResolvedOperation resolvedOperation = new BottomResolvedOperation((JvmOperation) findExecutable(implementedInterface, operationName), contextType, new OverrideTester());
+		implementor.appendOverrideFunction(xtendClass, resolvedOperation, appendable);
 		String code = appendable.toString();
 		if (!equalsIgnoreWhitespace(overrideCode, code))
 			assertEquals(overrideCode, code);
@@ -150,10 +169,22 @@ public class SuperMemberImplementorTest extends AbstractXtendUITestCase {
 				return false;
 			}
 		});
-		implementor.appendConstructorFromSuper(xtendClass, constructor, appendable);
+		LightweightTypeReference contextType = getContextType();
+		ResolvedConstructor resolvedConstructor = new ResolvedConstructor(constructor, contextType);
+		implementor.appendConstructorFromSuper(xtendClass, resolvedConstructor, appendable);
 		String code = appendable.toString();
 		if (!equalsIgnoreWhitespace(implementCode, code))
 			assertEquals(implementCode, code);
+	}
+
+	protected LightweightTypeReference getContextType() {
+		JvmGenericType inferredType = associations.getInferredType(xtendClass);
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, inferredType);
+		ParameterizedTypeReference contextType = new ParameterizedTypeReference(owner, inferredType);
+		for(JvmTypeParameter typeParamter: inferredType.getTypeParameters()) {
+			contextType.addTypeArgument(new ParameterizedTypeReference(owner, typeParamter));
+		}
+		return contextType;
 	}
 
 	protected JvmExecutable findExecutable(JvmGenericType owner, final String name) {

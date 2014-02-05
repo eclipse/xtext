@@ -40,5 +40,10 @@ public class StaticFeatureDescriptionWithImplicitReceiver extends StaticFeatureD
 	public XExpression getImplicitReceiver() {
 		return implicitReceiver;
 	}
-
+	
+	@Override
+	public boolean isValidStaticState() {
+		return implicitReceiverType == null;
+	}
+	
 }

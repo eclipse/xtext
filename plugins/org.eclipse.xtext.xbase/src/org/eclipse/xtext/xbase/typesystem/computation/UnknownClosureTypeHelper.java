@@ -64,6 +64,7 @@ public class UnknownClosureTypeHelper extends AbstractClosureTypeHelper {
 			}
 		}
 		ITypeComputationState result = typeAssigner.getForkedState();
+		result.withinScope(getClosure());
 		return result;
 	}
 }

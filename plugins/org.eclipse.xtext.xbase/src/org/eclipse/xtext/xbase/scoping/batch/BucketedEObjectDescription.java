@@ -173,5 +173,17 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 	public boolean isTypeLiteral() {
 		return false;
 	}
-
+	
+	public int getNumberOfIrrelevantParameters() {
+		if (isExtension())
+			return 1;
+		if (getImplicitFirstArgument() != null)
+			return 1;
+		return 0;
+	}
+	
+	public boolean isValidStaticState() {
+		return true;
+	}
+	
 }

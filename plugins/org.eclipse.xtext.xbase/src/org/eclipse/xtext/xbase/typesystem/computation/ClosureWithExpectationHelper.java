@@ -296,6 +296,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		for (JvmTypeReference exception : exceptions) {
 			expectedExceptions.add(typeAssigner.toLightweightTypeReference(exception));
 		}
+		result.withinScope(getClosure());
 		return result.withExpectedExceptions(expectedExceptions);
 	}
 

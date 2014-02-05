@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.beans.Introspector;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -94,7 +95,9 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 				if (!allFeatures.isEmpty()) {
 					Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(extensionType);
 					for (JvmFeature feature : allFeatures) {
-						addDescriptions(feature, extensionProvider.getKey(), extensionType, receiverTypeParameterMapping, bucket, result);
+						if (!feature.isStatic()) {
+							addDescriptions(feature, extensionProvider.getKey(), extensionType, receiverTypeParameterMapping, bucket, result);
+						}
 					}
 				}
 			}
@@ -104,12 +107,27 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 
 	protected void addDescriptions(JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping, ExpressionBucket bucket, List<IEObjectDescription> result) {
-		// TODO property names?
-		QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
-		if (firstArgument != null)
-			result.add(createDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
+		String simpleName = feature.getSimpleName();
+		QualifiedName featureName = QualifiedName.create(simpleName);
+		if (firstArgument != null) {
+			IEObjectDescription description = createDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket);
+			if (description != null) {
+				result.add(description);
+				String propertyName = toProperty(simpleName, feature);
+				if (propertyName != null) {
+					result.add(createDescription(QualifiedName.create(propertyName), feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
+				}
+			}
+		}
 		if (implicit) {
-			result.add(createReceiverDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
+			IEObjectDescription description = createReceiverDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket);
+			if (description != null) {
+				result.add(description);
+				String propertyName = toProperty(simpleName, feature);
+				if (propertyName != null) {
+					result.add(createReceiverDescription(QualifiedName.create(propertyName), feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
+				}
+			}
 		}
 		QualifiedName operator = operatorMapping.getOperator(featureName);
 		if (operator != null) {
@@ -230,4 +248,17 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 				getSession().isVisible(feature));
 	}
 	
+	@Override
+	protected String toProperty(String methodName, JvmFeature feature) {
+		if (feature instanceof JvmOperation) {
+			JvmOperation operation = (JvmOperation) feature;
+			if (methodName.length() > 3 && (methodName.startsWith("get") && operation.getParameters().size() == 1 || methodName.startsWith("set") && operation.getParameters().size() == 2) && Character.isUpperCase(methodName.charAt(3))) {
+				return Introspector.decapitalize(methodName.substring(3));
+			}
+			if (methodName.length() > 3 && methodName.startsWith("is") && Character.isUpperCase(methodName.charAt(2)) && operation.getParameters().size() == 1) {
+				return Introspector.decapitalize(methodName.substring(2));
+			}
+		}
+		return null;
+	}
 }

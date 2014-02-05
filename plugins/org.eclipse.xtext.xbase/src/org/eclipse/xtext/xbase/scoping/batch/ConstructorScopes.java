@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -17,7 +16,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-
 
 /**
  * Encapsulates the creation of constructor scopes.

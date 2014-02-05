@@ -52,6 +52,10 @@ public class ResolvedOperations extends AbstractResolvedFeatures {
 		return allOperations = computeAllOperations();
 	}
 	
+	public IResolvedOperation getResolvedOperation(JvmOperation operation) {
+		return createResolvedOperation(operation);
+	}
+	
 	public List<IResolvedConstructor> getDeclaredConstructors() {
 		if (declaredConstructors != null) {
 			return declaredConstructors;

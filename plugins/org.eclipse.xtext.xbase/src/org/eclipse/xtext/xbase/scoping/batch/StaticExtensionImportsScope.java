@@ -7,11 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.beans.Introspector;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
-import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -23,6 +28,11 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.Maps2;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -60,38 +70,119 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	}
 	
 	@Override
+	protected Iterable<IEObjectDescription> getAllLocalElements() {
+		List<TypeBucket> buckets = getBuckets();
+		if (buckets.isEmpty()) {
+			return Collections.emptyList();
+		}
+		List<IEObjectDescription> result = Lists.newArrayList();
+		for(TypeBucket bucket: buckets) {
+			Map<String, List<JvmOperation>> extensionSignatures = Maps.newHashMap();
+			for(JvmType type: bucket.getTypes()) {
+				if (type instanceof JvmDeclaredType) {
+					Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
+					for(JvmFeature feature: features) {
+						if (feature.isStatic() && isPossibleExtension(feature) && isMatchingFirstParameter((JvmOperation) feature)) {
+							Maps2.putIntoListMap(getExtensionSignature((JvmOperation) feature), (JvmOperation) feature, extensionSignatures);
+						}
+					}
+				}
+			}
+			for(List<JvmOperation> list: extensionSignatures.values()) {
+				int size = list.size();
+				for(int i = 0; i < size; i++) {
+					JvmOperation candidate = list.get(i);
+					if (candidate != null) {
+						LightweightTypeReference firstParameterType = getFirstParameterType(candidate);
+						if (i + 1 < list.size()) {
+							for(int j = i + 1; j < list.size(); j++) {
+								JvmOperation next = list.get(j);
+								if (next != null) {
+									LightweightTypeReference otherFirstParameterType = getFirstParameterType(next);
+									if (otherFirstParameterType.isAssignableFrom(firstParameterType)) {
+										list.set(j, null);
+									} else if (firstParameterType.isAssignableFrom(otherFirstParameterType)) {
+										list.set(j, null);
+										candidate = next;
+										firstParameterType = otherFirstParameterType;
+									}
+								}
+							}
+						}
+						addDescriptions(candidate, bucket, result);
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	private String getExtensionSignature(JvmOperation operation) {
+		StringBuilder builder = new StringBuilder(64).append(operation.getSimpleName()).append('(');
+		List<JvmFormalParameter> parameters = operation.getParameters();
+		for(int i = 1; i < parameters.size(); i++) {
+			if (i != 1) {
+				builder.append(',');
+			}
+			JvmFormalParameter parameter = parameters.get(i);
+			builder.append(getParameterType(parameter).getIdentifier());
+		}
+		builder.append(')');
+		return builder.toString();
+	}
+
+	protected LightweightTypeReference getFirstParameterType(JvmOperation candidate) {
+		return getParameterType(candidate.getParameters().get(0));
+	}
+	
+	protected LightweightTypeReference getParameterType(JvmFormalParameter p) {
+		return new OwnedConverter(receiverType.getOwner()).toRawLightweightReference(p.getParameterType().getType()).getRawTypeReference();
+	}
+	
+	@Override
 	protected BucketedEObjectDescription createDescription(QualifiedName name, JvmFeature feature,
 			TypeBucket bucket) {
 		if (!isPossibleExtension(feature)) {
 			return null;
 		}
-		List<JvmFormalParameter> parameters = ((JvmExecutable) feature).getParameters();
+		if (!isMatchingFirstParameter((JvmOperation) feature)) {
+			return null;
+		}
+		return doCreateDescription(name, feature, bucket);
+	}
+
+	protected BucketedEObjectDescription doCreateDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
+		if (implicit) {
+			return new StaticExtensionFeatureDescriptionWithImplicitFirstArgument(name, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature));
+		}
+		return new StaticExtensionFeatureDescription(name, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature));
+	}
+
+	protected boolean isMatchingFirstParameter(JvmOperation feature) {
+		List<JvmFormalParameter> parameters = feature.getParameters();
 		JvmFormalParameter firstParameter = parameters.get(0);
 		JvmTypeReference type = firstParameter.getParameterType();
 		if (type == null)
-			return null;
+			return false;
 		JvmType rawParameterType = type.getType();
 		if (rawParameterType == null || rawParameterType.eIsProxy())
-			return null;
+			return false;
 		if (!(rawParameterType instanceof JvmTypeParameter)) {
 			LightweightTypeReference rawReceiverType = receiverType.getRawTypeReference();
 			if (rawReceiverType.isResolved()) {
 				// short circuit - limit extension scope entries to real candidates
 				LightweightTypeReference parameterTypeReference = new OwnedConverter(rawReceiverType.getOwner()).toRawLightweightReference(rawParameterType);
 				if (parameterTypeReference.isResolved() && !parameterTypeReference.isAssignableFrom(rawReceiverType)) {
-					return null;
+					return false;
 				}
 				if (parameterTypeReference.isArray() && !rawReceiverType.isArray() && !rawReceiverType.isSubtypeOf(Iterable.class)) {
-					return null;
+					return false;
 				}
 			} else if (isArrayTypeMismatch(rawReceiverType, rawParameterType)) {
-				return null;
+				return false;
 			}
 		}
-		if (implicit) {
-			return new StaticExtensionFeatureDescriptionWithImplicitFirstArgument(name, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature));
-		}
-		return new StaticExtensionFeatureDescription(name, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature));
+		return true;
 	}
 	
 	private boolean isArrayTypeMismatch(LightweightTypeReference rawReceiverType, JvmType rawParameterType) {
@@ -122,13 +213,50 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 		return false;
 	}
 	
+	protected void fastAddDescriptions(JvmFeature feature, TypeBucket bucket, List<IEObjectDescription> result) {
+		String simpleName = feature.getSimpleName();
+		QualifiedName featureName = QualifiedName.create(simpleName);
+		BucketedEObjectDescription description = createDescription(featureName, feature, bucket);
+		if (description != null) {
+			result.add(description);
+			String propertyName = toProperty(simpleName, feature);
+			if (propertyName != null) {
+				result.add(createDescription(QualifiedName.create(propertyName), feature, bucket));
+			}
+			QualifiedName operator = operatorMapping.getOperator(featureName);
+			if (operator != null) {
+				result.add(createDescription(operator, feature, bucket));
+			}
+		}
+	}
+	
 	@Override
 	protected void addDescriptions(JvmFeature feature, TypeBucket bucket, List<IEObjectDescription> result) {
-		QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
-		result.add(createDescription(featureName, feature, bucket));
+		String simpleName = feature.getSimpleName();
+		QualifiedName featureName = QualifiedName.create(simpleName);
+		BucketedEObjectDescription description = doCreateDescription(featureName, feature, bucket);
+		result.add(description);
+		String propertyName = toProperty(simpleName, feature);
+		if (propertyName != null) {
+			result.add(createDescription(QualifiedName.create(propertyName), feature, bucket));
+		}
 		QualifiedName operator = operatorMapping.getOperator(featureName);
 		if (operator != null) {
 			result.add(createDescription(operator, feature, bucket));
 		}
+	}
+	
+	@Override
+	protected String toProperty(String methodName, JvmFeature feature) {
+		if (feature instanceof JvmOperation) {
+			JvmOperation operation = (JvmOperation) feature;
+			if (methodName.length() > 3 && (methodName.startsWith("get") && operation.getParameters().size() == 1 || methodName.startsWith("set") && operation.getParameters().size() == 2) && Character.isUpperCase(methodName.charAt(3))) {
+				return Introspector.decapitalize(methodName.substring(3));
+			}
+			if (methodName.length() > 3 && methodName.startsWith("is") && Character.isUpperCase(methodName.charAt(2)) && operation.getParameters().size() == 1) {
+				return Introspector.decapitalize(methodName.substring(2));
+			}
+		}
+		return null;
 	}
 }

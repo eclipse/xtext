@@ -48,7 +48,7 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<String> m(final List<String> list) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,String> _function = new Function1<String,String>() {");
+    _builder_1.append("final Function1<String, String> _function = new Function1<String, String>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public String apply(final String e) {");
@@ -105,7 +105,7 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<String> m(final List<String> list) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,String> _function = new Function1<String,String>() {");
+    _builder_1.append("final Function1<String, String> _function = new Function1<String, String>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public String apply(final String e) {");
@@ -162,7 +162,7 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<String> m(final List<String> list) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,String> _function = new Function1<String,String>() {");
+    _builder_1.append("final Function1<String, String> _function = new Function1<String, String>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public String apply(final String e) {");
@@ -219,7 +219,7 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<String> m(final List<String> list) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,String> _function = new Function1<String,String>() {");
+    _builder_1.append("final Function1<String, String> _function = new Function1<String, String>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public String apply(final String e) {");
@@ -342,10 +342,10 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <T extends EObject> Iterable<Pair<QualifiedName,T>> getVisibleIEObjectDescriptionByTypeAndCondition(final ResourceSet resourceSet, final EClass type, final Function1<? super IEObjectDescription,? extends Boolean> p) {");
+    _builder_1.append("public <T extends EObject> Iterable<Pair<QualifiedName, T>> getVisibleIEObjectDescriptionByTypeAndCondition(final ResourceSet resourceSet, final EClass type, final Function1<? super IEObjectDescription, ? extends Boolean> p) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("List<Pair<QualifiedName,T>> _xblockexpression = null;");
+    _builder_1.append("List<Pair<QualifiedName, T>> _xblockexpression = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("{");
@@ -354,10 +354,10 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("final ArrayList<IEObjectDescription> c = CollectionLiterals.<IEObjectDescription>newArrayList();");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("final Function1<IEObjectDescription,Pair<QualifiedName,T>> _function = new Function1<IEObjectDescription,Pair<QualifiedName,T>>() {");
+    _builder_1.append("final Function1<IEObjectDescription, Pair<QualifiedName, T>> _function = new Function1<IEObjectDescription, Pair<QualifiedName, T>>() {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("public Pair<QualifiedName,T> apply(final IEObjectDescription eod) {");
+    _builder_1.append("public Pair<QualifiedName, T> apply(final IEObjectDescription eod) {");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("QualifiedName _qualifiedName = eod.getQualifiedName();");
@@ -375,7 +375,7 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (ListExtensions.<IEObjectDescription, Pair<QualifiedName,T>>map(c, _function));");
+    _builder_1.append("_xblockexpression = ListExtensions.<IEObjectDescription, Pair<QualifiedName, T>>map(c, _function);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");

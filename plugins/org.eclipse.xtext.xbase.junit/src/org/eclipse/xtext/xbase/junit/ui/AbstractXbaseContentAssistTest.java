@@ -275,9 +275,8 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("''+''").assertTextAtCursorPosition("+''", 1, expect(new String[]{"+"}, getKeywordsAndStatics()));
 	}
 	
-	@Ignore("Broken, since the OtherOperand '>' '>' has been introduced")
 	@Test public void testOnStringLiteral_06() throws Exception {
-		newBuilder().append("''==''").assertTextAtCursorPosition("==", 1, "==", "=>");
+		newBuilder().append("''==''").assertTextAtCursorPosition("==", 1, "==", "=>", "===");
 	}
 	
 	@Test public void testOnStringLiteral_07() throws Exception {
@@ -313,9 +312,8 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("'' + ''").assertTextAtCursorPosition("+ ''", 1, expect(new String[]{"+"}, getKeywordsAndStatics()));
 	}
 	
-	@Ignore("Broken, since the OtherOperand '>' '>' has been introduced")
 	@Test public void testOnStringLiteral_15() throws Exception {
-		newBuilder().append("'' == ''").assertTextAtCursorPosition("==", 1, "==", "=>");
+		newBuilder().append("'' == ''").assertTextAtCursorPosition("==", 1, "==", "=>", "===");
 	}
 	
 	@Test public void testOnStringLiteral_16() throws Exception {
@@ -352,7 +350,6 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("''.toString+''").assertTextAtCursorPosition("+''", 1, expect(new String[]{"+"}, getKeywordsAndStatics()));
 	}
 	
-	@Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=381327#c3")
 	@Test public void testOnStringLiteral_24() throws Exception {
 		newBuilder().append("''.toString==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"===", "==", "=>"}, getKeywordsAndStatics()));
 	}
@@ -405,7 +402,6 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("''.toString +''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, CAST_INSTANCEOF));
 	}
 	
-	@Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=381327#c3")
 	@Test public void testOnStringLiteral_37() throws Exception {
 		newBuilder().append("''.toString ==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"==", "===", "=>"}, getKeywordsAndStatics()));
 	}
@@ -451,7 +447,17 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	@Test public void testAfterBinaryOperation_10() throws Exception {
-		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", "null", "!=", "!==", "==", "===", "->", "=>", "+", "?:");
+		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", 
+				"null", "!=", "!==", "==", "===", 
+				"->", "=>", 
+				"+", 
+				"?:",
+				"<", "<=", "<=>", ">=", ">");
+	}
+	
+	@Ignore("TODO binary operator precedence is not implemented in CA yet")
+	@Test public void testAfterBinaryOperation_11() throws Exception {
+		newBuilder().append("''+1").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF /* number operators */));
 	}
 	
 	@Test public void testStaticFeatures_01() throws Exception {
@@ -463,7 +469,8 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	@Test public void testNull() throws Exception {
-		newBuilder().append("null").assertText("null", "!=", "!==", "+", "==", "===", "->", "?:", "=>");
+		newBuilder().append("null").assertText("null", "!=", "!==", "+", "==", "===", "->", "?:", "=>",
+				"%", "*", "**", "-", "+=", "-=", "/", "<", "<=", "<=>", ">=", ">");
 	}
 	
 	@Test public void testForLoop_01() throws Exception {
@@ -506,12 +513,21 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("new ArrBloQu").assertText("java.util.concurrent.ArrayBlockingQueue");
 	}
 	
+	@Test public void testCamelCase_03() throws Exception {
+		newBuilder().append("new ArrBloQu").assertText("java.util.concurrent.ArrayBlockingQueue");
+	}
+	
 	@Test public void testSwitchOnEnum_01() throws Exception {
-		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case ").assertText(expect(new String[]{"SOURCE", "CLASS", "RUNTIME"}, getKeywordsAndStatics()));
+		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case ").assertText(expect(
+				new String[]{"SOURCE", "CLASS", "RUNTIME", /* TODO static scope should be restricted to enum literals */ "valueOf()", "valueOf()", "values"}, getKeywordsAndStatics()));
 	}
 	
 	@Test public void testSwitchOnEnum_02() throws Exception {
 		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case SOUR").assertProposal("SOURCE");
+	}
+	
+	@Test public void testSwitchOnEnum_03() throws Exception {
+		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case SOURCE: ").assertText(getKeywordsAndStatics());
 	}
 	
 	/**

@@ -63,7 +63,7 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 		assertSameSignature(
 				"package test class Foo { String bar }", 
 				"package test class Foo { String bar }");
-		assertSameSignature(
+		assertDifferentSignature(
 				"package test class Foo { private String bar }",
 				"package test class Foo { private int bar }");
 		assertDifferentSignature(
@@ -167,7 +167,8 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 				"package test class Foo extends Bar {}").iterator();
 		XtendFile barFile1 = files1.next();
 		XtendFile fooFile1 = files1.next();
-		assertEquals(getTypeSignature(barFile0), getTypeSignature(barFile1));
+		// consider private members in signatures
+		assertFalse(getTypeSignature(barFile0).equals(getTypeSignature(barFile1)));
 		assertEquals(getTypeSignature(fooFile0), getTypeSignature(fooFile1));
 		
 		Iterator<XtendFile> files2 = files(true, 
@@ -176,7 +177,8 @@ public class TypeSignatureHashTest extends AbstractXtendTestCase {
 		XtendFile barFile2 = files2.next();
 		XtendFile fooFile2 = files2.next();
 		assertFalse(equal(getTypeSignature(barFile0), getTypeSignature(barFile2)));
-		assertFalse(equal(getTypeSignature(fooFile0), getTypeSignature(fooFile2)));
+		// don't inline parent's signatures
+		assertEquals(getTypeSignature(fooFile0), getTypeSignature(fooFile2));
 	}
 
 	@Test

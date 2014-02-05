@@ -43,6 +43,7 @@ public class FeatureScopeSessionWithContext extends AbstractNestedFeatureScopeSe
 	
 	@Override
 	public boolean isVisible(JvmMember member, @Nullable JvmIdentifiableElement receiverFeature) {
+		// TODO probably bogus implementation
 		boolean result = isVisible(member);
 		if (result && JvmVisibility.PROTECTED == member.getVisibility() && receiverFeature != null) {
 			// TODO how does this work with inner types, e.g.

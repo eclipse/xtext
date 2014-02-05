@@ -35,4 +35,9 @@ public class StaticFeatureDescriptionWithTypeLiteralReceiver extends StaticFeatu
 	public boolean isSyntacticReceiverPossibleArgument() {
 		return false;
 	}
+	
+	@Override
+	public boolean isValidStaticState() {
+		return true;
+	}
 }

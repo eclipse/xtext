@@ -58,7 +58,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<? super Object> m(final Iterable<String> iterable) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,Object> _function = new Function1<String,Object>() {");
+    _builder_1.append("final Function1<String, Object> _function = new Function1<String, Object>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Object apply(final String it) {");
@@ -76,7 +76,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("Iterable<? super Object> _flatMap = this.<String, Object>flatMap(iterable, _function);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<Object,Integer> _function_1 = new Function1<Object,Integer>() {");
+    _builder_1.append("final Function1<Object, Integer> _function_1 = new Function1<Object, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Integer apply(final Object it) {");
@@ -99,7 +99,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <A extends Object, B extends Object> Iterable<? super B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A,? extends B> map) {");
+    _builder_1.append("public <A extends Object, B extends Object> Iterable<? super B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null;");
@@ -153,7 +153,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<? super Number> m(final Iterable<String> iterable) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,Number> _function = new Function1<String,Number>() {");
+    _builder_1.append("final Function1<String, Number> _function = new Function1<String, Number>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Number apply(final String it) {");
@@ -171,7 +171,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("Iterable<? super Number> _flatMap = this.<String, Number>flatMap(iterable, _function);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<Object,Integer> _function_1 = new Function1<Object,Integer>() {");
+    _builder_1.append("final Function1<Object, Integer> _function_1 = new Function1<Object, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Integer apply(final Object it) {");
@@ -194,7 +194,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <A extends Object, B extends Number> Iterable<? super B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A,? extends B> map) {");
+    _builder_1.append("public <A extends Object, B extends Number> Iterable<? super B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null;");
@@ -248,7 +248,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<? extends Number> m(final Iterable<String> iterable) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,Number> _function = new Function1<String,Number>() {");
+    _builder_1.append("final Function1<String, Number> _function = new Function1<String, Number>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Number apply(final String it) {");
@@ -266,7 +266,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("Iterable<? extends Number> _flatMap = this.<String, Number>flatMap(iterable, _function);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<Number,Integer> _function_1 = new Function1<Number,Integer>() {");
+    _builder_1.append("final Function1<Number, Integer> _function_1 = new Function1<Number, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Integer apply(final Number it) {");
@@ -289,7 +289,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <A extends Object, B extends Number> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A,? extends B> map) {");
+    _builder_1.append("public <A extends Object, B extends Number> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null;");
@@ -347,7 +347,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<? extends Integer> m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,Integer> _function = new Function1<String,Integer>() {");
+    _builder_1.append("final Function1<String, Integer> _function = new Function1<String, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Integer apply(final String it) {");
@@ -365,7 +365,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("Iterable<? extends Integer> _flatMap = this.<String, Integer>flatMap(Collections.<String>unmodifiableList(Lists.<String>newArrayList()), _function);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<Integer,Integer> _function_1 = new Function1<Integer,Integer>() {");
+    _builder_1.append("final Function1<Integer, Integer> _function_1 = new Function1<Integer, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Integer apply(final Integer it) {");
@@ -388,7 +388,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <A extends String, B extends Number> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A,? extends B> map) {");
+    _builder_1.append("public <A extends String, B extends Number> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null;");
@@ -446,7 +446,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<? extends Number> m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,Number> _function = new Function1<String,Number>() {");
+    _builder_1.append("final Function1<String, Number> _function = new Function1<String, Number>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Number apply(final String it) {");
@@ -464,7 +464,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("Iterable<? extends Number> _flatMap = this.<String, Number>flatMap(Collections.<String>unmodifiableList(Lists.<String>newArrayList()), _function);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<Number,Integer> _function_1 = new Function1<Number,Integer>() {");
+    _builder_1.append("final Function1<Number, Integer> _function_1 = new Function1<Number, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Integer apply(final Number it) {");
@@ -487,7 +487,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <A extends String, B extends Number> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A,? extends B> map) {");
+    _builder_1.append("public <A extends String, B extends Number> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null;");
@@ -541,7 +541,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("public List<? extends String> m(final Iterable<String> iterable) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,String> _function = new Function1<String,String>() {");
+    _builder_1.append("final Function1<String, String> _function = new Function1<String, String>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public String apply(final String it) {");
@@ -559,7 +559,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("Iterable<? extends String> _flatMap = this.<String, String>flatMap(iterable, _function);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,Integer> _function_1 = new Function1<String,Integer>() {");
+    _builder_1.append("final Function1<String, Integer> _function_1 = new Function1<String, Integer>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Integer apply(final String it) {");
@@ -582,7 +582,7 @@ public class CompilerBug404051Test extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <A extends Object, B extends A> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A,? extends B> map) {");
+    _builder_1.append("public <A extends Object, B extends A> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A, ? extends B> map) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return null;");

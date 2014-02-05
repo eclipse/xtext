@@ -82,12 +82,12 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public <K extends Object, V extends Object, M extends Map<K,V>> M nonEmpty(final M m) {
+			  public <K extends Object, V extends Object, M extends Map<K, V>> M nonEmpty(final M m) {
 			    return m;
 			  }
 			  
-			  public Map<String,Integer> m(final Map<String,Integer> m) {
-			    return this.<String, Integer, Map<String,Integer>>nonEmpty(m);
+			  public Map<String, Integer> m(final Map<String, Integer> m) {
+			    return this.<String, Integer, Map<String, Integer>>nonEmpty(m);
 			  }
 			}
 		''')
@@ -112,16 +112,16 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public <K extends Object, V extends K, M extends Map<K,V>> M nonEmpty(final M m) {
+			  public <K extends Object, V extends K, M extends Map<K, V>> M nonEmpty(final M m) {
 			    return m;
 			  }
 			  
-			  public HashMap<String,String> m() {
-			    HashMap<String,String> _xblockexpression = null;
+			  public HashMap<String, String> m() {
+			    HashMap<String, String> _xblockexpression = null;
 			    {
-			      final HashMap<String,String> m = CollectionLiterals.<String, String>newHashMap();
+			      final HashMap<String, String> m = CollectionLiterals.<String, String>newHashMap();
 			      m.put("", null);
-			      _xblockexpression = (this.<String, String, HashMap<String,String>>nonEmpty(m));
+			      _xblockexpression = this.<String, String, HashMap<String, String>>nonEmpty(m);
 			    }
 			    return _xblockexpression;
 			  }
@@ -148,16 +148,16 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public <K extends Object, V extends K, M extends Map<K,V>> M nonEmpty(final M m) {
+			  public <K extends Object, V extends K, M extends Map<K, V>> M nonEmpty(final M m) {
 			    return m;
 			  }
 			  
-			  public HashMap<String,String> m() {
-			    HashMap<String,String> _xblockexpression = null;
+			  public HashMap<String, String> m() {
+			    HashMap<String, String> _xblockexpression = null;
 			    {
-			      final HashMap<String,String> m = CollectionLiterals.<String, String>newHashMap();
+			      final HashMap<String, String> m = CollectionLiterals.<String, String>newHashMap();
 			      m.put(null, "");
-			      _xblockexpression = (this.<String, String, HashMap<String,String>>nonEmpty(m));
+			      _xblockexpression = this.<String, String, HashMap<String, String>>nonEmpty(m);
 			    }
 			    return _xblockexpression;
 			  }
@@ -184,16 +184,16 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public <K extends Object, V extends K, M extends Map<? extends K,? extends V>> M nonEmpty(final M m) {
+			  public <K extends Object, V extends K, M extends Map<? extends K, ? extends V>> M nonEmpty(final M m) {
 			    return m;
 			  }
 			  
-			  public HashMap<String,String> m() {
-			    HashMap<String,String> _xblockexpression = null;
+			  public HashMap<String, String> m() {
+			    HashMap<String, String> _xblockexpression = null;
 			    {
-			      final HashMap<String,String> m = CollectionLiterals.<String, String>newHashMap();
+			      final HashMap<String, String> m = CollectionLiterals.<String, String>newHashMap();
 			      m.put(null, "");
-			      _xblockexpression = (this.<String, String, HashMap<String,String>>nonEmpty(m));
+			      _xblockexpression = this.<String, String, HashMap<String, String>>nonEmpty(m);
 			    }
 			    return _xblockexpression;
 			  }
@@ -279,8 +279,8 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			    return s;
 			  }
 			  
-			  public List<Iterable<? extends Object>> m(final List<Iterable<? extends Object>> o) {
-			    return this.<Iterable<? extends Object>, List<Iterable<? extends Object>>>nonEmpty(o);
+			  public List<Iterable<?>> m(final List<Iterable<?>> o) {
+			    return this.<Iterable<?>, List<Iterable<?>>>nonEmpty(o);
 			  }
 			}
 		''')

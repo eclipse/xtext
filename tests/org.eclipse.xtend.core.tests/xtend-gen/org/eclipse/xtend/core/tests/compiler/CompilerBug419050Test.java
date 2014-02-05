@@ -553,7 +553,7 @@ public class CompilerBug419050Test extends AbstractXtendCompilerTest {
     _builder_1.append("public boolean m(final boolean b) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,Boolean> _function = new Function1<String,Boolean>() {");
+    _builder_1.append("final Function1<String, Boolean> _function = new Function1<String, Boolean>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Boolean apply(final String s) {");
@@ -580,7 +580,7 @@ public class CompilerBug419050Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,Boolean> func = _function;");
+    _builder_1.append("final Function1<String, Boolean> func = _function;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("boolean _while = true;");
@@ -739,7 +739,7 @@ public class CompilerBug419050Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Iterable<String> m(final Iterable<String> iter) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<String,Boolean> _function = new Function1<String,Boolean>() {");
+    _builder_1.append("final Function1<String, Boolean> _function = new Function1<String, Boolean>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public Boolean apply(final String it) {");

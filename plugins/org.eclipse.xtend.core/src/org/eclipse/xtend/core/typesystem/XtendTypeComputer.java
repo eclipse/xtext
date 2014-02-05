@@ -168,6 +168,7 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		super.addLocalToCurrentScope(localVariable, state);
 		if (localVariable instanceof XtendVariableDeclaration && ((XtendVariableDeclaration) localVariable).isExtension()) {
 			state.addExtensionToCurrentScope(localVariable);
+			state.rewriteScope(localVariable);
 		}
 	}
 	

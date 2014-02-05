@@ -36,7 +36,7 @@ public class LocalVariableScope extends AbstractSessionBasedScope {
 	
 	@Override
 	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
-		if (canBeLocalVariable())
+		if (!canBeLocalVariable())
 			return Collections.emptyList();
 		IEObjectDescription element = getSession().getLocalElement(name);
 		if (element == null)
@@ -45,11 +45,14 @@ public class LocalVariableScope extends AbstractSessionBasedScope {
 	}
 
 	protected boolean canBeLocalVariable() {
-		return !looksLikeLocalVariable() && !(getFeatureCall() instanceof XAssignment);
+		XAbstractFeatureCall featureCall = getFeatureCall();
+		if (featureCall != null) {
+			return looksLikeLocalVariable(featureCall) || featureCall instanceof XAssignment;
+		}
+		return true;
 	}
 	
-	protected boolean looksLikeLocalVariable() {
-		XAbstractFeatureCall featureCall = getFeatureCall();
+	protected boolean looksLikeLocalVariable(XAbstractFeatureCall featureCall) {
 		if (featureCall instanceof XFeatureCall) {
 			boolean result = !featureCall.isExplicitOperationCallOrBuilderSyntax() && featureCall.getTypeArguments().isEmpty();
 			return result;
@@ -62,7 +65,7 @@ public class LocalVariableScope extends AbstractSessionBasedScope {
 		Collection<IEObjectDescription> localElements = getLocalElementsByName(name);
 		if (localElements.isEmpty())
 			return getParent().getElements(name);
-		if (looksLikeLocalVariable()) {
+		if (looksLikeLocalVariable(getFeatureCall())) {
 			return localElements;
 		}
 		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {

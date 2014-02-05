@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmType;
@@ -47,6 +48,12 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 	
 	public LightweightTypeReference getContextType() {
 		return contextType;
+	}
+	
+	public LightweightTypeReference getResolvedDeclarator() {
+		JvmExecutable declaration = getDeclaration();
+		JvmDeclaredType declarator = declaration.getDeclaringType();
+		return getContextType().getSuperType(declarator);
 	}
 	
 	public List<JvmTypeParameter> getTypeParameters() {

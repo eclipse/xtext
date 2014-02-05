@@ -9,8 +9,10 @@ package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -31,8 +33,9 @@ import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -42,17 +45,13 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class UIStrings {
 
 	@Inject
-	private ITypeProvider typeProvider;
-	
-	@Inject
-	private FeatureCallToJavaMapping featureCallToJavaMapping;
-	
-	@Inject
 	private LazyURIEncoder lazyURIEncoder;
+	
+	@Inject
+	private IBatchTypeResolver typeResolver;
 	
 	public String signature(JvmExecutable executable) {
 		StringBuilder b = new StringBuilder(executable.getSimpleName());
@@ -70,7 +69,7 @@ public class UIStrings {
 	}
 
 	public String arguments(XAbstractFeatureCall featureCall) {
-		List<XExpression> arguments = featureCallToJavaMapping.getActualArguments(featureCall);
+		List<XExpression> arguments = featureCall.getActualArguments();
 		return "(" + expressionTypes(arguments) + ")";
 	}
 
@@ -87,7 +86,8 @@ public class UIStrings {
 	
 	public String typeParameters(JvmIdentifiableElement element) {
 		if (element instanceof JvmTypeParameterDeclarator) {
-			return "<" + toString(((JvmTypeParameterDeclarator) element).getTypeParameters()) + ">";
+			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) element).getTypeParameters();
+			return typeParameters(typeParameters);
 		}
 		return "";
 	}
@@ -160,11 +160,34 @@ public class UIStrings {
 	}
 
 	protected String expressionTypes(Iterable<XExpression> expressions) {
-		return referencesToString(transform(expressions, new Function<XExpression, JvmTypeReference>() {
-			public JvmTypeReference apply(XExpression from) {
-				return typeProvider.getType(from);
+		Iterator<XExpression> iterator = expressions.iterator();
+		if (iterator.hasNext()) {
+			XExpression expression = iterator.next();
+			IResolvedTypes resolvedTypes = typeResolver.resolveTypes(expression);
+			LightweightTypeReference reference = resolvedTypes.getActualType(expression);
+			if (!iterator.hasNext()) {
+				return referenceToString(reference);
 			}
-		}));
+			StringBuilder result = new StringBuilder(reference.toString());
+			while(iterator.hasNext()) {
+				reference = resolvedTypes.getActualType(iterator.next());
+				result.append(", ");
+				result.append(referenceToString(reference));
+			}
+			return result.toString();
+		} else {
+			return "";
+		}
+	}
+
+	protected String referenceToString(LightweightTypeReference reference) {
+		if (reference == null) {
+			return "[null]";
+		}
+		if (reference.isAny()) {
+			return "Object";
+		}
+		return reference.getSimpleName();
 	}
 
 	protected String parameterTypes(Iterable<JvmFormalParameter> parameters, @SuppressWarnings("unused") boolean isVarArgs) {

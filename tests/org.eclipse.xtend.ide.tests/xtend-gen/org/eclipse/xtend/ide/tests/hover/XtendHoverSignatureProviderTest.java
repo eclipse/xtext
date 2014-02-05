@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -364,17 +366,17 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void testSignatureForXtendDefaultConstructorWithGenerics() {
+  public void testSignatureXtendConstructorWithGenerics_01() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package testPackage");
       _builder.newLine();
-      _builder.append("class Foo<String> {");
+      _builder.append("class Foo<S extends CharSequence> {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def bar(){");
+      _builder.append("def bar() {");
       _builder.newLine();
-      _builder.append("\t");
+      _builder.append("\t\t");
       _builder.append("new Foo()");
       _builder.newLine();
       _builder.append("\t");
@@ -396,7 +398,208 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XConstructorCall constructorCall = ((XConstructorCall) _get_1);
       JvmConstructor _constructor = constructorCall.getConstructor();
       final String signature = this.signatureProvider.getSignature(_constructor);
+      Assert.assertEquals("Foo<S extends CharSequence>()", signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSignatureConstructorCall_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo<S extends CharSequence> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def bar() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Foo()");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendFunction xtendFunction = ((XtendFunction) _get);
+      XExpression _expression = xtendFunction.getExpression();
+      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
+      XExpression _get_1 = _expressions.get(0);
+      final XConstructorCall constructorCall = ((XConstructorCall) _get_1);
+      final String signature = this.signatureProvider.getSignature(constructorCall);
+      Assert.assertEquals("Foo<CharSequence>()", signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSignatureConstructorCall_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo<S> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def bar() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Foo(StringBuilder, StringBuffer)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new <X>(Class<X> c, Class<S> c2) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendFunction xtendFunction = ((XtendFunction) _get);
+      XExpression _expression = xtendFunction.getExpression();
+      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
+      XExpression _get_1 = _expressions.get(0);
+      final XConstructorCall constructorCall = ((XConstructorCall) _get_1);
+      final String signature = this.signatureProvider.getSignature(constructorCall);
+      Assert.assertEquals("<StringBuilder> Foo<StringBuffer>(Class<StringBuilder> c, Class<StringBuffer> c2)", signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSignatureConstructorCall_03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo<S> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def bar() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Foo<String>()");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendFunction xtendFunction = ((XtendFunction) _get);
+      XExpression _expression = xtendFunction.getExpression();
+      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
+      XExpression _get_1 = _expressions.get(0);
+      final XConstructorCall constructorCall = ((XConstructorCall) _get_1);
+      final String signature = this.signatureProvider.getSignature(constructorCall);
       Assert.assertEquals("Foo<String>()", signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Ignore
+  @Test
+  public void testSignatureDelegateConstructorCall_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo<S extends CharSequence> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new(int i) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("this()");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new() {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendConstructor xtendConstructor = ((XtendConstructor) _get);
+      XExpression _expression = xtendConstructor.getExpression();
+      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
+      XExpression _get_1 = _expressions.get(0);
+      final XFeatureCall featureCall = ((XFeatureCall) _get_1);
+      final String signature = this.signatureProvider.getSignature(featureCall);
+      Assert.assertEquals("Foo<S>()", signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Ignore
+  @Test
+  public void testSignatureDelegateConstructorCall_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo<S extends CharSequence> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new(int i) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("this(StringBuilder)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new<X>(Class<X> c) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendConstructor xtendConstructor = ((XtendConstructor) _get);
+      XExpression _expression = xtendConstructor.getExpression();
+      EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
+      XExpression _get_1 = _expressions.get(0);
+      final XFeatureCall featureCall = ((XFeatureCall) _get_1);
+      final String signature = this.signatureProvider.getSignature(featureCall);
+      Assert.assertEquals("Foo<S>()", signature);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
