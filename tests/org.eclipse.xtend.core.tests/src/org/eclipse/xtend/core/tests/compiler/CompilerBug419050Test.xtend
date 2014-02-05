@@ -255,7 +255,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public boolean m(final boolean b) {
-			    final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
+			    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
 			      public Boolean apply(final String s) {
 			        boolean _while = true;
 			        while (_while) {
@@ -264,7 +264,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			        return null;
 			      }
 			    };
-			    final Function1<String,Boolean> func = _function;
+			    final Function1<String, Boolean> func = _function;
 			    boolean _while = true;
 			    while (_while) {
 			      return (func.apply("foo")).booleanValue();
@@ -332,7 +332,7 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Iterable<String> m(final Iterable<String> iter) {
-			    final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
+			    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
 			      public Boolean apply(final String it) {
 			        int _length = it.length();
 			        boolean _lessThan = (_length < 2);

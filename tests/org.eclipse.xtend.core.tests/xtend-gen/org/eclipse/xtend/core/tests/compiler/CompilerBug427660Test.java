@@ -41,7 +41,7 @@ public class CompilerBug427660Test extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Enum enumValue(final Class<? extends Object> clazz, final String value) {");
+    _builder_1.append("public Enum enumValue(final Class<?> clazz, final String value) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("Enum _xifexpression = null;");

@@ -36,7 +36,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -47,27 +48,22 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 	private Provider<XbaseInterpreter> interpreterProvider;
 
 	@Inject
-	private ITypeProvider typeProvider;
+	private IBatchTypeResolver typeResolver;
 
 	@Inject
 	private IResourceValidator validator;
 
-	public void customizeDocumentCommand(final IDocument document,
-			final DocumentCommand command) {
+	public void customizeDocumentCommand(final IDocument document, final DocumentCommand command) {
 		if (!isLineDelimiter(document, command)) {
 			return;
 		}
 		try {
-
 			IXtextDocument doc = (IXtextDocument) document;
-			String result = doc
-					.readOnly(new IUnitOfWork<String, XtextResource>() {
-						public String exec(XtextResource resource)
-								throws Exception {
-							return computeResultText(document, command,
-									resource);
-						}
-					});
+			String result = doc.readOnly(new IUnitOfWork<String, XtextResource>() {
+				public String exec(XtextResource resource) throws Exception {
+					return computeResultText(document, command, resource);
+				}
+			});
 			if (result == null)
 				return;
 			command.text = result;
@@ -86,8 +82,7 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 		return delimiterIndex != -1 && originalText.trim().length() == 0;
 	}
 
-	protected String computeResultText(final IDocument document,
-			final DocumentCommand command, XtextResource resource)
+	protected String computeResultText(final IDocument document, final DocumentCommand command, XtextResource resource)
 			throws BadLocationException {
 		if (resource.getContents().isEmpty())
 			return null;
@@ -96,47 +91,44 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 		Model model = (Model) resource.getContents().get(0);
 		if (model.getBlock() == null)
 			return null;
-		EList<XExpression> expressions = model.getBlock()
-				.getExpressions();
+		EList<XExpression> expressions = model.getBlock().getExpressions();
 		if (expressions.isEmpty())
 			return null;
-		XExpression expression = expressions
-				.get(expressions.size() - 1);
-		ICompositeNode node = NodeModelUtils
-				.getNode(expression);
-		if (document.getLineOfOffset(command.offset) + 1 != node
-				.getEndLine())
+		XExpression expression = expressions.get(expressions.size() - 1);
+		if (expression == null) {
 			return null;
-		List<Issue> issues = validator.validate(resource,
-				CheckMode.NORMAL_AND_FAST,
-				CancelIndicator.NullImpl);
+		}
+		ICompositeNode node = NodeModelUtils.getNode(expression);
+		if (node == null || document.getLineOfOffset(command.offset) + 1 != node.getEndLine())
+			return null;
+		List<Issue> issues = validator.validate(resource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
 		if (!issues.isEmpty())
 			return null;
 		XbaseInterpreter xbaseInterpreter = getConfiguredInterpreter(resource);
-		IEvaluationResult result = xbaseInterpreter
-				.evaluate(model.getBlock(),new DefaultEvaluationContext(),new CancelIndicator() {
-					private long stopAt = System.currentTimeMillis()+2000;
+		IEvaluationResult result = xbaseInterpreter.evaluate(model.getBlock(), new DefaultEvaluationContext(),
+				new CancelIndicator() {
+					private long stopAt = System.currentTimeMillis() + 2000;
+
 					public boolean isCanceled() {
-						return System.currentTimeMillis()>stopAt;
+						return System.currentTimeMillis() > stopAt;
 					}
 				});
 		if (result == null)
 			return null;
 
-		String value = ""+result.getResult();
-		if (result.getException()!=null)
-			value = "threw "+result.getException().getClass().getSimpleName();
-		
-		String newText = command.text
-				+ "// "
-				+ value
-				+ " ("
-				+ typeProvider.getType(expression)
-						.getSimpleName() + ")"
-				+ command.text;
-		return newText;
+		String value = "" + result.getResult();
+		if (result.getException() != null)
+			value = "threw " + result.getException().getClass().getSimpleName();
+
+		LightweightTypeReference expressionType = typeResolver.resolveTypes(expression).getActualType(expression);
+		if (expressionType != null) {
+			String newText = command.text + "// " + value + " ("
+					+ expressionType.getSimpleName() + ")" + command.text;
+			return newText;
+		}
+		return command.text + "// " + value;
 	}
-	
+
 	protected XbaseInterpreter getConfiguredInterpreter(XtextResource resource) {
 		XbaseInterpreter interpreter2 = interpreterProvider.get();
 		ResourceSet set = resource.getResourceSet();
@@ -146,40 +138,41 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 			if (context instanceof IJavaProject) {
 				try {
 					final IJavaProject jp = (IJavaProject) context;
-//					String[] runtimeClassPath = JavaRuntime.computeDefaultRuntimeClassPath(jp);
-//					URL[] urls = new URL[runtimeClassPath.length];
-//					for (int i = 0; i < urls.length; i++) {
-//						urls[i] = new URL(runtimeClassPath[i]);
-//					}
-//					cl = new URLClassLoader(urls);
-					IClasspathEntry[] classpath = jp
-							.getResolvedClasspath(true);
+					// String[] runtimeClassPath =
+					// JavaRuntime.computeDefaultRuntimeClassPath(jp);
+					// URL[] urls = new URL[runtimeClassPath.length];
+					// for (int i = 0; i < urls.length; i++) {
+					// urls[i] = new URL(runtimeClassPath[i]);
+					// }
+					// cl = new URLClassLoader(urls);
+					IClasspathEntry[] classpath = jp.getResolvedClasspath(true);
 					final IWorkspaceRoot root = jp.getProject().getWorkspace().getRoot();
 					Set<URL> urls = newHashSet();
 					for (int i = 0; i < classpath.length; i++) {
 						final IClasspathEntry entry = classpath[i];
 						if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
 							IPath outputLocation = entry.getOutputLocation();
-							if (outputLocation==null) {
+							if (outputLocation == null) {
 								outputLocation = jp.getOutputLocation();
 							}
 							IFolder folder = root.getFolder(outputLocation);
 							if (folder.exists()) {
-								urls.add(new URL(folder.getRawLocationURI().toASCIIString()+"/"));
+								urls.add(new URL(folder.getRawLocationURI().toASCIIString() + "/"));
 							}
 						} else if (entry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
 							IPath outputLocation = entry.getOutputLocation();
-							if (outputLocation==null) {
-								IProject project = (IProject) jp.getProject().getWorkspace().getRoot().getContainerForLocation(entry.getPath());
+							if (outputLocation == null) {
+								IProject project = (IProject) jp.getProject().getWorkspace().getRoot()
+										.getContainerForLocation(entry.getPath());
 								IJavaProject javaProject = JavaCore.create(project);
 								outputLocation = javaProject.getOutputLocation();
 							}
 							IFolder folder = root.getFolder(outputLocation);
 							if (folder.exists()) {
-								urls.add(new URL(folder.getRawLocationURI().toASCIIString()+"/"));
+								urls.add(new URL(folder.getRawLocationURI().toASCIIString() + "/"));
 							}
 						} else {
-							urls.add(entry.getPath().toFile().toURL());
+							urls.add(entry.getPath().toFile().toURI().toURL());
 						}
 					}
 					cl = new URLClassLoader(urls.toArray(new URL[urls.size()]));

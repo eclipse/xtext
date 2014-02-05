@@ -34,15 +34,16 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.TypeAwareReferenceProposalCreator;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
-import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
+import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
+import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -156,7 +157,7 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 							}
 						}
 					} 
-					else if (from instanceof LocalVarDescription && !from.getQualifiedName().equals(XbaseScopeProvider.THIS)){
+					else if (from instanceof SimpleIdentifiableElementDescription && isLocalVarOrFormalParameter(from)){
 						if (result instanceof ConfigurableCompletionProposal) {
 							((ConfigurableCompletionProposal) result).setImage(JavaPlugin.getImageDescriptorRegistry().get(JavaPluginImages.DESC_OBJS_LOCAL_VARIABLE));
 						}
@@ -168,6 +169,11 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 		return super.getWrappedFactory(model, reference, proposalFactory);
 	}
 	
+	protected boolean isLocalVarOrFormalParameter(IEObjectDescription desc) {
+		QualifiedName name = desc.getQualifiedName();
+		return !name.equals(IFeatureNames.THIS) && !name.equals(IFeatureNames.SUPER);
+	}
+	
 	@Override
 	public Iterable<IEObjectDescription> queryScope(IScope scope, EObject model, EReference reference,
 			Predicate<IEObjectDescription> filter) {
@@ -177,18 +183,18 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 			Iterable<IEObjectDescription> allDescriptions =	super.queryScope(scope, model, reference, filter);
 			for(IEObjectDescription description: allDescriptions) {
 				if (filter.apply(description)) {
-					if (description instanceof IValidatedEObjectDescription) {
-						IValidatedEObjectDescription featureDescription = (IValidatedEObjectDescription) description;
+					if (description instanceof IIdentifiableElementDescription) {
+						IIdentifiableElementDescription featureDescription = (IIdentifiableElementDescription) description;
 						if (filteredDescriptions.containsKey(featureDescription.getEObjectOrProxy())) {
 							if (isShowShortestSugar() || isShowSmartProposals()) {
 								IEObjectDescription previousDescription = filteredDescriptions.get(featureDescription.getEObjectOrProxy());
-								IValidatedEObjectDescription previousFeatureDescription = null;
+								IIdentifiableElementDescription previousFeatureDescription = null;
 								MultiNameDescription multiNameDescription = null;
-								if (previousDescription instanceof IValidatedEObjectDescription) {
-									previousFeatureDescription = (IValidatedEObjectDescription) previousDescription;
+								if (previousDescription instanceof IIdentifiableElementDescription) {
+									previousFeatureDescription = (IIdentifiableElementDescription) previousDescription;
 								} else if (previousDescription instanceof MultiNameDescription) {
 									multiNameDescription = (MultiNameDescription) previousDescription;
-									previousFeatureDescription = (IValidatedEObjectDescription) multiNameDescription.getDelegate();
+									previousFeatureDescription = (IIdentifiableElementDescription) multiNameDescription.getDelegate();
 								}
 								if (previousFeatureDescription == null)
 									continue;
@@ -197,7 +203,7 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 								if (previousName.length() > candidateName.length()) {
 									if (!isShowSmartProposals()) {
 										filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
-										if (isShowAllProposals() && previousFeatureDescription.getKey().endsWith(")"))
+										if (isShowAllProposals() && previousFeatureDescription.getShadowingKey().indexOf(')') >= 0)
 											others.add(previousFeatureDescription);
 									} else {
 										if (multiNameDescription == null) {
@@ -210,7 +216,7 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 										}
 									}
 								} else if (previousName.length() == candidateName.length()) {
-									if (previousFeatureDescription.getKey().endsWith(")")) {
+									if (previousFeatureDescription.getNumberOfParameters() >= 1) {
 										if (!isShowAllProposals()) {
 											if (!previousFeatureDescription.getEObjectOrProxy().eIsProxy() && previousFeatureDescription.getEObjectOrProxy() instanceof JvmExecutable) {
 												JvmExecutable exectuable = (JvmExecutable) previousFeatureDescription.getEObjectOrProxy();

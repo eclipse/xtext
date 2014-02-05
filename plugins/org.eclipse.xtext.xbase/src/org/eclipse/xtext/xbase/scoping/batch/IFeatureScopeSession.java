@@ -81,10 +81,22 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	IFeatureScopeSession toInstanceContext();
 	
 	/**
+	 * Forks this session with a constructor context. References to delegation constructors are only valid within this context.
+	 * @see #isInstanceContext()
+	 */
+	IFeatureScopeSession toConstructorContext();
+	
+	/**
 	 * Returns <code>true</code> if <code>this</code> can be validly resolved in the current scope.
 	 * @see #toInstanceContext()
 	 */
 	boolean isInstanceContext();
+	
+	/**
+	 * Returns <code>true</code> if the current expression is used in a constructor body.
+	 * @see #toConstructorContext()
+	 */
+	boolean isConstructorContext();
 	
 	/**
 	 * All extension providers as expression buckets.
@@ -152,9 +164,10 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	 * when invoked on the given receiver feature which resolves to the given type.
 	 * 
 	 * @param member the member that shall be accessed.
+	 * @param receiverType the type of the receiver. May be unknown.
 	 * @param receiverFeature the links the receiver of the feature call to the given member. May be unknown.
 	 * @return <code>true</code> if the feature can be accessed.
 	 */
-	boolean isVisible(JvmMember member, @Nullable JvmIdentifiableElement receiverFeature);
+	boolean isVisible(JvmMember member, @Nullable LightweightTypeReference receiverType, @Nullable JvmIdentifiableElement receiverFeature);
 
 }

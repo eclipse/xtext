@@ -18,6 +18,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
 import com.google.inject.Inject;
@@ -101,6 +102,15 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	/**
 	 * {@inheritDoc}
 	 * 
+	 * By default, a session is not a constructor context.
+	 */
+	public boolean isConstructorContext() {
+		return false;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * 
 	 * By default, all public features are considered to be accessible.
 	 */
 	public boolean isVisible(JvmMember member) {
@@ -112,7 +122,7 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	 * 
 	 * By default, all public features are considered to be accessible.
 	 */
-	public boolean isVisible(JvmMember member, @Nullable JvmIdentifiableElement receiverFeature) {
+	public boolean isVisible(JvmMember member, @Nullable LightweightTypeReference receiverType, @Nullable JvmIdentifiableElement receiverFeature) {
 		return visibilityHelper.isVisible(member);
 	}
 	

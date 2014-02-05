@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -15,10 +14,9 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.util.RawSuperTypes;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-
-import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -26,7 +24,6 @@ import com.google.common.collect.Sets;
 @NonNullByDefault
 public class ContextualVisibilityHelper implements IVisibilityHelper {
 
-	private LightweightTypeReference contextType;
 	private JvmType rawContextType;
 	private Set<String> superTypeNames;
 	private IVisibilityHelper parent;
@@ -34,8 +31,7 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 
 	public ContextualVisibilityHelper(IVisibilityHelper parent, LightweightTypeReference contextType) {
 		this.parent = parent;
-		this.contextType = contextType;
-		this.rawContextType = contextType.getType();
+		this.rawContextType = contextType.getRawTypeReference().getType();
 		if (rawContextType instanceof JvmDeclaredType) {
 			this.packageName = ((JvmDeclaredType) rawContextType).getPackageName();
 		}
@@ -43,17 +39,26 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 	
 	public ContextualVisibilityHelper(IVisibilityHelper parent, LightweightTypeReference contextType, String packageName) {
 		this.parent = parent;
-		this.contextType = contextType;
-		this.rawContextType = contextType.getType();
+		this.rawContextType = contextType.getRawTypeReference().getType();
 		this.packageName = packageName;
+	}
+	
+	public ContextualVisibilityHelper(IVisibilityHelper parent, JvmType rawContextType, String packageName) {
+		this.parent = parent;
+		this.rawContextType = rawContextType;
+		this.packageName = packageName;
+	}
+	
+	public ContextualVisibilityHelper(IVisibilityHelper parent, JvmType rawContextType) {
+		this.parent = parent;
+		this.rawContextType = rawContextType;
+		if (rawContextType instanceof JvmDeclaredType) {
+			this.packageName = ((JvmDeclaredType) rawContextType).getPackageName();
+		}
 	}
 	
 	public ContextualVisibilityHelper(LightweightTypeReference contextType) {
 		this(new PublicVisibilityHelper(), contextType);
-	}
-	
-	public LightweightTypeReference getContextType() {
-		return contextType;
 	}
 	
 	public JvmType getRawContextType() {
@@ -61,6 +66,7 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 	}
 	
 	public boolean isVisible(JvmMember member) {
+		// TODO private visibility?
 		JvmVisibility visibility = member.getVisibility();
 		if (visibility == JvmVisibility.PUBLIC) {
 			return true;
@@ -71,12 +77,7 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 		}
 		if (type != null && visibility == JvmVisibility.PROTECTED) {
 			if (superTypeNames == null) {
-				List<LightweightTypeReference> superTypes = contextType.getRawTypeReference().getAllSuperTypes();
-				Set<String> superTypeNames = Sets.newHashSetWithExpectedSize(superTypes.size());
-				for(LightweightTypeReference superType: superTypes) {
-					superTypeNames.add(superType.getRawTypeReference().getIdentifier());
-				}
-				this.superTypeNames = superTypeNames;
+				this.superTypeNames = computeSuperTypeNames();
 			}
 			if (superTypeNames.contains(type.getIdentifier())) {
 				return true;
@@ -95,6 +96,10 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 			}
 		}
 		return parent.isVisible(member);
+	}
+
+	protected Set<String> computeSuperTypeNames() {
+		return new RawSuperTypes().collectNames(rawContextType);
 	}
 	
 }

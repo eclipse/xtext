@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
@@ -50,11 +48,6 @@ public class TypeResolutionStateAdapter extends AbstractRootedReentrantTypeResol
 	}
 	
 	@Override
-	protected IScope getFeatureScope(XAbstractFeatureCall featureCall) {
-		return context.getFeatureScope(featureCall);
-	}
-
-	@Override
 	protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
 		return context.isHandled(identifiableElement);
 	}
@@ -69,11 +62,6 @@ public class TypeResolutionStateAdapter extends AbstractRootedReentrantTypeResol
 		return this.context.isHandled(context);
 	}
 	
-	@Override
-	protected IResolvedTypes getResolvedTypesInContextOf(EObject context) {
-		return this.context.getResolvedTypesInContextOf(context);
-	}
-
 	public void initializeFrom(EObject root) {
 		throw new IllegalStateException("Attempt to reinitialize the root resolver");
 	}

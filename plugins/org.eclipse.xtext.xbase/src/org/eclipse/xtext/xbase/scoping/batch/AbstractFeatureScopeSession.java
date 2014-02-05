@@ -88,6 +88,10 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	public IFeatureScopeSession toInstanceContext() {
 		return new InstanceFeatureScopeSession(this);
 	}
+	
+	public IFeatureScopeSession toConstructorContext() {
+		return new ConstructorFeatureScopeSession(this);
+	}
 
 	public IFeatureScopeSession addLocalElement(QualifiedName name, JvmIdentifiableElement element, ITypeReferenceOwner owner) {
 		IFeatureScopeSession result = addLocalElements(Collections.singletonMap(name, element), owner);

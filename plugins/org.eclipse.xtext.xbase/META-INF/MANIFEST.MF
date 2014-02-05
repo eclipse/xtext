@@ -64,6 +64,7 @@ Export-Package: org.eclipse.xtext.xbase;x-friends:="org.eclipse.xtext.xbase.juni
  org.eclipse.xtext.xbase.typesystem.computation;x-internal:=true,
  org.eclipse.xtext.xbase.typesystem.conformance;x-internal:=true,
  org.eclipse.xtext.xbase.typesystem.internal;x-internal:=true,
+ org.eclipse.xtext.xbase.typesystem.internal.util;x-internal:=true,
  org.eclipse.xtext.xbase.typesystem.legacy;x-internal:=true,
  org.eclipse.xtext.xbase.typesystem.override;x-internal:=true,
  org.eclipse.xtext.xbase.typesystem.references;x-internal:=true,

@@ -52,7 +52,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
               String _message = e.getMessage();
               String _plus = ("invalid format : " + _message);
               context.addError(_initializer, _plus);
-              _xblockexpression = (new MessageFormat(""));
+              _xblockexpression = new MessageFormat("");
             }
             _xtrycatchfinallyexpression = _xblockexpression;
           } else {

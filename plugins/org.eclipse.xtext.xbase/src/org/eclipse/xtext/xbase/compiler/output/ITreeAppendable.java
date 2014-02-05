@@ -53,6 +53,8 @@ public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 	
 	ITreeAppendable append(JvmType type);
 	
+	ITreeAppendable append(Class<?> type);
+	
 	ITreeAppendable append(CharSequence content);
 	
 	ITreeAppendable decreaseIndentation();

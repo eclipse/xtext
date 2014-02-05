@@ -26,7 +26,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.RawSuperTypes;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
@@ -71,10 +71,6 @@ public class TypeUsageCollector {
 	private ImplicitlyImportedTypes implicitImports;
 	
 	@Inject
-	@SuppressWarnings("deprecation")
-	private org.eclipse.xtext.common.types.util.SuperTypeCollector superTypeCollector;
-	
-	@Inject
 	private ILocationInFileProvider locationInFileProvider;
 
 	@Inject
@@ -88,6 +84,9 @@ public class TypeUsageCollector {
 	
 	@Inject
 	private IBatchTypeResolver batchTypeResolver;
+	
+	@Inject
+	private RawSuperTypes rawSuperTypes;
 	
 	@Inject
 	private FeatureCallAsTypeLiteralHelper typeLiteralHelper;
@@ -433,14 +432,11 @@ public class TypeUsageCollector {
 		typeUsages.addExtensionImport(declarator);
 	}
 
-	@SuppressWarnings("deprecation")
 	protected boolean needsStaticImport(JvmDeclaredType declarator) {
 		if(currentThisType == declarator)
 			return false;
 		if (knownTypesForStaticImports == null && currentThisType != null) {
-			JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-			reference.setType(currentThisType);
-			knownTypesForStaticImports = superTypeCollector.collectSuperTypesAsRawTypes(reference);
+			knownTypesForStaticImports = rawSuperTypes.collect(currentThisType);
 		}
 		if (knownTypesForStaticImports != null && knownTypesForStaticImports.contains(declarator))
 			return false;

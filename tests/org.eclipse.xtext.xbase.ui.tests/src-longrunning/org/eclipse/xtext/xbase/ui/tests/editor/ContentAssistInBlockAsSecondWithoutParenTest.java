@@ -66,15 +66,21 @@ public class ContentAssistInBlockAsSecondWithoutParenTest extends ContentAssistI
 		newBuilder().append("((''+''))").assertText(expect(getKeywordsAndStatics(), VARIABLE_DECL, CAST_INSTANCEOF));
 	}
 
-	@Ignore("TODO implement me")
 	@Override
 	@Test public void testOnStringLiteral_31() throws Exception {
+		newBuilder().append(";('').").assertText(getStringFeatures());
+	}
+	
+	@Test public void testOnStringLiteral_39() throws Exception {
 		newBuilder().append("('').").assertText();
 	}
 	
-	@Ignore("TODO implement me")	
 	@Override
 	@Test public void testAfterBinaryOperation_04() throws Exception {
+		newBuilder().append(";(''+'').").assertText(getStringFeatures());
+	}
+	
+	@Test public void testAfterBinaryOperation_12() throws Exception {
 		newBuilder().append("(''+'').").assertText();
 	}
 	

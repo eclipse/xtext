@@ -16,10 +16,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
-import org.junit.Ignore;
 import org.junit.Test;
-
-import testdata.Annotation2;
 
 import com.google.inject.Inject;
 

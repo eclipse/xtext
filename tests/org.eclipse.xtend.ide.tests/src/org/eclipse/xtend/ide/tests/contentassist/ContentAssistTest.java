@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.tests.contentassist;
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,21 +20,15 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
-import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistInBlockTest;
-import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -44,7 +37,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest implements IJavaProjectProvider {
+public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 	
 	protected static String[] VARIABLE_DECL = {"val", "var", "extension"};
 
@@ -53,6 +46,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 	@BeforeClass
 	public static void setUpProject() throws Exception {
 		project = createPluginProject(PROJECT_NAME);
+		doInitFeatures(JavaCore.create(project));
 	}
 
 	@AfterClass
@@ -64,12 +58,6 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 	@Override
 	protected String[] getVariableDeclarationKeywords() {
 		return VARIABLE_DECL;
-	}
-	
-	@Override
-	@Ignore
-	@Test public void testForLoop_02() throws Exception {
-		super.testForLoop_02();
 	}
 	
 	// all these test cases declared a local variable 'this' which is not allowed in Xtend
@@ -170,10 +158,10 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 		result.add("super");
 		result.add("this");
 		result.add("class");
-//		result.add("clone");
+		result.add("clone");
 		result.add("hashCode");
 		result.add("toString");
-//		result.add("finalize");
+		result.add("finalize");
 		result.add("notify");
 		result.add("notifyAll");
 		result.add("equals()");
@@ -239,6 +227,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 		return false;
 	}
 	
+	@Override
 	public IJavaProject getJavaProject(ResourceSet resourceSet) {
 		IJavaProject javaProject = findJavaProject(PROJECT_NAME);
 		if (javaProject == null || !javaProject.exists()) {
@@ -252,28 +241,6 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 		return javaProject;
 	}
 
-	@Override
-	protected XtextResourceSet getResourceSet() {
-		XtextResourceSet resourceSet = super.getResourceSet();
-		IJvmTypeProvider.Factory typeProviderFactory = new JdtTypeProviderFactory(this);
-		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-		return resourceSet;
-	}
-	
-	protected void initializeTypeProvider(XtextResource result) {
-		XtextResourceSet resourceSet = (XtextResourceSet) result.getResourceSet();
-		IJvmTypeProvider.Factory typeProviderFactory = new JdtTypeProviderFactory(this);
-		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-		resourceSet.setClasspathURIContext(getJavaProject(resourceSet));
-	}
-	
-	@Override
-	public XtextResource getResourceFor(InputStream stream) {
-		XtextResource result = super.getResourceFor(stream);
-		initializeTypeProvider(result);
-		return result;
-	}
-	
 	public static IProject createPluginProject(String name) throws CoreException {
 		Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);

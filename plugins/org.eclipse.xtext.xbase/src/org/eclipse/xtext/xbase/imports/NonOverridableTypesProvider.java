@@ -10,17 +10,18 @@ package org.eclipse.xtext.xbase.imports;
 import static com.google.common.collect.Maps.*;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
+import org.eclipse.xtext.common.types.util.RawSuperTypes;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.common.types.util.VisibilityService;
+import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
 import com.google.inject.Inject;
 
@@ -33,13 +34,13 @@ import com.google.inject.Inject;
 public class NonOverridableTypesProvider {
 
 	@Inject
-	private SuperTypeCollector superTypeCollector;
-
-	@Inject
 	private TypeReferences typeReferences;
-
+	
 	@Inject
-	private VisibilityService visibilityService;
+	private IVisibilityHelper visibilityHelper;
+	
+	@Inject
+	private RawSuperTypes rawSuperTypes;
 
 	private Map<JvmMember, Map<String, JvmIdentifiableElement>> visibleElements = newHashMap();
 
@@ -69,11 +70,13 @@ public class NonOverridableTypesProvider {
 			if (!result.containsKey(context.getSimpleName()))
 				result.put(context.getSimpleName(), context);
 			JvmDeclaredType contextType = (JvmDeclaredType) context;
-			addInnerTypes(contextType, "", contextType, result);
-			JvmParameterizedTypeReference contextTypeRef = typeReferences.createTypeRef(contextType);
-			for (JvmType superType : superTypeCollector.collectSuperTypesAsRawTypes(contextTypeRef)) {
+			ContextualVisibilityHelper visibilityHelper = new ContextualVisibilityHelper(this.visibilityHelper, contextType);
+			addInnerTypes(contextType, "", visibilityHelper, result);
+			
+			Set<JvmType> superTypes = rawSuperTypes.collect(contextType);
+			for (JvmType superType : superTypes) {
 				if (superType instanceof JvmDeclaredType)
-					addInnerTypes((JvmDeclaredType) superType, "", contextType, result);
+					addInnerTypes((JvmDeclaredType) superType, "", visibilityHelper, result);
 			}
 		}
 		if (context instanceof JvmTypeParameterDeclarator)
@@ -83,15 +86,18 @@ public class NonOverridableTypesProvider {
 			process(declaringType, result);
 	}
 
-	protected void addInnerTypes(JvmDeclaredType type, String prefix, JvmDeclaredType contextType,
+	protected void addInnerTypes(
+			JvmDeclaredType type,
+			String prefix,
+			IVisibilityHelper visibilityHelper,
 			Map<String, JvmIdentifiableElement> result) {
 		for (JvmMember member : type.getMembers()) {
-			if (member instanceof JvmDeclaredType && visibilityService.isVisible(member, contextType)) {
+			if (member instanceof JvmDeclaredType && visibilityHelper.isVisible(member)) {
 				String localName = prefix + member.getSimpleName();
 				if (!result.containsKey(localName)) {
 					result.put(localName, member);
 				}
-				addInnerTypes((JvmDeclaredType) member, prefix + member.getSimpleName() + ".", contextType, result);
+				addInnerTypes((JvmDeclaredType) member, prefix + member.getSimpleName() + ".", visibilityHelper, result);
 			}
 		}
 	}

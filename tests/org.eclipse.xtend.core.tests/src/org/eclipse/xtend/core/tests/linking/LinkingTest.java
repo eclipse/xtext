@@ -46,7 +46,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.lib.Functions;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -87,7 +88,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 	protected IXtendJvmAssociations associator;
 	
 	@Inject
-	private ITypeProvider typeProvider;
+	private IBatchTypeResolver typeResolver;
 	
 	@Test public void testExplicitTypeOverSugar_01() throws Exception {
 		XtendFile file = file(
@@ -1464,21 +1465,33 @@ public class LinkingTest extends AbstractXtendTestCase {
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("java.lang.Iterable<Z>", returnType.getIdentifier());
-		JvmTypeReference bodyType = typeProvider.getType(func.getExpression());
+		LightweightTypeReference bodyType = getType(func.getExpression());
 		assertEquals("X<Z>", bodyType.getIdentifier());
-		JvmTypeReference bodyReturnType = typeProvider.getCommonReturnType(func.getExpression(), true);
+		LightweightTypeReference bodyReturnType = getReturnType(func.getExpression());
 		assertEquals("X<Z>", bodyReturnType.getIdentifier());
 	}
 	
+	protected LightweightTypeReference getReturnType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getReturnType(expression);
+	}
+
+	protected LightweightTypeReference getType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getActualType(expression);
+	}
+	
+	protected LightweightTypeReference getType(JvmIdentifiableElement identifiable) {
+		return typeResolver.resolveTypes(identifiable).getActualType(identifiable);
+	}
+
 	@Test public void testTypeParameterReference_12() throws Exception {
 		XtendFunction func = (XtendFunction) ((XtendClass)file("class X<Z> implements Iterable<Z> { def Iterable<String> foo() { val result = new X return result }}")
 				.getXtendTypes().get(0)).getMembers().get(0);
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("java.lang.Iterable<java.lang.String>", returnType.getIdentifier());
-		JvmTypeReference bodyType = typeProvider.getType(func.getExpression());
+		LightweightTypeReference bodyType = getType(func.getExpression());
 		assertEquals("void", bodyType.getIdentifier());
-		JvmTypeReference bodyReturnType = typeProvider.getCommonReturnType(func.getExpression(), true);
+		LightweightTypeReference bodyReturnType = getReturnType(func.getExpression());
 		assertEquals("X<java.lang.String>", bodyReturnType.getIdentifier());
 	}
 	
@@ -1488,9 +1501,9 @@ public class LinkingTest extends AbstractXtendTestCase {
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("java.lang.Iterable<Y>", returnType.getIdentifier());
-		JvmTypeReference bodyType = typeProvider.getType(func.getExpression());
+		LightweightTypeReference bodyType = getType(func.getExpression());
 		assertEquals("void", bodyType.getIdentifier());
-		JvmTypeReference bodyReturnType = typeProvider.getCommonReturnType(func.getExpression(), true);
+		LightweightTypeReference bodyReturnType = getReturnType(func.getExpression());
 		assertEquals("X<Y>", bodyReturnType.getIdentifier());
 	}
 	
@@ -1508,9 +1521,9 @@ public class LinkingTest extends AbstractXtendTestCase {
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("java.lang.Iterable<java.lang.String>", returnType.getIdentifier());
-		JvmTypeReference bodyType = typeProvider.getType(func.getExpression());
+		LightweightTypeReference bodyType = getType(func.getExpression());
 		assertEquals("X<java.lang.String>", bodyType.getIdentifier());
-		JvmTypeReference bodyReturnType = typeProvider.getCommonReturnType(func.getExpression(), true);
+		LightweightTypeReference bodyReturnType = getReturnType(func.getExpression());
 		assertEquals("X<java.lang.String>", bodyReturnType.getIdentifier());
 	}
 	
@@ -1520,9 +1533,9 @@ public class LinkingTest extends AbstractXtendTestCase {
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		JvmTypeReference returnType = operation.getReturnType();
 		assertEquals("java.lang.Iterable<Y>", returnType.getIdentifier());
-		JvmTypeReference bodyType = typeProvider.getType(func.getExpression());
+		LightweightTypeReference bodyType = getType(func.getExpression());
 		assertEquals("X<Y>", bodyType.getIdentifier());
-		JvmTypeReference bodyReturnType = typeProvider.getCommonReturnType(func.getExpression(), true);
+		LightweightTypeReference bodyReturnType = getReturnType(func.getExpression());
 		assertEquals("X<Y>", bodyReturnType.getIdentifier());
 	}
 	
@@ -2327,14 +2340,14 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertTrue("Resource contained errors : " + issues.toString(), issues.isEmpty());
 		XtendFunction function = (XtendFunction) clazz.getMembers().get(1);
 		XExpression body = function.getExpression();
-		JvmTypeReference bodyType = typeProvider.getType(body);
+		LightweightTypeReference bodyType = getType(body);
 		assertEquals("java.lang.Iterable<org.eclipse.xtext.AbstractRule>", bodyType.getIdentifier());
 		XBlockExpression block = (XBlockExpression) body;
 		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(0);
 		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
 		JvmFormalParameter e1 = closure.getFormalParameters().get(0);
 		assertEquals("e1", e1.getSimpleName());
-		assertEquals("org.eclipse.xtext.RuleCall", typeProvider.getTypeForIdentifiable(e1).getIdentifier());
+		assertEquals("org.eclipse.xtext.RuleCall", getType(e1).getIdentifier());
 	}
 	
 	@Test public void testBug342848_01() throws Exception {
@@ -2609,7 +2622,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 		XBlockExpression block = (XBlockExpression) body;
 		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(0);
 		XFeatureCall superCall = (XFeatureCall) featureCall.getMemberCallTarget();
-		JvmTypeReference type = typeProvider.getType(superCall);
+		LightweightTypeReference type = getType(superCall);
 		assertEquals("java.util.ArrayList<java.lang.String>", type.getIdentifier());
 	}
 	

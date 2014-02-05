@@ -192,7 +192,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 
 	def protected void formatStaticQualifier(INode node, FormattableDocument document) {
 		if (node instanceof ICompositeNode) {
-			val leafs = (node as ICompositeNode).leafNodes
+			val leafs = node.leafNodes
 			for (n : leafs)
 				if (n.grammarElement instanceof Keyword && n.text == "::") {
 					document += n.prepend[noSpace]
@@ -423,8 +423,8 @@ class XbaseFormatter2 extends AbstractFormatter {
 		var EObject top = expr
 		var calls = <XMemberFeatureCall>newArrayList()
 		while (top instanceof XMemberFeatureCall) {
-			calls += top as XMemberFeatureCall
-			top = (top as XMemberFeatureCall).memberCallTarget
+			calls += top
+			top = top.memberCallTarget
 		}
 		format(top, format)
 
@@ -506,7 +506,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 		if (node != null && node.grammarElement instanceof CrossReference) {
 			val terminal = (node.grammarElement as CrossReference).terminal
 			if (terminal instanceof RuleCall)
-				return (terminal as RuleCall).rule
+				return terminal.rule
 		}
 	}
 

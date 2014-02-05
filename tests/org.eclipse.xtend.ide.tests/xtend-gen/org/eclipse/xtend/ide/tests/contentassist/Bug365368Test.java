@@ -22,7 +22,7 @@ public class Bug365368Test extends AbstractXtendContentAssistBugTest {
     ContentAssistProcessorTestBuilder _append = _newBuilder.append("class C {\n\t\t\tdef void ^as() {}\n\t\t\tdef void aa() {}\n\t\t\tdef void bb() {}\n\t\t\tdef void m() { this.");
     _append.assertText(
       "^as", "aa", "bb", "m", 
-      "class", "equals()", "hashCode", "identityEquals()", "notify", "notifyAll", "toString", "wait", "wait()", "wait()");
+      "class", "clone", "equals()", "finalize", "hashCode", "identityEquals()", "notify", "notifyAll", "toString", "wait", "wait()", "wait()");
   }
   
   @Test

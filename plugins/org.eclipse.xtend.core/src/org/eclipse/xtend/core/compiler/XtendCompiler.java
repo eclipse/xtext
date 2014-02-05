@@ -33,7 +33,6 @@ import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XCatchClause;
-import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XListLiteral;
@@ -44,7 +43,6 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -55,7 +53,6 @@ import com.google.inject.Provider;
  * @author Jan Koehnlein
  * @author Sebastian Zarnekow
  */
-@SuppressWarnings("deprecation")
 @NonNullByDefault
 public class XtendCompiler extends XbaseCompiler {
 
@@ -65,9 +62,6 @@ public class XtendCompiler extends XbaseCompiler {
 	@Inject	
 	private Provider<DefaultIndentationHandler> indentationHandler;
 	
-	@Inject
-	private ITypeProvider typeProvider;
-
 	@Override
 	protected String getFavoriteVariableName(EObject ex) {
 		if (ex instanceof RichStringForLoop)
@@ -216,7 +210,8 @@ public class XtendCompiler extends XbaseCompiler {
 			}
 			debugAppendable.newLine();
 			debugAppendable.append("for(final ");
-			LightweightTypeReference paramType = getTypeResolver().resolveTypes(parameter).getActualType(parameter);
+			// TODO tracing if parameter was explicitly declared
+			LightweightTypeReference paramType = getLightweightType(parameter);
 			if (paramType != null) {
 				debugAppendable.append(paramType);
 			} else {
@@ -334,25 +329,24 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 
 	public void _toJavaStatement(RichString richString, ITreeAppendable b, boolean isReferenced) {
-		JvmType stringConcatenationClient = getTypeReferences().findDeclaredType(StringConcatenationClient.class, richString);
-		JvmTypeReference actualType = typeProvider.getType(richString);
+		LightweightTypeReference actualType = getLightweightType(richString);
 		b = b.trace(richString);
-		if (actualType.getType().equals(stringConcatenationClient)) {
+		if (actualType.isType(StringConcatenationClient.class)) {
 			String resultVariableName = b.declareSyntheticVariable(richString, "_client");
 			b.newLine();
-			serialize(actualType, richString, b);
+			b.append(actualType);
 			b.append(" ");
 			b.append(resultVariableName);
 			b.append(" = new ");
-			serialize(actualType, richString, b);
+			b.append(actualType);
 			b.append("() {");
 			b.openScope();
-			reassignThisInClosure(b, stringConcatenationClient);
+			reassignThisInClosure(b, actualType.getType());
 			b.increaseIndentation().newLine();
 			b.append("@");
-			serialize(getTypeReferences().getTypeForName(Override.class, richString), richString, b);
+			b.append(Override.class);
 			b.newLine().append("protected void appendTo(");
-			serialize(getTypeReferences().getTypeForName(StringConcatenationClient.TargetStringConcatenation.class, richString), richString, b);
+			b.append(StringConcatenationClient.TargetStringConcatenation.class);
 			String variableName = b.declareSyntheticVariable(richString, "_builder");
 			b.append(" ").append(variableName).append(") {");
 			b.increaseIndentation();
@@ -362,14 +356,13 @@ public class XtendCompiler extends XbaseCompiler {
 			b.decreaseIndentation().newLine().append("}").decreaseIndentation().newLine().append("};");
 		} else {
 			// declare variable
-			JvmTypeReference type = getTypeReferences().getTypeForName(StringConcatenation.class, richString);
 			String variableName = b.declareSyntheticVariable(richString, "_builder");
 			b.newLine();
-			serialize(type, richString, b);
+			b.append(StringConcatenation.class);
 			b.append(" ");
 			b.append(variableName);
 			b.append(" = new ");
-			serialize(type, richString, b);
+			b.append(StringConcatenation.class);
 			b.append("();");
 			RichStringPrepareCompiler compiler = new RichStringPrepareCompiler(b, variableName, richString);
 			richStringProcessor.process(richString, compiler, indentationHandler.get());
@@ -386,7 +379,7 @@ public class XtendCompiler extends XbaseCompiler {
 	
 	public void _toJavaExpression(RichString richString, ITreeAppendable b) {
 		b.append(getVarName(richString, b));
-		if(getTypeReferences().is(typeProvider.getType(richString), String.class))
+		if(getLightweightType(richString).isType(String.class))
 			b.append(".toString()");
 	}
 	
@@ -408,7 +401,7 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 
 	protected void appendExtensionAnnotation(EObject context, ITreeAppendable appendable, boolean newLine) {
-		JvmType extension = getTypeReferences().findDeclaredType(Extension.class, context);
+		JvmType extension = findKnownTopLevelType(Extension.class, context);
 		if (extension != null) {
 			appendable.append("@");
 			appendable.append(extension);
@@ -420,7 +413,7 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 	
 	@Override
-	protected JvmTypeReference appendVariableTypeAndName(XVariableDeclaration varDeclaration, ITreeAppendable appendable) {
+	protected LightweightTypeReference appendVariableTypeAndName(XVariableDeclaration varDeclaration, ITreeAppendable appendable) {
 		if (varDeclaration instanceof XtendVariableDeclaration && ((XtendVariableDeclaration) varDeclaration).isExtension())
 			appendExtensionAnnotation(varDeclaration, appendable, true);
 		return super.appendVariableTypeAndName(varDeclaration, appendable);
@@ -433,10 +426,10 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 	
 	@Override
-	protected void appendClosureParameter(JvmFormalParameter closureParam, JvmTypeReference parameterType,
-			XClosure closure, ITreeAppendable appendable) {
-		appendExtensionAnnotation(closureParam, closure, appendable, false);
-		super.appendClosureParameter(closureParam, parameterType, closure, appendable);
+	protected void appendClosureParameter(JvmFormalParameter closureParam, LightweightTypeReference parameterType,
+			ITreeAppendable appendable) {
+		appendExtensionAnnotation(closureParam, closureParam, appendable, false);
+		super.appendClosureParameter(closureParam, parameterType, appendable);
 	}
 	
 	@Override

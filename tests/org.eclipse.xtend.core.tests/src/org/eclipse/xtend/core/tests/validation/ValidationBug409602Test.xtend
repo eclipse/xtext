@@ -310,4 +310,66 @@ class ValidationBug409602Test extends AbstractXtendTestCase {
 		''')
 		helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.")
 	}
+	
+	@Test def void test_19() {
+		val file = parser.parse('''
+			class C {
+				def void m() {
+					while(true)
+						return ''
+				}
+			}
+		''')
+		helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.")
+	}
+	
+	@Test def void test_20() {
+		val file = parser.parse('''
+			class C {
+				def m() {
+					while(true)
+						return ''
+				}
+			}
+		''')
+		helper.assertNoErrors(file)
+	}
+	
+	@Test def void test_21() {
+		val file = parser.parse('''
+			class C {
+				def m() {
+					while(true)
+						return ''
+					return ''
+				}
+			}
+		''')
+		helper.assertNoErrors(file)
+	}
+	
+	@Test def void test_22() {
+		val file = parser.parse('''
+			class C {
+				def String m() {
+					while(true)
+						return ''
+				}
+			}
+		''')
+		helper.assertNoErrors(file)
+	}
+	
+	@Test def void test_23() {
+		val file = parser.parse('''
+			class C {
+				def String m() {
+					while(true)
+						return ''
+					return ''
+				}
+			}
+		''')
+		helper.assertNoErrors(file)
+	}
 }

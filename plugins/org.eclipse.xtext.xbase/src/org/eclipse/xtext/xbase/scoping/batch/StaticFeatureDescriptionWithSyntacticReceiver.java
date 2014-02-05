@@ -37,5 +37,10 @@ public class StaticFeatureDescriptionWithSyntacticReceiver extends StaticFeature
 	public LightweightTypeReference getSyntacticReceiverType() {
 		return receiverType;
 	}
+	
+	@Override
+	public boolean isValidStaticState() {
+		return receiverType == null;
+	}
 
 }

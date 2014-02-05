@@ -77,4 +77,9 @@ public class MultiNameDescription extends AbstractEObjectDescription {
 		return delegate.getEClass();
 	}
 	
+	@Override
+	public String toString() {
+		return otherNames.toString() + delegate;
+	}
+	
 }

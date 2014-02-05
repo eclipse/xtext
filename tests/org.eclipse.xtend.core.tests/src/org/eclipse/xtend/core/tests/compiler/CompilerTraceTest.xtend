@@ -504,7 +504,7 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 			  /**
 			   * my comment
 			   */
-			  public void method(final Function1<? super #String#,? extends Integer> fun) {
+			  public void method(final Function1<? super #String#, ? extends Integer> fun) {
 			  }
 			}
 		''')
@@ -527,7 +527,7 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 			  /**
 			   * my comment
 			   */
-			  public void method(final #Function1<? super String,? extends Integer># fun) {
+			  public void method(final #Function1<? super String, ? extends Integer># fun) {
 			  }
 			}
 		''')
