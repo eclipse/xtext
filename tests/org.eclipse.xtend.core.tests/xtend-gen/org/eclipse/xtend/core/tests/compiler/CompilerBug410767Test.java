@@ -50,7 +50,7 @@ public class CompilerBug410767Test extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Map<C1<C1<? extends Object>>,C1<C1<? extends Object>>> m(final C1<? extends Object> p) {");
+    _builder_1.append("public Map<C1<C1<?>>, C1<C1<?>>> m(final C1<?> p) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return p.toMap();");
@@ -101,7 +101,7 @@ public class CompilerBug410767Test extends AbstractXtendCompilerTest {
     _builder_1.append("public abstract class C<T extends Object> implements C1<T> {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Map<T,C1<T>> m() {");
+    _builder_1.append("public Map<T, C1<T>> m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.toMap();");
@@ -152,7 +152,7 @@ public class CompilerBug410767Test extends AbstractXtendCompilerTest {
     _builder_1.append("public abstract class C<T extends Object> implements C1<T> {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Map<? extends String,? extends C1<? extends String>> m(final C<? extends String> p) {");
+    _builder_1.append("public Map<? extends String, ? extends C1<? extends String>> m(final C<? extends String> p) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return p.toMap();");
@@ -203,7 +203,7 @@ public class CompilerBug410767Test extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Map<? extends Object,C1<? extends Object>> m(final C1<? extends Object> p) {");
+    _builder_1.append("public Map<?, C1<?>> m(final C1<?> p) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return p.toMap();");

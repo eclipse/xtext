@@ -3,8 +3,6 @@
 */
 package org.eclipse.xtext.xbase.tests;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.junit4.GlobalRegistries;
@@ -15,8 +13,6 @@ import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
@@ -36,7 +32,6 @@ import com.google.inject.Singleton;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
 
 	protected GlobalStateMemento stateBeforeInjectorCreation;
@@ -96,11 +91,6 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 		}
 		
 		@Override
-		public Class<? extends IScopeProvider> bindIScopeProvider() {
-			return DisabledXbaseScopeProvider.class;
-		}
-		
-		@Override
 		public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
 			return SuspiciousOverloadIsErrorInTests.class;
 		}
@@ -112,14 +102,6 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 		protected void initialize(IAcceptor<PreferenceKey> iAcceptor) {
 			super.initialize(iAcceptor);
 			iAcceptor.accept(create(IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, SeverityConverter.SEVERITY_ERROR));
-		}
-	}
-	
-	public static class DisabledXbaseScopeProvider extends org.eclipse.xtext.xbase.scoping.XbaseScopeProvider {
-		@Deprecated
-		@Override
-		public IScope getScope(EObject context, EReference reference) {
-			throw new UnsupportedOperationException();
 		}
 	}
 

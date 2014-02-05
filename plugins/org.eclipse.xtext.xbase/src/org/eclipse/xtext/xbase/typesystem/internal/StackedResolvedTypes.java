@@ -13,6 +13,8 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -23,6 +25,10 @@ import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.IExpressionScope.Anchor;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -260,7 +266,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	
 	@Override
 	@Nullable
-	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
+	protected LightweightTypeReference doGetDeclaredType(JvmIdentifiableElement identifiable) {
 		return null;
 	}
 	
@@ -433,4 +439,30 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		return parent.getSeverities();
 	}
 
+	public IExpressionScope getExpressionScope(EObject context, EReference reference, Anchor anchor) {
+		return parent.getExpressionScope(context, reference, anchor);
+	}
+	
+	public IExpressionScope getExpressionScope(EObject context, EReference reference) {
+		return parent.getExpressionScope(context, reference);
+	}
+	
+	@Override
+	protected void addExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor, IResolvedTypes resolvedTypes) {
+		parent.addExpressionScope(context, session, anchor, resolvedTypes);
+	}
+	
+	@Override
+	protected void replacePreviousExpressionScope(XExpression context, IFeatureScopeSession session,  IExpressionScope.Anchor anchor) {
+		parent.replacePreviousExpressionScope(context, session, anchor);
+	}
+	
+	@Override
+	protected Map<JvmIdentifiableElement, LightweightTypeReference> getFlattenedReassignedTypes() {
+		Map<JvmIdentifiableElement, LightweightTypeReference> result = parent.getFlattenedReassignedTypes();
+		if (result == null)
+			return super.getFlattenedReassignedTypes();
+		result.putAll(basicGetReassignedTypes());
+		return result;
+	}
 }

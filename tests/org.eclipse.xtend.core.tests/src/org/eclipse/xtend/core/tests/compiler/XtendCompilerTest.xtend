@@ -93,7 +93,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			public class Test {
 			  // does not work, Java error
-			  def <T,R> nonWorkingExample((T)=>R... functionList) {
+			  def <T, R> nonWorkingExample((T)=>R... functionList) {
 			    var value = 0
 			    for (function : functionList)
 			    {
@@ -125,9 +125,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class Test {
-			  public <T extends Object, R extends Object> int nonWorkingExample(final Function1<? super T,? extends R>... functionList) {
+			  public <T extends Object, R extends Object> int nonWorkingExample(final Function1<? super T, ? extends R>... functionList) {
 			    int value = 0;
-			    for (final Function1<? super T,? extends R> function : functionList) {
+			    for (final Function1<? super T, ? extends R> function : functionList) {
 			      value = (value + 1);
 			    }
 			    return value;
@@ -443,7 +443,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        return "";
 			      }
 			      final String x = _xifexpression;
-			      _xblockexpression = (x);
+			      _xblockexpression = x;
 			    }
 			    return _xblockexpression;
 			  }
@@ -524,7 +524,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        }
 			      }
 			      final String r = _switchResult;
-			      _xblockexpression = (r);
+			      _xblockexpression = r;
 			    }
 			    return _xblockexpression;
 			  }
@@ -663,8 +663,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class Foo {
-			  public void foo(final Function1<? super String,? extends String> func) {
-			    final Function1<String,String> _function = new Function1<String,String>() {
+			  public void foo(final Function1<? super String, ? extends String> func) {
+			    final Function1<String, String> _function = new Function1<String, String>() {
 			      public String apply(final String it) {
 			        return this.apply(it);
 			      }
@@ -776,7 +776,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        {
 			          Foo.this.toString();
 			          Foo.super.toString();
-			          _xblockexpression = (this.toString());
+			          _xblockexpression = this.toString();
 			        }
 			        return _xblockexpression;
 			      }
@@ -813,7 +813,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      @Override
 			      protected T computeNext() {
 			        T _elvis = null;
-			        final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
+			        final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 			          public Boolean apply(final T it) {
 			            return Boolean.valueOf((it != null));
 			          }
@@ -864,7 +864,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				      @Override
 				      protected T computeNext() {
 				        T _elvis = null;
-				        final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
+				        final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 				          public Boolean apply(final T it) {
 				            return Boolean.valueOf((!Objects.equal(it, null)));
 				          }
@@ -980,7 +980,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class Throwables {
-			  public static <T extends Object> T propagate(final Function0<? extends T> proc, final Function1<? super Exception,? extends Exception> handler) {
+			  public static <T extends Object> T propagate(final Function0<? extends T> proc, final Function1<? super Exception, ? extends Exception> handler) {
 			    try {
 			      T _xtrycatchfinallyexpression = null;
 			      try {
@@ -1035,7 +1035,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        throw Exceptions.sneakyThrow(_e);
 			      }
 			    }
-			  }, new Function1<Exception,IllegalArgumentException>() {
+			  }, new Function1<Exception, IllegalArgumentException>() {
 			    public IllegalArgumentException apply(final Exception it) {
 			      return new IllegalArgumentException(it);
 			    }
@@ -1223,7 +1223,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public void m(final Object a) {
 			    boolean _matched = false;
 			    if (!_matched) {
-			      if (Objects.equal(a,"b")) {
+			      if (Objects.equal(a, "b")) {
 			        _matched=true;
 			        boolean _while = true;
 			        while (_while) {
@@ -1233,7 +1233,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      }
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(a,"c")) {
+			      if (Objects.equal(a, "c")) {
 			        _matched=true;
 			        if (true) {
 			          return;
@@ -1241,7 +1241,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      }
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(a,"d")) {
+			      if (Objects.equal(a, "d")) {
 			        _matched=true;
 			        IntegerRange _upTo = new IntegerRange(1, 1);
 			        for (final Integer i : _upTo) {
@@ -1274,7 +1274,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public String m(final Object a) {
 			    boolean _matched = false;
 			    if (!_matched) {
-			      if (Objects.equal(a,"b")) {
+			      if (Objects.equal(a, "b")) {
 			        _matched=true;
 			        boolean _while = true;
 			        while (_while) {
@@ -1284,7 +1284,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      }
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(a,"c")) {
+			      if (Objects.equal(a, "c")) {
 			        _matched=true;
 			        if (true) {
 			          return "a";
@@ -1292,7 +1292,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      }
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(a,"d")) {
+			      if (Objects.equal(a, "d")) {
 			        _matched=true;
 			        IntegerRange _upTo = new IntegerRange(1, 1);
 			        for (final Integer i : _upTo) {
@@ -1325,7 +1325,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    String _switchResult = null;
 			    boolean _matched = false;
 			    if (!_matched) {
-			      if (Objects.equal(a,"a")) {
+			      if (Objects.equal(a, "a")) {
 			        _matched=true;
 			        String _xblockexpression = null;
 			        {
@@ -1334,13 +1334,13 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			            "".toString();
 			            _while = true;
 			          }
-			          _xblockexpression = ("");
+			          _xblockexpression = "";
 			        }
 			        _switchResult = _xblockexpression;
 			      }
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(a,"b")) {
+			      if (Objects.equal(a, "b")) {
 			        _matched=true;
 			        if (true) {
 			          return "a";
@@ -1495,14 +1495,14 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class Foo {
-			  public Function1<? super Integer,? extends Object> foo() {
-			    Function1<? super Integer,? extends Object> _switchResult = null;
+			  public Function1<? super Integer, ?> foo() {
+			    Function1<? super Integer, ?> _switchResult = null;
 			    final Object _switchValue = null;
 			    boolean _matched = false;
 			    if (!_matched) {
-			      if (Objects.equal(_switchValue,null)) {
+			      if (Objects.equal(_switchValue, null)) {
 			        _matched=true;
-			        final Function1<Object,Object> _function = new Function1<Object,Object>() {
+			        final Function1<Object, Object> _function = new Function1<Object, Object>() {
 			          public Object apply(final Object it) {
 			            return it;
 			          }
@@ -1511,9 +1511,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      }
 			    }
 			    if (!_matched) {
-			      if (Objects.equal(_switchValue,null)) {
+			      if (Objects.equal(_switchValue, null)) {
 			        _matched=true;
-			        final Function1<Integer,Integer> _function_1 = new Function1<Integer,Integer>() {
+			        final Function1<Integer, Integer> _function_1 = new Function1<Integer, Integer>() {
 			          public Integer apply(final Integer it) {
 			            return it;
 			          }
@@ -1589,7 +1589,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		    final double x = (1d + 2);
 		    boolean _matched = false;
 		    if (!_matched) {
-		      if (Objects.equal(x,1)) {
+		      if (Objects.equal(x, 1)) {
 		        _matched=true;
 		        _switchResult = 1;
 		      }
@@ -1625,7 +1625,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		    final int x = 1;
 		    boolean _matched = false;
 		    if (!_matched) {
-		      if (Objects.equal(x,1d)) {
+		      if (Objects.equal(x, 1d)) {
 		        _matched=true;
 		        _switchResult = 1;
 		      }
@@ -1664,7 +1664,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		          _switchResult = true;
 		          break;
 		      }
-		      _xblockexpression = (_switchResult);
+		      _xblockexpression = _switchResult;
 		    }
 		    return _xblockexpression;
 		  }
@@ -1698,7 +1698,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		          _switchResult = true;
 		          break;
 		      }
-		      _xblockexpression = (_switchResult);
+		      _xblockexpression = _switchResult;
 		    }
 		    return _xblockexpression;
 		  }
@@ -1772,7 +1772,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		        }
 		      };
 		      Integer _apply = _function.apply();
-		      if (Objects.equal(x,_apply)) {
+		      if (Objects.equal(x, _apply)) {
 		        _matched=true;
 		        _switchResult = true;
 		      }
@@ -1941,12 +1941,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		      final int x = 1;
 		      boolean _matched = false;
 		      if (!_matched) {
-		        if (Objects.equal(x,z)) {
+		        if (Objects.equal(x, z)) {
 		          _matched=true;
 		          _switchResult = true;
 		        }
 		      }
-		      _xblockexpression = (_switchResult);
+		      _xblockexpression = _switchResult;
 		    }
 		    return _xblockexpression;
 		  }
@@ -1979,12 +1979,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		      final Thread.State x = Thread.State.NEW;
 		      boolean _matched = false;
 		      if (!_matched) {
-		        if (Objects.equal(x,state)) {
+		        if (Objects.equal(x, state)) {
 		          _matched=true;
 		          _switchResult = true;
 		        }
 		      }
-		      _xblockexpression = (_switchResult);
+		      _xblockexpression = _switchResult;
 		    }
 		    return _xblockexpression;
 		  }
@@ -2211,7 +2211,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    List<File> _xtrycatchfinallyexpression = null;
 			    try {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("file1.ext");
-			      final Function1<String,File> _function = new Function1<String,File>() {
+			      final Function1<String, File> _function = new Function1<String, File>() {
 			        public File apply(final String f) {
 			          try {
 			            File _file = new File(f);
@@ -2257,9 +2257,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public abstract class Foo {
 			  public abstract Object getFoo(final String x) throws Exception;
 			  
-			  public Map<Object,String> bar() {
+			  public Map<Object, String> bar() {
 			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-			    final Function1<String,Object> _function = new Function1<String,Object>() {
+			    final Function1<String, Object> _function = new Function1<String, Object>() {
 			      public Object apply(final String it) {
 			        try {
 			          return Foo.this.getFoo(it);
@@ -2868,7 +2868,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			package foo
 			class Bar {
-				def foo() {new java.util.HashMap<String,java.io.Serializable>()}
+				def foo() {new java.util.HashMap<String, java.io.Serializable>()}
 			}
 		''', '''
 			package foo;
@@ -2878,7 +2878,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 
 			@SuppressWarnings("all")
 			public class Bar {
-			  public HashMap<String,Serializable> foo() {
+			  public HashMap<String, Serializable> foo() {
 			    return new HashMap<String, Serializable>();
 			  }
 			}
@@ -3079,7 +3079,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      this.getThing();
 			      this.getThing("");
 			      this.getThing();
-			      _xblockexpression = (this.getThing(""));
+			      _xblockexpression = this.getThing("");
 			    }
 			    return _xblockexpression;
 			  }
@@ -3136,7 +3136,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      super.getThing("");
 			      super.getThing();
 			      super.getThing();
-			      _xblockexpression = (super.getThing());
+			      _xblockexpression = super.getThing();
 			    }
 			    return _xblockexpression;
 			  }
@@ -3177,7 +3177,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    return _result;
 			  }
 			  
-			  private final HashMap<ArrayList<? extends Object>,StringBuilder> _createCache_aBuilder = CollectionLiterals.newHashMap();
+			  private final HashMap<ArrayList<?>, StringBuilder> _createCache_aBuilder = CollectionLiterals.newHashMap();
 			  
 			  private void _init_aBuilder(final StringBuilder result, final String x) {
 			    result.append(x);
@@ -3453,9 +3453,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public String foo() {
 			    String _xblockexpression = null;
 			    {
-			      final Function1<String,String> _function = new Function1<String,String>() {
+			      final Function1<String, String> _function = new Function1<String, String>() {
 			        public String apply(final String it) {
-			          final Function1<String,String> _function = new Function1<String,String>() {
+			          final Function1<String, String> _function = new Function1<String, String>() {
 			            public String apply(final String it) {
 			              return it;
 			            }
@@ -3463,8 +3463,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			          return _function.apply(it);
 			        }
 			      };
-			      final Function1<? super String,? extends String> function = _function;
-			      _xblockexpression = (function.apply("foo"));
+			      final Function1<? super String, ? extends String> function = _function;
+			      _xblockexpression = function.apply("foo");
 			    }
 			    return _xblockexpression;
 			  }
@@ -3507,7 +3507,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class X {
 				def foo(int p0, Integer p1) {
-					foo(p1,p0)
+					foo(p1, p0)
 				}
 			}
 		''','''
@@ -3524,7 +3524,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		assertCompilesTo('''
 			class X {
 				def Object foo(int p0, Integer p1) {
-					foo(p1,p0)
+					foo(p1, p0)
 				}
 			}
 		''','''
@@ -3791,7 +3791,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				@SuppressWarnings("all")
 				public class FindFirstOnIt {
 				  public <T extends Object> T useExtension(final Iterable<T> it) {
-				    final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
+				    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
 				      public Boolean apply(final T it) {
 				        return Boolean.valueOf((it != null));
 				      }
@@ -3944,7 +3944,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				      StringConcatenation _builder = new StringConcatenation();
 				      _builder.append("SomeString");
 				      final String x = InputOutput.<String>println(_builder.toString());
-				      _xblockexpression = (x);
+				      _xblockexpression = x;
 				    }
 				    return _xblockexpression;
 				  }
@@ -3967,7 +3967,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				      StringConcatenation _builder = new StringConcatenation();
 				      _builder.append("SomeString");
 				      final String x = _builder.toString();
-				      _xblockexpression = (x);
+				      _xblockexpression = x;
 				    }
 				    return _xblockexpression;
 				  }
@@ -4550,7 +4550,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					    String _xblockexpression = null;
 					    {
 					      int i = 1;
-					      _xblockexpression = (("" + Integer.valueOf(i)));
+					      _xblockexpression = ("" + Integer.valueOf(i));
 					    }
 					    String _string_2 = null;
 					    if (_xblockexpression!=null) {
@@ -4656,16 +4656,16 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class Bug412642 {
-			  private final Pair<String,Integer> pairField = Pair.<String, Integer>of("Orange", Integer.valueOf(3));
+			  private final Pair<String, Integer> pairField = Pair.<String, Integer>of("Orange", Integer.valueOf(3));
 			  
 			  public void bar() {
-			    final Pair<String,Integer> pair = Pair.<String, Integer>of("Apple", Integer.valueOf(1));
-			    final Pair<String,Integer> _pair = pair;
-			    Map<Object,Object> _xsetliteral = null;
-			    Pair<String,Integer> _methodStaticPair = Bug412642_2.methodStaticPair();
-			    Pair<Object,Object> _plus = this.operator_plus(
+			    final Pair<String, Integer> pair = Pair.<String, Integer>of("Apple", Integer.valueOf(1));
+			    final Pair<String, Integer> _pair = pair;
+			    Map<Object, Object> _xsetliteral = null;
+			    Pair<String, Integer> _methodStaticPair = Bug412642_2.methodStaticPair();
+			    Pair<Object, Object> _plus = this.operator_plus(
 			      1, 2);
-			    Map<Object,Object> _tempMap = Maps.<Object, Object>newHashMap();
+			    Map<Object, Object> _tempMap = Maps.<Object, Object>newHashMap();
 			    _tempMap.put(pair == null ? null : pair.getKey(), pair == null ? null : pair.getValue());
 			    _tempMap.put(_pair == null ? null : _pair.getKey(), _pair == null ? null : _pair.getValue());
 			    _tempMap.put("Banana", Integer.valueOf(2));
@@ -4674,12 +4674,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    _tempMap.put(_methodStaticPair == null ? null : _methodStaticPair.getKey(), _methodStaticPair == null ? null : _methodStaticPair.getValue());
 			    _tempMap.put(_plus == null ? null : _plus.getKey(), _plus == null ? null : _plus.getValue());
 			    _xsetliteral = Collections.<Object, Object>unmodifiableMap(_tempMap);
-			    final Map<Object,Object> map2 = _xsetliteral;
-			    Pair<String,Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
-			    final Set<? extends Object> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));
+			    final Map<Object, Object> map2 = _xsetliteral;
+			    Pair<String, Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
+			    final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));
 			  }
 			  
-			  public Pair<Object,Object> operator_plus(final int operant, final int operand2) {
+			  public Pair<Object, Object> operator_plus(final int operant, final int operand2) {
 			    return null;
 			  }
 			}
@@ -4736,16 +4736,16 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class Bug412642 {
-			  private final Pair<String,Integer> pairField = Pair.<String, Integer>of("Orange", Integer.valueOf(3));
+			  private final Pair<String, Integer> pairField = Pair.<String, Integer>of("Orange", Integer.valueOf(3));
 			  
 			  public void bar() {
-			    final Pair<String,Integer> pair = Pair.<String, Integer>of("Apple", Integer.valueOf(1));
-			    final Pair<String,Integer> _pair = pair;
-			    Map<Object,Object> _xsetliteral = null;
-			    Pair<String,Integer> _methodStaticPair = Bug412642_2.methodStaticPair();
-			    Pair<Object,Object> _plus = this.operator_plus(
+			    final Pair<String, Integer> pair = Pair.<String, Integer>of("Apple", Integer.valueOf(1));
+			    final Pair<String, Integer> _pair = pair;
+			    Map<Object, Object> _xsetliteral = null;
+			    Pair<String, Integer> _methodStaticPair = Bug412642_2.methodStaticPair();
+			    Pair<Object, Object> _plus = this.operator_plus(
 			      1, 2);
-			    Map<Object,Object> _tempMap = Maps.<Object, Object>newHashMap();
+			    Map<Object, Object> _tempMap = Maps.<Object, Object>newHashMap();
 			    _tempMap.put(pair == null ? null : pair.getKey(), pair == null ? null : pair.getValue());
 			    _tempMap.put(_pair == null ? null : _pair.getKey(), _pair == null ? null : _pair.getValue());
 			    _tempMap.put("Banana", Integer.valueOf(2));
@@ -4754,12 +4754,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    _tempMap.put(_methodStaticPair == null ? null : _methodStaticPair.getKey(), _methodStaticPair == null ? null : _methodStaticPair.getValue());
 			    _tempMap.put(_plus == null ? null : _plus.getKey(), _plus == null ? null : _plus.getValue());
 			    _xsetliteral = Collections.<Object, Object>unmodifiableMap(_tempMap);
-			    final Map<Object,Object> map2 = _xsetliteral;
-			    Pair<String,Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
-			    final Set<? extends Object> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));
+			    final Map<Object, Object> map2 = _xsetliteral;
+			    Pair<String, Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
+			    final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));
 			  }
 			  
-			  public Pair<Object,Object> operator_plus(final int operant, final int operand2) {
+			  public Pair<Object, Object> operator_plus(final int operant, final int operand2) {
 			    return null;
 			  }
 			}
@@ -4791,7 +4791,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    return 1;
 			  }
 			  
-			  public int bug(final Element<? extends Object> a) {
+			  public int bug(final Element<?> a) {
 			    if (a instanceof A) {
 			      return _bug((A)a);
 			    } else if (a instanceof B) {
@@ -4848,7 +4848,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    List<String> _xblockexpression = null;
 			    {
 			      final List<String> result = Collections.<String>unmodifiableList(Lists.<String>newArrayList());
-			      _xblockexpression = (result);
+			      _xblockexpression = result;
 			    }
 			    return _xblockexpression;
 			  }
@@ -4861,7 +4861,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    Set<String> _xblockexpression = null;
 			    {
 			      final Set<String> result = Collections.<String>unmodifiableSet(Sets.<String>newHashSet());
-			      _xblockexpression = (result);
+			      _xblockexpression = result;
 			    }
 			    return _xblockexpression;
 			  }

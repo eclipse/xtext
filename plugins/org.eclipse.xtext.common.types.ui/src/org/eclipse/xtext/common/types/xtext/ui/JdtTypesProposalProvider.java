@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.xtext.ui;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
@@ -38,7 +39,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
+import org.eclipse.xtext.common.types.util.RawSuperTypes;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -60,6 +61,7 @@ import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.CharMatcher;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -70,9 +72,6 @@ import com.google.inject.Provider;
  */
 public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 
-	@Inject
-	private SuperTypeCollector superTypeCollector;
-	
 	@Inject
 	private IJavaProjectProvider projectProvider;
 	
@@ -96,6 +95,9 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 
 	@Inject
 	private IDirtyStateManager dirtyStateManager;
+	
+	@Inject
+	private RawSuperTypes superTypeCollector;
 	
 	public static class FQNShortener extends ReplacementTextApplier {
 		protected final IScope scope;
@@ -156,7 +158,12 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			return;
 		} 
 		
-		final Collection<String> superTypes = superTypeCollector.collectSuperTypeNames(superType);
+		final Collection<JvmType> superTypes = superTypeCollector.collect(superType);
+		final Set<String> superTypeNames = Sets.newHashSet();
+		for(JvmType collectedSuperType: superTypes) {
+			superTypeNames.add(collectedSuperType.getIdentifier());
+		}
+		superTypeNames.remove(fqn);
 		try {
 			IType type = project.findType(fqn);
 			if (type != null) {
@@ -379,14 +386,6 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 						Flags.isAnnotation(modifiers) || Flags.isInterface(modifiers), 
 						modifiers, 
 						false /* don't use light icons */));
-	}
-
-	public void setSuperTypeCollector(SuperTypeCollector superTypeCollector) {
-		this.superTypeCollector = superTypeCollector;
-	}
-
-	public SuperTypeCollector getSuperTypeCollector() {
-		return superTypeCollector;
 	}
 
 	public void setProjectProvider(IJavaProjectProvider projectProvider) {

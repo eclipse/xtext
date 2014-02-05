@@ -143,14 +143,15 @@ public class SuperTypeCollector {
 		}
 	}
 
-	public static class Implementation extends TypesSwitch<Boolean> {
+	@Deprecated
+	static class Implementation extends TypesSwitch<Boolean> {
 
 		private boolean collecting = false;
 		private SuperTypeAcceptor acceptor;
 		private int level;
 		private final TypeReferences references;
 
-		public Implementation(SuperTypeAcceptor acceptor, TypeReferences references) {
+		Implementation(SuperTypeAcceptor acceptor, TypeReferences references) {
 			this.acceptor = acceptor;
 			this.references = references;
 			this.level = 0;

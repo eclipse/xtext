@@ -42,7 +42,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			    final Double d = Double.valueOf(1.0);
 			    IntegerRange _upTo = new IntegerRange(1, 1);
 			    for (@Extension final Integer j : _upTo) {
-			      final Function1<Object,Object> _function = new Function1<Object,Object>() {
+			      final Function1<Object, Object> _function = new Function1<Object, Object>() {
 			        public Object apply(@Extension final Object o) {
 			          Object _xtrycatchfinallyexpression = null;
 			          try {
@@ -110,7 +110,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				    String _xblockexpression = null;
 				    {
 				      this._string.substring(it);
-				      _xblockexpression = (this._string.substring(it));
+				      _xblockexpression = this._string.substring(it);
 				    }
 				    return _xblockexpression;
 				  }
@@ -139,7 +139,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				    String _xblockexpression = null;
 				    {
 				      this.string.substring(it);
-				      _xblockexpression = (this.string.substring(it));
+				      _xblockexpression = this.string.substring(it);
 				    }
 				    return _xblockexpression;
 				  }
@@ -410,7 +410,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				    {
 				      @Extension
 				      final String s = "";
-				      _xblockexpression = (s.substring(it));
+				      _xblockexpression = s.substring(it);
 				    }
 				    return _xblockexpression;
 				  }
@@ -473,7 +473,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				        final String s = "";
 				        s.toString();
 				      }
-				      _xblockexpression = (param.substring(it));
+				      _xblockexpression = param.substring(it);
 				    }
 				    return _xblockexpression;
 				  }
@@ -607,7 +607,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			    String _xblockexpression = null;
 			    {
 			      final String[] chars = ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("foo", "bar"), String.class));
-			      _xblockexpression = (this.<String>at(chars, 2));
+			      _xblockexpression = this.<String>at(chars, 2);
 			    }
 			    return _xblockexpression;
 			  }
@@ -647,8 +647,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public String m(final Pair<String,String> in) {
-			    Pair<String,String> _mappedTo = Pair.<String, String>of("", "");
+			  public String m(final Pair<String, String> in) {
+			    Pair<String, String> _mappedTo = Pair.<String, String>of("", "");
 			    return this.m(_mappedTo);
 			  }
 			}
@@ -668,8 +668,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public String m(final Pair<String,String> in) {
-			    Pair<String,String> _mappedTo = Pair.<String, String>of(null, null);
+			  public String m(final Pair<String, String> in) {
+			    Pair<String, String> _mappedTo = Pair.<String, String>of(null, null);
 			    return this.m(_mappedTo);
 			  }
 			}
@@ -689,7 +689,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public String m(final Pair<String,String> in) {
+			  public String m(final Pair<String, String> in) {
 			    return this.m(in);
 			  }
 			}
@@ -709,7 +709,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public <T extends Object> T m(final Pair<T,T> in) {
+			  public <T extends Object> T m(final Pair<T, T> in) {
 			    return this.<T>m(in);
 			  }
 			}
@@ -729,8 +729,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public <T extends Object> T m(final Pair<T,T> in) {
-			    Pair<T,T> _mappedTo = Pair.<T, T>of(null, null);
+			  public <T extends Object> T m(final Pair<T, T> in) {
+			    Pair<T, T> _mappedTo = Pair.<T, T>of(null, null);
 			    return this.<T>m(_mappedTo);
 			  }
 			}
@@ -750,8 +750,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public <T extends Object> String m(final Pair<T,T> in) {
-			    Pair<String,String> _mappedTo = Pair.<String, String>of("", "");
+			  public <T extends Object> String m(final Pair<T, T> in) {
+			    Pair<String, String> _mappedTo = Pair.<String, String>of("", "");
 			    return this.<String>m(_mappedTo);
 			  }
 			}
@@ -771,7 +771,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public <T extends CharSequence> T m(final Pair<T,T> in) {
+			  public <T extends CharSequence> T m(final Pair<T, T> in) {
 			    return this.<T>m(in);
 			  }
 			}
@@ -791,8 +791,8 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public <T extends CharSequence> T m(final Pair<T,T> in) {
-			    Pair<T,T> _mappedTo = Pair.<T, T>of(null, null);
+			  public <T extends CharSequence> T m(final Pair<T, T> in) {
+			    Pair<T, T> _mappedTo = Pair.<T, T>of(null, null);
 			    return this.<T>m(_mappedTo);
 			  }
 			}
@@ -813,9 +813,9 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public String m(final Pair<String,String> in) {
+			  public String m(final Pair<String, String> in) {
 			    StringConcatenation _builder = new StringConcatenation();
-			    Pair<String,String> _mappedTo = Pair.<String, String>of("", _builder.toString());
+			    Pair<String, String> _mappedTo = Pair.<String, String>of("", _builder.toString());
 			    return this.m(_mappedTo);
 			  }
 			}
@@ -835,7 +835,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public <T extends Object> String m(final Pair<T,T> it) {
+			  public <T extends Object> String m(final Pair<T, T> it) {
 			    return this.<T>m(it);
 			  }
 			}
@@ -855,10 +855,10 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public <T extends Object> String m(final Pair<T,T> it) {
+			  public <T extends Object> String m(final Pair<T, T> it) {
 			    T _key = it.getKey();
 			    T _value = it.getValue();
-			    Pair<T,T> _mappedTo = Pair.<T, T>of(_key, _value);
+			    Pair<T, T> _mappedTo = Pair.<T, T>of(_key, _value);
 			    return this.<T>m(_mappedTo);
 			  }
 			}

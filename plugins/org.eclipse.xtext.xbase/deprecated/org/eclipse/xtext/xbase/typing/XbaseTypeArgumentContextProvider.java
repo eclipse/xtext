@@ -7,17 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
-import java.util.Set;
-
-import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider.Request;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-
-import com.google.common.collect.Multimap;
-import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -29,36 +20,6 @@ public class XbaseTypeArgumentContextProvider extends TypeArgumentContextProvide
 		
 		public abstract XAbstractFeatureCall getFeatureCall();
 		
-	}
-	
-	@Inject
-	private Closures closures;
-	
-	@Inject
-	private SynonymTypesProvider synonymTypeProvider;
-	
-	@Inject
-	private XbaseTypeConformanceComputer conformanceComputer;
-	
-	@Override
-	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType,
-			Multimap<JvmTypeParameter, ResolveInfo> result, boolean allowWildcardResolutions, int hint) {
-		JvmTypeReference declaredClosureType = closures.getCompatibleFunctionType(declaredType, false, false);
-		JvmTypeReference actualClosureType = closures.getCompatibleFunctionType(actualType, true, false);
-		if (declaredClosureType == null || actualClosureType == null) {
-			super.resolveAgainstActualType(declaredType, actualType, result, allowWildcardResolutions, hint);
-			Set<JvmTypeReference> actualSynonyms = synonymTypeProvider.getSynonymTypes(actualType, true);
-			for(JvmTypeReference synonym: actualSynonyms) {
-				super.resolveAgainstActualType(declaredType, synonym, result, allowWildcardResolutions, hint);
-			}
-		} else {
-			super.resolveAgainstActualType(declaredClosureType, actualClosureType, result, allowWildcardResolutions, hint);
-		}
-	}
-	
-	@Override
-	protected TypeConformanceComputer getConformanceComputer() {
-		return conformanceComputer;
 	}
 	
 }

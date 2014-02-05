@@ -10,11 +10,9 @@ import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.annotations.XbaseWithAnnotationsRuntimeModule;
 import org.eclipse.xtext.xbase.annotations.XbaseWithAnnotationsStandaloneSetup;
 import org.eclipse.xtext.xbase.junit.SynchronizedXtextResourceSetProvider;
-import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider.DisabledXbaseScopeProvider;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -77,11 +75,6 @@ public class XbaseWithAnnotationsInjectorProvider implements IInjectorProvider, 
 
 		public Class<? extends Provider<SynchronizedXtextResourceSet>> provideSynchronizedResourceSet() {
 			return SynchronizedXtextResourceSetProvider.class;
-		}
-		
-		@Override
-		public Class<? extends IScopeProvider> bindIScopeProvider() {
-			return DisabledXbaseScopeProvider.class;
 		}
 	}
 	

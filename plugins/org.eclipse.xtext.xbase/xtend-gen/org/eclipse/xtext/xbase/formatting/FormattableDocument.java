@@ -539,7 +539,7 @@ public class FormattableDocument {
           int _plus = (currentIndentation + _indentationChange);
           currentIndentation = _plus;
           if ((f instanceof NewLineData)) {
-            lastWrap = ((NewLineData) f);
+            lastWrap = ((NewLineData)f);
             lastIndentation = currentIndentation;
           }
         }
@@ -577,7 +577,7 @@ public class FormattableDocument {
       Collection<FormattingData> _values_2 = _subMap_1.values();
       for (final FormattingData f_2 : _values_2) {
         if ((f_2 instanceof WhitespaceData)) {
-          final String space = ((WhitespaceData) f_2).getSpace();
+          final String space = ((WhitespaceData)f_2).getSpace();
           int _xifexpression = (int) 0;
           boolean _equals = Objects.equal(space, null);
           if (_equals) {

@@ -40,7 +40,7 @@ class CompilerBug413138Test extends AbstractXtendCompilerTest {
 			    String _xblockexpression = null;
 			    {
 			      String string = this.repository.findByStringId(Long.valueOf(1L));
-			      _xblockexpression = (this.repository.<String>save(string));
+			      _xblockexpression = this.repository.<String>save(string);
 			    }
 			    return _xblockexpression;
 			  }

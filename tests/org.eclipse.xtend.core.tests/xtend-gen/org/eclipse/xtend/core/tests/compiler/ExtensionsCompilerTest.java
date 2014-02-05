@@ -83,7 +83,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("for (@Extension final Integer j : _upTo) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("final Function1<Object,Object> _function = new Function1<Object,Object>() {");
+    _builder_1.append("final Function1<Object, Object> _function = new Function1<Object, Object>() {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("public Object apply(@Extension final Object o) {");
@@ -237,7 +237,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("this._string.substring(it);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this._string.substring(it));");
+    _builder_1.append("_xblockexpression = this._string.substring(it);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -299,7 +299,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("this.string.substring(it);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this.string.substring(it));");
+    _builder_1.append("_xblockexpression = this.string.substring(it);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -850,7 +850,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final String s = \"\";");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (s.substring(it));");
+    _builder_1.append("_xblockexpression = s.substring(it);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -987,7 +987,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (param.substring(it));");
+    _builder_1.append("_xblockexpression = param.substring(it);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -1284,7 +1284,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final String[] chars = ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(\"foo\", \"bar\"), String.class));");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this.<String>at(chars, 2));");
+    _builder_1.append("_xblockexpression = this.<String>at(chars, 2);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -1381,10 +1381,10 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public String m(final Pair<String,String> in) {");
+    _builder_1.append("public String m(final Pair<String, String> in) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Pair<String,String> _mappedTo = Pair.<String, String>of(\"\", \"\");");
+    _builder_1.append("Pair<String, String> _mappedTo = Pair.<String, String>of(\"\", \"\");");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.m(_mappedTo);");
@@ -1424,10 +1424,10 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public String m(final Pair<String,String> in) {");
+    _builder_1.append("public String m(final Pair<String, String> in) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Pair<String,String> _mappedTo = Pair.<String, String>of(null, null);");
+    _builder_1.append("Pair<String, String> _mappedTo = Pair.<String, String>of(null, null);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.m(_mappedTo);");
@@ -1467,7 +1467,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public String m(final Pair<String,String> in) {");
+    _builder_1.append("public String m(final Pair<String, String> in) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.m(in);");
@@ -1507,7 +1507,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <T extends Object> T m(final Pair<T,T> in) {");
+    _builder_1.append("public <T extends Object> T m(final Pair<T, T> in) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.<T>m(in);");
@@ -1547,10 +1547,10 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <T extends Object> T m(final Pair<T,T> in) {");
+    _builder_1.append("public <T extends Object> T m(final Pair<T, T> in) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Pair<T,T> _mappedTo = Pair.<T, T>of(null, null);");
+    _builder_1.append("Pair<T, T> _mappedTo = Pair.<T, T>of(null, null);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.<T>m(_mappedTo);");
@@ -1590,10 +1590,10 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <T extends Object> String m(final Pair<T,T> in) {");
+    _builder_1.append("public <T extends Object> String m(final Pair<T, T> in) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Pair<String,String> _mappedTo = Pair.<String, String>of(\"\", \"\");");
+    _builder_1.append("Pair<String, String> _mappedTo = Pair.<String, String>of(\"\", \"\");");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.<String>m(_mappedTo);");
@@ -1633,7 +1633,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <T extends CharSequence> T m(final Pair<T,T> in) {");
+    _builder_1.append("public <T extends CharSequence> T m(final Pair<T, T> in) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.<T>m(in);");
@@ -1673,10 +1673,10 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <T extends CharSequence> T m(final Pair<T,T> in) {");
+    _builder_1.append("public <T extends CharSequence> T m(final Pair<T, T> in) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Pair<T,T> _mappedTo = Pair.<T, T>of(null, null);");
+    _builder_1.append("Pair<T, T> _mappedTo = Pair.<T, T>of(null, null);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.<T>m(_mappedTo);");
@@ -1720,13 +1720,13 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public String m(final Pair<String,String> in) {");
+    _builder_1.append("public String m(final Pair<String, String> in) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("StringConcatenation _builder = new StringConcatenation();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Pair<String,String> _mappedTo = Pair.<String, String>of(\"\", _builder.toString());");
+    _builder_1.append("Pair<String, String> _mappedTo = Pair.<String, String>of(\"\", _builder.toString());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.m(_mappedTo);");
@@ -1766,7 +1766,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <T extends Object> String m(final Pair<T,T> it) {");
+    _builder_1.append("public <T extends Object> String m(final Pair<T, T> it) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.<T>m(it);");
@@ -1806,7 +1806,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public <T extends Object> String m(final Pair<T,T> it) {");
+    _builder_1.append("public <T extends Object> String m(final Pair<T, T> it) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("T _key = it.getKey();");
@@ -1815,7 +1815,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("T _value = it.getValue();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Pair<T,T> _mappedTo = Pair.<T, T>of(_key, _value);");
+    _builder_1.append("Pair<T, T> _mappedTo = Pair.<T, T>of(_key, _value);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return this.<T>m(_mappedTo);");

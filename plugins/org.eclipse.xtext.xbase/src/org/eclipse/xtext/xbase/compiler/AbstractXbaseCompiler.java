@@ -11,25 +11,28 @@ import static com.google.common.collect.Sets.*;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVoid;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -45,29 +48,22 @@ import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.conformance.RawTypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.JvmExceptions;
-import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
 
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 @NonNullByDefault
 public abstract class AbstractXbaseCompiler {
 
-	@Inject
-	private TypeReferences typeReferences;
-	
 	@Inject
 	private TypeReferenceSerializer referenceSerializer;
 	
@@ -76,43 +72,62 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	@Inject
+	private CommonTypeComputationServices services;
+
+	@Inject
 	private JavaKeywords javaUtils;
 
-	@Inject
-	private CommonTypeComputationServices services;
-	
-	@Inject
-	private ITypeProvider typeProvider;
-
-	protected ITypeProvider getTypeProvider() {
-		return typeProvider;
-	}
-	
 	@Inject 
 	private IBatchTypeResolver typeResolver;
 
-	protected IBatchTypeResolver getTypeResolver() {
-		return typeResolver;
-	}
-
+	// TODO doublecheck usage of this one
 	@Inject
 	private IEarlyExitComputer exitComputer;
 	
 	@Inject
-	private JvmOnlyTypeConformanceComputer typeConformanceComputer;
-	
-	@Inject
 	private Primitives primitives;
 	
-	@Inject
-	private JvmExceptions jvmExceptions;
-	
-	protected Primitives getPrimitives() {
-		return primitives;
+	private IBatchTypeResolver getTypeResolver() {
+		return typeResolver;
 	}
-
-	protected TypeReferences getTypeReferences() {
-		return typeReferences;
+	
+	@Nullable
+	protected JvmType findKnownTopLevelType(Class<?> rawType, Notifier context) {
+		if (rawType.isArray()) {
+			throw new IllegalArgumentException(rawType.getCanonicalName());
+		}
+		if (rawType.isPrimitive()) {
+			throw new IllegalArgumentException(rawType.getName());
+		}
+		ResourceSet resourceSet = EcoreUtil2.getResourceSet(context);
+		if (resourceSet == null) {
+			return null;
+		}
+		Resource typeResource = resourceSet.getResource(URIHelperConstants.OBJECTS_URI.appendSegment(rawType.getName()), true);
+		List<EObject> resourceContents = typeResource.getContents();
+		if (resourceContents.isEmpty())
+			return null;
+		JvmType type = (JvmType) resourceContents.get(0);
+		return type;
+	}
+	
+	@Nullable
+	protected JvmType findKnownType(Class<?> rawType, Notifier context) {
+		if (rawType.isArray()) {
+			throw new IllegalArgumentException(rawType.getCanonicalName());
+		}
+		if (rawType.isPrimitive()) {
+			throw new IllegalArgumentException(rawType.getName());
+		}		ResourceSet resourceSet = EcoreUtil2.getResourceSet(context);
+		if (resourceSet == null) {
+			return null;
+		}
+		Class<?> declaringClass = rawType.getDeclaringClass();
+		if (declaringClass == null) {
+			return findKnownTopLevelType(rawType, resourceSet);
+		}
+		JvmType result = (JvmType) resourceSet.getEObject(URIHelperConstants.OBJECTS_URI.appendSegment(declaringClass.getName()).appendFragment(rawType.getName()), true);
+		return result;
 	}
 	
 	protected CommonTypeComputationServices getTypeComputationServices() {
@@ -127,23 +142,23 @@ public abstract class AbstractXbaseCompiler {
 		return new OwnedConverter(newTypeReferenceOwner(context)).apply(reference);
 	}
 	
-	/**
-	 * @deprecated not called anywhere. 
-	 */
-	@Deprecated
-	public void setTypeReferences(TypeReferences typeReferences) {
-		this.typeReferences = typeReferences;
-	}
-	
-	public ITreeAppendable compile(XExpression obj, ITreeAppendable appendable, JvmTypeReference expectedReturnType) {
+	public ITreeAppendable compile(XExpression obj, ITreeAppendable appendable, LightweightTypeReference expectedReturnType) {
 		compile(obj, appendable, expectedReturnType, null);
 		return appendable;
 	}
 	
 	public ITreeAppendable compileAsJavaExpression(XExpression obj, ITreeAppendable parentAppendable, JvmTypeReference expectedType) {
+		LightweightTypeReference converted = null;
+		if (expectedType != null) {
+			converted = new OwnedConverter(new StandardTypeReferenceOwner(getTypeComputationServices(), obj)).toLightweightReference(expectedType);
+		}
+		return compileAsJavaExpression(obj, parentAppendable, converted);
+	}
+	
+	public ITreeAppendable compileAsJavaExpression(XExpression obj, ITreeAppendable parentAppendable, LightweightTypeReference expectedType) {
 		ITreeAppendable appendable = parentAppendable.trace(obj, true);
 		
-		final boolean isPrimitiveVoidExpected = isPrimitiveVoid(expectedType); 
+		final boolean isPrimitiveVoidExpected = expectedType.isPrimitiveVoid(); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
 		final boolean earlyExit = exitComputer.isEarlyExit(obj);
 		boolean needsSneakyThrow = needsSneakyThrow(obj, Collections.<JvmTypeReference>emptySet());
@@ -164,19 +179,25 @@ public abstract class AbstractXbaseCompiler {
 					}
 				}
 				appendable.append("new ");
-				JvmTypeReference procedureOrFunction = null;
+				JvmType procedureOrFunction = null;
 				if (isPrimitiveVoidExpected) {
-					procedureOrFunction = typeReferences.getTypeForName(Procedures.Procedure0.class, obj);
+					procedureOrFunction = findKnownType(Procedures.Procedure0.class, obj);
 				} else {
-					procedureOrFunction = typeReferences.getTypeForName(Functions.Function0.class, obj, expectedType);
+					procedureOrFunction = findKnownType(Functions.Function0.class, obj);
 				}
-				if (procedureOrFunction != null)
-					referenceSerializer.serialize(procedureOrFunction, obj, appendable, false, false, true, false);
-				else
+				if (procedureOrFunction != null) {
+					appendable.append(procedureOrFunction);
+					if (!isPrimitiveVoidExpected) {
+						appendable.append("<");
+						appendable.append(expectedType);
+						appendable.append(">");
+					}
+				} else {
 					appendable.append("Object");
+				}
 				appendable.append("() {").increaseIndentation();
 				appendable.newLine().append("public ");
-				referenceSerializer.serialize(primitives.asWrapperTypeIfPrimitive(expectedType), obj, appendable);
+				appendable.append(expectedType);
 				appendable.append(" apply() {").increaseIndentation();
 				if (needsSneakyThrow) {
 					appendable.newLine().append("try {").increaseIndentation();
@@ -192,7 +213,7 @@ public abstract class AbstractXbaseCompiler {
 						appendable.append(";");
 				}
 				if (needsSneakyThrow) {
-					generateCheckedExceptionHandling(obj, appendable);
+					generateCheckedExceptionHandling(appendable);
 				}
 				appendable.decreaseIndentation().newLine().append("}");
 				appendable.decreaseIndentation().newLine().append("}.apply()");
@@ -205,9 +226,9 @@ public abstract class AbstractXbaseCompiler {
 		return parentAppendable;
 	}
 	
-	protected void appendDefaultLiteral(ITreeAppendable b, @Nullable JvmTypeReference type) {
-		if (type != null && getPrimitives().isPrimitive(type)) {
-			Primitive primitiveKind = getPrimitives().primitiveKind((JvmPrimitiveType) type.getType());
+	protected void appendDefaultLiteral(ITreeAppendable b, @Nullable LightweightTypeReference type) {
+		if (type != null && type.isPrimitive()) {
+			Primitive primitiveKind = type.getPrimitiveKind();
 			switch (primitiveKind) {
 				case Boolean:
 					b.append("false");
@@ -221,19 +242,14 @@ public abstract class AbstractXbaseCompiler {
 		}
 	}
 	
-	protected void generateCheckedExceptionHandling(XExpression obj, ITreeAppendable appendable) {
+	protected void generateCheckedExceptionHandling(ITreeAppendable appendable) {
 		String name = appendable.declareSyntheticVariable(new Object(), "_e");
-		appendable.decreaseIndentation().newLine().append("} catch (Throwable "+name+") {").increaseIndentation();
-		final JvmType findDeclaredType = typeReferences.findDeclaredType(Exceptions.class, obj);
-		if (findDeclaredType == null) {
-			appendable.append("COMPILE ERROR : '"+Exceptions.class.getCanonicalName()+"' could not be found on the classpath!");
-		} else {
-			appendable.newLine().append("throw ");
-			appendable.append(findDeclaredType);
-			appendable.append(".sneakyThrow(");
-			appendable.append(name);
-			appendable.append(");");
-		}
+		appendable.decreaseIndentation().newLine().append("} catch (").append(Throwable.class).append(" ").append(name).append(") {").increaseIndentation();
+		appendable.newLine().append("throw ");
+		appendable.append(Exceptions.class);
+		appendable.append(".sneakyThrow(");
+		appendable.append(name);
+		appendable.append(");");
 		appendable.decreaseIndentation().newLine().append("}");
 	}
 	
@@ -241,17 +257,29 @@ public abstract class AbstractXbaseCompiler {
 		return internalCanCompileToJavaExpression(expression, appendable);
 	}
 	
+	/**
+	 * @param expression to be used by subtypes 
+	 * @param appendable to be used by subtypes
+	 */
 	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
 		return true;
 	}
 	
 	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, @Nullable JvmTypeReference expectedReturnType, @Nullable Set<JvmTypeReference> declaredExceptions) {
+		LightweightTypeReference converted = null;
+		if (expectedReturnType != null) {
+			converted = new OwnedConverter(new StandardTypeReferenceOwner(getTypeComputationServices(), obj)).toLightweightReference(expectedReturnType);
+		}
+		return compile(obj, parentAppendable, converted, declaredExceptions);
+	}
+	
+	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, @Nullable LightweightTypeReference expectedReturnType, @Nullable Set<JvmTypeReference> declaredExceptions) {
 		if (declaredExceptions == null) {
 			declaredExceptions = newHashSet();
 			assert declaredExceptions != null;
 		}
 		ITreeAppendable appendable = parentAppendable.trace(obj, true);
-		final boolean isPrimitiveVoidExpected = isPrimitiveVoid(expectedReturnType); 
+		final boolean isPrimitiveVoidExpected = expectedReturnType.isPrimitiveVoid(); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
 		final boolean earlyExit = exitComputer.isEarlyExit(obj);
 		boolean needsSneakyThrow = needsSneakyThrow(obj, declaredExceptions);
@@ -273,7 +301,7 @@ public abstract class AbstractXbaseCompiler {
 				appendable.append(";");
 		}
 		if (needsSneakyThrow) {
-			generateCheckedExceptionHandling(obj, appendable);
+			generateCheckedExceptionHandling(appendable);
 		}
 		return parentAppendable;
 	}
@@ -293,7 +321,7 @@ public abstract class AbstractXbaseCompiler {
 			internalToJavaStatement(ex, b, false);
 		}
 		
-		generateCheckedExceptionHandling(obj, apendable);
+		generateCheckedExceptionHandling(apendable);
 	}
 	
 	protected boolean hasJvmConstructorCall(XExpression obj) {
@@ -314,16 +342,36 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected boolean needsSneakyThrow(XExpression obj, Collection<JvmTypeReference> declaredExceptions) {
-		Iterable<JvmTypeReference> types = typeProvider.getThrownExceptionTypes(obj);
-		Iterable<JvmTypeReference> exceptions = jvmExceptions.findUnhandledExceptions(obj, types, declaredExceptions);
-		return ! Iterables.isEmpty(exceptions);
+		IResolvedTypes resolvedTypes = getResolvedTypes(obj);
+		List<LightweightTypeReference> thrownExceptions = resolvedTypes.getThrownExceptions(obj);
+		return hasUnhandledException(thrownExceptions, declaredExceptions);
 	}
 	
+	protected boolean hasUnhandledException(List<LightweightTypeReference> thrownExceptions, Collection<JvmTypeReference> declaredExceptions) {
+		for(LightweightTypeReference thrownException: thrownExceptions) {
+			if (!thrownException.isSubtypeOf(RuntimeException.class)) {
+				if (isUnhandledException(thrownException, declaredExceptions)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	protected boolean isUnhandledException(LightweightTypeReference thrownException, Collection<JvmTypeReference> declaredExceptions) {
+		for(JvmTypeReference declaredException: declaredExceptions) {
+			if (thrownException.isSubtypeOf(declaredException.getType())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * this one trims the outer block
 	 */
-	public ITreeAppendable compile(XBlockExpression expr, ITreeAppendable b, JvmTypeReference expectedReturnType) {
-		final boolean isPrimitiveVoidExpected = isPrimitiveVoid(expectedReturnType); 
+	public ITreeAppendable compile(XBlockExpression expr, ITreeAppendable b, LightweightTypeReference expectedReturnType) {
+		final boolean isPrimitiveVoidExpected = expectedReturnType.isPrimitiveVoid(); 
 		final boolean isPrimitiveVoid = isPrimitiveVoid(expr);
 		final boolean earlyExit = exitComputer.isEarlyExit(expr);
 		final boolean isImplicitReturn = !isPrimitiveVoidExpected && !isPrimitiveVoid && !earlyExit;
@@ -345,15 +393,70 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected boolean isPrimitiveVoid(JvmTypeReference typeRef) {
-		return typeReferences.is(typeRef, Void.TYPE);
+		JvmType type = typeRef.getType();
+		if (type instanceof JvmVoid) {
+			return !type.eIsProxy();
+		}
+		return false;
 	}
 
 	protected JvmTypeReference getType(XExpression expr) {
-		return getTypeProvider().getType(expr);
+		LightweightTypeReference actualType = getLightweightType(expr);
+		if (actualType != null)
+			return actualType.toTypeReference();
+		return null;
+	}
+	
+	protected JvmTypeReference getType(JvmIdentifiableElement identifiable) {
+		LightweightTypeReference actualType = getLightweightType(identifiable);
+		if (actualType != null)
+			return actualType.toTypeReference();
+		return null;
+	}
+
+	protected LightweightTypeReference getLightweightType(XExpression expr) {
+		IResolvedTypes resolvedTypes = getResolvedTypes(expr);
+		LightweightTypeReference actualType = resolvedTypes.getActualType(expr);
+		return actualType;
+	}
+	
+	protected LightweightTypeReference getLightweightType(JvmIdentifiableElement identifiable) {
+		IResolvedTypes resolvedTypes = getResolvedTypes(identifiable);
+		LightweightTypeReference actualType = resolvedTypes.getActualType(identifiable);
+		return actualType;
+	}
+	
+//	protected JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
+//		IResolvedTypes resolvedTypes = getResolvedTypes(identifiable);
+//		JvmTypeReference result = resolvedTypes.getDeclaredType(identifiable);
+//		return result;
+//	}
+	
+	protected LightweightTypeReference getLightweightReturnType(XExpression expr) {
+		IResolvedTypes resolvedTypes = getResolvedTypes(expr);
+		LightweightTypeReference returnType = resolvedTypes.getReturnType(expr);
+		return returnType;
+	}
+
+	protected IResolvedTypes getResolvedTypes(EObject obj) {
+		return getTypeResolver().resolveTypes(obj);
+	}
+	
+	protected JvmTypeReference getExpectedType(XExpression expr) {
+		LightweightTypeReference expectedType = getLightweightExpectedType(expr);
+		if (expectedType != null)
+			return expectedType.toTypeReference();
+		return null;
+	}
+	
+	protected LightweightTypeReference getLightweightExpectedType(XExpression expr) {
+		IResolvedTypes resolvedTypes = getResolvedTypes(expr);
+		LightweightTypeReference expectedType = resolvedTypes.getExpectedType(expr);
+		return expectedType;
 	}
 	
 	protected abstract void internalToConvertedExpression(final XExpression obj, final ITreeAppendable appendable,
-			@Nullable JvmTypeReference toBeConvertedTo);
+			@Nullable LightweightTypeReference toBeConvertedTo);
 	
 	protected boolean isPrimitiveVoid(XExpression xExpression) {
 		JvmTypeReference type = getType(xExpression);
@@ -491,8 +594,13 @@ public abstract class AbstractXbaseCompiler {
 		OwnedConverter converter = new OwnedConverter(owner);
 		LightweightTypeReference convertedLeft = converter.toLightweightReference(left);
 		LightweightTypeReference convertedRight = converter.toLightweightReference(right);
+		return isJavaConformant(convertedLeft, convertedRight);
+	}
+	
+	protected boolean isJavaConformant(LightweightTypeReference left, LightweightTypeReference right) {
 		boolean result = (services.getTypeConformanceComputer().isConformant(
-				convertedLeft, convertedRight, RawTypeConformanceComputer.ALLOW_RAW_TYPE_CONVERSION) & RawTypeConformanceComputer.SUCCESS) != 0;
+				left, right,
+				RawTypeConformanceComputer.ALLOW_RAW_TYPE_CONVERSION | RawTypeConformanceComputer.ALLOW_BOXING | RawTypeConformanceComputer.ALLOW_UNBOXING) & RawTypeConformanceComputer.SUCCESS) != 0;
 		return result;
 	}
 	
@@ -505,44 +613,44 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected String getDefaultValueLiteral(XExpression expr) {
-		JvmTypeReference type = getTypeForVariableDeclaration(expr);
-		if (primitives.isPrimitive(type)) {
-			if (primitives.primitiveKind((JvmPrimitiveType) type.getType()) == Primitive.Boolean) {
+		LightweightTypeReference type = getTypeForVariableDeclaration(expr);
+		if (type.isPrimitive()) {
+			if (type.getPrimitiveKind() == Primitives.Primitive.Boolean) {
 				return "false";
 			} else {
-				return "(" + type.getQualifiedName() + ") 0";
+				return "(" + type.getSimpleName() + ") 0";
 			}
 		}
 		return "null";
 	}
 
 	protected void declareFreshLocalVariable(XExpression expr, ITreeAppendable b, Later expression) {
-		JvmTypeReference type = getTypeForVariableDeclaration(expr);
+		LightweightTypeReference type = getTypeForVariableDeclaration(expr);
 		final String proposedName = makeJavaIdentifier(getFavoriteVariableName(expr));
 		final String varName = b.declareSyntheticVariable(expr, proposedName);
 		b.newLine();
-		serialize(type,expr,b);
+		b.append(type);
 		b.append(" ").append(varName).append(" = ");
 		expression.exec(b);
 		b.append(";");
 	}
 
-	protected JvmTypeReference getTypeForVariableDeclaration(XExpression expr) {
-		JvmTypeReference type = getType(expr);
-		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
-		if (type instanceof JvmAnyTypeReference || isPrimitiveVoid(type)) {
-			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
+	protected LightweightTypeReference getTypeForVariableDeclaration(XExpression expr) {
+		IResolvedTypes resolvedTypes = getResolvedTypes(expr);
+		LightweightTypeReference actualType = resolvedTypes.getActualType(expr);
+		if (actualType.isAny() || actualType.isPrimitiveVoid()) {
+			LightweightTypeReference expectedType = resolvedTypes.getExpectedType(expr);
 			if (expectedType == null) {
-				expectedType = getTypeProvider().getExpectedReturnType(expr, false);
+				expectedType = resolvedTypes.getExpectedReturnType(expr);
 				if (expectedType == null) {
-					expectedType = getTypeProvider().getCommonReturnType(expr, true);
+					expectedType = resolvedTypes.getReturnType(expr);
 				}
 			}
-			if (expectedType != null && !isPrimitiveVoid(expectedType)) {
-				type = expectedType;
+			if (expectedType != null && !expectedType.isPrimitiveVoid()) {
+				actualType = expectedType;
 			}
 		}
-		return type;
+		return actualType;
 	}
 
 	/**
@@ -555,10 +663,6 @@ public abstract class AbstractXbaseCompiler {
 		return true;
 	}
 	
-	protected TypeConformanceComputer getTypeConformanceComputer() {
-		return typeConformanceComputer;
-	}
-
 	/**
 	 * @return the variable name under which the result of the expression is stored. Returns <code>null</code> if the
 	 *          expression hasn't been assigned to a local variable before.

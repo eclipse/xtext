@@ -54,7 +54,7 @@ public class CompilerBug405825Test extends AbstractXtendCompilerTest {
     _builder_1.append("public class Test {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public static void test(final Bound<? extends Object> b) {");
+    _builder_1.append("public static void test(final Bound<?> b) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -198,7 +198,7 @@ public class CompilerBug405825Test extends AbstractXtendCompilerTest {
     _builder_1.append("public class Test {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public static void test(final Sub<? extends Object> b) {");
+    _builder_1.append("public static void test(final Sub<?> b) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

@@ -41,6 +41,12 @@ public class FakeTreeAppendable extends StringBuilderBasedAppendable implements 
 	}
 	
 	@Override
+	public ITreeAppendable append(Class<?> type) {
+		super.append(type);
+		return this;
+	}
+	
+	@Override
 	public ITreeAppendable append(CharSequence string) {
 		super.append(string);
 		return this;

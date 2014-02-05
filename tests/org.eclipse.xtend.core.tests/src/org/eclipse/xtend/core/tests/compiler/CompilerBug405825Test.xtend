@@ -31,7 +31,7 @@ class CompilerBug405825Test extends AbstractXtendCompilerTest {
 		''', '''
 			@SuppressWarnings("all")
 			public class Test {
-			  public static void test(final Bound<? extends Object> b) {
+			  public static void test(final Bound<?> b) {
 			  }
 			  
 			  public static void main() {
@@ -94,7 +94,7 @@ class CompilerBug405825Test extends AbstractXtendCompilerTest {
 		''', '''
 			@SuppressWarnings("all")
 			public class Test {
-			  public static void test(final Sub<? extends Object> b) {
+			  public static void test(final Sub<?> b) {
 			  }
 			  
 			  public static void main() {

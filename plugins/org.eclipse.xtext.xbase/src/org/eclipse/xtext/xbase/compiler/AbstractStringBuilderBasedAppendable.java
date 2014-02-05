@@ -48,6 +48,11 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 		appendType(type, builder);
 		return this;
 	}
+	
+	public IAppendable append(Class<?> type) {
+		appendType(type, builder);
+		return this;
+	}
 
 	public IAppendable append(LightweightTypeReference typeRef) {
 		typeRef.accept(lightweightTypeReferenceSerializer);
@@ -134,6 +139,8 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 	}
 
 	protected abstract void appendType(final JvmType type, StringBuilder builder);
+	
+	protected abstract void appendType(final Class<?> type, StringBuilder builder);
 	
 	@Deprecated
 	public abstract List<String> getImports();

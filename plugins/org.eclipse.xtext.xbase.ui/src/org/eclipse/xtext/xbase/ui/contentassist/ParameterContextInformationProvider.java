@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -40,7 +39,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
+import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
@@ -84,15 +83,15 @@ public class ParameterContextInformationProvider implements IContextInformationP
 				QualifiedName qualifiedName = QualifiedName.create(getCalledFeatureName(containerCall));
 				boolean candidatesFound = false;
 				for (IEObjectDescription element : scope.getElements(qualifiedName)) {
-					if (element instanceof JvmFeatureDescription) {
-						JvmFeatureDescription featureDescription = (JvmFeatureDescription) element;
-						JvmFeature featureCandidate = featureDescription.getJvmFeature();
+					if (element instanceof IIdentifiableElementDescription) {
+						IIdentifiableElementDescription featureDescription = (IIdentifiableElementDescription) element;
+						JvmIdentifiableElement featureCandidate = featureDescription.getElementOrProxy();
 						if (featureCandidate instanceof JvmExecutable) {
 							JvmExecutable executable = (JvmExecutable) featureCandidate;
 							if(!executable.getParameters().isEmpty()) {
 								StyledString styledString = new StyledString();
 								proposalProvider.appendParameters(styledString, executable,
-										featureDescription.getNumberOfIrrelevantArguments(), converter);
+										featureDescription.isExtension() || featureDescription.getImplicitFirstArgument() != null ? 1 : 0, converter);
 								parameterData.addOverloaded(styledString.toString(), executable.isVarArgs());
 								candidatesFound = true;
 							}
@@ -168,7 +167,7 @@ public class ParameterContextInformationProvider implements IContextInformationP
 
 	protected List<XExpression> getArguments(XExpression call) {
 		if (call instanceof XFeatureCall)
-			return ((XFeatureCall) call).getExplicitArguments();
+			return ((XFeatureCall) call).getFeatureCallArguments();
 		else if (call instanceof XMemberFeatureCall)
 			return ((XMemberFeatureCall) call).getMemberCallArguments();
 		else if (call instanceof XConstructorCall)
