@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -35,6 +36,7 @@ import org.eclipse.xtend.ide.codebuilder.MemberFromSuperImplementor;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -59,6 +61,9 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedConstructor;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
@@ -76,6 +81,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 
 	private static final Logger logger = Logger.getLogger(XtendQuickfixProvider.class);
 	
+	@Inject private IXtendJvmAssociations associations;
+	
 	@Inject	private ReplacingAppendable.Factory appendableFactory;
 	
 	@Inject private XtendGrammarAccess grammarAccess;
@@ -91,6 +98,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	@Inject private CreateXtendTypeQuickfixes createTypeQuickfixes;
 
 	@Inject private CreateMemberQuickfixes createMemberQuickfixes;
+	
+	@Inject private OverrideHelper overrideHelper;
 	
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
 			IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
@@ -199,6 +208,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					new ISemanticModification() {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendClass clazz = (XtendClass) element;
+							JvmGenericType inferredType = associations.getInferredType(clazz);
+							ResolvedOperations operations = overrideHelper.getResolvedOperations(inferredType);
 							ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) clazz.eResource(),
 									insertionOffsets.getNewConstructorInsertOffset(null, clazz), 0, new OptionalParameters() {{ 
 										ensureEmptyLinesAround = true;
@@ -206,7 +217,9 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 									}});
 							EObject constructor = clazz.eResource().getResourceSet().getEObject(constructorURI, true);
 							if (constructor instanceof JvmConstructor) {
-								superMemberImplementor.appendConstructorFromSuper(clazz, (JvmConstructor) constructor,
+								superMemberImplementor.appendConstructorFromSuper(
+										clazz,
+										new ResolvedConstructor((JvmConstructor) constructor, operations.getType()),
 										appendable);
 							}
 							appendable.commitChanges();
@@ -223,6 +236,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					new ISemanticModification() {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendClass clazz = (XtendClass) element;
+							JvmGenericType inferredType = associations.getInferredType(clazz);
+							ResolvedOperations resolvedOperations = overrideHelper.getResolvedOperations(inferredType);
 							IXtextDocument document = context.getXtextDocument();
 							ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) clazz.eResource(),
 									insertionOffsets.getNewMethodInsertOffset(null, clazz), 0, new OptionalParameters() {{ 
@@ -237,7 +252,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 									if(!isFirst) 
 										appendable.newLine().newLine();
 									isFirst = false;
-									superMemberImplementor.appendOverrideFunction(clazz, (JvmOperation) overridden,
+									
+									superMemberImplementor.appendOverrideFunction(clazz, resolvedOperations.getResolvedOperation((JvmOperation) overridden),
 											appendable);
 								}
 							}

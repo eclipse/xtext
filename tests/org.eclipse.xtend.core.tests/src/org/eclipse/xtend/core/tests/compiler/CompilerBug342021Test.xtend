@@ -45,7 +45,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      _xifexpression = _function;
 			    } else {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(s);
-			      _xifexpression = ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			      _xifexpression = (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			    }
 			    return _xifexpression;
 			  }
@@ -84,7 +84,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      _xifexpression = _function;
 			    } else {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			      _xifexpression = ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			      _xifexpression = (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			    }
 			    return _xifexpression;
 			  }
@@ -121,7 +121,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      return _function;
 			    } else {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			      return ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			      return (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			    }
 			  }
 			}
@@ -160,7 +160,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
 			      _xifexpression = _newArrayList.toArray();
 			    }
-			    return ((Iterable<Object>)Conversions.doWrapArray(_xifexpression));
+			    return (Iterable<Object>)Conversions.doWrapArray(_xifexpression);
 			  }
 			}
 		''')
@@ -196,7 +196,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      _xifexpression = _function;
 			    } else {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			      return ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			      return (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			    }
 			    return _xifexpression;
 			  }
@@ -235,7 +235,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      _xifexpression = _function;
 			    } else {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(s);
-			      _xifexpression = ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			      _xifexpression = (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			    }
 			    return _xifexpression;
 			  }
@@ -275,7 +275,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      _xifexpression = _function;
 			    } else {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			      _xifexpression = ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			      _xifexpression = (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			    }
 			    return _xifexpression;
 			  }
@@ -313,7 +313,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      };
 			      return _function;
 			    } else {
-			      return ((Iterable<Object>)Conversions.doWrapArray(CollectionLiterals.<String>newArrayList("").toArray()));
+			      return (Iterable<Object>)Conversions.doWrapArray(CollectionLiterals.<String>newArrayList("").toArray());
 			    }
 			  }
 			}
@@ -352,7 +352,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
 			      _xifexpression = _newArrayList.toArray();
 			    }
-			    return ((Iterable<Object>)Conversions.doWrapArray(_xifexpression));
+			    return (Iterable<Object>)Conversions.doWrapArray(_xifexpression);
 			  }
 			}
 		''')
@@ -388,7 +388,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      _xifexpression = _function;
 			    } else {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			      return ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			      return (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			    }
 			    return _xifexpression;
 			  }
@@ -434,7 +434,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			              return _newArrayList.iterator();
 			            }
 			          };
-			          _xblockexpression_1 = (_function);
+			          _xblockexpression_1 = _function;
 			        }
 			        _xifexpression = _xblockexpression_1;
 			      } else {
@@ -442,11 +442,11 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			        {
 			          this.toString();
 			          ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(s);
-			          _xblockexpression_2 = (_newArrayList.toArray());
+			          _xblockexpression_2 = _newArrayList.toArray();
 			        }
-			        _xifexpression = ((Iterable<Object>)Conversions.doWrapArray(_xblockexpression_2));
+			        _xifexpression = (Iterable<Object>)Conversions.doWrapArray(_xblockexpression_2);
 			      }
-			      _xblockexpression = (_xifexpression);
+			      _xblockexpression = _xifexpression;
 			    }
 			    return _xblockexpression;
 			  }
@@ -495,7 +495,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			              return _newArrayList.iterator();
 			            }
 			          };
-			          _xblockexpression_1 = (_function);
+			          _xblockexpression_1 = _function;
 			        }
 			        _xifexpression = _xblockexpression_1;
 			      } else {
@@ -503,11 +503,11 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			        {
 			          this.toString();
 			          ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			          _xblockexpression_2 = (_newArrayList.toArray());
+			          _xblockexpression_2 = _newArrayList.toArray();
 			        }
-			        _xifexpression = ((Iterable<Object>)Conversions.doWrapArray(_xblockexpression_2));
+			        _xifexpression = (Iterable<Object>)Conversions.doWrapArray(_xblockexpression_2);
 			      }
-			      _xblockexpression = (_xifexpression);
+			      _xblockexpression = _xifexpression;
 			    }
 			    return _xblockexpression;
 			  }
@@ -551,7 +551,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    } else {
 			      this.toString();
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			      return ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			      return (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			    }
 			  }
 			}
@@ -599,13 +599,13 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			        {
 			          this.toString();
 			          ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			          _xblockexpression_1 = (_newArrayList.toArray());
+			          _xblockexpression_1 = _newArrayList.toArray();
 			        }
 			        _xifexpression = _xblockexpression_1;
 			      }
-			      _xblockexpression = (_xifexpression);
+			      _xblockexpression = _xifexpression;
 			    }
-			    return ((Iterable<Object>)Conversions.doWrapArray(_xblockexpression));
+			    return (Iterable<Object>)Conversions.doWrapArray(_xblockexpression);
 			  }
 			}
 		''')
@@ -654,15 +654,15 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			              return _newArrayList.iterator();
 			            }
 			          };
-			          _xblockexpression_1 = (_function);
+			          _xblockexpression_1 = _function;
 			        }
 			        _xifexpression = _xblockexpression_1;
 			      } else {
 			        this.toString();
 			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			        return ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			        return (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			      }
-			      _xblockexpression = (_xifexpression);
+			      _xblockexpression = _xifexpression;
 			    }
 			    return _xblockexpression;
 			  }
@@ -706,7 +706,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    }
 			    if (!_matched) {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			      _switchResult = ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			      _switchResult = (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			    }
 			    return _switchResult;
 			  }
@@ -752,7 +752,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      if (o instanceof String) {
 			        _matched=true;
 			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			        return ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			        return (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			      }
 			    }
 			    return _switchResult;
@@ -800,7 +800,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      if (o instanceof String) {
 			        _matched=true;
 			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			        _switchResult = ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			        _switchResult = (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			      }
 			    }
 			    if (!_matched) {
@@ -851,7 +851,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      if (o instanceof String) {
 			        _matched=true;
 			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			        _switchResult = ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			        _switchResult = (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			      }
 			    }
 			    if (!_matched) {
@@ -898,7 +898,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			      if (_t instanceof Exception) {
 			        final Exception e = (Exception)_t;
 			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			        _xtrycatchfinallyexpression = ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			        _xtrycatchfinallyexpression = (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			      } else {
 			        throw Exceptions.sneakyThrow(_t);
 			      }
@@ -953,7 +953,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    if (!_matched) {
 			      if (b) {
 			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			        return ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			        return (Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray());
 			      } else {
 			        return Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet());
 			      }

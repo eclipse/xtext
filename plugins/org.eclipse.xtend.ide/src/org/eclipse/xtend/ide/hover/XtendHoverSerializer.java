@@ -26,10 +26,13 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.util.XbaseSwitch;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Holger Schill - Initial contribution and API
  * @since 2.3
  */
+@Singleton
 public class XtendHoverSerializer implements IFeatureNames {
 
 	private static final String SEPARATOR = ", ";

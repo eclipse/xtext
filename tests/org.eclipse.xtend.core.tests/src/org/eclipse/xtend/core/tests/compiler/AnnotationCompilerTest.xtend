@@ -119,7 +119,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			public @interface DependsOn {
-			  public Class<? extends Object>[] value() default { String.class, CharSequence.class };
+			  public Class<?>[] value() default { String.class, CharSequence.class };
 			}
 		''')
 	}
@@ -192,7 +192,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			public @interface MyAnnotation {
 			  public String x();
 			  public int y();
-			  public Class<? extends Object>[] value();
+			  public Class<?>[] value();
 			}
 		''')
 	}
@@ -211,7 +211,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			public @interface MyAnnotation {
 			  public String x() default "foo";
 			  public int y() default 42;
-			  public Class<? extends Object> value() default String.class;
+			  public Class<?> value() default String.class;
 			  public boolean flag() default true;
 			}
 		''')

@@ -41,7 +41,10 @@ public class ConstructorDelegateScope extends AbstractSessionBasedScope implemen
 	
 	@Override
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
-		throw new UnsupportedOperationException();
+		List<IEObjectDescription> result = Lists.newArrayList();
+		result.addAll(getLocalElementsByName(THIS));
+		result.addAll(getLocalElementsByName(SUPER));
+		return result;
 	}
 	
 	@Override

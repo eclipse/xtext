@@ -153,7 +153,7 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 
 	@Override
 	public String toString() {
-		return String.format("%s [key: %s]", getElementOrProxy().getIdentifier(), getShadowingKey());
+		return String.format("%s:%s [key: %s]", getName(), getElementOrProxy().getIdentifier(), getShadowingKey());
 	}
 
 	public JvmIdentifiableElement getElementOrProxy() {
@@ -173,5 +173,26 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 	public boolean isTypeLiteral() {
 		return false;
 	}
-
+	
+	public int getNumberOfIrrelevantParameters() {
+		if (isExtension())
+			return 1;
+		if (getImplicitFirstArgument() != null)
+			return 1;
+		return 0;
+	}
+	
+	public int getNumberOfParameters() {
+		JvmIdentifiableElement elementOrProxy = getElementOrProxy();
+		if (elementOrProxy instanceof JvmExecutable) {
+			int parameters = ((JvmExecutable) elementOrProxy).getParameters().size() - getNumberOfIrrelevantParameters();
+			return parameters;
+		}
+		return 0;
+	}
+	
+	public boolean isValidStaticState() {
+		return true;
+	}
+	
 }

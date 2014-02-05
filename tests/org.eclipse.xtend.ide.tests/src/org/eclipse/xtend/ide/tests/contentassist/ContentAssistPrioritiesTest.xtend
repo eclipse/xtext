@@ -52,7 +52,7 @@ class ContentAssistPrioritiesTest extends AbstractXtendContentAssistBugTest {
 	}
 	
 	def void assertContains(ICompletionProposal proposal, String text) {
-		assertTrue(proposal.displayString, proposal.displayString.contains(text))
+		assertTrue(text + ' in ' + proposal.displayString, proposal.displayString.contains(text))
 	}
 	
 }

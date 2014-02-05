@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmType;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
+import org.eclipse.xtext.xbase.typesystem.util.RawTypeSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
@@ -47,6 +49,12 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 	
 	public LightweightTypeReference getContextType() {
 		return contextType;
+	}
+	
+	public LightweightTypeReference getResolvedDeclarator() {
+		JvmExecutable declaration = getDeclaration();
+		JvmDeclaredType declarator = declaration.getDeclaringType();
+		return getContextType().getSuperType(declarator);
 	}
 	
 	public List<JvmTypeParameter> getTypeParameters() {
@@ -159,6 +167,11 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 	}
 	
 	protected TypeParameterSubstitutor<?> getSubstitutor() {
+		if (getContextType().getType() != getDeclaration().getDeclaringType()) {
+			if (isRawTypeInheritance()) {
+				return new RawTypeSubstitutor(getContextType().getOwner());
+			}
+		}
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = getContextTypeParameterMapping();
 		TypeParameterSubstitutor<?> result = new TypeParameterByConstraintSubstitutor(mapping, getContextType().getOwner()) {
 			@Override
@@ -181,6 +194,17 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 			}
 		};
 		return result;
+	}
+	
+	protected boolean isRawTypeInheritance() {
+		List<LightweightTypeReference> superTypes = getContextType().getAllSuperTypes();
+		JvmDeclaredType declaringType = getDeclaration().getDeclaringType();
+		for(LightweightTypeReference superType: superTypes) {
+			if (superType.getType() == declaringType && superType.isRawType()) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override

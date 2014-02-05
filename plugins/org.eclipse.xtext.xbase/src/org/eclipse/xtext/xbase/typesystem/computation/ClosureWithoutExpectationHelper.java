@@ -118,6 +118,16 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 	}
 
 	protected ITypeComputationState getClosureBodyTypeComputationState(ITypeAssigner typeAssigner, FunctionTypeReference incompleteClosureType) {
+		ITypeComputationState result = assignParameters(typeAssigner, incompleteClosureType);
+//		JvmType knownType = incompleteClosureType.getType();
+//		if (knownType != null && knownType instanceof JvmGenericType) {
+//			result.assignType(IFeatureNames.SELF, knownType, incompleteClosureType);
+//		}
+		result.withinScope(getClosure());
+		return result;
+	}
+
+	protected ITypeComputationState assignParameters(ITypeAssigner typeAssigner, FunctionTypeReference incompleteClosureType) {
 		List<LightweightTypeReference> operationParameterTypes = incompleteClosureType.getTypeArguments();
 		List<JvmFormalParameter> closureParameters = getClosure().getFormalParameters();
 		
@@ -155,10 +165,6 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 			}
 		}
 		ITypeComputationState result = typeAssigner.getForkedState();
-//		JvmType knownType = incompleteClosureType.getType();
-//		if (knownType != null && knownType instanceof JvmGenericType) {
-//			result.assignType(IFeatureNames.SELF, knownType, incompleteClosureType);
-//		}
 		return result;
 	}
 

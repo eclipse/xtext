@@ -32,6 +32,34 @@ public class Bug401154Test extends AbstractXbaseContentAssistBugTest {
   }
   
   @Test
+  public void testLocalSwitchVariable() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch it: new Object {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("CharSequence: ");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("it");
+    _assertProposal.withDisplayString("it");
+  }
+  
+  @Test
+  public void testLocalSwitchVariableInDefault() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch it: new Object {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("default: ");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("it");
+    _assertProposal.withDisplayString("it");
+  }
+  
+  @Test
   public void testImplicitReceiverInEmptyBlock() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     StringConcatenation _builder = new StringConcatenation();
@@ -114,6 +142,20 @@ public class Bug401154Test extends AbstractXbaseContentAssistBugTest {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("CharSequence: ");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("charAt()");
+    _assertProposal.withDisplayString("charAt(int index) : char - AbstractStringBuilder");
+  }
+  
+  @Test
+  public void testKnownTypeIsSupertype_02() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch it: new StringBuilder {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("CharSequence: it.");
     _builder.newLine();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
     ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("charAt()");

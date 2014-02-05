@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription;
+import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -117,11 +118,13 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	protected ExpressionAwareStackedResolvedTypes doComputeTypes(XExpression expression) {
 		ExpressionAwareStackedResolvedTypes stackedResolvedTypes = pushTypes(expression);
 		ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
+		stackedResolvedTypes.addExpressionScope(expression, state.getFeatureScopeSession(), IExpressionScope.Anchor.BEFORE);
 		getResolver().getTypeComputer().computeTypes(expression, state);
 		stackedResolvedTypes.prepareMergeIntoParent();
 		if (stackedResolvedTypes.doGetTypeData(expression) == null) {
 			state.acceptActualType(new AnyTypeReference(stackedResolvedTypes.getReferenceOwner()));
 		}
+		stackedResolvedTypes.addExpressionScope(expression, getFeatureScopeSession(), IExpressionScope.Anchor.AFTER);
 		return stackedResolvedTypes;
 	}
 	
@@ -552,5 +555,17 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 
 	public boolean isIgnored(String issueCode) {
 		return getSeverities().isIgnored(issueCode);
+	}
+	
+	public void withinScope(EObject context) {
+		resolvedTypes.addExpressionScope(context, featureScopeSession, IExpressionScope.Anchor.WITHIN);
+	}
+	
+	public void afterScope(EObject context) {
+		resolvedTypes.addExpressionScope(context, featureScopeSession, IExpressionScope.Anchor.AFTER);
+	}
+	
+	public void rewriteScope(EObject context) {
+		resolvedTypes.replacePreviousExpressionScope(context, featureScopeSession, IExpressionScope.Anchor.AFTER);
 	}
 }

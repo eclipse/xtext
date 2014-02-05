@@ -34,6 +34,8 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * TODO reimplement with Xtend dispatch
  */
 @Singleton
 public class DefaultEarlyExitComputer implements IEarlyExitComputer {
@@ -156,7 +158,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 	}
 	
 	protected Collection<ExitPoint> _exitPoints(XAbstractFeatureCall expression) {
-		for(XExpression argument: expression.getExplicitArguments()) {
+		for(XExpression argument: expression.getActualArguments()) {
 			Collection<ExitPoint> argumentExitPoints = getExitPoints(argument);
 			if (isNotEmpty(argumentExitPoints))
 				return argumentExitPoints;

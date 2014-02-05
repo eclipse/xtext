@@ -145,8 +145,8 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 		return result
 	}
 	
-	override getDeclaredType(JvmIdentifiableElement identifiable) {
-		val result = super.getDeclaredType(identifiable)
+	override doGetDeclaredType(JvmIdentifiableElement identifiable) {
+		val result = super.doGetDeclaredType(identifiable)
 		if (result != null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
@@ -289,8 +289,8 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 		return result
 	}
 	
-	override getDeclaredType(JvmIdentifiableElement identifiable) {
-		val result = super.getDeclaredType(identifiable)
+	override doGetDeclaredType(JvmIdentifiableElement identifiable) {
+		val result = super.doGetDeclaredType(identifiable)
 		if (result != null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
@@ -410,8 +410,8 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 		return result
 	}
 	
-	override getDeclaredType(JvmIdentifiableElement identifiable) {
-		val result = super.getDeclaredType(identifiable)
+	override doGetDeclaredType(JvmIdentifiableElement identifiable) {
+		val result = super.doGetDeclaredType(identifiable)
 		if (result != null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
@@ -530,8 +530,8 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 		return result
 	}
 	
-	override getDeclaredType(JvmIdentifiableElement identifiable) {
-		val result = super.getDeclaredType(identifiable)
+	override doGetDeclaredType(JvmIdentifiableElement identifiable) {
+		val result = super.doGetDeclaredType(identifiable)
 		if (result != null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result

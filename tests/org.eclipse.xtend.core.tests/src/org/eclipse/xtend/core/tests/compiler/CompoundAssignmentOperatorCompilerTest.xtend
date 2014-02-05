@@ -7,21 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
-import compound.IntCompoundExtensions
-import org.junit.Before
 import org.junit.Test
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
-
-	@Before
-	override setupCompiler() {
-		compiler.addClassPathOfClass(class)
-		compiler.addClassPathOfClass(IntCompoundExtensions)
-		compiler.setParentClassLoader(class.classLoader)
-	}
 
 	@Test def void test_1() {
 		'''
@@ -44,7 +35,7 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			    {
 			      int i = 2;
 			      int _multiplyAssign = i *= 2;
-			      _xblockexpression = (i += _multiplyAssign);
+			      _xblockexpression = i += _multiplyAssign;
 			    }
 			    return _xblockexpression;
 			  }
@@ -73,7 +64,7 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			    {
 			      int i = 2;
 			      int _add = i += 2;
-			      _xblockexpression = (i *= _add);
+			      _xblockexpression = i *= _add;
 			    }
 			    return _xblockexpression;
 			  }

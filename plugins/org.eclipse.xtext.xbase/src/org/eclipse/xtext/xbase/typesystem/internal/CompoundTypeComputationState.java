@@ -285,4 +285,22 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 			return state.isIgnored(issueCode);
 		throw new IllegalStateException("no components available.");
 	}
+	
+	public void withinScope(EObject context) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].withinScope(context);
+		}
+	}
+	
+	public void afterScope(EObject context) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].afterScope(context);
+		}
+	}
+	
+	public void rewriteScope(EObject context) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].rewriteScope(context);
+		}
+	}
 }

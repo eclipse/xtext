@@ -39,8 +39,8 @@ public class ExtensionAwareClosureTypeComputer extends ClosureTypeComputer {
 	protected ClosureWithExpectationHelper createClosureWithExpectationHelper(JvmOperation operation) {
 		return new ClosureWithExpectationHelper(getClosure(), operation, getExpectation(), getState()) {
 			@Override
-			protected ITypeComputationState getClosureBodyTypeComputationState(ITypeAssigner typeAssigner) {
-				ITypeComputationState result = super.getClosureBodyTypeComputationState(typeAssigner);
+			protected ITypeComputationState assignParameters(ITypeAssigner typeAssigner) {
+				ITypeComputationState result = super.assignParameters(typeAssigner);
 				addExtensions(result);
 				return result;
 			}
@@ -51,8 +51,8 @@ public class ExtensionAwareClosureTypeComputer extends ClosureTypeComputer {
 	protected UnknownClosureTypeHelper createUnknownClosureTypeHelper() {
 		return new UnknownClosureTypeHelper(getClosure(), getExpectation(), getState()) {
 			@Override
-			protected ITypeComputationState getClosureBodyTypeComputationState(ITypeAssigner typeAssigner) {
-				ITypeComputationState result = super.getClosureBodyTypeComputationState(typeAssigner);
+			protected ITypeComputationState assignParameters(ITypeAssigner typeAssigner) {
+				ITypeComputationState result = super.assignParameters(typeAssigner);
 				addExtensions(result);
 				return result;
 			}
@@ -63,9 +63,9 @@ public class ExtensionAwareClosureTypeComputer extends ClosureTypeComputer {
 	protected ClosureWithoutExpectationHelper createClosureWithoutExpectationHelper() {
 		return new ClosureWithoutExpectationHelper(getClosure(), getExpectation(), getState()) {
 			@Override
-			protected ITypeComputationState getClosureBodyTypeComputationState(ITypeAssigner typeAssigner,
+			protected ITypeComputationState assignParameters(ITypeAssigner typeAssigner,
 					FunctionTypeReference incompleteClosureType) {
-				ITypeComputationState result = super.getClosureBodyTypeComputationState(typeAssigner, incompleteClosureType);
+				ITypeComputationState result = super.assignParameters(typeAssigner, incompleteClosureType);
 				addExtensions(result);
 				return result;
 			}

@@ -8,12 +8,10 @@
 package org.eclipse.xtext.xbase.typesystem;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.CachingBatchTypeResolver;
 
@@ -51,26 +49,13 @@ public interface IBatchTypeResolver {
 	IResolvedTypes resolveTypes(@Nullable EObject object);
 	
 	/**
-	 * Returns an intermitted instance of resolved types that carries the
-	 * potentially specialized type information in the context of the given
-	 * instance. This may be an instance of resolved types that yields
-	 * the type {@link CharSequence} for the {@link JvmIdentifiableElement identifiable}
-	 * {@code o} at the cursor position {@code |} when queried with the {@link XCasePart}:
+	 * Return a handle to resolved types of expressions that are related
+	 * to the given {@code object}.
 	 * 
-	 * <pre>
-	 * switch o: getObject() {
-	 *   CharSequence: |
-	 * }
-	 * </pre>
-	 * @param context the expression or {@link XCasePart case part} that specified the current context. 
+	 * @param resource the resource that shall be resolved.
+	 * @return a handle to resolved types of expressions and identifiables.
 	 */
 	@NonNull
-	IResolvedTypes getResolvedTypesInContextOf(@Nullable EObject context);
-	
-	/**
-	 * Returns the currently visible features in the given context.
-	 */
-	@NonNull
-	IScope getFeatureScope(@Nullable XAbstractFeatureCall featureCall);
+	IResolvedTypes resolveTypes(@NonNull Resource resource);
 	
 }

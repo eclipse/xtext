@@ -199,9 +199,6 @@ public class TypeArgumentContextProvider {
 	
 	public ITypeArgumentContext getTypeArgumentContext(Request request) {
 		IInitializableTypeArgumentContext result = lazyTypeArgumentContextProvider.get();
-		if (LoggingTypeArgumentDecorator.isDebugEnabled()) {
-			result = new LoggingTypeArgumentDecorator(result);
-		}
 		result.initialize(request, this);
 		return result;
 	}

@@ -196,6 +196,29 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 	}
 
 	protected ITypeComputationState getClosureBodyTypeComputationState(ITypeAssigner typeAssigner) {
+		ITypeComputationState result = assignParameters(typeAssigner);
+		LightweightTypeReference expectedType = getExpectation().getExpectedType();
+		if (expectedType == null) {
+			throw new IllegalStateException();
+		}
+		JvmType knownType = expectedType.getType();
+		if (knownType != null && knownType instanceof JvmGenericType) {
+			result.assignType(IFeatureNames.SELF, knownType, expectedType);
+		}
+		List<JvmTypeReference> exceptions = operation.getExceptions();
+		if (exceptions.isEmpty()) {
+			result.withinScope(getClosure());
+			return result;
+		}
+		List<LightweightTypeReference> expectedExceptions = Lists.newArrayListWithCapacity(exceptions.size());
+		for (JvmTypeReference exception : exceptions) {
+			expectedExceptions.add(typeAssigner.toLightweightTypeReference(exception));
+		}
+		result.withinScope(getClosure());
+		return result.withExpectedExceptions(expectedExceptions);
+	}
+
+	protected ITypeComputationState assignParameters(ITypeAssigner typeAssigner) {
 		List<LightweightTypeReference> operationParameterTypes = expectedClosureType.getParameterTypes();
 		List<JvmFormalParameter> closureParameters = getClosure().getFormalParameters();
 		Object skippedHandle = null;
@@ -281,22 +304,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 			}
 		}
 		ITypeComputationState result = typeAssigner.getForkedState();
-		LightweightTypeReference expectedType = getExpectation().getExpectedType();
-		if (expectedType == null) {
-			throw new IllegalStateException();
-		}
-		JvmType knownType = expectedType.getType();
-		if (knownType != null && knownType instanceof JvmGenericType) {
-			result.assignType(IFeatureNames.SELF, knownType, expectedType);
-		}
-		List<JvmTypeReference> exceptions = operation.getExceptions();
-		if (exceptions.isEmpty())
-			return result;
-		List<LightweightTypeReference> expectedExceptions = Lists.newArrayListWithCapacity(exceptions.size());
-		for (JvmTypeReference exception : exceptions) {
-			expectedExceptions.add(typeAssigner.toLightweightTypeReference(exception));
-		}
-		return result.withExpectedExceptions(expectedExceptions);
+		return result;
 	}
 
 	/**

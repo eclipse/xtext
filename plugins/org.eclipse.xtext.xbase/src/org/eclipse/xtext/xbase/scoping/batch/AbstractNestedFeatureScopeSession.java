@@ -17,6 +17,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * An abstract nested feature scope session.
@@ -104,6 +105,10 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 		return parent.isInstanceContext();
 	}
 	
+	public boolean isConstructorContext() {
+		return parent.isConstructorContext();
+	}
+	
 	@Override
 	protected void addExtensionProviders(List<ExpressionBucket> result) {
 		parent.addExtensionProviders(result);
@@ -118,8 +123,8 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 		return parent.isVisible(member);
 	}
 	
-	public boolean isVisible(JvmMember member, @Nullable JvmIdentifiableElement receiverFeature) {
-		return parent.isVisible(member, receiverFeature);
+	public boolean isVisible(JvmMember member, @Nullable LightweightTypeReference receiverType, @Nullable JvmIdentifiableElement receiverFeature) {
+		return parent.isVisible(member, receiverType, receiverFeature);
 	}
 	
 }

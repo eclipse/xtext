@@ -41,4 +41,6 @@ public interface IBatchScopeProvider extends IScopeProvider {
 	 */
 	boolean isBatchScopeable(EReference reference);
 	
+	boolean isFeatureCallScope(EReference reference);
+	
 }

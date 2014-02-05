@@ -43,8 +43,9 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 				if (type instanceof JvmDeclaredType) {
 					Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
 					for(JvmFeature feature: features) {
-						if (feature.isStatic())
+						if (feature.isStatic()) {
 							addDescriptions(feature, bucket, result);
+						}
 					}
 				}
 			}
@@ -53,7 +54,15 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 	}
 	
 	protected void addDescriptions(JvmFeature feature, TypeBucket bucket, List<IEObjectDescription> result) {
-		result.add(createDescription(QualifiedName.create(feature.getSimpleName()), feature, bucket));
+		String simpleName = feature.getSimpleName();
+		IEObjectDescription description = createDescription(QualifiedName.create(simpleName), feature, bucket);
+		if (description != null) {
+			result.add(description);
+			String propertyName = toProperty(simpleName, feature);
+			if (propertyName != null) {
+				result.add(createDescription(QualifiedName.create(propertyName), feature, bucket));
+			}
+		}
 	}
 
 	protected abstract List<TypeBucket> getBuckets();
