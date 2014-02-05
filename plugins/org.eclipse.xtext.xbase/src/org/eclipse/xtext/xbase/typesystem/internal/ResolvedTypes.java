@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -35,6 +36,8 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -180,6 +183,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		if (!diagnostics.add(diagnostic)) {
 			throw new IllegalStateException("Duplicate diagnostic: " + diagnostic);
 		}
+	}
+	
+	public List<LightweightTypeReference> getThrownExceptions(XExpression obj) {
+		return getServices().getEarlyExitComputer().getThrownExceptions(obj, this, this.getReferenceOwner());
 	}
 	
 	@Nullable
@@ -503,7 +510,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			}
 		} else {
 			if (reassignedTypes != null)
-				ensureReassignedTypesMapExists().remove(identifiable);
+				reassignedTypes.remove(identifiable);
 		}
 	}
 	
@@ -584,12 +591,16 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	protected Map<JvmIdentifiableElement, LightweightTypeReference> basicGetTypes() {
 		return types != null ? types : Collections.<JvmIdentifiableElement, LightweightTypeReference>emptyMap(); 
 	}
-
+	
 	private Map<JvmIdentifiableElement, LightweightTypeReference> ensureTypesMapExists() {
 		if (types == null) {
 			types = Maps.newLinkedHashMap();
 		}
 		return types;
+	}
+	
+	protected Map<JvmIdentifiableElement, LightweightTypeReference> basicGetReassignedTypes() {
+		return reassignedTypes != null ? reassignedTypes : Collections.<JvmIdentifiableElement, LightweightTypeReference>emptyMap(); 
 	}
 
 	private Map<JvmIdentifiableElement, LightweightTypeReference> ensureReassignedTypesMapExists() {
@@ -671,13 +682,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 		LightweightTypeReference result = basicGetTypes().get(identifiable);
 		if (result == null) {
-			return getDeclaredType(identifiable);
+			return doGetDeclaredType(identifiable);
 		}
 		return result;
 	}
 	
 	@Nullable
-	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
+	protected LightweightTypeReference doGetDeclaredType(JvmIdentifiableElement identifiable) {
 		if (identifiable instanceof JvmType) {
 			ITypeReferenceOwner owner = getConverter().getOwner();
 			ParameterizedTypeReference result = new ParameterizedTypeReference(owner, (JvmType) identifiable);
@@ -688,7 +699,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			}
 			return result;
 		}
-		JvmTypeReference type = getUnconvertedDeclaredType(identifiable);
+		JvmTypeReference type = getDeclaredType(identifiable);
 		if (type != null) {
 			LightweightTypeReference result = getConverter().toLightweightReference(type);
 			return result;
@@ -697,7 +708,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	@Nullable
-	protected JvmTypeReference getUnconvertedDeclaredType(JvmIdentifiableElement identifiable) {
+	protected JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
 		if (identifiable instanceof JvmOperation) {
 			return ((JvmOperation) identifiable).getReturnType();
 		}
@@ -1127,5 +1138,38 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 
 	protected abstract void markToBeInferred(XExpression expression);
+	
+	protected final void addExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor) {
+		addExpressionScope(context, session, anchor, withFlattenedReassignedTypes());
+	}
+	
+	private IResolvedTypes withFlattenedReassignedTypes() {
+		final Map<JvmIdentifiableElement, LightweightTypeReference> flattened = getFlattenedReassignedTypes();
+		if (flattened != null)
+			return new ForwardingResolvedTypes() {
+				@Override
+				@Nullable
+				public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
+					LightweightTypeReference reassigned = flattened.get(identifiable);
+					if (reassigned != null)
+						return reassigned;
+					return super.getActualType(identifiable);
+				}
+			
+				@Override
+				protected IResolvedTypes delegate() {
+					return ResolvedTypes.this;
+				}
+			};
+		return this;
+	}
 
+	protected Map<JvmIdentifiableElement, LightweightTypeReference> getFlattenedReassignedTypes() {
+		return reassignedTypes == null ? null : Maps.newHashMap(reassignedTypes);
+	}
+
+	protected abstract void addExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor, IResolvedTypes resolvedTypes);
+
+	protected abstract void replacePreviousExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor);
+	
 }

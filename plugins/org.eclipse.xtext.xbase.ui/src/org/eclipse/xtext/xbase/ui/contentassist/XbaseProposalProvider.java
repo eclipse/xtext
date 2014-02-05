@@ -3,8 +3,6 @@
 */
 package org.eclipse.xtext.xbase.ui.contentassist;
 
-import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Maps.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
@@ -13,19 +11,16 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
-import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
@@ -34,7 +29,6 @@ import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
@@ -48,36 +42,27 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Triple;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.XCasePart;
-import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XForLoopExpression;
-import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
-import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
+import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
-import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -87,16 +72,35 @@ import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
-@SuppressWarnings("deprecation")
 public class XbaseProposalProvider extends AbstractXbaseProposalProvider implements RepeatedContentAssistProcessor.ModeAware {
+	
+	public static class ValidFeatureDescription implements Predicate<IEObjectDescription> {
+
+		@Inject
+		private OperatorMapping operatorMapping;
+		
+		public boolean apply(IEObjectDescription input) {
+			if (input instanceof IIdentifiableElementDescription) {
+				final IIdentifiableElementDescription desc = (IIdentifiableElementDescription) input;
+				if (!desc.isVisible() || !desc.isValidStaticState()) // || !desc.isValid())
+					return false;
+				
+				// filter operator method names from CA
+				if (input.getName().getFirstSegment().startsWith("operator_")) {
+					return operatorMapping.getOperator(input.getName()) == null;
+				}
+				return true;
+			}
+			return true;
+		}
+		
+	}
 	
 	private final static Logger log = Logger.getLogger(XbaseProposalProvider.class);
 	
@@ -112,9 +116,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	private ValidFeatureDescription featureDescriptionPredicate;
 	
 	@Inject
-	private XbaseGrammarAccess grammarAccess;
-	
-	@Inject
 	private XbaseQualifiedNameValueConverter qualifiedNameValueConverter;
 	
 	@Inject
@@ -125,6 +126,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	
 	@Inject
 	private IBatchTypeResolver typeResolver;
+	
+	@Inject
+	private IBatchScopeProvider batchScopeProvider;
 
 	public String getNextCategory() {
 		return getXbaseCrossReferenceProposalCreator().getNextCategory();
@@ -147,109 +151,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 	
 	@Override
-	public void createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		// we install a caching scope provider so scopes won't be computed multiple times.
-		IScopeProvider scopeProvider = super.getScopeProvider();
-		try {
-			this.cachingProvider = new CachingXbaseScopeProvider((XbaseScopeProvider)scopeProvider);
-			this.getCrossReferenceProposalCreator().setScopeProvider(cachingProvider);
-			super.createProposals(context, acceptor);
-		} finally {
-			this.cachingProvider = null;
-			this.getCrossReferenceProposalCreator().setScopeProvider(scopeProvider);
-		}
-	}
-	
-	private CachingXbaseScopeProvider cachingProvider = null;
-	
-	@Override
-	public XbaseScopeProvider getScopeProvider() {
-		if (cachingProvider != null)
-			return cachingProvider;
-		return (XbaseScopeProvider) super.getScopeProvider();
-	}
-	
-	private static class CachingXbaseScopeProvider extends XbaseScopeProvider {
-		private XbaseScopeProvider delegate;
-		private Map<Pair<EObject,EReference>, IScope> getScopeCache = newHashMap();
-		private Map<Triple<XExpression,XExpression,EReference>, IScope> createFeatureCallScopeForReceiverCache = newHashMap();
-
-		public CachingXbaseScopeProvider(XbaseScopeProvider delegate) {
-			this.delegate = delegate;
-		}
-		
-		@Override
-		public IScope createSimpleFeatureCallScope(EObject context, EReference reference, Resource resource,
-				boolean includeCurrentBlock, int idx) {
-			// No caching, since this is not called multiples times.
-			return delegate.createSimpleFeatureCallScope(context, reference, resource, includeCurrentBlock, idx);
-		}
-		
-		@Override
-		public IScope createFeatureCallScopeForReceiver(XExpression context, XExpression receiver, EReference reference) {
-			Triple<XExpression,XExpression,EReference> key = Tuples.create(context, receiver, reference);
-			if (createFeatureCallScopeForReceiverCache.containsKey(key)) {
-				return createFeatureCallScopeForReceiverCache.get(key);
-			} else {
-				IScope result = delegate.createFeatureCallScopeForReceiver(context, receiver, reference);
-				result = new SimpleScope(IScope.NULLSCOPE, newArrayList(result.getAllElements()));
-				createFeatureCallScopeForReceiverCache.put(key, result);
-				return result;
-			}
-		}
-		
-		@Override
-		public IScope getScope(EObject context, EReference reference) {
-			Pair<EObject,EReference> key = Tuples.create(context, reference);
-			if (getScopeCache.containsKey(key)) {
-				return getScopeCache.get(key);
-			} else {
-				IScope result = delegate.getScope(context, reference);
-				result = new SimpleScope(IScope.NULLSCOPE, newArrayList(result.getAllElements()));
-				getScopeCache.put(key, result);
-				return result;
-			}
-		}
-
-		@Override
-		public IScopeProvider getDelegate() {
-			return delegate.getDelegate();
-		}
-
-		@Override
-		public boolean isFeatureCallScope(EReference reference) {
-			return delegate.isFeatureCallScope(reference);
-		}
-		
-	}
-	
-	public static class ValidFeatureDescription implements Predicate<IEObjectDescription> {
-
-		@Inject
-		private OperatorMapping operatorMapping;
-		
-		public boolean apply(IEObjectDescription input) {
-			if (input instanceof IValidatedEObjectDescription) {
-				final IValidatedEObjectDescription desc = (IValidatedEObjectDescription) input;
-				if (!desc.isVisible() || !desc.isValidStaticState() || !desc.isValid())
-					return false;
-				JvmIdentifiableElement element = desc.getEObjectOrProxy();
-				// TODO remove the workaround below
-				if (element instanceof JvmOperation) {
-					if ("java.lang.Object.finalize()".equals(element.getIdentifier()) ||
-						"java.lang.Object.clone()".equals(element.getIdentifier())) {
-						return false;
-					}
-				}
-				// filter operator method names from CA
-				return operatorMapping.getOperator(input.getName()) == null;
-			}
-			return true;
-		}
-		
-	}
-	
-	@Override
 	public void completeXImportDeclaration_ImportedType(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		completeJavaTypes(context, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, true,
@@ -262,6 +163,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals() || getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
 			completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
 		}
+	}
+	
+	@Override
+	public void completeXConstructorCall_Constructor(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
+				qualifiedNameValueConverter, TypeMatchFilters.and(TypeMatchFilters.canInstantiate(), createVisibilityFilter(context)), acceptor);
 	}
 	
 	@Override
@@ -317,13 +225,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, qualifiedNameValueConverter, createVisibilityFilter(context), acceptor);
 	}
 	
-//	@Override
-//	public void completeXFeatureCall_DeclaringType(EObject model, Assignment assignment, ContentAssistContext context,
-//			ICompletionProposalAcceptor acceptor) {
-//		proposeDeclaringTypeForStaticInvocation(model, assignment, context, acceptor);
-//	}
-	
-	
 	public void proposeDeclaringTypeForStaticInvocation(EObject model, Assignment assignment, ContentAssistContext context, 
 			ICompletionProposalAcceptor acceptor){
 		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals() || getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
@@ -359,81 +260,28 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 	
 	@Override
-	public void completeXAssignment_Feature(EObject model, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		if (assignment == getXAssignmentFeatureAssignment())
-			super.completeXAssignment_Feature(model, assignment, context, acceptor);
-	}
-
-	protected Assignment getXAssignmentFeatureAssignment() {
-		return grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1();
-	}
-	
-	@Override
 	public void completeXFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		if (model instanceof XBlockExpression) {
-			XBlockExpression block = (XBlockExpression) model;
-			if (!block.getExpressions().isEmpty()) {
-				EObject previousModel = context.getPreviousModel();
-				if (context.getPreviousModel() == model) {
-					for(XExpression expression: block.getExpressions()) {
-						ICompositeNode node = NodeModelUtils.findActualNodeFor(expression);
-						if (node != null && node.getOffset() >= context.getOffset())
-							break;
-						previousModel = expression;
-					}
-				} else {
-					while(previousModel.eContainer() != block) {
-						previousModel = previousModel.eContainer();
-					}
-				}
-				int idx = block.getExpressions().indexOf(previousModel);
-				createLocalVariableAndImplicitProposals(block, idx + 1, context, acceptor);
+		if (model != null) {
+			if (typeResolver.resolveTypes(model).hasExpressionScope(model, IExpressionScope.Anchor.WITHIN)) {
 				return;
 			}
-		} 
-		if (model instanceof XForLoopExpression) {
-			ICompositeNode node = NodeModelUtils.getNode(model);
-			if (node != null) {
-				boolean eachExpression = false;
-				for(INode leaf: node.getLeafNodes()) {
-					if (leaf.getOffset() >= context.getOffset())
-						break;
-					if (leaf.getGrammarElement() == getXForLoopRightParenthesis()) {
-						eachExpression = true;
-						break;
-					}
-				}
-				if (!eachExpression) {
-					createLocalVariableAndImplicitProposals(model, false, -1, context, acceptor);
-					return;
-				}
-			}
 		}
-		if (model == null || model instanceof XExpression || model instanceof XCatchClause) {
-			createLocalVariableAndImplicitProposals(model, context, acceptor);
-		}
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
 	}
 
-	protected Keyword getXForLoopRightParenthesis() {
-		return grammarAccess.getXForLoopExpressionAccess().getRightParenthesisKeyword_2();
+	@Override
+	public void completeXForLoopExpression_EachExpression(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
 	}
 	
 	@Override
-	public void completeXBlockExpression_Expressions(EObject model, Assignment assignment,
+	public void completeXForLoopExpression_ForExpression(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		super.completeXBlockExpression_Expressions(model, assignment, context, acceptor);
-		completeWithinBlock(model, context, acceptor);
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
 	}
 	
-	@Override
-	public void completeXExpressionInClosure_Expressions(EObject model, Assignment assignment,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		super.completeXExpressionInClosure_Expressions(model, assignment, context, acceptor);
-		completeWithinBlock(model, context, acceptor);
-	}
-
 	protected void completeWithinBlock(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (!(model instanceof XBlockExpression)) {
 			EObject local = model;
@@ -442,146 +290,208 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				if (local == null)
 					return;
 			}
-			XBlockExpression block = (XBlockExpression) local.eContainer();
-			int idx = block.getExpressions().indexOf(local);
-			createLocalVariableAndImplicitProposals(block, idx + 1, context, acceptor);
+			createLocalVariableAndImplicitProposals(local, IExpressionScope.Anchor.AFTER, context, acceptor);
 		}
+	}
+	
+	@Override
+	public void completeXSwitchExpression_Default(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
 	}
 	
 	@Override
 	public void completeXCasePart_Then(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeXCasePart_Then(model, assignment, context, acceptor);
-		if (model instanceof XCasePart) {
-			createLocalVariableAndImplicitProposals(model, -1, context, acceptor);
-			
-		}
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
 	}
 	
 	@Override
 	public void completeXCasePart_Case(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeXCasePart_Case(model, assignment, context, acceptor);
-		if (model instanceof XCasePart) {
-			createLocalVariableAndImplicitProposals(model, -1, context, acceptor);
-		}
-		XSwitchExpression switchExpression = EcoreUtil2.getContainerOfType(model, XSwitchExpression.class);
-		if (switchExpression != null) {
-			LightweightTypeReference switchExpressionType = typeResolver.resolveTypes(switchExpression).getActualType(switchExpression.getSwitch());
-			if (switchExpressionType != null) {
-				JvmType rawType = switchExpressionType.getType();
-				if (rawType instanceof JvmEnumerationType) {
-					final Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(getFeatureCallRuleName(), context);
-					Function<IEObjectDescription, ICompletionProposal> higherPriority = new Function<IEObjectDescription, ICompletionProposal>() {
-						public ICompletionProposal apply(IEObjectDescription input) {
-							ICompletionProposal result = proposalFactory.apply(input);
-							if (result instanceof ConfigurableCompletionProposal) {
-								ConfigurableCompletionProposal casted = (ConfigurableCompletionProposal) result;
-								casted.setPriority(2* casted.getPriority());
-							}
-							return result;
-						}
-					};
-					IScope literals = new SimpleScope(Lists.transform(((JvmEnumerationType) rawType).getLiterals(), new Function<JvmEnumerationLiteral, IEObjectDescription>() {
-						public IEObjectDescription apply(JvmEnumerationLiteral literal) {
-							return EObjectDescription.create(literal.getSimpleName(), literal);
-						}
-					}));
-					getCrossReferenceProposalCreator().lookupCrossReference(
-							literals,
-							model,
-							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE,
-							acceptor,
-							getFeatureDescriptionPredicate(context),
-							higherPriority);
-				}
-			}
-		}
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
 	}
 	
-	/**
-	 * Customized to be able to treat binary operations in a special way with respect to scoping.
-	 * Since the operator is a cross reference, we have to be careful to choose the right context for
-	 * the scope provider. On the other hand it's important to filter "impossible" syntactical situations.
-	 */
 	@Override
-	protected void lookupCrossReference(CrossReference crossReference, EReference reference,
-			ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor,
-			Predicate<IEObjectDescription> filter) {
-		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
-			completeJavaTypes(contentAssistContext, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
-					qualifiedNameValueConverter, TypeMatchFilters.and(TypeMatchFilters.canInstantiate(), createVisibilityFilter(contentAssistContext)), acceptor);
+	public XbaseReferenceProposalCreator getCrossReferenceProposalCreator() {
+		return (XbaseReferenceProposalCreator) super.getCrossReferenceProposalCreator();
+	}
+	
+	@Override
+	public void completeXBlockExpression_Expressions(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		ICompositeNode node = NodeModelUtils.getNode(model);
+		if (node.getOffset() >= context.getOffset()) {
+			createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
 			return;
 		}
-		// guard for feature call scopes
-		if (!getScopeProvider().isFeatureCallScope(reference)) {
-			super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
-			return;
-		}
-		EObject model = contentAssistContext.getCurrentModel();
-		if (model == contentAssistContext.getPreviousModel() || 
-				!(contentAssistContext.getPreviousModel() instanceof XExpression)) {
-			// check whether we have a binary operation that was already linked
-			if (model instanceof XBinaryOperation) {
-				XBinaryOperation binaryOperation = (XBinaryOperation) model;
-				if (doNotProposeFeatureOfBinaryOperation(contentAssistContext, binaryOperation)) {
-					return;
-				}
-			} else if (model instanceof XAbstractFeatureCall) {
-				XAbstractFeatureCall memberFeatureCall = (XAbstractFeatureCall) model;
-				List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(memberFeatureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-				if (!nodesForFeature.isEmpty()) {
-					INode node = nodesForFeature.get(0);
-					if (node.getEndOffset() <= contentAssistContext.getOffset() - contentAssistContext.getPrefix().length()) {
-						if (!Iterables.isEmpty(node.getLeafNodes())) {
-							createReceiverProposals(memberFeatureCall, crossReference, reference, contentAssistContext,	acceptor, filter);
-							return;
-						}
+		if (model instanceof XBlockExpression) {
+			List<XExpression> children = ((XBlockExpression) model).getExpressions();
+			if (!children.isEmpty()) {
+				for(int i = children.size() - 1; i >= 0; i--) {
+					XExpression child = children.get(i);
+					ICompositeNode childNode = NodeModelUtils.getNode(child);
+					if (childNode.getEndOffset() <= context.getOffset()) {
+						createLocalVariableAndImplicitProposals(child, IExpressionScope.Anchor.AFTER, context, acceptor);
+						return;		
 					}
-				} 
-			}
-			super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
-			return;
-		}
-		if (model instanceof XBinaryOperation) {
-			XBinaryOperation binaryOperation = (XBinaryOperation) model;
-			if (contentAssistContext.getPreviousModel() == binaryOperation.getRightOperand()) {
-				createReceiverProposals(binaryOperation.getRightOperand(), crossReference, reference, contentAssistContext,	acceptor, filter);
-				return;
-			}
-		}
-		if (model instanceof XAbstractFeatureCall) {
-			ICompositeNode node = NodeModelUtils.findActualNodeFor(model);
-			if (node != null) {
-				int offset = node.getOffset();
-				int length = node.getLength();
-				if (offset + length >= contentAssistContext.getOffset()) {
-					super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
-					return;
 				}
 			}
 		}
-		if (model != null && !(model instanceof XExpression)) {
-			super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
+		if (node.getEndOffset() <= context.getOffset()) {
+			createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
 			return;
 		}
-		
-		if(contentAssistContext.getPreviousModel() instanceof XExpression) {
-			createReceiverProposals((XExpression) contentAssistContext.getPreviousModel(), crossReference, reference, contentAssistContext,	acceptor, filter);
-		} else {
-			super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
+	}
+	
+	@Override
+	public void completeXAssignment_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		String ruleName = getConcreteSyntaxRuleName(assignment);
+		// unfortunately we have two different kinds of 'feature' assignemnts in the rule XAssignment
+		// thus we have to find the operator rule here
+		if (isOperatorRule(ruleName)) {
+			completeBinaryOperationFeature(model, assignment, context, acceptor);
 		}
 	}
 	
-	protected void createLocalVariableAndImplicitProposals(EObject context, int idx, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
-		createLocalVariableAndImplicitProposals(context, true, idx, contentAssistContext, acceptor);
+	protected boolean isOperatorRule(String ruleName) {
+		return ruleName != null && ruleName.startsWith("Op");
+	}
+
+	@Override
+	public void completeXOrExpression_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeBinaryOperationFeature(model, assignment, context, acceptor);
 	}
 	
-	protected void createLocalVariableAndImplicitProposals(EObject context, boolean includeCurrentObject, int idx, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
+	@Override
+	public void completeXAndExpression_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeBinaryOperationFeature(model, assignment, context, acceptor);
+	}
+	
+	@Override
+	public void completeXEqualityExpression_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeBinaryOperationFeature(model, assignment, context, acceptor);
+	}
+	
+	@Override
+	public void completeXRelationalExpression_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeBinaryOperationFeature(model, assignment, context, acceptor);
+	}
+	
+	@Override
+	public void completeXOtherOperatorExpression_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeBinaryOperationFeature(model, assignment, context, acceptor);
+	}
+	
+	@Override
+	public void completeXAdditiveExpression_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeBinaryOperationFeature(model, assignment, context, acceptor);
+	}
+	
+	@Override
+	public void completeXMultiplicativeExpression_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeBinaryOperationFeature(model, assignment, context, acceptor);
+	}
+
+	@Override
+	public void completeXUnaryOperation_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		// don't propose unary operations like !, +, -
+	}
+	
+	protected void completeBinaryOperationFeature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (model instanceof XBinaryOperation) {
+			if (context.getPrefix().length() == 0) { // check for a cursor inbetween an operator
+				INode currentNode = context.getCurrentNode();
+				int offset = currentNode.getOffset();
+				int endOffset = currentNode.getEndOffset();
+				if (offset < context.getOffset() && endOffset >= context.getOffset()) {
+					if (currentNode.getGrammarElement() instanceof CrossReference) {
+						// don't propose another binary operator
+						return;
+					}
+				}
+			}
+			if (NodeModelUtils.findActualNodeFor(model).getEndOffset() <= context.getOffset()) {
+				createReceiverProposals((XExpression) model,
+						(CrossReference) assignment.getTerminal(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, context, acceptor, getFeatureDescriptionPredicate(context));
+			} else {
+				createReceiverProposals(((XBinaryOperation) model).getLeftOperand(),
+						(CrossReference) assignment.getTerminal(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, context, acceptor, getFeatureDescriptionPredicate(context));
+			}
+		} else {
+			EObject previousModel = context.getPreviousModel();
+			if (previousModel instanceof XExpression) {
+				if (context.getPrefix().length() == 0) {
+					if (NodeModelUtils.getNode(previousModel).getEndOffset() > context.getOffset()) {
+						return;
+					}
+				}
+				createReceiverProposals((XExpression) previousModel,
+						(CrossReference) assignment.getTerminal(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, context, acceptor, getFeatureDescriptionPredicate(context));
+			}
+		}
+	}
+	
+	@Override
+	public void completeXCatchClause_Expression(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
+	}
+	
+	@Override
+	public void completeXClosure_Expression(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
+	}
+	
+	@Override
+	public void completeXShortClosure_Expression(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
+	}
+	
+	@Override
+	public void completeXMemberFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (model instanceof XMemberFeatureCall) {
+			createReceiverProposals(((XMemberFeatureCall) model).getMemberCallTarget(), (CrossReference) assignment.getTerminal(),
+					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, context, acceptor,
+					getFeatureDescriptionPredicate(context));	
+		} else {
+			super.completeXMemberFeatureCall_Feature(model, assignment, context, acceptor);
+		}
+	}
+	
+	@Override
+	public void completeXVariableDeclaration_Right(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
+	}
+	
+	protected void createLocalVariableAndImplicitProposals(
+			EObject context,
+			IExpressionScope.Anchor anchor,
+			ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor) {
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(getFeatureCallRuleName(), contentAssistContext);
-		IScope scope = getScopeProvider().createSimpleFeatureCallScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, contentAssistContext.getResource(), includeCurrentObject, idx);
+		IResolvedTypes resolvedTypes = context != null ? typeResolver.resolveTypes(context) : typeResolver.resolveTypes(contentAssistContext.getResource());
+		IExpressionScope expressionScope = resolvedTypes.getExpressionScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, anchor);
+		// TODO use the type name information
+		IScope scope = expressionScope.getFeatureScope();
 		getCrossReferenceProposalCreator().lookupCrossReference(scope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, getFeatureDescriptionPredicate(contentAssistContext), proposalFactory);
 		
+		// TODO use the type name information
 		proposeDeclaringTypeForStaticInvocation(context, null /* ignore */, contentAssistContext, acceptor);
 	}
 
@@ -594,19 +504,49 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	 * as concrete syntax.
 	 */
 	protected void createLocalVariableAndImplicitProposals(EObject context, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
-		createLocalVariableAndImplicitProposals(context, -1, contentAssistContext, acceptor);
+		createLocalVariableAndImplicitProposals(context, IExpressionScope.Anchor.BEFORE, contentAssistContext, acceptor);
 	}
 
 	protected void createReceiverProposals(XExpression receiver, CrossReference crossReference,
 			EReference reference, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor,
 			Predicate<IEObjectDescription> filter) {
+		String ruleName = getConcreteSyntaxRuleName(crossReference);
+		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(ruleName, contentAssistContext);
+		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(receiver);
+		IExpressionScope expressionScope = resolvedTypes.getExpressionScope(receiver, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.RECEIVER);
+		// TODO exploit the type name information
+		IScope scope;
+		if (contentAssistContext.getCurrentModel() != receiver) {
+			EObject currentModel = contentAssistContext.getCurrentModel();
+			if (currentModel instanceof XMemberFeatureCall && ((XMemberFeatureCall) currentModel).getMemberCallTarget() == receiver) {
+				scope = expressionScope.getFeatureScope((XAbstractFeatureCall) currentModel);
+			} else {
+				scope = expressionScope.getFeatureScope();	
+			}
+		} else {
+			scope = expressionScope.getFeatureScope();
+		}
+		getCrossReferenceProposalCreator().lookupCrossReference(scope, receiver, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, getFeatureDescriptionPredicate(contentAssistContext), proposalFactory);
+	}
+	
+	protected String getConcreteSyntaxRuleName(Assignment assignment) {
+		AbstractElement terminal = assignment.getTerminal();
+		if (terminal instanceof CrossReference) {
+			return getConcreteSyntaxRuleName((CrossReference) terminal);
+		}
+		String ruleName = null;
+		if (terminal instanceof RuleCall) {
+			ruleName = ((RuleCall) terminal).getRule().getName();
+		}
+		return ruleName;
+	}
+
+	protected String getConcreteSyntaxRuleName(CrossReference crossReference) {
 		String ruleName = null;
 		if (crossReference.getTerminal() instanceof RuleCall) {
 			ruleName = ((RuleCall) crossReference.getTerminal()).getRule().getName();
 		}
-		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(ruleName, contentAssistContext);
-		IScope scope = getScopeProvider().createFeatureCallScopeForReceiver(receiver, receiver, reference);
-		getCrossReferenceProposalCreator().lookupCrossReference(scope, receiver, reference, acceptor, filter, proposalFactory);
+		return ruleName;
 	}
 
 	protected boolean doNotProposeFeatureOfBinaryOperation(ContentAssistContext contentAssistContext,
@@ -677,7 +617,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 						}
 					}).toContext();
 				}
-				if (myCandidate instanceof IValidatedEObjectDescription && (isIdRule(ruleName))) {
+				if (myCandidate instanceof IIdentifiableElementDescription && (isIdRule(ruleName))) {
 					ICompletionProposal result = null;
 					String proposal = getQualifiedNameConverter().toString(myCandidate.getName());
 					if (ruleName != null) {
@@ -691,8 +631,11 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					ProposalBracketInfo bracketInfo = getProposalBracketInfo(myCandidate, contentAssistContext);
 					proposal += bracketInfo.brackets;
 					int insignificantParameters = 0;
-					if(myCandidate instanceof JvmFeatureDescription) 
-						insignificantParameters = ((JvmFeatureDescription) myCandidate).getNumberOfIrrelevantArguments();
+					if(myCandidate instanceof IIdentifiableElementDescription) {
+						IIdentifiableElementDescription casted = (IIdentifiableElementDescription) myCandidate;
+						if (casted.isExtension() || casted.getImplicitFirstArgument() != null)
+							insignificantParameters = 1;
+					}
 					OwnedConverter converter = getTypeConverter(contentAssistContext.getResource());
 					EObject objectOrProxy = myCandidate.getEObjectOrProxy();
 					StyledString displayString = objectOrProxy instanceof JvmFeature 
@@ -723,7 +666,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 							JvmExecutable executable = (JvmExecutable) objectOrProxy;
 							StyledString parameterList = new StyledString();
 							appendParameters(parameterList, executable, insignificantParameters, converter);
-							// TODO how should we display overloaded methods were one variant does not take arguments?
+							// TODO how should we display overloaded methods were one variant does not take arguments? -> empty parentheses? '<no args>' ?
 							if (parameterList.length() > 0) {
 								ParameterData parameterData = simpleNameToParameterList.get(myCandidate.getName());
 								if (parameterData == null) {
@@ -753,12 +696,12 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	
 	protected ProposalBracketInfo getProposalBracketInfo(IEObjectDescription proposedDescription, ContentAssistContext contentAssistContext) {
 		ProposalBracketInfo info = new ProposalBracketInfo();
-		if (proposedDescription instanceof JvmFeatureDescription) {
-			JvmFeatureDescription jvmFeatureDescription = (JvmFeatureDescription)proposedDescription;
-			JvmFeature jvmFeature = jvmFeatureDescription.getJvmFeature();
+		if (proposedDescription instanceof IIdentifiableElementDescription) {
+			IIdentifiableElementDescription jvmFeatureDescription = (IIdentifiableElementDescription)proposedDescription;
+			JvmIdentifiableElement jvmFeature = jvmFeatureDescription.getElementOrProxy();
 			if(jvmFeature instanceof JvmExecutable) {
 				List<JvmFormalParameter> parameters = ((JvmExecutable) jvmFeature).getParameters();
-				if (parameters.size() - jvmFeatureDescription.getNumberOfIrrelevantArguments() == 1) {
+				if (parameters.size() - jvmFeatureDescription.getNumberOfIrrelevantParameters() == 1) {
 					JvmTypeReference parameterType = parameters.get(parameters.size()-1).getParameterType();
 					LightweightTypeReference light = getTypeConverter(contentAssistContext.getResource()).apply(parameterType);
 					if(light.isFunctionType()) {
@@ -788,7 +731,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					}
 				} 
 			}
-			if (jvmFeatureDescription.getKey().endsWith(")")) {
+			if (isExplicitOperationCall(jvmFeatureDescription)) {
 				info.brackets = "()";
 				info.selectionOffset = -1;
 			}		
@@ -886,5 +829,15 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 
 	protected boolean isIdRule(final String ruleName) {
 		return "IdOrSuper".equals(ruleName) || "ValidID".equals(ruleName) || "FeatureCallID".equals(ruleName); 
+	}
+	
+	public boolean isExplicitOperationCall(IIdentifiableElementDescription desc) {
+		if (desc.getElementOrProxy() instanceof JvmOperation) {
+			JvmOperation operation = (JvmOperation) desc.getElementOrProxy();
+			if (operation.getSimpleName().equals(desc.getName().toString())) {
+				return operation.getParameters().size() > desc.getNumberOfIrrelevantParameters();
+			}
+		}
+		return false;
 	}
 }

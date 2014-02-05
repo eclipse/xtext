@@ -989,7 +989,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.append("*/");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public void method(final Function1<? super #String#,? extends Integer> fun) {");
+    _builder_1.append("public void method(final Function1<? super #String#, ? extends Integer> fun) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1036,7 +1036,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
     _builder_1.append("*/");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public void method(final #Function1<? super String,? extends Integer># fun) {");
+    _builder_1.append("public void method(final #Function1<? super String, ? extends Integer># fun) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

@@ -52,6 +52,7 @@ import org.eclipse.xtext.xtype.XImportSection;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Provides minimal scopes for the serialization of feature calls, e.g.
@@ -60,6 +61,7 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class SerializerScopeProvider extends XbaseBatchScopeProvider implements IFeatureNames {
 
 	@Inject

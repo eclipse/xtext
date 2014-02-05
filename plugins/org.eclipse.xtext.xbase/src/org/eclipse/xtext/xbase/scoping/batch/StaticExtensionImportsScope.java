@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.beans.Introspector;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -124,11 +126,33 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	
 	@Override
 	protected void addDescriptions(JvmFeature feature, TypeBucket bucket, List<IEObjectDescription> result) {
-		QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
-		result.add(createDescription(featureName, feature, bucket));
-		QualifiedName operator = operatorMapping.getOperator(featureName);
-		if (operator != null) {
-			result.add(createDescription(operator, feature, bucket));
+		String simpleName = feature.getSimpleName();
+		QualifiedName featureName = QualifiedName.create(simpleName);
+		BucketedEObjectDescription description = createDescription(featureName, feature, bucket);
+		if (description != null) {
+			result.add(description);
+			String propertyName = toProperty(simpleName, feature);
+			if (propertyName != null) {
+				result.add(createDescription(QualifiedName.create(propertyName), feature, bucket));
+			}
+			QualifiedName operator = operatorMapping.getOperator(featureName);
+			if (operator != null) {
+				result.add(createDescription(operator, feature, bucket));
+			}
 		}
+	}
+	
+	@Override
+	protected String toProperty(String methodName, JvmFeature feature) {
+		if (feature instanceof JvmOperation) {
+			JvmOperation operation = (JvmOperation) feature;
+			if (methodName.length() > 3 && (methodName.startsWith("get") && operation.getParameters().size() == 1 || methodName.startsWith("set") && operation.getParameters().size() == 2) && Character.isUpperCase(methodName.charAt(3))) {
+				return Introspector.decapitalize(methodName.substring(3));
+			}
+			if (methodName.length() > 3 && methodName.startsWith("is") && Character.isUpperCase(methodName.charAt(2)) && operation.getParameters().size() == 1) {
+				return Introspector.decapitalize(methodName.substring(2));
+			}
+		}
+		return null;
 	}
 }

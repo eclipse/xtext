@@ -727,4 +727,145 @@ public class ValidationBug409602Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void test_19() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("while(true)");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("return \'\'");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.parser.parse(_builder);
+      this.helper.assertError(file, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN, "Void functions cannot return a value.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test_20() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("while(true)");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("return \'\'");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.parser.parse(_builder);
+      this.helper.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test_21() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("while(true)");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("return \'\'");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return \'\'");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.parser.parse(_builder);
+      this.helper.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test_22() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def String m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("while(true)");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("return \'\'");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.parser.parse(_builder);
+      this.helper.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test_23() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def String m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("while(true)");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("return \'\'");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return \'\'");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.parser.parse(_builder);
+      this.helper.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

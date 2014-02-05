@@ -262,8 +262,8 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 			computeCompletionProposals = new ICompletionProposal[0];
 
 		Arrays.sort(expectedText);
-		final String expectation = Strings.concat(", ", Arrays.asList(expectedText));
-		final String actual = Strings.concat(", ", toString(computeCompletionProposals));
+		final String expectation = Strings.concat("\n", Arrays.asList(expectedText));
+		final String actual = Strings.concat("\n", toString(computeCompletionProposals));
 		
 		Assert.assertEquals(expectation, actual);
 		

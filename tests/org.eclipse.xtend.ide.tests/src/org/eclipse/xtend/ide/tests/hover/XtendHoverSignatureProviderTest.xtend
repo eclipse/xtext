@@ -20,6 +20,8 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.junit.After
 import org.junit.Test
+import org.eclipse.xtend.core.xtend.XtendConstructor
+import org.junit.Ignore
 
 class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	@Inject
@@ -190,12 +192,12 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
-	def testSignatureForXtendDefaultConstructorWithGenerics(){
+	def testSignatureXtendConstructorWithGenerics_01(){
 		val xtendFile = parseHelper.parse('''
 		package testPackage
-		class Foo<String> {
-			def bar(){
-			new Foo()
+		class Foo<S extends CharSequence> {
+			def bar() {
+				new Foo()
 			}
 		}
 		''', resourceSet)
@@ -203,7 +205,97 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val xtendFunction = clazz.members.get(0) as XtendFunction
 		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
 		val signature = signatureProvider.getSignature(constructorCall.constructor)
+		assertEquals("Foo<S extends CharSequence>()",signature)
+	}
+
+	@Test
+	def testSignatureConstructorCall_01(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo<S extends CharSequence> {
+			def bar() {
+				new Foo()
+			}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val xtendFunction = clazz.members.get(0) as XtendFunction
+		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
+		val signature = signatureProvider.getSignature(constructorCall)
+		assertEquals("Foo<CharSequence>()",signature)
+	}
+	
+	@Test
+	def testSignatureConstructorCall_02(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo<S> {
+			def bar() {
+				new Foo(StringBuilder, StringBuffer)
+			}
+			new <X>(Class<X> c, Class<S> c2) {}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val xtendFunction = clazz.members.get(0) as XtendFunction
+		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
+		val signature = signatureProvider.getSignature(constructorCall)
+		assertEquals("<StringBuilder> Foo<StringBuffer>(Class<StringBuilder> c, Class<StringBuffer> c2)",signature)
+	}
+	
+	@Test
+	def testSignatureConstructorCall_03(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo<S> {
+			def bar() {
+				new Foo<String>()
+			}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val xtendFunction = clazz.members.get(0) as XtendFunction
+		val constructorCall = (xtendFunction.expression as XBlockExpression).expressions.get(0) as XConstructorCall
+		val signature = signatureProvider.getSignature(constructorCall)
 		assertEquals("Foo<String>()",signature)
+	}
+	
+	@Ignore
+	@Test
+	def testSignatureDelegateConstructorCall_01(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo<S extends CharSequence> {
+			new(int i) {
+				this()
+			}
+			new() {}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val xtendConstructor = clazz.members.get(0) as XtendConstructor
+		val featureCall = (xtendConstructor.expression as XBlockExpression).expressions.get(0) as XFeatureCall
+		val signature = signatureProvider.getSignature(featureCall)
+		assertEquals("Foo<S>()",signature)
+	}
+	
+	@Ignore
+	@Test
+	def testSignatureDelegateConstructorCall_02(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo<S extends CharSequence> {
+			new(int i) {
+				this(StringBuilder)
+			}
+			new<X>(Class<X> c) {}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val xtendConstructor = clazz.members.get(0) as XtendConstructor
+		val featureCall = (xtendConstructor.expression as XBlockExpression).expressions.get(0) as XFeatureCall
+		val signature = signatureProvider.getSignature(featureCall)
+		assertEquals("Foo<S>()",signature)
 	}
 	
 	@Test

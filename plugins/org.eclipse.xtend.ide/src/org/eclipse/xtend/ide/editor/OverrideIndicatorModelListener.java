@@ -26,7 +26,7 @@ import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModelExtension;
-import org.eclipse.xtend.core.typing.XtendOverridesService;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendPackage;
@@ -41,6 +41,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
@@ -50,7 +51,6 @@ import com.google.inject.Inject;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class OverrideIndicatorModelListener extends NullImpl implements IXtextModelListener {
 	
 	public static final String JOB_NAME = "Override Indicator Updater";
@@ -58,22 +58,21 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 
 	private XtextEditor xtextEditor;
 	private Set<Annotation> overrideIndicatorAnnotations = Sets.newHashSet();
-	private XtendOverridesService xtendOverridesService;
 
 	private Job currentJob;
 
 	@Inject
-	public void setXtendOverridesService(XtendOverridesService xtendOverridesService) {
-		this.xtendOverridesService = xtendOverridesService;
-	}
-
+	private IXtendJvmAssociations associations;
+	
+	@Inject
+	private OverrideHelper overrideHelper;
+	
 	@Override
 	public void afterCreatePartControl(XtextEditor xtextEditor) {
 		this.xtextEditor = xtextEditor;
 		installModelListener(xtextEditor);
 	}
 
-	
 	@Override
 	public void afterSetInput(XtextEditor xtextEditor) {
 		installModelListener(xtextEditor);
@@ -162,15 +161,18 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 		for (XtendFunction xtendFunction : getXtendFunctions(xtendFile)) {
 			if (xtendFunction.isOverride()) {
 				INode node = NodeModelUtils.getNode(xtendFunction);
-				JvmOperation jvmOperation = xtendOverridesService.findOverriddenOperation(xtendFunction);
-				if (node != null && jvmOperation != null) {
-					boolean overwriteIndicator = isOverwriteIndicator(jvmOperation);
-					String text = (overwriteIndicator ? "overrides " : "implements ") + jvmOperation.getQualifiedName(); //$NON-NLS-1$ //$NON-NLS-2$
-					node = getFirst(findNodesForFeature(xtendFunction, XtendPackage.eINSTANCE.getXtendFunction_Name()),
-							node);
-					annotationToPosition.put(
-							new OverrideIndicatorAnnotation(overwriteIndicator, text, xtextResource
-									.getURIFragment(xtendFunction)), new Position(node.getOffset()));
+				JvmOperation inferredOperation = associations.getDirectlyInferredOperation(xtendFunction);
+				if (inferredOperation != null) {
+					JvmOperation jvmOperation = overrideHelper.findOverriddenOperation(inferredOperation);
+					if (node != null && jvmOperation != null) {
+						boolean overwriteIndicator = isOverwriteIndicator(jvmOperation);
+						String text = (overwriteIndicator ? "overrides " : "implements ") + jvmOperation.getQualifiedName(); //$NON-NLS-1$ //$NON-NLS-2$
+						node = getFirst(findNodesForFeature(xtendFunction, XtendPackage.eINSTANCE.getXtendFunction_Name()),
+								node);
+						annotationToPosition.put(
+								new OverrideIndicatorAnnotation(overwriteIndicator, text, xtextResource
+										.getURIFragment(xtendFunction)), new Position(node.getOffset()));
+					}
 				}
 			}
 		}

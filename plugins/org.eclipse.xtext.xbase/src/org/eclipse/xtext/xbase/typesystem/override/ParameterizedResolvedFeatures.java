@@ -41,6 +41,14 @@ public class ParameterizedResolvedFeatures implements IResolvedFeatures {
 		return computeAllFeatures(result);
 	}
 	
+	public List<JvmFeature> getAllFeatures() {
+		List<JvmFeature> result = parent.getAllFeatures();
+		if (type.getTypeArguments().isEmpty() || result.size() <= 1) {
+			return result;
+		}
+		return computeAllFeatures(result);
+	}
+	
 	public IResolvedFeatures getParameterizedView(LightweightTypeReference concrete) {
 		return parent.getParameterizedView(concrete);
 	}

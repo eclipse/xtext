@@ -631,7 +631,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("_xblockexpression = (_switchResult);");
+    _builder_1.append("_xblockexpression = _switchResult;");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -728,7 +728,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if (!_matched) {");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("if (com.google.common.base.Objects.equal(x,\"a\")) {");
+      _builder_1.append("if (com.google.common.base.Objects.equal(x, \"a\")) {");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("_matched=true;");
@@ -740,7 +740,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if (!_matched) {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("if (com.google.common.base.Objects.equal(x,\"b\")) {");
+      _builder_1.append("if (com.google.common.base.Objects.equal(x, \"b\")) {");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("_matched=true;");
@@ -755,7 +755,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if (!_matched) {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("if (com.google.common.base.Objects.equal(x,\"c\")) {");
+      _builder_1.append("if (com.google.common.base.Objects.equal(x, \"c\")) {");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("_matched=true;");
@@ -879,7 +879,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if (!_matched) {");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("if (com.google.common.base.Objects.equal(x,\"a\")) {");
+      _builder_1.append("if (com.google.common.base.Objects.equal(x, \"a\")) {");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("_matched=true;");
@@ -891,7 +891,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if (!_matched) {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("if (com.google.common.base.Objects.equal(x,\"b\")) {");
+      _builder_1.append("if (com.google.common.base.Objects.equal(x, \"b\")) {");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("_matched=true;");
@@ -1042,7 +1042,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if (x instanceof String) {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("if (com.google.common.base.Objects.equal(x,\"a\")) {");
+      _builder_1.append("if (com.google.common.base.Objects.equal(x, \"a\")) {");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("_matched=true;");
@@ -1064,7 +1064,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if (x instanceof Integer) {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("if (com.google.common.base.Objects.equal(x,1)) {");
+      _builder_1.append("if (com.google.common.base.Objects.equal(x, 1)) {");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("_matched=true;");
@@ -1079,7 +1079,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if (!_matched) {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("if (com.google.common.base.Objects.equal(x,2)) {");
+      _builder_1.append("if (com.google.common.base.Objects.equal(x, 2)) {");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("_matched=true;");
@@ -1161,7 +1161,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if (x instanceof Integer) {");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("if (com.google.common.base.Objects.equal(x,1)) {");
+      _builder_1.append("if (com.google.common.base.Objects.equal(x, 1)) {");
       _builder_1.newLine();
       _builder_1.append("        ");
       _builder_1.append("_matched=true;");
@@ -2294,5 +2294,47 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  public void testBug410797_01() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{ val boolean bug = #[true, false, true].reduce[a,b|a && b] }");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("final org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean> _function = new org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean>() {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Boolean apply(final Boolean a, final Boolean b) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("boolean _and = false;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (!(a).booleanValue()) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_and = false;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_and = (b).booleanValue();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return Boolean.valueOf(_and);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(com.google.common.collect.Lists.<Boolean>newArrayList(true, false, true)), _function);");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
   }
 }

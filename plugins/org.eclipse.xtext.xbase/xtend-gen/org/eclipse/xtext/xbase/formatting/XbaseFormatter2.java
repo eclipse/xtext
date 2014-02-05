@@ -656,7 +656,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
   
   protected void formatStaticQualifier(final INode node, final FormattableDocument document) {
     if ((node instanceof ICompositeNode)) {
-      final Iterable<ILeafNode> leafs = ((ICompositeNode) node).getLeafNodes();
+      final Iterable<ILeafNode> leafs = ((ICompositeNode)node).getLeafNodes();
       for (final ILeafNode n : leafs) {
         boolean _and = false;
         EObject _grammarElement = n.getGrammarElement();
@@ -1308,8 +1308,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
     boolean _while = (top instanceof XMemberFeatureCall);
     while (_while) {
       {
-        calls.add(((XMemberFeatureCall) top));
-        XExpression _memberCallTarget = ((XMemberFeatureCall) top).getMemberCallTarget();
+        calls.add(((XMemberFeatureCall)top));
+        XExpression _memberCallTarget = ((XMemberFeatureCall)top).getMemberCallTarget();
         top = _memberCallTarget;
       }
       _while = (top instanceof XMemberFeatureCall);
@@ -1537,7 +1537,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       EObject _grammarElement_1 = node.getGrammarElement();
       final AbstractElement terminal = ((CrossReference) _grammarElement_1).getTerminal();
       if ((terminal instanceof RuleCall)) {
-        return ((RuleCall) terminal).getRule();
+        return ((RuleCall)terminal).getRule();
       }
     }
     return null;

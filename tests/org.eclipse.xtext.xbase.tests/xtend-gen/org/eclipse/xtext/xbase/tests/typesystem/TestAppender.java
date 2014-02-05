@@ -15,6 +15,11 @@ public class TestAppender extends AbstractStringBuilderBasedAppendable {
     builder.append(_identifier);
   }
   
+  protected void appendType(final Class<?> type, final StringBuilder builder) {
+    String _name = type.getName();
+    builder.append(_name);
+  }
+  
   public List<String> getImports() {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }

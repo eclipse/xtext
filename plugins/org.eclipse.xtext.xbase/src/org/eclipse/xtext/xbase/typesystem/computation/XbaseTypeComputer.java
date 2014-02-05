@@ -186,7 +186,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 	
 	protected LightweightTypeReference getPrimitiveVoid(ITypeComputationState state) {
-		return getTypeForName(Void.TYPE, state);
+		return getRawTypeForName(Void.TYPE, state.getReferenceOwner());
 	}
 	
 	protected static abstract class BranchExpressionProcessor {
@@ -350,6 +350,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if (declaredParam != null && declaredParam.getParameterType() == null) {
 			allCasePartsState = allCasePartsState.assignType(declaredParam, expressionType);
 		}
+		allCasePartsState.withinScope(object);
 
 		JvmType potentialEnumType = expressionType != null ? expressionType.getType() : null;
 		boolean isEnum = potentialEnumType instanceof JvmEnumerationType;
@@ -405,13 +406,14 @@ public class XbaseTypeComputer implements ITypeComputer {
 					}
 				}
 			}
+			// boolean or object / primitive
+			ITypeComputationState caseState = casePartState.withNonVoidExpectation();
+			if (localIsEnum) {
+				assert potentialEnumType != null;
+				caseState.addTypeToStaticImportScope((JvmDeclaredType) localPotentialEnumType);
+			}
+			caseState.withinScope(casePart);
 			if (casePart.getCase() != null) {
-				// boolean or object / primitive
-				ITypeComputationState caseState = casePartState.withNonVoidExpectation();
-				if (localIsEnum) {
-					assert potentialEnumType != null;
-					caseState.addTypeToStaticImportScope((JvmDeclaredType) localPotentialEnumType);
-				}
 				caseState.computeTypes(casePart.getCase());
 			}
 			XExpression then = casePart.getThen();
@@ -424,10 +426,13 @@ public class XbaseTypeComputer implements ITypeComputer {
 						thenTypeReference = null;
 					}
 				}
+				thenState.afterScope(casePart);
 				ITypeComputationResult thenResult = thenState.computeTypes(then);
 				if (branchExpressionProcessor != null) {
 					branchExpressionProcessor.process(thenResult);
 				}
+			} else {
+				allCasePartsState.afterScope(casePart);
 			}
 		}
 		XExpression defaultCase = object.getDefault();
@@ -472,6 +477,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 				}
 			}
 		} else {
+			state.withinScope(object);
 			for(int i = 0; i < children.size() - 1; i++) {
 				XExpression expression = children.get(i);
 				ITypeComputationState expressionState = state.withoutExpectation(); // no expectation
@@ -505,6 +511,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 
 	protected void addLocalToCurrentScope(XVariableDeclaration localVariable, ITypeComputationState state) {
 		state.addLocalToCurrentScope(localVariable);
+		state.rewriteScope(localVariable);
 	}
 
 	protected void _computeTypes(XVariableDeclaration object, ITypeComputationState state) {
@@ -544,6 +551,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			initializerState.computeTypes(object.getRight());
 		} else {
 			ITypeComputationState initializerState = lightweightTypeReference != null ? state.withExpectation(lightweightTypeReference) : state.withNonVoidExpectation();
+			initializerState.withinScope(object);
 			ITypeComputationResult computedType = initializerState.computeTypes(object.getRight());
 			/* 
 			 * TODO keep information about the actual type, e.g. automatic cast insertion should be possible for
@@ -573,7 +581,6 @@ public class XbaseTypeComputer implements ITypeComputer {
 				variableType = new UnknownTypeReference(variableType.getOwner());
 			}
 			state.assignType(object, variableType, false);
-			state.addExtensionToCurrentScope(object);
 		}
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		state.acceptActualType(primitiveVoid);
@@ -832,6 +839,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if (declaredParam != null) {
 			LightweightTypeReference parameterType = computeForLoopParameterType(object, state);
 			eachState = assignType(declaredParam, parameterType, eachState);
+			eachState.withinScope(object);
 		}
 		eachState.computeTypes(object.getEachExpression());
 		
@@ -1151,6 +1159,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 					? state.getConverter().toLightweightReference(parameterType)
 					: new AnyTypeReference(state.getReferenceOwner());
 			ITypeComputationState catchClauseState = assignType(catchClauseParam, lightweightReference, state);
+			catchClauseState.withinScope(catchClause);
 			catchClauseState.computeTypes(catchClause.getExpression());
 		}
 		// TODO validate / handle return / throw in finally block

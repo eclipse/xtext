@@ -39,6 +39,14 @@ public interface IResolvedFeatures {
 	 * these features.
 	 */
 	List<JvmFeature> getAllFeatures(String simpleName);
+	
+	/**
+	 * Returns all reachable features.
+	 * 
+	 * Bound type parameters are properly considered when the override semantics are applied for
+	 * these features.
+	 */
+	List<JvmFeature> getAllFeatures();
 
 	/**
 	 * Applies concretely bound type arguments to this instance of {@link IResolvedFeatures}.
@@ -72,6 +80,10 @@ public interface IResolvedFeatures {
 		}
 		
 		public List<JvmFeature> getAllFeatures(String simpleName) {
+			return Collections.emptyList();
+		}
+		
+		public List<JvmFeature> getAllFeatures() {
 			return Collections.emptyList();
 		}
 	};

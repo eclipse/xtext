@@ -25,7 +25,7 @@ class CompilerBug427660Test extends AbstractXtendCompilerTest {
 		''', '''
 			@SuppressWarnings("all")
 			public class C {
-			  public Enum enumValue(final Class<? extends Object> clazz, final String value) {
+			  public Enum enumValue(final Class<?> clazz, final String value) {
 			    Enum _xifexpression = null;
 			    boolean _isEnum = clazz.isEnum();
 			    if (_isEnum) {

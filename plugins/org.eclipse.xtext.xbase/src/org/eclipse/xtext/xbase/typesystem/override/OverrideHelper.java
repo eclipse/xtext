@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.override;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -36,8 +34,6 @@ import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -179,7 +175,13 @@ public class OverrideHelper {
 			return null;
 		}
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, operation.eResource().getResourceSet());
-		LightweightTypeReference declaringType = new ParameterizedTypeReference(owner, operation.getDeclaringType());
+		ParameterizedTypeReference declaringType = new ParameterizedTypeReference(owner, operation.getDeclaringType());
+		if (declaringType.isRawType()) {
+			JvmGenericType genericType = (JvmGenericType) declaringType.getType();
+			for(JvmTypeParameter typeParameter: genericType.getTypeParameters()) {
+				declaringType.addTypeArgument(new ParameterizedTypeReference(owner, typeParameter));
+			}
+		}
 		TypeParameterSubstitutor<?> substitutor = createSubstitutor(owner, declaringType);
 		OwnedConverter converter = new OwnedConverter(owner);
 		return findOverriddenOperation(operation, declaringType, substitutor, converter, new ContextualVisibilityHelper(visibilityHelper, declaringType));
@@ -222,55 +224,55 @@ public class OverrideHelper {
 		return new ResolvedOperations(contextType, overrideTester);
 	}
 	
-	public List<JvmOperation> getAllOperations(JvmDeclaredType type, ITypeReferenceOwner owner, IVisibilityHelper visibilityHelper) {
-		LightweightTypeReference declaringType = new ParameterizedTypeReference(owner, type);
-		return getAllOperations(declaringType, visibilityHelper);
-	}
-
-	public List<JvmOperation> getAllOperations(LightweightTypeReference declaringType, IVisibilityHelper visibilityHelper) {
-		if (!(declaringType.getType() instanceof JvmDeclaredType)) {
-			return Collections.emptyList();
-		}
-		Iterable<JvmFeature> allFeatures = ((JvmDeclaredType) declaringType.getType()).getAllFeatures();
-		TypeParameterSubstitutor<?> substitutor = createSubstitutor(declaringType.getOwner(), declaringType);
-		OwnedConverter converter = new OwnedConverter(declaringType.getOwner());
-		List<JvmOperation> result = Lists.newArrayList();
-		Set<String> signatures = Sets.newHashSet();
-		for(JvmFeature feature: allFeatures) {
-			if (feature instanceof JvmOperation) {
-				JvmOperation operation = (JvmOperation) feature;
-				if (visibilityHelper.isVisible(operation)) {
-					if (!operation.isStatic()) {
-						List<JvmFormalParameter> parameters = operation.getParameters();
-						StringBuilder signature = new StringBuilder(operation.getSimpleName());
-						if (parameters.isEmpty()) {
-							signature.append("()");
-						} else {
-							signature.append("(");
-							for(JvmFormalParameter parameter: parameters) {
-								JvmTypeReference pType = parameter.getParameterType();
-								if (pType != null) {
-									LightweightTypeReference parameterType =
-											substitutor.substitute(converter.toLightweightReference(pType));
-									signature.append(parameterType.getJavaIdentifier());
-								} else {
-									signature.append("<Unknown>");
-								}
-								signature.append(",");
-							}
-							signature.replace(signature.length() - 1, signature.length(), ")");
-						}
-						if (signatures.add(signature.toString())) {
-							result.add(operation);
-						}
-					} else {
-						result.add(operation);
-					}
-				}
-			}
-		}
-		return result;
-	}
+//	public List<JvmOperation> getAllOperations(JvmDeclaredType type, ITypeReferenceOwner owner, IVisibilityHelper visibilityHelper) {
+//		LightweightTypeReference declaringType = new ParameterizedTypeReference(owner, type);
+//		return getAllOperations(declaringType, visibilityHelper);
+//	}
+//
+//	public List<JvmOperation> getAllOperations(LightweightTypeReference declaringType, IVisibilityHelper visibilityHelper) {
+//		if (!(declaringType.getType() instanceof JvmDeclaredType)) {
+//			return Collections.emptyList();
+//		}
+//		Iterable<JvmFeature> allFeatures = ((JvmDeclaredType) declaringType.getType()).getAllFeatures();
+//		TypeParameterSubstitutor<?> substitutor = createSubstitutor(declaringType.getOwner(), declaringType);
+//		OwnedConverter converter = new OwnedConverter(declaringType.getOwner());
+//		List<JvmOperation> result = Lists.newArrayList();
+//		Set<String> signatures = Sets.newHashSet();
+//		for(JvmFeature feature: allFeatures) {
+//			if (feature instanceof JvmOperation) {
+//				JvmOperation operation = (JvmOperation) feature;
+//				if (visibilityHelper.isVisible(operation)) {
+//					if (!operation.isStatic()) {
+//						List<JvmFormalParameter> parameters = operation.getParameters();
+//						StringBuilder signature = new StringBuilder(operation.getSimpleName());
+//						if (parameters.isEmpty()) {
+//							signature.append("()");
+//						} else {
+//							signature.append("(");
+//							for(JvmFormalParameter parameter: parameters) {
+//								JvmTypeReference pType = parameter.getParameterType();
+//								if (pType != null) {
+//									LightweightTypeReference parameterType =
+//											substitutor.substitute(converter.toLightweightReference(pType));
+//									signature.append(parameterType.getJavaIdentifier());
+//								} else {
+//									signature.append("<Unknown>");
+//								}
+//								signature.append(",");
+//							}
+//							signature.replace(signature.length() - 1, signature.length(), ")");
+//						}
+//						if (signatures.add(signature.toString())) {
+//							result.add(operation);
+//						}
+//					} else {
+//						result.add(operation);
+//					}
+//				}
+//			}
+//		}
+//		return result;
+//	}
 	
 }
 

@@ -9,12 +9,13 @@ package org.eclipse.xtext.xbase.tests.typing;
 
 import java.util.List;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -22,14 +23,10 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 
 	@Inject
-	private XbaseTypeConformanceComputer typeConformanceComputer;
-	
-	@Inject
-	private ITypeProvider typeProvider;
+	private IBatchTypeResolver typeResolver;
 	
 	@Inject
 	private ParseHelper<XExpression> parseHelper;
@@ -86,12 +83,19 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 		return isConformantReturnTypes(leftExpression, rightExpression, false);
 	}
 	
+	@SuppressWarnings("null")
 	protected boolean isConformantReturnTypes(final String leftExpression, final String rightExpression, boolean ignoreGenerics)
 			throws Exception {
-		final XExpression parse = parseHelper.parse(leftExpression);
-		JvmTypeReference leftType = typeProvider.getType(parse);
-		JvmTypeReference rightType = typeProvider.getType(parseHelper.parse(rightExpression,parse.eResource().getResourceSet()));
-		boolean conformant = typeConformanceComputer.isConformant(leftType, rightType, ignoreGenerics);
+		XExpression leftParse = parseHelper.parse(leftExpression);
+		IResolvedTypes leftTypes = typeResolver.resolveTypes(leftParse);
+		XExpression rightParse = parseHelper.parse(rightExpression, leftParse.eResource().getResourceSet());
+		LightweightTypeReference leftType = leftTypes.getActualType(leftParse);
+		IResolvedTypes rightTypes = typeResolver.resolveTypes(rightParse);
+		LightweightTypeReference rightType = rightTypes.getActualType(rightParse);
+		if (rightType == null) {
+			throw new IllegalStateException("rightType may not be null");
+		}
+		boolean conformant = leftType.isAssignableFrom(rightType, new TypeConformanceComputationArgument(ignoreGenerics, false, true, true, false, true));
 		return conformant;
 	}
 	

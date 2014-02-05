@@ -155,6 +155,16 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
   }
   
   @Test
+  public void testWhileExpression_04() throws Exception {
+    this.resolvesTo("while(null instanceof String) return \'\'", "String");
+  }
+  
+  @Test
+  public void testWhileExpression_05() throws Exception {
+    this.resolvesTo("{ while(null instanceof String) return \'\' return \'\' }", "String");
+  }
+  
+  @Test
   public void testTryCatchFinallyExpression_08() throws Exception {
     this.resolvesTo("try return \'foo\' catch (Exception e) return \'bar\'", "String");
   }

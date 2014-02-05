@@ -12,12 +12,9 @@ import java.io.Serializable
 import java.util.Collection
 import java.util.Collections
 import java.util.List
-import java.util.Set
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtext.common.types.util.SuperTypeCollector
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -274,57 +271,57 @@ class AllSuperTypesTest extends AbstractSuperTypesTest {
 	
 }
 
-/**
- * @author Sebastian Zarnekow
- */
-class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
-
-	@Inject
-	extension IXtendJvmAssociations
-	
-	@Inject
-	SuperTypeCollector superTypeCollector
-
-	override assertSuperTypes(Pair<String, String> type, String... superTypes) {
-		// TODO synthesize unique variable names as soon as the function should be validated
-		val signature = '''def «IF !type.value.nullOrEmpty»<«type.value»> «ENDIF»void method(«type.key» type) {}'''
-		val function = function(signature.toString)
-		val operation = function.directlyInferredOperation
-		val subtype = operation.parameters.head.parameterType
-		val computedSuperTypes = superTypeCollector.collectSuperTypes(subtype)
-		val Set<String> expectedSupertypesAsSet = superTypes.<String>toSet
-		val Set<String> actualSupertypesAsSet = computedSuperTypes.map[ simpleName ].<String>toSet
-		assertEquals(expectedSupertypesAsSet, actualSupertypesAsSet as Object)
-	}
-	
-	@Ignore("Old API does not support this properly")
-	@Test
-	override testRawCollection() {
-		fail("Old API does not support this properly")
-	}
-	
-	@Ignore("Old API does not support this properly")
-	@Test
-	override testStringCollection() {
-		fail("Old API does not support this properly")
-	}
-	
-	@Ignore("Old API does not support this properly")
-	@Test
-	override testRawList() {
-		fail("Old API does not support this properly")
-	}
-	
-	@Ignore("Old API does not support this properly")
-	@Test
-	override testStringList() {
-		fail("Old API does not support this properly")
-	}
-	
-	@Ignore("Old API does not support this properly")
-	@Test
-	override testStringArrayArrayList() {
-		fail("Old API does not support this properly")
-	}
-	
-}
+///**
+// * @author Sebastian Zarnekow
+// */
+//class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
+//
+//	@Inject
+//	extension IXtendJvmAssociations
+//	
+//	@Inject
+//	SuperTypeCollector superTypeCollector
+//
+//	override assertSuperTypes(Pair<String, String> type, String... superTypes) {
+//		// TODO synthesize unique variable names as soon as the function should be validated
+//		val signature = '''def «IF !type.value.nullOrEmpty»<«type.value»> «ENDIF»void method(«type.key» type) {}'''
+//		val function = function(signature.toString)
+//		val operation = function.directlyInferredOperation
+//		val subtype = operation.parameters.head.parameterType
+//		val computedSuperTypes = superTypeCollector.collectSuperTypes(subtype)
+//		val Set<String> expectedSupertypesAsSet = superTypes.<String>toSet
+//		val Set<String> actualSupertypesAsSet = computedSuperTypes.map[ simpleName ].<String>toSet
+//		assertEquals(expectedSupertypesAsSet, actualSupertypesAsSet as Object)
+//	}
+//	
+//	@Ignore("Old API does not support this properly")
+//	@Test
+//	override testRawCollection() {
+//		fail("Old API does not support this properly")
+//	}
+//	
+//	@Ignore("Old API does not support this properly")
+//	@Test
+//	override testStringCollection() {
+//		fail("Old API does not support this properly")
+//	}
+//	
+//	@Ignore("Old API does not support this properly")
+//	@Test
+//	override testRawList() {
+//		fail("Old API does not support this properly")
+//	}
+//	
+//	@Ignore("Old API does not support this properly")
+//	@Test
+//	override testStringList() {
+//		fail("Old API does not support this properly")
+//	}
+//	
+//	@Ignore("Old API does not support this properly")
+//	@Test
+//	override testStringArrayArrayList() {
+//		fail("Old API does not support this properly")
+//	}
+//	
+//}

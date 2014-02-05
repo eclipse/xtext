@@ -17,6 +17,11 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
+	ContentAssistTest.class,
+	ContentAssistInBlockTest.class,
+	ContentAssistInBlockAsSecondTest.class,
+	ContentAssistInBlockAsSecondWithoutParenTest.class,
+	ContentAssistInBlockAsSecondWithSemiTest.class,
 	Bug350007Test.class,
 	Bug372950Test.class,
 	Bug379238Test.class,

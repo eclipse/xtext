@@ -15,7 +15,7 @@ import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.IUpdate;
 import org.eclipse.ui.texteditor.ResourceAction;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
-import org.eclipse.xtend.core.typing.XtendOverridesService;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
@@ -35,7 +36,6 @@ import com.google.inject.Inject;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class OverrideIndicatorRulerAction extends ResourceAction implements IActionContributor, IUpdate {
 	private static final String RESOURCE_KEY_PREFIX = "XtendSelectAnnotationRulerAction.OpenSuperImplementation.";//$NON-NLS-1$
 	private static final String BUNDLE_NAME = "org.eclipse.xtend.ide.editor.messages";//$NON-NLS-1$
@@ -44,8 +44,13 @@ public class OverrideIndicatorRulerAction extends ResourceAction implements IAct
 	private IJavaElementFinder javaElementFinder;
 	private XtextEditor editor;
 	private SelectMarkerRulerAction selectMarkerRulerAction;
-	private XtendOverridesService xtendOverridesService;
 	private OverrideIndicatorAnnotation overrideIndicatorAnnotation;
+	
+	@Inject
+	private IXtendJvmAssociations associations;
+	
+	@Inject
+	private OverrideHelper overrideHelper;
 
 	@Inject
 	public void setUriEditorOpener(GlobalURIEditorOpener uriEditorOpener) {
@@ -55,11 +60,6 @@ public class OverrideIndicatorRulerAction extends ResourceAction implements IAct
 	@Inject
 	public void setJavaElementFinder(IJavaElementFinder javaElementFinder) {
 		this.javaElementFinder = javaElementFinder;
-	}
-
-	@Inject
-	public void setXtendOverridesService(XtendOverridesService xtendOverridesService) {
-		this.xtendOverridesService = xtendOverridesService;
 	}
 
 	public OverrideIndicatorRulerAction() {
@@ -119,15 +119,15 @@ public class OverrideIndicatorRulerAction extends ResourceAction implements IAct
 	}
 
 	protected void runInternal() {
-		JvmOperation jvmOperation = getDocument().readOnly(new IUnitOfWork<JvmOperation, XtextResource>() {
-
-			public JvmOperation exec(XtextResource resourceSet) throws Exception {
-				XtendFunction xtendFunction = (XtendFunction) resourceSet.getEObject(overrideIndicatorAnnotation
-						.getFunctionURIFragment());
-				return xtendOverridesService.findOverriddenOperation(xtendFunction);
+		getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource resource) throws Exception {
+				XtendFunction xtendFunction = (XtendFunction) resource.getEObject(overrideIndicatorAnnotation.getFunctionURIFragment());
+				JvmOperation operation = associations.getDirectlyInferredOperation(xtendFunction);
+				JvmOperation overridden = overrideHelper.findOverriddenOperation(operation);
+				uriEditorOpener.open(EcoreUtil.getURI(overridden), javaElementFinder.findElementFor(overridden), true);
 			}
 		});
-		uriEditorOpener.open(EcoreUtil.getURI(jvmOperation), javaElementFinder.findElementFor(jvmOperation), true);
 	}
 
 	protected IVerticalRuler getVerticalRuler() {

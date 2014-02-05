@@ -107,7 +107,7 @@ public class NodeModelAccess {
       INode current = node;
       boolean _while = (current instanceof ICompositeNode);
       while (_while) {
-        INode _lastChild = ((ICompositeNode) current).getLastChild();
+        INode _lastChild = ((ICompositeNode)current).getLastChild();
         current = _lastChild;
         _while = (current instanceof ICompositeNode);
       }

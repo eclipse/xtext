@@ -27,6 +27,7 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ErrorCollector
+import org.eclipse.emf.ecore.EObject
 
 /**
  * @author Sebastian Zarnekow
@@ -107,7 +108,7 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 	
 	@Test 
 	def void testNull() throws Exception {
-		val typeResolution = typeResolver.resolveTypes(null)
+		val typeResolution = typeResolver.resolveTypes(null as EObject)
 		assertNotNull(typeResolution);
 		assertEquals(IResolvedTypes::NULL, typeResolution)
 	}
