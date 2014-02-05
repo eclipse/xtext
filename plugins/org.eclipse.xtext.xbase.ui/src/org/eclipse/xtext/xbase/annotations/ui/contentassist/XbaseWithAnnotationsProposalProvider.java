@@ -82,9 +82,11 @@ public class XbaseWithAnnotationsProposalProvider extends AbstractXbaseWithAnnot
 				if (operations.size() == 1) {
 					JvmOperation singleOperation = operations.get(0);
 					if ("value".equals(singleOperation.getSimpleName())) {
+						// TODO propose qualified enum literals + import
 						super.completeXAnnotation_Value(model, assignment, context, acceptor);
 						if ("java.lang.Class".equals(getRawReturnType(singleOperation))) {
 							// eager proposals for classes if the expected type is a suptype of class
+							// TODO evaluate the bounds of the class
 							completeJavaTypes(
 									context, 
 									TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE,

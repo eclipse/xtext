@@ -31,7 +31,6 @@ import org.eclipse.xtend.core.resource.XtendLocationInFileProvider;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionManager;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy;
 import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
-import org.eclipse.xtend.core.scoping.XtendScopeProvider;
 import org.eclipse.xtend.core.typesystem.DispatchAndExtensionAwareReentrantTypeResolver;
 import org.eclipse.xtend.core.typesystem.TypeDeclarationAwareBatchTypeResolver;
 import org.eclipse.xtend.core.typesystem.XtendTypeComputer;
@@ -94,7 +93,6 @@ import com.google.inject.name.Names;
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
-@SuppressWarnings("deprecation")
 public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRuntimeModule {
 
 	public XbaseFactory bindXbaseFactory() {
@@ -138,10 +136,10 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		return XtendOutputConfigurationProvider.class;
 	}
 
-	@Override
-	public Class<? extends IScopeProvider> bindIScopeProvider() {
-		return XtendScopeProvider.class;
-	}
+//	@Override
+//	public Class<? extends IScopeProvider> bindIScopeProvider() {
+//		return XtendScopeProvider.class;
+//	}
 
 	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {

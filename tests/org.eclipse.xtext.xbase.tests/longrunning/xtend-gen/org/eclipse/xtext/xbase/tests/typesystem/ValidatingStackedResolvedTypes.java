@@ -212,8 +212,8 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
     return result;
   }
   
-  public LightweightTypeReference getDeclaredType(final JvmIdentifiableElement identifiable) {
-    final LightweightTypeReference result = super.getDeclaredType(identifiable);
+  public LightweightTypeReference doGetDeclaredType(final JvmIdentifiableElement identifiable) {
+    final LightweightTypeReference result = super.doGetDeclaredType(identifiable);
     boolean _and = false;
     boolean _notEquals = (!Objects.equal(result, null));
     if (!_notEquals) {

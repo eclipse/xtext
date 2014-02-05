@@ -78,7 +78,7 @@ public class CompilerBug413138Test extends AbstractXtendCompilerTest {
     _builder_1.append("String string = this.repository.findByStringId(Long.valueOf(1L));");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this.repository.<String>save(string));");
+    _builder_1.append("_xblockexpression = this.repository.<String>save(string);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");

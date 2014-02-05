@@ -22,6 +22,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -218,6 +219,26 @@ public interface ITypeComputationState {
 	 * @param extensionProviders the identifiables that contribute to the extension scope
 	 */
 	void addExtensionsToCurrentScope(List<? extends JvmIdentifiableElement> extensionProviders);
+	
+	/**
+	 * If the expression tree contains intermediate objects, e.g. {@link XCasePart}
+	 * or {@link XCatchClause}, one can explicitly record the scope of these
+	 * objects as these won't be processed by the inference infrastructure.
+	 */
+	void withinScope(EObject context);
+	
+	/**
+	 * If the expression tree contains intermediate objects, e.g. {@link XCasePart}
+	 * or {@link XCatchClause}, one can explicitly record the scope of these
+	 * objects as these won't be processed by the inference infrastructure.
+	 */
+	void afterScope(EObject context);
+	
+	/**
+	 * If the container of an expression decides to alter the scope after the 
+	 * expression was typed, its AFTER scope may be rewritten.
+	 */
+	void rewriteScope(EObject context);
 	
 	/**
 	 * Assigns the given actual type to the raw type which shall be reachable with the given name.

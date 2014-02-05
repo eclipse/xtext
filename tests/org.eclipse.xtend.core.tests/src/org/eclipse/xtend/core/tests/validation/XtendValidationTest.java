@@ -973,6 +973,54 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendClass xtendClass = clazz("package java.lang class Foo { def foo() { val o = new Object() o.clone }}");
 		helper.assertNoErrors(xtendClass);
 	}
+	
+	@Test
+	public void testInaccessibleMethod6() throws Exception {
+		XtendClass xtendClass = clazz("class C { def m() { ''.clone }}");
+		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
+				.getExpressions().get(0), XMEMBER_FEATURE_CALL, FEATURE_NOT_VISIBLE, "The method clone",
+				"not", "visible");
+	}
+	
+	@Test
+	public void testInaccessibleMethod7() throws Exception {
+		XtendClass xtendClass = clazz("class C { def m(String s) { s.clone }}");
+		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
+				.getExpressions().get(0), XMEMBER_FEATURE_CALL, FEATURE_NOT_VISIBLE, "The method clone",
+				"not", "visible");
+	}
+	
+	@Test
+	public void testInaccessibleMethod8() throws Exception {
+		XtendClass xtendClass = clazz("package java.lang class C { def m(String s) { s.clone }}");
+		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
+				.getExpressions().get(0), XMEMBER_FEATURE_CALL, FEATURE_NOT_VISIBLE, "The method clone",
+				"not", "visible");
+	}
+	
+	@Test
+	public void testInaccessibleMethod9() throws Exception {
+		XtendClass xtendClass = clazz("package java.lang class C { def m() { ''.clone }}");
+		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
+				.getExpressions().get(0), XMEMBER_FEATURE_CALL, FEATURE_NOT_VISIBLE, "The method clone",
+				"not", "visible");
+	}
+	
+	@Test
+	public void testInaccessibleMethod10() throws Exception {
+		XtendClass xtendClass = clazz("class C { def m() { String.clone }}");
+		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
+				.getExpressions().get(0), XMEMBER_FEATURE_CALL, FEATURE_NOT_VISIBLE, "The method clone",
+				"not", "visible");
+	}
+	
+	@Test
+	public void testInaccessibleMethod11() throws Exception {
+		XtendClass xtendClass = clazz("package java.lang class C { def m() { String.clone }}");
+		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
+				.getExpressions().get(0), XMEMBER_FEATURE_CALL, FEATURE_NOT_VISIBLE, "The method clone",
+				"not", "visible");
+	}
 
 	@Test public void testDuplicateParameter() throws Exception {
 		XtendFunction function = function("def foo(int x, int x) {null}");

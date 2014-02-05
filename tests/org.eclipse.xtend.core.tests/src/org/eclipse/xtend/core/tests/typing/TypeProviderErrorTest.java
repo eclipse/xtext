@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.tests.typing;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -22,7 +23,8 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -30,11 +32,10 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class TypeProviderErrorTest extends AbstractXtendTestCase {
 
 	@Inject
-	private ITypeProvider typeProvider;
+	private IBatchTypeResolver typeResolver;
 	
 	@Inject
 	private IResourceScopeCache cache;
@@ -49,10 +50,25 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 			EObject object = (EObject) contents.next();
 			if (object instanceof JvmOperation) {
 				// no exception
-				typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) object);
+				getType((JvmIdentifiableElement) object);
 			}
 		}
-		
+	}
+	
+	private LightweightTypeReference getType(JvmIdentifiableElement identifiable) {
+		return typeResolver.resolveTypes(identifiable).getActualType(identifiable);
+	}
+	private List<LightweightTypeReference> getThrownExceptionTypes(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getThrownExceptions(expression);
+	}
+	private LightweightTypeReference getReturnType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getReturnType(expression);
+	}
+	private LightweightTypeReference getType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getActualType(expression);
+	}
+	private LightweightTypeReference getExpectedType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getExpectedType(expression);
 	}
 	
 	@Test public void testNoException_02() throws Exception {
@@ -66,7 +82,7 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 			EObject object = (EObject) contents.next();
 			if (object instanceof XExpression) {
 				XExpression expression = (XExpression) object;
-				typeProvider.getExpectedType(expression);
+				getExpectedType(expression);
 			}
 		}
 	}
@@ -93,7 +109,7 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 			EObject object = (EObject) contents.next();
 			if (object instanceof XExpression) {
 				XExpression expression = (XExpression) object;
-				typeProvider.getCommonReturnType(expression, true);
+				getReturnType(expression);
 			}
 		}
 	}
@@ -105,7 +121,7 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 			EObject object = (EObject) contents.next();
 			if (object instanceof JvmIdentifiableElement) {
 				JvmIdentifiableElement element = (JvmIdentifiableElement) object;
-				typeProvider.getTypeForIdentifiable(element);
+				getType(element);
 			}
 		}
 	}
@@ -133,7 +149,7 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 			EObject object = (EObject) contents.next();
 			if (object instanceof XExpression) {
 				XExpression expression = (XExpression) object;
-				typeProvider.getExpectedType(expression);
+				getExpectedType(expression);
 			}
 		}
 	}
@@ -153,7 +169,7 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 			EObject object = (EObject) contents.next();
 			if (object instanceof XExpression) {
 				XExpression expression = (XExpression) object;
-				typeProvider.getThrownExceptionTypes(expression);
+				getThrownExceptionTypes(expression);
 			}
 		}
 	}
@@ -169,7 +185,7 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 			EObject object = (EObject) contents.next();
 			if (object instanceof XExpression) {
 				XExpression expression = (XExpression) object;
-				typeProvider.getCommonReturnType(expression, true);
+				getReturnType(expression);
 			}
 		}
 	}
@@ -195,7 +211,7 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 			EObject object = (EObject) contents.next();
 			if (object instanceof XExpression) {
 				XExpression expression = (XExpression) object;
-				typeProvider.getCommonReturnType(expression, true);
+				getReturnType(expression);
 			}
 		}
 	}
@@ -258,7 +274,7 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 				EObject object = (EObject) contents.next();
 				if (object instanceof XExpression) {
 					XExpression expression = (XExpression) object;
-					typeProvider.getExpectedType(expression);
+					getExpectedType(expression);
 				}
 			}
 		}
@@ -269,7 +285,7 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 				EObject object = (EObject) contents.next();
 				if (object instanceof XExpression) {
 					XExpression expression = (XExpression) object;
-					typeProvider.getExpectedType(expression);
+					getExpectedType(expression);
 				}
 			}
 		}
@@ -309,7 +325,7 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 			EObject object = (EObject) contents.next();
 			if (object instanceof XExpression) {
 				XExpression expression = (XExpression) object;
-				typeProvider.getExpectedType(expression);
+				getExpectedType(expression);
 			}
 		}
 	}

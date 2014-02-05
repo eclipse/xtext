@@ -8,13 +8,11 @@
 package org.eclipse.xtend.ide.tests.contentassist;
 
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Ignore("TODO fix me")
 public class Bug364966Test extends AbstractXtendContentAssistBugTest {
 
 	@Test public void testFieldInitializer_01() throws Exception {

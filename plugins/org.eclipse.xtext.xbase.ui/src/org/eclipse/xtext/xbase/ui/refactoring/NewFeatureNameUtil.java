@@ -12,10 +12,10 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -30,8 +30,9 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.inject.Inject;
 
@@ -41,16 +42,13 @@ import com.google.inject.Inject;
 public class NewFeatureNameUtil {
 	
 	@Inject
-	private XbaseScopeProvider scopeProvider;
-	
-	@Inject
-	private ITypeProvider typeProvider;
-	
-	@Inject
 	private Primitives primitives;
 	
 	@Inject
 	private IValueConverterService valueConverterService;
+
+	@Inject
+	private IBatchTypeResolver batchTypeResolver;
 	
 	private Set<String> allKeywords;
 	
@@ -66,12 +64,12 @@ public class NewFeatureNameUtil {
 				(siblingExpression.eContainer() instanceof XBlockExpression) 
 				? (XBlockExpression) siblingExpression.eContainer() 
 				: null;
-		featureCallScope = scopeProvider.createSimpleFeatureCallScope(
-				siblingExpression.eContainer(), 
-				XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 
-				siblingExpression.eResource(), 
-				true,
-				(containerBlock != null) ? containerBlock.getExpressions().size() : 0);
+		EObject context = siblingExpression;
+		if (containerBlock != null && !containerBlock.getExpressions().isEmpty()) {
+			context = containerBlock.getExpressions().get(containerBlock.getExpressions().size() - 1);
+		}
+		IExpressionScope expressionScope = batchTypeResolver.resolveTypes(context).getExpressionScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.AFTER);
+		featureCallScope = expressionScope.getFeatureScope();
 	}
 
 	public void checkNewFeatureName(String newFeatureName, boolean isLookupInScope, RefactoringStatus status) {
@@ -100,8 +98,8 @@ public class NewFeatureNameUtil {
 		return allKeywords.contains(newFeatureName);
 	}
 
-	protected boolean isAlreadyDefined(String newFetaureName) {
-		Iterable<IEObjectDescription> elements = featureCallScope.getElements(QualifiedName.create(newFetaureName));
+	protected boolean isAlreadyDefined(String newFeatureName) {
+		Iterable<IEObjectDescription> elements = featureCallScope.getElements(QualifiedName.create(newFeatureName));
 		return !isEmpty(elements);
 	}
 
@@ -126,9 +124,9 @@ public class NewFeatureNameUtil {
 		}
 		if(expression instanceof XClosure)
 			return "function";
-		JvmTypeReference type = typeProvider.getType(expression);
+		LightweightTypeReference type = batchTypeResolver.resolveTypes(expression).getActualType(expression);
 		if (type != null) {
-			if (primitives.isPrimitive(type))
+			if (type.isPrimitive())
 				return type.getSimpleName().substring(0, 1);
 			else
 				return toVariableName(type.getSimpleName());

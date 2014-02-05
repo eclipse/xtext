@@ -42,34 +42,47 @@ public class FeatureScopeSessionWithContext extends AbstractNestedFeatureScopeSe
 	}
 	
 	@Override
-	public boolean isVisible(JvmMember member, @Nullable JvmIdentifiableElement receiverFeature) {
+	public boolean isVisible(JvmMember member, @Nullable LightweightTypeReference receiverType, @Nullable JvmIdentifiableElement receiverFeature) {
+		// TODO probably bogus implementation
 		boolean result = isVisible(member);
-		if (result && JvmVisibility.PROTECTED == member.getVisibility() && receiverFeature != null) {
-			// TODO how does this work with inner types, e.g.
-			/*
-			 * class A {
-			 *   class B {
-			 *     {
-			 *       A.super.toString
-			 *     }
-			 *   }
-			 * }
-			 */
-			if (isThisOrSuper(receiverFeature)) {
-				return true;
+		if (result && JvmVisibility.PROTECTED == member.getVisibility()) {
+			if (receiverFeature != null) {
+				// TODO how does this work with inner types, e.g.
+				/*
+				 * class A {
+				 *   class B {
+				 *     {
+				 *       A.super.toString
+				 *     }
+				 *   }
+				 * }
+				 */
+				if (isThisSuperOrTypeLiteral(receiverFeature)) {
+					if (receiverType == null || !receiverType.isType(Class.class)) {
+						return true;
+					}
+				}
+				JvmType contextType = visibilityHelper.getRawContextType();
+				if (contextType instanceof JvmDeclaredType) {
+					String packageName = ((JvmDeclaredType) contextType).getPackageName();
+					JvmDeclaredType declaringType = member.getDeclaringType();
+					String memberPackageName = declaringType.getPackageName();
+					if (Strings.equal(packageName, memberPackageName)) {
+						return declaringType == receiverType.getType() || receiverType.getRawTypes().contains(contextType);
+					}
+				}
+				return false;
+			} else if (receiverType != null) {
+				JvmType contextType = visibilityHelper.getRawContextType();
+				if (!receiverType.getRawTypes().contains(contextType)) {
+					return false;
+				}
 			}
-			JvmType contextType = visibilityHelper.getRawContextType();
-			if (contextType instanceof JvmDeclaredType) {
-				String packageName = ((JvmDeclaredType) contextType).getPackageName();
-				String memberPackageName = member.getDeclaringType().getPackageName();
-				return Strings.equal(packageName, memberPackageName);
-			}
-			return false;
 		}
 		return result;
 	}
 	
-	protected boolean isThisOrSuper(JvmIdentifiableElement receiverFeature) {
+	protected boolean isThisSuperOrTypeLiteral(JvmIdentifiableElement receiverFeature) {
 		return receiverFeature instanceof JvmType;
 	}
 

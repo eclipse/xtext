@@ -262,20 +262,37 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		}
 	}
 
-	protected void selectEofStrategy() {
+	/**
+	 * @since 2.6
+	 */
+	protected void selectEofStrategy(int lookAhead) {
 		if (mismatch) {
 			delegate = createMismatchStrategy();
 		} else if (!state.errorRecovery) {
 			delegate = createNotErrorRecoveryStrategy();
+		} else if (strict && lookAhead == 1) {
+			delegate = createNoOpStrategy();
 		} else {
 			delegate = createErrorRecoveryStrategy();
 		}
 		if (predictionLevel > 0) {
 			delegate = createPredictionStrategy();
-		} 
+		}
 	}
 	
+	protected void selectEofStrategy() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("This method is no longer called");
+	}
 	
+	/**
+	 * @since 2.6
+	 */
+	protected StreamAdapter createNoOpStrategy() {
+		return new StreamAdapter() {
+			public void announceEof(int lookAhead) {
+			}
+		};
+	}
 
 	protected StreamAdapter createPredictionStrategy() {
 		return new StreamAdapter() {
@@ -380,7 +397,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		return new StreamAdapter() {
 
 			public void announceEof(int lookAhead) {
-				if (!state.errorRecovery && !mismatch && (!isBacktracking() || marked)) {
+				if (!state.errorRecovery && !mismatch && ((!isBacktracking() || marked) || wasErrorCount == 0)) {
 					AbstractElement current = getCurrentGrammarElement();
 					if (current != null) {
 						if (marked)
@@ -496,7 +513,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			logger.debug("==================================");
 		}
 		if (delegate == null) {
-			selectEofStrategy();
+			selectEofStrategy(lookAhead);
 			if (strict) {
 				wasErrorCount = state.syntaxErrors;
 			}
@@ -531,8 +548,20 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 	
 	public void announceRewind(int marker) {
+		int useLookAhead = -1;
+		if (marker != 0 && delegate == null && strict && predictionLevel != 0 && lookAheadAddOn > 0 && state.syntaxErrors == 0
+				&& input.index() == input.size()
+				&& marker + lookAheadAddOn <= input.size()
+				&& state.backtracking > 0) {
+			useLookAhead = lookAheadAddOn;
+			delegate = createNotErrorRecoveryStrategy();
+			wasErrorCount = state.syntaxErrors;
+		}
 		currentMarker = marker;
 		lookAheadAddOn = currentMarker - firstMarker;
+		if (useLookAhead != -1) {
+			announceEof(useLookAhead);
+		}
 		if (firstMarker == currentMarker)
 			marked = false;
 	}

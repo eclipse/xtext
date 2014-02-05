@@ -31,13 +31,14 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
 import org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.imports.TypeUsage;
 import org.eclipse.xtext.xbase.imports.TypeUsages;
+import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
@@ -46,7 +47,6 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class InteractiveUnresolvedTypeResolver implements IUnresolvedTypeResolver {
 
 	private static final Logger LOG = Logger.getLogger(InteractiveUnresolvedTypeResolver.class);
@@ -58,10 +58,10 @@ public class InteractiveUnresolvedTypeResolver implements IUnresolvedTypeResolve
 	private IJavaProjectProvider projectProvider;
 
 	@Inject
-	private VisibilityService visibilityService;
-
-	@Inject
 	private TypeChooser typeChooser;
+	
+	@Inject
+	private IVisibilityHelper visibilityHelper;
 	
 	@Inject
 	private XbaseQualifiedNameValueConverter nameValueConverter;
@@ -137,6 +137,7 @@ public class InteractiveUnresolvedTypeResolver implements IUnresolvedTypeResolve
 	protected void findCandidateTypes(final JvmDeclaredType contextType, final String typeSimpleName,
 			IJavaSearchScope searchScope, final IAcceptor<JvmDeclaredType> acceptor) throws JavaModelException {
 		BasicSearchEngine searchEngine = new BasicSearchEngine();
+		final IVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, contextType);
 		searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, typeSimpleName.toCharArray(),
 				SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, IJavaSearchConstants.TYPE, searchScope,
 				new IRestrictedAccessTypeRequestor() {
@@ -148,7 +149,7 @@ public class InteractiveUnresolvedTypeResolver implements IUnresolvedTypeResolve
 								|| (access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter())) {
 							JvmType importType = typeRefs.findDeclaredType(qualifiedTypeName, contextType.eResource());
 							if (importType instanceof JvmDeclaredType
-									&& visibilityService.isVisible((JvmDeclaredType) importType, contextType)) {
+									&& contextualVisibilityHelper.isVisible((JvmDeclaredType) importType)) {
 								acceptor.accept((JvmDeclaredType) importType);
 							}
 						}

@@ -8,17 +8,24 @@
 package org.eclipse.xtext.xbase.junit.ui;
 
 import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.core.Flags;
+import org.eclipse.jdt.core.IField;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IMethod;
+import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
+import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.util.ResourceLoadHelper;
@@ -32,6 +39,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.omg.PortableInterceptor.SUCCESSFUL;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -39,19 +47,22 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.name.Named;
 
-public abstract class AbstractXbaseContentAssistTest extends Assert implements ResourceLoadHelper {
+public abstract class AbstractXbaseContentAssistTest extends Assert implements ResourceLoadHelper, IJavaProjectProvider {
 
 	@Inject
 	protected IWorkspace workspace;
 
 	protected String fileExtension;
 
+	private boolean demandFeatureComputation = false;
+	
 	/**
 	 * @since 2.3
 	 */
 	@Before
 	public void setUp() throws Exception {
 		getInjector().injectMembers(this);
+		initFeatures();
 	}
 
 	/**
@@ -61,6 +72,13 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	public void tearDown() throws Exception {
 		if (doCleanWorkspace())
 			IResourcesSetupUtil.cleanWorkspace();
+		if (demandFeatureComputation) {
+			STATIC_CLASS_FEATURES = null;
+			STATIC_STRING_FEATURES = null;
+			CLASS_FEATURES = null;
+			STRING_FEATURES = null;
+			demandFeatureComputation = false;
+		}
 	}
 	
 	protected boolean doCleanWorkspace() {
@@ -68,6 +86,8 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	protected abstract Injector getInjector();
+	
+	public abstract IJavaProject getJavaProject(ResourceSet resourceSet);
 	
 	public <T> T get(Class<T> clazz) {
 		return getInjector().getInstance(clazz);
@@ -80,11 +100,15 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		return result;
 	}
 	
-	protected XtextResourceSet getResourceSet() {
-		return get(XtextResourceSet.class);
+	protected final XtextResourceSet getResourceSet() {
+		XtextResourceSet resourceSet = get(XtextResourceSet.class);
+		IJvmTypeProvider.Factory typeProviderFactory = new JdtTypeProviderFactory(this);
+		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
+		resourceSet.setClasspathURIContext(getJavaProject(resourceSet));
+		return resourceSet;
 	}
 	
-	public XtextResource getResourceFor(InputStream stream) {
+	public final XtextResource getResourceFor(InputStream stream) {
 		try {
 			XtextResource result = (XtextResource) getResourceSet().createResource(URI.createURI("Test." + fileExtension));
 			result.load(stream, null);
@@ -160,20 +184,40 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		"as", "instanceof"
 	};
 	
-	protected static final String[] STRING_FEATURES;
-	protected static final String[] STATIC_STRING_FEATURES;
-	protected static final String[] CLASS_FEATURES;
-	protected static final String[] STATIC_CLASS_FEATURES;
+	protected static String[] STRING_FEATURES;
+	protected static String[] STATIC_STRING_FEATURES;
+	protected static String[] CLASS_FEATURES;
+	protected static String[] STATIC_CLASS_FEATURES;
 	
-	static {
+	protected void initFeatures() {
+		if (STRING_FEATURES != null) {
+			return;
+		}
+		demandFeatureComputation = true;
+		doInitFeatures(getJavaProject(getResourceSet()));
+	}
+	
+	protected static void doInitFeatures(IJavaProject javaProject) {
+		try {
+			doInitStringFeatures(javaProject);
+			doInitClassFeatures(javaProject);
+		} catch (JavaModelException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	protected static void doInitStringFeatures(IJavaProject javaProject) throws JavaModelException {
+		IType stringType = javaProject.findType(String.class.getName());
+		Set<String> featuresOrTypes = Sets.newHashSet();
 		List<String> features = Lists.newArrayList();
 		List<String> staticFeatures = Lists.newArrayList();
-		addMethods(String.class, features, staticFeatures);
+		addMethods(stringType, features, staticFeatures, featuresOrTypes);
 		// compareTo(T) is actually overridden by compareTo(String) but contained twice in String.class#getMethods
 		features.remove("compareTo()");
 		Set<String> featuresAsSet = Sets.newHashSet(features);
 		Set<String> staticFeaturesAsSet = Sets.newHashSet(staticFeatures);
-		addFields(String.class, features, staticFeatures, featuresAsSet, staticFeaturesAsSet);
+		Set<String> types = Sets.newHashSet();
+		addFields(stringType, features, staticFeatures, featuresAsSet, staticFeaturesAsSet, types);
 		// StringExtensions
 		features.add("toFirstLower");
 		features.add("toFirstUpper");
@@ -184,49 +228,101 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		STATIC_STRING_FEATURES = staticFeatures.toArray(new String[staticFeatures.size()]);
 	}
 	
-	static {
+	protected static void doInitClassFeatures(IJavaProject javaProject) throws JavaModelException {
+		IType classType = javaProject.findType(Class.class.getName());
+		Set<String> featuresOrTypes = Sets.newHashSet();
 		List<String> features = Lists.newArrayList();
 		List<String> staticFeatures = Lists.newArrayList();
-		addMethods(Class.class, features, staticFeatures);
-		features.remove("compareTo()");
+		addMethods(classType, features, staticFeatures, featuresOrTypes);
 		Set<String> featuresAsSet = Sets.newHashSet(features);
 		Set<String> staticFeaturesAsSet = Sets.newHashSet(staticFeatures);
-		addFields(Class.class, features, staticFeatures, featuresAsSet, staticFeaturesAsSet);
+		Set<String> types = Sets.newHashSet();
+		addFields(classType, features, staticFeatures, featuresAsSet, staticFeaturesAsSet, types);
 		// Object extensions
 		features.add("identityEquals()");
 		CLASS_FEATURES = features.toArray(new String[features.size()]);
 		STATIC_CLASS_FEATURES = staticFeatures.toArray(new String[staticFeatures.size()]);
 	}
 
-	protected static void addFields(Class<?> type, List<String> features, List<String> staticFeatures, Set<String> featuresAsSet,
-			Set<String> staticFeaturesAsSet) {
-		for(Field field: type.getFields()) {
-			Set<String> asSet = featuresAsSet;
-			List<String> list = features;
-			if (Modifier.isStatic(field.getModifiers())) {
-				list = staticFeatures;
-				asSet = staticFeaturesAsSet;
+	protected static void addFields(IType type, List<String> features, List<String> staticFeatures, Set<String> featuresAsSet,
+			Set<String> staticFeaturesAsSet, Set<String> types) throws JavaModelException {
+		if (types.add(type.getFullyQualifiedName())) {
+			for(IField field: type.getFields()) {
+				Set<String> asSet = featuresAsSet;
+				List<String> list = features;
+				if (Modifier.isStatic(field.getFlags())) {
+					list = staticFeatures;
+					asSet = staticFeaturesAsSet;
+				}
+				if (Flags.isPublic(field.getFlags()) && asSet.add(field.getElementName()))
+					list.add(field.getElementName());
 			}
-			if (asSet.add(field.getName()))
-				list.add(field.getName());
+			String superclassName = type.getSuperclassName();
+			if (superclassName != null) {
+				int idx = superclassName.indexOf('<');
+				if (idx != -1) {
+					superclassName = superclassName.substring(0, idx);
+				}
+				IType superType = type.getJavaProject().findType(superclassName);
+				addFields(superType, features, staticFeatures, featuresAsSet, staticFeaturesAsSet, types);
+			}
+			String[] interfaceNames = type.getSuperInterfaceNames();
+			for(String interfaceName: interfaceNames) {
+				int idx = interfaceName.indexOf('<');
+				if (idx != -1) {
+					interfaceName = interfaceName.substring(0, idx);
+				}
+				IType superInterface = type.getJavaProject().findType(interfaceName);
+				addFields(superInterface, features, staticFeatures, featuresAsSet, staticFeaturesAsSet, types);
+			}
 		}
 	}
 
-	protected static void addMethods(Class<?> type, List<String> features, List<String> staticFeatures) {
-		for(Method method: type.getMethods()) {
-			List<String> list = features;
-			if (Modifier.isStatic(method.getModifiers()))
-				list = staticFeatures;
-			if (method.getParameterTypes().length == 0) {
-				if (method.getName().startsWith("get") && method.getParameterTypes().length == 0) {
-					list.add(Strings.toFirstLower(method.getName().substring(3)));
-				} else if (method.getName().startsWith("is") && method.getParameterTypes().length == 0) {
-					list.add(Strings.toFirstLower(method.getName().substring(2)));
-				} else {
-					list.add(method.getName());
+	protected static void addMethods(IType type, List<String> features, List<String> staticFeatures, Set<String> featuresOrTypes) throws JavaModelException {
+		if (featuresOrTypes.add(type.getFullyQualifiedName())) {
+			for(IMethod method: type.getMethods()) {
+				List<String> list = features;
+				if (Flags.isStatic(method.getFlags()))
+					list = staticFeatures;
+				String methodName = method.getElementName();
+				if (Flags.isPublic(method.getFlags()) &&  !method.isConstructor() && !"<clinit>".equals(methodName) && !"<init>".equals(methodName) && !Flags.isSynthetic(method.getFlags())) {
+					if (method.getParameterTypes().length == 0) {
+						if (methodName.startsWith("get") && method.getParameterTypes().length == 0) {
+							String propertyName = Strings.toFirstLower(methodName.substring(3));
+							if (featuresOrTypes.add(propertyName + method.getSignature()))
+								list.add(propertyName);
+						} else if (methodName.startsWith("is") && method.getParameterTypes().length == 0) {
+							String propertyName = Strings.toFirstLower(methodName.substring(2));
+							if (featuresOrTypes.add(propertyName + method.getSignature()))
+								list.add(propertyName);
+						} else {
+							if (featuresOrTypes.add(methodName + method.getSignature()))
+								list.add(methodName);
+						}
+					} else {
+						methodName = methodName + "()";
+						if (featuresOrTypes.add(methodName + method.getSignature()))
+							list.add(methodName);				
+					}
 				}
-			} else {
-				list.add(method.getName() + "()");				
+			}
+			String superclassName = type.getSuperclassName();
+			if (superclassName != null) {
+				int idx = superclassName.indexOf('<');
+				if (idx != -1) {
+					superclassName = superclassName.substring(0, idx);
+				}
+				IType superType = type.getJavaProject().findType(superclassName);
+				addMethods(superType, features, staticFeatures, featuresOrTypes);
+			}
+			String[] interfaceNames = type.getSuperInterfaceNames();
+			for(String interfaceName: interfaceNames) {
+				int idx = interfaceName.indexOf('<');
+				if (idx != -1) {
+					interfaceName = interfaceName.substring(0, idx);
+				}
+				IType superInterface = type.getJavaProject().findType(interfaceName);
+				addMethods(superInterface, features, staticFeatures, featuresOrTypes);
 			}
 		}
 	}
@@ -275,9 +371,8 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("''+''").assertTextAtCursorPosition("+''", 1, expect(new String[]{"+"}, getKeywordsAndStatics()));
 	}
 	
-	@Ignore("Broken, since the OtherOperand '>' '>' has been introduced")
 	@Test public void testOnStringLiteral_06() throws Exception {
-		newBuilder().append("''==''").assertTextAtCursorPosition("==", 1, "==", "=>");
+		newBuilder().append("''==''").assertTextAtCursorPosition("==", 1, "==", "=>", "===");
 	}
 	
 	@Test public void testOnStringLiteral_07() throws Exception {
@@ -313,9 +408,8 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("'' + ''").assertTextAtCursorPosition("+ ''", 1, expect(new String[]{"+"}, getKeywordsAndStatics()));
 	}
 	
-	@Ignore("Broken, since the OtherOperand '>' '>' has been introduced")
 	@Test public void testOnStringLiteral_15() throws Exception {
-		newBuilder().append("'' == ''").assertTextAtCursorPosition("==", 1, "==", "=>");
+		newBuilder().append("'' == ''").assertTextAtCursorPosition("==", 1, "==", "=>", "===");
 	}
 	
 	@Test public void testOnStringLiteral_16() throws Exception {
@@ -352,7 +446,6 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("''.toString+''").assertTextAtCursorPosition("+''", 1, expect(new String[]{"+"}, getKeywordsAndStatics()));
 	}
 	
-	@Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=381327#c3")
 	@Test public void testOnStringLiteral_24() throws Exception {
 		newBuilder().append("''.toString==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"===", "==", "=>"}, getKeywordsAndStatics()));
 	}
@@ -405,7 +498,6 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("''.toString +''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, CAST_INSTANCEOF));
 	}
 	
-	@Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=381327#c3")
 	@Test public void testOnStringLiteral_37() throws Exception {
 		newBuilder().append("''.toString ==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"==", "===", "=>"}, getKeywordsAndStatics()));
 	}
@@ -451,7 +543,17 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	@Test public void testAfterBinaryOperation_10() throws Exception {
-		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", "null", "!=", "!==", "==", "===", "->", "=>", "+", "?:");
+		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", 
+				"null", "!=", "!==", "==", "===", 
+				"->", "=>", 
+				"+", 
+				"?:",
+				"<", "<=", "<=>", ">=", ">");
+	}
+	
+	@Ignore("TODO binary operator precedence is not implemented in CA yet")
+	@Test public void testAfterBinaryOperation_11() throws Exception {
+		newBuilder().append("''+1").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF /* number operators */));
 	}
 	
 	@Test public void testStaticFeatures_01() throws Exception {
@@ -463,7 +565,8 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	@Test public void testNull() throws Exception {
-		newBuilder().append("null").assertText("null", "!=", "!==", "+", "==", "===", "->", "?:", "=>");
+		newBuilder().append("null").assertText("null", "!=", "!==", "+", "==", "===", "->", "?:", "=>",
+				"%", "*", "**", "-", "+=", "-=", "/", "<", "<=", "<=>", ">=", ">");
 	}
 	
 	@Test public void testForLoop_01() throws Exception {
@@ -506,12 +609,21 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("new ArrBloQu").assertText("java.util.concurrent.ArrayBlockingQueue");
 	}
 	
+	@Test public void testCamelCase_03() throws Exception {
+		newBuilder().append("new ArrBloQu").assertText("java.util.concurrent.ArrayBlockingQueue");
+	}
+	
 	@Test public void testSwitchOnEnum_01() throws Exception {
-		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case ").assertText(expect(new String[]{"SOURCE", "CLASS", "RUNTIME"}, getKeywordsAndStatics()));
+		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case ").assertText(expect(
+				new String[]{"SOURCE", "CLASS", "RUNTIME", /* TODO static scope should be restricted to enum literals */ "valueOf()", "valueOf()", "values"}, getKeywordsAndStatics()));
 	}
 	
 	@Test public void testSwitchOnEnum_02() throws Exception {
 		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case SOUR").assertProposal("SOURCE");
+	}
+	
+	@Test public void testSwitchOnEnum_03() throws Exception {
+		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case SOURCE: ").assertText(getKeywordsAndStatics());
 	}
 	
 	/**

@@ -30,7 +30,7 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String,String> _function = new Function1<String,String>() {
+			    final Function1<String, String> _function = new Function1<String, String>() {
 			      public String apply(final String e) {
 			        return e;
 			      }
@@ -57,7 +57,7 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String,String> _function = new Function1<String,String>() {
+			    final Function1<String, String> _function = new Function1<String, String>() {
 			      public String apply(final String e) {
 			        return e;
 			      }
@@ -84,7 +84,7 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String,String> _function = new Function1<String,String>() {
+			    final Function1<String, String> _function = new Function1<String, String>() {
 			      public String apply(final String e) {
 			        return e;
 			      }
@@ -111,7 +111,7 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public List<String> m(final List<String> list) {
-			    final Function1<String,String> _function = new Function1<String,String>() {
+			    final Function1<String, String> _function = new Function1<String, String>() {
 			      public String apply(final String e) {
 			        return e;
 			      }
@@ -167,18 +167,18 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			    return null;
 			  }
 			  
-			  public <T extends EObject> Iterable<Pair<QualifiedName,T>> getVisibleIEObjectDescriptionByTypeAndCondition(final ResourceSet resourceSet, final EClass type, final Function1<? super IEObjectDescription,? extends Boolean> p) {
-			    List<Pair<QualifiedName,T>> _xblockexpression = null;
+			  public <T extends EObject> Iterable<Pair<QualifiedName, T>> getVisibleIEObjectDescriptionByTypeAndCondition(final ResourceSet resourceSet, final EClass type, final Function1<? super IEObjectDescription, ? extends Boolean> p) {
+			    List<Pair<QualifiedName, T>> _xblockexpression = null;
 			    {
 			      final ArrayList<IEObjectDescription> c = CollectionLiterals.<IEObjectDescription>newArrayList();
-			      final Function1<IEObjectDescription,Pair<QualifiedName,T>> _function = new Function1<IEObjectDescription,Pair<QualifiedName,T>>() {
-			        public Pair<QualifiedName,T> apply(final IEObjectDescription eod) {
+			      final Function1<IEObjectDescription, Pair<QualifiedName, T>> _function = new Function1<IEObjectDescription, Pair<QualifiedName, T>>() {
+			        public Pair<QualifiedName, T> apply(final IEObjectDescription eod) {
 			          QualifiedName _qualifiedName = eod.getQualifiedName();
 			          T _resolve = Dummy.this.<T>resolve(eod, resourceSet);
 			          return Pair.<QualifiedName, T>of(_qualifiedName, _resolve);
 			        }
 			      };
-			      _xblockexpression = (ListExtensions.<IEObjectDescription, Pair<QualifiedName,T>>map(c, _function));
+			      _xblockexpression = ListExtensions.<IEObjectDescription, Pair<QualifiedName, T>>map(c, _function);
 			    }
 			    return _xblockexpression;
 			  }

@@ -52,7 +52,6 @@ import org.eclipse.xtext.ui.editor.hover.html.OpenBrowserUtil;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
@@ -78,8 +77,6 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	protected XbaseElementLinks elementLinks;
 	@Inject
 	protected XbaseHoverConfiguration xbaseHoverConfiguration;
-	@Inject
-	protected HoverGenericsResolver hoverGenericsResolver;
 	@Inject
 	protected ILabelProvider labelProvider;
 	@Inject 
@@ -126,7 +123,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	/**
 	 * @since 2.3
 	 */
-	protected String getHoverInfoAsHtml(EObject call, EObject objectToView, IRegion hoverRegion) {
+	protected String getHoverInfoAsHtml(EObject astElement, EObject objectToView, IRegion hoverRegion) {
 		if(!hasHover(objectToView))
 			return null;
 		StringBuffer buffer = new StringBuffer();
@@ -134,7 +131,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 		if(oldSignature != null)
 			buffer.append(oldSignature);
 		else
-			buffer.append(computeSignature(call, objectToView));
+			buffer.append(computeSignature(astElement, objectToView));
 		String documentation = getDocumentation(objectToView);
 		if (documentation != null && documentation.length() > 0) {
 			buffer.append("<p>");
@@ -180,12 +177,9 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	 * @since 2.3
 	 * @param call - FeatureCall may be null
 	 */
-	protected String computeSignature(EObject call, EObject o) {
-		String imageTag =  hoverSignatureProvider.getImageTag(o);
-		String signature = hoverSignatureProvider.getSignature(o);
-		if (call != null && (call instanceof XAbstractFeatureCall || call instanceof XConstructorCall))
-			signature = hoverGenericsResolver.replaceGenerics((XExpression) call,
-					hoverSignatureProvider.getSignature(o));
+	protected String computeSignature(EObject astElement, EObject referencedElement) {
+		String imageTag =  hoverSignatureProvider.getImageTag(referencedElement);
+		String signature = hoverSignatureProvider.getSignature(astElement);
 		if(signature != null) {
 			if (imageTag != null) {
 				return "<div style='position: absolute; left: 0; top: 0;'>" + imageTag + "</div>" + LEADING_PADDING +"<b>"+ HTMLPrinter.convertToHTMLContent(signature) + "</b>" + TRAILING_PADDING;

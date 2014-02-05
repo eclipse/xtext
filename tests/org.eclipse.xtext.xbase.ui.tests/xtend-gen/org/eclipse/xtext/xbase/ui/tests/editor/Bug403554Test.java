@@ -7,6 +7,10 @@
  */
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
+import java.util.ArrayList;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IMethod;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.ui.tests.editor.AbstractXbaseContentAssistBugTest;
 import org.junit.Ignore;
@@ -17,12 +21,44 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class Bug403554Test extends AbstractXbaseContentAssistBugTest {
+  private String declarator;
+  
+  public void setUp() throws Exception {
+    super.setUp();
+    final IJavaProject project = this.getJavaProject(null);
+    String _name = ArrayList.class.getName();
+    IType type = project.findType(_name);
+    IMethod method = type.getMethod("subList", new String[] { "I", "I" });
+    boolean _exists = method.exists();
+    boolean _not = (!_exists);
+    boolean _while = _not;
+    while (_while) {
+      {
+        String superclassName = type.getSuperclassName();
+        final int idx = superclassName.indexOf("<");
+        if ((idx != (-1))) {
+          String _substring = superclassName.substring(0, idx);
+          superclassName = _substring;
+        }
+        IType _findType = project.findType(superclassName);
+        type = _findType;
+        IMethod _method = type.getMethod("subList", new String[] { "I", "I" });
+        method = _method;
+      }
+      boolean _exists_1 = method.exists();
+      boolean _not_1 = (!_exists_1);
+      _while = _not_1;
+    }
+    String _elementName = type.getElementName();
+    this.declarator = _elementName;
+  }
+  
   @Test
   public void testProposalOnIt() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append("newArrayList(\"\") => [ it.");
     ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("subList()");
-    _assertProposal.withDisplayString("subList(int fromIndex, int toIndex) : List<E> - AbstractList");
+    _assertProposal.withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
   }
   
   @Ignore
@@ -31,7 +67,7 @@ public class Bug403554Test extends AbstractXbaseContentAssistBugTest {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append("newArrayList(\"\") => [ it | it.");
     ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("subList()");
-    _assertProposal.withDisplayString("subList(int fromIndex, int toIndex) : List<E> - AbstractList");
+    _assertProposal.withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
   }
   
   @Ignore
@@ -40,7 +76,7 @@ public class Bug403554Test extends AbstractXbaseContentAssistBugTest {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append("newArrayList(\"\") => [ it | ");
     ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("subList()");
-    _assertProposal.withDisplayString("subList(int fromIndex, int toIndex) : List<E> - AbstractList");
+    _assertProposal.withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
   }
   
   @Ignore
@@ -49,7 +85,7 @@ public class Bug403554Test extends AbstractXbaseContentAssistBugTest {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append("newArrayList(\"\") => [ ");
     ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("subList()");
-    _assertProposal.withDisplayString("subList(int fromIndex, int toIndex) : List<E> - AbstractList");
+    _assertProposal.withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
   }
   
   @Test
@@ -57,6 +93,6 @@ public class Bug403554Test extends AbstractXbaseContentAssistBugTest {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append("newArrayList(\"\").");
     ContentAssistProcessorTestBuilder.ProposalTester _assertProposal = _append.assertProposal("subList()");
-    _assertProposal.withDisplayString("subList(int fromIndex, int toIndex) : List<E> - AbstractList");
+    _assertProposal.withDisplayString(("subList(int fromIndex, int toIndex) : List<E> - " + this.declarator));
   }
 }

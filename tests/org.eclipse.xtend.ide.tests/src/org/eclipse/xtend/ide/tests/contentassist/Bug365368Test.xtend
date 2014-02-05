@@ -21,7 +21,7 @@ class Bug365368Test extends AbstractXtendContentAssistBugTest {
 			def void bb() {}
 			def void m() { this.").assertText(
 				'^as', 'aa', 'bb', 'm',
-				'class', 'equals()', 'hashCode', 'identityEquals()', 'notify', 'notifyAll', 'toString', 'wait', 'wait()', 'wait()');
+				'class', 'clone', 'equals()', 'finalize', 'hashCode', 'identityEquals()', 'notify', 'notifyAll', 'toString', 'wait', 'wait()', 'wait()');
 	}
 	
 	@Test def void testEscapedIdentifierEscapeCharPrefix() throws Exception {

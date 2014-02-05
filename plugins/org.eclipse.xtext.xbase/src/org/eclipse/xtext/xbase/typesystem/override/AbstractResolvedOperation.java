@@ -86,12 +86,10 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 		List<IResolvedOperation> overriddenAndImplemented = getOverriddenAndImplementedMethods();
 		if (overriddenAndImplemented.isEmpty())
 			return Collections.emptyList();
-		JvmType runtimeException = getThrowableType(RuntimeException.class);
-		JvmType error = getThrowableType(Error.class);
 		List<LightweightTypeReference> exceptions = getResolvedExceptions();
 		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(exceptions.size());
 		for(LightweightTypeReference exception: exceptions) {
-			if (!exception.isSubtypeOf(runtimeException) && !exception.isSubtypeOf(error)) {
+			if (!exception.isSubtypeOf(RuntimeException.class) && !exception.isSubtypeOf(Error.class)) {
 				if (isIllegallyDeclaredException(exception, overriddenAndImplemented)) {
 					result.add(exception);
 				}
@@ -202,17 +200,6 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 	
 	protected OverrideTester getOverrideTester() {
 		return getBottom().getOverrideTester();
-	}
-	
-	protected boolean isRawTypeInheritance() {
-		List<LightweightTypeReference> superTypes = getContextType().getAllSuperTypes();
-		JvmDeclaredType declaringType = getDeclaration().getDeclaringType();
-		for(LightweightTypeReference superType: superTypes) {
-			if (superType.getType() == declaringType && superType.isRawType()) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 }

@@ -63,8 +63,8 @@ class HiddenLeafAccess {
 		while(ni.hasNext) {
 			val next = ni.next
 			if(next instanceof ILeafNode) { 
-				if ((next as ILeafNode).hidden)
-					result += next as ILeafNode
+				if (next.hidden)
+					result += next
 				else //if(!result.empty)
 					return result
 			}
@@ -75,7 +75,7 @@ class HiddenLeafAccess {
 	def protected ILeafNode findPreviousLeaf(INode node, (ILeafNode) => boolean matches) {
 		var current = node
 		while(current instanceof ICompositeNode)
-			current = (current as ICompositeNode).lastChild
+			current = current.lastChild
 		if(current instanceof ILeafNode && matches.apply(current as ILeafNode))
 			return current as ILeafNode
 		if(current != null) {
@@ -92,7 +92,7 @@ class HiddenLeafAccess {
 	def protected List<ILeafNode> findPreviousHiddenLeafs(INode node) {
 		var current = node
 		while(current instanceof ICompositeNode)
-			current = (current as ICompositeNode).lastChild
+			current = current.lastChild
 		val result = <ILeafNode>newArrayList
 		if(current != null) {
 			val ni = new NodeIterator(current)
