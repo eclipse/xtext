@@ -73,13 +73,17 @@ public class StaticFeatureScope extends AbstractSessionBasedScope {
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
 		for(JvmFeature feature: allFeatures) {
-			if (feature.isStatic())
-				allDescriptions.add(createDescription(name, feature, bucket));
-			else if (receiver == null && receiverType == null) {
-				allDescriptions.add(createInstanceDescription(name, feature, bucket));
-			}
+			addDescription(name, feature, allDescriptions);
 		}
 		return allDescriptions;
+	}
+
+	protected void addDescription(QualifiedName name, JvmFeature feature, List<IEObjectDescription> result) {
+		if (feature.isStatic())
+			result.add(createDescription(name, feature, bucket));
+		else if (receiver == null && receiverType == null) {
+			result.add(createInstanceDescription(name, feature, bucket));
+		}
 	}
 	
 	protected IEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
@@ -121,10 +125,10 @@ public class StaticFeatureScope extends AbstractSessionBasedScope {
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
 		for(JvmFeature feature: allFeatures) {
 			QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
-			allDescriptions.add(createDescription(featureName, feature, bucket));
+			addDescription(featureName, feature, allDescriptions);
 			QualifiedName operator = operatorMapping.getOperator(featureName);
 			if (operator != null) {
-				allDescriptions.add(createDescription(operator, feature, bucket));
+				addDescription(operator, feature, allDescriptions);
 			}
 		}
 		return allDescriptions;

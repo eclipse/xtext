@@ -10,12 +10,12 @@ package org.eclipse.xtext.xbase.ui.contentassist;
 import com.google.common.base.Objects;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalPriorities;
-import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
-import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription;
+import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
+import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseProposalProvider;
 
 /**
@@ -32,29 +32,7 @@ public class XbaseContentProposalPriorities extends ContentProposalPriorities {
         final Object desc = _additionalData;
         boolean _matched_1 = false;
         if (!_matched_1) {
-          if (desc instanceof JvmFeatureDescription) {
-            _matched_1=true;
-            JvmFeature _jvmFeature = ((JvmFeatureDescription)desc).getJvmFeature();
-            final JvmFeature feature = _jvmFeature;
-            boolean _matched_2 = false;
-            if (!_matched_2) {
-              if (feature instanceof JvmField) {
-                _matched_2=true;
-                this.adjustPriority(proposal, prefix, 550);
-                return;
-              }
-            }
-            if (!_matched_2) {
-              if (feature instanceof JvmExecutable) {
-                _matched_2=true;
-                this.adjustPriority(proposal, prefix, 520);
-                return;
-              }
-            }
-          }
-        }
-        if (!_matched_1) {
-          if (desc instanceof LocalVarDescription) {
+          if (desc instanceof SimpleIdentifiableElementDescription) {
             boolean _and = false;
             String _replacementString = ((ConfigurableCompletionProposal)proposal).getReplacementString();
             boolean _notEquals = (!Objects.equal(_replacementString, "this"));
@@ -69,6 +47,28 @@ public class XbaseContentProposalPriorities extends ContentProposalPriorities {
               _matched_1=true;
               this.adjustPriority(proposal, prefix, 570);
               return;
+            }
+          }
+        }
+        if (!_matched_1) {
+          if (desc instanceof IIdentifiableElementDescription) {
+            _matched_1=true;
+            JvmIdentifiableElement _elementOrProxy = ((IIdentifiableElementDescription)desc).getElementOrProxy();
+            final JvmIdentifiableElement feature = _elementOrProxy;
+            boolean _matched_2 = false;
+            if (!_matched_2) {
+              if (feature instanceof JvmField) {
+                _matched_2=true;
+                this.adjustPriority(proposal, prefix, 550);
+                return;
+              }
+            }
+            if (!_matched_2) {
+              if (feature instanceof JvmExecutable) {
+                _matched_2=true;
+                this.adjustPriority(proposal, prefix, 520);
+                return;
+              }
             }
           }
         }

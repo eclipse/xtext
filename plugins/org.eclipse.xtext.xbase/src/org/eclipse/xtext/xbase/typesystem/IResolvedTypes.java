@@ -11,6 +11,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.IExpressionScope.Anchor;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -74,6 +77,15 @@ public interface IResolvedTypes {
 	@Nullable
 	LightweightTypeReference getActualType(JvmIdentifiableElement identifiable);
 	
+	List<LightweightTypeReference> getThrownExceptions(XExpression obj);
+	
+//	/**
+//	 * Returns the traced declared type for the given identifiable or <code>null</code> if none.
+//	 * @param identifiable identifiable whose type is queried.
+//	 */
+//	@Nullable
+//	JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable);
+	
 	/**
 	 * Returns the actually expected type for the given expression or <code>null</code> if none.
 	 * @param expression expression whose expected type is queried.
@@ -95,6 +107,20 @@ public interface IResolvedTypes {
 	LightweightTypeReference getExpectedReturnType(XExpression expression);
 	
 	/**
+	 * Returns the resolved type arguments. If the expression refers to a constructor
+	 * and the constructor itself defines type parameters,
+	 * their resolved representation is prepended to the list of type arguments.
+	 * Consider the following type:
+	 * 
+	 * <pre>
+	 * class C&lt;T, V&gt; {
+	 *   public <P> C(P p) {}
+	 * }
+	 * </pre>
+	 * 
+	 * An invocation of the constructor {@code C} will return three type arguments, the bound
+	 * values of for {@code P}, {@code T} and {@code V}.
+	 * 
 	 * @param expression may either be an {@link XAbstractFeatureCall} or {@link XConstructorCall}. May not be <code>null</code>. 
 	 */
 	List<LightweightTypeReference> getActualTypeArguments(XExpression expression);
@@ -148,7 +174,17 @@ public interface IResolvedTypes {
 	 * @return <code>true</code> if the type was refined, <code>false</code> otherwise.
 	 */
 	boolean isRefinedType(XExpression expression);
-
+	
+	/**
+	 * Returns the scope the given expression is contained in. This considers 
+	 * all decision paths that were taken while computing the type of the expression.
+	 * The returned scope carries some meta data such as whether there was an attempt
+	 * to resolve the given expression as a type.
+	 */
+	IExpressionScope getExpressionScope(EObject context, EReference reference, IExpressionScope.Anchor anchor);
+	
+	IExpressionScope getExpressionScope(EObject context, EReference reference);
+	
 	IResolvedTypes NULL = new NullResolvedTypes();
 
 	/**
@@ -182,6 +218,10 @@ public interface IResolvedTypes {
 			return Collections.emptyList();
 		}
 		
+		public List<LightweightTypeReference> getThrownExceptions(XExpression obj) {
+			return Collections.emptyList();
+		}
+		
 		@Nullable
 		public LightweightTypeReference getActualType(XExpression expression) {
 			return null;
@@ -196,6 +236,11 @@ public interface IResolvedTypes {
 		public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 			return null;
 		}
+		
+//		@Nullable
+//		public JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
+//			return null;
+//		}
 		
 		public boolean isVoidTypeAllowed(XExpression expression) {
 			return false;
@@ -224,6 +269,14 @@ public interface IResolvedTypes {
 		public boolean isRefinedType(XExpression expression) {
 			return false;
 		}
+		
+		public IExpressionScope getExpressionScope(EObject context, EReference reference, Anchor anchor) {
+			return IExpressionScope.NULL;
+		}
+		
+		public IExpressionScope getExpressionScope(EObject context, EReference reference) {
+			return IExpressionScope.NULL;
+		}
 	}
-	
+
 }

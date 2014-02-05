@@ -27,7 +27,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 
 import com.google.common.collect.Lists;
@@ -37,14 +36,10 @@ import com.google.inject.Inject;
  * @author Holger Schill - Initial contribution and API
  * @since 2.3
  */
-@SuppressWarnings("deprecation")
 public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureProvider {
 
 	@Inject
 	protected IXtendJvmAssociations associations;
-
-	@Inject
-	protected ITypeProvider typeProvider;
 
 	protected String _signature(XtendClass clazz, boolean typeAtEnd) {
 		return clazz.getName() + hoverUiStrings.typeParameters(clazz.getTypeParameters());
@@ -53,10 +48,10 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 	protected String _signature(XtendFunction function, boolean typeAtEnd) {
 		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(function);
 		String returnTypeString = "void";
-		JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(inferredOperation);
+		JvmTypeReference returnType = inferredOperation.getReturnType();
 		if (returnType != null) {
 			if (returnType instanceof JvmAnyTypeReference) {
-				returnTypeString = "Object";
+				throw new IllegalStateException();
 			} else {
 				returnTypeString = returnType.getSimpleName();
 			}
@@ -75,7 +70,7 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 			return field.getType().getSimpleName();
 		JvmField jvmField = associations.getJvmField(field);
 		if (jvmField != null) {
-			JvmTypeReference type = typeProvider.getTypeForIdentifiable(jvmField);
+			JvmTypeReference type = jvmField.getType();
 			if (type != null) {
 				if (field.getName() == null)
 					return type.getSimpleName();

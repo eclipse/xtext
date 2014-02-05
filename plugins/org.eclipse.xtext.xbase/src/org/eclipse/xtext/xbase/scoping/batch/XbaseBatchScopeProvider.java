@@ -20,9 +20,9 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 
@@ -71,11 +71,8 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 			return IScope.NULLSCOPE;
 		}
 		if (isFeatureCallScope(reference)) {
-			if (context instanceof XAbstractFeatureCall) {
-				IScope result = typeResolver.getFeatureScope((XAbstractFeatureCall) context);
-				return result;
-			}
-			return IScope.NULLSCOPE;
+			IExpressionScope expressionScope = typeResolver.resolveTypes(context).getExpressionScope(context, reference);
+			return expressionScope.getFeatureScope();
 		}
 		return delegateGetScope(context, reference);
 	}

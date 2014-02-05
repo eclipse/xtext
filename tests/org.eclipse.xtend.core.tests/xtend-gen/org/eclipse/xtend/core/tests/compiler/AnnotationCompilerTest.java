@@ -190,7 +190,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public @interface DependsOn {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Class<? extends Object>[] value() default { String.class, CharSequence.class };");
+    _builder_1.append("public Class<?>[] value() default { String.class, CharSequence.class };");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -328,7 +328,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public int y();");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Class<? extends Object>[] value();");
+    _builder_1.append("public Class<?>[] value();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -364,7 +364,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public int y() default 42;");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Class<? extends Object> value() default String.class;");
+    _builder_1.append("public Class<?> value() default String.class;");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public boolean flag() default true;");

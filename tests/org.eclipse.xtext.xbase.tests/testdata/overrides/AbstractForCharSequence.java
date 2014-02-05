@@ -11,4 +11,5 @@ package overrides;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractForCharSequence implements Interface<CharSequence> {
+	
 }

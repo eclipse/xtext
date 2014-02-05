@@ -134,20 +134,26 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope implements I
 		Set<JvmFeature> allFeatures = Sets.newLinkedHashSet();
 		for(JvmType type: bucket.getTypes()) {
 			if (type instanceof JvmDeclaredType) {
-				Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
-				Iterables.addAll(allFeatures, features);
+				IResolvedFeatures resolvedFeatures = bucket.getResolvedFeaturesProvider().getResolvedFeatures(type);
+				allFeatures.addAll(resolvedFeatures.getAllFeatures());
 			}
 		}
 		if (allFeatures.isEmpty())
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
 		for(JvmFeature feature: allFeatures) {
-			QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
-			// TODO property names?
-			allDescriptions.add(createDescription(featureName, feature, bucket));
-			QualifiedName operator = operatorMapping.getOperator(featureName);
-			if (operator != null) {
-				allDescriptions.add(createDescription(operator, feature, bucket));
+			if (!feature.isStatic()) {
+				String simpleName = feature.getSimpleName();
+				QualifiedName featureName = QualifiedName.create(simpleName);
+				allDescriptions.add(createDescription(featureName, feature, bucket));
+				QualifiedName operator = operatorMapping.getOperator(featureName);
+				if (operator != null) {
+					allDescriptions.add(createDescription(operator, feature, bucket));
+				}
+				String propertyName = toProperty(simpleName, feature);
+				if (propertyName != null) {
+					allDescriptions.add(createDescription(QualifiedName.create(propertyName), feature, bucket));	
+				}
 			}
 		}
 		return allDescriptions;

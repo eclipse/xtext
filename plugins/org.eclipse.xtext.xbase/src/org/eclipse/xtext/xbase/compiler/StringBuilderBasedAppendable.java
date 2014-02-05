@@ -37,6 +37,11 @@ public class StringBuilderBasedAppendable extends AbstractStringBuilderBasedAppe
 	protected void appendType(final JvmType type, StringBuilder builder) {
 		importManager.appendType(type, builder);
 	}
+	
+	@Override
+	protected void appendType(final Class<?> type, StringBuilder builder) {
+		importManager.appendType(type, builder);
+	}
 
 	@Deprecated
 	@Override

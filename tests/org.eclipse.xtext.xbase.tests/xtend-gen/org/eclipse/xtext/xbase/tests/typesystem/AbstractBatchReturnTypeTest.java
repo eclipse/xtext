@@ -189,7 +189,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
   @Test
   public void testNull() throws Exception {
     IBatchTypeResolver _typeResolver = this.getTypeResolver();
-    final IResolvedTypes typeResolution = _typeResolver.resolveTypes(null);
+    final IResolvedTypes typeResolution = _typeResolver.resolveTypes(((EObject) null));
     Assert.assertNotNull(typeResolution);
     Assert.assertEquals(IResolvedTypes.NULL, typeResolution);
   }

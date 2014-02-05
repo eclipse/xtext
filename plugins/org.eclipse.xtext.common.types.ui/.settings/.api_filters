@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.common.types.ui" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Removed deprecated code" id="923795461">
+            <message_arguments>
+                <message_argument value="2.5.1"/>
+                <message_argument value="2.5.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/xtext/ui/JdtTypesProposalProvider.java" type="org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider"/>
+                <message_argument value="getSuperTypeCollector()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Removed deprecated code" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider"/>
+                <message_argument value="setSuperTypeCollector(SuperTypeCollector)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/common/types/ui/notification/JavaBuilderState.java" type="org.eclipse.xtext.common.types.ui.notification.JavaBuilderState">
+        <filter comment="API tooling bug" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.ui.notification.JavaBuilderState"/>
+                <message_argument value="org.eclipse.xtext.common.types.ui_2.5.1"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

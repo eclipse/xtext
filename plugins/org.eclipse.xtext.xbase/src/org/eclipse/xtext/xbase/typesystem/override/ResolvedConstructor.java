@@ -39,7 +39,11 @@ public class ResolvedConstructor extends AbstractResolvedExecutable implements I
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getContextTypeParameterMapping() {
 		if (typeParameterMapping != null)
 			return typeParameterMapping;
-		return typeParameterMapping = Collections.unmodifiableMap(new DeclaratorTypeArgumentCollector().getTypeParameterMapping(getContextType()));
+		return typeParameterMapping = Collections.unmodifiableMap(computeContextTypeParameterMapping());
+	}
+
+	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> computeContextTypeParameterMapping() {
+		return new DeclaratorTypeArgumentCollector().getTypeParameterMapping(getContextType());
 	}
 
 }

@@ -36,10 +36,13 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 
 /**
@@ -126,6 +129,8 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 	 */
 	private final Map<String, List<JvmFeature>> featureIndex;
 	
+	private boolean allFeaturesComputed = false;
+	
 	protected RawResolvedFeatures(JvmType type, CommonTypeComputationServices services) {
 		this(createTypeReference(type, services), new OverrideTester());
 	}
@@ -146,6 +151,21 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 		}
 		return result;
 	}
+	
+	public List<JvmFeature> getAllFeatures() {
+		if (!allFeaturesComputed) {
+			ListMultimap<String, JvmFeature> featureIndex = computeAllFeatures();
+			for(String simpleName: featureIndex.keySet()) {
+				this.featureIndex.put(simpleName, Lists.newArrayList(featureIndex.get(simpleName)));
+			}
+			allFeaturesComputed = true;
+		}
+		List<JvmFeature> result = Lists.newArrayList();
+		for(List<JvmFeature> list: featureIndex.values()) {
+			result.addAll(list);
+		}
+		return result;
+	}
 
 	protected List<JvmFeature> computeAllFeatures(String simpleName) {
 		JvmType rawType = getRawType();
@@ -157,6 +177,45 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 		Set<String> processedFields = Sets.newHashSetWithExpectedSize(5);
 		computeAllFeatures((JvmDeclaredType)rawType, simpleName, processed, processedFields, result);
 		return Collections.unmodifiableList(result);
+	}
+	
+	protected ListMultimap<String, JvmFeature> computeAllFeatures() {
+		JvmType rawType = getRawType();
+		if (!(rawType instanceof JvmDeclaredType)) {
+			return ArrayListMultimap.create();
+		}
+		ListMultimap<String, JvmFeature> result = ArrayListMultimap.create();
+		Multimap<String, AbstractResolvedOperation> processed = HashMultimap.create();
+		Set<String> processedFields = Sets.newHashSetWithExpectedSize(5);
+		computeAllFeatures((JvmDeclaredType)rawType, processed, processedFields, result, featureIndex.keySet());
+		return Multimaps.unmodifiableListMultimap(result);
+	}
+	
+	protected void computeAllFeatures(
+			JvmDeclaredType type,
+			Multimap<String, AbstractResolvedOperation> processedOperations,
+			Set<String> processedFields,
+			ListMultimap<String, JvmFeature> result,
+			Set<String> seenNames) {
+		Iterable<JvmFeature> features = type.getAllFeatures();
+		for(JvmFeature feature: features) {
+			if (!seenNames.contains(feature.getSimpleName())) {
+				if (feature instanceof JvmOperation) {
+					JvmOperation operation = (JvmOperation) feature;
+					String simpleName = operation.getSimpleName();
+					if (processedOperations.containsKey(simpleName)) {
+						if (isOverridden(operation, processedOperations.get(simpleName))) {
+							continue;
+						}
+					}
+					BottomResolvedOperation resolvedOperation = createResolvedOperation(operation);
+					processedOperations.put(simpleName, resolvedOperation);
+					result.put(simpleName, operation);	
+				} else if (feature instanceof JvmField && processedFields.add(feature.getSimpleName())) {
+					result.put(feature.getSimpleName(), feature);
+				}
+			}
+		}
 	}
 	
 	protected void computeAllFeatures(

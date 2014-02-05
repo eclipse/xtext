@@ -182,9 +182,9 @@ public class HiddenLeafAccess {
         {
           final INode next = ni.next();
           if ((next instanceof ILeafNode)) {
-            boolean _isHidden = ((ILeafNode) next).isHidden();
+            boolean _isHidden = ((ILeafNode)next).isHidden();
             if (_isHidden) {
-              result.add(((ILeafNode) next));
+              result.add(((ILeafNode)next));
             } else {
               return result;
             }
@@ -202,7 +202,7 @@ public class HiddenLeafAccess {
     INode current = node;
     boolean _while = (current instanceof ICompositeNode);
     while (_while) {
-      INode _lastChild = ((ICompositeNode) current).getLastChild();
+      INode _lastChild = ((ICompositeNode)current).getLastChild();
       current = _lastChild;
       _while = (current instanceof ICompositeNode);
     }
@@ -248,7 +248,7 @@ public class HiddenLeafAccess {
       INode current = node;
       boolean _while = (current instanceof ICompositeNode);
       while (_while) {
-        INode _lastChild = ((ICompositeNode) current).getLastChild();
+        INode _lastChild = ((ICompositeNode)current).getLastChild();
         current = _lastChild;
         _while = (current instanceof ICompositeNode);
       }

@@ -322,6 +322,21 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public LightweightTypeReference toJavaType() {
+		if (isMultiType()) {
+			LightweightTypeReference result = null;
+			for(LightweightTypeReference component: getMultiTypeComponents()) {
+				if (!component.isInterfaceType()) {
+					if (result != null) {
+						result = null;
+						break;
+					}
+					result = component;
+				}
+			}
+			if (result != null) {
+				return result;
+			}
+		}
 		LightweightTypeReference result = getServices().getTypeConformanceComputer().getCommonSuperType(getMultiTypeComponents(), getOwner());
 		if (result == null) {
 			throw new IllegalStateException("Cannot expression " + this + " as Java type reference");

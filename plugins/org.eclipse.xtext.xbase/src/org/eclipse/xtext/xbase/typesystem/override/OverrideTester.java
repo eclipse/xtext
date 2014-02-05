@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.util.Strings;
@@ -163,11 +162,9 @@ public class OverrideTester {
 		if (exceptions.isEmpty()) {
 			return;
 		}
-		JvmType runtimeException = overriding.getThrowableType(RuntimeException.class);
-		JvmType error = overriding.getThrowableType(Error.class);
 		List<LightweightTypeReference> inheritedExceptions = overridden.getResolvedExceptions();
 		for(LightweightTypeReference exception: exceptions) {
-			if (!exception.isSubtypeOf(runtimeException) && !exception.isSubtypeOf(error)) {
+			if (!exception.isSubtypeOf(RuntimeException.class) && !exception.isSubtypeOf(Error.class)) {
 				boolean isDeclared = false;
 				for(LightweightTypeReference inheritedException: inheritedExceptions) {
 					if (inheritedException.isAssignableFrom(exception)) {
