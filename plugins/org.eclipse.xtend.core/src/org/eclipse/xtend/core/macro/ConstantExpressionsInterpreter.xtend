@@ -22,7 +22,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.common.types.access.TypeResource
 import org.eclipse.xtext.common.types.access.impl.ClassFinder
@@ -35,7 +34,6 @@ import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XListLiteral
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
-import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration
 import org.eclipse.xtext.xbase.interpreter.AbstractConstantExpressionsInterpreter
@@ -44,7 +42,6 @@ import org.eclipse.xtext.xbase.interpreter.Context
 import org.eclipse.xtext.xbase.interpreter.StackedConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.interpreter.UnresolvableFeatureException
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
-import org.eclipse.xtext.xbase.lib.Conversions
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals
 import org.eclipse.xtext.xtype.XComputedTypeReference
 
@@ -142,10 +139,6 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			getJavaType(ctx.expectedType.type,ctx.classFinder) as Class<? extends Number>
 		
 		numberValue(type)
-	}
-
-	def dispatch Object internalEvaluate(XTypeLiteral it, Context ctx) {
-		toTypeReference(type, arrayDimensions.size)
 	}
 
 	def dispatch Object internalEvaluate(XListLiteral it, Context ctx) {
@@ -262,20 +255,6 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 		} catch (ConstantExpressionEvaluationException e) {
 			throw new StackedConstantExpressionEvaluationException(call, field, e)
 		}
-	}
-
-	protected def toTypeReference(JvmType type, int arrayDimensions) {
-		if (type == null)
-			return null
-		var JvmTypeReference resultTypeRef = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference => [
-			it.type = type
-		]
-		for (i : 0 ..< arrayDimensions) {
-			val arrayRef = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference
-			arrayRef.setComponentType(resultTypeRef);
-			resultTypeRef = arrayRef
-		}
-		return resultTypeRef
 	}
 
 	protected def Class<?> getJavaType(JvmType type, ClassFinder classFinder) throws ClassNotFoundException {
