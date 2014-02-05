@@ -25,6 +25,26 @@ class Bug401154Test extends AbstractXbaseContentAssistBugTest {
 	}
 	
 	@Test
+	def void testLocalSwitchVariable() throws Exception {
+		newBuilder.append('''
+			switch it: new Object {
+				CharSequence: 
+		''')
+			.assertProposal('it')
+			.withDisplayString('it')
+	}
+	
+	@Test
+	def void testLocalSwitchVariableInDefault() throws Exception {
+		newBuilder.append('''
+			switch it: new Object {
+				default: 
+		''')
+			.assertProposal('it')
+			.withDisplayString('it')
+	}
+	
+	@Test
 	def void testImplicitReceiverInEmptyBlock() throws Exception {
 		newBuilder.append('''
 			switch it: new Object {
@@ -85,4 +105,13 @@ class Bug401154Test extends AbstractXbaseContentAssistBugTest {
 			.withDisplayString('charAt(int index) : char - AbstractStringBuilder')
 	}
 	
+	@Test
+	def void testKnownTypeIsSupertype_02() throws Exception {
+		newBuilder.append('''
+			switch it: new StringBuilder {
+				CharSequence: it.
+		''')
+			.assertProposal('charAt()')
+			.withDisplayString('charAt(int index) : char - AbstractStringBuilder')
+	}
 }

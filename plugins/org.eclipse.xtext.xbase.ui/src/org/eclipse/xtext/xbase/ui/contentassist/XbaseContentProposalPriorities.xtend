@@ -10,10 +10,10 @@ package org.eclipse.xtext.xbase.ui.contentassist
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalPriorities
-import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmExecutable
-import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription
+import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription
+import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -24,8 +24,12 @@ class XbaseContentProposalPriorities extends ContentProposalPriorities {
 		switch proposal {
 			ConfigurableCompletionProposal : {
 				switch desc : proposal.getAdditionalData(XbaseProposalProvider.DESCRIPTION_KEY) {
-					JvmFeatureDescription : {
-						switch feature : desc.jvmFeature {
+					SimpleIdentifiableElementDescription case proposal.replacementString != 'this' && proposal.replacementString != 'super': {
+						adjustPriority(proposal, prefix, 570)
+						return;
+					}
+					IIdentifiableElementDescription : {
+						switch feature : desc.elementOrProxy {
 							JvmField : {
 								adjustPriority(proposal, prefix, 550)
 								return;
@@ -36,10 +40,7 @@ class XbaseContentProposalPriorities extends ContentProposalPriorities {
 							}
 						}
 					}
-					LocalVarDescription case proposal.replacementString != 'this' && proposal.replacementString != 'super': {
-						adjustPriority(proposal, prefix, 570)
-						return;
-					}
+					
 				} 
 			}
 		}

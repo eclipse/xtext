@@ -9,18 +9,12 @@ package org.eclipse.xtext.xbase.ui.tests.editor;
 
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
-import java.io.InputStream;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
-import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistInBlockTest;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
@@ -32,7 +26,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockTest implements IJavaProjectProvider {
+public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockTest {
 
 	@Override
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
@@ -56,6 +50,7 @@ public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockT
 	@BeforeClass
 	public static void createTestProject() throws Exception {
 		staticProject = AbstractXbaseUITestCase.createPluginProject(PROJECT_NAME);
+		doInitFeatures(JavaCore.create(staticProject));
 	}
 	
 	@AfterClass
@@ -80,13 +75,7 @@ public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockT
 		return false;
 	}
 	
-	protected void initializeTypeProvider(XtextResource result) {
-		XtextResourceSet resourceSet = (XtextResourceSet) result.getResourceSet();
-		IJvmTypeProvider.Factory typeProviderFactory = new JdtTypeProviderFactory(this);
-		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-		resourceSet.setClasspathURIContext(getJavaProject(resourceSet));
-	}
-	
+	@Override
 	public IJavaProject getJavaProject(ResourceSet resourceSet) {
 		IJavaProject javaProject = findJavaProject(PROJECT_NAME);
 		if (javaProject == null || !javaProject.exists()) {
@@ -98,13 +87,6 @@ public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockT
 			}
 		}
 		return javaProject;
-	}
-	
-	@Override
-	public XtextResource getResourceFor(InputStream stream) {
-		XtextResource result = super.getResourceFor(stream);
-		initializeTypeProvider(result);
-		return result;
 	}
 	
 }
