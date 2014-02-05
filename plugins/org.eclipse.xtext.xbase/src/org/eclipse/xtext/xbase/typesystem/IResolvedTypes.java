@@ -74,6 +74,15 @@ public interface IResolvedTypes {
 	@Nullable
 	LightweightTypeReference getActualType(JvmIdentifiableElement identifiable);
 	
+	List<LightweightTypeReference> getThrownExceptions(XExpression obj);
+	
+//	/**
+//	 * Returns the traced declared type for the given identifiable or <code>null</code> if none.
+//	 * @param identifiable identifiable whose type is queried.
+//	 */
+//	@Nullable
+//	JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable);
+	
 	/**
 	 * Returns the actually expected type for the given expression or <code>null</code> if none.
 	 * @param expression expression whose expected type is queried.
@@ -95,6 +104,20 @@ public interface IResolvedTypes {
 	LightweightTypeReference getExpectedReturnType(XExpression expression);
 	
 	/**
+	 * Returns the resolved type arguments. If the expression refers to a constructor
+	 * and the constructor itself defines type parameters,
+	 * their resolved representation is prepended to the list of type arguments.
+	 * Consider the following type:
+	 * 
+	 * <pre>
+	 * class C&lt;T, V&gt; {
+	 *   public <P> C(P p) {}
+	 * }
+	 * </pre>
+	 * 
+	 * An invocation of the constructor {@code C} will return three type arguments, the bound
+	 * values of for {@code P}, {@code T} and {@code V}.
+	 * 
 	 * @param expression may either be an {@link XAbstractFeatureCall} or {@link XConstructorCall}. May not be <code>null</code>. 
 	 */
 	List<LightweightTypeReference> getActualTypeArguments(XExpression expression);
@@ -182,6 +205,10 @@ public interface IResolvedTypes {
 			return Collections.emptyList();
 		}
 		
+		public List<LightweightTypeReference> getThrownExceptions(XExpression obj) {
+			return Collections.emptyList();
+		}
+		
 		@Nullable
 		public LightweightTypeReference getActualType(XExpression expression) {
 			return null;
@@ -196,6 +223,11 @@ public interface IResolvedTypes {
 		public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 			return null;
 		}
+		
+//		@Nullable
+//		public JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
+//			return null;
+//		}
 		
 		public boolean isVoidTypeAllowed(XExpression expression) {
 			return false;
@@ -225,5 +257,5 @@ public interface IResolvedTypes {
 			return false;
 		}
 	}
-	
+
 }

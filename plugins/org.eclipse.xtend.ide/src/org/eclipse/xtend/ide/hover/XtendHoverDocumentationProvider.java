@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.typing.XtendOverridesService;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -35,6 +34,9 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider;
 
 import com.google.common.collect.Lists;
@@ -49,9 +51,9 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 
 	@Inject
 	private IXtendJvmAssociations associations;
-
+	
 	@Inject
-	private XtendOverridesService overridesService;
+	private OverrideHelper overrideHelper;
 
 	@Override
 	protected JvmDeclaredType getDeclaringType(EObject eObject) {
@@ -93,13 +95,18 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 		if (context instanceof XtendFunction) {
 			XtendFunction function = (XtendFunction) context;
 			if (function.isOverride()) {
-				JvmOperation overwritten = overridesService.findOverriddenOperation(function);
-				buffer.append("<div>"); //$NON-NLS-1$
-				buffer.append("<b>"); //$NON-NLS-1$
-				buffer.append("Overrides:"); //$NON-NLS-1$
-				buffer.append("</b> "); //$NON-NLS-1$
-				buffer.append(createMethodInTypeLinks(overwritten));
-				buffer.append("</div>"); //$NON-NLS-1$
+				JvmOperation inferredOperation = associations.getDirectlyInferredOperation(function);
+				if (inferredOperation != null) {
+					JvmOperation overridden = overrideHelper.findOverriddenOperation(inferredOperation);
+					if (overridden != null) {
+						buffer.append("<div>"); //$NON-NLS-1$
+						buffer.append("<b>"); //$NON-NLS-1$
+						buffer.append("Overrides:"); //$NON-NLS-1$
+						buffer.append("</b> "); //$NON-NLS-1$
+						buffer.append(createMethodInTypeLinks(overridden));
+						buffer.append("</div>"); //$NON-NLS-1$
+					}
+				}
 			}
 		}
 	}

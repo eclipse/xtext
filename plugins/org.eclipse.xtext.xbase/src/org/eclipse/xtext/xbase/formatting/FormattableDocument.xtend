@@ -209,7 +209,7 @@ class FormattableDocument {
 			if(f.offset < offset) {
 				currentIndentation = currentIndentation + f.indentationChange
 				if(f instanceof NewLineData) {
-					lastWrap = f as NewLineData
+					lastWrap = f
 					lastIndentation = currentIndentation
 				}
 			}
@@ -231,7 +231,7 @@ class FormattableDocument {
 		var lengthDiff = 0
 		for(f:formattings.subMap(lastWrap.offset + 1, offset).values) {
 			if(f instanceof WhitespaceData) {
-				val space = (f as WhitespaceData).space
+				val space = f.space
 				val length = if (space == null) 0 else space.length
 				lengthDiff = lengthDiff + length - f.length
 			}

@@ -20,9 +20,6 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
@@ -40,8 +37,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
-import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -55,7 +51,6 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-@SuppressWarnings("deprecation")
 public class SmokeTest extends AbstractSmokeTest {
 	
 	private static final Logger logger = Logger.getLogger(SmokeTest.class);
@@ -67,7 +62,7 @@ public class SmokeTest extends AbstractSmokeTest {
 	private IResourceScopeCache cache;
 	
 	@Inject
-	private ITypeProvider typeProvider;
+	private IBatchTypeResolver typeResolver;
 	
 	@Inject
 	private Provider<ResourceValidatorImpl> resourceValidatorProvider;
@@ -224,18 +219,11 @@ public class SmokeTest extends AbstractSmokeTest {
 	}
 
 	protected void checkNoErrorsInTypeProvider(LazyLinkingResource resource) {
+		typeResolver.resolveTypes(resource.getContents().get(0));
+		
 		Iterator<Object> contents = EcoreUtil.getAllContents(resource, true);
 		while(contents.hasNext()) {
 			Object object = contents.next();
-			if (object instanceof XExpression) {
-				XExpression expression = (XExpression) object;
-				typeProvider.getExpectedType(expression);
-				typeProvider.getType(expression);
-				typeProvider.getCommonReturnType(expression, true);
-			}
-			if (object instanceof JvmType || object instanceof JvmMember) {
-				typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) object);
-			}
 			if (object instanceof JvmWildcardTypeReference) {
 				assertTrue(((JvmWildcardTypeReference) object).eContainer() instanceof JvmTypeReference);
 			}

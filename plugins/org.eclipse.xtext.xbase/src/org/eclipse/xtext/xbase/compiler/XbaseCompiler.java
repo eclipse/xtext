@@ -17,13 +17,11 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -31,7 +29,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -93,8 +90,6 @@ import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -114,10 +109,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Inject 
 	private IBatchTypeResolver batchTypeResolver;
-	
-	@SuppressWarnings("deprecation")
-	@Inject
-	private org.eclipse.xtext.xbase.typing.Closures closures;
 	
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
@@ -149,7 +140,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			LightweightTypeReference keyType = literalType.getTypeArguments().get(0);
 			LightweightTypeReference valueType = literalType.getTypeArguments().get(1);
-			JvmType mapsClass = getTypeReferences().findDeclaredType(Maps.class, literal);
+			JvmType mapsClass = findKnownTopLevelType(Maps.class, literal);
 			
 			final String tempMapName = b.declareSyntheticVariable(Tuples.create(literal,  "_tempMap"), "_tempMap");
 			b.newLine();
@@ -180,7 +171,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			if(isReferenced) 
 				b.append(getVarName(literal, b)).append(" = ");
-			JvmType collectionsClass = getTypeReferences().findDeclaredType(Collections.class, literal);
+			JvmType collectionsClass = findKnownTopLevelType(Collections.class, literal);
 			b.append(collectionsClass)
 				.append(".<").append(keyType).append(", ").append(valueType)
 				.append(">unmodifiableMap(").append(tempMapName).append(");");
@@ -201,7 +192,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 	
 	protected LightweightTypeReference getCollectionElementType(XCollectionLiteral literal) {
-		LightweightTypeReference type = batchTypeResolver.resolveTypes(literal).getActualType(literal);
+		LightweightTypeReference type = getLightweightType(literal);
 		if (type == null)
 			throw new IllegalStateException();
 		if(type.isArray()) {
@@ -212,7 +203,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		else if(type.isSubtypeOf(Collection.class) && !type.getTypeArguments().isEmpty()) 
 			return type.getTypeArguments().get(0).getInvariantBoundSubstitute();
-		return new ParameterizedTypeReference(type.getOwner(), getTypeReferences().findDeclaredType(Object.class, literal));
+		return new ParameterizedTypeReference(type.getOwner(), findKnownTopLevelType(Object.class, literal));
 	}
 
 	protected void _toJavaExpression(XListLiteral literal, ITreeAppendable b) {
@@ -261,8 +252,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			ITreeAppendable b, String collectionsMethod, Class<?> guavaHelper, String guavaHelperMethod) {
 		LightweightTypeReference collectionElementType = getCollectionElementType(literal);
 		ITypeReferenceOwner owner = collectionElementType.getOwner();
-		JvmType collectionsClass = getTypeReferences().findDeclaredType(Collections.class, literal);
-		JvmType guavaHelperType = getTypeReferences().findDeclaredType(guavaHelper, literal);
+		JvmType collectionsClass = findKnownTopLevelType(Collections.class, literal);
+		JvmType guavaHelperType = findKnownTopLevelType(guavaHelper, literal);
 		LightweightTypeReference guavaClass = guavaHelperType == null ? new UnknownTypeReference(owner, guavaHelper.getName()) :new ParameterizedTypeReference(owner, guavaHelperType);
 		b.append(collectionsClass)
 			.append(".<").append(collectionElementType).append(">").append(collectionsMethod).append("(")
@@ -306,16 +297,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return normalizedArguments;
 	}
 	
-	@Nullable
-	@Override
-	protected XExpression getActualReceiver(XAbstractFeatureCall featureCall) {
-		return featureCall.getActualReceiver();
-	}
-	@Override
-	protected boolean isMemberCall(XAbstractFeatureCall call) {
-		return !call.isStatic();
-	}
-	
 	@Override
 	protected ITreeAppendable appendTypeArguments(XAbstractFeatureCall call, ITreeAppendable original) {
 		if (!call.getTypeArguments().isEmpty()) {
@@ -345,92 +326,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			completeFeatureCallAppendable.append(">");
 		}
 		return completeFeatureCallAppendable;
-	}
-	
-	@SuppressWarnings("deprecation")
-	@Override
-	protected void convertFunctionType(JvmTypeReference expectedType, final JvmTypeReference functionType,
-			ITreeAppendable appendable, Later expression, XExpression context) {
-		if (expectedType.getIdentifier().equals(Object.class.getName())
-				|| EcoreUtil.equals(expectedType.getType(), functionType.getType())
-				|| ((expectedType instanceof JvmSynonymTypeReference) 
-					&& Iterables.any(((JvmSynonymTypeReference)expectedType).getReferences(), new Predicate<JvmTypeReference>() {
-						public boolean apply(@Nullable JvmTypeReference ref) {
-							if (ref == null) {
-								throw new IllegalStateException();
-							}
-							return EcoreUtil.equals(ref.getType(), functionType.getType());
-						}
-					}))) {
-			// same raw type but different type parameters
-			// at this point we know that we are compatible so we have to convince the Java compiler about that ;-)
-			if (!getTypeConformanceComputer().isConformant(expectedType, functionType)) {
-				// insert a cast
-				appendable.append("(");
-				serialize(expectedType, context, appendable);
-				appendable.append(")");
-			}
-			expression.exec(appendable);
-			return;
-		}
-		JvmOperation operation = getClosures().findImplementingOperation(expectedType, context.eResource());
-		if (operation == null) {
-			throw new IllegalStateException("expected type " + expectedType + " not mappable from " + functionType);
-		}
-		appendable.append("new ");
-		LightweightTypeReference lightweightExpectedType = new OwnedConverter(newTypeReferenceOwner(context))
-			.toLightweightReference(expectedType);
-		FunctionTypeReference functionTypeReference = lightweightExpectedType.tryConvertToFunctionTypeReference(false);
-		if (functionTypeReference == null)
-			throw new IllegalStateException("Expected type does not seem to be a SAM type");
-		JvmTypeReference convertedExpectedType = functionTypeReference.toInstanceTypeReference().toTypeReference();
-		serialize(convertedExpectedType, context, appendable, false, false);
-		appendable.append("() {");
-		appendable.increaseIndentation().increaseIndentation();
-		appendable.newLine().append("public ");
-		LightweightTypeReference returnType = functionTypeReference.getReturnType();
-		if (returnType == null)
-			throw new IllegalStateException("Could not find return type");
-		serialize(returnType.toTypeReference(), context, appendable, false, false);
-		appendable.append(" ").append(operation.getSimpleName()).append("(");
-		List<JvmFormalParameter> params = operation.getParameters();
-		for (int i = 0; i < params.size(); i++) {
-			if (i != 0)
-				appendable.append(",");
-			JvmFormalParameter p = params.get(i);
-			final String name = p.getName();
-			serialize(functionTypeReference.getParameterTypes().get(i).toTypeReference(), context, appendable, false, false);
-			appendable.append(" ").append(name);
-		}
-		appendable.append(") {");
-		appendable.increaseIndentation();
-		try {
-			appendable.openScope();
-			reassignThisInClosure(appendable, operation.getDeclaringType());
-			if (!getTypeReferences().is(operation.getReturnType(), Void.TYPE))
-				appendable.newLine().append("return ");
-			else
-				appendable.newLine();
-			expression.exec(appendable);
-			appendable.append(".");
-			JvmOperation actualOperation = getClosures().findImplementingOperation(functionType, context.eResource());
-			appendable.append(actualOperation.getSimpleName());
-			appendable.append("(");
-			for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
-				JvmFormalParameter p = iterator.next();
-				final String name = p.getName();
-				appendable.append(name);
-				if (iterator.hasNext())
-					appendable.append(",");
-			}
-			appendable.append(");");
-		} finally {
-			appendable.closeScope();
-		}
-		appendable.decreaseIndentation();
-		appendable.newLine().append("}");
-		appendable.decreaseIndentation().decreaseIndentation();
-		appendable.newLine().append("}");
 	}
 	
 	@Override
@@ -524,9 +419,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			} else {
 				internalToJavaStatement(ex, b, isReferenced);
 				if (isReferenced) {
-					b.newLine().append(getVarName(expr, b)).append(" = (");
-					internalToConvertedExpression(ex, b, getType(expr));
-					b.append(");");
+					b.newLine().append(getVarName(expr, b)).append(" = ");
+					internalToConvertedExpression(ex, b, getLightweightType(expr));
+					b.append(";");
 				}
 			}
 		}
@@ -573,7 +468,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		internalToJavaStatement(expr.getExpression(), b, canBeReferenced);
 		if (canBeReferenced) {
 			b.newLine().append(getVarName(expr, b)).append(" = ");
-			internalToConvertedExpression(expr.getExpression(), b, getType(expr));
+			internalToConvertedExpression(expr.getExpression(), b, getLightweightType(expr));
 			b.append(";");
 		}
 		b.decreaseIndentation().newLine().append("}");
@@ -598,7 +493,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			b.append(" else {");
 			b.increaseIndentation();
-			final JvmType sneakyThrowType = getTypeReferences().findDeclaredType(Exceptions.class, expr);
+			final JvmType sneakyThrowType = findKnownTopLevelType(Exceptions.class, expr);
 			if (sneakyThrowType == null) {
 				b.append("COMPILE ERROR : '"+Exceptions.class.getCanonicalName()+"' could not be found on the classpath!");
 			} else {
@@ -640,7 +535,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		internalToJavaStatement(catchClause.getExpression(), withDebugging, canBeReferenced);
 		if (canBeReferenced) {
 			appendable.newLine().append(getVarName(catchClause.eContainer(), appendable)).append(" = ");
-			internalToConvertedExpression(catchClause.getExpression(), appendable, getType((XExpression) catchClause.eContainer()));
+			internalToConvertedExpression(catchClause.getExpression(), appendable, getLightweightType((XExpression) catchClause.eContainer()));
 			appendable.append(";");
 		}
 		appendable.decreaseIndentation();
@@ -691,7 +586,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaStatement(varDeclaration.getRight(), b, true);
 		}
 		b.newLine();
-		JvmTypeReference type = appendVariableTypeAndName(varDeclaration, b);
+		LightweightTypeReference type = appendVariableTypeAndName(varDeclaration, b);
 		b.append(" = ");
 		if (varDeclaration.getRight() != null) {
 			internalToConvertedExpression(varDeclaration.getRight(), b, type);
@@ -701,20 +596,21 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(";");
 	}
 
-	protected JvmTypeReference appendVariableTypeAndName(XVariableDeclaration varDeclaration, ITreeAppendable appendable) {
+	protected LightweightTypeReference appendVariableTypeAndName(XVariableDeclaration varDeclaration, ITreeAppendable appendable) {
 		if (!varDeclaration.isWriteable()) {
 			appendable.append("final ");
 		}
-		JvmTypeReference type = null;
+		LightweightTypeReference type = null;
 		if (varDeclaration.getType() != null) {
-			type = varDeclaration.getType();
+			serialize(varDeclaration.getType(), varDeclaration, appendable);
+			type = getLightweightType((JvmIdentifiableElement) varDeclaration);
 		} else {
-			type = getType(varDeclaration.getRight());
-			if (type instanceof JvmAnyTypeReference) {
+			type = getLightweightType(varDeclaration.getRight());
+			if (type.isAny()) {
 				type = getTypeForVariableDeclaration(varDeclaration.getRight());
 			}
+			appendable.append(type);
 		}
-		serialize(type, varDeclaration, appendable);
 		appendable.append(" ");
 		appendable.append(appendable.declareVariable(varDeclaration, makeJavaIdentifier(varDeclaration.getName())));
 		return type;
@@ -792,13 +688,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		appendable.trace(expr.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(varName);
 	}
 
-	@SuppressWarnings("deprecation")
 	protected JvmTypeReference getForLoopParameterType(XForLoopExpression expr) {
 		JvmTypeReference declaredType = expr.getDeclaredParam().getParameterType();
 		if (declaredType != null) {
 			return declaredType;
 		}
-		return getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
+		return getType(expr.getDeclaredParam());
 	}
 
 	protected void _toJavaStatement(final XConstructorCall expr, ITreeAppendable b, final boolean isReferenced) {
@@ -918,7 +813,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr.getExpression()!=null) {
 			internalToJavaStatement(expr.getExpression(), b, true);
 			b.newLine().append("return ");
-			JvmTypeReference returnTypeToCompile = findRealReturnType(expr);
+			LightweightTypeReference returnTypeToCompile = findRealReturnType(expr);
 			internalToConvertedExpression(expr.getExpression(), b, returnTypeToCompile);
 			b.append(";");
 		} else {
@@ -926,12 +821,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 	
-	private JvmTypeReference findRealReturnType(XExpression expression) {
+	private LightweightTypeReference findRealReturnType(XExpression expression) {
 		if (expression == null)
 			return null;
 		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getLogicalContainer(expression);
 		if (logicalContainer instanceof JvmOperation) {
-			return ((JvmOperation) logicalContainer).getReturnType();
+			return getLightweightType(logicalContainer);
 		}
 		if (expression instanceof XClosure) {
 			IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(expression);
@@ -944,14 +839,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			FunctionTypeReference functionType = type.tryConvertToFunctionTypeReference(false);
 			if (functionType != null) {
-				return functionType.getReturnType().toJavaCompliantTypeReference();
+				return functionType.getReturnType();
 			}
 			return null;
 		}
 		XExpression containerExpression = EcoreUtil2.getContainerOfType(expression.eContainer(), XExpression.class);
 		if (containerExpression == null) {
-			LightweightTypeReference returnType = getTypeResolver().resolveTypes(expression).getReturnType(expression);
-			return returnType.toJavaCompliantTypeReference();
+			LightweightTypeReference returnType = getLightweightReturnType(expression);
+			return returnType;
 		}
 		return findRealReturnType(containerExpression);
 	}
@@ -960,7 +855,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append("((");
 		serialize(expr.getType(), expr, b);
 		b.append(") ");
-		internalToConvertedExpression(expr.getTarget(), b, expr.getType());
+		internalToConvertedExpression(expr.getTarget(), b, getLightweightType(expr));
 		b.append(")");
 	}
 
@@ -981,7 +876,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.newLine();
 			b.append(getVarName(expr, b));
 			b.append(" = ");
-			internalToConvertedExpression(expr.getThen(), b, getType(expr));
+			internalToConvertedExpression(expr.getThen(), b, getLightweightType(expr));
 			b.append(";");
 		}
 		b.decreaseIndentation().newLine().append("}");
@@ -993,7 +888,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.newLine();
 				b.append(getVarName(expr, b));
 				b.append(" = ");
-				internalToConvertedExpression(expr.getElse(), b, getType(expr));
+				internalToConvertedExpression(expr.getElse(), b, getLightweightType(expr));
 				b.append(";");
 			}
 			b.decreaseIndentation().newLine().append("}");
@@ -1098,11 +993,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected String declareSwitchResultVariable(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
-		JvmTypeReference type = getTypeForVariableDeclaration(expr);
+		LightweightTypeReference type = getTypeForVariableDeclaration(expr);
 		String switchResultName = b.declareSyntheticVariable(getSwitchExpressionKey(expr), "_switchResult");
 		if (isReferenced) {
 			b.newLine();
-			serialize(type, expr, b);
+			b.append(type);
 			b.append(" ").append(switchResultName).append(" = ");
 			b.append(getDefaultValueLiteral(expr));
 			b.append(";");
@@ -1116,7 +1011,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		internalToJavaStatement(then, b, canBeReferenced);
 		if (canBeReferenced) {
 			b.newLine().append(switchResultName).append(" = ");
-			internalToConvertedExpression(then, b, getType(expr));
+			internalToConvertedExpression(then, b, getLightweightType((XExpression)expr));
 			b.append(";");
 		}
 	}
@@ -1171,7 +1066,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			Iterator<XCasePart> i = fallThroughCases.iterator();
 			while(i.hasNext()) {
 				XCasePart fallThroughCase = i.next();
-				caseAppendable = appendOpenIfStatement(fallThroughCase, expr, caseAppendable, matchedVariable, variableName);
+				caseAppendable = appendOpenIfStatement(fallThroughCase, caseAppendable, matchedVariable, variableName);
 				appendCloseIfStatement(fallThroughCase, caseAppendable);
 				if (first) {
 					first = false;
@@ -1181,7 +1076,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				}
 				i.remove();
 			}
-			caseAppendable = appendOpenIfStatement(casePart, expr, caseAppendable, matchedVariable, variableName);
+			caseAppendable = appendOpenIfStatement(casePart, caseAppendable, matchedVariable, variableName);
 			appendCloseIfStatement(casePart, caseAppendable);
 			if (!first) {
 				caseAppendable.decreaseIndentation();
@@ -1193,7 +1088,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			caseAppendable.decreaseIndentation().newLine().append("}");
 			
 		} else {
-			caseAppendable = appendOpenIfStatement(casePart, expr, caseAppendable, matchedVariable, variableName);
+			caseAppendable = appendOpenIfStatement(casePart, caseAppendable, matchedVariable, variableName);
 			executeThenPart(expr, switchResultName, then, caseAppendable, isReferenced);
 			appendCloseIfStatement(casePart, caseAppendable);
 		}
@@ -1201,7 +1096,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		caseAppendable.newLine().append("}");
 	}
 
-	protected ITreeAppendable appendOpenIfStatement(XCasePart casePart, XSwitchExpression expr, ITreeAppendable b, String matchedVariable, String variableName) {
+	protected ITreeAppendable appendOpenIfStatement(XCasePart casePart, ITreeAppendable b, String matchedVariable, String variableName) {
 		ITreeAppendable caseAppendable = b.trace(casePart, true);
 		caseAppendable.newLine().append("if (!").append(matchedVariable).append(") {");
 		caseAppendable.increaseIndentation();
@@ -1219,13 +1114,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			ITreeAppendable conditionAppendable = caseAppendable.trace(casePart.getCase(), true);
 			internalToJavaStatement(casePart.getCase(), conditionAppendable, true);
 			conditionAppendable.newLine().append("if (");
-			JvmTypeReference convertedType = getType(casePart.getCase());
-			if (getTypeReferences().is(convertedType, Boolean.TYPE) || getTypeReferences().is(convertedType, Boolean.class)) {
+			LightweightTypeReference convertedType = getLightweightType(casePart.getCase());
+			if (convertedType.isType(Boolean.TYPE) || convertedType.isType(Boolean.class)) {
 				internalToJavaExpression(casePart.getCase(), conditionAppendable);
 			} else {
-				JvmTypeReference typeRef = getTypeReferences().getTypeForName(Objects.class, expr);
-				serialize(typeRef, casePart, conditionAppendable);
-				conditionAppendable.append(".equal(").append(variableName).append(",");
+				conditionAppendable.append(Objects.class);
+				conditionAppendable.append(".equal(").append(variableName).append(", ");
 				internalToJavaExpression(casePart.getCase(), conditionAppendable);
 				conditionAppendable.append(")");
 			}
@@ -1330,35 +1224,35 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaStatement(final XClosure closure, final ITreeAppendable b, boolean isReferenced) {
 		if (!isReferenced)
 			throw new IllegalArgumentException("a closure definition does not cause any side-effects");
-		JvmTypeReference type = getType(closure);
+		LightweightTypeReference type = getLightweightType(closure);
 		b.newLine().append("final ");
-		serialize(type, closure, b);
+		b.append(type);
 		b.append(" ");
 		String variableName = b.declareSyntheticVariable(closure, "_function");
 		b.append(variableName).append(" = ");
 		toAnonymousClass(closure, b, type).append(";");
 	}
 
-	protected ITreeAppendable toAnonymousClass(final XClosure closure, final ITreeAppendable b, JvmTypeReference type) {
+	protected ITreeAppendable toAnonymousClass(final XClosure closure, final ITreeAppendable b, LightweightTypeReference type) {
 		b.append("new ");
 		// TODO parameters in type arguments are safe to be a wildcard
-		serialize(type, closure, b, false, false, true, false);
+		b.append(type);
 		b.append("() {");
 		b.increaseIndentation();
 		try {
 			b.openScope();
-			JvmOperation operation = findImplementingOperation(type, closure);
+			JvmOperation operation = findImplementingOperation(type);
 			if (operation != null) {
-				final JvmTypeReference returnType = getClosureOperationReturnType(type, operation);
+				final LightweightTypeReference returnType = getClosureOperationReturnType(type, operation);
 				appendOperationVisibility(b, operation);
-				serialize(returnType, closure, b, false, false, true, true);
+				b.append(returnType);
 				b.append(" ").append(operation.getSimpleName());
 				b.append("(");
 				List<JvmFormalParameter> closureParams = closure.getFormalParameters();
 				for (int i = 0; i < closureParams.size(); i++) {
 					JvmFormalParameter closureParam = closureParams.get(i);
-					JvmTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
-					appendClosureParameter(closureParam, parameterType, closure, b);
+					LightweightTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
+					appendClosureParameter(closureParam, parameterType, b);
 					if (i != closureParams.size() - 1)
 						b.append(", ");
 				}
@@ -1374,7 +1268,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.append(" {");
 				b.increaseIndentation();
 				reassignThisInClosure(b, type.getType());
-				compile(closure.getExpression(), b, operation.getReturnType(), newHashSet(operation.getExceptions()));
+				compile(closure.getExpression(), b, returnType, newHashSet(operation.getExceptions()));
 				b.decreaseIndentation();
 				b.newLine().append("}");
 			}
@@ -1384,10 +1278,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return b.decreaseIndentation().newLine().append("}");
 	}
 
-	protected void appendClosureParameter(JvmFormalParameter closureParam, JvmTypeReference parameterType, final XClosure closure,
-			final ITreeAppendable appendable) {
+	protected void appendClosureParameter(JvmFormalParameter closureParam, LightweightTypeReference parameterType, ITreeAppendable appendable) {
 		appendable.append("final ");
-		serialize(parameterType, closure, appendable, false, false, true, true);
+		appendable.append(parameterType);
 		appendable.append(" ");
 		final String proposedParamName = makeJavaIdentifier(closureParam.getName());
 		String name = appendable.declareVariable(closureParam, proposedParamName);
@@ -1408,66 +1301,27 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 
-	@Nullable
-	protected JvmOperation findImplementingOperation(JvmTypeReference closureType, EObject context) {
-		LightweightTypeReference lightweightTypeReference = new OwnedConverter(newTypeReferenceOwner(context)).toLightweightReference(closureType);
-		return getTypeComputationServices().getFunctionTypes().findImplementingOperation(lightweightTypeReference);
-	}
-	
-	private final static String REASSIGNED_THIS_IN_LAMBDA = "!reassigned_this_for_lambda!";
-	
-	protected void reassignThisInClosure(final ITreeAppendable b, JvmType rawClosureType) {
-		boolean registerClosureAsThis = rawClosureType instanceof JvmGenericType;
-		boolean isAlreadyInALambda = b.hasObject(REASSIGNED_THIS_IN_LAMBDA);
-		if (b.hasObject("this") && !isAlreadyInALambda) {
-			Object element = b.getObject("this");
-			if (element instanceof JvmType) {
-				final String proposedName = ((JvmType) element).getSimpleName()+".this";
-				if (!b.hasObject(proposedName)) {
-					b.declareSyntheticVariable(element, proposedName);
-					if (b.hasObject("super")) {
-						Object superElement = b.getObject("super");
-						if (superElement instanceof JvmType) {
-							b.declareSyntheticVariable(superElement, ((JvmType) element).getSimpleName()+".super");
-						}
-					}
-				}
-			} else {
-				registerClosureAsThis = false;
-			}
-		}
-		if (!isAlreadyInALambda) {
-			// add a synthetic marker so we don't reassign this and super more than once.
-			b.declareSyntheticVariable(REASSIGNED_THIS_IN_LAMBDA, REASSIGNED_THIS_IN_LAMBDA);
-		}
-		if (registerClosureAsThis) {
-			b.declareVariable(rawClosureType, "this");
-		}
-	}
-	
-	protected JvmTypeReference getClosureOperationParameterType(JvmTypeReference closureType, JvmOperation operation, int i) {
+	protected LightweightTypeReference getClosureOperationParameterType(LightweightTypeReference closureType, JvmOperation operation, int i) {
 		ITypeReferenceOwner owner = newTypeReferenceOwner(operation);
 		OwnedConverter converter = new OwnedConverter(newTypeReferenceOwner(operation));
-		LightweightTypeReference lightweightTypeReference = converter.toLightweightReference(closureType);
-		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(lightweightTypeReference);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(closureType);
 		LightweightTypeReference parameterType = converter.toLightweightReference(operation.getParameters().get(i).getParameterType());
-		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType).toJavaCompliantTypeReference();
+		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType);
 	}
 
-	protected JvmTypeReference getClosureOperationReturnType(JvmTypeReference closureType, JvmOperation operation) {
+	protected LightweightTypeReference getClosureOperationReturnType(LightweightTypeReference closureType, JvmOperation operation) {
 		ITypeReferenceOwner owner = newTypeReferenceOwner(operation);
 		OwnedConverter converter = new OwnedConverter(owner);
-		LightweightTypeReference lightweightTypeReference = converter.toLightweightReference(closureType);
-		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(lightweightTypeReference);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(closureType);
 		LightweightTypeReference parameterType = converter.toLightweightReference(operation.getReturnType());
-		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType).toJavaCompliantTypeReference();
+		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType);
 	}
 	
 	protected void _toJavaExpression(final XClosure closure, final ITreeAppendable b) {
 		if (b.hasName(closure)) {
 			b.trace(closure, false).append(getVarName(closure, b));
 		} else {
-			toAnonymousClass(closure, b.trace(closure, false), getType(closure));
+			toAnonymousClass(closure, b.trace(closure, false), getLightweightType(closure));
 		}
 	}
 	
@@ -1538,11 +1392,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 		}
 		return super.isVariableDeclarationRequired(expr, b);
-	}
-	
-	@SuppressWarnings("deprecation")
-	protected org.eclipse.xtext.xbase.typing.Closures getClosures() {
-		return closures;
 	}
 	
 	protected void _toJavaExpression(final XAnnotation annotation, final ITreeAppendable b) {

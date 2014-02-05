@@ -321,6 +321,10 @@ class TestAppender extends AbstractStringBuilderBasedAppendable {
 		builder.append(type.identifier)
 	}
 	
+	override protected appendType(Class<?> type, StringBuilder builder) {
+		builder.append(type.name)
+	}
+	
 	override getImports() {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}

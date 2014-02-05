@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
@@ -23,7 +30,7 @@ public class TreeAppendableUtil {
   public ITreeAppendable traceSignificant(final ITreeAppendable appendable, final EObject source, final boolean useForDebugging) {
     ITreeAppendable _xifexpression = null;
     if ((appendable instanceof TreeAppendable)) {
-      _xifexpression = ((TreeAppendable) appendable).trace(source, ILocationInFileProviderExtension.RegionDescription.SIGNIFICANT, useForDebugging);
+      _xifexpression = ((TreeAppendable)appendable).trace(source, ILocationInFileProviderExtension.RegionDescription.SIGNIFICANT, useForDebugging);
     } else {
       ITreeAppendable _xblockexpression = null;
       {
@@ -51,7 +58,7 @@ public class TreeAppendableUtil {
   public ITreeAppendable traceWithComments(final ITreeAppendable appendable, final EObject source) {
     ITreeAppendable _xifexpression = null;
     if ((appendable instanceof TreeAppendable)) {
-      _xifexpression = ((TreeAppendable) appendable).trace(source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS, false);
+      _xifexpression = ((TreeAppendable)appendable).trace(source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS, false);
     } else {
       ITreeAppendable _xblockexpression = null;
       {

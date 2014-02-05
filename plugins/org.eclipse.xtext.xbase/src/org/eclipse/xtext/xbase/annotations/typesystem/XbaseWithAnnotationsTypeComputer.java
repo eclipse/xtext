@@ -106,6 +106,9 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 		}
 	}
 
+	/**
+	 * @param annotation passed into computeTypes to mimic the same signature as in super types. 
+	 */
 	protected void computeTypes(XAnnotation annotation, @Nullable JvmOperation operation, XExpression value,
 			ITypeComputationState state) {
 		LightweightTypeReference expectation = operation == null || operation.eIsProxy() ? null : state.getConverter().toLightweightReference(operation.getReturnType());

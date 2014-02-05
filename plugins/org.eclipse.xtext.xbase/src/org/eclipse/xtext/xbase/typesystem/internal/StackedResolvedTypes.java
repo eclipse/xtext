@@ -260,7 +260,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	
 	@Override
 	@Nullable
-	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
+	protected LightweightTypeReference doGetDeclaredType(JvmIdentifiableElement identifiable) {
 		return null;
 	}
 	

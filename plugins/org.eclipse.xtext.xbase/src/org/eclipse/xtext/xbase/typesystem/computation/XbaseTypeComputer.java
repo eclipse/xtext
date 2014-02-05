@@ -183,7 +183,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 	
 	protected LightweightTypeReference getPrimitiveVoid(ITypeComputationState state) {
-		return getTypeForName(Void.TYPE, state);
+		return getRawTypeForName(Void.TYPE, state.getReferenceOwner());
 	}
 	
 	protected static abstract class BranchExpressionProcessor {

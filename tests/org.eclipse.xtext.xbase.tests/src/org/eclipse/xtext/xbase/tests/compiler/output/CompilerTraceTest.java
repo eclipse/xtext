@@ -19,7 +19,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.builder.trace.AbstractTrace;
 import org.eclipse.xtext.builder.trace.LocationInResource;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
@@ -33,7 +32,8 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -41,7 +41,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class CompilerTraceTest extends AbstractXbaseTestCase {
 	
 	public static class SimpleTrace extends AbstractTrace {
@@ -94,9 +93,6 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		
 	}
 	
-	@Inject
-	private ITypeProvider typeProvider;
-	
 	@Inject 
 	private ITraceURIConverter converter;
 	
@@ -105,6 +101,9 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
+	
+	@Inject
+	private IBatchTypeResolver typeResolver;
 	
 	@Test 
 	public void testNullLiteral() throws Exception {
@@ -851,13 +850,13 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
 				"if (!_m#a#tched) {\n" + 
-				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"  if (Objects.equal(_switchValue, \"\")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\" \")) {\n" + 
+				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -874,13 +873,13 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,#\"\"#)) {\n" + 
+				"  if (Objects.equal(_switchValue, #\"\"#)) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\" \")) {\n" + 
+				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -897,13 +896,13 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"  if (Objects.equal(_switchValue, \"\")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = #\"\"#;\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\" \")) {\n" + 
+				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -920,13 +919,13 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"final String _switchValue = #\"\"#;\n" + 
 				"boolean _matched = false;\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"  if (Objects.equal(_switchValue, \"\")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\" \")) {\n" + 
+				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -943,13 +942,13 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"  if (Objects.equal(_switchValue, \"\")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\" \")) {\n" + 
+				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -966,7 +965,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue,\"\")) {\n" + 
+				"  if (Objects.equal(_switchValue, \"\")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -994,7 +993,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(it,\"\")) {\n" + 
+				"  if (Objects.equal(it, \"\")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -1019,7 +1018,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"  }\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
-				"  if (Objects.equal(it,\"\")) {\n" + 
+				"  if (Objects.equal(it, \"\")) {\n" + 
 				"    _matched=true;\n" + 
 				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
@@ -1088,7 +1087,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"boolean _matched = false;\n" + 
 				"i#f (!_matched) {\n" + 
 				"  if (it instanceof String) {\n" + 
-				"    if (Objects.equal(it,\"\")) {\n" + 
+				"    if (Objects.equal(it, \"\")) {\n" + 
 				"      _matched=true;\n" + 
 				"      _switchResult = \"\";\n" + 
 				"    }\n" + 
@@ -1121,7 +1120,6 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	
 	private static final Pattern p = Pattern.compile("([^#]*)#([^#]*)#([^#]*)", Pattern.DOTALL);
 	
-	@SuppressWarnings("null")
 	protected void assertTrace(final String javaCodeWithMarker, String xbaseCodeWithMarker) throws Exception {
 		xbaseCodeWithMarker = " " + xbaseCodeWithMarker + " ";
 		Matcher xbaseMatcher = p.matcher(xbaseCodeWithMarker);
@@ -1133,7 +1131,10 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		XExpression model = expression(actualCode,true);
 		TreeAppendable appendable = new TreeAppendable(new ImportManager(true), converter, locationProvider, jvmModelAssociations, model, "  ", "\n");
 		XbaseCompiler compiler = get(XbaseCompiler.class);
-		JvmTypeReference returnType = typeProvider.getCommonReturnType(model, true);
+		LightweightTypeReference returnType = typeResolver.resolveTypes(model).getReturnType(model);
+		if (returnType == null) {
+			throw new IllegalStateException();
+		}
 		compiler.compile(model, appendable, returnType);
 		String compiledJavaCode = appendable.getContent();
 		Matcher javaMatcher = p.matcher(javaCodeWithMarker);
@@ -1145,6 +1146,9 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		assertEquals(actualExpectation, compiledJavaCode);
 		ITrace trace = new SimpleTrace(appendable.getTraceRegion());
 		ILocationInResource location = trace.getBestAssociatedLocation(new TextRegion(javaGroup1.length(), javaGroup2.length()));
+		if (location == null) {
+			throw new IllegalStateException("location may not be null");
+		}
 		assertEquals(new TextRegion(xbaseGroup1.length(), xbaseGroup2.length()), location.getTextRegion());
 	}
 }

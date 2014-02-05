@@ -347,7 +347,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			  if (!_matched) {
 			    _switchResult = "noname";
 			  }
-			  _xblockexpression = (_switchResult);
+			  _xblockexpression = _switchResult;
 			}
 			return _xblockexpression;
 		''')
@@ -393,16 +393,16 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			final String x = "lalala";
 			boolean _matched = false;
 			if (!_matched) {
-			  if (com.google.common.base.Objects.equal(x,"a")) {
+			  if (com.google.common.base.Objects.equal(x, "a")) {
 			    _matched=true;
 			  }
 			  if (!_matched) {
-			    if (com.google.common.base.Objects.equal(x,"b")) {
+			    if (com.google.common.base.Objects.equal(x, "b")) {
 			      _matched=true;
 			    }
 			  }
 			  if (!_matched) {
-			    if (com.google.common.base.Objects.equal(x,"c")) {
+			    if (com.google.common.base.Objects.equal(x, "c")) {
 			      _matched=true;
 			    }
 			  }
@@ -457,11 +457,11 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			final String x = "lalala";
 			boolean _matched = false;
 			if (!_matched) {
-			  if (com.google.common.base.Objects.equal(x,"a")) {
+			  if (com.google.common.base.Objects.equal(x, "a")) {
 			    _matched=true;
 			  }
 			  if (!_matched) {
-			    if (com.google.common.base.Objects.equal(x,"b")) {
+			    if (com.google.common.base.Objects.equal(x, "b")) {
 			      _matched=true;
 			    }
 			  }
@@ -526,7 +526,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			boolean _matched = false;
 			if (!_matched) {
 			  if (x instanceof String) {
-			    if (com.google.common.base.Objects.equal(x,"a")) {
+			    if (com.google.common.base.Objects.equal(x, "a")) {
 			      _matched=true;
 			      _switchResult = "blabla";
 			    }
@@ -534,12 +534,12 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			}
 			if (!_matched) {
 			  if (x instanceof Integer) {
-			    if (com.google.common.base.Objects.equal(x,1)) {
+			    if (com.google.common.base.Objects.equal(x, 1)) {
 			      _matched=true;
 			    }
 			  }
 			  if (!_matched) {
-			    if (com.google.common.base.Objects.equal(x,2)) {
+			    if (com.google.common.base.Objects.equal(x, 2)) {
 			      _matched=true;
 			    }
 			  }
@@ -574,7 +574,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			  }
 			  if (!_matched) {
 			    if (x instanceof Integer) {
-			      if (com.google.common.base.Objects.equal(x,1)) {
+			      if (com.google.common.base.Objects.equal(x, 1)) {
 			        _matched=true;
 			      }
 			    }
@@ -745,5 +745,23 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 
+	@Test def void testBug410797_01() throws Exception {
+		'''
+			{ val boolean bug = #[true, false, true].reduce[a,b|a && b] }
+		'''.compilesTo('''
+			final org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean> _function = new org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean>() {
+			  public Boolean apply(final Boolean a, final Boolean b) {
+			    boolean _and = false;
+			    if (!(a).booleanValue()) {
+			      _and = false;
+			    } else {
+			      _and = (b).booleanValue();
+			    }
+			    return Boolean.valueOf(_and);
+			  }
+			};
+			final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(com.google.common.collect.Lists.<Boolean>newArrayList(true, false, true)), _function);
+		''')
+	}
 }
 

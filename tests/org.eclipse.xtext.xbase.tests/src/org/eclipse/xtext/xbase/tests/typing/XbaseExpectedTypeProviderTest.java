@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typing;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -28,7 +27,8 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Test;
 
 /**
@@ -79,13 +79,13 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	@Test public void testTypeParamInference_01_c() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1WithSuper([e|e],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<? extends java.lang.Object & super java.lang.String, java.lang.String>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<? super java.lang.String, java.lang.String>", closure);
 	}
 	
 	@Test public void testTypeParamInference_01_d() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1WithSuperAndExtends([e|e],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<? extends java.lang.Object & super java.lang.String, ? extends java.lang.String>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<? super java.lang.String, ? extends java.lang.String>", closure);
 	}
 	
 	@Test public void testTypeParamInference_02() throws Exception {
@@ -228,7 +228,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 
 	@Test public void testForLoopExpression_1() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (x : null) null");
-		assertExpected("java.lang.Iterable<? extends java.lang.Object>", loop.getForExpression());
+		assertExpected("java.lang.Iterable<?>", loop.getForExpression());
 		assertExpected(null, loop.getEachExpression());
 	}
 	
@@ -283,7 +283,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	@Test public void testForLoopExpression_3_h() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (Object x : null as Iterable<? super Integer>) null");
-		assertExpected("java.lang.Iterable<? extends java.lang.Object & super java.lang.Integer>", loop.getForExpression());
+		assertExpected("java.lang.Iterable<? super java.lang.Integer>", loop.getForExpression());
 	}
 	
 	// testForLoopExpression_4_*:
@@ -377,7 +377,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	protected void assertExpected(String expectedExpectedType, XExpression obj) {
-		JvmTypeReference reference = get(ITypeProvider.class).getExpectedType(obj);
+		LightweightTypeReference reference = get(IBatchTypeResolver.class).resolveTypes(obj).getExpectedType(obj);
 		if (reference == null)
 			assertNull("expected " + expectedExpectedType + " for " + obj + " but was null", expectedExpectedType);
 		else

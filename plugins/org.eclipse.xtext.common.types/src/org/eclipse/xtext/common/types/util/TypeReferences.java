@@ -40,8 +40,8 @@ import com.google.inject.Singleton;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Singleton
 @SuppressWarnings("deprecation")
+@Singleton
 public class TypeReferences {
 
 	private final static Logger log = Logger.getLogger(TypeReferences.class);
@@ -51,7 +51,7 @@ public class TypeReferences {
 
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
-
+	
 	@Inject
 	private SuperTypeCollector superTypeCollector;
 
@@ -266,11 +266,7 @@ public class TypeReferences {
 		boolean result = className.equals(type.getIdentifier());
 		return result;
 	}
-
-	public boolean isNullOrProxy(final JvmTypeReference reference) {
-		return reference == null || reference.getType() == null || reference.getType().eIsProxy();
-	}
-
+	
 	public boolean isInstanceOf(JvmTypeReference reference, Class<?> clazz) {
 		if (isNullOrProxy(reference))
 			return false;
@@ -283,6 +279,10 @@ public class TypeReferences {
 				return true;
 		}
 		return false;
+	}
+
+	public boolean isNullOrProxy(final JvmTypeReference reference) {
+		return reference == null || reference.getType() == null || reference.getType().eIsProxy();
 	}
 
 	public boolean isArray(JvmTypeReference type) {

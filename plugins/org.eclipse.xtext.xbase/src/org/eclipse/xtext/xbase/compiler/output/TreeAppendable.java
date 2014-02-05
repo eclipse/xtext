@@ -311,6 +311,12 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return this;
 	}
 	
+	public ITreeAppendable append(Class<?> type) {
+		closeLastChild();
+		state.appendType(type, this);
+		return this;
+	}
+	
 	public TreeAppendable append(LightweightTypeReference typeRef) {
 		typeRef.accept(lightweightTypeReferenceSerializer);
 		return this;

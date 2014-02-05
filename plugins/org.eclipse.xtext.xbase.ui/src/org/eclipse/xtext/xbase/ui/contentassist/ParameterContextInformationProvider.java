@@ -49,6 +49,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class ParameterContextInformationProvider implements IContextInformationProvider {
 
 	@Inject

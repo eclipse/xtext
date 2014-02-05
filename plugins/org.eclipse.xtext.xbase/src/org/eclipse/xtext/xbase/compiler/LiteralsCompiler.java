@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XClosure;
@@ -22,6 +21,7 @@ import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.base.Joiner;
 import com.google.inject.Inject;
@@ -77,11 +77,11 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	 * @since 2.4
 	 */
 	protected void toJavaExpression(XStringLiteral literal, ITreeAppendable appendable, boolean useUnicodeEscapes) {
-		JvmTypeReference type = getType(literal);
-		if (getTypeReferences().is(type, Character.TYPE)) {
+		LightweightTypeReference type = getLightweightType(literal);
+		if (type.isType(Character.TYPE)) {
 			String javaString = Strings.convertToJavaString(literal.getValue(), useUnicodeEscapes);
 			appendable.append("'").append(javaString).append("'");
-		} else if (getTypeReferences().is(type, Character.class)) {
+		} else if (type.isType(Character.class)) {
 			String javaString = Strings.convertToJavaString(literal.getValue(), useUnicodeEscapes);
 			appendable.append("Character.valueOf('").append(javaString).append("')");
 		} else {
@@ -128,8 +128,8 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 
 	public void _toJavaExpression(XNumberLiteral expr, ITreeAppendable b) {
-		JvmTypeReference type = getType(expr);
-		if(getTypeReferences().is(type, BigInteger.class)) {
+		LightweightTypeReference type = getLightweightType(expr);
+		if(type.isType(BigInteger.class)) {
 			BigInteger value = numberLiterals.toBigInteger(expr);
 			if (BigInteger.ZERO.equals(value)) {
 				b.append(type.getType()).append(".ZERO");
@@ -175,7 +175,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 					}
 				}
 			}
-		} else if(getTypeReferences().is(type, BigDecimal.class)) {
+		} else if(type.isType(BigDecimal.class)) {
 			BigDecimal value = numberLiterals.toBigDecimal(expr);
 			if (BigDecimal.ZERO.equals(value)) {
 				b.append(type.getType()).append(".ZERO");

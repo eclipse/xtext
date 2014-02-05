@@ -182,6 +182,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 	
+	public List<LightweightTypeReference> getThrownExceptions(XExpression obj) {
+		return getServices().getEarlyExitComputer().getThrownExceptions(obj, this, this.getReferenceOwner());
+	}
+	
 	@Nullable
 	public JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall) {
 		return doGetLinkedFeature(featureCall);
@@ -671,13 +675,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 		LightweightTypeReference result = basicGetTypes().get(identifiable);
 		if (result == null) {
-			return getDeclaredType(identifiable);
+			return doGetDeclaredType(identifiable);
 		}
 		return result;
 	}
 	
 	@Nullable
-	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
+	protected LightweightTypeReference doGetDeclaredType(JvmIdentifiableElement identifiable) {
 		if (identifiable instanceof JvmType) {
 			ITypeReferenceOwner owner = getConverter().getOwner();
 			ParameterizedTypeReference result = new ParameterizedTypeReference(owner, (JvmType) identifiable);
@@ -688,7 +692,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			}
 			return result;
 		}
-		JvmTypeReference type = getUnconvertedDeclaredType(identifiable);
+		JvmTypeReference type = getDeclaredType(identifiable);
 		if (type != null) {
 			LightweightTypeReference result = getConverter().toLightweightReference(type);
 			return result;
@@ -697,7 +701,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	@Nullable
-	protected JvmTypeReference getUnconvertedDeclaredType(JvmIdentifiableElement identifiable) {
+	protected JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
 		if (identifiable instanceof JvmOperation) {
 			return ((JvmOperation) identifiable).getReturnType();
 		}

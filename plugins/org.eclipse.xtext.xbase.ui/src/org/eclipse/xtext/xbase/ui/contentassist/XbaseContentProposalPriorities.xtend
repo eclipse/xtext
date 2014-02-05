@@ -10,9 +10,9 @@ package org.eclipse.xtext.xbase.ui.contentassist
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalPriorities
-import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmExecutable
+import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription
 import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription
 
 /**

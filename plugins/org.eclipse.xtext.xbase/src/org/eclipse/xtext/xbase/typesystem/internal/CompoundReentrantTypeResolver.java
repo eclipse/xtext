@@ -145,6 +145,11 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.getExpectedType(expression);
 	}
+	
+	public List<LightweightTypeReference> getThrownExceptions(XExpression obj) {
+		IResolvedTypes delegate = getDelegate(obj);
+		return delegate.getThrownExceptions(obj);
+	}
 
 	public boolean isVoidTypeAllowed(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);

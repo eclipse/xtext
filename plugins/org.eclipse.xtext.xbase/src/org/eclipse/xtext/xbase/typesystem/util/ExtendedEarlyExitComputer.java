@@ -7,9 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -21,6 +28,13 @@ import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -109,6 +123,116 @@ public class ExtendedEarlyExitComputer {
 			}
 		}
 		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
+	}
+	
+	protected abstract class AbstractThrownExceptionDelegate implements IThrownExceptionDelegate {
+		private Switch<Boolean> collector;
+
+		public void collectThrownExceptions(XExpression expression) {
+			if (expression != null) {
+				TreeIterator<EObject> iterator = EcoreUtil2.eAll(expression);
+				while(iterator.hasNext()) {
+					if (!collector.doSwitch(iterator.next())) {
+						iterator.prune();
+					}
+				}
+			}
+		}
+
+		public IThrownExceptionDelegate catchExceptions(List<LightweightTypeReference> caughtExceptions) {
+			if (caughtExceptions.isEmpty()) {
+				return this;
+			}
+			FilteringThrownExceptionDelegate delegate = new FilteringThrownExceptionDelegate(this, caughtExceptions);
+			Switch<Boolean> collector = createThrownExceptionCollector(delegate);
+			delegate.collectWith(collector);
+			return delegate;
+		}
+
+		public void collectWith(Switch<Boolean> collector) {
+			this.collector = collector;
+		}
+
+	}
+	
+	protected class ThrownExceptionDelegate extends AbstractThrownExceptionDelegate {
+
+		private final List<LightweightTypeReference> result;
+		private final Set<String> seen;
+		private final IResolvedTypes types;
+		private final ITypeReferenceOwner owner;
+
+		public ThrownExceptionDelegate(List<LightweightTypeReference> result, IResolvedTypes types, ITypeReferenceOwner owner) {
+			this.result = result;
+			this.types = types;
+			this.owner = owner;
+			this.seen = Sets.newHashSet();
+		}
+
+		public LightweightTypeReference toLightweightReference(JvmTypeReference exception) {
+			return new OwnedConverter(owner).toLightweightReference(exception);
+		}
+
+		public void accept(LightweightTypeReference type) {
+			if (type != null && seen.add(type.getIdentifier())) {
+				result.add(type);
+			}
+		}
+
+		public LightweightTypeReference getActualType(XExpression expr) {
+			return types.getActualType(expr);
+		}
+
+	}
+	
+	protected class FilteringThrownExceptionDelegate extends AbstractThrownExceptionDelegate {
+
+		private final IThrownExceptionDelegate delegate;
+		private final List<LightweightTypeReference> caughtExceptions;
+
+		protected FilteringThrownExceptionDelegate(IThrownExceptionDelegate delegate, List<LightweightTypeReference> caughtExceptions) {
+			this.delegate = delegate;
+			this.caughtExceptions = caughtExceptions;
+			
+		}
+		
+		public LightweightTypeReference toLightweightReference(JvmTypeReference exception) {
+			return delegate.toLightweightReference(exception);
+		}
+
+		public void accept(LightweightTypeReference type) {
+			for(LightweightTypeReference caughtException: caughtExceptions) {
+				if (type.isSubtypeOf(caughtException.getType())) {
+					return;
+				}
+			}
+			delegate.accept(type);
+		}
+
+		public LightweightTypeReference getActualType(XExpression expr) {
+			return delegate.getActualType(expr);
+		}
+
+	}
+
+	public List<LightweightTypeReference> getThrownExceptions(XExpression obj, IResolvedTypes types, ITypeReferenceOwner owner) {
+		if (obj == null) {
+			return Collections.emptyList();
+		}
+		final List<LightweightTypeReference> result = Lists.newArrayListWithExpectedSize(2);
+		ThrownExceptionDelegate delegate = createDelegate(result, types, owner);
+		Switch<Boolean> collector = createThrownExceptionCollector(delegate);
+		delegate.collectWith(collector);
+		delegate.collectThrownExceptions(obj);
+		return result;
+	}
+
+	protected ThrownExceptionDelegate createDelegate(final List<LightweightTypeReference> result, IResolvedTypes types, ITypeReferenceOwner owner) {
+		return new ThrownExceptionDelegate(result, types, owner);
+	}
+	
+	protected Switch<Boolean> createThrownExceptionCollector(IThrownExceptionDelegate delegate) {
+		return new ThrownExceptionSwitch(delegate);
 	}
 	
 }
