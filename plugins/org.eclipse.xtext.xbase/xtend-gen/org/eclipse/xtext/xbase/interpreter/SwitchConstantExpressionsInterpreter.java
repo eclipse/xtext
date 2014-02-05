@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.interpreter;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -65,23 +66,63 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
         _matched=true;
         boolean _isSetConstant = ((JvmField)feature).isSetConstant();
         if (_isSetConstant) {
-          return ((JvmField)feature).getConstantValue();
+          boolean _isConstant = ((JvmField)feature).isConstant();
+          if (_isConstant) {
+            return ((JvmField)feature).getConstantValue();
+          }
+        } else {
+          boolean _isFinal = ((JvmField)feature).isFinal();
+          if (_isFinal) {
+            final XExpression associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
+            boolean _notEquals = (!Objects.equal(associatedExpression, null));
+            if (_notEquals) {
+              return this.evaluateAssociatedExpression(associatedExpression, ctx);
+            }
+          }
         }
-        XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
-        return this.internalEvaluate(_associatedExpression, ctx);
       }
     }
     if (!_matched) {
       if (feature instanceof XVariableDeclaration) {
-        _matched=true;
-        XExpression _right = ((XVariableDeclaration)feature).getRight();
-        return this.internalEvaluate(_right, ctx);
+        boolean _and = false;
+        boolean _isWriteable = ((XVariableDeclaration)feature).isWriteable();
+        boolean _not = (!_isWriteable);
+        if (!_not) {
+          _and = false;
+        } else {
+          XExpression _right = ((XVariableDeclaration)feature).getRight();
+          boolean _notEquals = (!Objects.equal(_right, null));
+          _and = _notEquals;
+        }
+        if (_and) {
+          _matched=true;
+          XExpression _right_1 = ((XVariableDeclaration)feature).getRight();
+          return this.evaluateAssociatedExpression(_right_1, ctx);
+        }
       }
     }
     JvmIdentifiableElement _feature_1 = it.getFeature();
     String _simpleName = _feature_1.getSimpleName();
     String _plus = ("Couldn\'t resolve feature " + _simpleName);
     throw new UnresolvableFeatureException(_plus, it);
+  }
+  
+  public Object evaluateAssociatedExpression(final XExpression it, final Context ctx) {
+    Object _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (it instanceof XAbstractFeatureCall) {
+        JvmIdentifiableElement _feature = ((XAbstractFeatureCall)it).getFeature();
+        if ((_feature instanceof JvmEnumerationLiteral)) {
+          _matched=true;
+          throw this.notConstantExpression(it);
+        }
+      }
+    }
+    if (!_matched) {
+      _switchResult = this.internalEvaluate(it, ctx);
+    }
+    return _switchResult;
   }
   
   public Object internalEvaluate(final XExpression it, final Context ctx) {
