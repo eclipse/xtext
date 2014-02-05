@@ -33,10 +33,8 @@ import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.ClassFinder;
@@ -69,13 +67,10 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XImportDeclaration;
@@ -262,13 +257,6 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  protected Object _internalEvaluate(final XTypeLiteral it, final Context ctx) {
-    JvmType _type = it.getType();
-    EList<String> _arrayDimensions = it.getArrayDimensions();
-    int _size = _arrayDimensions.size();
-    return this.toTypeReference(_type, _size);
   }
   
   protected Object _internalEvaluate(final XListLiteral it, final Context ctx) {
@@ -530,29 +518,6 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  protected JvmTypeReference toTypeReference(final JvmType type, final int arrayDimensions) {
-    boolean _equals = Objects.equal(type, null);
-    if (_equals) {
-      return null;
-    }
-    JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-    final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
-      public void apply(final JvmParameterizedTypeReference it) {
-        it.setType(type);
-      }
-    };
-    JvmTypeReference resultTypeRef = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
-    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, arrayDimensions, true);
-    for (final Integer i : _doubleDotLessThan) {
-      {
-        final JvmGenericArrayTypeReference arrayRef = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
-        arrayRef.setComponentType(resultTypeRef);
-        resultTypeRef = arrayRef;
-      }
-    }
-    return resultTypeRef;
   }
   
   protected Class<? extends Object> getJavaType(final JvmType type, final ClassFinder classFinder) throws ClassNotFoundException {

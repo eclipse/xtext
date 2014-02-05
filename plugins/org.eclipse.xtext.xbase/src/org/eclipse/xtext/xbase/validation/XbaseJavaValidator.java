@@ -1344,7 +1344,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 		Map<String, Multimap<Object, XCasePart>> typeGuards = Maps.newHashMap();
 		for (XCasePart casePart : switchExpression.getCases()) {
-			if (!switchExpressions.isConstant(casePart)) {
+			XExpression caseExpression = casePart.getCase();
+			if (caseExpression == null) {
 				continue;
 			}
 			String typeGuardName = switchType.getType().getQualifiedName();
@@ -1353,7 +1354,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				typeGuardName = typeGuard.getQualifiedName();
 			}
 			try {
-				Object result = switchConstantExpressionsInterpreter.evaluate(casePart.getCase());
+				Object result = switchConstantExpressionsInterpreter.evaluate(caseExpression);
+				if (result instanceof JvmTypeReference) {
+					JvmTypeReference jvmTypeReference = (JvmTypeReference) result;
+					result = jvmTypeReference.getIdentifier();
+				}
 				Multimap<Object, XCasePart> duplicatedCases = typeGuards.get(typeGuardName);
 				if (duplicatedCases == null) {
 					duplicatedCases = HashMultimap.create();
@@ -1500,12 +1505,16 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (!switchExpressions.isJavaCaseExpression(switchExpression, casePart)) {
 				return;
 			}
-			Object result = switchConstantExpressionsInterpreter.evaluate(casePart.getCase());
-			if (!(result instanceof JvmEnumerationLiteral)) {
-				return;
+			try {
+				Object result = switchConstantExpressionsInterpreter.evaluate(casePart.getCase());
+				if (!(result instanceof JvmEnumerationLiteral)) {
+					return;
+				}
+				JvmEnumerationLiteral enumerationLiteral = (JvmEnumerationLiteral) result;
+				expectedEnumerationLiterals.remove(enumerationLiteral.getSimpleName());
+			} catch (ConstantExpressionEvaluationException e) {
+				// do nothing
 			}
-			JvmEnumerationLiteral enumerationLiteral = (JvmEnumerationLiteral) result;
-			expectedEnumerationLiterals.remove(enumerationLiteral.getSimpleName());
 		}
 		if (expectedEnumerationLiterals.isEmpty()) {
 			return;

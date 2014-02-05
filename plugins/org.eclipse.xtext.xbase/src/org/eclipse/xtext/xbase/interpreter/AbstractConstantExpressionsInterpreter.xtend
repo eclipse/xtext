@@ -12,7 +12,9 @@ import java.util.Map
 import java.util.Set
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.access.impl.ClassFinder
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.xbase.XBinaryOperation
@@ -20,6 +22,7 @@ import org.eclipse.xtext.xbase.XBooleanLiteral
 import org.eclipse.xtext.xbase.XCastedExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XStringLiteral
+import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.XUnaryOperation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 
@@ -31,7 +34,11 @@ class AbstractConstantExpressionsInterpreter {
 	@Inject ConstantOperators constantOperators
 
 	def dispatch Object internalEvaluate(XExpression expression, Context ctx) {
-		throw new ConstantExpressionEvaluationException("Not a constant expression : '" + expression.toText + "'", expression)
+		throw notConstantExpression(expression)
+	}
+	
+	def notConstantExpression(XExpression expression) {
+		new ConstantExpressionEvaluationException("Not a constant expression : '" + expression?.toText + "'", expression)
 	}
 	
 	def dispatch Object internalEvaluate(XCastedExpression expression, Context ctx) {
@@ -50,6 +57,24 @@ class AbstractConstantExpressionsInterpreter {
 		literal
 	}
 
+	def dispatch Object internalEvaluate(XTypeLiteral it, Context ctx) {
+		toTypeReference(type, arrayDimensions.size)
+	}
+
+	protected def toTypeReference(JvmType type, int arrayDimensions) {
+		if (type == null)
+			return null
+		var JvmTypeReference resultTypeRef = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference => [
+			it.type = type
+		]
+		for (i : 0 ..< arrayDimensions) {
+			val arrayRef = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference
+			arrayRef.setComponentType(resultTypeRef);
+			resultTypeRef = arrayRef
+		}
+		return resultTypeRef
+	}
+
 	def dispatch Object internalEvaluate(XBinaryOperation it, Context ctx) {
 		val left = leftOperand.internalEvaluate(ctx)
 		val right = rightOperand.internalEvaluate(ctx)
@@ -66,8 +91,8 @@ class AbstractConstantExpressionsInterpreter {
 			case '>=': constantOperators.greaterEquals(left, right)
 			case '===': constantOperators.same(left, right)
 			case '!==': constantOperators.notSame(left, right)
-			case '==': throw new ConstantExpressionEvaluationException("Please use the identity comparison operator '===' in constant expressions.")
-			case '!=': throw new ConstantExpressionEvaluationException("Please use the identity comparison operator '!==' in constant expressions.")
+			case '==': constantOperators.same(left, right)
+			case '!=': constantOperators.notSame(left, right)
 			default: throw new ConstantExpressionEvaluationException("Couldn't evaluate binary operator '" + op + "' on values " + left + " and " + right)
 		}
 	}

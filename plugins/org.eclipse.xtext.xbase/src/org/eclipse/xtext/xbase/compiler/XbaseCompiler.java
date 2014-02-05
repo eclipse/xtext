@@ -1258,6 +1258,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			if (!switchExpressions.isJavaCaseExpression(expr, casePart)) {
 				return false;
 			}
+			if (!switchExpressions.isConstant(casePart)) {
+				return false;
+			}
 		}
 		return true;
 	}

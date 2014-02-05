@@ -10,6 +10,12 @@ package org.eclipse.xtext.xbase.interpreter;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -17,11 +23,15 @@ import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.interpreter.ConstantOperators;
 import org.eclipse.xtext.xbase.interpreter.Context;
+import org.eclipse.xtext.xbase.lib.ExclusiveRange;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -32,10 +42,17 @@ public class AbstractConstantExpressionsInterpreter {
   private ConstantOperators constantOperators;
   
   protected Object _internalEvaluate(final XExpression expression, final Context ctx) {
-    String _text = this.toText(expression);
+    throw this.notConstantExpression(expression);
+  }
+  
+  public ConstantExpressionEvaluationException notConstantExpression(final XExpression expression) {
+    String _text = null;
+    if (expression!=null) {
+      _text=this.toText(expression);
+    }
     String _plus = ("Not a constant expression : \'" + _text);
     String _plus_1 = (_plus + "\'");
-    throw new ConstantExpressionEvaluationException(_plus_1, expression);
+    return new ConstantExpressionEvaluationException(_plus_1, expression);
   }
   
   protected Object _internalEvaluate(final XCastedExpression expression, final Context ctx) {
@@ -53,6 +70,36 @@ public class AbstractConstantExpressionsInterpreter {
   
   protected Object _internalEvaluate(final XAnnotation literal, final Context ctx) {
     return literal;
+  }
+  
+  protected Object _internalEvaluate(final XTypeLiteral it, final Context ctx) {
+    JvmType _type = it.getType();
+    EList<String> _arrayDimensions = it.getArrayDimensions();
+    int _size = _arrayDimensions.size();
+    return this.toTypeReference(_type, _size);
+  }
+  
+  protected JvmTypeReference toTypeReference(final JvmType type, final int arrayDimensions) {
+    boolean _equals = Objects.equal(type, null);
+    if (_equals) {
+      return null;
+    }
+    JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+    final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
+      public void apply(final JvmParameterizedTypeReference it) {
+        it.setType(type);
+      }
+    };
+    JvmTypeReference resultTypeRef = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
+    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, arrayDimensions, true);
+    for (final Integer i : _doubleDotLessThan) {
+      {
+        final JvmGenericArrayTypeReference arrayRef = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
+        arrayRef.setComponentType(resultTypeRef);
+        resultTypeRef = arrayRef;
+      }
+    }
+    return resultTypeRef;
   }
   
   protected Object _internalEvaluate(final XBinaryOperation it, final Context ctx) {
@@ -134,13 +181,13 @@ public class AbstractConstantExpressionsInterpreter {
       if (!_matched) {
         if (Objects.equal(op,"==")) {
           _matched=true;
-          throw new ConstantExpressionEvaluationException("Please use the identity comparison operator \'===\' in constant expressions.");
+          _switchResult = Boolean.valueOf(this.constantOperators.same(left, right));
         }
       }
       if (!_matched) {
         if (Objects.equal(op,"!=")) {
           _matched=true;
-          throw new ConstantExpressionEvaluationException("Please use the identity comparison operator \'!==\' in constant expressions.");
+          _switchResult = Boolean.valueOf(this.constantOperators.notSame(left, right));
         }
       }
       if (!_matched) {
@@ -215,6 +262,8 @@ public class AbstractConstantExpressionsInterpreter {
       return _internalEvaluate((XCastedExpression)it, ctx);
     } else if (it instanceof XStringLiteral) {
       return _internalEvaluate((XStringLiteral)it, ctx);
+    } else if (it instanceof XTypeLiteral) {
+      return _internalEvaluate((XTypeLiteral)it, ctx);
     } else if (it instanceof XAnnotation) {
       return _internalEvaluate((XAnnotation)it, ctx);
     } else if (it != null) {

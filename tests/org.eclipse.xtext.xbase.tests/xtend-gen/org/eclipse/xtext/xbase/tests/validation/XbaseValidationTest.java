@@ -15,6 +15,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Test;
@@ -27,6 +29,138 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
+  
+  @Test
+  public void testDuplicateCases_typeLiteral() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch x : String {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case String: 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case String: 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testDuplicateCases_typeLiteral_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch x : String {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case String: 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case typeof(String): 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      final Procedure1<XExpression> _function = new Procedure1<XExpression>() {
+        public void apply(final XExpression it) {
+          XbaseValidationTest.this._validationTestHelper.assertError(it, XbasePackage.Literals.XTYPE_LITERAL, IssueCodes.DUPLICATE_CASE);
+          XbaseValidationTest.this._validationTestHelper.assertError(it, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
+        }
+      };
+      ObjectExtensions.<XExpression>operator_doubleArrow(_expression, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testDuplicateCases_typeLiteral_3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch x : String {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case typeof(String): 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case typeof(String): 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XTYPE_LITERAL, IssueCodes.DUPLICATE_CASE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testDuplicateCases_typeLiteral_4() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch x : String {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case typeof(Integer): 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case typeof(String): 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testDuplicateCases_typeLiteral_5() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch x : String {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case Integer: 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case typeof(String): 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testDuplicateCases_typeLiteral_6() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch x : String {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case Integer: 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case String: 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
   
   @Test
   public void testDuplicateCases_boolean() {

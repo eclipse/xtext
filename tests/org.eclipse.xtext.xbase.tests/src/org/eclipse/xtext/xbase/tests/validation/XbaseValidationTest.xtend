@@ -23,6 +23,63 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 	@Inject
 	extension ValidationTestHelper
 
+	@Test def void testDuplicateCases_typeLiteral() {
+		'''
+			switch x : String {
+				case String: 1
+				case String: 1
+			}
+		'''.expression.assertError(XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE)
+	}
+
+	@Test def void testDuplicateCases_typeLiteral_2() {
+		'''
+			switch x : String {
+				case String: 1
+				case typeof(String): 1
+			}
+		'''.expression => [
+			assertError(XbasePackage.Literals.XTYPE_LITERAL, IssueCodes.DUPLICATE_CASE)
+			assertError(XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE)
+		]
+	}
+
+	@Test def void testDuplicateCases_typeLiteral_3() {
+		'''
+			switch x : String {
+				case typeof(String): 1
+				case typeof(String): 1
+			}
+		'''.expression.assertError(XbasePackage.Literals.XTYPE_LITERAL, IssueCodes.DUPLICATE_CASE)
+	}
+
+	@Test def void testDuplicateCases_typeLiteral_4() {
+		'''
+			switch x : String {
+				case typeof(Integer): 1
+				case typeof(String): 1
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void testDuplicateCases_typeLiteral_5() {
+		'''
+			switch x : String {
+				case Integer: 1
+				case typeof(String): 1
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void testDuplicateCases_typeLiteral_6() {
+		'''
+			switch x : String {
+				case Integer: 1
+				case String: 1
+			}
+		'''.expression.assertNoErrors
+	}
+
 	@Test def void testDuplicateCases_boolean() {
 		'''
 			switch x : true {

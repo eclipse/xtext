@@ -9,10 +9,11 @@ package org.eclipse.xtext.xbase.util
 
 import com.google.inject.Inject
 import org.eclipse.xtext.xbase.XCasePart
-import org.eclipse.xtext.xbase.XSwitchExpression
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
-import org.eclipse.xtext.xbase.validation.ConstantExpressionValidator
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XSwitchExpression
+import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -23,7 +24,7 @@ class XSwitchExpressions {
 	extension IBatchTypeResolver
 
 	@Inject
-	extension ConstantExpressionValidator
+	extension SwitchConstantExpressionsInterpreter
 
 	def isJavaSwitchExpression(XSwitchExpression it) {
 		extension val resolvedTypes = resolveTypes
@@ -44,11 +45,12 @@ class XSwitchExpressions {
 		if (casePart.typeGuard != null) {
 			return false
 		}
-		if (!casePart.constant) {
+		val ^case = casePart.^case
+		if (^case == null) {
 			return false
 		} 
 		extension val resolvedTypes = resolveTypes
-		val caseType = casePart.^case.actualType
+		val caseType = ^case.actualType
 		if (caseType == null) {
 			return false
 		}
@@ -64,7 +66,12 @@ class XSwitchExpressions {
 		if (^case == null) {
 			return false
 		}
-		return ^case.constant
+		try {
+			^case.evaluate
+			return true
+		} catch (ConstantExpressionEvaluationException e) {
+			return false
+		}
 	}
 	
 	def XExpression getThen(XCasePart casePart, XSwitchExpression switchExpression) {
