@@ -41,15 +41,30 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 			}
 			JvmField: {
 				if (feature.setConstant) {
-					return feature.constantValue
+					if (feature.constant) {
+						return feature.constantValue
+					}
+				} else if (feature.final) {
+					val associatedExpression = feature.associatedExpression
+					if (associatedExpression != null) {
+						return associatedExpression.evaluateAssociatedExpression(ctx)
+					}
 				}
-				return feature.associatedExpression.internalEvaluate(ctx)
 			}
-			XVariableDeclaration: {
-				return feature.right.internalEvaluate(ctx)
+			XVariableDeclaration case !feature.writeable && feature.right != null: {
+				return feature.right.evaluateAssociatedExpression(ctx)
 			}
 		}
 		throw new UnresolvableFeatureException("Couldn't resolve feature "+ feature.simpleName, it)
+	}
+	
+	def Object evaluateAssociatedExpression(XExpression it, Context ctx) {
+		switch it {
+			XAbstractFeatureCall case feature instanceof JvmEnumerationLiteral: {
+				throw notConstantExpression
+			}
+			default: internalEvaluate(ctx)
+		}
 	}
 
 }

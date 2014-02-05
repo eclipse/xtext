@@ -9,9 +9,11 @@ package org.eclipse.xtext.xbase.util
 
 import com.google.inject.Inject
 import org.eclipse.xtext.xbase.XCasePart
+import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
+import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
-import org.eclipse.xtext.xbase.validation.ConstantExpressionValidator
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -22,7 +24,7 @@ class XSwitchExpressions {
 	extension IBatchTypeResolver
 
 	@Inject
-	extension ConstantExpressionValidator
+	extension SwitchConstantExpressionsInterpreter
 
 	def isJavaSwitchExpression(XSwitchExpression it) {
 		extension val resolvedTypes = resolveTypes
@@ -47,9 +49,6 @@ class XSwitchExpressions {
 		if (^case == null) {
 			return false
 		}
-		if (!^case.constant) {
-			return false
-		}
 		extension val resolvedTypes = resolveTypes
 		val caseType = ^case.actualType
 		if (caseType == null) {
@@ -60,6 +59,18 @@ class XSwitchExpressions {
 			return false
 		}
 		true
+	}
+
+	def isConstant(XExpression it) {
+		if (it == null) {
+			return false
+		}
+		try {
+			evaluate
+			return true
+		} catch (ConstantExpressionEvaluationException e) {
+			return false
+		}
 	}
 
 }

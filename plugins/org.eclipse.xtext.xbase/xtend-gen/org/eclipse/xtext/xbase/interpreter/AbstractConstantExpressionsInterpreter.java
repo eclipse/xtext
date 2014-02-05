@@ -32,10 +32,17 @@ public class AbstractConstantExpressionsInterpreter {
   private ConstantOperators constantOperators;
   
   protected Object _internalEvaluate(final XExpression expression, final Context ctx) {
-    String _text = this.toText(expression);
+    throw this.notConstantExpression(expression);
+  }
+  
+  public ConstantExpressionEvaluationException notConstantExpression(final XExpression expression) {
+    String _text = null;
+    if (expression!=null) {
+      _text=this.toText(expression);
+    }
     String _plus = ("Not a constant expression : \'" + _text);
     String _plus_1 = (_plus + "\'");
-    throw new ConstantExpressionEvaluationException(_plus_1, expression);
+    return new ConstantExpressionEvaluationException(_plus_1, expression);
   }
   
   protected Object _internalEvaluate(final XCastedExpression expression, final Context ctx) {

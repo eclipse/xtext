@@ -31,7 +31,11 @@ class AbstractConstantExpressionsInterpreter {
 	@Inject ConstantOperators constantOperators
 
 	def dispatch Object internalEvaluate(XExpression expression, Context ctx) {
-		throw new ConstantExpressionEvaluationException("Not a constant expression : '" + expression.toText + "'", expression)
+		throw notConstantExpression(expression)
+	}
+	
+	def notConstantExpression(XExpression expression) {
+		new ConstantExpressionEvaluationException("Not a constant expression : '" + expression?.toText + "'", expression)
 	}
 	
 	def dispatch Object internalEvaluate(XCastedExpression expression, Context ctx) {

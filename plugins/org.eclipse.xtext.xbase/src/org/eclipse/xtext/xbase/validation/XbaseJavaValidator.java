@@ -90,6 +90,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
@@ -1340,8 +1341,12 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (!switchExpressions.isJavaCaseExpression(switchExpression, casePart)) {
 				continue;
 			}
-			Object result = switchConstantExpressionsInterpreter.evaluate(casePart.getCase());
-			duplicatedCases.put(result, casePart);
+			try {
+				Object result = switchConstantExpressionsInterpreter.evaluate(casePart.getCase());
+				duplicatedCases.put(result, casePart);
+			} catch (ConstantExpressionEvaluationException e) {
+				// do nothing
+			}
 		}
 		for (Object result : duplicatedCases.keySet()) {
 			Collection<XCasePart> cases = duplicatedCases.get(result);

@@ -13,11 +13,13 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
+import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.validation.ConstantExpressionValidator;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -30,7 +32,7 @@ public class XSwitchExpressions {
   
   @Inject
   @Extension
-  private ConstantExpressionValidator _constantExpressionValidator;
+  private SwitchConstantExpressionsInterpreter _switchConstantExpressionsInterpreter;
   
   public boolean isJavaSwitchExpression(final XSwitchExpression it) {
     boolean _xblockexpression = false;
@@ -69,11 +71,6 @@ public class XSwitchExpressions {
       if (_equals) {
         return false;
       }
-      boolean _isConstant = this._constantExpressionValidator.isConstant(case_);
-      boolean _not = (!_isConstant);
-      if (_not) {
-        return false;
-      }
       @Extension
       final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(it);
       final LightweightTypeReference caseType = resolvedTypes.getActualType(case_);
@@ -84,12 +81,30 @@ public class XSwitchExpressions {
       XExpression _switch = it.getSwitch();
       final LightweightTypeReference switchType = resolvedTypes.getActualType(_switch);
       boolean _isAssignableFrom = switchType.isAssignableFrom(caseType);
-      boolean _not_1 = (!_isAssignableFrom);
-      if (_not_1) {
+      boolean _not = (!_isAssignableFrom);
+      if (_not) {
         return false;
       }
       _xblockexpression = (true);
     }
     return _xblockexpression;
+  }
+  
+  public boolean isConstant(final XExpression it) {
+    boolean _equals = Objects.equal(it, null);
+    if (_equals) {
+      return false;
+    }
+    try {
+      this._switchConstantExpressionsInterpreter.evaluate(it);
+      return true;
+    } catch (final Throwable _t) {
+      if (_t instanceof ConstantExpressionEvaluationException) {
+        final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
+        return false;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
   }
 }
