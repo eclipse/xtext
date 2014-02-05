@@ -13,8 +13,6 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Collection;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -25,8 +23,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -34,28 +30,23 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.IMirrorExtension;
 import org.eclipse.xtext.common.types.access.TypeResource;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
  * Calculates the hash of the signature of a {@link JvmDeclaredType}.
- * The signature spans everything that could change the linking of clients.
+ * The signature spans relevant information that could change the linking of clients.
  * The hash is stored in the {@link IEObjectDescription} of the type to allow fast calculation of 
  * {@link org.eclipse.xtext.resource.IResourceDescription.Manager#isAffected(org.eclipse.xtext.resource.IResourceDescription.Delta, IResourceDescription)}.
  *
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 @Singleton
 public class JvmDeclaredTypeSignatureHashProvider {
 
@@ -83,9 +74,6 @@ public class JvmDeclaredTypeSignatureHashProvider {
 	}
 	
 	public static class SignatureHashBuilder {
-
-		@Inject
-		private SuperTypeCollector superTypeCollector;
 
 		@Inject
 		private JvmDeclaredTypeSignatureHashProvider hashProvider;
@@ -174,40 +162,9 @@ public class JvmDeclaredTypeSignatureHashProvider {
 		}
 
 		protected SignatureHashBuilder appendSuperTypeSignatures(JvmDeclaredType type) {
-			Set<JvmTypeReference> allSuperTypes = superTypeCollector.collectSuperTypes(type);
-			Collection<JvmType> transformedSuperTypes = Lists.newArrayList((Iterables.transform(allSuperTypes, new Function<JvmTypeReference, JvmType>() {
-				public JvmType apply(JvmTypeReference input){
-					return input.getType();
-				}
-			})));
-			// The inheritance hierarchy contains cycles -> stop calculation here
-			if(transformedSuperTypes.contains(type))
-				return this;
-			for (JvmTypeReference superType : allSuperTypes) {
+			for(JvmTypeReference superType: type.getSuperTypes()) {
 				append("super ");
-				superType
-						.accept(new org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor.InheritanceAware<Void>() {
-							@Override
-							public Void doVisitTypeReference(JvmTypeReference reference) {
-								if (reference.getType() instanceof JvmDeclaredType)
-									append(hashProvider.getHash((JvmDeclaredType) reference.getType()));
-								else
-									append(reference.getIdentifier());
-								return null;
-							}
-
-							@Override
-							public Void doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
-								doVisitTypeReference(reference);
-								append("<");
-								for (JvmTypeReference typeArgument : reference.getArguments()) {
-									append(typeArgument.getIdentifier());
-									append(",");
-								}
-								append(">");
-								return null;
-							}
-						});
+				append(superType.getIdentifier());
 				append("\n");
 			}
 			return this;

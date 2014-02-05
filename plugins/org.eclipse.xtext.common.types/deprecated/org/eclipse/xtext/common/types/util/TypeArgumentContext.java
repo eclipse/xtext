@@ -48,7 +48,7 @@ public class TypeArgumentContext implements ITypeArgumentContext {
 	private final IRawTypeHelper rawTypeHelper;
 	private final Primitives primitives;
 
-	public TypeArgumentContext(
+	TypeArgumentContext(
 			Map<JvmTypeParameter, JvmTypeReference> boundParameters, 
 			TypeReferences typeReferences,
 			TypesFactory typesFactory,

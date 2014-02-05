@@ -8,8 +8,8 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import bug380058.Amount;
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -17,23 +17,26 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.compiler.XtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
-import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.hamcrest.Matcher;
+import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
+import testdata.Annotation1;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -47,28 +50,31 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   protected IGeneratorConfigProvider generatorConfigProvider;
   
   @Inject
-  protected OnTheFlyJavaCompiler compiler;
+  protected IFilePostProcessor postProcessor;
   
   @Inject
-  protected IFilePostProcessor postProcessor;
+  private CompilationTestHelper compilationTestHelper;
   
   protected boolean useJavaCompiler = false;
   
   @Before
   public void setupCompiler() {
     Class<? extends AbstractXtendCompilerTest> _class = this.getClass();
-    this.compiler.addClassPathOfClass(_class);
-    this.compiler.addClassPathOfClass(Amount.class);
-    this.compiler.addClassPathOfClass(Data.class);
-    this.compiler.addClassPathOfClass(Inject.class);
-    this.compiler.addClassPathOfClass(CollectionLiterals.class);
-    this.compiler.addClassPathOfClass(JvmTypeParameter.class);
-    this.compiler.addClassPathOfClass(ITraceRegionProvider.class);
-    this.compiler.addClassPathOfClass(XExpression.class);
-    this.compiler.addClassPathOfClass(Objects.class);
-    Class<? extends AbstractXtendCompilerTest> _class_1 = this.getClass();
-    ClassLoader _classLoader = _class_1.getClassLoader();
-    this.compiler.setParentClassLoader(_classLoader);
+    this.compilationTestHelper.setJavaCompilerClassPath(_class, 
+      Amount.class, 
+      Data.class, 
+      Inject.class, 
+      CollectionLiterals.class, 
+      JvmTypeParameter.class, 
+      ITraceRegionProvider.class, 
+      XExpression.class, 
+      Object.class, 
+      Annotation1.class, 
+      Lists.class, 
+      EObject.class, 
+      Matcher.class, 
+      Is.class, 
+      Assert.class);
   }
   
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
@@ -96,34 +102,13 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
       String _string_1 = expected.toString();
       String _string_2 = javaCode.toString();
       XtendCompilerTest.assertEquals(_string_1, _string_2);
-      boolean _and = false;
-      if (!this.useJavaCompiler) {
-        _and = false;
-      } else {
-        EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
-        int _size = _xtendTypes.size();
-        boolean _equals = (_size == 1);
-        _and = _equals;
-      }
-      if (_and) {
-        String _xifexpression = null;
-        String _package = file.getPackage();
-        boolean _notEquals = (!Objects.equal(_package, null));
-        if (_notEquals) {
-          String _package_1 = file.getPackage();
-          String _plus = (_package_1 + ".");
-          EList<XtendTypeDeclaration> _xtendTypes_1 = file.getXtendTypes();
-          XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes_1);
-          String _name = _head.getName();
-          _xifexpression = (_plus + _name);
-        } else {
-          EList<XtendTypeDeclaration> _xtendTypes_2 = file.getXtendTypes();
-          XtendTypeDeclaration _head_1 = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes_2);
-          _xifexpression = _head_1.getName();
-        }
-        final String typeName = _xifexpression;
-        String _string_3 = expected.toString();
-        this.compiler.compileToClass(typeName, _string_3);
+      if (this.useJavaCompiler) {
+        final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+          public void accept(final CompilationTestHelper.Result it) {
+            it.getCompiledClass();
+          }
+        };
+        this.compilationTestHelper.compile(input, _function);
       }
       return file;
     } catch (Throwable _e) {

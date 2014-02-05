@@ -29,9 +29,9 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesToStatement(
 				"\n" + 
 				"try {\n" + 
-				"  Class<? extends Object> clazz = Class.forName(\"java.lang.String\");\n" + 
-				"  Class<? extends Object> _superclass = clazz.getSuperclass();\n" + 
-				"  org.eclipse.xtext.xbase.lib.InputOutput.<Class<? extends Object>>println(_superclass);\n" + 
+				"  Class<?> clazz = Class.forName(\"java.lang.String\");\n" + 
+				"  Class<?> _superclass = clazz.getSuperclass();\n" + 
+				"  org.eclipse.xtext.xbase.lib.InputOutput.<Class<?>>println(_superclass);\n" + 
 				"} catch (Throwable _e) {\n" + 
 				"  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);\n" + 
 				"}", 
@@ -344,7 +344,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"String _xblockexpression = null;\n" + 
 				"{\n" + 
 				"  final testdata.Properties1 x = new testdata.Properties1();\n" +  
-				"  _xblockexpression = (x.toString());\n" + 
+				"  _xblockexpression = x.toString();\n" + 
 				"}\n" + 
 				"return _xblockexpression;",
 				"{ val x = new testdata.Properties1() x.toString()}");
@@ -355,7 +355,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"\nint _xblockexpression = (int) 0;\n" +
 				"{\n" +
 				"  final java.util.ArrayList<String> it = new java.util.ArrayList<String>();\n" +
-				"  _xblockexpression = (it.size());\n" +
+				"  _xblockexpression = it.size();\n" +
 				"}\n" +
 				"return _xblockexpression;"
 				, "{ val it = new java.util.ArrayList<String>(); size;}");
@@ -409,7 +409,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"java.util.ArrayList<String> _xblockexpression = null;\n" + 
 				"{\n" + 
 				"  final java.util.ArrayList<String> x = org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"foo\");\n" + 
-				"  _xblockexpression = (x);\n" + 
+				"  _xblockexpression = x;\n" + 
 				"}\n" + 
 				"return _xblockexpression;",
 				"{val x = newArrayList('foo')\n" +
@@ -478,7 +478,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"    int _x = x = 2;\n" +
 				"    _string.substring(_x);\n" +
 				"  }\n" +
-				"  _xblockexpression = (x);\n" +
+				"  _xblockexpression = x;\n" +
 				"}\n" +
 				"return _xblockexpression;",
 				"{var x = 0; new String()?.substring(x=2); x}");
@@ -536,7 +536,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"      _switchResult_1 = \"\";\n" + 
 				"    }\n" + 
 				"  }\n" + 
-				"  _xblockexpression = (_switchResult_1);\n" + 
+				"  _xblockexpression = _switchResult_1;\n" + 
 				"}\n" + 
 				"return _xblockexpression;",
 				"{" +

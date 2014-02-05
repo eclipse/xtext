@@ -384,6 +384,10 @@ public class ScopeProviderAccess {
 		public boolean isTypeLiteral() {
 			return false;
 		}
+		
+		public int getNumberOfIrrelevantParameters() {
+			return 0;
+		}
 
 	}
 

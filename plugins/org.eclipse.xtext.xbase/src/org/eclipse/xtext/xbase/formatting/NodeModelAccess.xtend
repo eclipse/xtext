@@ -42,7 +42,7 @@ class NodeModelAccess {
 	def ILeafNode immediatelyFollowingKeyword(INode node, String kw) {
 		var current = node
 		while (current instanceof ICompositeNode)
-			current = (current as ICompositeNode).lastChild
+			current = current.lastChild
 		val current1 = current
 		val result = current1.findNextLeaf[current1 != it && grammarElement instanceof Keyword]
 		if (result != null && result.text == kw) result

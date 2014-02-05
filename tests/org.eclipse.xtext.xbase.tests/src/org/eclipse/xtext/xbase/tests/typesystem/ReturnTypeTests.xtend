@@ -142,6 +142,14 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 		"while(if (true) return 1 else false) ''.length".resolvesTo("Integer")
 	}
 	
+	@Test def void testWhileExpression_04() throws Exception {
+		"while(null instanceof String) return ''".resolvesTo("String")
+	}
+	
+	@Test def void testWhileExpression_05() throws Exception {
+		"{ while(null instanceof String) return '' return '' }".resolvesTo("String")
+	}
+	
 	@Test override testTryCatchFinallyExpression_08() throws Exception {
 		"try return 'foo' catch (Exception e) return 'bar'".resolvesTo("String") 
 	}

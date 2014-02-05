@@ -186,7 +186,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 	
 	protected LightweightTypeReference getPrimitiveVoid(ITypeComputationState state) {
-		return getTypeForName(Void.TYPE, state);
+		return getRawTypeForName(Void.TYPE, state.getReferenceOwner());
 	}
 	
 	protected static abstract class BranchExpressionProcessor {
@@ -412,6 +412,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 					assert potentialEnumType != null;
 					caseState.addTypeToStaticImportScope((JvmDeclaredType) localPotentialEnumType);
 				}
+				caseState.recordScope(casePart);
 				caseState.computeTypes(casePart.getCase());
 			}
 			XExpression then = casePart.getThen();
@@ -505,6 +506,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 
 	protected void addLocalToCurrentScope(XVariableDeclaration localVariable, ITypeComputationState state) {
 		state.addLocalToCurrentScope(localVariable);
+		state.rewriteScope(localVariable);
 	}
 
 	protected void _computeTypes(XVariableDeclaration object, ITypeComputationState state) {
@@ -573,7 +575,6 @@ public class XbaseTypeComputer implements ITypeComputer {
 				variableType = new UnknownTypeReference(variableType.getOwner());
 			}
 			state.assignType(object, variableType, false);
-			state.addExtensionToCurrentScope(object);
 		}
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		state.acceptActualType(primitiveVoid);
@@ -1151,6 +1152,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 					? state.getConverter().toLightweightReference(parameterType)
 					: new AnyTypeReference(state.getReferenceOwner());
 			ITypeComputationState catchClauseState = assignType(catchClauseParam, lightweightReference, state);
+			state.recordScope(catchClause);
 			catchClauseState.computeTypes(catchClause.getExpression());
 		}
 		// TODO validate / handle return / throw in finally block

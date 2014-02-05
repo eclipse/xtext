@@ -21,6 +21,7 @@ public class PureXbaseUiModule extends org.eclipse.xtext.purexbase.ui.AbstractPu
 		super(plugin);
 	}
 	
+	@Override
 	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 		return AutoEditStrategyProvider.class;
 	}

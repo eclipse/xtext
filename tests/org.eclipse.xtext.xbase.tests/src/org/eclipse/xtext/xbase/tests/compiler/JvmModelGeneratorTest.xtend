@@ -32,7 +32,6 @@ import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDepen
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelCompleter
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.xtext.xbase.lib.Functions
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjectorProvider
 import org.junit.Before

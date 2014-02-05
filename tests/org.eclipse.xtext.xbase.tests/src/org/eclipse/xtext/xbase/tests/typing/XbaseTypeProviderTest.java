@@ -12,8 +12,6 @@ import java.math.BigInteger;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
@@ -23,7 +21,8 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -31,13 +30,12 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge
  */
-@SuppressWarnings("deprecation")
 public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	
 	@Test public void testTypeForVoidClosure() throws Exception {
 		XExpression expression = expression("newArrayList('foo','bar').forEach [] ", true);
 		XExpression closure = ((XMemberFeatureCall)expression).getMemberCallArguments().get(0);
-		JvmTypeReference type = typeProvider.getType(closure);
+		LightweightTypeReference type = getType(closure);
 		assertEquals("(String)=>void", type.getSimpleName());
 	}
 	
@@ -75,7 +73,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 				"}");
 		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
 		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
-		JvmTypeReference typeRef = typeProvider.getType(closure);
+		LightweightTypeReference typeRef = getType(closure);
 		assertEquals("(java.lang.Object)=>java.lang.Object", toString(typeRef));
 	}
 	
@@ -88,7 +86,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 				"}");
 		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(1);
 		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
-		JvmTypeReference typeRef = typeProvider.getType(closure);
+		LightweightTypeReference typeRef = getType(closure);
 		assertEquals("(java.lang.Object)=>boolean", toString(typeRef));
 	}
 	
@@ -115,15 +113,15 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	
 	@Test public void testSwitchExpression_1() throws Exception {
 		XExpression expression = expression("switch true { case true : return 's' default: null}");
-		JvmTypeReference type = typeProvider.getType(expression);
-		assertTrue(type instanceof JvmAnyTypeReference);
+		LightweightTypeReference type = getType(expression);
+		assertTrue(type.isAny());
 	}
 	@Test public void testSwitchExpression_2() throws Exception {
 		XExpression expression = expression(
 							"switch e {\n" + 
 							"  Object : return null\n" + 
 							"}");
-		JvmTypeReference type = typeProvider.getType(expression);
+		LightweightTypeReference type = getType(expression);
 		assertEquals("void", type.getIdentifier());
 	}
 	
@@ -132,19 +130,19 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 //		assertEquals("java.lang.Object", toString(typeProvider.getType(expression.getSwitch())));
 //		assertEquals("java.lang.String", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
 //		assertEquals("java.lang.StringBuffer", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
-		assertEquals("java.io.Serializable & java.lang.CharSequence", toString(typeProvider.getType(expression)));
+		assertEquals("java.io.Serializable & java.lang.CharSequence", toString(getType(expression)));
 	}
 	
 	@Test public void testTypeGuardedCase_1() throws Exception {
 		XSwitchExpression expression = (XSwitchExpression) expression("switch s: '' as CharSequence { Cloneable: s String: s }", true);
-		assertEquals("java.lang.CharSequence", toString(typeProvider.getType(expression.getSwitch())));
-		assertEquals("java.lang.CharSequence & java.lang.Cloneable", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
-		assertEquals("java.lang.String", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
-		assertEquals("java.lang.CharSequence", toString(typeProvider.getType(expression)));
+		assertEquals("java.lang.CharSequence", toString(getType(expression.getSwitch())));
+		assertEquals("java.lang.CharSequence & java.lang.Cloneable", toString(getType(expression.getCases().get(0).getThen())));
+		assertEquals("java.lang.String", toString(getType(expression.getCases().get(1).getThen())));
+		assertEquals("java.lang.CharSequence", toString(getType(expression)));
 	}
 	
 	@Test public void testSwitchExpression_Bug343100() throws Exception {
-		assertResolvedType("java.lang.Class<? extends java.lang.Object>",
+		assertResolvedType("java.lang.Class<?>",
 			"switch 'a' {\n" + 
 			"  case null: typeof(java.lang.String)\n" + 
 			"  case 'a': typeof(java.lang.Void)\n" + 
@@ -296,7 +294,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testListLiteral_5() throws Exception {
-		assertResolvedType("java.util.List<? extends java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", "#[1,2.0,3]");
+		assertResolvedType("java.util.List<? extends java.lang.Number & java.lang.Comparable<?>>", "#[1,2.0,3]");
 	}
 	
 	@Test public void testSetLiteral_0() throws Exception {
@@ -320,7 +318,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testSetLiteral_5() throws Exception {
-		assertResolvedType("java.util.Set<? extends java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", "#{1,2.0,3}");
+		assertResolvedType("java.util.Set<? extends java.lang.Number & java.lang.Comparable<?>>", "#{1,2.0,3}");
 	}
 
 	@Test public void testCastExpression() throws Exception {
@@ -360,7 +358,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testFeatureCall_04() throws Exception {
-		assertResolvedType("java.util.List<java.lang.Comparable<? extends java.lang.Object> & java.io.Serializable>", "new testdata.ClassWithVarArgs().toList('', 1)");
+		assertResolvedType("java.util.List<java.lang.Comparable<?> & java.io.Serializable>", "new testdata.ClassWithVarArgs().toList('', 1)");
 	}
 	
 	@Test public void testFeatureCall_05() throws Exception {
@@ -368,7 +366,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType("java.util.List<java.lang.Number>", "new testdata.ClassWithVarArgs().toNumberList()");
 		assertResolvedType("java.util.List<java.lang.Integer>", "new testdata.ClassWithVarArgs().toNumberList(0)");
 		assertResolvedType("java.util.List<java.lang.Integer>", "new testdata.ClassWithVarArgs().toNumberList(0, 1)");
-		assertResolvedType("java.util.List<java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", "new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)");
+		assertResolvedType("java.util.List<java.lang.Number & java.lang.Comparable<?>>", "new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)");
 	}
 	
 	@Test public void testFeatureCall_06() throws Exception {
@@ -541,7 +539,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 				"{ val Object o = newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue).head }", true);
 		XVariableDeclaration variableDeclaration = (XVariableDeclaration) block.getExpressions().get(0);
 		XExpression memberCallTarget = ((XMemberFeatureCall) variableDeclaration.getRight()).getMemberCallTarget();
-		JvmTypeReference typeRef = typeProvider.getType(memberCallTarget);
+		LightweightTypeReference typeRef = getType(memberCallTarget);
 		assertNotNull("type ref was null for " + memberCallTarget, typeRef);
 		assertEquals("java.util.List<java.lang.Integer>", toString(typeRef));
 	}
@@ -672,13 +670,13 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testNull() throws Exception {
-		assertNull(typeProvider.getType(null));
+		assertNull(getType(null));
 	}
 
 	@Test public void testProxy() throws Exception {
 		XFeatureCall proxy = XbaseFactory.eINSTANCE.createXFeatureCall();
 		((InternalEObject) proxy).eSetProxyURI(URI.createURI("path#fragment"));
-		assertNull(typeProvider.getType(proxy));
+		assertNull(getType(proxy));
 	}
 	
 	@Test public void testMethodTypeParamInference_00() throws Exception {
@@ -703,16 +701,20 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Inject
-	protected ITypeProvider typeProvider;
+	protected IBatchTypeResolver typeResolver;
 
 	public void assertResolvedType(String typeName, String expression) throws Exception {
 		final XExpression expression2 = expression(expression, true);
-		JvmTypeReference typeRef = typeProvider.getType(expression2);
+		LightweightTypeReference typeRef = getType(expression2);
 		assertNotNull("type ref was null for " + expression, typeRef);
 		assertEquals(typeName, toString(typeRef));
 	}
 
-	protected String toString(JvmTypeReference typeref) {
+	protected LightweightTypeReference getType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getActualType(expression);
+	}
+
+	protected String toString(LightweightTypeReference typeref) {
 		return typeref.getIdentifier();
 	}
 

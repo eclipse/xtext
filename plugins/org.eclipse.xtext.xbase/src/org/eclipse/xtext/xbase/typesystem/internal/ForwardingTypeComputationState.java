@@ -200,4 +200,12 @@ public abstract class ForwardingTypeComputationState implements ITypeComputation
 		return delegate.isIgnored(issueCode);
 	}
 	
+	public void recordScope(EObject context) {
+		delegate.recordScope(context);
+	}
+	
+	public void rewriteScope(XExpression context) {
+		delegate.rewriteScope(context);
+	}
+	
 }

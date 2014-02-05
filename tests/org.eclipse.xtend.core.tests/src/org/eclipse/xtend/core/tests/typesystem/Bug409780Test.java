@@ -13,11 +13,12 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -25,7 +26,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class Bug409780Test extends AbstractXtendTestCase {
 	
 	@Override
@@ -37,7 +37,14 @@ public class Bug409780Test extends AbstractXtendTestCase {
 	protected IXtendJvmAssociations associator;
 	
 	@Inject
-	private ITypeProvider typeProvider;
+	private IBatchTypeResolver typeResolver;
+	
+	private LightweightTypeReference getType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getActualType(expression);
+	}
+	private LightweightTypeReference getExpectedType(XExpression expression) {
+		return typeResolver.resolveTypes(expression).getExpectedType(expression);
+	}
 	
 	@Test public void testMissingTypeArgumentInference() throws Exception {
 		XtendFile file = file(
@@ -56,10 +63,10 @@ public class Bug409780Test extends AbstractXtendTestCase {
 		assertTrue(featureCall.isStatic());
 		assertTrue(featureCall.isExtension());
 		assertFalse(featureCall.isTypeLiteral());
-		JvmTypeReference type = typeProvider.getType(featureCall);
-		assertEquals("java.lang.Iterable<T>", type.getQualifiedName());
-		JvmTypeReference expectedType = typeProvider.getExpectedType(featureCall);
-		assertEquals("java.lang.Iterable<T>", expectedType.getQualifiedName());
+		LightweightTypeReference type = getType(featureCall);
+		assertEquals("java.lang.Iterable<T>", type.getIdentifier());
+		LightweightTypeReference expectedType = getExpectedType(featureCall);
+		assertEquals("java.lang.Iterable<T>", expectedType.getIdentifier());
 	}
 	
 	@Test public void testConstraintsInfluenceType() throws Exception {
@@ -79,8 +86,8 @@ public class Bug409780Test extends AbstractXtendTestCase {
 		assertTrue(featureCall.isStatic());
 		assertTrue(featureCall.isExtension());
 		assertFalse(featureCall.isTypeLiteral());
-		JvmTypeReference type = typeProvider.getType(featureCall);
-		assertEquals("java.lang.Iterable<java.lang.Appendable>", type.getQualifiedName());
+		LightweightTypeReference type = getType(featureCall);
+		assertEquals("java.lang.Iterable<java.lang.Appendable>", type.getIdentifier());
 	}
 	
 	@Test public void testConstraintsInfluenceFeatureScope() throws Exception {
@@ -100,8 +107,8 @@ public class Bug409780Test extends AbstractXtendTestCase {
 		assertTrue(featureCall.isStatic());
 		assertTrue(featureCall.isExtension());
 		assertFalse(featureCall.isTypeLiteral());
-		JvmTypeReference type = typeProvider.getType(featureCall);
-		assertEquals("java.lang.Iterable<java.lang.Appendable>", type.getQualifiedName());
+		LightweightTypeReference type = getType(featureCall);
+		assertEquals("java.lang.Iterable<java.lang.Appendable>", type.getIdentifier());
 	}
 	
 	@Test public void testConstraintsInfluenceFeatureScope_02() throws Exception {
@@ -121,8 +128,8 @@ public class Bug409780Test extends AbstractXtendTestCase {
 		assertTrue(featureCall.isStatic());
 		assertTrue(featureCall.isExtension());
 		assertFalse(featureCall.isTypeLiteral());
-		JvmTypeReference type = typeProvider.getType(featureCall);
-		assertEquals("java.lang.Iterable<java.lang.Appendable>", type.getQualifiedName());
+		LightweightTypeReference type = getType(featureCall);
+		assertEquals("java.lang.Iterable<java.lang.Appendable>", type.getIdentifier());
 	}
 
 

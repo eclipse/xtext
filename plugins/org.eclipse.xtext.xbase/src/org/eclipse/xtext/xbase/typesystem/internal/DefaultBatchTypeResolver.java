@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -55,36 +54,6 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 		return nonArtificialObject;
 	}
 	
-	public IScope getFeatureScope(@Nullable XAbstractFeatureCall featureCall) {
-		if (featureCall == null || featureCall.eIsProxy()) {
-			return IScope.NULLSCOPE;
-		}
-		List<EObject> roots = getEntryPoints(featureCall);
-		for(EObject root: roots) {
-			AbstractRootedReentrantTypeResolver resolver = getOrCreateResolver(root);
-			if (resolver.isHandled(featureCall)) {
-				return resolver.getFeatureScope(featureCall);
-			}
-		}
-		return IScope.NULLSCOPE;
-	}
-	
-	public IResolvedTypes getResolvedTypesInContextOf(@Nullable EObject context) {
-		if (context == null || context.eIsProxy())
-			return IResolvedTypes.NULL;
-		// TODO: remove when we switch to an Xtend scope provider without artificial feature calls  
-		EObject nonArtificialObject = getNonArtificialObject(context);
-		// TODO end
-		List<EObject> roots = getEntryPoints(nonArtificialObject);
-		for(EObject root: roots) {
-			AbstractRootedReentrantTypeResolver resolver = getOrCreateResolver(root);
-			if (resolver.isHandled(context)) {
-				return resolver.getResolvedTypesInContextOf(context);
-			}
-		}
-		return IResolvedTypes.NULL;
-	}
-
 	protected IReentrantTypeResolver getTypeResolver(EObject object) {
 		List<EObject> roots = getEntryPoints(object);
 		if (roots.size() == 1) {
@@ -159,15 +128,6 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 					return newResolver.isHandled(expression);
 				}
 
-				@Override
-				protected IScope getFeatureScope(XAbstractFeatureCall featureCall) {
-					return newResolver.getFeatureScope(featureCall);
-				}
-				
-				@Override
-				protected IResolvedTypes getResolvedTypesInContextOf(EObject context) {
-					return newResolver.getResolvedTypesInContextOf(context);
-				}
 			};
 			result.initializeFrom(root);
 			return result;

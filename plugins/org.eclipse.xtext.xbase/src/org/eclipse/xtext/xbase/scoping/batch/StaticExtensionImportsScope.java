@@ -125,10 +125,14 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	@Override
 	protected void addDescriptions(JvmFeature feature, TypeBucket bucket, List<IEObjectDescription> result) {
 		QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
-		result.add(createDescription(featureName, feature, bucket));
+		BucketedEObjectDescription description = createDescription(featureName, feature, bucket);
+		if (description != null)
+			result.add(description);
 		QualifiedName operator = operatorMapping.getOperator(featureName);
 		if (operator != null) {
-			result.add(createDescription(operator, feature, bucket));
+			description = createDescription(operator, feature, bucket);
+			if (description != null)
+				result.add(description);
 		}
 	}
 }

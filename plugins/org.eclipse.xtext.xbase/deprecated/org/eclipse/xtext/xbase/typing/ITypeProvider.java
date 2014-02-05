@@ -7,25 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
-import java.util.List;
-
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-
-import com.google.inject.ImplementedBy;
-import com.google.inject.Provider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @deprecated Use the {@link IBatchTypeResolver} instead.
  */
 @Deprecated
-@SuppressWarnings("deprecation")
-@ImplementedBy(XbaseTypeProvider.class)
 public interface ITypeProvider {
 
 	/**
@@ -107,34 +98,4 @@ public interface ITypeProvider {
 	 */
 	public JvmTypeReference getCommonReturnType(XExpression expression, boolean assumeImplicitReturn);
 	
-	/**
-	 * returns all exception types, thrown within the given expression.
-	 * This includes explicitly declared {@link RuntimeException}s as well.
-	 * 
-	 * @param expression May not be <code>null</code>.
-	 * @return the iterable of fully-resolved exception types, if a correct, fully-linkable model is
-	 *         given. <code>null</code> indicates a problem during computation, an empty iterable means no thrown exceptions were found.
-	 */
-	public Iterable<JvmTypeReference> getThrownExceptionTypes(XExpression expression);
-	
-	/**
-	 * returns the exception types, declared to be thrown by referencing / executing the passed {@link JvmIdentifiableElement}.
-	 * This includes explicitly declared {@link RuntimeException}s as well.
-	 * 
-	 * @param identifiable May not be <code>null</code>.
-	 * @return the iterable of fully-resolved exception types, if a correct, fully-linkable model is
-	 *         given. <code>null</code> indicates a problem during computation, an empty iterable means no thrown exceptions were found.
-	 */
-	public Iterable<JvmTypeReference> getThrownExceptionForIdentifiable(JvmIdentifiableElement identifiable);
-
-	public ITypeArgumentContext getTypeArgumentContext(
-			XAbstractFeatureCall featureCall,
-			List<XExpression> actualArguments,
-			Provider<JvmTypeReference> receiverTypeProvider,
-			JvmIdentifiableElement feature);
-
-	public ITypeArgumentContext getTypeArgumentContext(
-			XConstructorCall constructorCall, 
-			JvmConstructor constructor);
-
 }

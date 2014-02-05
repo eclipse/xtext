@@ -85,6 +85,11 @@ public interface IResolvedExecutable {
 	LightweightTypeReference getContextType();
 	
 	/**
+	 * Returns the resolved type of the declarator of this {@link #getDeclaration() declaration}.
+	 */
+	LightweightTypeReference getResolvedDeclarator();
+	
+	/**
 	 * Returns the list of declared type parameters of the {@link #getDeclaration() executable}.
 	 * 
 	 * @return the list of declared type parameters.

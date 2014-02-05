@@ -13,7 +13,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.ISynchronizable;
-import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -62,34 +61,6 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 			}
 		});
 		return result;
-	}
-	
-	@NonNull
-	public IScope getFeatureScope(@Nullable XAbstractFeatureCall featureCall) {
-		if (featureCall != null) {
-			Resource resource = featureCall.eResource();
-			if (resource instanceof ISynchronizable<?>) {
-				synchronized(((ISynchronizable<?>) resource).getLock()) {
-					return delegate.getFeatureScope(featureCall);
-				}
-			}
-			return delegate.getFeatureScope(featureCall);
-		}
-		return IScope.NULLSCOPE;
-	}
-	
-	@NonNull
-	public IResolvedTypes getResolvedTypesInContextOf(@Nullable EObject context) {
-		if (context != null) {
-			Resource resource = context.eResource();
-			if (resource instanceof ISynchronizable<?>) {
-				synchronized(((ISynchronizable<?>) resource).getLock()) {
-					return delegate.getResolvedTypesInContextOf(context);
-				}
-			}
-			return delegate.getResolvedTypesInContextOf(context);
-		}
-		return IResolvedTypes.NULL;
 	}
 	
 	@NonNullByDefault

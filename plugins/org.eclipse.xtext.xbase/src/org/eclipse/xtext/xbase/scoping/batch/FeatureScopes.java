@@ -46,6 +46,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Utility class when dealing with feature scopes or constructor scopes.
@@ -56,6 +57,7 @@ import com.google.inject.Inject;
  * 
  * TODO constructor scopes
  */
+@Singleton
 public class FeatureScopes implements IFeatureNames {
 
 	@Inject
@@ -138,6 +140,7 @@ public class FeatureScopes implements IFeatureNames {
 		return parent;
 	}
 
+	@Nullable
 	protected XAbstractFeatureCall asAbstractFeatureCall(EObject context) {
 		return context instanceof XAbstractFeatureCall ? (XAbstractFeatureCall) context : null;
 	}
