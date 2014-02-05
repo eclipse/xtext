@@ -8,24 +8,22 @@
 package org.eclipse.xtend.ide.tests.contentassist;
 
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Ignore("TODO fix me")
 public class Bug348446Test extends AbstractXtendContentAssistBugTest {
 
 	@Test public void testVar() throws Exception {
-		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().va").assertText("variable");
-		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().^va").assertText();
+		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().va").assertText("variable", "^var");
+		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().^va").assertText("^var");
 	}
 	
 	@Test public void testGetWhile() throws Exception {
-		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().wh").assertText("whileYouCan");
-		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().getWh").assertText("whileYouCan");
-		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().^wh").assertText();
+		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().wh").assertText("whileYouCan", "^while");
+		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().getWh").assertText("whileYouCan", "^while");
+		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().^wh").assertText("^while");
 	}
 	
 	@Override

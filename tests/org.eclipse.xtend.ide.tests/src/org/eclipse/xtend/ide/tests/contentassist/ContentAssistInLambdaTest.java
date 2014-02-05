@@ -9,9 +9,6 @@ package org.eclipse.xtend.ide.tests.contentassist;
 
 import java.util.List;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
 import com.google.common.collect.Lists;
 
 /**
@@ -19,13 +16,6 @@ import com.google.common.collect.Lists;
  */
 public class ContentAssistInLambdaTest extends ContentAssistTest {
 
-	@Override
-	@Ignore
-	//TODO: There's an unexpected equals()
-	@Test public void testEmptyInput() throws Exception {
-		super.testEmptyInput();
-	}
-	
 	@Override
 	protected String getPrefix() {
 		return "class Name { def (Name)=>void _operation() { [";
@@ -40,9 +30,7 @@ public class ContentAssistInLambdaTest extends ContentAssistTest {
 	protected String[] getKeywordsAndStatics() {
 		List<String> result = Lists.newArrayList(super.getKeywordsAndStatics());
 		result.add("it");
-		// this.equals(it)
-		result.add("equals");
-		result.remove("equals()");
+		result.add("self");
 		return result.toArray(new String[result.size()]);
 	}
 }

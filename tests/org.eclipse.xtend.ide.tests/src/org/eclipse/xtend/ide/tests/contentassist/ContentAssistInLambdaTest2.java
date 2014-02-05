@@ -35,30 +35,22 @@ public class ContentAssistInLambdaTest2 extends ContentAssistTest {
 		super.testOnStringLiteral_11();
 	}
 
-	// missing 'bytes'
-	@Ignore
-	@Override
-	@Test
-	public void testAfterBinaryOperation_08() throws Exception {
-		super.testAfterBinaryOperation_08();
-	}
-	
-	// missing 'bytes'
-	@Ignore
-	@Override
-	@Test
-	public void testAfterBinaryOperation_09() throws Exception {
-		super.testAfterBinaryOperation_09();
-	}
-	
 	@Override
 	@Test public void testAfterBinaryOperation_10() throws Exception {
-		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", "null", "!=", "!==", "==", "===", "->", "=>", "+", "?:", "nullOrEmpty");
+		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", 
+				"null", "!=", "!==", "==", "===", 
+				"->", "=>", 
+				"+", 
+				"?:",
+				"<", "<=", "<=>", ">=", ">",
+				/*it.*/"nullOrEmpty");
 	}
 	
 	@Override
 	@Test public void testNull() throws Exception {
-		newBuilder().append("null").assertText("null", "!=", "!==", "+", "==", "===", "->", "?:", "=>", "nullOrEmpty");
+		newBuilder().append("null").assertText("null", "!=", "!==", "+", "==", "===", "->", "?:", "=>",
+				"%", "*", "**", "-", "+=", "-=", "/", "<", "<=", "<=>", ">=", ">",
+				/*it.*/"nullOrEmpty");
 	}
 	
 	@Override
@@ -75,9 +67,8 @@ public class ContentAssistInLambdaTest2 extends ContentAssistTest {
 	protected String[] getKeywordsAndStatics() {
 		List<String> result = Lists.newArrayList(super.getKeywordsAndStatics());
 		result.add("it");
+		result.add("self");
 		result.add("mySpecialLocalVariable");
-		// this.equals(it)
-		result.add("equals");
 		String[] stringFeatures = super.getStringFeatures();
 		List<String> soFar = Lists.newArrayList(result);
 		for (String stringFeature : stringFeatures) {

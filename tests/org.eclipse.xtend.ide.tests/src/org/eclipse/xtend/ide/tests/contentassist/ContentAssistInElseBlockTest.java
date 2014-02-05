@@ -99,12 +99,20 @@ public class ContentAssistInElseBlockTest extends ContentAssistTest {
 	
 	@Override
 	@Test public void testAfterBinaryOperation_10() throws Exception {
-		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", "null", "!=", "!==", "==", "===", "->", "=>", "+", "?:", "nullOrEmpty");
+		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", 
+				"null", "!=", "!==", "==", "===", 
+				"->", "=>", 
+				"+", 
+				"?:",
+				"<", "<=", "<=>", ">=", ">",
+				/*it.*/"nullOrEmpty");
 	}
 	
 	@Override
 	@Test public void testNull() throws Exception {
-		newBuilder().append("null").assertText("null", "!=", "!==", "+", "==", "===", "->", "?:", "=>", "nullOrEmpty");
+		newBuilder().append("null").assertText("null", "!=", "!==", "+", "==", "===", "->", "?:", "=>",
+				"%", "*", "**", "-", "+=", "-=", "/", "<", "<=", "<=>", ">=", ">",
+				/*it.*/"nullOrEmpty");
 	}
 	
 	@Override
@@ -126,9 +134,6 @@ public class ContentAssistInElseBlockTest extends ContentAssistTest {
 	protected String[] getKeywordsAndStatics() {
 		List<String> result = Lists.newArrayList(super.getKeywordsAndStatics());
 		result.add("it");
-//		result.add("mySpecialLocalVariable");
-		// this.equals(it)
-		result.add("equals");
 		String[] stringFeatures = super.getStringFeatures();
 		List<String> soFar = Lists.newArrayList(result);
 		for (String stringFeature : stringFeatures) {

@@ -26,6 +26,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
@@ -39,7 +40,9 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
@@ -175,12 +178,39 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		return new Predicate<IEObjectDescription>() {
 
 			public boolean apply(IEObjectDescription input) {
-				return !input.getName().getFirstSegment().startsWith("_") && delegate.apply(input);
+				boolean result = !input.getName().getFirstSegment().startsWith("_") && delegate.apply(input);
+				if (result) {
+					if (input instanceof IIdentifiableElementDescription) {
+						IIdentifiableElementDescription casted = (IIdentifiableElementDescription) input;
+						if (isDiscouragedExtension(casted)) {
+							return false;
+						}
+					}
+				}
+				return result;
 			}
 
 		};
 	}
 	
+	private final QualifiedName WAIT = QualifiedName.create("java", "lang", "Object", "wait");
+	protected boolean isDiscouragedExtension(IIdentifiableElementDescription description) {
+		if (description.isExtension()) {
+			JvmIdentifiableElement candidate = description.getElementOrProxy();
+			if ("equals".equals(candidate.getSimpleName())) {
+				return description.getNumberOfParameters() == 0;
+			}
+			if ("wait".equals(candidate.getSimpleName())) {
+				return WAIT.equals(candidate.getQualifiedName());
+			}
+		} else { // if (description.getImplicitFirstArgument() != null) {
+			JvmIdentifiableElement candidate = description.getElementOrProxy();
+			if ("equals".equals(candidate.getSimpleName())) {
+				return description.getNumberOfParameters() == 0;
+			}
+		}
+		return false;
+	}
 
 	@Override
 	public void completeType_Extends(EObject model, Assignment assignment, ContentAssistContext context,
@@ -249,7 +279,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	public void completeXFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XtendField) {
-			createLocalVariableAndImplicitProposals(model, context, acceptor);
+			createLocalVariableAndImplicitProposals(context.getPreviousModel(), context, acceptor);
 		} else {
 			super.completeXFeatureCall_Feature(model, assignment, context, acceptor);
 		}
@@ -290,4 +320,11 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		completeInRichString(model, ruleCall, context, acceptor);
 	}
+	
+	@Override
+	public void completeXVariableDeclaration_Right(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
+	}
+	
 }
