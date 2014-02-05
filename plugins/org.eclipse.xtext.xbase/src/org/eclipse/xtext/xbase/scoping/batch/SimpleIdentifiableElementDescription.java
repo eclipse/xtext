@@ -147,4 +147,16 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 	public boolean isTypeLiteral() {
 		return false;
 	}
+	
+	public int getNumberOfIrrelevantParameters() {
+		return 0;
+	}
+	
+	public int getNumberOfParameters() {
+		return 0;
+	}
+	
+	public boolean isValidStaticState() {
+		return true;
+	}
 }

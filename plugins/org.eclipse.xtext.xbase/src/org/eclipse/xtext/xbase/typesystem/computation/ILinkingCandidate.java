@@ -55,7 +55,7 @@ public interface ILinkingCandidate {
 	void applyToModel();
 	
 	// TODO we should use a smarter acceptor here
-	// e.g. it should be possible to suppress diagnostics for children of certain expresions
+	// e.g. it should be possible to suppress diagnostics for children of certain expressions
 	// and therefore it should expose something like 'isSuppressed()'
 	/**
 	 * Produce diagnostics for this condidate. It is not the responsibility of this

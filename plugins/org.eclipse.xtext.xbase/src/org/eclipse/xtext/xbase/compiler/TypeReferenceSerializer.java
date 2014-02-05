@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -96,8 +98,9 @@ public class TypeReferenceSerializer {
 			if (!withoutConstraints) {
 				tracedAppendable.append("?");
 			}
-			if (!wildcard.getConstraints().isEmpty()) {
-				for(JvmTypeConstraint constraint: wildcard.getConstraints()) {
+			List<JvmTypeConstraint> constraints = wildcard.getConstraints();
+			if (!constraints.isEmpty()) {
+				for(JvmTypeConstraint constraint: constraints) {
 					if (constraint instanceof JvmLowerBound) {
 						if (!withoutConstraints)
 							tracedAppendable.append(" super ");
@@ -105,8 +108,13 @@ public class TypeReferenceSerializer {
 						return;
 					}
 				}
+				if (constraints.size() == 1) {
+					if (Object.class.getName().equals(constraints.get(0).getTypeReference().getIdentifier())) {
+						return;
+					}
+				}
 				boolean first = true;
-				for(JvmTypeConstraint constraint: wildcard.getConstraints()) {
+				for(JvmTypeConstraint constraint: constraints) {
 					if (constraint instanceof JvmUpperBound) {
 						if (first) {
 							if (!withoutConstraints)
@@ -153,7 +161,7 @@ public class TypeReferenceSerializer {
 				tracedAppendable.append("<");
 				for(int i = 0; i < parameterized.getArguments().size(); i++) {
 					if (i != 0) {
-						tracedAppendable.append(",");
+						tracedAppendable.append(", ");
 					}
 					serialize(parameterized.getArguments().get(i), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, false);
 				}

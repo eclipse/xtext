@@ -7,25 +7,31 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public abstract class AbstractOutputComparingCompilerTests extends AbstractXbaseTestCase {
 	
 	@Inject
-	private ITypeProvider typeProvider;
+	private IBatchTypeResolver typeResolver;
+	
+	@Inject
+	private CommonTypeComputationServices services;
 	
 	@Inject
 	private TypeReferences typeReferences;
@@ -34,7 +40,10 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 		XExpression model = expression(xbaseCode.toString(),true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
 		ITreeAppendable tracing = new FakeTreeAppendable();
-		JvmTypeReference returnType = typeProvider.getCommonReturnType(model, true);
+		LightweightTypeReference returnType = typeResolver.resolveTypes(model).getReturnType(model);
+		if (returnType == null) {
+			throw new IllegalStateException();
+		}
 		compiler.compile(model, tracing, returnType);
 		assertEquals(expectedJavaCode.toString().trim(), tracing.getContent().toString().trim());
 	}
@@ -43,7 +52,9 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 		XExpression model = expression(xbaseCode.toString(),true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
 		ITreeAppendable tracing = new FakeTreeAppendable();
-		compiler.compile(model, tracing, typeReferences.getTypeForName(Void.TYPE, model));
+		JvmType voidType = typeReferences.findDeclaredType(Void.TYPE, model);
+		ParameterizedTypeReference voidRef = new ParameterizedTypeReference(new StandardTypeReferenceOwner(services, model), voidType);
+		compiler.compile(model, tracing, voidRef);
 		assertEquals(expectedJavaCode, tracing.getContent());
 	}
 	

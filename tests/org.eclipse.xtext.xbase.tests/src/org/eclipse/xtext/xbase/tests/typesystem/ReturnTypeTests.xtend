@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.junit.Test
+import org.eclipse.emf.ecore.EObject
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -140,6 +141,14 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 	
 	@Test def void testWhileExpression_03() throws Exception {
 		"while(if (true) return 1 else false) ''.length".resolvesTo("Integer")
+	}
+	
+	@Test def void testWhileExpression_04() throws Exception {
+		"while(null instanceof String) return ''".resolvesTo("String")
+	}
+	
+	@Test def void testWhileExpression_05() throws Exception {
+		"{ while(null instanceof String) return '' return '' }".resolvesTo("String")
 	}
 	
 	@Test override testTryCatchFinallyExpression_08() throws Exception {
@@ -340,7 +349,7 @@ abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<Lightw
 	
 	@Test 
 	def void testNull() throws Exception {
-		val typeResolution = typeResolver.resolveTypes(null)
+		val typeResolution = typeResolver.resolveTypes(null as EObject)
 		assertNotNull(typeResolution);
 		assertEquals(IResolvedTypes::NULL, typeResolution)
 	}

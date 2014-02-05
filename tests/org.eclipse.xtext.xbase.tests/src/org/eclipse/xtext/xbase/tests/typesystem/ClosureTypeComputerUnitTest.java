@@ -564,7 +564,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 			throw new UnsupportedOperationException();
 		}
 		
-		public boolean isVisible(JvmMember member, @Nullable JvmIdentifiableElement receiverFeature) {
+		public boolean isVisible(JvmMember member, @Nullable LightweightTypeReference receiverType, @Nullable JvmIdentifiableElement receiverFeature) {
 			throw new UnsupportedOperationException();
 		}
 
@@ -584,6 +584,10 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		}
 		
 		public boolean isInstanceContext() {
+			throw new UnsupportedOperationException();
+		}
+		
+		public boolean isConstructorContext() {
 			throw new UnsupportedOperationException();
 		}
 		

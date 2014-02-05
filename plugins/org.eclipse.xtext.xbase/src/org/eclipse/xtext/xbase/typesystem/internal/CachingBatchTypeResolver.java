@@ -13,11 +13,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.ISynchronizable;
-import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.inject.Inject;
@@ -29,7 +27,7 @@ import com.google.inject.Provider;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CachingBatchTypeResolver implements IBatchTypeResolver {
+public class CachingBatchTypeResolver extends AbstractBatchTypeResolver {
 
 	@Inject
 	private OnChangeEvictingCache cache;
@@ -37,11 +35,9 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 	@Inject
 	private DefaultBatchTypeResolver delegate;
 	
+	@Override
 	@NonNull
-	public IResolvedTypes resolveTypes(final @Nullable EObject object) {
-		if (object == null || object.eIsProxy()) {
-			return IResolvedTypes.NULL;
-		}
+	protected IResolvedTypes doResolveTypes(final @Nullable EObject object) {
 		// TODO: remove when we switch to an Xtend scope provider without artificial feature calls  
 		EObject nonArtificialObject = object;
 		if(object.eResource() == null && object instanceof XAbstractFeatureCall) {
@@ -62,34 +58,6 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 			}
 		});
 		return result;
-	}
-	
-	@NonNull
-	public IScope getFeatureScope(@Nullable XAbstractFeatureCall featureCall) {
-		if (featureCall != null) {
-			Resource resource = featureCall.eResource();
-			if (resource instanceof ISynchronizable<?>) {
-				synchronized(((ISynchronizable<?>) resource).getLock()) {
-					return delegate.getFeatureScope(featureCall);
-				}
-			}
-			return delegate.getFeatureScope(featureCall);
-		}
-		return IScope.NULLSCOPE;
-	}
-	
-	@NonNull
-	public IResolvedTypes getResolvedTypesInContextOf(@Nullable EObject context) {
-		if (context != null) {
-			Resource resource = context.eResource();
-			if (resource instanceof ISynchronizable<?>) {
-				synchronized(((ISynchronizable<?>) resource).getLock()) {
-					return delegate.getResolvedTypesInContextOf(context);
-				}
-			}
-			return delegate.getResolvedTypesInContextOf(context);
-		}
-		return IResolvedTypes.NULL;
 	}
 	
 	@NonNullByDefault

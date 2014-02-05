@@ -46,6 +46,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Utility class when dealing with feature scopes or constructor scopes.
@@ -56,6 +57,7 @@ import com.google.inject.Inject;
  * 
  * TODO constructor scopes
  */
+@Singleton
 public class FeatureScopes implements IFeatureNames {
 
 	@Inject
@@ -127,17 +129,20 @@ public class FeatureScopes implements IFeatureNames {
 	}
 
 	protected IScope createConstructorDelegates(EObject context, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
-		IEObjectDescription thisDescription = session.getLocalElement(THIS);
-		if (thisDescription != null) {
-			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
-			LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
-			if (type != null && !type.isUnknown()) {
-				return new ConstructorDelegateScope(parent, type, session, asAbstractFeatureCall(context));
+		if (session.isConstructorContext()) {
+			IEObjectDescription thisDescription = session.getLocalElement(THIS);
+			if (thisDescription != null) {
+				JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
+				LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
+				if (type != null && !type.isUnknown()) {
+					return new ConstructorDelegateScope(parent, type, session, asAbstractFeatureCall(context));
+				}
 			}
 		}
 		return parent;
 	}
 
+	@Nullable
 	protected XAbstractFeatureCall asAbstractFeatureCall(EObject context) {
 		return context instanceof XAbstractFeatureCall ? (XAbstractFeatureCall) context : null;
 	}
@@ -303,6 +308,9 @@ public class FeatureScopes implements IFeatureNames {
 			result = createImplicitExtensionScope(IT, featureCall, session, resolvedTypes, result);
 			return result;
 		} else {
+			if (receiverType == null) {
+				throw new IllegalStateException("Unknown receiver type");
+			}
 			result = createStaticExtensionsScope(receiver, receiverType, false, featureCall, parent, session);
 		}
 		return result;

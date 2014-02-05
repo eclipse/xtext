@@ -472,7 +472,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		} else {
 			preparedResolvedTypes.put(constructor, null);
 		}
-		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession.toInstanceContext(), constructor);
+		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession.toInstanceContext().toConstructorContext(), constructor);
 		addExtensionProviders(state, constructor.getParameters());
 		state.computeTypes();
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, constructor);

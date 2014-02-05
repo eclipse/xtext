@@ -52,6 +52,12 @@ public class UnknownClosureTypeHelper extends AbstractClosureTypeHelper {
 	}
 
 	protected ITypeComputationState getClosureBodyTypeComputationState(ITypeAssigner typeAssigner) {
+		ITypeComputationState result = assignParameters(typeAssigner);
+		result.withinScope(getClosure());
+		return result;
+	}
+
+	protected ITypeComputationState assignParameters(ITypeAssigner typeAssigner) {
 		List<JvmFormalParameter> closureParameters = getClosure().getFormalParameters();
 		int paramCount = closureParameters.size();
 		for(int i = 0; i < paramCount; i++) {

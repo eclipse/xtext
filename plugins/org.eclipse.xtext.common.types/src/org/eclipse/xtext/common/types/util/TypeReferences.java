@@ -9,7 +9,6 @@ package org.eclipse.xtext.common.types.util;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notifier;
@@ -41,7 +40,6 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge - Initial contribution and API
  */
 @Singleton
-@SuppressWarnings("deprecation")
 public class TypeReferences {
 
 	private final static Logger log = Logger.getLogger(TypeReferences.class);
@@ -51,10 +49,7 @@ public class TypeReferences {
 
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
-
-	@Inject
-	private SuperTypeCollector superTypeCollector;
-
+	
 	/**
 	 * @return a fresh {@link JvmAnyTypeReference} or null if {@link Object} is not on the context's classpath
 	 */
@@ -266,23 +261,9 @@ public class TypeReferences {
 		boolean result = className.equals(type.getIdentifier());
 		return result;
 	}
-
+	
 	public boolean isNullOrProxy(final JvmTypeReference reference) {
 		return reference == null || reference.getType() == null || reference.getType().eIsProxy();
-	}
-
-	public boolean isInstanceOf(JvmTypeReference reference, Class<?> clazz) {
-		if (isNullOrProxy(reference))
-			return false;
-		if (is(reference, clazz)) {
-			return true;
-		}
-		Set<JvmTypeReference> types = superTypeCollector.collectSuperTypes(reference);
-		for (JvmTypeReference jvmTypeReference : types) {
-			if (is(jvmTypeReference, clazz))
-				return true;
-		}
-		return false;
 	}
 
 	public boolean isArray(JvmTypeReference type) {
