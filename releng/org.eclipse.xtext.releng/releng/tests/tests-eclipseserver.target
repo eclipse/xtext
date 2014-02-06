@@ -20,7 +20,6 @@
 <unit id="javax.inject" version="0.0.0"/>
 <unit id="org.objectweb.asm" version="0.0.0"/>
 <unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.emf.mwe.sdk.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.xpand" version="0.0.0"/>
 <unit id="org.eclipse.xtend" version="0.0.0"/>
 <unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
@@ -32,9 +31,13 @@
 <repository location="http://download.eclipse.org/technology/swtbot/snapshots/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+<unit id="org.eclipse.emf.mwe.sdk.feature.group" version="0.0.0"/>
+<repository location="https://hudson.eclipse.org/xtext/job/mwe/lastSuccessfulBuild/artifact/build-result/p2.repository/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.xtend.sdk.feature.group" version="0.0.0"/>
-<repository location="https://hudson.eclipse.org/mexx/job/xtext-xtend/lastSuccessfulBuild/artifact/build-result/p2.repository/"/>
+<repository location="https://hudson.eclipse.org/xtext/job/xtext-xtend/lastSuccessfulBuild/artifact/build-result/p2.repository/"/>
 </location>
 </locations>
 </target>
