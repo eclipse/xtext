@@ -352,5 +352,24 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			return _xblockexpression;
 		''')
 	}
+	
+	@Test def void testBug410797_01() throws Exception {
+		'''
+			{ val boolean bug = #[true, false, true].reduce[a,b|a && b] }
+		'''.compilesTo('''
+			final org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean,Boolean,Boolean> _function = new org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean,Boolean,Boolean>() {
+			  public Boolean apply(final Boolean a, final Boolean b) {
+			    boolean _and = false;
+			    if (!(a).booleanValue()) {
+			      _and = false;
+			    } else {
+			      _and = (b).booleanValue();
+			    }
+			    return Boolean.valueOf(_and);
+			  }
+			};
+			final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(com.google.common.collect.Lists.<Boolean>newArrayList(true, false, true)), _function);
+		''')
+	}
 }
 

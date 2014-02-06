@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmDelegateTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -372,6 +373,24 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			XExpression context, 
 			final ITreeAppendable appendable,
 			final Later expression) {
+		if (context instanceof XAbstractFeatureCall && !(context.eContainer() instanceof XAbstractFeatureCall)) {
+			// Avoid javac bug
+			// https://bugs.eclipse.org/bugs/show_bug.cgi?id=410797
+			// TODO make that dependent on the compiler version (javac 1.7 fixed that bug)
+			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) context;
+			if (featureCall.isStatic()) {
+				JvmIdentifiableElement feature = featureCall.getFeature();
+				if (feature instanceof JvmOperation) {
+					if (!((JvmOperation) feature).getTypeParameters().isEmpty()) {
+						appendable.append("(");
+						serialize(primitive, context, appendable);
+						appendable.append(") ");
+						expression.exec(appendable);
+						return;
+					}
+				}
+			}
+		}
 		appendable.append("(");
 		if (mustInsertTypeCast(context, wrapper)) {
 			appendable.append("(");
