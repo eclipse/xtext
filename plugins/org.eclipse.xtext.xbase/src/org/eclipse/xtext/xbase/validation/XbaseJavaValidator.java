@@ -1357,7 +1357,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				Object result = switchConstantExpressionsInterpreter.evaluate(caseExpression);
 				if (result instanceof JvmTypeReference) {
 					JvmTypeReference jvmTypeReference = (JvmTypeReference) result;
-					result = jvmTypeReference.getIdentifier();
+					result = jvmTypeReference.getType();
 				}
 				Multimap<Object, XCasePart> duplicatedCases = typeGuards.get(typeGuardName);
 				if (duplicatedCases == null) {

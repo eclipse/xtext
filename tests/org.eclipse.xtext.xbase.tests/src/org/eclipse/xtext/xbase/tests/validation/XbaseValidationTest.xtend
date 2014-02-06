@@ -80,6 +80,15 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertNoErrors
 	}
 
+	@Test def void testDuplicateCases_typeLiteral_7() {
+		'''
+			switch x : String {
+				case 'java.lang.String': 1
+				case String: 1
+			}
+		'''.expression.assertNoErrors
+	}
+
 	@Test def void testDuplicateCases_boolean() {
 		'''
 			switch x : true {

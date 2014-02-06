@@ -163,6 +163,27 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testDuplicateCases_typeLiteral_7() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("switch x : String {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case \'java.lang.String\': 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("case String: 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testDuplicateCases_boolean() {
     try {
       StringConcatenation _builder = new StringConcatenation();
