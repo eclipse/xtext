@@ -53,11 +53,11 @@ public class StandaloneResourceSetTest {
 		assertEquals("/org/eclipse/xtext/builder/resource/StandaloneResourceSetTest.fake", resource.getURI().toString());
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test
 	public void testGetResource_2() {
 		StandaloneResourceSet resourceSet = new StandaloneResourceSet();
 		resourceSet.createResource(createURI("/org/eclipse/xtext/builder/resource/StandaloneResourceSetTest.fake"));
-		resourceSet.getResource(createURI("/somepackage/StandaloneResourceSetTest_2.fake"), false);
+		assertNull(resourceSet.getResource(createURI("/somepackage/StandaloneResourceSetTest_2.fake"), false));
 	}
 
 	@Test(expected = RuntimeException.class)
@@ -65,11 +65,11 @@ public class StandaloneResourceSetTest {
 		new StandaloneResourceSet().getResource(null, true);
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test
 	public void testGetResource_4() {
 		StandaloneResourceSet resourceSet = new StandaloneResourceSet();
 		resourceSet.createResource(createURI("/org/eclipse/xtext/builder/resource/ResourceWithoutURI.fake"));
-		resourceSet.getResource(createURI("/somepackage/ResourceWithoutURI.fake"), false);
+		assertNull(resourceSet.getResource(createURI("/somepackage/ResourceWithoutURI.fake"), false));
 	}
 
 	@Test
@@ -81,6 +81,15 @@ public class StandaloneResourceSetTest {
 		Resource resource = resourceSet.getResource(uri, false);
 		assertNotNull(resource);
 		assertEquals("/org/eclipse/xtext/builder/resource/StandaloneResourceSetTest.fake", resource.getURI().toString());
+	}
+
+	@Test
+	public void testGetResource_6() {
+		StandaloneResourceSet resourceSet = new StandaloneResourceSet();
+		resourceSet.createResource(createURI("/org/eclipse/xtext/builder/resource/StandaloneResourceSetTest.fake"));
+		resourceSet.createResource(createURI("/org/eclipse/xtext/builder/resource/somepackage/StandaloneResourceSetTest.fake"));
+
+		assertNull(resourceSet.getResource(createURI("/somepackage/StandaloneResourceSetTest.fake"), false));
 	}
 
 }

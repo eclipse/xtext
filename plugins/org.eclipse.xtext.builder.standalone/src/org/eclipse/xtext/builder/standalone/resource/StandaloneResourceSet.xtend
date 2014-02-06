@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.standalone.resource
 
+import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.resource.XtextResourceSet
 
@@ -15,29 +16,32 @@ import org.eclipse.xtext.resource.XtextResourceSet
  */
 class StandaloneResourceSet extends XtextResourceSet {
 
+	static val LOG = Logger.getLogger(StandaloneResourceSet)
+
 	override getResource(URI uri, boolean loadOnDemand) {
-		try {
-			val superResource = super.getResource(uri, loadOnDemand)
-			if (superResource != null) {
-				superResource
-			} else {
-				uri.resourceByLastSegment
-			}
-		} catch (RuntimeException e) {
+		val superResource = super.getResource(uri, loadOnDemand)
+		if (superResource != null) {
+			superResource
+		} else {
+			LOG.warn('''Failed to resolve a resource by URI: '«uri»'; trying to load it by the URI's last segment: '«uri?.lastSegment»'.''');
 			uri.resourceByLastSegment
 		}
 	}
 
 	def getResourceByLastSegment(URI uri) {
 		val lastSegment = uri?.lastSegment
-		if (lastSegment != null) {
-			for (resource : resources) {
-				if (lastSegment == resource.URI?.lastSegment) {
-					return resource
-				}
-			}
+		if (lastSegment == null) {
+			return null
 		}
-		throw new RuntimeException("Cannot create a resource for '" + uri + "'; a registered resource factory is needed")
+		val resources = resources.filter[lastSegment == URI?.lastSegment]
+		if (resources.empty) {
+			return null
+		}
+		if (resources.size > 1) {
+			LOG.error('''Failed to resolve a resource by the URI's last segment: '«uri?.lastSegment»'. Several resources are matched: «FOR resourceURI : resources.map[URI] SEPARATOR ','»'«resourceURI»'«ENDFOR».''');
+			return null
+		}
+		return resources.head
 	}
 
 }
