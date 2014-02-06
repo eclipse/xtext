@@ -2015,4 +2015,76 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }
+  
+  @Test
+  public void formatEmptySwitchSL() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch null { }");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("switch   null    {      }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatEmptySwitchSL_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch null { default: 1 }");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("switch   null    {    default    :  1  }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatEmptySwitchML() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch null {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("switch   null    {      ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatEmptySwitchML_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("switch null {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("default: 1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("switch   null    {      ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("default : 1");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
 }

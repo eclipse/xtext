@@ -1736,11 +1736,11 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XSwitchExpression returns XExpression:
 		//	{XSwitchExpression} "switch" (=> (localVarName=ValidID ":")? switch=XExpression | => ("(" localVarName=ValidID ":")
-		//	switch=XExpression ")") "{" cases+=XCasePart+ ("default" ":" default=XExpression)? "}";
+		//	switch=XExpression ")") "{" cases+=XCasePart* ("default" ":" default=XExpression)? "}";
 		public ParserRule getRule() { return rule; }
 
 		//{XSwitchExpression} "switch" (=> (localVarName=ValidID ":")? switch=XExpression | => ("(" localVarName=ValidID ":")
-		//switch=XExpression ")") "{" cases+=XCasePart+ ("default" ":" default=XExpression)? "}"
+		//switch=XExpression ")") "{" cases+=XCasePart* ("default" ":" default=XExpression)? "}"
 		public Group getGroup() { return cGroup; }
 
 		//{XSwitchExpression}
@@ -1809,7 +1809,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//cases+=XCasePart+
+		//cases+=XCasePart*
 		public Assignment getCasesAssignment_4() { return cCasesAssignment_4; }
 
 		//XCasePart
@@ -3435,7 +3435,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	//XSwitchExpression returns XExpression:
 	//	{XSwitchExpression} "switch" (=> (localVarName=ValidID ":")? switch=XExpression | => ("(" localVarName=ValidID ":")
-	//	switch=XExpression ")") "{" cases+=XCasePart+ ("default" ":" default=XExpression)? "}";
+	//	switch=XExpression ")") "{" cases+=XCasePart* ("default" ":" default=XExpression)? "}";
 	public XSwitchExpressionElements getXSwitchExpressionAccess() {
 		return (pXSwitchExpression != null) ? pXSwitchExpression : (pXSwitchExpression = new XSwitchExpressionElements());
 	}

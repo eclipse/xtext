@@ -421,7 +421,7 @@ ruleXSwitchExpression :
 		) => (
 			'(' ruleValidID ':'
 		) ) ruleXExpression ')'
-	) '{' ruleXCasePart+ (
+	) '{' ruleXCasePart* (
 		'default' ':' ruleXExpression
 	)? '}'
 ;

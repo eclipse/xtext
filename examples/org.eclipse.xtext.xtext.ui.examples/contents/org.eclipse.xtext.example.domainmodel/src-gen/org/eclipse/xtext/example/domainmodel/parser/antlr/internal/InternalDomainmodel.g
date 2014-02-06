@@ -3223,7 +3223,7 @@ ruleValidID
 	    }
 
 )
-)+(	otherlv_12='default' 
+)*(	otherlv_12='default' 
     {
     	newLeafNode(otherlv_12, grammarAccess.getXSwitchExpressionAccess().getDefaultKeyword_5_0());
     }

@@ -20280,16 +20280,9 @@ rule__XSwitchExpression__Group__4__Impl
     }
 :
 (
-(
-{ before(grammarAccess.getXSwitchExpressionAccess().getCasesAssignment_4()); }
-(rule__XSwitchExpression__CasesAssignment_4)
-{ after(grammarAccess.getXSwitchExpressionAccess().getCasesAssignment_4()); }
-)
-(
 { before(grammarAccess.getXSwitchExpressionAccess().getCasesAssignment_4()); }
 (rule__XSwitchExpression__CasesAssignment_4)*
 { after(grammarAccess.getXSwitchExpressionAccess().getCasesAssignment_4()); }
-)
 )
 
 ;

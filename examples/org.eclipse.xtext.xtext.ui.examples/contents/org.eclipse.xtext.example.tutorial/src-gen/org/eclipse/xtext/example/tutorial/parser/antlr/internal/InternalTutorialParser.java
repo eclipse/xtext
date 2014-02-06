@@ -1096,11 +1096,11 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
                 {
                 int LA7_2 = input.LA(2);
 
-                if ( (LA7_2==EOF||(LA7_2>=RULE_STRING && LA7_2<=RULE_ID)||LA7_2==14||(LA7_2>=16 && LA7_2<=19)||(LA7_2>=21 && LA7_2<=57)||(LA7_2>=59 && LA7_2<=82)) ) {
-                    alt7=2;
-                }
-                else if ( (LA7_2==20) ) {
+                if ( (LA7_2==20) ) {
                     alt7=1;
+                }
+                else if ( (LA7_2==EOF||(LA7_2>=RULE_STRING && LA7_2<=RULE_ID)||LA7_2==14||(LA7_2>=16 && LA7_2<=19)||(LA7_2>=21 && LA7_2<=57)||(LA7_2>=59 && LA7_2<=82)) ) {
+                    alt7=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -1134,11 +1134,11 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
                 {
                 int LA7_4 = input.LA(2);
 
-                if ( (LA7_4==EOF||(LA7_4>=RULE_STRING && LA7_4<=RULE_ID)||LA7_4==14||(LA7_4>=16 && LA7_4<=19)||(LA7_4>=21 && LA7_4<=57)||(LA7_4>=59 && LA7_4<=82)) ) {
-                    alt7=2;
-                }
-                else if ( (LA7_4==20) ) {
+                if ( (LA7_4==20) ) {
                     alt7=1;
+                }
+                else if ( (LA7_4==EOF||(LA7_4>=RULE_STRING && LA7_4<=RULE_ID)||LA7_4==14||(LA7_4>=16 && LA7_4<=19)||(LA7_4>=21 && LA7_4<=57)||(LA7_4>=59 && LA7_4<=82)) ) {
+                    alt7=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -1153,11 +1153,11 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
                 {
                 int LA7_5 = input.LA(2);
 
-                if ( (LA7_5==EOF||(LA7_5>=RULE_STRING && LA7_5<=RULE_ID)||LA7_5==14||(LA7_5>=16 && LA7_5<=19)||(LA7_5>=21 && LA7_5<=57)||(LA7_5>=59 && LA7_5<=82)) ) {
-                    alt7=2;
-                }
-                else if ( (LA7_5==20) ) {
+                if ( (LA7_5==20) ) {
                     alt7=1;
+                }
+                else if ( (LA7_5==EOF||(LA7_5>=RULE_STRING && LA7_5<=RULE_ID)||LA7_5==14||(LA7_5>=16 && LA7_5<=19)||(LA7_5>=21 && LA7_5<=57)||(LA7_5>=59 && LA7_5<=82)) ) {
+                    alt7=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -8513,7 +8513,7 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXSwitchExpression"
-    // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2875:1: ruleXSwitchExpression returns [EObject current=null] : ( () otherlv_1= 'switch' ( ( ( ( ( ( ( ruleValidID ) ) ':' ) )=> ( ( (lv_localVarName_2_0= ruleValidID ) ) otherlv_3= ':' ) )? ( (lv_switch_4_0= ruleXExpression ) ) ) | ( ( ( ( '(' ( ( ruleValidID ) ) ':' ) )=> (otherlv_5= '(' ( (lv_localVarName_6_0= ruleValidID ) ) otherlv_7= ':' ) ) ( (lv_switch_8_0= ruleXExpression ) ) otherlv_9= ')' ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )+ (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) ;
+    // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2875:1: ruleXSwitchExpression returns [EObject current=null] : ( () otherlv_1= 'switch' ( ( ( ( ( ( ( ruleValidID ) ) ':' ) )=> ( ( (lv_localVarName_2_0= ruleValidID ) ) otherlv_3= ':' ) )? ( (lv_switch_4_0= ruleXExpression ) ) ) | ( ( ( ( '(' ( ( ruleValidID ) ) ':' ) )=> (otherlv_5= '(' ( (lv_localVarName_6_0= ruleValidID ) ) otherlv_7= ':' ) ) ( (lv_switch_8_0= ruleXExpression ) ) otherlv_9= ')' ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) ;
     public final EObject ruleXSwitchExpression() throws RecognitionException {
         EObject current = null;
 
@@ -8542,11 +8542,11 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2878:28: ( ( () otherlv_1= 'switch' ( ( ( ( ( ( ( ruleValidID ) ) ':' ) )=> ( ( (lv_localVarName_2_0= ruleValidID ) ) otherlv_3= ':' ) )? ( (lv_switch_4_0= ruleXExpression ) ) ) | ( ( ( ( '(' ( ( ruleValidID ) ) ':' ) )=> (otherlv_5= '(' ( (lv_localVarName_6_0= ruleValidID ) ) otherlv_7= ':' ) ) ( (lv_switch_8_0= ruleXExpression ) ) otherlv_9= ')' ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )+ (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) )
-            // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2879:1: ( () otherlv_1= 'switch' ( ( ( ( ( ( ( ruleValidID ) ) ':' ) )=> ( ( (lv_localVarName_2_0= ruleValidID ) ) otherlv_3= ':' ) )? ( (lv_switch_4_0= ruleXExpression ) ) ) | ( ( ( ( '(' ( ( ruleValidID ) ) ':' ) )=> (otherlv_5= '(' ( (lv_localVarName_6_0= ruleValidID ) ) otherlv_7= ':' ) ) ( (lv_switch_8_0= ruleXExpression ) ) otherlv_9= ')' ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )+ (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
+            // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2878:28: ( ( () otherlv_1= 'switch' ( ( ( ( ( ( ( ruleValidID ) ) ':' ) )=> ( ( (lv_localVarName_2_0= ruleValidID ) ) otherlv_3= ':' ) )? ( (lv_switch_4_0= ruleXExpression ) ) ) | ( ( ( ( '(' ( ( ruleValidID ) ) ':' ) )=> (otherlv_5= '(' ( (lv_localVarName_6_0= ruleValidID ) ) otherlv_7= ':' ) ) ( (lv_switch_8_0= ruleXExpression ) ) otherlv_9= ')' ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' ) )
+            // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2879:1: ( () otherlv_1= 'switch' ( ( ( ( ( ( ( ruleValidID ) ) ':' ) )=> ( ( (lv_localVarName_2_0= ruleValidID ) ) otherlv_3= ':' ) )? ( (lv_switch_4_0= ruleXExpression ) ) ) | ( ( ( ( '(' ( ( ruleValidID ) ) ':' ) )=> (otherlv_5= '(' ( (lv_localVarName_6_0= ruleValidID ) ) otherlv_7= ':' ) ) ( (lv_switch_8_0= ruleXExpression ) ) otherlv_9= ')' ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
             {
-            // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2879:1: ( () otherlv_1= 'switch' ( ( ( ( ( ( ( ruleValidID ) ) ':' ) )=> ( ( (lv_localVarName_2_0= ruleValidID ) ) otherlv_3= ':' ) )? ( (lv_switch_4_0= ruleXExpression ) ) ) | ( ( ( ( '(' ( ( ruleValidID ) ) ':' ) )=> (otherlv_5= '(' ( (lv_localVarName_6_0= ruleValidID ) ) otherlv_7= ':' ) ) ( (lv_switch_8_0= ruleXExpression ) ) otherlv_9= ')' ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )+ (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
-            // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2879:2: () otherlv_1= 'switch' ( ( ( ( ( ( ( ruleValidID ) ) ':' ) )=> ( ( (lv_localVarName_2_0= ruleValidID ) ) otherlv_3= ':' ) )? ( (lv_switch_4_0= ruleXExpression ) ) ) | ( ( ( ( '(' ( ( ruleValidID ) ) ':' ) )=> (otherlv_5= '(' ( (lv_localVarName_6_0= ruleValidID ) ) otherlv_7= ':' ) ) ( (lv_switch_8_0= ruleXExpression ) ) otherlv_9= ')' ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )+ (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}'
+            // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2879:1: ( () otherlv_1= 'switch' ( ( ( ( ( ( ( ruleValidID ) ) ':' ) )=> ( ( (lv_localVarName_2_0= ruleValidID ) ) otherlv_3= ':' ) )? ( (lv_switch_4_0= ruleXExpression ) ) ) | ( ( ( ( '(' ( ( ruleValidID ) ) ':' ) )=> (otherlv_5= '(' ( (lv_localVarName_6_0= ruleValidID ) ) otherlv_7= ':' ) ) ( (lv_switch_8_0= ruleXExpression ) ) otherlv_9= ')' ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}' )
+            // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2879:2: () otherlv_1= 'switch' ( ( ( ( ( ( ( ruleValidID ) ) ':' ) )=> ( ( (lv_localVarName_2_0= ruleValidID ) ) otherlv_3= ':' ) )? ( (lv_switch_4_0= ruleXExpression ) ) ) | ( ( ( ( '(' ( ( ruleValidID ) ) ':' ) )=> (otherlv_5= '(' ( (lv_localVarName_6_0= ruleValidID ) ) otherlv_7= ':' ) ) ( (lv_switch_8_0= ruleXExpression ) ) otherlv_9= ')' ) ) otherlv_10= '{' ( (lv_cases_11_0= ruleXCasePart ) )* (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )? otherlv_15= '}'
             {
             // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2879:2: ()
             // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2880:5: 
@@ -8849,8 +8849,7 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_10, grammarAccess.getXSwitchExpressionAccess().getLeftCurlyBracketKeyword_3());
                   
             }
-            // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2993:1: ( (lv_cases_11_0= ruleXCasePart ) )+
-            int cnt52=0;
+            // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:2993:1: ( (lv_cases_11_0= ruleXCasePart ) )*
             loop52:
             do {
                 int alt52=2;
@@ -8899,13 +8898,8 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt52 >= 1 ) break loop52;
-            	    if (state.backtracking>0) {state.failed=true; return current;}
-                        EarlyExitException eee =
-                            new EarlyExitException(52, input);
-                        throw eee;
+            	    break loop52;
                 }
-                cnt52++;
             } while (true);
 
             // ../org.eclipse.xtext.example.tutorial/src-gen/org/eclipse/xtext/example/tutorial/parser/antlr/internal/InternalTutorial.g:3011:3: (otherlv_12= 'default' otherlv_13= ':' ( (lv_default_14_0= ruleXExpression ) ) )?
@@ -18210,7 +18204,7 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
     static final String DFA15_acceptS =
         "\1\uffff\1\2\11\uffff\1\1";
     static final String DFA15_specialS =
-        "\2\uffff\1\0\1\1\1\3\1\2\1\7\1\10\1\6\1\5\1\4\1\uffff}>";
+        "\2\uffff\1\10\1\0\1\5\1\7\1\4\1\3\1\2\1\6\1\1\1\uffff}>";
     static final String[] DFA15_transitionS = {
             "\5\1\5\uffff\1\1\1\uffff\4\1\1\uffff\13\1\1\2\1\3\1\4\1\5\1"+
             "\6\1\7\1\10\1\11\1\12\21\1\1\uffff\30\1",
@@ -18264,21 +18258,6 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA15_2 = input.LA(1);
-
-                         
-                        int index15_2 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred7_InternalTutorial()) ) {s = 11;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index15_2);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA15_3 = input.LA(1);
 
                          
@@ -18293,37 +18272,7 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
                         input.seek(index15_3);
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
-                        int LA15_5 = input.LA(1);
-
-                         
-                        int index15_5 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred7_InternalTutorial()) ) {s = 11;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index15_5);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA15_4 = input.LA(1);
-
-                         
-                        int index15_4 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred7_InternalTutorial()) ) {s = 11;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index15_4);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
+                    case 1 : 
                         int LA15_10 = input.LA(1);
 
                          
@@ -18338,22 +18287,7 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
                         input.seek(index15_10);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
-                        int LA15_9 = input.LA(1);
-
-                         
-                        int index15_9 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred7_InternalTutorial()) ) {s = 11;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index15_9);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 6 : 
+                    case 2 : 
                         int LA15_8 = input.LA(1);
 
                          
@@ -18368,7 +18302,22 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
                         input.seek(index15_8);
                         if ( s>=0 ) return s;
                         break;
-                    case 7 : 
+                    case 3 : 
+                        int LA15_7 = input.LA(1);
+
+                         
+                        int index15_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred7_InternalTutorial()) ) {s = 11;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index15_7);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
                         int LA15_6 = input.LA(1);
 
                          
@@ -18383,11 +18332,11 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
                         input.seek(index15_6);
                         if ( s>=0 ) return s;
                         break;
-                    case 8 : 
-                        int LA15_7 = input.LA(1);
+                    case 5 : 
+                        int LA15_4 = input.LA(1);
 
                          
-                        int index15_7 = input.index();
+                        int index15_4 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred7_InternalTutorial()) ) {s = 11;}
@@ -18395,7 +18344,52 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index15_7);
+                        input.seek(index15_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA15_9 = input.LA(1);
+
+                         
+                        int index15_9 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred7_InternalTutorial()) ) {s = 11;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index15_9);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 7 : 
+                        int LA15_5 = input.LA(1);
+
+                         
+                        int index15_5 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred7_InternalTutorial()) ) {s = 11;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index15_5);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 8 : 
+                        int LA15_2 = input.LA(1);
+
+                         
+                        int index15_2 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred7_InternalTutorial()) ) {s = 11;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index15_2);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -21233,7 +21227,7 @@ public class InternalTutorialParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_19_in_ruleXSwitchExpression7120 = new BitSet(new long[]{0x51A08602000341F0L,0x000000000001FFCEL});
     public static final BitSet FOLLOW_ruleXExpression_in_ruleXSwitchExpression7143 = new BitSet(new long[]{0x0040000000000000L});
     public static final BitSet FOLLOW_54_in_ruleXSwitchExpression7155 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleXSwitchExpression7169 = new BitSet(new long[]{0x0030002000080100L,0x0000000000000001L});
+    public static final BitSet FOLLOW_17_in_ruleXSwitchExpression7169 = new BitSet(new long[]{0x80300020000C0100L,0x0000000000000001L});
     public static final BitSet FOLLOW_ruleXCasePart_in_ruleXSwitchExpression7190 = new BitSet(new long[]{0x80300020000C0100L,0x0000000000000001L});
     public static final BitSet FOLLOW_63_in_ruleXSwitchExpression7204 = new BitSet(new long[]{0x0000000000080000L});
     public static final BitSet FOLLOW_19_in_ruleXSwitchExpression7216 = new BitSet(new long[]{0x51A08602000341F0L,0x000000000001FFCEL});
