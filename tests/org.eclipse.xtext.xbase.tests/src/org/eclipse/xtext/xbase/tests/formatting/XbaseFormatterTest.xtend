@@ -1152,4 +1152,53 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 		''')	
 	}
 	
+	@Test def formatEmptySwitchSL() {
+		assertFormattedExpression('''
+			switch null { }
+		''', '''
+			switch   null    {      }
+		'''
+		)
+	}
+	
+	@Test def formatEmptySwitchSL_2() {
+		assertFormattedExpression('''
+			switch null { default: 1 }
+		''', '''
+			switch   null    {    default    :  1  }
+		'''
+		)
+	}
+	
+	@Test def formatEmptySwitchML() {
+		assertFormattedExpression('''
+			switch null {
+			}
+		''', '''
+			switch   null    {      
+				
+				
+				
+			}
+		'''
+		)
+	}
+	
+	@Test def formatEmptySwitchML_2() {
+		assertFormattedExpression('''
+			switch null {
+				default: 1
+			}
+		''', '''
+			switch   null    {      
+				
+				
+				
+				default : 1
+				
+			}
+		'''
+		)
+	}
+	
 }

@@ -627,6 +627,123 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''
 		)
 	}
+	
+	@Test def void testEmptySwitch() {
+		'''
+			{
+				switch 1 {
+				}
+			}
+		'''.compilesTo(
+		'''
+			Object _switchResult = null;
+			final int _switchValue = 1;
+			switch (_switchValue) {
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testEmptySwitch_2() {
+		'''
+			{
+				switch 1 {
+					default: {
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			Object _switchResult = null;
+			final int _switchValue = 1;
+			switch (_switchValue) {
+			  default:
+			    _switchResult = null;
+			    break;
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testEmptySwitch_3() {
+		'''
+			{
+				switch Object {
+				}
+			}
+		'''.compilesTo(
+		'''
+			Object _switchResult = null;
+			final Class<Object> Object = Object.class;
+			boolean _matched = false;
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testEmptySwitch_4() {
+		'''
+			{
+				switch Object {
+					default: {
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			Object _switchResult = null;
+			final Class<Object> Object = Object.class;
+			boolean _matched = false;
+			if (!_matched) {
+			  _switchResult = null;
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testEmptySwitch_5() {
+		'''
+			{
+				switch Thread.State.NEW {
+				}
+			}
+		'''.compilesTo(
+		'''
+			Object _switchResult = null;
+			final Thread.State _switchValue = Thread.State.NEW;
+			switch (_switchValue) {
+			  default:
+			    break;
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testEmptySwitch_6() {
+		'''
+			{
+				switch Thread.State.NEW {
+					default: {
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			Object _switchResult = null;
+			final Thread.State _switchValue = Thread.State.NEW;
+			switch (_switchValue) {
+			  default:
+			    _switchResult = null;
+			    break;
+			}
+			return _switchResult;
+		'''
+		)
+	}
 
 }
 

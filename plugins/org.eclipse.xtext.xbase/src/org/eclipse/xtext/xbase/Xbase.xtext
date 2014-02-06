@@ -174,7 +174,7 @@ XSwitchExpression returns XExpression:
 	{XSwitchExpression}
 	'switch' (=>(localVarName=ValidID ':')? switch=XExpression
 		| =>('(' localVarName=ValidID ':') switch=XExpression ')') '{'
-	(cases+=XCasePart)+
+	(cases+=XCasePart)*
 	('default' ':' default=XExpression )?
 	'}';
 

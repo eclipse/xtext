@@ -752,7 +752,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 	def protected dispatch void format(XSwitchExpression expr, FormattableDocument format) {
 		val containsBlockExpr = expr.cases.exists[then instanceof XBlockExpression]
 		val switchSL = !containsBlockExpr && !expr.nodeForEObject.text.trim.contains("\n")
-		val caseSL = !containsBlockExpr && !expr.cases.exists[nodeForEObject.text.trim.contains("\n")] && !expr.^default?.nodeForEObject?.text?.contains("\n")
+		val caseSL = !containsBlockExpr && (!expr.cases.empty || expr.^default != null) && !expr.cases.exists[nodeForEObject.text.trim.contains("\n")] && !expr.^default?.nodeForEObject?.text?.contains("\n")
 		val open = expr.nodeForKeyword("{")
 		val close = expr.nodeForKeyword("}")
 		format += expr.nodeForKeyword("switch").append[oneSpace]
@@ -774,7 +774,10 @@ class XbaseFormatter2 extends AbstractFormatter {
 			}
 		} else if (caseSL) {
 			format += open.prepend[cfg(bracesInNewLine)]
-			format += open.append[newLine; increaseIndentation]
+			if (!expr.cases.empty) {
+				format += open.append[newLine]	
+			}
+			format += open.append[increaseIndentation]
 			for (c : expr.cases) {
 				format += c.then.nodeForEObject.prepend[oneSpace]
 				if (c != expr.cases.last)
@@ -787,7 +790,10 @@ class XbaseFormatter2 extends AbstractFormatter {
 			format += close.prepend[newLine; decreaseIndentation]
 		} else {
 			format += open.prepend[cfg(bracesInNewLine)]
-			format += open.append[newLine; increaseIndentation]
+			format += open.append[newLine]
+			if (!expr.cases.empty || expr.^default != null) {
+				format += open.append[increaseIndentation]	
+			}
 			for (c : expr.cases) {
 				val cnode = c.then.nodeForEObject
 				if (c.then instanceof XBlockExpression) {
