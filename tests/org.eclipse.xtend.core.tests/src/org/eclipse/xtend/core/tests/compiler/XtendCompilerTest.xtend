@@ -1495,8 +1495,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class Foo {
-			  public Function1<? super Integer,? extends Object> foo() {
-			    Function1<? super Integer,? extends Object> _switchResult = null;
+			  public Function1<? super Integer,?> foo() {
+			    Function1<? super Integer,?> _switchResult = null;
 			    final Object _switchValue = null;
 			    boolean _matched = false;
 			    if (!_matched) {
@@ -3036,7 +3036,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    return _result;
 			  }
 			  
-			  private final HashMap<ArrayList<? extends Object>,StringBuilder> _createCache_aBuilder = CollectionLiterals.newHashMap();
+			  private final HashMap<ArrayList<?>,StringBuilder> _createCache_aBuilder = CollectionLiterals.newHashMap();
 			  
 			  private void _init_aBuilder(final StringBuilder result, final String x) {
 			    result.append(x);
@@ -4535,7 +4535,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    _xsetliteral = Collections.<Object, Object>unmodifiableMap(_tempMap);
 			    final Map<Object,Object> map2 = _xsetliteral;
 			    Pair<String,Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
-			    final Set<? extends Object> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));
+			    final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));
 			  }
 			  
 			  public Pair<Object,Object> operator_plus(final int operant, final int operand2) {
@@ -4570,7 +4570,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    return 1;
 			  }
 			  
-			  public int bug(final Element<? extends Object> a) {
+			  public int bug(final Element<?> a) {
 			    if (a instanceof A) {
 			      return _bug((A)a);
 			    } else if (a instanceof B) {

@@ -35,7 +35,7 @@ class CompilerBug410767Test extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public Map<C1<C1<? extends Object>>,C1<C1<? extends Object>>> m(final C1<? extends Object> p) {
+			  public Map<C1<C1<?>>,C1<C1<?>>> m(final C1<?> p) {
 			    return p.toMap();
 			  }
 			}
@@ -117,7 +117,7 @@ class CompilerBug410767Test extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public Map<? extends Object,C1<? extends Object>> m(final C1<? extends Object> p) {
+			  public Map<?,C1<?>> m(final C1<?> p) {
 			    return p.toMap();
 			  }
 			}

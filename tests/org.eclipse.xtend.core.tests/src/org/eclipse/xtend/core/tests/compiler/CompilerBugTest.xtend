@@ -88,14 +88,14 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public Iterable<? extends Object> m() {
+			  public Iterable<?> m() {
 			    final List<?> a = null;
 			    final Object[] b = null;
 			    boolean _equals = Objects.equal("foo", "bar");
 			    if (_equals) {
 			      return a;
 			    } else {
-			      return ((Iterable<? extends Object>)Conversions.doWrapArray(b));
+			      return ((Iterable<?>)Conversions.doWrapArray(b));
 			    }
 			  }
 			}
@@ -1515,13 +1515,13 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  public List<? extends Object> m(final Iterable<String> iterable) {
+			  public List<?> m(final Iterable<String> iterable) {
 			    final Function1<String,Object> _function = new Function1<String,Object>() {
 			      public Object apply(final String it) {
 			        return null;
 			      }
 			    };
-			    Iterable<? extends Object> _flatMap = this.<String, Object>flatMap(iterable, _function);
+			    Iterable<?> _flatMap = this.<String, Object>flatMap(iterable, _function);
 			    final Function1<Object,Integer> _function_1 = new Function1<Object,Integer>() {
 			      public Integer apply(final Object it) {
 			        return Integer.valueOf(it.hashCode());
@@ -1660,7 +1660,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		''', '''
 			@SuppressWarnings("all")
 			public class C {
-			  public Object[] m(final Class<? extends Object> type) {
+			  public Object[] m(final Class<?> type) {
 			    return type.getEnumConstants();
 			  }
 			}
@@ -2570,8 +2570,8 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class C<T extends Object> {
-			  public C<? extends Object> m() {
-			    C<? extends Object> _xblockexpression = null;
+			  public C<?> m() {
+			    C<?> _xblockexpression = null;
 			    {
 			      final C<?> c = this;
 			      _xblockexpression = (c);
@@ -2869,7 +2869,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    return null;
 			  }
 			  
-			  private HeaderAccess<? extends Object> unboundedMockHeaderAccess;
+			  private HeaderAccess<?> unboundedMockHeaderAccess;
 			  
 			  public void test() {
 			    final Object header = this.unboundedMockHeaderAccess.getHeader();
@@ -2892,7 +2892,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class A {
-			  public void m(final Class<? extends Object>[] c) {
+			  public void m(final Class<?>[] c) {
 			  }
 			}
 		''')
@@ -2909,7 +2909,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class B extends A {
-			  public void m(final Class<? extends Object>[] c) {
+			  public void m(final Class<?>[] c) {
 			  }
 			}
 		''')
@@ -2926,7 +2926,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class A {
-			  public void m(final Class<? extends Object>... c) {
+			  public void m(final Class<?>... c) {
 			  }
 			}
 		''')
@@ -2943,7 +2943,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class B extends A {
-			  public void m(final Class<? extends Object>... c) {
+			  public void m(final Class<?>... c) {
 			  }
 			}
 		''')

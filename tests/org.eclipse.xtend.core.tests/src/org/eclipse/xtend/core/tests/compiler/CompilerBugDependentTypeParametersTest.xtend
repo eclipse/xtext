@@ -279,8 +279,8 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			    return s;
 			  }
 			  
-			  public List<Iterable<? extends Object>> m(final List<Iterable<? extends Object>> o) {
-			    return this.<Iterable<? extends Object>, List<Iterable<? extends Object>>>nonEmpty(o);
+			  public List<Iterable<?>> m(final List<Iterable<?>> o) {
+			    return this.<Iterable<?>, List<Iterable<?>>>nonEmpty(o);
 			  }
 			}
 		''')

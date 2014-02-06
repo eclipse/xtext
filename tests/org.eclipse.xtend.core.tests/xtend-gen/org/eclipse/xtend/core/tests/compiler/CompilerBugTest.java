@@ -180,7 +180,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Iterable<? extends Object> m() {");
+    _builder_1.append("public Iterable<?> m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final List<?> a = null;");
@@ -201,7 +201,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("} else {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("return ((Iterable<? extends Object>)Conversions.doWrapArray(b));");
+    _builder_1.append("return ((Iterable<?>)Conversions.doWrapArray(b));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -3360,7 +3360,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public List<? extends Object> m(final Iterable<String> iterable) {");
+    _builder_1.append("public List<?> m(final Iterable<String> iterable) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Function1<String,Object> _function = new Function1<String,Object>() {");
@@ -3378,7 +3378,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Iterable<? extends Object> _flatMap = this.<String, Object>flatMap(iterable, _function);");
+    _builder_1.append("Iterable<?> _flatMap = this.<String, Object>flatMap(iterable, _function);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Function1<Object,Integer> _function_1 = new Function1<Object,Integer>() {");
@@ -3701,7 +3701,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Object[] m(final Class<? extends Object> type) {");
+    _builder_1.append("public Object[] m(final Class<?> type) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return type.getEnumConstants();");
@@ -5847,10 +5847,10 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C<T extends Object> {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public C<? extends Object> m() {");
+    _builder_1.append("public C<?> m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C<? extends Object> _xblockexpression = null;");
+    _builder_1.append("C<?> _xblockexpression = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("{");
@@ -6563,7 +6563,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("private HeaderAccess<? extends Object> unboundedMockHeaderAccess;");
+    _builder_1.append("private HeaderAccess<?> unboundedMockHeaderAccess;");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.newLine();
@@ -6613,7 +6613,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class A {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public void m(final Class<? extends Object>[] c) {");
+    _builder_1.append("public void m(final Class<?>[] c) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -6646,7 +6646,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class B extends A {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public void m(final Class<? extends Object>[] c) {");
+    _builder_1.append("public void m(final Class<?>[] c) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -6679,7 +6679,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class A {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public void m(final Class<? extends Object>... c) {");
+    _builder_1.append("public void m(final Class<?>... c) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -6712,7 +6712,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class B extends A {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public void m(final Class<? extends Object>... c) {");
+    _builder_1.append("public void m(final Class<?>... c) {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

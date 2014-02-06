@@ -50,7 +50,7 @@ public class CompilerBug410767Test extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Map<C1<C1<? extends Object>>,C1<C1<? extends Object>>> m(final C1<? extends Object> p) {");
+    _builder_1.append("public Map<C1<C1<?>>,C1<C1<?>>> m(final C1<?> p) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return p.toMap();");
@@ -203,7 +203,7 @@ public class CompilerBug410767Test extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Map<? extends Object,C1<? extends Object>> m(final C1<? extends Object> p) {");
+    _builder_1.append("public Map<?,C1<?>> m(final C1<?> p) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return p.toMap();");

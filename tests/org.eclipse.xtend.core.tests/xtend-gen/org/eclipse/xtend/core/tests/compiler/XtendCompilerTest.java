@@ -3449,10 +3449,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Function1<? super Integer,? extends Object> foo() {");
+    _builder_1.append("public Function1<? super Integer,?> foo() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Function1<? super Integer,? extends Object> _switchResult = null;");
+    _builder_1.append("Function1<? super Integer,?> _switchResult = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Object _switchValue = null;");
@@ -6847,7 +6847,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("private final HashMap<ArrayList<? extends Object>,StringBuilder> _createCache_aBuilder = CollectionLiterals.newHashMap();");
+    _builder_1.append("private final HashMap<ArrayList<?>,StringBuilder> _createCache_aBuilder = CollectionLiterals.newHashMap();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.newLine();
@@ -9931,7 +9931,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("Pair<String,Integer> _mappedTo = Pair.<String, Integer>of(\"Banana\", Integer.valueOf(2));");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Set<? extends Object> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));");
+    _builder_1.append("final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -10005,7 +10005,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public int bug(final Element<? extends Object> a) {");
+    _builder_1.append("public int bug(final Element<?> a) {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (a instanceof A) {");

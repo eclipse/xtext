@@ -631,10 +631,10 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public List<Iterable<? extends Object>> m(final List<Iterable<? extends Object>> o) {");
+    _builder_1.append("public List<Iterable<?>> m(final List<Iterable<?>> o) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return this.<Iterable<? extends Object>, List<Iterable<? extends Object>>>nonEmpty(o);");
+    _builder_1.append("return this.<Iterable<?>, List<Iterable<?>>>nonEmpty(o);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
