@@ -347,7 +347,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			  if (!_matched) {
 			    _switchResult = "noname";
 			  }
-			  _xblockexpression = (_switchResult);
+			  _xblockexpression = _switchResult;
 			}
 			return _xblockexpression;
 		''')

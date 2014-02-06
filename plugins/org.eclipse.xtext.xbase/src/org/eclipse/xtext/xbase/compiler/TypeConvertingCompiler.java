@@ -324,7 +324,11 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected void convertArrayToList(final JvmTypeReference left, final ITreeAppendable appendable, XExpression context,
 			final Later expression) {
 		if (!(context.eContainer() instanceof XCastedExpression)) {
-			appendable.append("((");
+			if (context.eContainer() instanceof XAbstractFeatureCall) {
+				appendable.append("((");
+			} else {
+				appendable.append("(");
+			}
 			serialize(left, context, appendable);
 			appendable.append(")");
 		}
@@ -333,7 +337,11 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		appendable.append(".doWrapArray(");
 		expression.exec(appendable);
 		if (!(context.eContainer() instanceof XCastedExpression)) {
-			appendable.append("))");
+			if (context.eContainer() instanceof XAbstractFeatureCall) {
+				appendable.append("))");
+			} else {
+				appendable.append(")");
+			}
 		} else {
 			appendable.append(")");
 		}
@@ -374,8 +382,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		appendable.append(")");
 		appendable.append(".");
 		serialize(primitive, context, appendable);
-		appendable.append("Value(");
-		appendable.append(")");
+		appendable.append("Value()");
 	}
 
 	//TODO externalize whole conversion strategy and use org.eclipse.xtext.xbase.typing.SynonymTypesProvider.isList(JvmTypeReference)

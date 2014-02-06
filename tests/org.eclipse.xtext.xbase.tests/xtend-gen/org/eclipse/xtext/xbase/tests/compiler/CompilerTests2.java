@@ -630,7 +630,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("_xblockexpression = (_switchResult);");
+    _builder_1.append("_xblockexpression = _switchResult;");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

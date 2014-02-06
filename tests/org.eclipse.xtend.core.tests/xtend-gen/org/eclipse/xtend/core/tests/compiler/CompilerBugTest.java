@@ -201,7 +201,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("} else {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("return ((Iterable<?>)Conversions.doWrapArray(b));");
+    _builder_1.append("return (Iterable<?>)Conversions.doWrapArray(b);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -844,7 +844,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (_switchResult);");
+    _builder_1.append("_xblockexpression = _switchResult;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -1962,7 +1962,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("InputOutput.println();");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (null);");
+    _builder_1.append("_xblockexpression = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -2018,7 +2018,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("InputOutput.println();");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (null);");
+    _builder_1.append("_xblockexpression = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -2239,7 +2239,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final StringBuilder result = ObjectExtensions.<StringBuilder>operator_doubleArrow(((StringBuilder) null), _function);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (result);");
+    _builder_1.append("_xblockexpression = result;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -2712,7 +2712,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Object o = this.<String, Collection<String>>nullAsCollection(String.class);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (o.toString());");
+    _builder_1.append("_xblockexpression = o.toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -2784,7 +2784,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Iterable<String> i = this.<String, Collection<String>>nullAsCollection(String.class);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (i.toString());");
+    _builder_1.append("_xblockexpression = i.toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -2856,7 +2856,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Collection<? extends String> c = this.<String, Collection<String>>nullAsCollection(String.class);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (c.toString());");
+    _builder_1.append("_xblockexpression = c.toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -2928,7 +2928,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Collection<? super String> c = this.<String, Collection<String>>nullAsCollection(String.class);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (c.toString());");
+    _builder_1.append("_xblockexpression = c.toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -3000,7 +3000,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Object o = this.<T, Collection<T>>nullAsCollection(c);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (o.toString());");
+    _builder_1.append("_xblockexpression = o.toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -3072,7 +3072,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Iterable<T> i = this.<T, Collection<T>>nullAsCollection(c);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (i.toString());");
+    _builder_1.append("_xblockexpression = i.toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -3144,7 +3144,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Iterable<? extends T> i = this.<T, Collection<T>>nullAsCollection(c);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (i.toString());");
+    _builder_1.append("_xblockexpression = i.toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -3216,7 +3216,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Iterable<? super T> i = this.<T, Collection<T>>nullAsCollection(c);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (i.toString());");
+    _builder_1.append("_xblockexpression = i.toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -5806,7 +5806,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Amount<Length> perim = _plus.times(2);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (InputOutput.<Amount<Length>>println(perim));");
+    _builder_1.append("_xblockexpression = InputOutput.<Amount<Length>>println(perim);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -5859,7 +5859,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final C<?> c = this;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (c);");
+    _builder_1.append("_xblockexpression = c;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -6955,7 +6955,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final XItem<T> result = new XItem<T>(this, item);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this.items.add(result));");
+    _builder_1.append("_xblockexpression = this.items.add(result);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -7135,7 +7135,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Map<Long,List<Long>> extensionInvocation = this.<Long>then(arrayList);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (extensionInvocation.toString());");
+    _builder_1.append("_xblockexpression = extensionInvocation.toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -7249,7 +7249,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Map<Long,Iterable<Long>> extensionInvocation = this.<Long>then(iterable);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (extensionInvocation.toString());");
+    _builder_1.append("_xblockexpression = extensionInvocation.toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -7367,7 +7367,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Map<String,Iterable<String>> extensionInvocation = this.<String>then(linkedList);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (extensionInvocation.toString());");
+    _builder_1.append("_xblockexpression = extensionInvocation.toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -7485,7 +7485,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Map<Integer,Iterable<Integer>> extensionInvocation = this.<Integer>then(set);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (extensionInvocation.toString());");
+    _builder_1.append("_xblockexpression = extensionInvocation.toString();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -7839,7 +7839,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this.bug(_function_1));");
+    _builder_1.append("_xblockexpression = this.bug(_function_1);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");

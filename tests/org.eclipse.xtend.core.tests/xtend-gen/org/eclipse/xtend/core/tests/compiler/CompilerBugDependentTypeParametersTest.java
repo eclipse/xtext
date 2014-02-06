@@ -262,7 +262,7 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("m.put(\"\", null);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this.<String, String, HashMap<String,String>>nonEmpty(m));");
+    _builder_1.append("_xblockexpression = this.<String, String, HashMap<String,String>>nonEmpty(m);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -348,7 +348,7 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("m.put(null, \"\");");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this.<String, String, HashMap<String,String>>nonEmpty(m));");
+    _builder_1.append("_xblockexpression = this.<String, String, HashMap<String,String>>nonEmpty(m);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -434,7 +434,7 @@ public class CompilerBugDependentTypeParametersTest extends AbstractXtendCompile
     _builder_1.append("m.put(null, \"\");");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this.<String, String, HashMap<String,String>>nonEmpty(m));");
+    _builder_1.append("_xblockexpression = this.<String, String, HashMap<String,String>>nonEmpty(m);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");

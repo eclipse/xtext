@@ -91,7 +91,7 @@ class CompilerBug417522Test extends AbstractXtendCompilerTest {
 			      this.instance.<Bug>select(Bug.class);
 			      this.instance.select();
 			      this.instance.select(new Annotation[] {});
-			      _xblockexpression = (this.instance.<Bug>select(Bug.class, new Annotation[] {}));
+			      _xblockexpression = this.instance.<Bug>select(Bug.class, new Annotation[] {});
 			    }
 			    return _xblockexpression;
 			  }

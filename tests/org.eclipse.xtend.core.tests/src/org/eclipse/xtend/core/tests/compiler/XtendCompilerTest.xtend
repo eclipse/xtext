@@ -443,7 +443,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        return "";
 			      }
 			      final String x = _xifexpression;
-			      _xblockexpression = (x);
+			      _xblockexpression = x;
 			    }
 			    return _xblockexpression;
 			  }
@@ -524,7 +524,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        }
 			      }
 			      final String r = _switchResult;
-			      _xblockexpression = (r);
+			      _xblockexpression = r;
 			    }
 			    return _xblockexpression;
 			  }
@@ -776,7 +776,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        {
 			          Foo.this.toString();
 			          Foo.super.toString();
-			          _xblockexpression = (this.toString());
+			          _xblockexpression = this.toString();
 			        }
 			        return _xblockexpression;
 			      }
@@ -1334,7 +1334,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			            "".toString();
 			            _while = true;
 			          }
-			          _xblockexpression = ("");
+			          _xblockexpression = "";
 			        }
 			        _switchResult = _xblockexpression;
 			      }
@@ -1664,7 +1664,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		          _switchResult = true;
 		          break;
 		      }
-		      _xblockexpression = (_switchResult);
+		      _xblockexpression = _switchResult;
 		    }
 		    return _xblockexpression;
 		  }
@@ -1698,7 +1698,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		          _switchResult = true;
 		          break;
 		      }
-		      _xblockexpression = (_switchResult);
+		      _xblockexpression = _switchResult;
 		    }
 		    return _xblockexpression;
 		  }
@@ -1942,7 +1942,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		          _switchResult = true;
 		        }
 		      }
-		      _xblockexpression = (_switchResult);
+		      _xblockexpression = _switchResult;
 		    }
 		    return _xblockexpression;
 		  }
@@ -1980,7 +1980,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		          _switchResult = true;
 		        }
 		      }
-		      _xblockexpression = (_switchResult);
+		      _xblockexpression = _switchResult;
 		    }
 		    return _xblockexpression;
 		  }
@@ -2938,7 +2938,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      this.getThing();
 			      this.getThing("");
 			      this.getThing();
-			      _xblockexpression = (this.getThing(""));
+			      _xblockexpression = this.getThing("");
 			    }
 			    return _xblockexpression;
 			  }
@@ -2995,7 +2995,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      super.getThing("");
 			      super.getThing();
 			      super.getThing();
-			      _xblockexpression = (super.getThing());
+			      _xblockexpression = super.getThing();
 			    }
 			    return _xblockexpression;
 			  }
@@ -3323,7 +3323,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        }
 			      };
 			      final Function1<? super String,? extends String> function = _function;
-			      _xblockexpression = (function.apply("foo"));
+			      _xblockexpression = function.apply("foo");
 			    }
 			    return _xblockexpression;
 			  }
@@ -3803,7 +3803,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				      StringConcatenation _builder = new StringConcatenation();
 				      _builder.append("SomeString");
 				      final String x = InputOutput.<String>println(_builder.toString());
-				      _xblockexpression = (x);
+				      _xblockexpression = x;
 				    }
 				    return _xblockexpression;
 				  }
@@ -3826,7 +3826,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				      StringConcatenation _builder = new StringConcatenation();
 				      _builder.append("SomeString");
 				      final String x = _builder.toString();
-				      _xblockexpression = (x);
+				      _xblockexpression = x;
 				    }
 				    return _xblockexpression;
 				  }
@@ -4409,7 +4409,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					    String _xblockexpression = null;
 					    {
 					      int i = 1;
-					      _xblockexpression = (("" + Integer.valueOf(i)));
+					      _xblockexpression = ("" + Integer.valueOf(i));
 					    }
 					    String _string_2 = null;
 					    if (_xblockexpression!=null) {
@@ -4627,7 +4627,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    List<String> _xblockexpression = null;
 			    {
 			      final List<String> result = Collections.<String>unmodifiableList(Lists.<String>newArrayList());
-			      _xblockexpression = (result);
+			      _xblockexpression = result;
 			    }
 			    return _xblockexpression;
 			  }
@@ -4640,7 +4640,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    Set<String> _xblockexpression = null;
 			    {
 			      final Set<String> result = Collections.<String>unmodifiableSet(Sets.<String>newHashSet());
-			      _xblockexpression = (result);
+			      _xblockexpression = result;
 			    }
 			    return _xblockexpression;
 			  }

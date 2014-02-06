@@ -964,7 +964,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final String x = _xifexpression;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (x);");
+    _builder_1.append("_xblockexpression = x;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -1158,7 +1158,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final String r = _switchResult;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (r);");
+    _builder_1.append("_xblockexpression = r;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -1762,7 +1762,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("Foo.super.toString();");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("_xblockexpression = (this.toString());");
+    _builder_1.append("_xblockexpression = this.toString();");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("}");
@@ -3058,7 +3058,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("_xblockexpression = (\"\");");
+    _builder_1.append("_xblockexpression = \"\";");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("}");
@@ -3862,7 +3862,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (_switchResult);");
+    _builder_1.append("_xblockexpression = _switchResult;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -3942,7 +3942,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (_switchResult);");
+    _builder_1.append("_xblockexpression = _switchResult;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -4532,7 +4532,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (_switchResult);");
+    _builder_1.append("_xblockexpression = _switchResult;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -4621,7 +4621,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (_switchResult);");
+    _builder_1.append("_xblockexpression = _switchResult;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -6611,7 +6611,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("this.getThing();");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this.getThing(\"\"));");
+    _builder_1.append("_xblockexpression = this.getThing(\"\");");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -6753,7 +6753,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("super.getThing();");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (super.getThing());");
+    _builder_1.append("_xblockexpression = super.getThing();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -7453,7 +7453,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Function1<? super String,? extends String> function = _function;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (function.apply(\"foo\"));");
+    _builder_1.append("_xblockexpression = function.apply(\"foo\");");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -8447,7 +8447,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("final String x = InputOutput.<String>println(_builder.toString());");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("_xblockexpression = (x);");
+    _builder.append("_xblockexpression = x;");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
@@ -8493,7 +8493,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("final String x = _builder.toString();");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("_xblockexpression = (x);");
+    _builder.append("_xblockexpression = x;");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
@@ -9628,7 +9628,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("int i = 1;");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = ((\"\" + Integer.valueOf(i)));");
+    _builder_1.append("_xblockexpression = (\"\" + Integer.valueOf(i));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -10135,7 +10135,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final List<String> result = Collections.<String>unmodifiableList(Lists.<String>newArrayList());");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (result);");
+    _builder_1.append("_xblockexpression = result;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -10172,7 +10172,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final Set<String> result = Collections.<String>unmodifiableSet(Sets.<String>newHashSet());");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (result);");
+    _builder_1.append("_xblockexpression = result;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");

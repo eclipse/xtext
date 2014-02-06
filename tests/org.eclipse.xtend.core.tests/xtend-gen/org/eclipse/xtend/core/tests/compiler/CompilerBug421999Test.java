@@ -375,7 +375,7 @@ public class CompilerBug421999Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (ListExtensions.<IEObjectDescription, Pair<QualifiedName,T>>map(c, _function));");
+    _builder_1.append("_xblockexpression = ListExtensions.<IEObjectDescription, Pair<QualifiedName,T>>map(c, _function);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");

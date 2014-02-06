@@ -524,9 +524,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			} else {
 				internalToJavaStatement(ex, b, isReferenced);
 				if (isReferenced) {
-					b.newLine().append(getVarName(expr, b)).append(" = (");
+					b.newLine().append(getVarName(expr, b)).append(" = ");
 					internalToConvertedExpression(ex, b, getType(expr));
-					b.append(");");
+					b.append(";");
 				}
 			}
 		}

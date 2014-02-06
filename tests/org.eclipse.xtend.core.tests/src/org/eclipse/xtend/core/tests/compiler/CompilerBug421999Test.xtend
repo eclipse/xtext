@@ -178,7 +178,7 @@ class CompilerBug421999Test extends AbstractXtendCompilerTest {
 			          return Pair.<QualifiedName, T>of(_qualifiedName, _resolve);
 			        }
 			      };
-			      _xblockexpression = (ListExtensions.<IEObjectDescription, Pair<QualifiedName,T>>map(c, _function));
+			      _xblockexpression = ListExtensions.<IEObjectDescription, Pair<QualifiedName,T>>map(c, _function);
 			    }
 			    return _xblockexpression;
 			  }

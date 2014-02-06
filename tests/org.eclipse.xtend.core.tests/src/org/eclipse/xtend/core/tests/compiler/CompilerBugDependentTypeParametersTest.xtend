@@ -121,7 +121,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			    {
 			      final HashMap<String,String> m = CollectionLiterals.<String, String>newHashMap();
 			      m.put("", null);
-			      _xblockexpression = (this.<String, String, HashMap<String,String>>nonEmpty(m));
+			      _xblockexpression = this.<String, String, HashMap<String,String>>nonEmpty(m);
 			    }
 			    return _xblockexpression;
 			  }
@@ -157,7 +157,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			    {
 			      final HashMap<String,String> m = CollectionLiterals.<String, String>newHashMap();
 			      m.put(null, "");
-			      _xblockexpression = (this.<String, String, HashMap<String,String>>nonEmpty(m));
+			      _xblockexpression = this.<String, String, HashMap<String,String>>nonEmpty(m);
 			    }
 			    return _xblockexpression;
 			  }
@@ -193,7 +193,7 @@ class CompilerBugDependentTypeParametersTest extends AbstractXtendCompilerTest {
 			    {
 			      final HashMap<String,String> m = CollectionLiterals.<String, String>newHashMap();
 			      m.put(null, "");
-			      _xblockexpression = (this.<String, String, HashMap<String,String>>nonEmpty(m));
+			      _xblockexpression = this.<String, String, HashMap<String,String>>nonEmpty(m);
 			    }
 			    return _xblockexpression;
 			  }

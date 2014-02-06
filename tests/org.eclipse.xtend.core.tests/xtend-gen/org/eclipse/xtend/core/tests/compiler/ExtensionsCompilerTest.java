@@ -237,7 +237,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("this._string.substring(it);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this._string.substring(it));");
+    _builder_1.append("_xblockexpression = this._string.substring(it);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -299,7 +299,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("this.string.substring(it);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this.string.substring(it));");
+    _builder_1.append("_xblockexpression = this.string.substring(it);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -850,7 +850,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final String s = \"\";");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (s.substring(it));");
+    _builder_1.append("_xblockexpression = s.substring(it);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -987,7 +987,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (param.substring(it));");
+    _builder_1.append("_xblockexpression = param.substring(it);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -1284,7 +1284,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final String[] chars = ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(\"foo\", \"bar\"), String.class));");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = (this.<String>at(chars, 2));");
+    _builder_1.append("_xblockexpression = this.<String>at(chars, 2);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");

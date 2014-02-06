@@ -110,7 +110,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				    String _xblockexpression = null;
 				    {
 				      this._string.substring(it);
-				      _xblockexpression = (this._string.substring(it));
+				      _xblockexpression = this._string.substring(it);
 				    }
 				    return _xblockexpression;
 				  }
@@ -139,7 +139,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				    String _xblockexpression = null;
 				    {
 				      this.string.substring(it);
-				      _xblockexpression = (this.string.substring(it));
+				      _xblockexpression = this.string.substring(it);
 				    }
 				    return _xblockexpression;
 				  }
@@ -410,7 +410,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				    {
 				      @Extension
 				      final String s = "";
-				      _xblockexpression = (s.substring(it));
+				      _xblockexpression = s.substring(it);
 				    }
 				    return _xblockexpression;
 				  }
@@ -473,7 +473,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				        final String s = "";
 				        s.toString();
 				      }
-				      _xblockexpression = (param.substring(it));
+				      _xblockexpression = param.substring(it);
 				    }
 				    return _xblockexpression;
 				  }
@@ -607,7 +607,7 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 			    String _xblockexpression = null;
 			    {
 			      final String[] chars = ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("foo", "bar"), String.class));
-			      _xblockexpression = (this.<String>at(chars, 2));
+			      _xblockexpression = this.<String>at(chars, 2);
 			    }
 			    return _xblockexpression;
 			  }
