@@ -13,9 +13,9 @@ import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
-import org.eclipse.xtext.builder.standalone.XtextResourceSetProvider;
 import org.eclipse.xtext.builder.standalone.compiler.EclipseJavaCompiler;
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
+import org.eclipse.xtext.builder.standalone.resource.StandaloneResourceSet;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -31,7 +31,7 @@ import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 public class StandaloneBuilderModule extends AbstractModule {
   protected void configure() {
     AnnotatedBindingBuilder<XtextResourceSet> _bind = this.<XtextResourceSet>bind(XtextResourceSet.class);
-    _bind.toProvider(XtextResourceSetProvider.class);
+    _bind.to(StandaloneResourceSet.class);
     AnnotatedBindingBuilder<IResourceDescriptions> _bind_1 = this.<IResourceDescriptions>bind(IResourceDescriptions.class);
     Named _named = Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE);
     LinkedBindingBuilder<IResourceDescriptions> _annotatedWith = _bind_1.annotatedWith(_named);
