@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler;
+import org.eclipse.xtext.xbase.ui.util.InsertionOffsets;
 import org.eclipse.xtext.xbase.util.TypesOrderUtil;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -67,6 +68,9 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Inject 
 	private ReplacingAppendable.Factory appendableFactory; 
+	
+	@Inject 
+	private InsertionOffsets insertionOffsets;
 	
 	@Fix(IssueCodes.IMPORT_DUPLICATE)
 	public void fixDuplicateImport(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -104,15 +108,14 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				if (switchExpression == null) {
 					return;
 				}
-				EList<XCasePart> cases = switchExpression.getCases();
-				XCasePart casePart = IterableExtensions.last(cases);
-				ICompositeNode caseNode = NodeModelUtils.findActualNodeFor(casePart);
-				if (caseNode == null) {
-					return;
-				}
+				int insertOffset = getInsertOffset(switchExpression);
 				IXtextDocument document = context.getXtextDocument();
-				ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) element.eResource(), caseNode.getEndOffset(), 0);
-				appendable.newLine().append("default: {");
+				ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) element.eResource(), insertOffset, 0);
+				if (switchExpression.getCases().isEmpty()) {
+					appendable.increaseIndentation();
+				}
+				appendable.newLine();
+				appendable.append("default: {");
 				appendable.newLine().append("}");
 				appendable.commitChanges();
 			}
@@ -124,14 +127,12 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				if (switchExpression == null) {
 					return;
 				}
-				EList<XCasePart> cases = switchExpression.getCases();
-				XCasePart casePart = IterableExtensions.last(cases);
-				ICompositeNode caseNode = NodeModelUtils.findActualNodeFor(casePart);
-				if (caseNode == null) {
-					return;
-				}
+				int insertOffset = getInsertOffset(switchExpression);
 				IXtextDocument document = context.getXtextDocument();
-				ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) element.eResource(), caseNode.getEndOffset(), 0);
+				ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) element.eResource(), insertOffset, 0);
+				if (switchExpression.getCases().isEmpty()) {
+					appendable.increaseIndentation();
+				}
 				for (String expectedEnumerationLiteral : issue.getData()) {
 					appendable.newLine().append("case ").append(expectedEnumerationLiteral).append(": {");
 					appendable.newLine().append("}");
@@ -140,6 +141,15 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 			}
 			
 		});
+	}
+	
+	private int getInsertOffset(XSwitchExpression switchExpression) {
+		EList<XCasePart> cases = switchExpression.getCases();
+		if (cases.isEmpty()) {
+			return insertionOffsets.inEmpty(switchExpression);
+		} 
+		XCasePart casePart = IterableExtensions.last(cases);
+		return insertionOffsets.after(casePart);
 	}
 	
 	@Fix(IssueCodes.UNREACHABLE_CASE)
