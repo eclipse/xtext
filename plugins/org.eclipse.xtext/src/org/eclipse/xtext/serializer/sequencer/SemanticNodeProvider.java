@@ -10,6 +10,7 @@ package org.eclipse.xtext.serializer.sequencer;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -50,10 +51,11 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 		protected void add(String featureName, INode child) {
 			if (featureName == null)
 				return;
-			EStructuralFeature feature = this.semanticObject.eClass().getEStructuralFeature(featureName);
+			EClass eClass = this.semanticObject.eClass();
+			EStructuralFeature feature = eClass.getEStructuralFeature(featureName);
 			if (feature == null)
 				return;
-			int id = feature.getFeatureID();
+			int id = eClass.getFeatureID(feature);
 			if (feature.isMany()) {
 				@SuppressWarnings("unchecked")
 				List<INode> nodes = (List<INode>) childrenByFeatureIDAndIndex[id];
@@ -120,7 +122,7 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 				if (candiadate != null)
 					return candiadate;
 			}
-			Object object = this.childrenByFeatureIDAndIndex[feat.getFeatureID()];
+			Object object = this.childrenByFeatureIDAndIndex[semanticObject.eClass().getFeatureID(feat)];
 			if (feat.isMany() && object instanceof List<?>) {
 				@SuppressWarnings("unchecked")
 				List<INode> nodes = (List<INode>) object;
