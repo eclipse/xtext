@@ -320,6 +320,8 @@ public class UnboundTypeReference extends LightweightTypeReference {
 			if (resolvedTo != null) {
 				if (varianceHints.contains(VarianceInfo.OUT) && varianceHints.size() == 1 && typeArgument.getVariance() == VarianceInfo.INVARIANT && (resolvedTo instanceof WildcardTypeReference)) {
 					resolvedTo = resolvedTo.getUpperBoundSubstitute();
+				} else if (varianceHints.contains(VarianceInfo.IN) && varianceHints.size() == 1 && typeArgument.getVariance() == VarianceInfo.INVARIANT && (resolvedTo instanceof WildcardTypeReference)) { 
+					resolvedTo = resolvedTo.getInvariantBoundSubstitute();
 				} else if (varianceHints.isEmpty() && typeArgument.getVariance() == VarianceInfo.OUT && allHints.size() == 1) {
 					LightweightBoundTypeArgument singleHint = allHints.get(0);
 					if (singleHint.getDeclaredVariance() == VarianceInfo.INVARIANT && singleHint.getSource() == BoundTypeArgumentSource.INFERRED_LATER) {
