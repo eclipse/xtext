@@ -5,8 +5,8 @@ Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.tutorial; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;bundle-version="2.5.1";visibility:=reexport,
- org.eclipse.xtext.xbase;bundle-version="2.5.1";resolution:=optional;x-installation:=greedy;visibility:=reexport,
+Require-Bundle: org.eclipse.xtext;bundle-version="2.5.2";visibility:=reexport,
+ org.eclipse.xtext.xbase;bundle-version="2.5.2";resolution:=optional;x-installation:=greedy;visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.codegen.ecore;resolution:=optional;x-installation:=greedy,
  org.eclipse.emf.mwe.utils;resolution:=optional;x-installation:=greedy,

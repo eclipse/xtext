@@ -9,7 +9,7 @@
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.parent</artifactId>
 	<packaging>pom</packaging>
-	<version>2.5.1-SNAPSHOT</version>
+	<version>2.5.2-SNAPSHOT</version>
 	<modules>
 		<module>../../plugins/org.eclipse.xtend.lib</module>
 		<module>../../plugins/org.eclipse.xtext.xbase.lib</module>
