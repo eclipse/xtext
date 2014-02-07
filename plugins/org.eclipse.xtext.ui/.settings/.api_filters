@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.ui" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter comment="Added some protected fields" id="924844039">
+        <filter id="924844039">
             <message_arguments>
-                <message_argument value="2.5.1"/>
+                <message_argument value="2.5.2"/>
                 <message_argument value="2.5.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.resource.IndexingOrderer">
-        <filter comment="Removed @Beta API" id="305422471">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.resource.IndexingOrderer"/>
-                <message_argument value="org.eclipse.xtext.ui_2.4.3"/>
             </message_arguments>
         </filter>
     </resource>
@@ -69,25 +61,6 @@
             <message_arguments>
                 <message_argument value="TextChange"/>
                 <message_argument value="EditorDocumentChange"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/resource/IStorage2UriMapperJdtExtensions.java" type="org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions">
-        <filter comment="Refactored towards greater extensibility" id="404791350">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/resource/Storage2UriMapperJavaImpl.java" type="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl">
-        <filter id="337682486">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl"/>
-            </message_arguments>
-        </filter>
-        <filter comment="Refactored towards better extensibility" id="338849923">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl"/>
             </message_arguments>
         </filter>
     </resource>

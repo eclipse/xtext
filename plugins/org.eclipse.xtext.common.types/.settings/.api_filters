@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.common.types" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter comment="Added JvmField.isConstant" id="923795461">
+        <filter id="923795461">
             <message_arguments>
-                <message_argument value="2.5.1"/>
+                <message_argument value="2.5.2"/>
                 <message_argument value="2.5.0"/>
             </message_arguments>
         </filter>
-        <filter comment="Added JvmField.isConstant" id="924844039">
+        <filter id="924844039">
             <message_arguments>
-                <message_argument value="2.5.1"/>
+                <message_argument value="2.5.2"/>
                 <message_argument value="2.5.0"/>
             </message_arguments>
         </filter>
@@ -45,13 +45,13 @@
                 <message_argument value="10"/>
             </message_arguments>
         </filter>
-        <filter comment="JvmAnnotationReference.getValues is now an EOperation" id="405864542">
+        <filter id="405864542">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
                 <message_argument value="JVM_ANNOTATION_REFERENCE__VALUES"/>
             </message_arguments>
         </filter>
-        <filter comment="JvmAnnotationReference.getValues() became an EOperation" id="405901410">
+        <filter id="405901410">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
                 <message_argument value="getJvmAnnotationReference_Values()"/>
@@ -77,7 +77,7 @@
                 <message_argument value="JVM_FIELD__CONSTANT_VALUE"/>
             </message_arguments>
         </filter>
-        <filter comment="JvmAnnotationReference#getExplicitValues" id="405864542">
+        <filter id="405864542">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
                 <message_argument value="JVM_ANNOTATION_REFERENCE__VALUES"/>
