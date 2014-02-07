@@ -346,21 +346,23 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 
 	protected void propageResolvedTypeToConstraints(List<LightweightBoundTypeArgument> hints) {
-		for(LightweightBoundTypeArgument hint: hints) {
-			if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+		if (!resolvedTo.isRawType()) {
+			for(LightweightBoundTypeArgument hint: hints) {
 				LightweightTypeReference hintReference = hint.getTypeReference();
-				DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getOwner()) {
-					@Override
-					protected BoundTypeArgumentSource getTypeArgumentSource() {
-						return BoundTypeArgumentSource.INFERRED_CONSTRAINT;
-					}
-					@Override
-					protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
-						if (typeParameter.getHandle() != getHandle())
-							super.addHint(typeParameter, reference);
-					}
-				};
-				collector.processPairedReferences(hintReference, resolvedTo);
+				if (hintReference != null && !hintReference.isRawType() && hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+					DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(getOwner()) {
+						@Override
+						protected BoundTypeArgumentSource getTypeArgumentSource() {
+							return BoundTypeArgumentSource.INFERRED_CONSTRAINT;
+						}
+						@Override
+						protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
+							if (typeParameter.getHandle() != getHandle())
+								super.addHint(typeParameter, reference);
+						}
+					};
+					collector.processPairedReferences(hintReference, resolvedTo);
+				}
 			}
 		}
 	}
