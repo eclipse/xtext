@@ -41,6 +41,7 @@ import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Lists;
 
@@ -197,7 +198,11 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 	protected ITypeComputationState getClosureBodyTypeComputationState(ITypeAssigner typeAssigner) {
 		List<LightweightTypeReference> operationParameterTypes = expectedClosureType.getParameterTypes();
 		List<JvmFormalParameter> closureParameters = getClosure().getFormalParameters();
-
+		Object skippedHandle = null;
+		LightweightTypeReference returnType = expectedClosureType.getReturnType();
+		if (returnType.getKind() == LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
+			skippedHandle = ((UnboundTypeReference) returnType).getHandle();
+		}
 		validParameterTypes = closureParameters.size() == operationParameterTypes.size();
 
 		// just in case we have more than 6 closure parameters
@@ -206,6 +211,12 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		for (int i = 0; i < paramCount; i++) {
 			JvmFormalParameter closureParameter = closureParameters.get(i);
 			final LightweightTypeReference operationParameterType = operationParameterTypes.get(i);
+			if (operationParameterType.getKind() == LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
+				UnboundTypeReference casted = (UnboundTypeReference)operationParameterType;
+				if (!casted.getHandle().equals(skippedHandle) && !casted.internalIsResolved() && casted.hasSignificantHints()) {
+					casted.acceptHint(VarianceInfo.IN);
+				}
+			}
 			if (closureParameter.eContainingFeature() != XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER && closureParameter.getParameterType() != null) {
 				final LightweightTypeReference closureParameterType = typeAssigner.toLightweightTypeReference(closureParameter.getParameterType());
 				new DeferredTypeParameterHintCollector(getExpectation().getReferenceOwner()) {
