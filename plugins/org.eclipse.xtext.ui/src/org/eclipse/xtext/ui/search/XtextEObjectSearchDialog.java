@@ -56,6 +56,8 @@ public class XtextEObjectSearchDialog extends ListDialog {
 
 	private String initialPatternText;
 
+	private String initialTypeText;
+	
 	private Label messageLabel;
 
 	private Label searchStatusLabel;
@@ -72,7 +74,9 @@ public class XtextEObjectSearchDialog extends ListDialog {
 	private final ILabelProvider labelProvider;
 
 	private boolean enableStyledLabels;
-	
+
+	private boolean editableTypePattern = true;
+
 	public XtextEObjectSearchDialog(Shell parent, IXtextEObjectSearch searchEngine, ILabelProvider labelProvider) {
 		super(parent);
 		this.searchEngine = searchEngine;
@@ -122,6 +126,21 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		return initialPatternText;
 	}
 
+	/**
+	 * @since 2.6
+	 */
+	public void setInitialTypePattern(String text) {
+		setInitialTypePattern(text, true);
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	public void setInitialTypePattern(String text, boolean editable) {
+		this.initialTypeText = text;
+		this.editableTypePattern = editable;
+	}
+	
 	@Override
 	public int open() {
 		if (getInitialPattern() == null) {
@@ -268,6 +287,11 @@ public class XtextEObjectSearchDialog extends ListDialog {
 			}
 		});
 
+		if (initialTypeText != null)
+			typeSearchControl.setText(initialTypeText);
+		
+		typeSearchControl.setEditable(editableTypePattern);
+		
 		return label;
 	}
 
