@@ -308,7 +308,8 @@ public class UnboundTypeReference extends LightweightTypeReference {
 				}
 				effectiveHints.add(hint);
 				if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
-					inferredHints.add(hint);
+					if (!(hint.getDeclaredVariance() == VarianceInfo.IN && hint.getActualVariance() == VarianceInfo.INVARIANT) || hint.getTypeReference().isWildcard())
+						inferredHints.add(hint);
 				}
 			}
 		}
