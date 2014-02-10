@@ -116,6 +116,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 /**
@@ -517,7 +518,7 @@ public class JvmModelGenerator implements IGenerator {
         _matched=true;
         SharedAppendableState _state = ((TreeAppendable)appendable).getState();
         StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.commonServices, it);
-        final ImportingStringConcatenation target = new ImportingStringConcatenation(_state, _standardTypeReferenceOwner);
+        final ImportingStringConcatenation target = this.createImportingStringConcatenation(_state, _standardTypeReferenceOwner);
         StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(it);
         target.append(_compilationTemplate);
         ((TreeAppendable)appendable).append(target);
@@ -529,6 +530,10 @@ public class JvmModelGenerator implements IGenerator {
       String _plus = ("unexpected appendable: " + _name);
       throw new IllegalStateException(_plus);
     }
+  }
+  
+  protected ImportingStringConcatenation createImportingStringConcatenation(final SharedAppendableState state, final ITypeReferenceOwner owner) {
+    return new ImportingStringConcatenation(state, owner);
   }
   
   protected ITreeAppendable _generateModifier(final JvmGenericType it, final ITreeAppendable appendable, final GeneratorConfig config) {

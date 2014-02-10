@@ -16,6 +16,8 @@ import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
+import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -47,6 +49,10 @@ class XtendGenerator extends JvmModelGenerator {
 				context.handleProcessingError(input, t)
 			}
 		}
+	}
+	
+	override protected createImportingStringConcatenation(SharedAppendableState state, ITypeReferenceOwner owner) {
+		new MacroAwareStringConcatenation(state, owner)
 	}
 	
 	/**
