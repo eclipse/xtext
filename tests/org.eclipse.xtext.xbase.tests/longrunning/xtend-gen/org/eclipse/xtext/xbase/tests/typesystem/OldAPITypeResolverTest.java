@@ -706,6 +706,18 @@ public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
   
   @Ignore("fails in old implementation")
   @Test
+  public void testTypeGuardedCase_3() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testTypeGuardedCase_4() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testConstructorCall_01() throws Exception {
     Assert.fail("fails in old implementation");
   }

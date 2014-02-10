@@ -59,6 +59,11 @@ public class XbaseShufflingInjectorProvider extends XbaseInjectorProvider {
 		@Override
 		protected List<XCasePart> getCases(XSwitchExpression switchExpression) {
 			List<XCasePart> result = super.getCases(switchExpression);
+			for(XCasePart casePart: result) {
+				if (casePart.getThen() == null) {
+					return result;
+				}
+			}
 			return Lists.reverse(result);
 		}
 		

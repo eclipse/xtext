@@ -355,7 +355,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 		
 		LightweightTypeReference thenTypeReference = null;
 		// TODO case expressions may influence the expected type of other cases
-		for(XCasePart casePart: getCases(object)) {
+		List<XCasePart> cases = getCases(object);
+		for(int i = 0; i < cases.size(); i++) {
+			XCasePart casePart = cases.get(i);
 			// assign the type for the switch expression if possible and use that one for the remaining things
 			ITypeComputationState casePartState = allCasePartsState.withTypeCheckpoint(casePart);
 			boolean localIsEnum = isEnum;
@@ -411,8 +413,8 @@ public class XbaseTypeComputer implements ITypeComputer {
 				caseState.computeTypes(casePart.getCase());
 			}
 			XExpression then = casePart.getThen();
-			if (then != null) {
-				ITypeComputationState thenState = allCasePartsState.withTypeCheckpoint(then);
+			if (then != null || (i == cases.size() - 1 && thenTypeReference != null)) {
+				ITypeComputationState thenState = allCasePartsState.withTypeCheckpoint(casePart);
 				if (thenTypeReference != null) {
 					JvmIdentifiableElement refinable = null;
 					if (object.getLocalVarName() != null) {
