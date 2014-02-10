@@ -125,7 +125,7 @@ public class InMemoryFileSystemAccess extends AbstractFileSystemAccess2 {
 		try {
 			try {
 				byte[] byteArray = ByteStreams.toByteArray(content);
-				files.put(fileName, byteArray);
+				files.put(getFileName(fileName, outputCfgName), byteArray);
 			} finally {
 				content.close();
 			}
