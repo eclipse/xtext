@@ -10,6 +10,9 @@ package org.eclipse.xtext.builder.resource;
 import static org.eclipse.emf.common.util.URI.*;
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+import java.util.Map;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.builder.standalone.resource.StandaloneResourceSet;
@@ -27,14 +30,14 @@ public class StandaloneResourceSetTest {
 	public static void setUp() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("fake",
 				new org.eclipse.emf.ecore.resource.Resource.Factory() {
-
 					public Resource createResource(URI uri) {
-						if (uri != null && "ResourceWithoutURI.fake".equals(uri.lastSegment())) {
-							return new XtextResource();
-						}
-						return new XtextResource(uri);
+						return new XtextResource(uri) {
+							@Override
+							public void load(Map<?, ?> options) throws IOException {
+								isLoaded = true;
+							}
+						};
 					}
-
 				});
 	}
 
@@ -68,7 +71,7 @@ public class StandaloneResourceSetTest {
 	@Test
 	public void testGetResource_4() {
 		StandaloneResourceSet resourceSet = new StandaloneResourceSet();
-		resourceSet.createResource(createURI("/org/eclipse/xtext/builder/resource/ResourceWithoutURI.fake"));
+		resourceSet.getResources().add(new XtextResource());
 		assertNull(resourceSet.getResource(createURI("/somepackage/ResourceWithoutURI.fake"), false));
 	}
 
@@ -89,7 +92,56 @@ public class StandaloneResourceSetTest {
 		resourceSet.createResource(createURI("/org/eclipse/xtext/builder/resource/StandaloneResourceSetTest.fake"));
 		resourceSet.createResource(createURI("/org/eclipse/xtext/builder/resource/somepackage/StandaloneResourceSetTest.fake"));
 
-		assertNull(resourceSet.getResource(createURI("/somepackage/StandaloneResourceSetTest.fake"), false));
+		try {
+			assertNull(resourceSet.getResource(createURI("/somepackage/StandaloneResourceSetTest.fake"), false));
+			fail("exception expected");
+		} catch (IllegalArgumentException e) {
+			// expected
+		}
+	}
+	
+	@Test
+	public void testGetResourceOnDemand() throws Exception {
+		StandaloneResourceSet resourceSet = new StandaloneResourceSet();
+		Resource res1 = resourceSet.createResource(createURI("/org/eclipse/xtext/builder/resource/StandaloneResourceSetTest.fake"));
+
+		Resource resource = resourceSet.getResource(createURI("/somepackage/StandaloneResourceSetTest.fake"), true);
+		assertNotNull(resource);
+		assertSame(res1, resource);
+		assertEquals("/org/eclipse/xtext/builder/resource/StandaloneResourceSetTest.fake", resource.getURI().toString());
+	}
+
+	@Test
+	public void testGetResourceOnDemand_1() {
+		StandaloneResourceSet resourceSet = new StandaloneResourceSet();
+		Resource res1 = resourceSet.createResource(createURI("/org/eclipse/xtext/builder/resource/StandaloneResourceSetTest.fake"));
+		Resource res2 = resourceSet.getResource(createURI("/somepackage/StandaloneResourceSetTest_2.fake"), true);
+		assertNotSame(res1, res2);
+	}
+
+	@Test
+	public void testGetResourceOnDemand_5() throws Exception {
+		StandaloneResourceSet resourceSet = new StandaloneResourceSet();
+		URI uri = createURI("/org/eclipse/xtext/builder/resource/StandaloneResourceSetTest.fake");
+		resourceSet.createResource(uri);
+
+		Resource resource = resourceSet.getResource(uri, true);
+		assertNotNull(resource);
+		assertEquals("/org/eclipse/xtext/builder/resource/StandaloneResourceSetTest.fake", resource.getURI().toString());
+	}
+
+	@Test
+	public void testGetResourceOnDemand_6() {
+		StandaloneResourceSet resourceSet = new StandaloneResourceSet();
+		resourceSet.createResource(createURI("/org/eclipse/xtext/builder/resource/StandaloneResourceSetTest.fake"));
+		resourceSet.createResource(createURI("/org/eclipse/xtext/builder/resource/somepackage/StandaloneResourceSetTest.fake"));
+		
+		try {
+			assertNull(resourceSet.getResource(createURI("/somepackage/StandaloneResourceSetTest.fake"), true));
+			fail("exception expected");
+		} catch (IllegalArgumentException e) {
+			// expected
+		}
 	}
 
 }
