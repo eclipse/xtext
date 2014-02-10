@@ -1083,6 +1083,130 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals('Hello World', clazz.docComment)
 		]
 	}
+	
+	@Test def void testAnnotationDefaultValues_01() {
+		assertProcessing(
+			'myannotation/AnnotationDefaultValues.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import java.lang.annotation.RetentionPolicy
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				@Active(AnnotationDefaultValuesProcessor)
+				annotation AnnotationDefaultValues { }
+				
+				class AnnotationDefaultValuesProcessor implements TransformationParticipant<MutableClassDeclaration> {
+					
+					override doTransform(List<? extends MutableClassDeclaration> annotationTargets, extension TransformationContext context) {
+						annotationTargets.forEach[ annotationTarget |
+						val annotation = annotationTarget.findAnnotation(findTypeGlobally(MyAnnotation))
+						val strings = annotation.getStringArrayValue('value').map[ toString ]
+						strings.forEach [ annotationTarget.addField(it) [ type = string ] ]
+						
+						val booleans = annotation.getBooleanArrayValue('booleans').map[ toString ]
+						booleans.forEach [ annotationTarget.addField(it) [ type = string ] ]
+						
+						val types = annotation.getClassArrayValue('types').map[ toString ]
+						types.forEach [ annotationTarget.addField(it) [ type = string ] ]
+						
+						val policies = annotation.getEnumArrayValue('policies').map[ toString ]
+						policies.forEach [ annotationTarget.addField(it) [ type = string ] ]
+						
+						val nested = annotation.getAnnotationArrayValue('nested').map[ toString ]
+						nested.forEach [ annotationTarget.addField(it) [ type = string ] ]
+						]
+					}
+					
+				}
+				annotation MyAnnotation {
+					String[] value = #[]
+					boolean[] booleans = #[]
+					Class<?>[] types = #[]
+					RetentionPolicy[] policies = #[]
+					Active[] nested = #[]
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.AnnotationDefaultValues
+				@myannotation.MyAnnotation
+				class MyClass {}
+			'''
+		) [
+			val clazz = typeLookup.findClass('myusercode.MyClass')
+			assertTrue(clazz.declaredFields.isEmpty)
+		]
+	}
+	
+	@Test def void testAnnotationDefaultValues_02() {
+		assertProcessing(
+			'myannotation/AnnotationDefaultValues.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import java.lang.annotation.RetentionPolicy
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				@Active(AnnotationDefaultValuesProcessor)
+				annotation AnnotationDefaultValues { }
+				
+				class AnnotationDefaultValuesProcessor implements TransformationParticipant<MutableClassDeclaration> {
+					
+					override doTransform(List<? extends MutableClassDeclaration> annotationTargets, extension TransformationContext context) {
+						annotationTargets.forEach[ annotationTarget |
+						val annotation = annotationTarget.findAnnotation(findTypeGlobally(MyAnnotation))
+						val strings = annotation.getStringArrayValue('value').map[ toString ]
+						strings.forEach [ annotationTarget.addField(it) [ type = string ] ]
+						
+						val booleans = annotation.getBooleanArrayValue('booleans').map[ toString ]
+						booleans.forEach [ annotationTarget.addField(it) [ type = string ] ]
+						
+						val types = annotation.getClassArrayValue('types').map[ toString ]
+						types.forEach [ annotationTarget.addField(it) [ type = string ] ]
+						
+						val policies = annotation.getEnumArrayValue('policies').map[ toString ]
+						policies.forEach [ annotationTarget.addField(it) [ type = string ] ]
+						
+						val nested = annotation.getAnnotationArrayValue('nested').map[ toString ]
+						nested.forEach [ annotationTarget.addField(it) [ type = string ] ]
+						]
+					}
+					
+				}
+				annotation MyAnnotation {
+					String[] value = #[]
+					boolean[] booleans = #[]
+					Class<?>[] types = #[]
+					RetentionPolicy[] policies = #[]
+					Active[] nested = #[]
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.AnnotationDefaultValues
+				@myannotation.MyAnnotation(
+					value = #[],
+					booleans = #[],
+					types = #[],
+					policies = #[],
+					nested = #[]
+				)
+				class MyClass {}
+			'''
+		) [
+			val clazz = typeLookup.findClass('myusercode.MyClass')
+			assertTrue(clazz.declaredFields.isEmpty)
+		]
+	}
 
 	@Test def void testAddAnnotationValue() {
 		assertProcessing(
