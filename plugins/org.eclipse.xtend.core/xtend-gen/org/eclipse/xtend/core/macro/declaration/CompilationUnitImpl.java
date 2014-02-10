@@ -114,9 +114,11 @@ import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmByteAnnotationValue;
 import org.eclipse.xtext.common.types.JvmCharAnnotationValue;
+import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -1241,6 +1243,114 @@ public class CompilationUnitImpl implements CompilationUnit {
   public Object translateAnnotationValue(final JvmAnnotationValue value, final boolean isArray) {
     Pair<List<? extends Object>,Class<? extends Object>> _switchResult = null;
     boolean _matched = false;
+    if (!_matched) {
+      if (value instanceof JvmCustomAnnotationValue) {
+        boolean _and = false;
+        EList<Object> _values = ((JvmCustomAnnotationValue)value).getValues();
+        boolean _isEmpty = _values.isEmpty();
+        if (!_isEmpty) {
+          _and = false;
+        } else {
+          _and = isArray;
+        }
+        if (_and) {
+          _matched=true;
+          Pair<List<? extends Object>,Class<? extends Object>> _xblockexpression = null;
+          {
+            JvmTypeReference _findExpectedType = this.findExpectedType(value);
+            JvmType _type = _findExpectedType.getType();
+            final JvmArrayType expectedType = ((JvmArrayType) _type);
+            final JvmComponentType componentType = expectedType.getComponentType();
+            final String componentTypeName = componentType.getIdentifier();
+            List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
+            Class<? extends Object> _switchResult_1 = null;
+            boolean _matched_1 = false;
+            if (!_matched_1) {
+              if (Objects.equal(componentTypeName,"java.lang.Class")) {
+                _matched_1=true;
+                _switchResult_1 = TypeReference.class;
+              }
+            }
+            if (!_matched_1) {
+              if (Objects.equal(componentTypeName,"java.lang.String")) {
+                _matched_1=true;
+                _switchResult_1 = String.class;
+              }
+            }
+            if (!_matched_1) {
+              if (Objects.equal(componentTypeName,"boolean")) {
+                _matched_1=true;
+                _switchResult_1 = boolean.class;
+              }
+            }
+            if (!_matched_1) {
+              if (Objects.equal(componentTypeName,"int")) {
+                _matched_1=true;
+                _switchResult_1 = int.class;
+              }
+            }
+            if (!_matched_1) {
+              if (Objects.equal(componentTypeName,"byte")) {
+                _matched_1=true;
+                _switchResult_1 = byte.class;
+              }
+            }
+            if (!_matched_1) {
+              if (Objects.equal(componentTypeName,"char")) {
+                _matched_1=true;
+                _switchResult_1 = char.class;
+              }
+            }
+            if (!_matched_1) {
+              if (Objects.equal(componentTypeName,"double")) {
+                _matched_1=true;
+                _switchResult_1 = double.class;
+              }
+            }
+            if (!_matched_1) {
+              if (Objects.equal(componentTypeName,"float")) {
+                _matched_1=true;
+                _switchResult_1 = float.class;
+              }
+            }
+            if (!_matched_1) {
+              if (Objects.equal(componentTypeName,"long")) {
+                _matched_1=true;
+                _switchResult_1 = long.class;
+              }
+            }
+            if (!_matched_1) {
+              if (Objects.equal(componentTypeName,"short")) {
+                _matched_1=true;
+                _switchResult_1 = short.class;
+              }
+            }
+            if (!_matched_1) {
+              Class<? extends Object> _switchResult_2 = null;
+              boolean _matched_2 = false;
+              if (!_matched_2) {
+                if (componentType instanceof JvmEnumerationType) {
+                  _matched_2=true;
+                  _switchResult_2 = EnumerationValueDeclaration.class;
+                }
+              }
+              if (!_matched_2) {
+                if (componentType instanceof JvmAnnotationType) {
+                  _matched_2=true;
+                  _switchResult_2 = AnnotationReference.class;
+                }
+              }
+              if (!_matched_2) {
+                _switchResult_2 = Object.class;
+              }
+              _switchResult_1 = _switchResult_2;
+            }
+            _xblockexpression = (Pair.<List<? extends Object>, Class<? extends Object>>of(_emptyList, _switchResult_1));
+          }
+          _switchResult = _xblockexpression;
+        }
+      }
+    }
     if (!_matched) {
       if (value instanceof JvmCustomAnnotationValue) {
         _matched=true;
