@@ -480,6 +480,12 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testTypeGuardedCase_2() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testTypeGuardedCase_3() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testTypeGuardedCase_4() throws Exception {
+		fail("fails in old implementation")
+	}
 	
 	@Ignore("fails in old implementation") @Test override testConstructorCall_01() throws Exception {
 		fail("fails in old implementation")
