@@ -79,6 +79,8 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
+import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 
 /**
  * A generator implementation that processes the 
@@ -279,7 +281,7 @@ class JvmModelGenerator implements IGenerator {
 	private def void appendCompilationTemplate(ITreeAppendable appendable, JvmIdentifiableElement it) {
 		switch appendable {
 			TreeAppendable: {
-				val target = new ImportingStringConcatenation(appendable.state, new StandardTypeReferenceOwner(commonServices, it));
+				val target = createImportingStringConcatenation(appendable.state, new StandardTypeReferenceOwner(commonServices, it));
 				target.append(compilationTemplate)
 				appendable.append(target)			
 			} 
@@ -288,6 +290,10 @@ class JvmModelGenerator implements IGenerator {
 		}
 		
 		}
+	}
+	
+	protected def ImportingStringConcatenation createImportingStringConcatenation(SharedAppendableState state, ITypeReferenceOwner owner) {
+		return new ImportingStringConcatenation(state, owner)
 	}
 	
 	def dispatch generateModifier(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {

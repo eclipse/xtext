@@ -2,10 +2,17 @@ package org.eclipse.xtend.core.tests.macro;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.compiler.XtendGenerator;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
+import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
@@ -27,6 +34,9 @@ import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -38,6 +48,12 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public abstract class AbstractReusableActiveAnnotationTests {
+  @Inject
+  private XtendGenerator generator;
+  
+  @Inject
+  private IGeneratorConfigProvider generatorConfigProvider;
+  
   @Test
   public void testAnnotationValueSetting_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -2942,6 +2958,45 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
   
   @Test
+  public void testImportFromTypeReference() {
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationImportFromTypeReference.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.text.DateFormat\n\t\t\t\timport java.text.SimpleDateFormat\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\t\n\t\t\t\t@Active(AnnotationImportFromTypeReferenceProcessor)\n\t\t\t\tannotation AnnotationImportFromTypeReference { }\n\t\t\t\tclass AnnotationImportFromTypeReferenceProcessor extends AbstractClassProcessor {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedClass.addField(\'myDateFormat\') [\n\t\t\t\t\t\t\ttype = DateFormat.newTypeReference\n\t\t\t\t\t\t\tinitializer = \'\'\'new «SimpleDateFormat.newTypeReference»()\'\'\'\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myusercode");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@myannotation.AnnotationImportFromTypeReference");
+    _builder.newLine();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.text.DateFormat;");
+    _builder_1.newLine();
+    _builder_1.append("import java.text.SimpleDateFormat;");
+    _builder_1.newLine();
+    _builder_1.append("import myannotation.AnnotationImportFromTypeReference;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@AnnotationImportFromTypeReference");
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private DateFormat myDateFormat = new SimpleDateFormat();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertGeneratedCode(_mappedTo, _mappedTo_1, _builder_1.toString());
+  }
+  
+  @Test
   public void testIntroduceNewTypeAndWorkWithIt() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myannotation");
@@ -3184,6 +3239,49 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
   
   public abstract void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations);
+  
+  public void assertGeneratedCode(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final String... compiledClientFiles) {
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        final Set<String> clientFilesAsSet = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(compiledClientFiles)));
+        int _size = clientFilesAsSet.size();
+        int _length = compiledClientFiles.length;
+        Assert.assertEquals(_size, _length);
+        XtendFile _xtendFile = it.getXtendFile();
+        final Resource resource = _xtendFile.eResource();
+        EList<EObject> _contents = resource.getContents();
+        final Iterable<EObject> jvmTypes = IterableExtensions.<EObject>tail(_contents);
+        final Procedure1<EObject> _function = new Procedure1<EObject>() {
+          public void apply(final EObject it) {
+            if ((it instanceof JvmDeclaredType)) {
+              GeneratorConfig _get = AbstractReusableActiveAnnotationTests.this.generatorConfigProvider.get(it);
+              CharSequence _generateType = AbstractReusableActiveAnnotationTests.this.generator.generateType(((JvmDeclaredType)it), _get);
+              final String generated = String.valueOf(_generateType);
+              boolean _remove = clientFilesAsSet.remove(generated);
+              boolean _not = (!_remove);
+              if (_not) {
+                String _join = IterableExtensions.join(clientFilesAsSet, "\n");
+                String _plus = ((("Unexpected compiled code:\n" + generated) + "\nExpected :\n") + _join);
+                Assert.assertEquals("", _plus);
+              }
+            } else {
+              String _valueOf = String.valueOf(it);
+              throw new IllegalArgumentException(_valueOf);
+            }
+          }
+        };
+        IterableExtensions.<EObject>forEach(jvmTypes, _function);
+        boolean _isEmpty = clientFilesAsSet.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          String _join = IterableExtensions.join(clientFilesAsSet, "\n");
+          String _plus = ("Missing compiled code. Expected :\n" + _join);
+          Assert.fail(_plus);
+        }
+      }
+    };
+    this.assertProcessing(macroFile, clientFile, _function);
+  }
   
   @Test
   public void testFileSystemSupport_01() {

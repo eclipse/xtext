@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.compiler.MacroAwareStringConcatenation;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.CodeGenerationContextImpl;
@@ -27,11 +28,14 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
+import org.eclipse.xtext.xbase.compiler.output.ImportingStringConcatenation;
+import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -91,6 +95,10 @@ public class XtendGenerator extends JvmModelGenerator {
         }
       }
     }
+  }
+  
+  protected ImportingStringConcatenation createImportingStringConcatenation(final SharedAppendableState state, final ITypeReferenceOwner owner) {
+    return new MacroAwareStringConcatenation(state, owner);
   }
   
   /**
