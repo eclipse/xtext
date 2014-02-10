@@ -1,20 +1,23 @@
 package org.eclipse.xtend.core.tests.macro
 
+import com.google.inject.Inject
+import org.eclipse.xtend.core.compiler.XtendGenerator
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
-import org.eclipse.xtend.lib.macro.AbstractClassProcessor
-import org.eclipse.xtend.lib.macro.TransformationContext
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
-import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
+import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtend.lib.macro.declaration.TypeReference
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
-import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 
 abstract class AbstractReusableActiveAnnotationTests {
+	
+	@Inject XtendGenerator generator
+	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
 	@Test def void testAnnotationValueSetting_1() {
 		assertProcessing(
@@ -1466,6 +1469,55 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertNotNull(typeLookup.findAnnotationType('myusercode.MyClassAnnotation'))
 		]
 	}
+	
+	@Test def void testImportFromTypeReference() {
+		assertGeneratedCode(
+			'myannotation/AnnotationImportFromTypeReference.xtend' -> "
+				package myannotation
+				
+				import java.text.DateFormat
+				import java.text.SimpleDateFormat
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				@Active(AnnotationImportFromTypeReferenceProcessor)
+				annotation AnnotationImportFromTypeReference { }
+				class AnnotationImportFromTypeReferenceProcessor extends AbstractClassProcessor {
+					
+					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+						annotatedClass.addField('myDateFormat') [
+							type = DateFormat.newTypeReference
+							initializer = '''new «SimpleDateFormat.newTypeReference»()'''
+						]
+					}
+				}
+			",
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.AnnotationImportFromTypeReference
+				class MyClass {
+				}
+			''',
+			'''
+				package myusercode;
+				
+				import java.text.DateFormat;
+				import java.text.SimpleDateFormat;
+				import myannotation.AnnotationImportFromTypeReference;
+				
+				@AnnotationImportFromTypeReference
+				@SuppressWarnings("all")
+				public class MyClass {
+				  private DateFormat myDateFormat = new SimpleDateFormat();
+				}
+			'''
+		)
+	}
 
 	@Test def void testIntroduceNewTypeAndWorkWithIt() {
 		assertProcessing(
@@ -1590,6 +1642,30 @@ abstract class AbstractReusableActiveAnnotationTests {
 	def void assertProcessing(Pair<String, String> macroFile, Pair<String, String> clientFile,
 		(CompilationUnitImpl)=>void expectations)
 		
+	def void assertGeneratedCode(Pair<String, String> macroFile, Pair<String, String> clientFile,
+		String... compiledClientFiles) {
+		assertProcessing(macroFile, clientFile) [
+			val clientFilesAsSet = compiledClientFiles.toSet
+			assertEquals(clientFilesAsSet.size, compiledClientFiles.length)
+			val resource = it.xtendFile.eResource
+			val jvmTypes = resource.contents.tail
+			
+			jvmTypes.forEach [
+				if (it instanceof JvmDeclaredType) {
+					val generated = String.valueOf(generator.generateType(it, generatorConfigProvider.get(it)))
+					if (!clientFilesAsSet.remove(generated)) {
+						assertEquals('', 'Unexpected compiled code:\n' + generated + '\nExpected :\n' + clientFilesAsSet.join('\n'))
+					}
+				} else {
+					throw new IllegalArgumentException(String.valueOf(it))
+				}
+			]
+			if (!clientFilesAsSet.empty) {
+				fail('Missing compiled code. Expected :\n' + clientFilesAsSet.join('\n'))
+			}
+		]
+	}
+		
 	@Test def void testFileSystemSupport_01() {
 
 		assertProcessing(
@@ -1649,22 +1725,3 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 }
-
-class FileSystemUsingProcessor extends AbstractClassProcessor {
-	
-	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
-		val path = annotatedClass.compilationUnit.filePath
-		annotatedClass.docComment = '''
-			Path "«path.toString»" {
-				exists: «path.exists»
-				isFolder: «path.isFolder»
-				isFile: «path.isFile»
-			}
-			sourceFolder : «path.sourceFolder»
-			targetFolder : «path.targetFolder»
-			projectFolder: «path.projectFolder»
-		'''
-	}
-	
-}
-
