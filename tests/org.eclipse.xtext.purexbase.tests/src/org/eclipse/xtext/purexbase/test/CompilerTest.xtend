@@ -81,7 +81,7 @@ class CompilerTest {
 			      Pair<Integer,String> _mappedTo_2 = Pair.<Integer, String>of(Integer.valueOf(3), "three");
 			      /* CollectionLiterals.<Integer, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2); */
 			      /* new BigInteger("beefbeefbeefbeefbeef", 16) */
-			      _xblockexpression = (new BigDecimal("0.123456789123456789123456789123456789e4242"));
+			      _xblockexpression = new BigDecimal("0.123456789123456789123456789123456789e4242");
 			    }
 			    return _xblockexpression;
 			  }
@@ -189,9 +189,9 @@ class CompilerTest {
 			      String _xblockexpression_1 = null;
 			      {
 			        final String s1 = "foo";
-			        _xblockexpression_1 = ((s + s1));
+			        _xblockexpression_1 = (s + s1);
 			      }
-			      _xblockexpression = (_xblockexpression_1);
+			      _xblockexpression = _xblockexpression_1;
 			    }
 			    return _xblockexpression;
 			  }
@@ -223,7 +223,7 @@ class CompilerTest {
 			    int _xblockexpression = (int) 0;
 			    {
 			      final CharSequence s = "foo";
-			      _xblockexpression = (((String) s).length());
+			      _xblockexpression = ((String) s).length();
 			    }
 			    return _xblockexpression;
 			  }
@@ -298,7 +298,7 @@ class CompilerTest {
 			        }
 			      };
 			      final Function1<? super String,? extends String> f2 = _function_2;
-			      _xblockexpression = (f2.apply("simsalabim"));
+			      _xblockexpression = f2.apply("simsalabim");
 			    }
 			    return _xblockexpression;
 			  }
@@ -369,7 +369,7 @@ class CompilerTest {
 			      if (_xifexpression_1) {
 			        _xifexpression = "Xbase doesn\'t need the ternary operator";
 			      }
-			      _xblockexpression = (_xifexpression);
+			      _xblockexpression = _xifexpression;
 			    }
 			    return _xblockexpression;
 			  }
@@ -403,7 +403,7 @@ class CompilerTest {
 			      final Amount a = new Amount("12.80");
 			      final Amount b = new Amount("0.20");
 			      Amount _multiply = b.operator_multiply(3);
-			      _xblockexpression = (a.operator_plus(_multiply));
+			      _xblockexpression = a.operator_plus(_multiply);
 			    }
 			    return _xblockexpression;
 			  }
@@ -470,7 +470,7 @@ class CompilerTest {
 			        boolean _lessThan_1 = (i < _size_1);
 			        _while = _lessThan_1;
 			      }
-			      _xblockexpression = (result);
+			      _xblockexpression = result;
 			    }
 			    return _xblockexpression;
 			  }
@@ -522,7 +522,7 @@ class CompilerTest {
 			        }
 			      } finally {
 			      }
-			      _xblockexpression = (null);
+			      _xblockexpression = null;
 			    }
 			    return _xblockexpression;
 			  }
@@ -635,7 +635,7 @@ class CompilerTest {
 			          return _switchResult;
 			        }
 			      };
-			      _xblockexpression = (ListExtensions.<Shape, String>map(list2, _function));
+			      _xblockexpression = ListExtensions.<Shape, String>map(list2, _function);
 			    }
 			    return _xblockexpression;
 			  }
@@ -703,7 +703,7 @@ class CompilerTest {
 			    int _length = "string".length();
 			    Integer.valueOf(_length).toString();
 			    "string".toCharArray();
-			    final List<Character> l = ((List<Character>)Conversions.doWrapArray("string".toCharArray()));
+			    final List<Character> l = (List<Character>)Conversions.doWrapArray("string".toCharArray());
 			    char[] _charArray = "string".toCharArray();
 			    /* _charArray[3]; */
 			    final Comparator<String> _function = new Comparator<String>() {
