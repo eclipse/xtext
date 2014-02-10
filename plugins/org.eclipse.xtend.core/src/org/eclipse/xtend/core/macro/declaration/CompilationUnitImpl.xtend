@@ -110,6 +110,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
+import org.eclipse.xtext.common.types.JvmArrayType
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -630,6 +631,29 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def Object translateAnnotationValue(JvmAnnotationValue value, boolean isArray) {
 		val Pair<List<?>, Class<?>> result = switch value {
+			JvmCustomAnnotationValue case value.values.empty && isArray: {
+				val expectedType = findExpectedType(value).getType as JvmArrayType
+				val componentType = expectedType.componentType
+				val componentTypeName = componentType.identifier
+				emptyList -> switch(componentTypeName) {
+					case 'java.lang.Class': TypeReference
+					case 'java.lang.String': String
+					case 'boolean': boolean
+					case 'int': int
+					case 'byte': byte
+					case 'char': char
+					case 'double': double
+					case 'float': float
+					case 'long': long
+					case 'short': short
+					default:
+						switch(componentType) {
+							JvmEnumerationType: EnumerationValueDeclaration
+							JvmAnnotationType: AnnotationReference
+							default: Object
+						}
+				}
+			}
 			JvmCustomAnnotationValue : {
 				// custom values always contain a single expression and will already return an array if it's a multi value.
 				val expectedType = findExpectedType(value)
