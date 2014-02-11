@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Added protected method" id="924844039">
+            <message_arguments>
+                <message_argument value="2.5.2"/>
+                <message_argument value="2.5.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
