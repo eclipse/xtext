@@ -160,7 +160,7 @@ public class CompilerTest {
       _builder_1.append("/* new BigInteger(\"beefbeefbeefbeefbeef\", 16) */");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = new BigDecimal(\"0.123456789123456789123456789123456789e4242\");");
+      _builder_1.append("_xblockexpression = (new BigDecimal(\"0.123456789123456789123456789123456789e4242\"));");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -408,13 +408,13 @@ public class CompilerTest {
       _builder_1.append("final String s1 = \"foo\";");
       _builder_1.newLine();
       _builder_1.append("        ");
-      _builder_1.append("_xblockexpression_1 = (s + s1);");
+      _builder_1.append("_xblockexpression_1 = ((s + s1));");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = _xblockexpression_1;");
+      _builder_1.append("_xblockexpression = (_xblockexpression_1);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -490,7 +490,7 @@ public class CompilerTest {
       _builder_1.append("final CharSequence s = \"foo\";");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = ((String) s).length();");
+      _builder_1.append("_xblockexpression = (((String) s).length());");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -665,7 +665,7 @@ public class CompilerTest {
       _builder_1.append("final Function1<? super String,? extends String> f2 = _function_2;");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = f2.apply(\"simsalabim\");");
+      _builder_1.append("_xblockexpression = (f2.apply(\"simsalabim\"));");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -849,7 +849,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = _xifexpression;");
+      _builder_1.append("_xblockexpression = (_xifexpression);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -927,7 +927,7 @@ public class CompilerTest {
       _builder_1.append("Amount _multiply = b.operator_multiply(3);");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = a.operator_plus(_multiply);");
+      _builder_1.append("_xblockexpression = (a.operator_plus(_multiply));");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -1093,7 +1093,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = result;");
+      _builder_1.append("_xblockexpression = (result);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -1222,7 +1222,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = null;");
+      _builder_1.append("_xblockexpression = (null);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -1520,7 +1520,7 @@ public class CompilerTest {
       _builder_1.append("};");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = ListExtensions.<Shape, String>map(list2, _function);");
+      _builder_1.append("_xblockexpression = (ListExtensions.<Shape, String>map(list2, _function));");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -1669,7 +1669,7 @@ public class CompilerTest {
       _builder_1.append("\"string\".toCharArray();");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("final List<Character> l = (List<Character>)Conversions.doWrapArray(\"string\".toCharArray());");
+      _builder_1.append("final List<Character> l = ((List<Character>)Conversions.doWrapArray(\"string\".toCharArray()));");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("char[] _charArray = \"string\".toCharArray();");
