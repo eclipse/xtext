@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Added protected method" id="924844039">
+            <message_arguments>
+                <message_argument value="2.5.2"/>
+                <message_argument value="2.5.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.resource.IndexingOrderer">
         <filter comment="Removed @Beta API" id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.resource.IndexingOrderer"/>
                 <message_argument value="org.eclipse.xtext_2.5.1"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/parser/antlr/AbstractAntlrParser.java" type="org.eclipse.xtext.parser.antlr.AbstractAntlrParser">
+        <filter comment="Added protected method" id="1141899266">
+            <message_arguments>
+                <message_argument value="2.5"/>
+                <message_argument value="2.6"/>
+                <message_argument value="createNodeModelBuilder()"/>
             </message_arguments>
         </filter>
     </resource>
