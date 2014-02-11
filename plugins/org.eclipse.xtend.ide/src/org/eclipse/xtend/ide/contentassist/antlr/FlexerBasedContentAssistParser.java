@@ -12,6 +12,7 @@ import java.util.Collection;
 
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
+import org.eclipse.xtend.ide.contentassist.antlr.internal.ContentAssistFlexerFactory;
 import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendParser;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;

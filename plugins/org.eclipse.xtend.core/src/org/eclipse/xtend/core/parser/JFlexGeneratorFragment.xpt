@@ -62,7 +62,7 @@ import org.antlr.runtime.TokenSource;
 %}
 
 %unicode
-%public
+%implements org.eclipse.xtend.core.parser.InternalFlexer
 %class «getGrammarFileName().toSimpleName()»Flexer
 %function advance
 %int

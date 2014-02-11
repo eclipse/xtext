@@ -12,7 +12,6 @@ import java.io.StringReader;
 
 import org.antlr.runtime.Token;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
-import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendFlexer;
 import org.eclipse.xtext.parser.impl.TokenRegionProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
@@ -30,21 +29,21 @@ public class FlexTokenRegionProvider extends TokenRegionProvider {
 	@Override
 	public ITextRegion getTokenRegion(String text, ITextRegion region) {
 		try {
-			InternalXtendFlexer flexer = flexerFactory.createFlexer(new StringReader(text));
+			InternalFlexer flexer = flexerFactory.createFlexer(new StringReader(text));
 			int token = flexer.advance();
 			int prevStart = 0;
-			int nextStart = flexer.yylength();
+			int nextStart = flexer.getTokenLength();
 			
 			final int regionStartOffset = region.getOffset();
 			final int regionEnd = regionStartOffset + region.getLength();
 			while (token != Token.EOF && nextStart <= regionStartOffset) {
 				prevStart = nextStart;
 				token = flexer.advance();
-				nextStart += flexer.yylength();
+				nextStart += flexer.getTokenLength();
 			}
 			while (token != Token.EOF && nextStart < regionEnd) {
 				token = flexer.advance();
-				nextStart += flexer.yylength();
+				nextStart += flexer.getTokenLength();
 			}
 			return new TextRegion(prevStart, nextStart - prevStart);
 		} catch(IOException e) {

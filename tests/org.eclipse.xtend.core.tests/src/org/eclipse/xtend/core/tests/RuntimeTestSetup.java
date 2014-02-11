@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend.core.XtendRuntimeModule;
 import org.eclipse.xtend.core.XtendStandaloneSetup;
+import org.eclipse.xtend.core.parser.InternalFlexer;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
-import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendFlexer;
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.scoping.XtendScopeProvider;
 import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes;
@@ -92,17 +92,17 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 	public static class AssertingFlexerFactory extends FlexerFactory {
 		
 		@Override
-		public InternalXtendFlexer createFlexer(Reader reader) {
+		public InternalFlexer createFlexer(Reader reader) {
 			try {
 				final String lexMe = CharStreams.toString(reader);
 				ANTLRStringStream antlrStream = new ANTLRStringStream(lexMe);
 				final InternalXtendLexer antlrImplementation = new InternalXtendLexer(antlrStream);
-				InternalXtendFlexer result = new InternalXtendFlexer(new StringReader(lexMe)) {
-					@Override
+				final InternalFlexer delegate = super.createFlexer(new StringReader(lexMe));
+				InternalFlexer result = new InternalFlexer() {
 					public int advance() throws IOException {
-						int result = super.advance();
+						int result = delegate.advance();
 						CommonToken antlrToken = (CommonToken) antlrImplementation.nextToken();
-						String text = yytext();
+						String text = getTokenText();
 						if (antlrToken.getType() != result) {
 							throw mismatch(lexMe, antlrToken, text);
 						}
@@ -115,6 +115,18 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 					private IllegalStateException mismatch(final String lexMe, CommonToken antlrToken, String other) {
 						return new IllegalStateException(
 								"Token mismatch at offset " + antlrToken.getStartIndex() + "(" + other + " vs " + antlrToken.getText() + ") in: " + lexMe);
+					}
+
+					public int getTokenLength() {
+						return delegate.getTokenLength();
+					}
+					
+					public String getTokenText() {
+						return delegate.getTokenText();
+					}
+
+					public void yyreset(Reader reader) {
+						delegate.yyreset(reader);
 					}
 				};
 				return result;

@@ -5,10 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.contentassist.antlr;
+package org.eclipse.xtend.ide.contentassist.antlr.internal;
 
 import java.io.Reader;
 
+import org.eclipse.xtend.core.parser.InternalFlexer;
 import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendFlexer;
 
 /**
@@ -16,7 +17,7 @@ import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendFlexer;
  */
 public class ContentAssistFlexerFactory {
 
-	public InternalXtendFlexer createFlexer(Reader reader) {
+	public InternalFlexer createFlexer(Reader reader) {
 		return new InternalXtendFlexer(reader);
 	}
 	

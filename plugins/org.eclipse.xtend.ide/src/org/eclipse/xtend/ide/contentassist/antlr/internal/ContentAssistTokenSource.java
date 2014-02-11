@@ -1,4 +1,4 @@
-package org.eclipse.xtend.ide.contentassist.antlr;
+package org.eclipse.xtend.ide.contentassist.antlr.internal;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -6,17 +6,17 @@ import java.io.Reader;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
-import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendFlexer;
+import org.eclipse.xtend.core.parser.InternalFlexer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ContentAssistTokenSource implements TokenSource {
 
-	private final InternalXtendFlexer flexer;
+	private final InternalFlexer flexer;
 	private int offset;
 
-	protected ContentAssistTokenSource(InternalXtendFlexer flexer) {
+	protected ContentAssistTokenSource(InternalFlexer flexer) {
 		this.flexer = flexer;
 		offset = 0;
 	}

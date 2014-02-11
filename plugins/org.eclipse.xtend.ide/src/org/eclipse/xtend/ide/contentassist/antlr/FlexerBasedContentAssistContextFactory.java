@@ -15,7 +15,8 @@ import org.antlr.runtime.Token;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendFlexer;
+import org.eclipse.xtend.core.parser.InternalFlexer;
+import org.eclipse.xtend.ide.contentassist.antlr.internal.ContentAssistFlexerFactory;
 import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
@@ -37,7 +38,7 @@ public class FlexerBasedContentAssistContextFactory extends ParserBasedContentAs
 	protected void createContextsForLastCompleteNode(EObject previousModel, boolean strict) throws BadLocationException {
 		String currentNodePrefix = getPrefix(currentNode);
 		if (!Strings.isEmpty(currentNodePrefix) && !currentNode.getText().equals(currentNodePrefix)) {
-			InternalXtendFlexer flexer = flexerFactory.createFlexer(new StringReader(currentNodePrefix));
+			InternalFlexer flexer = flexerFactory.createFlexer(new StringReader(currentNodePrefix));
 			try {
 				int token = flexer.advance();
 				if (token == Token.EOF) { // error case - nothing could be parsed
