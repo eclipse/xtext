@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -31,6 +30,8 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -102,7 +103,7 @@ public class ProblemSupportImpl implements ProblemSupport {
   }
   
   public EStructuralFeature getSignificantFeature(final EObject obj) {
-    EAttribute _switchResult = null;
+    EStructuralFeature _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
       if (obj instanceof XtendTypeDeclaration) {
@@ -126,6 +127,12 @@ public class ProblemSupportImpl implements ProblemSupport {
       if (obj instanceof JvmFormalParameter) {
         _matched=true;
         _switchResult = TypesPackage.eINSTANCE.getJvmFormalParameter_Name();
+      }
+    }
+    if (!_matched) {
+      if (obj instanceof XAnnotation) {
+        _matched=true;
+        _switchResult = XAnnotationsPackage.eINSTANCE.getXAnnotation_AnnotationType();
       }
     }
     return _switchResult;

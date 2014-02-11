@@ -21,6 +21,8 @@ import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
 class ProblemSupportImpl implements ProblemSupport {
 	
@@ -65,6 +67,7 @@ class ProblemSupportImpl implements ProblemSupport {
 			// FIXME: find something appropriate for constructors
 			//XtendConstructor : XtendPackage.eINSTANCE.xtendConstructor_Name
 			JvmFormalParameter : TypesPackage.eINSTANCE.jvmFormalParameter_Name
+			XAnnotation : XAnnotationsPackage.eINSTANCE.XAnnotation_AnnotationType
 		}
 	}
 	
