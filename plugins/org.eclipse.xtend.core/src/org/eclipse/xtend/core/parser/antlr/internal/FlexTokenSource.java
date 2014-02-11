@@ -13,16 +13,17 @@ import java.io.Reader;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
+import org.eclipse.xtend.core.parser.InternalFlexer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class FlexTokenSource implements TokenSource {
 
-	private final InternalXtendFlexer flexer;
+	private final InternalFlexer flexer;
 	private int offset;
 
-	protected FlexTokenSource(InternalXtendFlexer flexer) {
+	protected FlexTokenSource(InternalFlexer flexer) {
 		this.flexer = flexer;
 		offset = 0;
 	}
@@ -39,7 +40,7 @@ public class FlexTokenSource implements TokenSource {
 				return Token.EOF_TOKEN;
 			}
 			int length = flexer.getTokenLength();
-			final String tokenText = flexer.yytext();
+			final String tokenText = flexer.getTokenText();
 			CommonToken result = new CommonTokenWithText(tokenText, type, Token.DEFAULT_CHANNEL, offset);
 			offset += length;
 			return result;

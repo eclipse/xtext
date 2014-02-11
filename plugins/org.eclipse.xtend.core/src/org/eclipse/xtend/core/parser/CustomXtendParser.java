@@ -19,7 +19,6 @@ import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.parser.IParseResult;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
@@ -32,10 +31,6 @@ import com.google.inject.Singleton;
 @Singleton
 public class CustomXtendParser extends XtendParser {
 
-	// TODO make the provider's #get from the super type available
-	@Inject
-	private Provider<NodeModelBuilder> nodeModelBuilder;
-	
 	@Inject
 	private FlexerFactory flexerFactory;
 	
@@ -61,88 +56,10 @@ public class CustomXtendParser extends XtendParser {
 	
 	@Override
 	public IParseResult parse(RuleCall ruleCall, Reader reader, int initialLookAhead) {
-		NodeModelBuilder builder = nodeModelBuilder.get();
+		NodeModelBuilder builder = createNodeModelBuilder();
 		builder.setForcedFirstGrammarElement(ruleCall);
 		IParseResult parseResult = doParse(ruleCall.getRule().getName(), new ReaderCharStream(reader), builder, initialLookAhead);
 		return parseResult;
-	}
-	
-	static class ReaderCharStream implements CharStream {
-
-		private Reader reader;
-
-		ReaderCharStream(Reader reader) {
-			this.reader = reader;
-		}
-		
-		public Reader getReader() {
-			return reader;
-		}
-		
-		public void consume() {
-			throw new UnsupportedOperationException();
-		}
-
-		public int LA(int i) {
-			throw new UnsupportedOperationException();
-		}
-
-		public int mark() {
-			throw new UnsupportedOperationException();
-		}
-
-		public int index() {
-			throw new UnsupportedOperationException();
-		}
-
-		public void rewind(int marker) {
-			throw new UnsupportedOperationException();
-		}
-
-		public void rewind() {
-			throw new UnsupportedOperationException();
-		}
-
-		public void release(int marker) {
-			throw new UnsupportedOperationException();
-		}
-
-		public void seek(int index) {
-			throw new UnsupportedOperationException();
-		}
-
-		public int size() {
-			throw new UnsupportedOperationException();
-		}
-
-		public String getSourceName() {
-			throw new UnsupportedOperationException();
-		}
-
-		public String substring(int start, int stop) {
-			throw new UnsupportedOperationException();
-		}
-
-		public int LT(int i) {
-			throw new UnsupportedOperationException();
-		}
-
-		public int getLine() {
-			throw new UnsupportedOperationException();
-		}
-
-		public void setLine(int line) {
-			throw new UnsupportedOperationException();
-		}
-
-		public void setCharPositionInLine(int pos) {
-			throw new UnsupportedOperationException();
-		}
-
-		public int getCharPositionInLine() {
-			throw new UnsupportedOperationException();
-		}
-		
 	}
 	
 }

@@ -15,8 +15,8 @@ import java.nio.charset.Charset;
 
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.Token;
+import org.eclipse.xtend.core.parser.InternalFlexer;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
-import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendFlexer;
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexTokenSource;
 
@@ -84,7 +84,7 @@ public class LexerBenchmark extends SimpleBenchmark {
 	private String contentToParse;
 	private InternalXtendLexer lexer;
 	private FlexTokenSource flexerTokenSource;
-	private InternalXtendFlexer bareFlexer;
+	private InternalFlexer bareFlexer;
 
 	public String loadString() {
 		URL resource = LexerBenchmark.class.getResource(fileName);
@@ -101,7 +101,7 @@ public class LexerBenchmark extends SimpleBenchmark {
 		contentToParse = loadString();
 		lexer = new InternalXtendLexer(null);
 		flexerTokenSource = new FlexerFactory().createTokenSource(null);
-		bareFlexer = new InternalXtendFlexer();
+		bareFlexer = new FlexerFactory().createFlexer(null);
 	}
 
 	public int timeLexing(int reps) throws Exception {

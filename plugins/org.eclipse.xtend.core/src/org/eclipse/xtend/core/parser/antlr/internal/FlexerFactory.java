@@ -9,15 +9,13 @@ package org.eclipse.xtend.core.parser.antlr.internal;
 
 import java.io.Reader;
 
+import org.eclipse.xtend.core.parser.InternalFlexer;
+
 /**
- * Will be removed later. Just to make sure Antlr and JFlex are in sync by allowing
- * to override {@link #createFlexer(Reader)} and return something that asserts the state
- * of both implementations.
- * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class FlexerFactory {
-	public InternalXtendFlexer createFlexer(Reader reader) {
+	public InternalFlexer createFlexer(Reader reader) {
 		return new InternalXtendFlexer(reader);
 	}
 	public FlexTokenSource createTokenSource(Reader reader) {
