@@ -29,7 +29,7 @@ import org.antlr.runtime.TokenSource;
 %}
 
 %unicode
-%public
+%implements org.eclipse.xtend.core.parser.InternalFlexer
 %class InternalXtendFlexer
 %function advance
 %int

@@ -19,7 +19,6 @@ import org.antlr.runtime.Token;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
-import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendFlexer;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.GrammarUtil;
@@ -184,8 +183,8 @@ public class XtendPartialParsingHelper implements IPartialParsingHelper {
 	
 	private boolean isSameTokenSequence(String originalText, String newText) {
 		try {
-			InternalXtendFlexer originalSequence = flexerFactory.createFlexer(new StringReader(originalText));
-			InternalXtendFlexer newSequence = flexerFactory.createFlexer(new StringReader(newText));
+			InternalFlexer originalSequence = flexerFactory.createFlexer(new StringReader(originalText));
+			InternalFlexer newSequence = flexerFactory.createFlexer(new StringReader(newText));
 			int token = originalSequence.advance();
 			while(token != Token.EOF) {
 				if (token != newSequence.advance()) {

@@ -14,6 +14,8 @@ import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 
 /**
+ * This is required together with the {@link XtendPartialParsingHelper}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class XtendNodeModelBuilder extends org.eclipse.xtext.nodemodel.impl.NodeModelBuilder {
@@ -22,7 +24,7 @@ public class XtendNodeModelBuilder extends org.eclipse.xtext.nodemodel.impl.Node
 	public void replaceAndTransferLookAhead(INode oldNode, INode newRootNode) {
 		Iterator<AbstractNode> oldNodes = ((AbstractNode) oldNode).basicIterator();
 		Iterator<AbstractNode> newNodes = ((AbstractNode) newRootNode).basicIterator();
-		newNodes.next(); // basicGetFirstChild
+		newNodes.next(); // basicGetFirstChild to skip that one
 		while(oldNodes.hasNext()) {
 			AbstractNode nextOld = oldNodes.next();
 			AbstractNode nextNew = newNodes.next();

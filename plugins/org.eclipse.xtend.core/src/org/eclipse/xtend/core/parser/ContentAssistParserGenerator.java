@@ -21,7 +21,6 @@ public class ContentAssistParserGenerator extends XtextAntlrUiGeneratorFragment 
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		XpandExecutionContextImpl casted = (XpandExecutionContextImpl) ctx;
 		casted.registerAdvices("org::eclipse::xtend::core::parser::ContentAssistAntlrGrammarWithTokens");
-		
 		super.generate(grammar, ctx);
 	}
 	

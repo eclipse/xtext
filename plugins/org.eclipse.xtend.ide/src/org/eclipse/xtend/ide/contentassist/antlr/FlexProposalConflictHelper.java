@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import org.antlr.runtime.Token;
+import org.eclipse.xtend.core.parser.InternalFlexer;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
-import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendFlexer;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ProposalConflictHelper;
 
@@ -40,11 +40,11 @@ import com.google.inject.Inject;
  */
 public class FlexProposalConflictHelper extends ProposalConflictHelper {
 
-	private InternalXtendFlexer proposalFlexer;
+	private InternalFlexer proposalFlexer;
 
-	private InternalXtendFlexer lastCompleteFlexer;
+	private InternalFlexer lastCompleteFlexer;
 	
-	private InternalXtendFlexer combinedFlexer;
+	private InternalFlexer combinedFlexer;
 	
 	@Inject
 	private void initializeFlexers(FlexerFactory factory) {
@@ -70,7 +70,7 @@ public class FlexProposalConflictHelper extends ProposalConflictHelper {
 		}
 	}
 
-	protected boolean equalTokenSequence(InternalXtendFlexer first, InternalXtendFlexer second) throws IOException {
+	protected boolean equalTokenSequence(InternalFlexer first, InternalFlexer second) throws IOException {
 		int token;
 		while((token = first.advance()) != Token.EOF) {
 			int otherToken = second.advance();
@@ -91,7 +91,7 @@ public class FlexProposalConflictHelper extends ProposalConflictHelper {
 		initTokenSource(proposal, proposalFlexer, context);
 	}
 
-	protected void initTokenSource(String text, InternalXtendFlexer tokenSource, ContentAssistContext context) {
+	protected void initTokenSource(String text, InternalFlexer tokenSource, ContentAssistContext context) {
 		tokenSource.yyreset(new StringReader(text));
 	}
 

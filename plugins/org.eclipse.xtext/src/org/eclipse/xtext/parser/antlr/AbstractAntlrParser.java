@@ -190,5 +190,12 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 	public Provider<IUnorderedGroupHelper> getUnorderedGroupHelper() {
 		return unorderedGroupHelper;
 	}
+	
+	/**
+	 * @since 2.5
+	 */
+	protected NodeModelBuilder createNodeModelBuilder() {
+		return nodeModelBuilder.get();
+	}
 
 }
