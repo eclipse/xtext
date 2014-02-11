@@ -134,22 +134,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return true;
 	}
 	
-	protected List<XExpression> normalizeBlockExpression(Collection<XExpression> expr) {
-		List<XExpression> result  = Lists.newArrayListWithExpectedSize(expr.size());
-		for(XExpression e:expr)
-			result.add(normalizeBlockExpression(e));
-		return result;
-	}
-
-	protected XExpression normalizeBlockExpression(XExpression expr) {
-		if (expr instanceof XBlockExpression) {
-			XBlockExpression block = ((XBlockExpression) expr);
-			if (block.getExpressions().size() == 1)
-				return normalizeBlockExpression(block.getExpressions().get(0));
-		}
-		return expr;
-	}
-	
 	protected void _toJavaStatement(final XAbstractFeatureCall expr, ITreeAppendable b, final boolean isReferenced) {
 		if (expr.isTypeLiteral()) {
 			generateComment(new Later() {

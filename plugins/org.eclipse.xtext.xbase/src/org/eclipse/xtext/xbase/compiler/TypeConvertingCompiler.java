@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -29,6 +31,7 @@ import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -41,6 +44,7 @@ import org.eclipse.xtext.xbase.typing.Closures;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -363,6 +367,23 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		expression.exec(appendable);
 		appendable.append(")");
 	}
+	
+	protected List<XExpression> normalizeBlockExpression(Collection<XExpression> expr) {
+		List<XExpression> result  = Lists.newArrayListWithExpectedSize(expr.size());
+		for(XExpression e:expr)
+			result.add(normalizeBlockExpression(e));
+		return result;
+	}
+
+	protected XExpression normalizeBlockExpression(XExpression expr) {
+		if (expr instanceof XBlockExpression) {
+			XBlockExpression block = ((XBlockExpression) expr);
+			if (block.getExpressions().size() == 1)
+				return normalizeBlockExpression(block.getExpressions().get(0));
+		}
+		return expr;
+	}
+
 
 	/**
 	 * @param wrapper unused in this context but useful for inheritors 
@@ -373,11 +394,12 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			XExpression context, 
 			final ITreeAppendable appendable,
 			final Later expression) {
-		if (context instanceof XAbstractFeatureCall && !(context.eContainer() instanceof XAbstractFeatureCall)) {
+		XExpression normalized = normalizeBlockExpression(context);
+		if (normalized instanceof XAbstractFeatureCall && !(context.eContainer() instanceof XAbstractFeatureCall)) {
 			// Avoid javac bug
 			// https://bugs.eclipse.org/bugs/show_bug.cgi?id=410797
 			// TODO make that dependent on the compiler version (javac 1.7 fixed that bug)
-			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) context;
+			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) normalized;
 			if (featureCall.isStatic()) {
 				JvmIdentifiableElement feature = featureCall.getFeature();
 				if (feature instanceof JvmOperation) {
