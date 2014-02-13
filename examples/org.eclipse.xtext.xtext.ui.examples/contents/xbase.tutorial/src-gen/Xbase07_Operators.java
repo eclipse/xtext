@@ -8,7 +8,7 @@ public class Xbase07_Operators {
       final Amount a = new Amount("12.80");
       final Amount b = new Amount("0.20");
       Amount _multiply = b.operator_multiply(3);
-      _xblockexpression = (a.operator_plus(_multiply));
+      _xblockexpression = a.operator_plus(_multiply);
     }
     return _xblockexpression;
   }

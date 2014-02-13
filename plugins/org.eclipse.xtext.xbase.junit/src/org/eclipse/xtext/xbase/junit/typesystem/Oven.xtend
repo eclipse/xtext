@@ -16,7 +16,6 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
@@ -54,12 +53,6 @@ class Oven extends Assert {
 			if (file != null) {
 				for(content: file.eAllContents.toIterable) {
 					switch(content) {
-						XSwitchExpression: {
-							assertExpressionTypeIsResolved(content, resolvedTypes)
-							if (content.localVarName != null) {
-								assertIdentifiableTypeIsResolved(content, resolvedTypes)
-							}
-						}
 						XAbstractFeatureCall: {
 							assertExpressionTypeIsResolved(content, resolvedTypes)
 							if (content.implicitReceiver != null) {

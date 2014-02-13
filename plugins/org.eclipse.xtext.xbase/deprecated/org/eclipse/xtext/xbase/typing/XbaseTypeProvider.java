@@ -146,8 +146,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			return _typeForIdentifiable((JvmOperation)identifiable, rawType);
 		} else if (identifiable instanceof JvmType) {
 			return _typeForIdentifiable((JvmType)identifiable, rawType);
-		} else if (identifiable instanceof XSwitchExpression) {
-			return _typeForIdentifiable((XSwitchExpression)identifiable, rawType);
 		} else if (identifiable instanceof XVariableDeclaration) {
 			return _typeForIdentifiable((XVariableDeclaration)identifiable, rawType);
 		} else {
@@ -1299,14 +1297,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	@Inject
 	private SynonymTypesProvider synonymTypesProvider;
 
-	protected JvmTypeReference _typeForIdentifiable(XSwitchExpression object, boolean rawType) {
-		if (object.getLocalVarName() != null) {
-			final JvmTypeReference result = getType(object.getSwitch(), rawType);
-			return result;
-		}
-		return null;
-	}
-
 	protected JvmTypeReference _typeForIdentifiable(XVariableDeclaration object, boolean rawType) {
 		if (object.getType() != null)
 			return object.getType();
@@ -1315,7 +1305,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference _typeForIdentifiable(JvmFormalParameter parameter, boolean rawType) {
 		if (parameter.getParameterType() == null) {
-			if (parameter.eContainer() instanceof XClosure) {
+			if (parameter.eContainer() instanceof XSwitchExpression) {
+				XSwitchExpression switchExpression = (XSwitchExpression) parameter.eContainer();
+				return getType(switchExpression.getSwitch(), rawType);
+			} else if (parameter.eContainer() instanceof XClosure) {
 				final XClosure closure = (XClosure) parameter.eContainer();
 				JvmTypeReference type = getExpectedType(closure, rawType);
 				if (type == null) {

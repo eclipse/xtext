@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.util;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
@@ -38,10 +39,7 @@ public class XSwitchExpressions {
   public boolean isJavaSwitchExpression(final XSwitchExpression it) {
     boolean _xblockexpression = false;
     {
-      @Extension
-      final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(it);
-      XExpression _switch = it.getSwitch();
-      final LightweightTypeReference switchType = resolvedTypes.getActualType(_switch);
+      final LightweightTypeReference switchType = this.getSwitchVariableType(it);
       boolean _equals = Objects.equal(switchType, null);
       if (_equals) {
         return false;
@@ -79,8 +77,7 @@ public class XSwitchExpressions {
       if (_equals_1) {
         return false;
       }
-      XExpression _switch = it.getSwitch();
-      final LightweightTypeReference switchType = resolvedTypes.getActualType(_switch);
+      final LightweightTypeReference switchType = this.getSwitchVariableType(it);
       boolean _isAssignableFrom = switchType.isAssignableFrom(caseType);
       boolean _not = (!_isAssignableFrom);
       if (_not) {
@@ -89,6 +86,27 @@ public class XSwitchExpressions {
       _xblockexpression = true;
     }
     return _xblockexpression;
+  }
+  
+  public LightweightTypeReference getSwitchVariableType(final XSwitchExpression it) {
+    @Extension
+    final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(it);
+    final JvmFormalParameter declaredParam = it.getDeclaredParam();
+    boolean _equals = Objects.equal(declaredParam, null);
+    if (_equals) {
+      XExpression _switch = it.getSwitch();
+      return resolvedTypes.getActualType(_switch);
+    }
+    final LightweightTypeReference paramType = resolvedTypes.getActualType(declaredParam);
+    LightweightTypeReference _elvis = null;
+    if (paramType != null) {
+      _elvis = paramType;
+    } else {
+      XExpression _switch_1 = it.getSwitch();
+      LightweightTypeReference _actualType = resolvedTypes.getActualType(_switch_1);
+      _elvis = _actualType;
+    }
+    return _elvis;
   }
   
   public boolean isConstant(final XCasePart casePart) {

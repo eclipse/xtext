@@ -14,9 +14,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
-import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.xbase.XCasePart
-import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.validation.UIStrings
@@ -127,22 +124,6 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 
 	protected def dispatch ImageDescriptor imageDescriptor(JvmTypeParameter parameter) {
 		images.forTypeParameter(adornments.get(parameter))
-	}
-
-	protected def String text(XCasePart casePart) {
-		if (casePart.eContainer instanceof XSwitchExpression) {
-			val switchExpression = casePart.eContainer as XSwitchExpression
-			if (switchExpression != null) {
-				if (switchExpression.getLocalVarName != null)
-					return switchExpression.getLocalVarName
-				if (switchExpression.getSwitch instanceof XAbstractFeatureCall) {
-					val call = switchExpression.getSwitch as XAbstractFeatureCall
-					if (call.getFeature != null)
-						return call.getFeature.getSimpleName
-				}
-			}
-		}
-		null
 	}
 
 	protected def StyledString signature(String simpleName, JvmIdentifiableElement element) {

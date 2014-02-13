@@ -63,7 +63,7 @@ public class Xbase10_Switch {
           return _switchResult;
         }
       };
-      _xblockexpression = (ListExtensions.<Shape, String>map(list2, _function));
+      _xblockexpression = ListExtensions.<Shape, String>map(list2, _function);
     }
     return _xblockexpression;
   }

@@ -31,7 +31,7 @@ public class Xbase08_Loops {
         boolean _lessThan_1 = (i < _size_1);
         _while = _lessThan_1;
       }
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }

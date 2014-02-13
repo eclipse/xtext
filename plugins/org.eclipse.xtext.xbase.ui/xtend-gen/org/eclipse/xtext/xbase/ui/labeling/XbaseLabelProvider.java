@@ -3,7 +3,6 @@ package org.eclipse.xtext.xbase.ui.labeling;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
@@ -19,10 +18,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XCasePart;
-import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -195,38 +190,6 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   protected ImageDescriptor _imageDescriptor(final JvmTypeParameter parameter) {
     int _get = this.adornments.get(parameter);
     return this.images.forTypeParameter(_get);
-  }
-  
-  protected String text(final XCasePart casePart) {
-    String _xblockexpression = null;
-    {
-      EObject _eContainer = casePart.eContainer();
-      if ((_eContainer instanceof XSwitchExpression)) {
-        EObject _eContainer_1 = casePart.eContainer();
-        final XSwitchExpression switchExpression = ((XSwitchExpression) _eContainer_1);
-        boolean _notEquals = (!Objects.equal(switchExpression, null));
-        if (_notEquals) {
-          String _localVarName = switchExpression.getLocalVarName();
-          boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
-          if (_notEquals_1) {
-            return switchExpression.getLocalVarName();
-          }
-          XExpression _switch = switchExpression.getSwitch();
-          if ((_switch instanceof XAbstractFeatureCall)) {
-            XExpression _switch_1 = switchExpression.getSwitch();
-            final XAbstractFeatureCall call = ((XAbstractFeatureCall) _switch_1);
-            JvmIdentifiableElement _feature = call.getFeature();
-            boolean _notEquals_2 = (!Objects.equal(_feature, null));
-            if (_notEquals_2) {
-              JvmIdentifiableElement _feature_1 = call.getFeature();
-              return _feature_1.getSimpleName();
-            }
-          }
-        }
-      }
-      _xblockexpression = null;
-    }
-    return _xblockexpression;
   }
   
   protected StyledString signature(final String simpleName, final JvmIdentifiableElement element) {

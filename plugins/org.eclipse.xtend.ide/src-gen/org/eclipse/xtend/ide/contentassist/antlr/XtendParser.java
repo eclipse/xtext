@@ -550,9 +550,9 @@ public class XtendParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXIfExpressionAccess().getIfAssignment_3(), "rule__XIfExpression__IfAssignment_3");
 					put(grammarAccess.getXIfExpressionAccess().getThenAssignment_5(), "rule__XIfExpression__ThenAssignment_5");
 					put(grammarAccess.getXIfExpressionAccess().getElseAssignment_6_1(), "rule__XIfExpression__ElseAssignment_6_1");
-					put(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameAssignment_2_0_0_0_0(), "rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0");
+					put(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamAssignment_2_0_0_0_1(), "rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1");
 					put(grammarAccess.getXSwitchExpressionAccess().getSwitchAssignment_2_0_1(), "rule__XSwitchExpression__SwitchAssignment_2_0_1");
-					put(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameAssignment_2_1_0_0_1(), "rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1");
+					put(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamAssignment_2_1_0_0_0(), "rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0");
 					put(grammarAccess.getXSwitchExpressionAccess().getSwitchAssignment_2_1_1(), "rule__XSwitchExpression__SwitchAssignment_2_1_1");
 					put(grammarAccess.getXSwitchExpressionAccess().getCasesAssignment_4(), "rule__XSwitchExpression__CasesAssignment_4");
 					put(grammarAccess.getXSwitchExpressionAccess().getDefaultAssignment_5_2(), "rule__XSwitchExpression__DefaultAssignment_5_2");

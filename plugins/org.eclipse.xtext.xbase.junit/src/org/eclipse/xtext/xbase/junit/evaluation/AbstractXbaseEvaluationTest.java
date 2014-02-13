@@ -2158,6 +2158,22 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(null, "{ switch Thread.State.NEW { default: { } } }");
 	}
 	
+	@Test public void testSwitchExpression_52() throws Exception {
+		assertEvaluatesTo(null, "{ switch Object x : Thread.State.NEW { default: { } } }");
+	}
+	
+	@Test public void testSwitchExpression_53() throws Exception {
+		assertEvaluatesTo(null, "{ switch Thread.State x\n : Thread.State.NEW { default: { } } }");
+	}
+	
+	@Test public void testSwitchExpression_54() throws Exception {
+		assertEvaluatesTo(null, "{ switch (Object x : Thread.State.NEW) { default: { } } }");
+	}
+	
+	@Test public void testSwitchExpression_55() throws Exception {
+		assertEvaluatesTo(null, "{ switch (Thread.State x : Thread.State.NEW) { default: { } } }");
+	}
+	
 	@Test public void testCastedExpression_01() throws Exception {
 		assertEvaluatesTo("literal", "'literal' as String");
 	}
