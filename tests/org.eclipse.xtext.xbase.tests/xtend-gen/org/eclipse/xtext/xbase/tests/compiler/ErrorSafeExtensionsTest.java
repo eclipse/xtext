@@ -255,7 +255,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
         final XExpression expression = this.expression(model, false);
         Resource _eResource = expression.eResource();
         this.issueProviderFactory.attachData(_eResource);
-        _xblockexpression = (expression);
+        _xblockexpression = expression;
       }
       return _xblockexpression;
     } catch (Throwable _e) {

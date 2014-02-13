@@ -71,7 +71,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
           Integer _buildNumber = state.getBuildNumber();
           ((UnconfirmedStructuralChangesDelta)delta).setBuildNumber((_buildNumber).intValue());
           this.unconfirmedDeltas.add(((UnconfirmedStructuralChangesDelta)delta));
-          _xblockexpression = (true);
+          _xblockexpression = true;
         }
         _switchResult = _xblockexpression;
       }
@@ -88,7 +88,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
       String _name = it.getName();
       final JavaBuilderState oldState = this.javaBuildState.get(_name);
       final JavaBuilderState newState = JavaBuilderState.getLastBuiltState(it);
-      Procedure1<IResourceDescription.Delta> _xifexpression = null;
+      Procedure1<UnconfirmedStructuralChangesDelta> _xifexpression = null;
       boolean _or = false;
       boolean _equals = Objects.equal(oldState, null);
       if (_equals) {
@@ -100,8 +100,8 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
         _or = _notEquals;
       }
       if (_or) {
-        final Procedure1<IResourceDescription.Delta> _function = new Procedure1<IResourceDescription.Delta>() {
-          public void apply(final IResourceDescription.Delta it) {
+        final Procedure1<UnconfirmedStructuralChangesDelta> _function = new Procedure1<UnconfirmedStructuralChangesDelta>() {
+          public void apply(final UnconfirmedStructuralChangesDelta it) {
             final Set<QualifiedName> structurallyChangedTypes = newState.getStructurallyChangedTypes();
             boolean _or = false;
             IResourceDescription _new = it.getNew();
@@ -122,7 +122,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
       } else {
         _xifexpression = null;
       }
-      _xblockexpression = (this.doNeedRebuild(newState, _xifexpression));
+      _xblockexpression = this.doNeedRebuild(newState, _xifexpression);
     }
     return _xblockexpression;
   }
@@ -160,7 +160,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
         _while = _hasNext_1;
       }
       int _size = this.unconfirmedDeltas.size();
-      _xblockexpression = ((_size != 0));
+      _xblockexpression = (_size != 0);
     }
     return _xblockexpression;
   }
@@ -180,7 +180,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
           return true;
         }
       }
-      _xblockexpression = (false);
+      _xblockexpression = false;
     }
     return _xblockexpression;
   }

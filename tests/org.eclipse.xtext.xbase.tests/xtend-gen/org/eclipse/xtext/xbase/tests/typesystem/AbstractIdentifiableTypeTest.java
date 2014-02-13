@@ -134,7 +134,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
               ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(_eContainer);
               _xifexpression = _findActualNodeFor.getOffset();
             }
-            _xblockexpression = (_xifexpression);
+            _xblockexpression = _xifexpression;
           }
           return Integer.valueOf(_xblockexpression);
         }
@@ -154,7 +154,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
       if (_not) {
         Assert.fail(("Duplicate expression under test: " + expression));
       }
-      _xblockexpression = (super.expression(expression, resolve));
+      _xblockexpression = super.expression(expression, resolve);
     }
     return _xblockexpression;
   }

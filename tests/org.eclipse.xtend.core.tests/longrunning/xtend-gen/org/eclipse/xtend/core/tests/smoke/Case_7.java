@@ -16,7 +16,7 @@ public class Case_7 {
       if (result!=null) {
         _head=IterableExtensions.<Map.Entry<String,List<String>>>head(result);
       }
-      _xblockexpression = (_head);
+      _xblockexpression = _head;
     }
     return _xblockexpression;
   }
@@ -29,7 +29,7 @@ public class Case_7 {
       if ((x instanceof Map.Entry)) {
         _xifexpression = null;
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

@@ -45,7 +45,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
   @Inject
   private OverrideHelper overrideHelper;
   
-  public ResolvedOperations toResolvedOperations(final Class<? extends Object> type) {
+  public ResolvedOperations toResolvedOperations(final Class<?> type) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("typeof(");

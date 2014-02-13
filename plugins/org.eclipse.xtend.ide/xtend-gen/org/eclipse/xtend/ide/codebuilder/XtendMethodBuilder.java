@@ -74,7 +74,7 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBu
       if (_not) {
         this.appendBody(appendable, "");
       }
-      _xblockexpression = (appendable);
+      _xblockexpression = appendable;
     }
     return _xblockexpression;
   }

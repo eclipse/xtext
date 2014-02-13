@@ -67,7 +67,7 @@ public class JavaEditorExtension {
         }
       };
       this.waitForPostReconcileEvent(_function);
-      _xblockexpression = (editor);
+      _xblockexpression = editor;
     }
     return _xblockexpression;
   }
@@ -90,7 +90,7 @@ public class JavaEditorExtension {
         }
       };
       this.waitForPostChangeEvent(_function);
-      _xblockexpression = (editor);
+      _xblockexpression = editor;
     }
     return _xblockexpression;
   }
@@ -113,7 +113,7 @@ public class JavaEditorExtension {
         }
       };
       this.waitForPostChangeEvent(_function);
-      _xblockexpression = (editor);
+      _xblockexpression = editor;
     }
     return _xblockexpression;
   }
@@ -166,7 +166,7 @@ public class JavaEditorExtension {
         _builder_1.append(eventMask, "");
         _xifexpression = InputOutput.<String>println(_builder_1.toString());
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -191,7 +191,7 @@ public class JavaEditorExtension {
         int _indexOf = model.indexOf(oldText);
         int _length = oldText.length();
         document.replace(_indexOf, _length, newText);
-        _xblockexpression = (editor);
+        _xblockexpression = editor;
       }
       return _xblockexpression;
     } catch (Throwable _e) {

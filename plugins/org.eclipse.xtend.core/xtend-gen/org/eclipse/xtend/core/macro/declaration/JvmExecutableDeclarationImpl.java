@@ -87,7 +87,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
       T _delegate = this.getDelegate();
       final XExpression expression = _jvmTypesBuilder.getExpression(_delegate);
       CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-      _xblockexpression = (_compilationUnit_1.toExpression(expression));
+      _xblockexpression = _compilationUnit_1.toExpression(expression);
     }
     return _xblockexpression;
   }
@@ -109,7 +109,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public void setExceptions(final TypeReference... exceptions) {
-    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(exceptions)), "exceptions");
+    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(exceptions)), "exceptions");
     ConditionUtils.checkInferredTypeReferences("exception type", exceptions);
     T _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
@@ -133,7 +133,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   
   public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {
     ConditionUtils.checkJavaIdentifier(name, "name");
-    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(upperBounds)), "upperBounds");
+    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(upperBounds)), "upperBounds");
     ConditionUtils.checkInferredTypeReferences("parameter type", upperBounds);
     final JvmTypeParameter param = TypesFactory.eINSTANCE.createJvmTypeParameter();
     param.setName(name);

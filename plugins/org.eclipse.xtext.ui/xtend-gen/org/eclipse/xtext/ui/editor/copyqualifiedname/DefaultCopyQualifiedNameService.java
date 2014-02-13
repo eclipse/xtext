@@ -75,7 +75,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
           _builder.append(_apply, "");
         }
       }
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -88,7 +88,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
         return null;
       }
       QualifiedName _fullyQualifiedName = this.getFullyQualifiedName(it);
-      _xblockexpression = (this.toString(it, _fullyQualifiedName));
+      _xblockexpression = this.toString(it, _fullyQualifiedName);
     }
     return _xblockexpression;
   }
@@ -100,7 +100,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
       if (_equals) {
         return null;
       }
-      _xblockexpression = (this.qualifiedNameProvider.getFullyQualifiedName(it));
+      _xblockexpression = this.qualifiedNameProvider.getFullyQualifiedName(it);
     }
     return _xblockexpression;
   }
@@ -112,7 +112,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
       if (_equals) {
         return null;
       }
-      _xblockexpression = (this.qualifiedNameConverter.toString(fullyQualifiedName));
+      _xblockexpression = this.qualifiedNameConverter.toString(fullyQualifiedName);
     }
     return _xblockexpression;
   }

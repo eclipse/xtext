@@ -64,7 +64,7 @@ public class ImportingStringConcatenation extends StringConcatenation {
     return appender.toString();
   }
   
-  protected String _getStringRepresentation(final Class<? extends Object> object) {
+  protected String _getStringRepresentation(final Class<?> object) {
     CharSequence _serialize = this.importManager.serialize(object);
     return _serialize.toString();
   }

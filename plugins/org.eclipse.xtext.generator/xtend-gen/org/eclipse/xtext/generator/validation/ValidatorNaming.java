@@ -65,7 +65,7 @@ public class ValidatorNaming extends Naming {
       } else {
         _xifexpression = "org.eclipse.xtext.validation.AbstractDeclarativeValidator";
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

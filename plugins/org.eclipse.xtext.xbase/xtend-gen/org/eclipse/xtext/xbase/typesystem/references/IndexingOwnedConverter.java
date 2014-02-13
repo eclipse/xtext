@@ -81,7 +81,7 @@ public class IndexingOwnedConverter extends OwnedConverter {
       if (!_matched) {
         _switchResult = null;
       }
-      _xblockexpression = (_switchResult);
+      _xblockexpression = _switchResult;
     }
     return _xblockexpression;
   }
@@ -104,7 +104,7 @@ public class IndexingOwnedConverter extends OwnedConverter {
       Resource _eResource = it.eResource();
       ResourceSet _resourceSet = _eResource.getResourceSet();
       EObject _eObject = _resourceSet.getEObject(uri, true);
-      _xblockexpression = (((JvmType) _eObject));
+      _xblockexpression = ((JvmType) _eObject);
     }
     return _xblockexpression;
   }
@@ -198,7 +198,7 @@ public class IndexingOwnedConverter extends OwnedConverter {
         return null;
       }
       final JvmType type = this.getType(reference);
-      _xblockexpression = (XFunctionTypeRefs.wrapIfNecessary(reference, type));
+      _xblockexpression = XFunctionTypeRefs.wrapIfNecessary(reference, type);
     }
     return _xblockexpression;
   }

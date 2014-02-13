@@ -325,7 +325,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
         }
       };
       this._javaEditorExtension.waitForPostChangeEvent(_function);
-      _xblockexpression = (fileName);
+      _xblockexpression = fileName;
     }
     return _xblockexpression;
   }

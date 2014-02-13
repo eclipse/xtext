@@ -232,7 +232,7 @@ public class TransformationContextImpl implements TransformationContext {
     return _typeReferenceProvider.newTypeReference(typeDeclaration, typeArguments);
   }
   
-  public TypeReference newTypeReference(final Class<? extends Object> clazz, final TypeReference... typeArguments) {
+  public TypeReference newTypeReference(final Class<?> clazz, final TypeReference... typeArguments) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
     return _typeReferenceProvider.newTypeReference(clazz, typeArguments);
@@ -280,7 +280,7 @@ public class TransformationContextImpl implements TransformationContext {
     return _typeLookup.findEnumerationType(qualifiedName);
   }
   
-  public Type findTypeGlobally(final Class<? extends Object> clazz) {
+  public Type findTypeGlobally(final Class<?> clazz) {
     CompilationUnitImpl _unit = this.getUnit();
     TypeLookupImpl _typeLookup = _unit.getTypeLookup();
     return _typeLookup.findTypeGlobally(clazz);

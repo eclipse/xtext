@@ -51,7 +51,7 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuil
       ISourceAppender _appendType = this.appendType(appendable, _fieldType, "Object");
       ISourceAppender _append = _appendType.append(" ");
       String _fieldName = this.getFieldName();
-      _xblockexpression = (_append.append(_fieldName));
+      _xblockexpression = _append.append(_fieldName);
     }
     return _xblockexpression;
   }

@@ -50,13 +50,13 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     return CollectionLiterals.<JvmTypeParameter>emptyList();
   }
   
-  public void isAssignableFrom(final Class<? extends Object> lhs, final String rhs) {
+  public void isAssignableFrom(final Class<?> lhs, final String rhs) {
     String _canonicalName = lhs.getCanonicalName();
     Pair<String,String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
     this.isAssignableFrom(_mappedTo, rhs, true);
   }
   
-  public void isAssignableFrom(final Class<? extends Object> lhs, final Class<? extends Object> rhs) {
+  public void isAssignableFrom(final Class<?> lhs, final Class<?> rhs) {
     String _canonicalName = lhs.getCanonicalName();
     Pair<String,String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
     String _canonicalName_1 = rhs.getCanonicalName();
@@ -73,13 +73,13 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     this.isAssignableFrom(_mappedTo, null, true);
   }
   
-  public void isAssignableFrom(final String lhs, final Class<? extends Object> rhs) {
+  public void isAssignableFrom(final String lhs, final Class<?> rhs) {
     Pair<String,String> _mappedTo = Pair.<String, String>of(lhs, null);
     String _canonicalName = rhs.getCanonicalName();
     this.isAssignableFrom(_mappedTo, _canonicalName, true);
   }
   
-  public void isNotAssignableFrom(final Class<? extends Object> lhs, final String rhs) {
+  public void isNotAssignableFrom(final Class<?> lhs, final String rhs) {
     String _canonicalName = lhs.getCanonicalName();
     Pair<String,String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
     this.isAssignableFrom(_mappedTo, rhs, false);

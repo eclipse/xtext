@@ -158,18 +158,18 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       boolean _contains_1 = code.contains("java.lang.String foo");
       Assert.assertTrue(code, _contains_1);
       String _identifier_1 = clazz.getIdentifier();
-      final Class<? extends Object> compiledClass = this.javaCompiler.compileToClass(_identifier_1, code);
+      final Class<?> compiledClass = this.javaCompiler.compileToClass(_identifier_1, code);
       Resource _eResource_4 = expression.eResource();
       EList<EObject> _contents_1 = _eResource_4.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents_1);
       this.helper.assertNoErrors(_head);
-      Class<? extends Object>[] _declaredClasses = compiledClass.getDeclaredClasses();
-      int _size = ((List<Class<? extends Object>>)Conversions.doWrapArray(_declaredClasses)).size();
+      Class<?>[] _declaredClasses = compiledClass.getDeclaredClasses();
+      int _size = ((List<Class<?>>)Conversions.doWrapArray(_declaredClasses)).size();
       Assert.assertEquals(2, _size);
-      Class<? extends Object>[] _declaredClasses_1 = compiledClass.getDeclaredClasses();
-      Class<? extends Object> _head_1 = IterableExtensions.<Class<? extends Object>>head(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(_declaredClasses_1)));
-      Class<? extends Object>[] _declaredClasses_2 = compiledClass.getDeclaredClasses();
-      Class<? extends Object> _last = IterableExtensions.<Class<? extends Object>>last(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(_declaredClasses_2)));
+      Class<?>[] _declaredClasses_1 = compiledClass.getDeclaredClasses();
+      Class<?> _head_1 = IterableExtensions.<Class<?>>head(((Iterable<Class<?>>)Conversions.doWrapArray(_declaredClasses_1)));
+      Class<?>[] _declaredClasses_2 = compiledClass.getDeclaredClasses();
+      Class<?> _last = IterableExtensions.<Class<?>>last(((Iterable<Class<?>>)Conversions.doWrapArray(_declaredClasses_2)));
       Method _method = compiledClass.getMethod("foo", _head_1, _last);
       Assert.assertNotNull(_method);
     } catch (Throwable _e) {
@@ -200,7 +200,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
-      final Class<? extends Object> compiledClass = this.compile(_eResource, clazz);
+      final Class<?> compiledClass = this.compile(_eResource, clazz);
       final Object instance = compiledClass.newInstance();
       Method _method = compiledClass.getMethod("doStuff", String.class);
       Object _invoke = _method.invoke(instance, "foo");
@@ -229,7 +229,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmAnnotationType clazz = this.builder.toAnnotationType(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
-      final Class<? extends Object> compiledClass = this.compile(_eResource, clazz);
+      final Class<?> compiledClass = this.compile(_eResource, clazz);
       boolean _isAnnotation = compiledClass.isAnnotation();
       Assert.assertTrue(_isAnnotation);
       Method[] _methods = compiledClass.getMethods();
@@ -271,7 +271,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmAnnotationType clazz = this.builder.toAnnotationType(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
-      final Class<? extends Object> compiledClass = this.compile(_eResource, clazz);
+      final Class<?> compiledClass = this.compile(_eResource, clazz);
       boolean _isAnnotation = compiledClass.isAnnotation();
       Assert.assertTrue(_isAnnotation);
       Method[] _methods = compiledClass.getMethods();
@@ -313,7 +313,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
-      final Class<? extends Object> compiled = this.compile(_eResource, clazz);
+      final Class<?> compiled = this.compile(_eResource, clazz);
       boolean _isAssignableFrom = Iterable.class.isAssignableFrom(compiled);
       Assert.assertTrue(_isAssignableFrom);
     } catch (Throwable _e) {
@@ -335,7 +335,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
-      final Class<? extends Object> compiled = this.compile(_eResource, clazz);
+      final Class<?> compiled = this.compile(_eResource, clazz);
       boolean _isAssignableFrom = Iterable.class.isAssignableFrom(compiled);
       Assert.assertTrue(_isAssignableFrom);
       boolean _isAssignableFrom_1 = AbstractList.class.isAssignableFrom(compiled);
@@ -367,7 +367,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
-      final Class<? extends Object> compiled = this.compile(_eResource, clazz);
+      final Class<?> compiled = this.compile(_eResource, clazz);
       final Object inst = compiled.newInstance();
       final Method getter = compiled.getMethod("getX");
       final Method setter = compiled.getMethod("setX", String.class);
@@ -407,7 +407,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmEnumerationType enumeration = this.builder.toEnumerationType(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
-      final Class<? extends Object> compiled = this.compile(_eResource, enumeration);
+      final Class<?> compiled = this.compile(_eResource, enumeration);
       final Method valuesMethod = compiled.getMethod("values");
       Object _invoke = valuesMethod.invoke(null);
       final Object[] values = ((Object[]) _invoke);
@@ -442,7 +442,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       _contents.add(enumeration);
       this.completer.complete(enumeration);
       Resource _eResource_1 = expression.eResource();
-      final Class<? extends Object> compiled = this.compile(_eResource_1, enumeration);
+      final Class<?> compiled = this.compile(_eResource_1, enumeration);
       final Method valuesMethod = compiled.getMethod("values");
       Object _invoke = valuesMethod.invoke(null);
       final Object[] values = ((Object[]) _invoke);
@@ -595,7 +595,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       boolean _contains = code.contains("@TestAnnotations({ @TestAnnotation, @TestAnnotation, @TestAnnotation })");
       Assert.assertTrue(code, _contains);
       Resource _eResource_1 = expression.eResource();
-      final Class<? extends Object> compiledClazz = this.compileToClass(_eResource_1, clazz, code);
+      final Class<?> compiledClazz = this.compileToClass(_eResource_1, clazz, code);
       final Method method = compiledClazz.getMethod("doStuff");
       final TestAnnotations methodAnnotation = method.<TestAnnotations>getAnnotation(TestAnnotations.class);
       TestAnnotation[] _value = methodAnnotation.value();
@@ -652,7 +652,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmEnumerationType clazz = this.builder.toEnumerationType(expression, "my.test.Level", _function);
       Resource _eResource = expression.eResource();
-      final Class<? extends Object> compiled = this.compile(_eResource, clazz);
+      final Class<?> compiled = this.compile(_eResource, clazz);
       Field _field = compiled.getField("WARN");
       Assert.assertNotNull(_field);
       Field _field_1 = compiled.getField("ERROR");
@@ -688,9 +688,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       JvmAnnotationType _annotationType = this.builder.toAnnotationType(expression, "MyAnnotation", _function);
       this.builder.<JvmAnnotationType>operator_add(_members, _annotationType);
       Resource _eResource = expression.eResource();
-      Class<? extends Object> _compile = this.compile(_eResource, outerClass);
-      Class<? extends Object>[] _declaredClasses = _compile.getDeclaredClasses();
-      final Class<? extends Object> compiled = IterableExtensions.<Class<? extends Object>>head(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(_declaredClasses)));
+      Class<?> _compile = this.compile(_eResource, outerClass);
+      Class<?>[] _declaredClasses = _compile.getDeclaredClasses();
+      final Class<?> compiled = IterableExtensions.<Class<?>>head(((Iterable<Class<?>>)Conversions.doWrapArray(_declaredClasses)));
       String _canonicalName = compiled.getCanonicalName();
       Assert.assertEquals("my.outer.Clazz.MyAnnotation", _canonicalName);
       Method[] _declaredMethods = compiled.getDeclaredMethods();
@@ -751,9 +751,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       JvmEnumerationType _enumerationType = this.builder.toEnumerationType(expression, "Level", _function);
       this.builder.<JvmEnumerationType>operator_add(_members, _enumerationType);
       Resource _eResource = expression.eResource();
-      Class<? extends Object> _compile = this.compile(_eResource, outerClass);
-      Class<? extends Object>[] _declaredClasses = _compile.getDeclaredClasses();
-      final Class<? extends Object> compiled = IterableExtensions.<Class<? extends Object>>head(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(_declaredClasses)));
+      Class<?> _compile = this.compile(_eResource, outerClass);
+      Class<?>[] _declaredClasses = _compile.getDeclaredClasses();
+      final Class<?> compiled = IterableExtensions.<Class<?>>head(((Iterable<Class<?>>)Conversions.doWrapArray(_declaredClasses)));
       Field _field = compiled.getField("WARN");
       Assert.assertNotNull(_field);
       Field _field_1 = compiled.getField("ERROR");
@@ -809,35 +809,35 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
-      final Class<? extends Object> compiled = this.compile(_eResource, clazz);
-      final Class<? extends Object>[] classes = compiled.getClasses();
-      final Function1<Class<? extends Object>,Boolean> _function_1 = new Function1<Class<? extends Object>,Boolean>() {
-        public Boolean apply(final Class<? extends Object> it) {
+      final Class<?> compiled = this.compile(_eResource, clazz);
+      final Class<?>[] classes = compiled.getClasses();
+      final Function1<Class<?>,Boolean> _function_1 = new Function1<Class<?>,Boolean>() {
+        public Boolean apply(final Class<?> it) {
           String _name = it.getName();
           return Boolean.valueOf(_name.endsWith("AbstractClass"));
         }
       };
-      Class<? extends Object> _findFirst = IterableExtensions.<Class<? extends Object>>findFirst(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(classes)), _function_1);
+      Class<?> _findFirst = IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(classes)), _function_1);
       int _modifiers = _findFirst.getModifiers();
       boolean _isAbstract = Modifier.isAbstract(_modifiers);
       Assert.assertTrue(_isAbstract);
-      final Function1<Class<? extends Object>,Boolean> _function_2 = new Function1<Class<? extends Object>,Boolean>() {
-        public Boolean apply(final Class<? extends Object> it) {
+      final Function1<Class<?>,Boolean> _function_2 = new Function1<Class<?>,Boolean>() {
+        public Boolean apply(final Class<?> it) {
           String _name = it.getName();
           return Boolean.valueOf(_name.endsWith("StaticClass"));
         }
       };
-      Class<? extends Object> _findFirst_1 = IterableExtensions.<Class<? extends Object>>findFirst(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(classes)), _function_2);
+      Class<?> _findFirst_1 = IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(classes)), _function_2);
       int _modifiers_1 = _findFirst_1.getModifiers();
       boolean _isStatic = Modifier.isStatic(_modifiers_1);
       Assert.assertTrue(_isStatic);
-      final Function1<Class<? extends Object>,Boolean> _function_3 = new Function1<Class<? extends Object>,Boolean>() {
-        public Boolean apply(final Class<? extends Object> it) {
+      final Function1<Class<?>,Boolean> _function_3 = new Function1<Class<?>,Boolean>() {
+        public Boolean apply(final Class<?> it) {
           String _name = it.getName();
           return Boolean.valueOf(_name.endsWith("FinalClass"));
         }
       };
-      Class<? extends Object> _findFirst_2 = IterableExtensions.<Class<? extends Object>>findFirst(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(classes)), _function_3);
+      Class<?> _findFirst_2 = IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(classes)), _function_3);
       int _modifiers_2 = _findFirst_2.getModifiers();
       boolean _isFinal = Modifier.isFinal(_modifiers_2);
       Assert.assertTrue(_isFinal);
@@ -902,7 +902,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
-      final Class<? extends Object> compiled = this.compile(_eResource, clazz);
+      final Class<?> compiled = this.compile(_eResource, clazz);
       Field _field = compiled.getField("staticField");
       int _modifiers = _field.getModifiers();
       boolean _isStatic = Modifier.isStatic(_modifiers);
@@ -1013,7 +1013,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
-      final Class<? extends Object> compiled = this.compile(_eResource, clazz);
+      final Class<?> compiled = this.compile(_eResource, clazz);
       Method _method = compiled.getMethod("staticMethod");
       int _modifiers = _method.getModifiers();
       boolean _isStatic = Modifier.isStatic(_modifiers);
@@ -1043,16 +1043,16 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     }
   }
   
-  public JvmTypeReference typeRef(final EObject ctx, final Class<? extends Object> clazz) {
+  public JvmTypeReference typeRef(final EObject ctx, final Class<?> clazz) {
     return this.references.getTypeForName(clazz, ctx);
   }
   
-  public JvmTypeReference typeRef(final EObject ctx, final Class<? extends Object> clazz, final Class<? extends Object> param) {
+  public JvmTypeReference typeRef(final EObject ctx, final Class<?> clazz, final Class<?> param) {
     JvmTypeReference _typeRef = this.typeRef(ctx, param);
     return this.references.getTypeForName(clazz, ctx, _typeRef);
   }
   
-  public Class<? extends Object> compile(final Resource res, final JvmDeclaredType type) {
+  public Class<?> compile(final Resource res, final JvmDeclaredType type) {
     String _generate = this.generate(res, type);
     return this.compileToClass(res, type, _generate);
   }
@@ -1072,20 +1072,20 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       String _plus = (IFileSystemAccess.DEFAULT_OUTPUT + _replace);
       String _plus_1 = (_plus + ".java");
       CharSequence _get = _files.get(_plus_1);
-      _xblockexpression = (_get.toString());
+      _xblockexpression = _get.toString();
     }
     return _xblockexpression;
   }
   
-  public Class<? extends Object> compileToClass(final Resource res, final JvmDeclaredType type, final String code) {
-    Class<? extends Object> _xblockexpression = null;
+  public Class<?> compileToClass(final Resource res, final JvmDeclaredType type, final String code) {
+    Class<?> _xblockexpression = null;
     {
       String _identifier = type.getIdentifier();
-      final Class<? extends Object> compiledClass = this.javaCompiler.compileToClass(_identifier, code);
+      final Class<?> compiledClass = this.javaCompiler.compileToClass(_identifier, code);
       EList<EObject> _contents = res.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents);
       this.helper.assertNoErrors(_head);
-      _xblockexpression = (compiledClass);
+      _xblockexpression = compiledClass;
     }
     return _xblockexpression;
   }

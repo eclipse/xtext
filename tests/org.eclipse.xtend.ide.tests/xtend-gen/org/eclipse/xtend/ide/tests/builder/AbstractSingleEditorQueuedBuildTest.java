@@ -405,7 +405,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
               ITextEditor _xblockexpression = null;
               {
                 AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, "public class Foo { public class Foo3 {} }", "");
-                _xblockexpression = (AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, "public static class Foo2 {}", ""));
+                _xblockexpression = AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, "public static class Foo2 {}", "");
               }
               return _xblockexpression;
             }
@@ -453,7 +453,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
               {
                 AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo ", " NewFoo ");
                 AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo2 ", " NewFoo2 ");
-                _xblockexpression = (AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo3 ", " NewFoo3 "));
+                _xblockexpression = AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo3 ", " NewFoo3 ");
               }
               return _xblockexpression;
             }
@@ -569,7 +569,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
               ITextEditor _xblockexpression = null;
               {
                 AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, "public class Foo { public class Foo3 {} }", "");
-                _xblockexpression = (AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, "public static class Foo2 {}", ""));
+                _xblockexpression = AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, "public static class Foo2 {}", "");
               }
               return _xblockexpression;
             }
@@ -609,7 +609,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
               {
                 AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo ", " NewFoo ");
                 AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo2 ", " NewFoo2 ");
-                _xblockexpression = (AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo3 ", " NewFoo3 "));
+                _xblockexpression = AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, " Foo3 ", " NewFoo3 ");
               }
               return _xblockexpression;
             }

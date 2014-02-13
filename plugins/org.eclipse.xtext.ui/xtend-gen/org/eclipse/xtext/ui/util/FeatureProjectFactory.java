@@ -225,7 +225,7 @@ public class FeatureProjectFactory extends ProjectFactory {
       if (_endsWith) {
         return featureId.replaceAll((("\\" + FeatureProjectFactory.FEAT_ENDING) + "$"), (FeatureProjectFactory.SOURCE_FEAT_ENDING + FeatureProjectFactory.FEAT_ENDING));
       }
-      _xblockexpression = ((featureId + FeatureProjectFactory.SOURCE_FEAT_ENDING));
+      _xblockexpression = (featureId + FeatureProjectFactory.SOURCE_FEAT_ENDING);
     }
     return _xblockexpression;
   }

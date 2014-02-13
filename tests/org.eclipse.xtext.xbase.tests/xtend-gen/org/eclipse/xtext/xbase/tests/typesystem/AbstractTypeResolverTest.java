@@ -58,7 +58,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
         this.handleDuplicateExpression(expression);
         return null;
       }
-      _xblockexpression = (super.expression(string, resolve));
+      _xblockexpression = super.expression(string, resolve);
     }
     return _xblockexpression;
   }

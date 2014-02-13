@@ -1128,7 +1128,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         for (final SearchResultEvent event : _tail) {
           Assert.assertTrue((event instanceof MatchEvent));
         }
-        _xblockexpression = (elements);
+        _xblockexpression = elements;
       }
       return _xblockexpression;
     } catch (Throwable _e) {

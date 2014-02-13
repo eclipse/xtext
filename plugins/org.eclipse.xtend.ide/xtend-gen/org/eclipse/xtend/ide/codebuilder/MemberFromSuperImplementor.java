@@ -109,7 +109,7 @@ public class MemberFromSuperImplementor {
                 }
               }
             }
-            _xblockexpression = (typeParameter);
+            _xblockexpression = typeParameter;
           }
           return _xblockexpression;
         }
@@ -243,7 +243,7 @@ public class MemberFromSuperImplementor {
       }
       DeclaratorTypeArgumentCollector _declaratorTypeArgumentCollector = new DeclaratorTypeArgumentCollector();
       final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> parameterMapping = _declaratorTypeArgumentCollector.getTypeParameterMapping(lightweightOverrider);
-      _xblockexpression = (new StandardTypeParameterSubstitutor(parameterMapping, owner));
+      _xblockexpression = new StandardTypeParameterSubstitutor(parameterMapping, owner);
     }
     return _xblockexpression;
   }

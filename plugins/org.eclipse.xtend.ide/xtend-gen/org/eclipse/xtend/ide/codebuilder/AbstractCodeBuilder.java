@@ -139,7 +139,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
       ISourceAppender _build = this.build(_newLine);
       ISourceAppender _newLine_1 = _build.newLine();
       _newLine_1.append("...");
-      _xblockexpression = (appendable.toString());
+      _xblockexpression = appendable.toString();
     }
     return _xblockexpression;
   }
@@ -186,7 +186,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
       } else {
         appendable.append(typeRef);
       }
-      _xblockexpression = (appendable);
+      _xblockexpression = appendable;
     }
     return _xblockexpression;
   }
@@ -244,7 +244,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
         } while(_dowhile);
         appendable.append("> ");
       }
-      _xblockexpression = (appendable);
+      _xblockexpression = appendable;
     }
     return _xblockexpression;
   }

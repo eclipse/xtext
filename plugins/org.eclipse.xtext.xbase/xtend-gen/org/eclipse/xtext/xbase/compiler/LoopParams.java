@@ -63,7 +63,7 @@ public class LoopParams {
       if (this.prefix!=null) {
         this.prefix.apply(app);
       }
-      _xblockexpression = (app);
+      _xblockexpression = app;
     }
     return _xblockexpression;
   }
@@ -74,7 +74,7 @@ public class LoopParams {
       if (this.separator!=null) {
         this.separator.apply(app);
       }
-      _xblockexpression = (app);
+      _xblockexpression = app;
     }
     return _xblockexpression;
   }
@@ -85,7 +85,7 @@ public class LoopParams {
       if (this.suffix!=null) {
         this.suffix.apply(app);
       }
-      _xblockexpression = (app);
+      _xblockexpression = app;
     }
     return _xblockexpression;
   }

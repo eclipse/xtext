@@ -90,7 +90,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
         URI _createURI = URI.createURI(_plus);
         final Resource result = set.createResource(_createURI);
         result.load(stream, null);
-        _xblockexpression = (((XtextResource) result));
+        _xblockexpression = ((XtextResource) result);
       }
       return _xblockexpression;
     } catch (Throwable _e) {

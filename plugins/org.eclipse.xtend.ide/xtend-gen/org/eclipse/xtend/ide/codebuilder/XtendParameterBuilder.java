@@ -12,7 +12,7 @@ public class XtendParameterBuilder extends AbstractParameterBuilder {
       if (_isExtensionFlag) {
         appendable.append("extension ");
       }
-      _xblockexpression = (appendable);
+      _xblockexpression = appendable;
     }
     return _xblockexpression;
   }

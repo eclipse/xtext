@@ -254,47 +254,47 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     }
   }
   
-  protected boolean addImport(final RewritableImportSection section, final Class<? extends Object> javaClass) {
+  protected boolean addImport(final RewritableImportSection section, final Class<?> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
     return section.addImport(_jvmType);
   }
   
-  protected boolean removeImport(final RewritableImportSection section, final Class<? extends Object> javaClass) {
+  protected boolean removeImport(final RewritableImportSection section, final Class<?> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
     return section.removeImport(_jvmType);
   }
   
-  protected boolean addStaticImport(final RewritableImportSection section, final Class<? extends Object> javaClass) {
+  protected boolean addStaticImport(final RewritableImportSection section, final Class<?> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
     return section.addStaticImport(_jvmType);
   }
   
-  protected boolean removeStaticImport(final RewritableImportSection section, final Class<? extends Object> javaClass) {
+  protected boolean removeStaticImport(final RewritableImportSection section, final Class<?> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
     return section.removeStaticImport(_jvmType);
   }
   
-  protected boolean addExtensionImport(final RewritableImportSection section, final Class<? extends Object> javaClass) {
+  protected boolean addExtensionImport(final RewritableImportSection section, final Class<?> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
     return section.addStaticExtensionImport(_jvmType);
   }
   
-  protected boolean removeExtensionImport(final RewritableImportSection section, final Class<? extends Object> javaClass) {
+  protected boolean removeExtensionImport(final RewritableImportSection section, final Class<?> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
     return section.removeStaticExtensionImport(_jvmType);
   }
   
-  protected JvmDeclaredType jvmType(final Class<? extends Object> javaClass) {
+  protected JvmDeclaredType jvmType(final Class<?> javaClass) {
     JvmDeclaredType _xblockexpression = null;
     {
       final JvmType type = this._typeReferences.findDeclaredType(javaClass, this.xtendFile);
       Assert.assertTrue((type instanceof JvmDeclaredType));
-      _xblockexpression = (((JvmDeclaredType) type));
+      _xblockexpression = ((JvmDeclaredType) type);
     }
     return _xblockexpression;
   }
   
-  protected RewritableImportSection getSection(final Class<? extends Object>... types) {
+  protected RewritableImportSection getSection(final Class<?>... types) {
     try {
       RewritableImportSection _xblockexpression = null;
       {
@@ -304,7 +304,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
         XtendFile _file = this.file(this.model);
         this.xtendFile = _file;
         Resource _eResource = this.xtendFile.eResource();
-        _xblockexpression = (this._rewritableImportSection$Factory.parse(((XtextResource) _eResource)));
+        _xblockexpression = this._rewritableImportSection$Factory.parse(((XtextResource) _eResource));
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -352,7 +352,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
       } else {
         _xifexpression = sequence.toString();
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -361,7 +361,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     return false;
   }
   
-  protected abstract CharSequence getModel(final Class<? extends Object>[] types);
+  protected abstract CharSequence getModel(final Class<?>[] types);
   
   protected abstract CharSequence getExpectedModel(final String sectionAsString);
 }

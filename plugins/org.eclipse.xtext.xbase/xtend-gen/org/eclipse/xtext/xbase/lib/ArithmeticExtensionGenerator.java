@@ -76,7 +76,7 @@ public class ArithmeticExtensionGenerator {
               String _substring_1 = content.substring(_plus_2);
               _builder.append(_substring_1, "");
               _builder.newLineIfNotEmpty();
-              _xblockexpression = (_builder.toString());
+              _xblockexpression = _builder.toString();
             }
             _xifexpression = _xblockexpression;
           } else {
@@ -511,7 +511,7 @@ public class ArithmeticExtensionGenerator {
           }
           _xifexpression_1 = _xifexpression_2;
         }
-        _xblockexpression = (_xifexpression_1);
+        _xblockexpression = _xifexpression_1;
       }
       _xifexpression = _xblockexpression;
     }

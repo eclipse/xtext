@@ -81,7 +81,7 @@ public class AnnotationProcessor {
                   ((RegisterGlobalsParticipant<NamedElement>)processor).doRegisterGlobals(_map, registerGlobalsCtx);
                 }
               };
-              _xblockexpression_1 = (this.runWithCancelIndiciator(ctx, monitor, _function));
+              _xblockexpression_1 = this.runWithCancelIndiciator(ctx, monitor, _function);
             }
             _switchResult = _xblockexpression_1;
           }
@@ -90,7 +90,7 @@ public class AnnotationProcessor {
       } finally {
         task.stop();
       }
-      _xblockexpression = (_xtrycatchfinallyexpression);
+      _xblockexpression = _xtrycatchfinallyexpression;
     }
     return _xblockexpression;
   }
@@ -143,7 +143,7 @@ public class AnnotationProcessor {
                   ((TransformationParticipant<MutableNamedElement>)processor).doTransform(map, modifyCtx);
                 }
               };
-              _xblockexpression_1 = (this.runWithCancelIndiciator(ctx, monitor, _function));
+              _xblockexpression_1 = this.runWithCancelIndiciator(ctx, monitor, _function);
             }
             _switchResult = _xblockexpression_1;
           }
@@ -152,7 +152,7 @@ public class AnnotationProcessor {
       } finally {
         task.stop();
       }
-      _xblockexpression = (_xtrycatchfinallyexpression);
+      _xblockexpression = _xtrycatchfinallyexpression;
     }
     return _xblockexpression;
   }
@@ -205,7 +205,7 @@ public class AnnotationProcessor {
       } finally {
         isFinished.set(true);
       }
-      _xblockexpression = (_xtrycatchfinallyexpression);
+      _xblockexpression = _xtrycatchfinallyexpression;
     }
     return _xblockexpression;
   }

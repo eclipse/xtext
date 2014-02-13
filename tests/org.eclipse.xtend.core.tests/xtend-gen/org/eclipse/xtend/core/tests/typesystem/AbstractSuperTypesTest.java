@@ -39,7 +39,7 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
-  public void assertSuperTypes(final Class<? extends Object> type, final String... superTypes) {
+  public void assertSuperTypes(final Class<?> type, final String... superTypes) {
     String _canonicalName = type.getCanonicalName();
     Pair<String,String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
     this.assertSuperTypes(_mappedTo, superTypes);

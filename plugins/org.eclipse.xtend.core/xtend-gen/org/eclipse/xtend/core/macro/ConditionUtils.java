@@ -39,7 +39,7 @@ public class ConditionUtils {
     }
   }
   
-  public static void checkIterable(final Iterable<? extends Object> values, final String name) {
+  public static void checkIterable(final Iterable<?> values, final String name) {
     boolean _notEquals = (!Objects.equal(values, null));
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(name, "");
@@ -102,7 +102,7 @@ public class ConditionUtils {
           return false;
         }
       }
-      _xblockexpression = (true);
+      _xblockexpression = true;
     }
     return _xblockexpression;
   }
@@ -137,7 +137,7 @@ public class ConditionUtils {
           return false;
         }
       }
-      _xblockexpression = (true);
+      _xblockexpression = true;
     }
     return _xblockexpression;
   }

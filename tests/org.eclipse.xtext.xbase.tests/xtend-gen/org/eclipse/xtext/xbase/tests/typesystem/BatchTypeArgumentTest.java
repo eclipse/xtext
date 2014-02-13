@@ -58,7 +58,7 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
     final Procedure2<String,Integer> _function = new Procedure2<String,Integer>() {
       public void apply(final String typeArgument, final Integer i) {
         StringConcatenation _builder = new StringConcatenation();
-        String _join = IterableExtensions.join(((Iterable<? extends Object>)Conversions.doWrapArray(typeArguments)), ", ");
+        String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(typeArguments)), ", ");
         _builder.append(_join, "");
         _builder.append(" vs ");
         final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {

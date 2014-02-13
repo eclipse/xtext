@@ -252,11 +252,11 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
           JvmTypeReference _expectedType_1 = ctx.getExpectedType();
           JvmType _type = _expectedType_1.getType();
           ClassFinder _classFinder = ctx.getClassFinder();
-          Class<? extends Object> _javaType = this.getJavaType(_type, _classFinder);
+          Class<?> _javaType = this.getJavaType(_type, _classFinder);
           _xifexpression = ((Class<? extends Number>) _javaType);
         }
         final Class<? extends Number> type = _xifexpression;
-        _xblockexpression = (this.numberLiterals.numberValue(it, type));
+        _xblockexpression = this.numberLiterals.numberValue(it, type);
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -292,21 +292,21 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         }
       };
       final List<Object> elements = ListExtensions.<XExpression, Object>map(_elements, _function);
-      Class<? extends Object> _xifexpression = null;
+      Class<?> _xifexpression = null;
       boolean _notEquals = (!Objects.equal(expectedComponentType, null));
       if (_notEquals) {
         JvmType _type = expectedComponentType.getType();
         ClassFinder _classFinder = ctx.getClassFinder();
         _xifexpression = this.getJavaType(_type, _classFinder);
       } else {
-        Class<? extends Object> _xifexpression_1 = null;
+        Class<?> _xifexpression_1 = null;
         boolean _isEmpty = elements.isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
-          Class<? extends Object> _switchResult_1 = null;
+          Class<?> _switchResult_1 = null;
           Object _head = IterableExtensions.<Object>head(elements);
-          Class<? extends Object> _class = _head.getClass();
-          final Class<? extends Object> cl = _class;
+          Class<?> _class = _head.getClass();
+          final Class<?> cl = _class;
           boolean _matched_1 = false;
           if (!_matched_1) {
             if (Objects.equal(cl,Integer.class)) {
@@ -495,7 +495,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       if ((_eResource instanceof TypeResource)) {
         JvmDeclaredType _declaringType = field.getDeclaringType();
         ClassFinder _classFinder = context.getClassFinder();
-        final Class<? extends Object> clazz = this.getJavaType(_declaringType, _classFinder);
+        final Class<?> clazz = this.getJavaType(_declaringType, _classFinder);
         String _simpleName = field.getSimpleName();
         Field _field = clazz.getField(_simpleName);
         Object _get = null;
@@ -555,7 +555,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     return resultTypeRef;
   }
   
-  protected Class<? extends Object> getJavaType(final JvmType type, final ClassFinder classFinder) throws ClassNotFoundException {
+  protected Class<?> getJavaType(final JvmType type, final ClassFinder classFinder) throws ClassNotFoundException {
     if ((type instanceof JvmArrayType)) {
       JvmType t = type;
       String dimensions = "";
@@ -568,7 +568,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         }
         _while = (t instanceof JvmArrayType);
       }
-      final Class<? extends Object> componentClass = this.getJavaType(t, classFinder);
+      final Class<?> componentClass = this.getJavaType(t, classFinder);
       String _name = componentClass.getName();
       String _plus = (_name + dimensions);
       return classFinder.forName(_plus);

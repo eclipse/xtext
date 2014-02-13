@@ -106,7 +106,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
       if (_not) {
         Assert.fail(("Duplicate expression under test: " + expression));
       }
-      _xblockexpression = (super.expression(string, resolve));
+      _xblockexpression = super.expression(string, resolve);
     }
     return _xblockexpression;
   }

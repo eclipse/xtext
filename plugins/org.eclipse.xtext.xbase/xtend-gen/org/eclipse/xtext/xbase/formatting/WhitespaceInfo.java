@@ -40,7 +40,7 @@ public class WhitespaceInfo extends LeafInfo {
         LeafInfo _get = _leafs_1.get(i);
         _xifexpression = ((CommentInfo) _get);
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -63,7 +63,7 @@ public class WhitespaceInfo extends LeafInfo {
         LeafInfo _get = _leafs_2.get(i);
         _xifexpression = ((CommentInfo) _get);
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

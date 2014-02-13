@@ -57,7 +57,7 @@ public class HiddenLeafAccess {
         }
         _xifexpression = new HiddenLeafs(_offset);
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -138,7 +138,7 @@ public class HiddenLeafAccess {
         WhitespaceInfo _whitespaceInfo = new WhitespaceInfo(result, null, 0, _xifexpression);
         _leafs_1.add(_whitespaceInfo);
       }
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -166,7 +166,7 @@ public class HiddenLeafAccess {
         }
         _xifexpression = new HiddenLeafs(_offset);
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -193,7 +193,7 @@ public class HiddenLeafAccess {
         boolean _hasNext_1 = ni.hasNext();
         _while = _hasNext_1;
       }
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }
@@ -281,7 +281,7 @@ public class HiddenLeafAccess {
           _while_1 = _hasPrevious_1;
         }
       }
-      _xblockexpression = (ListExtensions.<ILeafNode>reverse(result));
+      _xblockexpression = ListExtensions.<ILeafNode>reverse(result);
     }
     return _xblockexpression;
   }

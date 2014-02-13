@@ -227,7 +227,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
       IFile _file = this.workbenchTestHelper.getFile(it);
       boolean _exists = _file.exists();
       Assert.assertTrue(_exists);
-      _xblockexpression = (it);
+      _xblockexpression = it;
     }
     return _xblockexpression;
   }

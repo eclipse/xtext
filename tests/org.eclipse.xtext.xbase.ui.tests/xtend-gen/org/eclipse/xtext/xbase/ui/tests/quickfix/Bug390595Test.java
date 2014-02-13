@@ -64,7 +64,7 @@ public class Bug390595Test extends AbstractXbaseQuickfixTest {
     {
       this.document.setInput(xtextResource);
       this.document.set(code);
-      _xblockexpression = (this.document);
+      _xblockexpression = this.document;
     }
     return _xblockexpression;
   }

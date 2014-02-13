@@ -41,7 +41,7 @@ public class TreeAppendableUtil {
         } else {
           _xifexpression_1 = appendable;
         }
-        _xblockexpression = (_xifexpression_1);
+        _xblockexpression = _xifexpression_1;
       }
       _xifexpression = _xblockexpression;
     }
@@ -80,7 +80,7 @@ public class TreeAppendableUtil {
         } else {
           _xifexpression_1 = appendable;
         }
-        _xblockexpression = (_xifexpression_1);
+        _xblockexpression = _xifexpression_1;
       }
       _xifexpression = _xblockexpression;
     }

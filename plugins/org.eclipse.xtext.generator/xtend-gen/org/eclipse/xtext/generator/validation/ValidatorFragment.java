@@ -93,7 +93,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
         String _abstractValidatorName_1 = this._validatorNaming.getAbstractValidatorName();
         bindFactory.addTypeToTypeEagerSingleton(_abstractValidatorName, _abstractValidatorName_1);
       }
-      _xblockexpression = (bindFactory.getBindings());
+      _xblockexpression = bindFactory.getBindings();
     }
     return _xblockexpression;
   }
@@ -303,7 +303,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
       Iterable<EPackage> _map = IterableExtensions.<GeneratedMetamodel, EPackage>map(_filter, _function);
       List<EPackage> _list = IterableExtensions.<EPackage>toList(_map);
       packages.removeAll(_list);
-      _xblockexpression = (packages);
+      _xblockexpression = packages;
     }
     return _xblockexpression;
   }

@@ -85,7 +85,7 @@ public class MutableAssert extends Assert {
       final T t = MutableAssert.<T>assertThrowable(clazz, codeToTest);
       String _message = t.getMessage();
       Assert.assertEquals(message, _message);
-      _xblockexpression = (t);
+      _xblockexpression = t;
     }
     return _xblockexpression;
   }
@@ -112,7 +112,7 @@ public class MutableAssert extends Assert {
       _builder.append(_name, "");
       _builder.append(" class had to be thrown");
       Assert.fail(_builder.toString());
-      _xblockexpression = (null);
+      _xblockexpression = null;
     }
     return _xblockexpression;
   }
