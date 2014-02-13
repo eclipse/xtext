@@ -1594,7 +1594,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 	
-	@Test def void testImportFromTypeReference() {
+	@Test def void testImportFromTypeReference_01() {
 		assertGeneratedCode(
 			'myannotation/AnnotationImportFromTypeReference.xtend' -> "
 				package myannotation
@@ -1638,6 +1638,57 @@ abstract class AbstractReusableActiveAnnotationTests {
 				@SuppressWarnings("all")
 				public class MyClass {
 				  private DateFormat myDateFormat = new SimpleDateFormat();
+				}
+			'''
+		)
+	}
+	
+	@Test def void testImportFromTypeReference_02() {
+		assertGeneratedCode(
+			'myannotation/AnnotationImportFromTypeReference.xtend' -> "
+				package myannotation
+				
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				@Active(AnnotationImportFromTypeReferenceProcessor)
+				annotation AnnotationImportFromTypeReference { }
+				class AnnotationImportFromTypeReferenceProcessor extends AbstractClassProcessor {
+					
+					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+						annotatedClass.declaredFields.forEach [
+							initializer = '''new «type.type»()'''
+						]
+					}
+				}
+			",
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				import java.util.Timer
+				
+				@myannotation.AnnotationImportFromTypeReference
+				class MyClass {
+					Timer t
+					MyClass child
+				}
+			''',
+			'''
+				package myusercode;
+				
+				import java.util.Timer;
+				import myannotation.AnnotationImportFromTypeReference;
+				
+				@AnnotationImportFromTypeReference
+				@SuppressWarnings("all")
+				public class MyClass {
+				  private Timer t = new Timer();
+				  
+				  private MyClass child = new MyClass();
 				}
 			'''
 		)
