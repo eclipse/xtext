@@ -3231,7 +3231,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
   
   @Test
-  public void testImportFromTypeReference() {
+  public void testImportFromTypeReference_01() {
     Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationImportFromTypeReference.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.text.DateFormat\n\t\t\t\timport java.text.SimpleDateFormat\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\t\n\t\t\t\t@Active(AnnotationImportFromTypeReferenceProcessor)\n\t\t\t\tannotation AnnotationImportFromTypeReference { }\n\t\t\t\tclass AnnotationImportFromTypeReferenceProcessor extends AbstractClassProcessor {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedClass.addField(\'myDateFormat\') [\n\t\t\t\t\t\t\ttype = DateFormat.newTypeReference\n\t\t\t\t\t\t\tinitializer = \'\'\'new «SimpleDateFormat.newTypeReference»()\'\'\'\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myusercode");
@@ -3263,6 +3263,57 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private DateFormat myDateFormat = new SimpleDateFormat();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertGeneratedCode(_mappedTo, _mappedTo_1, _builder_1.toString());
+  }
+  
+  @Test
+  public void testImportFromTypeReference_02() {
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationImportFromTypeReference.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\t\n\t\t\t\t@Active(AnnotationImportFromTypeReferenceProcessor)\n\t\t\t\tannotation AnnotationImportFromTypeReference { }\n\t\t\t\tclass AnnotationImportFromTypeReferenceProcessor extends AbstractClassProcessor {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedClass.declaredFields.forEach [\n\t\t\t\t\t\t\tinitializer = \'\'\'new «type.type»()\'\'\'\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myusercode");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.Timer");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@myannotation.AnnotationImportFromTypeReference");
+    _builder.newLine();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Timer t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("MyClass child");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Timer;");
+    _builder_1.newLine();
+    _builder_1.append("import myannotation.AnnotationImportFromTypeReference;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@AnnotationImportFromTypeReference");
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private Timer t = new Timer();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private MyClass child = new MyClass();");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();

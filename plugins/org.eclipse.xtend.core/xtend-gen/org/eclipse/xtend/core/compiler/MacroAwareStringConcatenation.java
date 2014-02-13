@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.compiler;
 
 import java.util.Arrays;
+import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -30,8 +31,15 @@ public class MacroAwareStringConcatenation extends ImportingStringConcatenation 
     return this._getStringRepresentation(_delegate);
   }
   
+  protected String _getStringRepresentation(final JvmTypeDeclarationImpl<?> object) {
+    final JvmType type = object.getDelegate();
+    return this._getStringRepresentation(type);
+  }
+  
   protected String getStringRepresentation(final Object object) {
-    if (object instanceof JvmType) {
+    if (object instanceof JvmTypeDeclarationImpl) {
+      return _getStringRepresentation((JvmTypeDeclarationImpl<?>)object);
+    } else if (object instanceof JvmType) {
       return _getStringRepresentation((JvmType)object);
     } else if (object instanceof TypeReferenceImpl) {
       return _getStringRepresentation((TypeReferenceImpl)object);
