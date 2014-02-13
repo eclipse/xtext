@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.util;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
@@ -20,7 +21,10 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -35,13 +39,13 @@ public class XSwitchExpressions {
   @Extension
   private SwitchConstantExpressionsInterpreter _switchConstantExpressionsInterpreter;
   
+  @Inject
+  private CommonTypeComputationServices services;
+  
   public boolean isJavaSwitchExpression(final XSwitchExpression it) {
     boolean _xblockexpression = false;
     {
-      @Extension
-      final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(it);
-      XExpression _switch = it.getSwitch();
-      final LightweightTypeReference switchType = resolvedTypes.getActualType(_switch);
+      final LightweightTypeReference switchType = this.getSwitchVariableType(it);
       boolean _equals = Objects.equal(switchType, null);
       if (_equals) {
         return false;
@@ -54,7 +58,7 @@ public class XSwitchExpressions {
       if (_isSubtypeOf_1) {
         return true;
       }
-      _xblockexpression = false;
+      _xblockexpression = (false);
     }
     return _xblockexpression;
   }
@@ -79,14 +83,37 @@ public class XSwitchExpressions {
       if (_equals_1) {
         return false;
       }
-      XExpression _switch = it.getSwitch();
-      final LightweightTypeReference switchType = resolvedTypes.getActualType(_switch);
+      final LightweightTypeReference switchType = this.getSwitchVariableType(it);
       boolean _isAssignableFrom = switchType.isAssignableFrom(caseType);
       boolean _not = (!_isAssignableFrom);
       if (_not) {
         return false;
       }
-      _xblockexpression = true;
+      _xblockexpression = (true);
+    }
+    return _xblockexpression;
+  }
+  
+  public LightweightTypeReference getSwitchVariableType(final XSwitchExpression it) {
+    LightweightTypeReference _xblockexpression = null;
+    {
+      @Extension
+      final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(it);
+      final JvmFormalParameter declaredParam = it.getDeclaredParam();
+      boolean _equals = Objects.equal(declaredParam, null);
+      if (_equals) {
+        XExpression _switch = it.getSwitch();
+        return resolvedTypes.getActualType(_switch);
+      }
+      final JvmTypeReference parameterType = declaredParam.getParameterType();
+      boolean _equals_1 = Objects.equal(parameterType, null);
+      if (_equals_1) {
+        XExpression _switch_1 = it.getSwitch();
+        return resolvedTypes.getActualType(_switch_1);
+      }
+      StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, it);
+      final OwnedConverter converter = new OwnedConverter(_standardTypeReferenceOwner);
+      _xblockexpression = (converter.toLightweightReference(parameterType));
     }
     return _xblockexpression;
   }

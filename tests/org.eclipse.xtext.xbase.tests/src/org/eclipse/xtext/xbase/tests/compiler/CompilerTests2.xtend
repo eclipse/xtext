@@ -744,6 +744,92 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''
 		)
 	}
+	
+	@Test def void testEmptySwitch_7() {
+		'''
+			{
+				switch Thread.State x : Thread.State.NEW {
+					default: {
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			Object _switchResult = null;
+			final Thread.State x = Thread.State.NEW;
+			switch (x) {
+			  default:
+			    _switchResult = null;
+			    break;
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testEmptySwitch_8() {
+		'''
+			{
+				switch (Thread.State x : Thread.State.NEW) {
+					default: {
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			Object _switchResult = null;
+			final Thread.State x = Thread.State.NEW;
+			switch (x) {
+			  default:
+			    _switchResult = null;
+			    break;
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testEmptySwitch_9() {
+		'''
+			{
+				switch Object x : Thread.State.NEW {
+					default: {
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			Object _switchResult = null;
+			final Object x = Thread.State.NEW;
+			boolean _matched = false;
+			if (!_matched) {
+			  _switchResult = null;
+			}
+			return _switchResult;
+		'''
+		)
+	}
+	
+	@Test def void testEmptySwitch_10() {
+		'''
+			{
+				switch (Object x : Thread.State.NEW) {
+					default: {
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			Object _switchResult = null;
+			final Object x = Thread.State.NEW;
+			boolean _matched = false;
+			if (!_matched) {
+			  _switchResult = null;
+			}
+			return _switchResult;
+		'''
+		)
+	}
 
 }
 

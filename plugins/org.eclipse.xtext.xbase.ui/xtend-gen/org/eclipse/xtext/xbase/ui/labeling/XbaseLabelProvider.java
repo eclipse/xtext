@@ -146,7 +146,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
         String _name = parameter.getName();
         _xifexpression = (_plus + _name);
       }
-      _xblockexpression = _xifexpression;
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
@@ -187,7 +187,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       } else {
         _xifexpression = variableDeclaration.getName();
       }
-      _xblockexpression = _xifexpression;
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
@@ -206,10 +206,11 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
         final XSwitchExpression switchExpression = ((XSwitchExpression) _eContainer_1);
         boolean _notEquals = (!Objects.equal(switchExpression, null));
         if (_notEquals) {
-          String _localVarName = switchExpression.getLocalVarName();
-          boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
+          JvmFormalParameter _declaredParam = switchExpression.getDeclaredParam();
+          boolean _notEquals_1 = (!Objects.equal(_declaredParam, null));
           if (_notEquals_1) {
-            return switchExpression.getLocalVarName();
+            JvmFormalParameter _declaredParam_1 = switchExpression.getDeclaredParam();
+            return _declaredParam_1.getName();
           }
           XExpression _switch = switchExpression.getSwitch();
           if ((_switch instanceof XAbstractFeatureCall)) {
@@ -224,7 +225,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
           }
         }
       }
-      _xblockexpression = null;
+      _xblockexpression = (null);
     }
     return _xblockexpression;
   }
@@ -246,7 +247,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       String _plus = (simpleName + _parameters);
       StyledString _styledString = new StyledString(_plus);
       StyledString _styledString_1 = new StyledString((" : " + returnTypeString), StyledString.DECORATIONS_STYLER);
-      _xblockexpression = _styledString.append(_styledString_1);
+      _xblockexpression = (_styledString.append(_styledString_1));
     }
     return _xblockexpression;
   }

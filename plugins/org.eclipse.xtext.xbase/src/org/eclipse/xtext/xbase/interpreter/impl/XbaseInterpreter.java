@@ -455,7 +455,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	protected Object _doEvaluate(XSwitchExpression switchExpression, IEvaluationContext context, CancelIndicator indicator) {
 		IEvaluationContext forkedContext = context.fork();
 		Object conditionResult = internalEvaluate(switchExpression.getSwitch(), forkedContext, indicator);
-		String simpleName = switchExpression.getLocalVarName() != null ? featureNameProvider.getSimpleName(switchExpression) : null;
+		String simpleName = featureNameProvider.getSimpleName(switchExpression.getDeclaredParam());
 		if (simpleName != null) {
 			forkedContext.newValue(QualifiedName.create(simpleName), conditionResult);
 		}
@@ -488,7 +488,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			Object defaultResult = internalEvaluate(switchExpression.getDefault(), forkedContext, indicator);
 			return defaultResult;
 		}
-		return getDefaultObjectValue(typeResolver.resolveTypes(switchExpression).getActualType((XExpression)switchExpression));
+		return getDefaultObjectValue(typeResolver.resolveTypes(switchExpression).getActualType(switchExpression));
 	}
 
 	protected Object _doEvaluate(XCastedExpression castedExpression, IEvaluationContext context, CancelIndicator indicator) {

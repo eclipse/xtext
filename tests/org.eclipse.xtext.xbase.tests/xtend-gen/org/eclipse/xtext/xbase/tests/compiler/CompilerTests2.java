@@ -1519,4 +1519,180 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testEmptySwitch_7() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch Thread.State x : Thread.State.NEW {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("default: {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Object _switchResult = null;");
+      _builder_1.newLine();
+      _builder_1.append("final Thread.State x = Thread.State.NEW;");
+      _builder_1.newLine();
+      _builder_1.append("switch (x) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("default:");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_switchResult = null;");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("break;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _switchResult;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testEmptySwitch_8() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch (Thread.State x : Thread.State.NEW) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("default: {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Object _switchResult = null;");
+      _builder_1.newLine();
+      _builder_1.append("final Thread.State x = Thread.State.NEW;");
+      _builder_1.newLine();
+      _builder_1.append("switch (x) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("default:");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_switchResult = null;");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("break;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _switchResult;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testEmptySwitch_9() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch Object x : Thread.State.NEW {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("default: {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Object _switchResult = null;");
+      _builder_1.newLine();
+      _builder_1.append("final Object x = Thread.State.NEW;");
+      _builder_1.newLine();
+      _builder_1.append("boolean _matched = false;");
+      _builder_1.newLine();
+      _builder_1.append("if (!_matched) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_switchResult = null;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _switchResult;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testEmptySwitch_10() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch (Object x : Thread.State.NEW) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("default: {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Object _switchResult = null;");
+      _builder_1.newLine();
+      _builder_1.append("final Object x = Thread.State.NEW;");
+      _builder_1.newLine();
+      _builder_1.append("boolean _matched = false;");
+      _builder_1.newLine();
+      _builder_1.append("if (!_matched) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_switchResult = null;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _switchResult;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

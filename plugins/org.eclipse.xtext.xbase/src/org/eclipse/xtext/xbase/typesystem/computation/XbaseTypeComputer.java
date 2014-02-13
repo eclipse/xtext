@@ -337,13 +337,17 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 	
 	protected void _computeTypes(XSwitchExpression object, ITypeComputationState state) {
-		ITypeComputationState switchExpressionState = state.withNonVoidExpectation();
+		JvmFormalParameter declaredParam = object.getDeclaredParam();
+		ITypeComputationState switchExpressionState = withExpectation(state, declaredParam); 
 		ITypeComputationResult computedType = switchExpressionState.computeTypes(object.getSwitch());
+		
 		ITypeComputationState allCasePartsState = state;
 		LightweightTypeReference expressionType = computedType.getActualExpressionType();
-		if (object.getLocalVarName() != null) {
-			allCasePartsState = allCasePartsState.assignType(object, expressionType);
+
+		if (declaredParam != null) {
+			allCasePartsState = allCasePartsState.assignType(declaredParam, expressionType);
 		}
+
 		JvmType potentialEnumType = expressionType != null ? expressionType.getType() : null;
 		boolean isEnum = potentialEnumType instanceof JvmEnumerationType;
 		BranchExpressionProcessor branchExpressionProcessor = object.getDefault() == null ? new BranchExpressionProcessor(state, object) {
@@ -363,12 +367,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			boolean localIsEnum = isEnum;
 			JvmType localPotentialEnumType = potentialEnumType;
 			if (casePart.getTypeGuard() != null) {
-				JvmIdentifiableElement refinable = null;
-				if (object.getLocalVarName() != null) {
-					refinable = getRefinableCandidate(object, casePartState);
-				} else {
-					refinable = getRefinableCandidate(object.getSwitch(), casePartState);
-				}
+				JvmIdentifiableElement refinable = getRefinableCandidate(object, casePartState);
 				if (refinable != null) {
 					LightweightTypeReference lightweightReference = casePartState.getConverter().toLightweightReference(casePart.getTypeGuard());
 					casePartState.reassignType(refinable, lightweightReference);
@@ -416,12 +415,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			if (then != null || (i == cases.size() - 1 && thenTypeReference != null)) {
 				ITypeComputationState thenState = allCasePartsState.withTypeCheckpoint(casePart);
 				if (thenTypeReference != null) {
-					JvmIdentifiableElement refinable = null;
-					if (object.getLocalVarName() != null) {
-						refinable = getRefinableCandidate(object, thenState);
-					} else {
-						refinable = getRefinableCandidate(object.getSwitch(), thenState);
-					}
+					JvmIdentifiableElement refinable = getRefinableCandidate(object, thenState);
 					if (refinable != null) {
 						thenState.reassignType(refinable, thenTypeReference);
 						thenTypeReference = null;
@@ -439,6 +433,18 @@ public class XbaseTypeComputer implements ITypeComputer {
 		} else if (branchExpressionProcessor != null) {
 			branchExpressionProcessor.commit();
 		}
+	}
+
+	protected ITypeComputationState withExpectation(ITypeComputationState state, JvmFormalParameter declaredParam) {
+		if (declaredParam == null) {
+			return state.withNonVoidExpectation();
+		}
+		JvmTypeReference parameterType = declaredParam.getParameterType();
+		if (parameterType == null) {
+			return state.withNonVoidExpectation();
+		}
+		LightweightTypeReference expectation = state.getConverter().toLightweightReference(parameterType);
+		return state.withExpectation(expectation);
 	}
 
 	/**
@@ -1145,7 +1151,12 @@ public class XbaseTypeComputer implements ITypeComputer {
 	@Nullable
 	protected JvmIdentifiableElement getRefinableCandidate(XExpression object, ITypeComputationState state) {
 		if (object instanceof XSwitchExpression) {
-			return (XSwitchExpression) object;
+			XSwitchExpression switchExpression = (XSwitchExpression) object;
+			JvmFormalParameter declaredParam = switchExpression.getDeclaredParam();
+			if (declaredParam != null) {
+				return declaredParam;
+			}
+			return getRefinableCandidate(switchExpression.getSwitch(), state);
 		}
 		if (object instanceof XFeatureCall) {
 			List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates((XFeatureCall)object);

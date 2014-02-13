@@ -11,9 +11,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 
 /**
@@ -33,18 +30,6 @@ public class IdentifiableSimpleNameProvider {
 		}
 		if (element instanceof XVariableDeclaration) {
 			return ((XVariableDeclaration) element).getName();
-		}
-		if (element instanceof XSwitchExpression) {
-			final XSwitchExpression xSwitchExpression = (XSwitchExpression) element;
-			String varName = xSwitchExpression.getLocalVarName();
-			if (varName!=null)
-				return varName;
-			XExpression expression = xSwitchExpression.getSwitch();
-			if (expression instanceof XFeatureCall) {
-				return getSimpleName(((XFeatureCall) expression).getFeature());
-			} else {
-				return null;
-			}
 		}
 		return element.getSimpleName();
 	}

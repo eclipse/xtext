@@ -15,7 +15,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -70,17 +69,6 @@ public abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
         Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
         for (final EObject content : _iterable) {
           boolean _matched = false;
-          if (!_matched) {
-            if (content instanceof XSwitchExpression) {
-              _matched=true;
-              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
-              String _localVarName = ((XSwitchExpression)content).getLocalVarName();
-              boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
-              if (_notEquals_1) {
-                this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content), resolvedTypes);
-              }
-            }
-          }
           if (!_matched) {
             if (content instanceof XAbstractFeatureCall) {
               _matched=true;

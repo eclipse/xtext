@@ -13,7 +13,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.xbase.XClosure
-import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.AfterClass
@@ -53,7 +52,6 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 			it != null && switch(it) {
 				XVariableDeclaration: true
 				JvmFormalParameter: true
-				XSwitchExpression case it.localVarName != null : true
 				default: false
 			}
 		].filter(typeof(JvmIdentifiableElement)).toList

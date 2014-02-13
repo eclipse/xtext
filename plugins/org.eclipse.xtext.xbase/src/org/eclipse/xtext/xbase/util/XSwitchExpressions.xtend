@@ -14,6 +14,9 @@ import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -25,10 +28,12 @@ class XSwitchExpressions {
 
 	@Inject
 	extension SwitchConstantExpressionsInterpreter
+	
+	@Inject
+	CommonTypeComputationServices services
 
 	def isJavaSwitchExpression(XSwitchExpression it) {
-		extension val resolvedTypes = resolveTypes
-		val switchType = ^switch.actualType
+		val switchType = switchVariableType
 		if (switchType == null) {
 			return false
 		}
@@ -54,11 +59,25 @@ class XSwitchExpressions {
 		if (caseType == null) {
 			return false
 		}
-		val switchType = ^switch.actualType
+		val switchType = switchVariableType
 		if (!switchType.isAssignableFrom(caseType)) {
 			return false
 		}
 		true
+	}
+	
+	def getSwitchVariableType(XSwitchExpression it) {
+		extension val resolvedTypes = resolveTypes
+		val declaredParam = declaredParam
+		if (declaredParam == null) {
+			return ^switch.actualType
+		}
+		val parameterType = declaredParam.parameterType
+		if (parameterType == null) {
+			return ^switch.actualType
+		}
+		val converter = new OwnedConverter(new StandardTypeReferenceOwner(services, it));
+		converter.toLightweightReference(parameterType)
 	}
 	
 	def isConstant(XCasePart casePart) {

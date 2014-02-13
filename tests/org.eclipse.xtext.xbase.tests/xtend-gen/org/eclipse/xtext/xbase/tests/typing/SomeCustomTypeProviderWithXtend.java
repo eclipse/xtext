@@ -202,8 +202,6 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _typeForIdentifiable((JvmFormalParameter)constructor, rawType);
     } else if (constructor instanceof JvmType) {
       return _typeForIdentifiable((JvmType)constructor, rawType);
-    } else if (constructor instanceof XSwitchExpression) {
-      return _typeForIdentifiable((XSwitchExpression)constructor, rawType);
     } else if (constructor instanceof XVariableDeclaration) {
       return _typeForIdentifiable((XVariableDeclaration)constructor, rawType);
     } else if (constructor != null) {

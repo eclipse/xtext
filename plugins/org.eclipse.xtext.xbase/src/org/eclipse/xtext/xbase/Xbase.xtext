@@ -172,8 +172,8 @@ XIfExpression returns XExpression:
 
 XSwitchExpression returns XExpression:
 	{XSwitchExpression}
-	'switch' (=>(localVarName=ValidID ':')? switch=XExpression
-		| =>('(' localVarName=ValidID ':') switch=XExpression ')') '{'
+	'switch' (=>('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
+		| =>(declaredParam=JvmFormalParameter ':')? switch=XExpression) '{'
 	(cases+=XCasePart)*
 	('default' ':' default=XExpression )?
 	'}';
