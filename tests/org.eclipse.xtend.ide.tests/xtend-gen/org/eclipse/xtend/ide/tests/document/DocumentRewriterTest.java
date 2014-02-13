@@ -552,14 +552,14 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
               final DocumentRewriter rewriter = DocumentRewriterTest.this.factory.create(document, it);
               test.apply(rewriter, it);
               List<ReplaceRegion> _changes = rewriter.getChanges();
-              _xblockexpression = (DocumentRewriterTest.this._replaceConverter.convertToTextEdit(_changes));
+              _xblockexpression = DocumentRewriterTest.this._replaceConverter.convertToTextEdit(_changes);
             }
             return _xblockexpression;
           }
         };
         TextEdit _readOnly = document.<TextEdit>readOnly(_function);
         _readOnly.apply(document);
-        _xblockexpression = (document.get());
+        _xblockexpression = document.get();
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -623,7 +623,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
       final XtextDocument document = new XtextDocument(source, null);
       document.set(content);
       document.setInput(((XtextResource) resource));
-      _xblockexpression = (document);
+      _xblockexpression = document;
     }
     return _xblockexpression;
   }

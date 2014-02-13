@@ -43,11 +43,11 @@ public class Case_0 {
           for (final char y : _charArray) {
             x = (x + Character.valueOf(y));
           }
-          _xblockexpression_1 = (x);
+          _xblockexpression_1 = x;
         }
         _xifexpression = _xblockexpression_1;
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

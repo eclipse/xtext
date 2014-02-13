@@ -139,7 +139,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
           }
           _while = _and_1;
         }
-        _xblockexpression = (IterableExtensions.<IResourceDescription.Event>head(event));
+        _xblockexpression = IterableExtensions.<IResourceDescription.Event>head(event);
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -156,7 +156,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
         final IResourceDescription.Event.Listener _function = new IResourceDescription.Event.Listener() {
           public void descriptionsChanged(final IResourceDescription.Event e) {
             Boolean _head = IterableExtensions.<Boolean>head(listenToEvent);
-            if ((_head).booleanValue()) {
+            if ((boolean) _head) {
               listenToEvent.set(0, Boolean.valueOf(false));
               event.add(e);
               XtendEditorChangingClasspathTest.this.stateChangeEventBroker.removeListener(this);
@@ -189,7 +189,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
           }
           _while = _and_1;
         }
-        _xblockexpression = (IterableExtensions.<IResourceDescription.Event>head(event));
+        _xblockexpression = IterableExtensions.<IResourceDescription.Event>head(event);
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -208,7 +208,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
         int _indexOf = model.indexOf(oldText);
         int _length = oldText.length();
         document.replace(_indexOf, _length, newText);
-        _xblockexpression = (editor);
+        _xblockexpression = editor;
       }
       return _xblockexpression;
     } catch (Throwable _e) {

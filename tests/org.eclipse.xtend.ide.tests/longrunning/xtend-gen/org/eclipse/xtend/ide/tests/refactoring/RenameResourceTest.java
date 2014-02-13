@@ -106,7 +106,7 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
         boolean _exists = newFile.exists();
         Assert.assertTrue(_exists);
         Assert.assertTrue((newFile instanceof IFile));
-        _xblockexpression = (((IFile) newFile));
+        _xblockexpression = ((IFile) newFile);
       }
       return _xblockexpression;
     } catch (Throwable _e) {

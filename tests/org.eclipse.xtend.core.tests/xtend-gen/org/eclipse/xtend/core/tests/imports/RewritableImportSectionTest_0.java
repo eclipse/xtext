@@ -5,7 +5,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class RewritableImportSectionTest_0 extends AbstractRewritableImportSectionTest {
-  protected CharSequence getModel(final Class<? extends Object>[] types) {
+  protected CharSequence getModel(final Class<?>[] types) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();

@@ -76,7 +76,7 @@ public class XbaseResourceForEditorInputFactoryTest extends AbstractXbaseUITestC
         boolean _isArchive = pfr.isArchive();
         if (_isArchive) {
           Object[] _nonJavaResources = pfr.getNonJavaResources();
-          Iterable<IStorage> _filter = Iterables.<IStorage>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_nonJavaResources)), IStorage.class);
+          Iterable<IStorage> _filter = Iterables.<IStorage>filter(((Iterable<?>)Conversions.doWrapArray(_nonJavaResources)), IStorage.class);
           for (final IStorage r : _filter) {
             {
               boolean _isValidationDisabled = this.isValidationDisabled(r);

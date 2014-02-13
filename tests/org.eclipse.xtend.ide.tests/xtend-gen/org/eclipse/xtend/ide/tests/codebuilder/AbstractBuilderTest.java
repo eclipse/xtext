@@ -68,7 +68,7 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
           JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
           this.xtendClass = _inferredType;
         }
-        _xblockexpression = (this.xtendClass);
+        _xblockexpression = this.xtendClass;
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -94,7 +94,7 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
           JvmType _type = _typeForName.getType();
           this.javaClass = ((JvmDeclaredType) _type);
         }
-        _xblockexpression = (this.javaClass);
+        _xblockexpression = this.javaClass;
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -107,7 +107,7 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
     return new ParameterizedTypeReference(_standardTypeReferenceOwner, type);
   }
   
-  protected LightweightTypeReference createTypeRef(final Class<? extends Object> clazz, final EObject context) {
+  protected LightweightTypeReference createTypeRef(final Class<?> clazz, final EObject context) {
     StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, context);
     JvmType _findDeclaredType = this._typeReferences.findDeclaredType(clazz, context);
     return new ParameterizedTypeReference(_standardTypeReferenceOwner, _findDeclaredType);

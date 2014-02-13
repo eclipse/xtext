@@ -78,7 +78,7 @@ public class ArrayExtensionsGenerator {
         final FileWriter writer = new FileWriter(file);
         writer.append(newContent);
         writer.close();
-        _xblockexpression = (InputOutput.<String>println("generation finished"));
+        _xblockexpression = InputOutput.<String>println("generation finished");
       }
       return _xblockexpression;
     } catch (Throwable _e) {

@@ -145,7 +145,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
         VarianceInfo _variance = _value_2.getVariance();
         Assert.assertEquals(variance, _variance);
       }
-      _xblockexpression = (merged.getKey());
+      _xblockexpression = merged.getKey();
     }
     return _xblockexpression;
   }

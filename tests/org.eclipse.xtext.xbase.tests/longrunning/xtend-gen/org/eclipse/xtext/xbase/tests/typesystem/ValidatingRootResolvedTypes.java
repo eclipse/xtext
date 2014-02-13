@@ -136,7 +136,7 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
       if (_not_1) {
         throw new IllegalArgumentException("type is not owned by this resolved types");
       }
-      _xblockexpression = (super.acceptType(expression, expectation, type, returnType, hints));
+      _xblockexpression = super.acceptType(expression, expectation, type, returnType, hints);
     }
     return _xblockexpression;
   }

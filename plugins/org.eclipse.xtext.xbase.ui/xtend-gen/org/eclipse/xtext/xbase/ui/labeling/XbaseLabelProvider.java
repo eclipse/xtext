@@ -146,7 +146,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
         String _name = parameter.getName();
         _xifexpression = (_plus + _name);
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -187,7 +187,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       } else {
         _xifexpression = variableDeclaration.getName();
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -224,7 +224,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
           }
         }
       }
-      _xblockexpression = (null);
+      _xblockexpression = null;
     }
     return _xblockexpression;
   }
@@ -246,7 +246,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       String _plus = (simpleName + _parameters);
       StyledString _styledString = new StyledString(_plus);
       StyledString _styledString_1 = new StyledString((" : " + returnTypeString), StyledString.DECORATIONS_STYLER);
-      _xblockexpression = (_styledString.append(_styledString_1));
+      _xblockexpression = _styledString.append(_styledString_1);
     }
     return _xblockexpression;
   }

@@ -62,7 +62,7 @@ public class HiddenLeafs {
         return Integer.valueOf(((x).intValue() + _length));
       }
     };
-    return (IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function)).intValue();
+    return (int) IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);
   }
   
   public int getNewLines() {
@@ -73,7 +73,7 @@ public class HiddenLeafs {
         return Integer.valueOf(((x).intValue() + _newLines));
       }
     };
-    return (IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function)).intValue();
+    return (int) IterableExtensions.<LeafInfo, Integer>fold(_leafs, Integer.valueOf(0), _function);
   }
   
   public int getNewLinesInComments() {
@@ -85,7 +85,7 @@ public class HiddenLeafs {
         return Integer.valueOf(((x).intValue() + _newLines));
       }
     };
-    return (IterableExtensions.<CommentInfo, Integer>fold(_filter, Integer.valueOf(0), _function)).intValue();
+    return (int) IterableExtensions.<CommentInfo, Integer>fold(_filter, Integer.valueOf(0), _function);
   }
   
   public boolean containsComment() {

@@ -98,7 +98,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
         String _genProposalProviderName = this.getGenProposalProviderName();
         bindFactory.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider", _genProposalProviderName);
       }
-      _xblockexpression = (bindFactory.getBindings());
+      _xblockexpression = bindFactory.getBindings();
     }
     return _xblockexpression;
   }
@@ -143,7 +143,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       } else {
         _xifexpression = "org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider";
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

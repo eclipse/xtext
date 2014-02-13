@@ -75,7 +75,7 @@ public class JavaBuilderState {
         return null;
       }
       IProject _project = javaProject.getProject();
-      _xblockexpression = (JavaBuilderState.getLastBuiltState(_project));
+      _xblockexpression = JavaBuilderState.getLastBuiltState(_project);
     }
     return _xblockexpression;
   }
@@ -110,7 +110,7 @@ public class JavaBuilderState {
         return this.lastStructuralBuildTime = Long.valueOf((-1l));
       }
       Object _readField = this.readField(this.state, "lastStructuralBuildTime", Long.valueOf((-1l)));
-      _xblockexpression = (this.lastStructuralBuildTime = ((Long) _readField));
+      _xblockexpression = this.lastStructuralBuildTime = ((Long) _readField);
     }
     return _xblockexpression;
   }
@@ -127,7 +127,7 @@ public class JavaBuilderState {
         return this.buildNumber = Integer.valueOf((-1));
       }
       Object _readField = this.readField(this.state, "buildNumber", Integer.valueOf((-1)));
-      _xblockexpression = (this.buildNumber = ((Integer) _readField));
+      _xblockexpression = this.buildNumber = ((Integer) _readField);
     }
     return _xblockexpression;
   }
@@ -160,7 +160,7 @@ public class JavaBuilderState {
           }
         }
       }
-      _xblockexpression = (this.structurallyChangedTypes);
+      _xblockexpression = this.structurallyChangedTypes;
     }
     return _xblockexpression;
   }
@@ -218,7 +218,7 @@ public class JavaBuilderState {
           }
         }
       }
-      _xblockexpression = (qualifiedTypeNames);
+      _xblockexpression = qualifiedTypeNames;
     }
     return _xblockexpression;
   }
@@ -274,7 +274,7 @@ public class JavaBuilderState {
         }
       };
       IterableExtensions.<char[]>forEach(((Iterable<char[]>)Conversions.doWrapArray(typeNames)), _function);
-      _xblockexpression = (qualifiedTypeNames);
+      _xblockexpression = qualifiedTypeNames;
     }
     return _xblockexpression;
   }
@@ -290,7 +290,7 @@ public class JavaBuilderState {
       _builder.append(packageName, "");
       _builder.append(".");
       _builder.append(simpleTypeName, "");
-      _xblockexpression = (_builder.toString());
+      _xblockexpression = _builder.toString();
     }
     return _xblockexpression;
   }
@@ -327,7 +327,7 @@ public class JavaBuilderState {
     {
       final String elementName = it.getElementName();
       int _lastIndexOf = elementName.lastIndexOf(".");
-      _xblockexpression = (elementName.substring(0, _lastIndexOf));
+      _xblockexpression = elementName.substring(0, _lastIndexOf);
     }
     return _xblockexpression;
   }
@@ -356,14 +356,14 @@ public class JavaBuilderState {
       if (!_matched) {
         _switchResult = null;
       }
-      _xblockexpression = (this.references = _switchResult);
+      _xblockexpression = this.references = _switchResult;
     }
     return _xblockexpression;
   }
   
   private Object readField(final Object instance, final String fieldName, final Object defaultValue) {
     try {
-      Class<? extends Object> _class = instance.getClass();
+      Class<?> _class = instance.getClass();
       final Field field = _class.getDeclaredField(fieldName);
       field.setAccessible(true);
       final Object value = field.get(instance);

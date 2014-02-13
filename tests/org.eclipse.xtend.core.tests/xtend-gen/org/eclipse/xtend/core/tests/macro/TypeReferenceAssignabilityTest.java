@@ -252,7 +252,7 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
         }
         _while_1 = (i < depth);
       }
-      _xblockexpression = (typeReference);
+      _xblockexpression = typeReference;
     }
     return _xblockexpression;
   }

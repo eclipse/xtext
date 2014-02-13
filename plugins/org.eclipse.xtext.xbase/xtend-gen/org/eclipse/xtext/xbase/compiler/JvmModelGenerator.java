@@ -300,7 +300,7 @@ public class JvmModelGenerator implements IGenerator {
       ITreeAppendable _decreaseIndentation = childAppendable.decreaseIndentation();
       ITreeAppendable _newLine = _decreaseIndentation.newLine();
       _newLine.append("}");
-      _xblockexpression = (appendable.newLine());
+      _xblockexpression = appendable.newLine();
     }
     return _xblockexpression;
   }
@@ -326,7 +326,7 @@ public class JvmModelGenerator implements IGenerator {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("@SuppressWarnings(\"all\")");
       ITreeAppendable _append = appendable.append(_builder);
-      _xblockexpression = (_append.newLine());
+      _xblockexpression = _append.newLine();
     }
     return _xblockexpression;
   }
@@ -399,7 +399,7 @@ public class JvmModelGenerator implements IGenerator {
       ITreeAppendable _decreaseIndentation = childAppendable.decreaseIndentation();
       ITreeAppendable _newLine = _decreaseIndentation.newLine();
       _newLine.append("}");
-      _xblockexpression = (appendable.newLine());
+      _xblockexpression = appendable.newLine();
     }
     return _xblockexpression;
   }
@@ -433,7 +433,7 @@ public class JvmModelGenerator implements IGenerator {
       }
       ITreeAppendable _newLine = childAppendable.newLine();
       _newLine.append("}");
-      _xblockexpression = (appendable.newLine());
+      _xblockexpression = appendable.newLine();
     }
     return _xblockexpression;
   }
@@ -559,7 +559,7 @@ public class JvmModelGenerator implements IGenerator {
       if (_isStrictFloatingPoint) {
         _xifexpression = appendable.append("strictfp ");
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -593,7 +593,7 @@ public class JvmModelGenerator implements IGenerator {
       if (_isVolatile) {
         _xifexpression = appendable.append("volatile ");
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -629,7 +629,7 @@ public class JvmModelGenerator implements IGenerator {
       if (_isNative) {
         _xifexpression = appendable.append("native ");
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -814,7 +814,7 @@ public class JvmModelGenerator implements IGenerator {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
-      _xblockexpression = (this.generateBody(it, appendable, config));
+      _xblockexpression = this.generateBody(it, appendable, config);
     }
     return _xblockexpression;
   }
@@ -823,7 +823,7 @@ public class JvmModelGenerator implements IGenerator {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
-      _xblockexpression = (this.generateBody(it, appendable, config));
+      _xblockexpression = this.generateBody(it, appendable, config);
     }
     return _xblockexpression;
   }
@@ -832,7 +832,7 @@ public class JvmModelGenerator implements IGenerator {
     ITreeAppendable _xblockexpression = null;
     {
       appendable.newLine();
-      _xblockexpression = (this.generateBody(it, appendable, config));
+      _xblockexpression = this.generateBody(it, appendable, config);
     }
     return _xblockexpression;
   }
@@ -853,7 +853,7 @@ public class JvmModelGenerator implements IGenerator {
       String _simpleName = it.getSimpleName();
       _traceSignificant.append(_simpleName);
       this.generateInitialization(it, tracedAppendable, config);
-      _xblockexpression = (tracedAppendable.append(";"));
+      _xblockexpression = tracedAppendable.append(";");
     }
     return _xblockexpression;
   }
@@ -901,7 +901,7 @@ public class JvmModelGenerator implements IGenerator {
         this.generateExecutableBody(it, tracedAppendable, config);
       }
       appendable.closeScope();
-      _xblockexpression = (appendable);
+      _xblockexpression = appendable;
     }
     return _xblockexpression;
   }
@@ -927,7 +927,7 @@ public class JvmModelGenerator implements IGenerator {
       tracedAppendable.append(" ");
       this.generateExecutableBody(it, tracedAppendable, config);
       appendable.closeScope();
-      _xblockexpression = (appendable);
+      _xblockexpression = appendable;
     }
     return _xblockexpression;
   }
@@ -1282,7 +1282,7 @@ public class JvmModelGenerator implements IGenerator {
       ITreeAppendable _decreaseIndentation = _append_1.decreaseIndentation();
       ITreeAppendable _decreaseIndentation_1 = _decreaseIndentation.decreaseIndentation();
       ITreeAppendable _newLine_1 = _decreaseIndentation_1.newLine();
-      _xblockexpression = (_newLine_1.append("}"));
+      _xblockexpression = _newLine_1.append("}");
     }
     return _xblockexpression;
   }
@@ -1424,11 +1424,11 @@ public class JvmModelGenerator implements IGenerator {
         final Field stateField = _class.getDeclaredField("state");
         stateField.setAccessible(true);
         final Object stateValue = stateField.get(appendable);
-        Class<? extends Object> _class_1 = stateValue.getClass();
+        Class<?> _class_1 = stateValue.getClass();
         final Field importManagerField = _class_1.getDeclaredField("importManager");
         importManagerField.setAccessible(true);
         Object _get = importManagerField.get(stateValue);
-        _xblockexpression = (((ImportManager) _get));
+        _xblockexpression = ((ImportManager) _get);
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -1463,7 +1463,7 @@ public class JvmModelGenerator implements IGenerator {
           ITreeAppendable _trace = appendable.trace(_locationData);
           String _string = doc.toString();
           _trace.append(_string);
-          _xblockexpression_1 = (appendable.newLine());
+          _xblockexpression_1 = appendable.newLine();
         }
         _xifexpression = _xblockexpression_1;
       } else {
@@ -1471,7 +1471,7 @@ public class JvmModelGenerator implements IGenerator {
         ITreeAppendable _append = appendable.append(_string);
         _xifexpression = _append.newLine();
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -1827,7 +1827,7 @@ public class JvmModelGenerator implements IGenerator {
           return Boolean.valueOf((!_and));
         }
       };
-      _xblockexpression = (IterableExtensions.<JvmMember>filter(_members, _function));
+      _xblockexpression = IterableExtensions.<JvmMember>filter(_members, _function);
     }
     return _xblockexpression;
   }

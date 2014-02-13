@@ -113,7 +113,7 @@ public class CodeBuilderFactory {
       final AbstractClassBuilder builder = _xifexpression;
       builder.setOwner(owner);
       builder.setOwnerSource(ownerSource);
-      _xblockexpression = (builder);
+      _xblockexpression = builder;
     }
     return _xblockexpression;
   }
@@ -131,7 +131,7 @@ public class CodeBuilderFactory {
       final AbstractInterfaceBuilder builder = _xifexpression;
       builder.setOwner(owner);
       builder.setOwnerSource(ownerSource);
-      _xblockexpression = (builder);
+      _xblockexpression = builder;
     }
     return _xblockexpression;
   }
@@ -149,7 +149,7 @@ public class CodeBuilderFactory {
       final AbstractAnnotationBuilder builder = _xifexpression;
       builder.setOwner(owner);
       builder.setOwnerSource(ownerSource);
-      _xblockexpression = (builder);
+      _xblockexpression = builder;
     }
     return _xblockexpression;
   }
@@ -167,7 +167,7 @@ public class CodeBuilderFactory {
       final AbstractFieldBuilder builder = _xifexpression;
       builder.setOwner(owner);
       builder.setOwnerSource(ownerSource);
-      _xblockexpression = (builder);
+      _xblockexpression = builder;
     }
     return _xblockexpression;
   }
@@ -185,7 +185,7 @@ public class CodeBuilderFactory {
       final AbstractConstructorBuilder builder = _xifexpression;
       builder.setOwner(owner);
       builder.setOwnerSource(ownerSource);
-      _xblockexpression = (builder);
+      _xblockexpression = builder;
     }
     return _xblockexpression;
   }
@@ -203,7 +203,7 @@ public class CodeBuilderFactory {
       final AbstractMethodBuilder builder = _xifexpression;
       builder.setOwner(owner);
       builder.setOwnerSource(ownerSource);
-      _xblockexpression = (builder);
+      _xblockexpression = builder;
     }
     return _xblockexpression;
   }
@@ -221,7 +221,7 @@ public class CodeBuilderFactory {
       final AbstractParameterBuilder builder = _xifexpression;
       builder.setOwner(owner);
       builder.setOwnerSource(ownerSource);
-      _xblockexpression = (builder);
+      _xblockexpression = builder;
     }
     return _xblockexpression;
   }
@@ -240,7 +240,7 @@ public class CodeBuilderFactory {
       } else {
         _xifexpression = null;
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

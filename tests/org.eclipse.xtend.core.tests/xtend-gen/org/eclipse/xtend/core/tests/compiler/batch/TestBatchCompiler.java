@@ -749,7 +749,7 @@ public class TestBatchCompiler {
       }
     };
     String[] _list = _file.list(_function);
-    final String javaFiles = IterableExtensions.join(((Iterable<? extends Object>)Conversions.doWrapArray(_list)), ",");
+    final String javaFiles = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(_list)), ",");
     Assert.assertEquals("Client.java", javaFiles);
   }
   

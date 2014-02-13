@@ -36,7 +36,7 @@ public class UnknownType implements Type {
       } else {
         _xifexpression = this.getQualifiedName();
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

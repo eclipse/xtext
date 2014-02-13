@@ -204,7 +204,7 @@ public class FormatterTester {
       int _length = oldDocument.length();
       String _substring = oldDocument.substring(lastOffset, _length);
       newDocument.append(_substring);
-      _xblockexpression = (newDocument.toString());
+      _xblockexpression = newDocument.toString();
     }
     return _xblockexpression;
   }
@@ -247,7 +247,7 @@ public class FormatterTester {
       int _length = oldDocument.length();
       String _substring = oldDocument.substring(lastOffset, _length);
       debugTrace.append(_substring);
-      _xblockexpression = (debugTrace.toString());
+      _xblockexpression = debugTrace.toString();
     }
     return _xblockexpression;
   }
@@ -323,7 +323,7 @@ public class FormatterTester {
           lastOffset = _plus;
         }
       }
-      _xblockexpression = (result);
+      _xblockexpression = result;
     }
     return _xblockexpression;
   }

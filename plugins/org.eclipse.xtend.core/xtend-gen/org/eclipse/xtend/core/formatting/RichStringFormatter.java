@@ -235,7 +235,7 @@ public class RichStringFormatter {
           return Boolean.valueOf((!Objects.equal(_syntaxErrorMessage, null)));
         }
       };
-      _xblockexpression = (IterableExtensions.<INode>exists(_asTreeIterable, _function));
+      _xblockexpression = IterableExtensions.<INode>exists(_asTreeIterable, _function);
     }
     return _xblockexpression;
   }

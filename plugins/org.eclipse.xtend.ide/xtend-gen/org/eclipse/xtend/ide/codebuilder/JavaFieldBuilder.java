@@ -52,7 +52,7 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuild
       ISourceAppender _append = _appendType.append(" ");
       String _fieldName = this.getFieldName();
       ISourceAppender _append_1 = _append.append(_fieldName);
-      _xblockexpression = (_append_1.append(";"));
+      _xblockexpression = _append_1.append(";");
     }
     return _xblockexpression;
   }

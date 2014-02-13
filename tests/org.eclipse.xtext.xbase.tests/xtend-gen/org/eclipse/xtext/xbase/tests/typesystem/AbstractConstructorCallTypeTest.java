@@ -85,7 +85,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
       if (_not) {
         Assert.fail(("Duplicate expression under test: " + expression));
       }
-      _xblockexpression = (super.expression(expression, resolve));
+      _xblockexpression = super.expression(expression, resolve);
     }
     return _xblockexpression;
   }

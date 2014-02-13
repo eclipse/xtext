@@ -107,7 +107,7 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
       int _size = actualSynonyms.size();
       Assert.assertEquals(_string_1, _length, _size);
       String _string_2 = actualSynonyms.toString();
-      boolean _containsAll = actualSynonyms.containsAll(((Collection<? extends Object>)Conversions.doWrapArray(expectedSynonyms)));
+      boolean _containsAll = actualSynonyms.containsAll(((Collection<?>)Conversions.doWrapArray(expectedSynonyms)));
       Assert.assertTrue(_string_2, _containsAll);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

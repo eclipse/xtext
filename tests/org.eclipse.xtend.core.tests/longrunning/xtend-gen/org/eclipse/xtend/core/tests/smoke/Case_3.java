@@ -48,9 +48,9 @@ public class Case_3 {
         Integer.valueOf(x).toString();
         int x2 = y;
         final int y2 = 1;
-        _xblockexpression_1 = ((x2 + y2));
+        _xblockexpression_1 = (x2 + y2);
       }
-      _xblockexpression = (_xblockexpression_1);
+      _xblockexpression = _xblockexpression_1;
     }
     return _xblockexpression;
   }
@@ -60,7 +60,7 @@ public class Case_3 {
     {
       char[] _charArray = "abc".toCharArray();
       List<Character> x = IterableExtensions.<Character>toList(((Iterable<Character>) Conversions.doWrapArray(_charArray)));
-      _xblockexpression = (x);
+      _xblockexpression = x;
     }
     return _xblockexpression;
   }

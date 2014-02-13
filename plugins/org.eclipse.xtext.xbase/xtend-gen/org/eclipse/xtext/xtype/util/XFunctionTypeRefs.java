@@ -61,7 +61,7 @@ public class XFunctionTypeRefs {
     return _builder_1.toString();
   }
   
-  public static URI computeTypeUri(final Class<? extends Object> topLevelClass) {
+  public static URI computeTypeUri(final Class<?> topLevelClass) {
     ClassURIHelper _classURIHelper = new ClassURIHelper();
     return _classURIHelper.getFullURI(topLevelClass);
   }
@@ -88,7 +88,7 @@ public class XFunctionTypeRefs {
             };
             _xifexpression = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
           }
-          _xblockexpression = (_xifexpression);
+          _xblockexpression = _xifexpression;
         }
         _switchResult = _xblockexpression;
       }
@@ -181,12 +181,12 @@ public class XFunctionTypeRefs {
       if (!_matched) {
         _switchResult = null;
       }
-      _xblockexpression = (_switchResult);
+      _xblockexpression = _switchResult;
     }
     return _xblockexpression;
   }
   
-  public static JvmType getType(final Class<? extends Object> clazz, final EObject context) {
+  public static JvmType getType(final Class<?> clazz, final EObject context) {
     JvmType _xblockexpression = null;
     {
       JvmVoid _createJvmVoid = TypesFactory.eINSTANCE.createJvmVoid();
@@ -194,7 +194,7 @@ public class XFunctionTypeRefs {
       URI _computeTypeUri = XFunctionTypeRefs.computeTypeUri(clazz);
       proxy.eSetProxyURI(_computeTypeUri);
       EObject _resolve = EcoreUtil.resolve(proxy, context);
-      _xblockexpression = (((JvmType) _resolve));
+      _xblockexpression = ((JvmType) _resolve);
     }
     return _xblockexpression;
   }

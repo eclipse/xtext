@@ -131,7 +131,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
         int _length_2 = ((Object[])Conversions.unwrapArray(remainingExportedNames, Object.class)).length;
         Assert.assertEquals(_builder_1.toString(), 0, _length_2);
       }
-      _xblockexpression = (deltas);
+      _xblockexpression = deltas;
     }
     return _xblockexpression;
   }
@@ -140,7 +140,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     Collection<? extends IResourceDescription.Delta> _xblockexpression = null;
     {
       final Collection<IResourceDescription.Delta> deltas = this.assertDeltas(producer);
-      _xblockexpression = (this.assertThereAreNotDeltas(deltas));
+      _xblockexpression = this.assertThereAreNotDeltas(deltas);
     }
     return _xblockexpression;
   }
@@ -152,7 +152,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
       String _plus = ("There are deltas: " + _exportedNames);
       int _size = deltas.size();
       Assert.assertEquals(_plus, 0, _size);
-      _xblockexpression = (deltas);
+      _xblockexpression = deltas;
     }
     return _xblockexpression;
   }
@@ -198,7 +198,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
             };
             IterableExtensions.<IEObjectDescription>forEach(_exportedObjects_1, _function_1);
           }
-          _xblockexpression = (names);
+          _xblockexpression = names;
         }
         return _xblockexpression;
       }
@@ -209,7 +209,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
         HashSet<String> _xblockexpression = null;
         {
           t.addAll(t2);
-          _xblockexpression = (t);
+          _xblockexpression = t;
         }
         return _xblockexpression;
       }
@@ -223,7 +223,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
       this.reset();
       producer.apply();
       this.confirmDeltas();
-      _xblockexpression = (this.queuedBuildData.getAndRemovePendingDeltas());
+      _xblockexpression = this.queuedBuildData.getAndRemovePendingDeltas();
     }
     return _xblockexpression;
   }
@@ -249,7 +249,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
       IResourcesSetupUtil.waitForAutoBuild();
       IProject _project = this.testHelper.getProject();
       boolean _needRebuild = this.queuedBuildData.needRebuild(_project);
-      _xblockexpression = ((!_needRebuild));
+      _xblockexpression = (!_needRebuild);
     }
     return _xblockexpression;
   }
