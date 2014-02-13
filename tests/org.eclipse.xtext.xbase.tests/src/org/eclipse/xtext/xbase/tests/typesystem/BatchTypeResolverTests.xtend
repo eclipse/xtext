@@ -15,7 +15,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XbaseFactory
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
@@ -43,12 +42,6 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 		assertEquals(type, resolvedType.simpleName);
 		for(content: xExpression.eAllContents.toIterable) {
 			switch(content) {
-				XSwitchExpression: {
-					assertExpressionTypeIsResolved(content, resolvedTypes)
-					if (content.localVarName != null) {
-						assertIdentifiableTypeIsResolved(content, resolvedTypes)
-					}
-				}
 				XAbstractFeatureCall: {
 					assertExpressionTypeIsResolved(content, resolvedTypes)
 					if (content.implicitReceiver != null) {

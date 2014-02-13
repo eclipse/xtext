@@ -10,14 +10,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="else" eType="#//XExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XSwitchExpression" eSuperTypes="#//XExpression platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="XSwitchExpression" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="switch" eType="#//XExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
         eType="#//XCasePart" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//XExpression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="localVarName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaredParam" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmFormalParameter"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XCasePart">
     <eStructuralFeatures xsi:type="ecore:EReference" name="case" eType="#//XExpression"
@@ -68,9 +69,9 @@
         <details key="documentation" value="Returns &lt;code>true&lt;/code> if the feature was made available by an extension. &#xA;Otherwise &lt;code>false&lt;/code>. May not be used during linking."/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement"/>
     <eOperations name="isPackageFragment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="isTypeLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
         eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
@@ -148,7 +149,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="XStringLiteral" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XCollectionLiteral" eSuperTypes="#//XExpression" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="XCollectionLiteral" abstract="true"
+      eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//XExpression" containment="true"/>
   </eClassifiers>

@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 
@@ -45,9 +44,6 @@ public class XbaseLocationInFileProvider extends DefaultLocationInFileProvider {
 	
 	@Override
 	public ITextRegion getSignificantTextRegion(EObject element) {
-		if(element instanceof XSwitchExpression && ((XSwitchExpression)element).getLocalVarName() != null) {
-			 return getLocationOfAttribute(element, XbasePackage.Literals.XSWITCH_EXPRESSION__LOCAL_VAR_NAME, -1, true);
-		}
 		if (element instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall typeLiteral = typeLiteralHelper.getRootTypeLiteral((XAbstractFeatureCall) element);
 			if (typeLiteral != null) {

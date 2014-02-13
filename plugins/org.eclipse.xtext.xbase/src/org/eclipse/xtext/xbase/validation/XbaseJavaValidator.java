@@ -1486,7 +1486,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (switchExpression.getDefault() != null) {
 			return;
 		}
-		LightweightTypeReference switchType = typeResolver.resolveTypes(switchExpression).getActualType(switchExpression.getSwitch());
+		LightweightTypeReference switchType = switchExpressions.getSwitchVariableType(switchExpression);
 		if (switchType == null) {
 			return;
 		}
