@@ -287,7 +287,9 @@ public class XtextEObjectSearchDialog extends ListDialog {
 			}
 		});
 
-		typeSearchControl.setText(initialTypeText);
+		if (initialTypeText != null)
+			typeSearchControl.setText(initialTypeText);
+		
 		typeSearchControl.setEditable(editableTypePattern);
 		
 		return label;
