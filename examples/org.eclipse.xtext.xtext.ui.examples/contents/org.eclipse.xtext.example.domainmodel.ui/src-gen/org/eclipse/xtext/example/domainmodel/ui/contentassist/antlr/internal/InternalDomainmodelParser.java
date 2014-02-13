@@ -9557,49 +9557,7 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
         try {
             // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:2960:1: ( ( ( rule__XSwitchExpression__Group_2_0__0 ) ) | ( ( rule__XSwitchExpression__Group_2_1__0 ) ) )
             int alt23=2;
-            int LA23_0 = input.LA(1);
-
-            if ( ((LA23_0>=RULE_ID && LA23_0<=RULE_STRING)||LA23_0==25||(LA23_0>=33 && LA23_0<=34)||LA23_0==39||(LA23_0>=43 && LA23_0<=48)||LA23_0==50||(LA23_0>=59 && LA23_0<=60)||LA23_0==63||LA23_0==65||(LA23_0>=68 && LA23_0<=76)||LA23_0==85) ) {
-                alt23=1;
-            }
-            else if ( (LA23_0==55) ) {
-                int LA23_2 = input.LA(2);
-
-                if ( (LA23_2==RULE_ID) ) {
-                    int LA23_3 = input.LA(3);
-
-                    if ( ((LA23_3>=13 && LA23_3<=38)||LA23_3==40||(LA23_3>=55 && LA23_3<=58)||LA23_3==60||(LA23_3>=81 && LA23_3<=82)) ) {
-                        alt23=1;
-                    }
-                    else if ( (LA23_3==53) ) {
-                        alt23=2;
-                    }
-                    else {
-                        if (state.backtracking>0) {state.failed=true; return ;}
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 23, 3, input);
-
-                        throw nvae;
-                    }
-                }
-                else if ( ((LA23_2>=RULE_HEX && LA23_2<=RULE_STRING)||LA23_2==25||(LA23_2>=33 && LA23_2<=34)||LA23_2==39||(LA23_2>=43 && LA23_2<=48)||LA23_2==50||LA23_2==55||(LA23_2>=59 && LA23_2<=60)||LA23_2==63||LA23_2==65||(LA23_2>=68 && LA23_2<=76)||LA23_2==85) ) {
-                    alt23=1;
-                }
-                else {
-                    if (state.backtracking>0) {state.failed=true; return ;}
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 23, 2, input);
-
-                    throw nvae;
-                }
-            }
-            else {
-                if (state.backtracking>0) {state.failed=true; return ;}
-                NoViableAltException nvae =
-                    new NoViableAltException("", 23, 0, input);
-
-                throw nvae;
-            }
+            alt23 = dfa23.predict(input);
             switch (alt23) {
                 case 1 :
                     // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:2961:1: ( ( rule__XSwitchExpression__Group_2_0__0 ) )
@@ -29825,44 +29783,29 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_0__0__Impl"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10058:1: rule__XSwitchExpression__Group_2_0__0__Impl : ( ( rule__XSwitchExpression__Group_2_0_0__0 )? ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10058:1: rule__XSwitchExpression__Group_2_0__0__Impl : ( ( rule__XSwitchExpression__Group_2_0_0__0 ) ) ;
     public final void rule__XSwitchExpression__Group_2_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10062:1: ( ( ( rule__XSwitchExpression__Group_2_0_0__0 )? ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10063:1: ( ( rule__XSwitchExpression__Group_2_0_0__0 )? )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10062:1: ( ( ( rule__XSwitchExpression__Group_2_0_0__0 ) ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10063:1: ( ( rule__XSwitchExpression__Group_2_0_0__0 ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10063:1: ( ( rule__XSwitchExpression__Group_2_0_0__0 )? )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10064:1: ( rule__XSwitchExpression__Group_2_0_0__0 )?
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10063:1: ( ( rule__XSwitchExpression__Group_2_0_0__0 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10064:1: ( rule__XSwitchExpression__Group_2_0_0__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getGroup_2_0_0()); 
             }
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10065:1: ( rule__XSwitchExpression__Group_2_0_0__0 )?
-            int alt79=2;
-            int LA79_0 = input.LA(1);
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10065:1: ( rule__XSwitchExpression__Group_2_0_0__0 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10065:2: rule__XSwitchExpression__Group_2_0_0__0
+            {
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0__0_in_rule__XSwitchExpression__Group_2_0__0__Impl20511);
+            rule__XSwitchExpression__Group_2_0_0__0();
 
-            if ( (LA79_0==RULE_ID) ) {
-                int LA79_1 = input.LA(2);
-
-                if ( (LA79_1==53) ) {
-                    alt79=1;
-                }
-            }
-            switch (alt79) {
-                case 1 :
-                    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10065:2: rule__XSwitchExpression__Group_2_0_0__0
-                    {
-                    pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0__0_in_rule__XSwitchExpression__Group_2_0__0__Impl20511);
-                    rule__XSwitchExpression__Group_2_0_0__0();
-
-                    state._fsp--;
-                    if (state.failed) return ;
-
-                    }
-                    break;
+            state._fsp--;
+            if (state.failed) return ;
 
             }
 
@@ -29891,17 +29834,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_0__1"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10075:1: rule__XSwitchExpression__Group_2_0__1 : rule__XSwitchExpression__Group_2_0__1__Impl ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10075:1: rule__XSwitchExpression__Group_2_0__1 : rule__XSwitchExpression__Group_2_0__1__Impl rule__XSwitchExpression__Group_2_0__2 ;
     public final void rule__XSwitchExpression__Group_2_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10079:1: ( rule__XSwitchExpression__Group_2_0__1__Impl )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10080:2: rule__XSwitchExpression__Group_2_0__1__Impl
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10079:1: ( rule__XSwitchExpression__Group_2_0__1__Impl rule__XSwitchExpression__Group_2_0__2 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10080:2: rule__XSwitchExpression__Group_2_0__1__Impl rule__XSwitchExpression__Group_2_0__2
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0__1__Impl_in_rule__XSwitchExpression__Group_2_0__120542);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0__1__Impl_in_rule__XSwitchExpression__Group_2_0__120541);
             rule__XSwitchExpression__Group_2_0__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0__2_in_rule__XSwitchExpression__Group_2_0__120544);
+            rule__XSwitchExpression__Group_2_0__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -29924,25 +29872,25 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_0__1__Impl"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10086:1: rule__XSwitchExpression__Group_2_0__1__Impl : ( ( rule__XSwitchExpression__SwitchAssignment_2_0_1 ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10087:1: rule__XSwitchExpression__Group_2_0__1__Impl : ( ( rule__XSwitchExpression__SwitchAssignment_2_0_1 ) ) ;
     public final void rule__XSwitchExpression__Group_2_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10090:1: ( ( ( rule__XSwitchExpression__SwitchAssignment_2_0_1 ) ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10091:1: ( ( rule__XSwitchExpression__SwitchAssignment_2_0_1 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10091:1: ( ( ( rule__XSwitchExpression__SwitchAssignment_2_0_1 ) ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10092:1: ( ( rule__XSwitchExpression__SwitchAssignment_2_0_1 ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10091:1: ( ( rule__XSwitchExpression__SwitchAssignment_2_0_1 ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10092:1: ( rule__XSwitchExpression__SwitchAssignment_2_0_1 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10092:1: ( ( rule__XSwitchExpression__SwitchAssignment_2_0_1 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10093:1: ( rule__XSwitchExpression__SwitchAssignment_2_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getSwitchAssignment_2_0_1()); 
             }
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10093:1: ( rule__XSwitchExpression__SwitchAssignment_2_0_1 )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10093:2: rule__XSwitchExpression__SwitchAssignment_2_0_1
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10094:1: ( rule__XSwitchExpression__SwitchAssignment_2_0_1 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10094:2: rule__XSwitchExpression__SwitchAssignment_2_0_1
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__SwitchAssignment_2_0_1_in_rule__XSwitchExpression__Group_2_0__1__Impl20569);
+            pushFollow(FOLLOW_rule__XSwitchExpression__SwitchAssignment_2_0_1_in_rule__XSwitchExpression__Group_2_0__1__Impl20571);
             rule__XSwitchExpression__SwitchAssignment_2_0_1();
 
             state._fsp--;
@@ -29974,17 +29922,91 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__XSwitchExpression__Group_2_0__1__Impl"
 
 
+    // $ANTLR start "rule__XSwitchExpression__Group_2_0__2"
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10104:1: rule__XSwitchExpression__Group_2_0__2 : rule__XSwitchExpression__Group_2_0__2__Impl ;
+    public final void rule__XSwitchExpression__Group_2_0__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10108:1: ( rule__XSwitchExpression__Group_2_0__2__Impl )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10109:2: rule__XSwitchExpression__Group_2_0__2__Impl
+            {
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0__2__Impl_in_rule__XSwitchExpression__Group_2_0__220601);
+            rule__XSwitchExpression__Group_2_0__2__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XSwitchExpression__Group_2_0__2"
+
+
+    // $ANTLR start "rule__XSwitchExpression__Group_2_0__2__Impl"
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10115:1: rule__XSwitchExpression__Group_2_0__2__Impl : ( ')' ) ;
+    public final void rule__XSwitchExpression__Group_2_0__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10119:1: ( ( ')' ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10120:1: ( ')' )
+            {
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10120:1: ( ')' )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10121:1: ')'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXSwitchExpressionAccess().getRightParenthesisKeyword_2_0_2()); 
+            }
+            match(input,56,FOLLOW_56_in_rule__XSwitchExpression__Group_2_0__2__Impl20629); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getXSwitchExpressionAccess().getRightParenthesisKeyword_2_0_2()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XSwitchExpression__Group_2_0__2__Impl"
+
+
     // $ANTLR start "rule__XSwitchExpression__Group_2_0_0__0"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10107:1: rule__XSwitchExpression__Group_2_0_0__0 : rule__XSwitchExpression__Group_2_0_0__0__Impl ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10140:1: rule__XSwitchExpression__Group_2_0_0__0 : rule__XSwitchExpression__Group_2_0_0__0__Impl ;
     public final void rule__XSwitchExpression__Group_2_0_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10111:1: ( rule__XSwitchExpression__Group_2_0_0__0__Impl )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10112:2: rule__XSwitchExpression__Group_2_0_0__0__Impl
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10144:1: ( rule__XSwitchExpression__Group_2_0_0__0__Impl )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10145:2: rule__XSwitchExpression__Group_2_0_0__0__Impl
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0__0__Impl_in_rule__XSwitchExpression__Group_2_0_0__020603);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0__0__Impl_in_rule__XSwitchExpression__Group_2_0_0__020666);
             rule__XSwitchExpression__Group_2_0_0__0__Impl();
 
             state._fsp--;
@@ -30008,25 +30030,25 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_0_0__0__Impl"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10118:1: rule__XSwitchExpression__Group_2_0_0__0__Impl : ( ( rule__XSwitchExpression__Group_2_0_0_0__0 ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10151:1: rule__XSwitchExpression__Group_2_0_0__0__Impl : ( ( rule__XSwitchExpression__Group_2_0_0_0__0 ) ) ;
     public final void rule__XSwitchExpression__Group_2_0_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10122:1: ( ( ( rule__XSwitchExpression__Group_2_0_0_0__0 ) ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10123:1: ( ( rule__XSwitchExpression__Group_2_0_0_0__0 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10155:1: ( ( ( rule__XSwitchExpression__Group_2_0_0_0__0 ) ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10156:1: ( ( rule__XSwitchExpression__Group_2_0_0_0__0 ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10123:1: ( ( rule__XSwitchExpression__Group_2_0_0_0__0 ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10124:1: ( rule__XSwitchExpression__Group_2_0_0_0__0 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10156:1: ( ( rule__XSwitchExpression__Group_2_0_0_0__0 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10157:1: ( rule__XSwitchExpression__Group_2_0_0_0__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getGroup_2_0_0_0()); 
             }
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10125:1: ( rule__XSwitchExpression__Group_2_0_0_0__0 )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10125:2: rule__XSwitchExpression__Group_2_0_0_0__0
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10158:1: ( rule__XSwitchExpression__Group_2_0_0_0__0 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10158:2: rule__XSwitchExpression__Group_2_0_0_0__0
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__0_in_rule__XSwitchExpression__Group_2_0_0__0__Impl20630);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__0_in_rule__XSwitchExpression__Group_2_0_0__0__Impl20693);
             rule__XSwitchExpression__Group_2_0_0_0__0();
 
             state._fsp--;
@@ -30059,21 +30081,21 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_0_0_0__0"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10137:1: rule__XSwitchExpression__Group_2_0_0_0__0 : rule__XSwitchExpression__Group_2_0_0_0__0__Impl rule__XSwitchExpression__Group_2_0_0_0__1 ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10170:1: rule__XSwitchExpression__Group_2_0_0_0__0 : rule__XSwitchExpression__Group_2_0_0_0__0__Impl rule__XSwitchExpression__Group_2_0_0_0__1 ;
     public final void rule__XSwitchExpression__Group_2_0_0_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10141:1: ( rule__XSwitchExpression__Group_2_0_0_0__0__Impl rule__XSwitchExpression__Group_2_0_0_0__1 )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10142:2: rule__XSwitchExpression__Group_2_0_0_0__0__Impl rule__XSwitchExpression__Group_2_0_0_0__1
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10174:1: ( rule__XSwitchExpression__Group_2_0_0_0__0__Impl rule__XSwitchExpression__Group_2_0_0_0__1 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10175:2: rule__XSwitchExpression__Group_2_0_0_0__0__Impl rule__XSwitchExpression__Group_2_0_0_0__1
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__0__Impl_in_rule__XSwitchExpression__Group_2_0_0_0__020662);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__0__Impl_in_rule__XSwitchExpression__Group_2_0_0_0__020725);
             rule__XSwitchExpression__Group_2_0_0_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__1_in_rule__XSwitchExpression__Group_2_0_0_0__020665);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__1_in_rule__XSwitchExpression__Group_2_0_0_0__020728);
             rule__XSwitchExpression__Group_2_0_0_0__1();
 
             state._fsp--;
@@ -30097,34 +30119,24 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_0_0_0__0__Impl"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10149:1: rule__XSwitchExpression__Group_2_0_0_0__0__Impl : ( ( rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0 ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10182:1: rule__XSwitchExpression__Group_2_0_0_0__0__Impl : ( '(' ) ;
     public final void rule__XSwitchExpression__Group_2_0_0_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10153:1: ( ( ( rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0 ) ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10154:1: ( ( rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10186:1: ( ( '(' ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10187:1: ( '(' )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10154:1: ( ( rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0 ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10155:1: ( rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10187:1: ( '(' )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10188:1: '('
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameAssignment_2_0_0_0_0()); 
+               before(grammarAccess.getXSwitchExpressionAccess().getLeftParenthesisKeyword_2_0_0_0_0()); 
             }
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10156:1: ( rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0 )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10156:2: rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0
-            {
-            pushFollow(FOLLOW_rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0_in_rule__XSwitchExpression__Group_2_0_0_0__0__Impl20692);
-            rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
+            match(input,55,FOLLOW_55_in_rule__XSwitchExpression__Group_2_0_0_0__0__Impl20756); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameAssignment_2_0_0_0_0()); 
+               after(grammarAccess.getXSwitchExpressionAccess().getLeftParenthesisKeyword_2_0_0_0_0()); 
             }
 
             }
@@ -30148,17 +30160,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_0_0_0__1"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10166:1: rule__XSwitchExpression__Group_2_0_0_0__1 : rule__XSwitchExpression__Group_2_0_0_0__1__Impl ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10201:1: rule__XSwitchExpression__Group_2_0_0_0__1 : rule__XSwitchExpression__Group_2_0_0_0__1__Impl rule__XSwitchExpression__Group_2_0_0_0__2 ;
     public final void rule__XSwitchExpression__Group_2_0_0_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10170:1: ( rule__XSwitchExpression__Group_2_0_0_0__1__Impl )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10171:2: rule__XSwitchExpression__Group_2_0_0_0__1__Impl
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10205:1: ( rule__XSwitchExpression__Group_2_0_0_0__1__Impl rule__XSwitchExpression__Group_2_0_0_0__2 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10206:2: rule__XSwitchExpression__Group_2_0_0_0__1__Impl rule__XSwitchExpression__Group_2_0_0_0__2
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__1__Impl_in_rule__XSwitchExpression__Group_2_0_0_0__120722);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__1__Impl_in_rule__XSwitchExpression__Group_2_0_0_0__120787);
             rule__XSwitchExpression__Group_2_0_0_0__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__2_in_rule__XSwitchExpression__Group_2_0_0_0__120790);
+            rule__XSwitchExpression__Group_2_0_0_0__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -30181,24 +30198,34 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_0_0_0__1__Impl"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10177:1: rule__XSwitchExpression__Group_2_0_0_0__1__Impl : ( ':' ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10213:1: rule__XSwitchExpression__Group_2_0_0_0__1__Impl : ( ( rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1 ) ) ;
     public final void rule__XSwitchExpression__Group_2_0_0_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10181:1: ( ( ':' ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10182:1: ( ':' )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10217:1: ( ( ( rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1 ) ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10218:1: ( ( rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1 ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10182:1: ( ':' )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10183:1: ':'
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10218:1: ( ( rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10219:1: ( rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXSwitchExpressionAccess().getColonKeyword_2_0_0_0_1()); 
+               before(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamAssignment_2_0_0_0_1()); 
             }
-            match(input,53,FOLLOW_53_in_rule__XSwitchExpression__Group_2_0_0_0__1__Impl20750); if (state.failed) return ;
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10220:1: ( rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10220:2: rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1
+            {
+            pushFollow(FOLLOW_rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1_in_rule__XSwitchExpression__Group_2_0_0_0__1__Impl20817);
+            rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXSwitchExpressionAccess().getColonKeyword_2_0_0_0_1()); 
+               after(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamAssignment_2_0_0_0_1()); 
             }
 
             }
@@ -30221,22 +30248,96 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__XSwitchExpression__Group_2_0_0_0__1__Impl"
 
 
+    // $ANTLR start "rule__XSwitchExpression__Group_2_0_0_0__2"
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10230:1: rule__XSwitchExpression__Group_2_0_0_0__2 : rule__XSwitchExpression__Group_2_0_0_0__2__Impl ;
+    public final void rule__XSwitchExpression__Group_2_0_0_0__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10234:1: ( rule__XSwitchExpression__Group_2_0_0_0__2__Impl )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10235:2: rule__XSwitchExpression__Group_2_0_0_0__2__Impl
+            {
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__2__Impl_in_rule__XSwitchExpression__Group_2_0_0_0__220847);
+            rule__XSwitchExpression__Group_2_0_0_0__2__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XSwitchExpression__Group_2_0_0_0__2"
+
+
+    // $ANTLR start "rule__XSwitchExpression__Group_2_0_0_0__2__Impl"
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10241:1: rule__XSwitchExpression__Group_2_0_0_0__2__Impl : ( ':' ) ;
+    public final void rule__XSwitchExpression__Group_2_0_0_0__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10245:1: ( ( ':' ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10246:1: ( ':' )
+            {
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10246:1: ( ':' )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10247:1: ':'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXSwitchExpressionAccess().getColonKeyword_2_0_0_0_2()); 
+            }
+            match(input,53,FOLLOW_53_in_rule__XSwitchExpression__Group_2_0_0_0__2__Impl20875); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getXSwitchExpressionAccess().getColonKeyword_2_0_0_0_2()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XSwitchExpression__Group_2_0_0_0__2__Impl"
+
+
     // $ANTLR start "rule__XSwitchExpression__Group_2_1__0"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10200:1: rule__XSwitchExpression__Group_2_1__0 : rule__XSwitchExpression__Group_2_1__0__Impl rule__XSwitchExpression__Group_2_1__1 ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10266:1: rule__XSwitchExpression__Group_2_1__0 : rule__XSwitchExpression__Group_2_1__0__Impl rule__XSwitchExpression__Group_2_1__1 ;
     public final void rule__XSwitchExpression__Group_2_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10204:1: ( rule__XSwitchExpression__Group_2_1__0__Impl rule__XSwitchExpression__Group_2_1__1 )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10205:2: rule__XSwitchExpression__Group_2_1__0__Impl rule__XSwitchExpression__Group_2_1__1
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10270:1: ( rule__XSwitchExpression__Group_2_1__0__Impl rule__XSwitchExpression__Group_2_1__1 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10271:2: rule__XSwitchExpression__Group_2_1__0__Impl rule__XSwitchExpression__Group_2_1__1
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1__0__Impl_in_rule__XSwitchExpression__Group_2_1__020785);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1__0__Impl_in_rule__XSwitchExpression__Group_2_1__020912);
             rule__XSwitchExpression__Group_2_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1__1_in_rule__XSwitchExpression__Group_2_1__020788);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1__1_in_rule__XSwitchExpression__Group_2_1__020915);
             rule__XSwitchExpression__Group_2_1__1();
 
             state._fsp--;
@@ -30260,29 +30361,36 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_1__0__Impl"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10212:1: rule__XSwitchExpression__Group_2_1__0__Impl : ( ( rule__XSwitchExpression__Group_2_1_0__0 ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10278:1: rule__XSwitchExpression__Group_2_1__0__Impl : ( ( rule__XSwitchExpression__Group_2_1_0__0 )? ) ;
     public final void rule__XSwitchExpression__Group_2_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10216:1: ( ( ( rule__XSwitchExpression__Group_2_1_0__0 ) ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10217:1: ( ( rule__XSwitchExpression__Group_2_1_0__0 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10282:1: ( ( ( rule__XSwitchExpression__Group_2_1_0__0 )? ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10283:1: ( ( rule__XSwitchExpression__Group_2_1_0__0 )? )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10217:1: ( ( rule__XSwitchExpression__Group_2_1_0__0 ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10218:1: ( rule__XSwitchExpression__Group_2_1_0__0 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10283:1: ( ( rule__XSwitchExpression__Group_2_1_0__0 )? )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10284:1: ( rule__XSwitchExpression__Group_2_1_0__0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getGroup_2_1_0()); 
             }
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10219:1: ( rule__XSwitchExpression__Group_2_1_0__0 )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10219:2: rule__XSwitchExpression__Group_2_1_0__0
-            {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0__0_in_rule__XSwitchExpression__Group_2_1__0__Impl20815);
-            rule__XSwitchExpression__Group_2_1_0__0();
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10285:1: ( rule__XSwitchExpression__Group_2_1_0__0 )?
+            int alt79=2;
+            alt79 = dfa79.predict(input);
+            switch (alt79) {
+                case 1 :
+                    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10285:2: rule__XSwitchExpression__Group_2_1_0__0
+                    {
+                    pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0__0_in_rule__XSwitchExpression__Group_2_1__0__Impl20942);
+                    rule__XSwitchExpression__Group_2_1_0__0();
 
-            state._fsp--;
-            if (state.failed) return ;
+                    state._fsp--;
+                    if (state.failed) return ;
+
+                    }
+                    break;
 
             }
 
@@ -30311,22 +30419,17 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_1__1"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10229:1: rule__XSwitchExpression__Group_2_1__1 : rule__XSwitchExpression__Group_2_1__1__Impl rule__XSwitchExpression__Group_2_1__2 ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10295:1: rule__XSwitchExpression__Group_2_1__1 : rule__XSwitchExpression__Group_2_1__1__Impl ;
     public final void rule__XSwitchExpression__Group_2_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10233:1: ( rule__XSwitchExpression__Group_2_1__1__Impl rule__XSwitchExpression__Group_2_1__2 )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10234:2: rule__XSwitchExpression__Group_2_1__1__Impl rule__XSwitchExpression__Group_2_1__2
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10299:1: ( rule__XSwitchExpression__Group_2_1__1__Impl )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10300:2: rule__XSwitchExpression__Group_2_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1__1__Impl_in_rule__XSwitchExpression__Group_2_1__120845);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1__1__Impl_in_rule__XSwitchExpression__Group_2_1__120973);
             rule__XSwitchExpression__Group_2_1__1__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1__2_in_rule__XSwitchExpression__Group_2_1__120848);
-            rule__XSwitchExpression__Group_2_1__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -30349,25 +30452,25 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_1__1__Impl"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10241:1: rule__XSwitchExpression__Group_2_1__1__Impl : ( ( rule__XSwitchExpression__SwitchAssignment_2_1_1 ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10306:1: rule__XSwitchExpression__Group_2_1__1__Impl : ( ( rule__XSwitchExpression__SwitchAssignment_2_1_1 ) ) ;
     public final void rule__XSwitchExpression__Group_2_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10245:1: ( ( ( rule__XSwitchExpression__SwitchAssignment_2_1_1 ) ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10246:1: ( ( rule__XSwitchExpression__SwitchAssignment_2_1_1 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10310:1: ( ( ( rule__XSwitchExpression__SwitchAssignment_2_1_1 ) ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10311:1: ( ( rule__XSwitchExpression__SwitchAssignment_2_1_1 ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10246:1: ( ( rule__XSwitchExpression__SwitchAssignment_2_1_1 ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10247:1: ( rule__XSwitchExpression__SwitchAssignment_2_1_1 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10311:1: ( ( rule__XSwitchExpression__SwitchAssignment_2_1_1 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10312:1: ( rule__XSwitchExpression__SwitchAssignment_2_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getSwitchAssignment_2_1_1()); 
             }
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10248:1: ( rule__XSwitchExpression__SwitchAssignment_2_1_1 )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10248:2: rule__XSwitchExpression__SwitchAssignment_2_1_1
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10313:1: ( rule__XSwitchExpression__SwitchAssignment_2_1_1 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10313:2: rule__XSwitchExpression__SwitchAssignment_2_1_1
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__SwitchAssignment_2_1_1_in_rule__XSwitchExpression__Group_2_1__1__Impl20875);
+            pushFollow(FOLLOW_rule__XSwitchExpression__SwitchAssignment_2_1_1_in_rule__XSwitchExpression__Group_2_1__1__Impl21000);
             rule__XSwitchExpression__SwitchAssignment_2_1_1();
 
             state._fsp--;
@@ -30399,91 +30502,17 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__XSwitchExpression__Group_2_1__1__Impl"
 
 
-    // $ANTLR start "rule__XSwitchExpression__Group_2_1__2"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10258:1: rule__XSwitchExpression__Group_2_1__2 : rule__XSwitchExpression__Group_2_1__2__Impl ;
-    public final void rule__XSwitchExpression__Group_2_1__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10262:1: ( rule__XSwitchExpression__Group_2_1__2__Impl )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10263:2: rule__XSwitchExpression__Group_2_1__2__Impl
-            {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1__2__Impl_in_rule__XSwitchExpression__Group_2_1__220905);
-            rule__XSwitchExpression__Group_2_1__2__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__XSwitchExpression__Group_2_1__2"
-
-
-    // $ANTLR start "rule__XSwitchExpression__Group_2_1__2__Impl"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10269:1: rule__XSwitchExpression__Group_2_1__2__Impl : ( ')' ) ;
-    public final void rule__XSwitchExpression__Group_2_1__2__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10273:1: ( ( ')' ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10274:1: ( ')' )
-            {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10274:1: ( ')' )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10275:1: ')'
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXSwitchExpressionAccess().getRightParenthesisKeyword_2_1_2()); 
-            }
-            match(input,56,FOLLOW_56_in_rule__XSwitchExpression__Group_2_1__2__Impl20933); if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getXSwitchExpressionAccess().getRightParenthesisKeyword_2_1_2()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__XSwitchExpression__Group_2_1__2__Impl"
-
-
     // $ANTLR start "rule__XSwitchExpression__Group_2_1_0__0"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10294:1: rule__XSwitchExpression__Group_2_1_0__0 : rule__XSwitchExpression__Group_2_1_0__0__Impl ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10327:1: rule__XSwitchExpression__Group_2_1_0__0 : rule__XSwitchExpression__Group_2_1_0__0__Impl ;
     public final void rule__XSwitchExpression__Group_2_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10298:1: ( rule__XSwitchExpression__Group_2_1_0__0__Impl )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10299:2: rule__XSwitchExpression__Group_2_1_0__0__Impl
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10331:1: ( rule__XSwitchExpression__Group_2_1_0__0__Impl )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10332:2: rule__XSwitchExpression__Group_2_1_0__0__Impl
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0__0__Impl_in_rule__XSwitchExpression__Group_2_1_0__020970);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0__0__Impl_in_rule__XSwitchExpression__Group_2_1_0__021034);
             rule__XSwitchExpression__Group_2_1_0__0__Impl();
 
             state._fsp--;
@@ -30507,25 +30536,25 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_1_0__0__Impl"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10305:1: rule__XSwitchExpression__Group_2_1_0__0__Impl : ( ( rule__XSwitchExpression__Group_2_1_0_0__0 ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10338:1: rule__XSwitchExpression__Group_2_1_0__0__Impl : ( ( rule__XSwitchExpression__Group_2_1_0_0__0 ) ) ;
     public final void rule__XSwitchExpression__Group_2_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10309:1: ( ( ( rule__XSwitchExpression__Group_2_1_0_0__0 ) ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10310:1: ( ( rule__XSwitchExpression__Group_2_1_0_0__0 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10342:1: ( ( ( rule__XSwitchExpression__Group_2_1_0_0__0 ) ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10343:1: ( ( rule__XSwitchExpression__Group_2_1_0_0__0 ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10310:1: ( ( rule__XSwitchExpression__Group_2_1_0_0__0 ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10311:1: ( rule__XSwitchExpression__Group_2_1_0_0__0 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10343:1: ( ( rule__XSwitchExpression__Group_2_1_0_0__0 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10344:1: ( rule__XSwitchExpression__Group_2_1_0_0__0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getGroup_2_1_0_0()); 
             }
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10312:1: ( rule__XSwitchExpression__Group_2_1_0_0__0 )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10312:2: rule__XSwitchExpression__Group_2_1_0_0__0
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10345:1: ( rule__XSwitchExpression__Group_2_1_0_0__0 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10345:2: rule__XSwitchExpression__Group_2_1_0_0__0
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__0_in_rule__XSwitchExpression__Group_2_1_0__0__Impl20997);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__0_in_rule__XSwitchExpression__Group_2_1_0__0__Impl21061);
             rule__XSwitchExpression__Group_2_1_0_0__0();
 
             state._fsp--;
@@ -30558,21 +30587,21 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_1_0_0__0"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10324:1: rule__XSwitchExpression__Group_2_1_0_0__0 : rule__XSwitchExpression__Group_2_1_0_0__0__Impl rule__XSwitchExpression__Group_2_1_0_0__1 ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10357:1: rule__XSwitchExpression__Group_2_1_0_0__0 : rule__XSwitchExpression__Group_2_1_0_0__0__Impl rule__XSwitchExpression__Group_2_1_0_0__1 ;
     public final void rule__XSwitchExpression__Group_2_1_0_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10328:1: ( rule__XSwitchExpression__Group_2_1_0_0__0__Impl rule__XSwitchExpression__Group_2_1_0_0__1 )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10329:2: rule__XSwitchExpression__Group_2_1_0_0__0__Impl rule__XSwitchExpression__Group_2_1_0_0__1
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10361:1: ( rule__XSwitchExpression__Group_2_1_0_0__0__Impl rule__XSwitchExpression__Group_2_1_0_0__1 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10362:2: rule__XSwitchExpression__Group_2_1_0_0__0__Impl rule__XSwitchExpression__Group_2_1_0_0__1
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__0__Impl_in_rule__XSwitchExpression__Group_2_1_0_0__021029);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__0__Impl_in_rule__XSwitchExpression__Group_2_1_0_0__021093);
             rule__XSwitchExpression__Group_2_1_0_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__1_in_rule__XSwitchExpression__Group_2_1_0_0__021032);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__1_in_rule__XSwitchExpression__Group_2_1_0_0__021096);
             rule__XSwitchExpression__Group_2_1_0_0__1();
 
             state._fsp--;
@@ -30596,24 +30625,34 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_1_0_0__0__Impl"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10336:1: rule__XSwitchExpression__Group_2_1_0_0__0__Impl : ( '(' ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10369:1: rule__XSwitchExpression__Group_2_1_0_0__0__Impl : ( ( rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0 ) ) ;
     public final void rule__XSwitchExpression__Group_2_1_0_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10340:1: ( ( '(' ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10341:1: ( '(' )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10373:1: ( ( ( rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0 ) ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10374:1: ( ( rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0 ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10341:1: ( '(' )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10342:1: '('
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10374:1: ( ( rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10375:1: ( rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXSwitchExpressionAccess().getLeftParenthesisKeyword_2_1_0_0_0()); 
+               before(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamAssignment_2_1_0_0_0()); 
             }
-            match(input,55,FOLLOW_55_in_rule__XSwitchExpression__Group_2_1_0_0__0__Impl21060); if (state.failed) return ;
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10376:1: ( rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10376:2: rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0
+            {
+            pushFollow(FOLLOW_rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0_in_rule__XSwitchExpression__Group_2_1_0_0__0__Impl21123);
+            rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXSwitchExpressionAccess().getLeftParenthesisKeyword_2_1_0_0_0()); 
+               after(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamAssignment_2_1_0_0_0()); 
             }
 
             }
@@ -30637,22 +30676,17 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_1_0_0__1"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10355:1: rule__XSwitchExpression__Group_2_1_0_0__1 : rule__XSwitchExpression__Group_2_1_0_0__1__Impl rule__XSwitchExpression__Group_2_1_0_0__2 ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10386:1: rule__XSwitchExpression__Group_2_1_0_0__1 : rule__XSwitchExpression__Group_2_1_0_0__1__Impl ;
     public final void rule__XSwitchExpression__Group_2_1_0_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10359:1: ( rule__XSwitchExpression__Group_2_1_0_0__1__Impl rule__XSwitchExpression__Group_2_1_0_0__2 )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10360:2: rule__XSwitchExpression__Group_2_1_0_0__1__Impl rule__XSwitchExpression__Group_2_1_0_0__2
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10390:1: ( rule__XSwitchExpression__Group_2_1_0_0__1__Impl )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10391:2: rule__XSwitchExpression__Group_2_1_0_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__1__Impl_in_rule__XSwitchExpression__Group_2_1_0_0__121091);
+            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__1__Impl_in_rule__XSwitchExpression__Group_2_1_0_0__121153);
             rule__XSwitchExpression__Group_2_1_0_0__1__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__2_in_rule__XSwitchExpression__Group_2_1_0_0__121094);
-            rule__XSwitchExpression__Group_2_1_0_0__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -30675,34 +30709,24 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_2_1_0_0__1__Impl"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10367:1: rule__XSwitchExpression__Group_2_1_0_0__1__Impl : ( ( rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1 ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10397:1: rule__XSwitchExpression__Group_2_1_0_0__1__Impl : ( ':' ) ;
     public final void rule__XSwitchExpression__Group_2_1_0_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10371:1: ( ( ( rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1 ) ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10372:1: ( ( rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1 ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10401:1: ( ( ':' ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10402:1: ( ':' )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10372:1: ( ( rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1 ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10373:1: ( rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1 )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10402:1: ( ':' )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10403:1: ':'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameAssignment_2_1_0_0_1()); 
+               before(grammarAccess.getXSwitchExpressionAccess().getColonKeyword_2_1_0_0_1()); 
             }
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10374:1: ( rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1 )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10374:2: rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1
-            {
-            pushFollow(FOLLOW_rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1_in_rule__XSwitchExpression__Group_2_1_0_0__1__Impl21121);
-            rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
+            match(input,53,FOLLOW_53_in_rule__XSwitchExpression__Group_2_1_0_0__1__Impl21181); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameAssignment_2_1_0_0_1()); 
+               after(grammarAccess.getXSwitchExpressionAccess().getColonKeyword_2_1_0_0_1()); 
             }
 
             }
@@ -30723,80 +30747,6 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
         return ;
     }
     // $ANTLR end "rule__XSwitchExpression__Group_2_1_0_0__1__Impl"
-
-
-    // $ANTLR start "rule__XSwitchExpression__Group_2_1_0_0__2"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10384:1: rule__XSwitchExpression__Group_2_1_0_0__2 : rule__XSwitchExpression__Group_2_1_0_0__2__Impl ;
-    public final void rule__XSwitchExpression__Group_2_1_0_0__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10388:1: ( rule__XSwitchExpression__Group_2_1_0_0__2__Impl )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10389:2: rule__XSwitchExpression__Group_2_1_0_0__2__Impl
-            {
-            pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__2__Impl_in_rule__XSwitchExpression__Group_2_1_0_0__221151);
-            rule__XSwitchExpression__Group_2_1_0_0__2__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__XSwitchExpression__Group_2_1_0_0__2"
-
-
-    // $ANTLR start "rule__XSwitchExpression__Group_2_1_0_0__2__Impl"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10395:1: rule__XSwitchExpression__Group_2_1_0_0__2__Impl : ( ':' ) ;
-    public final void rule__XSwitchExpression__Group_2_1_0_0__2__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10399:1: ( ( ':' ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10400:1: ( ':' )
-            {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10400:1: ( ':' )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10401:1: ':'
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXSwitchExpressionAccess().getColonKeyword_2_1_0_0_2()); 
-            }
-            match(input,53,FOLLOW_53_in_rule__XSwitchExpression__Group_2_1_0_0__2__Impl21179); if (state.failed) return ;
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getXSwitchExpressionAccess().getColonKeyword_2_1_0_0_2()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__XSwitchExpression__Group_2_1_0_0__2__Impl"
 
 
     // $ANTLR start "rule__XSwitchExpression__Group_5__0"
@@ -48959,29 +48909,29 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__XIfExpression__ElseAssignment_6_1"
 
 
-    // $ANTLR start "rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17061:1: rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0 : ( ruleValidID ) ;
-    public final void rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0() throws RecognitionException {
+    // $ANTLR start "rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1"
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17061:1: rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1 : ( ruleJvmFormalParameter ) ;
+    public final void rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17065:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17066:1: ( ruleValidID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17065:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17066:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17066:1: ( ruleValidID )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17067:1: ruleValidID
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17066:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17067:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameValidIDParserRuleCall_2_0_0_0_0_0()); 
+               before(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamJvmFormalParameterParserRuleCall_2_0_0_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_034348);
-            ruleValidID();
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_134348);
+            ruleJvmFormalParameter();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameValidIDParserRuleCall_2_0_0_0_0_0()); 
+               after(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamJvmFormalParameterParserRuleCall_2_0_0_0_1_0()); 
             }
 
             }
@@ -49001,7 +48951,7 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0"
+    // $ANTLR end "rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1"
 
 
     // $ANTLR start "rule__XSwitchExpression__SwitchAssignment_2_0_1"
@@ -49049,29 +48999,29 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__XSwitchExpression__SwitchAssignment_2_0_1"
 
 
-    // $ANTLR start "rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1"
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17091:1: rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1 : ( ruleValidID ) ;
-    public final void rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1() throws RecognitionException {
+    // $ANTLR start "rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0"
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17091:1: rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0 : ( ruleJvmFormalParameter ) ;
+    public final void rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17095:1: ( ( ruleValidID ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17096:1: ( ruleValidID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17095:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17096:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17096:1: ( ruleValidID )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17097:1: ruleValidID
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17096:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:17097:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameValidIDParserRuleCall_2_1_0_0_1_0()); 
+               before(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamJvmFormalParameterParserRuleCall_2_1_0_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleValidID_in_rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_134410);
-            ruleValidID();
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_034410);
+            ruleJvmFormalParameter();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameValidIDParserRuleCall_2_1_0_0_1_0()); 
+               after(grammarAccess.getXSwitchExpressionAccess().getDeclaredParamJvmFormalParameterParserRuleCall_2_1_0_0_0_0()); 
             }
 
             }
@@ -49091,7 +49041,7 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1"
+    // $ANTLR end "rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0"
 
 
     // $ANTLR start "rule__XSwitchExpression__SwitchAssignment_2_1_1"
@@ -52321,6 +52271,36 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     }
     // $ANTLR end synpred35_InternalDomainmodel
 
+    // $ANTLR start synpred55_InternalDomainmodel
+    public final void synpred55_InternalDomainmodel_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:2961:1: ( ( ( rule__XSwitchExpression__Group_2_0__0 ) ) )
+        // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:2961:1: ( ( rule__XSwitchExpression__Group_2_0__0 ) )
+        {
+        // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:2961:1: ( ( rule__XSwitchExpression__Group_2_0__0 ) )
+        // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:2962:1: ( rule__XSwitchExpression__Group_2_0__0 )
+        {
+        if ( state.backtracking==0 ) {
+           before(grammarAccess.getXSwitchExpressionAccess().getGroup_2_0()); 
+        }
+        // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:2963:1: ( rule__XSwitchExpression__Group_2_0__0 )
+        // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:2963:2: rule__XSwitchExpression__Group_2_0__0
+        {
+        pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_0__0_in_synpred55_InternalDomainmodel6412);
+        rule__XSwitchExpression__Group_2_0__0();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+
+
+        }
+
+
+        }
+    }
+    // $ANTLR end synpred55_InternalDomainmodel
+
     // $ANTLR start synpred59_InternalDomainmodel
     public final void synpred59_InternalDomainmodel_fragment() throws RecognitionException {   
         // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:3053:1: ( ( ( rule__XVariableDeclaration__Group_2_0__0 ) ) )
@@ -52620,6 +52600,21 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
         }
     }
     // $ANTLR end synpred112_InternalDomainmodel
+
+    // $ANTLR start synpred115_InternalDomainmodel
+    public final void synpred115_InternalDomainmodel_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10285:2: ( rule__XSwitchExpression__Group_2_1_0__0 )
+        // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/domainmodel/ui/contentassist/antlr/internal/InternalDomainmodel.g:10285:2: rule__XSwitchExpression__Group_2_1_0__0
+        {
+        pushFollow(FOLLOW_rule__XSwitchExpression__Group_2_1_0__0_in_synpred115_InternalDomainmodel20942);
+        rule__XSwitchExpression__Group_2_1_0__0();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred115_InternalDomainmodel
 
     // $ANTLR start synpred123_InternalDomainmodel
     public final void synpred123_InternalDomainmodel_fragment() throws RecognitionException {   
@@ -53096,6 +53091,20 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
         state.failed=false;
         return success;
     }
+    public final boolean synpred55_InternalDomainmodel() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred55_InternalDomainmodel_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred105_InternalDomainmodel() {
         state.backtracking++;
         int start = input.mark();
@@ -53115,6 +53124,20 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
         int start = input.mark();
         try {
             synpred144_InternalDomainmodel_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred115_InternalDomainmodel() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred115_InternalDomainmodel_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -53213,6 +53236,7 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     protected DFA9 dfa9 = new DFA9(this);
     protected DFA16 dfa16 = new DFA16(this);
     protected DFA19 dfa19 = new DFA19(this);
+    protected DFA23 dfa23 = new DFA23(this);
     protected DFA28 dfa28 = new DFA28(this);
     protected DFA31 dfa31 = new DFA31(this);
     protected DFA40 dfa40 = new DFA40(this);
@@ -53220,6 +53244,7 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     protected DFA60 dfa60 = new DFA60(this);
     protected DFA61 dfa61 = new DFA61(this);
     protected DFA69 dfa69 = new DFA69(this);
+    protected DFA79 dfa79 = new DFA79(this);
     protected DFA87 dfa87 = new DFA87(this);
     protected DFA88 dfa88 = new DFA88(this);
     protected DFA92 dfa92 = new DFA92(this);
@@ -53471,6 +53496,116 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
             if (state.backtracking>0) {state.failed=true; return -1;}
             NoViableAltException nvae =
                 new NoViableAltException(getDescription(), 19, _s, input);
+            error(nvae);
+            throw nvae;
+        }
+    }
+    static final String DFA23_eotS =
+        "\42\uffff";
+    static final String DFA23_eofS =
+        "\42\uffff";
+    static final String DFA23_minS =
+        "\1\4\1\0\40\uffff";
+    static final String DFA23_maxS =
+        "\1\125\1\0\40\uffff";
+    static final String DFA23_acceptS =
+        "\2\uffff\1\2\36\uffff\1\1";
+    static final String DFA23_specialS =
+        "\1\uffff\1\0\40\uffff}>";
+    static final String[] DFA23_transitionS = {
+            "\5\2\20\uffff\1\2\3\uffff\1\2\3\uffff\2\2\4\uffff\1\2\3\uffff"+
+            "\6\2\1\uffff\1\2\4\uffff\1\1\3\uffff\2\2\2\uffff\1\2\1\uffff"+
+            "\1\2\2\uffff\11\2\10\uffff\1\2",
+            "\1\uffff",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] DFA23_eot = DFA.unpackEncodedString(DFA23_eotS);
+    static final short[] DFA23_eof = DFA.unpackEncodedString(DFA23_eofS);
+    static final char[] DFA23_min = DFA.unpackEncodedStringToUnsignedChars(DFA23_minS);
+    static final char[] DFA23_max = DFA.unpackEncodedStringToUnsignedChars(DFA23_maxS);
+    static final short[] DFA23_accept = DFA.unpackEncodedString(DFA23_acceptS);
+    static final short[] DFA23_special = DFA.unpackEncodedString(DFA23_specialS);
+    static final short[][] DFA23_transition;
+
+    static {
+        int numStates = DFA23_transitionS.length;
+        DFA23_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA23_transition[i] = DFA.unpackEncodedString(DFA23_transitionS[i]);
+        }
+    }
+
+    class DFA23 extends DFA {
+
+        public DFA23(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 23;
+            this.eot = DFA23_eot;
+            this.eof = DFA23_eof;
+            this.min = DFA23_min;
+            this.max = DFA23_max;
+            this.accept = DFA23_accept;
+            this.special = DFA23_special;
+            this.transition = DFA23_transition;
+        }
+        public String getDescription() {
+            return "2956:1: rule__XSwitchExpression__Alternatives_2 : ( ( ( rule__XSwitchExpression__Group_2_0__0 ) ) | ( ( rule__XSwitchExpression__Group_2_1__0 ) ) );";
+        }
+        public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+            TokenStream input = (TokenStream)_input;
+        	int _s = s;
+            switch ( s ) {
+                    case 0 : 
+                        int LA23_1 = input.LA(1);
+
+                         
+                        int index23_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred55_InternalDomainmodel()) ) {s = 33;}
+
+                        else if ( (true) ) {s = 2;}
+
+                         
+                        input.seek(index23_1);
+                        if ( s>=0 ) return s;
+                        break;
+            }
+            if (state.backtracking>0) {state.failed=true; return -1;}
+            NoViableAltException nvae =
+                new NoViableAltException(getDescription(), 23, _s, input);
             error(nvae);
             throw nvae;
         }
@@ -54410,6 +54545,130 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
             if (state.backtracking>0) {state.failed=true; return -1;}
             NoViableAltException nvae =
                 new NoViableAltException(getDescription(), 69, _s, input);
+            error(nvae);
+            throw nvae;
+        }
+    }
+    static final String DFA79_eotS =
+        "\41\uffff";
+    static final String DFA79_eofS =
+        "\41\uffff";
+    static final String DFA79_minS =
+        "\1\4\2\0\36\uffff";
+    static final String DFA79_maxS =
+        "\1\125\2\0\36\uffff";
+    static final String DFA79_acceptS =
+        "\3\uffff\1\1\1\2\34\uffff";
+    static final String DFA79_specialS =
+        "\1\uffff\1\0\1\1\36\uffff}>";
+    static final String[] DFA79_transitionS = {
+            "\1\1\4\4\20\uffff\1\4\3\uffff\1\3\3\uffff\2\4\4\uffff\1\4\3"+
+            "\uffff\6\4\1\uffff\1\4\4\uffff\1\2\3\uffff\2\4\2\uffff\1\4\1"+
+            "\uffff\1\4\2\uffff\11\4\10\uffff\1\4",
+            "\1\uffff",
+            "\1\uffff",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] DFA79_eot = DFA.unpackEncodedString(DFA79_eotS);
+    static final short[] DFA79_eof = DFA.unpackEncodedString(DFA79_eofS);
+    static final char[] DFA79_min = DFA.unpackEncodedStringToUnsignedChars(DFA79_minS);
+    static final char[] DFA79_max = DFA.unpackEncodedStringToUnsignedChars(DFA79_maxS);
+    static final short[] DFA79_accept = DFA.unpackEncodedString(DFA79_acceptS);
+    static final short[] DFA79_special = DFA.unpackEncodedString(DFA79_specialS);
+    static final short[][] DFA79_transition;
+
+    static {
+        int numStates = DFA79_transitionS.length;
+        DFA79_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA79_transition[i] = DFA.unpackEncodedString(DFA79_transitionS[i]);
+        }
+    }
+
+    class DFA79 extends DFA {
+
+        public DFA79(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 79;
+            this.eot = DFA79_eot;
+            this.eof = DFA79_eof;
+            this.min = DFA79_min;
+            this.max = DFA79_max;
+            this.accept = DFA79_accept;
+            this.special = DFA79_special;
+            this.transition = DFA79_transition;
+        }
+        public String getDescription() {
+            return "10285:1: ( rule__XSwitchExpression__Group_2_1_0__0 )?";
+        }
+        public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+            TokenStream input = (TokenStream)_input;
+        	int _s = s;
+            switch ( s ) {
+                    case 0 : 
+                        int LA79_1 = input.LA(1);
+
+                         
+                        int index79_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred115_InternalDomainmodel()) ) {s = 3;}
+
+                        else if ( (true) ) {s = 4;}
+
+                         
+                        input.seek(index79_1);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA79_2 = input.LA(1);
+
+                         
+                        int index79_2 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred115_InternalDomainmodel()) ) {s = 3;}
+
+                        else if ( (true) ) {s = 4;}
+
+                         
+                        input.seek(index79_2);
+                        if ( s>=0 ) return s;
+                        break;
+            }
+            if (state.backtracking>0) {state.failed=true; return -1;}
+            NoViableAltException nvae =
+                new NoViableAltException(getDescription(), 79, _s, input);
             error(nvae);
             throw nvae;
         }
@@ -56789,33 +57048,33 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0__0__Impl_in_rule__XSwitchExpression__Group_2_0__020481 = new BitSet(new long[]{0x98A5F886220001F0L,0x0000000000281FF2L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0__1_in_rule__XSwitchExpression__Group_2_0__020484 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0__0_in_rule__XSwitchExpression__Group_2_0__0__Impl20511 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0__1__Impl_in_rule__XSwitchExpression__Group_2_0__120542 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__SwitchAssignment_2_0_1_in_rule__XSwitchExpression__Group_2_0__1__Impl20569 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0__0__Impl_in_rule__XSwitchExpression__Group_2_0_0__020603 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__0_in_rule__XSwitchExpression__Group_2_0_0__0__Impl20630 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__0__Impl_in_rule__XSwitchExpression__Group_2_0_0_0__020662 = new BitSet(new long[]{0x0020000000000000L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__1_in_rule__XSwitchExpression__Group_2_0_0_0__020665 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_0_in_rule__XSwitchExpression__Group_2_0_0_0__0__Impl20692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__1__Impl_in_rule__XSwitchExpression__Group_2_0_0_0__120722 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_rule__XSwitchExpression__Group_2_0_0_0__1__Impl20750 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1__0__Impl_in_rule__XSwitchExpression__Group_2_1__020785 = new BitSet(new long[]{0x98A5F886220001F0L,0x0000000000281FF2L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1__1_in_rule__XSwitchExpression__Group_2_1__020788 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0__0_in_rule__XSwitchExpression__Group_2_1__0__Impl20815 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1__1__Impl_in_rule__XSwitchExpression__Group_2_1__120845 = new BitSet(new long[]{0x0100000000000000L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1__2_in_rule__XSwitchExpression__Group_2_1__120848 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__SwitchAssignment_2_1_1_in_rule__XSwitchExpression__Group_2_1__1__Impl20875 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1__2__Impl_in_rule__XSwitchExpression__Group_2_1__220905 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_rule__XSwitchExpression__Group_2_1__2__Impl20933 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0__0__Impl_in_rule__XSwitchExpression__Group_2_1_0__020970 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__0_in_rule__XSwitchExpression__Group_2_1_0__0__Impl20997 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__0__Impl_in_rule__XSwitchExpression__Group_2_1_0_0__021029 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__1_in_rule__XSwitchExpression__Group_2_1_0_0__021032 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_rule__XSwitchExpression__Group_2_1_0_0__0__Impl21060 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__1__Impl_in_rule__XSwitchExpression__Group_2_1_0_0__121091 = new BitSet(new long[]{0x0020000000000000L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__2_in_rule__XSwitchExpression__Group_2_1_0_0__121094 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_1_in_rule__XSwitchExpression__Group_2_1_0_0__1__Impl21121 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__2__Impl_in_rule__XSwitchExpression__Group_2_1_0_0__221151 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_rule__XSwitchExpression__Group_2_1_0_0__2__Impl21179 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0__1__Impl_in_rule__XSwitchExpression__Group_2_0__120541 = new BitSet(new long[]{0x0100000000000000L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0__2_in_rule__XSwitchExpression__Group_2_0__120544 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__SwitchAssignment_2_0_1_in_rule__XSwitchExpression__Group_2_0__1__Impl20571 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0__2__Impl_in_rule__XSwitchExpression__Group_2_0__220601 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_rule__XSwitchExpression__Group_2_0__2__Impl20629 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0__0__Impl_in_rule__XSwitchExpression__Group_2_0_0__020666 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__0_in_rule__XSwitchExpression__Group_2_0_0__0__Impl20693 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__0__Impl_in_rule__XSwitchExpression__Group_2_0_0_0__020725 = new BitSet(new long[]{0x0080000020000010L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__1_in_rule__XSwitchExpression__Group_2_0_0_0__020728 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_rule__XSwitchExpression__Group_2_0_0_0__0__Impl20756 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__1__Impl_in_rule__XSwitchExpression__Group_2_0_0_0__120787 = new BitSet(new long[]{0x0020000000000000L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__2_in_rule__XSwitchExpression__Group_2_0_0_0__120790 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_1_in_rule__XSwitchExpression__Group_2_0_0_0__1__Impl20817 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0_0_0__2__Impl_in_rule__XSwitchExpression__Group_2_0_0_0__220847 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_rule__XSwitchExpression__Group_2_0_0_0__2__Impl20875 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1__0__Impl_in_rule__XSwitchExpression__Group_2_1__020912 = new BitSet(new long[]{0x98A5F886220001F0L,0x0000000000281FF2L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1__1_in_rule__XSwitchExpression__Group_2_1__020915 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0__0_in_rule__XSwitchExpression__Group_2_1__0__Impl20942 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1__1__Impl_in_rule__XSwitchExpression__Group_2_1__120973 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__SwitchAssignment_2_1_1_in_rule__XSwitchExpression__Group_2_1__1__Impl21000 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0__0__Impl_in_rule__XSwitchExpression__Group_2_1_0__021034 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__0_in_rule__XSwitchExpression__Group_2_1_0__0__Impl21061 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__0__Impl_in_rule__XSwitchExpression__Group_2_1_0_0__021093 = new BitSet(new long[]{0x0020000000000000L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__1_in_rule__XSwitchExpression__Group_2_1_0_0__021096 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_0_in_rule__XSwitchExpression__Group_2_1_0_0__0__Impl21123 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0_0__1__Impl_in_rule__XSwitchExpression__Group_2_1_0_0__121153 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_rule__XSwitchExpression__Group_2_1_0_0__1__Impl21181 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group_5__0__Impl_in_rule__XSwitchExpression__Group_5__021216 = new BitSet(new long[]{0x0020000000000000L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group_5__1_in_rule__XSwitchExpression__Group_5__021219 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_66_in_rule__XSwitchExpression__Group_5__0__Impl21247 = new BitSet(new long[]{0x0000000000000002L});
@@ -57331,9 +57590,9 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_334255 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_534286 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_6_134317 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__XSwitchExpression__LocalVarNameAssignment_2_0_0_0_034348 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XSwitchExpression__DeclaredParamAssignment_2_0_0_0_134348 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_0_134379 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValidID_in_rule__XSwitchExpression__LocalVarNameAssignment_2_1_0_0_134410 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XSwitchExpression__DeclaredParamAssignment_2_1_0_0_034410 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_2_1_134441 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_434472 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_5_234503 = new BitSet(new long[]{0x0000000000000002L});
@@ -57404,6 +57663,7 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_236634 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__OpOther__Group_6_1_0__0_in_synpred23_InternalDomainmodel5437 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0_in_synpred35_InternalDomainmodel5940 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_0__0_in_synpred55_InternalDomainmodel6412 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XVariableDeclaration__Group_2_0__0_in_synpred59_InternalDomainmodel6618 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_3_1_0_in_synpred60_InternalDomainmodel6669 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_4_1_0_in_synpred66_InternalDomainmodel6884 = new BitSet(new long[]{0x0000000000000002L});
@@ -57421,6 +57681,7 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_4_in_synpred97_InternalDomainmodel15429 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XClosure__Group_1__0_in_synpred105_InternalDomainmodel17665 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIfExpression__Group_6__0_in_synpred112_InternalDomainmodel19871 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group_2_1_0__0_in_synpred115_InternalDomainmodel20942 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__Group_3__0_in_synpred123_InternalDomainmodel24597 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_4_in_synpred124_InternalDomainmodel24655 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__0_in_synpred128_InternalDomainmodel25713 = new BitSet(new long[]{0x0000000000000002L});

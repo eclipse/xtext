@@ -604,5 +604,95 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		}
 		'''.expression.assertNoIssues
 	}
+	
+	@Test def void testIncompleteCasesOnEnum_7() {
+		'''
+		{
+			switch org.eclipse.xtext.xbase.tests.validation.Color x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
+			}
+		}
+		'''.expression.assertWarning(XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM)
+	}
+	
+	@Test def void testIncompleteCasesOnEnum_8() {
+		'''
+		{
+			switch (org.eclipse.xtext.xbase.tests.validation.Color x : org.eclipse.xtext.xbase.tests.validation.Color.RED) {
+			}
+		}
+		'''.expression.assertWarning(XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPLETE_CASES_ON_ENUM)
+	}
+	
+	@Test def void testIncompleteCasesOnEnum_9() {
+		'''
+		{
+			switch Object x : org.eclipse.xtext.xbase.tests.validation.Color.RED {
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testIncompleteCasesOnEnum_10() {
+		'''
+		{
+			switch (Object x : org.eclipse.xtext.xbase.tests.validation.Color.RED) {
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSwitchDeclaredParameter() {
+		'''
+		{
+			switch Object x : "lalala" {
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSwitchDeclaredParameter_1() {
+		'''
+		{
+			switch String x : "lalala" {
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSwitchDeclaredParameter_2() {
+		'''
+		{
+			switch Integer x : "lalala" {
+			}
+		}
+		'''.expression.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+	
+	@Test def void testSwitchDeclaredParameter_3() {
+		'''
+		{
+			switch (Object x : "lalala") {
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSwitchDeclaredParameter_4() {
+		'''
+		{
+			switch (String x : "lalala") {
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSwitchDeclaredParameter_5() {
+		'''
+		{
+			switch (Integer x : "lalala") {
+			}
+		}
+		'''.expression.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
 
 }

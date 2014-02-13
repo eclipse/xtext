@@ -31,6 +31,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ISelectable;
+import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
@@ -174,8 +175,14 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 		return new ImportScope(namespaceResolvers, parent, importFrom, type, ignoreCase) {
 			@Override
 			protected IEObjectDescription getSingleLocalElementByName(QualifiedName name) {
-				if (name.getSegmentCount() > 1)
+				if (name.getSegmentCount() > 1) {
+					QualifiedName singleSegment = QualifiedName.create(name.toString("$"));
+					final IEObjectDescription result = super.getSingleLocalElementByName(singleSegment);
+					if (result != null) {
+						return new AliasedEObjectDescription(name, result);
+					}
 					return null;
+				}
 				final IEObjectDescription result = super.getSingleLocalElementByName(name);
 				return result;
 			}

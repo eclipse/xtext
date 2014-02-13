@@ -768,8 +768,8 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 				"   case x : x" +
 		"}");
 		final XCasePart xCasePart = switchExpr.getCases().get(0);
-		assertEquals(switchExpr, ((XFeatureCall) xCasePart.getThen()).getFeature());
-		assertEquals(switchExpr, ((XFeatureCall) xCasePart.getCase()).getFeature());
+		assertEquals(switchExpr.getDeclaredParam(), ((XFeatureCall) xCasePart.getThen()).getFeature());
+		assertEquals(switchExpr.getDeclaredParam(), ((XFeatureCall) xCasePart.getCase()).getFeature());
 	}
 	
 	@Test public void testSwitchExpression_02() throws Exception {
@@ -778,7 +778,7 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 				"    case true : true "+
 				"    default : x" +
 				"}");
-		assertEquals(switchExpr, ((XFeatureCall)switchExpr.getDefault()).getFeature());
+		assertEquals(switchExpr.getDeclaredParam(), ((XFeatureCall)switchExpr.getDefault()).getFeature());
 	}
 	
 	@Test public void testSwitchExpression_03() throws Exception {

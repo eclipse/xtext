@@ -15,7 +15,7 @@ public class Xbase11_TypeCoercion {
       "string".toCharArray();
       char[] _charArray = "string".toCharArray();
       /* _charArray[3]; */
-      final List<Character> l = ((List<Character>)Conversions.doWrapArray("string".toCharArray()));
+      final List<Character> l = (List<Character>)Conversions.doWrapArray("string".toCharArray());
       /* l; */
       final Comparator<String> _function = new Comparator<String>() {
         public int compare(final String a, final String b) {
@@ -25,7 +25,7 @@ public class Xbase11_TypeCoercion {
         }
       };
       final Comparator<String> comparator = _function;
-      _xblockexpression = (comparator.compare("1", " 2"));
+      _xblockexpression = comparator.compare("1", " 2");
     }
     return _xblockexpression;
   }

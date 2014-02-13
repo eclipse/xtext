@@ -13,7 +13,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
@@ -41,12 +40,6 @@ class BatchLinkingTest extends AbstractXbaseLinkingTest {
 		val resolvedTypes = typeResolver.resolveTypes(result);
 		for(content: result.eAllContents.toIterable) {
 			switch(content) {
-				XSwitchExpression: {
-					assertExpressionTypeIsResolved(content, resolvedTypes)
-					if (content.localVarName != null) {
-						assertIdentifiableTypeIsResolved(content, resolvedTypes)
-					}
-				}
 				XAbstractFeatureCall: {
 					assertExpressionTypeIsResolved(content, resolvedTypes)
 					if (content.implicitReceiver != null) {
@@ -65,12 +58,12 @@ class BatchLinkingTest extends AbstractXbaseLinkingTest {
 			for(content: result.eAllContents.toIterable) {
 				switch(content) {
 					XConstructorCall: {
-						val constructor = content.eGet(XbasePackage$Literals::XCONSTRUCTOR_CALL__CONSTRUCTOR, false) as InternalEObject
+						val constructor = content.eGet(XbasePackage.Literals::XCONSTRUCTOR_CALL__CONSTRUCTOR, false) as InternalEObject
 						assertNotNull(content.toString, constructor)
 						assertFalse(content.toString, constructor.eIsProxy())
 					}
 					XAbstractFeatureCall: {
-						val feature = content.eGet(XbasePackage$Literals::XABSTRACT_FEATURE_CALL__FEATURE, false) as InternalEObject
+						val feature = content.eGet(XbasePackage.Literals::XABSTRACT_FEATURE_CALL__FEATURE, false) as InternalEObject
 						assertNotNull(content.toString, feature)
 						assertFalse(content.toString, feature.eIsProxy())
 					}

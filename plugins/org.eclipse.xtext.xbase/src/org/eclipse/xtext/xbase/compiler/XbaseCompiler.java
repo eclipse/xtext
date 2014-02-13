@@ -73,6 +73,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueP
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -792,13 +793,18 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		appendable.trace(expr.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(varName);
 	}
 
-	@SuppressWarnings("deprecation")
 	protected JvmTypeReference getForLoopParameterType(XForLoopExpression expr) {
-		JvmTypeReference declaredType = expr.getDeclaredParam().getParameterType();
+		JvmFormalParameter declaredParam = expr.getDeclaredParam();
+		return getParameterType(declaredParam);
+	}
+
+	@SuppressWarnings("deprecation")
+	protected JvmTypeReference getParameterType(JvmFormalParameter declaredParam) {
+		JvmTypeReference declaredType = declaredParam.getParameterType();
 		if (declaredType != null) {
 			return declaredType;
 		}
-		return getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
+		return getTypeProvider().getTypeForIdentifiable(declaredParam);
 	}
 
 	protected void _toJavaStatement(final XConstructorCall expr, ITreeAppendable b, final boolean isReferenced) {
@@ -1065,36 +1071,86 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected String declareLocalVariable(XSwitchExpression expr, ITreeAppendable b) {
 		// declare local var for the switch expression
-		String variableName = null;
-		if (expr.getLocalVarName() == null && b.hasName(expr.getSwitch())) {
-			variableName = b.getName(expr.getSwitch());
-		} else if (expr.getLocalVarName() == null && expr.getSwitch() instanceof XFeatureCall) {
-			JvmIdentifiableElement feature = ((XFeatureCall) expr.getSwitch()).getFeature();
-			if (b.hasName(feature))
-				variableName = b.getName(feature);
-		} 
-		if(variableName == null) {
-			String name = getNameProvider().getSimpleName(expr);
-			if (name!=null) { 
-				name = makeJavaIdentifier(name);
-			} else {
-				// define synthetic name
-				name = "_switchValue";
-			}
-			JvmTypeReference typeReference = getType(expr.getSwitch());
-			b.newLine().append("final ");
-			serialize(typeReference, expr, b);
-			b.append(" ");
-			variableName = b.declareSyntheticVariable(expr, name);
-			if (expr.getLocalVarName() != null)
-				b.trace(expr, XbasePackage.Literals.XSWITCH_EXPRESSION__LOCAL_VAR_NAME, 0).append(variableName);
-			else
-				b.append(variableName);
-			b.append(" = ");
-			internalToJavaExpression(expr.getSwitch(), b);
-			b.append(";");
+		String variableName = getSwitchLocalVariableName(expr, b); 
+		if (variableName != null) {
+			return variableName;
 		}
+		String name = getSwitchLocalVariableName(expr);
+		JvmTypeReference variableType = getSwitchLocalVariableType(expr);
+		b.newLine().append("final ");
+		serialize(variableType, expr, b);
+		b.append(" ");
+		variableName = declareAndAppendSwitchSyntheticLocalVariable(expr, name, b);
+		b.append(" = ");
+		internalToJavaExpression(expr.getSwitch(), b);
+		b.append(";");
 		return variableName;
+	}
+
+	protected String getSwitchLocalVariableName(XSwitchExpression expr, ITreeAppendable b) {
+		JvmFormalParameter declaredParam = expr.getDeclaredParam();
+		if (declaredParam != null) {
+			if (b.hasName(declaredParam)) {
+				return b.getName(declaredParam);
+			}
+			return null;
+		}
+		XExpression switchExpression = expr.getSwitch();
+		if (b.hasName(switchExpression)) {
+			return b.getName(switchExpression);
+		} 
+		if (switchExpression instanceof XFeatureCall) {
+			XFeatureCall featureCall = (XFeatureCall) switchExpression;
+			JvmIdentifiableElement feature = featureCall.getFeature();
+			if (b.hasName(feature)) {
+				return b.getName(feature);
+			}
+		}
+		return null;
+	}
+
+	protected String declareAndAppendSwitchSyntheticLocalVariable(XSwitchExpression expr, String name, ITreeAppendable b) {
+		JvmFormalParameter declaredParam = expr.getDeclaredParam();
+		if (declaredParam == null) {
+			String declareSyntheticVariable = b.declareSyntheticVariable(expr, name);
+			b.append(declareSyntheticVariable);
+			return declareSyntheticVariable;
+		}
+		String declareSyntheticVariable = b.declareSyntheticVariable(declaredParam, name);
+		b.trace(declaredParam, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(declareSyntheticVariable);
+		return declareSyntheticVariable;
+	}
+
+	protected String getSwitchLocalVariableName(XSwitchExpression expr) {
+		String name = getSwitchLocalVariableSimpleName(expr);
+		if (name != null) { 
+			return makeJavaIdentifier(name);
+		}
+		// define synthetic name
+		return "_switchValue";
+	}
+
+	protected String getSwitchLocalVariableSimpleName(XSwitchExpression expr) {
+		IdentifiableSimpleNameProvider nameProvider = getNameProvider();
+		String varName = nameProvider.getSimpleName(expr.getDeclaredParam());
+		if (varName != null) {
+			return varName;
+		}
+		XExpression expression = expr.getSwitch();
+		if (!(expression instanceof XFeatureCall)) {
+			return null;
+		}
+		XFeatureCall featureCall = (XFeatureCall) expression;
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		return nameProvider.getSimpleName(feature);
+	}
+
+	protected JvmTypeReference getSwitchLocalVariableType(XSwitchExpression expr) {
+		JvmFormalParameter declaredParam = expr.getDeclaredParam();
+		if (declaredParam == null) {
+			return getType(expr.getSwitch());
+		} 
+		return getParameterType(declaredParam);
 	}
 
 	protected String declareSwitchResultVariable(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {

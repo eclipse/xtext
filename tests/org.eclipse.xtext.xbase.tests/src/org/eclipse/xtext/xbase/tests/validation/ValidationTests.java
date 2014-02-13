@@ -244,7 +244,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	@Test public void testVariableShadowing_04() throws Exception {
 		XExpression expression = expression("{ val x = 'foo' switch x : 'foo' { case 'foo' : 'foo' } }");
-		helper.assertError(expression, XbasePackage.Literals.XSWITCH_EXPRESSION, VARIABLE_NAME_SHADOWING, "x");
+		helper.assertError(expression, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING, "x");
 	}
 	
 	@Test public void testVariableShadowing_05() throws Exception {

@@ -22,7 +22,6 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -97,16 +96,6 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
               if (it instanceof JvmFormalParameter) {
                 _matched=true;
                 _switchResult = true;
-              }
-            }
-            if (!_matched) {
-              if (it instanceof XSwitchExpression) {
-                String _localVarName = ((XSwitchExpression)it).getLocalVarName();
-                boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
-                if (_notEquals_1) {
-                  _matched=true;
-                  _switchResult = true;
-                }
               }
             }
             if (!_matched) {

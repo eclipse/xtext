@@ -27,7 +27,7 @@ public class Xbase06_If {
       if (_xifexpression_1) {
         _xifexpression = "Xbase doesn\'t need the ternary operator";
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
