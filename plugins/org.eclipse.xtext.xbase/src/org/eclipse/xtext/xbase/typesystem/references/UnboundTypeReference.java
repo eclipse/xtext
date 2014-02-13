@@ -312,7 +312,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 				}
 			}
 		}
-		if (inferredHints.size() == 1) {
+		if (inferredHints.size() == 1 && !varianceHints.isEmpty()) {
 			LightweightBoundTypeArgument hint = inferredHints.get(0);
 			if ((hint.getDeclaredVariance() == VarianceInfo.IN && hint.getActualVariance() == VarianceInfo.INVARIANT) && !hint.getTypeReference().isWildcard()) {
 				// we recorded a single bogus hint, eliminate that one
