@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.xtend.lib.gwt
 Bundle-Name: %Bundle-Name
 Bundle-Vendor: %Bundle-Vendor
-Bundle-Version: 2.5.2.qualifier
+Bundle-Version: 2.5.3.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtend.lib
-Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.5.2"
+Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.5.3"

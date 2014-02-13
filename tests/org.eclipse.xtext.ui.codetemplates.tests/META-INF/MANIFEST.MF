@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.ui.codetemplates.tests
 Bundle-SymbolicName: org.eclipse.xtext.ui.codetemplates.tests
-Bundle-Version: 2.5.2.qualifier
+Bundle-Version: 2.5.3.qualifier
 Require-Bundle: com.google.inject;bundle-version="3.0.0",
- org.eclipse.xtext.junit4;bundle-version="2.5.2",
+ org.eclipse.xtext.junit4;bundle-version="2.5.3",
  org.eclipse.xtext.ui.codetemplates,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.ui;bundle-version="3.5.0",

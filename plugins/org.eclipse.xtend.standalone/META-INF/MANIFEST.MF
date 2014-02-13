@@ -3,11 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.xtend.standalone
 Bundle-Name: Xtend Standalone Bundle
 Bundle-Vendor: Eclipse Xtend
-Bundle-Version: 2.5.2.qualifier
-Require-Bundle: org.eclipse.xtend.core;bundle-version="2.5.2";visibility:=reexport,
- org.eclipse.xtext.junit4;bundle-version="2.5.2";visibility:=reexport,
+Bundle-Version: 2.5.3.qualifier
+Require-Bundle: org.eclipse.xtend.core;bundle-version="2.5.3";visibility:=reexport,
+ org.eclipse.xtext.junit4;bundle-version="2.5.3";visibility:=reexport,
  com.google.inject;bundle-version="3.0.0";visibility:=reexport,
- org.eclipse.xtext.xbase.junit;bundle-version="2.5.2";visibility:=reexport,
+ org.eclipse.xtext.xbase.junit;bundle-version="2.5.3";visibility:=reexport,
  org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
  org.eclipse.jdt.core;bundle-version="3.5.2";visibility:=reexport,
  org.eclipse.emf.codegen;bundle-version="2.9.0";visibility:=reexport

@@ -3,7 +3,7 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter comment="Added protected method" id="924844039">
             <message_arguments>
-                <message_argument value="2.5.2"/>
+                <message_argument value="2.5.3"/>
                 <message_argument value="2.5.0"/>
             </message_arguments>
         </filter>

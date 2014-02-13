@@ -4,7 +4,7 @@
         <filter id="0"/>
         <filter id="923795461">
             <message_arguments>
-                <message_argument value="2.5.2"/>
+                <message_argument value="2.5.3"/>
                 <message_argument value="2.5.1"/>
             </message_arguments>
         </filter>

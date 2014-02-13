@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.ui"
       label="%featureName"
-     version="2.5.2.qualifier"
+     version="2.5.3.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -23,7 +23,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </license>
 
    <requires>
-      <import feature="org.eclipse.xtext.runtime" version="2.5.2" match="equivalent"/>
+      <import feature="org.eclipse.xtext.runtime" version="2.5.3" match="equivalent"/>
    </requires>
 
    <plugin
