@@ -133,8 +133,8 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 		if (casePart.eContainer instanceof XSwitchExpression) {
 			val switchExpression = casePart.eContainer as XSwitchExpression
 			if (switchExpression != null) {
-				if (switchExpression.getLocalVarName != null)
-					return switchExpression.getLocalVarName
+				if (switchExpression.declaredParam != null)
+					return switchExpression.declaredParam.name
 				if (switchExpression.getSwitch instanceof XAbstractFeatureCall) {
 					val call = switchExpression.getSwitch as XAbstractFeatureCall
 					if (call.getFeature != null)

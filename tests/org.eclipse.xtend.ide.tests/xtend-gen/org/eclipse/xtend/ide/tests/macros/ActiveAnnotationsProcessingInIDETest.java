@@ -398,11 +398,11 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       if (_containsKey) {
         Object _get = attrs.get("Export-Package");
         String _plus = (_get + ",");
-        String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(exportedPackages)), ",");
+        String _join = IterableExtensions.join(((Iterable<? extends Object>)Conversions.doWrapArray(exportedPackages)), ",");
         String _plus_1 = (_plus + _join);
         attrs.putValue("Export-Package", _plus_1);
       } else {
-        String _join_1 = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(exportedPackages)), ",");
+        String _join_1 = IterableExtensions.join(((Iterable<? extends Object>)Conversions.doWrapArray(exportedPackages)), ",");
         attrs.putValue("Export-Package", _join_1);
       }
       final ByteArrayOutputStream out = new ByteArrayOutputStream();

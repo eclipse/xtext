@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +22,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
  *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getSwitch <em>Switch</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getCases <em>Cases</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getDefault <em>Default</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getLocalVarName <em>Local Var Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getDeclaredParam <em>Declared Param</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,7 +30,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
  * @model
  * @generated
  */
-public interface XSwitchExpression extends XExpression, JvmIdentifiableElement
+public interface XSwitchExpression extends XExpression
 {
 	/**
 	 * Returns the value of the '<em><b>Switch</b></em>' containment reference.
@@ -101,29 +101,29 @@ public interface XSwitchExpression extends XExpression, JvmIdentifiableElement
 	void setDefault(XExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>Local Var Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Declared Param</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Local Var Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Declared Param</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Local Var Name</em>' attribute.
-	 * @see #setLocalVarName(String)
-	 * @see org.eclipse.xtext.xbase.XbasePackage#getXSwitchExpression_LocalVarName()
-	 * @model
+	 * @return the value of the '<em>Declared Param</em>' containment reference.
+	 * @see #setDeclaredParam(JvmFormalParameter)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXSwitchExpression_DeclaredParam()
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getLocalVarName();
+	JvmFormalParameter getDeclaredParam();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XSwitchExpression#getLocalVarName <em>Local Var Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XSwitchExpression#getDeclaredParam <em>Declared Param</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Local Var Name</em>' attribute.
-	 * @see #getLocalVarName()
+	 * @param value the new value of the '<em>Declared Param</em>' containment reference.
+	 * @see #getDeclaredParam()
 	 * @generated
 	 */
-	void setLocalVarName(String value);
+	void setDeclaredParam(JvmFormalParameter value);
 
 } // XSwitchExpression

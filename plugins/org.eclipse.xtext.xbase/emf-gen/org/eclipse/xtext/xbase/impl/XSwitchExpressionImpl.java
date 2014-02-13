@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -37,7 +39,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl#getSwitch <em>Switch</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl#getCases <em>Cases</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl#getDefault <em>Default</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl#getLocalVarName <em>Local Var Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl#getDeclaredParam <em>Declared Param</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,24 +78,14 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	protected XExpression default_;
 
 	/**
-	 * The default value of the '{@link #getLocalVarName() <em>Local Var Name</em>}' attribute.
+	 * The cached value of the '{@link #getDeclaredParam() <em>Declared Param</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLocalVarName()
+	 * @see #getDeclaredParam()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LOCAL_VAR_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getLocalVarName() <em>Local Var Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLocalVarName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String localVarName = LOCAL_VAR_NAME_EDEFAULT;
+	protected JvmFormalParameter declaredParam;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -231,9 +223,9 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLocalVarName()
+	public JvmFormalParameter getDeclaredParam()
 	{
-		return localVarName;
+		return declaredParam;
 	}
 
 	/**
@@ -241,12 +233,16 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLocalVarName(String newLocalVarName)
+	public NotificationChain basicSetDeclaredParam(JvmFormalParameter newDeclaredParam, NotificationChain msgs)
 	{
-		String oldLocalVarName = localVarName;
-		localVarName = newLocalVarName;
+		JvmFormalParameter oldDeclaredParam = declaredParam;
+		declaredParam = newDeclaredParam;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XSWITCH_EXPRESSION__LOCAL_VAR_NAME, oldLocalVarName, localVarName));
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XbasePackage.XSWITCH_EXPRESSION__DECLARED_PARAM, oldDeclaredParam, newDeclaredParam);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -254,47 +250,20 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getIdentifier()
+	public void setDeclaredParam(JvmFormalParameter newDeclaredParam)
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getSimpleName()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getQualifiedName()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getQualifiedName(char innerClassDelimiter)
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (newDeclaredParam != declaredParam)
+		{
+			NotificationChain msgs = null;
+			if (declaredParam != null)
+				msgs = ((InternalEObject)declaredParam).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XSWITCH_EXPRESSION__DECLARED_PARAM, null, msgs);
+			if (newDeclaredParam != null)
+				msgs = ((InternalEObject)newDeclaredParam).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XSWITCH_EXPRESSION__DECLARED_PARAM, null, msgs);
+			msgs = basicSetDeclaredParam(newDeclaredParam, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XSWITCH_EXPRESSION__DECLARED_PARAM, newDeclaredParam, newDeclaredParam));
 	}
 
 	/**
@@ -313,6 +282,8 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 				return ((InternalEList<?>)getCases()).basicRemove(otherEnd, msgs);
 			case XbasePackage.XSWITCH_EXPRESSION__DEFAULT:
 				return basicSetDefault(null, msgs);
+			case XbasePackage.XSWITCH_EXPRESSION__DECLARED_PARAM:
+				return basicSetDeclaredParam(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -333,8 +304,8 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 				return getCases();
 			case XbasePackage.XSWITCH_EXPRESSION__DEFAULT:
 				return getDefault();
-			case XbasePackage.XSWITCH_EXPRESSION__LOCAL_VAR_NAME:
-				return getLocalVarName();
+			case XbasePackage.XSWITCH_EXPRESSION__DECLARED_PARAM:
+				return getDeclaredParam();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -360,8 +331,8 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 			case XbasePackage.XSWITCH_EXPRESSION__DEFAULT:
 				setDefault((XExpression)newValue);
 				return;
-			case XbasePackage.XSWITCH_EXPRESSION__LOCAL_VAR_NAME:
-				setLocalVarName((String)newValue);
+			case XbasePackage.XSWITCH_EXPRESSION__DECLARED_PARAM:
+				setDeclaredParam((JvmFormalParameter)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -386,8 +357,8 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 			case XbasePackage.XSWITCH_EXPRESSION__DEFAULT:
 				setDefault((XExpression)null);
 				return;
-			case XbasePackage.XSWITCH_EXPRESSION__LOCAL_VAR_NAME:
-				setLocalVarName(LOCAL_VAR_NAME_EDEFAULT);
+			case XbasePackage.XSWITCH_EXPRESSION__DECLARED_PARAM:
+				setDeclaredParam((JvmFormalParameter)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -409,27 +380,10 @@ public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExp
 				return cases != null && !cases.isEmpty();
 			case XbasePackage.XSWITCH_EXPRESSION__DEFAULT:
 				return default_ != null;
-			case XbasePackage.XSWITCH_EXPRESSION__LOCAL_VAR_NAME:
-				return LOCAL_VAR_NAME_EDEFAULT == null ? localVarName != null : !LOCAL_VAR_NAME_EDEFAULT.equals(localVarName);
+			case XbasePackage.XSWITCH_EXPRESSION__DECLARED_PARAM:
+				return declaredParam != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString()
-	{
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (localVarName: ");
-		result.append(localVarName);
-		result.append(')');
-		return result.toString();
 	}
 
 } //XSwitchExpressionImpl

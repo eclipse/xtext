@@ -644,9 +644,10 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 	}
 
 	protected void createLocalVarScopeForSwitchExpression(XSwitchExpression context, LocalVariableAcceptor acceptor) {
-		if (context.getLocalVarName() != null) {
+		JvmFormalParameter declaredParam = context.getDeclaredParam();
+		if (declaredParam != null) {
 			acceptor.accept("XSwitchExpression",
-					new LocalVarDescription(QualifiedName.create(context.getLocalVarName()), context));
+					new LocalVarDescription(QualifiedName.create(declaredParam.getName()), declaredParam));
 		}
 	}
 

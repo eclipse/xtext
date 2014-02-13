@@ -99,7 +99,6 @@ public class XbaseSwitch<T> extends Switch<T>
 				XSwitchExpression xSwitchExpression = (XSwitchExpression)theEObject;
 				T result = caseXSwitchExpression(xSwitchExpression);
 				if (result == null) result = caseXExpression(xSwitchExpression);
-				if (result == null) result = caseJvmIdentifiableElement(xSwitchExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

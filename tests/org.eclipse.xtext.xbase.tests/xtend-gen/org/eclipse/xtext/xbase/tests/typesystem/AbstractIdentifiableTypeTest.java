@@ -22,7 +22,6 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -100,16 +99,6 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
               }
             }
             if (!_matched) {
-              if (it instanceof XSwitchExpression) {
-                String _localVarName = ((XSwitchExpression)it).getLocalVarName();
-                boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
-                if (_notEquals_1) {
-                  _matched=true;
-                  _switchResult = true;
-                }
-              }
-            }
-            if (!_matched) {
               _switchResult = false;
             }
             _and = _switchResult;
@@ -134,7 +123,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
               ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(_eContainer);
               _xifexpression = _findActualNodeFor.getOffset();
             }
-            _xblockexpression = _xifexpression;
+            _xblockexpression = (_xifexpression);
           }
           return Integer.valueOf(_xblockexpression);
         }
@@ -154,7 +143,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
       if (_not) {
         Assert.fail(("Duplicate expression under test: " + expression));
       }
-      _xblockexpression = super.expression(expression, resolve);
+      _xblockexpression = (super.expression(expression, resolve));
     }
     return _xblockexpression;
   }

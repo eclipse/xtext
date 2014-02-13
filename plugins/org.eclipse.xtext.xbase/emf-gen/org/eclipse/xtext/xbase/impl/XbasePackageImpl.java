@@ -460,9 +460,9 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getXSwitchExpression_LocalVarName()
+	public EReference getXSwitchExpression_DeclaredParam()
 	{
-		return (EAttribute)xSwitchExpressionEClass.getEStructuralFeatures().get(3);
+		return (EReference)xSwitchExpressionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1436,7 +1436,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		createEReference(xSwitchExpressionEClass, XSWITCH_EXPRESSION__SWITCH);
 		createEReference(xSwitchExpressionEClass, XSWITCH_EXPRESSION__CASES);
 		createEReference(xSwitchExpressionEClass, XSWITCH_EXPRESSION__DEFAULT);
-		createEAttribute(xSwitchExpressionEClass, XSWITCH_EXPRESSION__LOCAL_VAR_NAME);
+		createEReference(xSwitchExpressionEClass, XSWITCH_EXPRESSION__DECLARED_PARAM);
 
 		xCasePartEClass = createEClass(XCASE_PART);
 		createEReference(xCasePartEClass, XCASE_PART__CASE);
@@ -1595,7 +1595,6 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		// Add supertypes to classes
 		xIfExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xSwitchExpressionEClass.getESuperTypes().add(this.getXExpression());
-		xSwitchExpressionEClass.getESuperTypes().add(theTypesPackage.getJvmIdentifiableElement());
 		xBlockExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xVariableDeclarationEClass.getESuperTypes().add(this.getXExpression());
 		xVariableDeclarationEClass.getESuperTypes().add(theTypesPackage.getJvmIdentifiableElement());
@@ -1637,7 +1636,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEReference(getXSwitchExpression_Switch(), this.getXExpression(), null, "switch", null, 0, 1, XSwitchExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXSwitchExpression_Cases(), this.getXCasePart(), null, "cases", null, 0, -1, XSwitchExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXSwitchExpression_Default(), this.getXExpression(), null, "default", null, 0, 1, XSwitchExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getXSwitchExpression_LocalVarName(), ecorePackage.getEString(), "localVarName", null, 0, 1, XSwitchExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXSwitchExpression_DeclaredParam(), theTypesPackage.getJvmFormalParameter(), null, "declaredParam", null, 0, 1, XSwitchExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xCasePartEClass, XCasePart.class, "XCasePart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXCasePart_Case(), this.getXExpression(), null, "case", null, 0, 1, XCasePart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -164,13 +164,13 @@ public interface XbasePackage extends EPackage
 	int XSWITCH_EXPRESSION__DEFAULT = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Local Var Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Declared Param</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XSWITCH_EXPRESSION__LOCAL_VAR_NAME = XEXPRESSION_FEATURE_COUNT + 3;
+	int XSWITCH_EXPRESSION__DECLARED_PARAM = XEXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>XSwitch Expression</em>' class.
@@ -1730,15 +1730,15 @@ public interface XbasePackage extends EPackage
 	EReference getXSwitchExpression_Default();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XSwitchExpression#getLocalVarName <em>Local Var Name</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XSwitchExpression#getDeclaredParam <em>Declared Param</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Local Var Name</em>'.
-	 * @see org.eclipse.xtext.xbase.XSwitchExpression#getLocalVarName()
+	 * @return the meta object for the containment reference '<em>Declared Param</em>'.
+	 * @see org.eclipse.xtext.xbase.XSwitchExpression#getDeclaredParam()
 	 * @see #getXSwitchExpression()
 	 * @generated
 	 */
-	EAttribute getXSwitchExpression_LocalVarName();
+	EReference getXSwitchExpression_DeclaredParam();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XCasePart <em>XCase Part</em>}'.
@@ -2836,12 +2836,12 @@ public interface XbasePackage extends EPackage
 		EReference XSWITCH_EXPRESSION__DEFAULT = eINSTANCE.getXSwitchExpression_Default();
 
 		/**
-		 * The meta object literal for the '<em><b>Local Var Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Declared Param</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute XSWITCH_EXPRESSION__LOCAL_VAR_NAME = eINSTANCE.getXSwitchExpression_LocalVarName();
+		EReference XSWITCH_EXPRESSION__DECLARED_PARAM = eINSTANCE.getXSwitchExpression_DeclaredParam();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XCasePartImpl <em>XCase Part</em>}' class.
