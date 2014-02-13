@@ -117,8 +117,8 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 	}
 
 	public void configureXSwitchExpression(FormattingConfig c, XSwitchExpressionElements ele) {
-		c.setNoSpace().around(ele.getColonKeyword_2_0_0_0_1());
-		c.setNoSpace().around(ele.getColonKeyword_2_1_0_0_2());
+		c.setNoSpace().around(ele.getColonKeyword_2_1_0_0_1());
+		c.setNoSpace().around(ele.getColonKeyword_2_0_0_0_2());
 		c.setNoLinewrap().before(ele.getLeftCurlyBracketKeyword_3());
 		c.setLinewrap().after(ele.getLeftCurlyBracketKeyword_3());
 		c.setIndentationIncrement().after(ele.getLeftCurlyBracketKeyword_3());

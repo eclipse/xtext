@@ -10,8 +10,10 @@ package org.eclipse.xtext.xbase.interpreter;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -112,13 +114,21 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
       }
     }
     if (!_matched) {
-      if (feature instanceof XSwitchExpression) {
-        XExpression _switch = ((XSwitchExpression)feature).getSwitch();
-        boolean _notEquals = (!Objects.equal(_switch, null));
-        if (_notEquals) {
-          _matched=true;
-          XExpression _switch_1 = ((XSwitchExpression)feature).getSwitch();
-          return this.internalEvaluate(_switch_1, ctx);
+      if (feature instanceof JvmFormalParameter) {
+        _matched=true;
+        EObject _eContainer = ((JvmFormalParameter)feature).eContainer();
+        final EObject container = _eContainer;
+        boolean _matched_1 = false;
+        if (!_matched_1) {
+          if (container instanceof XSwitchExpression) {
+            XExpression _switch = ((XSwitchExpression)container).getSwitch();
+            boolean _notEquals = (!Objects.equal(_switch, null));
+            if (_notEquals) {
+              _matched_1=true;
+              XExpression _switch_1 = ((XSwitchExpression)container).getSwitch();
+              return this.internalEvaluate(_switch_1, ctx);
+            }
+          }
         }
       }
     }

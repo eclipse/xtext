@@ -24,7 +24,6 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
@@ -66,12 +65,6 @@ abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
 			if (xExpression != null) {
 				for(content: xExpression.eAllContents.toIterable) {
 					switch(content) {
-						XSwitchExpression: {
-							assertExpressionTypeIsResolved(content, resolvedTypes)
-							if (content.localVarName != null) {
-								assertIdentifiableTypeIsResolved(content, resolvedTypes)
-							}
-						}
 						XAbstractFeatureCall: {
 							assertExpressionTypeIsResolved(content, resolvedTypes)
 							if (content.implicitReceiver != null) {

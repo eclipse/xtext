@@ -604,5 +604,59 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		}
 		'''.expression.assertNoIssues
 	}
+	
+	@Test def void testSwitchDeclaredParameter() {
+		'''
+		{
+			switch Object x : "lalala" {
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSwitchDeclaredParameter_1() {
+		'''
+		{
+			switch String x : "lalala" {
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSwitchDeclaredParameter_2() {
+		'''
+		{
+			switch Integer x : "lalala" {
+			}
+		}
+		'''.expression.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+	
+	@Test def void testSwitchDeclaredParameter_3() {
+		'''
+		{
+			switch (Object x : "lalala") {
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSwitchDeclaredParameter_4() {
+		'''
+		{
+			switch (String x : "lalala") {
+			}
+		}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSwitchDeclaredParameter_5() {
+		'''
+		{
+			switch (Integer x : "lalala") {
+			}
+		}
+		'''.expression.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
 
 }

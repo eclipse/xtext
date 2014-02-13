@@ -22,7 +22,6 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -69,17 +68,6 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
       Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
       for (final EObject content : _iterable) {
         boolean _matched = false;
-        if (!_matched) {
-          if (content instanceof XSwitchExpression) {
-            _matched=true;
-            this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
-            String _localVarName = ((XSwitchExpression)content).getLocalVarName();
-            boolean _notEquals = (!Objects.equal(_localVarName, null));
-            if (_notEquals) {
-              this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content), resolvedTypes);
-            }
-          }
-        }
         if (!_matched) {
           if (content instanceof XAbstractFeatureCall) {
             _matched=true;

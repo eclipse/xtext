@@ -10,14 +10,15 @@ package org.eclipse.xtext.xbase.interpreter
 import com.google.inject.Inject
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XNumberLiteral
-import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals
+import org.eclipse.xtext.xbase.XSwitchExpression
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -59,8 +60,12 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 			XVariableDeclaration case !feature.writeable && feature.right != null: {
 				return feature.right.evaluateAssociatedExpression(ctx)
 			}
-			XSwitchExpression case feature.^switch != null: {
-				return feature.^switch.internalEvaluate(ctx)
+			JvmFormalParameter: {
+				switch container : feature.eContainer {
+					XSwitchExpression case container.^switch != null: {
+						return container.^switch.internalEvaluate(ctx)
+					}
+				}
 			}
 		}
 		throw new UnresolvableFeatureException("Couldn't resolve feature "+ feature.simpleName, it)

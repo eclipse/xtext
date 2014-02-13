@@ -73,6 +73,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueP
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
+import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -1066,15 +1067,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected String declareLocalVariable(XSwitchExpression expr, ITreeAppendable b) {
 		// declare local var for the switch expression
 		String variableName = null;
-		if (expr.getLocalVarName() == null && b.hasName(expr.getSwitch())) {
+		if (expr.getDeclaredParam() == null && b.hasName(expr.getSwitch())) {
 			variableName = b.getName(expr.getSwitch());
-		} else if (expr.getLocalVarName() == null && expr.getSwitch() instanceof XFeatureCall) {
+		} else if (expr.getDeclaredParam() == null && expr.getSwitch() instanceof XFeatureCall) {
 			JvmIdentifiableElement feature = ((XFeatureCall) expr.getSwitch()).getFeature();
 			if (b.hasName(feature))
 				variableName = b.getName(feature);
 		} 
 		if(variableName == null) {
-			String name = getNameProvider().getSimpleName(expr);
+			String name = getSimpleName(expr);
 			if (name!=null) { 
 				name = makeJavaIdentifier(name);
 			} else {
@@ -1086,8 +1087,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			serialize(typeReference, expr, b);
 			b.append(" ");
 			variableName = b.declareSyntheticVariable(expr, name);
-			if (expr.getLocalVarName() != null)
-				b.trace(expr, XbasePackage.Literals.XSWITCH_EXPRESSION__LOCAL_VAR_NAME, 0).append(variableName);
+			if (expr.getDeclaredParam() != null)
+				b.trace(expr, XbasePackage.Literals.XSWITCH_EXPRESSION__DECLARED_PARAM, 0).append(variableName);
 			else
 				b.append(variableName);
 			b.append(" = ");
@@ -1095,6 +1096,21 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append(";");
 		}
 		return variableName;
+	}
+
+	protected String getSimpleName(XSwitchExpression expr) {
+		IdentifiableSimpleNameProvider nameProvider = getNameProvider();
+		String varName = nameProvider.getSimpleName(expr.getDeclaredParam());
+		if (varName != null) {
+			return varName;
+		}
+		XExpression expression = expr.getSwitch();
+		if (!(expression instanceof XFeatureCall)) {
+			return null;
+		}
+		XFeatureCall featureCall = (XFeatureCall) expression;
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		return nameProvider.getSimpleName(feature);
 	}
 
 	protected String declareSwitchResultVariable(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {

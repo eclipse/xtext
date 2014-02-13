@@ -206,10 +206,11 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
         final XSwitchExpression switchExpression = ((XSwitchExpression) _eContainer_1);
         boolean _notEquals = (!Objects.equal(switchExpression, null));
         if (_notEquals) {
-          String _localVarName = switchExpression.getLocalVarName();
-          boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
+          JvmFormalParameter _declaredParam = switchExpression.getDeclaredParam();
+          boolean _notEquals_1 = (!Objects.equal(_declaredParam, null));
           if (_notEquals_1) {
-            return switchExpression.getLocalVarName();
+            JvmFormalParameter _declaredParam_1 = switchExpression.getDeclaredParam();
+            return _declaredParam_1.getName();
           }
           XExpression _switch = switchExpression.getSwitch();
           if ((_switch instanceof XAbstractFeatureCall)) {

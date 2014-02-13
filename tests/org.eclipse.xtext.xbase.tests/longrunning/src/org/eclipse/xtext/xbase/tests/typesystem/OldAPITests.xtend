@@ -20,12 +20,11 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.typing.ITypeProvider
-import org.eclipse.xtext.xtype.XFunctionTypeRef
 import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider
+import org.eclipse.xtext.xtype.XFunctionTypeRef
 
 /**
  * @author Sebastian Zarnekow
@@ -40,12 +39,6 @@ abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolverTest<J
 		assertEquals(type, resolvedType?.simpleName);
 		for(content: xExpression.eAllContents.toIterable) {
 			switch(content) {
-				XSwitchExpression: {
-					assertExpressionTypeIsResolved(content)
-					if (content.localVarName != null) {
-						assertIdentifiableTypeIsResolved(content)
-					}
-				}
 				XExpression: {
 					assertExpressionTypeIsResolved(content)
 				}
@@ -154,7 +147,7 @@ abstract class AbstractOldAPITypeArgumentTest extends AbstractTypeArgumentTest {
  * @author Sebastian Zarnekow
  */
 @Data
-class FeatureCallRequest extends XbaseTypeArgumentContextProvider$AbstractFeatureCallRequest {
+class FeatureCallRequest extends XbaseTypeArgumentContextProvider.AbstractFeatureCallRequest {
 	
 	XAbstractFeatureCall call
 	JvmExecutable feature

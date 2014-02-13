@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -15,7 +14,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
@@ -51,17 +49,6 @@ public abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolve
       Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
       for (final EObject content : _iterable) {
         boolean _matched = false;
-        if (!_matched) {
-          if (content instanceof XSwitchExpression) {
-            _matched=true;
-            this.assertExpressionTypeIsResolved(((XExpression)content));
-            String _localVarName = ((XSwitchExpression)content).getLocalVarName();
-            boolean _notEquals = (!Objects.equal(_localVarName, null));
-            if (_notEquals) {
-              this.assertIdentifiableTypeIsResolved(((JvmIdentifiableElement)content));
-            }
-          }
-        }
         if (!_matched) {
           if (content instanceof XExpression) {
             _matched=true;

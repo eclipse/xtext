@@ -412,15 +412,15 @@ ruleXIfExpression :
 ruleXSwitchExpression :
 	'switch' (
 		( (
-		ruleValidID ':'
+		'(' ruleJvmFormalParameter ':'
 		) => (
-			ruleValidID ':'
-		) )? ruleXExpression |
+			'(' ruleJvmFormalParameter ':'
+		) ) ruleXExpression ')' |
 		( (
-		'(' ruleValidID ':'
+		ruleJvmFormalParameter ':'
 		) => (
-			'(' ruleValidID ':'
-		) ) ruleXExpression ')'
+			ruleJvmFormalParameter ':'
+		) )? ruleXExpression
 	) '{' ruleXCasePart* (
 		'default' ':' ruleXExpression
 	)? '}'
