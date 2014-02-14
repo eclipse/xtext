@@ -5,12 +5,14 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.example.domainmodel.tests.InjectorProviderCustom;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -18,6 +20,10 @@ import org.junit.runner.RunWith;
 @InjectWith(InjectorProviderCustom.class)
 @SuppressWarnings("all")
 public class CompilerTest {
+  @Rule
+  @Inject
+  public TemporaryFolder temporaryFolder;
+  
   @Inject
   @Extension
   private CompilationTestHelper _compilationTestHelper;

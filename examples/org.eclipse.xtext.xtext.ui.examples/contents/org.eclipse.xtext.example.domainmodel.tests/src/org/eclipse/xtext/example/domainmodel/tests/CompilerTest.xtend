@@ -9,11 +9,15 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.junit4.internal.TemporaryFolder
+import org.junit.Rule
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(InjectorProviderCustom))
 class CompilerTest {
 	
+	@Rule
+	@Inject public TemporaryFolder temporaryFolder 
 	@Inject extension CompilationTestHelper
 	@Inject extension ReflectExtensions
 	

@@ -11,10 +11,12 @@ import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.eclipse.xtext.purexbase.test.RuntimeInjectorProvider;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,6 +24,10 @@ import org.junit.runner.RunWith;
 @InjectWith(RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class CompilerTest {
+  @Rule
+  @Inject
+  public TemporaryFolder temporaryFolder;
+  
   @Inject
   @Extension
   private CompilationTestHelper _compilationTestHelper;

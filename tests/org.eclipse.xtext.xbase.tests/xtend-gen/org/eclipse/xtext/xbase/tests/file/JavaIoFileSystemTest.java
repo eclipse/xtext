@@ -14,8 +14,8 @@ import java.net.URI;
 import java.util.Map;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -33,21 +34,16 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class JavaIoFileSystemTest {
+  @Rule
+  public TemporaryFolder temporaryFolder = new TemporaryFolder();
+  
   @Extension
   protected MutableFileSystemSupport fs;
   
   @Before
   public void setUp() {
     try {
-      File _createTempFile = File.createTempFile("foo", "bar");
-      String _parent = _createTempFile.getParent();
-      Class<? extends JavaIoFileSystemTest> _class = this.getClass();
-      String _simpleName = _class.getSimpleName();
-      final File tempDir = new File(_parent, _simpleName);
-      boolean _exists = tempDir.exists();
-      if (_exists) {
-        Files.sweepFolder(tempDir);
-      }
+      final File tempDir = this.temporaryFolder.newFolder();
       JavaIOFileSystemSupport _javaIOFileSystemSupport = new JavaIOFileSystemSupport();
       final Procedure1<JavaIOFileSystemSupport> _function = new Procedure1<JavaIOFileSystemSupport>() {
         public void apply(final JavaIOFileSystemSupport it) {
