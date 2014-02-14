@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
+import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;
 import org.eclipse.xtext.util.concurrent.IReadAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -30,6 +31,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -39,6 +41,9 @@ import com.google.common.collect.Lists;
  */
 public class ConcurrentAccessTest extends Assert {
 
+	@Rule
+	public TemporaryFolder temporaryFolder = new TemporaryFolder();
+	
 	private Resource resource;
 
 	static {
@@ -53,7 +58,7 @@ public class ConcurrentAccessTest extends Assert {
 		EPackage start = EcoreFactory.eINSTANCE.createEPackage();
 		resource.getContents().add(start);
 		for (int i = 0; i < 100; i++) {
-			File tempFile = File.createTempFile("Package" + i, ".ecore");
+			File tempFile = temporaryFolder.createTempFile("Package" + i, ".ecore");
 			URI fileURI = URI.createFileURI(tempFile.getAbsolutePath());
 			Resource toBeProxified = resourceSet.createResource(fileURI);
 			EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
