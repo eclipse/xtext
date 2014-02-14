@@ -76,10 +76,10 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
         Iterator<CharSequence> _iterator = _values.iterator();
         final CharSequence concatenation = _iterator.next();
         String _string = concatenation.toString();
-        final Class<? extends Object> clazz = this.javaCompiler.compileToClass("Foo", _string);
+        final Class<?> clazz = this.javaCompiler.compileToClass("Foo", _string);
         final Object foo = clazz.newInstance();
         final Method method = clazz.getDeclaredMethod("doStuff");
-        _xblockexpression = (method.invoke(foo));
+        _xblockexpression = method.invoke(foo);
       }
       return _xblockexpression;
     } catch (Throwable _e) {

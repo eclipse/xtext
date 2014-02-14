@@ -1,0 +1,97 @@
+<project name="install">
+
+	<target name="install-buckminster.headless">
+		<condition property="buckminster.headless.installed">
+			<available file="${buckminster.home}/buckminster" />
+		</condition>
+		<antcall target="install-buckminster.headless.internal" />
+	</target>
+
+	<target name="install-buckminster.headless.internal" unless="buckminster.headless.installed">
+		<antcall target="install-p2.director" />
+		<echo message="" />
+		<echo message="Installing Buckminster Headless into ${buckminster.home}..." />
+		<java fork="true" dir="${director.dir}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
+			<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
+			<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
+			<classpath>
+				<fileset dir="${director.dir}/plugins">
+					<include name="org.eclipse.equinox.launcher_*.jar" />
+				</fileset>
+			</classpath>
+			<arg line='-data "${director.dir}/workspace"' />
+			<arg line="-r ${eclipse.download}/tools/buckminster/headless-4.3,http://download.cloudsmith.com/buckminster/external-4.3,${eclipse.download}/modeling/tmf/xtext/updates/composite/releases" />
+			<arg line='-d "${buckminster.home}"' />
+			<arg line="-p Buckminster" />
+			<arg line="-roaming" />
+			<arg line="-i org.eclipse.buckminster.cmdline.product" />
+			<arg line="-i org.eclipse.buckminster.core.headless.feature.feature.group" />
+			<arg line="-i org.eclipse.buckminster.pde.headless.feature.feature.group" />
+			<arg line="-i org.eclipse.buckminster.git.headless.feature.feature.group" />
+			<arg line="-i org.eclipse.buckminster.maven.headless.feature.feature.group" />
+			<arg line="-i org.eclipse.buckminster.emma.headless.feature.feature.group" />
+			<arg line="-i org.eclipse.emf.mwe2.launcher.feature.group" />
+		</java>
+	</target>
+
+	<target name="install-b3.headless">
+		<condition property="b3.headless.installed">
+			<available file="${b3.home}/b3" />
+		</condition>
+		<antcall target="install-b3.headless.internal" />
+	</target>
+
+	<target name="install-b3.headless.internal" unless="b3.headless.installed">
+		<antcall target="install-p2.director" />
+		<echo message="" />
+		<echo message="Installing B3 Headless into ${b3.home}..." />
+		<java fork="true" dir="${director.dir}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
+			<sysproperty key="eclipse.p2.mirrors" value="false" />
+			<classpath>
+				<fileset dir="${director.dir}/plugins">
+					<include name="org.eclipse.equinox.launcher_*.jar" />
+				</fileset>
+			</classpath>
+			<arg line='-data "${director.dir}/workspace"' />
+			<arg line="-r ${eclipse.download}/modeling/emft/b3/headless-4.3" />
+			<arg line='-d "${b3.home}"' />
+			<arg line="-p b3" />
+			<arg line="-i org.eclipse.b3.cli.product" />
+			<arg line="-i org.eclipse.b3.aggregator.engine.feature.feature.group" />
+		</java>
+	</target>
+
+	<target name="install-p2.director">
+		<condition property="p2.director.installed">
+			<available file="${director.dir}" />
+		</condition>
+		<antcall target="install-p2.director.internal" />
+	</target>
+
+	<target name="install-p2.director.internal" unless="p2.director.installed">
+		<echo message="" />
+		<echo message="Installing director from ${director.url}..." />
+		<tempfile destdir="${java.io.tmpdir}" prefix="director-" suffix=".zip" property="director.zip" deleteonexit="true" />
+		<get src="${director.url}" dest="${director.zip}" />
+		<unzip src="${director.zip}" dest="${director.install.dest}" />
+		<chmod file="${director.install.dest}/director/director" perm="+x" />
+		<delete file="${director.zip}" />
+	</target>
+
+	<target name="install-findbugs">
+		<condition property="findbugs.installed">
+			<available file="${findbugs.home}" />
+		</condition>
+		<antcall target="install-findbugs.internal" />
+	</target>
+
+	<target name="install-findbugs.internal" unless="findbugs.installed">
+		<echo message="" />
+		<echo message="Installing findbugs from ${findbugs.url}..." />
+		<tempfile destdir="${java.io.tmpdir}" prefix="findbugs-" suffix=".zip" property="findbugs.zip" deleteonexit="true" />
+		<get src="${findbugs.url}" dest="${findbugs.zip}" />
+		<unzip src="${findbugs.zip}" dest="${findbugs.install.dest}" />
+		<delete file="${findbugs.zip}" />
+	</target>
+
+</project>

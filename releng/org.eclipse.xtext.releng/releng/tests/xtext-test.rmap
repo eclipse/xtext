@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
-	<rm:property key="xtext.checkout.location" value="${workspace.root}/org.eclipse.xtext.git" />
+	<rm:property key="checkout.location" value="${workspace.root}/org.eclipse.xtext.git" />
 	
 	<rm:locator pattern="^org\.eclipse\.xtext\.releng$" searchPathRef="local.releng" />
 	<rm:locator pattern="^org\.eclipse\.xtext\.example(?:\..*)?$" searchPathRef="xtext.examples" />
@@ -9,7 +9,7 @@
 	<rm:searchPath name="local.releng">
 		<rm:provider componentTypes="buckminster" readerType="local" mutable="false">
 			<rm:uri format="{0}/releng/{1}">
-				<bc:propertyRef key="xtext.checkout.location" />
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
@@ -18,7 +18,7 @@
 	<rm:searchPath name="xtext.examples">
 		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
 			<rm:uri format="{0}/examples/org.eclipse.xtext.xtext.ui.examples/contents/{1}">
-				<bc:propertyRef key="xtext.checkout.location" />
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
@@ -27,18 +27,18 @@
 	<rm:searchPath name="xtext.tests">
 		<rm:provider componentTypes="eclipse.feature" readerType="local" mutable="false">
 			<rm:uri format="{0}/features/org.eclipse.xtext.tests.feature">
-				<bc:propertyRef key="xtext.checkout.location" />
+				<bc:propertyRef key="checkout.location" />
 			</rm:uri>
 		</rm:provider>
 		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
 			<rm:uri format="{0}/plugins/{1}">
-				<bc:propertyRef key="xtext.checkout.location" />
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
 		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
 			<rm:uri format="{0}/tests/{1}">
-				<bc:propertyRef key="xtext.checkout.location" />
+				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>

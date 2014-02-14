@@ -57,7 +57,6 @@
             <cs:properties>
                 <cs:property key="checkoutLocation" value="${checkout.location}"/>
                 <cs:property key="output" value="${buckminster.output}/javadoc/"/>
-                <cs:property key="xtend.checkoutLocation" value="${xtend.checkout.location}"/>
             </cs:properties>
         </cs:public>
         <cs:public name="setup.promoter" actor="ant">

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Buckminster Headless - build
+
+	buckminster.home defaults to ${user.home}/buckminster
+	    but it can be specified on the command line, e.g.,
+	 	ant -Dbuckminster.home=/home/bettini/buckminster -f build.ant
+
+	Properties:
+		WORKSPACE  			Eclipse workspace location, or hudson job workspace
+		build.root 			Where to build? WARNING: This folder will be cleaned up, so do not point to user.home or something important
+							Default: ${WORKSPACE}/buildroot
+		buckminster.home	Buckminster headless to use. See http://www.eclipse.org/buckminster/downloads.html
+		checkout.location	Where to find projects to build?
+							Default: ${WORKSPACE}
+		eclipse.download	The base URL for all the repositories in the RMAP
+							Default: http://download.eclipse.org
+-->
+<project name="common">
+
+	<property name="releng.project" value="${checkout.location}/releng/org.eclipse.xtext.releng" />
+
+	<property name="target.platform" value="target.platform" />
+	<property name="eclipse.download" value="http://download.eclipse.org" />
+
+	<property name="buckminster.home" location="${user.home}/buckminster" />
+	<property name="b3.home" location="${user.home}/b3" />
+
+	<property name="buckminster.output.root" value="${build.root}/buckminster.output" />
+	<property name="buckminster.temp.root" value="${build.root}/buckminster.temp" />
+	<property name="buckminster.workspace" value="${build.root}/buckminster.workspace" />
+	<property name="buckminster.configuration" value="${build.root}/configuration" />
+	<property name="buckminster.target.platform" value="${build.root}/${target.platform}" />
+	<property name="buckminster.loglevel" value="INFO" />
+
+	<property name="director.install.dest" location="${user.home}" />
+	<property name="director.dir" location="${director.install.dest}/director" />
+	<property name="director.url" value="http://download.eclipse.org/tools/buckminster/products/director_latest.zip" />
+
+	<property name="findbugs.version" value="2.0.3" />
+	<property name="findbugs.url" value="http://prdownloads.sourceforge.net/findbugs/findbugs-${findbugs.version}.zip?download" />
+	<property name="findbugs.install.dest" value="${user.home}" />
+	<property name="findbugs.home" value="${findbugs.install.dest}/findbugs-${findbugs.version}" />
+
+	<property name="eclipse.p2.mirrors" value="true" />
+	<property name="java.net.preferIPv4Stack" value="true" />
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: run_buckminster
+          pass the commandsfile to execute      
+         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="run_buckminster">
+		<attribute name="commandsfile" default="default" />
+		<attribute name="propertiesfile" default="default" />
+		<sequential>
+			<echo message=" " />
+			<java fork="true" dir="${buckminster.home}" logError="true"  
+				classname="org.eclipse.core.launcher.Main" failonerror="true"
+				jvm="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/java">
+				<classpath>
+					<fileset dir="${buckminster.home}/plugins">
+						<include name="org.eclipse.equinox.launcher_*.jar" />
+					</fileset>
+				</classpath>
+				<arg value="-Declipse.p2.mirrors=true" />
+				<arg line='-application org.eclipse.buckminster.cmdline.headless' />
+				<arg line='-data "${buckminster.workspace}"' />
+				<arg line='-configuration "${buckminster.configuration}"' />
+				<arg line='--properties "@{propertiesfile}"' />
+				<arg line='-S "@{commandsfile}"' />
+				<arg line='-L ${buckminster.loglevel}' />
+				<sysproperty key="checkout.location" value="${checkout.location}" />
+				<sysproperty key="WITH.MWE2" value="${WITH.MWE2}" />
+				<sysproperty key="SWTBOT" value="${SWTBOT}" />
+				<sysproperty key="ECLIPSE.TARGET.ALIAS" value="${ECLIPSE.TARGET.ALIAS}" />
+				<sysproperty key="buckminster.output.root" value="${buckminster.output.root}" />
+				<sysproperty key="buckminster.temp.root" value="${buckminster.temp.root}" />
+				<sysproperty key="target.platform" value="${buckminster.target.platform}" />
+				<sysproperty key="eclipse.download" value="${eclipse.download}" />
+				<sysproperty key="findbugs.home" value="${findbugs.home}" />
+				<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
+				<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
+				<jvmarg line=" -XX:MaxPermSize=300m -Xmx1500m" />
+			</java>
+		</sequential>
+	</macrodef>
+
+	<!-- = = = = = = = = = = = = = = = = =
+          macrodef: run_b3_aggregator
+          pass the commandsfile to execute      
+         = = = = = = = = = = = = = = = = = -->
+	<macrodef name="run_b3_aggregator">
+		<attribute name="buildmodel" default="default" />
+		<element name="args" optional="true" />
+		<sequential>
+			<java fork="true" dir="${b3.home}" logError="true" classname="org.eclipse.core.launcher.Main" failonerror="true">
+				<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
+				<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
+				<classpath>
+					<fileset dir="${b3.home}/plugins">
+						<include name="org.eclipse.equinox.launcher_*.jar" />
+					</fileset>
+				</classpath>
+				<arg line='aggregate' />
+				<arg line='--buildModel "@{buildmodel}"' />
+				<args />
+				<!-- <arg line='-L DEBUG' /> -->
+				<jvmarg line=" -Xms256m -Xmx512m" />
+			</java>
+		</sequential>
+	</macrodef>
+
+	<!-- example; replace the - - with two dashes (can't be done in this comment)
+	<target name="b3_aggregation_with_buildroot" depends="install.b3.headless" description="Runs the b3 aggregation with explicit buildRoot">
+
+		<property name="build.model" location="${releng.project}/aggregator/mirror.b3aggr" />
+		<property name="b3.build.root" location="${releng.project}/../../mirrors/my-mirror"/>
+		
+		<echo message="IMPORTANT: Mirror aggregation may took over 10 minutes." />
+		<echo message="build.model: ${build.model}" />
+		<echo message="b3.build.root: ${b3.build.root}" />
+
+		<run_b3_aggregator buildmodel="${build.model}" >
+			<args>
+				<arg value='- -buildRoot' />
+				<arg value='${b3.build.root}' />
+			</args>
+		</run_b3_aggregator>
+	</target>
+	-->
+
+	<target name="copy-xtext-grammar-to-bin">
+		<echo message="checkout.location: ${checkout.location}" />
+
+		<copy todir="${checkout.location}" overwrite="true" verbose="true">
+			<fileset dir="${checkout.location}" casesensitive="true">
+				<include name="**/src/**/*.xtext" />
+			</fileset>
+			<regexpmapper from="(.*)/(src)/(.*/*\.xtext)" to="\1/bin/\3" casesensitive="yes" handledirsep="yes" />
+		</copy>
+	</target>
+
+	<target name="copy-xtext-grammar-to-bin-debug" description="only for debuging purpose">
+		<fileset dir="${checkout.location}" includes="**/src/**/*.xtext" />
+
+		<path id="xtext.files">
+			<fileset dir="${checkout.location}">
+				<include name="**/src/**/*.xtext*" />
+			</fileset>
+		</path>
+
+		<pathconvert property="xtext-files">
+			<path refid="xtext.files" />
+			<mapper type="regexp" from="(.*)/(src)/(.*/*\.xtext)" to="\1/bin/\3" />
+		</pathconvert>
+
+		<!-- <pathconvert property="xtext-files" refid="xtext.files" pathsep=" " /> -->
+		<echo message="${xtext-files}" />
+	</target>
+
+	<target name="cleanup">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${build.root}" defaultexcludes="false">
+				<exclude name="**/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/" />
+				<exclude name="**/${target.platform}/" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="clean-xtend-gen" unless="dont-clean-xtend-gen">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${checkout.location}" defaultexcludes="false">
+				<include name="**/xtend-gen/**/*.java*" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="reset-target-platform">
+		<delete includeemptydirs="true">
+			<fileset dir="${build.root}" defaultexcludes="false">
+				<include name="**/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/" />
+				<include name="**/${target.platform}/" />
+			</fileset>
+		</delete>
+	</target>
+</project>
