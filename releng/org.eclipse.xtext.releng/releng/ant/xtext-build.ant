@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     20.01.2012 09:55:02                                                        
+
+     Local build    
+     description
+                   
+     dhuebner                                                                
+     ====================================================================== -->
+
+<project name="xtext-build" default="run-buckminster-build">
+	<description>
+            Executes buckminster build on local machine
+    </description>
+
+	<property name="WORKSPACE" location="${user.home}/hudsonbuild/tmf-xtext-head/" />
+	<property name="build.root" location="${WORKSPACE}/buildroot" />
+	<property name="checkout.location" location="${WORKSPACE}/git-repo" />
+
+	<import file="common.ant" as="common" />
+
+	<!-- Buckminster headless to use. See http://www.eclipse.org/buckminster/downloads.html -->
+	<property name="buckminster.home" location="${user.home}/buckminster" />
+	<!-- Locations -->
+	<property name="build.properties" location="${releng.project}/releng/xtext-build.properties" />
+
+	<!-- Against which platform to build (Galileo,Stable,Latest)-->
+	<property name="ECLIPSE.TARGET.ALIAS" value="Stable" />
+	<property name="WITH.MWE2" value="false" />
+	<property name="SWTBOT" value="false" />
+
+	<target name="run-buckminster-build" depends="common.cleanup">
+
+		<fail unless="buckminster.home" message="buckminster.home must be specified." />
+
+		<antcall target="buckminster-resolve" />
+		<antcall target="buckminster-compile" />
+		<antcall target="buckminster-package" />
+
+	</target>
+
+	<target name="buckminster-resolve">
+		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
+		<echo message="eclipse.download: ${eclipse.download}" />
+		<property name="commands.file" location="${releng.project}/releng/local/resolve-cmd.txt" />
+		<echo file="${commands.file}" append="false">
+			setpref targetPlatformPath="${build.root}/target.platform"
+			#setpref org.eclipse.buckminster.core.maxParallelResolutions=1
+			#setpref org.eclipse.buckminster.core.maxParallelMaterializations=1
+			importprefs -F ${releng.project}/releng/buckminster.workspace.epf
+			
+			# Xtext api baseline
+			importtargetdefinition "${releng.project}/api-baseline/api-baseline.target"
+			addbaseline -A "api-baseline"
+			
+			# Xtext TP and sources
+			resolve "${releng.project}/releng/xtext-platform.mspec"
+			resolve "${releng.project}/releng/xtext.cquery"
+		</echo>
+		<echo message="build.properties: ${build.properties}" />
+		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
+	</target>
+
+	<target name="buckminster-compile">
+		<property name="commands.file" location="${releng.project}/releng/local/compile-cmd.txt" />
+		<echo file="${commands.file}" append="false">
+			perform "org.eclipse.xtext.build#zip.examples"
+			build
+			junit --stderr --stdout --launch "org.eclipse.xtext.releng/releng/bootstrap-build.launch"
+		</echo>
+		<echo message="build.properties: ${build.properties}" />
+		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
+	</target>
+
+	<target name="buckminster-package">
+		<property name="commands.file" location="${releng.project}/releng/local/package-cmd.txt" />
+		<echo file="${commands.file}" append="false">
+			perform "org.eclipse.xtext.releng#create.javadoc"
+			perform "org.eclipse.xtext.build#build"
+			perform "org.eclipse.xtext.releng#setup.promoter"
+		</echo>
+		<echo message="build.properties: ${build.properties}" />
+		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
+		<echo message=" " />
+		<echo message="Updatesite output in: ${build.root}/buckminster.output/*.build_*-eclipse.feature/site.p2/" />
+	</target>
+
+
+</project>
