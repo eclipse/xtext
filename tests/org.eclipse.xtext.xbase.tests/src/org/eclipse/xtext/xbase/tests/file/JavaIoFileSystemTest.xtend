@@ -11,7 +11,6 @@ import java.io.File
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.parser.IEncodingProvider
-import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport
 import org.eclipse.xtext.xbase.file.ProjectConfig
 import org.eclipse.xtext.xbase.file.WorkspaceConfig
@@ -20,18 +19,21 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 import java.io.FileInputStream
+import org.eclipse.xtext.junit4.internal.TemporaryFolder
+import org.junit.Rule
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class JavaIoFileSystemTest {
 	
+	@Rule
+	public TemporaryFolder temporaryFolder = new TemporaryFolder()
+	
 	protected extension MutableFileSystemSupport fs
 	
 	@Before def void setUp() {
-		val tempDir = new File(File.createTempFile('foo','bar').parent, class.simpleName)
-		if (tempDir.exists)
-			Files.sweepFolder(tempDir);
+		val tempDir = temporaryFolder.newFolder()
 		fs = new JavaIOFileSystemSupport => [
 			projectInformationProvider = [|new WorkspaceConfig(tempDir.absolutePath) => [
 				addProjectConfig(new ProjectConfig('/foo') => [
