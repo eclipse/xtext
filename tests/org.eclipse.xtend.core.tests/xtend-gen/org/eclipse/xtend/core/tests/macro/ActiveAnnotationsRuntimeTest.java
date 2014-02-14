@@ -25,12 +25,12 @@ import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -45,9 +45,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -55,6 +55,10 @@ import org.junit.runner.RunWith;
 @InjectWith(RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests {
+  @Rule
+  @Inject
+  public TemporaryFolder temporaryFolder;
+  
   @Inject
   private CompilationTestHelper compiler;
   
@@ -85,18 +89,6 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   public void setUp() {
     this.compiler.setJavaCompilerClassPath(MutableTypeDeclaration.class, IterableExtensions.class, Lists.class);
     this.configureFreshWorkspace();
-  }
-  
-  @After
-  public void tearDown() {
-    try {
-      WorkspaceConfig _workspaceConfig = this.configProvider.getWorkspaceConfig();
-      String _absoluteFileSystemPath = _workspaceConfig.getAbsoluteFileSystemPath();
-      File _file = new File(_absoluteFileSystemPath);
-      Files.sweepFolder(_file);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
   }
   
   protected void configureFreshWorkspace() {
@@ -135,20 +127,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   
   protected File createFreshTempDir() {
     try {
-      long _nanoTime = System.nanoTime();
-      String _string = Long.toString(_nanoTime);
-      final File tempDir = File.createTempFile("temp", _string);
-      boolean _delete = tempDir.delete();
-      boolean _not = (!_delete);
-      if (_not) {
-        throw new IllegalStateException("couldn\'t delete temp file.");
-      }
-      boolean _mkdir = tempDir.mkdir();
-      boolean _not_1 = (!_mkdir);
-      if (_not_1) {
-        throw new IllegalStateException("couldn\'t create temp dir.");
-      }
-      return tempDir;
+      return this.temporaryFolder.newFolder();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

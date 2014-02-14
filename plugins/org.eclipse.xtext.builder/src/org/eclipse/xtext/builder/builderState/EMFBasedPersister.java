@@ -94,28 +94,32 @@ public class EMFBasedPersister implements PersistedStateProvider {
 		} finally {
 			try {
 				if (workspace != null) {
-					workspace.addSaveParticipant(Activator.getDefault(), new ISaveParticipant() {
-	
-						public void saving(ISaveContext context) throws CoreException {
-							if (context.getKind() == ISaveContext.FULL_SAVE)
-								save(builderState.getAllResourceDescriptions());
-						}
-	
-						public void rollback(ISaveContext context) {
-						}
-	
-						public void prepareToSave(ISaveContext context) throws CoreException {
-						}
-	
-						public void doneSaving(ISaveContext context) {
-						}
-					});
+					addSaveParticipant();
 				}
 			} catch (CoreException e) {
 				log.error("Error adding builder state save participant", e);
 			}
 		}
 		return Collections.emptySet();
+	}
+
+	protected void addSaveParticipant() throws CoreException {
+		workspace.addSaveParticipant(Activator.getDefault(), new ISaveParticipant() {
+
+			public void saving(ISaveContext context) throws CoreException {
+				if (context.getKind() == ISaveContext.FULL_SAVE)
+					save(builderState.getAllResourceDescriptions());
+			}
+
+			public void rollback(ISaveContext context) {
+			}
+
+			public void prepareToSave(ISaveContext context) throws CoreException {
+			}
+
+			public void doneSaving(ISaveContext context) {
+			}
+		});
 	}
 
 	public Iterable<IResourceDescription> loadFromResource(Resource resource) {

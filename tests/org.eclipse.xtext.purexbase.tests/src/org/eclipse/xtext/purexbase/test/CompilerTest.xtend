@@ -13,10 +13,15 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.junit.Rule
+import org.eclipse.xtext.junit4.internal.TemporaryFolder
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider)) 
 class CompilerTest {
+	
+	@Rule
+	@Inject public TemporaryFolder temporaryFolder
 	
 	@Inject extension CompilationTestHelper
 	

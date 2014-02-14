@@ -13,11 +13,13 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl;
 import org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
+import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.EmfStructureComparator;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -39,13 +42,16 @@ import com.google.inject.util.Modules;
  */
 public class AbstractEMFBasedPersisterTest extends Assert {
 
+	@Rule
+	public TemporaryFolder temporaryFolder = new TemporaryFolder();
+	
 	protected EMFBasedPersister persister;
 	private File tempFile;
 	private List<IResourceDescription> descriptions;
 
 	@Before
 	public void setUp() throws Exception {
-		tempFile = File.createTempFile("foo", "bar");
+		tempFile = temporaryFolder.createTempFile("foo", "bar");
 		SharedStateModule module = new SharedStateModule();
 		Module m = Modules.override(module).with(new AbstractModule() {
 			@Override
@@ -54,6 +60,14 @@ public class AbstractEMFBasedPersisterTest extends Assert {
 					@Override
 					protected File getBuilderStateLocation() {
 						return tempFile;
+					}
+					@Override
+					protected void scheduleRecoveryBuild() {
+						// do nothing
+					}
+					@Override
+					protected void addSaveParticipant() throws CoreException {
+						// do nothing
 					}
 				});
 			}});

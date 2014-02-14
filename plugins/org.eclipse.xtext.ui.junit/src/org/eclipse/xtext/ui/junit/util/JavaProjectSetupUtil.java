@@ -281,6 +281,7 @@ public class JavaProjectSetupUtil {
 			FileNotFoundException {
 		File tempFile = File.createTempFile(nameWithoutJarSuffix, ".jar");
 		tempFile.createNewFile();
+		tempFile.deleteOnExit();
 		FileOutputStream stream = new FileOutputStream(tempFile);
 		int i = -1;
 		while ((i = data.read()) != -1)
