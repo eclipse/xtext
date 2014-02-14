@@ -108,7 +108,7 @@ public class JFlexLoader implements IWorkflowComponent, JFlexMain {
 
 	private boolean download(final File jarFile) throws IOException {
 		final File tempFile = File.createTempFile("JFlex", "zip");
-		
+		tempFile.deleteOnExit();
 		if (askBeforeDownload) {
 			boolean ok = false;
 			while (!ok) {

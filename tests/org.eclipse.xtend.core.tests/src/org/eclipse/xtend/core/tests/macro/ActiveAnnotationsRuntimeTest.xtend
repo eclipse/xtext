@@ -21,7 +21,6 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
@@ -30,16 +29,20 @@ import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider
 import org.eclipse.xtext.xbase.file.WorkspaceConfig
 import org.eclipse.xtext.xbase.lib.IterableExtensions
 import org.eclipse.xtext.xbase.lib.Pair
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.junit4.internal.TemporaryFolder
+import org.junit.Rule
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
 class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests {
+
+	@Rule 
+	@Inject public TemporaryFolder temporaryFolder
 
 	@Inject CompilationTestHelper compiler
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
@@ -58,11 +61,6 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 		configureFreshWorkspace()
 	}
 	
-	@After
-	def void tearDown() {
-		Files.sweepFolder(new File(configProvider.workspaceConfig.absoluteFileSystemPath))
-	}
-	
 	protected def void configureFreshWorkspace() {
 		val tempDir = createFreshTempDir()
 		configProvider.workspaceConfig = new WorkspaceConfig(tempDir.absolutePath) => [
@@ -76,14 +74,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 	}
 	
 	protected def File createFreshTempDir() {
-		val tempDir = File.createTempFile("temp", Long.toString(System.nanoTime()));
-		if (!tempDir.delete) {
-			throw new IllegalStateException("couldn't delete temp file.")
-		}
-		if (!tempDir.mkdir) {
-			throw new IllegalStateException("couldn't create temp dir.")
-		}
-		return tempDir
+		return temporaryFolder.newFolder()
 	}
 	
 	protected def URI copyToDisk(String projectName, Pair<String,String> fileRepresentation) {
