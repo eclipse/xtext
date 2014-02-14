@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
+import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -53,6 +54,8 @@ import com.google.inject.Provider;
 public class CompilationTestHelper {
 	
 	private final static Logger log = Logger.getLogger(CompilationTestHelper.class);
+	
+	@Inject private TemporaryFolder temporaryFolder;
 	
 	@Inject private OnTheFlyJavaCompiler javaCompiler;
 	
@@ -81,16 +84,8 @@ public class CompilationTestHelper {
 	}
 	
 	protected File createFreshTempDir() {
-		File tempDir;
 		try {
-			tempDir = File.createTempFile("temp", Long.toString(System.nanoTime()));
-			if (!tempDir.delete()) {
-				throw new IllegalStateException("couldn't delete temp file.");
-			}
-			if (!tempDir.mkdir()) {
-				throw new IllegalStateException("couldn't create temp dir.");
-			}
-			return tempDir;
+			return temporaryFolder.newFolder();
 		} catch (IOException e) {
 			throw new AssertionError(e);
 		}
@@ -336,7 +331,5 @@ public class CompilationTestHelper {
 		}
 		return result;
 	}
-	
-	
 	
 }

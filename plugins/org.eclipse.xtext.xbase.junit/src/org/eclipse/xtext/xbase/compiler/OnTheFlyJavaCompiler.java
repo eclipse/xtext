@@ -37,8 +37,10 @@ import org.eclipse.jdt.core.compiler.CompilationProgress;
 import org.eclipse.jdt.internal.compiler.batch.FileSystem;
 import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
+import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -227,6 +229,9 @@ public class OnTheFlyJavaCompiler {
 	@Inject
 	private ClassPathAssembler classPathAssembler = new ClassPathAssembler();
 	
+	@Inject(optional=true)
+	private TemporaryFolder temporaryFolder;
+	
 	public void addClassPath(String classpath) {
 		this.classpath.add(classpath);
 	}
@@ -294,7 +299,7 @@ public class OnTheFlyJavaCompiler {
 	}
 	
 	public Pair<ClassLoader, Map<String,Class<?>>> internalCompileToClasses(Map<String,String> sources) {
-		File tempDir = com.google.common.io.Files.createTempDir();
+		File tempDir = createTempDir();
 		try {
 			for (Entry<String, String> entry : sources.entrySet()) {
 				String classname = entry.getKey();
@@ -334,22 +339,35 @@ public class OnTheFlyJavaCompiler {
 			cleanUpTmpFolder(tempDir);
 		}
 	}
+
+	protected File createTempDir() {
+		if (temporaryFolder != null && temporaryFolder.isInitialized()) {
+			try {
+				return temporaryFolder.newFolder();
+			} catch (IOException e) {
+				throw new RuntimeIOException(e);
+			}
+		}
+		return com.google.common.io.Files.createTempDir();
+	}
 	
 	protected void cleanUpTmpFolder(File tempDir) {
-		try {
-			tempDir.deleteOnExit();
-			// Classloader needs .class files to lazy load an anonymous non static classes
-			Files.cleanFolder(tempDir, new FileFilter() {
-				public boolean accept(File pathname) {
-					boolean isClass = pathname.getName().endsWith(".class");
-					if(isClass) {
-						pathname.deleteOnExit();
+		if (temporaryFolder == null || !temporaryFolder.isInitialized()) {
+			try {
+				tempDir.deleteOnExit();
+				// Classloader needs .class files to lazy load an anonymous non static classes
+				Files.cleanFolder(tempDir, new FileFilter() {
+					public boolean accept(File pathname) {
+						boolean isClass = pathname.getName().endsWith(".class");
+						if(isClass) {
+							pathname.deleteOnExit();
+						}
+						return !isClass;
 					}
-					return !isClass;
-				}
-			}, true, true);
-		} catch (FileNotFoundException e) {
-			// ignore
+				}, true, true);
+			} catch (FileNotFoundException e) {
+				// ignore
+			}
 		}
 	}
 

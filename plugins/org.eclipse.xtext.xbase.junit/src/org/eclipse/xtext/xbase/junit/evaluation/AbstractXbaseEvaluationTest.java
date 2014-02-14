@@ -24,21 +24,27 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 
 import testdata.ExceptionSubclass;
 import testdata.OuterClass;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
 public abstract class AbstractXbaseEvaluationTest extends Assert {
+	
+	@Rule
+	@Inject public TemporaryFolder temporaryFolder = new TemporaryFolder();
 	
 	@Test public void testReservedWordEnum() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "typeof(java.lang.annotation.RetentionPolicy).enum");
