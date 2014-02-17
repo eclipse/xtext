@@ -10,8 +10,11 @@ package org.eclipse.xtext.common.types.testSetups;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@TestAnnotationWithDefaults(
-		classArray={ int.class, void.class, double[][][].class, CharSequence[].class, Iterable.class }
-)
-public class Bug427098 {
+@org.eclipse.xtext.common.types.testSetups.Bug428340.MyAnnotation(emptyArray = {})
+public class Bug428340 {
+	
+	@interface MyAnnotation {
+		String[] emptyArray() default {""};
+	}
+	
 }
