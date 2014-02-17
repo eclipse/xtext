@@ -7,13 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.testSetups;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @org.eclipse.xtext.common.types.testSetups.Bug428340.MyAnnotation(emptyArray = {})
 public class Bug428340 {
 	
-	@interface MyAnnotation {
+	@Retention(RetentionPolicy.RUNTIME)
+	public @interface MyAnnotation {
 		String[] emptyArray() default {""};
 	}
 	
