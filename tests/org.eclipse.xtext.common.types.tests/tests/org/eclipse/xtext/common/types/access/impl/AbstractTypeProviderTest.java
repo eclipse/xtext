@@ -78,6 +78,7 @@ import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParams;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuper;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
 import org.eclipse.xtext.common.types.testSetups.Bug427098;
+import org.eclipse.xtext.common.types.testSetups.Bug428340;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
 import org.eclipse.xtext.common.types.testSetups.Fields;
@@ -3112,6 +3113,14 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertTypeReference("double[][][]", typeReferences, 2);
 		assertTypeReference("CharSequence[]", typeReferences, 3);
 		assertTypeReference("Iterable", typeReferences, 4);
+	}
+	
+	@Test
+	public void testBug428340() {
+		String typeName = Bug428340.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		JvmAnnotationReference myAnnotation = type.getAnnotations().get(0);
+		assertEquals("MyAnnotation", myAnnotation.getAnnotation().getSimpleName());
 	}
 
 	protected JvmTypeAnnotationValue getClassArrayAnnotationValue(JvmAnnotationReference annotationReference) {

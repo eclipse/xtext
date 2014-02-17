@@ -78,6 +78,9 @@ public class JvmAnnotationReferenceBuilder extends AbstractJvmAnnotationValueBui
 	public AnnotationVisitor visitArray(final String name) {
 		return new JvmAnnotationValueBuilder(proxies) {
 			public void visitEnd() {
+				if (result == null) {
+					result = TypesFactory.eINSTANCE.createJvmCustomAnnotationValue();
+				}
 				result.setOperation(createMethodProxy(annotationType, name));
 				values.addUnique(result);
 			}
