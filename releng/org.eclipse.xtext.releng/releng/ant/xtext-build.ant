@@ -23,6 +23,7 @@
 	<property name="buckminster.home" location="${user.home}/buckminster" />
 	<!-- Locations -->
 	<property name="build.properties" location="${releng.project}/releng/xtext-build.properties" />
+	<property name="temp.commands.location" location="${ant.file}/.." />
 
 	<!-- Against which platform to build (Galileo,Stable,Latest)-->
 	<property name="ECLIPSE.TARGET.ALIAS" value="Stable" />
@@ -42,7 +43,7 @@
 	<target name="buckminster-resolve">
 		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
 		<echo message="eclipse.download: ${eclipse.download}" />
-		<property name="commands.file" location="${releng.project}/releng/local/resolve-cmd.txt" />
+		<property name="commands.file" location="${temp.commands.location}/resolve-cmd.txt" />
 		<echo file="${commands.file}" append="false">
 			setpref targetPlatformPath="${build.root}/target.platform"
 			#setpref org.eclipse.buckminster.core.maxParallelResolutions=1
@@ -62,7 +63,7 @@
 	</target>
 
 	<target name="buckminster-compile">
-		<property name="commands.file" location="${releng.project}/releng/local/compile-cmd.txt" />
+		<property name="commands.file" location="${temp.commands.location}/compile-cmd.txt" />
 		<echo file="${commands.file}" append="false">
 			perform "org.eclipse.xtext.build#zip.examples"
 			build
@@ -73,7 +74,7 @@
 	</target>
 
 	<target name="buckminster-package">
-		<property name="commands.file" location="${releng.project}/releng/local/package-cmd.txt" />
+		<property name="commands.file" location="${temp.commands.location}/package-cmd.txt" />
 		<echo file="${commands.file}" append="false">
 			perform "org.eclipse.xtext.releng#create.javadoc"
 			perform "org.eclipse.xtext.build#build"
