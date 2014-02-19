@@ -7,21 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
+import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class OnTheFlyJavaCompilerTest extends Assert {
+	
+	@Rule
+	public TemporaryFolder tempFolder = new TemporaryFolder();
+	
 	private OnTheFlyJavaCompiler compiler = new OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler();
 	@Before
 	public void setUp() throws Exception {
+		compiler.setTemporaryFolder(tempFolder);
 		compiler.setParentClassLoader(OnTheFlyJavaCompilerTest.class.getClassLoader());
 		compiler.addClassPathOfClass(OnTheFlyJavaCompilerTest.class);
 		compiler.addClassPathOfClass(Functions.class);
