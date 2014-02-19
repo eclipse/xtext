@@ -407,6 +407,66 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 		''')	
 	}
 	
+	@Test def formatBasicFor() {
+		assertFormattedExpression('''
+			for (var i = 1; i < 10; i = i + 1)
+				println(i)
+		''', '''
+			for  (  var    i  =   1  ;   i   <   10;   i    =  i    +  1  )  println(i)
+		''')
+	}
+	
+	@Test def formatBasicFor2() {
+		assertFormattedExpression('''
+			for (;;) {
+				return true
+			}
+		''', '''
+			for  (      ;     ;      )  {     return     true }
+		''')
+	}
+	
+	@Test def formatBasicFor3() {
+		assertFormattedExpression('''
+			for (val x = 1, val y = 2;;) {
+				return x + y
+			}
+		''', '''
+			for  (    val    x   = 1    ,   val   y     =   2 ;     ;      )  {     return     x  +  y }
+		''')
+	}
+	
+	@Test def formatBasicFor4() {
+		assertFormattedExpression('''
+			val x = 1
+			for (; x < 10;)
+				println(x)
+		''', '''
+			val x = 1
+			for  (       ;     x     <    10      ;      )       println(x)
+		''')
+	}
+	
+	@Test def formatBasicFor5() {
+		assertFormattedExpression('''
+			val x = 1
+			for (;; x = x + 1, x = x + 2)
+				println(x)
+		''', '''
+			val x = 1
+			for  (       ;     ;     x     =      x 	+      1  ,  x  =   x   +    2 )          println(x)
+		''')
+	}
+	
+	@Test def formatBasicFor6() {
+		assertFormattedExpression('''
+			for (val x = 1;; x = x + 1, x = x + 2)
+				println(x)
+		''', '''
+			for  (			val 		x 		= 		1		;     ;     x     =      x 	+      1  ,  x  =   x   +    2 )          println(x)
+		''')
+	}
+	
 	@Test def formatWhile11() {
 		assertFormattedExpression([
 			put(whitespaceBetweenKeywordAndParenthesisML, true)

@@ -830,6 +830,220 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''
 		)
 	}
+	
+	@Test def void testBasicForLoop_0() {
+		'''
+			{
+				for (var i = 0; i < 10; i = i + 1) {
+				}
+			}
+		'''.compilesTo(
+		'''
+			int i = 0;
+			boolean _while = (i < 10);
+			while (_while) {
+			  i = (i + 1);
+			  _while = (i < 10);
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_1() {
+		'''
+			{
+				for (;;) {
+				}
+			}
+		'''.compilesTo(
+		'''
+			boolean _while = true;
+			while (_while) {
+			  _while = true;
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_2() {
+		'''
+			{
+				for (val i = 0; i < 10;) {
+					if (i == 2) {
+						return true;
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			final int i = 0;
+			boolean _while = (i < 10);
+			while (_while) {
+			  if ((i == 2)) {
+			    return Boolean.valueOf(true);
+			  }
+			  _while = (i < 10);
+			}
+			return null;
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_3() {
+		'''
+			{
+				for (val i = 0; i < 10;) {
+					return true
+				}
+			}
+		'''.compilesTo(
+		'''
+			final int i = 0;
+			boolean _while = (i < 10);
+			while (_while) {
+			  return Boolean.valueOf(true);
+			}
+			return null;
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_4() {
+		'''
+			{
+				for (val i = 1;;) {}
+				for (val i = 1;;) {}
+			}
+		'''.compilesTo(
+		'''
+			{
+			  final int i = 1;
+			  boolean _while = true;
+			  while (_while) {
+			    _while = true;
+			  }
+			}
+			{
+			  final int i = 1;
+			  boolean _while = true;
+			  while (_while) {
+			    _while = true;
+			  }
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_5() {
+		'''
+			{
+				{
+					for (val i = 1;;) {}
+				}
+				{
+					for (val i = 1;;) {}
+				}
+			}
+		'''.compilesTo(
+		'''
+			{
+			  final int i = 1;
+			  boolean _while = true;
+			  while (_while) {
+			    _while = true;
+			  }
+			}
+			{
+			  final int i = 1;
+			  boolean _while = true;
+			  while (_while) {
+			    _while = true;
+			  }
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_6() {
+		'''
+			{
+				if (true) {
+					for (;;) {}
+				}
+			}
+		'''.compilesTo(
+		'''
+			if (true) {
+			  boolean _while = true;
+			  while (_while) {
+			    _while = true;
+			  }
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_7() {
+		'''
+			{
+				try {
+					for (;;) {}
+				} finally {
+				}
+			}
+		'''.compilesTo(
+		'''
+			try {
+			  boolean _while = true;
+			  while (_while) {
+			    _while = true;
+			  }
+			} finally {
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_8() {
+		'''
+			{
+				[| for (;;) {} ]
+			}
+		'''.compilesTo(
+		'''
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure0 _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure0() {
+			  public void apply() {
+			    boolean _while = true;
+			    while (_while) {
+			      _while = true;
+			    }
+			  }
+			};
+			return _function;
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_9() {
+		'''
+			{
+				{
+					{
+						{
+							for (;;) {}
+						}
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			boolean _while = true;
+			while (_while) {
+			  _while = true;
+			}
+		'''
+		)
+	}
 
 }
 

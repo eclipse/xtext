@@ -11,6 +11,7 @@ import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarAccess;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XBasicForLoopExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XBlockExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XCasePartElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XCatchClauseElements;
@@ -58,6 +59,7 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 		configureXSwitchExpression(c, ga.getXSwitchExpressionAccess());
 		configureXCasePart(c, ga.getXCasePartAccess());
 		configureXForLoopExpression(c, ga.getXForLoopExpressionAccess());
+		configureXBasicForLoopExpression(c, ga.getXBasicForLoopExpressionAccess());
 		configureXWhileExpression(c, ga.getXWhileExpressionAccess());
 		configureXDoWhileExpression(c, ga.getXDoWhileExpressionAccess());
 		configureXBlockExpression(c, ga.getXBlockExpressionAccess());
@@ -139,12 +141,24 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 	}
 
 	public void configureXForLoopExpression(FormattingConfig c, XForLoopExpressionElements ele) {
+		c.setNoSpace().around(ele.getLeftParenthesisKeyword_0_0_2());
+		c.setNoSpace().around(ele.getColonKeyword_0_0_4());
+		c.setNoSpace().around(ele.getRightParenthesisKeyword_2());
+		c.setIndentationIncrement().before(ele.getEachExpressionAssignment_3());
+		c.setLinewrap().around(ele.getEachExpressionAssignment_3());
+		c.setIndentationDecrement().after(ele.getEachExpressionAssignment_3());
+	}
+
+	public void configureXBasicForLoopExpression(FormattingConfig c, XBasicForLoopExpressionElements ele) {
 		c.setNoSpace().around(ele.getLeftParenthesisKeyword_2());
-		c.setNoSpace().around(ele.getColonKeyword_4());
-		c.setNoSpace().around(ele.getRightParenthesisKeyword_6());
-		c.setIndentationIncrement().before(ele.getEachExpressionAssignment_7());
-		c.setLinewrap().around(ele.getEachExpressionAssignment_7());
-		c.setIndentationDecrement().after(ele.getEachExpressionAssignment_7());
+		c.setNoSpace().before(ele.getCommaKeyword_3_1_0());
+		c.setNoSpace().before(ele.getSemicolonKeyword_4());
+		c.setNoSpace().before(ele.getCommaKeyword_7_1_0());
+		c.setNoSpace().before(ele.getSemicolonKeyword_6());
+		c.setNoSpace().around(ele.getRightParenthesisKeyword_8());
+		c.setIndentationIncrement().before(ele.getEachExpressionAssignment_9());
+		c.setLinewrap().around(ele.getEachExpressionAssignment_9());
+		c.setIndentationDecrement().after(ele.getEachExpressionAssignment_9());
 	}
 
 	public void configureXWhileExpression(FormattingConfig c, XWhileExpressionElements ele) {

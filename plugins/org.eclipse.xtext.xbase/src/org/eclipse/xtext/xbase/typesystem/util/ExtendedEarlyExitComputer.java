@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
+import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
@@ -66,6 +67,8 @@ public class ExtendedEarlyExitComputer {
 			return isIntentionalEarlyExit(((XAbstractWhileExpression) expression).getBody());
 		} else if (expression instanceof XForLoopExpression) {
 			return isIntentionalEarlyExit(((XForLoopExpression) expression).getEachExpression());
+		} else if (expression instanceof XBasicForLoopExpression) {
+			return isIntentionalEarlyExit(((XBasicForLoopExpression) expression).getEachExpression());
 		}
 		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
 	}

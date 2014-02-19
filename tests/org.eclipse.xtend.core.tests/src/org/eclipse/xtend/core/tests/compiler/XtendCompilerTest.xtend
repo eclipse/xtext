@@ -4731,6 +4731,55 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test def void whileLoopWithReturnStatement() {
+		'''
+			class Foo {
+				def foo() {
+					val x = new StringBuilder
+					while (x instanceof CharSequence) {
+						return x.toString
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public String foo() {
+			    final StringBuilder x = new StringBuilder();
+			    boolean _while = (x instanceof CharSequence);
+			    while (_while) {
+			      return x.toString();
+			    }
+			    return null;
+			  }
+			}
+		''')
+	} 
+	
+	@Test def void basicForLoopWithReturnStatement() {
+		'''
+			class Foo {
+				def foo() {
+					for (val x = new StringBuilder; x instanceof CharSequence;) {
+						return x.toString
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public String foo() {
+			    final StringBuilder x = new StringBuilder();
+			    boolean _while = (x instanceof CharSequence);
+			    while (_while) {
+			      return x.toString();
+			    }
+			    return null;
+			  }
+			}
+		''')
+	} 
 
 }
 

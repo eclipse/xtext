@@ -660,7 +660,10 @@ ruleXPrimaryExpression :
 	ruleXFeatureCall |
 	ruleXLiteral |
 	ruleXIfExpression |
-	ruleXForLoopExpression |
+	( (
+	'for' '(' ruleJvmFormalParameter ':'
+	) => ruleXForLoopExpression ) |
+	ruleXBasicForLoopExpression |
 	ruleXWhileExpression |
 	ruleXDoWhileExpression |
 	ruleXThrowExpression |
@@ -793,7 +796,24 @@ ruleXCasePart :
 
 // Rule XForLoopExpression
 ruleXForLoopExpression :
-	'for' '(' ruleJvmFormalParameter ':' ruleXExpression ')' ruleXExpression
+	( (
+	'for' '(' ruleJvmFormalParameter ':'
+	) => (
+		'for' '(' ruleJvmFormalParameter ':'
+	) ) ruleXExpression ')' ruleXExpression
+;
+
+// Rule XBasicForLoopExpression
+ruleXBasicForLoopExpression :
+	'for' '(' (
+		ruleXExpressionInsideBlock (
+			',' ruleXExpressionInsideBlock
+		)*
+	)? ';' ruleXExpression? ';' (
+		ruleXExpression (
+			',' ruleXExpression
+		)*
+	)? ')' ruleXExpression
 ;
 
 // Rule XWhileExpression

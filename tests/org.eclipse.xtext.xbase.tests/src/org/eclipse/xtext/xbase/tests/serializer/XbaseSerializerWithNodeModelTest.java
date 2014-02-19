@@ -68,4 +68,9 @@ public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTes
 		super.testClosure_31();
 	}
 	
+	@Override
+	@Test @Ignore public void testXBasicForLoopExpression_15() throws Exception {
+		super.testXBasicForLoopExpression_15();
+	}
+	
 }

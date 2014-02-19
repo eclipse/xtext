@@ -694,5 +694,14 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		}
 		'''.expression.assertError(XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
 	}
+	
+	@Test def void testBasicForLoop_InvalidInnerExpression() {
+		'''
+		{
+			for(val condition = true; condition;) {
+			}
+		}
+		'''.expression.assertNoIssues
+	}
 
 }

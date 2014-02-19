@@ -117,6 +117,7 @@ XPrimaryExpression returns XExpression:
 	XLiteral |
 	XIfExpression |
 	XForLoopExpression |
+	XBasicForLoopExpression |
 	XWhileExpression |
 	XDoWhileExpression |
 	XThrowExpression |
@@ -184,8 +185,15 @@ XCasePart:
 		(':' then=XExpression | ',') ;
 
 XForLoopExpression returns XExpression:
-	{XForLoopExpression}
-	'for' '(' declaredParam=JvmFormalParameter ':' forExpression=XExpression ')'
+	=>({XForLoopExpression}
+	'for' '(' declaredParam=JvmFormalParameter ':') forExpression=XExpression ')'
+		eachExpression=XExpression;
+
+XBasicForLoopExpression returns XExpression:
+	{XBasicForLoopExpression}
+	'for' '('(initExpressions+=XExpressionInsideBlock (',' initExpressions+=XExpressionInsideBlock)*)? ';' 
+		expression=XExpression? ';' 
+		(updateExpressions+=XExpression (',' updateExpressions+=XExpression)*)? ')'
 		eachExpression=XExpression;
 
 XWhileExpression returns XExpression:
