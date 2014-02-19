@@ -35,6 +35,7 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -133,6 +134,8 @@ public class XbaseTypeComputer implements ITypeComputer {
 			_computeTypes((XConstructorCall)expression, state);
 		} else if (expression instanceof XForLoopExpression) {
 			_computeTypes((XForLoopExpression)expression, state);
+		} else if (expression instanceof XBasicForLoopExpression) {
+			_computeTypes((XBasicForLoopExpression)expression, state);
 		} else if (expression instanceof XIfExpression) {
 			_computeTypes((XIfExpression)expression, state);
 		} else if (expression instanceof XInstanceOfExpression) {
@@ -793,6 +796,35 @@ public class XbaseTypeComputer implements ITypeComputer {
 			state.computeTypes(object.getTarget());
 		}
 	}
+	
+	protected void _computeTypes(final XBasicForLoopExpression object, final ITypeComputationState state) {
+		for(XExpression initExpression : object.getInitExpressions()) {
+			ITypeComputationState expressionState = state.withoutExpectation();
+			expressionState.computeTypes(initExpression);
+			if (initExpression instanceof XVariableDeclaration) {
+				addLocalToCurrentScope((XVariableDeclaration) initExpression, state);
+			}
+		}
+		
+		XExpression expression = object.getExpression();
+		if (expression != null) {
+			LightweightTypeReference booleanType = getTypeForName(Boolean.TYPE, state);
+			ITypeComputationState conditionExpectation = state.withExpectation(booleanType);
+			conditionExpectation.computeTypes(expression);
+		}
+		
+		XExpression eachExpression = object.getEachExpression();
+		ITypeComputationState stateWithoutExpectation = state.withoutExpectation();
+		ITypeComputationState eachExpressionState = reassignCheckedType(expression, eachExpression, stateWithoutExpectation);
+		eachExpressionState.computeTypes(eachExpression);
+		
+		for (XExpression updateExpression : object.getUpdateExpressions()) {
+			eachExpressionState.computeTypes(updateExpression);
+		}
+		
+		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
+		state.acceptActualType(primitiveVoid);
+	}
 
 	protected void _computeTypes(final XForLoopExpression object, final ITypeComputationState state) {
 		JvmFormalParameter declaredParam = object.getDeclaredParam();
@@ -976,8 +1008,8 @@ public class XbaseTypeComputer implements ITypeComputer {
 		XExpression predicate = object.getPredicate();
 		conditionExpectation.computeTypes(predicate);
 		XExpression body = object.getBody();
-		ITypeComputationState bodyState = autocast ? reassignCheckedType(predicate, body, state) : state;
-		return bodyState.withoutExpectation().computeTypes(body);
+		ITypeComputationState bodyState = autocast ? reassignCheckedType(predicate, body, state.withoutExpectation()) : state.withoutExpectation();
+		return bodyState.computeTypes(body);
 	}
 
 	/**

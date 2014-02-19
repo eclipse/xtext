@@ -43,6 +43,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -76,6 +77,7 @@ import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -477,6 +479,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			_toJavaStatement((XDoWhileExpression) obj, appendable, isReferenced);
 		} else if (obj instanceof XForLoopExpression) {
 			_toJavaStatement((XForLoopExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof XBasicForLoopExpression) {
+			_toJavaStatement((XBasicForLoopExpression) obj, appendable, isReferenced);
 		} else if (obj instanceof XIfExpression) {
 			_toJavaStatement((XIfExpression) obj, appendable, isReferenced);
 		} else if (obj instanceof XInstanceOfExpression) {
@@ -537,12 +541,19 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 	
-	protected boolean bracesAreAddedByOuterStructure(XBlockExpression block) {
-		EObject container = block.eContainer();
+	protected boolean bracesAreAddedByOuterStructure(XExpression expression) {
+		EObject container = expression.eContainer();
 		if (container instanceof XTryCatchFinallyExpression 
 				|| container instanceof XIfExpression
 				|| container instanceof XClosure) {
 			return true;
+		}
+		if (container instanceof XBlockExpression) {
+			XBlockExpression blockExpression = (XBlockExpression) container;
+			EList<XExpression> expressions = blockExpression.getExpressions();
+			if (expressions.size() == 1 && expressions.get(0) == expression) {
+				return bracesAreAddedByOuterStructure(blockExpression);
+			}
 		}
 		if (!(container instanceof XExpression)) {
 			return true;
@@ -764,6 +775,169 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.decreaseIndentation().newLine().append("} while(");
 		b.append(variable);
 		b.append(");");
+	}
+	
+	protected void _toJavaStatement(XBasicForLoopExpression expr, ITreeAppendable b, boolean isReferenced) {
+		if (canCompileToJavaBasicForStatement(expr, b)) {
+			toJavaBasicForStatement(expr, b, isReferenced);
+		} else {
+			toJavaWhileStatement(expr, b, isReferenced);
+		}
+	}
+
+	protected boolean canCompileToJavaBasicForStatement(XBasicForLoopExpression expr, ITreeAppendable b) {
+		EList<XExpression> initExpressions = expr.getInitExpressions();
+		XExpression firstInitExpression = IterableExtensions.head(initExpressions);
+		if (firstInitExpression instanceof XVariableDeclaration) {
+			XVariableDeclaration variableDeclaration = (XVariableDeclaration) firstInitExpression;
+			XExpression right = variableDeclaration.getRight();
+			if (right != null && !canCompileToJavaExpression(right, b)) {
+				return false;
+			}
+		} else {
+			for (XExpression expression : initExpressions) {
+				if (!canCompileToJavaExpression(expression, b)) {
+					return false;
+				}
+			}
+		}
+		XExpression predicate = expr.getExpression();
+		if (predicate != null && !canCompileToJavaExpression(predicate, b)) {
+			return false;
+		}
+		for (XExpression expression : expr.getUpdateExpressions()) {
+			if (!canCompileToJavaExpression(expression, b)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
+	 */
+	protected void toJavaBasicForStatement(XBasicForLoopExpression expr, ITreeAppendable b, boolean isReferenced) {
+		ITreeAppendable loopAppendable = b.trace(expr);
+		loopAppendable.openScope();
+		loopAppendable.newLine().append("for (");
+		
+		EList<XExpression> initExpressions = expr.getInitExpressions();
+		XExpression firstInitExpression = IterableExtensions.head(initExpressions);
+		if (firstInitExpression instanceof XVariableDeclaration) {
+			XVariableDeclaration variableDeclaration = (XVariableDeclaration) firstInitExpression;
+			JvmTypeReference type = appendVariableTypeAndName(variableDeclaration, loopAppendable);
+			loopAppendable.append(" = ");
+			if (variableDeclaration.getRight() != null) {
+				compileAsJavaExpression(variableDeclaration.getRight(), loopAppendable, type);
+			} else {
+				appendDefaultLiteral(loopAppendable, type);
+			}
+		} else {
+			for (int i = 0; i < initExpressions.size(); i++) {
+				if (i != 0) {
+					loopAppendable.append(", ");
+				}
+				XExpression initExpression = initExpressions.get(i);
+				compileAsJavaExpression(initExpression, loopAppendable, null);
+			}
+		}
+		
+		loopAppendable.append(";");
+		
+		XExpression expression = expr.getExpression();
+		if (expression != null) {
+			loopAppendable.append(" ");
+			internalToJavaExpression(expression, loopAppendable);
+		}
+		loopAppendable.append(";");
+		
+		EList<XExpression> updateExpressions = expr.getUpdateExpressions();
+		for (int i = 0; i < updateExpressions.size(); i++) {
+			if (i != 0) {
+				loopAppendable.append(",");
+			}
+			loopAppendable.append(" ");
+			XExpression updateExpression = updateExpressions.get(i);
+			internalToJavaExpression(updateExpression, loopAppendable);
+		}
+		loopAppendable.append(") {").increaseIndentation();
+		
+		XExpression eachExpression = expr.getEachExpression();
+		internalToJavaStatement(eachExpression, loopAppendable, false);
+		
+		loopAppendable.decreaseIndentation().newLine().append("}");
+		loopAppendable.closeScope();
+	}
+
+	protected void toJavaWhileStatement(XBasicForLoopExpression expr, ITreeAppendable b, boolean isReferenced) {
+		ITreeAppendable loopAppendable = b.trace(expr);
+		
+		boolean needBraces = !bracesAreAddedByOuterStructure(expr);
+		if (needBraces) {
+			loopAppendable.newLine().increaseIndentation().append("{");
+			loopAppendable.openPseudoScope();
+		}
+		
+		EList<XExpression> initExpressions = expr.getInitExpressions();
+		for (int i = 0; i < initExpressions.size(); i++) {
+			XExpression initExpression = initExpressions.get(i);
+			if (i < initExpressions.size() - 1) {
+				internalToJavaStatement(initExpression, loopAppendable, false);
+			} else {
+				internalToJavaStatement(initExpression, loopAppendable, isReferenced);
+				if (isReferenced) {
+					loopAppendable.newLine().append(getVarName(expr, loopAppendable)).append(" = (");
+					internalToConvertedExpression(initExpression, loopAppendable, getType(expr));
+					loopAppendable.append(");");
+				}
+			}
+		}
+
+		final String varName = loopAppendable.declareSyntheticVariable(expr, "_while");
+		
+		XExpression expression = expr.getExpression();
+		if (expression != null) {
+			internalToJavaStatement(expression, loopAppendable, true);
+			loopAppendable.newLine().append("boolean ").append(varName).append(" = ");
+			internalToJavaExpression(expression, loopAppendable);
+			loopAppendable.append(";");
+		} else {
+			loopAppendable.newLine().append("boolean ").append(varName).append(" = true;");
+		}
+		loopAppendable.newLine();
+		loopAppendable.append("while (");
+		loopAppendable.append(varName);
+		loopAppendable.append(") {").increaseIndentation();
+		loopAppendable.openPseudoScope();
+		
+		XExpression eachExpression = expr.getEachExpression();
+		internalToJavaStatement(eachExpression, loopAppendable, false);
+		
+		EList<XExpression> updateExpressions = expr.getUpdateExpressions();
+		if (!updateExpressions.isEmpty()) {
+			for (XExpression updateExpression : updateExpressions) {
+				internalToJavaStatement(updateExpression, loopAppendable, false);
+			}
+		}
+		
+		if (!earlyExitComputer.isEarlyExit(eachExpression)) {
+			if (expression != null) {
+				internalToJavaStatement(expression, loopAppendable, true);
+				loopAppendable.newLine().append(varName).append(" = ");
+				internalToJavaExpression(expression, loopAppendable);
+				loopAppendable.append(";");
+			} else {
+				loopAppendable.newLine().append(varName).append(" = true;");
+			}
+		}
+		
+		loopAppendable.closeScope();
+		loopAppendable.decreaseIndentation().newLine().append("}");
+		
+		if (needBraces) {
+			loopAppendable.closeScope();
+			loopAppendable.decreaseIndentation().newLine().append("}");
+		}
 	}
 
 	/**
@@ -1529,14 +1703,67 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Override
 	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
-		if (expression instanceof XSwitchExpression) {
-			XSwitchExpression switchExpression = (XSwitchExpression) expression;
-			return appendable.hasName(getSwitchExpressionKey(switchExpression)) || !isVariableDeclarationRequired(expression, appendable);
-		} else {
-			return super.internalCanCompileToJavaExpression(expression, appendable);
+		if (expression instanceof XListLiteral) {
+			XListLiteral listLiteral = (XListLiteral) expression;
+			for (XExpression element : listLiteral.getElements()) {
+				if (!internalCanCompileToJavaExpression(element, appendable)) {
+					return false;
+				}
+			}
+			return true;
 		}
+		if (expression instanceof XSetLiteral) {
+			XSetLiteral setLiteral = (XSetLiteral) expression;
+			for (XExpression element : setLiteral.getElements()) {
+				if (!internalCanCompileToJavaExpression(element, appendable)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		if (expression instanceof XBlockExpression) {
+			return false;
+		}
+		if (expression instanceof XTryCatchFinallyExpression) {
+			return false;
+		}
+		if (expression instanceof XThrowExpression) {
+			return false;
+		}
+		if (expression instanceof XInstanceOfExpression) {
+			XInstanceOfExpression instanceOfExpression = (XInstanceOfExpression) expression;
+			return internalCanCompileToJavaExpression(instanceOfExpression.getExpression(), appendable);
+		}
+		if (expression instanceof XVariableDeclaration) {
+			return false;
+		}
+		if (expression instanceof XWhileExpression) {
+			return false;
+		}
+		if (expression instanceof XDoWhileExpression) {
+			return false;
+		}
+		if (expression instanceof XBasicForLoopExpression) {
+			return false;
+		}
+		if (expression instanceof XForLoopExpression) {
+			return false;
+		}
+		if (expression instanceof XCastedExpression) {
+			XCastedExpression castedExpression = (XCastedExpression) expression;
+			return internalCanCompileToJavaExpression(castedExpression.getTarget(), appendable);
+		}
+		if (expression instanceof XReturnExpression) {
+			return false;
+		}
+		if (expression instanceof XIfExpression) {
+			return false;
+		}
+		if (expression instanceof XSwitchExpression) {
+			return false;
+		}
+		return super.internalCanCompileToJavaExpression(expression, appendable);
 	}
-	
 	
 	@Override
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {

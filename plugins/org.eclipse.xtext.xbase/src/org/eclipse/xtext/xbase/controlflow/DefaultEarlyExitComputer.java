@@ -12,6 +12,7 @@ import java.util.Collections;
 
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
@@ -75,6 +76,20 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 			Collection<ExitPoint> exitPoints = getExitPoints(child);
 			if (isNotEmpty(exitPoints))
 				return exitPoints;
+		}
+		return Collections.emptyList();
+	}
+
+	protected Collection<ExitPoint> _exitPoints(XBasicForLoopExpression expression) {
+		for (XExpression initExpression: expression.getInitExpressions()) {
+			Collection<ExitPoint> exitPoints = getExitPoints(initExpression);
+			if (isNotEmpty(exitPoints)) {
+				return exitPoints;
+			}
+		}
+		Collection<ExitPoint> exitPoints = getExitPoints(expression.getExpression());
+		if (isNotEmpty(exitPoints)) {
+			return exitPoints;
 		}
 		return Collections.emptyList();
 	}
