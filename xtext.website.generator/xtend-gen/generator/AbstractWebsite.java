@@ -387,6 +387,8 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.append("<!-- Navbar End -->");
     _builder.newLine();
+    _builder.append("<div class=\"ribbon-wrapper-red\"><div class=\"ribbon-red\"><a href=\"http://xtextcon.org\">Come to XtextCON 2014!</a></div></div>");
+    _builder.newLine();
     return _builder;
   }
   

@@ -724,6 +724,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 		left: 10px;
 		margin-left:0;
 		max-width: 200px;
+		top: 80pt;
 	}
 }
 @media (max-width: 767px) {
@@ -975,4 +976,57 @@ section {
 }
 .language-icon {
 	max-width : 140px;
+}
+
+.ribbon-wrapper-red {
+	width: 200px;
+	height: 172px;
+	overflow: hidden;
+	position: absolute;
+	top: -4px;
+	right: -4px;
+}
+
+.ribbon-red {
+  font: bold 12px Sans-Serif;
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+  position: relative;
+  padding: 7px 0;
+  left: 0px;
+  top: 80px;
+  width: 200px;
+  background-color: #A00;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#A00), to(#A00)); 
+  background-image: -webkit-linear-gradient(top, #A00, #A00); 
+  background-image:    -moz-linear-gradient(top, #A00, #A00); 
+  background-image:     -ms-linear-gradient(top, #A00, #A00); 
+  background-image:      -o-linear-gradient(top, #A00, #A00); 
+  color: #6a6340;
+  -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 1px 3px rgba(0,0,0,0.3);
+  box-shadow:         0px 1px 3px rgba(0,0,0,0.3);
+    white-space: nowrap;
+}
+
+@media (max-width: 979px) {
+	.ribbon-red {
+		top: 120px;
+	}
+}
+
+.ribbon-red a {
+  color: white;
+}
+
+.ribbon-red:before, .ribbon-red:after {
+  position:absolute;
+  bottom: -3px;
+}
+
+.ribbon-green:before {
+  left: 0;
+}
+.ribbon-green:after {
+  right: 0;
 }
