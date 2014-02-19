@@ -67,7 +67,7 @@
 		<echo file="${commands.file}" append="false">
 			perform "org.eclipse.xtext.build#zip.examples"
 			build
-			junit --stderr --stdout --launch "org.eclipse.xtext.releng/releng/bootstrap-build.launch"
+			junit --stderr --stdout --launch "org.eclipse.xtext.releng/releng/bootstrap-build.launch"  --flatXML --output "${WORKSPACE}/build-result/test-results/builder-run.result.xml" 
 		</echo>
 		<echo message="build.properties: ${build.properties}" />
 		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
