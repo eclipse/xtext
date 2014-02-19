@@ -417,7 +417,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 
 	protected Keyword getXForLoopRightParenthesis() {
-		return grammarAccess.getXForLoopExpressionAccess().getRightParenthesisKeyword_6();
+		return grammarAccess.getXForLoopExpressionAccess().getRightParenthesisKeyword_2();
 	}
 	
 	@Override

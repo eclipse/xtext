@@ -1797,6 +1797,234 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_01() throws Exception {
+		assertEvaluatesTo("newValue", 
+				"{\n" +
+				"  var result = 'oldValue'\n"+
+				"  for (var condition = true; condition; condition = false) {\n" +
+				"    result = 'newValue'\n" +
+				"  }\n" +
+				"  result\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_02() throws Exception {
+		assertEvaluatesTo("oldValue", 
+				"{\n" +
+				"  var result = 'oldValue'\n"+
+				"  for (var condition = false; condition; condition = false) {\n" +
+				"    result = 'newValue'\n" +
+				"  }\n" +
+				"  result\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_03() throws Exception {
+		assertEvaluatesTo("foo", 
+				"{\n" +
+				"  val value = 'foo'\n" +
+				"  for (var i = 0; i < 10; i = i + 1) {\n" +
+				"    if (i == 3) {\n" +
+				"      return value\n" +
+				"    }\n" +
+				"  }\n" +
+				"  'bar'\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_03_1() throws Exception {
+		assertEvaluatesTo("foo", 
+				"{\n" +
+				"  var String value\n" +
+				"  var int i\n" +
+				"  for (value = 'foo', i = 0; i < 10; i = i + 1) {\n" +
+				"    if (i == 3) {\n" +
+				"      return value\n" +
+				"    }\n" +
+				"  }\n" +
+				"  'bar'\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_04() throws Exception {
+		assertEvaluatesTo("hello", 
+				"{\n" +
+				"  for (val CharSequence x = new StringBuilder; x instanceof Appendable; x.append('hello')) {\n" +
+				"    if (x.length != 0) {\n" +
+				"      return x.toString\n" +
+				"    }\n" +
+				"  }\n" +
+				"  'bar'\n" +
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_05() throws Exception {
+		assertEvaluatesTo("hello", 
+				"{\n" +
+				"  for (val Appendable x = new StringBuilder; x instanceof CharSequence; x.append('hello')) {\n" +
+				"    if (x.length != 0) {\n" +
+				"      return x.toString\n" +
+				"    }\n" +
+				"  }\n" +
+				"  'bar'\n" +
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_06() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(1+2+3+4+5+6+7+8+9+10), 
+				"{\n" +
+				"  var int result\n"+
+				"  for (var i = 1; i <= 10; i = i + 1) {\n" +
+				"    result = result + i\n" +
+				"  }\n" + 
+				"  result\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_07() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(1+2+3+4+5+6+7+8+9+10), 
+				"{\n" +
+				"  var int result\n"+
+				"  for (var i = 1; i <= 10; result = result + i, i = i + 1) {}\n" +
+				"  result\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_08() throws Exception {
+		assertEvaluatesTo("foobar", 
+				"{\n" +
+				"  val list = new java.util.ArrayList<String>\n" +
+				"  list += 'bar'\n" +
+				"  var result = 'foo'\n" +
+				"  for (var i = 0; i < list.size; i = i + 1) {\n" +
+				"    result = result + list.get(i)\n" +
+				"  }\n" + 
+				"  result\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_09() throws Exception {
+		assertEvaluatesTo("foobar", 
+				"{\n" +
+				"  val list = new java.util.ArrayList<String>\n" +
+				"  list += 'bar'\n" +
+				"  var result = 'foo'\n" +
+				"  for (var i = 0; i < list.size; result = result + list.get(i), i = i + 1) {}\n" +
+				"  result\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_10() throws Exception {
+		assertEvaluatesTo(new Character('c'), 
+				"{\n" +
+				"  var Character result = null\n" +
+				"  val abc = 'abc'.toCharArray\n" +
+				"  for (var i = 0; i < abc.size; i = i + 1) {\n" +
+				"    result = abc.get(i)\n" +
+				"  }\n" + 
+				"  result\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_11() throws Exception {
+		assertEvaluatesTo(new Character('c'), 
+				"{\n" +
+				"  var Character result = null\n" +
+				"  val abc = 'abc'.toCharArray\n" +
+				"  for (var i = 0; i < abc.size; result = abc.get(i), i = i + 1) {}\n" +
+				"  result\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_12() throws Exception {
+		assertEvaluatesTo(new Character('a'), 
+				"{\n" +
+				"  var Character result = null\n" +
+				"  val abc = 'abc'.toCharArray\n" +
+				"  for (var i = 0; i < abc.size; i = i + 1) {\n" +
+				"    if (result == null) {\n" +
+				"      result = abc.get(i)\n" +
+				"    }\n" +
+				"  }\n" + 
+				"  result\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_13() throws Exception {
+		assertEvaluatesTo(new Character('a'), 
+				"{\n" +
+				"  var Character result = null\n" +
+				"  val abc = 'abc'.toCharArray\n" +
+				"  for (var i = 0; i < abc.size; if (result == null) { result = abc.get(i) }, i = i + 1) {}\n" + 
+				"  result\n" + 
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_14() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, 
+				"{\n" +
+				"  var condition = true\n" + 
+				"  for (;condition;) { return true }\n" +
+				"  false\n" +
+				"}");
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_15() throws Exception {
+		assertEvaluatesTo(8, 
+				"{\n" +
+				"  for (var i = 0; i < 10; i = i + 1) { if (i == 8) { return i } };\n" +
+				"  -1\n" +
+				"}");
+	}
+	
 	@Test public void testMemberFeatureCall_01() throws Exception {
 		assertEvaluatesTo("LITERAL", "'literal'.toUpperCase()");
 	}
