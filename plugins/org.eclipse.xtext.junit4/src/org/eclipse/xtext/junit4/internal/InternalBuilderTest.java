@@ -17,10 +17,14 @@ import java.util.List;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtext.util.Files;
@@ -38,7 +42,8 @@ public class InternalBuilderTest {
 
 		try {
 			clearJdtIndex();
-			ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
+			fullBuild();
+			waitForAutoBuild();
 		} finally {
 			clearJdtIndex();
 			reportMemoryState("Finished build.");
@@ -77,4 +82,58 @@ public class InternalBuilderTest {
 				/ (1024 * 1024) + "m");
 	}
 
+	public static void cleanBuild() throws CoreException {
+		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, new NullProgressMonitor());
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD, null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
+	}
+
+	public static void fullBuild() throws CoreException {
+		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD, null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
+	}
+
+	public static void waitForAutoBuild() {
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD, null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
+	}
+
+	public static void setAutoBuild(boolean b) {
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		try {
+			IWorkspaceDescription desc = workspace.getDescription();
+			desc.setAutoBuilding(b);
+			workspace.setDescription(desc);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
 }
