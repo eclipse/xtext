@@ -192,6 +192,11 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 				return createXForLoopExpressionAdapter();
 			}
 			@Override
+			public Adapter caseXBasicForLoopExpression(XBasicForLoopExpression object)
+			{
+				return createXBasicForLoopExpressionAdapter();
+			}
+			@Override
 			public Adapter caseXAbstractWhileExpression(XAbstractWhileExpression object)
 			{
 				return createXAbstractWhileExpressionAdapter();
@@ -594,6 +599,21 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXForLoopExpressionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XBasicForLoopExpression <em>XBasic For Loop Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XBasicForLoopExpression
+	 * @generated
+	 */
+	public Adapter createXBasicForLoopExpressionAdapter()
 	{
 		return null;
 	}

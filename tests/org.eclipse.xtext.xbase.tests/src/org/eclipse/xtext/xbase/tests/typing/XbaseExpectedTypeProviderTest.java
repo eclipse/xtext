@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests.typing;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -312,6 +313,39 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	@Test public void testForLoopExpression_4_f() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for(double d: <Integer>newArrayList) { d.toString }");
 		assertExpected("java.util.ArrayList<java.lang.Integer>", loop.getForExpression());
+	}
+	
+	@Test public void testBasicForLoopExpression_0() throws Exception {
+		XBasicForLoopExpression loop = (XBasicForLoopExpression) expression("for(var i = 0; i < 10; i = i + 1) {}");
+		for (XExpression initExpression : loop.getInitExpressions()) {
+			assertExpected(null, initExpression);	
+		}
+		assertExpected("boolean", loop.getExpression());
+		for (XExpression updateExpression : loop.getUpdateExpressions()) {
+			assertExpected(null, updateExpression);	
+		}
+	}
+	
+	@Test public void testBasicForLoopExpression_1() throws Exception {
+		XBasicForLoopExpression loop = (XBasicForLoopExpression) expression("for(null; null; null) {}");
+		for (XExpression initExpression : loop.getInitExpressions()) {
+			assertExpected(null, initExpression);	
+		}
+		assertExpected("boolean", loop.getExpression());
+		for (XExpression updateExpression : loop.getUpdateExpressions()) {
+			assertExpected(null, updateExpression);	
+		}
+	}
+	
+	@Test public void testBasicForLoopExpression_2() throws Exception {
+		XBasicForLoopExpression loop = (XBasicForLoopExpression) expression("for(;;) {}");
+		for (XExpression initExpression : loop.getInitExpressions()) {
+			assertExpected(null, initExpression);	
+		}
+		assertExpected(null, loop.getExpression());
+		for (XExpression updateExpression : loop.getUpdateExpressions()) {
+			assertExpected(null, updateExpression);	
+		}
 	}
 
 	@Test public void testWhileExpression_0() throws Exception {

@@ -68,6 +68,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -579,6 +580,19 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			XForLoopExpression loopExpression = (XForLoopExpression) expr;
 			checkInitializationRec(loopExpression.getForExpression(), fields, initializedForSure, initializedMaybe, visited);
 			checkInitializationRec(loopExpression.getEachExpression(), fields, initializedMaybe, Sets.newLinkedHashSet(fields), visited);
+		} else if (expr instanceof XBasicForLoopExpression) {
+			XBasicForLoopExpression loopExpression = (XBasicForLoopExpression) expr;
+			for (XExpression initExpression : loopExpression.getInitExpressions()) {
+				checkInitializationRec(initExpression, fields, initializedForSure, initializedMaybe, visited);
+			}
+			XExpression expression = loopExpression.getExpression();
+			if (expression != null) {
+				checkInitializationRec(expression, fields, initializedForSure, Sets.newLinkedHashSet(fields), visited);
+			}
+			for (XExpression updateExpression : loopExpression.getUpdateExpressions()) {
+				checkInitializationRec(updateExpression, fields, initializedMaybe, Sets.newLinkedHashSet(fields), visited);
+			}
+			checkInitializationRec(loopExpression.getEachExpression(), fields, initializedMaybe, Sets.newLinkedHashSet(fields), visited);
 		} else if (expr instanceof XAbstractWhileExpression) {
 			XAbstractWhileExpression loopExpression = (XAbstractWhileExpression) expr;
 			checkInitializationRec(loopExpression.getPredicate(), fields, initializedForSure, Sets.newLinkedHashSet(fields), visited);
@@ -716,7 +730,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			|| feature == XbasePackage.Literals.XSWITCH_EXPRESSION__SWITCH
 			|| feature == XbasePackage.Literals.XCASE_PART__CASE
 			|| feature == XbasePackage.Literals.XIF_EXPRESSION__IF
-			|| feature == XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE) {
+			|| feature == XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE
+			|| feature == XbasePackage.Literals.XBASIC_FOR_LOOP_EXPRESSION__EXPRESSION) {
 			return true;
 		}
 		if (container instanceof XClosure || logicalContainerProvider.getLogicalContainer(expr) != null) {

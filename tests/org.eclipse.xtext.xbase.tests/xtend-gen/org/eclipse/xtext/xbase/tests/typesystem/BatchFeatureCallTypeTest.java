@@ -45,7 +45,7 @@ public class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
     Assert.assertFalse(_isEmpty);
     int _size = ((List<String>)Conversions.doWrapArray(types)).size();
     int _size_1 = IterableExtensions.size(actualFeatureCalls);
-    Assert.assertEquals(_size, _size_1);
+    Assert.assertEquals(("" + actualFeatureCalls), _size, _size_1);
     final Procedure2<XAbstractFeatureCall,Integer> _function = new Procedure2<XAbstractFeatureCall,Integer>() {
       public void apply(final XAbstractFeatureCall featureCall, final Integer index) {
         final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);

@@ -830,6 +830,282 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''
 		)
 	}
+	
+	@Test def void testBasicForLoop_0() {
+		'''
+			{
+				for (var i = 0; i < 10; i = i + 1) {
+				}
+			}
+		'''.compilesTo(
+		'''
+			for (int i = 0; (i < 10); i = (i + 1)) {
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_toJavaWhile_0() {
+		'''
+			{
+				for (var i = if (true) { 1 }; i < 10; i = i + 1) {
+				}
+			}
+		'''.compilesTo(
+		'''
+			int _xifexpression = (int) 0;
+			if (true) {
+			  _xifexpression = 1;
+			}
+			int i = _xifexpression;
+			boolean _while = (i < 10);
+			while (_while) {
+			  i = (i + 1);
+			  _while = (i < 10);
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_1() {
+		'''
+			{
+				for (;;) {
+				}
+			}
+		'''.compilesTo(
+		'''
+			for (;;) {
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_toJavaWhile_1() {
+		'''
+			{
+				for (for (;;) {};;) {
+				}
+			}
+		'''.compilesTo(
+		'''
+			for (;;) {
+			}
+			boolean _while = true;
+			while (_while) {
+			  _while = true;
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_2() {
+		'''
+			{
+				for (val i = 0; i < 10;) {
+					if (i == 2) {
+						return true;
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			for (final int i = 0; (i < 10);) {
+			  if ((i == 2)) {
+			    return Boolean.valueOf(true);
+			  }
+			}
+			return null;
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_toJavaWhile_2() {
+		'''
+			{
+				for (val i = #[if(true) {1} else {2}]; i.head < 10;) {
+					if (i.head == 2) {
+						return true;
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			int _xifexpression = (int) 0;
+			if (true) {
+			  _xifexpression = 1;
+			} else {
+			  _xifexpression = 2;
+			}
+			final java.util.List<Integer> i = java.util.Collections.<Integer>unmodifiableList(com.google.common.collect.Lists.<Integer>newArrayList(_xifexpression));
+			Integer _head = org.eclipse.xtext.xbase.lib.IterableExtensions.<Integer>head(i);
+			boolean _lessThan = ((_head).intValue() < 10);
+			boolean _while = _lessThan;
+			while (_while) {
+			  Integer _head_1 = org.eclipse.xtext.xbase.lib.IterableExtensions.<Integer>head(i);
+			  boolean _equals = ((_head_1).intValue() == 2);
+			  if (_equals) {
+			    return Boolean.valueOf(true);
+			  }
+			  Integer _head_2 = org.eclipse.xtext.xbase.lib.IterableExtensions.<Integer>head(i);
+			  boolean _lessThan_1 = ((_head_2).intValue() < 10);
+			  _while = _lessThan_1;
+			}
+			return null;
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_3() {
+		'''
+			{
+				for (val i = 0; i < 10;) {
+					return true
+				}
+			}
+		'''.compilesTo(
+		'''
+			for (final int i = 0; (i < 10);) {
+			  return Boolean.valueOf(true);
+			}
+			return null;
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_4() {
+		'''
+			{
+				for (val i = 1;;) {}
+				for (val i = 1;;) {}
+			}
+		'''.compilesTo(
+		'''
+			for (final int i = 1;;) {
+			}
+			for (final int i = 1;;) {
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_5() {
+		'''
+			{
+				{
+					for (val i = 1;;) {}
+				}
+				{
+					for (val i = 1;;) {}
+				}
+			}
+		'''.compilesTo(
+		'''
+			for (final int i = 1;;) {
+			}
+			for (final int i = 1;;) {
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_6() {
+		'''
+			{
+				if (true) {
+					for (;;) {}
+				}
+			}
+		'''.compilesTo(
+		'''
+			if (true) {
+			  for (;;) {
+			  }
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_7() {
+		'''
+			{
+				try {
+					for (;;) {}
+				} finally {
+				}
+			}
+		'''.compilesTo(
+		'''
+			try {
+			  for (;;) {
+			  }
+			} finally {
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_8() {
+		'''
+			{
+				[| for (;;) {} ]
+			}
+		'''.compilesTo(
+		'''
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure0 _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure0() {
+			  public void apply() {
+			    for (;;) {
+			    }
+			  }
+			};
+			return _function;
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_9() {
+		'''
+			{
+				{
+					{
+						{
+							for (;;) {}
+						}
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			for (;;) {
+			}
+		'''
+		)
+	}
+	
+	@Test def void testBasicForLoop_10() {
+		'''
+			{
+				val i = 0
+				for ([| i ].apply, [| i ].apply; i < 10;) {
+					
+				}
+			}
+		'''.compilesTo(
+		'''
+			final int i = 0;
+			for (new org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>() {
+			  public Integer apply() {
+			    return i;
+			  }
+			}.apply(), new org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>() {
+			  public Integer apply() {
+			    return i;
+			  }
+			}.apply(); (i < 10);) {
+			}
+		'''
+		)
+	}
 
 }
 

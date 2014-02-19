@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -266,6 +267,42 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   @Test
   public void testForExpression_04() throws Exception {
     this.resolvesFeatureCallsTo("for(x : null as String[]) x.length", "String", "int");
+  }
+  
+  @Test
+  public void testBasicForExpression_01() {
+    this.resolvesFeatureCallsTo("for(val x = new Object; x instanceof String;) { val y = x }", "Object", "String");
+  }
+  
+  @Test
+  public void testBasicForExpression_02() {
+    this.resolvesFeatureCallsTo("for(val x = new Object; x instanceof String && true;) { val y = x }", "Object", "boolean", "Object");
+  }
+  
+  @Test
+  public void testBasicForExpression_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var Object y = null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for(var x = new Object; x instanceof String; y = x) { ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("y = x");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("x = new Object");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.resolvesFeatureCallsTo(_string, "Object", "Object", "Object", "Object", "String", "Object");
   }
   
   @Test

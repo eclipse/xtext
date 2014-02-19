@@ -1695,4 +1695,565 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testBasicForLoop_0() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("for (var i = 0; i < 10; i = i + 1) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("for (int i = 0; (i < 10); i = (i + 1)) {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_toJavaWhile_0() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("for (var i = if (true) { 1 }; i < 10; i = i + 1) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("if (true) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xifexpression = 1;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("int i = _xifexpression;");
+      _builder_1.newLine();
+      _builder_1.append("boolean _while = (i < 10);");
+      _builder_1.newLine();
+      _builder_1.append("while (_while) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("i = (i + 1);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_while = (i < 10);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("for (;;) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("for (;;) {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_toJavaWhile_1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("for (for (;;) {};;) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("for (;;) {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("boolean _while = true;");
+      _builder_1.newLine();
+      _builder_1.append("while (_while) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_while = true;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("for (val i = 0; i < 10;) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (i == 2) {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("return true;");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("for (final int i = 0; (i < 10);) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if ((i == 2)) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("return Boolean.valueOf(true);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return null;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_toJavaWhile_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("for (val i = #[if(true) {1} else {2}]; i.head < 10;) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (i.head == 2) {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("return true;");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("if (true) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xifexpression = 1;");
+      _builder_1.newLine();
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xifexpression = 2;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("final java.util.List<Integer> i = java.util.Collections.<Integer>unmodifiableList(com.google.common.collect.Lists.<Integer>newArrayList(_xifexpression));");
+      _builder_1.newLine();
+      _builder_1.append("Integer _head = org.eclipse.xtext.xbase.lib.IterableExtensions.<Integer>head(i);");
+      _builder_1.newLine();
+      _builder_1.append("boolean _lessThan = ((_head).intValue() < 10);");
+      _builder_1.newLine();
+      _builder_1.append("boolean _while = _lessThan;");
+      _builder_1.newLine();
+      _builder_1.append("while (_while) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("Integer _head_1 = org.eclipse.xtext.xbase.lib.IterableExtensions.<Integer>head(i);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("boolean _equals = ((_head_1).intValue() == 2);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if (_equals) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("return Boolean.valueOf(true);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("Integer _head_2 = org.eclipse.xtext.xbase.lib.IterableExtensions.<Integer>head(i);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("boolean _lessThan_1 = ((_head_2).intValue() < 10);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_while = _lessThan_1;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return null;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("for (val i = 0; i < 10;) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("for (final int i = 0; (i < 10);) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return Boolean.valueOf(true);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return null;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_4() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("for (val i = 1;;) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("for (val i = 1;;) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("for (final int i = 1;;) {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("for (final int i = 1;;) {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_5() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("for (val i = 1;;) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("for (val i = 1;;) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("for (final int i = 1;;) {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("for (final int i = 1;;) {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_6() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (true) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("for (;;) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("if (true) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("for (;;) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_7() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("try {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("for (;;) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} finally {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("try {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("for (;;) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("} finally {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_8() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("[| for (;;) {} ]");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final org.eclipse.xtext.xbase.lib.Procedures.Procedure0 _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure0() {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("public void apply() {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("for (;;) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("};");
+      _builder_1.newLine();
+      _builder_1.append("return _function;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_9() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("for (;;) {}");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("for (;;) {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBasicForLoop_10() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val i = 0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("for ([| i ].apply, [| i ].apply; i < 10;) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final int i = 0;");
+      _builder_1.newLine();
+      _builder_1.append("for (new org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>() {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("public Integer apply() {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("return i;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}.apply(), new org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>() {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("public Integer apply() {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("return i;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}.apply(); (i < 10);) {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

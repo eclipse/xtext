@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -220,6 +221,13 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * @generated
 	 */
 	private EClass xForLoopExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xBasicForLoopExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1130,6 +1138,56 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getXBasicForLoopExpression()
+	{
+		return xBasicForLoopExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXBasicForLoopExpression_Expression()
+	{
+		return (EReference)xBasicForLoopExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXBasicForLoopExpression_EachExpression()
+	{
+		return (EReference)xBasicForLoopExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXBasicForLoopExpression_InitExpressions()
+	{
+		return (EReference)xBasicForLoopExpressionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXBasicForLoopExpression_UpdateExpressions()
+	{
+		return (EReference)xBasicForLoopExpressionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXAbstractWhileExpression()
 	{
 		return xAbstractWhileExpressionEClass;
@@ -1523,6 +1581,12 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		createEReference(xForLoopExpressionEClass, XFOR_LOOP_EXPRESSION__EACH_EXPRESSION);
 		createEReference(xForLoopExpressionEClass, XFOR_LOOP_EXPRESSION__DECLARED_PARAM);
 
+		xBasicForLoopExpressionEClass = createEClass(XBASIC_FOR_LOOP_EXPRESSION);
+		createEReference(xBasicForLoopExpressionEClass, XBASIC_FOR_LOOP_EXPRESSION__EXPRESSION);
+		createEReference(xBasicForLoopExpressionEClass, XBASIC_FOR_LOOP_EXPRESSION__EACH_EXPRESSION);
+		createEReference(xBasicForLoopExpressionEClass, XBASIC_FOR_LOOP_EXPRESSION__INIT_EXPRESSIONS);
+		createEReference(xBasicForLoopExpressionEClass, XBASIC_FOR_LOOP_EXPRESSION__UPDATE_EXPRESSIONS);
+
 		xAbstractWhileExpressionEClass = createEClass(XABSTRACT_WHILE_EXPRESSION);
 		createEReference(xAbstractWhileExpressionEClass, XABSTRACT_WHILE_EXPRESSION__PREDICATE);
 		createEReference(xAbstractWhileExpressionEClass, XABSTRACT_WHILE_EXPRESSION__BODY);
@@ -1614,6 +1678,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xBinaryOperationEClass.getESuperTypes().add(this.getXAbstractFeatureCall());
 		xUnaryOperationEClass.getESuperTypes().add(this.getXAbstractFeatureCall());
 		xForLoopExpressionEClass.getESuperTypes().add(this.getXExpression());
+		xBasicForLoopExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xAbstractWhileExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xDoWhileExpressionEClass.getESuperTypes().add(this.getXAbstractWhileExpression());
 		xWhileExpressionEClass.getESuperTypes().add(this.getXAbstractWhileExpression());
@@ -1742,6 +1807,12 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEReference(getXForLoopExpression_ForExpression(), this.getXExpression(), null, "forExpression", null, 0, 1, XForLoopExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXForLoopExpression_EachExpression(), this.getXExpression(), null, "eachExpression", null, 0, 1, XForLoopExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXForLoopExpression_DeclaredParam(), theTypesPackage.getJvmFormalParameter(), null, "declaredParam", null, 0, 1, XForLoopExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xBasicForLoopExpressionEClass, XBasicForLoopExpression.class, "XBasicForLoopExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXBasicForLoopExpression_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XBasicForLoopExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXBasicForLoopExpression_EachExpression(), this.getXExpression(), null, "eachExpression", null, 0, 1, XBasicForLoopExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXBasicForLoopExpression_InitExpressions(), this.getXExpression(), null, "initExpressions", null, 0, -1, XBasicForLoopExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXBasicForLoopExpression_UpdateExpressions(), this.getXExpression(), null, "updateExpressions", null, 0, -1, XBasicForLoopExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xAbstractWhileExpressionEClass, XAbstractWhileExpression.class, "XAbstractWhileExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXAbstractWhileExpression_Predicate(), this.getXExpression(), null, "predicate", null, 0, 1, XAbstractWhileExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

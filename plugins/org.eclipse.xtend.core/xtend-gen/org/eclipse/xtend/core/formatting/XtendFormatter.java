@@ -40,6 +40,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
@@ -1024,6 +1025,9 @@ public class XtendFormatter extends XbaseFormatter2 {
       return;
     } else if (annotationType instanceof JvmWildcardTypeReference) {
       _format((JvmWildcardTypeReference)annotationType, format);
+      return;
+    } else if (annotationType instanceof XBasicForLoopExpression) {
+      _format((XBasicForLoopExpression)annotationType, format);
       return;
     } else if (annotationType instanceof XBlockExpression) {
       _format((XBlockExpression)annotationType, format);

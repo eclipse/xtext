@@ -239,7 +239,7 @@ class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
 		val resolvedTypes = typeResolver.resolveTypes(featureCalls.head)
 		val actualFeatureCalls = featureCalls.filterTypeLiteralsAndPackageFragments
 		assertFalse(actualFeatureCalls.empty)
-		assertEquals(types.size, actualFeatureCalls.size)
+		assertEquals("" + actualFeatureCalls, types.size, actualFeatureCalls.size)
 		actualFeatureCalls.forEach [ featureCall, index |
 			val type = resolvedTypes.getActualType(featureCall)
 			assertEquals('''failed for feature call at «index»''', types.get(index), type.simpleName); 

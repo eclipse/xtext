@@ -49,6 +49,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ReflectionUtil;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -232,7 +233,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	      return _doEvaluate((XConstructorCall)expression, context, indicator);
 	    } else if (expression instanceof XForLoopExpression) {
 	      return _doEvaluate((XForLoopExpression)expression, context, indicator);
-	    } else if (expression instanceof XIfExpression) {
+	    } else if (expression instanceof XBasicForLoopExpression) {
+		  return _doEvaluate((XBasicForLoopExpression)expression, context, indicator);
+		} else if (expression instanceof XIfExpression) {
 	      return _doEvaluate((XIfExpression)expression, context, indicator);
 	    } else if (expression instanceof XInstanceOfExpression) {
 	      return _doEvaluate((XInstanceOfExpression)expression, context, indicator);
@@ -681,6 +684,23 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			Object next = iter.next();
 			forkedContext.assignValue(paramName, next);
 			internalEvaluate(forLoop.getEachExpression(), forkedContext, indicator);
+		}
+		return null;
+	}
+	
+	protected Object _doEvaluate(XBasicForLoopExpression forLoop, IEvaluationContext context, CancelIndicator indicator) {
+		IEvaluationContext forkedContext = context.fork();
+		for (XExpression initExpression : forLoop.getInitExpressions()) {
+			internalEvaluate(initExpression, forkedContext, indicator);
+		}
+		XExpression expression = forLoop.getExpression();
+		Object condition = expression == null ? Boolean.TRUE : internalEvaluate(expression, forkedContext, indicator);
+		while (Boolean.TRUE.equals(condition)) {
+			internalEvaluate(forLoop.getEachExpression(), forkedContext, indicator);
+			for (XExpression updateExpression : forLoop.getUpdateExpressions()) {
+				internalEvaluate(updateExpression, forkedContext, indicator);
+			}
+			condition = expression == null ? Boolean.TRUE : internalEvaluate(expression, forkedContext, indicator);
 		}
 		return null;
 	}

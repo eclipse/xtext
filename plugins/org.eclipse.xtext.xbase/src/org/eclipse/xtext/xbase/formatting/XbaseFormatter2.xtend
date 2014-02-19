@@ -18,6 +18,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XAssignment
+import org.eclipse.xtext.xbase.XBasicForLoopExpression
 import org.eclipse.xtext.xbase.XBinaryOperation
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XCatchClause
@@ -43,6 +44,7 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
+import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 class XbaseFormatter2 extends AbstractFormatter {
@@ -600,6 +602,51 @@ class XbaseFormatter2 extends AbstractFormatter {
 			format += each.append[decreaseIndentation]
 		}
 		expr.forExpression.format(format)
+		expr.eachExpression.format(format)
+	}
+	
+	def protected dispatch void format(XBasicForLoopExpression expr, FormattableDocument format) {
+		var INode previousFormattedNode = expr.nodeForKeyword("for") => [format += append[oneSpace]]
+		
+		val initExpressions = expr.initExpressions
+		if (!initExpressions.empty) {
+			for (initExpression : initExpressions) {
+				if (initExpression == expr.initExpressions.head) {
+					previousFormattedNode = initExpression.nodeForEObject => [format += prepend[noSpace] format += append[noSpace]]
+				} else {
+					previousFormattedNode = initExpression.nodeForEObject => [format += prepend[oneSpace] format += append[noSpace]]
+				}
+				initExpression.format(format)
+			}
+		} else {
+			previousFormattedNode = previousFormattedNode.immediatelyFollowingKeyword("(") => [format += append[noSpace]]
+		}
+		
+		val expression = expr.expression
+		if (expression != null) {
+			previousFormattedNode = expression.nodeForEObject => [format += prepend[oneSpace] format += append[noSpace]]
+			expression.format(format)
+		} else {
+			previousFormattedNode = previousFormattedNode.immediatelyFollowingKeyword(";") => [format += append[noSpace]]
+		}
+		
+		val updateExpressions = expr.updateExpressions
+		if (!updateExpressions.empty) {
+			for (updateExpression : updateExpressions) {
+				previousFormattedNode = updateExpression.nodeForEObject => [format += prepend[oneSpace] format += append[noSpace]]
+				updateExpression.format(format)
+			}
+		} else {
+			previousFormattedNode = previousFormattedNode.immediatelyFollowingKeyword(";") => [format += append[noSpace]]
+		}
+		
+		val each = expr.eachExpression.nodeForEObject
+		if (expr.eachExpression instanceof XBlockExpression) {
+			format += each.prepend[cfg(bracesInNewLine)]
+		} else {
+			format += each.prepend[newLine increaseIndentation]
+			format += each.append[decreaseIndentation]
+		}
 		expr.eachExpression.format(format)
 	}
 
