@@ -105,7 +105,9 @@ Workflow {
 				removeBacktrackingGuards = true
 				lookaheadThreshold = '5'
 				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
-				options = auto-inject {}
+				options = auto-inject {
+					classSplitting = true
+				}
 			}
 			fragment = refactoring.RefactorElementNameFragment {
 				useJdtRefactoring = true
