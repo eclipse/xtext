@@ -42,9 +42,12 @@ public class InternalBuilderTest {
 
 		try {
 			clearJdtIndex();
+			setAutoBuild(true);
 			fullBuild();
 			waitForAutoBuild();
+			waitForJobManagerIsIdle();
 		} finally {
+			setAutoBuild(false);
 			clearJdtIndex();
 			reportMemoryState("Finished build.");
 		}
@@ -70,10 +73,27 @@ public class InternalBuilderTest {
 				errors.isEmpty());
 	}
 
+	private void waitForJobManagerIsIdle() {
+		System.out.println("Waiting for JobManager");
+		boolean timeout = false;
+		long startTime = System.currentTimeMillis();
+		while (Job.getJobManager().isIdle() || timeout) {
+			System.out.println("Job '" + Job.getJobManager().currentJob().getName() + "' is running");
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} finally {
+				timeout = true;
+			}
+			timeout = (System.currentTimeMillis() - startTime) > 20000;
+		}
+	}
+
 	private void clearJdtIndex() throws FileNotFoundException {
 		File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
 		boolean success = Files.sweepFolder(jdtMetadata);
-		System.out.println("Clean up index " + jdtMetadata.getAbsolutePath() + ": " + (success ? "success" : "fail"));
+		System.out.println("Cleaned up index " + jdtMetadata.getAbsolutePath() + ": " + (success ? "success" : "fail"));
 	}
 
 	private void reportMemoryState(String reportName) {
@@ -98,6 +118,7 @@ public class InternalBuilderTest {
 	}
 
 	public static void fullBuild() throws CoreException {
+		System.out.println("Starting full build");
 		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
 		boolean wasInterrupted = false;
 		do {
@@ -113,6 +134,8 @@ public class InternalBuilderTest {
 	}
 
 	public static void waitForAutoBuild() {
+		System.out.println("Waiting for auto-build");
+
 		boolean wasInterrupted = false;
 		do {
 			try {
@@ -127,6 +150,8 @@ public class InternalBuilderTest {
 	}
 
 	public static void setAutoBuild(boolean b) {
+		System.out.println("Setting auto-build to " + b);
+
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		try {
 			IWorkspaceDescription desc = workspace.getDescription();
