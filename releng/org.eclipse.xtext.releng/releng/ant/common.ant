@@ -55,8 +55,7 @@
 		<sequential>
 			<echo message=" " />
 			<java fork="true" dir="${buckminster.home}" logError="true"  
-				classname="org.eclipse.core.launcher.Main" failonerror="true"
-				jvm="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/java">
+				classname="org.eclipse.core.launcher.Main" failonerror="true">
 				<classpath>
 					<fileset dir="${buckminster.home}/plugins">
 						<include name="org.eclipse.equinox.launcher_*.jar" />
