@@ -199,6 +199,15 @@ public interface XbaseFactory extends EFactory
 	XForLoopExpression createXForLoopExpression();
 
 	/**
+	 * Returns a new object of class '<em>XBasic For Loop Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XBasic For Loop Expression</em>'.
+	 * @generated
+	 */
+	XBasicForLoopExpression createXBasicForLoopExpression();
+
+	/**
 	 * Returns a new object of class '<em>XDo While Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

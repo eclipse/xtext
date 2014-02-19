@@ -691,6 +691,102 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   }
   
   @Test
+  public void formatBasicFor() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("for (var i = 1; i < 10; i = i + 1)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(i)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("for  (  var    i  =   1  ;   i   <   10;   i    =  i    +  1  )  println(i)");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatBasicFor2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("for (;;) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return true");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("for  (      ;     ;      )  {     return     true }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatBasicFor3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("for (val x = 1, val y = 2;;) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return x + y");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("for  (    val    x   = 1    ,   val   y     =   2 ;     ;      )  {     return     x  +  y }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatBasicFor4() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = 1");
+    _builder.newLine();
+    _builder.append("for (; x < 10;)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(x)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val x = 1");
+    _builder_1.newLine();
+    _builder_1.append("for  (       ;     x     <    10      ;      )       println(x)");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatBasicFor5() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = 1");
+    _builder.newLine();
+    _builder.append("for (;; x = x + 1, x = x + 2)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(x)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("val x = 1");
+    _builder_1.newLine();
+    _builder_1.append("for  (       ;     ;     x     =      x \t+      1  ,  x  =   x   +    2 )          println(x)");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatBasicFor6() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("for (val x = 1;; x = x + 1, x = x + 2)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("println(x)");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("for  (\t\t\tval \t\tx \t\t= \t\t1\t\t;     ;     x     =      x \t+      1  ,  x  =   x   +    2 )          println(x)");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatWhile11() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {

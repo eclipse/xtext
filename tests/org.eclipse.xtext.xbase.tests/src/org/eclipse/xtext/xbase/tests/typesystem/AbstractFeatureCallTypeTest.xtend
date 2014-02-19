@@ -248,6 +248,14 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 	@Test def void testForExpression_04() throws Exception {
 		"for(x : null as String[]) x.length".resolvesFeatureCallsTo("String", "int")
 	}
+	
+	@Test def void testBasicForExpression_01() {
+		"for(val x = new Object; x instanceof String;) { val y = x }".resolvesFeatureCallsTo("Object", "String")
+	}
+	
+	@Test def void testBasicForExpression_02() {
+		"for(val x = new Object; x instanceof String && true;) { val y = x }".resolvesFeatureCallsTo("Object", "boolean", "Object")
+	}
 
 	@Test def void testMethodTypeParamInference_01() throws Exception {
 		"new java.util.ArrayList<String>().findFirst(e|e == 'foo')".resolvesFeatureCallsTo("String", "String", "boolean")

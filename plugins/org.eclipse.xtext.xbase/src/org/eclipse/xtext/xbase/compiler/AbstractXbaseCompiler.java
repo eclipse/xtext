@@ -14,11 +14,9 @@ import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -35,7 +33,6 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -241,20 +238,11 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	protected boolean canCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
-		TreeIterator<EObject> iterator = EcoreUtil2.eAll(expression);
-		while (iterator.hasNext()) {
-			EObject next = iterator.next();
-			if (next instanceof XClosure) {
-				iterator.prune();
-			} else if (next instanceof XExpression) {
-				if (!internalCanCompileToJavaExpression((XExpression) next, appendable))
-					return false;
-			}
-		}
-		return true;
+		return internalCanCompileToJavaExpression(expression, appendable);
 	}
+	
 	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
-		return getReferenceName(expression, appendable) != null || !isVariableDeclarationRequired(expression, appendable);
+		return true;
 	}
 	
 	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, @Nullable JvmTypeReference expectedReturnType, @Nullable Set<JvmTypeReference> declaredExceptions) {

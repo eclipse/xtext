@@ -1200,6 +1200,61 @@ public interface XbasePackage extends EPackage
 	int XFOR_LOOP_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XBasicForLoopExpressionImpl <em>XBasic For Loop Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XBasicForLoopExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXBasicForLoopExpression()
+	 * @generated
+	 */
+	int XBASIC_FOR_LOOP_EXPRESSION = 22;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBASIC_FOR_LOOP_EXPRESSION__EXPRESSION = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Each Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBASIC_FOR_LOOP_EXPRESSION__EACH_EXPRESSION = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Init Expressions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBASIC_FOR_LOOP_EXPRESSION__INIT_EXPRESSIONS = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Update Expressions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBASIC_FOR_LOOP_EXPRESSION__UPDATE_EXPRESSIONS = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>XBasic For Loop Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBASIC_FOR_LOOP_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 4;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XAbstractWhileExpressionImpl <em>XAbstract While Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1207,7 +1262,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAbstractWhileExpression()
 	 * @generated
 	 */
-	int XABSTRACT_WHILE_EXPRESSION = 22;
+	int XABSTRACT_WHILE_EXPRESSION = 23;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -1244,7 +1299,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXDoWhileExpression()
 	 * @generated
 	 */
-	int XDO_WHILE_EXPRESSION = 23;
+	int XDO_WHILE_EXPRESSION = 24;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -1281,7 +1336,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXWhileExpression()
 	 * @generated
 	 */
-	int XWHILE_EXPRESSION = 24;
+	int XWHILE_EXPRESSION = 25;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -1318,7 +1373,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXTypeLiteral()
 	 * @generated
 	 */
-	int XTYPE_LITERAL = 25;
+	int XTYPE_LITERAL = 26;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1355,7 +1410,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXInstanceOfExpression()
 	 * @generated
 	 */
-	int XINSTANCE_OF_EXPRESSION = 26;
+	int XINSTANCE_OF_EXPRESSION = 27;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1392,7 +1447,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXThrowExpression()
 	 * @generated
 	 */
-	int XTHROW_EXPRESSION = 27;
+	int XTHROW_EXPRESSION = 28;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1420,7 +1475,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXTryCatchFinallyExpression()
 	 * @generated
 	 */
-	int XTRY_CATCH_FINALLY_EXPRESSION = 28;
+	int XTRY_CATCH_FINALLY_EXPRESSION = 29;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1466,7 +1521,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCatchClause()
 	 * @generated
 	 */
-	int XCATCH_CLAUSE = 29;
+	int XCATCH_CLAUSE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1503,7 +1558,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAssignment()
 	 * @generated
 	 */
-	int XASSIGNMENT = 30;
+	int XASSIGNMENT = 31;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -1612,7 +1667,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXReturnExpression()
 	 * @generated
 	 */
-	int XRETURN_EXPRESSION = 31;
+	int XRETURN_EXPRESSION = 32;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -2446,6 +2501,60 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXForLoopExpression_DeclaredParam();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XBasicForLoopExpression <em>XBasic For Loop Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XBasic For Loop Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XBasicForLoopExpression
+	 * @generated
+	 */
+	EClass getXBasicForLoopExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XBasicForLoopExpression#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XBasicForLoopExpression#getExpression()
+	 * @see #getXBasicForLoopExpression()
+	 * @generated
+	 */
+	EReference getXBasicForLoopExpression_Expression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XBasicForLoopExpression#getEachExpression <em>Each Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Each Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XBasicForLoopExpression#getEachExpression()
+	 * @see #getXBasicForLoopExpression()
+	 * @generated
+	 */
+	EReference getXBasicForLoopExpression_EachExpression();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XBasicForLoopExpression#getInitExpressions <em>Init Expressions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Init Expressions</em>'.
+	 * @see org.eclipse.xtext.xbase.XBasicForLoopExpression#getInitExpressions()
+	 * @see #getXBasicForLoopExpression()
+	 * @generated
+	 */
+	EReference getXBasicForLoopExpression_InitExpressions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XBasicForLoopExpression#getUpdateExpressions <em>Update Expressions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Update Expressions</em>'.
+	 * @see org.eclipse.xtext.xbase.XBasicForLoopExpression#getUpdateExpressions()
+	 * @see #getXBasicForLoopExpression()
+	 * @generated
+	 */
+	EReference getXBasicForLoopExpression_UpdateExpressions();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XAbstractWhileExpression <em>XAbstract While Expression</em>}'.
@@ -3408,6 +3517,48 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XFOR_LOOP_EXPRESSION__DECLARED_PARAM = eINSTANCE.getXForLoopExpression_DeclaredParam();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XBasicForLoopExpressionImpl <em>XBasic For Loop Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XBasicForLoopExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXBasicForLoopExpression()
+		 * @generated
+		 */
+		EClass XBASIC_FOR_LOOP_EXPRESSION = eINSTANCE.getXBasicForLoopExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XBASIC_FOR_LOOP_EXPRESSION__EXPRESSION = eINSTANCE.getXBasicForLoopExpression_Expression();
+
+		/**
+		 * The meta object literal for the '<em><b>Each Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XBASIC_FOR_LOOP_EXPRESSION__EACH_EXPRESSION = eINSTANCE.getXBasicForLoopExpression_EachExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Init Expressions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XBASIC_FOR_LOOP_EXPRESSION__INIT_EXPRESSIONS = eINSTANCE.getXBasicForLoopExpression_InitExpressions();
+
+		/**
+		 * The meta object literal for the '<em><b>Update Expressions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XBASIC_FOR_LOOP_EXPRESSION__UPDATE_EXPRESSIONS = eINSTANCE.getXBasicForLoopExpression_UpdateExpressions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XAbstractWhileExpressionImpl <em>XAbstract While Expression</em>}' class.

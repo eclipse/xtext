@@ -191,6 +191,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaredParam" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmFormalParameter"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XBasicForLoopExpression" eSuperTypes="#//XExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eachExpression" eType="#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initExpressions" upperBound="-1"
+        eType="#//XExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="updateExpressions" upperBound="-1"
+        eType="#//XExpression" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XAbstractWhileExpression" abstract="true"
       eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" eType="#//XExpression"

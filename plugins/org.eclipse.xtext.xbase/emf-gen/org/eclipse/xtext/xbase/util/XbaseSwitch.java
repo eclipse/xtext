@@ -260,6 +260,14 @@ public class XbaseSwitch<T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XbasePackage.XBASIC_FOR_LOOP_EXPRESSION:
+			{
+				XBasicForLoopExpression xBasicForLoopExpression = (XBasicForLoopExpression)theEObject;
+				T result = caseXBasicForLoopExpression(xBasicForLoopExpression);
+				if (result == null) result = caseXExpression(xBasicForLoopExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case XbasePackage.XABSTRACT_WHILE_EXPRESSION:
 			{
 				XAbstractWhileExpression xAbstractWhileExpression = (XAbstractWhileExpression)theEObject;
@@ -694,6 +702,22 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseXForLoopExpression(XForLoopExpression object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XBasic For Loop Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XBasic For Loop Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXBasicForLoopExpression(XBasicForLoopExpression object)
 	{
 		return null;
 	}
