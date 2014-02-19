@@ -235,6 +235,10 @@ public class OnTheFlyJavaCompiler {
 	public void addClassPath(String classpath) {
 		this.classpath.add(classpath);
 	}
+	
+	public void setTemporaryFolder(TemporaryFolder temporaryFolder) {
+		this.temporaryFolder = temporaryFolder;
+	}
 
 	public void addClassPathOfClass(Class<?> clazz) {
 		final String classNameAsPath = "/"
