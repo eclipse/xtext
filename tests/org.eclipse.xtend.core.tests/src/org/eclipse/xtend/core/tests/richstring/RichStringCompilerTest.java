@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.richstring;
 
+import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -19,6 +21,9 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 	
 	@Inject
 	private RichStringCompilerTestHelper testHelper;
+	
+	@Rule
+	@Inject public TemporaryFolder tempFolder;
 	
 	@Before
 	public void setUp() throws Exception {

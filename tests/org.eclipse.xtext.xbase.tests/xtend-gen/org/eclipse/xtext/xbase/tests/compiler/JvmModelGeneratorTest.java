@@ -45,6 +45,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.internal.TemporaryFolder;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
@@ -64,6 +65,7 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjectorProvider;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -71,6 +73,10 @@ import org.junit.runner.RunWith;
 @InjectWith(XbaseWithLogicalContainerInjectorProvider.class)
 @SuppressWarnings("all")
 public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
+  @Rule
+  @Inject
+  public TemporaryFolder temporaryFolder;
+  
   @Inject
   @Extension
   private JvmTypesBuilder builder;

@@ -38,11 +38,15 @@ import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjecto
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.internal.TemporaryFolder
+import org.junit.Rule
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseWithLogicalContainerInjectorProvider))
 class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
+	@Rule
+	@Inject public TemporaryFolder temporaryFolder
 	@Inject extension JvmTypesBuilder builder
 	@Inject TypeReferences references
 	@Inject ValidationTestHelper helper
@@ -55,10 +59,10 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	def void setUp() {
 		javaCompiler.clearClassPath();
 		javaCompiler.addClassPathOfClass(getClass());
-		javaCompiler.addClassPathOfClass(typeof(AbstractXbaseEvaluationTest));
-		javaCompiler.addClassPathOfClass(typeof(Functions));
-		javaCompiler.addClassPathOfClass(typeof(Provider));
-		javaCompiler.addClassPathOfClass(typeof(Supplier));
+		javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest)
+		javaCompiler.addClassPathOfClass(Functions)
+		javaCompiler.addClassPathOfClass(Provider)
+		javaCompiler.addClassPathOfClass(Supplier)
 	} 
 	
 	@Test
