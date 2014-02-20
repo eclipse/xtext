@@ -2073,6 +2073,36 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				" }");
 	}
 	
+	@Test public void testSwitchExpressionOverEnum_3() throws Exception {
+		assertEvaluatesTo(2, 
+				"{\n" +
+					"val java.lang.Thread.State x = null\n" +
+					"var result = 1\n" +
+					"switch x { case NEW: { result = 3 } default: { result = 2 } }\n" +
+					"result\n" +
+				" }");
+	}
+	
+	@Test public void testSwitchExpressionOverEnum_4() throws Exception {
+		assertEvaluatesTo(3, 
+				"{\n" +
+					"val java.lang.Thread.State x = Thread.State.NEW\n" +
+					"var result = 1\n" +
+					"switch x { case NEW: { result = 3 } default: { result = 2 } }\n" +
+					"result\n" +
+				" }");
+	}
+	
+	@Test public void testSwitchExpressionOverEnum_5() throws Exception {
+		assertEvaluatesTo(2, 
+				"{\n" +
+					"val java.lang.Thread.State x = Thread.State.RUNNABLE\n" +
+					"var result = 1\n" +
+					"switch x { case NEW: { result = 3 } default: { result = 2 } }\n" +
+					"result\n" +
+				" }");
+	}
+	
 	@Test public void testSwitchExpressionOverInteger() throws Exception {
 		assertEvaluatesTo(1, 
 				"{\n" +
@@ -2089,6 +2119,36 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 					"val Integer x = Integer.valueOf('3')\n" +
 					"var result = 1\n" +
 					"switch x { case 3: { result = 2 } }\n" +
+					"result\n" +
+				" }");
+	}
+	
+	@Test public void testSwitchExpressionOverInteger_3() throws Exception {
+		assertEvaluatesTo(2, 
+				"{\n" +
+					"val Integer x = null\n" +
+					"var result = 1\n" +
+					"switch x { case 3: { result = 3 } default: { result = 2 } }\n" +
+					"result\n" +
+				" }");
+	}
+	
+	@Test public void testSwitchExpressionOveInteger_4() throws Exception {
+		assertEvaluatesTo(3, 
+				"{\n" +
+					"val Integer x = Integer.valueOf('3')\n" +
+					"var result = 1\n" +
+					"switch x { case 3: { result = 3 } default: { result = 2 } }\n" +
+					"result\n" +
+				" }");
+	}
+	
+	@Test public void testSwitchExpressionOveInteger_5() throws Exception {
+		assertEvaluatesTo(2, 
+				"{\n" +
+					"val Integer x = Integer.valueOf('4')\n" +
+					"var result = 1\n" +
+					"switch x { case 3: { result = 3 } default: { result = 2 } }\n" +
 					"result\n" +
 				" }");
 	}

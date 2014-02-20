@@ -1065,6 +1065,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.decreaseIndentation().newLine().append("}");
 		if (needNullCheck) {
 			b.decreaseIndentation().newLine().append("}");
+			if (expr.getDefault() != null) {
+				b.append(" else {").increaseIndentation();
+
+				ILocationData location = getLocationOfDefault(expr);
+				ITreeAppendable defaultAppendable = location != null ? b.trace(location) : b;
+				executeThenPart(expr, switchResultName, expr.getDefault(), defaultAppendable, isReferenced);
+				
+				b.decreaseIndentation().newLine().append("}");
+			}
 		}
 	}
 

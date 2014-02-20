@@ -1993,6 +1993,91 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def testSwitchWithConstantExpressions_13() {
+		'''
+		class Foo {
+			def foo() {
+				switch x : Integer.valueOf('1') {
+					case 1:
+						if (x == 2) {
+							return true
+						}
+					default:
+						if (x == 2) {
+							return true
+						}
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo() {
+		    Integer _valueOf = Integer.valueOf("1");
+		    final Integer x = _valueOf;
+		    if (x != null) {
+		      switch (x) {
+		        case 1:
+		          if (((x).intValue() == 2)) {
+		            return true;
+		          }
+		          break;
+		        default:
+		          if (((x).intValue() == 2)) {
+		            return true;
+		          }
+		          break;
+		      }
+		    } else {
+		      if (((x).intValue() == 2)) {
+		        return true;
+		      }
+		    }
+		    return false;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithConstantExpressions_14() {
+		'''
+		class Foo {
+			def foo() {
+				switch x : Thread.State.NEW {
+					case NEW: true
+					default: false
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo() {
+		    boolean _switchResult = false;
+		    final Thread.State x = Thread.State.NEW;
+		    if (x != null) {
+		      switch (x) {
+		        case NEW:
+		          _switchResult = true;
+		          break;
+		        default:
+		          _switchResult = false;
+		          break;
+		      }
+		    } else {
+		      _switchResult = false;
+		    }
+		    return _switchResult;
+		  }
+		}
+		''')
+	}
+	
+	
+	@Test
 	def testTryCatch() { 
 		assertCompilesTo('''
 			package foo
