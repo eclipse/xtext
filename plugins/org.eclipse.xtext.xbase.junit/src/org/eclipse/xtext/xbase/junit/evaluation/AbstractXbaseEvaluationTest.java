@@ -638,6 +638,10 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testReturnExpression_09() throws Exception {
 		assertEvaluatesTo(null, "{ return null }");
 	}
+	
+	@Test public void testReturnExpression_10() throws Exception {
+		assertEvaluatesTo(null, "{ { println }; null }");
+	}
 
 	@Test public void testUnaryOperator_00() throws Exception {
 		assertEvaluatesTo(new Integer(-19),"-19");
