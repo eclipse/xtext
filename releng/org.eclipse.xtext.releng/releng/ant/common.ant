@@ -32,6 +32,8 @@
 	<property name="buckminster.configuration" value="${build.root}/configuration" />
 	<property name="buckminster.target.platform" value="${build.root}/${target.platform}" />
 	<property name="buckminster.loglevel" value="INFO" />
+	<property name="parent.folder" location="${ant.file}/.." />
+	<property name="debug.options.file" location="${parent.folder}/debug.options" />
 
 	<property name="director.install.dest" location="${user.home}" />
 	<property name="director.dir" location="${director.install.dest}/director" />
@@ -68,6 +70,7 @@
 				<arg line='--properties "@{propertiesfile}"' />
 				<arg line='-S "@{commandsfile}"' />
 				<arg line='-L ${buckminster.loglevel}' />
+				<arg line='-debug ${debug.options.file}' />
 				<sysproperty key="checkout.location" value="${checkout.location}" />
 				<sysproperty key="WITH.MWE2" value="${WITH.MWE2}" />
 				<sysproperty key="SWTBOT" value="${SWTBOT}" />
