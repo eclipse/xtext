@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -214,16 +215,20 @@ public class ValidationTestHelper {
 	 * @since 2.4
 	 */
 	protected StringBuilder getIssuesAsString(final EObject model, final Iterable<Issue> issues, StringBuilder result) {
-		for(Issue issue: issues) {
-			EObject eObject = model.eResource().getResourceSet().getEObject(issue.getUriToProblem(), true);
-			result.append(issue.getSeverity())
-				.append(" (")
-				.append(issue.getCode()) 
-				.append(") '")
-				.append(issue.getMessage()) 
-				.append("' on ")
-				.append(eObject.eClass().getName())
-				.append("\n");
+		for (Issue issue : issues) {
+			URI uri = issue.getUriToProblem();
+			result.append(issue.getSeverity());
+			result.append(" (");
+			result.append(issue.getCode());
+			result.append(") '");
+			result.append(issue.getMessage());
+			result.append("'");
+			if (uri != null) {
+				EObject eObject = model.eResource().getResourceSet().getEObject(uri, true);
+				result.append(" on ");
+				result.append(eObject.eClass().getName());
+			}
+			result.append("\n");
 		}
 		return result;
 	}
