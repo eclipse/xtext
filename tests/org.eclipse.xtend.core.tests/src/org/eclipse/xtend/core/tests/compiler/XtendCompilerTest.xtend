@@ -1731,10 +1731,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		    };
 		    Integer _apply = _function.apply();
 		    final Integer x = _apply;
-		    switch (x) {
-		      case 1:
-		        _switchResult = true;
-		        break;
+		    if (x != null) {
+		      switch (x) {
+		        case 1:
+		          _switchResult = true;
+		          break;
+		      }
 		    }
 		    return _switchResult;
 		  }
@@ -1800,18 +1802,20 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		  public boolean foo() {
 		    boolean _switchResult = false;
 		    final Thread.State x = Thread.State.NEW;
-		    switch (x) {
-		      case NEW:
-		        _switchResult = true;
-		        break;
-		      case RUNNABLE:
-		        _switchResult = false;
-		        break;
-		      case BLOCKED:
-		        _switchResult = true;
-		        break;
-		      default:
-		        break;
+		    if (x != null) {
+		      switch (x) {
+		        case NEW:
+		          _switchResult = true;
+		          break;
+		        case RUNNABLE:
+		          _switchResult = false;
+		          break;
+		        case BLOCKED:
+		          _switchResult = true;
+		          break;
+		        default:
+		          break;
+		      }
 		    }
 		    return _switchResult;
 		  }

@@ -1015,11 +1015,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaSwitchStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
 		final LightweightTypeReference switchType = batchTypeResolver.resolveTypes(expr).getActualType(expr.getSwitch());
 		final boolean enumeration = switchType.isSubtypeOf(Enum.class);
+		final boolean needNullCheck = enumeration || switchType.isWrapper();
 		
 		final String switchResultName = declareSwitchResultVariable(expr, b, isReferenced);
 		internalToJavaStatement(expr.getSwitch(), b, true);
 		final String variableName = declareLocalVariable(expr, b);
 		
+		if (needNullCheck) {
+			b.newLine().append("if (").append(variableName).append(" != null) {").increaseIndentation();
+		}
 		b.newLine().append("switch (").append(variableName).append(") {").increaseIndentation();
 		for (XCasePart casePart : expr.getCases()) {
 			ITreeAppendable caseAppendable = b.trace(casePart, true);
@@ -1059,6 +1063,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			defaultAppendable.decreaseIndentation();
 		}
 		b.decreaseIndentation().newLine().append("}");
+		if (needNullCheck) {
+			b.decreaseIndentation().newLine().append("}");
+		}
 	}
 
 	protected String declareLocalVariable(XSwitchExpression expr, ITreeAppendable b) {

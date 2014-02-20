@@ -2053,6 +2053,46 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"{ val int[][] myArray = #[#[1,2]] switch it : myArray as Object { int[][] : it.get(0).get(0) default : 42 }}");
 	}
 	
+	@Test public void testSwitchExpressionOverEnum() throws Exception {
+		assertEvaluatesTo(1, 
+				"{\n" +
+					"val java.lang.Thread.State x = null\n" +
+					"var result = 1\n" +
+					"switch x { case NEW: { result = 2 } }\n" +
+					"result\n" +
+				" }");
+	}
+	
+	@Test public void testSwitchExpressionOverEnum_2() throws Exception {
+		assertEvaluatesTo(2, 
+				"{\n" +
+					"val java.lang.Thread.State x = Thread.State.NEW\n" +
+					"var result = 1\n" +
+					"switch x { case NEW: { result = 2 } }\n" +
+					"result\n" +
+				" }");
+	}
+	
+	@Test public void testSwitchExpressionOverInteger() throws Exception {
+		assertEvaluatesTo(1, 
+				"{\n" +
+					"val Integer x = null\n" +
+					"var result = 1\n" +
+					"switch x { case 3: { result = 2 } }\n" +
+					"result\n" +
+				" }");
+	}
+	
+	@Test public void testSwitchExpressionOveInteger_2() throws Exception {
+		assertEvaluatesTo(2, 
+				"{\n" +
+					"val Integer x = Integer.valueOf('3')\n" +
+					"var result = 1\n" +
+					"switch x { case 3: { result = 2 } }\n" +
+					"result\n" +
+				" }");
+	}
+	
 	@Test public void testCastedExpression_01() throws Exception {
 		assertEvaluatesTo("literal", "'literal' as String");
 	}
