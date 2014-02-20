@@ -24,8 +24,13 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.jdt.internal.core.search.indexing.IndexManager;
+import org.eclipse.jdt.internal.corext.util.Strings;
+import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtext.util.Files;
 import org.junit.Test;
@@ -38,16 +43,34 @@ public class InternalBuilderTest {
 	@Test
 	public void test() throws CoreException, FileNotFoundException {
 
+		System.out.println("JDT Version:" + JavaCore.getPlugin().getBundle().getVersion());
+		System.out.println("JDT UI Version:" + JavaPlugin.getDefault().getBundle().getVersion());
 		reportMemoryState("Starting build.");
 
 		try {
+			dumpMemoryIndex("Initial Memory Index state");
+			dumpDiskIndex();
+
 			clearJdtIndex();
+			dumpMemoryIndex("Memory Index state after clear disk");
+			dumpDiskIndex();
+			
+			JavaModelManager.getIndexManager().resetIndex(new Path("/org.eclipse.xtext"));
+			dumpMemoryIndex("Memory Index state after reset project");
+			dumpDiskIndex();
+			
+			System.out.println("Saving index.");
+			JavaModelManager.getIndexManager().saveIndexes();
+			dumpMemoryIndex("Memory Index state after save");
+			dumpDiskIndex();
+
+			
 			setAutoBuild(true);
-			fullBuild();
 			waitForAutoBuild();
-			waitForJobManagerIsIdle();
 		} finally {
 			setAutoBuild(false);
+			System.out.println("Stopping background indexing.");
+			JavaModelManager.getIndexManager().shutdown();
 			clearJdtIndex();
 			reportMemoryState("Finished build.");
 		}
@@ -73,27 +96,19 @@ public class InternalBuilderTest {
 				errors.isEmpty());
 	}
 
-	private void waitForJobManagerIsIdle() {
-		System.out.println("Waiting for JobManager");
-		boolean timeout = false;
-		long startTime = System.currentTimeMillis();
-		while (Job.getJobManager().isIdle() || timeout) {
-			System.out.println("Job '" + Job.getJobManager().currentJob().getName() + "' is running");
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} finally {
-				timeout = true;
-			}
-			timeout = (System.currentTimeMillis() - startTime) > 20000;
-		}
+	private void dumpMemoryIndex(String message) {
+		System.out.println(message + ":\n" + JavaModelManager.getIndexManager().toString());
+	}
+
+
+	private void dumpDiskIndex() {
+		File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
+		System.out.println("Disk index " + Strings.concatenate(jdtMetadata.list(), ","));
 	}
 
 	private void clearJdtIndex() throws FileNotFoundException {
-		File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
-		boolean success = Files.sweepFolder(jdtMetadata);
-		System.out.println("Cleaned up index " + jdtMetadata.getAbsolutePath() + ": " + (success ? "success" : "fail"));
+		JavaModelManager.getIndexManager().deleteIndexFiles();
+		System.out.println("Cleaned up jdt's disk index.");
 	}
 
 	private void reportMemoryState(String reportName) {
