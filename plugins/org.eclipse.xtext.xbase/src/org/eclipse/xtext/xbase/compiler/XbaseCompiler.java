@@ -1195,11 +1195,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaSwitchStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
 		final LightweightTypeReference switchType = batchTypeResolver.resolveTypes(expr).getActualType(expr.getSwitch());
 		final boolean enumeration = switchType.isSubtypeOf(Enum.class);
+		final boolean needNullCheck = enumeration || switchType.isWrapper();
 		
 		final String switchResultName = declareSwitchResultVariable(expr, b, isReferenced);
 		internalToJavaStatement(expr.getSwitch(), b, true);
 		final String variableName = declareLocalVariable(expr, b);
 		
+		if (needNullCheck) {
+			b.newLine().append("if (").append(variableName).append(" != null) {").increaseIndentation();
+		}
 		b.newLine().append("switch (").append(variableName).append(") {").increaseIndentation();
 		for (XCasePart casePart : expr.getCases()) {
 			ITreeAppendable caseAppendable = b.trace(casePart, true);
@@ -1232,7 +1236,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			defaultAppendable.newLine().increaseIndentation().append("default:");
 
 			if (expr.getDefault() != null) {
+				defaultAppendable.openPseudoScope();
 				executeThenPart(expr, switchResultName, expr.getDefault(), defaultAppendable, isReferenced);
+				defaultAppendable.closeScope();
 			}
 			
 			if (!earlyExitComputer.isEarlyExit(expr.getDefault())) {
@@ -1241,6 +1247,18 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			defaultAppendable.decreaseIndentation();
 		}
 		b.decreaseIndentation().newLine().append("}");
+		if (needNullCheck) {
+			b.decreaseIndentation().newLine().append("}");
+			if (expr.getDefault() != null) {
+				b.append(" else {").increaseIndentation();
+
+				ILocationData location = getLocationOfDefault(expr);
+				ITreeAppendable defaultAppendable = location != null ? b.trace(location) : b;
+				executeThenPart(expr, switchResultName, expr.getDefault(), defaultAppendable, isReferenced);
+				
+				b.decreaseIndentation().newLine().append("}");
+			}
+		}
 	}
 
 	protected String declareLocalVariable(XSwitchExpression expr, ITreeAppendable b) {
