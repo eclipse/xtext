@@ -1731,10 +1731,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		    };
 		    Integer _apply = _function.apply();
 		    final Integer x = _apply;
-		    switch (x) {
-		      case 1:
-		        _switchResult = true;
-		        break;
+		    if (x != null) {
+		      switch (x) {
+		        case 1:
+		          _switchResult = true;
+		          break;
+		      }
 		    }
 		    return _switchResult;
 		  }
@@ -1800,18 +1802,20 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		  public boolean foo() {
 		    boolean _switchResult = false;
 		    final Thread.State x = Thread.State.NEW;
-		    switch (x) {
-		      case NEW:
-		        _switchResult = true;
-		        break;
-		      case RUNNABLE:
-		        _switchResult = false;
-		        break;
-		      case BLOCKED:
-		        _switchResult = true;
-		        break;
-		      default:
-		        break;
+		    if (x != null) {
+		      switch (x) {
+		        case NEW:
+		          _switchResult = true;
+		          break;
+		        case RUNNABLE:
+		          _switchResult = false;
+		          break;
+		        case BLOCKED:
+		          _switchResult = true;
+		          break;
+		        default:
+		          break;
+		      }
 		    }
 		    return _switchResult;
 		  }
@@ -1983,6 +1987,143 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		      _xblockexpression = (_switchResult);
 		    }
 		    return _xblockexpression;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithConstantExpressions_13() {
+		'''
+		class Foo {
+			def foo() {
+				switch x : Integer.valueOf('1') {
+					case 1:
+						if (x == 2) {
+							return true
+						}
+					default:
+						if (x == 2) {
+							return true
+						}
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo() {
+		    Integer _valueOf = Integer.valueOf("1");
+		    final Integer x = _valueOf;
+		    if (x != null) {
+		      switch (x) {
+		        case 1:
+		          if (((x).intValue() == 2)) {
+		            return true;
+		          }
+		          break;
+		        default:
+		          if (((x).intValue() == 2)) {
+		            return true;
+		          }
+		          break;
+		      }
+		    } else {
+		      if (((x).intValue() == 2)) {
+		        return true;
+		      }
+		    }
+		    return false;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithConstantExpressions_14() {
+		'''
+		class Foo {
+			def foo() {
+				switch x : Thread.State.NEW {
+					case NEW: true
+					default: false
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		@SuppressWarnings("all")
+		public class Foo {
+		  public boolean foo() {
+		    boolean _switchResult = false;
+		    final Thread.State x = Thread.State.NEW;
+		    if (x != null) {
+		      switch (x) {
+		        case NEW:
+		          _switchResult = true;
+		          break;
+		        default:
+		          _switchResult = false;
+		          break;
+		      }
+		    } else {
+		      _switchResult = false;
+		    }
+		    return _switchResult;
+		  }
+		}
+		''')
+	}
+	
+	@Test
+	def testSwitchWithConstantExpressions_15() {
+		'''
+		class Foo {
+			def foo() {
+				switch x : new Integer(42) {
+					case 32:
+						'foo'
+					default:
+						if ('x'.length == 1) {
+							'bar'
+						}
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		@SuppressWarnings("all")
+		public class Foo {
+		  public String foo() {
+		    String _switchResult = null;
+		    Integer _integer = new Integer(42);
+		    final Integer x = _integer;
+		    if (x != null) {
+		      switch (x) {
+		        case 32:
+		          _switchResult = "foo";
+		          break;
+		        default:
+		          String _xifexpression = null;
+		          int _length = "x".length();
+		          boolean _equals = (_length == 1);
+		          if (_equals) {
+		            _xifexpression = "bar";
+		          }
+		          _switchResult = _xifexpression;
+		          break;
+		      }
+		    } else {
+		      String _xifexpression = null;
+		      int _length = "x".length();
+		      boolean _equals = (_length == 1);
+		      if (_equals) {
+		        _xifexpression = "bar";
+		      }
+		      _switchResult = _xifexpression;
+		    }
+		    return _switchResult;
 		  }
 		}
 		''')
