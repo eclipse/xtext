@@ -56,6 +56,8 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		protected EObject context;
 
 		protected INode lastNode;
+		
+		protected INode rootNode;
 
 		protected ISynFollowerOwner lastState;
 
@@ -69,6 +71,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 			this.semanticObject = semanticObject;
 			this.lastState = previousState;
 			this.lastNode = previousNode;
+			this.rootNode = previousNode;
 			this.stack = new RuleCallStack();
 		}
 
@@ -343,7 +346,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	}
 
 	public void finish() {
-		navigateToAbsorber(null, null);
+		navigateToAbsorber(null, contexts.peek().rootNode);
 		delegate.finish();
 	}
 
