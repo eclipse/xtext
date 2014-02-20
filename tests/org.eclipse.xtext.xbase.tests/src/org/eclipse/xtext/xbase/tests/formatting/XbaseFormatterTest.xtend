@@ -428,11 +428,19 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 	
 	@Test def formatBasicFor3() {
 		assertFormattedExpression('''
-			for (val x = 1, val y = 2;;) {
-				return x + y
+			{
+				var int x
+				var int y
+				for (x = 1, y = 2;;) {
+					return x + y
+				}
 			}
 		''', '''
-			for  (    val    x   = 1    ,   val   y     =   2 ;     ;      )  {     return     x  +  y }
+			{
+				var   int     x
+				var   int    y 
+				for  (       x   = 1    ,   y     =   2 ;     ;      )  {     return     x  +  y }
+			}
 		''')
 	}
 	

@@ -723,15 +723,38 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   @Test
   public void formatBasicFor3() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("for (val x = 1, val y = 2;;) {");
+    _builder.append("{");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("var int x");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var int y");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for (x = 1, y = 2;;) {");
+    _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("return x + y");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("for  (    val    x   = 1    ,   val   y     =   2 ;     ;      )  {     return     x  +  y }");
+    _builder_1.append("{");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("var   int     x");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("var   int    y ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("for  (       x   = 1    ,   y     =   2 ;     ;      )  {     return     x  +  y }");
+    _builder_1.newLine();
+    _builder_1.append("}");
     _builder_1.newLine();
     this.assertFormattedExpression(_builder.toString(), _builder_1);
   }

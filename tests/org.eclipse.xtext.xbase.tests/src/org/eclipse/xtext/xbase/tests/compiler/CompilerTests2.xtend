@@ -714,9 +714,11 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''
 			Object _switchResult = null;
 			final Thread.State _switchValue = Thread.State.NEW;
-			switch (_switchValue) {
-			  default:
-			    break;
+			if (_switchValue != null) {
+			  switch (_switchValue) {
+			    default:
+			      break;
+			  }
 			}
 			return _switchResult;
 		'''
@@ -735,10 +737,14 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''
 			Object _switchResult = null;
 			final Thread.State _switchValue = Thread.State.NEW;
-			switch (_switchValue) {
-			  default:
-			    _switchResult = null;
-			    break;
+			if (_switchValue != null) {
+			  switch (_switchValue) {
+			    default:
+			      _switchResult = null;
+			      break;
+			  }
+			} else {
+			  _switchResult = null;
 			}
 			return _switchResult;
 		'''
@@ -757,10 +763,14 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''
 			Object _switchResult = null;
 			final Thread.State x = Thread.State.NEW;
-			switch (x) {
-			  default:
-			    _switchResult = null;
-			    break;
+			if (x != null) {
+			  switch (x) {
+			    default:
+			      _switchResult = null;
+			      break;
+			  }
+			} else {
+			  _switchResult = null;
 			}
 			return _switchResult;
 		'''
@@ -779,10 +789,14 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''
 			Object _switchResult = null;
 			final Thread.State x = Thread.State.NEW;
-			switch (x) {
-			  default:
-			    _switchResult = null;
-			    break;
+			if (x != null) {
+			  switch (x) {
+			    default:
+			      _switchResult = null;
+			      break;
+			  }
+			} else {
+			  _switchResult = null;
 			}
 			return _switchResult;
 		'''
