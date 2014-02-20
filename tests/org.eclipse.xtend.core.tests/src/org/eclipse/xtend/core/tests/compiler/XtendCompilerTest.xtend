@@ -2076,6 +2076,58 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	def testSwitchWithConstantExpressions_15() {
+		'''
+		class Foo {
+			def foo() {
+				switch x : new Integer(42) {
+					case 32:
+						'foo'
+					default:
+						if ('x'.length == 1) {
+							'bar'
+						}
+				}
+			}
+		}
+		'''.assertCompilesTo(
+		'''
+		@SuppressWarnings("all")
+		public class Foo {
+		  public String foo() {
+		    String _switchResult = null;
+		    Integer _integer = new Integer(42);
+		    final Integer x = _integer;
+		    if (x != null) {
+		      switch (x) {
+		        case 32:
+		          _switchResult = "foo";
+		          break;
+		        default:
+		          String _xifexpression = null;
+		          int _length = "x".length();
+		          boolean _equals = (_length == 1);
+		          if (_equals) {
+		            _xifexpression = "bar";
+		          }
+		          _switchResult = _xifexpression;
+		          break;
+		      }
+		    } else {
+		      String _xifexpression = null;
+		      int _length = "x".length();
+		      boolean _equals = (_length == 1);
+		      if (_equals) {
+		        _xifexpression = "bar";
+		      }
+		      _switchResult = _xifexpression;
+		    }
+		    return _switchResult;
+		  }
+		}
+		''')
+	}
 	
 	@Test
 	def testTryCatch() { 

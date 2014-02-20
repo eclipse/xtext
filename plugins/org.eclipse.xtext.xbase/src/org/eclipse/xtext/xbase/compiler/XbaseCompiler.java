@@ -1054,7 +1054,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			defaultAppendable.newLine().increaseIndentation().append("default:");
 
 			if (expr.getDefault() != null) {
+				defaultAppendable.openPseudoScope();
 				executeThenPart(expr, switchResultName, expr.getDefault(), defaultAppendable, isReferenced);
+				defaultAppendable.closeScope();
 			}
 			
 			if (!earlyExitComputer.isEarlyExit(expr.getDefault())) {

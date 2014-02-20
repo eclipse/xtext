@@ -2153,6 +2153,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				" }");
 	}
 	
+	@Test public void testSwitchExpressionOveInteger_6() throws Exception {
+		assertEvaluatesTo("bar", 
+				"{\n" +
+					"val Integer x = Integer.valueOf('4')\n" +
+					"switch x { case 3: { 'foo' } default: if ('x'.length == 1) { 'bar' } }\n" +
+				" }");
+	}
+	
 	@Test public void testCastedExpression_01() throws Exception {
 		assertEvaluatesTo("literal", "'literal' as String");
 	}
