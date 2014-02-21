@@ -161,7 +161,7 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 
 	public void configureXBasicForLoopExpression(FormattingConfig c, XBasicForLoopExpressionElements ele) {
 		c.setNoSpace().around(ele.getLeftParenthesisKeyword_2());
-		c.setNoSpace().before(ele.getCommaKeyword_3_1_1_0());
+		c.setNoSpace().before(ele.getCommaKeyword_3_1_0());
 		c.setNoSpace().before(ele.getSemicolonKeyword_4());
 		c.setNoSpace().before(ele.getCommaKeyword_7_1_0());
 		c.setNoSpace().before(ele.getSemicolonKeyword_6());

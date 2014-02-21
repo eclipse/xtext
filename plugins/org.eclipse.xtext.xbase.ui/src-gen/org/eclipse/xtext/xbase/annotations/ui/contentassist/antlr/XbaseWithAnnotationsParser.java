@@ -62,8 +62,7 @@ public class XbaseWithAnnotationsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXCollectionLiteralAccess().getAlternatives(), "rule__XCollectionLiteral__Alternatives");
 					put(grammarAccess.getXSwitchExpressionAccess().getAlternatives_2(), "rule__XSwitchExpression__Alternatives_2");
 					put(grammarAccess.getXCasePartAccess().getAlternatives_3(), "rule__XCasePart__Alternatives_3");
-					put(grammarAccess.getXBasicForLoopExpressionAccess().getAlternatives_3(), "rule__XBasicForLoopExpression__Alternatives_3");
-					put(grammarAccess.getXExpressionInsideBlockAccess().getAlternatives(), "rule__XExpressionInsideBlock__Alternatives");
+					put(grammarAccess.getXExpressionOrVarDeclarationAccess().getAlternatives(), "rule__XExpressionOrVarDeclaration__Alternatives");
 					put(grammarAccess.getXVariableDeclarationAccess().getAlternatives_1(), "rule__XVariableDeclaration__Alternatives_1");
 					put(grammarAccess.getXVariableDeclarationAccess().getAlternatives_2(), "rule__XVariableDeclaration__Alternatives_2");
 					put(grammarAccess.getXFeatureCallAccess().getAlternatives_3_1(), "rule__XFeatureCall__Alternatives_3_1");
@@ -197,8 +196,8 @@ public class XbaseWithAnnotationsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXForLoopExpressionAccess().getGroup_0(), "rule__XForLoopExpression__Group_0__0");
 					put(grammarAccess.getXForLoopExpressionAccess().getGroup_0_0(), "rule__XForLoopExpression__Group_0_0__0");
 					put(grammarAccess.getXBasicForLoopExpressionAccess().getGroup(), "rule__XBasicForLoopExpression__Group__0");
+					put(grammarAccess.getXBasicForLoopExpressionAccess().getGroup_3(), "rule__XBasicForLoopExpression__Group_3__0");
 					put(grammarAccess.getXBasicForLoopExpressionAccess().getGroup_3_1(), "rule__XBasicForLoopExpression__Group_3_1__0");
-					put(grammarAccess.getXBasicForLoopExpressionAccess().getGroup_3_1_1(), "rule__XBasicForLoopExpression__Group_3_1_1__0");
 					put(grammarAccess.getXBasicForLoopExpressionAccess().getGroup_7(), "rule__XBasicForLoopExpression__Group_7__0");
 					put(grammarAccess.getXBasicForLoopExpressionAccess().getGroup_7_1(), "rule__XBasicForLoopExpression__Group_7_1__0");
 					put(grammarAccess.getXWhileExpressionAccess().getGroup(), "rule__XWhileExpression__Group__0");
@@ -338,8 +337,7 @@ public class XbaseWithAnnotationsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXForLoopExpressionAccess().getForExpressionAssignment_1(), "rule__XForLoopExpression__ForExpressionAssignment_1");
 					put(grammarAccess.getXForLoopExpressionAccess().getEachExpressionAssignment_3(), "rule__XForLoopExpression__EachExpressionAssignment_3");
 					put(grammarAccess.getXBasicForLoopExpressionAccess().getInitExpressionsAssignment_3_0(), "rule__XBasicForLoopExpression__InitExpressionsAssignment_3_0");
-					put(grammarAccess.getXBasicForLoopExpressionAccess().getInitExpressionsAssignment_3_1_0(), "rule__XBasicForLoopExpression__InitExpressionsAssignment_3_1_0");
-					put(grammarAccess.getXBasicForLoopExpressionAccess().getInitExpressionsAssignment_3_1_1_1(), "rule__XBasicForLoopExpression__InitExpressionsAssignment_3_1_1_1");
+					put(grammarAccess.getXBasicForLoopExpressionAccess().getInitExpressionsAssignment_3_1_1(), "rule__XBasicForLoopExpression__InitExpressionsAssignment_3_1_1");
 					put(grammarAccess.getXBasicForLoopExpressionAccess().getExpressionAssignment_5(), "rule__XBasicForLoopExpression__ExpressionAssignment_5");
 					put(grammarAccess.getXBasicForLoopExpressionAccess().getUpdateExpressionsAssignment_7_0(), "rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_0");
 					put(grammarAccess.getXBasicForLoopExpressionAccess().getUpdateExpressionsAssignment_7_1_1(), "rule__XBasicForLoopExpression__UpdateExpressionsAssignment_7_1_1");

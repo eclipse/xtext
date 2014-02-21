@@ -1121,6 +1121,25 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		)
 	}
 	
+	@Test def void testBasicForLoop_11() {
+		'''
+			{
+				for (val i = 0, val j = 0; i < 10;) {
+					
+				}
+			}
+		'''.compilesTo(
+		'''
+			final int i = 0;
+			final int j = 0;
+			boolean _while = (i < 10);
+			while (_while) {
+			  _while = (i < 10);
+			}
+		'''
+		)
+	}
+	
 	@Test def void testSynchronizedBlock_1() {
 		'''
 			{

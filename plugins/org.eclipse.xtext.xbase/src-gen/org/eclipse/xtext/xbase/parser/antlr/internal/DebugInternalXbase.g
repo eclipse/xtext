@@ -314,7 +314,7 @@ ruleXClosure :
 // Rule XExpressionInClosure
 ruleXExpressionInClosure :
 	(
-		ruleXExpressionInsideBlock ';'?
+		ruleXExpressionOrVarDeclaration ';'?
 	)*
 ;
 
@@ -389,9 +389,8 @@ ruleXForLoopExpression :
 // Rule XBasicForLoopExpression
 ruleXBasicForLoopExpression :
 	'for' '(' (
-		ruleXVariableDeclaration |
-		ruleXExpression (
-			',' ruleXExpression
+		ruleXExpressionOrVarDeclaration (
+			',' ruleXExpressionOrVarDeclaration
 		)*
 	)? ';' ruleXExpression? ';' (
 		ruleXExpression (
@@ -413,12 +412,12 @@ ruleXDoWhileExpression :
 // Rule XBlockExpression
 ruleXBlockExpression :
 	'{' (
-		ruleXExpressionInsideBlock ';'?
+		ruleXExpressionOrVarDeclaration ';'?
 	)* '}'
 ;
 
-// Rule XExpressionInsideBlock
-ruleXExpressionInsideBlock :
+// Rule XExpressionOrVarDeclaration
+ruleXExpressionOrVarDeclaration :
 	ruleXVariableDeclaration |
 	ruleXExpression
 ;

@@ -219,7 +219,7 @@ InternalRichString returns xbase::XExpression:
 ;
 
 RichStringPart returns xbase::XExpression:
-	XExpressionInsideBlock |
+	XExpressionOrVarDeclaration |
 	RichStringForLoop |
 	RichStringIf
 ;

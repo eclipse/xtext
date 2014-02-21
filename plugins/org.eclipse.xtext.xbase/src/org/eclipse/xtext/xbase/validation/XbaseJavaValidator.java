@@ -1295,8 +1295,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	protected boolean isXExpressionInsideBlock(INode child) {
-		return child.getGrammarElement() == grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionInsideBlockParserRuleCall_2_0_0()
-				|| child.getGrammarElement() == grammarAccess.getXExpressionInClosureAccess().getExpressionsXExpressionInsideBlockParserRuleCall_1_0_0();
+		return child.getGrammarElement() == grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionOrVarDeclarationParserRuleCall_2_0_0()
+				|| child.getGrammarElement() == grammarAccess.getXExpressionInClosureAccess().getExpressionsXExpressionOrVarDeclarationParserRuleCall_1_0_0();
 	}
 
 	protected boolean isSemicolon(INode child) {

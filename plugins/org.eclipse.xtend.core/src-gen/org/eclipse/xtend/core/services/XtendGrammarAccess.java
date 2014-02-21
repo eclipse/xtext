@@ -2303,19 +2303,19 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	public class RichStringPartElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RichStringPart");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cXExpressionInsideBlockParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cXExpressionOrVarDeclarationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRichStringForLoopParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cRichStringIfParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//RichStringPart returns xbase::XExpression:
-		//	XExpressionInsideBlock | RichStringForLoop | RichStringIf;
+		//	XExpressionOrVarDeclaration | RichStringForLoop | RichStringIf;
 		public ParserRule getRule() { return rule; }
 
-		//XExpressionInsideBlock | RichStringForLoop | RichStringIf
+		//XExpressionOrVarDeclaration | RichStringForLoop | RichStringIf
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//XExpressionInsideBlock
-		public RuleCall getXExpressionInsideBlockParserRuleCall_0() { return cXExpressionInsideBlockParserRuleCall_0; }
+		//XExpressionOrVarDeclaration
+		public RuleCall getXExpressionOrVarDeclarationParserRuleCall_0() { return cXExpressionOrVarDeclarationParserRuleCall_0; }
 
 		//RichStringForLoop
 		public RuleCall getRichStringForLoopParserRuleCall_1() { return cRichStringForLoopParserRuleCall_1; }
@@ -2914,7 +2914,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RichStringPart returns xbase::XExpression:
-	//	XExpressionInsideBlock | RichStringForLoop | RichStringIf;
+	//	XExpressionOrVarDeclaration | RichStringForLoop | RichStringIf;
 	public RichStringPartElements getRichStringPartAccess() {
 		return (pRichStringPart != null) ? pRichStringPart : (pRichStringPart = new RichStringPartElements());
 	}
@@ -3425,7 +3425,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XExpressionInClosure returns XExpression:
-	//	{XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*;
+	//	{XBlockExpression} (expressions+=XExpressionOrVarDeclaration ";"?)*;
 	public XbaseGrammarAccess.XExpressionInClosureElements getXExpressionInClosureAccess() {
 		return gaXbaseWithAnnotations.getXExpressionInClosureAccess();
 	}
@@ -3499,8 +3499,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XBasicForLoopExpression returns XExpression:
-	//	{XBasicForLoopExpression} "for" "(" (initExpressions+=XVariableDeclaration | initExpressions+=XExpression (","
-	//	initExpressions+=XExpression)*)? ";" expression=XExpression? ";" (updateExpressions+=XExpression (","
+	//	{XBasicForLoopExpression} "for" "(" (initExpressions+=XExpressionOrVarDeclaration (","
+	//	initExpressions+=XExpressionOrVarDeclaration)*)? ";" expression=XExpression? ";" (updateExpressions+=XExpression (","
 	//	updateExpressions+=XExpression)*)? ")" eachExpression=XExpression;
 	public XbaseGrammarAccess.XBasicForLoopExpressionElements getXBasicForLoopExpressionAccess() {
 		return gaXbaseWithAnnotations.getXBasicForLoopExpressionAccess();
@@ -3531,7 +3531,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XBlockExpression returns XExpression:
-	//	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";"?)* "}";
+	//	{XBlockExpression} "{" (expressions+=XExpressionOrVarDeclaration ";"?)* "}";
 	public XbaseGrammarAccess.XBlockExpressionElements getXBlockExpressionAccess() {
 		return gaXbaseWithAnnotations.getXBlockExpressionAccess();
 	}
@@ -3540,14 +3540,14 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return getXBlockExpressionAccess().getRule();
 	}
 
-	//XExpressionInsideBlock returns XExpression:
+	//XExpressionOrVarDeclaration returns XExpression:
 	//	XVariableDeclaration | XExpression;
-	public XbaseGrammarAccess.XExpressionInsideBlockElements getXExpressionInsideBlockAccess() {
-		return gaXbaseWithAnnotations.getXExpressionInsideBlockAccess();
+	public XbaseGrammarAccess.XExpressionOrVarDeclarationElements getXExpressionOrVarDeclarationAccess() {
+		return gaXbaseWithAnnotations.getXExpressionOrVarDeclarationAccess();
 	}
 	
-	public ParserRule getXExpressionInsideBlockRule() {
-		return getXExpressionInsideBlockAccess().getRule();
+	public ParserRule getXExpressionOrVarDeclarationRule() {
+		return getXExpressionOrVarDeclarationAccess().getRule();
 	}
 
 	//XFeatureCall returns XExpression:

@@ -157,7 +157,7 @@ XClosure returns XExpression:
 	
 XExpressionInClosure returns XExpression: 
 	{XBlockExpression}
-	(expressions+=XExpressionInsideBlock ';'?)*
+	(expressions+=XExpressionOrVarDeclaration ';'?)*
 ;
 
 XShortClosure returns XExpression:
@@ -192,8 +192,7 @@ XForLoopExpression returns XExpression:
 
 XBasicForLoopExpression returns XExpression:
 	{XBasicForLoopExpression}
-	'for' '('(initExpressions+=XVariableDeclaration | 
-			 (initExpressions+=XExpression (',' initExpressions+=XExpression)*))? ';' 
+	'for' '('(initExpressions+=XExpressionOrVarDeclaration (',' initExpressions+=XExpressionOrVarDeclaration)*)? ';' 
 		expression=XExpression? ';' 
 		(updateExpressions+=XExpression (',' updateExpressions+=XExpression)*)? ')'
 		eachExpression=XExpression;
@@ -212,10 +211,10 @@ XDoWhileExpression returns XExpression:
 XBlockExpression returns XExpression: 
 	{XBlockExpression}
 	'{'
-		(expressions+=XExpressionInsideBlock ';'?)*
+		(expressions+=XExpressionOrVarDeclaration ';'?)*
 	'}';
 
-XExpressionInsideBlock returns XExpression:
+XExpressionOrVarDeclaration returns XExpression:
 	XVariableDeclaration | XExpression;
 
 XVariableDeclaration returns XExpression:

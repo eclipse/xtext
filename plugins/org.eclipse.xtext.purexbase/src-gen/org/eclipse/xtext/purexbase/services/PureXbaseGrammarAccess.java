@@ -53,27 +53,27 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cXBlockExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Assignment cExpressionsAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final RuleCall cExpressionsXExpressionInsideBlockParserRuleCall_1_0_0 = (RuleCall)cExpressionsAssignment_1_0.eContents().get(0);
+		private final RuleCall cExpressionsXExpressionOrVarDeclarationParserRuleCall_1_0_0 = (RuleCall)cExpressionsAssignment_1_0.eContents().get(0);
 		private final Keyword cSemicolonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
 		//SpecialBlockExpression returns xbase::XBlockExpression:
-		//	{xbase::XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*;
+		//	{xbase::XBlockExpression} (expressions+=XExpressionOrVarDeclaration ";"?)*;
 		public ParserRule getRule() { return rule; }
 
-		//{xbase::XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*
+		//{xbase::XBlockExpression} (expressions+=XExpressionOrVarDeclaration ";"?)*
 		public Group getGroup() { return cGroup; }
 
 		//{xbase::XBlockExpression}
 		public Action getXBlockExpressionAction_0() { return cXBlockExpressionAction_0; }
 
-		//(expressions+=XExpressionInsideBlock ";"?)*
+		//(expressions+=XExpressionOrVarDeclaration ";"?)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//expressions+=XExpressionInsideBlock
+		//expressions+=XExpressionOrVarDeclaration
 		public Assignment getExpressionsAssignment_1_0() { return cExpressionsAssignment_1_0; }
 
-		//XExpressionInsideBlock
-		public RuleCall getExpressionsXExpressionInsideBlockParserRuleCall_1_0_0() { return cExpressionsXExpressionInsideBlockParserRuleCall_1_0_0; }
+		//XExpressionOrVarDeclaration
+		public RuleCall getExpressionsXExpressionOrVarDeclarationParserRuleCall_1_0_0() { return cExpressionsXExpressionOrVarDeclarationParserRuleCall_1_0_0; }
 
 		//";"?
 		public Keyword getSemicolonKeyword_1_1() { return cSemicolonKeyword_1_1; }
@@ -145,7 +145,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SpecialBlockExpression returns xbase::XBlockExpression:
-	//	{xbase::XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*;
+	//	{xbase::XBlockExpression} (expressions+=XExpressionOrVarDeclaration ";"?)*;
 	public SpecialBlockExpressionElements getSpecialBlockExpressionAccess() {
 		return (pSpecialBlockExpression != null) ? pSpecialBlockExpression : (pSpecialBlockExpression = new SpecialBlockExpressionElements());
 	}
@@ -464,7 +464,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XExpressionInClosure returns XExpression:
-	//	{XBlockExpression} (expressions+=XExpressionInsideBlock ";"?)*;
+	//	{XBlockExpression} (expressions+=XExpressionOrVarDeclaration ";"?)*;
 	public XbaseGrammarAccess.XExpressionInClosureElements getXExpressionInClosureAccess() {
 		return gaXbase.getXExpressionInClosureAccess();
 	}
@@ -538,8 +538,8 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XBasicForLoopExpression returns XExpression:
-	//	{XBasicForLoopExpression} "for" "(" (initExpressions+=XVariableDeclaration | initExpressions+=XExpression (","
-	//	initExpressions+=XExpression)*)? ";" expression=XExpression? ";" (updateExpressions+=XExpression (","
+	//	{XBasicForLoopExpression} "for" "(" (initExpressions+=XExpressionOrVarDeclaration (","
+	//	initExpressions+=XExpressionOrVarDeclaration)*)? ";" expression=XExpression? ";" (updateExpressions+=XExpression (","
 	//	updateExpressions+=XExpression)*)? ")" eachExpression=XExpression;
 	public XbaseGrammarAccess.XBasicForLoopExpressionElements getXBasicForLoopExpressionAccess() {
 		return gaXbase.getXBasicForLoopExpressionAccess();
@@ -570,7 +570,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XBlockExpression returns XExpression:
-	//	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";"?)* "}";
+	//	{XBlockExpression} "{" (expressions+=XExpressionOrVarDeclaration ";"?)* "}";
 	public XbaseGrammarAccess.XBlockExpressionElements getXBlockExpressionAccess() {
 		return gaXbase.getXBlockExpressionAccess();
 	}
@@ -579,14 +579,14 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getXBlockExpressionAccess().getRule();
 	}
 
-	//XExpressionInsideBlock returns XExpression:
+	//XExpressionOrVarDeclaration returns XExpression:
 	//	XVariableDeclaration | XExpression;
-	public XbaseGrammarAccess.XExpressionInsideBlockElements getXExpressionInsideBlockAccess() {
-		return gaXbase.getXExpressionInsideBlockAccess();
+	public XbaseGrammarAccess.XExpressionOrVarDeclarationElements getXExpressionOrVarDeclarationAccess() {
+		return gaXbase.getXExpressionOrVarDeclarationAccess();
 	}
 	
-	public ParserRule getXExpressionInsideBlockRule() {
-		return getXExpressionInsideBlockAccess().getRule();
+	public ParserRule getXExpressionOrVarDeclarationRule() {
+		return getXExpressionOrVarDeclarationAccess().getRule();
 	}
 
 	//XVariableDeclaration returns XExpression:
