@@ -46,6 +46,7 @@ import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
+import org.eclipse.xtext.xbase.XSynchronizedExpression
 
 class XbaseFormatter2 extends AbstractFormatter {
 	@Inject extension NodeModelAccess
@@ -545,6 +546,30 @@ class XbaseFormatter2 extends AbstractFormatter {
 		}
 		if (indented)
 			format += calls.last.nodeForEObject.append[decreaseIndentation]
+	}
+	
+	def protected dispatch void format(XSynchronizedExpression expr, FormattableDocument format) {
+		if (expr.eContainer instanceof XVariableDeclaration) {
+			format += expr.nodeForKeyword("synchronized").append[increaseIndentation]
+			format += expr.nodeForEObject.append[decreaseIndentation]
+		}
+		val expressionnode = expr.expression.nodeForEObject
+		val multiline = expressionnode?.text?.trim?.contains("\n") || expressionnode?.hiddenLeafsBefore?.newLines > 0
+		format += expr.nodeForFeature(XSYNCHRONIZED_EXPRESSION__PARAM).surround[noSpace]
+		if (expr.expression instanceof XBlockExpression || multiline)
+			format += expr.nodeForKeyword("synchronized").append[cfg(whitespaceBetweenKeywordAndParenthesisML)]
+		else
+			format += expr.nodeForKeyword("synchronized").append[cfg(whitespaceBetweenKeywordAndParenthesisSL)]
+		if (expr.expression instanceof XBlockExpression) {
+			format += expressionnode.prepend[cfg(bracesInNewLine)]
+		} else if (!multiline) {
+			format += expressionnode.prepend[oneSpace]
+		} else {
+			format += expressionnode.prepend[newLine increaseIndentation]
+			format += expressionnode.append[decreaseIndentation]
+		}
+		expr.param.format(format)
+		expr.expression.format(format)
 	}
 
 	def protected dispatch void format(XIfExpression expr, FormattableDocument format) {

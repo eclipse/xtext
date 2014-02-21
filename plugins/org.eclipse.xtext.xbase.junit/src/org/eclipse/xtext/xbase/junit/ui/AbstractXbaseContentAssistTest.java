@@ -146,6 +146,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		"print()",
 		"println",
 		"println()",
+		"synchronized"
 	};
 	
 	protected static String[] STRING_OPERATORS = {

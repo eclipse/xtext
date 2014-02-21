@@ -1687,6 +1687,43 @@ public interface XbasePackage extends EPackage
 	 */
 	int XRETURN_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
 
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XSynchronizedExpressionImpl <em>XSynchronized Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XSynchronizedExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXSynchronizedExpression()
+	 * @generated
+	 */
+	int XSYNCHRONIZED_EXPRESSION = 33;
+
+	/**
+	 * The feature id for the '<em><b>Param</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSYNCHRONIZED_EXPRESSION__PARAM = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSYNCHRONIZED_EXPRESSION__EXPRESSION = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>XSynchronized Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSYNCHRONIZED_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XExpression <em>XExpression</em>}'.
@@ -2844,6 +2881,38 @@ public interface XbasePackage extends EPackage
 	EReference getXReturnExpression_Expression();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XSynchronizedExpression <em>XSynchronized Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XSynchronized Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XSynchronizedExpression
+	 * @generated
+	 */
+	EClass getXSynchronizedExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XSynchronizedExpression#getParam <em>Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Param</em>'.
+	 * @see org.eclipse.xtext.xbase.XSynchronizedExpression#getParam()
+	 * @see #getXSynchronizedExpression()
+	 * @generated
+	 */
+	EReference getXSynchronizedExpression_Param();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XSynchronizedExpression#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XSynchronizedExpression#getExpression()
+	 * @see #getXSynchronizedExpression()
+	 * @generated
+	 */
+	EReference getXSynchronizedExpression_Expression();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3795,6 +3864,32 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XRETURN_EXPRESSION__EXPRESSION = eINSTANCE.getXReturnExpression_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XSynchronizedExpressionImpl <em>XSynchronized Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XSynchronizedExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXSynchronizedExpression()
+		 * @generated
+		 */
+		EClass XSYNCHRONIZED_EXPRESSION = eINSTANCE.getXSynchronizedExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Param</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XSYNCHRONIZED_EXPRESSION__PARAM = eINSTANCE.getXSynchronizedExpression_Param();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XSYNCHRONIZED_EXPRESSION__EXPRESSION = eINSTANCE.getXSynchronizedExpression_Expression();
 
 	}
 

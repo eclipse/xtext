@@ -57,6 +57,7 @@ import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
@@ -162,7 +163,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 			_computeTypes((XListLiteral)expression, state);
 		} else if (expression instanceof XSetLiteral) {
 			_computeTypes((XSetLiteral)expression, state);
-		} else { 
+		} else if (expression instanceof XSynchronizedExpression) {
+			_computeTypes((XSynchronizedExpression)expression, state);
+		} else {
 			throw new UnsupportedOperationException("Missing type computation for expression type: " + expression.eClass().getName() + " / " + state);
 		}
 	}
@@ -1155,6 +1158,24 @@ public class XbaseTypeComputer implements ITypeComputer {
 		}
 		// TODO validate / handle return / throw in finally block
 		state.withoutExpectation().computeTypes(object.getFinallyExpression());
+	}
+	
+	protected void _computeTypes(XSynchronizedExpression expr, ITypeComputationState state) {
+		ITypeComputationState paramState = state.withExpectation(getRawTypeForName(Object.class, state.getReferenceOwner()));
+		ITypeComputationResult paramType = paramState.computeTypes(expr.getParam());
+		LightweightTypeReference actualParamType = paramType.getActualExpressionType();
+		if (actualParamType != null && (actualParamType.isPrimitive() || actualParamType.isAny())) {
+			state.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.ERROR,
+					IssueCodes.INCOMPATIBLE_TYPES,
+					actualParamType.getSimpleName() +  " is not a valid type's argument for the synchronized expression.",
+					expr.getParam(),
+					null,
+					-1,
+					new String[] { 
+					}));
+		}
+		state.computeTypes(expr.getExpression());
 	}
 	
 	protected void _computeTypes(final XAssignment assignment, ITypeComputationState state) {

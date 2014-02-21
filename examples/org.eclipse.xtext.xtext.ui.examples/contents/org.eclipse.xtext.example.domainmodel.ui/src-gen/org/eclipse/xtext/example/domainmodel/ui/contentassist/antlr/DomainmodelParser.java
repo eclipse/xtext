@@ -221,6 +221,9 @@ public class DomainmodelParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup_3_0(), "rule__XTryCatchFinallyExpression__Group_3_0__0");
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup_3_0_1(), "rule__XTryCatchFinallyExpression__Group_3_0_1__0");
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup_3_1(), "rule__XTryCatchFinallyExpression__Group_3_1__0");
+					put(grammarAccess.getXSynchronizedExpressionAccess().getGroup(), "rule__XSynchronizedExpression__Group__0");
+					put(grammarAccess.getXSynchronizedExpressionAccess().getGroup_0(), "rule__XSynchronizedExpression__Group_0__0");
+					put(grammarAccess.getXSynchronizedExpressionAccess().getGroup_0_0(), "rule__XSynchronizedExpression__Group_0_0__0");
 					put(grammarAccess.getXCatchClauseAccess().getGroup(), "rule__XCatchClause__Group__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
@@ -371,6 +374,8 @@ public class DomainmodelParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesAssignment_3_0_0(), "rule__XTryCatchFinallyExpression__CatchClausesAssignment_3_0_0");
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionAssignment_3_0_1_1(), "rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_0_1_1");
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionAssignment_3_1_1(), "rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1_1");
+					put(grammarAccess.getXSynchronizedExpressionAccess().getParamAssignment_1(), "rule__XSynchronizedExpression__ParamAssignment_1");
+					put(grammarAccess.getXSynchronizedExpressionAccess().getExpressionAssignment_3(), "rule__XSynchronizedExpression__ExpressionAssignment_3");
 					put(grammarAccess.getXCatchClauseAccess().getDeclaredParamAssignment_2(), "rule__XCatchClause__DeclaredParamAssignment_2");
 					put(grammarAccess.getXCatchClauseAccess().getExpressionAssignment_4(), "rule__XCatchClause__ExpressionAssignment_4");
 					put(grammarAccess.getXFunctionTypeRefAccess().getParamTypesAssignment_0_1_0(), "rule__XFunctionTypeRef__ParamTypesAssignment_0_1_0");

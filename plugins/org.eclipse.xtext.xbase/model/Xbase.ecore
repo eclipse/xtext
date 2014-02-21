@@ -253,4 +253,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//XExpression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XSynchronizedExpression" eSuperTypes="#//XExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param" eType="#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//XExpression"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

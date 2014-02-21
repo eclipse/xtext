@@ -348,6 +348,32 @@ public class XbaseFormatterTest extends AbstractXbaseFormatterTest {
   }
   
   @Test
+  public void formatSynchronizedBlock_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("synchronized (new Object) {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("synchronized(new Object){}");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
+  public void formatSynchronizedBlock_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("synchronized (new Object) {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("synchronized         (          new            Object           )        {        }");
+    _builder_1.newLine();
+    this.assertFormattedExpression(_builder.toString(), _builder_1);
+  }
+  
+  @Test
   public void formatIf1SL1() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {

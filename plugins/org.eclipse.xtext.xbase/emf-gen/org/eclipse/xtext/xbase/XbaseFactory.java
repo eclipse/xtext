@@ -289,6 +289,15 @@ public interface XbaseFactory extends EFactory
 	XReturnExpression createXReturnExpression();
 
 	/**
+	 * Returns a new object of class '<em>XSynchronized Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XSynchronized Expression</em>'.
+	 * @generated
+	 */
+	XSynchronizedExpression createXSynchronizedExpression();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
