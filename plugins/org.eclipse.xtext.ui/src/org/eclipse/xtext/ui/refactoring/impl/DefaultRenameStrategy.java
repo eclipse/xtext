@@ -65,7 +65,8 @@ public class DefaultRenameStrategy extends AbstractRenameStrategy {
 			try {
 				String value = getNameAsValue(newName);
 				String text = getNameAsText(value);
-				if(!equal(text, newName)) {
+				String textValue = getNameAsValue(text);
+				if(!equal(value, textValue)) {
 					status.addError("Illegal name: '" + newName + "'. Consider using '" + text + "' instead.");
 				}
 			} catch(ValueConverterException vce) {
