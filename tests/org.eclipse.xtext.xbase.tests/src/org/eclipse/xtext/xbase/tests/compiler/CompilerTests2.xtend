@@ -1120,6 +1120,78 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''
 		)
 	}
+	
+	@Test def void testSynchronizedBlock_1() {
+		'''
+			{
+				val x = new Integer(1)
+				synchronized(x) {}
+			}
+		'''.compilesTo(
+		'''
+			Object _xblockexpression = null;
+			{
+			  final Integer x = new Integer(1);
+			  Object _xsynchronizedexpression = null;
+			  synchronized (x) {
+			    _xsynchronizedexpression = null;
+			  }
+			  _xblockexpression = (_xsynchronizedexpression);
+			}
+			return _xblockexpression;
+		'''
+		)
+	}
+	
+	@Test def void testSynchronizedBlock_2() {
+		'''
+			{
+				val x = new Integer(1)
+				val y = synchronized(x) 1
+			}
+		'''.compilesTo(
+		'''
+			final Integer x = new Integer(1);
+			int _xsynchronizedexpression = (int) 0;
+			synchronized (x) {
+			  _xsynchronizedexpression = 1;
+			}
+			final int y = _xsynchronizedexpression;
+		'''
+		)
+	}
+	
+	@Test def void testSynchronizedBlock_3() {
+		'''
+			{
+				val x = new Integer(1)
+				val y = synchronized(x) {
+					{
+						{
+							val i = 1
+							val j = 2
+							i + j
+						}
+					}
+				}
+			}
+		'''.compilesTo(
+		'''
+			final Integer x = new Integer(1);
+			int _xsynchronizedexpression = (int) 0;
+			synchronized (x) {
+			  int _xblockexpression = (int) 0;
+			  {
+			    final int i = 1;
+			    final int j = 2;
+			    _xblockexpression = ((i + j));
+			  }
+			  _xsynchronizedexpression = _xblockexpression;
+			}
+			final int y = _xsynchronizedexpression;
+		'''
+		)
+	}
 
 }
 

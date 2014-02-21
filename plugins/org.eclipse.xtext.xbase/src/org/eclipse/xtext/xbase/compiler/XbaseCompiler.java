@@ -64,6 +64,7 @@ import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -460,6 +461,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			_toJavaExpression((XListLiteral) obj, appendable);
 		} else if (obj instanceof XSetLiteral) {
 			_toJavaExpression((XSetLiteral) obj, appendable);
+		} else if (obj instanceof XSynchronizedExpression) {
+			_toJavaExpression((XSynchronizedExpression) obj, appendable);
 		} else {
 			super.internalToConvertedExpression(obj, appendable);
 		}
@@ -501,6 +504,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			_toJavaStatement((XListLiteral) obj, appendable, isReferenced);
 		} else if (obj instanceof XSetLiteral) {
 			_toJavaStatement((XSetLiteral) obj, appendable, isReferenced);
+		} else if (obj instanceof XSynchronizedExpression) {
+			_toJavaStatement((XSynchronizedExpression) obj, appendable, isReferenced);
 		} else {
 			super.doInternalToJavaStatement(obj, appendable, isReferenced);
 		}
@@ -1575,6 +1580,35 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			throw new IllegalStateException("Switch expression wasn't translated to Java statements before.");
 	}
 
+	protected void _toJavaStatement(final XSynchronizedExpression synchronizedExpression, final ITreeAppendable b, boolean isReferenced) {
+		if (isReferenced) {
+			declareSyntheticVariable(synchronizedExpression, b);
+		}
+		ITreeAppendable synchronizedAppendable = b.trace(synchronizedExpression, true);
+		XExpression param = synchronizedExpression.getParam();
+		internalToJavaStatement(param, synchronizedAppendable, isReferenced);
+		
+		synchronizedAppendable.newLine().append("synchronized (");
+		internalToJavaExpression(param, synchronizedAppendable);
+		synchronizedAppendable.append(") {").increaseIndentation();
+		synchronizedAppendable.openPseudoScope();
+		
+		XExpression expression = synchronizedExpression.getExpression();
+		internalToJavaStatement(expression, b, isReferenced);
+		if (isReferenced) {
+			b.newLine().append(getVarName(synchronizedExpression, synchronizedAppendable)).append(" = ");
+			internalToConvertedExpression(expression, b, getType(synchronizedExpression));
+			b.append(";");
+		}
+		
+		synchronizedAppendable.closeScope();
+		synchronizedAppendable.decreaseIndentation().newLine().append("}");
+	}
+
+	protected void _toJavaExpression(XSynchronizedExpression synchronizedExpression, ITreeAppendable b) {
+		b.trace(synchronizedExpression, false).append(getVarName(synchronizedExpression, b));
+	}
+
 	protected void _toJavaStatement(final XClosure closure, final ITreeAppendable b, boolean isReferenced) {
 		if (!isReferenced)
 			throw new IllegalArgumentException("a closure definition does not cause any side-effects");
@@ -1778,6 +1812,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			return false;
 		}
 		if (expression instanceof XSwitchExpression) {
+			return false;
+		}
+		if (expression instanceof XSynchronizedExpression) {
 			return false;
 		}
 		return super.internalCanCompileToJavaExpression(expression, appendable);
