@@ -63,7 +63,7 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 	
 	@Override
 	public boolean enterAssignedParserRuleCall(RuleCall rc, EObject semanticChild, ICompositeNode node) {
-		if (rc == grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionInsideBlockParserRuleCall_2_0_0()) {
+		if (rc == grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionOrVarDeclarationParserRuleCall_2_0_0()) {
 			semicolonBeforeNextExpressionRequired = startsWithUnaryOperator(semanticChild);
 		} else
 			semicolonBeforeNextExpressionRequired = false;

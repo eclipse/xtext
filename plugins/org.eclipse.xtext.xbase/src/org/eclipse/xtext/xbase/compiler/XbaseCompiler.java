@@ -793,7 +793,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected boolean canCompileToJavaBasicForStatement(XBasicForLoopExpression expr, ITreeAppendable b) {
 		EList<XExpression> initExpressions = expr.getInitExpressions();
 		XExpression firstInitExpression = IterableExtensions.head(initExpressions);
-		if (firstInitExpression instanceof XVariableDeclaration) {
+		if (initExpressions.size() == 1 && firstInitExpression instanceof XVariableDeclaration) {
 			XVariableDeclaration variableDeclaration = (XVariableDeclaration) firstInitExpression;
 			XExpression right = variableDeclaration.getRight();
 			if (right != null && !canCompileToJavaExpression(right, b)) {
