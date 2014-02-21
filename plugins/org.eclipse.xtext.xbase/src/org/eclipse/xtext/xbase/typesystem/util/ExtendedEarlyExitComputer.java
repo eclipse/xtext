@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 
@@ -69,6 +70,8 @@ public class ExtendedEarlyExitComputer {
 			return isIntentionalEarlyExit(((XForLoopExpression) expression).getEachExpression());
 		} else if (expression instanceof XBasicForLoopExpression) {
 			return isIntentionalEarlyExit(((XBasicForLoopExpression) expression).getEachExpression());
+		} else if (expression instanceof XSynchronizedExpression) {
+			return isIntentionalEarlyExit(((XSynchronizedExpression) expression).getExpression());
 		}
 		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
 	}
@@ -110,6 +113,8 @@ public class ExtendedEarlyExitComputer {
 					return true;
 				}
 			}
+		} else if (expression instanceof XSynchronizedExpression) {
+			return isDefiniteEarlyExit(((XSynchronizedExpression) expression).getExpression());
 		}
 		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
 	}

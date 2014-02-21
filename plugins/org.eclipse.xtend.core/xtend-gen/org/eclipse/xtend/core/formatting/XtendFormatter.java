@@ -55,6 +55,7 @@ import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
@@ -1052,6 +1053,9 @@ public class XtendFormatter extends XbaseFormatter2 {
       return;
     } else if (annotationType instanceof XSwitchExpression) {
       _format((XSwitchExpression)annotationType, format);
+      return;
+    } else if (annotationType instanceof XSynchronizedExpression) {
+      _format((XSynchronizedExpression)annotationType, format);
       return;
     } else if (annotationType instanceof XThrowExpression) {
       _format((XThrowExpression)annotationType, format);

@@ -210,6 +210,26 @@ class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 		''')	
 	}
 	
+	@Test def formatSynchronizedBlock_1() {
+		assertFormattedExpression('''
+			synchronized (new Object) {
+			}
+		''',
+		'''
+			synchronized(new Object){}
+		''')
+	}
+	
+	@Test def formatSynchronizedBlock_2() {
+		assertFormattedExpression('''
+			synchronized (new Object) {
+			}
+		''',
+		'''
+			synchronized         (          new            Object           )        {        }
+		''')
+	}
+	
 	@Test def formatIf1SL1() {
 		assertFormattedExpression([
 			put(whitespaceBetweenKeywordAndParenthesisSL, true)

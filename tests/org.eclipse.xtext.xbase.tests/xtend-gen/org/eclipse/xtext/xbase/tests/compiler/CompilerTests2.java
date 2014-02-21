@@ -2295,4 +2295,161 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testSynchronizedBlock_1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val x = new Integer(1)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("synchronized(x) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Object _xblockexpression = null;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("final Integer x = new Integer(1);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("Object _xsynchronizedexpression = null;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("synchronized (x) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xsynchronizedexpression = null;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = (_xsynchronizedexpression);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSynchronizedBlock_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val x = new Integer(1)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val y = synchronized(x) 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final Integer x = new Integer(1);");
+      _builder_1.newLine();
+      _builder_1.append("int _xsynchronizedexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("synchronized (x) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xsynchronizedexpression = 1;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("final int y = _xsynchronizedexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSynchronizedBlock_3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val x = new Integer(1)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val y = synchronized(x) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("val i = 1");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("val j = 2");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("i + j");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final Integer x = new Integer(1);");
+      _builder_1.newLine();
+      _builder_1.append("int _xsynchronizedexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("synchronized (x) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("int _xblockexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("final int i = 1;");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("final int j = 2;");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xblockexpression = ((i + j));");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xsynchronizedexpression = _xblockexpression;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("final int y = _xsynchronizedexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

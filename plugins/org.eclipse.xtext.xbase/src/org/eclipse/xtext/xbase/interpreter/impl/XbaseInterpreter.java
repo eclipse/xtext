@@ -72,6 +72,7 @@ import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
@@ -223,7 +224,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	    	return _doEvaluate((XAbstractFeatureCall)expression, context, indicator);
 	    } else if (expression instanceof XBlockExpression) {
 	      return _doEvaluate((XBlockExpression)expression, context, indicator);
-	    } else if (expression instanceof XBooleanLiteral) {
+	    } else if (expression instanceof XSynchronizedExpression) {
+		  return _doEvaluate((XSynchronizedExpression)expression, context, indicator);
+		} else if (expression instanceof XBooleanLiteral) {
 	      return _doEvaluate((XBooleanLiteral)expression, context, indicator);
 	    } else if (expression instanceof XCastedExpression) {
 	      return _doEvaluate((XCastedExpression)expression, context, indicator);
@@ -442,6 +445,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			result = internalEvaluate(expressions.get(i), forkedContext, indicator);
 		}
 		return result;
+	}
+
+	protected Object _doEvaluate(XSynchronizedExpression expression, IEvaluationContext context, CancelIndicator indicator) {
+		internalEvaluate(expression.getParam(), context, indicator);
+		return internalEvaluate(expression.getExpression(), context, indicator);
 	}
 
 	protected Object _doEvaluate(XIfExpression ifExpression, IEvaluationContext context, CancelIndicator indicator) {

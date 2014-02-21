@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -190,6 +191,14 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 		} 
 		Collection<ExitPoint> finallyExitPoints = getExitPoints(expression.getFinallyExpression());
 		return finallyExitPoints;
+	}
+	
+	protected Collection<ExitPoint> _exitPoints(XSynchronizedExpression expression) {
+		Collection<ExitPoint> paramExitPoints = getExitPoints(expression.getParam());
+		if (isNotEmpty(paramExitPoints)) {
+			return paramExitPoints;
+		}
+		return getExitPoints(expression.getExpression());
 	}
 	
 }
