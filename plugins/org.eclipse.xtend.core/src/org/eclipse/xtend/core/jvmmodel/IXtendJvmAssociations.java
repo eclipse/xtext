@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.jvmmodel;
 import static com.google.common.collect.Iterables.*;
 
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -21,6 +22,7 @@ import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -30,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
@@ -188,6 +191,38 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 			EObject primarySourceElement = getPrimarySourceElement(jvmField);
 			if (primarySourceElement instanceof XtendField)
 				return (XtendField) primarySourceElement;
+			return null;
+		}
+		
+		@Override
+		protected JvmIdentifiableElement getLogicalContainer(EObject object, boolean considerContainer) {
+			if (object == null) {
+				return null;
+			}
+			final Map<EObject, JvmIdentifiableElement> mapping = getLogicalContainerMapping(object.eResource());
+			do {
+				if (mapping.containsKey(object)) {
+					return mapping.get(object);
+				}
+				if (object instanceof XtendMember) {
+					return null;
+				}
+				EObject container = object.eContainer();
+				if (container == null) {
+					return null;
+				}
+				if (!mapping.containsKey(container)) {
+					Set<EObject> elements = getJvmElements(container);
+					if (!elements.isEmpty()) {
+						for (EObject eObject : elements) {
+							if (eObject instanceof JvmIdentifiableElement) {
+								return (JvmIdentifiableElement) eObject;
+							}
+						}
+					}
+				}
+				object = container;
+			} while (considerContainer);
 			return null;
 		}
 
