@@ -867,6 +867,28 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testSynchronizedBlock_01() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, 
+				"synchronized(new Object) {\n" + 
+				"  val (Integer, Double, Boolean) => void fun1 = null\n" + 
+				"  val (byte[], Object) => double[] fun2 = null\n" + 
+				"  val test = newArrayList.map[1 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]\n" + 
+				"  val test2 = newArrayList.map[2 -> org::eclipse::xtext::xbase::lib::Pair::of(fun1, fun2)]\n" + 
+				"  val test3 = com::google::common::collect::Iterables::concat(test, test2).toMap[key].entrySet.map[value].toList\n" +
+				"  test3 != null" + 
+				"}");
+	}
+	
+	@Test public void testSynchronizedBlock_02() throws Exception {
+		assertEvaluatesTo("Length: 3", 
+				"synchronized(new Object) {\n" + 
+				"  val map = newHashMap\n" + 
+				"  map.put(1, 'abc')\n" + 
+				"  val x = map.get(1)\n" + 
+				"  'Length: ' + x.length" + 
+				"}");
+	}
+	
 	@Test public void testStringLiteral_01() throws Exception {
 		assertEvaluatesTo("", "''");
 	}

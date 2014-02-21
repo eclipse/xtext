@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
@@ -1644,6 +1645,132 @@ public class XbaseFormatter2 extends AbstractFormatter {
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForEObject, _function);
       format.operator_add(_append);
     }
+  }
+  
+  protected void _format(final XSynchronizedExpression expr, final FormattableDocument format) {
+    EObject _eContainer = expr.eContainer();
+    if ((_eContainer instanceof XVariableDeclaration)) {
+      ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(expr, "synchronized");
+      final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.increaseIndentation();
+        }
+      };
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForKeyword, _function);
+      format.operator_add(_append);
+      INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(expr);
+      final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.decreaseIndentation();
+        }
+      };
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_1 = this._formattingDataFactory.append(_nodeForEObject, _function_1);
+      format.operator_add(_append_1);
+    }
+    XExpression _expression = expr.getExpression();
+    final INode expressionnode = this._nodeModelAccess.nodeForEObject(_expression);
+    boolean _or = false;
+    String _text = null;
+    if (expressionnode!=null) {
+      _text=expressionnode.getText();
+    }
+    String _trim = null;
+    if (_text!=null) {
+      _trim=_text.trim();
+    }
+    boolean _contains = false;
+    if (_trim!=null) {
+      _contains=_trim.contains("\n");
+    }
+    if (_contains) {
+      _or = true;
+    } else {
+      HiddenLeafs _hiddenLeafsBefore = null;
+      if (expressionnode!=null) {
+        _hiddenLeafsBefore=this._hiddenLeafAccess.getHiddenLeafsBefore(expressionnode);
+      }
+      int _newLines = 0;
+      if (_hiddenLeafsBefore!=null) {
+        _newLines=_hiddenLeafsBefore.getNewLines();
+      }
+      boolean _greaterThan = (_newLines > 0);
+      _or = _greaterThan;
+    }
+    final boolean multiline = _or;
+    INode _nodeForFeature = this._nodeModelAccess.nodeForFeature(expr, XbasePackage.Literals.XSYNCHRONIZED_EXPRESSION__PARAM);
+    final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
+      public void apply(final FormattingDataInit it) {
+        it.noSpace();
+      }
+    };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForFeature, _function_2);
+    format.operator_add(_surround);
+    boolean _or_1 = false;
+    XExpression _expression_1 = expr.getExpression();
+    if ((_expression_1 instanceof XBlockExpression)) {
+      _or_1 = true;
+    } else {
+      _or_1 = multiline;
+    }
+    if (_or_1) {
+      ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(expr, "synchronized");
+      final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.cfg(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML);
+        }
+      };
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(_nodeForKeyword_1, _function_3);
+      format.operator_add(_append_2);
+    } else {
+      ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(expr, "synchronized");
+      final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.cfg(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL);
+        }
+      };
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(_nodeForKeyword_2, _function_4);
+      format.operator_add(_append_3);
+    }
+    XExpression _expression_2 = expr.getExpression();
+    if ((_expression_2 instanceof XBlockExpression)) {
+      final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.cfg(XbaseFormatterPreferenceKeys.bracesInNewLine);
+        }
+      };
+      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(expressionnode, _function_5);
+      format.operator_add(_prepend);
+    } else {
+      if ((!multiline)) {
+        final Procedure1<FormattingDataInit> _function_6 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.oneSpace();
+          }
+        };
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend_1 = this._formattingDataFactory.prepend(expressionnode, _function_6);
+        format.operator_add(_prepend_1);
+      } else {
+        final Procedure1<FormattingDataInit> _function_7 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.newLine();
+            it.increaseIndentation();
+          }
+        };
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend_2 = this._formattingDataFactory.prepend(expressionnode, _function_7);
+        format.operator_add(_prepend_2);
+        final Procedure1<FormattingDataInit> _function_8 = new Procedure1<FormattingDataInit>() {
+          public void apply(final FormattingDataInit it) {
+            it.decreaseIndentation();
+          }
+        };
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_4 = this._formattingDataFactory.append(expressionnode, _function_8);
+        format.operator_add(_append_4);
+      }
+    }
+    XExpression _param = expr.getParam();
+    this.format(_param, format);
+    XExpression _expression_3 = expr.getExpression();
+    this.format(_expression_3, format);
   }
   
   protected void _format(final XIfExpression expr, final FormattableDocument format) {
@@ -3528,6 +3655,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
       return;
     } else if (ref instanceof XSwitchExpression) {
       _format((XSwitchExpression)ref, document);
+      return;
+    } else if (ref instanceof XSynchronizedExpression) {
+      _format((XSynchronizedExpression)ref, document);
       return;
     } else if (ref instanceof XThrowExpression) {
       _format((XThrowExpression)ref, document);

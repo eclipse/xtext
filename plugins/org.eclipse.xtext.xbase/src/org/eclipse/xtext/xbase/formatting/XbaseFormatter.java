@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XMemberFeatureCallEle
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XParenthesizedExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XShortClosureElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XSwitchExpressionElements;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XSynchronizedExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XTryCatchFinallyExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XTypeLiteralElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XUnaryOperationElements;
@@ -56,6 +57,7 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 		configureXShortClosure(c, ga.getXShortClosureAccess());
 		configureXParenthesizedExpression(c, ga.getXParenthesizedExpressionAccess());
 		configureXIfExpression(c, ga.getXIfExpressionAccess());
+		configureXSynchronizedExpression(c, ga.getXSynchronizedExpressionAccess());
 		configureXSwitchExpression(c, ga.getXSwitchExpressionAccess());
 		configureXCasePart(c, ga.getXCasePartAccess());
 		configureXForLoopExpression(c, ga.getXForLoopExpressionAccess());
@@ -116,6 +118,14 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().around(ele.getElseAssignment_6_1());
 		c.setIndentationIncrement().before(ele.getElseAssignment_6_1());
 		c.setIndentationDecrement().after(ele.getElseAssignment_6_1());
+	}
+
+	public void configureXSynchronizedExpression(FormattingConfig c, XSynchronizedExpressionElements ele) {
+		c.setNoSpace().around(ele.getLeftParenthesisKeyword_0_0_2());
+		c.setNoSpace().before(ele.getRightParenthesisKeyword_2());
+		c.setLinewrap().around(ele.getExpressionAssignment_3());
+		c.setIndentationIncrement().before(ele.getExpressionAssignment_3());
+		c.setIndentationDecrement().after(ele.getExpressionAssignment_3());
 	}
 
 	public void configureXSwitchExpression(FormattingConfig c, XSwitchExpressionElements ele) {

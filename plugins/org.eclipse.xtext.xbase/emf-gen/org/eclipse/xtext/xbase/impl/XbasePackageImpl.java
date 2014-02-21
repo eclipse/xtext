@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
@@ -298,6 +299,13 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * @generated
 	 */
 	private EClass xReturnExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xSynchronizedExpressionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1458,6 +1466,36 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getXSynchronizedExpression()
+	{
+		return xSynchronizedExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXSynchronizedExpression_Param()
+	{
+		return (EReference)xSynchronizedExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXSynchronizedExpression_Expression()
+	{
+		return (EReference)xSynchronizedExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XbaseFactory getXbaseFactory()
 	{
 		return (XbaseFactory)getEFactoryInstance();
@@ -1623,6 +1661,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 
 		xReturnExpressionEClass = createEClass(XRETURN_EXPRESSION);
 		createEReference(xReturnExpressionEClass, XRETURN_EXPRESSION__EXPRESSION);
+
+		xSynchronizedExpressionEClass = createEClass(XSYNCHRONIZED_EXPRESSION);
+		createEReference(xSynchronizedExpressionEClass, XSYNCHRONIZED_EXPRESSION__PARAM);
+		createEReference(xSynchronizedExpressionEClass, XSYNCHRONIZED_EXPRESSION__EXPRESSION);
 	}
 
 	/**
@@ -1688,6 +1730,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xTryCatchFinallyExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xAssignmentEClass.getESuperTypes().add(this.getXAbstractFeatureCall());
 		xReturnExpressionEClass.getESuperTypes().add(this.getXExpression());
+		xSynchronizedExpressionEClass.getESuperTypes().add(this.getXExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xExpressionEClass, XExpression.class, "XExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1850,6 +1893,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 
 		initEClass(xReturnExpressionEClass, XReturnExpression.class, "XReturnExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXReturnExpression_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XReturnExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xSynchronizedExpressionEClass, XSynchronizedExpression.class, "XSynchronizedExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXSynchronizedExpression_Param(), this.getXExpression(), null, "param", null, 0, 1, XSynchronizedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXSynchronizedExpression_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XSynchronizedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

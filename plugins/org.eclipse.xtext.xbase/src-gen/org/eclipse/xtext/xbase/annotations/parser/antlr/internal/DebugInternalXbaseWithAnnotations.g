@@ -302,6 +302,9 @@ ruleXPrimaryExpression :
 	ruleXConstructorCall |
 	ruleXBlockExpression |
 	ruleXSwitchExpression |
+	( (
+	'synchronized' '('
+	) => ruleXSynchronizedExpression ) |
 	ruleXFeatureCall |
 	ruleXLiteral |
 	ruleXIfExpression |
@@ -631,6 +634,15 @@ ruleXTryCatchFinallyExpression :
 		)? |
 		'finally' ruleXExpression
 	)
+;
+
+// Rule XSynchronizedExpression
+ruleXSynchronizedExpression :
+	( (
+	'synchronized' '('
+	) => (
+		'synchronized' '('
+	) ) ruleXExpression ')' ruleXExpression
 ;
 
 // Rule XCatchClause

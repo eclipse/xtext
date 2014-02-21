@@ -703,5 +703,100 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		}
 		'''.expression.assertNoIssues
 	}
+	
+	@Test def void testSynchronizedExpression_1() {
+		'''
+			{
+				synchronized (1 + 2) {
+				}
+			}
+		'''.expression.assertError(XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+	
+	@Test def void testSynchronizedExpression_2() {
+		'''
+			{
+				synchronized (null) {
+				}
+			}
+		'''.expression.assertError(XbasePackage.Literals.XNULL_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+	
+	@Test def void testSynchronizedExpression_3() {
+		'''
+			{
+				val x = new Integer(1)
+				synchronized (x) {
+				}
+			}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSynchronizedExpression_4() {
+		'''
+			{
+				val ()=>void x = [|]
+				synchronized (x.apply) {
+				}
+			}
+		'''.expression.assertError(XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+	
+	@Test def void testSynchronizedExpression_5() {
+		'''
+			{
+				val ()=>int x = [|1]
+				synchronized (x.apply) {
+				}
+			}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSynchronizedExpression_6() {
+		'''
+			{
+				val ()=>Object x = [|new Object]
+				synchronized (x.apply) {
+				}
+			}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSynchronizedExpression_7() {
+		'''
+			{
+				val x = 1
+				synchronized (x) {
+				}
+			}
+		'''.expression.assertError(XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+	
+	@Test def void testSynchronizedExpression_8() {
+		'''
+			{
+				val int x = synchronized (new Object) new Object
+				x
+			}
+		'''.expression.assertError(XbasePackage.Literals.XCONSTRUCTOR_CALL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+	
+	@Test def void testSynchronizedExpression_9() {
+		'''
+			{
+				val int x = synchronized (new Object) 1
+				x
+			}
+		'''.expression.assertNoIssues
+	}
+	
+	@Test def void testSynchronizedExpression_10() {
+		'''
+			{
+				val x = synchronized (new Object) new Object
+				x
+			}
+		'''.expression.assertNoIssues
+	}
 
 }
