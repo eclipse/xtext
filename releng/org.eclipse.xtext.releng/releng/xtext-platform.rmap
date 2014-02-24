@@ -64,7 +64,7 @@
     </rm:provider>
   </rm:searchPath>
   <rm:searchPath name="local.releng">
-    <rm:provider componentTypes="buckminster" readerType="local" mutable="false">
+    <rm:provider componentTypes="buckminster" readerType="local" mutable="false" source="true">
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/releng/{1}">
         <bc:propertyRef key="checkout.location"/>
