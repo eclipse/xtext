@@ -17,13 +17,20 @@ import java.util.List;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.jdt.internal.corext.util.Strings;
+import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.ui.texteditor.MarkerUtilities;
-import org.eclipse.xtext.util.Files;
 import org.junit.Test;
 
 /**
@@ -34,12 +41,34 @@ public class InternalBuilderTest {
 	@Test
 	public void test() throws CoreException, FileNotFoundException {
 
+		System.out.println("JDT Version:" + JavaCore.getPlugin().getBundle().getVersion());
+		System.out.println("JDT UI Version:" + JavaPlugin.getDefault().getBundle().getVersion());
 		reportMemoryState("Starting build.");
 
 		try {
+			dumpMemoryIndex("Initial Memory Index state");
+			dumpDiskIndex();
+
 			clearJdtIndex();
-			ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
+			dumpMemoryIndex("Memory Index state after clear disk");
+			dumpDiskIndex();
+			
+			JavaModelManager.getIndexManager().resetIndex(new Path("/org.eclipse.xtext"));
+			dumpMemoryIndex("Memory Index state after reset project");
+			dumpDiskIndex();
+			
+			System.out.println("Saving index.");
+			JavaModelManager.getIndexManager().saveIndexes();
+			dumpMemoryIndex("Memory Index state after save");
+			dumpDiskIndex();
+
+			
+			setAutoBuild(true);
+			waitForAutoBuild();
 		} finally {
+			setAutoBuild(false);
+			System.out.println("Stopping background indexing.");
+			JavaModelManager.getIndexManager().shutdown();
 			clearJdtIndex();
 			reportMemoryState("Finished build.");
 		}
@@ -65,10 +94,19 @@ public class InternalBuilderTest {
 				errors.isEmpty());
 	}
 
-	private void clearJdtIndex() throws FileNotFoundException {
+	private void dumpMemoryIndex(String message) {
+		System.out.println(message + ":\n" + JavaModelManager.getIndexManager().toString());
+	}
+
+
+	private void dumpDiskIndex() {
 		File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
-		boolean success = Files.sweepFolder(jdtMetadata);
-		System.out.println("Clean up index " + jdtMetadata.getAbsolutePath() + ": " + (success ? "success" : "fail"));
+		System.out.println("Disk index " + Strings.concatenate(jdtMetadata.list(), ","));
+	}
+
+	private void clearJdtIndex() throws FileNotFoundException {
+		JavaModelManager.getIndexManager().deleteIndexFiles();
+		System.out.println("Cleaned up jdt's disk index.");
 	}
 
 	private void reportMemoryState(String reportName) {
@@ -77,4 +115,63 @@ public class InternalBuilderTest {
 				/ (1024 * 1024) + "m");
 	}
 
+	public static void cleanBuild() throws CoreException {
+		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, new NullProgressMonitor());
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD, null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
+	}
+
+	public static void fullBuild() throws CoreException {
+		System.out.println("Starting full build");
+		ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD, null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
+	}
+
+	public static void waitForAutoBuild() {
+		System.out.println("Waiting for auto-build");
+
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD, null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
+	}
+
+	public static void setAutoBuild(boolean b) {
+		System.out.println("Setting auto-build to " + b);
+
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		try {
+			IWorkspaceDescription desc = workspace.getDescription();
+			desc.setAutoBuilding(b);
+			workspace.setDescription(desc);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
 }
