@@ -28,6 +28,10 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.internal.core.JavaModelManager;
+<<<<<<< HEAD
+=======
+import org.eclipse.jdt.internal.core.search.indexing.IndexManager;
+>>>>>>> playground
 import org.eclipse.jdt.internal.corext.util.Strings;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.ui.texteditor.MarkerUtilities;
