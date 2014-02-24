@@ -32,6 +32,7 @@
         <cs:dependency name="org.eclipse.jdt" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.jdt.annotation" componentType="osgi.bundle" versionDesignator="1.0.0"/>
         <cs:dependency name="org.eclipse.jdt.core.source" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.jdt.launching.macosx" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.jdt.junit" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.jdt.junit4.runtime" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.m2e.core" componentType="osgi.bundle"/>
@@ -45,7 +46,7 @@
         <cs:dependency name="org.eclipse.xtend.typesystem.emf" componentType="osgi.bundle"/>
         <cs:dependency name="org.junit" componentType="osgi.bundle" versionDesignator="[3.8.0,4.0.0)"/>
         <cs:dependency name="org.junit4" componentType="osgi.bundle" versionDesignator="4.8.0"/>
-   <cs:dependency name="org.objectweb.asm" componentType="osgi.bundle" versionDesignator="[3.2.0,4.0.0)"/>
+   		<cs:dependency name="org.objectweb.asm" componentType="osgi.bundle" versionDesignator="[3.2.0,4.0.0)"/>
         <cs:dependency name="org.objectweb.asm.source" componentType="osgi.bundle" versionDesignator="[3.2.0,4.0.0)"/>
     </cs:dependencies>
     <cs:actions>
@@ -57,7 +58,6 @@
             <cs:properties>
                 <cs:property key="checkoutLocation" value="${checkout.location}"/>
                 <cs:property key="output" value="${buckminster.output}/javadoc/"/>
-                <cs:property key="xtend.checkoutLocation" value="${xtend.checkout.location}"/>
             </cs:properties>
         </cs:public>
         <cs:public name="setup.promoter" actor="ant">
