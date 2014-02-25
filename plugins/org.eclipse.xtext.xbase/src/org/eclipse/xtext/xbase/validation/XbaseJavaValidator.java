@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -34,6 +35,8 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EcoreUtil2.ElementReferenceAcceptor;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -45,6 +48,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -99,6 +103,7 @@ import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Functions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
@@ -491,27 +496,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Check
 	public void checkAssignment(XAssignment assignment) {
-		JvmIdentifiableElement assignmentFeature = assignment.getFeature();
-		if (assignmentFeature instanceof XVariableDeclaration
-				&& !((XVariableDeclaration) assignmentFeature).isWriteable())
-			error("Assignment to final variable", Literals.XASSIGNMENT__ASSIGNABLE,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_FINAL);
-		else if (assignmentFeature instanceof JvmFormalParameter)
-			error("Assignment to final parameter", Literals.XASSIGNMENT__ASSIGNABLE,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_FINAL);
-		else if (assignmentFeature instanceof JvmField && ((JvmField) assignmentFeature).isFinal()) {
-			JvmField field = (JvmField) assignmentFeature;
-			JvmIdentifiableElement container = logicalContainerProvider.getNearestLogicalContainer(assignment);
-			
-			// don't issue an error if it's an assignment of a local final field within a constructor.
-			if (container != null && container instanceof JvmConstructor) {
-				JvmConstructor constructor = (JvmConstructor) container;
-				if (field.getDeclaringType() == constructor.getDeclaringType())
-					return;
-			}
-			error("Assignment to final field", Literals.XASSIGNMENT__ASSIGNABLE,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_FINAL);
-		}
+		checkAssignment(assignment, Literals.XASSIGNMENT__ASSIGNABLE, true);
 	}
 
 	/**
@@ -1545,6 +1530,77 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		builder.append(" need a corresponding case labels in this enum switch on ").append(enumerationType.getQualifiedName());
 		String message = builder.toString();
 		addIssue(message, switchExpression.getSwitch(), null, IssueCodes.INCOMPLETE_CASES_ON_ENUM, expectedEnumerationLiterals.toArray(new String[0]));
+	}
+	
+	@Check
+	public void checkAssignment(XBinaryOperation binaryOperation) {
+		JvmAnnotationReference inlineAnnotation = expressionHelper.findInlineAnnotation(binaryOperation);
+		if (inlineAnnotation == null) {
+			return;
+		}
+		JvmAnnotationValue annotationValue = IterableExtensions.findFirst(inlineAnnotation.getValues(),
+				new Functions.Function1<JvmAnnotationValue, Boolean>() {
+
+					public Boolean apply(JvmAnnotationValue value) {
+						return "mutableArguments".equals(value.getValueName()) && value instanceof JvmIntAnnotationValue;
+					}
+
+				});
+		if (annotationValue == null) {
+			return;
+		}
+		EList<XExpression> actualArguments = binaryOperation.getActualArguments();
+		
+		JvmIntAnnotationValue intAnnotationValue = (JvmIntAnnotationValue) annotationValue;
+		for (int argumentIndex : intAnnotationValue.getValues()) {
+			try {
+				XExpression argument = actualArguments.get(argumentIndex);
+				checkAssignment(argument, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+			} catch (IndexOutOfBoundsException e) {
+				error("Mutable argument index is out of range: " + argumentIndex, null);
+			}
+		}
+	}
+	
+	protected void checkAssignment(XExpression expression, EStructuralFeature feature, boolean assignableInConstructor) {
+		if (!(expression instanceof XAbstractFeatureCall)) {
+			error("The left-hand side of an assignment must be a variable", expression, null,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_NO_VARIABLE);
+			return;
+		}
+		XAbstractFeatureCall assignment = (XAbstractFeatureCall) expression;
+		JvmIdentifiableElement assignmentFeature = assignment.getFeature();
+		if (assignmentFeature instanceof XVariableDeclaration) {
+			XVariableDeclaration variableDeclaration = (XVariableDeclaration) assignmentFeature;
+			if (variableDeclaration.isWriteable()) {
+				return;
+			}
+			error("Assignment to final variable", expression, feature,
+				ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_FINAL);
+		} else if (assignmentFeature instanceof JvmFormalParameter) {
+			error("Assignment to final parameter", expression, feature,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_FINAL);
+		} else if (assignmentFeature instanceof JvmField) {
+			JvmField field = (JvmField) assignmentFeature;
+			if (!field.isFinal()) {
+				return;
+			}
+			if (assignableInConstructor) {
+				JvmIdentifiableElement container = logicalContainerProvider.getNearestLogicalContainer(assignment);
+				
+				// don't issue an error if it's an assignment of a local final field within a constructor.
+				if (container != null && container instanceof JvmConstructor) {
+					JvmConstructor constructor = (JvmConstructor) container;
+					if (field.getDeclaringType() == constructor.getDeclaringType())
+						return;
+				}
+			}
+			error("Assignment to final field", expression, feature,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_FINAL);
+		} else {
+			error("The left-hand side of an assignment must be a variable", expression, null,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_NO_VARIABLE);
+		}
 	}
 	
 }

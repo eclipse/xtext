@@ -2198,6 +2198,78 @@ rule__OpMultiAssign__Alternatives
 { after(grammarAccess.getOpMultiAssignAccess().getHyphenMinusEqualsSignKeyword_1()); }
 )
 
+    |(
+{ before(grammarAccess.getOpMultiAssignAccess().getAsteriskEqualsSignKeyword_2()); }
+
+	'*=' 
+
+{ after(grammarAccess.getOpMultiAssignAccess().getAsteriskEqualsSignKeyword_2()); }
+)
+
+    |(
+{ before(grammarAccess.getOpMultiAssignAccess().getSolidusEqualsSignKeyword_3()); }
+
+	'/=' 
+
+{ after(grammarAccess.getOpMultiAssignAccess().getSolidusEqualsSignKeyword_3()); }
+)
+
+    |(
+{ before(grammarAccess.getOpMultiAssignAccess().getAmpersandEqualsSignKeyword_4()); }
+
+	'&=' 
+
+{ after(grammarAccess.getOpMultiAssignAccess().getAmpersandEqualsSignKeyword_4()); }
+)
+
+    |(
+{ before(grammarAccess.getOpMultiAssignAccess().getVerticalLineEqualsSignKeyword_5()); }
+
+	'|=' 
+
+{ after(grammarAccess.getOpMultiAssignAccess().getVerticalLineEqualsSignKeyword_5()); }
+)
+
+    |(
+{ before(grammarAccess.getOpMultiAssignAccess().getCircumflexAccentEqualsSignKeyword_6()); }
+
+	'^=' 
+
+{ after(grammarAccess.getOpMultiAssignAccess().getCircumflexAccentEqualsSignKeyword_6()); }
+)
+
+    |(
+{ before(grammarAccess.getOpMultiAssignAccess().getPercentSignEqualsSignKeyword_7()); }
+
+	'%=' 
+
+{ after(grammarAccess.getOpMultiAssignAccess().getPercentSignEqualsSignKeyword_7()); }
+)
+
+    |(
+{ before(grammarAccess.getOpMultiAssignAccess().getLessThanSignLessThanSignEqualsSignKeyword_8()); }
+
+	'<<=' 
+
+{ after(grammarAccess.getOpMultiAssignAccess().getLessThanSignLessThanSignEqualsSignKeyword_8()); }
+)
+
+    |(
+{ before(grammarAccess.getOpMultiAssignAccess().getGreaterThanSignGreaterThanSignEqualsSignKeyword_9()); }
+
+	'>>=' 
+
+{ after(grammarAccess.getOpMultiAssignAccess().getGreaterThanSignGreaterThanSignEqualsSignKeyword_9()); }
+)
+
+    |(
+{ before(grammarAccess.getOpMultiAssignAccess().getGreaterThanSignGreaterThanSignGreaterThanSignEqualsSignKeyword_10()); }
+
+	'>>>=' 
+
+{ after(grammarAccess.getOpMultiAssignAccess().getGreaterThanSignGreaterThanSignGreaterThanSignEqualsSignKeyword_10()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);

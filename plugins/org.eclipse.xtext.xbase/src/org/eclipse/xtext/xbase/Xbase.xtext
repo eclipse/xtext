@@ -25,7 +25,7 @@ OpSingleAssign:
 ;
 
 OpMultiAssign:
-	'+=' | '-=';
+	'+=' | '-=' | '*=' | '/=' | '&=' | '|=' | '^=' | '%=' | '<<=' | '>>=' | '>>>=';
 
 XOrExpression returns XExpression:
 	XAndExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOr]) rightOperand=XAndExpression)*;
