@@ -73,6 +73,11 @@
 			<version>[${project.version}]</version>
 		</dependency>
 		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib</artifactId>
+			<version>[${project.version}]</version>
+		</dependency>
+		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.common.types</artifactId>
 			<version>[${project.version}]</version>
