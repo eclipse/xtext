@@ -141,12 +141,21 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cPlusSignEqualsSignKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cHyphenMinusEqualsSignKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cAsteriskEqualsSignKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cSolidusEqualsSignKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cAmpersandEqualsSignKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cVerticalLineEqualsSignKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final Keyword cCircumflexAccentEqualsSignKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
+		private final Keyword cPercentSignEqualsSignKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
+		private final Keyword cLessThanSignLessThanSignEqualsSignKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
+		private final Keyword cGreaterThanSignGreaterThanSignEqualsSignKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final Keyword cGreaterThanSignGreaterThanSignGreaterThanSignEqualsSignKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
 		
 		//OpMultiAssign:
-		//	"+=" | "-=";
+		//	"+=" | "-=" | "*=" | "/=" | "&=" | "|=" | "^=" | "%=" | "<<=" | ">>=" | ">>>=";
 		public ParserRule getRule() { return rule; }
 
-		//"+=" | "-="
+		//"+=" | "-=" | "*=" | "/=" | "&=" | "|=" | "^=" | "%=" | "<<=" | ">>=" | ">>>="
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"+="
@@ -154,6 +163,33 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"-="
 		public Keyword getHyphenMinusEqualsSignKeyword_1() { return cHyphenMinusEqualsSignKeyword_1; }
+
+		//"*="
+		public Keyword getAsteriskEqualsSignKeyword_2() { return cAsteriskEqualsSignKeyword_2; }
+
+		//"/="
+		public Keyword getSolidusEqualsSignKeyword_3() { return cSolidusEqualsSignKeyword_3; }
+
+		//"&="
+		public Keyword getAmpersandEqualsSignKeyword_4() { return cAmpersandEqualsSignKeyword_4; }
+
+		//"|="
+		public Keyword getVerticalLineEqualsSignKeyword_5() { return cVerticalLineEqualsSignKeyword_5; }
+
+		//"^="
+		public Keyword getCircumflexAccentEqualsSignKeyword_6() { return cCircumflexAccentEqualsSignKeyword_6; }
+
+		//"%="
+		public Keyword getPercentSignEqualsSignKeyword_7() { return cPercentSignEqualsSignKeyword_7; }
+
+		//"<<="
+		public Keyword getLessThanSignLessThanSignEqualsSignKeyword_8() { return cLessThanSignLessThanSignEqualsSignKeyword_8; }
+
+		//">>="
+		public Keyword getGreaterThanSignGreaterThanSignEqualsSignKeyword_9() { return cGreaterThanSignGreaterThanSignEqualsSignKeyword_9; }
+
+		//">>>="
+		public Keyword getGreaterThanSignGreaterThanSignGreaterThanSignEqualsSignKeyword_10() { return cGreaterThanSignGreaterThanSignGreaterThanSignEqualsSignKeyword_10; }
 	}
 
 	public class XOrExpressionElements extends AbstractParserRuleElementFinder {
@@ -3311,7 +3347,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OpMultiAssign:
-	//	"+=" | "-=";
+	//	"+=" | "-=" | "*=" | "/=" | "&=" | "|=" | "^=" | "%=" | "<<=" | ">>=" | ">>>=";
 	public OpMultiAssignElements getOpMultiAssignAccess() {
 		return (pOpMultiAssign != null) ? pOpMultiAssign : (pOpMultiAssign = new OpMultiAssignElements());
 	}
