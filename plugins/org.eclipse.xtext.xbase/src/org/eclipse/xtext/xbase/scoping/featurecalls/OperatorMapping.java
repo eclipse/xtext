@@ -42,6 +42,15 @@ import com.google.inject.Singleton;
  *   <tr><td>&&</td><td>operator_and</td></tr>
  *   <tr><td>+=</td><td>operator_add</td></tr>
  *   <tr><td>-=</td><td>operator_remove</td></tr>
+ *   <tr><td>*=</td><td>operator_multiplyAssign</td></tr>
+ *   <tr><td>/=</td><td>operator_divideAssign</td></tr>
+ *   <tr><td>%=</td><td>operator_moduloAssign</td></tr>
+ *   <tr><td>&=</td><td>operator_andAssign</td></tr>
+ *   <tr><td>|=</td><td>operator_orAssign</td></tr>
+ *   <tr><td>^=</td><td>operator_xorAssign</td></tr>
+ *   <tr><td>&lt;&lt;=</td><td>operator_doubleLessThanAssign</td></tr>
+ *   <tr><td>&gt;&gt;=</td><td>operator_doubleGreaterThanAssign</td></tr>
+ *   <tr><td>&gt;&gt;&gt;=</td><td>operator_tripleGreaterThanAssign</td></tr>
  *   <tr><td>==</td><td>operator_equals</td></tr>
  *   <tr><td>===</td><td>operator_tripleEquals</td></tr>
  *   <tr><td>!==</td><td>operator_tripleNotEquals</td></tr>
@@ -82,6 +91,15 @@ public class OperatorMapping {
 	public static final QualifiedName AND = create("&&");
 	public static final QualifiedName ADD = create("+=");
 	public static final QualifiedName REMOVE = create("-=");
+	public static final QualifiedName MULTIPLY_ASSIGN = create("*=");
+	public static final QualifiedName DIVIDE_ASSIGN = create("/=");
+	public static final QualifiedName MODULO_ASSIGN = create("%=");
+	public static final QualifiedName AND_ASSIGN = create("&=");
+	public static final QualifiedName OR_ASSIGN = create("|=");
+	public static final QualifiedName XOR_ASSIGN = create("^=");
+	public static final QualifiedName DOUBLE_LESS_THAN_ASSIGN = create("<<=");
+	public static final QualifiedName DOUBLE_GREATER_THAN_ASSIGN = create(">>=");
+	public static final QualifiedName TRIPLE_GREATER_THAN_ASSIGN = create(">>>=");
 	public static final QualifiedName EQUALS = create("==");
 	public static final QualifiedName TRIPLE_EQUALS = create("===");
 	public static final QualifiedName TRIPLE_NOT_EQUALS = create("!==");
@@ -123,6 +141,15 @@ public class OperatorMapping {
 		map.put(AND, create(OP_PREFIX+"and"));
 		map.put(ADD, create(OP_PREFIX+"add"));
 		map.put(REMOVE, create(OP_PREFIX+"remove"));
+		map.put(MULTIPLY_ASSIGN, create(OP_PREFIX+"multiplyAssign"));
+		map.put(DIVIDE_ASSIGN, create(OP_PREFIX+"divideAssign"));
+		map.put(MODULO_ASSIGN, create(OP_PREFIX+"moduloAssign"));
+		map.put(AND_ASSIGN, create(OP_PREFIX+"andAssign"));
+		map.put(OR_ASSIGN, create(OP_PREFIX+"orAssign"));
+		map.put(XOR_ASSIGN, create(OP_PREFIX+"xorAssign"));
+		map.put(DOUBLE_LESS_THAN_ASSIGN, create(OP_PREFIX + "doubleLessThanAssign"));
+		map.put(DOUBLE_GREATER_THAN_ASSIGN, create(OP_PREFIX + "doubleGreaterThanAssign"));
+		map.put(TRIPLE_GREATER_THAN_ASSIGN, create(OP_PREFIX + "tripleGreaterThanAssign"));
 		map.put(EQUALS, create(OP_PREFIX+"equals"));
 		map.put(TRIPLE_EQUALS, create(OP_PREFIX+"tripleEquals"));
 		map.put(TRIPLE_NOT_EQUALS, create(OP_PREFIX+"tripleNotEquals"));

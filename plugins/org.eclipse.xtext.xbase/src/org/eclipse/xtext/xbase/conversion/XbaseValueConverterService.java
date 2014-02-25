@@ -64,6 +64,33 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 		}
 		
 	}
+	
+	public static class MultiAssignOperatorsValueConverter extends AbstractValueConverter<String> {
+
+		private final static Set<String> operators = ImmutableSet.of(
+			"+=",
+			"-=",
+			"*=",
+			"/=",
+			"&=",
+			"|=",
+			"^=",
+			"%=",
+			"<<=",
+			">>=",
+			">>>=");
+		
+		public String toValue(String string, INode node) throws ValueConverterException {
+			return string;
+		}
+
+		public String toString(String value) throws ValueConverterException {
+			if (!operators.contains(value))
+				throw new ValueConverterException("'" + value + "' is not a valid operator.", null, null);
+			return value;
+		}
+		
+	}
 
 	@Inject
 	private XbaseQualifiedNameValueConverter qualifiedNameValueConverter;
@@ -73,6 +100,9 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 	
 	@Inject
 	private OtherOperatorsValueConverter otherOperatorsValueConverter;
+	
+	@Inject
+	private MultiAssignOperatorsValueConverter multiAssignOperatorsValueConverter;
 	
 	@Inject
 	private KeywordAlternativeConverter validIDConverter;
@@ -115,7 +145,7 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 	
 	@ValueConverter(rule = "OpMultiAssign")
 	public IValueConverter<String> getOpMultiAssignConverter() {
-		return keywordBasedConverterProvider.get();
+		return multiAssignOperatorsValueConverter;
 	}
 	
 	@ValueConverter(rule = "OpOr")

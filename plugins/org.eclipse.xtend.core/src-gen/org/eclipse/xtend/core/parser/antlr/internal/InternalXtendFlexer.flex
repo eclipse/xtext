@@ -82,12 +82,15 @@ RICH_TEXT_FINISH="'"("'"("'")?)?
 <YYINITIAL> "!==" { return KW_ExclamationMarkEqualsSignEqualsSign; }
 <YYINITIAL> "#" { return KW_NumberSign; }
 <YYINITIAL> "%" { return KW_PercentSign; }
+<YYINITIAL> "%=" { return KW_PercentSignEqualsSign; }
 <YYINITIAL> "&" { return KW_Ampersand; }
 <YYINITIAL> "&&" { return KW_AmpersandAmpersand; }
+<YYINITIAL> "&=" { return KW_AmpersandEqualsSign; }
 <YYINITIAL> "(" { return KW_LeftParenthesis; }
 <YYINITIAL> ")" { return KW_RightParenthesis; }
 <YYINITIAL> "*" { return KW_Asterisk; }
 <YYINITIAL> "**" { return KW_AsteriskAsterisk; }
+<YYINITIAL> "*=" { return KW_AsteriskEqualsSign; }
 <YYINITIAL> "+" { return KW_PlusSign; }
 <YYINITIAL> "+=" { return KW_PlusSignEqualsSign; }
 <YYINITIAL> "," { return KW_Comma; }
@@ -99,6 +102,7 @@ RICH_TEXT_FINISH="'"("'"("'")?)?
 <YYINITIAL> "..." { return KW_FullStopFullStopFullStop; }
 <YYINITIAL> "..<" { return KW_FullStopFullStopLessThanSign; }
 <YYINITIAL> "/" { return KW_Solidus; }
+<YYINITIAL> "/=" { return KW_SolidusEqualsSign; }
 <YYINITIAL> ":" { return KW_Colon; }
 <YYINITIAL> "::" { return KW_ColonColon; }
 <YYINITIAL> ";" { return KW_Semicolon; }
@@ -127,6 +131,7 @@ RICH_TEXT_FINISH="'"("'"("'")?)?
 <YYINITIAL> "SEPARATOR" { return KW_SEPARATOR; }
 <YYINITIAL> "[" { return KW_LeftSquareBracket; }
 <YYINITIAL> "]" { return KW_RightSquareBracket; }
+<YYINITIAL> "^=" { return KW_CircumflexAccentEqualsSign; }
 <YYINITIAL> "abstract" { return KW_Abstract; }
 <YYINITIAL> "annotation" { return KW_Annotation; }
 <YYINITIAL> "as" { return KW_As; }
@@ -177,6 +182,7 @@ RICH_TEXT_FINISH="'"("'"("'")?)?
 <YYINITIAL> "while" { return KW_While; }
 <YYINITIAL> "{" { return KW_LeftCurlyBracket; }
 <YYINITIAL> "|" { return KW_VerticalLine; }
+<YYINITIAL> "|=" { return KW_VerticalLineEqualsSign; }
 <YYINITIAL> "||" { return KW_VerticalLineVerticalLine; }
 <YYINITIAL> "}" { return KW_RightCurlyBracket; }
 

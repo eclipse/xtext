@@ -30,6 +30,7 @@ public class IssueCodes {
 	public static final String ANNOTATIONS_NO_VALUE_ATTRIBUTE = ISSUE_CODE_PREFIX + "no_attribute_value";
 	public static final String ANNOTATIONS_MISSING_ATTRIBUTE_DEFINITION = ISSUE_CODE_PREFIX + "missing_attribute_definition";
 	public static final String ASSIGNMENT_TO_FINAL = ISSUE_CODE_PREFIX + "assignment_to_final";
+	public static final String ASSIGNMENT_TO_NO_VARIABLE = ISSUE_CODE_PREFIX + "assignment_to_no_variable";
 	public static final String CIRCULAR_CONSTRUCTOR_INVOCATION = ISSUE_CODE_PREFIX + "circular_constructor_invocation";
 	public static final String FEATURE_NOT_VISIBLE = ISSUE_CODE_PREFIX + "invisible_feature";
 	public static final String FIELD_ACCESS_WITH_PARENTHESES = ISSUE_CODE_PREFIX + "field_access_with_parentheses";
