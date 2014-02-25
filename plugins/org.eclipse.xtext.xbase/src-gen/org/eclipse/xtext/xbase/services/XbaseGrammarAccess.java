@@ -141,12 +141,25 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cPlusSignEqualsSignKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cHyphenMinusEqualsSignKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cAsteriskEqualsSignKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cSolidusEqualsSignKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cAmpersandEqualsSignKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cVerticalLineEqualsSignKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final Keyword cCircumflexAccentEqualsSignKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
+		private final Keyword cPercentSignEqualsSignKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
+		private final Group cGroup_8 = (Group)cAlternatives.eContents().get(8);
+		private final Keyword cLessThanSignKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
+		private final Keyword cLessThanSignEqualsSignKeyword_8_1 = (Keyword)cGroup_8.eContents().get(1);
+		private final Group cGroup_9 = (Group)cAlternatives.eContents().get(9);
+		private final Keyword cGreaterThanSignKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_9_1 = (Keyword)cGroup_9.eContents().get(1);
+		private final Keyword cGreaterThanSignEqualsSignKeyword_9_2 = (Keyword)cGroup_9.eContents().get(2);
 		
 		//OpMultiAssign:
-		//	"+=" | "-=";
+		//	"+=" | "-=" | "*=" | "/=" | "&=" | "|=" | "^=" | "%=" | "<" "<=" | ">" ">"? ">=";
 		public ParserRule getRule() { return rule; }
 
-		//"+=" | "-="
+		//"+=" | "-=" | "*=" | "/=" | "&=" | "|=" | "^=" | "%=" | "<" "<=" | ">" ">"? ">="
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"+="
@@ -154,6 +167,45 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"-="
 		public Keyword getHyphenMinusEqualsSignKeyword_1() { return cHyphenMinusEqualsSignKeyword_1; }
+
+		//"*="
+		public Keyword getAsteriskEqualsSignKeyword_2() { return cAsteriskEqualsSignKeyword_2; }
+
+		//"/="
+		public Keyword getSolidusEqualsSignKeyword_3() { return cSolidusEqualsSignKeyword_3; }
+
+		//"&="
+		public Keyword getAmpersandEqualsSignKeyword_4() { return cAmpersandEqualsSignKeyword_4; }
+
+		//"|="
+		public Keyword getVerticalLineEqualsSignKeyword_5() { return cVerticalLineEqualsSignKeyword_5; }
+
+		//"^="
+		public Keyword getCircumflexAccentEqualsSignKeyword_6() { return cCircumflexAccentEqualsSignKeyword_6; }
+
+		//"%="
+		public Keyword getPercentSignEqualsSignKeyword_7() { return cPercentSignEqualsSignKeyword_7; }
+
+		//"<" "<="
+		public Group getGroup_8() { return cGroup_8; }
+
+		//"<"
+		public Keyword getLessThanSignKeyword_8_0() { return cLessThanSignKeyword_8_0; }
+
+		//"<="
+		public Keyword getLessThanSignEqualsSignKeyword_8_1() { return cLessThanSignEqualsSignKeyword_8_1; }
+
+		//">" ">"? ">="
+		public Group getGroup_9() { return cGroup_9; }
+
+		//">"
+		public Keyword getGreaterThanSignKeyword_9_0() { return cGreaterThanSignKeyword_9_0; }
+
+		//">"?
+		public Keyword getGreaterThanSignKeyword_9_1() { return cGreaterThanSignKeyword_9_1; }
+
+		//">="
+		public Keyword getGreaterThanSignEqualsSignKeyword_9_2() { return cGreaterThanSignEqualsSignKeyword_9_2; }
 	}
 
 	public class XOrExpressionElements extends AbstractParserRuleElementFinder {
@@ -3311,7 +3363,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OpMultiAssign:
-	//	"+=" | "-=";
+	//	"+=" | "-=" | "*=" | "/=" | "&=" | "|=" | "^=" | "%=" | "<" "<=" | ">" ">"? ">=";
 	public OpMultiAssignElements getOpMultiAssignAccess() {
 		return (pOpMultiAssign != null) ? pOpMultiAssign : (pOpMultiAssign = new OpMultiAssignElements());
 	}

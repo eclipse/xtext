@@ -62,6 +62,14 @@ tokens {
   KW_RightSquareBracket = ']' ;
   KW_PlusSignEqualsSign = '+=' ;
   KW_HyphenMinusEqualsSign = '-=' ;
+  KW_AsteriskEqualsSign = '*=' ;
+  KW_SolidusEqualsSign = '/=' ;
+  KW_AmpersandEqualsSign = '&=' ;
+  KW_VerticalLineEqualsSign = '|=' ;
+  KW_CircumflexAccentEqualsSign = '^=' ;
+  KW_PercentSignEqualsSign = '%=' ;
+  KW_LessThanSignEqualsSign = '<=' ;
+  KW_GreaterThanSignEqualsSign = '>=' ;
   KW_VerticalLineVerticalLine = '||' ;
   KW_AmpersandAmpersand = '&&' ;
   KW_EqualsSignEqualsSign = '==' ;
@@ -69,8 +77,6 @@ tokens {
   KW_EqualsSignEqualsSignEqualsSign = '===' ;
   KW_ExclamationMarkEqualsSignEqualsSign = '!==' ;
   KW_Instanceof = 'instanceof' ;
-  KW_GreaterThanSignEqualsSign = '>=' ;
-  KW_LessThanSignEqualsSign = '<=' ;
   KW_HyphenMinusGreaterThanSign = '->' ;
   KW_FullStopFullStopLessThanSign = '..<' ;
   KW_FullStopFullStop = '..' ;
@@ -4880,7 +4886,81 @@ ruleOpMultiAssign returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getHyphenMinusEqualsSignKeyword_1()); 
     }
+
+    |
+	kw='*=' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getAsteriskEqualsSignKeyword_2()); 
+    }
+
+    |
+	kw='/=' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getSolidusEqualsSignKeyword_3()); 
+    }
+
+    |
+	kw='&=' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getAmpersandEqualsSignKeyword_4()); 
+    }
+
+    |
+	kw='|=' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getVerticalLineEqualsSignKeyword_5()); 
+    }
+
+    |
+	kw='^=' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getCircumflexAccentEqualsSignKeyword_6()); 
+    }
+
+    |
+	kw='%=' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getPercentSignEqualsSignKeyword_7()); 
+    }
+
+    |(
+	kw='<' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getLessThanSignKeyword_8_0()); 
+    }
+
+	kw='<=' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getLessThanSignEqualsSignKeyword_8_1()); 
+    }
 )
+    |(
+	kw='>' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getGreaterThanSignKeyword_9_0()); 
+    }
+(
+	kw='>' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getGreaterThanSignKeyword_9_1()); 
+    }
+)?
+	kw='>=' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getGreaterThanSignEqualsSignKeyword_9_2()); 
+    }
+))
     ;
 
 

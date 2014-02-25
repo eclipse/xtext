@@ -91,7 +91,15 @@ ruleOpSingleAssign :
 // Rule OpMultiAssign
 ruleOpMultiAssign :
 	'+=' |
-	'-='
+	'-=' |
+	'*=' |
+	'/=' |
+	'&=' |
+	'|=' |
+	'^=' |
+	'%=' |
+	'<' '<=' |
+	'>' '>'? '>='
 ;
 
 // Rule XOrExpression
