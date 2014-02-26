@@ -468,7 +468,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 						int originalTraceSize = element.getLocalTrace().size();
 						List<AbstractElement> newTrace = newElement.getLocalTrace();
 						if (newTrace.size() > originalTraceSize) {
-							if (Collections.indexOfSubList(element.getLocalTrace(), newTrace.subList(originalTraceSize, newTrace.size())) == -1) {
+							if (Collections.indexOfSubList(element.getLocalTrace(), newTrace.subList(originalTraceSize, newTrace.size())) != -1) {
 								continue;
 							}
 						}
