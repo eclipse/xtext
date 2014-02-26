@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.contentassist.antlr;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -462,8 +463,18 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			}
 			Collection<FollowElement> followElements = parser.getFollowElements(element);
 			for(FollowElement newElement: followElements) {
-				if (newElement.getLookAhead() != element.getLookAhead() || newElement.getGrammarElement() != element.getGrammarElement())
+				if (newElement.getLookAhead() != element.getLookAhead() || newElement.getGrammarElement() != element.getGrammarElement()) {
+					if (newElement.getLookAhead() == element.getLookAhead()) {
+						int originalTraceSize = element.getLocalTrace().size();
+						List<AbstractElement> newTrace = newElement.getLocalTrace();
+						if (newTrace.size() > originalTraceSize) {
+							if (Collections.indexOfSubList(element.getLocalTrace(), newTrace.subList(originalTraceSize, newTrace.size())) == -1) {
+								continue;
+							}
+						}
+					}
 					computeFollowElements(calculator, newElement, visited);
+				}
 			}
 		}
 
