@@ -477,6 +477,9 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testTypeGuardedCase_0() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testTypeGuardedCase_2() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -2908,6 +2911,13 @@ class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testBasicForExpression_01() {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testBasicForExpression_03() {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testOverloadedMethods_01() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -3030,6 +3040,9 @@ class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testTypeGuardedCase_0() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testTypeGuardedCase_1() throws Exception {
 		fail("fails in old implementation")
 	}
