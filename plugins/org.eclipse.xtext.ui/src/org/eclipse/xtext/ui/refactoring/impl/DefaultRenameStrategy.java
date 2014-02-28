@@ -61,12 +61,11 @@ public class DefaultRenameStrategy extends AbstractRenameStrategy {
 	@Override
 	public RefactoringStatus validateNewName(String newName) {
 		RefactoringStatus status = super.validateNewName(newName);
-		if(nameRuleName != null && valueConverterService != null) {
+		if(nameRuleName != null) {
 			try {
 				String value = getNameAsValue(newName);
 				String text = getNameAsText(value);
-				String textValue = getNameAsValue(text);
-				if(!equal(value, textValue)) {
+				if(!equal(text, newName)) {
 					status.addError("Illegal name: '" + newName + "'. Consider using '" + text + "' instead.");
 				}
 			} catch(ValueConverterException vce) {
@@ -104,10 +103,18 @@ public class DefaultRenameStrategy extends AbstractRenameStrategy {
 	}
 
 	protected String getNameAsText(String nameAsValue) {
+		return (nameRuleName != null) ? getNameAsText(nameAsValue, nameRuleName) : nameAsValue;
+	}
+	
+	protected String getNameAsText(String nameAsValue, String nameRuleName) {
 		return (nameRuleName != null) ? valueConverterService.toString(nameAsValue, nameRuleName) : nameAsValue;
 	}
 
 	protected String getNameAsValue(String nameAsText) {
+		return (nameRuleName != null) ? getNameAsValue(nameAsText, nameRuleName) : nameAsText;
+	}
+
+	protected String getNameAsValue(String nameAsText, String nameRuleName) {
 		return (nameRuleName != null) ? valueConverterService.toValue(nameAsText, nameRuleName, null).toString()
 				: nameAsText;
 	}

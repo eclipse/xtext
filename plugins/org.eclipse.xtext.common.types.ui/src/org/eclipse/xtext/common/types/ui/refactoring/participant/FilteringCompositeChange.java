@@ -13,6 +13,7 @@ import static com.google.common.collect.Lists.*;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -41,9 +42,18 @@ public class FilteringCompositeChange extends CompositeChange {
 		List<Change> filteredUndos = newArrayList();
 		for (Change childUndo : childUndos) {
 			try {
-				if (!(childUndo.getModifiedElement() instanceof ICompilationUnit)
-						|| !((ICompilationUnit) childUndo.getModifiedElement()).getUnderlyingResource().isDerived())
+				Object modifiedElement = childUndo.getModifiedElement();
+				if (modifiedElement instanceof ICompilationUnit) {
+					ICompilationUnit cu = (ICompilationUnit) modifiedElement;
+					if (cu.exists()) {
+						IResource resource = cu.getUnderlyingResource();
+						if (!resource.isDerived()) {
+							filteredUndos.add(childUndo);
+						}
+					}
+				} else {
 					filteredUndos.add(childUndo);
+				}
 			} catch (JavaModelException e) {
 				LOG.error("Error filtering refactoring undo changes", e);
 			}

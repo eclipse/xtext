@@ -47,6 +47,18 @@ public class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest
   
   @Ignore("fails in old implementation")
   @Test
+  public void testBasicForExpression_01() {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testBasicForExpression_03() {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testOverloadedMethods_01() throws Exception {
     Assert.fail("fails in old implementation");
   }
@@ -246,6 +258,12 @@ public class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest
   @Ignore("fails in old implementation")
   @Test
   public void testSwitchExpression_7() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testTypeGuardedCase_0() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
