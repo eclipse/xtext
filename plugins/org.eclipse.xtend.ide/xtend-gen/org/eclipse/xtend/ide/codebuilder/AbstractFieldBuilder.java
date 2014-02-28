@@ -49,19 +49,23 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
   public String getImage() {
     String _switchResult = null;
     JvmVisibility _visibility = this.getVisibility();
-    switch (_visibility) {
-      case PRIVATE:
-        _switchResult = "field_private_obj.gif";
-        break;
-      case PROTECTED:
-        _switchResult = "field_protected_obj.gif";
-        break;
-      case PUBLIC:
-        _switchResult = "field_public_obj.gif";
-        break;
-      default:
-        _switchResult = "field_default_obj.gif";
-        break;
+    if (_visibility != null) {
+      switch (_visibility) {
+        case PRIVATE:
+          _switchResult = "field_private_obj.gif";
+          break;
+        case PROTECTED:
+          _switchResult = "field_protected_obj.gif";
+          break;
+        case PUBLIC:
+          _switchResult = "field_public_obj.gif";
+          break;
+        default:
+          _switchResult = "field_default_obj.gif";
+          break;
+      }
+    } else {
+      _switchResult = "field_default_obj.gif";
     }
     return _switchResult;
   }

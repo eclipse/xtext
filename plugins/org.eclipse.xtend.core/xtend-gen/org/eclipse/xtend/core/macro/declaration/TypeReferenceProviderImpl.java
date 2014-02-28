@@ -216,33 +216,35 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
           _matched=true;
           TypeReference _switchResult_1 = null;
           PrimitiveType.Kind _kind = ((PrimitiveTypeImpl)typeDeclaration).getKind();
-          switch (_kind) {
-            case BOOLEAN:
-              _switchResult_1 = this.getPrimitiveBoolean();
-              break;
-            case BYTE:
-              _switchResult_1 = this.getPrimitiveByte();
-              break;
-            case CHAR:
-              _switchResult_1 = this.getPrimitiveChar();
-              break;
-            case DOUBLE:
-              _switchResult_1 = this.getPrimitiveDouble();
-              break;
-            case FLOAT:
-              _switchResult_1 = this.getPrimitiveFloat();
-              break;
-            case INT:
-              _switchResult_1 = this.getPrimitiveInt();
-              break;
-            case LONG:
-              _switchResult_1 = this.getPrimitiveLong();
-              break;
-            case SHORT:
-              _switchResult_1 = this.getPrimitiveShort();
-              break;
-            default:
-              break;
+          if (_kind != null) {
+            switch (_kind) {
+              case BOOLEAN:
+                _switchResult_1 = this.getPrimitiveBoolean();
+                break;
+              case BYTE:
+                _switchResult_1 = this.getPrimitiveByte();
+                break;
+              case CHAR:
+                _switchResult_1 = this.getPrimitiveChar();
+                break;
+              case DOUBLE:
+                _switchResult_1 = this.getPrimitiveDouble();
+                break;
+              case FLOAT:
+                _switchResult_1 = this.getPrimitiveFloat();
+                break;
+              case INT:
+                _switchResult_1 = this.getPrimitiveInt();
+                break;
+              case LONG:
+                _switchResult_1 = this.getPrimitiveLong();
+                break;
+              case SHORT:
+                _switchResult_1 = this.getPrimitiveShort();
+                break;
+              default:
+                break;
+            }
           }
           return _switchResult_1;
         }

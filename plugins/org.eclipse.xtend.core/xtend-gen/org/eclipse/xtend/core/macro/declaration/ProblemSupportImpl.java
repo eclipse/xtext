@@ -167,21 +167,23 @@ public class ProblemSupportImpl implements ProblemSupport {
   
   private Problem.Severity translateSeverity(final Severity severity) {
     Problem.Severity _switchResult = null;
-    switch (severity) {
-      case ERROR:
-        _switchResult = Problem.Severity.ERROR;
-        break;
-      case WARNING:
-        _switchResult = Problem.Severity.WARNING;
-        break;
-      case INFO:
-        _switchResult = Problem.Severity.INFO;
-        break;
-      case IGNORE:
-        _switchResult = Problem.Severity.IGNORE;
-        break;
-      default:
-        break;
+    if (severity != null) {
+      switch (severity) {
+        case ERROR:
+          _switchResult = Problem.Severity.ERROR;
+          break;
+        case WARNING:
+          _switchResult = Problem.Severity.WARNING;
+          break;
+        case INFO:
+          _switchResult = Problem.Severity.INFO;
+          break;
+        case IGNORE:
+          _switchResult = Problem.Severity.IGNORE;
+          break;
+        default:
+          break;
+      }
     }
     return _switchResult;
   }

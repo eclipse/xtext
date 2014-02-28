@@ -647,21 +647,23 @@ public class JvmModelGenerator implements IGenerator {
     boolean _notEquals = (!Objects.equal(visibility, null));
     if (_notEquals) {
       String _switchResult = null;
-      switch (visibility) {
-        case PRIVATE:
-          _switchResult = "private ";
-          break;
-        case PUBLIC:
-          _switchResult = "public ";
-          break;
-        case PROTECTED:
-          _switchResult = "protected ";
-          break;
-        case DEFAULT:
-          _switchResult = "";
-          break;
-        default:
-          break;
+      if (visibility != null) {
+        switch (visibility) {
+          case PRIVATE:
+            _switchResult = "private ";
+            break;
+          case PUBLIC:
+            _switchResult = "public ";
+            break;
+          case PROTECTED:
+            _switchResult = "protected ";
+            break;
+          case DEFAULT:
+            _switchResult = "";
+            break;
+          default:
+            break;
+        }
       }
       return _switchResult;
     } else {

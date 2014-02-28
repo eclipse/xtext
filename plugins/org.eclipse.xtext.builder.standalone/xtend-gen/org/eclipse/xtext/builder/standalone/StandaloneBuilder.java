@@ -273,15 +273,17 @@ public class StandaloneBuilder {
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_absolutePath_1);
     Iterable<String> _plus_1 = Iterables.<String>concat(_sourceDirs, _newArrayList);
     final IJavaCompiler.CompilationResult result = this.compiler.compile(_plus_1, stubsClasses);
-    switch (result) {
-      case SKIPPED:
-        StandaloneBuilder.LOG.info("Nothing to compile. Stubs compilation was skipped.");
-        break;
-      case FAILED:
-        StandaloneBuilder.LOG.debug("Stubs compilation finished with errors.");
-        break;
-      default:
-        break;
+    if (result != null) {
+      switch (result) {
+        case SKIPPED:
+          StandaloneBuilder.LOG.info("Nothing to compile. Stubs compilation was skipped.");
+          break;
+        case FAILED:
+          StandaloneBuilder.LOG.debug("Stubs compilation finished with errors.");
+          break;
+        default:
+          break;
+      }
     }
     return stubsClasses.getAbsolutePath();
   }
