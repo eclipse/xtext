@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -170,6 +171,16 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		XMemberFeatureCall member = (XMemberFeatureCall) body.getExpressions().get(0);
 		XFeatureCall recursive = (XFeatureCall) member.getMemberCallTarget();
 		assertSame(variable, recursive.getFeature());
+	}
+	
+	@Test public void testRecursiveClosure_02() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val (int)=>int fun = [ self.apply(it) ] }");
+		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);
+		XClosure closure = (XClosure) variable.getRight();
+		XBlockExpression body = (XBlockExpression) closure.getExpression();
+		XMemberFeatureCall member = (XMemberFeatureCall) body.getExpressions().get(0);
+		XFeatureCall recursive = (XFeatureCall) member.getMemberCallTarget();
+		assertEquals(Functions.Function1.class.getName(), recursive.getFeature().getQualifiedName('$'));
 	}
 	
 	@Test public void testConstructorCall_00() throws Exception {

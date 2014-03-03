@@ -31,6 +31,19 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   private ValidationTestHelper _validationTestHelper;
   
   @Test
+  public void testForwardReferenceToLocalVar() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{ val (int)=>int fun = [ fun.apply(it) ] }");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.ILLEGAL_FORWARD_REFERENCE, "The local variable fun may not have been initialized");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testDuplicateCases_typeLiteral() {
     try {
       StringConcatenation _builder = new StringConcatenation();

@@ -87,7 +87,6 @@ import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.ExtendedEarlyExitComputer;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
-import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Lists;
@@ -107,9 +106,6 @@ public class XbaseTypeComputer implements ITypeComputer {
 
 	@Inject
 	private NumberLiterals numberLiterals;
-	
-	@Inject 
-	private XSwitchExpressions switchExpressions;
 	
 	@Inject 
 	private CommonTypeComputationServices services;

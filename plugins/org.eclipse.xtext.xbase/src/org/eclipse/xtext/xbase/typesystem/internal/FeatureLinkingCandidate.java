@@ -183,12 +183,23 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				}
 			}
 			JvmIdentifiableElement feature = getFeature();
-			if (feature instanceof XVariableDeclaration && ((XVariableDeclaration) feature).isWriteable()) {
-				XClosure containingClosure = EcoreUtil2.getContainerOfType(getExpression(), XClosure.class);
-				if (containingClosure != null && !EcoreUtil.isAncestor(containingClosure, feature)) {
-					String message = String.format("Cannot refer to the non-final variable %s inside a lambda expression", feature.getSimpleName());
+			if (feature instanceof XVariableDeclaration) {
+				XVariableDeclaration casted = (XVariableDeclaration) feature;
+				if (casted.isWriteable()) {
+					XClosure containingClosure = EcoreUtil2.getContainerOfType(getExpression(), XClosure.class);
+					if (containingClosure != null && !EcoreUtil.isAncestor(containingClosure, feature)) {
+						String message = String.format("Cannot refer to the non-final variable %s inside a lambda expression", feature.getSimpleName());
+						AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+								IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, message, getExpression(),
+								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+						result.accept(diagnostic);
+						return false;
+					}
+				}
+				if (EcoreUtil.isAncestor(casted, getFeatureCall())) {
+					String message = String.format("The local variable %s may not have been initialized", feature.getSimpleName());
 					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
-							IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, message, getExpression(),
+							IssueCodes.ILLEGAL_FORWARD_REFERENCE, message, getExpression(),
 							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 					result.accept(diagnostic);
 					return false;
