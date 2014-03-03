@@ -18,6 +18,7 @@ package org.eclipse.xtext.xbase;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XBinaryOperation#getLeftOperand <em>Left Operand</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XBinaryOperation#getRightOperand <em>Right Operand</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XBinaryOperation#isCompoundOperator <em>Compound Operator</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,5 +79,31 @@ public interface XBinaryOperation extends XAbstractFeatureCall
 	 * @generated
 	 */
 	void setRightOperand(XExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Compound Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Compound Operator</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Compound Operator</em>' attribute.
+	 * @see #setCompoundOperator(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXBinaryOperation_CompoundOperator()
+	 * @model
+	 * @generated
+	 */
+	boolean isCompoundOperator();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XBinaryOperation#isCompoundOperator <em>Compound Operator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Compound Operator</em>' attribute.
+	 * @see #isCompoundOperator()
+	 * @generated
+	 */
+	void setCompoundOperator(boolean value);
 
 } // XBinaryOperation

@@ -34,7 +34,6 @@ import com.google.common.collect.Maps;
 public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 
 	private final ExtensionScopeHelper helper;
-	private final OperatorMapping operatorMapping;
 	private final XExpression receiver;
 	private final LightweightTypeReference receiverType;
 	private final boolean implicit;
@@ -42,27 +41,16 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	public StaticExtensionImportsScope(IScope parent, IFeatureScopeSession session, 
 			XExpression receiver, LightweightTypeReference receiverType, boolean implicit,
 			XAbstractFeatureCall context, OperatorMapping operatorMapping) {
-		super(parent, session, context);
+		super(parent, session, context, operatorMapping);
 		this.receiver = receiver;
 		this.receiverType = receiverType;
 		this.implicit = implicit;
-		this.operatorMapping = operatorMapping;
 		this.helper = new ExtensionScopeHelper(receiverType);
 	}
 
 	@Override
 	protected List<TypeBucket> getBuckets() {
 		return getSession().getStaticallyImportedExtensionTypes();
-	}
-	
-	@Override
-	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
-		QualifiedName methodName = operatorMapping.getMethodName(name);
-		if (methodName != null) {
-			acceptor.accept(methodName.toString(), 2);
-		} else {
-			super.processFeatureNames(name, acceptor);
-		}
 	}
 	
 	@Override
@@ -120,7 +108,7 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 		if (propertyName != null) {
 			result.add(createDescription(QualifiedName.create(propertyName), feature, bucket));
 		}
-		QualifiedName operator = operatorMapping.getOperator(featureName);
+		QualifiedName operator = getOperatorMapping().getOperator(featureName);
 		if (operator != null) {
 			result.add(createDescription(operator, feature, bucket));
 		}
@@ -137,7 +125,7 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 			if (propertyName != null) {
 				result.add(doCreateDescription(QualifiedName.create(propertyName), feature, bucket));
 			}
-			QualifiedName operator = operatorMapping.getOperator(featureName);
+			QualifiedName operator = getOperatorMapping().getOperator(featureName);
 			if (operator != null) {
 				result.add(doCreateDescription(operator, feature, bucket));
 			}

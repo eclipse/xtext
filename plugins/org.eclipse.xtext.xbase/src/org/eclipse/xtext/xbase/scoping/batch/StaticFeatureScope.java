@@ -33,10 +33,9 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class StaticFeatureScope extends AbstractSessionBasedScope {
+public class StaticFeatureScope extends AbstractSessionBasedExecutableScope {
 
 	private final TypeBucket bucket;
-	private final OperatorMapping operatorMapping;
 	private final XExpression receiver;
 	private final LightweightTypeReference receiverType;
 
@@ -48,11 +47,10 @@ public class StaticFeatureScope extends AbstractSessionBasedScope {
 			LightweightTypeReference receiverType,
 			TypeBucket bucket,
 			OperatorMapping operatorMapping) {
-		super(parent, session, featureCall);
+		super(parent, session, featureCall, operatorMapping);
 		this.receiver = receiver;
 		this.receiverType = receiverType;
 		this.bucket = bucket;
-		this.operatorMapping = operatorMapping;
 	}
 	
 	@Override
@@ -101,17 +99,6 @@ public class StaticFeatureScope extends AbstractSessionBasedScope {
 	}
 
 	@Override
-	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
-		QualifiedName methodName = operatorMapping.getMethodName(name);
-		if (methodName != null) {
-			acceptor.accept(methodName.toString(), 2);
-		} else {
-			super.processFeatureNames(name, acceptor);
-			processAsPropertyNames(name, acceptor);
-		}
-	}
-
-	@Override
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
 		Set<JvmFeature> allFeatures = Sets.newLinkedHashSet();
 		for(JvmType type: bucket.getTypes()) {
@@ -126,7 +113,7 @@ public class StaticFeatureScope extends AbstractSessionBasedScope {
 		for(JvmFeature feature: allFeatures) {
 			QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
 			addDescription(featureName, feature, allDescriptions);
-			QualifiedName operator = operatorMapping.getOperator(featureName);
+			QualifiedName operator = getOperatorMapping().getOperator(featureName);
 			if (operator != null) {
 				addDescription(operator, feature, allDescriptions);
 			}
