@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -50,9 +51,11 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
+import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Lists;
@@ -135,6 +138,21 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	 */
 	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
+		XAbstractFeatureCall featureCall = getFeatureCall();
+		if (featureCall instanceof XBinaryOperation) {
+			XBinaryOperation binaryOperation = (XBinaryOperation) featureCall;
+			if (binaryOperation.isCompoundOperator()) {
+				LightweightTypeReference actualType = getDeclaredType(featureCall.getFeature());
+				LightweightTypeReference expectedType = getActualType(getArguments().get(0));
+				if (!expectedType.getIdentifier().equals(actualType.getIdentifier())) {
+					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, String.format(
+							"Type mismatch: cannot convert from %s to %s", actualType.getSimpleName(), expectedType.getSimpleName()),
+							getExpression(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+					result.accept(diagnostic);
+					return false;
+				}
+			}
+		}
 		if (isInvalidStaticSyntax()) {
 			String message = String.format("The static %1$s %2$s%3$s should be accessed in a static way",
 					getFeatureTypeName(),
@@ -399,6 +417,31 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return getFeatureCall().isExplicitOperationCallOrBuilderSyntax();
 	}
 	
+	@Override
+	protected CandidateCompareResult compareByName(AbstractPendingLinkingCandidate<?> right) {
+		if (!(right instanceof FeatureLinkingCandidate)) {
+			return super.compareByName(right);
+		}
+		FeatureLinkingCandidate other = (FeatureLinkingCandidate) right;
+		boolean thisCompoundOperator = isCompoundOperator();
+		boolean otherCompoundOperator = other.isCompoundOperator();
+		if (thisCompoundOperator == otherCompoundOperator) {
+			return CandidateCompareResult.AMBIGUOUS;
+		}
+		if (thisCompoundOperator) {
+			return CandidateCompareResult.THIS;
+		}
+		return CandidateCompareResult.OTHER;
+	}
+	
+	protected boolean isCompoundOperator() {
+		if (!(getFeatureCall() instanceof XBinaryOperation)) {
+			return false;
+		}
+		String methodName = getFeature().getSimpleName();
+		return getState().getReferenceOwner().getServices().getOperatorMapping().isCompoundMethod(methodName);
+	}
+
 	@Override
 	protected CandidateCompareResult compareByBucket(AbstractPendingLinkingCandidate<?> right) {
 		if (isExtension() && right.isExtension()) {
@@ -820,6 +863,23 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			XExpression syntacticReceiver = casted.getAssignable();
 			if (isStaticWithDeclaringType(syntacticReceiver)) {
 				casted.setStaticWithDeclaringType(true);
+			}
+		} else if (featureCall instanceof XBinaryOperation) {
+			XBinaryOperation binaryOperation = (XBinaryOperation) featureCall;
+			CommonTypeComputationServices services = getState().getReferenceOwner().getServices();
+			OperatorMapping operatorMapping = services.getOperatorMapping();
+			
+			if (operatorMapping.getCompoundOperators().contains(description.getName())) {
+				JvmIdentifiableElement feature = description.getElementOrProxy();
+				String methodName = feature.getSimpleName();
+				if (operatorMapping.isCompoundMethod(methodName)) {
+					XExpressionHelper expressionHelper = services.getExpressionHelper();
+					if (expressionHelper.findCompoundAssignmentAnnotation(feature) != null) {
+						binaryOperation.setCompoundOperator(true);	
+					}
+				} else {
+					binaryOperation.setCompoundOperator(true);
+				}
 			}
 		}
 	}

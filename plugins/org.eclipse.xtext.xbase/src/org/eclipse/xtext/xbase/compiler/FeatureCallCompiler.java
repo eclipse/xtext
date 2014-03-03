@@ -60,6 +60,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -89,6 +90,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
+	
+	@Inject
+	private OperatorMapping operatorMapping;
 
 	@Override
 	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
@@ -138,12 +142,17 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				for (XExpression arg : getActualArguments(expr)) {
 					prepareExpression(arg, b);
 				}
+				final boolean needMultiAssignment = needMultiAssignment(expr);
 				if (!isReferenced) {
 					b.newLine();
 					if (!expressionHelper.hasSideEffects(expr, false)) {
 						b.append("/* ");
 					}
 					try {
+						if (needMultiAssignment) {
+							String leftOperandVariable = getLeftOperandVariable(expr, b);
+							b.append(leftOperandVariable).append(" = ");
+						}
 						featureCalltoJavaExpression(expr, b, false);
 						b.append(";");
 					} finally {
@@ -154,6 +163,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				} else if (isVariableDeclarationRequired(expr, b)) {
 					Later later = new Later() {
 						public void exec(ITreeAppendable appendable) {
+							if (needMultiAssignment) {
+								String leftOperandVariable = getLeftOperandVariable(expr, appendable);
+								appendable.append(leftOperandVariable).append(" = ");
+							}
 							featureCalltoJavaExpression(expr, appendable, true);
 						}
 					};
@@ -161,6 +174,20 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				}
 			}
 		}
+	}
+
+	protected String getLeftOperandVariable(final XAbstractFeatureCall expr, ITreeAppendable appendable) {
+		XBinaryOperation binaryOperation = (XBinaryOperation) expr;
+		XAbstractFeatureCall leftOperand = (XAbstractFeatureCall) binaryOperation.getLeftOperand();
+		return appendable.getName(leftOperand.getFeature());
+	}
+
+	protected boolean needMultiAssignment(XAbstractFeatureCall expr) {
+		if (expr instanceof XBinaryOperation) {
+			XBinaryOperation binaryOperation = (XBinaryOperation) expr;
+			return binaryOperation.isCompoundOperator();
+		}
+		return false;
 	}
 
 	private void compileNullSafeFeatureCall(final XMemberFeatureCall expr, ITreeAppendable b, final boolean isReferenced) {
@@ -324,6 +351,18 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					return !b.hasName(feature);
 				}
 				return !b.hasName(expr);
+			}
+		}
+		if (expr.eContainingFeature() == XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND) {
+			XBinaryOperation binaryOperation = (XBinaryOperation) expr.eContainer();
+			if (binaryOperation.isCompoundOperator()) {
+				return true;
+			}
+		}
+		if (expr instanceof XBinaryOperation) {
+			XBinaryOperation binaryOperation = (XBinaryOperation) expr;
+			if (binaryOperation.isCompoundOperator()) {
+				return true;
 			}
 		}
 		if (expr instanceof XAbstractFeatureCall) {

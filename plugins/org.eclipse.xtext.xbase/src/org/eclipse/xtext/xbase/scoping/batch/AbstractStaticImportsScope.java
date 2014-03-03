@@ -19,16 +19,17 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractStaticImportsScope extends AbstractSessionBasedScope {
+public abstract class AbstractStaticImportsScope extends AbstractSessionBasedExecutableScope {
 	
-	public AbstractStaticImportsScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall context) {
-		super(parent, session, context);
+	public AbstractStaticImportsScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall context, OperatorMapping operatorMapping) {
+		super(parent, session, context, operatorMapping);
 	}
 	
 	@Override
@@ -66,12 +67,6 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 	}
 
 	protected abstract List<TypeBucket> getBuckets();
-	
-	@Override
-	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
-		super.processFeatureNames(name, acceptor);
-		processAsPropertyNames(name, acceptor);
-	}
 
 	@Override
 	protected Collection<IEObjectDescription> getLocalElementsByName(final QualifiedName name) {

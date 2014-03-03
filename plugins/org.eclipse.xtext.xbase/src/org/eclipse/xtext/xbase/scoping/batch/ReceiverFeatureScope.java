@@ -44,10 +44,9 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ReceiverFeatureScope extends AbstractSessionBasedScope implements IVisibilityHelper {
+public class ReceiverFeatureScope extends AbstractSessionBasedExecutableScope implements IVisibilityHelper {
 
 	private final TypeBucket bucket;
-	private final OperatorMapping operatorMapping;
 	private final LightweightTypeReference receiverType;
 	private final XExpression receiver;
 	private final boolean implicit;
@@ -56,13 +55,12 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope implements I
 
 	protected ReceiverFeatureScope(IScope parent, IFeatureScopeSession session, XExpression receiver, LightweightTypeReference receiverType, boolean implicit,
 			XAbstractFeatureCall featureCall, TypeBucket bucket, JvmIdentifiableElement receiverFeature, OperatorMapping operatorMapping) {
-		super(parent, session, featureCall);
+		super(parent, session, featureCall, operatorMapping);
 		this.receiver = receiver;
 		this.receiverType = receiverType;
 		this.implicit = implicit;
 		this.bucket = bucket;
 		this.receiverFeature = receiverFeature;
-		this.operatorMapping = operatorMapping;
 	}
 	
 	public boolean isVisible(@NonNull JvmMember member) {
@@ -117,17 +115,6 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope implements I
 		}
 		return receiverTypeParameterMapping;
 	}
-	
-	@Override
-	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
-		QualifiedName methodName = operatorMapping.getMethodName(name);
-		if (methodName != null) {
-			acceptor.accept(methodName.toString(), 2);
-		} else {
-			super.processFeatureNames(name, acceptor);
-			processAsPropertyNames(name, acceptor);
-		}
-	}
 
 	@Override
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
@@ -146,7 +133,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope implements I
 				String simpleName = feature.getSimpleName();
 				QualifiedName featureName = QualifiedName.create(simpleName);
 				allDescriptions.add(createDescription(featureName, feature, bucket));
-				QualifiedName operator = operatorMapping.getOperator(featureName);
+				QualifiedName operator = getOperatorMapping().getOperator(featureName);
 				if (operator != null) {
 					allDescriptions.add(createDescription(operator, feature, bucket));
 				}
