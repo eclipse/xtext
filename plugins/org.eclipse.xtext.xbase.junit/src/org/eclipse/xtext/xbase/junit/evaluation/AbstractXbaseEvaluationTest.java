@@ -3891,6 +3891,90 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testLongShiftOperations_03() throws Exception {
 		assertEvaluatesTo(2l << 1, "2l << 1");
 	}
+	
+	protected void assertIntegerAssignOperations(Integer expectedResult, String xbaseCode) throws Exception {
+		assertEvaluatesTo(expectedResult, xbaseCode);
+	}
+	
+	@Test public void testIntegerAssignOperations_01() throws Exception {
+		int i = 2;
+		assertIntegerAssignOperations(i += 3, 
+				"{\n" +
+				"	var i = 2\n" +
+				"	i += 3\n" +
+				"	i" +
+				"}");
+	}
+	
+	@Test public void testIntegerAssignOperations_02() throws Exception {
+		int i = 2;
+		assertIntegerAssignOperations(i *= 3, 
+				"{\n" +
+				"	var i = 2\n" +
+				"	i *= 3\n" +
+				"	i" +
+				"}");
+	}
+	
+	@Test public void testIntegerAssignOperations_03() throws Exception {
+		int i = 2;
+		assertIntegerAssignOperations(i += i *= 2, 
+				"{\n" +
+				"	var i = 2\n" +
+				"	i += i *= 2\n" +
+				"	i" +
+				"}");
+	}
+	
+	@Test public void testIntegerAssignOperations_04() throws Exception {
+		int i = 2;
+		assertIntegerAssignOperations(i *= i += 2, 
+				"{\n" +
+				"	var i = 2\n" +
+				"	i *= i += 2\n" +
+				"	i" +
+				"}");
+	}
+	
+	@Test public void testIntegerAssignOperations_05() throws Exception {
+		int i = 2;
+		assertIntegerAssignOperations(i += (3 + (i *= 2)), 
+				"{\n" +
+				"	var i = 2\n" +
+				"	i += (3 + (i *= 2))\n" +
+				"	i" +
+				"}");
+	}
+	
+	@Test public void testIntegerAssignOperations_06() throws Exception {
+		int i = 2;
+		assertIntegerAssignOperations(i *= (3 + (i += 2)), 
+				"{\n" +
+				"	var i = 2\n" +
+				"	i *= (3 + (i += 2))\n" +
+				"	i" +
+				"}");
+	}
+	
+	@Test public void testIntegerAssignOperations_07() throws Exception {
+		int i = 10;
+		assertIntegerAssignOperations(i *= i %= i -= 2, 
+				"{\n" +
+				"	var i = 10\n" +
+				"	i *= i %= i -= 2\n" +
+				"	i" +
+				"}");
+	}
+
+	@Test public void testIntegerAssignOperations_08() throws Exception {
+		int i = 10;
+		assertIntegerAssignOperations(i *= i /= i -= 2, 
+				"{\n" +
+				"	var i = 10\n" +
+				"	i *= i /= i -= 2\n" +
+				"	i" +
+				"}");
+	}
 
 	@Test public void testBigIntegerBitOperations() throws Exception {
 		assertEvaluatesTo(new BigInteger("1").or(new BigInteger("2")).and(new BigInteger("3")).not(), 
