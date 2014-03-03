@@ -1155,7 +1155,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			  synchronized (x) {
 			    _xsynchronizedexpression = null;
 			  }
-			  _xblockexpression = (_xsynchronizedexpression);
+			  _xblockexpression = _xsynchronizedexpression;
 			}
 			return _xblockexpression;
 		'''
@@ -1203,7 +1203,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			  {
 			    final int i = 1;
 			    final int j = 2;
-			    _xblockexpression = ((i + j));
+			    _xblockexpression = (i + j);
 			  }
 			  _xsynchronizedexpression = _xblockexpression;
 			}
