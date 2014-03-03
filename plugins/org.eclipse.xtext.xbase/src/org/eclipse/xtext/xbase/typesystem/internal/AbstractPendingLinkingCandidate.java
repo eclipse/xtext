@@ -557,6 +557,19 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			return CandidateCompareResult.OTHER;
 		}
 		{
+			CandidateCompareResult nameCompareResult = compareByName(right);
+			switch(nameCompareResult) {
+				case SUSPICIOUS_OTHER:
+					throw new IllegalStateException();
+				case EQUALLY_INVALID:
+					invalid = true;
+					break;
+				case OTHER:
+				case THIS:
+					return nameCompareResult;
+			}
+		}
+		{
 			CandidateCompareResult bucketCompareResult = compareByBucket(right);
 			switch(bucketCompareResult) {
 				case SUSPICIOUS_OTHER:
@@ -575,6 +588,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return CandidateCompareResult.AMBIGUOUS;
 	}
 	
+	protected CandidateCompareResult compareByName(@SuppressWarnings("unused") AbstractPendingLinkingCandidate<?> right) {
+		return CandidateCompareResult.AMBIGUOUS;
+	}
+
 	protected CandidateCompareResult compareByBucket(AbstractPendingLinkingCandidate<?> right) {
 		if (description.getBucketId() != right.description.getBucketId()) {
 			return CandidateCompareResult.THIS;

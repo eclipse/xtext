@@ -23,6 +23,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypes
 import com.google.inject.Singleton
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
+import org.eclipse.xtext.xbase.util.XExpressionHelper
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -30,6 +32,15 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
  */
 @Singleton
 class CommonTypeComputationServices {
+	
+	@Inject
+	@Property
+	OperatorMapping operatorMapping
+	
+	@Inject
+	@Property
+	XExpressionHelper expressionHelper
+	
 	@Inject
 	@Property
 	TypeReferences typeReferences

@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ArrayTypes;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.ExtendedEarlyExitComputer;
+import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
 /**
@@ -29,6 +31,28 @@ import org.eclipse.xtext.xtype.XtypeFactory;
 @Singleton
 @SuppressWarnings("all")
 public class CommonTypeComputationServices {
+  @Inject
+  private OperatorMapping _operatorMapping;
+  
+  public OperatorMapping getOperatorMapping() {
+    return this._operatorMapping;
+  }
+  
+  public void setOperatorMapping(final OperatorMapping operatorMapping) {
+    this._operatorMapping = operatorMapping;
+  }
+  
+  @Inject
+  private XExpressionHelper _expressionHelper;
+  
+  public XExpressionHelper getExpressionHelper() {
+    return this._expressionHelper;
+  }
+  
+  public void setExpressionHelper(final XExpressionHelper expressionHelper) {
+    this._expressionHelper = expressionHelper;
+  }
+  
   @Inject
   private TypeReferences _typeReferences;
   

@@ -23,7 +23,7 @@ import com.google.inject.Singleton;
  * The mapping of operators to their respective method names.
  * 
  * By default, the following mapping is applied.
- * <table>
+  * <table>
  *   <tr><th>Operator</th><th>Method Name</th></tr>
  *   <tr><td>+</td><td>operator_plus</td></tr>
  *   <tr><td>-</td><td>operator_minus</td></tr>
@@ -45,9 +45,6 @@ import com.google.inject.Singleton;
  *   <tr><td>*=</td><td>operator_multiplyAssign</td></tr>
  *   <tr><td>/=</td><td>operator_divideAssign</td></tr>
  *   <tr><td>%=</td><td>operator_moduloAssign</td></tr>
- *   <tr><td>&=</td><td>operator_andAssign</td></tr>
- *   <tr><td>|=</td><td>operator_orAssign</td></tr>
- *   <tr><td>^=</td><td>operator_xorAssign</td></tr>
  *   <tr><td>&lt;&lt;=</td><td>operator_doubleLessThanAssign</td></tr>
  *   <tr><td>&gt;&gt;=</td><td>operator_doubleGreaterThanAssign</td></tr>
  *   <tr><td>&gt;&gt;&gt;=</td><td>operator_tripleGreaterThanAssign</td></tr>
@@ -94,9 +91,6 @@ public class OperatorMapping {
 	public static final QualifiedName MULTIPLY_ASSIGN = create("*=");
 	public static final QualifiedName DIVIDE_ASSIGN = create("/=");
 	public static final QualifiedName MODULO_ASSIGN = create("%=");
-	public static final QualifiedName AND_ASSIGN = create("&=");
-	public static final QualifiedName OR_ASSIGN = create("|=");
-	public static final QualifiedName XOR_ASSIGN = create("^=");
 	public static final QualifiedName DOUBLE_LESS_THAN_ASSIGN = create("<<=");
 	public static final QualifiedName DOUBLE_GREATER_THAN_ASSIGN = create(">>=");
 	public static final QualifiedName TRIPLE_GREATER_THAN_ASSIGN = create(">>>=");
@@ -116,6 +110,8 @@ public class OperatorMapping {
 	public static final QualifiedName DOUBLE_ARROW = create("=>");
 	
 	protected BiMap<QualifiedName, QualifiedName> map = HashBiMap.create();
+	
+	protected BiMap<QualifiedName, QualifiedName> compoundOperatorMapping = HashBiMap.create();
 	
 	{
 		initializeMapping();
@@ -144,9 +140,6 @@ public class OperatorMapping {
 		map.put(MULTIPLY_ASSIGN, create(OP_PREFIX+"multiplyAssign"));
 		map.put(DIVIDE_ASSIGN, create(OP_PREFIX+"divideAssign"));
 		map.put(MODULO_ASSIGN, create(OP_PREFIX+"moduloAssign"));
-		map.put(AND_ASSIGN, create(OP_PREFIX+"andAssign"));
-		map.put(OR_ASSIGN, create(OP_PREFIX+"orAssign"));
-		map.put(XOR_ASSIGN, create(OP_PREFIX+"xorAssign"));
 		map.put(DOUBLE_LESS_THAN_ASSIGN, create(OP_PREFIX + "doubleLessThanAssign"));
 		map.put(DOUBLE_GREATER_THAN_ASSIGN, create(OP_PREFIX + "doubleGreaterThanAssign"));
 		map.put(TRIPLE_GREATER_THAN_ASSIGN, create(OP_PREFIX + "tripleGreaterThanAssign"));
@@ -164,6 +157,15 @@ public class OperatorMapping {
 		map.put(GREATER_THAN_DOUBLE_DOT, create(OP_PREFIX+"greaterThanDoubleDot"));
 		map.put(NOT, create(OP_PREFIX+"not"));
 		map.put(DOUBLE_ARROW, create(OP_PREFIX+"doubleArrow"));
+		
+		compoundOperatorMapping.put(ADD, PLUS);
+		compoundOperatorMapping.put(REMOVE, MINUS);
+		compoundOperatorMapping.put(MULTIPLY_ASSIGN, MULTIPLY);
+		compoundOperatorMapping.put(DIVIDE_ASSIGN, DIVIDE);
+		compoundOperatorMapping.put(MODULO_ASSIGN, MODULO);
+		compoundOperatorMapping.put(DOUBLE_LESS_THAN_ASSIGN, DOUBLE_LESS_THAN);
+		compoundOperatorMapping.put(DOUBLE_GREATER_THAN_ASSIGN, DOUBLE_GREATER_THAN);
+		compoundOperatorMapping.put(TRIPLE_GREATER_THAN_ASSIGN, TRIPLE_GREATER_THAN);
 	}
 	
 	public QualifiedName getMethodName(QualifiedName operator) {
@@ -176,6 +178,23 @@ public class OperatorMapping {
 	
 	public Set<QualifiedName> getOperators() {
 		return map.keySet();
+	}
+	
+	public QualifiedName getCompoundOperator(QualifiedName simpleOperator) {
+		return compoundOperatorMapping.inverse().get(simpleOperator);
+	}
+	
+	public Set<QualifiedName> getCompoundOperators() {
+		return compoundOperatorMapping.keySet();
+	}
+	
+	public QualifiedName getSimpleOperator(QualifiedName compoundOperator) {
+		return compoundOperatorMapping.get(compoundOperator);
+	}
+
+	public boolean isCompoundMethod(String methodName) {
+		QualifiedName operator = getOperator(QualifiedName.create(methodName));
+		return getCompoundOperators().contains(operator);
 	}
 	
 	/**

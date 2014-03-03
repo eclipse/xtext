@@ -3158,7 +3158,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OpMultiAssign:
-	//	"+=" | "-=" | "*=" | "/=" | "&=" | "|=" | "^=" | "%=" | "<" "<=" | ">" ">"? ">=";
+	//	"+=" | "-=" | "*=" | "/=" | "%=" | "<" "<=" | ">" ">"? ">=";
 	public XbaseGrammarAccess.OpMultiAssignElements getOpMultiAssignAccess() {
 		return gaXbaseWithAnnotations.getOpMultiAssignAccess();
 	}

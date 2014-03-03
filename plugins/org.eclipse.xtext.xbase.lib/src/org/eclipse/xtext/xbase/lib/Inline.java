@@ -68,11 +68,5 @@ public @interface Inline {
 	 * @since 2.5
 	 */
 	boolean constantExpression() default false;
-	
-	/**
-	 * A list of mutable arguments' indexes. A value of a mutable argument is changed by a function.
-	 * @since 2.6
-	 */
-	int[] mutableArguments() default {};
 
 }

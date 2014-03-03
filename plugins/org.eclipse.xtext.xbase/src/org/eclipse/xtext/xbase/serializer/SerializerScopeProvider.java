@@ -131,7 +131,7 @@ public class SerializerScopeProvider extends XbaseBatchScopeProvider implements 
 	protected IScope getExecutableScope(XAbstractFeatureCall call, JvmIdentifiableElement feature) {
 		QualifiedName name = QualifiedName.create(feature.getSimpleName());
 		if (call instanceof XBinaryOperation || call instanceof XUnaryOperation) {
-			QualifiedName operator = operatorMapping.getOperator(name);
+			QualifiedName operator = getOperator(call, name);
 			if (operator == null) {
 				return IScope.NULLSCOPE;
 			}
@@ -158,6 +158,21 @@ public class SerializerScopeProvider extends XbaseBatchScopeProvider implements 
 			return new SimpleScope(result);
 		}
 		return new SingletonScope(EObjectDescription.create(name, feature), IScope.NULLSCOPE);
+	}
+
+	protected QualifiedName getOperator(XAbstractFeatureCall call, QualifiedName name) {
+		QualifiedName operator = operatorMapping.getOperator(name);
+		if (!(call instanceof XBinaryOperation)) {
+			return operator;
+		}
+		XBinaryOperation binaryOperation = (XBinaryOperation) call;
+		if (!binaryOperation.isCompoundOperator()) {
+			return operator;
+		}
+		if (operatorMapping.getCompoundOperators().contains(operator)) {
+			return operator;
+		}
+		return operatorMapping.getCompoundOperator(operator);
 	}
 
 	protected IScope getThisOrSuperScope(XAbstractFeatureCall call, JvmConstructor constructor) {

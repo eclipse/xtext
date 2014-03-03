@@ -498,15 +498,27 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 	
 	@Test public void testGenerics_1() throws Exception {
 		expression("(null as testdata.GenericType1<? extends java.lang.String>) += null", true);
+	}
+	
+	@Test public void testGenerics_2() throws Exception {
+		// linking is ok but should trigger a validation error
+		XExpression expression = expression("(null as testdata.GenericType1<? extends java.lang.StringBuffer>) += new StringBuffer", false);
+		EcoreUtil.resolveAll(expression);
+		List<Resource.Diagnostic> errors = expression.eResource().getErrors();
+		assertEquals(errors.toString(), 1, errors.size());
+		assertEquals("Type mismatch: type StringBuffer is not applicable at this location", errors.get(0).getMessage());
+	}
+	
+	@Test public void testGenerics_3() throws Exception {
 		// linking is ok but should trigger a validation error
 		XExpression expression = expression("(null as testdata.GenericType1<? extends java.lang.String>) += 'foo'", false);
 		EcoreUtil.resolveAll(expression);
 		List<Resource.Diagnostic> errors = expression.eResource().getErrors();
 		assertEquals(errors.toString(), 1, errors.size());
-		assertEquals("Type mismatch: type String is not applicable at this location", errors.get(0).getMessage());
+		assertEquals("Type mismatch: cannot convert from String to GenericType1<? extends String>", errors.get(0).getMessage());
 	}
 	
-	@Test public void testGenerics_2() throws Exception {
+	@Test public void testGenerics_4() throws Exception {
 		expression("new testdata.GenericType1() += 'foo'", true);
 	}
 	
