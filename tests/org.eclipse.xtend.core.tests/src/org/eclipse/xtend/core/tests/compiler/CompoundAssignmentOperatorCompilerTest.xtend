@@ -19,12 +19,13 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			import static extension compound.IntCompoundExtensions.*
 			
 			class Foo {
-				
+
 				def foo() {
 					var i = 2
 					i += i *= 2
+					i
 				}
-				
+
 			}
 		'''.assertCompilesTo(
 		'''
@@ -34,8 +35,11 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			    int _xblockexpression = (int) 0;
 			    {
 			      int i = 2;
-			      int _multiplyAssign = i *= 2;
-			      _xblockexpression = i += _multiplyAssign;
+			      int _i = i;
+			      int _i_1 = i;
+			      int _multiplyAssign = i = _i_1 *= 2;
+			      i = _i += _multiplyAssign;
+			      _xblockexpression = i;
 			    }
 			    return _xblockexpression;
 			  }
@@ -48,12 +52,13 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			import static extension compound.IntCompoundExtensions.*
 			
 			class Foo {
-				
+
 				def foo() {
 					var i = 2
 					i *= i += 2
+					i
 				}
-				
+
 			}
 		'''.assertCompilesTo(
 		'''
@@ -63,8 +68,339 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			    int _xblockexpression = (int) 0;
 			    {
 			      int i = 2;
-			      int _add = i += 2;
-			      _xblockexpression = i *= _add;
+			      int _i = i;
+			      int _i_1 = i;
+			      int _add = i = _i_1 += 2;
+			      i = _i *= _add;
+			      _xblockexpression = i;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+
+	@Test def void test_3() {
+		'''
+			class Foo {
+
+				def foo() {
+					var i = 2
+					i += i *= 2
+					i
+				}
+
+			}
+		'''.assertCompilesTo(
+		'''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int foo() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      int i = 2;
+			      int _i = i;
+			      int _i_1 = i;
+			      int _multiply = i = (_i_1 * 2);
+			      i = (_i + _multiply);
+			      _xblockexpression = i;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+
+	@Test def void test_4() {
+		'''
+			class Foo {
+
+				def foo() {
+					var i = 2
+					i *= i += 2
+					i
+				}
+
+			}
+		'''.assertCompilesTo(
+		'''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int foo() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      int i = 2;
+			      int _i = i;
+			      int _i_1 = i;
+			      int _plus = i = (_i_1 + 2);
+			      i = (_i * _plus);
+			      _xblockexpression = i;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+
+	@Test def void test_5() {
+		'''
+			import static extension compound.IntCompoundExtensions.*
+
+			class Foo {
+
+				def foo() {
+					var i = 2
+					i *= i -= 2
+					i
+				}
+
+			}
+		'''.assertCompilesTo(
+		'''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int foo() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      int i = 2;
+			      int _i = i;
+			      int _i_1 = i;
+			      int _minus = i = (_i_1 - 2);
+			      i = _i *= _minus;
+			      _xblockexpression = i;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+
+	@Test def void test_6() {
+		'''
+			import static extension compound.IntCompoundExtensions.*
+
+			class Foo {
+
+				def foo() {
+					var i = 2
+					i -= i *= 2
+					i
+				}
+
+			}
+		'''.assertCompilesTo(
+		'''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int foo() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      int i = 2;
+			      int _i = i;
+			      int _i_1 = i;
+			      int _multiplyAssign = i = _i_1 *= 2;
+			      i = (_i - _multiplyAssign);
+			      _xblockexpression = i;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+
+	@Test def void test_7() {
+		'''
+			import static extension compound.IntCompoundExtensions.*
+
+			class Foo {
+			
+				def foo() {
+					var i = 2
+					i *= i /= i -= 2
+					i
+				}
+			
+			}
+		'''.assertCompilesTo(
+		'''
+			import compound.IntCompoundExtensions;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int foo() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      int i = 2;
+			      int _i = i;
+			      int _i_1 = i;
+			      int _i_2 = i;
+			      int _minus = i = (_i_2 - 2);
+			      int _divideAssign = i = IntCompoundExtensions.operator_divideAssign(_i_1, _minus);
+			      i = _i *= _divideAssign;
+			      _xblockexpression = i;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+
+	@Test def void test_8() {
+		'''
+			import static extension compound.IntCompoundExtensions.*
+
+			class Foo {
+			
+				def foo() {
+					var i = 2
+					i *= i %= i -= 2
+					i
+				}
+			
+			}
+		'''.assertCompilesTo(
+		'''
+			import compound.IntCompoundExtensions;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int foo() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      int i = 2;
+			      int _i = i;
+			      int _i_1 = i;
+			      int _i_2 = i;
+			      int _minus = i = (_i_2 - 2);
+			      int _modulo = i = IntCompoundExtensions.operator_modulo(_i_1, _minus);
+			      i = _i *= _modulo;
+			      _xblockexpression = i;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+
+	@Test def void test_9() {
+		'''
+			class Foo {
+			
+				def foo() {
+					var i = 2
+					i *= 2
+					i
+				}
+			
+			}
+		'''.assertCompilesTo(
+		'''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int foo() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      int i = 2;
+			      int _i = i;
+			      i = (_i * 2);
+			      _xblockexpression = i;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+
+	@Test def void test_10() {
+		'''
+			import static extension compound.IntCompoundExtensions.*
+			
+			class Foo {
+			
+				def foo() {
+					var i = 2
+					i *= 2
+					i
+				}
+			
+			}
+		'''.assertCompilesTo(
+		'''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int foo() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      int i = 2;
+			      int _i = i;
+			      i = _i *= 2;
+			      _xblockexpression = i;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void test_11() {
+		'''
+			class Foo {
+			
+				def foo() {
+					var i = 2
+					i += (3 + (i *= 2))
+					i
+				}
+			
+			}
+		'''.assertCompilesTo(
+		'''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int foo() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      int i = 2;
+			      int _i = i;
+			      int _i_1 = i;
+			      int _multiply = i = (_i_1 * 2);
+			      int _plus = (3 + _multiply);
+			      i = (_i + _plus);
+			      _xblockexpression = i;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void test_12() {
+		'''
+			import static extension compound.IntCompoundExtensions.*
+			
+			class Foo {
+			
+				def foo() {
+					var i = 2
+					i += (3 + (i *= 2))
+					i
+				}
+			
+			}
+		'''.assertCompilesTo(
+		'''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int foo() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      int i = 2;
+			      int _i = i;
+			      int _i_1 = i;
+			      int _multiplyAssign = i = _i_1 *= 2;
+			      int _plus = (3 + _multiplyAssign);
+			      i = _i += _plus;
+			      _xblockexpression = i;
 			    }
 			    return _xblockexpression;
 			  }

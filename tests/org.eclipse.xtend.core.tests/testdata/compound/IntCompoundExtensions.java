@@ -7,6 +7,7 @@
  *******************************************************************************/
 package compound;
 
+import org.eclipse.xtext.xbase.lib.CompoundAssignment;
 import org.eclipse.xtext.xbase.lib.Inline;
 
 /**
@@ -14,14 +15,25 @@ import org.eclipse.xtext.xbase.lib.Inline;
  */
 public class IntCompoundExtensions {
 
-	@Inline(value = "$1 += $2", mutableArguments = { 0 })
+	@CompoundAssignment
+	@Inline(value = "$1 += $2")
 	public static int operator_add(int a, int b) {
 		return 0;
 	}
 
-	@Inline(value = "$1 *= $2", mutableArguments = { 0 })
+	@CompoundAssignment
+	@Inline(value = "$1 *= $2")
 	public static int operator_multiplyAssign(int a, int b) {
 		return 0;
+	}
+	
+	@CompoundAssignment
+	public static int operator_divideAssign(int a, int b) {
+		return a / b;
+	}
+	
+	public static int operator_modulo(int a, int b) {
+		return a % b;
 	}
 
 }

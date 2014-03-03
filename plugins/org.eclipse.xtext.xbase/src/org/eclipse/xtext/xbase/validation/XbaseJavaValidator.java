@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -35,8 +34,6 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EcoreUtil2.ElementReferenceAcceptor;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -48,7 +45,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -103,7 +99,6 @@ import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Functions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
@@ -1534,31 +1529,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Check
 	public void checkAssignment(XBinaryOperation binaryOperation) {
-		JvmAnnotationReference inlineAnnotation = expressionHelper.findInlineAnnotation(binaryOperation);
-		if (inlineAnnotation == null) {
-			return;
-		}
-		JvmAnnotationValue annotationValue = IterableExtensions.findFirst(inlineAnnotation.getValues(),
-				new Functions.Function1<JvmAnnotationValue, Boolean>() {
-
-					public Boolean apply(JvmAnnotationValue value) {
-						return "mutableArguments".equals(value.getValueName()) && value instanceof JvmIntAnnotationValue;
-					}
-
-				});
-		if (annotationValue == null) {
-			return;
-		}
-		EList<XExpression> actualArguments = binaryOperation.getActualArguments();
-		
-		JvmIntAnnotationValue intAnnotationValue = (JvmIntAnnotationValue) annotationValue;
-		for (int argumentIndex : intAnnotationValue.getValues()) {
-			try {
-				XExpression argument = actualArguments.get(argumentIndex);
-				checkAssignment(argument, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
-			} catch (IndexOutOfBoundsException e) {
-				error("Mutable argument index is out of range: " + argumentIndex, null);
-			}
+		if (binaryOperation.isCompoundOperator()) {
+			XExpression firstArgument = binaryOperation.getActualArguments().get(0);
+			checkAssignment(firstArgument, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);	
 		}
 	}
 	

@@ -41,10 +41,9 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DynamicExtensionsScope extends AbstractSessionBasedScope {
+public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope {
 
 	private final ExtensionScopeHelper helper;
-	private final OperatorMapping operatorMapping;
 	private final XExpression firstArgument;
 	private final LightweightTypeReference argumentType;
 	private final boolean implicit;
@@ -58,11 +57,10 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 			boolean implicit,
 			XAbstractFeatureCall context,
 			OperatorMapping operatorMapping) {
-		super(parent, session, context);
+		super(parent, session, context, operatorMapping);
 		this.firstArgument = firstArgument;
 		this.argumentType = argumentType;
 		this.implicit = implicit;
-		this.operatorMapping = operatorMapping;
 		if (argumentType != null)
 			this.helper = new ExtensionScopeHelper(argumentType);
 		else
@@ -136,7 +134,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 				}
 			}
 		}
-		QualifiedName operator = operatorMapping.getOperator(featureName);
+		QualifiedName operator = getOperatorMapping().getOperator(featureName);
 		if (operator != null) {
 			if (firstArgument != null)
 				result.add(doCreateExtensionDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
@@ -196,17 +194,6 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 			}
 		}
 		return result;
-	}
-	
-	@Override
-	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
-		QualifiedName methodName = operatorMapping.getMethodName(name);
-		if (methodName != null) {
-			acceptor.accept(methodName.toString(), 2);
-		} else {
-			super.processFeatureNames(name, acceptor);
-			processAsPropertyNames(name, acceptor);
-		}
 	}
 	
 	protected BucketedEObjectDescription createExtensionDescription(QualifiedName name, JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType,

@@ -1063,13 +1063,22 @@ public interface XbasePackage extends EPackage
 	int XBINARY_OPERATION__RIGHT_OPERAND = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Compound Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION__COMPOUND_OPERATOR = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>XBinary Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XBINARY_OPERATION_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+	int XBINARY_OPERATION_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XUnaryOperationImpl <em>XUnary Operation</em>}' class.
@@ -2476,6 +2485,17 @@ public interface XbasePackage extends EPackage
 	EReference getXBinaryOperation_RightOperand();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XBinaryOperation#isCompoundOperator <em>Compound Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Compound Operator</em>'.
+	 * @see org.eclipse.xtext.xbase.XBinaryOperation#isCompoundOperator()
+	 * @see #getXBinaryOperation()
+	 * @generated
+	 */
+	EAttribute getXBinaryOperation_CompoundOperator();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XUnaryOperation <em>XUnary Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3534,6 +3554,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XBINARY_OPERATION__RIGHT_OPERAND = eINSTANCE.getXBinaryOperation_RightOperand();
+
+		/**
+		 * The meta object literal for the '<em><b>Compound Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XBINARY_OPERATION__COMPOUND_OPERATOR = eINSTANCE.getXBinaryOperation_CompoundOperator();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XUnaryOperationImpl <em>XUnary Operation</em>}' class.

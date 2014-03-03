@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBinaryOperationImpl#getLeftOperand <em>Left Operand</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBinaryOperationImpl#getRightOperand <em>Right Operand</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XBinaryOperationImpl#isCompoundOperator <em>Compound Operator</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,6 +55,26 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 	 * @ordered
 	 */
 	protected XExpression rightOperand;
+
+	/**
+	 * The default value of the '{@link #isCompoundOperator() <em>Compound Operator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isCompoundOperator()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean COMPOUND_OPERATOR_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isCompoundOperator() <em>Compound Operator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isCompoundOperator()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean compoundOperator = COMPOUND_OPERATOR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -177,6 +198,29 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isCompoundOperator()
+	{
+		return compoundOperator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCompoundOperator(boolean newCompoundOperator)
+	{
+		boolean oldCompoundOperator = compoundOperator;
+		compoundOperator = newCompoundOperator;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XBINARY_OPERATION__COMPOUND_OPERATOR, oldCompoundOperator, compoundOperator));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -204,6 +248,8 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 				return getLeftOperand();
 			case XbasePackage.XBINARY_OPERATION__RIGHT_OPERAND:
 				return getRightOperand();
+			case XbasePackage.XBINARY_OPERATION__COMPOUND_OPERATOR:
+				return isCompoundOperator();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -223,6 +269,9 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 				return;
 			case XbasePackage.XBINARY_OPERATION__RIGHT_OPERAND:
 				setRightOperand((XExpression)newValue);
+				return;
+			case XbasePackage.XBINARY_OPERATION__COMPOUND_OPERATOR:
+				setCompoundOperator((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -244,6 +293,9 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 			case XbasePackage.XBINARY_OPERATION__RIGHT_OPERAND:
 				setRightOperand((XExpression)null);
 				return;
+			case XbasePackage.XBINARY_OPERATION__COMPOUND_OPERATOR:
+				setCompoundOperator(COMPOUND_OPERATOR_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -262,8 +314,27 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 				return leftOperand != null;
 			case XbasePackage.XBINARY_OPERATION__RIGHT_OPERAND:
 				return rightOperand != null;
+			case XbasePackage.XBINARY_OPERATION__COMPOUND_OPERATOR:
+				return compoundOperator != COMPOUND_OPERATOR_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (compoundOperator: ");
+		result.append(compoundOperator);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XBinaryOperationImpl

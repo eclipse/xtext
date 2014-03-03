@@ -34,6 +34,7 @@ import org.junit.Assert;
 import com.google.common.base.Supplier;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import compound.IntCompoundExtensions;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -61,6 +62,7 @@ public class CompilerTestHelper {
 	public void setUp() {
 		javaCompiler.clearClassPath();
 		javaCompiler.addClassPathOfClass(getClass());
+		javaCompiler.addClassPathOfClass(IntCompoundExtensions.class);
 		javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
 		javaCompiler.addClassPathOfClass(Functions.class);
 		javaCompiler.addClassPathOfClass(StringConcatenation.class);
@@ -84,6 +86,16 @@ public class CompilerTestHelper {
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail("Exception thrown " + e + ".Java code was " + compileToJavaCode);
+		}
+	}
+	
+	public void assertEvaluatesTo(Object object, String xtendCode, String javaCode) {
+		try {
+			Object actual = apply(compileToClass(javaCode));
+			Assert.assertEquals("String was:\n" + xtendCode + "\nJava code was " + javaCode, object, actual);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Exception thrown " + e + ".Java code was " + javaCode);
 		}
 	}
 
@@ -127,6 +139,10 @@ public class CompilerTestHelper {
 
 	protected Class<?> compile(String code) {
 		String javaCode = compileToJavaCode(code);
+		return compileToClass(javaCode);
+	}
+
+	protected Class<?> compileToClass(String javaCode) {
 		try {
 			Class<?> clazz = javaCompiler.compileToClass("foo.Test", javaCode);
 			return clazz;
@@ -136,9 +152,12 @@ public class CompilerTestHelper {
 	}
 
 	protected String compileToJavaCode(String xtendCode) {
+		final String text = "package foo class Test { def Object foo() throws Exception {" + xtendCode + "} }";
+		return toJavaCode(text);
+	}
+	protected String toJavaCode(String xtendCode) {
 		try {
-			final String text = "package foo class Test { def Object foo() throws Exception {" + xtendCode + "} }";
-			final XtendFile file = parseHelper.parse(text);
+			final XtendFile file = parseHelper.parse(xtendCode);
 			validationHelper.assertNoErrors(file);
 			JvmGenericType inferredType = associations.getInferredType((XtendClass) file.getXtendTypes().get(0));
 			CharSequence javaCode = generator.generateType(inferredType, configprovider.get(inferredType));

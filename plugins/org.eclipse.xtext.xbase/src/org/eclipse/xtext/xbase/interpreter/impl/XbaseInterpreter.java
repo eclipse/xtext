@@ -894,7 +894,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			}
 		XExpression receiver = getActualReceiver(featureCall);
 		Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
-		return invokeFeature(featureCall.getFeature(), featureCall, receiverObj, context, indicator);
+		Object result = invokeFeature(featureCall.getFeature(), featureCall, receiverObj, context, indicator);
+		if (featureCall instanceof XBinaryOperation) {
+			XBinaryOperation binaryOperation = (XBinaryOperation) featureCall;
+			if (binaryOperation.isCompoundOperator()) {
+				XAbstractFeatureCall leftOperand = (XAbstractFeatureCall) binaryOperation.getLeftOperand();
+				assignValueTo(leftOperand.getFeature(), featureCall, result, context, indicator);
+			}
+		}
+		return result;
 	}
 
 	protected List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {
@@ -1131,7 +1139,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return assign;
 	}
 	
-	protected Object assignValueTo(JvmIdentifiableElement feature, XAssignment assignment, Object value, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object assignValueTo(JvmIdentifiableElement feature, XAbstractFeatureCall assignment, Object value, IEvaluationContext context, CancelIndicator indicator) {
 		if (feature instanceof XVariableDeclaration) {
 			return _assigneValueTo((XVariableDeclaration) feature, assignment, value, context, indicator);
 		} else if (feature instanceof JvmField) {
@@ -1147,7 +1155,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 * @param assignment unused in this context but required for dispatching
 	 * @param indicator unused in this context but required for dispatching
 	 */
-	protected Object _assigneValueTo(XVariableDeclaration variable, XAssignment assignment, Object value,
+	protected Object _assigneValueTo(XVariableDeclaration variable, XAbstractFeatureCall assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
 		if (variable.getType() != null) {
 			JvmTypeReference type = variable.getType();
@@ -1159,7 +1167,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return value;
 	}
 
-	protected Object _assigneValueTo(JvmField jvmField, XAssignment assignment, Object value,
+	protected Object _assigneValueTo(JvmField jvmField, XAbstractFeatureCall assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
 		Object receiver = getReceiver(assignment, context, indicator);
 		if (receiver == null)
@@ -1181,17 +1189,19 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 
-	protected Object getReceiver(XAssignment assignment, IEvaluationContext context, CancelIndicator indicator) {
+	protected Object getReceiver(XAbstractFeatureCall assignment, IEvaluationContext context, CancelIndicator indicator) {
 		XExpression receiver = getActualReceiver(assignment);
 		Object result = receiver == null ? null : internalEvaluate(receiver, context, indicator);
 		return result;
 	}
 
-	protected Object _assigneValueTo(JvmOperation jvmOperation, XAssignment assignment, Object value,
+	protected Object _assigneValueTo(JvmOperation jvmOperation, XAbstractFeatureCall assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
 		List<Object> argumentValues;
-		if (assignment.getImplicitReceiver() != null && assignment.getAssignable() != null) {
-			XExpression implicitArgument = assignment.getAssignable();
+		if (assignment.getImplicitReceiver() != null 
+				&& assignment instanceof XAssignment 
+				&& ((XAssignment) assignment).getAssignable() != null) {
+			XExpression implicitArgument = ((XAssignment) assignment).getAssignable();
 			Object argResult = internalEvaluate(implicitArgument, context, indicator);
 			JvmTypeReference firstParameterType = jvmOperation.getParameters().get(0).getParameterType();
 			Object firstValue = coerceArgumentType(argResult, firstParameterType);

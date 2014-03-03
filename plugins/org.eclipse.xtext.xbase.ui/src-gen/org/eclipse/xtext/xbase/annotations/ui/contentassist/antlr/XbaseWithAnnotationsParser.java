@@ -103,8 +103,8 @@ public class XbaseWithAnnotationsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXAssignmentAccess().getGroup_1_1(), "rule__XAssignment__Group_1_1__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup_1_1_0(), "rule__XAssignment__Group_1_1_0__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup_1_1_0_0(), "rule__XAssignment__Group_1_1_0_0__0");
-					put(grammarAccess.getOpMultiAssignAccess().getGroup_8(), "rule__OpMultiAssign__Group_8__0");
-					put(grammarAccess.getOpMultiAssignAccess().getGroup_9(), "rule__OpMultiAssign__Group_9__0");
+					put(grammarAccess.getOpMultiAssignAccess().getGroup_5(), "rule__OpMultiAssign__Group_5__0");
+					put(grammarAccess.getOpMultiAssignAccess().getGroup_6(), "rule__OpMultiAssign__Group_6__0");
 					put(grammarAccess.getXOrExpressionAccess().getGroup(), "rule__XOrExpression__Group__0");
 					put(grammarAccess.getXOrExpressionAccess().getGroup_1(), "rule__XOrExpression__Group_1__0");
 					put(grammarAccess.getXOrExpressionAccess().getGroup_1_0(), "rule__XOrExpression__Group_1_0__0");
