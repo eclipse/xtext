@@ -2367,7 +2367,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("_xblockexpression = (_xsynchronizedexpression);");
+      _builder_1.append("_xblockexpression = _xsynchronizedexpression;");
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
@@ -2471,7 +2471,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("final int j = 2;");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("_xblockexpression = ((i + j));");
+      _builder_1.append("_xblockexpression = (i + j);");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");

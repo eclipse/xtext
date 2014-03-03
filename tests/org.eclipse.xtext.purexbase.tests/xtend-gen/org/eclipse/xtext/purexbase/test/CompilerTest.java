@@ -151,13 +151,13 @@ public class CompilerTest {
       _builder_1.append("/* CollectionLiterals.<String>newHashSet(\"foo\", \"bar\", \"baz\"); */");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("Pair<Integer,String> _mappedTo = Pair.<Integer, String>of(Integer.valueOf(1), \"one\");");
+      _builder_1.append("Pair<Integer, String> _mappedTo = Pair.<Integer, String>of(Integer.valueOf(1), \"one\");");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("Pair<Integer,String> _mappedTo_1 = Pair.<Integer, String>of(Integer.valueOf(2), \"two\");");
+      _builder_1.append("Pair<Integer, String> _mappedTo_1 = Pair.<Integer, String>of(Integer.valueOf(2), \"two\");");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("Pair<Integer,String> _mappedTo_2 = Pair.<Integer, String>of(Integer.valueOf(3), \"three\");");
+      _builder_1.append("Pair<Integer, String> _mappedTo_2 = Pair.<Integer, String>of(Integer.valueOf(3), \"three\");");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("/* CollectionLiterals.<Integer, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2); */");
@@ -166,7 +166,7 @@ public class CompilerTest {
       _builder_1.append("/* new BigInteger(\"beefbeefbeefbeefbeef\", 16) */");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = (new BigDecimal(\"0.123456789123456789123456789123456789e4242\"));");
+      _builder_1.append("_xblockexpression = new BigDecimal(\"0.123456789123456789123456789123456789e4242\");");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -414,13 +414,13 @@ public class CompilerTest {
       _builder_1.append("final String s1 = \"foo\";");
       _builder_1.newLine();
       _builder_1.append("        ");
-      _builder_1.append("_xblockexpression_1 = ((s + s1));");
+      _builder_1.append("_xblockexpression_1 = (s + s1);");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = (_xblockexpression_1);");
+      _builder_1.append("_xblockexpression = _xblockexpression_1;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -496,7 +496,7 @@ public class CompilerTest {
       _builder_1.append("final CharSequence s = \"foo\";");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = (((String) s).length());");
+      _builder_1.append("_xblockexpression = ((String) s).length();");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -611,7 +611,7 @@ public class CompilerTest {
       _builder_1.append("final String x = \"Hello \";");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("final Function1<String,String> _function = new Function1<String,String>() {");
+      _builder_1.append("final Function1<String, String> _function = new Function1<String, String>() {");
       _builder_1.newLine();
       _builder_1.append("        ");
       _builder_1.append("public String apply(final String e) {");
@@ -626,7 +626,7 @@ public class CompilerTest {
       _builder_1.append("};");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("final Function1<String,String> f = _function;");
+      _builder_1.append("final Function1<String, String> f = _function;");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("f.apply(\"World!\");");
@@ -635,7 +635,7 @@ public class CompilerTest {
       _builder_1.append("final ArrayList<String> list = CollectionLiterals.<String>newArrayList(\"a\", \"b\", \"c\");");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("final Function1<String,String> _function_1 = new Function1<String,String>() {");
+      _builder_1.append("final Function1<String, String> _function_1 = new Function1<String, String>() {");
       _builder_1.newLine();
       _builder_1.append("        ");
       _builder_1.append("public String apply(final String e) {");
@@ -653,7 +653,7 @@ public class CompilerTest {
       _builder_1.append("/* ListExtensions.<String, String>map(list, _function_1); */");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("final Function1<String,String> _function_2 = new Function1<String,String>() {");
+      _builder_1.append("final Function1<String, String> _function_2 = new Function1<String, String>() {");
       _builder_1.newLine();
       _builder_1.append("        ");
       _builder_1.append("public String apply(final String e) {");
@@ -668,10 +668,10 @@ public class CompilerTest {
       _builder_1.append("};");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("final Function1<? super String,? extends String> f2 = _function_2;");
+      _builder_1.append("final Function1<? super String, ? extends String> f2 = _function_2;");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = (f2.apply(\"simsalabim\"));");
+      _builder_1.append("_xblockexpression = f2.apply(\"simsalabim\");");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -855,7 +855,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = (_xifexpression);");
+      _builder_1.append("_xblockexpression = _xifexpression;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -933,7 +933,7 @@ public class CompilerTest {
       _builder_1.append("Amount _multiply = b.operator_multiply(3);");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = (a.operator_plus(_multiply));");
+      _builder_1.append("_xblockexpression = a.operator_plus(_multiply);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -1099,7 +1099,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = (result);");
+      _builder_1.append("_xblockexpression = result;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -1228,7 +1228,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = (null);");
+      _builder_1.append("_xblockexpression = null;");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -1391,7 +1391,7 @@ public class CompilerTest {
       _builder_1.append("if (!_matched) {");
       _builder_1.newLine();
       _builder_1.append("        ");
-      _builder_1.append("if (Objects.equal(_head,\"foo\")) {");
+      _builder_1.append("if (Objects.equal(_head, \"foo\")) {");
       _builder_1.newLine();
       _builder_1.append("          ");
       _builder_1.append("_matched=true;");
@@ -1409,7 +1409,7 @@ public class CompilerTest {
       _builder_1.append("if (!_matched) {");
       _builder_1.newLine();
       _builder_1.append("        ");
-      _builder_1.append("if (Objects.equal(_head,\"bar\")) {");
+      _builder_1.append("if (Objects.equal(_head, \"bar\")) {");
       _builder_1.newLine();
       _builder_1.append("          ");
       _builder_1.append("_matched=true;");
@@ -1445,7 +1445,7 @@ public class CompilerTest {
       _builder_1.append("final ArrayList<Shape> list2 = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("final Function1<Shape,String> _function = new Function1<Shape,String>() {");
+      _builder_1.append("final Function1<Shape, String> _function = new Function1<Shape, String>() {");
       _builder_1.newLine();
       _builder_1.append("        ");
       _builder_1.append("public String apply(final Shape shape) {");
@@ -1526,7 +1526,7 @@ public class CompilerTest {
       _builder_1.append("};");
       _builder_1.newLine();
       _builder_1.append("      ");
-      _builder_1.append("_xblockexpression = (ListExtensions.<Shape, String>map(list2, _function));");
+      _builder_1.append("_xblockexpression = ListExtensions.<Shape, String>map(list2, _function);");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("}");
@@ -1675,7 +1675,7 @@ public class CompilerTest {
       _builder_1.append("\"string\".toCharArray();");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("final List<Character> l = ((List<Character>)Conversions.doWrapArray(\"string\".toCharArray()));");
+      _builder_1.append("final List<Character> l = (List<Character>)Conversions.doWrapArray(\"string\".toCharArray());");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("char[] _charArray = \"string\".toCharArray();");

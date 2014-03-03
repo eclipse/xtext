@@ -99,8 +99,8 @@ public class NewFeatureNameUtil {
 	}
 
 	protected boolean isAlreadyDefined(String newFeatureName) {
-		Iterable<IEObjectDescription> elements = featureCallScope.getElements(QualifiedName.create(newFeatureName));
-		return !isEmpty(elements);
+		IEObjectDescription existing = featureCallScope.getSingleElement(QualifiedName.create(newFeatureName));
+		return existing != null;
 	}
 
 	public String getDefaultName(XExpression expression) {

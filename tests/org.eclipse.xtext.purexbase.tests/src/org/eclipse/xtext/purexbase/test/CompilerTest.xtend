@@ -81,12 +81,12 @@ class CompilerTest {
 			      /* String.class */
 			      /* CollectionLiterals.<Integer>newArrayList(Integer.valueOf(3), Integer.valueOf(5), Integer.valueOf(7)); */
 			      /* CollectionLiterals.<String>newHashSet("foo", "bar", "baz"); */
-			      Pair<Integer,String> _mappedTo = Pair.<Integer, String>of(Integer.valueOf(1), "one");
-			      Pair<Integer,String> _mappedTo_1 = Pair.<Integer, String>of(Integer.valueOf(2), "two");
-			      Pair<Integer,String> _mappedTo_2 = Pair.<Integer, String>of(Integer.valueOf(3), "three");
+			      Pair<Integer, String> _mappedTo = Pair.<Integer, String>of(Integer.valueOf(1), "one");
+			      Pair<Integer, String> _mappedTo_1 = Pair.<Integer, String>of(Integer.valueOf(2), "two");
+			      Pair<Integer, String> _mappedTo_2 = Pair.<Integer, String>of(Integer.valueOf(3), "three");
 			      /* CollectionLiterals.<Integer, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2); */
 			      /* new BigInteger("beefbeefbeefbeefbeef", 16) */
-			      _xblockexpression = (new BigDecimal("0.123456789123456789123456789123456789e4242"));
+			      _xblockexpression = new BigDecimal("0.123456789123456789123456789123456789e4242");
 			    }
 			    return _xblockexpression;
 			  }
@@ -194,9 +194,9 @@ class CompilerTest {
 			      String _xblockexpression_1 = null;
 			      {
 			        final String s1 = "foo";
-			        _xblockexpression_1 = ((s + s1));
+			        _xblockexpression_1 = (s + s1);
 			      }
-			      _xblockexpression = (_xblockexpression_1);
+			      _xblockexpression = _xblockexpression_1;
 			    }
 			    return _xblockexpression;
 			  }
@@ -228,7 +228,7 @@ class CompilerTest {
 			    int _xblockexpression = (int) 0;
 			    {
 			      final CharSequence s = "foo";
-			      _xblockexpression = (((String) s).length());
+			      _xblockexpression = ((String) s).length();
 			    }
 			    return _xblockexpression;
 			  }
@@ -283,27 +283,27 @@ class CompilerTest {
 			    String _xblockexpression = null;
 			    {
 			      final String x = "Hello ";
-			      final Function1<String,String> _function = new Function1<String,String>() {
+			      final Function1<String, String> _function = new Function1<String, String>() {
 			        public String apply(final String e) {
 			          return (x + e);
 			        }
 			      };
-			      final Function1<String,String> f = _function;
+			      final Function1<String, String> f = _function;
 			      f.apply("World!");
 			      final ArrayList<String> list = CollectionLiterals.<String>newArrayList("a", "b", "c");
-			      final Function1<String,String> _function_1 = new Function1<String,String>() {
+			      final Function1<String, String> _function_1 = new Function1<String, String>() {
 			        public String apply(final String e) {
 			          return e.toUpperCase();
 			        }
 			      };
 			      /* ListExtensions.<String, String>map(list, _function_1); */
-			      final Function1<String,String> _function_2 = new Function1<String,String>() {
+			      final Function1<String, String> _function_2 = new Function1<String, String>() {
 			        public String apply(final String e) {
 			          return e.toUpperCase();
 			        }
 			      };
-			      final Function1<? super String,? extends String> f2 = _function_2;
-			      _xblockexpression = (f2.apply("simsalabim"));
+			      final Function1<? super String, ? extends String> f2 = _function_2;
+			      _xblockexpression = f2.apply("simsalabim");
 			    }
 			    return _xblockexpression;
 			  }
@@ -374,7 +374,7 @@ class CompilerTest {
 			      if (_xifexpression_1) {
 			        _xifexpression = "Xbase doesn\'t need the ternary operator";
 			      }
-			      _xblockexpression = (_xifexpression);
+			      _xblockexpression = _xifexpression;
 			    }
 			    return _xblockexpression;
 			  }
@@ -408,7 +408,7 @@ class CompilerTest {
 			      final Amount a = new Amount("12.80");
 			      final Amount b = new Amount("0.20");
 			      Amount _multiply = b.operator_multiply(3);
-			      _xblockexpression = (a.operator_plus(_multiply));
+			      _xblockexpression = a.operator_plus(_multiply);
 			    }
 			    return _xblockexpression;
 			  }
@@ -475,7 +475,7 @@ class CompilerTest {
 			        boolean _lessThan_1 = (i < _size_1);
 			        _while = _lessThan_1;
 			      }
-			      _xblockexpression = (result);
+			      _xblockexpression = result;
 			    }
 			    return _xblockexpression;
 			  }
@@ -527,7 +527,7 @@ class CompilerTest {
 			        }
 			      } finally {
 			      }
-			      _xblockexpression = (null);
+			      _xblockexpression = null;
 			    }
 			    return _xblockexpression;
 			  }
@@ -595,13 +595,13 @@ class CompilerTest {
 			      String _head = IterableExtensions.<String>head(list);
 			      boolean _matched = false;
 			      if (!_matched) {
-			        if (Objects.equal(_head,"foo")) {
+			        if (Objects.equal(_head, "foo")) {
 			          _matched=true;
 			          /* "it\'s foo" */
 			        }
 			      }
 			      if (!_matched) {
-			        if (Objects.equal(_head,"bar")) {
+			        if (Objects.equal(_head, "bar")) {
 			          _matched=true;
 			          /* "a bar" */
 			        }
@@ -613,7 +613,7 @@ class CompilerTest {
 			      Circle _circle = new Circle(4);
 			      Rectangle _rectangle_1 = new Rectangle(6, 8);
 			      final ArrayList<Shape> list2 = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
-			      final Function1<Shape,String> _function = new Function1<Shape,String>() {
+			      final Function1<Shape, String> _function = new Function1<Shape, String>() {
 			        public String apply(final Shape shape) {
 			          String _switchResult = null;
 			          boolean _matched = false;
@@ -640,7 +640,7 @@ class CompilerTest {
 			          return _switchResult;
 			        }
 			      };
-			      _xblockexpression = (ListExtensions.<Shape, String>map(list2, _function));
+			      _xblockexpression = ListExtensions.<Shape, String>map(list2, _function);
 			    }
 			    return _xblockexpression;
 			  }
@@ -708,7 +708,7 @@ class CompilerTest {
 			    int _length = "string".length();
 			    Integer.valueOf(_length).toString();
 			    "string".toCharArray();
-			    final List<Character> l = ((List<Character>)Conversions.doWrapArray("string".toCharArray()));
+			    final List<Character> l = (List<Character>)Conversions.doWrapArray("string".toCharArray());
 			    char[] _charArray = "string".toCharArray();
 			    /* _charArray[3]; */
 			    final Comparator<String> _function = new Comparator<String>() {
