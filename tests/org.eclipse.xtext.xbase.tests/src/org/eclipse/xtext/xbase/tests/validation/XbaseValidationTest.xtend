@@ -23,6 +23,12 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 	@Inject
 	extension ValidationTestHelper
 
+	@Test def void testForwardReferenceToLocalVar() {
+		'''
+			{ val (int)=>int fun = [ fun.apply(it) ] }
+		'''.expression.assertError(XbasePackage.Literals.XFEATURE_CALL, IssueCodes.ILLEGAL_FORWARD_REFERENCE, 'The local variable fun may not have been initialized')
+	}
+	
 	@Test def void testDuplicateCases_typeLiteral() {
 		'''
 			switch x : String {
