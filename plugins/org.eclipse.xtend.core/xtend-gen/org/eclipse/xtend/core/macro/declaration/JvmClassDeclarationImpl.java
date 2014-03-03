@@ -51,7 +51,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
         }
       };
       Iterable<TypeReference> _map = IterableExtensions.<JvmTypeReference, TypeReference>map(filtered, _function_1);
-      _xblockexpression = IterableExtensions.<TypeReference>toList(_map);
+      _xblockexpression = (IterableExtensions.<TypeReference>toList(_map));
     }
     return _xblockexpression;
   }
@@ -133,7 +133,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     MethodDeclaration _xblockexpression = null;
     {
-      ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
+      ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
       Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
       Iterable<MethodDeclaration> _filter = Iterables.<MethodDeclaration>filter(_declaredMembers, MethodDeclaration.class);
       final Function1<MethodDeclaration,Boolean> _function = new Function1<MethodDeclaration,Boolean>() {
@@ -159,7 +159,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
           return Boolean.valueOf(_and);
         }
       };
-      _xblockexpression = IterableExtensions.<MethodDeclaration>findFirst(_filter, _function);
+      _xblockexpression = (IterableExtensions.<MethodDeclaration>findFirst(_filter, _function));
     }
     return _xblockexpression;
   }

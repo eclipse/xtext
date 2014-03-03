@@ -29,7 +29,7 @@ public class Xbase05_Closures {
         }
       };
       final Function1<? super String,? extends String> f2 = _function_2;
-      _xblockexpression = f2.apply("simsalabim");
+      _xblockexpression = (f2.apply("simsalabim"));
     }
     return _xblockexpression;
   }

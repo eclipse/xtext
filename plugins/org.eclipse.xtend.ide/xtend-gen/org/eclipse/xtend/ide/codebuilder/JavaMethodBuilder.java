@@ -65,7 +65,7 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBui
       } else {
         this.appendBody(appendable, ";");
       }
-      _xblockexpression = appendable;
+      _xblockexpression = (appendable);
     }
     return _xblockexpression;
   }

@@ -55,7 +55,7 @@ public class CompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
         public void accept(final CompilationTestHelper.Result it) {
           try {
-            Class<?> _compiledClass = it.getCompiledClass();
+            Class<? extends Object> _compiledClass = it.getCompiledClass();
             final Object obj = _compiledClass.newInstance();
             CompilerTest.this._reflectExtensions.invoke(obj, "setName", "Foo");
             Object _invoke = CompilerTest.this._reflectExtensions.invoke(obj, "doStuff", "Hello");

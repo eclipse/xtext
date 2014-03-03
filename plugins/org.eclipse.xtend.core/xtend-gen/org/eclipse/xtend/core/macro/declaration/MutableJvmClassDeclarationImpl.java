@@ -215,7 +215,7 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
   
   public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {
     ConditionUtils.checkJavaIdentifier(name, "name");
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(upperBounds)), "upperBounds");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(upperBounds)), "upperBounds");
     ConditionUtils.checkInferredTypeReferences("parameter type", upperBounds);
     final JvmTypeParameter param = TypesFactory.eINSTANCE.createJvmTypeParameter();
     param.setName(name);

@@ -72,7 +72,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
           return path.getAbsolutePath(it);
         }
       };
-      _xblockexpression = ListExtensions.<String, Path>map(((List<String>)Conversions.doWrapArray(_list)), _function);
+      _xblockexpression = (ListExtensions.<String, Path>map(((List<String>)Conversions.doWrapArray(_list)), _function));
     }
     return _xblockexpression;
   }

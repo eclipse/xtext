@@ -49,7 +49,7 @@ public class NodeModelAccess {
         }
       };
       INode _findFirst = IterableExtensions.<INode>findFirst(_asTreeIterable, _function);
-      _xblockexpression = ((ILeafNode) _findFirst);
+      _xblockexpression = (((ILeafNode) _findFirst));
     }
     return _xblockexpression;
   }
@@ -82,7 +82,7 @@ public class NodeModelAccess {
           return Boolean.valueOf(_and);
         }
       };
-      _xblockexpression = IterableExtensions.<ILeafNode>filter(_filter, _function);
+      _xblockexpression = (IterableExtensions.<ILeafNode>filter(_filter, _function));
     }
     return _xblockexpression;
   }
@@ -139,7 +139,7 @@ public class NodeModelAccess {
       if (_and) {
         _xifexpression = result;
       }
-      _xblockexpression = _xifexpression;
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }

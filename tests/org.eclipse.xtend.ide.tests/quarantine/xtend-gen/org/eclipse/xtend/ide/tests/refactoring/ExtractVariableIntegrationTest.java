@@ -520,7 +520,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
               NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
               Change _createChange = refactoring.createChange(_nullProgressMonitor_1);
               NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
-              _xblockexpression = _createChange.perform(_nullProgressMonitor_2);
+              _xblockexpression = (_createChange.perform(_nullProgressMonitor_2));
             }
             return _xblockexpression;
           }

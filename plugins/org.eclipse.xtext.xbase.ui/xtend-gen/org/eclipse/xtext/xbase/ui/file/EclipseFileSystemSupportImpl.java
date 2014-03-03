@@ -105,7 +105,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
         org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_string);
         _switchResult = _workspaceRoot_1.getFolder(_path);
       }
-      _xblockexpression = _switchResult;
+      _xblockexpression = (_switchResult);
     }
     return _xblockexpression;
   }
@@ -151,7 +151,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-      _xblockexpression = _xtrycatchfinallyexpression;
+      _xblockexpression = (_xtrycatchfinallyexpression);
     }
     return _xblockexpression;
   }
@@ -179,7 +179,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
       if (_equals) {
         return 0L;
       }
-      _xblockexpression = resource.getModificationStamp();
+      _xblockexpression = (resource.getModificationStamp());
     }
     return _xblockexpression;
   }
@@ -274,7 +274,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
             boolean _xblockexpression_1 = false;
             {
               ((IFolder)container).create(true, true, null);
-              _xblockexpression_1 = true;
+              _xblockexpression_1 = (true);
             }
             _switchResult = _xblockexpression_1;
           }
@@ -285,7 +285,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
             boolean _xblockexpression_1 = false;
             {
               ((IProject)container).create(null);
-              _xblockexpression_1 = true;
+              _xblockexpression_1 = (true);
             }
             _switchResult = _xblockexpression_1;
           }
@@ -303,7 +303,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-      _xblockexpression = _xtrycatchfinallyexpression;
+      _xblockexpression = (_xtrycatchfinallyexpression);
     }
     return _xblockexpression;
   }
@@ -355,7 +355,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
         }
       };
       IPath _fold = IterableExtensions.<String, IPath>fold(_reverse, _location, _function);
-      _xblockexpression = URIUtil.toURI(_fold);
+      _xblockexpression = (URIUtil.toURI(_fold));
     }
     return _xblockexpression;
   }

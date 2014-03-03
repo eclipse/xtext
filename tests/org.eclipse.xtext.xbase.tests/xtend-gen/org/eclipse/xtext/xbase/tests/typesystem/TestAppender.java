@@ -15,7 +15,7 @@ public class TestAppender extends AbstractStringBuilderBasedAppendable {
     builder.append(_identifier);
   }
   
-  protected void appendType(final Class<?> type, final StringBuilder builder) {
+  protected void appendType(final Class<? extends Object> type, final StringBuilder builder) {
     String _name = type.getName();
     builder.append(_name);
   }

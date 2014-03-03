@@ -187,7 +187,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final Object values, final boolean mustBeArray) {
-    Class<?> _class = values.getClass();
+    Class<? extends Object> _class = values.getClass();
     String _canonicalName = _class.getCanonicalName();
     String _plus = ("Cannot set annotation values of type " + _canonicalName);
     throw new IllegalArgumentException(_plus);
@@ -199,7 +199,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final String[] values, final boolean mustBeArray) {
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     String _name = String.class.getName();
     final JvmOperation op = this.findOperation(name, _name, mustBeArray);
     final JvmStringAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
@@ -219,7 +219,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final boolean[] values, final boolean mustBeArray) {
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmOperation op = this.findOperation(name, "boolean", mustBeArray);
     final JvmBooleanAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
     newValue.setOperation(op);
@@ -238,7 +238,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final int[] values, final boolean mustBeArray) {
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmOperation op = this.findOperation(name, "int", mustBeArray);
     final JvmIntAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
     newValue.setOperation(op);
@@ -257,7 +257,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final short[] values, final boolean mustBeArray) {
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmOperation op = this.findOperation(name, "short", mustBeArray);
     final JvmShortAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
     newValue.setOperation(op);
@@ -276,7 +276,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final long[] values, final boolean mustBeArray) {
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmOperation op = this.findOperation(name, "long", mustBeArray);
     final JvmLongAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
     newValue.setOperation(op);
@@ -295,7 +295,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final double[] values, final boolean mustBeArray) {
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmOperation op = this.findOperation(name, "double", mustBeArray);
     final JvmDoubleAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
     newValue.setOperation(op);
@@ -314,7 +314,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final float[] values, final boolean mustBeArray) {
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmOperation op = this.findOperation(name, "float", mustBeArray);
     final JvmFloatAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
     newValue.setOperation(op);
@@ -333,7 +333,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final char[] values, final boolean mustBeArray) {
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmOperation op = this.findOperation(name, "char", mustBeArray);
     final JvmCharAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
     newValue.setOperation(op);
@@ -352,7 +352,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final byte[] values, final boolean mustBeArray) {
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     final JvmOperation op = this.findOperation(name, "byte", mustBeArray);
     final JvmByteAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
     newValue.setOperation(op);
@@ -369,7 +369,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final TypeReference[] values, final boolean mustBeArray) {
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     String _name = TypeReference.class.getName();
     final JvmOperation op = this.findOperation(name, _name, mustBeArray);
     final JvmTypeAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
@@ -400,7 +400,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final EnumerationValueDeclaration[] values, final boolean mustBeArray) {
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     JvmOperation _xifexpression = null;
     int _length = values.length;
     boolean _greaterEqualsThan = (_length >= 1);
@@ -472,7 +472,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   protected void _internalSet(final String name, final AnnotationReference[] values, final boolean mustBeArray) {
-    ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
+    ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(values)), "values");
     JvmOperation _xifexpression = null;
     int _length = values.length;
     boolean _greaterEqualsThan = (_length >= 1);

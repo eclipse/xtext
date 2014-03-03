@@ -27,12 +27,12 @@ public class EagerArgumentTypeComputer extends XbaseTypeComputer {
       final Procedure1<ILinkingCandidate> _function = new Procedure1<ILinkingCandidate>() {
         public void apply(final ILinkingCandidate it) {
           if ((it instanceof AbstractPendingLinkingCandidate<?>)) {
-            ((AbstractPendingLinkingCandidate<?>)it).computeArgumentTypes();
+            ((AbstractPendingLinkingCandidate<? extends Object>)it).computeArgumentTypes();
           }
         }
       };
       IterableExtensions.forEach(candidates, _function);
-      _xblockexpression = super.getBestCandidate(candidates);
+      _xblockexpression = (super.getBestCandidate(candidates));
     }
     return _xblockexpression;
   }

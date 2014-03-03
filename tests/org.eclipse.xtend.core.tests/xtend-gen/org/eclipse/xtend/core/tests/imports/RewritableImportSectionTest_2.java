@@ -9,7 +9,7 @@ public class RewritableImportSectionTest_2 extends AbstractRewritableImportSecti
     return true;
   }
   
-  protected CharSequence getModel(final Class<?>[] types) {
+  protected CharSequence getModel(final Class<? extends Object>[] types) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();

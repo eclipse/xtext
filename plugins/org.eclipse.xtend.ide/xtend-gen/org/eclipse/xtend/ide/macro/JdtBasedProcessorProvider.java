@@ -43,7 +43,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       String _identifier = type.getIdentifier();
       final ClassLoader classLoader = this.createClassLoader(_identifier, project);
       String _identifier_1 = type.getIdentifier();
-      final Class<?> result = classLoader.loadClass(_identifier_1);
+      final Class<? extends Object> result = classLoader.loadClass(_identifier_1);
       return result.newInstance();
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
@@ -79,7 +79,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
           return _class.getClassLoader();
         }
         final IJavaProject projectToUse = type.getJavaProject();
-        _xblockexpression = this.createClassLoaderForJavaProject(projectToUse);
+        _xblockexpression = (this.createClassLoaderForJavaProject(projectToUse));
       }
       return _xblockexpression;
     } catch (Throwable _e) {

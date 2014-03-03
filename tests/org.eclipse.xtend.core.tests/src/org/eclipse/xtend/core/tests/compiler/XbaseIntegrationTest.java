@@ -45,5 +45,18 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	protected void assertEvaluatesWithException(Class<? extends Throwable> class1, String string) {
 		testHelper.assertEvaluatesWithException(class1, string);
 	}
+	
+	@Override
+	protected void assertIntegerAssignOperations(Integer expectedResult, String xbaseCode) throws Exception {
+		// without explicit compound assignments
+		testHelper.assertEvaluatesTo(expectedResult, xbaseCode);
+		
+		// with explicit compound assignments
+		String xtendCode =  "package foo\n" +
+				"import compound.IntCompoundExtensions\n" +
+				"class Test { def Object foo() throws Exception {" + xbaseCode + "} }";
+		String javaCode = testHelper.toJavaCode(xtendCode);
+		testHelper.assertEvaluatesTo(expectedResult, xtendCode, javaCode);
+	}
 
 }

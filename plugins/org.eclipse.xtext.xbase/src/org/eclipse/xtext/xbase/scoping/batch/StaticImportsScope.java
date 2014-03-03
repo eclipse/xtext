@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 public class StaticImportsScope extends AbstractStaticImportsScope {
 	
 	public StaticImportsScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall context) {
-		super(parent, session, context);
+		super(parent, session, context, null);
 	}
 
 	@Override

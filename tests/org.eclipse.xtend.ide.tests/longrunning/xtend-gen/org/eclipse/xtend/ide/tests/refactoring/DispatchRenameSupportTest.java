@@ -782,7 +782,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       final XtendClass xtendClass = ((XtendClass) _get);
       EList<XtendMember> _members = xtendClass.getMembers();
       Iterable<XtendFunction> _filter = Iterables.<XtendFunction>filter(_members, XtendFunction.class);
-      _xblockexpression = Iterables.<XtendFunction>get(_filter, 0);
+      _xblockexpression = (Iterables.<XtendFunction>get(_filter, 0));
     }
     return _xblockexpression;
   }
@@ -803,7 +803,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       boolean _contains = Iterables.contains(dispatchOperations, signature);
       Assert.assertTrue(_plus, _contains);
     }
-    String _join_1 = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(signatures)), "\n");
+    String _join_1 = IterableExtensions.join(((Iterable<? extends Object>)Conversions.doWrapArray(signatures)), "\n");
     String _plus_1 = ("Expected " + _join_1);
     String _plus_2 = (_plus_1 + "but got ");
     String _join_2 = IterableExtensions.join(dispatchOperations, "\n");

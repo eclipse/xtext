@@ -91,7 +91,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
           _switchResult = ((JvmType)proxy);
         }
       }
-      _xblockexpression = _switchResult;
+      _xblockexpression = (_switchResult);
     }
     return _xblockexpression;
   }

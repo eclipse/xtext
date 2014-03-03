@@ -7,10 +7,10 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 
 @SuppressWarnings("all")
 public class RewritableImportSectionTest_1 extends AbstractRewritableImportSectionTest {
-  protected CharSequence getModel(final Class<?>[] types) {
+  protected CharSequence getModel(final Class<? extends Object>[] types) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      int _size = ((List<Class<?>>)Conversions.doWrapArray(types)).size();
+      int _size = ((List<Class<? extends Object>>)Conversions.doWrapArray(types)).size();
       boolean _greaterThan = (_size > 0);
       if (_greaterThan) {
         {

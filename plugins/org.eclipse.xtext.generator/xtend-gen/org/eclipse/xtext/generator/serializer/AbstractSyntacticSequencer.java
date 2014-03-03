@@ -220,7 +220,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLine();
       String _string = _builder.toString();
       file.body = _string;
-      _xblockexpression = file.toString();
+      _xblockexpression = (file.toString());
     }
     return _xblockexpression;
   }
@@ -260,7 +260,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           return it.getName();
         }
       };
-      _xblockexpression = IterableExtensions.<AbstractRule, String>sortBy(_set, _function_3);
+      _xblockexpression = (IterableExtensions.<AbstractRule, String>sortBy(_set, _function_3));
     }
     return _xblockexpression;
   }
@@ -281,7 +281,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         boolean _isBooleanAssignment = GrammarUtil.isBooleanAssignment(ass);
         _or = _isBooleanAssignment;
       }
-      _xblockexpression = _or;
+      _xblockexpression = (_or);
     }
     return _xblockexpression;
   }

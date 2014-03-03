@@ -237,7 +237,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       _builder.newLine();
       String _string = _builder.toString();
       file.body = _string;
-      _xblockexpression = file.toString();
+      _xblockexpression = (file.toString());
     }
     return _xblockexpression;
   }
@@ -251,7 +251,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         V _value = i.getValue();
         result.put(_key, _value);
       }
-      _xblockexpression = result;
+      _xblockexpression = (result);
     }
     return _xblockexpression;
   }

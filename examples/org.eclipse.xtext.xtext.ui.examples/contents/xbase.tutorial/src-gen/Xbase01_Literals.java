@@ -45,7 +45,7 @@ public class Xbase01_Literals {
       _tempMap.put("c", "C");
       _xsetliteral = Collections.<String, String>unmodifiableMap(_tempMap);
       Map<String,String> immutableMap = _xsetliteral;
-      _xblockexpression = immutableMap;
+      _xblockexpression = (immutableMap);
     }
     return _xblockexpression;
   }

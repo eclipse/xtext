@@ -71,7 +71,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
           Integer _buildNumber = state.getBuildNumber();
           ((UnconfirmedStructuralChangesDelta)delta).setBuildNumber((_buildNumber).intValue());
           this.unconfirmedDeltas.add(((UnconfirmedStructuralChangesDelta)delta));
-          _xblockexpression = true;
+          _xblockexpression = (true);
         }
         _switchResult = _xblockexpression;
       }
@@ -122,7 +122,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
       } else {
         _xifexpression = null;
       }
-      _xblockexpression = this.doNeedRebuild(newState, _xifexpression);
+      _xblockexpression = (this.doNeedRebuild(newState, _xifexpression));
     }
     return _xblockexpression;
   }
@@ -160,7 +160,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
         _while = _hasNext_1;
       }
       int _size = this.unconfirmedDeltas.size();
-      _xblockexpression = (_size != 0);
+      _xblockexpression = ((_size != 0));
     }
     return _xblockexpression;
   }
@@ -180,7 +180,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
           return true;
         }
       }
-      _xblockexpression = false;
+      _xblockexpression = (false);
     }
     return _xblockexpression;
   }

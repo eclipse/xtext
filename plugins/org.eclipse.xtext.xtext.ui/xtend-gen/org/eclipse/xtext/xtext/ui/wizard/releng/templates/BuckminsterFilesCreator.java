@@ -47,7 +47,7 @@ public class BuckminsterFilesCreator {
       this.createProjectCquery(projectInfo);
       this.createPlatformCquery(projectInfo);
       this.createPlatformRmap(projectInfo);
-      _xblockexpression = this.createProjectRmap(projectInfo);
+      _xblockexpression = (this.createProjectRmap(projectInfo));
     }
     return _xblockexpression;
   }

@@ -16,7 +16,7 @@ public class Xbase09_Exceptions {
         }
       } finally {
       }
-      _xblockexpression = null;
+      _xblockexpression = (null);
     }
     return _xblockexpression;
   }

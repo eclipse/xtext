@@ -31,7 +31,7 @@ public class MacroAwareStringConcatenation extends ImportingStringConcatenation 
     return this._getStringRepresentation(_delegate);
   }
   
-  protected String _getStringRepresentation(final JvmTypeDeclarationImpl<?> object) {
+  protected String _getStringRepresentation(final JvmTypeDeclarationImpl<? extends Object> object) {
     final JvmType type = object.getDelegate();
     return this._getStringRepresentation(type);
   }

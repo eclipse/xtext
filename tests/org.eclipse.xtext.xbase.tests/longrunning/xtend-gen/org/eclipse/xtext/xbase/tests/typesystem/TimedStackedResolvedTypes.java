@@ -51,7 +51,7 @@ public class TimedStackedResolvedTypes extends StackedResolvedTypes {
       IFeatureLinkingCandidate _xblockexpression = null;
       {
         this.times.getFeatureTask.start();
-        _xblockexpression = super.getFeature(featureCall);
+        _xblockexpression = (super.getFeature(featureCall));
       }
       _xtrycatchfinallyexpression = _xblockexpression;
     } finally {
@@ -66,7 +66,7 @@ public class TimedStackedResolvedTypes extends StackedResolvedTypes {
       LightweightTypeReference _xblockexpression = null;
       {
         this.times.getActualTypeTask.start();
-        _xblockexpression = super.getActualType(identifiable);
+        _xblockexpression = (super.getActualType(identifiable));
       }
       _xtrycatchfinallyexpression = _xblockexpression;
     } finally {
@@ -81,7 +81,7 @@ public class TimedStackedResolvedTypes extends StackedResolvedTypes {
       LightweightTypeReference _xblockexpression = null;
       {
         this.times.getActualExpressionTypeTask.start();
-        _xblockexpression = super.getActualType(expression);
+        _xblockexpression = (super.getActualType(expression));
       }
       _xtrycatchfinallyexpression = _xblockexpression;
     } finally {
@@ -96,7 +96,7 @@ public class TimedStackedResolvedTypes extends StackedResolvedTypes {
       List<LightweightBoundTypeArgument> _xblockexpression = null;
       {
         this.times.getHintsTask.start();
-        _xblockexpression = super.getAllHints(handle);
+        _xblockexpression = (super.getAllHints(handle));
       }
       _xtrycatchfinallyexpression = _xblockexpression;
     } finally {

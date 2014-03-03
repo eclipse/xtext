@@ -182,7 +182,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
         XtendTypeDeclaration _get = _xtendTypes.get(0);
         final JvmDeclaredType inferredType = this.associations.getInferredType(_get);
         GeneratorConfig _get_1 = this.generatorConfigProvider.get(inferredType);
-        _xblockexpression = this.generator.generateType(inferredType, _get_1);
+        _xblockexpression = (this.generator.generateType(inferredType, _get_1));
       }
       return _xblockexpression;
     } catch (Throwable _e) {

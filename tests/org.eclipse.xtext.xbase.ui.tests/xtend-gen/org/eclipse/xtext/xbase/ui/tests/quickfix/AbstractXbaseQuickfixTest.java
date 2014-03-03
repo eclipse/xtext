@@ -103,7 +103,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
       final XtextResourceSet set = this.<XtextResourceSet>get(XtextResourceSet.class);
       IJavaProject _javaProject = this.getJavaProject(set);
       set.setClasspathURIContext(_javaProject);
-      _xblockexpression = set;
+      _xblockexpression = (set);
     }
     return _xblockexpression;
   }

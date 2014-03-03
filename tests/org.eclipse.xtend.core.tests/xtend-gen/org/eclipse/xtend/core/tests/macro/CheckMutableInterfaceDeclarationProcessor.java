@@ -94,7 +94,7 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
             String[] _xblockexpression = null;
             {
               final String[] array = { "foo" };
-              _xblockexpression = array;
+              _xblockexpression = (array);
             }
             annotationReference.set(null, _xblockexpression);
           }
@@ -129,7 +129,7 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
             String[] _xblockexpression = null;
             {
               final String[] array = { "foo" };
-              _xblockexpression = array;
+              _xblockexpression = (array);
             }
             annotationReference.set("doesNotExist", _xblockexpression);
           }
@@ -142,7 +142,7 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
         String[] _xblockexpression = null;
         {
           final String[] array = { "foo" };
-          _xblockexpression = array;
+          _xblockexpression = (array);
         }
         otherAnnotationReference.set("value", _xblockexpression);
         final Procedure0 _function_13 = new Procedure0() {
@@ -150,7 +150,7 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
             int[] _xblockexpression = null;
             {
               final int[] array = { 1 };
-              _xblockexpression = array;
+              _xblockexpression = (array);
             }
             otherAnnotationReference.set("value", _xblockexpression);
           }

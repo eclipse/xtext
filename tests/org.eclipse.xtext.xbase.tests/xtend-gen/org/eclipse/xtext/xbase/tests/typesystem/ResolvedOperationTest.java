@@ -258,7 +258,7 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
         List<IOverrideCheckResult.OverrideCheckDetails> _list = IterableExtensions.<IOverrideCheckResult.OverrideCheckDetails>toList(((Iterable<IOverrideCheckResult.OverrideCheckDetails>)Conversions.doWrapArray(details)));
         _builder.append(_list, "");
         _builder.append(")");
-        boolean _containsAll = actual.containsAll(((Collection<?>)Conversions.doWrapArray(details)));
+        boolean _containsAll = actual.containsAll(((Collection<? extends Object>)Conversions.doWrapArray(details)));
         Assert.assertTrue(_builder.toString(), _containsAll);
       }
     };

@@ -58,7 +58,7 @@ public class Bug372950Test extends AbstractXbaseContentAssistBugTest {
     this.shouldPropose("if (true) { if (o as String != 1 && o instanceof StringBuff", StringBuffer.class);
   }
   
-  protected void shouldPropose(final String input, final Class<?> proposedType) throws Exception {
+  protected void shouldPropose(final String input, final Class<? extends Object> proposedType) throws Exception {
     final ContentAssistProcessorTestBuilder tester = this.newBuilder();
     ContentAssistProcessorTestBuilder _append = tester.append(input);
     final ICompletionProposal[] proposals = _append.computeCompletionProposals();

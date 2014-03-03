@@ -38,7 +38,7 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
       XExpression _initialValue_1 = _delegate_1.getInitialValue();
       XtendField _delegate_2 = this.getDelegate();
       JvmTypeReference _type = _delegate_2.getType();
-      _xblockexpression = _compilationUnit.evaluate(_initialValue_1, _type);
+      _xblockexpression = (_compilationUnit.evaluate(_initialValue_1, _type));
     }
     return _xblockexpression;
   }
@@ -55,7 +55,7 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
       XtendField _delegate_1 = this.getDelegate();
       XExpression _initialValue_1 = _delegate_1.getInitialValue();
-      _xblockexpression = _compilationUnit.toExpression(_initialValue_1);
+      _xblockexpression = (_compilationUnit.toExpression(_initialValue_1));
     }
     return _xblockexpression;
   }

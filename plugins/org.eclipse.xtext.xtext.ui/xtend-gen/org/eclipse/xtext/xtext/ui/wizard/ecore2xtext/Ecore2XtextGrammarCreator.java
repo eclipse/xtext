@@ -101,7 +101,7 @@ public class Ecore2XtextGrammarCreator {
           _builder.newLineIfNotEmpty();
         }
       }
-      _xblockexpression = _builder;
+      _xblockexpression = (_builder);
     }
     return _xblockexpression;
   }
@@ -153,7 +153,7 @@ public class Ecore2XtextGrammarCreator {
         }
       };
       Iterable<String> _map = IterableExtensions.<EClass, String>map(list, _function_1);
-      _xblockexpression = IterableExtensions.join(_map, " | ");
+      _xblockexpression = (IterableExtensions.join(_map, " | "));
     }
     return _xblockexpression;
   }
@@ -173,7 +173,7 @@ public class Ecore2XtextGrammarCreator {
         _builder.append(_assignedRuleCall, "");
         _xifexpression = _builder;
       }
-      _xblockexpression = _xifexpression;
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }

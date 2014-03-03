@@ -107,7 +107,7 @@ public class QuickfixTestBuilder {
         String _string_2 = model.toString();
         int _indexOf_1 = _string_2.indexOf("|");
         this.caretOffset = _indexOf_1;
-        _xblockexpression = this;
+        _xblockexpression = (this);
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -119,7 +119,7 @@ public class QuickfixTestBuilder {
     QuickfixTestBuilder _xblockexpression = null;
     {
       this.caretOffset = offset;
-      _xblockexpression = this;
+      _xblockexpression = (this);
     }
     return _xblockexpression;
   }
@@ -135,7 +135,7 @@ public class QuickfixTestBuilder {
       };
       Iterable<String> _map = IterableExtensions.<Issue, String>map(_issuesAtCaret, _function);
       this.assertEqual(((List<String>)Conversions.doWrapArray(issueCodes)), _map);
-      _xblockexpression = this;
+      _xblockexpression = (this);
     }
     return _xblockexpression;
   }
@@ -158,7 +158,7 @@ public class QuickfixTestBuilder {
       };
       Iterable<String> _map_1 = IterableExtensions.<IssueResolution, String>map(resolutions, _function_1);
       this.assertEqual(((List<String>)Conversions.doWrapArray(resolutionLabels)), _map_1);
-      _xblockexpression = this;
+      _xblockexpression = (this);
     }
     return _xblockexpression;
   }
@@ -190,7 +190,7 @@ public class QuickfixTestBuilder {
         }
       };
       IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(expectedLabels)), _function_2);
-      _xblockexpression = this;
+      _xblockexpression = (this);
     }
     return _xblockexpression;
   }
@@ -222,7 +222,7 @@ public class QuickfixTestBuilder {
         }
       };
       IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(unExpectedLabels)), _function_2);
-      _xblockexpression = this;
+      _xblockexpression = (this);
     }
     return _xblockexpression;
   }
@@ -251,7 +251,7 @@ public class QuickfixTestBuilder {
       IXtextDocument _document_2 = this.editor.getDocument();
       _document_2.set(originalModel);
       this._syncUtil.waitForReconciler(this.editor);
-      _xblockexpression = this;
+      _xblockexpression = (this);
     }
     return _xblockexpression;
   }
@@ -294,7 +294,7 @@ public class QuickfixTestBuilder {
       IXtextDocument _document_2 = this.editor.getDocument();
       _document_2.set(originalModel);
       this._syncUtil.waitForReconciler(this.editor);
-      _xblockexpression = this;
+      _xblockexpression = (this);
     }
     return _xblockexpression;
   }
@@ -365,7 +365,7 @@ public class QuickfixTestBuilder {
       XtextEditor editor = this._workbenchTestHelper.openEditor(file);
       this._syncUtil.waitForReconciler(editor);
       this._syncUtil.yieldToQueuedDisplayJobs(null);
-      _xblockexpression = editor;
+      _xblockexpression = (editor);
     }
     return _xblockexpression;
   }
@@ -414,7 +414,7 @@ public class QuickfixTestBuilder {
         IFile _file = this._workbenchTestHelper.getFile(fileName);
         NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
         _file.delete(true, _nullProgressMonitor);
-        _xblockexpression = this;
+        _xblockexpression = (this);
       }
       return _xblockexpression;
     } catch (Throwable _e) {

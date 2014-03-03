@@ -26,20 +26,20 @@ public class DelegatingClassloader extends ClassLoader {
     return _elvis;
   }
   
-  public Class<?> findClass(final String name) throws ClassNotFoundException {
-    Class<?> _xblockexpression = null;
+  public Class<? extends Object> findClass(final String name) throws ClassNotFoundException {
+    Class<? extends Object> _xblockexpression = null;
     {
-      final Class<?> result = this.classFinder.getCompiledClass(name);
+      final Class<? extends Object> result = this.classFinder.getCompiledClass(name);
       boolean _notEquals = (!Objects.equal(result, null));
       if (_notEquals) {
         return result;
       }
-      _xblockexpression = super.findClass(name);
+      _xblockexpression = (super.findClass(name));
     }
     return _xblockexpression;
   }
   
-  public Class<?> loadClass(final String name) throws ClassNotFoundException {
+  public Class<? extends Object> loadClass(final String name) throws ClassNotFoundException {
     return super.loadClass(name);
   }
 }

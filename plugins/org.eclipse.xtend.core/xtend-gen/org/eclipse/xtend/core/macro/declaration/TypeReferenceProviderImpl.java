@@ -113,7 +113,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       JvmTypeReference _jvmTypeReference = this.compilationUnit.toJvmTypeReference(componentType);
       JvmGenericArrayTypeReference _createArrayType = _typeReferences.createArrayType(_jvmTypeReference);
-      _xblockexpression = this.compilationUnit.toTypeReference(_createArrayType);
+      _xblockexpression = (this.compilationUnit.toTypeReference(_createArrayType));
     }
     return _xblockexpression;
   }
@@ -136,7 +136,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       };
       List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
       JvmParameterizedTypeReference _createTypeRef = this.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
-      _xblockexpression = this.compilationUnit.toTypeReference(_createTypeRef);
+      _xblockexpression = (this.compilationUnit.toTypeReference(_createTypeRef));
     }
     return _xblockexpression;
   }
@@ -270,7 +270,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       };
       List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
       JvmParameterizedTypeReference _createTypeRef = this.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
-      _xblockexpression = this.compilationUnit.toTypeReference(_createTypeRef);
+      _xblockexpression = (this.compilationUnit.toTypeReference(_createTypeRef));
     }
     return _xblockexpression;
   }
@@ -311,7 +311,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     return _xifexpression;
   }
   
-  public TypeReference newTypeReference(final Class<?> clazz, final TypeReference... typeArguments) {
+  public TypeReference newTypeReference(final Class<? extends Object> clazz, final TypeReference... typeArguments) {
     String _name = clazz.getName();
     return this.newTypeReference(_name, typeArguments);
   }

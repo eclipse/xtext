@@ -853,7 +853,7 @@ public class CompilationUnitImpl implements CompilationUnit {
           return _switchResult;
         }
       };
-      _xblockexpression = this.<JvmTypeReference, TypeReference>getOrCreate(delegate, _function);
+      _xblockexpression = (this.<JvmTypeReference, TypeReference>getOrCreate(delegate, _function));
     }
     return _xblockexpression;
   }
@@ -873,7 +873,7 @@ public class CompilationUnitImpl implements CompilationUnit {
           it.setCompilationUnit(CompilationUnitImpl.this);
         }
       };
-      _xblockexpression = ObjectExtensions.<TypeReferenceImpl>operator_doubleArrow(_typeReferenceImpl, _function);
+      _xblockexpression = (ObjectExtensions.<TypeReferenceImpl>operator_doubleArrow(_typeReferenceImpl, _function));
     }
     return _xblockexpression;
   }
@@ -1188,7 +1188,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       } else {
         _xifexpression = sequence;
       }
-      _xblockexpression = _xifexpression;
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
@@ -1243,7 +1243,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public Object translateAnnotationValue(final JvmAnnotationValue value, final boolean isArray) {
-    Pair<List<?>,Class<?>> _switchResult = null;
+    Pair<List<? extends Object>,Class<? extends Object>> _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
       if (value instanceof JvmCustomAnnotationValue) {
@@ -1257,7 +1257,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         }
         if (_and) {
           _matched=true;
-          Pair<List<?>,Class<?>> _xblockexpression = null;
+          Pair<List<? extends Object>,Class<? extends Object>> _xblockexpression = null;
           {
             JvmTypeReference _findExpectedType = this.findExpectedType(value);
             JvmType _type = _findExpectedType.getType();
@@ -1265,7 +1265,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             final JvmComponentType componentType = expectedType.getComponentType();
             final String componentTypeName = componentType.getIdentifier();
             List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
-            Class<?> _switchResult_1 = null;
+            Class<? extends Object> _switchResult_1 = null;
             boolean _matched_1 = false;
             if (!_matched_1) {
               if (Objects.equal(componentTypeName,"java.lang.Class")) {
@@ -1328,7 +1328,7 @@ public class CompilationUnitImpl implements CompilationUnit {
               }
             }
             if (!_matched_1) {
-              Class<?> _switchResult_2 = null;
+              Class<? extends Object> _switchResult_2 = null;
               boolean _matched_2 = false;
               if (!_matched_2) {
                 if (componentType instanceof JvmEnumerationType) {
@@ -1347,7 +1347,7 @@ public class CompilationUnitImpl implements CompilationUnit {
               }
               _switchResult_1 = _switchResult_2;
             }
-            _xblockexpression = Pair.<List<?>, Class<?>>of(_emptyList, _switchResult_1);
+            _xblockexpression = (Pair.<List<? extends Object>, Class<? extends Object>>of(_emptyList, _switchResult_1));
           }
           _switchResult = _xblockexpression;
         }
@@ -1378,7 +1378,7 @@ public class CompilationUnitImpl implements CompilationUnit {
           }
         };
         List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(_values, _function);
-        _switchResult = Pair.<List<?>, Class<?>>of(_map, TypeReference.class);
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_map, TypeReference.class);
       }
     }
     if (!_matched) {
@@ -1391,49 +1391,49 @@ public class CompilationUnitImpl implements CompilationUnit {
           }
         };
         List<AnnotationReference> _map = ListExtensions.<JvmAnnotationReference, AnnotationReference>map(_values, _function);
-        _switchResult = Pair.<List<?>, Class<?>>of(_map, AnnotationReference.class);
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_map, AnnotationReference.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmStringAnnotationValue) {
         _matched=true;
         EList<String> _values = ((JvmStringAnnotationValue)value).getValues();
-        _switchResult = Pair.<List<?>, Class<?>>of(_values, String.class);
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, String.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmBooleanAnnotationValue) {
         _matched=true;
         EList<Boolean> _values = ((JvmBooleanAnnotationValue)value).getValues();
-        _switchResult = Pair.<List<?>, Class<?>>of(_values, boolean.class);
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, boolean.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmIntAnnotationValue) {
         _matched=true;
         EList<Integer> _values = ((JvmIntAnnotationValue)value).getValues();
-        _switchResult = Pair.<List<?>, Class<?>>of(_values, int.class);
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, int.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmByteAnnotationValue) {
         _matched=true;
         EList<Byte> _values = ((JvmByteAnnotationValue)value).getValues();
-        _switchResult = Pair.<List<?>, Class<?>>of(_values, byte.class);
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, byte.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmCharAnnotationValue) {
         _matched=true;
         EList<Character> _values = ((JvmCharAnnotationValue)value).getValues();
-        _switchResult = Pair.<List<?>, Class<?>>of(_values, char.class);
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, char.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmDoubleAnnotationValue) {
         _matched=true;
         EList<Double> _values = ((JvmDoubleAnnotationValue)value).getValues();
-        _switchResult = Pair.<List<?>, Class<?>>of(_values, double.class);
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, double.class);
       }
     }
     if (!_matched) {
@@ -1446,41 +1446,41 @@ public class CompilationUnitImpl implements CompilationUnit {
           }
         };
         List<NamedElement> _map = ListExtensions.<JvmEnumerationLiteral, NamedElement>map(_values, _function);
-        _switchResult = Pair.<List<?>, Class<?>>of(_map, EnumerationValueDeclaration.class);
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_map, EnumerationValueDeclaration.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmFloatAnnotationValue) {
         _matched=true;
         EList<Float> _values = ((JvmFloatAnnotationValue)value).getValues();
-        _switchResult = Pair.<List<?>, Class<?>>of(_values, float.class);
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, float.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmLongAnnotationValue) {
         _matched=true;
         EList<Long> _values = ((JvmLongAnnotationValue)value).getValues();
-        _switchResult = Pair.<List<?>, Class<?>>of(_values, long.class);
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, long.class);
       }
     }
     if (!_matched) {
       if (value instanceof JvmShortAnnotationValue) {
         _matched=true;
         EList<Short> _values = ((JvmShortAnnotationValue)value).getValues();
-        _switchResult = Pair.<List<?>, Class<?>>of(_values, short.class);
+        _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_values, short.class);
       }
     }
     if (!_matched) {
       List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
-      _switchResult = Pair.<List<?>, Class<?>>of(_emptyList, Object.class);
+      _switchResult = Pair.<List<? extends Object>, Class<? extends Object>>of(_emptyList, Object.class);
     }
     final Pair<List<?>,Class<?>> result = _switchResult;
     if (isArray) {
-      List<?> _key = result.getKey();
-      Class<?> _value = result.getValue();
+      List<? extends Object> _key = result.getKey();
+      Class<? extends Object> _value = result.getValue();
       return this.toArrayOfType(_key, _value);
     } else {
-      List<?> _key_1 = result.getKey();
+      List<? extends Object> _key_1 = result.getKey();
       return IterableExtensions.head(_key_1);
     }
   }
@@ -1516,7 +1516,7 @@ public class CompilationUnitImpl implements CompilationUnit {
           if (_notEquals_1) {
             _xifexpression = defaultOp.getReturnType();
           }
-          _xblockexpression = _xifexpression;
+          _xblockexpression = (_xifexpression);
         }
         _switchResult = _xblockexpression;
       }
@@ -1524,10 +1524,10 @@ public class CompilationUnitImpl implements CompilationUnit {
     return _switchResult;
   }
   
-  private Object toArrayOfType(final Iterable<?> iterable, final Class<?> componentType) {
-    Collection<?> _xifexpression = null;
+  private Object toArrayOfType(final Iterable<? extends Object> iterable, final Class<? extends Object> componentType) {
+    Collection<? extends Object> _xifexpression = null;
     if ((iterable instanceof Collection<?>)) {
-      _xifexpression = ((Collection<?>)iterable);
+      _xifexpression = ((Collection<? extends Object>)iterable);
     } else {
       _xifexpression = IterableExtensions.toList(iterable);
     }

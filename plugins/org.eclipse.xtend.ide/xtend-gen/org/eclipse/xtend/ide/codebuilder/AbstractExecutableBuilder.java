@@ -138,7 +138,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
       builder.setContext(_context);
       List<AbstractParameterBuilder> _parameterBuilders_1 = this.getParameterBuilders();
       _parameterBuilders_1.add(builder);
-      _xblockexpression = builder;
+      _xblockexpression = (builder);
     }
     return _xblockexpression;
   }
@@ -186,7 +186,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
           }
         }
       }
-      _xblockexpression = appendable.append(")");
+      _xblockexpression = (appendable.append(")"));
     }
     return _xblockexpression;
   }
@@ -216,7 +216,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
           _dowhile = _hasNext_1;
         } while(_dowhile);
       }
-      _xblockexpression = appendable;
+      _xblockexpression = (appendable);
     }
     return _xblockexpression;
   }

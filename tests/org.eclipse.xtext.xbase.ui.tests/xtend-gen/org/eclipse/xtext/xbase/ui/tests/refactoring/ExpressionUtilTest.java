@@ -264,7 +264,7 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
       {
         final XExpression expression = this.parseHelper.parse(string);
         this.validationHelper.assertNoErrors(expression);
-        _xblockexpression = expression;
+        _xblockexpression = (expression);
       }
       return _xblockexpression;
     } catch (Throwable _e) {

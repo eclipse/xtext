@@ -1232,7 +1232,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
               NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
               Change _createChange = refactoring.createChange(_nullProgressMonitor_2);
               NullProgressMonitor _nullProgressMonitor_3 = new NullProgressMonitor();
-              _xblockexpression = _createChange.perform(_nullProgressMonitor_3);
+              _xblockexpression = (_createChange.perform(_nullProgressMonitor_3));
             }
             return _xblockexpression;
           }
@@ -1286,7 +1286,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
               String _lowerCase_1 = messageFragment.toLowerCase();
               boolean _contains = _lowerCase.contains(_lowerCase_1);
               Assert.assertTrue(message, _contains);
-              _xblockexpression = "";
+              _xblockexpression = ("");
             }
             return _xblockexpression;
           }

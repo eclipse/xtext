@@ -730,13 +730,13 @@ public class XbaseFormatter2 extends AbstractFormatter {
           final ITextRegion textRegion = node.getTextRegion();
           int _offset = textRegion.getOffset();
           int _length = textRegion.getLength();
-          _xblockexpression_1 = lookahead.renderToString(_offset, _length);
+          _xblockexpression_1 = (lookahead.renderToString(_offset, _length));
         }
         _xifexpression = _xblockexpression_1;
       } else {
         _xifexpression = "";
       }
-      _xblockexpression = _xifexpression;
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
@@ -916,7 +916,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
           XExpression _last_2 = IterableExtensions.<XExpression>last(params);
           _xifexpression_1 = ((XClosure) _last_2);
         }
-        _xblockexpression = _xifexpression_1;
+        _xblockexpression = (_xifexpression_1);
       }
       _xifexpression = _xblockexpression;
     }
@@ -936,7 +936,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       } else {
         _xifexpression = params;
       }
-      _xblockexpression = _xifexpression;
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
@@ -1556,7 +1556,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         final ITextRegionWithLineInformation textRegion = node.getTextRegionWithLineInformation();
         int _lineNumber = textRegion.getLineNumber();
         int _endLineNumber = textRegion.getEndLineNumber();
-        _xblockexpression = (_lineNumber != _endLineNumber);
+        _xblockexpression = ((_lineNumber != _endLineNumber));
       }
       _and = _xblockexpression;
     }

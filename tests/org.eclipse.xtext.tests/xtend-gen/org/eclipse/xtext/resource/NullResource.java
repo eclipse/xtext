@@ -6,6 +6,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 
 @SuppressWarnings("all")
 public class NullResource extends ResourceImpl {
-  public void load(final Map<?,?> options) throws IOException {
+  public void load(final Map<? extends Object,? extends Object> options) throws IOException {
   }
 }

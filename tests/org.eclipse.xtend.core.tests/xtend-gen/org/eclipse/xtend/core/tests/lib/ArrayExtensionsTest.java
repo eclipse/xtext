@@ -115,7 +115,7 @@ public class ArrayExtensionsTest {
   }
   
   public int objectHashCode(final Object x) {
-    Class<?> _class = x.getClass();
+    Class<? extends Object> _class = x.getClass();
     boolean _isArray = _class.isArray();
     Assert.assertTrue(_isArray);
     return x.hashCode();

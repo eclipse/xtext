@@ -40,7 +40,7 @@ public class CachingResourceValidatorImpl extends ResourceValidatorImpl {
             } else {
               _xifexpression = result;
             }
-            _xblockexpression = _xifexpression;
+            _xblockexpression = (_xifexpression);
           }
           return _xblockexpression;
         }

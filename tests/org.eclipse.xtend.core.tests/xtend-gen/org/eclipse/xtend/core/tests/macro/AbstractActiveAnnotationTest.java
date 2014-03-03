@@ -18,7 +18,7 @@ public abstract class AbstractActiveAnnotationTest extends AbstractXtendTestCase
       Class<? extends AbstractActiveAnnotationTest> _class = this.getClass();
       ClassLoader _classLoader = _class.getClassLoader();
       processorProvider.setClassLoader(_classLoader);
-      _xblockexpression = this._xtendCompilerTester = compilerTester;
+      _xblockexpression = (this._xtendCompilerTester = compilerTester);
     }
     return _xblockexpression;
   }

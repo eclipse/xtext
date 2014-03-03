@@ -25,7 +25,7 @@ public class Case_5 {
       }
       Arrays.<Integer>asList(Integer.valueOf(i));
       Collections.<Integer>singletonList(Integer.valueOf(i));
-      _xblockexpression = false;
+      _xblockexpression = (false);
     }
     return _xblockexpression;
   }

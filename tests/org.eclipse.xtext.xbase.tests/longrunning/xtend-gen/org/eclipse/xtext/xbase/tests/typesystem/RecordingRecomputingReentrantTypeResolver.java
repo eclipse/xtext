@@ -25,7 +25,7 @@ public class RecordingRecomputingReentrantTypeResolver extends RecomputingReentr
       final ExpectationTestingTypeComputer recorder = ((ExpectationTestingTypeComputer) _typeComputer);
       final AbstractExpectationTest test = recorder.getTest();
       test.clearData();
-      _xblockexpression = super.createResolvedTypes();
+      _xblockexpression = (super.createResolvedTypes());
     }
     return _xblockexpression;
   }

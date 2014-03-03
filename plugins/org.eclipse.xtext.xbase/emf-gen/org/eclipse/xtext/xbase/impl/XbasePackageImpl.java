@@ -1086,6 +1086,16 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getXBinaryOperation_CompoundOperator()
+	{
+		return (EAttribute)xBinaryOperationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXUnaryOperation()
 	{
 		return xUnaryOperationEClass;
@@ -1610,6 +1620,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xBinaryOperationEClass = createEClass(XBINARY_OPERATION);
 		createEReference(xBinaryOperationEClass, XBINARY_OPERATION__LEFT_OPERAND);
 		createEReference(xBinaryOperationEClass, XBINARY_OPERATION__RIGHT_OPERAND);
+		createEAttribute(xBinaryOperationEClass, XBINARY_OPERATION__COMPOUND_OPERATOR);
 
 		xUnaryOperationEClass = createEClass(XUNARY_OPERATION);
 		createEReference(xUnaryOperationEClass, XUNARY_OPERATION__OPERAND);
@@ -1842,6 +1853,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEClass(xBinaryOperationEClass, XBinaryOperation.class, "XBinaryOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXBinaryOperation_LeftOperand(), this.getXExpression(), null, "leftOperand", null, 0, 1, XBinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXBinaryOperation_RightOperand(), this.getXExpression(), null, "rightOperand", null, 0, 1, XBinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXBinaryOperation_CompoundOperator(), ecorePackage.getEBoolean(), "compoundOperator", null, 0, 1, XBinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xUnaryOperationEClass, XUnaryOperation.class, "XUnaryOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXUnaryOperation_Operand(), this.getXExpression(), null, "operand", null, 0, 1, XUnaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

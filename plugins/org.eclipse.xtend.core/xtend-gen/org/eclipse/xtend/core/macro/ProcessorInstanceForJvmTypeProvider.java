@@ -34,12 +34,12 @@ public class ProcessorInstanceForJvmTypeProvider {
   public Object getProcessorInstance(final JvmType type) {
     try {
       ClassLoader _classLoader = this.getClassLoader(type);
-      Class<?> _loadClass = null;
+      Class<? extends Object> _loadClass = null;
       if (_classLoader!=null) {
         String _identifier = type.getIdentifier();
         _loadClass=_classLoader.loadClass(_identifier);
       }
-      final Class<?> loadClass = _loadClass;
+      final Class<? extends Object> loadClass = _loadClass;
       Object _newInstance = null;
       if (loadClass!=null) {
         _newInstance=loadClass.newInstance();
@@ -82,7 +82,7 @@ public class ProcessorInstanceForJvmTypeProvider {
         if (!_matched_1) {
           if (classLoaderCtx instanceof Class) {
             _matched_1=true;
-            return ((Class<?>)classLoaderCtx).getClassLoader();
+            return ((Class<? extends Object>)classLoaderCtx).getClassLoader();
           }
         }
       }

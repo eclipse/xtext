@@ -144,7 +144,7 @@ public class Oven extends Assert {
               Object _invoke = this._reflectExtensions.invoke(delegate, "getTypeData", expression, Boolean.FALSE);
               _xifexpression = ((TypeData) _invoke);
             }
-            _xblockexpression = _xifexpression;
+            _xblockexpression = (_xifexpression);
           }
           _switchResult = _xblockexpression;
         }

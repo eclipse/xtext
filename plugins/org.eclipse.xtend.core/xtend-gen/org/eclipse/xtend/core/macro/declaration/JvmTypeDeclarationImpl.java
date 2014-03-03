@@ -159,7 +159,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public ConstructorDeclaration findDeclaredConstructor(final TypeReference... parameterTypes) {
     ConstructorDeclaration _xblockexpression = null;
     {
-      ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
+      ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
       Iterable<? extends ConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
       final Function1<ConstructorDeclaration,Boolean> _function = new Function1<ConstructorDeclaration,Boolean>() {
         public Boolean apply(final ConstructorDeclaration constructor) {
@@ -175,7 +175,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
           return Boolean.valueOf(Objects.equal(_list, _list_1));
         }
       };
-      _xblockexpression = IterableExtensions.findFirst(_declaredConstructors, _function);
+      _xblockexpression = (IterableExtensions.findFirst(_declaredConstructors, _function));
     }
     return _xblockexpression;
   }
@@ -194,7 +194,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     MethodDeclaration _xblockexpression = null;
     {
-      ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
+      ConditionUtils.checkIterable(((Iterable<? extends Object>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
       Iterable<? extends MethodDeclaration> _declaredMethods = this.getDeclaredMethods();
       final Function1<MethodDeclaration,Boolean> _function = new Function1<MethodDeclaration,Boolean>() {
         public Boolean apply(final MethodDeclaration method) {
@@ -219,7 +219,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
           return Boolean.valueOf(_and);
         }
       };
-      _xblockexpression = IterableExtensions.findFirst(_declaredMethods, _function);
+      _xblockexpression = (IterableExtensions.findFirst(_declaredMethods, _function));
     }
     return _xblockexpression;
   }

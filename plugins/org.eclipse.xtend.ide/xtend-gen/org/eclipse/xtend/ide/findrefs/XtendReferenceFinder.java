@@ -78,7 +78,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
               QualifiedName _lowerCase = _qualifiedName.toLowerCase();
               _xifexpression = names.add(_lowerCase);
             }
-            _xblockexpression = _xifexpression;
+            _xblockexpression = (_xifexpression);
           }
           return Boolean.valueOf(_xblockexpression);
         }

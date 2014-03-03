@@ -508,13 +508,13 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
     return new StandardTypeReferenceOwner(this.services, this.resourceSet);
   }
   
-  protected ParameterizedTypeReference typeRef(final Class<?> type) {
+  protected ParameterizedTypeReference typeRef(final Class<? extends Object> type) {
     StandardTypeReferenceOwner _owner = this.getOwner();
     JvmType _type = this.type(type);
     return new ParameterizedTypeReference(_owner, _type);
   }
   
-  protected JvmType type(final Class<?> type) {
+  protected JvmType type(final Class<? extends Object> type) {
     TypeReferences _typeReferences = this.services.getTypeReferences();
     return _typeReferences.findDeclaredType(type, this.resourceSet);
   }
@@ -523,7 +523,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
     LightweightTypeReference _xblockexpression = null;
     {
       this.assertInXtend(ref, expectation);
-      _xblockexpression = this.assertInJava(ref, expectation);
+      _xblockexpression = (this.assertInJava(ref, expectation));
     }
     return _xblockexpression;
   }
@@ -544,7 +544,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
       ref.accept(serializer);
       String _string = appender.toString();
       Assert.assertEquals(expectation, _string);
-      _xblockexpression = ref;
+      _xblockexpression = (ref);
     }
     return _xblockexpression;
   }

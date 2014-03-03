@@ -87,7 +87,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
         Iterable<TextReplacement> _filter = IterableExtensions.<TextReplacement>filter(edits, _function);
         _xifexpression = IterableExtensions.<TextReplacement>toList(_filter);
       }
-      _xblockexpression = _xifexpression;
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }

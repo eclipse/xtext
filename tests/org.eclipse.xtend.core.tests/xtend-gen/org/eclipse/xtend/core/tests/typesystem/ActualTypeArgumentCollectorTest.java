@@ -186,7 +186,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
         String _string = signature.toString();
         final XtendFunction function = this.function(_string);
         final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
-        _xblockexpression = operation;
+        _xblockexpression = (operation);
       }
       return _xblockexpression;
     } catch (Throwable _e) {

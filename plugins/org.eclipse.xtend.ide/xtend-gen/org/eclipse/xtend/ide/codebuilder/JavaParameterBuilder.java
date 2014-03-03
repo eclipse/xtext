@@ -12,7 +12,7 @@ public class JavaParameterBuilder extends AbstractParameterBuilder {
       if (_isFinalFlag) {
         appendable.append("final ");
       }
-      _xblockexpression = appendable;
+      _xblockexpression = (appendable);
     }
     return _xblockexpression;
   }

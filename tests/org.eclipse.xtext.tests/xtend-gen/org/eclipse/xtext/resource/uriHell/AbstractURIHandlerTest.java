@@ -82,7 +82,7 @@ public abstract class AbstractURIHandlerTest extends Assert {
     {
       final XtextResourceSet result = this.resourceSetProvider.get();
       result.setClasspathURIContext(this.classLoader);
-      _xblockexpression = result;
+      _xblockexpression = (result);
     }
     return _xblockexpression;
   }
@@ -94,7 +94,7 @@ public abstract class AbstractURIHandlerTest extends Assert {
         final ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
         resource.save(out, null);
         final byte[] bytes = out.toByteArray();
-        _xblockexpression = bytes;
+        _xblockexpression = (bytes);
       }
       return _xblockexpression;
     } catch (Throwable _e) {

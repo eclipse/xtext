@@ -94,7 +94,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
       CharSequence _qualifiedNames = this.<XExpression>toQualifiedNames(_actualArguments, _function);
       _builder.append(_qualifiedNames, "");
       _builder.append(")");
-      _xblockexpression = _builder.toString();
+      _xblockexpression = (_builder.toString());
     }
     return _xblockexpression;
   }
@@ -118,7 +118,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
       CharSequence _qualifiedNames = this.<XExpression>toQualifiedNames(_arguments, _function);
       _builder.append(_qualifiedNames, "");
       _builder.append(")");
-      _xblockexpression = _builder.toString();
+      _xblockexpression = (_builder.toString());
     }
     return _xblockexpression;
   }

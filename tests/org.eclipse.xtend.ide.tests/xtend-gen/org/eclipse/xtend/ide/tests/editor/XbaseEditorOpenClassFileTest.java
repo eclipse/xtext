@@ -138,7 +138,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
           Class<? extends XbaseEditorOpenClassFileTest> _class_1 = this.getClass();
           InputStream _resourceAsStream_1 = _class_1.getResourceAsStream(fileNameOfSource);
           source.create(_resourceAsStream_1, true, null);
-          _xblockexpression = source;
+          _xblockexpression = (source);
         }
         _xifexpression = _xblockexpression;
       }
@@ -172,7 +172,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   public boolean supportsEditorOverride() {
     boolean _xtrycatchfinallyexpression = false;
     try {
-      Class<?> _forName = Class.forName("org.eclipse.ui.ide.IEditorAssociationOverride");
+      Class<? extends Object> _forName = Class.forName("org.eclipse.ui.ide.IEditorAssociationOverride");
       _xtrycatchfinallyexpression = (!Objects.equal(_forName, null));
     } catch (final Throwable _t) {
       if (_t instanceof ClassNotFoundException) {

@@ -41,7 +41,7 @@ public class FormattingDataFactory {
     {
       final FormattingDataInit data = new FormattingDataInit();
       init.apply(data);
-      _xblockexpression = this.newFormattingData(leafs, data.key, data);
+      _xblockexpression = (this.newFormattingData(leafs, data.key, data));
     }
     return _xblockexpression;
   }
@@ -55,7 +55,7 @@ public class FormattingDataFactory {
         } else {
           _elvis = Integer.valueOf(0);
         }
-        final int newLines2 = (int) _elvis;
+        final int newLines2 = (_elvis).intValue();
         boolean _or = false;
         boolean _and = false;
         boolean _equals = Objects.equal(it.space, null);
@@ -109,7 +109,7 @@ public class FormattingDataFactory {
           final int min = (blankline + 1);
           final int max = Math.max((preserve + 1), min);
           boolean _isDebugConflicts = doc.isDebugConflicts();
-          _xblockexpression = FormattingDataFactory.this.newNewLineData(leafs, min, max, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+          _xblockexpression = (FormattingDataFactory.this.newNewLineData(leafs, min, max, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts));
         }
         return _xblockexpression;
       }
@@ -145,7 +145,7 @@ public class FormattingDataFactory {
             _xifexpression_1 = 0;
           }
           boolean _isDebugConflicts = doc.isDebugConflicts();
-          _xblockexpression = FormattingDataFactory.this.newNewLineData(leafs, _xifexpression, _xifexpression_1, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+          _xblockexpression = (FormattingDataFactory.this.newNewLineData(leafs, _xifexpression, _xifexpression_1, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts));
         }
         return _xblockexpression;
       }
@@ -168,7 +168,7 @@ public class FormattingDataFactory {
           }
           final int minmax = _xifexpression;
           boolean _isDebugConflicts = doc.isDebugConflicts();
-          _xblockexpression = FormattingDataFactory.this.newNewLineData(leafs, minmax, minmax, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+          _xblockexpression = (FormattingDataFactory.this.newNewLineData(leafs, minmax, minmax, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts));
         }
         return _xblockexpression;
       }
@@ -196,7 +196,7 @@ public class FormattingDataFactory {
             _xifexpression = "";
           }
           boolean _isDebugConflicts = doc.isDebugConflicts();
-          _xblockexpression = FormattingDataFactory.this.newWhitespaceData(leafs, _xifexpression, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+          _xblockexpression = (FormattingDataFactory.this.newWhitespaceData(leafs, _xifexpression, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts));
         }
         return _xblockexpression;
       }
@@ -244,7 +244,7 @@ public class FormattingDataFactory {
           }
         }
       }
-      _xblockexpression = result;
+      _xblockexpression = (result);
     }
     return _xblockexpression;
   }
@@ -475,7 +475,7 @@ public class FormattingDataFactory {
           }
         }
       }
-      _xblockexpression = result;
+      _xblockexpression = (result);
     }
     return _xblockexpression;
   }
@@ -537,7 +537,7 @@ public class FormattingDataFactory {
             }
             Iterables.<FormattingData>addAll(result, _elvis_1);
           }
-          _xblockexpression = result;
+          _xblockexpression = (result);
         }
         return _xblockexpression;
       }
@@ -582,7 +582,7 @@ public class FormattingDataFactory {
             }
             Iterables.<FormattingData>addAll(result, _elvis_1);
           }
-          _xblockexpression = result;
+          _xblockexpression = (result);
         }
         return _xblockexpression;
       }

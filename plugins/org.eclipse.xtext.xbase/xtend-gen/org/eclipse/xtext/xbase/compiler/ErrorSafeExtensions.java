@@ -57,7 +57,7 @@ public class ErrorSafeExtensions {
           return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
         }
       };
-      _xblockexpression = IterableExtensions.<Issue>filter(_issues, _function);
+      _xblockexpression = (IterableExtensions.<Issue>filter(_issues, _function));
     }
     return _xblockexpression;
   }
@@ -74,7 +74,7 @@ public class ErrorSafeExtensions {
           return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
         }
       };
-      _xblockexpression = IterableExtensions.<Issue>exists(_issues, _function);
+      _xblockexpression = (IterableExtensions.<Issue>exists(_issues, _function));
     }
     return _xblockexpression;
   }
@@ -172,7 +172,7 @@ public class ErrorSafeExtensions {
       if (_and) {
         child.append(" */");
       }
-      _xblockexpression = parent;
+      _xblockexpression = (parent);
     }
     return _xblockexpression;
   }

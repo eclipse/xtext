@@ -76,7 +76,7 @@ public class TutorialJvmModelInferrer extends AbstractModelInferrer {
       String _name_2 = property.getName();
       JvmTypeReference _type_2 = property.getType();
       JvmOperation _setter = this._jvmTypesBuilder.toSetter(property, _name_2, _type_2);
-      _xblockexpression = this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _setter);
+      _xblockexpression = (this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _setter));
     }
     return _xblockexpression;
   }

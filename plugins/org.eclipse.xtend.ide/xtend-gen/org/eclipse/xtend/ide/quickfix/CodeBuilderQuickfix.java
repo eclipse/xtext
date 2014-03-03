@@ -193,7 +193,7 @@ public class CodeBuilderQuickfix {
         if (!_matched) {
           _switchResult = null;
         }
-        final Object element = _switchResult;
+        final Object element = ((Object)_switchResult);
         boolean _notEquals = (!Objects.equal(((IAnnotatable)element), null));
         if (_notEquals) {
           JdtHyperlink _jdtHyperlink = new JdtHyperlink();

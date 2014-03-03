@@ -52,7 +52,7 @@ public class XSwitchExpressions {
       if (_isSubtypeOf_1) {
         return true;
       }
-      _xblockexpression = false;
+      _xblockexpression = (false);
     }
     return _xblockexpression;
   }
@@ -83,7 +83,7 @@ public class XSwitchExpressions {
       if (_not) {
         return false;
       }
-      _xblockexpression = true;
+      _xblockexpression = (true);
     }
     return _xblockexpression;
   }

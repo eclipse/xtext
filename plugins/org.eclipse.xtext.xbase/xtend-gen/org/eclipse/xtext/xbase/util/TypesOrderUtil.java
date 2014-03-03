@@ -32,7 +32,7 @@ public class TypesOrderUtil {
           return true;
         }
       }
-      _xblockexpression = false;
+      _xblockexpression = (false);
     }
     return _xblockexpression;
   }
@@ -46,7 +46,7 @@ public class TypesOrderUtil {
       int _bitwiseOr_1 = (_bitwiseOr | RawTypeConformanceComputer.ALLOW_RAW_TYPE_CONVERSION);
       final int conformant = typeConformanceComputer.isConformant(previousTypeReference, actualTypeReference, _bitwiseOr_1);
       int _bitwiseAnd = (conformant & RawTypeConformanceComputer.SUCCESS);
-      _xblockexpression = (_bitwiseAnd != 0);
+      _xblockexpression = ((_bitwiseAnd != 0));
     }
     return _xblockexpression;
   }

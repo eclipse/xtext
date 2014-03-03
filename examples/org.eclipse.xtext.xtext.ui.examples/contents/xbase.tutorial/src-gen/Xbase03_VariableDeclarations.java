@@ -13,9 +13,9 @@ public class Xbase03_VariableDeclarations {
       String _xblockexpression_1 = null;
       {
         final String s1 = "foo";
-        _xblockexpression_1 = (s + s1);
+        _xblockexpression_1 = ((s + s1));
       }
-      _xblockexpression = _xblockexpression_1;
+      _xblockexpression = (_xblockexpression_1);
     }
     return _xblockexpression;
   }

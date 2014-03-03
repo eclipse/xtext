@@ -103,7 +103,7 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
       LightweightTypeReference _delegate = this.getDelegate();
       LightweightTypeReference _primitiveIfWrapperType = _delegate.getPrimitiveIfWrapperType();
-      _xblockexpression = _compilationUnit.toTypeReference(_primitiveIfWrapperType);
+      _xblockexpression = (_compilationUnit.toTypeReference(_primitiveIfWrapperType));
     }
     return _xblockexpression;
   }
@@ -141,7 +141,7 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
       }
       LightweightTypeReference _delegate = this.getDelegate();
       LightweightTypeReference _delegate_1 = ((TypeReferenceImpl) typeReference).getDelegate();
-      _xblockexpression = _delegate.isAssignableFrom(_delegate_1);
+      _xblockexpression = (_delegate.isAssignableFrom(_delegate_1));
     }
     return _xblockexpression;
   }

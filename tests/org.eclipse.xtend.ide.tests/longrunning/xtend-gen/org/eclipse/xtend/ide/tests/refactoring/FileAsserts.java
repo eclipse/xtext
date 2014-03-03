@@ -26,7 +26,7 @@ public class FileAsserts {
       Assert.assertTrue((fileName + " is not an IFile"), (file instanceof IFile));
       boolean _exists = file.exists();
       Assert.assertTrue((("File " + fileName) + " doesn\'t exist"), _exists);
-      _xblockexpression = ((IFile) file);
+      _xblockexpression = (((IFile) file));
     }
     return _xblockexpression;
   }

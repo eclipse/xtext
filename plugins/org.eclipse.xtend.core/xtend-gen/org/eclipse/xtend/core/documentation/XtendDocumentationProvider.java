@@ -30,7 +30,7 @@ public class XtendDocumentationProvider extends MultiLineCommentDocumentationPro
       if (_not) {
         return null;
       }
-      _xblockexpression = super.getDocumentation(o);
+      _xblockexpression = (super.getDocumentation(o));
     }
     return _xblockexpression;
   }
@@ -43,7 +43,7 @@ public class XtendDocumentationProvider extends MultiLineCommentDocumentationPro
       if (_not) {
         return CollectionLiterals.<INode>emptyList();
       }
-      _xblockexpression = super.getDocumentationNodes(o);
+      _xblockexpression = (super.getDocumentationNodes(o));
     }
     return _xblockexpression;
   }

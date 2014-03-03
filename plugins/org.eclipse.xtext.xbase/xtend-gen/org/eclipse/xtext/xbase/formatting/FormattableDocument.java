@@ -163,7 +163,7 @@ public class FormattableDocument {
           int _offset_3 = data.getOffset();
           _xifexpression_2 = _formattings_1.put(Integer.valueOf(_offset_3), newData);
         }
-        _xblockexpression = _xifexpression_2;
+        _xblockexpression = (_xifexpression_2);
       }
       _xifexpression = _xblockexpression;
     }
@@ -226,7 +226,7 @@ public class FormattableDocument {
               _switchResult = new WhitespaceData(_offset, _length, increaseIndentationChange, decreaseIndentationChange, _trace, _space);
             }
           }
-          _xblockexpression_1 = _switchResult;
+          _xblockexpression_1 = (_switchResult);
         }
         _xifexpression = _xblockexpression_1;
       } else {
@@ -237,11 +237,11 @@ public class FormattableDocument {
           if (_isDebugConflicts) {
             this.reportConflict(data1, data2);
           }
-          _xblockexpression_2 = null;
+          _xblockexpression_2 = (null);
         }
         _xifexpression = _xblockexpression_2;
       }
-      _xblockexpression = _xifexpression;
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
@@ -302,7 +302,7 @@ public class FormattableDocument {
       int _length = data1.getLength();
       int _plus = (_offset_3 + _length);
       final String postfix = _document_2.substring(_plus, (fiveLinesForwardOffset).intValue());
-      _xblockexpression = Pair.<String, String>of(prefix, postfix);
+      _xblockexpression = (Pair.<String, String>of(prefix, postfix));
     }
     return _xblockexpression;
   }
@@ -465,7 +465,7 @@ public class FormattableDocument {
           }
         }
       }
-      _xblockexpression = replacements;
+      _xblockexpression = (replacements);
     }
     return _xblockexpression;
   }
@@ -505,7 +505,7 @@ public class FormattableDocument {
       String _document = this.getDocument();
       final String text = _document.substring(lastOffset, (offset + length));
       newDocument.append(text);
-      _xblockexpression = newDocument.toString();
+      _xblockexpression = (newDocument.toString());
     }
     return _xblockexpression;
   }
@@ -593,7 +593,7 @@ public class FormattableDocument {
       }
       int _indentationLenght = this.getIndentationLenght(currentIndentation);
       int _plus_3 = ((offset - lineStart) + _indentationLenght);
-      _xblockexpression = (_plus_3 + lengthDiff);
+      _xblockexpression = ((_plus_3 + lengthDiff));
     }
     return _xblockexpression;
   }
@@ -603,7 +603,7 @@ public class FormattableDocument {
     {
       final FormattableDocument lookahead = new FormattableDocument(this);
       format.apply(lookahead);
-      _xblockexpression = lookahead.renderToString(offset, length);
+      _xblockexpression = (lookahead.renderToString(offset, length));
     }
     return _xblockexpression;
   }
@@ -660,7 +660,7 @@ public class FormattableDocument {
       int _length = _document_1.length();
       final String text = _document.substring(lastOffset, _length);
       debugTrace.append(text);
-      _xblockexpression = debugTrace.toString();
+      _xblockexpression = (debugTrace.toString());
     }
     return _xblockexpression;
   }
@@ -679,7 +679,7 @@ public class FormattableDocument {
           }
         };
         Iterable<String> _map = IterableExtensions.<Integer, String>map(_upTo, _function);
-        _xblockexpression = IterableExtensions.join(_map);
+        _xblockexpression = (IterableExtensions.join(_map));
       }
       _xifexpression = _xblockexpression;
     } else {
@@ -708,7 +708,7 @@ public class FormattableDocument {
           }
         };
         Iterable<String> _map = IterableExtensions.<Integer, String>map(_upTo, _function);
-        _xblockexpression = IterableExtensions.join(_map);
+        _xblockexpression = (IterableExtensions.join(_map));
       }
       _xifexpression = _xblockexpression;
     } else {

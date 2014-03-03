@@ -115,7 +115,7 @@ public class ActiveAnnotationContext {
             }
           };
           final StringWriter writer = ObjectExtensions.<StringWriter>operator_doubleArrow(_stringWriter, _function);
-          _xblockexpression = writer.toString();
+          _xblockexpression = (writer.toString());
         }
         return _xblockexpression;
       }

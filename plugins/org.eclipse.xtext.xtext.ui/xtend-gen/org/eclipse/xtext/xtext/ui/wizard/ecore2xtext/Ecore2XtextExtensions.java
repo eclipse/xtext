@@ -71,7 +71,7 @@ public class Ecore2XtextExtensions {
           }
         };
         Iterable<EClassifier> _filter = IterableExtensions.<EClassifier>filter(c, _function_2);
-        _xblockexpression = IterableExtensions.<EClassifier>toSet(_filter);
+        _xblockexpression = (IterableExtensions.<EClassifier>toSet(_filter));
       }
       _xifexpression = _xblockexpression;
     }
@@ -323,7 +323,7 @@ public class Ecore2XtextExtensions {
         }
       };
       Iterable<EStructuralFeature> _filter = IterableExtensions.<EStructuralFeature>filter(features, _function);
-      _xblockexpression = IterableExtensions.isEmpty(_filter);
+      _xblockexpression = (IterableExtensions.isEmpty(_filter));
     }
     return _xblockexpression;
   }
@@ -576,7 +576,7 @@ public class Ecore2XtextExtensions {
         };
         _xifexpression = IterableExtensions.<EAttribute>findFirst(_eAllAttributes, _function);
       }
-      _xblockexpression = _xifexpression;
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }

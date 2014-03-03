@@ -210,7 +210,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
         }
       };
       this.compiler.compile(macroResourceSet, _function);
-      _xblockexpression = resourceSet;
+      _xblockexpression = (resourceSet);
     }
     return _xblockexpression;
   }

@@ -46,7 +46,7 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
         }
       };
       Iterable<TypeReference> _map = IterableExtensions.<JvmTypeReference, TypeReference>map(filtered, _function_1);
-      _xblockexpression = IterableExtensions.<TypeReference>toList(_map);
+      _xblockexpression = (IterableExtensions.<TypeReference>toList(_map));
     }
     return _xblockexpression;
   }

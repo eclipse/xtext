@@ -249,7 +249,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
         }
       }
       String _name_2 = element.getName();
-      _xblockexpression = new StyledString(_name_2);
+      _xblockexpression = (new StyledString(_name_2));
     }
     return _xblockexpression;
   }
@@ -276,7 +276,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
           }
         }
       }
-      _xblockexpression = null;
+      _xblockexpression = (null);
     }
     return _xblockexpression;
   }
