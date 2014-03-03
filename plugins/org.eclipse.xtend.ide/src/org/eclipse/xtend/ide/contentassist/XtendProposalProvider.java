@@ -40,6 +40,8 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
@@ -68,6 +70,12 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeMember_Name(final EObject model, Assignment assignment, final ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor) {
+		EObject previousModel = context.getPreviousModel();
+		if (previousModel instanceof XExpression) {
+			if (!(previousModel instanceof XBlockExpression)) {
+				return;
+			}
+		}
 		if (model instanceof XtendField) {
 			//TODO go up type hierarchy and collect all local fields
 			final List<XtendField> siblings = EcoreUtil2.getSiblingsOfType(model, XtendField.class);
