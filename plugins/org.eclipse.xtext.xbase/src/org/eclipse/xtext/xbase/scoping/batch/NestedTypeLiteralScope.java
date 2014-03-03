@@ -23,6 +23,8 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
+import com.google.common.collect.Lists;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -78,7 +80,16 @@ public class NestedTypeLiteralScope extends AbstractSessionBasedScope {
 
 	@Override
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
-		return Collections.emptyList();
+		List<IEObjectDescription> result = Lists.newArrayListWithExpectedSize(2);
+		if (outerType instanceof JvmDeclaredType) {
+			for(JvmMember member: ((JvmDeclaredType) outerType).getMembers()) {
+				if (member instanceof JvmDeclaredType) {
+					IEObjectDescription description = EObjectDescription.create(member.getSimpleName(), member);
+					result.add(new TypeLiteralDescription(description, receiverType, isVisible((JvmType) member)));
+				}
+			}
+		}
+		return result;
 	}
 
 }

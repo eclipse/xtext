@@ -120,9 +120,11 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 		if (propertyName != null) {
 			result.add(createDescription(QualifiedName.create(propertyName), feature, bucket));
 		}
-		QualifiedName operator = operatorMapping.getOperator(featureName);
-		if (operator != null) {
-			result.add(createDescription(operator, feature, bucket));
+		if (!implicit) {
+			QualifiedName operator = operatorMapping.getOperator(featureName);
+			if (operator != null) {
+				result.add(createDescription(operator, feature, bucket));
+			}
 		}
 	}
 	
@@ -137,9 +139,11 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 			if (propertyName != null) {
 				result.add(doCreateDescription(QualifiedName.create(propertyName), feature, bucket));
 			}
-			QualifiedName operator = operatorMapping.getOperator(featureName);
-			if (operator != null) {
-				result.add(doCreateDescription(operator, feature, bucket));
+			if (!implicit) {
+				QualifiedName operator = operatorMapping.getOperator(featureName);
+				if (operator != null) {
+					result.add(doCreateDescription(operator, feature, bucket));
+				}
 			}
 		}
 	}

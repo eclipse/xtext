@@ -563,6 +563,10 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	@Test public void testStaticFeatures_02() throws Exception {
 		newBuilder().append("String.").assertText(expect(getStaticStringFeatures(), getClassFeatures()));
 	}
+
+	@Test public void testNestedTypes_01() throws Exception {
+		newBuilder().append("java.util.Map.").assertText(expect(new String[] {"Entry"}, getClassFeatures()));
+	}
 	
 	@Test public void testNull() throws Exception {
 		newBuilder().append("null").assertText("null", "!=", "!==", "+", "==", "===", "->", "?:", "=>",
