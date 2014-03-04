@@ -88,7 +88,9 @@ class Oven extends Assert {
 		val internalTypes = types.invoke('delegate')
 		val type = switch(internalTypes) {
 			CompoundReentrantTypeResolver: {
-				val delegate = internalTypes.invoke("getDelegate", expression)
+				val method = CompoundReentrantTypeResolver.getDeclaredMethod('getDelegate', XExpression)
+				method.accessible = true
+				val delegate = method.invoke(internalTypes, expression)
 				if (delegate instanceof RootResolvedTypes)
 					delegate.invoke("getTypeData", expression, Boolean.FALSE) as TypeData
 			} 

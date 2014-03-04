@@ -11,6 +11,7 @@ import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.lang.reflect.Method;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -138,7 +139,9 @@ public class Oven extends Assert {
           _matched=true;
           TypeData _xblockexpression = null;
           {
-            final Object delegate = this._reflectExtensions.invoke(internalTypes, "getDelegate", expression);
+            final Method method = CompoundReentrantTypeResolver.class.getDeclaredMethod("getDelegate", XExpression.class);
+            method.setAccessible(true);
+            final Object delegate = method.invoke(internalTypes, expression);
             TypeData _xifexpression = null;
             if ((delegate instanceof RootResolvedTypes)) {
               Object _invoke = this._reflectExtensions.invoke(delegate, "getTypeData", expression, Boolean.FALSE);
