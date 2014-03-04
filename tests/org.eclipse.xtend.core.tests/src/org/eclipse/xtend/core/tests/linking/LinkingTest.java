@@ -90,6 +90,26 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private IBatchTypeResolver typeResolver;
 	
+	@Test public void testBug426788() throws Exception {
+		XtendFile file = file("class Bug {\n" + 
+				"  def <T extends Object> void m(T t) {}\n" + 
+				"  def void m(CharSequence t) {}\n" + 
+				"  def void n(Iterable<String> it) {\n" + 
+				"    m(it.head)           \n" + 
+				"    m(it.iterator.next)  \n" + 
+				"    m(\"\")              \n" + 
+				"  }\n" + 
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction n = (XtendFunction) c.getMembers().get(2);
+		XBlockExpression body = (XBlockExpression) n.getExpression();
+		for(XExpression featureCall: body.getExpressions()) {
+			XFeatureCall casted = (XFeatureCall) featureCall;
+			JvmIdentifiableElement method = casted.getFeature();
+			assertEquals("Bug.m(java.lang.CharSequence)", method.getIdentifier());
+		}
+	}
+	
 	@Test public void testExplicitTypeOverSugar_01() throws Exception {
 		XtendFile file = file(
 				"import static extension org.eclipse.emf.ecore.util.EcoreUtil.*\n" + 

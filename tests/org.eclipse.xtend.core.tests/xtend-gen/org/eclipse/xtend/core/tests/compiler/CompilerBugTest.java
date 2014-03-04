@@ -134,6 +134,135 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testBug426788_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Bug {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends Object> void m(T t) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(CharSequence t) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n(Iterable<String> it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(it.iterator.next)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Iterator;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bug {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends Object> void m(final T t) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m(final CharSequence t) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void n(final Iterable<String> it) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Iterator<String> _iterator = it.iterator();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _next = _iterator.next();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.m(_next);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug426788_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Bug {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends Object> void m(T t) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(CharSequence t) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n(Iterable<String> it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(it.head)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bug {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends Object> void m(final T t) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m(final CharSequence t) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void n(final Iterable<String> it) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _head = IterableExtensions.<String>head(it);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.m(_head);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testReturnExpressionConverted_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");

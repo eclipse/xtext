@@ -68,6 +68,63 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def void testBug426788_01() {
+		assertCompilesTo('''
+			class Bug {
+				def <T extends Object> void m(T t) {}
+				def void m(CharSequence t) {}
+				def void n(Iterable<String> it) {
+					m(it.iterator.next)
+				}
+			}
+		''','''
+			import java.util.Iterator;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public <T extends Object> void m(final T t) {
+			  }
+			  
+			  public void m(final CharSequence t) {
+			  }
+			  
+			  public void n(final Iterable<String> it) {
+			    Iterator<String> _iterator = it.iterator();
+			    String _next = _iterator.next();
+			    this.m(_next);
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug426788_02() {
+		assertCompilesTo('''
+			class Bug {
+				def <T extends Object> void m(T t) {}
+				def void m(CharSequence t) {}
+				def void n(Iterable<String> it) {
+					m(it.head)
+				}
+			}
+		''','''
+			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  public <T extends Object> void m(final T t) {
+			  }
+			  
+			  public void m(final CharSequence t) {
+			  }
+			  
+			  public void n(final Iterable<String> it) {
+			    String _head = IterableExtensions.<String>head(it);
+			    this.m(_head);
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testReturnExpressionConverted_01() {
 		assertCompilesTo('''
 			class C {

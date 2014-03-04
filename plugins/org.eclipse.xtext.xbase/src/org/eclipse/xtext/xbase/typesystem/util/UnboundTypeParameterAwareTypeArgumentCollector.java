@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -15,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -36,8 +38,28 @@ public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeAr
 			} else {
 				acceptHint(declaration, reference);
 			}
-			
 		}
+		
+		@Override
+		protected void doVisitUnboundTypeReference(UnboundTypeReference reference, UnboundTypeReference declaration) {
+			if (declaration.internalIsResolved() || getOwner().isResolved(declaration.getHandle())) {
+				declaration.tryResolve();
+				outerVisit(declaration, reference, declaration, getExpectedVariance(), getActualVariance());
+			} else {
+				if (getParametersToProcess().contains(declaration.getTypeParameter()) && VarianceInfo.OUT == getActualVariance() && VarianceInfo.OUT == getExpectedVariance()) {
+					if (getDefaultSource() == BoundTypeArgumentSource.EXPECTATION) {
+						List<LightweightBoundTypeArgument> hints = reference.getAllHints();
+						for(int i = 0; i < hints.size(); i++) {
+							if (hints.get(i).getSource() == BoundTypeArgumentSource.INFERRED) {
+								return;
+							}
+						}
+					}
+				}
+				acceptHint(declaration, reference);
+			}
+		}
+		
 		@Override
 		protected void doVisitCompoundTypeReference(CompoundTypeReference reference, UnboundTypeReference param) {
 			doVisitTypeReference(reference, param);
