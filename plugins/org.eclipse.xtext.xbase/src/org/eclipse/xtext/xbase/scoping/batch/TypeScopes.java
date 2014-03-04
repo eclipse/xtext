@@ -27,61 +27,9 @@ public class TypeScopes extends DelegatingScopes {
 	 */
 	public IScope createTypeScope(EObject context, EReference reference,
 			IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
-		return doCreateTypeScope(context, reference, session);
-	}
-	
-	/**
-	 * @param session the currently available session data
-	 */
-	protected IScope doCreateTypeScope(final EObject context, EReference reference, final IFeatureScopeSession session) {
 		final IScope delegateScope = getDelegate().getScope(context, reference);
 		// TODO visibility information should be attached to the given type descriptions
 		return delegateScope;
-//		return new IScope() {
-//
-//			public Iterable<IEObjectDescription> getAllElements() {
-//				Iterable<IEObjectDescription> original = delegateScope.getAllElements();
-//				return createFeatureDescriptions(original);
-//			}
-//
-//			protected Iterable<IEObjectDescription> createFeatureDescriptions(Iterable<IEObjectDescription> original) {
-//				Iterable<IEObjectDescription> result = transform(original,
-//						new Function<IEObjectDescription, IEObjectDescription>() {
-//							public IEObjectDescription apply(IEObjectDescription from) {
-//								JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
-//								if (constructor.eIsProxy()) {
-//									EObject resolved = EcoreUtil.resolve(constructor, context);
-//									if (resolved instanceof JvmConstructor)
-//										constructor = (JvmConstructor) resolved;
-//								}
-//								boolean visible = session.isVisible(constructor);
-//								BucketedEObjectDescription result = new BucketedEObjectDescription(from.getName(), constructor, CONSTRUCTOR_BUCKET, visible);
-//								return result;
-//							}
-//						});
-//				return result;
-//			}
-//
-//			public Iterable<IEObjectDescription> getElements(EObject object) {
-//				Iterable<IEObjectDescription> original = delegateScope.getElements(object);
-//				return createFeatureDescriptions(original);
-//			}
-//
-//			public Iterable<IEObjectDescription> getElements(QualifiedName name) {
-//				Iterable<IEObjectDescription> original = delegateScope.getElements(name);
-//				return createFeatureDescriptions(original);
-//			}
-//
-//			public IEObjectDescription getSingleElement(EObject object) {
-//				Iterable<IEObjectDescription> elements = getElements(object);
-//				return (isEmpty(elements)) ? null : elements.iterator().next();
-//			}
-//
-//			public IEObjectDescription getSingleElement(QualifiedName name) {
-//				throw new UnsupportedOperationException();
-//			}
-//
-//		};
 	}
-	
+
 }

@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -67,7 +68,7 @@ public class DispatchHelper {
 		
 		/**
 		 * Creates a new {@link DispatchSignature} from a method name and parameter count.
-		 * The method name may not include the synthesized underscore even though an explicit underscope is ok.
+		 * The method name may not include the synthesized underscore even though an explicit underscore is ok.
 		 * @param simpleName the simple name of the associated dispatcher function.
 		 * @param arity the number of parameters (zero or more)
 		 */
@@ -79,14 +80,32 @@ public class DispatchHelper {
 			this.arity = arity;
 		}
 		
+		/**
+		 * Returns the number of parameters for this dispatch signature.
+		 */
 		public int getArity() {
 			return arity;
 		}
 		
+		/**
+		 * Returns the name of the dispatcher method. That is, the name without a synthetic underscore.
+		 */
 		public String getSimpleName() {
 			return simpleName.substring(1);
 		}
 		
+		/**
+		 * Returns the name of the dispatch cases as they would be compiled to Java. The name includes the
+		 * synthetic underscore.
+		 */
+		public String getDispatchCaseName() {
+			return simpleName;
+		}
+		
+		/**
+		 * Returns true, if the given operation matches this dispatch signature and is therefore a case
+		 * for this dispatcher.
+		 */
 		public boolean isDispatchCase(JvmOperation operation) {
 			return arity == operation.getParameters().size() && simpleName.equals(operation.getSimpleName());
 		}
@@ -197,6 +216,19 @@ public class DispatchHelper {
 	}
 	
 	/**
+	 * Return the local cases that match the given signature.
+	 */
+	public List<JvmOperation> getLocalDispatchCases(JvmDeclaredType type, DispatchSignature signature) {
+		List<JvmOperation> result = Lists.newArrayList();
+		for(JvmMember feature: type.getMembers()) {
+			if (feature instanceof JvmOperation && signature.isDispatchCase((JvmOperation) feature)) {
+				result.add((JvmOperation) feature);
+			}
+		}
+		return result;
+	}
+	
+	/**
 	 * Return the local cases that are associated with the given dispatch operation.
 	 */
 	public List<JvmOperation> getLocalDispatchCases(JvmOperation dispatcherOperation) {
@@ -269,7 +301,7 @@ public class DispatchHelper {
 	protected List<JvmOperation> getAllDispatchMethods(DispatchSignature signature, JvmDeclaredType type,
 			ContextualVisibilityHelper contextualVisibilityHelper) {
 		List<JvmOperation> allOperations = Lists.newArrayListWithExpectedSize(5);
-		Iterable<JvmFeature> allFeatures = type.findAllFeaturesByName(signature.simpleName);
+		Iterable<JvmFeature> allFeatures = type.findAllFeaturesByName(signature.getDispatchCaseName());
 		for(JvmFeature feature: allFeatures) {
 			if (feature instanceof JvmOperation) {
 				JvmOperation operationByName = (JvmOperation) feature;

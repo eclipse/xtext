@@ -20,6 +20,9 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
@@ -71,7 +74,21 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 			return IScope.NULLSCOPE;
 		}
 		if (isFeatureCallScope(reference)) {
-			IExpressionScope expressionScope = typeResolver.resolveTypes(context).getExpressionScope(context, reference, IExpressionScope.Anchor.BEFORE);
+			IExpressionScope.Anchor anchor = IExpressionScope.Anchor.BEFORE;
+			if (context instanceof XAbstractFeatureCall) {
+				EObject proxyOrResolved = (EObject) context.eGet(reference, false);
+				if (proxyOrResolved != null && !proxyOrResolved.eIsProxy()) {
+					XExpression receiver = ((XAbstractFeatureCall) context).getActualReceiver();
+					if (receiver == null && context instanceof XMemberFeatureCall) {
+						receiver = ((XMemberFeatureCall) context).getMemberCallTarget();
+					}
+					if (receiver != null) {
+						anchor = IExpressionScope.Anchor.RECEIVER;
+						context = receiver;
+					}
+				}
+			}
+			IExpressionScope expressionScope = typeResolver.resolveTypes(context).getExpressionScope(context, reference, anchor);
 			return expressionScope.getFeatureScope();
 		}
 		return delegateGetScope(context, reference);

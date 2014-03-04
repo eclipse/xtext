@@ -27,9 +27,9 @@ class FileAsserts {
 		file.refreshLocal(IResource::DEPTH_ZERO, null);
 		val fileContents = getContents(file);
 		expectedContents.forEach [ expectation |
-			assertTrue('''Substring '«expectation»' not found in '«fileContents»' ''', 
-				fileContents.contains(expectation)
-			)
+			if (!fileContents.contains(expectation)) {
+				assertEquals(expectation, fileContents)
+			}
 		]
 	}
 }

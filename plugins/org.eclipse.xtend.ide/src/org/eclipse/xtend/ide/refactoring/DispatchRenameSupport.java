@@ -91,8 +91,12 @@ public class DispatchRenameSupport {
 		return dispatchCases;
 	}
 
-	protected boolean addDispatcher(JvmGenericType type, DispatchHelper.DispatchSignature signature,
-			final IAcceptor<JvmOperation> acceptor, final Set<JvmGenericType> processedTypes, ResourceSet tempResourceSet) {
+	protected boolean addDispatcher(
+			JvmGenericType type, 
+			DispatchHelper.DispatchSignature signature,
+			final IAcceptor<JvmOperation> acceptor,
+			final Set<JvmGenericType> processedTypes,
+			ResourceSet tempResourceSet) {
 		if (processedTypes.contains(type))
 			return false;
 		processedTypes.add(type);
@@ -101,24 +105,22 @@ public class DispatchRenameSupport {
 		if (dispatcher != null) {
 			needProcessSubclasses = true;
 			acceptor.accept(dispatcher);
-			
-			for (JvmOperation dispatchCase : dispatchHelper.getLocalDispatchCases(dispatcher)) {
-				needProcessSubclasses = true;
-				acceptor.accept(dispatchCase);
-			}
-			for (JvmTypeReference superTypeRef : type.getSuperTypes()) {
-				JvmType superType = superTypeRef.getType();
-				if (superType instanceof JvmGenericType)
-					needProcessSubclasses |= addDispatcher((JvmGenericType) superType, signature, acceptor, processedTypes, tempResourceSet);
-			}
-			if (needProcessSubclasses) {
-				for (JvmGenericType subType : getSubTypes(type, tempResourceSet))
-					needProcessSubclasses |= addDispatcher(subType, signature, acceptor, processedTypes, tempResourceSet);
-			}
-			return needProcessSubclasses;
-		} else {
-			return needProcessSubclasses;
 		}
+			
+		for (JvmOperation dispatchCase : dispatchHelper.getLocalDispatchCases(type, signature)) {
+			needProcessSubclasses = true;
+			acceptor.accept(dispatchCase);
+		}
+		for (JvmTypeReference superTypeRef : type.getSuperTypes()) {
+			JvmType superType = superTypeRef.getType();
+			if (superType instanceof JvmGenericType)
+				needProcessSubclasses |= addDispatcher((JvmGenericType) superType, signature, acceptor, processedTypes, tempResourceSet);
+		}
+		if (needProcessSubclasses) {
+			for (JvmGenericType subType : getSubTypes(type, tempResourceSet))
+				needProcessSubclasses |= addDispatcher(subType, signature, acceptor, processedTypes, tempResourceSet);
+		}
+		return needProcessSubclasses;
 	}
 
 	protected Iterable<JvmGenericType> getSubTypes(JvmGenericType type, ResourceSet tempResourceSet) {

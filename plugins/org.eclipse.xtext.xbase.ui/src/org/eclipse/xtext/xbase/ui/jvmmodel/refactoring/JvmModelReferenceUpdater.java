@@ -108,7 +108,7 @@ public class JvmModelReferenceUpdater extends DefaultReferenceUpdater {
 
 			public boolean isValid(IEObjectDescription newTarget) {
 				IScope scope = linkingScopeProvider.getScope(referringElement, reference);
-				IEObjectDescription element = scope.getSingleElement(newTarget.getQualifiedName());
+				IEObjectDescription element = scope.getSingleElement(newTarget.getName());
 				// TODO here we need to simulate linking with the new name instead of the old name
 				if(element instanceof IIdentifiableElementDescription) {
 					IIdentifiableElementDescription casted = (IIdentifiableElementDescription) element;

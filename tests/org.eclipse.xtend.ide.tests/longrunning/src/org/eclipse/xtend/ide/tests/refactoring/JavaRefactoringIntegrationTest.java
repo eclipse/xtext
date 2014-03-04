@@ -1285,7 +1285,9 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 
 	protected void assertDocumentContains(XtextEditor editor, String expectedContent) throws CoreException {
 		String editorContent = editor.getDocument().get();
-		assertTrue("'" + expectedContent + "' not found in \n" + editorContent, editorContent.contains(expectedContent));
+		if (!editorContent.contains(expectedContent)) {
+			assertEquals(expectedContent, editorContent);
+		}
 	}
 
 	protected void assertDocumentContainsIgnoreWhitespace(XtextEditor editor, String expectedContent) throws CoreException {
