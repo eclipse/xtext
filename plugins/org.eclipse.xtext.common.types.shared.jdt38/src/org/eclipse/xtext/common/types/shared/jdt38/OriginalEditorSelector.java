@@ -135,12 +135,14 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 		if (file == null)
 			return null;
 		if (!ignorePreference) {
-			try {
-				String favoriteEditor = file.getPersistentProperty(IDE.EDITOR_KEY);
-				if (favoriteEditor != null)
-					return null;
-			} catch (CoreException e) {
-				logger.debug(e.getMessage(), e);
+			if (file.exists()) {
+				try {
+					String favoriteEditor = file.getPersistentProperty(IDE.EDITOR_KEY);
+					if (favoriteEditor != null)
+						return null;
+				} catch (CoreException e) {
+					logger.debug(e.getMessage(), e);
+				}
 			}
 		}
 		// TODO stay in same editor if local navigation
