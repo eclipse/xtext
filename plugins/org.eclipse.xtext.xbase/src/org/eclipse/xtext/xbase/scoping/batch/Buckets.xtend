@@ -16,6 +16,8 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedFeatures
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import java.util.Set
+import java.util.ArrayList
 
 /**
  * A type bucket collects a number of types that originate in the 
@@ -32,6 +34,33 @@ class TypeBucket {
 	IResolvedFeatures.Provider resolvedFeaturesProvider
 	def getHints() {
 		EnumSet.of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS)
+	}
+	def Map<? extends JvmType, ? extends Set<String>> getTypesToNames() {
+		return emptyMap
+	}
+	def boolean isRestrictingNames() {
+		return false;
+	}
+}
+
+/**
+ * A type bucket that 'exports' only a subset of all named features of 
+ * the contained types.
+ * 
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@Data
+class TypeWithRestrictedNamesBucket extends TypeBucket {
+	Map<? extends JvmType, ? extends Set<String>> typesToNames
+	new(int id, Map<? extends JvmType, ? extends Set<String>> types, IResolvedFeatures.Provider resolvedFeaturesProvider) {
+		super(id, null, resolvedFeaturesProvider)
+		this._typesToNames = types
+	}
+	override isRestrictingNames() {
+		return true
+	}
+	override getTypes() {
+		return new ArrayList(typesToNames.keySet)
 	}
 }
 

@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
+import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
 import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -211,6 +212,14 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	
 	public void addTypeToStaticImportScope(JvmDeclaredType type) {
 		featureScopeSession = featureScopeSession.addTypesToStaticScope(Collections.<JvmType>singletonList(type), Collections.<JvmType>emptyList());
+	}
+	
+	public void addTypeToStaticExtensionImportScope(JvmDeclaredType type) {
+		featureScopeSession = featureScopeSession.addTypesToStaticScope(Collections.<JvmType>singletonList(type), Collections.<JvmType>emptyList());
+	}
+	
+	public void addImports(ITypeImporter.Client importer) {
+		featureScopeSession = featureScopeSession.addImports(importer);
 	}
 	
 	public void addExtensionsToCurrentScope(List<? extends JvmIdentifiableElement> extensionProviders) {

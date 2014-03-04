@@ -619,7 +619,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	
 	@Test public void testSwitchOnEnum_01() throws Exception {
 		newBuilder().append("switch java.lang.annotation.RetentionPolicy.SOURCE { case ").assertText(expect(
-				new String[]{"SOURCE", "CLASS", "RUNTIME", /* TODO static scope should be restricted to enum literals */ "valueOf()", "valueOf()", "values"}, getKeywordsAndStatics()));
+				new String[]{"SOURCE", "CLASS", "RUNTIME"}, getKeywordsAndStatics()));
 	}
 	
 	@Test public void testSwitchOnEnum_02() throws Exception {

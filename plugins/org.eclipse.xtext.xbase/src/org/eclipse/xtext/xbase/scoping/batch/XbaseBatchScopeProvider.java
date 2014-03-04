@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -29,7 +28,6 @@ import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -100,28 +98,24 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 		IFeatureScopeSession result = rootSession.addTypesToStaticScope(literalClasses, extensionClasses);
 		if (context.getContents().isEmpty() || !(context instanceof XtextResource))
 			return result;
-		XImportSection importSection = importsConfig.getImportSection((XtextResource) context);
+		final XImportSection importSection = importsConfig.getImportSection((XtextResource) context);
 		if(importSection != null) {
-			List<XImportDeclaration> imports = importSection.getImportDeclarations();
-			List<JvmType> staticFeatureProviders = Lists.newArrayListWithCapacity(imports.size() / 2);
-			List<JvmType> staticExtensionFeatureProviders = Lists.newArrayListWithCapacity(imports.size() / 2);
-			List<JvmType> bogusStaticExtensionFeatureProviders = Lists.newArrayListWithCapacity(imports.size() / 2);
-			for(XImportDeclaration _import: imports) {
-				if (_import.isWildcard() && _import.isStatic()) {
-					if (_import.isExtension()) {
-						staticExtensionFeatureProviders.add(_import.getImportedType());
-						bogusStaticExtensionFeatureProviders.add(_import.getImportedType());
-					} else {
-						staticFeatureProviders.add(_import.getImportedType());
+			result = result.addImports(new ITypeImporter.Client() {
+
+				public void doAddImports(ITypeImporter importer) {
+					List<XImportDeclaration> imports = importSection.getImportDeclarations();
+					for(XImportDeclaration _import: imports) {
+						if (_import.isWildcard() && _import.isStatic()) {
+							if (_import.isExtension()) {
+								importer.importStaticExtension(_import.getImportedType(), false);
+							} else {
+								importer.importStatic(_import.getImportedType());
+							}
+						}
 					}
 				}
-			}
-			if (!bogusStaticExtensionFeatureProviders.isEmpty()) {
-				result = result.addTypesToStaticScope(bogusStaticExtensionFeatureProviders, Collections.<JvmType>emptyList());
-			}
-			if (!staticFeatureProviders.isEmpty() || !staticExtensionFeatureProviders.isEmpty()) {
-				result = result.addTypesToStaticScope(staticFeatureProviders, staticExtensionFeatureProviders);
-			}
+				
+			});
 		}
 		return result;
 	}

@@ -64,6 +64,13 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	 * @return a configured session.
 	 */
 	IFeatureScopeSession addTypesToStaticScope(List<? extends JvmType> staticFeatureProviders, List<? extends JvmType> staticExtensionProviders);
+	
+	/**
+	 * Add types to the session that are either imported statically or as extension.
+	 * @param importer the description of the imported types.
+	 * @return a configured session.
+	 */
+	IFeatureScopeSession addImports(ITypeImporter.Client importer);
 
 	/**
 	 * Add receivers to the session that contribute extensions. The expressions in the map

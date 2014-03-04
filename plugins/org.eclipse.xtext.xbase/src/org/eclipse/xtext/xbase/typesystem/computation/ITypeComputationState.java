@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
+import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -210,6 +211,22 @@ public interface ITypeComputationState {
 	 * @param type the type that is added to the static scope.
 	 */
 	void addTypeToStaticImportScope(JvmDeclaredType type);
+	
+	/**
+	 * Adds the given type to the static extension scope.
+	 * 
+	 * @param type the type that is added to the static extension scope.
+	 * @since 2.6
+	 */
+	void addTypeToStaticExtensionImportScope(JvmDeclaredType type);
+	
+	/**
+	 * Allows to add several imports in a bulk operation on a fine grained basis,
+	 * e.g. it supports to import only a subset of the members of a type.
+	 * 
+	 * @since 2.6
+	 */
+	void addImports(ITypeImporter.Client importer);
 	
 	/**
 	 * Adds the given elements as extension providers to the current scope.

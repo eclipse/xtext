@@ -23,6 +23,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
@@ -138,6 +139,14 @@ public abstract class ForwardingTypeComputationState implements ITypeComputation
 	
 	public void addTypeToStaticImportScope(JvmDeclaredType type) {
 		delegate.addTypeToStaticImportScope(type);
+	}
+	
+	public void addTypeToStaticExtensionImportScope(JvmDeclaredType type) {
+		delegate.addTypeToStaticExtensionImportScope(type);
+	}
+
+	public void addImports(ITypeImporter.Client importer) {
+		delegate.addImports(importer);
 	}
 
 	public void addExtensionsToCurrentScope(List<? extends JvmIdentifiableElement> extensionProviders) {
