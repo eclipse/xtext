@@ -11,6 +11,7 @@ import java.beans.Introspector;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -62,12 +63,27 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 		List<IEObjectDescription> result = Lists.newArrayList();
 		for(TypeBucket bucket: buckets) {
 			Map<String, List<JvmOperation>> extensionSignatures = Maps.newHashMap();
-			for(JvmType type: bucket.getTypes()) {
-				if (type instanceof JvmDeclaredType) {
-					Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
-					for(JvmFeature feature: features) {
-						if (feature.isStatic() && helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
-							Maps2.putIntoListMap(helper.getExtensionSignature((JvmOperation) feature), (JvmOperation) feature, extensionSignatures);
+			if (bucket.isRestrictingNames()) {
+				for(Map.Entry<? extends JvmType, ? extends Set<String>> entry: bucket.getTypesToNames().entrySet()) {
+					JvmType type = entry.getKey();
+					if (type instanceof JvmDeclaredType) {
+						Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
+						for(JvmFeature feature: features) {
+							if (feature.isStatic() && entry.getValue().contains(feature.getSimpleName())
+									&& helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
+								Maps2.putIntoListMap(helper.getExtensionSignature((JvmOperation) feature), (JvmOperation) feature, extensionSignatures);
+							}
+						}
+					}
+				}
+			} else {
+				for(JvmType type: bucket.getTypes()) {
+					if (type instanceof JvmDeclaredType) {
+						Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
+						for(JvmFeature feature: features) {
+							if (feature.isStatic() && helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
+								Maps2.putIntoListMap(helper.getExtensionSignature((JvmOperation) feature), (JvmOperation) feature, extensionSignatures);
+							}
 						}
 					}
 				}

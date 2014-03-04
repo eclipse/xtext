@@ -66,6 +66,10 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithStaticTypes(this, staticFeatureProviders, extensionProviders, getResolvedFeaturesProvider());
 		return result;
 	}
+	
+	public IFeatureScopeSession addImports(ITypeImporter.Client importer) {
+		return new TypeImporter().process(this, importer);
+	}
 
 	protected abstract IResolvedFeatures.Provider getResolvedFeaturesProvider();
 	protected abstract FeatureScopes getFeatureScopes();

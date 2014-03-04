@@ -11,10 +11,12 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.common.primitives.Ints;
 
 /**
@@ -57,6 +59,19 @@ public class Maps2 {
 		List<V> list = map.get(key);
 		if (list == null) {
 			list = Lists.newArrayListWithCapacity(2);
+			map.put(key, list);
+		}
+		list.add(value);
+	}
+	
+	/**
+	 * Puts a value into a map that supports lists as values.
+	 * The list is created on-demand.
+	 */
+	public static <K, V> void putIntoSetMap(K key, V value, Map<? super K, Set<V>> map) {
+		Set<V> list = map.get(key);
+		if (list == null) {
+			list = Sets.newHashSetWithExpectedSize(2);
 			map.put(key, list);
 		}
 		list.add(value);

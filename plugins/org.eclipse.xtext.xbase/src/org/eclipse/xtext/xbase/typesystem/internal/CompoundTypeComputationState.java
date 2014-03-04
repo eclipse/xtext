@@ -24,6 +24,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
@@ -175,6 +176,18 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 	public void addTypeToStaticImportScope(JvmDeclaredType type) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].addTypeToStaticImportScope(type);
+		}
+	}
+	
+	public void addImports(ITypeImporter.Client importer) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].addImports(importer);
+		}
+	}
+	
+	public void addTypeToStaticExtensionImportScope(JvmDeclaredType type) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].addTypeToStaticExtensionImportScope(type);
 		}
 	}
 	

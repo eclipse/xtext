@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
@@ -20,24 +22,23 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class FeatureScopeSessionWithStaticTypes extends AbstractFeatureScopeSessionWithStaticTypes<List<? extends JvmType>> {
+public class FeatureScopeSessionWithNamedStaticTypes extends AbstractFeatureScopeSessionWithStaticTypes<Map<? extends JvmType, Set<String>>> {
 
-	public FeatureScopeSessionWithStaticTypes(AbstractFeatureScopeSession featureScopeSession,
-			List<? extends JvmType> staticFeatureProviders,
-			List<? extends JvmType> extensionProviders,
+	public FeatureScopeSessionWithNamedStaticTypes(AbstractFeatureScopeSession featureScopeSession,
+			Map<? extends JvmType, Set<String>> staticFeatureProviders,
+			Map<? extends JvmType, Set<String>> extensionProviders,
 			IResolvedFeatures.Provider resolvedFeaturesProvider) {
 		super(featureScopeSession, staticFeatureProviders, extensionProviders, resolvedFeaturesProvider);
 	}
 	
 	@Override
-	protected List<TypeBucket> concatTypeBuckets(List<? extends JvmType> types, List<TypeBucket> parentResult, Provider resolvedFeaturesProvider) {
+	protected List<TypeBucket> concatTypeBuckets(Map<? extends JvmType, Set<String>> types, List<TypeBucket> parentResult, Provider resolvedFeaturesProvider) {
 		if (types.isEmpty()) {
 			return parentResult;
 		}
 		List<TypeBucket> result = Lists.newArrayListWithCapacity(3);
-		result.add(new TypeBucket(getId(), types, resolvedFeaturesProvider));
+		result.add(new TypeWithRestrictedNamesBucket(getId(), types, resolvedFeaturesProvider));
 		result.addAll(parentResult);
 		return result;
 	}
-
 }
