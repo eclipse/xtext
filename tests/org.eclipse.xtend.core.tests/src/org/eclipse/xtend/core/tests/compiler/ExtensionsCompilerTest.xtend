@@ -79,6 +79,211 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def testLocalVsDefaultExtensions_01() {
+		assertCompilesTo('''
+			import java.util.List
+			import java.util.Collection
+			class C {
+				def m(List<String> list) {
+					list.map [ it ]
+				}
+				def <T, R> Collection<R> map(Collection<T> original, (T)=>R transformation) { return null }
+			}
+		''', '''
+			import java.util.Collection;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public Collection<String> m(final List<String> list) {
+			    final Function1<String, String> _function = new Function1<String, String>() {
+			      public String apply(final String it) {
+			        return it;
+			      }
+			    };
+			    return this.<String, String>map(list, _function);
+			  }
+			  
+			  public <T extends Object, R extends Object> Collection<R> map(final Collection<T> original, final Function1<? super T, ? extends R> transformation) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testLocalVsDefaultExtensions_02() {
+		assertCompilesTo('''
+			import java.util.List
+			class C {
+				def m(List<String> list) {
+					list.map [ it ]
+				}
+				def <T, R> List<R> map(List<T> original, (T)=>R transformation) { return null }
+			}
+		''', '''
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public List<String> m(final List<String> list) {
+			    final Function1<String, String> _function = new Function1<String, String>() {
+			      public String apply(final String it) {
+			        return it;
+			      }
+			    };
+			    return this.<String, String>map(list, _function);
+			  }
+			  
+			  public <T extends Object, R extends Object> List<R> map(final List<T> original, final Function1<? super T, ? extends R> transformation) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testLocalVsDefaultExtensions_03() {
+		assertCompilesTo('''
+			import java.util.Collection
+			import java.util.List
+			class C {
+				def m(List<String> list) {
+					list.map [ it ]
+				}
+				static def <T, R> Collection<R> map(Collection<T> original, (T)=>R transformation) { return null }
+			}
+		''', '''
+			import java.util.Collection;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.ListExtensions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public List<String> m(final List<String> list) {
+			    final Function1<String, String> _function = new Function1<String, String>() {
+			      public String apply(final String it) {
+			        return it;
+			      }
+			    };
+			    return ListExtensions.<String, String>map(list, _function);
+			  }
+			  
+			  public static <T extends Object, R extends Object> Collection<R> map(final Collection<T> original, final Function1<? super T, ? extends R> transformation) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testLocalVsDefaultExtensions_04() {
+		assertCompilesTo('''
+			import java.util.List
+			class C {
+				def m(List<String> list) {
+					list.map [ it ]
+				}
+				static def <T, R> List<R> map(List<T> original, (T)=>R transformation) { return null }
+			}
+		''', '''
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public List<String> m(final List<String> list) {
+			    final Function1<String, String> _function = new Function1<String, String>() {
+			      public String apply(final String it) {
+			        return it;
+			      }
+			    };
+			    return C.<String, String>map(list, _function);
+			  }
+			  
+			  public static <T extends Object, R extends Object> List<R> map(final List<T> original, final Function1<? super T, ? extends R> transformation) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testExtensionFieldVsDefaultExtensions_01() {
+		assertCompilesTo('''
+			import java.util.Collection
+			import java.util.List
+			class C {
+				extension D
+				def m(List<String> list) {
+					list.map [ it ]
+				}
+			}
+			class D {
+				def <T, R> Collection<R> map(Collection<T> original, (T)=>R transformation) { return null }
+			}
+		''', '''
+			import java.util.Collection;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Extension;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  @Extension
+			  private D _d;
+			  
+			  public Collection<String> m(final List<String> list) {
+			    final Function1<String, String> _function = new Function1<String, String>() {
+			      public String apply(final String it) {
+			        return it;
+			      }
+			    };
+			    return this._d.<String, String>map(list, _function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testExtensionFieldVsDefaultExtensions_02() {
+		assertCompilesTo('''
+			import java.util.List
+			class C {
+				extension D
+				def m(List<String> list) {
+					list.map [ it ]
+				}
+			}
+			class D {
+				def <T, R> List<R> map(List<T> original, (T)=>R transformation) { return null }
+			}
+		''', '''
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Extension;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  @Extension
+			  private D _d;
+			  
+			  public List<String> m(final List<String> list) {
+			    final Function1<String, String> _function = new Function1<String, String>() {
+			      public String apply(final String it) {
+			        return it;
+			      }
+			    };
+			    return this._d.<String, String>map(list, _function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testExtensionAnnotations() {
 		assertCompilesTo('''
 			class C {

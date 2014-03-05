@@ -281,7 +281,7 @@ class CompilerBug424329Test extends AbstractXtendCompilerTest {
 			class A {
 				public def static void setMainDir(Class<? extends A> c, String... s){}
 				def static void main(String[] args) {
-					B.setMainDir(null)
+					B.setMainDir(null) // == B.setMainDir(null, new String[0])
 				}
 			}
 			class B extends A {}

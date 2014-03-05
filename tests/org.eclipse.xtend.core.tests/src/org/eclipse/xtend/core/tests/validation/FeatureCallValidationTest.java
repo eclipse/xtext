@@ -169,6 +169,35 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(clazz, XbasePackage.Literals.XLIST_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
 	}
 	
+	@Test
+	public void testOverloadedVarArgMethod_02() throws Exception {
+		XtendClass clazz = clazz(
+				"class Bar { " +
+				"	def void y(CharSequence s) {\n" + 
+				"		z(#[ '', true ])\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"	def void z(String... s) {}\n" +
+				"	def void z(boolean... s) {}\n" + 
+				"}");
+		helper.assertError(clazz, XbasePackage.Literals.XBOOLEAN_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from boolean to String");
+		helper.assertNoErrors(clazz, XbasePackage.Literals.XLIST_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+	}
+
+	@Test
+	public void testOverloadedVarArgMethod_03() throws Exception {
+		XtendClass clazz = clazz(
+				"class Bar { " +
+				"	def void y(CharSequence s) {\n" + 
+				"		z(#[ '', true ])\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"	def void z(boolean... s) {}\n" + 
+				"	def void z(String... s) {}\n" +
+				"}");
+		helper.assertError(clazz, XbasePackage.Literals.XSTRING_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from String to boolean");
+		helper.assertNoErrors(clazz, XbasePackage.Literals.XLIST_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+	}
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=362240
 	 */
@@ -720,7 +749,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 				"}");
 		helper.assertError(file, XbasePackage.Literals.XFEATURE_CALL,
 				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
-				"Bounds mismatch: The type arguments <Object, Iterable<?>[]> are not a valid substitute " +
+				"Bounds mismatch: The type arguments <Iterable<?>, Iterable<?>[]> are not a valid substitute " +
 				"for the bounded type parameters <E, I extends Iterable<E>> of the method nonEmpty(I)");
 	}
 	
