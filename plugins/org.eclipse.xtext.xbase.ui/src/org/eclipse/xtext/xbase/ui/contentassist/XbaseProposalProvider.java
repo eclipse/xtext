@@ -406,6 +406,12 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		// don't propose unary operations like !, +, -
 	}
 	
+	@Override
+	public void completeXPostfixOperation_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeBinaryOperationFeature(model, assignment, context, acceptor);
+	}
+	
 	protected void completeBinaryOperationFeature(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XBinaryOperation) {

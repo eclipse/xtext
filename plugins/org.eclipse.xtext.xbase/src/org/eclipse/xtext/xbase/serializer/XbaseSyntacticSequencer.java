@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 
@@ -58,6 +59,9 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 			return true;
 		if(obj instanceof XBinaryOperation)
 			return startsWithUnaryOperator(((XBinaryOperation)obj).getLeftOperand());
+		if(obj instanceof XPostfixOperation) {
+			return startsWithUnaryOperator(((XPostfixOperation)obj).getOperand());
+		}
 		return false;
 	}
 	

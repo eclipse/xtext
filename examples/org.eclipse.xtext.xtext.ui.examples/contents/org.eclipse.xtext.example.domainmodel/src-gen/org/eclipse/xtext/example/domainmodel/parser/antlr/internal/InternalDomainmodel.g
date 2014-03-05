@@ -1868,11 +1868,11 @@ ruleXCastedExpression returns [EObject current=null]
     @after { leaveRule(); }:
 (
     { 
-        newCompositeNode(grammarAccess.getXCastedExpressionAccess().getXMemberFeatureCallParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getXCastedExpressionAccess().getXPostfixOperationParserRuleCall_0()); 
     }
-    this_XMemberFeatureCall_0=ruleXMemberFeatureCall
+    this_XPostfixOperation_0=ruleXPostfixOperation
     { 
-        $current = $this_XMemberFeatureCall_0.current; 
+        $current = $this_XPostfixOperation_0.current; 
         afterParserOrEnumRuleCall();
     }
 (((((
@@ -1907,6 +1907,96 @@ ruleXCastedExpression returns [EObject current=null]
 )
 ))*)
 ;
+
+
+
+
+
+// Entry rule entryRuleXPostfixOperation
+entryRuleXPostfixOperation returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getXPostfixOperationRule()); }
+	 iv_ruleXPostfixOperation=ruleXPostfixOperation 
+	 { $current=$iv_ruleXPostfixOperation.current; } 
+	 EOF 
+;
+
+// Rule XPostfixOperation
+ruleXPostfixOperation returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getXPostfixOperationAccess().getXMemberFeatureCallParserRuleCall_0()); 
+    }
+    this_XMemberFeatureCall_0=ruleXMemberFeatureCall
+    { 
+        $current = $this_XMemberFeatureCall_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+((((
+)(
+(
+		ruleOpPostfix
+)
+)))=>((
+    {
+        $current = forceCreateModelElementAndSet(
+            grammarAccess.getXPostfixOperationAccess().getXPostfixOperationOperandAction_1_0_0(),
+            $current);
+    }
+)(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getXPostfixOperationRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getXPostfixOperationAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_1_0()); 
+	    }
+		ruleOpPostfix		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)))?)
+;
+
+
+
+
+
+// Entry rule entryRuleOpPostfix
+entryRuleOpPostfix returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getOpPostfixRule()); } 
+	 iv_ruleOpPostfix=ruleOpPostfix 
+	 { $current=$iv_ruleOpPostfix.current.getText(); }  
+	 EOF 
+;
+
+// Rule OpPostfix
+ruleOpPostfix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+	kw='++' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpPostfixAccess().getPlusSignPlusSignKeyword_0()); 
+    }
+
+    |
+	kw='--' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpPostfixAccess().getHyphenMinusHyphenMinusKeyword_1()); 
+    }
+)
+    ;
 
 
 

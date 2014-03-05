@@ -84,6 +84,7 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XNumberLiteral;
+import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -1529,9 +1530,17 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Check
 	public void checkAssignment(XBinaryOperation binaryOperation) {
-		if (binaryOperation.isCompoundOperator()) {
+		if (binaryOperation.isReassignFirstArgument()) {
 			XExpression firstArgument = binaryOperation.getActualArguments().get(0);
 			checkAssignment(firstArgument, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);	
+		}
+	}
+	
+	@Check
+	public void checkAssignment(XPostfixOperation postfixOperation) {
+		if (expressionHelper.isGetAndAssign(postfixOperation)) {
+			XExpression firstArgument = postfixOperation.getActualArguments().get(0);
+			checkAssignment(firstArgument, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
 		}
 	}
 	

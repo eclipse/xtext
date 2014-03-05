@@ -252,6 +252,15 @@ public class XbaseSwitch<T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XbasePackage.XPOSTFIX_OPERATION:
+			{
+				XPostfixOperation xPostfixOperation = (XPostfixOperation)theEObject;
+				T result = caseXPostfixOperation(xPostfixOperation);
+				if (result == null) result = caseXAbstractFeatureCall(xPostfixOperation);
+				if (result == null) result = caseXExpression(xPostfixOperation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case XbasePackage.XFOR_LOOP_EXPRESSION:
 			{
 				XForLoopExpression xForLoopExpression = (XForLoopExpression)theEObject;
@@ -694,6 +703,22 @@ public class XbaseSwitch<T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseXUnaryOperation(XUnaryOperation object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XPostfix Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XPostfix Operation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXPostfixOperation(XPostfixOperation object)
 	{
 		return null;
 	}

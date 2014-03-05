@@ -24,12 +24,9 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XAssignment;
-import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -37,6 +34,7 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.internal.FeatureLinkHelper;
 import org.eclipse.xtext.xbase.typesystem.internal.ScopeProviderAccess;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -379,19 +377,7 @@ public class FeatureScopes implements IFeatureNames {
 	}
 
 	protected XExpression getSyntacticalReceiver(final XAbstractFeatureCall call) {
-		if (call instanceof XMemberFeatureCall) {
-			return ((XMemberFeatureCall) call).getMemberCallTarget();
-		}
-		if (call instanceof XBinaryOperation) {
-			return ((XBinaryOperation) call).getLeftOperand();
-		}
-		if (call instanceof XUnaryOperation) {
-			return ((XUnaryOperation) call).getOperand();
-		}
-		if (call instanceof XAssignment) {
-			return ((XAssignment) call).getAssignable();
-		}
-		return null;
+		return new FeatureLinkHelper().getSyntacticReceiver(call);
 	}
 
 	protected IScope createTypeLiteralScope(EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes, QualifiedName parentSegments) {
