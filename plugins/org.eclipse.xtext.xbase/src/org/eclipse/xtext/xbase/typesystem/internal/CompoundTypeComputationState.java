@@ -140,7 +140,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		for(int i = 1; i < components.length; i++) {
 			StackedResolvedTypes candidate = components[i].doComputeTypes(expression);
 			EnumSet<ConformanceHint> candidateHints = candidate.getConformanceHints(expression, false);
-			int compareResult = ConformanceHint.compareHints(conformanceHints, candidateHints);
+			int compareResult = compareHints(conformanceHints, candidateHints);
 			if (compareResult == 1) {
 				resolvedTypes = candidate;
 				conformanceHints = candidateHints;
@@ -149,6 +149,22 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		resolvedTypes.performMergeIntoParent();
 		ResolutionBasedComputationResult result = new ResolutionBasedComputationResult(expression, resolvedTypes.getParent());
 		return result;
+	}
+	
+	private int compareHints(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
+		if (leftConformance.equals(rightConformance)) {
+			return 0;
+		}
+		int result = ConformanceHint.compareHints(leftConformance, rightConformance);
+		if (result != 0) {
+			return result;
+		}
+		if (leftConformance.contains(ConformanceHint.VAR_ARG) != rightConformance.contains(ConformanceHint.VAR_ARG)) {
+			if (leftConformance.contains(ConformanceHint.VAR_ARG))
+				return 1;
+			return -1;
+		}
+		return 0;
 	}
 
 	public ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type) {

@@ -78,6 +78,10 @@ public class AssignmentFeatureCallArguments implements IFeatureCallArguments, IF
 		this.processed = true;
 	}
 	
+	public boolean hasEmptyTrailingVarArg() {
+		return false;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("AssignmentFeatureCallArguments for %s [processed = %s]", expression, String.valueOf(processed));

@@ -726,6 +726,8 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		int upTo = Math.max(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		int leftBoxing = 0;
 		int rightBoxing = 0;
+		int leftVarArgs = 0;
+		int rightVarArgs = 0;
 		int leftDemand = 0;
 		int rightDemand = 0;
 		boolean invalid = false;
@@ -744,18 +746,40 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					return hintCompareResult;
 				
 			}
-			if (leftConformance.contains(ConformanceHint.DEMAND_CONVERSION)) {
-				leftDemand++;
+			if (!leftConformance.equals(rightConformance)) {
+				if (leftConformance.contains(ConformanceHint.VAR_ARG)) {
+					leftVarArgs++;
+				}
+				if (rightConformance.contains(ConformanceHint.VAR_ARG)) {
+					rightVarArgs++;
+				}
+				if (leftConformance.contains(ConformanceHint.DEMAND_CONVERSION)) {
+					leftDemand++;
+				}
+				if (rightConformance.contains(ConformanceHint.DEMAND_CONVERSION)) {
+					rightDemand++;
+				}
+				if (leftConformance.contains(ConformanceHint.BOXING) || leftConformance.contains(ConformanceHint.UNBOXING)) {
+					leftBoxing++;
+				}
+				if (rightConformance.contains(ConformanceHint.BOXING) || rightConformance.contains(ConformanceHint.UNBOXING)) {
+					rightBoxing++;
+				}
 			}
-			if (rightConformance.contains(ConformanceHint.DEMAND_CONVERSION)) {
-				rightDemand++;
+		}
+		if (isExtension() == right.isExtension()) {
+			if (arguments.hasEmptyTrailingVarArg()) {
+				leftVarArgs++;
 			}
-			if (leftConformance.contains(ConformanceHint.BOXING) || leftConformance.contains(ConformanceHint.UNBOXING)) {
-				leftBoxing++;
+			if (right.arguments.hasEmptyTrailingVarArg()) {
+				rightVarArgs++;
 			}
-			if (rightConformance.contains(ConformanceHint.BOXING) || rightConformance.contains(ConformanceHint.UNBOXING)) {
-				rightBoxing++;
+		}
+		if (leftVarArgs != rightVarArgs) {
+			if (leftVarArgs < rightVarArgs) {
+				return CandidateCompareResult.THIS;
 			}
+			return CandidateCompareResult.OTHER;
 		}
 		CandidateCompareResult result = compareByArgumentTypes(right, leftBoxing, rightBoxing, leftDemand, rightDemand);
 		switch(result) {

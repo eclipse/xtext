@@ -13,9 +13,11 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -79,25 +81,44 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 			}
 		};
 	}
+	
+	protected class DeferredParameterizedTypeReferenceHintCollector extends ParameterizedTypeReferenceTraverser {
+		@Override
+		public void doVisitUnboundTypeReference(UnboundTypeReference reference,
+				ParameterizedTypeReference declaration) {
+			addHint(reference, declaration);
+		}
+		
+		@Override
+		protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters,
+				Set<JvmTypeParameter> visited) {
+			if (boundParameters.contains(declaredTypeParameter) && !visited.add(declaredTypeParameter)) {
+				return false;
+			}
+			return true;
+		}
+		
+		@Override
+		protected void doVisitArrayTypeReference(ArrayTypeReference reference, ParameterizedTypeReference declaration) {
+			JvmType type = declaration.getType();
+			if (type instanceof JvmTypeParameter) {
+				if (shouldProcess((JvmTypeParameter) type)) {
+					JvmTypeParameter typeParameter = (JvmTypeParameter) type;
+					processTypeParameter(typeParameter, reference);
+				}
+			} else {
+				if (!declaration.isRawType() && (declaration.isType(List.class) || declaration.isType(Collection.class) || declaration.isType(Iterable.class))) {
+					LightweightTypeReference elementType = declaration.getTypeArguments().get(0);
+					LightweightTypeReference componentType = reference.getComponentType();
+					outerVisit(componentType.getInvariantBoundSubstitute(), elementType);
+				}
+			}
+		}
+	}
 
 	@Override
 	protected ParameterizedTypeReferenceTraverser createParameterizedTypeReferenceTraverser() {
-		return new ParameterizedTypeReferenceTraverser() {
-			@Override
-			public void doVisitUnboundTypeReference(UnboundTypeReference reference,
-					ParameterizedTypeReference declaration) {
-				addHint(reference, declaration);
-			}
-			
-			@Override
-			protected boolean shouldProcessInContextOf(JvmTypeParameter declaredTypeParameter, Set<JvmTypeParameter> boundParameters,
-					Set<JvmTypeParameter> visited) {
-				if (boundParameters.contains(declaredTypeParameter) && !visited.add(declaredTypeParameter)) {
-					return false;
-				}
-				return true;
-			}
-		};
+		return new DeferredParameterizedTypeReferenceHintCollector();
 	}
 	
 	@Override

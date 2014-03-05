@@ -316,6 +316,28 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals("java.util.ArrayList.addAll(int,java.util.Collection)", ((JvmOperation)memberFeatureCall.getFeature()).getIdentifier());
 	}
 	
+	@Test public void testFeatureCall_10() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" + 
+				"	val list = <String>newArrayList\n" + 
+				"	list.addAll(1, null as String[])\n" + 
+				"	list\n" + 
+				"}");
+		XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+		assertEquals("java.util.ArrayList.addAll(int,java.util.Collection)", ((JvmOperation)memberFeatureCall.getFeature()).getIdentifier());
+	}
+	
+	@Test public void testFeatureCall_11() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression(
+				"{\n" + 
+				"	val list = <String>newArrayList\n" + 
+				"	list.addAll(null as Integer, null as String[])\n" + 
+				"	list\n" + 
+				"}");
+		XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) block.getExpressions().get(1);
+		assertEquals("java.util.ArrayList.addAll(int,java.util.Collection)", ((JvmOperation)memberFeatureCall.getFeature()).getIdentifier());
+	}
+	
 	@Test public void testStaticFeatureCall_01() throws Exception {
 		XMemberFeatureCall featureCall = (XMemberFeatureCall) expression("testdata::MethodOverrides4::staticM5()");
 		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());

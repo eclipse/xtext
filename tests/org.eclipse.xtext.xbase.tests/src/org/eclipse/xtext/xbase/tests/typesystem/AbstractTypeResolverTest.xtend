@@ -4305,6 +4305,14 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<Iterable<? extends Iterator<String>>>")
 	}
 	
+	@Test def void testDeferredTypeArgumentResolution_168() throws Exception {
+		"{
+			val list = newArrayList
+			list.addAll(1, null as String[])
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
 	@Test def void testRecursiveTypeArgumentResolution_01() throws Exception {
 		"{
 			val list = newArrayList

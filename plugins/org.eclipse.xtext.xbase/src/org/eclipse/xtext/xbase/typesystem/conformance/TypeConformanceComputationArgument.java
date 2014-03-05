@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.conformance;
 
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc
@@ -64,28 +62,6 @@ public class TypeConformanceComputationArgument {
 		return "TypeConformanceComputationArgument [\n\t" +
 				flagsToString() + "\n" +
 				"]";
-	}
-
-	protected static class Internal<T extends LightweightTypeReference> extends TypeConformanceComputationArgument {
-		protected final T reference;
-		
-		protected static <T extends LightweightTypeReference> Internal<T> create(T reference, 
-				boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion, boolean allowPrimitiveWidening, boolean unboundComputationAddsHints, boolean allowSynonyms) {
-			return new Internal<T>(reference, rawType, asTypeArgument, allowPrimitiveConversion, allowPrimitiveWidening, unboundComputationAddsHints, allowSynonyms);
-		}
-		
-		protected Internal(T reference, boolean rawType, boolean asTypeArgument, boolean allowPrimitiveConversion, boolean allowPrimitiveWidening, boolean unboundComputationAddsHints, boolean allowSynonyms) {
-			super(rawType, asTypeArgument, allowPrimitiveConversion, allowPrimitiveWidening, unboundComputationAddsHints, allowSynonyms);
-			this.reference = reference;
-		}
-
-		@Override
-		public String toString() {
-			return "TypeConformanceComputationArgument.Internal [\n\t" +
-					"reference=" + reference + ",\n\t" +
-					flagsToString() + "\n" +
-					"]";
-		}
 	}
 	
 }
