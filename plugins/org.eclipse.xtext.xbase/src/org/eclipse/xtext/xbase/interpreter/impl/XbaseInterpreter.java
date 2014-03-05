@@ -891,18 +891,87 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				}
 			}
 			return invokeOperation(operation, receiver, argumentValues, context, indicator);
-			}
+		}
+		if (isGetAndAssign(featureCall)) {
+			return evaluateGetAndAssign(featureCall, context, indicator);
+		}
 		XExpression receiver = getActualReceiver(featureCall);
 		Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
 		Object result = invokeFeature(featureCall.getFeature(), featureCall, receiverObj, context, indicator);
 		if (featureCall instanceof XBinaryOperation) {
 			XBinaryOperation binaryOperation = (XBinaryOperation) featureCall;
-			if (binaryOperation.isCompoundOperator()) {
+			if (binaryOperation.isReassignFirstArgument()) {
 				XAbstractFeatureCall leftOperand = (XAbstractFeatureCall) binaryOperation.getLeftOperand();
 				assignValueTo(leftOperand.getFeature(), featureCall, result, context, indicator);
 			}
 		}
 		return result;
+	}
+
+	protected boolean isGetAndAssign(XAbstractFeatureCall featureCall) {
+		return expressionHelper.isGetAndAssign(featureCall);
+	}
+
+	protected Object evaluateGetAndAssign(XAbstractFeatureCall featureCall, IEvaluationContext context, CancelIndicator indicator) {
+		XAbstractFeatureCall operand = (XAbstractFeatureCall) featureCall.getActualArguments().get(0);
+		
+		Object originalValue = internalEvaluate(operand, context, indicator);
+		Object value = applyGetAndAssignOperator(originalValue, featureCall.getConcreteSyntaxFeatureName());
+		
+		assignValueTo(operand.getFeature(), featureCall, value, context, indicator);
+		return originalValue;
+	}
+
+	protected Object applyGetAndAssignOperator(Object originalValue, String operatorName) {
+		if (originalValue instanceof Double) {
+			Double value = (Double) originalValue;
+			if (equal(OperatorMapping.MINUS_MINUS.toString(), operatorName)) {
+				return (double) (value - 1);	
+			}
+			return (double) (value + 1);
+		} 
+		if (originalValue instanceof Float) {
+			Float value = (Float) originalValue;
+			if (equal(OperatorMapping.MINUS_MINUS.toString(), operatorName)) {
+				return (float) (value - 1);	
+			}
+			return (float) (value + 1);
+		} 
+		if (originalValue instanceof Long) {
+			Long value = (Long) originalValue;
+			if (equal(OperatorMapping.MINUS_MINUS.toString(), operatorName)) {
+				return (long) (value - 1);	
+			}
+			return (long) (value + 1);
+		}
+		if (originalValue instanceof Integer) {
+			Integer value = (Integer) originalValue;
+			if (equal(OperatorMapping.MINUS_MINUS.toString(), operatorName)) {
+				return value - 1;	
+			}
+			return value + 1;
+		} 
+		if (originalValue instanceof Short) {
+			Short value = (Short) originalValue;
+			if (equal(OperatorMapping.MINUS_MINUS.toString(), operatorName)) {
+				return (short) (value - 1);	
+			}
+			return (short) (value + 1);
+		} if (originalValue instanceof Byte) {
+			Byte value = (Byte) originalValue;
+			if (equal(OperatorMapping.MINUS_MINUS.toString(), operatorName)) {
+				return (byte) (value - 1);	
+			}
+			return (byte) (value + 1);
+		} 
+		if (originalValue instanceof Character) {
+			Character value = (Character) originalValue;
+			if (equal(OperatorMapping.MINUS_MINUS.toString(), operatorName)) {
+				return (char) (value - 1);	
+			}
+			return (char) (value + 1);
+		}
+		throw new IllegalStateException("Unexpected value: " + originalValue);
 	}
 
 	protected List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {

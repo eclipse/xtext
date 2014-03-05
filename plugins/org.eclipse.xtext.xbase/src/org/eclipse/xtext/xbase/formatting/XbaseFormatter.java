@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XForLoopExpressionEle
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XIfExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XMemberFeatureCallElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XParenthesizedExpressionElements;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XPostfixOperationElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XShortClosureElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XSwitchExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XSynchronizedExpressionElements;
@@ -52,6 +53,7 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 	public void configure(FormattingConfig c, XbaseGrammarAccess ga) {
 		xtypeFormatter.configure(c, ga.getXtypeGrammarAccess());
 		configureXUnaryOperation(c, ga.getXUnaryOperationAccess());
+		configureXPostfixOperation(c, ga.getXPostfixOperationAccess());
 		configureXMemberFeatureCall(c, ga.getXMemberFeatureCallAccess());
 		configureXClosure(c, ga.getXClosureAccess());
 		configureXShortClosure(c, ga.getXShortClosureAccess());
@@ -78,6 +80,10 @@ public class XbaseFormatter extends AbstractDeclarativeFormatter {
 
 	public void configureXUnaryOperation(FormattingConfig c, XUnaryOperationElements ele) {
 		c.setNoSpace().after(ele.getFeatureAssignment_0_1());
+	}
+
+	public void configureXPostfixOperation(FormattingConfig c, XPostfixOperationElements ele) {
+		c.setNoSpace().before(ele.getFeatureAssignment_1_0_1());
 	}
 
 	public void configureXMemberFeatureCall(FormattingConfig c, XMemberFeatureCallElements ele) {

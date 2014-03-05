@@ -7,27 +7,27 @@
  *******************************************************************************/
 package compound;
 
-import org.eclipse.xtext.xbase.lib.CompoundAssignment;
 import org.eclipse.xtext.xbase.lib.Inline;
+import org.eclipse.xtext.xbase.lib.ReassignFirstArgument;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 public class IntCompoundExtensions {
 
-	@CompoundAssignment
+	@ReassignFirstArgument
 	@Inline(value = "$1 += $2")
 	public static int operator_add(int a, int b) {
 		return 0;
 	}
 
-	@CompoundAssignment
+	@ReassignFirstArgument
 	@Inline(value = "$1 *= $2")
 	public static int operator_multiplyAssign(int a, int b) {
 		return 0;
 	}
 	
-	@CompoundAssignment
+	@ReassignFirstArgument
 	public static int operator_divideAssign(int a, int b) {
 		return a / b;
 	}

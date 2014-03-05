@@ -145,7 +145,8 @@ ruleOperators :
 	ruleOpCompare |
 	ruleOpOther |
 	ruleOpMulti |
-	ruleOpUnary
+	ruleOpUnary |
+	ruleOpPostfix
 ;
 
 // Rule XtendEnumLiteral
@@ -603,11 +604,24 @@ ruleOpUnary :
 
 // Rule XCastedExpression
 ruleXCastedExpression :
-	ruleXMemberFeatureCall (
+	ruleXPostfixOperation (
 		( (
 		'as'
 		) => 'as' ) ruleJvmTypeReference
 	)*
+;
+
+// Rule XPostfixOperation
+ruleXPostfixOperation :
+	ruleXMemberFeatureCall ( (
+	ruleOpPostfix
+	) => ruleOpPostfix )?
+;
+
+// Rule OpPostfix
+ruleOpPostfix :
+	'++' |
+	'--'
 ;
 
 // Rule XMemberFeatureCall

@@ -31,6 +31,62 @@ import com.google.common.annotations.GwtCompatible;
 	public static double operator_minus(Double a) {
 		return -a;
 	}
+	
+	/**
+	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * 
+	 * @param a  a double. May not be <code>null</code>.
+	 * @return   <code>a--</code>
+	 * @throws NullPointerException
+	 *             if {@code a} is <code>null</code>.
+	 * @since 2.6
+	 */
+	@Inline(value="$1--")
+	public static double operator_minusMinus(double a) {
+		return a--;
+	}
+	
+	/**
+	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * 
+	 * @param a  a double. May not be <code>null</code>.
+	 * @return   <code>a--</code>
+	 * @throws NullPointerException
+	 *             if {@code a} is <code>null</code>.
+	 * @since 2.6
+	 */
+	@Inline(value="$1--")
+	public static double operator_minusMinus(Double a) {
+		return a--;
+	}
+	
+	/**
+	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * 
+	 * @param a  a double. May not be <code>null</code>.
+	 * @return   <code>a++</code>
+	 * @throws NullPointerException
+	 *             if {@code a} is <code>null</code>.
+	 * @since 2.6
+	 */
+	@Inline(value="$1++")
+	public static double operator_plusPlus(double a) {
+		return a++;
+	}
+	
+	/**
+	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * 
+	 * @param a  a double. May not be <code>null</code>.
+	 * @return   <code>a++</code>
+	 * @throws NullPointerException
+	 *             if {@code a} is <code>null</code>.
+	 * @since 2.6
+	 */
+	@Inline(value="$1++")
+	public static double operator_plusPlus(Double a) {
+		return a++;
+	}
 
 	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the java <code>+</code> operator.

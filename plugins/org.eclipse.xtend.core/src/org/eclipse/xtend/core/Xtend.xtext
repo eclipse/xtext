@@ -124,6 +124,7 @@ Operators:
 //	| OpAdd completely contained in OpUnary
 	| OpMulti
 	| OpUnary
+	| OpPostfix
 ;
 
 XtendEnumLiteral: 

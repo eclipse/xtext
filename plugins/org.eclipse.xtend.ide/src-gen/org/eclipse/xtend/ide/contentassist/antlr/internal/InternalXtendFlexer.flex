@@ -91,9 +91,11 @@ RICH_TEXT_FINISH="'"("'"("'")?)?
 <YYINITIAL> "**" { return KW_AsteriskAsterisk; }
 <YYINITIAL> "*=" { return KW_AsteriskEqualsSign; }
 <YYINITIAL> "+" { return KW_PlusSign; }
+<YYINITIAL> "++" { return KW_PlusSignPlusSign; }
 <YYINITIAL> "+=" { return KW_PlusSignEqualsSign; }
 <YYINITIAL> "," { return KW_Comma; }
 <YYINITIAL> "-" { return KW_HyphenMinus; }
+<YYINITIAL> "--" { return KW_HyphenMinusHyphenMinus; }
 <YYINITIAL> "-=" { return KW_HyphenMinusEqualsSign; }
 <YYINITIAL> "->" { return KW_HyphenMinusGreaterThanSign; }
 <YYINITIAL> "." { return KW_FullStop; }

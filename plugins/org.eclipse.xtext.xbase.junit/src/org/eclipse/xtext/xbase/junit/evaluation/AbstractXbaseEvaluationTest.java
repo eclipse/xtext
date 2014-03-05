@@ -4193,6 +4193,620 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 								"} ");
 	}
 	
+	@Test
+	public void testIncrementOnByte() throws Exception {
+		byte i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2 as byte\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnByte_2() throws Exception {
+		byte i = 2;
+		assertEvaluatesTo(i++, 
+				"{\n" +
+					"var i = 2 as byte\n" +
+					"i++\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnByte_3() throws Exception {
+		byte i = 2;
+		assertEvaluatesTo(i++ + i, 
+				"{\n" +
+					"var i = 2 as byte\n" +
+					"i++ + i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnByte_4() throws Exception {
+		byte i = 2;
+		assertEvaluatesTo(i++, 
+				"{\n" +
+					"var Byte i = 2 as byte\n" +
+					"i++\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnByte() throws Exception {
+		byte i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2 as byte\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnByte_2() throws Exception {
+		byte i = 2;
+		assertEvaluatesTo(i--, 
+				"{\n" +
+					"var i = 2 as byte\n" +
+					"i--\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnByte_3() throws Exception {
+		byte i = 2;
+		assertEvaluatesTo(i-- - i, 
+				"{\n" +
+					"var i = 2 as byte\n" +
+					"i-- - i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnByte_4() throws Exception {
+		byte i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Byte i = 2 as byte\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnCharacter() throws Exception {
+		char i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2 as char\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnCharacter_2() throws Exception {
+		char i = 2;
+		assertEvaluatesTo(i++, 
+				"{\n" +
+					"var i = 2 as char\n" +
+					"i++\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnCharacter_3() throws Exception {
+		char i = 2;
+		assertEvaluatesTo(i++ + i, 
+				"{\n" +
+					"var i = 2 as char\n" +
+					"i++ + i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnCharacter_4() throws Exception {
+		char i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Character i = 2 as char\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnCharacter() throws Exception {
+		char i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2 as char\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnCharacter_2() throws Exception {
+		char i = 2;
+		assertEvaluatesTo(i--, 
+				"{\n" +
+					"var i = 2 as char\n" +
+					"i--\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnCharacter_3() throws Exception {
+		char i = 2;
+		assertEvaluatesTo(i-- - i, 
+				"{\n" +
+					"var i = 2 as char\n" +
+					"i-- - i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnCharacter_4() throws Exception {
+		char i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Character i = 2 as char\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnShort() throws Exception {
+		short i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2 as short\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnShort_2() throws Exception {
+		short i = 2;
+		assertEvaluatesTo(i++, 
+				"{\n" +
+					"var i = 2 as short\n" +
+					"i++\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnShort_3() throws Exception {
+		short i = 2;
+		assertEvaluatesTo(i++ + i, 
+				"{\n" +
+					"var i = 2 as short\n" +
+					"i++ + i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnShort_4() throws Exception {
+		short i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Short i = 2 as short\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnShort() throws Exception {
+		short i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2 as short\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnShort_2() throws Exception {
+		short i = 2;
+		assertEvaluatesTo(i--, 
+				"{\n" +
+					"var i = 2 as short\n" +
+					"i--\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnShort_3() throws Exception {
+		short i = 2;
+		assertEvaluatesTo(i-- - i, 
+				"{\n" +
+					"var i = 2 as short\n" +
+					"i-- - i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnShort_4() throws Exception {
+		short i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Short i = 2 as short\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnInteger() throws Exception {
+		int i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnInteger_2() throws Exception {
+		int i = 2;
+		assertEvaluatesTo(i++, 
+				"{\n" +
+					"var i = 2\n" +
+					"i++\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnInteger_3() throws Exception {
+		int i = 2;
+		assertEvaluatesTo(i++ + i, 
+				"{\n" +
+					"var i = 2\n" +
+					"i++ + i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnInteger_4() throws Exception {
+		int i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Integer i = 2\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnInteger() throws Exception {
+		int i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnInteger_2() throws Exception {
+		int i = 2;
+		assertEvaluatesTo(i--, 
+				"{\n" +
+					"var i = 2\n" +
+					"i--\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnInteger_3() throws Exception {
+		int i = 2;
+		assertEvaluatesTo(i-- - i, 
+				"{\n" +
+					"var i = 2\n" +
+					"i-- - i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnInteger_4() throws Exception {
+		int i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Integer i = 2\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnLong() throws Exception {
+		long i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2 as long\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnLong_2() throws Exception {
+		long i = 2;
+		assertEvaluatesTo(i++, 
+				"{\n" +
+					"var i = 2 as long\n" +
+					"i++\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnLong_3() throws Exception {
+		long i = 2;
+		assertEvaluatesTo(i++ + i, 
+				"{\n" +
+					"var i = 2 as long\n" +
+					"i++ + i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnLong_4() throws Exception {
+		long i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Long i = 2 as long\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnLong() throws Exception {
+		long i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2 as long\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnLong_2() throws Exception {
+		long i = 2;
+		assertEvaluatesTo(i--, 
+				"{\n" +
+					"var i = 2 as long\n" +
+					"i--\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnLong_3() throws Exception {
+		long i = 2;
+		assertEvaluatesTo(i-- - i, 
+				"{\n" +
+					"var i = 2 as long\n" +
+					"i-- - i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnLong_4() throws Exception {
+		long i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Long i = 2 as long\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnFloat() throws Exception {
+		float i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2 as float\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnFloat_2() throws Exception {
+		float i = 2;
+		assertEvaluatesTo(i++, 
+				"{\n" +
+					"var i = 2 as float\n" +
+					"i++\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnFloat_3() throws Exception {
+		float i = 2;
+		assertEvaluatesTo(i++ + i, 
+				"{\n" +
+					"var i = 2 as float\n" +
+					"i++ + i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnFloat_4() throws Exception {
+		float i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Float i = 2 as float\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnFloat() throws Exception {
+		float i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2 as float\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnFloat_2() throws Exception {
+		float i = 2;
+		assertEvaluatesTo(i--, 
+				"{\n" +
+					"var i = 2 as float\n" +
+					"i--\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnFloat_3() throws Exception {
+		float i = 2;
+		assertEvaluatesTo(i-- - i, 
+				"{\n" +
+					"var i = 2 as float\n" +
+					"i-- - i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnFloat_4() throws Exception {
+		float i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Float i = 2 as float\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnDouble() throws Exception {
+		double i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2 as double\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnDouble_2() throws Exception {
+		double i = 2;
+		assertEvaluatesTo(i++, 
+				"{\n" +
+					"var i = 2 as double\n" +
+					"i++\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnDouble_3() throws Exception {
+		double i = 2;
+		assertEvaluatesTo(i++ + i, 
+				"{\n" +
+					"var i = 2 as double\n" +
+					"i++ + i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testIncrementOnDouble_4() throws Exception {
+		double i = 2;
+		i++;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Double i = 2 as double\n" +
+					"i++\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnDouble() throws Exception {
+		double i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var i = 2 as double\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnDouble_2() throws Exception {
+		double i = 2;
+		assertEvaluatesTo(i--, 
+				"{\n" +
+					"var i = 2 as double\n" +
+					"i--\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnDouble_3() throws Exception {
+		double i = 2;
+		assertEvaluatesTo(i-- - i, 
+				"{\n" +
+					"var i = 2 as double\n" +
+					"i-- - i\n" +
+				"}");
+	}
+	
+	@Test
+	public void testDecrementOnDouble_4() throws Exception {
+		double i = 2;
+		i--;
+		assertEvaluatesTo(i, 
+				"{\n" +
+					"var Double i = 2 as double\n" +
+					"i--\n" +
+					"i" +
+				"}");
+	}
+	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
 		Object result = invokeXbaseExpression(string);
 		assertEquals(object, result);

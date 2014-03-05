@@ -93,7 +93,15 @@ OpUnary:
 	"!" | "-" | "+";
 	
 XCastedExpression returns XExpression:
-	XMemberFeatureCall (=>({XCastedExpression.target=current} 'as') type=JvmTypeReference)*
+	XPostfixOperation (=>({XCastedExpression.target=current} 'as') type=JvmTypeReference)*
+;
+
+XPostfixOperation returns XExpression:
+	XMemberFeatureCall =>({XPostfixOperation.operand=current} feature=[types::JvmIdentifiableElement|OpPostfix])?
+;
+
+OpPostfix:
+	"++" | "--"
 ;
 
 XMemberFeatureCall returns XExpression:

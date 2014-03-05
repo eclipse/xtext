@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XNumberLiteral;
+import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
@@ -215,6 +216,13 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * @generated
 	 */
 	private EClass xUnaryOperationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xPostfixOperationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1086,7 +1094,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getXBinaryOperation_CompoundOperator()
+	public EAttribute getXBinaryOperation_ReassignFirstArgument()
 	{
 		return (EAttribute)xBinaryOperationEClass.getEStructuralFeatures().get(2);
 	}
@@ -1109,6 +1117,26 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	public EReference getXUnaryOperation_Operand()
 	{
 		return (EReference)xUnaryOperationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getXPostfixOperation()
+	{
+		return xPostfixOperationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXPostfixOperation_Operand()
+	{
+		return (EReference)xPostfixOperationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1620,10 +1648,13 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xBinaryOperationEClass = createEClass(XBINARY_OPERATION);
 		createEReference(xBinaryOperationEClass, XBINARY_OPERATION__LEFT_OPERAND);
 		createEReference(xBinaryOperationEClass, XBINARY_OPERATION__RIGHT_OPERAND);
-		createEAttribute(xBinaryOperationEClass, XBINARY_OPERATION__COMPOUND_OPERATOR);
+		createEAttribute(xBinaryOperationEClass, XBINARY_OPERATION__REASSIGN_FIRST_ARGUMENT);
 
 		xUnaryOperationEClass = createEClass(XUNARY_OPERATION);
 		createEReference(xUnaryOperationEClass, XUNARY_OPERATION__OPERAND);
+
+		xPostfixOperationEClass = createEClass(XPOSTFIX_OPERATION);
+		createEReference(xPostfixOperationEClass, XPOSTFIX_OPERATION__OPERAND);
 
 		xForLoopExpressionEClass = createEClass(XFOR_LOOP_EXPRESSION);
 		createEReference(xForLoopExpressionEClass, XFOR_LOOP_EXPRESSION__FOR_EXPRESSION);
@@ -1730,6 +1761,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xCastedExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xBinaryOperationEClass.getESuperTypes().add(this.getXAbstractFeatureCall());
 		xUnaryOperationEClass.getESuperTypes().add(this.getXAbstractFeatureCall());
+		xPostfixOperationEClass.getESuperTypes().add(this.getXAbstractFeatureCall());
 		xForLoopExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xBasicForLoopExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xAbstractWhileExpressionEClass.getESuperTypes().add(this.getXExpression());
@@ -1797,6 +1829,8 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 
 		addEOperation(xAbstractFeatureCallEClass, ecorePackage.getEBoolean(), "isTypeLiteral", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(xAbstractFeatureCallEClass, ecorePackage.getEBoolean(), "isOperation", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(xMemberFeatureCallEClass, XMemberFeatureCall.class, "XMemberFeatureCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXMemberFeatureCall_MemberCallTarget(), this.getXExpression(), null, "memberCallTarget", null, 0, 1, XMemberFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXMemberFeatureCall_MemberCallArguments(), this.getXExpression(), null, "memberCallArguments", null, 0, -1, XMemberFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1853,10 +1887,13 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEClass(xBinaryOperationEClass, XBinaryOperation.class, "XBinaryOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXBinaryOperation_LeftOperand(), this.getXExpression(), null, "leftOperand", null, 0, 1, XBinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXBinaryOperation_RightOperand(), this.getXExpression(), null, "rightOperand", null, 0, 1, XBinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getXBinaryOperation_CompoundOperator(), ecorePackage.getEBoolean(), "compoundOperator", null, 0, 1, XBinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXBinaryOperation_ReassignFirstArgument(), ecorePackage.getEBoolean(), "reassignFirstArgument", null, 0, 1, XBinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xUnaryOperationEClass, XUnaryOperation.class, "XUnaryOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXUnaryOperation_Operand(), this.getXExpression(), null, "operand", null, 0, 1, XUnaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xPostfixOperationEClass, XPostfixOperation.class, "XPostfixOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXPostfixOperation_Operand(), this.getXExpression(), null, "operand", null, 0, 1, XPostfixOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xForLoopExpressionEClass, XForLoopExpression.class, "XForLoopExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXForLoopExpression_ForExpression(), this.getXExpression(), null, "forExpression", null, 0, 1, XForLoopExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

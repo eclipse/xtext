@@ -33,14 +33,22 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XNumberLiteral;
+import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.CompoundAssignment;
+import org.eclipse.xtext.xbase.lib.ByteExtensions;
+import org.eclipse.xtext.xbase.lib.CharacterExtensions;
+import org.eclipse.xtext.xbase.lib.DoubleExtensions;
+import org.eclipse.xtext.xbase.lib.FloatExtensions;
 import org.eclipse.xtext.xbase.lib.Inline;
+import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.LongExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.ReassignFirstArgument;
+import org.eclipse.xtext.xbase.lib.ShortExtensions;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 
 import com.google.inject.Inject;
@@ -90,7 +98,7 @@ public class XExpressionHelper {
 	public boolean hasSideEffects(XAbstractFeatureCall featureCall, boolean inspectContents) {
 		if (featureCall instanceof XBinaryOperation) {
 			XBinaryOperation binaryOperation = (XBinaryOperation) featureCall;
-			if (binaryOperation.isCompoundOperator()) {
+			if (binaryOperation.isReassignFirstArgument()) {
 				return true;
 			}
 		}
@@ -124,6 +132,10 @@ public class XExpressionHelper {
 	
 	public JvmAnnotationReference findInlineAnnotation(XAbstractFeatureCall featureCall) {
 		final JvmIdentifiableElement feature = featureCall.getFeature();
+		return findInlineAnnotation(feature);
+	}
+
+	public JvmAnnotationReference findInlineAnnotation(final JvmIdentifiableElement feature) {
 		if (feature instanceof JvmAnnotationTarget) {
 			return findAnnotation((JvmAnnotationTarget) feature, Inline.class.getName());
 		}
@@ -132,12 +144,12 @@ public class XExpressionHelper {
 	
 	public JvmAnnotationReference findCompoundAssignmentAnnotation(XAbstractFeatureCall featureCall) {
 		final JvmIdentifiableElement feature = featureCall.getFeature();
-		return findCompoundAssignmentAnnotation(feature);
+		return findReassignFirstArgumentAnnotation(feature);
 	}
 
-	public JvmAnnotationReference findCompoundAssignmentAnnotation(JvmIdentifiableElement feature) {
+	public JvmAnnotationReference findReassignFirstArgumentAnnotation(JvmIdentifiableElement feature) {
 		if (feature instanceof JvmAnnotationTarget) {
-			return findAnnotation((JvmAnnotationTarget) feature, CompoundAssignment.class.getName());
+			return findAnnotation((JvmAnnotationTarget) feature, ReassignFirstArgument.class.getName());
 		}
 		return null;
 	}
@@ -168,6 +180,55 @@ public class XExpressionHelper {
 
 	public String getElvisOperator() {
 		return "?:";
+	}
+	
+	public boolean isGetAndAssign(XAbstractFeatureCall featureCall) {
+		if (!(featureCall instanceof XPostfixOperation)) {
+			return false;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.MINUS_MINUS, DoubleExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.PLUS_PLUS, DoubleExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.MINUS_MINUS, FloatExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.PLUS_PLUS, FloatExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.MINUS_MINUS, LongExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.PLUS_PLUS, LongExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.MINUS_MINUS, IntegerExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.PLUS_PLUS, IntegerExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.MINUS_MINUS, ShortExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.PLUS_PLUS, ShortExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.MINUS_MINUS, CharacterExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.PLUS_PLUS, CharacterExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.MINUS_MINUS, ByteExtensions.class)) {
+			return true;
+		}
+		if (isOperatorFromExtension(featureCall, OperatorMapping.PLUS_PLUS, ByteExtensions.class)) {
+			return true;
+		}
+		return false;
 	}
 
 	public boolean isShortCircuitOperation(XAbstractFeatureCall featureCall) {
@@ -202,7 +263,7 @@ public class XExpressionHelper {
 		methodNames.add(operatorMapping.getMethodName(operatorSymbol));
 		if (featureCall instanceof XBinaryOperation) {
 			XBinaryOperation binaryOperation = (XBinaryOperation) featureCall;
-			if (binaryOperation.isCompoundOperator()) {
+			if (binaryOperation.isReassignFirstArgument()) {
 				QualifiedName simpleOperator = operatorMapping.getSimpleOperator(operatorSymbol);
 				if (simpleOperator != null) {
 					methodNames.add(operatorMapping.getMethodName(simpleOperator));

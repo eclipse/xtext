@@ -139,18 +139,15 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		XAbstractFeatureCall featureCall = getFeatureCall();
-		if (featureCall instanceof XBinaryOperation) {
-			XBinaryOperation binaryOperation = (XBinaryOperation) featureCall;
-			if (binaryOperation.isCompoundOperator()) {
-				LightweightTypeReference actualType = getDeclaredType(featureCall.getFeature());
-				LightweightTypeReference expectedType = getActualType(getArguments().get(0));
-				if (!expectedType.getIdentifier().equals(actualType.getIdentifier())) {
-					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, String.format(
-							"Type mismatch: cannot convert from %s to %s", actualType.getSimpleName(), expectedType.getSimpleName()),
-							getExpression(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
-					result.accept(diagnostic);
-					return false;
-				}
+		if (isReassignFirstArgument(featureCall)) {
+			LightweightTypeReference actualType = getDeclaredType(featureCall.getFeature());
+			LightweightTypeReference expectedType = getActualType(getArguments().get(0));
+			if (!expectedType.getIdentifier().equals(actualType.getIdentifier())) {
+				AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, String.format(
+						"Type mismatch: cannot convert from %s to %s", actualType.getSimpleName(), expectedType.getSimpleName()),
+						getExpression(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+				result.accept(diagnostic);
+				return false;
 			}
 		}
 		if (isInvalidStaticSyntax()) {
@@ -245,6 +242,14 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			}
 		}
 		return true;
+	}
+
+	protected boolean isReassignFirstArgument(XAbstractFeatureCall featureCall) {
+		if (featureCall instanceof XBinaryOperation) {
+			XBinaryOperation binaryOperation = (XBinaryOperation) featureCall;
+			return binaryOperation.isReassignFirstArgument();	
+		}
+		return false;
 	}
 	
 	/**
@@ -874,11 +879,11 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				String methodName = feature.getSimpleName();
 				if (operatorMapping.isCompoundMethod(methodName)) {
 					XExpressionHelper expressionHelper = services.getExpressionHelper();
-					if (expressionHelper.findCompoundAssignmentAnnotation(feature) != null) {
-						binaryOperation.setCompoundOperator(true);	
+					if (expressionHelper.findReassignFirstArgumentAnnotation(feature) != null) {
+						binaryOperation.setReassignFirstArgument(true);
 					}
 				} else {
-					binaryOperation.setCompoundOperator(true);
+					binaryOperation.setReassignFirstArgument(true);
 				}
 			}
 		}

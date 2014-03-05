@@ -190,6 +190,15 @@ public interface XbaseFactory extends EFactory
 	XUnaryOperation createXUnaryOperation();
 
 	/**
+	 * Returns a new object of class '<em>XPostfix Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XPostfix Operation</em>'.
+	 * @generated
+	 */
+	XPostfixOperation createXPostfixOperation();
+
+	/**
 	 * Returns a new object of class '<em>XFor Loop Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

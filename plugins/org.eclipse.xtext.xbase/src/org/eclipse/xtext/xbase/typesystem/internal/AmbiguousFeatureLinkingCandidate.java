@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -39,6 +40,8 @@ public class AmbiguousFeatureLinkingCandidate extends AbstractAmbiguousLinkingCa
 			return "binary operation";
 		} else if (expression instanceof XUnaryOperation) {
 			return "unary operation";
+		} else if (expression instanceof XPostfixOperation) {
+			return "postfix operation";
 		} else {
 			return "feature call";
 		}
@@ -47,7 +50,7 @@ public class AmbiguousFeatureLinkingCandidate extends AbstractAmbiguousLinkingCa
 	@Override
 	protected String getFeatureTypeName() {
 		XExpression expression = getExpression();
-		if (expression instanceof XBinaryOperation || expression instanceof XUnaryOperation) {
+		if (expression instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) expression).isOperation()) {
 			return "operator declaration";
 		}
 		if (getPrimaryCandidate().isExtension()) {

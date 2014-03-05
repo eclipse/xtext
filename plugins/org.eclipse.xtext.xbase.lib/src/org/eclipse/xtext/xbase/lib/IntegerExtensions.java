@@ -240,6 +240,54 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	/**
+	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * 
+	 * @param a  an integer.
+	 * @return   <code>a--</code>
+	 * @since 2.6
+	 */
+	@Inline(value="$1--")
+	public static int operator_minusMinus(int a) {
+		return a--;
+	}
+	
+	/**
+	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * 
+	 * @param a  an integer.
+	 * @return   <code>a--</code>
+	 * @since 2.6
+	 */
+	@Inline(value="$1--")
+	public static int operator_minusMinus(Integer a) {
+		return a--;
+	}
+	
+	/**
+	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * 
+	 * @param a  an integer.
+	 * @return   <code>a++</code>
+	 * @since 2.6
+	 */
+	@Inline(value="$1++")
+	public static int operator_plusPlus(int a) {
+		return a++;
+	}
+	
+	/**
+	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * 
+	 * @param a  an integer.
+	 * @return   <code>a++</code>
+	 * @since 2.6
+	 */
+	@Inline(value="$1++")
+	public static int operator_plusPlus(Integer a) {
+		return a++;
+	}
+	
+	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
 	 * @param a  an integer.

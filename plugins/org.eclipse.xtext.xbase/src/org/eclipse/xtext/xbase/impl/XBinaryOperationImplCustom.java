@@ -47,4 +47,9 @@ public class XBinaryOperationImplCustom extends XBinaryOperationImpl {
 		return isExtension(getLeftOperand());
 	}
 	
+	@Override
+	public boolean isOperation() {
+		return true;
+	}
+	
 }

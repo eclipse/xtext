@@ -187,6 +187,11 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 				return createXUnaryOperationAdapter();
 			}
 			@Override
+			public Adapter caseXPostfixOperation(XPostfixOperation object)
+			{
+				return createXPostfixOperationAdapter();
+			}
+			@Override
 			public Adapter caseXForLoopExpression(XForLoopExpression object)
 			{
 				return createXForLoopExpressionAdapter();
@@ -589,6 +594,21 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXUnaryOperationAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XPostfixOperation <em>XPostfix Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XPostfixOperation
+	 * @generated
+	 */
+	public Adapter createXPostfixOperationAdapter()
 	{
 		return null;
 	}

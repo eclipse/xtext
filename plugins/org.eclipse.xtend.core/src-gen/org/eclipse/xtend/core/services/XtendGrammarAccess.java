@@ -1370,14 +1370,15 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOpOtherParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cOpMultiParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		private final RuleCall cOpUnaryParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final RuleCall cOpPostfixParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
 		
 		//Operators:
 		//	OpMultiAssign //	| OpAdd completely contained in OpUnary
-		//	| OpOr | OpAnd | OpEquality | OpCompare | OpOther | OpMulti | OpUnary;
+		//	| OpOr | OpAnd | OpEquality | OpCompare | OpOther | OpMulti | OpUnary | OpPostfix;
 		public ParserRule getRule() { return rule; }
 
 		//OpMultiAssign //	| OpAdd completely contained in OpUnary
-		//| OpOr | OpAnd | OpEquality | OpCompare | OpOther | OpMulti | OpUnary
+		//| OpOr | OpAnd | OpEquality | OpCompare | OpOther | OpMulti | OpUnary | OpPostfix
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//OpMultiAssign
@@ -1403,6 +1404,9 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 
 		//OpUnary
 		public RuleCall getOpUnaryParserRuleCall_7() { return cOpUnaryParserRuleCall_7; }
+
+		//OpPostfix
+		public RuleCall getOpPostfixParserRuleCall_8() { return cOpPostfixParserRuleCall_8; }
 	}
 
 	public class XtendEnumLiteralElements extends AbstractParserRuleElementFinder {
@@ -2696,7 +2700,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 
 	//Operators:
 	//	OpMultiAssign //	| OpAdd completely contained in OpUnary
-	//	| OpOr | OpAnd | OpEquality | OpCompare | OpOther | OpMulti | OpUnary;
+	//	| OpOr | OpAnd | OpEquality | OpCompare | OpOther | OpMulti | OpUnary | OpPostfix;
 	public OperatorsElements getOperatorsAccess() {
 		return (pOperators != null) ? pOperators : (pOperators = new OperatorsElements());
 	}
@@ -3336,13 +3340,33 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XCastedExpression returns XExpression:
-	//	XMemberFeatureCall (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)*;
+	//	XPostfixOperation (=> ({XCastedExpression.target=current} "as") type=JvmTypeReference)*;
 	public XbaseGrammarAccess.XCastedExpressionElements getXCastedExpressionAccess() {
 		return gaXbaseWithAnnotations.getXCastedExpressionAccess();
 	}
 	
 	public ParserRule getXCastedExpressionRule() {
 		return getXCastedExpressionAccess().getRule();
+	}
+
+	//XPostfixOperation returns XExpression:
+	//	XMemberFeatureCall => ({XPostfixOperation.operand=current} feature=[types::JvmIdentifiableElement|OpPostfix])?;
+	public XbaseGrammarAccess.XPostfixOperationElements getXPostfixOperationAccess() {
+		return gaXbaseWithAnnotations.getXPostfixOperationAccess();
+	}
+	
+	public ParserRule getXPostfixOperationRule() {
+		return getXPostfixOperationAccess().getRule();
+	}
+
+	//OpPostfix:
+	//	"++" | "--";
+	public XbaseGrammarAccess.OpPostfixElements getOpPostfixAccess() {
+		return gaXbaseWithAnnotations.getOpPostfixAccess();
+	}
+	
+	public ParserRule getOpPostfixRule() {
+		return getOpPostfixAccess().getRule();
 	}
 
 	//XMemberFeatureCall returns XExpression:
