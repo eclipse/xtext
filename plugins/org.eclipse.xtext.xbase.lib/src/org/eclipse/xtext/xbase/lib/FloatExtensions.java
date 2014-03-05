@@ -32,6 +32,54 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	/**
+	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * 
+	 * @param a  a float.
+	 * @return   <code>a--</code>
+	 * @since 2.6
+	 */
+	@Inline(value="$1--")
+	public static float operator_minusMinus(float a) {
+		return a--;
+	}
+	
+	/**
+	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * 
+	 * @param a  a float.
+	 * @return   <code>a--</code>
+	 * @since 2.6
+	 */
+	@Inline(value="$1--")
+	public static float operator_minusMinus(Float a) {
+		return a--;
+	}
+	
+	/**
+	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * 
+	 * @param a  a float.
+	 * @return   <code>a++</code>
+	 * @since 2.6
+	 */
+	@Inline(value="$1++")
+	public static float operator_plusPlus(float a) {
+		return a++;
+	}
+	
+	/**
+	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * 
+	 * @param a  a float.
+	 * @return   <code>a++</code>
+	 * @since 2.6
+	 */
+	@Inline(value="$1++")
+	public static float operator_plusPlus(Float a) {
+		return a++;
+	}
+	
+	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
 	 * @param a  a float.

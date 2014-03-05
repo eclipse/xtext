@@ -16,7 +16,7 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 
 /**
- * This annotation is used to mark a method as a compound assignment operator.
+ * The annotated function assigns the returned value to the first argument.
  * 
  * @author Anton Kosyakov - Initial contribution and API
  * @since 2.6
@@ -25,6 +25,6 @@ import com.google.common.annotations.GwtCompatible;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = { ElementType.METHOD })
 @GwtCompatible
-public @interface CompoundAssignment {
+public @interface ReassignFirstArgument {
 
 }
