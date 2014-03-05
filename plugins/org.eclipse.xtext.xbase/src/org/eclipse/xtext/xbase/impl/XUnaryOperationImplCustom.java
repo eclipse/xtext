@@ -44,4 +44,10 @@ public class XUnaryOperationImplCustom extends XUnaryOperationImpl {
 	public boolean isExtension() {
 		return isExtension(getOperand());
 	}
+	
+	@Override
+	public boolean isOperation() {
+		return true;
+	}
+
 }

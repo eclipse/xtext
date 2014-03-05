@@ -175,4 +175,9 @@ public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCal
 		return result;
 	}
 	
+	@Override
+	public boolean isOperation() {
+		return false;
+	}
+	
 }

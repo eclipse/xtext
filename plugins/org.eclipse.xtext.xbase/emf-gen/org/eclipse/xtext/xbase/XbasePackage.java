@@ -1063,13 +1063,13 @@ public interface XbasePackage extends EPackage
 	int XBINARY_OPERATION__RIGHT_OPERAND = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Compound Operator</b></em>' attribute.
+	 * The feature id for the '<em><b>Reassign First Argument</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XBINARY_OPERATION__COMPOUND_OPERATOR = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+	int XBINARY_OPERATION__REASSIGN_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>XBinary Operation</em>' class.
@@ -1163,6 +1163,88 @@ public interface XbasePackage extends EPackage
 	int XUNARY_OPERATION_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XPostfixOperationImpl <em>XPostfix Operation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XPostfixOperationImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXPostfixOperation()
+	 * @generated
+	 */
+	int XPOSTFIX_OPERATION = 21;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XPOSTFIX_OPERATION__FEATURE = XABSTRACT_FEATURE_CALL__FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XPOSTFIX_OPERATION__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Implicit Receiver</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XPOSTFIX_OPERATION__IMPLICIT_RECEIVER = XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER;
+
+	/**
+	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XPOSTFIX_OPERATION__INVALID_FEATURE_ISSUE_CODE = XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Valid Feature</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XPOSTFIX_OPERATION__VALID_FEATURE = XABSTRACT_FEATURE_CALL__VALID_FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Implicit First Argument</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XPOSTFIX_OPERATION__IMPLICIT_FIRST_ARGUMENT = XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
+
+	/**
+	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XPOSTFIX_OPERATION__OPERAND = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>XPostfix Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XPOSTFIX_OPERATION_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XForLoopExpressionImpl <em>XFor Loop Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1170,7 +1252,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXForLoopExpression()
 	 * @generated
 	 */
-	int XFOR_LOOP_EXPRESSION = 21;
+	int XFOR_LOOP_EXPRESSION = 22;
 
 	/**
 	 * The feature id for the '<em><b>For Expression</b></em>' containment reference.
@@ -1216,7 +1298,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXBasicForLoopExpression()
 	 * @generated
 	 */
-	int XBASIC_FOR_LOOP_EXPRESSION = 22;
+	int XBASIC_FOR_LOOP_EXPRESSION = 23;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1271,7 +1353,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAbstractWhileExpression()
 	 * @generated
 	 */
-	int XABSTRACT_WHILE_EXPRESSION = 23;
+	int XABSTRACT_WHILE_EXPRESSION = 24;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -1308,7 +1390,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXDoWhileExpression()
 	 * @generated
 	 */
-	int XDO_WHILE_EXPRESSION = 24;
+	int XDO_WHILE_EXPRESSION = 25;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -1345,7 +1427,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXWhileExpression()
 	 * @generated
 	 */
-	int XWHILE_EXPRESSION = 25;
+	int XWHILE_EXPRESSION = 26;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -1382,7 +1464,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXTypeLiteral()
 	 * @generated
 	 */
-	int XTYPE_LITERAL = 26;
+	int XTYPE_LITERAL = 27;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1419,7 +1501,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXInstanceOfExpression()
 	 * @generated
 	 */
-	int XINSTANCE_OF_EXPRESSION = 27;
+	int XINSTANCE_OF_EXPRESSION = 28;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1456,7 +1538,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXThrowExpression()
 	 * @generated
 	 */
-	int XTHROW_EXPRESSION = 28;
+	int XTHROW_EXPRESSION = 29;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1484,7 +1566,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXTryCatchFinallyExpression()
 	 * @generated
 	 */
-	int XTRY_CATCH_FINALLY_EXPRESSION = 29;
+	int XTRY_CATCH_FINALLY_EXPRESSION = 30;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1530,7 +1612,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCatchClause()
 	 * @generated
 	 */
-	int XCATCH_CLAUSE = 30;
+	int XCATCH_CLAUSE = 31;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1567,7 +1649,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAssignment()
 	 * @generated
 	 */
-	int XASSIGNMENT = 31;
+	int XASSIGNMENT = 32;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -1676,7 +1758,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXReturnExpression()
 	 * @generated
 	 */
-	int XRETURN_EXPRESSION = 32;
+	int XRETURN_EXPRESSION = 33;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1704,7 +1786,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXSynchronizedExpression()
 	 * @generated
 	 */
-	int XSYNCHRONIZED_EXPRESSION = 33;
+	int XSYNCHRONIZED_EXPRESSION = 34;
 
 	/**
 	 * The feature id for the '<em><b>Param</b></em>' containment reference.
@@ -2485,15 +2567,15 @@ public interface XbasePackage extends EPackage
 	EReference getXBinaryOperation_RightOperand();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XBinaryOperation#isCompoundOperator <em>Compound Operator</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XBinaryOperation#isReassignFirstArgument <em>Reassign First Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Compound Operator</em>'.
-	 * @see org.eclipse.xtext.xbase.XBinaryOperation#isCompoundOperator()
+	 * @return the meta object for the attribute '<em>Reassign First Argument</em>'.
+	 * @see org.eclipse.xtext.xbase.XBinaryOperation#isReassignFirstArgument()
 	 * @see #getXBinaryOperation()
 	 * @generated
 	 */
-	EAttribute getXBinaryOperation_CompoundOperator();
+	EAttribute getXBinaryOperation_ReassignFirstArgument();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XUnaryOperation <em>XUnary Operation</em>}'.
@@ -2515,6 +2597,27 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXUnaryOperation_Operand();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XPostfixOperation <em>XPostfix Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XPostfix Operation</em>'.
+	 * @see org.eclipse.xtext.xbase.XPostfixOperation
+	 * @generated
+	 */
+	EClass getXPostfixOperation();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XPostfixOperation#getOperand <em>Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Operand</em>'.
+	 * @see org.eclipse.xtext.xbase.XPostfixOperation#getOperand()
+	 * @see #getXPostfixOperation()
+	 * @generated
+	 */
+	EReference getXPostfixOperation_Operand();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XForLoopExpression <em>XFor Loop Expression</em>}'.
@@ -3556,12 +3659,12 @@ public interface XbasePackage extends EPackage
 		EReference XBINARY_OPERATION__RIGHT_OPERAND = eINSTANCE.getXBinaryOperation_RightOperand();
 
 		/**
-		 * The meta object literal for the '<em><b>Compound Operator</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Reassign First Argument</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute XBINARY_OPERATION__COMPOUND_OPERATOR = eINSTANCE.getXBinaryOperation_CompoundOperator();
+		EAttribute XBINARY_OPERATION__REASSIGN_FIRST_ARGUMENT = eINSTANCE.getXBinaryOperation_ReassignFirstArgument();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XUnaryOperationImpl <em>XUnary Operation</em>}' class.
@@ -3580,6 +3683,24 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XUNARY_OPERATION__OPERAND = eINSTANCE.getXUnaryOperation_Operand();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XPostfixOperationImpl <em>XPostfix Operation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XPostfixOperationImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXPostfixOperation()
+		 * @generated
+		 */
+		EClass XPOSTFIX_OPERATION = eINSTANCE.getXPostfixOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XPOSTFIX_OPERATION__OPERAND = eINSTANCE.getXPostfixOperation_Operand();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XForLoopExpressionImpl <em>XFor Loop Expression</em>}' class.

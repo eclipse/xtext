@@ -23,10 +23,12 @@ import com.google.inject.Singleton;
  * The mapping of operators to their respective method names.
  * 
  * By default, the following mapping is applied.
-  * <table>
+ * <table>
  *   <tr><th>Operator</th><th>Method Name</th></tr>
  *   <tr><td>+</td><td>operator_plus</td></tr>
+ *   <tr><td>++</td><td>operator_plusPlus</td></tr>
  *   <tr><td>-</td><td>operator_minus</td></tr>
+ *   <tr><td>--</td><td>operator_minusMinus</td></tr>
  *   <tr><td>**</td><td>operator_power</td></tr>
  *   <tr><td>*</td><td>operator_multiply</td></tr>
  *   <tr><td>/</td><td>operator_divide</td></tr>
@@ -72,7 +74,9 @@ import com.google.inject.Singleton;
 public class OperatorMapping {
 	
 	public static final QualifiedName PLUS = create("+");
+	public static final QualifiedName PLUS_PLUS = create("++");
 	public static final QualifiedName MINUS = create("-");
+	public static final QualifiedName MINUS_MINUS = create("--");
 	public static final QualifiedName POWER = create("**");
 	public static final QualifiedName MULTIPLY = create("*");
 	public static final QualifiedName DIVIDE = create("/");
@@ -121,7 +125,9 @@ public class OperatorMapping {
 	
 	protected void initializeMapping() {
 		map.put(PLUS, create(OP_PREFIX+"plus"));
+		map.put(PLUS_PLUS, create(OP_PREFIX+"plusPlus"));
 		map.put(MINUS, create(OP_PREFIX+"minus"));
+		map.put(MINUS_MINUS, create(OP_PREFIX+"minusMinus"));
 		map.put(POWER, create(OP_PREFIX+"power"));
 		map.put(MULTIPLY, create(OP_PREFIX+"multiply"));
 		map.put(DIVIDE, create(OP_PREFIX+"divide"));

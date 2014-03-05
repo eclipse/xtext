@@ -54,7 +54,6 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -185,7 +184,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected boolean needMultiAssignment(XAbstractFeatureCall expr) {
 		if (expr instanceof XBinaryOperation) {
 			XBinaryOperation binaryOperation = (XBinaryOperation) expr;
-			return binaryOperation.isCompoundOperator();
+			return binaryOperation.isReassignFirstArgument();
 		}
 		return false;
 	}
@@ -355,13 +354,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 		if (expr.eContainingFeature() == XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND) {
 			XBinaryOperation binaryOperation = (XBinaryOperation) expr.eContainer();
-			if (binaryOperation.isCompoundOperator()) {
+			if (binaryOperation.isReassignFirstArgument()) {
 				return true;
 			}
 		}
 		if (expr instanceof XBinaryOperation) {
 			XBinaryOperation binaryOperation = (XBinaryOperation) expr;
-			if (binaryOperation.isCompoundOperator()) {
+			if (binaryOperation.isReassignFirstArgument()) {
 				return true;
 			}
 		}
@@ -373,7 +372,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			// we need to prefer expressions for constant expressions, so they get compiled correctly.
 			// a binary or unary operator is constant if it's method is annotated with @Inline(..., constantExpression=true)
 			// and all arguments don't require variableDeclarations.
-			if (featureCall instanceof XBinaryOperation || featureCall instanceof XUnaryOperation) {
+			if (featureCall.isOperation()) {
 				JvmAnnotationReference inlineAnnotation = expressionHelper.findInlineAnnotation(featureCall);
 				if (inlineAnnotation == null)
 					return true;

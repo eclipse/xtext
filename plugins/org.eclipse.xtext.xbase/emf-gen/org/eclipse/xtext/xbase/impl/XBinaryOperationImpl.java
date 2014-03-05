@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBinaryOperationImpl#getLeftOperand <em>Left Operand</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBinaryOperationImpl#getRightOperand <em>Right Operand</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XBinaryOperationImpl#isCompoundOperator <em>Compound Operator</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XBinaryOperationImpl#isReassignFirstArgument <em>Reassign First Argument</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,24 +57,24 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 	protected XExpression rightOperand;
 
 	/**
-	 * The default value of the '{@link #isCompoundOperator() <em>Compound Operator</em>}' attribute.
+	 * The default value of the '{@link #isReassignFirstArgument() <em>Reassign First Argument</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isCompoundOperator()
+	 * @see #isReassignFirstArgument()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean COMPOUND_OPERATOR_EDEFAULT = false;
+	protected static final boolean REASSIGN_FIRST_ARGUMENT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isCompoundOperator() <em>Compound Operator</em>}' attribute.
+	 * The cached value of the '{@link #isReassignFirstArgument() <em>Reassign First Argument</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isCompoundOperator()
+	 * @see #isReassignFirstArgument()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean compoundOperator = COMPOUND_OPERATOR_EDEFAULT;
+	protected boolean reassignFirstArgument = REASSIGN_FIRST_ARGUMENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -198,9 +198,9 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isCompoundOperator()
+	public boolean isReassignFirstArgument()
 	{
-		return compoundOperator;
+		return reassignFirstArgument;
 	}
 
 	/**
@@ -208,12 +208,12 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCompoundOperator(boolean newCompoundOperator)
+	public void setReassignFirstArgument(boolean newReassignFirstArgument)
 	{
-		boolean oldCompoundOperator = compoundOperator;
-		compoundOperator = newCompoundOperator;
+		boolean oldReassignFirstArgument = reassignFirstArgument;
+		reassignFirstArgument = newReassignFirstArgument;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XBINARY_OPERATION__COMPOUND_OPERATOR, oldCompoundOperator, compoundOperator));
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XBINARY_OPERATION__REASSIGN_FIRST_ARGUMENT, oldReassignFirstArgument, reassignFirstArgument));
 	}
 
 	/**
@@ -248,8 +248,8 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 				return getLeftOperand();
 			case XbasePackage.XBINARY_OPERATION__RIGHT_OPERAND:
 				return getRightOperand();
-			case XbasePackage.XBINARY_OPERATION__COMPOUND_OPERATOR:
-				return isCompoundOperator();
+			case XbasePackage.XBINARY_OPERATION__REASSIGN_FIRST_ARGUMENT:
+				return isReassignFirstArgument();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -270,8 +270,8 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 			case XbasePackage.XBINARY_OPERATION__RIGHT_OPERAND:
 				setRightOperand((XExpression)newValue);
 				return;
-			case XbasePackage.XBINARY_OPERATION__COMPOUND_OPERATOR:
-				setCompoundOperator((Boolean)newValue);
+			case XbasePackage.XBINARY_OPERATION__REASSIGN_FIRST_ARGUMENT:
+				setReassignFirstArgument((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -293,8 +293,8 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 			case XbasePackage.XBINARY_OPERATION__RIGHT_OPERAND:
 				setRightOperand((XExpression)null);
 				return;
-			case XbasePackage.XBINARY_OPERATION__COMPOUND_OPERATOR:
-				setCompoundOperator(COMPOUND_OPERATOR_EDEFAULT);
+			case XbasePackage.XBINARY_OPERATION__REASSIGN_FIRST_ARGUMENT:
+				setReassignFirstArgument(REASSIGN_FIRST_ARGUMENT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -314,8 +314,8 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 				return leftOperand != null;
 			case XbasePackage.XBINARY_OPERATION__RIGHT_OPERAND:
 				return rightOperand != null;
-			case XbasePackage.XBINARY_OPERATION__COMPOUND_OPERATOR:
-				return compoundOperator != COMPOUND_OPERATOR_EDEFAULT;
+			case XbasePackage.XBINARY_OPERATION__REASSIGN_FIRST_ARGUMENT:
+				return reassignFirstArgument != REASSIGN_FIRST_ARGUMENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -331,8 +331,8 @@ public class XBinaryOperationImpl extends XAbstractFeatureCallImplCustom impleme
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (compoundOperator: ");
-		result.append(compoundOperator);
+		result.append(" (reassignFirstArgument: ");
+		result.append(reassignFirstArgument);
 		result.append(')');
 		return result.toString();
 	}

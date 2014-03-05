@@ -18,7 +18,7 @@ package org.eclipse.xtext.xbase;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XBinaryOperation#getLeftOperand <em>Left Operand</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XBinaryOperation#getRightOperand <em>Right Operand</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XBinaryOperation#isCompoundOperator <em>Compound Operator</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XBinaryOperation#isReassignFirstArgument <em>Reassign First Argument</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,29 +81,29 @@ public interface XBinaryOperation extends XAbstractFeatureCall
 	void setRightOperand(XExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>Compound Operator</b></em>' attribute.
+	 * Returns the value of the '<em><b>Reassign First Argument</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Compound Operator</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Reassign First Argument</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Compound Operator</em>' attribute.
-	 * @see #setCompoundOperator(boolean)
-	 * @see org.eclipse.xtext.xbase.XbasePackage#getXBinaryOperation_CompoundOperator()
+	 * @return the value of the '<em>Reassign First Argument</em>' attribute.
+	 * @see #setReassignFirstArgument(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXBinaryOperation_ReassignFirstArgument()
 	 * @model
 	 * @generated
 	 */
-	boolean isCompoundOperator();
+	boolean isReassignFirstArgument();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XBinaryOperation#isCompoundOperator <em>Compound Operator</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XBinaryOperation#isReassignFirstArgument <em>Reassign First Argument</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Compound Operator</em>' attribute.
-	 * @see #isCompoundOperator()
+	 * @param value the new value of the '<em>Reassign First Argument</em>' attribute.
+	 * @see #isReassignFirstArgument()
 	 * @generated
 	 */
-	void setCompoundOperator(boolean value);
+	void setReassignFirstArgument(boolean value);
 
 } // XBinaryOperation

@@ -449,6 +449,18 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isOperation()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
