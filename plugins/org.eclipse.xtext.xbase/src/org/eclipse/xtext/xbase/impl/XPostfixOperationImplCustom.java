@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,20 +13,21 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * @author Anton Kosyakov - Initial contribution and API
  */
-public class XUnaryOperationImplCustom extends XUnaryOperationImpl {
+public class XPostfixOperationImplCustom extends XPostfixOperationImpl {
 
 	@Override
 	public String toString() {
-		return getConcreteSyntaxFeatureName() + " " + getExpressionAsString(getOperand());
+		return getExpressionAsString(getOperand()) + " " + getConcreteSyntaxFeatureName();
 	}
 	
 	@Override
 	public EList<XExpression> getExplicitArguments() {
 		BasicEList<XExpression> result = new BasicEList<XExpression>();
-		if (getOperand()!=null)
+		if (getOperand() != null) {
 			result.add(getOperand());
+		}
 		return result;
 	}
 	

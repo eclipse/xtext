@@ -188,6 +188,11 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 		return keywordBasedConverterProvider.get();
 	}
 	
+	@ValueConverter(rule = "OpPostfix")
+	public IValueConverter<String> getOpPostfixConverter() {
+		return keywordBasedConverterProvider.get();
+	}
+	
 	@Inject
 	private IntUnderscoreValueConverter intUnderscoreValueConverter;
 	

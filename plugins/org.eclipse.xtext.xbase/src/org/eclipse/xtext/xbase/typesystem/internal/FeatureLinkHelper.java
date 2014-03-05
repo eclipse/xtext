@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -54,6 +55,9 @@ public class FeatureLinkHelper {
 			if (expression instanceof XUnaryOperation) {
 				return ((XUnaryOperation) expression).getOperand();
 			}
+			if (expression instanceof XPostfixOperation) {
+				return ((XPostfixOperation) expression).getOperand();
+			}
 		}
 		return null;
 	}
@@ -73,6 +77,9 @@ public class FeatureLinkHelper {
 		}
 		// explicit condition to make sure we thought about it
 		if (expression instanceof XUnaryOperation) {
+			return Collections.emptyList();
+		}
+		if (expression instanceof XPostfixOperation) {
 			return Collections.emptyList();
 		}
 		return Collections.emptyList();

@@ -38,7 +38,6 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
-import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
@@ -130,7 +129,7 @@ public class SerializerScopeProvider extends XbaseBatchScopeProvider implements 
 
 	protected IScope getExecutableScope(XAbstractFeatureCall call, JvmIdentifiableElement feature) {
 		QualifiedName name = QualifiedName.create(feature.getSimpleName());
-		if (call instanceof XBinaryOperation || call instanceof XUnaryOperation) {
+		if (call.isOperation()) {
 			QualifiedName operator = getOperator(call, name);
 			if (operator == null) {
 				return IScope.NULLSCOPE;
@@ -166,7 +165,7 @@ public class SerializerScopeProvider extends XbaseBatchScopeProvider implements 
 			return operator;
 		}
 		XBinaryOperation binaryOperation = (XBinaryOperation) call;
-		if (!binaryOperation.isCompoundOperator()) {
+		if (!binaryOperation.isReassignFirstArgument()) {
 			return operator;
 		}
 		if (operatorMapping.getCompoundOperators().contains(operator)) {

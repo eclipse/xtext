@@ -41,13 +41,11 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
-import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XTypeLiteral;
-import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
@@ -180,8 +178,7 @@ public class TypeUsageCollector {
 						collectStaticImportsFrom((XAbstractFeatureCall) next);
 					}
 				} 
-			} else if (next instanceof XBinaryOperation 
-					|| next instanceof XUnaryOperation
+			} else if ((next instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) next).isOperation())
 					|| (next instanceof XAssignment && !contains(currentThisType.getAllFeatures(), ((XAssignment) next).getFeature()))) {
 				collectStaticImportsFrom((XAbstractFeatureCall) next);
 			} else {
