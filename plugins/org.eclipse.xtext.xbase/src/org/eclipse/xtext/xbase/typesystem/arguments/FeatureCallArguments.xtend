@@ -41,6 +41,8 @@ interface IFeatureCallArguments {
 	
 	def boolean isProcessed(int argumentIndex)
 	
+	def boolean hasEmptyTrailingVarArg()
+	
 }
 
 /**

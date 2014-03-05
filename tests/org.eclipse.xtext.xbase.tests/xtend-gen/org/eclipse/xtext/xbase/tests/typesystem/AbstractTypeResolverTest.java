@@ -3779,6 +3779,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testDeferredTypeArgumentResolution_168() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(1, null as String[])\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
   public void testRecursiveTypeArgumentResolution_01() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(list)\n\t\t\tlist\n\t\t}", "ArrayList<Object>");
   }

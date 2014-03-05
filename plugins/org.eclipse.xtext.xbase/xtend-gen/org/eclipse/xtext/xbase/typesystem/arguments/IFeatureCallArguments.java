@@ -39,4 +39,6 @@ public interface IFeatureCallArguments {
   public abstract int getArgumentCount();
   
   public abstract boolean isProcessed(final int argumentIndex);
+  
+  public abstract boolean hasEmptyTrailingVarArg();
 }

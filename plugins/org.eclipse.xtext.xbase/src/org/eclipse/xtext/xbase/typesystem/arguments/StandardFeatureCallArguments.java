@@ -65,6 +65,10 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 		return arguments.size() + receiverFixup;
 	}
 	
+	public boolean hasEmptyTrailingVarArg() {
+		return false;
+	}
+	
 	@Nullable
 	protected XExpression internalGetArgument(int idx) {
 		if (idx < 0)

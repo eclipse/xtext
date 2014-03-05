@@ -14,6 +14,36 @@ import org.junit.Test
  */
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
+	@Test def void testDeferredTypeArgumentResolution() {
+		assertCompilesTo('''
+			class C {
+				def m() {
+					val list = newArrayList
+					list.addAll(1, null as String[])
+					list
+				}
+			}
+		''','''
+			import java.util.ArrayList;
+			import java.util.Collection;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Conversions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public ArrayList<String> m() {
+			    ArrayList<String> _xblockexpression = null;
+			    {
+			      final ArrayList<String> list = CollectionLiterals.<String>newArrayList();
+			      list.addAll(1, ((Collection<? extends String>)Conversions.doWrapArray(((String[]) null))));
+			      _xblockexpression = list;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testBug424145_01() {
 		assertCompilesTo('''
 			class C {

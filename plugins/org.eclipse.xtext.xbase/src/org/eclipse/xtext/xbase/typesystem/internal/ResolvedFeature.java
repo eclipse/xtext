@@ -134,7 +134,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	@Override
 	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {
 		super.resolveAgainstActualType(declaredType, actualType, state);
-		if (!isStatic() && !isExtension()) { // TODO necessary?
+		if (!isStatic() && !isExtension()) {
 			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(state.getReferenceOwner());
 			collector.processPairedReferences(declaredType, actualType);
 		}

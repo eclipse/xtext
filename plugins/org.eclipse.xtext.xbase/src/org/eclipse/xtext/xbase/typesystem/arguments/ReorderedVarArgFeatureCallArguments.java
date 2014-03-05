@@ -66,4 +66,9 @@ public class ReorderedVarArgFeatureCallArguments extends ReorderedFeatureCallArg
 		JvmFormalParameter parameter = parameters.get(idx);
 		return toLightweightTypeReference(parameter);
 	}
+	
+	@Override
+	public boolean hasEmptyTrailingVarArg() {
+		return arguments.size() < parameters.size();
+	}
 }

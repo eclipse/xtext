@@ -604,7 +604,7 @@ public class CompilerBug424329Test extends AbstractXtendCompilerTest {
     _builder.append("def static void main(String[] args) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("B.setMainDir(null)");
+    _builder.append("B.setMainDir(null) // == B.setMainDir(null, new String[0])");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
