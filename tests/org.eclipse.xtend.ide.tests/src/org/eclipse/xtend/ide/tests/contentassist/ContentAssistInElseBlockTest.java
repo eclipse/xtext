@@ -111,7 +111,7 @@ public class ContentAssistInElseBlockTest extends ContentAssistTest {
 	@Override
 	@Test public void testNull() throws Exception {
 		newBuilder().append("null").assertText("null", "!=", "!==", "+", "==", "===", "->", "?:", "=>",
-				"%", "*", "**", "-", "+=", "-=", "/", "<", "<=", "<=>", ">=", ">",
+				"%", "*", "**", "-", "+=", "-=", "/", "<", "<=", "<=>", ">=", ">", "++", "--",
 				/*it.*/"nullOrEmpty");
 	}
 	

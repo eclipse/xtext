@@ -51,12 +51,10 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
-import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
@@ -139,7 +137,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 					}
 				}
 			} 
-			if (call instanceof XBinaryOperation || call instanceof XUnaryOperation) {
+			if (call.isOperation()) {
 				JvmIdentifiableElement feature = call.getFeature();
 				if(feature.eIsProxy()) {
 					String operatorMethodName = getOperatorMethodName(call);

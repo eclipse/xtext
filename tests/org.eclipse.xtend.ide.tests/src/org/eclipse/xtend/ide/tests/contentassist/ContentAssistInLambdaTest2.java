@@ -49,7 +49,7 @@ public class ContentAssistInLambdaTest2 extends ContentAssistTest {
 	@Override
 	@Test public void testNull() throws Exception {
 		newBuilder().append("null").assertText("null", "!=", "!==", "+", "==", "===", "->", "?:", "=>",
-				"%", "*", "**", "-", "+=", "-=", "/", "<", "<=", "<=>", ">=", ">",
+				"%", "*", "**", "-", "+=", "-=", "/", "<", "<=", "<=>", ">=", ">", "++", "--",
 				/*it.*/"nullOrEmpty");
 	}
 	
