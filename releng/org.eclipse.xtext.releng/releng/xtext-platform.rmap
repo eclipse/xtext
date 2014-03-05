@@ -53,7 +53,7 @@
   <rm:locator searchPathRef="platform" failOnError="false"/>
   
   <rm:searchPath name="google-maven">
-    <rm:provider xsi:type="maven:MavenProvider" componentTypes="maven,osgi.bundle" readerType="maven2">
+    <rm:provider xsi:type="maven:MavenProvider" componentTypes="maven,osgi.bundle" source="false" readerType="maven2">
       <rm:uri format="{0}">
         <bc:propertyRef key="maven.repository.uri"/>
       </rm:uri>
