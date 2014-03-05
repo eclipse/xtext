@@ -39,7 +39,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.omg.PortableInterceptor.SUCCESSFUL;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -570,7 +569,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	
 	@Test public void testNull() throws Exception {
 		newBuilder().append("null").assertText("null", "!=", "!==", "+", "==", "===", "->", "?:", "=>",
-				"%", "*", "**", "-", "+=", "-=", "/", "<", "<=", "<=>", ">=", ">");
+				"%", "*", "**", "-", "+=", "-=", "/", "<", "<=", "<=>", ">=", ">", "++", "--");
 	}
 	
 	@Test public void testForLoop_01() throws Exception {
