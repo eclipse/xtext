@@ -58,9 +58,11 @@ public enum ConformanceHint {
 	 */
 	PROPAGATED_TYPE;  
 	
-	private static ConformanceHint[] shallowCheckedHints = { ConformanceHint.SYNONYM, ConformanceHint.VAR_ARG };
 	
 	public static int compareHints(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
+		if (leftConformance.equals(rightConformance)) {
+			return 0;
+		}
 		if (leftConformance.contains(ConformanceHint.SUCCESS) != rightConformance.contains(ConformanceHint.SUCCESS)) {
 			if (leftConformance.contains(ConformanceHint.SUCCESS))
 				return -1;
@@ -81,23 +83,8 @@ public enum ConformanceHint {
 				return 1;
 			return -1;
 		}
-		for(ConformanceHint hint: shallowCheckedHints) {
-			boolean leftContains = leftConformance.contains(hint);
-			boolean rightContains = rightConformance.contains(hint);
-			if (leftContains != rightContains) {
-				if (leftContains)
-					return 1;
-				return -1;
-			}
-		}
-		return 0;
-	}
-	
-	protected int compareByConformanceHint(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance, ConformanceHint unexpectedHint) {
-		boolean leftContains = leftConformance.contains(unexpectedHint);
-		boolean rightContains = rightConformance.contains(unexpectedHint);
-		if (leftContains != rightContains) {
-			if (leftContains)
+		if (leftConformance.contains(ConformanceHint.SYNONYM) != rightConformance.contains(ConformanceHint.SYNONYM)) {
+			if (leftConformance.contains(ConformanceHint.SYNONYM))
 				return 1;
 			return -1;
 		}

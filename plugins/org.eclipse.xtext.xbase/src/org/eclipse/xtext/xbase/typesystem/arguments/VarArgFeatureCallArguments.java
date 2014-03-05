@@ -40,4 +40,9 @@ public class VarArgFeatureCallArguments extends StandardFeatureCallArguments {
 		return new VarArgsFeatureCallArgumentSlot(this, nextUnprocessedArgument);
 	}
 	
+	@Override
+	public boolean hasEmptyTrailingVarArg() {
+		return arguments.size() < parameters.size();
+	}
+	
 }
