@@ -90,7 +90,7 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 					anchor = IExpressionScope.Anchor.RECEIVER;
 				}
 			}
-			IExpressionScope expressionScope = typeResolver.resolveTypes(context).getExpressionScope(context, reference, anchor);
+			IExpressionScope expressionScope = typeResolver.resolveTypes(context).getExpressionScope(context, anchor);
 			return expressionScope.getFeatureScope();
 		}
 		return delegateGetScope(context, reference);

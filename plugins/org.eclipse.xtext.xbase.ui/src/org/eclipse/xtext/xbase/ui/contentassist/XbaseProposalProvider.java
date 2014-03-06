@@ -57,7 +57,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
-import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -127,9 +126,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Inject
 	private IBatchTypeResolver typeResolver;
 	
-	@Inject
-	private IBatchScopeProvider batchScopeProvider;
-
 	public String getNextCategory() {
 		return getXbaseCrossReferenceProposalCreator().getNextCategory();
 	}
@@ -490,7 +486,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			ICompletionProposalAcceptor acceptor) {
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(getFeatureCallRuleName(), contentAssistContext);
 		IResolvedTypes resolvedTypes = context != null ? typeResolver.resolveTypes(context) : typeResolver.resolveTypes(contentAssistContext.getResource());
-		IExpressionScope expressionScope = resolvedTypes.getExpressionScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, anchor);
+		IExpressionScope expressionScope = resolvedTypes.getExpressionScope(context, anchor);
 		// TODO use the type name information
 		IScope scope = expressionScope.getFeatureScope();
 		getCrossReferenceProposalCreator().lookupCrossReference(scope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, getFeatureDescriptionPredicate(contentAssistContext), proposalFactory);
@@ -517,7 +513,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		String ruleName = getConcreteSyntaxRuleName(crossReference);
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(ruleName, contentAssistContext);
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(receiver);
-		IExpressionScope expressionScope = resolvedTypes.getExpressionScope(receiver, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.RECEIVER);
+		IExpressionScope expressionScope = resolvedTypes.getExpressionScope(receiver, IExpressionScope.Anchor.RECEIVER);
 		// TODO exploit the type name information
 		IScope scope;
 		if (contentAssistContext.getCurrentModel() != receiver) {
