@@ -321,18 +321,11 @@ public class QuickfixTestBuilder {
   }
   
   protected void assertEqual(final List<String> expected, final Iterable<String> actual) {
-    String _error = this.error(expected, actual);
-    int _size = expected.size();
-    int _size_1 = IterableExtensions.size(actual);
-    Assert.assertEquals(_error, _size, _size_1);
-    final Procedure1<String> _function = new Procedure1<String>() {
-      public void apply(final String it) {
-        String _error = QuickfixTestBuilder.this.error(expected, actual);
-        boolean _contains = expected.contains(it);
-        Assert.assertTrue(_error, _contains);
-      }
-    };
-    IterableExtensions.<String>forEach(actual, _function);
+    List<String> _sort = IterableExtensions.<String>sort(expected);
+    String _join = IterableExtensions.join(_sort, "\n");
+    List<String> _sort_1 = IterableExtensions.<String>sort(actual);
+    String _join_1 = IterableExtensions.join(_sort_1, "\n");
+    Assert.assertEquals(_join, _join_1);
   }
   
   protected String error(final Iterable<String> expected, final Iterable<String> actual) {

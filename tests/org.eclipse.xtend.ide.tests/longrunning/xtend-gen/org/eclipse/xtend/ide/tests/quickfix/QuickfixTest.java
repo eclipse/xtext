@@ -1975,6 +1975,58 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void missingOperatorOtherClass_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def +(Bar b) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar(Foo foo) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo *| this");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create extension method \'operator_multiply(Foo, Bar)\'", "Create method \'operator_multiply(Bar)\' in \'Foo\'", "Change to \'+\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def +(Bar b) {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(Foo foo) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("foo + this");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix("Change to \'+\'", _builder_1);
+  }
+  
+  @Test
   public void inconsistentIndentation() {
     final String tripleQuotes = "\'\'\'";
     StringConcatenation _builder = new StringConcatenation();

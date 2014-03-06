@@ -123,8 +123,7 @@ class QuickfixTestBuilder {
 	}
 	
 	def protected assertEqual(List<String> expected, Iterable<String> actual) {
-		assertEquals(error(expected, actual), expected.size, actual.size)
-		actual.forEach[assertTrue(error(expected, actual), expected.contains(it))]
+		assertEquals(expected.sort.join('\n'), actual.sort.join('\n'))
 	}
 	
 	def protected error(Iterable<String> expected, Iterable<String> actual) {
