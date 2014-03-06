@@ -18,6 +18,8 @@ import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
 
@@ -30,6 +32,8 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 	private IBatchScopeProvider scopeProvider;
 	@Inject
 	private FeatureScopes featureScopes;
+	@Inject
+	private CommonTypeComputationServices services;
 	
 	protected AbstractBatchTypeResolver() {
 	}
@@ -47,7 +51,7 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 		List<EObject> resourceContents = resource.getContents();
 		if (resourceContents.isEmpty()) {
 			IFeatureScopeSession session = scopeProvider.newSession(resource);
-			return new EmptyResolvedTypes(session, featureScopes);
+			return new EmptyResolvedTypes(session, featureScopes, new StandardTypeReferenceOwner(services, resource));
 		} else {
 			return resolveTypes(resourceContents.get(0));
 		}
