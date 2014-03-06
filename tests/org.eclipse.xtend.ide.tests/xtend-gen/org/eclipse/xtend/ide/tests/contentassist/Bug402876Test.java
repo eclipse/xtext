@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.tests.contentassist;
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -17,6 +18,122 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class Bug402876Test extends AbstractXtendContentAssistBugTest {
+  @Test
+  public void testExtensionPrecendence_01() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Iterable<String> s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.map<|>");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposalAtCursor = _append.assertProposalAtCursor("map[]");
+    _assertProposalAtCursor.withDisplayString("map((T)=>R transformation) : Iterable<R> - IterableExtensions");
+  }
+  
+  @Test
+  public void testExtensionPrecendence_02() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(java.util.Collection<String> s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.map<|>");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposalAtCursor = _append.assertProposalAtCursor("map[]");
+    _assertProposalAtCursor.withDisplayString("map((T)=>R transformation) : Iterable<R> - IterableExtensions");
+  }
+  
+  @Test
+  public void testExtensionPrecendence_03() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(java.util.List<String> s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.map<|>");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposalAtCursor = _append.assertProposalAtCursor("map[]");
+    _assertProposalAtCursor.withDisplayString("map((T)=>R transformation) : List<R> - ListExtensions");
+  }
+  
+  @Test
+  public void testExtensionPrecendence_04() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T, R> void map(java.util.Collection<T> c, (T)=>R f) {} ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(java.util.List<String> s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.map<|>");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposalAtCursor = _append.assertProposalAtCursor("map[]");
+    _assertProposalAtCursor.withDisplayString("map((T)=>R f) : void - C");
+  }
+  
+  @Ignore
+  @Test
+  public void testExtensionPrecendence_05() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static <T, R> void map(java.util.Collection<T> c, (T)=>R f) {} ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(java.util.List<String> s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.map<|>");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposalAtCursor = _append.assertProposalAtCursor("map[]");
+    _assertProposalAtCursor.withDisplayString("map((T)=>R transformation) : List<R> - ListExtensions");
+  }
+  
+  @Ignore
+  @Test
+  public void testExtensionPrecendence_06() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T, R> int map(java.util.Collection<T> c, (T)=>R f) {} ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T, R> long map(java.util.AbstractCollection<T> c, (T)=>R f) {} ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(java.util.List<String> s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.map<|>");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    ContentAssistProcessorTestBuilder.ProposalTester _assertProposalAtCursor = _append.assertProposalAtCursor("map[]");
+    _assertProposalAtCursor.withDisplayString("map((T)=>R f) : long - C");
+  }
+  
   @Test
   public void testExtensionParameterNoArguments_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();

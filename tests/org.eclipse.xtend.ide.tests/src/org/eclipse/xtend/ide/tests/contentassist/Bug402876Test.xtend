@@ -8,11 +8,78 @@
 package org.eclipse.xtend.ide.tests.contentassist
 
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class Bug402876Test extends AbstractXtendContentAssistBugTest {
+	
+	@Test def void testExtensionPrecendence_01() throws Exception {
+		newBuilder.append('''
+			class C {
+				def void m(Iterable<String> s) {
+					s.map<|>
+		''')
+			.assertProposalAtCursor('map[]')
+			.withDisplayString('map((T)=>R transformation) : Iterable<R> - IterableExtensions')
+	}
+	
+	@Test def void testExtensionPrecendence_02() throws Exception {
+		newBuilder.append('''
+			class C {
+				def void m(java.util.Collection<String> s) {
+					s.map<|>
+		''')
+			.assertProposalAtCursor('map[]')
+			.withDisplayString('map((T)=>R transformation) : Iterable<R> - IterableExtensions')
+	}
+	
+	@Test def void testExtensionPrecendence_03() throws Exception {
+		newBuilder.append('''
+			class C {
+				def void m(java.util.List<String> s) {
+					s.map<|>
+		''')
+			.assertProposalAtCursor('map[]')
+			.withDisplayString('map((T)=>R transformation) : List<R> - ListExtensions')
+	}
+	
+	@Test def void testExtensionPrecendence_04() throws Exception {
+		newBuilder.append('''
+			class C {
+				def <T, R> void map(java.util.Collection<T> c, (T)=>R f) {} 
+				def void m(java.util.List<String> s) {
+					s.map<|>
+		''')
+			.assertProposalAtCursor('map[]')
+			.withDisplayString('map((T)=>R f) : void - C')
+	}
+	
+	@Ignore
+	@Test def void testExtensionPrecendence_05() throws Exception {
+		newBuilder.append('''
+			class C {
+				def static <T, R> void map(java.util.Collection<T> c, (T)=>R f) {} 
+				def void m(java.util.List<String> s) {
+					s.map<|>
+		''')
+			.assertProposalAtCursor('map[]')
+			.withDisplayString('map((T)=>R transformation) : List<R> - ListExtensions')
+	}
+	
+	@Ignore
+	@Test def void testExtensionPrecendence_06() throws Exception {
+		newBuilder.append('''
+			class C {
+				def <T, R> int map(java.util.Collection<T> c, (T)=>R f) {} 
+				def <T, R> long map(java.util.AbstractCollection<T> c, (T)=>R f) {} 
+				def void m(java.util.List<String> s) {
+					s.map<|>
+		''')
+			.assertProposalAtCursor('map[]')
+			.withDisplayString('map((T)=>R f) : long - C')
+	}
 	
 	@Test def void testExtensionParameterNoArguments_01() throws Exception {
 		newBuilder.append('''
