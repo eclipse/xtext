@@ -186,45 +186,51 @@ ruleFile returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((	otherlv_0='package' 
+((
     {
-    	newLeafNode(otherlv_0, grammarAccess.getFileAccess().getPackageKeyword_0_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getFileAccess().getXtendFileAction_0(),
+            $current);
+    }
+)(	otherlv_1='package' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getFileAccess().getPackageKeyword_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFileAccess().getPackageQualifiedNameParserRuleCall_0_1_0()); 
+	        newCompositeNode(grammarAccess.getFileAccess().getPackageQualifiedNameParserRuleCall_1_1_0()); 
 	    }
-		lv_package_1_0=ruleQualifiedName		{
+		lv_package_2_0=ruleQualifiedName		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getFileRule());
 	        }
        		set(
        			$current, 
        			"package",
-        		lv_package_1_0, 
+        		lv_package_2_0, 
         		"QualifiedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_2=';' 
+)(	otherlv_3=';' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getFileAccess().getSemicolonKeyword_0_2());
+    	newLeafNode(otherlv_3, grammarAccess.getFileAccess().getSemicolonKeyword_1_2());
     }
 )?)?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFileAccess().getImportSectionXImportSectionParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getFileAccess().getImportSectionXImportSectionParserRuleCall_2_0()); 
 	    }
-		lv_importSection_3_0=ruleXImportSection		{
+		lv_importSection_4_0=ruleXImportSection		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getFileRule());
 	        }
        		set(
        			$current, 
        			"importSection",
-        		lv_importSection_3_0, 
+        		lv_importSection_4_0, 
         		"XImportSection");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -233,16 +239,16 @@ ruleFile returns [EObject current=null]
 )?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFileAccess().getXtendTypesTypeParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getFileAccess().getXtendTypesTypeParserRuleCall_3_0()); 
 	    }
-		lv_xtendTypes_4_0=ruleType		{
+		lv_xtendTypes_5_0=ruleType		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getFileRule());
 	        }
        		add(
        			$current, 
        			"xtendTypes",
-        		lv_xtendTypes_4_0, 
+        		lv_xtendTypes_5_0, 
         		"Type");
 	        afterParserOrEnumRuleCall();
 	    }

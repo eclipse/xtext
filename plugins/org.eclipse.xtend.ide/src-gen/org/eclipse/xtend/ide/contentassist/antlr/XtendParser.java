@@ -102,7 +102,7 @@ public class XtendParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmWildcardTypeReferenceAccess().getAlternatives_2(), "rule__JvmWildcardTypeReference__Alternatives_2");
 					put(grammarAccess.getXImportDeclarationAccess().getAlternatives_1(), "rule__XImportDeclaration__Alternatives_1");
 					put(grammarAccess.getFileAccess().getGroup(), "rule__File__Group__0");
-					put(grammarAccess.getFileAccess().getGroup_0(), "rule__File__Group_0__0");
+					put(grammarAccess.getFileAccess().getGroup_1(), "rule__File__Group_1__0");
 					put(grammarAccess.getTypeAccess().getGroup(), "rule__Type__Group__0");
 					put(grammarAccess.getTypeAccess().getGroup_2_0(), "rule__Type__Group_2_0__0");
 					put(grammarAccess.getTypeAccess().getGroup_2_0_4(), "rule__Type__Group_2_0_4__0");
@@ -367,9 +367,9 @@ public class XtendParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQualifiedNameWithWildcardAccess().getGroup(), "rule__QualifiedNameWithWildcard__Group__0");
 					put(grammarAccess.getXImportDeclarationAccess().getGroup(), "rule__XImportDeclaration__Group__0");
 					put(grammarAccess.getXImportDeclarationAccess().getGroup_1_0(), "rule__XImportDeclaration__Group_1_0__0");
-					put(grammarAccess.getFileAccess().getPackageAssignment_0_1(), "rule__File__PackageAssignment_0_1");
-					put(grammarAccess.getFileAccess().getImportSectionAssignment_1(), "rule__File__ImportSectionAssignment_1");
-					put(grammarAccess.getFileAccess().getXtendTypesAssignment_2(), "rule__File__XtendTypesAssignment_2");
+					put(grammarAccess.getFileAccess().getPackageAssignment_1_1(), "rule__File__PackageAssignment_1_1");
+					put(grammarAccess.getFileAccess().getImportSectionAssignment_2(), "rule__File__ImportSectionAssignment_2");
+					put(grammarAccess.getFileAccess().getXtendTypesAssignment_3(), "rule__File__XtendTypesAssignment_3");
 					put(grammarAccess.getTypeAccess().getAnnotationsAssignment_1(), "rule__Type__AnnotationsAssignment_1");
 					put(grammarAccess.getTypeAccess().getModifiersAssignment_2_0_1(), "rule__Type__ModifiersAssignment_2_0_1");
 					put(grammarAccess.getTypeAccess().getNameAssignment_2_0_3(), "rule__Type__NameAssignment_2_0_3");

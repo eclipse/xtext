@@ -23,49 +23,53 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	public class FileElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "File");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
-		private final Keyword cPackageKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final Assignment cPackageAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cPackageQualifiedNameParserRuleCall_0_1_0 = (RuleCall)cPackageAssignment_0_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
-		private final Assignment cImportSectionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportSectionXImportSectionParserRuleCall_1_0 = (RuleCall)cImportSectionAssignment_1.eContents().get(0);
-		private final Assignment cXtendTypesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cXtendTypesTypeParserRuleCall_2_0 = (RuleCall)cXtendTypesAssignment_2.eContents().get(0);
+		private final Action cXtendFileAction_0 = (Action)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cPackageKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cPackageAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cPackageQualifiedNameParserRuleCall_1_1_0 = (RuleCall)cPackageAssignment_1_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Assignment cImportSectionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cImportSectionXImportSectionParserRuleCall_2_0 = (RuleCall)cImportSectionAssignment_2.eContents().get(0);
+		private final Assignment cXtendTypesAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cXtendTypesTypeParserRuleCall_3_0 = (RuleCall)cXtendTypesAssignment_3.eContents().get(0);
 		
 		//File returns XtendFile:
-		//	("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*;
+		//	{XtendFile} ("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*;
 		public ParserRule getRule() { return rule; }
 
-		//("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*
+		//{XtendFile} ("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*
 		public Group getGroup() { return cGroup; }
 
+		//{XtendFile}
+		public Action getXtendFileAction_0() { return cXtendFileAction_0; }
+
 		//("package" package=QualifiedName ";"?)?
-		public Group getGroup_0() { return cGroup_0; }
+		public Group getGroup_1() { return cGroup_1; }
 
 		//"package"
-		public Keyword getPackageKeyword_0_0() { return cPackageKeyword_0_0; }
+		public Keyword getPackageKeyword_1_0() { return cPackageKeyword_1_0; }
 
 		//package=QualifiedName
-		public Assignment getPackageAssignment_0_1() { return cPackageAssignment_0_1; }
+		public Assignment getPackageAssignment_1_1() { return cPackageAssignment_1_1; }
 
 		//QualifiedName
-		public RuleCall getPackageQualifiedNameParserRuleCall_0_1_0() { return cPackageQualifiedNameParserRuleCall_0_1_0; }
+		public RuleCall getPackageQualifiedNameParserRuleCall_1_1_0() { return cPackageQualifiedNameParserRuleCall_1_1_0; }
 
 		//";"?
-		public Keyword getSemicolonKeyword_0_2() { return cSemicolonKeyword_0_2; }
+		public Keyword getSemicolonKeyword_1_2() { return cSemicolonKeyword_1_2; }
 
 		//importSection=XImportSection?
-		public Assignment getImportSectionAssignment_1() { return cImportSectionAssignment_1; }
+		public Assignment getImportSectionAssignment_2() { return cImportSectionAssignment_2; }
 
 		//XImportSection
-		public RuleCall getImportSectionXImportSectionParserRuleCall_1_0() { return cImportSectionXImportSectionParserRuleCall_1_0; }
+		public RuleCall getImportSectionXImportSectionParserRuleCall_2_0() { return cImportSectionXImportSectionParserRuleCall_2_0; }
 
 		//xtendTypes+=Type*
-		public Assignment getXtendTypesAssignment_2() { return cXtendTypesAssignment_2; }
+		public Assignment getXtendTypesAssignment_3() { return cXtendTypesAssignment_3; }
 
 		//Type
-		public RuleCall getXtendTypesTypeParserRuleCall_2_0() { return cXtendTypesTypeParserRuleCall_2_0; }
+		public RuleCall getXtendTypesTypeParserRuleCall_3_0() { return cXtendTypesTypeParserRuleCall_3_0; }
 	}
 
 	public class TypeElements extends AbstractParserRuleElementFinder {
@@ -2614,7 +2618,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//File returns XtendFile:
-	//	("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*;
+	//	{XtendFile} ("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*;
 	public FileElements getFileAccess() {
 		return (pFile != null) ? pFile : (pFile = new FileElements());
 	}
