@@ -223,6 +223,23 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return assertTextAtCursorPosition(this.cursorPosition, expectedText);
 	}
 	
+	public ProposalTester assertProposalAtCursor(String expectedText) throws Exception {
+		String currentModelToParse = getFullTextToBeParsed();
+		int idx = currentModelToParse.indexOf("<|>");
+		currentModelToParse = currentModelToParse.substring(0, idx) + currentModelToParse.substring(idx + 3);
+		ICompletionProposal[] proposals = computeCompletionProposals(currentModelToParse, idx);
+
+		if (proposals == null)
+			proposals = new ICompletionProposal[0];
+		for(ICompletionProposal proposal: proposals) {
+			if (expectedText.equals(toString(proposal))) {
+				return new ProposalTester(proposal);
+			}
+		}
+		Assert.fail("No such proposal: " + expectedText + " Found: " + toString(proposals));
+		return null;
+	}
+	
 	public ProposalTester assertProposal(String expectedText) throws Exception {
 		String currentModelToParse = getFullTextToBeParsed();
 

@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -181,7 +180,7 @@ public interface IResolvedTypes {
 	 * The returned scope carries some meta data such as whether there was an attempt
 	 * to resolve the given expression as a type.
 	 */
-	IExpressionScope getExpressionScope(EObject context, EReference reference, IExpressionScope.Anchor anchor);
+	IExpressionScope getExpressionScope(EObject context, IExpressionScope.Anchor anchor);
 	
 	boolean hasExpressionScope(EObject context, IExpressionScope.Anchor anchor);
 	
@@ -270,7 +269,7 @@ public interface IResolvedTypes {
 			return false;
 		}
 		
-		public IExpressionScope getExpressionScope(EObject context, EReference reference, Anchor anchor) {
+		public IExpressionScope getExpressionScope(EObject context, Anchor anchor) {
 			return IExpressionScope.NULL;
 		}
 		

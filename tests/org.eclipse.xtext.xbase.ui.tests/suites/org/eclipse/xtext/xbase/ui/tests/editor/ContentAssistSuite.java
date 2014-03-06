@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
-import org.eclipse.xtext.xbase.ui.tests.quickfix.Bug390595Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -25,7 +24,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	Bug350007Test.class,
 	Bug372950Test.class,
 	Bug379238Test.class,
-	Bug390595Test.class,
 	Bug401154Test.class,
 	Bug402716Test.class,
 	Bug403554Test.class

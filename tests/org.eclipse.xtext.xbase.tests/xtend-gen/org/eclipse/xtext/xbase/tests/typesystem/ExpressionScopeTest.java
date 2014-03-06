@@ -18,7 +18,6 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -95,7 +94,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       XExpression _expression = this.expression(_builder, false);
       final XBlockExpression block = ((XBlockExpression) _expression);
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(block);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(block, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.AFTER);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(block, IExpressionScope.Anchor.AFTER);
       this.containsNot(expressionScope, "x");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -110,7 +109,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       XExpression _expression = this.expression(_builder, false);
       final XBlockExpression block = ((XBlockExpression) _expression);
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(block);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(block, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
       this.containsNot(expressionScope, "x");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -126,7 +125,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
       final XExpression varDecl = IterableExtensions.<XExpression>head(_expressions);
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varDecl);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.AFTER);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, IExpressionScope.Anchor.AFTER);
       this.contains(expressionScope, "x");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -142,7 +141,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
       final XExpression varDecl = IterableExtensions.<XExpression>head(_expressions);
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varDecl);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, IExpressionScope.Anchor.BEFORE);
       this.containsNot(expressionScope, "x");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -158,7 +157,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
       final XExpression varDecl = IterableExtensions.<XExpression>head(_expressions);
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varDecl);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.AFTER);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, IExpressionScope.Anchor.AFTER);
       this.contains(expressionScope, "charAt");
       this.contains(expressionScope, "it");
       this.contains(expressionScope, "operator_lessThan");
@@ -176,7 +175,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
       final XExpression varDecl = IterableExtensions.<XExpression>head(_expressions);
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varDecl);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, IExpressionScope.Anchor.BEFORE);
       this.containsNot(expressionScope, "charAt");
       this.containsNot(expressionScope, "it");
       this.containsNot(expressionScope, "operator_lessThan");
@@ -195,7 +194,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       XExpression _head = IterableExtensions.<XExpression>head(_expressions);
       final XExpression varInit = ((XVariableDeclaration) _head).getRight();
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varInit);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varInit, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varInit, IExpressionScope.Anchor.BEFORE);
       this.contains(expressionScope, "it");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -212,7 +211,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       XExpression _head = IterableExtensions.<XExpression>head(_expressions);
       final XExpression varInit = ((XVariableDeclaration) _head).getRight();
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varInit);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varInit, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varInit, IExpressionScope.Anchor.BEFORE);
       this.containsNot(expressionScope, "it");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -229,7 +228,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       XExpression _head = IterableExtensions.<XExpression>head(_expressions);
       final XExpression varInit = ((XVariableDeclaration) _head).getRight();
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varInit);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varInit, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varInit, IExpressionScope.Anchor.BEFORE);
       this.containsNot(expressionScope, "it");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -245,7 +244,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
       final XExpression varDecl = IterableExtensions.<XExpression>head(_expressions);
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(varDecl);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(varDecl, IExpressionScope.Anchor.BEFORE);
       this.contains(expressionScope, "newArrayList");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -264,7 +263,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       XExpression _then = ifExpr.getThen();
       final XBlockExpression block = ((XBlockExpression) _then);
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(block);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(block, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
       this.contains(expressionScope, "charAt");
       this.contains(expressionScope, "it");
       this.contains(expressionScope, "operator_lessThan");
@@ -285,7 +284,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       XExpression _then = ifExpr.getThen();
       final XBlockExpression block = ((XBlockExpression) _then);
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(block);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(block, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.BEFORE);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(block, IExpressionScope.Anchor.BEFORE);
       this.contains(expressionScope, "charAt");
       this.contains(expressionScope, "it");
       this.contains(expressionScope, "operator_lessThan");
@@ -308,7 +307,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
       EList<XExpression> _expressions_1 = block.getExpressions();
       final XExpression assignment = IterableExtensions.<XExpression>head(_expressions_1);
       IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(assignment);
-      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(assignment, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.AFTER);
+      final IExpressionScope expressionScope = _resolveTypes.getExpressionScope(assignment, IExpressionScope.Anchor.AFTER);
       this.containsNot(expressionScope, "charAt");
       this.contains(expressionScope, "it");
       this.containsNot(expressionScope, "operator_lessThan");
