@@ -66,10 +66,10 @@ public class DebugGraphGenerator {
   private SyntacticSequencerPDA2ExtendedDot syntacticSequencerPDA2Dot;
   
   @Inject
-  private PdaToDot pdaToDot;
+  private PdaToDot<?,?> pdaToDot;
   
   @Inject
-  private NfaToDot nfaToDot;
+  private NfaToDot<?> nfaToDot;
   
   public Iterable<Pair<String,String>> generateDebugGraphs() {
     ArrayList<Pair<String,String>> _xblockexpression = null;
