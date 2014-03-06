@@ -219,7 +219,7 @@ public class SmokeTest extends AbstractSmokeTest {
 	}
 
 	protected void checkNoErrorsInTypeProvider(LazyLinkingResource resource) {
-		typeResolver.resolveTypes(resource.getContents().get(0));
+		typeResolver.resolveTypes(resource);
 		
 		Iterator<Object> contents = EcoreUtil.getAllContents(resource, true);
 		while(contents.hasNext()) {

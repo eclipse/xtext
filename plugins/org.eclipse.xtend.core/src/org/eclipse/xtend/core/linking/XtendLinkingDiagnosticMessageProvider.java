@@ -75,7 +75,7 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
 				String firstPartOfMessage = "The method ";
 				if(explicitArguments.size() == 0 || featureCall instanceof XAssignment)
 					firstPartOfMessage += "or field ";
-				if (featureCall instanceof XFeatureCall && typeLiteralHelper.isPotentialTypeLiteral(featureCall, null)) {
+				if (featureCall instanceof XFeatureCall && linkText.length() > 0 && Character.isUpperCase(linkText.charAt(0)) && typeLiteralHelper.isPotentialTypeLiteral(featureCall, null)) {
 					return new DiagnosticMessage(firstPartOfMessage + linkText + " is undefined for the type " + clazzName, Severity.ERROR, IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, linkText, TYPE_LITERAL);	
 				}
 				return new DiagnosticMessage(firstPartOfMessage + linkText + " is undefined for the type " + clazzName, Severity.ERROR, IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, linkText);
