@@ -967,7 +967,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
-		.assertResolutionLabels("Create method 'operator_multiply(Foo)'", "Change to '+'")
+		.assertResolutionLabels("Create method 'operator_multiply(Foo)'", "Change to '+'") /* last proposal does not make much sense */
 		.assertModelAfterQuickfix("Create method 'operator_multiply(Foo)'", '''
 			class Foo {
 			}
@@ -998,7 +998,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
-		.assertResolutionLabels("Create extension method 'operator_multiply(Foo, Bar)'", "Create method 'operator_multiply(Bar)' in 'Foo'", "Change to '+'")
+		.assertResolutionLabels("Create extension method 'operator_multiply(Foo, Bar)'", "Create method 'operator_multiply(Bar)' in 'Foo'", "Change to '+'") /* last proposal does not make much sense */
 		.assertModelAfterQuickfix("Create extension method 'operator_multiply(Foo, Bar)'", '''
 			class Foo {
 			}
@@ -1026,6 +1026,34 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			class Bar {
 				def bar(Foo foo) {
 					foo * this
+				}
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingOperatorOtherClass_02() {
+		create('Foo.xtend', '''
+			class Foo {
+				def +(Bar b) {}
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo *| this
+				}
+			}
+		''')
+		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create extension method 'operator_multiply(Foo, Bar)'", "Create method 'operator_multiply(Bar)' in 'Foo'", "Change to '+'")
+		.assertModelAfterQuickfix("Change to '+'", '''
+			class Foo {
+				def +(Bar b) {}
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo + this
 				}
 			}
 		''')

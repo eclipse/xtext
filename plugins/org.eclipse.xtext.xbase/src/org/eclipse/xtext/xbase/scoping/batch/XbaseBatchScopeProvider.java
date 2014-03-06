@@ -20,6 +20,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
@@ -84,6 +85,9 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 						anchor = IExpressionScope.Anchor.RECEIVER;
 						context = receiver;
 					}
+				} else if (context instanceof XBinaryOperation) {
+					context = ((XBinaryOperation) context).getLeftOperand();
+					anchor = IExpressionScope.Anchor.RECEIVER;
 				}
 			}
 			IExpressionScope expressionScope = typeResolver.resolveTypes(context).getExpressionScope(context, reference, anchor);

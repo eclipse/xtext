@@ -13,7 +13,7 @@ import "http://www.eclipse.org/xtext/xbase/Xtype" as xtype
 import "http://www.eclipse.org/Xtext/Xbase/XAnnotations" as annotations
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 
-File returns XtendFile : 
+File returns XtendFile :
     ('package' package=QualifiedName ';'?)?
 	importSection=XImportSection?
 	(xtendTypes+=Type)*
