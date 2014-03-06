@@ -57,6 +57,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
+import org.eclipse.xtext.xbase.scoping.SyntaxFilteredScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -125,6 +126,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	
 	@Inject
 	private IBatchTypeResolver typeResolver;
+	
+	@Inject
+	private SyntaxFilteredScopes syntaxFilteredScopes;
 	
 	public String getNextCategory() {
 		return getXbaseCrossReferenceProposalCreator().getNextCategory();
@@ -252,6 +256,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Override
 	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
+		new Exception().printStackTrace();
 		lookupCrossReference(crossReference, contentAssistContext, acceptor, getFeatureDescriptionPredicate(contentAssistContext));
 	}
 	
@@ -424,10 +429,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			}
 			if (NodeModelUtils.findActualNodeFor(model).getEndOffset() <= context.getOffset()) {
 				createReceiverProposals((XExpression) model,
-						(CrossReference) assignment.getTerminal(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, context, acceptor, getFeatureDescriptionPredicate(context));
+						(CrossReference) assignment.getTerminal(), context, acceptor);
 			} else {
 				createReceiverProposals(((XBinaryOperation) model).getLeftOperand(),
-						(CrossReference) assignment.getTerminal(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, context, acceptor, getFeatureDescriptionPredicate(context));
+						(CrossReference) assignment.getTerminal(), context, acceptor);
 			}
 		} else {
 			EObject previousModel = context.getPreviousModel();
@@ -438,7 +443,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					}
 				}
 				createReceiverProposals((XExpression) previousModel,
-						(CrossReference) assignment.getTerminal(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, context, acceptor, getFeatureDescriptionPredicate(context));
+						(CrossReference) assignment.getTerminal(), context, acceptor);
 			}
 		}
 	}
@@ -466,8 +471,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XMemberFeatureCall) {
 			createReceiverProposals(((XMemberFeatureCall) model).getMemberCallTarget(), (CrossReference) assignment.getTerminal(),
-					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, context, acceptor,
-					getFeatureDescriptionPredicate(context));	
+					context, acceptor);	
 		} else {
 			super.completeXMemberFeatureCall_Feature(model, assignment, context, acceptor);
 		}
@@ -507,9 +511,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		createLocalVariableAndImplicitProposals(context, IExpressionScope.Anchor.BEFORE, contentAssistContext, acceptor);
 	}
 
-	protected void createReceiverProposals(XExpression receiver, CrossReference crossReference,
-			EReference reference, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor,
-			Predicate<IEObjectDescription> filter) {
+	protected void createReceiverProposals(XExpression receiver, CrossReference crossReference, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
 		String ruleName = getConcreteSyntaxRuleName(crossReference);
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(ruleName, contentAssistContext);
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(receiver);
@@ -519,14 +521,20 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		if (contentAssistContext.getCurrentModel() != receiver) {
 			EObject currentModel = contentAssistContext.getCurrentModel();
 			if (currentModel instanceof XMemberFeatureCall && ((XMemberFeatureCall) currentModel).getMemberCallTarget() == receiver) {
-				scope = expressionScope.getFeatureScope((XAbstractFeatureCall) currentModel);
+				scope = filterByConcreteSyntax(expressionScope.getFeatureScope((XAbstractFeatureCall) currentModel), crossReference);
 			} else {
-				scope = expressionScope.getFeatureScope();	
+				scope = filterByConcreteSyntax(expressionScope.getFeatureScope(), crossReference);	
 			}
 		} else {
-			scope = expressionScope.getFeatureScope();
+			scope = filterByConcreteSyntax(expressionScope.getFeatureScope(), crossReference);
 		}
 		getCrossReferenceProposalCreator().lookupCrossReference(scope, receiver, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, getFeatureDescriptionPredicate(contentAssistContext), proposalFactory);
+	}
+	
+	protected IScope filterByConcreteSyntax(IScope parent, AbstractElement syntax) {
+		// filter down the x-refs to operators
+		// rather than enumerating all proposals, just consider the syntactically valid entries
+		return syntaxFilteredScopes.create(parent, syntax);
 	}
 	
 	protected String getConcreteSyntaxRuleName(Assignment assignment) {
@@ -536,15 +544,20 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		}
 		String ruleName = null;
 		if (terminal instanceof RuleCall) {
-			ruleName = ((RuleCall) terminal).getRule().getName();
+			ruleName = getConcreteSyntaxRuleName((RuleCall) terminal);
 		}
+		return ruleName;
+	}
+	
+	protected String getConcreteSyntaxRuleName(RuleCall ruleCall) {
+		String ruleName = ruleCall.getRule().getName();
 		return ruleName;
 	}
 
 	protected String getConcreteSyntaxRuleName(CrossReference crossReference) {
 		String ruleName = null;
 		if (crossReference.getTerminal() instanceof RuleCall) {
-			ruleName = ((RuleCall) crossReference.getTerminal()).getRule().getName();
+			ruleName = getConcreteSyntaxRuleName((RuleCall) crossReference.getTerminal());
 		}
 		return ruleName;
 	}
