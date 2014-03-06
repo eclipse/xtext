@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -20,17 +19,15 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
-import com.google.common.collect.Lists;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ExtensionScopeHelper {
 
-	private LightweightTypeReference receiverType;
+	private LightweightTypeReference argumentType;
 
-	public ExtensionScopeHelper(LightweightTypeReference receiverType) {
-		this.receiverType = receiverType;
+	public ExtensionScopeHelper(LightweightTypeReference argumentType) {
+		this.argumentType = argumentType;
 	}
 	
 	/**
@@ -48,14 +45,6 @@ public class ExtensionScopeHelper {
 		return true;
 	}
 	
-	protected LightweightTypeReference getFirstParameterType(JvmOperation candidate) {
-		return getParameterType(candidate.getParameters().get(0));
-	}
-	
-	protected LightweightTypeReference getParameterType(JvmFormalParameter p) {
-		return new OwnedConverter(receiverType.getOwner()).toRawLightweightReference(p.getParameterType().getType()).getRawTypeReference();
-	}
-
 	protected boolean isMatchingFirstParameter(JvmOperation feature) {
 		List<JvmFormalParameter> parameters = feature.getParameters();
 		JvmFormalParameter firstParameter = parameters.get(0);
@@ -66,7 +55,7 @@ public class ExtensionScopeHelper {
 		if (rawParameterType == null || rawParameterType.eIsProxy())
 			return false;
 		if (!(rawParameterType instanceof JvmTypeParameter)) {
-			LightweightTypeReference rawReceiverType = receiverType.getRawTypeReference();
+			LightweightTypeReference rawReceiverType = argumentType.getRawTypeReference();
 			if (rawReceiverType.isResolved()) {
 				// short circuit - limit extension scope entries to real candidates
 				LightweightTypeReference parameterTypeReference = new OwnedConverter(rawReceiverType.getOwner()).toRawLightweightReference(rawParameterType);
@@ -111,47 +100,4 @@ public class ExtensionScopeHelper {
 		return false;
 	}
 	
-	protected List<JvmOperation> getFilteredExtensionDescriptions(Map<String, List<JvmOperation>> extensionSignatures) {
-		List<JvmOperation> result = Lists.newArrayList();
-		for(List<JvmOperation> list: extensionSignatures.values()) {
-			int size = list.size();
-			for(int i = 0; i < size; i++) {
-				JvmOperation candidate = list.get(i);
-				if (candidate != null) {
-					LightweightTypeReference firstParameterType = getFirstParameterType(candidate);
-					if (i + 1 < list.size()) {
-						for(int j = i + 1; j < list.size(); j++) {
-							JvmOperation next = list.get(j);
-							if (next != null) {
-								LightweightTypeReference otherFirstParameterType = getFirstParameterType(next);
-								if (otherFirstParameterType.isAssignableFrom(firstParameterType)) {
-									list.set(j, null);
-								} else if (firstParameterType.isAssignableFrom(otherFirstParameterType)) {
-									list.set(j, null);
-									candidate = next;
-									firstParameterType = otherFirstParameterType;
-								}
-							}
-						}
-					}
-					result.add(candidate);
-				}
-			}
-		}
-		return result;
-	}
-	
-	protected String getExtensionSignature(JvmOperation operation) {
-		StringBuilder builder = new StringBuilder(64).append(operation.getSimpleName()).append('(');
-		List<JvmFormalParameter> parameters = operation.getParameters();
-		for(int i = 1; i < parameters.size(); i++) {
-			if (i != 1) {
-				builder.append(',');
-			}
-			JvmFormalParameter parameter = parameters.get(i);
-			builder.append(getParameterType(parameter).getIdentifier());
-		}
-		builder.append(')');
-		return builder.toString();
-	}
 }

@@ -24,10 +24,8 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -62,7 +60,6 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 		}
 		List<IEObjectDescription> result = Lists.newArrayList();
 		for(TypeBucket bucket: buckets) {
-			Map<String, List<JvmOperation>> extensionSignatures = Maps.newHashMap();
 			if (bucket.isRestrictingNames()) {
 				for(Map.Entry<? extends JvmType, ? extends Set<String>> entry: bucket.getTypesToNames().entrySet()) {
 					JvmType type = entry.getKey();
@@ -71,7 +68,7 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 						for(JvmFeature feature: features) {
 							if (feature.isStatic() && entry.getValue().contains(feature.getSimpleName())
 									&& helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
-								Maps2.putIntoListMap(helper.getExtensionSignature((JvmOperation) feature), (JvmOperation) feature, extensionSignatures);
+								fastAddDescriptions(feature, bucket, result);
 							}
 						}
 					}
@@ -82,15 +79,11 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 						Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
 						for(JvmFeature feature: features) {
 							if (feature.isStatic() && helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
-								Maps2.putIntoListMap(helper.getExtensionSignature((JvmOperation) feature), (JvmOperation) feature, extensionSignatures);
+								fastAddDescriptions(feature, bucket, result);
 							}
 						}
 					}
 				}
-			}
-			List<JvmOperation> filtered = helper.getFilteredExtensionDescriptions(extensionSignatures);
-			for(JvmOperation operation: filtered) {
-				fastAddDescriptions(operation, bucket, result);
 			}
 		}
 		return result;

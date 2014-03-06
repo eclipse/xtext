@@ -271,7 +271,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 		Map<EObject, ExpressionScope> map = featureScopeSessions.get(anchor);
 		ExpressionScope scope = map.get(context);
 		if (scope == null) {
-			scope = new ExpressionScope(getResolver().getFeatureScopes(), context, anchor);
+			scope = new ExpressionScope(getResolver().getFeatureScopes(), context, anchor, getReferenceOwner());
 			map.put(context, scope);
 		}
 		scope.addData(session, resolvedTypes);
