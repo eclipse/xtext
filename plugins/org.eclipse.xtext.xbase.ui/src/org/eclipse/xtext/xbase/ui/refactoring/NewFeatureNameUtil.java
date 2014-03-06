@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.refactoring;
 
-import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Set;
@@ -16,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -28,7 +26,6 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
@@ -40,9 +37,6 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class NewFeatureNameUtil {
-	
-	@Inject
-	private Primitives primitives;
 	
 	@Inject
 	private IValueConverterService valueConverterService;
@@ -68,7 +62,7 @@ public class NewFeatureNameUtil {
 		if (containerBlock != null && !containerBlock.getExpressions().isEmpty()) {
 			context = containerBlock.getExpressions().get(containerBlock.getExpressions().size() - 1);
 		}
-		IExpressionScope expressionScope = batchTypeResolver.resolveTypes(context).getExpressionScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IExpressionScope.Anchor.AFTER);
+		IExpressionScope expressionScope = batchTypeResolver.resolveTypes(context).getExpressionScope(context, IExpressionScope.Anchor.AFTER);
 		featureCallScope = expressionScope.getFeatureScope();
 	}
 
