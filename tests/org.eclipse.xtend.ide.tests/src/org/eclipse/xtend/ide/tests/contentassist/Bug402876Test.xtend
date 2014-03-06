@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.tests.contentassist
 
 import org.junit.Test
-import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -56,7 +55,6 @@ class Bug402876Test extends AbstractXtendContentAssistBugTest {
 			.withDisplayString('map((T)=>R f) : void - C')
 	}
 	
-	@Ignore
 	@Test def void testExtensionPrecendence_05() throws Exception {
 		newBuilder.append('''
 			class C {
@@ -68,13 +66,48 @@ class Bug402876Test extends AbstractXtendContentAssistBugTest {
 			.withDisplayString('map((T)=>R transformation) : List<R> - ListExtensions')
 	}
 	
-	@Ignore
 	@Test def void testExtensionPrecendence_06() throws Exception {
 		newBuilder.append('''
 			class C {
 				def <T, R> int map(java.util.Collection<T> c, (T)=>R f) {} 
 				def <T, R> long map(java.util.AbstractCollection<T> c, (T)=>R f) {} 
 				def void m(java.util.List<String> s) {
+					s.map<|>
+		''')
+			.assertProposalAtCursor('map[]')
+			.withDisplayString('map((T)=>R f) : int - C')
+	}
+	
+	@Test def void testExtensionPrecendence_07() throws Exception {
+		newBuilder.append('''
+			class C {
+				def <T, R> int map(java.util.Collection<T> c, (T)=>R f) {} 
+				def <T, R> long map(java.util.AbstractCollection<T> c, (T)=>R f) {} 
+				def void m(java.util.ArrayList<String> s) {
+					s.map<|>
+		''')
+			.assertProposalAtCursor('map[]')
+			.withDisplayString('map((T)=>R f) : long - C')
+	}
+	
+	@Test def void testExtensionPrecendence_08() throws Exception {
+		newBuilder.append('''
+			class C {
+				def <T, R> long map(java.util.AbstractCollection<T> c, (T)=>R f) {} 
+				def <T, R> int map(java.util.Collection<T> c, (T)=>R f) {} 
+				def void m(java.util.List<String> s) {
+					s.map<|>
+		''')
+			.assertProposalAtCursor('map[]')
+			.withDisplayString('map((T)=>R f) : int - C')
+	}
+	
+	@Test def void testExtensionPrecendence_09() throws Exception {
+		newBuilder.append('''
+			class C {
+				def <T, R> long map(java.util.AbstractCollection<T> c, (T)=>R f) {} 
+				def <T, R> int map(java.util.Collection<T> c, (T)=>R f) {} 
+				def void m(java.util.ArrayList<String> s) {
 					s.map<|>
 		''')
 			.assertProposalAtCursor('map[]')
