@@ -52,8 +52,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
- * The main xtext generator. Can be configured with
- * {@link IGeneratorFragment} instances as well as with some properties
+ * The main xtext generator. Can be configured with {@link IGeneratorFragment} instances as well as with some properties
  * declared via setter or adder methods.
  * 
  * @author Sven Efftinge - Initial contribution and API
@@ -62,13 +61,14 @@ import com.google.common.collect.Maps;
 public class Generator extends AbstractWorkflowComponent2 {
 	private final static class EmptyPluginXmlVeto implements VetoStrategy {
 		static Pattern PLUGIN_ELEMENT = Pattern.compile("<plugin>(.*?)</plugin>", Pattern.DOTALL);
+
 		public boolean hasVeto(FileHandle handle) {
 			Matcher matcher = PLUGIN_ELEMENT.matcher(handle.getBuffer());
 			return matcher.find() && Strings.isEmpty(matcher.group(1).trim());
 		}
 	}
 
-	private final Logger log = Logger.getLogger(getClass());
+	private static final Logger LOG = Logger.getLogger(Generator.class);
 
 	public static final String SRC_GEN_TEST = "SRC_GEN_TEST";
 	public static final String SRC_TEST = "SRC_TEST";
@@ -85,8 +85,13 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public static final String PLUGIN_RT = "PLUGIN";
 
 	private Naming naming = new Naming();
-
 	private String encoding;
+	private String pathRtProject = ".";
+	private String pathUiProject = null;
+	private String pathTestProject = null;
+	private String srcPath = "/src";
+	private String srcGenPath = "/src-gen";
+	private List<PostProcessor> postProcessors = Lists.newArrayList();
 
 	public void setNaming(Naming naming) {
 		this.naming = naming;
@@ -103,16 +108,18 @@ public class Generator extends AbstractWorkflowComponent2 {
 		naming.setUiBasePackage(getProjectNameUi());
 		naming.setActivatorName(getActivator());
 		naming.setPathTestProject(getPathTestProject());
-		Map<String,Grammar> uris = new HashMap<String,Grammar>();
+		Map<String, Grammar> uris = new HashMap<String, Grammar>();
 		for (LanguageConfig config : languageConfigs) {
 			config.registerNaming(naming);
 			config.checkConfiguration(issues);
 			Grammar grammar = config.getGrammar();
-			List<GeneratedMetamodel> select = EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
+			List<GeneratedMetamodel> select = EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(),
+					GeneratedMetamodel.class);
 			for (GeneratedMetamodel generatedMetamodel : select) {
 				String nsURI = generatedMetamodel.getEPackage().getNsURI();
 				if (uris.containsKey(nsURI)) {
-					issues.addError("Duplicate generated grammar with nsURI '"+nsURI+"' in "+uris.get(nsURI).getName()+" and "+grammar.getName());
+					issues.addError("Duplicate generated grammar with nsURI '" + nsURI + "' in "
+							+ uris.get(nsURI).getName() + " and " + grammar.getName());
 				} else {
 					uris.put(nsURI, grammar);
 				}
@@ -144,22 +151,23 @@ public class Generator extends AbstractWorkflowComponent2 {
 				generateManifestUi(languageConfigs, exeCtx);
 				generateActivator(languageConfigs, exeCtx);
 			}
-			if(isTest()) {
+			if (isTest()) {
 				generateManifestTests(languageConfigs, exeCtx);
 			}
 		} catch (WorkflowInterruptedException e) {
 			throw e;
+		} catch (CompositeGeneratorException e) {
+			handleCompositeException(issues, e);
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			LOG.error(e.getMessage(), e);
 		}
 	}
 
-	private String pathRtProject = ".";
-	private String pathUiProject = null;
-	private String pathTestProject = null;
-	private String srcPath = "/src";
-	private String srcGenPath = "/src-gen";
-	private List<PostProcessor> postProcessors = Lists.newArrayList();
+	private void handleCompositeException(Issues issues, CompositeGeneratorException e) {
+		for (Exception ex : e.getExceptions()) {
+			issues.addError(this, "CompositeGeneratorException: ", null, ex, null);
+		}
+	}
 
 	public void addPostProcessor(PostProcessor postProcessor) {
 		this.postProcessors.add(postProcessor);
@@ -208,7 +216,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public void setSrcGenPath(String srcGenPath) {
 		this.srcGenPath = srcGenPath;
 	}
-	
+
 	private XpandExecutionContext createExecutionContext() {
 		// configure outlets
 		OutputImpl output = new OutputImpl();
@@ -229,30 +237,33 @@ public class Generator extends AbstractWorkflowComponent2 {
 		if (!Strings.isEmpty(getPathTestProject())) {
 			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_TEST, false, getPathTestProject()));
 			output.addOutlet(createOutlet(false, getEncoding(), SRC_TEST, false, getPathTestProject() + getSrcPath()));
-			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_TEST, true, getPathTestProject() + getSrcGenPath()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_TEST, true, getPathTestProject()
+					+ getSrcGenPath()));
 		} else {
 			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_TEST, false, getPathRtProject()));
 			output.addOutlet(createOutlet(false, getEncoding(), SRC_TEST, false, getPathRtProject() + getSrcPath()));
-			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_TEST, true, getPathRtProject() + getSrcGenPath()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_TEST, true, getPathRtProject()
+					+ getSrcGenPath()));
 		}
 		// initialize global vars
-		Map<String,Variable> globalVars = Maps.newHashMap();
-		globalVars.put(Naming.GLOBAL_VAR_NAME, new Variable(Naming.GLOBAL_VAR_NAME,naming));
+		Map<String, Variable> globalVars = Maps.newHashMap();
+		globalVars.put(Naming.GLOBAL_VAR_NAME, new Variable(Naming.GLOBAL_VAR_NAME, naming));
 
 		// create execution context
-		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null,globalVars,null,null);
+		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null, globalVars, null, null);
 		//since our templates are all encoded in ISO-8859-1, we have to fix it here.
 		execCtx.getResourceManager().setFileEncoding("ISO-8859-1");
 
 		execCtx.registerMetaModel(new JavaBeansMetaModel());
 		// add default value for 'modelPluginID' for generated GenModel required
 		// for further .edit/.editor generation
-		execCtx = (XpandExecutionContextImpl) execCtx.cloneWithVariable(new Variable("modelPluginID", getProjectNameRt()));
+		execCtx = (XpandExecutionContextImpl) execCtx.cloneWithVariable(new Variable("modelPluginID",
+				getProjectNameRt()));
 		return execCtx;
 	}
 
 	protected Outlet createOutlet(boolean append, String encoding, String name, boolean overwrite, String path) {
-		Outlet outlet = new Outlet(append,encoding,name,overwrite,path);
+		Outlet outlet = new Outlet(append, encoding, name, overwrite, path);
 		for (PostProcessor pp : getPostProcessors()) {
 			outlet.addPostprocessor(pp);
 		}
@@ -301,7 +312,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private void generateExecutableExtensionsFactory(LanguageConfig config, XpandExecutionContext exeCtx) {
 		XpandFacade facade = XpandFacade.create(exeCtx);
-		facade.evaluate("org::eclipse::xtext::generator::ExecutableExtensionFactory::file", config.getGrammar(), getActivator());
+		facade.evaluate("org::eclipse::xtext::generator::ExecutableExtensionFactory::file", config.getGrammar(),
+				getActivator());
 	}
 
 	private void generateActivator(List<LanguageConfig> configs, XpandExecutionContext exeCtx) {
@@ -343,7 +355,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private void generateGuiceModuleRt(LanguageConfig config, XpandExecutionContext ctx) {
 		XpandFacade facade = XpandFacade.create(ctx);
 		Set<Binding> bindings = config.getGuiceBindingsRt(config.getGrammar());
-		facade.evaluate("org::eclipse::xtext::generator::GuiceModuleRt::generate", config.getGrammar(), bindings, config.getFileExtensions(config.getGrammar()));
+		facade.evaluate("org::eclipse::xtext::generator::GuiceModuleRt::generate", config.getGrammar(), bindings,
+				config.getFileExtensions(config.getGrammar()));
 	}
 
 	private void generateGuiceModuleUi(LanguageConfig config, XpandExecutionContext ctx) {
@@ -357,7 +370,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private boolean isUi() {
 		return getPathUiProject() != null;
 	}
-	
+
 	private boolean isTest() {
 		return getPathTestProject() != null;
 	}
@@ -394,14 +407,16 @@ public class Generator extends AbstractWorkflowComponent2 {
 			ctx.getOutput().openFile(manifestPath, PLUGIN_RT);
 			try {
 				XpandFacade facade = XpandFacade.create(ctx);
-				generateManifest(facade, getProjectNameRt(), getProjectNameRt(), getBundleVersion(), exported, requiredBundles, imported, activator);
+				generateManifest(facade, getProjectNameRt(), getProjectNameRt(), getBundleVersion(), exported,
+						requiredBundles, imported, activator);
 			} finally {
 				ctx.getOutput().closeFile();
 			}
 		}
 	}
 
-	private void mergeManifest(String projectName, String path, Set<String> exported, Set<String> requiredBundles, Set<String> imported, String activator) {
+	private void mergeManifest(String projectName, String path, Set<String> exported, Set<String> requiredBundles,
+			Set<String> imported, String activator) {
 		File file = new File(path);
 		InputStream in = null;
 		OutputStream out = null;
@@ -464,8 +479,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 				ctx.getOutput().openFile(manifestPath, PLUGIN_UI);
 				try {
 					XpandFacade facade = XpandFacade.create(ctx);
-					generateManifest(facade, getProjectNameUi(), getProjectNameUi(), getBundleVersion(), exported, requiredBundles,
-							imported, getActivator());
+					generateManifest(facade, getProjectNameUi(), getProjectNameUi(), getBundleVersion(), exported,
+							requiredBundles, imported, getActivator());
 				} finally {
 					ctx.getOutput().closeFile();
 				}
@@ -494,8 +509,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 				ctx.getOutput().openFile(manifestPath, PLUGIN_TEST);
 				try {
 					XpandFacade facade = XpandFacade.create(ctx);
-					generateManifest(facade, getProjectNameTests(), getProjectNameTests(), getBundleVersion(), exported, requiredBundles,
-							imported, getActivator());
+					generateManifest(facade, getProjectNameTests(), getProjectNameTests(), getBundleVersion(),
+							exported, requiredBundles, imported, getActivator());
 				} finally {
 					ctx.getOutput().closeFile();
 				}
@@ -550,18 +565,18 @@ public class Generator extends AbstractWorkflowComponent2 {
 			return getProjectNameRt() + ".ui";
 		return projectNameUi;
 	}
-	
+
 	private String getProjectNameTests() {
-		if(pathTestProject != null) {
-			return pathTestProject.substring(pathTestProject.lastIndexOf('/') +1);
+		if (pathTestProject != null) {
+			return pathTestProject.substring(pathTestProject.lastIndexOf('/') + 1);
 		}
 		return getProjectNameRt() + ".tests";
 	}
 
-	private void generateManifest(XpandFacade facade, String name, String symbolicName, String version, Set<String> exported,
-			Set<String> requiredBundles, Set<String> imported, String activator) {
-		facade.evaluate("org::eclipse::xtext::generator::Manifest::file",
-				name, symbolicName, version, exported, requiredBundles, imported, activator);
+	private void generateManifest(XpandFacade facade, String name, String symbolicName, String version,
+			Set<String> exported, Set<String> requiredBundles, Set<String> imported, String activator) {
+		facade.evaluate("org::eclipse::xtext::generator::Manifest::file", name, symbolicName, version, exported,
+				requiredBundles, imported, activator);
 	}
 
 	public void setActivator(String activator) {

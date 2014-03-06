@@ -87,14 +87,18 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 	}
 
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
+		CompositeGeneratorException cgEx = new CompositeGeneratorException();
 		for (IGeneratorFragment fragment : fragments) {
 			try {
 				fragment.generate(grammar, ctx);
 			} catch (WorkflowInterruptedException e) {
 				throw e;
 			} catch (Exception e) {
-				LOG.error(e.getMessage(), e);
+				cgEx.addException(e);
 			}
+		}
+		if(cgEx.hasExceptions()) {
+			throw cgEx;
 		}
 	}
 

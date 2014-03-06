@@ -43,9 +43,9 @@ class DebugGraphGenerator {
 	
 	@Inject SyntacticSequencerPDA2ExtendedDot syntacticSequencerPDA2Dot
 	
-	@Inject PdaToDot pdaToDot
+	@Inject PdaToDot<?,?> pdaToDot
 	
-	@Inject NfaToDot nfaToDot
+	@Inject NfaToDot<?> nfaToDot
 	
 	def Iterable<Pair<String, String>> generateDebugGraphs() {
 		val result = <Pair<String, String>>newArrayList()
