@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.RandomAccess;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -23,7 +22,6 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.IExpressionScope.Anchor;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -135,12 +133,12 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		return IResolvedTypes.NULL;
 	}
 	
-	public IExpressionScope getExpressionScope(EObject context, EReference reference, Anchor anchor) {
+	public IExpressionScope getExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
 		IResolvedTypes delegate = getDelegate(context);
-		return delegate.getExpressionScope(context, reference, anchor);
+		return delegate.getExpressionScope(context, anchor);
 	}
 	
-	public boolean hasExpressionScope(EObject context, Anchor anchor) {
+	public boolean hasExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
 		IResolvedTypes delegate = getDelegate(context);
 		return delegate.hasExpressionScope(context, anchor);
 	}

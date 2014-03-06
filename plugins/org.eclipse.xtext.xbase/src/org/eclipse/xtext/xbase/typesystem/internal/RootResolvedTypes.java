@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -32,7 +31,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
-import org.eclipse.xtext.xbase.typesystem.IExpressionScope.Anchor;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
@@ -40,7 +38,6 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ExtendedEarlyExitComputer;
-import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Maps;
@@ -60,7 +57,7 @@ import com.google.common.collect.Sets;
 @NonNullByDefault
 public class RootResolvedTypes extends ResolvedTypes {
 
-	private final EnumMap<IExpressionScope.Anchor, Map<EObject, List<FeatureScopeSessionToResolvedTypes>>> featureScopeSessions;
+	private final EnumMap<IExpressionScope.Anchor, Map<EObject, ExpressionScope>> featureScopeSessions;
 	
 	private Set<XExpression> toBeInferredRootExpressions;
 	
@@ -69,9 +66,9 @@ public class RootResolvedTypes extends ResolvedTypes {
 	protected RootResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		super(resolver);
 		this.issueSeverities = resolver.getIssueSeverities();
-		this.featureScopeSessions = new EnumMap<IExpressionScope.Anchor, Map<EObject, List<FeatureScopeSessionToResolvedTypes>>>(IExpressionScope.Anchor.class);
+		this.featureScopeSessions = Maps.newEnumMap(IExpressionScope.Anchor.class);
 		for(IExpressionScope.Anchor anchor: IExpressionScope.Anchor.values()) {
-			featureScopeSessions.put(anchor, Maps.<EObject, List<FeatureScopeSessionToResolvedTypes>>newHashMapWithExpectedSize(256));
+			featureScopeSessions.put(anchor, Maps.<EObject, ExpressionScope>newHashMapWithExpectedSize(256));
 		}
 	}
 
@@ -249,41 +246,45 @@ public class RootResolvedTypes extends ResolvedTypes {
 		return issueSeverities;
 	}
 	
-	public IExpressionScope getExpressionScope(EObject context, EReference reference, Anchor anchor) {
-		Map<EObject, List<FeatureScopeSessionToResolvedTypes>> map = featureScopeSessions.get(anchor);
-		List<FeatureScopeSessionToResolvedTypes> data = map.get(context);
-		if (data == null) {
-			if (anchor == Anchor.RECEIVER) {
-				map = featureScopeSessions.get(Anchor.AFTER);
-				data = map.get(context);
+	public IExpressionScope getExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
+		Map<EObject, ExpressionScope> map = featureScopeSessions.get(anchor);
+		ExpressionScope scope = map.get(context);
+		if (scope == null) {
+			if (anchor == IExpressionScope.Anchor.RECEIVER) {
+				map = featureScopeSessions.get(IExpressionScope.Anchor.AFTER);
+				scope = map.get(context);
 			}
-			if (data == null) {
+			if (scope == null) {
 				return IExpressionScope.NULL;
 			}
 		}
-		return new ExpressionScope(getResolver().getFeatureScopes(), context, reference, data, anchor);
+		return scope.withAnchor(anchor);
 	}
 	
-	public boolean hasExpressionScope(EObject context, Anchor anchor) {
-		Map<EObject, List<FeatureScopeSessionToResolvedTypes>> map = featureScopeSessions.get(anchor);
+	public boolean hasExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
+		Map<EObject, ExpressionScope> map = featureScopeSessions.get(anchor);
 		return map.containsKey(context);
 	}
 	
 	@Override
 	protected void addExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor, IResolvedTypes resolvedTypes) {
-		Map<EObject, List<FeatureScopeSessionToResolvedTypes>> map = featureScopeSessions.get(anchor);
-		Maps2.putIntoListMap(context, new FeatureScopeSessionToResolvedTypes(session, resolvedTypes), map);
+		Map<EObject, ExpressionScope> map = featureScopeSessions.get(anchor);
+		ExpressionScope scope = map.get(context);
+		if (scope == null) {
+			scope = new ExpressionScope(getResolver().getFeatureScopes(), context, anchor);
+			map.put(context, scope);
+		}
+		scope.addData(session, resolvedTypes);
 	}
 	
 	@Override
 	protected void replacePreviousExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor) {
-		Map<EObject, List<FeatureScopeSessionToResolvedTypes>> map = featureScopeSessions.get(anchor);
-		List<FeatureScopeSessionToResolvedTypes> data = map.get(context);
-		if (data == null || data.isEmpty()) {
+		Map<EObject, ExpressionScope> map = featureScopeSessions.get(anchor);
+		ExpressionScope scope = map.get(context);
+		if (scope == null) {
 			throw new IllegalStateException("Cannot replace scope that was never recorded");
 		}
-		FeatureScopeSessionToResolvedTypes prev = data.remove(data.size() - 1);
-		data.add(new FeatureScopeSessionToResolvedTypes(session, prev.getTypes()));
+		scope.replacePreviousData(session);
 	}
 
 }

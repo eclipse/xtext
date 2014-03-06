@@ -79,16 +79,19 @@ public class FeatureScopes implements IFeatureNames {
 	 * @param session the currently available session data
 	 */
 	public IScope createFeatureCallScope(EObject context, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+		if (!isFeatureCallScope(reference)) {
+			throw new IllegalArgumentException(String.valueOf(reference));
+		}
 		if (!(context instanceof XAbstractFeatureCall)) {
 			return IScope.NULLSCOPE;
 		}
 		XAbstractFeatureCall call = (XAbstractFeatureCall) context;
 		final XExpression syntacticalReceiver = getSyntacticalReceiver(call);
 		if (syntacticalReceiver == null) {
-			IScope result = createSimpleFeatureCallScope(call, reference, session, resolvedTypes);
+			IScope result = createSimpleFeatureCallScope(call, session, resolvedTypes);
 			return result;
 		}
-		IScope result = createFeatureCallScopeForReceiver(call, syntacticalReceiver, reference, session, resolvedTypes);
+		IScope result = createFeatureCallScopeForReceiver(call, syntacticalReceiver, session, resolvedTypes);
 		return result;
 	}
 
@@ -99,9 +102,8 @@ public class FeatureScopes implements IFeatureNames {
 	/**
 	 * This method serves as an entry point for the content assist scoping for simple feature calls.
 	 * @param context the context e.g. a for loop expression, a block or a catch clause
-	 * @param reference the reference who's value shall be scoped. Not necessarily a feature of the context.
 	 */
-	public IScope createSimpleFeatureCallScope(EObject context, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+	public IScope createSimpleFeatureCallScope(EObject context, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		IScope root = IScope.NULLSCOPE;
 		if (context instanceof XFeatureCall) {
 			XFeatureCall featureCall = (XFeatureCall) context;
@@ -197,9 +199,7 @@ public class FeatureScopes implements IFeatureNames {
 	 * @param resolvedTypes TODO
 	 * @param session TODO
 	 */
-	public IScope createFeatureCallScopeForReceiver(final XExpression featureCall, final XExpression receiver, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
-		if (!isFeatureCallScope(reference))
-			return IScope.NULLSCOPE;
+	public IScope createFeatureCallScopeForReceiver(final XExpression featureCall, final XExpression receiver, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		if (receiver == null || receiver.eIsProxy())
 			return IScope.NULLSCOPE;
 		LightweightTypeReference receiverType = resolvedTypes.getActualType(receiver);
