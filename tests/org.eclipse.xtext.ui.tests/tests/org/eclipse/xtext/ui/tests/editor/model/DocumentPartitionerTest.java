@@ -52,7 +52,35 @@ public class DocumentPartitionerTest extends Assert {
 		assertEquals(8, partition.getOffset());
 		assertEquals(11, partition.getLength());
 		assertEquals(TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION, partition.getType());
-		
+	}
+	
+	@Test public void testBug401433() throws Exception {
+		XtextDocument document = getDocument("     /* */ ");
+		document.replace(10, 1, "");
+		ITypedRegion partition = document.getPartition(9);
+		assertEquals(5, partition.getOffset());
+		assertEquals(5, partition.getLength());
+		assertEquals(TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION, partition.getType());
+		document.replace(9, 1, "");
+		partition = document.getPartition(8);
+		assertEquals(5, partition.getOffset());
+		assertEquals(4, partition.getLength());
+		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, partition.getType());
+		document.replace(8, 1, "");
+		partition = document.getPartition(7);
+		assertEquals(5, partition.getOffset());
+		assertEquals(3, partition.getLength());
+		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, partition.getType());
+		document.replace(7, 1, "");
+		partition = document.getPartition(6);
+		assertEquals(5, partition.getOffset());
+		assertEquals(2, partition.getLength());
+		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, partition.getType());
+		document.replace(6, 1, "");
+		partition = document.getPartition(5);
+		assertEquals(5, partition.getOffset());
+		assertEquals(1, partition.getLength());
+		assertEquals(IDocument.DEFAULT_CONTENT_TYPE, partition.getType());
 	}
 
 	public XtextDocument getDocument(String s) {
