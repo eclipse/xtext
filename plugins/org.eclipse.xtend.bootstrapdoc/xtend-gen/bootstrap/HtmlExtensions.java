@@ -122,13 +122,13 @@ public class HtmlExtensions {
             final String newHref = ("_" + Integer.valueOf(_size));
             Map<Identifiable,String> _artificialHrefIds_3 = this.artificialHrefIds(it);
             _artificialHrefIds_3.put(it, newHref);
-            _xblockexpression_1 = (newHref);
+            _xblockexpression_1 = newHref;
           }
           _xifexpression_1 = _xblockexpression_1;
         }
         _xifexpression = _xifexpression_1;
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -189,7 +189,7 @@ public class HtmlExtensions {
             _builder.append("</p>");
             _builder.newLine();
             final String result = _builder.toString();
-            _xblockexpression_1 = (result);
+            _xblockexpression_1 = result;
           }
           _xifexpression_2 = _xblockexpression_1;
         } else {
@@ -199,7 +199,7 @@ public class HtmlExtensions {
       } else {
         _xifexpression_1 = "";
       }
-      _xblockexpression = (_xifexpression_1);
+      _xblockexpression = _xifexpression_1;
     }
     return _xblockexpression;
   }
@@ -348,7 +348,7 @@ public class HtmlExtensions {
       _builder.newLineIfNotEmpty();
       _builder.append("</div>");
       _builder.newLine();
-      _xblockexpression = (this.insert(_builder, state));
+      _xblockexpression = this.insert(_builder, state);
     }
     return _xblockexpression;
   }
@@ -433,7 +433,7 @@ public class HtmlExtensions {
           _builder.append("\">(src)</a>");
         }
       }
-      _xblockexpression = (_builder);
+      _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
@@ -539,7 +539,7 @@ public class HtmlExtensions {
         _builder_1.append("</code>");
         _xifexpression = _builder_1;
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -602,7 +602,7 @@ public class HtmlExtensions {
       String _name = _eClass.getName();
       String _plus = ("Missing toHtml for " + _name);
       InputOutput.<String>println(_plus);
-      _xblockexpression = ("");
+      _xblockexpression = "";
     }
     return _xblockexpression;
   }
@@ -712,7 +712,7 @@ public class HtmlExtensions {
         }
         _while_1 = _and_2;
       }
-      _xblockexpression = (it.substring(start, (end + 1)));
+      _xblockexpression = it.substring(start, (end + 1));
     }
     return _xblockexpression;
   }

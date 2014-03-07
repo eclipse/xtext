@@ -30,7 +30,7 @@ public class PostProcessor {
           (Pattern.MULTILINE + Pattern.DOTALL));
         this._codePattern = _compile;
       }
-      _xblockexpression = (this._codePattern);
+      _xblockexpression = this._codePattern;
     }
     return _xblockexpression;
   }
@@ -70,7 +70,7 @@ public class PostProcessor {
         boolean _find_1 = matcher.find();
         _while = _find_1;
       }
-      _xblockexpression = (html);
+      _xblockexpression = html;
     }
     return _xblockexpression;
   }

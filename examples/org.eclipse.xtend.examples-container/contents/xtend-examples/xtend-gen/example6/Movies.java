@@ -93,7 +93,7 @@ public class Movies {
         return Long.valueOf(((a).longValue() + (b).longValue()));
       }
     };
-    final long movies = (IterableExtensions.<Long>reduce(_map, _function_2)).longValue();
+    final long movies = (long) IterableExtensions.<Long>reduce(_map, _function_2);
     Assert.assertEquals(47229, movies);
   }
   

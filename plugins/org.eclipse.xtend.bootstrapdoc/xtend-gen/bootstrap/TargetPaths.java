@@ -35,7 +35,7 @@ public class TargetPaths {
       Resource _eResource = document.eResource();
       ResourceSet _resourceSet = _eResource.getResourceSet();
       EList<Adapter> _eAdapters = _resourceSet.eAdapters();
-      _xblockexpression = (_eAdapters.add(adapter));
+      _xblockexpression = _eAdapters.add(adapter);
     }
     return _xblockexpression;
   }
@@ -75,7 +75,7 @@ public class TargetPaths {
       } else {
         _xifexpression = (element instanceof Document);
       }
-      _xblockexpression = (_xifexpression);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

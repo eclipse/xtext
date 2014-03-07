@@ -55,7 +55,7 @@ public class CodeRefs {
                 boolean _startsWith = identifier.startsWith(it);
                 _and = _startsWith;
               }
-              _xblockexpression = (_and);
+              _xblockexpression = _and;
             }
             return Boolean.valueOf(_xblockexpression);
           }
@@ -70,7 +70,7 @@ public class CodeRefs {
         CodeRefs.LOG.error(_plus);
         return null;
       }
-      _xblockexpression = (uri);
+      _xblockexpression = uri;
     }
     return _xblockexpression;
   }
@@ -115,7 +115,7 @@ public class CodeRefs {
         CodeRefs.LOG.error(_plus);
         return null;
       }
-      _xblockexpression = (uri);
+      _xblockexpression = uri;
     }
     return _xblockexpression;
   }

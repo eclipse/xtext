@@ -28,7 +28,7 @@ public class DomBuilder {
     {
       final Contents text = new Contents(contents);
       ArrayList<Node> _contents = it.getContents();
-      _xblockexpression = (_contents.add(text));
+      _xblockexpression = _contents.add(text);
     }
     return _xblockexpression;
   }
