@@ -129,8 +129,9 @@ public class RichStringAwareTokenScanner extends TokenScanner {
 		if (!getIterator().hasNext())
 			return Token.EOF;
 		ILexerTokenRegion next = getIterator().next();
-		if (allTokenTypesAsString[next.getLexerTokenType()] != null) {
-			currentRichTextToken = createRichTextToken(allTokenTypesAsString[next.getLexerTokenType()], next);
+		int tokenType = next.getLexerTokenType();
+		if (tokenType >= 0 && allTokenTypesAsString[tokenType] != null) {
+			currentRichTextToken = createRichTextToken(allTokenTypesAsString[tokenType], next);
 			return currentRichTextToken.nextToken();
 		} else {
 			setCurrentToken(next);
