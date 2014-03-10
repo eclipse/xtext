@@ -55,12 +55,21 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class StandaloneBuilder {
   private final static Logger LOG = Logger.getLogger(StandaloneBuilder.class);
   
+  /**
+   * Map key is a file extension provided by Language FileExtensionProvider
+   */
   private Map<String,LanguageAccess> _languages;
   
+  /**
+   * Map key is a file extension provided by Language FileExtensionProvider
+   */
   public Map<String,LanguageAccess> getLanguages() {
     return this._languages;
   }
   
+  /**
+   * Map key is a file extension provided by Language FileExtensionProvider
+   */
   public void setLanguages(final Map<String,LanguageAccess> languages) {
     this._languages = languages;
   }
@@ -164,12 +173,21 @@ public class StandaloneBuilder {
       StandaloneBuilder.LOG.info("Using common types.");
     }
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+    String _encoding = this.getEncoding();
+    boolean _notEquals = (!Objects.equal(_encoding, null));
+    if (_notEquals) {
+      StandaloneBuilder.LOG.debug("Setting encoding.");
+      Map<String,LanguageAccess> _languages_1 = this.getLanguages();
+      Collection<LanguageAccess> _values_1 = _languages_1.values();
+      String _encoding_1 = this.getEncoding();
+      this.fileEncodingSetup(_values_1, _encoding_1);
+    }
     StandaloneBuilder.LOG.info("Collecting source models.");
     final long startedAt = System.currentTimeMillis();
     Iterable<String> rootsToTravers = this.getClassPathEntries();
     String _classPathLookUpFilter = this.getClassPathLookUpFilter();
-    boolean _notEquals = (!Objects.equal(_classPathLookUpFilter, null));
-    if (_notEquals) {
+    boolean _notEquals_1 = (!Objects.equal(_classPathLookUpFilter, null));
+    if (_notEquals_1) {
       StandaloneBuilder.LOG.info("Class path look up filter is active.");
       String _classPathLookUpFilter_1 = this.getClassPathLookUpFilter();
       final Pattern cpLookUpFilter = Pattern.compile(_classPathLookUpFilter_1);
@@ -243,6 +261,25 @@ public class StandaloneBuilder {
     }
     this.generate(sourceResources);
     return isErrorFree;
+  }
+  
+  public void fileEncodingSetup(final Collection<LanguageAccess> langs, final String encoding) {
+    for (final LanguageAccess lang : langs) {
+      IEncodingProvider _encodingProvider = lang.getEncodingProvider();
+      final IEncodingProvider provider = _encodingProvider;
+      boolean _matched = false;
+      if (!_matched) {
+        if (provider instanceof IEncodingProvider.Runtime) {
+          _matched=true;
+          ((IEncodingProvider.Runtime)provider).setDefaultEncoding(encoding);
+        }
+      }
+      if (!_matched) {
+        StandaloneBuilder.LOG.debug(
+          (((("Couldn\'t set encoding \'" + encoding) + "\' for provider \'") + provider) + 
+            "\'. Only subclasses of IEncodingProvider.Runtime are supported."));
+      }
+    }
   }
   
   protected ResourceDescriptionsData fillIndex(final XtextResourceSet set) {
@@ -342,35 +379,10 @@ public class StandaloneBuilder {
         String _plus = ("Starting generator for input: \'" + _lastSegment);
         String _plus_1 = (_plus + "\'");
         StandaloneBuilder.LOG.info(_plus_1);
-        String _encoding = this.getEncoding();
-        boolean _notEquals = (!Objects.equal(_encoding, null));
-        if (_notEquals) {
-          LanguageAccess _languageAccess = this.languageAccess(it);
-          IEncodingProvider _encodingProvider = _languageAccess.getEncodingProvider();
-          final IEncodingProvider provider = _encodingProvider;
-          boolean _matched = false;
-          if (!_matched) {
-            if (provider instanceof IEncodingProvider.Runtime) {
-              _matched=true;
-              String _encoding_1 = this.getEncoding();
-              ((IEncodingProvider.Runtime)provider).setDefaultEncoding(_encoding_1);
-            }
-          }
-          if (!_matched) {
-            String _encoding_1 = this.getEncoding();
-            String _plus_2 = ("Couldn\'t set encoding \'" + _encoding_1);
-            String _plus_3 = (_plus_2 + "\' for file \'");
-            URI _uRI_1 = it.getURI();
-            String _plus_4 = (_plus_3 + _uRI_1);
-            String _plus_5 = (_plus_4 + 
-              "\'. Only subclasses of IEncodingProvider.Runtime are supported.");
-            StandaloneBuilder.LOG.debug(_plus_5);
-          }
-        }
+        LanguageAccess _languageAccess = this.languageAccess(it);
+        IGenerator _generator = _languageAccess.getGenerator();
         LanguageAccess _languageAccess_1 = this.languageAccess(it);
-        IGenerator _generator = _languageAccess_1.getGenerator();
-        LanguageAccess _languageAccess_2 = this.languageAccess(it);
-        JavaIoFileSystemAccess _fileSystemAccess = _languageAccess_2.getFileSystemAccess();
+        JavaIoFileSystemAccess _fileSystemAccess = _languageAccess_1.getFileSystemAccess();
         _generator.doGenerate(it, _fileSystemAccess);
       }
     }
@@ -444,10 +456,7 @@ public class StandaloneBuilder {
       public boolean apply(final URI input) {
         final boolean matches = nameBasedFilter.matches(input);
         if (matches) {
-          boolean _isDebugEnabled = StandaloneBuilder.LOG.isDebugEnabled();
-          if (_isDebugEnabled) {
-            StandaloneBuilder.LOG.debug((("Adding file \'" + input) + "\'"));
-          }
+          StandaloneBuilder.LOG.debug((("Adding file \'" + input) + "\'"));
           Resource _resource = resourceSet.getResource(input, true);
           resources.add(_resource);
         }
