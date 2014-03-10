@@ -56,7 +56,7 @@ import com.google.inject.Injector;
 public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	private String model;
-	private String postFix;
+	private String suffix;
 	private int cursorPosition;
 	private Injector injector;
 	private final ResourceLoadHelper loadHelper;
@@ -93,8 +93,8 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return clone(getModel()+model, cursorPosition+model.length());
 	}
 	
-	public ContentAssistProcessorTestBuilder appendPostFix(String postFix) throws Exception {
-		return cloneWithPostFix(this.postFix==null?postFix:this.postFix+postFix);
+	public ContentAssistProcessorTestBuilder appendSuffix(String suffix) throws Exception {
+		return cloneWithSuffix(this.suffix==null?suffix:this.suffix+suffix);
 	}
 
 	public ContentAssistProcessorTestBuilder appendNl(String model) throws Exception {
@@ -351,7 +351,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	}
 	
 	protected String getFullTextToBeParsed() {
-		return getModel()+(this.postFix== null ? "":postFix);
+		return getModel()+(this.suffix== null ? "":suffix);
 	}
 
 	public List<String> toString(ICompletionProposal[] proposals) {
@@ -503,15 +503,15 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		ContentAssistProcessorTestBuilder builder = (ContentAssistProcessorTestBuilder) clone();
 		builder.model = model;
 		builder.cursorPosition = offset;
-		builder.postFix = this.postFix;
+		builder.suffix = this.suffix;
 		return builder;
 	}
 	
-	protected ContentAssistProcessorTestBuilder cloneWithPostFix(String postFix) throws Exception {
+	protected ContentAssistProcessorTestBuilder cloneWithSuffix(String postFix) throws Exception {
 		ContentAssistProcessorTestBuilder builder = (ContentAssistProcessorTestBuilder) clone();
 		builder.model = this.model;
 		builder.cursorPosition = this.cursorPosition;
-		builder.postFix = postFix;
+		builder.suffix = postFix;
 		return builder;
 	}
 

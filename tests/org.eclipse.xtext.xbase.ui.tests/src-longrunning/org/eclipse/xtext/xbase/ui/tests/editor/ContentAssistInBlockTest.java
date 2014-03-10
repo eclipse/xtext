@@ -14,7 +14,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistInBlockTest;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
@@ -29,16 +28,13 @@ import com.google.inject.Injector;
 public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockTest {
 
 	@Override
-	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(getInjector(), this) {
-			@Override
-			public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(int cursorPosition,
-					String... expectedText) throws Exception {
-				append("\n}");
-				return super.assertTextAtCursorPosition(cursorPosition, expectedText);
-			}
-		};
-		return builder.appendNl("{");
+	protected String getPrefix() {
+		return "{";
+	}
+	
+	@Override
+	protected String getSuffix() {
+		return "\n}";
 	}
 	
 	protected static final String PROJECT_NAME = "ContentAssistTestProject";

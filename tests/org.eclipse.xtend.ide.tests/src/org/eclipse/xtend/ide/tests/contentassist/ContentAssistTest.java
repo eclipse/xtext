@@ -22,7 +22,6 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
@@ -180,28 +179,11 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 	}
 	
 	@Override
-	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		final String prefix = getPrefix();
-		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(getInjector(), this) {
-			@Override
-			public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(String cursorPosition, int offset,
-					String... expectedText) throws Exception {
-				return assertTextAtCursorPosition(getModel().indexOf(cursorPosition, prefix.length()) + offset, expectedText);
-			}
-			
-			@Override
-			public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(String cursorPosition,
-					String... expectedText) throws Exception {
-				return assertTextAtCursorPosition(getModel().indexOf(cursorPosition, prefix.length()), expectedText);
-			}
-		};
-		return builder.appendNl(prefix).appendPostFix(getPostFix());
-	}
-
-	protected String getPostFix() {
+	protected String getSuffix() {
 		return "\n}\n}";
 	}
 	
+	@Override
 	protected String getPrefix() {
 		return "class Name { def _operation() {";
 	}

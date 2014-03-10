@@ -59,7 +59,7 @@ public class ContentAssistInLambdaTest2 extends ContentAssistTest {
 	}
 	
 	@Override
-	protected String getPostFix() {
+	protected String getSuffix() {
 		return "\n]\n]\n}\n}";
 	}
 	

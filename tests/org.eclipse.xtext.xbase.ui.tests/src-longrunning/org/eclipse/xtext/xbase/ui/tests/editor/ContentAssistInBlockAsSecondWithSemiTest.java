@@ -7,24 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
-import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ContentAssistInBlockAsSecondWithSemiTest extends ContentAssistInBlockTest {
 
 	@Override
-	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(getInjector(), this) {
-			@Override
-			public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(int cursorPosition,
-					String... expectedText) throws Exception {
-				append("\n}");
-				return super.assertTextAtCursorPosition(cursorPosition, expectedText);
-			}
-		};
-		return builder.appendNl("{ doesNotExist;");
+	protected String getPrefix() {
+		return "{ doesNotExist;";
+	}
+	
+	@Override
+	protected String getSuffix() {
+		return "\n}";
 	}
 	
 }

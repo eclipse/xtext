@@ -632,8 +632,43 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	/**
 	 * @since 2.3
 	 */
-	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		return new ContentAssistProcessorTestBuilder(getInjector(), this);
+	protected final ContentAssistProcessorTestBuilder newBuilder() throws Exception {
+		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(getInjector(), this) {
+			@Override
+			public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(
+					String cursorPosition, String... expectedText) throws Exception {
+				return assertTextAtCursorPosition(getModel().indexOf(cursorPosition, getPrefix().length()), expectedText);
+			}
+			
+			@Override
+			public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(
+					String cursorPosition, int offset, String... expectedText) throws Exception {
+				return assertTextAtCursorPosition(getModel().indexOf(cursorPosition, getPrefix().length()) + offset, expectedText);
+			}
+		};
+		String prefix = getPrefix();
+		if (prefix.length() > 0) {
+			builder = builder.appendNl(prefix);
+		}
+		String suffix = getSuffix();
+		if (suffix.length() > 0) {
+			builder = builder.appendSuffix(suffix);
+		}
+		return builder;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	protected String getPrefix() {
+		return "";
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	protected String getSuffix() {
+		return "";
 	}
 	
 }
