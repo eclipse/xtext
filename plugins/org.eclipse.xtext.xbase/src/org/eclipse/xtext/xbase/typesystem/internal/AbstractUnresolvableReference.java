@@ -49,15 +49,7 @@ public abstract class AbstractUnresolvableReference implements ILinkingCandidate
 	}
 
 	protected void applyType() {
-		for (ITypeExpectation expectation : state.getExpectations()) {
-			LightweightTypeReference expectedType = expectation.getExpectedType();
-			if (expectedType != null) {
-				expectation.acceptActualType(expectedType, ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
-			} else {
-				expectation.acceptActualType(new UnknownTypeReference(expectation.getReferenceOwner()),
-						ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
-			}
-		}
+		state.acceptActualType(new UnknownTypeReference(state.getReferenceOwner()),	ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
 	}
 	
 	protected ExpressionTypeComputationState getState() {
