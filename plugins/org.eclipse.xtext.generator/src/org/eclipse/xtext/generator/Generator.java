@@ -165,7 +165,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private void handleCompositeException(Issues issues, CompositeGeneratorException e) {
 		for (Exception ex : e.getExceptions()) {
-			issues.addError(this, "CompositeGeneratorException: ", null, ex, null);
+			if (ex instanceof CompositeGeneratorException) {
+				handleCompositeException(issues, (CompositeGeneratorException) ex);
+			}
+			issues.addError(this, "GeneratorException: ", null, ex, null);
 		}
 	}
 
