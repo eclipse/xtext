@@ -27,10 +27,12 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import com.google.common.io.Files
 import java.util.regex.Pattern
+import java.util.Collection
 
 class StandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(StandaloneBuilder);
 
+	/**  Map key is a file extension provided by Language FileExtensionProvider   */
 	@Property Map<String, LanguageAccess> languages
 	@Property Iterable<String> sourceDirs
 	@Property Iterable<String> classPathEntries
@@ -59,6 +61,11 @@ class StandaloneBuilder {
 		}
 
 		val resourceSet = resourceSetProvider.get
+
+		if (encoding != null) {
+			LOG.debug("Setting encoding.")
+			fileEncodingSetup(languages.values, encoding)
+		}
 
 		LOG.info("Collecting source models.")
 		val startedAt = System.currentTimeMillis
@@ -94,6 +101,21 @@ class StandaloneBuilder {
 		}
 		generate(sourceResources)
 		return isErrorFree
+	}
+
+	def fileEncodingSetup(Collection<LanguageAccess> langs, String encoding) {
+		for (lang : langs) {
+			switch provider : lang.encodingProvider {
+				IEncodingProvider.Runtime: {
+					provider.setDefaultEncoding(encoding)
+				}
+				default: {
+					LOG.debug(
+						"Couldn't set encoding '" + encoding + "' for provider '" + provider +
+							"'. Only subclasses of IEncodingProvider.Runtime are supported.")
+				}
+			}
+		}
 	}
 
 	def protected fillIndex(XtextResourceSet set) {
@@ -145,18 +167,6 @@ class StandaloneBuilder {
 	def protected generate(List<Resource> sourceResources) {
 		for (Resource it : sourceResources) {
 			LOG.info("Starting generator for input: '" + getURI().lastSegment() + "'");
-			if (encoding != null) {
-				switch provider : languageAccess.encodingProvider {
-					IEncodingProvider.Runtime: {
-						provider.setDefaultEncoding(encoding)
-					}
-					default: {
-						LOG.debug(
-							"Couldn't set encoding '" + encoding + "' for file '" + URI +
-								"'. Only subclasses of IEncodingProvider.Runtime are supported.")
-					}
-				}
-			}
 			languageAccess.generator.doGenerate(it, languageAccess.fileSystemAccess);
 		}
 	}
@@ -196,8 +206,7 @@ class StandaloneBuilder {
 			[ input |
 				val matches = nameBasedFilter.matches(input)
 				if (matches) {
-					if (LOG.debugEnabled)
-						LOG.debug("Adding file '" + input + "'");
+					LOG.debug("Adding file '" + input + "'");
 					resources.add(resourceSet.getResource(input, true));
 				}
 				return matches

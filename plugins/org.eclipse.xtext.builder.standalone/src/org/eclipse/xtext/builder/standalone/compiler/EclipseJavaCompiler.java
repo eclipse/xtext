@@ -58,7 +58,7 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 		commandLine.add("-target " + configuration.getTargetLevel());
 		commandLine.add("-proceedOnError");
 		for (String src : validSourceRoots) {
-			commandLine.add("\""+ src +"\"");
+			commandLine.add("\"" + src + "\"");
 		}
 		String cmdLine = concat(" ", commandLine);
 		if (LOG.isDebugEnabled()) {
@@ -77,7 +77,8 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 				public void write(char[] data, int offset, int count) throws IOException {
 					String message = String.copyValueOf(data, offset, count);
 					if (!Strings.isEmpty(message.trim())) {
-						LOG.info(message);
+						if (configuration.isVerbose())
+							LOG.info(message);
 					}
 				}
 
@@ -104,7 +105,8 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 				public void write(char[] data, int offset, int count) throws IOException {
 					String message = String.copyValueOf(data, offset, count);
 					if (!Strings.isEmpty(message.trim())) {
-						LOG.warn(message);
+						if (configuration.isVerbose())
+							LOG.warn(message);
 					}
 				}
 
@@ -146,7 +148,7 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 		public Boolean apply(final String path) {
 			final File file = new File(path);
 			boolean useEntry = file.exists();
-			if (LOG.isDebugEnabled() && !useEntry) {
+			if (!useEntry) {
 				LOG.debug("File \'" + path + "\' is missing. Skipping.");
 			}
 			return useEntry;
