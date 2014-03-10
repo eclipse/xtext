@@ -107,6 +107,14 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	}
 	
 	@Override
+	public void completeTypeReferenceNoTypeArgs_Type(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals() || getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
+			completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
+		}
+	}
+	
+	@Override
 	protected ITypesProposalProvider.Filter createVisibilityFilter(ContentAssistContext context, int searchFor) {
 		XtendFile file = (XtendFile) context.getRootModel();
 		final char[] contextPackageName = Strings.emptyIfNull(file.getPackage()).toCharArray(); 
