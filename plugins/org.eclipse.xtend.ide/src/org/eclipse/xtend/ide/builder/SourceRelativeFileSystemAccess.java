@@ -12,9 +12,9 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.JDTAwareEclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -27,51 +27,42 @@ import com.google.common.collect.Multimap;
  * @author Holger Schill
  */
 public class SourceRelativeFileSystemAccess extends JDTAwareEclipseResourceFileSystemAccess2 {
-
-	private IFolder currentSource = null;
-
-	public void setCurrentSource(IFolder currentSource) {
-		this.currentSource = currentSource;
-	}
-
+	
 	@Override
 	protected boolean ensureOutputConfigurationDirectoryExists(OutputConfiguration outputConfig) {
-		IContainer container = getContainer(outputConfig);
-		if (container.exists()) {
-			// Add as source folder even if the directory already exists
-			try {
-				createContainer(container);
-				return true;
-			} catch (CoreException e) {
-				throw new RuntimeIOException(e);
-			}
+		try {
+			super.ensureOutputConfigurationDirectoryExists(outputConfig);
+			addToSourceFolders(getContainer(outputConfig));
+			return true;
+		} catch (CoreException e) {
+			throw new RuntimeIOException(e);
 		}
-		return super.ensureOutputConfigurationDirectoryExists(outputConfig);
 	}
 
 	@Override
 	protected IContainer getContainer(OutputConfiguration outputConfig) {
-		if (currentSource != null) {
-			String directory = outputConfig.getOutputDirectory();
-			IPath path = currentSource.getFullPath().append("../" + directory);
-			IFolder folder = currentSource.getWorkspace().getRoot().getFolder(path);
-			return folder;
+		if (!outputConfig.isUseOutputPerSourceFolder() && getCurrentSource() != null) {
+			String path = getCurrentSource() + "/../" + outputConfig.getOutputDirectory();
+			IPath workspaceRelativePath = getProject().getFullPath().append(new Path(path));
+			return getProject().getParent().getFolder(workspaceRelativePath);
+		} else {
+			return super.getContainer(outputConfig);
 		}
-		return super.getContainer(outputConfig);
 	}
 
 	/**
 	 * Since sourceTraces are relative the URI has to be computed with the currentSource as context
 	 */
+	//TODO this fixes relative URIs for Xtend only, but what about all other languages?
 	@Override
 	public void flushSourceTraces(String generatorName) throws CoreException {
 		Multimap<URI, IPath> sourceTraces = getSourceTraces();
 		if (sourceTraces != null) {
 			Set<URI> keys = sourceTraces.keySet();
 			for (URI uri : keys) {
-				if (uri != null && currentSource != null) {
+				if (uri != null && getCurrentSource() != null) {
 					Collection<IPath> paths = sourceTraces.get(uri);
-					IFile sourceFile = currentSource.getFile(uri.toFileString());
+					IFile sourceFile = getProject().getFolder(getCurrentSource()).getFile(new Path(uri.toFileString()));
 					if (sourceFile.exists()) {
 						IPath[] tracePathArray = paths.toArray(new IPath[paths.size()]);
 						getTraceMarkers().installMarker(sourceFile, generatorName, tracePathArray);
@@ -81,5 +72,4 @@ public class SourceRelativeFileSystemAccess extends JDTAwareEclipseResourceFileS
 		}
 		resetSourceTraces();
 	}
-
 }
