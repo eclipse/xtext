@@ -270,7 +270,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 	}
 
 	def protected removeStaticImport(RewritableImportSection section, Class<?> javaClass) {
-		section.removeStaticImport(jvmType(javaClass))
+		section.removeStaticImport(jvmType(javaClass), null)
 	}
 
 	def protected addExtensionImport(RewritableImportSection section, Class<?> javaClass) {
@@ -278,7 +278,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 	}
 
 	def protected removeExtensionImport(RewritableImportSection section, Class<?> javaClass) {
-		section.removeStaticExtensionImport(jvmType(javaClass))
+		section.removeStaticExtensionImport(jvmType(javaClass), null)
 	}
 
 	def protected jvmType(Class<? extends Object> javaClass) {
