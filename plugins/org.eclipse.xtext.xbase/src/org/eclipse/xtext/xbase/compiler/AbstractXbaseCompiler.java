@@ -600,7 +600,7 @@ public abstract class AbstractXbaseCompiler {
 	protected boolean isJavaConformant(LightweightTypeReference left, LightweightTypeReference right) {
 		boolean result = (services.getTypeConformanceComputer().isConformant(
 				left, right,
-				RawTypeConformanceComputer.ALLOW_RAW_TYPE_CONVERSION | RawTypeConformanceComputer.ALLOW_BOXING | RawTypeConformanceComputer.ALLOW_UNBOXING) & RawTypeConformanceComputer.SUCCESS) != 0;
+				RawTypeConformanceComputer.ALLOW_PRIMITIVE_WIDENING | RawTypeConformanceComputer.ALLOW_RAW_TYPE_CONVERSION | RawTypeConformanceComputer.ALLOW_BOXING | RawTypeConformanceComputer.ALLOW_UNBOXING) & RawTypeConformanceComputer.SUCCESS) != 0;
 		return result;
 	}
 	
