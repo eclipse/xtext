@@ -12,7 +12,7 @@ public class Download extends AbstractWebsite {
   
   public String getLink(final String platform) {
     String _fileExtension = this.fileExtension(platform);
-    String _plus = (("http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-kepler-R-" + platform) + _fileExtension);
+    String _plus = (("http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-kepler-SR2-" + platform) + _fileExtension);
     return (_plus + "&r=1");
   }
   

@@ -166,8 +166,13 @@ abstract class AbstractWebsite implements Resource {
 			</div>
 		</div>
 		<!-- Navbar End -->
+		«xtextCONRibbon()»
+	'''
+	
+	def xtextCONRibbon() '''
 		<div class="ribbon-wrapper-red"><div class="ribbon-red"><a href="http://xtextcon.org">Come to XtextCON 2014!</a></div></div>
 	'''
+	
 	def plusoneURL() { 'http://www.xtext.org' }
 
 
