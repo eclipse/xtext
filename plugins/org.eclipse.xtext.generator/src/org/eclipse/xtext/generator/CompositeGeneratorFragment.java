@@ -25,9 +25,9 @@ import org.eclipse.xtext.Grammar;
 import com.google.common.base.Function;
 
 /**
+ * A simple composite generator fragment implementation. It delegates all callbacks to its contained fragments.
+ * 
  * @author Sven Efftinge - Initial contribution and API
- *
- *         simple composite generator fragment implementation. delegating all callbacks to its contained fragments
  */
 public class CompositeGeneratorFragment implements IGeneratorFragment, IGeneratorFragmentExtension, NamingAware {
 
@@ -86,7 +86,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		}
 	}
 
-	public void generate(Grammar grammar, XpandExecutionContext ctx) {
+	public void generate(Grammar grammar, XpandExecutionContext ctx) throws CompositeGeneratorException {
 		CompositeGeneratorException cgEx = new CompositeGeneratorException();
 		for (IGeneratorFragment fragment : fragments) {
 			try {

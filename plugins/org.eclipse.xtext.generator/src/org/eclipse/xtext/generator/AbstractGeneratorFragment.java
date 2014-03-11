@@ -17,10 +17,10 @@ import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xtext.Grammar;
 
 /**
+ * Base class redirecting call backs to respective Xpand definitions. The template needs to have the same qualified name
+ * the concrete subclass has.
+ * 
  * @author Sven Efftinge - Initial contribution and API
- *
- *         base class redirecting call backs to respective Xpand definitions. The template needs to have the same
- *         qualified name the extending class has.
  */
 public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment implements NamingAware {
 

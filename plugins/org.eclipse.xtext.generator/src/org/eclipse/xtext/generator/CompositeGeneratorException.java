@@ -13,6 +13,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
+ * A composite exception is used to collect all problems that
+ * were encountered during a generator execution. It may contain non fatal
+ * {@link GeneratorWarning warnings}, too.
+ * 
  * @author Dennis Huebner - Initial contribution and API
  * @since 2.6
  */

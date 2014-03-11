@@ -18,12 +18,14 @@ import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.GeneratorWarning;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlrStandaloneSetup;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.StringInputStream;
 
+import com.google.common.base.Joiner;
 import com.google.inject.Injector;
 
 /**
@@ -53,13 +55,14 @@ public class DebugAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 			resource.setURI(URI.createFileURI(absoluteGrammarFileName));
 			resource.load(new StringInputStream(content), null);
 			if (!resource.getErrors().isEmpty()) {
-				throw new RuntimeException(resource.getErrors().toString());
+				String errors = Joiner.on('\n').join(resource.getErrors());
+				throw new GeneratorWarning("Non fatal problem: Debug grammar could not be formatted due to:\n" + errors);
 			}
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream(content.length());
 			resource.save(outputStream, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
 			writeStringIntoFile(absoluteGrammarFileName, outputStream.toString());
 		} catch(IOException e) {
-			throw new RuntimeException(e);
+			throw new GeneratorWarning(e.getMessage());
 		}
 	}
 
