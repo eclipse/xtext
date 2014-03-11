@@ -102,12 +102,8 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 		images.forLocalVariable(adornments.get(variableDeclaration))
 	}
 
-	protected def String text(XImportDeclaration importDeclaration) {
-		if (importDeclaration.getImportedNamespace() != null) 
-			importDeclaration.getImportedNamespace()
-		else
-			importDeclaration.getImportedTypeName()
-	}
+	protected def String text(XImportDeclaration it) 
+		'''«importedTypeName»«IF wildcard».*«ELSEIF memberName != null».«memberName»«ENDIF»'''
 
 	protected def String text(XImportSection importSection) {
 		return "import declarations";

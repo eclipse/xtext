@@ -270,9 +270,9 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 
 		public boolean removeImport(JvmDeclaredType type, boolean isStatic, boolean isExtension) {
 			if(isExtension)
-				return importSection.removeStaticExtensionImport(type);
+				return importSection.removeStaticExtensionImport(type, null);
 			else if(isStatic) 
-				return importSection.removeStaticImport(type);
+				return importSection.removeStaticImport(type, null);
 			else
 				return importSection.removeImport(type);
 		}
