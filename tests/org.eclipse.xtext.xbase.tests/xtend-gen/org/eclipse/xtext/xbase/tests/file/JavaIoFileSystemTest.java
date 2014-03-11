@@ -11,6 +11,7 @@ import com.google.inject.Provider;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URI;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -152,13 +154,21 @@ public class JavaIoFileSystemTest {
   @Test
   public void testGetWorkspaceChildren() {
     Iterable<? extends Path> _children = this.fs.getChildren(Path.ROOT);
-    int _size = IterableExtensions.size(_children);
-    Assert.assertEquals(1, _size);
+    final Function1<Path,String> _function = new Function1<Path,String>() {
+      public String apply(final Path it) {
+        List<String> _segments = it.getSegments();
+        return IterableExtensions.join(_segments, ".");
+      }
+    };
+    String _join = IterableExtensions.join(_children, "[", ", ", "]", _function);
+    Iterable<? extends Path> _children_1 = this.fs.getChildren(Path.ROOT);
+    int _size = IterableExtensions.size(_children_1);
+    Assert.assertEquals(_join, 1, _size);
     Path _path = new Path("/bar");
     boolean _mkdir = this.fs.mkdir(_path);
     Assert.assertTrue(_mkdir);
-    Iterable<? extends Path> _children_1 = this.fs.getChildren(Path.ROOT);
-    int _size_1 = IterableExtensions.size(_children_1);
+    Iterable<? extends Path> _children_2 = this.fs.getChildren(Path.ROOT);
+    int _size_1 = IterableExtensions.size(_children_2);
     Assert.assertEquals(2, _size_1);
   }
   
