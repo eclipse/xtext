@@ -129,7 +129,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       if (_equals) {
         return null;
       }
-      final Function1<TypeReference,JvmTypeReference> _function = new Function1<TypeReference,JvmTypeReference>() {
+      final Function1<TypeReference, JvmTypeReference> _function = new Function1<TypeReference, JvmTypeReference>() {
         public JvmTypeReference apply(final TypeReference it) {
           return TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
         }
@@ -194,7 +194,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       if (!_matched) {
         if (typeDeclaration instanceof JvmTypeDeclarationImpl) {
           _matched=true;
-          _switchResult = ((JvmTypeDeclarationImpl<JvmDeclaredType>)typeDeclaration).getDelegate();
+          _switchResult = ((JvmTypeDeclarationImpl<? extends JvmDeclaredType>)typeDeclaration).getDelegate();
         }
       }
       if (!_matched) {
@@ -263,7 +263,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       if (_equals) {
         return null;
       }
-      final Function1<TypeReference,JvmTypeReference> _function = new Function1<TypeReference,JvmTypeReference>() {
+      final Function1<TypeReference, JvmTypeReference> _function = new Function1<TypeReference, JvmTypeReference>() {
         public JvmTypeReference apply(final TypeReference it) {
           return TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
         }

@@ -162,8 +162,8 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
       SerializerGenFileNames.GenFileName _grammarConstraints_1 = this.names.getGrammarConstraints();
       CharSequence _fileContents_6 = this.grammarConstraints.getFileContents(_grammarConstraints_1);
       ctx.writeFile(Generator.SRC_GEN, _fileName_6, _fileContents_6);
-      Iterable<Pair<String,String>> _generateDebugGraphs = this.debugGraphGenerator.generateDebugGraphs();
-      for (final Pair<String,String> obj : _generateDebugGraphs) {
+      Iterable<Pair<String, String>> _generateDebugGraphs = this.debugGraphGenerator.generateDebugGraphs();
+      for (final Pair<String, String> obj : _generateDebugGraphs) {
         String _key = obj.getKey();
         String _value = obj.getValue();
         ctx.writeFile(Generator.SRC_GEN, _key, _value);

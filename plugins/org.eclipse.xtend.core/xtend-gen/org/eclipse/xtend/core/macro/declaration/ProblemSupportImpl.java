@@ -50,7 +50,7 @@ public class ProblemSupportImpl implements ProblemSupport {
   
   public void addError(final Element element, final String message) {
     this.checkCanceled();
-    final Pair<Resource,EObject> resAndObj = this.getResourceAndEObject(element);
+    final Pair<Resource, EObject> resAndObj = this.getResourceAndEObject(element);
     Resource _key = resAndObj.getKey();
     EList<Resource.Diagnostic> _errors = _key.getErrors();
     EObject _value = resAndObj.getValue();
@@ -62,7 +62,7 @@ public class ProblemSupportImpl implements ProblemSupport {
   
   public void addWarning(final Element element, final String message) {
     this.checkCanceled();
-    final Pair<Resource,EObject> resAndObj = this.getResourceAndEObject(element);
+    final Pair<Resource, EObject> resAndObj = this.getResourceAndEObject(element);
     Resource _key = resAndObj.getKey();
     EList<Resource.Diagnostic> _warnings = _key.getWarnings();
     EObject _value = resAndObj.getValue();
@@ -74,13 +74,13 @@ public class ProblemSupportImpl implements ProblemSupport {
   
   public List<Problem> getProblems(final Element element) {
     this.checkCanceled();
-    final Pair<Resource,EObject> resAndObj = this.getResourceAndEObject(element);
+    final Pair<Resource, EObject> resAndObj = this.getResourceAndEObject(element);
     final Resource resource = resAndObj.getKey();
     EList<Resource.Diagnostic> _errors = resource.getErrors();
     EList<Resource.Diagnostic> _warnings = resource.getWarnings();
     Iterable<Resource.Diagnostic> _plus = Iterables.<Resource.Diagnostic>concat(_errors, _warnings);
     final Iterable<EObjectDiagnosticImpl> issues = Iterables.<EObjectDiagnosticImpl>filter(_plus, EObjectDiagnosticImpl.class);
-    final Function1<EObjectDiagnosticImpl,Boolean> _function = new Function1<EObjectDiagnosticImpl,Boolean>() {
+    final Function1<EObjectDiagnosticImpl, Boolean> _function = new Function1<EObjectDiagnosticImpl, Boolean>() {
       public Boolean apply(final EObjectDiagnosticImpl diag) {
         EObject _problematicObject = diag.getProblematicObject();
         EObject _value = resAndObj.getValue();
@@ -88,7 +88,7 @@ public class ProblemSupportImpl implements ProblemSupport {
       }
     };
     Iterable<EObjectDiagnosticImpl> _filter = IterableExtensions.<EObjectDiagnosticImpl>filter(issues, _function);
-    final Function1<EObjectDiagnosticImpl,Problem> _function_1 = new Function1<EObjectDiagnosticImpl,Problem>() {
+    final Function1<EObjectDiagnosticImpl, Problem> _function_1 = new Function1<EObjectDiagnosticImpl, Problem>() {
       public Problem apply(final EObjectDiagnosticImpl diag) {
         String _code = diag.getCode();
         String _message = diag.getMessage();
@@ -138,24 +138,24 @@ public class ProblemSupportImpl implements ProblemSupport {
     return _switchResult;
   }
   
-  private Pair<Resource,EObject> getResourceAndEObject(final Element element) {
+  private Pair<Resource, EObject> getResourceAndEObject(final Element element) {
     this.checkCanceled();
     boolean _matched = false;
     if (!_matched) {
       if (element instanceof AbstractElementImpl) {
         _matched=true;
-        EObject _delegate = ((AbstractElementImpl<EObject>)element).getDelegate();
+        EObject _delegate = ((AbstractElementImpl<? extends EObject>)element).getDelegate();
         final Resource resource = _delegate.eResource();
         XtendFile _xtendFile = this.compilationUnit.getXtendFile();
         Resource _eResource = _xtendFile.eResource();
         boolean _equals = Objects.equal(resource, _eResource);
         if (_equals) {
           IXtendJvmAssociations _jvmAssociations = this.compilationUnit.getJvmAssociations();
-          EObject _delegate_1 = ((AbstractElementImpl<EObject>)element).getDelegate();
+          EObject _delegate_1 = ((AbstractElementImpl<? extends EObject>)element).getDelegate();
           final EObject eobject = _jvmAssociations.getPrimarySourceElement(_delegate_1);
           boolean _equals_1 = Objects.equal(eobject, null);
           if (_equals_1) {
-            EObject _delegate_2 = ((AbstractElementImpl<EObject>)element).getDelegate();
+            EObject _delegate_2 = ((AbstractElementImpl<? extends EObject>)element).getDelegate();
             return Pair.<Resource, EObject>of(resource, _delegate_2);
           }
           return Pair.<Resource, EObject>of(resource, eobject);

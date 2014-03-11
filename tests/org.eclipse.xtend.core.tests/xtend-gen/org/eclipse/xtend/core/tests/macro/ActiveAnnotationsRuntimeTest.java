@@ -100,7 +100,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
         ProjectConfig _projectConfig = new ProjectConfig(ActiveAnnotationsRuntimeTest.this.macroProject);
         final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
           public void apply(final ProjectConfig it) {
-            Map<Path,Path> _sourceFolderMappings = it.getSourceFolderMappings();
+            Map<Path, Path> _sourceFolderMappings = it.getSourceFolderMappings();
             Path _path = new Path((("/" + ActiveAnnotationsRuntimeTest.this.macroProject) + "/src"));
             Path _path_1 = new Path((("/" + ActiveAnnotationsRuntimeTest.this.macroProject) + "/xtend-gen"));
             _sourceFolderMappings.put(_path, _path_1);
@@ -111,7 +111,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
         ProjectConfig _projectConfig_1 = new ProjectConfig(ActiveAnnotationsRuntimeTest.this.clientProject);
         final Procedure1<ProjectConfig> _function_1 = new Procedure1<ProjectConfig>() {
           public void apply(final ProjectConfig it) {
-            Map<Path,Path> _sourceFolderMappings = it.getSourceFolderMappings();
+            Map<Path, Path> _sourceFolderMappings = it.getSourceFolderMappings();
             Path _path = new Path((("/" + ActiveAnnotationsRuntimeTest.this.clientProject) + "/src"));
             Path _path_1 = new Path((("/" + ActiveAnnotationsRuntimeTest.this.clientProject) + "/xtend-gen"));
             _sourceFolderMappings.put(_path, _path_1);
@@ -133,7 +133,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     }
   }
   
-  protected URI copyToDisk(final String projectName, final Pair<String,String> fileRepresentation) {
+  protected URI copyToDisk(final String projectName, final Pair<String, String> fileRepresentation) {
     String _key = fileRepresentation.getKey();
     String _plus = ((("/" + projectName) + "/src/") + _key);
     final Path path = new Path(_plus);
@@ -146,7 +146,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     return URI.createFileURI(_plus_1);
   }
   
-  public void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {
+  public void assertProcessing(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {
     final XtextResourceSet resourceSet = this.compileMacroResourceSet(macroFile, clientFile);
     EList<Resource> _resources = resourceSet.getResources();
     final Resource singleResource = IterableExtensions.<Resource>head(_resources);
@@ -167,7 +167,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     this.compiler.compile(resourceSet, _function);
   }
   
-  public void assertIssues(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super List<Issue>> expectations) {
+  public void assertIssues(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super List<Issue>> expectations) {
     try {
       final XtextResourceSet resourceSet = this.compileMacroResourceSet(macroFile, clientFile);
       EList<Resource> _resources = resourceSet.getResources();
@@ -176,7 +176,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       boolean _isLoaded = singleResource.isLoaded();
       boolean _not = (!_isLoaded);
       if (_not) {
-        Map<Object,Object> _loadOptions = resourceSet.getLoadOptions();
+        Map<Object, Object> _loadOptions = resourceSet.getLoadOptions();
         singleResource.load(_loadOptions);
       }
       IResourceServiceProvider _resourceServiceProvider = singleResource.getResourceServiceProvider();
@@ -188,7 +188,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     }
   }
   
-  public XtextResourceSet compileMacroResourceSet(final Pair<String,String> macroFile, final Pair<String,String> clientFile) {
+  public XtextResourceSet compileMacroResourceSet(final Pair<String, String> macroFile, final Pair<String, String> clientFile) {
     XtextResourceSet _xblockexpression = null;
     {
       final URI macroURI = this.copyToDisk(this.macroProject, macroFile);
@@ -254,7 +254,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/ThrowExceptionAnnotationProcessor.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/ThrowExceptionAnnotationProcessor.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -263,7 +263,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<List<Issue>> _function = new Procedure1<List<Issue>>() {
       public void apply(final List<Issue> it) {
         int _size = it.size();

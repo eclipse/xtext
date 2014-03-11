@@ -7,5 +7,5 @@ import org.eclipse.xtext.xdoc.xdoc.Identifiable;
 
 @SuppressWarnings("all")
 public class ArtificialIds extends AdapterImpl {
-  public Map<Identifiable,String> artificialHrefs = CollectionLiterals.<Identifiable, String>newHashMap();
+  public Map<Identifiable, String> artificialHrefs = CollectionLiterals.<Identifiable, String>newHashMap();
 }

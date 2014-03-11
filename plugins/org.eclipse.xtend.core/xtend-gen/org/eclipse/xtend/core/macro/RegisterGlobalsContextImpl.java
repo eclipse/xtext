@@ -102,7 +102,7 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     Preconditions.checkArgument(_equals, _builder);
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     _compilationUnit.checkCanceled();
-    final Pair<String,String> namespaceAndName = this.getNameParts(qualifiedName);
+    final Pair<String, String> namespaceAndName = this.getNameParts(qualifiedName);
     CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
     IFileHeaderProvider _fileHeaderProvider = _compilationUnit_1.getFileHeaderProvider();
     CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
@@ -167,7 +167,7 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     return null;
   }
   
-  private Pair<String,String> getNameParts(final String string) {
+  private Pair<String, String> getNameParts(final String string) {
     final char dot = '.';
     final int index = string.lastIndexOf(dot);
     if ((index != (-1))) {

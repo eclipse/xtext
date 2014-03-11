@@ -16,7 +16,7 @@ public class DocumentationSetup extends XdocStandaloneSetup implements Module {
     Injector _xblockexpression = null;
     {
       final XdocRuntimeModule module = new XdocRuntimeModule();
-      _xblockexpression = (Guice.createInjector(module, this));
+      _xblockexpression = Guice.createInjector(module, this);
     }
     return _xblockexpression;
   }

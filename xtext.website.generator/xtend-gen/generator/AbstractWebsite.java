@@ -288,15 +288,15 @@ public abstract class AbstractWebsite implements Resource {
     return true;
   }
   
-  public Iterable<Pair<String,String>> topLevelMenu() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("news.html", "News");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("download.html", "Download");
-    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("7languages.html", "7 Languages");
-    Pair<String,String> _mappedTo_3 = Pair.<String, String>of("documentation.html", "Documentation");
-    Pair<String,String> _mappedTo_4 = Pair.<String, String>of("community.html", "Community");
-    Pair<String,String> _mappedTo_5 = Pair.<String, String>of("http://xtend-lang.org", "Xtend");
-    Pair<String,String> _mappedTo_6 = Pair.<String, String>of("http://www.eclipse.org", "Eclipse.org");
-    return CollectionLiterals.<Pair<String,String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6);
+  public Iterable<Pair<String, String>> topLevelMenu() {
+    Pair<String, String> _mappedTo = Pair.<String, String>of("news.html", "News");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("download.html", "Download");
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("7languages.html", "7 Languages");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("documentation.html", "Documentation");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("community.html", "Community");
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("http://xtend-lang.org", "Xtend");
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("http://www.eclipse.org", "Eclipse.org");
+    return CollectionLiterals.<Pair<String, String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6);
   }
   
   public CharSequence navBar() {
@@ -333,7 +333,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<ul class=\"nav\">");
     _builder.newLine();
     {
-      Iterable<Pair<String,String>> _pLevelMenu = this.topLevelMenu();
+      Iterable<Pair<String, String>> _pLevelMenu = this.topLevelMenu();
       for(final Pair<String, String> it : _pLevelMenu) {
         _builder.append("\t\t\t\t\t");
         _builder.append("<li ");

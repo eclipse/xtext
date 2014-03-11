@@ -58,19 +58,19 @@ public class StandaloneBuilder {
   /**
    * Map key is a file extension provided by Language FileExtensionProvider
    */
-  private Map<String,LanguageAccess> _languages;
+  private Map<String, LanguageAccess> _languages;
   
   /**
    * Map key is a file extension provided by Language FileExtensionProvider
    */
-  public Map<String,LanguageAccess> getLanguages() {
+  public Map<String, LanguageAccess> getLanguages() {
     return this._languages;
   }
   
   /**
    * Map key is a file extension provided by Language FileExtensionProvider
    */
-  public void setLanguages(final Map<String,LanguageAccess> languages) {
+  public void setLanguages(final Map<String, LanguageAccess> languages) {
     this._languages = languages;
   }
   
@@ -161,9 +161,9 @@ public class StandaloneBuilder {
   }
   
   public boolean launch() {
-    Map<String,LanguageAccess> _languages = this.getLanguages();
+    Map<String, LanguageAccess> _languages = this.getLanguages();
     Collection<LanguageAccess> _values = _languages.values();
-    final Function1<LanguageAccess,Boolean> _function = new Function1<LanguageAccess,Boolean>() {
+    final Function1<LanguageAccess, Boolean> _function = new Function1<LanguageAccess, Boolean>() {
       public Boolean apply(final LanguageAccess it) {
         return Boolean.valueOf(it.isLinksAgainstJava());
       }
@@ -177,7 +177,7 @@ public class StandaloneBuilder {
     boolean _notEquals = (!Objects.equal(_encoding, null));
     if (_notEquals) {
       StandaloneBuilder.LOG.debug("Setting encoding.");
-      Map<String,LanguageAccess> _languages_1 = this.getLanguages();
+      Map<String, LanguageAccess> _languages_1 = this.getLanguages();
       Collection<LanguageAccess> _values_1 = _languages_1.values();
       String _encoding_1 = this.getEncoding();
       this.fileEncodingSetup(_values_1, _encoding_1);
@@ -192,7 +192,7 @@ public class StandaloneBuilder {
       String _classPathLookUpFilter_1 = this.getClassPathLookUpFilter();
       final Pattern cpLookUpFilter = Pattern.compile(_classPathLookUpFilter_1);
       Iterable<String> _classPathEntries = this.getClassPathEntries();
-      final Function1<String,Boolean> _function_1 = new Function1<String,Boolean>() {
+      final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
         public Boolean apply(final String root) {
           Matcher _matcher = cpLookUpFilter.matcher(root);
           return Boolean.valueOf(_matcher.matches());
@@ -285,7 +285,7 @@ public class StandaloneBuilder {
   protected ResourceDescriptionsData fillIndex(final XtextResourceSet set) {
     EList<Resource> _resources = set.getResources();
     ArrayList<Resource> _arrayList = new ArrayList<Resource>(_resources);
-    final Function1<Resource,IResourceDescription> _function = new Function1<Resource,IResourceDescription>() {
+    final Function1<Resource, IResourceDescription> _function = new Function1<Resource, IResourceDescription>() {
       public IResourceDescription apply(final Resource it) {
         LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
         IResourceDescription.Manager _resourceDescriptionManager = _languageAccess.getResourceDescriptionManager();
@@ -338,7 +338,7 @@ public class StandaloneBuilder {
     }
     String _absolutePath_1 = stubsDir.getAbsolutePath();
     this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_1);
-    final Function1<Resource,Boolean> _function = new Function1<Resource,Boolean>() {
+    final Function1<Resource, Boolean> _function = new Function1<Resource, Boolean>() {
       public Boolean apply(final Resource it) {
         LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
         return Boolean.valueOf(_languageAccess.isLinksAgainstJava());
@@ -389,7 +389,7 @@ public class StandaloneBuilder {
   }
   
   private LanguageAccess languageAccess(final Resource resource) {
-    Map<String,LanguageAccess> _languages = this.getLanguages();
+    Map<String, LanguageAccess> _languages = this.getLanguages();
     URI _uRI = resource.getURI();
     String _fileExtension = _uRI.fileExtension();
     return _languages.get(_fileExtension);
@@ -428,7 +428,7 @@ public class StandaloneBuilder {
   }
   
   private URLClassLoader createURLClassLoader(final Iterable<String> classPathEntries) {
-    final Function1<String,URL> _function = new Function1<String,URL>() {
+    final Function1<String, URL> _function = new Function1<String, URL>() {
       public URL apply(final String str) {
         try {
           File _file = new File(str);
@@ -444,7 +444,7 @@ public class StandaloneBuilder {
   }
   
   protected List<Resource> collectResources(final Iterable<String> roots, final ResourceSet resourceSet) {
-    Map<String,LanguageAccess> _languages = this.getLanguages();
+    Map<String, LanguageAccess> _languages = this.getLanguages();
     Set<String> _keySet = _languages.keySet();
     final String extensions = IterableExtensions.join(_keySet, "|");
     final NameBasedFilter nameBasedFilter = new NameBasedFilter();

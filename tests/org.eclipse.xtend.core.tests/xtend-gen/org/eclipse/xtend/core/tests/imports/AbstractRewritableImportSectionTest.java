@@ -315,7 +315,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
   protected void assertEquals(final RewritableImportSection section, final CharSequence sectionAsString) {
     final StringBuilder builder = new StringBuilder(this.model);
     final List<ReplaceRegion> changes = section.rewrite();
-    final Function1<ReplaceRegion,Integer> _function = new Function1<ReplaceRegion,Integer>() {
+    final Function1<ReplaceRegion, Integer> _function = new Function1<ReplaceRegion, Integer>() {
       public Integer apply(final ReplaceRegion it) {
         return Integer.valueOf(it.getOffset());
       }

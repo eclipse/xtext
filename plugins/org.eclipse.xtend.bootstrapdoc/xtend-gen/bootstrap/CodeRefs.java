@@ -38,7 +38,7 @@ public class CodeRefs {
       if (!_isNullOrEmpty) {
         _and = false;
       } else {
-        final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
+        final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
           public Boolean apply(final String it) {
             boolean _xblockexpression = false;
             {
@@ -99,7 +99,7 @@ public class CodeRefs {
       if (!_and_1) {
         _and = false;
       } else {
-        final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
+        final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
           public Boolean apply(final String it) {
             String _identifier = element.getIdentifier();
             return Boolean.valueOf(_identifier.startsWith(it));

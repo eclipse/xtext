@@ -72,7 +72,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
         String _simpleName = field.getSimpleName();
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
           public void apply(final MutableMethodDeclaration it) {
-            final Procedure2<Format,Integer> _function = new Procedure2<Format,Integer>() {
+            final Procedure2<Format, Integer> _function = new Procedure2<Format, Integer>() {
               public void apply(final Format format, final Integer idx) {
                 TypeReference _switchResult = null;
                 boolean _matched = false;
@@ -121,7 +121,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
                     String _javaCode = it.toJavaCode(_newTypeReference);
                     _builder.append(_javaCode, "\t");
                     _builder.append(".format(msg,");
-                    final Function1<MutableParameterDeclaration,String> _function = new Function1<MutableParameterDeclaration,String>() {
+                    final Function1<MutableParameterDeclaration, String> _function = new Function1<MutableParameterDeclaration, String>() {
                       public String apply(final MutableParameterDeclaration it) {
                         return it.getSimpleName();
                       }

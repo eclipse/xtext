@@ -60,7 +60,7 @@ public class StaticallyImportedMemberProvider {
       final IVisibilityHelper visibilityHelper = this.getVisibilityHelper(_eResource);
       final IResolvedFeatures resolvedFeatures = this._provider.getResolvedFeatures(importedType);
       List<JvmFeature> _allFeatures = resolvedFeatures.getAllFeatures();
-      final Function1<JvmFeature,Boolean> _function = new Function1<JvmFeature,Boolean>() {
+      final Function1<JvmFeature, Boolean> _function = new Function1<JvmFeature, Boolean>() {
         public Boolean apply(final JvmFeature feature) {
           boolean _and = false;
           boolean _and_1 = false;
@@ -116,7 +116,7 @@ public class StaticallyImportedMemberProvider {
       final IResolvedFeatures resolvedFeatures = this._provider.getResolvedFeatures(importedType);
       String _memberName = it.getMemberName();
       List<JvmFeature> _allFeatures = resolvedFeatures.getAllFeatures(_memberName);
-      final Function1<JvmFeature,Boolean> _function = new Function1<JvmFeature,Boolean>() {
+      final Function1<JvmFeature, Boolean> _function = new Function1<JvmFeature, Boolean>() {
         public Boolean apply(final JvmFeature feature) {
           boolean _and = false;
           boolean _isStatic = feature.isStatic();

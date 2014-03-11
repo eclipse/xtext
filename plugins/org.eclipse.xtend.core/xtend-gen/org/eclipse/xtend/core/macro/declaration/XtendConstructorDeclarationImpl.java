@@ -59,7 +59,7 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
   public boolean isVarArgs() {
     XtendConstructor _delegate = this.getDelegate();
     EList<XtendParameter> _parameters = _delegate.getParameters();
-    final Function1<XtendParameter,Boolean> _function = new Function1<XtendParameter,Boolean>() {
+    final Function1<XtendParameter, Boolean> _function = new Function1<XtendParameter, Boolean>() {
       public Boolean apply(final XtendParameter it) {
         return Boolean.valueOf(XtendConstructorDeclarationImpl.this.isVarArgs());
       }
@@ -70,7 +70,7 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
   public Iterable<? extends TypeReference> getExceptions() {
     XtendConstructor _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
-    final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
+    final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
       public TypeReference apply(final JvmTypeReference it) {
         CompilationUnitImpl _compilationUnit = XtendConstructorDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toTypeReference(it);
@@ -82,7 +82,7 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
   public Iterable<? extends ParameterDeclaration> getParameters() {
     XtendConstructor _delegate = this.getDelegate();
     EList<XtendParameter> _parameters = _delegate.getParameters();
-    final Function1<XtendParameter,XtendParameterDeclarationImpl> _function = new Function1<XtendParameter,XtendParameterDeclarationImpl>() {
+    final Function1<XtendParameter, XtendParameterDeclarationImpl> _function = new Function1<XtendParameter, XtendParameterDeclarationImpl>() {
       public XtendParameterDeclarationImpl apply(final XtendParameter it) {
         CompilationUnitImpl _compilationUnit = XtendConstructorDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toXtendParameterDeclaration(it);

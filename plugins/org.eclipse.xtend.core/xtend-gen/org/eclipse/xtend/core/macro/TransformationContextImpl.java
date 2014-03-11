@@ -76,7 +76,7 @@ public class TransformationContextImpl implements TransformationContext {
     if (!_matched) {
       if (element instanceof JvmNamedElementImpl) {
         _matched=true;
-        JvmIdentifiableElement _delegate = ((JvmNamedElementImpl<JvmIdentifiableElement>)element).getDelegate();
+        JvmIdentifiableElement _delegate = ((JvmNamedElementImpl<? extends JvmIdentifiableElement>)element).getDelegate();
         Resource _eResource = _delegate.eResource();
         CompilationUnitImpl _unit = this.getUnit();
         XtendFile _xtendFile = _unit.getXtendFile();

@@ -37,14 +37,14 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     {
       JvmGenericType _delegate = this.getDelegate();
       EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
-      final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
+      final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
         public Boolean apply(final JvmTypeReference it) {
           JvmType _type = it.getType();
           return Boolean.valueOf(((JvmGenericType) _type).isInterface());
         }
       };
       final Iterable<JvmTypeReference> filtered = IterableExtensions.<JvmTypeReference>filter(_superTypes, _function);
-      final Function1<JvmTypeReference,TypeReference> _function_1 = new Function1<JvmTypeReference,TypeReference>() {
+      final Function1<JvmTypeReference, TypeReference> _function_1 = new Function1<JvmTypeReference, TypeReference>() {
         public TypeReference apply(final JvmTypeReference it) {
           CompilationUnitImpl _compilationUnit = JvmClassDeclarationImpl.this.getCompilationUnit();
           return _compilationUnit.toTypeReference(it);
@@ -60,7 +60,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
-    final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
+    final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
       public Boolean apply(final JvmTypeReference it) {
         boolean _switchResult = false;
         JvmType _type = it.getType();
@@ -109,7 +109,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
-    final Function1<JvmTypeParameter,TypeParameterDeclaration> _function = new Function1<JvmTypeParameter,TypeParameterDeclaration>() {
+    final Function1<JvmTypeParameter, TypeParameterDeclaration> _function = new Function1<JvmTypeParameter, TypeParameterDeclaration>() {
       public TypeParameterDeclaration apply(final JvmTypeParameter it) {
         CompilationUnitImpl _compilationUnit = JvmClassDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toTypeParameterDeclaration(it);
@@ -121,7 +121,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
   public FieldDeclaration findDeclaredField(final String name) {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     Iterable<FieldDeclaration> _filter = Iterables.<FieldDeclaration>filter(_declaredMembers, FieldDeclaration.class);
-    final Function1<FieldDeclaration,Boolean> _function = new Function1<FieldDeclaration,Boolean>() {
+    final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
       public Boolean apply(final FieldDeclaration it) {
         String _simpleName = it.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -136,7 +136,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
       ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
       Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
       Iterable<MethodDeclaration> _filter = Iterables.<MethodDeclaration>filter(_declaredMembers, MethodDeclaration.class);
-      final Function1<MethodDeclaration,Boolean> _function = new Function1<MethodDeclaration,Boolean>() {
+      final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
         public Boolean apply(final MethodDeclaration it) {
           boolean _and = false;
           String _simpleName = it.getSimpleName();
@@ -145,7 +145,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
             _and = false;
           } else {
             Iterable<? extends ParameterDeclaration> _parameters = it.getParameters();
-            final Function1<ParameterDeclaration,TypeReference> _function = new Function1<ParameterDeclaration,TypeReference>() {
+            final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
               public TypeReference apply(final ParameterDeclaration it) {
                 return it.getType();
               }

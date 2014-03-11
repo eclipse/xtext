@@ -50,7 +50,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public Iterable<? extends MemberDeclaration> getDeclaredMembers() {
     T _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
-    final Function1<JvmMember,MemberDeclaration> _function = new Function1<JvmMember,MemberDeclaration>() {
+    final Function1<JvmMember, MemberDeclaration> _function = new Function1<JvmMember, MemberDeclaration>() {
       public MemberDeclaration apply(final JvmMember it) {
         CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toMemberDeclaration(it);
@@ -90,7 +90,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     T _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
     Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
-    final Function1<JvmConstructor,Boolean> _function = new Function1<JvmConstructor,Boolean>() {
+    final Function1<JvmConstructor, Boolean> _function = new Function1<JvmConstructor, Boolean>() {
       public Boolean apply(final JvmConstructor it) {
         CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
         JvmTypeExtensions _typeExtensions = _compilationUnit.getTypeExtensions();
@@ -161,10 +161,10 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     {
       ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
       Iterable<? extends ConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
-      final Function1<ConstructorDeclaration,Boolean> _function = new Function1<ConstructorDeclaration,Boolean>() {
+      final Function1<ConstructorDeclaration, Boolean> _function = new Function1<ConstructorDeclaration, Boolean>() {
         public Boolean apply(final ConstructorDeclaration constructor) {
           Iterable<? extends ParameterDeclaration> _parameters = constructor.getParameters();
-          final Function1<ParameterDeclaration,TypeReference> _function = new Function1<ParameterDeclaration,TypeReference>() {
+          final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
             public TypeReference apply(final ParameterDeclaration it) {
               return it.getType();
             }
@@ -182,7 +182,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   
   public FieldDeclaration findDeclaredField(final String name) {
     Iterable<? extends FieldDeclaration> _declaredFields = this.getDeclaredFields();
-    final Function1<FieldDeclaration,Boolean> _function = new Function1<FieldDeclaration,Boolean>() {
+    final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
       public Boolean apply(final FieldDeclaration field) {
         String _simpleName = field.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -196,7 +196,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     {
       ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
       Iterable<? extends MethodDeclaration> _declaredMethods = this.getDeclaredMethods();
-      final Function1<MethodDeclaration,Boolean> _function = new Function1<MethodDeclaration,Boolean>() {
+      final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
         public Boolean apply(final MethodDeclaration method) {
           boolean _and = false;
           String _simpleName = method.getSimpleName();
@@ -205,7 +205,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
             _and = false;
           } else {
             Iterable<? extends ParameterDeclaration> _parameters = method.getParameters();
-            final Function1<ParameterDeclaration,TypeReference> _function = new Function1<ParameterDeclaration,TypeReference>() {
+            final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
               public TypeReference apply(final ParameterDeclaration it) {
                 return it.getType();
               }

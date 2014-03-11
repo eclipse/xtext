@@ -104,7 +104,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   
   public Object evaluate(final XExpression expression, final JvmTypeReference expectedType) {
     final ClassLoader classLoader = this.classLoaderProvider.getClassLoader(expression);
-    final Map<String,JvmIdentifiableElement> visibleFeatures = this.findVisibleFeatures(expression);
+    final Map<String, JvmIdentifiableElement> visibleFeatures = this.findVisibleFeatures(expression);
     JvmTypeReference _xifexpression = null;
     if ((expectedType instanceof XComputedTypeReference)) {
       _xifexpression = null;
@@ -122,8 +122,8 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
    * looks up the static final fields which are accessible in unqualified form for the given expression.
    * That essentially includes static imports and the fields declared in the containing types
    */
-  protected Map<String,JvmIdentifiableElement> findVisibleFeatures(final XExpression expression) {
-    final HashMap<String,JvmIdentifiableElement> result = CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
+  protected Map<String, JvmIdentifiableElement> findVisibleFeatures(final XExpression expression) {
+    final HashMap<String, JvmIdentifiableElement> result = CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
     Resource _eResource = expression.eResource();
     final XImportSection section = this.importSectionLocator.getImportSection(((XtextResource) _eResource));
     boolean _notEquals = (!Objects.equal(section, null));
@@ -140,7 +140,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
               _matched=true;
               Iterable<JvmFeature> _allFeatures = ((JvmGenericType)type).getAllFeatures();
               Iterable<JvmField> _filter = Iterables.<JvmField>filter(_allFeatures, JvmField.class);
-              final Function1<JvmField,Boolean> _function = new Function1<JvmField,Boolean>() {
+              final Function1<JvmField, Boolean> _function = new Function1<JvmField, Boolean>() {
                 public Boolean apply(final JvmField it) {
                   boolean _and = false;
                   boolean _isStatic = it.isStatic();
@@ -196,7 +196,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       {
         Iterable<JvmFeature> _allFeatures = container.getAllFeatures();
         Iterable<JvmField> _filter = Iterables.<JvmField>filter(_allFeatures, JvmField.class);
-        final Function1<JvmField,Boolean> _function = new Function1<JvmField,Boolean>() {
+        final Function1<JvmField, Boolean> _function = new Function1<JvmField, Boolean>() {
           public Boolean apply(final JvmField it) {
             boolean _and = false;
             boolean _isStatic = it.isStatic();
@@ -273,7 +273,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       }
       final JvmTypeReference expectedComponentType = _switchResult;
       EList<XExpression> _elements = it.getElements();
-      final Function1<XExpression,Object> _function = new Function1<XExpression,Object>() {
+      final Function1<XExpression, Object> _function = new Function1<XExpression, Object>() {
         public Object apply(final XExpression it) {
           Context _cloneWithExpectation = ctx.cloneWithExpectation(expectedComponentType);
           return ConstantExpressionsInterpreter.this.internalEvaluate(it, _cloneWithExpectation);
@@ -297,43 +297,43 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
           final Class<?> cl = _class;
           boolean _matched_1 = false;
           if (!_matched_1) {
-            if (Objects.equal(cl,Integer.class)) {
+            if (Objects.equal(cl, Integer.class)) {
               _matched_1=true;
               _switchResult_1 = Integer.TYPE;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(cl,Long.class)) {
+            if (Objects.equal(cl, Long.class)) {
               _matched_1=true;
               _switchResult_1 = Long.TYPE;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(cl,Short.class)) {
+            if (Objects.equal(cl, Short.class)) {
               _matched_1=true;
               _switchResult_1 = Short.TYPE;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(cl,Boolean.class)) {
+            if (Objects.equal(cl, Boolean.class)) {
               _matched_1=true;
               _switchResult_1 = Boolean.TYPE;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(cl,Double.class)) {
+            if (Objects.equal(cl, Double.class)) {
               _matched_1=true;
               _switchResult_1 = Double.TYPE;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(cl,Byte.class)) {
+            if (Objects.equal(cl, Byte.class)) {
               _matched_1=true;
               _switchResult_1 = Byte.TYPE;
             }
           }
           if (!_matched_1) {
-            if (Objects.equal(cl,Float.class)) {
+            if (Objects.equal(cl, Float.class)) {
               _matched_1=true;
               _switchResult_1 = Float.TYPE;
             }
@@ -356,11 +356,11 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   
   protected Object _internalEvaluate(final XFeatureCall it, final Context ctx) {
     final String featureName = it.getConcreteSyntaxFeatureName();
-    Map<String,JvmIdentifiableElement> _visibleFeatures = ctx.getVisibleFeatures();
+    Map<String, JvmIdentifiableElement> _visibleFeatures = ctx.getVisibleFeatures();
     boolean _containsKey = _visibleFeatures.containsKey(featureName);
     if (_containsKey) {
       Object _switchResult = null;
-      Map<String,JvmIdentifiableElement> _visibleFeatures_1 = ctx.getVisibleFeatures();
+      Map<String, JvmIdentifiableElement> _visibleFeatures_1 = ctx.getVisibleFeatures();
       JvmIdentifiableElement _get = _visibleFeatures_1.get(featureName);
       final JvmIdentifiableElement feature = _get;
       boolean _matched = false;
@@ -402,7 +402,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
             if (type instanceof JvmEnumerationType) {
               _matched_1=true;
               EList<JvmEnumerationLiteral> _literals = ((JvmEnumerationType)type).getLiterals();
-              final Function1<JvmEnumerationLiteral,Boolean> _function = new Function1<JvmEnumerationLiteral,Boolean>() {
+              final Function1<JvmEnumerationLiteral, Boolean> _function = new Function1<JvmEnumerationLiteral, Boolean>() {
                 public Boolean apply(final JvmEnumerationLiteral it) {
                   String _simpleName = it.getSimpleName();
                   return Boolean.valueOf(Objects.equal(_simpleName, featureName));
@@ -423,7 +423,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
               _matched_1=true;
               Iterable<JvmFeature> _allFeatures = ((JvmGenericType)type).getAllFeatures();
               Iterable<JvmField> _filter = Iterables.<JvmField>filter(_allFeatures, JvmField.class);
-              final Function1<JvmField,Boolean> _function = new Function1<JvmField,Boolean>() {
+              final Function1<JvmField, Boolean> _function = new Function1<JvmField, Boolean>() {
                 public Boolean apply(final JvmField it) {
                   String _simpleName = it.getSimpleName();
                   return Boolean.valueOf(Objects.equal(_simpleName, featureName));
@@ -499,7 +499,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         throw new ConstantExpressionEvaluationException("Endless recursive evaluation detected.");
       }
       try {
-        final Map<String,JvmIdentifiableElement> visibleFeatures = this.findVisibleFeatures(expression);
+        final Map<String, JvmIdentifiableElement> visibleFeatures = this.findVisibleFeatures(expression);
         Set<XExpression> _alreadyEvaluating_1 = context.getAlreadyEvaluating();
         final LinkedHashSet<XExpression> set = new LinkedHashSet<XExpression>(_alreadyEvaluating_1);
         set.add(expression);

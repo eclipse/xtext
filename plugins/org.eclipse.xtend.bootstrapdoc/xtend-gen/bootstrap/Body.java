@@ -32,7 +32,7 @@ public class Body {
     _builder.newLine();
     {
       Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(rootSection);
-      final Function1<AbstractSection,Boolean> _function = new Function1<AbstractSection,Boolean>() {
+      final Function1<AbstractSection, Boolean> _function = new Function1<AbstractSection, Boolean>() {
         public Boolean apply(final AbstractSection it) {
           boolean _isTargetRootElement = Body.this._targetPaths.isTargetRootElement(it);
           return Boolean.valueOf((!_isTargetRootElement));

@@ -18,13 +18,13 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
  */
 @SuppressWarnings("all")
 public class RecordingRootResolvedTypes extends RootResolvedTypes {
-  private Map<XExpression,ILinkingCandidate> _resolvedProxies;
+  private Map<XExpression, ILinkingCandidate> _resolvedProxies;
   
-  public Map<XExpression,ILinkingCandidate> getResolvedProxies() {
+  public Map<XExpression, ILinkingCandidate> getResolvedProxies() {
     return this._resolvedProxies;
   }
   
-  public void setResolvedProxies(final Map<XExpression,ILinkingCandidate> resolvedProxies) {
+  public void setResolvedProxies(final Map<XExpression, ILinkingCandidate> resolvedProxies) {
     this._resolvedProxies = resolvedProxies;
   }
   
@@ -33,7 +33,7 @@ public class RecordingRootResolvedTypes extends RootResolvedTypes {
   }
   
   public void resolveProxies() {
-    Map<XExpression,ILinkingCandidate> _basicGetLinkingCandidates = this.basicGetLinkingCandidates();
+    Map<XExpression, ILinkingCandidate> _basicGetLinkingCandidates = this.basicGetLinkingCandidates();
     this.setResolvedProxies(_basicGetLinkingCandidates);
     super.resolveProxies();
   }

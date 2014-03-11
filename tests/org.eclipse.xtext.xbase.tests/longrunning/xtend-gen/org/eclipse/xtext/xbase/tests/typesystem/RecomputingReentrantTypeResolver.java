@@ -62,10 +62,10 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   public IResolvedTypes resolve() {
     IResolvedTypes _resolve = super.resolve();
     final RecordingRootResolvedTypes firstResult = ((RecordingRootResolvedTypes) _resolve);
-    final Map<XExpression,ILinkingCandidate> firstRun = firstResult.getResolvedProxies();
+    final Map<XExpression, ILinkingCandidate> firstRun = firstResult.getResolvedProxies();
     IResolvedTypes _resolve_1 = super.resolve();
     final RecordingRootResolvedTypes result = ((RecordingRootResolvedTypes) _resolve_1);
-    final Map<XExpression,ILinkingCandidate> secondRun = result.getResolvedProxies();
+    final Map<XExpression, ILinkingCandidate> secondRun = result.getResolvedProxies();
     StringConcatenation _builder = new StringConcatenation();
     String _join = this.mapJoiner.join(firstRun);
     _builder.append(_join, "");
@@ -103,7 +103,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     Set<XExpression> _keySet_2 = firstRun.keySet();
     Set<XExpression> _keySet_3 = secondRun.keySet();
     Assert.assertEquals(_builder_1.toString(), _keySet_2, _keySet_3);
-    final Procedure2<XExpression,ILinkingCandidate> _function = new Procedure2<XExpression,ILinkingCandidate>() {
+    final Procedure2<XExpression, ILinkingCandidate> _function = new Procedure2<XExpression, ILinkingCandidate>() {
       public void apply(final XExpression expression, final ILinkingCandidate firstLinkingData) {
         final ILinkingCandidate secondLinkingData = secondRun.get(expression);
         RecomputingReentrantTypeResolver.this.assertEqualLinkingData(firstLinkingData, secondLinkingData);
@@ -306,11 +306,11 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
       Object _invoke_2 = this._reflectExtensions.invoke(left, "getDeclaredTypeParameters");
       Object _invoke_3 = this._reflectExtensions.invoke(right, "getDeclaredTypeParameters");
       Assert.assertEquals("declaredTypeParameters", _invoke_2, _invoke_3);
-      Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _invokeAndCast_2 = this.<Map<JvmTypeParameter,LightweightMergedBoundTypeArgument>>invokeAndCast(left, "getTypeParameterMapping");
-      Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _invokeAndCast_3 = this.<Map<JvmTypeParameter,LightweightMergedBoundTypeArgument>>invokeAndCast(right, "getTypeParameterMapping");
+      Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _invokeAndCast_2 = this.<Map<JvmTypeParameter, LightweightMergedBoundTypeArgument>>invokeAndCast(left, "getTypeParameterMapping");
+      Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _invokeAndCast_3 = this.<Map<JvmTypeParameter, LightweightMergedBoundTypeArgument>>invokeAndCast(right, "getTypeParameterMapping");
       this.assertEqualMapping("typeParameterMapping", _invokeAndCast_2, _invokeAndCast_3);
-      Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _invokeAndCast_4 = this.<Map<JvmTypeParameter,LightweightMergedBoundTypeArgument>>invokeAndCast(left, "getDeclaratorParameterMapping");
-      Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _invokeAndCast_5 = this.<Map<JvmTypeParameter,LightweightMergedBoundTypeArgument>>invokeAndCast(right, "getDeclaratorParameterMapping");
+      Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _invokeAndCast_4 = this.<Map<JvmTypeParameter, LightweightMergedBoundTypeArgument>>invokeAndCast(left, "getDeclaratorParameterMapping");
+      Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _invokeAndCast_5 = this.<Map<JvmTypeParameter, LightweightMergedBoundTypeArgument>>invokeAndCast(right, "getDeclaratorParameterMapping");
       this.assertEqualMapping("declaratorParameterMapping", _invokeAndCast_4, _invokeAndCast_5);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -330,13 +330,13 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   }
   
   public void assertEqualReferences(final String message, final List<LightweightTypeReference> left, final List<LightweightTypeReference> right) {
-    final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
+    final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
       public String apply(final LightweightTypeReference it) {
         return it.toString();
       }
     };
     List<String> _map = ListExtensions.<LightweightTypeReference, String>map(left, _function);
-    final Function1<LightweightTypeReference,String> _function_1 = new Function1<LightweightTypeReference,String>() {
+    final Function1<LightweightTypeReference, String> _function_1 = new Function1<LightweightTypeReference, String>() {
       public String apply(final LightweightTypeReference it) {
         return it.toString();
       }
@@ -345,7 +345,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     Assert.assertEquals(message, _map, _map_1);
   }
   
-  public void assertEqualMapping(final String message, final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> left, final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> right) {
+  public void assertEqualMapping(final String message, final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> left, final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> right) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(message, "");
     _builder.append(":");
@@ -386,7 +386,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     Set<JvmTypeParameter> _keySet = left.keySet();
     Set<JvmTypeParameter> _keySet_1 = right.keySet();
     Assert.assertEquals(_builder_1.toString(), ((Object) _keySet), _keySet_1);
-    final Procedure2<JvmTypeParameter,LightweightMergedBoundTypeArgument> _function = new Procedure2<JvmTypeParameter,LightweightMergedBoundTypeArgument>() {
+    final Procedure2<JvmTypeParameter, LightweightMergedBoundTypeArgument> _function = new Procedure2<JvmTypeParameter, LightweightMergedBoundTypeArgument>() {
       public void apply(final JvmTypeParameter typeParam, final LightweightMergedBoundTypeArgument leftData) {
         final LightweightMergedBoundTypeArgument rightData = right.get(typeParam);
         VarianceInfo _variance = leftData.getVariance();

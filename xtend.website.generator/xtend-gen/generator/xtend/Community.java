@@ -247,7 +247,7 @@ public class Community extends AbstractXtendWebsite {
       }
     };
     List<Article> _articles = this.articles(_function, _function_1, _function_2, _function_3, _function_4, _function_5, _function_6, _function_7, _function_8, _function_9, _function_10, _function_11, _function_12, _function_13, _function_14, _function_15, _function_16);
-    final Function1<Article,CharSequence> _function_17 = new Function1<Article,CharSequence>() {
+    final Function1<Article, CharSequence> _function_17 = new Function1<Article, CharSequence>() {
       public CharSequence apply(final Article it) {
         return Community.this.printArticle(it);
       }
@@ -356,7 +356,7 @@ public class Community extends AbstractXtendWebsite {
   }
   
   public List<Article> articles(final Procedure1<? super Article>... articles) {
-    final Function1<Procedure1<? super Article>,Article> _function = new Function1<Procedure1<? super Article>,Article>() {
+    final Function1<Procedure1<? super Article>, Article> _function = new Function1<Procedure1<? super Article>, Article>() {
       public Article apply(final Procedure1<? super Article> f) {
         Article _article = new Article();
         final Procedure1<Article> _function = new Procedure1<Article>() {

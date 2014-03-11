@@ -109,18 +109,18 @@ public class HtmlExtensions {
         _xifexpression = it.getName();
       } else {
         String _xifexpression_1 = null;
-        Map<Identifiable,String> _artificialHrefIds = this.artificialHrefIds(it);
+        Map<Identifiable, String> _artificialHrefIds = this.artificialHrefIds(it);
         boolean _containsKey = _artificialHrefIds.containsKey(it);
         if (_containsKey) {
-          Map<Identifiable,String> _artificialHrefIds_1 = this.artificialHrefIds(it);
+          Map<Identifiable, String> _artificialHrefIds_1 = this.artificialHrefIds(it);
           _xifexpression_1 = _artificialHrefIds_1.get(it);
         } else {
           String _xblockexpression_1 = null;
           {
-            Map<Identifiable,String> _artificialHrefIds_2 = this.artificialHrefIds(it);
+            Map<Identifiable, String> _artificialHrefIds_2 = this.artificialHrefIds(it);
             int _size = _artificialHrefIds_2.size();
             final String newHref = ("_" + Integer.valueOf(_size));
-            Map<Identifiable,String> _artificialHrefIds_3 = this.artificialHrefIds(it);
+            Map<Identifiable, String> _artificialHrefIds_3 = this.artificialHrefIds(it);
             _artificialHrefIds_3.put(it, newHref);
             _xblockexpression_1 = newHref;
           }
@@ -133,7 +133,7 @@ public class HtmlExtensions {
     return _xblockexpression;
   }
   
-  protected Map<Identifiable,String> artificialHrefIds(final Identifiable id) {
+  protected Map<Identifiable, String> artificialHrefIds(final Identifiable id) {
     Resource _eResource = id.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
     final EList<Adapter> adapters = _resourceSet.eAdapters();
@@ -213,7 +213,7 @@ public class HtmlExtensions {
   }
   
   protected CharSequence _toHtml(final List<EObject> it, final ParagraphState state) {
-    final Function1<EObject,CharSequence> _function = new Function1<EObject,CharSequence>() {
+    final Function1<EObject, CharSequence> _function = new Function1<EObject, CharSequence>() {
       public CharSequence apply(final EObject it) {
         return HtmlExtensions.this.toHtml(it, state);
       }

@@ -65,7 +65,7 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
   public List<TypeReference> getActualTypeArguments() {
     LightweightTypeReference _delegate = this.getDelegate();
     List<LightweightTypeReference> _typeArguments = _delegate.getTypeArguments();
-    final Function1<LightweightTypeReference,TypeReference> _function = new Function1<LightweightTypeReference,TypeReference>() {
+    final Function1<LightweightTypeReference, TypeReference> _function = new Function1<LightweightTypeReference, TypeReference>() {
       public TypeReference apply(final LightweightTypeReference it) {
         CompilationUnitImpl _compilationUnit = TypeReferenceImpl.this.getCompilationUnit();
         return _compilationUnit.toTypeReference(it);
