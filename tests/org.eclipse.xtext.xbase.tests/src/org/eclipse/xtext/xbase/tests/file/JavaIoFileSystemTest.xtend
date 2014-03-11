@@ -89,7 +89,7 @@ class JavaIoFileSystemTest {
 	}
 	
 	@Test def void testGetWorkspaceChildren() {
-		assertEquals(1, Path.ROOT.children.size)
+		assertEquals(Path.ROOT.children.join('[', ', ', ']') [ it.segments.join('.') ], 1, Path.ROOT.children.size)
 		
 		assertTrue(new Path("/bar").mkdir)
 		
