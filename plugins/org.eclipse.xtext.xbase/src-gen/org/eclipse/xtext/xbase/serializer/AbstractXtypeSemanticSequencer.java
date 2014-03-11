@@ -188,7 +188,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	/**
 	 * Constraint:
 	 *     (
-	 *         (static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedName]) | 
+	 *         (static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' | memberName=ValidID)) | 
 	 *         importedType=[JvmDeclaredType|QualifiedName] | 
 	 *         importedNamespace=QualifiedNameWithWildcard
 	 *     )

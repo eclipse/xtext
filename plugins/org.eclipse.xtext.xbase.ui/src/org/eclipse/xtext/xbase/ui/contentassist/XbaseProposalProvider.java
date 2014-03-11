@@ -20,15 +20,10 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
@@ -43,7 +38,6 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -63,11 +57,8 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Function;
@@ -119,10 +110,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	private XbaseQualifiedNameValueConverter qualifiedNameValueConverter;
 	
 	@Inject
-	private StaticQualifierPrefixMatcher staticQualifierPrefixMatcher;
-	
-	@Inject
-	private CommonTypeComputationServices services; 
+	private StaticQualifierPrefixMatcher staticQualifierPrefixMatcher; 
 	
 	@Inject
 	private IBatchTypeResolver typeResolver;
@@ -749,86 +737,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			}		
 		}
 		return info;
-	}
-	
-	protected StyledString getStyledDisplayString(JvmFeature feature, boolean withParenths, 
-			int insignificantParameters, String qualifiedNameAsString, String shortName,
-			OwnedConverter converter) {
-		StyledString result = new StyledString(shortName);
-		if (feature instanceof JvmOperation) {
-			JvmOperation operation = (JvmOperation) feature;
-			if (withParenths) {
-				result.append('(');
-				appendParameters(result, (JvmExecutable)feature, insignificantParameters, converter);
-				result.append(')');
-			}
-			JvmTypeReference returnType = operation.getReturnType();
-			if (returnType != null && returnType.getSimpleName() != null) {
-				result.append(" : ");
-				result.append(converter.apply(returnType).getSimpleName());
-			}
-			result.append(" - ", StyledString.QUALIFIER_STYLER);
-			result.append(converter.toRawLightweightReference(feature.getDeclaringType()).getSimpleName(), StyledString.QUALIFIER_STYLER);
-			if (!withParenths) {
-				result.append(".", StyledString.QUALIFIER_STYLER);
-				result.append(feature.getSimpleName(), StyledString.QUALIFIER_STYLER);
-				result.append("()", StyledString.QUALIFIER_STYLER);
-			}
-		} else if (feature instanceof JvmField) {
-			JvmField field = (JvmField) feature;
-			result.append(" : ");
-			if (field.getType() != null) {
-				String fieldType = converter.apply(field.getType()).getSimpleName();
-				if (fieldType != null)
-					result.append(fieldType);
-			}
-			result.append(" - ", StyledString.QUALIFIER_STYLER);
-			result.append(converter.toRawLightweightReference(feature.getDeclaringType()).getSimpleName(), StyledString.QUALIFIER_STYLER);
-		} else if (feature instanceof JvmConstructor) {
-			if (withParenths) {
-				result.append('(');
-				appendParameters(result, (JvmExecutable)feature, insignificantParameters, converter);
-				result.append(')');
-			}
-		}
-		return result;
-	}
-
-	protected void appendParameters(StyledString result, JvmExecutable executable, int insignificantParameters, OwnedConverter ownedConverter) {
-		List<JvmFormalParameter> declaredParameters = executable.getParameters();
-		List<JvmFormalParameter> relevantParameters = declaredParameters.subList(Math.min(insignificantParameters, declaredParameters.size()), declaredParameters.size());
-		for(int i = 0; i < relevantParameters.size(); i++) {
-			JvmFormalParameter parameter = relevantParameters.get(i);
-			if (i != 0)
-				result.append(", ");
-			if (i == relevantParameters.size() - 1 && executable.isVarArgs() && parameter.getParameterType() instanceof JvmGenericArrayTypeReference) {
-				JvmGenericArrayTypeReference parameterType = (JvmGenericArrayTypeReference) parameter.getParameterType();
-				result.append(ownedConverter.apply(parameterType.getComponentType()).getSimpleName());
-				result.append("...");
-			} else {
-				if (parameter.getParameterType()!= null) {
-					String simpleName = ownedConverter.apply(parameter.getParameterType()).getSimpleName();
-					if (simpleName != null) // is null if the file is not on the class path
-						result.append(simpleName);
-				}
-			}
-			result.append(' ');
-			result.append(notNull(parameter.getName()));
-		}
-	}
-
-	protected OwnedConverter getTypeConverter(XtextResource context) {
-		return new OwnedConverter(new StandardTypeReferenceOwner(services, context)) {
-			@Override
-			public LightweightTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
-				LightweightTypeReference result = super.doVisitParameterizedTypeReference(reference);
-				if (result.isFunctionType()) {
-					FunctionTypeReference functionTypeReference = result.tryConvertToFunctionTypeReference(false);
-					return functionTypeReference;
-				}
-				return result;
-			}
-		};
 	}
 	
 	protected Predicate<IEObjectDescription> getFeatureDescriptionPredicate(ContentAssistContext contentAssistContext) {

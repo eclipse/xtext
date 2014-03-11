@@ -89,8 +89,10 @@ public class XtendHyperlinkHelper extends TypeLiteralAwareHyperlinkHelper {
 	
 	protected void createMultipleHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
 		INode crossRefNode = getEObjectAtOffsetHelper().getCrossReferenceNode(resource, new TextRegion(offset, 0));
-		if (crossRefNode == null)
+		if (crossRefNode == null) {
+			createHyperlinksByOffset(resource, offset, acceptor);		
 			return;
+		}
 		EObject crossLinkedEObject = getEObjectAtOffsetHelper().getCrossReferencedElement(crossRefNode);
 		if (crossLinkedEObject != null && !crossLinkedEObject.eIsProxy()) {
 			EObject containedElementAt = getEObjectAtOffsetHelper().resolveContainedElementAt(resource, offset);

@@ -23,6 +23,16 @@ public class ValueConverterTest extends AbstractXbaseTestCase {
 	@Inject
 	private IValueConverterService valueConverterService;
 	
+	@Test public void testToValueQualifiedNameInStaticImport() {
+		Object value = valueConverterService.toValue("java.lang.String.", "QualifiedNameInStaticImport", null);
+		assertEquals("java.lang.String", value);
+	}
+	
+	@Test public void testToStringQualifiedNameInStaticImport() {
+		String string = valueConverterService.toString("java.lang.String", "QualifiedNameInStaticImport");
+		assertEquals("java.lang.String.", string);
+	}
+	
 	@Test public void testIntWithUnderscore() throws Exception {
 		Object value = valueConverterService.toValue("123_456", "INT", null);
 		assertTrue(value instanceof Integer);

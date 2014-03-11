@@ -96,6 +96,9 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 	private XbaseQualifiedNameValueConverter qualifiedNameValueConverter;
 	
 	@Inject
+	private XbaseQualifiedNameInStaticImportValueConverter qualifiedNameInStaticImportValueConverter;
+	
+	@Inject
 	private Provider<KeywordBasedValueConverter> keywordBasedConverterProvider;
 	
 	@Inject
@@ -136,6 +139,11 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 	@ValueConverter(rule = "QualifiedNameWithWildcard")
 	public IValueConverter<String> getQualifiedNameWithWildCardValueConverter() {
 		return getQualifiedNameValueConverter();
+	}
+	
+	@ValueConverter(rule = "QualifiedNameInStaticImport")
+	public IValueConverter<String> getQualifiedNameInStaticImportValueConverter() {
+		return qualifiedNameInStaticImportValueConverter;
 	}
 	
 	@ValueConverter(rule = "OpSingleAssign")

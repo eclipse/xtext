@@ -26,7 +26,10 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameInStaticImportValueConverter;
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -41,6 +44,9 @@ public class XbaseLocationInFileProvider extends DefaultLocationInFileProvider {
 	
 	@Inject
 	private FeatureCallAsTypeLiteralHelper typeLiteralHelper;
+	
+	@Inject
+	private XbaseQualifiedNameInStaticImportValueConverter qualifiedNameInStaticImportValueConverter;
 	
 	@Override
 	public ITextRegion getSignificantTextRegion(EObject element) {
@@ -75,6 +81,32 @@ public class XbaseLocationInFileProvider extends DefaultLocationInFileProvider {
 				if (!targetNodes.isEmpty()) {
 					INode targetNode = targetNodes.get(0);
 					result = result.merge(toZeroBasedRegion(targetNode.getTextRegionWithLineInformation()));
+				}
+				return result;
+			}
+		}
+		if (owner instanceof XImportDeclaration && reference == XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE) {
+			List<INode> nodes = NodeModelUtils.findNodesForFeature(owner, reference);
+			if (!nodes.isEmpty()) {
+				INode qualifierNode = nodes.get(0);
+				ITextRegion result = ITextRegion.EMPTY_REGION;
+				INode pending = null;
+				String delimiter = qualifiedNameInStaticImportValueConverter.getStringNamespaceDelimiter();
+				for (INode node : qualifierNode.getLeafNodes()) {
+					if (!isHidden(node)) {
+						int length = node.getLength();
+						if (length != 0) {
+							if (pending != null) {
+								result.merge(toZeroBasedRegion(pending.getTextRegionWithLineInformation()));
+								pending = null;
+							}
+							if (delimiter.equals(node.getText())) {
+								pending = node;
+							} else {
+								result = result.merge(toZeroBasedRegion(node.getTextRegionWithLineInformation()));
+							}
+						}
+					}
 				}
 				return result;
 			}

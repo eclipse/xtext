@@ -468,9 +468,12 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cExtensionExtensionKeyword_1_0_1_0 = (Keyword)cExtensionAssignment_1_0_1.eContents().get(0);
 		private final Assignment cImportedTypeAssignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
 		private final CrossReference cImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0 = (CrossReference)cImportedTypeAssignment_1_0_2.eContents().get(0);
-		private final RuleCall cImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_0_2_0_1 = (RuleCall)cImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0.eContents().get(1);
-		private final Keyword cFullStopKeyword_1_0_3 = (Keyword)cGroup_1_0.eContents().get(3);
-		private final Keyword cAsteriskKeyword_1_0_4 = (Keyword)cGroup_1_0.eContents().get(4);
+		private final RuleCall cImportedTypeJvmDeclaredTypeQualifiedNameInStaticImportParserRuleCall_1_0_2_0_1 = (RuleCall)cImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0.eContents().get(1);
+		private final Alternatives cAlternatives_1_0_3 = (Alternatives)cGroup_1_0.eContents().get(3);
+		private final Assignment cWildcardAssignment_1_0_3_0 = (Assignment)cAlternatives_1_0_3.eContents().get(0);
+		private final Keyword cWildcardAsteriskKeyword_1_0_3_0_0 = (Keyword)cWildcardAssignment_1_0_3_0.eContents().get(0);
+		private final Assignment cMemberNameAssignment_1_0_3_1 = (Assignment)cAlternatives_1_0_3.eContents().get(1);
+		private final RuleCall cMemberNameValidIDParserRuleCall_1_0_3_1_0 = (RuleCall)cMemberNameAssignment_1_0_3_1.eContents().get(0);
 		private final Assignment cImportedTypeAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
 		private final CrossReference cImportedTypeJvmDeclaredTypeCrossReference_1_1_0 = (CrossReference)cImportedTypeAssignment_1_1.eContents().get(0);
 		private final RuleCall cImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_1_0_1 = (RuleCall)cImportedTypeJvmDeclaredTypeCrossReference_1_1_0.eContents().get(1);
@@ -479,22 +482,25 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//XImportDeclaration:
-		//	"import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedName] "." "*" |
-		//	importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildcard) ";"?;
+		//	"import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedNameInStaticImport]
+		//	(wildcard?="*" | memberName=ValidID) | importedType=[JvmDeclaredType|QualifiedName] |
+		//	importedNamespace=QualifiedNameWithWildcard) ";"?;
 		public ParserRule getRule() { return rule; }
 
-		//"import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedName] "." "*" |
-		//importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildcard) ";"?
+		//"import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedNameInStaticImport]
+		//(wildcard?="*" | memberName=ValidID) | importedType=[JvmDeclaredType|QualifiedName] |
+		//importedNamespace=QualifiedNameWithWildcard) ";"?
 		public Group getGroup() { return cGroup; }
 
 		//"import"
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
-		//static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedName] "." "*" |
-		//importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildcard
+		//static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?="*" |
+		//memberName=ValidID) | importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildcard
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedName] "." "*"
+		//static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?="*" |
+		//memberName=ValidID)
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//static?="static"
@@ -509,20 +515,29 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//"extension"
 		public Keyword getExtensionExtensionKeyword_1_0_1_0() { return cExtensionExtensionKeyword_1_0_1_0; }
 
-		//importedType=[JvmDeclaredType|QualifiedName]
+		//importedType=[JvmDeclaredType|QualifiedNameInStaticImport]
 		public Assignment getImportedTypeAssignment_1_0_2() { return cImportedTypeAssignment_1_0_2; }
 
-		//[JvmDeclaredType|QualifiedName]
+		//[JvmDeclaredType|QualifiedNameInStaticImport]
 		public CrossReference getImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0() { return cImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0; }
 
-		//QualifiedName
-		public RuleCall getImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_0_2_0_1() { return cImportedTypeJvmDeclaredTypeQualifiedNameParserRuleCall_1_0_2_0_1; }
+		//QualifiedNameInStaticImport
+		public RuleCall getImportedTypeJvmDeclaredTypeQualifiedNameInStaticImportParserRuleCall_1_0_2_0_1() { return cImportedTypeJvmDeclaredTypeQualifiedNameInStaticImportParserRuleCall_1_0_2_0_1; }
 
-		//"."
-		public Keyword getFullStopKeyword_1_0_3() { return cFullStopKeyword_1_0_3; }
+		//wildcard?="*" | memberName=ValidID
+		public Alternatives getAlternatives_1_0_3() { return cAlternatives_1_0_3; }
+
+		//wildcard?="*"
+		public Assignment getWildcardAssignment_1_0_3_0() { return cWildcardAssignment_1_0_3_0; }
 
 		//"*"
-		public Keyword getAsteriskKeyword_1_0_4() { return cAsteriskKeyword_1_0_4; }
+		public Keyword getWildcardAsteriskKeyword_1_0_3_0_0() { return cWildcardAsteriskKeyword_1_0_3_0_0; }
+
+		//memberName=ValidID
+		public Assignment getMemberNameAssignment_1_0_3_1() { return cMemberNameAssignment_1_0_3_1; }
+
+		//ValidID
+		public RuleCall getMemberNameValidIDParserRuleCall_1_0_3_1_0() { return cMemberNameValidIDParserRuleCall_1_0_3_1_0; }
 
 		//importedType=[JvmDeclaredType|QualifiedName]
 		public Assignment getImportedTypeAssignment_1_1() { return cImportedTypeAssignment_1_1; }
@@ -542,6 +557,26 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//";"?
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
+
+	public class QualifiedNameInStaticImportElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedNameInStaticImport");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cValidIDParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//QualifiedNameInStaticImport:
+		//	(ValidID ".")+;
+		public ParserRule getRule() { return rule; }
+
+		//(ValidID ".")+
+		public Group getGroup() { return cGroup; }
+
+		//ValidID
+		public RuleCall getValidIDParserRuleCall_0() { return cValidIDParserRuleCall_0; }
+
+		//"."
+		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
+	}
 	
 	
 	private JvmTypeReferenceElements pJvmTypeReference;
@@ -559,6 +594,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	private ValidIDElements pValidID;
 	private XImportSectionElements pXImportSection;
 	private XImportDeclarationElements pXImportDeclaration;
+	private QualifiedNameInStaticImportElements pQualifiedNameInStaticImport;
 	private TerminalRule tID;
 	private TerminalRule tSTRING;
 	private TerminalRule tML_COMMENT;
@@ -739,14 +775,25 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XImportDeclaration:
-	//	"import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedName] "." "*" |
-	//	importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildcard) ";"?;
+	//	"import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedNameInStaticImport]
+	//	(wildcard?="*" | memberName=ValidID) | importedType=[JvmDeclaredType|QualifiedName] |
+	//	importedNamespace=QualifiedNameWithWildcard) ";"?;
 	public XImportDeclarationElements getXImportDeclarationAccess() {
 		return (pXImportDeclaration != null) ? pXImportDeclaration : (pXImportDeclaration = new XImportDeclarationElements());
 	}
 	
 	public ParserRule getXImportDeclarationRule() {
 		return getXImportDeclarationAccess().getRule();
+	}
+
+	//QualifiedNameInStaticImport:
+	//	(ValidID ".")+;
+	public QualifiedNameInStaticImportElements getQualifiedNameInStaticImportAccess() {
+		return (pQualifiedNameInStaticImport != null) ? pQualifiedNameInStaticImport : (pQualifiedNameInStaticImport = new QualifiedNameInStaticImportElements());
+	}
+	
+	public ParserRule getQualifiedNameInStaticImportRule() {
+		return getQualifiedNameInStaticImportAccess().getRule();
 	}
 
 	//terminal ID:

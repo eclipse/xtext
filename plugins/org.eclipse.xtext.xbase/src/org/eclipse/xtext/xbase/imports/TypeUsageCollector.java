@@ -26,16 +26,21 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.RawSuperTypes;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
@@ -52,6 +57,9 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypes;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
@@ -89,6 +97,9 @@ public class TypeUsageCollector {
 	@Inject
 	private FeatureCallAsTypeLiteralHelper typeLiteralHelper;
 	
+	@Inject
+	private IScopeProvider scopeProvider;
+	
 	private JvmDeclaredType currentThisType;
 	
 	private JvmMember currentContext;
@@ -120,6 +131,18 @@ public class TypeUsageCollector {
 			this.referencedType = null;
 			this.usedType = null;
 		}
+	}
+	
+	public XtextResource getResource() {
+		return resource;
+	}
+	
+	protected JvmMember getCurrentContext() {
+		return currentContext;
+	}
+	
+	protected TypeUsages getTypeUsages() {
+		return typeUsages;
 	}
 
 	@Inject
@@ -219,12 +242,31 @@ public class TypeUsageCollector {
 	}
 
 	private void collectStaticImportsFrom(final XAbstractFeatureCall featureCall) {
-		JvmIdentifiableElement feature = featureCall.getFeature();
-		if((feature instanceof JvmOperation || feature instanceof JvmField) && featureCall.isStatic()) {
-			if (featureCall.isExtension()) {
-				acceptStaticExtensionImport((JvmMember) feature);
-			} else {
-				acceptStaticImport((JvmMember) feature);
+		IFeatureLinkingCandidate featureLinkingCandidate = batchTypeResolver.resolveTypes(featureCall).getLinkingCandidate(featureCall);
+		if (featureLinkingCandidate instanceof IAmbiguousLinkingCandidate) {
+			IAmbiguousLinkingCandidate ambiguousLinkingCandidate = (IAmbiguousLinkingCandidate) featureLinkingCandidate;
+			for (ILinkingCandidate linkingCandidate : ambiguousLinkingCandidate.getAlternatives()) {
+				collectStaticImportsFrom(linkingCandidate);
+			}
+		} else {
+			collectStaticImportsFrom(featureLinkingCandidate);
+		}
+	}
+
+	protected void collectStaticImportsFrom(ILinkingCandidate linkingCandidate) {
+		if (linkingCandidate == null) {
+			return;
+		}
+		XExpression expression = linkingCandidate.getExpression();
+		if (expression instanceof XAbstractFeatureCall) {
+			JvmIdentifiableElement feature = linkingCandidate.getFeature();
+			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expression;
+			if ((feature instanceof JvmOperation || feature instanceof JvmField) && featureCall.isStatic()) {
+				if (featureCall.isExtension()) {
+					acceptStaticExtensionImport((JvmMember) feature);
+				} else {
+					acceptStaticImport((JvmMember) feature);
+				}
 			}
 		}
 	}
@@ -234,9 +276,13 @@ public class TypeUsageCollector {
 			for(INode documentationNode: documentationProvider.getDocumentationNodes(element)) {
 				for(ReplaceRegion docTypeReference: javaDocTypeReferenceProvider.computeTypeRefRegions(documentationNode)) {
 					String docTypeText = docTypeReference.getText();
-					JvmTypeReference typeRef = typeReferences.getTypeForName(docTypeText, currentThisType);
+					IScope scope = scopeProvider.getScope(element, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+					IEObjectDescription singleElement = scope.getSingleElement(QualifiedName.create(docTypeText));
 					ITextRegion textRegion = new TextRegion(docTypeReference.getOffset(), docTypeReference.getLength());
-					JvmType referencedType = typeRef != null ? typeRef.getType() : null;
+					JvmType referencedType = null;
+					if (singleElement != null) {
+						referencedType = (JvmType) singleElement.getEObjectOrProxy();
+					}
 					if(referencedType instanceof JvmDeclaredType && !referencedType.eIsProxy()) {
 						JvmDeclaredType casted = (JvmDeclaredType) referencedType;
 						typeUsages.addTypeUsage(casted, casted, textRegion, currentThisType);
@@ -340,7 +386,7 @@ public class TypeUsageCollector {
 		return text;
 	}
 
-	private PreferredType findPreferredType(JvmDeclaredType referencedType, String text) {
+	protected PreferredType findPreferredType(JvmDeclaredType referencedType, String text) {
 		if (referencedType != null && !referencedType.eIsProxy()) {
 			if (referencedType.getDeclaringType() == null) {
 				return new PreferredType(referencedType, referencedType);
@@ -419,14 +465,14 @@ public class TypeUsageCollector {
 		JvmDeclaredType declarator = member.getDeclaringType();
 		if (!needsStaticImport(declarator) || implicitStaticImports.contains(declarator))
 			return;
-		typeUsages.addStaticImport(declarator);
+		typeUsages.addStaticImport(member);
 	}
 
 	protected void acceptStaticExtensionImport(JvmMember member) {
 		JvmDeclaredType declarator = member.getDeclaringType();
 		if (!needsStaticImport(declarator) || implicitExtensionImports.contains(declarator))
 			return;
-		typeUsages.addExtensionImport(declarator);
+		typeUsages.addExtensionImport(member);
 	}
 
 	protected boolean needsStaticImport(JvmDeclaredType declarator) {

@@ -106,6 +106,7 @@ public class IssueCodes {
 	public static final String IMPORT_COLLISION = ISSUE_CODE_PREFIX + "import_collision";
 	public static final String IMPORT_CONFLICT = ISSUE_CODE_PREFIX + "import_conflict";
 	public static final String IMPORT_WILDCARD_DEPRECATED = ISSUE_CODE_PREFIX + "import_wildcard_deprecated";
+	public static final String IMPORT_UNRESOLVED = ISSUE_CODE_PREFIX + "import_unresolved";
 	
 	public static final String FORBIDDEN_REFERENCE = ISSUE_CODE_PREFIX	+ "forbidden_reference";
 	public static final String DISCOURAGED_REFERENCE = ISSUE_CODE_PREFIX	+ "discouraged_reference";

@@ -1328,22 +1328,493 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
-	def void duplicateImport() {
+	def void duplicateImport_0() {
 		create('Foo.xtend', '''
-			import java.util.List
-			import java.util.List|
+			import static java.lang.String.valueOf
+			import static java.lang.String.valueOf|
 			
 			class Foo {
-				List foo
+			
+				def foo() {
+					valueOf(1)
+				}
+			
 			}
 		''')
-		.assertIssueCodes(IMPORT_DUPLICATE)
+		.assertIssueCodes(IMPORT_UNUSED)
 		.assertResolutionLabels("Organize imports")
 		.assertModelAfterQuickfix('''
-			import java.util.List
+			import static java.lang.String.valueOf
 			
 			class Foo {
-				List foo
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_1() {
+		create('Foo.xtend', '''
+			import static java.lang.String.valueOf
+			import static java.lang.String.*|
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static java.lang.String.valueOf
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_2() {
+		create('Foo.xtend', '''
+			import static java.lang.String.valueOf
+			import static extension java.lang.String.valueOf|
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static java.lang.String.valueOf
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_3() {
+		create('Foo.xtend', '''
+			import static java.lang.String.valueOf
+			import static extension java.lang.String.*|
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static java.lang.String.valueOf
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_4() {
+		create('Foo.xtend', '''
+			import static java.lang.String.*
+			import static java.lang.String.*|
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static java.lang.String.*
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_5() {
+		create('Foo.xtend', '''
+			import static java.lang.String.valueOf
+			import static java.lang.String.valueOf
+			import static java.la|ng.String.format
+			import static java.lang.String.*
+			import static java.lang.String.*
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+				
+				def bar() {
+					copyValueOf(null as char[])
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static java.lang.String.valueOf
+			import static java.lang.String.*
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+				
+				def bar() {
+					copyValueOf(null as char[])
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_6() {
+		create('Foo.xtend', '''
+			import static java.lang.String.valueOf
+			import static java.lang.String.valueOf|
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+				
+				def bar() {
+					valueOf(2)
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static java.lang.String.valueOf
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+				
+				def bar() {
+					valueOf(2)
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_7() {
+		create('Foo.xtend', '''
+			import static java.lang.String.*
+			import static java.lang.String.*|
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+				
+				def bar() {
+					valueOf(2)
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static java.lang.String.*
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+				
+				def bar() {
+					valueOf(2)
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_8() {
+		create('Foo.xtend', '''
+			import static java.lang.String.*
+			import static extension java.lang.String.valueOf|
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static java.lang.String.*
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_9() {
+		create('Foo.xtend', '''
+			import static java.lang.String.*
+			import static extension java.lang.String.*|
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static java.lang.String.*
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_10() {
+		create('Foo.xtend', '''
+			import static extension java.lang.String.*
+			import static extension java.lang.String.*|
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static java.lang.String.*
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_11() {
+		create('Foo.xtend', '''
+			import static java.lang.String.valueOf|
+			import static extension java.lang.String.valueOf
+			
+			class Foo {
+			
+				def foo() {
+					1.valueOf
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static extension java.lang.String.valueOf
+			
+			class Foo {
+			
+				def foo() {
+					1.valueOf
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_12() {
+		create('Foo.xtend', '''
+			import static java.lang.String.valueOf|
+			import static extension java.lang.String.*
+			
+			class Foo {
+			
+				def foo() {
+					1.valueOf
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static extension java.lang.String.*
+			
+			class Foo {
+			
+				def foo() {
+					1.valueOf
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_13() {
+		create('Foo.xtend', '''
+			import static java.lang.String.*|
+			import static extension java.lang.String.valueOf
+			
+			class Foo {
+			
+				def foo() {
+					1.valueOf
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static extension java.lang.String.valueOf
+			
+			class Foo {
+			
+				def foo() {
+					1.valueOf
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_14() {
+		create('Foo.xtend', '''
+			import static java.lang.String.*|
+			import static extension java.lang.String.*
+			
+			class Foo {
+			
+				def foo() {
+					1.valueOf
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static extension java.lang.String.*
+			
+			class Foo {
+			
+				def foo() {
+					1.valueOf
+				}
+			
+			}
+		''')
+	}
+
+	@Test
+	def void duplicateImport_15() {
+		create('Foo.xtend', '''
+			import static extension java.lang.String.*
+			import static extension java.lang.String.*|
+			
+			class Foo {
+			
+				def foo() {
+					1.valueOf
+				}
+			
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static extension java.lang.String.*
+			
+			class Foo {
+			
+				def foo() {
+					1.valueOf
+				}
+			
 			}
 		''')
 	}

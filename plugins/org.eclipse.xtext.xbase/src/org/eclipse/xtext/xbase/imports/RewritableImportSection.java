@@ -19,9 +19,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -32,6 +34,7 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
+import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypeFactory;
@@ -91,9 +94,9 @@ public class RewritableImportSection {
 
 	private Map<String, JvmDeclaredType> plainImports = newHashMap();
 
-	private Set<JvmDeclaredType> staticImports = newHashSet();
-
-	private Set<JvmDeclaredType> staticExtensionImports = newHashSet();
+	private Map<JvmDeclaredType, Set<String>> staticImports = newHashMap();
+	
+	private Map<JvmDeclaredType, Set<String>> staticExtensionImports = newHashMap();
 
 	private String lineSeparator;
 
@@ -122,10 +125,13 @@ public class RewritableImportSection {
 			for (XImportDeclaration originalImportDeclaration : originalImportSection.getImportDeclarations()) {
 				this.originalImportDeclarations.add(originalImportDeclaration);
 				if (originalImportDeclaration.isStatic()) {
-					if (originalImportDeclaration.isExtension())
-						staticExtensionImports.add(originalImportDeclaration.getImportedType());
-					else
-						staticImports.add(originalImportDeclaration.getImportedType());
+					String memberName = originalImportDeclaration.getMemberName();
+					JvmDeclaredType importedType = originalImportDeclaration.getImportedType();
+					if (originalImportDeclaration.isExtension()) {
+						Maps2.putIntoSetMap(importedType, memberName, staticExtensionImports);
+					} else {
+						Maps2.putIntoSetMap(importedType, memberName, staticImports);
+					}
 				} else if(originalImportDeclaration.getImportedType() != null) {
 					plainImports.put(originalImportDeclaration.getImportedType().getSimpleName(),
 							originalImportDeclaration.getImportedType());
@@ -160,11 +166,11 @@ public class RewritableImportSection {
 	}
 	
 	public boolean removeImport(JvmDeclaredType type) {
-		XImportDeclaration importDeclaration = findOriginalImport(type, addedImportDeclarations, false, false);
+		XImportDeclaration importDeclaration = findOriginalImport(type, null, addedImportDeclarations, false, false);
 		if(importDeclaration != null) { 
 			addedImportDeclarations.remove(importDeclaration);
 		} else {
-			importDeclaration = findOriginalImport(type, originalImportDeclarations, false, false);
+			importDeclaration = findOriginalImport(type, null, originalImportDeclarations, false, false);
 			if(importDeclaration != null) 
 				removedImportDeclarations.add(importDeclaration);
 		}
@@ -179,68 +185,111 @@ public class RewritableImportSection {
 		return false;
 	}
 	
-	protected XImportDeclaration findOriginalImport(JvmDeclaredType type, Collection<XImportDeclaration> list,
+	protected XImportDeclaration findOriginalImport(JvmDeclaredType type, String memberName, Collection<XImportDeclaration> list,
 			boolean isStatic, boolean isExtension) {
+		XImportDeclaration result = null;
 		for(XImportDeclaration importDeclaration: list) {
 			if(!(isStatic ^ importDeclaration.isStatic())
 					&& !(isExtension ^ importDeclaration.isExtension())
-					&& importDeclaration.getImportedType()==type) 
-				return importDeclaration;
+					&& importDeclaration.getImportedType() == type) {
+				if (memberName == null) {
+					return importDeclaration;
+				}
+				if (memberName.equals(importDeclaration.getMemberName())) { 
+					return importDeclaration;
+				}
+				if (result == null) {
+					result = importDeclaration;
+				}
+			}
 		}
-		return null;
+		return result;
 	}
 
 	public JvmDeclaredType getImportedType(String simpleName) {
 		return plainImports.get(simpleName);
 	}
 
-	public boolean addStaticImport(JvmDeclaredType type) {
-		if (staticImports.contains(type))
-			return false;
-			staticImports.add(type);
-			XImportDeclaration importDeclaration = XtypeFactory.eINSTANCE.createXImportDeclaration();
-			importDeclaration.setImportedType(type);
-			importDeclaration.setStatic(true);
-			addedImportDeclarations.add(importDeclaration);
-		return true;
+	public boolean addStaticImport(JvmMember member) {
+		if (member instanceof JvmDeclaredType) {
+			return addStaticImport((JvmDeclaredType) member, null);
+		} else {
+			return addStaticImport(member.getDeclaringType(), member.getSimpleName());
+		}
 	}
 
-	public boolean removeStaticImport(JvmDeclaredType type) {
-		XImportDeclaration importDeclaration = findOriginalImport(type, originalImportDeclarations, true, false);
+	public boolean addStaticImport(JvmDeclaredType type, String memberName) {
+		if (hasStaticImport(staticImports, type, memberName)) {
+			return false;
+		}
+		Maps2.putIntoSetMap(type, memberName, staticImports);
+		XImportDeclaration importDeclaration = XtypeFactory.eINSTANCE.createXImportDeclaration();
+		importDeclaration.setImportedType(type);
+		importDeclaration.setStatic(true);
+		if (memberName == null) {
+			importDeclaration.setWildcard(true);
+		} else {
+			importDeclaration.setMemberName(memberName);
+		}
+		addedImportDeclarations.add(importDeclaration);
+		return true;		
+	}
+
+	public boolean removeStaticImport(JvmDeclaredType type, String memberName) {
+		XImportDeclaration importDeclaration = findOriginalImport(type, memberName, originalImportDeclarations, true, false);
 		if(importDeclaration != null) 
 			removedImportDeclarations.add(importDeclaration);
 		else {
-			importDeclaration = findOriginalImport(type, addedImportDeclarations, true, false);
+			importDeclaration = findOriginalImport(type, memberName, addedImportDeclarations, true, false);
 			if(importDeclaration != null)
 				addedImportDeclarations.remove(importDeclaration);
 		}
-		staticImports.remove(type);
+		Set<String> members = staticImports.get(type);
+		if (members != null) {
+			members.remove(memberName);
+		}
 		return importDeclaration != null;
 	}
 	
-
-	public boolean addStaticExtensionImport(JvmDeclaredType type) {
-		if (staticExtensionImports.contains(type))
-			return false;
-			staticExtensionImports.add(type);
-			XImportDeclaration importDeclaration = XtypeFactory.eINSTANCE.createXImportDeclaration();
-			importDeclaration.setImportedType(type);
-			importDeclaration.setStatic(true);
-			importDeclaration.setExtension(true);
-			addedImportDeclarations.add(importDeclaration);
-		return true;
+	public boolean addStaticExtensionImport(JvmMember member) {
+		if (member instanceof JvmDeclaredType) {
+			return addStaticExtensionImport((JvmDeclaredType) member, null);
+		} else {
+			return addStaticExtensionImport(member.getDeclaringType(), member.getSimpleName());
+		}
 	}
 
-	public boolean removeStaticExtensionImport(JvmDeclaredType type) {
-		XImportDeclaration importDeclaration = findOriginalImport(type, originalImportDeclarations, true, true);
+	public boolean addStaticExtensionImport(JvmDeclaredType type, String memberName) {
+		if (hasStaticImport(staticExtensionImports, type, memberName)) {
+			return false;
+		}
+		Maps2.putIntoSetMap(type, memberName, staticExtensionImports);
+		XImportDeclaration importDeclaration = XtypeFactory.eINSTANCE.createXImportDeclaration();
+		importDeclaration.setImportedType(type);
+		importDeclaration.setStatic(true);
+		importDeclaration.setExtension(true);
+		if (memberName == null) {
+			importDeclaration.setWildcard(true);
+		} else {
+			importDeclaration.setMemberName(memberName);
+		}
+		addedImportDeclarations.add(importDeclaration);
+		return true;		
+	}
+
+	public boolean removeStaticExtensionImport(JvmDeclaredType type, String memberName) {
+		XImportDeclaration importDeclaration = findOriginalImport(type, memberName, originalImportDeclarations, true, true);
 		if(importDeclaration != null) 
 			removedImportDeclarations.add(importDeclaration);
 		else {
-			importDeclaration = findOriginalImport(type, addedImportDeclarations, true, true);
+			importDeclaration = findOriginalImport(type, memberName, addedImportDeclarations, true, true);
 			if(importDeclaration != null)
 				addedImportDeclarations.remove(importDeclaration);
 		}
-		staticExtensionImports.remove(type);
+		Set<String> members = staticExtensionImports.get(type);
+		if (members != null) {
+			members.remove(memberName);
+		}
 		return importDeclaration != null;
 	}
 
@@ -275,9 +324,16 @@ public class RewritableImportSection {
 	}
 
 	private void removeObsoleteStaticImports() {
-		for(JvmDeclaredType staticExtensionImport: staticExtensionImports) {
-			if(staticImports.contains(staticExtensionImport)) 
-				removeStaticImport(staticExtensionImport);
+		for(Entry<JvmDeclaredType, Set<String>> staticExtensionImport: staticExtensionImports.entrySet()) {
+			JvmDeclaredType type = staticExtensionImport.getKey();
+			Set<String> memberNames = staticImports.get(type);
+			if (memberNames != null) {
+				for (String memberName : staticExtensionImport.getValue()) {
+					if (memberNames.contains(memberName)) { 
+						removeStaticImport(type, memberName);
+					}
+				}
+			}
 		}
 	}
 
@@ -315,8 +371,14 @@ public class RewritableImportSection {
 		}
 		String escapedTypeName = nameValueConverter.toString(serializeType(newImportDeclaration.getImportedType()));
 		builder.append(escapedTypeName);
-		if (newImportDeclaration.isStatic())
-			builder.append(".*");
+		if (newImportDeclaration.isStatic()) {
+			builder.append(".");
+			if (newImportDeclaration.isWildcard()) {
+				builder.append("*");
+			} else {
+				builder.append(newImportDeclaration.getMemberName());
+			}
+		}
 		builder.append(lineSeparator);
 	}
 	
@@ -381,4 +443,17 @@ public class RewritableImportSection {
 		});
 		return sortMe;
 	}
+
+	public boolean hasStaticImport(JvmDeclaredType declaringType, String memberName, boolean extension) {
+		if (extension) {
+			return hasStaticImport(staticExtensionImports, declaringType, memberName);
+		}
+		return hasStaticImport(staticImports, declaringType, memberName);
+	}
+
+	private boolean hasStaticImport(Map<JvmDeclaredType, Set<String>> imports, JvmDeclaredType declaringType, String memberName) {
+		Set<String> members = imports.get(declaringType);
+		return members != null && members.contains(memberName);
+	}
+
 }

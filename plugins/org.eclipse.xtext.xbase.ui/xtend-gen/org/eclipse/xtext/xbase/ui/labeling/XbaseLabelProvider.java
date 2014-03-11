@@ -6,6 +6,7 @@ import java.util.Arrays;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -151,16 +152,25 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     return this.images.forLocalVariable(_get);
   }
   
-  protected String text(final XImportDeclaration importDeclaration) {
-    String _xifexpression = null;
-    String _importedNamespace = importDeclaration.getImportedNamespace();
-    boolean _notEquals = (!Objects.equal(_importedNamespace, null));
-    if (_notEquals) {
-      _xifexpression = importDeclaration.getImportedNamespace();
-    } else {
-      _xifexpression = importDeclaration.getImportedTypeName();
+  protected String text(final XImportDeclaration it) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _importedTypeName = it.getImportedTypeName();
+    _builder.append(_importedTypeName, "");
+    {
+      boolean _isWildcard = it.isWildcard();
+      if (_isWildcard) {
+        _builder.append(".*");
+      } else {
+        String _memberName = it.getMemberName();
+        boolean _notEquals = (!Objects.equal(_memberName, null));
+        if (_notEquals) {
+          _builder.append(".");
+          String _memberName_1 = it.getMemberName();
+          _builder.append(_memberName_1, "");
+        }
+      }
     }
-    return _xifexpression;
+    return _builder.toString();
   }
   
   protected String text(final XImportSection importSection) {

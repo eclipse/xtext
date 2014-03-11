@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation;
 
-import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
@@ -23,17 +22,13 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EcoreUtil2.ElementReferenceAcceptor;
-import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -61,7 +56,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -95,6 +89,9 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
+import org.eclipse.xtext.xbase.imports.ImportedTypesCollector;
+import org.eclipse.xtext.xbase.imports.StaticallyImportedMemberProvider;
+import org.eclipse.xtext.xbase.imports.TypeUsages;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -126,6 +123,7 @@ import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
@@ -134,6 +132,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Xbase Validator that does use the scope provider or the type argument context. 
@@ -182,7 +181,13 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private TypesOrderUtil typesOrderUtil;
 	
 	@Inject
-	private SwitchConstantExpressionsInterpreter switchConstantExpressionsInterpreter; 
+	private SwitchConstantExpressionsInterpreter switchConstantExpressionsInterpreter;
+	
+	@Inject
+	private Provider<ImportedTypesCollector> importedTypesCollectorProvider;
+	
+	@Inject
+	private StaticallyImportedMemberProvider staticallyImportedMemberProvider;
 	
 	protected CommonTypeComputationServices getServices() {
 		return services;
@@ -999,194 +1004,178 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkImports(XImportSection importSection) {
-		if (importSection.getImportDeclarations().isEmpty())
+		if (importSection.getImportDeclarations().isEmpty()) {
 			return;
+		}
 		
-		final Map<JvmType, XImportDeclaration> imports = Maps.newHashMap();
-		final Map<JvmType, XImportDeclaration> staticImports = Maps.newHashMap();
-		final Map<JvmType, XImportDeclaration> extensionImports = Maps.newHashMap();
+		final Map<String, List<XImportDeclaration>> imports = Maps.newHashMap();
+		final Map<String, List<XImportDeclaration>> staticImports = Maps.newHashMap();
+		final Map<String, List<XImportDeclaration>> extensionImports = Maps.newHashMap();
 		final Map<String, JvmType> importedNames = Maps.newHashMap();
 		
 		populateMaps(importSection, imports, staticImports, extensionImports, importedNames);
-		Set<EObject> primarySourceElements = collectPrimarySourceElements(importSection, imports, importedNames);
-		if(!isIgnored(IMPORT_UNUSED)) {
-			for(EObject primarySourceElement: primarySourceElements) {
-				ICompositeNode node = NodeModelUtils.findActualNodeFor(primarySourceElement);
-				if (node != null) {
-					for (INode n : node.getAsTreeIterable()) {
-						if (n.getGrammarElement() instanceof CrossReference) {
-							handleTypeUsageInCrossReference(imports, importedNames, n);
-						} else if (n.getGrammarElement() instanceof TerminalRule && ((TerminalRule) n.getGrammarElement()).getName().equals("ML_COMMENT")){
-							handleTypeUsageInComment(imports, importedNames, n);
-						} else if (n.hasDirectSemanticElement() && n.getSemanticElement() instanceof XAbstractFeatureCall) {
-							handleTypeUsageInTypeLiteral(imports, importedNames, (XAbstractFeatureCall) n.getSemanticElement(), n);
-							handleTypeUsageInStaticFeatureCall(staticImports, extensionImports, n);
+		checkConflicts(importSection, imports, importedNames);
+		if (!isIgnored(IMPORT_UNUSED)) {
+			XtextResource xtextResource = (XtextResource) importSection.eResource();
+			
+			ImportedTypesCollector importedTypesCollector = importedTypesCollectorProvider.get();
+			TypeUsages typeUsages = importedTypesCollector.collectTypeUsages(xtextResource);
+			for (JvmMember member : typeUsages.getStaticImports()) {
+				if (typeUsages.getExtensionImports().contains(member)) {
+					if (!removeStaticImport(extensionImports, member)) {
+						removeStaticImport(staticImports, member);
+					}
+				} else {
+					if (!removeStaticImport(staticImports, member)) {
+						removeStaticImport(extensionImports, member);
+					}
+				}
+			}
+			for (JvmMember member : typeUsages.getExtensionImports()) {
+				removeStaticImport(extensionImports, member);
+			}
+			for (JvmDeclaredType type : typeUsages.getSimpleName2Types().values()) {
+				if (!removeTypeImport(imports, type)) {
+					for (JvmType key : importedNames.values()) {
+						if (isNestedTypeOf(key, type)) {
+							removeTypeImport(imports, key);
 						}
 					}
 				}
 			}
+			addImportUnusedIssues(imports);
+			addImportUnusedIssues(staticImports);
+			addImportUnusedIssues(extensionImports);
+		}
+	}
+
+	private boolean isNestedTypeOf(JvmType child, JvmDeclaredType parent) {
+		if (child instanceof JvmMember) {
+			JvmMember member = (JvmMember) child;
+			return member.getDeclaringType() == parent;
+		}
+		return false;
+	}
+
+	private boolean removeStaticImport(Map<String, List<XImportDeclaration>> staticImports, JvmMember member) {
+		JvmDeclaredType declaringType = member.getDeclaringType();
+		String identifier = declaringType.getIdentifier();
 		
-			Iterable<XImportDeclaration> obsoleteImports = concat(imports.values(), staticImports.values(), extensionImports.values());
-			for (XImportDeclaration imp : obsoleteImports) {
-				addIssue("The import '" + imp.getImportedTypeName() + "' is never used.", imp, IMPORT_UNUSED);
-			}
-		}
-	}
-
-	protected void handleTypeUsageInStaticFeatureCall(final Map<JvmType, XImportDeclaration> staticImports,
-			final Map<JvmType, XImportDeclaration> extensionImports, INode node) {
-		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) node.getSemanticElement();
-		boolean isExtension = featureCall.isExtension();
-		if (featureCall.isStatic() || isExtension) {
-			JvmIdentifiableElement element = featureCall.getFeature();
-			if (!element.eIsProxy()) {
-				JvmFeature feature = (JvmFeature) element;
-				JvmDeclaredType declaringType = feature.getDeclaringType();
-				if (declaringType != null) {
-					JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(featureCall);
-					JvmDeclaredType featureCallOwner = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
-					if (!contains(featureCallOwner.getAllFeatures(), feature)) {
-						if (isExtension) {
-							extensionImports.remove(declaringType);
-						} else {
-							staticImports.remove(declaringType);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	protected void handleTypeUsageInComment(final Map<JvmType, XImportDeclaration> imports, final Map<String, JvmType> importedNames, INode n) {
-		List<ReplaceRegion> typeRefRegions = javaDocTypeReferenceProvider.computeTypeRefRegions(n);
-		for(ReplaceRegion replaceRegion : typeRefRegions){
-			String simpleName = replaceRegion.getText();
-			if (importedNames.containsKey(simpleName)) {
-				imports.remove(importedNames.remove(simpleName));
-			}
-		}
-	}
-	
-	protected void handleTypeUsageInTypeLiteral(final Map<JvmType, XImportDeclaration> imports, final Map<String, JvmType> importedNames, XAbstractFeatureCall featureCall, INode node) {
-		if (featureCall instanceof XFeatureCall) {
-			XFeatureCall casted = (XFeatureCall) featureCall;
-			if (casted.isPackageFragment() || !casted.isTypeLiteral())
-				return;
-			doHandleTypeReference(imports, importedNames, node);
-		}
-	}
-
-	protected void handleTypeUsageInCrossReference(final Map<JvmType, XImportDeclaration> imports, final Map<String, JvmType> importedNames, INode n) {
-		CrossReference crossReference = (CrossReference) n.getGrammarElement();
-		EClassifier classifier = crossReference.getType().getClassifier();
-		if (classifier instanceof EClass
-			 && (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) 
-					|| TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf((EClass) classifier))) {
-			doHandleTypeReference(imports, importedNames, n);
-		}
-	}
-
-	private void doHandleTypeReference(final Map<JvmType, XImportDeclaration> imports, final Map<String, JvmType> importedNames, INode n) {
-		// Filter out HiddenLeafNodes to avoid confusion by comments etc.
-		StringBuilder builder = new StringBuilder();
-		for(ILeafNode leafNode : n.getLeafNodes()){
-			if(!leafNode.isHidden()){
-				builder.append(leafNode.getText());
-			}
-		}
-		String simpleName = builder.toString();
-		if (importedNames.containsKey(simpleName)) {
-			JvmType type = importedNames.remove(simpleName);
-			imports.remove(type);
-		} else {
-			if (markImportUsed(imports, importedNames, simpleName, "$")) {
-				return;
-			}
-			if (markImportUsed(imports, importedNames, simpleName, ".")) {
-				return;
-			}
-			if (markImportUsed(imports, importedNames, simpleName, "::")) {
-				return;
-			}
-		}
-	}
-	
-	protected boolean markImportUsed(Map<JvmType, XImportDeclaration> imports, Map<String, JvmType> importedNames, String simpleName, String delimiter) {
-		int idx = simpleName.indexOf(delimiter);
-		if (idx < 0)
+		List<XImportDeclaration> list = staticImports.get(identifier);
+		if (list == null) {
 			return false;
-		String firstSegment = simpleName.substring(0, idx);
-		if (importedNames.containsKey(firstSegment)) {
-			imports.remove(importedNames.remove(firstSegment));
 		}
+		if (list.size() == 1) {
+			staticImports.remove(identifier);
+			return true;
+		}
+		int indexToRemove = -1;
+		for (int i = 0; i < list.size(); i++) {
+			XImportDeclaration staticImportDeclaration = list.get(i);
+			if (staticImportDeclaration.isWildcard()) {
+				if (indexToRemove == -1) {
+					indexToRemove = i;
+				}
+				continue;
+			}
+			if (Objects.equal(member.getSimpleName(), staticImportDeclaration.getMemberName())) {
+				indexToRemove = i;
+				break;
+			}
+		}
+		if (indexToRemove == -1) {
+			indexToRemove = 0;
+		}
+		list.remove(indexToRemove);
 		return true;
 	}
 
-	protected Set<EObject> collectPrimarySourceElements(XImportSection importSection, final Map<JvmType, XImportDeclaration> imports,
+	private boolean removeTypeImport(Map<String, List<XImportDeclaration>> imports, JvmType declaringType) {
+		String identifier = declaringType.getIdentifier();
+		List<XImportDeclaration> list = imports.get(identifier);
+		if (list == null) {
+			return false;
+		}
+		if (list.size() == 1) {
+			imports.remove(identifier);
+			return true;
+		}
+		list.remove(0);
+		return true;
+	}
+
+	protected void addImportUnusedIssues(final Map<String, List<XImportDeclaration>> imports) {
+		for (List<XImportDeclaration> importDeclarations : imports.values()) {
+			for (XImportDeclaration importDeclaration : importDeclarations) {
+				addIssue("The import '" + importDeclaration.getImportedName() + "' is never used.", importDeclaration, IMPORT_UNUSED);
+			}	
+		}
+	}
+
+	protected void checkConflicts(XImportSection importSection, final Map<String, List<XImportDeclaration>> imports,
 			final Map<String, JvmType> importedNames) {
-		Set<EObject> primarySourceElements = Sets.newHashSet();
 		for (JvmDeclaredType declaredType : importsConfiguration.getLocallyDefinedTypes((XtextResource)importSection.eResource())) {
 			if(importedNames.containsKey(declaredType.getSimpleName())){
 				JvmType importedType = importedNames.get(declaredType.getSimpleName());
 				if (importedType != declaredType  && importedType.eResource() != importSection.eResource()) {
-					XImportDeclaration importDeclaration = imports.get(importedType);
-					if(importDeclaration != null)
-						error("The import '" 
-								+ importedType.getIdentifier() 
-								+ "' conflicts with a type defined in the same file", 
-								importDeclaration, null, IssueCodes.IMPORT_CONFLICT );
+					List<XImportDeclaration> list = imports.get(importedType.getIdentifier());
+					if (list != null) {
+						for (XImportDeclaration importDeclaration: list ) {
+							error("The import '" 
+									+ importedType.getIdentifier() 
+									+ "' conflicts with a type defined in the same file", 
+									importDeclaration, null, IssueCodes.IMPORT_CONFLICT);
+						}
+					}
 				}
 			}
-			EObject primarySourceElement = associations.getPrimarySourceElement(declaredType);
-			if(primarySourceElement != null)
-				primarySourceElements.add(primarySourceElement);
 		}
-		return primarySourceElements;
 	}
 
-	protected void populateMaps(XImportSection importSection, final Map<JvmType, XImportDeclaration> imports,
-			final Map<JvmType, XImportDeclaration> staticImports, final Map<JvmType, XImportDeclaration> extensionImports,
+	protected void populateMaps(XImportSection importSection, final Map<String, List<XImportDeclaration>> imports,
+			final Map<String, List<XImportDeclaration>> staticImports, final Map<String, List<XImportDeclaration>> extensionImports,
 			final Map<String, JvmType> importedNames) {
 		for (XImportDeclaration imp : importSection.getImportDeclarations()) {
 			if (imp.getImportedNamespace() != null) { 
 				addIssue("The use of wildcard imports is deprecated.", imp, IMPORT_WILDCARD_DEPRECATED);
-			} else {
-				JvmType importedType = imp.getImportedType();
-				if (importedType != null && !importedType.eIsProxy()) {
-					Map<JvmType, XImportDeclaration> map = imp.isStatic() 
-							? (imp.isExtension() ? extensionImports : staticImports) 
-						    : imports;
-					if(imp.isStatic()) {
-						if(imp.isExtension()) {
-							XImportDeclaration staticImport = staticImports.get(importedType);
-							if(staticImport != null) {
-								addIssue("Obsolete static import of '" + importedType.getSimpleName() + "'.", staticImport, IssueCodes.IMPORT_DUPLICATE);
-							}
-						} else if(extensionImports.containsKey(importedType)) {
-							addIssue("Obsolete static import of '" + importedType.getSimpleName() + "'.", imp, IssueCodes.IMPORT_DUPLICATE);
-						}
-					}
-					if (map.containsKey(importedType)) {
-						addIssue("Duplicate import of '" + importedType.getSimpleName() + "'.", imp, IssueCodes.IMPORT_DUPLICATE);
-					} else {
-						map.put(importedType, imp);
-						if (!imp.isStatic()) {
-							JvmType currentType = importedType;
-							String currentSuffix = currentType.getSimpleName();
-							JvmType collidingImport = importedNames.put(currentSuffix, importedType);
-							if(collidingImport != null)
-								error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
-										+ collidingImport.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
-							while (currentType.eContainer() instanceof JvmType) {
-								currentType = (JvmType) currentType.eContainer();
-								currentSuffix = currentType.getSimpleName()+"$"+currentSuffix;
-								JvmType collidingImport2 = importedNames.put(currentSuffix, importedType);
-								if(collidingImport2 != null)
-									error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
-											+ collidingImport2.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
-							}
-						}
-					}
+				continue;
+			}
+			
+			JvmType importedType = imp.getImportedType();
+			if (importedType == null || importedType.eIsProxy()) {
+				continue;
+			}
+			
+			Map<String, List<XImportDeclaration>> map = imp.isStatic() ? (imp.isExtension() ? extensionImports : staticImports) : imports;
+			List<XImportDeclaration> list = map.get(importedType.getIdentifier());
+			if (list != null) {
+				list.add(imp);
+				continue;
+			}
+			list = Lists.newArrayListWithCapacity(2);
+			list.add(imp);
+			map.put(importedType.getIdentifier(), list);
+			
+			if (!imp.isStatic()) {
+				JvmType currentType = importedType;
+				String currentSuffix = currentType.getSimpleName();
+				JvmType collidingImport = importedNames.put(currentSuffix, importedType);
+				if(collidingImport != null)
+					error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
+							+ collidingImport.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
+				while (currentType.eContainer() instanceof JvmType) {
+					currentType = (JvmType) currentType.eContainer();
+					currentSuffix = currentType.getSimpleName()+"$"+currentSuffix;
+					JvmType collidingImport2 = importedNames.put(currentSuffix, importedType);
+					if(collidingImport2 != null)
+						error("The import '" + importedType.getIdentifier() + "' collides with the import '" 
+								+ collidingImport2.getIdentifier() + "'.", imp, null, IssueCodes.IMPORT_COLLISION);
+				}
+			} else if (!imp.isWildcard()) {
+				Iterable<JvmFeature> allFeatures = staticallyImportedMemberProvider.getAllFeatures(imp);
+				if (!allFeatures.iterator().hasNext()) {
+					addIssue("The import " + imp.getImportedName() + " cannot be resolved.", imp, IMPORT_UNRESOLVED);
+					continue;
 				}
 			}
 		}
