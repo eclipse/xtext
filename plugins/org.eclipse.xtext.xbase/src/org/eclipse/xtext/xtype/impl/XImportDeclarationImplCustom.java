@@ -22,10 +22,23 @@ public class XImportDeclarationImplCustom extends XImportDeclarationImpl {
 	@Override
 	public boolean isWildcard() {
 		if (isStatic()) 
-			return true;
+			return super.isWildcard();
 		if (importedNamespace == null)
 			return false;
 		return importedNamespace.endsWith("*");
+	}
+	
+	@Override
+	public String getImportedName() {
+		String memberName = getMemberName();
+		String importedTypeName = getImportedTypeName();
+		if (memberName == null) {
+			return importedTypeName;
+		}
+		if (importedTypeName == null) {
+			return memberName;
+		}
+		return importedTypeName + '.' + memberName;
 	}
 
 	@Override
@@ -42,15 +55,24 @@ public class XImportDeclarationImplCustom extends XImportDeclarationImpl {
 				for (INode iNode : list) {
 					sb.append(NodeModelUtils.getTokenText(iNode).replace("^", ""));
 				}
-				return sb.toString().replace(" ", "");
+				result = sb.toString().replace(" ", "");
+				if (isStatic()) {
+					return trim(result, 1);
+				}
+				return result;
 			}
 			return null;
 		}
 		if (isWildcard()) {
-			if (result.length() > 2)
-				return result.substring(0, result.length() - 2);
-			return null;
+			return trim(result, 2);
 		}
 		return result;
+	}
+
+	private String trim(String result, int length) {
+		if (result.length() > length) {
+			return result.substring(0, result.length() - length);
+		}
+		return null;
 	}
 }

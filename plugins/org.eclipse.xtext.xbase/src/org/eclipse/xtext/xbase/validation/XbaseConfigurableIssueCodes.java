@@ -64,6 +64,7 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		iAcceptor.accept(createDelegate(IssueCodes.UNUSED_LOCAL_VARIABLE, COMPILER_PB_UNUSED_LOCAL));
 		iAcceptor.accept(create(IssueCodes.IMPORT_DUPLICATE, SeverityConverter.SEVERITY_WARNING));
 		iAcceptor.accept(create(IssueCodes.VARIABLE_NAME_DISCOURAGED, SeverityConverter.SEVERITY_WARNING));
+		iAcceptor.accept(create(IssueCodes.IMPORT_UNRESOLVED, SeverityConverter.SEVERITY_ERROR));
 		
 		iAcceptor.accept(create(IssueCodes.JAVA_STYLE_TYPE_CAST, SeverityConverter.SEVERITY_ERROR));
 		

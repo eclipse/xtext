@@ -109,11 +109,19 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 				public void doAddImports(ITypeImporter importer) {
 					List<XImportDeclaration> imports = importSection.getImportDeclarations();
 					for(XImportDeclaration _import: imports) {
-						if (_import.isWildcard() && _import.isStatic()) {
-							if (_import.isExtension()) {
-								importer.importStaticExtension(_import.getImportedType(), false);
+						if (_import.isStatic()) {
+							if (_import.isWildcard()) {
+								if (_import.isExtension()) {
+									importer.importStaticExtension(_import.getImportedType(), false);
+								} else {
+									importer.importStatic(_import.getImportedType());
+								}
 							} else {
-								importer.importStatic(_import.getImportedType());
+								if (_import.isExtension()) {
+									importer.importStaticExtension(_import.getImportedType(), _import.getMemberName(), false);
+								} else {
+									importer.importStatic(_import.getImportedType(), _import.getMemberName());
+								}
 							}
 						}
 					}

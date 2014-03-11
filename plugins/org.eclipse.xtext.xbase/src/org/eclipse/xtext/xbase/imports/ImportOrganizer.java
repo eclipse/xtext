@@ -15,6 +15,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
@@ -57,13 +58,27 @@ public class ImportOrganizer {
 	}
 
 	private List<ReplaceRegion> getOrganizedImportChanges(XtextResource resource, Map<String, JvmDeclaredType> resolvedConflicts, TypeUsages typeUsages) {
+		RewritableImportSection oldImportSection = importSectionFactory.parse(resource);
+		
 		RewritableImportSection newImportSection = importSectionFactory.createNewEmpty(resource);
 		addImports(resolvedConflicts, typeUsages, newImportSection);
 		List<ReplaceRegion> replaceRegions = getReplacedUsageSites(resolvedConflicts, typeUsages, newImportSection);
-		for(JvmDeclaredType staticImport: typeUsages.getStaticImports()) 
-			newImportSection.addStaticImport(staticImport);
-		for(JvmDeclaredType extensionImport: typeUsages.getExtensionImports()) 
-			newImportSection.addStaticExtensionImport(extensionImport);
+		for(JvmMember staticImport: typeUsages.getStaticImports()) {
+			JvmDeclaredType declaringType = staticImport.getDeclaringType();
+			if (oldImportSection.hasStaticImport(declaringType, staticImport.getSimpleName(), false)) {
+				newImportSection.addStaticImport(staticImport);
+			} else {
+				newImportSection.addStaticImport(declaringType, null);
+			}
+		}
+		for(JvmMember extensionImport: typeUsages.getExtensionImports()) {
+			JvmDeclaredType declaringType = extensionImport.getDeclaringType();
+			if (oldImportSection.hasStaticImport(declaringType, extensionImport.getSimpleName(), true)) {
+				newImportSection.addStaticExtensionImport(extensionImport);
+			} else {
+				newImportSection.addStaticExtensionImport(declaringType, null);
+			}
+		}
 		replaceRegions.addAll(newImportSection.rewrite());
 		return replaceRegions;
 	}
