@@ -7,6 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
+import java.util.Objects;
+import java.util.Set;
+
+import com.google.common.collect.Sets;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
@@ -72,6 +77,13 @@ public class OutputConfiguration {
 	 * whether local history should be kept for generated files.
 	 */
 	private boolean keepLocalHistory = false;
+
+	/**
+	 * Whether to allow specifying output directories on a per sourcefolder basis
+	 */
+	private boolean useOutputPerSourceFolder = false;
+
+	private Set<SourceMapping> sourceMappings = Sets.newHashSet();
 
 	public OutputConfiguration(String name) {
 		super();
@@ -172,12 +184,67 @@ public class OutputConfiguration {
 	public Boolean isKeepLocalHistory() {
 		return keepLocalHistory;
 	}
-	
+
 	/**
 	 * @since 2.5
 	 */
 	public void setKeepLocalHistory(Boolean keepLocalHistory) {
 		this.keepLocalHistory = keepLocalHistory;
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	public boolean isUseOutputPerSourceFolder() {
+		return useOutputPerSourceFolder;
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	public void setUseOutputPerSourceFolder(boolean useOutputPerSourceFolder) {
+		this.useOutputPerSourceFolder = useOutputPerSourceFolder;
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	public Set<SourceMapping> getSourceMappings() {
+		return sourceMappings;
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	public String getOutputDirectory(String sourceFolder) {
+		if (useOutputPerSourceFolder) {
+			for (SourceMapping mapping : sourceMappings) {
+				if (mapping.getSourceFolder().equals(sourceFolder) && mapping.getOutputDirectory() != null) {
+					return mapping.getOutputDirectory();
+				}
+			}
+		}
+		return getOutputDirectory();
+	}
+	
+	public Set<String> getSourceFolders() {
+		Set<String> sourceFolders = Sets.newLinkedHashSet();
+		for (SourceMapping mapping : getSourceMappings()) {
+			sourceFolders.add(mapping.getSourceFolder());
+		}
+		return sourceFolders;
+	}
+	
+	public Set<String> getOutputDirectories() {
+		Set<String> outputDirectories = Sets.newLinkedHashSet();
+		if (isUseOutputPerSourceFolder()) {
+			for (SourceMapping mapping : getSourceMappings()) {
+				outputDirectories.add(getOutputDirectory(mapping.getSourceFolder()));
+			}
+		} else {
+			outputDirectories.add(getOutputDirectory());
+		}
+		return outputDirectories;
 	}
 
 	@Override
@@ -205,4 +272,54 @@ public class OutputConfiguration {
 		return true;
 	}
 
+	/**
+	 * Specifies the output folder for a source folder (may be null, in which case the output folder of the enclosing
+	 * {@link OutputConfiguration} is used). A source folder may also be set to be ignored in the UI. This makes it
+	 * clear to the user that he does not have to specify an output directory for that source folder.
+	 * 
+	 * @since 2.6
+	 */
+	public static class SourceMapping {
+		private String sourceFolder;
+		private String outputDirectory;
+		private boolean ignore;
+
+		public SourceMapping(String sourceFolder) {
+			this.sourceFolder = sourceFolder;
+		}
+
+		public String getSourceFolder() {
+			return sourceFolder;
+		}
+
+		public String getOutputDirectory() {
+			return outputDirectory;
+		}
+
+		public void setOutputDirectory(String outputDirectory) {
+			this.outputDirectory = outputDirectory;
+		}
+
+		public boolean isIgnore() {
+			return ignore;
+		}
+
+		public void setIgnore(boolean ignore) {
+			this.ignore = ignore;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (obj instanceof SourceMapping) {
+				SourceMapping other = (SourceMapping) obj;
+				return Objects.equals(sourceFolder, other.sourceFolder);
+			}
+			return false;
+		}
+		
+		@Override
+		public int hashCode() {
+			return Objects.hash(sourceFolder);
+		}
+	}
 }

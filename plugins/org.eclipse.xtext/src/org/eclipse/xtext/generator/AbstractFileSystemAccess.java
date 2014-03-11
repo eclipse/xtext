@@ -27,6 +27,19 @@ public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFi
 	private IFilePostProcessor postProcessor;
 
 	private Map<String, OutputConfiguration> outputs = newLinkedHashMap();
+	
+	private String currentSource;
+	
+	public void setCurrentSource(String currentSource) {
+		this.currentSource = currentSource;
+	}
+	
+	/**
+	 * The current source folder, relative to the project location
+	 */
+	protected String getCurrentSource() {
+		return currentSource;
+	}
 
 	/**
 	 * @since 2.1
@@ -52,9 +65,13 @@ public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFi
 	}
 
 	protected Map<String, String> getPathes() {
-		return transformValues(outputs, new Function<OutputConfiguration, String>() {
+		return transformValues(getOutputConfigurations(), new Function<OutputConfiguration, String>() {
 			public String apply(OutputConfiguration from) {
-				return from.getOutputDirectory();
+				if (currentSource == null) {
+					return from.getOutputDirectory();
+				} else {
+					return from.getOutputDirectory(currentSource);
+				}
 			}
 		});
 	}
