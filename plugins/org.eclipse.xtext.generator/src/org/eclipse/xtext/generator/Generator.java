@@ -132,11 +132,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
-
 		try {
 			XpandExecutionContext exeCtx = createExecutionContext();
 			for (LanguageConfig config : languageConfigs) {
-				generate(config, exeCtx);
+				generate(config, exeCtx, issues);
 				addToStandaloneSetup(config, exeCtx);
 				generateGuiceModuleRt(config, exeCtx);
 				if (isUi()) {
@@ -167,11 +166,25 @@ public class Generator extends AbstractWorkflowComponent2 {
 		for (Exception ex : e.getExceptions()) {
 			if (ex instanceof CompositeGeneratorException) {
 				handleCompositeException(issues, (CompositeGeneratorException) ex);
+			} else if (!(ex instanceof GeneratorWarning)) {
+				issues.addError(this, "GeneratorException: ", null, ex, null);
 			}
-			issues.addError(this, "GeneratorException: ", null, ex, null);
 		}
 	}
 
+	private boolean handleWarnings(Issues issues, CompositeGeneratorException e) {
+		for (Exception ex : e.getExceptions()) {
+			if (ex instanceof CompositeGeneratorException) {
+				handleWarnings(issues, (CompositeGeneratorException) ex);
+			} else if (ex instanceof GeneratorWarning) {
+				issues.addWarning(this, "Warning: " + ex.getMessage(), null, null, null);
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public void addPostProcessor(PostProcessor postProcessor) {
 		this.postProcessors.add(postProcessor);
 	}
@@ -378,8 +391,14 @@ public class Generator extends AbstractWorkflowComponent2 {
 		return getPathTestProject() != null;
 	}
 
-	private void generate(LanguageConfig config, XpandExecutionContext ctx) {
-		config.generate(config.getGrammar(), ctx);
+	private void generate(LanguageConfig config, XpandExecutionContext ctx, Issues issues) {
+		try {
+			config.generate(config.getGrammar(), ctx);
+		} catch(CompositeGeneratorException e) {
+			if (!handleWarnings(issues, e)) {
+				throw e;
+			}
+		}
 	}
 
 	private void generateManifestRt(List<LanguageConfig> configs, XpandExecutionContext ctx) {
