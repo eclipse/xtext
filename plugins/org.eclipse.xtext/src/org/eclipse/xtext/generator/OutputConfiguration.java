@@ -7,72 +7,36 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
+import java.util.Set;
+
+import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Sets;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
 public class OutputConfiguration {
 
-	/**
-	 * a unique name identifying this outlet configuration.
-	 */
 	private String name;
-
-	/**
-	 * a description to be shown in the UI.
-	 */
 	private String description;
-
-	/**
-	 * the project relative path to the output directory
-	 */
 	private String outputDirectory;
-
-	/**
-	 * whether the output directory should be created if t doesn't already exist.
-	 */
 	private boolean createOutputDirectory;
-
-	/**
-	 * whether derived resources should be deleted on clean.
-	 */
 	private boolean cleanUpDerivedResources = true;
-
-	/**
-	 * whether existing resources should be overridden.
-	 */
 	private boolean overrideExistingResources = true;
-
-	/**
-	 * whether the resources should be flagged as 'derived' <b>Only used if the underlying file system implementation
-	 * supports such a property</b>
-	 */
 	private boolean setDerivedProperty = true;
-
-	/**
-	 * whether the whole outputDirectory can be cleared. This is usually used in a CLEAN build.
-	 */
 	private boolean canClearOutputDirectory = false;
-
-	/**
-	 * whether the DSL files should be registered as primary source files for debugging in the generated
-	 * Java-class-files. If false, the Java source is registered as primary source and the DSL files are registered as
-	 * secondary source via JSR-045 (SMAP).
-	 */
 	private boolean installDslAsPrimarySource = false;
-
-	/**
-	 * whether debug information should be removed from the class files for synthetic local variables. Synthetic
-	 * variables are the ones that have not been declared in the DSL but have been introduced by the compiler. This flag
-	 * is only used when {@link #isInstallDslAsPrimarySource()} is true.
-	 */
 	private boolean hideSyntheticLocalVariables = true;
+	private boolean keepLocalHistory = false;
+	private boolean useOutputPerSourceFolder = false;
+	private Set<SourceMapping> sourceMappings = Sets.newHashSet();
 
 	/**
-	 * whether local history should be kept for generated files.
+	 * @param name
+	 *            - a unique name identifying this outlet configuration.
 	 */
-	private boolean keepLocalHistory = false;
-
 	public OutputConfiguration(String name) {
 		super();
 		this.name = name;
@@ -86,6 +50,9 @@ public class OutputConfiguration {
 		return description;
 	}
 
+	/**
+	 * a description to be shown in the UI.
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -94,6 +61,9 @@ public class OutputConfiguration {
 		return outputDirectory;
 	}
 
+	/**
+	 * the project relative path to the output directory
+	 */
 	public void setOutputDirectory(String outputDirectory) {
 		this.outputDirectory = outputDirectory;
 	}
@@ -102,6 +72,9 @@ public class OutputConfiguration {
 		return cleanUpDerivedResources;
 	}
 
+	/**
+	 * whether derived resources should be deleted on clean.
+	 */
 	public void setCleanUpDerivedResources(boolean cleanUpDerivedResources) {
 		this.cleanUpDerivedResources = cleanUpDerivedResources;
 	}
@@ -110,6 +83,9 @@ public class OutputConfiguration {
 		return overrideExistingResources;
 	}
 
+	/**
+	 * whether existing resources should be overridden.
+	 */
 	public void setOverrideExistingResources(boolean overrideExistingResources) {
 		this.overrideExistingResources = overrideExistingResources;
 	}
@@ -118,6 +94,10 @@ public class OutputConfiguration {
 		return setDerivedProperty;
 	}
 
+	/**
+	 * whether the resources should be flagged as 'derived' <b>Only used if the underlying file system implementation
+	 * supports such a property</b>
+	 */
 	public void setSetDerivedProperty(boolean setDerivedProperty) {
 		this.setDerivedProperty = setDerivedProperty;
 	}
@@ -126,6 +106,9 @@ public class OutputConfiguration {
 		return createOutputDirectory;
 	}
 
+	/**
+	 * whether the output directory should be created if t doesn't already exist.
+	 */
 	public void setCreateOutputDirectory(boolean createOutputDirectory) {
 		this.createOutputDirectory = createOutputDirectory;
 	}
@@ -134,6 +117,9 @@ public class OutputConfiguration {
 		return canClearOutputDirectory;
 	}
 
+	/**
+	 * whether the whole outputDirectory can be cleared. This is usually used in a CLEAN build.
+	 */
 	public void setCanClearOutputDirectory(boolean canClearOutputDirectory) {
 		this.canClearOutputDirectory = canClearOutputDirectory;
 	}
@@ -146,6 +132,10 @@ public class OutputConfiguration {
 	}
 
 	/**
+	 * whether the DSL files should be registered as primary source files for debugging in the generated
+	 * Java-class-files. If false, the Java source is registered as primary source and the DSL files are registered as
+	 * secondary source via JSR-045 (SMAP).
+	 * 
 	 * @since 2.4
 	 */
 	public void setInstallDslAsPrimarySource(boolean installDslAsPrimarySource) {
@@ -160,6 +150,10 @@ public class OutputConfiguration {
 	}
 
 	/**
+	 * whether debug information should be removed from the class files for synthetic local variables. Synthetic
+	 * variables are the ones that have not been declared in the DSL but have been introduced by the compiler. This flag
+	 * is only used when {@link #isInstallDslAsPrimarySource()} is true.
+	 * 
 	 * @since 2.4
 	 */
 	public void setHideSyntheticLocalVariables(boolean hideSyntheticLocalVariables) {
@@ -172,12 +166,83 @@ public class OutputConfiguration {
 	public Boolean isKeepLocalHistory() {
 		return keepLocalHistory;
 	}
-	
+
 	/**
+	 * whether local history should be kept for generated files.
+	 * 
 	 * @since 2.5
 	 */
 	public void setKeepLocalHistory(Boolean keepLocalHistory) {
 		this.keepLocalHistory = keepLocalHistory;
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	public boolean isUseOutputPerSourceFolder() {
+		return useOutputPerSourceFolder;
+	}
+
+	/**
+	 * Whether to allow specifying output directories on a per source folder basis
+	 * 
+	 * @since 2.6
+	 */
+	public void setUseOutputPerSourceFolder(boolean useOutputPerSourceFolder) {
+		this.useOutputPerSourceFolder = useOutputPerSourceFolder;
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	public Set<SourceMapping> getSourceMappings() {
+		return sourceMappings;
+	}
+
+	/**
+	 * @since 2.6
+	 * @param sourceFolder
+	 *            the project relative source folder, e.g. "src" or "src/main/java"
+	 * @return the project relative output directory
+	 * @since 2.6
+	 */
+	public String getOutputDirectory(String sourceFolder) {
+		if (useOutputPerSourceFolder) {
+			for (SourceMapping mapping : sourceMappings) {
+				if (mapping.getSourceFolder().equals(sourceFolder) && mapping.getOutputDirectory() != null) {
+					return mapping.getOutputDirectory();
+				}
+			}
+		}
+		return getOutputDirectory();
+	}
+
+	/**
+	 * The source folders returned are project relative, e.g. "src" or "src/main/java"
+	 * @since 2.6
+	 */
+	public Set<String> getSourceFolders() {
+		Set<String> sourceFolders = Sets.newLinkedHashSet();
+		for (SourceMapping mapping : getSourceMappings()) {
+			sourceFolders.add(mapping.getSourceFolder());
+		}
+		return sourceFolders;
+	}
+
+	/**
+	 * The output directories returned are project relative, e.g. "build/gen" or "src-gen"
+	 * @since 2.6
+	 */
+	public Set<String> getOutputDirectories() {
+		Set<String> outputDirectories = Sets.newLinkedHashSet();
+		if (isUseOutputPerSourceFolder()) {
+			for (SourceMapping mapping : getSourceMappings()) {
+				outputDirectories.add(getOutputDirectory(mapping.getSourceFolder()));
+			}
+		} else {
+			outputDirectories.add(getOutputDirectory());
+		}
+		return outputDirectories;
 	}
 
 	@Override
@@ -205,4 +270,56 @@ public class OutputConfiguration {
 		return true;
 	}
 
+	/**
+	 * Specifies the output folder for a source folder (may be null, in which case the output folder of the enclosing
+	 * {@link OutputConfiguration} is used). A source folder may also be set to be ignored in the UI. This makes it
+	 * clear to the user that he does not have to specify an output directory for that source folder.
+	 * 
+	 * Both source and output folders are project relative, e.g. "src/main/java", "build/gen" etc.
+	 * 
+	 * @since 2.6
+	 */
+	public static class SourceMapping {
+		private String sourceFolder;
+		private String outputDirectory;
+		private boolean ignore;
+
+		public SourceMapping(String sourceFolder) {
+			this.sourceFolder = Preconditions.checkNotNull(sourceFolder);
+		}
+
+		public String getSourceFolder() {
+			return sourceFolder;
+		}
+
+		public String getOutputDirectory() {
+			return outputDirectory;
+		}
+
+		public void setOutputDirectory(String outputDirectory) {
+			this.outputDirectory = outputDirectory;
+		}
+
+		public boolean isIgnore() {
+			return ignore;
+		}
+
+		public void setIgnore(boolean ignore) {
+			this.ignore = ignore;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (obj instanceof SourceMapping) {
+				SourceMapping other = (SourceMapping) obj;
+				return Objects.equal(sourceFolder, other.sourceFolder);
+			}
+			return false;
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hashCode(sourceFolder);
+		}
+	}
 }

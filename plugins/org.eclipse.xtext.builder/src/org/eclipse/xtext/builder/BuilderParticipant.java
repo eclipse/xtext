@@ -35,13 +35,18 @@ import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.util.ResourceUtil;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -51,41 +56,41 @@ import com.google.inject.Provider;
  * @since 2.1
  */
 public class BuilderParticipant implements IXtextBuilderParticipant {
-	
+
 	private final static Logger logger = Logger.getLogger(BuilderParticipant.class);
-	
+
 	@Inject
 	private Provider<EclipseResourceFileSystemAccess2> fileSystemAccessProvider;
-	
+
 	@Inject
 	private IGenerator generator;
-	
+
 	@Inject
 	private IResourceServiceProvider resourceServiceProvider;
-	
+
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
-	
+
 	@Inject
 	private IDerivedResourceMarkers derivedResourceMarkers;
-	
- 	@Inject
- 	private GeneratorIdProvider generatorIdProvider;
-	
+
+	@Inject
+	private GeneratorIdProvider generatorIdProvider;
+
 	private EclipseOutputConfigurationProvider outputConfigurationProvider;
 	private BuilderPreferenceAccess builderPreferenceAccess;
 
 	/**
 	 * @since 2.4
 	 */
-	protected IDerivedResourceMarkers getDerivedResourceMarkers(){
+	protected IDerivedResourceMarkers getDerivedResourceMarkers() {
 		return derivedResourceMarkers;
 	}
 
 	/**
 	 * @since 2.4
 	 */
-	protected GeneratorIdProvider getGeneratorIdProvider(){
+	protected GeneratorIdProvider getGeneratorIdProvider() {
 		return generatorIdProvider;
 	}
 
@@ -105,18 +110,18 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	public void setBuilderPreferenceAccess(BuilderPreferenceAccess builderPreferenceAccess) {
 		this.builderPreferenceAccess = builderPreferenceAccess;
 	}
-	
+
 	public EclipseOutputConfigurationProvider getOutputConfigurationProvider() {
 		return outputConfigurationProvider;
 	}
-	
+
 	/**
 	 * @since 2.2
 	 */
 	public IGenerator getGenerator() {
 		return generator;
 	}
-	
+
 	/**
 	 * @since 2.2
 	 */
@@ -132,12 +137,18 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	/**
 	 * @since 2.4
 	 */
-	protected Map<OutputConfiguration, Iterable<IMarker>> getGeneratorMarkers(IProject builtProject, Collection<OutputConfiguration> outputConfigurations) throws CoreException{
+	protected Map<OutputConfiguration, Iterable<IMarker>> getGeneratorMarkers(IProject builtProject,
+			Collection<OutputConfiguration> outputConfigurations) throws CoreException {
 		Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = newHashMap();
 		for (OutputConfiguration config : outputConfigurations) {
 			if (config.isCleanUpDerivedResources()) {
-				IContainer container = getContainer(builtProject, config.getOutputDirectory());
-				final Iterable<IMarker> markers = derivedResourceMarkers.findDerivedResourceMarkers(container, generatorIdProvider.getGeneratorIdentifier());
+				List<IMarker> markers = Lists.newArrayList();
+				for (IContainer container : getOutputs(builtProject, config)) {
+					Iterables.addAll(
+							markers,
+							derivedResourceMarkers.findDerivedResourceMarkers(container,
+									generatorIdProvider.getGeneratorIdentifier()));
+				}
 				generatorMarkers.put(config, markers);
 			}
 		}
@@ -148,19 +159,19 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		if (!isEnabled(context)) {
 			return;
 		}
-		
-        final List<IResourceDescription.Delta> deltas = getRelevantDeltas(context);
-        if (deltas.isEmpty()) {
-            return;
-        }
+
+		final List<IResourceDescription.Delta> deltas = getRelevantDeltas(context);
+		if (deltas.isEmpty()) {
+			return;
+		}
 
 		final int numberOfDeltas = deltas.size();
-		
+
 		// monitor handling
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
 		SubMonitor subMonitor = SubMonitor.convert(monitor, numberOfDeltas + 3);
-		
+
 		EclipseResourceFileSystemAccess2 access = fileSystemAccessProvider.get();
 		final IProject builtProject = context.getBuiltProject();
 		access.setProject(builtProject);
@@ -175,16 +186,17 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			if (context.getBuildType() == BuildType.CLEAN)
 				return;
 		}
-		Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = getGeneratorMarkers(builtProject, outputConfigurations.values());
-		for (int i = 0 ; i < numberOfDeltas ; i++) {
+		Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = getGeneratorMarkers(builtProject,
+				outputConfigurations.values());
+		for (int i = 0; i < numberOfDeltas; i++) {
 			final IResourceDescription.Delta delta = deltas.get(i);
-			
+
 			// monitor handling
 			if (subMonitor.isCanceled())
 				throw new OperationCanceledException();
-			subMonitor.subTask("Compiling "+delta.getUri().lastSegment()+" ("+i+" of "+numberOfDeltas+")");
+			subMonitor.subTask("Compiling " + delta.getUri().lastSegment() + " (" + i + " of " + numberOfDeltas + ")");
 			access.setMonitor(subMonitor.newChild(1));
-			
+
 			final String uri = delta.getUri().toString();
 			final Set<IFile> derivedResources = newLinkedHashSet();
 			for (OutputConfiguration config : outputConfigurations.values()) {
@@ -198,13 +210,13 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				}
 			}
 			access.setPostProcessor(new EclipseResourceFileSystemAccess2.IFileCallback() {
-				
+
 				public boolean beforeFileDeletion(IFile file) {
 					derivedResources.remove(file);
 					context.needRebuild();
 					return true;
 				}
-				
+
 				public void afterFileUpdate(IFile file) {
 					handleFileAccess(file);
 				}
@@ -212,7 +224,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				public void afterFileCreation(IFile file) {
 					handleFileAccess(file);
 				}
-				
+
 				protected void handleFileAccess(IFile file) {
 					try {
 						derivedResources.remove(file);
@@ -222,7 +234,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 						throw new RuntimeException(e);
 					}
 				}
-				
+
 			});
 			if (delta.getNew() != null) {
 				try {
@@ -230,7 +242,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				} catch (OperationCanceledException e) {
 					throw e;
 				} catch (Exception e) {
-					logger.error("Error during compilation of '"+delta.getUri()+"'.", e);
+					logger.error("Error during compilation of '" + delta.getUri() + "'.", e);
 				}
 			}
 			access.flushSourceTraces();
@@ -250,65 +262,72 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	protected boolean isEnabled(final IBuildContext context) {
 		return builderPreferenceAccess.isAutoBuildEnabled(context.getBuiltProject());
 	}
-	
-    /**
+
+	/**
 	 * @since 2.3
 	 */
-    protected List<IResourceDescription.Delta> getRelevantDeltas(IBuildContext context) {
-        List<IResourceDescription.Delta> result = newArrayList();
-        for (IResourceDescription.Delta delta : context.getDeltas()) {
-            if (resourceServiceProvider.canHandle(delta.getUri()))
-                result.add(delta);
-        }
-        return result;
-    }
-	
-	protected void refreshOutputFolders(IBuildContext ctx, Map<String, OutputConfiguration> outputConfigurations, IProgressMonitor monitor) throws CoreException {
+	protected List<IResourceDescription.Delta> getRelevantDeltas(IBuildContext context) {
+		List<IResourceDescription.Delta> result = newArrayList();
+		for (IResourceDescription.Delta delta : context.getDeltas()) {
+			if (resourceServiceProvider.canHandle(delta.getUri()))
+				result.add(delta);
+		}
+		return result;
+	}
+
+	protected void refreshOutputFolders(IBuildContext ctx, Map<String, OutputConfiguration> outputConfigurations,
+			IProgressMonitor monitor) throws CoreException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, outputConfigurations.size());
 		for (OutputConfiguration config : outputConfigurations.values()) {
 			SubMonitor child = subMonitor.newChild(1);
 			final IProject project = ctx.getBuiltProject();
-			IContainer container = getContainer(project, config.getOutputDirectory());
-			container.refreshLocal(IResource.DEPTH_INFINITE, child);
+			for (IContainer container : getOutputs(project, config)) {
+				container.refreshLocal(IResource.DEPTH_INFINITE, child);
+			}
 		}
 	}
 
-	protected void cleanOutput(IBuildContext ctx, OutputConfiguration config, IProgressMonitor monitor) throws CoreException {
+	protected void cleanOutput(IBuildContext ctx, OutputConfiguration config, IProgressMonitor monitor)
+			throws CoreException {
 		cleanOutput(ctx, config, null, monitor);
 	}
 
 	/**
 	 * @since 2.5
 	 */
-	protected void cleanOutput(IBuildContext ctx, OutputConfiguration config, EclipseResourceFileSystemAccess2 access, IProgressMonitor monitor) throws CoreException {
+	protected void cleanOutput(IBuildContext ctx, OutputConfiguration config, EclipseResourceFileSystemAccess2 access,
+			IProgressMonitor monitor) throws CoreException {
 		final IProject project = ctx.getBuiltProject();
-		IContainer container = getContainer(project, config.getOutputDirectory());
-		if (!container.exists()) {
-			return;
-		}
-		if (config.isCanClearOutputDirectory()) {
-			for (IResource resource : container.members()) {
-				if (!config.isKeepLocalHistory()) {
-					resource.delete(IResource.NONE, monitor);
-				} else if (access == null) {
-					resource.delete(IResource.KEEP_HISTORY, monitor);
-				} else {
-					delete(resource, config, access, monitor);
+		for (IContainer container : getOutputs(project, config)) {
+			if (!container.exists()) {
+				return;
+			}
+			if (config.isCanClearOutputDirectory()) {
+				for (IResource resource : container.members()) {
+					if (!config.isKeepLocalHistory()) {
+						resource.delete(IResource.NONE, monitor);
+					} else if (access == null) {
+						resource.delete(IResource.KEEP_HISTORY, monitor);
+					} else {
+						delete(resource, config, access, monitor);
+					}
+				}
+			} else if (config.isCleanUpDerivedResources()) {
+				List<IFile> resources = derivedResourceMarkers.findDerivedResources(container, null);
+				for (IFile iFile : resources) {
+					if (access != null) {
+						access.deleteFile(iFile, config.getName(), monitor);
+					} else {
+						iFile.delete(config.isKeepLocalHistory() ? IResource.KEEP_HISTORY : IResource.NONE, monitor);
+					}
 				}
 			}
-		} else if (config.isCleanUpDerivedResources()) {
-			List<IFile> resources = derivedResourceMarkers.findDerivedResources(container, null);
-			for (IFile iFile : resources) {
-				if (access != null) {
-					access.deleteFile(iFile, config.getName(), monitor);
-				} else {
-					iFile.delete(config.isKeepLocalHistory() ? IResource.KEEP_HISTORY : IResource.NONE, monitor);	
-				}
-			}
 		}
+
 	}
-	
-	private void delete(IResource resource, OutputConfiguration config, EclipseResourceFileSystemAccess2 access, IProgressMonitor monitor) throws CoreException {
+
+	private void delete(IResource resource, OutputConfiguration config, EclipseResourceFileSystemAccess2 access,
+			IProgressMonitor monitor) throws CoreException {
 		if (resource instanceof IContainer) {
 			IContainer container = (IContainer) resource;
 			for (IResource child : container.members()) {
@@ -323,17 +342,39 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		}
 	}
 
-	protected void handleChangedContents(Delta delta, IBuildContext context, EclipseResourceFileSystemAccess2 fileSystemAccess) throws CoreException {
+	protected void handleChangedContents(Delta delta, IBuildContext context,
+			EclipseResourceFileSystemAccess2 fileSystemAccess) throws CoreException {
 		// TODO: we will run out of memory here if the number of deltas is large enough
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
 		if (shouldGenerate(resource, context)) {
 			try {
+				registerCurrentSourceFolder(context, delta, fileSystemAccess);
 				generator.doGenerate(resource, fileSystemAccess);
 			} catch (RuntimeException e) {
 				if (e.getCause() instanceof CoreException) {
 					throw (CoreException) e.getCause();
 				}
 				throw e;
+			}
+		}
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	protected void registerCurrentSourceFolder(IBuildContext context, Delta delta, EclipseResourceFileSystemAccess2 fileSystemAccess) {
+		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(delta.getUri());
+		for (Pair<IStorage, IProject> pair : storages) {
+			final IResource resource = (IResource) pair.getFirst();
+			IProject project = pair.getSecond();
+			for (OutputConfiguration output : getOutputConfigurations(context).values()) {
+				for (SourceMapping sourceMapping : output.getSourceMappings()) {
+					IContainer folder = ResourceUtil.getContainer(project, sourceMapping.getSourceFolder());
+					if (folder.contains(resource)) {
+						fileSystemAccess.setCurrentSource(sourceMapping.getSourceFolder());
+						return;
+					}
+				}
 			}
 		}
 	}
@@ -353,8 +394,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		}
 	}
 
-	protected Map<String,OutputConfiguration> getOutputConfigurations(IBuildContext context) {
-		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations(context.getBuiltProject());
+	protected Map<String, OutputConfiguration> getOutputConfigurations(IBuildContext context) {
+		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations(context
+				.getBuiltProject());
 		return uniqueIndex(configurations, new Function<OutputConfiguration, String>() {
 			public String apply(OutputConfiguration from) {
 				return from.getName();
@@ -362,4 +404,15 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		});
 	}
 	
+	/**
+	 * @since 2.6
+	 */
+	protected Set<IContainer> getOutputs(IProject project, OutputConfiguration outputConfiguration) {
+		Set<IContainer> outputs = Sets.newLinkedHashSet();
+		for (String outputPath : outputConfiguration.getOutputDirectories()) {
+			IContainer output = getContainer(project, outputPath);
+			outputs.add(output);
+		}
+		return outputs;
+	}
 }

@@ -10,14 +10,18 @@ package org.eclipse.xtext.builder;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider.Delegate;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 
 /**
@@ -48,7 +52,24 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 	 */
 	public static final String HIDE_LOCAL_SYNTHETIC_VARIABLES = "hideLocalSyntheticVariables";
 	
+	/**
+	 * @since 2.6
+	 */
+	public static final String USE_OUTPUT_PER_SOURCE_FOLDER = "userOutputPerSourceFolder";
+	
+	/**
+	 * @since 2.6
+	 */
+	public static final String SOURCE_FOLDER_TAG = "sourceFolder";
+	
+	/**
+	 * @since 2.6
+	 */
+	public static final String IGNORE_SOURCE_FOLDER_TAG = "ignore";
+	
 	private IPreferenceStoreAccess preferenceStoreAccess;
+	
+	private EclipseSourceFolderProvider sourceFolderProvider;
 
 	public IPreferenceStoreAccess getPreferenceStoreAccess() {
 		return preferenceStoreAccess;
@@ -57,6 +78,14 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 	@Inject
 	public void setPreferenceStoreAccess(IPreferenceStoreAccess preferenceStoreAccess) {
 		this.preferenceStoreAccess = preferenceStoreAccess;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	@Inject
+	public void setSourceFolderProvider(EclipseSourceFolderProvider sourceFolderProvider) {
+		this.sourceFolderProvider = sourceFolderProvider;
 	}
 
 	@Inject
@@ -68,12 +97,16 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 		IPreferenceStore store = getPreferenceStoreAccess().getContextPreferenceStore(project);
 		Set<OutputConfiguration> outputConfigurations = new LinkedHashSet<OutputConfiguration>(getOutputConfigurations().size());
 		for (OutputConfiguration output : getOutputConfigurations()) {
-			OutputConfiguration configuration = createAndOverlayOutputConfiguration(store, output);
+			OutputConfiguration configuration = createAndOverlayOutputConfiguration(project, store, output);
 			outputConfigurations.add(configuration);
 		}
 		return outputConfigurations;
 	}
-
+	
+	/**
+	 * @deprecated use {@link #createAndOverlayOutputConfiguration(IProject, IPreferenceStore, OutputConfiguration)}
+	 */
+	@Deprecated
 	protected OutputConfiguration createAndOverlayOutputConfiguration(IPreferenceStore store, OutputConfiguration output) {
 		OutputConfiguration result = new OutputConfiguration(output.getName());
 		boolean clearOutputDirectory = getBoolean(output, OUTPUT_CLEAN_DIRECTORY, store, output.isCanClearOutputDirectory());
@@ -96,7 +129,30 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 		result.setOutputDirectory(directory);
 		boolean keepLocalHistory = getBoolean(output, OUTPUT_KEEP_LOCAL_HISTORY, store, output.isKeepLocalHistory());
 		result.setKeepLocalHistory(keepLocalHistory);
+		boolean useOutputPerSourceFolder = getBoolean(output, USE_OUTPUT_PER_SOURCE_FOLDER, store, output.isUseOutputPerSourceFolder());
+		result.setUseOutputPerSourceFolder(useOutputPerSourceFolder);
 		return result;
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	protected OutputConfiguration createAndOverlayOutputConfiguration(IProject project, IPreferenceStore store, OutputConfiguration output) {
+		OutputConfiguration result = createAndOverlayOutputConfiguration(store, output);
+		if (project != null) {
+			for (IContainer sourceContainer : sourceFolderProvider.getSourceFolders(project)) {
+				String sourceFolder = toProjectRelativePath(sourceContainer).toString();
+				SourceMapping mapping = new SourceMapping(sourceFolder);
+				mapping.setOutputDirectory(getOutputForSourceFolder(store, output, sourceFolder));
+				mapping.setIgnore(isIgnoreSourceFolder(store, output, sourceFolder));
+				result.getSourceMappings().add(mapping);
+			}
+		}
+		return result;
+	}
+	
+	private IPath toProjectRelativePath(IContainer source) {
+		return source.getFullPath().makeRelativeTo(source.getProject().getFullPath());
 	}
 
 	private boolean getBoolean(OutputConfiguration outputConfiguration, String name, IPreferenceStore preferenceStore,
@@ -114,6 +170,16 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 	private String getKey(OutputConfiguration outputConfiguration, String preferenceName) {
 		return OUTPUT_PREFERENCE_TAG + PreferenceConstants.SEPARATOR + outputConfiguration.getName()
 				+ PreferenceConstants.SEPARATOR + preferenceName;
+	}
+	
+	private String getOutputForSourceFolder(IPreferenceStore store ,OutputConfiguration outputConfiguration, String sourceFolder) {
+		String key = getKey(outputConfiguration, SOURCE_FOLDER_TAG + PreferenceConstants.SEPARATOR + sourceFolder + PreferenceConstants.SEPARATOR + OUTPUT_DIRECTORY);
+		return Strings.emptyToNull(store.getString(key));
+	}
+	
+	private boolean isIgnoreSourceFolder(IPreferenceStore store ,OutputConfiguration outputConfiguration, String sourceFolder) {
+		String key = getKey(outputConfiguration, SOURCE_FOLDER_TAG + PreferenceConstants.SEPARATOR + sourceFolder + PreferenceConstants.SEPARATOR + IGNORE_SOURCE_FOLDER_TAG);
+		return store.contains(key)? store.getBoolean(key): false;
 	}
 
 }
