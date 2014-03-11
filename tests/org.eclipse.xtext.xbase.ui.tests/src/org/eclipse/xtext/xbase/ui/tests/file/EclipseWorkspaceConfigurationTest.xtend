@@ -19,11 +19,18 @@ import org.junit.Test
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
 import static org.junit.Assert.*
 import org.eclipse.xtend.lib.macro.file.Path
+import org.junit.After
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class EclipseWorkspaceConfigurationTest {
+	
+	@After
+	def void tearDown() {
+		IResourcesSetupUtil.cleanWorkspace
+	}
 	
 	@Test def void testConfig() {
 		val wsroot = ResourcesPlugin.workspace.root

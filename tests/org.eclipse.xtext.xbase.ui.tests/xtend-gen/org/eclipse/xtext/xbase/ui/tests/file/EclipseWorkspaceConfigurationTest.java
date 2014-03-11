@@ -18,6 +18,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.ui.file.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.ui.tests.file.MockEclipseOutputConfiguration;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -35,6 +37,15 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class EclipseWorkspaceConfigurationTest {
+  @After
+  public void tearDown() {
+    try {
+      IResourcesSetupUtil.cleanWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   @Test
   public void testConfig() {
     try {
