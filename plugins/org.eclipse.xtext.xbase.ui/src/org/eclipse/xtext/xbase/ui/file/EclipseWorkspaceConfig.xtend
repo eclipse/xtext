@@ -18,6 +18,7 @@ import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.core.IPackageFragmentRoot
 import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IWorkspaceRoot
+import org.eclipse.core.resources.IFolder
 
 class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
 	
@@ -55,7 +56,13 @@ class EclipseProjectConfig extends ProjectConfig {
 			for (root : jp.packageFragmentRoots) {
 				if (root.kind == IPackageFragmentRoot.K_SOURCE && root.underlyingResource != null) {
 					val container = root.underlyingResource as IContainer
-					val target = container.parent.getFolder(new org.eclipse.core.runtime.Path(config.outputDirectory))
+					var IFolder target
+					if (config.useOutputPerSourceFolder) {
+						val projectRelativeSource = container.fullPath.makeRelativeTo(project.fullPath).toString
+						target = project.getFolder(new org.eclipse.core.runtime.Path(config.getOutputDirectory(projectRelativeSource)))
+					}else {
+						target = container.parent.getFolder(new org.eclipse.core.runtime.Path(config.outputDirectory))
+					}
 					if (container != target) {
 						map.put(new Path(container.fullPath.toString), new Path(target.fullPath.toString))
 					}

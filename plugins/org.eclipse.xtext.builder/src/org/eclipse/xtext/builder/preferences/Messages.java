@@ -31,8 +31,12 @@ public class Messages extends NLS {
 	public static String OutputConfigurationPage_CreateDirectory;
 	public static String OutputConfigurationPage_CreatesDerivedResources;
 	public static String OutputConfigurationPage_Directory;
+	public static String OutputConfigurationPage_IgnoreSourceFolder;
+	public static String OutputConfigurationPage_OutputDirectory;
 	public static String OutputConfigurationPage_OverrideExistingResources;
 	public static String OutputConfigurationPage_KeepLocalHistory;
+	public static String OutputConfigurationPage_SourceFolder;
+	public static String OutputConfigurationPage_UseOutputPerSourceFolder;
 	
 	static {
 		// initialize resource bundle
