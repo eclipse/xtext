@@ -416,22 +416,23 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				if (!variableDeclaration.isWriteable()) {
 					internalToJavaStatement(arg, b, true);
 					return;
+				} else {
+					LightweightTypeReference expectedType = getLightweightExpectedType(arg);
+					LightweightTypeReference type = getLightweightType(arg);
+					if (expectedType != null && !isJavaConformant(expectedType, type)) {
+						String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
+						String finalVariable = b.declareSyntheticVariable(arg, "_converted_" + varName);
+						b.newLine().append("final ");
+						b.append(type);
+						b.append(" ").append(finalVariable).append(" = ").append("(");
+						b.append(type);
+						b.append(")").append(varName).append(";");
+					}
 				}
 			} else if (featureCall.getFeature() instanceof JvmFormalParameter) {
 				// always final
 				internalToJavaStatement(arg, b, true);
 				return;
-			}
-			LightweightTypeReference expectedType = getLightweightExpectedType(arg);
-			LightweightTypeReference type = getLightweightType(arg);
-			if (expectedType != null && !isJavaConformant(expectedType, type)) {
-				String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
-				String finalVariable = b.declareSyntheticVariable(arg, "_converted_" + varName);
-				b.newLine().append("final ");
-				b.append(type);
-				b.append(" ").append(finalVariable).append(" = ").append("(");
-				b.append(type);
-				b.append(")").append(varName).append(";");
 			}
 		} else {
 			internalToJavaStatement(arg, b, true);
