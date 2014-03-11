@@ -45,6 +45,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -460,8 +461,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		if (model instanceof XMemberFeatureCall) {
 			createReceiverProposals(((XMemberFeatureCall) model).getMemberCallTarget(), (CrossReference) assignment.getTerminal(),
 					context, acceptor);	
-		} else {
-			super.completeXMemberFeatureCall_Feature(model, assignment, context, acceptor);
+		} else if (model instanceof XAssignment) {
+			createReceiverProposals(((XAssignment) model).getAssignable(), (CrossReference) assignment.getTerminal(),
+					context, acceptor);
 		}
 	}
 	

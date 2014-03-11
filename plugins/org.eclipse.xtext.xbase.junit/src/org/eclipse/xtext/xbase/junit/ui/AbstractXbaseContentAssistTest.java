@@ -505,6 +505,14 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("''.toString.toString").assertTextAtCursorPosition("g.", 1, expect(STRING_OPERATORS, new String[]{"toString"}));
 	}
 	
+	@Test public void testOnStringLiteral_39() throws Exception {
+		newBuilder().append("''.invalid = ''").assertTextAtCursorPosition(".", 1, getStringFeatures());
+	}
+	
+	@Test public void testOnStringLiteral_40() throws Exception {
+		newBuilder().append("''.length = 'invalid'").assertTextAtCursorPosition("le", 2, new String[]{"length"});
+	}
+	
 	@Test public void testAfterBinaryOperation_01() throws Exception {
 		newBuilder().append("''+''").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF));
 	}

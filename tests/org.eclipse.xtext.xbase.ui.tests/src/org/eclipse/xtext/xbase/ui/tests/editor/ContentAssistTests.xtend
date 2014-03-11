@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.ui.tests.editor
 
 import org.junit.AfterClass
 import org.junit.BeforeClass
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -111,5 +112,93 @@ class ContentAssistInIfElseTest3 extends ContentAssistInBlockTest {
 	
 	override protected getSuffix() {
 		return "\n}"
+	}
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@Ignore('https://bugs.eclipse.org/bugs/show_bug.cgi?id=430022')
+class ContentAssistReturnTest extends ContentAssistTest {
+	override protected getPrefix() {
+		return "return"
+	}
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@Ignore('https://bugs.eclipse.org/bugs/show_bug.cgi?id=430022')
+class ContentAssistReturnTest2 extends ContentAssistTest {
+	override protected getPrefix() {
+		return "return ("
+	}
+	
+	override protected getSuffix() {
+		return ")"
+	}
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@Ignore('https://bugs.eclipse.org/bugs/show_bug.cgi?id=430022')
+class ContentAssistReturnTest3 extends ContentAssistInBlockTest {
+	override protected getPrefix() {
+		return "return {"
+	}
+	
+	override protected getSuffix() {
+		return "}"
+	}
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@Ignore('https://bugs.eclipse.org/bugs/show_bug.cgi?id=430022')
+class ContentAssistReturnTest4 extends ContentAssistTest {
+	override protected getPrefix() {
+		return "{ return "
+	}
+	
+	override protected getSuffix() {
+		return "}"
+	}
+}
+
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+class ContentAssistThrowTest extends ContentAssistTest {
+	override protected getPrefix() {
+		return "throw"
+	}
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+class ContentAssistThrowTest2 extends ContentAssistTest {
+	override protected getPrefix() {
+		return "throw ("
+	}
+	
+	override protected getSuffix() {
+		return ")"
+	}
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+class ContentAssistThrowTest3 extends ContentAssistInBlockTest {
+	override protected getPrefix() {
+		return "throw {"
+	}
+	
+	override protected getSuffix() {
+		return "}"
 	}
 }
