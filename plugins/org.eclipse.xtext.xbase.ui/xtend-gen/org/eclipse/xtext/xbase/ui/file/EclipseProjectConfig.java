@@ -60,19 +60,33 @@ public class EclipseProjectConfig extends ProjectConfig {
           if (_and) {
             IResource _underlyingResource_1 = root.getUnderlyingResource();
             final IContainer container = ((IContainer) _underlyingResource_1);
-            IContainer _parent = container.getParent();
-            String _outputDirectory = config.getOutputDirectory();
-            org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_outputDirectory);
-            final IFolder target = _parent.getFolder(_path);
+            IFolder target = null;
+            boolean _isUseOutputPerSourceFolder = config.isUseOutputPerSourceFolder();
+            if (_isUseOutputPerSourceFolder) {
+              IPath _fullPath = container.getFullPath();
+              IPath _fullPath_1 = this.project.getFullPath();
+              IPath _makeRelativeTo = _fullPath.makeRelativeTo(_fullPath_1);
+              final String projectRelativeSource = _makeRelativeTo.toString();
+              String _outputDirectory = config.getOutputDirectory(projectRelativeSource);
+              org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_outputDirectory);
+              IFolder _folder = this.project.getFolder(_path);
+              target = _folder;
+            } else {
+              IContainer _parent = container.getParent();
+              String _outputDirectory_1 = config.getOutputDirectory();
+              org.eclipse.core.runtime.Path _path_1 = new org.eclipse.core.runtime.Path(_outputDirectory_1);
+              IFolder _folder_1 = _parent.getFolder(_path_1);
+              target = _folder_1;
+            }
             boolean _notEquals_1 = (!Objects.equal(container, target));
             if (_notEquals_1) {
-              IPath _fullPath = container.getFullPath();
-              String _string = _fullPath.toString();
-              Path _path_1 = new Path(_string);
-              IPath _fullPath_1 = target.getFullPath();
-              String _string_1 = _fullPath_1.toString();
-              Path _path_2 = new Path(_string_1);
-              map.put(_path_1, _path_2);
+              IPath _fullPath_2 = container.getFullPath();
+              String _string = _fullPath_2.toString();
+              Path _path_2 = new Path(_string);
+              IPath _fullPath_3 = target.getFullPath();
+              String _string_1 = _fullPath_3.toString();
+              Path _path_3 = new Path(_string_1);
+              map.put(_path_2, _path_3);
             }
           }
         }

@@ -13,6 +13,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -35,7 +36,13 @@ public class JDTAwareEclipseResourceFileSystemAccess2 extends EclipseResourceFil
 	@Override
 	protected void createContainer(IContainer container) throws CoreException {
 		super.createContainer(container);
-		// make it a source folder
+		addToSourceFolders(container);
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	protected void addToSourceFolders(IContainer container) throws JavaModelException {
 		IJavaProject jp = JavaCore.create(container.getProject());
 		if (jp.exists() && !jp.isOnClasspath(container)) {
 			IClasspathEntry srcFolderClasspathEntry = JavaCore.newSourceEntry(container.getFullPath());

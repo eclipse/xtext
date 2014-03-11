@@ -58,7 +58,7 @@ public class BuilderPreferencePage extends PropertyAndPreferencePage {
 	public void setPreferenceStoreAccessImpl(PreferenceStoreAccessImpl preferenceStoreAccessImpl) {
 		this.preferenceStoreAccessImpl = preferenceStoreAccessImpl;
 	}
-
+	
 	@Override
 	public void createControl(Composite parent) {
 		IWorkbenchPreferenceContainer container = (IWorkbenchPreferenceContainer) getContainer();

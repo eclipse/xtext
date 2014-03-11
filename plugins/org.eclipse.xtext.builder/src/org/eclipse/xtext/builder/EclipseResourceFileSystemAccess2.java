@@ -40,7 +40,6 @@ import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.GetGrammarElement;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -57,46 +56,48 @@ import com.google.inject.Inject;
 public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 {
 
 	private final static Logger log = Logger.getLogger(EclipseResourceFileSystemAccess2.class);
-	
+
 	/**
 	 * @noimplement This interface is not intended to be implemented by clients.
 	 */
 	public interface IFileCallback {
 		public void afterFileUpdate(IFile file);
+
 		public void afterFileCreation(IFile file);
+
 		/**
 		 * @return whether a deletion is vetoed.
 		 */
 		public boolean beforeFileDeletion(IFile file);
 	}
-	
+
 	private IProject project;
-	
+
 	private IProgressMonitor monitor;
-	
+
 	private IFileCallback callBack;
-	
+
 	@Inject
 	private TraceRegionSerializer traceSerializer;
-	
+
 	@Inject
 	private TraceMarkers traceMarkers;
-	
+
 	@Inject
 	private TraceForStorageProvider fileBasedTraceInformation;
-	
+
 	@Inject
 	private IWorkspace workspace;
-	
+
 	private Multimap<URI, IPath> sourceTraces;
-	
+
 	/**
 	 * @since 2.4
 	 */
-	protected Multimap<URI, IPath> getSourceTraces(){
+	protected Multimap<URI, IPath> getSourceTraces() {
 		return sourceTraces;
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
@@ -107,32 +108,40 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	/**
 	 * @since 2.4
 	 */
-	protected TraceMarkers getTraceMarkers(){
+	protected TraceMarkers getTraceMarkers() {
 		return traceMarkers;
 	}
+
 	/**
 	 * @since 2.3
 	 */
 	protected IFileCallback getCallBack() {
 		return callBack;
 	}
-	
+
 	public void setProject(IProject project) {
 		this.project = project;
 	}
 	
+	/**
+	 * @since 2.6
+	 */
+	protected IProject getProject() {
+		return project;
+	}
+
 	public void setMonitor(IProgressMonitor monitor) {
 		this.monitor = monitor;
 	}
-	
+
 	public void setPostProcessor(IFileCallback callBack) {
 		this.callBack = callBack;
 	}
-	
+
 	protected IProgressMonitor getMonitor() {
 		return monitor;
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
@@ -203,7 +212,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			throw new RuntimeIOException(e);
 		}
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
@@ -254,7 +263,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	protected String getEncoding(IFile file) throws CoreException {
 		return file.getCharset(true);
 	}
-	
+
 	/**
 	 * @since 2.3
 	 */
@@ -275,11 +284,11 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	 * @since 2.4
 	 */
 	protected void createContainer(IContainer container) throws CoreException {
-        if (container instanceof IFolder) {
-        		createFolder((IFolder) container);
-        } else {
-        		ensureExists(container);
-        } 
+		if (container instanceof IFolder) {
+			createFolder((IFolder) container);
+		} else {
+			ensureExists(container);
+		}
 	}
 
 	protected void ensureParentExists(IFile file) throws CoreException {
@@ -287,13 +296,13 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			ensureExists(file.getParent());
 		}
 	}
-	
+
 	protected void ensureExists(IContainer container) throws CoreException {
 		if (container.exists())
 			return;
 		if (container instanceof IFolder) {
 			ensureExists(container.getParent());
-			((IFolder)container).create(true, true, monitor);
+			((IFolder) container).create(true, true, monitor);
 		}
 	}
 
@@ -310,24 +319,29 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	 */
 	@Deprecated
 	protected IFolder getFolder(OutputConfiguration outputConfig) {
-		return project.getFolder(new Path(outputConfig.getOutputDirectory()));
+		return (IFolder) getContainer(outputConfig);
 	}
 
 	/**
 	 * @since 2.4
 	 */
 	protected IContainer getContainer(OutputConfiguration outputConfig) {
-		String path = outputConfig.getOutputDirectory();
+		String path;
+		if (getCurrentSource() == null) {
+			path = outputConfig.getOutputDirectory();
+		} else {
+			path = outputConfig.getOutputDirectory(getCurrentSource());
+		}
 		if (".".equals(path) || "./".equals(path) || "".equals(path)) {
 			return project;
 		}
-		return getFolder(outputConfig);
+		return project.getFolder(new Path(path));
 	}
 
 	protected boolean hasContentsChanged(IFile file, StringInputStream newContent) {
-		return hasContentsChanged(file,(InputStream) newContent);
+		return hasContentsChanged(file, (InputStream) newContent);
 	}
-	
+
 	/**
 	 * @since 2.4
 	 */
@@ -338,7 +352,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			oldContent = new BufferedInputStream(file.getContents());
 			int newByte = newContent.read();
 			int oldByte = oldContent.read();
-			while(newByte != -1 && oldByte != -1 && newByte == oldByte) {
+			while (newByte != -1 && oldByte != -1 && newByte == oldByte) {
 				newByte = newContent.read();
 				oldByte = oldContent.read();
 			}
@@ -358,14 +372,16 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		}
 		return contentChanged;
 	}
-	
 
 	/**
-	 * @throws CoreException if something unexpected happens during resource access
-	 * @throws IOException if serialization of the trace data fails 
+	 * @throws CoreException
+	 *             if something unexpected happens during resource access
+	 * @throws IOException
+	 *             if serialization of the trace data fails
 	 * @since 2.3
 	 */
-	protected void updateTraceInformation(IFile traceFile, CharSequence contents, boolean derived) throws CoreException, IOException {
+	protected void updateTraceInformation(IFile traceFile, CharSequence contents, boolean derived)
+			throws CoreException, IOException {
 		if (contents instanceof ITraceRegionProvider) {
 			AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();
 			if (sourceTraces == null) {
@@ -373,9 +389,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			}
 			IPath tracePath = traceFile.getFullPath();
 			Iterator<AbstractTraceRegion> iterator = traceRegion.treeIterator();
-			while(iterator.hasNext()) {
+			while (iterator.hasNext()) {
 				AbstractTraceRegion region = iterator.next();
-				for(ILocationData location: region.getAssociatedLocations()) {
+				for (ILocationData location : region.getAssociatedLocations()) {
 					URI path = location.getPath();
 					if (path != null) {
 						sourceTraces.put(path, tracePath);
@@ -386,6 +402,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 				byte[] internalBuffer() {
 					return buf;
 				}
+
 				int internalLength() {
 					return count;
 				}
@@ -406,7 +423,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			traceFile.delete(IResource.NONE, monitor);
 		}
 	}
-	
+
 	/**
 	 * @since 2.3
 	 */
@@ -416,21 +433,23 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		return null;
 	}
 
-
 	/**
-	 * Can be used to announce that a builder participant is done with this file system access and
-	 * all potentially recorded trace information should be persisted. Uses the default generator name.
+	 * Can be used to announce that a builder participant is done with this file system access and all potentially
+	 * recorded trace information should be persisted. Uses the default generator name.
+	 * 
 	 * @since 2.3
 	 * @see TraceMarkers#DEFAULT_GENERATOR_NAME
 	 */
 	public void flushSourceTraces() throws CoreException {
 		flushSourceTraces(TraceMarkers.DEFAULT_GENERATOR_NAME);
 	}
-	
+
 	/**
-	 * Can be used to announce that a builder participant is done with this file system access and
-	 * all potentially recorded trace information should be persisted.
-	 * @param generatorName the name of the generator. 
+	 * Can be used to announce that a builder participant is done with this file system access and all potentially
+	 * recorded trace information should be persisted.
+	 * 
+	 * @param generatorName
+	 *            the name of the generator.
 	 * @since 2.3
 	 */
 	public void flushSourceTraces(String generatorName) throws CoreException {
@@ -449,7 +468,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		}
 		sourceTraces = null;
 	}
-	
+
 	/**
 	 * @since 2.5
 	 */
@@ -475,7 +494,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		if (!result.isSynchronized(IResource.DEPTH_ZERO)) {
 			try {
 				result.refreshLocal(IResource.DEPTH_ZERO, monitor);
-			} catch(CoreException c) {
+			} catch (CoreException c) {
 				// ignore
 			}
 		}
@@ -497,7 +516,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	public void deleteFile(IFile file, IProgressMonitor monitor) throws CoreException {
 		deleteFile(file, DEFAULT_OUTPUT, monitor);
 	}
-	
+
 	/**
 	 * @since 2.5
 	 */
@@ -520,9 +539,10 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		syncIfNecessary(result);
 		return result;
 	}
-	
+
 	/**
-	 * We cannot use the storage to URI mapper here, as it only works for Xtext based languages 
+	 * We cannot use the storage to URI mapper here, as it only works for Xtext based languages
+	 * 
 	 * @since 2.3
 	 */
 	public URI getURI(String fileName, String outputConfiguration) {

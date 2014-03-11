@@ -66,7 +66,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 
 	@Inject
 	private ITraceForStorageProvider traceInformation;
-
+	
 	protected OutputConfiguration findOutputConfiguration(URI dslSourceFile, IFile generatedJavaFile) {
 		IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(dslSourceFile);
 		if (serviceProvider == null)
@@ -78,15 +78,17 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 			if (configurations.size() == 1)
 				return configurations.iterator().next();
 			for (OutputConfiguration out : configurations) {
-				IContainer container = ResourceUtil.getContainer(project, out.getOutputDirectory());
-				if (container != null && container.getFullPath().isPrefixOf(generatedJavaFile.getFullPath()))
-					return out;
+				for (String source : out.getSourceFolders()) {
+					IContainer container = ResourceUtil.getContainer(project, out.getOutputDirectory(source));
+					if (container != null && container.getFullPath().isPrefixOf(generatedJavaFile.getFullPath()))
+						return out;
+				}
 			}
 		}
 		log.error("Could not find output configuration for file " + generatedJavaFile.getFullPath());
 		return null;
 	}
-
+	
 	protected ITraceToBytecodeInstaller getInstaller(OutputConfiguration config) {
 		if (config.isInstallDslAsPrimarySource()) {
 			TraceAsPrimarySourceInstaller installer = traceAsPrimarySourceInstallerProvider.get();
