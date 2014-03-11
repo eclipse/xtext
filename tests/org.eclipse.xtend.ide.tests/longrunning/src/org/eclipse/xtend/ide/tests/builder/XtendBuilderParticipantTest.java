@@ -9,12 +9,16 @@ package org.eclipse.xtend.ide.tests.builder;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.builder.trace.TraceMarkers;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.junit.Test;
 
@@ -27,6 +31,9 @@ public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
 
 	@Inject
 	private WorkbenchTestHelper testHelper;
+	
+	@Inject
+	private TraceMarkers traceMarkers;
 
 	@Override
 	public void tearDown() throws Exception {
@@ -51,6 +58,9 @@ public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
 		IFile classFile = testHelper.getProject().getFile("/bin/test/Test.class");
 		assertTrue(classFile.exists());
 		assertFalse(fileIsEmpty(classFile));
+		
+		List<IPath> traceFiles = traceMarkers.findTraceFiles(sourceFile);
+		assertTrue(traceFiles.contains(traceFile.getFullPath()));
 
 		sourceFile.delete(true, null);
 		waitForAutoBuild();
@@ -83,6 +93,10 @@ public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
 		assertTrue(traceFile.exists());
 		IFile classFile = testHelper.getProject().getFile("/bin/Foo.class");
 		assertTrue(classFile.exists());
+		
+		List<IPath> traceFiles = traceMarkers.findTraceFiles(sourceFile);
+		assertTrue(traceFiles.contains(traceFile.getFullPath()));
+
 
 		sourceFile.delete(false, new NullProgressMonitor());
 		waitForAutoBuild();

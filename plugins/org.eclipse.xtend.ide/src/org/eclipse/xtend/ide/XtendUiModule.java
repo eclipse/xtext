@@ -72,7 +72,9 @@ import org.eclipse.xtend.ide.refactoring.XtendRenameStrategyProvider;
 import org.eclipse.xtend.ide.validator.preferences.XtendValidatorConfigurationBlock;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
+import org.eclipse.xtext.builder.EclipseSourceFolderProvider;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
+import org.eclipse.xtext.builder.JDTAwareSourceFolderProvider;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
@@ -246,6 +248,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	public Class<? extends EclipseResourceFileSystemAccess2> bindEclipseResourceFileSystemAccess2() {
 		return SourceRelativeFileSystemAccess.class;
+	}
+	
+	public Class<? extends EclipseSourceFolderProvider> bindEclipseSourceFolderProvider() {
+		return JDTAwareSourceFolderProvider.class;
 	}
 
 	@Override

@@ -4,7 +4,9 @@
 package org.eclipse.xtext.builder.tests.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.builder.EclipseSourceFolderProvider;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
+import org.eclipse.xtext.builder.JDTAwareSourceFolderProvider;
 import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
 import org.eclipse.xtext.resource.IContainer;
 
@@ -26,5 +28,9 @@ public class BuilderTestLanguageUiModule extends org.eclipse.xtext.builder.tests
 
 	public void configureBuilderPreferenceStoreInitializer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class);
+	}
+	
+	public Class<? extends EclipseSourceFolderProvider> bindEclipseSourceFolderProvider() {
+		return JDTAwareSourceFolderProvider.class;
 	}
 }

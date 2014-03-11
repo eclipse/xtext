@@ -12,10 +12,12 @@ import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -25,6 +27,7 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class BuilderPreferenceAccess {
+	
 	/**
 	 * Name of a preference for configuring whether the builder participant is enabled or not.
 	 */
@@ -65,6 +68,11 @@ public class BuilderPreferenceAccess {
 				store.setDefault(getKey(configuration, INSTALL_DSL_AS_PRIMARY_SOURCE), configuration.isInstallDslAsPrimarySource());
 				store.setDefault(getKey(configuration, HIDE_LOCAL_SYNTHETIC_VARIABLES), configuration.isHideSyntheticLocalVariables());
 				store.setDefault(getKey(configuration, OUTPUT_KEEP_LOCAL_HISTORY), configuration.isKeepLocalHistory());
+				
+				for (SourceMapping sourceMapping : configuration.getSourceMappings()) {
+					store.setDefault(getOutputForSourceFolderKey(configuration, sourceMapping.getSourceFolder()), Strings.nullToEmpty(sourceMapping.getOutputDirectory()));
+					store.setDefault(getIgnoreSourceFolderKey(configuration, sourceMapping.getSourceFolder()), sourceMapping.isIgnore());
+				}
 			}
 		}
 
@@ -73,6 +81,14 @@ public class BuilderPreferenceAccess {
 	public static String getKey(OutputConfiguration outputConfiguration, String preferenceName) {
 		return OUTPUT_PREFERENCE_TAG + PreferenceConstants.SEPARATOR + outputConfiguration.getName()
 				+ PreferenceConstants.SEPARATOR + preferenceName;
+	}
+	
+	public static String getOutputForSourceFolderKey(OutputConfiguration outputConfiguration, String sourceFolder) {
+		return getKey(outputConfiguration, SOURCE_FOLDER_TAG + PreferenceConstants.SEPARATOR + sourceFolder + PreferenceConstants.SEPARATOR + OUTPUT_DIRECTORY);
+	}
+	
+	public static String getIgnoreSourceFolderKey(OutputConfiguration outputConfiguration, String sourceFolder) {
+		return getKey(outputConfiguration, SOURCE_FOLDER_TAG + PreferenceConstants.SEPARATOR + sourceFolder + PreferenceConstants.SEPARATOR + IGNORE_SOURCE_FOLDER_TAG);
 	}
 
 	private IPreferenceStoreAccess preferenceStoreAccess;
