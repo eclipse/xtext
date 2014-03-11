@@ -19,9 +19,11 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#isWildcard <em>Wildcard</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#isExtension <em>Extension</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#getImportedType <em>Imported Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#getMemberName <em>Member Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
  * </p>
@@ -32,6 +34,32 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
  */
 public interface XImportDeclaration extends EObject
 {
+	/**
+	 * Returns the value of the '<em><b>Wildcard</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Wildcard</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Wildcard</em>' attribute.
+	 * @see #setWildcard(boolean)
+	 * @see org.eclipse.xtext.xtype.XtypePackage#getXImportDeclaration_Wildcard()
+	 * @model
+	 * @generated
+	 */
+	boolean isWildcard();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtype.XImportDeclaration#isWildcard <em>Wildcard</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Wildcard</em>' attribute.
+	 * @see #isWildcard()
+	 * @generated
+	 */
+	void setWildcard(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Extension</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -111,6 +139,32 @@ public interface XImportDeclaration extends EObject
 	void setImportedType(JvmDeclaredType value);
 
 	/**
+	 * Returns the value of the '<em><b>Member Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Member Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Member Name</em>' attribute.
+	 * @see #setMemberName(String)
+	 * @see org.eclipse.xtext.xtype.XtypePackage#getXImportDeclaration_MemberName()
+	 * @model
+	 * @generated
+	 */
+	String getMemberName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtype.XImportDeclaration#getMemberName <em>Member Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Member Name</em>' attribute.
+	 * @see #getMemberName()
+	 * @generated
+	 */
+	void setMemberName(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Imported Namespace</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -139,10 +193,16 @@ public interface XImportDeclaration extends EObject
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>Returns the name that has been imported.</p>
+	 * <p>For types and wildcard import declarations returns a qualified type name, e.g. java.lang.String.</p>
+	 * <p>For member import declarations returns a qualified member name, e.g. java.lang.String.valueOf.</p>
+	 * <p>
+	 * <!-- end-model-doc -->
 	 * @model kind="operation"
 	 * @generated
 	 */
-	boolean isWildcard();
+	String getImportedName();
 
 	/**
 	 * <!-- begin-user-doc -->

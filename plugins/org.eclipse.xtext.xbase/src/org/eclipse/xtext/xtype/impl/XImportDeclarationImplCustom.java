@@ -22,10 +22,23 @@ public class XImportDeclarationImplCustom extends XImportDeclarationImpl {
 	@Override
 	public boolean isWildcard() {
 		if (isStatic()) 
-			return true;
+			return super.isWildcard();
 		if (importedNamespace == null)
 			return false;
 		return importedNamespace.endsWith("*");
+	}
+	
+	@Override
+	public String getImportedName() {
+		String memberName = getMemberName();
+		String importedTypeName = getImportedTypeName();
+		if (memberName == null) {
+			return importedTypeName;
+		}
+		if (importedTypeName == null) {
+			return memberName;
+		}
+		return importedTypeName + '.' + memberName;
 	}
 
 	@Override

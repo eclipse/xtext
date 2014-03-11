@@ -59,9 +59,13 @@ XImportSection:
 
 XImportDeclaration: 
 	'import' (
-		(static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedName] '.' '*') 
+		(static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' | memberName=ValidID)) 
 		| importedType=[JvmDeclaredType|QualifiedName] 
 		| importedNamespace=QualifiedNameWithWildcard) ';'?
+;
+
+QualifiedNameInStaticImport:
+  (ValidID '.')+
 ;
 
 terminal ID:

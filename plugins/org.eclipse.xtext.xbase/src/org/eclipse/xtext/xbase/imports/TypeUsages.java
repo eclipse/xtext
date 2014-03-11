@@ -8,8 +8,10 @@
 package org.eclipse.xtext.xbase.imports;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -26,8 +28,8 @@ public class TypeUsages {
 	private Multimap<String, JvmDeclaredType> simpleName2types = LinkedHashMultimap.create();
 	private Multimap<JvmDeclaredType, TypeUsage> types2usages = LinkedHashMultimap.create();
 	
-	private List<JvmDeclaredType> staticImports = newArrayList();
-	private List<JvmDeclaredType> extensionImports = newArrayList();
+	private Set<JvmMember> staticImports = newHashSet();
+	private Set<JvmMember> extensionImports = newHashSet();
 	
 	private List<TypeUsage> unresolvedTypes = newArrayList();
 	
@@ -65,19 +67,19 @@ public class TypeUsages {
 		return unresolvedTypes;
 	}
 	
-	public void addStaticImport(JvmDeclaredType declarator) {
-		staticImports.add(declarator);
+	public void addStaticImport(JvmMember member) {
+		staticImports.add(member);
 	}
 
-	public void addExtensionImport(JvmDeclaredType declarator) {
-		extensionImports.add(declarator);
+	public void addExtensionImport(JvmMember member) {
+		extensionImports.add(member);
 	}
 	
-	public List<JvmDeclaredType> getStaticImports() {
+	public Set<JvmMember> getStaticImports() {
 		return staticImports;
 	}
 	
-	public List<JvmDeclaredType> getExtensionImports() {
+	public Set<JvmMember> getExtensionImports() {
 		return extensionImports;
 	}
 }

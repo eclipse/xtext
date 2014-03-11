@@ -123,4 +123,13 @@ public class XtendImportsConfiguration extends DefaultImportsConfiguration {
 			xtendType = (XtendTypeDeclaration) xtendType.eContainer();
 		return associations.getInferredType(xtendType);
 	}
+	
+	@Override
+	public String getPackageName(XtextResource xtextResource) {
+		XtendFile xtendFile = getXtendFile(xtextResource);
+		if (xtendFile == null) {
+			return null;
+		}
+		return xtendFile.getPackage();
+	}
 }

@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.ui.navigation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -25,7 +24,7 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.4
  */
-public class TypeLiteralAwareHyperlinkHelper extends TypeAwareHyperlinkHelper {
+public class TypeLiteralAwareHyperlinkHelper extends StaticallyImportedMemberAwareHyperlinkHelper {
 
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;

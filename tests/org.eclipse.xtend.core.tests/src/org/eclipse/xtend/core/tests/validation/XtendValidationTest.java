@@ -1235,17 +1235,17 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Test public void testStaticAndStaticExtensionImport_0() throws Exception {
 		XtendFile file = file("import static java.util.Collections.* import static extension java.util.Collections.* class X { var x = ''.singleton var y = singleton('') }");
-		helper.assertWarning(file.getImportSection().getImportDeclarations().get(0), XIMPORT_DECLARATION, IMPORT_DUPLICATE, "obsolete");
+		helper.assertWarning(file.getImportSection().getImportDeclarations().get(0), XIMPORT_DECLARATION, IMPORT_UNUSED);
 	}
 
 	@Test public void testStaticAndStaticExtensionImport_1() throws Exception {
 		XtendFile file = file("import static extension java.util.Collections.* import static java.util.Collections.* class X { var x = ''.singleton var y = singleton('') }");
-		helper.assertWarning(file.getImportSection().getImportDeclarations().get(1), XIMPORT_DECLARATION, IMPORT_DUPLICATE, "obsolete");
+		helper.assertWarning(file.getImportSection().getImportDeclarations().get(1), XIMPORT_DECLARATION, IMPORT_UNUSED);
 	}
 
 	@Test public void testImportDuplicate() throws Exception {
 		XtendClass clazz = clazz("import java.util.List import java.util.List class X { private List sb def foo(){sb}}");
-		helper.assertWarning(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_DUPLICATE);
+		helper.assertWarning(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_UNUSED);
 	}
 	
 	@Test public void testImportCollision() throws Exception {

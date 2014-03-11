@@ -381,4 +381,56 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 		''')
 	}
 
+	@Test def void testMemberImport_01() {
+		'''
+			import static java.lang.String.valueOf
+			import static java.lang.Integer.valueOf
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		'''.assertIsOrganizedTo("repro/Foo", '''
+			import static java.lang.Integer.valueOf
+			import static java.lang.String.valueOf
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+	}
+
+	@Test def void testMemberImport_02() {
+		'''
+			import static java.lang.Integer.*
+			import static java.lang.Integer.valueOf
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		'''.assertIsOrganizedTo("repro/Foo", '''
+			import static java.lang.Integer.*
+			import static java.lang.Integer.valueOf
+			
+			class Foo {
+			
+				def foo() {
+					valueOf(1)
+				}
+			
+			}
+		''')
+	}
+
 }

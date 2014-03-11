@@ -769,10 +769,20 @@ ruleValidID :
 // Rule XImportDeclaration
 ruleXImportDeclaration :
 	'import' (
-		'static' 'extension'? ruleQualifiedName '.' '*' |
+		'static' 'extension'? ruleQualifiedNameInStaticImport (
+			'*' |
+			ruleValidID
+		) |
 		ruleQualifiedName |
 		ruleQualifiedNameWithWildcard
 	) ';'?
+;
+
+// Rule QualifiedNameInStaticImport
+ruleQualifiedNameInStaticImport :
+	(
+		ruleValidID '.'
+	)+
 ;
 
 RULE_HEX :

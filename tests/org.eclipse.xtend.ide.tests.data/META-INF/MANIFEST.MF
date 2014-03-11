@@ -8,6 +8,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtend.core.tests.internal;x-internal:=true,
  org.eclipse.xtend.ide.tests.data,
  org.eclipse.xtend.ide.tests.data.bug348446,
+ org.eclipse.xtend.ide.tests.data.contentassist,
  org.eclipse.xtend.ide.tests.data.highlighting,
  org.eclipse.xtend.ide.tests.data.quickfix
 Import-Package: org.junit;version="4.5.0"

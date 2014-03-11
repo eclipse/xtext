@@ -271,7 +271,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
   
   protected boolean removeStaticImport(final RewritableImportSection section, final Class<?> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    return section.removeStaticImport(_jvmType);
+    return section.removeStaticImport(_jvmType, null);
   }
   
   protected boolean addExtensionImport(final RewritableImportSection section, final Class<?> javaClass) {
@@ -281,7 +281,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
   
   protected boolean removeExtensionImport(final RewritableImportSection section, final Class<?> javaClass) {
     JvmDeclaredType _jvmType = this.jvmType(javaClass);
-    return section.removeStaticExtensionImport(_jvmType);
+    return section.removeStaticExtensionImport(_jvmType, null);
   }
   
   protected JvmDeclaredType jvmType(final Class<?> javaClass) {

@@ -41,4 +41,6 @@ public interface IImportsConfiguration {
 	 * is null. Also returns null, if no node model is attached. 
 	 */
 	String getLegacyImportSyntax(XImportDeclaration importDeclaration);
+
+	String getPackageName(XtextResource xtextResource);
 }

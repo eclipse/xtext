@@ -224,4 +224,8 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 		pathToImportSection.removeLast();
 		return false;
 	}
+
+	public String getPackageName(XtextResource xtextResource) {
+		return null;
+	}
 }

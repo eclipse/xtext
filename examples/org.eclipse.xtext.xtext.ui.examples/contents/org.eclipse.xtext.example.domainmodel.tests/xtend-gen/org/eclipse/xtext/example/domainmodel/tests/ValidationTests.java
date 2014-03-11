@@ -204,7 +204,7 @@ public class ValidationTests {
     _builder.append("}");
     _builder.newLine();
     final DomainModel model = this.parse(_builder);
-    this.validationTestHelper.assertWarning(model, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_DUPLICATE);
+    this.validationTestHelper.assertWarning(model, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
   }
   
   @Test

@@ -121,7 +121,7 @@ class ValidationTests {
 				}
 			}
 		''');
-		assertWarning(model, XIMPORT_DECLARATION, IMPORT_DUPLICATE);
+		assertWarning(model, XIMPORT_DECLARATION, IMPORT_UNUSED);
 	}
 	
 	@Test def testImportCollision() {
