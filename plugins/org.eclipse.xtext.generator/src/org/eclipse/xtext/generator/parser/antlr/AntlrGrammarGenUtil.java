@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.util.Strings;
 
@@ -20,6 +23,15 @@ public class AntlrGrammarGenUtil {
 
 	public static String toAntlrString(String string) {
 		return Strings.convertToJavaString(string, true).replace("\\\"", "\"");
+	}
+	
+	/**
+	 * Returns the first-set of the given abstractElement. That is, all keywords
+	 * with distinct values and all rule calls to distinct terminals.
+	 * @since 2.6
+	 */
+	public static List<AbstractElement> getFirstSet(AbstractElement element) {
+		return FirstSetComputer.getFirstSet(element);
 	}
 
 	public static String toStringInAntlrAction(String string) {

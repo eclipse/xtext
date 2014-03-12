@@ -19,6 +19,11 @@ ruleName(EnumRule this) : 'rule'+name;
 ruleName(TerminalRule this) : 'RULE_'+name.toUpperCase();
 ruleName(AbstractRule this) : "Unsupported";
 
+List[AbstractElement] firstSet(AbstractElement this):
+  JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getFirstSet(org.eclipse.xtext.AbstractElement)
+;
+
+
 predicated(AbstractElement this):
   this.predicated
 ;
@@ -100,8 +105,8 @@ mustBeParenthesized(Group this) : true;
 mustBeParenthesized(UnorderedGroup this) : true;
 mustBeParenthesized(Alternatives this) : true;
 mustBeParenthesized(EnumLiteralDeclaration this) : true;
-mustBeParenthesized(Keyword this) : predicated() || cardinality!=null;
-mustBeParenthesized(RuleCall this) : predicated() || cardinality!=null;
+mustBeParenthesized(Keyword this) : predicated() || firstSetPredicated || cardinality!=null;
+mustBeParenthesized(RuleCall this) : predicated() || firstSetPredicated || cardinality!=null;
 
 String grammarElementAccess(EObject object):
 	"Unsupported : grammarElementAccess for: " + object.toString(); 
