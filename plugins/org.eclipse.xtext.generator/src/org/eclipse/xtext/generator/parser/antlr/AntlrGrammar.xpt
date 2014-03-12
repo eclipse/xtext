@@ -281,12 +281,20 @@ finally {
 «ENDDEFINE»
 
 «DEFINE ebnf(AntlrOptions options, boolean debugGrammar) FOR AbstractElement-»
-«IF mustBeParenthesized()»(«IF predicated()»(«EXPAND ebnf2(options, true) FOR predicatedElement()»)=>«ENDIF»«EXPAND ebnf2(options, debugGrammar)»)«ELSE»«EXPAND ebnf2(options, debugGrammar)»«ENDIF»«cardinality-»
+«IF mustBeParenthesized()»(«EXPAND ebnfPredicate(options)»«EXPAND ebnf2(options, debugGrammar)»)«ELSE»«EXPAND ebnf2(options, debugGrammar)»«ENDIF»«cardinality-»
 «ENDDEFINE»
 
+«DEFINE ebnfPredicate(AntlrOptions options) FOR AbstractElement-»
+«IF predicated() || firstSetPredicated»(«IF predicated()»«EXPAND ebnf2(options, true) FOR predicatedElement()»«ELSE»«EXPAND ebnf2(options, true) FOREACH firstSet() SEPARATOR ' | '»«ENDIF»)=>«ENDIF-»
+«ENDDEFINE-»
+
 «DEFINE dataTypeEbnf(boolean debugGrammar) FOR AbstractElement-»
-«IF mustBeParenthesized()»(«IF predicated()»(«EXPAND dataTypeEbnf2(true) FOR predicatedElement()»)=>«ENDIF»«EXPAND dataTypeEbnf2(debugGrammar)»)«ELSE»«EXPAND dataTypeEbnf2(debugGrammar)»«ENDIF»«cardinality-»
+«IF mustBeParenthesized()»(«EXPAND dataTypeEbnfPredicate»«EXPAND dataTypeEbnf2(debugGrammar)»)«ELSE»«EXPAND dataTypeEbnf2(debugGrammar)»«ENDIF»«cardinality-»
 «ENDDEFINE»
+
+«DEFINE dataTypeEbnfPredicate FOR AbstractElement-»
+«IF predicated() || firstSetPredicated»(«IF predicated()»«EXPAND dataTypeEbnf2(true) FOR predicatedElement()»«ELSE»«EXPAND dataTypeEbnf2(true) FOREACH firstSet() SEPARATOR ' | '»«ENDIF»)=>«ENDIF-»
+«ENDDEFINE-»
 
 «DEFINE dataTypeEbnf2(boolean debugGrammar) FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
 

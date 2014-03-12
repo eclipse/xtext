@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext" version="2">
     <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="923795461">
+            <message_arguments>
+                <message_argument value="2.6.0"/>
+                <message_argument value="2.5.3"/>
+            </message_arguments>
+        </filter>
         <filter comment="Added protected method" id="924844039">
             <message_arguments>
                 <message_argument value="2.5.2"/>
@@ -13,6 +19,296 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.resource.IndexingOrderer"/>
                 <message_argument value="org.eclipse.xtext_2.5.1"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/AbstractElement.java" type="org.eclipse.xtext.AbstractElement">
+        <filter comment="Added #firstSetPredicated" id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.AbstractElement"/>
+                <message_argument value="isFirstSetPredicated()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated" id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.AbstractElement"/>
+                <message_argument value="setFirstSetPredicated(boolean)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/XtextPackage.java" type="org.eclipse.xtext.XtextPackage">
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ABSTRACT_ELEMENT_FEATURE_COUNT"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ABSTRACT_NEGATED_TOKEN_FEATURE_COUNT"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ABSTRACT_NEGATED_TOKEN__TERMINAL"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ACTION_FEATURE_COUNT"/>
+                <message_argument value="5"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ACTION__FEATURE"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ACTION__OPERATOR"/>
+                <message_argument value="4"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ACTION__TYPE"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ALTERNATIVES_FEATURE_COUNT"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ALTERNATIVES__ELEMENTS"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ASSIGNMENT_FEATURE_COUNT"/>
+                <message_argument value="5"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ASSIGNMENT__FEATURE"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ASSIGNMENT__OPERATOR"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ASSIGNMENT__TERMINAL"/>
+                <message_argument value="4"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="CHARACTER_RANGE_FEATURE_COUNT"/>
+                <message_argument value="4"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="CHARACTER_RANGE__LEFT"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="CHARACTER_RANGE__RIGHT"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="COMPOUND_ELEMENT_FEATURE_COUNT"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="COMPOUND_ELEMENT__ELEMENTS"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="CROSS_REFERENCE_FEATURE_COUNT"/>
+                <message_argument value="4"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="CROSS_REFERENCE__TERMINAL"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="CROSS_REFERENCE__TYPE"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ENUM_LITERAL_DECLARATION_FEATURE_COUNT"/>
+                <message_argument value="4"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ENUM_LITERAL_DECLARATION__ENUM_LITERAL"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="ENUM_LITERAL_DECLARATION__LITERAL"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="EOF_FEATURE_COUNT"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="GROUP_FEATURE_COUNT"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="GROUP__ELEMENTS"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="KEYWORD_FEATURE_COUNT"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="KEYWORD__VALUE"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="NEGATED_TOKEN_FEATURE_COUNT"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="NEGATED_TOKEN__TERMINAL"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="RULE_CALL_FEATURE_COUNT"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="RULE_CALL__RULE"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="UNORDERED_GROUP_FEATURE_COUNT"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="UNORDERED_GROUP__ELEMENTS"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="UNTIL_TOKEN_FEATURE_COUNT"/>
+                <message_argument value="3"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="UNTIL_TOKEN__TERMINAL"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="WILDCARD_FEATURE_COUNT"/>
+                <message_argument value="2"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/XtextPackage.java" type="org.eclipse.xtext.XtextPackage$Literals">
+        <filter comment="Added #firstSetPredicated to AbstractElement" id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="ABSTRACT_ELEMENT__FIRST_SET_PREDICATED"/>
             </message_arguments>
         </filter>
     </resource>

@@ -820,23 +820,35 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	public class PredicatedKeywordElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PredicatedKeyword");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cPredicatedAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cPredicatedEqualsSignGreaterThanSignKeyword_0_0 = (Keyword)cPredicatedAssignment_0.eContents().get(0);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cPredicatedAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final Keyword cPredicatedEqualsSignGreaterThanSignKeyword_0_0_0 = (Keyword)cPredicatedAssignment_0_0.eContents().get(0);
+		private final Assignment cFirstSetPredicatedAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
+		private final Keyword cFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0 = (Keyword)cFirstSetPredicatedAssignment_0_1.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValueSTRINGTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//PredicatedKeyword returns Keyword:
-		//	predicated?="=>" value=STRING;
+		//	(predicated?="=>" | firstSetPredicated?="->") value=STRING;
 		public ParserRule getRule() { return rule; }
 
-		//predicated?="=>" value=STRING
+		//(predicated?="=>" | firstSetPredicated?="->") value=STRING
 		public Group getGroup() { return cGroup; }
 
+		//predicated?="=>" | firstSetPredicated?="->"
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
 		//predicated?="=>"
-		public Assignment getPredicatedAssignment_0() { return cPredicatedAssignment_0; }
+		public Assignment getPredicatedAssignment_0_0() { return cPredicatedAssignment_0_0; }
 
 		//"=>"
-		public Keyword getPredicatedEqualsSignGreaterThanSignKeyword_0_0() { return cPredicatedEqualsSignGreaterThanSignKeyword_0_0; }
+		public Keyword getPredicatedEqualsSignGreaterThanSignKeyword_0_0_0() { return cPredicatedEqualsSignGreaterThanSignKeyword_0_0_0; }
+
+		//firstSetPredicated?="->"
+		public Assignment getFirstSetPredicatedAssignment_0_1() { return cFirstSetPredicatedAssignment_0_1; }
+
+		//"->"
+		public Keyword getFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0() { return cFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0; }
 
 		//value=STRING
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
@@ -848,24 +860,36 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	public class PredicatedRuleCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PredicatedRuleCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cPredicatedAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cPredicatedEqualsSignGreaterThanSignKeyword_0_0 = (Keyword)cPredicatedAssignment_0.eContents().get(0);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cPredicatedAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final Keyword cPredicatedEqualsSignGreaterThanSignKeyword_0_0_0 = (Keyword)cPredicatedAssignment_0_0.eContents().get(0);
+		private final Assignment cFirstSetPredicatedAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
+		private final Keyword cFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0 = (Keyword)cFirstSetPredicatedAssignment_0_1.eContents().get(0);
 		private final Assignment cRuleAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cRuleAbstractRuleCrossReference_1_0 = (CrossReference)cRuleAssignment_1.eContents().get(0);
 		private final RuleCall cRuleAbstractRuleIDTerminalRuleCall_1_0_1 = (RuleCall)cRuleAbstractRuleCrossReference_1_0.eContents().get(1);
 		
 		//PredicatedRuleCall returns RuleCall:
-		//	predicated?="=>" rule=[AbstractRule];
+		//	(predicated?="=>" | firstSetPredicated?="->") rule=[AbstractRule];
 		public ParserRule getRule() { return rule; }
 
-		//predicated?="=>" rule=[AbstractRule]
+		//(predicated?="=>" | firstSetPredicated?="->") rule=[AbstractRule]
 		public Group getGroup() { return cGroup; }
 
+		//predicated?="=>" | firstSetPredicated?="->"
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
 		//predicated?="=>"
-		public Assignment getPredicatedAssignment_0() { return cPredicatedAssignment_0; }
+		public Assignment getPredicatedAssignment_0_0() { return cPredicatedAssignment_0_0; }
 
 		//"=>"
-		public Keyword getPredicatedEqualsSignGreaterThanSignKeyword_0_0() { return cPredicatedEqualsSignGreaterThanSignKeyword_0_0; }
+		public Keyword getPredicatedEqualsSignGreaterThanSignKeyword_0_0_0() { return cPredicatedEqualsSignGreaterThanSignKeyword_0_0_0; }
+
+		//firstSetPredicated?="->"
+		public Assignment getFirstSetPredicatedAssignment_0_1() { return cFirstSetPredicatedAssignment_0_1; }
+
+		//"->"
+		public Keyword getFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0() { return cFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0; }
 
 		//rule=[AbstractRule]
 		public Assignment getRuleAssignment_1() { return cRuleAssignment_1; }
@@ -880,8 +904,11 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	public class AssignmentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Assignment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cPredicatedAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cPredicatedEqualsSignGreaterThanSignKeyword_0_0 = (Keyword)cPredicatedAssignment_0.eContents().get(0);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cPredicatedAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final Keyword cPredicatedEqualsSignGreaterThanSignKeyword_0_0_0 = (Keyword)cPredicatedAssignment_0_0.eContents().get(0);
+		private final Assignment cFirstSetPredicatedAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
+		private final Keyword cFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0 = (Keyword)cFirstSetPredicatedAssignment_0_1.eContents().get(0);
 		private final Assignment cFeatureAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cFeatureIDTerminalRuleCall_1_0 = (RuleCall)cFeatureAssignment_1.eContents().get(0);
 		private final Assignment cOperatorAssignment_2 = (Assignment)cGroup.eContents().get(2);
@@ -893,17 +920,26 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTerminalAssignableTerminalParserRuleCall_3_0 = (RuleCall)cTerminalAssignment_3.eContents().get(0);
 		
 		//Assignment:
-		//	predicated?="=>"? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
+		//	(predicated?="=>" | firstSetPredicated?="->")? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
 		public ParserRule getRule() { return rule; }
 
-		//predicated?="=>"? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal
+		//(predicated?="=>" | firstSetPredicated?="->")? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal
 		public Group getGroup() { return cGroup; }
 
-		//predicated?="=>"?
-		public Assignment getPredicatedAssignment_0() { return cPredicatedAssignment_0; }
+		//(predicated?="=>" | firstSetPredicated?="->")?
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
+		//predicated?="=>"
+		public Assignment getPredicatedAssignment_0_0() { return cPredicatedAssignment_0_0; }
 
 		//"=>"
-		public Keyword getPredicatedEqualsSignGreaterThanSignKeyword_0_0() { return cPredicatedEqualsSignGreaterThanSignKeyword_0_0; }
+		public Keyword getPredicatedEqualsSignGreaterThanSignKeyword_0_0_0() { return cPredicatedEqualsSignGreaterThanSignKeyword_0_0_0; }
+
+		//firstSetPredicated?="->"
+		public Assignment getFirstSetPredicatedAssignment_0_1() { return cFirstSetPredicatedAssignment_0_1; }
+
+		//"->"
+		public Keyword getFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0() { return cFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0; }
 
 		//feature=ID
 		public Assignment getFeatureAssignment_1() { return cFeatureAssignment_1; }
@@ -1116,25 +1152,37 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	public class PredicatedGroupElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PredicatedGroup");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cPredicatedAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cPredicatedEqualsSignGreaterThanSignKeyword_0_0 = (Keyword)cPredicatedAssignment_0.eContents().get(0);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cPredicatedAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final Keyword cPredicatedEqualsSignGreaterThanSignKeyword_0_0_0 = (Keyword)cPredicatedAssignment_0_0.eContents().get(0);
+		private final Assignment cFirstSetPredicatedAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
+		private final Keyword cFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0 = (Keyword)cFirstSetPredicatedAssignment_0_1.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cElementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cElementsAlternativesParserRuleCall_2_0 = (RuleCall)cElementsAssignment_2.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//PredicatedGroup returns Group:
-		//	predicated?="=>" "(" elements+=Alternatives ")";
+		//	(predicated?="=>" | firstSetPredicated?="->") "(" elements+=Alternatives ")";
 		public ParserRule getRule() { return rule; }
 
-		//predicated?="=>" "(" elements+=Alternatives ")"
+		//(predicated?="=>" | firstSetPredicated?="->") "(" elements+=Alternatives ")"
 		public Group getGroup() { return cGroup; }
 
+		//predicated?="=>" | firstSetPredicated?="->"
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
 		//predicated?="=>"
-		public Assignment getPredicatedAssignment_0() { return cPredicatedAssignment_0; }
+		public Assignment getPredicatedAssignment_0_0() { return cPredicatedAssignment_0_0; }
 
 		//"=>"
-		public Keyword getPredicatedEqualsSignGreaterThanSignKeyword_0_0() { return cPredicatedEqualsSignGreaterThanSignKeyword_0_0; }
+		public Keyword getPredicatedEqualsSignGreaterThanSignKeyword_0_0_0() { return cPredicatedEqualsSignGreaterThanSignKeyword_0_0_0; }
+
+		//firstSetPredicated?="->"
+		public Assignment getFirstSetPredicatedAssignment_0_1() { return cFirstSetPredicatedAssignment_0_1; }
+
+		//"->"
+		public Keyword getFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0() { return cFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0; }
 
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
@@ -1949,7 +1997,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PredicatedKeyword returns Keyword:
-	//	predicated?="=>" value=STRING;
+	//	(predicated?="=>" | firstSetPredicated?="->") value=STRING;
 	public PredicatedKeywordElements getPredicatedKeywordAccess() {
 		return (pPredicatedKeyword != null) ? pPredicatedKeyword : (pPredicatedKeyword = new PredicatedKeywordElements());
 	}
@@ -1959,7 +2007,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PredicatedRuleCall returns RuleCall:
-	//	predicated?="=>" rule=[AbstractRule];
+	//	(predicated?="=>" | firstSetPredicated?="->") rule=[AbstractRule];
 	public PredicatedRuleCallElements getPredicatedRuleCallAccess() {
 		return (pPredicatedRuleCall != null) ? pPredicatedRuleCall : (pPredicatedRuleCall = new PredicatedRuleCallElements());
 	}
@@ -1969,7 +2017,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Assignment:
-	//	predicated?="=>"? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
+	//	(predicated?="=>" | firstSetPredicated?="->")? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
 	public AssignmentElements getAssignmentAccess() {
 		return (pAssignment != null) ? pAssignment : (pAssignment = new AssignmentElements());
 	}
@@ -2039,7 +2087,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PredicatedGroup returns Group:
-	//	predicated?="=>" "(" elements+=Alternatives ")";
+	//	(predicated?="=>" | firstSetPredicated?="->") "(" elements+=Alternatives ")";
 	public PredicatedGroupElements getPredicatedGroupAccess() {
 		return (pPredicatedGroup != null) ? pPredicatedGroup : (pPredicatedGroup = new PredicatedGroupElements());
 	}

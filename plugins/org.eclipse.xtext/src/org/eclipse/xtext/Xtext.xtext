@@ -95,15 +95,15 @@ RuleCall :
 ;
 
 PredicatedKeyword returns Keyword:
-	predicated?='=>' value=STRING  
+	(predicated?='=>' | firstSetPredicated?='->') value=STRING  
 ;
 
 PredicatedRuleCall returns RuleCall:
-	predicated?='=>' rule=[AbstractRule]
+	(predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule]
 ;
 
 Assignment returns Assignment:
-   predicated?='=>'? feature=ID operator=('+='|'='|'?=') ^terminal=AssignableTerminal
+   (predicated?='=>' | firstSetPredicated?='->')? feature=ID operator=('+='|'='|'?=') ^terminal=AssignableTerminal
 ;
 
 AssignableTerminal returns AbstractElement:
@@ -131,7 +131,7 @@ ParenthesizedElement returns AbstractElement:
 ;
 
 PredicatedGroup returns Group:
-	predicated?='=>' '(' elements+=Alternatives ')' 
+	(predicated?='=>' | firstSetPredicated?='->') '(' elements+=Alternatives ')' 
 ;
 
 TerminalRule :

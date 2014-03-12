@@ -3617,11 +3617,11 @@ protected class RuleCall_RuleAssignment extends AssignmentToken  {
 /************ begin Rule PredicatedKeyword ****************
  *
  * PredicatedKeyword returns Keyword:
- * 	predicated?="=>" value=STRING;
+ * 	(predicated?="=>" | firstSetPredicated?="->") value=STRING;
  *
  **/
 
-// predicated?="=>" value=STRING
+// (predicated?="=>" | firstSetPredicated?="->") value=STRING
 protected class PredicatedKeyword_Group extends GroupToken {
 	
 	public PredicatedKeyword_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3650,16 +3650,39 @@ protected class PredicatedKeyword_Group extends GroupToken {
 
 }
 
-// predicated?="=>"
-protected class PredicatedKeyword_PredicatedAssignment_0 extends AssignmentToken  {
+// predicated?="=>" | firstSetPredicated?="->"
+protected class PredicatedKeyword_Alternatives_0 extends AlternativesToken {
+
+	public PredicatedKeyword_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public PredicatedKeyword_PredicatedAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getPredicatedKeywordAccess().getAlternatives_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new PredicatedKeyword_PredicatedAssignment_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new PredicatedKeyword_FirstSetPredicatedAssignment_0_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// predicated?="=>"
+protected class PredicatedKeyword_PredicatedAssignment_0_0 extends AssignmentToken  {
+	
+	public PredicatedKeyword_PredicatedAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPredicatedKeywordAccess().getPredicatedAssignment_0();
+		return grammarAccess.getPredicatedKeywordAccess().getPredicatedAssignment_0_0();
 	}
 
     @Override
@@ -3675,13 +3698,47 @@ protected class PredicatedKeyword_PredicatedAssignment_0 extends AssignmentToken
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("predicated");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getPredicatedKeywordAccess().getPredicatedEqualsSignGreaterThanSignKeyword_0_0();
+			element = grammarAccess.getPredicatedKeywordAccess().getPredicatedEqualsSignGreaterThanSignKeyword_0_0_0();
 			return obj;
 		}
 		return null;
 	}
 
 }
+
+// firstSetPredicated?="->"
+protected class PredicatedKeyword_FirstSetPredicatedAssignment_0_1 extends AssignmentToken  {
+	
+	public PredicatedKeyword_FirstSetPredicatedAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getPredicatedKeywordAccess().getFirstSetPredicatedAssignment_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstSetPredicated",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstSetPredicated");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getPredicatedKeywordAccess().getFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
 
 // value=STRING
 protected class PredicatedKeyword_ValueAssignment_1 extends AssignmentToken  {
@@ -3698,7 +3755,7 @@ protected class PredicatedKeyword_ValueAssignment_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PredicatedKeyword_PredicatedAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PredicatedKeyword_Alternatives_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3724,11 +3781,11 @@ protected class PredicatedKeyword_ValueAssignment_1 extends AssignmentToken  {
 /************ begin Rule PredicatedRuleCall ****************
  *
  * PredicatedRuleCall returns RuleCall:
- * 	predicated?="=>" rule=[AbstractRule];
+ * 	(predicated?="=>" | firstSetPredicated?="->") rule=[AbstractRule];
  *
  **/
 
-// predicated?="=>" rule=[AbstractRule]
+// (predicated?="=>" | firstSetPredicated?="->") rule=[AbstractRule]
 protected class PredicatedRuleCall_Group extends GroupToken {
 	
 	public PredicatedRuleCall_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3757,16 +3814,39 @@ protected class PredicatedRuleCall_Group extends GroupToken {
 
 }
 
-// predicated?="=>"
-protected class PredicatedRuleCall_PredicatedAssignment_0 extends AssignmentToken  {
+// predicated?="=>" | firstSetPredicated?="->"
+protected class PredicatedRuleCall_Alternatives_0 extends AlternativesToken {
+
+	public PredicatedRuleCall_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public PredicatedRuleCall_PredicatedAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getPredicatedRuleCallAccess().getAlternatives_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new PredicatedRuleCall_PredicatedAssignment_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new PredicatedRuleCall_FirstSetPredicatedAssignment_0_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// predicated?="=>"
+protected class PredicatedRuleCall_PredicatedAssignment_0_0 extends AssignmentToken  {
+	
+	public PredicatedRuleCall_PredicatedAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPredicatedRuleCallAccess().getPredicatedAssignment_0();
+		return grammarAccess.getPredicatedRuleCallAccess().getPredicatedAssignment_0_0();
 	}
 
     @Override
@@ -3782,13 +3862,47 @@ protected class PredicatedRuleCall_PredicatedAssignment_0 extends AssignmentToke
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("predicated");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getPredicatedRuleCallAccess().getPredicatedEqualsSignGreaterThanSignKeyword_0_0();
+			element = grammarAccess.getPredicatedRuleCallAccess().getPredicatedEqualsSignGreaterThanSignKeyword_0_0_0();
 			return obj;
 		}
 		return null;
 	}
 
 }
+
+// firstSetPredicated?="->"
+protected class PredicatedRuleCall_FirstSetPredicatedAssignment_0_1 extends AssignmentToken  {
+	
+	public PredicatedRuleCall_FirstSetPredicatedAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getPredicatedRuleCallAccess().getFirstSetPredicatedAssignment_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstSetPredicated",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstSetPredicated");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getPredicatedRuleCallAccess().getFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
 
 // rule=[AbstractRule]
 protected class PredicatedRuleCall_RuleAssignment_1 extends AssignmentToken  {
@@ -3805,7 +3919,7 @@ protected class PredicatedRuleCall_RuleAssignment_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PredicatedRuleCall_PredicatedAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PredicatedRuleCall_Alternatives_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3834,11 +3948,11 @@ protected class PredicatedRuleCall_RuleAssignment_1 extends AssignmentToken  {
 /************ begin Rule Assignment ****************
  *
  * Assignment:
- * 	predicated?="=>"? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
+ * 	(predicated?="=>" | firstSetPredicated?="->")? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
  *
  **/
 
-// predicated?="=>"? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal
+// (predicated?="=>" | firstSetPredicated?="->")? feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal
 protected class Assignment_Group extends GroupToken {
 	
 	public Assignment_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3867,16 +3981,39 @@ protected class Assignment_Group extends GroupToken {
 
 }
 
-// predicated?="=>"?
-protected class Assignment_PredicatedAssignment_0 extends AssignmentToken  {
+// (predicated?="=>" | firstSetPredicated?="->")?
+protected class Assignment_Alternatives_0 extends AlternativesToken {
+
+	public Assignment_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public Assignment_PredicatedAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getAssignmentAccess().getAlternatives_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Assignment_PredicatedAssignment_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Assignment_FirstSetPredicatedAssignment_0_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// predicated?="=>"
+protected class Assignment_PredicatedAssignment_0_0 extends AssignmentToken  {
+	
+	public Assignment_PredicatedAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getAssignmentAccess().getPredicatedAssignment_0();
+		return grammarAccess.getAssignmentAccess().getPredicatedAssignment_0_0();
 	}
 
     @Override
@@ -3888,17 +4025,51 @@ protected class Assignment_PredicatedAssignment_0 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("predicated",false)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("predicated",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("predicated");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getAssignmentAccess().getPredicatedEqualsSignGreaterThanSignKeyword_0_0();
+			element = grammarAccess.getAssignmentAccess().getPredicatedEqualsSignGreaterThanSignKeyword_0_0_0();
 			return obj;
 		}
 		return null;
 	}
 
 }
+
+// firstSetPredicated?="->"
+protected class Assignment_FirstSetPredicatedAssignment_0_1 extends AssignmentToken  {
+	
+	public Assignment_FirstSetPredicatedAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAssignmentAccess().getFirstSetPredicatedAssignment_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstSetPredicated",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstSetPredicated");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getAssignmentAccess().getFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
 
 // feature=ID
 protected class Assignment_FeatureAssignment_1 extends AssignmentToken  {
@@ -3915,7 +4086,7 @@ protected class Assignment_FeatureAssignment_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Assignment_PredicatedAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Assignment_Alternatives_0(lastRuleCallOrigin, this, 0, inst);
 			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 1, inst);
 		}	
 	}
@@ -5028,11 +5199,11 @@ protected class ParenthesizedElement_RightParenthesisKeyword_2 extends KeywordTo
 /************ begin Rule PredicatedGroup ****************
  *
  * PredicatedGroup returns Group:
- * 	predicated?="=>" "(" elements+=Alternatives ")";
+ * 	(predicated?="=>" | firstSetPredicated?="->") "(" elements+=Alternatives ")";
  *
  **/
 
-// predicated?="=>" "(" elements+=Alternatives ")"
+// (predicated?="=>" | firstSetPredicated?="->") "(" elements+=Alternatives ")"
 protected class PredicatedGroup_Group extends GroupToken {
 	
 	public PredicatedGroup_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5061,16 +5232,39 @@ protected class PredicatedGroup_Group extends GroupToken {
 
 }
 
-// predicated?="=>"
-protected class PredicatedGroup_PredicatedAssignment_0 extends AssignmentToken  {
+// predicated?="=>" | firstSetPredicated?="->"
+protected class PredicatedGroup_Alternatives_0 extends AlternativesToken {
+
+	public PredicatedGroup_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public PredicatedGroup_PredicatedAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getPredicatedGroupAccess().getAlternatives_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new PredicatedGroup_PredicatedAssignment_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new PredicatedGroup_FirstSetPredicatedAssignment_0_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// predicated?="=>"
+protected class PredicatedGroup_PredicatedAssignment_0_0 extends AssignmentToken  {
+	
+	public PredicatedGroup_PredicatedAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPredicatedGroupAccess().getPredicatedAssignment_0();
+		return grammarAccess.getPredicatedGroupAccess().getPredicatedAssignment_0_0();
 	}
 
     @Override
@@ -5086,13 +5280,47 @@ protected class PredicatedGroup_PredicatedAssignment_0 extends AssignmentToken  
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("predicated");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getPredicatedGroupAccess().getPredicatedEqualsSignGreaterThanSignKeyword_0_0();
+			element = grammarAccess.getPredicatedGroupAccess().getPredicatedEqualsSignGreaterThanSignKeyword_0_0_0();
 			return obj;
 		}
 		return null;
 	}
 
 }
+
+// firstSetPredicated?="->"
+protected class PredicatedGroup_FirstSetPredicatedAssignment_0_1 extends AssignmentToken  {
+	
+	public PredicatedGroup_FirstSetPredicatedAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getPredicatedGroupAccess().getFirstSetPredicatedAssignment_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("firstSetPredicated",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("firstSetPredicated");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getPredicatedGroupAccess().getFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
 
 // "("
 protected class PredicatedGroup_LeftParenthesisKeyword_1 extends KeywordToken  {
@@ -5109,7 +5337,7 @@ protected class PredicatedGroup_LeftParenthesisKeyword_1 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PredicatedGroup_PredicatedAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PredicatedGroup_Alternatives_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
