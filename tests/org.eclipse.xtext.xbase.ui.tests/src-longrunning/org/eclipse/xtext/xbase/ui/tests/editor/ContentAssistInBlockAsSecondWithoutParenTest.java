@@ -54,8 +54,18 @@ public class ContentAssistInBlockAsSecondWithoutParenTest extends ContentAssistI
 		newBuilder().append(";('').").assertText(getStringFeatures());
 	}
 	
-	@Test public void testOnStringLiteral_39() throws Exception {
+	@Test public void testOnStringLiteral_41() throws Exception {
 		newBuilder().append("('').").assertText();
+	}
+	
+	@Override
+	@Test public void testOnVoidMethod_01() throws Exception {
+		// effectively becomes doesNotExist(null as List).clear which is of type Unknown
+		newBuilder().append("(null as java.util.List).clear ").assertText(expect(getKeywordsAndStatics(), getVariableDeclarationKeywords(), CAST_INSTANCEOF));
+	}
+	
+	@Test public void testOnVoidMethod_02() throws Exception {
+		newBuilder().append(";(null as java.util.List).clear ").assertText(expect(getKeywordsAndStatics(), getVariableDeclarationKeywords()));
 	}
 	
 	@Override

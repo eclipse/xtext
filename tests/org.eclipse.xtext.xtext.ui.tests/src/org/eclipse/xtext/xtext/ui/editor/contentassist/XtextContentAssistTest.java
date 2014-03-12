@@ -181,6 +181,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
         		"::",
         		":",
         		"=>",
+        		"->",
         		"Feature",
         		"\"Value\"",
         		"RuleA",
@@ -329,6 +330,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"(",
 	        		"{",
 	        		"=>",
+	        		"->",
 	        		"name=");
     }
     
@@ -352,6 +354,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"(",
 	        		"{",
 	        		"=>",
+	        		"->",
 	        		"*",
 	        		"+",
 	        		";",
@@ -382,6 +385,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"(",
 	        		"{",
 	        		"=>",
+	        		"->",
 	        		"name=");
     }
     
@@ -583,6 +587,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("RuleB returns RuleA:  ;")
 	        .assertTextAtCursorPosition(" ;",
 	        		"=>",
+	        		"->",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -602,6 +607,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("RuleB returns RuleA:   feature+='y' ;")
 	        .assertTextAtCursorPosition("  feat",
 	        		"=>",
+	        		"->",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -621,6 +627,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("RuleB returns RuleA:  ;")
 	        .assertTextAtCursorPosition(" ;",
 	        		"=>",
+	        		"->",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"RuleA",
@@ -639,6 +646,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("Import:  ;")
 	        .assertTextAtCursorPosition(" ;",
 	        		"=>",
+	        		"->",
 	        		"Feature",
 	        		"\"Value\"",
 	        		"(",
