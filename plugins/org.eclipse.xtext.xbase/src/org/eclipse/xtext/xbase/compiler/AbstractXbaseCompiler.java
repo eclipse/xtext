@@ -84,9 +84,6 @@ public abstract class AbstractXbaseCompiler {
 	@Inject
 	private IEarlyExitComputer exitComputer;
 	
-	@Inject
-	private Primitives primitives;
-	
 	private IBatchTypeResolver getTypeResolver() {
 		return typeResolver;
 	}
@@ -587,14 +584,6 @@ public abstract class AbstractXbaseCompiler {
 
 	protected String makeJavaIdentifier(String name) {
 		return javaUtils.isJavaKeyword(name) ? name+"_" : name;
-	}
-	
-	protected boolean isJavaConformant(JvmTypeReference left, JvmTypeReference right, EObject context) {
-		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
-		OwnedConverter converter = new OwnedConverter(owner);
-		LightweightTypeReference convertedLeft = converter.toLightweightReference(left);
-		LightweightTypeReference convertedRight = converter.toLightweightReference(right);
-		return isJavaConformant(convertedLeft, convertedRight);
 	}
 	
 	protected boolean isJavaConformant(LightweightTypeReference left, LightweightTypeReference right) {

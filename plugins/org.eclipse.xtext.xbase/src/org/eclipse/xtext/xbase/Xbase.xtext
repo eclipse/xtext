@@ -289,7 +289,7 @@ XThrowExpression returns XExpression :
 	{XThrowExpression} 'throw' expression=XExpression;
 	
 XReturnExpression returns XExpression :
-	{XReturnExpression} 'return' (=>expression=XExpression)?;
+	{XReturnExpression} 'return' (->expression=XExpression)?;
 	
 XTryCatchFinallyExpression returns XExpression:
 	{XTryCatchFinallyExpression}
