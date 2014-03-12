@@ -8,12 +8,10 @@
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
 import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
-import org.junit.Ignore;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=430022")
 @SuppressWarnings("all")
 public class ContentAssistReturnTest2 extends ContentAssistTest {
   protected String getPrefix() {

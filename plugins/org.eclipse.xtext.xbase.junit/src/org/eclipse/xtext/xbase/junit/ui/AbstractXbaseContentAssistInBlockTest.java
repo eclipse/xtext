@@ -83,6 +83,11 @@ public abstract class AbstractXbaseContentAssistInBlockTest extends AbstractXbas
 	}
 	
 	@Override
+	@Test public void testOnVoidMethod_01() throws Exception {
+		newBuilder().append("(null as java.util.List).clear ").assertText(expect(getKeywordsAndStatics(), getVariableDeclarationKeywords()));
+	}
+	
+	@Override
 	@Test public void testAfterBinaryOperation_01() throws Exception {
 		newBuilder().append("''+''").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF, getKeywordsAndStatics(), getVariableDeclarationKeywords()));
 	}

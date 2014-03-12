@@ -7,15 +7,13 @@
  */
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
-import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
-import org.junit.Ignore;
+import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistInBlockTest;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=430022")
 @SuppressWarnings("all")
-public class ContentAssistReturnTest4 extends ContentAssistTest {
+public class ContentAssistReturnTest4 extends ContentAssistInBlockTest {
   protected String getPrefix() {
     return "{ return ";
   }

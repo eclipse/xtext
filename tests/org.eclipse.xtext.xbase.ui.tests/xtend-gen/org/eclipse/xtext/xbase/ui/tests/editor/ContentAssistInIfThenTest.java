@@ -52,4 +52,10 @@ public class ContentAssistInIfThenTest extends ContentAssistTest {
     String[] _expect = this.expect(AbstractXbaseContentAssistTest.STRING_OPERATORS, new String[] { "as", "instanceof" });
     _append.assertTextAtCursorPosition("))", _expect);
   }
+  
+  public void testOnVoidMethod_01() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append("(null as java.util.List).clear ");
+    _append.assertText("else");
+  }
 }

@@ -2983,10 +2983,10 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpressionXExpressionParserRuleCall_2_0 = (RuleCall)cExpressionAssignment_2.eContents().get(0);
 		
 		//XReturnExpression returns XExpression:
-		//	{XReturnExpression} "return" => expression=XExpression?;
+		//	{XReturnExpression} "return" -> expression=XExpression?;
 		public ParserRule getRule() { return rule; }
 
-		//{XReturnExpression} "return" => expression=XExpression?
+		//{XReturnExpression} "return" -> expression=XExpression?
 		public Group getGroup() { return cGroup; }
 
 		//{XReturnExpression}
@@ -2995,7 +2995,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//"return"
 		public Keyword getReturnKeyword_1() { return cReturnKeyword_1; }
 
-		//=> expression=XExpression?
+		//-> expression=XExpression?
 		public Assignment getExpressionAssignment_2() { return cExpressionAssignment_2; }
 
 		//XExpression
@@ -3961,7 +3961,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XReturnExpression returns XExpression:
-	//	{XReturnExpression} "return" => expression=XExpression?;
+	//	{XReturnExpression} "return" -> expression=XExpression?;
 	public XReturnExpressionElements getXReturnExpressionAccess() {
 		return (pXReturnExpression != null) ? pXReturnExpression : (pXReturnExpression = new XReturnExpressionElements());
 	}

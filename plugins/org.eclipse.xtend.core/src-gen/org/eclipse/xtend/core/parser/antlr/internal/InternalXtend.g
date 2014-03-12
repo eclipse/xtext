@@ -8932,11 +8932,54 @@ ruleXReturnExpression returns [EObject current=null]
     {
     	newLeafNode(otherlv_1, grammarAccess.getXReturnExpressionAccess().getReturnKeyword_1());
     }
-((
-(
-ruleXExpression
-)
-)=>
+((	'abstract' 
+ | 	'annotation' 
+ | 	'class' 
+ | 	'create' 
+ | 	'def' 
+ | 	'dispatch' 
+ | 	'enum' 
+ | 	'extends' 
+ | 	'final' 
+ | 	'implements' 
+ | 	'import' 
+ | 	'interface' 
+ | 	'override' 
+ | 	'package' 
+ | 	'public' 
+ | 	'private' 
+ | 	'protected' 
+ | 	'static' 
+ | 	'throws' 
+ | 	'strictfp' 
+ | 	'native' 
+ | 	'volatile' 
+ | 	'synchronized' 
+ | 	'transient' 
+ | 	'extension' 
+ | 	'!' 
+ | 	'-' 
+ | 	'+' 
+ | 	'new' 
+ | 	'{' 
+ | 	'switch' 
+ | 	'<' 
+ | 	'super' 
+ | 	'#' 
+ | 	'[' 
+ | 	'false' 
+ | 	'true' 
+ | 	'null' 
+ | 	'typeof' 
+ | 	'if' 
+ | 	'for' 
+ | 	'while' 
+ | 	'do' 
+ | 	'throw' 
+ | 	'return' 
+ | 	'try' 
+ | 	'(' 
+ | 	RULE_ID | 	RULE_HEX | 	RULE_INT | 	RULE_DECIMAL | 	RULE_STRING | 	RULE_RICH_TEXT | 	RULE_RICH_TEXT_START)=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getXReturnExpressionAccess().getExpressionXExpressionParserRuleCall_2_0()); 

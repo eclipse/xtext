@@ -233,9 +233,30 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Override
 	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
-		if (isKeywordWorthyToPropose(keyword)) { 
+		if (isKeywordWorthyToPropose(keyword, contentAssistContext)) { 
 			super.completeKeyword(keyword, contentAssistContext, acceptor);
 		}
+	}
+	
+	protected boolean isKeywordWorthyToPropose(Keyword keyword, ContentAssistContext context) {
+		if (isKeywordWorthyToPropose(keyword)) {
+			if ("as".equals(keyword.getValue()) || "instanceof".equals(keyword.getValue())) {
+				EObject previousModel = context.getPreviousModel();
+				if (previousModel instanceof XExpression) {
+					if (context.getPrefix().length() == 0) {
+						if (NodeModelUtils.getNode(previousModel).getEndOffset() > context.getOffset()) {
+							return false;
+						}
+					}
+					LightweightTypeReference type = typeResolver.resolveTypes(previousModel).getActualType((XExpression) previousModel);
+					if (type == null || type.isPrimitiveVoid()) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 
 	protected boolean isKeywordWorthyToPropose(Keyword keyword) {
@@ -505,6 +526,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		String ruleName = getConcreteSyntaxRuleName(crossReference);
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(ruleName, contentAssistContext);
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(receiver);
+		LightweightTypeReference receiverType = resolvedTypes.getActualType(receiver);
+		if (receiverType == null || receiverType.isPrimitiveVoid()) {
+			return;
+		}
 		IExpressionScope expressionScope = resolvedTypes.getExpressionScope(receiver, IExpressionScope.Anchor.RECEIVER);
 		// TODO exploit the type name information
 		IScope scope;

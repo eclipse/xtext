@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.ui.tests.editor
 
 import org.junit.AfterClass
 import org.junit.BeforeClass
-import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -49,6 +48,9 @@ class ContentAssistInIfThenTest extends ContentAssistTest {
 	}
 	override testAfterBinaryOperation_07() throws Exception {
 		newBuilder().append("((''+''))").assertTextAtCursorPosition("))", expect(STRING_OPERATORS, #['as', 'instanceof']));
+	}
+	override testOnVoidMethod_01() throws Exception {
+		newBuilder().append("(null as java.util.List).clear ").assertText('else');
 	}
 	
 }
@@ -118,7 +120,6 @@ class ContentAssistInIfElseTest3 extends ContentAssistInBlockTest {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Ignore('https://bugs.eclipse.org/bugs/show_bug.cgi?id=430022')
 class ContentAssistReturnTest extends ContentAssistTest {
 	override protected getPrefix() {
 		return "return"
@@ -128,7 +129,6 @@ class ContentAssistReturnTest extends ContentAssistTest {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Ignore('https://bugs.eclipse.org/bugs/show_bug.cgi?id=430022')
 class ContentAssistReturnTest2 extends ContentAssistTest {
 	override protected getPrefix() {
 		return "return ("
@@ -142,7 +142,6 @@ class ContentAssistReturnTest2 extends ContentAssistTest {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Ignore('https://bugs.eclipse.org/bugs/show_bug.cgi?id=430022')
 class ContentAssistReturnTest3 extends ContentAssistInBlockTest {
 	override protected getPrefix() {
 		return "return {"
@@ -156,8 +155,7 @@ class ContentAssistReturnTest3 extends ContentAssistInBlockTest {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Ignore('https://bugs.eclipse.org/bugs/show_bug.cgi?id=430022')
-class ContentAssistReturnTest4 extends ContentAssistTest {
+class ContentAssistReturnTest4 extends ContentAssistInBlockTest {
 	override protected getPrefix() {
 		return "{ return "
 	}

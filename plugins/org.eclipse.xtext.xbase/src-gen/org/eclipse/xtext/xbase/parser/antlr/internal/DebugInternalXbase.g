@@ -570,7 +570,38 @@ ruleXThrowExpression :
 // Rule XReturnExpression
 ruleXReturnExpression :
 	'return' ( (
-	ruleXExpression
+	'extends' |
+	'static' |
+	'import' |
+	'extension' |
+	'!' |
+	'-' |
+	'+' |
+	'new' |
+	'{' |
+	'switch' |
+	'synchronized' |
+	'<' |
+	'super' |
+	'#' |
+	'[' |
+	'false' |
+	'true' |
+	'null' |
+	'typeof' |
+	'if' |
+	'for' |
+	'while' |
+	'do' |
+	'throw' |
+	'return' |
+	'try' |
+	'(' |
+	RULE_ID |
+	RULE_HEX |
+	RULE_INT |
+	RULE_DECIMAL |
+	RULE_STRING
 	) => ruleXExpression )?
 ;
 
