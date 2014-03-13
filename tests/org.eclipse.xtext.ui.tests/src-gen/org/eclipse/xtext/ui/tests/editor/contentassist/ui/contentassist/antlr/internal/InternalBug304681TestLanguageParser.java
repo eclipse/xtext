@@ -19398,7 +19398,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
     static final String DFA13_acceptS =
         "\1\uffff\1\2\12\uffff\1\1\15\uffff";
     static final String DFA13_specialS =
-        "\11\uffff\1\0\1\uffff\1\2\3\uffff\1\1\12\uffff}>";
+        "\11\uffff\1\0\1\uffff\1\1\3\uffff\1\2\12\uffff}>";
     static final String[] DFA13_transitionS = {
             "\1\1\1\uffff\4\1\1\uffff\2\1\1\2\1\3\5\uffff\1\1",
             "",
@@ -19480,21 +19480,6 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA13_15 = input.LA(1);
-
-                         
-                        int index13_15 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred13_InternalBug304681TestLanguage()) ) {s = 12;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index13_15);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA13_11 = input.LA(1);
 
                          
@@ -19507,6 +19492,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                          
                         input.seek(index13_11);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA13_15 = input.LA(1);
+
+                         
+                        int index13_15 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred13_InternalBug304681TestLanguage()) ) {s = 12;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index13_15);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -19530,7 +19530,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
     static final String DFA14_acceptS =
         "\1\uffff\1\2\12\uffff\1\1\15\uffff";
     static final String DFA14_specialS =
-        "\11\uffff\1\1\1\uffff\1\0\3\uffff\1\2\12\uffff}>";
+        "\11\uffff\1\2\1\uffff\1\0\3\uffff\1\1\12\uffff}>";
     static final String[] DFA14_transitionS = {
             "\1\1\1\uffff\4\1\1\uffff\2\1\1\2\1\3\5\uffff\1\1",
             "",
@@ -19612,21 +19612,6 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA14_9 = input.LA(1);
-
-                         
-                        int index14_9 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred14_InternalBug304681TestLanguage()) ) {s = 12;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index14_9);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA14_15 = input.LA(1);
 
                          
@@ -19639,6 +19624,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                          
                         input.seek(index14_15);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA14_9 = input.LA(1);
+
+                         
+                        int index14_9 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred14_InternalBug304681TestLanguage()) ) {s = 12;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index14_9);
                         if ( s>=0 ) return s;
                         break;
             }

@@ -27,8 +27,8 @@ public class InternalBug287941TestLanguageLexer extends Lexer {
     public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=9;
     public static final int RULE_ML_COMMENT=8;
-    public static final int T__30=30;
     public static final int T__19=19;
+    public static final int T__30=30;
     public static final int T__31=31;
     public static final int T__32=32;
     public static final int RULE_STRING=4;

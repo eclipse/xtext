@@ -7019,11 +7019,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         state.failed=false;
         return success;
     }
-    public final boolean synpred14_InternalBug304681TestLanguage() {
+    public final boolean synpred39_InternalBug304681TestLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred14_InternalBug304681TestLanguage_fragment(); // can never throw exception
+            synpred39_InternalBug304681TestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -7033,11 +7033,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         state.failed=false;
         return success;
     }
-    public final boolean synpred39_InternalBug304681TestLanguage() {
+    public final boolean synpred14_InternalBug304681TestLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred39_InternalBug304681TestLanguage_fragment(); // can never throw exception
+            synpred14_InternalBug304681TestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

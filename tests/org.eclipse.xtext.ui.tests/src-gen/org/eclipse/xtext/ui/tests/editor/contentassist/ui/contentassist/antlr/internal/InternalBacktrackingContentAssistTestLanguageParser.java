@@ -43278,11 +43278,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         state.failed=false;
         return success;
     }
-    public final boolean synpred72_InternalBacktrackingContentAssistTestLanguage() {
+    public final boolean synpred117_InternalBacktrackingContentAssistTestLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred72_InternalBacktrackingContentAssistTestLanguage_fragment(); // can never throw exception
+            synpred117_InternalBacktrackingContentAssistTestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -43292,11 +43292,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         state.failed=false;
         return success;
     }
-    public final boolean synpred117_InternalBacktrackingContentAssistTestLanguage() {
+    public final boolean synpred72_InternalBacktrackingContentAssistTestLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred117_InternalBacktrackingContentAssistTestLanguage_fragment(); // can never throw exception
+            synpred72_InternalBacktrackingContentAssistTestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
