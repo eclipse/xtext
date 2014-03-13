@@ -66,40 +66,40 @@ public class DebugGraphGenerator {
   private SyntacticSequencerPDA2ExtendedDot syntacticSequencerPDA2Dot;
   
   @Inject
-  private PdaToDot<?,?> pdaToDot;
+  private PdaToDot<?, ?> pdaToDot;
   
   @Inject
   private NfaToDot<?> nfaToDot;
   
-  public Iterable<Pair<String,String>> generateDebugGraphs() {
-    ArrayList<Pair<String,String>> _xblockexpression = null;
+  public Iterable<Pair<String, String>> generateDebugGraphs() {
+    ArrayList<Pair<String, String>> _xblockexpression = null;
     {
-      final ArrayList<Pair<String,String>> result = CollectionLiterals.<Pair<String,String>>newArrayList();
+      final ArrayList<Pair<String, String>> result = CollectionLiterals.<Pair<String, String>>newArrayList();
       List<EObject> _allContexts = this.contextProvider.getAllContexts(this.grammar);
       for (final EObject context : _allContexts) {
         try {
           String _file = this.file("context", context);
-          Pda<ISerState,RuleCall> _contextPDA = this.contextPDAProvider.getContextPDA(context);
+          Pda<ISerState, RuleCall> _contextPDA = this.contextPDAProvider.getContextPDA(context);
           String _draw = this.pdaToDot.draw(_contextPDA);
-          Pair<String,String> _mappedTo = Pair.<String, String>of(_file, _draw);
+          Pair<String, String> _mappedTo = Pair.<String, String>of(_file, _draw);
           result.add(_mappedTo);
           Set<EClass> _typesForContext = this.contextProvider.getTypesForContext(context);
           for (final EClass type : _typesForContext) {
             try {
               String _file_1 = this.file("context_type", context, type);
-              Pda<ISerState,RuleCall> _contextTypePDA = this.contextTypePDAProvider.getContextTypePDA(context, type);
+              Pda<ISerState, RuleCall> _contextTypePDA = this.contextTypePDAProvider.getContextTypePDA(context, type);
               String _draw_1 = this.pdaToDot.draw(_contextTypePDA);
-              Pair<String,String> _mappedTo_1 = Pair.<String, String>of(_file_1, _draw_1);
+              Pair<String, String> _mappedTo_1 = Pair.<String, String>of(_file_1, _draw_1);
               result.add(_mappedTo_1);
               String _file_2 = this.file("syntactic_sequencer", context, type);
               ISyntacticSequencerPDAProvider.ISynAbsorberState _pDA = this.syntacticSequencerPDAProvider.getPDA(context, type);
               String _draw_2 = this.syntacticSequencerPDA2Dot.draw(_pDA);
-              Pair<String,String> _mappedTo_2 = Pair.<String, String>of(_file_2, _draw_2);
+              Pair<String, String> _mappedTo_2 = Pair.<String, String>of(_file_2, _draw_2);
               result.add(_mappedTo_2);
               String _file_3 = this.file("semantic_sequencer", context, type);
               Nfa<ISemanticSequencerNfaProvider.ISemState> _nFA = this.semanticSequencerNFAProvider.getNFA(context, type);
               String _draw_3 = this.nfaToDot.draw(_nFA);
-              Pair<String,String> _mappedTo_3 = Pair.<String, String>of(_file_3, _draw_3);
+              Pair<String, String> _mappedTo_3 = Pair.<String, String>of(_file_3, _draw_3);
               result.add(_mappedTo_3);
             } catch (final Throwable _t) {
               if (_t instanceof Throwable) {

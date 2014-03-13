@@ -29,9 +29,9 @@ public class LightweightTraversalData {
     return this._visited;
   }
   
-  private final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _typeParameterMapping = CollectionLiterals.<JvmTypeParameter, LightweightMergedBoundTypeArgument>newLinkedHashMap();
+  private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _typeParameterMapping = CollectionLiterals.<JvmTypeParameter, LightweightMergedBoundTypeArgument>newLinkedHashMap();
   
-  public Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> getTypeParameterMapping() {
+  public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping() {
     return this._typeParameterMapping;
   }
   

@@ -12,8 +12,8 @@ import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public class Xbase01_Literals {
-  public Map<String,String> myMethod() throws Throwable {
-    Map<String,String> _xblockexpression = null;
+  public Map<String, String> myMethod() throws Throwable {
+    Map<String, String> _xblockexpression = null;
     {
       /* null */
       /* "Hello World" */
@@ -28,9 +28,9 @@ public class Xbase01_Literals {
       /* Map.Entry.class */
       /* CollectionLiterals.<Integer>newArrayList(Integer.valueOf(3), Integer.valueOf(5), Integer.valueOf(7)); */
       /* CollectionLiterals.<String>newHashSet("foo", "bar", "baz"); */
-      Pair<Integer,String> _mappedTo = Pair.<Integer, String>of(Integer.valueOf(1), "one");
-      Pair<Integer,String> _mappedTo_1 = Pair.<Integer, String>of(Integer.valueOf(2), "two");
-      Pair<Integer,String> _mappedTo_2 = Pair.<Integer, String>of(Integer.valueOf(3), "three");
+      Pair<Integer, String> _mappedTo = Pair.<Integer, String>of(Integer.valueOf(1), "one");
+      Pair<Integer, String> _mappedTo_1 = Pair.<Integer, String>of(Integer.valueOf(2), "two");
+      Pair<Integer, String> _mappedTo_2 = Pair.<Integer, String>of(Integer.valueOf(3), "three");
       /* CollectionLiterals.<Integer, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2); */
       String[] stringArray = { "a", "b", "c" };
       /* stringArray[1]; */
@@ -38,13 +38,13 @@ public class Xbase01_Literals {
       /* listOfStrings; */
       Set<String> setOfStrings = Collections.<String>unmodifiableSet(Sets.<String>newHashSet("a", "b", "c"));
       /* setOfStrings; */
-      Map<String,String> _xsetliteral = null;
-      Map<String,String> _tempMap = Maps.<String, String>newHashMap();
+      Map<String, String> _xsetliteral = null;
+      Map<String, String> _tempMap = Maps.<String, String>newHashMap();
       _tempMap.put("a", "A");
       _tempMap.put("b", "B");
       _tempMap.put("c", "C");
       _xsetliteral = Collections.<String, String>unmodifiableMap(_tempMap);
-      Map<String,String> immutableMap = _xsetliteral;
+      Map<String, String> immutableMap = _xsetliteral;
       _xblockexpression = immutableMap;
     }
     return _xblockexpression;

@@ -73,7 +73,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
       if (_isAllowIdentityEdits) {
         _xifexpression = edits;
       } else {
-        final Function1<TextReplacement,Boolean> _function = new Function1<TextReplacement,Boolean>() {
+        final Function1<TextReplacement, Boolean> _function = new Function1<TextReplacement, Boolean>() {
           public Boolean apply(final TextReplacement it) {
             int _offset = it.getOffset();
             int _offset_1 = it.getOffset();

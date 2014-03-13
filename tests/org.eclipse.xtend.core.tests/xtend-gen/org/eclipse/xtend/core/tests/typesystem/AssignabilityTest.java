@@ -182,39 +182,39 @@ public class AssignabilityTest extends CommonAssignabilityTest {
   
   @Test
   public void testTypeParameter_08() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("Iterable<T>", "T extends CharSequence");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("Iterable<T>", "T extends CharSequence");
     this.isNotAssignableFrom(_mappedTo, "org.eclipse.xtend.core.tests.typesystem.CharIterable<String>");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("Iterable<T>", "T extends CharSequence");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("Iterable<T>", "T extends CharSequence");
     this.isNotAssignableFrom(_mappedTo_1, "org.eclipse.xtend.core.tests.typesystem.CharIterable<CharSequence>");
-    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("Iterable<T>", "T extends CharSequence");
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("Iterable<T>", "T extends CharSequence");
     this.isNotAssignableFrom(_mappedTo_2, "org.eclipse.xtend.core.tests.typesystem.CharIterable<? extends CharSequence>");
-    Pair<String,String> _mappedTo_3 = Pair.<String, String>of("Iterable<? extends T>", "T extends CharSequence");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("Iterable<? extends T>", "T extends CharSequence");
     this.isNotAssignableFrom(_mappedTo_3, "org.eclipse.xtend.core.tests.typesystem.CharIterable<String>");
-    Pair<String,String> _mappedTo_4 = Pair.<String, String>of("Iterable<? extends T>", "T extends CharSequence");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("Iterable<? extends T>", "T extends CharSequence");
     this.isNotAssignableFrom(_mappedTo_4, "org.eclipse.xtend.core.tests.typesystem.CharIterable<CharSequence>");
-    Pair<String,String> _mappedTo_5 = Pair.<String, String>of("Iterable<? extends T>", "T extends CharSequence");
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("Iterable<? extends T>", "T extends CharSequence");
     this.isNotAssignableFrom(_mappedTo_5, "org.eclipse.xtend.core.tests.typesystem.CharIterable<? extends CharSequence>");
-    Pair<String,String> _mappedTo_6 = Pair.<String, String>of("Iterable<T>", "T extends CharSequence");
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("Iterable<T>", "T extends CharSequence");
     this.isAssignableFrom(_mappedTo_6, "org.eclipse.xtend.core.tests.typesystem.CharIterable");
-    Pair<String,String> _mappedTo_7 = Pair.<String, String>of("Iterable<T>", "T extends Number");
+    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("Iterable<T>", "T extends Number");
     this.isAssignableFrom(_mappedTo_7, "org.eclipse.xtend.core.tests.typesystem.CharIterable");
   }
   
   @Test
   public void testTwoTypeParameters_02() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("Iterable<T>", "T, V extends T");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("Iterable<T>", "T, V extends T");
     this.isNotAssignableFrom(_mappedTo, "Iterable<V>");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("Iterable<? extends T>", "T, V extends T");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("Iterable<? extends T>", "T, V extends T");
     this.isAssignableFrom(_mappedTo_1, "Iterable<V>");
-    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("Iterable<? extends T>", "T, V extends T");
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("Iterable<? extends T>", "T, V extends T");
     this.isAssignableFrom(_mappedTo_2, "Iterable<? extends V>");
   }
   
   @Test
   public void testTwoTypeParameters_03() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("Iterable<? super V>", "T, V extends T");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("Iterable<? super V>", "T, V extends T");
     this.isAssignableFrom(_mappedTo, "Iterable<? super T>");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("Iterable<? super T>", "T, V extends T");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("Iterable<? super T>", "T, V extends T");
     this.isNotAssignableFrom(_mappedTo_1, "Iterable<? super V>");
   }
   
@@ -241,9 +241,9 @@ public class AssignabilityTest extends CommonAssignabilityTest {
   
   @Test
   public void testFunctionTypes_07() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("(T)=>T", "T extends Integer");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("(T)=>T", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo, "(Integer)=>Integer");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("(T)=>T", "T extends Integer");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("(T)=>T", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo_1, "(int)=>int");
   }
   
@@ -300,21 +300,21 @@ public class AssignabilityTest extends CommonAssignabilityTest {
   
   @Test
   public void testFunctionTypeAsParameterized_07() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("$Function1<T, T>", "T extends Integer");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("$Function1<T, T>", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo, "(Integer)=>Integer");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("$Function1<? super T, T>", "T extends Integer");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("$Function1<? super T, T>", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo_1, "(Integer)=>Integer");
-    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("$Function1<T, ? extends T>", "T extends Integer");
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("$Function1<T, ? extends T>", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo_2, "(Integer)=>Integer");
-    Pair<String,String> _mappedTo_3 = Pair.<String, String>of("$Function1<? super T, ? extends T>", "T extends Integer");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("$Function1<? super T, ? extends T>", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo_3, "(Integer)=>Integer");
-    Pair<String,String> _mappedTo_4 = Pair.<String, String>of("$Function1<T, T>", "T extends Integer");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("$Function1<T, T>", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo_4, "(int)=>int");
-    Pair<String,String> _mappedTo_5 = Pair.<String, String>of("$Function1<? super T, T>", "T extends Integer");
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("$Function1<? super T, T>", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo_5, "(int)=>int");
-    Pair<String,String> _mappedTo_6 = Pair.<String, String>of("$Function1<T, ? extends T>", "T extends Integer");
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("$Function1<T, ? extends T>", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo_6, "(int)=>int");
-    Pair<String,String> _mappedTo_7 = Pair.<String, String>of("$Function1<? super T, ? extends T>", "T extends Integer");
+    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("$Function1<? super T, ? extends T>", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo_7, "(int)=>int");
   }
   
@@ -362,13 +362,13 @@ public class AssignabilityTest extends CommonAssignabilityTest {
   
   @Test
   public void testFunctionTypeAsParameterized_14() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("(T)=>T", "T extends Integer");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("(T)=>T", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo, "$Function1<Integer, Integer>");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("(T)=>T", "T extends Integer");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("(T)=>T", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo_1, "$Function1<? super Integer, Integer>");
-    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("(T)=>T", "T extends Integer");
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("(T)=>T", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo_2, "$Function1<Integer, ? extends Integer>");
-    Pair<String,String> _mappedTo_3 = Pair.<String, String>of("(T)=>T", "T extends Integer");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("(T)=>T", "T extends Integer");
     this.isNotAssignableFrom(_mappedTo_3, "$Function1<? super Integer, ? extends Integer>");
   }
   

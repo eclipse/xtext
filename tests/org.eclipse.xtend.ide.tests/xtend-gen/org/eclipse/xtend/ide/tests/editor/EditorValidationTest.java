@@ -107,7 +107,7 @@ public class EditorValidationTest extends AbstractXtendUITestCase {
       _document_1.set(content);
       this._syncUtil.waitForReconciler(editor);
       IXtextDocument _document_2 = editor.getDocument();
-      final IUnitOfWork<Object,XtextResource> _function = new IUnitOfWork<Object,XtextResource>() {
+      final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
         public Object exec(final XtextResource it) throws Exception {
           final CancelIndicator _function = new CancelIndicator() {
             public boolean isCanceled() {
@@ -176,7 +176,7 @@ public class EditorValidationTest extends AbstractXtendUITestCase {
       _document.set(contentWithoutBar);
       this._syncUtil.waitForReconciler(editor);
       IXtextDocument _document_1 = editor.getDocument();
-      final IUnitOfWork<Object,XtextResource> _function = new IUnitOfWork<Object,XtextResource>() {
+      final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
         public Object exec(final XtextResource it) throws Exception {
           final CancelIndicator _function = new CancelIndicator() {
             public boolean isCanceled() {
@@ -195,7 +195,7 @@ public class EditorValidationTest extends AbstractXtendUITestCase {
       _document_2.set((contentWithoutBar + bar));
       this._syncUtil.waitForReconciler(editor);
       IXtextDocument _document_3 = editor.getDocument();
-      final IUnitOfWork<Object,XtextResource> _function_1 = new IUnitOfWork<Object,XtextResource>() {
+      final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
         public Object exec(final XtextResource it) throws Exception {
           final CancelIndicator _function = new CancelIndicator() {
             public boolean isCanceled() {

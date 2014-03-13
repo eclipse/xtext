@@ -1203,7 +1203,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
       try {
         IXtextDocument _document = editor.getDocument();
-        final IUnitOfWork<Change,XtextResource> _function = new IUnitOfWork<Change,XtextResource>() {
+        final IUnitOfWork<Change, XtextResource> _function = new IUnitOfWork<Change, XtextResource>() {
           public Change exec(final XtextResource it) throws Exception {
             Change _xblockexpression = null;
             {
@@ -1258,7 +1258,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
       try {
         IXtextDocument _document = editor.getDocument();
-        final IUnitOfWork<String,XtextResource> _function = new IUnitOfWork<String,XtextResource>() {
+        final IUnitOfWork<String, XtextResource> _function = new IUnitOfWork<String, XtextResource>() {
           public String exec(final XtextResource it) throws Exception {
             String _xblockexpression = null;
             {

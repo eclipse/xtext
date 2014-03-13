@@ -122,7 +122,7 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
     String _simpleName = _resolvedReturnType.getSimpleName();
     Assert.assertEquals("CharSequence", _simpleName);
     List<JvmTypeParameter> _resolvedTypeParameters = operation.getResolvedTypeParameters();
-    final Function1<JvmTypeParameter,String> _function = new Function1<JvmTypeParameter,String>() {
+    final Function1<JvmTypeParameter, String> _function = new Function1<JvmTypeParameter, String>() {
       public String apply(final JvmTypeParameter it) {
         return it.getSimpleName();
       }
@@ -130,7 +130,7 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
     String _join = IterableExtensions.<JvmTypeParameter>join(_resolvedTypeParameters, ", ", _function);
     Assert.assertEquals("V, K", _join);
     List<LightweightTypeReference> _resolvedTypeArguments = operation.getResolvedTypeArguments();
-    final Function1<LightweightTypeReference,String> _function_1 = new Function1<LightweightTypeReference,String>() {
+    final Function1<LightweightTypeReference, String> _function_1 = new Function1<LightweightTypeReference, String>() {
       public String apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }
@@ -148,7 +148,7 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
     String _simpleName = _resolvedReturnType.getSimpleName();
     Assert.assertEquals("ArrayList<Number & Comparable<?>>", _simpleName);
     List<LightweightTypeReference> _resolvedTypeArguments = operation.getResolvedTypeArguments();
-    final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
+    final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
       public String apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }
@@ -166,7 +166,7 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
     String _simpleName = _resolvedReturnType.getSimpleName();
     Assert.assertEquals("List<? extends String>", _simpleName);
     List<LightweightTypeReference> _resolvedTypeArguments = operation.getResolvedTypeArguments();
-    final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
+    final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
       public String apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }
@@ -184,7 +184,7 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
     String _simpleName = _resolvedReturnType.getSimpleName();
     Assert.assertEquals("String", _simpleName);
     List<JvmTypeParameter> _resolvedTypeParameters = operation.getResolvedTypeParameters();
-    final Function1<JvmTypeParameter,String> _function = new Function1<JvmTypeParameter,String>() {
+    final Function1<JvmTypeParameter, String> _function = new Function1<JvmTypeParameter, String>() {
       public String apply(final JvmTypeParameter it) {
         return it.getSimpleName();
       }
@@ -192,7 +192,7 @@ public class InvokedResolvedOperationTest extends AbstractXbaseTestCase {
     String _join = IterableExtensions.<JvmTypeParameter>join(_resolvedTypeParameters, ", ", _function);
     Assert.assertEquals("V, K", _join);
     List<LightweightTypeReference> _resolvedTypeArguments = operation.getResolvedTypeArguments();
-    final Function1<LightweightTypeReference,String> _function_1 = new Function1<LightweightTypeReference,String>() {
+    final Function1<LightweightTypeReference, String> _function_1 = new Function1<LightweightTypeReference, String>() {
       public String apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }

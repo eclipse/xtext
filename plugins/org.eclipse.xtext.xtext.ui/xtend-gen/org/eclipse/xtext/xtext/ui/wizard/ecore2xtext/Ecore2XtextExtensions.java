@@ -42,7 +42,7 @@ public class Ecore2XtextExtensions {
     boolean _equals = Objects.equal(_rootElementClass, null);
     if (_equals) {
       Collection<EPackageInfo> _ePackageInfos = it.getEPackageInfos();
-      final Function1<EPackageInfo,Set<EClassifier>> _function = new Function1<EPackageInfo,Set<EClassifier>>() {
+      final Function1<EPackageInfo, Set<EClassifier>> _function = new Function1<EPackageInfo, Set<EClassifier>>() {
         public Set<EClassifier> apply(final EPackageInfo it) {
           EPackage _ePackage = it.getEPackage();
           return Ecore2XtextExtensions.allReferencedClassifiers(_ePackage, false);
@@ -51,7 +51,7 @@ public class Ecore2XtextExtensions {
       Iterable<Set<EClassifier>> _map = IterableExtensions.<EPackageInfo, Set<EClassifier>>map(_ePackageInfos, _function);
       Iterable<EClassifier> _flatten = Iterables.<EClassifier>concat(_map);
       Set<EClassifier> _set = IterableExtensions.<EClassifier>toSet(_flatten);
-      final Function1<EClassifier,Boolean> _function_1 = new Function1<EClassifier,Boolean>() {
+      final Function1<EClassifier, Boolean> _function_1 = new Function1<EClassifier, Boolean>() {
         public Boolean apply(final EClassifier it) {
           return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(it));
         }
@@ -65,7 +65,7 @@ public class Ecore2XtextExtensions {
         final ArrayList<EClassifier> c = CollectionLiterals.<EClassifier>newArrayList(_cast);
         EClass _rootElementClass_2 = it.getRootElementClass();
         Ecore2XtextExtensions.allAssignedClassifiers(_rootElementClass_2, c);
-        final Function1<EClassifier,Boolean> _function_2 = new Function1<EClassifier,Boolean>() {
+        final Function1<EClassifier, Boolean> _function_2 = new Function1<EClassifier, Boolean>() {
           public Boolean apply(final EClassifier cl) {
             return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(cl));
           }
@@ -90,7 +90,7 @@ public class Ecore2XtextExtensions {
     boolean _equals = Objects.equal(_rootElementClass, null);
     if (_equals) {
       Collection<EPackageInfo> _ePackageInfos = it.getEPackageInfos();
-      final Function1<EPackageInfo,Set<EClassifier>> _function = new Function1<EPackageInfo,Set<EClassifier>>() {
+      final Function1<EPackageInfo, Set<EClassifier>> _function = new Function1<EPackageInfo, Set<EClassifier>>() {
         public Set<EClassifier> apply(final EPackageInfo it) {
           EPackage _ePackage = it.getEPackage();
           return Ecore2XtextExtensions.allReferencedClassifiers(_ePackage, false);
@@ -99,7 +99,7 @@ public class Ecore2XtextExtensions {
       Iterable<Set<EClassifier>> _map = IterableExtensions.<EPackageInfo, Set<EClassifier>>map(_ePackageInfos, _function);
       Iterable<EClassifier> _flatten = Iterables.<EClassifier>concat(_map);
       Set<EClassifier> _set = IterableExtensions.<EClassifier>toSet(_flatten);
-      final Function1<EClassifier,Boolean> _function_1 = new Function1<EClassifier,Boolean>() {
+      final Function1<EClassifier, Boolean> _function_1 = new Function1<EClassifier, Boolean>() {
         public Boolean apply(final EClassifier c) {
           return Boolean.valueOf(Ecore2XtextExtensions.needsDispatcherRule(c));
         }
@@ -110,16 +110,16 @@ public class Ecore2XtextExtensions {
     } else {
       Iterable<EClassifier> _allConcreteRuleClassifiers = Ecore2XtextExtensions.allConcreteRuleClassifiers(it);
       Iterable<EClass> _filter_2 = Iterables.<EClass>filter(_allConcreteRuleClassifiers, EClass.class);
-      final Function1<EClass,Iterable<EClassifier>> _function_2 = new Function1<EClass,Iterable<EClassifier>>() {
+      final Function1<EClass, Iterable<EClassifier>> _function_2 = new Function1<EClass, Iterable<EClassifier>>() {
         public Iterable<EClassifier> apply(final EClass c) {
           EList<EReference> _eAllReferences = c.getEAllReferences();
-          final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
+          final Function1<EReference, Boolean> _function = new Function1<EReference, Boolean>() {
             public Boolean apply(final EReference r) {
               return Boolean.valueOf(Ecore2XtextExtensions.needsAssignment(r));
             }
           };
           Iterable<EReference> _filter = IterableExtensions.<EReference>filter(_eAllReferences, _function);
-          final Function1<EReference,EClassifier> _function_1 = new Function1<EReference,EClassifier>() {
+          final Function1<EReference, EClassifier> _function_1 = new Function1<EReference, EClassifier>() {
             public EClassifier apply(final EReference it) {
               return it.getEType();
             }
@@ -141,7 +141,7 @@ public class Ecore2XtextExtensions {
    */
   public static Collection<EPackage> allReferencedEPackages(final Ecore2XtextProjectInfo prjInfo) {
     Collection<EPackageInfo> _ePackageInfos = prjInfo.getEPackageInfos();
-    final Function1<EPackageInfo,Set<EPackage>> _function = new Function1<EPackageInfo,Set<EPackage>>() {
+    final Function1<EPackageInfo, Set<EPackage>> _function = new Function1<EPackageInfo, Set<EPackage>>() {
       public Set<EPackage> apply(final EPackageInfo it) {
         EPackage _ePackage = it.getEPackage();
         return Ecore2XtextExtensions.allReferencedEPackages(_ePackage, true);
@@ -158,7 +158,7 @@ public class Ecore2XtextExtensions {
    */
   public static Set<EPackage> allReferencedEPackages(final EPackage ePack, final boolean includeCrossRefs) {
     Set<EClassifier> _allReferencedClassifiers = Ecore2XtextExtensions.allReferencedClassifiers(ePack, includeCrossRefs);
-    final Function1<EClassifier,EPackage> _function = new Function1<EClassifier,EPackage>() {
+    final Function1<EClassifier, EPackage> _function = new Function1<EClassifier, EPackage>() {
       public EPackage apply(final EClassifier it) {
         return it.getEPackage();
       }
@@ -170,10 +170,10 @@ public class Ecore2XtextExtensions {
   public static Set<EClassifier> allReferencedClassifiers(final EPackage ePack, final boolean includeCrossRefs) {
     EList<EClassifier> _eClassifiers = ePack.getEClassifiers();
     Iterable<EClass> _filter = Iterables.<EClass>filter(_eClassifiers, EClass.class);
-    final Function1<EClass,Iterable<EStructuralFeature>> _function = new Function1<EClass,Iterable<EStructuralFeature>>() {
+    final Function1<EClass, Iterable<EStructuralFeature>> _function = new Function1<EClass, Iterable<EStructuralFeature>>() {
       public Iterable<EStructuralFeature> apply(final EClass it) {
         EList<EStructuralFeature> _eAllStructuralFeatures = it.getEAllStructuralFeatures();
-        final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
+        final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
           public Boolean apply(final EStructuralFeature f) {
             boolean _and = false;
             boolean _needsAssignment = Ecore2XtextExtensions.needsAssignment(f);
@@ -197,7 +197,7 @@ public class Ecore2XtextExtensions {
     };
     final Iterable<Iterable<EStructuralFeature>> strFeatures = IterableExtensions.<EClass, Iterable<EStructuralFeature>>map(_filter, _function);
     Iterable<EStructuralFeature> _flatten = Iterables.<EStructuralFeature>concat(strFeatures);
-    final Function1<EStructuralFeature,EClassifier> _function_1 = new Function1<EStructuralFeature,EClassifier>() {
+    final Function1<EStructuralFeature, EClassifier> _function_1 = new Function1<EStructuralFeature, EClassifier>() {
       public EClassifier apply(final EStructuralFeature it) {
         return it.getEType();
       }
@@ -222,13 +222,13 @@ public class Ecore2XtextExtensions {
    */
   private static void allAssignedClassifiers(final EClass eClazz, final Collection<EClassifier> acceptor) {
     EList<EStructuralFeature> _eAllStructuralFeatures = eClazz.getEAllStructuralFeatures();
-    final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
+    final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
       public Boolean apply(final EStructuralFeature f) {
         return Boolean.valueOf(Ecore2XtextExtensions.needsAssignment(f));
       }
     };
     Iterable<EStructuralFeature> _filter = IterableExtensions.<EStructuralFeature>filter(_eAllStructuralFeatures, _function);
-    final Function1<EStructuralFeature,EClassifier> _function_1 = new Function1<EStructuralFeature,EClassifier>() {
+    final Function1<EStructuralFeature, EClassifier> _function_1 = new Function1<EStructuralFeature, EClassifier>() {
       public EClassifier apply(final EStructuralFeature it) {
         return it.getEType();
       }
@@ -274,7 +274,7 @@ public class Ecore2XtextExtensions {
   
   public static Iterable<EStructuralFeature> prefixFeatures(final EClass it) {
     EList<EStructuralFeature> _eAllStructuralFeatures = it.getEAllStructuralFeatures();
-    final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
+    final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
       public Boolean apply(final EStructuralFeature f) {
         boolean _and = false;
         boolean _needsAssignment = Ecore2XtextExtensions.needsAssignment(f);
@@ -296,7 +296,7 @@ public class Ecore2XtextExtensions {
    */
   public static Iterable<EStructuralFeature> inlinedFeatures(final EClass it) {
     EList<EStructuralFeature> _eAllStructuralFeatures = it.getEAllStructuralFeatures();
-    final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
+    final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
       public Boolean apply(final EStructuralFeature f) {
         return Boolean.valueOf(Ecore2XtextExtensions.needsAssignment(f));
       }
@@ -317,7 +317,7 @@ public class Ecore2XtextExtensions {
       Iterable<EStructuralFeature> _prefixFeatures = Ecore2XtextExtensions.prefixFeatures(it);
       Iterable<EStructuralFeature> _inlinedFeatures = Ecore2XtextExtensions.inlinedFeatures(it);
       final Iterable<EStructuralFeature> features = Iterables.<EStructuralFeature>concat(_prefixFeatures, _inlinedFeatures);
-      final Function1<EStructuralFeature,Boolean> _function = new Function1<EStructuralFeature,Boolean>() {
+      final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
         public Boolean apply(final EStructuralFeature f) {
           return Boolean.valueOf(f.isRequired());
         }
@@ -362,115 +362,115 @@ public class Ecore2XtextExtensions {
     String _name = it.getName();
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(_name,"EBigDecimal")) {
+      if (Objects.equal(_name, "EBigDecimal")) {
         _matched=true;
         _switchResult = "INT? \'.\' INT";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EBigInteger")) {
+      if (Objects.equal(_name, "EBigInteger")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EBoolean")) {
+      if (Objects.equal(_name, "EBoolean")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.booleanRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EBooleanObject")) {
+      if (Objects.equal(_name, "EBooleanObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.booleanRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EByte")) {
+      if (Objects.equal(_name, "EByte")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EByteObject")) {
+      if (Objects.equal(_name, "EByteObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EChar")) {
+      if (Objects.equal(_name, "EChar")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"ECharObject")) {
+      if (Objects.equal(_name, "ECharObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EDouble")) {
+      if (Objects.equal(_name, "EDouble")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.decimalRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EDoubleObject")) {
+      if (Objects.equal(_name, "EDoubleObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.decimalRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EFloat")) {
+      if (Objects.equal(_name, "EFloat")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.decimalRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EFloatObject")) {
+      if (Objects.equal(_name, "EFloatObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.decimalRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EInt")) {
+      if (Objects.equal(_name, "EInt")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EIntegerObject")) {
+      if (Objects.equal(_name, "EIntegerObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"ELong")) {
+      if (Objects.equal(_name, "ELong")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"ELongObject")) {
+      if (Objects.equal(_name, "ELongObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EShort")) {
+      if (Objects.equal(_name, "EShort")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EShortObject")) {
+      if (Objects.equal(_name, "EShortObject")) {
         _matched=true;
         _switchResult = Ecore2XtextExtensions.intRuleBody();
       }
     }
     if (!_matched) {
-      if (Objects.equal(_name,"EString")) {
+      if (Objects.equal(_name, "EString")) {
         _matched=true;
         _switchResult = "STRING | ID";
       }
@@ -543,7 +543,7 @@ public class Ecore2XtextExtensions {
         _xifexpression = idAttr;
       } else {
         EList<EAttribute> _eAllAttributes = it.getEAllAttributes();
-        final Function1<EAttribute,Boolean> _function = new Function1<EAttribute,Boolean>() {
+        final Function1<EAttribute, Boolean> _function = new Function1<EAttribute, Boolean>() {
           public Boolean apply(final EAttribute a) {
             boolean _and = false;
             boolean _and_1 = false;
@@ -583,7 +583,7 @@ public class Ecore2XtextExtensions {
   
   private static EAttribute idAttributeInternal(final EClass it) {
     EList<EAttribute> _eAllAttributes = it.getEAllAttributes();
-    final Function1<EAttribute,Boolean> _function = new Function1<EAttribute,Boolean>() {
+    final Function1<EAttribute, Boolean> _function = new Function1<EAttribute, Boolean>() {
       public Boolean apply(final EAttribute a) {
         boolean _and = false;
         boolean _needsAssignment = Ecore2XtextExtensions.needsAssignment(a);
@@ -761,7 +761,7 @@ public class Ecore2XtextExtensions {
       if (eClassifier instanceof EClass) {
         _matched=true;
         Iterable<EClass> _subClasses = Ecore2XtextExtensions.subClasses(((EClass)eClassifier));
-        final Function1<EClass,Boolean> _function = new Function1<EClass,Boolean>() {
+        final Function1<EClass, Boolean> _function = new Function1<EClass, Boolean>() {
           public Boolean apply(final EClass c) {
             return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(c));
           }
@@ -811,7 +811,7 @@ public class Ecore2XtextExtensions {
     EPackage _ePackage = it.getEPackage();
     EList<EClassifier> _eClassifiers = _ePackage.getEClassifiers();
     Iterable<EClass> _filter = Iterables.<EClass>filter(_eClassifiers, EClass.class);
-    final Function1<EClass,Boolean> _function = new Function1<EClass,Boolean>() {
+    final Function1<EClass, Boolean> _function = new Function1<EClass, Boolean>() {
       public Boolean apply(final EClass c) {
         EList<EClass> _eAllSuperTypes = c.getEAllSuperTypes();
         return Boolean.valueOf(_eAllSuperTypes.contains(it));
@@ -838,7 +838,7 @@ public class Ecore2XtextExtensions {
   public static Iterable<EReference> allCrossReferences(final EClass it) {
     Iterable<EStructuralFeature> _inlinedFeatures = Ecore2XtextExtensions.inlinedFeatures(it);
     Iterable<EReference> _filter = Iterables.<EReference>filter(_inlinedFeatures, EReference.class);
-    final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
+    final Function1<EReference, Boolean> _function = new Function1<EReference, Boolean>() {
       public Boolean apply(final EReference f) {
         boolean _isContainment = f.isContainment();
         return Boolean.valueOf((!_isContainment));
@@ -850,7 +850,7 @@ public class Ecore2XtextExtensions {
   public static Iterable<EReference> allContainmentReferences(final EClass it) {
     Iterable<EStructuralFeature> _inlinedFeatures = Ecore2XtextExtensions.inlinedFeatures(it);
     Iterable<EReference> _filter = Iterables.<EReference>filter(_inlinedFeatures, EReference.class);
-    final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
+    final Function1<EReference, Boolean> _function = new Function1<EReference, Boolean>() {
       public Boolean apply(final EReference f) {
         return Boolean.valueOf(f.isContainment());
       }

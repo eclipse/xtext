@@ -41,10 +41,10 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package foo class ClassA extends bar.ClassB {}");
-      Pair<String,String> _mappedTo = Pair.<String, String>of("foo/ClassA.xtend", _builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("foo/ClassA.xtend", _builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package bar class ClassB { public foo.ClassA myField }");
-      Pair<String,String> _mappedTo_1 = Pair.<String, String>of("bar/ClassB.xtend", _builder_1.toString());
+      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("bar/ClassB.xtend", _builder_1.toString());
       final ResourceSet resourceSet = this.compiler.resourceSet(_mappedTo, _mappedTo_1);
       final List<? extends Resource> resources = resourceSet.getResources();
       ArrayList<Resource> _arrayList = new ArrayList<Resource>(resources);
@@ -66,10 +66,10 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package foo class ClassA extends bar.ClassB {}");
-      Pair<String,String> _mappedTo = Pair.<String, String>of("foo/ClassA.xtend", _builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("foo/ClassA.xtend", _builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package bar class ClassB { public foo.ClassA myField }");
-      Pair<String,String> _mappedTo_1 = Pair.<String, String>of("bar/ClassB.xtend", _builder_1.toString());
+      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("bar/ClassB.xtend", _builder_1.toString());
       final ResourceSet resourceSet = this.compiler.unLoadedResourceSet(_mappedTo, _mappedTo_1);
       final List<? extends Resource> resources = resourceSet.getResources();
       ArrayList<Resource> _arrayList = new ArrayList<Resource>(resources);
@@ -91,10 +91,10 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package foo class ClassA extends bar.ClassB {}");
-      Pair<String,String> _mappedTo = Pair.<String, String>of("foo/ClassA.xtend", _builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("foo/ClassA.xtend", _builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package bar class ClassB { public foo.ClassA myField }");
-      Pair<String,String> _mappedTo_1 = Pair.<String, String>of("bar/ClassB.xtend", _builder_1.toString());
+      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("bar/ClassB.xtend", _builder_1.toString());
       final ResourceSet resourceSet = this.compiler.unLoadedResourceSet(_mappedTo, _mappedTo_1);
       final List<? extends Resource> resources = resourceSet.getResources();
       ArrayList<Resource> _arrayList = new ArrayList<Resource>(resources);

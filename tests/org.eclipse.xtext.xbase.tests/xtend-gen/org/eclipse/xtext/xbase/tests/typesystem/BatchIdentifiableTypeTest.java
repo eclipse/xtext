@@ -43,7 +43,7 @@ public class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
     IBatchTypeResolver _typeResolver = this.getTypeResolver();
     JvmIdentifiableElement _head = IterableExtensions.<JvmIdentifiableElement>head(identifiables);
     final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
-    final Procedure2<JvmIdentifiableElement,Integer> _function = new Procedure2<JvmIdentifiableElement,Integer>() {
+    final Procedure2<JvmIdentifiableElement, Integer> _function = new Procedure2<JvmIdentifiableElement, Integer>() {
       public void apply(final JvmIdentifiableElement identifiable, final Integer index) {
         final LightweightTypeReference type = resolvedTypes.getActualType(identifiable);
         Assert.assertNotNull(type);

@@ -40,7 +40,7 @@ public class BasicExpressions {
   @Test
   public void collections() {
     final List<String> list = Collections.<String>unmodifiableList(Lists.<String>newArrayList("Hello", "World"));
-    final Function1<String,String> _function = new Function1<String,String>() {
+    final Function1<String, String> _function = new Function1<String, String>() {
       public String apply(final String it) {
         return it.toUpperCase();
       }
@@ -49,7 +49,7 @@ public class BasicExpressions {
     String _head = IterableExtensions.<String>head(_map);
     Assert.assertEquals("HELLO", _head);
     final HashSet<Integer> set = CollectionLiterals.<Integer>newHashSet(Integer.valueOf(1), Integer.valueOf(3), Integer.valueOf(5));
-    final Function1<Integer,Boolean> _function_1 = new Function1<Integer,Boolean>() {
+    final Function1<Integer, Boolean> _function_1 = new Function1<Integer, Boolean>() {
       public Boolean apply(final Integer it) {
         return Boolean.valueOf(((it).intValue() >= 3));
       }
@@ -57,10 +57,10 @@ public class BasicExpressions {
     Iterable<Integer> _filter = IterableExtensions.<Integer>filter(set, _function_1);
     int _size = IterableExtensions.size(_filter);
     Assert.assertEquals(2, _size);
-    Pair<String,Integer> _mappedTo = Pair.<String, Integer>of("one", Integer.valueOf(1));
-    Pair<String,Integer> _mappedTo_1 = Pair.<String, Integer>of("two", Integer.valueOf(2));
-    Pair<String,Integer> _mappedTo_2 = Pair.<String, Integer>of("three", Integer.valueOf(3));
-    final HashMap<String,Integer> map = CollectionLiterals.<String, Integer>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2);
+    Pair<String, Integer> _mappedTo = Pair.<String, Integer>of("one", Integer.valueOf(1));
+    Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of("two", Integer.valueOf(2));
+    Pair<String, Integer> _mappedTo_2 = Pair.<String, Integer>of("three", Integer.valueOf(3));
+    final HashMap<String, Integer> map = CollectionLiterals.<String, Integer>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2);
     Integer _get = map.get("two");
     Assert.assertEquals(2, (_get).intValue());
   }
@@ -92,7 +92,7 @@ public class BasicExpressions {
       }
     }
     if (!_matched) {
-      if (Objects.equal(t,"text")) {
+      if (Objects.equal(t, "text")) {
         _matched=true;
         Assert.assertTrue(true);
       }

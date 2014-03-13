@@ -52,58 +52,58 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   
   public void isAssignableFrom(final Class<?> lhs, final String rhs) {
     String _canonicalName = lhs.getCanonicalName();
-    Pair<String,String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
     this.isAssignableFrom(_mappedTo, rhs, true);
   }
   
   public void isAssignableFrom(final Class<?> lhs, final Class<?> rhs) {
     String _canonicalName = lhs.getCanonicalName();
-    Pair<String,String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
     String _canonicalName_1 = rhs.getCanonicalName();
     this.isAssignableFrom(_mappedTo, _canonicalName_1, true);
   }
   
   public void isAssignableFrom(final String lhs, final String rhs) {
-    Pair<String,String> _mappedTo = Pair.<String, String>of(lhs, null);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(lhs, null);
     this.isAssignableFrom(_mappedTo, rhs, true);
   }
   
   public void isAssignableFromAny(final String lhs) {
-    Pair<String,String> _mappedTo = Pair.<String, String>of(lhs, null);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(lhs, null);
     this.isAssignableFrom(_mappedTo, null, true);
   }
   
   public void isAssignableFrom(final String lhs, final Class<?> rhs) {
-    Pair<String,String> _mappedTo = Pair.<String, String>of(lhs, null);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(lhs, null);
     String _canonicalName = rhs.getCanonicalName();
     this.isAssignableFrom(_mappedTo, _canonicalName, true);
   }
   
   public void isNotAssignableFrom(final Class<?> lhs, final String rhs) {
     String _canonicalName = lhs.getCanonicalName();
-    Pair<String,String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
     this.isAssignableFrom(_mappedTo, rhs, false);
   }
   
   public void isNotAssignableFrom(final String lhs, final String rhs) {
-    Pair<String,String> _mappedTo = Pair.<String, String>of(lhs, null);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(lhs, null);
     this.isAssignableFrom(_mappedTo, rhs, false);
   }
   
   public void isNotAssignableFromAny(final String lhs) {
-    Pair<String,String> _mappedTo = Pair.<String, String>of(lhs, null);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(lhs, null);
     this.isAssignableFrom(_mappedTo, null, false);
   }
   
-  public void isAssignableFrom(final Pair<String,String> lhsAndParams, final String rhs) {
+  public void isAssignableFrom(final Pair<String, String> lhsAndParams, final String rhs) {
     this.isAssignableFrom(lhsAndParams, rhs, true);
   }
   
-  public void isNotAssignableFrom(final Pair<String,String> lhsAndParams, final String rhs) {
+  public void isNotAssignableFrom(final Pair<String, String> lhsAndParams, final String rhs) {
     this.isAssignableFrom(lhsAndParams, rhs, false);
   }
   
-  public void isAssignableFrom(final Pair<String,String> lhsAndParams, final String rhs, final boolean expectation) {
+  public void isAssignableFrom(final Pair<String, String> lhsAndParams, final String rhs, final boolean expectation) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");

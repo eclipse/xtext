@@ -96,7 +96,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
-    final Function1<IResolvedOperation,Boolean> _function = new Function1<IResolvedOperation,Boolean>() {
+    final Function1<IResolvedOperation, Boolean> _function = new Function1<IResolvedOperation, Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
         return Boolean.valueOf(_declaration.isAbstract());
@@ -116,7 +116,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
     String _string = all.toString();
-    final Function1<IResolvedOperation,Boolean> _function = new Function1<IResolvedOperation,Boolean>() {
+    final Function1<IResolvedOperation, Boolean> _function = new Function1<IResolvedOperation, Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
         return Boolean.valueOf(_declaration.isAbstract());
@@ -126,7 +126,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     int _size = IterableExtensions.size(_filter);
     Assert.assertEquals(_string, 2, _size);
     String _string_1 = all.toString();
-    final Function1<IResolvedOperation,Boolean> _function_1 = new Function1<IResolvedOperation,Boolean>() {
+    final Function1<IResolvedOperation, Boolean> _function_1 = new Function1<IResolvedOperation, Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
         return Boolean.valueOf(_declaration.isFinal());
@@ -147,7 +147,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
     String _string = all.toString();
-    final Function1<IResolvedOperation,Boolean> _function = new Function1<IResolvedOperation,Boolean>() {
+    final Function1<IResolvedOperation, Boolean> _function = new Function1<IResolvedOperation, Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
         return Boolean.valueOf(_declaration.isAbstract());
@@ -157,7 +157,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
     int _size = IterableExtensions.size(_filter);
     Assert.assertEquals(_string, (1 + 1), _size);
     final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
-    final Function1<IResolvedOperation,Boolean> _function_1 = new Function1<IResolvedOperation,Boolean>() {
+    final Function1<IResolvedOperation, Boolean> _function_1 = new Function1<IResolvedOperation, Boolean>() {
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
         return Boolean.valueOf(_declaration.isAbstract());

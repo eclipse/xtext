@@ -90,7 +90,7 @@ public class StandaloneResourceSet extends XtextResourceSet {
     if (_equals) {
       return null;
     }
-    final Function1<Resource,Boolean> _function = new Function1<Resource,Boolean>() {
+    final Function1<Resource, Boolean> _function = new Function1<Resource, Boolean>() {
       public Boolean apply(final Resource it) {
         URI _uRI = it.getURI();
         String _lastSegment = null;
@@ -118,7 +118,7 @@ public class StandaloneResourceSet extends XtextResourceSet {
       _builder.append(_lastSegment_1, "");
       _builder.append("\'. Several resources are matched: ");
       {
-        final Function1<Resource,URI> _function_1 = new Function1<Resource,URI>() {
+        final Function1<Resource, URI> _function_1 = new Function1<Resource, URI>() {
           public URI apply(final Resource it) {
             return it.getURI();
           }

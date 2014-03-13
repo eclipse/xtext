@@ -400,7 +400,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
         public void apply() {
-          final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
+          final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
             public ITextEditor apply(final ITextEditor it) {
               ITextEditor _xblockexpression = null;
               {
@@ -447,7 +447,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
         public void apply() {
-          final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
+          final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
             public ITextEditor apply(final ITextEditor it) {
               ITextEditor _xblockexpression = null;
               {
@@ -564,7 +564,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       this.testHelper.createFile("Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
         public void apply() {
-          final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
+          final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
             public ITextEditor apply(final ITextEditor it) {
               ITextEditor _xblockexpression = null;
               {
@@ -603,7 +603,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       this.testHelper.createFile("Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
         public void apply() {
-          final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
+          final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
             public ITextEditor apply(final ITextEditor it) {
               ITextEditor _xblockexpression = null;
               {
@@ -1179,7 +1179,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
         public void apply() {
-          final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
+          final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
             public ITextEditor apply(final ITextEditor it) {
               ITextEditor _changeContent = AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, "public void bar() {}", "");
               return AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(_changeContent, "private void bar2() {}", "");
@@ -1196,7 +1196,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
   
   public ITextEditor save(final String fileName, final String oldText, final String newText) {
     ITextEditor _openJavaEditor = this._javaEditorExtension.openJavaEditor(fileName);
-    final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
+    final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
       public ITextEditor apply(final ITextEditor it) {
         return AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, oldText, newText);
       }
@@ -1204,14 +1204,14 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
     return this.doSave(_openJavaEditor, _function);
   }
   
-  public ITextEditor save(final String fileName, final Function1<? super ITextEditor,? extends ITextEditor> consumer) {
+  public ITextEditor save(final String fileName, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     ITextEditor _openJavaEditor = this._javaEditorExtension.openJavaEditor(fileName);
     return this.doSave(_openJavaEditor, consumer);
   }
   
   public ITextEditor close(final String fileName, final String oldText, final String newText) {
     ITextEditor _openJavaEditor = this._javaEditorExtension.openJavaEditor(fileName);
-    final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
+    final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
       public ITextEditor apply(final ITextEditor it) {
         return AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, oldText, newText);
       }
@@ -1219,12 +1219,12 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
     return this.doClose(_openJavaEditor, _function);
   }
   
-  public ITextEditor close(final String fileName, final Function1<? super ITextEditor,? extends ITextEditor> consumer) {
+  public ITextEditor close(final String fileName, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     ITextEditor _openJavaEditor = this._javaEditorExtension.openJavaEditor(fileName);
     return this.doClose(_openJavaEditor, consumer);
   }
   
-  public abstract ITextEditor doSave(final ITextEditor editor, final Function1<? super ITextEditor,? extends ITextEditor> consumer);
+  public abstract ITextEditor doSave(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer);
   
-  public abstract ITextEditor doClose(final ITextEditor editor, final Function1<? super ITextEditor,? extends ITextEditor> consumer);
+  public abstract ITextEditor doClose(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer);
 }

@@ -134,7 +134,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
       List<Path> _xtrycatchfinallyexpression = null;
       try {
         IResource[] _members = container.members();
-        final Function1<IResource,Path> _function = new Function1<IResource,Path>() {
+        final Function1<IResource, Path> _function = new Function1<IResource, Path>() {
           public Path apply(final IResource it) {
             IPath _fullPath = it.getFullPath();
             String _string = _fullPath.toString();
@@ -349,7 +349,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
       }
       List<String> _reverse = ListExtensions.<String>reverse(trailingSegments);
       IPath _location = resource.getLocation();
-      final Function2<IPath,String,IPath> _function = new Function2<IPath,String,IPath>() {
+      final Function2<IPath, String, IPath> _function = new Function2<IPath, String, IPath>() {
         public IPath apply(final IPath location, final String segment) {
           return location.append(segment);
         }

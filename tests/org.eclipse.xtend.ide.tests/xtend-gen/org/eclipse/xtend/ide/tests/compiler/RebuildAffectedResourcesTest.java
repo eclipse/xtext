@@ -288,16 +288,16 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
   
   public void assertNumberOfBuilds(final int numberOfBuild) {
     IResourcesSetupUtil.waitForAutoBuild();
-    Map<String,Stopwatches.NumbersForTask> _allNumbers = Stopwatches.allNumbers();
-    Set<Map.Entry<String,Stopwatches.NumbersForTask>> _entrySet = _allNumbers.entrySet();
-    final Function1<Map.Entry<String,Stopwatches.NumbersForTask>,Boolean> _function = new Function1<Map.Entry<String,Stopwatches.NumbersForTask>,Boolean>() {
-      public Boolean apply(final Map.Entry<String,Stopwatches.NumbersForTask> it) {
+    Map<String, Stopwatches.NumbersForTask> _allNumbers = Stopwatches.allNumbers();
+    Set<Map.Entry<String, Stopwatches.NumbersForTask>> _entrySet = _allNumbers.entrySet();
+    final Function1<Map.Entry<String, Stopwatches.NumbersForTask>, Boolean> _function = new Function1<Map.Entry<String, Stopwatches.NumbersForTask>, Boolean>() {
+      public Boolean apply(final Map.Entry<String, Stopwatches.NumbersForTask> it) {
         String _key = it.getKey();
         return Boolean.valueOf(Objects.equal(_key, "XtextBuilder.build"));
       }
     };
-    Iterable<Map.Entry<String,Stopwatches.NumbersForTask>> _filter = IterableExtensions.<Map.Entry<String,Stopwatches.NumbersForTask>>filter(_entrySet, _function);
-    final Map.Entry<String,Stopwatches.NumbersForTask> builderEntry = IterableExtensions.<Map.Entry<String,Stopwatches.NumbersForTask>>head(_filter);
+    Iterable<Map.Entry<String, Stopwatches.NumbersForTask>> _filter = IterableExtensions.<Map.Entry<String, Stopwatches.NumbersForTask>>filter(_entrySet, _function);
+    final Map.Entry<String, Stopwatches.NumbersForTask> builderEntry = IterableExtensions.<Map.Entry<String, Stopwatches.NumbersForTask>>head(_filter);
     boolean _equals = Objects.equal(builderEntry, null);
     if (_equals) {
       Assert.assertEquals(numberOfBuild, 0);
@@ -329,7 +329,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       IPath _fullPath = file.getFullPath();
       String _plus = ((("Expected an error marker containing \'" + msgPart) + "\' on ") + _fullPath);
       String _plus_1 = (_plus + " but found ");
-      final Function1<IMarker,String> _function = new Function1<IMarker,String>() {
+      final Function1<IMarker, String> _function = new Function1<IMarker, String>() {
         public String apply(final IMarker it) {
           return MarkerUtilities.getMessage(it);
         }

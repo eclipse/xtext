@@ -67,7 +67,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
       }
       File _javaIOFile = this.getJavaIOFile(path);
       String[] _list = _javaIOFile.list();
-      final Function1<String,Path> _function = new Function1<String,Path>() {
+      final Function1<String, Path> _function = new Function1<String, Path>() {
         public Path apply(final String it) {
           return path.getAbsolutePath(it);
         }

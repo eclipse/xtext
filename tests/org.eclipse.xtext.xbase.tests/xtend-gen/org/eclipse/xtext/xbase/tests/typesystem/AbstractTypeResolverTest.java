@@ -65,7 +65,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   public Iterable<Resource.Diagnostic> getLinkingAndSyntaxErrors(final Resource resource) {
     EList<Resource.Diagnostic> _errors = resource.getErrors();
-    final Function1<Resource.Diagnostic,Boolean> _function = new Function1<Resource.Diagnostic,Boolean>() {
+    final Function1<Resource.Diagnostic, Boolean> _function = new Function1<Resource.Diagnostic, Boolean>() {
       public Boolean apply(final Resource.Diagnostic it) {
         boolean _or = false;
         if ((it instanceof XtextSyntaxDiagnostic)) {

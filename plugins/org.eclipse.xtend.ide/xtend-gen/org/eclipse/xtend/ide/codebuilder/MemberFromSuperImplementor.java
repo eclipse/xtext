@@ -71,7 +71,7 @@ public class MemberFromSuperImplementor {
     if (_not) {
       final ArrayList<JvmTypeParameter> typeParameters = CollectionLiterals.<JvmTypeParameter>newArrayList();
       List<JvmTypeParameter> _resolvedTypeParameters_1 = overriddenOperation.getResolvedTypeParameters();
-      final Procedure2<JvmTypeParameter,Integer> _function = new Procedure2<JvmTypeParameter,Integer>() {
+      final Procedure2<JvmTypeParameter, Integer> _function = new Procedure2<JvmTypeParameter, Integer>() {
         public void apply(final JvmTypeParameter typeParam, final Integer idx) {
           final JvmTypeParameter newTypeParam = MemberFromSuperImplementor.this.typesFactory.createJvmTypeParameter();
           String _name = typeParam.getName();
@@ -122,7 +122,7 @@ public class MemberFromSuperImplementor {
       _builder.append("(");
       JvmOperation _declaration_3 = overriddenOperation.getDeclaration();
       EList<JvmFormalParameter> _parameters = _declaration_3.getParameters();
-      final Function1<JvmFormalParameter,String> _function_1 = new Function1<JvmFormalParameter,String>() {
+      final Function1<JvmFormalParameter, String> _function_1 = new Function1<JvmFormalParameter, String>() {
         public String apply(final JvmFormalParameter it) {
           return it.getSimpleName();
         }
@@ -153,7 +153,7 @@ public class MemberFromSuperImplementor {
       _builder.append("super(");
       JvmConstructor _declaration = superConstructor.getDeclaration();
       EList<JvmFormalParameter> _parameters = _declaration.getParameters();
-      final Function1<JvmFormalParameter,String> _function = new Function1<JvmFormalParameter,String>() {
+      final Function1<JvmFormalParameter, String> _function = new Function1<JvmFormalParameter, String>() {
         public String apply(final JvmFormalParameter it) {
           return it.getSimpleName();
         }
@@ -178,7 +178,7 @@ public class MemberFromSuperImplementor {
     JvmVisibility _visibility = _declaration.getVisibility();
     builder.setVisibility(_visibility);
     List<LightweightTypeReference> _resolvedParameterTypes = overridden.getResolvedParameterTypes();
-    final Procedure2<LightweightTypeReference,Integer> _function = new Procedure2<LightweightTypeReference,Integer>() {
+    final Procedure2<LightweightTypeReference, Integer> _function = new Procedure2<LightweightTypeReference, Integer>() {
       public void apply(final LightweightTypeReference it, final Integer index) {
         EList<JvmFormalParameter> _parameters = executable.getParameters();
         final JvmFormalParameter declaredParameter = _parameters.get((index).intValue());

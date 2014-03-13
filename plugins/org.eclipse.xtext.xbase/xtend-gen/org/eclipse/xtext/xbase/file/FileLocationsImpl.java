@@ -39,7 +39,7 @@ public class FileLocationsImpl implements FileLocations {
     final String string = _segments.get(0);
     Provider<WorkspaceConfig> _projectInformationProvider = this.getProjectInformationProvider();
     WorkspaceConfig _get = _projectInformationProvider.get();
-    Map<String,ProjectConfig> _projects = _get.getProjects();
+    Map<String, ProjectConfig> _projects = _get.getProjects();
     final ProjectConfig projectConfig = _projects.get(string);
     boolean _equals = Objects.equal(projectConfig, null);
     if (_equals) {
@@ -50,7 +50,7 @@ public class FileLocationsImpl implements FileLocations {
   
   public Path getSourceFolder(final Path path) {
     final ProjectConfig config = this.getProjectConfig(path);
-    Map<Path,Path> _sourceFolderMappings = config.getSourceFolderMappings();
+    Map<Path, Path> _sourceFolderMappings = config.getSourceFolderMappings();
     Set<Path> _keySet = _sourceFolderMappings.keySet();
     for (final Path src : _keySet) {
       boolean _startsWith = path.startsWith(src);
@@ -63,12 +63,12 @@ public class FileLocationsImpl implements FileLocations {
   
   public Path getTargetFolder(final Path path) {
     final ProjectConfig config = this.getProjectConfig(path);
-    Map<Path,Path> _sourceFolderMappings = config.getSourceFolderMappings();
+    Map<Path, Path> _sourceFolderMappings = config.getSourceFolderMappings();
     Set<Path> _keySet = _sourceFolderMappings.keySet();
     for (final Path src : _keySet) {
       boolean _startsWith = path.startsWith(src);
       if (_startsWith) {
-        Map<Path,Path> _sourceFolderMappings_1 = config.getSourceFolderMappings();
+        Map<Path, Path> _sourceFolderMappings_1 = config.getSourceFolderMappings();
         return _sourceFolderMappings_1.get(src);
       }
     }

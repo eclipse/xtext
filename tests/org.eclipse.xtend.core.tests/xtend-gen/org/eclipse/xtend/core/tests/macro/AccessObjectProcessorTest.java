@@ -41,7 +41,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         Assert.assertNotNull(_findDeclaredMethod);
         final MutableClassDeclaration classPA = ctx.findClass("PA");
         Iterable<? extends TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
-        final Function1<TypeReference,Boolean> _function = new Function1<TypeReference,Boolean>() {
+        final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
             TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
@@ -53,7 +53,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         Assert.assertNotNull(_findFirst);
         final MutableClassDeclaration classGA = ctx.findClass("GA");
         Iterable<? extends TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
-        final Function1<TypeReference,Boolean> _function_1 = new Function1<TypeReference,Boolean>() {
+        final Function1<TypeReference, Boolean> _function_1 = new Function1<TypeReference, Boolean>() {
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
             TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
@@ -93,7 +93,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         Assert.assertNotNull(_findDeclaredMethod);
         final MutableClassDeclaration classPA = ctx.findClass("my.pack.PA");
         Iterable<? extends TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
-        final Function1<TypeReference,Boolean> _function = new Function1<TypeReference,Boolean>() {
+        final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
             TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
@@ -105,7 +105,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         Assert.assertNotNull(_findFirst);
         final MutableClassDeclaration classGA = ctx.findClass("my.pack.GA");
         Iterable<? extends TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
-        final Function1<TypeReference,Boolean> _function_1 = new Function1<TypeReference,Boolean>() {
+        final Function1<TypeReference, Boolean> _function_1 = new Function1<TypeReference, Boolean>() {
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
             TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);

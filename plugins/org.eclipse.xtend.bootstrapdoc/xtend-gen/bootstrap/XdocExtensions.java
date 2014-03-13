@@ -24,7 +24,7 @@ public class XdocExtensions {
   public Iterable<Chapter> getAllChapters(final Document document) {
     EList<Chapter> _chapters = document.getChapters();
     EList<Part> _parts = document.getParts();
-    final Function1<Part,EList<Chapter>> _function = new Function1<Part,EList<Chapter>>() {
+    final Function1<Part, EList<Chapter>> _function = new Function1<Part, EList<Chapter>>() {
       public EList<Chapter> apply(final Part it) {
         return it.getChapters();
       }
@@ -32,7 +32,7 @@ public class XdocExtensions {
     List<EList<Chapter>> _map = ListExtensions.<Part, EList<Chapter>>map(_parts, _function);
     Iterable<Chapter> _flatten = Iterables.<Chapter>concat(_map);
     Iterable<Chapter> _plus = Iterables.<Chapter>concat(_chapters, _flatten);
-    final Function1<Chapter,Chapter> _function_1 = new Function1<Chapter,Chapter>() {
+    final Function1<Chapter, Chapter> _function_1 = new Function1<Chapter, Chapter>() {
       public Chapter apply(final Chapter it) {
         AbstractSection _resolve = XdocExtensions.this.resolve(it);
         return ((Chapter) _resolve);
@@ -56,7 +56,7 @@ public class XdocExtensions {
       if (it instanceof Part) {
         _matched=true;
         EList<Chapter> _chapters = ((Part)it).getChapters();
-        final Function1<Chapter,AbstractSection> _function = new Function1<Chapter,AbstractSection>() {
+        final Function1<Chapter, AbstractSection> _function = new Function1<Chapter, AbstractSection>() {
           public AbstractSection apply(final Chapter it) {
             return XdocExtensions.this.resolve(it);
           }
@@ -68,7 +68,7 @@ public class XdocExtensions {
       if (it instanceof Chapter) {
         _matched=true;
         EList<Section> _subSections = ((Chapter)it).getSubSections();
-        final Function1<Section,AbstractSection> _function = new Function1<Section,AbstractSection>() {
+        final Function1<Section, AbstractSection> _function = new Function1<Section, AbstractSection>() {
           public AbstractSection apply(final Section it) {
             return XdocExtensions.this.resolve(it);
           }
@@ -80,7 +80,7 @@ public class XdocExtensions {
       if (it instanceof Section) {
         _matched=true;
         EList<Section2> _subSections = ((Section)it).getSubSections();
-        final Function1<Section2,AbstractSection> _function = new Function1<Section2,AbstractSection>() {
+        final Function1<Section2, AbstractSection> _function = new Function1<Section2, AbstractSection>() {
           public AbstractSection apply(final Section2 it) {
             return XdocExtensions.this.resolve(it);
           }
@@ -92,7 +92,7 @@ public class XdocExtensions {
       if (it instanceof Section2) {
         _matched=true;
         EList<Section3> _subSections = ((Section2)it).getSubSections();
-        final Function1<Section3,AbstractSection> _function = new Function1<Section3,AbstractSection>() {
+        final Function1<Section3, AbstractSection> _function = new Function1<Section3, AbstractSection>() {
           public AbstractSection apply(final Section3 it) {
             return XdocExtensions.this.resolve(it);
           }
@@ -104,7 +104,7 @@ public class XdocExtensions {
       if (it instanceof Section3) {
         _matched=true;
         EList<Section4> _subSections = ((Section3)it).getSubSections();
-        final Function1<Section4,AbstractSection> _function = new Function1<Section4,AbstractSection>() {
+        final Function1<Section4, AbstractSection> _function = new Function1<Section4, AbstractSection>() {
           public AbstractSection apply(final Section4 it) {
             return XdocExtensions.this.resolve(it);
           }

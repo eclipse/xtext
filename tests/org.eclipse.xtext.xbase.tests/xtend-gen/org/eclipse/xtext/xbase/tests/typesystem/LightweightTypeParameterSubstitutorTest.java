@@ -38,7 +38,7 @@ public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParamet
   public String resolve(final JvmTypeReference declaration, final JvmTypeReference reference) {
     DeclaratorTypeArgumentCollector _declaratorTypeArgumentCollector = new DeclaratorTypeArgumentCollector();
     LightweightTypeReference _lightweightReference = this._ownedConverter.toLightweightReference(declaration);
-    final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> mapping = _declaratorTypeArgumentCollector.getTypeParameterMapping(_lightweightReference);
+    final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = _declaratorTypeArgumentCollector.getTypeParameterMapping(_lightweightReference);
     StandardTypeParameterSubstitutor _standardTypeParameterSubstitutor = new StandardTypeParameterSubstitutor(mapping, this);
     LightweightTypeReference _lightweightReference_1 = this._ownedConverter.toLightweightReference(reference);
     LightweightTypeReference _substitute = _standardTypeParameterSubstitutor.substitute(_lightweightReference_1);

@@ -85,12 +85,12 @@ public class ReflectExtensionsTest {
   @Test
   public void testInvokeWithNull() {
     try {
-      final Function1<String,String> _function = new Function1<String,String>() {
+      final Function1<String, String> _function = new Function1<String, String>() {
         public String apply(final String x) {
           return x;
         }
       };
-      final Function1<String,String> x = _function;
+      final Function1<String, String> x = _function;
       Object _invoke = this.ext.invoke(x, "apply", null);
       Assert.assertNull(_invoke);
       Object _invoke_1 = this.ext.invoke(x, "apply", "foo");

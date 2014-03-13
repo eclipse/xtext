@@ -63,7 +63,7 @@ public class EclipseWorkspaceConfigurationTest {
       final Procedure1<EclipseWorkspaceConfigProvider> _function = new Procedure1<EclipseWorkspaceConfigProvider>() {
         public void apply(final EclipseWorkspaceConfigProvider it) {
           it.setWorkspaceRoot(wsroot);
-          final Function1<IProject,Set<OutputConfiguration>> _function = new Function1<IProject,Set<OutputConfiguration>>() {
+          final Function1<IProject, Set<OutputConfiguration>> _function = new Function1<IProject, Set<OutputConfiguration>>() {
             public Set<OutputConfiguration> apply(final IProject it) {
               OutputConfiguration _outputConfiguration = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
               final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
@@ -86,12 +86,12 @@ public class EclipseWorkspaceConfigurationTest {
       };
       final EclipseWorkspaceConfigProvider provider = ObjectExtensions.<EclipseWorkspaceConfigProvider>operator_doubleArrow(_eclipseWorkspaceConfigProvider, _function);
       WorkspaceConfig _get = provider.get();
-      Map<String,ProjectConfig> _projects_2 = _get.getProjects();
+      Map<String, ProjectConfig> _projects_2 = _get.getProjects();
       final ProjectConfig projectAConfig = _projects_2.get("projectA");
-      Map<Path,Path> _sourceFolderMappings = projectAConfig.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings = projectAConfig.getSourceFolderMappings();
       int _size = _sourceFolderMappings.size();
       Assert.assertEquals(1, _size);
-      Map<Path,Path> _sourceFolderMappings_1 = projectAConfig.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings_1 = projectAConfig.getSourceFolderMappings();
       Path _path = new Path("/projectA/src");
       final Path target = _sourceFolderMappings_1.get(_path);
       String _string = target.toString();

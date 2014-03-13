@@ -27,7 +27,7 @@ public class TargetPaths {
   @Extension
   private XdocExtensions _xdocExtensions;
   
-  public boolean splitAt(final Document document, final Function1<? super AbstractSection,? extends Boolean> predicate, final String prefix) {
+  public boolean splitAt(final Document document, final Function1<? super AbstractSection, ? extends Boolean> predicate, final String prefix) {
     boolean _xblockexpression = false;
     {
       final TargetPathAdapter adapter = new TargetPathAdapter();
@@ -43,7 +43,7 @@ public class TargetPaths {
   public String getTargetPath(final Identifiable element) {
     String _elvis = null;
     TargetPathAdapter _targetPathAdapter = this.getTargetPathAdapter(element);
-    Map<Identifiable,String> _targetPaths = null;
+    Map<Identifiable, String> _targetPaths = null;
     if (_targetPathAdapter!=null) {
       _targetPaths=_targetPathAdapter.getTargetPaths();
     }
@@ -96,7 +96,7 @@ public class TargetPaths {
     return _elvis;
   }
   
-  protected void traverseChildren(final Identifiable element, final TargetPathAdapter adapter, final String prefix, final String parentPath, final Function1<? super AbstractSection,? extends Boolean> predicate) {
+  protected void traverseChildren(final Identifiable element, final TargetPathAdapter adapter, final String prefix, final String parentPath, final Function1<? super AbstractSection, ? extends Boolean> predicate) {
     String thisPath = parentPath;
     if ((element instanceof AbstractSection)) {
       final AbstractSection resolved = this._xdocExtensions.resolve(((AbstractSection) element));
@@ -123,7 +123,7 @@ public class TargetPaths {
         _targetFileRoots_2.add(((AbstractSection) element));
       }
     }
-    Map<Identifiable,String> _targetPaths = adapter.getTargetPaths();
+    Map<Identifiable, String> _targetPaths = adapter.getTargetPaths();
     _targetPaths.put(element, thisPath);
     EList<EObject> _eContents = element.eContents();
     Iterable<Identifiable> _filter = Iterables.<Identifiable>filter(_eContents, Identifiable.class);

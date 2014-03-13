@@ -10,5 +10,5 @@ package org.eclipse.xtend.core.tests.typesystem;
 import java.util.Map;
 
 @SuppressWarnings("all")
-public interface StringIntMap extends Map<String,Integer> {
+public interface StringIntMap extends Map<String, Integer> {
 }

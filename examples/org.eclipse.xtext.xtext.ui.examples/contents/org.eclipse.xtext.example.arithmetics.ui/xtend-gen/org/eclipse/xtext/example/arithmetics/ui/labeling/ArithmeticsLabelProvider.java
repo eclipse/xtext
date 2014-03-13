@@ -32,7 +32,7 @@ public class ArithmeticsLabelProvider extends DefaultEObjectLabelProvider {
   public String text(final Definition ele) {
     String _name = ele.getName();
     EList<DeclaredParameter> _args = ele.getArgs();
-    final Function1<DeclaredParameter,String> _function = new Function1<DeclaredParameter,String>() {
+    final Function1<DeclaredParameter, String> _function = new Function1<DeclaredParameter, String>() {
       public String apply(final DeclaredParameter it) {
         return it.getName();
       }

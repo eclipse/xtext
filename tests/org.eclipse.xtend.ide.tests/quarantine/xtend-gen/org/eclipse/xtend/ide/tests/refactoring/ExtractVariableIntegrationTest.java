@@ -499,7 +499,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
       try {
         IXtextDocument _document = editor.getDocument();
-        final IUnitOfWork<Change,XtextResource> _function = new IUnitOfWork<Change,XtextResource>() {
+        final IUnitOfWork<Change, XtextResource> _function = new IUnitOfWork<Change, XtextResource>() {
           public Change exec(final XtextResource it) throws Exception {
             Change _xblockexpression = null;
             {

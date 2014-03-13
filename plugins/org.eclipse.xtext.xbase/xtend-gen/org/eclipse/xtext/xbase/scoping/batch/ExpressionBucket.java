@@ -31,9 +31,9 @@ public class ExpressionBucket {
     return this._id;
   }
   
-  private final Map<XExpression,LightweightTypeReference> _extensionProviders;
+  private final Map<XExpression, LightweightTypeReference> _extensionProviders;
   
-  public Map<XExpression,LightweightTypeReference> getExtensionProviders() {
+  public Map<XExpression, LightweightTypeReference> getExtensionProviders() {
     return this._extensionProviders;
   }
   
@@ -43,7 +43,7 @@ public class ExpressionBucket {
     return this._resolvedFeaturesProvider;
   }
   
-  public ExpressionBucket(final int id, final Map<XExpression,LightweightTypeReference> extensionProviders, final IResolvedFeatures.Provider resolvedFeaturesProvider) {
+  public ExpressionBucket(final int id, final Map<XExpression, LightweightTypeReference> extensionProviders, final IResolvedFeatures.Provider resolvedFeaturesProvider) {
     super();
     this._id = id;
     this._extensionProviders = extensionProviders;

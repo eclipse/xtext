@@ -37,9 +37,9 @@ public class EclipseProjectConfig extends ProjectConfig {
     this.configurationProvider = configurationProvider;
   }
   
-  public Map<Path,Path> getSourceFolderMappings() {
+  public Map<Path, Path> getSourceFolderMappings() {
     try {
-      final Map<Path,Path> map = super.getSourceFolderMappings();
+      final Map<Path, Path> map = super.getSourceFolderMappings();
       boolean _isEmpty = map.isEmpty();
       if (_isEmpty) {
         Set<OutputConfiguration> _outputConfigurations = this.configurationProvider.getOutputConfigurations(this.project);

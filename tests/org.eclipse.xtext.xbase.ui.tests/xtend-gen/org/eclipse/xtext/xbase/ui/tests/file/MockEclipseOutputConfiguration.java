@@ -15,9 +15,9 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 @SuppressWarnings("all")
 public class MockEclipseOutputConfiguration extends EclipseOutputConfigurationProvider {
-  private Function1<? super IProject,? extends Set<OutputConfiguration>> function;
+  private Function1<? super IProject, ? extends Set<OutputConfiguration>> function;
   
-  public MockEclipseOutputConfiguration(final Function1<? super IProject,? extends Set<OutputConfiguration>> function) {
+  public MockEclipseOutputConfiguration(final Function1<? super IProject, ? extends Set<OutputConfiguration>> function) {
     super(null);
     this.function = function;
   }

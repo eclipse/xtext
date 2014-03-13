@@ -113,79 +113,79 @@ public class AbstractConstantExpressionsInterpreter {
       Object _switchResult = null;
       boolean _matched = false;
       if (!_matched) {
-        if (Objects.equal(op,"+")) {
+        if (Objects.equal(op, "+")) {
           _matched=true;
           _switchResult = this.constantOperators.plus(left, right);
         }
       }
       if (!_matched) {
-        if (Objects.equal(op,"-")) {
+        if (Objects.equal(op, "-")) {
           _matched=true;
           _switchResult = this.constantOperators.minus(left, right);
         }
       }
       if (!_matched) {
-        if (Objects.equal(op,"*")) {
+        if (Objects.equal(op, "*")) {
           _matched=true;
           _switchResult = this.constantOperators.multiply(left, right);
         }
       }
       if (!_matched) {
-        if (Objects.equal(op,"/")) {
+        if (Objects.equal(op, "/")) {
           _matched=true;
           _switchResult = this.constantOperators.divide(left, right);
         }
       }
       if (!_matched) {
-        if (Objects.equal(op,"%")) {
+        if (Objects.equal(op, "%")) {
           _matched=true;
           _switchResult = this.constantOperators.modulo(left, right);
         }
       }
       if (!_matched) {
-        if (Objects.equal(op,"<")) {
+        if (Objects.equal(op, "<")) {
           _matched=true;
           _switchResult = Boolean.valueOf(this.constantOperators.lessThan(left, right));
         }
       }
       if (!_matched) {
-        if (Objects.equal(op,">")) {
+        if (Objects.equal(op, ">")) {
           _matched=true;
           _switchResult = Boolean.valueOf(this.constantOperators.greaterThan(left, right));
         }
       }
       if (!_matched) {
-        if (Objects.equal(op,"<=")) {
+        if (Objects.equal(op, "<=")) {
           _matched=true;
           _switchResult = Boolean.valueOf(this.constantOperators.lessEquals(left, right));
         }
       }
       if (!_matched) {
-        if (Objects.equal(op,">=")) {
+        if (Objects.equal(op, ">=")) {
           _matched=true;
           _switchResult = Boolean.valueOf(this.constantOperators.greaterEquals(left, right));
         }
       }
       if (!_matched) {
-        if (Objects.equal(op,"===")) {
+        if (Objects.equal(op, "===")) {
           _matched=true;
           _switchResult = Boolean.valueOf(this.constantOperators.same(left, right));
         }
       }
       if (!_matched) {
-        if (Objects.equal(op,"!==")) {
+        if (Objects.equal(op, "!==")) {
           _matched=true;
           _switchResult = Boolean.valueOf(this.constantOperators.notSame(left, right));
         }
       }
       if (!_matched) {
-        if (Objects.equal(op,"==")) {
+        if (Objects.equal(op, "==")) {
           _matched=true;
           _switchResult = Boolean.valueOf(this.constantOperators.same(left, right));
         }
       }
       if (!_matched) {
-        if (Objects.equal(op,"!=")) {
+        if (Objects.equal(op, "!=")) {
           _matched=true;
           _switchResult = Boolean.valueOf(this.constantOperators.notSame(left, right));
         }
@@ -207,7 +207,7 @@ public class AbstractConstantExpressionsInterpreter {
       Object _switchResult = null;
       boolean _matched = false;
       if (!_matched) {
-        if (Objects.equal(op,"-")) {
+        if (Objects.equal(op, "-")) {
           _matched=true;
           _switchResult = this.constantOperators.minus(value);
         }

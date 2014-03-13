@@ -51,7 +51,7 @@ public class TypeBucket {
     return EnumSet.<ConformanceHint>of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
   }
   
-  public Map<? extends JvmType,? extends Set<String>> getTypesToNames() {
+  public Map<? extends JvmType, ? extends Set<String>> getTypesToNames() {
     return CollectionLiterals.<JvmType, Set<String>>emptyMap();
   }
   

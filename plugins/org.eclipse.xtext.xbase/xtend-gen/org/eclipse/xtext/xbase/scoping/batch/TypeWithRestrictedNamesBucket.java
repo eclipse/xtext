@@ -26,13 +26,13 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 @Data
 @SuppressWarnings("all")
 public class TypeWithRestrictedNamesBucket extends TypeBucket {
-  private final Map<? extends JvmType,? extends Set<String>> _typesToNames;
+  private final Map<? extends JvmType, ? extends Set<String>> _typesToNames;
   
-  public Map<? extends JvmType,? extends Set<String>> getTypesToNames() {
+  public Map<? extends JvmType, ? extends Set<String>> getTypesToNames() {
     return this._typesToNames;
   }
   
-  public TypeWithRestrictedNamesBucket(final int id, final Map<? extends JvmType,? extends Set<String>> types, final IResolvedFeatures.Provider resolvedFeaturesProvider) {
+  public TypeWithRestrictedNamesBucket(final int id, final Map<? extends JvmType, ? extends Set<String>> types, final IResolvedFeatures.Provider resolvedFeaturesProvider) {
     super(id, null, resolvedFeaturesProvider);
     this._typesToNames = types;
   }
@@ -42,7 +42,7 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
   }
   
   public List<? extends JvmType> getTypes() {
-    Map<? extends JvmType,? extends Set<String>> _typesToNames = this.getTypesToNames();
+    Map<? extends JvmType, ? extends Set<String>> _typesToNames = this.getTypesToNames();
     Set<? extends JvmType> _keySet = _typesToNames.keySet();
     return new ArrayList<JvmType>(_keySet);
   }

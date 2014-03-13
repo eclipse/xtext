@@ -58,7 +58,7 @@ public abstract class AbstractXbaseFormatterTest {
   
   protected String indent(final String string, final String indent) {
     String[] _split = string.split("\\r?\\n");
-    final Function1<String,String> _function = new Function1<String,String>() {
+    final Function1<String, String> _function = new Function1<String, String>() {
       public String apply(final String it) {
         String _xifexpression = null;
         boolean _equals = Objects.equal(it, "");

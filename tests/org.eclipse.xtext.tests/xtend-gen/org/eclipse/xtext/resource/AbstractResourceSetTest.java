@@ -28,9 +28,9 @@ public abstract class AbstractResourceSetTest {
     };
     final Resource.Factory nullFactory = _function;
     Resource.Factory.Registry _resourceFactoryRegistry = rs.getResourceFactoryRegistry();
-    Map<String,Object> _extensionToFactoryMap = _resourceFactoryRegistry.getExtensionToFactoryMap();
+    Map<String, Object> _extensionToFactoryMap = _resourceFactoryRegistry.getExtensionToFactoryMap();
     _extensionToFactoryMap.put("xmi", nullFactory);
-    Map<URI,Resource> _uRIResourceMap = rs.getURIResourceMap();
+    Map<URI, Resource> _uRIResourceMap = rs.getURIResourceMap();
     int _size = _uRIResourceMap.size();
     Assert.assertEquals(0, _size);
     final URI uri = URI.createURI("file:/does/not/exist.xmi");
@@ -38,7 +38,7 @@ public abstract class AbstractResourceSetTest {
     Assert.assertNotNull(demandLoaded);
     final Resource second = rs.getResource(uri, true);
     Assert.assertSame(demandLoaded, second);
-    Map<URI,Resource> _uRIResourceMap_1 = rs.getURIResourceMap();
+    Map<URI, Resource> _uRIResourceMap_1 = rs.getURIResourceMap();
     int _size_1 = _uRIResourceMap_1.size();
     Assert.assertEquals(1, _size_1);
   }

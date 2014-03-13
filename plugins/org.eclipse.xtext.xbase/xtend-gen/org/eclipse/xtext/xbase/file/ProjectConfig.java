@@ -19,9 +19,9 @@ public class ProjectConfig {
     return this._name;
   }
   
-  private final Map<Path,Path> _sourceFolderMappings = CollectionLiterals.<Path, Path>newLinkedHashMap();
+  private final Map<Path, Path> _sourceFolderMappings = CollectionLiterals.<Path, Path>newLinkedHashMap();
   
-  public Map<Path,Path> getSourceFolderMappings() {
+  public Map<Path, Path> getSourceFolderMappings() {
     return this._sourceFolderMappings;
   }
   
@@ -35,7 +35,7 @@ public class ProjectConfig {
   }
   
   public void addSourceFolderMapping(final String from, final String to) {
-    Map<Path,Path> _sourceFolderMappings = this.getSourceFolderMappings();
+    Map<Path, Path> _sourceFolderMappings = this.getSourceFolderMappings();
     Path _rootPath = this.getRootPath();
     Path _append = _rootPath.append(from);
     Path _rootPath_1 = this.getRootPath();

@@ -12,9 +12,9 @@ import org.eclipse.xtext.xdoc.xdoc.Identifiable;
 @Data
 @SuppressWarnings("all")
 public class TargetPathAdapter extends AdapterImpl {
-  private final Map<Identifiable,String> _targetPaths = CollectionLiterals.<Identifiable, String>newHashMap();
+  private final Map<Identifiable, String> _targetPaths = CollectionLiterals.<Identifiable, String>newHashMap();
   
-  public Map<Identifiable,String> getTargetPaths() {
+  public Map<Identifiable, String> getTargetPaths() {
     return this._targetPaths;
   }
   

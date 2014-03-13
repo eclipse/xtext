@@ -54,11 +54,11 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
   }
   
   public void hasSynonyms(final String type, final String... expectedSynonyms) {
-    Pair<String,String> _mappedTo = Pair.<String, String>of(type, null);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(type, null);
     this.hasSynonyms(_mappedTo, expectedSynonyms);
   }
   
-  public void hasSynonyms(final Pair<String,String> typeAndTypeParams, final String... expectedSynonyms) {
+  public void hasSynonyms(final Pair<String, String> typeAndTypeParams, final String... expectedSynonyms) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");
@@ -167,51 +167,51 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
   
   @Test
   public void testListWithTypeParameter_01() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("java.util.List<T>", "T extends String");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("java.util.List<T>", "T extends String");
     this.hasSynonyms(_mappedTo, "T[]");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("java.util.List<? extends T>", "T extends String");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("java.util.List<? extends T>", "T extends String");
     this.hasSynonyms(_mappedTo_1, "T[]");
   }
   
   @Test
   public void testListWithTypeParameter_02() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("java.util.List<T>", "T extends Integer");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("java.util.List<T>", "T extends Integer");
     this.hasSynonyms(_mappedTo, "T[]", "int[]");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("java.util.List<? extends T>", "T extends Integer");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("java.util.List<? extends T>", "T extends Integer");
     this.hasSynonyms(_mappedTo_1, "T[]", "int[]");
   }
   
   @Test
   public void testArrayWithTypeParameter_01() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("T[]", "T extends String");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("T[]", "T extends String");
     this.hasSynonyms(_mappedTo, "List<T>");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("T[][]", "T extends String");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("T[][]", "T extends String");
     this.hasSynonyms(_mappedTo_1, "List<T[]>");
   }
   
   @Test
   public void testArrayWithTypeParameter_02() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("T[]", "T extends Integer");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("T[]", "T extends Integer");
     this.hasSynonyms(_mappedTo, "List<T>");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("T[][]", "T extends Integer");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("T[][]", "T extends Integer");
     this.hasSynonyms(_mappedTo_1, "List<T[]>");
   }
   
   @Test
   public void testTypeParameter_01() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("T", "V, T extends Iterable<V>");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "V, T extends Iterable<V>");
     this.hasSynonyms(_mappedTo, "V[]");
   }
   
   @Test
   public void testTypeParameter_02() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("T", "T extends Iterable<Integer>");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "T extends Iterable<Integer>");
     this.hasSynonyms(_mappedTo, "Integer[]", "int[]");
   }
   
   @Test
   public void testTypeParameter_03() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("T", "V extends Integer, T extends Iterable<V>");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "V extends Integer, T extends Iterable<V>");
     this.hasSynonyms(_mappedTo, "V[]", "int[]");
   }
 }

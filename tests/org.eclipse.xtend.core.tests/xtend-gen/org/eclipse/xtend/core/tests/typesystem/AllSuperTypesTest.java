@@ -79,25 +79,25 @@ public class AllSuperTypesTest extends AbstractSuperTypesTest {
   
   @Test
   public void testTypeParameters() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("T", "T extends CharSequence");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "T extends CharSequence");
     this.assertSuperTypes(_mappedTo, "CharSequence", "Object");
   }
   
   @Test
   public void testDependentTypeParameters() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("T", "V, T extends V");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "V, T extends V");
     this.assertSuperTypes(_mappedTo, "V", "Object");
   }
   
   @Test
   public void testDependentTypeParametersWithBounds() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("T", "V extends CharSequence, T extends V");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "V extends CharSequence, T extends V");
     this.assertSuperTypes(_mappedTo, "V", "CharSequence", "Object");
   }
   
   @Test
   public void testTypeParameterArray() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("T", "T extends Object[]");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "T extends Object[]");
     this.assertSuperTypes(_mappedTo, "Object[]", "Cloneable", "Serializable", "Object");
   }
 }

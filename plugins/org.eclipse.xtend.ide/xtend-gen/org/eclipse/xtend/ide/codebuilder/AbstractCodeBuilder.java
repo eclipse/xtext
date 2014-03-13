@@ -148,25 +148,25 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(visibility,skippableDefault)) {
+      if (Objects.equal(visibility, skippableDefault)) {
         _matched=true;
         _switchResult = "";
       }
     }
     if (!_matched) {
-      if (Objects.equal(visibility,JvmVisibility.PRIVATE)) {
+      if (Objects.equal(visibility, JvmVisibility.PRIVATE)) {
         _matched=true;
         _switchResult = "private ";
       }
     }
     if (!_matched) {
-      if (Objects.equal(visibility,JvmVisibility.PROTECTED)) {
+      if (Objects.equal(visibility, JvmVisibility.PROTECTED)) {
         _matched=true;
         _switchResult = "protected ";
       }
     }
     if (!_matched) {
-      if (Objects.equal(visibility,JvmVisibility.PUBLIC)) {
+      if (Objects.equal(visibility, JvmVisibility.PUBLIC)) {
         _matched=true;
         _switchResult = "public ";
       }
@@ -206,7 +206,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
             appendable.append(_name);
             EList<JvmTypeConstraint> _constraints = typeParameter.getConstraints();
             Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(_constraints, JvmUpperBound.class);
-            final Function1<JvmUpperBound,Boolean> _function = new Function1<JvmUpperBound,Boolean>() {
+            final Function1<JvmUpperBound, Boolean> _function = new Function1<JvmUpperBound, Boolean>() {
               public Boolean apply(final JvmUpperBound it) {
                 JvmTypeReference _typeReference = it.getTypeReference();
                 String _identifier = _typeReference.getIdentifier();

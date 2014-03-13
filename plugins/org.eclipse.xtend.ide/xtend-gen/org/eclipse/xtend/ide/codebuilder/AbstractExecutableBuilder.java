@@ -250,7 +250,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     boolean _and_1 = false;
     boolean _and_2 = false;
     List<AbstractParameterBuilder> _parameterBuilders = this.getParameterBuilders();
-    final Function1<AbstractParameterBuilder,Boolean> _function = new Function1<AbstractParameterBuilder,Boolean>() {
+    final Function1<AbstractParameterBuilder, Boolean> _function = new Function1<AbstractParameterBuilder, Boolean>() {
       public Boolean apply(final AbstractParameterBuilder it) {
         return Boolean.valueOf(it.isValid());
       }

@@ -106,7 +106,7 @@ public abstract class AbstractURIHandlerTest extends Assert {
     try {
       final ByteArrayInputStream in = new ByteArrayInputStream(bytes);
       ResourceSet _resourceSet = resource.getResourceSet();
-      Map<Object,Object> _loadOptions = _resourceSet.getLoadOptions();
+      Map<Object, Object> _loadOptions = _resourceSet.getLoadOptions();
       resource.load(in, _loadOptions);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -129,7 +129,7 @@ public abstract class AbstractURIHandlerTest extends Assert {
     if (_notEquals) {
       throw new UnexpectedResourcesException(otherResourceSet);
     }
-    final Map<EObject,Collection<EStructuralFeature.Setting>> unresolved = EcoreUtil.UnresolvedProxyCrossReferencer.find(otherResourceSet);
+    final Map<EObject, Collection<EStructuralFeature.Setting>> unresolved = EcoreUtil.UnresolvedProxyCrossReferencer.find(otherResourceSet);
     boolean _isEmpty = unresolved.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {

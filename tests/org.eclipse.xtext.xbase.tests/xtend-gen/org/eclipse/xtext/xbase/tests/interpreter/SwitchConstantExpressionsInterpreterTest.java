@@ -34,13 +34,13 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
   
   @Test
   public void testXNumberLiteral() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("int", "1");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("int", "1");
     this.evaluatesTo(_mappedTo, Integer.valueOf(1));
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("short", "1 as short");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("short", "1 as short");
     this.evaluatesTo(_mappedTo_1, Integer.valueOf(1));
-    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("byte", "1 as byte");
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("byte", "1 as byte");
     this.evaluatesTo(_mappedTo_2, Integer.valueOf(1));
-    Pair<String,String> _mappedTo_3 = Pair.<String, String>of("char", "1 as char");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("char", "1 as char");
     this.evaluatesTo(_mappedTo_3, Integer.valueOf(1));
   }
   
@@ -96,16 +96,16 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
   }
   
   protected void evaluatesTo(final String expression, final Object expectation) {
-    Pair<String,String> _mappedTo = Pair.<String, String>of(null, expression);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(null, expression);
     this.evaluatesTo(_mappedTo, expectation);
   }
   
   protected void evaluatesTo(final String expression, final Procedure1<? super Object> assertions) {
-    Pair<String,String> _mappedTo = Pair.<String, String>of(null, expression);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(null, expression);
     this.evaluatesTo(_mappedTo, assertions);
   }
   
-  protected void evaluatesTo(final Pair<String,String> typeAndExpression, final Object expectation) {
+  protected void evaluatesTo(final Pair<String, String> typeAndExpression, final Object expectation) {
     final Procedure1<Object> _function = new Procedure1<Object>() {
       public void apply(final Object it) {
         Assert.assertEquals(expectation, it);
@@ -114,7 +114,7 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
     this.evaluatesTo(typeAndExpression, _function);
   }
   
-  protected void evaluatesTo(final Pair<String,String> typeAndExpression, final Procedure1<? super Object> assertions) {
+  protected void evaluatesTo(final Pair<String, String> typeAndExpression, final Procedure1<? super Object> assertions) {
     try {
       final String type = typeAndExpression.getKey();
       final String expression = typeAndExpression.getValue();

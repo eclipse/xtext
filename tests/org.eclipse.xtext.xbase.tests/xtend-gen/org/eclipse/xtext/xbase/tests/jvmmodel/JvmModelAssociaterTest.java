@@ -180,7 +180,7 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
             Resource _eResource = it.eResource();
             EList<EObject> _contents = _eResource.getContents();
             Iterable<JvmGenericType> _filter = Iterables.<JvmGenericType>filter(_contents, JvmGenericType.class);
-            final Function1<JvmGenericType,Boolean> _function = new Function1<JvmGenericType,Boolean>() {
+            final Function1<JvmGenericType, Boolean> _function = new Function1<JvmGenericType, Boolean>() {
               public Boolean apply(final JvmGenericType it) {
                 String _identifier = it.getIdentifier();
                 return Boolean.valueOf(Objects.equal(_identifier, "foo.Bar"));

@@ -51,7 +51,7 @@ public class ErrorSafeExtensions {
       Resource _eResource = element.eResource();
       final IElementIssueProvider issueProvider = this.issueProviderFactory.get(_eResource);
       Iterable<Issue> _issues = issueProvider.getIssues(element);
-      final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
+      final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
         public Boolean apply(final Issue it) {
           Severity _severity = it.getSeverity();
           return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
@@ -68,7 +68,7 @@ public class ErrorSafeExtensions {
       Resource _eResource = element.eResource();
       final IElementIssueProvider issueProvider = this.issueProviderFactory.get(_eResource);
       Iterable<Issue> _issues = issueProvider.getIssues(element);
-      final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
+      final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
         public Boolean apply(final Issue it) {
           Severity _severity = it.getSeverity();
           return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
@@ -79,14 +79,14 @@ public class ErrorSafeExtensions {
     return _xblockexpression;
   }
   
-  public <T extends EObject> void forEachSafely(final ITreeAppendable appendable, final Iterable<T> elements, final Procedure1<? super LoopParams> loopInitializer, final Procedure2<? super T,? super ITreeAppendable> body) {
+  public <T extends EObject> void forEachSafely(final ITreeAppendable appendable, final Iterable<T> elements, final Procedure1<? super LoopParams> loopInitializer, final Procedure2<? super T, ? super ITreeAppendable> body) {
     boolean _isEmpty = IterableExtensions.isEmpty(elements);
     if (_isEmpty) {
       return;
     }
     LoopParams _loopParams = new LoopParams();
     final LoopParams loopParams = ObjectExtensions.<LoopParams>operator_doubleArrow(_loopParams, loopInitializer);
-    final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
+    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
       public Boolean apply(final T it) {
         return Boolean.valueOf(ErrorSafeExtensions.this.hasErrors(it));
       }

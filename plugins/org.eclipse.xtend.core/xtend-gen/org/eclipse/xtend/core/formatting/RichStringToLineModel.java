@@ -264,7 +264,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
         int _length_1 = text.length();
         int _minus = (_length_1 - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
-        final Function2<Boolean,Integer,Boolean> _function = new Function2<Boolean,Integer,Boolean>() {
+        final Function2<Boolean, Integer, Boolean> _function = new Function2<Boolean, Integer, Boolean>() {
           public Boolean apply(final Boolean v, final Integer i) {
             boolean _or = false;
             if ((v).booleanValue()) {

@@ -31,9 +31,9 @@ public class Context {
     return this._classFinder;
   }
   
-  private final Map<String,JvmIdentifiableElement> _visibleFeatures;
+  private final Map<String, JvmIdentifiableElement> _visibleFeatures;
   
-  public Map<String,JvmIdentifiableElement> getVisibleFeatures() {
+  public Map<String, JvmIdentifiableElement> getVisibleFeatures() {
     return this._visibleFeatures;
   }
   
@@ -45,12 +45,12 @@ public class Context {
   
   public Context cloneWithExpectation(final JvmTypeReference newExpectation) {
     ClassFinder _classFinder = this.getClassFinder();
-    Map<String,JvmIdentifiableElement> _visibleFeatures = this.getVisibleFeatures();
+    Map<String, JvmIdentifiableElement> _visibleFeatures = this.getVisibleFeatures();
     Set<XExpression> _alreadyEvaluating = this.getAlreadyEvaluating();
     return new Context(newExpectation, _classFinder, _visibleFeatures, _alreadyEvaluating);
   }
   
-  public Context(final JvmTypeReference expectedType, final ClassFinder classFinder, final Map<String,JvmIdentifiableElement> visibleFeatures, final Set<XExpression> alreadyEvaluating) {
+  public Context(final JvmTypeReference expectedType, final ClassFinder classFinder, final Map<String, JvmIdentifiableElement> visibleFeatures, final Set<XExpression> alreadyEvaluating) {
     super();
     this._expectedType = expectedType;
     this._classFinder = classFinder;

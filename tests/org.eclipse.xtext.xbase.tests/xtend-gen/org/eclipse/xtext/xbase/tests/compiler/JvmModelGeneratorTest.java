@@ -152,7 +152,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
       Resource _eResource_3 = expression.eResource();
       this.generator.doGenerate(_eResource_3, fsa);
-      Map<String,CharSequence> _files = fsa.getFiles();
+      Map<String, CharSequence> _files = fsa.getFiles();
       String _identifier = clazz.getIdentifier();
       String _replace = _identifier.replace(".", "/");
       String _plus = (IFileSystemAccess.DEFAULT_OUTPUT + _replace);
@@ -281,7 +281,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       boolean _isAnnotation = compiledClass.isAnnotation();
       Assert.assertTrue(_isAnnotation);
       Method[] _methods = compiledClass.getMethods();
-      final Function1<Method,Boolean> _function_1 = new Function1<Method,Boolean>() {
+      final Function1<Method, Boolean> _function_1 = new Function1<Method, Boolean>() {
         public Boolean apply(final Method it) {
           String _name = it.getName();
           return Boolean.valueOf(Objects.equal(_name, "value"));
@@ -291,7 +291,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Object _defaultValue = _findFirst.getDefaultValue();
       Assert.assertEquals(String.class, _defaultValue);
       Method[] _methods_1 = compiledClass.getMethods();
-      final Function1<Method,Boolean> _function_2 = new Function1<Method,Boolean>() {
+      final Function1<Method, Boolean> _function_2 = new Function1<Method, Boolean>() {
         public Boolean apply(final Method it) {
           String _name = it.getName();
           return Boolean.valueOf(Objects.equal(_name, "otherValue"));
@@ -817,7 +817,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Resource _eResource = expression.eResource();
       final Class<?> compiled = this.compile(_eResource, clazz);
       final Class<?>[] classes = compiled.getClasses();
-      final Function1<Class<?>,Boolean> _function_1 = new Function1<Class<?>,Boolean>() {
+      final Function1<Class<?>, Boolean> _function_1 = new Function1<Class<?>, Boolean>() {
         public Boolean apply(final Class<?> it) {
           String _name = it.getName();
           return Boolean.valueOf(_name.endsWith("AbstractClass"));
@@ -827,7 +827,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       int _modifiers = _findFirst.getModifiers();
       boolean _isAbstract = Modifier.isAbstract(_modifiers);
       Assert.assertTrue(_isAbstract);
-      final Function1<Class<?>,Boolean> _function_2 = new Function1<Class<?>,Boolean>() {
+      final Function1<Class<?>, Boolean> _function_2 = new Function1<Class<?>, Boolean>() {
         public Boolean apply(final Class<?> it) {
           String _name = it.getName();
           return Boolean.valueOf(_name.endsWith("StaticClass"));
@@ -837,7 +837,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       int _modifiers_1 = _findFirst_1.getModifiers();
       boolean _isStatic = Modifier.isStatic(_modifiers_1);
       Assert.assertTrue(_isStatic);
-      final Function1<Class<?>,Boolean> _function_3 = new Function1<Class<?>,Boolean>() {
+      final Function1<Class<?>, Boolean> _function_3 = new Function1<Class<?>, Boolean>() {
         public Boolean apply(final Class<?> it) {
           String _name = it.getName();
           return Boolean.valueOf(_name.endsWith("FinalClass"));
@@ -1072,7 +1072,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       res.eSetDeliver(true);
       final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
       this.generator.doGenerate(res, fsa);
-      Map<String,CharSequence> _files = fsa.getFiles();
+      Map<String, CharSequence> _files = fsa.getFiles();
       String _identifier = type.getIdentifier();
       String _replace = _identifier.replace(".", "/");
       String _plus = (IFileSystemAccess.DEFAULT_OUTPUT + _replace);

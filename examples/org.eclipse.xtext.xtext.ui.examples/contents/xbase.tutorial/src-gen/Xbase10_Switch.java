@@ -18,13 +18,13 @@ public class Xbase10_Switch {
       String _head = IterableExtensions.<String>head(list);
       boolean _matched = false;
       if (!_matched) {
-        if (Objects.equal(_head,"foo")) {
+        if (Objects.equal(_head, "foo")) {
           _matched=true;
           /* "it\'s foo" */
         }
       }
       if (!_matched) {
-        if (Objects.equal(_head,"bar")) {
+        if (Objects.equal(_head, "bar")) {
           _matched=true;
           /* "a bar" */
         }
@@ -36,7 +36,7 @@ public class Xbase10_Switch {
       Circle _circle = new Circle(4);
       Rectangle _rectangle_1 = new Rectangle(6, 8);
       final ArrayList<Shape> list2 = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
-      final Function1<Shape,String> _function = new Function1<Shape,String>() {
+      final Function1<Shape, String> _function = new Function1<Shape, String>() {
         public String apply(final Shape shape) {
           String _switchResult = null;
           boolean _matched = false;

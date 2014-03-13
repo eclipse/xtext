@@ -42,7 +42,7 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
     _builder.append(_fullyQualifiedName, "");
     _builder.append("(");
     EList<XtendParameter> _parameters = it.getParameters();
-    final Function1<XtendParameter,String> _function = new Function1<XtendParameter,String>() {
+    final Function1<XtendParameter, String> _function = new Function1<XtendParameter, String>() {
       public String apply(final XtendParameter it) {
         JvmTypeReference _parameterType = it.getParameterType();
         return _parameterType.getSimpleName();
@@ -68,7 +68,7 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
     _builder.append(_fullyQualifiedName, "");
     _builder.append("(");
     EList<XtendParameter> _parameters = it.getParameters();
-    final Function1<XtendParameter,String> _function = new Function1<XtendParameter,String>() {
+    final Function1<XtendParameter, String> _function = new Function1<XtendParameter, String>() {
       public String apply(final XtendParameter it) {
         JvmTypeReference _parameterType = it.getParameterType();
         return _parameterType.getSimpleName();

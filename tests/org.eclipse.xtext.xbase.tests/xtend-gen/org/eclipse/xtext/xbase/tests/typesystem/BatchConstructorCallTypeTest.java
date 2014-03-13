@@ -43,7 +43,7 @@ public class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTes
     IBatchTypeResolver _typeResolver = this.getTypeResolver();
     XConstructorCall _head = IterableExtensions.<XConstructorCall>head(featureCalls);
     final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
-    final Procedure2<XConstructorCall,Integer> _function = new Procedure2<XConstructorCall,Integer>() {
+    final Procedure2<XConstructorCall, Integer> _function = new Procedure2<XConstructorCall, Integer>() {
       public void apply(final XConstructorCall featureCall, final Integer index) {
         final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
         StringConcatenation _builder = new StringConcatenation();

@@ -30,7 +30,7 @@ public class HiddenLeafAccess {
   public HiddenLeafs getHiddenLeafsBefore(final INode node) {
     HiddenLeafs _xblockexpression = null;
     {
-      final Function1<ILeafNode,Boolean> _function = new Function1<ILeafNode,Boolean>() {
+      final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
         public Boolean apply(final ILeafNode it) {
           boolean _isHidden = it.isHidden();
           return Boolean.valueOf((!_isHidden));
@@ -146,7 +146,7 @@ public class HiddenLeafAccess {
   public HiddenLeafs getHiddenLeafsAfter(final INode node) {
     HiddenLeafs _xblockexpression = null;
     {
-      final Function1<ILeafNode,Boolean> _function = new Function1<ILeafNode,Boolean>() {
+      final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
         public Boolean apply(final ILeafNode it) {
           boolean _isHidden = it.isHidden();
           return Boolean.valueOf((!_isHidden));
@@ -198,7 +198,7 @@ public class HiddenLeafAccess {
     return _xblockexpression;
   }
   
-  protected ILeafNode findPreviousLeaf(final INode node, final Function1<? super ILeafNode,? extends Boolean> matches) {
+  protected ILeafNode findPreviousLeaf(final INode node, final Function1<? super ILeafNode, ? extends Boolean> matches) {
     INode current = node;
     boolean _while = (current instanceof ICompositeNode);
     while (_while) {

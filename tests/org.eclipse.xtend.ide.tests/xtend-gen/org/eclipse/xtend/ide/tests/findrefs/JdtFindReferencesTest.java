@@ -160,7 +160,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           int _size = it.size();
           Assert.assertEquals(4, _size);
           Iterable<IField> _filter = Iterables.<IField>filter(it, IField.class);
-          final Function1<IField,Boolean> _function = new Function1<IField,Boolean>() {
+          final Function1<IField, Boolean> _function = new Function1<IField, Boolean>() {
             public Boolean apply(final IField it) {
               String _elementName = it.getElementName();
               return Boolean.valueOf(Objects.equal(_elementName, "x"));
@@ -169,7 +169,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           boolean _exists = IterableExtensions.<IField>exists(_filter, _function);
           Assert.assertTrue(_exists);
           Iterable<IMethod> _filter_1 = Iterables.<IMethod>filter(it, IMethod.class);
-          final Function1<IMethod,Boolean> _function_1 = new Function1<IMethod,Boolean>() {
+          final Function1<IMethod, Boolean> _function_1 = new Function1<IMethod, Boolean>() {
             public Boolean apply(final IMethod it) {
               String _elementName = it.getElementName();
               return Boolean.valueOf(Objects.equal(_elementName, "foo"));
@@ -178,7 +178,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           boolean _exists_1 = IterableExtensions.<IMethod>exists(_filter_1, _function_1);
           Assert.assertTrue(_exists_1);
           Iterable<IMethod> _filter_2 = Iterables.<IMethod>filter(it, IMethod.class);
-          final Function1<IMethod,Boolean> _function_2 = new Function1<IMethod,Boolean>() {
+          final Function1<IMethod, Boolean> _function_2 = new Function1<IMethod, Boolean>() {
             public Boolean apply(final IMethod it) {
               String _elementName = it.getElementName();
               return Boolean.valueOf(Objects.equal(_elementName, "bar"));
@@ -187,7 +187,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           boolean _exists_2 = IterableExtensions.<IMethod>exists(_filter_2, _function_2);
           Assert.assertTrue(_exists_2);
           Iterable<IMethod> _filter_3 = Iterables.<IMethod>filter(it, IMethod.class);
-          final Function1<IMethod,Boolean> _function_3 = new Function1<IMethod,Boolean>() {
+          final Function1<IMethod, Boolean> _function_3 = new Function1<IMethod, Boolean>() {
             public Boolean apply(final IMethod it) {
               String _elementName = it.getElementName();
               return Boolean.valueOf(Objects.equal(_elementName, "baz"));
@@ -244,7 +244,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         public void apply(final ArrayList<Object> it) {
           int _size = it.size();
           Assert.assertEquals(2, _size);
-          final Function1<Object,Boolean> _function = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IField)) {
@@ -259,7 +259,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists = IterableExtensions.<Object>exists(it, _function);
           Assert.assertTrue(_exists);
-          final Function1<Object,Boolean> _function_1 = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function_1 = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -341,7 +341,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         public void apply(final ArrayList<Object> it) {
           int _size = it.size();
           Assert.assertEquals(4, _size);
-          final Function1<Object,Boolean> _function = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IField)) {
@@ -356,7 +356,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists = IterableExtensions.<Object>exists(it, _function);
           Assert.assertTrue(_exists);
-          final Function1<Object,Boolean> _function_1 = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function_1 = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -371,7 +371,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_1);
           Assert.assertTrue(_exists_1);
-          final Function1<Object,Boolean> _function_2 = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function_2 = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -386,7 +386,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists_2 = IterableExtensions.<Object>exists(it, _function_2);
           Assert.assertTrue(_exists_2);
-          final Function1<Object,Boolean> _function_3 = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function_3 = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -466,7 +466,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         public void apply(final ArrayList<Object> it) {
           int _size = it.size();
           Assert.assertEquals(5, _size);
-          final Function1<Object,Boolean> _function = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IField)) {
@@ -481,7 +481,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists = IterableExtensions.<Object>exists(it, _function);
           Assert.assertTrue(_exists);
-          final Function1<Object,Boolean> _function_1 = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function_1 = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -496,7 +496,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_1);
           Assert.assertTrue(_exists_1);
-          final Function1<Object,Boolean> _function_2 = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function_2 = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -511,7 +511,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists_2 = IterableExtensions.<Object>exists(it, _function_2);
           Assert.assertTrue(_exists_2);
-          final Function1<Object,Boolean> _function_3 = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function_3 = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -526,7 +526,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists_3 = IterableExtensions.<Object>exists(it, _function_3);
           Assert.assertTrue(_exists_3);
-          final Function1<Object,Boolean> _function_4 = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function_4 = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -627,7 +627,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         public void apply(final ArrayList<Object> it) {
           int _size = it.size();
           Assert.assertEquals(3, _size);
-          final Function1<Object,Boolean> _function = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -642,7 +642,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists = IterableExtensions.<Object>exists(it, _function);
           Assert.assertTrue(_exists);
-          final Function1<Object,Boolean> _function_1 = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function_1 = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -657,7 +657,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_1);
           Assert.assertTrue(_exists_1);
-          final Function1<Object,Boolean> _function_2 = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function_2 = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -730,7 +730,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         public void apply(final ArrayList<Object> it) {
           int _size = it.size();
           Assert.assertEquals(3, _size);
-          final Function1<Object,Boolean> _function = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IField)) {
@@ -745,7 +745,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists = IterableExtensions.<Object>exists(it, _function);
           Assert.assertTrue(_exists);
-          final Function1<Object,Boolean> _function_1 = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function_1 = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -760,7 +760,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_1);
           Assert.assertTrue(_exists_1);
-          final Function1<Object,Boolean> _function_2 = new Function1<Object,Boolean>() {
+          final Function1<Object, Boolean> _function_2 = new Function1<Object, Boolean>() {
             public Boolean apply(final Object it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -801,7 +801,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         public void apply(final Iterable<IJavaElement> it) {
           int _size = IterableExtensions.size(it);
           Assert.assertEquals(1, _size);
-          final Function1<IJavaElement,Boolean> _function = new Function1<IJavaElement,Boolean>() {
+          final Function1<IJavaElement, Boolean> _function = new Function1<IJavaElement, Boolean>() {
             public Boolean apply(final IJavaElement it) {
               boolean _and = false;
               if (!(it instanceof IType)) {
@@ -851,7 +851,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         public void apply(final Iterable<IJavaElement> it) {
           int _size = IterableExtensions.size(it);
           Assert.assertEquals(1, _size);
-          final Function1<IJavaElement,Boolean> _function = new Function1<IJavaElement,Boolean>() {
+          final Function1<IJavaElement, Boolean> _function = new Function1<IJavaElement, Boolean>() {
             public Boolean apply(final IJavaElement it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -898,7 +898,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         public void apply(final Iterable<IJavaElement> it) {
           int _size = IterableExtensions.size(it);
           Assert.assertEquals(1, _size);
-          final Function1<IJavaElement,Boolean> _function = new Function1<IJavaElement,Boolean>() {
+          final Function1<IJavaElement, Boolean> _function = new Function1<IJavaElement, Boolean>() {
             public Boolean apply(final IJavaElement it) {
               boolean _and = false;
               if (!(it instanceof IField)) {
@@ -945,7 +945,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         public void apply(final Iterable<IJavaElement> it) {
           int _size = IterableExtensions.size(it);
           Assert.assertEquals(3, _size);
-          final Function1<IJavaElement,Boolean> _function = new Function1<IJavaElement,Boolean>() {
+          final Function1<IJavaElement, Boolean> _function = new Function1<IJavaElement, Boolean>() {
             public Boolean apply(final IJavaElement it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -960,7 +960,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function);
           Assert.assertTrue(_exists);
-          final Function1<IJavaElement,Boolean> _function_1 = new Function1<IJavaElement,Boolean>() {
+          final Function1<IJavaElement, Boolean> _function_1 = new Function1<IJavaElement, Boolean>() {
             public Boolean apply(final IJavaElement it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -975,7 +975,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists_1 = IterableExtensions.<IJavaElement>exists(it, _function_1);
           Assert.assertTrue(_exists_1);
-          final Function1<IJavaElement,Boolean> _function_2 = new Function1<IJavaElement,Boolean>() {
+          final Function1<IJavaElement, Boolean> _function_2 = new Function1<IJavaElement, Boolean>() {
             public Boolean apply(final IJavaElement it) {
               boolean _and = false;
               if (!(it instanceof IField)) {
@@ -1032,7 +1032,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         public void apply(final Iterable<IJavaElement> it) {
           int _size = IterableExtensions.size(it);
           Assert.assertEquals(2, _size);
-          final Function1<IJavaElement,Boolean> _function = new Function1<IJavaElement,Boolean>() {
+          final Function1<IJavaElement, Boolean> _function = new Function1<IJavaElement, Boolean>() {
             public Boolean apply(final IJavaElement it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -1047,7 +1047,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           };
           boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function);
           Assert.assertTrue(_exists);
-          final Function1<IJavaElement,Boolean> _function_1 = new Function1<IJavaElement,Boolean>() {
+          final Function1<IJavaElement, Boolean> _function_1 = new Function1<IJavaElement, Boolean>() {
             public Boolean apply(final IJavaElement it) {
               boolean _and = false;
               if (!(it instanceof IMethod)) {
@@ -1085,9 +1085,9 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
             events.add(it);
             if ((it instanceof MatchEvent)) {
               Match[] _matches = ((MatchEvent) it).getMatches();
-              final Function1<Match,Boolean> _function = new Function1<Match,Boolean>() {
+              final Function1<Match, Boolean> _function = new Function1<Match, Boolean>() {
                 public Boolean apply(final Match m) {
-                  final Function1<MatchFilter,Boolean> _function = new Function1<MatchFilter,Boolean>() {
+                  final Function1<MatchFilter, Boolean> _function = new Function1<MatchFilter, Boolean>() {
                     public Boolean apply(final MatchFilter it) {
                       boolean _filters = it.filters(m);
                       return Boolean.valueOf((!_filters));

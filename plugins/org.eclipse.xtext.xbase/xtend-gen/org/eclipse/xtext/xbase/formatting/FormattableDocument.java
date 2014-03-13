@@ -39,9 +39,9 @@ public class FormattableDocument {
     return this._document;
   }
   
-  private final TreeMap<Integer,FormattingData> _formattings;
+  private final TreeMap<Integer, FormattingData> _formattings;
   
-  public TreeMap<Integer,FormattingData> getFormattings() {
+  public TreeMap<Integer, FormattingData> getFormattings() {
     return this._formattings;
   }
   
@@ -68,7 +68,7 @@ public class FormattableDocument {
   public FormattableDocument(final FormattingPreferenceValues cfg, final String document) {
     this._cfg = cfg;
     this._document = document;
-    TreeMap<Integer,FormattingData> _treeMap = new TreeMap<Integer, FormattingData>();
+    TreeMap<Integer, FormattingData> _treeMap = new TreeMap<Integer, FormattingData>();
     this._formattings = _treeMap;
   }
   
@@ -77,8 +77,8 @@ public class FormattableDocument {
     this._cfg = _cfg;
     String _document = fmt.getDocument();
     this._document = _document;
-    TreeMap<Integer,FormattingData> _formattings = fmt.getFormattings();
-    TreeMap<Integer,FormattingData> _treeMap = new TreeMap<Integer, FormattingData>(_formattings);
+    TreeMap<Integer, FormattingData> _formattings = fmt.getFormattings();
+    TreeMap<Integer, FormattingData> _treeMap = new TreeMap<Integer, FormattingData>(_formattings);
     this._formattings = _treeMap;
   }
   
@@ -96,7 +96,7 @@ public class FormattableDocument {
         int _length = data.getLength();
         boolean _lessThan = (_length < 0);
         if (_lessThan) {
-          final Pair<String,String> text = this.getTextAround(data);
+          final Pair<String, String> text = this.getTextAround(data);
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("lenght of text-edit can not be negative:");
           _builder.newLine();
@@ -125,7 +125,7 @@ public class FormattableDocument {
           boolean _isWhitespace = this.isWhitespace(oldText);
           boolean _not = (!_isWhitespace);
           if (_not) {
-            final Pair<String,String> text_1 = this.getTextAround(data);
+            final Pair<String, String> text_1 = this.getTextAround(data);
             StringConcatenation _builder_1 = new StringConcatenation();
             _builder_1.append("Can not edit non-whitespace:");
             _builder_1.newLine();
@@ -145,7 +145,7 @@ public class FormattableDocument {
             throw new IllegalStateException(("Can non format non-whitespace: " + oldText));
           }
         }
-        TreeMap<Integer,FormattingData> _formattings = this.getFormattings();
+        TreeMap<Integer, FormattingData> _formattings = this.getFormattings();
         int _offset_2 = data.getOffset();
         final FormattingData old = _formattings.get(Integer.valueOf(_offset_2));
         FormattingData _xifexpression_1 = null;
@@ -159,7 +159,7 @@ public class FormattableDocument {
         FormattingData _xifexpression_2 = null;
         boolean _notEquals_1 = (!Objects.equal(newData, null));
         if (_notEquals_1) {
-          TreeMap<Integer,FormattingData> _formattings_1 = this.getFormattings();
+          TreeMap<Integer, FormattingData> _formattings_1 = this.getFormattings();
           int _offset_3 = data.getOffset();
           _xifexpression_2 = _formattings_1.put(Integer.valueOf(_offset_3), newData);
         }
@@ -246,12 +246,12 @@ public class FormattableDocument {
     return _xblockexpression;
   }
   
-  protected Pair<String,String> getTextAround(final FormattingData data1) {
-    Pair<String,String> _xblockexpression = null;
+  protected Pair<String, String> getTextAround(final FormattingData data1) {
+    Pair<String, String> _xblockexpression = null;
     {
       IntegerRange _upTo = new IntegerRange(0, 5);
       int _offset = data1.getOffset();
-      final Function2<Integer,Integer,Integer> _function = new Function2<Integer,Integer,Integer>() {
+      final Function2<Integer, Integer, Integer> _function = new Function2<Integer, Integer, Integer>() {
         public Integer apply(final Integer last, final Integer i) {
           int _xifexpression = (int) 0;
           if (((last).intValue() > 0)) {
@@ -266,7 +266,7 @@ public class FormattableDocument {
       final Integer back = IterableExtensions.<Integer, Integer>fold(_upTo, Integer.valueOf(_offset), _function);
       IntegerRange _upTo_1 = new IntegerRange(0, 5);
       int _offset_1 = data1.getOffset();
-      final Function2<Integer,Integer,Integer> _function_1 = new Function2<Integer,Integer,Integer>() {
+      final Function2<Integer, Integer, Integer> _function_1 = new Function2<Integer, Integer, Integer>() {
         public Integer apply(final Integer last, final Integer i) {
           int _xifexpression = (int) 0;
           if (((last).intValue() > 0)) {
@@ -308,7 +308,7 @@ public class FormattableDocument {
   }
   
   protected void reportConflict(final FormattingData data1, final FormattingData data2) {
-    final Pair<String,String> text = this.getTextAround(data1);
+    final Pair<String, String> text = this.getTextAround(data1);
     Throwable _rootTrace = this.getRootTrace();
     StackTraceElement[] _stackTrace = _rootTrace.getStackTrace();
     int _size = ((List<StackTraceElement>)Conversions.doWrapArray(_stackTrace)).size();
@@ -377,7 +377,7 @@ public class FormattableDocument {
     }
   }
   
-  public void operator_add(final Function1<? super FormattableDocument,? extends Iterable<FormattingData>> data) {
+  public void operator_add(final Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> data) {
     boolean _notEquals = (!Objects.equal(data, null));
     if (_notEquals) {
       Iterable<FormattingData> _apply = data.apply(this);
@@ -397,7 +397,7 @@ public class FormattableDocument {
       final ArrayList<TextReplacement> replacements = CollectionLiterals.<TextReplacement>newArrayList();
       int oldOffset = offset;
       int indentation = 0;
-      TreeMap<Integer,FormattingData> _formattings = this.getFormattings();
+      TreeMap<Integer, FormattingData> _formattings = this.getFormattings();
       Collection<FormattingData> _values = _formattings.values();
       for (final FormattingData f : _values) {
         {
@@ -482,7 +482,7 @@ public class FormattableDocument {
       final List<TextReplacement> edits = this.renderToEdits(offset, length);
       int lastOffset = offset;
       final StringBuilder newDocument = new StringBuilder();
-      final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
+      final Function1<TextReplacement, Integer> _function = new Function1<TextReplacement, Integer>() {
         public Integer apply(final TextReplacement it) {
           return Integer.valueOf(offset);
         }
@@ -514,7 +514,7 @@ public class FormattableDocument {
     int _length = doc.length();
     int _minus = (_length - 1);
     IntegerRange _upTo = new IntegerRange(0, _minus);
-    final Function1<Integer,Boolean> _function = new Function1<Integer,Boolean>() {
+    final Function1<Integer, Boolean> _function = new Function1<Integer, Boolean>() {
       public Boolean apply(final Integer it) {
         char _charAt = doc.charAt((it).intValue());
         return Boolean.valueOf(Character.isWhitespace(_charAt));
@@ -529,7 +529,7 @@ public class FormattableDocument {
       int currentIndentation = 0;
       NewLineData lastWrap = null;
       int lastIndentation = 0;
-      TreeMap<Integer,FormattingData> _formattings = this.getFormattings();
+      TreeMap<Integer, FormattingData> _formattings = this.getFormattings();
       Collection<FormattingData> _values = _formattings.values();
       for (final FormattingData f : _values) {
         int _offset = f.getOffset();
@@ -548,10 +548,10 @@ public class FormattableDocument {
       int _length = lastWrap.getLength();
       int lastOffset = (_offset_1 + _length);
       int lineStart = lastOffset;
-      TreeMap<Integer,FormattingData> _formattings_1 = this.getFormattings();
+      TreeMap<Integer, FormattingData> _formattings_1 = this.getFormattings();
       int _offset_2 = lastWrap.getOffset();
       int _plus_1 = (_offset_2 + 1);
-      SortedMap<Integer,FormattingData> _subMap = _formattings_1.subMap(Integer.valueOf(_plus_1), Integer.valueOf(offset));
+      SortedMap<Integer, FormattingData> _subMap = _formattings_1.subMap(Integer.valueOf(_plus_1), Integer.valueOf(offset));
       Collection<FormattingData> _values_1 = _subMap.values();
       for (final FormattingData f_1 : _values_1) {
         {
@@ -570,10 +570,10 @@ public class FormattableDocument {
         }
       }
       int lengthDiff = 0;
-      TreeMap<Integer,FormattingData> _formattings_2 = this.getFormattings();
+      TreeMap<Integer, FormattingData> _formattings_2 = this.getFormattings();
       int _offset_3 = lastWrap.getOffset();
       int _plus_2 = (_offset_3 + 1);
-      SortedMap<Integer,FormattingData> _subMap_1 = _formattings_2.subMap(Integer.valueOf(_plus_2), Integer.valueOf(offset));
+      SortedMap<Integer, FormattingData> _subMap_1 = _formattings_2.subMap(Integer.valueOf(_plus_2), Integer.valueOf(offset));
       Collection<FormattingData> _values_2 = _subMap_1.values();
       for (final FormattingData f_2 : _values_2) {
         if ((f_2 instanceof WhitespaceData)) {
@@ -673,7 +673,7 @@ public class FormattableDocument {
         FormattingPreferenceValues _cfg = this.getCfg();
         final String indent = _cfg.get(BasicFormatterPreferenceKeys.indentation);
         IntegerRange _upTo = new IntegerRange(0, (levels - 1));
-        final Function1<Integer,String> _function = new Function1<Integer,String>() {
+        final Function1<Integer, String> _function = new Function1<Integer, String>() {
           public String apply(final Integer it) {
             return indent;
           }
@@ -702,7 +702,7 @@ public class FormattableDocument {
         FormattingPreferenceValues _cfg = this.getCfg();
         final String sep = _cfg.get(BasicFormatterPreferenceKeys.lineSeparator);
         IntegerRange _upTo = new IntegerRange(0, (levels - 1));
-        final Function1<Integer,String> _function = new Function1<Integer,String>() {
+        final Function1<Integer, String> _function = new Function1<Integer, String>() {
           public String apply(final Integer it) {
             return sep;
           }

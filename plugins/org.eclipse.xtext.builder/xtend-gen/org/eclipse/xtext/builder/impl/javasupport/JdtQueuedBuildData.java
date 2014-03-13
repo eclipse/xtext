@@ -32,12 +32,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
-  private Map<String,JavaBuilderState> javaBuildState;
+  private Map<String, JavaBuilderState> javaBuildState;
   
   private Collection<UnconfirmedStructuralChangesDelta> unconfirmedDeltas;
   
   public void reset() {
-    HashMap<String,JavaBuilderState> _newHashMap = CollectionLiterals.<String, JavaBuilderState>newHashMap();
+    HashMap<String, JavaBuilderState> _newHashMap = CollectionLiterals.<String, JavaBuilderState>newHashMap();
     this.javaBuildState = _newHashMap;
     ArrayList<UnconfirmedStructuralChangesDelta> _newArrayList = CollectionLiterals.<UnconfirmedStructuralChangesDelta>newArrayList();
     this.unconfirmedDeltas = _newArrayList;

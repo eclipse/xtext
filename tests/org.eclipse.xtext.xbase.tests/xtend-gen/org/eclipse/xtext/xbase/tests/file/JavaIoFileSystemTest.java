@@ -58,7 +58,7 @@ public class JavaIoFileSystemTest {
                   ProjectConfig _projectConfig = new ProjectConfig("/foo");
                   final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
                     public void apply(final ProjectConfig it) {
-                      Map<Path,Path> _sourceFolderMappings = it.getSourceFolderMappings();
+                      Map<Path, Path> _sourceFolderMappings = it.getSourceFolderMappings();
                       Path _path = new Path("/foo/src");
                       Path _path_1 = new Path("/foo/xtend-gen");
                       _sourceFolderMappings.put(_path, _path_1);

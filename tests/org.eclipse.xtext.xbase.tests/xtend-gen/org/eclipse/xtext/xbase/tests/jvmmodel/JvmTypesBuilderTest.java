@@ -302,7 +302,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       Assert.assertEquals("Foo", _documentation);
       ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList("LITERAL0", "LITERAL1");
       EList<JvmEnumerationLiteral> _literals = myEnum.getLiterals();
-      final Function1<JvmEnumerationLiteral,String> _function_1 = new Function1<JvmEnumerationLiteral,String>() {
+      final Function1<JvmEnumerationLiteral, String> _function_1 = new Function1<JvmEnumerationLiteral, String>() {
         public String apply(final JvmEnumerationLiteral it) {
           return it.getSimpleName();
         }
@@ -472,7 +472,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testInitializeSafely_0() {
     final Procedure1<Object> _function = new Procedure1<Object>() {
       public void apply(final Object it) {
-        final Function3<EObject,String,Procedure1<? super JvmGenericType>,JvmGenericType> _function = new Function3<EObject,String,Procedure1<? super JvmGenericType>,JvmGenericType>() {
+        final Function3<EObject, String, Procedure1<? super JvmGenericType>, JvmGenericType> _function = new Function3<EObject, String, Procedure1<? super JvmGenericType>, JvmGenericType>() {
           public JvmGenericType apply(final EObject expr, final String name, final Procedure1<? super JvmGenericType> init) {
             return JvmTypesBuilderTest.this._jvmTypesBuilder.toClass(expr, name, init);
           }
@@ -487,7 +487,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testInitializeSafely_1() {
     final Procedure1<Object> _function = new Procedure1<Object>() {
       public void apply(final Object it) {
-        final Function3<EObject,String,Procedure1<? super JvmConstructor>,JvmConstructor> _function = new Function3<EObject,String,Procedure1<? super JvmConstructor>,JvmConstructor>() {
+        final Function3<EObject, String, Procedure1<? super JvmConstructor>, JvmConstructor> _function = new Function3<EObject, String, Procedure1<? super JvmConstructor>, JvmConstructor>() {
           public JvmConstructor apply(final EObject expr, final String name, final Procedure1<? super JvmConstructor> init) {
             return JvmTypesBuilderTest.this._jvmTypesBuilder.toConstructor(expr, init);
           }
@@ -502,7 +502,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testInitializeSafely_2() {
     final Procedure1<Object> _function = new Procedure1<Object>() {
       public void apply(final Object it) {
-        final Function3<EObject,String,Procedure1<? super JvmField>,JvmField> _function = new Function3<EObject,String,Procedure1<? super JvmField>,JvmField>() {
+        final Function3<EObject, String, Procedure1<? super JvmField>, JvmField> _function = new Function3<EObject, String, Procedure1<? super JvmField>, JvmField>() {
           public JvmField apply(final EObject expr, final String name, final Procedure1<? super JvmField> init) {
             return JvmTypesBuilderTest.this._jvmTypesBuilder.toField(expr, name, null, init);
           }
@@ -517,7 +517,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testInitializeSafely_3() {
     final Procedure1<Object> _function = new Procedure1<Object>() {
       public void apply(final Object it) {
-        final Function3<EObject,String,Procedure1<? super JvmOperation>,JvmOperation> _function = new Function3<EObject,String,Procedure1<? super JvmOperation>,JvmOperation>() {
+        final Function3<EObject, String, Procedure1<? super JvmOperation>, JvmOperation> _function = new Function3<EObject, String, Procedure1<? super JvmOperation>, JvmOperation>() {
           public JvmOperation apply(final EObject expr, final String name, final Procedure1<? super JvmOperation> init) {
             return JvmTypesBuilderTest.this._jvmTypesBuilder.toMethod(expr, name, null, init);
           }
@@ -532,7 +532,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testInitializeSafely_4() {
     final Procedure1<Object> _function = new Procedure1<Object>() {
       public void apply(final Object it) {
-        final Function3<EObject,String,Procedure1<? super JvmAnnotationType>,JvmAnnotationType> _function = new Function3<EObject,String,Procedure1<? super JvmAnnotationType>,JvmAnnotationType>() {
+        final Function3<EObject, String, Procedure1<? super JvmAnnotationType>, JvmAnnotationType> _function = new Function3<EObject, String, Procedure1<? super JvmAnnotationType>, JvmAnnotationType>() {
           public JvmAnnotationType apply(final EObject expr, final String name, final Procedure1<? super JvmAnnotationType> init) {
             return JvmTypesBuilderTest.this._jvmTypesBuilder.toAnnotationType(expr, name, init);
           }
@@ -547,7 +547,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   public void testInitializeSafely_5() {
     final Procedure1<Object> _function = new Procedure1<Object>() {
       public void apply(final Object it) {
-        final Function3<EObject,String,Procedure1<? super JvmEnumerationType>,JvmEnumerationType> _function = new Function3<EObject,String,Procedure1<? super JvmEnumerationType>,JvmEnumerationType>() {
+        final Function3<EObject, String, Procedure1<? super JvmEnumerationType>, JvmEnumerationType> _function = new Function3<EObject, String, Procedure1<? super JvmEnumerationType>, JvmEnumerationType>() {
           public JvmEnumerationType apply(final EObject expr, final String name, final Procedure1<? super JvmEnumerationType> init) {
             return JvmTypesBuilderTest.this._jvmTypesBuilder.toEnumerationType(expr, name, init);
           }
@@ -558,7 +558,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     this.expectErrorLogging(_function);
   }
   
-  protected <T extends Object> void genericTestInitializeSafely(final Function3<? super EObject,? super String,? super Procedure1<? super T>,? extends EObject> create) {
+  protected <T extends Object> void genericTestInitializeSafely(final Function3<? super EObject, ? super String, ? super Procedure1<? super T>, ? extends EObject> create) {
     final XNullLiteral expr = XbaseFactory.eINSTANCE.createXNullLiteral();
     final Wrapper<Boolean> initialized = new Wrapper<Boolean>(Boolean.valueOf(false));
     final Procedure1<T> _function = new Procedure1<T>() {
