@@ -173,6 +173,4 @@ import com.google.common.primitives.Booleans;
 	public static boolean operator_greaterEqualsThan(boolean a, boolean b) {
 		return Booleans.compare(a, b) >= 0;
 	}
-
-
 }

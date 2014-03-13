@@ -21,64 +21,63 @@ import com.google.common.annotations.GwtCompatible;
 	/**
 	 * The unary <code>minus</code> operator. This is the equivalent to the Java's <code>-</code> function.
 	 * 
-	 * @param a  a short.
-	 * @return   <code>-a</code>
+	 * @param s  a short.
+	 * @return   <code>-s</code>
 	 * @since 2.3
 	 */
 	@Pure
 	@Inline(value="(-$1)", constantExpression=true)
-	public static int operator_minus(short a) {
-		return -a;
+	public static int operator_minus(short s) {
+		return -s;
 	}
 	
 	/**
-	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
 	 * 
-	 * @param a  a short.
-	 * @return   <code>a--</code>
+	 * @param s  a short.
+	 * @return   <code>s--</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1--")
-	public static short operator_minusMinus(short a) {
-		return a--;
+	public static short operator_minusMinus(short s) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
 	 * 
-	 * @param a  a short.
-	 * @return   <code>a--</code>
+	 * @param s  a short.
+	 * @return   <code>s--</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1--")
-	public static short operator_minusMinus(Short a) {
-		return a--;
+	public static Short operator_minusMinus(Short s) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
 	 * 
-	 * @param a  a short.
-	 * @return   <code>a++</code>
+	 * @param s  a short.
+	 * @return   <code>s++</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1++")
-	public static short operator_plusPlus(short a) {
-		return a++;
+	public static short operator_plusPlus(short s) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
 	 * 
-	 * @param a  a short.
-	 * @return   <code>a++</code>
+	 * @param s  a short.
+	 * @return   <code>s++</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1++")
-	public static short operator_plusPlus(Short a) {
-		return a++;
+	public static Short operator_plusPlus(Short s) {
+		throw new HardcodedInInterpreterException();
 	}
-	
 	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
@@ -1466,21 +1465,5 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	// END generated code
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

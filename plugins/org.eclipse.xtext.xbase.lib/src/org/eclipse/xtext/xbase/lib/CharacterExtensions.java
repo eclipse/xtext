@@ -21,64 +21,63 @@ import com.google.common.annotations.GwtCompatible;
 	/**
 	 * The unary <code>minus</code> operator. This is the equivalent to the Java's <code>-</code> function.
 	 * 
-	 * @param a  a character.
-	 * @return   <code>-a</code>
+	 * @param c  a character.
+	 * @return   <code>-c</code>
 	 * @since 2.3
 	 */
 	@Pure
 	@Inline(value="(-$1)", constantExpression=true)
-	public static int operator_minus(char a) {
-		return -a;
+	public static int operator_minus(char c) {
+		return -c;
 	}
 	
 	/**
-	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
 	 * 
-	 * @param a  a character.
-	 * @return   <code>a--</code>
+	 * @param c  a character.
+	 * @return   <code>c--</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1--")
-	public static char operator_minusMinus(char a) {
-		return a--;
+	public static char operator_minusMinus(char c) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
 	 * 
-	 * @param a  a character.
-	 * @return   <code>a--</code>
+	 * @param c  a character.
+	 * @return   <code>c--</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1--")
-	public static char operator_minusMinus(Character a) {
-		return a--;
+	public static Character operator_minusMinus(Character c) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
 	 * 
-	 * @param a  a character.
-	 * @return   <code>a++</code>
+	 * @param c  a character.
+	 * @return   <code>c++</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1++")
-	public static char operator_plusPlus(char a) {
-		return a++;
+	public static char operator_plusPlus(char c) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
 	 * 
-	 * @param a  a character.
-	 * @return   <code>a++</code>
+	 * @param c  a character.
+	 * @return   <code>c++</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1++")
-	public static char operator_plusPlus(Character a) {
-		return a++;
+	public static Character operator_plusPlus(Character c) {
+		throw new HardcodedInInterpreterException();
 	}
-	
 	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
@@ -1466,21 +1465,4 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	// END generated code
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

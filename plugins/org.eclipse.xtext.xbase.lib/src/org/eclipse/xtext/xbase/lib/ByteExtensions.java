@@ -21,64 +21,63 @@ import com.google.common.annotations.GwtCompatible;
 	/**
 	 * The unary <code>minus</code> operator. This is the equivalent to the Java's <code>-</code> function.
 	 * 
-	 * @param a  a byte.
-	 * @return   <code>-a</code>
+	 * @param b  a byte.
+	 * @return   <code>-b</code>
 	 * @since 2.3
 	 */
 	@Pure
 	@Inline(value="(-$1)", constantExpression=true)
-	public static int operator_minus(byte a) {
-		return -a;
+	public static int operator_minus(byte b) {
+		return -b;
 	}
 	
 	/**
-	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
 	 * 
-	 * @param a  a byte.
-	 * @return   <code>a--</code>
+	 * @param b  a byte.
+	 * @return   <code>b--</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1--")
-	public static byte operator_minusMinus(byte a) {
-		return a--;
+	public static byte operator_minusMinus(byte b) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
 	 * 
-	 * @param a  a byte.
-	 * @return   <code>a--</code>
+	 * @param b  a byte.
+	 * @return   <code>b--</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1--")
-	public static byte operator_minusMinus(Byte a) {
-		return a--;
+	public static Byte operator_minusMinus(Byte b) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
 	 * 
-	 * @param a  a byte.
-	 * @return   <code>a++</code>
+	 * @param b  a byte.
+	 * @return   <code>b++</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1++")
-	public static byte operator_plusPlus(byte a) {
-		return a++;
+	public static byte operator_plusPlus(byte b) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
 	 * 
-	 * @param a  a byte.
-	 * @return   <code>a++</code>
+	 * @param b  a byte.
+	 * @return   <code>b++</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1++")
-	public static byte operator_plusPlus(Byte a) {
-		return a++;
+	public static Byte operator_plusPlus(Byte b) {
+		throw new HardcodedInInterpreterException();
 	}
-	
 	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
@@ -1466,21 +1465,4 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	// END generated code
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
