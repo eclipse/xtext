@@ -21,64 +21,63 @@ import com.google.common.annotations.GwtCompatible;
 	/**
 	 * The unary <code>minus</code> operator. This is the equivalent to the Java's <code>-</code> function.
 	 * 
-	 * @param a  a float.
-	 * @return   <code>-a</code>
+	 * @param f  a float.
+	 * @return   <code>-f</code>
 	 * @since 2.3
 	 */
 	@Pure
 	@Inline(value="(-$1)", constantExpression=true)
-	public static float operator_minus(float a) {
-		return -a;
+	public static float operator_minus(float f) {
+		return -f;
 	}
 	
 	/**
-	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
 	 * 
-	 * @param a  a float.
-	 * @return   <code>a--</code>
+	 * @param f  a float.
+	 * @return   <code>f--</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1--")
-	public static float operator_minusMinus(float a) {
-		return a--;
+	public static float operator_minusMinus(float f) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
 	 * 
-	 * @param a  a float.
-	 * @return   <code>a--</code>
+	 * @param f  a float.
+	 * @return   <code>f--</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1--")
-	public static float operator_minusMinus(Float a) {
-		return a--;
+	public static Float operator_minusMinus(Float f) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
 	 * 
-	 * @param a  a float.
-	 * @return   <code>a++</code>
+	 * @param f  a float.
+	 * @return   <code>f++</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1++")
-	public static float operator_plusPlus(float a) {
-		return a++;
+	public static float operator_plusPlus(float f) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
 	 * 
-	 * @param a  a float.
-	 * @return   <code>a++</code>
+	 * @param f  a float.
+	 * @return   <code>f++</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1++")
-	public static float operator_plusPlus(Float a) {
-		return a++;
+	public static Float operator_plusPlus(Float f) {
+		throw new HardcodedInInterpreterException();
 	}
-	
 	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
@@ -1466,21 +1465,5 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	// END generated code
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

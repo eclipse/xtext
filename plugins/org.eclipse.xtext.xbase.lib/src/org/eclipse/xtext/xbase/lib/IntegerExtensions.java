@@ -229,64 +229,63 @@ import com.google.common.annotations.GwtCompatible;
 	/**
 	 * The unary <code>minus</code> operator. This is the equivalent to the Java's <code>-</code> function.
 	 * 
-	 * @param a  an integer.
-	 * @return   <code>-a</code>
+	 * @param i  an integer.
+	 * @return   <code>-i</code>
 	 * @since 2.3
 	 */
 	@Pure
 	@Inline(value="(-$1)", constantExpression=true)
-	public static int operator_minus(int a) {
-		return -a;
+	public static int operator_minus(int i) {
+		return -i;
 	}
 	
 	/**
-	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
 	 * 
-	 * @param a  an integer.
-	 * @return   <code>a--</code>
+	 * @param i  an integer.
+	 * @return   <code>i--</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1--")
-	public static int operator_minusMinus(int a) {
-		return a--;
+	public static int operator_minusMinus(int i) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
 	 * 
-	 * @param a  an integer.
-	 * @return   <code>a--</code>
+	 * @param i  an integer.
+	 * @return   <code>i--</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1--")
-	public static int operator_minusMinus(Integer a) {
-		return a--;
+	public static Integer operator_minusMinus(Integer i) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
 	 * 
-	 * @param a  an integer.
-	 * @return   <code>a++</code>
+	 * @param i  an integer.
+	 * @return   <code>i++</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1++")
-	public static int operator_plusPlus(int a) {
-		return a++;
+	public static int operator_plusPlus(int i) {
+		throw new HardcodedInInterpreterException();
 	}
 	
 	/**
-	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
 	 * 
-	 * @param a  an integer.
-	 * @return   <code>a++</code>
+	 * @param i  an integer.
+	 * @return   <code>i++</code>
 	 * @since 2.6
 	 */
 	@Inline(value="$1++")
-	public static int operator_plusPlus(Integer a) {
-		return a++;
+	public static Integer operator_plusPlus(Integer i) {
+		throw new HardcodedInInterpreterException();
 	}
-	
 	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
@@ -1674,17 +1673,5 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	// END generated code
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
-import java.util.Arrays;
-
 import com.google.common.annotations.GwtCompatible;
 
 /**
