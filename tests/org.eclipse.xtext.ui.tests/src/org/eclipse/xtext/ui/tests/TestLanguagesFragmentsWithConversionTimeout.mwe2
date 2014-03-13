@@ -1,0 +1,43 @@
+/*******************************************************************************
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+module org.eclipse.xtext.ui.tests.TestLanguagesFragmentsWithConversionTimeout
+
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+import de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
+import de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
+
+var genModels =""
+var genModel = ""
+var basePackage = ""
+var javaModelDirectory = ""
+var xmiModelDirectory = ""
+var file.extensions = ""
+var classSplitting = true
+var skipGenerate = false
+var backtrack = false
+var memoize = false
+var emfRuntimeVersion = "2.9"
+
+CompositeGeneratorFragment {
+	fragment = ecore.EcoreGeneratorFragment auto-inject {}
+	fragment = grammarAccess.GrammarAccessFragment {}
+	fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+	fragment = resourceFactory.ResourceFactoryFragment { 
+		fileExtensions = file.extensions
+	}
+	fragment = parser.antlr.XtextAntlrGeneratorFragment {
+		antlrParam = "-Xconversiontimeout" antlrParam = "10000"
+		options = auto-inject {}
+	}
+	fragment = contentAssist.JavaBasedContentAssistFragment {}
+	fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
+		antlrParam = "-Xconversiontimeout" antlrParam = "10000"
+		options = auto-inject {}
+	}
+}
