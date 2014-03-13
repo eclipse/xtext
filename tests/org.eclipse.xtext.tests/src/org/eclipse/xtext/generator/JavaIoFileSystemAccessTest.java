@@ -11,6 +11,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.CharSequenceTraceWrapper;
@@ -55,7 +56,12 @@ public class JavaIoFileSystemAccessTest extends Assert {
 			binFile = new File(dir, "Y");
 			assertTrue(binFile.exists());
 			assertTrue(binFile.isFile());
-			assertEquals("\1\2\3", new String(ByteStreams.toByteArray(fileSystemAccess.readBinaryFile("tmp/Y"))));
+			InputStream stream = fileSystemAccess.readBinaryFile("tmp/Y");
+			try {
+				assertEquals("\1\2\3", new String(ByteStreams.toByteArray(stream)));
+			} finally {
+				stream.close();
+			}
 
 		} finally {
 			try {
