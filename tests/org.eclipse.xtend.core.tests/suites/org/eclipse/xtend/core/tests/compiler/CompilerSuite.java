@@ -60,6 +60,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	Java8OverloadCompilerTest.class,
 	OverloadedExtensionCompilerTest.class,
 	ParameterizedTypeCompilerTest.class,
+	PostfixOperatorCompilerTest.class,
 	PropertyCompilerTest.class,
 	TestBatchCompiler.class,
 	XtendCompilerTest.class,
