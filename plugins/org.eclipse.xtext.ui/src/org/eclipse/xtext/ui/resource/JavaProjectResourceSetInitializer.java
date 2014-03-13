@@ -90,16 +90,6 @@ public class JavaProjectResourceSetInitializer implements IResourceSetInitialize
 					}
 				}
 			}
-			final IProject project = javaProject.getProject();
-			for (IProject iProject : project.getWorkspace().getRoot().getProjects()) {
-				if (iProject.isAccessible()) {
-					IPath location = iProject.getLocation();
-					if (location != null) {
-						// append a trailing slash so that URI.isPrefix is true.
-						hashMap.put(URI.createPlatformResourceURI(iProject.getName()+"/", true), URI.createFileURI(location.toFile().getPath()+"/"));
-					}
-				}
-			}
 		} catch (JavaModelException e) {
 			LOG.error(e.getMessage(), e);
 		}

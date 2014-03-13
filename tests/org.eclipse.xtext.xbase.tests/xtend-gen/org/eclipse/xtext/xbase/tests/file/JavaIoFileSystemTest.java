@@ -154,7 +154,7 @@ public class JavaIoFileSystemTest {
   @Test
   public void testGetWorkspaceChildren() {
     Iterable<? extends Path> _children = this.fs.getChildren(Path.ROOT);
-    final Function1<Path,String> _function = new Function1<Path,String>() {
+    final Function1<Path, String> _function = new Function1<Path, String>() {
       public String apply(final Path it) {
         List<String> _segments = it.getSegments();
         return IterableExtensions.join(_segments, ".");
