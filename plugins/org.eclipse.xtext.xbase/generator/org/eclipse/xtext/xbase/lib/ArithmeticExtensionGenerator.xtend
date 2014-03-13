@@ -1,15 +1,17 @@
 package org.eclipse.xtext.xbase.lib
 
+import com.google.common.base.Charsets
+import com.google.common.io.Files
 import com.google.inject.Inject
 import java.io.File
-import java.io.FileWriter
 import java.util.List
 import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.xbase.XbaseStandaloneSetup
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
 
 import static org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping.*
-import org.eclipse.xtext.xbase.XbaseStandaloneSetup
-import org.eclipse.xtext.util.Files
+import org.eclipse.xtend2.lib.StringConcatenation
+import org.eclipse.xtend2.lib.StringConcatenationClient
 
 class ArithmeticExtensionGenerator {
 	def static void main(String[] args) {
@@ -19,20 +21,34 @@ class ArithmeticExtensionGenerator {
 			.generate()
 	}
 	
-	String since = "2.3"
+	static String since = "2.3"
 	
 	List<String> types = newArrayList("double", "float", "long", "int", "char", "short", "byte")
 	
-	List<QualifiedName> comparators = newArrayList(LESS_THAN, LESS_EQUALS_THAN, 
-			GREATER_THAN, GREATER_EQUALS_THAN, EQUALS, NOT_EQUALS
+	List<QualifiedName> comparators = newArrayList(
+		LESS_THAN,
+		LESS_EQUALS_THAN, 
+		GREATER_THAN,
+		GREATER_EQUALS_THAN,
+		EQUALS,
+		NOT_EQUALS
 	)
 	
-	List<QualifiedName> operators = newArrayList(PLUS, MINUS, MULTIPLY, DIVIDE, MODULO, LESS_THAN,
-			LESS_EQUALS_THAN, GREATER_THAN, GREATER_EQUALS_THAN, EQUALS, NOT_EQUALS
+	List<QualifiedName> operators = newArrayList(
+		PLUS,
+		MINUS,
+		MULTIPLY,
+		DIVIDE,
+		MODULO,
+		LESS_THAN,
+		LESS_EQUALS_THAN,
+		GREATER_THAN,
+		GREATER_EQUALS_THAN,
+		EQUALS,
+		NOT_EQUALS
 	)
 	
 	@Inject extension OperatorMapping
-	
 	
 	def generate() {
 		val path = "../org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/"
@@ -40,18 +56,18 @@ class ArithmeticExtensionGenerator {
 		for(type: types) {
 			val file = new File(path + type.className + ".java")
 			val newContent = if(file.exists) {
-				val content = Files.readFileIntoString(file.absolutePath)
+				val content = Files.toString(file, Charsets.ISO_8859_1)
 				'''
 					«content.substring(0, content.indexOf(startMarker))»
 						«generateAllOperations(type)»
-					«content.substring(content.indexOf(endMarker) + endMarker.length)»
-				'''		
+					«content.substring(content.indexOf(endMarker) + endMarker.length)»'''		
 			} else {
 				generate(type)
 			}
-			val writer = new FileWriter(file)
-			writer.append(newContent)
-			writer.close()
+			// enforce platform independent newlines
+			val result = new StringConcatenation('\n')
+			result.append(newContent)
+			Files.write(result, file, Charsets.ISO_8859_1)
 		}
 	}
 		
@@ -81,16 +97,63 @@ class ArithmeticExtensionGenerator {
 		/**
 		 * The unary <code>minus</code> operator. This is the equivalent to the Java's <code>-</code> function.
 		 * 
-		 * @param a  «type.article» «type.wrapperType.toFirstLower».
-		 * @return   <code>-a</code>
+		 * @param «type.charAt(0)»  «type.article» «type.wrapperType.toFirstLower».
+		 * @return   <code>-«type.charAt(0)»</code>
 		 * @since «since»
 		 */
 		@Pure
 		@Inline(value="(-$1)", constantExpression=true)
-		public static «returnType(type, MINUS, type)» «MINUS.methodName»(«type» a) {
-			return -a;
+		public static «returnType(type, MINUS, type)» «MINUS.methodName»(«type» «type.charAt(0)») {
+			return -«type.charAt(0)»;
 		}
 		
+		/**
+		 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+		 * 
+		 * @param «type.charAt(0)»  «type.article» «type.wrapperType.toFirstLower».
+		 * @return   <code>«type.charAt(0)»--</code>
+		 * @since 2.6
+		 */
+		@Inline(value="$1--")
+		public static «type» «MINUS_MINUS.methodName»(«type» «type.charAt(0)») {
+			throw new HardcodedInInterpreterException();
+		}
+		
+		/**
+		 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+		 * 
+		 * @param «type.charAt(0)»  «type.article» «type.wrapperType.toFirstLower».
+		 * @return   <code>«type.charAt(0)»--</code>
+		 * @since 2.6
+		 */
+		@Inline(value="$1--")
+		public static «type.wrapperType» «MINUS_MINUS.methodName»(«type.wrapperType» «type.charAt(0)») {
+			throw new HardcodedInInterpreterException();
+		}
+		
+		/**
+		 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+		 * 
+		 * @param «type.charAt(0)»  «type.article» «type.wrapperType.toFirstLower».
+		 * @return   <code>«type.charAt(0)»++</code>
+		 * @since 2.6
+		 */
+		@Inline(value="$1++")
+		public static «type» «PLUS_PLUS.methodName»(«type» «type.charAt(0)») {
+			throw new HardcodedInInterpreterException();
+		}
+		
+		/**
+		 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+		 * 
+		 * @param «type.charAt(0)»  «type.article» «type.wrapperType.toFirstLower».
+		 * @return   <code>«type.charAt(0)»++</code>
+		 * @since 2.6
+		 */
+		@Inline(value="$1++")
+		public static «type.wrapperType» «PLUS_PLUS.methodName»(«type.wrapperType» «type.charAt(0)») {
+			throw new HardcodedInInterpreterException();
+		}
 		«FOR other: types»
 			«generateOperations(type, other)»
 		«ENDFOR» 
@@ -181,14 +244,10 @@ class ArithmeticExtensionGenerator {
 	
 	def article(String it) {
 		switch(it.toLowerCase.substring(0, 1)) {
-			case 'a':
-				'an'
-			case 'e':
-				'an'
-			case 'i':
-				'an'
-			case 'o':
-				'an'
+			case 'a',
+			case 'e',
+			case 'i',
+			case 'o',
 			case 'u':
 				'an'
 			default:
@@ -217,7 +276,7 @@ class ArithmeticExtensionGenerator {
 	}		
 	
 	def endMarker() {
-		"// END generated code"
+		"// END generated code\n"
 	}		
 	
 }
