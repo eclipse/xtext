@@ -522,6 +522,19 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			}
 		}
 		{
+			CandidateCompareResult nameCompareResult = compareByName(right);
+			switch(nameCompareResult) {
+				case SUSPICIOUS_OTHER:
+					throw new IllegalStateException();
+				case EQUALLY_INVALID:
+					invalid = true;
+					break;
+				case OTHER:
+				case THIS:
+					return nameCompareResult;
+			}
+		}
+		{
 			CandidateCompareResult argumentTypeCompareResult = compareByArgumentTypes(right);
 			switch(argumentTypeCompareResult) {
 				case EQUALLY_INVALID:
@@ -555,19 +568,6 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		}
 		if(isTypeLiteral() && !right.isTypeLiteral()) {
 			return CandidateCompareResult.OTHER;
-		}
-		{
-			CandidateCompareResult nameCompareResult = compareByName(right);
-			switch(nameCompareResult) {
-				case SUSPICIOUS_OTHER:
-					throw new IllegalStateException();
-				case EQUALLY_INVALID:
-					invalid = true;
-					break;
-				case OTHER:
-				case THIS:
-					return nameCompareResult;
-			}
 		}
 		{
 			CandidateCompareResult bucketCompareResult = compareByBucket(right);
