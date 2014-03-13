@@ -285,14 +285,18 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 	
 	protected String getContents(IFile file) throws CoreException, IOException {
 		InputStream contents = file.getContents();
-		InputStreamReader reader = new InputStreamReader(contents, file.getCharset());
-		BufferedReader reader2 = new BufferedReader(reader);
-		String line = null;
-		StringBuilder result = new StringBuilder();
-		while ((line = reader2.readLine()) != null) {
-			result.append(line);
+		try {
+			InputStreamReader reader = new InputStreamReader(contents, file.getCharset());
+			BufferedReader reader2 = new BufferedReader(reader);
+			String line = null;
+			StringBuilder result = new StringBuilder();
+			while ((line = reader2.readLine()) != null) {
+				result.append(line);
+			}
+			return result.toString();
+		} finally {
+			contents.close();
 		}
-		return result.toString();
 	}
 
 	protected void createTwoReferencedProjects() throws CoreException {

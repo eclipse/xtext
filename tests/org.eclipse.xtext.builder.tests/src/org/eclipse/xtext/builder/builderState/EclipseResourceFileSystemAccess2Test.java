@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
+import java.io.InputStream;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -51,6 +53,11 @@ public class EclipseResourceFileSystemAccess2Test extends Assert {
 		assertEquals("XX", fsa.readTextFile("tmp/X"));
 
 		fsa.generateFile("tmp/Y", "\1\2\3");
-		assertEquals("\1\2\3", new String(ByteStreams.toByteArray(fsa.readBinaryFile("tmp/Y"))));
+		InputStream stream = fsa.readBinaryFile("tmp/Y");
+		try {
+			assertEquals("\1\2\3", new String(ByteStreams.toByteArray(stream)));
+		} finally {
+			stream.close();
+		}
 	}
 }
