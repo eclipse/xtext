@@ -113,7 +113,7 @@ Workflow {
 		}
 		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/BacktrackingContentAssistTestLanguage.xtext"
-			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsWithConversionTimeout {
 				backtrack=true
 			}
 		}
