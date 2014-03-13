@@ -14,6 +14,31 @@ import org.junit.Test
  */
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
+	@Test def void testCompoundOperatorPrecedence() {
+		assertCompilesTo('''
+			import java.util.List
+			class C {
+				def <T> operator_plus(List<T> list, T value) {}
+				def m(List<String> items, String s) {
+					items += s
+				}
+			}
+		''','''
+			import java.util.List;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Object> Object operator_plus(final List<T> list, final T value) {
+			    return null;
+			  }
+			  
+			  public boolean m(final List<String> items, final String s) {
+			    return items.add(s);
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testDeferredTypeArgumentResolution() {
 		assertCompilesTo('''
 			class C {
