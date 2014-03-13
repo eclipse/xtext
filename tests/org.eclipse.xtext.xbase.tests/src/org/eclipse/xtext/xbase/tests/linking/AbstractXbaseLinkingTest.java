@@ -537,7 +537,7 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		EcoreUtil.resolveAll(expression);
 		List<Resource.Diagnostic> errors = expression.eResource().getErrors();
 		assertEquals(errors.toString(), 1, errors.size());
-		assertEquals("Type mismatch: cannot convert from String to GenericType1<? extends String>", errors.get(0).getMessage());
+		assertEquals("Type mismatch: type String is not applicable at this location", errors.get(0).getMessage());
 	}
 	
 	@Test public void testGenerics_4() throws Exception {
