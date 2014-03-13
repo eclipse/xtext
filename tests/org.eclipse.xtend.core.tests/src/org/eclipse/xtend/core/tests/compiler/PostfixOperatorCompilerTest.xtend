@@ -194,8 +194,8 @@ class PostfixOperatorCompilerTest extends AbstractXtendCompilerTest {
 		'''
 			@SuppressWarnings("all")
 			public class Foo {
-			  public int foo() {
-			    int _xblockexpression = (int) 0;
+			  public Integer foo() {
+			    Integer _xblockexpression = null;
 			    {
 			      Integer i = Integer.valueOf(2);
 			      _xblockexpression = i++;

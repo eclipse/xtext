@@ -135,5 +135,4 @@ import com.google.common.annotations.GwtCompatible;
 	public static BigInteger operator_modulo(BigInteger a, BigInteger b) {
 		return a.mod(b);
 	}
-
 }

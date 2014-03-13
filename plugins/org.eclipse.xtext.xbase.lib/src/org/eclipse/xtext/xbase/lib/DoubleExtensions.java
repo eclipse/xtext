@@ -31,62 +31,6 @@ import com.google.common.annotations.GwtCompatible;
 	public static double operator_minus(Double a) {
 		return -a;
 	}
-	
-	/**
-	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
-	 * 
-	 * @param a  a double. May not be <code>null</code>.
-	 * @return   <code>a--</code>
-	 * @throws NullPointerException
-	 *             if {@code a} is <code>null</code>.
-	 * @since 2.6
-	 */
-	@Inline(value="$1--")
-	public static double operator_minusMinus(double a) {
-		return a--;
-	}
-	
-	/**
-	 * The unary <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
-	 * 
-	 * @param a  a double. May not be <code>null</code>.
-	 * @return   <code>a--</code>
-	 * @throws NullPointerException
-	 *             if {@code a} is <code>null</code>.
-	 * @since 2.6
-	 */
-	@Inline(value="$1--")
-	public static double operator_minusMinus(Double a) {
-		return a--;
-	}
-	
-	/**
-	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
-	 * 
-	 * @param a  a double. May not be <code>null</code>.
-	 * @return   <code>a++</code>
-	 * @throws NullPointerException
-	 *             if {@code a} is <code>null</code>.
-	 * @since 2.6
-	 */
-	@Inline(value="$1++")
-	public static double operator_plusPlus(double a) {
-		return a++;
-	}
-	
-	/**
-	 * The unary <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
-	 * 
-	 * @param a  a double. May not be <code>null</code>.
-	 * @return   <code>a++</code>
-	 * @throws NullPointerException
-	 *             if {@code a} is <code>null</code>.
-	 * @since 2.6
-	 */
-	@Inline(value="$1++")
-	public static double operator_plusPlus(Double a) {
-		return a++;
-	}
 
 	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the java <code>+</code> operator.
@@ -173,16 +117,63 @@ import com.google.common.annotations.GwtCompatible;
 	/**
 	 * The unary <code>minus</code> operator. This is the equivalent to the Java's <code>-</code> function.
 	 * 
-	 * @param a  a double.
-	 * @return   <code>-a</code>
+	 * @param d  a double.
+	 * @return   <code>-d</code>
 	 * @since 2.3
 	 */
 	@Pure
 	@Inline(value="(-$1)", constantExpression=true)
-	public static double operator_minus(double a) {
-		return -a;
+	public static double operator_minus(double d) {
+		return -d;
 	}
 	
+	/**
+	 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * 
+	 * @param d  a double.
+	 * @return   <code>d--</code>
+	 * @since 2.6
+	 */
+	@Inline(value="$1--")
+	public static double operator_minusMinus(double d) {
+		throw new HardcodedInInterpreterException();
+	}
+	
+	/**
+	 * The postfix <code>decrement</code> operator. This is the equivalent to the Java's <code>--</code> postfix function.
+	 * 
+	 * @param d  a double.
+	 * @return   <code>d--</code>
+	 * @since 2.6
+	 */
+	@Inline(value="$1--")
+	public static Double operator_minusMinus(Double d) {
+		throw new HardcodedInInterpreterException();
+	}
+	
+	/**
+	 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * 
+	 * @param d  a double.
+	 * @return   <code>d++</code>
+	 * @since 2.6
+	 */
+	@Inline(value="$1++")
+	public static double operator_plusPlus(double d) {
+		throw new HardcodedInInterpreterException();
+	}
+	
+	/**
+	 * The postfix <code>increment</code> operator. This is the equivalent to the Java's <code>++</code> postfix function.
+	 * 
+	 * @param d  a double.
+	 * @return   <code>d++</code>
+	 * @since 2.6
+	 */
+	@Inline(value="$1++")
+	public static Double operator_plusPlus(Double d) {
+		throw new HardcodedInInterpreterException();
+	}
 	/**
 	 * The binary <code>plus</code> operator. This is the equivalent to the Java <code>+</code> operator.
 	 * 
@@ -1570,21 +1561,4 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	// END generated code
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -403,10 +403,10 @@ public class PostfixOperatorCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public int foo() {");
+    _builder_1.append("public Integer foo() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("int _xblockexpression = (int) 0;");
+    _builder_1.append("Integer _xblockexpression = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("{");
