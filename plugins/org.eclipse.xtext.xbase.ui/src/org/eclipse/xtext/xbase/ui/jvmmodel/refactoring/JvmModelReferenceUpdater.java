@@ -116,8 +116,8 @@ public class JvmModelReferenceUpdater extends DefaultReferenceUpdater {
 						return false;
 				}
 				return element != null 
-						&& element.getEObjectURI() != null 
-						&& element.getEObjectURI().equals(newTarget.getEObjectURI());
+							&& element.getEObjectURI() != null 
+							&& element.getEObjectURI().equals(newTarget.getEObjectURI());
 			}
 
 			public boolean isBetterThan(String newText, String currentText) {
