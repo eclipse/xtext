@@ -232,7 +232,8 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
   @Test
   public void testRenameRefactoringScenario() {
     final RewritableImportSection section = this.getSection(List.class);
-    final JvmDeclaredType importedType = section.getImportedType("List");
+    List<JvmDeclaredType> _importedTypes = section.getImportedTypes("List");
+    final JvmDeclaredType importedType = IterableExtensions.<JvmDeclaredType>head(_importedTypes);
     Assert.assertNotNull(importedType);
     importedType.setSimpleName("NewList");
     section.removeImport(importedType);

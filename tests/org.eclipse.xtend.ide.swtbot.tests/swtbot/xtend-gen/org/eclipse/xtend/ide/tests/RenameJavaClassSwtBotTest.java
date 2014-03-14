@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.runners.Parameterized;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -30,7 +30,7 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(ParameterizedSWTBotRunner.class)
 @SuppressWarnings("all")
 public class RenameJavaClassSwtBotTest extends AbstractRefactoringSwtBotTest {
-  @Parameters(name = "{0}")
+  @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
     RefactoringTestParameters _refactoringTestParameters = new RefactoringTestParameters();
     final Procedure1<RefactoringTestParameters> _function = new Procedure1<RefactoringTestParameters>() {

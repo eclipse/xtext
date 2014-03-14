@@ -136,9 +136,9 @@ public class ConflictResolver {
 
 	protected boolean isBetter(JvmDeclaredType candidate, JvmDeclaredType currentBestMatch, TypeUsages usages, 
 			RewritableImportSection importSection) {
-		if (importSection.getImportedType(candidate.getSimpleName()) == candidate 
-				&& importSection.getImportedType(currentBestMatch.getSimpleName()) != currentBestMatch)
+		if (importSection.hasImportedType(candidate) && !importSection.hasImportedType(currentBestMatch)) {
 			return true;
+		}
 		return size(usages.getUsages(candidate)) > size(usages.getUsages(currentBestMatch));
 	}
 }

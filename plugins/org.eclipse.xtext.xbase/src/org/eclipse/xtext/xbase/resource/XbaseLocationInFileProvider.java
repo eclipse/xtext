@@ -85,7 +85,7 @@ public class XbaseLocationInFileProvider extends DefaultLocationInFileProvider {
 				return result;
 			}
 		}
-		if (owner instanceof XImportDeclaration && reference == XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE) {
+		if (isSignificant && owner instanceof XImportDeclaration && reference == XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE) {
 			List<INode> nodes = NodeModelUtils.findNodesForFeature(owner, reference);
 			if (!nodes.isEmpty()) {
 				INode qualifierNode = nodes.get(0);

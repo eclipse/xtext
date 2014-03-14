@@ -43,8 +43,7 @@ public class SwtBotProjectHelper {
   private final static String defaultProject = "test";
   
   public static SWTBotShell newXtendProject(final SWTWorkbenchBot it) {
-    SWTBotShell _newXtendProject = SwtBotProjectHelper.newXtendProject(it, SwtBotProjectHelper.defaultProject);
-    return _newXtendProject;
+    return SwtBotProjectHelper.newXtendProject(it, SwtBotProjectHelper.defaultProject);
   }
   
   public static SWTBotShell newXtendProject(final SWTWorkbenchBot it, final String projectName) {
@@ -55,8 +54,7 @@ public class SwtBotProjectHelper {
       final Function1<SWTBotView,Boolean> _function = new Function1<SWTBotView,Boolean>() {
         public Boolean apply(final SWTBotView it) {
           String _title = it.getTitle();
-          boolean _equals = Objects.equal(_title, "Welcome");
-          return Boolean.valueOf(_equals);
+          return Boolean.valueOf(Objects.equal(_title, "Welcome"));
         }
       };
       SWTBotView _findFirst = IterableExtensions.<SWTBotView>findFirst(_views, _function);
@@ -94,28 +92,23 @@ public class SwtBotProjectHelper {
       _button_4.click();
       SWTBotButton _button_5 = it.button("Finish");
       _button_5.click();
-      SWTBotShell _activate = shell.activate();
-      _xblockexpression = (_activate);
+      _xblockexpression = shell.activate();
     }
     return _xblockexpression;
   }
   
   public static SWTBotEclipseEditor newJavaEditor(final SWTWorkbenchBot it, final String typeName) {
-    String _plus = (SwtBotProjectHelper.defaultProject + "/src");
-    SWTBotEclipseEditor _newJavaEditor = SwtBotProjectHelper.newJavaEditor(it, typeName, "", _plus);
-    return _newJavaEditor;
+    return SwtBotProjectHelper.newJavaEditor(it, typeName, "", (SwtBotProjectHelper.defaultProject + "/src"));
   }
   
   public static SWTBotEclipseEditor newJavaEditor(final SWTWorkbenchBot it, final String typeName, final CharSequence content) {
-    String _plus = (SwtBotProjectHelper.defaultProject + "/src");
-    SWTBotEclipseEditor _newJavaEditor = SwtBotProjectHelper.newJavaEditor(it, typeName, "", _plus);
+    SWTBotEclipseEditor _newJavaEditor = SwtBotProjectHelper.newJavaEditor(it, typeName, "", (SwtBotProjectHelper.defaultProject + "/src"));
     final Procedure1<SWTBotEclipseEditor> _function = new Procedure1<SWTBotEclipseEditor>() {
       public void apply(final SWTBotEclipseEditor it) {
         SwtBotProjectHelper.setContent(it, content);
       }
     };
-    SWTBotEclipseEditor _doubleArrow = ObjectExtensions.<SWTBotEclipseEditor>operator_doubleArrow(_newJavaEditor, _function);
-    return _doubleArrow;
+    return ObjectExtensions.<SWTBotEclipseEditor>operator_doubleArrow(_newJavaEditor, _function);
   }
   
   public static SWTBotEclipseEditor newJavaEditor(final SWTWorkbenchBot it, final String typeName, final String packageName, final String sourceFolderPath) {
@@ -135,24 +128,20 @@ public class SwtBotProjectHelper {
       _textWithLabel_2.setText(typeName);
       SWTBotButton _button = it.button("Finish");
       _button.click();
-      String _plus = (typeName + ".java");
-      SWTBotEditor _editorByTitle = it.editorByTitle(_plus);
-      SWTBotEclipseEditor _textEditor = _editorByTitle.toTextEditor();
-      _xblockexpression = (_textEditor);
+      SWTBotEditor _editorByTitle = it.editorByTitle((typeName + ".java"));
+      _xblockexpression = _editorByTitle.toTextEditor();
     }
     return _xblockexpression;
   }
   
   public static SWTBotEclipseEditor newXtendEditor(final SWTWorkbenchBot it, final String typeName, final CharSequence content) {
-    String _plus = (SwtBotProjectHelper.defaultProject + "/src");
-    SWTBotEclipseEditor _newXtendEditor = SwtBotProjectHelper.newXtendEditor(it, typeName, "", _plus);
+    SWTBotEclipseEditor _newXtendEditor = SwtBotProjectHelper.newXtendEditor(it, typeName, "", (SwtBotProjectHelper.defaultProject + "/src"));
     final Procedure1<SWTBotEclipseEditor> _function = new Procedure1<SWTBotEclipseEditor>() {
       public void apply(final SWTBotEclipseEditor it) {
         SwtBotProjectHelper.setContent(it, content);
       }
     };
-    SWTBotEclipseEditor _doubleArrow = ObjectExtensions.<SWTBotEclipseEditor>operator_doubleArrow(_newXtendEditor, _function);
-    return _doubleArrow;
+    return ObjectExtensions.<SWTBotEclipseEditor>operator_doubleArrow(_newXtendEditor, _function);
   }
   
   public static SWTBotEclipseEditor newXtendEditor(final SWTWorkbenchBot it, final String typeName, final String packageName, final String sourceFolderPath) {
@@ -172,10 +161,8 @@ public class SwtBotProjectHelper {
       _textWithLabel_2.setText(typeName);
       SWTBotButton _button = it.button("Finish");
       _button.click();
-      String _plus = (typeName + ".xtend");
-      SWTBotEditor _editorByTitle = it.editorByTitle(_plus);
-      SWTBotEclipseEditor _textEditor = _editorByTitle.toTextEditor();
-      _xblockexpression = (_textEditor);
+      SWTBotEditor _editorByTitle = it.editorByTitle((typeName + ".xtend"));
+      _xblockexpression = _editorByTitle.toTextEditor();
     }
     return _xblockexpression;
   }
@@ -195,24 +182,21 @@ public class SwtBotProjectHelper {
     String _replace = contentString.replace("?", "");
     it.setText(_replace);
     final int offset = contentString.indexOf("?");
-    int _minus = (-1);
-    boolean _notEquals = (offset != _minus);
-    if (_notEquals) {
+    if ((offset != (-1))) {
       final Pair<Integer,Integer> lineAndColumn = SwtBotProjectHelper.getLineAndColumn(contentString, offset);
       Integer _key = lineAndColumn.getKey();
       Integer _value = lineAndColumn.getValue();
       int _lastIndexOf = contentString.lastIndexOf("?");
-      int _minus_1 = (_lastIndexOf - offset);
-      int _minus_2 = (_minus_1 - 1);
-      it.selectRange((_key).intValue(), (_value).intValue(), _minus_2);
+      int _minus = (_lastIndexOf - offset);
+      int _minus_1 = (_minus - 1);
+      it.selectRange((_key).intValue(), (_value).intValue(), _minus_1);
     }
   }
   
   public static SWTBotMenu clickableContextMenu(final SWTBotEclipseEditor editor, final String... text) {
     SWTBotStyledText _styledText = editor.getStyledText();
     MenuItem _contextMenu = ContextMenuHelper.contextMenu(_styledText, text);
-    SWTBotMenu _sWTBotMenu = new SWTBotMenu(_contextMenu);
-    return _sWTBotMenu;
+    return new SWTBotMenu(_contextMenu);
   }
   
   protected static Pair<Integer,Integer> getLineAndColumn(final String content, final int offset) {
@@ -223,51 +207,44 @@ public class SwtBotProjectHelper {
       String ignoreNext = null;
       ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, offset, true);
       for (final Integer i : _doubleDotLessThan) {
-        int _plus = ((i).intValue() + 1);
-        String _substring = content.substring((i).intValue(), _plus);
-        final String _switchValue = _substring;
+        String _substring = content.substring((i).intValue(), ((i).intValue() + 1));
         boolean _matched = false;
         if (!_matched) {
-          if (Objects.equal(_switchValue,ignoreNext)) {
+          if (Objects.equal(_substring,ignoreNext)) {
             _matched=true;
             ignoreNext = null;
           }
         }
         if (!_matched) {
-          if (Objects.equal(_switchValue,"\n")) {
+          if (Objects.equal(_substring,"\n")) {
             _matched=true;
             column = 0;
-            int _plus_1 = (line + 1);
-            line = _plus_1;
+            line = (line + 1);
             ignoreNext = "\r";
           }
         }
         if (!_matched) {
-          if (Objects.equal(_switchValue,"\r")) {
+          if (Objects.equal(_substring,"\r")) {
             _matched=true;
             column = 0;
-            int _plus_2 = (line + 1);
-            line = _plus_2;
+            line = (line + 1);
             ignoreNext = "\n";
           }
         }
         if (!_matched) {
           {
             ignoreNext = null;
-            int _plus_3 = (column + 1);
-            column = _plus_3;
+            column = (column + 1);
           }
         }
       }
-      Pair<Integer,Integer> _mappedTo = Pair.<Integer, Integer>of(Integer.valueOf(line), Integer.valueOf(column));
-      _xblockexpression = (_mappedTo);
+      _xblockexpression = Pair.<Integer, Integer>of(Integer.valueOf(line), Integer.valueOf(column));
     }
     return _xblockexpression;
   }
   
   public static Object clearSourceFolderContents(final SWTWorkbenchBot it) {
-    Object _clearSourceFolderContents = SwtBotProjectHelper.clearSourceFolderContents(it, SwtBotProjectHelper.defaultProject);
-    return _clearSourceFolderContents;
+    return SwtBotProjectHelper.clearSourceFolderContents(it, SwtBotProjectHelper.defaultProject);
   }
   
   public static Object clearSourceFolderContents(final SWTWorkbenchBot it, final String project) {

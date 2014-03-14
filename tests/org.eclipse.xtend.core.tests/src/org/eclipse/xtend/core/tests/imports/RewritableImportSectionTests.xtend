@@ -243,7 +243,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 
 	@Test def testRenameRefactoringScenario() {
 		val section = getSection(typeof(List))
-		val importedType = section.getImportedType("List")
+		val importedType = section.getImportedTypes("List").head
 		assertNotNull(importedType)
 		importedType.setSimpleName("NewList")
 		section.removeImport(importedType)

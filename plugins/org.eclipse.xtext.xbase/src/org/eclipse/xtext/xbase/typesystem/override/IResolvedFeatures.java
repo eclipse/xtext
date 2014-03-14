@@ -86,5 +86,6 @@ public interface IResolvedFeatures {
 		public List<JvmFeature> getAllFeatures() {
 			return Collections.emptyList();
 		}
+
 	};
 }

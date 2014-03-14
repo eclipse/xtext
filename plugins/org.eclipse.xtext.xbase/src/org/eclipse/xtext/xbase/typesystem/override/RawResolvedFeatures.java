@@ -67,7 +67,7 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 	 * the {@link JvmTypeChangeDispatcher} instead.
 	 */
 	static RawResolvedFeatures getResolvedFeatures(JvmDeclaredType type, CommonTypeComputationServices services) {
-		List<Adapter> adapterList = type.eAdapters();
+		final List<Adapter> adapterList = type.eAdapters();
 		RawResolvedFeatures adapter = (RawResolvedFeatures) EcoreUtil.getAdapter(adapterList, RawResolvedFeatures.class);
 		if (adapter != null) {
 			return adapter;
@@ -75,7 +75,8 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 		final RawResolvedFeatures newAdapter = new RawResolvedFeatures(type, services);
 		requestNotificationOnChange(type, new Runnable() {
 			public void run() {
-				newAdapter.featureIndex.clear();
+				newAdapter.clear();
+				adapterList.remove(newAdapter);
 			}
 		});
 		adapterList.add(newAdapter);
@@ -257,4 +258,10 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 	public boolean isAdapterForType(@Nullable Object type) {
 		return RawResolvedFeatures.class.equals(type);
 	}
+
+	private void clear() {
+		featureIndex.clear();
+		allFeaturesComputed = false;
+	}
+
 }

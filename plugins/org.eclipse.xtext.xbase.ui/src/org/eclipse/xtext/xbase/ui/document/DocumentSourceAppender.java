@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.document;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.ui.contentassist.WhitespaceHelper;
@@ -194,7 +196,7 @@ public class DocumentSourceAppender implements ISourceAppender {
 		} else {
 			final String qualifiedName = type.getQualifiedName(getInnerTypeSeparator());
 			final String simpleName = type.getSimpleName();
-			JvmDeclaredType importedType = importSection.getImportedType(simpleName);
+			JvmDeclaredType importedType = getImportedType(type);
 			if (importedType == type) {
 				builder.append(simpleName);
 			} else if (importedType == null) {
@@ -204,6 +206,19 @@ public class DocumentSourceAppender implements ISourceAppender {
 				builder.append(qualifiedName);
 			}
 		}
+	}
+
+	protected JvmDeclaredType getImportedType(JvmType type) {
+		List<JvmDeclaredType> importedTypes = importSection.getImportedTypes(type.getSimpleName());
+		if (importedTypes == null) {
+			return null;
+		}
+		for (JvmDeclaredType importedType : importedTypes) {
+			if (importedType == type) {
+				return importedType;
+			}
+		}
+		return IterableExtensions.last(importedTypes);
 	}
 	
 	protected char getInnerTypeSeparator() {

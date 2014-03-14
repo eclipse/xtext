@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.CrossReference;
@@ -114,12 +115,27 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 						indexInList, newTargetElement);
 				String newReferenceText = crossReferenceSerializer.getCrossRefText(referringElement,
 						crossReference, newTargetElement, refTextComparator, referenceTextRegion, updateAcceptor.getRefactoringStatus());
+				if (newReferenceText == null) {
+					newReferenceText = resolveNameConflict(referringElement, reference, newTargetElement, updateAcceptor);
+				}
+				if (newReferenceText == null) {
+					updateAcceptor.getRefactoringStatus().add(RefactoringStatus.ERROR, "Refactoring introduces a name conflict.", referringElement, referenceTextRegion);
+				}
 				createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement, reference, 
 						referringResourceURI, updateAcceptor);
 			}
 		}
 	}
 	
+	/**
+	 * Return null if it is not possible to resolve a name conflict; otherwise a name which should be used.
+	 * @param updateAcceptor 
+	 * @since 2.6
+	 */
+	protected String resolveNameConflict(EObject referringElement, EReference reference, EObject newTargetElement, IRefactoringUpdateAcceptor updateAcceptor) {
+		return null;
+	}
+
 	/**
 	 * The result is used to determine the best new link text in case of multiple possibilities.
 	 * By default, the shortest text is chosen.

@@ -111,7 +111,7 @@ public class ImportOrganizer {
 		// if the resource contains two types with the same simple name, we don't add any import
 		// but we can still use the package local name within the same package.
 		if(equal(usage.getContextPackageName(), type.getPackageName())) {
-			if(importSection.getImportedType(packageLocalName) == null) {
+			if(importSection.getImportedTypes(packageLocalName) == null) {
 				nameToUse = packageLocalName;
 			}
 		}

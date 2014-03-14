@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
@@ -31,13 +32,21 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.imports.StaticallyImportedMemberProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
 public class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceFinder {
   private IQualifiedNameConverter nameConverter;
+  
+  @Inject
+  @Extension
+  private StaticallyImportedMemberProvider _staticallyImportedMemberProvider;
   
   @Inject
   public XtendReferenceFinder(final IResourceDescriptions indexData, final IResourceServiceProvider.Registry serviceProviderRegistry, final IQualifiedNameConverter nameConverter) {
@@ -73,10 +82,18 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
             boolean _xifexpression = false;
             boolean _notEquals = (!Objects.equal(obj, null));
             if (_notEquals) {
-              String _identifier = obj.getIdentifier();
-              QualifiedName _qualifiedName = XtendReferenceFinder.this.nameConverter.toQualifiedName(_identifier);
-              QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-              _xifexpression = names.add(_lowerCase);
+              boolean _xblockexpression_1 = false;
+              {
+                String _identifier = obj.getIdentifier();
+                QualifiedName _qualifiedName = XtendReferenceFinder.this.nameConverter.toQualifiedName(_identifier);
+                QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+                names.add(_lowerCase);
+                String _qualifiedName_1 = obj.getQualifiedName('.');
+                QualifiedName _qualifiedName_2 = XtendReferenceFinder.this.nameConverter.toQualifiedName(_qualifiedName_1);
+                QualifiedName _lowerCase_1 = _qualifiedName_2.toLowerCase();
+                _xblockexpression_1 = names.add(_lowerCase_1);
+              }
+              _xifexpression = _xblockexpression_1;
             }
             _xblockexpression = _xifexpression;
           }
@@ -126,6 +143,23 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     super.findLocalReferencesFromElement(targetURISet, sourceCandidate, localResource, acceptor, currentExportedContainerURI, exportedElementsMap);
     boolean _matched_1 = false;
     if (!_matched_1) {
+      if (sourceCandidate instanceof XImportDeclaration) {
+        boolean _and = false;
+        boolean _isStatic = ((XImportDeclaration)sourceCandidate).isStatic();
+        if (!_isStatic) {
+          _and = false;
+        } else {
+          boolean _isWildcard = ((XImportDeclaration)sourceCandidate).isWildcard();
+          boolean _not = (!_isWildcard);
+          _and = _not;
+        }
+        if (_and) {
+          _matched_1=true;
+          this.addReferenceToFeatureFromStaticImport(((XImportDeclaration)sourceCandidate), targetURISet, acceptor, currentExportedContainerURI);
+        }
+      }
+    }
+    if (!_matched_1) {
       if (sourceCandidate instanceof XFeatureCall) {
         boolean _and = false;
         XExpression _actualReceiver = ((XFeatureCall)sourceCandidate).getActualReceiver();
@@ -156,6 +190,21 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
         }
         if (_and) {
           this.addReferenceToTypeFromStaticImport(((XAbstractFeatureCall)sourceCandidate), targetURISet, acceptor, currentExportedContainerURI);
+        }
+      }
+    }
+  }
+  
+  protected void addReferenceToFeatureFromStaticImport(final XImportDeclaration it, final Set<URI> targetURISet, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI) {
+    Iterable<JvmFeature> _allFeatures = this._staticallyImportedMemberProvider.getAllFeatures(it);
+    for (final JvmFeature feature : _allFeatures) {
+      {
+        final URI featureURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(feature);
+        boolean _contains = targetURISet.contains(featureURI);
+        if (_contains) {
+          final URI sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(it);
+          DefaultReferenceDescription _defaultReferenceDescription = new DefaultReferenceDescription(sourceURI, featureURI, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, (-1), currentExportedContainerURI);
+          acceptor.accept(_defaultReferenceDescription);
         }
       }
     }

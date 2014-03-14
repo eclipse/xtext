@@ -44,20 +44,17 @@ public class WaitForRefactoringCondition extends DefaultCondition {
       IUndoableOperation _xifexpression = null;
       if (this.isRedo) {
         IUndoContext _undoContext = this.getUndoContext();
-        IUndoableOperation _redoOperation = operationHistory.getRedoOperation(_undoContext);
-        _xifexpression = _redoOperation;
+        _xifexpression = operationHistory.getRedoOperation(_undoContext);
       } else {
         IUndoContext _undoContext_1 = this.getUndoContext();
-        IUndoableOperation _undoOperation = operationHistory.getUndoOperation(_undoContext_1);
-        _xifexpression = _undoOperation;
+        _xifexpression = operationHistory.getUndoOperation(_undoContext_1);
       }
       String _label = null;
       if (_xifexpression!=null) {
         _label=_xifexpression.getLabel();
       }
       final String label = _label;
-      boolean _startsWith = label.startsWith("Rename ");
-      _xblockexpression = (_startsWith);
+      _xblockexpression = label.startsWith("Rename ");
     }
     return _xblockexpression;
   }
@@ -72,8 +69,7 @@ public class WaitForRefactoringCondition extends DefaultCondition {
       IEditorInput _editorInput = ed.getEditorInput();
       final IDocument document = _documentProvider.getDocument(_editorInput);
       final IDocumentUndoManager undoManager = DocumentUndoManagerRegistry.getDocumentUndoManager(document);
-      IUndoContext _undoContext = undoManager.getUndoContext();
-      _xblockexpression = (_undoContext);
+      _xblockexpression = undoManager.getUndoContext();
     }
     return _xblockexpression;
   }

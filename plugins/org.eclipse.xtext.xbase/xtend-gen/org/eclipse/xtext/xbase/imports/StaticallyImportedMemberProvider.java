@@ -96,13 +96,19 @@ public class StaticallyImportedMemberProvider {
   }
   
   public Iterable<JvmFeature> getAllFeatures(final XImportDeclaration it) {
+    Resource _eResource = it.eResource();
+    JvmDeclaredType _importedType = it.getImportedType();
+    boolean _isStatic = it.isStatic();
+    boolean _isExtension = it.isExtension();
+    String _memberName = it.getMemberName();
+    return this.getAllFeatures(_eResource, _importedType, _isStatic, _isExtension, _memberName);
+  }
+  
+  public Iterable<JvmFeature> getAllFeatures(final Resource resource, final JvmDeclaredType importedType, final boolean static_, final boolean extension, final String memberName) {
     Iterable<JvmFeature> _xblockexpression = null;
     {
-      final JvmDeclaredType importedType = it.getImportedType();
       boolean _or = false;
-      boolean _isStatic = it.isStatic();
-      boolean _not = (!_isStatic);
-      if (_not) {
+      if ((!static_)) {
         _or = true;
       } else {
         boolean _equals = Objects.equal(importedType, null);
@@ -111,11 +117,9 @@ public class StaticallyImportedMemberProvider {
       if (_or) {
         return CollectionLiterals.<JvmFeature>emptyList();
       }
-      Resource _eResource = it.eResource();
-      final IVisibilityHelper visibilityHelper = this.getVisibilityHelper(_eResource);
+      final IVisibilityHelper visibilityHelper = this.getVisibilityHelper(resource);
       final IResolvedFeatures resolvedFeatures = this._provider.getResolvedFeatures(importedType);
-      String _memberName = it.getMemberName();
-      List<JvmFeature> _allFeatures = resolvedFeatures.getAllFeatures(_memberName);
+      List<JvmFeature> _allFeatures = resolvedFeatures.getAllFeatures(memberName);
       final Function1<JvmFeature, Boolean> _function = new Function1<JvmFeature, Boolean>() {
         public Boolean apply(final JvmFeature feature) {
           boolean _and = false;

@@ -77,4 +77,5 @@ public class ParameterizedResolvedFeatures implements IResolvedFeatures {
 			}
 		}
 	}
+
 }

@@ -26,7 +26,6 @@ public class WaitForLinkedModeCondition extends DefaultCondition {
   
   public boolean test() throws Exception {
     RenameLinkedMode _activeLinkedMode = this.controller.getActiveLinkedMode();
-    boolean _notEquals = (!Objects.equal(_activeLinkedMode, null));
-    return _notEquals;
+    return (!Objects.equal(_activeLinkedMode, null));
   }
 }
