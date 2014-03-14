@@ -28,6 +28,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.imports.DefaultImportsConfiguration;
+import org.eclipse.xtext.xbase.imports.IMutableImportsConfiguration;
 import org.eclipse.xtext.xtype.XImportSection;
 
 import com.google.inject.Inject;
@@ -35,7 +36,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class XtendImportsConfiguration extends DefaultImportsConfiguration {
+public class XtendImportsConfiguration extends DefaultImportsConfiguration implements IMutableImportsConfiguration {
 	
 	@Inject
 	private IXtendJvmAssociations associations;
@@ -49,6 +50,13 @@ public class XtendImportsConfiguration extends DefaultImportsConfiguration {
 			return null;
 	}
 
+	public void setImportSection(XtextResource resource, XImportSection importSection) {
+		XtendFile xtendFile = getXtendFile(resource);
+		if (xtendFile != null) {
+			xtendFile.setImportSection(importSection);
+		}
+	}
+	
 	protected String getCommonPackageName(XtextResource resource) {
 		XtendFile xtendFile = getXtendFile(resource);
 		return xtendFile == null ? null : xtendFile.getPackage();
@@ -132,4 +140,5 @@ public class XtendImportsConfiguration extends DefaultImportsConfiguration {
 		}
 		return xtendFile.getPackage();
 	}
+
 }

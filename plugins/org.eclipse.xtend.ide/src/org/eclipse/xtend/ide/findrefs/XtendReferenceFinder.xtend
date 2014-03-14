@@ -25,9 +25,16 @@ import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
+import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
+import org.eclipse.xtext.xtype.XImportDeclaration
+import org.eclipse.xtext.xbase.imports.StaticallyImportedMemberProvider
 
 class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceFinder {
+	
 	IQualifiedNameConverter nameConverter
+	
+	@Inject
+	extension StaticallyImportedMemberProvider
 
 	@Inject new(IResourceDescriptions indexData, Registry serviceProviderRegistry, IQualifiedNameConverter nameConverter) {
 		super(indexData, serviceProviderRegistry)
@@ -43,8 +50,9 @@ class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceF
 		for (uri : targetURIs) {
 			localResourceAccess.readOnly(uri) [
 				val obj = EcoreUtil2.getContainerOfType(it.getEObject(uri, true), JvmType)
-				if (obj!=null) {
+				if (obj != null) {
 					names += nameConverter.toQualifiedName(obj.identifier).toLowerCase
+					names += nameConverter.toQualifiedName(obj.getQualifiedName('.')).toLowerCase
 				}
 			]
 		}
@@ -66,12 +74,25 @@ class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceF
 			default: super.findLocalReferencesFromElement(targetURISet, sourceCandidate, localResource, acceptor, currentExportedContainerURI, exportedElementsMap)
 		}
 		switch sourceCandidate {
+			XImportDeclaration case sourceCandidate.static && !sourceCandidate.wildcard: {
+				addReferenceToFeatureFromStaticImport(sourceCandidate, targetURISet, acceptor, currentExportedContainerURI)
+			} 
 			XFeatureCall case sourceCandidate.actualReceiver == null && sourceCandidate.static: {
 				addReferenceToTypeFromStaticImport(sourceCandidate, targetURISet, acceptor, currentExportedContainerURI)
 			}
 			XMemberFeatureCall: { 
 				if(sourceCandidate.static && !sourceCandidate.staticWithDeclaringType) 
 				addReferenceToTypeFromStaticImport(sourceCandidate, targetURISet, acceptor, currentExportedContainerURI)
+			}
+		}
+	}
+	
+	protected def addReferenceToFeatureFromStaticImport(XImportDeclaration it, Set<URI> targetURISet, IAcceptor<IReferenceDescription> acceptor, URI currentExportedContainerURI) {
+		for (feature : allFeatures) {
+			val featureURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(feature)
+			if (targetURISet.contains(featureURI)) {
+				val sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(it) 
+				acceptor.accept(new DefaultReferenceDescription(sourceURI, featureURI, XIMPORT_DECLARATION__IMPORTED_TYPE, -1, currentExportedContainerURI))
 			}
 		}
 	}
