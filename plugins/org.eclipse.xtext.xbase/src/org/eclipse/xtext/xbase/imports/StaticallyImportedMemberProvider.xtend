@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.typesystem.^override.IResolvedFeatures
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper
 import org.eclipse.xtext.xtype.XImportDeclaration
+import org.eclipse.xtext.common.types.JvmDeclaredType
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -44,15 +45,17 @@ class StaticallyImportedMemberProvider {
 	}
 
 	def getAllFeatures(XImportDeclaration it) {
-		val importedType = importedType
+		eResource.getAllFeatures(importedType, static, extension, memberName)
+	}
+
+	def getAllFeatures(Resource resource, JvmDeclaredType importedType, boolean ^static, boolean ^extension, String memberName) {
 		if (!static || importedType == null) {
 			return <JvmFeature>emptyList
 		}
-		val visibilityHelper = eResource.visibilityHelper
+		val visibilityHelper = resource.visibilityHelper
 		val resolvedFeatures = importedType.resolvedFeatures
 		resolvedFeatures.getAllFeatures(memberName).filter [ feature |
 			feature.static && visibilityHelper.isVisible(feature) 
-			
 		]
 	}
 
