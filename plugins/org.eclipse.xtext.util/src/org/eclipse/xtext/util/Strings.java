@@ -97,6 +97,13 @@ public class Strings {
 	public static String newLine() {
 		return System.getProperty("line.separator");
 	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public static String replacePlatformWithUnixNewLines(String platformDelimited) {
+		return platformDelimited.replace(newLine(), "\n");
+	}
 
 	public static String toFirstLower(String s) {
 		if (s == null || s.length() == 0 || Character.isLowerCase(s.charAt(0)))

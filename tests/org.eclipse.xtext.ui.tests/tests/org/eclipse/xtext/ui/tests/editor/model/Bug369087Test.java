@@ -19,6 +19,7 @@ import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.TypedPosition;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.junit4.ui.AbstractAutoEditTest;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -55,6 +56,7 @@ public class Bug369087Test extends AbstractAutoEditTest {
 		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID);
 		projectFactory.addProjectNatures(XtextProjectHelper.NATURE_ID);
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
+		JavaProjectSetupUtil.setUnixLineEndings(result);
 		return result;
 	}
 

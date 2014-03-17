@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.util.Strings
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
@@ -1820,7 +1821,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 	def void assertGeneratedCode(Pair<String, String> macroFile, Pair<String, String> clientFile,
 		String... compiledClientFiles) {
 		assertProcessing(macroFile, clientFile) [
-			val clientFilesAsSet = compiledClientFiles.toSet
+			val clientFilesAsSet = compiledClientFiles.map[Strings.replacePlatformWithUnixNewLines(it)].toSet
 			assertEquals(clientFilesAsSet.size, compiledClientFiles.length)
 			val resource = it.xtendFile.eResource
 			val jvmTypes = resource.contents.tail

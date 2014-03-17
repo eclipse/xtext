@@ -19,6 +19,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.junit.After;
 import org.junit.Before;
@@ -53,6 +54,7 @@ public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 		int cursor = string.indexOf('|');
 		String fileExtension = getFileExtension();
 		IFile file = createFile("foo/myfile" + files.size() + "." + fileExtension, string.replace("|", ""));
+		JavaProjectSetupUtil.setUnixLineEndings(file.getProject());
 		files.add(file);
 		XtextEditor editor = openEditor(file);
 		editor.getInternalSourceViewer().setSelectedRange(cursor, 0);

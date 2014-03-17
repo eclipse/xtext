@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
@@ -76,8 +77,10 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	public void setUp() throws Exception {
 		super.setUp();
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(TESTPROJECT_NAME);
-		if (!project.exists())
+		if (!project.exists()) {
 			createPluginProject(TESTPROJECT_NAME);
+		}
+		JavaProjectSetupUtil.setUnixLineEndings(project);
 	}
 	
 	protected static IProject createPluginProject(String name) throws CoreException {
