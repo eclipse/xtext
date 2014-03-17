@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.autoedit;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.junit.Test;
 
@@ -52,6 +54,13 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		XtextEditor editor = openEditor("{|\n}'foo'");
 		pressKey(editor, '\n');
 		assertState("{\n\t|\n}'foo'", editor);
+	}
+	
+	@Override
+	protected XtextEditor openEditor(IFile file) throws Exception {
+		JavaProjectSetupUtil.setUnixLineEndings(file.getProject());
+		XtextEditor editor = super.openEditor(file);
+		return editor;
 	}
 
 }

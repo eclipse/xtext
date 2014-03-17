@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.tests.validation;
 
 import com.google.inject.Inject;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -19,13 +20,16 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -63,7 +67,13 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
     String _message = singleError.getMessage();
     String _code = singleError.getCode();
     Assert.assertEquals(_message, IssueCodes.AMBIGUOUS_FEATURE_CALL, _code);
-    final Procedure1<String> _function = new Procedure1<String>() {
+    final Function1<String, String> _function = new Function1<String, String>() {
+      public String apply(final String it) {
+        return Strings.replacePlatformWithUnixNewLines(it);
+      }
+    };
+    List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(messageParts)), _function);
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
       public void apply(final String it) {
         final String message = singleError.getMessage();
         boolean _contains = message.contains(it);
@@ -73,7 +83,7 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
         }
       }
     };
-    IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(messageParts)), _function);
+    IterableExtensions.<String>forEach(_map, _function_1);
     EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
     final XtendTypeDeclaration firstType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
     EList<XtendMember> _members = firstType.getMembers();

@@ -35,12 +35,14 @@ import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -3567,7 +3569,13 @@ public abstract class AbstractReusableActiveAnnotationTests {
   public void assertGeneratedCode(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final String... compiledClientFiles) {
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
-        final Set<String> clientFilesAsSet = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(compiledClientFiles)));
+        final Function1<String, String> _function = new Function1<String, String>() {
+          public String apply(final String it) {
+            return Strings.replacePlatformWithUnixNewLines(it);
+          }
+        };
+        List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(compiledClientFiles)), _function);
+        final Set<String> clientFilesAsSet = IterableExtensions.<String>toSet(_map);
         int _size = clientFilesAsSet.size();
         int _length = compiledClientFiles.length;
         Assert.assertEquals(_size, _length);
@@ -3575,7 +3583,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
         final Resource resource = _xtendFile.eResource();
         EList<EObject> _contents = resource.getContents();
         final Iterable<EObject> jvmTypes = IterableExtensions.<EObject>tail(_contents);
-        final Procedure1<EObject> _function = new Procedure1<EObject>() {
+        final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
           public void apply(final EObject it) {
             if ((it instanceof JvmDeclaredType)) {
               GeneratorConfig _get = AbstractReusableActiveAnnotationTests.this.generatorConfigProvider.get(it);
@@ -3594,7 +3602,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
             }
           }
         };
-        IterableExtensions.<EObject>forEach(jvmTypes, _function);
+        IterableExtensions.<EObject>forEach(jvmTypes, _function_1);
         boolean _isEmpty = clientFilesAsSet.isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {

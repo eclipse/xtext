@@ -12,6 +12,7 @@ import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.Strings;
 import org.junit.Test;
 
 public class XtextGrammarReconcilationTest extends AbstractXtextTests {
@@ -38,7 +39,7 @@ public class XtextGrammarReconcilationTest extends AbstractXtextTests {
 		// save
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		resource.save(out, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
-		String result = new String(out.toByteArray());
+		String result = Strings.replacePlatformWithUnixNewLines(new String(out.toByteArray()));
 
 		// check
 		assertFalse(model.equals(result));

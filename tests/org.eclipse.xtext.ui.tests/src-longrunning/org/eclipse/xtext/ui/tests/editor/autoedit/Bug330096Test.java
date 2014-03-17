@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.testlanguages.backtracking.ui.internal.BeeLangTestLanguageActivator;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -53,6 +54,7 @@ public class Bug330096Test extends AbstractCStyleLanguageAutoEditTest {
 	@BeforeClass
 	public static void createProject() throws Exception {
 		staticProject = createPluginProject(TESTPROJECT_NAME);
+		JavaProjectSetupUtil.setUnixLineEndings(staticProject);
 	}
 	
 	public static void deleteProject() throws Exception {
@@ -63,8 +65,10 @@ public class Bug330096Test extends AbstractCStyleLanguageAutoEditTest {
 	public void setUp() throws Exception {
 		super.setUp();
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(TESTPROJECT_NAME);
-		if (!project.exists())
+		if (!project.exists()) {
 			createPluginProject(TESTPROJECT_NAME);
+			JavaProjectSetupUtil.setUnixLineEndings(project);
+		}
 	}
 	
 	protected static IProject createPluginProject(String name) throws CoreException {

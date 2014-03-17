@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate
 import org.junit.Test
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.util.Strings
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -37,7 +38,7 @@ abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
 		assertEquals(errors.toString, 1, errors.size)
 		val singleError = errors.head as AbstractDiagnostic
 		assertEquals(singleError.message, IssueCodes.AMBIGUOUS_FEATURE_CALL, singleError.code)
-		messageParts.forEach [
+		messageParts.map[Strings.replacePlatformWithUnixNewLines(it)].forEach [
 			val message = singleError.message
 			if (!message.contains(it)) {
 				assertEquals(it, message)

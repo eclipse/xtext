@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
@@ -52,6 +53,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 	@BeforeClass
 	public static void setUpProject() throws Exception {
 		project = createPluginProject(TESTPROJECT_NAME);
+		JavaProjectSetupUtil.setUnixLineEndings(project);
 	}
 	
 	@AfterClass
@@ -299,6 +301,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID);
 		projectFactory.addProjectNatures(XtextProjectHelper.NATURE_ID);
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
+		JavaProjectSetupUtil.setUnixLineEndings(result);
 		return result;
 	}
 	

@@ -21,6 +21,7 @@ import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.services.XtextGrammarAccess;
+import org.eclipse.xtext.util.Strings;
 import org.junit.Test;
 
 /**
@@ -49,7 +50,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
 		assertNotNull(g);
 		final OutputStream outputStream = new ByteArrayOutputStream();
 		resource.save(outputStream, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
-		final String serializedModel = outputStream.toString();
+		final String serializedModel = Strings.replacePlatformWithUnixNewLines(outputStream.toString());
 		assertEquals(expectedModel, serializedModel);
 	}
 
