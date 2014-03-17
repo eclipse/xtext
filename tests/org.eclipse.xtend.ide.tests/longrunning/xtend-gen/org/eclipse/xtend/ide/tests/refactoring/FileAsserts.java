@@ -1,13 +1,17 @@
 package org.eclipse.xtend.ide.tests.refactoring;
 
 import com.google.inject.Inject;
+import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 
@@ -39,7 +43,13 @@ public class FileAsserts {
   public void assertFileContains(final IFile file, final String... expectedContents) throws Exception {
     file.refreshLocal(IResource.DEPTH_ZERO, null);
     final String fileContents = this._workbenchTestHelper.getContents(file);
-    final Procedure1<String> _function = new Procedure1<String>() {
+    final Function1<String, String> _function = new Function1<String, String>() {
+      public String apply(final String it) {
+        return LineDelimiters.toPlatform(it);
+      }
+    };
+    List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(expectedContents)), _function);
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
       public void apply(final String expectation) {
         boolean _contains = fileContents.contains(expectation);
         boolean _not = (!_contains);
@@ -48,6 +58,6 @@ public class FileAsserts {
         }
       }
     };
-    IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(expectedContents)), _function);
+    IterableExtensions.<String>forEach(_map, _function_1);
   }
 }

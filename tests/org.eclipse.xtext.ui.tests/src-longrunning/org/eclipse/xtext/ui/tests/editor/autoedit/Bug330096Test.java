@@ -15,11 +15,11 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.testlanguages.backtracking.ui.internal.BeeLangTestLanguageActivator;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.inject.Injector;
@@ -48,26 +48,16 @@ public class Bug330096Test extends AbstractCStyleLanguageAutoEditTest {
 		assertState("unit \"|\" ;", editor);
 	}
 	
-	private static IProject staticProject;
-	
-	@BeforeClass
-	public static void createProject() throws Exception {
-		staticProject = createPluginProject(TESTPROJECT_NAME);
-	}
-	
-	public static void deleteProject() throws Exception {
-		deleteProject(staticProject);
-	}
-
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(TESTPROJECT_NAME);
-		if (!project.exists())
+		if (!project.exists()) {
 			createPluginProject(TESTPROJECT_NAME);
+		}
 	}
 	
-	protected static IProject createPluginProject(String name) throws CoreException {
+	protected IProject createPluginProject(String name) throws CoreException {
 		Injector injector = BeeLangTestLanguageActivator.getInstance().getInjector("org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
@@ -79,12 +69,7 @@ public class Bug330096Test extends AbstractCStyleLanguageAutoEditTest {
 			XtextProjectHelper.BUILDER_ID);
 		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID);
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
+		JavaProjectSetupUtil.setUnixLineEndings(result);
 		return result;
-	}
-	
-	public static void deleteProject(IProject project) throws CoreException {
-		if (project.exists()) {
-			project.delete(true, true, null);
-		}
 	}
 }

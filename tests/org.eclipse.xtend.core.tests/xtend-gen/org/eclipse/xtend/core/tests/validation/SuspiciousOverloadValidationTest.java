@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.Iterator;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -26,6 +27,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -38,6 +40,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -76,7 +79,13 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     String _message = singleError.getMessage();
     String _code = singleError.getCode();
     Assert.assertEquals(_message, IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, _code);
-    final Procedure1<String> _function = new Procedure1<String>() {
+    final Function1<String, String> _function = new Function1<String, String>() {
+      public String apply(final String it) {
+        return LineDelimiters.toUnix(it);
+      }
+    };
+    List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(messageParts)), _function);
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
       public void apply(final String it) {
         final String message = singleError.getMessage();
         boolean _contains = message.contains(it);
@@ -86,7 +95,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
         }
       }
     };
-    IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(messageParts)), _function);
+    IterableExtensions.<String>forEach(_map, _function_1);
     EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
     final XtendTypeDeclaration firstType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
     EList<XtendMember> _members = firstType.getMembers();
@@ -96,7 +105,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     final XBlockExpression block = ((XBlockExpression) _expression);
     TreeIterator<EObject> _eAllContents = block.eAllContents();
     Iterator<XAbstractFeatureCall> _filter = Iterators.<XAbstractFeatureCall>filter(_eAllContents, XAbstractFeatureCall.class);
-    final Function1<XAbstractFeatureCall, Boolean> _function_1 = new Function1<XAbstractFeatureCall, Boolean>() {
+    final Function1<XAbstractFeatureCall, Boolean> _function_2 = new Function1<XAbstractFeatureCall, Boolean>() {
       public Boolean apply(final XAbstractFeatureCall it) {
         boolean _and = false;
         EStructuralFeature _eContainingFeature = it.eContainingFeature();
@@ -110,7 +119,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
         return Boolean.valueOf(_and);
       }
     };
-    final XAbstractFeatureCall featureCall = IteratorExtensions.<XAbstractFeatureCall>findLast(_filter, _function_1);
+    final XAbstractFeatureCall featureCall = IteratorExtensions.<XAbstractFeatureCall>findLast(_filter, _function_2);
     IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(file);
     final IFeatureLinkingCandidate linkingCandidate = _resolveTypes.getLinkingCandidate(featureCall);
     Assert.assertTrue((linkingCandidate instanceof ISuspiciouslyOverloadedCandidate));

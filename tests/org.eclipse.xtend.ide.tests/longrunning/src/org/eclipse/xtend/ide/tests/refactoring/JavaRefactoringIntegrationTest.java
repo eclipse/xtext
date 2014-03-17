@@ -110,6 +110,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		}
 	}
 
+	//TODO this test fails on Windows, because the generated code contains mixed line delimiters
 	@Test
 	public void testRenameJavaClassAndImport() throws Exception {
 		try {
@@ -129,6 +130,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		}
 	}
 
+	//TODO this test fails on Windows, because the generated code contains mixed line delimiters
 	@Test
 	public void testRenameJavaClassAndImportReferenceToStaticField() throws Exception {
 		try {

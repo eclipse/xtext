@@ -18,12 +18,11 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.xtext.ui.internal.Activator;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.inject.Injector;
@@ -47,18 +46,6 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 		return "org.eclipse.xtext.Xtext";
 	}
 	
-	private static IProject project;
-	
-	@BeforeClass
-	public static void setUpProject() throws Exception {
-		project = createPluginProject(TESTPROJECT_NAME);
-	}
-	
-	@AfterClass
-	public static void tearDownProject() throws Exception {
-		deleteProject(project);
-	}
-
 	@Override
 	protected XtextEditor openEditor(String string) throws Exception {
 		int cursor = string.indexOf('|');
@@ -285,13 +272,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 			createPluginProject(TESTPROJECT_NAME);
 	}
 
-	public static void deleteProject(IProject project) throws CoreException {
-		if (project.exists()) {
-			project.delete(true, true, null);
-		}
-	}
-
-	protected static IProject createPluginProject(String name) throws CoreException {
+	protected IProject createPluginProject(String name) throws CoreException {
 		Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.Xtext");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
@@ -299,6 +280,7 @@ public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTes
 		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID);
 		projectFactory.addProjectNatures(XtextProjectHelper.NATURE_ID);
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
+		JavaProjectSetupUtil.setUnixLineEndings(result);
 		return result;
 	}
 	

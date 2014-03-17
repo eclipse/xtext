@@ -29,6 +29,7 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.junit4.util.ResourceLoadHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
@@ -43,6 +44,7 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
 import org.junit.Assert;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
@@ -190,8 +192,9 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	protected ICompletionProposal findProposal(String proposalString, ICompletionProposal[] proposals) {
 		if (proposalString != null) {
+			String platformDelimitedProposal = LineDelimiters.toPlatform(proposalString);
 			for (ICompletionProposal candidate : proposals) {
-				if (proposalString.equals(getProposedText(candidate))) {
+				if (platformDelimitedProposal.equals(getProposedText(candidate))) {
 					return candidate;
 				}
 			}
@@ -267,7 +270,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return assertTextAtCursorPosition(getModel().indexOf(cursorPosition) + offset, expectedText);
 	}
 	
-	public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(int cursorPosition, String... expectedText)
+	public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(int cursorPosition, String... expectations)
 			throws Exception {
 
 		String currentModelToParse = getFullTextToBeParsed();
@@ -278,9 +281,13 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		if (computeCompletionProposals == null)
 			computeCompletionProposals = new ICompletionProposal[0];
 
-		Arrays.sort(expectedText);
-		final String expectation = Strings.concat("\n", Arrays.asList(expectedText));
-		final String actual = Strings.concat("\n", toString(computeCompletionProposals));
+		Arrays.sort(expectations);
+		List<String> sortedExpectations = Lists.newArrayList();
+		for (String expectation : expectations) {
+			sortedExpectations.add(LineDelimiters.toPlatform(expectation));
+		}
+		final String expectation = Strings.concat(Strings.newLine(), sortedExpectations);
+		final String actual = Strings.concat(Strings.newLine(), toString(computeCompletionProposals));
 		
 		Assert.assertEquals(expectation, actual);
 		
@@ -289,7 +296,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 			String proposedText = getProposedText(completionProposal);
 			Assert.assertTrue("Missing proposal '" + proposedText + "'. Expect completionProposal text '" + expectation + "', but got " +
 					actual,
-					Arrays.asList(expectedText).contains(proposedText));
+					sortedExpectations.contains(proposedText));
 		}
 
 		return this;
@@ -306,7 +313,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		}
 		return proposedText;
 	}
-
+	
 	public ContentAssistProcessorTestBuilder assertMatchString(String matchString)
 			throws Exception {
 		String currentModelToParse = getModel();
@@ -367,14 +374,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	}
 
 	protected String toString(ICompletionProposal proposal) {
-		String proposedText = proposal.getDisplayString();
-		if (proposal instanceof ConfigurableCompletionProposal) {
-			ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) proposal;
-			proposedText = configurableProposal.getReplacementString();
-			if (configurableProposal.getTextApplier() instanceof ReplacementTextApplier)
-				proposedText = ((ReplacementTextApplier) configurableProposal.getTextApplier()).getActualReplacementString(configurableProposal);
-		}
-		return proposedText;
+		return getProposedText(proposal);
 	}
 
 	public ContentAssistProcessorTestBuilder assertCountAtCursorPosition(int completionProposalCount, int cursorPosition)
