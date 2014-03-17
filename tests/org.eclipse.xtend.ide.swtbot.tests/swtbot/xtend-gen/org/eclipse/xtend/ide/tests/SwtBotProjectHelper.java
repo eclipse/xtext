@@ -51,7 +51,7 @@ public class SwtBotProjectHelper {
     {
       final SWTBotShell shell = it.activeShell();
       List<SWTBotView> _views = it.views();
-      final Function1<SWTBotView,Boolean> _function = new Function1<SWTBotView,Boolean>() {
+      final Function1<SWTBotView, Boolean> _function = new Function1<SWTBotView, Boolean>() {
         public Boolean apply(final SWTBotView it) {
           String _title = it.getTitle();
           return Boolean.valueOf(Objects.equal(_title, "Welcome"));
@@ -183,7 +183,7 @@ public class SwtBotProjectHelper {
     it.setText(_replace);
     final int offset = contentString.indexOf("?");
     if ((offset != (-1))) {
-      final Pair<Integer,Integer> lineAndColumn = SwtBotProjectHelper.getLineAndColumn(contentString, offset);
+      final Pair<Integer, Integer> lineAndColumn = SwtBotProjectHelper.getLineAndColumn(contentString, offset);
       Integer _key = lineAndColumn.getKey();
       Integer _value = lineAndColumn.getValue();
       int _lastIndexOf = contentString.lastIndexOf("?");
@@ -199,8 +199,8 @@ public class SwtBotProjectHelper {
     return new SWTBotMenu(_contextMenu);
   }
   
-  protected static Pair<Integer,Integer> getLineAndColumn(final String content, final int offset) {
-    Pair<Integer,Integer> _xblockexpression = null;
+  protected static Pair<Integer, Integer> getLineAndColumn(final String content, final int offset) {
+    Pair<Integer, Integer> _xblockexpression = null;
     {
       int line = 0;
       int column = 0;
@@ -210,13 +210,13 @@ public class SwtBotProjectHelper {
         String _substring = content.substring((i).intValue(), ((i).intValue() + 1));
         boolean _matched = false;
         if (!_matched) {
-          if (Objects.equal(_substring,ignoreNext)) {
+          if (Objects.equal(_substring, ignoreNext)) {
             _matched=true;
             ignoreNext = null;
           }
         }
         if (!_matched) {
-          if (Objects.equal(_substring,"\n")) {
+          if (Objects.equal(_substring, "\n")) {
             _matched=true;
             column = 0;
             line = (line + 1);
@@ -224,7 +224,7 @@ public class SwtBotProjectHelper {
           }
         }
         if (!_matched) {
-          if (Objects.equal(_substring,"\r")) {
+          if (Objects.equal(_substring, "\r")) {
             _matched=true;
             column = 0;
             line = (line + 1);
