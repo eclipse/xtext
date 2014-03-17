@@ -9,6 +9,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
@@ -42,7 +43,7 @@ public class XtextGrammarReconcilationTest extends AbstractXtextTests {
 
 		// check
 		assertFalse(model.equals(result));
-		String expectedModel = "grammar foo with org.eclipse.xtext.common.Terminals\n\nHONOLULU:\n	name=ID;";
+		String expectedModel = LineDelimiters.toPlatform("grammar foo with org.eclipse.xtext.common.Terminals\n\nHONOLULU:\n	name=ID;");
 		assertEquals(expectedModel, result);
 	}
 

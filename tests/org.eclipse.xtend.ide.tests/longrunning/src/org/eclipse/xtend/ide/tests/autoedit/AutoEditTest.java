@@ -20,12 +20,11 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtend.ide.internal.XtendActivator;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.inject.Injector;
@@ -36,18 +35,6 @@ import com.google.inject.Injector;
 
 public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 
-	private static IProject project;
-	
-	@BeforeClass
-	public static void setUpProject() throws Exception {
-		project = createPluginProject(TESTPROJECT_NAME);
-	}
-	
-	@AfterClass
-	public static void tearDownProject() throws Exception {
-		deleteProject(project);
-	}
-	
 	private static final String TESTPROJECT_NAME = "foo";
 
 	@Override
@@ -76,11 +63,10 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 	public void setUp() throws Exception {
 		super.setUp();
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(TESTPROJECT_NAME);
-		if (!project.exists())
-			createPluginProject(TESTPROJECT_NAME);
+		if (!project.exists()) createPluginProject(TESTPROJECT_NAME);
 	}
 	
-	protected static IProject createPluginProject(String name) throws CoreException {
+	protected IProject createPluginProject(String name) throws CoreException {
 		Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
@@ -93,13 +79,8 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID);
 		projectFactory.addRequiredBundles(newArrayList("org.eclipse.xtext.xbase.lib"));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
+		JavaProjectSetupUtil.setUnixLineEndings(result);
 		return result;
-	}
-	
-	public static void deleteProject(IProject project) throws CoreException {
-		if (project.exists()) {
-			project.delete(true, true, null);
-		}
 	}
 	
 	@Test public void testCurlyBraceBlockAndRichStrings_0() throws Exception {

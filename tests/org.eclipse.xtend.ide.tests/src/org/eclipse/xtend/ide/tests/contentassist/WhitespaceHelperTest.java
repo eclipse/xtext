@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.tests.contentassist;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.ui.contentassist.WhitespaceHelper;
 import org.junit.Test;
 
@@ -33,11 +34,12 @@ public class WhitespaceHelperTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testInsertLines_0() throws Exception {
-		WhitespaceHelper w = getWhitespaceHelper("xxx|yyy", 0, true, "xxx\n\n*\n\nyyy");
+		String doubleNewLine = Strings.newLine() + Strings.newLine();
+		WhitespaceHelper w = getWhitespaceHelper("xxx|yyy", 0, true, "xxx" + doubleNewLine + "*" + doubleNewLine + "yyy");
 		assertEquals(3, w.getTotalOffset());
 		assertEquals(0, w.getTotalLength());
-		assertEquals("\n\n", w.getPrefix());
-		assertEquals("\n\n", w.getSuffix());
+		assertEquals(doubleNewLine, w.getPrefix());
+		assertEquals(doubleNewLine, w.getSuffix());
 	}
 
 	@Test public void testInsertLines_1() throws Exception {
@@ -73,11 +75,12 @@ public class WhitespaceHelperTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testInsertLines_5() throws Exception {
-		WhitespaceHelper w = getWhitespaceHelper("xxx | yyy", 0, true, "xxx \n\n*\n\nyyy");
+		String doubleNewLine = Strings.newLine() + Strings.newLine();
+		WhitespaceHelper w = getWhitespaceHelper("xxx | yyy", 0, true, "xxx "+ doubleNewLine + "*" + doubleNewLine + "yyy");
 		assertEquals(4, w.getTotalOffset());
 		assertEquals(1, w.getTotalLength());
-		assertEquals("\n\n", w.getPrefix());
-		assertEquals("\n\n", w.getSuffix());
+		assertEquals(doubleNewLine, w.getPrefix());
+		assertEquals(doubleNewLine, w.getSuffix());
 	}
 
 	@Test public void testInsertLines_6() throws Exception {
