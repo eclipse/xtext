@@ -304,9 +304,9 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 				proposedText = ((ReplacementTextApplier) configurableProposal.getTextApplier()).getActualReplacementString(configurableProposal);
 			}
 		}
-		return proposedText;
+		return Strings.replacePlatformWithUnixNewLines(proposedText);
 	}
-
+	
 	public ContentAssistProcessorTestBuilder assertMatchString(String matchString)
 			throws Exception {
 		String currentModelToParse = getModel();
@@ -367,14 +367,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	}
 
 	protected String toString(ICompletionProposal proposal) {
-		String proposedText = proposal.getDisplayString();
-		if (proposal instanceof ConfigurableCompletionProposal) {
-			ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) proposal;
-			proposedText = configurableProposal.getReplacementString();
-			if (configurableProposal.getTextApplier() instanceof ReplacementTextApplier)
-				proposedText = ((ReplacementTextApplier) configurableProposal.getTextApplier()).getActualReplacementString(configurableProposal);
-		}
-		return proposedText;
+		return getProposedText(proposal);
 	}
 
 	public ContentAssistProcessorTestBuilder assertCountAtCursorPosition(int completionProposalCount, int cursorPosition)

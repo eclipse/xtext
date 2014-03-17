@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
@@ -74,7 +75,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		String string = serializer.serialize(instanceOfExpression);
 		// TODO expectation is wrong --> I've (MEY) fixed the expectation, please verify 
 //		assertEquals("if ( false ) \"value\" instanceof String", string);
-		assertEquals("(if(false)\n" + indent.getIndentString() + "\"value\") instanceof String", string);
+		assertEquals("(if(false)" + Strings.newLine() + indent.getIndentString() + "\"value\") instanceof String", string);
 	}
 
 }
