@@ -9,6 +9,10 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTest {
+  /**
+   * TODO this test fails on Windows. It looks like only platform delimiters are trimmed.
+   * We should trim all usual delimiters.
+   */
   @Test
   public void testTrimEmptyLines() {
     StringConcatenation _builder = new StringConcatenation();

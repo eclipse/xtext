@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -27,11 +28,13 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkingSet;
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
+import org.osgi.service.prefs.BackingStoreException;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -140,6 +143,7 @@ public class ProjectFactory {
 			project.open(subMonitor.newChild(1));
 			project.setDescription(description, subMonitor.newChild(1));
 			project.setDefaultCharset(defaultCharset, subMonitor.newChild(1));
+			setUnixLineDelimiter(project);
 			createFolders(project, subMonitor, shell);
 			enhanceProject(project, subMonitor, shell);
 
@@ -160,6 +164,16 @@ public class ProjectFactory {
 			return null;
 		} finally {
 			subMonitor.done();
+		}
+	}
+
+	private void setUnixLineDelimiter(final IProject project) {
+		IEclipsePreferences runtimePrefs = new ProjectScope(project).getNode(Platform.PI_RUNTIME);
+		runtimePrefs.put(Platform.PREF_LINE_SEPARATOR, "\n");
+		try {
+			runtimePrefs.flush();
+		} catch (BackingStoreException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

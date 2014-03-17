@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.tests.compiler;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.eclipse.core.resources.IFile;
@@ -172,9 +173,14 @@ public class UnicodeEscapeTest extends AbstractXtendUITestCase {
 
 	private String getGeneratedClass(IProject project) throws IOException, CoreException {
 		IFile compiledFile = project.getFile("xtend-gen/C.java");
-		String contents = CharStreams.toString(
-				new InputStreamReader(compiledFile.getContents(), project.getDefaultCharset()));
-		return contents;
+		InputStream stream = compiledFile.getContents();
+		try {
+			String contents = CharStreams.toString(
+					new InputStreamReader(stream, project.getDefaultCharset()));
+			return contents;
+		} finally {
+			stream.close();
+		}
 	}
 
 	private void createFile(IProject project, String content, String encoding) throws Exception {
