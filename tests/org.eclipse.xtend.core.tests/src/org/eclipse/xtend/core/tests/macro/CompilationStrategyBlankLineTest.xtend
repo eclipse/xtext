@@ -11,6 +11,10 @@ import java.math.BigDecimal
 
 class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTest {
 	
+	/*
+	 * TODO this test fails on Windows. It looks like only platform delimiters are trimmed. 
+	 * We should trim all usual delimiters.
+	 */
 	@Test def void testTrimEmptyLines() {
 		'''
 			import org.eclipse.xtend.core.tests.macro.ArtificialMethods

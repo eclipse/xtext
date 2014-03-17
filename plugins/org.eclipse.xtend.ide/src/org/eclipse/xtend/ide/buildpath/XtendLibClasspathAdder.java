@@ -73,7 +73,7 @@ public class XtendLibClasspathAdder {
 			OutputStream output = null;
 			InputStream input = null;
 			try {
-				MergeableManifest manifest = new MergeableManifest(((IFile) manifestFile).getContents());
+				MergeableManifest manifest = createMergableManifest(manifestFile);
 				manifest.addRequiredBundles(newHashSet(XtendClasspathContainer.BUNDLE_IDS_TO_INCLUDE));
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				output = new BufferedOutputStream(out);
@@ -90,5 +90,14 @@ public class XtendLibClasspathAdder {
 			}
 		}
 		return false;
+	}
+
+	private MergeableManifest createMergableManifest(IResource manifestFile) throws IOException, CoreException {
+		InputStream originalManifest = ((IFile) manifestFile).getContents();
+		try {
+			return new MergeableManifest(originalManifest);
+		} finally {
+			originalManifest.close();
+		}
 	}
 }

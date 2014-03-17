@@ -27,11 +27,14 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -39,6 +42,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.osgi.service.prefs.BackingStoreException;
 
 import com.google.common.collect.Lists;
 
@@ -323,6 +327,16 @@ public class JavaProjectSetupUtil {
 		stream.close();
 		data.close();
 		return tempFile;
+	}
+	
+	public static void setUnixLineEndings(IProject project) {
+		IEclipsePreferences prefs = new ProjectScope(project).getNode(Platform.PI_RUNTIME);
+		prefs.put(Platform.PREF_LINE_SEPARATOR, "\n");
+		try {
+			prefs.flush();
+		} catch (BackingStoreException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }

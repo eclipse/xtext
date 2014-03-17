@@ -23,6 +23,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.typesystem.computation.ISuspiciouslyOverloadedCandidate
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.junit4.internal.LineDelimiters
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -39,7 +40,7 @@ class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
 		assertEquals(errors.toString, 1, errors.size)
 		val singleError = errors.head as AbstractDiagnostic
 		assertEquals(singleError.message, IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, singleError.code)
-		messageParts.forEach [
+		messageParts.map[LineDelimiters.toUnix(it)].forEach [
 			val message = singleError.message
 			if (!message.contains(it)) {
 				assertEquals(it, message)
