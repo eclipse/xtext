@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -50,7 +51,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
 		final OutputStream outputStream = new ByteArrayOutputStream();
 		resource.save(outputStream, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
 		final String serializedModel = outputStream.toString();
-		assertEquals(expectedModel, serializedModel);
+		assertEquals(LineDelimiters.toPlatform(expectedModel), serializedModel);
 	}
 
 	@Test public void testMetamodelRefSerialization() throws Exception {
