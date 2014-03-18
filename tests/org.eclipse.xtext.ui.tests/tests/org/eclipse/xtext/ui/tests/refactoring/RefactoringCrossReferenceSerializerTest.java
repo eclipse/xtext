@@ -11,9 +11,6 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jface.text.IRegion;
-import org.eclipse.ltk.core.refactoring.FileStatusContext;
-import org.eclipse.ltk.core.refactoring.RefactoringStatusEntry;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
@@ -93,15 +90,7 @@ public class RefactoringCrossReferenceSerializerTest extends AbstractXtextTests 
 		assertEquals(foo, ((Main) resource.getContents().get(0)).getElements().get(1));
 		foo.setName("bar");
 		resource.getCache().clear(resource);
-		facade.getCrossRefText(bar, crossref, foo, evaluator, linkTextRegion, status);
-		assertTrue(status.getRefactoringStatus().hasError());
-		RefactoringStatusEntry fatalError = status.getRefactoringStatus().getEntryAt(0);
-		assertTrue(fatalError.getMessage().contains("conflict"));
-		assertTrue(fatalError.getContext() instanceof FileStatusContext);
-		assertEquals(file, ((FileStatusContext)fatalError.getContext()).getFile());
-		IRegion contextRegion = ((FileStatusContext)fatalError.getContext()).getTextRegion();
-		assertEquals(linkTextRegion.getOffset(), contextRegion.getOffset());
-		assertEquals(linkTextRegion.getLength(), contextRegion.getLength());
+		assertNull(facade.getCrossRefText(bar, crossref, foo, evaluator, linkTextRegion, status));
 	}
 
 }
