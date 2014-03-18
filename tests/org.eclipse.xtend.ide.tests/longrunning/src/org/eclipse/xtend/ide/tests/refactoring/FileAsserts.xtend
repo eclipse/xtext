@@ -6,6 +6,7 @@ import org.eclipse.core.resources.IResource
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.junit4.internal.LineDelimiters
 
 class FileAsserts {
 	
@@ -26,7 +27,7 @@ class FileAsserts {
 	def assertFileContains(IFile file, String... expectedContents) throws Exception {
 		file.refreshLocal(IResource::DEPTH_ZERO, null);
 		val fileContents = getContents(file);
-		expectedContents.forEach [ expectation |
+		expectedContents.map[LineDelimiters.toPlatform(it)].forEach [ expectation |
 			if (!fileContents.contains(expectation)) {
 				assertEquals(expectation, fileContents)
 			}
