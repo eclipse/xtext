@@ -109,7 +109,7 @@ TimeDef3 returns TimeDef:
 ;
 
 terminal NL:
-	'\n'
+	'\r'? '\n' 
 ;
 
 terminal WS:
