@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
  */
 public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeReferenceProvider {
 
+	//TODO this does not work when opening a Unix-delimited file on a Windows machine
 	protected String lineDelimiter = System.getProperty("line.separator");
 
 	public List<ReplaceRegion> computeTypeRefRegions(INode node) {
