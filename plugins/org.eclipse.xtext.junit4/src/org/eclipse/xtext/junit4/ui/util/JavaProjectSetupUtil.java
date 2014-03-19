@@ -42,6 +42,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.xtext.util.RuntimeIOException;
 import org.osgi.service.prefs.BackingStoreException;
 
 import com.google.common.collect.Lists;
@@ -253,8 +254,11 @@ public class JavaProjectSetupUtil {
 		if (folder.exists()) {
 			folder.delete(true, null);
 		}
-		folder.create(true, true, null);
-		return folder;
+		try {
+			return IResourcesSetupUtil.createFolder(folder.getFullPath());
+		} catch (Exception e) {
+			throw new RuntimeIOException(e);
+		}
 	}
 
 	public static void addJre15ClasspathEntry(IJavaProject javaProject) throws JavaModelException {
