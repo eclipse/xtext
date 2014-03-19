@@ -180,11 +180,17 @@ public class JavaProjectSetupUtil {
 		return javaProject;
 	}
 
+	/**
+	 * @see #addSourceFolder(IJavaProject, String, String[], String[]) 
+	 */
 	public static IFolder addSourceFolder(IJavaProject javaProject, String folderName) throws CoreException,
 			JavaModelException {
 		return addSourceFolder(javaProject, folderName, null, null);
 	}
 
+	/**
+	 * Adds the given folder as a Java source folder. Creates the folder and all parent folders as necessary.
+	 */
 	public static IFolder addSourceFolder(IJavaProject javaProject, String folderName, String[] inclusionPatterns, String[] exclusionPatterns) throws CoreException,
 			JavaModelException {
 		
@@ -193,7 +199,7 @@ public class JavaProjectSetupUtil {
 
 		deleteClasspathEntry(javaProject, projectPath);
 
-		IFolder srcFolder = createSubFolder(project, folderName); //$NON-NLS-1$
+		IFolder srcFolder = createFolderRecursively(project, folderName); //$NON-NLS-1$
 		IClasspathEntry srcFolderClasspathEntry = JavaCore.newSourceEntry(srcFolder.getFullPath(), getInclusionPatterns(inclusionPatterns), getExclusionPatterns(exclusionPatterns), null);
 		addToClasspath(javaProject, srcFolderClasspathEntry);
 		return srcFolder;
@@ -248,10 +254,32 @@ public class JavaProjectSetupUtil {
 		waitForAutoBuild();
 	}
 
+	/**
+	 * Creates the first-level subfolder of the given name. Deletes any existing contents if it already exists. 
+	 */
 	public static IFolder createSubFolder(IProject project, String folderName) throws CoreException {
 		IFolder folder = project.getFolder(folderName);
 		if (folder.exists()) {
 			folder.delete(true, null);
+		}
+		folder.create(true, true, null);
+		return folder;
+	}
+	
+	/**
+	 * Creates the given subfolder, also creating parent folders as necessary. 
+	 */
+	public static IFolder createFolderRecursively(IProject project, String folderName) throws CoreException {
+		return createFolderRecursively(project, project.getFolder(folderName));
+	}
+	
+	/**
+	 * @see #createFolderRecursively(IProject, String)
+	 */
+	public static IFolder createFolderRecursively(IProject project, IFolder folder) throws CoreException {
+		if (folder.exists()) return folder;
+		if (!folder.getParent().exists()) {
+			createFolderRecursively(project, (IFolder) folder.getParent());
 		}
 		folder.create(true, true, null);
 		return folder;
