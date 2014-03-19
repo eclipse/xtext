@@ -8,36 +8,22 @@
 package org.eclipse.xtend.ide.tests.builder;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.util.Strings.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.junit.Test;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
-
-	@Inject
-	private IWorkspace workspace;
 
 	@Inject
 	private WorkbenchTestHelper testHelper;
@@ -51,82 +37,56 @@ public class XtendBuilderParticipantTest extends AbstractXtendUITestCase {
 	@Test
 	public void testBuild() throws Exception {
 		IFile sourceFile = testHelper.createFile("test/Test", "package test\nclass Test {}");
-		sourceFile.getProject().setDefaultCharset(getNonDefaultEncoding(), null);
 		assertTrue(sourceFile.exists());
 		waitForAutoBuild();
 
 		IFile targetFile = testHelper.getProject().getFile("/xtend-gen/test/Test.java");
 		assertTrue(targetFile.exists());
-		assertFalse(isEmpty(targetFile));
-		assertEquals(getNonDefaultEncoding(), targetFile.getCharset());
+		assertFalse(fileIsEmpty(targetFile));
+
+		IFile traceFile = testHelper.getProject().getFile("/xtend-gen/test/.Test.java._trace");
+		assertTrue(traceFile.exists());
+		assertFalse(fileIsEmpty(traceFile));
 
 		IFile classFile = testHelper.getProject().getFile("/bin/test/Test.class");
 		assertTrue(classFile.exists());
-		assertFalse(isEmpty(classFile));
+		assertFalse(fileIsEmpty(classFile));
 
 		sourceFile.delete(true, null);
 		waitForAutoBuild();
 		cleanBuild();
-		assertFalse(targetFile.exists());
-		// don't delete folders per default
 		assertTrue(targetFile.getParent().exists());
+		assertFalse(targetFile.exists());
+		assertFalse(traceFile.exists());
 		assertFalse(classFile.exists());
+
 	}
 
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=400193
+	 */
 	@Test
-	public void testBug400193() throws Exception {
+	public void testSourceRelativeOutput() throws Exception {
 		IProject project = testHelper.getProject();
-		waitForAutoBuild();
 		String srcFolder = "/foo/bar/bug";
-		IFolder folder = project.getFolder(srcFolder);
-		prepareFolder(folder);
-		final IClasspathEntry srcClasspathEntry = JavaCore.newSourceEntry(folder.getFullPath());
-		IJavaProject javaProject = JavaCore.create(project);
-		List<IClasspathEntry> classpathEntries = Lists.newArrayList(javaProject.getRawClasspath());
-		classpathEntries.add(srcClasspathEntry);
-		javaProject.setRawClasspath(classpathEntries.toArray(new IClasspathEntry[classpathEntries.size()]),
-				new NullProgressMonitor());
+		JavaProjectSetupUtil.addSourceFolder(JavaCore.create(project), srcFolder);
+
 		String path = srcFolder + "/Foo.xtend";
 		String fullFileName = project.getName() + path;
-		IFile file = testHelper.createFileImpl(fullFileName, "class Foo {}");
+		IFile sourceFile = testHelper.createFileImpl(fullFileName, "class Foo {}");
+		assertTrue(sourceFile.exists());
 		waitForAutoBuild();
+
 		IFile generatedFile = project.getFile("foo/bar/xtend-gen/Foo.java");
 		assertTrue(generatedFile.exists());
-		file.delete(false, new NullProgressMonitor());
+		IFile traceFile = testHelper.getProject().getFile("foo/bar/xtend-gen/.Foo.java._trace");
+		assertTrue(traceFile.exists());
+		IFile classFile = testHelper.getProject().getFile("/bin/Foo.class");
+		assertTrue(classFile.exists());
+
+		sourceFile.delete(false, new NullProgressMonitor());
 		waitForAutoBuild();
-		assertTrue(!generatedFile.exists());
-	}
-
-	public void prepareFolder(IFolder folder) {
-		IContainer parent = folder.getParent();
-		if (parent instanceof IFolder) {
-			prepareFolder((IFolder) parent);
-		}
-		if (!folder.exists()) {
-			try {
-				folder.create(false,false,new NullProgressMonitor());
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	protected boolean isEmpty(IFile file) throws CoreException, IOException {
-		InputStream contents = null;
-		try {
-			contents = file.getContents();
-			return contents.read() == -1;
-		} finally {
-			if (contents != null)
-				contents.close();
-		}
-	}
-
-	protected String getNonDefaultEncoding() throws CoreException {
-		String defaultCharset = workspace.getRoot().getDefaultCharset();
-		if (equal(defaultCharset, "UTF-8"))
-			return "ISO-8859-1";
-		else
-			return "UTF-8";
+		assertFalse(generatedFile.exists());
+		assertFalse(traceFile.exists());
 	}
 }
