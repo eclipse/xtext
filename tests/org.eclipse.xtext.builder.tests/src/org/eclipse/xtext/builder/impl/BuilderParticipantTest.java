@@ -10,11 +10,8 @@ package org.eclipse.xtext.builder.impl;
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.util.Strings.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
@@ -124,6 +121,18 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		generatedFile = project.getProject().getFile("./Bar.txt");
 		assertTrue(generatedFile.exists());
 	}
+	
+	@Test public void testCharsetIsHonored() throws Exception {
+		IJavaProject project = createJavaProject("testCharsetIsHonored");
+		project.getProject().setDefaultCharset(getNonDefaultEncoding(), null);
+		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+		IFolder folder = project.getProject().getFolder("src");
+		IFile file = folder.getFile("Foo" + F_EXT);
+		file.create(new StringInputStream("object Foo"), true, monitor());
+		waitForAutoBuild();
+		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
+		assertEquals(getNonDefaultEncoding(), generatedFile.getCharset());
+	}
 
 	@Test public void testCleanUpDerivedResources() throws Exception {
 		IJavaProject project = createJavaProject("foo");
@@ -160,7 +169,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		assertTrue(generatedFile.exists());
 		assertTrue(generatedFile.isDerived());
 		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
-		assertEquals("object Foo", getContents(generatedFile).trim());
+		assertEquals("object Foo", fileToString(generatedFile).trim());
 		
 		file.setContents(new StringInputStream("object Bar"), true, true, monitor());
 		waitForAutoBuild();
@@ -169,7 +178,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		assertTrue(generatedFile.exists());
 		assertTrue(generatedFile.isDerived());
 		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
-		assertEquals("object Bar", getContents(generatedFile).trim());
+		assertEquals("object Bar", fileToString(generatedFile).trim());
 		
 		file.delete(true, monitor());
 		waitForAutoBuild();
@@ -187,7 +196,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		assertTrue(generatedFile.exists());
 		assertTrue(generatedFile.isDerived());
 		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
-		assertEquals("object Foo", getContents(generatedFile).trim());
+		assertEquals("object Foo", fileToString(generatedFile).trim());
 		
 		cleanBuild();
 		assertFalse(generatedFile.exists());
@@ -220,7 +229,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 			assertTrue(generatedFile.exists());
 			assertFalse(generatedFile.isDerived());
 			assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
-			assertEquals("object Foo", getContents(generatedFile).trim());
+			assertEquals("object Foo", fileToString(generatedFile).trim());
 			
 			file.setContents(new StringInputStream("object Bar"), true, true, monitor());
 			waitForAutoBuild();
@@ -229,7 +238,7 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 			assertTrue(generatedFile.exists());
 			assertFalse(generatedFile.isDerived());
 			assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
-			assertEquals("object Bar", getContents(generatedFile).trim());
+			assertEquals("object Bar", fileToString(generatedFile).trim());
 			
 			file.delete(true, monitor());
 			waitForAutoBuild();
@@ -283,22 +292,6 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 		assertFalse(generatedFile.exists());
 	}
 	
-	protected String getContents(IFile file) throws CoreException, IOException {
-		InputStream contents = file.getContents();
-		try {
-			InputStreamReader reader = new InputStreamReader(contents, file.getCharset());
-			BufferedReader reader2 = new BufferedReader(reader);
-			String line = null;
-			StringBuilder result = new StringBuilder();
-			while ((line = reader2.readLine()) != null) {
-				result.append(line);
-			}
-			return result.toString();
-		} finally {
-			contents.close();
-		}
-	}
-
 	protected void createTwoReferencedProjects() throws CoreException {
 		IJavaProject firstProject = createJavaProjectWithRootSrc("first");
 		IJavaProject secondProject = createJavaProjectWithRootSrc("second");
@@ -328,5 +321,14 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 	protected String getDefaultOutputDirectoryKey() {
 		return OUTPUT_PREFERENCE_TAG + PreferenceConstants.SEPARATOR + IFileSystemAccess.DEFAULT_OUTPUT
 				+ PreferenceConstants.SEPARATOR + OUTPUT_DIRECTORY;
+	}
+	
+	protected String getNonDefaultEncoding() throws CoreException {
+		String defaultCharset = root().getDefaultCharset();
+		if (equal(defaultCharset, "UTF-8")) {
+			return "ISO-8859-1";
+		} else {
+			return "UTF-8";
+		}
 	}
 }

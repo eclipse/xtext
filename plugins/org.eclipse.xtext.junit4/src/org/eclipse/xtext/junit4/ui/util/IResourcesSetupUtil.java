@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4.ui.util;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.ICommand;
@@ -29,6 +31,8 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.util.StringInputStream;
+
+import com.google.common.io.ByteStreams;
 
 public class IResourcesSetupUtil {
 
@@ -211,6 +215,32 @@ public class IResourcesSetupUtil {
 
 	public static IResource file(String path) {
 		return root().findMember(new Path(path));
+	}
+	
+	public static byte[] fileToByteArray(IFile file) throws CoreException, IOException {
+		InputStream contents = null;
+		try {
+			contents = file.getContents();
+			return ByteStreams.toByteArray(contents);
+		} finally {
+			if (contents != null)
+				contents.close();
+		}
+	}
+
+	public static String fileToString(IFile file) throws CoreException, IOException {
+		return new String(fileToByteArray(file), file.getCharset());
+	}
+
+	public static boolean fileIsEmpty(IFile file) throws IOException, CoreException {
+		InputStream contents = null;
+		try {
+			contents = file.getContents();
+			return contents.read() == -1;
+		} finally {
+			if (contents != null)
+				contents.close();
+		}
 	}
 
 	private static void create(final IContainer container)
