@@ -9,6 +9,8 @@ package org.eclipse.xtend.ide.tests.compiler;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
@@ -18,6 +20,8 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.junit.Test;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 /**
@@ -34,20 +38,29 @@ public class LineSeparatorConversionTest extends AbstractXtendUITestCase {
 		super.tearDown();
 	}
 	
-	@Test public void testLineSeparator() throws Exception {
+	@Test public void testMacSeparator() throws Exception {
+		testSeparator("\r");
+	}
+	
+	@Test public void testWindowsSeparator() throws Exception {
+		testSeparator("\r\n");
+	}
+	
+	@Test public void testUnixSeparator() throws Exception {
+		testSeparator("\n");
+	}
+
+	private void testSeparator(String separator) throws Exception {
 		IProject project = workbenchTestHelper.getProject();
 		ScopedPreferenceStore projectPreferenceStore = new ScopedPreferenceStore(new ProjectScope(project), Platform.PI_RUNTIME);
-		projectPreferenceStore.setValue(Platform.PREF_LINE_SEPARATOR, "\n\n");
+		projectPreferenceStore.setValue(Platform.PREF_LINE_SEPARATOR, separator);
 		workbenchTestHelper.createFile("Foo.xtend", "class Foo {}");
 		waitForAutoBuild();
 		IFile compiledFile = project.getFile("xtend-gen/Foo.java");
+		workbenchTestHelper.getFiles().add(compiledFile);
 		String contents = workbenchTestHelper.getContents(compiledFile);
-		boolean expectAnotherNewline = false;
-		for(char c : contents.toCharArray()) {
-			if(c == '\n') 
-				expectAnotherNewline = !expectAnotherNewline;
-			else if(expectAnotherNewline) 
-				fail("Invalid line separator: Expected double newlines only but got '" + contents + "'");
-		}
+		List<String> expectedLines = ImmutableList.of("@SuppressWarnings(\"all\")", "public class Foo {", "}", "");
+		String expectedContent = Joiner.on(separator).join(expectedLines);
+		assertEquals(expectedContent, contents);
 	}
 }

@@ -110,7 +110,6 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		}
 	}
 
-	//TODO this test fails on Windows, because the generated code contains mixed line delimiters
 	@Test
 	public void testRenameJavaClassAndImport() throws Exception {
 		try {
@@ -129,8 +128,26 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
 	}
+	
+	@Test
+	public void testUseSameLineDelimiterAsRestOfFile() throws Exception {
+		try {
+			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {}");
+			String xtendModel = "import java.util.List\r\n"
+					+ "import test.JavaClass\r\n"
+					+ "\r\n"
+					+ "class XtendClass { List<JavaClass> x }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			IType javaClass = findJavaType("test.JavaClass");
+			assertNotNull(javaClass);
+			renameJavaElement(javaClass, "NewJavaClass");
+			fileAsserts.assertFileContains(xtendClass, "import test.NewJavaClass");
+			fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass"));
+		} finally {
+			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
 
-	//TODO this test fails on Windows, because the generated code contains mixed line delimiters
 	@Test
 	public void testRenameJavaClassAndImportReferenceToStaticField() throws Exception {
 		try {

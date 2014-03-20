@@ -452,6 +452,29 @@ public class Strings {
 		}
 		return result;
 	}
+	
+	/**
+	 * Assumes {@code '\r'}, {@code '\n'} or {@code '\r\n'} to be valid line breaks.
+	 * 
+	 * @since 2.6
+	 */
+	public static CharSequence trimTrailingLineBreak(CharSequence s) {
+		if (s == null)
+			return null;
+		if (s.length() == 0)
+			return s;
+		if (s.charAt(s.length() - 1) == '\n') {
+			if (s.length() > 1 && s.charAt(s.length() - 2) == '\r') {
+				return s.subSequence(0, s.length() - 2);
+			}
+			return s.subSequence(0, s.length() - 1);
+		}
+		if (s.charAt(s.length() - 1) == '\r') {
+			return s.subSequence(0, s.length() - 1);
+		}
+		return s;
+	}
+	
 
 	/**
 	 * Counts the number of lines where {@link #separator} is assumed to be a valid line break.

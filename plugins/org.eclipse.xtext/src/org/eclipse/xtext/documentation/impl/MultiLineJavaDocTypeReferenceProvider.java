@@ -1,3 +1,4 @@
+
 /*******************************************************************************
  * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
@@ -23,21 +24,21 @@ import com.google.common.collect.Lists;
  */
 public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeReferenceProvider {
 
-	//TODO this does not work when opening a Unix-delimited file on a Windows machine
+	@Deprecated
 	protected String lineDelimiter = System.getProperty("line.separator");
 
 	public List<ReplaceRegion> computeTypeRefRegions(INode node) {
 		List<ReplaceRegion> regions = Lists.newArrayList();
 		Iterable<ILeafNode> leafNodes = node.getLeafNodes();
-		computeRegions(regions, leafNodes, LINK_TAG_WITH_SUFFIX, "#", " ", "}");
-		computeRegions(regions, leafNodes, SEE_TAG_WITH_SUFFIX, "#" , " ", lineDelimiter);
+		computeRegions(regions, leafNodes, LINK_TAG_WITH_SUFFIX, new String[]{"#", " ", "}"});
+		computeRegions(regions, leafNodes, SEE_TAG_WITH_SUFFIX, new String[]{"#" , " ", "\r", "\n"});
 		return regions;
 	}
 
 	public List<ReplaceRegion> computeParameterTypeRefRegions(INode node) {
 		List<ReplaceRegion> regions = Lists.newArrayList();
 		Iterable<ILeafNode> leafNodes = node.getLeafNodes();
-		computeRegions(regions, leafNodes, "@param ", " ", "-", lineDelimiter);
+		computeRegions(regions, leafNodes, "@param ", new String[]{" ", "-", "\r", "\n"});
 		return regions;
 	}
 
@@ -50,8 +51,23 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 	 * @param end - end with highest precedence
 	 * @param optionalEnd - end with lower precedence
 	 * @param optionalEnd2 - end with lowest precedence
+	 * @deprecated use {@link #computeRegions(List, Iterable, String, String...)}
 	 */
+	@Deprecated
 	protected void computeRegions(List<ReplaceRegion> regions, Iterable<ILeafNode> leafNodes, String toSearch, String end, String optionalEnd, String optionalEnd2) {
+		computeRegions(regions, leafNodes, toSearch, new String[]{end, optionalEnd, optionalEnd2});
+	}
+	
+	/**
+	 * Computes regions between a given string to search and different ends searched by their precedence
+	 *
+	 * @param regions - List to put new regions in
+	 * @param leafNodes - nodes to search in
+	 * @param toSearch - String to search
+	 * @param ends - ends in decreasing precedence
+	 * @since 2.6
+	 */
+	protected void computeRegions(List<ReplaceRegion> regions, Iterable<ILeafNode> leafNodes, String toSearch, String... ends) {
 		for (ILeafNode leafNode : leafNodes) {
 			String text = leafNode.getText();
 			int offset = leafNode.getOffset();
@@ -65,32 +81,30 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 						beginIndex ++;
 					}
 				}
-				int endLink = -1;
-				if(end != null && endLink == -1)
-					endLink = text.indexOf(end, beginIndex);
-				if(optionalEnd != null && endLink == -1)
-					endLink = text.indexOf(optionalEnd, beginIndex);
-				if(optionalEnd2 != null){
-					int lastEndLink = text.indexOf(optionalEnd2, beginIndex);
-					if(lastEndLink != -1) {
-						if(endLink != -1){
-							if(endLink > lastEndLink)
-								endLink = lastEndLink;
+				int endIndex = -1;
+				for (int i = ends.length -1; i >= 0; i--) {
+					String end = ends[i];
+					int endCandidate = text.indexOf(end, beginIndex);
+					if (endCandidate != -1)  {
+						if (endIndex == -1) {
+							endIndex = endCandidate;
 						} else {
-							endLink = lastEndLink;
+							if (endIndex > endCandidate) {
+								endIndex = endCandidate;
+							}
 						}
 					}
 				}
-				if (endLink == -1) { 
+				if (endIndex == -1) { 
 					break;
 				} else {
-					String simpleName = text.substring(beginIndex, endLink).replaceAll(" ", "");
+					String simpleName = text.substring(beginIndex, endIndex).replaceAll(" ", "");
 					if(simpleName.length() > 0 && simpleName.matches("[0-9a-zA-Z\\.\\$_]*")){
 						ReplaceRegion region = new ReplaceRegion(offset + beginIndex, simpleName.length(), simpleName);
 						regions.add(region);
 					}
 				} 
-				position = text.indexOf(toSearch, endLink);
+				position = text.indexOf(toSearch, endIndex);
 			}
 		}
 	}
