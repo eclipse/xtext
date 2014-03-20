@@ -90,21 +90,27 @@ class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
 			class Foo{
 				/**
 				* @param string - a fancy string
+				* @param anotherString-even more fancy
 				* @param zonk
 				*/
-				def bar(String string, Integer zonk){}
+				def bar(String string, String anotherString, Integer zonk){}
 			}
 		'''
 		val resource = clazz(input).eResource as XtextResource
 		val rootNode = resource.parseResult.rootNode
 		val regions = javaDocTypeReferenceProvider.computeParameterTypeRefRegions(rootNode)
-		assertEquals(2,regions.size)
+		assertEquals(3,regions.size)
 		assertEquals("string", regions.head.text);
 		assertEquals(input.indexOf("string"), regions.head.offset)
 		assertEquals("string".length, regions.head.length)
-		assertEquals("zonk", regions.get(1).text);
-		assertEquals(input.indexOf("zonk"), regions.get(1).offset)
-		assertEquals("zonk".length, regions.get(1).length)
+		
+		assertEquals("anotherString", regions.get(1).text);
+		assertEquals(input.indexOf("anotherString"), regions.get(1).offset)
+		assertEquals("anotherString".length, regions.get(1).length)
+		
+		assertEquals("zonk", regions.get(2).text);
+		assertEquals(input.indexOf("zonk"), regions.get(2).offset)
+		assertEquals("zonk".length, regions.get(2).length)
 	}
 
 	@Test
@@ -141,7 +147,7 @@ class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
 		val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode)
 		assertEquals(1,regions.size)
 	}
-
+	
 	@Test
 	def void testComputation_8() {
 		val String input = '''
@@ -156,6 +162,23 @@ class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
 		val rootNode = resource.parseResult.rootNode
 		val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode)
 		assertEquals(1,regions.size)
+	}
+	
+	@Test
+	def void testComputation_9() {
+		val String input = '''
+			package foo
+
+			/**
+			* {@link    String #length()  }
+			*/
+			class Foo{}
+		'''
+		val resource = clazz(input).eResource as XtextResource
+		val rootNode = resource.parseResult.rootNode
+		val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode)
+		assertEquals(1,regions.size)
+		assertEquals("String",regions.head.text)
 	}
 
 }
