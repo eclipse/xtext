@@ -38,6 +38,7 @@ import org.junit.Test;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
  */
+//TODO these tests fail on Windows, it's not yet clear why
 public class DefaultReferenceFinderTest extends AbstractXtextTests {
 
 	private ResourceSet resourceSet;

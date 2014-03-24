@@ -7,10 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.formatting;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ProjectScope;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -20,6 +27,7 @@ import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.RuntimeIOException;
 
 import com.google.inject.Inject;
 
@@ -52,6 +60,11 @@ public class PreferenceStoreWhitespaceInformationProvider implements IWhitespace
 	}
 
 	protected String getLineSeparatorPreference(URI uri) {
+		if (uri.isPlatformResource()) {
+			IFile file = workspace.getRoot().getFile(new Path(uri.toPlatformString(true)));
+			String delimiter = senseLineDelimiter(file);
+			if (delimiter != null) return delimiter;
+		}
 		IProject project = null;
 		if (uri.isPlatformResource()) {
 			project = workspace.getRoot().getProject(uri.segment(1));
@@ -70,6 +83,48 @@ public class PreferenceStoreWhitespaceInformationProvider implements IWhitespace
 		if (result != null)
 			return result;
 		return System.getProperty("line.separator");
+	}
+	
+	private String senseLineDelimiter(IFile file) {
+		if (file.exists()) {
+			InputStream content = null;
+			try {
+				content = file.getContents();
+				Reader reader = new InputStreamReader(content, file.getCharset());
+				int read;
+				boolean rFound = false;
+				while ((read = reader.read()) != -1) {
+					char c = (char) read;
+					if (c == '\n') {
+						if (rFound) {
+							return "\r\n";
+						} else {
+							return "\n";
+						}
+					}
+					if (rFound) {
+						return "\r";
+					}
+					if (c == '\r') {
+						rFound = true;
+					}
+				}
+				if (rFound) {
+					return "\r";
+				}
+			} catch (Exception e) {
+				throw new RuntimeIOException(e);
+			} finally {
+				try {
+					if (content != null) {
+						content.close();
+					}
+				} catch (IOException e) {
+					throw new RuntimeIOException(e);
+				}
+			}
+		}
+		return null;
 	}
 
 	protected String getLineSeparatorPreference(IScopeContext scopeContext) {
