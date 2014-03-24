@@ -28,7 +28,6 @@
 	<property name="eclipse.download" value="http://download.eclipse.org" />
 
 	<property name="buckminster.home" location="${user.home}/buckminster" />
-	<property name="buckminster.loglevel" value="INFO" />
 
 	<property name="director.install.dest" location="${user.home}" />
 	<property name="director.dir" location="${director.install.dest}/director" />
@@ -75,7 +74,7 @@
 
 	<target name="import.tp">
 		<echo message="IMPORTANT: Populating an empty target platform may take a while." />
-		<run_buckminster command='importtargetdefinition -A "${checkout.location}/releng/org.eclipse.xtext.releng/target-platforms/developer-kepler.target"' />
+		<run_buckminster command='import "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-platform.mspec"' />
 	</target>
 
 	<target name="import.workspace.settings">
@@ -96,7 +95,6 @@
 						<include name="org.eclipse.equinox.launcher_*.jar" />
 					</fileset>
 				</classpath>
-				<arg line='-L ${buckminster.loglevel}' />
 				<arg line='@{command}' />
 				<arg line='-update' />
 				<arg line='-data "${WORKSPACE}"' />
