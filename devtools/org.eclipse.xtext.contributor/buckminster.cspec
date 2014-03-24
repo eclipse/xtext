@@ -3,9 +3,8 @@
     <cs:dependencies>
         <cs:dependency name="org.eclipse.xtend.sdk" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.xtend.tests" componentType="eclipse.feature"/>
-        <cs:dependency name="org.eclipse.xtext.compatibility.galileo" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.xtext.sdk" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.xtext.tests" componentType="eclipse.feature"/>
-        <cs:dependency name="org.eclipse.xtext.releng" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.xtext.compatibility.galileo" componentType="osgi.bundle"/>
     </cs:dependencies>
 </cs:cspec>
