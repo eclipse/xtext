@@ -49,6 +49,7 @@ import com.google.inject.Inject;
  * Language dependent configuration for the 'import' related things.
  * 
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Lorenzo Bettini - https://bugs.eclipse.org/bugs/show_bug.cgi?id=407390
  */
 public class DefaultImportsConfiguration implements IImportsConfiguration {
 
@@ -172,7 +173,9 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 				if(elementInNode != null) {
 					for(Iterator<EObject> i = ruleInGrammar.eAllContents(); i.hasNext();) {
 						EObject nextInGrammar = i.next();
-						if(nextInGrammar == expectedRuleCall) {
+						// check for type of childNode, otherwise we get a ClassCastException
+						// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=407390
+						if(nextInGrammar == expectedRuleCall && childNode instanceof ICompositeNode) {
 							currentParentNode = (ICompositeNode) childNode;
 							continue OUTER;
 						}
