@@ -42,6 +42,15 @@
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle,buckminster" readerType="git" mutable="false">
+			<rm:property key="buckminster.mutable" value="false" />
+			<rm:property key="git.remote.uri" value="${git.uri}" />
+			<rm:property key="git.auto.fetch" value="true" />
+			<rm:uri format="{0},releng/{1}">
+				<bc:propertyRef key="git.clone.dest" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
 		<rm:provider componentTypes="osgi.bundle" readerType="git" mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:property key="git.remote.uri" value="${git.uri}" />
@@ -70,6 +79,14 @@
 			<rm:property key="buckminster.source" value="false" />
 			<rm:property key="buckminster.mutable" value="false" />
 			<rm:uri format="{0}/releases/galileo">
+				<bc:propertyRef key="eclipse.download" />
+			</rm:uri>
+		</rm:provider>
+		<rm:provider componentTypes="eclipse.feature,osgi.bundle"
+			readerType="p2" source="false" mutable="false">
+			<rm:property key="buckminster.source" value="false" />
+			<rm:property key="buckminster.mutable" value="false" />
+			<rm:uri format="{0}/eclipse/updates/3.8">
 				<bc:propertyRef key="eclipse.download" />
 			</rm:uri>
 		</rm:provider>
