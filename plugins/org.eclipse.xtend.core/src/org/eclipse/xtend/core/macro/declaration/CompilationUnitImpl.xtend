@@ -94,7 +94,6 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IFileHeaderProvider
-import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.XExpression
@@ -111,6 +110,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
 import org.eclipse.xtext.common.types.JvmArrayType
+import org.eclipse.xtext.util.Strings
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -167,8 +167,6 @@ class CompilationUnitImpl implements CompilationUnit {
 
 	@Inject AbstractFileSystemSupport fileSystemSupport
 	@Inject FileLocations fileLocations
-	
-	@Inject extension IWhitespaceInformationProvider 
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
@@ -587,14 +585,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	protected def trimTrailingLinebreak(CharSequence sequence, EObject context) {
-		val lineBreak = context?.eResource?.URI?.lineSeparatorInformation?.lineSeparator
-		if(sequence != null 
-			&& lineBreak != null 
-			&& sequence.length >= lineBreak.length
-			&& lineBreak.equals(sequence.subSequence(sequence.length - lineBreak.length, sequence.length)))
-			sequence.subSequence(0, sequence.length - lineBreak.length)
-		else 
-			sequence
+		Strings.trimTrailingLineBreak(sequence)
 	} 
 	
 	def void setCompilationStrategy(JvmField field, CompilationStrategy compilationStrategy) {
