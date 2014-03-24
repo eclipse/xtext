@@ -70,7 +70,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 	}
 
 	protected Resource loadResource(String pathName, String content) throws IOException {
-		Resource resource = resourceSet.createResource(URI.createFileURI("/" + pathName));
+		Resource resource = resourceSet.createResource(URI.createFileURI(pathName));
 		resource.load(new StringInputStream(content), null);
 		assertTrue(resource.getErrors().isEmpty());
 		return resource;
@@ -78,7 +78,8 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 
 	@Test public void testLocalRefs() throws Exception {
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0,
+				EcoreUtil.getURI(elementB)));
 		findAllRefs(elementA, localResourceAccess);
 		acceptor.assertFinished();
 
