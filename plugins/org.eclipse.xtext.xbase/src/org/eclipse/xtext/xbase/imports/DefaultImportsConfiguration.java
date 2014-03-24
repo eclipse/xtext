@@ -33,6 +33,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.HiddenLeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
@@ -49,6 +50,7 @@ import com.google.inject.Inject;
  * Language dependent configuration for the 'import' related things.
  * 
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Lorenzo Bettini - https://bugs.eclipse.org/bugs/show_bug.cgi?id=407390
  */
 public class DefaultImportsConfiguration implements IImportsConfiguration {
 
@@ -168,6 +170,11 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 			EObject expectedRuleCall = pathToImportSection.get(currentDepth);
 			AbstractRule ruleInGrammar = GrammarUtil.containingRule(expectedRuleCall);
 			for(INode childNode: currentParentNode.getChildren()) {
+				if (childNode instanceof HiddenLeafNode) {
+					// otherwise we get a ClassCastException in case of comments
+					// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=407390
+					continue;
+				}
 				EObject elementInNode = childNode.getGrammarElement();
 				if(elementInNode != null) {
 					for(Iterator<EObject> i = ruleInGrammar.eAllContents(); i.hasNext();) {
