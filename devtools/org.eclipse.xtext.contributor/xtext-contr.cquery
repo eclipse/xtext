@@ -5,5 +5,4 @@
      <cq:advisorNode namePattern="^org\.eclipse.*examples.*$" skipComponent="true"/>
      <cq:advisorNode namePattern="org.eclipse.xtend.typesystem" skipComponent="true"/>
      <cq:advisorNode namePattern="^(org|com|javax)\.([a-z])+(\.(?!(xtext|xtend\.|xtend2)).*)?$" skipComponent="true"/>
-     <cq:advisorNode namePattern="^org\.junit(?:\..+)?$" skipComponent="true"/>
 </cq:componentQuery>
