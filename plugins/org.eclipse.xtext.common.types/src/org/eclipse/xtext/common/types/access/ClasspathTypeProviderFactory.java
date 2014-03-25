@@ -63,8 +63,8 @@ public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 	}
 	
 	@Override
-	public ClasspathTypeProvider findTypeProvider(ResourceSet resourceSet) {
-		return (ClasspathTypeProvider) super.findTypeProvider(resourceSet);
+	public IJvmTypeProvider findTypeProvider(ResourceSet resourceSet) {
+		return super.findTypeProvider(resourceSet);
 	}
 	
 }

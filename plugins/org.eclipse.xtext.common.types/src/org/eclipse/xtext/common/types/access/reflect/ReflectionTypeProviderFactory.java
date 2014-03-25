@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.access.reflect;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.access.AbstractTypeProviderFactory;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Inject;
@@ -59,8 +60,8 @@ public class ReflectionTypeProviderFactory extends AbstractTypeProviderFactory {
 	}
 	
 	@Override
-	public ReflectionTypeProvider findTypeProvider(ResourceSet resourceSet) {
-		return (ReflectionTypeProvider) super.findTypeProvider(resourceSet);
+	public IJvmTypeProvider findTypeProvider(ResourceSet resourceSet) {
+		return super.findTypeProvider(resourceSet);
 	}
 	
 }
