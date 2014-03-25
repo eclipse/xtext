@@ -244,47 +244,47 @@ class RenameJvmOperationTest extends AbstractXtendUITestCase {
 			''')
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test def void renameToOverloadedImport() {
 		renameToOverloadedImport(false, false, false, false)
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test def void renameToOverloadedImport_2() {
 		renameToOverloadedImport(false, false, true, false)
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test def void renameToOverloadedImport_3() {
 		renameToOverloadedImport(false, false, true, true)
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test def void renameToOverloadedImport_4() {
 		renameToOverloadedImport(true, false, false, false)
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test def void renameToOverloadedImport_5() {
 		renameToOverloadedImport(true, false, true, false)
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test def void renameToOverloadedImport_6() {
 		renameToOverloadedImport(true, false, true, true)
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test def void renameToOverloadedImport_7() {
 		renameToOverloadedImport(true, true, false, false)
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test def void renameToOverloadedImport_8() {
 		renameToOverloadedImport(true, true, true, false)
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test def void renameToOverloadedImport_9() {
 		renameToOverloadedImport(true, true, true, true)
 	}
