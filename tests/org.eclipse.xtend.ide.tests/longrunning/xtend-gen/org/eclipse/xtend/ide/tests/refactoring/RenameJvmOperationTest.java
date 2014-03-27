@@ -453,46 +453,55 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
     }
   }
   
+  @Ignore
   @Test
   public void renameToOverloadedImport() {
     this.renameToOverloadedImport(false, false, false, false);
   }
   
+  @Ignore
   @Test
   public void renameToOverloadedImport_2() {
     this.renameToOverloadedImport(false, false, true, false);
   }
   
+  @Ignore
   @Test
   public void renameToOverloadedImport_3() {
     this.renameToOverloadedImport(false, false, true, true);
   }
   
+  @Ignore
   @Test
   public void renameToOverloadedImport_4() {
     this.renameToOverloadedImport(true, false, false, false);
   }
   
+  @Ignore
   @Test
   public void renameToOverloadedImport_5() {
     this.renameToOverloadedImport(true, false, true, false);
   }
   
+  @Ignore
   @Test
   public void renameToOverloadedImport_6() {
     this.renameToOverloadedImport(true, false, true, true);
   }
   
+  @Ignore
   @Test
   public void renameToOverloadedImport_7() {
     this.renameToOverloadedImport(true, true, false, false);
   }
   
+  @Ignore
   @Test
   public void renameToOverloadedImport_8() {
     this.renameToOverloadedImport(true, true, true, false);
   }
   
+  @Ignore
   @Test
   public void renameToOverloadedImport_9() {
     this.renameToOverloadedImport(true, true, true, true);

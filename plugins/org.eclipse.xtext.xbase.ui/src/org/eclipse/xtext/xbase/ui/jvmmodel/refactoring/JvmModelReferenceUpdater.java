@@ -24,7 +24,6 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringCrossReferenceSerializer.RefTextEvaluator;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -108,18 +107,6 @@ public class JvmModelReferenceUpdater extends DefaultReferenceUpdater {
 		return new RefTextEvaluator() {
 
 			public boolean isValid(IEObjectDescription newTarget) {
-				if (referringElement instanceof XAbstractFeatureCall) {
-					XAbstractFeatureCall featureCall = (XAbstractFeatureCall) referringElement;
-					boolean result = featureCall.getFeature() == newTarget.getEObjectOrProxy();
-					if (result) {
-						IScope scope = linkingScopeProvider.getScope(referringElement, reference);
-						IEObjectDescription element = scope.getSingleElement(featureCall.getFeature());
-						if (element != null && element.getName().equals(newTarget.getName())) {
-							return true;
-						}
-					}
-					return false;
-				}
 				IScope scope = linkingScopeProvider.getScope(referringElement, reference);
 				IEObjectDescription element = scope.getSingleElement(newTarget.getName());
 				// TODO here we need to simulate linking with the new name instead of the old name
