@@ -1,6 +1,10 @@
 package org.eclipse.xtext.maven;
 
+import java.util.List;
+
 import org.eclipse.xtext.generator.IFileSystemAccess;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -84,6 +88,15 @@ public class OutputConfiguration {
 	 */
 	private boolean cleanUpDerivedResources = true;
 
+	/**
+	 * Optional mappings from source folders to output directories, e.g.</br>
+	 * src/main/java => build/gen/main </br> src/test/java =>
+	 * build/gen/test</br>
+	 * 
+	 * @property
+	 */
+	private List<SourceMapping> sourceMappings = Lists.newArrayList();
+
 	public OutputConfiguration() {
 		super();
 	}
@@ -136,7 +149,8 @@ public class OutputConfiguration {
 		return hideSyntheticLocalVariables;
 	}
 
-	public void setHideSyntheticLocalVariables(boolean hideSyntheticLocalVariables) {
+	public void setHideSyntheticLocalVariables(
+			boolean hideSyntheticLocalVariables) {
 		this.hideSyntheticLocalVariables = hideSyntheticLocalVariables;
 	}
 
@@ -156,8 +170,17 @@ public class OutputConfiguration {
 		this.cleanUpDerivedResources = cleanUpDerivedResources;
 	}
 
+	public List<SourceMapping> getSourceMappings() {
+		return sourceMappings;
+	}
+
+	public void setSourceMappings(List<SourceMapping> sourceMappings) {
+		this.sourceMappings = sourceMappings;
+	}
+
 	public org.eclipse.xtext.generator.OutputConfiguration toOutputConfiguration() {
-		org.eclipse.xtext.generator.OutputConfiguration copy = new org.eclipse.xtext.generator.OutputConfiguration(name);
+		org.eclipse.xtext.generator.OutputConfiguration copy = new org.eclipse.xtext.generator.OutputConfiguration(
+				name);
 		copy.setCanClearOutputDirectory(canClearOutputDirectory);
 		copy.setCleanUpDerivedResources(cleanUpDerivedResources);
 		copy.setCreateOutputDirectory(createOutputDirectory);
@@ -166,7 +189,49 @@ public class OutputConfiguration {
 		copy.setInstallDslAsPrimarySource(installDslAsPrimarySource);
 		copy.setOutputDirectory(outputDirectory);
 		copy.setOverrideExistingResources(overrideExistingResources);
+		if (!sourceMappings.isEmpty()) {
+			copy.setUseOutputPerSourceFolder(true);
+			for (SourceMapping mapping : sourceMappings) {
+				org.eclipse.xtext.generator.OutputConfiguration.SourceMapping mappingCopy = new org.eclipse.xtext.generator.OutputConfiguration.SourceMapping(
+						mapping.getSourceFolder());
+				mappingCopy.setOutputDirectory(mapping.getOutputDirectory());
+				copy.getSourceMappings().add(mappingCopy);
+			}
+		}
 		return copy;
+	}
+
+	public static class SourceMapping {
+		/**
+		 * The project relative source folder
+		 * 
+		 * @property
+		 * @required
+		 */
+		private String sourceFolder;
+		/**
+		 * The project relative output directory
+		 * 
+		 * @property
+		 * @required
+		 */
+		private String outputDirectory;
+
+		public String getSourceFolder() {
+			return sourceFolder;
+		}
+
+		public void setSourceFolder(String sourceFolder) {
+			this.sourceFolder = sourceFolder;
+		}
+
+		public String getOutputDirectory() {
+			return outputDirectory;
+		}
+
+		public void setOutputDirectory(String outputDirectory) {
+			this.outputDirectory = outputDirectory;
+		}
 	}
 
 }
