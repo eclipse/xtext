@@ -3,6 +3,7 @@ package org.eclipse.xtext.builder.standalone;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -46,7 +48,9 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -372,6 +376,19 @@ public class StandaloneBuilder {
   }
   
   protected void generate(final List<Resource> sourceResources) {
+    Iterable<String> _sourceDirs = this.getSourceDirs();
+    final Function1<String, URI> _function = new Function1<String, URI>() {
+      public URI apply(final String it) {
+        return URI.createFileURI(it);
+      }
+    };
+    Iterable<URI> _map = IterableExtensions.<String, URI>map(_sourceDirs, _function);
+    final Function2<URI, URI, URI> _function_1 = new Function2<URI, URI, URI>() {
+      public URI apply(final URI a, final URI b) {
+        return StandaloneBuilder.this.commonPrefix(a, b);
+      }
+    };
+    final URI baseDir = IterableExtensions.<URI>reduce(_map, _function_1);
     for (final Resource it : sourceResources) {
       {
         URI _uRI = it.getURI();
@@ -379,6 +396,7 @@ public class StandaloneBuilder {
         String _plus = ("Starting generator for input: \'" + _lastSegment);
         String _plus_1 = (_plus + "\'");
         StandaloneBuilder.LOG.info(_plus_1);
+        this.registerCurrentSource(it, baseDir);
         LanguageAccess _languageAccess = this.languageAccess(it);
         IGenerator _generator = _languageAccess.getGenerator();
         LanguageAccess _languageAccess_1 = this.languageAccess(it);
@@ -386,6 +404,52 @@ public class StandaloneBuilder {
         _generator.doGenerate(it, _fileSystemAccess);
       }
     }
+  }
+  
+  protected void registerCurrentSource(final Resource resource, final URI baseDir) {
+    LanguageAccess _languageAccess = this.languageAccess(resource);
+    final JavaIoFileSystemAccess fsa = _languageAccess.getFileSystemAccess();
+    Map<String, OutputConfiguration> _outputConfigurations = fsa.getOutputConfigurations();
+    Collection<OutputConfiguration> _values = _outputConfigurations.values();
+    for (final OutputConfiguration output : _values) {
+      Set<String> _sourceFolders = output.getSourceFolders();
+      for (final String source : _sourceFolders) {
+        URI _uRI = resource.getURI();
+        String _string = _uRI.toString();
+        String _plus = (baseDir + "/");
+        String _plus_1 = (_plus + source);
+        boolean _startsWith = _string.startsWith(_plus_1);
+        if (_startsWith) {
+          fsa.setCurrentSource(source);
+        }
+      }
+    }
+  }
+  
+  private URI commonPrefix(final URI a, final URI b) {
+    final List<String> segmentsA = a.segmentsList();
+    final List<String> segmentsB = b.segmentsList();
+    int _size = segmentsA.size();
+    int _size_1 = segmentsB.size();
+    final int maxPrefixLength = Math.min(_size, _size_1);
+    final ArrayList<String> prefixes = Lists.<String>newArrayList();
+    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, maxPrefixLength, true);
+    for (final Integer i : _doubleDotLessThan) {
+      String _get = segmentsA.get((i).intValue());
+      String _get_1 = segmentsB.get((i).intValue());
+      boolean _equals = Objects.equal(_get, _get_1);
+      if (_equals) {
+        String _get_2 = segmentsA.get((i).intValue());
+        prefixes.add(_get_2);
+      } else {
+        int _size_2 = prefixes.size();
+        int _minus = (maxPrefixLength - _size_2);
+        return a.trimSegments(_minus);
+      }
+    }
+    int _size_3 = prefixes.size();
+    int _minus_1 = (maxPrefixLength - _size_3);
+    return a.trimSegments(_minus_1);
   }
   
   private LanguageAccess languageAccess(final Resource resource) {

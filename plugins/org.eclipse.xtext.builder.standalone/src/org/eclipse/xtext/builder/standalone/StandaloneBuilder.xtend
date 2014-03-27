@@ -1,14 +1,19 @@
 package org.eclipse.xtext.builder.standalone
 
+import com.google.common.collect.Lists
+import com.google.common.io.Files
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.File
 import java.io.IOException
 import java.net.URLClassLoader
 import java.util.ArrayList
+import java.util.Collection
 import java.util.List
 import java.util.Map
+import java.util.regex.Pattern
 import org.apache.log4j.Logger
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.EcoreUtil2
@@ -25,9 +30,6 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
-import com.google.common.io.Files
-import java.util.regex.Pattern
-import java.util.Collection
 
 class StandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(StandaloneBuilder);
@@ -165,10 +167,38 @@ class StandaloneBuilder {
 	}
 
 	def protected generate(List<Resource> sourceResources) {
+		val baseDir = sourceDirs.map[URI.createFileURI(it)].reduce[a,b| commonPrefix(a,b)]
 		for (Resource it : sourceResources) {
 			LOG.info("Starting generator for input: '" + getURI().lastSegment() + "'");
+			registerCurrentSource(it, baseDir)
 			languageAccess.generator.doGenerate(it, languageAccess.fileSystemAccess);
 		}
+	}
+	
+	def protected registerCurrentSource(Resource resource, URI baseDir) {
+		val fsa = resource.languageAccess.fileSystemAccess
+		for(output : fsa.outputConfigurations.values) {
+			for(source : output.sourceFolders) {
+				if(resource.URI.toString.startsWith(baseDir + "/" + source)) {
+					fsa.currentSource = source
+				}
+			}
+		}
+	}
+	
+	def private URI commonPrefix(URI a, URI b) {
+		val segmentsA = a.segmentsList
+		val segmentsB = b.segmentsList
+		val maxPrefixLength = Math.min(segmentsA.size, segmentsB.size)
+		val prefixes = Lists.<String>newArrayList
+		for(i : 0..<maxPrefixLength) {
+			if (segmentsA.get(i) == segmentsB.get(i)) {
+				prefixes.add(segmentsA.get(i))
+			} else {
+				return a.trimSegments(maxPrefixLength - prefixes.size)
+			}
+		}
+		return a.trimSegments(maxPrefixLength - prefixes.size)
 	}
 
 	def private languageAccess(Resource resource) {
