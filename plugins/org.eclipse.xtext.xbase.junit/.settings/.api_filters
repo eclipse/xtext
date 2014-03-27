@@ -7,6 +7,12 @@
                 <message_argument value="2.5.1"/>
             </message_arguments>
         </filter>
+        <filter comment="Api baseline from SDK" id="923795461">
+            <message_arguments>
+                <message_argument value="2.6.0"/>
+                <message_argument value="2.5.3"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.EvictionListeners">
         <filter comment="Guava Update" id="305422471">
