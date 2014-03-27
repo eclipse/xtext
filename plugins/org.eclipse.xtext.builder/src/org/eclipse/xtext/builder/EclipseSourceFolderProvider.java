@@ -12,13 +12,10 @@ import java.util.List;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 
-import com.google.inject.ImplementedBy;
-
 /**
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
-@ImplementedBy(ProjectRootAsSourceFolderProvider.class)
 public interface EclipseSourceFolderProvider {
 
 	List<? extends IContainer> getSourceFolders(IProject project);
