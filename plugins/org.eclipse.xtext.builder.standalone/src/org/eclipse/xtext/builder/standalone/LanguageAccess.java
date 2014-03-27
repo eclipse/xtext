@@ -13,6 +13,7 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IEncodingProvider.Runtime;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -84,6 +85,9 @@ public class LanguageAccess {
 
 					public OutputConfiguration apply(OutputConfiguration output) {
 						output.setOutputDirectory(resolveToBaseDir(output.getOutputDirectory()));
+						for (SourceMapping sourceMapping : output.getSourceMappings()) {
+							sourceMapping.setOutputDirectory(resolveToBaseDir(sourceMapping.getOutputDirectory()));
+						}
 						return output;
 					}
 				}), new Function1<OutputConfiguration, String>() {
