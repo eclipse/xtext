@@ -1,14 +1,19 @@
 package org.eclipse.xtext.builder.standalone
 
+import com.google.common.collect.Lists
+import com.google.common.io.Files
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.File
 import java.io.IOException
 import java.net.URLClassLoader
 import java.util.ArrayList
+import java.util.Collection
 import java.util.List
 import java.util.Map
+import java.util.regex.Pattern
 import org.apache.log4j.Logger
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.EcoreUtil2
@@ -25,9 +30,6 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
-import com.google.common.io.Files
-import java.util.regex.Pattern
-import java.util.Collection
 
 class StandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(StandaloneBuilder);
@@ -167,10 +169,28 @@ class StandaloneBuilder {
 	def protected generate(List<Resource> sourceResources) {
 		for (Resource it : sourceResources) {
 			LOG.info("Starting generator for input: '" + getURI().lastSegment() + "'");
+			registerCurrentSource(it)
 			languageAccess.generator.doGenerate(it, languageAccess.fileSystemAccess);
 		}
 	}
-
+	
+	def protected registerCurrentSource(Resource resource) {
+		val fsa = resource.languageAccess.fileSystemAccess
+		var absoluteSource = sourceDirs
+			.filter[resource.URI.toFileString.startsWith(it)]
+			.reduce[longest, current| if (current.length > longest.length) current else longest] 
+		if (absoluteSource !== null) {
+			val absoluteSourceUri = URI.createFileURI(absoluteSource)
+			for(output : fsa.outputConfigurations.values) {
+				for(relativeSource : output.sourceFolders) {
+					if(absoluteSourceUri.toString.endsWith(relativeSource)) {
+						fsa.currentSource = relativeSource
+					}
+				}
+			}
+		}
+	}
+	
 	def private languageAccess(Resource resource) {
 		languages.get(resource.URI.fileExtension)
 	}

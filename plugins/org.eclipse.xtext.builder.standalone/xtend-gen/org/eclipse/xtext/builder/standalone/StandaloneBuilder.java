@@ -33,6 +33,7 @@ import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -47,6 +48,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -379,11 +381,57 @@ public class StandaloneBuilder {
         String _plus = ("Starting generator for input: \'" + _lastSegment);
         String _plus_1 = (_plus + "\'");
         StandaloneBuilder.LOG.info(_plus_1);
+        this.registerCurrentSource(it);
         LanguageAccess _languageAccess = this.languageAccess(it);
         IGenerator _generator = _languageAccess.getGenerator();
         LanguageAccess _languageAccess_1 = this.languageAccess(it);
         JavaIoFileSystemAccess _fileSystemAccess = _languageAccess_1.getFileSystemAccess();
         _generator.doGenerate(it, _fileSystemAccess);
+      }
+    }
+  }
+  
+  protected void registerCurrentSource(final Resource resource) {
+    LanguageAccess _languageAccess = this.languageAccess(resource);
+    final JavaIoFileSystemAccess fsa = _languageAccess.getFileSystemAccess();
+    Iterable<String> _sourceDirs = this.getSourceDirs();
+    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+      public Boolean apply(final String it) {
+        URI _uRI = resource.getURI();
+        String _fileString = _uRI.toFileString();
+        return Boolean.valueOf(_fileString.startsWith(it));
+      }
+    };
+    Iterable<String> _filter = IterableExtensions.<String>filter(_sourceDirs, _function);
+    final Function2<String, String, String> _function_1 = new Function2<String, String, String>() {
+      public String apply(final String longest, final String current) {
+        String _xifexpression = null;
+        int _length = current.length();
+        int _length_1 = longest.length();
+        boolean _greaterThan = (_length > _length_1);
+        if (_greaterThan) {
+          _xifexpression = current;
+        } else {
+          _xifexpression = longest;
+        }
+        return _xifexpression;
+      }
+    };
+    String absoluteSource = IterableExtensions.<String>reduce(_filter, _function_1);
+    boolean _tripleNotEquals = (absoluteSource != null);
+    if (_tripleNotEquals) {
+      final URI absoluteSourceUri = URI.createFileURI(absoluteSource);
+      Map<String, OutputConfiguration> _outputConfigurations = fsa.getOutputConfigurations();
+      Collection<OutputConfiguration> _values = _outputConfigurations.values();
+      for (final OutputConfiguration output : _values) {
+        Set<String> _sourceFolders = output.getSourceFolders();
+        for (final String relativeSource : _sourceFolders) {
+          String _string = absoluteSourceUri.toString();
+          boolean _endsWith = _string.endsWith(relativeSource);
+          if (_endsWith) {
+            fsa.setCurrentSource(relativeSource);
+          }
+        }
       }
     }
   }
