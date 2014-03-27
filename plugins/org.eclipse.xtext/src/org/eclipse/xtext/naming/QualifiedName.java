@@ -245,13 +245,18 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		String[] newSegments = new String[segments.length];
 		for (int i = 0; i < getSegmentCount(); ++i)
 			newSegments[i] = segments[i].toLowerCase();
-		lowerCase = new QualifiedName(newSegments) {
-			@Override
-			public QualifiedName toLowerCase() {
-				return this;
-			}
-		};
+		lowerCase = new QualifiedNameLowerCase(newSegments);
 		return lowerCase;
+	}
+	
+	private static class QualifiedNameLowerCase extends QualifiedName {
+		public QualifiedNameLowerCase(String[] segments) {
+			super(segments);
+		}
+		@Override
+		public QualifiedName toLowerCase() {
+			return this;
+		}
 	}
 
 	public QualifiedName toUpperCase() {
