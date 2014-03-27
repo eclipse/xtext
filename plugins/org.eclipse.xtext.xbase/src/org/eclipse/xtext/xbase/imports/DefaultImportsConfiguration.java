@@ -62,10 +62,14 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 	private ILogicalContainerProvider logicalContainerProvider;
 
 	public XImportSection getImportSection(XtextResource resource) {
-		for (Iterator<EObject> i = resource.getAllContents(); i.hasNext();) {
-			EObject next = i.next();
-			if (next instanceof XImportSection)
-				return (XImportSection) next;
+		EList<EObject> contents = resource.getContents();
+		if (!contents.isEmpty())
+		{
+			for (Iterator<EObject> i = contents.get(0).eAllContents(); i.hasNext();) {
+				EObject next = i.next();
+				if (next instanceof XImportSection)
+					return (XImportSection) next;
+			}
 		}
 		return null;
 	}
