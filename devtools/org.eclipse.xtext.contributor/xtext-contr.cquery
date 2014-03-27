@@ -2,7 +2,7 @@
 <cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0" resourceMap="xtext-contr.rmap">
     <cq:rootRequest name="org.eclipse.xtext.contributor" componentType="buckminster"/>
  	<cq:advisorNode namePattern="^.*\.source$" skipComponent="true"/>
-     <cq:advisorNode namePattern="^org\.eclipse.*examples.*$" skipComponent="true"/>
+     <cq:advisorNode namePattern="^org\.eclipse.*(examples|swtbot).*$" skipComponent="true"/>
      <cq:advisorNode namePattern="org.eclipse.xtend.typesystem" skipComponent="true"/>
      <cq:advisorNode namePattern="^(org|com|javax)\.([a-z])+(\.(?!(xtext|xtend\.|xtend2)).*)?$" skipComponent="true"/>
 </cq:componentQuery>
