@@ -12,10 +12,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.m2e.core.project.configurator.AbstractProjectConfigurator;
 import org.eclipse.m2e.core.project.configurator.ProjectConfigurationRequest;
+import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.osgi.service.prefs.BackingStoreException;
 
+import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 
 public class XtextProjectConfigurator extends AbstractProjectConfigurator {
@@ -66,5 +68,12 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 		languagePreferences.putBoolean(getKey(configuration, INSTALL_DSL_AS_PRIMARY_SOURCE), configuration.isInstallDslAsPrimarySource());
 		languagePreferences.putBoolean(getKey(configuration, HIDE_LOCAL_SYNTHETIC_VARIABLES), configuration.isHideSyntheticLocalVariables());
 		languagePreferences.putBoolean(getKey(configuration, OUTPUT_KEEP_LOCAL_HISTORY), configuration.isKeepLocalHistory());
+		languagePreferences.putBoolean(getKey(configuration, USE_OUTPUT_PER_SOURCE_FOLDER), configuration.isUseOutputPerSourceFolder());
+		for (SourceMapping sourceMapping : configuration.getSourceMappings()) {
+			languagePreferences.put(getOutputForSourceFolderKey(configuration, sourceMapping.getSourceFolder()),
+					Strings.nullToEmpty(sourceMapping.getOutputDirectory()));
+			languagePreferences.putBoolean(getIgnoreSourceFolderKey(configuration, sourceMapping.getSourceFolder()),
+					sourceMapping.isIgnore());
+		}
 	}
 }

@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -47,6 +49,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -379,11 +382,77 @@ public class StandaloneBuilder {
         String _plus = ("Starting generator for input: \'" + _lastSegment);
         String _plus_1 = (_plus + "\'");
         StandaloneBuilder.LOG.info(_plus_1);
+        this.registerCurrentSource(it);
         LanguageAccess _languageAccess = this.languageAccess(it);
         IGenerator _generator = _languageAccess.getGenerator();
         LanguageAccess _languageAccess_1 = this.languageAccess(it);
         JavaIoFileSystemAccess _fileSystemAccess = _languageAccess_1.getFileSystemAccess();
         _generator.doGenerate(it, _fileSystemAccess);
+      }
+    }
+  }
+  
+  protected void registerCurrentSource(final Resource resource) {
+    LanguageAccess _languageAccess = this.languageAccess(resource);
+    final JavaIoFileSystemAccess fsa = _languageAccess.getFileSystemAccess();
+    Iterable<String> _sourceDirs = this.getSourceDirs();
+    final Function1<String, String> _function = new Function1<String, String>() {
+      public String apply(final String it) {
+        URI _createFileURI = URI.createFileURI(it);
+        return _createFileURI.toString();
+      }
+    };
+    Iterable<String> _map = IterableExtensions.<String, String>map(_sourceDirs, _function);
+    final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
+      public Boolean apply(final String it) {
+        URI _uRI = resource.getURI();
+        String _string = _uRI.toString();
+        return Boolean.valueOf(_string.startsWith(it));
+      }
+    };
+    Iterable<String> _filter = IterableExtensions.<String>filter(_map, _function_1);
+    final Function2<String, String, String> _function_2 = new Function2<String, String, String>() {
+      public String apply(final String longest, final String current) {
+        String _xifexpression = null;
+        int _length = current.length();
+        int _length_1 = longest.length();
+        boolean _greaterThan = (_length > _length_1);
+        if (_greaterThan) {
+          _xifexpression = current;
+        } else {
+          _xifexpression = longest;
+        }
+        return _xifexpression;
+      }
+    };
+    String _reduce = IterableExtensions.<String>reduce(_filter, _function_2);
+    URI _createFileURI = null;
+    if (_reduce!=null) {
+      _createFileURI=URI.createFileURI(_reduce);
+    }
+    final URI absoluteSource = _createFileURI;
+    boolean _equals = Objects.equal(absoluteSource, null);
+    if (_equals) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Resource ");
+      URI _uRI = resource.getURI();
+      _builder.append(_uRI, "");
+      _builder.append(" is not contained in any of the known source folders ");
+      Iterable<String> _sourceDirs_1 = this.getSourceDirs();
+      _builder.append(_sourceDirs_1, "");
+      _builder.append(".");
+      throw new IllegalStateException(_builder.toString());
+    }
+    Map<String, OutputConfiguration> _outputConfigurations = fsa.getOutputConfigurations();
+    Collection<OutputConfiguration> _values = _outputConfigurations.values();
+    for (final OutputConfiguration output : _values) {
+      Set<String> _sourceFolders = output.getSourceFolders();
+      for (final String relativeSource : _sourceFolders) {
+        String _string = absoluteSource.toString();
+        boolean _endsWith = _string.endsWith(relativeSource);
+        if (_endsWith) {
+          fsa.setCurrentSource(relativeSource);
+        }
       }
     }
   }
