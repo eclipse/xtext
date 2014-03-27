@@ -83,7 +83,7 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 	/**
 	 * @since 2.6
 	 */
-	@Inject
+	@Inject(optional = true)
 	public void setSourceFolderProvider(EclipseSourceFolderProvider sourceFolderProvider) {
 		this.sourceFolderProvider = sourceFolderProvider;
 	}
@@ -139,7 +139,7 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 	 */
 	protected OutputConfiguration createAndOverlayOutputConfiguration(IProject project, IPreferenceStore store, OutputConfiguration output) {
 		OutputConfiguration result = createAndOverlayOutputConfiguration(store, output);
-		if (project != null) {
+		if (project != null && sourceFolderProvider != null) {
 			for (IContainer sourceContainer : sourceFolderProvider.getSourceFolders(project)) {
 				String sourceFolder = toProjectRelativePath(sourceContainer).toString();
 				SourceMapping mapping = new SourceMapping(sourceFolder);
