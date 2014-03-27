@@ -151,7 +151,7 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 					BuilderPreferenceAccess.getKey(outputConfiguration,
 							EclipseOutputConfigurationProvider.OUTPUT_KEEP_LOCAL_HISTORY), trueFalseValues, 0);
 			
-			if (getProject() != null) {
+			if (getProject() != null && !outputConfiguration.getSourceFolders().isEmpty()) {
 				final Button outputPerSourceButton = addCheckBox(othersComposite,
 						Messages.OutputConfigurationPage_UseOutputPerSourceFolder, BuilderPreferenceAccess.getKey(outputConfiguration,
 								EclipseOutputConfigurationProvider.USE_OUTPUT_PER_SOURCE_FOLDER), trueFalseValues, 0);
