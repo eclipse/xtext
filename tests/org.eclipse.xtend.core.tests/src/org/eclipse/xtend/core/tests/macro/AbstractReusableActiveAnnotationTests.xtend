@@ -9,16 +9,77 @@ import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.junit4.internal.LineDelimiters
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
 	@Inject XtendGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
+	
+	@Test def void testInferredTypeReferences() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				@Active(MyAnnotationProcessor)
+				annotation MyAnnotation {
+					Class<?> value
+				}
+				
+				class MyAnnotationProcessor extends AbstractClassProcessor {
+				
+					override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
+						for (field : declaredFields) {
+							addMethod(field.simpleName) [
+								returnType = field.type
+								body = ['return 1;']
+							]
+						}
+				
+						val myAnnotation = findAnnotation(MyAnnotation.findTypeGlobally)
+						val type = myAnnotation.getClassValue("value").type as ClassDeclaration
+						for (field : type.declaredFields) {
+							addMethod(field.simpleName) [
+								returnType = field.type
+								body = ['return 1;']
+							]
+						}
+					}
+				
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.*
+				
+				@MyAnnotation(Bar)
+				class Foo {
+					val y = 1
+				}
+				
+				class Bar {
+					val x = 1
+				}
+			'''
+		) [
+			val foo = typeLookup.findClass("myusercode.Foo")
+			val bar = typeLookup.findClass("myusercode.Bar")
+			
+			assertEquals(foo.findDeclaredField('y').type, foo.findDeclaredMethod('y').returnType)
+			assertEquals(bar.findDeclaredField('x').type, foo.findDeclaredMethod('x').returnType)
+		]
+	}
 	
 	@Test def void testAnnotationValueSetting_1() {
 		assertProcessing(
