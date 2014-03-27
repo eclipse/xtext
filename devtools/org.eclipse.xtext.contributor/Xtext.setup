@@ -189,11 +189,11 @@
     <choices value="luna" label="Luna - 4.4"/>
   </setupTasks>
   <branches name="master">
-    <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.5 stream API" version="2.5.3" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.5.3/R201402240820/tmf-xtext-Update-2.5.3.zip&amp;r=1"/>
+    <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.5 stream API" version="2.5.3" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.5.3/R201402240820/tmf-xtext-SDK-2.5.3.zip&amp;r=1"/>
     <restrictions href="http://git.eclipse.org/c/cdo/cdo.git/plain/plugins/org.eclipse.emf.cdo.releng.setup/Configuration.setup#//@eclipseVersions[version='4.4']" version="4.4"/>
   </branches>
   <branches name="maintenance">
-    <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.4 stream API" version="2.4.3" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.4.3/R201309030823/tmf-xtext-Update-2.4.3.zip&amp;r=1"/>
+    <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.4 stream API" version="2.4.3" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.4.3/R201309030823/tmf-xtext-SDK-2.4.3.zip&amp;r=1"/>
     <setupTasks xsi:type="setup:ContextVariableTask" name="xtext.git.branch" value="maintenance"/>
     <setupTasks xsi:type="setup:ContextVariableTask" name="emf.git.branch" value="R2_9_maintenance" label=""/>
     <setupTasks xsi:type="setup:ContextVariableTask" name="xtext.nightly.composite" value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
