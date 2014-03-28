@@ -105,8 +105,13 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 			new Job("Initializing outline") {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
-					initializeTreeContent();
-					return Status.OK_STATUS;
+					try {
+						initializeTreeContent();
+						return Status.OK_STATUS;
+					} catch (Throwable e) {
+						LOG.error("Error initializing outline", e);
+						return Status.OK_STATUS; 
+					}
 				}
 				
 			}.schedule();

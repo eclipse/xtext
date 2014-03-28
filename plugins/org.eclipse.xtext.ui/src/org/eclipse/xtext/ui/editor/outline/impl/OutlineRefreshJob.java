@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.outline.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -17,7 +18,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
-import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -26,6 +26,8 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 public class OutlineRefreshJob extends Job {
+	
+	private final static Logger LOG = Logger.getLogger(OutlineRefreshJob.class);
 	
 	private OutlinePage outlinePage;
 	
@@ -50,7 +52,8 @@ public class OutlineRefreshJob extends Job {
 				outlinePage.refreshViewer(rootNode, newState.getExpandedNodes(), newState.getSelectedNodes());
 			return Status.OK_STATUS;
 		} catch (Throwable t) {
-			return new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Error refreshing outline", t);
+			LOG.error("Error refreshing outline", t);
+			return Status.OK_STATUS;
 		}
 	}
 
