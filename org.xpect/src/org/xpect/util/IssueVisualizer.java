@@ -36,7 +36,7 @@ public class IssueVisualizer {
 		List<Issue>[] mapped = new List[document.length()];
 		List<Issue> unmapped = Lists.newArrayList();
 		for (Issue issue : issues) {
-			if (issue.getOffset() >= 0 && issue.getOffset() < document.length() && issue.getLength() > 0) {
+			if (issue.getOffset() != null && issue.getLength() != null && issue.getOffset() >= 0 && issue.getOffset() < document.length() && issue.getLength() > 0) {
 				int max = Math.min(issue.getOffset() + issue.getLength(), document.length());
 				for (int i = issue.getOffset(); i < max; i++) {
 					if (mapped[i] == null)
