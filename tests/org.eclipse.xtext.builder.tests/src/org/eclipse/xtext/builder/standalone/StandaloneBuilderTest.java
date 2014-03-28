@@ -59,6 +59,11 @@ public class StandaloneBuilderTest {
 		assertTrue(generatedFile.exists());
 		generatedFile = getFile("src2-gen/Bar.txt");
 		assertTrue(generatedFile.exists());
+		
+		File unexpectedFile = getFile("src-gen/Bar.txt");
+		assertFalse(unexpectedFile.exists());
+		unexpectedFile = getFile("src2-gen/Foo.txt");
+		assertFalse(unexpectedFile.exists());
 	}
 
 	@Test
@@ -70,6 +75,11 @@ public class StandaloneBuilderTest {
 		assertTrue(generatedFile.exists());
 		generatedFile = getFile("src-gen/Bar.txt");
 		assertTrue(generatedFile.exists());
+		
+		File unexpectedFile = getFile("src2-gen/Bar.txt");
+		assertFalse(unexpectedFile.exists());
+		unexpectedFile = getFile("src2-gen/Foo.txt");
+		assertFalse(unexpectedFile.exists());
 	}
 	
 	@Test
@@ -80,6 +90,13 @@ public class StandaloneBuilderTest {
 
 		File generatedFile = getFile("src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
+		
+		File unexpectedFile = getFile("src-gen/Bar.txt");
+		assertFalse(unexpectedFile.exists());
+		unexpectedFile = getFile("src2-gen/Bar.txt");
+		assertFalse(unexpectedFile.exists());
+		unexpectedFile = getFile("src2-gen/Foo.txt");
+		assertFalse(unexpectedFile.exists());
 	}
 	
 	@Test
@@ -90,6 +107,13 @@ public class StandaloneBuilderTest {
 
 		File generatedFile = getFile("src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
+		
+		File unexpectedFile = getFile("src-gen/Bar.txt");
+		assertFalse(unexpectedFile.exists());
+		unexpectedFile = getFile("src2-gen/Bar.txt");
+		assertFalse(unexpectedFile.exists());
+		unexpectedFile = getFile("src2-gen/Foo.txt");
+		assertFalse(unexpectedFile.exists());
 	}
 
 	private File getFile(String projectRelativePath) {
