@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xbase Xtext Testlanguages For UI and Runtime - UI
+Bundle-Vendor: Eclipse.org
+Bundle-Version: 2.6.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.xbase.testlanguages.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext.xbase.testlanguages;visibility:=reexport,
+ org.eclipse.xtext.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.xbase.ui,
+ org.eclipse.ui,
+ org.eclipse.xtext.builder,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.compare,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext.junit4,
+ org.eclipse.ui.workbench;resolution:=optional
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.xbase.lib,
+ org.junit.runner;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0",
+ org.hamcrest.core
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.xtext.xbase.testlanguages.ui.quickfix,
+ org.eclipse.xtext.xbase.testlanguages.ui.contentassist,
+ org.eclipse.xtext.xbase.testlanguages.ui.contentassist.antlr,
+ org.eclipse.xtext.xbase.testlanguages.ui.internal,
+ org.eclipse.xtext.xbase.testlanguages
+Bundle-Activator: org.eclipse.xtext.xbase.testlanguages.ui.internal.XImportSectionTestLangActivator
