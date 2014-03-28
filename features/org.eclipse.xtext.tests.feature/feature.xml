@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.tests"
       label="%featureName"
-     version="2.6.0.qualifier"
+      version="2.6.0.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -126,6 +126,20 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <plugin
          id="org.eclipse.xtext.example.domainmodel.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.xbase.testlanguages"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.xbase.testlanguages.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
