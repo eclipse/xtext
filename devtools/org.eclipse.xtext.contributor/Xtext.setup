@@ -14,6 +14,7 @@
     <installableUnits id="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
     <installableUnits id="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
     <installableUnits id="edu.umd.cs.findbugs.plugin.eclipse.feature.group"/>
+    <installableUnits id="org.eclipse.epp.mpc.feature.group"/>
     <p2Repositories url="${xtext.nightly.composite}"/>
     <p2Repositories url="http://findbugs.cs.umd.edu/eclipse-daily"/>
   </setupTasks>
@@ -47,6 +48,9 @@
     </setupTasks>
     <setupTasks xsi:type="setup:CompoundSetupTask" name="org.eclipse.emf.cdo.releng.setup">
       <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.emf.cdo.releng.setup/skip.startup.tasks" value="true"/>
+    </setupTasks>
+    <setupTasks xsi:type="setup:CompoundSetupTask" name="org.eclipse.pde.ui">
+      <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.pde.ui/Preferences.MainPage.addToJavaSearch" value="true"/>
     </setupTasks>
   </setupTasks>
   <setupTasks xsi:type="setup:ProjectsImportTask" documentation="Import all developer tools">
@@ -153,8 +157,10 @@
       </predicates>
     </workingSets>
     <workingSets name="Xtext Examples">
-      <predicates xsi:type="predicates:RepositoryPredicate" project="org.eclipse.xtext.example.arithmetics"/>
-      <predicates xsi:type="predicates:NamePredicate" pattern="*.example.*"/>
+      <predicates xsi:type="predicates:AndPredicate">
+        <operands xsi:type="predicates:NamePredicate" pattern=".*example.*"/>
+        <operands xsi:type="predicates:RepositoryPredicate" project="org.eclipse.xtext.example.arithmetics"/>
+      </predicates>
     </workingSets>
     <workingSets name="Xtext Features">
       <predicates xsi:type="predicates:AndPredicate">
