@@ -15,6 +15,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -55,6 +56,9 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein
  */
 public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDescription.Event.Listener, VerifyListener {
+	
+	private final static Logger LOG = Logger.getLogger(DirtyStateEditorSupport.class);
+	
 	private static ISchedulingRule SCHEDULING_RULE = SchedulingRuleFactory.INSTANCE.newSequence();
 	
 	/**
@@ -110,45 +114,50 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 
 		@Override
 		protected IStatus run(final IProgressMonitor monitor) {
-			IDirtyStateEditorSupportClient myClient = currentClient;
-			if (myClient == null || monitor.isCanceled()) {
-				return Status.OK_STATUS;
-			}
-			final IXtextDocument document = myClient.getDocument();
-			if (document == null) {
-				return Status.OK_STATUS;
-			}
-			final boolean[] isReparseRequired = new boolean[] { coarseGrainedChange };
-			final Pair<IResourceDescription.Event, Integer> event = mergePendingDeltas();
-			Collection<Resource> affectedResources = document.readOnly(
-					new IUnitOfWork<Collection<Resource>, XtextResource>() {
-				
-						public Collection<Resource> exec(XtextResource resource) throws Exception {
-							if (resource == null || resource.getResourceSet() == null) {
-								return null;
-							}
-							Collection<Resource> affectedResources = collectAffectedResources(resource, event.getFirst());
-							if (monitor.isCanceled() || !affectedResources.isEmpty()) {
+			try {
+				IDirtyStateEditorSupportClient myClient = currentClient;
+				if (myClient == null || monitor.isCanceled()) {
+					return Status.OK_STATUS;
+				}
+				final IXtextDocument document = myClient.getDocument();
+				if (document == null) {
+					return Status.OK_STATUS;
+				}
+				final boolean[] isReparseRequired = new boolean[] { coarseGrainedChange };
+				final Pair<IResourceDescription.Event, Integer> event = mergePendingDeltas();
+				Collection<Resource> affectedResources = document.readOnly(
+						new IUnitOfWork<Collection<Resource>, XtextResource>() {
+					
+							public Collection<Resource> exec(XtextResource resource) throws Exception {
+								if (resource == null || resource.getResourceSet() == null) {
+									return null;
+								}
+								Collection<Resource> affectedResources = collectAffectedResources(resource, event.getFirst());
+								if (monitor.isCanceled() || !affectedResources.isEmpty()) {
+									return affectedResources;
+								}
+								if (!isReparseRequired[0]) {
+									isReparseRequired[0] = isReparseRequired(resource, event.getFirst());
+								}
 								return affectedResources;
 							}
-							if (!isReparseRequired[0]) {
-								isReparseRequired[0] = isReparseRequired(resource, event.getFirst());
-							}
-							return affectedResources;
-						}
-				
-					});
-			if (monitor.isCanceled()) {
-				return Status.OK_STATUS;
-			}
-			try {
-				unloadAffectedResourcesAndReparseDocument(document, affectedResources, isReparseRequired[0]);
-				for (int i = 0; i < event.getSecond(); i++) {
-					pendingChanges.poll();
+					
+						});
+				if (monitor.isCanceled()) {
+					return Status.OK_STATUS;
 				}
+				try {
+					unloadAffectedResourcesAndReparseDocument(document, affectedResources, isReparseRequired[0]);
+					for (int i = 0; i < event.getSecond(); i++) {
+						pendingChanges.poll();
+					}
+					return Status.OK_STATUS;
+				} finally {
+					coarseGrainedChange = false;	
+				}
+			} catch (Throwable e) {
+				LOG.error("Error updating dirty state editor", e);
 				return Status.OK_STATUS;
-			} finally {
-				coarseGrainedChange = false;	
 			}
 		}
 
