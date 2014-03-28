@@ -20,29 +20,28 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.util.Files;
 import org.junit.After;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
  */
+@RunWith(XtextRunner.class)
+@InjectWith(StandaloneBuilderInjectorProvider.class)
 public class StandaloneBuilderTest {
 
 	private static final File PROJECT_DIR = new File("test-data/standalone");
-	private static Injector injector;
-	private StandaloneBuilder builder;
 
-	@BeforeClass
-	public static void createInjector() {
-		injector = Guice.createInjector(new StandaloneBuilderModule());
-	}
+	@Inject
+	private StandaloneBuilder builder;
 
 	@After
 	public void cleanup() throws IOException {
@@ -59,7 +58,7 @@ public class StandaloneBuilderTest {
 		assertTrue(generatedFile.exists());
 		generatedFile = getFile("src2-gen/Bar.txt");
 		assertTrue(generatedFile.exists());
-		
+
 		File unexpectedFile = getFile("src-gen/Bar.txt");
 		assertFalse(unexpectedFile.exists());
 		unexpectedFile = getFile("src2-gen/Foo.txt");
@@ -75,13 +74,13 @@ public class StandaloneBuilderTest {
 		assertTrue(generatedFile.exists());
 		generatedFile = getFile("src-gen/Bar.txt");
 		assertTrue(generatedFile.exists());
-		
+
 		File unexpectedFile = getFile("src2-gen/Bar.txt");
 		assertFalse(unexpectedFile.exists());
 		unexpectedFile = getFile("src2-gen/Foo.txt");
 		assertFalse(unexpectedFile.exists());
 	}
-	
+
 	@Test
 	public void testOnlyOneSourceFolder() {
 		initBuilder(new TestLanguageConfiguration(false));
@@ -90,7 +89,7 @@ public class StandaloneBuilderTest {
 
 		File generatedFile = getFile("src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
-		
+
 		File unexpectedFile = getFile("src-gen/Bar.txt");
 		assertFalse(unexpectedFile.exists());
 		unexpectedFile = getFile("src2-gen/Bar.txt");
@@ -98,7 +97,7 @@ public class StandaloneBuilderTest {
 		unexpectedFile = getFile("src2-gen/Foo.txt");
 		assertFalse(unexpectedFile.exists());
 	}
-	
+
 	@Test
 	public void testRelativeSourceFolder() {
 		initBuilder(new TestLanguageConfiguration(false));
@@ -107,7 +106,7 @@ public class StandaloneBuilderTest {
 
 		File generatedFile = getFile("src-gen/Foo.txt");
 		assertTrue(generatedFile.exists());
-		
+
 		File unexpectedFile = getFile("src-gen/Bar.txt");
 		assertFalse(unexpectedFile.exists());
 		unexpectedFile = getFile("src2-gen/Bar.txt");
@@ -129,14 +128,11 @@ public class StandaloneBuilderTest {
 	}
 
 	private StandaloneBuilder initBuilder(ILanguageConfiguration config) {
-		builder = injector.getInstance(StandaloneBuilder.class);
 		String sourceDir1 = new File(PROJECT_DIR, "src").getAbsolutePath();
 		String sourceDir2 = new File(PROJECT_DIR, "src2").getAbsolutePath();
 		builder.setSourceDirs(ImmutableList.of(sourceDir1, sourceDir2));
 		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(
-				ImmutableList.of(config), 
-				getClass().getClassLoader(), 
-				PROJECT_DIR);
+				ImmutableList.of(config), getClass().getClassLoader(), PROJECT_DIR);
 		builder.setLanguages(languages);
 		builder.setClassPathEntries(ImmutableList.<String> of());
 		return builder;
