@@ -7,12 +7,56 @@
                 <message_argument value="2.5.1"/>
             </message_arguments>
         </filter>
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="2.5.3"/>
+                <message_argument value="2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.base.Equivalences">
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.base.Equivalences"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.AbstractLinkedIterator">
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.AbstractLinkedIterator"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.AsynchronousComputationException">
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.AsynchronousComputationException"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.DiscreteDomains">
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.DiscreteDomains"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.5.3"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.EvictionListeners">
         <filter comment="Guava Update" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.collect.EvictionListeners"/>
                 <message_argument value="org.eclipse.xtext.xbase.junit_2.5.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.EvictionListeners"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.5.3"/>
             </message_arguments>
         </filter>
     </resource>
@@ -23,6 +67,20 @@
                 <message_argument value="org.eclipse.xtext.xbase.junit_2.5.0"/>
             </message_arguments>
         </filter>
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.MapEvictionListener"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.Ranges">
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.Ranges"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.5.3"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.SortedMaps">
         <filter comment="Guava Update" id="305422471">
@@ -31,12 +89,40 @@
                 <message_argument value="org.eclipse.xtext.xbase.junit_2.5.0"/>
             </message_arguments>
         </filter>
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.SortedMaps"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.io.LimitInputStream">
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.io.LimitInputStream"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.io.NullOutputStream">
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.io.NullOutputStream"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.5.3"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.AbstractListenableFuture">
         <filter comment="Guava Update" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.util.concurrent.AbstractListenableFuture"/>
                 <message_argument value="org.eclipse.xtext.xbase.junit_2.5.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.AbstractListenableFuture"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.5.3"/>
             </message_arguments>
         </filter>
     </resource>
@@ -51,6 +137,12 @@
             <message_arguments>
                 <message_argument value="com.google.common.util.concurrent.UninterruptibleFuture"/>
                 <message_argument value="org.eclipse.xtext.xbase.junit_2.5.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.UninterruptibleFuture"/>
+                <message_argument value="org.eclipse.xtext.xbase.junit_2.5.3"/>
             </message_arguments>
         </filter>
     </resource>
