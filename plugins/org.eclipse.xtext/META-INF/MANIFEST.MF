@@ -77,7 +77,7 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.9.0";visibility:=ree
  org.eclipse.emf.codegen.ecore;bundle-version="2.9.0";resolution:=optional;x-installation:=greedy,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)";visibility:=reexport,
  com.google.inject;bundle-version="3.0.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
- org.objectweb.asm;bundle-version="[3.2.0,4.0.0)";resolution:=optional,
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
  org.eclipse.emf.mwe.core;bundle-version="1.2.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.emf.mwe.utils;bundle-version="1.2.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.xtend;bundle-version="1.1.0";resolution:=optional;x-installation:=greedy,
