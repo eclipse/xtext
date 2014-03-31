@@ -52,10 +52,16 @@
     <setupTasks xsi:type="setup:CompoundSetupTask" name="org.eclipse.pde.ui">
       <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.pde.ui/Preferences.MainPage.addToJavaSearch" value="true"/>
     </setupTasks>
+    <setupTasks xsi:type="setup:CompoundSetupTask" name="org.eclipse.jdt.core">
+      <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.codegen.targetPlatform" value="1.5"/>
+      <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.source" value="1.5"/>
+      <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.compliance" value="1.5"/>
+    </setupTasks>
   </setupTasks>
   <setupTasks xsi:type="setup:ProjectsImportTask" documentation="Import all developer tools">
     <sourceLocators rootFolder="${xtext.git.location}/devtools/"/>
     <sourceLocators rootFolder="${xtext.git.location}/releng/"/>
+    <sourceLocators rootFolder="${xtext.git.location}/maven/"/>
   </setupTasks>
   <setupTasks xsi:type="setup:TargletTask" name="Eclipse TP" activeRepositoryList="galileo">
     <roots id="org.eclipse.jdt.feature.group" versionRange="[3.5.0,3.6.0)"/>
@@ -88,14 +94,15 @@
     <roots id="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
     <roots id="org.eclipse.emf.test.ecore.xcore.feature.group"/>
     <roots id="org.eclipse.xtext.examples.feature.group"/>
-    <roots id="org.eclipse.xtend.core.tests"/>
-    <roots id="org.eclipse.xtend.ide.tests"/>
-    <roots id="org.eclipse.xtend.ide.tests.data"/>
-    <roots id="org.eclipse.xtend.caliper.tests"/>
+    <roots id="org.eclipse.xtend.tests.feature.group"/>
     <sourceLocators rootFolder="${emf.git.location}">
       <predicates xsi:type="predicates:NamePredicate" pattern=".*xcore.*|.*xtext.*"/>
     </sourceLocators>
-    <sourceLocators rootFolder="${xtext.git.location}"/>
+    <sourceLocators rootFolder="${xtext.git.location}">
+      <predicates xsi:type="predicates:NotPredicate">
+        <operand xsi:type="predicates:NamePredicate" pattern=".*swtbot.*"/>
+      </predicates>
+    </sourceLocators>
     <sourceLocators rootFolder="${xtext.git.location}/examples" locateNestedProjects="true"/>
   </setupTasks>
   <setupTasks xsi:type="setup:WorkingSetTask">
@@ -168,18 +175,24 @@
         <operands xsi:type="predicates:NaturePredicate" nature="org.eclipse.pde.FeatureNature"/>
       </predicates>
     </workingSets>
+    <workingSets name="Xtext Maven">
+      <predicates xsi:type="predicates:AndPredicate">
+        <operands xsi:type="predicates:RepositoryPredicate" project="org.eclipse.xtext"/>
+        <operands xsi:type="predicates:NamePredicate" pattern=".*maven.*"/>
+      </predicates>
+    </workingSets>
     <workingSets name="Xcore">
       <predicates xsi:type="predicates:AndPredicate">
         <operands xsi:type="predicates:RepositoryPredicate" project="org.eclipse.emf.ecore.xcore"/>
         <operands xsi:type="predicates:NamePredicate" pattern=".*xcore.*|.*xtext.*"/>
-        <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.11"/>
+        <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.12"/>
       </predicates>
     </workingSets>
     <workingSets name="EMF">
       <predicates xsi:type="predicates:AndPredicate">
-        <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.9"/>
+        <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.10"/>
         <operands xsi:type="predicates:RepositoryPredicate" project="org.eclipse.emf.common"/>
-        <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.11"/>
+        <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.12"/>
         <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.0"/>
       </predicates>
     </workingSets>
