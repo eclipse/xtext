@@ -24,8 +24,8 @@
     <bundles name="org.antlr.runtime.source"/>
     <bundles name="javax.inject"/>
     <bundles name="javax.inject.source"/>
-    <bundles name="org.objectweb.asm" versionRange="[3.2.0,4.0.0)"/>
-    <bundles name="org.objectweb.asm.source" versionRange="[3.2.0,4.0.0)"/>
+    <bundles name="org.objectweb.asm" versionRange="5.0.1"/>
+    <bundles name="org.objectweb.asm.source" versionRange="5.0.1"/>
     <bundles name="org.apache.commons.lang"/>
     <bundles name="org.apache.commons.lang.source"/>
   </repositories>

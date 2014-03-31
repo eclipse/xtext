@@ -45,8 +45,8 @@
         <cs:dependency name="org.eclipse.xtend.typesystem.emf" componentType="osgi.bundle"/>
         <cs:dependency name="org.junit" componentType="osgi.bundle" versionDesignator="[3.8.0,4.0.0)"/>
         <cs:dependency name="org.junit4" componentType="osgi.bundle" versionDesignator="4.8.0"/>
-   <cs:dependency name="org.objectweb.asm" componentType="osgi.bundle" versionDesignator="[3.2.0,4.0.0)"/>
-        <cs:dependency name="org.objectweb.asm.source" componentType="osgi.bundle" versionDesignator="[3.2.0,4.0.0)"/>
+        <cs:dependency name="org.objectweb.asm" componentType="osgi.bundle" versionDesignator="5.0.1"/>
+        <cs:dependency name="org.objectweb.asm.source" componentType="osgi.bundle" versionDesignator="5.0.1"/>
     </cs:dependencies>
     <cs:actions>
         <cs:public name="create.javadoc" actor="ant">
