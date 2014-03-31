@@ -15,6 +15,7 @@
     <installableUnits id="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
     <installableUnits id="edu.umd.cs.findbugs.plugin.eclipse.feature.group"/>
     <installableUnits id="org.eclipse.epp.mpc.feature.group"/>
+    <installableUnits id="org.eclipse.m2e.feature.feature.group"/>
     <p2Repositories url="${xtext.nightly.composite}"/>
     <p2Repositories url="http://findbugs.cs.umd.edu/eclipse-daily"/>
   </setupTasks>
@@ -72,6 +73,8 @@
     <roots id="org.eclipse.draw2d.feature.group"/>
     <roots id="org.eclipse.m2e.core" versionRange="[1.0.0,1.0.100)"/>
     <roots id="com.google.guava" versionRange="[10.0.1,13.0.0)"/>
+    <roots id="org.objectweb.asm" versionRange="5.0.1"/>
+    <roots id="org.junit"/>
     <repositoryLists name="galileo">
       <p2Repositories url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
       <p2Repositories url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
@@ -85,6 +88,7 @@
   </setupTasks>
   <setupTasks xsi:type="setup:TargletTask" name="Jdt Annotation" activeRepositoryList="juno">
     <roots id="org.eclipse.jdt.annotation"/>
+    <roots id="org.junit4"/>
     <repositoryLists name="juno">
       <p2Repositories url="http://download.eclipse.org/eclipse/updates/3.8/"/>
     </repositoryLists>
@@ -123,6 +127,7 @@
         <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.3"/>
         <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.6"/>
         <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.0"/>
+        <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.7"/>
       </predicates>
     </workingSets>
     <workingSets name="Xbase">
