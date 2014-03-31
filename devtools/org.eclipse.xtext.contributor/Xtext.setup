@@ -71,6 +71,7 @@
     <roots id="de.itemis.xtext.antlr.feature.feature.group" versionRange="2.0.0"/>
     <roots id="org.eclipse.draw2d.feature.group"/>
     <roots id="org.eclipse.m2e.core" versionRange="[1.0.0,1.0.100)"/>
+    <roots id="com.google.guava" versionRange="[10.0.1,13.0.0)"/>
     <repositoryLists name="galileo">
       <p2Repositories url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
       <p2Repositories url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
