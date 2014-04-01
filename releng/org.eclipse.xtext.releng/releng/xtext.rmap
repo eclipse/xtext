@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm:rmap  xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
-	<rm:property key="checkout.location" value="${user.home}/git/org.eclipse.xtext" />
+	<rm:property key="checkout.location" value="${user.home}/git/xtext-master" />
     <rm:property key="git.clone.dest" value="${checkout.location}"/>
  
 	<rm:locator pattern="^org\.eclipse\.xtext\.releng(?:\..+)?$" searchPathRef="releng" />
