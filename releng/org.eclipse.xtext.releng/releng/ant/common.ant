@@ -31,7 +31,7 @@
 	<property name="buckminster.workspace" value="${build.root}/buckminster.workspace" />
 	<property name="buckminster.configuration" value="${build.root}/configuration" />
 	<property name="buckminster.target.platform" value="${build.root}/${target.platform}" />
-	<property name="buckminster.loglevel" value="INFO" />
+	<property name="buckminster.loglevel" value="DEBUG" />
 	<property name="parent.folder" location="${ant.file}/.." />
 	<property name="debug.options.file" location="${parent.folder}/debug.options" />
 

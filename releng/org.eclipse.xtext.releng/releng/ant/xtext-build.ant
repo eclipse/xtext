@@ -15,7 +15,7 @@
 
 	<property name="WORKSPACE" location="${user.home}/hudsonbuild/tmf-xtext-head/" />
 	<property name="build.root" location="${WORKSPACE}/buildroot" />
-	<property name="checkout.location" location="${WORKSPACE}/git-repo" />
+	<property name="checkout.location" location="/Users/dhuebner/git/xtext-master" />
 
 	<import file="common.ant" as="common" />
 
@@ -28,7 +28,6 @@
 	<!-- Against which platform to build (Galileo,Stable,Latest)-->
 	<property name="ECLIPSE.TARGET.ALIAS" value="Stable" />
 	<property name="WITH.MWE2" value="false" />
-	<property name="SWTBOT" value="false" />
 
 	<target name="run-buckminster-build" depends="common.cleanup">
 
@@ -38,6 +37,19 @@
 		<antcall target="buckminster-compile" />
 		<antcall target="buckminster-package" />
 
+	</target>
+
+	<target name="run-buckminster-swtbot" depends="common.cleanup">
+
+		<fail unless="buckminster.home" message="buckminster.home must be specified." />
+
+		<ant antfile="${checkout.location}/features/org.eclipse.xtext.build.feature/packaging.ant" target="resolve.variables">
+			<property name="xtext.p2.repository" value="https://hudson.eclipse.org/xtext/job/xtext-xtend/lastSuccessfulBuild/artifact/build-result/p2.repository/" />
+			<property name="eclipse.tp" value="file://${releng.project}/releng/mirroring/Kepler/final" />
+			<property name="src.file" value="${releng.project}/releng/tests/swtbot-tests-buildserver.target" />
+			<property name="dest.file" value="${releng.project}/releng/tests/swtbot-tests-buildserver-resolved.target" />
+		</ant>
+		<antcall target="buckminster-swtbot-tests" />
 	</target>
 
 	<target name="buckminster-resolve">
@@ -57,6 +69,19 @@
 			# Xtext TP and sources
 			resolve "${releng.project}/releng/xtext-platform.mspec"
 			resolve "${releng.project}/releng/xtext.cquery"
+		</echo>
+		<echo message="build.properties: ${build.properties}" />
+		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
+	</target>
+
+	<target name="buckminster-swtbot-tests">
+		<echo message="eclipse.download: ${eclipse.download}" />
+		<property name="commands.file" location="${temp.commands.location}/swtbot-cmd.txt" />
+		<echo file="${commands.file}" append="false">
+			importtargetdefinition -A "${releng.project}/releng/tests/swtbot-tests-buildserver-resolved.target
+			resolve "${releng.project}/releng/tests-xtend/xtend-test.mspec"
+			build
+			junit --launch "org.eclipse.xtend.ide.swtbot.tests/xtend.ide.tests.slow (SWTBot).launch" --flatXML --output "${WORKSPACE}/xtend.test.results/xtend.ide.swtbot.tests.slow.xml"
 		</echo>
 		<echo message="build.properties: ${build.properties}" />
 		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
