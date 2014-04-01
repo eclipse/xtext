@@ -16,8 +16,10 @@
     <installableUnits id="edu.umd.cs.findbugs.plugin.eclipse.feature.group"/>
     <installableUnits id="org.eclipse.epp.mpc.feature.group"/>
     <installableUnits id="org.eclipse.m2e.feature.feature.group"/>
+    <installableUnits id="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
     <p2Repositories url="${xtext.nightly.composite}"/>
     <p2Repositories url="http://findbugs.cs.umd.edu/eclipse-daily"/>
+    <p2Repositories url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
   </setupTasks>
   <setupTasks xsi:type="setup:GitCloneTask" location="${xtext.git.location}" remoteURI="ssh://git.eclipse.org:29418/tmf/org.eclipse.xtext" checkoutBranch="${xtext.git.branch}"/>
   <setupTasks xsi:type="setup:GitCloneTask" location="${emf.git.location}" remoteURI="ssh://git.eclipse.org:29418/emf/org.eclipse.emf" checkoutBranch="${emf.git.branch}"/>
@@ -57,6 +59,10 @@
       <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.codegen.targetPlatform" value="1.5"/>
       <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.source" value="1.5"/>
       <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.compliance" value="1.5"/>
+    </setupTasks>
+    <setupTasks xsi:type="setup:CompoundSetupTask" name="org.eclipse.debug.ui">
+      <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.debug.ui/Console.limitConsoleOutput" value="false"/>
+      <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.debug.ui/Console.highWaterMark" value="88000"/>
     </setupTasks>
   </setupTasks>
   <setupTasks xsi:type="setup:ProjectsImportTask" documentation="Import all developer tools">
