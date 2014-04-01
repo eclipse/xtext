@@ -28,7 +28,7 @@
 		</rm:provider>
 		<rm:provider componentTypes="eclipse.feature" readerType="local"
 			source="true" mutable="false">
-			<rm:uri format="{0}/features/{1}">
+			<rm:uri format="{0}/features/{1}.feature">
 				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
