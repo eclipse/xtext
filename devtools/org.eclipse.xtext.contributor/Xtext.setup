@@ -17,9 +17,11 @@
     <installableUnits id="org.eclipse.epp.mpc.feature.group"/>
     <installableUnits id="org.eclipse.m2e.feature.feature.group"/>
     <installableUnits id="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
+    <installableUnits id="org.jboss.tools.m2e.jdt.feature.feature.group"/>
     <p2Repositories url="${xtext.nightly.composite}"/>
     <p2Repositories url="http://findbugs.cs.umd.edu/eclipse-daily"/>
     <p2Repositories url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
+    <p2Repositories url="http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler/"/>
   </setupTasks>
   <setupTasks xsi:type="setup:GitCloneTask" location="${xtext.git.location}" remoteURI="ssh://git.eclipse.org:29418/tmf/org.eclipse.xtext" checkoutBranch="${xtext.git.branch}"/>
   <setupTasks xsi:type="setup:GitCloneTask" location="${emf.git.location}" remoteURI="ssh://git.eclipse.org:29418/emf/org.eclipse.emf" checkoutBranch="${emf.git.branch}"/>
