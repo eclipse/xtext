@@ -286,6 +286,20 @@
       <persistent value="true"/>
    </extension>
    <extension
+         id="org.eclipse.xtext.ui.marker"
+         name="Xtext Marker"
+         point="org.eclipse.core.resources.markers">
+      <persistent value="true"/>
+   </extension>
+   <extension
+         id="org.eclipse.xtext.ui.task"
+         name="Xtext Task"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.xtext.ui.marker"/>
+      <super type="org.eclipse.core.resources.taskmarker"/>
+      <persistent value="true"/>
+   </extension>
+   <extension
       point="org.eclipse.ui.editors.annotationTypes">
       <type
       	name="org.eclipse.xtext.ui.editor.error"
@@ -304,7 +318,7 @@
       	markerType="org.eclipse.emf.ecore.diagnostic"
       	markerSeverity="0"
         super="org.eclipse.ui.workbench.texteditor.info">
-      </type>a
+      </type>
    </extension>
    <extension
          point="org.eclipse.ui.editors.markerAnnotationSpecification">
