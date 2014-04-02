@@ -192,7 +192,10 @@
     <workingSets name="Xtext Maven">
       <predicates xsi:type="predicates:AndPredicate">
         <operands xsi:type="predicates:RepositoryPredicate" project="org.eclipse.xtext"/>
-        <operands xsi:type="predicates:NamePredicate" pattern=".*maven.*"/>
+        <operands xsi:type="predicates:OrPredicate">
+          <operands xsi:type="predicates:NamePredicate" pattern=".*maven.*"/>
+          <operands xsi:type="predicates:NaturePredicate" nature="org.eclipse.m2e.core.maven2Nature"/>
+        </operands>
       </predicates>
     </workingSets>
     <workingSets name="Xcore">
