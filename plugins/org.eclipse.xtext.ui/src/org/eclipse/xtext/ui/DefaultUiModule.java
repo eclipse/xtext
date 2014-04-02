@@ -85,8 +85,10 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.PresentationRepairer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TokenScanner;
 import org.eclipse.xtext.ui.editor.templates.DefaultTemplateProposalProvider;
@@ -98,9 +100,11 @@ import org.eclipse.xtext.ui.generator.trace.ExtensibleTraceURIConverter;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider;
+import org.eclipse.xtext.ui.markers.IMarkerContributor;
 import org.eclipse.xtext.ui.preferences.EclipsePreferencesProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
+import org.eclipse.xtext.ui.tasks.TaskMarkerContributor;
 import org.eclipse.xtext.ui.validation.LanguageAwareMarkerTypeProvider;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 
@@ -387,6 +391,20 @@ public class DefaultUiModule extends AbstractGenericModule {
 	 */
 	public Class<? extends CopyQualifiedNameService> bindCopyQualifiedNameService() {
 		return DefaultCopyQualifiedNameService.class;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public Class<? extends IMarkerContributor> bindMarkerContributor() {
+		return TaskMarkerContributor.class;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return DefaultSemanticHighlightingCalculator.class;
 	}
 	
 }
