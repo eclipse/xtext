@@ -32,9 +32,6 @@
     <setupTasks xsi:type="setup:CompoundSetupTask" name="org.eclipse.emf.cdo.releng.version">
       <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.emf.cdo.releng.version///org.eclipse.emf.common/release.xml" value="PARTIAL"/>
     </setupTasks>
-    <setupTasks xsi:type="setup:CompoundSetupTask" name="org.eclipse.m2e.core">
-      <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.m2e.core/eclipse.m2.updateIndexes" value="false"/>
-    </setupTasks>
     <setupTasks xsi:type="setup:CompoundSetupTask" name="org.eclipse.ui.workbench">
       <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.ui.workbench/HeapStatus.showMax" value="true"/>
       <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.ui.workbench/PLUGINS_NOT_ACTIVATED_ON_STARTUP" value="org.eclipse.m2e.discovery;"/>
