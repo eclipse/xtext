@@ -27,7 +27,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.jdt.launching;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.ui.forms;bundle-version="3.4.1"
+ org.eclipse.ui.forms;bundle-version="3.4.1",
+ org.eclipse.xtend.lib
 Bundle-Activator: org.eclipse.xtext.ui.internal.Activator
 Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui,
@@ -84,6 +85,9 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui.shared.contribution,
  org.eclipse.xtext.ui.util,
  org.eclipse.xtext.ui.validation,
+ org.eclipse.xtext.ui.tasks,
+ org.eclipse.xtext.ui.tasks.preferences;x-internal:=true,
+ org.eclipse.xtext.ui.markers,
  org.eclipse.xtext.ui.views,
  org.eclipse.xtext.ui.wizard
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

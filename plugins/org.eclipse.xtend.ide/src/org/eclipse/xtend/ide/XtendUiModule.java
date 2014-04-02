@@ -61,6 +61,7 @@ import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
 import org.eclipse.xtend.ide.outline.XtendOutlinePage;
 import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
+import org.eclipse.xtend.ide.preferences.XtendPreferenceStoreAccess;
 import org.eclipse.xtend.ide.quickfix.TypeLiteralAwareJavaTypeQuickfixes;
 import org.eclipse.xtend.ide.refactoring.XtendDependentElementsCalculator;
 import org.eclipse.xtend.ide.refactoring.XtendJdtRenameParticipantProcessor;
@@ -117,6 +118,7 @@ import org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.QuickOutlineFilterAndSorter;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
@@ -500,4 +502,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return FlexerBasedTemplateBodyHighlighter.class;
 	}
 
+	public Class<? extends IPreferenceStoreAccess> bindPreferenceStoreAccess() {
+		return XtendPreferenceStoreAccess.class;
+	}
 }

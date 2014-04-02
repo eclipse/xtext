@@ -24,11 +24,16 @@ public class DefaultHighlightingConfiguration implements IHighlightingConfigurat
 	public static final String NUMBER_ID = "number";
 	public static final String DEFAULT_ID = "default";
 	public static final String INVALID_TOKEN_ID = "error";
+	/**
+	 * @since 2.6
+	 */
+	public static final String TASK_ID = "task";
 
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		acceptor.acceptDefaultHighlighting(KEYWORD_ID, "Keyword", keywordTextStyle());
 		acceptor.acceptDefaultHighlighting(PUNCTUATION_ID, "Punctuation character", punctuationTextStyle());
 		acceptor.acceptDefaultHighlighting(COMMENT_ID, "Comment", commentTextStyle());
+		acceptor.acceptDefaultHighlighting(TASK_ID, "Task", taskTextStyle());
 		acceptor.acceptDefaultHighlighting(STRING_ID, "String", stringTextStyle());
 		acceptor.acceptDefaultHighlighting(NUMBER_ID, "Number", numberTextStyle());
 		acceptor.acceptDefaultHighlighting(DEFAULT_ID, "Default", defaultTextStyle());
@@ -63,6 +68,16 @@ public class DefaultHighlightingConfiguration implements IHighlightingConfigurat
 	public TextStyle commentTextStyle() {
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setColor(new RGB(63, 127, 95));
+		return textStyle;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public TextStyle taskTextStyle() {
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(127, 159, 191));
+		textStyle.setStyle(SWT.BOLD);
 		return textStyle;
 	}
 
