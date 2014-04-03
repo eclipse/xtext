@@ -64,7 +64,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
     XClosure _head = IterableExtensions.<XClosure>head(closures);
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(_head);
     final ArrayList<Object> result = CollectionLiterals.<Object>newArrayList();
-    final Procedure2<XClosure,Integer> _function = new Procedure2<XClosure,Integer>() {
+    final Procedure2<XClosure, Integer> _function = new Procedure2<XClosure, Integer>() {
       public void apply(final XClosure closure, final Integer index) {
         final LightweightTypeReference closureType = resolvedTypes.getActualType(closure);
         final Callable<Object> _function = new Callable<Object>() {
@@ -99,7 +99,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
   }
   
   public void withEquivalents(final List<Object> references, final String... types) {
-    final Procedure2<Object,Integer> _function = new Procedure2<Object,Integer>() {
+    final Procedure2<Object, Integer> _function = new Procedure2<Object, Integer>() {
       public void apply(final Object reference, final Integer index) {
         final Callable<Object> _function = new Callable<Object>() {
           public Object call() throws Exception {
@@ -135,7 +135,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
     _builder.append(_simpleName, "");
     _builder.append("<");
     List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
-    final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
+    final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
       public String apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }
@@ -168,7 +168,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
       Iterator<XClosure> _filter = Iterators.<XClosure>filter(_eAll, XClosure.class);
       final List<XClosure> Closures = IteratorExtensions.<XClosure>toList(_filter);
-      final Function1<XClosure,Integer> _function = new Function1<XClosure,Integer>() {
+      final Function1<XClosure, Integer> _function = new Function1<XClosure, Integer>() {
         public Integer apply(final XClosure it) {
           ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
           return Integer.valueOf(_findActualNodeFor.getOffset());

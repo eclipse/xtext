@@ -57,7 +57,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
       Iterator<XAbstractFeatureCall> _filter = Iterators.<XAbstractFeatureCall>filter(_eAll, XAbstractFeatureCall.class);
       final List<XAbstractFeatureCall> featureCalls = IteratorExtensions.<XAbstractFeatureCall>toList(_filter);
-      final Function1<XAbstractFeatureCall,Integer> _function = new Function1<XAbstractFeatureCall,Integer>() {
+      final Function1<XAbstractFeatureCall, Integer> _function = new Function1<XAbstractFeatureCall, Integer>() {
         public Integer apply(final XAbstractFeatureCall it) {
           List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
           INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
@@ -71,7 +71,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   protected Iterable<XAbstractFeatureCall> filterTypeLiteralsAndPackageFragments(final Iterable<XAbstractFeatureCall> featureCalls) {
-    final Function1<XAbstractFeatureCall,Boolean> _function = new Function1<XAbstractFeatureCall,Boolean>() {
+    final Function1<XAbstractFeatureCall, Boolean> _function = new Function1<XAbstractFeatureCall, Boolean>() {
       public Boolean apply(final XAbstractFeatureCall it) {
         boolean _and = false;
         boolean _isPackageFragment = it.isPackageFragment();

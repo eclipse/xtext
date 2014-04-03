@@ -54,7 +54,7 @@ public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig>
     IProject[] _projects = _workspaceRoot_1.getProjects();
     final Procedure1<IProject> _function = new Procedure1<IProject>() {
       public void apply(final IProject it) {
-        Map<String,ProjectConfig> _projects = result.getProjects();
+        Map<String, ProjectConfig> _projects = result.getProjects();
         String _name = it.getName();
         EclipseOutputConfigurationProvider _configurationProvider = EclipseWorkspaceConfigProvider.this.getConfigurationProvider();
         EclipseProjectConfig _eclipseProjectConfig = new EclipseProjectConfig(it, _configurationProvider);

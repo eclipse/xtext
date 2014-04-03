@@ -140,7 +140,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("annotation/ChangeDoc.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("annotation/ChangeDoc.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package usercode");
     _builder_1.newLine();
@@ -167,7 +167,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("usercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("usercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         XtendFile _xtendFile = it.getXtendFile();
@@ -181,7 +181,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         _builder_1.append("Hello World!");
         EList<XtendMember> _members = xtendClass.getMembers();
         Iterable<XtendField> _filter_1 = Iterables.<XtendField>filter(_members, XtendField.class);
-        final Function1<XtendField,Boolean> _function = new Function1<XtendField,Boolean>() {
+        final Function1<XtendField, Boolean> _function = new Function1<XtendField, Boolean>() {
           public Boolean apply(final XtendField it) {
             String _name = it.getName();
             return Boolean.valueOf(_name.equals("object"));
@@ -226,7 +226,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   
   private IFile sourceFile;
   
-  public void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {
+  public void assertProcessing(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("macroProject");
       IJavaProject _create = JavaCore.create(_createPluginProject);
@@ -256,7 +256,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       IResourcesSetupUtil.waitForAutoBuild();
       IProject _project = this.macroProject.getProject();
       IMarker[] _findMarkers = _project.findMarkers(IMarker.PROBLEM, true, (-1));
-      final Function1<IMarker,Boolean> _function = new Function1<IMarker,Boolean>() {
+      final Function1<IMarker, Boolean> _function = new Function1<IMarker, Boolean>() {
         public Boolean apply(final IMarker it) {
           try {
             Object _attribute = it.getAttribute(IMarker.SEVERITY);
@@ -267,7 +267,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         }
       };
       final Iterable<IMarker> markers = IterableExtensions.<IMarker>filter(((Iterable<IMarker>)Conversions.doWrapArray(_findMarkers)), _function);
-      final Function1<IMarker,String> _function_1 = new Function1<IMarker,String>() {
+      final Function1<IMarker, String> _function_1 = new Function1<IMarker, String>() {
         public String apply(final IMarker it) {
           try {
             IResource _resource = it.getResource();
@@ -288,7 +288,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       Assert.assertEquals(_join, 0, _length);
       IProject _project_1 = this.userProject.getProject();
       IMarker[] _findMarkers_1 = _project_1.findMarkers(IMarker.PROBLEM, true, (-1));
-      final Function1<IMarker,Boolean> _function_2 = new Function1<IMarker,Boolean>() {
+      final Function1<IMarker, Boolean> _function_2 = new Function1<IMarker, Boolean>() {
         public Boolean apply(final IMarker it) {
           try {
             Object _attribute = it.getAttribute(IMarker.SEVERITY);
@@ -300,7 +300,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
       };
       final Iterable<IMarker> markers2 = IterableExtensions.<IMarker>filter(((Iterable<IMarker>)Conversions.doWrapArray(_findMarkers_1)), _function_2);
       final StringBuilder buffer = new StringBuilder();
-      final Function1<IMarker,IResource> _function_3 = new Function1<IMarker,IResource>() {
+      final Function1<IMarker, IResource> _function_3 = new Function1<IMarker, IResource>() {
         public IResource apply(final IMarker it) {
           return it.getResource();
         }
@@ -328,7 +328,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         }
       };
       IterableExtensions.<IFile>forEach(_filter, _function_4);
-      final Function1<IMarker,String> _function_5 = new Function1<IMarker,String>() {
+      final Function1<IMarker, String> _function_5 = new Function1<IMarker, String>() {
         public String apply(final IMarker it) {
           try {
             IResource _resource = it.getResource();

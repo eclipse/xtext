@@ -12,26 +12,26 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 @SuppressWarnings("all")
 public class LoopParams {
-  private Function1<? super ITreeAppendable,? extends ITreeAppendable> prefix;
+  private Function1<? super ITreeAppendable, ? extends ITreeAppendable> prefix;
   
-  private Function1<? super ITreeAppendable,? extends ITreeAppendable> separator;
+  private Function1<? super ITreeAppendable, ? extends ITreeAppendable> separator;
   
-  private Function1<? super ITreeAppendable,? extends ITreeAppendable> suffix;
+  private Function1<? super ITreeAppendable, ? extends ITreeAppendable> suffix;
   
-  public Function1<? super ITreeAppendable,? extends ITreeAppendable> setPrefix(final Function1<? super ITreeAppendable,? extends ITreeAppendable> prefix) {
+  public Function1<? super ITreeAppendable, ? extends ITreeAppendable> setPrefix(final Function1<? super ITreeAppendable, ? extends ITreeAppendable> prefix) {
     return this.prefix = prefix;
   }
   
-  public Function1<? super ITreeAppendable,? extends ITreeAppendable> setSeparator(final Function1<? super ITreeAppendable,? extends ITreeAppendable> separator) {
+  public Function1<? super ITreeAppendable, ? extends ITreeAppendable> setSeparator(final Function1<? super ITreeAppendable, ? extends ITreeAppendable> separator) {
     return this.separator = separator;
   }
   
-  public Function1<? super ITreeAppendable,? extends ITreeAppendable> setSuffix(final Function1<? super ITreeAppendable,? extends ITreeAppendable> suffix) {
+  public Function1<? super ITreeAppendable, ? extends ITreeAppendable> setSuffix(final Function1<? super ITreeAppendable, ? extends ITreeAppendable> suffix) {
     return this.suffix = suffix;
   }
   
-  public Function1<? super ITreeAppendable,? extends ITreeAppendable> setPrefix(final String prefix) {
-    final Function1<ITreeAppendable,ITreeAppendable> _function = new Function1<ITreeAppendable,ITreeAppendable>() {
+  public Function1<? super ITreeAppendable, ? extends ITreeAppendable> setPrefix(final String prefix) {
+    final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
       public ITreeAppendable apply(final ITreeAppendable it) {
         return it.append(prefix);
       }
@@ -39,8 +39,8 @@ public class LoopParams {
     return this.prefix = _function;
   }
   
-  public Function1<? super ITreeAppendable,? extends ITreeAppendable> setSeparator(final String separator) {
-    final Function1<ITreeAppendable,ITreeAppendable> _function = new Function1<ITreeAppendable,ITreeAppendable>() {
+  public Function1<? super ITreeAppendable, ? extends ITreeAppendable> setSeparator(final String separator) {
+    final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
       public ITreeAppendable apply(final ITreeAppendable it) {
         return it.append(separator);
       }
@@ -48,8 +48,8 @@ public class LoopParams {
     return this.separator = _function;
   }
   
-  public Function1<? super ITreeAppendable,? extends ITreeAppendable> setSuffix(final String suffix) {
-    final Function1<ITreeAppendable,ITreeAppendable> _function = new Function1<ITreeAppendable,ITreeAppendable>() {
+  public Function1<? super ITreeAppendable, ? extends ITreeAppendable> setSuffix(final String suffix) {
+    final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
       public ITreeAppendable apply(final ITreeAppendable it) {
         return it.append(suffix);
       }

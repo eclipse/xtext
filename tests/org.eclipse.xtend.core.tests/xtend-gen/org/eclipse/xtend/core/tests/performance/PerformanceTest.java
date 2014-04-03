@@ -353,10 +353,10 @@ public class PerformanceTest extends AbstractXtendTestCase {
   public void doCompile() {
     try {
       final int num = 50;
-      final Map<String,? extends CharSequence> map = this.fileGenerator.getDependencies();
+      final Map<String, ? extends CharSequence> map = this.fileGenerator.getDependencies();
       final List<String> files = CollectionLiterals.<String>newArrayList();
       Collection<? extends CharSequence> _values = map.values();
-      final Function1<CharSequence,String> _function = new Function1<CharSequence,String>() {
+      final Function1<CharSequence, String> _function = new Function1<CharSequence, String>() {
         public String apply(final CharSequence it) {
           return it.toString();
         }

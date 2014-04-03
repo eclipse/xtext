@@ -46,7 +46,7 @@ public class FormatterTester {
   @SuppressWarnings("unchecked")
   public void assertFormatted(final Procedure1<? super AssertingFormatterData> init) {
     final AssertingFormatterData data = new AssertingFormatterData();
-    HashMap<String,String> _newHashMap = CollectionLiterals.<String, String>newHashMap();
+    HashMap<String, String> _newHashMap = CollectionLiterals.<String, String>newHashMap();
     MapBasedPreferenceValues _mapBasedPreferenceValues = new MapBasedPreferenceValues(_newHashMap);
     data.setConfig(_mapBasedPreferenceValues);
     init.apply(data);
@@ -182,7 +182,7 @@ public class FormatterTester {
     {
       int lastOffset = 0;
       final StringBuilder newDocument = new StringBuilder();
-      final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
+      final Function1<TextReplacement, Integer> _function = new Function1<TextReplacement, Integer>() {
         public Integer apply(final TextReplacement it) {
           return Integer.valueOf(it.getOffset());
         }
@@ -214,7 +214,7 @@ public class FormatterTester {
     {
       int lastOffset = 0;
       final StringBuilder debugTrace = new StringBuilder();
-      final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
+      final Function1<TextReplacement, Integer> _function = new Function1<TextReplacement, Integer>() {
         public Integer apply(final TextReplacement it) {
           return Integer.valueOf(it.getOffset());
         }
@@ -255,7 +255,7 @@ public class FormatterTester {
   protected ArrayList<TextReplacement> createMissingEditReplacements(final XtextResource res, final Collection<TextReplacement> edits, final int offset, final int length) {
     ArrayList<TextReplacement> _xblockexpression = null;
     {
-      final Function1<TextReplacement,Integer> _function = new Function1<TextReplacement,Integer>() {
+      final Function1<TextReplacement, Integer> _function = new Function1<TextReplacement, Integer>() {
         public Integer apply(final TextReplacement it) {
           return Integer.valueOf(it.getOffset());
         }

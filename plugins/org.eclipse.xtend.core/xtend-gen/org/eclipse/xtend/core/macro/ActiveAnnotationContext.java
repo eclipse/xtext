@@ -96,7 +96,7 @@ public class ActiveAnnotationContext {
   }
   
   public String getMessageWithStackTrace(final Throwable t) {
-    final Function1<Throwable,String> _function = new Function1<Throwable,String>() {
+    final Function1<Throwable, String> _function = new Function1<Throwable, String>() {
       public String apply(final Throwable it) {
         String _xblockexpression = null;
         {
@@ -123,7 +123,7 @@ public class ActiveAnnotationContext {
     return this.getMessageWithReducedStackTrace(t, _function);
   }
   
-  public String getMessageWithReducedStackTrace(final Throwable t, final Function1<? super Throwable,? extends String> getMessage) {
+  public String getMessageWithReducedStackTrace(final Throwable t, final Function1<? super Throwable, ? extends String> getMessage) {
     final StackTraceElement[] stackTrace = t.getStackTrace();
     final ArrayList<StackTraceElement> reducedStackTrace = CollectionLiterals.<StackTraceElement>newArrayList();
     for (final StackTraceElement it : stackTrace) {

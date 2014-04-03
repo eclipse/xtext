@@ -15,14 +15,14 @@ public class WorkspaceConfig {
     return this._absoluteFileSystemPath;
   }
   
-  private final Map<String,ProjectConfig> _projects = CollectionLiterals.<String, ProjectConfig>newLinkedHashMap();
+  private final Map<String, ProjectConfig> _projects = CollectionLiterals.<String, ProjectConfig>newLinkedHashMap();
   
-  public Map<String,ProjectConfig> getProjects() {
+  public Map<String, ProjectConfig> getProjects() {
     return this._projects;
   }
   
   public ProjectConfig addProjectConfig(final ProjectConfig config) {
-    Map<String,ProjectConfig> _projects = this.getProjects();
+    Map<String, ProjectConfig> _projects = this.getProjects();
     String _name = config.getName();
     return _projects.put(_name, config);
   }

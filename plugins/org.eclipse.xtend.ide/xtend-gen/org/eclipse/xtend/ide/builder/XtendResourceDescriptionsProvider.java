@@ -43,7 +43,7 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
             if (_isIndexing) {
               return new IResourceDescriptions.NullImpl();
             }
-            final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
+            final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
               public Boolean apply(final URI uri) {
                 boolean _or = false;
                 boolean _equals = Objects.equal(uri, null);
@@ -70,7 +70,7 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
     }
     boolean _isIndexing = this.compilerPhases.isIndexing(resourceSet);
     if (_isIndexing) {
-      final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
+      final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
         public Boolean apply(final URI uri) {
           boolean _or = false;
           boolean _equals = Objects.equal(uri, null);

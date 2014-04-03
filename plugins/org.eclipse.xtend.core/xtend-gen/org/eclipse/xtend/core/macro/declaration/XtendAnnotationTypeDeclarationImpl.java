@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class XtendAnnotationTypeDeclarationImpl extends XtendTypeDeclarationImpl<XtendAnnotationType> implements AnnotationTypeDeclaration {
   public AnnotationTypeElementDeclaration findDeclaredAnnotationTypeElement(final String name) {
     Iterable<? extends AnnotationTypeElementDeclaration> _declaredAnnotationTypeElements = this.getDeclaredAnnotationTypeElements();
-    final Function1<AnnotationTypeElementDeclaration,Boolean> _function = new Function1<AnnotationTypeElementDeclaration,Boolean>() {
+    final Function1<AnnotationTypeElementDeclaration, Boolean> _function = new Function1<AnnotationTypeElementDeclaration, Boolean>() {
       public Boolean apply(final AnnotationTypeElementDeclaration it) {
         String _simpleName = it.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -38,7 +38,7 @@ public class XtendAnnotationTypeDeclarationImpl extends XtendTypeDeclarationImpl
   public Iterable<? extends AnnotationTypeElementDeclaration> getDeclaredAnnotationTypeElements() {
     XtendAnnotationType _delegate = this.getDelegate();
     EList<XtendMember> _members = _delegate.getMembers();
-    final Function1<XtendMember,MemberDeclaration> _function = new Function1<XtendMember,MemberDeclaration>() {
+    final Function1<XtendMember, MemberDeclaration> _function = new Function1<XtendMember, MemberDeclaration>() {
       public MemberDeclaration apply(final XtendMember it) {
         CompilationUnitImpl _compilationUnit = XtendAnnotationTypeDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toXtendMemberDeclaration(it);

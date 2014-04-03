@@ -24,7 +24,7 @@ public class NoJdtTestLanguageGenerator implements IGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     TreeIterator<EObject> _allContents = resource.getAllContents();
     Iterator<Greeting> _filter = Iterators.<Greeting>filter(_allContents, Greeting.class);
-    final Function1<Greeting,String> _function = new Function1<Greeting,String>() {
+    final Function1<Greeting, String> _function = new Function1<Greeting, String>() {
       public String apply(final Greeting it) {
         return it.getName();
       }

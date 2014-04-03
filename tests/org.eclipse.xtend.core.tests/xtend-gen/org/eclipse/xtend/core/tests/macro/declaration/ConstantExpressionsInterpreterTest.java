@@ -230,84 +230,84 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   
   @Test
   public void testOperators() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("2", "int");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("2", "int");
     this.assertEvaluatesTo(Boolean.valueOf((1 == 2)), _mappedTo, _mappedTo_1, "===");
-    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_3 = Pair.<String, String>of("1", "byte");
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("1", "byte");
     this.assertEvaluatesTo(Boolean.valueOf(true), _mappedTo_2, _mappedTo_3, "===");
-    Pair<String,String> _mappedTo_4 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_5 = Pair.<String, String>of("1", "float");
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("1", "float");
     this.assertEvaluatesTo(Boolean.valueOf(true), _mappedTo_4, _mappedTo_5, "===");
-    Pair<String,String> _mappedTo_6 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_7 = Pair.<String, String>of("1", "long");
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("1", "long");
     this.assertEvaluatesTo(Boolean.valueOf(true), _mappedTo_6, _mappedTo_7, "===");
-    Pair<String,String> _mappedTo_8 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_9 = Pair.<String, String>of("1", "double");
+    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("1", "double");
     this.assertEvaluatesTo(Boolean.valueOf(true), _mappedTo_8, _mappedTo_9, "===");
-    Pair<String,String> _mappedTo_10 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_11 = Pair.<String, String>of("1", "byte");
+    Pair<String, String> _mappedTo_10 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_11 = Pair.<String, String>of("1", "byte");
     this.assertEvaluatesTo(Boolean.valueOf(true), _mappedTo_10, _mappedTo_11, "<=");
-    Pair<String,String> _mappedTo_12 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_13 = Pair.<String, String>of("1", "float");
+    Pair<String, String> _mappedTo_12 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_13 = Pair.<String, String>of("1", "float");
     this.assertEvaluatesTo(Boolean.valueOf(true), _mappedTo_12, _mappedTo_13, "<=");
-    Pair<String,String> _mappedTo_14 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_15 = Pair.<String, String>of("1", "long");
+    Pair<String, String> _mappedTo_14 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_15 = Pair.<String, String>of("1", "long");
     this.assertEvaluatesTo(Boolean.valueOf(true), _mappedTo_14, _mappedTo_15, "<=");
-    Pair<String,String> _mappedTo_16 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_17 = Pair.<String, String>of("1", "double");
+    Pair<String, String> _mappedTo_16 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_17 = Pair.<String, String>of("1", "double");
     this.assertEvaluatesTo(Boolean.valueOf(true), _mappedTo_16, _mappedTo_17, "<=");
-    Pair<String,String> _mappedTo_18 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_19 = Pair.<String, String>of("1", "byte");
+    Pair<String, String> _mappedTo_18 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_19 = Pair.<String, String>of("1", "byte");
     this.assertEvaluatesTo(Boolean.valueOf(true), _mappedTo_18, _mappedTo_19, ">=");
-    Pair<String,String> _mappedTo_20 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_21 = Pair.<String, String>of("1", "float");
+    Pair<String, String> _mappedTo_20 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_21 = Pair.<String, String>of("1", "float");
     this.assertEvaluatesTo(Boolean.valueOf(true), _mappedTo_20, _mappedTo_21, ">=");
-    Pair<String,String> _mappedTo_22 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_23 = Pair.<String, String>of("1", "long");
+    Pair<String, String> _mappedTo_22 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_23 = Pair.<String, String>of("1", "long");
     this.assertEvaluatesTo(Boolean.valueOf(true), _mappedTo_22, _mappedTo_23, ">=");
-    Pair<String,String> _mappedTo_24 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_25 = Pair.<String, String>of("1", "double");
+    Pair<String, String> _mappedTo_24 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_25 = Pair.<String, String>of("1", "double");
     this.assertEvaluatesTo(Boolean.valueOf(true), _mappedTo_24, _mappedTo_25, ">=");
-    Pair<String,String> _mappedTo_26 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_27 = Pair.<String, String>of("1", "byte");
+    Pair<String, String> _mappedTo_26 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_27 = Pair.<String, String>of("1", "byte");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_26, _mappedTo_27, "!==");
-    Pair<String,String> _mappedTo_28 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_29 = Pair.<String, String>of("1", "float");
+    Pair<String, String> _mappedTo_28 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_29 = Pair.<String, String>of("1", "float");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_28, _mappedTo_29, "!==");
-    Pair<String,String> _mappedTo_30 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_31 = Pair.<String, String>of("1", "long");
+    Pair<String, String> _mappedTo_30 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_31 = Pair.<String, String>of("1", "long");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_30, _mappedTo_31, "!==");
-    Pair<String,String> _mappedTo_32 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_33 = Pair.<String, String>of("1", "double");
+    Pair<String, String> _mappedTo_32 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_33 = Pair.<String, String>of("1", "double");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_32, _mappedTo_33, "!==");
-    Pair<String,String> _mappedTo_34 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_35 = Pair.<String, String>of("1", "byte");
+    Pair<String, String> _mappedTo_34 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_35 = Pair.<String, String>of("1", "byte");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_34, _mappedTo_35, "<");
-    Pair<String,String> _mappedTo_36 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_37 = Pair.<String, String>of("1", "float");
+    Pair<String, String> _mappedTo_36 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_37 = Pair.<String, String>of("1", "float");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_36, _mappedTo_37, "<");
-    Pair<String,String> _mappedTo_38 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_39 = Pair.<String, String>of("1", "long");
+    Pair<String, String> _mappedTo_38 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_39 = Pair.<String, String>of("1", "long");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_38, _mappedTo_39, "<");
-    Pair<String,String> _mappedTo_40 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_41 = Pair.<String, String>of("1", "double");
+    Pair<String, String> _mappedTo_40 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_41 = Pair.<String, String>of("1", "double");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_40, _mappedTo_41, "<");
-    Pair<String,String> _mappedTo_42 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_43 = Pair.<String, String>of("1", "byte");
+    Pair<String, String> _mappedTo_42 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_43 = Pair.<String, String>of("1", "byte");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_42, _mappedTo_43, ">");
-    Pair<String,String> _mappedTo_44 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_45 = Pair.<String, String>of("1", "float");
+    Pair<String, String> _mappedTo_44 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_45 = Pair.<String, String>of("1", "float");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_44, _mappedTo_45, ">");
-    Pair<String,String> _mappedTo_46 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_47 = Pair.<String, String>of("1", "long");
+    Pair<String, String> _mappedTo_46 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_47 = Pair.<String, String>of("1", "long");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_46, _mappedTo_47, ">");
-    Pair<String,String> _mappedTo_48 = Pair.<String, String>of("1", "int");
-    Pair<String,String> _mappedTo_49 = Pair.<String, String>of("1", "double");
+    Pair<String, String> _mappedTo_48 = Pair.<String, String>of("1", "int");
+    Pair<String, String> _mappedTo_49 = Pair.<String, String>of("1", "double");
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_48, _mappedTo_49, ">");
   }
   
-  protected void assertEvaluatesTo(final Object expectation, final Pair<String,String> left, final Pair<String,String> right, final String op) {
+  protected void assertEvaluatesTo(final Object expectation, final Pair<String, String> left, final Pair<String, String> right, final String op) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("import static MyConstants.*");
@@ -463,11 +463,11 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   
   @Test
   public void testNumberLiteralWithExpectation() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("float", "1");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("float", "1");
     this.evaluatesTo(_mappedTo, Float.valueOf(1f));
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("double", "1");
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("double", "1");
     this.evaluatesTo(_mappedTo_1, Double.valueOf(1d));
-    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("long", "1");
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("long", "1");
     this.evaluatesTo(_mappedTo_2, Long.valueOf(1l));
   }
   
@@ -518,16 +518,16 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   }
   
   protected void evaluatesTo(final String expression, final Object expectation) {
-    Pair<String,String> _mappedTo = Pair.<String, String>of(null, expression);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(null, expression);
     this.evaluatesTo(_mappedTo, expectation);
   }
   
   protected void evaluatesTo(final String expression, final Procedure1<? super Object> assertions) {
-    Pair<String,String> _mappedTo = Pair.<String, String>of(null, expression);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(null, expression);
     this.evaluatesTo(_mappedTo, assertions);
   }
   
-  protected void evaluatesTo(final Pair<String,String> typeAndExpression, final Object expectation) {
+  protected void evaluatesTo(final Pair<String, String> typeAndExpression, final Object expectation) {
     final Procedure1<Object> _function = new Procedure1<Object>() {
       public void apply(final Object it) {
         Assert.assertEquals(expectation, it);
@@ -536,7 +536,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     this.evaluatesTo(typeAndExpression, _function);
   }
   
-  protected void evaluatesTo(final Pair<String,String> typeAndExpression, final Procedure1<? super Object> assertions) {
+  protected void evaluatesTo(final Pair<String, String> typeAndExpression, final Procedure1<? super Object> assertions) {
     try {
       final String type = typeAndExpression.getKey();
       final String expression = typeAndExpression.getValue();

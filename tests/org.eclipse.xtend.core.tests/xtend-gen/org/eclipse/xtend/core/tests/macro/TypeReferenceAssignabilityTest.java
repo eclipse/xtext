@@ -55,7 +55,7 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
   
-  public void isAssignableFrom(final Pair<String,String> lhsAndParams, final String rhs, final boolean expectation) {
+  public void isAssignableFrom(final Pair<String, String> lhsAndParams, final String rhs, final boolean expectation) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");
@@ -207,7 +207,7 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
       @Extension
       final TypeReferenceProvider typeReferenceProvider = unit.getTypeReferenceProvider();
       List<LightweightTypeReference> _typeArguments = reference.getTypeArguments();
-      final Function1<LightweightTypeReference,TypeReference> _function = new Function1<LightweightTypeReference,TypeReference>() {
+      final Function1<LightweightTypeReference, TypeReference> _function = new Function1<LightweightTypeReference, TypeReference>() {
         public TypeReference apply(final LightweightTypeReference it) {
           return TypeReferenceAssignabilityTest.this.newTypeReference(it, unit);
         }

@@ -193,25 +193,25 @@ public class LoopExtensionsTest extends AbstractXbaseTestCase {
   
   public void testForEachWithSkip() {
     final ArrayList<String> all = CollectionLiterals.<String>newArrayList("jan", "hein", "class", "pit");
-    final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
+    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
       public Boolean apply(final String it) {
         return Boolean.valueOf(Objects.equal(it, "jan"));
       }
     };
     this.assertForEachWithSkip(all, _function, "{hein, class, pit}");
-    final Function1<String,Boolean> _function_1 = new Function1<String,Boolean>() {
+    final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
       public Boolean apply(final String it) {
         return Boolean.valueOf(Objects.equal(it, "hein"));
       }
     };
     this.assertForEachWithSkip(all, _function_1, "{jan, class, pit}");
-    final Function1<String,Boolean> _function_2 = new Function1<String,Boolean>() {
+    final Function1<String, Boolean> _function_2 = new Function1<String, Boolean>() {
       public Boolean apply(final String it) {
         return Boolean.valueOf(Objects.equal(it, "pit"));
       }
     };
     this.assertForEachWithSkip(all, _function_2, "{jan, hein, class}");
-    final Function1<String,Boolean> _function_3 = new Function1<String,Boolean>() {
+    final Function1<String, Boolean> _function_3 = new Function1<String, Boolean>() {
       public Boolean apply(final String it) {
         return Boolean.valueOf(true);
       }
@@ -241,7 +241,7 @@ public class LoopExtensionsTest extends AbstractXbaseTestCase {
     Assert.assertEquals(expectedResult, _string);
   }
   
-  protected void assertForEachWithSkip(final Iterable<String> elements, final Function1<? super String,? extends Boolean> append, final String expectedResult) {
+  protected void assertForEachWithSkip(final Iterable<String> elements, final Function1<? super String, ? extends Boolean> append, final String expectedResult) {
     final FakeTreeAppendable app = new FakeTreeAppendable();
     final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
       public void apply(final LoopParams it) {

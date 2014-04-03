@@ -55,13 +55,13 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class StandaloneBuilder {
   private final static Logger LOG = Logger.getLogger(StandaloneBuilder.class);
   
-  private Map<String,LanguageAccess> _languages;
+  private Map<String, LanguageAccess> _languages;
   
-  public Map<String,LanguageAccess> getLanguages() {
+  public Map<String, LanguageAccess> getLanguages() {
     return this._languages;
   }
   
-  public void setLanguages(final Map<String,LanguageAccess> languages) {
+  public void setLanguages(final Map<String, LanguageAccess> languages) {
     this._languages = languages;
   }
   
@@ -152,9 +152,9 @@ public class StandaloneBuilder {
   }
   
   public boolean launch() {
-    Map<String,LanguageAccess> _languages = this.getLanguages();
+    Map<String, LanguageAccess> _languages = this.getLanguages();
     Collection<LanguageAccess> _values = _languages.values();
-    final Function1<LanguageAccess,Boolean> _function = new Function1<LanguageAccess,Boolean>() {
+    final Function1<LanguageAccess, Boolean> _function = new Function1<LanguageAccess, Boolean>() {
       public Boolean apply(final LanguageAccess it) {
         return Boolean.valueOf(it.isLinksAgainstJava());
       }
@@ -174,7 +174,7 @@ public class StandaloneBuilder {
       String _classPathLookUpFilter_1 = this.getClassPathLookUpFilter();
       final Pattern cpLookUpFilter = Pattern.compile(_classPathLookUpFilter_1);
       Iterable<String> _classPathEntries = this.getClassPathEntries();
-      final Function1<String,Boolean> _function_1 = new Function1<String,Boolean>() {
+      final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
         public Boolean apply(final String root) {
           Matcher _matcher = cpLookUpFilter.matcher(root);
           return Boolean.valueOf(_matcher.matches());
@@ -248,7 +248,7 @@ public class StandaloneBuilder {
   protected ResourceDescriptionsData fillIndex(final XtextResourceSet set) {
     EList<Resource> _resources = set.getResources();
     ArrayList<Resource> _arrayList = new ArrayList<Resource>(_resources);
-    final Function1<Resource,IResourceDescription> _function = new Function1<Resource,IResourceDescription>() {
+    final Function1<Resource, IResourceDescription> _function = new Function1<Resource, IResourceDescription>() {
       public IResourceDescription apply(final Resource it) {
         LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
         IResourceDescription.Manager _resourceDescriptionManager = _languageAccess.getResourceDescriptionManager();
@@ -273,15 +273,17 @@ public class StandaloneBuilder {
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_absolutePath_1);
     Iterable<String> _plus_1 = Iterables.<String>concat(_sourceDirs, _newArrayList);
     final IJavaCompiler.CompilationResult result = this.compiler.compile(_plus_1, stubsClasses);
-    switch (result) {
-      case SKIPPED:
-        StandaloneBuilder.LOG.info("Nothing to compile. Stubs compilation was skipped.");
-        break;
-      case FAILED:
-        StandaloneBuilder.LOG.debug("Stubs compilation finished with errors.");
-        break;
-      default:
-        break;
+    if (result != null) {
+      switch (result) {
+        case SKIPPED:
+          StandaloneBuilder.LOG.info("Nothing to compile. Stubs compilation was skipped.");
+          break;
+        case FAILED:
+          StandaloneBuilder.LOG.debug("Stubs compilation finished with errors.");
+          break;
+        default:
+          break;
+      }
     }
     return stubsClasses.getAbsolutePath();
   }
@@ -299,7 +301,7 @@ public class StandaloneBuilder {
     }
     String _absolutePath_1 = stubsDir.getAbsolutePath();
     this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_1);
-    final Function1<Resource,Boolean> _function = new Function1<Resource,Boolean>() {
+    final Function1<Resource, Boolean> _function = new Function1<Resource, Boolean>() {
       public Boolean apply(final Resource it) {
         LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
         return Boolean.valueOf(_languageAccess.isLinksAgainstJava());
@@ -375,7 +377,7 @@ public class StandaloneBuilder {
   }
   
   private LanguageAccess languageAccess(final Resource resource) {
-    Map<String,LanguageAccess> _languages = this.getLanguages();
+    Map<String, LanguageAccess> _languages = this.getLanguages();
     URI _uRI = resource.getURI();
     String _fileExtension = _uRI.fileExtension();
     return _languages.get(_fileExtension);
@@ -414,7 +416,7 @@ public class StandaloneBuilder {
   }
   
   private URLClassLoader createURLClassLoader(final Iterable<String> classPathEntries) {
-    final Function1<String,URL> _function = new Function1<String,URL>() {
+    final Function1<String, URL> _function = new Function1<String, URL>() {
       public URL apply(final String str) {
         try {
           File _file = new File(str);
@@ -430,7 +432,7 @@ public class StandaloneBuilder {
   }
   
   protected List<Resource> collectResources(final Iterable<String> roots, final ResourceSet resourceSet) {
-    Map<String,LanguageAccess> _languages = this.getLanguages();
+    Map<String, LanguageAccess> _languages = this.getLanguages();
     Set<String> _keySet = _languages.keySet();
     final String extensions = IterableExtensions.join(_keySet, "|");
     final NameBasedFilter nameBasedFilter = new NameBasedFilter();

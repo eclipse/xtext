@@ -61,7 +61,7 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
   @Extension
   private Primitives _primitives;
   
-  public Object isSuperTypeOf(final Pair<String,String> superTypeAndParam, final String... types) {
+  public Object isSuperTypeOf(final Pair<String, String> superTypeAndParam, final String... types) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");
@@ -96,7 +96,7 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       EList<JvmFormalParameter> _parameters = operation.getParameters();
-      final Function1<JvmFormalParameter,JvmTypeReference> _function = new Function1<JvmFormalParameter,JvmTypeReference>() {
+      final Function1<JvmFormalParameter, JvmTypeReference> _function = new Function1<JvmFormalParameter, JvmTypeReference>() {
         public JvmTypeReference apply(final JvmFormalParameter it) {
           return it.getParameterType();
         }

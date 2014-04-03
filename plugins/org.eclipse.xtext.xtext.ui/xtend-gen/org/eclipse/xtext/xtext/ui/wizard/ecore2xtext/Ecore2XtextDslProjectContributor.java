@@ -111,7 +111,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     _builder.newLine();
     {
       Collection<EPackageInfo> _ePackageInfos = this.projectInfo.getEPackageInfos();
-      final Function1<EPackageInfo,String> _function = new Function1<EPackageInfo,String>() {
+      final Function1<EPackageInfo, String> _function = new Function1<EPackageInfo, String>() {
         public String apply(final EPackageInfo it) {
           return it.getEPackageJavaFQN();
         }
@@ -128,7 +128,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     }
     {
       Collection<EPackageInfo> _ePackageInfos_1 = this.projectInfo.getEPackageInfos();
-      final Function1<EPackageInfo,String> _function_1 = new Function1<EPackageInfo,String>() {
+      final Function1<EPackageInfo, String> _function_1 = new Function1<EPackageInfo, String>() {
         public String apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
           return _genmodelURI.toString();

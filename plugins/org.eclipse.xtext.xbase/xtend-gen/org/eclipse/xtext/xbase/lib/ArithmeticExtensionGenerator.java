@@ -524,31 +524,31 @@ public class ArithmeticExtensionGenerator {
     String _substring = _lowerCase.substring(0, 1);
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(_substring,"a")) {
+      if (Objects.equal(_substring, "a")) {
         _matched=true;
         _switchResult = "an";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_substring,"e")) {
+      if (Objects.equal(_substring, "e")) {
         _matched=true;
         _switchResult = "an";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_substring,"i")) {
+      if (Objects.equal(_substring, "i")) {
         _matched=true;
         _switchResult = "an";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_substring,"o")) {
+      if (Objects.equal(_substring, "o")) {
         _matched=true;
         _switchResult = "an";
       }
     }
     if (!_matched) {
-      if (Objects.equal(_substring,"u")) {
+      if (Objects.equal(_substring, "u")) {
         _matched=true;
         _switchResult = "an";
       }
@@ -563,13 +563,13 @@ public class ArithmeticExtensionGenerator {
     String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(it,"int")) {
+      if (Objects.equal(it, "int")) {
         _matched=true;
         _switchResult = "Integer";
       }
     }
     if (!_matched) {
-      if (Objects.equal(it,"char")) {
+      if (Objects.equal(it, "char")) {
         _matched=true;
         _switchResult = "Character";
       }

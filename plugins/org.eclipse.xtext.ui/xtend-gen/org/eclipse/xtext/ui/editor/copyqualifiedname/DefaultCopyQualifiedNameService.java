@@ -47,7 +47,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
     return null;
   }
   
-  protected <T extends Object> CharSequence toQualifiedNames(final List<T> it, final Function1<? super T,? extends String> toQualifiedNameFunction) {
+  protected <T extends Object> CharSequence toQualifiedNames(final List<T> it, final Function1<? super T, ? extends String> toQualifiedNameFunction) {
     CharSequence _xblockexpression = null;
     {
       boolean _or = false;

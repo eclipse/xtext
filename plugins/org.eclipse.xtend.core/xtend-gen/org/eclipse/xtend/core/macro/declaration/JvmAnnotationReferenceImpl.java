@@ -81,7 +81,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     final JvmOperation op = this.findOperation(property);
     JvmAnnotationReference _delegate = this.getDelegate();
     EList<JvmAnnotationValue> _values = _delegate.getValues();
-    final Function1<JvmAnnotationValue,Boolean> _function = new Function1<JvmAnnotationValue,Boolean>() {
+    final Function1<JvmAnnotationValue, Boolean> _function = new Function1<JvmAnnotationValue, Boolean>() {
       public Boolean apply(final JvmAnnotationValue it) {
         boolean _or = false;
         JvmOperation _operation = it.getOperation();
@@ -123,7 +123,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       final JvmOperation op = this.findOperation(property);
       JvmAnnotationReference _delegate = this.getDelegate();
       EList<JvmAnnotationValue> _values = _delegate.getValues();
-      final Function1<JvmAnnotationValue,Boolean> _function = new Function1<JvmAnnotationValue,Boolean>() {
+      final Function1<JvmAnnotationValue, Boolean> _function = new Function1<JvmAnnotationValue, Boolean>() {
         public Boolean apply(final JvmAnnotationValue it) {
           boolean _or = false;
           JvmOperation _operation = it.getOperation();
@@ -605,13 +605,13 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     final String result = _identifier;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(result,"java.lang.Class")) {
+      if (Objects.equal(result, "java.lang.Class")) {
         _matched=true;
         _switchResult = TypeReference.class.getName();
       }
     }
     if (!_matched) {
-      if (Objects.equal(result,"java.lang.Class[]")) {
+      if (Objects.equal(result, "java.lang.Class[]")) {
         _matched=true;
         String _name = TypeReference.class.getName();
         _switchResult = (_name + "[]");
@@ -628,7 +628,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     AnnotationTypeDeclaration _annotationTypeDeclaration = this.getAnnotationTypeDeclaration();
     final JvmAnnotationType jvmAnnoType = ((JvmAnnotationTypeDeclarationImpl) _annotationTypeDeclaration).getDelegate();
     Iterable<JvmOperation> _declaredOperations = jvmAnnoType.getDeclaredOperations();
-    final Function1<JvmOperation,Boolean> _function = new Function1<JvmOperation,Boolean>() {
+    final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
       public Boolean apply(final JvmOperation it) {
         String _simpleName = it.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));

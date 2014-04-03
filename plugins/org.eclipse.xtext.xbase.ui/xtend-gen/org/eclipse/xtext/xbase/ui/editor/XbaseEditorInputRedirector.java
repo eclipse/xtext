@@ -73,7 +73,7 @@ public class XbaseEditorInputRedirector {
               int _segmentCount = _outputLocation_1.segmentCount();
               final IPath relative = _fullPath_2.removeFirstSegments(_segmentCount);
               IPackageFragmentRoot[] _packageFragmentRoots = project.getPackageFragmentRoots();
-              final Function1<IPackageFragmentRoot,Boolean> _function = new Function1<IPackageFragmentRoot,Boolean>() {
+              final Function1<IPackageFragmentRoot, Boolean> _function = new Function1<IPackageFragmentRoot, Boolean>() {
                 public Boolean apply(final IPackageFragmentRoot it) {
                   try {
                     int _kind = it.getKind();
@@ -99,7 +99,7 @@ public class XbaseEditorInputRedirector {
               }
             }
             IClasspathEntry[] _rawClasspath = project.getRawClasspath();
-            final Function1<IClasspathEntry,Boolean> _function_1 = new Function1<IClasspathEntry,Boolean>() {
+            final Function1<IClasspathEntry, Boolean> _function_1 = new Function1<IClasspathEntry, Boolean>() {
               public Boolean apply(final IClasspathEntry it) {
                 int _entryKind = it.getEntryKind();
                 return Boolean.valueOf((_entryKind == IClasspathEntry.CPE_SOURCE));

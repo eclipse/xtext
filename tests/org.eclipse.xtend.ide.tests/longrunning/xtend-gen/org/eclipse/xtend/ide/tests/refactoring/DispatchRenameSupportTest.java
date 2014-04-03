@@ -791,7 +791,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
     IResourcesSetupUtil.waitForAutoBuild();
     XtendFunction _firstMethod = this.firstMethod(targetFile);
     Iterable<JvmOperation> _allDispatchOperations = this.dispatchRenameSupport.getAllDispatchOperations(_firstMethod);
-    final Function1<JvmOperation,String> _function = new Function1<JvmOperation,String>() {
+    final Function1<JvmOperation, String> _function = new Function1<JvmOperation, String>() {
       public String apply(final JvmOperation it) {
         return DispatchRenameSupportTest.this.signature(it);
       }

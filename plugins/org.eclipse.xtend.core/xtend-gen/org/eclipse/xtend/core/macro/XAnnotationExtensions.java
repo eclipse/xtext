@@ -155,7 +155,7 @@ public class XAnnotationExtensions {
           if (_isCrossLinkFragment) {
             Resource _eResource_1 = it.eResource();
             String _fragment_1 = uri.fragment();
-            final Triple<EObject,EReference,INode> triple = this.encoder.decode(_eResource_1, _fragment_1);
+            final Triple<EObject, EReference, INode> triple = this.encoder.decode(_eResource_1, _fragment_1);
             EObject _first = triple.getFirst();
             EReference _second = triple.getSecond();
             INode _third = triple.getThird();
@@ -183,7 +183,7 @@ public class XAnnotationExtensions {
   
   public JvmType getProcessorType(final JvmAnnotationType it) {
     EList<JvmAnnotationReference> _annotations = it.getAnnotations();
-    final Function1<JvmAnnotationReference,Boolean> _function = new Function1<JvmAnnotationReference,Boolean>() {
+    final Function1<JvmAnnotationReference, Boolean> _function = new Function1<JvmAnnotationReference, Boolean>() {
       public Boolean apply(final JvmAnnotationReference it) {
         JvmAnnotationType _annotation = it.getAnnotation();
         String _identifier = null;
@@ -196,7 +196,7 @@ public class XAnnotationExtensions {
     };
     final JvmAnnotationReference activeAnnotation = IterableExtensions.<JvmAnnotationReference>findFirst(_annotations, _function);
     EList<JvmAnnotationValue> _values = activeAnnotation.getValues();
-    final Function1<JvmAnnotationValue,Boolean> _function_1 = new Function1<JvmAnnotationValue,Boolean>() {
+    final Function1<JvmAnnotationValue, Boolean> _function_1 = new Function1<JvmAnnotationValue, Boolean>() {
       public Boolean apply(final JvmAnnotationValue it) {
         boolean _or = false;
         JvmOperation _operation = it.getOperation();

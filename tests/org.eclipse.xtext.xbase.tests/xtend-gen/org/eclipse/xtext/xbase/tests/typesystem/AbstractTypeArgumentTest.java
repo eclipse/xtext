@@ -119,7 +119,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
       this.resolveTypes(xExpression);
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
       Iterator<XExpression> _filter = Iterators.<XExpression>filter(_eAll, XExpression.class);
-      final Function1<XExpression,Boolean> _function = new Function1<XExpression,Boolean>() {
+      final Function1<XExpression, Boolean> _function = new Function1<XExpression, Boolean>() {
         public Boolean apply(final XExpression it) {
           boolean _switchResult = false;
           boolean _matched = false;
@@ -197,7 +197,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
       };
       Iterator<XExpression> _filter_1 = IteratorExtensions.<XExpression>filter(_filter, _function);
       final List<XExpression> result = IteratorExtensions.<XExpression>toList(_filter_1);
-      final Function1<XExpression,Integer> _function_1 = new Function1<XExpression,Integer>() {
+      final Function1<XExpression, Integer> _function_1 = new Function1<XExpression, Integer>() {
         public Integer apply(final XExpression it) {
           EReference _switchResult = null;
           boolean _matched = false;

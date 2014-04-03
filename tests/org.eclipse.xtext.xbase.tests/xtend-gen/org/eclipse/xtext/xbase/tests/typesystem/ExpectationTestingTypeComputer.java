@@ -29,22 +29,22 @@ public class ExpectationTestingTypeComputer extends XbaseTypeComputer {
     this._test = test;
   }
   
-  private Function1<? super XExpression,? extends Boolean> _predicate = new Function1<XExpression,Boolean>() {
+  private Function1<? super XExpression, ? extends Boolean> _predicate = new Function1<XExpression, Boolean>() {
     public Boolean apply(final XExpression it) {
       return Boolean.valueOf((it instanceof XNullLiteral));
     }
   };
   
-  public Function1<? super XExpression,? extends Boolean> getPredicate() {
+  public Function1<? super XExpression, ? extends Boolean> getPredicate() {
     return this._predicate;
   }
   
-  public void setPredicate(final Function1<? super XExpression,? extends Boolean> predicate) {
+  public void setPredicate(final Function1<? super XExpression, ? extends Boolean> predicate) {
     this._predicate = predicate;
   }
   
   public void computeTypes(final XExpression expression, final ITypeComputationState state) {
-    Function1<? super XExpression,? extends Boolean> _predicate = this.getPredicate();
+    Function1<? super XExpression, ? extends Boolean> _predicate = this.getPredicate();
     Boolean _apply = _predicate.apply(expression);
     if ((_apply).booleanValue()) {
       AbstractExpectationTest _test = this.getTest();

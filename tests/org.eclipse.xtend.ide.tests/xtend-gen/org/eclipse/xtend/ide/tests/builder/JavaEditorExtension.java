@@ -46,7 +46,7 @@ public class JavaEditorExtension {
   }
   
   public ITextEditor reconcile(final ITextEditor editor, final String oldText, final String newText) {
-    final Function1<ITextEditor,ITextEditor> _function = new Function1<ITextEditor,ITextEditor>() {
+    final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
       public ITextEditor apply(final ITextEditor it) {
         return JavaEditorExtension.this.changeContent(it, oldText, newText);
       }
@@ -54,7 +54,7 @@ public class JavaEditorExtension {
     return this.reconcile(editor, _function);
   }
   
-  public ITextEditor reconcile(final ITextEditor editor, final Function1<? super ITextEditor,? extends ITextEditor> consumer) {
+  public ITextEditor reconcile(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     ITextEditor _xblockexpression = null;
     {
       boolean _equals = Objects.equal(consumer, null);
@@ -76,7 +76,7 @@ public class JavaEditorExtension {
     return this.save(editor, null);
   }
   
-  public ITextEditor save(final ITextEditor editor, final Function1<? super ITextEditor,? extends ITextEditor> consumer) {
+  public ITextEditor save(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     ITextEditor _xblockexpression = null;
     {
       final Procedure0 _function = new Procedure0() {
@@ -99,7 +99,7 @@ public class JavaEditorExtension {
     return this.close(editor, null);
   }
   
-  public ITextEditor close(final ITextEditor editor, final Function1<? super ITextEditor,? extends ITextEditor> consumer) {
+  public ITextEditor close(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     ITextEditor _xblockexpression = null;
     {
       final Procedure0 _function = new Procedure0() {

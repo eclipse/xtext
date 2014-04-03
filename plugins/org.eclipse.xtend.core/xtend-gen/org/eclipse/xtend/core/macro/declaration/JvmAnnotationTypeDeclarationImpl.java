@@ -51,7 +51,7 @@ public class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jvm
   
   public AnnotationTypeElementDeclaration findDeclaredAnnotationTypeElement(final String name) {
     Iterable<? extends AnnotationTypeElementDeclaration> _declaredAnnotationTypeElements = this.getDeclaredAnnotationTypeElements();
-    final Function1<AnnotationTypeElementDeclaration,Boolean> _function = new Function1<AnnotationTypeElementDeclaration,Boolean>() {
+    final Function1<AnnotationTypeElementDeclaration, Boolean> _function = new Function1<AnnotationTypeElementDeclaration, Boolean>() {
       public Boolean apply(final AnnotationTypeElementDeclaration it) {
         String _simpleName = it.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -63,7 +63,7 @@ public class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jvm
   public Iterable<? extends AnnotationTypeElementDeclaration> getDeclaredAnnotationTypeElements() {
     JvmAnnotationType _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
-    final Function1<JvmMember,MemberDeclaration> _function = new Function1<JvmMember,MemberDeclaration>() {
+    final Function1<JvmMember, MemberDeclaration> _function = new Function1<JvmMember, MemberDeclaration>() {
       public MemberDeclaration apply(final JvmMember it) {
         CompilationUnitImpl _compilationUnit = JvmAnnotationTypeDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toMemberDeclaration(it);

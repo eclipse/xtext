@@ -213,7 +213,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   public Iterable<? extends TypeDeclaration> getSourceTypeDeclarations() {
     XtendFile _xtendFile = this.getXtendFile();
     EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
-    final Function1<XtendTypeDeclaration,XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = new Function1<XtendTypeDeclaration,XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>() {
+    final Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = new Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>() {
       public XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> apply(final XtendTypeDeclaration it) {
         return CompilationUnitImpl.this.toXtendTypeDeclaration(it);
       }
@@ -294,7 +294,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this._typeLookup;
   }
   
-  private Map<EObject,Object> identityCache = CollectionLiterals.<EObject, Object>newHashMap();
+  private Map<EObject, Object> identityCache = CollectionLiterals.<EObject, Object>newHashMap();
   
   private OwnedConverter typeRefConverter;
   
@@ -356,7 +356,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this.compilerPhases.isIndexing(_xtendFile);
   }
   
-  private <IN extends EObject, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN,? extends OUT> provider) {
+  private <IN extends EObject, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN, ? extends OUT> provider) {
     this.checkCanceled();
     boolean _equals = Objects.equal(in, null);
     if (_equals) {
@@ -374,27 +374,29 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public Visibility toVisibility(final JvmVisibility delegate) {
     Visibility _switchResult = null;
-    switch (delegate) {
-      case DEFAULT:
-        _switchResult = Visibility.DEFAULT;
-        break;
-      case PRIVATE:
-        _switchResult = Visibility.PRIVATE;
-        break;
-      case PROTECTED:
-        _switchResult = Visibility.PROTECTED;
-        break;
-      case PUBLIC:
-        _switchResult = Visibility.PUBLIC;
-        break;
-      default:
-        break;
+    if (delegate != null) {
+      switch (delegate) {
+        case DEFAULT:
+          _switchResult = Visibility.DEFAULT;
+          break;
+        case PRIVATE:
+          _switchResult = Visibility.PRIVATE;
+          break;
+        case PROTECTED:
+          _switchResult = Visibility.PROTECTED;
+          break;
+        case PUBLIC:
+          _switchResult = Visibility.PUBLIC;
+          break;
+        default:
+          break;
+      }
     }
     return _switchResult;
   }
   
   public Type toType(final JvmType delegate) {
-    final Function1<JvmType,Type> _function = new Function1<JvmType,Type>() {
+    final Function1<JvmType, Type> _function = new Function1<JvmType, Type>() {
       public Type apply(final JvmType it) {
         Type _switchResult = null;
         boolean _matched = false;
@@ -443,7 +445,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public TypeDeclaration toTypeDeclaration(final JvmDeclaredType delegate) {
-    final Function1<JvmDeclaredType,TypeDeclaration> _function = new Function1<JvmDeclaredType,TypeDeclaration>() {
+    final Function1<JvmDeclaredType, TypeDeclaration> _function = new Function1<JvmDeclaredType, TypeDeclaration>() {
       public TypeDeclaration apply(final JvmDeclaredType it) {
         JvmTypeDeclarationImpl<? extends JvmDeclaredType> _switchResult = null;
         boolean _matched = false;
@@ -565,7 +567,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public TypeParameterDeclaration toTypeParameterDeclaration(final JvmTypeParameter delegate) {
-    final Function1<JvmTypeParameter,JvmTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,JvmTypeParameterDeclarationImpl>() {
+    final Function1<JvmTypeParameter, JvmTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter, JvmTypeParameterDeclarationImpl>() {
       public JvmTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
         JvmTypeParameterDeclarationImpl _xifexpression = null;
         boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
@@ -595,7 +597,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public ParameterDeclaration toParameterDeclaration(final JvmFormalParameter delegate) {
-    final Function1<JvmFormalParameter,JvmParameterDeclarationImpl> _function = new Function1<JvmFormalParameter,JvmParameterDeclarationImpl>() {
+    final Function1<JvmFormalParameter, JvmParameterDeclarationImpl> _function = new Function1<JvmFormalParameter, JvmParameterDeclarationImpl>() {
       public JvmParameterDeclarationImpl apply(final JvmFormalParameter it) {
         JvmParameterDeclarationImpl _xifexpression = null;
         boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
@@ -625,7 +627,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public MemberDeclaration toMemberDeclaration(final JvmMember delegate) {
-    final Function1<JvmMember,MemberDeclaration> _function = new Function1<JvmMember,MemberDeclaration>() {
+    final Function1<JvmMember, MemberDeclaration> _function = new Function1<JvmMember, MemberDeclaration>() {
       public MemberDeclaration apply(final JvmMember it) {
         MemberDeclaration _switchResult = null;
         boolean _matched = false;
@@ -785,7 +787,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public NamedElement toNamedElement(final JvmIdentifiableElement delegate) {
-    final Function1<JvmIdentifiableElement,Declaration> _function = new Function1<JvmIdentifiableElement,Declaration>() {
+    final Function1<JvmIdentifiableElement, Declaration> _function = new Function1<JvmIdentifiableElement, Declaration>() {
       public Declaration apply(final JvmIdentifiableElement it) {
         Declaration _switchResult = null;
         boolean _matched = false;
@@ -823,7 +825,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (_equals) {
         return null;
       }
-      final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
+      final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
         public TypeReference apply(final JvmTypeReference it) {
           TypeReference _switchResult = null;
           boolean _matched = false;
@@ -877,7 +879,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> toXtendTypeDeclaration(final XtendTypeDeclaration delegate) {
-    final Function1<XtendTypeDeclaration,XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = new Function1<XtendTypeDeclaration,XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>() {
+    final Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = new Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>() {
       public XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> apply(final XtendTypeDeclaration it) {
         XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
         boolean _matched = false;
@@ -940,7 +942,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public MemberDeclaration toXtendMemberDeclaration(final XtendMember delegate) {
-    final Function1<XtendMember,XtendMemberDeclarationImpl<? extends XtendMember>> _function = new Function1<XtendMember,XtendMemberDeclarationImpl<? extends XtendMember>>() {
+    final Function1<XtendMember, XtendMemberDeclarationImpl<? extends XtendMember>> _function = new Function1<XtendMember, XtendMemberDeclarationImpl<? extends XtendMember>>() {
       public XtendMemberDeclarationImpl<? extends XtendMember> apply(final XtendMember it) {
         XtendMemberDeclarationImpl<? extends XtendMember> _switchResult = null;
         boolean _matched = false;
@@ -1023,7 +1025,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public XtendParameterDeclarationImpl toXtendParameterDeclaration(final XtendParameter delegate) {
-    final Function1<XtendParameter,XtendParameterDeclarationImpl> _function = new Function1<XtendParameter,XtendParameterDeclarationImpl>() {
+    final Function1<XtendParameter, XtendParameterDeclarationImpl> _function = new Function1<XtendParameter, XtendParameterDeclarationImpl>() {
       public XtendParameterDeclarationImpl apply(final XtendParameter it) {
         XtendParameterDeclarationImpl _xtendParameterDeclarationImpl = new XtendParameterDeclarationImpl();
         final Procedure1<XtendParameterDeclarationImpl> _function = new Procedure1<XtendParameterDeclarationImpl>() {
@@ -1039,7 +1041,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public XtendTypeParameterDeclarationImpl toXtendTypeParameterDeclaration(final JvmTypeParameter delegate) {
-    final Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl>() {
+    final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl>() {
       public XtendTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
         XtendTypeParameterDeclarationImpl _xtendTypeParameterDeclarationImpl = new XtendTypeParameterDeclarationImpl();
         final Procedure1<XtendTypeParameterDeclarationImpl> _function = new Procedure1<XtendTypeParameterDeclarationImpl>() {
@@ -1095,7 +1097,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public Expression toExpression(final XExpression delegate) {
-    final Function1<XExpression,ExpressionImpl> _function = new Function1<XExpression,ExpressionImpl>() {
+    final Function1<XExpression, ExpressionImpl> _function = new Function1<XExpression, ExpressionImpl>() {
       public ExpressionImpl apply(final XExpression it) {
         ExpressionImpl _expressionImpl = new ExpressionImpl();
         final Procedure1<ExpressionImpl> _function = new Procedure1<ExpressionImpl>() {
@@ -1209,7 +1211,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public AnnotationReference toAnnotationReference(final XAnnotation delegate) {
-    final Function1<XAnnotation,XtendAnnotationReferenceImpl> _function = new Function1<XAnnotation,XtendAnnotationReferenceImpl>() {
+    final Function1<XAnnotation, XtendAnnotationReferenceImpl> _function = new Function1<XAnnotation, XtendAnnotationReferenceImpl>() {
       public XtendAnnotationReferenceImpl apply(final XAnnotation it) {
         XtendAnnotationReferenceImpl _xtendAnnotationReferenceImpl = new XtendAnnotationReferenceImpl();
         final Procedure1<XtendAnnotationReferenceImpl> _function = new Procedure1<XtendAnnotationReferenceImpl>() {
@@ -1225,7 +1227,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public AnnotationReference toAnnotationReference(final JvmAnnotationReference delegate) {
-    final Function1<JvmAnnotationReference,JvmAnnotationReferenceImpl> _function = new Function1<JvmAnnotationReference,JvmAnnotationReferenceImpl>() {
+    final Function1<JvmAnnotationReference, JvmAnnotationReferenceImpl> _function = new Function1<JvmAnnotationReference, JvmAnnotationReferenceImpl>() {
       public JvmAnnotationReferenceImpl apply(final JvmAnnotationReference it) {
         JvmAnnotationReferenceImpl _jvmAnnotationReferenceImpl = new JvmAnnotationReferenceImpl();
         final Procedure1<JvmAnnotationReferenceImpl> _function = new Procedure1<JvmAnnotationReferenceImpl>() {
@@ -1241,7 +1243,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public Object translateAnnotationValue(final JvmAnnotationValue value, final boolean isArray) {
-    Pair<List<?>,Class<?>> _switchResult = null;
+    Pair<List<?>, Class<?>> _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
       if (value instanceof JvmCustomAnnotationValue) {
@@ -1255,7 +1257,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         }
         if (_and) {
           _matched=true;
-          Pair<List<?>,Class<?>> _xblockexpression = null;
+          Pair<List<?>, Class<?>> _xblockexpression = null;
           {
             JvmTypeReference _findExpectedType = this.findExpectedType(value);
             JvmType _type = _findExpectedType.getType();
@@ -1266,61 +1268,61 @@ public class CompilationUnitImpl implements CompilationUnit {
             Class<?> _switchResult_1 = null;
             boolean _matched_1 = false;
             if (!_matched_1) {
-              if (Objects.equal(componentTypeName,"java.lang.Class")) {
+              if (Objects.equal(componentTypeName, "java.lang.Class")) {
                 _matched_1=true;
                 _switchResult_1 = TypeReference.class;
               }
             }
             if (!_matched_1) {
-              if (Objects.equal(componentTypeName,"java.lang.String")) {
+              if (Objects.equal(componentTypeName, "java.lang.String")) {
                 _matched_1=true;
                 _switchResult_1 = String.class;
               }
             }
             if (!_matched_1) {
-              if (Objects.equal(componentTypeName,"boolean")) {
+              if (Objects.equal(componentTypeName, "boolean")) {
                 _matched_1=true;
                 _switchResult_1 = boolean.class;
               }
             }
             if (!_matched_1) {
-              if (Objects.equal(componentTypeName,"int")) {
+              if (Objects.equal(componentTypeName, "int")) {
                 _matched_1=true;
                 _switchResult_1 = int.class;
               }
             }
             if (!_matched_1) {
-              if (Objects.equal(componentTypeName,"byte")) {
+              if (Objects.equal(componentTypeName, "byte")) {
                 _matched_1=true;
                 _switchResult_1 = byte.class;
               }
             }
             if (!_matched_1) {
-              if (Objects.equal(componentTypeName,"char")) {
+              if (Objects.equal(componentTypeName, "char")) {
                 _matched_1=true;
                 _switchResult_1 = char.class;
               }
             }
             if (!_matched_1) {
-              if (Objects.equal(componentTypeName,"double")) {
+              if (Objects.equal(componentTypeName, "double")) {
                 _matched_1=true;
                 _switchResult_1 = double.class;
               }
             }
             if (!_matched_1) {
-              if (Objects.equal(componentTypeName,"float")) {
+              if (Objects.equal(componentTypeName, "float")) {
                 _matched_1=true;
                 _switchResult_1 = float.class;
               }
             }
             if (!_matched_1) {
-              if (Objects.equal(componentTypeName,"long")) {
+              if (Objects.equal(componentTypeName, "long")) {
                 _matched_1=true;
                 _switchResult_1 = long.class;
               }
             }
             if (!_matched_1) {
-              if (Objects.equal(componentTypeName,"short")) {
+              if (Objects.equal(componentTypeName, "short")) {
                 _matched_1=true;
                 _switchResult_1 = short.class;
               }
@@ -1357,7 +1359,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         final JvmTypeReference expectedType = this.findExpectedType(value);
         EList<Object> _values = ((JvmCustomAnnotationValue)value).getValues();
         Iterable<XExpression> _filter = Iterables.<XExpression>filter(_values, XExpression.class);
-        final Function1<XExpression,Object> _function = new Function1<XExpression,Object>() {
+        final Function1<XExpression, Object> _function = new Function1<XExpression, Object>() {
           public Object apply(final XExpression it) {
             return CompilationUnitImpl.this.evaluate(it, expectedType);
           }
@@ -1370,7 +1372,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (value instanceof JvmTypeAnnotationValue) {
         _matched=true;
         EList<JvmTypeReference> _values = ((JvmTypeAnnotationValue)value).getValues();
-        final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
+        final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
           public TypeReference apply(final JvmTypeReference it) {
             return CompilationUnitImpl.this.toTypeReference(it);
           }
@@ -1383,7 +1385,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (value instanceof JvmAnnotationAnnotationValue) {
         _matched=true;
         EList<JvmAnnotationReference> _values = ((JvmAnnotationAnnotationValue)value).getValues();
-        final Function1<JvmAnnotationReference,AnnotationReference> _function = new Function1<JvmAnnotationReference,AnnotationReference>() {
+        final Function1<JvmAnnotationReference, AnnotationReference> _function = new Function1<JvmAnnotationReference, AnnotationReference>() {
           public AnnotationReference apply(final JvmAnnotationReference it) {
             return CompilationUnitImpl.this.toAnnotationReference(it);
           }
@@ -1438,7 +1440,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (value instanceof JvmEnumAnnotationValue) {
         _matched=true;
         EList<JvmEnumerationLiteral> _values = ((JvmEnumAnnotationValue)value).getValues();
-        final Function1<JvmEnumerationLiteral,NamedElement> _function = new Function1<JvmEnumerationLiteral,NamedElement>() {
+        final Function1<JvmEnumerationLiteral, NamedElement> _function = new Function1<JvmEnumerationLiteral, NamedElement>() {
           public NamedElement apply(final JvmEnumerationLiteral it) {
             return CompilationUnitImpl.this.toNamedElement(it);
           }
@@ -1472,7 +1474,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
       _switchResult = Pair.<List<?>, Class<?>>of(_emptyList, Object.class);
     }
-    final Pair<List<?>,Class<?>> result = _switchResult;
+    final Pair<List<?>, Class<?>> result = _switchResult;
     if (isArray) {
       List<?> _key = result.getKey();
       Class<?> _value = result.getValue();
@@ -1533,49 +1535,49 @@ public class CompilationUnitImpl implements CompilationUnit {
     Object _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(componentType,int.class)) {
+      if (Objects.equal(componentType, int.class)) {
         _matched=true;
         _switchResult = Ints.toArray(((List<Integer>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType,long.class)) {
+      if (Objects.equal(componentType, long.class)) {
         _matched=true;
         _switchResult = Longs.toArray(((List<Long>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType,char.class)) {
+      if (Objects.equal(componentType, char.class)) {
         _matched=true;
         _switchResult = Chars.toArray(((List<Character>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType,boolean.class)) {
+      if (Objects.equal(componentType, boolean.class)) {
         _matched=true;
         _switchResult = Booleans.toArray(((List<Boolean>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType,byte.class)) {
+      if (Objects.equal(componentType, byte.class)) {
         _matched=true;
         _switchResult = Bytes.toArray(((List<Byte>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType,short.class)) {
+      if (Objects.equal(componentType, short.class)) {
         _matched=true;
         _switchResult = Shorts.toArray(((List<Short>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType,float.class)) {
+      if (Objects.equal(componentType, float.class)) {
         _matched=true;
         _switchResult = Floats.toArray(((List<Float>) collection));
       }
     }
     if (!_matched) {
-      if (Objects.equal(componentType,double.class)) {
+      if (Objects.equal(componentType, double.class)) {
         _matched=true;
         _switchResult = Doubles.toArray(((List<Double>) collection));
       }

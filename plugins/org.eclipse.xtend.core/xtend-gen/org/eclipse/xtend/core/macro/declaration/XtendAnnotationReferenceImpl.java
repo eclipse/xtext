@@ -115,7 +115,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     XAnnotation _delegate_2 = this.getDelegate();
     EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_2.getElementValuePairs();
-    final Function1<XAnnotationElementValuePair,Boolean> _function = new Function1<XAnnotationElementValuePair,Boolean>() {
+    final Function1<XAnnotationElementValuePair, Boolean> _function = new Function1<XAnnotationElementValuePair, Boolean>() {
       public Boolean apply(final XAnnotationElementValuePair it) {
         JvmOperation _element = it.getElement();
         String _simpleName = _element.getSimpleName();
@@ -155,7 +155,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     }
     XAnnotation _delegate_2 = this.getDelegate();
     EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_2.getElementValuePairs();
-    final Function1<XAnnotationElementValuePair,Boolean> _function = new Function1<XAnnotationElementValuePair,Boolean>() {
+    final Function1<XAnnotationElementValuePair, Boolean> _function = new Function1<XAnnotationElementValuePair, Boolean>() {
       public Boolean apply(final XAnnotationElementValuePair it) {
         JvmOperation _element = it.getElement();
         String _simpleName = _element.getSimpleName();

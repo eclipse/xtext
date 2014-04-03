@@ -46,7 +46,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
       _or = true;
     } else {
       EList<JvmTypeReference> _references = it.getReferences();
-      final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
+      final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
         public Boolean apply(final JvmTypeReference it) {
           return BrokenTypeRefDetector.this.visit(it);
         }
@@ -64,7 +64,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
       _or = true;
     } else {
       EList<JvmTypeReference> _arguments = it.getArguments();
-      final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
+      final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
         public Boolean apply(final JvmTypeReference it) {
           return BrokenTypeRefDetector.this.visit(it);
         }
@@ -77,7 +77,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
   
   public Boolean doVisitWildcardTypeReference(final JvmWildcardTypeReference it) {
     EList<JvmTypeConstraint> _constraints = it.getConstraints();
-    final Function1<JvmTypeConstraint,Boolean> _function = new Function1<JvmTypeConstraint,Boolean>() {
+    final Function1<JvmTypeConstraint, Boolean> _function = new Function1<JvmTypeConstraint, Boolean>() {
       public Boolean apply(final JvmTypeConstraint it) {
         JvmTypeReference _typeReference = it.getTypeReference();
         return BrokenTypeRefDetector.this.visit(_typeReference);

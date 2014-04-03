@@ -25,7 +25,7 @@ public abstract class AbstractOldAPIFeatureCallTypeTest extends AbstractFeatureC
   public void resolvesFeatureCallsTo(final String expression, final String... types) {
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
     final List<XAbstractFeatureCall> featureCalls = this.findFeatureCalls(expressionWithQualifiedNames);
-    final Procedure2<XAbstractFeatureCall,Integer> _function = new Procedure2<XAbstractFeatureCall,Integer>() {
+    final Procedure2<XAbstractFeatureCall, Integer> _function = new Procedure2<XAbstractFeatureCall, Integer>() {
       public void apply(final XAbstractFeatureCall featureCall, final Integer index) {
         ITypeProvider _typeProvider = AbstractOldAPIFeatureCallTypeTest.this.getTypeProvider();
         final JvmTypeReference type = _typeProvider.getType(featureCall);

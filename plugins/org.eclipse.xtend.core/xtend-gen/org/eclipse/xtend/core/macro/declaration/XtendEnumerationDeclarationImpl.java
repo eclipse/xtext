@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class XtendEnumerationDeclarationImpl extends XtendTypeDeclarationImpl<XtendEnum> implements EnumerationTypeDeclaration {
   public EnumerationValueDeclaration findDeclaredValue(final String name) {
     Iterable<? extends EnumerationValueDeclaration> _declaredValues = this.getDeclaredValues();
-    final Function1<EnumerationValueDeclaration,Boolean> _function = new Function1<EnumerationValueDeclaration,Boolean>() {
+    final Function1<EnumerationValueDeclaration, Boolean> _function = new Function1<EnumerationValueDeclaration, Boolean>() {
       public Boolean apply(final EnumerationValueDeclaration value) {
         String _simpleName = value.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));

@@ -29,7 +29,7 @@ class UnicodeTerminalsGenerator {
     _builder.append("terminal fragment IDENTIFIER_START:");
     _builder.newLine();
     _builder.append("\t");
-    final Function1<Integer,Boolean> _function = new Function1<Integer,Boolean>() {
+    final Function1<Integer, Boolean> _function = new Function1<Integer, Boolean>() {
       public Boolean apply(final Integer it) {
         return Boolean.valueOf(Character.isJavaIdentifierStart((it).intValue()));
       }
@@ -51,7 +51,7 @@ class UnicodeTerminalsGenerator {
     _builder.append("terminal fragment IDENTIFIER_PART_IMPL:");
     _builder.newLine();
     _builder.append("\t");
-    final Function1<Integer,Boolean> _function_1 = new Function1<Integer,Boolean>() {
+    final Function1<Integer, Boolean> _function_1 = new Function1<Integer, Boolean>() {
       public Boolean apply(final Integer it) {
         boolean _and = false;
         boolean _isJavaIdentifierPart = Character.isJavaIdentifierPart((it).intValue());
@@ -73,7 +73,7 @@ class UnicodeTerminalsGenerator {
     return _builder;
   }
   
-  public static StringWriter generateUnicodeRules(final Function1<? super Integer,? extends Boolean> guard) {
+  public static StringWriter generateUnicodeRules(final Function1<? super Integer, ? extends Boolean> guard) {
     Character prev = null;
     boolean run = false;
     boolean first = true;

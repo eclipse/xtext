@@ -52,7 +52,7 @@ public class HiddenLeafs {
   
   public int getLenght() {
     List<LeafInfo> _leafs = this.getLeafs();
-    final Function2<Integer,LeafInfo,Integer> _function = new Function2<Integer,LeafInfo,Integer>() {
+    final Function2<Integer, LeafInfo, Integer> _function = new Function2<Integer, LeafInfo, Integer>() {
       public Integer apply(final Integer x, final LeafInfo i) {
         ILeafNode _node = i.getNode();
         int _length = 0;
@@ -67,7 +67,7 @@ public class HiddenLeafs {
   
   public int getNewLines() {
     List<LeafInfo> _leafs = this.getLeafs();
-    final Function2<Integer,LeafInfo,Integer> _function = new Function2<Integer,LeafInfo,Integer>() {
+    final Function2<Integer, LeafInfo, Integer> _function = new Function2<Integer, LeafInfo, Integer>() {
       public Integer apply(final Integer x, final LeafInfo i) {
         int _newLines = i.getNewLines();
         return Integer.valueOf(((x).intValue() + _newLines));
@@ -79,7 +79,7 @@ public class HiddenLeafs {
   public int getNewLinesInComments() {
     List<LeafInfo> _leafs = this.getLeafs();
     Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(_leafs, CommentInfo.class);
-    final Function2<Integer,CommentInfo,Integer> _function = new Function2<Integer,CommentInfo,Integer>() {
+    final Function2<Integer, CommentInfo, Integer> _function = new Function2<Integer, CommentInfo, Integer>() {
       public Integer apply(final Integer x, final CommentInfo i) {
         int _newLines = i.getNewLines();
         return Integer.valueOf(((x).intValue() + _newLines));

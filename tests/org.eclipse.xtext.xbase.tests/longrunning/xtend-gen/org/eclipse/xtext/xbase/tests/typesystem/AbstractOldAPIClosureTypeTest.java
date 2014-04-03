@@ -28,7 +28,7 @@ public abstract class AbstractOldAPIClosureTypeTest extends AbstractClosureTypeT
   public List<Object> resolvesClosuresTo(final String expression, final String... types) {
     final List<XClosure> closures = this.findClosures(expression);
     final ArrayList<Object> result = CollectionLiterals.<Object>newArrayList();
-    final Procedure2<XClosure,Integer> _function = new Procedure2<XClosure,Integer>() {
+    final Procedure2<XClosure, Integer> _function = new Procedure2<XClosure, Integer>() {
       public void apply(final XClosure closure, final Integer index) {
         ITypeProvider _typeProvider = AbstractOldAPIClosureTypeTest.this.getTypeProvider();
         final JvmTypeReference closureType = _typeProvider.getType(closure);
@@ -52,7 +52,7 @@ public abstract class AbstractOldAPIClosureTypeTest extends AbstractClosureTypeT
   }
   
   public void withEquivalents(final List<Object> references, final String... types) {
-    final Procedure2<Object,Integer> _function = new Procedure2<Object,Integer>() {
+    final Procedure2<Object, Integer> _function = new Procedure2<Object, Integer>() {
       public void apply(final Object reference, final Integer index) {
         Assert.assertTrue((reference instanceof XFunctionTypeRef));
         Object _get = types[(index).intValue()];

@@ -544,7 +544,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       IPath _fullPath = file.getFullPath();
       String _plus = ((("Expected an error marker containing \'" + msgPart) + "\' on ") + _fullPath);
       String _plus_1 = (_plus + " but found ");
-      final Function1<IMarker,String> _function = new Function1<IMarker,String>() {
+      final Function1<IMarker, String> _function = new Function1<IMarker, String>() {
         public String apply(final IMarker it) {
           return MarkerUtilities.getMessage(it);
         }

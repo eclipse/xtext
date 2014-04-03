@@ -10,12 +10,12 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class Case_3 {
   public void testReturnExpression_06() {
-    final Function1<Integer,Integer> _function = new Function1<Integer,Integer>() {
+    final Function1<Integer, Integer> _function = new Function1<Integer, Integer>() {
       public Integer apply(final Integer i) {
         return i;
       }
     };
-    final Function1<? super Integer,? extends Integer> closure = _function;
+    final Function1<? super Integer, ? extends Integer> closure = _function;
     IntegerRange _upTo = new IntegerRange(1, 100);
     for (final Integer x : _upTo) {
       closure.apply(x);
@@ -25,12 +25,12 @@ public class Case_3 {
   public void testReturnExpression_07() {
     boolean _notEquals = (!Objects.equal(Case_3.class, null));
     if (_notEquals) {
-      final Function1<Integer,Integer> _function = new Function1<Integer,Integer>() {
+      final Function1<Integer, Integer> _function = new Function1<Integer, Integer>() {
         public Integer apply(final Integer i) {
           return (i).intValue();
         }
       };
-      final Function1<? super Integer,? extends Integer> closure = _function;
+      final Function1<? super Integer, ? extends Integer> closure = _function;
       IntegerRange _upTo = new IntegerRange(1, 100);
       for (final Integer x : _upTo) {
         closure.apply(x);

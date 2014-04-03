@@ -71,7 +71,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
         final InMemoryFileSystemAccess fsa = new InMemoryFileSystemAccess();
         Resource _eResource = parse.eResource();
         this.generator.doGenerate(_eResource, fsa);
-        Map<String,CharSequence> _files = fsa.getFiles();
+        Map<String, CharSequence> _files = fsa.getFiles();
         Collection<CharSequence> _values = _files.values();
         Iterator<CharSequence> _iterator = _values.iterator();
         final CharSequence concatenation = _iterator.next();

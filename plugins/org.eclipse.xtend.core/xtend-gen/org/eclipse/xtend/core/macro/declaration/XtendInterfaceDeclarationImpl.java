@@ -25,7 +25,7 @@ public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<Xten
   public Iterable<? extends TypeReference> getExtendedInterfaces() {
     XtendInterface _delegate = this.getDelegate();
     EList<JvmTypeReference> _extends = _delegate.getExtends();
-    final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
+    final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
       public TypeReference apply(final JvmTypeReference it) {
         CompilationUnitImpl _compilationUnit = XtendInterfaceDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toTypeReference(it);
@@ -37,7 +37,7 @@ public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<Xten
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     XtendInterface _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
-    final Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl>() {
+    final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl>() {
       public XtendTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
         CompilationUnitImpl _compilationUnit = XtendInterfaceDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toXtendTypeParameterDeclaration(it);

@@ -73,7 +73,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   public Iterable<? extends MemberDeclaration> getDeclaredMembers() {
     T _delegate = this.getDelegate();
     EList<XtendMember> _members = _delegate.getMembers();
-    final Function1<XtendMember,MemberDeclaration> _function = new Function1<XtendMember,MemberDeclaration>() {
+    final Function1<XtendMember, MemberDeclaration> _function = new Function1<XtendMember, MemberDeclaration>() {
       public MemberDeclaration apply(final XtendMember it) {
         CompilationUnitImpl _compilationUnit = XtendTypeDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toXtendMemberDeclaration(it);
@@ -98,10 +98,10 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   
   public ConstructorDeclaration findDeclaredConstructor(final TypeReference... parameterTypes) {
     Iterable<? extends ConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
-    final Function1<ConstructorDeclaration,Boolean> _function = new Function1<ConstructorDeclaration,Boolean>() {
+    final Function1<ConstructorDeclaration, Boolean> _function = new Function1<ConstructorDeclaration, Boolean>() {
       public Boolean apply(final ConstructorDeclaration constructor) {
         Iterable<? extends ParameterDeclaration> _parameters = constructor.getParameters();
-        final Function1<ParameterDeclaration,TypeReference> _function = new Function1<ParameterDeclaration,TypeReference>() {
+        final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
           public TypeReference apply(final ParameterDeclaration it) {
             return it.getType();
           }
@@ -117,7 +117,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   
   public FieldDeclaration findDeclaredField(final String name) {
     Iterable<? extends FieldDeclaration> _declaredFields = this.getDeclaredFields();
-    final Function1<FieldDeclaration,Boolean> _function = new Function1<FieldDeclaration,Boolean>() {
+    final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
       public Boolean apply(final FieldDeclaration field) {
         String _simpleName = field.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -128,7 +128,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     Iterable<? extends MethodDeclaration> _declaredMethods = this.getDeclaredMethods();
-    final Function1<MethodDeclaration,Boolean> _function = new Function1<MethodDeclaration,Boolean>() {
+    final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
       public Boolean apply(final MethodDeclaration method) {
         boolean _and = false;
         String _simpleName = method.getSimpleName();
@@ -137,7 +137,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
           _and = false;
         } else {
           Iterable<? extends ParameterDeclaration> _parameters = method.getParameters();
-          final Function1<ParameterDeclaration,TypeReference> _function = new Function1<ParameterDeclaration,TypeReference>() {
+          final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
             public TypeReference apply(final ParameterDeclaration it) {
               return it.getType();
             }

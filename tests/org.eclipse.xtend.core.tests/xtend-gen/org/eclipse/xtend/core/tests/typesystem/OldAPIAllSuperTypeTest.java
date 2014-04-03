@@ -41,7 +41,7 @@ public class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
   @Inject
   private SuperTypeCollector superTypeCollector;
   
-  public void assertSuperTypes(final Pair<String,String> type, final String... superTypes) {
+  public void assertSuperTypes(final Pair<String, String> type, final String... superTypes) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");
@@ -69,7 +69,7 @@ public class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
       final JvmTypeReference subtype = _head.getParameterType();
       final Set<JvmTypeReference> computedSuperTypes = this.superTypeCollector.collectSuperTypes(subtype);
       final Set<String> expectedSupertypesAsSet = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(superTypes)));
-      final Function1<JvmTypeReference,String> _function = new Function1<JvmTypeReference,String>() {
+      final Function1<JvmTypeReference, String> _function = new Function1<JvmTypeReference, String>() {
         public String apply(final JvmTypeReference it) {
           return it.getSimpleName();
         }

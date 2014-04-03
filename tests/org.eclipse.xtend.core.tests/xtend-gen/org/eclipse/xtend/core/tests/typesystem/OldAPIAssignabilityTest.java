@@ -44,7 +44,7 @@ public class OldAPIAssignabilityTest extends AssignabilityTest {
   @Inject
   private TypeConformanceComputer conformanceComputer;
   
-  public void isAssignableFrom(final Pair<String,String> lhsAndParams, final String rhs, final boolean expectation) {
+  public void isAssignableFrom(final Pair<String, String> lhsAndParams, final String rhs, final boolean expectation) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");

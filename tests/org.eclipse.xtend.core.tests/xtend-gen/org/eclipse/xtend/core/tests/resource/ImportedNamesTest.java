@@ -92,7 +92,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       Resource _eResource = file.eResource();
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       Iterable<QualifiedName> _importedNames = description.getImportedNames();
-      final Function1<QualifiedName,Boolean> _function = new Function1<QualifiedName,Boolean>() {
+      final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
         public Boolean apply(final QualifiedName it) {
           String _lastSegment = it.getLastSegment();
           return Boolean.valueOf(ImportedNamesTest.this.primitives.contains(_lastSegment));
@@ -124,7 +124,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       Resource _eResource = file.eResource();
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
-      final Function1<QualifiedName,Boolean> _function = new Function1<QualifiedName,Boolean>() {
+      final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
         public Boolean apply(final QualifiedName it) {
           String _lastSegment = it.getLastSegment();
           return Boolean.valueOf(_lastSegment.equals("collection"));

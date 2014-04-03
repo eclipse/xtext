@@ -100,7 +100,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append(" grammarAccess;");
       _builder.newLineIfNotEmpty();
       {
-        List<Pair<String,GrammarAlias.AbstractElementAlias>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
+        List<Pair<String, GrammarAlias.AbstractElementAlias>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
         for(final Pair<String, GrammarAlias.AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
           _builder.append("\t");
           _builder.append("protected ");
@@ -129,7 +129,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append(") access;");
       _builder.newLineIfNotEmpty();
       {
-        List<Pair<String,GrammarAlias.AbstractElementAlias>> _allAmbiguousTransitionsBySyntax_1 = this.util.getAllAmbiguousTransitionsBySyntax();
+        List<Pair<String, GrammarAlias.AbstractElementAlias>> _allAmbiguousTransitionsBySyntax_1 = this.util.getAllAmbiguousTransitionsBySyntax();
         for(final Pair<String, GrammarAlias.AbstractElementAlias> group_1 : _allAmbiguousTransitionsBySyntax_1) {
           _builder.append("\t\t");
           _builder.append("match_");
@@ -177,7 +177,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        List<Pair<String,GrammarAlias.AbstractElementAlias>> _allAmbiguousTransitionsBySyntax_2 = this.util.getAllAmbiguousTransitionsBySyntax();
+        List<Pair<String, GrammarAlias.AbstractElementAlias>> _allAmbiguousTransitionsBySyntax_2 = this.util.getAllAmbiguousTransitionsBySyntax();
         for(final Pair<String, GrammarAlias.AbstractElementAlias> group_2 : _allAmbiguousTransitionsBySyntax_2) {
           _builder.append("\t");
           _builder.append("/**");
@@ -229,16 +229,16 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     List<AbstractRule> _xblockexpression = null;
     {
       List<AbstractRule> _allRules = GrammarUtil.allRules(this.grammar);
-      final Function1<AbstractRule,Boolean> _function = new Function1<AbstractRule,Boolean>() {
+      final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
         public Boolean apply(final AbstractRule it) {
           return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
         }
       };
       final Iterable<AbstractRule> rules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
-      final Function1<AbstractRule,Iterable<RuleCall>> _function_1 = new Function1<AbstractRule,Iterable<RuleCall>>() {
+      final Function1<AbstractRule, Iterable<RuleCall>> _function_1 = new Function1<AbstractRule, Iterable<RuleCall>>() {
         public Iterable<RuleCall> apply(final AbstractRule r) {
           List<RuleCall> _containedRuleCalls = GrammarUtil.containedRuleCalls(r);
-          final Function1<RuleCall,Boolean> _function = new Function1<RuleCall,Boolean>() {
+          final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
             public Boolean apply(final RuleCall e) {
               return Boolean.valueOf(AbstractSyntacticSequencer.this.isUnassignedRuleCall(e));
             }
@@ -248,14 +248,14 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       };
       Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(rules, _function_1);
       final Iterable<RuleCall> calls = Iterables.<RuleCall>concat(_map);
-      final Function1<RuleCall,AbstractRule> _function_2 = new Function1<RuleCall,AbstractRule>() {
+      final Function1<RuleCall, AbstractRule> _function_2 = new Function1<RuleCall, AbstractRule>() {
         public AbstractRule apply(final RuleCall it) {
           return it.getRule();
         }
       };
       Iterable<AbstractRule> _map_1 = IterableExtensions.<RuleCall, AbstractRule>map(calls, _function_2);
       Set<AbstractRule> _set = IterableExtensions.<AbstractRule>toSet(_map_1);
-      final Function1<AbstractRule,String> _function_3 = new Function1<AbstractRule,String>() {
+      final Function1<AbstractRule, String> _function_3 = new Function1<AbstractRule, String>() {
         public String apply(final AbstractRule it) {
           return it.getName();
         }
@@ -325,7 +325,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       if (ele instanceof Group) {
         _matched=true;
         EList<AbstractElement> _elements = ((Group)ele).getElements();
-        final Function1<AbstractElement,String> _function = new Function1<AbstractElement,String>() {
+        final Function1<AbstractElement, String> _function = new Function1<AbstractElement, String>() {
           public String apply(final AbstractElement e) {
             return AbstractSyntacticSequencer.this.defaultValue(e, visited);
           }
@@ -423,7 +423,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       if (node instanceof ICompositeNode) {
         _matched=true;
         BidiIterable<INode> _children = ((ICompositeNode)node).getChildren();
-        final Function1<INode,String> _function = new Function1<INode,String>() {
+        final Function1<INode, String> _function = new Function1<INode, String>() {
           public String apply(final INode it) {
             return AbstractSyntacticSequencer.this.textWithoutComments(it);
           }
@@ -500,7 +500,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     int i = 0;
     _builder.newLineIfNotEmpty();
     {
-      List<Pair<String,GrammarAlias.AbstractElementAlias>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
+      List<Pair<String, GrammarAlias.AbstractElementAlias>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
       for(final Pair<String, GrammarAlias.AbstractElementAlias> group : _allAmbiguousTransitionsBySyntax) {
         _builder.append("\t\t");
         {

@@ -60,7 +60,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     try {
       final XExpression xExpression = this.expression(expression, false);
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
-      final Function1<EObject,EObject> _function = new Function1<EObject,EObject>() {
+      final Function1<EObject, EObject> _function = new Function1<EObject, EObject>() {
         public EObject apply(final EObject it) {
           EObject _switchResult = null;
           boolean _matched = false;
@@ -78,7 +78,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
       };
       Iterator<EObject> _map = IteratorExtensions.<EObject, EObject>map(_eAll, _function);
       Set<EObject> _set = IteratorExtensions.<EObject>toSet(_map);
-      final Function1<EObject,Boolean> _function_1 = new Function1<EObject,Boolean>() {
+      final Function1<EObject, Boolean> _function_1 = new Function1<EObject, Boolean>() {
         public Boolean apply(final EObject it) {
           boolean _and = false;
           boolean _notEquals = (!Objects.equal(it, null));
@@ -120,7 +120,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
       Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_set, _function_1);
       Iterable<JvmIdentifiableElement> _filter_1 = Iterables.<JvmIdentifiableElement>filter(_filter, JvmIdentifiableElement.class);
       final List<JvmIdentifiableElement> identifiables = IterableExtensions.<JvmIdentifiableElement>toList(_filter_1);
-      final Function1<JvmIdentifiableElement,Integer> _function_2 = new Function1<JvmIdentifiableElement,Integer>() {
+      final Function1<JvmIdentifiableElement, Integer> _function_2 = new Function1<JvmIdentifiableElement, Integer>() {
         public Integer apply(final JvmIdentifiableElement it) {
           int _xblockexpression = (int) 0;
           {

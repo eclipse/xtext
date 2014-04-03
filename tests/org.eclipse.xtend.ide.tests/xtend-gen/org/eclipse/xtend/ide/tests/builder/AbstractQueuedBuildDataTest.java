@@ -106,7 +106,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
         HashSet<String> _exportedNames = this.getExportedNames(deltas);
         for (final String exportedName : _exportedNames) {
           {
-            final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
+            final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
               public Boolean apply(final String it) {
                 return Boolean.valueOf(Objects.equal(exportedName, it));
               }
@@ -158,7 +158,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
   }
   
   public HashSet<String> getExportedNames(final Collection<? extends IResourceDescription.Delta> deltas) {
-    final Function1<IResourceDescription.Delta,HashSet<String>> _function = new Function1<IResourceDescription.Delta,HashSet<String>>() {
+    final Function1<IResourceDescription.Delta, HashSet<String>> _function = new Function1<IResourceDescription.Delta, HashSet<String>>() {
       public HashSet<String> apply(final IResourceDescription.Delta it) {
         HashSet<String> _xblockexpression = null;
         {
@@ -204,7 +204,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
       }
     };
     Iterable<HashSet<String>> _map = IterableExtensions.map(deltas, _function);
-    final Function2<HashSet<String>,HashSet<String>,HashSet<String>> _function_1 = new Function2<HashSet<String>,HashSet<String>,HashSet<String>>() {
+    final Function2<HashSet<String>, HashSet<String>, HashSet<String>> _function_1 = new Function2<HashSet<String>, HashSet<String>, HashSet<String>>() {
       public HashSet<String> apply(final HashSet<String> t, final HashSet<String> t2) {
         HashSet<String> _xblockexpression = null;
         {

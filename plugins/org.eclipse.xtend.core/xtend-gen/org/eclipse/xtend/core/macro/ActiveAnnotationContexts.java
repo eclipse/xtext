@@ -21,9 +21,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class ActiveAnnotationContexts extends AdapterImpl {
-  private final Map<JvmAnnotationType,ActiveAnnotationContext> _contexts = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newLinkedHashMap();
+  private final Map<JvmAnnotationType, ActiveAnnotationContext> _contexts = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newLinkedHashMap();
   
-  public Map<JvmAnnotationType,ActiveAnnotationContext> getContexts() {
+  public Map<JvmAnnotationType, ActiveAnnotationContext> getContexts() {
     return this._contexts;
   }
   
@@ -33,7 +33,7 @@ public class ActiveAnnotationContexts extends AdapterImpl {
     ActiveAnnotationContexts result = IterableExtensions.<ActiveAnnotationContexts>head(_filter);
     boolean _notEquals = (!Objects.equal(result, null));
     if (_notEquals) {
-      Map<JvmAnnotationType,ActiveAnnotationContext> _contexts = result.getContexts();
+      Map<JvmAnnotationType, ActiveAnnotationContext> _contexts = result.getContexts();
       _contexts.clear();
     } else {
       ActiveAnnotationContexts _activeAnnotationContexts = new ActiveAnnotationContexts();

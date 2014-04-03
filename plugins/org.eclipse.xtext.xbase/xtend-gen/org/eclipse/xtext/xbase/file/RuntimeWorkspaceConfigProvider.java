@@ -56,7 +56,7 @@ public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig>
         public void apply(final WorkspaceConfig it) {
           File _workspaceRoot = RuntimeWorkspaceConfigProvider.this.getWorkspaceRoot();
           File[] _listFiles = _workspaceRoot.listFiles();
-          final Function1<File,Boolean> _function = new Function1<File,Boolean>() {
+          final Function1<File, Boolean> _function = new Function1<File, Boolean>() {
             public Boolean apply(final File it) {
               return Boolean.valueOf(it.isDirectory());
             }

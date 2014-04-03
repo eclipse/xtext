@@ -25,7 +25,7 @@ public abstract class AbstractOldAPIConstructorCallTypeTest extends AbstractCons
   public void resolvesConstructorCallsTo(final String expression, final String... types) {
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
     final List<XConstructorCall> featureCalls = this.findConstructorCalls(expressionWithQualifiedNames);
-    final Procedure2<XConstructorCall,Integer> _function = new Procedure2<XConstructorCall,Integer>() {
+    final Procedure2<XConstructorCall, Integer> _function = new Procedure2<XConstructorCall, Integer>() {
       public void apply(final XConstructorCall featureCall, final Integer index) {
         ITypeProvider _typeProvider = AbstractOldAPIConstructorCallTypeTest.this.getTypeProvider();
         final JvmTypeReference type = _typeProvider.getType(featureCall);

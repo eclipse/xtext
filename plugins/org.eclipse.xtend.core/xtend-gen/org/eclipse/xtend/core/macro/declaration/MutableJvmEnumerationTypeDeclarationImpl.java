@@ -112,7 +112,7 @@ public class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationType
   
   public MutableEnumerationValueDeclaration findDeclaredValue(final String name) {
     Iterable<? extends MutableEnumerationValueDeclaration> _declaredValues = this.getDeclaredValues();
-    final Function1<MutableEnumerationValueDeclaration,Boolean> _function = new Function1<MutableEnumerationValueDeclaration,Boolean>() {
+    final Function1<MutableEnumerationValueDeclaration, Boolean> _function = new Function1<MutableEnumerationValueDeclaration, Boolean>() {
       public Boolean apply(final MutableEnumerationValueDeclaration value) {
         String _simpleName = value.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));

@@ -40,7 +40,7 @@ public class PublicResolvedTypes extends RootResolvedTypes {
     return super.getHints(handle);
   }
   
-  public Map<XExpression,List<TypeData>> basicGetExpressionTypes() {
+  public Map<XExpression, List<TypeData>> basicGetExpressionTypes() {
     return super.basicGetExpressionTypes();
   }
 }

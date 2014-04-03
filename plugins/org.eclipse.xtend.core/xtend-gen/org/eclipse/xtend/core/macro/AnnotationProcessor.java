@@ -71,7 +71,7 @@ public class AnnotationProcessor {
               final Runnable _function = new Runnable() {
                 public void run() {
                   List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-                  final Function1<XtendAnnotationTarget,MemberDeclaration> _function = new Function1<XtendAnnotationTarget,MemberDeclaration>() {
+                  final Function1<XtendAnnotationTarget, MemberDeclaration> _function = new Function1<XtendAnnotationTarget, MemberDeclaration>() {
                     public MemberDeclaration apply(final XtendAnnotationTarget it) {
                       CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
                       return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
@@ -117,7 +117,7 @@ public class AnnotationProcessor {
               final Runnable _function = new Runnable() {
                 public void run() {
                   List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-                  final Function1<XtendAnnotationTarget,MutableNamedElement> _function = new Function1<XtendAnnotationTarget,MutableNamedElement>() {
+                  final Function1<XtendAnnotationTarget, MutableNamedElement> _function = new Function1<XtendAnnotationTarget, MutableNamedElement>() {
                     public MutableNamedElement apply(final XtendAnnotationTarget it) {
                       Declaration _switchResult = null;
                       boolean _matched = false;

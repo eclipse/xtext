@@ -34,7 +34,7 @@ public class SiteSpexCreator implements IProjectFactoryContributor {
     _builder.newLine();
     {
       List<IFile> _testLaunchers = this.projectInfo.getTestLaunchers();
-      final Function1<IFile,IProject> _function = new Function1<IFile,IProject>() {
+      final Function1<IFile, IProject> _function = new Function1<IFile, IProject>() {
         public IProject apply(final IFile it) {
           return it.getProject();
         }

@@ -56,8 +56,8 @@ public class ConstantOperators {
   }
   
   public static void main(final String[] args) {
-    Map<String,String> _xsetliteral = null;
-    Map<String,String> _tempMap = Maps.<String, String>newHashMap();
+    Map<String, String> _xsetliteral = null;
+    Map<String, String> _tempMap = Maps.<String, String>newHashMap();
     _tempMap.put("Integer", "intValue()");
     _tempMap.put("Short", "shortValue()");
     _tempMap.put("Long", "longValue()");
@@ -65,9 +65,9 @@ public class ConstantOperators {
     _tempMap.put("Double", "doubleValue()");
     _tempMap.put("Byte", "byteValue()");
     _xsetliteral = Collections.<String, String>unmodifiableMap(_tempMap);
-    final Map<String,String> types = _xsetliteral;
-    Map<String,String> _xsetliteral_1 = null;
-    Map<String,String> _tempMap_1 = Maps.<String, String>newHashMap();
+    final Map<String, String> types = _xsetliteral;
+    Map<String, String> _xsetliteral_1 = null;
+    Map<String, String> _tempMap_1 = Maps.<String, String>newHashMap();
     _tempMap_1.put("plus", "+");
     _tempMap_1.put("minus", "-");
     _tempMap_1.put("divide", "/");
@@ -80,10 +80,10 @@ public class ConstantOperators {
     _tempMap_1.put("same", "===");
     _tempMap_1.put("notSame", "!==");
     _xsetliteral_1 = Collections.<String, String>unmodifiableMap(_tempMap_1);
-    final Map<String,String> operators = _xsetliteral_1;
+    final Map<String, String> operators = _xsetliteral_1;
     final Set<String> booleanOps = Collections.<String>unmodifiableSet(Sets.<String>newHashSet("<", "<=", ">", ">=", "===", "!=="));
-    Set<Map.Entry<String,String>> _entrySet = operators.entrySet();
-    for (final Map.Entry<String,String> op : _entrySet) {
+    Set<Map.Entry<String, String>> _entrySet = operators.entrySet();
+    for (final Map.Entry<String, String> op : _entrySet) {
       {
         String _xifexpression = null;
         String _value = op.getValue();

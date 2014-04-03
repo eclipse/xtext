@@ -130,7 +130,7 @@ public class TestBatchCompiler {
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String,ProjectConfig> _projects = config.getProjects();
+      Map<String, ProjectConfig> _projects = config.getProjects();
       Collection<ProjectConfig> _values = _projects.values();
       final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
       File _file_1 = new File(".");
@@ -140,12 +140,12 @@ public class TestBatchCompiler {
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals(projectPath, _string);
-      Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings.keySet();
       final Path src = IterableExtensions.<Path>head(_keySet);
       String _string_1 = src.toString();
       Assert.assertEquals((projectPath + "/batch-compiler-data/test data"), _string_1);
-      Map<Path,Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       final Path target = _sourceFolderMappings_1.get(src);
       String _string_2 = target.toString();
       Assert.assertEquals((projectPath + "/test-result"), _string_2);
@@ -172,18 +172,18 @@ public class TestBatchCompiler {
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String,ProjectConfig> _projects = config.getProjects();
+      Map<String, ProjectConfig> _projects = config.getProjects();
       Collection<ProjectConfig> _values = _projects.values();
       final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
-      Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
       int _size = _sourceFolderMappings.size();
       Assert.assertEquals(2, _size);
-      Map<Path,Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path,String> _function = new Function1<Path,String>() {
+      final Function1<Path, String> _function = new Function1<Path, String>() {
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -194,7 +194,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/bin", _string_1);
@@ -206,7 +206,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src-gen", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/bin", _string_1);
@@ -236,18 +236,18 @@ public class TestBatchCompiler {
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String,ProjectConfig> _projects = config.getProjects();
+      Map<String, ProjectConfig> _projects = config.getProjects();
       Collection<ProjectConfig> _values = _projects.values();
       final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
-      Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
       int _size = _sourceFolderMappings.size();
       Assert.assertEquals(2, _size);
-      Map<Path,Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path,String> _function = new Function1<Path,String>() {
+      final Function1<Path, String> _function = new Function1<Path, String>() {
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -258,7 +258,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/bin", _string_1);
@@ -270,7 +270,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src-gen", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/bin", _string_1);
@@ -300,18 +300,18 @@ public class TestBatchCompiler {
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String,ProjectConfig> _projects = config.getProjects();
+      Map<String, ProjectConfig> _projects = config.getProjects();
       Collection<ProjectConfig> _values = _projects.values();
       final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
-      Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
       int _size = _sourceFolderMappings.size();
       Assert.assertEquals(2, _size);
-      Map<Path,Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path,String> _function = new Function1<Path,String>() {
+      final Function1<Path, String> _function = new Function1<Path, String>() {
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -322,7 +322,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir1/src", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/dir2/bin", _string_1);
@@ -334,7 +334,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src-gen", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/dir2/bin", _string_1);
@@ -364,18 +364,18 @@ public class TestBatchCompiler {
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String,ProjectConfig> _projects = config.getProjects();
+      Map<String, ProjectConfig> _projects = config.getProjects();
       Collection<ProjectConfig> _values = _projects.values();
       final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
-      Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
       int _size = _sourceFolderMappings.size();
       Assert.assertEquals(2, _size);
-      Map<Path,Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path,String> _function = new Function1<Path,String>() {
+      final Function1<Path, String> _function = new Function1<Path, String>() {
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -386,7 +386,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/bin", _string_1);
@@ -398,7 +398,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir1/src-gen", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/bin", _string_1);
@@ -428,18 +428,18 @@ public class TestBatchCompiler {
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String,ProjectConfig> _projects = config.getProjects();
+      Map<String, ProjectConfig> _projects = config.getProjects();
       Collection<ProjectConfig> _values = _projects.values();
       final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
-      Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
       int _size = _sourceFolderMappings.size();
       Assert.assertEquals(2, _size);
-      Map<Path,Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path,String> _function = new Function1<Path,String>() {
+      final Function1<Path, String> _function = new Function1<Path, String>() {
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -450,7 +450,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir1/dir1a/src", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/dir2/dir2a/bin", _string_1);
@@ -462,7 +462,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir3/dir3a/src-gen", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/dir2/dir2a/bin", _string_1);
@@ -496,18 +496,18 @@ public class TestBatchCompiler {
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String,ProjectConfig> _projects = config.getProjects();
+      Map<String, ProjectConfig> _projects = config.getProjects();
       Collection<ProjectConfig> _values = _projects.values();
       final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
-      Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
       int _size = _sourceFolderMappings.size();
       Assert.assertEquals(4, _size);
-      Map<Path,Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path,String> _function = new Function1<Path,String>() {
+      final Function1<Path, String> _function = new Function1<Path, String>() {
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -518,7 +518,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir2/dir3/dir4/src1", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/dir2/dir3/dir4/dir5/bin", _string_1);
@@ -530,7 +530,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir2/dir3/src2", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/dir2/dir3/dir4/dir5/bin", _string_1);
@@ -542,7 +542,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir2/src3", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/dir2/dir3/dir4/dir5/bin", _string_1);
@@ -554,7 +554,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src4", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1/dir2/dir3/dir4/dir5/bin", _string_1);
@@ -578,18 +578,18 @@ public class TestBatchCompiler {
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String,ProjectConfig> _projects = config.getProjects();
+      Map<String, ProjectConfig> _projects = config.getProjects();
       Collection<ProjectConfig> _values = _projects.values();
       final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
-      Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
       int _size = _sourceFolderMappings.size();
       Assert.assertEquals(1, _size);
-      Map<Path,Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
+      Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
-      final Function1<Path,String> _function = new Function1<Path,String>() {
+      final Function1<Path, String> _function = new Function1<Path, String>() {
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -600,7 +600,7 @@ public class TestBatchCompiler {
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1", _string);
-          Map<Path,Path> _sourceFolderMappings = project.getSourceFolderMappings();
+          Map<Path, Path> _sourceFolderMappings = project.getSourceFolderMappings();
           Path _get = _sourceFolderMappings.get(it);
           String _string_1 = _get.toString();
           Assert.assertEquals("/prj1", _string_1);

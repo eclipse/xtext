@@ -180,7 +180,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/ConfigurableAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/ConfigurableAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -194,7 +194,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -286,7 +286,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/ConfigurableAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/ConfigurableAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -308,7 +308,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -408,7 +408,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/MoveValues.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/MoveValues.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -472,7 +472,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -612,7 +612,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/MoveValues.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/MoveValues.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -679,7 +679,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -897,7 +897,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -920,7 +920,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -1040,7 +1040,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -1080,7 +1080,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         final Procedure1<MutableTypeParameterDeclarator> _function = new Procedure1<MutableTypeParameterDeclarator>() {
@@ -1177,7 +1177,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -1206,7 +1206,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         final Procedure1<MutableTypeParameterDeclarator> _function = new Procedure1<MutableTypeParameterDeclarator>() {
@@ -1289,7 +1289,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -1318,7 +1318,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         final Procedure1<MutableTypeParameterDeclarator> _function = new Procedure1<MutableTypeParameterDeclarator>() {
@@ -1386,7 +1386,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/RemoveAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/RemoveAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -1403,7 +1403,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -1454,7 +1454,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/ChangeDocAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/ChangeDocAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -1471,7 +1471,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -1527,7 +1527,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AddConstructorAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AddConstructorAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -1536,7 +1536,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -1599,7 +1599,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AddConstructorAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AddConstructorAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -1608,7 +1608,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -1673,7 +1673,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AddConstructorAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AddConstructorAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -1682,7 +1682,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         it.getCompilationUnit();
@@ -1748,7 +1748,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/SwapAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/SwapAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -1775,7 +1775,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
       }
@@ -1830,7 +1830,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/SwapAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/SwapAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -1845,7 +1845,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
       }
@@ -1897,7 +1897,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AbstractAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AbstractAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -1910,7 +1910,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -1966,7 +1966,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AbstractAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AbstractAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -1981,7 +1981,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -1989,7 +1989,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
         Iterable<? extends MutableMethodDeclaration> _declaredMethods = clazz.getDeclaredMethods();
         MutableMethodDeclaration _head = IterableExtensions.head(_declaredMethods);
         Iterable<? extends MutableParameterDeclaration> _parameters = _head.getParameters();
-        final Function1<MutableParameterDeclaration,Boolean> _function = new Function1<MutableParameterDeclaration,Boolean>() {
+        final Function1<MutableParameterDeclaration, Boolean> _function = new Function1<MutableParameterDeclaration, Boolean>() {
           public Boolean apply(final MutableParameterDeclaration it) {
             String _simpleName = it.getSimpleName();
             return Boolean.valueOf(_simpleName.endsWith("foo"));
@@ -2093,7 +2093,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("annotations/MyAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("annotations/MyAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package application");
     _builder_1.newLine();
@@ -2114,7 +2114,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("application/MyAnnotation.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("application/MyAnnotation.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -2180,7 +2180,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AbstractAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AbstractAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -2201,7 +2201,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -2317,7 +2317,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationDefaultValues.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationDefaultValues.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -2328,7 +2328,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("class MyClass {}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -2445,7 +2445,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationDefaultValues.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationDefaultValues.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -2473,7 +2473,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("class MyClass {}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -2574,7 +2574,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AddAnnotationValue.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AddAnnotationValue.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -2583,7 +2583,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("class MyClass {}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -2678,7 +2678,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/SomeAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/SomeAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -2692,7 +2692,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -2707,7 +2707,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
   
   @Test
   public void testPropertyAnnotation() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/PropertyAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(typeof(PropertyProcessor))\n\t\t\t\tannotation Property2 { }\n\t\t\t\tclass PropertyProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tval declaringType = field.declaringType \n\t\t\t\t\t\t\tdeclaringType.addMethod(field.getterName) [\n\t\t\t\t\t\t\t\treturnType = field.type\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\treturn this.«field.simpleName»;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\tdeclaringType.addMethod(\'set\'+field.simpleName.toFirstUpper) [\n\t\t\t\t\t\t\t\taddParameter(field.simpleName, field.type)\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\tthis.«field.simpleName» = «field.simpleName»;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t\tdef private String getterName(MutableFieldDeclaration field) {\n\t\t\t\t\t\treturn \'get\'+field.simpleName.toFirstUpper\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/PropertyAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(typeof(PropertyProcessor))\n\t\t\t\tannotation Property2 { }\n\t\t\t\tclass PropertyProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tval declaringType = field.declaringType \n\t\t\t\t\t\t\tdeclaringType.addMethod(field.getterName) [\n\t\t\t\t\t\t\t\treturnType = field.type\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\treturn this.«field.simpleName»;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\tdeclaringType.addMethod(\'set\'+field.simpleName.toFirstUpper) [\n\t\t\t\t\t\t\t\taddParameter(field.simpleName, field.type)\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\tthis.«field.simpleName» = «field.simpleName»;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t\tdef private String getterName(MutableFieldDeclaration field) {\n\t\t\t\t\t\treturn \'get\'+field.simpleName.toFirstUpper\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myusercode");
     _builder.newLine();
@@ -2721,7 +2721,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -2804,7 +2804,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AbstractAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AbstractAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -2822,7 +2822,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -2908,7 +2908,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -2932,7 +2932,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -3003,7 +3003,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -3027,7 +3027,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -3095,7 +3095,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AbstractAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AbstractAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -3121,7 +3121,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -3196,7 +3196,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/NewTypesAddingAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/NewTypesAddingAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -3207,7 +3207,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -3232,7 +3232,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
   
   @Test
   public void testImportFromTypeReference_01() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationImportFromTypeReference.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.text.DateFormat\n\t\t\t\timport java.text.SimpleDateFormat\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\t\n\t\t\t\t@Active(AnnotationImportFromTypeReferenceProcessor)\n\t\t\t\tannotation AnnotationImportFromTypeReference { }\n\t\t\t\tclass AnnotationImportFromTypeReferenceProcessor extends AbstractClassProcessor {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedClass.addField(\'myDateFormat\') [\n\t\t\t\t\t\t\ttype = DateFormat.newTypeReference\n\t\t\t\t\t\t\tinitializer = \'\'\'new «SimpleDateFormat.newTypeReference»()\'\'\'\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationImportFromTypeReference.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.text.DateFormat\n\t\t\t\timport java.text.SimpleDateFormat\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\t\n\t\t\t\t@Active(AnnotationImportFromTypeReferenceProcessor)\n\t\t\t\tannotation AnnotationImportFromTypeReference { }\n\t\t\t\tclass AnnotationImportFromTypeReferenceProcessor extends AbstractClassProcessor {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedClass.addField(\'myDateFormat\') [\n\t\t\t\t\t\t\ttype = DateFormat.newTypeReference\n\t\t\t\t\t\t\tinitializer = \'\'\'new «SimpleDateFormat.newTypeReference»()\'\'\'\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myusercode");
     _builder.newLine();
@@ -3243,7 +3243,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode;");
     _builder_1.newLine();
@@ -3271,7 +3271,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
   
   @Test
   public void testImportFromTypeReference_02() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationImportFromTypeReference.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\t\n\t\t\t\t@Active(AnnotationImportFromTypeReferenceProcessor)\n\t\t\t\tannotation AnnotationImportFromTypeReference { }\n\t\t\t\tclass AnnotationImportFromTypeReferenceProcessor extends AbstractClassProcessor {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedClass.declaredFields.forEach [\n\t\t\t\t\t\t\tinitializer = \'\'\'new «type.type»()\'\'\'\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AnnotationImportFromTypeReference.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\t\n\t\t\t\t@Active(AnnotationImportFromTypeReferenceProcessor)\n\t\t\t\tannotation AnnotationImportFromTypeReference { }\n\t\t\t\tclass AnnotationImportFromTypeReferenceProcessor extends AbstractClassProcessor {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedClass.declaredFields.forEach [\n\t\t\t\t\t\t\tinitializer = \'\'\'new «type.type»()\'\'\'\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myusercode");
     _builder.newLine();
@@ -3291,7 +3291,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode;");
     _builder_1.newLine();
@@ -3388,7 +3388,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/NewTypesAddingAnnotation.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/NewTypesAddingAnnotation.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package myusercode");
     _builder_1.newLine();
@@ -3399,7 +3399,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -3418,8 +3418,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
   
-  private final Pair<String,String> THREE_ANNOTATIONS = new Function0<Pair<String,String>>() {
-    public Pair<String,String> apply() {
+  private final Pair<String, String> THREE_ANNOTATIONS = new Function0<Pair<String, String>>() {
+    public Pair<String, String> apply() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package myannotation");
       _builder.newLine();
@@ -3495,7 +3495,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/three.xtend", _builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/three.xtend", _builder.toString());
       return _mappedTo;
     }
   }.apply();
@@ -3513,7 +3513,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -3543,7 +3543,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -3562,9 +3562,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
       this.THREE_ANNOTATIONS, _mappedTo, _function);
   }
   
-  public abstract void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations);
+  public abstract void assertProcessing(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations);
   
-  public void assertGeneratedCode(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final String... compiledClientFiles) {
+  public void assertGeneratedCode(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final String... compiledClientFiles) {
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         final Set<String> clientFilesAsSet = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(compiledClientFiles)));
@@ -3609,7 +3609,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
   
   @Test
   public void testFileSystemSupport_01() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/FileSystemSupportTest.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\t\n\t\t\t\t@Active(FileSystemUsingProcessor)\n\t\t\t\tannotation FileSystemSupportTest { }\n\t\t\t\t\n\t\t\t\tclass FileSystemUsingProcessor extends AbstractClassProcessor {\n\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tval path = annotatedClass.compilationUnit.filePath\n\t\t\t\t\t\tannotatedClass.docComment = \'\'\'\n\t\t\t\t\t\t\tPath \'«path.toString»\' {\n\t\t\t\t\t\t\t\texists: «path.exists»\n\t\t\t\t\t\t\t\tisFolder: «path.isFolder»\n\t\t\t\t\t\t\t\tisFile: «path.isFile»\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tsourceFolder : «path.sourceFolder»\n\t\t\t\t\t\t\ttargetFolder : «path.targetFolder»\n\t\t\t\t\t\t\tprojectFolder: «path.projectFolder»\n\t\t\t\t\t\t\'\'\'\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t}\n\t\t\t");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/FileSystemSupportTest.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.ClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.AbstractClassProcessor\n\t\t\t\t\n\t\t\t\t@Active(FileSystemUsingProcessor)\n\t\t\t\tannotation FileSystemSupportTest { }\n\t\t\t\t\n\t\t\t\tclass FileSystemUsingProcessor extends AbstractClassProcessor {\n\t\n\t\t\t\t\toverride doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {\n\t\t\t\t\t\tval path = annotatedClass.compilationUnit.filePath\n\t\t\t\t\t\tannotatedClass.docComment = \'\'\'\n\t\t\t\t\t\t\tPath \'«path.toString»\' {\n\t\t\t\t\t\t\t\texists: «path.exists»\n\t\t\t\t\t\t\t\tisFolder: «path.isFolder»\n\t\t\t\t\t\t\t\tisFile: «path.isFile»\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tsourceFolder : «path.sourceFolder»\n\t\t\t\t\t\t\ttargetFolder : «path.targetFolder»\n\t\t\t\t\t\t\tprojectFolder: «path.projectFolder»\n\t\t\t\t\t\t\'\'\'\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t}\n\t\t\t");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myusercode");
     _builder.newLine();
@@ -3620,7 +3620,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();

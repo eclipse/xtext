@@ -118,7 +118,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     }
     if (!_matched) {
       EList<EObject> _eContents = expression.eContents();
-      final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
+      final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
         public Boolean apply(final EObject content) {
           boolean _switchResult = false;
           boolean _matched = false;
@@ -151,7 +151,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     String _simpleName = _type.getSimpleName();
     _builder.append(_simpleName, "");
     List<LightweightTypeReference> _typeArguments = type.getTypeArguments();
-    final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
+    final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
       public String apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }

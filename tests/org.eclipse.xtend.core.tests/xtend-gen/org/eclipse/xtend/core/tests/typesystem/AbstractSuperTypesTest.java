@@ -41,16 +41,16 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
   
   public void assertSuperTypes(final Class<?> type, final String... superTypes) {
     String _canonicalName = type.getCanonicalName();
-    Pair<String,String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(_canonicalName, null);
     this.assertSuperTypes(_mappedTo, superTypes);
   }
   
   public void assertSuperTypes(final String type, final String... superTypes) {
-    Pair<String,String> _mappedTo = Pair.<String, String>of(type, null);
+    Pair<String, String> _mappedTo = Pair.<String, String>of(type, null);
     this.assertSuperTypes(_mappedTo, superTypes);
   }
   
-  public void assertSuperTypes(final Pair<String,String> type, final String... superTypes) {
+  public void assertSuperTypes(final Pair<String, String> type, final String... superTypes) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def ");
@@ -79,7 +79,7 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
       final LightweightTypeReference subtype = this.toLightweightReference(_parameterType);
       List<String> _list = IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(superTypes)));
       Iterable<LightweightTypeReference> _collectSuperTypes = this.collectSuperTypes(subtype);
-      final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
+      final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
         public String apply(final LightweightTypeReference it) {
           return it.getSimpleName();
         }
@@ -150,7 +150,7 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
   
   @Test
   public void testTypeParametersWithoutUpperBound() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("T", "T");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("T", "T");
     this.assertSuperTypes(_mappedTo, "Object");
   }
 }

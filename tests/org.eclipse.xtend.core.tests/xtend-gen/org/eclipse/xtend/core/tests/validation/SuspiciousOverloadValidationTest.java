@@ -96,7 +96,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     final XBlockExpression block = ((XBlockExpression) _expression);
     TreeIterator<EObject> _eAllContents = block.eAllContents();
     Iterator<XAbstractFeatureCall> _filter = Iterators.<XAbstractFeatureCall>filter(_eAllContents, XAbstractFeatureCall.class);
-    final Function1<XAbstractFeatureCall,Boolean> _function_1 = new Function1<XAbstractFeatureCall,Boolean>() {
+    final Function1<XAbstractFeatureCall, Boolean> _function_1 = new Function1<XAbstractFeatureCall, Boolean>() {
       public Boolean apply(final XAbstractFeatureCall it) {
         boolean _and = false;
         EStructuralFeature _eContainingFeature = it.eContainingFeature();

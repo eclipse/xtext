@@ -72,10 +72,10 @@ public class ActiveAnnotationContextProvider {
         final ActiveAnnotationContexts result = ActiveAnnotationContexts.installNew(_eResource);
         final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
         compilationUnit.setXtendFile(file);
-        final IAcceptor<Pair<JvmAnnotationType,XAnnotation>> _function = new IAcceptor<Pair<JvmAnnotationType,XAnnotation>>() {
-          public void accept(final Pair<JvmAnnotationType,XAnnotation> it) {
+        final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> _function = new IAcceptor<Pair<JvmAnnotationType, XAnnotation>>() {
+          public void accept(final Pair<JvmAnnotationType, XAnnotation> it) {
             try {
-              Map<JvmAnnotationType,ActiveAnnotationContext> _contexts = result.getContexts();
+              Map<JvmAnnotationType, ActiveAnnotationContext> _contexts = result.getContexts();
               JvmAnnotationType _key = it.getKey();
               boolean _containsKey = _contexts.containsKey(_key);
               boolean _not = (!_containsKey);
@@ -127,11 +127,11 @@ public class ActiveAnnotationContextProvider {
                     throw Exceptions.sneakyThrow(_t);
                   }
                 }
-                Map<JvmAnnotationType,ActiveAnnotationContext> _contexts_1 = result.getContexts();
+                Map<JvmAnnotationType, ActiveAnnotationContext> _contexts_1 = result.getContexts();
                 JvmAnnotationType _key_2 = it.getKey();
                 _contexts_1.put(_key_2, fa);
               }
-              Map<JvmAnnotationType,ActiveAnnotationContext> _contexts_2 = result.getContexts();
+              Map<JvmAnnotationType, ActiveAnnotationContext> _contexts_2 = result.getContexts();
               JvmAnnotationType _key_3 = it.getKey();
               ActiveAnnotationContext _get = _contexts_2.get(_key_3);
               List<XtendAnnotationTarget> _annotatedSourceElements = _get.getAnnotatedSourceElements();
@@ -177,7 +177,7 @@ public class ActiveAnnotationContextProvider {
   /**
    * recursively looks for macro annotations on XtendAnnotationTargets
    */
-  private void searchAnnotatedElements(final EObject element, final IAcceptor<Pair<JvmAnnotationType,XAnnotation>> acceptor) {
+  private void searchAnnotatedElements(final EObject element, final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
     boolean _matched = false;
     if (!_matched) {
       if (element instanceof XtendFile) {
@@ -264,9 +264,9 @@ public class ActiveAnnotationContextProvider {
     }
   }
   
-  private void registerMacroAnnotations(final XtendAnnotationTarget candidate, final IAcceptor<Pair<JvmAnnotationType,XAnnotation>> acceptor) {
+  private void registerMacroAnnotations(final XtendAnnotationTarget candidate, final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
     EList<XAnnotation> _annotations = candidate.getAnnotations();
-    final Function1<XAnnotation,Boolean> _function = new Function1<XAnnotation,Boolean>() {
+    final Function1<XAnnotation, Boolean> _function = new Function1<XAnnotation, Boolean>() {
       public Boolean apply(final XAnnotation it) {
         return Boolean.valueOf(ActiveAnnotationContextProvider.this._xAnnotationExtensions.isProcessed(it));
       }
@@ -279,7 +279,7 @@ public class ActiveAnnotationContextProvider {
         if (_notEquals) {
           boolean _isValid = this.isValid(annotation, activeAnnotationDeclaration);
           if (_isValid) {
-            Pair<JvmAnnotationType,XAnnotation> _mappedTo = Pair.<JvmAnnotationType, XAnnotation>of(activeAnnotationDeclaration, annotation);
+            Pair<JvmAnnotationType, XAnnotation> _mappedTo = Pair.<JvmAnnotationType, XAnnotation>of(activeAnnotationDeclaration, annotation);
             acceptor.accept(_mappedTo);
           }
         }

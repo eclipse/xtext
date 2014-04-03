@@ -80,7 +80,7 @@ public class MemberFromSuperImplementor {
     if (_not) {
       final ArrayList<JvmTypeParameter> typeParameters = CollectionLiterals.<JvmTypeParameter>newArrayList();
       EList<JvmTypeParameter> _typeParameters_1 = overriddenOperation.getTypeParameters();
-      final Function1<JvmTypeParameter,JvmTypeParameter> _function = new Function1<JvmTypeParameter,JvmTypeParameter>() {
+      final Function1<JvmTypeParameter, JvmTypeParameter> _function = new Function1<JvmTypeParameter, JvmTypeParameter>() {
         public JvmTypeParameter apply(final JvmTypeParameter it) {
           JvmTypeParameter _xblockexpression = null;
           {
@@ -144,7 +144,7 @@ public class MemberFromSuperImplementor {
       _builder.append(_simpleName_2, "");
       _builder.append("(");
       EList<JvmFormalParameter> _parameters = overriddenOperation.getParameters();
-      final Function1<JvmFormalParameter,String> _function_1 = new Function1<JvmFormalParameter,String>() {
+      final Function1<JvmFormalParameter, String> _function_1 = new Function1<JvmFormalParameter, String>() {
         public String apply(final JvmFormalParameter it) {
           return it.getSimpleName();
         }
@@ -175,7 +175,7 @@ public class MemberFromSuperImplementor {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("super(");
       EList<JvmFormalParameter> _parameters_1 = superConstructor.getParameters();
-      final Function1<JvmFormalParameter,String> _function = new Function1<JvmFormalParameter,String>() {
+      final Function1<JvmFormalParameter, String> _function = new Function1<JvmFormalParameter, String>() {
         public String apply(final JvmFormalParameter it) {
           return it.getSimpleName();
         }
@@ -198,7 +198,7 @@ public class MemberFromSuperImplementor {
     JvmVisibility _visibility = overridden.getVisibility();
     builder.setVisibility(_visibility);
     EList<JvmFormalParameter> _parameters = overridden.getParameters();
-    final Procedure2<JvmFormalParameter,Integer> _function = new Procedure2<JvmFormalParameter,Integer>() {
+    final Procedure2<JvmFormalParameter, Integer> _function = new Procedure2<JvmFormalParameter, Integer>() {
       public void apply(final JvmFormalParameter it, final Integer index) {
         final AbstractParameterBuilder parameterBuilder = builder.newParameterBuilder();
         String _simpleName = it.getSimpleName();
@@ -217,7 +217,7 @@ public class MemberFromSuperImplementor {
     boolean _isVarArgs = overridden.isVarArgs();
     builder.setVarArgsFlag(_isVarArgs);
     EList<JvmTypeReference> _exceptions = overridden.getExceptions();
-    final Function1<JvmTypeReference,LightweightTypeReference> _function_1 = new Function1<JvmTypeReference,LightweightTypeReference>() {
+    final Function1<JvmTypeReference, LightweightTypeReference> _function_1 = new Function1<JvmTypeReference, LightweightTypeReference>() {
       public LightweightTypeReference apply(final JvmTypeReference it) {
         return substitutor.substitute(it);
       }
@@ -242,7 +242,7 @@ public class MemberFromSuperImplementor {
         IterableExtensions.<JvmTypeParameter>forEach(_typeParameters, _function);
       }
       DeclaratorTypeArgumentCollector _declaratorTypeArgumentCollector = new DeclaratorTypeArgumentCollector();
-      final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> parameterMapping = _declaratorTypeArgumentCollector.getTypeParameterMapping(lightweightOverrider);
+      final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> parameterMapping = _declaratorTypeArgumentCollector.getTypeParameterMapping(lightweightOverrider);
       _xblockexpression = new StandardTypeParameterSubstitutor(parameterMapping, owner);
     }
     return _xblockexpression;

@@ -65,7 +65,7 @@ public class StandardTypeParameterSubstitutorTest extends AbstractXbaseTestCase 
     _builder.append(">");
     final LightweightTypeReference typeReference = this.toTypeReference(_builder);
     final DeclaratorTypeArgumentCollector collector = new DeclaratorTypeArgumentCollector();
-    final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> mapping = collector.getTypeParameterMapping(typeReference);
+    final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = collector.getTypeParameterMapping(typeReference);
     int _size = mapping.size();
     Assert.assertEquals(1, _size);
     Set<JvmTypeParameter> _keySet = mapping.keySet();

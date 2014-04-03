@@ -151,7 +151,7 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     final JvmTypeReference newTypeRef = _xifexpression;
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
-    final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
+    final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
       public Boolean apply(final JvmTypeReference it) {
         boolean _and = false;
         JvmType _type = it.getType();
@@ -183,7 +183,7 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     ConditionUtils.checkInferredTypeReferences("implemented interface", ((TypeReference[])Conversions.unwrapArray(superInterfaces, TypeReference.class)));
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
-    final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
+    final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
       public Boolean apply(final JvmTypeReference it) {
         boolean _and = false;
         JvmType _type = it.getType();
@@ -203,7 +203,7 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     CollectionExtensions.<JvmTypeReference>removeAll(_superTypes_1, oldInterfaces);
     JvmGenericType _delegate_2 = this.getDelegate();
     EList<JvmTypeReference> _superTypes_2 = _delegate_2.getSuperTypes();
-    final Function1<TypeReference,JvmTypeReference> _function_1 = new Function1<TypeReference,JvmTypeReference>() {
+    final Function1<TypeReference, JvmTypeReference> _function_1 = new Function1<TypeReference, JvmTypeReference>() {
       public JvmTypeReference apply(final TypeReference it) {
         CompilationUnitImpl _compilationUnit = MutableJvmClassDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toJvmTypeReference(it);

@@ -25,7 +25,7 @@ public abstract class AbstractOldAPIIdentifiableTypeTest extends AbstractIdentif
   public void resolvesIdentifiablesTo(final String expression, final String... types) {
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
     final List<JvmIdentifiableElement> identifiables = this.findIdentifiables(expressionWithQualifiedNames);
-    final Procedure2<JvmIdentifiableElement,Integer> _function = new Procedure2<JvmIdentifiableElement,Integer>() {
+    final Procedure2<JvmIdentifiableElement, Integer> _function = new Procedure2<JvmIdentifiableElement, Integer>() {
       public void apply(final JvmIdentifiableElement identifiable, final Integer index) {
         ITypeProvider _typeProvider = AbstractOldAPIIdentifiableTypeTest.this.getTypeProvider();
         final JvmTypeReference type = _typeProvider.getTypeForIdentifiable(identifiable);

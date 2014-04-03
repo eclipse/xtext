@@ -53,7 +53,7 @@ public class XtendGenerator extends JvmModelGenerator {
     if (_equals) {
       return;
     }
-    Map<JvmAnnotationType,ActiveAnnotationContext> _contexts = ctxs.getContexts();
+    Map<JvmAnnotationType, ActiveAnnotationContext> _contexts = ctxs.getContexts();
     Collection<ActiveAnnotationContext> _values = _contexts.values();
     for (final ActiveAnnotationContext context : _values) {
       try {
@@ -76,7 +76,7 @@ public class XtendGenerator extends JvmModelGenerator {
             };
             final CodeGenerationContextImpl codeGenServices = ObjectExtensions.<CodeGenerationContextImpl>operator_doubleArrow(_codeGenerationContextImpl, _function);
             List<XtendAnnotationTarget> _annotatedSourceElements = context.getAnnotatedSourceElements();
-            final Function1<XtendAnnotationTarget,MemberDeclaration> _function_1 = new Function1<XtendAnnotationTarget,MemberDeclaration>() {
+            final Function1<XtendAnnotationTarget, MemberDeclaration> _function_1 = new Function1<XtendAnnotationTarget, MemberDeclaration>() {
               public MemberDeclaration apply(final XtendAnnotationTarget it) {
                 CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
                 return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));

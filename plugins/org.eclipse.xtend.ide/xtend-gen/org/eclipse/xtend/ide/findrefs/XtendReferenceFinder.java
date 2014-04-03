@@ -46,13 +46,13 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
   }
   
   public void findReferences(final Set<URI> targetURIs, final IResourceDescription resourceDescription, final IAcceptor<IReferenceDescription> acceptor, final IProgressMonitor monitor, final IReferenceFinder.ILocalResourceAccess localResourceAccess) {
-    final Function1<URI,URI> _function = new Function1<URI,URI>() {
+    final Function1<URI, URI> _function = new Function1<URI, URI>() {
       public URI apply(final URI it) {
         return it.trimFragment();
       }
     };
     Iterable<URI> _map = IterableExtensions.<URI, URI>map(targetURIs, _function);
-    final Function1<URI,Boolean> _function_1 = new Function1<URI,Boolean>() {
+    final Function1<URI, Boolean> _function_1 = new Function1<URI, Boolean>() {
       public Boolean apply(final URI it) {
         URI _uRI = resourceDescription.getURI();
         return Boolean.valueOf(Objects.equal(it, _uRI));
@@ -64,7 +64,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     }
     final HashSet<QualifiedName> names = CollectionLiterals.<QualifiedName>newHashSet();
     for (final URI uri : targetURIs) {
-      final IUnitOfWork<Boolean,ResourceSet> _function_2 = new IUnitOfWork<Boolean,ResourceSet>() {
+      final IUnitOfWork<Boolean, ResourceSet> _function_2 = new IUnitOfWork<Boolean, ResourceSet>() {
         public Boolean exec(final ResourceSet it) throws Exception {
           boolean _xblockexpression = false;
           {
@@ -87,7 +87,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     }
     Iterable<QualifiedName> _importedNames = resourceDescription.getImportedNames();
     final Set<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(_importedNames);
-    final Function1<QualifiedName,Boolean> _function_3 = new Function1<QualifiedName,Boolean>() {
+    final Function1<QualifiedName, Boolean> _function_3 = new Function1<QualifiedName, Boolean>() {
       public Boolean apply(final QualifiedName it) {
         return Boolean.valueOf(importedNames.contains(it));
       }
@@ -95,7 +95,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     boolean _exists_1 = IterableExtensions.<QualifiedName>exists(names, _function_3);
     if (_exists_1) {
       URI _uRI = resourceDescription.getURI();
-      final IUnitOfWork<Object,ResourceSet> _function_4 = new IUnitOfWork<Object,ResourceSet>() {
+      final IUnitOfWork<Object, ResourceSet> _function_4 = new IUnitOfWork<Object, ResourceSet>() {
         public Object exec(final ResourceSet resourceSet) throws Exception {
           URI _uRI = resourceDescription.getURI();
           Resource _resource = resourceSet.getResource(_uRI, true);
@@ -112,7 +112,7 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     }
   }
   
-  protected void findLocalReferencesFromElement(final Set<URI> targetURISet, final EObject sourceCandidate, final Resource localResource, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI, final Map<EObject,URI> exportedElementsMap) {
+  protected void findLocalReferencesFromElement(final Set<URI> targetURISet, final EObject sourceCandidate, final Resource localResource, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI, final Map<EObject, URI> exportedElementsMap) {
     boolean _matched = false;
     if (!_matched) {
       if (sourceCandidate instanceof XAbstractFeatureCall) {

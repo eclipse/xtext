@@ -72,7 +72,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("//***********");
     _builder.newLine();
-    final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
+    final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         DocumentRewriter.Section _newSection = it.newSection(3, 1);
         _newSection.append("one");
@@ -136,7 +136,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("//***********");
     _builder.newLine();
-    final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
+    final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         DocumentRewriter.Section _newSection = it.newSection(6, 1);
         _newSection.append("one");
@@ -213,7 +213,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final String model = _builder.toString();
-    final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
+    final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("class");
         DocumentRewriter.Section _newSection = it.newSection(_indexOf, 0);
@@ -264,7 +264,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final String model = _builder.toString();
-    final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
+    final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("foo");
         final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
@@ -312,7 +312,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final String model = _builder.toString();
-    final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
+    final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("foo");
         final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
@@ -377,7 +377,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final String model = _builder.toString();
-    final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
+    final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("foo");
         final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
@@ -439,7 +439,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final String model = _builder.toString();
-    final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
+    final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("def bar");
         final DocumentRewriter.Section beforeDefBar = it.newSection(_indexOf, 0, true);
@@ -485,7 +485,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final String model = _builder.toString();
-    final Procedure2<DocumentRewriter,XtextResource> _function = new Procedure2<DocumentRewriter,XtextResource>() {
+    final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("{}");
         int _plus = (_indexOf + 3);
@@ -539,13 +539,13 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     this.andExpect(_rewrite, _builder_1);
   }
   
-  protected String rewrite(final CharSequence model, final Procedure2<? super DocumentRewriter,? super XtextResource> test) {
+  protected String rewrite(final CharSequence model, final Procedure2<? super DocumentRewriter, ? super XtextResource> test) {
     try {
       String _xblockexpression = null;
       {
         String _string = model.toString();
         final XtextDocument document = this.createDocument(_string);
-        final IUnitOfWork<TextEdit,XtextResource> _function = new IUnitOfWork<TextEdit,XtextResource>() {
+        final IUnitOfWork<TextEdit, XtextResource> _function = new IUnitOfWork<TextEdit, XtextResource>() {
           public TextEdit exec(final XtextResource it) throws Exception {
             TextEdit _xblockexpression = null;
             {

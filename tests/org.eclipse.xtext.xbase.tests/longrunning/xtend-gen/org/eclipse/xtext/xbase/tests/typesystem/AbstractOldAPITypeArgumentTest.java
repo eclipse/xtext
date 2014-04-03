@@ -107,7 +107,7 @@ public abstract class AbstractOldAPITypeArgumentTest extends AbstractTypeArgumen
   }
   
   public void assertTypeArguments(final String[] typeArguments, final List<JvmTypeReference> actualTypeArguments) {
-    final Procedure2<String,Integer> _function = new Procedure2<String,Integer>() {
+    final Procedure2<String, Integer> _function = new Procedure2<String, Integer>() {
       public void apply(final String typeArgument, final Integer i) {
         final JvmTypeReference actualTypeArgument = actualTypeArguments.get((i).intValue());
         Assert.assertNotNull(typeArgument, actualTypeArgument);
