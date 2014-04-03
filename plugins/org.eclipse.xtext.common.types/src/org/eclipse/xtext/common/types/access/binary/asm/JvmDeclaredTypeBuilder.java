@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -21,16 +21,20 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.binary.BinaryClass;
+import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Attribute;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implements ClassVisitor {
+public class JvmDeclaredTypeBuilder extends ClassVisitor implements Opcodes {
+
+	protected final Proxies proxies;
 
     protected JvmDeclaredType result;
     
@@ -48,17 +52,9 @@ public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implement
 		this(binaryClass, bytesAccess, classLoader, null, new Proxies());
 	}
     
-    @Override
-    protected JvmAnnotationTarget getInstance() {
-    	return result;
-    }
-    
-    public void visitAttribute(Attribute attr) {
-    	// ignore
-    }
-    
     protected JvmDeclaredTypeBuilder(BinaryClass binaryClass, ClassFileBytesAccess bytesAccess, ClassLoader classLoader, Map<String, JvmTypeParameter> typeParameters, Proxies proxies) {
-    	super(proxies);
+    	super(Opcodes.ASM5);
+    	this.proxies = proxies;
 		this.binaryClass = binaryClass;
 		this.bytesAccess = bytesAccess;
 		this.classLoader = classLoader;
@@ -80,7 +76,8 @@ public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implement
     // Implementation of the ClassVisitor interface
     // ------------------------------------------------------------------------
 
-    public void visit(
+    @Override
+	public void visit(
         final int version,
         final int access,
         final String name,
@@ -104,7 +101,7 @@ public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implement
     	}
     	setTypeModifiers(access);
     	
-    	setVisibility(access, result);
+    	proxies.setVisibility(access, result);
     	
     	setNameAndPackage(name);
 
@@ -115,12 +112,27 @@ public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implement
 			}
 			genericSignature = BinarySignatures.createSuperTypeSignature(signature);
 			if (((ACC_ENUM | ACC_ANNOTATION) & access) == 0) {
-				typeParameters = createTypeParameters(genericSignature, (JvmTypeParameterDeclarator) result, typeParameters);
+				typeParameters = proxies.createTypeParameters(genericSignature, (JvmTypeParameterDeclarator) result, typeParameters);
 			}
 		}
 		setSuperTypes(name, genericSignature, superName, interfaces);
     }
     
+	@Override
+	public AnnotationVisitor visitAnnotation(final String desc, final boolean visible) {
+		return new JvmAnnotationReferenceBuilder((InternalEList<JvmAnnotationReference>) result
+				.getAnnotations(), desc, proxies);
+	}
+
+	@Override
+	public void visitEnd() {
+	}
+    
+    @Override
+	public void visitAttribute(Attribute attr) {
+    	// ignore
+    }
+
     private void setSuperTypes(String name, BinarySuperTypeSignature signature, String superName, String[] interfaces) {
     	InternalEList<JvmTypeReference> superTypes = (InternalEList<JvmTypeReference>) result.getSuperTypes();
 		if (signature != null) {
@@ -131,15 +143,15 @@ public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implement
 				}
 			}
 			for (int i = 0; i < superTypeSignatures.size(); i++) {
-				superTypes.addUnique(createTypeReference(superTypeSignatures.get(i), typeParameters));
+				superTypes.addUnique(proxies.createTypeReference(superTypeSignatures.get(i), typeParameters));
 			}
 		} else {
 			if (superName != null && result.eClass() != TypesPackage.Literals.JVM_ANNOTATION_TYPE) {
-				superTypes.addUnique(createTypeReference(BinarySignatures.createTypeSignature(superName), typeParameters));
+				superTypes.addUnique(proxies.createTypeReference(BinarySignatures.createTypeSignature(superName), typeParameters));
 			}
 			setInterfaces(interfaces, typeParameters, superTypes);
 			if (superTypes.isEmpty() && !Proxies.JAVA_LANG_OBJECT.equals(name)) {
-				superTypes.addUnique(createObjectTypeReference());
+				superTypes.addUnique(proxies.createObjectTypeReference());
 			}
 		}
 	}
@@ -149,8 +161,7 @@ public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implement
 		if (interfaces != null) {
 			for (int i = 0; i < interfaces.length; i++) {
 				String interfaceName = interfaces[i];
-				result.addUnique(createTypeReference(BinarySignatures.createTypeSignature(interfaceName),
-						typeParameters));
+				result.addUnique(proxies.createTypeReference(BinarySignatures.createTypeSignature(interfaceName), typeParameters));
 			}
 		}
 	}
@@ -183,11 +194,13 @@ public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implement
 		}
 	}
 
-    public void visitSource(final String file, final String debug) {
+    @Override
+	public void visitSource(final String file, final String debug) {
         // ignore
     }
 
-    public void visitOuterClass(
+    @Override
+	public void visitOuterClass(
         final String owner,
         final String name,
         final String desc)
@@ -195,7 +208,8 @@ public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implement
     	throw new IllegalStateException("Expected top-level type");
     }
 
-    public void visitInnerClass(
+    @Override
+	public void visitInnerClass(
         final String name,
         final String outerName,
         final String innerName,
@@ -212,7 +226,7 @@ public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implement
     				typeParameters,
     				proxies);
     		JvmDeclaredType nestedType = builder.buildType();
-    		setVisibility(access, nestedType);
+    		proxies.setVisibility(access, nestedType);
     		result.getMembers().add(nestedType);
     	}
     }
@@ -248,7 +262,8 @@ public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implement
     	
     }
     
-    public FieldVisitor visitField(
+    @Override
+	public FieldVisitor visitField(
         final int access,
         final String name,
         final String desc,
@@ -270,7 +285,8 @@ public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implement
     	return null;
     }
 
-    public MethodVisitor visitMethod(
+    @Override
+	public MethodVisitor visitMethod(
         final int access,
         final String name,
         final String desc,
@@ -293,4 +309,12 @@ public class JvmDeclaredTypeBuilder extends JvmAnnotationTargetBuilder implement
     	return null;
     }
 
+    /**
+	 * Answer true if the method is a class initializer, false otherwise.
+	 * 
+	 * @return boolean
+	 */
+	private boolean isClinit(String selector) {
+		return selector.charAt(0) == '<' && selector.length() == 8; // Can only match <clinit>
+	}
 }

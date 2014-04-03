@@ -29,10 +29,12 @@ import com.google.common.collect.Maps;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class JvmAnnotationTargetBuilder extends AbstractJvmElementBuilder implements Opcodes {
+public abstract class JvmAnnotationTargetBuilder implements Opcodes {
+
+	protected final Proxies proxies;
 
 	protected JvmAnnotationTargetBuilder(Proxies proxies) {
-		super(proxies);
+		this.proxies = proxies;
 	}
 
 	protected abstract JvmAnnotationTarget getInstance();
@@ -107,8 +109,7 @@ public abstract class JvmAnnotationTargetBuilder extends AbstractJvmElementBuild
 						.getConstraints();
 				for (int j = 0; j < bounds.size(); j++) {
 					JvmUpperBound upperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
-					((JvmTypeConstraintImplCustom) upperBound).internalSetTypeReference(createTypeReference(
-							bounds.get(j), result));
+					((JvmTypeConstraintImplCustom) upperBound).internalSetTypeReference(proxies.createTypeReference(bounds.get(j), result));
 					constraints.addUnique(upperBound);
 				}
 			}
