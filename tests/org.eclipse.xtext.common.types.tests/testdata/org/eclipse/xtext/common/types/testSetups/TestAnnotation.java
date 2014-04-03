@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.testSetups;
 
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.util.List;
 
 /**
@@ -33,6 +35,7 @@ public @interface TestAnnotation  {
 	Class<?>[] classArray();
 	
 	@Retention(RetentionPolicy.RUNTIME)
+	@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 	@interface NestedAnnotation {
 		String value() default "MyString";
 	}
