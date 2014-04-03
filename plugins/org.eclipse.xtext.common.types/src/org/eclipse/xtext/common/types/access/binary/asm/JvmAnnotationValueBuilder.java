@@ -17,31 +17,35 @@ import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class JvmAnnotationValueBuilder extends AbstractJvmAnnotationValueBuilder {
+public abstract class JvmAnnotationValueBuilder extends AnnotationVisitor {
+
+	protected final Proxies proxies;
 
 	protected JvmAnnotationValue result;
 	
 	protected JvmAnnotationValueBuilder(Proxies proxies) {
-		super(proxies);
+		super(Opcodes.ASM5);
+		this.proxies = proxies;
 	}
 	
+	@Override
 	public void visit(String name, Object value) {
 		if (name != null) {
 			throw new IllegalStateException();
 		}
 		if (result == null) {
-			result = createAnnotationValue(value);
+			result = proxies.createAnnotationValue(value);
 		} else {
 			if (value instanceof Type) {
 				Type type = (Type) value;
 				String typeName = type.getSort() == Type.OBJECT ? type.getInternalName() : type.getDescriptor();
-				((InternalEList<JvmTypeReference>) ((JvmTypeAnnotationValue) result).getValues()).addUnique(createTypeReference(
-						BinarySignatures.createTypeSignature(typeName), null));
+				((InternalEList<JvmTypeReference>) ((JvmTypeAnnotationValue) result).getValues()).addUnique(proxies.createTypeReference(BinarySignatures.createTypeSignature(typeName), null));
 			} else {
 				@SuppressWarnings("unchecked")
 				InternalEList<Object> list = (InternalEList<Object>) result.eGet(result.eClass().getEStructuralFeature("values"));
@@ -50,6 +54,7 @@ public abstract class JvmAnnotationValueBuilder extends AbstractJvmAnnotationVal
 		}
 	}
 
+	@Override
 	public void visitEnum(String name, String desc, String value) {
 		if (name != null) {
 			throw new IllegalStateException();
@@ -57,10 +62,11 @@ public abstract class JvmAnnotationValueBuilder extends AbstractJvmAnnotationVal
 		if (result == null) {
 			result = TypesFactory.eINSTANCE.createJvmEnumAnnotationValue();
 		}
-		JvmEnumerationLiteral enumLiteralProxy = createEnumLiteralProxy(value, desc);
+		JvmEnumerationLiteral enumLiteralProxy = proxies.createEnumLiteral(value, desc);
 		((InternalEList<JvmEnumerationLiteral>) ((JvmEnumAnnotationValue) result).getValues()).addUnique(enumLiteralProxy);
 	}
 
+	@Override
 	public AnnotationVisitor visitAnnotation(String name, String desc) {
 		if (name != null) {
 			throw new IllegalStateException();
@@ -73,6 +79,7 @@ public abstract class JvmAnnotationValueBuilder extends AbstractJvmAnnotationVal
 		return annotation;
 	}
 
+	@Override
 	public AnnotationVisitor visitArray(String name) {
 		throw new IllegalStateException();
 	}

@@ -12,7 +12,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -26,11 +25,14 @@ import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Attribute;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements MethodVisitor {
+public class JvmExecutableBuilder extends MethodVisitor implements Opcodes {
+
+	protected final Proxies proxies;
 
 	private JvmDeclaredType declarator;
 	
@@ -51,7 +53,8 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
         final String signature,
         final String[] exceptions)
     {
-    	super(proxies);
+    	super(Opcodes.ASM5);
+    	this.proxies = proxies;
 		this.declarator = declarator;
 		final StringBuilder fqName;
 		if (isConstructor(name)) {
@@ -82,14 +85,14 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
 			operation.setStrictFloatingPoint((access & ACC_STRICT) != 0);
 			operation.setNative((access & ACC_NATIVE) != 0);
 		}
-		setVisibility(access, result);
+		proxies.setVisibility(access, result);
 		
 		BinaryMethodSignature binarySignature = BinarySignatures.createMethodSignature(signature != null ? signature: desc);
-		typeParameters = createTypeParameters(binarySignature, result, typeParameters);
+		typeParameters = proxies.createTypeParameters(binarySignature, result, typeParameters);
 		
 		if (result.eClass() == TypesPackage.Literals.JVM_OPERATION) {
 			returnType = desc;
-			((JvmOperation) result).setReturnType(createTypeReference(binarySignature.getReturnType(), typeParameters));
+			((JvmOperation) result).setReturnType(proxies.createTypeReference(binarySignature.getReturnType(), typeParameters));
 		}
 		
 		fqName.append('(');
@@ -112,7 +115,7 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
 		}
 		fqName.append(')');
 		result.internalSetIdentifier(fqName.toString());
-		setVisibility(access, result);
+		proxies.setVisibility(access, result);
 		result.setVarArgs((access & ACC_VARARGS) != 0);
 
 		List<BinaryGenericTypeSignature> exceptionSignatures = binarySignature.getExceptionTypes();
@@ -121,27 +124,28 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
 				InternalEList<JvmTypeReference> resultExceptions = (InternalEList<JvmTypeReference>) result
 						.getExceptions();
 				for (int i = 0, max = exceptions.length; i < max; i++) {
-					resultExceptions.addUnique(createTypeReference(
-							BinarySignatures.createTypeSignature(exceptions[i]), typeParameters));
+					resultExceptions.addUnique(proxies.createTypeReference(BinarySignatures.createTypeSignature(exceptions[i]), typeParameters));
 				}
 			}
 		} else {
 			InternalEList<JvmTypeReference> resultExceptions = (InternalEList<JvmTypeReference>) result.getExceptions();
 			for (int i = 0, max = exceptionSignatures.size(); i < max; i++) {
-				resultExceptions.addUnique(createTypeReference(exceptionSignatures.get(i), typeParameters));
+				resultExceptions.addUnique(proxies.createTypeReference(exceptionSignatures.get(i), typeParameters));
 			}
 		}
     }
     
-    public void visitAttribute(Attribute attr) {
+    @Override
+	public void visitAttribute(Attribute attr) {
     	// nothing to do
     }
     
-    @Override
-    protected JvmAnnotationTarget getInstance() {
-    	return result;
-    }
-    
+	@Override
+	public AnnotationVisitor visitAnnotation(final String desc, final boolean visible) {
+		return new JvmAnnotationReferenceBuilder((InternalEList<JvmAnnotationReference>) result
+				.getAnnotations(), desc, proxies);
+	}
+
     @Override
     public void visitEnd() {
     	InternalEList<JvmMember> members = (InternalEList<JvmMember>) declarator.getMembers();
@@ -152,7 +156,7 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
 			JvmMember container, Map<String, JvmTypeParameter> typeParameters) {
 		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
 		result.setName(paramName);
-		result.setParameterType(createTypeReference(parameterType, typeParameters));
+		result.setParameterType(proxies.createTypeReference(parameterType, typeParameters));
 		return result;
 	}
     
@@ -160,11 +164,13 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
     // Implementation of the MethodVisitor interface
     // ------------------------------------------------------------------------
 
-    public AnnotationVisitor visitAnnotationDefault() {
+    @Override
+	public AnnotationVisitor visitAnnotationDefault() {
     	return new JvmAnnotationValueBuilder(proxies) {
 			
     		int array = 0;
     		
+			@Override
 			public void visitEnd() {
 				if (array == 0) {
 					JvmOperation operation = (JvmOperation) JvmExecutableBuilder.this.result;
@@ -220,7 +226,8 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
 		};
     }
 
-    public AnnotationVisitor visitParameterAnnotation(
+    @Override
+	public AnnotationVisitor visitParameterAnnotation(
         final int parameter,
         final String desc,
         final boolean visible)
@@ -231,11 +238,13 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
     	return new JvmAnnotationReferenceBuilder((InternalEList<JvmAnnotationReference>) formalParameter.getAnnotations(), desc, proxies);
     }
 
-    public void visitCode() {
+    @Override
+	public void visitCode() {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitFrame(
+    @Override
+	public void visitFrame(
         final int type,
         final int nLocal,
         final Object[] local,
@@ -245,23 +254,28 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
         throw new UnsupportedOperationException();
     }
 
-    public void visitInsn(final int opcode) {
+    @Override
+	public void visitInsn(final int opcode) {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitIntInsn(final int opcode, final int operand) {
+    @Override
+	public void visitIntInsn(final int opcode, final int operand) {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitVarInsn(final int opcode, final int var) {
+    @Override
+	public void visitVarInsn(final int opcode, final int var) {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitTypeInsn(final int opcode, final String type) {
+    @Override
+	public void visitTypeInsn(final int opcode, final String type) {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitFieldInsn(
+    @Override
+	public void visitFieldInsn(
         final int opcode,
         final String owner,
         final String name,
@@ -270,41 +284,49 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
     	throw new UnsupportedOperationException();
     }
 
-    public void visitMethodInsn(
+    @Override
+	public void visitMethodInsn(
         final int opcode,
         final String owner,
         final String name,
-        final String desc)
+        final String desc, 
+        final boolean itf)
     {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitJumpInsn(final int opcode, final Label label) {
+    @Override
+	public void visitJumpInsn(final int opcode, final Label label) {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitLabel(final Label label) {
+    @Override
+	public void visitLabel(final Label label) {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitLdcInsn(final Object cst) {
+    @Override
+	public void visitLdcInsn(final Object cst) {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitIincInsn(final int var, final int increment) {
+    @Override
+	public void visitIincInsn(final int var, final int increment) {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitTableSwitchInsn(
+    @Override
+	public void visitTableSwitchInsn(
         final int min,
         final int max,
         final Label dflt,
-        final Label[] labels)
+        final Label... labels)
     {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitLookupSwitchInsn(
+    @Override
+	public void visitLookupSwitchInsn(
         final Label dflt,
         final int[] keys,
         final Label[] labels)
@@ -312,11 +334,13 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
     	throw new UnsupportedOperationException();
     }
 
-    public void visitMultiANewArrayInsn(final String desc, final int dims) {
+    @Override
+	public void visitMultiANewArrayInsn(final String desc, final int dims) {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitTryCatchBlock(
+    @Override
+	public void visitTryCatchBlock(
         final Label start,
         final Label end,
         final Label handler,
@@ -325,7 +349,8 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
     	throw new UnsupportedOperationException();
     }
 
-    public void visitLocalVariable(
+    @Override
+	public void visitLocalVariable(
         final String name,
         final String desc,
         final String signature,
@@ -336,12 +361,23 @@ public class JvmExecutableBuilder extends JvmAnnotationTargetBuilder implements 
     	throw new UnsupportedOperationException();
     }
 
-    public void visitLineNumber(final int line, final Label start) {
+    @Override
+	public void visitLineNumber(final int line, final Label start) {
     	throw new UnsupportedOperationException();
     }
 
-    public void visitMaxs(final int maxStack, final int maxLocals) {
+    @Override
+	public void visitMaxs(final int maxStack, final int maxLocals) {
     	throw new UnsupportedOperationException();
     }
+
+		/**
+	 * Answer true if the method is a constructor, false otherwise.
+	 * 
+	 * @return boolean
+	 */
+	private boolean isConstructor(String selector) {
+		return selector.charAt(0) == '<' && selector.length() == 6; // Can only match <init>
+	}
 
 }
