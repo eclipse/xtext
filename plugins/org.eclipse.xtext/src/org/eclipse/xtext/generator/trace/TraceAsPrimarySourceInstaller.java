@@ -13,13 +13,12 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
-import org.objectweb.asm.ClassAdapter;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
-import org.objectweb.asm.MethodAdapter;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 import com.google.inject.Inject;
 
@@ -28,7 +27,7 @@ import com.google.inject.Inject;
  */
 public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller {
 
-	public static class XtextClassAdapter extends ClassAdapter {
+	public static class XtextClassAdapter extends ClassVisitor {
 
 		private final boolean hideSyntheticVariables;
 
@@ -37,7 +36,7 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 		private final int[] target2source;
 
 		public XtextClassAdapter(ClassVisitor cv, String sourceFile, int[] target2source, boolean hideSyntheticVariables) {
-			super(cv);
+			super(Opcodes.ASM5, cv);
 			this.sourceFile = sourceFile;
 			this.target2source = target2source;
 			this.hideSyntheticVariables = hideSyntheticVariables;
@@ -66,12 +65,12 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 		}
 	}
 
-	public static class XtextMethodAdapter extends MethodAdapter {
+	public static class XtextMethodAdapter extends MethodVisitor {
 
 		private XtextClassAdapter context;
 
 		public XtextMethodAdapter(XtextClassAdapter context, MethodVisitor delegate) {
-			super(delegate);
+			super(Opcodes.ASM5, delegate);
 			this.context = context;
 		}
 

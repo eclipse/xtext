@@ -10,20 +10,24 @@ package org.eclipse.xtext.common.types.access.binary.asm;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Attribute;
 import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmFieldBuilder extends JvmAnnotationTargetBuilder implements FieldVisitor {
-    
+public class JvmFieldBuilder extends FieldVisitor implements Opcodes {
+
+	protected final Proxies proxies;
+
     private final JvmDeclaredType declarator;
     private final JvmField result;
 	public JvmFieldBuilder(
@@ -36,7 +40,8 @@ public class JvmFieldBuilder extends JvmAnnotationTargetBuilder implements Field
         final String signature,
         final Object value)
     {
-		super(proxies);
+		super(Opcodes.ASM5);
+		this.proxies = proxies;
 		this.declarator = declarator;
         if ((access & ACC_ENUM) != 0) {
         	result = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
@@ -74,20 +79,22 @@ public class JvmFieldBuilder extends JvmAnnotationTargetBuilder implements Field
 		result.setStatic((access & ACC_STATIC) != 0);
 		result.setTransient((access & ACC_TRANSIENT) != 0);
 		result.setVolatile((access & ACC_VOLATILE) != 0);
-		setVisibility(access, result);
-		result.setType(createTypeReference(BinarySignatures.createTypeSignature(signature != null ? signature : desc), typeParameters));
+		proxies.setVisibility(access, result);
+		result.setType(proxies.createTypeReference(BinarySignatures.createTypeSignature(signature != null ? signature : desc), typeParameters));
     }
     
     @Override
-    protected JvmAnnotationTarget getInstance() {
-    	return result;
-    }
-    
-    public void visitAttribute(Attribute attr) {
+	public void visitAttribute(Attribute attr) {
     	// nothing to do
     }
     
-    @Override
+	@Override
+	public AnnotationVisitor visitAnnotation(final String desc, final boolean visible) {
+		return new JvmAnnotationReferenceBuilder((InternalEList<JvmAnnotationReference>) result
+				.getAnnotations(), desc, proxies);
+	}
+
+	@Override
     public void visitEnd() {
     	InternalEList<JvmMember> members = (InternalEList<JvmMember>) declarator.getMembers();
     	members.addUnique(result);

@@ -15,12 +15,15 @@ import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmAnnotationReferenceBuilder extends AbstractJvmAnnotationValueBuilder {
+public class JvmAnnotationReferenceBuilder extends AnnotationVisitor {
+
+	protected final Proxies proxies;
 
 	private final InternalEList<JvmAnnotationReference> target;
 
@@ -31,11 +34,12 @@ public class JvmAnnotationReferenceBuilder extends AbstractJvmAnnotationValueBui
 	private final BinaryTypeSignature annotationType;
 
 	public JvmAnnotationReferenceBuilder(InternalEList<JvmAnnotationReference> target, String desc, Proxies proxies) {
-		super(proxies);
+		super(Opcodes.ASM5);
+		this.proxies = proxies;
 		this.target = target;
 		this.annotationType = BinarySignatures.createTypeSignature(desc);
 		result = TypesFactory.eINSTANCE.createJvmAnnotationReference();
-		result.setAnnotation(createAnnotationProxy(annotationType));
+		result.setAnnotation(proxies.createAnnotationProxy(annotationType));
 		values = (InternalEList<JvmAnnotationValue>) result.getExplicitValues();
 	}
 
@@ -51,42 +55,48 @@ public class JvmAnnotationReferenceBuilder extends AbstractJvmAnnotationValueBui
 	 *            equivalent to using {@link #visitArray visitArray} and visiting each array element in turn, but is
 	 *            more convenient).
 	 */
+	@Override
 	public void visit(final String name, final Object value) {
-		JvmAnnotationValue annotationValue = createAnnotationValue(value);
-		annotationValue.setOperation(createMethodProxy(annotationType, name));
+		JvmAnnotationValue annotationValue = proxies.createAnnotationValue(value);
+		annotationValue.setOperation(proxies.createMethodProxy(annotationType, name));
 		values.addUnique(annotationValue);
 	}
 
+	@Override
 	public void visitEnum(final String name, final String desc, final String value) {
 		JvmEnumAnnotationValue result = TypesFactory.eINSTANCE.createJvmEnumAnnotationValue();
-		JvmEnumerationLiteral enumLiteralProxy = createEnumLiteralProxy(value, desc);
+		JvmEnumerationLiteral enumLiteralProxy = proxies.createEnumLiteral(value, desc);
 		((InternalEList<JvmEnumerationLiteral>) result.getValues()).addUnique(enumLiteralProxy);
-		result.setOperation(createMethodProxy(annotationType, name));
+		result.setOperation(proxies.createMethodProxy(annotationType, name));
 		values.addUnique(result);
 	}
 	
+	@Override
 	public AnnotationVisitor visitAnnotation(final String name, final String desc) {
 		JvmAnnotationAnnotationValue annotationValue = TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue();
 		InternalEList<JvmAnnotationReference> nestedValues = (InternalEList<JvmAnnotationReference>) annotationValue
 				.getValues();
-		annotationValue.setOperation(createMethodProxy(annotationType, name));
+		annotationValue.setOperation(proxies.createMethodProxy(annotationType, name));
 		JvmAnnotationReferenceBuilder annotation = new JvmAnnotationReferenceBuilder(nestedValues, desc, proxies);
 		values.addUnique(annotationValue);
 		return annotation;
 	}
 
+	@Override
 	public AnnotationVisitor visitArray(final String name) {
 		return new JvmAnnotationValueBuilder(proxies) {
+			@Override
 			public void visitEnd() {
 				if (result == null) {
 					result = TypesFactory.eINSTANCE.createJvmCustomAnnotationValue();
 				}
-				result.setOperation(createMethodProxy(annotationType, name));
+				result.setOperation(proxies.createMethodProxy(annotationType, name));
 				values.addUnique(result);
 			}
 		};
 	}
 
+	@Override
 	public void visitEnd() {
 		target.addUnique(result);
 	}
