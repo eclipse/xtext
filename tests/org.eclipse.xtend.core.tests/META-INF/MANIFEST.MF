@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtend Core Tests
 Bundle-SymbolicName: org.eclipse.xtend.core.tests
-Bundle-Version: 2.5.3.qualifier
+Bundle-Version: 2.5.4.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtend.core,

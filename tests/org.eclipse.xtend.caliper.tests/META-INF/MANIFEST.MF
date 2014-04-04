@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtend Microbenchmarks
 Bundle-SymbolicName: org.eclipse.xtend.caliper.tests
-Bundle-Version: 2.5.3.qualifier
+Bundle-Version: 2.5.4.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: com.google.inject;bundle-version="3.0.0",

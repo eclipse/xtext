@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.common.types.tests
 Bundle-SymbolicName: org.eclipse.xtext.common.types.tests;singleton:=true
-Bundle-Version: 2.5.3.qualifier
+Bundle-Version: 2.5.4.qualifier
 Bundle-Vendor: Eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.junit4;bundle-version="2.5.3",

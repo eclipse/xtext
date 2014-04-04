@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Junit UI Support
 Bundle-SymbolicName: org.eclipse.xtext.ui.junit
-Bundle-Version: 2.5.3.qualifier
+Bundle-Version: 2.5.4.qualifier
 Bundle-Activator: org.eclipse.xtext.ui.junit.Activator
 Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.5.0",
