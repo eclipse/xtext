@@ -9,8 +9,8 @@
         <bundles name="org.eclipse.ui.cheatsheets"/>
         <features name="org.eclipse.jdt.feature.group" versionRange="[3.5.2,3.5.3)"/>
       </repositories>
-      <repositories location="http://download.eclipse.org/releases/galileo">
-        <bundles name="org.eclipse.draw2d.feature.group"/>
+      <repositories location="http://download.eclipse.org/tools/gef/updates-pre-3_8/releases/">
+        <bundles name="org.eclipse.draw2d.feature.group" versionRange="[3.5.1,3.6.0)"/>
       </repositories>
       <repositories location="http://download.eclipse.org/eclipse/updates/3.8">
         <bundles name="org.eclipse.jdt.annotation"/>
