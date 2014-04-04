@@ -3,7 +3,7 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter id="927989779">
             <message_arguments>
-                <message_argument value="2.5.3"/>
+                <message_argument value="2.5.4"/>
                 <message_argument value="org.eclipse.xtend.core"/>
             </message_arguments>
         </filter>
