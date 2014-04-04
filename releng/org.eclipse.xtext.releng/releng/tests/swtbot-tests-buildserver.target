@@ -18,7 +18,6 @@
 <unit id="org.easymock" version="0.0.0"/>
 <unit id="org.antlr.runtime" version="0.0.0"/>
 <unit id="javax.inject" version="0.0.0"/>
-<unit id="org.objectweb.asm" version="0.0.0"/>
 <unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.emf.mwe.sdk.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.xpand" version="0.0.0"/>
@@ -35,6 +34,10 @@
 <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.xtend.sdk.feature.group" version="0.0.0"/>
 <repository location="${xtext.p2.repository}"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+<unit id="org.objectweb.asm" version="5.0.1.v201403281216"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit"/>
 </location>
 </locations>
 </target>
