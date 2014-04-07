@@ -7,7 +7,7 @@
 	<artifactId>purexbase-test</artifactId>
 	<packaging>jar</packaging>
 	<properties>
-		<tycho-version>0.18.0</tycho-version>
+		<tycho-version>0.19.0</tycho-version>
 		<xtend-version>IT-SNAPSHOT</xtend-version>
 	</properties>
 	<dependencies>
