@@ -59,28 +59,11 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 	@Inject
 	private IValueConverterService valueConverter;
 
-	//	protected String getConvertedValue(String unconverted, CrossReference grammarElement) {
-	//		String ruleName = linkingHelper.getRuleNameFrom(grammarElement);
-	//		if (ruleName == null)
-	//			throw new IllegalStateException("Could not determine targeted rule name for "
-	//					+ EmfFormatter.objPath(grammarElement));
-	//		return valueConverter.toString(unconverted, ruleName);
-	//	}
-	//
-	//	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
-	//		IScope scope = scopeProvider.getScope(context, reference);
-	//		if (scope == null)
-	//			return null;
-	//		IEObjectDescription eObjectDescription = scope.getSingleElement(object);
-	//		if (eObjectDescription != null) {
-	//			return qualifiedNameConverter.toString(eObjectDescription.getName());
-	//		}
-	//		return null;
-	//	}
-
 	public boolean isValid(EObject semanticObject, CrossReference crossref, EObject target, INode node, Acceptor errors) {
-		if (target.eIsProxy() && node != null)
-			return true;
+		if (target.eIsProxy() && node != null) {
+			CrossReference crossrefFromNode = GrammarUtil.containingCrossReference(node.getGrammarElement());
+			return crossref == crossrefFromNode;
+		}
 		final EReference ref = GrammarUtil.getReference(crossref, semanticObject.eClass());
 		final IScope scope = scopeProvider.getScope(semanticObject, ref);
 		if (scope == null) {

@@ -17,7 +17,9 @@ Model:
 	("#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1|NestedTypeRecursiveTest2)) | 
 	("#4" parentRef=(ParentRefTest1|ParentRefTest2)) | 
 	("#5" quantityExclusion=(QuantityExclusionTest1|QuantityExclusionTest2)) |
-	("#6" valueExclusion=(ValueExclusionTest1|ValueExclusionTest2))	
+	("#6" valueExclusion=(ValueExclusionTest1|ValueExclusionTest2)) |	
+	("#7" name=STRING nodeExclusion=(NodeExclusion1|NodeExclusion2)) |	
+	("#8" name=STRING nodeExclusionList=(NodeExclusion1List|NodeExclusion2List))	
 	;
 	
 Model2 returns Model: {Model} "model";
@@ -47,3 +49,9 @@ ValueExclusionTest2 returns ValueExclusionTest: val=ValueExclusionTestEn2;
 enum ValueExclusionTestEn0 returns ValueExclusionTestEn: lit0;
 enum ValueExclusionTestEn1 returns ValueExclusionTestEn: lit1;
 enum ValueExclusionTestEn2 returns ValueExclusionTestEn: lit2;
+
+NodeExclusion1 returns NodeExclusion: ref=[Model|ID]; 
+NodeExclusion2 returns NodeExclusion: ref=[Model|STRING];
+
+NodeExclusion1List returns NodeExclusionList: ref+=[Model|ID]+; 
+NodeExclusion2List returns NodeExclusionList: ref+=[Model|STRING]+;
