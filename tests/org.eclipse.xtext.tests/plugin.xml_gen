@@ -176,6 +176,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/MultiRuleEnums" 
+       class = "org.eclipse.xtext.enumrules.multiRuleenums.MultiRuleenumsPackage"
+       genModel = "org/eclipse/xtext/enumrules/MultiRuleEnumTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/EcoreFragmentTestLanguage" 
        class = "org.eclipse.xtext.generator.ecore.second.SecondPackage"
        genModel = "org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.genmodel" /> 
@@ -359,6 +368,7 @@
        genModel = "org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.genmodel" /> 
 	
   </extension>
+
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">

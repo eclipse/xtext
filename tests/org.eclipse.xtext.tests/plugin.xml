@@ -188,6 +188,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/MultiRuleEnums" 
+       class = "org.eclipse.xtext.enumrules.multiRuleenums.MultiRuleenumsPackage"
+       genModel = "org/eclipse/xtext/enumrules/MultiRuleEnumTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/EcoreFragmentTestLanguage" 
        class = "org.eclipse.xtext.generator.ecore.second.SecondPackage"
        genModel = "org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.genmodel" /> 
@@ -238,6 +247,15 @@
        uri = "http://www.eclipse.org/xtext/indexTestLanguage" 
        class = "org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage"
        genModel = "org/eclipse/xtext/index/IndexTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2011/tmf/xtext/ecoreReference" 
+       class = "org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.EcoreReferencePackage"
+       genModel = "org/eclipse/xtext/metamodelreferencing/tests/EcoreReferenceTestLanguage.genmodel" /> 
 	
   </extension>
 
@@ -327,6 +345,15 @@
   </extension>
 
 
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://eclipse.org/xtext/Bug378967TestLanguage" 
+       class = "org.eclipse.xtext.parser.antlr.bug378967Test.Bug378967TestPackage"
+       genModel = "org/eclipse/xtext/parser/antlr/Bug378967TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -353,6 +380,7 @@
        genModel = "org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.genmodel" /> 
 	
   </extension>
+
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -604,6 +632,24 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage" 
+       class = "org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage"
+       genModel = "org/eclipse/xtext/serializer/ContextFinderTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage" 
+       class = "org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestPackage"
+       genModel = "org/eclipse/xtext/serializer/AssignmentFinderTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://simple/unassignedtext" 
        class = "org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextPackage"
        genModel = "org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.genmodel" /> 
@@ -766,6 +812,33 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.xtext.org/LiveContainerTestLanguage" 
+       class = "org.eclipse.xtext.resource.liveContainerTestLanguage.LiveContainerTestLanguagePackage"
+       genModel = "org/eclipse/xtext/resource/LiveContainerTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.xtext.org/LiveContainerBuilderIntegerationTestLanguage.xtext" 
+       class = "org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.LiveContainerBuilderIntegerationTestLanguagePackage"
+       genModel = "org/eclipse/xtext/resource/LiveContainerBuilderIntegerationTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.xtext.org/Bug385636" 
+       class = "org.eclipse.xtext.resource.bug385636.Bug385636Package"
+       genModel = "org/eclipse/xtext/resource/Bug385636.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2010/tmf/xtext/parser/EncodingTest" 
        class = "org.eclipse.xtext.parser.encoding.encodingTest.EncodingTestPackage"
        genModel = "org/eclipse/xtext/parser/encoding/EncodingTestLanguage.genmodel" /> 
@@ -779,16 +852,6 @@
        class = "org.eclipse.xtext.testlanguages.indent.indentLang.IndentLangPackage"
        genModel = "org/eclipse/xtext/testlanguages/indent/IndentationAwareTestLanguage.genmodel" /> 
 	
-  </extension>
-  <extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.resource.ResourceServiceProviderProviderTest$TestResourceServiceProviderProvider"
-           uriExtension="TestResourceServiceProviderProvider">
-     </resourceServiceProvider>
-     <resourceServiceProvider
-           class="org.eclipse.xtext.resource.ResourceServiceProviderProviderTest$TestResourceServiceProviderExecutableExtensionFactory:foo"
-           uriExtension="TestResourceServiceProviderExecutableExtensionFactory">
-     </resourceServiceProvider>
   </extension>
 
 
