@@ -60,7 +60,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl.PlatformSchemeAware;
+import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl.AbsoluteCrossBundleAware;
 import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.eclipse.emf.mwe.core.ConfigurationException;
@@ -440,7 +440,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 		return clonedGrammar;
 	}
 
-	public static class ToPlatformResourceDeresolvingURIHandler extends PlatformSchemeAware {
+	public static class ToPlatformResourceDeresolvingURIHandler extends AbsoluteCrossBundleAware {
 		@Override
 		public URI deresolve(URI uri) {
 			return super.deresolve(toPlatformResourceURI(uri));
