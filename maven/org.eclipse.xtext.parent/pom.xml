@@ -35,8 +35,8 @@
 	<properties>
 		<mavenVersion>3.0.4</mavenVersion>
 		<tycho-version>0.17.0</tycho-version>
-		<emf.version>[2.8.0,)</emf.version>
-		<asm.version>[3.3.0,4.0.0)</asm.version>
+		<emf.version>(2.8,3.0)</emf.version>
+		<asm.version>5.0.1</asm.version>
 		<guava.version>[10.0.1,14.0]</guava.version>
 		<javax-inject.version>1</javax-inject.version>
 		<google-inject.version>3.0</google-inject.version>
@@ -83,14 +83,14 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<compilerId>eclipse</compilerId>
+					<compilerId>jdt</compilerId>
 					<optimize>true</optimize>
 				</configuration>
 				<dependencies>
 					<dependency>
-						<groupId>org.codehaus.plexus</groupId>
-						<artifactId>plexus-compiler-eclipse</artifactId>
-						<version>2.3</version>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-compiler-jdt</artifactId>
+						<version>${tycho-version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -128,7 +128,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -136,6 +137,25 @@
 					<configuration>
 						<lifecycleMappingMetadata>
 							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-plugin-plugin
+										</artifactId>
+										<versionRange>
+											[2.7,)
+										</versionRange>
+										<goals>
+											<goal>descriptor</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>
