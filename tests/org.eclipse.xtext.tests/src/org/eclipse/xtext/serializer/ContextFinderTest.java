@@ -10,10 +10,14 @@ package org.eclipse.xtext.serializer;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
+import org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage;
 import org.eclipse.xtext.serializer.contextFinderTest.Model;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2;
@@ -147,6 +151,48 @@ public class ContextFinderTest extends AbstractXtextTests {
 	@Test public void testValueExclusionTest2() throws Exception {
 		Model model = parseHelper.parse("#6 lit2");
 		assertEquals("ValueExclusionTest2", findContextsByContents(model.getValueExclusion()));
+	}
+	
+	@Test public void testNodeExclusion1() throws Exception {
+		Model model = parseHelper.parse("#7 'myname' myname");
+		proxify(model.getNodeExclusion(), ContextFinderTestPackage.Literals.NODE_EXCLUSION__REF);
+		assertEquals("NodeExclusion1", findContextsByContents(model.getNodeExclusion()));
+	}
+
+	@Test public void testNodeExclusion2() throws Exception {
+		Model model = parseHelper.parse("#7 'my@' 'my@'");
+		proxify(model.getNodeExclusion(), ContextFinderTestPackage.Literals.NODE_EXCLUSION__REF);
+		assertEquals("NodeExclusion2", findContextsByContents(model.getNodeExclusion()));
+	}
+
+	@Test public void testNodeExclusion1List() throws Exception {
+		Model model = parseHelper.parse("#8 'myname' myname");
+		proxify(model.getNodeExclusionList(), ContextFinderTestPackage.Literals.NODE_EXCLUSION_LIST__REF);
+		assertEquals("NodeExclusion1List", findContextsByContents(model.getNodeExclusionList()));
+	}
+
+	@Test public void testNodeExclusion2List() throws Exception {
+		Model model = parseHelper.parse("#8 'my@' 'my@'");
+		proxify(model.getNodeExclusionList(), ContextFinderTestPackage.Literals.NODE_EXCLUSION_LIST__REF);
+		assertEquals("NodeExclusion2List", findContextsByContents(model.getNodeExclusionList()));
+	}
+
+	private void proxify(EObject owner, EReference ref) {
+		if (ref.isMany()) {
+			@SuppressWarnings("unchecked")
+			List<? super Object> list = (List<? super Object>) owner.eGet(ref);
+			for (int i = 0; i < list.size(); i++)
+				list.set(i, createProxy((EObject) list.get(i)));
+		} else {
+			owner.eSet(ref, createProxy((EObject) owner.eGet(ref)));
+		}
+	}
+
+	private EObject createProxy(EObject old) {
+		EClass type = old.eClass();
+		InternalEObject proxy = (InternalEObject) type.getEPackage().getEFactoryInstance().create(type);
+		proxy.eSetProxyURI(old.eResource().getURI().appendFragment("some_invalid_fragment"));
+		return proxy;
 	}
 
 }

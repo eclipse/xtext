@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
     forceOverwrite="true" modelName="Genmodel" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor" runtimeVersion="2.5" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    editorPluginID="org.eclipse.xtext.tests.editor" runtimeVersion="2.5" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="First" basePackage="org.eclipse.xtext.generator.ecore" disposableProviderFactory="true"
       ecorePackage="First.ecore#/">
     <genClasses ecoreClass="First.ecore#//First">
