@@ -78,7 +78,7 @@ public class GeneratorComponent implements IWorkflowComponent {
 			if (outlet.getKey()==null)
 				throw new IllegalStateException("One of the outlets was configured without a name");
 			if (outlet.getValue()==null)
-				throw new IllegalStateException("The path of outle '"+outlet.getKey()+"' was null.");
+				throw new IllegalStateException("The path of outlet '"+outlet.getKey()+"' was null.");
 		}
 	}
 	
