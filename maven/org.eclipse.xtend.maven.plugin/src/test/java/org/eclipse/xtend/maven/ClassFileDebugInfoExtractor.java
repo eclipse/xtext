@@ -12,7 +12,6 @@ import org.eclipse.xtext.util.Strings;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.commons.EmptyVisitor;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -60,7 +59,7 @@ public class ClassFileDebugInfoExtractor {
 		}
 	}
 
-	protected static class ClassVisitor extends EmptyVisitor {
+	protected static class ClassVisitor extends org.objectweb.asm.ClassVisitor {
 		private List<MethodVisitor> methods = Lists.newArrayList();
 		private String name;
 		private String fileName;
@@ -72,7 +71,7 @@ public class ClassFileDebugInfoExtractor {
 		 * @param fileName
 		 */
 		public ClassVisitor(String fileName) {
-			super();
+			super(Opcodes.ASM5);
 			this.fileName = fileName;
 		}
 
@@ -107,14 +106,14 @@ public class ClassFileDebugInfoExtractor {
 		}
 	}
 
-	protected static class MethodVisitor extends EmptyVisitor {
+	protected static class MethodVisitor extends org.objectweb.asm.MethodVisitor {
 		private List<String> localVariables = Lists.newArrayList();
 		private String name;
 		private int startline = -1;
 		private ClassVisitor cls;
 
 		public MethodVisitor(ClassVisitor cls, String name) {
-			super();
+			super(Opcodes.ASM5);
 			this.cls = cls;
 			this.name = name;
 		}
