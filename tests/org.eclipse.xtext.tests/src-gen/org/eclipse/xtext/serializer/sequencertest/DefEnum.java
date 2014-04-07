@@ -37,7 +37,7 @@ public enum DefEnum implements Enumerator
    * @generated
    * @ordered
    */
-  KW2(0, "kw2", "kw2"),
+  KW2(1, "kw2", "kw2"),
 
   /**
    * The '<em><b>Kw3</b></em>' literal object.
@@ -47,7 +47,7 @@ public enum DefEnum implements Enumerator
    * @generated
    * @ordered
    */
-  KW3(0, "kw3", "kw3");
+  KW3(2, "kw3", "kw3");
 
   /**
    * The '<em><b>Kw1</b></em>' literal value.
@@ -77,7 +77,7 @@ public enum DefEnum implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int KW2_VALUE = 0;
+  public static final int KW2_VALUE = 1;
 
   /**
    * The '<em><b>Kw3</b></em>' literal value.
@@ -92,7 +92,7 @@ public enum DefEnum implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int KW3_VALUE = 0;
+  public static final int KW3_VALUE = 2;
 
   /**
    * An array of all the '<em><b>Def Enum</b></em>' enumerators.
@@ -165,6 +165,8 @@ public enum DefEnum implements Enumerator
     switch (value)
     {
       case KW1_VALUE: return KW1;
+      case KW2_VALUE: return KW2;
+      case KW3_VALUE: return KW3;
     }
     return null;
   }

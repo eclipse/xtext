@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.first.impl;
 
@@ -24,82 +21,86 @@ import org.eclipse.xtext.generator.ecore.first.*;
 public class FirstFactoryImpl extends EFactoryImpl implements FirstFactory
 {
   /**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+   * Creates the default factory implementation.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public static FirstFactory init()
   {
-		try {
-			FirstFactory theFirstFactory = (FirstFactory)EPackage.Registry.INSTANCE.getEFactory("http://first"); 
-			if (theFirstFactory != null) {
-				return theFirstFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new FirstFactoryImpl();
-	}
+    try
+    {
+      FirstFactory theFirstFactory = (FirstFactory)EPackage.Registry.INSTANCE.getEFactory(FirstPackage.eNS_URI);
+      if (theFirstFactory != null)
+      {
+        return theFirstFactory;
+      }
+    }
+    catch (Exception exception)
+    {
+      EcorePlugin.INSTANCE.log(exception);
+    }
+    return new FirstFactoryImpl();
+  }
 
   /**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the factory.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public FirstFactoryImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public EObject create(EClass eClass)
   {
-		switch (eClass.getClassifierID()) {
-			case FirstPackage.FIRST: return createFirst();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+    switch (eClass.getClassifierID())
+    {
+      case FirstPackage.FIRST: return createFirst();
+      default:
+        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public First createFirst()
   {
-		FirstImpl first = new FirstImpl();
-		return first;
-	}
+    FirstImpl first = new FirstImpl();
+    return first;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public FirstPackage getFirstPackage()
   {
-		return (FirstPackage)getEPackage();
-	}
+    return (FirstPackage)getEPackage();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+   * @deprecated
+   * @generated
+   */
   @Deprecated
   public static FirstPackage getPackage()
   {
-		return FirstPackage.eINSTANCE;
-	}
+    return FirstPackage.eINSTANCE;
+  }
 
 } //FirstFactoryImpl

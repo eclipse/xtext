@@ -37,7 +37,7 @@ public enum EnumBug310435Enum implements Enumerator
    * @generated
    * @ordered
    */
-  LIT2(0, "lit2", "lit2");
+  LIT2(1, "lit2", "lit2");
 
   /**
    * The '<em><b>Lit1</b></em>' literal value.
@@ -67,7 +67,7 @@ public enum EnumBug310435Enum implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int LIT2_VALUE = 0;
+  public static final int LIT2_VALUE = 1;
 
   /**
    * An array of all the '<em><b>Enum Bug310435 Enum</b></em>' enumerators.
@@ -139,6 +139,7 @@ public enum EnumBug310435Enum implements Enumerator
     switch (value)
     {
       case LIT1_VALUE: return LIT1;
+      case LIT2_VALUE: return LIT2;
     }
     return null;
   }

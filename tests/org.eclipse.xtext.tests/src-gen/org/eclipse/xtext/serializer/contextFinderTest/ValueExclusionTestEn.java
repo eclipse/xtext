@@ -37,7 +37,7 @@ public enum ValueExclusionTestEn implements Enumerator
    * @generated
    * @ordered
    */
-  LIT1(0, "lit1", "lit1"),
+  LIT1(1, "lit1", "lit1"),
 
   /**
    * The '<em><b>Lit2</b></em>' literal object.
@@ -47,7 +47,7 @@ public enum ValueExclusionTestEn implements Enumerator
    * @generated
    * @ordered
    */
-  LIT2(0, "lit2", "lit2");
+  LIT2(2, "lit2", "lit2");
 
   /**
    * The '<em><b>Lit0</b></em>' literal value.
@@ -77,7 +77,7 @@ public enum ValueExclusionTestEn implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int LIT1_VALUE = 0;
+  public static final int LIT1_VALUE = 1;
 
   /**
    * The '<em><b>Lit2</b></em>' literal value.
@@ -92,7 +92,7 @@ public enum ValueExclusionTestEn implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int LIT2_VALUE = 0;
+  public static final int LIT2_VALUE = 2;
 
   /**
    * An array of all the '<em><b>Value Exclusion Test En</b></em>' enumerators.
@@ -165,6 +165,8 @@ public enum ValueExclusionTestEn implements Enumerator
     switch (value)
     {
       case LIT0_VALUE: return LIT0;
+      case LIT1_VALUE: return LIT1;
+      case LIT2_VALUE: return LIT2;
     }
     return null;
   }

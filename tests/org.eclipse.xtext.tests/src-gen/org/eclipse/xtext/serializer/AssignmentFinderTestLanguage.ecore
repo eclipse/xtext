@@ -35,8 +35,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TestEnum">
     <eLiterals name="lit1" literal="lit1"/>
-    <eLiterals name="lit2" literal="lit2"/>
-    <eLiterals name="lit3" literal="lit3"/>
+    <eLiterals name="lit2" value="1" literal="lit2"/>
+    <eLiterals name="lit3" value="2" literal="lit3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KeywordBool">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kw" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>

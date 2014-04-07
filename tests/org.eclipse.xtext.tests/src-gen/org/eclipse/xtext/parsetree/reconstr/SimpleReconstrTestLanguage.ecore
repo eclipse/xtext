@@ -135,7 +135,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EnumBug310435Enum">
     <eLiterals name="lit1" literal="lit1"/>
-    <eLiterals name="lit2" literal="lit2"/>
+    <eLiterals name="lit2" value="1" literal="lit2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CrossRefNameTest" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="named" upperBound="-1"

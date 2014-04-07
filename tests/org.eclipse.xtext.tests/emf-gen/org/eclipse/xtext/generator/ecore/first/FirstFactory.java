@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.first;
 
@@ -18,29 +15,29 @@ import org.eclipse.emf.ecore.EFactory;
 public interface FirstFactory extends EFactory
 {
   /**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
+   * The singleton instance of the factory.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   FirstFactory eINSTANCE = org.eclipse.xtext.generator.ecore.first.impl.FirstFactoryImpl.init();
 
   /**
-	 * Returns a new object of class '<em>First</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns a new object of class '<em>First</em>'.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return a new object of class '<em>First</em>'.
-	 * @generated
-	 */
+   * @return a new object of class '<em>First</em>'.
+   * @generated
+   */
   First createFirst();
 
   /**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
+   * Returns the package supported by this factory.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
+   * @return the package supported by this factory.
+   * @generated
+   */
   FirstPackage getFirstPackage();
 
 } //FirstFactory
