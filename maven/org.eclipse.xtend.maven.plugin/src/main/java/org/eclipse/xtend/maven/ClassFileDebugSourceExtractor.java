@@ -4,13 +4,18 @@ import java.io.File;
 import java.io.IOException;
 
 import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.commons.EmptyVisitor;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
 
 import com.google.common.io.Files;
 
 public class ClassFileDebugSourceExtractor {
 
-	protected static class Visitor extends EmptyVisitor {
+	protected static class Visitor extends ClassVisitor {
+		public Visitor() {
+			super(Opcodes.ASM5);
+		}
+
 		protected String source;
 
 		@Override
