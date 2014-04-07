@@ -1520,7 +1520,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   @Test
   public void missingConstructorCallParentheses() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
+    _builder.append("class TopLevelClassWithDefaultconstructor {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def foo() {}");
@@ -1534,7 +1534,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("def bar() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("new Foo.foo|");
+    _builder.append("new TopLevelClassWithDefaultconstructor.foo|");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -1543,9 +1543,9 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
     QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Change to constructor call \'new Foo()\'");
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Change to constructor call \'new TopLevelClassWithDefaultconstructor()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("class Foo {");
+    _builder_1.append("class TopLevelClassWithDefaultconstructor {");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("def foo() {}");
@@ -1559,7 +1559,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("def bar() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
-    _builder_1.append("new Foo().foo");
+    _builder_1.append("new TopLevelClassWithDefaultconstructor().foo");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");
