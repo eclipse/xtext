@@ -18,6 +18,8 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -46,6 +48,7 @@ import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -461,6 +464,59 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Override
 	public void completeXCatchClause_Expression(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
+	}
+	
+	@Override
+	public void complete_XExpression(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		// likely XParenthesizedExpression
+		EObject container = ruleCall.eContainer();
+		// avoid dependency on XbaseGrammarAccess
+		if (container instanceof Group && "XParenthesizedExpression".equals(GrammarUtil.containingRule(ruleCall).getName())) {
+			createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
+		}
+	}
+	
+	@Override
+	public void completeXBasicForLoopExpression_InitExpressions(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		ICompositeNode node = NodeModelUtils.getNode(model);
+		if (node.getOffset() >= context.getOffset()) {
+			createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
+			return;
+		}
+		if (model instanceof XBasicForLoopExpression) {
+			List<XExpression> children = ((XBasicForLoopExpression) model).getInitExpressions();
+			if (!children.isEmpty()) {
+				for(int i = children.size() - 1; i >= 0; i--) {
+					XExpression child = children.get(i);
+					ICompositeNode childNode = NodeModelUtils.getNode(child);
+					if (childNode.getEndOffset() <= context.getOffset()) {
+						createLocalVariableAndImplicitProposals(child, IExpressionScope.Anchor.AFTER, context, acceptor);
+						return;		
+					}
+				}
+			}
+		}
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
+	}
+	
+	@Override
+	public void completeXBasicForLoopExpression_UpdateExpressions(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
+	}
+	
+	@Override
+	public void completeXBasicForLoopExpression_Expression(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
+	}
+	
+	@Override
+	public void completeXBasicForLoopExpression_EachExpression(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
 	}
 	
