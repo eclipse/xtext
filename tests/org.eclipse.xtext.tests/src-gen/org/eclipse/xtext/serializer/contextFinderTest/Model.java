@@ -19,6 +19,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getParentRef <em>Parent Ref</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getQuantityExclusion <em>Quantity Exclusion</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getValueExclusion <em>Value Exclusion</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getNodeExclusion <em>Node Exclusion</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getNodeExclusionList <em>Node Exclusion List</em>}</li>
  * </ul>
  * </p>
  *
@@ -209,5 +212,83 @@ public interface Model extends EObject
    * @generated
    */
   void setValueExclusion(ValueExclusionTest value);
+
+  /**
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage#getModel_Name()
+   * @model
+   * @generated
+   */
+  String getName();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
+  void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Node Exclusion</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Node Exclusion</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Node Exclusion</em>' containment reference.
+   * @see #setNodeExclusion(NodeExclusion)
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage#getModel_NodeExclusion()
+   * @model containment="true"
+   * @generated
+   */
+  NodeExclusion getNodeExclusion();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getNodeExclusion <em>Node Exclusion</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Node Exclusion</em>' containment reference.
+   * @see #getNodeExclusion()
+   * @generated
+   */
+  void setNodeExclusion(NodeExclusion value);
+
+  /**
+   * Returns the value of the '<em><b>Node Exclusion List</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Node Exclusion List</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Node Exclusion List</em>' containment reference.
+   * @see #setNodeExclusionList(NodeExclusionList)
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage#getModel_NodeExclusionList()
+   * @model containment="true"
+   * @generated
+   */
+  NodeExclusionList getNodeExclusionList();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getNodeExclusionList <em>Node Exclusion List</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Node Exclusion List</em>' containment reference.
+   * @see #getNodeExclusionList()
+   * @generated
+   */
+  void setNodeExclusionList(NodeExclusionList value);
 
 } // Model

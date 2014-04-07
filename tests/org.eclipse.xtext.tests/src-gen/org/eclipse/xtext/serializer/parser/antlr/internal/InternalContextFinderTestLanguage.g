@@ -346,6 +346,124 @@ ruleModel returns [EObject current=null]
 )
 
 )
+))
+    |(	otherlv_14='#7' 
+    {
+    	newLeafNode(otherlv_14, grammarAccess.getModelAccess().getNumberSignDigitSevenKeyword_7_0());
+    }
+(
+(
+		lv_name_15_0=RULE_STRING
+		{
+			newLeafNode(lv_name_15_0, grammarAccess.getModelAccess().getNameSTRINGTerminalRuleCall_7_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getModelRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_15_0, 
+        		"STRING");
+	    }
+
+)
+)(
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getNodeExclusionNodeExclusion1ParserRuleCall_7_2_0_0()); 
+	    }
+		lv_nodeExclusion_16_1=ruleNodeExclusion1		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"nodeExclusion",
+        		lv_nodeExclusion_16_1, 
+        		"NodeExclusion1");
+	        afterParserOrEnumRuleCall();
+	    }
+
+    |		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getNodeExclusionNodeExclusion2ParserRuleCall_7_2_0_1()); 
+	    }
+		lv_nodeExclusion_16_2=ruleNodeExclusion2		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"nodeExclusion",
+        		lv_nodeExclusion_16_2, 
+        		"NodeExclusion2");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+
+)
+))
+    |(	otherlv_17='#8' 
+    {
+    	newLeafNode(otherlv_17, grammarAccess.getModelAccess().getNumberSignDigitEightKeyword_8_0());
+    }
+(
+(
+		lv_name_18_0=RULE_STRING
+		{
+			newLeafNode(lv_name_18_0, grammarAccess.getModelAccess().getNameSTRINGTerminalRuleCall_8_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getModelRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_18_0, 
+        		"STRING");
+	    }
+
+)
+)(
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getNodeExclusionListNodeExclusion1ListParserRuleCall_8_2_0_0()); 
+	    }
+		lv_nodeExclusionList_19_1=ruleNodeExclusion1List		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"nodeExclusionList",
+        		lv_nodeExclusionList_19_1, 
+        		"NodeExclusion1List");
+	        afterParserOrEnumRuleCall();
+	    }
+
+    |		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getNodeExclusionListNodeExclusion2ListParserRuleCall_8_2_0_1()); 
+	    }
+		lv_nodeExclusionList_19_2=ruleNodeExclusion2List		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"nodeExclusionList",
+        		lv_nodeExclusionList_19_2, 
+        		"NodeExclusion2List");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+
+)
 )))
 ;
 
@@ -1096,6 +1214,142 @@ ruleValueExclusionTest2 returns [EObject current=null]
 
 )
 )
+;
+
+
+
+
+
+// Entry rule entryRuleNodeExclusion1
+entryRuleNodeExclusion1 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNodeExclusion1Rule()); }
+	 iv_ruleNodeExclusion1=ruleNodeExclusion1 
+	 { $current=$iv_ruleNodeExclusion1.current; } 
+	 EOF 
+;
+
+// Rule NodeExclusion1
+ruleNodeExclusion1 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getNodeExclusion1Rule());
+	        }
+        }
+	otherlv_0=RULE_ID
+	{
+		newLeafNode(otherlv_0, grammarAccess.getNodeExclusion1Access().getRefModelCrossReference_0()); 
+	}
+
+)
+)
+;
+
+
+
+
+
+// Entry rule entryRuleNodeExclusion2
+entryRuleNodeExclusion2 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNodeExclusion2Rule()); }
+	 iv_ruleNodeExclusion2=ruleNodeExclusion2 
+	 { $current=$iv_ruleNodeExclusion2.current; } 
+	 EOF 
+;
+
+// Rule NodeExclusion2
+ruleNodeExclusion2 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getNodeExclusion2Rule());
+	        }
+        }
+	otherlv_0=RULE_STRING
+	{
+		newLeafNode(otherlv_0, grammarAccess.getNodeExclusion2Access().getRefModelCrossReference_0()); 
+	}
+
+)
+)
+;
+
+
+
+
+
+// Entry rule entryRuleNodeExclusion1List
+entryRuleNodeExclusion1List returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNodeExclusion1ListRule()); }
+	 iv_ruleNodeExclusion1List=ruleNodeExclusion1List 
+	 { $current=$iv_ruleNodeExclusion1List.current; } 
+	 EOF 
+;
+
+// Rule NodeExclusion1List
+ruleNodeExclusion1List returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getNodeExclusion1ListRule());
+	        }
+        }
+	otherlv_0=RULE_ID
+	{
+		newLeafNode(otherlv_0, grammarAccess.getNodeExclusion1ListAccess().getRefModelCrossReference_0()); 
+	}
+
+)
+)+
+;
+
+
+
+
+
+// Entry rule entryRuleNodeExclusion2List
+entryRuleNodeExclusion2List returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNodeExclusion2ListRule()); }
+	 iv_ruleNodeExclusion2List=ruleNodeExclusion2List 
+	 { $current=$iv_ruleNodeExclusion2List.current; } 
+	 EOF 
+;
+
+// Rule NodeExclusion2List
+ruleNodeExclusion2List returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getNodeExclusion2ListRule());
+	        }
+        }
+	otherlv_0=RULE_STRING
+	{
+		newLeafNode(otherlv_0, grammarAccess.getNodeExclusion2ListAccess().getRefModelCrossReference_0()); 
+	}
+
+)
+)+
 ;
 
 

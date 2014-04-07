@@ -17,6 +17,8 @@ import org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage;
 import org.eclipse.xtext.serializer.contextFinderTest.Model;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeTest;
+import org.eclipse.xtext.serializer.contextFinderTest.NodeExclusion;
+import org.eclipse.xtext.serializer.contextFinderTest.NodeExclusionList;
 import org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest;
 import org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTest;
 
@@ -34,6 +36,9 @@ import org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTest;
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getParentRef <em>Parent Ref</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getQuantityExclusion <em>Quantity Exclusion</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getValueExclusion <em>Value Exclusion</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getNodeExclusion <em>Node Exclusion</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getNodeExclusionList <em>Node Exclusion List</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,6 +115,46 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected ValueExclusionTest valueExclusion;
+
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getNodeExclusion() <em>Node Exclusion</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNodeExclusion()
+   * @generated
+   * @ordered
+   */
+  protected NodeExclusion nodeExclusion;
+
+  /**
+   * The cached value of the '{@link #getNodeExclusionList() <em>Node Exclusion List</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNodeExclusionList()
+   * @generated
+   * @ordered
+   */
+  protected NodeExclusionList nodeExclusionList;
 
   /**
    * <!-- begin-user-doc -->
@@ -473,6 +518,125 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NodeExclusion getNodeExclusion()
+  {
+    return nodeExclusion;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetNodeExclusion(NodeExclusion newNodeExclusion, NotificationChain msgs)
+  {
+    NodeExclusion oldNodeExclusion = nodeExclusion;
+    nodeExclusion = newNodeExclusion;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__NODE_EXCLUSION, oldNodeExclusion, newNodeExclusion);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setNodeExclusion(NodeExclusion newNodeExclusion)
+  {
+    if (newNodeExclusion != nodeExclusion)
+    {
+      NotificationChain msgs = null;
+      if (nodeExclusion != null)
+        msgs = ((InternalEObject)nodeExclusion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ContextFinderTestPackage.MODEL__NODE_EXCLUSION, null, msgs);
+      if (newNodeExclusion != null)
+        msgs = ((InternalEObject)newNodeExclusion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ContextFinderTestPackage.MODEL__NODE_EXCLUSION, null, msgs);
+      msgs = basicSetNodeExclusion(newNodeExclusion, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__NODE_EXCLUSION, newNodeExclusion, newNodeExclusion));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NodeExclusionList getNodeExclusionList()
+  {
+    return nodeExclusionList;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetNodeExclusionList(NodeExclusionList newNodeExclusionList, NotificationChain msgs)
+  {
+    NodeExclusionList oldNodeExclusionList = nodeExclusionList;
+    nodeExclusionList = newNodeExclusionList;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__NODE_EXCLUSION_LIST, oldNodeExclusionList, newNodeExclusionList);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setNodeExclusionList(NodeExclusionList newNodeExclusionList)
+  {
+    if (newNodeExclusionList != nodeExclusionList)
+    {
+      NotificationChain msgs = null;
+      if (nodeExclusionList != null)
+        msgs = ((InternalEObject)nodeExclusionList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ContextFinderTestPackage.MODEL__NODE_EXCLUSION_LIST, null, msgs);
+      if (newNodeExclusionList != null)
+        msgs = ((InternalEObject)newNodeExclusionList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ContextFinderTestPackage.MODEL__NODE_EXCLUSION_LIST, null, msgs);
+      msgs = basicSetNodeExclusionList(newNodeExclusionList, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__NODE_EXCLUSION_LIST, newNodeExclusionList, newNodeExclusionList));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -492,6 +656,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetQuantityExclusion(null, msgs);
       case ContextFinderTestPackage.MODEL__VALUE_EXCLUSION:
         return basicSetValueExclusion(null, msgs);
+      case ContextFinderTestPackage.MODEL__NODE_EXCLUSION:
+        return basicSetNodeExclusion(null, msgs);
+      case ContextFinderTestPackage.MODEL__NODE_EXCLUSION_LIST:
+        return basicSetNodeExclusionList(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -520,6 +688,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getQuantityExclusion();
       case ContextFinderTestPackage.MODEL__VALUE_EXCLUSION:
         return getValueExclusion();
+      case ContextFinderTestPackage.MODEL__NAME:
+        return getName();
+      case ContextFinderTestPackage.MODEL__NODE_EXCLUSION:
+        return getNodeExclusion();
+      case ContextFinderTestPackage.MODEL__NODE_EXCLUSION_LIST:
+        return getNodeExclusionList();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -554,6 +728,15 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case ContextFinderTestPackage.MODEL__VALUE_EXCLUSION:
         setValueExclusion((ValueExclusionTest)newValue);
+        return;
+      case ContextFinderTestPackage.MODEL__NAME:
+        setName((String)newValue);
+        return;
+      case ContextFinderTestPackage.MODEL__NODE_EXCLUSION:
+        setNodeExclusion((NodeExclusion)newValue);
+        return;
+      case ContextFinderTestPackage.MODEL__NODE_EXCLUSION_LIST:
+        setNodeExclusionList((NodeExclusionList)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -590,6 +773,15 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case ContextFinderTestPackage.MODEL__VALUE_EXCLUSION:
         setValueExclusion((ValueExclusionTest)null);
         return;
+      case ContextFinderTestPackage.MODEL__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+      case ContextFinderTestPackage.MODEL__NODE_EXCLUSION:
+        setNodeExclusion((NodeExclusion)null);
+        return;
+      case ContextFinderTestPackage.MODEL__NODE_EXCLUSION_LIST:
+        setNodeExclusionList((NodeExclusionList)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -618,8 +810,31 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return quantityExclusion != null;
       case ContextFinderTestPackage.MODEL__VALUE_EXCLUSION:
         return valueExclusion != null;
+      case ContextFinderTestPackage.MODEL__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case ContextFinderTestPackage.MODEL__NODE_EXCLUSION:
+        return nodeExclusion != null;
+      case ContextFinderTestPackage.MODEL__NODE_EXCLUSION_LIST:
+        return nodeExclusionList != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //ModelImpl

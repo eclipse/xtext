@@ -22,6 +22,8 @@ import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest1;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest2;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeTest;
+import org.eclipse.xtext.serializer.contextFinderTest.NodeExclusion;
+import org.eclipse.xtext.serializer.contextFinderTest.NodeExclusionList;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild;
@@ -120,6 +122,20 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * @generated
    */
   private EClass valueExclusionTestEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass nodeExclusionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass nodeExclusionListEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -286,6 +302,36 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
   public EReference getModel_ValueExclusion()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getModel_Name()
+  {
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_NodeExclusion()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_NodeExclusionList()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(9);
   }
 
   /**
@@ -513,6 +559,46 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getNodeExclusion()
+  {
+    return nodeExclusionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getNodeExclusion_Ref()
+  {
+    return (EReference)nodeExclusionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getNodeExclusionList()
+  {
+    return nodeExclusionListEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getNodeExclusionList_Ref()
+  {
+    return (EReference)nodeExclusionListEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getNestedTypeRecursiveTest1()
   {
     return nestedTypeRecursiveTest1EClass;
@@ -576,6 +662,9 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
     createEReference(modelEClass, MODEL__PARENT_REF);
     createEReference(modelEClass, MODEL__QUANTITY_EXCLUSION);
     createEReference(modelEClass, MODEL__VALUE_EXCLUSION);
+    createEAttribute(modelEClass, MODEL__NAME);
+    createEReference(modelEClass, MODEL__NODE_EXCLUSION);
+    createEReference(modelEClass, MODEL__NODE_EXCLUSION_LIST);
 
     attributeExclusionTestEClass = createEClass(ATTRIBUTE_EXCLUSION_TEST);
     createEAttribute(attributeExclusionTestEClass, ATTRIBUTE_EXCLUSION_TEST__ATTR1);
@@ -609,6 +698,12 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
 
     valueExclusionTestEClass = createEClass(VALUE_EXCLUSION_TEST);
     createEAttribute(valueExclusionTestEClass, VALUE_EXCLUSION_TEST__VAL);
+
+    nodeExclusionEClass = createEClass(NODE_EXCLUSION);
+    createEReference(nodeExclusionEClass, NODE_EXCLUSION__REF);
+
+    nodeExclusionListEClass = createEClass(NODE_EXCLUSION_LIST);
+    createEReference(nodeExclusionListEClass, NODE_EXCLUSION_LIST__REF);
 
     nestedTypeRecursiveTest1EClass = createEClass(NESTED_TYPE_RECURSIVE_TEST1);
 
@@ -664,6 +759,9 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
     initEReference(getModel_ParentRef(), theEcorePackage.getEObject(), null, "parentRef", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_QuantityExclusion(), this.getQuantityExclusionTest(), null, "quantityExclusion", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_ValueExclusion(), this.getValueExclusionTest(), null, "valueExclusion", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_NodeExclusion(), this.getNodeExclusion(), null, "nodeExclusion", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_NodeExclusionList(), this.getNodeExclusionList(), null, "nodeExclusionList", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attributeExclusionTestEClass, AttributeExclusionTest.class, "AttributeExclusionTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAttributeExclusionTest_Attr1(), theEcorePackage.getEString(), "attr1", null, 0, 1, AttributeExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -697,6 +795,12 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
 
     initEClass(valueExclusionTestEClass, ValueExclusionTest.class, "ValueExclusionTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getValueExclusionTest_Val(), this.getValueExclusionTestEn(), "val", null, 0, 1, ValueExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(nodeExclusionEClass, NodeExclusion.class, "NodeExclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getNodeExclusion_Ref(), this.getModel(), null, "ref", null, 0, 1, NodeExclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(nodeExclusionListEClass, NodeExclusionList.class, "NodeExclusionList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getNodeExclusionList_Ref(), this.getModel(), null, "ref", null, 0, -1, NodeExclusionList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nestedTypeRecursiveTest1EClass, NestedTypeRecursiveTest1.class, "NestedTypeRecursiveTest1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -135,6 +135,16 @@ public class ContextFinderTestAdapterFactory extends AdapterFactoryImpl
         return createValueExclusionTestAdapter();
       }
       @Override
+      public Adapter caseNodeExclusion(NodeExclusion object)
+      {
+        return createNodeExclusionAdapter();
+      }
+      @Override
+      public Adapter caseNodeExclusionList(NodeExclusionList object)
+      {
+        return createNodeExclusionListAdapter();
+      }
+      @Override
       public Adapter caseNestedTypeRecursiveTest1(NestedTypeRecursiveTest1 object)
       {
         return createNestedTypeRecursiveTest1Adapter();
@@ -342,6 +352,36 @@ public class ContextFinderTestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createValueExclusionTestAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.contextFinderTest.NodeExclusion <em>Node Exclusion</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.NodeExclusion
+   * @generated
+   */
+  public Adapter createNodeExclusionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.contextFinderTest.NodeExclusionList <em>Node Exclusion List</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.NodeExclusionList
+   * @generated
+   */
+  public Adapter createNodeExclusionListAdapter()
   {
     return null;
   }
