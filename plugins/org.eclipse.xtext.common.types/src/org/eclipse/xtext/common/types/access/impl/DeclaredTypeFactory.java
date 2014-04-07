@@ -19,7 +19,7 @@ import org.eclipse.xtext.common.types.access.reflect.ReflectionTypeFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
-import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.Opcodes;
 
 import com.google.inject.Inject;
 
@@ -51,7 +51,7 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 	 */
 	private final ClassFileBytesAccess bytesAccess;
 	
-	private static final boolean ASM_AVAILABLE = isAsmAvailable();
+	private static final boolean ASM_AVAILABLE = isAsm5Available();
 	
 	private final boolean useASM;
 
@@ -66,18 +66,21 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 		this.useASM = useASM;
 	}
 
-	private static boolean isAsmAvailable() {
+	private static boolean isAsm5Available() {
 		try {
-			ClassReader.class.getName();
-			return true;
+			if(Opcodes.class.getDeclaredField("ASM5") != null) 
+				return true;
 		} catch(NoClassDefFoundError e) {
 			logger.error("--- xtext.common.types ---------------------------------------------------");
 			logger.error("ASM library is not available. Falling back to java.lang.reflect API.");
-			logger.error("Please note that no information about compile time constants is available.");
-			logger.error("It's recommended to use org.objectweb.asm 3.3.1 or better.");
-			logger.error("--------------------------------------------------------------------------");
-			return false;
+		} catch(NoSuchFieldException e) {
+			logger.error("--- xtext.common.types ---------------------------------------------------");
+			logger.error("ASM library is too old. Falling back to java.lang.reflect API.");
 		}
+		logger.error("Please note that no information about compile time constants is available.");
+		logger.error("It's recommended to use org.objectweb.asm 5.0.1 or better.");
+		logger.error("--------------------------------------------------------------------------");
+		return false;
 	}
 
 	/**
