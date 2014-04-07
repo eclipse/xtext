@@ -21,11 +21,13 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IFeatureInfo;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -60,17 +62,47 @@ public class ContextFinder implements IContextFinder {
 
 	@Inject
 	protected TransientValueUtil transientValueUtil;
+	
+	@Inject
+	protected ITransientValueService transientValues;
+	
+	@Inject
+	protected ISemanticNodeProvider nodesProvider;
 
 	protected Iterable<AbstractElement> findAssignedElements(EObject obj, EStructuralFeature feature,
 			Iterable<AbstractElement> candidates) {
 		if (feature.isMany()) {
-			Set<AbstractElement> result = Sets.newHashSet();
-			for (Object value : transientValueUtil.getAllNonTransientValues(obj, feature))
-				Iterables.addAll(result, assignmentFinder.findAssignmentsByValue(obj, candidates, value, null));
-			return result;
+			Set<AbstractElement> r = Sets.newHashSet();
+			INodesForEObjectProvider nodes = nodesProvider.getNodesForSemanticObject(obj, null);
+			switch (transientValues.isListTransient(obj, feature)) {
+				case SOME:
+					List<?> values1 = (List<?>) obj.eGet(feature);
+					int j = 0;
+					for (int i = 0; i < values1.size(); i++)
+						if (!transientValues.isValueInListTransient(obj, i, feature)) {
+							Object value = values1.get(i);
+							INode node = nodes.getNodeForMultiValue(feature, i, j, value);
+							Iterables.addAll(r, assignmentFinder.findAssignmentsByValue(obj, candidates, value, node));
+							j++;
+						}
+					return r;
+				case NO:
+					List<?> values2 = (List<?>) obj.eGet(feature);
+					for (int i = 0; i < values2.size(); i++) {
+						Object value = values2.get(i);
+						INode node = nodes.getNodeForMultiValue(feature, i, i, value);
+						Iterables.addAll(r, assignmentFinder.findAssignmentsByValue(obj, candidates, value, node));
+					}
+					return r;
+				default:
+					return Collections.emptyList();
+			}
 		} else {
+			if (transientValues.isValueTransient(obj, feature) == ValueTransient.YES)
+				return Collections.emptyList();
 			Object value = obj.eGet(feature);
-			return assignmentFinder.findAssignmentsByValue(obj, candidates, value, null);
+			INode node = nodesProvider.getNodesForSemanticObject(obj, null).getNodeForSingelValue(feature, value);
+			return assignmentFinder.findAssignmentsByValue(obj, candidates, value, node);
 		}
 	}
 

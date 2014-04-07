@@ -158,6 +158,20 @@ public class ContextFinderTestSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ContextFinderTestPackage.NODE_EXCLUSION:
+      {
+        NodeExclusion nodeExclusion = (NodeExclusion)theEObject;
+        T result = caseNodeExclusion(nodeExclusion);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ContextFinderTestPackage.NODE_EXCLUSION_LIST:
+      {
+        NodeExclusionList nodeExclusionList = (NodeExclusionList)theEObject;
+        T result = caseNodeExclusionList(nodeExclusionList);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST1:
       {
         NestedTypeRecursiveTest1 nestedTypeRecursiveTest1 = (NestedTypeRecursiveTest1)theEObject;
@@ -366,6 +380,38 @@ public class ContextFinderTestSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseValueExclusionTest(ValueExclusionTest object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Node Exclusion</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Node Exclusion</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNodeExclusion(NodeExclusion object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Node Exclusion List</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Node Exclusion List</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNodeExclusionList(NodeExclusionList object)
   {
     return null;
   }

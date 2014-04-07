@@ -5,7 +5,7 @@
     forceOverwrite="true" modelName="Bug289524ExTestLanguage" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="5.0"
     copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
-    runtimeVersion="2.9" usedGenPackages="../../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="Bug289524ExTest" basePackage="org.eclipse.xtext.parser.antlr"
       disposableProviderFactory="true" ecorePackage="Bug289524ExTestLanguage.ecore#/">
     <genClasses ecoreClass="Bug289524ExTestLanguage.ecore#//Model">

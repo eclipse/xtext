@@ -29,6 +29,14 @@ ruleModel :
 	'#6' (
 		ruleValueExclusionTest1 |
 		ruleValueExclusionTest2
+	) |
+	'#7' RULE_STRING (
+		ruleNodeExclusion1 |
+		ruleNodeExclusion2
+	) |
+	'#8' RULE_STRING (
+		ruleNodeExclusion1List |
+		ruleNodeExclusion2List
 	)
 ;
 
@@ -115,6 +123,26 @@ ruleValueExclusionTest1 :
 // Rule ValueExclusionTest2
 ruleValueExclusionTest2 :
 	ruleValueExclusionTestEn2
+;
+
+// Rule NodeExclusion1
+ruleNodeExclusion1 :
+	RULE_ID
+;
+
+// Rule NodeExclusion2
+ruleNodeExclusion2 :
+	RULE_STRING
+;
+
+// Rule NodeExclusion1List
+ruleNodeExclusion1List :
+	RULE_ID+
+;
+
+// Rule NodeExclusion2List
+ruleNodeExclusion2List :
+	RULE_STRING+
 ;
 
 // Rule ValueExclusionTestEn1

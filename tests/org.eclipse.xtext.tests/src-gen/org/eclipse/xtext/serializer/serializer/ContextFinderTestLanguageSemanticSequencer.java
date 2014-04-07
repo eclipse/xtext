@@ -14,6 +14,8 @@ import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest1;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest2;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeTest;
+import org.eclipse.xtext.serializer.contextFinderTest.NodeExclusion;
+import org.eclipse.xtext.serializer.contextFinderTest.NodeExclusionList;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild;
@@ -105,6 +107,26 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 					return; 
 				}
 				else break;
+			case ContextFinderTestPackage.NODE_EXCLUSION:
+				if(context == grammarAccess.getNodeExclusion1Rule()) {
+					sequence_NodeExclusion1(context, (NodeExclusion) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getNodeExclusion2Rule()) {
+					sequence_NodeExclusion2(context, (NodeExclusion) semanticObject); 
+					return; 
+				}
+				else break;
+			case ContextFinderTestPackage.NODE_EXCLUSION_LIST:
+				if(context == grammarAccess.getNodeExclusion1ListRule()) {
+					sequence_NodeExclusion1List(context, (NodeExclusionList) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getNodeExclusion2ListRule()) {
+					sequence_NodeExclusion2List(context, (NodeExclusionList) semanticObject); 
+					return; 
+				}
+				else break;
 			case ContextFinderTestPackage.PARENT_REF_TEST1:
 				if(context == grammarAccess.getParentRefTest1Rule()) {
 					sequence_ParentRefTest1(context, (ParentRefTest1) semanticObject); 
@@ -193,7 +215,9 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	 *         quantityExclusion=QuantityExclusionTest1 | 
 	 *         quantityExclusion=QuantityExclusionTest2 | 
 	 *         valueExclusion=ValueExclusionTest1 | 
-	 *         valueExclusion=ValueExclusionTest2
+	 *         valueExclusion=ValueExclusionTest2 | 
+	 *         (name=STRING (nodeExclusion=NodeExclusion1 | nodeExclusion=NodeExclusion2)) | 
+	 *         (name=STRING (nodeExclusionList=NodeExclusion1List | nodeExclusionList=NodeExclusion2List))
 	 *     )
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
@@ -311,6 +335,56 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getNestedTypeTest2Access().getNestedNestedTypeChild2ParserRuleCall_0(), semanticObject.getNested());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ref+=[Model|ID]+
+	 */
+	protected void sequence_NodeExclusion1List(EObject context, NodeExclusionList semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ref=[Model|ID]
+	 */
+	protected void sequence_NodeExclusion1(EObject context, NodeExclusion semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.NODE_EXCLUSION__REF) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.NODE_EXCLUSION__REF));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getNodeExclusion1Access().getRefModelIDTerminalRuleCall_0_1(), semanticObject.getRef());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ref+=[Model|STRING]+
+	 */
+	protected void sequence_NodeExclusion2List(EObject context, NodeExclusionList semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ref=[Model|STRING]
+	 */
+	protected void sequence_NodeExclusion2(EObject context, NodeExclusion semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, ContextFinderTestPackage.Literals.NODE_EXCLUSION__REF) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.NODE_EXCLUSION__REF));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getNodeExclusion2Access().getRefModelSTRINGTerminalRuleCall_0_1(), semanticObject.getRef());
 		feeder.finish();
 	}
 	

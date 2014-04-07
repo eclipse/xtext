@@ -131,13 +131,40 @@ public interface ContextFinderTestPackage extends EPackage
   int MODEL__VALUE_EXCLUSION = 6;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__NAME = 7;
+
+  /**
+   * The feature id for the '<em><b>Node Exclusion</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__NODE_EXCLUSION = 8;
+
+  /**
+   * The feature id for the '<em><b>Node Exclusion List</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__NODE_EXCLUSION_LIST = 9;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 7;
+  int MODEL_FEATURE_COUNT = 10;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.AttributeExclusionTestImpl <em>Attribute Exclusion Test</em>}' class.
@@ -466,6 +493,62 @@ public interface ContextFinderTestPackage extends EPackage
   int VALUE_EXCLUSION_TEST_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NodeExclusionImpl <em>Node Exclusion</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.NodeExclusionImpl
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getNodeExclusion()
+   * @generated
+   */
+  int NODE_EXCLUSION = 12;
+
+  /**
+   * The feature id for the '<em><b>Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NODE_EXCLUSION__REF = 0;
+
+  /**
+   * The number of structural features of the '<em>Node Exclusion</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NODE_EXCLUSION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NodeExclusionListImpl <em>Node Exclusion List</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.NodeExclusionListImpl
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getNodeExclusionList()
+   * @generated
+   */
+  int NODE_EXCLUSION_LIST = 13;
+
+  /**
+   * The feature id for the '<em><b>Ref</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NODE_EXCLUSION_LIST__REF = 0;
+
+  /**
+   * The number of structural features of the '<em>Node Exclusion List</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NODE_EXCLUSION_LIST_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NestedTypeRecursiveTest1Impl <em>Nested Type Recursive Test1</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -473,7 +556,7 @@ public interface ContextFinderTestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getNestedTypeRecursiveTest1()
    * @generated
    */
-  int NESTED_TYPE_RECURSIVE_TEST1 = 12;
+  int NESTED_TYPE_RECURSIVE_TEST1 = 14;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -501,7 +584,7 @@ public interface ContextFinderTestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getNestedTypeRecursiveTest2()
    * @generated
    */
-  int NESTED_TYPE_RECURSIVE_TEST2 = 13;
+  int NESTED_TYPE_RECURSIVE_TEST2 = 15;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -529,7 +612,7 @@ public interface ContextFinderTestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getValueExclusionTestEn()
    * @generated
    */
-  int VALUE_EXCLUSION_TEST_EN = 14;
+  int VALUE_EXCLUSION_TEST_EN = 16;
 
 
   /**
@@ -618,6 +701,39 @@ public interface ContextFinderTestPackage extends EPackage
    * @generated
    */
   EReference getModel_ValueExclusion();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.Model#getName()
+   * @see #getModel()
+   * @generated
+   */
+  EAttribute getModel_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getNodeExclusion <em>Node Exclusion</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Node Exclusion</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.Model#getNodeExclusion()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_NodeExclusion();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getNodeExclusionList <em>Node Exclusion List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Node Exclusion List</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.Model#getNodeExclusionList()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_NodeExclusionList();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.AttributeExclusionTest <em>Attribute Exclusion Test</em>}'.
@@ -851,6 +967,48 @@ public interface ContextFinderTestPackage extends EPackage
   EAttribute getValueExclusionTest_Val();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.NodeExclusion <em>Node Exclusion</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Node Exclusion</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.NodeExclusion
+   * @generated
+   */
+  EClass getNodeExclusion();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.serializer.contextFinderTest.NodeExclusion#getRef <em>Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ref</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.NodeExclusion#getRef()
+   * @see #getNodeExclusion()
+   * @generated
+   */
+  EReference getNodeExclusion_Ref();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.NodeExclusionList <em>Node Exclusion List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Node Exclusion List</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.NodeExclusionList
+   * @generated
+   */
+  EClass getNodeExclusionList();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.eclipse.xtext.serializer.contextFinderTest.NodeExclusionList#getRef <em>Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Ref</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.NodeExclusionList#getRef()
+   * @see #getNodeExclusionList()
+   * @generated
+   */
+  EReference getNodeExclusionList_Ref();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest1 <em>Nested Type Recursive Test1</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -968,6 +1126,30 @@ public interface ContextFinderTestPackage extends EPackage
      * @generated
      */
     EReference MODEL__VALUE_EXCLUSION = eINSTANCE.getModel_ValueExclusion();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MODEL__NAME = eINSTANCE.getModel_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Node Exclusion</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__NODE_EXCLUSION = eINSTANCE.getModel_NodeExclusion();
+
+    /**
+     * The meta object literal for the '<em><b>Node Exclusion List</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__NODE_EXCLUSION_LIST = eINSTANCE.getModel_NodeExclusionList();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.AttributeExclusionTestImpl <em>Attribute Exclusion Test</em>}' class.
@@ -1166,6 +1348,42 @@ public interface ContextFinderTestPackage extends EPackage
      * @generated
      */
     EAttribute VALUE_EXCLUSION_TEST__VAL = eINSTANCE.getValueExclusionTest_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NodeExclusionImpl <em>Node Exclusion</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.NodeExclusionImpl
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getNodeExclusion()
+     * @generated
+     */
+    EClass NODE_EXCLUSION = eINSTANCE.getNodeExclusion();
+
+    /**
+     * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NODE_EXCLUSION__REF = eINSTANCE.getNodeExclusion_Ref();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NodeExclusionListImpl <em>Node Exclusion List</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.NodeExclusionListImpl
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getNodeExclusionList()
+     * @generated
+     */
+    EClass NODE_EXCLUSION_LIST = eINSTANCE.getNodeExclusionList();
+
+    /**
+     * The meta object literal for the '<em><b>Ref</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NODE_EXCLUSION_LIST__REF = eINSTANCE.getNodeExclusionList_Ref();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NestedTypeRecursiveTest1Impl <em>Nested Type Recursive Test1</em>}' class.
