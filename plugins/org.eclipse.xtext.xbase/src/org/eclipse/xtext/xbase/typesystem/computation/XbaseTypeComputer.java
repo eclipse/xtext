@@ -829,7 +829,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 				addLocalToCurrentScope((XVariableDeclaration) initExpression, state);
 			}
 		}
-		
+		state.withinScope(object);
 		XExpression expression = object.getExpression();
 		if (expression != null) {
 			LightweightTypeReference booleanType = getTypeForName(Boolean.TYPE, state);
