@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.second.impl;
 
@@ -24,82 +21,86 @@ import org.eclipse.xtext.generator.ecore.second.*;
 public class SecondFactoryImpl extends EFactoryImpl implements SecondFactory
 {
   /**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+   * Creates the default factory implementation.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public static SecondFactory init()
   {
-		try {
-			SecondFactory theSecondFactory = (SecondFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/EcoreFragmentTestLanguage"); 
-			if (theSecondFactory != null) {
-				return theSecondFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new SecondFactoryImpl();
-	}
+    try
+    {
+      SecondFactory theSecondFactory = (SecondFactory)EPackage.Registry.INSTANCE.getEFactory(SecondPackage.eNS_URI);
+      if (theSecondFactory != null)
+      {
+        return theSecondFactory;
+      }
+    }
+    catch (Exception exception)
+    {
+      EcorePlugin.INSTANCE.log(exception);
+    }
+    return new SecondFactoryImpl();
+  }
 
   /**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the factory.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public SecondFactoryImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public EObject create(EClass eClass)
   {
-		switch (eClass.getClassifierID()) {
-			case SecondPackage.SECOND: return createSecond();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+    switch (eClass.getClassifierID())
+    {
+      case SecondPackage.SECOND: return createSecond();
+      default:
+        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public Second createSecond()
   {
-		SecondImpl second = new SecondImpl();
-		return second;
-	}
+    SecondImpl second = new SecondImpl();
+    return second;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public SecondPackage getSecondPackage()
   {
-		return (SecondPackage)getEPackage();
-	}
+    return (SecondPackage)getEPackage();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+   * @deprecated
+   * @generated
+   */
   @Deprecated
   public static SecondPackage getPackage()
   {
-		return SecondPackage.eINSTANCE;
-	}
+    return SecondPackage.eINSTANCE;
+  }
 
 } //SecondFactoryImpl

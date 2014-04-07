@@ -126,8 +126,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DefEnum">
     <eLiterals name="kw1" literal="kw1"/>
-    <eLiterals name="kw2" literal="kw2"/>
-    <eLiterals name="kw3" literal="kw3"/>
+    <eLiterals name="kw2" value="1" literal="kw2"/>
+    <eLiterals name="kw3" value="2" literal="kw3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SingleCrossReference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>

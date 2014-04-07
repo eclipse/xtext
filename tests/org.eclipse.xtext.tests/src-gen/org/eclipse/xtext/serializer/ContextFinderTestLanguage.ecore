@@ -56,8 +56,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ValueExclusionTestEn">
     <eLiterals name="lit0" literal="lit0"/>
-    <eLiterals name="lit1" literal="lit1"/>
-    <eLiterals name="lit2" literal="lit2"/>
+    <eLiterals name="lit1" value="1" literal="lit1"/>
+    <eLiterals name="lit2" value="2" literal="lit2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NestedTypeRecursiveTest1" eSuperTypes="#//NestedTypeRecursiveTest"/>
   <eClassifiers xsi:type="ecore:EClass" name="NestedTypeRecursiveTest2" eSuperTypes="#//NestedTypeRecursiveTest"/>
