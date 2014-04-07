@@ -10,8 +10,18 @@
        uri = "http://www.eclipse.org/xtext/tests/grammarinheritance" 
        class = "org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage"
        genModel = "org/eclipse/xtext/grammarinheritance/ametamodel.genmodel" /> 
-	
   </extension>
+  <extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.resource.ResourceServiceProviderProviderTest$TestResourceServiceProviderProvider"
+           uriExtension="TestResourceServiceProviderProvider">
+     </resourceServiceProvider>
+     <resourceServiceProvider
+           class="org.eclipse.xtext.resource.ResourceServiceProviderProviderTest$TestResourceServiceProviderExecutableExtensionFactory:foo"
+           uriExtension="TestResourceServiceProviderExecutableExtensionFactory">
+     </resourceServiceProvider>
+  </extension>
+  
 
 <!-- explicitly added packages above -->
   
