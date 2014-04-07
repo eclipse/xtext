@@ -3,6 +3,6 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="liveContainerTestLanguage" nsURI="http://www.xtext.org/LiveContainerTestLanguage"
     nsPrefix="liveContainerTestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

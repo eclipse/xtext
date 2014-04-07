@@ -3,6 +3,6 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bug299237Test" nsURI="http://eclipse.org/xtext/Bug299237TestLanguage"
     nsPrefix="bug299237Test">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../../../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

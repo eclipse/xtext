@@ -5,7 +5,7 @@
     forceOverwrite="true" modelName="LiveContainerBuilderIntegerationTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor" runtimeVersion="2.9" usedGenPackages="../../../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    editorPluginID="org.eclipse.xtext.tests.editor" runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="LiveContainerBuilderIntegerationTestLanguage" basePackage="org.eclipse.xtext.resource"
       disposableProviderFactory="true" ecorePackage="LiveContainerBuilderIntegerationTestLanguage.ecore#/">
     <genClasses ecoreClass="LiveContainerBuilderIntegerationTestLanguage.ecore#//Model">
