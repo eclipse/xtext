@@ -783,26 +783,26 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	@Test
 	def void missingConstructorCallParentheses() {
 		create('Foo.xtend', '''
-			class Foo {
+			class TopLevelClassWithDefaultconstructor {
 				def foo() {}
 			}
 			
 			class Bar {
 				def bar() {
-					new Foo.foo|
+					new TopLevelClassWithDefaultconstructor.foo|
 				}
 			}
 		''')
 		.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC)
-		.assertResolutionLabels("Change to constructor call 'new Foo()'")
+		.assertResolutionLabels("Change to constructor call 'new TopLevelClassWithDefaultconstructor()'")
 		.assertModelAfterQuickfix('''
-			class Foo {
+			class TopLevelClassWithDefaultconstructor {
 				def foo() {}
 			}
 			
 			class Bar {
 				def bar() {
-					new Foo().foo
+					new TopLevelClassWithDefaultconstructor().foo
 				}
 			}
 		''')
