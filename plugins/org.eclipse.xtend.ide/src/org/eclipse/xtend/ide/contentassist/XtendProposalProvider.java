@@ -209,7 +209,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		};
 	}
 	
-	private final QualifiedName WAIT = QualifiedName.create("java", "lang", "Object", "wait");
+	private final String WAIT = "java.lang.Object.wait";
 	protected boolean isDiscouragedExtension(IIdentifiableElementDescription description) {
 		if (description.isExtension()) {
 			JvmIdentifiableElement candidate = description.getElementOrProxy();
