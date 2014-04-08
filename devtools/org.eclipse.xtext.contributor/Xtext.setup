@@ -18,6 +18,7 @@
     <installableUnits id="org.eclipse.m2e.feature.feature.group"/>
     <installableUnits id="org.eclipse.b3.aggregator.editor.feature.feature.group"/>
     <installableUnits id="org.jboss.tools.m2e.jdt.feature.feature.group"/>
+    <installableUnits id="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
     <p2Repositories url="${xtext.nightly.composite}"/>
     <p2Repositories url="http://findbugs.cs.umd.edu/eclipse-daily"/>
     <p2Repositories url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
