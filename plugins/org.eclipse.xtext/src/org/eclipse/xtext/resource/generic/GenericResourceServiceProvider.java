@@ -15,6 +15,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
 
+import com.google.inject.ConfigurationException;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
@@ -67,6 +68,10 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 	private Injector injector;
 	
 	public <T> T get(Class<T> t) {
-		return injector.getInstance(t);
+		try {
+			return injector.getInstance(t);
+		} catch (ConfigurationException e) {
+			return null;
+		}
 	}
 }
