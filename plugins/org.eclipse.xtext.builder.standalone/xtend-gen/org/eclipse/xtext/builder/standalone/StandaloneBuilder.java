@@ -321,6 +321,9 @@ public class StandaloneBuilder {
         case FAILED:
           StandaloneBuilder.LOG.debug("Stubs compilation finished with errors.");
           break;
+        case SUCCEEDED:
+          StandaloneBuilder.LOG.debug("Stubs compilation successfully finished.");
+          break;
         default:
           break;
       }
