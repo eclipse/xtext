@@ -1179,7 +1179,6 @@ public class JvmTypesBuilder {
 	 * 
 	 * @return the newly created {@link JvmTypeReference}
 	 */
-	@Nullable 
 	public JvmTypeReference newTypeRef(@Nullable EObject ctx, @Nullable Class<?> clazz, @Nullable JvmTypeReference... typeArgs) {
 		return references.getTypeForName(clazz, ctx, typeArgs);
 	}
@@ -1196,7 +1195,6 @@ public class JvmTypesBuilder {
 	 *            type arguments
 	 * @return the newly created {@link JvmTypeReference}
 	 */
-	@Nullable 
 	public JvmTypeReference newTypeRef(@Nullable EObject ctx, @Nullable String typeName, @Nullable JvmTypeReference... typeArgs) {
 		return references.getTypeForName(typeName, ctx, typeArgs);
 	}
@@ -1210,7 +1208,6 @@ public class JvmTypesBuilder {
 	 *            type arguments
 	 * @return the newly created {@link JvmTypeReference}
 	 */
-	@Nullable 
 	public JvmTypeReference newTypeRef(@Nullable JvmType type, @Nullable JvmTypeReference... typeArgs) {
 		return references.createTypeRef(type, typeArgs);
 	}
