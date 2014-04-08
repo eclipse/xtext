@@ -16,6 +16,8 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor
 import org.junit.Before
 import org.junit.Test
 import static org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration.*
+import org.eclipse.xtext.junit4.internal.LineDelimiters
+
 /**
  * @author Stefan Oehme - Initial contribution and API
  */
@@ -36,7 +38,7 @@ class TaskHighlightingTest extends AbstractXtextTests implements IHighlightedPos
 	@Test
 	def void test() {
 		val resource = getResourceFromString(
-		'''
+		LineDelimiters.toUnix('''
 			//TODO foo
 			/*
 			 * FIXME bar
@@ -44,9 +46,9 @@ class TaskHighlightingTest extends AbstractXtextTests implements IHighlightedPos
 			 * FOO also no match
 			 */
 			Hello notATODO!
-		''')
+		'''))
 		expect(2, 4, TASK_ID)
-		expect(19, 5, TASK_ID)
+		expect(17, 5, TASK_ID)
 		highlighter.provideHighlightingFor(resource, this)
 	}
 	
