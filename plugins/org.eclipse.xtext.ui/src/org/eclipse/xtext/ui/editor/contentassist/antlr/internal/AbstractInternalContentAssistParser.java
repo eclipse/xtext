@@ -291,7 +291,12 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		if (mismatch) {
 			delegate = createMismatchStrategy();
 		} else if (!state.errorRecovery) {
-			delegate = createNotErrorRecoveryStrategy();
+			if (marked >= 0 && state.syntaxErrors > 0 && state.lastErrorIndex >= firstMarker) {
+				delegate = createNoOpStrategy();
+				return;
+			} else {
+				delegate = createNotErrorRecoveryStrategy();
+			}
 		} else {
 			delegate = createErrorRecoveryStrategy();
 		}
