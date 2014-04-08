@@ -16,15 +16,11 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtext.builder.JDTAwareEclipseResourceFileSystemAccess2;
-import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
-import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.util.RuntimeIOException;
 
 import com.google.common.collect.Multimap;
-import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -32,30 +28,16 @@ import com.google.inject.Inject;
  */
 public class SourceRelativeFileSystemAccess extends JDTAwareEclipseResourceFileSystemAccess2 {
 	
-	private IPreferenceStoreAccess preferenceStoreAccess;
-	
-	@Inject
-	public void setPreferenceStoreAccess(IPreferenceStoreAccess preferenceStoreAccess) {
-		this.preferenceStoreAccess = preferenceStoreAccess;
-	}
-	
 	@Override
 	protected boolean ensureOutputConfigurationDirectoryExists(OutputConfiguration outputConfig) {
 		try {
 			super.ensureOutputConfigurationDirectoryExists(outputConfig);
 			IContainer container = getContainer(outputConfig);
 			addToSourceFolders(container);
-			ignoreInOutputSettings(outputConfig, container);
 			return true;
 		} catch (CoreException e) {
 			throw new RuntimeIOException(e);
 		}
-	}
-
-	protected void ignoreInOutputSettings(OutputConfiguration outputConfig, IContainer container) {
-		String newSourceFolder = container.getProjectRelativePath().toString();
-		IPreferenceStore prefs = preferenceStoreAccess.getWritablePreferenceStore(container.getProject());
-		prefs.setValue(BuilderPreferenceAccess.getIgnoreSourceFolderKey(outputConfig, newSourceFolder), true);
 	}
 
 	@Override
