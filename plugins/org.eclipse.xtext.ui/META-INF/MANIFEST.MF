@@ -85,9 +85,9 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui.shared.contribution,
  org.eclipse.xtext.ui.util,
  org.eclipse.xtext.ui.validation,
- org.eclipse.xtext.ui.tasks,
+ org.eclipse.xtext.ui.tasks;x-internal:=true,
  org.eclipse.xtext.ui.tasks.preferences;x-internal:=true,
- org.eclipse.xtext.ui.markers,
+ org.eclipse.xtext.ui.markers;x-internal:=true,
  org.eclipse.xtext.ui.views,
  org.eclipse.xtext.ui.wizard
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
