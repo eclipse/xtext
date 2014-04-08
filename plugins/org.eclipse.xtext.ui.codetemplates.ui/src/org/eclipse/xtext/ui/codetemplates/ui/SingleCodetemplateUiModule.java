@@ -66,7 +66,6 @@ public class SingleCodetemplateUiModule extends org.eclipse.xtext.ui.codetemplat
 		return SyntheticResourceAwareScopeProvider.class;
 	}
 	
-	@Override
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return SemanticHighlighter.class;
 	}
