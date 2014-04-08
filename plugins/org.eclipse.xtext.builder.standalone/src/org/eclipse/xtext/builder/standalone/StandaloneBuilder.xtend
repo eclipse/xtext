@@ -138,6 +138,8 @@ class StandaloneBuilder {
 				LOG.info("Nothing to compile. Stubs compilation was skipped.")
 			case CompilationResult.FAILED:
 				LOG.debug("Stubs compilation finished with errors.")
+			case CompilationResult.SUCCEEDED:
+				LOG.debug("Stubs compilation successfully finished.")
 		}
 		return stubsClasses.absolutePath
 	}
