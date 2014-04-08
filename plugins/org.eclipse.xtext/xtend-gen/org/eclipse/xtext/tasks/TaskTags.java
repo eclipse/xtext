@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
  * @since 2.6
  */
 @SuppressWarnings("all")
-public final class TaskTags implements Iterable<TaskTag> {
+public class TaskTags implements Iterable<TaskTag> {
   private boolean _caseSensitive;
   
   public boolean isCaseSensitive() {

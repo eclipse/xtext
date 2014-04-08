@@ -39,6 +39,6 @@ class DefaultTaskParser implements ITaskParser {
 		if (!taskTags.caseSensitive) {
 			flags = flags.bitwiseOr(Pattern.CASE_INSENSITIVE).bitwiseOr(Pattern.UNICODE_CASE)
 		}
-		Pattern.compile('''^.*((«taskTags.map[name].join("|")»)(.*)?)$''', flags)
+		Pattern.compile('''^.*((«taskTags.map[Pattern.quote(name)].join("|")»)(.*)?)$''', flags)
 	}
 }
