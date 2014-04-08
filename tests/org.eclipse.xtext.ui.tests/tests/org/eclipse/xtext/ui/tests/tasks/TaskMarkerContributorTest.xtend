@@ -21,6 +21,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import org.eclipse.xtext.junit4.internal.LineDelimiters
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -40,12 +41,12 @@ class TaskMarkerContributorTest extends AbstractXtextTests {
 	@Test
 	def void testMarkerCreation() {
 		val file = createFile("foo/foo.domainModelTest",
-			'''
+			LineDelimiters.toUnix('''
 				/*
 				 * TODO foo
 				 * FIXME bar
 				 */
-			''')
+			'''))
 		val resource = file.resource
 		markerContributor.updateMarkers(file, resource, null)
 		val markers = file.findMarkers(TaskMarkerTypeProvider.XTEXT_TASK_TYPE, true, IResource.DEPTH_ZERO)
@@ -53,14 +54,14 @@ class TaskMarkerContributorTest extends AbstractXtextTests {
 		assertEquals(2, markers.size)
 		assertEquals("TODO foo", markers.head.getAttribute(IMarker.MESSAGE))
 		assertEquals(2, markers.head.getAttribute(IMarker.LINE_NUMBER))
-		assertEquals(7, markers.head.getAttribute(IMarker.CHAR_START))
-		assertEquals(15, markers.head.getAttribute(IMarker.CHAR_END))
+		assertEquals(6, markers.head.getAttribute(IMarker.CHAR_START))
+		assertEquals(14, markers.head.getAttribute(IMarker.CHAR_END))
 		assertEquals(IMarker.PRIORITY_NORMAL, markers.head.getAttribute(IMarker.PRIORITY))
 		assertEquals("line 2", markers.head.getAttribute(IMarker.LOCATION))
 		assertEquals("FIXME bar", markers.get(1).getAttribute(IMarker.MESSAGE))
 		assertEquals(3, markers.get(1).getAttribute(IMarker.LINE_NUMBER))
-		assertEquals(20, markers.get(1).getAttribute(IMarker.CHAR_START))
-		assertEquals(29, markers.get(1).getAttribute(IMarker.CHAR_END))
+		assertEquals(18, markers.get(1).getAttribute(IMarker.CHAR_START))
+		assertEquals(27, markers.get(1).getAttribute(IMarker.CHAR_END))
 		assertEquals(IMarker.PRIORITY_HIGH, markers.get(1).getAttribute(IMarker.PRIORITY))
 		assertEquals("line 3", markers.get(1).getAttribute(IMarker.LOCATION))
 	}
