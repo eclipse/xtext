@@ -64,6 +64,9 @@
       <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.debug.ui/Console.limitConsoleOutput" value="false"/>
       <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.debug.ui/Console.highWaterMark" value="88000"/>
     </setupTasks>
+    <setupTasks xsi:type="setup:CompoundSetupTask" name="org.eclipse.jdt.launching">
+      <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.jdt.launching/org.eclipse.jdt.launching.PREF_STRICTLY_COMPATIBLE_JRE_NOT_AVAILABLE" value="ignore"/>
+    </setupTasks>
   </setupTasks>
   <setupTasks xsi:type="setup:ProjectsImportTask" documentation="Import all developer tools">
     <sourceLocators rootFolder="${xtext.git.location}/devtools/"/>
