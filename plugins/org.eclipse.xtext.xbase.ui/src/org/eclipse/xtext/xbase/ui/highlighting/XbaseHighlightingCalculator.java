@@ -37,8 +37,8 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -67,15 +67,16 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Holger Schill
  */
-public class XbaseHighlightingCalculator implements ISemanticHighlightingCalculator {
+public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalculator {
 
 	@Inject
 	private XbaseGrammarAccess grammarAccess;
-
+	
 	private Map<String, String> highlightedIdentifiers;
 	
 	private BitSet idLengthsToHighlight;
 
+	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		if (resource == null)
 			return;
@@ -97,21 +98,9 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 		doProvideHighlightingFor(resource, acceptor);
 	}
 	
-	/**
-	 * <p>
-	 * Actual implementation of the semantic highlighting calculation. It is ensured, that the given resource is not
-	 * <code>null</code> and refers to an initialized parse result.
-	 * </p>
-	 * <p>
-	 * Clients should override this method in order to perform custom highlighting.
-	 * </p>
-	 * 
-	 * @param resource
-	 *            a valid to-be-processed resource. Is never <code>null</code>.
-	 * @param acceptor
-	 *            the acceptor. Is never <code>null</code>.
-	 */
+	@Override
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+		super.doProvideHighlightingFor(resource, acceptor);
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult == null)
 			throw new IllegalStateException("resource#parseResult may not be null");
