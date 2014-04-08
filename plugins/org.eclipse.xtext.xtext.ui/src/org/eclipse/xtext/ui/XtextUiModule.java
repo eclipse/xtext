@@ -70,7 +70,6 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 				.toInstance("[{");
 	}
 
-	@Override
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return SemanticHighlightingCalculator.class;
 	}

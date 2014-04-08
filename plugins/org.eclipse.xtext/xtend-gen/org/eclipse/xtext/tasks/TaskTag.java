@@ -14,7 +14,7 @@ import org.eclipse.xtext.tasks.Priority;
  * @since 2.6
  */
 @SuppressWarnings("all")
-public final class TaskTag {
+public class TaskTag {
   private String _name;
   
   public String getName() {

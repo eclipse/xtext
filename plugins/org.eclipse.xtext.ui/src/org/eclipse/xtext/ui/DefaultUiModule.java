@@ -400,13 +400,6 @@ public class DefaultUiModule extends AbstractGenericModule {
 		return TaskMarkerContributor.class;
 	}
 	
-	/**
-	 * @since 2.6
-	 */
-	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
-		return DefaultSemanticHighlightingCalculator.class;
-	}
-	
 }
 
 

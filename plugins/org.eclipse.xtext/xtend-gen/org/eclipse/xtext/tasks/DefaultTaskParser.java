@@ -97,7 +97,8 @@ public class DefaultTaskParser implements ITaskParser {
       _builder.append("^.*((");
       final Function1<TaskTag, String> _function = new Function1<TaskTag, String>() {
         public String apply(final TaskTag it) {
-          return it.getName();
+          String _name = it.getName();
+          return Pattern.quote(_name);
         }
       };
       Iterable<String> _map = IterableExtensions.<TaskTag, String>map(taskTags, _function);

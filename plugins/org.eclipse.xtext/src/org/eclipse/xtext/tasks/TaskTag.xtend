@@ -13,7 +13,7 @@ import java.util.List
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
-final class TaskTag {
+class TaskTag {
 	@Property String name
 	@Property Priority priority
 
@@ -26,7 +26,7 @@ final class TaskTag {
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
-final class TaskTags implements Iterable<TaskTag> {
+class TaskTags implements Iterable<TaskTag> {
 
 	@Property boolean caseSensitive
 	val List<TaskTag> taskTags = newArrayList
