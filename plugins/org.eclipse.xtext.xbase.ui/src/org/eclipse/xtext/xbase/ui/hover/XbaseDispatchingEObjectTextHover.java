@@ -53,6 +53,9 @@ public class XbaseDispatchingEObjectTextHover extends DispatchingEObjectTextHove
 				public Object getInfo() {
 					return hoverInfo;
 				}
+				public IInformationControlCreator getInformationPresenterControlCreator() {
+					return javaDebugHover.getInformationPresenterControlCreator();
+				}
 			};
 			return hoverInfo;
 		}
