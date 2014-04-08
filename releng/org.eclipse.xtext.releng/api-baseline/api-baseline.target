@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="api-baseline" sequenceNumber="3">
+<?pde version="3.6"?>
+
+<target name="api-baseline" sequenceNumber="2">
 <locations>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="false" type="InstallableUnit">
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.4.3.v201309030823"/>
-<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/"/>
+<location includeAllPlatforms="false" includeMode="slicer" includeSource="false" type="InstallableUnit">
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.5.0.v201312110906"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/head/R201312110906"/>
 </location>
 </locations>
 </target>
