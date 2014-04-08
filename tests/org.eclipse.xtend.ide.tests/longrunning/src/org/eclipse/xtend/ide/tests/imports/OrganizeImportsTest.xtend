@@ -420,7 +420,6 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			
 			}
 		'''.assertIsOrganizedTo("repro/Foo", '''
-			import static java.lang.Integer.*
 			import static java.lang.Integer.valueOf
 			
 			class Foo {
