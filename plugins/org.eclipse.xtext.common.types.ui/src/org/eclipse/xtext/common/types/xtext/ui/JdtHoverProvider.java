@@ -49,6 +49,10 @@ public class JdtHoverProvider implements IEObjectHoverProvider {
 					public Object getInfo() {
 						return hoverInfo2;
 					}
+
+					public IInformationControlCreator getInformationPresenterControlCreator() {
+						return javadocHover.getInformationPresenterControlCreator();
+					}
 					
 				};
 			}
