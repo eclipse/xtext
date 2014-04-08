@@ -1,4 +1,4 @@
-package org.eclipse.xtext.junit4.parameterized;
+package org.eclipse.xtext.junit4;
 
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.GlobalRegistries;

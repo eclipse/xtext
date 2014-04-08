@@ -8,7 +8,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.junit4,
  org.eclipse.xtext.junit4.internal;x-internal:=true,
  org.eclipse.xtext.junit4.logging;x-internal:=true,
- org.eclipse.xtext.junit4.parameterized;x-internal:=true,
  org.eclipse.xtext.junit4.serializer;x-internal:=true,
  org.eclipse.xtext.junit4.smoketest,
  org.eclipse.xtext.junit4.ui;x-internal:=true,
