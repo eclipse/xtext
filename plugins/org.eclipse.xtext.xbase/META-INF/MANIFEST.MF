@@ -42,6 +42,7 @@ Export-Package: org.eclipse.xtext.xbase;x-friends:="org.eclipse.xtext.xbase.juni
  org.eclipse.xtext.xbase.controlflow;x-internal:=true,
  org.eclipse.xtext.xbase.conversion;x-internal:=true,
  org.eclipse.xtext.xbase.debug;x-internal:=true,
+ org.eclipse.xtext.xbase.tasks;x-internal:=true,
  org.eclipse.xtext.xbase.featurecalls;x-internal:=true,
  org.eclipse.xtext.xbase.file;x-internal:=true,
  org.eclipse.xtext.xbase.formatting;x-internal:=true,

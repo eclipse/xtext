@@ -18,8 +18,10 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaModelMarker;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.BuildContext;
@@ -126,7 +128,9 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 					IJavaElement element = JavaCore.create(generatedJavaFile);
 					if (element == null)
 						continue;
-
+					
+					deleteTaskMarkers(generatedJavaFile);
+					
 					ITraceToBytecodeInstaller installer = getInstaller(outputConfiguration);
 					installer.setTrace(generatedJavaFile.getName(), traceToSource);
 					for (IFile javaClassFile : findGeneratedJavaClassFiles(element)) {
@@ -147,6 +151,10 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 			files = null;
 			task.stop();
 		}
+	}
+
+	private void deleteTaskMarkers(IFile generatedJavaFile) throws CoreException {
+		generatedJavaFile.deleteMarkers(IJavaModelMarker.TASK_MARKER, false, IResource.DEPTH_ZERO);
 	}
 
 	@Override
