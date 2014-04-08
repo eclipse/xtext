@@ -20,6 +20,8 @@ import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
+import org.eclipse.jface.text.information.IInformationPresenter;
+import org.eclipse.jface.text.information.InformationPresenter;
 import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.IPresentationRepairer;
@@ -42,6 +44,7 @@ import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Holger Schill - Add InformationPresenter for https://bugs.eclipse.org/bugs/show_bug.cgi?id=419112
  */
 public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguration {
 
@@ -82,6 +85,9 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	private Provider<ITextHover> textHoverProvider;
 
 	private IEditorPart  editor;
+
+	@Inject
+	private XtextInformationProvider informationProvider;
 
 	/**
 	 * @since 2.4
@@ -235,6 +241,20 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	void setPreferenceStore(IPreferenceStore preferenceStore) {
 		this.fPreferenceStore = preferenceStore;
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	@Override
+	public IInformationPresenter getInformationPresenter(ISourceViewer sourceViewer) {
+		InformationPresenter presenter = new InformationPresenter(getInformationControlCreator(sourceViewer));
+		String[] contentTypes= getConfiguredContentTypes(sourceViewer);
+		for (int i= 0; i < contentTypes.length; i++)
+			presenter.setInformationProvider(informationProvider, contentTypes[i]);
+		// sizes: see org.eclipse.jface.text.TextViewer.TEXT_HOVER_*_CHARS
+		presenter.setSizeConstraints(100, 12, true, true);
+		return presenter;
 	}
 
 	
