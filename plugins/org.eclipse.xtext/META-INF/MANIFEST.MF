@@ -67,7 +67,7 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.services;x-internal:=true,
  org.eclipse.xtext.util,
  org.eclipse.xtext.validation,
- org.eclipse.xtext.tasks,
+ org.eclipse.xtext.tasks;x-internal:=true,
  org.eclipse.xtext.validation.impl,
  org.eclipse.xtext.xtext;x-internal:=true,
  org.eclipse.xtext.xtext.ecoreInference;x-internal:=true
