@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.sdk"
       label="%featureName"
-     version="2.6.0.qualifier"
+      version="2.6.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.xtext"
       image="modeling32.png">
@@ -145,6 +145,13 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <plugin
          id="org.eclipse.xtext.purexbase.ui.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.m2e"
          download-size="0"
          install-size="0"
          version="0.0.0"
