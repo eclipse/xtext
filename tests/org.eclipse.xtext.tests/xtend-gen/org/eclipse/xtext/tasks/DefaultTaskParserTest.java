@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.tasks.DefaultTaskParser;
 import org.eclipse.xtext.tasks.DefaultTaskTagProvider;
 import org.eclipse.xtext.tasks.ITaskParser;
@@ -70,7 +71,7 @@ public class DefaultTaskParserTest {
         it.setTag(_doubleArrow);
         it.setDescription(" case insensitve match");
         it.setLineNumber(2);
-        it.setOffset(7);
+        it.setOffset(6);
       }
     };
     Task _doubleArrow = ObjectExtensions.<Task>operator_doubleArrow(_task, _function);
@@ -130,7 +131,7 @@ public class DefaultTaskParserTest {
         it.setTag(_doubleArrow);
         it.setDescription(" this cannot work");
         it.setLineNumber(2);
-        it.setOffset(27);
+        it.setOffset(26);
       }
     };
     Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_1);
@@ -148,7 +149,7 @@ public class DefaultTaskParserTest {
         it.setTag(_doubleArrow);
         it.setDescription(": god, this is bad");
         it.setLineNumber(3);
-        it.setOffset(54);
+        it.setOffset(52);
       }
     };
     Task _doubleArrow_2 = ObjectExtensions.<Task>operator_doubleArrow(_task_2, _function_2);
@@ -166,7 +167,7 @@ public class DefaultTaskParserTest {
         it.setTag(_doubleArrow);
         it.setDescription("");
         it.setLineNumber(4);
-        it.setOffset(80);
+        it.setOffset(77);
       }
     };
     Task _doubleArrow_3 = ObjectExtensions.<Task>operator_doubleArrow(_task_3, _function_3);
@@ -176,7 +177,8 @@ public class DefaultTaskParserTest {
   
   private void assertContainsTasks(final CharSequence source, final List<Task> expectedTasks) {
     String _string = source.toString();
-    final List<Task> actualTasks = this.parser.parseTasks(_string, this.definitions);
+    String _unix = LineDelimiters.toUnix(_string);
+    final List<Task> actualTasks = this.parser.parseTasks(_unix, this.definitions);
     int _size = expectedTasks.size();
     int _size_1 = actualTasks.size();
     Assert.assertEquals(_size, _size_1);
