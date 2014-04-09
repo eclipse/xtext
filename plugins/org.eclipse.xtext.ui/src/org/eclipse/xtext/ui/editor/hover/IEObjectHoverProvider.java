@@ -35,7 +35,7 @@ public interface IEObjectHoverProvider {
 	 */
 	IInformationControlCreatorProvider getHoverInfo(EObject object, ITextViewer viewer, IRegion region);
 
-	public interface IInformationControlCreatorProvider extends IInformationControlCreatorProvider2{
+	public interface IInformationControlCreatorProvider {
 		/**
 		 * an {@link IInformationControlCreator} capable of creating an
 		 * {@link org.eclipse.jface.text.IInformationControl} for the information provided by {@link #getInfo()}.
@@ -51,7 +51,7 @@ public interface IEObjectHoverProvider {
 	/**
 	 * @since 2.6
 	 */
-	public interface IInformationControlCreatorProvider2 {
+	public interface IInformationControlCreatorProvider2 extends IInformationControlCreatorProvider{
 		/**
 		 * an {@link IInformationControlCreator} capable of creating an
 		 * {@link org.eclipse.jface.text.IInformationControl} for the information provided by {@link IInformationControlCreatorProvider#getInfo()}.

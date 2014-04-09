@@ -509,7 +509,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 	}
 
 	public IInformationControlCreatorProvider getHoverInfo(final EObject object, final ITextViewer viewer, final IRegion region) {
-		return new IInformationControlCreatorProvider() {
+		return new IInformationControlCreatorProvider2() {
 
 			public IInformationControlCreator getHoverControlCreator() {
 				return DefaultEObjectHoverProvider.this.getHoverControlCreator();
