@@ -153,7 +153,10 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 		}
 	}
 
-	private void deleteTaskMarkers(IFile generatedJavaFile) throws CoreException {
+	/**
+	 * Deletes task markers in generated Java files, because they would duplicate the markers in the source file. 
+	 */
+	protected void deleteTaskMarkers(IFile generatedJavaFile) throws CoreException {
 		generatedJavaFile.deleteMarkers(IJavaModelMarker.TASK_MARKER, false, IResource.DEPTH_ZERO);
 	}
 

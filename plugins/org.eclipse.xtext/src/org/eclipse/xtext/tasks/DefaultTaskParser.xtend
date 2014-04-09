@@ -34,6 +34,7 @@ class DefaultTaskParser implements ITaskParser {
 	}
 	
 	protected def toPattern(TaskTags taskTags) {
+		//this takes roughly 1µs per call, so we think its not worth caching patterns here
 		var flags = Pattern.MULTILINE
 		if (!taskTags.caseSensitive) {
 			flags = flags.bitwiseOr(Pattern.CASE_INSENSITIVE).bitwiseOr(Pattern.UNICODE_CASE)

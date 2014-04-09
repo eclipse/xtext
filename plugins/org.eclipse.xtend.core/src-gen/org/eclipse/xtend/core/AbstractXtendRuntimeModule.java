@@ -309,4 +309,8 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 		return org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.tasks.ITaskFinder> bindTaskFinder() {
+		return org.eclipse.xtext.xbase.tasks.XTypeTaskFinder.class;
+	}
 }
