@@ -32,15 +32,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/ui/editor/hover/IEObjectHoverProvider.java" type="org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider$IInformationControlCreatorProvider">
-        <filter comment="extends new extension interface because there are only anonymous implementations" id="403984517">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider.IInformationControlCreatorProvider"/>
-                <message_argument value="org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider$IInformationControlCreatorProvider2"/>
-                <message_argument value="getInformationPresenterControlCreator()"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/hover/html/XtextBrowserInformationControl.java" type="org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControl">
         <filter comment="Intentional extends clause" id="576720909">
             <message_arguments>
