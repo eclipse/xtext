@@ -13,6 +13,7 @@ import org.junit.Test
 
 import static org.eclipse.xtext.tasks.TaskAssert.*
 import static org.junit.Assert.*
+import org.eclipse.xtext.junit4.internal.LineDelimiters
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -43,7 +44,7 @@ class DefaultTaskParserTest {
 					]
 					description = " case insensitve match"
 					lineNumber = 2
-					offset = 7
+					offset = 6
 				]
 			]
 		)
@@ -76,7 +77,7 @@ class DefaultTaskParserTest {
 					]
 					description = " this cannot work"
 					lineNumber = 2
-					offset = 27
+					offset = 26
 				],
 				new Task() => [
 					tag = new TaskTag => [
@@ -85,7 +86,7 @@ class DefaultTaskParserTest {
 					]
 					description = ": god, this is bad"
 					lineNumber = 3
-					offset = 54
+					offset = 52
 				],
 				new Task() => [
 					tag = new TaskTag => [
@@ -94,13 +95,13 @@ class DefaultTaskParserTest {
 					]
 					description = ""
 					lineNumber = 4
-					offset = 80
+					offset = 77
 				]
 			])
 	}
 
 	private def assertContainsTasks(CharSequence source, List<Task> expectedTasks) {
-		val actualTasks = parser.parseTasks(source.toString, definitions)
+		val actualTasks = parser.parseTasks(LineDelimiters.toUnix(source.toString), definitions)
 		assertEquals(expectedTasks.size, actualTasks.size)
 		for (i : 0 ..< expectedTasks.size) {
 			assertExactMatch(expectedTasks.get(i), actualTasks.get(i))

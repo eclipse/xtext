@@ -15,6 +15,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.tasks.TaskAssert.*
+import org.eclipse.xtext.junit4.internal.LineDelimiters
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -32,15 +33,17 @@ class DefaultTaskFinderTest extends AbstractXtextTests {
 	@Test
 	def void test() {
 		getResourceFromString(
-		'''
-			//TODO foo
-			/*
-			 * FIXME bar
-			 * Fixme no match
-			 * FOO also no match
-			 */
-			Hello notATODO!
-		''')
+			LineDelimiters.toUnix(
+			'''
+				//TODO foo
+				/*
+				 * FIXME bar
+				 * Fixme no match
+				 * FOO also no match
+				 */
+				Hello notATODO!
+			''')
+		)
 		.assertContainsTasks(#[
 			new Task => [
 				tag = new TaskTag => [
@@ -57,7 +60,7 @@ class DefaultTaskFinderTest extends AbstractXtextTests {
 					priority = Priority.HIGH
 				]
 				description = " bar"
-				offset = 19
+				offset = 17
 				lineNumber = 3
 			]
 		])
