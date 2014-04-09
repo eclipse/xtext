@@ -12,6 +12,7 @@ import java.util.HashSet;
 import org.eclipse.jface.text.TypedRegion;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
@@ -66,9 +67,10 @@ public class TaskHighlightingTest extends AbstractXtextTests implements IHighlig
       _builder.newLine();
       _builder.append("Hello notATODO!");
       _builder.newLine();
-      final XtextResource resource = this.getResourceFromString(_builder.toString());
+      String _unix = LineDelimiters.toUnix(_builder.toString());
+      final XtextResource resource = this.getResourceFromString(_unix);
       this.expect(2, 4, DefaultHighlightingConfiguration.TASK_ID);
-      this.expect(19, 5, DefaultHighlightingConfiguration.TASK_ID);
+      this.expect(17, 5, DefaultHighlightingConfiguration.TASK_ID);
       this.highlighter.provideHighlightingFor(resource, this);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
