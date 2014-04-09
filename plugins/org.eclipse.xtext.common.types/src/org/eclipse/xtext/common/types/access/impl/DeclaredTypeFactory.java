@@ -71,15 +71,15 @@ public class DeclaredTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 			if(Opcodes.class.getDeclaredField("ASM5") != null) 
 				return true;
 		} catch(NoClassDefFoundError e) {
-			logger.error("--- xtext.common.types ---------------------------------------------------");
-			logger.error("ASM library is not available. Falling back to java.lang.reflect API.");
+			logger.warn("--- xtext.common.types ---------------------------------------------------");
+			logger.warn("ASM library is not available. Falling back to java.lang.reflect API.");
 		} catch(NoSuchFieldException e) {
-			logger.error("--- xtext.common.types ---------------------------------------------------");
-			logger.error("ASM library is too old. Falling back to java.lang.reflect API.");
+			logger.warn("--- xtext.common.types ---------------------------------------------------");
+			logger.warn("ASM library is too old. Falling back to java.lang.reflect API.");
 		}
-		logger.error("Please note that no information about compile time constants is available.");
-		logger.error("It's recommended to use org.objectweb.asm 5.0.1 or better.");
-		logger.error("--------------------------------------------------------------------------");
+		logger.warn("Please note that no information about compile time constants is available.");
+		logger.warn("It's recommended to use org.objectweb.asm 5.0.1 or better.");
+		logger.warn("--------------------------------------------------------------------------");
 		return false;
 	}
 
