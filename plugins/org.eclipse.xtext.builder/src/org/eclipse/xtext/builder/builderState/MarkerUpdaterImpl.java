@@ -121,9 +121,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 	 * @return {@link IResourceUIValidatorExtension} for the given {@link URI} or <code>null</code> if not found.
 	 * @see org.eclipse.xtext.resource.IResourceServiceProvider.Registry#getResourceServiceProvider(URI)
 	 * @see IResourceServiceProvider#get(Class)
-	 * @deprecated this will be removed in favor of registering validation as an {@link IMarkerContributor}
 	 */
-	@Deprecated
 	protected IResourceUIValidatorExtension getResourceUIValidatorExtension(URI uri) {
 		IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(uri);
 		if (provider != null) {

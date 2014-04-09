@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
 
 /**
- * Allows you to add custom markers on DSL files.
+ * Allows to add and delete markers on resources.
  * @author Stefan Oehme - Initial contribution and API
  * @since 2.6
  */
