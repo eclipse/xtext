@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tasks.DefaultTaskFinder;
 import org.eclipse.xtext.tasks.ITaskFinder;
@@ -69,7 +70,8 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("Hello notATODO!");
       _builder.newLine();
-      XtextResource _resourceFromString = this.getResourceFromString(_builder.toString());
+      String _unix = LineDelimiters.toUnix(_builder.toString());
+      XtextResource _resourceFromString = this.getResourceFromString(_unix);
       Task _task = new Task();
       final Procedure1<Task> _function = new Procedure1<Task>() {
         public void apply(final Task it) {
@@ -101,7 +103,7 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
           TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
           it.setTag(_doubleArrow);
           it.setDescription(" bar");
-          it.setOffset(19);
+          it.setOffset(17);
           it.setLineNumber(3);
         }
       };
