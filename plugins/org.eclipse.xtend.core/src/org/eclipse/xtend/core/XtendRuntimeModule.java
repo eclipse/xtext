@@ -65,7 +65,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.EagerResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.tasks.ITaskTagProvider;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
@@ -83,7 +82,6 @@ import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
-import org.eclipse.xtext.xbase.tasks.XTypeTaskFinder;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
@@ -321,9 +319,5 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public Class<? extends ITaskTagProvider> bindTaskTagProvider() {
 		return XtendTaskTagProvider.class;
-	}
-	
-	public Class<? extends ITaskFinder> bindTaskFinder() {
-		return XTypeTaskFinder.class;
 	}
 }
