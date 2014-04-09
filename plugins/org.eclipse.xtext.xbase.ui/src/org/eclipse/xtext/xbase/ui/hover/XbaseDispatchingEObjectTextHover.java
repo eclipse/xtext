@@ -46,7 +46,7 @@ public class XbaseDispatchingEObjectTextHover extends DispatchingEObjectTextHove
 	public Object getHoverInfo2(ITextViewer textViewer, IRegion hoverRegion) {
 		final Object hoverInfo = javaDebugHover.getHoverInfo2(textViewer, hoverRegion);
 		if (hoverInfo != null) {
-			lastCreatorProvider = new IEObjectHoverProvider.IInformationControlCreatorProvider() {
+			lastCreatorProvider = new IEObjectHoverProvider.IInformationControlCreatorProvider2() {
 				public IInformationControlCreator getHoverControlCreator() {
 					return javaDebugHover.getHoverControlCreator();
 				}

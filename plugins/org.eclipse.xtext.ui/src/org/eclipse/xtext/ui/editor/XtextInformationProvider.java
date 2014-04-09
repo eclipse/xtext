@@ -24,6 +24,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider.IInformationControlCreatorProvider;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider.IInformationControlCreatorProvider2;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -52,7 +53,9 @@ public class XtextInformationProvider  implements IInformationProvider, IInforma
 			IEObjectHoverProvider hoverProvider = serviceProvider.findService(contextObject , IEObjectHoverProvider.class);
 			if (hoverProvider!=null){
 				IInformationControlCreatorProvider hoverInfo = hoverProvider.getHoverInfo(contextObject, textViewer, contextRegion);
-				return hoverInfo.getInformationPresenterControlCreator();
+				if(hoverInfo instanceof IInformationControlCreatorProvider2){
+					return ((IInformationControlCreatorProvider2)hoverInfo).getInformationPresenterControlCreator();
+				}
 			}
 		}
 		return null;
