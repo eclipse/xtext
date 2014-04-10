@@ -624,7 +624,7 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
     _builder.append("list.addListener [");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("LC<String> c |");
+    _builder.append("LC<? extends String> c |");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("]");
@@ -679,7 +679,7 @@ public class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
     _builder.append("list.addListener [");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("LC<CharSequence> lc |");
+    _builder.append("LC<? extends CharSequence> lc |");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("]");
