@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
@@ -200,6 +201,11 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 				return createXtendExecutableAdapter();
 			}
 			@Override
+			public Adapter caseAnonymousClassConstructorCall(AnonymousClassConstructorCall object)
+			{
+				return createAnonymousClassConstructorCallAdapter();
+			}
+			@Override
 			public Adapter caseXExpression(XExpression object)
 			{
 				return createXExpressionAdapter();
@@ -238,6 +244,11 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 			public Adapter caseJvmFormalParameter(JvmFormalParameter object)
 			{
 				return createJvmFormalParameterAdapter();
+			}
+			@Override
+			public Adapter caseXConstructorCall(XConstructorCall object)
+			{
+				return createXConstructorCallAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object)
@@ -592,6 +603,21 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall <em>Anonymous Class Constructor Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall
+	 * @generated
+	 */
+	public Adapter createAnonymousClassConstructorCallAdapter()
+	{
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XExpression <em>XExpression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -707,6 +733,21 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createJvmFormalParameterAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XConstructorCall <em>XConstructor Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XConstructorCall
+	 * @generated
+	 */
+	public Adapter createXConstructorCallAdapter()
 	{
 		return null;
 	}

@@ -23,9 +23,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XImportDeclaration">
     <eOperations name="getImportedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-    	<eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-			<details key="documentation" value="&lt;p>Returns the name that has been imported.&lt;/p>&#xA;&lt;p>For types and wildcard import declarations returns a qualified type name, e.g. java.lang.String.&lt;/p>&#xA;&lt;p>For member import declarations returns a qualified member name, e.g. java.lang.String.valueOf.&lt;/p>&#xA;&lt;p>"/>
-    	</eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns the name that has been imported.&lt;/p>&#xA;&lt;p>For types and wildcard import declarations returns a qualified type name, e.g. java.lang.String.&lt;/p>&#xA;&lt;p>For member import declarations returns a qualified member name, e.g. java.lang.String.valueOf.&lt;/p>&#xA;&lt;p>"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="getImportedTypeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="wildcard" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

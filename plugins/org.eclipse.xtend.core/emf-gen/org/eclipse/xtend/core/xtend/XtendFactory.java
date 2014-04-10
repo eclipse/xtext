@@ -208,6 +208,15 @@ public interface XtendFactory extends EFactory
 	XtendFormalParameter createXtendFormalParameter();
 
 	/**
+	 * Returns a new object of class '<em>Anonymous Class Constructor Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Anonymous Class Constructor Call</em>'.
+	 * @generated
+	 */
+	AnonymousClassConstructorCall createAnonymousClassConstructorCall();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
