@@ -130,6 +130,7 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="strictFloatingPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anonymous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmTypeReference" abstract="true">
     <eOperations name="getType" eType="#//JvmType"/>
@@ -200,6 +201,8 @@
         <details key="documentation" value="&lt;p>Returns &lt;code>true&lt;/code> if the feature is a static field or static operation.&lt;/p>&#xA;&#xA;@since 2.4"/>
       </eAnnotations>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localClasses" upperBound="-1"
+        eType="#//JvmGenericType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="JvmVisibility">
     <eLiterals name="DEFAULT"/>

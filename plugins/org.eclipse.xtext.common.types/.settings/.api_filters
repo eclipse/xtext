@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.common.types" version="2">
-    <resource path="META-INF/MANIFEST.MF">
-        <filter comment="Added JvmField.isConstant" id="923795461">
-            <message_arguments>
-                <message_argument value="2.6.0"/>
-                <message_argument value="2.5.1"/>
-            </message_arguments>
-        </filter>
-        <filter comment="Added JvmField.isConstant" id="924844039">
-            <message_arguments>
-                <message_argument value="2.6.0"/>
-                <message_argument value="2.5.1"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java" type="org.eclipse.xtext.common.types.JvmTypeReference">
         <filter id="643846161">
             <message_arguments>
@@ -31,56 +17,312 @@
         </filter>
     </resource>
     <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage">
-        <filter id="388194388">
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_CONSTRUCTOR_FEATURE_COUNT"/>
+                <message_argument value="9"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_CONSTRUCTOR__EXCEPTIONS"/>
+                <message_argument value="7"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_CONSTRUCTOR__PARAMETERS"/>
+                <message_argument value="6"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_CONSTRUCTOR__TYPE_PARAMETERS"/>
+                <message_argument value="5"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_CONSTRUCTOR__VAR_ARGS"/>
+                <message_argument value="8"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
                 <message_argument value="JVM_ENUMERATION_LITERAL_FEATURE_COUNT"/>
+                <message_argument value="12"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_ENUMERATION_LITERAL__CONSTANT"/>
                 <message_argument value="10"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_ENUMERATION_LITERAL__CONSTANT_VALUE"/>
+                <message_argument value="11"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_ENUMERATION_LITERAL__FINAL"/>
+                <message_argument value="6"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_ENUMERATION_LITERAL__STATIC"/>
+                <message_argument value="5"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_ENUMERATION_LITERAL__TRANSIENT"/>
+                <message_argument value="9"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_ENUMERATION_LITERAL__TYPE"/>
+                <message_argument value="7"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_ENUMERATION_LITERAL__VOLATILE"/>
+                <message_argument value="8"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_EXECUTABLE_FEATURE_COUNT"/>
+                <message_argument value="9"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_EXECUTABLE__EXCEPTIONS"/>
+                <message_argument value="7"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_EXECUTABLE__PARAMETERS"/>
+                <message_argument value="6"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_EXECUTABLE__TYPE_PARAMETERS"/>
+                <message_argument value="5"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_EXECUTABLE__VAR_ARGS"/>
+                <message_argument value="8"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_FEATURE_FEATURE_COUNT"/>
+                <message_argument value="5"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_FIELD_FEATURE_COUNT"/>
+                <message_argument value="12"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_FIELD__CONSTANT"/>
+                <message_argument value="10"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_FIELD__CONSTANT_VALUE"/>
+                <message_argument value="11"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_FIELD__FINAL"/>
+                <message_argument value="6"/>
             </message_arguments>
         </filter>
         <filter id="388194388">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
-                <message_argument value="JVM_FIELD_FEATURE_COUNT"/>
+                <message_argument value="JVM_FIELD__STATIC"/>
+                <message_argument value="5"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_FIELD__TRANSIENT"/>
+                <message_argument value="9"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_FIELD__TYPE"/>
+                <message_argument value="7"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_FIELD__VOLATILE"/>
+                <message_argument value="8"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_GENERIC_TYPE_FEATURE_COUNT"/>
+                <message_argument value="15"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_OPERATION_FEATURE_COUNT"/>
+                <message_argument value="18"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_OPERATION__ABSTRACT"/>
+                <message_argument value="11"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_OPERATION__DEFAULT"/>
+                <message_argument value="15"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_OPERATION__DEFAULT_VALUE"/>
+                <message_argument value="13"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_OPERATION__EXCEPTIONS"/>
+                <message_argument value="7"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_OPERATION__FINAL"/>
                 <message_argument value="10"/>
             </message_arguments>
         </filter>
-        <filter comment="JvmAnnotationReference.getValues is now an EOperation" id="405864542">
+        <filter comment="Allow anonymous and local classes" id="388194388">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
-                <message_argument value="JVM_ANNOTATION_REFERENCE__VALUES"/>
+                <message_argument value="JVM_OPERATION__NATIVE"/>
+                <message_argument value="16"/>
             </message_arguments>
         </filter>
-        <filter comment="JvmAnnotationReference.getValues() became an EOperation" id="405901410">
+        <filter comment="Allow anonymous and local classes" id="388194388">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
-                <message_argument value="getJvmAnnotationReference_Values()"/>
+                <message_argument value="JVM_OPERATION__PARAMETERS"/>
+                <message_argument value="6"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_OPERATION__RETURN_TYPE"/>
+                <message_argument value="12"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_OPERATION__STATIC"/>
+                <message_argument value="9"/>
+            </message_arguments>
+        </filter>
+        <filter id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_OPERATION__STRICT_FLOATING_POINT"/>
+                <message_argument value="17"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_OPERATION__SYNCHRONIZED"/>
+                <message_argument value="14"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_OPERATION__TYPE_PARAMETERS"/>
+                <message_argument value="5"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Allow anonymous and local classes" id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_OPERATION__VAR_ARGS"/>
+                <message_argument value="8"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage$Literals">
-        <filter id="403767336">
+        <filter comment="Allow anonymous and inner classes" id="403767336">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
-                <message_argument value="JVM_ANNOTATION_REFERENCE__EXPLICIT_VALUES"/>
+                <message_argument value="JVM_FEATURE__LOCAL_CLASSES"/>
             </message_arguments>
         </filter>
         <filter id="403767336">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
-                <message_argument value="JVM_FIELD__CONSTANT"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
-                <message_argument value="JVM_FIELD__CONSTANT_VALUE"/>
-            </message_arguments>
-        </filter>
-        <filter comment="JvmAnnotationReference#getExplicitValues" id="405864542">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
-                <message_argument value="JVM_ANNOTATION_REFERENCE__VALUES"/>
+                <message_argument value="JVM_GENERIC_TYPE__ANONYMOUS"/>
             </message_arguments>
         </filter>
     </resource>
