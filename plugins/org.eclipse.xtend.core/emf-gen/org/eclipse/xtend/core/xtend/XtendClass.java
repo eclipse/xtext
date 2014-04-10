@@ -106,4 +106,12 @@ public interface XtendClass extends XtendTypeDeclaration
 	 */
 	boolean isStrictFloatingPoint();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isAnonymous();
+
 } // XtendClass

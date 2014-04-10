@@ -308,4 +308,5 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	public Class<? extends org.eclipse.xtext.validation.IResourceValidator> bindIResourceValidator() {
 		return org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.class;
 	}
+
 }

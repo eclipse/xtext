@@ -142,9 +142,11 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	public void completeMember_Type(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XtendField) {
-			// don't propose types everywhere but only if there's already an indicator for fields, e.g. static, extension, var, val
-			completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
-					getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
+			if(!((XtendField) model).getModifiers().isEmpty()) {
+				// don't propose types everywhere but only if there's already an indicator for fields, e.g. static, extension, var, val
+				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
+						getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
+			}
 		}
 	}
 	
@@ -343,4 +345,17 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
 	}
 	
+	@Override
+	public void completeXbaseConstructorCall_Constructor(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
+				getQualifiedNameValueConverter(), TypeMatchFilters.and(TypeMatchFilters.canInstantiate(), createVisibilityFilter(context)), acceptor);
+	}
+	
+	@Override
+	public void completeAnonymousClassConstructorCall_Constructor(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
+				getQualifiedNameValueConverter(), TypeMatchFilters.and(TypeMatchFilters.canInstantiate(), createVisibilityFilter(context)), acceptor);
+	}
 }
