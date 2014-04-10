@@ -70,9 +70,9 @@ public class NodeIteratorTest extends Assert {
 		NodeIterator nodeIterator = new NodeIterator(nodes[3]);
 		nodeIterator.prune();
 		assertEquals(nodes[6], nodeIterator.next());
-		assertEquals(nodes[6], nodeIterator.previous());
 		assertEquals(nodes[3], nodeIterator.previous());
 		assertEquals(nodes[2], nodeIterator.previous());
+		assertEquals(nodes[1], nodeIterator.previous());
 	}
 	
 	@Test public void testPruneLeaf() throws Exception {
@@ -80,9 +80,9 @@ public class NodeIteratorTest extends Assert {
 		NodeIterator nodeIterator = new NodeIterator(nodes[8]);
 		nodeIterator.prune();
 		assertEquals(nodes[9], nodeIterator.next());
-		assertEquals(nodes[9], nodeIterator.previous());
 		assertEquals(nodes[8], nodeIterator.previous());
 		assertEquals(nodes[7], nodeIterator.previous());
+		assertEquals(nodes[6], nodeIterator.previous());
 	}
 
 	protected void checkAscending(int index) {
@@ -97,7 +97,7 @@ public class NodeIteratorTest extends Assert {
 		int i = index;
 		NodeIterator nodeIterator = new NodeIterator(nodes[i]);
 		while (nodeIterator.hasPrevious()) {
-			assertEquals(nodes[i--], nodeIterator.previous());
+			assertEquals(nodes[--i], nodeIterator.previous());
 		}
 	}
 }
