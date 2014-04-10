@@ -26,6 +26,8 @@ public class NodeIterator implements TreeIterator<INode> {
 	private INode current;
 
 	private INode next;
+	
+	private INode previous;
 
 	private Set<ICompositeNode> prunedComposites;
 
@@ -33,6 +35,7 @@ public class NodeIterator implements TreeIterator<INode> {
 		prunedComposites = Sets.newHashSet();
 		current = node;
 		next = findNext(node);
+		previous = findPrevious(node);
 	}
 
 	private INode findPrevious(INode node) {
@@ -81,19 +84,21 @@ public class NodeIterator implements TreeIterator<INode> {
 	}
 
 	public INode next() {
+		previous = current;
 		current = next;
 		next = findNext(next);
 		return current;
 	}
 
 	public boolean hasPrevious() {
-		return current != null;
+		return previous != null;
 	}
 
 	public INode previous() {
 		next = current;
-		current = findPrevious(current);
-		return next;
+		current = previous;
+		previous = findPrevious(previous);
+		return current;
 	}
 
 	public void remove() {
@@ -104,6 +109,7 @@ public class NodeIterator implements TreeIterator<INode> {
 		if (current instanceof ICompositeNode) {
 			prunedComposites.add((ICompositeNode) current);
 			next = findNext(current);
+			previous = findPrevious(current);
 		}
 	}
 }
