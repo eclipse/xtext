@@ -17,15 +17,44 @@ import org.eclipse.xtext.Grammar;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultGeneratorFragment implements IGeneratorFragment {
+public class DefaultGeneratorFragment implements IGeneratorFragment,IGeneratorFragmentExtension, IGeneratorFragmentExtension2 {
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void addToPluginXmlRt(LanguageConfig config, XpandExecutionContext ctx) {
+		addToPluginXmlRt(config.getGrammar(), ctx);
 	}
 
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
 	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void addToPluginXmlUi(LanguageConfig config, XpandExecutionContext ctx) {
+		addToPluginXmlUi(config.getGrammar(), ctx);
+	}
 
+	
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
 	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void addToStandaloneSetup(LanguageConfig config, XpandExecutionContext ctx) {
+		addToStandaloneSetup(config.getGrammar(), ctx);
+	}
+	
+	/**
+	 * @since 2.6
+	 * @deprecated
+	 */
+	@Deprecated
+	public void addToPluginXmlTests(Grammar grammar, XpandExecutionContext ctx) {}
 
 	public String[] getExportedPackagesRt(Grammar grammar) {
 		return null;
@@ -58,10 +87,38 @@ public class DefaultGeneratorFragment implements IGeneratorFragment {
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return null;
 	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public String[] getExportedPackagesTests(Grammar grammar) {
+		return null;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public String[] getImportedPackagesTests(Grammar grammar) {
+		return null;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public String[] getRequiredBundlesTests(Grammar grammar) {
+		return null;
+	}
 
 	public void checkConfiguration(Issues issues) {
 	}
 
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void generate(LanguageConfig config, XpandExecutionContext ctx) {
+		generate(config.getGrammar(), ctx);
 	}
 }
