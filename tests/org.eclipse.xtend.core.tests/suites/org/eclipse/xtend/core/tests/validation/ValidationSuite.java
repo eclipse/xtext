@@ -25,8 +25,11 @@ import org.junit.runners.Suite.SuiteClasses;
 	ModifierValidationTest.class,
 	AmbiguityValidationSuite.class,
 	SuspiciousOverloadValidationTest.class,
+	ValidationBug371957Test.class,
+	ValidationBug409602Test.class,
 	ValidationBug419050Test.class,
-	ValidationBug409602Test.class
+	ValidationBug427432Test.class,
+	ValidationBug432193Test.class
 })
 public class ValidationSuite {
 }
