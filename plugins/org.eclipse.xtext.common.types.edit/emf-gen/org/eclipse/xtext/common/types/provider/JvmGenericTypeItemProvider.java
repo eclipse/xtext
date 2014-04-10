@@ -36,14 +36,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmGenericTypeItemProvider
-	extends JvmDeclaredTypeItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmGenericTypeItemProvider extends JvmDeclaredTypeItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -181,6 +174,7 @@ public class JvmGenericTypeItemProvider
 			getString("_UI_JvmGenericType_type") :
 			getString("_UI_JvmGenericType_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

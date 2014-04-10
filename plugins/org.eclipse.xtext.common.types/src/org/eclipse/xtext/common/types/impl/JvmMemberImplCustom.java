@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmMember;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -57,4 +58,9 @@ public abstract class JvmMemberImplCustom extends JvmMemberImpl {
 		return declaringType.getIdentifier() + "." + simpleName;
 	}
 
+	@Override
+	public JvmDeclaredType getDeclaringType() {
+		JvmMember declaringMember = getDeclaringMember();
+		return (declaringMember instanceof JvmDeclaredType) ? (JvmDeclaredType) declaringMember : null;
+	}
 }

@@ -36,14 +36,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmDeclaredTypeItemProvider
-	extends JvmMemberItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmDeclaredTypeItemProvider extends JvmMemberItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -185,7 +178,6 @@ public class JvmDeclaredTypeItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.JVM_COMPONENT_TYPE__ARRAY_TYPE);
 			childrenFeatures.add(TypesPackage.Literals.JVM_DECLARED_TYPE__SUPER_TYPES);
-			childrenFeatures.add(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS);
 		}
 		return childrenFeatures;
 	}
@@ -218,6 +210,7 @@ public class JvmDeclaredTypeItemProvider
 			getString("_UI_JvmDeclaredType_type") :
 			getString("_UI_JvmDeclaredType_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -241,7 +234,6 @@ public class JvmDeclaredTypeItemProvider
 				return;
 			case TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE:
 			case TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES:
-			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -304,41 +296,6 @@ public class JvmDeclaredTypeItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_DECLARED_TYPE__SUPER_TYPES,
 				 TypesFactory.eINSTANCE.createJvmUnknownTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS,
-				 TypesFactory.eINSTANCE.createJvmAnnotationType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS,
-				 TypesFactory.eINSTANCE.createJvmEnumerationType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS,
-				 TypesFactory.eINSTANCE.createJvmField()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS,
-				 TypesFactory.eINSTANCE.createJvmEnumerationLiteral()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS,
-				 TypesFactory.eINSTANCE.createJvmGenericType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS,
-				 TypesFactory.eINSTANCE.createJvmConstructor()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_DECLARED_TYPE__MEMBERS,
-				 TypesFactory.eINSTANCE.createJvmOperation()));
 	}
 
 }

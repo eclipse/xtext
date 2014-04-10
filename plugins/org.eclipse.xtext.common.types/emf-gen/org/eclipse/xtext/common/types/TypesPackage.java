@@ -272,13 +272,14 @@ public interface TypesPackage extends EPackage
 	int JVM_MEMBER__ANNOTATIONS = JVM_ANNOTATION_TARGET__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Declaring Member</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.6
 	 */
-	int JVM_MEMBER__DECLARING_TYPE = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 0;
+	int JVM_MEMBER__DECLARING_MEMBER = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -308,13 +309,23 @@ public interface TypesPackage extends EPackage
 	int JVM_MEMBER__IDENTIFIER = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_MEMBER__MEMBERS = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Member</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_MEMBER_FEATURE_COUNT = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 4;
+	int JVM_MEMBER_FEATURE_COUNT = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl <em>Jvm Declared Type</em>}' class.
@@ -336,13 +347,14 @@ public interface TypesPackage extends EPackage
 	int JVM_DECLARED_TYPE__ANNOTATIONS = JVM_MEMBER__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Declaring Member</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.6
 	 */
-	int JVM_DECLARED_TYPE__DECLARING_TYPE = JVM_MEMBER__DECLARING_TYPE;
+	int JVM_DECLARED_TYPE__DECLARING_MEMBER = JVM_MEMBER__DECLARING_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -372,6 +384,15 @@ public interface TypesPackage extends EPackage
 	int JVM_DECLARED_TYPE__IDENTIFIER = JVM_MEMBER__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_DECLARED_TYPE__MEMBERS = JVM_MEMBER__MEMBERS;
+
+	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -390,22 +411,13 @@ public interface TypesPackage extends EPackage
 	int JVM_DECLARED_TYPE__SUPER_TYPES = JVM_MEMBER_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_DECLARED_TYPE__MEMBERS = JVM_MEMBER_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__ABSTRACT = JVM_MEMBER_FEATURE_COUNT + 3;
+	int JVM_DECLARED_TYPE__ABSTRACT = JVM_MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -414,7 +426,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__STATIC = JVM_MEMBER_FEATURE_COUNT + 4;
+	int JVM_DECLARED_TYPE__STATIC = JVM_MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Final</b></em>' attribute.
@@ -423,7 +435,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__FINAL = JVM_MEMBER_FEATURE_COUNT + 5;
+	int JVM_DECLARED_TYPE__FINAL = JVM_MEMBER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Package Name</b></em>' attribute.
@@ -432,7 +444,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE__PACKAGE_NAME = JVM_MEMBER_FEATURE_COUNT + 6;
+	int JVM_DECLARED_TYPE__PACKAGE_NAME = JVM_MEMBER_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Declared Type</em>' class.
@@ -441,7 +453,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE_FEATURE_COUNT = JVM_MEMBER_FEATURE_COUNT + 7;
+	int JVM_DECLARED_TYPE_FEATURE_COUNT = JVM_MEMBER_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeParameterImpl <em>Jvm Type Parameter</em>}' class.
@@ -685,13 +697,14 @@ public interface TypesPackage extends EPackage
 	int JVM_ANNOTATION_TYPE__ANNOTATIONS = JVM_DECLARED_TYPE__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Declaring Member</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.6
 	 */
-	int JVM_ANNOTATION_TYPE__DECLARING_TYPE = JVM_DECLARED_TYPE__DECLARING_TYPE;
+	int JVM_ANNOTATION_TYPE__DECLARING_MEMBER = JVM_DECLARED_TYPE__DECLARING_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -721,6 +734,15 @@ public interface TypesPackage extends EPackage
 	int JVM_ANNOTATION_TYPE__IDENTIFIER = JVM_DECLARED_TYPE__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_TYPE__MEMBERS = JVM_DECLARED_TYPE__MEMBERS;
+
+	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -737,15 +759,6 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_ANNOTATION_TYPE__SUPER_TYPES = JVM_DECLARED_TYPE__SUPER_TYPES;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_ANNOTATION_TYPE__MEMBERS = JVM_DECLARED_TYPE__MEMBERS;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -812,13 +825,14 @@ public interface TypesPackage extends EPackage
 	int JVM_ENUMERATION_TYPE__ANNOTATIONS = JVM_DECLARED_TYPE__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Declaring Member</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.6
 	 */
-	int JVM_ENUMERATION_TYPE__DECLARING_TYPE = JVM_DECLARED_TYPE__DECLARING_TYPE;
+	int JVM_ENUMERATION_TYPE__DECLARING_MEMBER = JVM_DECLARED_TYPE__DECLARING_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -848,6 +862,15 @@ public interface TypesPackage extends EPackage
 	int JVM_ENUMERATION_TYPE__IDENTIFIER = JVM_DECLARED_TYPE__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_TYPE__MEMBERS = JVM_DECLARED_TYPE__MEMBERS;
+
+	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -864,15 +887,6 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_ENUMERATION_TYPE__SUPER_TYPES = JVM_DECLARED_TYPE__SUPER_TYPES;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_ENUMERATION_TYPE__MEMBERS = JVM_DECLARED_TYPE__MEMBERS;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -948,13 +962,14 @@ public interface TypesPackage extends EPackage
 	int JVM_FEATURE__ANNOTATIONS = JVM_MEMBER__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Declaring Member</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.6
 	 */
-	int JVM_FEATURE__DECLARING_TYPE = JVM_MEMBER__DECLARING_TYPE;
+	int JVM_FEATURE__DECLARING_MEMBER = JVM_MEMBER__DECLARING_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -982,6 +997,16 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_FEATURE__IDENTIFIER = JVM_MEMBER__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_FEATURE__MEMBERS = JVM_MEMBER__MEMBERS;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Feature</em>' class.
@@ -1012,13 +1037,14 @@ public interface TypesPackage extends EPackage
 	int JVM_FIELD__ANNOTATIONS = JVM_FEATURE__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Declaring Member</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.6
 	 */
-	int JVM_FIELD__DECLARING_TYPE = JVM_FEATURE__DECLARING_TYPE;
+	int JVM_FIELD__DECLARING_MEMBER = JVM_FEATURE__DECLARING_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1046,6 +1072,16 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_FIELD__IDENTIFIER = JVM_FEATURE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_FIELD__MEMBERS = JVM_FEATURE__MEMBERS;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1143,13 +1179,14 @@ public interface TypesPackage extends EPackage
 	int JVM_ENUMERATION_LITERAL__ANNOTATIONS = JVM_FIELD__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Declaring Member</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.6
 	 */
-	int JVM_ENUMERATION_LITERAL__DECLARING_TYPE = JVM_FIELD__DECLARING_TYPE;
+	int JVM_ENUMERATION_LITERAL__DECLARING_MEMBER = JVM_FIELD__DECLARING_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1177,6 +1214,16 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_ENUMERATION_LITERAL__IDENTIFIER = JVM_FIELD__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_ENUMERATION_LITERAL__MEMBERS = JVM_FIELD__MEMBERS;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1273,13 +1320,14 @@ public interface TypesPackage extends EPackage
 	int JVM_GENERIC_TYPE__ANNOTATIONS = JVM_DECLARED_TYPE__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Declaring Member</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.6
 	 */
-	int JVM_GENERIC_TYPE__DECLARING_TYPE = JVM_DECLARED_TYPE__DECLARING_TYPE;
+	int JVM_GENERIC_TYPE__DECLARING_MEMBER = JVM_DECLARED_TYPE__DECLARING_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1309,6 +1357,15 @@ public interface TypesPackage extends EPackage
 	int JVM_GENERIC_TYPE__IDENTIFIER = JVM_DECLARED_TYPE__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__MEMBERS = JVM_DECLARED_TYPE__MEMBERS;
+
+	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1325,15 +1382,6 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_GENERIC_TYPE__SUPER_TYPES = JVM_DECLARED_TYPE__SUPER_TYPES;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_GENERIC_TYPE__MEMBERS = JVM_DECLARED_TYPE__MEMBERS;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1653,13 +1701,14 @@ public interface TypesPackage extends EPackage
 	int JVM_EXECUTABLE__ANNOTATIONS = JVM_FEATURE__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Declaring Member</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.6
 	 */
-	int JVM_EXECUTABLE__DECLARING_TYPE = JVM_FEATURE__DECLARING_TYPE;
+	int JVM_EXECUTABLE__DECLARING_MEMBER = JVM_FEATURE__DECLARING_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1687,6 +1736,16 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_EXECUTABLE__IDENTIFIER = JVM_FEATURE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_EXECUTABLE__MEMBERS = JVM_FEATURE__MEMBERS;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -1753,13 +1812,14 @@ public interface TypesPackage extends EPackage
 	int JVM_CONSTRUCTOR__ANNOTATIONS = JVM_EXECUTABLE__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Declaring Member</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.6
 	 */
-	int JVM_CONSTRUCTOR__DECLARING_TYPE = JVM_EXECUTABLE__DECLARING_TYPE;
+	int JVM_CONSTRUCTOR__DECLARING_MEMBER = JVM_EXECUTABLE__DECLARING_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1787,6 +1847,16 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_CONSTRUCTOR__IDENTIFIER = JVM_EXECUTABLE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_CONSTRUCTOR__MEMBERS = JVM_EXECUTABLE__MEMBERS;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -1853,13 +1923,14 @@ public interface TypesPackage extends EPackage
 	int JVM_OPERATION__ANNOTATIONS = JVM_EXECUTABLE__ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Declaring Member</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @since 2.6
 	 */
-	int JVM_OPERATION__DECLARING_TYPE = JVM_EXECUTABLE__DECLARING_TYPE;
+	int JVM_OPERATION__DECLARING_MEMBER = JVM_EXECUTABLE__DECLARING_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1887,6 +1958,16 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_OPERATION__IDENTIFIER = JVM_EXECUTABLE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_OPERATION__MEMBERS = JVM_EXECUTABLE__MEMBERS;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -2929,17 +3010,6 @@ public interface TypesPackage extends EPackage
 	EReference getJvmDeclaredType_SuperTypes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmDeclaredType#getMembers <em>Members</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Members</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmDeclaredType#getMembers()
-	 * @see #getJvmDeclaredType()
-	 * @generated
-	 */
-	EReference getJvmDeclaredType_Members();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmDeclaredType#isAbstract <em>Abstract</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3299,15 +3369,16 @@ public interface TypesPackage extends EPackage
 	EClass getJvmMember();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.JvmMember#getDeclaringType <em>Declaring Type</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.JvmMember#getDeclaringMember <em>Declaring Member</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Declaring Type</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmMember#getDeclaringType()
+	 * @return the meta object for the container reference '<em>Declaring Member</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmMember#getDeclaringMember()
 	 * @see #getJvmMember()
 	 * @generated
+	 * @since 2.6
 	 */
-	EReference getJvmMember_DeclaringType();
+	EReference getJvmMember_DeclaringMember();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmMember#getVisibility <em>Visibility</em>}'.
@@ -3341,6 +3412,18 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getJvmMember_Identifier();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmMember#getMembers <em>Members</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Members</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmMember#getMembers()
+	 * @see #getJvmMember()
+	 * @generated
+	 * @since 2.6
+	 */
+	EReference getJvmMember_Members();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmFeature <em>Jvm Feature</em>}'.
@@ -4279,14 +4362,6 @@ public interface TypesPackage extends EPackage
 		EReference JVM_DECLARED_TYPE__SUPER_TYPES = eINSTANCE.getJvmDeclaredType_SuperTypes();
 
 		/**
-		 * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JVM_DECLARED_TYPE__MEMBERS = eINSTANCE.getJvmDeclaredType_Members();
-
-		/**
 		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4595,12 +4670,13 @@ public interface TypesPackage extends EPackage
 		EClass JVM_MEMBER = eINSTANCE.getJvmMember();
 
 		/**
-		 * The meta object literal for the '<em><b>Declaring Type</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Declaring Member</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
+		 * @since 2.6
 		 */
-		EReference JVM_MEMBER__DECLARING_TYPE = eINSTANCE.getJvmMember_DeclaringType();
+		EReference JVM_MEMBER__DECLARING_MEMBER = eINSTANCE.getJvmMember_DeclaringMember();
 
 		/**
 		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
@@ -4625,6 +4701,15 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute JVM_MEMBER__IDENTIFIER = eINSTANCE.getJvmMember_Identifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 * @since 2.6
+		 */
+		EReference JVM_MEMBER__MEMBERS = eINSTANCE.getJvmMember_Members();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmFeatureImpl <em>Jvm Feature</em>}' class.

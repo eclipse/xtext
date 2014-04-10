@@ -27,14 +27,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmLowerBoundItemProvider
-	extends JvmTypeConstraintItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmLowerBoundItemProvider extends JvmTypeConstraintItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -87,6 +80,7 @@ public class JvmLowerBoundItemProvider
 	{
 		return getString("_UI_JvmLowerBound_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

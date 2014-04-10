@@ -29,14 +29,7 @@ import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmEnumerationLiteralItemProvider
-	extends JvmFieldItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmEnumerationLiteralItemProvider extends JvmFieldItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -92,6 +85,7 @@ public class JvmEnumerationLiteralItemProvider
 			getString("_UI_JvmEnumerationLiteral_type") :
 			getString("_UI_JvmEnumerationLiteral_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

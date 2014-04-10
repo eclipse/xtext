@@ -650,19 +650,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getJvmDeclaredType_Members()
-	{
-		return (EReference)jvmDeclaredTypeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getJvmDeclaredType_Abstract()
 	{
-		return (EAttribute)jvmDeclaredTypeEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)jvmDeclaredTypeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -672,7 +662,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 */
 	public EAttribute getJvmDeclaredType_Static()
 	{
-		return (EAttribute)jvmDeclaredTypeEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)jvmDeclaredTypeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -682,7 +672,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 */
 	public EAttribute getJvmDeclaredType_Final()
 	{
-		return (EAttribute)jvmDeclaredTypeEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)jvmDeclaredTypeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -692,7 +682,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 */
 	public EAttribute getJvmDeclaredType_PackageName()
 	{
-		return (EAttribute)jvmDeclaredTypeEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)jvmDeclaredTypeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1000,7 +990,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getJvmMember_DeclaringType()
+	public EReference getJvmMember_DeclaringMember()
 	{
 		return (EReference)jvmMemberEClass.getEStructuralFeatures().get(0);
 	}
@@ -1033,6 +1023,16 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	public EAttribute getJvmMember_Identifier()
 	{
 		return (EAttribute)jvmMemberEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJvmMember_Members()
+	{
+		return (EReference)jvmMemberEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1822,7 +1822,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		jvmDeclaredTypeEClass = createEClass(JVM_DECLARED_TYPE);
 		createEReference(jvmDeclaredTypeEClass, JVM_DECLARED_TYPE__SUPER_TYPES);
-		createEReference(jvmDeclaredTypeEClass, JVM_DECLARED_TYPE__MEMBERS);
 		createEAttribute(jvmDeclaredTypeEClass, JVM_DECLARED_TYPE__ABSTRACT);
 		createEAttribute(jvmDeclaredTypeEClass, JVM_DECLARED_TYPE__STATIC);
 		createEAttribute(jvmDeclaredTypeEClass, JVM_DECLARED_TYPE__FINAL);
@@ -1874,10 +1873,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmMultiTypeReferenceEClass = createEClass(JVM_MULTI_TYPE_REFERENCE);
 
 		jvmMemberEClass = createEClass(JVM_MEMBER);
-		createEReference(jvmMemberEClass, JVM_MEMBER__DECLARING_TYPE);
+		createEReference(jvmMemberEClass, JVM_MEMBER__DECLARING_MEMBER);
 		createEAttribute(jvmMemberEClass, JVM_MEMBER__VISIBILITY);
 		createEAttribute(jvmMemberEClass, JVM_MEMBER__SIMPLE_NAME);
 		createEAttribute(jvmMemberEClass, JVM_MEMBER__IDENTIFIER);
+		createEReference(jvmMemberEClass, JVM_MEMBER__MEMBERS);
 
 		jvmFeatureEClass = createEClass(JVM_FEATURE);
 
@@ -2097,7 +2097,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		initEClass(jvmDeclaredTypeEClass, JvmDeclaredType.class, "JvmDeclaredType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmDeclaredType_SuperTypes(), this.getJvmTypeReference(), null, "superTypes", null, 0, -1, JvmDeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJvmDeclaredType_Members(), this.getJvmMember(), this.getJvmMember_DeclaringType(), "members", null, 0, -1, JvmDeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmDeclaredType_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, JvmDeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmDeclaredType_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, JvmDeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmDeclaredType_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, JvmDeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2127,6 +2126,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		g2 = createEGenericType(this.getJvmFeature());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
+
+		addEOperation(jvmDeclaredTypeEClass, ecorePackage.getEBoolean(), "isAnonymous", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(jvmTypeParameterEClass, JvmTypeParameter.class, "JvmTypeParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJvmTypeParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, JvmTypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2239,13 +2240,16 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEClass(jvmMultiTypeReferenceEClass, JvmMultiTypeReference.class, "JvmMultiTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(jvmMemberEClass, JvmMember.class, "JvmMember", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJvmMember_DeclaringType(), this.getJvmDeclaredType(), this.getJvmDeclaredType_Members(), "declaringType", null, 0, 1, JvmMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJvmMember_DeclaringMember(), this.getJvmMember(), this.getJvmMember_Members(), "declaringMember", null, 0, 1, JvmMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmMember_Visibility(), this.getJvmVisibility(), "visibility", null, 0, 1, JvmMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmMember_SimpleName(), ecorePackage.getEString(), "simpleName", null, 0, 1, JvmMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmMember_Identifier(), ecorePackage.getEString(), "identifier", null, 0, 1, JvmMember.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getJvmMember_Members(), this.getJvmMember(), this.getJvmMember_DeclaringMember(), "members", null, 0, -1, JvmMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(jvmMemberEClass, null, "internalSetIdentifier", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "identifier", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(jvmMemberEClass, this.getJvmDeclaredType(), "getDeclaringType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(jvmFeatureEClass, JvmFeature.class, "JvmFeature", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

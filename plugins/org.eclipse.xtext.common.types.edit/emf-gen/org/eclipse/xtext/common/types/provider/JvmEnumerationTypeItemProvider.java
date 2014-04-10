@@ -31,14 +31,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmEnumerationTypeItemProvider
-	extends JvmDeclaredTypeItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmEnumerationTypeItemProvider extends JvmDeclaredTypeItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -118,6 +111,7 @@ public class JvmEnumerationTypeItemProvider
 			getString("_UI_JvmEnumerationType_type") :
 			getString("_UI_JvmEnumerationType_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

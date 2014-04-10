@@ -27,14 +27,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmSynonymTypeReferenceItemProvider
-	extends JvmCompoundTypeReferenceItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmSynonymTypeReferenceItemProvider extends JvmCompoundTypeReferenceItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -87,6 +80,7 @@ public class JvmSynonymTypeReferenceItemProvider
 	{
 		return getString("_UI_JvmSynonymTypeReference_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

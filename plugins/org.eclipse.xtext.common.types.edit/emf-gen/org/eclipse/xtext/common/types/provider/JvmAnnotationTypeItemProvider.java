@@ -29,14 +29,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmAnnotationTypeItemProvider
-	extends JvmDeclaredTypeItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmAnnotationTypeItemProvider extends JvmDeclaredTypeItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -92,6 +85,7 @@ public class JvmAnnotationTypeItemProvider
 			getString("_UI_JvmAnnotationType_type") :
 			getString("_UI_JvmAnnotationType_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

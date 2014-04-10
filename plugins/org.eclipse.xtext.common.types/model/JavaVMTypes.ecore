@@ -67,10 +67,9 @@
         <eTypeArguments eClassifier="#//JvmFeature"/>
       </eGenericType>
     </eOperations>
+    <eOperations name="isAnonymous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superTypes" upperBound="-1"
         eType="#//JvmTypeReference" containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
-        eType="#//JvmMember" containment="true" resolveProxies="false" eOpposite="#//JvmMember/declaringType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -187,12 +186,15 @@
     <eOperations name="internalSetIdentifier">
       <eParameters name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="declaringType" eType="#//JvmDeclaredType"
-        eOpposite="#//JvmDeclaredType/members"/>
+    <eOperations name="getDeclaringType" eType="#//JvmDeclaredType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaringMember" eType="#//JvmMember"
+        eOpposite="#//JvmMember/members"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//JvmVisibility"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//JvmMember" containment="true" resolveProxies="false" eOpposite="#//JvmMember/declaringMember"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmFeature" abstract="true" eSuperTypes="#//JvmMember">
     <eOperations name="isStatic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">

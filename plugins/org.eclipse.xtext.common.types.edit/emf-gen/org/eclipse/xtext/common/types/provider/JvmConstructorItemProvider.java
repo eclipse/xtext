@@ -29,14 +29,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmConstructorItemProvider
-	extends JvmExecutableItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmConstructorItemProvider extends JvmExecutableItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -92,6 +85,7 @@ public class JvmConstructorItemProvider
 			getString("_UI_JvmConstructor_type") :
 			getString("_UI_JvmConstructor_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

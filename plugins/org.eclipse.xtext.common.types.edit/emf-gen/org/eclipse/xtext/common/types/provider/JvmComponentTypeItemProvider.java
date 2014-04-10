@@ -34,14 +34,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmComponentTypeItemProvider
-	extends JvmTypeItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmComponentTypeItemProvider extends JvmTypeItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -115,6 +108,7 @@ public class JvmComponentTypeItemProvider
 	{
 		return getString("_UI_JvmComponentType_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

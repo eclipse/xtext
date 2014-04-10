@@ -29,14 +29,7 @@ import org.eclipse.xtext.common.types.JvmFeature;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmFeatureItemProvider
-	extends JvmMemberItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmFeatureItemProvider extends JvmMemberItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -80,6 +73,7 @@ public class JvmFeatureItemProvider
 			getString("_UI_JvmFeature_type") :
 			getString("_UI_JvmFeature_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

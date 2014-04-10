@@ -36,14 +36,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmExecutableItemProvider
-	extends JvmFeatureItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmExecutableItemProvider extends JvmFeatureItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -146,6 +139,7 @@ public class JvmExecutableItemProvider
 			getString("_UI_JvmExecutable_type") :
 			getString("_UI_JvmExecutable_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

@@ -36,14 +36,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmFieldItemProvider
-	extends JvmFeatureItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmFieldItemProvider extends JvmFeatureItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.

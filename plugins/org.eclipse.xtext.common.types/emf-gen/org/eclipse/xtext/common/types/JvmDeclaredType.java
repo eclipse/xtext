@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#getSuperTypes <em>Super Types</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#getMembers <em>Members</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmDeclaredType#isFinal <em>Final</em>}</li>
@@ -50,24 +49,6 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * @generated
 	 */
 	EList<JvmTypeReference> getSuperTypes();
-
-	/**
-	 * Returns the value of the '<em><b>Members</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmMember}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.JvmMember#getDeclaringType <em>Declaring Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Members</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Members</em>' containment reference list.
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmDeclaredType_Members()
-	 * @see org.eclipse.xtext.common.types.JvmMember#getDeclaringType
-	 * @model opposite="declaringType" containment="true"
-	 * @generated
-	 */
-	EList<JvmMember> getMembers();
 
 	/**
 	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
@@ -214,5 +195,14 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * @since 2.1
 	 */
 	Iterable<JvmFeature> getAllFeatures();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 * @since 2.6
+	 */
+	boolean isAnonymous();
 
 } // JvmDeclaredType

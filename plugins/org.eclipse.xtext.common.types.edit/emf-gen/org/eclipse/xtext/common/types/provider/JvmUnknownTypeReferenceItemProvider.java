@@ -33,14 +33,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmUnknownTypeReferenceItemProvider
-	extends JvmTypeReferenceItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmUnknownTypeReferenceItemProvider extends JvmTypeReferenceItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -121,6 +114,7 @@ public class JvmUnknownTypeReferenceItemProvider
 			getString("_UI_JvmUnknownTypeReference_type") :
 			getString("_UI_JvmUnknownTypeReference_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

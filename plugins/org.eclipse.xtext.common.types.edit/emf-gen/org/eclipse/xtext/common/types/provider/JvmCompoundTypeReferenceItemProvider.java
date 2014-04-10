@@ -35,14 +35,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmCompoundTypeReferenceItemProvider
-	extends JvmTypeReferenceItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmCompoundTypeReferenceItemProvider extends JvmTypeReferenceItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -140,6 +133,7 @@ public class JvmCompoundTypeReferenceItemProvider
 	{
 		return getString("_UI_JvmCompoundTypeReference_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

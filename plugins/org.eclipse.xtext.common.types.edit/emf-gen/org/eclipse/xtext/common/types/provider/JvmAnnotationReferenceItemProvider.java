@@ -38,7 +38,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmAnnotationReferenceItemProvider
+public class JvmAnnotationReferenceItemProvider 
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,

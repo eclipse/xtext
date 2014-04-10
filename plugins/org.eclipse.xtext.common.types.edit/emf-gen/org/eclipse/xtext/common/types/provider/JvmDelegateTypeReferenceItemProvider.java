@@ -30,14 +30,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmDelegateTypeReferenceItemProvider
-	extends JvmTypeReferenceItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmDelegateTypeReferenceItemProvider extends JvmTypeReferenceItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -114,6 +107,7 @@ public class JvmDelegateTypeReferenceItemProvider
 	{
 		return getString("_UI_JvmDelegateTypeReference_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

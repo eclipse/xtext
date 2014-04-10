@@ -33,7 +33,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmAnnotationValueItemProvider
+public class JvmAnnotationValueItemProvider 
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -105,6 +105,7 @@ public class JvmAnnotationValueItemProvider
 	{
 		return getString("_UI_JvmAnnotationValue_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

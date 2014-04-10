@@ -37,7 +37,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmConstraintOwnerItemProvider
+public class JvmConstraintOwnerItemProvider 
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -118,6 +118,7 @@ public class JvmConstraintOwnerItemProvider
 	{
 		return getString("_UI_JvmConstraintOwner_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

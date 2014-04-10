@@ -30,7 +30,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmTypeReferenceItemProvider
+public class JvmTypeReferenceItemProvider 
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -78,6 +78,7 @@ public class JvmTypeReferenceItemProvider
 	{
 		return getString("_UI_JvmTypeReference_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

@@ -776,14 +776,14 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 	}
 	
-	protected void transform(XtendEnumLiteral literal, JvmDeclaredType container) {
+	protected void transform(XtendEnumLiteral literal, JvmEnumerationType container) {
 		JvmEnumerationLiteral jvmLiteral = typesFactory.createJvmEnumerationLiteral();
 		associator.associatePrimary(literal, jvmLiteral);
 		jvmLiteral.setSimpleName(literal.getName());
 		jvmLiteral.setVisibility(JvmVisibility.PUBLIC);
 		jvmLiteral.setStatic(true);
 		jvmLiteral.setFinal(true);
-		jvmLiteral.setDeclaringType(container);
+		container.getMembers().add(jvmLiteral);
 	}
 	
 	private Predicate<XAnnotation> annotationTranslationFilter = new Predicate<XAnnotation>() {

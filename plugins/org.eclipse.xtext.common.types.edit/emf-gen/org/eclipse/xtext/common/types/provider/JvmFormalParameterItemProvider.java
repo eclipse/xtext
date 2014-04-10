@@ -36,14 +36,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmFormalParameterItemProvider
-	extends JvmAnnotationTargetItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmFormalParameterItemProvider extends JvmAnnotationTargetItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -156,6 +149,7 @@ public class JvmFormalParameterItemProvider
 			getString("_UI_JvmFormalParameter_type") :
 			getString("_UI_JvmFormalParameter_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmArrayType;
@@ -30,7 +29,6 @@ import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -45,7 +43,6 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getArrayType <em>Array Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getSuperTypes <em>Super Types</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#getMembers <em>Members</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl#isFinal <em>Final</em>}</li>
@@ -76,16 +73,6 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 	 * @ordered
 	 */
 	protected EList<JvmTypeReference> superTypes;
-
-	/**
-	 * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMembers()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<JvmMember> members;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
@@ -255,20 +242,6 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<JvmMember> getMembers()
-	{
-		if (members == null)
-		{
-			members = new EObjectContainmentWithInverseEList<JvmMember>(JvmMember.class, this, TypesPackage.JVM_DECLARED_TYPE__MEMBERS, TypesPackage.JVM_MEMBER__DECLARING_TYPE);
-		}
-		return members;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isAbstract()
 	{
 		return abstract_;
@@ -409,7 +382,18 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
+	public boolean isAnonymous()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -419,8 +403,6 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 				if (arrayType != null)
 					msgs = ((InternalEObject)arrayType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE, null, msgs);
 				return basicSetArrayType((JvmArrayType)otherEnd, msgs);
-			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMembers()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -439,8 +421,6 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 				return basicSetArrayType(null, msgs);
 			case TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES:
 				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
-			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:
-				return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -459,8 +439,6 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 				return getArrayType();
 			case TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES:
 				return getSuperTypes();
-			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:
-				return getMembers();
 			case TypesPackage.JVM_DECLARED_TYPE__ABSTRACT:
 				return isAbstract();
 			case TypesPackage.JVM_DECLARED_TYPE__STATIC:
@@ -490,10 +468,6 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 			case TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES:
 				getSuperTypes().clear();
 				getSuperTypes().addAll((Collection<? extends JvmTypeReference>)newValue);
-				return;
-			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:
-				getMembers().clear();
-				getMembers().addAll((Collection<? extends JvmMember>)newValue);
 				return;
 			case TypesPackage.JVM_DECLARED_TYPE__ABSTRACT:
 				setAbstract((Boolean)newValue);
@@ -527,9 +501,6 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 			case TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES:
 				getSuperTypes().clear();
 				return;
-			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:
-				getMembers().clear();
-				return;
 			case TypesPackage.JVM_DECLARED_TYPE__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -560,8 +531,6 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 				return arrayType != null;
 			case TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES:
 				return superTypes != null && !superTypes.isEmpty();
-			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:
-				return members != null && !members.isEmpty();
 			case TypesPackage.JVM_DECLARED_TYPE__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case TypesPackage.JVM_DECLARED_TYPE__STATIC:

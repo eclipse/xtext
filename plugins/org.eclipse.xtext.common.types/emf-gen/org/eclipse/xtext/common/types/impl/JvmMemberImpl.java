@@ -7,15 +7,21 @@
  */
 package org.eclipse.xtext.common.types.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -29,10 +35,11 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getDeclaringType <em>Declaring Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getDeclaringMember <em>Declaring Member</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getIdentifier <em>Identifier</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl#getMembers <em>Members</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,6 +108,16 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	protected String identifier = IDENTIFIER_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMembers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JvmMember> members;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -126,10 +143,10 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmDeclaredType getDeclaringType()
+	public JvmMember getDeclaringMember()
 	{
-		if (eContainerFeatureID() != TypesPackage.JVM_MEMBER__DECLARING_TYPE) return null;
-		return (JvmDeclaredType)eInternalContainer();
+		if (eContainerFeatureID() != TypesPackage.JVM_MEMBER__DECLARING_MEMBER) return null;
+		return (JvmMember)eInternalContainer();
 	}
 
 	/**
@@ -137,9 +154,9 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetDeclaringType(JvmDeclaredType newDeclaringType, NotificationChain msgs)
+	public NotificationChain basicSetDeclaringMember(JvmMember newDeclaringMember, NotificationChain msgs)
 	{
-		msgs = eBasicSetContainer((InternalEObject)newDeclaringType, TypesPackage.JVM_MEMBER__DECLARING_TYPE, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newDeclaringMember, TypesPackage.JVM_MEMBER__DECLARING_MEMBER, msgs);
 		return msgs;
 	}
 
@@ -148,22 +165,22 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDeclaringType(JvmDeclaredType newDeclaringType)
+	public void setDeclaringMember(JvmMember newDeclaringMember)
 	{
-		if (newDeclaringType != eInternalContainer() || (eContainerFeatureID() != TypesPackage.JVM_MEMBER__DECLARING_TYPE && newDeclaringType != null))
+		if (newDeclaringMember != eInternalContainer() || (eContainerFeatureID() != TypesPackage.JVM_MEMBER__DECLARING_MEMBER && newDeclaringMember != null))
 		{
-			if (EcoreUtil.isAncestor(this, newDeclaringType))
+			if (EcoreUtil.isAncestor(this, newDeclaringMember))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newDeclaringType != null)
-				msgs = ((InternalEObject)newDeclaringType).eInverseAdd(this, TypesPackage.JVM_DECLARED_TYPE__MEMBERS, JvmDeclaredType.class, msgs);
-			msgs = basicSetDeclaringType(newDeclaringType, msgs);
+			if (newDeclaringMember != null)
+				msgs = ((InternalEObject)newDeclaringMember).eInverseAdd(this, TypesPackage.JVM_MEMBER__MEMBERS, JvmMember.class, msgs);
+			msgs = basicSetDeclaringMember(newDeclaringMember, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_MEMBER__DECLARING_TYPE, newDeclaringType, newDeclaringType));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_MEMBER__DECLARING_MEMBER, newDeclaringMember, newDeclaringMember));
 	}
 
 	/**
@@ -229,6 +246,20 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<JvmMember> getMembers()
+	{
+		if (members == null)
+		{
+			members = new EObjectContainmentWithInverseEList<JvmMember>(JvmMember.class, this, TypesPackage.JVM_MEMBER__MEMBERS, TypesPackage.JVM_MEMBER__DECLARING_MEMBER);
+		}
+		return members;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void internalSetIdentifier(String identifier)
 	{
 		// TODO: implement this method
@@ -241,15 +272,30 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JvmDeclaredType getDeclaringType()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_MEMBER__DECLARING_TYPE:
+			case TypesPackage.JVM_MEMBER__DECLARING_MEMBER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetDeclaringType((JvmDeclaredType)otherEnd, msgs);
+				return basicSetDeclaringMember((JvmMember)otherEnd, msgs);
+			case TypesPackage.JVM_MEMBER__MEMBERS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMembers()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -264,8 +310,10 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_MEMBER__DECLARING_TYPE:
-				return basicSetDeclaringType(null, msgs);
+			case TypesPackage.JVM_MEMBER__DECLARING_MEMBER:
+				return basicSetDeclaringMember(null, msgs);
+			case TypesPackage.JVM_MEMBER__MEMBERS:
+				return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -280,8 +328,8 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	{
 		switch (eContainerFeatureID())
 		{
-			case TypesPackage.JVM_MEMBER__DECLARING_TYPE:
-				return eInternalContainer().eInverseRemove(this, TypesPackage.JVM_DECLARED_TYPE__MEMBERS, JvmDeclaredType.class, msgs);
+			case TypesPackage.JVM_MEMBER__DECLARING_MEMBER:
+				return eInternalContainer().eInverseRemove(this, TypesPackage.JVM_MEMBER__MEMBERS, JvmMember.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -296,14 +344,16 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_MEMBER__DECLARING_TYPE:
-				return getDeclaringType();
+			case TypesPackage.JVM_MEMBER__DECLARING_MEMBER:
+				return getDeclaringMember();
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 				return getVisibility();
 			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
 				return getSimpleName();
 			case TypesPackage.JVM_MEMBER__IDENTIFIER:
 				return getIdentifier();
+			case TypesPackage.JVM_MEMBER__MEMBERS:
+				return getMembers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -313,19 +363,24 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_MEMBER__DECLARING_TYPE:
-				setDeclaringType((JvmDeclaredType)newValue);
+			case TypesPackage.JVM_MEMBER__DECLARING_MEMBER:
+				setDeclaringMember((JvmMember)newValue);
 				return;
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 				setVisibility((JvmVisibility)newValue);
 				return;
 			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
 				setSimpleName((String)newValue);
+				return;
+			case TypesPackage.JVM_MEMBER__MEMBERS:
+				getMembers().clear();
+				getMembers().addAll((Collection<? extends JvmMember>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -341,14 +396,17 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_MEMBER__DECLARING_TYPE:
-				setDeclaringType((JvmDeclaredType)null);
+			case TypesPackage.JVM_MEMBER__DECLARING_MEMBER:
+				setDeclaringMember((JvmMember)null);
 				return;
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 				setVisibility(VISIBILITY_EDEFAULT);
 				return;
 			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
 				setSimpleName(SIMPLE_NAME_EDEFAULT);
+				return;
+			case TypesPackage.JVM_MEMBER__MEMBERS:
+				getMembers().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -364,14 +422,16 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	{
 		switch (featureID)
 		{
-			case TypesPackage.JVM_MEMBER__DECLARING_TYPE:
-				return getDeclaringType() != null;
+			case TypesPackage.JVM_MEMBER__DECLARING_MEMBER:
+				return getDeclaringMember() != null;
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 				return visibility != VISIBILITY_EDEFAULT;
 			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
 				return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
 			case TypesPackage.JVM_MEMBER__IDENTIFIER:
 				return IDENTIFIER_EDEFAULT == null ? identifier != null : !IDENTIFIER_EDEFAULT.equals(identifier);
+			case TypesPackage.JVM_MEMBER__MEMBERS:
+				return members != null && !members.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

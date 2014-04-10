@@ -33,14 +33,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmFloatAnnotationValueItemProvider
-	extends JvmAnnotationValueItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmFloatAnnotationValueItemProvider extends JvmAnnotationValueItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -117,6 +110,7 @@ public class JvmFloatAnnotationValueItemProvider
 	{
 		return getString("_UI_JvmFloatAnnotationValue_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

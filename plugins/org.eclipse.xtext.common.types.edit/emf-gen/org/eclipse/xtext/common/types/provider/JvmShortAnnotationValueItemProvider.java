@@ -33,14 +33,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmShortAnnotationValueItemProvider
-	extends JvmAnnotationValueItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmShortAnnotationValueItemProvider extends JvmAnnotationValueItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -117,6 +110,7 @@ public class JvmShortAnnotationValueItemProvider
 	{
 		return getString("_UI_JvmShortAnnotationValue_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

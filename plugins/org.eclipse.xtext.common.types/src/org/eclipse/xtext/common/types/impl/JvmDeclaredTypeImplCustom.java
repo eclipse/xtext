@@ -357,5 +357,10 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		JvmTypeReference result = strategy.getRawTypeReference(reference, eResource());
 		return result == null ? null : result.getType();
 	}
+	
+	@Override
+	public boolean isAnonymous() {
+		return false;
+	}
 
 }

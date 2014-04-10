@@ -27,14 +27,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmMultiTypeReferenceItemProvider
-	extends JvmCompoundTypeReferenceItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmMultiTypeReferenceItemProvider extends JvmCompoundTypeReferenceItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -87,6 +80,7 @@ public class JvmMultiTypeReferenceItemProvider
 	{
 		return getString("_UI_JvmMultiTypeReference_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

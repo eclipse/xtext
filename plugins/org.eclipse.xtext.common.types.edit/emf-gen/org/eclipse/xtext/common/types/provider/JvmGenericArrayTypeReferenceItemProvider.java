@@ -34,14 +34,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmGenericArrayTypeReferenceItemProvider
-	extends JvmTypeReferenceItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmGenericArrayTypeReferenceItemProvider extends JvmTypeReferenceItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -127,6 +120,7 @@ public class JvmGenericArrayTypeReferenceItemProvider
 	{
 		return getString("_UI_JvmGenericArrayTypeReference_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

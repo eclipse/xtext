@@ -27,14 +27,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmVoidItemProvider
-	extends JvmTypeItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmVoidItemProvider extends JvmTypeItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -87,6 +80,7 @@ public class JvmVoidItemProvider
 	{
 		return getString("_UI_JvmVoid_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

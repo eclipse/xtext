@@ -37,7 +37,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmTypeParameterDeclaratorItemProvider
+public class JvmTypeParameterDeclaratorItemProvider 
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -118,6 +118,7 @@ public class JvmTypeParameterDeclaratorItemProvider
 	{
 		return getString("_UI_JvmTypeParameterDeclarator_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

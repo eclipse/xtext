@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.common.types;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,46 +17,50 @@ package org.eclipse.xtext.common.types;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getDeclaringType <em>Declaring Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getDeclaringMember <em>Declaring Member</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getIdentifier <em>Identifier</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmMember#getMembers <em>Members</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember()
  * @model abstract="true"
+ * @noimplement
  * @generated
  */
 public interface JvmMember extends JvmAnnotationTarget
 {
 	/**
-	 * Returns the value of the '<em><b>Declaring Type</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.JvmDeclaredType#getMembers <em>Members</em>}'.
+	 * Returns the value of the '<em><b>Declaring Member</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.JvmMember#getMembers <em>Members</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Declaring Type</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Declaring Member</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Declaring Type</em>' container reference.
-	 * @see #setDeclaringType(JvmDeclaredType)
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember_DeclaringType()
-	 * @see org.eclipse.xtext.common.types.JvmDeclaredType#getMembers
+	 * @return the value of the '<em>Declaring Member</em>' container reference.
+	 * @see #setDeclaringMember(JvmMember)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember_DeclaringMember()
+	 * @see org.eclipse.xtext.common.types.JvmMember#getMembers
 	 * @model opposite="members" transient="false"
 	 * @generated
+	 * @since 2.6
 	 */
-	JvmDeclaredType getDeclaringType();
+	JvmMember getDeclaringMember();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmMember#getDeclaringType <em>Declaring Type</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmMember#getDeclaringMember <em>Declaring Member</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Declaring Type</em>' container reference.
-	 * @see #getDeclaringType()
+	 * @param value the new value of the '<em>Declaring Member</em>' container reference.
+	 * @see #getDeclaringMember()
 	 * @generated
+	 * @since 2.6
 	 */
-	void setDeclaringType(JvmDeclaredType value);
+	void setDeclaringMember(JvmMember value);
 
 	/**
 	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
@@ -128,11 +133,38 @@ public interface JvmMember extends JvmAnnotationTarget
 	String getIdentifier();
 
 	/**
+	 * Returns the value of the '<em><b>Members</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmMember}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.JvmMember#getDeclaringMember <em>Declaring Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Members</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Members</em>' containment reference list.
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember_Members()
+	 * @see org.eclipse.xtext.common.types.JvmMember#getDeclaringMember
+	 * @model opposite="declaringMember" containment="true"
+	 * @generated
+	 * @since 2.6
+	 */
+	EList<JvmMember> getMembers();
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
 	void internalSetIdentifier(String identifier);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	JvmDeclaredType getDeclaringType();
 
 } // JvmMember
