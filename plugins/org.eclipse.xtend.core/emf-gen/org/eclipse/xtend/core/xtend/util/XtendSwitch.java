@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
@@ -279,6 +280,15 @@ public class XtendSwitch<T> extends Switch<T>
 				T result = caseXtendExecutable(xtendExecutable);
 				if (result == null) result = caseXtendMember(xtendExecutable);
 				if (result == null) result = caseXtendAnnotationTarget(xtendExecutable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtendPackage.XTEND_CONSTRUCTOR_CALL:
+			{
+				XtendConstructorCall xtendConstructorCall = (XtendConstructorCall)theEObject;
+				T result = caseXtendConstructorCall(xtendConstructorCall);
+				if (result == null) result = caseXConstructorCall(xtendConstructorCall);
+				if (result == null) result = caseXExpression(xtendConstructorCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -639,6 +649,22 @@ public class XtendSwitch<T> extends Switch<T>
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constructor Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constructor Call</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendConstructorCall(XtendConstructorCall object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>XExpression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -762,6 +788,22 @@ public class XtendSwitch<T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseJvmFormalParameter(JvmFormalParameter object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XConstructor Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XConstructor Call</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXConstructorCall(XConstructorCall object)
 	{
 		return null;
 	}

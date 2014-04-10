@@ -271,6 +271,44 @@ ruleXVariableDeclaration :
 	)?
 ;
 
+// Rule XConstructorCall
+ruleXConstructorCall :
+	'new' ruleQualifiedName (
+		( (
+		'<'
+		) => '<' ) ruleJvmArgumentTypeReference (
+			',' ruleJvmArgumentTypeReference
+		)* '>'
+	)? (
+		( (
+		'('
+		) => '(' ) (
+			( (
+			(
+				ruleJvmFormalParameter (
+					',' ruleJvmFormalParameter
+				)*
+			)? '|'
+			) => ruleXShortClosure ) |
+			ruleXExpression (
+				',' ruleXExpression
+			)*
+		)? ')'
+	)? (
+		( (
+		ruleAnonymousClass
+		) => ruleAnonymousClass ) |
+		( (
+		'['
+		) => ruleXClosure )
+	)?
+;
+
+// Rule AnonymousClass
+ruleAnonymousClass :
+	'{' ruleMember* '}'
+;
+
 // Rule JvmFormalParameter
 ruleJvmFormalParameter :
 	'extension'? ruleJvmTypeReference? ruleInnerVarID
@@ -900,34 +938,6 @@ ruleXFeatureCall :
 ruleIdOrSuper :
 	ruleFeatureCallID |
 	'super'
-;
-
-// Rule XConstructorCall
-ruleXConstructorCall :
-	'new' ruleQualifiedName (
-		( (
-		'<'
-		) => '<' ) ruleJvmArgumentTypeReference (
-			',' ruleJvmArgumentTypeReference
-		)* '>'
-	)? (
-		( (
-		'('
-		) => '(' ) (
-			( (
-			(
-				ruleJvmFormalParameter (
-					',' ruleJvmFormalParameter
-				)*
-			)? '|'
-			) => ruleXShortClosure ) |
-			ruleXExpression (
-				',' ruleXExpression
-			)*
-		)? ')'
-	)? ( (
-	'['
-	) => ruleXClosure )?
 ;
 
 // Rule XBooleanLiteral

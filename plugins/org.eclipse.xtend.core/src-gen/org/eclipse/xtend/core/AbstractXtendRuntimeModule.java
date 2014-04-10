@@ -265,6 +265,11 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.tasks.ITaskFinder> bindITaskFinder() {
+		return org.eclipse.xtext.xbase.tasks.XTypeTaskFinder.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer> bindITypeComputer() {
 		return org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer.class;
 	}
@@ -309,8 +314,4 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 		return org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.tasks.ITaskFinder> bindTaskFinder() {
-		return org.eclipse.xtext.xbase.tasks.XTypeTaskFinder.class;
-	}
 }
