@@ -18,11 +18,13 @@
 
 «DEFINE addToPluginXmlRt(Boolean generatorStub, Boolean mwe, Boolean javaMain, Boolean xtendMain) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(Boolean generatorStub, Boolean mwe, Boolean javaMain, boolean xtendMain) FOR Grammar»
+«DEFINE addToPluginXmlUi(Boolean generatorStub, Boolean mwe, Boolean javaMain, boolean xtendMain, List[String] fileExtensions) FOR Grammar»
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="«executableExtensionFactory()»:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="«executableExtensionFactory()»:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+            fileExtensions="«fileExtensions.toString(',')»"
+            >
       </participant>
    </extension>
    <extension
