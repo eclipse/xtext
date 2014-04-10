@@ -1227,7 +1227,7 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 			class C {
 				def void n(L<String> list) {
 					list.addListener [
-						LC<String> c |
+						LC<? extends String> c |
 					]
 				}
 			}
@@ -1253,7 +1253,7 @@ class AmbiguousGenericFeatureCallTest extends AmbiguityValidationTest {
 			class C {
 				def void n(L<String> list) {
 					list.addListener [
-						LC<CharSequence> lc |
+						LC<? extends CharSequence> lc |
 					]
 				}
 			}

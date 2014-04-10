@@ -50,6 +50,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	CompilerBug427637Test.class,
 	CompilerBug427660Test.class,
 	CompilerBug428063Test.class,
+	CompilerBug432193Test.class,
 	CompilerBugDependentTypeParametersTest.class,
 	CompilerTraceTest.class,
 	CompoundAssignmentOperatorCompilerTest.class,
