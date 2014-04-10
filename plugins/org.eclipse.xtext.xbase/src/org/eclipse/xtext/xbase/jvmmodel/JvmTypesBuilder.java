@@ -15,8 +15,11 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -1090,6 +1093,88 @@ public class JvmTypesBuilder {
 				}
 				return result;
 			}
+			
+			@Override
+			protected void copyReference(EReference eReference, EObject eObject, EObject copyEObject)
+		    {
+		      if (eObject.eIsSet(eReference))
+		      {
+		        EStructuralFeature.Setting setting = getTarget(eReference, eObject, copyEObject);
+		        if (setting != null)
+		        {
+		          Object value = eObject.eGet(eReference, resolveProxies);
+		          if (eReference.isMany())
+		          {
+		            @SuppressWarnings("unchecked") InternalEList<EObject> source = (InternalEList<EObject>)value;
+		            @SuppressWarnings("unchecked") InternalEList<EObject> target = (InternalEList<EObject>)setting;
+		            if (source.isEmpty())
+		            {
+		              target.clear();
+		            }
+		            else
+		            {
+		              boolean isBidirectional = eReference.getEOpposite() != null;
+		              int index = 0;
+		              for (Iterator<EObject> k = resolveProxies ? source.iterator() : source.basicIterator(); k.hasNext();)
+		              {
+		                EObject referencedEObject = k.next();
+		                EObject copyReferencedEObject = get(referencedEObject);
+		                if (copyReferencedEObject == null)
+		                {
+		                  if (useOriginalReferences && !isBidirectional)
+		                  {
+		                    target.addUnique(index, referencedEObject);
+		                    ++index;
+		                  }
+		                }
+		                else
+		                {
+		                  if (isBidirectional)
+		                  {
+		                    int position = target.indexOf(copyReferencedEObject);
+		                    if (position == -1)
+		                    {
+		                      target.addUnique(index, copyReferencedEObject);
+		                    }
+		                    else if (index != position)
+		                    {
+		                      target.move(index, copyReferencedEObject);
+		                    }
+		                  }
+		                  else
+		                  {
+		                    target.addUnique(index, copyReferencedEObject);
+		                  }
+		                  ++index;
+		                }
+		              }
+		            }
+		          }
+		          else
+		          {
+		            if (value == null)
+		            {
+		              setting.set(null);
+		            }
+		            else
+		            {
+		              Object copyReferencedEObject = get(value);
+		              if (copyReferencedEObject == null)
+		              {
+		                if (useOriginalReferences && eReference.getEOpposite() == null)
+		                {
+		                  setting.set(value);
+		                }
+		              }
+		              else
+		              {
+		                setting.set(copyReferencedEObject);
+		              }
+		            }
+		          }
+		        }
+		      }
+		    }
 		};
 		@SuppressWarnings("unchecked")
 		T copy = (T) copier.copy(original);
