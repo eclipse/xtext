@@ -230,7 +230,6 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 
 		// just in case we have more than 6 closure parameters
 		int paramCount = Math.min(closureParameters.size(), operationParameterTypes.size());
-		// TODO validate parameter count - check against operation if available
 		for (int i = 0; i < paramCount; i++) {
 			JvmFormalParameter closureParameter = closureParameters.get(i);
 			final LightweightTypeReference operationParameterType = operationParameterTypes.get(i);
@@ -247,11 +246,15 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 					protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
 						LightweightTypeReference wrapped = reference.getWrapperTypeIfPrimitive();
 						typeParameter.acceptHint(wrapped, BoundTypeArgumentSource.RESOLVED, getOrigin(), getExpectedVariance(), getActualVariance());
+						ParameterizedTypeReference typeParameterReference = new ParameterizedTypeReference(reference.getOwner(), typeParameter.getTypeParameter());
+						if (validParameterTypes && !typeParameterReference.getRawTypeReference().isAssignableFrom(reference)) {
+							validParameterTypes = false;
+						}
 					}
 				}.processPairedReferences(operationParameterType, closureParameterType);
 				typeAssigner.assignType(closureParameter, closureParameterType);
 				resultClosureType.addParameterType(closureParameterType);
-				if (validParameterTypes && !operationParameterType.isAssignableFrom(closureParameterType)) {
+				if (validParameterTypes && !closureParameterType.isAssignableFrom(operationParameterType)) {
 					validParameterTypes = false;
 				}
 			} else {
