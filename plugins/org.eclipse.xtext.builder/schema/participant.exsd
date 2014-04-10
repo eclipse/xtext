@@ -65,6 +65,15 @@
                </appInfo>
             </annotation>
          </attribute>
+         <attribute name="fileExtensions" type="string">
+            <annotation>
+               <documentation>
+                  A comma separated list of file extensions that this participant is interested in. It will not be actived for changes to other files. If left empty, the participant will always be activated.
+
+E.g. &lt;samp&gt;mydsl,myotherdsl&lt;/samp&gt;
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 
@@ -99,6 +108,17 @@ A more flexible way uses Google Guice to instantiate the participant for a langu
           class=&quot;org.xtext.example.MyDslExecutableExtensionFactory:org.xtext.example.MyDslBuilderParticipant&quot;/&gt;
 &lt;/extension&gt;
 &lt;/pre&gt;
+
+A builder participant can be restricted to only run on certain file extensions. It will not even be loaded before such a file is encountered.
+&lt;p&gt;
+&lt;pre&gt;
+&lt;extension point=&quot;org.eclipse.xtext.builder.participant&quot;&gt;
+    &lt;participant
+          class=&quot;org.xtext.example.MyDslExecutableExtensionFactory:org.xtext.example.MyDslBuilderParticipant&quot;
+          fileExtensions=&quot;mydsl,myotherdsl&quot;
+          /&gt;
+&lt;/extension&gt;
+&lt;/pre&gt;
       </documentation>
    </annotation>
 
@@ -117,7 +137,7 @@ implementor of &lt;samp&gt;org.eclipse.xtext.builder.IXtextBuilderParticipant&lt
          <meta.section type="implementation"/>
       </appInfo>
       <documentation>
-         The Xtext framework itself does not deliver any predefined builder participants. 
+         The Xtext framework itself does not deliver any predefined builder participants.
       </documentation>
    </annotation>
 
