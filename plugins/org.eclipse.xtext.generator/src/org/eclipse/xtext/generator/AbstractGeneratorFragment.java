@@ -10,7 +10,6 @@ package org.eclipse.xtext.generator;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandFacade;
@@ -22,7 +21,7 @@ import org.eclipse.xtext.Grammar;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment implements NamingAware {
+public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment implements NamingAware{
 
 	private Naming naming;
 
@@ -42,12 +41,12 @@ public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		XpandFacade.create(ctx).evaluate2(getTemplate() + "::generate", grammar, getParameters(grammar));
 	}
-
+	
 	@Override
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
 		XpandFacade.create(ctx).evaluate2(getTemplate() + "::addToPluginXmlRt", grammar, getParameters(grammar));
 	}
-
+	
 	@Override
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
 		XpandFacade.create(ctx).evaluate2(getTemplate() + "::addToPluginXmlUi", grammar, getParameters(grammar));
@@ -55,48 +54,21 @@ public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment
 
 	/**
 	 * @since 2.3
+	 * @deprecated
 	 */
+	@Override
+	@Deprecated
 	public void addToPluginXmlTests(Grammar grammar, XpandExecutionContext ctx) {
 		XpandFacade.create(ctx).evaluate2(getTemplate() + "::addToPluginXmlTests", grammar, getParameters(grammar));
 	}
-
+	
 	@Override
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
 		XpandFacade.create(ctx).evaluate2(getTemplate() + "::addToStandaloneSetup", grammar, getParameters(grammar));
 	}
-
-	@Override
-	public String[] getExportedPackagesRt(Grammar grammar) {
-		return null;
-	}
-
-	@Override
-	public String[] getExportedPackagesUi(Grammar grammar) {
-		return null;
-	}
-
-	@Override
-	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return null;
-	}
-
-	@Override
-	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		return null;
-	}
-
-	@Override
-	public String[] getRequiredBundlesRt(Grammar grammar) {
-		return null;
-	}
-
-	@Override
-	public String[] getRequiredBundlesUi(Grammar grammar) {
-		return null;
-	}
-
+	
 	protected List<Object> getParameters(Grammar grammar) {
 		return Collections.emptyList();
 	}
-
+	
 }

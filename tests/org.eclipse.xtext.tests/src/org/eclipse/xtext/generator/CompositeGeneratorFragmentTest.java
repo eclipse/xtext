@@ -117,7 +117,7 @@ public class CompositeGeneratorFragmentTest extends Assert {
 		});
 
 		try {
-			fragment.generate(null, null);
+			fragment.generate((Grammar) null, null);
 			fail("CompositeGeneratorException was not thrown");
 		} catch (CompositeGeneratorException e) {
 			Iterable<Exception> exceptions = e.getExceptions();

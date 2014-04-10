@@ -29,7 +29,7 @@ import com.google.common.base.Function;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class CompositeGeneratorFragment implements IGeneratorFragment, IGeneratorFragmentExtension, NamingAware {
+public class CompositeGeneratorFragment implements IGeneratorFragment, IGeneratorFragmentExtension, IGeneratorFragmentExtension2, NamingAware {
 
 	private static Logger LOG = Logger.getLogger(CompositeGeneratorFragment.class);
 
@@ -62,16 +62,44 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 			fragment.addToPluginXmlRt(grammar, ctx);
 		}
 	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void addToPluginXmlRt(LanguageConfig config, XpandExecutionContext ctx) {
+		for (IGeneratorFragment fragment : fragments) {
+			if (fragment instanceof IGeneratorFragmentExtension2) {
+				((IGeneratorFragmentExtension2)fragment).addToPluginXmlRt(config, ctx);
+			} else {
+				fragment.addToPluginXmlRt(config.getGrammar(), ctx);
+			}
+		}
+	}
 
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
 			fragment.addToPluginXmlUi(grammar, ctx);
 		}
 	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void addToPluginXmlUi(LanguageConfig config, XpandExecutionContext ctx) {
+		for (IGeneratorFragment fragment : fragments) {
+			if (fragment instanceof IGeneratorFragmentExtension2) {
+				((IGeneratorFragmentExtension2)fragment).addToPluginXmlUi(config, ctx);
+			} else {
+				fragment.addToPluginXmlUi(config.getGrammar(), ctx);
+			}
+		}
+	}
 
 	/**
 	 * @since 2.3
+	 * @deprecated 
 	 */
+	@Deprecated
 	public void addToPluginXmlTests(Grammar grammar, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
 			if (fragment instanceof IGeneratorFragmentExtension) {
@@ -79,10 +107,23 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 			}
 		}
 	}
-
+	
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
 			fragment.addToStandaloneSetup(grammar, ctx);
+		}
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void addToStandaloneSetup(LanguageConfig config, XpandExecutionContext ctx) {
+		for (IGeneratorFragment fragment : fragments) {
+			if (fragment instanceof IGeneratorFragmentExtension2) {
+				((IGeneratorFragmentExtension2)fragment).addToStandaloneSetup(config, ctx);
+			} else {
+				fragment.addToStandaloneSetup(config.getGrammar(), ctx);
+			}
 		}
 	}
 
@@ -91,6 +132,29 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		for (IGeneratorFragment fragment : fragments) {
 			try {
 				fragment.generate(grammar, ctx);
+			} catch (WorkflowInterruptedException e) {
+				throw e;
+			} catch (Exception e) {
+				cgEx.addException(e);
+			}
+		}
+		if(cgEx.hasExceptions()) {
+			throw cgEx;
+		}
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void generate(LanguageConfig config, XpandExecutionContext ctx) throws CompositeGeneratorException {
+		CompositeGeneratorException cgEx = new CompositeGeneratorException();
+		for (IGeneratorFragment fragment : fragments) {
+			try {
+				if (fragment instanceof IGeneratorFragmentExtension2) {
+					((IGeneratorFragmentExtension2)fragment).generate(config, ctx);
+				} else {
+					fragment.generate(config.getGrammar(), ctx);
+				}
 			} catch (WorkflowInterruptedException e) {
 				throw e;
 			} catch (Exception e) {

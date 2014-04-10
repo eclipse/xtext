@@ -21,7 +21,9 @@ public interface IGeneratorFragmentExtension {
 	 *
 	 * @param grammar
 	 * @param ctx - the execution context to use (the plugin.xml file is already opened)
+	 * @deprecated We do not generate plugin.xml files for test bundles
 	 */
+	@Deprecated
 	void addToPluginXmlTests(Grammar grammar, XpandExecutionContext ctx);
 
 	/**

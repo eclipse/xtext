@@ -15,7 +15,6 @@ import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
-import org.eclipse.xtext.generator.IGeneratorFragmentExtension;
 import org.eclipse.xtext.generator.Naming;
 
 import com.google.common.collect.Lists;
@@ -23,7 +22,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public class Junit4Fragment extends AbstractGeneratorFragment implements IGeneratorFragmentExtension {
+public class Junit4Fragment extends AbstractGeneratorFragment {
 	private static final Logger log = Logger.getLogger(Junit4Fragment.class);
 
 	@Deprecated
@@ -80,6 +79,7 @@ public class Junit4Fragment extends AbstractGeneratorFragment implements IGenera
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public String[] getRequiredBundlesTests(Grammar grammar) {
 		return new String[] {
 				getNaming().getProjectNameRt(),
@@ -93,6 +93,7 @@ public class Junit4Fragment extends AbstractGeneratorFragment implements IGenera
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public String[] getExportedPackagesTests(Grammar grammar) {
 		return new String[]{ getNaming().basePackageRuntime(grammar) };
 	}
@@ -100,6 +101,7 @@ public class Junit4Fragment extends AbstractGeneratorFragment implements IGenera
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public String[] getImportedPackagesTests(Grammar grammar) {
 		return new String[] {
 				"org.junit.runner;version=\"4.5.0\"",

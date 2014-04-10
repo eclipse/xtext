@@ -315,9 +315,9 @@ public class Generator extends AbstractWorkflowComponent2 {
 			List<Grammar> grammars = getGrammars(configs);
 			facade.evaluate("org::eclipse::xtext::generator::Plugin::pre", grammars);
 			for (LanguageConfig conf : languageConfigs) {
-				conf.addToPluginXmlRt(conf.getGrammar(), ctx);
+				conf.addToPluginXmlRt(conf, ctx);
 				if (isMergedProjects()) {
-					conf.addToPluginXmlUi(conf.getGrammar(), ctx);
+					conf.addToPluginXmlUi(conf, ctx);
 				}
 			}
 			facade.evaluate("org::eclipse::xtext::generator::Plugin::post", grammars);
@@ -347,7 +347,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 				List<Grammar> grammars = getGrammars(configs);
 				facade.evaluate("org::eclipse::xtext::generator::Plugin::pre", grammars);
 				for (LanguageConfig conf : languageConfigs) {
-					conf.addToPluginXmlUi(conf.getGrammar(), ctx);
+					conf.addToPluginXmlUi(conf, ctx);
 				}
 				facade.evaluate("org::eclipse::xtext::generator::Plugin::post", grammars);
 			} finally {
@@ -355,13 +355,13 @@ public class Generator extends AbstractWorkflowComponent2 {
 			}
 		}
 	}
-
+	
 	private void addToStandaloneSetup(LanguageConfig config, XpandExecutionContext ctx) {
 		ctx.getOutput().openFile(naming.asPath(naming.setupImpl(config.getGrammar())) + ".java", SRC_GEN);
 		try {
 			XpandFacade facade = XpandFacade.create(ctx);
 			facade.evaluate("org::eclipse::xtext::generator::StandaloneSetup::pre", config.getGrammar());
-			config.addToStandaloneSetup(config.getGrammar(), ctx);
+			config.addToStandaloneSetup(config, ctx);
 			facade.evaluate("org::eclipse::xtext::generator::StandaloneSetup::post", config.getGrammar());
 		} finally {
 			ctx.getOutput().closeFile();
@@ -393,7 +393,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private void generate(LanguageConfig config, XpandExecutionContext ctx, Issues issues) {
 		try {
-			config.generate(config.getGrammar(), ctx);
+			config.generate(config, ctx);
 		} catch(CompositeGeneratorException e) {
 			if (!handleWarnings(issues, e)) {
 				throw e;
