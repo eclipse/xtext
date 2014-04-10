@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
 import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
@@ -17,6 +19,7 @@ import org.eclipse.xtext.generator.trace.TraceAsSmapInstaller;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.eclipse.xtext.util.Strings;
+import org.objectweb.asm.Opcodes;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Maps;
@@ -63,12 +66,24 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractXtendMoj
 	 */
 	protected boolean xtendAsPrimaryDebugSource;
 
+	@Override
+	protected void internalExecute() throws MojoExecutionException, MojoFailureException {
+		if (isAsm5Available()) {
+			installDebugInfo();
+		} else {
+			throw new MojoFailureException("Debug information installation is not possible."
+					+ " Dependency is missing or too old, use org.ow2.asm:asm-commons 5.0.1 or better.");
+		}
+	}
+
+	protected abstract void installDebugInfo() throws MojoExecutionException, MojoFailureException;
+
 	protected void collectJavaSourceFile2traceFile(String root, String subdir,
 			Map<String, File> javaSourceFile2traceFile) {
 		File file = new File(root + "/" + subdir);
 		File[] listFiles = file.listFiles();
 		if (listFiles == null) {
-			getLog().warn("Directory "+ file.getPath() +" is empty. Can't process.");
+			getLog().warn("Directory " + file.getPath() + " is empty. Can't process.");
 			return;
 		}
 		for (File child : listFiles) {
@@ -161,5 +176,17 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractXtendMoj
 		getLog().info("Installing Xtend files into " + n + " class files as " + p + " debug sources in: " + folder);
 		getLog().debug("xtendAsPrimaryDebugSource=" + xtendAsPrimaryDebugSource);
 		getLog().debug("hideSyntheticVariables=" + hideSyntheticVariables);
+	}
+
+	private boolean isAsm5Available() {
+		try {
+			if (Opcodes.class.getDeclaredField("ASM5") != null)
+				return true;
+		} catch (NoClassDefFoundError e) {
+			getLog().error("ASM library is not available.");
+		} catch (NoSuchFieldException e) {
+			getLog().error("ASM library is too old.");
+		}
+		return false;
 	}
 }

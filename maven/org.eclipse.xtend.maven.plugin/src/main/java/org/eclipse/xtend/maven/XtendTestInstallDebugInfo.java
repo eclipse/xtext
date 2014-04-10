@@ -3,6 +3,9 @@ package org.eclipse.xtend.maven;
 import java.io.File;
 import java.util.List;
 
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+
 import com.google.common.collect.Multimap;
 
 /**
@@ -14,8 +17,9 @@ import com.google.common.collect.Multimap;
  * @requiresDependencyResolution compile
  */
 public class XtendTestInstallDebugInfo extends AbstractXtendInstallDebugInfoMojo {
+
 	@Override
-	protected void internalExecute() {
+	protected void installDebugInfo() throws MojoExecutionException, MojoFailureException {
 		List<String> compileSourceRoots = project.getTestCompileSourceRoots();
 		String outputDirectory = project.getBuild().getTestOutputDirectory();
 		Multimap<File, File> trace2class = createTraceToClassFileMap(compileSourceRoots, outputDirectory);
