@@ -984,13 +984,23 @@ public interface TypesPackage extends EPackage
 	int JVM_FEATURE__IDENTIFIER = JVM_MEMBER__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Local Classes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_FEATURE__LOCAL_CLASSES = JVM_MEMBER_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Feature</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_FEATURE_FEATURE_COUNT = JVM_MEMBER_FEATURE_COUNT + 0;
+	int JVM_FEATURE_FEATURE_COUNT = JVM_MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl <em>Jvm Field</em>}' class.
@@ -1046,6 +1056,16 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_FIELD__IDENTIFIER = JVM_FEATURE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Local Classes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_FIELD__LOCAL_CLASSES = JVM_FEATURE__LOCAL_CLASSES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1177,6 +1197,16 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_ENUMERATION_LITERAL__IDENTIFIER = JVM_FIELD__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Local Classes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_ENUMERATION_LITERAL__LOCAL_CLASSES = JVM_FIELD__LOCAL_CLASSES;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1400,13 +1430,23 @@ public interface TypesPackage extends EPackage
 	int JVM_GENERIC_TYPE__STRICT_FLOATING_POINT = JVM_DECLARED_TYPE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Anonymous</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_GENERIC_TYPE__ANONYMOUS = JVM_DECLARED_TYPE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Generic Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_GENERIC_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 3;
+	int JVM_GENERIC_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl <em>Jvm Type Reference</em>}' class.
@@ -1689,6 +1729,16 @@ public interface TypesPackage extends EPackage
 	int JVM_EXECUTABLE__IDENTIFIER = JVM_FEATURE__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Local Classes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_EXECUTABLE__LOCAL_CLASSES = JVM_FEATURE__LOCAL_CLASSES;
+
+	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1789,6 +1839,16 @@ public interface TypesPackage extends EPackage
 	int JVM_CONSTRUCTOR__IDENTIFIER = JVM_EXECUTABLE__IDENTIFIER;
 
 	/**
+	 * The feature id for the '<em><b>Local Classes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_CONSTRUCTOR__LOCAL_CLASSES = JVM_EXECUTABLE__LOCAL_CLASSES;
+
+	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1887,6 +1947,16 @@ public interface TypesPackage extends EPackage
 	 * @ordered
 	 */
 	int JVM_OPERATION__IDENTIFIER = JVM_EXECUTABLE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Local Classes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.6
+	 */
+	int JVM_OPERATION__LOCAL_CLASSES = JVM_EXECUTABLE__LOCAL_CLASSES;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -3184,6 +3254,18 @@ public interface TypesPackage extends EPackage
 	EAttribute getJvmGenericType_StrictFloatingPoint();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmGenericType#isAnonymous <em>Anonymous</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Anonymous</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmGenericType#isAnonymous()
+	 * @see #getJvmGenericType()
+	 * @generated
+	 * @since 2.6
+	 */
+	EAttribute getJvmGenericType_Anonymous();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmTypeReference <em>Jvm Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3351,6 +3433,18 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 */
 	EClass getJvmFeature();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmFeature#getLocalClasses <em>Local Classes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Local Classes</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmFeature#getLocalClasses()
+	 * @see #getJvmFeature()
+	 * @generated
+	 * @since 2.6
+	 */
+	EReference getJvmFeature_LocalClasses();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmField <em>Jvm Field</em>}'.
@@ -4172,7 +4266,7 @@ public interface TypesPackage extends EPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @noimplement This interface is not intended to be implemented by clients.
-	 * @noextend
+	 * @noextend 
 	 */
 	interface Literals
 	{
@@ -4492,6 +4586,15 @@ public interface TypesPackage extends EPackage
 		EAttribute JVM_GENERIC_TYPE__STRICT_FLOATING_POINT = eINSTANCE.getJvmGenericType_StrictFloatingPoint();
 
 		/**
+		 * The meta object literal for the '<em><b>Anonymous</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 * @since 2.6
+		 */
+		EAttribute JVM_GENERIC_TYPE__ANONYMOUS = eINSTANCE.getJvmGenericType_Anonymous();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl <em>Jvm Type Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4635,6 +4738,15 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EClass JVM_FEATURE = eINSTANCE.getJvmFeature();
+
+		/**
+		 * The meta object literal for the '<em><b>Local Classes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 * @since 2.6
+		 */
+		EReference JVM_FEATURE__LOCAL_CLASSES = eINSTANCE.getJvmFeature_LocalClasses();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl <em>Jvm Field</em>}' class.

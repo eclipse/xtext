@@ -41,6 +41,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isInterface <em>Interface</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isAnonymous <em>Anonymous</em>}</li>
  * </ul>
  * </p>
  *
@@ -97,6 +98,26 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 	 * @ordered
 	 */
 	protected boolean strictFloatingPoint = STRICT_FLOATING_POINT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isAnonymous() <em>Anonymous</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAnonymous()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ANONYMOUS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAnonymous() <em>Anonymous</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAnonymous()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean anonymous = ANONYMOUS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -177,6 +198,29 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 		strictFloatingPoint = newStrictFloatingPoint;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT, oldStrictFloatingPoint, strictFloatingPoint));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAnonymous()
+	{
+		return anonymous;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAnonymous(boolean newAnonymous)
+	{
+		boolean oldAnonymous = anonymous;
+		anonymous = newAnonymous;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS, oldAnonymous, anonymous));
 	}
 
 	/**
@@ -276,6 +320,8 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 				return isInterface();
 			case TypesPackage.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT:
 				return isStrictFloatingPoint();
+			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
+				return isAnonymous();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -301,6 +347,9 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 			case TypesPackage.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT:
 				setStrictFloatingPoint((Boolean)newValue);
 				return;
+			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
+				setAnonymous((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -324,6 +373,9 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 			case TypesPackage.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT:
 				setStrictFloatingPoint(STRICT_FLOATING_POINT_EDEFAULT);
 				return;
+			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
+				setAnonymous(ANONYMOUS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -344,6 +396,8 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 				return interface_ != INTERFACE_EDEFAULT;
 			case TypesPackage.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT:
 				return strictFloatingPoint != STRICT_FLOATING_POINT_EDEFAULT;
+			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
+				return anonymous != ANONYMOUS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -401,6 +455,8 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 		result.append(interface_);
 		result.append(", strictFloatingPoint: ");
 		result.append(strictFloatingPoint);
+		result.append(", anonymous: ");
+		result.append(anonymous);
 		result.append(')');
 		return result.toString();
 	}

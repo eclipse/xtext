@@ -13,19 +13,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -36,14 +28,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmGenericTypeItemProvider
-	extends JvmDeclaredTypeItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+public class JvmGenericTypeItemProvider extends JvmDeclaredTypeItemProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -71,6 +56,7 @@ public class JvmGenericTypeItemProvider
 
 			addInterfacePropertyDescriptor(object);
 			addStrictFloatingPointPropertyDescriptor(object);
+			addAnonymousPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -103,7 +89,6 @@ public class JvmGenericTypeItemProvider
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @since 2.4
 	 */
 	protected void addStrictFloatingPointPropertyDescriptor(Object object)
 	{
@@ -114,6 +99,30 @@ public class JvmGenericTypeItemProvider
 				 getString("_UI_JvmGenericType_strictFloatingPoint_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_JvmGenericType_strictFloatingPoint_feature", "_UI_JvmGenericType_type"),
 				 TypesPackage.Literals.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Anonymous feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.6
+	 */
+	protected void addAnonymousPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmGenericType_anonymous_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmGenericType_anonymous_feature", "_UI_JvmGenericType_type"),
+				 TypesPackage.Literals.JVM_GENERIC_TYPE__ANONYMOUS,
 				 true,
 				 false,
 				 false,
@@ -181,6 +190,7 @@ public class JvmGenericTypeItemProvider
 			getString("_UI_JvmGenericType_type") :
 			getString("_UI_JvmGenericType_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -198,6 +208,7 @@ public class JvmGenericTypeItemProvider
 		{
 			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
 			case TypesPackage.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT:
+			case TypesPackage.JVM_GENERIC_TYPE__ANONYMOUS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS:

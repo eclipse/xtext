@@ -19,12 +19,14 @@ import java.lang.Iterable;
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isInterface <em>Interface</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isAnonymous <em>Anonymous</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType()
  * @model
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclarator
 {
@@ -81,6 +83,34 @@ public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclara
 	 * @since 2.4
 	 */
 	void setStrictFloatingPoint(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Anonymous</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Anonymous</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Anonymous</em>' attribute.
+	 * @see #setAnonymous(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType_Anonymous()
+	 * @model
+	 * @generated
+	 * @since 2.6
+	 */
+	boolean isAnonymous();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmGenericType#isAnonymous <em>Anonymous</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Anonymous</em>' attribute.
+	 * @see #isAnonymous()
+	 * @generated
+	 * @since 2.6
+	 */
+	void setAnonymous(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -25,6 +25,7 @@ package org.eclipse.xtext.common.types;
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmMember()
  * @model abstract="true"
+ * @noimplement
  * @generated
  */
 public interface JvmMember extends JvmAnnotationTarget
