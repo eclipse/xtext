@@ -84,7 +84,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 	def void registerAllTypes(JvmType type, (String)=>boolean acceptor) {
 		if (type == null)
 			return;
-		if (acceptor.apply(type.identifier)) {
+		if (type.isAnonymous || acceptor.apply(type.identifier)) {
 			switch type {
 				JvmGenericType : {
 					registerAllTypes(type.declaringType, acceptor)
@@ -97,4 +97,10 @@ class XtendResourceDescription extends DefaultResourceDescription {
 		}
 	}
 	
+	def boolean isAnonymous(JvmType type) {
+		switch type {
+			JvmGenericType: type.isAnonymous
+			default: false
+		}
+	}
 }

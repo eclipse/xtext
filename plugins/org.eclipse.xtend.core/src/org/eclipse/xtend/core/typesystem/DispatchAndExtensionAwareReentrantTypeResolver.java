@@ -32,6 +32,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -47,6 +48,7 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
+import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.OperationBodyComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
@@ -62,6 +64,7 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -285,7 +288,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 	}
 	
 	@Override
-	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
+	public void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
 		if (element instanceof XtendTypeDeclaration) {
 			XtendTypeDeclaration typeDeclaration = (XtendTypeDeclaration) element;
 			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, ((XtendTypeDeclaration) element).getAnnotations());
@@ -321,6 +324,20 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, member.getAnnotations());
 		} else {
 			super.computeTypes(resolvedTypes, featureScopeSession, element);
+		}
+	}
+	
+	public void resolveTypesForAnonymousClass(AbstractTypeComputationState state,
+			JvmGenericType anonymousClass) {
+		if(anonymousClass.isAnonymous()) {
+			ResolvedTypes resolvedTypes = state.getResolvedTypes();
+			IFeatureScopeSession featureScopeSession = state.getFeatureScopeSession();
+			Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes = Maps.newHashMapWithExpectedSize(3); 
+			doPrepare(resolvedTypes, featureScopeSession, anonymousClass, preparedResolvedTypes);
+			computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, anonymousClass);
+			return;
+		} else {
+			throw new IllegalStateException();
 		}
 	}
 	
@@ -564,5 +581,6 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		}
 		return super.createTypeProvider(resolvedTypesByContext, resolvedTypes, featureScopeSession, member, returnType);
 	}
+
 
 }

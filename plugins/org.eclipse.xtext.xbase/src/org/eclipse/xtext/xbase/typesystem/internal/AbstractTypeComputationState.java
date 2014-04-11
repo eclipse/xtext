@@ -80,11 +80,11 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		this.reentrantTypeResolver = resolvedTypes.getResolver();
 	}
 	
-	protected ResolvedTypes getResolvedTypes() {
+	public ResolvedTypes getResolvedTypes() {
 		return resolvedTypes;
 	}
 	
-	protected IFeatureScopeSession getFeatureScopeSession() {
+	public IFeatureScopeSession getFeatureScopeSession() {
 		return featureScopeSession;
 	}
 	
@@ -515,7 +515,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new SimpleIdentifiableElementDescription(description);
 	}
 
-	protected IConstructorLinkingCandidate createResolvedLink(XConstructorCall constructorCall, JvmConstructor resolvedTo) {
+	public IConstructorLinkingCandidate createResolvedLink(XConstructorCall constructorCall, JvmConstructor resolvedTo) {
 		StackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(constructorCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(constructorCall, stackedResolvedTypes);
 		return new ResolvedConstructor(constructorCall, resolvedTo, getSingleExpectation(state), state);

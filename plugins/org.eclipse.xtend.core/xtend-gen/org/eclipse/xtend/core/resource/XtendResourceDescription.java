@@ -147,9 +147,16 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     if (_equals) {
       return;
     }
-    String _identifier = type.getIdentifier();
-    Boolean _apply = acceptor.apply(_identifier);
-    if ((_apply).booleanValue()) {
+    boolean _or = false;
+    boolean _isAnonymous = this.isAnonymous(type);
+    if (_isAnonymous) {
+      _or = true;
+    } else {
+      String _identifier = type.getIdentifier();
+      Boolean _apply = acceptor.apply(_identifier);
+      _or = (_apply).booleanValue();
+    }
+    if (_or) {
       boolean _matched = false;
       if (!_matched) {
         if (type instanceof JvmGenericType) {
@@ -179,5 +186,20 @@ public class XtendResourceDescription extends DefaultResourceDescription {
         }
       }
     }
+  }
+  
+  public boolean isAnonymous(final JvmType type) {
+    boolean _switchResult = false;
+    boolean _matched = false;
+    if (!_matched) {
+      if (type instanceof JvmGenericType) {
+        _matched=true;
+        _switchResult = ((JvmGenericType)type).isAnonymous();
+      }
+    }
+    if (!_matched) {
+      _switchResult = false;
+    }
+    return _switchResult;
   }
 }

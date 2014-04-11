@@ -900,7 +900,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 	
-	private void constructorCallToJavaExpression(final XConstructorCall expr, ITreeAppendable b) {
+	protected void constructorCallToJavaExpression(final XConstructorCall expr, ITreeAppendable b) {
 		ILocationData locationWithNewKeyword = getLocationWithNewKeyword(expr);
 		ITreeAppendable appendableWithNewKeyword = locationWithNewKeyword != null ? b.trace(locationWithNewKeyword) : b;
 		appendableWithNewKeyword.append("new ");
@@ -947,7 +947,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			appendableWithNewKeyword.append(">");
 		}
 		ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
-		typeAppendable.append(declaringType);
+		if(declaringType.isAnonymous()) 
+			typeAppendable.append(declaringType.getSuperTypes().get(0).getType());
+		else
+			typeAppendable.append(declaringType);
 		if (hasTypeArguments) {
 			typeAppendable.append("<");
 			for(int i = 0; i < typeArguments.size(); i++) {

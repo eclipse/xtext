@@ -7,31 +7,49 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.typesystem;
 
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
+
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
+import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendConstructorCall;
 import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer;
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState;
+import org.eclipse.xtext.xbase.typesystem.internal.ConstructorLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.internal.TypeInsteadOfConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
+import com.google.inject.Inject;
 /**
  * Customized type computer for Xtend specific expressions.
  * 
@@ -42,9 +60,17 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @NonNullByDefault
 public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 
+	@Inject XtendJvmModelInferrer inferrer;
+	
+	@Inject ILogicalContainerProvider logicalContainerProvider;
+	
+	@Inject DispatchAndExtensionAwareReentrantTypeResolver typeResolver;
+	
 	@Override
 	public void computeTypes(XExpression expression, ITypeComputationState state) {
-		if (expression instanceof RichString) {
+		if (expression instanceof XtendConstructorCall) {
+			_computeTypes((XtendConstructorCall) expression, state);
+		} else if (expression instanceof RichString) {
 			_computeTypes((RichString)expression, state);
 		} else if (expression instanceof RichStringForLoop) {
 			_computeTypes((RichStringForLoop)expression, state);
@@ -54,6 +80,59 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 			_computeTypes((RichStringLiteral)expression, state);
 		} else {
 			super.computeTypes(expression, state);
+		}
+	}
+	
+	protected void _computeTypes(XtendConstructorCall constructorCall, ITypeComputationState state) {
+		XtendClass xtendAnonymousClass = constructorCall.getAnonymousClass();
+		if(xtendAnonymousClass == null) {
+			super._computeTypes(constructorCall, state);
+		} else {
+			JvmMember container = (JvmMember) logicalContainerProvider.getNearestLogicalContainer(constructorCall);
+			List<? extends IConstructorLinkingCandidate> linkingCandidates = state.getLinkingCandidates(constructorCall);
+			IConstructorLinkingCandidate candidate = (IConstructorLinkingCandidate) getBestCandidate(linkingCandidates);
+			JvmGenericType superType = null;
+			JvmConstructor superConstructor = null;
+			if(candidate instanceof ConstructorLinkingCandidate) {
+				superConstructor = candidate.getConstructor();
+				superType = (JvmGenericType) superConstructor.getDeclaringType();
+			} else if(candidate instanceof TypeInsteadOfConstructorLinkingCandidate) {
+				JvmIdentifiableElement feature = ((TypeInsteadOfConstructorLinkingCandidate) candidate).getFeature();
+				if(feature instanceof JvmGenericType && ((JvmGenericType) feature).isInterface()) {
+					superType = (JvmGenericType) feature;
+				}
+			}
+			if(superType != null) {
+				JvmGenericType inferredAnonymousClass = inferrer.inferAnonymousClass(xtendAnonymousClass, container, constructorCall, superType);
+				JvmConstructor inferredConstructor = inferrer.inferAnonymousClassConstructor(constructorCall, inferredAnonymousClass, superConstructor);
+				LightweightTypeReference inferredType = state.getConverter().toRawLightweightReference(inferredAnonymousClass);
+				state.acceptActualType(inferredType);
+				AbstractTypeComputationState typeComputationState = (AbstractTypeComputationState) state;
+				typeResolver.resolveTypesForAnonymousClass(typeComputationState, inferredAnonymousClass);
+				linkAnonymousClassConstructorCall(constructorCall, inferredConstructor);
+				IConstructorLinkingCandidate resolvedConstructor = typeComputationState.createResolvedLink(constructorCall, inferredConstructor);
+				resolvedConstructor.applyToComputationState();
+			} else {
+				candidate.applyToComputationState();
+			}
+		}
+	}
+	
+	protected void linkAnonymousClassConstructorCall(XtendConstructorCall constructorCall, JvmConstructor inferredConstructor) {
+		JvmConstructor oldFeature = (JvmConstructor) constructorCall.eGet(XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
+		if (oldFeature == null || !(oldFeature.eIsProxy())) {
+			throw new IllegalStateException("Feature was already resolved to " + oldFeature);
+		}
+		if (((InternalEObject)constructorCall).eNotificationRequired()) {
+			boolean wasDeliver = constructorCall.eDeliver();
+			constructorCall.eSetDeliver(false);
+			constructorCall.setConstructor(inferredConstructor);
+			constructorCall.eSetDeliver(wasDeliver);
+			if (inferredConstructor != oldFeature) {
+				constructorCall.eNotify(new ENotificationImpl((InternalEObject) constructorCall, Notification.RESOLVE, XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR, oldFeature, inferredConstructor));
+			}
+		} else {
+			constructorCall.setConstructor(inferredConstructor);
 		}
 	}
 	

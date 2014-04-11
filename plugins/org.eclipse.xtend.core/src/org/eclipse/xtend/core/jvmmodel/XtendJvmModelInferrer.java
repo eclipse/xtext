@@ -28,6 +28,7 @@ import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendConstructorCall;
 import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -53,6 +54,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -236,6 +238,44 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 				}
 			}
 		}
+	}
+	
+	public JvmGenericType inferAnonymousClass(XtendClass anonymousClass, JvmMember container, XtendConstructorCall constructorCall, JvmGenericType superType) {
+		final JvmGenericType inferredType = typesFactory.createJvmGenericType();
+		inferredType.setFinal(true);
+		inferredType.setVisibility(JvmVisibility.DEFAULT);
+		inferredType.setPackageName(EcoreUtil2.getContainerOfType(anonymousClass, XtendFile.class).getPackage());
+		// TODO type parameters
+		inferredType.getSuperTypes().add(typeReferences.createTypeRef(superType));
+		associator.associatePrimary(anonymousClass, inferredType);
+		container.getMembers().add(inferredType);
+		inferredType.setSimpleName("$" + container.getMembers().indexOf(inferredType));
+		
+		for (XtendMember member : anonymousClass.getMembers()) {
+			if (member instanceof XtendField
+					|| (member instanceof XtendFunction && ((XtendFunction) member).getName() != null)
+					|| member instanceof XtendConstructor) {
+				transform(member, inferredType, true);
+			}
+		}
+		appendSyntheticDispatchMethods(anonymousClass, inferredType);
+		return inferredType;
+	}
+	
+	public JvmConstructor inferAnonymousClassConstructor(XtendConstructorCall constructorCall, JvmGenericType inferredAnonymousClass, @Nullable JvmConstructor superConstructor) {
+		JvmConstructor constructor = typesFactory.createJvmConstructor();
+		inferredAnonymousClass.getMembers().add(constructor);
+		associator.associatePrimary(constructorCall, constructor);
+		constructor.setVisibility(JvmVisibility.DEFAULT);
+		constructor.setSimpleName(inferredAnonymousClass.getSimpleName());
+		if(superConstructor != null) {
+			for(JvmFormalParameter parameter: superConstructor.getParameters()) 
+				constructor.getParameters().add(jvmTypesBuilder.cloneWithProxies(parameter));
+			copyAndFixTypeParameters(superConstructor.getTypeParameters(), constructor);
+			for (JvmTypeReference exception : superConstructor.getExceptions()) 
+				constructor.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
+		}
+		return constructor;
 	}
 	
 	protected void setNameAndAssociate(XtendFile file, XtendTypeDeclaration xtendType, JvmDeclaredType javaType) {

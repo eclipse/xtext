@@ -21,11 +21,13 @@ import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
+import org.eclipse.xtend.core.xtend.XtendConstructorCall;
 import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -33,12 +35,15 @@ import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XCatchClause;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -61,6 +66,12 @@ public class XtendCompiler extends XbaseCompiler {
 
 	@Inject	
 	private Provider<DefaultIndentationHandler> indentationHandler;
+	
+	@Inject 
+	private JvmModelGenerator jvmModelGenerator;
+	
+	@Inject 
+	private GeneratorConfigProvider generatorConfigProvider;
 	
 	@Override
 	protected String getFavoriteVariableName(EObject ex) {
@@ -459,5 +470,19 @@ public class XtendCompiler extends XbaseCompiler {
 	@Override
 	public void _toJavaStatement(final XStringLiteral expr, ITreeAppendable b, boolean isReferenced) {
 		toJavaStatement(expr, b, isReferenced, false);
+	}
+	
+	@Override
+	protected void constructorCallToJavaExpression(XConstructorCall constructorCall, ITreeAppendable b) {
+		super.constructorCallToJavaExpression(constructorCall, b);
+		JvmDeclaredType declaringType = constructorCall.getConstructor().getDeclaringType();
+		if(declaringType.isAnonymous()) {
+			ITreeAppendable appendable = b.trace(((XtendConstructorCall) constructorCall).getAnonymousClass(), true);
+			appendable.openScope();
+			appendable.declareVariable(declaringType, "this");
+			appendable.declareVariable(declaringType.getSuperTypes().get(0).getType(), "super");
+			jvmModelGenerator.generateBody(declaringType, appendable, generatorConfigProvider.get(constructorCall));
+			appendable.closeScope();
+		}
 	}
 }
