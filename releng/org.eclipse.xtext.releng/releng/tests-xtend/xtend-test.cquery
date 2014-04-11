@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0"
-	resourceMap="xtend-test.rmap">
-	<cq:rootRequest name="org.eclipse.xtend.tests"
-		componentType="eclipse.feature" />
+<cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0" resourceMap="xtend-test.rmap">
+	<cq:rootRequest name="org.eclipse.xtend.tests" componentType="eclipse.feature" />
 	<cq:property key="target.arch" value="*" />
 	<cq:property key="target.os" value="*" />
 	<cq:property key="target.ws" value="*" />
+	<cq:advisorNode namePattern="^org\.eclipse\..*\.license$" skipComponent="true"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xtend\.swtbot(?:\..*)?$" skipComponent="true" filter="(!(SWTBOT=true))"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xtend\.ide\.swtbot(?:\..*)?$" skipComponent="true" filter="(!(SWTBOT=true))"/>
 </cq:componentQuery>
