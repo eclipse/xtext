@@ -2,9 +2,11 @@
 <feature
       id="org.eclipse.xtend.gwt"
       label="%featureName"
-     version="2.6.0.qualifier"
+      version="2.6.0.qualifier"
       provider-name="%providerName"
-      plugin="org.eclipse.xtend.ide">
+      plugin="org.eclipse.xtend.ide"
+      license-feature="org.eclipse.xtext.license"
+      license-feature-version="2.6.0.qualifier">
 
    <description>
       %description
@@ -19,9 +21,6 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
-   <license url="http://www.eclipse.org/legal/epl-v10.html">
-      %license
-   </license>
 
    <includes
          id="org.eclipse.xtext.gwt"
@@ -33,14 +32,14 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-   
+
    <plugin
          id="org.eclipse.xtend.lib.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-   
+
    <plugin
          id="org.eclipse.xtend.lib.gwt"
          download-size="0"
