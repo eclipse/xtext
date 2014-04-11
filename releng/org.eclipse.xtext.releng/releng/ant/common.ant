@@ -56,6 +56,8 @@
 		<attribute name="propertiesfile" default="default" />
 		<sequential>
 			<echo message=" " />
+			<echo message="With mwe2: ${WITH.MWE2}" />
+			<echo message="With SWTBOT: ${SWTBOT}" />
 			<java fork="true" dir="${buckminster.home}" logError="true"  
 				classname="org.eclipse.core.launcher.Main" failonerror="true">
 				<classpath>
@@ -82,7 +84,7 @@
 				<sysproperty key="findbugs.home" value="${findbugs.home}" />
 				<sysproperty key="eclipse.p2.mirrors" value="${eclipse.p2.mirrors}" />
 				<sysproperty key="java.net.preferIPv4Stack" value="${java.net.preferIPv4Stack}" />
-				<jvmarg line=" -XX:MaxPermSize=300m -Xmx1500m" />
+				<jvmarg line=" -XX:MaxPermSize=300m -Xmx1500m -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=${suspend.debug}" />
 			</java>
 		</sequential>
 	</macrodef>
