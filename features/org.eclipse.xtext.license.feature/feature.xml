@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.xtext.license"
+      label="%featureName"
+      version="2.6.0.qualifier"
+      provider-name="%providerName">
+
+
+   <description>
+      License for Xtext/Xtend.
+   </description>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+</feature>
+

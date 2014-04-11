@@ -24,6 +24,10 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </license>
 
    <includes
+         id="org.eclipse.xtext.license"
+         version="0.0.0"/>
+         
+   <includes
          id="org.eclipse.xtext.sdk"
          version="0.0.0"/>
 

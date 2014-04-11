@@ -5,7 +5,9 @@
       version="2.6.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.xtext"
-      image="modeling32.png">
+      image="modeling32.png"
+      license-feature="org.eclipse.xtext.license"
+      license-feature-version="2.6.0.qualifier">
 
    <description>
       %description
