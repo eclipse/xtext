@@ -3,7 +3,9 @@
       id="org.eclipse.xtext.redist"
       label="%featureName"
      version="2.6.0.qualifier"
-      provider-name="%providerName">
+      provider-name="%providerName"
+      license-feature="org.eclipse.xtext.license"
+      license-feature-version="2.6.0.qualifier">
 
    <description>
       %description
@@ -18,9 +20,6 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
-   <license url="http://www.eclipse.org/legal/epl-v10.html">
-      %license
-   </license>
 
    <plugin
          id="org.eclipse.xtext.xbase.lib"

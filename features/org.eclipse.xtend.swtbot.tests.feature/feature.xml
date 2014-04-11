@@ -3,7 +3,9 @@
       id="org.eclipse.xtend.swtbot.tests"
       label="%featureName"
       version="2.6.0.qualifier"
-      provider-name="%providerName">
+      provider-name="%providerName"
+      license-feature="org.eclipse.xtext.license"
+      license-feature-version="2.6.0.qualifier">
 
    <description>
       %description
@@ -16,10 +18,6 @@ are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
    </copyright>
-
-   <license url="%licenseURL">
-      %license
-   </license>
 
    <url>
       <update label="%UpdateSiteName" url="http://download.eclipse.org/modeling/tmf/xtext/updates/"/>
