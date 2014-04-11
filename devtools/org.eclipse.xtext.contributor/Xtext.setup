@@ -121,9 +121,12 @@
   </setupTasks>
   <setupTasks xsi:type="setup:WorkingSetTask">
     <workingSets name="Releng">
-      <predicates xsi:type="predicates:AndPredicate">
-        <operands xsi:type="predicates:RepositoryPredicate" project="org.eclipse.xtext.releng"/>
-        <operands xsi:type="predicates:NamePredicate" pattern=".*releng|.*bootstrap|.*contributor|.*build.feature|.*language-generator"/>
+      <predicates xsi:type="predicates:OrPredicate">
+        <operands xsi:type="predicates:AndPredicate">
+          <operands xsi:type="predicates:RepositoryPredicate" project="org.eclipse.xtext.releng"/>
+          <operands xsi:type="predicates:NamePredicate" pattern=".*releng|.*bootstrap|.*contributor|.*build.feature|.*language-generator"/>
+        </operands>
+        <operands xsi:type="predicates:NamePredicate" pattern="org.eclipse.simrel.build"/>
       </predicates>
     </workingSets>
     <workingSets name="Xtext">
