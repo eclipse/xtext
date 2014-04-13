@@ -11,7 +11,6 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.google.common.base.Stopwatch;
 import com.google.inject.Inject;
 
 /**
@@ -296,6 +294,10 @@ public class PerformanceTest extends AbstractXtendUITestCase {
 	@Inject
 	private XtendFileGenerator fileGenerator;
 	
+	@Override
+	public void tearDown() throws Exception {
+		workbenchTestHelper.tearDown();
+	}
 	
 	@Test public void testBuildProject() throws Exception {
 		final long warmUp = measureReferenceTime();
@@ -365,14 +367,14 @@ public class PerformanceTest extends AbstractXtendUITestCase {
 	
 	
 	protected long measureCleanBuild() throws CoreException {
-		Stopwatch timer = new Stopwatch().start();
+		long before = System.currentTimeMillis();
 		cleanBuild();
 		fullBuild();
-		return timer.elapsedTime(TimeUnit.MILLISECONDS);
+		return System.currentTimeMillis() - before;
 	}
 	
 	protected long measureReferenceTime() {
-		Stopwatch timer = new Stopwatch().start();
+		long before = System.currentTimeMillis();
 		int counter = 0;
 		int max = 100000000;
 		for(int i = 0; i < max; i++) {
@@ -381,7 +383,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
 			counter = counter + i;
 		}
 		assertEquals(max, counter);
-		return timer.elapsedTime(TimeUnit.MILLISECONDS);
+		return System.currentTimeMillis() - before;
 	}
 
 	protected void assertNoErrorsInWorkspace() throws CoreException {
