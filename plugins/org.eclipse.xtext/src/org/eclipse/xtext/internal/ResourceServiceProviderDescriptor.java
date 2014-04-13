@@ -39,6 +39,8 @@ public class ResourceServiceProviderDescriptor implements IResourceServiceProvid
 				this.extension = element.createExecutableExtension(attClass);
 			} catch (CoreException e) {
 				log.error(e.getMessage(), e);
+			} catch (NoClassDefFoundError e) {
+				log.error(e.getMessage(), e);
 			}
 		}
 		if (this.extension instanceof IResourceServiceProvider.Provider) {
