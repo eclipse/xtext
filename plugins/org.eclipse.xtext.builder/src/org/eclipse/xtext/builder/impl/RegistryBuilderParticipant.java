@@ -166,6 +166,8 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 					}
 				} catch (CoreException e) {
 					logError(element, e.getMessage());
+				} catch (NoClassDefFoundError e) {
+					logError(element, e.getMessage());
 				}
 				if (delegate == null) {
 					delegate = new NoOpBuilderParticipant();
