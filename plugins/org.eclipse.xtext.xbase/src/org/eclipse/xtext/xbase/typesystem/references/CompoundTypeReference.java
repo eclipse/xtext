@@ -107,6 +107,73 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean isArray() {
+		for(LightweightTypeReference component: expose(components)) {
+			if (component.isArray())
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean isAny() {
+		for(LightweightTypeReference component: expose(components)) {
+			if (component.isAny())
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean isPrimitive() {
+		for(LightweightTypeReference component: expose(components)) {
+			if (component.isPrimitive())
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean isWrapper() {
+		for(LightweightTypeReference component: expose(components)) {
+			if (component.isWrapper())
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean isPrimitiveVoid() {
+		for(LightweightTypeReference component: expose(components)) {
+			if (component.isPrimitiveVoid())
+				return true;
+		}
+		return false;
+	}
+
+	@Override
+	public FunctionTypeKind getFunctionTypeKind() {
+		for(LightweightTypeReference component: expose(components)) {
+			if (component.isFunctionType()) {
+				FunctionTypeKind kind = getFunctionTypeKind();
+				if (kind != FunctionTypeKind.NONE) {
+					return kind;
+				}
+			}
+		}
+		return FunctionTypeKind.NONE;
+	}
+	
+	@Override
+	public boolean isInterfaceType() {
+		for(LightweightTypeReference component: expose(components)) {
+			if (component.isInterfaceType())
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public LightweightTypeReference getRawTypeReference() {
 		if (isAllRawType()) {
 			return this;
