@@ -42,6 +42,25 @@
 
 	</target>
 
+	<target name="run-buckminster-tests" depends="common.cleanup">
+
+		<fail unless="buckminster.home" message="buckminster.home must be specified." />
+		<echo message="IMPORTANT: Populating an empty target platform may took over 10 minutes." />
+		<echo message="eclipse.download: ${eclipse.download}" />
+		<property name="commands.file" location="${temp.commands.location}/xtext-tests-cmd.txt" />
+		<echo file="${commands.file}" append="false">
+			importtargetdefinition -A "${releng.project}/releng/tests/tests-eclipseserver.target
+			resolve "${releng.project}/releng/tests/xtext-test.mspec"
+			build
+
+			#Xtend tests
+			junit --stderr --stdout --launch "org.eclipse.xtext.junit4.tests/xtext.junit4.tests.launch" --flatXML --output "${WORKSPACE}/build-result/test-results/xtend.core.tests.fast.xml"
+
+		</echo>
+		<echo message="build.properties: ${build.properties}" />
+		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
+	</target>
+
 	<target name="run-buckminster-swtbot" depends="common.cleanup">
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
 		<ant antfile="${checkout.location}/features/org.eclipse.xtext.build.feature/packaging.ant" target="resolve.variables">
