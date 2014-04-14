@@ -15,9 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parser.IParseResult;
@@ -42,9 +40,6 @@ public class DefaultTaskFinder implements ITaskFinder {
   
   @Inject
   private ITaskTagProvider taskTagProvider;
-  
-  @Inject
-  private TerminalsGrammarAccess terminals;
   
   public List<Task> findTasks(final Resource resource) {
     List<Task> _xblockexpression = null;
@@ -115,19 +110,16 @@ public class DefaultTaskFinder implements ITaskFinder {
   }
   
   protected boolean canContainTaskTags(final ILeafNode node) {
-    Grammar _grammar = this.terminals.getGrammar();
-    boolean _tripleNotEquals = (_grammar != null);
-    if (_tripleNotEquals) {
+    final EObject rule = node.getGrammarElement();
+    if ((rule instanceof AbstractRule)) {
       boolean _or = false;
-      EObject _grammarElement = node.getGrammarElement();
-      TerminalRule _mL_COMMENTRule = this.terminals.getML_COMMENTRule();
-      boolean _equals = Objects.equal(_grammarElement, _mL_COMMENTRule);
+      String _name = ((AbstractRule)rule).getName();
+      boolean _equals = Objects.equal(_name, "SL_COMMENT");
       if (_equals) {
         _or = true;
       } else {
-        EObject _grammarElement_1 = node.getGrammarElement();
-        TerminalRule _sL_COMMENTRule = this.terminals.getSL_COMMENTRule();
-        boolean _equals_1 = Objects.equal(_grammarElement_1, _sL_COMMENTRule);
+        String _name_1 = ((AbstractRule)rule).getName();
+        boolean _equals_1 = Objects.equal(_name_1, "ML_COMMENT");
         _or = _equals_1;
       }
       return _or;
