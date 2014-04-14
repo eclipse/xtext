@@ -24,7 +24,7 @@ public class EmitterNodeFinder {
 	public INode next(AbstractElement grammarElement) {
 		if (toNode == null)
 			return null;
-		EmitterNodeIterator ni = new EmitterNodeIterator(toNode, null, false, false);
+		EmitterNodeIterator ni = new EmitterNodeIterator(toNode, null, true, false);
 		while (ni.hasNext()) {
 			INode next = ni.next();
 			if (next.getGrammarElement() == grammarElement)
