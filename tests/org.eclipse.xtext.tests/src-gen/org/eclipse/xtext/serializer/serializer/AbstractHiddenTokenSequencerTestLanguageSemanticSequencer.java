@@ -1,0 +1,94 @@
+package org.eclipse.xtext.serializer.serializer;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
+import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.serializer.hiddentokensequencertest.DomainModel;
+import org.eclipse.xtext.serializer.hiddentokensequencertest.Entity;
+import org.eclipse.xtext.serializer.hiddentokensequencertest.HiddentokensequencertestPackage;
+import org.eclipse.xtext.serializer.hiddentokensequencertest.Model;
+import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+import org.eclipse.xtext.serializer.services.HiddenTokenSequencerTestLanguageGrammarAccess;
+
+@SuppressWarnings("all")
+public abstract class AbstractHiddenTokenSequencerTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
+
+	@Inject
+	private HiddenTokenSequencerTestLanguageGrammarAccess grammarAccess;
+	
+	public void createSequence(EObject context, EObject semanticObject) {
+		if(semanticObject.eClass().getEPackage() == HiddentokensequencertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case HiddentokensequencertestPackage.DOMAIN_MODEL:
+				if(context == grammarAccess.getDomainModelRule()) {
+					sequence_DomainModel(context, (DomainModel) semanticObject); 
+					return; 
+				}
+				else break;
+			case HiddentokensequencertestPackage.ENTITY:
+				if(context == grammarAccess.getEntityRule()) {
+					sequence_Entity(context, (Entity) semanticObject); 
+					return; 
+				}
+				else break;
+			case HiddentokensequencertestPackage.MODEL:
+				if(context == grammarAccess.getModelRule()) {
+					sequence_Model(context, (Model) semanticObject); 
+					return; 
+				}
+				else break;
+			}
+		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+	}
+	
+	/**
+	 * Constraint:
+	 *     entities+=Entity*
+	 */
+	protected void sequence_DomainModel(EObject context, DomainModel semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=ID description=STRING)
+	 */
+	protected void sequence_Entity(EObject context, Entity semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, HiddentokensequencertestPackage.Literals.ENTITY__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, HiddentokensequencertestPackage.Literals.ENTITY__NAME));
+			if(transientValues.isValueTransient(semanticObject, HiddentokensequencertestPackage.Literals.ENTITY__DESCRIPTION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, HiddentokensequencertestPackage.Literals.ENTITY__DESCRIPTION));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEntityAccess().getDescriptionSTRINGTerminalRuleCall_1_0(), semanticObject.getDescription());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     domainModel=DomainModel
+	 */
+	protected void sequence_Model(EObject context, Model semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, HiddentokensequencertestPackage.Literals.MODEL__DOMAIN_MODEL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, HiddentokensequencertestPackage.Literals.MODEL__DOMAIN_MODEL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getModelAccess().getDomainModelDomainModelParserRuleCall_0(), semanticObject.getDomainModel());
+		feeder.finish();
+	}
+}
