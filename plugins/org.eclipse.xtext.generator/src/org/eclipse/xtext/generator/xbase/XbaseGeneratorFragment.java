@@ -187,7 +187,6 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType(CancelableDiagnostician.class.getCanonicalName(), "org.eclipse.xtext.xbase.validation.XbaseDiagnostician")
 				.addTypeToType("org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider.ExtensionClassNameProvider",
 						"org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypesAdapter")
-				.addTypeToType("org.eclipse.xtext.tasks.ITaskFinder", "org.eclipse.xtext.xbase.tasks.XTypeTaskFinder")
 				;
 		if (doesUseXbaseWithAnnotations(grammar)) {
 			config = config
