@@ -20,10 +20,6 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
-   <includes
-         id="org.eclipse.xtext.license"
-         version="0.0.0"/>
-
    <requires>
       <import plugin="org.eclipse.xtend"/>
       <import plugin="org.eclipse.xpand"/>
