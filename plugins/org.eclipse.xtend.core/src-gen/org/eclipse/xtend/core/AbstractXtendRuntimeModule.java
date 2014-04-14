@@ -40,6 +40,7 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtend.core.serializer.XtendSemanticSequencer.class;
 	}
@@ -50,6 +51,7 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
 		return org.eclipse.xtext.serializer.impl.Serializer.class;
 	}
@@ -60,6 +62,7 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
@@ -85,6 +88,7 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
@@ -100,6 +104,7 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
 		return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;
 	}
@@ -110,11 +115,13 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	@Override
 	public void configureIResourceDescriptions(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).to(org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	@Override
 	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions.class);
 	}
@@ -155,26 +162,31 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.naming.IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
 		return org.eclipse.xtext.xbase.conversion.XbaseValueConverterService.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	@Override
 	public void configureLinkingIScopeProvider(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(org.eclipse.xtext.linking.LinkingScopeProviderBinding.class).to(org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	@Override
 	public void configureSerializerIScopeProvider(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding.class).to(org.eclipse.xtext.xbase.serializer.SerializerScopeProvider.class);
 	}
@@ -185,11 +197,13 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.linking.ILinker> bindILinker() {
 		return org.eclipse.xtext.xbase.linking.XbaseLazyLinker.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.resource.XtextResource> bindXtextResource() {
 		return org.eclipse.xtext.xbase.resource.BatchLinkableResource.class;
 	}
@@ -280,11 +294,13 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.resource.ILocationInFileProvider> bindILocationInFileProvider() {
 		return org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	@Override
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider.class;
 	}
@@ -307,10 +323,5 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.validation.IResourceValidator> bindIResourceValidator() {
 		return org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.tasks.ITaskFinder> bindTaskFinder() {
-		return org.eclipse.xtext.xbase.tasks.XTypeTaskFinder.class;
 	}
 }
