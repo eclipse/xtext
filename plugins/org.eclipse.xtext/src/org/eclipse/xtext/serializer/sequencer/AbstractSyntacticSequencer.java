@@ -57,6 +57,8 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 		protected INode lastNode;
 		
+		protected INode lastNonNullNode;
+		
 		protected INode rootNode;
 
 		protected ISynFollowerOwner lastState;
@@ -71,6 +73,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 			this.semanticObject = semanticObject;
 			this.lastState = previousState;
 			this.lastNode = previousNode;
+			this.lastNonNullNode = previousNode;
 			this.rootNode = previousNode;
 			this.stack = new RuleCallStack();
 		}
@@ -85,7 +88,11 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 		protected void setLastNode(INode lastNode) {
 			this.lastNode = lastNode;
+			if (lastNode != null) {
+				lastNonNullNode = lastNode;
+			}
 		}
+		
 	}
 
 	protected Stack<SyntacticalContext> contexts = new Stack<SyntacticalContext>();
@@ -414,7 +421,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		ctx.lastState = findTransition(ctx.context, ctx.semanticObject, ctx.lastState, ctx.getLastNode(), ele, node,
 				ctx.stack);
 		emitUnassignedTokens(ctx.semanticObject, (ISynTransition) ctx.lastState, ctx.getLastNode(), node);
-		ctx.lastState = navigateToAbsorber(ctx.lastState, ctx.getLastNode(), null, ctx.stack);
+		ctx.lastState = navigateToAbsorber(ctx.lastState, ctx.lastNonNullNode, null, ctx.stack);
 		ctx.setLastNode(getLastLeaf(node));
 	}
 
