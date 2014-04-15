@@ -67,6 +67,9 @@
     <setupTasks xsi:type="setup:CompoundSetupTask" name="org.eclipse.jdt.launching">
       <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.jdt.launching/org.eclipse.jdt.launching.PREF_STRICTLY_COMPATIBLE_JRE_NOT_AVAILABLE" value="ignore"/>
     </setupTasks>
+    <setupTasks xsi:type="setup:CompoundSetupTask" name="org.eclipse.jdt.ui">
+      <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.jdt.ui/content_assist_favorite_static_members" value="com.google.common.collect.Lists.*;com.google.common.collect.Iterables.*;com.google.common.collect.Sets.*;java.util.Collections.*;com.google.common.collect.Maps.*;java.lang.Math.*"/>
+    </setupTasks>
   </setupTasks>
   <setupTasks xsi:type="setup:ProjectsImportTask" documentation="Import all developer tools">
     <sourceLocators rootFolder="${xtext.git.location}/devtools/"/>
