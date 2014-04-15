@@ -10,10 +10,11 @@ package org.eclipse.xtext.tasks
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.common.services.TerminalsGrammarAccess
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -25,7 +26,7 @@ class DefaultTaskFinder implements ITaskFinder {
 	@Inject
 	ITaskTagProvider taskTagProvider
 	@Inject
-	TerminalsGrammarAccess terminals
+	IHiddenTokenHelper hiddenTokenHelper
 
 	override findTasks(Resource resource) {
 		val taskTags = taskTagProvider.getTaskTags(resource)
@@ -52,9 +53,9 @@ class DefaultTaskFinder implements ITaskFinder {
 	}
 
 	protected def boolean canContainTaskTags(ILeafNode node) {
-		if (terminals.grammar !== null) {
-			return node.grammarElement == terminals.ML_COMMENTRule ||
-				node.grammarElement == terminals.SL_COMMENTRule
+		val rule = node.grammarElement
+		if (rule instanceof AbstractRule) {
+			return hiddenTokenHelper.isComment(rule)
 		}
 		return false;
 	}
