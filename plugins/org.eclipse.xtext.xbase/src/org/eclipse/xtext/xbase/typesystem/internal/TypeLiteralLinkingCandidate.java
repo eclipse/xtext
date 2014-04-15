@@ -10,15 +10,22 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -29,6 +36,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -112,6 +120,67 @@ public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate
 	@Override
 	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
 		return Collections.emptyList();
+	}
+	
+	@Override
+	protected boolean validateTypeArity(IAcceptor<? super AbstractDiagnostic> result) {
+		int numberOfTypeArgs = getFeatureCall().getTypeArguments().size();
+		if (numberOfTypeArgs != 0) {
+			String message = String.format("Invalid type %1$s. Type arguments cannot be applied to the type literal %2$s",
+					numberOfTypeArgs == 1 ? "argument" : "arguments",
+					getFeature().getSimpleName());
+			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
+					Severity.ERROR, 
+					IssueCodes.INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL, 
+					message, 
+					getExpression(),
+					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS,
+					-1, null) {
+				
+				ICompositeNode node = NodeModelUtils.getNode(getFeatureCall());
+				
+				@Override
+				public int getLength() {
+					for(INode child: node.getChildren()) {
+						EObject grammarElement = child.getGrammarElement();
+						if (grammarElement instanceof Keyword) {
+							if (">".equals(((Keyword) grammarElement).getValue())) {
+								return child.getEndOffset() - getOffset();
+							}
+						}
+					}
+					return 0;
+				}
+				@Override
+				public int getOffset() {
+					for(INode child: node.getChildren()) {
+						EObject grammarElement = child.getGrammarElement();
+						if (grammarElement instanceof Keyword) {
+							if ("<".equals(((Keyword) grammarElement).getValue())) {
+								return child.getOffset();
+							}
+						}
+					}
+					return 0;
+				}
+				
+				@Override
+				public int getLine() {
+					for(INode child: node.getChildren()) {
+						EObject grammarElement = child.getGrammarElement();
+						if (grammarElement instanceof Keyword) {
+							if ("<".equals(((Keyword) grammarElement).getValue())) {
+								return child.getStartLine();
+							}
+						}
+					}
+					return 0;
+				}
+			};
+			result.accept(diagnostic);
+			return false;
+		}
+		return true;
 	}
 	
 	@Override

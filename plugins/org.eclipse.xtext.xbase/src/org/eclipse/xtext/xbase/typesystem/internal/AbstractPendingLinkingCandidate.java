@@ -712,7 +712,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					getFeatureParameterTypesAsString());
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 					Severity.ERROR, 
-					IssueCodes.TYPE_BOUNDS_MISSMATCH, 
+					IssueCodes.TYPE_BOUNDS_MISMATCH, 
 					message, 
 					getExpression(), 
 					getDefaultValidationFeature(), -1, null);
