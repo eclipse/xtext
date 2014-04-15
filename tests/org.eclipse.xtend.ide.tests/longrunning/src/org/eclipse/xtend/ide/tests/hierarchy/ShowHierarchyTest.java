@@ -26,7 +26,7 @@ import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.xbase.ui.hierarchy.AbstractHierarchyHandler;
+import org.eclipse.xtext.xbase.ui.editor.AbstractModelElementHandler;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -121,7 +121,7 @@ public class ShowHierarchyTest extends AbstractEditorTest {
 		return getInjector().getInstance(clazz);
 	}
 	
-	private final class TestingTypeHierarchyHandler extends AbstractHierarchyHandler {
+	private final class TestingTypeHierarchyHandler extends AbstractModelElementHandler {
 		private IJavaElement resolvedType = null;
 		public String getResolvedTypeName(){
 			return resolvedType.getElementName();

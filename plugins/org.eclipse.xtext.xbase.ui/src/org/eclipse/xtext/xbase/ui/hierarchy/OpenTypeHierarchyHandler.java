@@ -11,11 +11,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.internal.ui.util.OpenTypeHierarchyUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.xbase.ui.editor.AbstractModelElementHandler;
 
 /**
  * @author Holger Schill - Initial contribution and API
  */
-public class OpenTypeHierarchyHandler extends AbstractHierarchyHandler {
+public class OpenTypeHierarchyHandler extends AbstractModelElementHandler {
 
 	@Override
 	protected void openPresentation(final XtextEditor editor, IJavaElement javaElement,  final EObject selectedElement) {

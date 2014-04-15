@@ -120,5 +120,12 @@
             contextId="org.eclipse.xtext.ui.XtextEditorScope"
             platform="gtk"/>
     </extension>
-	
+	<extension point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            description="%OpenImpelentation_description"
+            id="org.eclipse.xtext.xbase.ui.OpenImplementationCommand"
+            name="%OpenImpelentation_name">
+      </command>
+	   </extension>
 </plugin>

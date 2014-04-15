@@ -251,7 +251,9 @@
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+            fileExtensions="xtend"
+            >
       </participant>
    </extension>
    <extension
@@ -542,5 +544,29 @@
          </command>
       </menuContribution>
    </extension>  
+   <!-- Open implementation -->
+   <extension point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.navigation.OpenImplementationHandler"
+            commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+            <activeWhen>
+				<reference
+					definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+				</reference>
+			</activeWhen>
+      </handler>
+   </extension>
+ <extension point="org.eclipse.ui.menus">
+       <menuContribution
+            locationURI="menu:navigate?after=open.ext4">
+         <command commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+		<visibleWhen checkEnabled="false">
+              <reference
+                 definitionId="org.eclipse.xtend.core.Xtend.Editor.opened">
+              </reference>
+		</visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
 
 </plugin>

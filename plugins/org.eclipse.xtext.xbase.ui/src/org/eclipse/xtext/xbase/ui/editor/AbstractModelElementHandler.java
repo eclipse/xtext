@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.ui.hierarchy;
+package org.eclipse.xtext.xbase.ui.editor;
 
 import java.util.Set;
 
@@ -29,14 +29,14 @@ import com.google.inject.Inject;
 /**
  * @author Holger Schill - Initial contribution and API
  */
-public abstract class AbstractHierarchyHandler extends AbstractHandler {
+public abstract class AbstractModelElementHandler extends AbstractHandler {
 
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
 	@Inject
 	private IJvmModelAssociations associations;
-	
+
 	@Inject
 	private IJavaElementFinder javaElementFinder;
 
@@ -48,7 +48,7 @@ public abstract class AbstractHierarchyHandler extends AbstractHandler {
 				public java.lang.Void exec(XtextResource resource) throws Exception {
 					EObject selectedElement = eObjectAtOffsetHelper.resolveElementAt(resource, selection.getOffset());
 					if (selectedElement != null) {
-						JvmIdentifiableElement jvmIdentifiable = getJvmIdentifiableElement(selectedElement);
+						JvmIdentifiableElement jvmIdentifiable = getJvmIdentifiableElement(associations, selectedElement);
 						if (jvmIdentifiable != null) {
 							IJavaElement javaType = javaElementFinder.findElementFor(jvmIdentifiable);
 								if (javaType != null)
@@ -58,21 +58,20 @@ public abstract class AbstractHierarchyHandler extends AbstractHandler {
 					return null;
 				}
 
-				
 
-				private JvmIdentifiableElement getJvmIdentifiableElement(EObject element) {
-					if(element instanceof JvmIdentifiableElement)
-						return (JvmIdentifiableElement) element;
-					Set<EObject> jvmElements = associations.getJvmElements(element);
-					if (!jvmElements.isEmpty()) {
-						JvmIdentifiableElement type = (JvmIdentifiableElement) jvmElements.iterator().next();
-							if(type != null) 
-								return type;
-					}
-					return null;
-					
-				}
 			});
+		}
+		return null;
+	}
+
+	public static JvmIdentifiableElement getJvmIdentifiableElement(IJvmModelAssociations jvmModelAssociations, EObject element) {
+		if(element instanceof JvmIdentifiableElement)
+			return (JvmIdentifiableElement) element;
+		Set<EObject> jvmElements = jvmModelAssociations.getJvmElements(element);
+		if (!jvmElements.isEmpty()) {
+			JvmIdentifiableElement type = (JvmIdentifiableElement) jvmElements.iterator().next();
+				if(type != null)
+					return type;
 		}
 		return null;
 	}
