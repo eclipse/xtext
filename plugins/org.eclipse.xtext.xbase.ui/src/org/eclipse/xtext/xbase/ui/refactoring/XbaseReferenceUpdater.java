@@ -68,6 +68,8 @@ import com.google.inject.Inject;
  * Handles imports while updating references of renamed elements.
  * 
  * @author Jan Koehnlein - Initial contribution and API
+ * 
+ * TODO this looks bogus to me (e.g. {@link #isImplicitVariable(EObject, EReference, String)}, {@link #isStaticExtensionFeatureCall(EObject, EReference, EObject)})
  */
 public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 	
