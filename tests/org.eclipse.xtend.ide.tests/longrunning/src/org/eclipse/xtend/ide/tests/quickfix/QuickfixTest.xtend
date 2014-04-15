@@ -2817,6 +2817,48 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
+	@Test def void invalidTypeArgsOnTypeLiteral_01() {
+		create('Foo.xtend', 
+		'''
+		class C {
+			def Object m() {
+				<String, |String>Iterable
+			}
+		}
+		''')
+		.assertIssueCodes(INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL)
+		.assertResolutionLabels("Remove invalid type arguments")
+		.assertModelAfterQuickfix("Remove invalid type arguments",
+		'''
+		class C {
+			def Object m() {
+				Iterable
+			}
+		}
+		''')
+	}
+	
+	@Test def void invalidTypeArgsOnTypeLiteral_02() {
+		create('Foo.xtend', 
+		'''
+		class C {
+			def Object m() {
+				java.util.  < /* |comments are not preserved, WS not removed */ String>List
+			}
+		}
+		''')
+		.assertIssueCodes(INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL)
+		.assertResolutionLabels("Remove invalid type argument")
+		.assertModelAfterQuickfix("Remove invalid type argument",
+		'''
+		class C {
+			def Object m() {
+				java.util.  List
+			}
+		}
+		''')
+	}
+	
 	@Test def void incompleteCasesOnEnum() {
 		create('Foo.xtend', 
 		'''
