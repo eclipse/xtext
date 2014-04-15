@@ -7,10 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation;
 
-import java.util.List;
-
-import com.google.common.collect.ImmutableList;
-
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -112,51 +108,11 @@ public class IssueCodes {
 	public static final String DISCOURAGED_REFERENCE = ISSUE_CODE_PREFIX	+ "discouraged_reference";
 	
 	public static final String RAW_TYPE = ISSUE_CODE_PREFIX	+ "raw_type";
-	public static final String TYPE_BOUNDS_MISSMATCH = ISSUE_CODE_PREFIX + "type_bounds_missmatch";
+	public static final String TYPE_BOUNDS_MISMATCH = ISSUE_CODE_PREFIX + "type_bounds_missmatch";
 	public static final String INVALID_USE_OF_TYPE_PARAMETER = ISSUE_CODE_PREFIX + "invalid_use_of_type_parameter";
 	public static final String TYPE_PARAMETER_FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "type_parameter_forward_reference";
 	public static final String INVALID_TYPE_PARAMETER_BOUNDS = ISSUE_CODE_PREFIX + "invalid_type_parameter_bounds";
-
-	
-	// list is not necessarily complete
-	// list is sorted from least important issue to worst issue
-	private static final List<String> sortedIssueCodes = ImmutableList.of(
-			FIELD_ACCESS_WITH_PARENTHESES,
-			LOCAL_VAR_ACCESS_WITH_PARENTHESES,
-			METHOD_ACCESS_WITHOUT_PARENTHESES,
-			INVALID_MUTABLE_VARIABLE_ACCESS,
-			INSTANCE_ACCESS_TO_STATIC_MEMBER,
-			INVALID_GENERIC_ARGUMENT_TYPES,
-			INVALID_NUMBER_OF_TYPE_ARGUMENTS,
-			INVALID_ARGUMENT_TYPES,
-			INVALID_NUMBER_OF_ARGUMENTS
-	);
-	
-	public static int compareIssueCodes(String left, String right) {
-		if (left.equals(right))
-			return 0;
-		for(int i = 0; i < sortedIssueCodes.size(); i++) {
-			String candidate = sortedIssueCodes.get(i);
-			if (candidate.equals(left)) {
-				for( int j = i + 1; j < sortedIssueCodes.size(); j++) {
-					String followedBy = sortedIssueCodes.get(j);
-					if (followedBy.equals(right)) {
-						return -1;
-					}
-				}
-				return 0;
-			} else if (candidate.equals(right)) {
-				for( int j = i + 1; j < sortedIssueCodes.size(); j++) {
-					String followedBy = sortedIssueCodes.get(j);
-					if (followedBy.equals(left)) {
-						return 1;
-					}
-				}
-				return 0;
-			}
-		}
-		return 0;
-	}
+	public static final String INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL = ISSUE_CODE_PREFIX + "invalid_type_arguments_on_type_literal";
 	
 	private IssueCodes() {
 	}

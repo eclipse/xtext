@@ -5353,6 +5353,78 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void invalidTypeArgsOnTypeLiteral_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Object m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<String, |String>Iterable");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Remove invalid type arguments");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class C {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def Object m() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Iterable");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix("Remove invalid type arguments", _builder_1);
+  }
+  
+  @Test
+  public void invalidTypeArgsOnTypeLiteral_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Object m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("java.util.  < /* |comments are not preserved, WS not removed */ String>List");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Remove invalid type argument");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class C {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def Object m() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("java.util.  List");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix("Remove invalid type argument", _builder_1);
+  }
+  
+  @Test
   public void incompleteCasesOnEnum() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");

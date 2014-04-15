@@ -99,6 +99,21 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 		}
 	}
 	
+	@Fix(IssueCodes.INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL)
+	public void fixTypeArguments(final Issue issue, IssueResolutionAcceptor acceptor) {
+		String message = issue.getMessage();
+		String fixup = "Remove invalid type arguments";
+		if (message.contains("argument.")) {
+			fixup = "Remove invalid type argument";
+		}
+		acceptor.accept(issue, fixup, fixup, null, new IModification() {
+			public void apply(IModificationContext context) throws Exception {
+				IXtextDocument document = context.getXtextDocument();
+				document.replace(issue.getOffset(), issue.getLength(), "");
+			}
+		});
+	}
+	
 	@Fix(IssueCodes.INCOMPLETE_CASES_ON_ENUM)
 	public void fixIncompleteCasesOnEnum(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Add 'default' case", "Add 'default' case", null, new ISemanticModification() {
