@@ -7,4 +7,5 @@ Export-Package: org.eclipse.xtend2.lib,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: com.google.guava;bundle-version="[10.0.1,16.0.0)"
+Bundle-Vendor: %Vendor-Name
 
