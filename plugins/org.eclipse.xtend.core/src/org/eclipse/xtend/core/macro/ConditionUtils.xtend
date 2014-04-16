@@ -9,11 +9,17 @@ package org.eclipse.xtend.core.macro
 
 import com.google.common.base.Preconditions
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
+import org.eclipse.emf.ecore.EObject
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 class ConditionUtils {
+	
+	static def notRemoved(EObject object, String name) {
+		Preconditions.checkArgument(object != null, '''«name» cannot be null''')
+		Preconditions.checkArgument(object.eResource != null, '''«name» cannot be removed''')
+	}
 	
 	static def checkInferredTypeReferences(String typeName, TypeReference ... types) {
 		for (type : types) {

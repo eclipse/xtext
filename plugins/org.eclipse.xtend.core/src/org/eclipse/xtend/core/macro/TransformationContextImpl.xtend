@@ -20,6 +20,9 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
+import org.eclipse.xtend.lib.macro.services.AnnotationReferenceBuildContext
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 
 class TransformationContextImpl implements TransformationContext {
 
@@ -221,6 +224,38 @@ class TransformationContextImpl implements TransformationContext {
 	
 	override toURI(Path path) {
 		unit.fileSystemSupport.toURI(path)
+	}
+	
+	override newAnnotationReference(String annotationTypeName) {
+		unit.annotationReferenceProvider.newAnnotationReference(annotationTypeName)
+	}
+	
+	override newAnnotationReference(Type annotationTypeDelcaration) {
+		unit.annotationReferenceProvider.newAnnotationReference(annotationTypeDelcaration)
+	}
+	
+	override newAnnotationReference(Class<?> annotationClass) {
+		unit.annotationReferenceProvider.newAnnotationReference(annotationClass)
+	}
+	
+	override newAnnotationReference(AnnotationReference annotationReference) {
+		unit.annotationReferenceProvider.newAnnotationReference(annotationReference)
+	}
+	
+	override newAnnotationReference(String annotationTypeName, Procedure1<AnnotationReferenceBuildContext> initializer) {
+		unit.annotationReferenceProvider.newAnnotationReference(annotationTypeName, initializer)
+	}
+	
+	override newAnnotationReference(Type annotationTypeDelcaration, Procedure1<AnnotationReferenceBuildContext> initializer) {
+		unit.annotationReferenceProvider.newAnnotationReference(annotationTypeDelcaration, initializer)
+	}
+	
+	override newAnnotationReference(Class<?> annotationClass, Procedure1<AnnotationReferenceBuildContext> initializer) {
+		unit.annotationReferenceProvider.newAnnotationReference(annotationClass, initializer)
+	}
+	
+	override newAnnotationReference(AnnotationReference annotationReference, Procedure1<AnnotationReferenceBuildContext> initializer) {
+		unit.annotationReferenceProvider.newAnnotationReference(annotationReference, initializer)
 	}
 	
 }

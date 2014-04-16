@@ -86,7 +86,10 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		''').asCompilationUnit [
 			val anno = typeLookup.findClass("MyClass").annotations.head
 			val anno2 = typeLookup.findClass("MyClass").declaredFields.head.annotations.head
-			anno.set("annotation2Value", anno2)
+			typeLookup.findClass("MyClass").addAnnotation(annotationReferenceProvider.newAnnotationReference(anno) [
+				set("annotation2Value", anno2)
+			])
+			typeLookup.findClass("MyClass").removeAnnotation(anno)
 			assertEquals(typeLookup.findClass("MyClass").declaredFields.head.annotations.head.annotationTypeDeclaration, (anno.getValue('annotation2Value') as AnnotationReference).annotationTypeDeclaration)
 		]
 	}

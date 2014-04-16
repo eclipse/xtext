@@ -62,7 +62,7 @@ class ImmutableProcessor implements TransformationParticipant<MutableClassDeclar
 			
 			clazz.tryAddMethod('hashCode') [
 				returnType = primitiveInt
-				addAnnotation(typeof(Override).findTypeGlobally)
+				addAnnotation(Override.newAnnotationReference)
 				body = ['''
 					final int prime = 31;
 					«IF clazz.extendsSomethingWithProperHashCode»

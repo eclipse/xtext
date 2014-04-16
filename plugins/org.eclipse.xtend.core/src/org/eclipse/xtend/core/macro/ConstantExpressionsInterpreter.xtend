@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.interpreter.UnresolvableFeatureException
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals
 import org.eclipse.xtext.xtype.XComputedTypeReference
+import org.eclipse.xtext.xbase.XbasePackage
 
 /**
  * An interpreter for evaluating constant expressions in annotation values.
@@ -170,25 +171,45 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 	}
 
 	def dispatch Object internalEvaluate(XFeatureCall it, Context ctx) {
+		val feature = eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false) as EObject
+		if (!feature.eIsProxy) {
+			return switch feature {
+				JvmEnumerationLiteral: feature
+				JvmField: evaluateField(it, feature, ctx)
+				JvmType: toTypeReference(feature, 0)
+			}
+		}
 		val featureName = concreteSyntaxFeatureName
 		if (ctx.visibleFeatures.containsKey(featureName)) {
-			return switch feature : ctx.visibleFeatures.get(featureName) {
+			return switch visibleFeature : ctx.visibleFeatures.get(featureName) {
 				JvmEnumerationLiteral : {
-					feature
+					eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, visibleFeature)
+					visibleFeature
 				}
 				JvmField : {
-					evaluateField(it, feature, ctx)
+					eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, visibleFeature)
+					evaluateField(it, visibleFeature, ctx)
 				}
 			}
 		}
 		val type = findTypeByName(featureName)
 		if (type != null) {
-			return toTypeReference(type,0)
+			typeLiteral = true
+			eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type)
+			return toTypeReference(type, 0)
 		}
 		throw new UnresolvableFeatureException("Couldn't resolve feature "+featureName, it)
 	}
 
 	def dispatch Object internalEvaluate(XMemberFeatureCall it, Context ctx) {
+		val feature = eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false) as EObject
+		if (!feature.eIsProxy) {
+			return switch feature {
+				JvmEnumerationLiteral: feature
+				JvmField: evaluateField(it, feature, ctx)
+				JvmType: toTypeReference(feature, 0)
+			}
+		}
 		val featureName = concreteSyntaxFeatureName
 		try {
 			val receiver = internalEvaluate(memberCallTarget, ctx)
@@ -200,6 +221,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 							if (enumValue == null) {
 								throw new ConstantExpressionEvaluationException("Couldn't find enum value "+featureName+" on enum "+receiver.simpleName, it)
 							}
+							eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, enumValue)
 							return enumValue
 						}
 						JvmGenericType : {
@@ -207,6 +229,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 							if (field == null) {
 								throw new ConstantExpressionEvaluationException("Couldn't find field "+featureName+" on type "+receiver.simpleName, it)
 							}
+							eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, field)
 							return evaluateField(it,field, ctx)
 						}
 					}
@@ -217,6 +240,10 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			val typeName = fullName
 			val type = findTypeByName(typeName)
 			if (type != null) {
+				memberCallTarget.setFeature(type)
+				
+				typeLiteral = true
+				eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type)
 				return toTypeReference(type, 0)
 			} else {
 				throw new UnresolvableFeatureException("Unresolvable type "+typeName, it)
@@ -235,6 +262,22 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 	
 	def dispatch String getFullName(XFeatureCall call) {
 		call.concreteSyntaxFeatureName
+	}
+	
+	def dispatch void setFeature(XExpression call, JvmType type) {
+		throw new ConstantExpressionEvaluationException("The expression '"+call.toText+"' cannot be used as a receiver within a constant expression.")
+	}
+	
+	def dispatch void setFeature(XMemberFeatureCall it, JvmType type) {
+		memberCallTarget.setFeature(type)
+		
+		packageFragment = true
+		eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type)
+	}
+	
+	def dispatch void setFeature(XFeatureCall it, JvmType type) {
+		packageFragment = true
+		eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type)
 	}
 	
 	protected def evaluateField(XAbstractFeatureCall call, JvmField field, Context context) {

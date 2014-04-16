@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.junit.Ignore
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
@@ -90,14 +91,18 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.*
 				import org.eclipse.xtend.lib.macro.declaration.*
 				
-				import static com.google.common.base.Preconditions.*
-				
 				@Active(ConfigurableAnnotationProcessor)
 				annotation ConfigurableAnnotation {
 					BlackOrWhite color
 					BlackOrWhite[] colors
 					Class<?> type
 					Class<?>[] types
+					SomeAnnotation annotation
+					SomeAnnotation[] annotations
+				}
+
+				annotation SomeAnnotation {
+					boolean value
 				}
 				
 				enum BlackOrWhite {
@@ -108,31 +113,80 @@ abstract class AbstractReusableActiveAnnotationTests {
 				
 					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
 						val anno = annotatedClass.annotations.head
+						val someAnnotationType = findTypeGlobally(SomeAnnotation)
 						val enumType = findTypeGlobally('myannotation.BlackOrWhite') as EnumerationTypeDeclaration
 						val white = enumType.findDeclaredValue('WHITE')
 						val black = enumType.findDeclaredValue('BLACK')
 						
 						val existingValue = anno.getValue('color')
-						if (existingValue !=  white)
+						if (existingValue != white)
 							throw new AssertionError("color")
-						anno.setEnumValue('color', black)
-							
-						val existingColorsValue = anno.getValue('colors') as Object[]
-						if (existingColorsValue.get(0) !=  white && existingColorsValue.get(1) != black && existingColorsValue.length != 2)
-							throw new AssertionError("colors")
-							
-						anno.setEnumValue('colors', black, white)
 						
-						val existingType = anno.getValue('type')
+						val annoWithColor = annotatedClass.addAnnotation(newAnnotationReference(anno) [
+							setEnumValue('color', black)
+						])
+						annotatedClass.removeAnnotation(anno)
+						
+						val existingColorsValue = annoWithColor.getValue('colors') as Object[]
+						if (existingColorsValue.get(0) != white && existingColorsValue.get(1) != black && existingColorsValue.length != 2)
+							throw new AssertionError("colors")
+						
+						val annoWithColors = annotatedClass.addAnnotation(newAnnotationReference(annoWithColor) [
+							setEnumValue('colors', black, white)
+						])
+						annotatedClass.removeAnnotation(annoWithColor)
+						
+						val existingType = annoWithColors.getValue('type')
 						if (existingType != string)
 							throw new AssertionError("type")
-						anno.setClassValue('type', annotatedClass.newTypeReference)
-							
-						val existingTypes = anno.getValue('types') as Object[]
-						if (existingTypes.get(0) !=  primitiveInt && existingTypes.get(1) != annotatedClass.newTypeReference && existingTypes.length != 2)
+						
+						val annoWithType = annotatedClass.addAnnotation(newAnnotationReference(annoWithColors) [
+							setClassValue('type', annotatedClass.newTypeReference)
+						])
+						annotatedClass.removeAnnotation(annoWithColors)
+						
+						val existingTypes = annoWithType.getValue('types') as Object[]
+						if (existingTypes.get(0) != primitiveInt && existingTypes.get(1) != annotatedClass.newTypeReference && existingTypes.length != 2)
 							throw new AssertionError("types")
-							
-						anno.setClassValue('types', primitiveBoolean)
+						
+						val annoWithTypes = annotatedClass.addAnnotation(newAnnotationReference(annoWithType) [
+							setClassValue('types', primitiveBoolean)
+						])
+						annotatedClass.removeAnnotation(annoWithType)
+						
+						val annotationReference = annoWithTypes.getAnnotationValue('annotation')
+						if (someAnnotationType != annotationReference.annotationTypeDeclaration)
+							throw new AssertionError("someAnnotationType != annotationReference.annotationTypeDeclaration")
+						
+						val annoWithAnnotation = annotatedClass.addAnnotation(newAnnotationReference(annoWithTypes) [
+							setAnnotationValue('annotation', 
+								newAnnotationReference(someAnnotationType) [
+									setBooleanValue('value', false)
+								]
+							)
+						])
+						annotatedClass.removeAnnotation(annoWithTypes)
+						
+						val annotationReferences = annoWithAnnotation.getAnnotationArrayValue('annotations')
+						if (annotationReferences.size != 2)
+							throw new AssertionError("annotationReferences.size != 2")
+						
+						annotationReferences.forEach [
+							if (someAnnotationType != annotationTypeDeclaration)
+								throw new AssertionError("someAnnotationType != annotationTypeDeclaration")
+						]
+						
+						annotatedClass.addAnnotation(newAnnotationReference(annoWithAnnotation) [
+							setAnnotationValue('annotations', 
+								newAnnotationReference(someAnnotationType) [
+									setBooleanValue('value', false)
+								],
+								newAnnotationReference(someAnnotationType) [
+									setBooleanValue('value', false)
+								]
+							)
+						])
+						annotatedClass.removeAnnotation(annoWithAnnotation)
 					}
 				}
 			''',
@@ -141,7 +195,14 @@ abstract class AbstractReusableActiveAnnotationTests {
 
 				import myannotation.*
 				
-				@ConfigurableAnnotation(color=BlackOrWhite.WHITE, colors=#[BlackOrWhite.WHITE, BlackOrWhite.BLACK], type = String, types=#[Integer, MyClass])
+				@ConfigurableAnnotation(
+					color=BlackOrWhite.WHITE, 
+					colors=#[BlackOrWhite.WHITE, BlackOrWhite.BLACK], 
+					type = String, 
+					types=#[Integer, MyClass],
+					annotation=@SomeAnnotation(true),
+					annotations=#[@SomeAnnotation(true), @SomeAnnotation(true)]
+				)
 				class MyClass {
 				}
 			'''
@@ -163,6 +224,19 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertEquals(1, types.length)
 			assertEquals(typeReferenceProvider.primitiveBoolean, types.get(0))
 			
+			val someAnnotationType = typeLookup.findTypeGlobally('myannotation.SomeAnnotation')
+			val annotationValue = annotation.getAnnotationValue('annotation')
+			assertNotNull(annotationValue)
+			assertEquals(someAnnotationType, annotationValue.annotationTypeDeclaration)
+			assertFalse(annotationValue.getBooleanValue('value'))
+			
+			val annotationsValue = annotation.getAnnotationArrayValue('annotations')
+			assertNotNull(annotationsValue)
+			assertEquals(2, annotationsValue.size)
+			annotationsValue.forEach[
+				assertEquals(someAnnotationType, annotationValue.annotationTypeDeclaration)
+				assertFalse(annotationValue.getBooleanValue('value'))
+			]
 		]
 	}
 	
@@ -219,37 +293,40 @@ abstract class AbstractReusableActiveAnnotationTests {
 				package myannotation
 				
 				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
-				import org.eclipse.xtend.lib.macro.TransformationContext
-				import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
-				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-				import org.eclipse.xtend.lib.macro.declaration.TypeReference
 				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 				
 				@Active(MoveAnnotationValuesProcessor)
 				annotation MoveValues {}
 				
 				class MoveAnnotationValuesProcessor extends AbstractClassProcessor {
-					
+				
 					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
 						val classAnnotation = annotatedClass.annotations.head
-						val fieldAnnotation = annotatedClass.declaredFields.head.annotations.head
 						
-						fieldAnnotation.set('booleanValue', classAnnotation.getValue('booleanValue'))
-						fieldAnnotation.set('intValue', classAnnotation.getValue('intValue'))
-						fieldAnnotation.set('longValue', classAnnotation.getValue('longValue'))
-						fieldAnnotation.set('stringValue', classAnnotation.getValue('stringValue'))
-						fieldAnnotation.set('booleanArrayValue', classAnnotation.getValue('booleanArrayValue'))
-						fieldAnnotation.set('intArrayValue', classAnnotation.getValue('intArrayValue'))
-						fieldAnnotation.set('longArrayValue', classAnnotation.getValue('longArrayValue'))
-						fieldAnnotation.set('stringArrayValue', classAnnotation.getValue('stringArrayValue'))
-						fieldAnnotation.set('typeValue', classAnnotation.getValue('typeValue'))
-						fieldAnnotation.set('typeArrayValue', classAnnotation.getValue('typeArrayValue'))
-				  		fieldAnnotation.set('annotation2Value', classAnnotation.getValue('annotation2Value'))
-				  		fieldAnnotation.set('annotation2ArrayValue', classAnnotation.getExpression('annotation2ArrayValue'))
-						fieldAnnotation.set('enumValue', classAnnotation.getValue('enumValue'))
-						fieldAnnotation.set('enumArrayValue', classAnnotation.getValue('enumArrayValue'))
+						val field = annotatedClass.declaredFields.head
+						val fieldAnnotation = field.annotations.head
+						field.removeAnnotation(fieldAnnotation)
+						
+						field.addAnnotation(fieldAnnotation.annotationTypeDeclaration.qualifiedName.newAnnotationReference [
+							set('booleanValue', classAnnotation.getValue('booleanValue'))
+							set('intValue', classAnnotation.getValue('intValue'))
+							set('longValue', classAnnotation.getValue('longValue'))
+							set('stringValue', classAnnotation.getValue('stringValue'))
+							set('booleanArrayValue', classAnnotation.getValue('booleanArrayValue'))
+							set('intArrayValue', classAnnotation.getValue('intArrayValue'))
+							set('longArrayValue', classAnnotation.getValue('longArrayValue'))
+							set('stringArrayValue', classAnnotation.getValue('stringArrayValue'))
+							set('typeValue', classAnnotation.getValue('typeValue'))
+							set('typeArrayValue', classAnnotation.getValue('typeArrayValue'))
+				  			set('annotation2Value', classAnnotation.getValue('annotation2Value'))
+				  			set('annotation2ArrayValue', classAnnotation.getValue('annotation2ArrayValue'))
+							set('enumValue', classAnnotation.getValue('enumValue'))
+							set('enumArrayValue', classAnnotation.getValue('enumArrayValue'))
+						])
 					}
-					
+				
 				}
 			''',
 			'myusercode/UserCode.xtend' -> '''
@@ -311,17 +388,17 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 	
+	@Ignore("Setting annotation values of type Expression is not possible")
 	@Test def void testAnnotationValueSetting_AsExpression() {
 		assertProcessing(
 			'myannotation/MoveValues.xtend' -> '''
 				package myannotation
 				
 				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
-				import org.eclipse.xtend.lib.macro.TransformationContext
-				import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
-				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-				import org.eclipse.xtend.lib.macro.declaration.TypeReference
 				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+
 				
 				@Active(MoveAnnotationValuesProcessor)
 				annotation MoveValues {}
@@ -330,22 +407,27 @@ abstract class AbstractReusableActiveAnnotationTests {
 					
 					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
 						val classAnnotation = annotatedClass.annotations.head
-						val fieldAnnotation = annotatedClass.declaredFields.head.annotations.head
 						
-						fieldAnnotation.set('booleanValue', classAnnotation.getExpression('booleanValue'))
-						fieldAnnotation.set('intValue', classAnnotation.getExpression('intValue'))
-						fieldAnnotation.set('longValue', classAnnotation.getExpression('longValue'))
-						fieldAnnotation.set('stringValue', classAnnotation.getExpression('stringValue'))
-						fieldAnnotation.set('booleanArrayValue', classAnnotation.getExpression('booleanArrayValue'))
-						fieldAnnotation.set('intArrayValue', classAnnotation.getExpression('intArrayValue'))
-						fieldAnnotation.set('longArrayValue', classAnnotation.getExpression('longArrayValue'))
-						fieldAnnotation.set('stringArrayValue', classAnnotation.getExpression('stringArrayValue'))
-						fieldAnnotation.set('typeValue', classAnnotation.getExpression('typeValue'))
-						fieldAnnotation.set('typeArrayValue', classAnnotation.getExpression('typeArrayValue'))
-				  		fieldAnnotation.set('annotation2Value', classAnnotation.getExpression('annotation2Value'))
-				  		fieldAnnotation.set('annotation2ArrayValue', classAnnotation.getExpression('annotation2ArrayValue'))
-						fieldAnnotation.set('enumValue', classAnnotation.getExpression('enumValue'))
-						fieldAnnotation.set('enumArrayValue', classAnnotation.getExpression('enumArrayValue'))
+						val field = annotatedClass.declaredFields.head
+						val fieldAnnotation = field.annotations.head
+						field.removeAnnotation(fieldAnnotation)
+						
+						field.addAnnotation(fieldAnnotation.annotationTypeDeclaration.qualifiedName.newAnnotationReference [
+							set('booleanValue', classAnnotation.getExpression('booleanValue'))
+							set('intValue', classAnnotation.getExpression('intValue'))
+							set('longValue', classAnnotation.getExpression('longValue'))
+							set('stringValue', classAnnotation.getExpression('stringValue'))
+							set('booleanArrayValue', classAnnotation.getExpression('booleanArrayValue'))
+							set('intArrayValue', classAnnotation.getExpression('intArrayValue'))
+							set('longArrayValue', classAnnotation.getExpression('longArrayValue'))
+							set('stringArrayValue', classAnnotation.getExpression('stringArrayValue'))
+							set('typeValue', classAnnotation.getExpression('typeValue'))
+							set('typeArrayValue', classAnnotation.getExpression('typeArrayValue'))
+				  			set('annotation2Value', classAnnotation.getExpression('annotation2Value'))
+				  			set('annotation2ArrayValue', classAnnotation.getExpression('annotation2ArrayValue'))
+							set('enumValue', classAnnotation.getExpression('enumValue'))
+							set('enumArrayValue', classAnnotation.getExpression('enumArrayValue'))
+						])
 					}
 					
 				}
@@ -471,11 +553,11 @@ abstract class AbstractReusableActiveAnnotationTests {
 							enumeration.checkState
 							for (value : enumeration.declaredValues) {
 								checkState(value.annotations.size == 0, value.annotations.size != 0)
-								value.addAnnotation(Deprecated.newTypeReference.type)
+								value.addAnnotation(Deprecated.newAnnotationReference)
 								checkState(value.annotations.size == 1, value.annotations.size != 1)
 							}
 							enumeration.addValue("D") [
-								addAnnotation(Deprecated.newTypeReference.type)
+								addAnnotation(Deprecated.newAnnotationReference)
 							]
 						}
 					}
@@ -729,7 +811,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 				class RemoveAnnotationProcessor extends AbstractClassProcessor {
 				
 					override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
-						clazz.findAnnotation(RemoveAnnotation.newTypeReference.type).remove
+						val annotationReference = clazz.findAnnotation(RemoveAnnotation.newTypeReference.type)
+						clazz.removeAnnotation(annotationReference)
 					}
 				
 				}
@@ -1288,14 +1371,15 @@ abstract class AbstractReusableActiveAnnotationTests {
 					
 					override doTransform(List<? extends MutableAnnotationTarget> annotationTargets, extension TransformationContext context) {
 						annotationTargets.forEach [
-							addAnnotation(typeof(MyAnnotation).findTypeGlobally) => [
-								set('value', #['foo','bar','baz'] as String[])
-								set('singleValue', 'foo')
-								set('booleans', #[true, false, true] as boolean[])
-								set('singleBoolean', true)
-								set('numbers', #[1,2,3] as int[])
-								set('singleNumber', 1)
-							]
+							addAnnotation(
+								MyAnnotation.findTypeGlobally.newAnnotationReference [
+									set('value', #['foo', 'bar', 'baz'] as String[])
+									set('singleValue', 'foo')
+									set('booleans', #[true, false, true] as boolean[])
+									set('singleBoolean', true)
+									set('numbers', #[1, 2, 3] as int[])
+									set('singleNumber', 1)
+								])
 						]
 					}
 					

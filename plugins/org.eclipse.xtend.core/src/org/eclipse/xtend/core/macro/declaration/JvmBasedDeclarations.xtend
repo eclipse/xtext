@@ -25,7 +25,6 @@ import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeElementDeclaration
@@ -41,6 +40,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
@@ -69,7 +69,7 @@ import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 
 import static org.eclipse.xtend.core.macro.ConditionUtils.*
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> {
 	
@@ -101,16 +101,22 @@ abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends Jv
 		ImmutableList.copyOf(delegate.annotations.map[compilationUnit.toAnnotationReference(it)])
 	}
 	
-	def MutableAnnotationReference addAnnotation(Type annotationType) {
-		switch annotationType { 
-			JvmAnnotationTypeDeclarationImpl : {
-				val result = TypesFactory.eINSTANCE.createJvmAnnotationReference
-				result.setAnnotation(annotationType.delegate)
-				this.delegate.annotations.add(result)
-				return compilationUnit.toAnnotationReference(result) as MutableAnnotationReference
-			}
-			default : throw new IllegalArgumentException(""+annotationType+" is not an annotation type.")
+	def addAnnotation(AnnotationReference annotationReference) {
+		Preconditions.checkArgument(annotationReference != null, "annotationReference cannot be null")
+		if (annotationReference instanceof JvmAnnotationReferenceImpl) {
+			val jvmAnnotationReference = annotationReference.delegate.cloneWithProxies
+			this.delegate.annotations += jvmAnnotationReference
+			compilationUnit.toAnnotationReference(jvmAnnotationReference)
+		} else {
+			throw new IllegalArgumentException('''«annotationReference» is not annotation reference''')
 		}
+	}
+	
+	def boolean removeAnnotation(AnnotationReference annotationReference) {
+		if (annotationReference instanceof JvmAnnotationReferenceImpl) {
+			return this.delegate.annotations.remove(annotationReference.delegate)
+		}
+		return false
 	}
 	
 	def findAnnotation(Type annotationType) {
@@ -299,14 +305,6 @@ class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationImpl imp
 		super.declaredInterfaces as Iterable<? extends MutableInterfaceDeclaration>
 	}
 	
-	override MutableAnnotationReference findAnnotation(Type annotationType) {
-		super.findAnnotation(annotationType) as MutableAnnotationReference
-	}
-	
-	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
-		super.annotations as Iterable<? extends MutableAnnotationReference>
-	}
-	
 	override MutableTypeDeclaration getDeclaringType() {
 		super.declaringType as MutableTypeDeclaration
 	}
@@ -412,14 +410,6 @@ class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDeclarati
 		super.declaredInterfaces as Iterable<? extends MutableInterfaceDeclaration>
 	}
 	
-	override MutableAnnotationReference findAnnotation(Type annotationType) {
-		super.findAnnotation(annotationType) as MutableAnnotationReference
-	}
-	
-	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
-		super.annotations as Iterable<? extends MutableAnnotationReference>
-	}
-	
 	override MutableTypeDeclaration getDeclaringType() {
 		super.declaringType as MutableTypeDeclaration
 	}
@@ -508,14 +498,6 @@ class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationTypeDeclara
 		super.declaredInterfaces as Iterable<? extends MutableInterfaceDeclaration>
 	}
 	
-	override MutableAnnotationReference findAnnotation(Type annotationType) {
-		super.findAnnotation(annotationType) as MutableAnnotationReference
-	}
-	
-	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
-		super.annotations as Iterable<? extends MutableAnnotationReference>
-	}
-	
 	override MutableTypeDeclaration getDeclaringType() {
 		super.declaringType as MutableTypeDeclaration
 	}
@@ -590,14 +572,6 @@ class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements 
 	
 	override Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
 		super.declaredInterfaces as Iterable<? extends MutableInterfaceDeclaration>
-	}
-	
-	override MutableAnnotationReference findAnnotation(Type annotationType) {
-		super.findAnnotation(annotationType) as MutableAnnotationReference
-	}
-	
-	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
-		super.annotations as Iterable<? extends MutableAnnotationReference>
 	}
 	
 	override MutableTypeDeclaration getDeclaringType() {
@@ -812,14 +786,6 @@ class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationImpl imp
 		super.declaringExecutable as MutableExecutableDeclaration
 	}
 	
-	override MutableAnnotationReference findAnnotation(Type annotationType) {
-		super.findAnnotation(annotationType) as MutableAnnotationReference
-	}
-	
-	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
-		super.annotations as Iterable<? extends MutableAnnotationReference>
-	}
-	
 	override setSimpleName(String name) {
 		checkJavaIdentifier(name, "name");
 		delegate.name = name
@@ -847,14 +813,6 @@ class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implement
 	
 	override Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters() {
 		super.typeParameters as Iterable<? extends MutableTypeParameterDeclaration>
-	}
-	
-	override MutableAnnotationReference findAnnotation(Type annotationType) {
-		super.findAnnotation(annotationType) as MutableAnnotationReference
-	}
-	
-	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
-		super.annotations as Iterable<? extends MutableAnnotationReference>
 	}
 	
 	override MutableTypeDeclaration getDeclaringType() {
@@ -950,14 +908,6 @@ class MutableJvmConstructorDeclarationImpl extends JvmConstructorDeclarationImpl
 		super.typeParameters as Iterable<? extends MutableTypeParameterDeclaration>
 	}
 	
-	override MutableAnnotationReference findAnnotation(Type annotationType) {
-		super.findAnnotation(annotationType) as MutableAnnotationReference
-	}
-	
-	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
-		super.annotations as Iterable<? extends MutableAnnotationReference> 
-	}
-	
 	override MutableTypeDeclaration getDeclaringType() {
 		super.declaringType as MutableTypeDeclaration
 	}
@@ -973,14 +923,6 @@ class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmCons
 }
 
 class MutableJvmEnumerationValueDeclarationImpl extends JvmEnumerationValueDeclarationImpl implements MutableEnumerationValueDeclaration {
-	
-	override MutableAnnotationReference findAnnotation(Type annotationType) {
-		super.findAnnotation(annotationType) as MutableAnnotationReference
-	}
-	
-	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
-		super.annotations as Iterable<? extends MutableAnnotationReference> 
-	}
 	
 	override MutableEnumerationTypeDeclaration getDeclaringType() {
 		super.getDeclaringType() as MutableEnumerationTypeDeclaration
@@ -1001,14 +943,6 @@ class JvmEnumerationValueDeclarationImpl extends JvmMemberDeclarationImpl<JvmEnu
 }
 
 class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements MutableFieldDeclaration {
-	
-	override MutableAnnotationReference findAnnotation(Type annotationType) {
-		super.findAnnotation(annotationType) as MutableAnnotationReference
-	}
-	
-	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
-		super.annotations as Iterable<? extends MutableAnnotationReference> 
-	}	
 	
 	override MutableTypeDeclaration getDeclaringType() {
 		super.declaringType as MutableTypeDeclaration
@@ -1089,14 +1023,6 @@ class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclaration
 		super.typeParameterDeclarator as MutableTypeParameterDeclarator
 	}
 	
-	override MutableAnnotationReference findAnnotation(Type annotationType) {
-		super.findAnnotation(annotationType) as MutableAnnotationReference
-	}
-	
-	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
-		super.annotations as Iterable<? extends MutableAnnotationReference> 
-	}
-	
 	override setSimpleName(String name) {
 		checkJavaIdentifier(name, "name");
 		delegate.name = name
@@ -1110,8 +1036,12 @@ class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclaration
 			throw new IllegalStateException("Couldn't remove "+delegate.toString)
 	}
 	
-	override addAnnotation(Type annotationType) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	override addAnnotation(AnnotationReference annotationReference) {
+		throw new UnsupportedOperationException("It is not possible to add an annotation.")
+	}
+	
+	override removeAnnotation(AnnotationReference annotationReference) {
+		throw new UnsupportedOperationException("It is not possible to remove an annotation.")
 	}
 	
 	override setUpperBounds(Iterable<? extends TypeReference> upperBounds) {
@@ -1149,14 +1079,6 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 }
 
 class MutableJvmAnnotationTypeElementDeclarationImpl extends JvmAnnotationTypeElementDeclarationImpl implements MutableAnnotationTypeElementDeclaration {
-	
-	override MutableAnnotationReference findAnnotation(Type annotationType) {
-		super.findAnnotation(annotationType) as MutableAnnotationReference
-	}
-	
-	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
-		super.annotations as Iterable<? extends MutableAnnotationReference> 
-	}
 	
 	override MutableTypeDeclaration getDeclaringType() {
 		super.declaringType as MutableTypeDeclaration
