@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.common.types.access.TypeResource
 import org.eclipse.xtext.xbase.XSwitchExpression
+import org.eclipse.emf.ecore.EObject
 
 /**
  * Checks whether a given XExpression is a a constant expression.
@@ -93,6 +94,9 @@ class ConstantExpressionValidator {
 			XSwitchExpression: {
 				return feature.^switch.constantExpression;
 			}
+			EObject case feature.eIsProxy: {
+				throw new NotResolvedFeatureException
+			}
 		}
 		return false
 	}
@@ -111,5 +115,7 @@ class ConstantExpressionValidator {
 			default: constant
 		}
 	}
-
 }
+
+class NotResolvedFeatureException extends RuntimeException {
+}	
