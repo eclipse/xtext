@@ -26,6 +26,12 @@ public interface MutableTypeParameterDeclaration extends MutableDeclaration, Typ
 	 * This operation is not supported.
 	 * @exception UnsupportedOperationException always 
 	 */
-	public MutableAnnotationReference addAnnotation(Type annotationType);
+	public AnnotationReference addAnnotation(AnnotationReference annotationReference);
+	
+	/**
+	 * This operation is not supported.
+	 * @exception UnsupportedOperationException always 
+	 */
+	public boolean removeAnnotation(AnnotationReference annotationReference);
 
 }

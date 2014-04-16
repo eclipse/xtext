@@ -1,25 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+package org.eclipse.xtend.lib.macro.services;
 
-package org.eclipse.xtend.lib.macro.declaration;
-
-import org.eclipse.xtend.lib.macro.expression.Expression;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 
 import com.google.common.annotations.Beta;
 
 /**
- * Represents an annotation reference with its values.
+ * Services provided during an annotation reference initialization.  
  * 
- * @author Sven Efftinge
+ * @author Anton Kosyakov
+ * @since 2.6
  */
 @Beta
-public interface MutableAnnotationReference extends AnnotationReference,
-		MutableElement {
+public interface AnnotationReferenceBuildContext {
 
 	/**
 	 * Sets the annotation property of the given name
@@ -34,14 +28,10 @@ public interface MutableAnnotationReference extends AnnotationReference,
 	 * <li>Double or double[]</li>
 	 * <li>Boolean or boolean[]</li>
 	 * <li>TypeReference or TypeReference[] - for elements of type Class<?></li>
-	 * <li>AnnotationReference or AnnotationReference[] - for elements of an
-	 * annotation type</li>
-	 * <li>EnumerationValueDeclaration or EnumerationValueDeclaration[] - for
-	 * elements of an enum type</li>
-	 * <li>Expression - for any element type that matches the given expression's
-	 * type</li>
-	 * <li>null - will {@link #remove()} any existing value for the given
-	 * element name</li>
+	 * <li>AnnotationReference or AnnotationReference[] - for elements of an annotation type</li>
+	 * <li>EnumerationValueDeclaration or EnumerationValueDeclaration[] - for elements of an enum type</li>
+	 * <li>Expression - for any element type that matches the given expression's type</li>
+	 * <li>null - will remove any existing value for the given element name</li>
 	 * </ul>
 	 * 
 	 * @param name a valid name of a property of the annotation type.
@@ -175,17 +165,6 @@ public interface MutableAnnotationReference extends AnnotationReference,
 	void setEnumValue(String name, EnumerationValueDeclaration... value);
 
 	/**
-	 * Sets the given expression for the given annotation element name.
-	 * 
-	 * @param name a valid name of a property of the annotation type.
-	 * @param value a non-null value.
-	 * @throws IllegalArgumentException
-	 *             if the name does not point to a valid member of the
-	 *             referenced annotation type.
-	 */
-	void setExpression(String name, Expression value);
-
-	/**
 	 * Sets the given value for the given annotation element name.
 	 * 
 	 * @param name a valid name of a property of the annotation type.
@@ -195,17 +174,5 @@ public interface MutableAnnotationReference extends AnnotationReference,
 	 *             referenced annotation type.
 	 */
 	void setAnnotationValue(String name, AnnotationReference... value);
-
-	/**
-	 * Removes the annotation property with the given name (resets to default if
-	 * existent).
-	 * 
-	 * @param name a valid name of a property of the annotation type.
-	 * @return whether an annotation with the given name existed and was
-	 *         removed.
-	 * @throws IllegalArgumentException
-	 *             if the name does not point to a valid member of the
-	 *             referenced annotation type.
-	 */
-	boolean remove(String name);
+	
 }
