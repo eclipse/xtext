@@ -16,13 +16,22 @@ import com.google.common.annotations.Beta;
 public interface MutableAnnotationTarget extends MutableNamedElement, AnnotationTarget {
 
 	/**
-	 * @param annotationType
+	 * Annotate this element with the given annotation reference.
+	 * 
+	 * @param annotationReference the annotation reference
 	 * @return a new annotation reference
-	 * @exception IllegalArgumentException if <code>annotationType</code> is not an annotation type
+	 * @throws IllegalArgumentException if the given annotation reference is <code>null</code>
+	 * @since 2.6
 	 */
-	MutableAnnotationReference addAnnotation(Type annotationType);
+	AnnotationReference addAnnotation(AnnotationReference annotationReference);
 	
-	Iterable<? extends MutableAnnotationReference> getAnnotations();
-	
-	MutableAnnotationReference findAnnotation(Type annotationType);
+	/**
+	 * Remove the given annotation reference from this element.
+	 * 
+	 * @param annotationReference the annotation reference
+	 * @return <code>true</code> if this element contained the specified annotation
+	 * @since 2.6
+	 */
+	boolean removeAnnotation(AnnotationReference annotationReference);
+
 }

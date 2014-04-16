@@ -15,11 +15,9 @@ import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeParameterDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -34,16 +32,6 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
   public MutableTypeParameterDeclarator getTypeParameterDeclarator() {
     TypeParameterDeclarator _typeParameterDeclarator = super.getTypeParameterDeclarator();
     return ((MutableTypeParameterDeclarator) _typeParameterDeclarator);
-  }
-  
-  public MutableAnnotationReference findAnnotation(final Type annotationType) {
-    AnnotationReference _findAnnotation = super.findAnnotation(annotationType);
-    return ((MutableAnnotationReference) _findAnnotation);
-  }
-  
-  public Iterable<? extends MutableAnnotationReference> getAnnotations() {
-    Iterable<? extends AnnotationReference> _annotations = super.getAnnotations();
-    return ((Iterable<? extends MutableAnnotationReference>) _annotations);
   }
   
   public void setSimpleName(final String name) {
@@ -72,8 +60,12 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
     }
   }
   
-  public MutableAnnotationReference addAnnotation(final Type annotationType) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  public AnnotationReference addAnnotation(final AnnotationReference annotationReference) {
+    throw new UnsupportedOperationException("It is not possible to add an annotation.");
+  }
+  
+  public boolean removeAnnotation(final AnnotationReference annotationReference) {
+    throw new UnsupportedOperationException("It is not possible to remove an annotation.");
   }
   
   public void setUpperBounds(final Iterable<? extends TypeReference> upperBounds) {

@@ -12,12 +12,9 @@ import com.google.common.base.Preconditions;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmFieldDeclarationImpl;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
@@ -29,16 +26,6 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 
 @SuppressWarnings("all")
 public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements MutableFieldDeclaration {
-  public MutableAnnotationReference findAnnotation(final Type annotationType) {
-    AnnotationReference _findAnnotation = super.findAnnotation(annotationType);
-    return ((MutableAnnotationReference) _findAnnotation);
-  }
-  
-  public Iterable<? extends MutableAnnotationReference> getAnnotations() {
-    Iterable<? extends AnnotationReference> _annotations = super.getAnnotations();
-    return ((Iterable<? extends MutableAnnotationReference>) _annotations);
-  }
-  
   public MutableTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();
     return ((MutableTypeDeclaration) _declaringType);

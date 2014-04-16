@@ -6,12 +6,12 @@ import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -84,8 +84,8 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
           public void apply(final MutableMethodDeclaration it) {
             TypeReference _primitiveInt = context.getPrimitiveInt();
             it.setReturnType(_primitiveInt);
-            Type _findTypeGlobally = context.findTypeGlobally(Override.class);
-            it.addAnnotation(_findTypeGlobally);
+            AnnotationReference _newAnnotationReference = context.newAnnotationReference(Override.class);
+            it.addAnnotation(_newAnnotationReference);
             final CompilationStrategy _function = new CompilationStrategy() {
               public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();

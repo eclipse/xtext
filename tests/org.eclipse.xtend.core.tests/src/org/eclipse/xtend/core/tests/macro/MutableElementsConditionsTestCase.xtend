@@ -432,52 +432,55 @@ class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobalsPartic
 				annotatedTargetElement.extendedInterfaces = #[null]
 			]
 			annotatedTargetElement.extendedInterfaces = emptyList
-			val annotationReference = annotatedTargetElement.addAnnotation(Deprecated.newTypeReference.type)
+			val annotationReference = annotatedTargetElement.addAnnotation(Deprecated.newAnnotationReference [
+					assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+					set(null, null)
+				]
+				assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+					set(null, "foo")
+				]
+				assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+					// TODO remove workaround (cast) below
+					set(null, { val String[] array = #["foo"]; array })
+				]
+				assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+					set(null, true)
+				]
+				assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+					set(null, #[true] as boolean[])
+				]
+				assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+					set(null, 0)
+				]
+				assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
+					set(null, #[0] as int[])
+				]
+				assertThrowable(IllegalArgumentException, "The annotation property 'doesNotExist' is not declared on the annotation type 'java.lang.Deprecated'.") [ |
+					set('doesNotExist', { val String[] array = #["foo"]; array })
+				]
+			])
+			annotatedTargetElement.removeAnnotation(annotationReference)
 			
-			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
-				annotationReference.set(null, null)
-			]
-			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
-				annotationReference.set(null, "foo")
-			]
-			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
-				// TODO remove workaround (cast) below
-				annotationReference.set(null, { val String[] array = #["foo"]; array })
-			]
-			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
-				annotationReference.set(null, true)
-			]
-			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
-				annotationReference.set(null, #[true] as boolean[])
-			]
-			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
-				annotationReference.set(null, 0)
-			]
-			assertThrowable(IllegalArgumentException, "name has to be a valid java identifier") [ |
-				annotationReference.set(null, #[0] as int[])
-			]
-			assertThrowable(IllegalArgumentException, "The annotation property 'doesNotExist' is not declared on the annotation type 'java.lang.Deprecated'.") [ |
-				annotationReference.set('doesNotExist', { val String[] array = #["foo"]; array })
-			]
-			annotationReference.remove
-			val otherAnnotationReference = annotatedTargetElement.addAnnotation(SuppressWarnings.newTypeReference.type)
-			otherAnnotationReference.set('value', { val String[] array = #["foo"]; array })
-			assertThrowable(IllegalArgumentException, 'int[] is not applicable at this location. Expected java.lang.String[]') [|
-				otherAnnotationReference.set('value', { val int[] array = #[1]; array })
-			]
-			otherAnnotationReference.remove
+			val otherAnnotationReference = annotatedTargetElement.addAnnotation(SuppressWarnings.newAnnotationReference [
+				set('value', { val String[] array = #["foo"]; array })
+				assertThrowable(IllegalArgumentException, 'int[] is not applicable at this location. Expected java.lang.String[]') [|
+					set('value', { val int[] array = #[1]; array })
+				]
+			])
+			annotatedTargetElement.removeAnnotation(otherAnnotationReference)
 			
-			val composedChecksReference = annotatedTargetElement.addAnnotation(ComposedChecks.newTypeReference.type)
-			composedChecksReference.set('validators', <TypeReference>newArrayOfSize(0))
-			// concrete class type is intentionally not checked since the hierarchy may still be incomplete
-			composedChecksReference.set('validators', String.newTypeReference) 
-			assertThrowable(IllegalArgumentException, 'java.lang.String[] is not applicable at this location. Expected org.eclipse.xtend.lib.macro.declaration.TypeReference[]') [|
-				composedChecksReference.set('validators', <String>newArrayOfSize(0))
-			]
-			assertThrowable(IllegalArgumentException, 'Cannot set annotation values of type java.lang.Object[]') [|
-				composedChecksReference.set('validators', <Object>newArrayOfSize(0))
-			]
-			composedChecksReference.remove
+			val composedChecksReference = annotatedTargetElement.addAnnotation(ComposedChecks.newAnnotationReference [
+				set('validators', <TypeReference>newArrayOfSize(0))
+				// concrete class type is intentionally not checked since the hierarchy may still be incomplete
+				set('validators', String.newTypeReference) 
+				assertThrowable(IllegalArgumentException, 'java.lang.String[] is not applicable at this location. Expected org.eclipse.xtend.lib.macro.declaration.TypeReference[]') [|
+					set('validators', <String>newArrayOfSize(0))
+				]
+				assertThrowable(IllegalArgumentException, 'Cannot set annotation values of type java.lang.Object[]') [|
+					set('validators', <Object>newArrayOfSize(0))
+				]
+			])
+			annotatedTargetElement.removeAnnotation(composedChecksReference)
 		}
 	}
 

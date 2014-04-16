@@ -9,6 +9,8 @@ package org.eclipse.xtend.core.macro;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -19,6 +21,20 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class ConditionUtils {
+  public static void notRemoved(final EObject object, final String name) {
+    boolean _notEquals = (!Objects.equal(object, null));
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(name, "");
+    _builder.append(" cannot be null");
+    Preconditions.checkArgument(_notEquals, _builder);
+    Resource _eResource = object.eResource();
+    boolean _notEquals_1 = (!Objects.equal(_eResource, null));
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append(name, "");
+    _builder_1.append(" cannot be removed");
+    Preconditions.checkArgument(_notEquals_1, _builder_1);
+  }
+  
   public static void checkInferredTypeReferences(final String typeName, final TypeReference... types) {
     for (final TypeReference type : types) {
       boolean _and = false;

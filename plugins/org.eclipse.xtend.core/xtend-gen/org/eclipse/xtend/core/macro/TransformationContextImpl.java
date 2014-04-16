@@ -23,6 +23,7 @@ import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.TransformationContext;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
@@ -35,11 +36,14 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtend.lib.macro.services.AnnotationReferenceBuildContext;
+import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class TransformationContextImpl implements TransformationContext {
@@ -362,5 +366,53 @@ public class TransformationContextImpl implements TransformationContext {
     CompilationUnitImpl _unit = this.getUnit();
     MutableFileSystemSupport _fileSystemSupport = _unit.getFileSystemSupport();
     return _fileSystemSupport.toURI(path);
+  }
+  
+  public AnnotationReference newAnnotationReference(final String annotationTypeName) {
+    CompilationUnitImpl _unit = this.getUnit();
+    AnnotationReferenceProvider _annotationReferenceProvider = _unit.getAnnotationReferenceProvider();
+    return _annotationReferenceProvider.newAnnotationReference(annotationTypeName);
+  }
+  
+  public AnnotationReference newAnnotationReference(final Type annotationTypeDelcaration) {
+    CompilationUnitImpl _unit = this.getUnit();
+    AnnotationReferenceProvider _annotationReferenceProvider = _unit.getAnnotationReferenceProvider();
+    return _annotationReferenceProvider.newAnnotationReference(annotationTypeDelcaration);
+  }
+  
+  public AnnotationReference newAnnotationReference(final Class<?> annotationClass) {
+    CompilationUnitImpl _unit = this.getUnit();
+    AnnotationReferenceProvider _annotationReferenceProvider = _unit.getAnnotationReferenceProvider();
+    return _annotationReferenceProvider.newAnnotationReference(annotationClass);
+  }
+  
+  public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference) {
+    CompilationUnitImpl _unit = this.getUnit();
+    AnnotationReferenceProvider _annotationReferenceProvider = _unit.getAnnotationReferenceProvider();
+    return _annotationReferenceProvider.newAnnotationReference(annotationReference);
+  }
+  
+  public AnnotationReference newAnnotationReference(final String annotationTypeName, final Procedure1<AnnotationReferenceBuildContext> initializer) {
+    CompilationUnitImpl _unit = this.getUnit();
+    AnnotationReferenceProvider _annotationReferenceProvider = _unit.getAnnotationReferenceProvider();
+    return _annotationReferenceProvider.newAnnotationReference(annotationTypeName, initializer);
+  }
+  
+  public AnnotationReference newAnnotationReference(final Type annotationTypeDelcaration, final Procedure1<AnnotationReferenceBuildContext> initializer) {
+    CompilationUnitImpl _unit = this.getUnit();
+    AnnotationReferenceProvider _annotationReferenceProvider = _unit.getAnnotationReferenceProvider();
+    return _annotationReferenceProvider.newAnnotationReference(annotationTypeDelcaration, initializer);
+  }
+  
+  public AnnotationReference newAnnotationReference(final Class<?> annotationClass, final Procedure1<AnnotationReferenceBuildContext> initializer) {
+    CompilationUnitImpl _unit = this.getUnit();
+    AnnotationReferenceProvider _annotationReferenceProvider = _unit.getAnnotationReferenceProvider();
+    return _annotationReferenceProvider.newAnnotationReference(annotationClass, initializer);
+  }
+  
+  public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference, final Procedure1<AnnotationReferenceBuildContext> initializer) {
+    CompilationUnitImpl _unit = this.getUnit();
+    AnnotationReferenceProvider _annotationReferenceProvider = _unit.getAnnotationReferenceProvider();
+    return _annotationReferenceProvider.newAnnotationReference(annotationReference, initializer);
   }
 }

@@ -19,6 +19,7 @@ import com.google.common.primitives.Longs;
 import com.google.common.primitives.Shorts;
 import com.google.inject.Inject;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.CompilationContextImpl;
 import org.eclipse.xtend.core.macro.ConstantExpressionsInterpreter;
+import org.eclipse.xtend.core.macro.declaration.AnnotationReferenceBuildContextImpl;
+import org.eclipse.xtend.core.macro.declaration.AnnotationReferenceProviderImpl;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.InferredTypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
@@ -107,6 +110,7 @@ import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -146,6 +150,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
@@ -154,7 +159,9 @@ import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
@@ -232,6 +239,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   @Inject
+  private TypesFactory typesFactory;
+  
+  @Inject
   private CompilerPhases compilerPhases;
   
   private XtendFile _xtendFile;
@@ -280,6 +290,12 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public TypeReferenceProvider getTypeReferenceProvider() {
     return this._typeReferenceProvider;
+  }
+  
+  private final AnnotationReferenceProvider _annotationReferenceProvider = new AnnotationReferenceProviderImpl(this);
+  
+  public AnnotationReferenceProvider getAnnotationReferenceProvider() {
+    return this._annotationReferenceProvider;
   }
   
   private final TypeLookupImpl _typeLookup = new TypeLookupImpl(this);
@@ -773,7 +789,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this.<JvmMember, MemberDeclaration>getOrCreate(delegate, _function);
   }
   
-  public boolean isBelongedToCompilationUnit(final JvmIdentifiableElement element) {
+  public boolean isBelongedToCompilationUnit(final EObject element) {
     Resource _eResource = element.eResource();
     XtendFile _xtendFile = this.getXtendFile();
     Resource _eResource_1 = _xtendFile.eResource();
@@ -1549,14 +1565,14 @@ public class CompilationUnitImpl implements CompilationUnit {
       int _length_1 = ((Object[])object).length;
       ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _length_1, true);
       for (final Integer i : _doubleDotLessThan) {
-        Object _get = ((Object[])object)[(i).intValue()];
-        Object _translate = this.translate(_get);
-        result[(i).intValue()] = ((AnnotationReference) _translate);
+        XAnnotation _get = ((XAnnotation[])object)[(i).intValue()];
+        AnnotationReference _translateAnnotation = this.translateAnnotation(_get);
+        result[(i).intValue()] = _translateAnnotation;
       }
       return result;
     }
     if ((object instanceof XAnnotation)) {
-      return this.toAnnotationReference(((XAnnotation)object));
+      return this.translateAnnotation(((XAnnotation)object));
     }
     if ((object instanceof JvmTypeReference[])) {
       int _length_2 = ((Object[])object).length;
@@ -1565,8 +1581,8 @@ public class CompilationUnitImpl implements CompilationUnit {
       ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, _length_3, true);
       for (final Integer i_1 : _doubleDotLessThan_1) {
         Object _get_1 = ((Object[])object)[(i_1).intValue()];
-        Object _translate_1 = this.translate(_get_1);
-        result_1[(i_1).intValue()] = ((TypeReference) _translate_1);
+        Object _translate = this.translate(_get_1);
+        result_1[(i_1).intValue()] = ((TypeReference) _translate);
       }
       return result_1;
     }
@@ -1580,8 +1596,8 @@ public class CompilationUnitImpl implements CompilationUnit {
       ExclusiveRange _doubleDotLessThan_2 = new ExclusiveRange(0, _length_5, true);
       for (final Integer i_2 : _doubleDotLessThan_2) {
         Object _get_2 = ((Object[])object)[(i_2).intValue()];
-        Object _translate_2 = this.translate(_get_2);
-        result_2[(i_2).intValue()] = ((EnumerationValueDeclaration) _translate_2);
+        Object _translate_1 = this.translate(_get_2);
+        result_2[(i_2).intValue()] = ((EnumerationValueDeclaration) _translate_1);
       }
       return result_2;
     }
@@ -1589,5 +1605,79 @@ public class CompilationUnitImpl implements CompilationUnit {
       return this.toMemberDeclaration(((JvmMember)object));
     }
     return object;
+  }
+  
+  protected AnnotationReference translateAnnotation(final XAnnotation annotation) {
+    AnnotationReference _xblockexpression = null;
+    {
+      AnnotationReferenceBuildContextImpl _annotationReferenceBuildContextImpl = new AnnotationReferenceBuildContextImpl();
+      final Procedure1<AnnotationReferenceBuildContextImpl> _function = new Procedure1<AnnotationReferenceBuildContextImpl>() {
+        public void apply(final AnnotationReferenceBuildContextImpl it) {
+          it.setCompilationUnit(CompilationUnitImpl.this);
+          JvmAnnotationReference _createJvmAnnotationReference = CompilationUnitImpl.this.typesFactory.createJvmAnnotationReference();
+          final Procedure1<JvmAnnotationReference> _function = new Procedure1<JvmAnnotationReference>() {
+            public void apply(final JvmAnnotationReference reference) {
+              JvmType _annotationType = annotation.getAnnotationType();
+              reference.setAnnotation(((JvmAnnotationType) _annotationType));
+            }
+          };
+          JvmAnnotationReference _doubleArrow = ObjectExtensions.<JvmAnnotationReference>operator_doubleArrow(_createJvmAnnotationReference, _function);
+          it.setDelegate(_doubleArrow);
+        }
+      };
+      final AnnotationReferenceBuildContextImpl buildContext = ObjectExtensions.<AnnotationReferenceBuildContextImpl>operator_doubleArrow(_annotationReferenceBuildContextImpl, _function);
+      EList<XAnnotationElementValuePair> _elementValuePairs = annotation.getElementValuePairs();
+      for (final XAnnotationElementValuePair valuePair : _elementValuePairs) {
+        {
+          final XExpression value = valuePair.getValue();
+          boolean _notEquals = (!Objects.equal(value, null));
+          if (_notEquals) {
+            final JvmOperation operation = valuePair.getElement();
+            JvmTypeReference _returnType = operation.getReturnType();
+            final Object annotationValue = this.translateAnnotationValue(value, _returnType);
+            String _simpleName = operation.getSimpleName();
+            buildContext.set(_simpleName, annotationValue);
+          }
+        }
+      }
+      XExpression _value = annotation.getValue();
+      boolean _notEquals = (!Objects.equal(_value, null));
+      if (_notEquals) {
+        XExpression _value_1 = annotation.getValue();
+        final Object annotationValue = this.translateAnnotationValue(_value_1, null);
+        buildContext.set("value", annotationValue);
+      }
+      JvmAnnotationReference _delegate = buildContext.getDelegate();
+      _xblockexpression = this.toAnnotationReference(_delegate);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Object translateAnnotationValue(final XExpression value, final JvmTypeReference expectedType) {
+    Object _xblockexpression = null;
+    {
+      if ((value instanceof XAnnotation)) {
+        return this.translateAnnotation(((XAnnotation)value));
+      }
+      if ((value instanceof XListLiteral)) {
+        EList<XExpression> _elements = ((XListLiteral)value).getElements();
+        final Iterable<XAnnotation> annotations = Iterables.<XAnnotation>filter(_elements, XAnnotation.class);
+        EList<XExpression> _elements_1 = ((XListLiteral)value).getElements();
+        int _size = _elements_1.size();
+        int _size_1 = IterableExtensions.size(annotations);
+        boolean _equals = (_size == _size_1);
+        if (_equals) {
+          final ArrayList<AnnotationReference> annotationReferences = CollectionLiterals.<AnnotationReference>newArrayList();
+          for (final XAnnotation annotation : annotations) {
+            AnnotationReference _translateAnnotation = this.translateAnnotation(annotation);
+            annotationReferences.add(_translateAnnotation);
+          }
+          return annotationReferences;
+        }
+      }
+      Object _evaluate = this.evaluate(value, expectedType);
+      _xblockexpression = this.translate(_evaluate);
+    }
+    return _xblockexpression;
   }
 }

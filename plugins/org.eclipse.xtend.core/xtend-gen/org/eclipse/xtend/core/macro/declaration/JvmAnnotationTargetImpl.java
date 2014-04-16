@@ -8,20 +8,20 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -41,23 +41,43 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
     return ImmutableList.<AnnotationReference>copyOf(_map);
   }
   
-  public MutableAnnotationReference addAnnotation(final Type annotationType) {
-    boolean _matched = false;
-    if (!_matched) {
-      if (annotationType instanceof JvmAnnotationTypeDeclarationImpl) {
-        _matched=true;
-        final JvmAnnotationReference result = TypesFactory.eINSTANCE.createJvmAnnotationReference();
-        JvmAnnotationType _delegate = ((JvmAnnotationTypeDeclarationImpl)annotationType).getDelegate();
-        result.setAnnotation(_delegate);
-        T _delegate_1 = this.getDelegate();
-        EList<JvmAnnotationReference> _annotations = _delegate_1.getAnnotations();
-        _annotations.add(result);
-        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        AnnotationReference _annotationReference = _compilationUnit.toAnnotationReference(result);
-        return ((MutableAnnotationReference) _annotationReference);
+  public AnnotationReference addAnnotation(final AnnotationReference annotationReference) {
+    AnnotationReference _xblockexpression = null;
+    {
+      boolean _notEquals = (!Objects.equal(annotationReference, null));
+      Preconditions.checkArgument(_notEquals, "annotationReference cannot be null");
+      AnnotationReference _xifexpression = null;
+      if ((annotationReference instanceof JvmAnnotationReferenceImpl)) {
+        AnnotationReference _xblockexpression_1 = null;
+        {
+          JvmAnnotationReference _delegate = ((JvmAnnotationReferenceImpl)annotationReference).getDelegate();
+          final JvmAnnotationReference jvmAnnotationReference = EcoreUtil2.<JvmAnnotationReference>cloneWithProxies(_delegate);
+          T _delegate_1 = this.getDelegate();
+          EList<JvmAnnotationReference> _annotations = _delegate_1.getAnnotations();
+          _annotations.add(jvmAnnotationReference);
+          CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+          _xblockexpression_1 = _compilationUnit.toAnnotationReference(jvmAnnotationReference);
+        }
+        _xifexpression = _xblockexpression_1;
+      } else {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append(annotationReference, "");
+        _builder.append(" is not annotation reference");
+        throw new IllegalArgumentException(_builder.toString());
       }
+      _xblockexpression = _xifexpression;
     }
-    throw new IllegalArgumentException((("" + annotationType) + " is not an annotation type."));
+    return _xblockexpression;
+  }
+  
+  public boolean removeAnnotation(final AnnotationReference annotationReference) {
+    if ((annotationReference instanceof JvmAnnotationReferenceImpl)) {
+      T _delegate = this.getDelegate();
+      EList<JvmAnnotationReference> _annotations = _delegate.getAnnotations();
+      JvmAnnotationReference _delegate_1 = ((JvmAnnotationReferenceImpl)annotationReference).getDelegate();
+      return _annotations.remove(_delegate_1);
+    }
+    return false;
   }
   
   public AnnotationReference findAnnotation(final Type annotationType) {

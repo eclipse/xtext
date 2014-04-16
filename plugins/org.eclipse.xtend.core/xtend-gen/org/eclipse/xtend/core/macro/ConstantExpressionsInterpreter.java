@@ -56,6 +56,7 @@ import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.interpreter.AbstractConstantExpressionsInterpreter;
@@ -355,19 +356,17 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   }
   
   protected Object _internalEvaluate(final XFeatureCall it, final Context ctx) {
-    final String featureName = it.getConcreteSyntaxFeatureName();
-    Map<String, JvmIdentifiableElement> _visibleFeatures = ctx.getVisibleFeatures();
-    boolean _containsKey = _visibleFeatures.containsKey(featureName);
-    if (_containsKey) {
+    Object _eGet = it.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+    final EObject feature = ((EObject) _eGet);
+    boolean _eIsProxy = feature.eIsProxy();
+    boolean _not = (!_eIsProxy);
+    if (_not) {
       Object _switchResult = null;
-      Map<String, JvmIdentifiableElement> _visibleFeatures_1 = ctx.getVisibleFeatures();
-      JvmIdentifiableElement _get = _visibleFeatures_1.get(featureName);
-      final JvmIdentifiableElement feature = _get;
       boolean _matched = false;
       if (!_matched) {
         if (feature instanceof JvmEnumerationLiteral) {
           _matched=true;
-          _switchResult = ((JvmEnumerationLiteral)feature);
+          _switchResult = feature;
         }
       }
       if (!_matched) {
@@ -376,31 +375,99 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
           _switchResult = this.evaluateField(it, ((JvmField)feature), ctx);
         }
       }
+      if (!_matched) {
+        if (feature instanceof JvmType) {
+          _matched=true;
+          _switchResult = this.toTypeReference(((JvmType)feature), 0);
+        }
+      }
       return _switchResult;
+    }
+    final String featureName = it.getConcreteSyntaxFeatureName();
+    Map<String, JvmIdentifiableElement> _visibleFeatures = ctx.getVisibleFeatures();
+    boolean _containsKey = _visibleFeatures.containsKey(featureName);
+    if (_containsKey) {
+      Object _switchResult_1 = null;
+      Map<String, JvmIdentifiableElement> _visibleFeatures_1 = ctx.getVisibleFeatures();
+      JvmIdentifiableElement _get = _visibleFeatures_1.get(featureName);
+      final JvmIdentifiableElement visibleFeature = _get;
+      boolean _matched_1 = false;
+      if (!_matched_1) {
+        if (visibleFeature instanceof JvmEnumerationLiteral) {
+          _matched_1=true;
+          JvmEnumerationLiteral _xblockexpression = null;
+          {
+            it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, visibleFeature);
+            _xblockexpression = ((JvmEnumerationLiteral)visibleFeature);
+          }
+          _switchResult_1 = _xblockexpression;
+        }
+      }
+      if (!_matched_1) {
+        if (visibleFeature instanceof JvmField) {
+          _matched_1=true;
+          Object _xblockexpression = null;
+          {
+            it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, visibleFeature);
+            _xblockexpression = this.evaluateField(it, ((JvmField)visibleFeature), ctx);
+          }
+          _switchResult_1 = _xblockexpression;
+        }
+      }
+      return _switchResult_1;
     }
     final JvmType type = this.findTypeByName(it, featureName);
     boolean _notEquals = (!Objects.equal(type, null));
     if (_notEquals) {
+      it.setTypeLiteral(true);
+      it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type);
       return this.toTypeReference(type, 0);
     }
     throw new UnresolvableFeatureException(("Couldn\'t resolve feature " + featureName), it);
   }
   
   protected Object _internalEvaluate(final XMemberFeatureCall it, final Context ctx) {
+    Object _eGet = it.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+    final EObject feature = ((EObject) _eGet);
+    boolean _eIsProxy = feature.eIsProxy();
+    boolean _not = (!_eIsProxy);
+    if (_not) {
+      Object _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (feature instanceof JvmEnumerationLiteral) {
+          _matched=true;
+          _switchResult = feature;
+        }
+      }
+      if (!_matched) {
+        if (feature instanceof JvmField) {
+          _matched=true;
+          _switchResult = this.evaluateField(it, ((JvmField)feature), ctx);
+        }
+      }
+      if (!_matched) {
+        if (feature instanceof JvmType) {
+          _matched=true;
+          _switchResult = this.toTypeReference(((JvmType)feature), 0);
+        }
+      }
+      return _switchResult;
+    }
     final String featureName = it.getConcreteSyntaxFeatureName();
     try {
       XExpression _memberCallTarget = it.getMemberCallTarget();
       final Object receiver = this.internalEvaluate(_memberCallTarget, ctx);
-      boolean _matched = false;
-      if (!_matched) {
+      boolean _matched_1 = false;
+      if (!_matched_1) {
         if (receiver instanceof JvmTypeReference) {
-          _matched=true;
+          _matched_1=true;
           JvmType _type = ((JvmTypeReference)receiver).getType();
           final JvmType type = _type;
-          boolean _matched_1 = false;
-          if (!_matched_1) {
+          boolean _matched_2 = false;
+          if (!_matched_2) {
             if (type instanceof JvmEnumerationType) {
-              _matched_1=true;
+              _matched_2=true;
               EList<JvmEnumerationLiteral> _literals = ((JvmEnumerationType)type).getLiterals();
               final Function1<JvmEnumerationLiteral, Boolean> _function = new Function1<JvmEnumerationLiteral, Boolean>() {
                 public Boolean apply(final JvmEnumerationLiteral it) {
@@ -415,12 +482,13 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
                 String _plus = ((("Couldn\'t find enum value " + featureName) + " on enum ") + _simpleName);
                 throw new ConstantExpressionEvaluationException(_plus, it);
               }
+              it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, enumValue);
               return enumValue;
             }
           }
-          if (!_matched_1) {
+          if (!_matched_2) {
             if (type instanceof JvmGenericType) {
-              _matched_1=true;
+              _matched_2=true;
               Iterable<JvmFeature> _allFeatures = ((JvmGenericType)type).getAllFeatures();
               Iterable<JvmField> _filter = Iterables.<JvmField>filter(_allFeatures, JvmField.class);
               final Function1<JvmField, Boolean> _function = new Function1<JvmField, Boolean>() {
@@ -436,6 +504,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
                 String _plus = ((("Couldn\'t find field " + featureName) + " on type ") + _simpleName);
                 throw new ConstantExpressionEvaluationException(_plus, it);
               }
+              it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, field);
               return this.evaluateField(it, field, ctx);
             }
           }
@@ -449,6 +518,10 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         final JvmType type = this.findTypeByName(it, typeName);
         boolean _notEquals = (!Objects.equal(type, null));
         if (_notEquals) {
+          XExpression _memberCallTarget_1 = it.getMemberCallTarget();
+          this.setFeature(_memberCallTarget_1, type);
+          it.setTypeLiteral(true);
+          it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type);
           return this.toTypeReference(type, 0);
         } else {
           throw new UnresolvableFeatureException(("Unresolvable type " + typeName), it);
@@ -475,6 +548,25 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   
   protected String _getFullName(final XFeatureCall call) {
     return call.getConcreteSyntaxFeatureName();
+  }
+  
+  protected void _setFeature(final XExpression call, final JvmType type) {
+    String _text = this.toText(call);
+    String _plus = ("The expression \'" + _text);
+    String _plus_1 = (_plus + "\' cannot be used as a receiver within a constant expression.");
+    throw new ConstantExpressionEvaluationException(_plus_1);
+  }
+  
+  protected void _setFeature(final XMemberFeatureCall it, final JvmType type) {
+    XExpression _memberCallTarget = it.getMemberCallTarget();
+    this.setFeature(_memberCallTarget, type);
+    it.setPackageFragment(true);
+    it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type);
+  }
+  
+  protected void _setFeature(final XFeatureCall it, final JvmType type) {
+    it.setPackageFragment(true);
+    it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type);
   }
   
   protected Object evaluateField(final XAbstractFeatureCall call, final JvmField field, final Context context) {
@@ -594,6 +686,22 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(call).toString());
+    }
+  }
+  
+  public void setFeature(final XExpression it, final JvmType type) {
+    if (it instanceof XFeatureCall) {
+      _setFeature((XFeatureCall)it, type);
+      return;
+    } else if (it instanceof XMemberFeatureCall) {
+      _setFeature((XMemberFeatureCall)it, type);
+      return;
+    } else if (it != null) {
+      _setFeature(it, type);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, type).toString());
     }
   }
 }

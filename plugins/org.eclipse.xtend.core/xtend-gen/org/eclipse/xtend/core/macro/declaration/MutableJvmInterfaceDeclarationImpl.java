@@ -11,14 +11,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmInterfaceDeclarationImpl;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
@@ -27,7 +25,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
@@ -79,16 +76,6 @@ public class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationI
   public Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
     Iterable<? extends InterfaceDeclaration> _declaredInterfaces = super.getDeclaredInterfaces();
     return ((Iterable<? extends MutableInterfaceDeclaration>) _declaredInterfaces);
-  }
-  
-  public MutableAnnotationReference findAnnotation(final Type annotationType) {
-    AnnotationReference _findAnnotation = super.findAnnotation(annotationType);
-    return ((MutableAnnotationReference) _findAnnotation);
-  }
-  
-  public Iterable<? extends MutableAnnotationReference> getAnnotations() {
-    Iterable<? extends AnnotationReference> _annotations = super.getAnnotations();
-    return ((Iterable<? extends MutableAnnotationReference>) _annotations);
   }
   
   public MutableTypeDeclaration getDeclaringType() {

@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.validation.ConstantExpressionValidator
 import org.eclipse.xtext.xbase.validation.IssueCodes
 import org.eclipse.xtext.xbase.XListLiteral
+import org.eclipse.xtext.xbase.validation.NotResolvedFeatureException
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -21,9 +22,13 @@ import org.eclipse.xtext.xbase.XListLiteral
 class AnnotationValueValidator extends ConstantExpressionValidator {
 	
 	def void validateAnnotationValue(XExpression value, ValidationMessageAcceptor acceptor) {
-		if (!isValidAnnotationValue(value)) {
-			acceptor.acceptError("The value for an annotation attribute must be a constant expression", value, null,
-				ValidationMessageAcceptor.INSIGNIFICANT_INDEX, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE);
+		try {
+			if (!isValidAnnotationValue(value)) {
+				acceptor.acceptError("The value for an annotation attribute must be a constant expression", value, null,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE);
+			}
+		} catch (NotResolvedFeatureException e) {
+			// do nothing
 		}
 	}
 	

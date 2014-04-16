@@ -9,12 +9,9 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.JvmParameterDeclarationImpl;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 
 @SuppressWarnings("all")
@@ -22,16 +19,6 @@ public class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationI
   public MutableExecutableDeclaration getDeclaringExecutable() {
     ExecutableDeclaration _declaringExecutable = super.getDeclaringExecutable();
     return ((MutableExecutableDeclaration) _declaringExecutable);
-  }
-  
-  public MutableAnnotationReference findAnnotation(final Type annotationType) {
-    AnnotationReference _findAnnotation = super.findAnnotation(annotationType);
-    return ((MutableAnnotationReference) _findAnnotation);
-  }
-  
-  public Iterable<? extends MutableAnnotationReference> getAnnotations() {
-    Iterable<? extends AnnotationReference> _annotations = super.getAnnotations();
-    return ((Iterable<? extends MutableAnnotationReference>) _annotations);
   }
   
   public void setSimpleName(final String name) {

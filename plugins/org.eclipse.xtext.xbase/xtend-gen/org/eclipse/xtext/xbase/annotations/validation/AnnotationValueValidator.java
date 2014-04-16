@@ -14,10 +14,12 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.validation.ConstantExpressionValidator;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
+import org.eclipse.xtext.xbase.validation.NotResolvedFeatureException;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,11 +27,19 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 @SuppressWarnings("all")
 public class AnnotationValueValidator extends ConstantExpressionValidator {
   public void validateAnnotationValue(final XExpression value, final ValidationMessageAcceptor acceptor) {
-    boolean _isValidAnnotationValue = this.isValidAnnotationValue(value);
-    boolean _not = (!_isValidAnnotationValue);
-    if (_not) {
-      acceptor.acceptError("The value for an annotation attribute must be a constant expression", value, null, 
-        ValidationMessageAcceptor.INSIGNIFICANT_INDEX, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE);
+    try {
+      boolean _isValidAnnotationValue = this.isValidAnnotationValue(value);
+      boolean _not = (!_isValidAnnotationValue);
+      if (_not) {
+        acceptor.acceptError("The value for an annotation attribute must be a constant expression", value, null, 
+          ValidationMessageAcceptor.INSIGNIFICANT_INDEX, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE);
+      }
+    } catch (final Throwable _t) {
+      if (_t instanceof NotResolvedFeatureException) {
+        final NotResolvedFeatureException e = (NotResolvedFeatureException)_t;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   

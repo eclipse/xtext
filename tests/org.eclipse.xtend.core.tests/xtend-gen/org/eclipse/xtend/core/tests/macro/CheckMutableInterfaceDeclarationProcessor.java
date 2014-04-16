@@ -17,12 +17,12 @@ import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtend.lib.macro.services.AnnotationReferenceBuildContext;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -74,111 +74,120 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
         MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "superinterfaces cannot contain null", _function_4);
         List<TypeReference> _emptyList_1 = CollectionLiterals.<TypeReference>emptyList();
         annotatedTargetElement.setExtendedInterfaces(_emptyList_1);
-        TypeReference _newTypeReference = context.newTypeReference(Deprecated.class);
-        Type _type = _newTypeReference.getType();
-        final MutableAnnotationReference annotationReference = annotatedTargetElement.addAnnotation(_type);
-        final Procedure0 _function_5 = new Procedure0() {
-          public void apply() {
-            annotationReference.set(null, null);
+        final Procedure1<AnnotationReferenceBuildContext> _function_5 = new Procedure1<AnnotationReferenceBuildContext>() {
+          public void apply(final AnnotationReferenceBuildContext it) {
+            final Procedure0 _function = new Procedure0() {
+              public void apply() {
+                it.set(null, null);
+              }
+            };
+            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function);
+            final Procedure0 _function_1 = new Procedure0() {
+              public void apply() {
+                it.set(null, "foo");
+              }
+            };
+            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_1);
+            final Procedure0 _function_2 = new Procedure0() {
+              public void apply() {
+                String[] _xblockexpression = null;
+                {
+                  final String[] array = { "foo" };
+                  _xblockexpression = array;
+                }
+                it.set(null, _xblockexpression);
+              }
+            };
+            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_2);
+            final Procedure0 _function_3 = new Procedure0() {
+              public void apply() {
+                it.set(null, Boolean.valueOf(true));
+              }
+            };
+            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_3);
+            final Procedure0 _function_4 = new Procedure0() {
+              public void apply() {
+                it.set(null, ((boolean[]) ((boolean[])Conversions.unwrapArray(Collections.<Boolean>unmodifiableList(Lists.<Boolean>newArrayList(true)), boolean.class))));
+              }
+            };
+            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_4);
+            final Procedure0 _function_5 = new Procedure0() {
+              public void apply() {
+                it.set(null, Integer.valueOf(0));
+              }
+            };
+            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_5);
+            final Procedure0 _function_6 = new Procedure0() {
+              public void apply() {
+                it.set(null, ((int[]) ((int[])Conversions.unwrapArray(Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(0)), int.class))));
+              }
+            };
+            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_6);
+            final Procedure0 _function_7 = new Procedure0() {
+              public void apply() {
+                String[] _xblockexpression = null;
+                {
+                  final String[] array = { "foo" };
+                  _xblockexpression = array;
+                }
+                it.set("doesNotExist", _xblockexpression);
+              }
+            };
+            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "The annotation property \'doesNotExist\' is not declared on the annotation type \'java.lang.Deprecated\'.", _function_7);
           }
         };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_5);
-        final Procedure0 _function_6 = new Procedure0() {
-          public void apply() {
-            annotationReference.set(null, "foo");
-          }
-        };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_6);
-        final Procedure0 _function_7 = new Procedure0() {
-          public void apply() {
+        AnnotationReference _newAnnotationReference = context.newAnnotationReference(Deprecated.class, _function_5);
+        final AnnotationReference annotationReference = annotatedTargetElement.addAnnotation(_newAnnotationReference);
+        annotatedTargetElement.removeAnnotation(annotationReference);
+        final Procedure1<AnnotationReferenceBuildContext> _function_6 = new Procedure1<AnnotationReferenceBuildContext>() {
+          public void apply(final AnnotationReferenceBuildContext it) {
             String[] _xblockexpression = null;
             {
               final String[] array = { "foo" };
               _xblockexpression = array;
             }
-            annotationReference.set(null, _xblockexpression);
+            it.set("value", _xblockexpression);
+            final Procedure0 _function = new Procedure0() {
+              public void apply() {
+                int[] _xblockexpression = null;
+                {
+                  final int[] array = { 1 };
+                  _xblockexpression = array;
+                }
+                it.set("value", _xblockexpression);
+              }
+            };
+            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "int[] is not applicable at this location. Expected java.lang.String[]", _function);
           }
         };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_7);
-        final Procedure0 _function_8 = new Procedure0() {
-          public void apply() {
-            annotationReference.set(null, Boolean.valueOf(true));
+        AnnotationReference _newAnnotationReference_1 = context.newAnnotationReference(SuppressWarnings.class, _function_6);
+        final AnnotationReference otherAnnotationReference = annotatedTargetElement.addAnnotation(_newAnnotationReference_1);
+        annotatedTargetElement.removeAnnotation(otherAnnotationReference);
+        final Procedure1<AnnotationReferenceBuildContext> _function_7 = new Procedure1<AnnotationReferenceBuildContext>() {
+          public void apply(final AnnotationReferenceBuildContext it) {
+            TypeReference[] _newArrayOfSize = new TypeReference[0];
+            it.set("validators", _newArrayOfSize);
+            TypeReference _newTypeReference = context.newTypeReference(String.class);
+            it.set("validators", _newTypeReference);
+            final Procedure0 _function = new Procedure0() {
+              public void apply() {
+                String[] _newArrayOfSize = new String[0];
+                it.set("validators", _newArrayOfSize);
+              }
+            };
+            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "java.lang.String[] is not applicable at this location. Expected org.eclipse.xtend.lib.macro.declaration.TypeReference[]", _function);
+            final Procedure0 _function_1 = new Procedure0() {
+              public void apply() {
+                Object[] _newArrayOfSize = new Object[0];
+                it.set("validators", _newArrayOfSize);
+              }
+            };
+            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot set annotation values of type java.lang.Object[]", _function_1);
           }
         };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_8);
-        final Procedure0 _function_9 = new Procedure0() {
-          public void apply() {
-            annotationReference.set(null, ((boolean[]) ((boolean[])Conversions.unwrapArray(Collections.<Boolean>unmodifiableList(Lists.<Boolean>newArrayList(true)), boolean.class))));
-          }
-        };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_9);
-        final Procedure0 _function_10 = new Procedure0() {
-          public void apply() {
-            annotationReference.set(null, Integer.valueOf(0));
-          }
-        };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_10);
-        final Procedure0 _function_11 = new Procedure0() {
-          public void apply() {
-            annotationReference.set(null, ((int[]) ((int[])Conversions.unwrapArray(Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(0)), int.class))));
-          }
-        };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_11);
-        final Procedure0 _function_12 = new Procedure0() {
-          public void apply() {
-            String[] _xblockexpression = null;
-            {
-              final String[] array = { "foo" };
-              _xblockexpression = array;
-            }
-            annotationReference.set("doesNotExist", _xblockexpression);
-          }
-        };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "The annotation property \'doesNotExist\' is not declared on the annotation type \'java.lang.Deprecated\'.", _function_12);
-        annotationReference.remove();
-        TypeReference _newTypeReference_1 = context.newTypeReference(SuppressWarnings.class);
-        Type _type_1 = _newTypeReference_1.getType();
-        final MutableAnnotationReference otherAnnotationReference = annotatedTargetElement.addAnnotation(_type_1);
-        String[] _xblockexpression = null;
-        {
-          final String[] array = { "foo" };
-          _xblockexpression = array;
-        }
-        otherAnnotationReference.set("value", _xblockexpression);
-        final Procedure0 _function_13 = new Procedure0() {
-          public void apply() {
-            int[] _xblockexpression = null;
-            {
-              final int[] array = { 1 };
-              _xblockexpression = array;
-            }
-            otherAnnotationReference.set("value", _xblockexpression);
-          }
-        };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "int[] is not applicable at this location. Expected java.lang.String[]", _function_13);
-        otherAnnotationReference.remove();
-        TypeReference _newTypeReference_2 = context.newTypeReference(ComposedChecks.class);
-        Type _type_2 = _newTypeReference_2.getType();
-        final MutableAnnotationReference composedChecksReference = annotatedTargetElement.addAnnotation(_type_2);
-        TypeReference[] _newArrayOfSize = new TypeReference[0];
-        composedChecksReference.set("validators", _newArrayOfSize);
-        TypeReference _newTypeReference_3 = context.newTypeReference(String.class);
-        composedChecksReference.set("validators", _newTypeReference_3);
-        final Procedure0 _function_14 = new Procedure0() {
-          public void apply() {
-            String[] _newArrayOfSize = new String[0];
-            composedChecksReference.set("validators", _newArrayOfSize);
-          }
-        };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "java.lang.String[] is not applicable at this location. Expected org.eclipse.xtend.lib.macro.declaration.TypeReference[]", _function_14);
-        final Procedure0 _function_15 = new Procedure0() {
-          public void apply() {
-            Object[] _newArrayOfSize = new Object[0];
-            composedChecksReference.set("validators", _newArrayOfSize);
-          }
-        };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot set annotation values of type java.lang.Object[]", _function_15);
-        composedChecksReference.remove();
+        AnnotationReference _newAnnotationReference_2 = context.newAnnotationReference(ComposedChecks.class, _function_7);
+        final AnnotationReference composedChecksReference = annotatedTargetElement.addAnnotation(_newAnnotationReference_2);
+        annotatedTargetElement.removeAnnotation(composedChecksReference);
       }
     }
   }

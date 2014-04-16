@@ -11,14 +11,11 @@ import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMethodDeclarationImpl;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
@@ -35,16 +32,6 @@ public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl im
   public Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters() {
     Iterable<? extends TypeParameterDeclaration> _typeParameters = super.getTypeParameters();
     return ((Iterable<? extends MutableTypeParameterDeclaration>) _typeParameters);
-  }
-  
-  public MutableAnnotationReference findAnnotation(final Type annotationType) {
-    AnnotationReference _findAnnotation = super.findAnnotation(annotationType);
-    return ((MutableAnnotationReference) _findAnnotation);
-  }
-  
-  public Iterable<? extends MutableAnnotationReference> getAnnotations() {
-    Iterable<? extends AnnotationReference> _annotations = super.getAnnotations();
-    return ((Iterable<? extends MutableAnnotationReference>) _annotations);
   }
   
   public MutableTypeDeclaration getDeclaringType() {

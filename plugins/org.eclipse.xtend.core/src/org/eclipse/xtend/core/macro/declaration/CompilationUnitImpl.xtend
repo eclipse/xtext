@@ -54,6 +54,7 @@ import org.eclipse.xtend.lib.macro.expression.Expression
 import org.eclipse.xtend.lib.macro.file.FileLocations
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
+import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider
 import org.eclipse.xtend.lib.macro.services.ProblemSupport
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider
 import org.eclipse.xtend2.lib.StringConcatenationClient
@@ -61,6 +62,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
 import org.eclipse.xtext.common.types.JvmAnnotationReference
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmAnnotationValue
+import org.eclipse.xtext.common.types.JvmArrayType
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
 import org.eclipse.xtext.common.types.JvmByteAnnotationValue
 import org.eclipse.xtext.common.types.JvmCharAnnotationValue
@@ -95,6 +97,7 @@ import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IFileHeaderProvider
 import org.eclipse.xtext.resource.CompilerPhases
+import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
@@ -102,15 +105,14 @@ import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
-import org.eclipse.xtext.common.types.JvmArrayType
-import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.xbase.XListLiteral
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -153,6 +155,8 @@ class CompilationUnitImpl implements CompilationUnit {
 			throw new CancellationException("compilation was canceled.")
 	}
 	
+	@Inject TypesFactory typesFactory
+	
 	@Inject CompilerPhases compilerPhases;
 
 	@Property XtendFile xtendFile
@@ -170,6 +174,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
+	@Property val AnnotationReferenceProvider annotationReferenceProvider = new AnnotationReferenceProviderImpl(this)
 	@Property val TypeLookupImpl typeLookup = new TypeLookupImpl(this)
 	
 	Map<EObject, Object> identityCache = newHashMap
@@ -420,7 +425,7 @@ class CompilationUnitImpl implements CompilationUnit {
 			}
 		]}
 	
-	def isBelongedToCompilationUnit(JvmIdentifiableElement element) {
+	def isBelongedToCompilationUnit(EObject element) {
 		element.eResource == xtendFile.eResource
 	}
 	
@@ -651,7 +656,7 @@ class CompilationUnitImpl implements CompilationUnit {
 				return value.values.filter(XExpression).map[evaluate(it, expectedType)].head
 			}
 			JvmTypeAnnotationValue : value.values.map[toTypeReference(it)] -> TypeReference 
-			JvmAnnotationAnnotationValue : value.values.map[toAnnotationReference(it)] -> AnnotationReference 
+			JvmAnnotationAnnotationValue : value.values.map[toAnnotationReference(it)] -> AnnotationReference   
 			JvmStringAnnotationValue : value.values -> String
 			JvmBooleanAnnotationValue : value.values -> boolean
 			JvmIntAnnotationValue : value.values  -> int
@@ -718,12 +723,12 @@ class CompilationUnitImpl implements CompilationUnit {
 		if (object instanceof XAnnotation[]) {
 			val AnnotationReference[] result = newArrayOfSize(object.length)
 			for (i : 0..<object.length) {
-				result.set(i, translate(object.get(i)) as AnnotationReference)
+				result.set(i, object.get(i).translateAnnotation)
 			}
 			return result
 		}
 		if (object instanceof XAnnotation) {
-			return toAnnotationReference(object)
+			return object.translateAnnotation
 		}
 		if (object instanceof JvmTypeReference[]) {
 			val TypeReference[] result = newArrayOfSize(object.length)
@@ -748,5 +753,43 @@ class CompilationUnitImpl implements CompilationUnit {
 		return object
 	}
 	
+	protected def translateAnnotation(XAnnotation annotation) {
+		val buildContext = new AnnotationReferenceBuildContextImpl => [
+			compilationUnit = this
+			delegate = typesFactory.createJvmAnnotationReference => [ reference |
+				reference.annotation = annotation.annotationType as JvmAnnotationType
+			]
+		]
+		for (valuePair : annotation.elementValuePairs) {
+			val value = valuePair.value
+			if (value != null) {
+				val operation = valuePair.element
+				val annotationValue = value.translateAnnotationValue(operation.returnType)
+				buildContext.set(operation.simpleName, annotationValue)
+			}
+		}
+		if (annotation.value != null) {
+			val annotationValue = annotation.value.translateAnnotationValue(null)
+			buildContext.set('value', annotationValue)
+		}
+		buildContext.delegate.toAnnotationReference
+	} 
+	
+	protected def Object translateAnnotationValue(XExpression value, JvmTypeReference expectedType) {
+		if (value instanceof XAnnotation) {
+			return value.translateAnnotation
+		}
+		if (value instanceof XListLiteral) {
+			val annotations = value.elements.filter(XAnnotation)
+			if (value.elements.size == annotations.size) {
+				val annotationReferences = newArrayList
+				for (annotation : annotations) {
+					annotationReferences += annotation.translateAnnotation
+				}
+				return annotationReferences
+			}
+		}
+		value.evaluate(expectedType).translate
+	}
+	
 }
-

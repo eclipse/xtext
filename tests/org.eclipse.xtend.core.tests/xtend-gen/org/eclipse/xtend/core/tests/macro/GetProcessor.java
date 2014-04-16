@@ -5,7 +5,7 @@ import java.util.List;
 import org.eclipse.xtend.core.tests.macro.Get;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -16,7 +16,7 @@ public class GetProcessor implements TransformationParticipant<MutableMethodDecl
     for (final MutableMethodDeclaration m : methods) {
       {
         Type _findTypeGlobally = context.findTypeGlobally(Get.class);
-        final MutableAnnotationReference annotation = m.findAnnotation(_findTypeGlobally);
+        final AnnotationReference annotation = m.findAnnotation(_findTypeGlobally);
         final Object pattern = annotation.getValue("value");
         boolean _equals = Objects.equal(pattern, null);
         if (_equals) {

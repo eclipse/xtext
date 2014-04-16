@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
+import org.eclipse.xtext.xbase.validation.NotResolvedFeatureException;
 
 /**
  * Checks whether a given XExpression is a a constant expression.
@@ -210,6 +212,15 @@ public class ConstantExpressionValidator {
         _matched=true;
         XExpression _switch = ((XSwitchExpression)feature).getSwitch();
         return this.isConstantExpression(_switch);
+      }
+    }
+    if (!_matched) {
+      if (feature instanceof EObject) {
+        boolean _eIsProxy = feature.eIsProxy();
+        if (_eIsProxy) {
+          _matched=true;
+          throw new NotResolvedFeatureException();
+        }
       }
     }
     return false;

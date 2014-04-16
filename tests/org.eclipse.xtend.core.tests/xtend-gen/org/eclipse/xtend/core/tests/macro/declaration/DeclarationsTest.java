@@ -29,7 +29,6 @@ import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
@@ -43,6 +42,8 @@ import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
+import org.eclipse.xtend.lib.macro.services.AnnotationReferenceBuildContext;
+import org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -143,8 +144,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         Assert.assertEquals(Boolean.FALSE, _value);
         Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = javaClass.getDeclaredFields();
         final MutableFieldDeclaration javaField = IterableExtensions.head(_declaredFields_1);
-        Iterable<? extends MutableAnnotationReference> _annotations_1 = javaField.getAnnotations();
-        MutableAnnotationReference _head_2 = IterableExtensions.head(_annotations_1);
+        Iterable<? extends AnnotationReference> _annotations_1 = javaField.getAnnotations();
+        AnnotationReference _head_2 = IterableExtensions.head(_annotations_1);
         Object _value_1 = _head_2.getValue("optional");
         Assert.assertFalse((((Boolean) _value_1)).booleanValue());
       }
@@ -170,21 +171,33 @@ public class DeclarationsTest extends AbstractXtendTestCase {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         MutableClassDeclaration _findClass = _typeLookup.findClass("MyClass");
-        Iterable<? extends MutableAnnotationReference> _annotations = _findClass.getAnnotations();
-        final MutableAnnotationReference anno = IterableExtensions.head(_annotations);
+        Iterable<? extends AnnotationReference> _annotations = _findClass.getAnnotations();
+        final AnnotationReference anno = IterableExtensions.head(_annotations);
         TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
         MutableClassDeclaration _findClass_1 = _typeLookup_1.findClass("MyClass");
         Iterable<? extends MutableFieldDeclaration> _declaredFields = _findClass_1.getDeclaredFields();
         MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
-        Iterable<? extends MutableAnnotationReference> _annotations_1 = _head.getAnnotations();
-        final MutableAnnotationReference anno2 = IterableExtensions.head(_annotations_1);
-        anno.set("annotation2Value", anno2);
+        Iterable<? extends AnnotationReference> _annotations_1 = _head.getAnnotations();
+        final AnnotationReference anno2 = IterableExtensions.head(_annotations_1);
         TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
         MutableClassDeclaration _findClass_2 = _typeLookup_2.findClass("MyClass");
-        Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = _findClass_2.getDeclaredFields();
+        AnnotationReferenceProvider _annotationReferenceProvider = it.getAnnotationReferenceProvider();
+        final Procedure1<AnnotationReferenceBuildContext> _function = new Procedure1<AnnotationReferenceBuildContext>() {
+          public void apply(final AnnotationReferenceBuildContext it) {
+            it.set("annotation2Value", anno2);
+          }
+        };
+        AnnotationReference _newAnnotationReference = _annotationReferenceProvider.newAnnotationReference(anno, _function);
+        _findClass_2.addAnnotation(_newAnnotationReference);
+        TypeLookupImpl _typeLookup_3 = it.getTypeLookup();
+        MutableClassDeclaration _findClass_3 = _typeLookup_3.findClass("MyClass");
+        _findClass_3.removeAnnotation(anno);
+        TypeLookupImpl _typeLookup_4 = it.getTypeLookup();
+        MutableClassDeclaration _findClass_4 = _typeLookup_4.findClass("MyClass");
+        Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = _findClass_4.getDeclaredFields();
         MutableFieldDeclaration _head_1 = IterableExtensions.head(_declaredFields_1);
-        Iterable<? extends MutableAnnotationReference> _annotations_2 = _head_1.getAnnotations();
-        MutableAnnotationReference _head_2 = IterableExtensions.head(_annotations_2);
+        Iterable<? extends AnnotationReference> _annotations_2 = _head_1.getAnnotations();
+        AnnotationReference _head_2 = IterableExtensions.head(_annotations_2);
         AnnotationTypeDeclaration _annotationTypeDeclaration = _head_2.getAnnotationTypeDeclaration();
         Object _value = anno.getValue("annotation2Value");
         AnnotationTypeDeclaration _annotationTypeDeclaration_1 = ((AnnotationReference) _value).getAnnotationTypeDeclaration();
@@ -821,8 +834,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration baseClass = _typeLookup.findClass("foo.Bar");
-        Iterable<? extends MutableAnnotationReference> _annotations = baseClass.getAnnotations();
-        final MutableAnnotationReference annoRef = IterableExtensions.head(_annotations);
+        Iterable<? extends AnnotationReference> _annotations = baseClass.getAnnotations();
+        final AnnotationReference annoRef = IterableExtensions.head(_annotations);
         Object _value = annoRef.getValue("intValue");
         Assert.assertEquals(Integer.valueOf((((2 / 2) + (2 * 3)) - (4 % 1))), _value);
         Object _value_1 = annoRef.getValue("longValue");
@@ -907,8 +920,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration baseClass = _typeLookup.findClass("foo.Bar");
-        Iterable<? extends MutableAnnotationReference> _annotations = baseClass.getAnnotations();
-        final MutableAnnotationReference annoRef = IterableExtensions.head(_annotations);
+        Iterable<? extends AnnotationReference> _annotations = baseClass.getAnnotations();
+        final AnnotationReference annoRef = IterableExtensions.head(_annotations);
         int _intValue = annoRef.getIntValue("intValue");
         Assert.assertEquals((((2 / 2) + (2 * 3)) - (4 % 1)), _intValue);
         long _longValue = annoRef.getLongValue("longValue");
