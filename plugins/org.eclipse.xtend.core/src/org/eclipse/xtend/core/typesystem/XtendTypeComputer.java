@@ -77,7 +77,6 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		AbstractTypeComputationState typeComputationState = (AbstractTypeComputationState) state;
 		JvmGenericType inferredLocalClass = associations.getInferredType(xtendAnonymousClass);
 		if(inferredLocalClass != null) {
-			// TODO: I still have to call this here, as I need the state with all local final vars declared before the call
 			typeResolver.resolveTypesForLocalClass(typeComputationState, inferredLocalClass);
 			if(inferredLocalClass.isAnonymous()) 
 				state.acceptActualType(state.getConverter().toLightweightReference(inferredLocalClass.getSuperTypes().get(0)));
