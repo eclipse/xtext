@@ -140,7 +140,7 @@ public class ScopeProviderAccess {
 			if (requiredType == null)
 				return Collections.emptyList();
 
-			final String crossRefString = linkingHelper.getCrossRefNodeAsString(node, true);
+			final String crossRefString = getNameToLookup(expression, reference, node);
 			if (crossRefString != null && !crossRefString.equals("")) {
 				final IScope scope = session.getScope(expression, reference, types);
 				QualifiedName qualifiedLinkName = qualifiedNameConverter.toQualifiedName(crossRefString);
@@ -159,7 +159,12 @@ public class ScopeProviderAccess {
 			throw new IllegalStateException(expression + " uses unsupported uri fragment " + uri);
 		}
 	}
-	
+
+	@SuppressWarnings("unused")
+	protected String getNameToLookup(XExpression expression, EReference reference, INode node) {
+		return linkingHelper.getCrossRefNodeAsString(node, true);
+	}
+
 	private QualifiedName getErrorName(INode errorNode) {
 		List<String> segments = Lists.newArrayListWithCapacity(4);
 		for(ILeafNode leaf: errorNode.getLeafNodes()) {

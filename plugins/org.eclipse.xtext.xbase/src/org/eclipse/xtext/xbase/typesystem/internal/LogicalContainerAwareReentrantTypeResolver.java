@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -122,7 +123,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			}
 			if (actualType == null)
 				return null;
-			return toJavaCompliantTypeReference(actualType, session);
+			return toJavaCompliantTypeReference(convertLocalType(actualType), session);
 		}
 
 		protected JvmTypeReference doGetTypeReferenceWithCurrentTypeResolver() {
@@ -135,7 +136,17 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			}
 			if (actualType == null)
 				return null;
-			return toJavaCompliantTypeReference(actualType, session);
+			return toJavaCompliantTypeReference(convertLocalType(actualType), session);
+		}
+
+		protected LightweightTypeReference convertLocalType(LightweightTypeReference reference) {
+			JvmType jvmType = reference.getType();
+			if(jvmType instanceof JvmGenericType && ((JvmGenericType) jvmType).isLocal()) {
+				List<JvmTypeReference> superTypes = ((JvmGenericType)jvmType).getSuperTypes();
+				if(!superTypes.isEmpty())
+					return resolvedTypes.getConverter().toLightweightReference(superTypes.get(0));
+			}
+			return reference;
 		}
 		
 		@Override

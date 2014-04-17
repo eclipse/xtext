@@ -23,10 +23,10 @@ import org.eclipse.xtext.util.Strings;
  */
 public class KnownTypesScope extends AbstractScope {
 	
-	private final List<JvmType> types;
+	private final List<? extends JvmType> types;
 	private final AbstractScope parent;
 
-	public KnownTypesScope(List<JvmType> types, AbstractScope parent) {
+	public KnownTypesScope(List<? extends JvmType> types, AbstractScope parent) {
 		this.types = types;
 		this.parent = parent;
 	}

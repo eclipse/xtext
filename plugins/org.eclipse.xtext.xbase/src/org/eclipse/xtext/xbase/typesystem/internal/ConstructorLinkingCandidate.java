@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import static java.util.Collections.*;
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -130,7 +133,13 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	
 	@Override
 	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
-		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
+		JvmDeclaredType declaringType = getConstructor().getDeclaringType();
+		if(declaringType instanceof JvmGenericType && ((JvmGenericType)declaringType).isLocal()) 
+			// for anonymous classes the type arguments have been transferred to the superclass
+			// TODO this only works as long as we don't have explicitly local classes
+			return emptyList();
+		else 
+			return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
 	}
 	
 	public void applyToModel() {
@@ -141,5 +150,4 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	public List<JvmTypeParameter> getDeclaredTypeParameters() {
 		return new FeatureLinkHelper().getDeclaredTypeParameters(getConstructor());
 	}
-	
 }

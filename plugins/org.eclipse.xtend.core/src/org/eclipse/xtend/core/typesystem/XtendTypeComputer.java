@@ -11,27 +11,34 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
+import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer;
+import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
+import com.google.inject.Inject;
 /**
  * Customized type computer for Xtend specific expressions.
  * 
@@ -42,9 +49,17 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @NonNullByDefault
 public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 
+	@Inject 
+	private IXtendJvmAssociations associations;
+	
+	@Inject 
+	private XtendReentrantTypeResolver typeResolver;
+	
 	@Override
 	public void computeTypes(XExpression expression, ITypeComputationState state) {
-		if (expression instanceof RichString) {
+		if (expression instanceof AnonymousClassConstructorCall) {
+			_computeTypes((AnonymousClassConstructorCall) expression, state);
+		} else if (expression instanceof RichString) {
 			_computeTypes((RichString)expression, state);
 		} else if (expression instanceof RichStringForLoop) {
 			_computeTypes((RichStringForLoop)expression, state);
@@ -55,6 +70,23 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		} else {
 			super.computeTypes(expression, state);
 		}
+	}
+	
+	protected void _computeTypes(AnonymousClassConstructorCall constructorCall, ITypeComputationState state) {
+		XtendClass xtendAnonymousClass = constructorCall.getAnonymousClass();
+		AbstractTypeComputationState typeComputationState = (AbstractTypeComputationState) state;
+		JvmGenericType inferredLocalClass = associations.getInferredType(xtendAnonymousClass);
+		if(inferredLocalClass != null) {
+			// TODO: I still have to call this here, as I need the state with all local final vars declared before the call
+			typeResolver.resolveTypesForLocalClass(typeComputationState, inferredLocalClass);
+			if(inferredLocalClass.isAnonymous()) 
+				state.acceptActualType(state.getConverter().toLightweightReference(inferredLocalClass.getSuperTypes().get(0)));
+			else 
+				state.acceptActualType(state.getConverter().toRawLightweightReference(inferredLocalClass));
+		}
+		List<? extends IConstructorLinkingCandidate> linkingCandidates = typeComputationState.getLinkingCandidates(constructorCall);
+		IConstructorLinkingCandidate candidate = (IConstructorLinkingCandidate) getBestCandidate(linkingCandidates);
+		candidate.applyToComputationState();
 	}
 	
 	protected void _computeTypes(RichString object, ITypeComputationState state) {
