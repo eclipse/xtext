@@ -144,4 +144,13 @@ public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclara
 	 */
 	Iterable<JvmConstructor> getDeclaredConstructors();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 * @since 2.6
+	 */
+	boolean isLocal();
+
 } // JvmGenericType

@@ -900,15 +900,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 	
-	private void constructorCallToJavaExpression(final XConstructorCall expr, ITreeAppendable b) {
+	protected void constructorCallToJavaExpression(final XConstructorCall expr, ITreeAppendable b) {
 		ILocationData locationWithNewKeyword = getLocationWithNewKeyword(expr);
 		ITreeAppendable appendableWithNewKeyword = locationWithNewKeyword != null ? b.trace(locationWithNewKeyword) : b;
 		appendableWithNewKeyword.append("new ");
 		List<LightweightTypeReference> typeArguments = batchTypeResolver.resolveTypes(expr).getActualTypeArguments(expr);
 		JvmConstructor constructor = expr.getConstructor();
-		JvmDeclaredType declaringType = constructor.getDeclaringType();
-		List<JvmTypeParameter> typeParameters = declaringType instanceof JvmTypeParameterDeclarator 
-				? ((JvmTypeParameterDeclarator) declaringType).getTypeParameters() 
+		JvmDeclaredType constructedType = constructor.getDeclaringType();
+		List<JvmTypeParameter> typeParameters = constructedType instanceof JvmTypeParameterDeclarator 
+				? ((JvmTypeParameterDeclarator) constructedType).getTypeParameters() 
 				: Collections.<JvmTypeParameter>emptyList(); 
 		List<JvmTypeParameter> constructorTypeParameters = constructor.getTypeParameters();
 		boolean hasTypeArguments = !typeArguments.isEmpty() && (typeParameters.size() + constructorTypeParameters.size() == typeArguments.size());
@@ -947,7 +947,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			appendableWithNewKeyword.append(">");
 		}
 		ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
-		typeAppendable.append(declaringType);
+		appendConstructedTypeName(expr, typeAppendable);
 		if (hasTypeArguments) {
 			typeAppendable.append("<");
 			for(int i = 0; i < typeArguments.size(); i++) {
@@ -965,6 +965,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append("(");
 		appendArguments(expr.getArguments(), b);
 		b.append(")");
+	}
+
+	protected void appendConstructedTypeName(XConstructorCall constructorCall, ITreeAppendable typeAppendable) {
+		typeAppendable.append(constructorCall.getConstructor().getDeclaringType());
 	}
 	
 	@Nullable

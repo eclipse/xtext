@@ -251,30 +251,36 @@ public class JvmModelGenerator implements IGenerator {
     {
       this.generateJavaDoc(it, appendable, config);
       final ITreeAppendable childAppendable = appendable.trace(it);
-      boolean _isGenerateSyntheticSuppressWarnings = config.isGenerateSyntheticSuppressWarnings();
-      if (_isGenerateSyntheticSuppressWarnings) {
-        this.generateAnnotationsWithSyntheticSuppressWarnings(it, childAppendable, config);
+      boolean _isAnonymous = it.isAnonymous();
+      boolean _not = (!_isAnonymous);
+      if (_not) {
+        boolean _isGenerateSyntheticSuppressWarnings = config.isGenerateSyntheticSuppressWarnings();
+        if (_isGenerateSyntheticSuppressWarnings) {
+          this.generateAnnotationsWithSyntheticSuppressWarnings(it, childAppendable, config);
+        } else {
+          EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+          this.generateAnnotations(_annotations, childAppendable, true, config);
+        }
+        this.generateModifier(it, childAppendable, config);
+        boolean _isInterface = it.isInterface();
+        if (_isInterface) {
+          childAppendable.append("interface ");
+        } else {
+          childAppendable.append("class ");
+        }
+        ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, it);
+        String _simpleName = it.getSimpleName();
+        _traceSignificant.append(_simpleName);
+        this.generateTypeParameterDeclaration(it, childAppendable, config);
+        EList<JvmTypeParameter> _typeParameters = it.getTypeParameters();
+        boolean _isEmpty = _typeParameters.isEmpty();
+        if (_isEmpty) {
+          childAppendable.append(" ");
+        }
+        this.generateExtendsClause(it, childAppendable, config);
       } else {
-        EList<JvmAnnotationReference> _annotations = it.getAnnotations();
-        this.generateAnnotations(_annotations, childAppendable, true, config);
-      }
-      this.generateModifier(it, childAppendable, config);
-      boolean _isInterface = it.isInterface();
-      if (_isInterface) {
-        childAppendable.append("interface ");
-      } else {
-        childAppendable.append("class ");
-      }
-      ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, it);
-      String _simpleName = it.getSimpleName();
-      _traceSignificant.append(_simpleName);
-      this.generateTypeParameterDeclaration(it, childAppendable, config);
-      EList<JvmTypeParameter> _typeParameters = it.getTypeParameters();
-      boolean _isEmpty = _typeParameters.isEmpty();
-      if (_isEmpty) {
         childAppendable.append(" ");
       }
-      this.generateExtendsClause(it, childAppendable, config);
       ITreeAppendable _append = childAppendable.append("{");
       _append.increaseIndentation();
       Iterable<JvmMember> _membersToBeCompiled = this.getMembersToBeCompiled(it);
