@@ -5,9 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.ui.hierarchy;
-
-import java.util.Set;
+package org.eclipse.xtext.xbase.ui.editor;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -17,28 +15,24 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.resource.JvmElementAtOffsetHelper;
 
 import com.google.inject.Inject;
 
 /**
  * @author Holger Schill - Initial contribution and API
  */
-public abstract class AbstractHierarchyHandler extends AbstractHandler {
+public abstract class AbstractJvmElementHandler extends AbstractHandler {
 
-	@Inject
-	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
-
-	@Inject
-	private IJvmModelAssociations associations;
-	
 	@Inject
 	private IJavaElementFinder javaElementFinder;
+
+	@Inject
+	private JvmElementAtOffsetHelper jvmElementAtOffsetHelper;
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
@@ -46,31 +40,13 @@ public abstract class AbstractHierarchyHandler extends AbstractHandler {
 			final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 			editor.getDocument().readOnly(new IUnitOfWork<Void, XtextResource>() {
 				public java.lang.Void exec(XtextResource resource) throws Exception {
-					EObject selectedElement = eObjectAtOffsetHelper.resolveElementAt(resource, selection.getOffset());
-					if (selectedElement != null) {
-						JvmIdentifiableElement jvmIdentifiable = getJvmIdentifiableElement(selectedElement);
-						if (jvmIdentifiable != null) {
-							IJavaElement javaType = javaElementFinder.findElementFor(jvmIdentifiable);
-								if (javaType != null)
-									openPresentation(editor, javaType, selectedElement);
-						}
+					JvmIdentifiableElement jvmIdentifiable = jvmElementAtOffsetHelper.getJvmIdentifiableElement(resource, selection.getOffset());
+					if (jvmIdentifiable != null) {
+						IJavaElement javaType = javaElementFinder.findElementFor(jvmIdentifiable);
+							if (javaType != null)
+								openPresentation(editor, javaType, null);
 					}
 					return null;
-				}
-
-				
-
-				private JvmIdentifiableElement getJvmIdentifiableElement(EObject element) {
-					if(element instanceof JvmIdentifiableElement)
-						return (JvmIdentifiableElement) element;
-					Set<EObject> jvmElements = associations.getJvmElements(element);
-					if (!jvmElements.isEmpty()) {
-						JvmIdentifiableElement type = (JvmIdentifiableElement) jvmElements.iterator().next();
-							if(type != null) 
-								return type;
-					}
-					return null;
-					
 				}
 			});
 		}
