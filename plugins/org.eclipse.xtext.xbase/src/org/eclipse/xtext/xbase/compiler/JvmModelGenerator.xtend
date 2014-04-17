@@ -147,21 +147,25 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch ITreeAppendable generateBody(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
-		if(config.generateSyntheticSuppressWarnings)
-			generateAnnotationsWithSyntheticSuppressWarnings(childAppendable, config)
-		else
-			annotations.generateAnnotations(childAppendable, true, config)
-		generateModifier(childAppendable, config)
-		if (isInterface) {
-			childAppendable.append("interface ")
+		if(!isAnonymous) {
+			if(config.generateSyntheticSuppressWarnings)
+				generateAnnotationsWithSyntheticSuppressWarnings(childAppendable, config)
+			else
+				annotations.generateAnnotations(childAppendable, true, config)
+			generateModifier(childAppendable, config)
+			if (isInterface) {
+				childAppendable.append("interface ")
+			} else {
+				childAppendable.append("class ")
+			}
+			childAppendable.traceSignificant(it).append(simpleName)
+			generateTypeParameterDeclaration(childAppendable, config)
+			if (typeParameters.empty)
+				childAppendable.append(" ")
+			generateExtendsClause(childAppendable, config)
 		} else {
-			childAppendable.append("class ")
-		}
-		childAppendable.traceSignificant(it).append(simpleName)
-		generateTypeParameterDeclaration(childAppendable, config)
-		if (typeParameters.empty)
 			childAppendable.append(" ")
-		generateExtendsClause(childAppendable, config)
+		}
 		childAppendable.append('{').increaseIndentation
 		childAppendable.forEach(membersToBeCompiled, [
 				separator = [ITreeAppendable it | newLine]

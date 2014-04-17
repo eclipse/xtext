@@ -11,6 +11,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -55,6 +56,11 @@ public class JvmGenericTypeImplCustom extends JvmGenericTypeImpl {
 	@Override
 	public Iterable<JvmConstructor> getDeclaredConstructors() {
 		return Iterables.filter(getMembers(), JvmConstructor.class);
+	}
+	
+	@Override
+	public boolean isLocal() {
+		return eContainingFeature() == TypesPackage.Literals.JVM_FEATURE__LOCAL_CLASSES;
 	}
 
 }

@@ -122,7 +122,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			}
 			if (actualType == null)
 				return null;
-			return toJavaCompliantTypeReference(actualType, session);
+			return toJavaCompliantTypeReference(convertLocalType(actualType), session);
 		}
 
 		protected JvmTypeReference doGetTypeReferenceWithCurrentTypeResolver() {
@@ -135,7 +135,16 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			}
 			if (actualType == null)
 				return null;
-			return toJavaCompliantTypeReference(actualType, session);
+			return toJavaCompliantTypeReference(convertLocalType(actualType), session);
+		}
+
+		protected LightweightTypeReference convertLocalType(LightweightTypeReference reference) {
+			JvmType jvmType = reference.getType();
+			if(jvmType instanceof JvmGenericType && ((JvmGenericType) jvmType).isLocal()) {
+				if(reference.getSuperTypes().size() == 1)
+					return reference.getSuperTypes().get(1);
+			}
+			return reference;
 		}
 		
 		@Override
@@ -377,6 +386,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
 		StackedResolvedTypes childResolvedTypes = declareTypeParameters(resolvedTypes, constructor, resolvedTypesByContext);
 		
@@ -471,6 +481,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 	}
 
+	@SuppressWarnings("unused")
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(field);
 		if (childResolvedTypes == null) {
@@ -492,6 +503,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		mergeChildTypes(childResolvedTypes);
 	}
 	
+	@SuppressWarnings("unused")
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor) {
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(constructor);
 		if (childResolvedTypes == null) {
@@ -525,6 +537,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			state.addExtensionsToCurrentScope(extensionProviders);
 	}
 	
+	@SuppressWarnings("unused")
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(operation);
 		if (childResolvedTypes == null) {
@@ -587,6 +600,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(type);
 		if (childResolvedTypes == null)
@@ -717,6 +731,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	 * another operation.
 	 */
 	@Nullable
+	@SuppressWarnings("unused")
 	protected LightweightTypeReference getReturnTypeOfOverriddenOperation(JvmOperation operation, ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 		if (operation.getVisibility() == JvmVisibility.PRIVATE)
 			return null;

@@ -541,7 +541,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		}
 		
 		@Override
-		protected PublicResolvedTypes getResolvedTypes() {
+		public PublicResolvedTypes getResolvedTypes() {
 			return (PublicResolvedTypes) super.getResolvedTypes();
 		}
 

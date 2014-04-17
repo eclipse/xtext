@@ -80,11 +80,11 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		this.reentrantTypeResolver = resolvedTypes.getResolver();
 	}
 	
-	protected ResolvedTypes getResolvedTypes() {
+	public ResolvedTypes getResolvedTypes() {
 		return resolvedTypes;
 	}
 	
-	protected IFeatureScopeSession getFeatureScopeSession() {
+	public IFeatureScopeSession getFeatureScopeSession() {
 		return featureScopeSession;
 	}
 	
@@ -334,7 +334,6 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		}
 	}
 
-	@SuppressWarnings({ "null", "unused" })
 	public void reassignType(JvmIdentifiableElement refinable, LightweightTypeReference type) {
 		if (type == null)
 			throw new IllegalArgumentException("Reassigned type may not be null");
