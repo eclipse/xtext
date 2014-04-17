@@ -211,8 +211,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 					.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver",
 							"org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver")
 					.addTypeToType(IResourceValidator.class.getCanonicalName(), 
-							"org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator")
-					;
+							"org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator");
 			if(generateXtendInferrer) {
 				config = config
 					.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer",
@@ -295,7 +294,9 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"\t\t\tbinder.bind(org.eclipse.xtext.ui.editor.IURIEditorOpener.class).annotatedWith(org.eclipse.xtext.ui.LanguageSpecific.class)" +
 						".to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); \n" +
 						"\t\t\tbinder.bind(org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener.class).to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); \n"+
-						"\t\t}");
+						"\t\t}")
+				.addTypeToType("org.eclipse.jface.text.hyperlink.IHyperlinkDetector",
+							"org.eclipse.xtext.xbase.ui.navigation.XbaseHyperlinkDetector");
 
 		} else {
 			bindFactory =  bindFactory.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
