@@ -149,8 +149,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     }
     boolean _or = false;
     boolean _isLocal = this.isLocal(type);
-    boolean _not = (!_isLocal);
-    if (_not) {
+    if (_isLocal) {
       _or = true;
     } else {
       String _identifier = type.getIdentifier();
