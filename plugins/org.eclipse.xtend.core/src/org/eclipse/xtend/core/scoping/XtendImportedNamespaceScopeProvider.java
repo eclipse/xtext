@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.scoping;
 
+import static java.util.Collections.*;
+
 import java.util.List;
 import java.util.Set;
 
@@ -16,10 +18,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -70,6 +75,9 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 	@Inject
 	private CompilerPhases compilerPhases;
 	
+	@Inject 
+	private IXtendJvmAssociations associations;
+	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
 		EClass referenceType = reference.getEReferenceType();
@@ -93,12 +101,17 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 					RecordingTypeScope recordingTypeScope = new RecordingTypeScope(typeScope, getImportedNamesSet(resource));
 					AbstractScope rootTypeScope = getRootTypeScope(xtendFile, recordingTypeScope);
 					AbstractScope importScope = getImportScope(xtendFile.getImportSection(), rootTypeScope, recordingTypeScope);
-					AbstractScope localTypes = getLocalTypeScope(xtendFile.eResource(), xtendFile.getPackage(), importScope);
+					AbstractScope localTypes = getResourceTypeScope(xtendFile.eResource(), xtendFile.getPackage(), importScope);
 					AbstractScope primitiveAware = new PrimitiveAwareScope(localTypes, typeScope);
 					AbstractScope caching = new CachingTypeScope(primitiveAware);
 					return caching;
 				}
 			});
+			if(context instanceof AnonymousClassConstructorCall) {
+				JvmGenericType inferredAnonymousType = associations.getInferredType(((AnonymousClassConstructorCall) context).getAnonymousClass());
+				if(inferredAnonymousType != null)
+					result = new LocalTypeScope(singletonList(inferredAnonymousType), result);
+			}
 			XtendMember syntacticContainer = EcoreUtil2.getContainerOfType(context, XtendMember.class);
 			if (syntacticContainer != null) {
 				result = getContainerScope(syntacticContainer, result);
@@ -164,7 +177,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 		return result;
 	}
 
-	private AbstractScope getLocalTypeScope(Resource resource, String packageName, AbstractScope parent) {
+	private AbstractScope getResourceTypeScope(Resource resource, String packageName, AbstractScope parent) {
 		List<EObject> contents = resource.getContents();
 		List<JvmType> knownTypes = Lists.newArrayListWithExpectedSize(contents.size() - 1);
 		for(EObject content: contents) {

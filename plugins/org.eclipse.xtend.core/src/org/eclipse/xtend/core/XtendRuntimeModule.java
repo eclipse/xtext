@@ -23,8 +23,8 @@ import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider;
 import org.eclipse.xtend.core.parser.CustomXtendParser;
 import org.eclipse.xtend.core.parser.FlexTokenRegionProvider;
-import org.eclipse.xtend.core.parser.XtendPartialParsingHelper;
 import org.eclipse.xtend.core.parser.XtendNodeModelBuilder;
+import org.eclipse.xtend.core.parser.XtendPartialParsingHelper;
 import org.eclipse.xtend.core.parser.antlr.internal.DisabledAntlrLexer;
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.resource.XtendLocationInFileProvider;
@@ -32,8 +32,9 @@ import org.eclipse.xtend.core.resource.XtendResourceDescriptionManager;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy;
 import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
 import org.eclipse.xtend.core.tasks.XtendTaskTagProvider;
-import org.eclipse.xtend.core.typesystem.DispatchAndExtensionAwareReentrantTypeResolver;
 import org.eclipse.xtend.core.typesystem.TypeDeclarationAwareBatchTypeResolver;
+import org.eclipse.xtend.core.typesystem.XtendReentrantTypeResolver;
+import org.eclipse.xtend.core.typesystem.XtendScopeProviderAccess;
 import org.eclipse.xtend.core.typesystem.XtendTypeComputer;
 import org.eclipse.xtend.core.typing.XtendExpressionHelper;
 import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes;
@@ -85,6 +86,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.internal.ScopeProviderAccess;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.validation.EarlyExitValidator;
 
@@ -177,7 +179,11 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 
 	@Override
 	public Class<? extends DefaultReentrantTypeResolver> bindDefaultReentrantTypeResolver() {
-		return DispatchAndExtensionAwareReentrantTypeResolver.class;
+		return XtendReentrantTypeResolver.class;
+	}
+	
+	public Class<? extends ScopeProviderAccess> bindScoperProviderAccess() {
+		return XtendScopeProviderAccess.class;
 	}
 
 	public Class<? extends XbaseCompiler> bindXbaseCompiler() {
