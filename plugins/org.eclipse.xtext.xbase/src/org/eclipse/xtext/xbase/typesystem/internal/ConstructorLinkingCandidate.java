@@ -136,7 +136,6 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 		JvmDeclaredType declaringType = getConstructor().getDeclaringType();
 		if(declaringType instanceof JvmGenericType && ((JvmGenericType)declaringType).isLocal()) 
 			// for anonymous classes the type arguments have been transferred to the superclass
-			// TODO this only works as long as we don't have explicitly local classes
 			return emptyList();
 		else 
 			return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
