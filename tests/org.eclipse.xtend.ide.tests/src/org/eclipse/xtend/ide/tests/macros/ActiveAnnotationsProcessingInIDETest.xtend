@@ -38,6 +38,7 @@ import org.junit.runner.RunWith
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
@@ -102,7 +103,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 			''') [
 			val xtendClass = xtendFile.xtendTypes.filter(XtendClass).head
 			assertDocumentation('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Comment''', xtendClass)
-			assertDocumentation('''Hello World!''', xtendClass.members.filter(XtendField).filter[name.equals("object")].head.type.type)
+			assertDocumentation('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!''', xtendClass.members.filter(XtendField).filter[name.equals("object")].head.type.type)
 		]
 	}
 	
