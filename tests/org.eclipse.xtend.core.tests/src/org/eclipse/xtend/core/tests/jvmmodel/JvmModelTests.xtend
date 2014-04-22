@@ -3,16 +3,21 @@ package org.eclipse.xtend.core.tests.jvmmodel
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
+import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.XListLiteral
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
 
 class JvmModelTests extends AbstractXtendTestCase {
 	
 	@Inject extension IXtendJvmAssociations
+	
+	@Inject extension IBatchTypeResolver typeResolver
 	
 	@Test
 	def testClassImplicitSuperType() {
@@ -94,4 +99,89 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertTrue(valueOf.static)
 		assertEquals(JvmVisibility::PUBLIC, valueOf.visibility)
 	}
+	
+	@Test
+	def testAnonymousClass() {
+		val operation = '''
+			def foo() {
+				new Runnable() {
+					int field
+					override run() {}
+				}
+			}
+		'''.toString.function.directlyInferredOperation
+		resolveTypes(operation.eResource)
+		assertEquals(1, operation.localClasses.size)
+		val anonymous = operation.localClasses.head
+		assertTrue(anonymous.final)
+		assertFalse(anonymous.static)
+		assertTrue(anonymous.local)
+		assertFalse(anonymous.anonymous) // additional member -> named local class
+		assertEquals(JvmVisibility.DEFAULT, anonymous.visibility)
+		assertEquals(1, anonymous.superTypes.size)
+		assertEquals('java.lang.Runnable', anonymous.superTypes.head.qualifiedName)
+		assertEquals(3, anonymous.members.size)
+		val constructor = anonymous.members.head
+		assertTrue(constructor instanceof JvmConstructor)
+		assertEquals(0, (constructor as JvmConstructor).parameters.size)
+		assertTrue(anonymous.members.get(1) instanceof JvmField)
+		val overriding = anonymous.members.last
+		assertTrue(overriding instanceof JvmOperation)
+	}
+	
+	@Test
+	def testAnonymousClass_2() {
+		val operation = '''
+			def foo() {
+				new Runnable() {
+					override run() {}
+				}
+			}
+		'''.toString.function.directlyInferredOperation
+		resolveTypes(operation.eResource)
+		assertEquals(1, operation.localClasses.size)
+		val anonymous = operation.localClasses.head
+		assertTrue(anonymous.final)
+		assertFalse(anonymous.static)
+		assertTrue(anonymous.local)
+		assertTrue(anonymous.anonymous)
+		assertEquals(JvmVisibility.DEFAULT, anonymous.visibility)
+		assertEquals(1, anonymous.superTypes.size)
+		assertEquals('java.lang.Runnable', anonymous.superTypes.head.qualifiedName)
+		assertEquals(2, anonymous.members.size)
+		val constructor = anonymous.members.head
+		assertTrue(constructor instanceof JvmConstructor)
+		assertEquals(0, (constructor as JvmConstructor).parameters.size)
+		val overriding = anonymous.members.last
+		assertTrue(overriding instanceof JvmOperation)
+	}
+	
+	@Test
+	def testAnonymousClass_3() {
+		val operation = '''
+			def <T> foo() {
+				new Iterable<T>() {
+					override iterator() {}
+				}
+			}
+		'''.toString.function.directlyInferredOperation
+		resolveTypes(operation.eResource)
+		assertEquals(1, operation.localClasses.size)
+		val anonymous = operation.localClasses.head
+		assertTrue(anonymous.final)
+		assertFalse(anonymous.static)
+		assertTrue(anonymous.local)
+		assertTrue(anonymous.anonymous)
+		assertEquals(0, anonymous.typeParameters.size)
+		assertEquals(JvmVisibility.DEFAULT, anonymous.visibility)
+		assertEquals(1, anonymous.superTypes.size)
+		assertEquals('java.lang.Iterable<T>', anonymous.superTypes.head.qualifiedName)
+		assertEquals(2, anonymous.members.size)
+		val constructor = anonymous.members.head
+		assertTrue(constructor instanceof JvmConstructor)
+		assertEquals(0, (constructor as JvmConstructor).typeParameters.size)
+		val overriding = anonymous.members.last
+		assertTrue(overriding instanceof JvmOperation)
+	}
+	
 }
