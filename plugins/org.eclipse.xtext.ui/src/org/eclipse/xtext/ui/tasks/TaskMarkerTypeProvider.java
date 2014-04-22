@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tasks;
 
+import org.eclipse.xtext.tasks.Task;
+
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -16,7 +18,7 @@ public class TaskMarkerTypeProvider {
 
 	public static final String XTEXT_TASK_TYPE = "org.eclipse.xtext.ui.task";
 
-	public String getMarkerType() {
+	public String getMarkerType(Task task) {
 		return XTEXT_TASK_TYPE;
 	}
 

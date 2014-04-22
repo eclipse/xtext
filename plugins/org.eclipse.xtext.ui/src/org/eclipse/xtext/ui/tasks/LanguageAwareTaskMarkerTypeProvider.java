@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tasks;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.LanguageInfo;
+import org.eclipse.xtext.tasks.Task;
 
 import com.google.inject.Inject;
 
@@ -28,7 +29,7 @@ public class LanguageAwareTaskMarkerTypeProvider extends TaskMarkerTypeProvider 
 	}
 
 	@Override
-	public String getMarkerType() {
+	public String getMarkerType(Task task) {
 		return taskMarkerType;
 	}
 

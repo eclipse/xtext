@@ -55,12 +55,12 @@ class TaskMarkerContributor implements IMarkerContributor {
 
 	protected def createTaskMarkers(IFile file, List<Task> tasks, IProgressMonitor monitor) throws CoreException {
 		for (task : tasks) {
-			markerCreator.createMarker(task, file, typeProvider.markerType);
+			markerCreator.createMarker(task, file, typeProvider.getMarkerType(task));
 		}
 	}
 
 	override deleteMarkers(IFile file, IProgressMonitor monitor) {
-		file.deleteMarkers(typeProvider.markerType, true, IResource.DEPTH_ZERO)
+		file.deleteMarkers(TaskMarkerTypeProvider.XTEXT_TASK_TYPE, true, IResource.DEPTH_ZERO)
 	}
 
 }
