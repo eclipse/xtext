@@ -37,6 +37,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
@@ -117,6 +118,9 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 		Resource resource = objectToView.eResource();
 		if (resource instanceof XtextResource)
 			return ((XtextResource)resource).isValidationDisabled();
+		// If this is not done links to native java types can be navigated in the hover
+		if(resource instanceof TypeResource)
+			return false;
 		return true; 
 	}
 
