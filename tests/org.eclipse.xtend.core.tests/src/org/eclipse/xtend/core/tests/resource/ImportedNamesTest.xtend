@@ -60,4 +60,20 @@ class ImportedNamesTest extends AbstractXtendTestCase {
 		assertTrue('' + importedNames, importedNames.exists[it.lastSegment.equals('collection')]);
 	}
 	
+	@Test
+	def void testAnonymousClass() {
+		val file = file('''
+			package foo
+			
+			class Foo {
+				val foo = new Runnable() {
+					override run() {}
+				}
+			}
+		''')
+		val description = resourceDescriptionManager.getResourceDescription(file.eResource)
+		val importedNames = description.importedNames
+		assertTrue('' + importedNames, importedNames.exists[it.lastSegment.equals('runnable')]);
+	}
+	
 }
