@@ -147,7 +147,7 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch ITreeAppendable generateBody(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
-		if(!isAnonymous) {
+		if(!anonymous) {
 			if(config.generateSyntheticSuppressWarnings)
 				generateAnnotationsWithSyntheticSuppressWarnings(childAppendable, config)
 			else
@@ -176,7 +176,8 @@ class JvmModelGenerator implements IGenerator {
 				memberAppendable.closeScope
 			])
 		childAppendable.decreaseIndentation.newLine.append('}')
-		appendable.newLine
+		if(!anonymous) 
+			appendable.newLine
 	}
 	
 	def generateAnnotationsWithSyntheticSuppressWarnings(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {

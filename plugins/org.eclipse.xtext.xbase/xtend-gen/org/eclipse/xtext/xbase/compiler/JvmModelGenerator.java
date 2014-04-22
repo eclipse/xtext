@@ -306,7 +306,13 @@ public class JvmModelGenerator implements IGenerator {
       ITreeAppendable _decreaseIndentation = childAppendable.decreaseIndentation();
       ITreeAppendable _newLine = _decreaseIndentation.newLine();
       _newLine.append("}");
-      _xblockexpression = appendable.newLine();
+      ITreeAppendable _xifexpression = null;
+      boolean _isAnonymous_1 = it.isAnonymous();
+      boolean _not_1 = (!_isAnonymous_1);
+      if (_not_1) {
+        _xifexpression = appendable.newLine();
+      }
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

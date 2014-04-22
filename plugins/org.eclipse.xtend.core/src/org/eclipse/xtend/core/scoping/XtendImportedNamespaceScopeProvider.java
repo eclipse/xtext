@@ -165,14 +165,16 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 					}
 				}
 			}
-			EObject container = syntacticContainer.eContainer();
-			if (container instanceof XtendMember) {
-				syntacticContainer = (XtendMember) container;
-			} else {
-				if (typeParameters == null)
-					return result;
-				return new TypeParameterScope(typeParameters, result);
-			}
+			EObject container = syntacticContainer;
+			do {
+				container = container.eContainer();
+				if (container == null) {
+					if (typeParameters == null)
+						return result;
+					return new TypeParameterScope(typeParameters, result);
+				}
+			} while (!(container instanceof XtendMember));
+			syntacticContainer = (XtendMember) container;
 		}
 		return result;
 	}
