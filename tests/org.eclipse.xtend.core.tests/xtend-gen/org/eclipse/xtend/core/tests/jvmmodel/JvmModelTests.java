@@ -2,27 +2,34 @@ package org.eclipse.xtend.core.tests.jvmmodel;
 
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendEnum;
+import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,6 +38,10 @@ public class JvmModelTests extends AbstractXtendTestCase {
   @Inject
   @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
+  
+  @Inject
+  @Extension
+  private IBatchTypeResolver typeResolver;
   
   @Test
   public void testClassImplicitSuperType() {
@@ -212,6 +223,198 @@ public class JvmModelTests extends AbstractXtendTestCase {
       Assert.assertTrue(_isStatic_1);
       JvmVisibility _visibility_1 = valueOf.getVisibility();
       Assert.assertEquals(JvmVisibility.PUBLIC, _visibility_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAnonymousClass() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("def foo() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new Runnable() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("int field");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("override run() {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendFunction _function = this.function(_string);
+      final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(_function);
+      Resource _eResource = operation.eResource();
+      this.typeResolver.resolveTypes(_eResource);
+      EList<JvmGenericType> _localClasses = operation.getLocalClasses();
+      int _size = _localClasses.size();
+      Assert.assertEquals(1, _size);
+      EList<JvmGenericType> _localClasses_1 = operation.getLocalClasses();
+      final JvmGenericType anonymous = IterableExtensions.<JvmGenericType>head(_localClasses_1);
+      boolean _isFinal = anonymous.isFinal();
+      Assert.assertTrue(_isFinal);
+      boolean _isStatic = anonymous.isStatic();
+      Assert.assertFalse(_isStatic);
+      boolean _isLocal = anonymous.isLocal();
+      Assert.assertTrue(_isLocal);
+      boolean _isAnonymous = anonymous.isAnonymous();
+      Assert.assertFalse(_isAnonymous);
+      JvmVisibility _visibility = anonymous.getVisibility();
+      Assert.assertEquals(JvmVisibility.DEFAULT, _visibility);
+      EList<JvmTypeReference> _superTypes = anonymous.getSuperTypes();
+      int _size_1 = _superTypes.size();
+      Assert.assertEquals(1, _size_1);
+      EList<JvmTypeReference> _superTypes_1 = anonymous.getSuperTypes();
+      JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_superTypes_1);
+      String _qualifiedName = _head.getQualifiedName();
+      Assert.assertEquals("java.lang.Runnable", _qualifiedName);
+      EList<JvmMember> _members = anonymous.getMembers();
+      int _size_2 = _members.size();
+      Assert.assertEquals(3, _size_2);
+      EList<JvmMember> _members_1 = anonymous.getMembers();
+      final JvmMember constructor = IterableExtensions.<JvmMember>head(_members_1);
+      Assert.assertTrue((constructor instanceof JvmConstructor));
+      EList<JvmFormalParameter> _parameters = ((JvmConstructor) constructor).getParameters();
+      int _size_3 = _parameters.size();
+      Assert.assertEquals(0, _size_3);
+      EList<JvmMember> _members_2 = anonymous.getMembers();
+      JvmMember _get = _members_2.get(1);
+      Assert.assertTrue((_get instanceof JvmField));
+      EList<JvmMember> _members_3 = anonymous.getMembers();
+      final JvmMember overriding = IterableExtensions.<JvmMember>last(_members_3);
+      Assert.assertTrue((overriding instanceof JvmOperation));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAnonymousClass_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("def foo() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new Runnable() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("override run() {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendFunction _function = this.function(_string);
+      final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(_function);
+      Resource _eResource = operation.eResource();
+      this.typeResolver.resolveTypes(_eResource);
+      EList<JvmGenericType> _localClasses = operation.getLocalClasses();
+      int _size = _localClasses.size();
+      Assert.assertEquals(1, _size);
+      EList<JvmGenericType> _localClasses_1 = operation.getLocalClasses();
+      final JvmGenericType anonymous = IterableExtensions.<JvmGenericType>head(_localClasses_1);
+      boolean _isFinal = anonymous.isFinal();
+      Assert.assertTrue(_isFinal);
+      boolean _isStatic = anonymous.isStatic();
+      Assert.assertFalse(_isStatic);
+      boolean _isLocal = anonymous.isLocal();
+      Assert.assertTrue(_isLocal);
+      boolean _isAnonymous = anonymous.isAnonymous();
+      Assert.assertTrue(_isAnonymous);
+      JvmVisibility _visibility = anonymous.getVisibility();
+      Assert.assertEquals(JvmVisibility.DEFAULT, _visibility);
+      EList<JvmTypeReference> _superTypes = anonymous.getSuperTypes();
+      int _size_1 = _superTypes.size();
+      Assert.assertEquals(1, _size_1);
+      EList<JvmTypeReference> _superTypes_1 = anonymous.getSuperTypes();
+      JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_superTypes_1);
+      String _qualifiedName = _head.getQualifiedName();
+      Assert.assertEquals("java.lang.Runnable", _qualifiedName);
+      EList<JvmMember> _members = anonymous.getMembers();
+      int _size_2 = _members.size();
+      Assert.assertEquals(2, _size_2);
+      EList<JvmMember> _members_1 = anonymous.getMembers();
+      final JvmMember constructor = IterableExtensions.<JvmMember>head(_members_1);
+      Assert.assertTrue((constructor instanceof JvmConstructor));
+      EList<JvmFormalParameter> _parameters = ((JvmConstructor) constructor).getParameters();
+      int _size_3 = _parameters.size();
+      Assert.assertEquals(0, _size_3);
+      EList<JvmMember> _members_2 = anonymous.getMembers();
+      final JvmMember overriding = IterableExtensions.<JvmMember>last(_members_2);
+      Assert.assertTrue((overriding instanceof JvmOperation));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAnonymousClass_3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("def <T> foo() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new Iterable<T>() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("override iterator() {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendFunction _function = this.function(_string);
+      final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(_function);
+      Resource _eResource = operation.eResource();
+      this.typeResolver.resolveTypes(_eResource);
+      EList<JvmGenericType> _localClasses = operation.getLocalClasses();
+      int _size = _localClasses.size();
+      Assert.assertEquals(1, _size);
+      EList<JvmGenericType> _localClasses_1 = operation.getLocalClasses();
+      final JvmGenericType anonymous = IterableExtensions.<JvmGenericType>head(_localClasses_1);
+      boolean _isFinal = anonymous.isFinal();
+      Assert.assertTrue(_isFinal);
+      boolean _isStatic = anonymous.isStatic();
+      Assert.assertFalse(_isStatic);
+      boolean _isLocal = anonymous.isLocal();
+      Assert.assertTrue(_isLocal);
+      boolean _isAnonymous = anonymous.isAnonymous();
+      Assert.assertTrue(_isAnonymous);
+      EList<JvmTypeParameter> _typeParameters = anonymous.getTypeParameters();
+      int _size_1 = _typeParameters.size();
+      Assert.assertEquals(0, _size_1);
+      JvmVisibility _visibility = anonymous.getVisibility();
+      Assert.assertEquals(JvmVisibility.DEFAULT, _visibility);
+      EList<JvmTypeReference> _superTypes = anonymous.getSuperTypes();
+      int _size_2 = _superTypes.size();
+      Assert.assertEquals(1, _size_2);
+      EList<JvmTypeReference> _superTypes_1 = anonymous.getSuperTypes();
+      JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_superTypes_1);
+      String _qualifiedName = _head.getQualifiedName();
+      Assert.assertEquals("java.lang.Iterable<T>", _qualifiedName);
+      EList<JvmMember> _members = anonymous.getMembers();
+      int _size_3 = _members.size();
+      Assert.assertEquals(2, _size_3);
+      EList<JvmMember> _members_1 = anonymous.getMembers();
+      final JvmMember constructor = IterableExtensions.<JvmMember>head(_members_1);
+      Assert.assertTrue((constructor instanceof JvmConstructor));
+      EList<JvmTypeParameter> _typeParameters_1 = ((JvmConstructor) constructor).getTypeParameters();
+      int _size_4 = _typeParameters_1.size();
+      Assert.assertEquals(0, _size_4);
+      EList<JvmMember> _members_2 = anonymous.getMembers();
+      final JvmMember overriding = IterableExtensions.<JvmMember>last(_members_2);
+      Assert.assertTrue((overriding instanceof JvmOperation));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
