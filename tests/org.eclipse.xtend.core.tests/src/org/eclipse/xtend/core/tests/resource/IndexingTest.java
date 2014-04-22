@@ -15,7 +15,6 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.resource.DescriptionFlags;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
@@ -41,9 +40,6 @@ public class IndexingTest extends AbstractXtendTestCase {
 	
 	@Inject
 	private IQualifiedNameConverter converter;
-	
-	@Inject
-	private DescriptionFlags flags;
 	
 	@Inject
 	private IDerivedStateComputer derivedStateComputer;
@@ -108,6 +104,27 @@ public class IndexingTest extends AbstractXtendTestCase {
 				"  static String bar_static\n" +
 				"  def foo() {}\n" +
 				"  def static foo_static() {}\n" +
+				"}");
+//		expect(iterator, "test.Foo", XTEND_CLASS);
+//		assertFalse(flags.isStatic(iterator.next()));
+//		assertTrue(flags.isStatic(iterator.next()));
+//		assertFalse(flags.isStatic(iterator.next()));
+//		assertTrue(flags.isStatic(iterator.next()));
+		expect(iterator, "test.Foo", JVM_GENERIC_TYPE);
+//		expect(iterator, "test.Foo", JVM_CONSTRUCTOR);
+//		assertFalse(flags.isStatic(iterator.next()));
+//		assertTrue(flags.isStatic(iterator.next()));
+//		assertFalse(flags.isStatic(iterator.next()));
+//		assertTrue(flags.isStatic(iterator.next()));
+		assertFalse(iterator.hasNext()); 
+	}
+	
+	@Test public void testAnonymousClass() throws Exception {
+		Iterator<IEObjectDescription> iterator = getExportedObjects("package test\n" +
+				"class Foo {\n" +
+				"  val bar = new Runnable() {\n" +
+				"    override run() {}\n" +
+				"  }\n" +
 				"}");
 //		expect(iterator, "test.Foo", XTEND_CLASS);
 //		assertFalse(flags.isStatic(iterator.next()));

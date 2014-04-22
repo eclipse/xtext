@@ -84,7 +84,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 	def void registerAllTypes(JvmType type, (String)=>boolean acceptor) {
 		if (type == null)
 			return;
-		if (type.local || acceptor.apply(type.identifier)) {
+		if (!type.local && acceptor.apply(type.identifier)) {
 			switch type {
 				JvmGenericType : {
 					registerAllTypes(type.declaringType, acceptor)
