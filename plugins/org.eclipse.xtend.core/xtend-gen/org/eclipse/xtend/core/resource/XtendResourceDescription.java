@@ -147,16 +147,17 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     if (_equals) {
       return;
     }
-    boolean _or = false;
+    boolean _and = false;
     boolean _isLocal = this.isLocal(type);
-    if (_isLocal) {
-      _or = true;
+    boolean _not = (!_isLocal);
+    if (!_not) {
+      _and = false;
     } else {
       String _identifier = type.getIdentifier();
       Boolean _apply = acceptor.apply(_identifier);
-      _or = (_apply).booleanValue();
+      _and = (_apply).booleanValue();
     }
-    if (_or) {
+    if (_and) {
       boolean _matched = false;
       if (!_matched) {
         if (type instanceof JvmGenericType) {
