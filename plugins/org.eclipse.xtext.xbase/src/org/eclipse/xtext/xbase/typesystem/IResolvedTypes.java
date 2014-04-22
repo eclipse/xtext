@@ -113,7 +113,7 @@ public interface IResolvedTypes {
 	 * 
 	 * <pre>
 	 * class C&lt;T, V&gt; {
-	 *   public <P> C(P p) {}
+	 *   public &lt;PLgt; C(P p) {}
 	 * }
 	 * </pre>
 	 * 

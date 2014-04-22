@@ -456,8 +456,13 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if(element instanceof JvmFeature)
 			return ((JvmFeature) element).isStatic();
 		if(element instanceof JvmDeclaredType)
-			return ((JvmDeclaredType) element).isStatic() || ((JvmDeclaredType)element).getDeclaringType() == null;
+			return ((JvmDeclaredType) element).isStatic() || (
+					((JvmDeclaredType)element).getDeclaringType() == null && !isLocalType(element));
 		return false;
+	}
+	
+	protected boolean isLocalType(EObject element) {
+		return element instanceof JvmGenericType && ((JvmGenericType)element).isLocal();
 	}
 	
 	@Check

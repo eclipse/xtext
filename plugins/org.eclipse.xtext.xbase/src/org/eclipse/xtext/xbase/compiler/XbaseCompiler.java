@@ -31,7 +31,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.generator.trace.ILocationData;
@@ -81,6 +80,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.internal.FeatureLinkHelper;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -119,6 +119,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Inject
 	private XSwitchExpressions switchExpressions;
+	
+	@Inject
+	private FeatureLinkHelper featureLinkHelper;
 	
 	/**
 	 * @param isReferenced unused in this context but necessary for dispatch signature 
@@ -906,12 +909,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		appendableWithNewKeyword.append("new ");
 		List<LightweightTypeReference> typeArguments = batchTypeResolver.resolveTypes(expr).getActualTypeArguments(expr);
 		JvmConstructor constructor = expr.getConstructor();
-		JvmDeclaredType constructedType = constructor.getDeclaringType();
-		List<JvmTypeParameter> typeParameters = constructedType instanceof JvmTypeParameterDeclarator 
-				? ((JvmTypeParameterDeclarator) constructedType).getTypeParameters() 
-				: Collections.<JvmTypeParameter>emptyList(); 
 		List<JvmTypeParameter> constructorTypeParameters = constructor.getTypeParameters();
-		boolean hasTypeArguments = !typeArguments.isEmpty() && (typeParameters.size() + constructorTypeParameters.size() == typeArguments.size());
+		boolean hasTypeArguments = !typeArguments.isEmpty() && (featureLinkHelper.getDeclaredTypeParameters(constructor).size() == typeArguments.size());
 		List<JvmTypeReference> explicitTypeArguments = expr.getTypeArguments();
 		List<LightweightTypeReference> constructorTypeArguments = Collections.emptyList();
 		if (hasTypeArguments) {

@@ -142,7 +142,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			JvmType jvmType = reference.getType();
 			if(jvmType instanceof JvmGenericType && ((JvmGenericType) jvmType).isLocal()) {
 				if(reference.getSuperTypes().size() == 1)
-					return reference.getSuperTypes().get(1);
+					return reference.getSuperTypes().get(0);
 			}
 			return reference;
 		}
