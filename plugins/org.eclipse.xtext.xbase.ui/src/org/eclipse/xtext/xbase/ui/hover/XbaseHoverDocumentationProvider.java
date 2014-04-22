@@ -52,6 +52,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -129,7 +130,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 		getDocumentationWithPrefix(object);
 		Javadoc javadoc = getJavaDoc();
 		if (javadoc == null)
-			return "";
+			return buffer.toString();
 		TagElement deprecatedTag = null;
 		TagElement start = null;
 		List<TagElement> parameters = new ArrayList<TagElement>();
@@ -256,30 +257,34 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	}
 
 	protected void addAnnotations(EObject object) {
-		Set<EObject> jvmElements = associations.getJvmElements(object);
-		if (jvmElements.size() > 0) {
-			EObject associatedElement = Lists.newArrayList(jvmElements).get(0);
-			if (associatedElement instanceof JvmAnnotationTarget) {
-				EList<JvmAnnotationReference> annotations = ((JvmAnnotationTarget) associatedElement).getAnnotations();
-				for (JvmAnnotationReference annotationReference : annotations) {
-					buffer.append("@");
-					buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil
-							.getURI(annotationReference.getAnnotation()), annotationReference.getAnnotation()
-							.getSimpleName()));
-					if (annotationReference.getExplicitValues().size() > 0) {
-						buffer.append("(");
-						for (JvmAnnotationValue value : annotationReference.getExplicitValues()) {
-							ITreeAppendable appendable = new FakeTreeAppendable();
-							jvmModelGenerator.toJava(value, appendable, generatorConfigProvider.get(object));
-							String java = appendable.getContent();
-							buffer.append(java);
-						}
-						buffer.append(")");
-					}
-					buffer.append("<br>");
-
+		List<JvmAnnotationReference> annotations = Lists.newArrayList();
+		if(object instanceof JvmAnnotationTarget) {
+			annotations.addAll(((JvmAnnotationTarget) object).getAnnotations());
+		} else {
+			Set<EObject> jvmElements = associations.getJvmElements(object);
+			if (jvmElements.size() > 0) {
+				EObject associatedElement = Lists.newArrayList(jvmElements).get(0);
+				if (associatedElement instanceof JvmAnnotationTarget) {
+					annotations.addAll(((JvmAnnotationTarget) associatedElement).getAnnotations());
 				}
 			}
+		}
+		for (JvmAnnotationReference annotationReference : annotations) {
+			buffer.append("@");
+			URI uri = EcoreUtil.getURI(annotationReference.getAnnotation());
+			buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, annotationReference.getAnnotation().getSimpleName()));
+			if (annotationReference.getExplicitValues().size() > 0) {
+				buffer.append("(");
+				for (JvmAnnotationValue value : annotationReference.getExplicitValues()) {
+					ITreeAppendable appendable = new FakeTreeAppendable();
+					jvmModelGenerator.toJava(value, appendable, generatorConfigProvider.get(object));
+					String java = appendable.getContent();
+					buffer.append(java);
+				}
+				buffer.append(")");
+			}
+			buffer.append("<br>");
+
 		}
 
 	}

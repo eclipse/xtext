@@ -178,7 +178,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         _builder.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Comment");
         ActiveAnnotationsProcessingInIDETest.this.assertDocumentation(_builder, xtendClass);
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("Hello World!");
+        _builder_1.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Hello World!");
         EList<XtendMember> _members = xtendClass.getMembers();
         Iterable<XtendField> _filter_1 = Iterables.<XtendField>filter(_members, XtendField.class);
         final Function1<XtendField, Boolean> _function = new Function1<XtendField, Boolean>() {
