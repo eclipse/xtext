@@ -488,6 +488,7 @@ public class XtendCompiler extends XbaseCompiler {
 		XtendClass anonymousXtendClass = expr.getAnonymousClass();
 		JvmGenericType inferredLocalClass = associations.getInferredType(anonymousXtendClass);
 		if(!inferredLocalClass.isAnonymous()) {
+			b.newLine();
 			jvmModelGenerator.generateBody(inferredLocalClass, b, generatorConfigProvider.get(expr));
 		} 
 		if (!isReferenced) {

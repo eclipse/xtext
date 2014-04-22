@@ -640,8 +640,8 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				return input instanceof JvmGenericType && ((JvmGenericType) input).isAnonymous();
 			}
 		}).size();
-		String anonymousClassName = "_"
-				+ ((JvmIdentifiableElement) EcoreUtil.getRootContainer(container)).getSimpleName() + uniqueNumber;
+		String anonymousClassName = "__"
+				+ ((JvmIdentifiableElement) EcoreUtil.getRootContainer(container)).getSimpleName() + "_" + uniqueNumber;
 		return anonymousClassName;
 	}
 
