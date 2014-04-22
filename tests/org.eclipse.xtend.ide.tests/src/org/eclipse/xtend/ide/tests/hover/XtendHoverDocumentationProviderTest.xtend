@@ -1,6 +1,9 @@
 package org.eclipse.xtend.ide.tests.hover
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.jface.text.Region
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
@@ -11,8 +14,10 @@ import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider
 import org.junit.After
 import org.junit.Test
+import org.eclipse.xtext.common.types.JvmAnnotationTarget
 
 class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 	
@@ -24,6 +29,12 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 	
 	@Inject
 	private IEObjectHoverDocumentationProvider documentationProvider
+	
+	@Inject
+	private TestingXbaseHoverProvider hoverProvider
+	
+	@Inject
+	private IXtendJvmAssociations jvmModelAssociations
 	
 	/**
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
@@ -383,6 +394,58 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 <code><a href="eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2">testpackage.Foo#foo(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>'''.toString, docu)
 	}
 	
+	@Test
+    def bug380551(){
+        val xtendFile = parseHelper.parse('''
+        package testpackage
+        @A
+        class Foo {
+        }
+        
+        annotation A {}
+        ''',resourceSet)
+        val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+        val docu = documentationProvider.getDocumentation(clazz)
+        assertEquals('''@<a href="eclipse-xtext-doc:__synthetic0.xtend%23/2">A</a><br>'''.toString, docu)
+    }
+    
+    	
+	@Test
+    def bug380551_2(){
+        val xtendFile = parseHelper.parse('''
+        package testpackage
+        @A
+        class Foo {
+        	def bar(Foo x){}
+        }
+        
+        annotation A {}
+        ''',resourceSet)
+        val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+        val func = clazz.members.head as XtendFunction
+        val docu = documentationProvider.getDocumentation(func.parameters.head.parameterType.type)
+        assertEquals('''@<a href="eclipse-xtext-doc:__synthetic0.xtend%23/2">A</a><br>'''.toString, docu)
+    }
+    // This test makes sure that a Java URI to a native Java type in JavaDoc can be resolved
+    // Normally the invocation would be done through org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider.addLinkListener(...).new ILinkHandler() {...}.handleInlineXtextdocLink(URI)
+    // The necessary change was in org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider.isValidationDisabled(EObject)
+    @Test
+    def bug380551_TestLinkToNativeJavaType(){
+        val xtendFile = parseHelper.parse('''
+        package testpackage
+        import javax.annotation.Resource
+        @Resource
+        class Foo {
+        }
+        ''',resourceSet)
+        val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+        val target = jvmModelAssociations.getInferredType(clazz) as JvmAnnotationTarget
+      	assertNotNull(hoverProvider.getHoverInfo(target.annotations.head.annotation))
+    }
+    
+   
+	
+	
 	def getResourceSet(){
 		getInjector.getInstance(typeof(IResourceSetProvider)).get(testHelper.project)
 	}
@@ -390,5 +453,12 @@ class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 	@After
 	def void cleanup(){
 		testHelper.tearDown
+	}
+}
+
+ class TestingXbaseHoverProvider extends XbaseHoverProvider {
+		
+   def getHoverInfo(EObject element) {
+		super.getHoverInfo(element, new Region(0,0) , null)
 	}
 }

@@ -10,17 +10,27 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtend.ide.tests.hover.TestingXbaseHoverProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
+import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -42,6 +52,12 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
   
   @Inject
   private IEObjectHoverDocumentationProvider documentationProvider;
+  
+  @Inject
+  private TestingXbaseHoverProvider hoverProvider;
+  
+  @Inject
+  private IXtendJvmAssociations jvmModelAssociations;
   
   /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=390429
@@ -809,6 +825,107 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2\">testpackage.Foo#foo(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void bug380551() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.append("@A");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("annotation A {}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      final String docu = this.documentationProvider.getDocumentation(clazz);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("@<a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/2\">A</a><br>");
+      String _string = _builder_1.toString();
+      Assert.assertEquals(_string, docu);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void bug380551_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.append("@A");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def bar(Foo x){}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("annotation A {}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFunction func = ((XtendFunction) _head);
+      EList<XtendParameter> _parameters = func.getParameters();
+      XtendParameter _head_1 = IterableExtensions.<XtendParameter>head(_parameters);
+      JvmTypeReference _parameterType = _head_1.getParameterType();
+      JvmType _type = _parameterType.getType();
+      final String docu = this.documentationProvider.getDocumentation(_type);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("@<a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/2\">A</a><br>");
+      String _string = _builder_1.toString();
+      Assert.assertEquals(_string, docu);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void bug380551_TestLinkToNativeJavaType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testpackage");
+      _builder.newLine();
+      _builder.append("import javax.annotation.Resource");
+      _builder.newLine();
+      _builder.append("@Resource");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      JvmGenericType _inferredType = this.jvmModelAssociations.getInferredType(clazz);
+      final JvmAnnotationTarget target = ((JvmAnnotationTarget) _inferredType);
+      EList<JvmAnnotationReference> _annotations = target.getAnnotations();
+      JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
+      JvmAnnotationType _annotation = _head.getAnnotation();
+      XtextBrowserInformationControlInput _hoverInfo = this.hoverProvider.getHoverInfo(_annotation);
+      Assert.assertNotNull(_hoverInfo);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
