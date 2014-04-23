@@ -31,6 +31,7 @@ import org.eclipse.xtend.core.resource.XtendLocationInFileProvider;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionManager;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy;
 import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
+import org.eclipse.xtend.core.serializer.XtendSerializerScopeProvider;
 import org.eclipse.xtend.core.tasks.XtendTaskTagProvider;
 import org.eclipse.xtend.core.typesystem.TypeDeclarationAwareBatchTypeResolver;
 import org.eclipse.xtend.core.typesystem.XtendReentrantTypeResolver;
@@ -116,6 +117,13 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
 				.to(XtendImportedNamespaceScopeProvider.class);
+	}
+
+	@Override
+	public void configureSerializerIScopeProvider(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
+			.annotatedWith(org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding.class)
+			.to(XtendSerializerScopeProvider.class);
 	}
 
 	@Override

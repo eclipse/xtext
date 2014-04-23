@@ -187,4 +187,17 @@ public abstract class AbstractXtendTestData extends AbstractXtendTestCase {
 		str.append("}");
 		doTest(str.toString());
 	}
+	
+	@Test public void testAnonymousClass() throws Exception {
+		StringBuilder str = new StringBuilder();
+		str.append("package myPackage\n");
+		str.append("class Foo {\n");
+		str.append("	val bar = new Runnable() {\n");
+		str.append("		override run() {\n");
+		str.append("		}\n");
+		str.append("	}\n");
+		str.append("}");
+		doTest(str.toString());
+	}
+
 }
