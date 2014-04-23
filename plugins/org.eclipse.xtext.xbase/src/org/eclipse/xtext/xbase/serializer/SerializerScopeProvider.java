@@ -22,7 +22,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -68,9 +67,6 @@ public class SerializerScopeProvider extends XbaseBatchScopeProvider implements 
 	
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
-	
-	@Inject
-	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	@Inject
 	private IImportsConfiguration importsConfiguration;
