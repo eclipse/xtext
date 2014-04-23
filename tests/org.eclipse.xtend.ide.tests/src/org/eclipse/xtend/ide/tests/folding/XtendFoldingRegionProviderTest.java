@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.tests.folding;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -46,6 +47,28 @@ public class XtendFoldingRegionProviderTest extends AbstractXtendUITestCase {
 		FoldedPosition first = foldingRegions.iterator().next();
 		assertEquals(13, first.getOffset());
 		assertEquals(43, first.length);
+	}
+	
+	@Test public void testFoldAnonymousClass() throws Exception {
+		String content = "class Foo {\n"
+				+ " val foo = new Runnable() {\n"
+				+ "   override run() {\n"
+				+ "   }\n"
+				+ " }\n"
+				+ "}";
+		IFile iFile = testHelper.createFile("test/Bar",content);
+		Collection<FoldedPosition> foldingRegions = foldingRegionProvider.getFoldingRegions(openFileAndReturnDocument(iFile));
+		assertEquals(3, foldingRegions.size());
+		Iterator<FoldedPosition> iterator = foldingRegions.iterator();
+		FoldedPosition next = iterator.next();
+		assertEquals(0, next.offset);
+		assertEquals(69, next.length);
+		next = iterator.next();
+		assertEquals(12, next.offset);
+		assertEquals(56, next.length);
+		next = iterator.next();
+		assertEquals(40, next.offset);
+		assertEquals(25, next.length);
 	}
 	
 	protected IXtextDocument openFileAndReturnDocument(IFile iFile) throws Exception {

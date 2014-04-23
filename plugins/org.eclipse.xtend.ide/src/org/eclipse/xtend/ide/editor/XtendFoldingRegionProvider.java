@@ -39,8 +39,7 @@ public class XtendFoldingRegionProvider extends DefaultFoldingRegionProvider {
 	
 	@Override
 	protected boolean shouldProcessContent(EObject object) {
-		EClass clazz = object.eClass();
-		return clazz == XtendPackage.Literals.XTEND_CLASS || clazz == XtendPackage.Literals.XTEND_FILE;
+		return true;
 	}
 	
 	@Override
