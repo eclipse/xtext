@@ -12,6 +12,7 @@ import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
@@ -34,6 +35,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
+import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
@@ -461,6 +463,22 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if(inferredType != null && hasCycleInHierarchy(inferredType, Sets.<JvmGenericType> newHashSet())) {
 			error("The inheritance hierarchy of " + notNull(xtendInterface.getName()) + " contains cycles",
 					XTEND_TYPE_DECLARATION__NAME, CYCLIC_INHERITANCE);
+		}
+	}
+	
+	@Check
+	public void checkSuperTypes(AnonymousClassConstructorCall constructorCall) {
+		JvmGenericType inferredType = associations.getInferredType(constructorCall.getAnonymousClass());
+		if (inferredType != null && !inferredType.getSuperTypes().isEmpty()) {
+			JvmTypeReference superTypeRef = inferredType.getSuperTypes().get(0);
+			JvmType superType = superTypeRef.getType();
+			if(superType instanceof JvmGenericType && ((JvmGenericType) superType).isFinal())
+				error("Attempt to override final class", XCONSTRUCTOR_CALL__CONSTRUCTOR, INSIGNIFICANT_INDEX, OVERRIDDEN_FINAL);
+			if(isInvalidWildcard(superTypeRef)) 
+				error("Anonymous class cannot extend or implement "
+						+ superTypeRef.getIdentifier() 
+						+ ". A supertype may not specify any wildcard", 
+						XCONSTRUCTOR_CALL__CONSTRUCTOR, INSIGNIFICANT_INDEX, WILDCARD_IN_SUPERTYPE);
 		}
 	}
 	
