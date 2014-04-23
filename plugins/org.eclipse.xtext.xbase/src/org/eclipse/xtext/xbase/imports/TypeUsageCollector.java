@@ -17,8 +17,10 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -333,6 +335,12 @@ public class TypeUsageCollector {
 			if (potentiallyLinkedType != null && !potentiallyLinkedType.eIsProxy()) {
 				referencedThing = potentiallyLinkedType;
 			}
+		}
+		if(owner instanceof XConstructorCall && referencedThing instanceof JvmConstructor && 
+				((JvmConstructor) referencedThing).getDeclaringType() instanceof JvmGenericType) {
+			JvmGenericType referencedType = (JvmGenericType) ((JvmConstructor) referencedThing).getDeclaringType();
+			if(referencedType.isAnonymous() && referencedType.getSuperTypes().size() == 1) 
+				referencedThing = referencedType.getSuperTypes().get(0).getType();
 		}
 		JvmDeclaredType referencedType = null;
 		if (referencedThing instanceof JvmDeclaredType) {
