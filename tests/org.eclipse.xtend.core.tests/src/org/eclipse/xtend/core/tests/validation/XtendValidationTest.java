@@ -1903,6 +1903,30 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoError(file.getXtendTypes().get(0), WILDCARD_IN_SUPERTYPE);
 	}
 	
+	@Test
+	public void testWildcardSuperType_4() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+				+ " val bar = new Bar<?>() {" 
+				+ " }"
+				+ "}"
+				+ "class Bar<T> {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), ANONYMOUS_CLASS_CONSTRUCTOR_CALL, WILDCARD_IN_SUPERTYPE);
+	}
+
+	@Test
+	public void testAnonymousClassExtendsFinal() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+				+ " val bar = new Bar() {" 
+				+ " }"
+				+ "}"
+				+ "final class Bar {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), ANONYMOUS_CLASS_CONSTRUCTOR_CALL, OVERRIDDEN_FINAL);
+	}
+
 	@Test 
 	public void testTypeParameterAccessedFromStaticMember_0() throws Exception {
 		XtendFile file = file(
