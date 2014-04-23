@@ -34,19 +34,13 @@
 						<iu>
 							<id>org.eclipse.jdt.annotation</id>
 						</iu>
-						<iu>
-							<id>org.eclipse.equinox.common</id>
-						</iu>
-
+						
 						<!-- Sources -->
 						<iu>
 							<id>org.eclipse.jdt.core.source</id>
 						</iu>
 						<iu>
 							<id>org.eclipse.jdt.annotation.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.equinox.common.source</id>
 						</iu>
 					</ius>
 				</configuration>
