@@ -8,9 +8,11 @@
 package org.eclipse.xtend.ide.editor;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.nodemodel.util.NodeModelUtils.*;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,7 +32,6 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -41,9 +42,9 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -66,6 +67,9 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 	
 	@Inject
 	private OverrideHelper overrideHelper;
+	
+	@Inject
+	private IBatchTypeResolver typeResolver;
 	
 	@Override
 	public void afterCreatePartControl(XtextEditor xtextEditor) {
@@ -160,6 +164,7 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 		Map<Annotation, Position> annotationToPosition = Maps.newHashMap();
 		for (XtendFunction xtendFunction : getXtendFunctions(xtendFile)) {
 			if (xtendFunction.isOverride()) {
+				typeResolver.resolveTypes(xtendFunction);
 				INode node = NodeModelUtils.getNode(xtendFunction);
 				JvmOperation inferredOperation = associations.getDirectlyInferredOperation(xtendFunction);
 				if (inferredOperation != null) {
@@ -180,11 +185,14 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 	}
 
 	private Iterable<XtendFunction> getXtendFunctions(XtendFile xtendFile) {
-		return concat(transform(xtendFile.getXtendTypes(), new Function<XtendTypeDeclaration, Iterable<XtendFunction>>() {
-			public Iterable<XtendFunction> apply(XtendTypeDeclaration input) {
-				return filter(input.getMembers(), XtendFunction.class);
+		List<XtendFunction> xtendFunctions = newArrayList();
+		for(Iterator<EObject> i = xtendFile.eAllContents(); i.hasNext();) {
+			EObject next = i.next();
+			if (next instanceof XtendFunction) {
+				xtendFunctions.add((XtendFunction) next);
 			}
-		}));
+		}
+		return xtendFunctions;
 	}
 
 	protected boolean isOverwriteIndicator(JvmOperation jvmOperation) {
