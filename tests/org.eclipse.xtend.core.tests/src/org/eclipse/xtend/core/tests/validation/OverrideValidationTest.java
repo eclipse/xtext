@@ -12,12 +12,9 @@ import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.junit.Test;
 
@@ -935,5 +932,10 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	@Test public void testAnonymousClassIncompatibleConstructorArg_1() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { val foo = new Bar(new Object()) { } } class Bar { new(int x) {} }");
 		helper.assertError(xtendClass, XbasePackage.Literals.XCONSTRUCTOR_CALL, INCOMPATIBLE_TYPES);
+	}
+
+	@Test public void testAnonymousClassConstructorVisibility() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { val foo = new Bar() { } } class Bar { private new() {} }");
+		helper.assertError(xtendClass, ANONYMOUS_CLASS_CONSTRUCTOR_CALL, FEATURE_NOT_VISIBLE);
 	}
 }

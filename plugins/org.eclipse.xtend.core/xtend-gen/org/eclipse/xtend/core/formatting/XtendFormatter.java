@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.formatting.RichStringFormatter;
 import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys;
+import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
@@ -861,6 +862,16 @@ public class XtendFormatter extends XbaseFormatter2 {
     this.richStringFormatter.format(callback, format, rs);
   }
   
+  protected void _format(final AnonymousClassConstructorCall constructorCall, final FormattableDocument format) {
+    super._format(((XConstructorCall) constructorCall), format);
+    XtendClass _anonymousClass = constructorCall.getAnonymousClass();
+    boolean _notEquals = (!Objects.equal(_anonymousClass, null));
+    if (_notEquals) {
+      XtendClass _anonymousClass_1 = constructorCall.getAnonymousClass();
+      this.formatBody(_anonymousClass_1, format);
+    }
+  }
+  
   /**
    * Always put existing modifiers into this fixed order
    */
@@ -984,6 +995,9 @@ public class XtendFormatter extends XbaseFormatter2 {
       return;
     } else if (annotationType instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)annotationType, format);
+      return;
+    } else if (annotationType instanceof AnonymousClassConstructorCall) {
+      _format((AnonymousClassConstructorCall)annotationType, format);
       return;
     } else if (annotationType instanceof RichString) {
       _format((RichString)annotationType, format);
