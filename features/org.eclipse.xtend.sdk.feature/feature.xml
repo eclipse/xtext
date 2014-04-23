@@ -152,12 +152,14 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          id="org.eclipse.xtend.standalone"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="org.eclipse.xtend.standalone.source"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>
