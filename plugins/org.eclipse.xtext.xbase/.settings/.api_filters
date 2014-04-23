@@ -8,4 +8,12 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference">
+        <filter id="305422471">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference"/>
+                <message_argument value="org.eclipse.xtext.xbase_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
