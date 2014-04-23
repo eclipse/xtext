@@ -34,12 +34,15 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.lib.macro.Active;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmType;
@@ -54,10 +57,13 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -110,8 +116,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
 		for (XtendAnnotationTarget xtendType : file.getXtendTypes()) {
-			highlightDeprecatedXtendAnnotationTarget(acceptor, xtendType);
-			highlightRichStringsInAnnotations(acceptor, xtendType);
+			highlightAnnotations(acceptor, xtendType);
 			for (XtendMember member : filter(xtendType.eContents(), XtendMember.class)) {
 				if (member.eClass() == XtendPackage.Literals.XTEND_FUNCTION) {
 					XtendFunction function = (XtendFunction) member;
@@ -128,30 +133,43 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 					XExpression initializer = field.getInitialValue();
 					highlightRichStrings(initializer, acceptor);
 				}
-				highlightDeprecatedXtendAnnotationTarget(acceptor, member);
-				highlightRichStringsInAnnotations(acceptor, member);
+				highlightAnnotations(acceptor, member);
 			}
 		}
 		super.doProvideHighlightingFor(resource, acceptor);
 	}
 
-	protected void highlightRichStringsInAnnotations(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target) {
-		if (target != null) {
+	protected void highlightAnnotations(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target) {
+		if(target != null){
 			for(XAnnotation annotation: target.getAnnotations()) {
 				highlightRichStrings(annotation, acceptor);
+				highlightDeprecatedXtendAnnotationTarget(acceptor, target, annotation);
 			}
 		}
 	}
 
-	protected void highlightDeprecatedXtendAnnotationTarget(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target){
-		if(target != null)
-			for(XAnnotation annotation : target.getAnnotations()){
-				JvmType annotationType = annotation.getAnnotationType();
-				if(annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType && DeprecationUtil.isDeprecated((JvmAnnotationType) annotationType)){
-					EStructuralFeature nameFeature = target.eClass().getEStructuralFeature("name");
-					highlightObjectAtFeature(acceptor, target, nameFeature, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
-				}
+	@Override
+	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor) {
+		super.highlightAnnotation(annotation, acceptor);
+		JvmType annotationType = annotation.getAnnotationType();
+		if(annotationType != null && annotationType instanceof JvmAnnotationTarget && Iterables.any(((JvmAnnotationTarget) annotationType).getAnnotations(), new Predicate<JvmAnnotationReference>() {
+
+			public boolean apply(JvmAnnotationReference input) {
+				return input.getAnnotation().getIdentifier().equals(Active.class.getCanonicalName());
 			}
+		}))
+		{
+			highlightObjectAtFeature(acceptor, annotation, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
+		}
+
+	}
+
+	protected void highlightDeprecatedXtendAnnotationTarget(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target, XAnnotation annotation){
+		JvmType annotationType = annotation.getAnnotationType();
+		if(annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType && DeprecationUtil.isDeprecated((JvmAnnotationType) annotationType)){
+			EStructuralFeature nameFeature = target.eClass().getEStructuralFeature("name");
+			highlightObjectAtFeature(acceptor, target, nameFeature, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		}
 	}
 
 	protected void highlightRichStrings(XExpression expression, IHighlightedPositionAcceptor acceptor) {

@@ -23,6 +23,7 @@ public class XtendHighlightingConfiguration extends XbaseHighlightingConfigurati
 	public static final String INSIGNIFICANT_TEMPLATE_TEXT = "xtend.insignificant.template.text";
 	public static final String POTENTIAL_LINE_BREAK = "xtend.potential.line.break";
 	public static final String TEMPLATE_LINE_BREAK = "xtend.template.line.break";
+	public static final String ACTIVE_ANNOTATION = "xtend.active.annotation";
 	
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
@@ -32,6 +33,7 @@ public class XtendHighlightingConfiguration extends XbaseHighlightingConfigurati
 		acceptor.acceptDefaultHighlighting(INSIGNIFICANT_TEMPLATE_TEXT, "Insignificant Template Text", insignificantTemplateTextStyle());
 		acceptor.acceptDefaultHighlighting(POTENTIAL_LINE_BREAK, "Potential Line Break (if line is not empty)", insignificantTemplateTextStyle());
 		acceptor.acceptDefaultHighlighting(TEMPLATE_LINE_BREAK, "Template Line Break", richTextStyle());
+		acceptor.acceptDefaultHighlighting(ACTIVE_ANNOTATION, "Active Annotation", activeAnnotationStyle());
 
 		
 	}
@@ -49,6 +51,12 @@ public class XtendHighlightingConfiguration extends XbaseHighlightingConfigurati
 	
 	public TextStyle insignificantTemplateTextStyle() {
 		TextStyle textStyle = stringTextStyle().copy();
+		return textStyle;
+	}
+
+	public TextStyle activeAnnotationStyle() {
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(203, 68, 55));
 		return textStyle;
 	}
 

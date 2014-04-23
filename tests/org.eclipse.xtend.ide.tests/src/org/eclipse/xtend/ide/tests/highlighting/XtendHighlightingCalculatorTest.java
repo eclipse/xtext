@@ -16,6 +16,7 @@ import java.util.Set;
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.highlighting.XtendHighlightingCalculator;
 import org.eclipse.xtend.ide.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtext.resource.XtextResource;
@@ -99,6 +100,9 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	
 	protected XtendClass member(String string) throws Exception {
 		return clazz(getPrefix()+string+"}");
+	}
+	protected XtendTypeDeclaration secondMember(String string) throws Exception {
+		return file(getPrefix()+string+"}").getXtendTypes().get(1);
 	}
 	
 	@Override
@@ -534,6 +538,36 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		}
 	}
 	
+	@Test public void testActiveAnnotation_Type() throws Exception {
+		addImport("org.eclipse.xtend.lib.macro.Active");
+		addImport("java.lang.annotation.ElementType");
+		addImport("java.lang.annotation.Target");
+		addImport("org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+		addImport("org.eclipse.xtend.lib.macro.TransformationContext");
+		addImport("org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+		classDefString = "@Target(ElementType.TYPE) @Active(ObservableCompilationParticipant) annotation Observable {} class ObservableCompilationParticipant extends AbstractClassProcessor { override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {}}";
+		classDefString = classDefString + " @Observable class Bar ";
+		String model = "{}";
+		expect(566, 10, XbaseHighlightingConfiguration.ANNOTATION);
+		expect(566, 10, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
+		highlightActiveAnnotation(model);
+	}
+
+	@Test public void testActiveAnnotation_Field() throws Exception {
+		addImport("org.eclipse.xtend.lib.macro.Active");
+		addImport("java.lang.annotation.ElementType");
+		addImport("java.lang.annotation.Target");
+		addImport("org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+		addImport("org.eclipse.xtend.lib.macro.TransformationContext");
+		addImport("org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+		classDefString = "@Target(ElementType.FIELD) @Active(ObservableCompilationParticipant) annotation Observable {} class ObservableCompilationParticipant extends AbstractFieldProcessor { override doTransform(MutableFieldDeclaration field, extension TransformationContext context) {}}";
+		classDefString = classDefString + "class Bar ";
+		String model = "{} @Observable String myAnnotatedString ";
+		expect(592, 10, XbaseHighlightingConfiguration.ANNOTATION);
+		expect(592, 10, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
+		highlightActiveAnnotation(model);
+	}
+
 	protected void highlight(String functionBody) {
 		try {
 			XtendClass model = member(functionBody);
@@ -544,6 +578,16 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		}
 	}
 	
+	protected void highlightActiveAnnotation(String functionBody) {
+		try {
+			XtendTypeDeclaration model = secondMember(functionBody);
+			calculator.provideHighlightingFor((XtextResource) model.eResource(), this);
+			assertTrue(expectedRegions.toString(), expectedRegions.isEmpty());
+		} catch(Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	protected void addImport(String importString){
 		imports.add("import " + importString);
 	}
