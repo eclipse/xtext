@@ -15,6 +15,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -891,6 +892,50 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	@Test public void testInterfaceCompatibleThrowsClause_13() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowingInterface { override <E extends RuntimeException> generifiedRuntimeException() throws E, NullPointerException }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
 
+	@Test public void testAnonymousClassMustBeAbstract() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { val foo = new Runnable() {} }");
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT);
+	}
+
+	@Test public void testAnonymousClassIncompatibleSignature_0() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { val foo = new Runnable() { override run(int x) {} } }");
+		helper.assertError(xtendClass, XTEND_FUNCTION, OBSOLETE_OVERRIDE);
+	}
+	
+	@Test public void testAnonymousClassIncompatibleSignature_1() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { val foo = new Runnable() { override int run() { 1 } } }");
+		helper.assertError(xtendClass, XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+	}
+	
+	@Test public void testAnonymousClassIncompatibleSignature_2() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { val foo = new Runnable() { override run() throws Exception {} } }");
+		helper.assertError(xtendClass, XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
+	@Test public void testAnonymousClassMissingOverride() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { val foo = new Runnable() { def run() {} } }");
+		helper.assertError(xtendClass, XTEND_FUNCTION, MISSING_OVERRIDE);
+	}
+	
+	@Test public void testAnonymousClassIncompatibleTypeArg() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { val foo = new Bar<String>() { } } interface Bar<T extends Number> {}");
+		helper.assertError(xtendClass, ANONYMOUS_CLASS_CONSTRUCTOR_CALL, TYPE_BOUNDS_MISMATCH);
+	}
+	
+	@Test public void testAnonymousClassIncompatibleConstructorArg_0() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { val foo = new Bar() { } } class Bar { new(String x) {} }");
+		helper.assertError(xtendClass, ANONYMOUS_CLASS_CONSTRUCTOR_CALL, INVALID_NUMBER_OF_ARGUMENTS);
+	}
+	
+	@Test public void testAnonymousClassIncompatibleConstructorArg_1() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { val foo = new Bar(new Object()) { } } class Bar { new(int x) {} }");
+		helper.assertError(xtendClass, XbasePackage.Literals.XCONSTRUCTOR_CALL, INCOMPATIBLE_TYPES);
+	}
+
+	@Test public void testAnonymousClassConstructorVisibility() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { val foo = new Bar() { } } class Bar { private new() {} }");
+		helper.assertError(xtendClass, ANONYMOUS_CLASS_CONSTRUCTOR_CALL, FEATURE_NOT_VISIBLE);
 	}
 }
