@@ -431,5 +431,64 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Test def void testAnonymousClass_0() {
+		'''
+			class Foo {
+				val bar = new Bar() {
+					override bar() {}
+				}
+			}
+			
+			interface Bar {
+				def bar() {}
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				val bar = new Bar() {
+					override bar() {}
+				}
+			}
+			
+			interface Bar {
+				def bar() {}
+			}
+		''')
+	}
+
+	@Test def void testAnonymousClass_1() {
+		'''
+			class Foo {
+				val bar = new Serializable() {
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import java.io.Serializable
+			
+			class Foo {
+				val bar = new Serializable() {
+				}
+			}
+		''')
+	}
+
+	@Test def void testAnonymousClass_2() {
+		'''
+			class Foo {
+				val bar = new Iterable<Serializable>() {
+					override Iterator<Serializable> iterator() { null }
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import java.io.Serializable
+			import java.util.Iterator
+			
+			class Foo {
+				val bar = new Iterable<Serializable>() {
+					override Iterator<Serializable> iterator() { null }
+				}
+			}
+		''')
+	}
 
 }

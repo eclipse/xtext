@@ -24,10 +24,10 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class JvmElementAtOffsetHelper {
   @Inject
   private EObjectAtOffsetHelper eObjectAtOffsetHelper;
-
+  
   @Inject
   private IJvmModelAssociations associations;
-
+  
   public JvmIdentifiableElement getJvmIdentifiableElement(final XtextResource resource, final int offset) {
     final EObject selectedElement = this.eObjectAtOffsetHelper.resolveElementAt(resource, offset);
     boolean _equals = Objects.equal(selectedElement, null);

@@ -27,7 +27,7 @@ import org.junit.Test;
 public class JvmElementAtOffsetHelperTest extends AbstractXtendTestCase {
   @Inject
   private JvmElementAtOffsetHelper jvmElementAtOffsetHelper;
-
+  
   @Test
   public void testdeclaration() {
     try {
@@ -63,7 +63,7 @@ public class JvmElementAtOffsetHelperTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testRef() {
     try {
@@ -99,7 +99,7 @@ public class JvmElementAtOffsetHelperTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testRefOtherClass() {
     try {
