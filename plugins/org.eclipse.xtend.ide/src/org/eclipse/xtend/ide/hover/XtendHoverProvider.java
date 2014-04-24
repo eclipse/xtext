@@ -9,6 +9,9 @@ package org.eclipse.xtend.ide.hover;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
+import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
 import org.eclipse.xtext.util.Pair;
@@ -41,6 +44,12 @@ public class XtendHoverProvider extends XbaseHoverProvider {
 	
 	@Override
 	protected boolean hasHover(EObject o) {
-		return super.hasHover(o) || o instanceof XtendParameter;
+		return super.hasHover(o) || o instanceof XtendParameter || isMemberOfAnonymousClass(o);
+	}
+
+	protected boolean isMemberOfAnonymousClass(EObject o) {
+		return o instanceof XtendMember 
+				&& o.eContainer() instanceof XtendClass 
+				&& o.eContainer().eContainer() instanceof AnonymousClassConstructorCall;
 	}
 }
