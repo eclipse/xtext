@@ -1084,7 +1084,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           public void searchResultChanged(final SearchResultEvent it) {
             events.add(it);
             if ((it instanceof MatchEvent)) {
-              Match[] _matches = ((MatchEvent) it).getMatches();
+              Match[] _matches = ((MatchEvent)it).getMatches();
               final Function1<Match, Boolean> _function = new Function1<Match, Boolean>() {
                 public Boolean apply(final Match m) {
                   final Function1<MatchFilter, Boolean> _function = new Function1<MatchFilter, Boolean>() {
@@ -1097,7 +1097,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
                 }
               };
               final Iterable<Match> matches = IterableExtensions.<Match>filter(((Iterable<Match>)Conversions.doWrapArray(_matches)), _function);
-              int _kind = ((MatchEvent) it).getKind();
+              int _kind = ((MatchEvent)it).getKind();
               boolean _equals = (_kind == MatchEvent.ADDED);
               if (_equals) {
                 final Procedure1<Match> _function_1 = new Procedure1<Match>() {

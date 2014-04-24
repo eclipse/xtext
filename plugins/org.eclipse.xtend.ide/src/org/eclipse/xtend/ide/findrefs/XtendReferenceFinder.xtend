@@ -7,7 +7,10 @@ import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil
+import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall
 import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.naming.IQualifiedNameConverter
@@ -23,11 +26,12 @@ import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtext.xbase.imports.StaticallyImportedMemberProvider
+import org.eclipse.xtext.xtype.XImportDeclaration
 
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
-import org.eclipse.xtext.xtype.XImportDeclaration
-import org.eclipse.xtext.xbase.imports.StaticallyImportedMemberProvider
+import org.eclipse.emf.ecore.EReference
 
 class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceFinder {
 	
@@ -35,6 +39,9 @@ class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceF
 	
 	@Inject
 	extension StaticallyImportedMemberProvider
+	
+	@Inject 
+	extension AnonymousClassUtil
 
 	@Inject new(IResourceDescriptions indexData, Registry serviceProviderRegistry, IQualifiedNameConverter nameConverter) {
 		super(indexData, serviceProviderRegistry)
@@ -54,6 +61,7 @@ class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceF
 					names += nameConverter.toQualifiedName(obj.identifier).toLowerCase
 					names += nameConverter.toQualifiedName(obj.getQualifiedName('.')).toLowerCase
 				}
+				null
 			]
 		}
 		val importedNames = resourceDescription.importedNames.toSet
@@ -82,32 +90,40 @@ class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceF
 			}
 			XMemberFeatureCall: { 
 				if(sourceCandidate.static && !sourceCandidate.staticWithDeclaringType) 
-				addReferenceToTypeFromStaticImport(sourceCandidate, targetURISet, acceptor, currentExportedContainerURI)
+					addReferenceToTypeFromStaticImport(sourceCandidate, targetURISet, acceptor, currentExportedContainerURI)
+			}
+			AnonymousClassConstructorCall: {
+				addReferencesToSuper(sourceCandidate, targetURISet, acceptor, currentExportedContainerURI)
 			}
 		}
 	}
 	
-	protected def addReferenceToFeatureFromStaticImport(XImportDeclaration it, Set<URI> targetURISet, IAcceptor<IReferenceDescription> acceptor, URI currentExportedContainerURI) {
-		for (feature : allFeatures) {
-			val featureURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(feature)
-			if (targetURISet.contains(featureURI)) {
-				val sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(it) 
-				acceptor.accept(new DefaultReferenceDescription(sourceURI, featureURI, XIMPORT_DECLARATION__IMPORTED_TYPE, -1, currentExportedContainerURI))
-			}
-		}
+	protected def addReferencesToSuper(AnonymousClassConstructorCall constructorCall, Set<URI> targetURISet, IAcceptor<IReferenceDescription> acceptor, URI currentExportedContainerURI) {
+		val superType = constructorCall.superType
+		superType?.addReferenceIfTarget(targetURISet, constructorCall, XCONSTRUCTOR_CALL__CONSTRUCTOR, acceptor, currentExportedContainerURI)
+		val superConstructor = constructorCall.superTypeConstructor
+		superConstructor?.addReferenceIfTarget(targetURISet, constructorCall, XCONSTRUCTOR_CALL__CONSTRUCTOR, acceptor, currentExportedContainerURI)
+	}
+	
+	protected def addReferenceToFeatureFromStaticImport(XImportDeclaration importDeclaration, Set<URI> targetURISet, IAcceptor<IReferenceDescription> acceptor, URI currentExportedContainerURI) {
+		importDeclaration.allFeatures.forEach [
+			addReferenceIfTarget(targetURISet, importDeclaration, XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor, currentExportedContainerURI)
+		] 
 	}
 	
 	protected def addReferenceToTypeFromStaticImport(XAbstractFeatureCall sourceCandidate, Set<URI> targetURISet, IAcceptor<IReferenceDescription> acceptor, URI currentExportedContainerURI) {
 		val feature = sourceCandidate.feature
 		if(feature instanceof JvmMember) {
-			val type = (feature as JvmMember).declaringType
-			val typeURI= EcoreUtil2.getPlatformResourceOrNormalizedURI(type)
-			if(targetURISet.contains(typeURI)) {
-				val sourceURI =EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceCandidate) 
-				acceptor.accept(new DefaultReferenceDescription(
-						sourceURI, typeURI, XABSTRACT_FEATURE_CALL__FEATURE , -1, currentExportedContainerURI))
-			}
+			val type = feature.declaringType
+			type.addReferenceIfTarget(targetURISet, sourceCandidate, XABSTRACT_FEATURE_CALL__FEATURE, acceptor, currentExportedContainerURI)
 		}
 	}
 
+	protected def addReferenceIfTarget(EObject candidate, Set<URI> targetURISet, EObject sourceElement, EReference reference, IAcceptor<IReferenceDescription> acceptor, URI currentExportedContainerURI) {
+		val candidateURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(candidate)
+		if (targetURISet.contains(candidateURI)) {
+			val sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceElement)
+			acceptor.accept(new DefaultReferenceDescription(sourceURI, candidateURI, reference, -1, currentExportedContainerURI))
+		}
+	}
 }

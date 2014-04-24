@@ -12,9 +12,9 @@ import static com.google.common.collect.Lists.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
 import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -23,22 +23,26 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.xbase.serializer.SerializerScopeProvider;
 
+import com.google.inject.Inject;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class XtendSerializerScopeProvider extends SerializerScopeProvider {
 
+	@Inject
+	private AnonymousClassUtil anonymousClassUtil;
+	
 	@Override
 	public IScope createConstructorCallSerializationScope(EObject context) {
 		IScope constructorCallSerializationScope = super.createConstructorCallSerializationScope(context);
 		if(context instanceof AnonymousClassConstructorCall) {
 			JvmConstructor constructor = ((AnonymousClassConstructorCall) context).getConstructor();
-			if(constructor.eIsProxy())
+			if(constructor == null || constructor.eIsProxy())
 				return IScope.NULLSCOPE;
-			JvmDeclaredType anonymousClass = constructor.getDeclaringType();
-			if(!anonymousClass.getSuperTypes().isEmpty()) {
+			JvmType superType = anonymousClassUtil.getSuperType((AnonymousClassConstructorCall) context);
+			if(superType != null) {
 				IScope typeScope = getScope(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-				JvmType superType = anonymousClass.getSuperTypes().get(0).getType();
 				Iterable<IEObjectDescription> superTypeDescriptions = typeScope.getElements(superType);
 				Iterable<IEObjectDescription> constructorDescriptions = constructorCallSerializationScope.getElements(constructor);
 				List<IEObjectDescription> aliasedDescriptions = newArrayList();

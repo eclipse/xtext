@@ -8,11 +8,16 @@ import java.util.Set;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
+import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
@@ -37,6 +42,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XtypePackage;
 
@@ -47,6 +53,10 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
   @Inject
   @Extension
   private StaticallyImportedMemberProvider _staticallyImportedMemberProvider;
+  
+  @Inject
+  @Extension
+  private AnonymousClassUtil _anonymousClassUtil;
   
   @Inject
   public XtendReferenceFinder(final IResourceDescriptions indexData, final IResourceServiceProvider.Registry serviceProviderRegistry, final IQualifiedNameConverter nameConverter) {
@@ -73,34 +83,29 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
     }
     final HashSet<QualifiedName> names = CollectionLiterals.<QualifiedName>newHashSet();
     for (final URI uri : targetURIs) {
-      final IUnitOfWork<Boolean, ResourceSet> _function_2 = new IUnitOfWork<Boolean, ResourceSet>() {
-        public Boolean exec(final ResourceSet it) throws Exception {
-          boolean _xblockexpression = false;
+      final IUnitOfWork<Object, ResourceSet> _function_2 = new IUnitOfWork<Object, ResourceSet>() {
+        public Object exec(final ResourceSet it) throws Exception {
+          Object _xblockexpression = null;
           {
             EObject _eObject = it.getEObject(uri, true);
             final JvmType obj = EcoreUtil2.<JvmType>getContainerOfType(_eObject, JvmType.class);
-            boolean _xifexpression = false;
             boolean _notEquals = (!Objects.equal(obj, null));
             if (_notEquals) {
-              boolean _xblockexpression_1 = false;
-              {
-                String _identifier = obj.getIdentifier();
-                QualifiedName _qualifiedName = XtendReferenceFinder.this.nameConverter.toQualifiedName(_identifier);
-                QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-                names.add(_lowerCase);
-                String _qualifiedName_1 = obj.getQualifiedName('.');
-                QualifiedName _qualifiedName_2 = XtendReferenceFinder.this.nameConverter.toQualifiedName(_qualifiedName_1);
-                QualifiedName _lowerCase_1 = _qualifiedName_2.toLowerCase();
-                _xblockexpression_1 = names.add(_lowerCase_1);
-              }
-              _xifexpression = _xblockexpression_1;
+              String _identifier = obj.getIdentifier();
+              QualifiedName _qualifiedName = XtendReferenceFinder.this.nameConverter.toQualifiedName(_identifier);
+              QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+              names.add(_lowerCase);
+              String _qualifiedName_1 = obj.getQualifiedName('.');
+              QualifiedName _qualifiedName_2 = XtendReferenceFinder.this.nameConverter.toQualifiedName(_qualifiedName_1);
+              QualifiedName _lowerCase_1 = _qualifiedName_2.toLowerCase();
+              names.add(_lowerCase_1);
             }
-            _xblockexpression = _xifexpression;
+            _xblockexpression = null;
           }
-          return Boolean.valueOf(_xblockexpression);
+          return _xblockexpression;
         }
       };
-      localResourceAccess.<Boolean>readOnly(uri, _function_2);
+      localResourceAccess.<Object>readOnly(uri, _function_2);
     }
     Iterable<QualifiedName> _importedNames = resourceDescription.getImportedNames();
     final Set<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(_importedNames);
@@ -193,34 +198,50 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
         }
       }
     }
-  }
-  
-  protected void addReferenceToFeatureFromStaticImport(final XImportDeclaration it, final Set<URI> targetURISet, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI) {
-    Iterable<JvmFeature> _allFeatures = this._staticallyImportedMemberProvider.getAllFeatures(it);
-    for (final JvmFeature feature : _allFeatures) {
-      {
-        final URI featureURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(feature);
-        boolean _contains = targetURISet.contains(featureURI);
-        if (_contains) {
-          final URI sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(it);
-          DefaultReferenceDescription _defaultReferenceDescription = new DefaultReferenceDescription(sourceURI, featureURI, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, (-1), currentExportedContainerURI);
-          acceptor.accept(_defaultReferenceDescription);
-        }
+    if (!_matched_1) {
+      if (sourceCandidate instanceof AnonymousClassConstructorCall) {
+        _matched_1=true;
+        this.addReferencesToSuper(((AnonymousClassConstructorCall)sourceCandidate), targetURISet, acceptor, currentExportedContainerURI);
       }
     }
+  }
+  
+  protected void addReferencesToSuper(final AnonymousClassConstructorCall constructorCall, final Set<URI> targetURISet, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI) {
+    final JvmGenericType superType = this._anonymousClassUtil.getSuperType(constructorCall);
+    if (superType!=null) {
+      this.addReferenceIfTarget(superType, targetURISet, constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, acceptor, currentExportedContainerURI);
+    }
+    final JvmConstructor superConstructor = this._anonymousClassUtil.getSuperTypeConstructor(constructorCall);
+    if (superConstructor!=null) {
+      this.addReferenceIfTarget(superConstructor, targetURISet, constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, acceptor, currentExportedContainerURI);
+    }
+  }
+  
+  protected void addReferenceToFeatureFromStaticImport(final XImportDeclaration importDeclaration, final Set<URI> targetURISet, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI) {
+    Iterable<JvmFeature> _allFeatures = this._staticallyImportedMemberProvider.getAllFeatures(importDeclaration);
+    final Procedure1<JvmFeature> _function = new Procedure1<JvmFeature>() {
+      public void apply(final JvmFeature it) {
+        XtendReferenceFinder.this.addReferenceIfTarget(it, targetURISet, importDeclaration, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor, currentExportedContainerURI);
+      }
+    };
+    IterableExtensions.<JvmFeature>forEach(_allFeatures, _function);
   }
   
   protected void addReferenceToTypeFromStaticImport(final XAbstractFeatureCall sourceCandidate, final Set<URI> targetURISet, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI) {
     final JvmIdentifiableElement feature = sourceCandidate.getFeature();
     if ((feature instanceof JvmMember)) {
-      final JvmDeclaredType type = ((JvmMember) feature).getDeclaringType();
-      final URI typeURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(type);
-      boolean _contains = targetURISet.contains(typeURI);
-      if (_contains) {
-        final URI sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceCandidate);
-        DefaultReferenceDescription _defaultReferenceDescription = new DefaultReferenceDescription(sourceURI, typeURI, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, (-1), currentExportedContainerURI);
-        acceptor.accept(_defaultReferenceDescription);
-      }
+      final JvmDeclaredType type = ((JvmMember)feature).getDeclaringType();
+      this.addReferenceIfTarget(type, targetURISet, sourceCandidate, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, currentExportedContainerURI);
+    }
+  }
+  
+  protected void addReferenceIfTarget(final EObject candidate, final Set<URI> targetURISet, final EObject sourceElement, final EReference reference, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI) {
+    final URI candidateURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(candidate);
+    boolean _contains = targetURISet.contains(candidateURI);
+    if (_contains) {
+      final URI sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceElement);
+      DefaultReferenceDescription _defaultReferenceDescription = new DefaultReferenceDescription(sourceURI, candidateURI, reference, (-1), currentExportedContainerURI);
+      acceptor.accept(_defaultReferenceDescription);
     }
   }
 }
