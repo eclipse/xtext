@@ -65,6 +65,63 @@ public class EObjectLocationTests extends AbstractXtendTestCase {
 		assertTrue(hashCodeReference instanceof JvmOperation);
 	}
 	
+	@Test public void testResolveAnonymousClassConstructorCall_0() throws Exception {
+		String model = "class Foo { val bar = new Bar() {} } interface Bar {}";
+		XtendFile file = file(model);
+		XtextResource resource = (XtextResource) file.eResource();
+		EObject bar = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, model.indexOf("Bar"));
+		assertTrue(bar instanceof JvmGenericType);
+		assertEquals("Bar", ((JvmGenericType) bar).getSimpleName());
+	}
+	
+	@Test public void testResolveAnonymousClassConstructorCall_1() throws Exception {
+		String model = "class Foo { val bar = new Bar() {} } class Bar {}";
+		XtendFile file = file(model);
+		XtextResource resource = (XtextResource) file.eResource();
+		EObject constructor = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, model.indexOf("Bar"));
+		assertTrue(constructor instanceof JvmConstructor);
+		assertEquals("Bar", ((JvmConstructor) constructor).getDeclaringType().getSimpleName());
+	}
+	
+	@Test public void testResolveAnonymousClassConstructorCall_2() throws Exception {
+		String model = "class Foo { val bar = new Bar() {} } class Bar { new(String x) {} new() {} }";
+		XtendFile file = file(model);
+		XtextResource resource = (XtextResource) file.eResource();
+		EObject constructor = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, model.indexOf("Bar"));
+		assertTrue(constructor instanceof JvmConstructor);
+		assertEquals("Bar", ((JvmConstructor) constructor).getDeclaringType().getSimpleName());
+		assertEquals(0, ((JvmConstructor) constructor).getParameters().size());
+	}
+	
+	@Test public void testResolveAnonymousClassConstructorCall_3() throws Exception {
+		String model = "class Foo { val bar = new Bar('') {} } class Bar { new(String x) {} new() {} }";
+		XtendFile file = file(model);
+		XtextResource resource = (XtextResource) file.eResource();
+		EObject constructor = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, model.indexOf("Bar"));
+		assertTrue(constructor instanceof JvmConstructor);
+		assertEquals("Bar", ((JvmConstructor) constructor).getDeclaringType().getSimpleName());
+		assertEquals(1, ((JvmConstructor) constructor).getParameters().size());
+	}
+	
+	@Test public void testResolveAnonymousClassConstructorCall_4() throws Exception {
+		String model = "class Foo { val bar = new Bar('') {} } interface Bar {}";
+		XtendFile file = file(model);
+		XtextResource resource = (XtextResource) file.eResource();
+		EObject bar = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, model.indexOf("Bar"));
+		assertTrue(bar instanceof JvmGenericType);
+		assertEquals("Bar", ((JvmGenericType) bar).getSimpleName());
+	}
+	
+	@Test public void testResolveAnonymousClassConstructorCall_5() throws Exception {
+		String model = "class Foo { val bar = new Bar() {} } class Bar { new(String x) {} }";
+		XtendFile file = file(model);
+		XtextResource resource = (XtextResource) file.eResource();
+		EObject constructor = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, model.indexOf("Bar"));
+		assertTrue(constructor instanceof JvmConstructor);
+		assertEquals("Bar", ((JvmConstructor) constructor).getDeclaringType().getSimpleName());
+		assertEquals(1, ((JvmConstructor) constructor).getParameters().size());
+	}
+	
 	@Test public void testFullLocationInFile() throws Exception {
 		String model = "class Foo extends Object { def Foo foo() {this }}";
 		XtendClass clazz = clazz(model);
