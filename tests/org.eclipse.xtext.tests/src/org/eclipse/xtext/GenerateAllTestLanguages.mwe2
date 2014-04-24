@@ -410,6 +410,10 @@ Workflow {
 			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = { 
+			uri = "classpath:/org/eclipse/xtext/serializer/HiddenTokenSequencerTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
 			uri = "classpath:/org/eclipse/xtext/serializer/SequencerTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}

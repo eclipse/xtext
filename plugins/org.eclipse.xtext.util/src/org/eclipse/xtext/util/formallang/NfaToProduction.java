@@ -22,6 +22,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Functions;
 import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -408,6 +409,134 @@ public class NfaToProduction {
 		return created;
 	}
 
+	protected <T> boolean mergeOptionalIntoMany(StateAlias<T> state, Set<StateAlias<T>> visited) {
+		if (!visited.add(state))
+			return false;
+		boolean merged = false;
+		if (state.getElement().isMany()) {
+			for (StateAlias<T> out : ImmutableList.copyOf(state.getOutgoing())) {
+				if (state.getIncoming().contains(out) && isOptionalIgnoring(out, state)) {
+					mergeOptionalIntoMany(state, out);
+					merged = true;
+				}
+			}
+			for (StateAlias<T> in : ImmutableList.copyOf(state.getIncoming())) {
+				if (state.getOutgoing().contains(in) && isOptionalIgnoring(in, state)) {
+					mergeOptionalIntoMany(in, state);
+					merged = true;
+				}
+			}
+		}
+		for (StateAlias<T> out : ImmutableList.copyOf(state.getOutgoing())) {
+			if (mergeOptionalIntoMany(out, visited))
+				merged = true;
+		}
+		return merged;
+	}
+
+	protected <T> boolean isOptionalIgnoring(StateAlias<T> cand, StateAlias<T> ignored) {
+		if (cand.getIncoming().isEmpty() || cand.getOutgoing().isEmpty())
+			return false;
+		for (StateAlias<T> in : cand.getIncoming())
+			if (!in.equals(ignored) && !in.getOutgoing().containsAll(cand.getOutgoing()))
+				return false;
+		return true;
+	}
+
+	protected <T> void mergeOptionalIntoMany(StateAlias<T> first, StateAlias<T> second) {
+		StateAlias<T> many = first.element.isMany() ? first : second;
+		StateAlias<T> optional = many == first ? second : first;
+		if (optional.getOutgoing().contains(optional)) {
+			optional.element.setMany(true);
+		}
+		many.element.setMany(false);
+		optional.element.setOptional(true);
+		for (StateAlias<T> out : optional.getOutgoing()) {
+			out.getIncoming().remove(optional);
+		}
+		for (StateAlias<T> in : optional.getIncoming()) {
+			in.getOutgoing().remove(optional);
+		}
+		GroupAlias<T> group = new GroupAlias<T>();
+		group.setMany(true);
+		if (first.element instanceof GroupAlias<?> && !first.element.many && !first.element.optional) {
+			group.children.addAll(((GroupAlias<T>) first.element).children);
+		} else {
+			group.addChild(first.getElement());
+		}
+		if (second.element instanceof GroupAlias<?> && !second.element.many && !second.element.optional) {
+			group.children.addAll(((GroupAlias<T>) second.element).children);
+		} else {
+			group.addChild(second.element);
+		}
+		many.element = group;
+	}
+
+	protected <T> boolean mergeAlternativeMultiples(StateAlias<T> state, Set<StateAlias<T>> visited) {
+		if (!visited.add(state))
+			return false;
+		boolean merged = false;
+
+		if (state.getElement().isMany()) {
+			for (StateAlias<T> out : ImmutableList.copyOf(state.getOutgoing())) {
+				if (areAlternativeMultiples(state, out)) {
+					mergeAlternativeMultiples(state, out);
+					merged = true;
+				}
+			}
+		}
+
+		for (StateAlias<T> out : ImmutableList.copyOf(state.getOutgoing())) {
+			if (mergeAlternativeMultiples(out, visited))
+				merged = true;
+		}
+		return merged;
+	}
+
+	protected <T> boolean areAlternativeMultiples(StateAlias<T> first, StateAlias<T> second) {
+		if (!first.getElement().isMany() || !second.getElement().isMany())
+			return false;
+		if (!first.getOutgoing().contains(second) || !first.getIncoming().contains(second))
+			return false;
+
+		for (StateAlias<T> in : first.getIncoming()) {
+			if (!in.equals(second) && !second.getIncoming().contains(in))
+				return false;
+		}
+		for (StateAlias<T> out : first.getOutgoing()) {
+			if (!out.equals(second) && !second.getOutgoing().contains(out))
+				return false;
+		}
+		return true;
+	}
+
+	protected <T> void mergeAlternativeMultiples(StateAlias<T> first, StateAlias<T> second) {
+		first.element.many = false;
+		second.element.many = false;
+		AlternativeAlias<T> alternative = new AlternativeAlias<T>();
+		alternative.many = true;
+		if (first.element instanceof AlternativeAlias<?>) {
+			alternative.getChildren().addAll(((AlternativeAlias<T>) first.element).children);
+		} else {
+			alternative.addChild(first.getElement());
+		}
+		if (second.element instanceof AlternativeAlias<?>) {
+			alternative.getChildren().addAll(((AlternativeAlias<T>) second.element).children);
+		} else {
+			alternative.addChild(second.element);
+		}
+		if (first.element.optional || second.element.optional) {
+			alternative.optional = true;
+		}
+		first.element = alternative;
+		for (StateAlias<T> out : second.getOutgoing()) {
+			out.getIncoming().remove(second);
+		}
+		for (StateAlias<T> in : second.getIncoming()) {
+			in.getOutgoing().remove(second);
+		}
+	}
+
 	protected <STATE, TOKEN> StateAliasNfa<TOKEN> createNfa(Nfa<STATE> nfa, Function<STATE, TOKEN> state2token) {
 		HashMap<STATE, StateAlias<TOKEN>> cache = Maps.<STATE, StateAlias<TOKEN>> newHashMap();
 		StateAlias<TOKEN> stop = null;
@@ -497,13 +626,15 @@ public class NfaToProduction {
 				//				System.out.println("after Many: " + Joiner.on(" ").join(getAllStates(start)));
 				changed |= createGroups(states.getStart(), Sets.<StateAlias<TOKEN>> newHashSet());
 				//				System.out.println("after Groups: " + Joiner.on(" ").join(getAllStates(start)));
+				changed |= mergeOptionalIntoMany(states.getStart(), Sets.<StateAlias<TOKEN>> newHashSet());
+				changed |= mergeAlternativeMultiples(states.getStart(), Sets.<StateAlias<TOKEN>> newHashSet());
 			}
 			if (!states.getStart().getOutgoing().isEmpty()) {
 				Pair<Integer, StateAlias<TOKEN>> splitState = findSplitState(states.getStart(), 0,
 						Sets.<StateAlias<TOKEN>> newHashSet());
 				if (splitState != null) {
 					changed = true;
-					//					System.out.println("Splitting " + splitState);
+					//										System.out.println("Splitting " + splitState);
 					splitState(splitState.getSecond());
 				}
 				//				System.out.println("after Split: " + Joiner.on(" ").join(getAllStates(states.getStart())));
