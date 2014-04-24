@@ -526,11 +526,16 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 	}
 
-	protected void appendSyntheticDispatchMethods(XtendClass source, JvmGenericType target) {
+	protected void appendSyntheticDispatchMethods(XtendClass source, final JvmGenericType target) {
 		ListMultimap<DispatchHelper.DispatchSignature, JvmOperation> methods = dispatchHelper.getDeclaredOrEnhancedDispatchMethods(target);
 		for (DispatchHelper.DispatchSignature signature : methods.keySet()) {
 			List<JvmOperation> operations = methods.get(signature);
-			JvmOperation operation = deriveGenericDispatchOperationSignature(operations, target);
+			Iterable<JvmOperation> localOperations = Iterables.filter(operations, new Predicate<JvmOperation>() {
+				public boolean apply(JvmOperation input) {
+					return target == input.eContainer();
+				}
+			});
+			JvmOperation operation = deriveGenericDispatchOperationSignature(localOperations, target);
 			if (operation != null) {
 				operation.setSimpleName(signature.getSimpleName());
 				operation.setReturnType(jvmTypesBuilder.inferredType());
@@ -542,11 +547,11 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	 * @return a {@link JvmOperation} with common denominator argument types of all given operations
 	 */
 	@Nullable
-	protected JvmOperation deriveGenericDispatchOperationSignature(List<JvmOperation> sortedOperations,
+	protected JvmOperation deriveGenericDispatchOperationSignature(Iterable<JvmOperation> localOperations,
 			JvmGenericType target) {
-		if (sortedOperations.isEmpty())
+		final Iterator<JvmOperation> iterator = localOperations.iterator();
+		if (!iterator.hasNext())
 			return null;
-		final Iterator<JvmOperation> iterator = sortedOperations.iterator();
 		JvmOperation first = iterator.next();
 		JvmOperation result = typesFactory.createJvmOperation();
 		target.getMembers().add(result);
@@ -557,11 +562,11 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			JvmFormalParameter parameter2 = first.getParameters().get(i);
 			parameter.setName(parameter2.getName());
 		}
-		jvmTypesBuilder.setBody(result, compileStrategies.forDispatcher(result, sortedOperations));
+		jvmTypesBuilder.setBody(result, compileStrategies.forDispatcher(result));
 		JvmVisibility commonVisibility = null;
 		boolean isFirst = true;
 		boolean allStatic = true;
-		for (JvmOperation jvmOperation : sortedOperations) {
+		for (JvmOperation jvmOperation : localOperations) {
 			Iterable<XtendFunction> xtendFunctions = Iterables.filter(associations.getSourceElements(jvmOperation),
 					XtendFunction.class);
 			for (XtendFunction func : xtendFunctions) {

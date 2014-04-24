@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.tests.macro;
 
+import com.google.common.base.Objects;
 import java.lang.annotation.Target;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
@@ -20,6 +21,10 @@ public class AddInterfaceProcessor extends AbstractClassProcessor {
   
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     final AnnotationReference annotationReferenceA = context.newAnnotationReference("A");
+    boolean _equals = Objects.equal(annotationReferenceA, null);
+    if (_equals) {
+      throw new NullPointerException();
+    }
     final Procedure1<AnnotationReferenceBuildContext> _function = new Procedure1<AnnotationReferenceBuildContext>() {
       public void apply(final AnnotationReferenceBuildContext it) {
         it.set("value", Integer.valueOf(1));
@@ -36,5 +41,9 @@ public class AddInterfaceProcessor extends AbstractClassProcessor {
       }
     };
     final AnnotationReference annotationReferenceB = context.newAnnotationReference("B", _function);
+    boolean _equals_1 = Objects.equal(annotationReferenceB, null);
+    if (_equals_1) {
+      throw new NullPointerException();
+    }
   }
 }

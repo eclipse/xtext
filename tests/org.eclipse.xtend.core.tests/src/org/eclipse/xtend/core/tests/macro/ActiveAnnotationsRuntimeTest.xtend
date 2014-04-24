@@ -37,8 +37,8 @@ import static org.junit.Assert.*
 import org.eclipse.xtext.junit4.internal.TemporaryFolder
 import org.junit.Rule
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(RuntimeInjectorProvider))
+@RunWith(XtextRunner)
+@InjectWith(RuntimeInjectorProvider)
 class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests {
 
 	@Rule 

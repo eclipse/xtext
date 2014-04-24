@@ -13,13 +13,10 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-
-import com.google.inject.Inject;
 
 /**
  * The {@link SynonymTypesProvider} allows to define automatic conversion rules
@@ -40,9 +37,6 @@ import com.google.inject.Inject;
  */
 public class SynonymTypesProvider {
 	
-	@Inject
-	private TypeReferences typeReferences;
-
 	/**
 	 * Clients of the {@link SynonymTypesProvider} may use a custom acceptor
 	 * to handle the available synonym types.

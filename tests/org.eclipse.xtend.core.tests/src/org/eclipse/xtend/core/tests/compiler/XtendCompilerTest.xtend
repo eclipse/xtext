@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.tests.compiler
 import com.google.inject.Inject
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.generator.IFilePostProcessor
-import org.junit.Ignore
 import org.junit.Test
 
 class XtendCompilerTest extends AbstractXtendCompilerTest {
@@ -270,7 +269,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Ignore("TODO")
 	@Test
 	def testInheritedDispatchMethods_02() {
 		assertCompilesTo('''
@@ -288,11 +286,30 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			TODO
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class D extends C {
+			  protected int _testFunction1(final Double d) {
+			    return d.intValue();
+			  }
+			  
+			  public int testFunction1(final Object d) {
+			    if (d instanceof Double) {
+			      return _testFunction1((Double)d);
+			    } else if (d instanceof Integer) {
+			      return _testFunction1((Integer)d);
+			    } else if (d instanceof String) {
+			      return _testFunction1((String)d);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(d).toString());
+			    }
+			  }
+			}
 		''')
 	}
 	
-	@Ignore("TODO")
 	@Test
 	def testInheritedDispatchMethods_03() {
 		assertCompilesTo('''
@@ -313,7 +330,79 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			TODO
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class D extends C {
+			  protected int _testFunction1(final Double d) {
+			    return d.intValue();
+			  }
+			  
+			  protected int _testFunction1(final Number n) {
+			    return n.intValue();
+			  }
+			  
+			  public int testFunction1(final Object d) {
+			    if (d instanceof Double) {
+			      return _testFunction1((Double)d);
+			    } else if (d instanceof Integer) {
+			      return _testFunction1((Integer)d);
+			    } else if (d instanceof Number) {
+			      return _testFunction1((Number)d);
+			    } else if (d instanceof String) {
+			      return _testFunction1((String)d);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(d).toString());
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testInheritedDispatchMethods_04() {
+		assertCompilesTo('''
+			class C {
+				def dispatch testFunction1(String s) {
+					s.length
+				}
+				def dispatch testFunction1(Integer i) {
+					i.intValue
+				}
+			}
+			class D extends C {
+				def dispatch testFunction1(Double d) {
+					d.intValue
+				}
+				def dispatch testFunction1(Number n) {
+					n.intValue
+				}
+			}
+		''', '''
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  protected int _testFunction1(final String s) {
+			    return s.length();
+			  }
+			  
+			  protected int _testFunction1(final Integer i) {
+			    return i.intValue();
+			  }
+			  
+			  public int testFunction1(final Object i) {
+			    if (i instanceof Integer) {
+			      return _testFunction1((Integer)i);
+			    } else if (i instanceof String) {
+			      return _testFunction1((String)i);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(i).toString());
+			    }
+			  }
+			}
 		''')
 	}
 	

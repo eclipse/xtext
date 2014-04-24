@@ -48,13 +48,16 @@ class AddInterfaceProcessor extends AbstractClassProcessor {
 	
 	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
 		val annotationReferenceA = newAnnotationReference('A')
-
+		if (annotationReferenceA == null)
+			throw new NullPointerException
 		val annotationReferenceB = newAnnotationReference('B') [
 			set('value', 1)
 			setAnnotationValue('a', newAnnotationReference('C') [
 				setAnnotationValue('lalala', newAnnotationReference(Target.findTypeGlobally), newAnnotationReference(Target))
 			])
 		]
+		if (annotationReferenceB == null)
+			throw new NullPointerException
 	}
 	
 }
