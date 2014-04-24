@@ -1196,6 +1196,76 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
     }
   }
   
+  @Test
+  public void testAutcastExpressions_3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def foo(CharSequence c) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (c instanceof String) {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("c.substring(1, 1)");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("switch(c){");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("String : c.length");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XtendMember> _members = ((XtendClass) _head).getMembers();
+      XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
+      final XtendFunction func = ((XtendFunction) _head_1);
+      EList<XtendParameter> _parameters = func.getParameters();
+      XtendParameter _head_2 = IterableExtensions.<XtendParameter>head(_parameters);
+      String _signature = this.signatureProvider.getSignature(_head_2);
+      Assert.assertEquals("CharSequence c - foo(CharSequence)", _signature);
+      XExpression _expression = func.getExpression();
+      final XBlockExpression block = ((XBlockExpression) _expression);
+      EList<XExpression> _expressions = block.getExpressions();
+      XExpression _head_3 = IterableExtensions.<XExpression>head(_expressions);
+      final XIfExpression ifexpr = ((XIfExpression) _head_3);
+      final XExpression then = ifexpr.getThen();
+      EList<XExpression> _expressions_1 = ((XBlockExpression) then).getExpressions();
+      XExpression _head_4 = IterableExtensions.<XExpression>head(_expressions_1);
+      final XExpression target = ((XMemberFeatureCall) _head_4).getMemberCallTarget();
+      String _signature_1 = this.signatureProvider.getSignature(target);
+      Assert.assertEquals("String c", _signature_1);
+      EList<XExpression> _expressions_2 = block.getExpressions();
+      XExpression _get = _expressions_2.get(1);
+      final XSwitchExpression switchExpr = ((XSwitchExpression) _get);
+      EList<XCasePart> _cases = switchExpr.getCases();
+      XCasePart _head_5 = IterableExtensions.<XCasePart>head(_cases);
+      XExpression _then = _head_5.getThen();
+      final XExpression expr = ((XMemberFeatureCall) _then).getMemberCallTarget();
+      String _signature_2 = this.signatureProvider.getSignature(expr);
+      Assert.assertEquals("String c", _signature_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   public ResourceSet getResourceSet() {
     Injector _injector = this.getInjector();
     IResourceSetProvider _instance = _injector.<IResourceSetProvider>getInstance(IResourceSetProvider.class);
