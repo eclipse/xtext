@@ -37,7 +37,6 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.override.InvokedResolvedOperation;
@@ -60,9 +59,6 @@ public class XbaseDeclarativeHoverSignatureProvider {
 
 	@Inject
 	protected UIStrings uiStrings;
-
-	@Inject
-	private IJvmModelAssociations associations;
 	
 	@Inject
 	private ILabelProvider labelProvider;
