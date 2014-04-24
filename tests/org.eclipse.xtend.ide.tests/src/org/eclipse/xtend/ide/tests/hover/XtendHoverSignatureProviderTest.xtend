@@ -557,6 +557,33 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val expr = (switchExpr.cases.head.getThen() as XMemberFeatureCall).memberCallTarget
 		assertEquals("String c", signatureProvider.getSignature(expr))
 	}
+	
+	@Test
+	def testAutcastExpressions_3(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo {
+			def foo(CharSequence c) {
+				if (c instanceof String) {
+					c.substring(1, 1)
+				}
+				switch(c){
+					String : c.length
+				}
+			}
+		}
+		''',resourceSet)
+		val func = (xtendFile.xtendTypes.head as XtendClass).members.head as XtendFunction
+		assertEquals("CharSequence c - foo(CharSequence)", signatureProvider.getSignature(func.parameters.head))
+		val block = func.expression as XBlockExpression
+		val ifexpr = block.expressions.head as XIfExpression
+		val then = ifexpr.getThen()
+		val target = ((then as XBlockExpression).expressions.head as XMemberFeatureCall).memberCallTarget
+		assertEquals("String c", signatureProvider.getSignature(target))
+		val switchExpr = block.expressions.get(1) as XSwitchExpression
+		val expr = (switchExpr.cases.head.getThen() as XMemberFeatureCall).memberCallTarget
+		assertEquals("String c", signatureProvider.getSignature(expr))
+	}
 
 	def getResourceSet(){
 		getInjector.getInstance(typeof(IResourceSetProvider)).get(testHelper.project)
