@@ -1409,6 +1409,30 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     	helper.assertWarning(clazz.getMembers().get(1), XTEND_FUNCTION, DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "dispatch", "same", "name", "parameters");
     }
     
+    @Test public void testInheritedDispatch_01() throws Exception {
+    	XtendClass clazz = clazz(
+    			"class D extends C {\n" + 
+    			"  def dispatch m(Integer o) { 1 }\n" + 
+    			"  def dispatch m(String o) { 1 }\n" + 
+    			"}\n" + 
+    			"class C {\n" + 
+    			"  def dispatch m(Number o) { 1 }\n" + 
+    			"}");
+    	helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, DISPATCH_FUNCTIONS_INVALID_PARAMETER_TYPE, "dispatch", "widen", "Number");
+    }
+    
+    @Test public void testInheritedDispatch_02() throws Exception {
+    	XtendClass clazz = clazz(
+    			"class D extends C {\n" + 
+				"  def dispatch m(Integer o) { 1 }\n" + 
+				"  def dispatch m(Double o) { '' }\n" + 
+				"}\n" + 
+				"class C {\n" + 
+				"  def dispatch m(Number o) { 1 }\n" + 
+    			"}");
+    	helper.assertError(clazz, XSTRING_LITERAL, INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from String to int");
+    }
+    
     @Test public void testKeywordConflict() throws Exception {
     	XtendClass clazz = clazz("class assert { def dispatch assert(Object x) {} }");
     	helper.assertError(clazz, XTEND_CLASS, INVALID_IDENTIFIER, "assert");
