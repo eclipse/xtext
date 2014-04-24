@@ -60,5 +60,10 @@
 			<artifactId>org.eclipse.xtend.lib</artifactId>
 			<version>[${project.version}]</version>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.equinox</groupId>
+			<artifactId>common</artifactId>
+			<version>[3.5,)</version>
+		</dependency>
 	</dependencies>
 </project>
