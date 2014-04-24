@@ -16,6 +16,7 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
@@ -81,7 +82,7 @@ public class XbaseDispatchingEObjectTextHover extends DispatchingEObjectTextHove
 		EObject object = eObjectAtOffsetHelper.resolveContainedElementAt(resource, offset);
 		if (object != null && object instanceof XAbstractFeatureCall){
 			JvmIdentifiableElement feature = ((XAbstractFeatureCall) object).getFeature();
-			if(feature instanceof JvmExecutable || feature instanceof JvmField || object instanceof XConstructorCall || object instanceof XVariableDeclaration)
+			if(feature instanceof JvmExecutable || feature instanceof JvmField || object instanceof XConstructorCall || object instanceof XVariableDeclaration || object instanceof JvmFormalParameter)
 					if (original != null)
 						return Tuples.create(object, original.getSecond());
 		}
