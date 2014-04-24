@@ -118,6 +118,8 @@ public class XtendHyperlinkHelper extends TypeLiteralAwareHyperlinkHelper {
 					} else {
 						createHyperlinksTo(resource, crossRefNode, crossLinkedEObject, acceptor);
 					}
+				} else {
+					createHyperlinksTo(resource, crossRefNode, crossLinkedEObject, acceptor);
 				}
 			} else {
 				createHyperlinksTo(resource, crossRefNode, crossLinkedEObject, acceptor);
