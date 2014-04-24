@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.jvmmodel;
 
-import java.util.List;
-
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmField;
@@ -27,10 +25,9 @@ public class XtendCompileStrategies {
 	@Inject
 	private Provider<DispatchMethodCompileStrategy> dispatchMethodProvider;
 
-	public Procedures.Procedure1<ITreeAppendable> forDispatcher(JvmOperation dispatchOperation,
-			List<JvmOperation> sortedDispatchOperations) {
+	public Procedures.Procedure1<ITreeAppendable> forDispatcher(JvmOperation dispatchOperation) {
 		DispatchMethodCompileStrategy strategy = dispatchMethodProvider.get();
-		strategy.initialize(dispatchOperation, sortedDispatchOperations);
+		strategy.initialize(dispatchOperation);
 		return strategy;
 	}
 

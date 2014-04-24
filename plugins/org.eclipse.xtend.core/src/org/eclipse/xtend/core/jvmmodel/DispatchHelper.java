@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -200,6 +199,10 @@ public class DispatchHelper {
 					}
 				}
 			}
+		} else {
+			DispatchSignature signature = new DispatchSignature(dispatchCase.getSimpleName().substring(1), dispatchCase.getParameters().size());
+			JvmOperation result = getDispatcherOperation(dispatchCase.getDeclaringType(), signature);
+			return result;
 		}
 		return null;
 	}
@@ -216,10 +219,10 @@ public class DispatchHelper {
 	}
 	
 	/**
-	 * Return the local cases that match the given signature.
+	 * Return the local cases that match the given signature (in no particular order, usually as defined in the file).
 	 */
 	public List<JvmOperation> getLocalDispatchCases(JvmDeclaredType type, DispatchSignature signature) {
-		List<JvmOperation> result = Lists.newArrayList();
+		List<JvmOperation> result = Lists.newArrayListWithExpectedSize(5);
 		for(JvmMember feature: type.getMembers()) {
 			if (feature instanceof JvmOperation && signature.isDispatchCase((JvmOperation) feature)) {
 				result.add((JvmOperation) feature);
@@ -229,28 +232,12 @@ public class DispatchHelper {
 	}
 	
 	/**
-	 * Return the local cases that are associated with the given dispatch operation.
+	 * Return the local cases that contribute to the given dispatch operation (in no particular order, but usually as defined in the file).
 	 */
 	public List<JvmOperation> getLocalDispatchCases(JvmOperation dispatcherOperation) {
-		Set<EObject> sourceElements = associations.getSourceElements(dispatcherOperation);
-		List<JvmOperation> result = Lists.newArrayList();
-		for(EObject sourceElement: sourceElements) {
-			if (sourceElement instanceof XtendFunction) {
-				XtendFunction function = (XtendFunction) sourceElement;
-				if (Strings.equal(function.getName(), dispatcherOperation.getSimpleName())) {
-					Set<EObject> jvmElements = associations.getJvmElements(function);
-					for(EObject jvmElement: jvmElements) {
-						if (jvmElement != dispatcherOperation && jvmElement instanceof JvmOperation) {
-							JvmOperation candidate = (JvmOperation) jvmElement;
-							if (candidate.getDeclaringType() == dispatcherOperation.getDeclaringType() && Strings.equal(candidate.getSimpleName(), '_' + function.getName())) {
-								result.add(candidate);
-							}
-						}
-					}
-				}
-			}
-		}
-		return result;
+		DispatchSignature dispatchSignature = new DispatchSignature(dispatcherOperation.getSimpleName(), dispatcherOperation.getParameters().size());
+		JvmDeclaredType type = dispatcherOperation.getDeclaringType();
+		return getLocalDispatchCases(type, dispatchSignature);
 	}
 	
 	/**

@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.inject.Inject;
+
 /**
  * Customized type computer for Xtend specific expressions.
  * 

@@ -32,7 +32,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 @NonNullByDefault
@@ -50,13 +49,10 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 	@Inject
 	private DispatchHelper sorter;
 	
-	private List<JvmOperation> sortedDispatchOperations;
-
 	private JvmOperation dispatchOperation;
 
-	protected void initialize(JvmOperation dispatchOperation, List<JvmOperation> sortedDispatchOperations) {
+	protected void initialize(JvmOperation dispatchOperation) {
 		this.dispatchOperation = dispatchOperation;
-		this.sortedDispatchOperations = sortedDispatchOperations;
 	}
 
 	public void apply(@Nullable ITreeAppendable a) {
@@ -64,8 +60,7 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 			throw new IllegalArgumentException("a is never null");
 		boolean needsElse = true;
 		int parameterCount = dispatchOperation.getParameters().size();
-		List<JvmOperation> sortedDispatchOperations = Lists.newArrayList(this.sortedDispatchOperations);
-		sorter.sort(sortedDispatchOperations);
+		List<JvmOperation> sortedDispatchOperations = sorter.getAllDispatchCases(dispatchOperation);
 		boolean[] allCasesSameType = new boolean[parameterCount];
 		for(int i = 0; i < parameterCount; i++) {
 			allCasesSameType[i] = true;

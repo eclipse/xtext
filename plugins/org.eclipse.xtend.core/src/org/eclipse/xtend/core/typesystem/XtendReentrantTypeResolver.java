@@ -172,17 +172,48 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				List<JvmOperation> cases = typeResolver.dispatchHelper.getAllDispatchCases(operation);
 				TypeConformanceComputer conformanceComputer = typeResolver.getServices().getTypeConformanceComputer();
 				List<LightweightTypeReference> parameterTypes = Lists.newArrayListWithCapacity(cases.size());
+				JvmOperation inheritedDispatcher = null;
+				LightweightTypeReference inheritedParameterType = null;
+				for (JvmOperation caseOperation : cases) {
+					if (caseOperation.eContainer() != operation.eContainer()) {
+						// inherited case, use the signature of the inherited dispatcher
+						inheritedDispatcher = typeResolver.dispatchHelper.getDispatcherOperation(caseOperation);
+						if (inheritedDispatcher != null) {
+							JvmFormalParameter inheritedParameter = inheritedDispatcher.getParameters().get(idx);
+							inheritedParameterType = resolvedTypes.getActualType(inheritedParameter);
+							break;
+						}
+					}
+				}
 				for (JvmOperation caseOperation : cases) {
 					JvmFormalParameter parameter = caseOperation.getParameters().get(idx);
 					LightweightTypeReference parameterType = resolvedTypes.getActualType(parameter);
 					if (parameterType != null && !parameterType.isType(Void.class)) {
-						parameterTypes.add(parameterType);
+						if (inheritedParameterType != null) {
+							if (caseOperation.eContainer() == operation.eContainer()) {
+								if (!inheritedParameterType.isAssignableFrom(parameterType)) {
+									XtendParameter xtendParameter = (XtendParameter) typeResolver
+											.getSourceElement(parameter);
+									resolvedTypes
+											.addDiagnostic(new EObjectDiagnosticImpl(
+													Severity.ERROR,
+													org.eclipse.xtend.core.validation.IssueCodes.DISPATCH_FUNCTIONS_INVALID_PARAMETER_TYPE,
+													"Dispatch function cannot widen inherited parameter type "
+															+ inheritedParameterType.getSimpleName(), xtendParameter
+															.getParameterType(), null, -1, null));
+								}
+							}
+						} else {
+							parameterTypes.add(parameterType);
+						}
 					}
 				}
 				// every parameter type is java.lang.Void so we use Object
 				// otherwise it would only be possible to pass the null literal but not a null value, e.g. of type String
 				// to the dispatcher
 				if (parameterTypes.isEmpty()) {
+					if (inheritedParameterType != null)
+						return typeResolver.toJavaCompliantTypeReference(inheritedParameterType, session);
 					return typeResolver.getServices().getTypeReferences().getTypeForName(Object.class, operation);
 				}
 				LightweightTypeReference parameterType = conformanceComputer.getCommonSuperType(parameterTypes,
@@ -223,8 +254,9 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				LightweightTypeReference actualType = resolvedTypes.getReturnType(expression);
 				if (actualType == null) {
 					JvmOperation operation = typeResolver.associations.getDirectlyInferredOperation(createFunction);
-					IFeatureScopeSession session = operation.isStatic() ? featureScopeSession : featureScopeSession
-							.toInstanceContext();
+					IFeatureScopeSession session = operation.isStatic() 
+							? featureScopeSession 
+							: featureScopeSession.toInstanceContext();
 					typeResolver.computeTypes(resolvedTypesByContext, resolvedTypes, session, operation);
 					actualType = resolvedTypes.getReturnType(expression);
 				}
@@ -305,8 +337,9 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				expression = function.getExpression();
 				CreateExtensionInfo createInfo = function.getCreateExtensionInfo();
 				if (createInfo != null) {
-					IFeatureScopeSession session = function.isStatic() ? featureScopeSession : featureScopeSession
-							.toInstanceContext();
+					IFeatureScopeSession session = function.isStatic() 
+							? featureScopeSession 
+							: featureScopeSession.toInstanceContext();
 					computeTypes(resolvedTypes, session, createInfo.getCreateExpression());
 				}
 				for (XtendParameter parameter : function.getParameters()) {
@@ -424,8 +457,6 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		}
 
 		if (dispatchHelper.isDispatcherFunction(operation)) {
-			// TODO an inherited declared type should influence the expectation of the cases
-
 			// no associated expression, we just resolve it to the common super type of all associated cases
 			// see #createTypeProvider and #_doPrepare
 			preparedResolvedTypes.put(operation, null);
@@ -448,7 +479,8 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				markComputing(dispatchCase.getReturnType());
 			}
 			for (JvmOperation dispatchCase : dispatchCases) {
-				ResolvedTypes dispatchCaseResolvedTypes = dispatchCase == operation ? childResolvedTypes
+				ResolvedTypes dispatchCaseResolvedTypes = dispatchCase == operation 
+						? childResolvedTypes
 						: preparedResolvedTypes.get(dispatchCase);
 				if (dispatchCaseResolvedTypes == null) {
 					if (preparedResolvedTypes.containsKey(dispatchCase)) {
@@ -467,8 +499,11 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				} else {
 					preparedResolvedTypes.put(dispatchCase, null);
 					OperationBodyComputationState state = new DispatchOperationBodyComputationState(
-							dispatchCaseResolvedTypes, dispatchCase.isStatic() ? featureScopeSession
-									: featureScopeSession.toInstanceContext(), dispatchCase, dispatcher);
+							dispatchCaseResolvedTypes,
+							dispatchCase.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(),
+							dispatchCase,
+							dispatcher,
+							declaredDispatcherType);
 					addExtensionProviders(state, dispatchCase.getParameters());
 					ITypeComputationResult dispatchCaseResult = state.computeTypes();
 					if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
@@ -484,14 +519,15 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				}
 			}
 			if (hasInferredCase) {
-				LightweightTypeReference commonDispatchType = declaredDispatcherType != null ? declaredDispatcherType
-						: getServices().getTypeConformanceComputer().getCommonSuperType(dispatchCaseResults,
-								childResolvedTypes.getReferenceOwner());
+				LightweightTypeReference commonDispatchType = declaredDispatcherType != null 
+						? declaredDispatcherType
+						: getServices().getTypeConformanceComputer().getCommonSuperType(dispatchCaseResults, childResolvedTypes.getReferenceOwner());
 				if (commonDispatchType != null) {
 					for (JvmOperation dispatchCase : dispatchCases) {
 						JvmTypeReference returnType = dispatchCase.getReturnType();
 						if (InferredTypeIndicator.isInferred(returnType)) {
-							InferredTypeIndicator.resolveTo(returnType,
+							InferredTypeIndicator.resolveTo(
+									returnType,
 									toJavaCompliantTypeReference(commonDispatchType, featureScopeSession));
 						}
 					}
@@ -621,7 +657,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			JvmGenericType inferredLocalClass = jvmModelInferrer.inferLocalClass(
 					(AnonymousClassConstructorCall) current, localClassName, container, featureScopeSession,
 					resolvedTypes);
-			if(inferredLocalClass != null) {
+			if (inferredLocalClass != null) {
 				doPrepare(resolvedTypes, featureScopeSession, inferredLocalClass, resolvedTypesByContext);
 				return true;
 			}

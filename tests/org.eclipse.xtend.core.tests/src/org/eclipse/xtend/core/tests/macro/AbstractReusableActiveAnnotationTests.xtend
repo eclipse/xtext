@@ -868,6 +868,72 @@ abstract class AbstractReusableActiveAnnotationTests {
 		]
 	}
 
+	@Test def void testAddDispatchCase() {
+		assertGeneratedCode(
+			'myannotation/AddDispatchCaseAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.Visibility
+				
+				@Active(AddDispatchCaseProcessor)
+				annotation AddDispatchCase{ }
+				class AddDispatchCaseProcessor extends AbstractClassProcessor {
+					
+					override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
+						clazz.addMethod('_m') [
+							addParameter("foo", string)
+							visibility = Visibility.PROTECTED
+							returnType = string
+							body = '«»''return null;''«»'
+						]
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.AddDispatchCase class MyClass {
+					def dispatch m(Integer i) { return null }
+				}
+			''',
+			'''
+				package myusercode;
+				
+				import java.util.Arrays;
+				import myannotation.AddDispatchCase;
+				
+				@AddDispatchCase
+				@SuppressWarnings("all")
+				public class MyClass {
+				  protected String _m(final Integer i) {
+				    return null;
+				  }
+				  
+				  public String m(final Object i) {
+				    if (i instanceof Integer) {
+				      return _m((Integer)i);
+				    } else if (i instanceof String) {
+				      return _m((String)i);
+				    } else {
+				      throw new IllegalArgumentException("Unhandled parameter types: " +
+				        Arrays.<Object>asList(i).toString());
+				    }
+				  }
+				  
+				  protected String _m(final String foo) {
+				    return null;
+				  }
+				}
+			'''
+		)
+	}
+	
 	@Test def void testAddConstructor() {
 		assertProcessing(
 			'myannotation/AddConstructorAnnotation.xtend' -> '''

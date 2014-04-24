@@ -23,14 +23,17 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class DispatchOperationBodyComputationState extends OperationBodyComputationState {
 
 	private JvmOperation dispatcher;
+	private LightweightTypeReference inheritedExpectedType;
 
 	public DispatchOperationBodyComputationState(
 			ResolvedTypes resolvedTypes, 
 			IFeatureScopeSession featureScopeSession,
 			JvmOperation operation,
-			JvmOperation dispatcher) {
+			JvmOperation dispatcher,
+			@Nullable LightweightTypeReference inheritedExpectedType) {
 		super(resolvedTypes, featureScopeSession, operation);
 		this.dispatcher = dispatcher;
+		this.inheritedExpectedType = inheritedExpectedType;
 	}
 	
 	@Override
@@ -49,7 +52,7 @@ public class DispatchOperationBodyComputationState extends OperationBodyComputat
 				return result;
 			}
 		}
-		return null;
+		return inheritedExpectedType;
 	}
 
 }

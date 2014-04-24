@@ -1,13 +1,10 @@
 package org.eclipse.xtend.core.tests.macro
 
-import org.junit.Test
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
-import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
-import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-import org.eclipse.xtend.lib.macro.TransformationContext
-import java.lang.annotation.Target
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+import org.junit.Test
 
 class AddInterfaceProcessorTest extends AbstractActiveAnnotationTest {
 	
@@ -44,17 +41,6 @@ class AddInterfaceProcessor extends AbstractClassProcessor {
 	
 	override doRegisterGlobals(ClassDeclaration annotatedClass, RegisterGlobalsContext context) {
 		context.registerInterface('de.test.Test')
-	}
-	
-	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
-		val annotationReferenceA = newAnnotationReference('A')
-
-		val annotationReferenceB = newAnnotationReference('B') [
-			set('value', 1)
-			setAnnotationValue('a', newAnnotationReference('C') [
-				setAnnotationValue('lalala', newAnnotationReference(Target.findTypeGlobally), newAnnotationReference(Target))
-			])
-		]
 	}
 	
 }

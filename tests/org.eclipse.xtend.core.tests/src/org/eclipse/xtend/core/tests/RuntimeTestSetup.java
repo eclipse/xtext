@@ -39,7 +39,6 @@ import com.google.inject.Singleton;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class RuntimeTestSetup extends XtendStandaloneSetup {
 
 	@Override

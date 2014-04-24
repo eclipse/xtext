@@ -87,7 +87,11 @@ public class CacheMethodCompileStrategy implements Procedures.Procedure1<ITreeAp
 		appendable.append(");");
 		// declare result variable
 		LightweightTypeReference returnType = resolvedTypes.getActualType(createExtensionInfo.getCreateExpression());
-		appendable.newLine().append("final ").append(returnType);
+		if (returnType != null) {
+			appendable.newLine().append("final ").append(returnType);
+		} else {
+			appendable.newLine().append("final Object");
+		}
 		String resultVarName = "_result";
 		appendable.append(" ").append(resultVarName).append(";");
 		// open synchronize block
