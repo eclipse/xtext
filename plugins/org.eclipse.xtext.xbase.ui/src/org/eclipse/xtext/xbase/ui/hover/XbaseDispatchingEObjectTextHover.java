@@ -27,6 +27,7 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 
 import com.google.inject.Inject;
 
@@ -80,7 +81,7 @@ public class XbaseDispatchingEObjectTextHover extends DispatchingEObjectTextHove
 		EObject object = eObjectAtOffsetHelper.resolveContainedElementAt(resource, offset);
 		if (object != null && object instanceof XAbstractFeatureCall){
 			JvmIdentifiableElement feature = ((XAbstractFeatureCall) object).getFeature();
-			if(feature instanceof JvmExecutable || feature instanceof JvmField || object instanceof XConstructorCall)
+			if(feature instanceof JvmExecutable || feature instanceof JvmField || object instanceof XConstructorCall || object instanceof XVariableDeclaration)
 					if (original != null)
 						return Tuples.create(object, original.getSecond());
 		}
