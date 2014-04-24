@@ -19,6 +19,7 @@ import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.linking.Linker;
 import org.eclipse.xtend.core.linking.LinkingProxyAwareResource;
 import org.eclipse.xtend.core.linking.URIEncoder;
+import org.eclipse.xtend.core.linking.XtendEObjectAtOffsetHelper;
 import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider;
 import org.eclipse.xtend.core.parser.CustomXtendParser;
@@ -59,6 +60,7 @@ import org.eclipse.xtext.parser.antlr.IPartialParsingHelper;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.parser.impl.TokenRegionProvider;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
@@ -333,5 +335,10 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public Class<? extends ITaskTagProvider> bindTaskTagProvider() {
 		return XtendTaskTagProvider.class;
+	}
+	
+	@Override
+	public Class<? extends EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
+		return XtendEObjectAtOffsetHelper.class;
 	}
 }
