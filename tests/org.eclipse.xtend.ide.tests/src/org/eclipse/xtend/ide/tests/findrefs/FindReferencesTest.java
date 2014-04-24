@@ -13,6 +13,8 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -146,6 +148,48 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 		mockAcceptor.expect(((XBlockExpression) functionBaz.getExpression()).getExpressions().get(0),
 				inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
 		findReferencesTester.checkFindReferences(functionFoo, "Java References to Foo.foo (/test.project/src/Foo.xtend)", mockAcceptor);
+	}
+
+	@Test public void testFindReferencesToAnonymousSuperType() throws Exception {
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo {}")
+				.getXtendTypes().get(0);
+		XtendClass classBar = (XtendClass) testHelper.xtendFile("Bar", "class Bar { val foo = new Foo{} }").getXtendTypes().get(0);
+		waitForAutoBuild();
+		XtendField fieldFoo = (XtendField) classBar.getMembers().get(0);
+		JvmGenericType inferredTypeFoo = associations.getInferredType(classFoo);
+
+		final MockAcceptor mockAcceptor = new MockAcceptor();
+		mockAcceptor.expect(fieldFoo.getInitialValue(),
+				inferredTypeFoo, XCONSTRUCTOR_CALL__CONSTRUCTOR);
+		findReferencesTester.checkFindReferences(inferredTypeFoo, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+	}
+
+	@Test public void testFindReferencesToAnonymousImplicitSuperConstructor() throws Exception {
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo {}")
+				.getXtendTypes().get(0);
+		XtendClass classBar = (XtendClass) testHelper.xtendFile("Bar", "class Bar { val foo = new Foo{} }").getXtendTypes().get(0);
+		waitForAutoBuild();
+		XtendField fieldFoo = (XtendField) classBar.getMembers().get(0);
+		JvmConstructor inferredConstructor = associations.getInferredConstructor(classFoo);
+
+		final MockAcceptor mockAcceptor = new MockAcceptor();
+		mockAcceptor.expect(fieldFoo.getInitialValue(),
+				inferredConstructor, XCONSTRUCTOR_CALL__CONSTRUCTOR);
+		findReferencesTester.checkFindReferences(inferredConstructor, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
+	}
+
+	@Test public void testFindReferencesToAnonymousExplicitSuperConstructor() throws Exception {
+		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo { new() {} }")
+				.getXtendTypes().get(0);
+		XtendClass classBar = (XtendClass) testHelper.xtendFile("Bar", "class Bar { val foo = new Foo{} }").getXtendTypes().get(0);
+		waitForAutoBuild();
+		XtendField fieldFoo = (XtendField) classBar.getMembers().get(0);
+		JvmConstructor inferredConstructor = associations.getInferredConstructor((XtendConstructor) classFoo.getMembers().get(0));
+
+		final MockAcceptor mockAcceptor = new MockAcceptor();
+		mockAcceptor.expect(fieldFoo.getInitialValue(),
+				inferredConstructor, XCONSTRUCTOR_CALL__CONSTRUCTOR);
+		findReferencesTester.checkFindReferences(inferredConstructor, "Java References to Foo (/test.project/src/Foo.xtend)", mockAcceptor);
 	}
 
 }
