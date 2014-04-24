@@ -51,6 +51,7 @@ import org.eclipse.xtend.ide.highlighting.TokenToAttributeIdMapper;
 import org.eclipse.xtend.ide.highlighting.XtendHighlightingCalculator;
 import org.eclipse.xtend.ide.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtend.ide.hover.XtendAnnotationHover;
+import org.eclipse.xtend.ide.hover.XtendDispatchingEObjectTextHover;
 import org.eclipse.xtend.ide.hover.XtendHoverDocumentationProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider;
@@ -504,5 +505,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	public Class<? extends IPreferenceStoreAccess> bindPreferenceStoreAccess() {
 		return XtendPreferenceStoreAccess.class;
+	}
+	
+	@Override
+	public Class<? extends org.eclipse.xtext.ui.editor.hover.IEObjectHover> bindIEObjectHover() {
+		return XtendDispatchingEObjectTextHover.class;
 	}
 }

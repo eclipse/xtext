@@ -27,12 +27,15 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -1040,6 +1043,154 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       JvmIdentifiableElement _feature_3 = ((XFeatureCall) _memberCallTarget_1).getFeature();
       String _signature_3 = this.signatureProvider.getSignature(_feature_3);
       Assert.assertEquals("Foo Bar.f", _signature_3);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAutcastExpressions() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def foo() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val CharSequence c = \"\"");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (c instanceof String) {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("c.substring(1, 1)");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("switch(c){");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("String : c.length");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XtendMember> _members = ((XtendClass) _head).getMembers();
+      XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
+      final XtendFunction func = ((XtendFunction) _head_1);
+      XExpression _expression = func.getExpression();
+      final XBlockExpression block = ((XBlockExpression) _expression);
+      EList<XExpression> _expressions = block.getExpressions();
+      final XExpression dec = IterableExtensions.<XExpression>head(_expressions);
+      String _signature = this.signatureProvider.getSignature(dec);
+      Assert.assertEquals("CharSequence c", _signature);
+      EList<XExpression> _expressions_1 = block.getExpressions();
+      XExpression _get = _expressions_1.get(1);
+      final XIfExpression ifexpr = ((XIfExpression) _get);
+      final XExpression then = ifexpr.getThen();
+      EList<XExpression> _expressions_2 = ((XBlockExpression) then).getExpressions();
+      XExpression _head_2 = IterableExtensions.<XExpression>head(_expressions_2);
+      final XExpression target = ((XMemberFeatureCall) _head_2).getMemberCallTarget();
+      String _signature_1 = this.signatureProvider.getSignature(target);
+      Assert.assertEquals("String c", _signature_1);
+      EList<XExpression> _expressions_3 = block.getExpressions();
+      XExpression _get_1 = _expressions_3.get(2);
+      final XSwitchExpression switchExpr = ((XSwitchExpression) _get_1);
+      EList<XCasePart> _cases = switchExpr.getCases();
+      XCasePart _head_3 = IterableExtensions.<XCasePart>head(_cases);
+      XExpression _then = _head_3.getThen();
+      final XExpression expr = ((XMemberFeatureCall) _then).getMemberCallTarget();
+      String _signature_2 = this.signatureProvider.getSignature(expr);
+      Assert.assertEquals("String c", _signature_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAutcastExpressions_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("CharSequence c = \"\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def foo() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (c instanceof String) {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("c.substring(1, 1)");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("switch(c){");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("String : c.length");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XtendMember> _members = ((XtendClass) _head).getMembers();
+      XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
+      String _signature = this.signatureProvider.getSignature(_head_1);
+      Assert.assertEquals("CharSequence c", _signature);
+      EList<XtendTypeDeclaration> _xtendTypes_1 = xtendFile.getXtendTypes();
+      XtendTypeDeclaration _head_2 = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes_1);
+      EList<XtendMember> _members_1 = ((XtendClass) _head_2).getMembers();
+      XtendMember _get = _members_1.get(1);
+      final XtendFunction func = ((XtendFunction) _get);
+      XExpression _expression = func.getExpression();
+      final XBlockExpression block = ((XBlockExpression) _expression);
+      EList<XExpression> _expressions = block.getExpressions();
+      XExpression _head_3 = IterableExtensions.<XExpression>head(_expressions);
+      final XIfExpression ifexpr = ((XIfExpression) _head_3);
+      final XExpression then = ifexpr.getThen();
+      EList<XExpression> _expressions_1 = ((XBlockExpression) then).getExpressions();
+      XExpression _head_4 = IterableExtensions.<XExpression>head(_expressions_1);
+      final XExpression target = ((XMemberFeatureCall) _head_4).getMemberCallTarget();
+      String _signature_1 = this.signatureProvider.getSignature(target);
+      Assert.assertEquals("String c", _signature_1);
+      EList<XExpression> _expressions_2 = block.getExpressions();
+      XExpression _get_1 = _expressions_2.get(1);
+      final XSwitchExpression switchExpr = ((XSwitchExpression) _get_1);
+      EList<XCasePart> _cases = switchExpr.getCases();
+      XCasePart _head_5 = IterableExtensions.<XCasePart>head(_cases);
+      XExpression _then = _head_5.getThen();
+      final XExpression expr = ((XMemberFeatureCall) _then).getMemberCallTarget();
+      String _signature_2 = this.signatureProvider.getSignature(expr);
+      Assert.assertEquals("String c", _signature_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
