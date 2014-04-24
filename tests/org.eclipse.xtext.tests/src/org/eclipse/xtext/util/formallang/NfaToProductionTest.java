@@ -252,4 +252,57 @@ public class NfaToProductionTest extends Assert {
 		assertEquals("start x (y x)* stop", nfa2g(nfa));
 	}
 
+	/*
+	 * This caused an explosion of state splits, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=427449  
+	 */
+	@Test public void testManyOptionalGroupAlternative() {
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "y", "z", "stop");
+		nfa.state("x").followedBy("x", "y", "z", "{1", "stop");
+		nfa.state("{1").followedBy("x=ID", "}1");
+		nfa.state("x=ID").followedBy("}1");
+		nfa.state("}1").followedBy("x", "y", "z", "stop");
+		nfa.state("y").followedBy("x", "y", "z", "{2", "stop");
+		nfa.state("{2").followedBy("y=ID", "}2");
+		nfa.state("y=ID").followedBy("}2");
+		nfa.state("}2").followedBy("x", "y", "z", "stop");
+		nfa.state("z").followedBy("x", "y", "z", "{3", "stop");
+		nfa.state("{3").followedBy("z=ID", "}3");
+		nfa.state("z=ID").followedBy("}3");
+		nfa.state("}3").followedBy("x", "y", "z", "stop");
+		assertEquals("start (x ({1 x=ID? }1)? | y ({2 y=ID? }2)? | z ({3 z=ID? }3)?)* stop", nfa2g(nfa));
+	}
+	
+	/*
+	 * simplified version of https://bugs.eclipse.org/bugs/show_bug.cgi?id=427449
+	 */
+	@Test public void testManyOptionalGroup1() {
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "stop");
+		nfa.state("x").followedBy("x", "{", "stop");
+		nfa.state("{").followedBy("x=ID", "}");
+		nfa.state("x=ID").followedBy("}");
+		nfa.state("}").followedBy("x", "stop");
+		assertEquals("start (x ({ x=ID? })?)* stop", nfa2g(nfa));
+	}
+	
+	@Test public void testManyOptionalGroup2() {
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("x", "stop");
+		nfa.state("x").followedBy("x", "{", "stop");
+		nfa.state("{").followedBy("x=ID", "}");
+		nfa.state("x=ID").followedBy("}");
+		nfa.state("}").followedBy("{","x", "stop");
+		assertEquals("start (x ({ x=ID? })*)* stop", nfa2g(nfa));
+	}
+	
+	@Test public void testManyOptionalGroup3() {
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("{", "stop");
+		nfa.state("{").followedBy("x=ID", "}");
+		nfa.state("x=ID").followedBy("}");
+		nfa.state("}").followedBy("x");
+		nfa.state("x").followedBy("x", "{", "stop");
+		assertEquals("start ({ x=ID? } x+)* stop", nfa2g(nfa));
+	}
 }
