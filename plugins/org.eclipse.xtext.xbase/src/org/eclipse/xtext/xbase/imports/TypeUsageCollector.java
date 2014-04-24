@@ -30,7 +30,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.RawSuperTypes;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
@@ -84,9 +83,6 @@ public class TypeUsageCollector {
 	@Inject
 	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
 
-	@Inject
-	private TypeReferences typeReferences;
-	
 	@Inject
 	private TypeUsages typeUsages;
 	
