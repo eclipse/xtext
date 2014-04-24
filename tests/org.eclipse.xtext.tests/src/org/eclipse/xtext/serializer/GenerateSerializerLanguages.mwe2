@@ -41,9 +41,7 @@ Workflow {
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/HiddenTokenSequencerTestLanguage.xtext"
-			fragment = @ TestLanguagesFragments auto-inject {
-				srcGenOnly = false
-			}
+			fragment = @ TestLanguagesFragments auto-inject {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/ContextFinderTestLanguage.xtext"
