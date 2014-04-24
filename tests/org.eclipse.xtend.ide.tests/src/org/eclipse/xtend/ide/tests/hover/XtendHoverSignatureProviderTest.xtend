@@ -22,6 +22,8 @@ import org.junit.After
 import org.junit.Test
 import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.junit.Ignore
+import org.eclipse.xtext.xbase.XIfExpression
+import org.eclipse.xtext.xbase.XSwitchExpression
 
 class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	@Inject
@@ -463,6 +465,8 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val in = (xtendFile.xtendTypes.head as XtendClass).annotations.head.annotationType
 		assertEquals("Foo", signatureProvider.getSignature(in))
 	}
+	
+	
 
 	@Test
 	def test381185(){
@@ -495,6 +499,63 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		assertEquals("Bar Foo.b", signatureProvider.getSignature((call1.memberCallTarget as XFeatureCall).feature))
 		assertEquals("Foo Bar.f", signatureProvider.getSignature((call2.memberCallTarget as XFeatureCall).feature))
 		
+	}
+	
+	@Test
+	def testAutcastExpressions(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo {
+			def foo() {
+				val CharSequence c = ""
+				if (c instanceof String) {
+					c.substring(1, 1)
+				}
+				switch(c){
+					String : c.length
+				}
+			}
+		}
+		''',resourceSet)
+		val func = (xtendFile.xtendTypes.head as XtendClass).members.head as XtendFunction
+		val block = func.expression as XBlockExpression
+		val dec = block.expressions.head
+		assertEquals("CharSequence c", signatureProvider.getSignature(dec))
+		val ifexpr = block.expressions.get(1) as XIfExpression
+		val then = ifexpr.getThen()
+		val target = ((then as XBlockExpression).expressions.head as XMemberFeatureCall).memberCallTarget
+		assertEquals("String c", signatureProvider.getSignature(target))
+		val switchExpr = block.expressions.get(2) as XSwitchExpression
+		val expr = (switchExpr.cases.head.getThen() as XMemberFeatureCall).memberCallTarget
+		assertEquals("String c", signatureProvider.getSignature(expr))
+	}
+	
+	@Test
+	def testAutcastExpressions_2(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Foo {
+			CharSequence c = ""
+			def foo() {
+				if (c instanceof String) {
+					c.substring(1, 1)
+				}
+				switch(c){
+					String : c.length
+				}
+			}
+		}
+		''',resourceSet)
+		assertEquals("CharSequence c", signatureProvider.getSignature((xtendFile.xtendTypes.head as XtendClass).members.head))
+		val func = (xtendFile.xtendTypes.head as XtendClass).members.get(1) as XtendFunction
+		val block = func.expression as XBlockExpression
+		val ifexpr = block.expressions.head as XIfExpression
+		val then = ifexpr.getThen()
+		val target = ((then as XBlockExpression).expressions.head as XMemberFeatureCall).memberCallTarget
+		assertEquals("String c", signatureProvider.getSignature(target))
+		val switchExpr = block.expressions.get(1) as XSwitchExpression
+		val expr = (switchExpr.cases.head.getThen() as XMemberFeatureCall).memberCallTarget
+		assertEquals("String c", signatureProvider.getSignature(expr))
 	}
 
 	def getResourceSet(){
