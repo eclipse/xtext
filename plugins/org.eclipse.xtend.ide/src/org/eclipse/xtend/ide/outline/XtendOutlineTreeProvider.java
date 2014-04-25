@@ -87,10 +87,14 @@ public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider impl
 						XtypePackage.Literals.XIMPORT_SECTION__IMPORT_DECLARATIONS, images.forImportContainer(),
 						"import declarations", false);
 			for (XtendTypeDeclaration xtendType : xtendFile.getXtendTypes()) {
-				EObjectNode classNode = createNode(parentNode, xtendType);
-				createFeatureNodes(classNode, xtendType);
+				createNodeForType(parentNode, xtendType);
 			}
 		}
+	}
+
+	private void createNodeForType(IOutlineNode parentNode, XtendTypeDeclaration xtendType) {
+		EObjectNode classNode = createNode(parentNode, xtendType);
+		createFeatureNodes(classNode, xtendType);
 	}
 	
 	protected void createFeatureNodes(IOutlineNode parentNode, XtendTypeDeclaration xtendType) {
@@ -106,6 +110,10 @@ public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider impl
 
 	protected void createFeatureNodesForType(IOutlineNode parentNode, XtendTypeDeclaration xtendType,
 			JvmDeclaredType inferredType, final JvmDeclaredType baseType, Set<JvmFeature> processedFeatures, int inheritanceDepth) {
+		if(xtendType != null) {
+			for (XtendTypeDeclaration nestedType : filter(xtendType.getMembers(), XtendTypeDeclaration.class)) 
+				createNodeForType(parentNode, nestedType);
+		}
 		if (xtendType instanceof XtendClass) {
 			for(JvmOperation operation: inferredType.getDeclaredOperations()) {
 				if(dispatchHelper.isDispatcherFunction(operation)) {

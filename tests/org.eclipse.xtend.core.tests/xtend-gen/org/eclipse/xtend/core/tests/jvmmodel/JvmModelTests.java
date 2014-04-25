@@ -444,4 +444,99 @@ public class JvmModelTests extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testNestedClass_0() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo { ");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static class Nested0 {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("interface Nested1 {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("annotation Nested2 {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("enum Nested3 {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("X");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendClass _clazz = this.clazz(_string);
+      final JvmGenericType clazz = this._iXtendJvmAssociations.getInferredType(_clazz);
+      EList<JvmMember> _members = clazz.getMembers();
+      int _size = _members.size();
+      Assert.assertEquals(2, _size);
+      EList<JvmMember> _members_1 = clazz.getMembers();
+      JvmMember _head = IterableExtensions.<JvmMember>head(_members_1);
+      Assert.assertTrue((_head instanceof JvmGenericType));
+      EList<JvmMember> _members_2 = clazz.getMembers();
+      JvmMember _head_1 = IterableExtensions.<JvmMember>head(_members_2);
+      final JvmGenericType nested0 = ((JvmGenericType) _head_1);
+      String _simpleName = nested0.getSimpleName();
+      Assert.assertEquals("Nested0", _simpleName);
+      boolean _isStatic = nested0.isStatic();
+      Assert.assertTrue(_isStatic);
+      EList<JvmMember> _members_3 = nested0.getMembers();
+      int _size_1 = _members_3.size();
+      Assert.assertEquals(2, _size_1);
+      EList<JvmMember> _members_4 = nested0.getMembers();
+      JvmMember _head_2 = IterableExtensions.<JvmMember>head(_members_4);
+      Assert.assertTrue((_head_2 instanceof JvmGenericType));
+      EList<JvmMember> _members_5 = nested0.getMembers();
+      JvmMember _head_3 = IterableExtensions.<JvmMember>head(_members_5);
+      final JvmGenericType nested1 = ((JvmGenericType) _head_3);
+      String _simpleName_1 = nested1.getSimpleName();
+      Assert.assertEquals("Nested1", _simpleName_1);
+      boolean _isStatic_1 = nested1.isStatic();
+      Assert.assertTrue(_isStatic_1);
+      EList<JvmMember> _members_6 = nested1.getMembers();
+      int _size_2 = _members_6.size();
+      Assert.assertEquals(2, _size_2);
+      EList<JvmMember> _members_7 = nested1.getMembers();
+      JvmMember _head_4 = IterableExtensions.<JvmMember>head(_members_7);
+      Assert.assertTrue((_head_4 instanceof JvmAnnotationType));
+      EList<JvmMember> _members_8 = nested1.getMembers();
+      JvmMember _head_5 = IterableExtensions.<JvmMember>head(_members_8);
+      final JvmAnnotationType nested2 = ((JvmAnnotationType) _head_5);
+      String _simpleName_2 = nested2.getSimpleName();
+      Assert.assertEquals("Nested2", _simpleName_2);
+      boolean _isStatic_2 = nested2.isStatic();
+      Assert.assertTrue(_isStatic_2);
+      EList<JvmMember> _members_9 = nested1.getMembers();
+      int _size_3 = _members_9.size();
+      Assert.assertEquals(2, _size_3);
+      EList<JvmMember> _members_10 = nested1.getMembers();
+      JvmMember _last = IterableExtensions.<JvmMember>last(_members_10);
+      Assert.assertTrue((_last instanceof JvmEnumerationType));
+      EList<JvmMember> _members_11 = nested1.getMembers();
+      JvmMember _last_1 = IterableExtensions.<JvmMember>last(_members_11);
+      final JvmEnumerationType nested3 = ((JvmEnumerationType) _last_1);
+      String _simpleName_3 = nested3.getSimpleName();
+      Assert.assertEquals("Nested3", _simpleName_3);
+      boolean _isStatic_3 = nested3.isStatic();
+      Assert.assertTrue(_isStatic_3);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

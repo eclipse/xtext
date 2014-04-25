@@ -281,52 +281,52 @@ public class XtendLabelProvider extends XbaseLabelProvider {
     return _xblockexpression;
   }
   
-  protected ImageDescriptor imageDescriptor(final Object constructor) {
-    if (constructor instanceof JvmConstructor) {
-      return _imageDescriptor((JvmConstructor)constructor);
-    } else if (constructor instanceof JvmOperation) {
-      return _imageDescriptor((JvmOperation)constructor);
-    } else if (constructor instanceof JvmAnnotationType) {
-      return _imageDescriptor((JvmAnnotationType)constructor);
-    } else if (constructor instanceof JvmEnumerationType) {
-      return _imageDescriptor((JvmEnumerationType)constructor);
-    } else if (constructor instanceof JvmField) {
-      return _imageDescriptor((JvmField)constructor);
-    } else if (constructor instanceof JvmGenericType) {
-      return _imageDescriptor((JvmGenericType)constructor);
-    } else if (constructor instanceof XtendAnnotationType) {
-      return _imageDescriptor((XtendAnnotationType)constructor);
-    } else if (constructor instanceof XtendClass) {
-      return _imageDescriptor((XtendClass)constructor);
-    } else if (constructor instanceof XtendConstructor) {
-      return _imageDescriptor((XtendConstructor)constructor);
-    } else if (constructor instanceof XtendEnum) {
-      return _imageDescriptor((XtendEnum)constructor);
-    } else if (constructor instanceof XtendFunction) {
-      return _imageDescriptor((XtendFunction)constructor);
-    } else if (constructor instanceof XtendInterface) {
-      return _imageDescriptor((XtendInterface)constructor);
-    } else if (constructor instanceof JvmTypeParameter) {
-      return _imageDescriptor((JvmTypeParameter)constructor);
-    } else if (constructor instanceof XtendEnumLiteral) {
-      return _imageDescriptor((XtendEnumLiteral)constructor);
-    } else if (constructor instanceof XtendField) {
-      return _imageDescriptor((XtendField)constructor);
-    } else if (constructor instanceof JvmFormalParameter) {
-      return _imageDescriptor((JvmFormalParameter)constructor);
-    } else if (constructor instanceof XVariableDeclaration) {
-      return _imageDescriptor((XVariableDeclaration)constructor);
-    } else if (constructor instanceof XtendFile) {
-      return _imageDescriptor((XtendFile)constructor);
-    } else if (constructor instanceof XImportDeclaration) {
-      return _imageDescriptor((XImportDeclaration)constructor);
-    } else if (constructor instanceof XImportSection) {
-      return _imageDescriptor((XImportSection)constructor);
-    } else if (constructor != null) {
-      return _imageDescriptor(constructor);
+  protected ImageDescriptor imageDescriptor(final Object operation) {
+    if (operation instanceof JvmConstructor) {
+      return _imageDescriptor((JvmConstructor)operation);
+    } else if (operation instanceof JvmOperation) {
+      return _imageDescriptor((JvmOperation)operation);
+    } else if (operation instanceof JvmAnnotationType) {
+      return _imageDescriptor((JvmAnnotationType)operation);
+    } else if (operation instanceof JvmEnumerationType) {
+      return _imageDescriptor((JvmEnumerationType)operation);
+    } else if (operation instanceof JvmField) {
+      return _imageDescriptor((JvmField)operation);
+    } else if (operation instanceof JvmGenericType) {
+      return _imageDescriptor((JvmGenericType)operation);
+    } else if (operation instanceof XtendAnnotationType) {
+      return _imageDescriptor((XtendAnnotationType)operation);
+    } else if (operation instanceof XtendClass) {
+      return _imageDescriptor((XtendClass)operation);
+    } else if (operation instanceof XtendConstructor) {
+      return _imageDescriptor((XtendConstructor)operation);
+    } else if (operation instanceof XtendEnum) {
+      return _imageDescriptor((XtendEnum)operation);
+    } else if (operation instanceof XtendFunction) {
+      return _imageDescriptor((XtendFunction)operation);
+    } else if (operation instanceof XtendInterface) {
+      return _imageDescriptor((XtendInterface)operation);
+    } else if (operation instanceof JvmTypeParameter) {
+      return _imageDescriptor((JvmTypeParameter)operation);
+    } else if (operation instanceof XtendEnumLiteral) {
+      return _imageDescriptor((XtendEnumLiteral)operation);
+    } else if (operation instanceof XtendField) {
+      return _imageDescriptor((XtendField)operation);
+    } else if (operation instanceof JvmFormalParameter) {
+      return _imageDescriptor((JvmFormalParameter)operation);
+    } else if (operation instanceof XVariableDeclaration) {
+      return _imageDescriptor((XVariableDeclaration)operation);
+    } else if (operation instanceof XtendFile) {
+      return _imageDescriptor((XtendFile)operation);
+    } else if (operation instanceof XImportDeclaration) {
+      return _imageDescriptor((XImportDeclaration)operation);
+    } else if (operation instanceof XImportSection) {
+      return _imageDescriptor((XImportSection)operation);
+    } else if (operation != null) {
+      return _imageDescriptor(operation);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(constructor).toString());
+        Arrays.<Object>asList(operation).toString());
     }
   }
 }

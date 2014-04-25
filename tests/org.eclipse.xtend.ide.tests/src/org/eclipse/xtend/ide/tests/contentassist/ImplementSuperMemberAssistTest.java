@@ -42,7 +42,7 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 	}
 
 	@Test public void testNonAbstractMethod() throws Exception {
-		newBuilder().append("class Foo implements Comparable<String> { cl").assertText(
+		newBuilder().append("class Foo implements Comparable<String> { clo").assertText(
 				"\n" + indent + "\n" + indent + "override protected clone() throws CloneNotSupportedException {\n" + 
 				indent + indent + "super.clone()\n" +
 				indent + "}");
