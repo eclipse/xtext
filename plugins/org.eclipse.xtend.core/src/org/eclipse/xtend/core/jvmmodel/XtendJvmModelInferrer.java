@@ -39,6 +39,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.Data;
@@ -171,58 +172,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		XtendFile xtendFile = (XtendFile) object;
 		List<Runnable> doLater = newArrayList();
 		for (final XtendTypeDeclaration declaration: xtendFile.getXtendTypes()) {
-			if (Strings.isEmpty(declaration.getName()))
-				continue;
-			
-			if (declaration instanceof XtendAnnotationType) {
-				final JvmAnnotationType annotation = typesFactory.createJvmAnnotationType();
-				setNameAndAssociate(xtendFile, declaration, annotation);
-				acceptor.accept(annotation);
-				if (!preIndexingPhase) {
-					doLater.add(new Runnable() {
-						public void run() {
-							initialize((XtendAnnotationType)declaration, annotation);
-						}
-					});
-				}
-			} else if (declaration instanceof XtendClass) {
-				XtendClass xtendClass = (XtendClass) declaration;
-				final JvmGenericType javaType = typesFactory.createJvmGenericType();
-				setNameAndAssociate(xtendFile, declaration, javaType);
-				copyTypeParameters(xtendClass.getTypeParameters(), javaType);
-				acceptor.accept(javaType);
-				if (!preIndexingPhase) {
-					doLater.add(new Runnable() {
-						public void run() {
-							initialize((XtendClass) declaration, javaType);
-						}
-					});
-				}
-			} else if (declaration instanceof XtendInterface) {
-				XtendInterface xtendInterface = (XtendInterface) declaration;
-				final JvmGenericType javaType = typesFactory.createJvmGenericType();
-				setNameAndAssociate(xtendFile, declaration, javaType);
-				copyTypeParameters(xtendInterface.getTypeParameters(), javaType);
-				acceptor.accept(javaType);
-				if (!preIndexingPhase) {
-					doLater.add(new Runnable() {
-						public void run() {
-							initialize((XtendInterface) declaration, javaType);
-						}
-					});
-				}
-			} else if (declaration instanceof XtendEnum) {
-				final JvmEnumerationType javaType = typesFactory.createJvmEnumerationType();
-				setNameAndAssociate(xtendFile, declaration, javaType);
-				acceptor.accept(javaType);
-				if (!preIndexingPhase) {
-					doLater.add(new Runnable() {
-						public void run() {
-							initialize((XtendEnum) declaration, javaType);
-						}
-					});
-				}
-			}
+			inferTypeSceleton(declaration, acceptor, preIndexingPhase, xtendFile, doLater, null);
 		}
 		ActiveAnnotationContexts contexts = null;
 		BatchLinkableResource resource = (BatchLinkableResource)xtendFile.eResource();
@@ -260,7 +210,76 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			}
 		}
 	}
+
+	protected void inferTypeSceleton(final XtendTypeDeclaration declaration, final IJvmDeclaredTypeAcceptor acceptor, 
+			boolean preIndexingPhase, XtendFile xtendFile, List<Runnable> doLater, JvmDeclaredType containerSceleton) { 
+		JvmDeclaredType inferredSceleton = doInferTypeSceleton(declaration, acceptor, preIndexingPhase, xtendFile, doLater);
+		if(inferredSceleton != null) {
+			setNameAndAssociate(xtendFile, declaration, inferredSceleton);
+			if(containerSceleton != null)
+				containerSceleton.getMembers().add(inferredSceleton);
+			acceptor.accept(inferredSceleton);
+			for(XtendMember member: declaration.getMembers()) {
+				if(member instanceof XtendTypeDeclaration && ((XtendTypeDeclaration) member).isStatic())
+					inferTypeSceleton((XtendTypeDeclaration) member, acceptor, preIndexingPhase, xtendFile, doLater, inferredSceleton);
+			}
+		}
+	}
 	
+	protected JvmDeclaredType doInferTypeSceleton(final XtendTypeDeclaration declaration, final IJvmDeclaredTypeAcceptor acceptor,
+			boolean preIndexingPhase, XtendFile xtendFile, List<Runnable> doLater) {
+		if (Strings.isEmpty(declaration.getName()))
+			return null;
+		
+		if (declaration instanceof XtendAnnotationType) {
+			final JvmAnnotationType annotation = typesFactory.createJvmAnnotationType();
+			if (!preIndexingPhase) {
+				doLater.add(new Runnable() {
+					public void run() {
+						initialize((XtendAnnotationType)declaration, annotation);
+					}
+				});
+			}
+			return annotation;
+		} else if (declaration instanceof XtendClass) {
+			XtendClass xtendClass = (XtendClass) declaration;
+			final JvmGenericType javaType = typesFactory.createJvmGenericType();
+			copyTypeParameters(xtendClass.getTypeParameters(), javaType);
+			if (!preIndexingPhase) {
+				doLater.add(new Runnable() {
+					public void run() {
+						initialize((XtendClass) declaration, javaType);
+					}
+				});
+			}
+			return javaType;
+		} else if (declaration instanceof XtendInterface) {
+			XtendInterface xtendInterface = (XtendInterface) declaration;
+			final JvmGenericType javaType = typesFactory.createJvmGenericType();
+			copyTypeParameters(xtendInterface.getTypeParameters(), javaType);
+			if (!preIndexingPhase) {
+				doLater.add(new Runnable() {
+					public void run() {
+						initialize((XtendInterface) declaration, javaType);
+					}
+				});
+			}
+			return javaType;
+		} else if (declaration instanceof XtendEnum) {
+			final JvmEnumerationType javaType = typesFactory.createJvmEnumerationType();
+			if (!preIndexingPhase) {
+				doLater.add(new Runnable() {
+					public void run() {
+						initialize((XtendEnum) declaration, javaType);
+					}
+				});
+			}
+			return javaType;
+		} else {
+			return null;
+		}
+	}
+
 	protected void setNameAndAssociate(XtendFile file, XtendTypeDeclaration xtendType, JvmDeclaredType javaType) {
 		javaType.setPackageName(file.getPackage());
 		javaType.setSimpleName(xtendType.getName());
@@ -276,6 +295,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	protected void initialize(XtendAnnotationType source, JvmAnnotationType inferredJvmType) {
 		inferredJvmType.setVisibility(source.getVisibility());
+		inferredJvmType.setStatic(source.isStatic() && !isTopLevel(source));
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		jvmTypesBuilder.copyDocumentationTo(source, inferredJvmType);
 		for (XtendMember member : source.getMembers()) {
@@ -315,6 +335,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	protected void initialize(XtendClass source, JvmGenericType inferredJvmType) {
 		inferredJvmType.setVisibility(source.getVisibility());
+		inferredJvmType.setStatic(source.isStatic() && !isTopLevel(source));
 		inferredJvmType.setAbstract(source.isAbstract());
 		inferredJvmType.setStrictFloatingPoint(source.isStrictFloatingPoint());
 		if (!inferredJvmType.isAbstract()) {
@@ -356,6 +377,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	protected void initialize(XtendInterface source, JvmGenericType inferredJvmType) {
 		inferredJvmType.setVisibility(source.getVisibility());
+		inferredJvmType.setStatic(source.isStatic() && !isTopLevel(source));
 		inferredJvmType.setInterface(true);
 		inferredJvmType.setStrictFloatingPoint(source.isStrictFloatingPoint());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
@@ -375,6 +397,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	protected void initialize(XtendEnum source, JvmEnumerationType inferredJvmType) {
 		inferredJvmType.setVisibility(source.getVisibility());
+		inferredJvmType.setStatic(source.isStatic() && !isTopLevel(source));
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		for (XtendMember member : source.getMembers()) {
 			if (member instanceof XtendEnumLiteral) 
@@ -383,7 +406,10 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		jvmTypesBuilder.copyDocumentationTo(source, inferredJvmType);
 	}
 	
-
+	protected boolean isTopLevel(XtendTypeDeclaration declaration) {
+		return declaration.eContainingFeature() == XtendPackage.Literals.XTEND_FILE__XTEND_TYPES;
+	}
+	
 	protected boolean hasAnnotation(XtendAnnotationTarget source, Class<?> class1) {
 		for (XAnnotation anno : source.getAnnotations()) {
 			if (anno != null && anno.getAnnotationType() != null && class1.getName().equals(anno.getAnnotationType().getIdentifier()))

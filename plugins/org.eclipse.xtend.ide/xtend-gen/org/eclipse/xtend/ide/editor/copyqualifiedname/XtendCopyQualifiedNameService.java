@@ -80,46 +80,46 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
     return _builder.toString();
   }
   
-  public String getQualifiedName(final EObject constructor, final EObject constructorCall) {
-    if (constructor instanceof JvmConstructor
-         && constructorCall instanceof XConstructorCall) {
-      return _getQualifiedName((JvmConstructor)constructor, (XConstructorCall)constructorCall);
-    } else if (constructor instanceof JvmExecutable
-         && constructorCall instanceof XAbstractFeatureCall) {
-      return _getQualifiedName((JvmExecutable)constructor, (XAbstractFeatureCall)constructorCall);
-    } else if (constructor instanceof JvmExecutable
-         && constructorCall != null) {
-      return _getQualifiedName((JvmExecutable)constructor, constructorCall);
-    } else if (constructor instanceof JvmExecutable
-         && constructorCall == null) {
-      return _getQualifiedName((JvmExecutable)constructor, (Void)null);
-    } else if (constructor instanceof XtendConstructor
-         && constructorCall != null) {
-      return _getQualifiedName((XtendConstructor)constructor, constructorCall);
-    } else if (constructor instanceof XtendFunction
-         && constructorCall != null) {
-      return _getQualifiedName((XtendFunction)constructor, constructorCall);
-    } else if (constructor instanceof XtendConstructor
-         && constructorCall == null) {
-      return _getQualifiedName((XtendConstructor)constructor, (Void)null);
-    } else if (constructor instanceof XtendFunction
-         && constructorCall == null) {
-      return _getQualifiedName((XtendFunction)constructor, (Void)null);
-    } else if (constructor != null
-         && constructorCall != null) {
-      return _getQualifiedName(constructor, constructorCall);
-    } else if (constructor != null
-         && constructorCall == null) {
-      return _getQualifiedName(constructor, (Void)null);
-    } else if (constructor == null
-         && constructorCall != null) {
-      return _getQualifiedName((Void)null, constructorCall);
-    } else if (constructor == null
-         && constructorCall == null) {
+  public String getQualifiedName(final EObject it, final EObject context) {
+    if (it instanceof JvmConstructor
+         && context instanceof XConstructorCall) {
+      return _getQualifiedName((JvmConstructor)it, (XConstructorCall)context);
+    } else if (it instanceof JvmExecutable
+         && context instanceof XAbstractFeatureCall) {
+      return _getQualifiedName((JvmExecutable)it, (XAbstractFeatureCall)context);
+    } else if (it instanceof JvmExecutable
+         && context != null) {
+      return _getQualifiedName((JvmExecutable)it, context);
+    } else if (it instanceof JvmExecutable
+         && context == null) {
+      return _getQualifiedName((JvmExecutable)it, (Void)null);
+    } else if (it instanceof XtendConstructor
+         && context != null) {
+      return _getQualifiedName((XtendConstructor)it, context);
+    } else if (it instanceof XtendFunction
+         && context != null) {
+      return _getQualifiedName((XtendFunction)it, context);
+    } else if (it instanceof XtendConstructor
+         && context == null) {
+      return _getQualifiedName((XtendConstructor)it, (Void)null);
+    } else if (it instanceof XtendFunction
+         && context == null) {
+      return _getQualifiedName((XtendFunction)it, (Void)null);
+    } else if (it != null
+         && context != null) {
+      return _getQualifiedName(it, context);
+    } else if (it != null
+         && context == null) {
+      return _getQualifiedName(it, (Void)null);
+    } else if (it == null
+         && context != null) {
+      return _getQualifiedName((Void)null, context);
+    } else if (it == null
+         && context == null) {
       return _getQualifiedName((Void)null, (Void)null);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(constructor, constructorCall).toString());
+        Arrays.<Object>asList(it, context).toString());
     }
   }
 }

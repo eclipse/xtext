@@ -172,6 +172,17 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 		dispatchMethod.child(1, "foo(String) : String");
 	}
 
+	@Test public void testNestedTypes() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { int foo static class Bar { def bar() {} interface Baz {} enum FooBar{ X } } }");
+		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2);
+		foo.child(1, "foo : int").numChildren(0);
+		AssertBuilder bar = foo.child(0, "Bar").numChildren(3);
+		bar.child(0, "Baz").numChildren(0);
+		bar.child(1, "FooBar").numChildren(1);
+		bar.child(2, "bar() : Object").numChildren(0);
+	}
+	
+
 	protected AssertBuilder newAssertBuilder(String model) throws Exception, CoreException {
 		XtendFile file = workbenchTestHelper.xtendFile("Foo", model);
 		XtextDocument document = documentProvider.get();

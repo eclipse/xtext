@@ -20,7 +20,7 @@ public class XtendAnnotationTypeImplCustom extends XtendAnnotationTypeImpl {
 
 	@Override
 	public boolean isStatic() {
-		return false;
+		return true;
 	}
 	
 }
