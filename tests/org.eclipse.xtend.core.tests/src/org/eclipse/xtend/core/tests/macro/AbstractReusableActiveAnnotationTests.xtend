@@ -934,6 +934,144 @@ abstract class AbstractReusableActiveAnnotationTests {
 		)
 	}
 	
+	@Test def void testChangeDispatchHierachy() {
+		assertGeneratedCode(
+			'myannotation/AddDispatchCaseAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				@Active(MyDeriveParticipant)
+				annotation MyDerive {}
+				class MyDeriveParticipant extends AbstractClassProcessor {
+					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+						annotatedClass.setExtendedClass(newTypeReference(Base))
+					}
+				}
+				class Base {
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				class Derived1 extends myannotation.Base {
+				}
+				@myannotation.MyDerive
+				class Derived2 {
+				}
+				@myannotation.MyDerive
+				class Derived3 {
+				}
+				class D1 {
+					def dispatch void m(myannotation.Base b) {
+					}
+				}
+				class D2 extends D1 {
+					def dispatch m(Derived1 d) {
+					}
+					def dispatch m(Derived2 d) {
+					}
+					def dispatch m(Derived3 d) {
+					}
+				}
+			''',
+			'''
+				package myusercode;
+				
+				import myannotation.Base;
+				
+				@SuppressWarnings("all")
+				public class Derived1 extends Base {
+				}
+			''',
+			'''
+				package myusercode;
+				
+				import myannotation.Base;
+				import myannotation.MyDerive;
+				
+				@MyDerive
+				@SuppressWarnings("all")
+				public class Derived2 extends Base {
+				}
+			''',
+			'''
+				package myusercode;
+				
+				import myannotation.Base;
+				import myannotation.MyDerive;
+				
+				@MyDerive
+				@SuppressWarnings("all")
+				public class Derived3 extends Base {
+				}
+			''',
+			'''
+				package myusercode;
+				
+				import myannotation.Base;
+				
+				@SuppressWarnings("all")
+				public class D1 {
+				  protected void _m(final Base b) {
+				  }
+				  
+				  public void m(final Base b) {
+				    {
+				      _m(b);
+				      return;
+				    }
+				  }
+				}
+			''',
+			'''
+				package myusercode;
+				
+				import java.util.Arrays;
+				import myannotation.Base;
+				import myusercode.D1;
+				import myusercode.Derived1;
+				import myusercode.Derived2;
+				import myusercode.Derived3;
+				
+				@SuppressWarnings("all")
+				public class D2 extends D1 {
+				  protected void _m(final Derived1 d) {
+				  }
+				  
+				  protected void _m(final Derived2 d) {
+				  }
+				  
+				  protected void _m(final Derived3 d) {
+				  }
+				  
+				  public void m(final Base d) {
+				    if (d instanceof Derived1) {
+				      _m((Derived1)d);
+				      return;
+				    } else if (d instanceof Derived2) {
+				      _m((Derived2)d);
+				      return;
+				    } else if (d instanceof Derived3) {
+				      _m((Derived3)d);
+				      return;
+				    } else if (d != null) {
+				      _m(d);
+				      return;
+				    } else {
+				      throw new IllegalArgumentException("Unhandled parameter types: " +
+				        Arrays.<Object>asList(d).toString());
+				    }
+				  }
+				}
+			'''
+		)
+	}
+	
 	@Test def void testAddConstructor() {
 		assertProcessing(
 			'myannotation/AddConstructorAnnotation.xtend' -> '''
