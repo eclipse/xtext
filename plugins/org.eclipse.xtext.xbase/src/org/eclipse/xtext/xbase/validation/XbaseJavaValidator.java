@@ -48,7 +48,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -167,9 +166,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private IBatchTypeResolver typeResolver;
-	
-	@Inject
-	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
 	
 	@Inject 
 	private IImportsConfiguration importsConfiguration;
