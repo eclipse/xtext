@@ -65,15 +65,14 @@ public class TaskMarkerContributor implements IMarkerContributor {
   
   protected void createTaskMarkers(final IFile file, final List<Task> tasks, final IProgressMonitor monitor) throws CoreException {
     for (final Task task : tasks) {
-      String _markerType = this.typeProvider.getMarkerType();
+      String _markerType = this.typeProvider.getMarkerType(task);
       this.markerCreator.createMarker(task, file, _markerType);
     }
   }
   
   public void deleteMarkers(final IFile file, final IProgressMonitor monitor) {
     try {
-      String _markerType = this.typeProvider.getMarkerType();
-      file.deleteMarkers(_markerType, true, IResource.DEPTH_ZERO);
+      file.deleteMarkers(TaskMarkerTypeProvider.XTEXT_TASK_TYPE, true, IResource.DEPTH_ZERO);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
