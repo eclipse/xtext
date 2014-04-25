@@ -1095,18 +1095,18 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 										commonStatic = null;
 									}
 								}
-							}
-							// TODO move validation to type computation
-							if (dispatchMethodReturnType != null) {
-								XtendFunction function = associations.getXtendFunction(jvmOperation);
-								if (function != null) {
-									LightweightTypeReference operationType = getActualType(function.getExpression(), jvmOperation);
-									if (!dispatchMethodReturnType.isAssignableFrom(operationType)) {
-										error("Incompatible return type of dispatch method. Expected "
-												+ syntheticDispatchMethod.getSimpleName() + " but was "
-												+ operationType.getSimpleName(), function,
-												XtendPackage.Literals.XTEND_FUNCTION__RETURN_TYPE,
-												ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_RETURN_TYPE);
+								// TODO move validation to type computation
+								if (dispatchMethodReturnType != null) {
+									XtendFunction function = associations.getXtendFunction(jvmOperation);
+									if (function != null) {
+										LightweightTypeReference operationType = getActualType(function.getExpression(), jvmOperation);
+										if (!dispatchMethodReturnType.isAssignableFrom(operationType)) {
+											error("Incompatible return type of dispatch method. Expected "
+													+ dispatchMethodReturnType.getSimpleName() + " but was "
+													+ operationType.getSimpleName(), function,
+													XtendPackage.Literals.XTEND_FUNCTION__RETURN_TYPE,
+													ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_RETURN_TYPE);
+										}
 									}
 								}
 							}
