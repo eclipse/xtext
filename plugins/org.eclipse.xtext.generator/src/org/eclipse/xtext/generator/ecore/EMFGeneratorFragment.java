@@ -250,7 +250,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	}
 
 	void updateBuildProperties(XpandExecutionContext ctx) throws Exception {
-		if (!updateBuildProperties)
+		if (!updateBuildProperties || modelPluginID != null)
 			return;
 		Outlet rootOutlet = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.PLUGIN_RT);
 		Outlet modelOutlet = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.MODEL);
@@ -569,12 +569,14 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 		List<GeneratedMetamodel> typeSelect = org.eclipse.xtext.EcoreUtil2.typeSelect(
 				grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
 		Set<String> exportedPackages = new LinkedHashSet<String>();
-		for (GeneratedMetamodel generatedMetamodel : typeSelect) {
-			final String modelPackage = Strings.skipLastToken(
-					getGeneratedEPackageName(grammar, generatedMetamodel.getEPackage()), ".");
-			exportedPackages.add(modelPackage);
-			exportedPackages.add(modelPackage + ".impl");
-			exportedPackages.add(modelPackage + ".util");
+		if (modelPluginID == null) {
+			for (GeneratedMetamodel generatedMetamodel : typeSelect) {
+				final String modelPackage = Strings.skipLastToken(
+						getGeneratedEPackageName(grammar, generatedMetamodel.getEPackage()), ".");
+				exportedPackages.add(modelPackage);
+				exportedPackages.add(modelPackage + ".impl");
+				exportedPackages.add(modelPackage + ".util");
+			}
 		}
 		return exportedPackages.toArray(new String[exportedPackages.size()]);
 	}
