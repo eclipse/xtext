@@ -36,14 +36,18 @@ public class XtendQualifiedNameProvider extends XbaseQualifiedNameProvider {
 		if (obj instanceof XtendTypeDeclaration) {
 			XtendTypeDeclaration typeDecl = (XtendTypeDeclaration) obj;
 			String typeName = typeDecl.getName();
-			if (typeName == null)
-				return null;
-			XtendFile file = (XtendFile) typeDecl.eContainer();
-			String packageName = file.getPackage();
-			if (packageName != null) {
-				return qualifiedNameConverter.toQualifiedName(packageName).append(typeName);
+			if(typeDecl.eContainer() instanceof XtendFile) {
+				if (typeName == null)
+					return null;
+				XtendFile file = (XtendFile) typeDecl.eContainer();
+				String packageName = file.getPackage();
+				if (packageName != null) {
+					return qualifiedNameConverter.toQualifiedName(packageName).append(typeName);
+				}
+				return QualifiedName.create(typeName);
+			} else {
+				return concatNames(obj, typeName);
 			}
-			return QualifiedName.create(typeName);
 		}
 		if (obj instanceof XtendConstructor) {
 			return getFullyQualifiedName(obj.eContainer());

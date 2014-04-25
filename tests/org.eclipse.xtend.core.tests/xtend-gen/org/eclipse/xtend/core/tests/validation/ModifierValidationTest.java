@@ -703,6 +703,22 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     }
   }
   
+  @Test
+  public void testNestedClass() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo { class Bar {} }");
+      XtendClass _clazz = this.clazz(_builder.toString());
+      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CLASS, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("class Foo { static class Bar {} }");
+      XtendClass _clazz_1 = this.clazz(_builder_1.toString());
+      this._validationTestHelper.assertNoErrors(_clazz_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   protected XtendMember memberInInterface(final String model) {
     try {
       StringConcatenation _builder = new StringConcatenation();

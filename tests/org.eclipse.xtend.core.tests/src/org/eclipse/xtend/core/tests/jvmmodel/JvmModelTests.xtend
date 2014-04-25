@@ -3,15 +3,18 @@ package org.eclipse.xtend.core.tests.jvmmodel
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
+import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.XListLiteral
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
+import org.eclipse.xtext.common.types.JvmGenericType
 
 class JvmModelTests extends AbstractXtendTestCase {
 	
@@ -182,6 +185,47 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertEquals(0, (constructor as JvmConstructor).typeParameters.size)
 		val overriding = anonymous.members.last
 		assertTrue(overriding instanceof JvmOperation)
+	}
+	
+	@Test
+	def testNestedClass_0() {
+		val clazz = '''
+			class Foo { 
+				static class Nested0 {
+					interface Nested1 {
+						annotation Nested2 {
+						}
+						enum Nested3 {
+							X
+						}
+					}
+				}
+			}
+		'''.toString.clazz.inferredType
+		
+		assertEquals(2, clazz.members.size)
+		assertTrue(clazz.members.head instanceof JvmGenericType)
+		val nested0 = clazz.members.head as JvmGenericType
+		assertEquals('Nested0', nested0.simpleName)
+		assertTrue(nested0.static)
+		
+		assertEquals(2, nested0.members.size)
+		assertTrue(nested0.members.head instanceof JvmGenericType)
+		val nested1 = nested0.members.head as JvmGenericType
+		assertEquals('Nested1', nested1.simpleName)
+		assertTrue(nested1.static)
+
+		assertEquals(2, nested1.members.size)
+		assertTrue(nested1.members.head instanceof JvmAnnotationType)
+		val nested2 = nested1.members.head as JvmAnnotationType
+		assertEquals('Nested2', nested2.simpleName)
+		assertTrue(nested2.static)
+
+		assertEquals(2, nested1.members.size)
+		assertTrue(nested1.members.last instanceof JvmEnumerationType)
+		val nested3 = nested1.members.last as JvmEnumerationType
+		assertEquals('Nested3', nested3.simpleName)
+		assertTrue(nested3.static)
 	}
 	
 }

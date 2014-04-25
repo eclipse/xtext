@@ -121,7 +121,33 @@ ruleMember :
 			'throws' ruleJvmTypeReference (
 				',' ruleJvmTypeReference
 			)*
-		)? ruleXBlockExpression
+		)? ruleXBlockExpression |
+		ruleCommonModifier* 'class' ruleValidID (
+			'<' ruleJvmTypeParameter (
+				',' ruleJvmTypeParameter
+			)* '>'
+		)? (
+			'extends' ruleJvmParameterizedTypeReference
+		)? (
+			'implements' ruleJvmParameterizedTypeReference (
+				',' ruleJvmParameterizedTypeReference
+			)*
+		)? '{' ruleMember* '}' |
+		ruleCommonModifier* 'interface' ruleValidID (
+			'<' ruleJvmTypeParameter (
+				',' ruleJvmTypeParameter
+			)* '>'
+		)? (
+			'extends' ruleJvmParameterizedTypeReference (
+				',' ruleJvmParameterizedTypeReference
+			)*
+		)? '{' ruleMember* '}' |
+		ruleCommonModifier* 'enum' ruleValidID '{' (
+			ruleXtendEnumLiteral (
+				',' ruleXtendEnumLiteral
+			)*
+		)? ';'? '}' |
+		ruleCommonModifier* 'annotation' ruleValidID '{' ruleAnnotationField* '}'
 	)
 ;
 
@@ -1250,11 +1276,11 @@ RULE_RICH_TEXT :
 RULE_RICH_TEXT_START :
 	'\'\'\'' RULE_IN_RICH_STRING* (
 		'\'' '\''?
-	)? '\u00AB'
+	)? '\uFFFD'
 ;
 
 RULE_RICH_TEXT_END :
-	'\u00BB' RULE_IN_RICH_STRING* (
+	'\uFFFD' RULE_IN_RICH_STRING* (
 		'\'\'\'' |
 		(
 			'\'' '\''?
@@ -1263,24 +1289,24 @@ RULE_RICH_TEXT_END :
 ;
 
 RULE_RICH_TEXT_INBETWEEN :
-	'\u00BB' RULE_IN_RICH_STRING* (
+	'\uFFFD' RULE_IN_RICH_STRING* (
 		'\'' '\''?
-	)? '\u00AB'
+	)? '\uFFFD'
 ;
 
 RULE_COMMENT_RICH_TEXT_INBETWEEN :
-	'\u00AB\u00AB' ~ (
+	'\uFFFD\uFFFD' ~ (
 		'\n' |
 		'\r'
 	)* (
 		'\r'? '\n' RULE_IN_RICH_STRING* (
 			'\'' '\''?
-		)? '\u00AB'
+		)? '\uFFFD'
 	)?
 ;
 
 RULE_COMMENT_RICH_TEXT_END :
-	'\u00AB\u00AB' ~ (
+	'\uFFFD\uFFFD' ~ (
 		'\n' |
 		'\r'
 	)* (
@@ -1296,15 +1322,15 @@ RULE_COMMENT_RICH_TEXT_END :
 
 fragment RULE_IN_RICH_STRING :
 	'\'\'' ~ (
-		'\u00AB' |
+		'\uFFFD' |
 		'\''
 	) |
 	'\'' ~ (
-		'\u00AB' |
+		'\uFFFD' |
 		'\''
 	) |
 	~ (
-		'\u00AB' |
+		'\uFFFD' |
 		'\''
 	)
 ;

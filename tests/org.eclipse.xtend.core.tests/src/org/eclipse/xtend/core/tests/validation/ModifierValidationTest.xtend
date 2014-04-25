@@ -213,6 +213,11 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		field('''val final int i=42''').assertNoErrors
 	}
 	
+	@Test def void testNestedClass() {
+		clazz('''class Foo { class Bar {} }''').assertError(XTEND_CLASS, INVALID_MODIFIER)
+		clazz('''class Foo { static class Bar {} }''').assertNoErrors
+	}
+	
 	def protected memberInInterface(String model) {
 		interfaze('''interface Foo { «model» }''').members.get(0)
 	}
