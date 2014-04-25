@@ -1556,6 +1556,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	protected void checkModifiers(XtendClass xtendClass) {
 		classModifierValidator.checkModifiers(xtendClass, "class " + xtendClass.getName());
+		EObject eContainer = xtendClass.eContainer();
+		if(!(eContainer instanceof XtendFile) && !(eContainer instanceof AnonymousClassConstructorCall) && !xtendClass.isStatic()) 
+			error("Nested classes must be static", XTEND_TYPE_DECLARATION__NAME, -1, INVALID_MODIFIER);
 	}
 	
 	@Check

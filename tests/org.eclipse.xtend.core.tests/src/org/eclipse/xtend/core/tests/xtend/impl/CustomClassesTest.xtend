@@ -45,11 +45,11 @@ class CustomClassesTest extends AbstractXtendTestCase {
 	
 	@Test def void testInterfaceFinalAndStatic() {
 		assertFalse(interfaze('''interface Foo {}''').final)
-		assertFalse(interfaze('''interface Foo {}''').^static)
+		assertTrue(interfaze('''interface Foo {}''').^static)
 	}
 	
 	@Test def void testEnumFinalAndStatic() {
-		assertFalse(enumeration('''enum Foo {}''').^static)
+		assertTrue(enumeration('''enum Foo {}''').^static)
 	}
 	
 	@Test def void testEnumLiteralDefaults() {
@@ -75,7 +75,7 @@ class CustomClassesTest extends AbstractXtendTestCase {
 	}
 	
 	@Test def void testAnnotationTypeStaticAndFinal() {
-		assertFalse(annotationType('''static annotation Foo {}''').^static)
+		assertTrue(annotationType('''static annotation Foo {}''').^static)
 		assertFalse(annotationType('''final annotation Foo {}''').final)
 	}
 	

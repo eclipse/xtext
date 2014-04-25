@@ -12,6 +12,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
@@ -62,6 +63,18 @@ public class NamingTest extends AbstractXtendTestCase {
 	@Test public void testBug364508_toString() throws Exception {
 		String model = "foo.create";
 		assertEquals(model, converter.toString(model));
+	}
+	
+	@Test public void testNestedTypes() throws Exception {
+		XtendFile file = file("class Foo { static class Bar { interface Baz {} annotation FooBar {} } }");
+		XtendTypeDeclaration foo = file.getXtendTypes().get(0);
+		assertEquals(QualifiedName.create("Foo"), nameProvider.getFullyQualifiedName(foo));
+		XtendTypeDeclaration bar = (XtendTypeDeclaration) foo.getMembers().get(0);
+		assertEquals(QualifiedName.create("Foo", "Bar"), nameProvider.getFullyQualifiedName(bar));
+		XtendTypeDeclaration baz = (XtendTypeDeclaration) bar.getMembers().get(0);
+		assertEquals(QualifiedName.create("Foo", "Bar", "Baz"), nameProvider.getFullyQualifiedName(baz));
+		XtendTypeDeclaration fooBar = (XtendTypeDeclaration) bar.getMembers().get(1);
+		assertEquals(QualifiedName.create("Foo", "Bar", "FooBar"), nameProvider.getFullyQualifiedName(fooBar));
 	}
 
 }

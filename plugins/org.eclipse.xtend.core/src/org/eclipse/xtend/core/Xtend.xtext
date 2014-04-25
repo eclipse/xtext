@@ -102,7 +102,34 @@ Member returns XtendMember:
 			'(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')'
 			('throws' exceptions+=JvmTypeReference (',' exceptions+=JvmTypeReference)*)?
 			expression=XBlockExpression
-		)
+		) | (
+			{XtendClass.annotationInfo = current}
+			modifiers+=CommonModifier*
+	  		'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
+	   		("extends" extends=JvmParameterizedTypeReference)? 
+		   	('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
+			   (members+=Member)*
+	   		'}'
+	 	) | (
+			{XtendInterface.annotationInfo = current}
+			modifiers+=CommonModifier*
+		  	'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
+		   	('extends' extends+=JvmParameterizedTypeReference (',' extends+=JvmParameterizedTypeReference)*)?'{'
+			   (members+=Member)*
+		   	'}'
+	 	) | (
+			{XtendEnum.annotationInfo = current}
+			modifiers+=CommonModifier*
+		  	'enum' name=ValidID '{'   
+			   (members+=XtendEnumLiteral (',' members+=XtendEnumLiteral)*)? ';'?
+		   	'}'
+	 	) | (
+		 	{XtendAnnotationType.annotationInfo = current}
+		 	modifiers+=CommonModifier*
+			'annotation' name=ValidID '{'
+			   (members+=AnnotationField)*
+		   	'}'
+	   	)
 	)
 ;
 
