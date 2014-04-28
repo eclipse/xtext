@@ -60,6 +60,17 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertTrue(inferred.defaultValue instanceof JvmCustomAnnotationValue)
 		assertTrue((inferred.defaultValue as JvmCustomAnnotationValue).values.head instanceof XListLiteral)
 	}
+	
+	@Test
+	def testAnnotationDefaultAssociatedWithJvmOperation() {
+		val inferred = '''
+			annotation Foo {
+				val bar = ''
+			}
+		'''.toString.annotationType.inferredAnnotationType.members.head as JvmOperation
+		val defaultValue = inferred.defaultValue
+		assertSame(inferred, defaultValue.operation)
+	}
 
 	@Test
 	def testEnumImplicitSuperType() {
