@@ -21,6 +21,7 @@
 		<module>../org.eclipse.xtext</module>
 		<module>../org.eclipse.xtext.common.types</module>
 		<module>../org.eclipse.xtext.xbase</module>
+		<module>../org.eclipse.xtext.xbase.lib.slim</module>
 		<module>../org.eclipse.xtend.core</module>
 		<module>../org.eclipse.xtext.xtext</module>
 
