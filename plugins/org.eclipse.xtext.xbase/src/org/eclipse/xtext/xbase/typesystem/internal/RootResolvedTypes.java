@@ -7,13 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -29,9 +27,6 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
-import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -40,7 +35,6 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ExtendedEarlyExitComputer;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
@@ -57,7 +51,7 @@ import com.google.common.collect.Sets;
 @NonNullByDefault
 public class RootResolvedTypes extends ResolvedTypes {
 
-	private final EnumMap<IExpressionScope.Anchor, Map<EObject, ExpressionScope>> featureScopeSessions;
+	private final IFeatureScopeTracker featureScopeTracker;
 	
 	private Set<XExpression> toBeInferredRootExpressions;
 	
@@ -66,10 +60,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 	protected RootResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		super(resolver);
 		this.issueSeverities = resolver.getIssueSeverities();
-		this.featureScopeSessions = Maps.newEnumMap(IExpressionScope.Anchor.class);
-		for(IExpressionScope.Anchor anchor: IExpressionScope.Anchor.values()) {
-			featureScopeSessions.put(anchor, Maps.<EObject, ExpressionScope>newHashMapWithExpectedSize(256));
-		}
+		this.featureScopeTracker = resolver.createFeatureScopeTracker(); 
 	}
 
 	public void resolveUnboundTypeParameters() {
@@ -246,45 +237,9 @@ public class RootResolvedTypes extends ResolvedTypes {
 		return issueSeverities;
 	}
 	
-	public IExpressionScope getExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
-		Map<EObject, ExpressionScope> map = featureScopeSessions.get(anchor);
-		ExpressionScope scope = map.get(context);
-		if (scope == null) {
-			if (anchor == IExpressionScope.Anchor.RECEIVER) {
-				map = featureScopeSessions.get(IExpressionScope.Anchor.AFTER);
-				scope = map.get(context);
-			}
-			if (scope == null) {
-				return IExpressionScope.NULL;
-			}
-		}
-		return scope.withAnchor(anchor);
-	}
-	
-	public boolean hasExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
-		Map<EObject, ExpressionScope> map = featureScopeSessions.get(anchor);
-		return map.containsKey(context);
-	}
-	
 	@Override
-	protected void addExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor, IResolvedTypes resolvedTypes) {
-		Map<EObject, ExpressionScope> map = featureScopeSessions.get(anchor);
-		ExpressionScope scope = map.get(context);
-		if (scope == null) {
-			scope = new ExpressionScope(getResolver().getFeatureScopes(), context, anchor, getReferenceOwner());
-			map.put(context, scope);
-		}
-		scope.addData(session, resolvedTypes);
+	protected IFeatureScopeTracker getFeatureScopeTracker() {
+		return featureScopeTracker;
 	}
 	
-	@Override
-	protected void replacePreviousExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor) {
-		Map<EObject, ExpressionScope> map = featureScopeSessions.get(anchor);
-		ExpressionScope scope = map.get(context);
-		if (scope == null) {
-			throw new IllegalStateException("Cannot replace scope that was never recorded");
-		}
-		scope.replacePreviousData(session);
-	}
-
 }

@@ -64,6 +64,9 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	@Inject
 	private FeatureScopes featureScopes;
 	
+	@Inject
+	private IFeatureScopeTracker.Provider featureScopeTrackerProvider;
+	
 	private EObject root;
 	
 	private boolean resolving = false;
@@ -135,6 +138,10 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	protected RootResolvedTypes createResolvedTypes() {
 		return new RootResolvedTypes(this);
 	}
+	
+	protected IFeatureScopeTracker createFeatureScopeTracker() {
+		return featureScopeTrackerProvider.track(root);
+	}
 
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 		computeTypes(resolvedTypes, session, root);
@@ -204,4 +211,5 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	protected FeatureScopes getFeatureScopes() {
 		return featureScopes;
 	}
+
 }
