@@ -336,7 +336,66 @@ class PerformanceTest extends AbstractXtendTestCase {
 	Task 'ResourceValidatorImpl.validation' took 3289ms (171 measurements).
 	Task 'DefaultReentrantTypeResolver.resolve' took 2341ms (342 measurements).
 	-------------------------------------------------------------------------------------------------------------------------
-	 
+	v2.5.2
+	Test 'doCompileThreeTimes(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+	-------------------------------------------------------------------------------------------------------------------------
+	Task 'PerformanceTest.doCompile' took 4752ms (3 measurements).
+	Task 'AbstractParser.parse' took 465ms (171 measurements).
+	Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 214ms (171 measurements).
+	Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 575ms (339 measurements).
+	Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 236ms (339 measurements).
+	Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 1ms (339 measurements).
+	Task 'ResourceValidatorImpl.validation' took 3608ms (171 measurements).
+	Task 'DefaultReentrantTypeResolver.resolve' took 2579ms (342 measurements).
+	-------------------------------------------------------------------------------------------------------------------------
+	v2.5.3
+	Test 'doCompileThreeTimes(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+	-------------------------------------------------------------------------------------------------------------------------
+	Task 'PerformanceTest.doCompile' took 4410ms (3 measurements).
+	Task 'AbstractParser.parse' took 446ms (171 measurements).
+	Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 203ms (171 measurements).
+	Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 541ms (339 measurements).
+	Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 225ms (339 measurements).
+	Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 1ms (339 measurements).
+	Task 'ResourceValidatorImpl.validation' took 3329ms (171 measurements).
+	Task 'DefaultReentrantTypeResolver.resolve' took 2370ms (342 measurements).
+	-------------------------------------------------------------------------------------------------------------------------
+	v2.5.4
+	Test 'doCompileThreeTimes(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+	-------------------------------------------------------------------------------------------------------------------------
+	Task 'PerformanceTest.doCompile' took 4583ms (3 measurements).
+	Task 'AbstractParser.parse' took 431ms (171 measurements).
+	Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 212ms (171 measurements).
+	Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 582ms (339 measurements).
+	Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 256ms (339 measurements).
+	Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (339 measurements).
+	Task 'ResourceValidatorImpl.validation' took 3462ms (171 measurements).
+	Task 'DefaultReentrantTypeResolver.resolve' took 2451ms (342 measurements).
+	-------------------------------------------------------------------------------------------------------------------------
+	Before extraction of IFeatureScopeTracker
+	Test 'doCompileThreeTimes(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+	-------------------------------------------------------------------------------------------------------------------------
+	Task 'PerformanceTest.doCompile' took 5489ms (3 measurements).
+	Task 'AbstractParser.parse' took 519ms (171 measurements).
+	Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 222ms (171 measurements).
+	Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 540ms (339 measurements).
+	Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 224ms (339 measurements).
+	Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (339 measurements).
+	Task 'ResourceValidatorImpl.validation' took 4303ms (171 measurements).
+	Task 'DefaultReentrantTypeResolver.resolve' took 3128ms (342 measurements).
+	-------------------------------------------------------------------------------------------------------------------------
+	After extraction of IFeatureScopeTracker
+	Test 'doCompileThreeTimes(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+	-------------------------------------------------------------------------------------------------------------------------
+	Task 'PerformanceTest.doCompile' took 4617ms (3 measurements).
+	Task 'AbstractParser.parse' took 456ms (171 measurements).
+	Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 207ms (171 measurements).
+	Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 541ms (339 measurements).
+	Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 218ms (339 measurements).
+	Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (339 measurements).
+	Task 'ResourceValidatorImpl.validation' took 3495ms (171 measurements).
+	Task 'DefaultReentrantTypeResolver.resolve' took 2413ms (342 measurements).
+	------------------------------------------------------------------------------------------------------------------------- 
 	 */
 	@Test def void doCompile() {
 		val num = 50;
