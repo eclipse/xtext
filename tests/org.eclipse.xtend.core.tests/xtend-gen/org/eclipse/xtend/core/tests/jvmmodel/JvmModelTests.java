@@ -144,6 +144,31 @@ public class JvmModelTests extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testAnnotationDefaultAssociatedWithJvmOperation() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("annotation Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val bar = \'\'");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendAnnotationType _annotationType = this.annotationType(_string);
+      JvmAnnotationType _inferredAnnotationType = this._iXtendJvmAssociations.getInferredAnnotationType(_annotationType);
+      EList<JvmMember> _members = _inferredAnnotationType.getMembers();
+      JvmMember _head = IterableExtensions.<JvmMember>head(_members);
+      final JvmOperation inferred = ((JvmOperation) _head);
+      final JvmAnnotationValue defaultValue = inferred.getDefaultValue();
+      JvmOperation _operation = defaultValue.getOperation();
+      Assert.assertSame(inferred, _operation);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testEnumImplicitSuperType() {
     try {
       StringConcatenation _builder = new StringConcatenation();
