@@ -150,6 +150,8 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	protected abstract IssueSeverities getSeverities();
 	
+	protected abstract IFeatureScopeTracker getFeatureScopeTracker();
+	
 	protected OwnedConverter getConverter() {
 		return converter;
 	}
@@ -1140,11 +1142,23 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	protected abstract void markToBeInferred(XExpression expression);
 	
-	protected final void addExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor) {
-		addExpressionScope(context, session, anchor, withFlattenedReassignedTypes());
+	protected void addExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor) {
+		getFeatureScopeTracker().addExpressionScope(this, context, session, anchor);
 	}
 	
-	private IResolvedTypes withFlattenedReassignedTypes() {
+	protected void replacePreviousExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor) {
+		getFeatureScopeTracker().replacePreviousExpressionScope(context, session, anchor);
+	}
+	
+	public IExpressionScope getExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
+		return getFeatureScopeTracker().getExpressionScope(context, anchor);
+	}
+	
+	public boolean hasExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
+		return getFeatureScopeTracker().hasExpressionScope(context, anchor);
+	}
+	
+	protected IResolvedTypes withFlattenedReassignedTypes() {
 		final Map<JvmIdentifiableElement, LightweightTypeReference> flattened = getFlattenedReassignedTypes();
 		if (flattened != null)
 			return new ForwardingResolvedTypes() {
@@ -1168,9 +1182,5 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	protected Map<JvmIdentifiableElement, LightweightTypeReference> getFlattenedReassignedTypes() {
 		return reassignedTypes == null ? null : Maps.newHashMap(reassignedTypes);
 	}
-
-	protected abstract void addExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor, IResolvedTypes resolvedTypes);
-
-	protected abstract void replacePreviousExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor);
 	
 }

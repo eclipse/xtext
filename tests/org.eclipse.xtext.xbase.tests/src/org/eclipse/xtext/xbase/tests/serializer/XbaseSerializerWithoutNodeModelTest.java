@@ -47,12 +47,16 @@ public class XbaseSerializerWithoutNodeModelTest extends AbstractXbaseEvaluation
 	}
 	
 	@Override
-	@Test @Ignore public void testClosure_32() throws Exception {
+	@Test 
+	@Ignore
+	public void testClosure_32() throws Exception {
 		super.testClosure_32();
 	}
 	
 	@Override
-	@Test @Ignore public void testClosure_31() throws Exception {
+	@Test 
+	@Ignore
+	public void testClosure_31() throws Exception {
 		super.testClosure_31();
 	}
 
