@@ -233,7 +233,6 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 		''')
 	}
 	
-	@Ignore('see https://bugs.eclipse.org/bugs/show_bug.cgi?id=402728')
 	@Test def testIrregularIndentation() {
 		assertFormattedRichStringExpression('''
 			val x = ```
@@ -244,4 +243,38 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
+	
+	@Test def testIrregularIndentation2() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				aaaaaaaaaaaaaa: <<bar>>
+				        aaaaaa: <<bar>>
+				          aaaa: <<bar>>
+				 aaaaaaaaaaaaa: <<bar>>
+				        aaaaaa: <<bar>>
+				           aaa: <<bar>>
+				       aaaaaaa: <<bar>>
+				 aaaaaaaaaaaaa: <<bar>>
+			```
+		''')
+	}
+	@Test def smokeTest() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				<html>
+					<body>
+						<<FOR p : paragraphs BEFORE '<div>' SEPARATOR '</div><div>' AFTER '</div>'>>
+							<<IF p.headLine != null>>
+								<h1><<p.headline>></h1>
+							<<ENDIF>>
+							<p>
+								<<p.text>>
+							</p>
+						<<ENDFOR>>
+					</body>
+				</html>
+			```
+		''')
+	}
 }
+	 
