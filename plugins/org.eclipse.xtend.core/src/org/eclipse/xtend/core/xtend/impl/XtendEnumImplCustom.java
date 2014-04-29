@@ -19,6 +19,6 @@ public class XtendEnumImplCustom extends XtendEnumImpl {
 
 	@Override
 	public boolean isStatic() {
-		return false;
+		return true;
 	}
 }

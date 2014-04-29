@@ -32,7 +32,7 @@ public class XtendOutlineNodeComparator extends SortOutlineContribution.DefaultC
 		boolean isStatic = node instanceof XtendFeatureNode && ((XtendFeatureNode) node).isStatic();
 		if (node instanceof EObjectNode) {
 			EClass eClass = ((EObjectNode) node).getEClass();
-			if (eClass == XtendPackage.Literals.XTEND_CLASS)
+			if (XtendPackage.Literals.XTEND_TYPE_DECLARATION.isSuperTypeOf(eClass))
 				return 20;
 			if (eClass == XtendPackage.Literals.XTEND_FIELD || eClass == TypesPackage.Literals.JVM_FIELD) 
 				return isStatic ? 30 : 50;
@@ -47,5 +47,4 @@ public class XtendOutlineNodeComparator extends SortOutlineContribution.DefaultC
 		}
 		return Integer.MAX_VALUE;
 	}
-
 }
