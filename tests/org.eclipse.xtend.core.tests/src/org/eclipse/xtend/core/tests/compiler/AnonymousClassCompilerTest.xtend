@@ -66,6 +66,58 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testLocalVarInArray_01() {'''
+			class Foo {
+				def foo() {
+					val Object[] bar = #[ 
+						new Runnable() {
+							override run() {}
+						}
+					]
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo() {
+			    final Object[] bar = new Object[] { new Runnable() {
+			      public void run() {
+			      }
+			    } };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testLocalVarInArray_02() {'''
+			class Foo {
+				def foo() {
+					val bar = #[ 
+						new Runnable() {
+							override run() {}
+						}
+					]
+				}
+			}
+		'''.assertCompilesTo('''
+			import com.google.common.collect.Lists;
+			import java.util.Collections;
+			import java.util.List;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo() {
+			    final List<Runnable> bar = Collections.<Runnable>unmodifiableList(Lists.<Runnable>newArrayList(new Runnable() {
+			      public void run() {
+			      }
+			    }));
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testField() {'''
 			class Foo {
 				val bar = new Runnable() {
@@ -250,6 +302,32 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			        return null;
 			      }
 			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testGeneric5() {'''
+			class C {
+				def m() {
+					new Object {
+						def <T> T m2() {}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public Object m() {
+			    @SuppressWarnings("all")
+			    final class __C_0 {
+			      public <T extends Object> T m2() {
+			        return null;
+			      }
+			    }
+			    
+			    return new __C_0();
 			  }
 			}
 		''')

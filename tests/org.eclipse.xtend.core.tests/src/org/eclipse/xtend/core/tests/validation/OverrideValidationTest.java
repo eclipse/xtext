@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.validation;
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -896,7 +897,7 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 
 	@Test public void testAnonymousClassMustBeAbstract() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { val foo = new Runnable() {} }");
-		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT);
+		helper.assertError(xtendClass, ANONYMOUS_CLASS, CLASS_MUST_BE_ABSTRACT, "The anonymous subclass of Runnable must be defined abstract");
 	}
 
 	@Test public void testAnonymousClassIncompatibleSignature_0() throws Exception {
@@ -921,12 +922,12 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testAnonymousClassIncompatibleTypeArg() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { val foo = new Bar<String>() { } } interface Bar<T extends Number> {}");
-		helper.assertError(xtendClass, ANONYMOUS_CLASS_CONSTRUCTOR_CALL, TYPE_BOUNDS_MISMATCH);
+		helper.assertError(xtendClass, XCONSTRUCTOR_CALL, TYPE_BOUNDS_MISMATCH);
 	}
 	
 	@Test public void testAnonymousClassIncompatibleConstructorArg_0() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { val foo = new Bar() { } } class Bar { new(String x) {} }");
-		helper.assertError(xtendClass, ANONYMOUS_CLASS_CONSTRUCTOR_CALL, INVALID_NUMBER_OF_ARGUMENTS);
+		helper.assertError(xtendClass, XCONSTRUCTOR_CALL, INVALID_NUMBER_OF_ARGUMENTS);
 	}
 	
 	@Test public void testAnonymousClassIncompatibleConstructorArg_1() throws Exception {
@@ -936,6 +937,6 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 
 	@Test public void testAnonymousClassConstructorVisibility() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { val foo = new Bar() { } } class Bar { private new() {} }");
-		helper.assertError(xtendClass, ANONYMOUS_CLASS_CONSTRUCTOR_CALL, FEATURE_NOT_VISIBLE);
+		helper.assertError(xtendClass, XCONSTRUCTOR_CALL, FEATURE_NOT_VISIBLE);
 	}
 }

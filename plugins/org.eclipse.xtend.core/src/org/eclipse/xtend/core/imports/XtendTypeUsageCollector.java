@@ -9,10 +9,11 @@ package org.eclipse.xtend.core.imports;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.imports.TypeUsageCollector;
 
 /**
@@ -23,7 +24,7 @@ public class XtendTypeUsageCollector extends TypeUsageCollector {
 	@Override
 	protected JvmIdentifiableElement getReferencedElement(EObject owner, EReference reference) {
 		JvmIdentifiableElement referencedThing = super.getReferencedElement(owner, reference);
-		if(owner instanceof AnonymousClassConstructorCall && referencedThing instanceof JvmConstructor && 
+		if(owner instanceof XConstructorCall && owner.eContainer() instanceof AnonymousClass && referencedThing instanceof JvmConstructor && 
 				((JvmConstructor) referencedThing).getDeclaringType() instanceof JvmGenericType) {
 			JvmGenericType referencedType = (JvmGenericType) ((JvmConstructor) referencedThing).getDeclaringType();
 			if(referencedType.getSuperTypes().size() == 1) 

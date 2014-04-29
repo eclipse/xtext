@@ -8,7 +8,7 @@
 package org.eclipse.xtend.core.jvmmodel;
 
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -16,14 +16,15 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class AnonymousClassUtil {
 
 	@Nullable
-	public JvmGenericType getSuperType(AnonymousClassConstructorCall constructorCall) {
-		JvmConstructor constructor = constructorCall.getConstructor();
+	public JvmGenericType getSuperType(AnonymousClass anonymousClass) {
+		JvmConstructor constructor = anonymousClass.getConstructorCall().getConstructor();
 		if(constructor != null && ! constructor.eIsProxy()) {
 			JvmDeclaredType declaringType = constructor.getDeclaringType();
 			if(!declaringType.getSuperTypes().isEmpty()) {
@@ -35,10 +36,10 @@ public class AnonymousClassUtil {
 		return null;
 	}
 	
-	public JvmConstructor getSuperTypeConstructor(AnonymousClassConstructorCall constructorCall) {
-		JvmGenericType superType = getSuperType(constructorCall);
+	public JvmConstructor getSuperTypeConstructor(AnonymousClass anonymousClass) {
+		JvmGenericType superType = getSuperType(anonymousClass);
 		if(superType != null) {
-			JvmConstructor constructor = constructorCall.getConstructor();
+			JvmConstructor constructor = anonymousClass.getConstructorCall().getConstructor();
 			for(JvmMember superMember: superType.getMembers()) {
 				if(superMember instanceof JvmConstructor && isSameSignature(constructor, (JvmConstructor) superMember)) 
 					return (JvmConstructor) superMember;
@@ -53,7 +54,7 @@ public class AnonymousClassUtil {
 		for(int i=0; i<constructor.getParameters().size(); ++i) {
 			JvmTypeReference paramType = constructor.getParameters().get(i).getParameterType();
 			JvmTypeReference superParamType = superConstructor.getParameters().get(i).getParameterType();
-			if(!paramType.getQualifiedName().equals(superParamType.getQualifiedName()))
+			if(!paramType.getIdentifier().equals(superParamType.getIdentifier()))
 				return false;
 		}
 		return true;

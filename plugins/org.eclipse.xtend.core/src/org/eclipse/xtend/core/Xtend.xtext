@@ -200,22 +200,10 @@ XVariableDeclaration returns xbase::XExpression:
 	(=>(type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ('=' right=XExpression)?;
 
 XConstructorCall returns xbase::XExpression:
-	=>AnonymousClassConstructorCall | XbaseConstructorCall;
-	
-AnonymousClassConstructorCall returns xbase::XExpression:
-	{AnonymousClassConstructorCall}
-	'new' constructor=[types::JvmConstructor|QualifiedName] 
-	(=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	(=>'(' 
-		(
-		    arguments+=XShortClosure
-		  |	arguments+=XExpression (',' arguments+=XExpression)*
-		)? 
-	')')?
-	anonymousClass=AnonymousClass
+	XbaseConstructorCall (=>({AnonymousClass.constructorCall=current} '{') members+=Member* '}')?
 ;
 
-XbaseConstructorCall returns xbase::XExpression:
+XbaseConstructorCall returns xbase::XConstructorCall:
 	{xbase::XConstructorCall}
 	'new' constructor=[types::JvmConstructor|QualifiedName] 
 	(=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
@@ -228,10 +216,6 @@ XbaseConstructorCall returns xbase::XExpression:
 	(arguments+=XClosure)?
 ;
 
-AnonymousClass returns XtendClass:
-	=>({XtendClass} '{') members+=Member* '}'
-;
-
 JvmFormalParameter returns XtendFormalParameter:
 	extension?='extension'? (parameterType=JvmTypeReference)? name=InnerVarID;
 	
@@ -240,6 +224,19 @@ FullJvmFormalParameter returns XtendFormalParameter:
 
 XStringLiteral returns xbase::XExpression:
 	SimpleStringLiteral | RichString
+;
+
+XSwitchExpression returns xbase::XExpression:
+	{xbase::XSwitchExpression}
+	'switch' (=>('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
+		| =>(declaredParam=JvmFormalParameter ':')? switch=XExpressionOrSimpleConstructorCall) '{'
+	(cases+=XCasePart)*
+	('default' ':' default=XExpression )?
+	'}'
+;
+
+XExpressionOrSimpleConstructorCall returns xbase::XExpression:
+	->XbaseConstructorCall | XExpression
 ;
 
 SimpleStringLiteral returns xbase::XExpression:

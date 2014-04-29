@@ -24,7 +24,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -506,6 +506,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 							declaredDispatcherType);
 					addExtensionProviders(state, dispatchCase.getParameters());
 					ITypeComputationResult dispatchCaseResult = state.computeTypes();
+					unmarkComputing(dispatchCase.getReturnType());
 					if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
 						if (declaredDispatcherType == null) {
 							dispatchCaseResults.add(dispatchCaseResult.getReturnType());
@@ -652,10 +653,10 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 	protected boolean inferAndPrepareLocalClass(EObject current, ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession, JvmFeature container,
 			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
-		if (current instanceof AnonymousClassConstructorCall) {
+		if (current instanceof AnonymousClass) {
 			String localClassName = getLocalClassName(container, resolvedTypesByContext);
 			JvmGenericType inferredLocalClass = jvmModelInferrer.inferLocalClass(
-					(AnonymousClassConstructorCall) current, localClassName, container, featureScopeSession,
+					(AnonymousClass) current, localClassName, container, featureScopeSession,
 					resolvedTypes);
 			if (inferredLocalClass != null) {
 				doPrepare(resolvedTypes, featureScopeSession, inferredLocalClass, resolvedTypesByContext);

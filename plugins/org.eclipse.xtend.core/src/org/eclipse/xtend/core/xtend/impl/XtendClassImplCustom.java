@@ -9,8 +9,6 @@ package org.eclipse.xtend.core.xtend.impl;
 
 import static org.eclipse.xtext.util.Strings.*;
 
-import org.eclipse.xtend.core.xtend.XtendPackage;
-
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -36,9 +34,4 @@ public class XtendClassImplCustom extends XtendClassImpl {
 		return false;
 	}
 	
-	@Override 
-	public boolean isAnonymous() {
-		return eContainingFeature() == XtendPackage.Literals.ANONYMOUS_CLASS_CONSTRUCTOR_CALL__ANONYMOUS_CLASS;
-	}
-
 }
