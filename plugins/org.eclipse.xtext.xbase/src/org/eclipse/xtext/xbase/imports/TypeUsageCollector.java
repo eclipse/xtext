@@ -325,19 +325,7 @@ public class TypeUsageCollector {
 	 * @return the referenced type or one of its containers.
 	 */
 	protected PreferredType findPreferredType(EObject owner, EReference reference, String text) {
-		JvmIdentifiableElement referencedThing = (JvmIdentifiableElement) owner.eGet(reference);
-		if (referencedThing != null && owner instanceof XConstructorCall && referencedThing.eIsProxy()) {
-			JvmIdentifiableElement potentiallyLinkedType = batchTypeResolver.resolveTypes(owner).getLinkedFeature((XConstructorCall)owner);
-			if (potentiallyLinkedType != null && !potentiallyLinkedType.eIsProxy()) {
-				referencedThing = potentiallyLinkedType;
-			}
-		}
-		if(owner instanceof XConstructorCall && referencedThing instanceof JvmConstructor && 
-				((JvmConstructor) referencedThing).getDeclaringType() instanceof JvmGenericType) {
-			JvmGenericType referencedType = (JvmGenericType) ((JvmConstructor) referencedThing).getDeclaringType();
-			if(referencedType.isAnonymous() && referencedType.getSuperTypes().size() == 1) 
-				referencedThing = referencedType.getSuperTypes().get(0).getType();
-		}
+		JvmIdentifiableElement referencedThing = getReferencedElement(owner, reference);
 		JvmDeclaredType referencedType = null;
 		if (referencedThing instanceof JvmDeclaredType) {
 			referencedType = (JvmDeclaredType) referencedThing;
@@ -351,6 +339,17 @@ public class TypeUsageCollector {
 			return null;
 		}
 		return findPreferredType(referencedType, text);
+	}
+
+	protected JvmIdentifiableElement getReferencedElement(EObject owner, EReference reference) {
+		JvmIdentifiableElement referencedThing = (JvmIdentifiableElement) owner.eGet(reference);
+		if (referencedThing != null && owner instanceof XConstructorCall && referencedThing.eIsProxy()) {
+			JvmIdentifiableElement potentiallyLinkedType = batchTypeResolver.resolveTypes(owner).getLinkedFeature((XConstructorCall)owner);
+			if (potentiallyLinkedType != null && !potentiallyLinkedType.eIsProxy()) {
+				referencedThing = potentiallyLinkedType;
+			}
+		}
+		return referencedThing;
 	}
 
 	private String getFirstNameSegment(EObject owner, EReference reference) {

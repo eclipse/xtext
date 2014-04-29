@@ -904,4 +904,43 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testAnonymousClass_3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.io.Serializable");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val bar = new Serializable() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val additionalField = 1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.io.Serializable");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val bar = new Serializable() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val additionalField = 1");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
 }
