@@ -173,7 +173,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       _builder_1.append("interface Foo {}");
       XtendInterface _interfaze_1 = this.interfaze(_builder_1.toString());
       boolean _isStatic = _interfaze_1.isStatic();
-      Assert.assertFalse(_isStatic);
+      Assert.assertTrue(_isStatic);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -186,7 +186,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       _builder.append("enum Foo {}");
       XtendEnum _enumeration = this.enumeration(_builder.toString());
       boolean _isStatic = _enumeration.isStatic();
-      Assert.assertFalse(_isStatic);
+      Assert.assertTrue(_isStatic);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -258,7 +258,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       _builder.append("static annotation Foo {}");
       XtendAnnotationType _annotationType = this.annotationType(_builder.toString());
       boolean _isStatic = _annotationType.isStatic();
-      Assert.assertFalse(_isStatic);
+      Assert.assertTrue(_isStatic);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("final annotation Foo {}");
       XtendAnnotationType _annotationType_1 = this.annotationType(_builder_1.toString());

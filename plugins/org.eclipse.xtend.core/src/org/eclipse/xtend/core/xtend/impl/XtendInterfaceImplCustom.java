@@ -17,7 +17,7 @@ public class XtendInterfaceImplCustom extends XtendInterfaceImpl {
 
 	@Override
 	public boolean isStatic() {
-		return false;
+		return true;
 	}
 
 	@Override

@@ -366,7 +366,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 		@SuppressWarnings("unchecked")
 		public <T extends JvmDeclaredType> IPostIndexingInitializing<T> accept(T type) {
-			if(type != null)
+			if(type != null && type.eContainer() == null)
 				resource.getContents().add(type);
 			return (IPostIndexingInitializing<T>) new JvmPostIndexingInitializing(type);
 		}
