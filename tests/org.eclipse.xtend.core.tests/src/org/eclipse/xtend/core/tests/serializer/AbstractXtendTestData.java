@@ -199,5 +199,43 @@ public abstract class AbstractXtendTestData extends AbstractXtendTestCase {
 		str.append("}");
 		doTest(str.toString());
 	}
+	
+	@Test public void testAnonymousClassFQN() throws Exception {
+		StringBuilder str = new StringBuilder();
+		str.append("package myPackage\n");
+		str.append("class Runnable {\n");
+		str.append("	val bar = new java.lang.Runnable() {\n");
+		str.append("		override run() {\n");
+		str.append("		}\n");
+		str.append("	}\n");
+		str.append("}");
+		doTest(str.toString());
+	}
+	
+	@Test public void testAnonymousClassAsLocal() throws Exception {
+		StringBuilder str = new StringBuilder();
+		str.append("package myPackage\n");
+		str.append("class Foo {\n");
+		str.append("	val bar = new Runnable() {\n");
+		str.append("		def void m() {}\n");
+		str.append("		override run() {\n");
+		str.append("		}\n");
+		str.append("	}\n");
+		str.append("}");
+		doTest(str.toString());
+	}
+	
+	@Test public void testAnonymousClassFQNAsLocal() throws Exception {
+		StringBuilder str = new StringBuilder();
+		str.append("package myPackage\n");
+		str.append("class Runnable {\n");
+		str.append("	val bar = new java.lang.Runnable() {\n");
+		str.append("		def void m() {}\n");
+		str.append("		override run() {\n");
+		str.append("		}\n");
+		str.append("	}\n");
+		str.append("}");
+		doTest(str.toString());
+	}
 
 }

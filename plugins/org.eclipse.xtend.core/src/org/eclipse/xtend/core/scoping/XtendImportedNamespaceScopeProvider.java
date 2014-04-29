@@ -19,12 +19,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -107,8 +106,9 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 					return caching;
 				}
 			});
-			if(context instanceof AnonymousClassConstructorCall) {
-				JvmGenericType inferredAnonymousType = associations.getInferredType(((AnonymousClassConstructorCall) context).getAnonymousClass());
+			if(context instanceof AnonymousClass) {
+				// necessary for the super type of an anonymous class expression
+				JvmDeclaredType inferredAnonymousType = associations.getInferredType((AnonymousClass) context);
 				if(inferredAnonymousType != null)
 					result = new LocalTypeScope(singletonList(inferredAnonymousType), result);
 			}

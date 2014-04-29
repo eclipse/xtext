@@ -19,7 +19,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 
 import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
@@ -283,12 +282,14 @@ public class XtendSwitch<T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtendPackage.ANONYMOUS_CLASS_CONSTRUCTOR_CALL:
+			case XtendPackage.ANONYMOUS_CLASS:
 			{
-				AnonymousClassConstructorCall anonymousClassConstructorCall = (AnonymousClassConstructorCall)theEObject;
-				T result = caseAnonymousClassConstructorCall(anonymousClassConstructorCall);
-				if (result == null) result = caseXConstructorCall(anonymousClassConstructorCall);
-				if (result == null) result = caseXExpression(anonymousClassConstructorCall);
+				AnonymousClass anonymousClass = (AnonymousClass)theEObject;
+				T result = caseAnonymousClass(anonymousClass);
+				if (result == null) result = caseXExpression(anonymousClass);
+				if (result == null) result = caseXtendTypeDeclaration(anonymousClass);
+				if (result == null) result = caseXtendMember(anonymousClass);
+				if (result == null) result = caseXtendAnnotationTarget(anonymousClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -649,17 +650,17 @@ public class XtendSwitch<T> extends Switch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Anonymous Class Constructor Call</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Anonymous Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Anonymous Class Constructor Call</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Anonymous Class</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAnonymousClassConstructorCall(AnonymousClassConstructorCall object)
+	public T caseAnonymousClass(AnonymousClass object)
 	{
 		return null;
 	}
@@ -788,22 +789,6 @@ public class XtendSwitch<T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseJvmFormalParameter(JvmFormalParameter object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>XConstructor Call</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>XConstructor Call</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseXConstructorCall(XConstructorCall object)
 	{
 		return null;
 	}

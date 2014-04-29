@@ -89,7 +89,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 			case XtendPackage.XTEND_ENUM_LITERAL: return createXtendEnumLiteral();
 			case XtendPackage.XTEND_VARIABLE_DECLARATION: return createXtendVariableDeclaration();
 			case XtendPackage.XTEND_FORMAL_PARAMETER: return createXtendFormalParameter();
-			case XtendPackage.ANONYMOUS_CLASS_CONSTRUCTOR_CALL: return createAnonymousClassConstructorCall();
+			case XtendPackage.ANONYMOUS_CLASS: return createAnonymousClass();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -245,7 +245,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 */
 	public XtendTypeDeclaration createXtendTypeDeclaration()
 	{
-		XtendTypeDeclarationImpl xtendTypeDeclaration = new XtendTypeDeclarationImpl();
+		XtendTypeDeclarationImplCustom xtendTypeDeclaration = new XtendTypeDeclarationImplCustom();
 		return xtendTypeDeclaration;
 	}
 
@@ -320,10 +320,10 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AnonymousClassConstructorCall createAnonymousClassConstructorCall()
+	public AnonymousClass createAnonymousClass()
 	{
-		AnonymousClassConstructorCallImpl anonymousClassConstructorCall = new AnonymousClassConstructorCallImpl();
-		return anonymousClassConstructorCall;
+		AnonymousClassImplCustom anonymousClass = new AnonymousClassImplCustom();
+		return anonymousClass;
 	}
 
 	/**

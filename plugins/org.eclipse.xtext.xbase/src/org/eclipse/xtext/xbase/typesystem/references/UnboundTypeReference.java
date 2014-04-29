@@ -202,6 +202,13 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return false;
 	}
 	
+	@Override
+	public boolean isAnonymous() {
+		if (internalGetResolvedTo() != null)
+			return resolvedTo.isAnonymous();
+		return false;
+	}
+	
 	public JvmTypeParameter getTypeParameter() {
 		return typeParameter;
 	}

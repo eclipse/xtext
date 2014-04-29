@@ -299,38 +299,11 @@ ruleXVariableDeclaration :
 
 // Rule XConstructorCall
 ruleXConstructorCall :
-	( (
-	ruleAnonymousClassConstructorCall
-	) => ruleAnonymousClassConstructorCall ) |
-	ruleXbaseConstructorCall
-;
-
-// Rule AnonymousClassConstructorCall
-ruleAnonymousClassConstructorCall :
-	'new' ruleQualifiedName (
+	ruleXbaseConstructorCall (
 		( (
-		'<'
-		) => '<' ) ruleJvmArgumentTypeReference (
-			',' ruleJvmArgumentTypeReference
-		)* '>'
-	)? (
-		( (
-		'('
-		) => '(' ) (
-			( (
-			(
-				ruleJvmFormalParameter (
-					',' ruleJvmFormalParameter
-				)*
-			)? '|'
-			) => ruleXShortClosure ) |
-			ruleXExpression (
-				',' ruleXExpression
-			)*
-		)? ')'
-	)? ( (
-	'{'
-	) => ruleAnonymousClass )
+		'{'
+		) => '{' ) ruleMember* '}'
+	)?
 ;
 
 // Rule XbaseConstructorCall
@@ -361,13 +334,6 @@ ruleXbaseConstructorCall :
 	) => ruleXClosure )?
 ;
 
-// Rule AnonymousClass
-ruleAnonymousClass :
-	( (
-	'{'
-	) => '{' ) ruleMember* '}'
-;
-
 // Rule JvmFormalParameter
 ruleJvmFormalParameter :
 	'extension'? ruleJvmTypeReference? ruleInnerVarID
@@ -382,6 +348,32 @@ ruleFullJvmFormalParameter :
 ruleXStringLiteral :
 	ruleSimpleStringLiteral |
 	ruleRichString
+;
+
+// Rule XSwitchExpression
+ruleXSwitchExpression :
+	'switch' (
+		( (
+		'(' ruleJvmFormalParameter ':'
+		) => (
+			'(' ruleJvmFormalParameter ':'
+		) ) ruleXExpression ')' |
+		( (
+		ruleJvmFormalParameter ':'
+		) => (
+			ruleJvmFormalParameter ':'
+		) )? ruleXExpressionOrSimpleConstructorCall
+	) '{' ruleXCasePart* (
+		'default' ':' ruleXExpression
+	)? '}'
+;
+
+// Rule XExpressionOrSimpleConstructorCall
+ruleXExpressionOrSimpleConstructorCall :
+	( (
+	'new'
+	) => ruleXbaseConstructorCall ) |
+	ruleXExpression
 ;
 
 // Rule SimpleStringLiteral
@@ -883,24 +875,6 @@ ruleXIfExpression :
 		'else'
 		) => 'else' ) ruleXExpression
 	)?
-;
-
-// Rule XSwitchExpression
-ruleXSwitchExpression :
-	'switch' (
-		( (
-		'(' ruleJvmFormalParameter ':'
-		) => (
-			'(' ruleJvmFormalParameter ':'
-		) ) ruleXExpression ')' |
-		( (
-		ruleJvmFormalParameter ':'
-		) => (
-			ruleJvmFormalParameter ':'
-		) )? ruleXExpression
-	) '{' ruleXCasePart* (
-		'default' ':' ruleXExpression
-	)? '}'
 ;
 
 // Rule XCasePart

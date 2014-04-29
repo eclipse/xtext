@@ -36,8 +36,7 @@ import org.eclipse.xtext.xtype.XImportSection
 import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall
-import org.eclipse.xtext.xbase.XConstructorCall
+import org.eclipse.xtend.core.xtend.AnonymousClass
 
 @SuppressWarnings("restriction")
 public class XtendFormatter extends XbaseFormatter2 {
@@ -265,11 +264,9 @@ public class XtendFormatter extends XbaseFormatter2 {
 		richStringFormatter.format(callback, format, rs)
 	}
 	
-	def protected dispatch void format(AnonymousClassConstructorCall constructorCall, FormattableDocument format) {
-		super._format(constructorCall as XConstructorCall, format)
-		if(constructorCall.anonymousClass != null) {
-			formatBody(constructorCall.anonymousClass, format)
-		}
+	def protected dispatch void format(AnonymousClass anonymousClass, FormattableDocument format) {
+		format(anonymousClass.constructorCall, format)
+		formatBody(anonymousClass, format)
 	}
 	
 	/** 

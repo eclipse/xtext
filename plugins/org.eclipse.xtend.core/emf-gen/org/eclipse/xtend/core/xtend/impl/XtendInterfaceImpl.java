@@ -39,7 +39,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *
  * @generated
  */
-public class XtendInterfaceImpl extends XtendTypeDeclarationImpl implements XtendInterface
+public class XtendInterfaceImpl extends XtendTypeDeclarationImplCustom implements XtendInterface
 {
 	/**
 	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' containment reference list.

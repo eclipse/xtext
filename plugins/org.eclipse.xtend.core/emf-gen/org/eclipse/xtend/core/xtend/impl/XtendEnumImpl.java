@@ -21,7 +21,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
  *
  * @generated
  */
-public class XtendEnumImpl extends XtendTypeDeclarationImpl implements XtendEnum
+public class XtendEnumImpl extends XtendTypeDeclarationImplCustom implements XtendEnum
 {
 	/**
 	 * <!-- begin-user-doc -->

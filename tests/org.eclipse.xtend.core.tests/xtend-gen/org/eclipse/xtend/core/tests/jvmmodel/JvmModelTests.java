@@ -90,6 +90,24 @@ public class JvmModelTests extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testInterfaceAbstract() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface Foo {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendInterface _interfaze = this.interfaze(_string);
+      final JvmGenericType inferred = this._iXtendJvmAssociations.getInferredType(_interfaze);
+      boolean _isAbstract = inferred.isAbstract();
+      Assert.assertTrue(_isAbstract);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testAnnotationImplicitSuperType() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -107,6 +125,24 @@ public class JvmModelTests extends AbstractXtendTestCase {
       JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_superTypes_1);
       String _identifier = _head.getIdentifier();
       Assert.assertEquals("java.lang.annotation.Annotation", _identifier);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAnnotationAbstract() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("annotation Foo {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendAnnotationType _annotationType = this.annotationType(_string);
+      final JvmAnnotationType inferred = this._iXtendJvmAssociations.getInferredAnnotationType(_annotationType);
+      boolean _isAbstract = inferred.isAbstract();
+      Assert.assertTrue(_isAbstract);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

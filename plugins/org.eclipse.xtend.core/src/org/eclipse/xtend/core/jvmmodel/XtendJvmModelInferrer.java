@@ -26,7 +26,7 @@ import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContextProvider;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
 import org.eclipse.xtend.core.macro.AnnotationProcessor;
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
@@ -84,6 +84,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -296,6 +297,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	protected void initialize(XtendAnnotationType source, JvmAnnotationType inferredJvmType) {
 		inferredJvmType.setVisibility(source.getVisibility());
 		inferredJvmType.setStatic(source.isStatic() && !isTopLevel(source));
+		inferredJvmType.setAbstract(true);
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		jvmTypesBuilder.copyDocumentationTo(source, inferredJvmType);
 		for (XtendMember member : source.getMembers()) {
@@ -379,6 +381,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		inferredJvmType.setVisibility(source.getVisibility());
 		inferredJvmType.setStatic(source.isStatic() && !isTopLevel(source));
 		inferredJvmType.setInterface(true);
+		inferredJvmType.setAbstract(true);
 		inferredJvmType.setStrictFloatingPoint(source.isStrictFloatingPoint());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		for (JvmTypeReference intf : source.getExtends()) {
@@ -554,7 +557,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 	}
 
-	protected void appendSyntheticDispatchMethods(XtendClass source, final JvmGenericType target) {
+	protected void appendSyntheticDispatchMethods(XtendTypeDeclaration source, final JvmGenericType target) {
 		ListMultimap<DispatchHelper.DispatchSignature, JvmOperation> methods = dispatchHelper.getDeclaredOrEnhancedDispatchMethods(target);
 		for (DispatchHelper.DispatchSignature signature : methods.keySet()) {
 			List<JvmOperation> operations = methods.get(signature);
@@ -904,9 +907,8 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	/**
 	 * Anonymous classes are not inferred in the type inference phase, but later during type resolution. 
 	 */
-	public JvmGenericType inferLocalClass(AnonymousClassConstructorCall constructorCall, String localClassName, JvmFeature container, IFeatureScopeSession featureScopeSession, ResolvedTypes resolvedTypes) {
-		XtendClass anonymousClass = constructorCall.getAnonymousClass();
-		JvmParameterizedTypeReference superTypeReference = createSuperTypeReference(container, constructorCall,
+	public JvmGenericType inferLocalClass(AnonymousClass anonymousClass, String localClassName, JvmFeature container, IFeatureScopeSession featureScopeSession, ResolvedTypes resolvedTypes) {
+		JvmParameterizedTypeReference superTypeReference = createSuperTypeReference(container, anonymousClass,
 				featureScopeSession, resolvedTypes);
 		if(superTypeReference == null)
 			return null;
@@ -915,19 +917,19 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		inferredType.setAnonymous(!hasAdditionalMembers(anonymousClass));
 		inferredType.setFinal(true);
 		inferredType.setVisibility(JvmVisibility.DEFAULT);
-		inferredType.setPackageName(EcoreUtil2.getContainerOfType(constructorCall, XtendFile.class).getPackage());
+		inferredType.setPackageName(EcoreUtil2.getContainerOfType(anonymousClass, XtendFile.class).getPackage());
 		inferredType.getSuperTypes().add(superTypeReference);
 		container.getLocalClasses().add(inferredType);
 		associator.associatePrimary(anonymousClass, inferredType);
 		
 		JvmGenericType superType = (JvmGenericType) superTypeReference.getType();
 		if(superType.isInterface()) {
-			inferAnonymousClassConstructor(constructorCall, inferredType, superType);
+			inferAnonymousClassConstructor(anonymousClass, inferredType, superType);
 		} else {
 			for(JvmMember superMember: superType.getMembers()) {
 				if (superMember instanceof JvmConstructor) {
 					JvmConstructor superTypeConstructor = (JvmConstructor) superMember;
-					inferAnonymousClassConstructor(constructorCall, inferredType, superTypeConstructor);
+					inferAnonymousClassConstructor(anonymousClass, inferredType, superTypeConstructor);
 				}
 			}
 		}
@@ -941,21 +943,23 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		return inferredType;
 	}
 	
-	protected boolean hasAdditionalMembers(XtendClass anonymousClass) {
+	protected boolean hasAdditionalMembers(AnonymousClass anonymousClass) {
 		for(XtendMember member: anonymousClass.getMembers()) {
 			if(member instanceof XtendField ||	
-				member instanceof XtendFunction && !((XtendFunction) member).isOverride()) 
+				(member instanceof XtendFunction && !((XtendFunction) member).isOverride())) 
 				return true;
 		}
 		return false;
 	}
 
 	protected JvmParameterizedTypeReference createSuperTypeReference(JvmFeature container,
-			AnonymousClassConstructorCall constructorCall, IFeatureScopeSession featureScopeSession, ResolvedTypes resolvedTypes) {
-		QualifiedName superTypeName = getSuperClassQualifiedName(constructorCall);
+			AnonymousClass anonymousClass, IFeatureScopeSession featureScopeSession, ResolvedTypes resolvedTypes) {
+		QualifiedName superTypeName = getSuperClassQualifiedName(anonymousClass);
+		// TODO defer
 		IScope typeScope = featureScopeSession.getScope(container, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, resolvedTypes);
 		IEObjectDescription superTypeDesc = typeScope.getSingleElement(superTypeName);
 		if(superTypeDesc != null) {
+			XConstructorCall constructorCall = anonymousClass.getConstructorCall();
 			JvmDeclaredType jvmSuperType = (JvmDeclaredType) EcoreUtil.resolve(superTypeDesc.getEObjectOrProxy(), constructorCall.eResource().getResourceSet());
 			JvmParameterizedTypeReference superTypeReference = typesFactory.createJvmParameterizedTypeReference();
 			superTypeReference.setType(jvmSuperType);
@@ -967,7 +971,8 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 	}
 	
-	protected QualifiedName getSuperClassQualifiedName(AnonymousClassConstructorCall constructorCall) {
+	protected QualifiedName getSuperClassQualifiedName(AnonymousClass anonymousClass) {
+		XConstructorCall constructorCall = anonymousClass.getConstructorCall();
 		EObject constructorProxy = (EObject) constructorCall.eGet(XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
 		String fragment = EcoreUtil.getURI(constructorProxy).fragment();
 		INode node = lazyURIEncoder.getNode(constructorCall, fragment);
@@ -975,10 +980,10 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		return nameConverter.toQualifiedName(name.toString());
 	}
 	
-	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClassConstructorCall constructorCall, JvmGenericType inferredLocalClass, JvmConstructor superConstructor) {
+	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClass anonymousClass, JvmGenericType inferredLocalClass, JvmConstructor superConstructor) {
 		JvmConstructor constructor = typesFactory.createJvmConstructor();
 		inferredLocalClass.getMembers().add(constructor);
-		associator.associatePrimary(constructorCall, constructor);
+		associator.associatePrimary(anonymousClass.getConstructorCall(), constructor);
 		constructor.setVisibility(superConstructor.getVisibility());
 		constructor.setSimpleName(inferredLocalClass.getSimpleName());
 		for(JvmFormalParameter parameter: superConstructor.getParameters()) 
@@ -986,10 +991,12 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		copyAndFixTypeParameters(superConstructor.getTypeParameters(), constructor);
 		for (JvmTypeReference exception : superConstructor.getExceptions()) 
 			constructor.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
+		// TODO body?
 		return constructor;
 	}
 
-	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClassConstructorCall constructorCall, JvmGenericType inferredLocalClass, JvmGenericType superInterface) {
+	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClass anonymousClass, JvmGenericType inferredLocalClass, JvmGenericType superInterface) {
+		XConstructorCall constructorCall = anonymousClass.getConstructorCall();
 		JvmConstructor constructor = typesFactory.createJvmConstructor();
 		inferredLocalClass.getMembers().add(constructor);
 		associator.associatePrimary(constructorCall, constructor);

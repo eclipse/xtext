@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.formatting.RichStringFormatter;
 import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys;
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
@@ -862,14 +862,10 @@ public class XtendFormatter extends XbaseFormatter2 {
     this.richStringFormatter.format(callback, format, rs);
   }
   
-  protected void _format(final AnonymousClassConstructorCall constructorCall, final FormattableDocument format) {
-    super._format(((XConstructorCall) constructorCall), format);
-    XtendClass _anonymousClass = constructorCall.getAnonymousClass();
-    boolean _notEquals = (!Objects.equal(_anonymousClass, null));
-    if (_notEquals) {
-      XtendClass _anonymousClass_1 = constructorCall.getAnonymousClass();
-      this.formatBody(_anonymousClass_1, format);
-    }
+  protected void _format(final AnonymousClass anonymousClass, final FormattableDocument format) {
+    XConstructorCall _constructorCall = anonymousClass.getConstructorCall();
+    this.format(_constructorCall, format);
+    this.formatBody(anonymousClass, format);
   }
   
   /**
@@ -974,145 +970,145 @@ public class XtendFormatter extends XbaseFormatter2 {
     document.operator_add(_append_11);
   }
   
-  protected void format(final EObject annotationType, final FormattableDocument format) {
-    if (annotationType instanceof XtendAnnotationType) {
-      _format((XtendAnnotationType)annotationType, format);
+  protected void format(final EObject anonymousClass, final FormattableDocument format) {
+    if (anonymousClass instanceof AnonymousClass) {
+      _format((AnonymousClass)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XtendClass) {
-      _format((XtendClass)annotationType, format);
+    } else if (anonymousClass instanceof XtendAnnotationType) {
+      _format((XtendAnnotationType)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XtendConstructor) {
-      _format((XtendConstructor)annotationType, format);
+    } else if (anonymousClass instanceof XtendClass) {
+      _format((XtendClass)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XtendEnum) {
-      _format((XtendEnum)annotationType, format);
+    } else if (anonymousClass instanceof XtendConstructor) {
+      _format((XtendConstructor)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XtendFunction) {
-      _format((XtendFunction)annotationType, format);
+    } else if (anonymousClass instanceof XtendEnum) {
+      _format((XtendEnum)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XtendInterface) {
-      _format((XtendInterface)annotationType, format);
+    } else if (anonymousClass instanceof XtendFunction) {
+      _format((XtendFunction)anonymousClass, format);
       return;
-    } else if (annotationType instanceof JvmTypeParameter) {
-      _format((JvmTypeParameter)annotationType, format);
+    } else if (anonymousClass instanceof XtendInterface) {
+      _format((XtendInterface)anonymousClass, format);
       return;
-    } else if (annotationType instanceof AnonymousClassConstructorCall) {
-      _format((AnonymousClassConstructorCall)annotationType, format);
+    } else if (anonymousClass instanceof JvmTypeParameter) {
+      _format((JvmTypeParameter)anonymousClass, format);
       return;
-    } else if (annotationType instanceof RichString) {
-      _format((RichString)annotationType, format);
+    } else if (anonymousClass instanceof RichString) {
+      _format((RichString)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XtendField) {
-      _format((XtendField)annotationType, format);
+    } else if (anonymousClass instanceof XtendField) {
+      _format((XtendField)anonymousClass, format);
       return;
-    } else if (annotationType instanceof JvmFormalParameter) {
-      _format((JvmFormalParameter)annotationType, format);
+    } else if (anonymousClass instanceof JvmFormalParameter) {
+      _format((JvmFormalParameter)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XAssignment) {
-      _format((XAssignment)annotationType, format);
+    } else if (anonymousClass instanceof XAssignment) {
+      _format((XAssignment)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XBinaryOperation) {
-      _format((XBinaryOperation)annotationType, format);
+    } else if (anonymousClass instanceof XBinaryOperation) {
+      _format((XBinaryOperation)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XDoWhileExpression) {
-      _format((XDoWhileExpression)annotationType, format);
+    } else if (anonymousClass instanceof XDoWhileExpression) {
+      _format((XDoWhileExpression)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XFeatureCall) {
-      _format((XFeatureCall)annotationType, format);
+    } else if (anonymousClass instanceof XFeatureCall) {
+      _format((XFeatureCall)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XMemberFeatureCall) {
-      _format((XMemberFeatureCall)annotationType, format);
+    } else if (anonymousClass instanceof XMemberFeatureCall) {
+      _format((XMemberFeatureCall)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XWhileExpression) {
-      _format((XWhileExpression)annotationType, format);
+    } else if (anonymousClass instanceof XWhileExpression) {
+      _format((XWhileExpression)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XFunctionTypeRef) {
-      _format((XFunctionTypeRef)annotationType, format);
+    } else if (anonymousClass instanceof XFunctionTypeRef) {
+      _format((XFunctionTypeRef)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XtendParameter) {
-      _format((XtendParameter)annotationType, format);
+    } else if (anonymousClass instanceof XtendParameter) {
+      _format((XtendParameter)anonymousClass, format);
       return;
-    } else if (annotationType instanceof JvmGenericArrayTypeReference) {
-      _format((JvmGenericArrayTypeReference)annotationType, format);
+    } else if (anonymousClass instanceof JvmGenericArrayTypeReference) {
+      _format((JvmGenericArrayTypeReference)anonymousClass, format);
       return;
-    } else if (annotationType instanceof JvmParameterizedTypeReference) {
-      _format((JvmParameterizedTypeReference)annotationType, format);
+    } else if (anonymousClass instanceof JvmParameterizedTypeReference) {
+      _format((JvmParameterizedTypeReference)anonymousClass, format);
       return;
-    } else if (annotationType instanceof JvmWildcardTypeReference) {
-      _format((JvmWildcardTypeReference)annotationType, format);
+    } else if (anonymousClass instanceof JvmWildcardTypeReference) {
+      _format((JvmWildcardTypeReference)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XBasicForLoopExpression) {
-      _format((XBasicForLoopExpression)annotationType, format);
+    } else if (anonymousClass instanceof XBasicForLoopExpression) {
+      _format((XBasicForLoopExpression)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XBlockExpression) {
-      _format((XBlockExpression)annotationType, format);
+    } else if (anonymousClass instanceof XBlockExpression) {
+      _format((XBlockExpression)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XClosure) {
-      _format((XClosure)annotationType, format);
+    } else if (anonymousClass instanceof XClosure) {
+      _format((XClosure)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XCollectionLiteral) {
-      _format((XCollectionLiteral)annotationType, format);
+    } else if (anonymousClass instanceof XCollectionLiteral) {
+      _format((XCollectionLiteral)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XConstructorCall) {
-      _format((XConstructorCall)annotationType, format);
+    } else if (anonymousClass instanceof XConstructorCall) {
+      _format((XConstructorCall)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XForLoopExpression) {
-      _format((XForLoopExpression)annotationType, format);
+    } else if (anonymousClass instanceof XForLoopExpression) {
+      _format((XForLoopExpression)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XIfExpression) {
-      _format((XIfExpression)annotationType, format);
+    } else if (anonymousClass instanceof XIfExpression) {
+      _format((XIfExpression)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XReturnExpression) {
-      _format((XReturnExpression)annotationType, format);
+    } else if (anonymousClass instanceof XReturnExpression) {
+      _format((XReturnExpression)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XSwitchExpression) {
-      _format((XSwitchExpression)annotationType, format);
+    } else if (anonymousClass instanceof XSwitchExpression) {
+      _format((XSwitchExpression)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XSynchronizedExpression) {
-      _format((XSynchronizedExpression)annotationType, format);
+    } else if (anonymousClass instanceof XSynchronizedExpression) {
+      _format((XSynchronizedExpression)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XThrowExpression) {
-      _format((XThrowExpression)annotationType, format);
+    } else if (anonymousClass instanceof XThrowExpression) {
+      _format((XThrowExpression)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XTryCatchFinallyExpression) {
-      _format((XTryCatchFinallyExpression)annotationType, format);
+    } else if (anonymousClass instanceof XTryCatchFinallyExpression) {
+      _format((XTryCatchFinallyExpression)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XTypeLiteral) {
-      _format((XTypeLiteral)annotationType, format);
+    } else if (anonymousClass instanceof XTypeLiteral) {
+      _format((XTypeLiteral)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XVariableDeclaration) {
-      _format((XVariableDeclaration)annotationType, format);
+    } else if (anonymousClass instanceof XVariableDeclaration) {
+      _format((XVariableDeclaration)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XAnnotation) {
-      _format((XAnnotation)annotationType, format);
+    } else if (anonymousClass instanceof XAnnotation) {
+      _format((XAnnotation)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XtendFile) {
-      _format((XtendFile)annotationType, format);
+    } else if (anonymousClass instanceof XtendFile) {
+      _format((XtendFile)anonymousClass, format);
       return;
-    } else if (annotationType instanceof JvmTypeConstraint) {
-      _format((JvmTypeConstraint)annotationType, format);
+    } else if (anonymousClass instanceof JvmTypeConstraint) {
+      _format((JvmTypeConstraint)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XCatchClause) {
-      _format((XCatchClause)annotationType, format);
+    } else if (anonymousClass instanceof XCatchClause) {
+      _format((XCatchClause)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XExpression) {
-      _format((XExpression)annotationType, format);
+    } else if (anonymousClass instanceof XExpression) {
+      _format((XExpression)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XImportDeclaration) {
-      _format((XImportDeclaration)annotationType, format);
+    } else if (anonymousClass instanceof XImportDeclaration) {
+      _format((XImportDeclaration)anonymousClass, format);
       return;
-    } else if (annotationType instanceof XImportSection) {
-      _format((XImportSection)annotationType, format);
+    } else if (anonymousClass instanceof XImportSection) {
+      _format((XImportSection)anonymousClass, format);
       return;
-    } else if (annotationType != null) {
-      _format(annotationType, format);
+    } else if (anonymousClass != null) {
+      _format(anonymousClass, format);
       return;
-    } else if (annotationType == null) {
+    } else if (anonymousClass == null) {
       _format((Void)null, format);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(annotationType, format).toString());
+        Arrays.<Object>asList(anonymousClass, format).toString());
     }
   }
 }

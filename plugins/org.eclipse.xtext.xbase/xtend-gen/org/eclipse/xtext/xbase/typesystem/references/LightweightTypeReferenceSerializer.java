@@ -63,16 +63,22 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
   }
   
   protected void doVisitParameterizedTypeReference(@NonNull final ParameterizedTypeReference reference) {
-    JvmType _type = reference.getType();
-    this.appender.append(_type);
-    List<LightweightTypeReference> _typeArguments = reference.getTypeArguments();
-    boolean _isEmpty = _typeArguments.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      this.appender.append("<");
-      List<LightweightTypeReference> _typeArguments_1 = reference.getTypeArguments();
-      this.appendCommaSeparated(_typeArguments_1);
-      this.appender.append(">");
+    boolean _isAnonymous = reference.isAnonymous();
+    if (_isAnonymous) {
+      LightweightTypeReference _namedType = reference.getNamedType();
+      _namedType.accept(this);
+    } else {
+      JvmType _type = reference.getType();
+      this.appender.append(_type);
+      List<LightweightTypeReference> _typeArguments = reference.getTypeArguments();
+      boolean _isEmpty = _typeArguments.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        this.appender.append("<");
+        List<LightweightTypeReference> _typeArguments_1 = reference.getTypeArguments();
+        this.appendCommaSeparated(_typeArguments_1);
+        this.appender.append(">");
+      }
     }
   }
   

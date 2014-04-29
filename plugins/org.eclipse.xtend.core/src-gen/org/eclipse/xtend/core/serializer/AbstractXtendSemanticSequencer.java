@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
@@ -177,6 +177,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -217,6 +218,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -256,6 +258,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -296,6 +299,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -340,6 +344,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXLiteralRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
@@ -386,6 +391,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -432,6 +438,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXLiteralRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
@@ -474,9 +481,11 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXCastedExpressionRule() ||
 				   context == grammarAccess.getXCastedExpressionAccess().getXCastedExpressionTargetAction_1_0_0_0() ||
 				   context == grammarAccess.getXConstructorCallRule() ||
+				   context == grammarAccess.getXConstructorCallAccess().getAnonymousClassConstructorCallAction_1_0_0_0() ||
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -518,6 +527,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -557,6 +567,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
@@ -597,6 +608,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXForLoopExpressionRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
@@ -637,6 +649,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXIfExpressionRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
@@ -677,6 +690,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -723,6 +737,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXListLiteralRule() ||
 				   context == grammarAccess.getXLiteralRule() ||
@@ -764,6 +779,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -803,6 +819,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXLiteralRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
@@ -844,6 +861,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXLiteralRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
@@ -885,6 +903,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -924,6 +943,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -965,6 +985,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXLiteralRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
@@ -1007,6 +1028,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXLiteralRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
@@ -1048,6 +1070,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -1088,6 +1111,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -1128,6 +1152,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -1168,6 +1193,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -1208,6 +1234,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXLiteralRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
@@ -1249,6 +1276,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -1288,6 +1316,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -1313,9 +1342,8 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				else break;
 			}
 		else if(semanticObject.eClass().getEPackage() == XtendPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
-			case XtendPackage.ANONYMOUS_CLASS_CONSTRUCTOR_CALL:
-				if(context == grammarAccess.getAnonymousClassConstructorCallRule() ||
-				   context == grammarAccess.getRichStringPartRule() ||
+			case XtendPackage.ANONYMOUS_CLASS:
+				if(context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXAndExpressionRule() ||
@@ -1332,6 +1360,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
 				   context == grammarAccess.getXMemberFeatureCallAccess().getXAssignmentAssignableAction_1_0_0_0_0() ||
@@ -1350,7 +1379,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXRelationalExpressionAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0_0_0() ||
 				   context == grammarAccess.getXUnaryOperationRule()) {
-					sequence_AnonymousClassConstructorCall(context, (AnonymousClassConstructorCall) semanticObject); 
+					sequence_XConstructorCall(context, (AnonymousClass) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1382,6 +1411,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getXEqualityExpressionRule() ||
 				   context == grammarAccess.getXEqualityExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXExpressionRule() ||
+				   context == grammarAccess.getXExpressionOrSimpleConstructorCallRule() ||
 				   context == grammarAccess.getXExpressionOrVarDeclarationRule() ||
 				   context == grammarAccess.getXLiteralRule() ||
 				   context == grammarAccess.getXMemberFeatureCallRule() ||
@@ -1455,11 +1485,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				}
 				else break;
 			case XtendPackage.XTEND_CLASS:
-				if(context == grammarAccess.getAnonymousClassRule()) {
-					sequence_AnonymousClass(context, (XtendClass) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getMemberRule()) {
+				if(context == grammarAccess.getMemberRule()) {
 					sequence_Member(context, (XtendClass) semanticObject); 
 					return; 
 				}
@@ -1603,29 +1629,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     )
 	 */
 	protected void sequence_AnnotationField(EObject context, XtendField semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (
-	 *         constructor=[JvmConstructor|QualifiedName] 
-	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
-	 *         (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))? 
-	 *         anonymousClass=AnonymousClass
-	 *     )
-	 */
-	protected void sequence_AnonymousClassConstructorCall(EObject context, AnonymousClassConstructorCall semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (members+=Member*)
-	 */
-	protected void sequence_AnonymousClass(EObject context, XtendClass semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -2051,6 +2054,28 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     )
 	 */
 	protected void sequence_Type(EObject context, XtendInterface semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((constructorCall=XConstructorCall_AnonymousClass_1_0_0_0 members+=Member*) | constructorCall=XConstructorCall_AnonymousClass_1_0_0_0)
+	 */
+	protected void sequence_XConstructorCall(EObject context, AnonymousClass semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         ((declaredParam=JvmFormalParameter switch=XExpression) | (declaredParam=JvmFormalParameter? switch=XExpressionOrSimpleConstructorCall)) 
+	 *         cases+=XCasePart* 
+	 *         default=XExpression?
+	 *     )
+	 */
+	protected void sequence_XSwitchExpression(EObject context, XSwitchExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

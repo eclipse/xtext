@@ -12,6 +12,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import org.eclipse.xtend.core.xtend.XtendField
 
 class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 	 
@@ -47,7 +48,6 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 			
 			'''.toString
 		);
-		
 		testHelper.createFile("testpackage/ExtensionJava.java", '''
 			package testpackage;
 			public class ExtensionJava {
@@ -58,6 +58,7 @@ class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 			
 			'''.toString
 		);
+		waitForAutoBuild
 	}
 	
 	@After
@@ -492,6 +493,10 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		val call2 = block.expressions.get(1)
 		val call3 = block.expressions.get(2)
 		val call4 = block.expressions.get(3)
+		val foo = xtendFile.xtendTypes.head
+		val extensionField = foo.members.get(1) as XtendField
+		val extensionFieldType = extensionField.type
+		assertEquals("testpackage.Extension", extensionFieldType.identifier)
 		assertEquals("it.fieldInBar", serializer.computeUnsugaredExpression(call))
 		assertEquals("this._extension.fieldInExtension", serializer.computeUnsugaredExpression(call2))
 		assertEquals("this.fieldInFoo", serializer.computeUnsugaredExpression(call3))

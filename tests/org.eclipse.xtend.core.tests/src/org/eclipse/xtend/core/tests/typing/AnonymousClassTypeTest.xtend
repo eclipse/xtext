@@ -10,11 +10,11 @@ package org.eclipse.xtend.core.tests.typing
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
+import org.eclipse.xtend.core.xtend.AnonymousClass
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -70,8 +70,8 @@ class AnonymousClassTypeTest extends AbstractXtendTestCase {
 		val operation = function.directlyInferredOperation
 		val resolvedTypes = operation.eResource.resolveTypes
 		assertEquals('Iterable<String>', resolvedTypes.getActualType(operation).toString)
-		val constructorCall = ((function.expression as XBlockExpression).expressions.head as AnonymousClassConstructorCall)
-		val overriding = (constructorCall.anonymousClass.members.last as XtendFunction).directlyInferredOperation
+		val anonymousClass = (function.expression as XBlockExpression).expressions.head as AnonymousClass
+		val overriding = (anonymousClass.members.last as XtendFunction).directlyInferredOperation
 		assertEquals('Iterator<String>', resolvedTypes.getActualType(overriding).toString)
 	}
 	
@@ -87,8 +87,8 @@ class AnonymousClassTypeTest extends AbstractXtendTestCase {
 		val operation = function.directlyInferredOperation
 		val resolvedTypes = operation.eResource.resolveTypes
 		assertEquals('Iterable<T>', resolvedTypes.getActualType(operation).toString)
-		val constructorCall = ((function.expression as XBlockExpression).expressions.head as AnonymousClassConstructorCall)
-		val overriding = (constructorCall.anonymousClass.members.last as XtendFunction).directlyInferredOperation
+		val anonymousClass = (function.expression as XBlockExpression).expressions.head as AnonymousClass
+		val overriding = (anonymousClass.members.last as XtendFunction).directlyInferredOperation
 		assertEquals('Iterator<T>', resolvedTypes.getActualType(overriding).toString)
 	}
 }
