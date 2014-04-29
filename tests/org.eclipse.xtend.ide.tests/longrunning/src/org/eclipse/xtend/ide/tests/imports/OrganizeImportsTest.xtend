@@ -490,5 +490,27 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Test def void testAnonymousClass_3() {
+		'''
+			import java.io.Serializable
+
+			class Foo {
+				val bar = new Serializable() {
+					val additionalField = 1
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import java.io.Serializable
+			
+			class Foo {
+				val bar = new Serializable() {
+					val additionalField = 1
+				}
+			}
+		''')
+	}
+
+	
 
 }
