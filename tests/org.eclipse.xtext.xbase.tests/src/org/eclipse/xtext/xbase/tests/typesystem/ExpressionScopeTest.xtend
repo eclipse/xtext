@@ -8,21 +8,27 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
+import org.eclipse.xtext.xbase.tests.XbaseInjectorProviderWithScopeTracking
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope
 import org.junit.Test
+import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.xbase.typesystem.IExpressionScope.Anchor.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@InjectWith(XbaseInjectorProviderWithScopeTracking)
+@RunWith(XtextRunner)
 class ExpressionScopeTest extends AbstractXbaseTestCase {
 	@Inject
 	extension IBatchTypeResolver
@@ -156,3 +162,4 @@ class ExpressionScopeTest extends AbstractXbaseTestCase {
 		expressionScope.containsNot('operator_lessThan')
 	}
 }
+
