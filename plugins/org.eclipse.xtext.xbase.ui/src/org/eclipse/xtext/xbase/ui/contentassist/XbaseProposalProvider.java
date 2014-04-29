@@ -837,4 +837,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	public boolean isExplicitOperationCall(IIdentifiableElementDescription desc) {
 		return desc.getNumberOfParameters() > 0;
 	}
+	
+	@Override
+	public void completeXMemberFeatureCall_ExplicitStatic(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println();
+	}
 }
