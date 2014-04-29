@@ -43,6 +43,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		createFile('Super', '''
 			class Super {
 				def dispatch foo(Double x) {}
+				def dispatch foo(Object x) {}
 			}
 		''')
 		val subFile = createFile("Sub", '''
@@ -52,7 +53,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 			}
 		''')
 		checkDispatchOperations(subFile, 
-			'Super.foo(Double)', 'Super._foo(Double)',
+			'Super.foo(Object)', 'Super._foo(Double)', 'Super._foo(Object)',
 			'Sub._foo(String)', 'Sub._foo(Integer)', 'Sub.foo(Object)')
 	}
 	
@@ -61,6 +62,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		val superFile = createFile('Super', '''
 			class Super {
 				def dispatch foo(Double x) {}
+				def dispatch foo(Object x) {}
 			}
 		''')
 		createFile("Sub", '''
@@ -70,7 +72,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 			}
 		''')
 		checkDispatchOperations(superFile, 
-			'Super.foo(Double)', 'Super._foo(Double)',
+			'Super.foo(Object)', 'Super._foo(Double)', 'Super._foo(Object)',
 			'Sub._foo(String)', 'Sub._foo(Integer)', 'Sub.foo(Object)')
 	}
 	
@@ -149,6 +151,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		createFile('Super.xtend', '''
 			class Super {
 				def dispatch foo(Double x) {}
+				def dispatch foo(Object x) {}
 			}
 		''')
 		createFile('Sub', '''
@@ -162,8 +165,8 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 			}
 		''')
 		checkDispatchOperations(subSubFile, 
-			'Super.foo(Double)', 'Super._foo(Double)',
-			'Sub._foo(Integer)', 'Sub.foo(Number)',
+			'Super.foo(Object)', 'Super._foo(Double)', 'Super._foo(Object)',
+			'Sub._foo(Integer)', 'Sub.foo(Object)',
 			'SubSub._foo(String)', 'SubSub.foo(Object)')
 	}
 	
@@ -172,6 +175,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		createFile('Super.xtend', '''
 			class Super {
 				def dispatch foo(Double x) {}
+				def dispatch foo(Object x) {}
 			}
 		''')
 		val subFile = createFile('Sub', '''
@@ -185,8 +189,8 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 			}
 		''')
 		checkDispatchOperations(subFile, 
-			'Super.foo(Double)', 'Super._foo(Double)',
-			'Sub._foo(Integer)', 'Sub.foo(Number)',
+			'Super.foo(Object)', 'Super._foo(Double)', 'Super._foo(Object)',
+			'Sub._foo(Integer)', 'Sub.foo(Object)',
 			'SubSub._foo(String)', 'SubSub.foo(Object)')
 	}
 	
@@ -195,6 +199,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		val superFile = createFile('Super.xtend', '''
 			class Super {
 				def dispatch foo(Double x) {}
+				def dispatch foo(Object x) {}
 			}
 		''')
 		createFile('Sub', '''
@@ -208,8 +213,8 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 			}
 		''')
 		checkDispatchOperations(superFile, 
-			'Super.foo(Double)', 'Super._foo(Double)',
-			'Sub._foo(Integer)', 'Sub.foo(Number)',
+			'Super.foo(Object)', 'Super._foo(Double)', 'Super._foo(Object)',
+			'Sub._foo(Integer)', 'Sub.foo(Object)',
 			'SubSub._foo(String)', 'SubSub.foo(Object)')
 	}
 	
@@ -218,6 +223,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		val superFile = createFile('Super.xtend', '''
 			class Super {
 				def dispatch foo(Double x) {}
+				def dispatch foo(Object x) {}
 			}
 		''')
 		createFile('Sub.java', '''
@@ -231,7 +237,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 			}
 		''')
 		checkDispatchOperations(superFile, 
-			'Super.foo(Double)', 'Super._foo(Double)',
+			'Super.foo(Object)', 'Super._foo(Double)', 'Super._foo(Object)',
 			'Sub._foo(Integer)', 
 			'SubSub._foo(String)', 'SubSub.foo(Object)')
 	}
@@ -241,6 +247,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		createFile('Super.xtend', '''
 			class Super {
 				def dispatch foo(Double x) {}
+				def dispatch foo(Object x) {}
 			}
 		''')
 		createFile('Sub.java', '''
@@ -254,7 +261,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 			}
 		''')
 		checkDispatchOperations(subsubFile, 
-			'Super.foo(Double)', 'Super._foo(Double)',
+			'Super.foo(Object)', 'Super._foo(Double)', 'Super._foo(Object)',
 			'Sub._foo(Integer)', 
 			'SubSub._foo(String)', 'SubSub.foo(Object)')
 	}
@@ -264,6 +271,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		val superFile = createFile('Super.xtend', '''
 			class Super {
 				def dispatch foo(Double x) {}
+				def dispatch foo(Object x) {}
 			}
 		''')
 		createFile('Sub0', '''
@@ -277,8 +285,8 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 			}
 		''')
 		checkDispatchOperations(superFile, 
-			'Super.foo(Double)', 'Super._foo(Double)',
-			'Sub0._foo(Integer)', 'Sub0.foo(Number)',
+			'Super.foo(Object)', 'Super._foo(Double)', 'Super._foo(Object)',
+			'Sub0._foo(Integer)', 'Sub0.foo(Object)',
 			'Sub1._foo(String)', 'Sub1.foo(Object)')
 	}
 
@@ -287,6 +295,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		createFile('Super.xtend', '''
 			class Super {
 				def dispatch foo(Double x) {}
+				def dispatch foo(Object x) {}
 			}
 		''')
 		val sub0File = createFile('Sub0', '''
@@ -300,8 +309,8 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 			}
 		''')
 		checkDispatchOperations(sub0File, 
-			'Super.foo(Double)', 'Super._foo(Double)',
-			'Sub0._foo(Integer)', 'Sub0.foo(Number)',
+			'Super.foo(Object)', 'Super._foo(Double)', 'Super._foo(Object)',
+			'Sub0._foo(Integer)', 'Sub0.foo(Object)',
 			'Sub1._foo(String)', 'Sub1.foo(Object)')
 	}
 
@@ -373,6 +382,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		createFile('Super.xtend', '''
 			class Super {
 				def dispatch foo(Double x) {}
+				def dispatch foo(Object x) {}
 			}
 		''')
 		createFile('Sub', '''
@@ -390,7 +400,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 			}
 		''')
 		checkDispatchOperations(subsub1File, 
-			'Super.foo(Double)', 'Super._foo(Double)',
+			'Super.foo(Object)', 'Super._foo(Double)', 'Super._foo(Object)',
 			'SubSub1._foo(String)', 'SubSub1.foo(Object)',
 			'SubSub0._foo(String)', 'SubSub0.foo(Object)')
 	}
@@ -400,6 +410,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		createFile('Super.xtend', '''
 			class Super {
 				def dispatch foo(Double x) {}
+				def dispatch foo(Object x) {}
 			}
 		''')
 		createFile('Sub.java', '''
@@ -417,7 +428,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 			}
 		''')
 		checkDispatchOperations(subsub1File, 
-			'Super.foo(Double)', 'Super._foo(Double)',
+			'Super.foo(Object)', 'Super._foo(Double)', 'Super._foo(Object)',
 			'SubSub1._foo(String)', 'SubSub1.foo(Object)',
 			'SubSub0._foo(String)', 'SubSub0.foo(Object)')
 	}

@@ -76,6 +76,9 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder.append("\t");
       _builder.append("def dispatch foo(Double x) {}");
       _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch foo(Object x) {}");
+      _builder.newLine();
       _builder.append("}");
       _builder.newLine();
       this.testHelper.createFile("Super", _builder.toString());
@@ -92,7 +95,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder_1.newLine();
       final IFile subFile = this.testHelper.createFile("Sub", _builder_1.toString());
       this.checkDispatchOperations(subFile, 
-        "Super.foo(Double)", "Super._foo(Double)", 
+        "Super.foo(Object)", "Super._foo(Double)", "Super._foo(Object)", 
         "Sub._foo(String)", "Sub._foo(Integer)", "Sub.foo(Object)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -107,6 +110,9 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("def dispatch foo(Double x) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch foo(Object x) {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -124,7 +130,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder_1.newLine();
       this.testHelper.createFile("Sub", _builder_1.toString());
       this.checkDispatchOperations(superFile, 
-        "Super.foo(Double)", "Super._foo(Double)", 
+        "Super.foo(Object)", "Super._foo(Double)", "Super._foo(Object)", 
         "Sub._foo(String)", "Sub._foo(Integer)", "Sub.foo(Object)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -262,6 +268,9 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder.append("\t");
       _builder.append("def dispatch foo(Double x) {}");
       _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch foo(Object x) {}");
+      _builder.newLine();
       _builder.append("}");
       _builder.newLine();
       this.testHelper.createFile("Super.xtend", _builder.toString());
@@ -284,8 +293,8 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       final IFile subSubFile = this.testHelper.createFile("SubSub", _builder_2.toString());
       this.checkDispatchOperations(subSubFile, 
-        "Super.foo(Double)", "Super._foo(Double)", 
-        "Sub._foo(Integer)", "Sub.foo(Number)", 
+        "Super.foo(Object)", "Super._foo(Double)", "Super._foo(Object)", 
+        "Sub._foo(Integer)", "Sub.foo(Object)", 
         "SubSub._foo(String)", "SubSub.foo(Object)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -300,6 +309,9 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("def dispatch foo(Double x) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch foo(Object x) {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -323,8 +335,8 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       this.testHelper.createFile("SubSub", _builder_2.toString());
       this.checkDispatchOperations(subFile, 
-        "Super.foo(Double)", "Super._foo(Double)", 
-        "Sub._foo(Integer)", "Sub.foo(Number)", 
+        "Super.foo(Object)", "Super._foo(Double)", "Super._foo(Object)", 
+        "Sub._foo(Integer)", "Sub.foo(Object)", 
         "SubSub._foo(String)", "SubSub.foo(Object)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -339,6 +351,9 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("def dispatch foo(Double x) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch foo(Object x) {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -362,8 +377,8 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       this.testHelper.createFile("SubSub", _builder_2.toString());
       this.checkDispatchOperations(superFile, 
-        "Super.foo(Double)", "Super._foo(Double)", 
-        "Sub._foo(Integer)", "Sub.foo(Number)", 
+        "Super.foo(Object)", "Super._foo(Double)", "Super._foo(Object)", 
+        "Sub._foo(Integer)", "Sub.foo(Object)", 
         "SubSub._foo(String)", "SubSub.foo(Object)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -378,6 +393,9 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("def dispatch foo(Double x) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch foo(Object x) {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -401,7 +419,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       this.testHelper.createFile("SubSub", _builder_2.toString());
       this.checkDispatchOperations(superFile, 
-        "Super.foo(Double)", "Super._foo(Double)", 
+        "Super.foo(Object)", "Super._foo(Double)", "Super._foo(Object)", 
         "Sub._foo(Integer)", 
         "SubSub._foo(String)", "SubSub.foo(Object)");
     } catch (Throwable _e) {
@@ -417,6 +435,9 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("def dispatch foo(Double x) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch foo(Object x) {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -440,7 +461,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       final IFile subsubFile = this.testHelper.createFile("SubSub", _builder_2.toString());
       this.checkDispatchOperations(subsubFile, 
-        "Super.foo(Double)", "Super._foo(Double)", 
+        "Super.foo(Object)", "Super._foo(Double)", "Super._foo(Object)", 
         "Sub._foo(Integer)", 
         "SubSub._foo(String)", "SubSub.foo(Object)");
     } catch (Throwable _e) {
@@ -456,6 +477,9 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("def dispatch foo(Double x) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch foo(Object x) {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -479,8 +503,8 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       this.testHelper.createFile("Sub1", _builder_2.toString());
       this.checkDispatchOperations(superFile, 
-        "Super.foo(Double)", "Super._foo(Double)", 
-        "Sub0._foo(Integer)", "Sub0.foo(Number)", 
+        "Super.foo(Object)", "Super._foo(Double)", "Super._foo(Object)", 
+        "Sub0._foo(Integer)", "Sub0.foo(Object)", 
         "Sub1._foo(String)", "Sub1.foo(Object)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -495,6 +519,9 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("def dispatch foo(Double x) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch foo(Object x) {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -518,8 +545,8 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       this.testHelper.createFile("Sub1", _builder_2.toString());
       this.checkDispatchOperations(sub0File, 
-        "Super.foo(Double)", "Super._foo(Double)", 
-        "Sub0._foo(Integer)", "Sub0.foo(Number)", 
+        "Super.foo(Object)", "Super._foo(Double)", "Super._foo(Object)", 
+        "Sub0._foo(Integer)", "Sub0.foo(Object)", 
         "Sub1._foo(String)", "Sub1.foo(Object)");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -642,6 +669,9 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder.append("\t");
       _builder.append("def dispatch foo(Double x) {}");
       _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch foo(Object x) {}");
+      _builder.newLine();
       _builder.append("}");
       _builder.newLine();
       this.testHelper.createFile("Super.xtend", _builder.toString());
@@ -670,7 +700,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder_3.newLine();
       final IFile subsub1File = this.testHelper.createFile("SubSub1", _builder_3.toString());
       this.checkDispatchOperations(subsub1File, 
-        "Super.foo(Double)", "Super._foo(Double)", 
+        "Super.foo(Object)", "Super._foo(Double)", "Super._foo(Object)", 
         "SubSub1._foo(String)", "SubSub1.foo(Object)", 
         "SubSub0._foo(String)", "SubSub0.foo(Object)");
     } catch (Throwable _e) {
@@ -686,6 +716,9 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("def dispatch foo(Double x) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def dispatch foo(Object x) {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -715,7 +748,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder_3.newLine();
       final IFile subsub1File = this.testHelper.createFile("SubSub1", _builder_3.toString());
       this.checkDispatchOperations(subsub1File, 
-        "Super.foo(Double)", "Super._foo(Double)", 
+        "Super.foo(Object)", "Super._foo(Double)", "Super._foo(Object)", 
         "SubSub1._foo(String)", "SubSub1.foo(Object)", 
         "SubSub0._foo(String)", "SubSub0.foo(Object)");
     } catch (Throwable _e) {

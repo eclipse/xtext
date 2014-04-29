@@ -604,7 +604,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 
 	@Test
 	public void testRenameXtendDispatchMethod_1() throws Exception {
-		String superModel = "class Super { def dispatch foo(Integer x) {} }";
+		String superModel = "class Super { def dispatch foo(Integer x) {} def dispatch foo(Object x) {} }";
 		IFile superClass = testHelper.createFile("Super.xtend", superModel);
 		String subModel = "class Sub extends Super { def dispatch foo(String x) {} }";
 		IFile subClass = testHelper.createFile("Sub.xtend", subModel);
@@ -623,7 +623,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 
 	@Test
 	public void testRenameXtendDispatchMethod_2() throws Exception {
-		String superModel = "class Super { def dispatch foo(Integer x) {} }";
+		String superModel = "class Super { def dispatch foo(Integer x) {} def dispatch foo(Object x) {} }";
 		IFile superClass = testHelper.createFile("Super.xtend", superModel);
 		String subModel = "class Sub extends Super { def dispatch foo(String x) {} }";
 		IFile subClass = testHelper.createFile("Sub.xtend", subModel);
