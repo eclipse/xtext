@@ -17,6 +17,7 @@
 <unit id="com.google.inject" version="0.0.0"/>
 <unit id="org.apache.log4j" version="0.0.0"/>
 <unit id="org.apache.ant" version="1.8.4.v201404171501"/>
+<unit id="org.apache.commons.lang" version="2.6.0.v201404270220"/>
 <unit id="org.aopalliance" version="0.0.0"/>
 <unit id="org.easymock" version="0.0.0"/>
 <unit id="org.antlr.runtime" version="0.0.0"/>
