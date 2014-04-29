@@ -164,6 +164,19 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean isAnonymous() {
+		return component.isAnonymous();
+	}
+	
+	@Override
+	public LightweightTypeReference getNamedType() {
+		if (isAnonymous()) {
+			return new ArrayTypeReference(getOwner(), component.getNamedType());
+		}
+		return super.getNamedType();
+	}
+	
+	@Override
 	public LightweightTypeReference getRawTypeReference() {
 		LightweightTypeReference rawComponent = component.getRawTypeReference();
 		if (rawComponent == component) {

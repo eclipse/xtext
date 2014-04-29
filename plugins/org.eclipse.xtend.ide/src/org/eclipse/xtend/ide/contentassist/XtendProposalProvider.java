@@ -15,6 +15,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -262,6 +263,13 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor, getConflictHelper());
 		super.completeType_Members(model, assignment, context, acceptor);
 	}
+	
+	@Override
+	public void completeXConstructorCall_Members(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (model instanceof AnonymousClass)
+			overrideAssist.createOverrideProposals((AnonymousClass) model, context, acceptor, getConflictHelper());
+	}
 
 	protected void addGuillemotsProposal(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(new ConfigurableCompletionProposal("\u00AB\u00BB", context.getOffset(), context
@@ -348,14 +356,12 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeXbaseConstructorCall_Constructor(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
-				getQualifiedNameValueConverter(), TypeMatchFilters.and(TypeMatchFilters.canInstantiate(), createVisibilityFilter(context)), acceptor);
+		completeXConstructorCall_Constructor(model, assignment, context, acceptor);
 	}
-	
+
 	@Override
-	public void completeAnonymousClassConstructorCall_Constructor(EObject model, Assignment assignment,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
-				getQualifiedNameValueConverter(), TypeMatchFilters.and(TypeMatchFilters.canInstantiate(), createVisibilityFilter(context)), acceptor);
+	public void completeXSwitchExpression_Default(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
 	}
 }

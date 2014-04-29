@@ -12,13 +12,12 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -31,7 +30,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer;
-import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -58,8 +56,8 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	
 	@Override
 	public void computeTypes(XExpression expression, ITypeComputationState state) {
-		if (expression instanceof AnonymousClassConstructorCall) {
-			_computeTypes((AnonymousClassConstructorCall) expression, state);
+		if (expression instanceof AnonymousClass) {
+			_computeTypes((AnonymousClass) expression, state);
 		} else if (expression instanceof RichString) {
 			_computeTypes((RichString)expression, state);
 		} else if (expression instanceof RichStringForLoop) {
@@ -73,20 +71,13 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		}
 	}
 	
-	protected void _computeTypes(AnonymousClassConstructorCall constructorCall, ITypeComputationState state) {
-		XtendClass xtendAnonymousClass = constructorCall.getAnonymousClass();
+	protected void _computeTypes(AnonymousClass anonymousClass, ITypeComputationState state) {
 		AbstractTypeComputationState typeComputationState = (AbstractTypeComputationState) state;
-		JvmGenericType inferredLocalClass = associations.getInferredType(xtendAnonymousClass);
+		JvmGenericType inferredLocalClass = associations.getInferredType(anonymousClass);
 		if(inferredLocalClass != null) {
 			typeResolver.resolveTypesForLocalClass(typeComputationState, inferredLocalClass);
-			if(inferredLocalClass.isAnonymous()) 
-				state.acceptActualType(state.getConverter().toLightweightReference(inferredLocalClass.getSuperTypes().get(0)));
-			else 
-				state.acceptActualType(state.getConverter().toRawLightweightReference(inferredLocalClass));
 		}
-		List<? extends IConstructorLinkingCandidate> linkingCandidates = typeComputationState.getLinkingCandidates(constructorCall);
-		IConstructorLinkingCandidate candidate = (IConstructorLinkingCandidate) getBestCandidate(linkingCandidates);
-		candidate.applyToComputationState();
+		state.computeTypes(anonymousClass.getConstructorCall());
 	}
 	
 	protected void _computeTypes(RichString object, ITypeComputationState state) {

@@ -18,18 +18,24 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	CheckedExceptionTest.class,
 	FeatureCallValidationTest.class,
+	FeatureCallValidationWithCustomSynonymsTest.class,
 	OverrideValidationTest.class,
 	RichStringValidationTest.class,
 	XtendValidationTest.class,
 	AnnotationValidationTest.class,
+	CompoundAssignmentOperatorValidationTest.class,
+	LambdaValidationTest.class,
 	ModifierValidationTest.class,
-	AmbiguityValidationSuite.class,
+	OperatorDeclarationTest.class,
+	PostfixOperatorValidationTest.class,
 	SuspiciousOverloadValidationTest.class,
 	ValidationBug371957Test.class,
 	ValidationBug409602Test.class,
 	ValidationBug419050Test.class,
 	ValidationBug427432Test.class,
-	ValidationBug432193Test.class
+	ValidationBug432193Test.class,
+	ValidationBug433213Test.class,
+	AmbiguityValidationSuite.class,
 })
 public class ValidationSuite {
 }

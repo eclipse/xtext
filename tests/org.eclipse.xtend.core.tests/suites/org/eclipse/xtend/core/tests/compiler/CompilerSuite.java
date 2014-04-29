@@ -21,6 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	AnnotationCompilerTest.class,
 	AnnotationsCompilerTest.class,
 	AnnotationValueCompilerTest.class,
+	AnonymousClassCompilerTest.class,
 	AutocastCompilerTest.class,
 	CompilerTest.class,
 	CompilerBugTest.class,

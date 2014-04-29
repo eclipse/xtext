@@ -22,8 +22,10 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.MemberFromSuperImplementor;
 import org.eclipse.xtend.ide.labeling.XtendImages;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -82,9 +84,9 @@ public class ImplementMemberFromSuperAssist {
 	private static Pattern bodyExpressionPattern = Pattern.compile("\\{\\s*(.*?)\\s*$\\s*\\}", Pattern.MULTILINE
 			| Pattern.DOTALL);
 
-	protected List<IResolvedExecutable> getImplementationCandidates(XtendClass clazz) {
-		final JvmGenericType inferredType = associations.getInferredType(clazz);
-		if (inferredType == null)
+	protected List<IResolvedExecutable> getImplementationCandidates(XtendTypeDeclaration clazz) {
+		final JvmDeclaredType inferredType = associations.getInferredType(clazz);
+		if (inferredType == null || !(inferredType instanceof JvmGenericType))
 			return Collections.emptyList();
 		ResolvedOperations operations = overrideHelper.getResolvedOperations(inferredType);
 		List<IResolvedExecutable> result = newArrayList();
@@ -147,7 +149,7 @@ public class ImplementMemberFromSuperAssist {
 		return visibilityHelper.isVisible(executable.getDeclaration());
 	}
 
-	public void createOverrideProposals(XtendClass model, ContentAssistContext context,
+	public void createOverrideProposals(XtendTypeDeclaration model, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor, IProposalConflictHelper conflictHelper) {
 		List<IResolvedExecutable> overrideables = getImplementationCandidates(model);
 		for (IResolvedExecutable overrideable : overrideables) {
@@ -157,7 +159,7 @@ public class ImplementMemberFromSuperAssist {
 		}
 	}
 
-	protected ICompletionProposal createOverrideMethodProposal(XtendClass model, IResolvedExecutable overrideable,
+	protected ICompletionProposal createOverrideMethodProposal(XtendTypeDeclaration model, IResolvedExecutable overrideable,
 			final ContentAssistContext context, IProposalConflictHelper conflictHelper) {
 		ReplacingAppendable appendable = appendableFactory.create(context.getDocument(), (XtextResource) model.eResource(), context.getReplaceRegion()
 				.getOffset(), context.getReplaceRegion().getLength(), new OptionalParameters() {{ 
@@ -169,9 +171,11 @@ public class ImplementMemberFromSuperAssist {
 		if (overrideable instanceof IResolvedOperation) {
 			implementor.appendOverrideFunction(model, (IResolvedOperation) overrideable, appendable);
 			simpleName = overrideable.getDeclaration().getSimpleName();
-		} else {
-			implementor.appendConstructorFromSuper(model, (IResolvedConstructor) overrideable, appendable);
+		} else if (model instanceof XtendClass) {
+			implementor.appendConstructorFromSuper((XtendClass) model, (IResolvedConstructor) overrideable, appendable);
 			simpleName = "new";
+		} else {
+			return null;
 		}
 		String code = appendable.getCode();
 		if (!isValidProposal(code.trim(), context, conflictHelper) && !isValidProposal(simpleName, context, conflictHelper))
@@ -218,7 +222,7 @@ public class ImplementMemberFromSuperAssist {
 		return true;
 	}
 
-	protected int getPriority(XtendClass model, JvmExecutable overridden, ContentAssistContext context) {
+	protected int getPriority(XtendTypeDeclaration model, JvmExecutable overridden, ContentAssistContext context) {
 		return (overridden instanceof JvmOperation && ((JvmOperation) overridden).isAbstract()) ? 400 : 350;
 	}
 

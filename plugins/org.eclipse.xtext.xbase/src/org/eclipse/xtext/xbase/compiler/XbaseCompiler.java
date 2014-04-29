@@ -967,7 +967,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void appendConstructedTypeName(XConstructorCall constructorCall, ITreeAppendable typeAppendable) {
-		typeAppendable.append(constructorCall.getConstructor().getDeclaringType());
+		JvmDeclaredType type = constructorCall.getConstructor().getDeclaringType();
+		if (type instanceof JvmGenericType && ((JvmGenericType) type).isAnonymous()) {
+			typeAppendable.append(type.getSuperTypes().get(0).getType());
+		} else {
+			typeAppendable.append(constructorCall.getConstructor().getDeclaringType());
+		}
 	}
 	
 	@Nullable
@@ -1697,7 +1702,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		if (expr instanceof XMemberFeatureCall && isVariableDeclarationRequired((XMemberFeatureCall) expr, b))
 			return true;
-		final EObject container = expr.eContainer();
+		EObject container = expr.eContainer();
 		if ((container instanceof XVariableDeclaration)
 			|| (container instanceof XReturnExpression) 
 			|| (container instanceof XThrowExpression)) {

@@ -1492,77 +1492,86 @@ public interface XtendPackage extends EPackage
 	int XTEND_FORMAL_PARAMETER_FEATURE_COUNT = TypesPackage.JVM_FORMAL_PARAMETER_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.AnonymousClassConstructorCallImpl <em>Anonymous Class Constructor Call</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.AnonymousClassImpl <em>Anonymous Class</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtend.core.xtend.impl.AnonymousClassConstructorCallImpl
-	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getAnonymousClassConstructorCall()
+	 * @see org.eclipse.xtend.core.xtend.impl.AnonymousClassImpl
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getAnonymousClass()
 	 * @generated
 	 */
-	int ANONYMOUS_CLASS_CONSTRUCTOR_CALL = 22;
+	int ANONYMOUS_CLASS = 22;
 
 	/**
-	 * The feature id for the '<em><b>Constructor</b></em>' reference.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANONYMOUS_CLASS_CONSTRUCTOR_CALL__CONSTRUCTOR = XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR;
+	int ANONYMOUS_CLASS__ANNOTATIONS = XbasePackage.XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotation Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANONYMOUS_CLASS_CONSTRUCTOR_CALL__ARGUMENTS = XbasePackage.XCONSTRUCTOR_CALL__ARGUMENTS;
+	int ANONYMOUS_CLASS__ANNOTATION_INFO = XbasePackage.XEXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Type Arguments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANONYMOUS_CLASS_CONSTRUCTOR_CALL__TYPE_ARGUMENTS = XbasePackage.XCONSTRUCTOR_CALL__TYPE_ARGUMENTS;
+	int ANONYMOUS_CLASS__MODIFIERS = XbasePackage.XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Invalid Feature Issue Code</b></em>' attribute.
+	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANONYMOUS_CLASS_CONSTRUCTOR_CALL__INVALID_FEATURE_ISSUE_CODE = XbasePackage.XCONSTRUCTOR_CALL__INVALID_FEATURE_ISSUE_CODE;
+	int ANONYMOUS_CLASS__DECLARING_TYPE = XbasePackage.XEXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Valid Feature</b></em>' attribute.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANONYMOUS_CLASS_CONSTRUCTOR_CALL__VALID_FEATURE = XbasePackage.XCONSTRUCTOR_CALL__VALID_FEATURE;
+	int ANONYMOUS_CLASS__NAME = XbasePackage.XEXPRESSION_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Anonymous Class</b></em>' containment reference.
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANONYMOUS_CLASS_CONSTRUCTOR_CALL__ANONYMOUS_CLASS = XbasePackage.XCONSTRUCTOR_CALL_FEATURE_COUNT + 0;
+	int ANONYMOUS_CLASS__MEMBERS = XbasePackage.XEXPRESSION_FEATURE_COUNT + 5;
 
 	/**
-	 * The number of structural features of the '<em>Anonymous Class Constructor Call</em>' class.
+	 * The feature id for the '<em><b>Constructor Call</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANONYMOUS_CLASS_CONSTRUCTOR_CALL_FEATURE_COUNT = XbasePackage.XCONSTRUCTOR_CALL_FEATURE_COUNT + 1;
+	int ANONYMOUS_CLASS__CONSTRUCTOR_CALL = XbasePackage.XEXPRESSION_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Anonymous Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANONYMOUS_CLASS_FEATURE_COUNT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 7;
 
 
 	/**
@@ -2248,25 +2257,25 @@ public interface XtendPackage extends EPackage
 	EReference getXtendExecutable_Parameters();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall <em>Anonymous Class Constructor Call</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.AnonymousClass <em>Anonymous Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Anonymous Class Constructor Call</em>'.
-	 * @see org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall
+	 * @return the meta object for class '<em>Anonymous Class</em>'.
+	 * @see org.eclipse.xtend.core.xtend.AnonymousClass
 	 * @generated
 	 */
-	EClass getAnonymousClassConstructorCall();
+	EClass getAnonymousClass();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall#getAnonymousClass <em>Anonymous Class</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.AnonymousClass#getConstructorCall <em>Constructor Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Anonymous Class</em>'.
-	 * @see org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall#getAnonymousClass()
-	 * @see #getAnonymousClassConstructorCall()
+	 * @return the meta object for the containment reference '<em>Constructor Call</em>'.
+	 * @see org.eclipse.xtend.core.xtend.AnonymousClass#getConstructorCall()
+	 * @see #getAnonymousClass()
 	 * @generated
 	 */
-	EReference getAnonymousClassConstructorCall_AnonymousClass();
+	EReference getAnonymousClass_ConstructorCall();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2848,22 +2857,22 @@ public interface XtendPackage extends EPackage
 		EReference XTEND_EXECUTABLE__PARAMETERS = eINSTANCE.getXtendExecutable_Parameters();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.AnonymousClassConstructorCallImpl <em>Anonymous Class Constructor Call</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.AnonymousClassImpl <em>Anonymous Class</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtend.core.xtend.impl.AnonymousClassConstructorCallImpl
-		 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getAnonymousClassConstructorCall()
+		 * @see org.eclipse.xtend.core.xtend.impl.AnonymousClassImpl
+		 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getAnonymousClass()
 		 * @generated
 		 */
-		EClass ANONYMOUS_CLASS_CONSTRUCTOR_CALL = eINSTANCE.getAnonymousClassConstructorCall();
+		EClass ANONYMOUS_CLASS = eINSTANCE.getAnonymousClass();
 
 		/**
-		 * The meta object literal for the '<em><b>Anonymous Class</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Constructor Call</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ANONYMOUS_CLASS_CONSTRUCTOR_CALL__ANONYMOUS_CLASS = eINSTANCE.getAnonymousClassConstructorCall_AnonymousClass();
+		EReference ANONYMOUS_CLASS__CONSTRUCTOR_CALL = eINSTANCE.getAnonymousClass_ConstructorCall();
 
 	}
 

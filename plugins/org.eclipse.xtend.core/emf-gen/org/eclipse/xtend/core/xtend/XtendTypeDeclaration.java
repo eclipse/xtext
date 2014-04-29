@@ -72,4 +72,20 @@ public interface XtendTypeDeclaration extends XtendMember
 	 */
 	EList<XtendMember> getMembers();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isAnonymous();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isLocal();
+
 } // XtendTypeDeclaration

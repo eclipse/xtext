@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
@@ -215,7 +215,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass anonymousClassConstructorCallEClass = null;
+	private EClass anonymousClassEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -930,9 +930,9 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAnonymousClassConstructorCall()
+	public EClass getAnonymousClass()
 	{
-		return anonymousClassConstructorCallEClass;
+		return anonymousClassEClass;
 	}
 
 	/**
@@ -940,9 +940,9 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAnonymousClassConstructorCall_AnonymousClass()
+	public EReference getAnonymousClass_ConstructorCall()
 	{
-		return (EReference)anonymousClassConstructorCallEClass.getEStructuralFeatures().get(0);
+		return (EReference)anonymousClassEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1061,8 +1061,8 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		createEReference(xtendExecutableEClass, XTEND_EXECUTABLE__EXPRESSION);
 		createEReference(xtendExecutableEClass, XTEND_EXECUTABLE__PARAMETERS);
 
-		anonymousClassConstructorCallEClass = createEClass(ANONYMOUS_CLASS_CONSTRUCTOR_CALL);
-		createEReference(anonymousClassConstructorCallEClass, ANONYMOUS_CLASS_CONSTRUCTOR_CALL__ANONYMOUS_CLASS);
+		anonymousClassEClass = createEClass(ANONYMOUS_CLASS);
+		createEReference(anonymousClassEClass, ANONYMOUS_CLASS__CONSTRUCTOR_CALL);
 	}
 
 	/**
@@ -1118,7 +1118,8 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		xtendVariableDeclarationEClass.getESuperTypes().add(theXbasePackage.getXVariableDeclaration());
 		xtendFormalParameterEClass.getESuperTypes().add(theTypesPackage.getJvmFormalParameter());
 		xtendExecutableEClass.getESuperTypes().add(this.getXtendMember());
-		anonymousClassConstructorCallEClass.getESuperTypes().add(theXbasePackage.getXConstructorCall());
+		anonymousClassEClass.getESuperTypes().add(theXbasePackage.getXExpression());
+		anonymousClassEClass.getESuperTypes().add(this.getXtendTypeDeclaration());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xtendFileEClass, XtendFile.class, "XtendFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1134,8 +1135,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		addEOperation(xtendClassEClass, ecorePackage.getEBoolean(), "isAbstract", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(xtendClassEClass, ecorePackage.getEBoolean(), "isStrictFloatingPoint", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(xtendClassEClass, ecorePackage.getEBoolean(), "isAnonymous", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(xtendAnnotationTargetEClass, XtendAnnotationTarget.class, "XtendAnnotationTarget", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXtendAnnotationTarget_Annotations(), theXAnnotationsPackage.getXAnnotation(), null, "annotations", null, 0, -1, XtendAnnotationTarget.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1216,6 +1215,10 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		initEAttribute(getXtendTypeDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendTypeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendTypeDeclaration_Members(), this.getXtendMember(), this.getXtendMember_DeclaringType(), "members", null, 0, -1, XtendTypeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(xtendTypeDeclarationEClass, ecorePackage.getEBoolean(), "isAnonymous", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(xtendTypeDeclarationEClass, ecorePackage.getEBoolean(), "isLocal", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(xtendAnnotationTypeEClass, XtendAnnotationType.class, "XtendAnnotationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(xtendInterfaceEClass, XtendInterface.class, "XtendInterface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1241,8 +1244,8 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		initEReference(getXtendExecutable_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, XtendExecutable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendExecutable_Parameters(), this.getXtendParameter(), null, "parameters", null, 0, -1, XtendExecutable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(anonymousClassConstructorCallEClass, AnonymousClassConstructorCall.class, "AnonymousClassConstructorCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAnonymousClassConstructorCall_AnonymousClass(), this.getXtendClass(), null, "anonymousClass", null, 0, 1, AnonymousClassConstructorCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(anonymousClassEClass, AnonymousClass.class, "AnonymousClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAnonymousClass_ConstructorCall(), theXbasePackage.getXConstructorCall(), null, "constructorCall", null, 0, 1, AnonymousClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

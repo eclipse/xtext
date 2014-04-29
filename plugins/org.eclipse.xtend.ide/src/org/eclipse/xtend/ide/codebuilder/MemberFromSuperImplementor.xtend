@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedExecutable
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 
 class MemberFromSuperImplementor {
 	
@@ -21,7 +22,7 @@ class MemberFromSuperImplementor {
 
 	@Inject extension TypesFactory typesFactory
 
-	def void appendOverrideFunction(XtendClass overrider, IResolvedOperation overriddenOperation, ISourceAppender appendable) {
+	def void appendOverrideFunction(XtendTypeDeclaration overrider, IResolvedOperation overriddenOperation, ISourceAppender appendable) {
 		val inferredType = associations.getInferredType(overrider)
 		val methodBuilder = codeBuilderFactory.createMethodBuilder(inferredType)
 		initializeExecutableBuilder(methodBuilder, inferredType, overriddenOperation)
