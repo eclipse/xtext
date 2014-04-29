@@ -210,6 +210,29 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
               this.indentationStack.remove(ws);
             }
           }
+          final Chunk lastWs = IterableExtensions.<Chunk>last(this.indentationStack);
+          int _xifexpression = (int) 0;
+          boolean _tripleEquals = (lastWs == null);
+          if (_tripleEquals) {
+            LineModel _model_3 = this.getModel();
+            int _rootIndentLenght = _model_3.getRootIndentLenght();
+            _xifexpression = (newContentStartColumn - _rootIndentLenght);
+          } else {
+            int _xifexpression_1 = (int) 0;
+            if ((lastWs instanceof SemanticWhitespace)) {
+              int _column_1 = ((SemanticWhitespace)lastWs).getColumn();
+              _xifexpression_1 = (newContentStartColumn - _column_1);
+            } else {
+              _xifexpression_1 = 0;
+            }
+            _xifexpression = _xifexpression_1;
+          }
+          final int length_1 = _xifexpression;
+          if ((length_1 > 0)) {
+            final String text_1 = this.document.substring((this.contentStartOffset - length_1), this.contentStartOffset);
+            SemanticWhitespace _semanticWhitespace_1 = new SemanticWhitespace(text_1, newContentStartColumn);
+            this.indentationStack.push(_semanticWhitespace_1);
+          }
         }
         if (this._outdentThisLine) {
           boolean _empty = this.indentationStack.empty();
@@ -223,8 +246,8 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
         if ((newContentStartColumn != 0)) {
           this.contentStartColumn = newContentStartColumn;
         }
-        LineModel _model_3 = this.getModel();
-        List<Line> _lines_2 = _model_3.getLines();
+        LineModel _model_4 = this.getModel();
+        List<Line> _lines_2 = _model_4.getLines();
         Line _last = IterableExtensions.<Line>last(_lines_2);
         List<Chunk> _chunks = _last.getChunks();
         Iterables.<Chunk>addAll(_chunks, this.indentationStack);
@@ -238,8 +261,8 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     this.contentStartOffset = (-1);
     this.content = false;
     if (startNewLine) {
-      LineModel _model_4 = this.getModel();
-      List<Line> _lines_3 = _model_4.getLines();
+      LineModel _model_5 = this.getModel();
+      List<Line> _lines_3 = _model_5.getLines();
       Line _line = new Line(this.offset, semantic, charCount);
       _lines_3.add(_line);
     }

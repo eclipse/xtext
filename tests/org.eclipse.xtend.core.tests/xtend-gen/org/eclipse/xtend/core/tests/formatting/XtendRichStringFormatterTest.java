@@ -435,7 +435,6 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     this.assertFormattedRichStringExpressionWithErrors(_builder);
   }
   
-  @Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=402728")
   @Test
   public void testIrregularIndentation() {
     StringConcatenation _builder = new StringConcatenation();
@@ -452,6 +451,86 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("\t    ");
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    this.assertFormattedRichStringExpression(_builder);
+  }
+  
+  @Test
+  public void testIrregularIndentation2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("aaaaaaaaaaaaaa: <<bar>>");
+    _builder.newLine();
+    _builder.append("\t        ");
+    _builder.append("aaaaaa: <<bar>>");
+    _builder.newLine();
+    _builder.append("\t          ");
+    _builder.append("aaaa: <<bar>>");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("aaaaaaaaaaaaa: <<bar>>");
+    _builder.newLine();
+    _builder.append("\t        ");
+    _builder.append("aaaaaa: <<bar>>");
+    _builder.newLine();
+    _builder.append("\t           ");
+    _builder.append("aaa: <<bar>>");
+    _builder.newLine();
+    _builder.append("\t       ");
+    _builder.append("aaaaaaa: <<bar>>");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("aaaaaaaaaaaaa: <<bar>>");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    this.assertFormattedRichStringExpression(_builder);
+  }
+  
+  @Test
+  public void smokeTest() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<html>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<body>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<<FOR p : paragraphs BEFORE \'<div>\' SEPARATOR \'</div><div>\' AFTER \'</div>\'>>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("<<IF p.headLine != null>>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("<h1><<p.headline>></h1>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("<<ENDIF>>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("<p>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("<<p.text>>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("</p>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<<ENDFOR>>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("</body>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</html>");
     _builder.newLine();
     _builder.append("```");
     _builder.newLine();

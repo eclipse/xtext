@@ -227,15 +227,31 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 						indentationStack.push(new SemanticWhitespace(text, newContentStartColumn))
 					}
 				}
-				if(newContentStartColumn < contentStartColumn)
-					for(ws:indentationStack.filter(SemanticWhitespace).toList)
+				if(newContentStartColumn < contentStartColumn) {
+					for(ws:indentationStack.filter(SemanticWhitespace).toList) {
 						if(ws.column > newContentStartColumn)
 							indentationStack.remove(ws)
+					}
+					val lastWs = indentationStack.last
+					val length = 
+						if (lastWs === null)
+							newContentStartColumn - model.rootIndentLenght
+						else if (lastWs instanceof SemanticWhitespace)  
+							newContentStartColumn - lastWs.column
+						else 
+							0
+					if (length > 0) {
+						val text = document.substring(contentStartOffset - length, contentStartOffset)
+						indentationStack.push(new SemanticWhitespace(text, newContentStartColumn))
+					}
+				}
+				
 				if(_outdentThisLine) {
 					if(!indentationStack.empty())
 						indentationStack.pop()
 					_outdentThisLine = false
 				}
+				
 				lastLine.indentLength = newContentStartColumn
 				// newContentStartColumn is 0 when the line before had a SN and no content -> This shouldn't have impact to a greyspace and should not lead to a increment for the following lines.
 				// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=398718
