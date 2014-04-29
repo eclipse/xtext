@@ -140,14 +140,14 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
+<!-- temporary disabled due to bogus bundle versions from orbit
    <plugin
          id="org.apache.commons.lang.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
+-->
    <plugin
          id="org.eclipse.xtend.standalone"
          download-size="0"
