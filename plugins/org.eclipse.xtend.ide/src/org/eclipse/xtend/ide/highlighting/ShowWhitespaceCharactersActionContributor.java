@@ -25,16 +25,17 @@ public class ShowWhitespaceCharactersActionContributor implements IActionContrib
 
 	@Inject
 	private IImageDescriptorHelper imageHelper;
-
 	public void contributeActions(XtextEditor editor) {
+		
+		IToolBarManager toolBarManager = editor.getEditorSite().getActionBars().getToolBarManager();
 		IAction action = editor.getAction(ITextEditorActionConstants.SHOW_WHITESPACE_CHARACTERS);
 		action.setImageDescriptor(imageHelper
 				.getImageDescriptor("full/etool16/show_whitespace_chars.gif"));
 		action.setDisabledImageDescriptor(imageHelper
 				.getImageDescriptor("full/dtool16/show_whitespace_chars.gif"));
-		IToolBarManager toolBarManager = editor.getEditorSite().getActionBars().getToolBarManager();
-		toolBarManager.remove(ITextEditorActionConstants.SHOW_WHITESPACE_CHARACTERS);
-		toolBarManager.add(action);
+		if(toolBarManager.find(action.getId())==null) {
+			toolBarManager.add(action);				
+		}
 	}
 	
 	public void editorDisposed(XtextEditor editor) {
