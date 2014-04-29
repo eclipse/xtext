@@ -16,6 +16,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalPriorities;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription;
+import org.eclipse.xtext.xbase.scoping.batch.StaticFeatureDescriptionWithTypeLiteralReceiver;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseProposalProvider;
 
 /**
@@ -48,6 +49,12 @@ public class XbaseContentProposalPriorities extends ContentProposalPriorities {
               this.adjustPriority(proposal, prefix, 570);
               return;
             }
+          }
+        }
+        if (!_matched_1) {
+          if (desc instanceof StaticFeatureDescriptionWithTypeLiteralReceiver) {
+            _matched_1=true;
+            this.adjustPriority(proposal, prefix, 560);
           }
         }
         if (!_matched_1) {

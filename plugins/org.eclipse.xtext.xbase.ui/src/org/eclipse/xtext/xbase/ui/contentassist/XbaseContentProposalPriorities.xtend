@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription
 import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription
+import org.eclipse.xtext.xbase.scoping.batch.StaticFeatureDescriptionWithTypeLiteralReceiver
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -27,6 +28,9 @@ class XbaseContentProposalPriorities extends ContentProposalPriorities {
 					SimpleIdentifiableElementDescription case proposal.replacementString != 'this' && proposal.replacementString != 'super': {
 						adjustPriority(proposal, prefix, 570)
 						return;
+					}
+					StaticFeatureDescriptionWithTypeLiteralReceiver: {
+						adjustPriority(proposal,prefix,560)
 					}
 					IIdentifiableElementDescription : {
 						switch feature : desc.elementOrProxy {
