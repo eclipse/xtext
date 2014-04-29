@@ -251,6 +251,11 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		}
 		throw new IllegalStateException("Cannot find primitive type: " + primitive);
 	}
+	
+	@Override
+	public boolean isAnonymous() {
+		return type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) type).isAnonymous();
+	}
 
 	@Override
 	public boolean isPrimitive() {

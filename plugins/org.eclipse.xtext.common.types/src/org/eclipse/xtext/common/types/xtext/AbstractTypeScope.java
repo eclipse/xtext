@@ -56,7 +56,6 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	
 	public IEObjectDescription getSingleElement(QualifiedName name, boolean binary) {
 		try {
-//			System.out.println(name);
 			JvmType type = typeProvider.findTypeByName(qualifiedNameConverter.toString(name), binary);
 			if (type == null)
 				return null;

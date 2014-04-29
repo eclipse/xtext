@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.serializer;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -93,8 +94,32 @@ public class SerializerScopeProvider extends XbaseBatchScopeProvider implements 
 		if (constructor.eIsProxy()) {
 			return IScope.NULLSCOPE;
 		}
+		return doCreateConstructorCallSerializationScope(constructorCall);
+	}
+
+	protected IScope doCreateConstructorCallSerializationScope(XConstructorCall context) {
 		IScope typeScope = getScope(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		ConstructorTypeScopeWrapper result = new ConstructorTypeScopeWrapper(context, IVisibilityHelper.ALL, typeScope);
+		return result;
+	}
+	
+	protected IScope createAnonymousClassConstructorScope(EObject context, final JvmType superType) {
+		final IScope typeScope = getScope(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+		ConstructorTypeScopeWrapper result = new ConstructorTypeScopeWrapper(context, IVisibilityHelper.ALL, typeScope) {
+			@Override
+			public Iterable<IEObjectDescription> getElements(EObject object) {
+				if (!(object instanceof JvmConstructor)) {
+					return Collections.emptyList();
+				}
+				JvmConstructor constructor = (JvmConstructor) object;
+				Iterable<IEObjectDescription> typeDescriptions = typeScope.getElements(superType);
+				List<IEObjectDescription> result = Lists.newArrayListWithCapacity(3);
+				for(IEObjectDescription typeDescription: typeDescriptions) {
+					result.add(EObjectDescription.create(typeDescription.getName(), constructor));
+				}
+				return result;
+			}
+		};
 		return result;
 	}
 
