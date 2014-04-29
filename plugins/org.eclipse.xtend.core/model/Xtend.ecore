@@ -11,7 +11,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="XtendClass" eSuperTypes="#//XtendTypeDeclaration">
     <eOperations name="isAbstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="isStrictFloatingPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="isAnonymous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="implements" upperBound="-1"
@@ -102,6 +101,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XtendConstructor" eSuperTypes="#//XtendExecutable"/>
   <eClassifiers xsi:type="ecore:EClass" name="XtendTypeDeclaration" eSuperTypes="#//XtendMember">
+    <eOperations name="isAnonymous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isLocal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
         eType="#//XtendMember" containment="true" eOpposite="#//XtendMember/declaringType"/>
@@ -138,8 +139,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//XtendParameter" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AnonymousClassConstructorCall" eSuperTypes="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XConstructorCall">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="anonymousClass" eType="#//XtendClass"
+  <eClassifiers xsi:type="ecore:EClass" name="AnonymousClass" eSuperTypes="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression #//XtendTypeDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constructorCall" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XConstructorCall"
         containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
