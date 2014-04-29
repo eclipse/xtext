@@ -271,6 +271,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertNotNull(type);
 		assertTrue(type instanceof JvmGenericType);
 		assertEquals(typeName, type.getIdentifier());
+		assertTrue(((JvmDeclaredType) type).isAbstract());
 		diagnose(type);
 		Resource resource = type.eResource();
 		getAndResolveAllFragments(resource);
@@ -1886,6 +1887,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
 		assertTrue(type instanceof JvmAnnotationType);
+		assertTrue(((JvmDeclaredType) type).isAbstract());
 		diagnose(type);
 		Resource resource = type.eResource();
 		getAndResolveAllFragments(resource);

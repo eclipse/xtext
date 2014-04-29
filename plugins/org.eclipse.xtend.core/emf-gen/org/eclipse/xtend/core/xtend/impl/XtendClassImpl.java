@@ -43,7 +43,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *
  * @generated
  */
-public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendClass
+public class XtendClassImpl extends XtendTypeDeclarationImplCustom implements XtendClass
 {
 	/**
 	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' containment reference.
@@ -190,18 +190,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 	 * @generated
 	 */
 	public boolean isStrictFloatingPoint()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isAnonymous()
 	{
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT

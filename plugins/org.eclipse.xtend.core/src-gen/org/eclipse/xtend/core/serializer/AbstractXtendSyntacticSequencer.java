@@ -19,7 +19,6 @@ public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticS
 
 	protected XtendGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_AnnotationField_SemicolonKeyword_4_q;
-	protected AbstractElementAlias match_AnonymousClassConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q;
 	protected AbstractElementAlias match_File_SemicolonKeyword_0_2_q;
 	protected AbstractElementAlias match_Member_SemicolonKeyword_2_0_4_q;
 	protected AbstractElementAlias match_Member_SemicolonKeyword_2_1_9_2_q;
@@ -38,7 +37,6 @@ public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticS
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (XtendGrammarAccess) access;
 		match_AnnotationField_SemicolonKeyword_4_q = new TokenAlias(false, true, grammarAccess.getAnnotationFieldAccess().getSemicolonKeyword_4());
-		match_AnonymousClassConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getAnonymousClassConstructorCallAccess().getLeftParenthesisKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getAnonymousClassConstructorCallAccess().getRightParenthesisKeyword_4_2()));
 		match_File_SemicolonKeyword_0_2_q = new TokenAlias(false, true, grammarAccess.getFileAccess().getSemicolonKeyword_0_2());
 		match_Member_SemicolonKeyword_2_0_4_q = new TokenAlias(false, true, grammarAccess.getMemberAccess().getSemicolonKeyword_2_0_4());
 		match_Member_SemicolonKeyword_2_1_9_2_q = new TokenAlias(false, true, grammarAccess.getMemberAccess().getSemicolonKeyword_2_1_9_2());
@@ -93,8 +91,6 @@ public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticS
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
 			if(match_AnnotationField_SemicolonKeyword_4_q.equals(syntax))
 				emit_AnnotationField_SemicolonKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_AnonymousClassConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q.equals(syntax))
-				emit_AnonymousClassConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_File_SemicolonKeyword_0_2_q.equals(syntax))
 				emit_File_SemicolonKeyword_0_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Member_SemicolonKeyword_2_0_4_q.equals(syntax))
@@ -130,14 +126,6 @@ public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticS
 	 *     ';'?
 	 */
 	protected void emit_AnnotationField_SemicolonKeyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Syntax:
-	 *     ('(' ')')?
-	 */
-	protected void emit_AnonymousClassConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

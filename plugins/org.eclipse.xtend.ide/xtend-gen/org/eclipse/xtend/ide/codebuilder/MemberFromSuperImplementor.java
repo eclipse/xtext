@@ -7,6 +7,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractExecutableBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
@@ -55,8 +56,8 @@ public class MemberFromSuperImplementor {
   @Extension
   private TypesFactory typesFactory;
   
-  public void appendOverrideFunction(final XtendClass overrider, final IResolvedOperation overriddenOperation, final ISourceAppender appendable) {
-    final JvmGenericType inferredType = this.associations.getInferredType(overrider);
+  public void appendOverrideFunction(final XtendTypeDeclaration overrider, final IResolvedOperation overriddenOperation, final ISourceAppender appendable) {
+    final JvmDeclaredType inferredType = this.associations.getInferredType(overrider);
     final AbstractMethodBuilder methodBuilder = this.codeBuilderFactory.createMethodBuilder(inferredType);
     this.initializeExecutableBuilder(methodBuilder, inferredType, overriddenOperation);
     methodBuilder.setOverrideFlag(true);

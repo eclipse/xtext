@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -47,6 +48,8 @@ import com.google.inject.Singleton;
 public interface IXtendJvmAssociations extends IJvmModelAssociations {
 
 	JvmDeclaredType getInferredType(XtendTypeDeclaration xtendClass);
+	
+	JvmGenericType getInferredType(AnonymousClass anonymousClass);
 	
 	JvmGenericType getInferredType(XtendClass xtendClass);
 
@@ -85,6 +88,11 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 
 		public JvmDeclaredType getInferredType(XtendTypeDeclaration xtendType) {
 			final JvmDeclaredType firstOrNull = getFirstOrNull(getJvmElements(xtendType), JvmDeclaredType.class);
+			return firstOrNull;
+		}
+		
+		public JvmGenericType getInferredType(AnonymousClass anonymousClass) {
+			final JvmGenericType firstOrNull = getFirstOrNull(getJvmElements(anonymousClass), JvmGenericType.class);
 			return firstOrNull;
 		}
 		
@@ -214,7 +222,7 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 						if (member.getAnnotationInfo() != object) {
 							return null;
 						}
-					} else {
+					} else if (!(object instanceof AnonymousClass)) {
 						return null;
 					}
 				}

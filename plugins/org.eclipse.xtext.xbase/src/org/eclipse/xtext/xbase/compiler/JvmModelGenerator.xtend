@@ -303,10 +303,12 @@ class JvmModelGenerator implements IGenerator {
 	
 	def dispatch generateModifier(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.append(visibility.javaName)
-		if (isAbstract)
-			appendable.append("abstract ")
-		if (isStatic)
-			appendable.append("static ")
+		if (!interface) {
+			if (isAbstract)
+				appendable.append("abstract ")
+			if (isStatic)
+				appendable.append("static ")
+		}
 		if (isFinal)
 			appendable.append("final ")
 		if (isStrictFloatingPoint)

@@ -554,13 +554,17 @@ public class JvmModelGenerator implements IGenerator {
       JvmVisibility _visibility = it.getVisibility();
       String _javaName = this.javaName(_visibility);
       appendable.append(_javaName);
-      boolean _isAbstract = it.isAbstract();
-      if (_isAbstract) {
-        appendable.append("abstract ");
-      }
-      boolean _isStatic = it.isStatic();
-      if (_isStatic) {
-        appendable.append("static ");
+      boolean _isInterface = it.isInterface();
+      boolean _not = (!_isInterface);
+      if (_not) {
+        boolean _isAbstract = it.isAbstract();
+        if (_isAbstract) {
+          appendable.append("abstract ");
+        }
+        boolean _isStatic = it.isStatic();
+        if (_isStatic) {
+          appendable.append("static ");
+        }
       }
       boolean _isFinal = it.isFinal();
       if (_isFinal) {

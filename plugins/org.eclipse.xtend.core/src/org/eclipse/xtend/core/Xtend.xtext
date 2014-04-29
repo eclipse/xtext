@@ -200,7 +200,7 @@ XVariableDeclaration returns xbase::XExpression:
 	(=>(type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ('=' right=XExpression)?;
 
 XConstructorCall returns xbase::XExpression:
-	XbaseConstructorCall =>({AnonymousClass.constructorCall=current} '{') members+=Member* '}'
+	XbaseConstructorCall (=>({AnonymousClass.constructorCall=current} '{') members+=Member* '}')?
 ;
 
 XbaseConstructorCall returns xbase::XConstructorCall:
@@ -224,6 +224,19 @@ FullJvmFormalParameter returns XtendFormalParameter:
 
 XStringLiteral returns xbase::XExpression:
 	SimpleStringLiteral | RichString
+;
+
+XSwitchExpression returns xbase::XExpression:
+	{xbase::XSwitchExpression}
+	'switch' (=>('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
+		| =>(declaredParam=JvmFormalParameter ':')? switch=XExpressionOrSimpleConstructorCall) '{'
+	(cases+=XCasePart)*
+	('default' ':' default=XExpression )?
+	'}'
+;
+
+XExpressionOrSimpleConstructorCall returns xbase::XExpression:
+	->XbaseConstructorCall | XExpression
 ;
 
 SimpleStringLiteral returns xbase::XExpression:

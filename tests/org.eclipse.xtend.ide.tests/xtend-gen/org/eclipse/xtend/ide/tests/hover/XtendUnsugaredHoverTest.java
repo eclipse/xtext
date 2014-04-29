@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -12,6 +13,7 @@ import org.eclipse.xtend.ide.hover.XtendHoverSerializer;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -95,6 +97,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     String _string_1 = _builder_1.toString();
     this.testHelper.createFile("testpackage/ExtensionJava.java", _string_1);
+    IResourcesSetupUtil.waitForAutoBuild();
   }
   
   @After
@@ -1017,6 +1020,14 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     final XExpression call3 = _expressions_2.get(2);
     EList<XExpression> _expressions_3 = block.getExpressions();
     final XExpression call4 = _expressions_3.get(3);
+    EList<XtendTypeDeclaration> _xtendTypes_1 = xtendFile.getXtendTypes();
+    final XtendTypeDeclaration foo = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes_1);
+    EList<XtendMember> _members_1 = foo.getMembers();
+    XtendMember _get_1 = _members_1.get(1);
+    final XtendField extensionField = ((XtendField) _get_1);
+    final JvmTypeReference extensionFieldType = extensionField.getType();
+    String _identifier = extensionFieldType.getIdentifier();
+    Assert.assertEquals("testpackage.Extension", _identifier);
     String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);
     Assert.assertEquals("it.fieldInBar", _computeUnsugaredExpression);
     String _computeUnsugaredExpression_1 = this.serializer.computeUnsugaredExpression(call2);

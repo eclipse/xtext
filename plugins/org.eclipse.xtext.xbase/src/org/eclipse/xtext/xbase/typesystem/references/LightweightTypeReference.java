@@ -298,6 +298,20 @@ public abstract class LightweightTypeReference {
 		return false;
 	}
 	
+	public boolean isAnonymous() {
+		return false;
+	}
+	
+	/**
+	 * Returns the named type if this is an anonymous type.
+	 */
+	public LightweightTypeReference getNamedType() {
+		if (isAnonymous()) {
+			return getSuperTypes().get(0);
+		}
+		return this;
+	}
+	
 	public boolean isUnknown() {
 		return false;
 	}

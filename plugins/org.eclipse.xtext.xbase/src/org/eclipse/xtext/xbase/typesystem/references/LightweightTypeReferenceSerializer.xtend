@@ -32,19 +32,23 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 			appender.append('(')
 			appendCommaSeparated(reference.parameterTypes)
 			appender.append(')=>')
-			if(reference.returnType == null) 
+			if(reference.returnType == null)
 				appender.append('void')
 			else
-				reference.returnType.accept(this)			
+				reference.returnType.accept(this)
 		}
 	}
 
 	override protected doVisitParameterizedTypeReference(@NonNull ParameterizedTypeReference reference) {
-		appender.append(reference.type)
-		if(!reference.typeArguments.empty) {
-			appender.append('<')
-			appendCommaSeparated(reference.typeArguments)			
-			appender.append('>')			
+		if (reference.anonymous) {
+			reference.namedType.accept(this)
+		} else {
+			appender.append(reference.type)
+			if(!reference.typeArguments.empty) {
+				appender.append('<')
+				appendCommaSeparated(reference.typeArguments)
+				appender.append('>')
+			}
 		}
 	}
 	
@@ -60,7 +64,7 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 		appender.append('?')
 		if(reference.lowerBound != null) {
 			appender.append(" super ")
-			reference.lowerBound.accept(this)			
+			reference.lowerBound.accept(this)
 		} else {
 			val relevantUpperBounds = reference.upperBounds.filter["java.lang.Object" != identifier]
 			if (!relevantUpperBounds.empty) {
@@ -70,7 +74,7 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 					if(!isFirst)
 						appender.append(" & ")
 					isFirst = false
-					upperBound.accept(this)						
+					upperBound.accept(this)
 				}
 			}
 		}
@@ -82,7 +86,7 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 			if(!isFirst)
 				appender.append(", ")
 			isFirst = false
-			reference.accept(this)						
+			reference.accept(this)
 		}
 	}
 }

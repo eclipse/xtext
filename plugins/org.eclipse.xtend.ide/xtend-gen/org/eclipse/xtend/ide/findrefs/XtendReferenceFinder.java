@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -33,6 +33,7 @@ import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -199,19 +200,20 @@ public class XtendReferenceFinder extends DefaultReferenceFinder implements IRef
       }
     }
     if (!_matched_1) {
-      if (sourceCandidate instanceof AnonymousClassConstructorCall) {
+      if (sourceCandidate instanceof AnonymousClass) {
         _matched_1=true;
-        this.addReferencesToSuper(((AnonymousClassConstructorCall)sourceCandidate), targetURISet, acceptor, currentExportedContainerURI);
+        this.addReferencesToSuper(((AnonymousClass)sourceCandidate), targetURISet, acceptor, currentExportedContainerURI);
       }
     }
   }
   
-  protected void addReferencesToSuper(final AnonymousClassConstructorCall constructorCall, final Set<URI> targetURISet, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI) {
-    final JvmGenericType superType = this._anonymousClassUtil.getSuperType(constructorCall);
+  protected void addReferencesToSuper(final AnonymousClass anonymousClass, final Set<URI> targetURISet, final IAcceptor<IReferenceDescription> acceptor, final URI currentExportedContainerURI) {
+    final XConstructorCall constructorCall = anonymousClass.getConstructorCall();
+    final JvmGenericType superType = this._anonymousClassUtil.getSuperType(anonymousClass);
     if (superType!=null) {
       this.addReferenceIfTarget(superType, targetURISet, constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, acceptor, currentExportedContainerURI);
     }
-    final JvmConstructor superConstructor = this._anonymousClassUtil.getSuperTypeConstructor(constructorCall);
+    final JvmConstructor superConstructor = this._anonymousClassUtil.getSuperTypeConstructor(anonymousClass);
     if (superConstructor!=null) {
       this.addReferenceIfTarget(superConstructor, targetURISet, constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, acceptor, currentExportedContainerURI);
     }

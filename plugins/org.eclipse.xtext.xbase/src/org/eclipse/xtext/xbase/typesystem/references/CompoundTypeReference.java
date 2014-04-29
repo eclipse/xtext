@@ -134,6 +134,15 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean isAnonymous() {
+		for(LightweightTypeReference component: expose(components)) {
+			if (component.isAnonymous())
+				return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public boolean isWrapper() {
 		for(LightweightTypeReference component: expose(components)) {
 			if (component.isWrapper())

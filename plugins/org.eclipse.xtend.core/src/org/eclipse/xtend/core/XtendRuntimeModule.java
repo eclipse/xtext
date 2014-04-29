@@ -32,12 +32,12 @@ import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.resource.XtendLocationInFileProvider;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionManager;
 import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy;
+import org.eclipse.xtend.core.scoping.AnonymousClassConstructorScopes;
 import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
 import org.eclipse.xtend.core.serializer.XtendSerializerScopeProvider;
 import org.eclipse.xtend.core.tasks.XtendTaskTagProvider;
 import org.eclipse.xtend.core.typesystem.TypeDeclarationAwareBatchTypeResolver;
 import org.eclipse.xtend.core.typesystem.XtendReentrantTypeResolver;
-import org.eclipse.xtend.core.typesystem.XtendScopeProviderAccess;
 import org.eclipse.xtend.core.typesystem.XtendTypeComputer;
 import org.eclipse.xtend.core.typing.XtendExpressionHelper;
 import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes;
@@ -88,10 +88,10 @@ import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.imports.TypeUsageCollector;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
+import org.eclipse.xtext.xbase.scoping.batch.ConstructorScopes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.ScopeProviderAccess;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.validation.EarlyExitValidator;
 
@@ -128,6 +128,10 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
 			.annotatedWith(org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding.class)
 			.to(XtendSerializerScopeProvider.class);
+	}
+	
+	public Class<? extends ConstructorScopes> bindConstructorScopes() {
+		return AnonymousClassConstructorScopes.class;
 	}
 
 	@Override
@@ -198,10 +202,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		return XtendReentrantTypeResolver.class;
 	}
 	
-	public Class<? extends ScopeProviderAccess> bindScoperProviderAccess() {
-		return XtendScopeProviderAccess.class;
-	}
-
 	public Class<? extends XbaseCompiler> bindXbaseCompiler() {
 		return XtendCompiler.class;
 	}

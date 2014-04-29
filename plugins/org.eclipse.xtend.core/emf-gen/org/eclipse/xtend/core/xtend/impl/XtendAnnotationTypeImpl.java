@@ -21,7 +21,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
  *
  * @generated
  */
-public class XtendAnnotationTypeImpl extends XtendTypeDeclarationImpl implements XtendAnnotationType
+public class XtendAnnotationTypeImpl extends XtendTypeDeclarationImplCustom implements XtendAnnotationType
 {
 	/**
 	 * <!-- begin-user-doc -->

@@ -43,6 +43,15 @@ class JvmModelTests extends AbstractXtendTestCase {
 	}
 
 	@Test
+	def testInterfaceAbstract() {
+		val inferred = '''
+			interface Foo {
+			}
+		'''.toString.interfaze.inferredType
+		assertTrue(inferred.abstract)
+	}
+	
+	@Test
 	def testAnnotationImplicitSuperType() {
 		val inferred = '''
 			annotation Foo {
@@ -50,6 +59,15 @@ class JvmModelTests extends AbstractXtendTestCase {
 		'''.toString.annotationType.inferredAnnotationType
 		assertEquals(1, inferred.superTypes.size)
 		assertEquals('java.lang.annotation.Annotation', inferred.superTypes.head.identifier)
+	}
+	
+	@Test
+	def testAnnotationAbstract() {
+		val inferred = '''
+			annotation Foo {
+			}
+		'''.toString.annotationType.inferredAnnotationType
+		assertTrue(inferred.abstract)
 	}
 	
 	@Test

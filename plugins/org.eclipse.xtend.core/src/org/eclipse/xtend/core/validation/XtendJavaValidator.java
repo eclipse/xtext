@@ -35,7 +35,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
@@ -467,17 +467,18 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
-	public void checkSuperTypes(AnonymousClassConstructorCall constructorCall) {
-		JvmGenericType inferredType = associations.getInferredType(constructorCall.getAnonymousClass());
+	public void checkSuperTypes(AnonymousClass anonymousClass) {
+		JvmGenericType inferredType = associations.getInferredType(anonymousClass);
 		if (inferredType != null && !inferredType.getSuperTypes().isEmpty()) {
 			JvmTypeReference superTypeRef = inferredType.getSuperTypes().get(0);
 			JvmType superType = superTypeRef.getType();
 			if(superType instanceof JvmGenericType && ((JvmGenericType) superType).isFinal())
-				error("Attempt to override final class", XCONSTRUCTOR_CALL__CONSTRUCTOR, INSIGNIFICANT_INDEX, OVERRIDDEN_FINAL);
+				error("Attempt to override final class", anonymousClass.getConstructorCall(), XCONSTRUCTOR_CALL__CONSTRUCTOR, INSIGNIFICANT_INDEX, OVERRIDDEN_FINAL);
 			if(isInvalidWildcard(superTypeRef)) 
 				error("Anonymous class cannot extend or implement "
 						+ superTypeRef.getIdentifier() 
-						+ ". A supertype may not specify any wildcard", 
+						+ ". A supertype may not specify any wildcard",
+						anonymousClass.getConstructorCall(), 
 						XCONSTRUCTOR_CALL__CONSTRUCTOR, INSIGNIFICANT_INDEX, WILDCARD_IN_SUPERTYPE);
 		}
 	}
@@ -656,14 +657,21 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}
 			}
 		}
-		if(xtendType instanceof XtendClass && operationsMissingImplementation != null && !operationsMissingImplementation.isEmpty()) {
-			reportMissingImplementations((XtendClass) xtendType, operationsMissingImplementation);
+		if (operationsMissingImplementation != null && !operationsMissingImplementation.isEmpty()) {
+			reportMissingImplementations(xtendType, inferredType, operationsMissingImplementation);
 		}
 	}
-
-	protected void reportMissingImplementations(XtendClass xtendClass, List<IResolvedOperation> operationsMissingImplementation) {
+	
+	protected void reportMissingImplementations(XtendTypeDeclaration xtendClass, JvmGenericType inferredType, List<IResolvedOperation> operationsMissingImplementation) {
 		StringBuilder errorMsg = new StringBuilder();
-		errorMsg.append("The class ").append(xtendClass.getName()).append(" must be defined abstract because it does not implement ");
+		String name = xtendClass.getName();
+		if (xtendClass.isAnonymous()) {
+			JvmTypeReference superType = inferredType.getSuperTypes().get(0);
+			errorMsg.append("The anonymous subclass of ").append(superType.getSimpleName());
+		} else {
+			errorMsg.append("The class ").append(name);	
+		}
+		errorMsg.append(" must be defined abstract because it does not implement ");
 		boolean needsNewLine = operationsMissingImplementation.size() > 1;
 		IResolvedOperation operation;
 		for(int i=0; i<operationsMissingImplementation.size() && i<3; ++i) {
@@ -1557,7 +1565,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	protected void checkModifiers(XtendClass xtendClass) {
 		classModifierValidator.checkModifiers(xtendClass, "class " + xtendClass.getName());
 		EObject eContainer = xtendClass.eContainer();
-		if(!(eContainer instanceof XtendFile) && !(eContainer instanceof AnonymousClassConstructorCall) && !xtendClass.isStatic()) 
+		if(!(eContainer instanceof XtendFile) && !xtendClass.isStatic()) 
 			error("Nested classes must be static", XTEND_TYPE_DECLARATION__NAME, -1, INVALID_MODIFIER);
 	}
 	

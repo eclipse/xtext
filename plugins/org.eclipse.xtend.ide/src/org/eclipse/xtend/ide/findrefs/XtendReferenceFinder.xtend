@@ -8,9 +8,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil
-import org.eclipse.xtend.core.xtend.AnonymousClassConstructorCall
 import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.naming.IQualifiedNameConverter
@@ -32,6 +30,7 @@ import org.eclipse.xtext.xtype.XImportDeclaration
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
 import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtend.core.xtend.AnonymousClass
 
 class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceFinder {
 	
@@ -92,16 +91,17 @@ class XtendReferenceFinder extends DefaultReferenceFinder implements IReferenceF
 				if(sourceCandidate.static && !sourceCandidate.staticWithDeclaringType) 
 					addReferenceToTypeFromStaticImport(sourceCandidate, targetURISet, acceptor, currentExportedContainerURI)
 			}
-			AnonymousClassConstructorCall: {
+			AnonymousClass: {
 				addReferencesToSuper(sourceCandidate, targetURISet, acceptor, currentExportedContainerURI)
 			}
 		}
 	}
 	
-	protected def addReferencesToSuper(AnonymousClassConstructorCall constructorCall, Set<URI> targetURISet, IAcceptor<IReferenceDescription> acceptor, URI currentExportedContainerURI) {
-		val superType = constructorCall.superType
+	protected def addReferencesToSuper(AnonymousClass anonymousClass, Set<URI> targetURISet, IAcceptor<IReferenceDescription> acceptor, URI currentExportedContainerURI) {
+		val constructorCall = anonymousClass.constructorCall
+		val superType = anonymousClass.superType
 		superType?.addReferenceIfTarget(targetURISet, constructorCall, XCONSTRUCTOR_CALL__CONSTRUCTOR, acceptor, currentExportedContainerURI)
-		val superConstructor = constructorCall.superTypeConstructor
+		val superConstructor = anonymousClass.superTypeConstructor
 		superConstructor?.addReferenceIfTarget(targetURISet, constructorCall, XCONSTRUCTOR_CALL__CONSTRUCTOR, acceptor, currentExportedContainerURI)
 	}
 	
