@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.tests.formatting;
 
 import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -304,6 +305,57 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=415950")
+  @Test
+  public void formatSLCommentAtEndOfClass() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val i = 0");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/* my comment */");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class bar{");
+    _builder_1.newLine();
+    _builder_1.append("val i = 0");
+    _builder_1.newLine();
+    _builder_1.append("/* my comment */");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertFormatted(_builder, _builder_1);
+  }
+  
+  @Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=415950")
+  @Test
+  public void formatSLCommentAtEndOfMethod() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class FormatterIssue {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def method() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val i = 0");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("// comment");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");

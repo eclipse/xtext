@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.tests.formatting
 
 import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest
 import org.junit.Test
+import org.junit.Ignore
 
 class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
 	@Test def formatSLCommentAfterpackage() {
@@ -194,5 +195,33 @@ class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
 				}
 			}
 		''')	
+	}
+	
+	@Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=415950")
+	@Test def formatSLCommentAtEndOfClass() {
+		assertFormatted('''
+			class bar {
+				val i = 0
+				/* my comment */
+			}
+		''', '''
+			class bar{
+			val i = 0
+			/* my comment */
+			}
+		''')	
+	}
+	
+	@Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=415950")
+	@Test def formatSLCommentAtEndOfMethod() {
+		assertFormatted('''
+			class FormatterIssue {
+				def method() {
+					val i = 0
+				
+					// comment
+				}
+			}
+		''')
 	}
 }
