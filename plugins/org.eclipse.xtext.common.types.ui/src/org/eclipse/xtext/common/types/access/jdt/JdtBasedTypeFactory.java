@@ -74,6 +74,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.impl.JvmExecutableImplCustom;
@@ -1005,8 +1006,12 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 	protected void setTypeModifiers(JvmDeclaredType result, int modifiers) {
 		result.setAbstract(Modifier.isAbstract(modifiers));
 		result.setStatic(Modifier.isStatic(modifiers));
-		if (!(result instanceof JvmEnumerationType))
+		if (result.eClass() != TypesPackage.Literals.JVM_ENUMERATION_TYPE) {
 			result.setFinal(Modifier.isFinal(modifiers));
+			if (result.eClass() == TypesPackage.Literals.JVM_ANNOTATION_TYPE || result.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType)result).isInterface()) {
+				result.setAbstract(true);
+			}
+		}
 	}
 
 	protected JvmTypeParameter createTypeParameter(ITypeBinding parameter, JvmMember container) {
