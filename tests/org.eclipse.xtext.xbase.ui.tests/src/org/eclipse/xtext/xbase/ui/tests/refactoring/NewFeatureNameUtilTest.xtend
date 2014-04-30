@@ -4,20 +4,26 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.jface.text.TextSelection
 import org.eclipse.ltk.core.refactoring.RefactoringStatus
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
+import org.eclipse.xtext.xbase.tests.XbaseInjectorProviderWithScopeTracking
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
 import org.eclipse.xtext.xbase.ui.refactoring.NewFeatureNameUtil
 import org.junit.Test
+import org.junit.runner.RunWith
 
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*
 
 /**
  * @author Jan Koehnlein
  */
+@InjectWith(XbaseInjectorProviderWithScopeTracking)
+@RunWith(XtextRunner)
 class NewFeatureNameUtilTest extends AbstractXbaseTestCase {
 
 	@Inject ExpressionUtil util
