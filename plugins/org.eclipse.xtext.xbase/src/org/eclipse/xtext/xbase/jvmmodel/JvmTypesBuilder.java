@@ -389,6 +389,7 @@ public class JvmTypesBuilder {
 		if (result == null)
 			return null;
 		result.setInterface(true);
+		result.setAbstract(true);
 		associate(sourceElement, result);
 		return initializeSafely(result, initializer);
 	}
@@ -420,6 +421,7 @@ public class JvmTypesBuilder {
 		Pair<String, String> fullName = splitQualifiedName(name);
 		JvmAnnotationType annotationType = typesFactory.createJvmAnnotationType();
 		annotationType.setSimpleName(fullName.getSecond());
+		annotationType.setAbstract(true);
 		if (fullName.getFirst() != null)
 			annotationType.setPackageName(fullName.getFirst());
 		associate(sourceElement, annotationType);

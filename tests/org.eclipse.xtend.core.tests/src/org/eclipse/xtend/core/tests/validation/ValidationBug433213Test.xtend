@@ -9,14 +9,13 @@ package org.eclipse.xtend.core.tests.validation
 
 import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtend.core.xtend.AnonymousClass
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import org.junit.Test
-import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtext.xbase.XBlockExpression
-import org.eclipse.xtend.core.xtend.AnonymousClass
-import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -26,7 +25,6 @@ class ValidationBug433213Test extends AbstractXtendTestCase {
 	@Inject ValidationTestHelper helper
 	@Inject ParseHelper<XtendFile> parser
 	
-	@Ignore
 	@Test def void test_01() {
 		val file = parser.parse('''
 			class C {

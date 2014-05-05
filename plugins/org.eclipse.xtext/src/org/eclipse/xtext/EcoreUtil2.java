@@ -22,11 +22,13 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.AbstractTreeIterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -38,10 +40,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.impl.EClassImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EContentsEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
@@ -695,5 +699,62 @@ public class EcoreUtil2 extends EcoreUtil {
 	 */
 	public static interface ElementReferenceAcceptor {
 		void accept(EObject referrer, EObject referenced, EReference reference, int index);
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public static TreeIterator<EObject> getAllNonDerivedContents(EObject root, boolean includeRoot) {
+		/*
+		 * We cannot simply use root.eAllContents here since the iterator
+		 * will probe for #hasNext on each invocation of #next. This is usually
+		 * not a problem but with derived containment, it becomes an issue.
+		 * For example, the accessor of XAbstractFeatureCall#getImplicitReceiver uses #getFeature
+		 * to initialize itself. This will cause the potential proxy feature
+		 * to be resolved which in turn tries to access the mapped proxy URI fragments
+		 * in the resource. Now these fragments are currently in the process of being
+		 * updated, e.g. there may not even be enough entries. Thus #getFeature
+		 * shall not be called here. Long story short, this iterator filters
+		 * derived containment features.
+		 */
+		return new AbstractTreeIterator<EObject>(root, includeRoot) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public Iterator<EObject> getChildren(Object object) {
+				EObject eObject = (EObject) object;
+				return getNonDerivedContents(eObject);
+			}
+
+		};
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public static TreeIterator<EObject> getAllNonDerivedContents(EObject root) {
+		return getAllNonDerivedContents(root, false);
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	public static Iterator<EObject> getNonDerivedContents(EObject eObject) {
+		EClassImpl.FeatureSubsetSupplier featureSupplier = (EClassImpl.FeatureSubsetSupplier) eObject.eClass().getEAllStructuralFeatures();
+		EStructuralFeature[] eStructuralFeatures = featureSupplier.containments();
+
+		return (eStructuralFeatures == null 
+				? EContentsEList.<EObject> emptyContentsEList()
+				: new EContentsEList<EObject>(eObject, eStructuralFeatures) {
+					@Override
+					protected ListIterator<EObject> newResolvingListIterator() {
+						return new ResolvingFeatureIteratorImpl<EObject>(eObject, eStructuralFeatures) {
+							@Override
+							protected boolean isIncluded(EStructuralFeature eStructuralFeature) {
+								return !eStructuralFeature.isDerived();
+							}
+						};
+					}
+				}).iterator();
 	}
 }

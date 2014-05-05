@@ -290,7 +290,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testAnonymousClass() {
+  public void testAnonymousClass_01() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def foo() {");
@@ -340,16 +340,16 @@ public class JvmModelTests extends AbstractXtendTestCase {
       int _size_2 = _members.size();
       Assert.assertEquals(3, _size_2);
       EList<JvmMember> _members_1 = anonymous.getMembers();
-      final JvmMember constructor = IterableExtensions.<JvmMember>head(_members_1);
+      final JvmMember constructor = IterableExtensions.<JvmMember>last(_members_1);
       Assert.assertTrue((constructor instanceof JvmConstructor));
       EList<JvmFormalParameter> _parameters = ((JvmConstructor) constructor).getParameters();
       int _size_3 = _parameters.size();
       Assert.assertEquals(0, _size_3);
       EList<JvmMember> _members_2 = anonymous.getMembers();
-      JvmMember _get = _members_2.get(1);
-      Assert.assertTrue((_get instanceof JvmField));
+      JvmMember _head_1 = IterableExtensions.<JvmMember>head(_members_2);
+      Assert.assertTrue((_head_1 instanceof JvmField));
       EList<JvmMember> _members_3 = anonymous.getMembers();
-      final JvmMember overriding = IterableExtensions.<JvmMember>last(_members_3);
+      final JvmMember overriding = _members_3.get(1);
       Assert.assertTrue((overriding instanceof JvmOperation));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -357,7 +357,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testAnonymousClass_2() {
+  public void testAnonymousClass_02() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def foo() {");
@@ -404,13 +404,13 @@ public class JvmModelTests extends AbstractXtendTestCase {
       int _size_2 = _members.size();
       Assert.assertEquals(2, _size_2);
       EList<JvmMember> _members_1 = anonymous.getMembers();
-      final JvmMember constructor = IterableExtensions.<JvmMember>head(_members_1);
+      final JvmMember constructor = IterableExtensions.<JvmMember>last(_members_1);
       Assert.assertTrue((constructor instanceof JvmConstructor));
       EList<JvmFormalParameter> _parameters = ((JvmConstructor) constructor).getParameters();
       int _size_3 = _parameters.size();
       Assert.assertEquals(0, _size_3);
       EList<JvmMember> _members_2 = anonymous.getMembers();
-      final JvmMember overriding = IterableExtensions.<JvmMember>last(_members_2);
+      final JvmMember overriding = IterableExtensions.<JvmMember>head(_members_2);
       Assert.assertTrue((overriding instanceof JvmOperation));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -418,7 +418,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testAnonymousClass_3() {
+  public void testAnonymousClass_03() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def <T> foo() {");
@@ -468,13 +468,13 @@ public class JvmModelTests extends AbstractXtendTestCase {
       int _size_3 = _members.size();
       Assert.assertEquals(2, _size_3);
       EList<JvmMember> _members_1 = anonymous.getMembers();
-      final JvmMember constructor = IterableExtensions.<JvmMember>head(_members_1);
+      final JvmMember constructor = IterableExtensions.<JvmMember>last(_members_1);
       Assert.assertTrue((constructor instanceof JvmConstructor));
       EList<JvmTypeParameter> _typeParameters_1 = ((JvmConstructor) constructor).getTypeParameters();
       int _size_4 = _typeParameters_1.size();
       Assert.assertEquals(0, _size_4);
       EList<JvmMember> _members_2 = anonymous.getMembers();
-      final JvmMember overriding = IterableExtensions.<JvmMember>last(_members_2);
+      final JvmMember overriding = IterableExtensions.<JvmMember>head(_members_2);
       Assert.assertTrue((overriding instanceof JvmOperation));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -482,7 +482,7 @@ public class JvmModelTests extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testNestedClass_0() {
+  public void testNestedClass_01() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class Foo { ");

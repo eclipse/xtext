@@ -11,7 +11,6 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
@@ -23,7 +22,6 @@ import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
@@ -33,10 +31,7 @@ import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeCo
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-
-import com.google.inject.Inject;
 
 /**
  * Customized type computer for Xtend specific expressions.
@@ -48,12 +43,6 @@ import com.google.inject.Inject;
 @NonNullByDefault
 public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 
-	@Inject 
-	private IXtendJvmAssociations associations;
-	
-	@Inject 
-	private XtendReentrantTypeResolver typeResolver;
-	
 	@Override
 	public void computeTypes(XExpression expression, ITypeComputationState state) {
 		if (expression instanceof AnonymousClass) {
@@ -72,11 +61,6 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 	
 	protected void _computeTypes(AnonymousClass anonymousClass, ITypeComputationState state) {
-		AbstractTypeComputationState typeComputationState = (AbstractTypeComputationState) state;
-		JvmGenericType inferredLocalClass = associations.getInferredType(anonymousClass);
-		if(inferredLocalClass != null) {
-			typeResolver.resolveTypesForLocalClass(typeComputationState, inferredLocalClass);
-		}
 		state.computeTypes(anonymousClass.getConstructorCall());
 	}
 	
