@@ -34,8 +34,8 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.Issue;
@@ -2043,7 +2043,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendFile file = file(
 				"class Foo<T extends T> {"
 				+ "}");
-		helper.assertNoError(file, TYPE_PARAMETER_FORWARD_REFERENCE);		
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);
 	}
 	
 	@Test 
@@ -2067,7 +2067,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendFile file = file(
 				"interface Foo<T extends T> {"
 				+ "}");
-		helper.assertNoError(file, TYPE_PARAMETER_FORWARD_REFERENCE);		
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);
 	}
 	
 	@Test 
@@ -2092,7 +2092,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"class Foo {"
 				+ "  def <T extends T> foo() {}"
 				+ "}");
-		helper.assertNoError(file, TYPE_PARAMETER_FORWARD_REFERENCE);		
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);
 	}
 	
 	@Test 
@@ -2111,6 +2111,15 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "  def <T, U extends List<? extends V>, V> foo() {}"
 				+ "}");
 		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+	}
+	
+	@Test 
+	public void testTypeParameterForwardReference_9() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+				+ "  def <T extends Enum<T>> foo() {}"
+				+ "}");
+		helper.assertNoError(file, TYPE_PARAMETER_FORWARD_REFERENCE);		
 	}
 	
 	@Test 
