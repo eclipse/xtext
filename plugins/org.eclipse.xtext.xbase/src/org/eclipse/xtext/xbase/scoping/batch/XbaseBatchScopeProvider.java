@@ -136,7 +136,7 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 		return TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType());
 	}
 
-	protected boolean isConstructorCallScope(EReference reference) {
+	public boolean isConstructorCallScope(EReference reference) {
 		return reference.getEReferenceType() == TypesPackage.Literals.JVM_CONSTRUCTOR;
 	}
 

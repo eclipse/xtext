@@ -28,6 +28,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.scoping.impl.SingletonScope;
 import org.eclipse.xtext.util.Strings;
@@ -42,6 +43,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.batch.ConstructorTypeScopeWrapper;
+import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -61,7 +63,7 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
-public class SerializerScopeProvider extends XbaseBatchScopeProvider implements IFeatureNames {
+public class SerializerScopeProvider implements IScopeProvider, IFeatureNames {
 
 	@Inject
 	private OperatorMapping operatorMapping;
@@ -72,17 +74,19 @@ public class SerializerScopeProvider extends XbaseBatchScopeProvider implements 
 	@Inject
 	private IImportsConfiguration importsConfiguration;
 	
-	@Override
+	@Inject 
+	private IBatchScopeProvider delegate;
+	
 	public IScope getScope(EObject context, EReference reference) {
-		if (isFeatureCallScope(reference)) {
+		if (delegate.isFeatureCallScope(reference)) {
 			IScope result = createFeatureCallSerializationScope(context);
 			return result;
 		}
-		if (isConstructorCallScope(reference)) {
+		if (delegate.isConstructorCallScope(reference)) {
 			IScope result = createConstructorCallSerializationScope(context);
 			return result;
 		}
-		return super.getScope(context, reference);
+		return delegate.getScope(context, reference);
 	}
 	
 	public IScope createConstructorCallSerializationScope(EObject context) {
