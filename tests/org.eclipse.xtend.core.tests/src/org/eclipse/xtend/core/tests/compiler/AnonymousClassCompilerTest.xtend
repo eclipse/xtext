@@ -38,6 +38,226 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testNestedTypeScoping_01() {'''
+			class C {
+				def newMap() {
+					return new java.util.AbstractMap<String, String>() {
+						override java.util.Set<Entry<String, String>> entrySet() {
+							newHashSet
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.AbstractMap;
+			import java.util.Map;
+			import java.util.Set;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public AbstractMap<String, String> newMap() {
+			    return new AbstractMap<String, String>() {
+			      public Set<Map.Entry<String, String>> entrySet() {
+			        return CollectionLiterals.<Map.Entry<String, String>>newHashSet();
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testNestedTypeScoping_02() {'''
+			class C {
+				def newMap() {
+					return new java.util.AbstractMap<String, String>() {
+						override entrySet() {
+							<Entry<String, String>>newHashSet
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.AbstractMap;
+			import java.util.Map;
+			import java.util.Set;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public AbstractMap<String, String> newMap() {
+			    return new AbstractMap<String, String>() {
+			      public Set<Map.Entry<String, String>> entrySet() {
+			        return CollectionLiterals.<Map.Entry<String, String>>newHashSet();
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testNestedTypeScoping_03() {'''
+			class C {
+				def newMap() {
+					return new java.util.AbstractMap<String, String>() {
+						override entrySet() {
+							Entry.declaredMethods // doesn't make much sense
+							#{}
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import com.google.common.collect.Sets;
+			import java.util.AbstractMap;
+			import java.util.Collections;
+			import java.util.Map;
+			import java.util.Set;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public AbstractMap<String, String> newMap() {
+			    return new AbstractMap<String, String>() {
+			      public Set<Map.Entry<String, String>> entrySet() {
+			        Set<Map.Entry<String, String>> _xblockexpression = null;
+			        {
+			          Map.Entry.class.getDeclaredMethods();
+			          _xblockexpression = Collections.<Map.Entry<String, String>>unmodifiableSet(Sets.<Map.Entry<String, String>>newHashSet());
+			        }
+			        return _xblockexpression;
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testThisScoping_01() {'''
+			class C {
+				def newD() {
+					return new D {
+						def m() {
+							return this
+						}
+					}
+				}
+			}
+			class D {}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public D newD() {
+			    @SuppressWarnings("all")
+			    final class __C_1 extends D {
+			      public D m() {
+			        return this;
+			      }
+			    }
+			    
+			    return new __C_1();
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testThisScoping_02() {'''
+			class C {
+				def newD() {
+					return new D {
+						def m() {
+							return toString
+						}
+					}
+				}
+			}
+			class D {}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public D newD() {
+			    @SuppressWarnings("all")
+			    final class __C_1 extends D {
+			      public String m() {
+			        return this.toString();
+			      }
+			    }
+			    
+			    return new __C_1();
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testThisScoping_03() {'''
+			class C {
+				def newD() {
+					return new D {
+						def m() {
+							m2
+						}
+					}
+				}
+				def void m2() {}
+			}
+			class D {}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public D newD() {
+			    @SuppressWarnings("all")
+			    final class __C_1 extends D {
+			      public void m() {
+			        C.this.m2();
+			      }
+			    }
+			    
+			    return new __C_1();
+			  }
+			  
+			  public void m2() {
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testSuperScoping_01() {'''
+			class C extends B {
+				def myMethod() {
+					return new D {
+						override m() {
+							super.m
+						}
+					}
+				}
+				override m() {}
+			}
+			class B { def void m() {} }
+			class D extends E {}
+			class E { def void m() {} }
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C extends B {
+			  public D myMethod() {
+			    return new D() {
+			      public void m() {
+			        super.m();
+			      }
+			    };
+			  }
+			  
+			  public void m() {
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testLocalVar_AdditionalMember() {'''
 			class Foo {
 				def foo() {
@@ -362,4 +582,3 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 }
-

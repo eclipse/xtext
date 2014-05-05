@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
@@ -47,12 +48,6 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.linking.impl.LinkingHelper;
-import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -326,13 +321,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 	private IJvmModelAssociator associator;
 	
 	@Inject
-	private LazyURIEncoder uriEncoder;
-	
-	@Inject
-	private LinkingHelper linkingHelper;
-
-	@Inject
-	private IQualifiedNameConverter qualifiedNameConverter;
+	private AnonymousClassUtil anonymousClassUtil;
 	
 	@Inject
 	private JvmTypesBuilder typesBuilder;
@@ -646,19 +635,13 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				AnonymousClass anonymousClass = (AnonymousClass) typeProvider.getExpression();
 				XConstructorCall constructorCall = anonymousClass.getConstructorCall();
 				IScope typeScope = featureScopeSession.getScope(constructorCall, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, resolvedTypes);
-				JvmGenericType type = getSuperType(constructorCall, typeScope);
-				if (type == null) {
-					IEObjectDescription description = typeScope.getSingleElement(QualifiedName.create("java", "lang", "Object"));
-					if (description != null) {
-						type = (JvmGenericType) description.getEObjectOrProxy();
-					}
-				}
+				JvmDeclaredType type = anonymousClassUtil.getSuperTypeNonResolving(anonymousClass, typeScope);
 				if (type == null) {
 					break;
 				}
 				JvmParameterizedTypeReference superTypeReference = createSuperTypeReference(type, constructorCall);
 				InferredTypeIndicator.resolveTo(casted, superTypeReference);
-				if(type.isInterface()) {
+				if(type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) type).isInterface()) {
 					inferAnonymousClassConstructor(anonymousClass, localClass, type);
 				} else {
 					for(JvmMember superMember: type.getMembers()) {
@@ -682,19 +665,6 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		return result;
 	}
 	
-	private JvmGenericType getSuperType(XConstructorCall anonymousClassConstructor, IScope typeScope) {
-		EObject constructorProxy = (EObject) anonymousClassConstructor.eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
-		String fragment = EcoreUtil.getURI(constructorProxy).fragment();
-		INode node = uriEncoder.getNode(anonymousClassConstructor, fragment);
-		String name = linkingHelper.getCrossRefNodeAsString(node, true);
-		QualifiedName superTypeName = qualifiedNameConverter.toQualifiedName(name);
-		IEObjectDescription result = typeScope.getSingleElement(superTypeName);
-		if (result != null && result.getEClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
-			return (JvmGenericType) result.getEObjectOrProxy();
-		}
-		return null;
-	}
-	
 	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClass anonymousClass, JvmGenericType inferredLocalClass, JvmConstructor superConstructor) {
 		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 		inferredLocalClass.getMembers().add(constructor);
@@ -709,7 +679,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		return constructor;
 	}
 
-	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClass anonymousClass, JvmGenericType inferredLocalClass, JvmGenericType superInterface) {
+	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClass anonymousClass, JvmGenericType inferredLocalClass, JvmDeclaredType superInterface) {
 		XConstructorCall constructorCall = anonymousClass.getConstructorCall();
 		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 		inferredLocalClass.getMembers().add(constructor);
