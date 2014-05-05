@@ -6,5 +6,6 @@
 	<classpathentry kind="src" path="testdata"/>
 	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="suites"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

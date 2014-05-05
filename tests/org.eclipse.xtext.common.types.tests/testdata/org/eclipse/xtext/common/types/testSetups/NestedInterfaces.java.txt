@@ -1,26 +1,26 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.xtend.impl;
-
-import org.eclipse.xtend.core.xtend.XtendFile;
+package org.eclipse.xtext.common.types.testSetups;
 
 /**
- * @author Jan Koehnlein - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtendEnumImplCustom extends XtendEnumImpl {
+public abstract class NestedInterfaces extends TestScenario {
 
-	@Override
-	public boolean isFinal() {
-		return true;
+	interface Outer {
+		
+		interface Inner {
+			
+			void method();
+			
+		}
+		
+		int method();
 	}
-
-	@Override
-	public boolean isStatic() {
-		return !(eContainer() instanceof XtendFile);
-	}
+	
 }

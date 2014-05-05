@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.tests.xtend.impl;
 
 import org.eclipse.emf.common.util.EList;
@@ -14,6 +21,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class CustomClassesTest extends AbstractXtendTestCase {
   @Test
@@ -173,7 +183,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       _builder_1.append("interface Foo {}");
       XtendInterface _interfaze_1 = this.interfaze(_builder_1.toString());
       boolean _isStatic = _interfaze_1.isStatic();
-      Assert.assertTrue(_isStatic);
+      Assert.assertFalse(_isStatic);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -186,7 +196,12 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       _builder.append("enum Foo {}");
       XtendEnum _enumeration = this.enumeration(_builder.toString());
       boolean _isStatic = _enumeration.isStatic();
-      Assert.assertTrue(_isStatic);
+      Assert.assertFalse(_isStatic);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("enum Foo {}");
+      XtendEnum _enumeration_1 = this.enumeration(_builder_1.toString());
+      boolean _isFinal = _enumeration_1.isFinal();
+      Assert.assertTrue(_isFinal);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -258,7 +273,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       _builder.append("static annotation Foo {}");
       XtendAnnotationType _annotationType = this.annotationType(_builder.toString());
       boolean _isStatic = _annotationType.isStatic();
-      Assert.assertTrue(_isStatic);
+      Assert.assertFalse(_isStatic);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("final annotation Foo {}");
       XtendAnnotationType _annotationType_1 = this.annotationType(_builder_1.toString());
