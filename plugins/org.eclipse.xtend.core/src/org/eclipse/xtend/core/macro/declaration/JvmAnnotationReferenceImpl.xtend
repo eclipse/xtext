@@ -72,7 +72,10 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getBooleanValue(String name) {
-		getValue(name) as Boolean
+		switch value : getValue(name) {
+			Boolean: value
+			default: false
+		}
 	}
 	
 	override getByteArrayValue(String name) {
@@ -80,7 +83,10 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getByteValue(String name) {
-		getValue(name) as Byte
+		switch value : getValue(name) {
+			Byte: value
+			default: 0 as byte
+		}
 	}
 	
 	override getCharArrayValue(String name) {
@@ -88,7 +94,10 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getCharValue(String name) {
-		getValue(name) as Character
+		switch value : getValue(name) {
+			Character: value
+			default: 0 as char
+		}
 	}
 	
 	override getClassValue(String name) {
@@ -104,7 +113,10 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getDoubleValue(String name) {
-		getValue(name) as Double
+		switch value : getValue(name) {
+			Double: value
+			default: 0 
+		}
 	}
 	
 	override getEnumValue(String name) {
@@ -120,7 +132,10 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getFloatValue(String name) {
-		getValue(name) as Float
+		switch value : getValue(name) {
+			Float: value
+			default: 0 
+		} 
 	}
 	
 	override getIntArrayValue(String name) {
@@ -128,7 +143,10 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getIntValue(String name) {
-		getValue(name) as Integer
+		switch value : getValue(name) {
+			Integer: value
+			default: 0 
+		}
 	}
 	
 	override getLongArrayValue(String name) {
@@ -136,7 +154,10 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getLongValue(String name) {
-		getValue(name) as Long
+		switch value : getValue(name) {
+			Long: value
+			default: 0 
+		}
 	}
 	
 	override getShortArrayValue(String name) {
@@ -144,7 +165,10 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	}
 	
 	override getShortValue(String name) {
-		getValue(name) as Short
+		switch value : getValue(name) {
+			Short: value
+			default: 0 as short
+		}
 	}
 	
 	override getStringArrayValue(String name) {
