@@ -48,7 +48,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVisibility
-import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension
@@ -66,7 +65,6 @@ import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.ImportingStringConcatenation
@@ -127,7 +125,10 @@ class JvmModelGenerator implements IGenerator {
 	def CharSequence generateType(JvmDeclaredType type, GeneratorConfig config) {
 		val importManager = new ImportManager(true, type)
 		val bodyAppendable = createAppendable(type, importManager, config)
+		bodyAppendable.openScope
+		bodyAppendable.assignThisAndSuper(type)
 		generateBody(type, bodyAppendable, config)
+		bodyAppendable.closeScope
 		val importAppendable = createAppendable(type, importManager, config)
         generateFileHeader(type, importAppendable, config)
 		if (type.packageName != null) {
@@ -409,19 +410,15 @@ class JvmModelGenerator implements IGenerator {
 		)
 	}
 	
-	def dispatch generateMember(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
+	def dispatch generateMember(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.newLine
-		generateBody(it, appendable, config)
-	}
-	
-	def dispatch generateMember(JvmEnumerationType it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.newLine
-		generateBody(it, appendable, config)
-	}
-	
-	def dispatch generateMember(JvmAnnotationType it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.newLine
-		generateBody(it, appendable, config)
+		appendable.openScope
+		appendable.assignThisAndSuper(it)
+		try {
+			generateBody(it, appendable, config)
+		} finally {
+			appendable.closeScope
+		}
 	}
 	
 	def dispatch generateMember(JvmField it, ITreeAppendable appendable, GeneratorConfig config) {
@@ -606,7 +603,6 @@ class JvmModelGenerator implements IGenerator {
 						default: null
 					}
 					appendable.append("{").increaseIndentation
-					appendable.reassignThisInJvmExecutable(op)
 					compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
 					appendable.decreaseIndentation.newLine.append("}")
 				} else {
@@ -624,20 +620,30 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 
-	def protected void reassignThisInJvmExecutable(ITreeAppendable b, JvmExecutable jvmExecutable) {
-		val declaredType = EcoreUtil2.getContainerOfType(jvmExecutable, JvmDeclaredType)
-		if (!declaredType.static && b.hasObject("this")) {
-			val element = b.getObject("this")
-			if (element != declaredType) {
-				if (element instanceof JvmType) {
-					val proposedName = element.simpleName+".this"
-					if (!b.hasObject(proposedName)) {
-						b.declareSyntheticVariable(element, proposedName)
-					}
-				}
+	def void assignThisAndSuper(ITreeAppendable b, JvmDeclaredType declaredType) {
+		b.reassignToType(declaredType, 'this')
+		val superClass = declaredType.superTypes.findFirst[ 
+			val superType = it.type
+			if (superType instanceof JvmGenericType)
+				return !superType.isInterface
+			return false
+		]?.type as JvmDeclaredType
+		b.reassignToType(superClass, 'super')
+	}
+	
+	private def reassignToType(ITreeAppendable b, JvmDeclaredType declaredType, String name) {
+		if (b.hasObject(name)) {
+			val element = b.getObject(name)
+			if (element instanceof JvmType) {
+				val proposedName = element.simpleName+"."+name
+				b.declareVariable(element, proposedName)
 			}
+			if (declaredType != null)
+				b.declareVariable(declaredType, name);
+		} else {
+			if (declaredType != null)
+				b.declareVariable(declaredType, name);
 		}
-		b.declareVariable(declaredType, "this");
 	}
 
 	def generateBodyWithIssues(ITreeAppendable appendable, Iterable<Issue> errors) {
@@ -856,13 +862,6 @@ class JvmModelGenerator implements IGenerator {
 		
 	def TreeAppendable createAppendable(EObject context, ImportManager importManager, GeneratorConfig config) {
 		val appendable = new TreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, context, "  ", "\n")
-		val type = context.containerType
-		if( type != null) {
-			appendable.declareVariable(context.containerType, "this")
-			val superType = context.containerType.extendedClass
-			if (superType != null)
-				appendable.declareVariable(superType.type, "super")
-		}
 		return appendable
 	}
 	
