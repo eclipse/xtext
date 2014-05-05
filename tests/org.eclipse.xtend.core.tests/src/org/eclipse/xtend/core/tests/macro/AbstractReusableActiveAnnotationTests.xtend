@@ -21,6 +21,90 @@ abstract class AbstractReusableActiveAnnotationTests {
 	@Inject XtendGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def void testSetEmptyListAsAnnotationValue() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+				
+				@Active(MyAnnotationProcessor)
+				annotation MyAnnotation {
+					
+				}
+				
+				annotation Values {
+					int[] intValue
+					long[] longValue
+					short[] shortValue
+					double[] doubleValue
+					float[] floatValue
+					byte[] byteValue
+					boolean[] booleanValue
+					char[] charValue
+					String[] stringValue
+					Class<?>[] classValue
+					Enum1[] enumValue
+					Annotation2[] annotationValue
+				}
+				
+				enum Enum1 {}
+				annotation Annotation2 {}
+
+				
+				class MyAnnotationProcessor extends AbstractClassProcessor {
+				
+					override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
+						removeAnnotation(annotations.head)
+						addAnnotation(Values.newAnnotationReference [
+							setIntValue('intValue', emptyList)
+							setLongValue('longValue', emptyList)
+							setShortValue('shortValue', emptyList)
+							setDoubleValue('doubleValue', emptyList)
+							setFloatValue('floatValue', emptyList)
+							setByteValue('byteValue', emptyList)
+							setBooleanValue('booleanValue', emptyList)
+							setCharValue('charValue', emptyList)
+							setStringValue('stringValue', emptyList)
+							setClassValue('classValue', emptyList)
+							setEnumValue('enumValue', emptyList)
+							setAnnotationValue('annotationValue', emptyList)
+						])
+					}
+				
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.*
+				
+				@MyAnnotation
+				class Foo {
+				}
+			'''
+		) [
+			val foo = typeLookup.findClass("myusercode.Foo")
+			val values = foo.annotations.head
+			assertEquals(0, values.getIntArrayValue('intValue').size)
+			assertEquals(0, values.getLongArrayValue('longValue').size)
+			assertEquals(0, values.getShortArrayValue('shortValue').size)
+			assertEquals(0, values.getDoubleArrayValue('doubleValue').size)
+			assertEquals(0, values.getFloatArrayValue('floatValue').size)
+			assertEquals(0, values.getByteArrayValue('byteValue').size)
+			assertEquals(0, values.getBooleanArrayValue('booleanValue').size)
+			assertEquals(0, values.getCharArrayValue('charValue').size)
+			assertEquals(0, values.getStringArrayValue('stringValue').size)
+			assertEquals(0, values.getClassArrayValue('classValue').size)
+			assertEquals(0, values.getEnumArrayValue('enumValue').size)
+			assertEquals(0, values.getAnnotationArrayValue('annotationValue').size)
+		]
+	}
+	
 	@Test def void testInferredTypeReferences() {
 		assertProcessing(
 			'myannotation/MyAnnotation.xtend' -> '''
