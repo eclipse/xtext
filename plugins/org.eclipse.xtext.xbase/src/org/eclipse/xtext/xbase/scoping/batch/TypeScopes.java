@@ -7,9 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
@@ -28,8 +32,12 @@ public class TypeScopes extends DelegatingScopes {
 	public IScope createTypeScope(EObject context, EReference reference,
 			IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		final IScope delegateScope = getDelegate().getScope(context, reference);
+		final Map<QualifiedName, JvmDeclaredType> nestedTypes = session.getNestedTypes();
+		if (nestedTypes.isEmpty()) {
+			return delegateScope;
+		}
 		// TODO visibility information should be attached to the given type descriptions
-		return delegateScope;
+		return new NestedTypeScope(delegateScope, nestedTypes);
 	}
 
 }
