@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.xtend.impl;
 
+import org.eclipse.xtend.core.xtend.XtendFile;
+
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -20,7 +22,7 @@ public class XtendAnnotationTypeImplCustom extends XtendAnnotationTypeImpl {
 
 	@Override
 	public boolean isStatic() {
-		return true;
+		return !(eContainer() instanceof XtendFile);
 	}
 	
 }

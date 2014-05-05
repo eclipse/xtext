@@ -9,6 +9,8 @@ package org.eclipse.xtend.core.xtend.impl;
 
 import static org.eclipse.xtext.util.Strings.*;
 
+import org.eclipse.xtend.core.xtend.XtendFile;
+
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -17,7 +19,7 @@ public class XtendInterfaceImplCustom extends XtendInterfaceImpl {
 
 	@Override
 	public boolean isStatic() {
-		return true;
+		return !(eContainer() instanceof XtendFile);
 	}
 
 	@Override

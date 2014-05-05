@@ -252,6 +252,66 @@ public class JvmModelTests extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testEnumIsFinal() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("enum Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("BAR");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendEnum _enumeration = this.enumeration(_string);
+      final JvmEnumerationType inferred = this._iXtendJvmAssociations.getInferredEnumerationType(_enumeration);
+      boolean _isFinal = inferred.isFinal();
+      Assert.assertTrue(_isFinal);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testTopLevelEnumIsNotStatic() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("enum Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("BAR");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendEnum _enumeration = this.enumeration(_string);
+      final JvmEnumerationType inferred = this._iXtendJvmAssociations.getInferredEnumerationType(_enumeration);
+      boolean _isStatic = inferred.isStatic();
+      Assert.assertFalse(_isStatic);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testTopLevelInterfaceIsNotStatic() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface Foo {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendInterface _interfaze = this.interfaze(_string);
+      final JvmGenericType inferred = this._iXtendJvmAssociations.getInferredType(_interfaze);
+      boolean _isStatic = inferred.isStatic();
+      Assert.assertFalse(_isStatic);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testEnumArtificialMethods() {
     try {
       StringConcatenation _builder = new StringConcatenation();
