@@ -182,8 +182,20 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public boolean getBooleanValue(final String name) {
+    Boolean _switchResult = null;
     Object _value = this.getValue(name);
-    return (((Boolean) _value)).booleanValue();
+    final Object value = _value;
+    boolean _matched = false;
+    if (!_matched) {
+      if (value instanceof Boolean) {
+        _matched=true;
+        _switchResult = ((Boolean)value);
+      }
+    }
+    if (!_matched) {
+      _switchResult = Boolean.valueOf(false);
+    }
+    return (_switchResult).booleanValue();
   }
   
   public byte[] getByteArrayValue(final String name) {
@@ -192,8 +204,20 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public byte getByteValue(final String name) {
+    Byte _switchResult = null;
     Object _value = this.getValue(name);
-    return (((Byte) _value)).byteValue();
+    final Object value = _value;
+    boolean _matched = false;
+    if (!_matched) {
+      if (value instanceof Byte) {
+        _matched=true;
+        _switchResult = ((Byte)value);
+      }
+    }
+    if (!_matched) {
+      _switchResult = Byte.valueOf(((byte) 0));
+    }
+    return (_switchResult).byteValue();
   }
   
   public char[] getCharArrayValue(final String name) {
@@ -202,8 +226,20 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public char getCharValue(final String name) {
+    Character _switchResult = null;
     Object _value = this.getValue(name);
-    return (((Character) _value)).charValue();
+    final Object value = _value;
+    boolean _matched = false;
+    if (!_matched) {
+      if (value instanceof Character) {
+        _matched=true;
+        _switchResult = ((Character)value);
+      }
+    }
+    if (!_matched) {
+      _switchResult = Character.valueOf(((char) 0));
+    }
+    return (_switchResult).charValue();
   }
   
   public TypeReference getClassValue(final String name) {
@@ -222,8 +258,20 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public double getDoubleValue(final String name) {
+    double _switchResult = (double) 0;
     Object _value = this.getValue(name);
-    return (((Double) _value)).doubleValue();
+    final Object value = _value;
+    boolean _matched = false;
+    if (!_matched) {
+      if (value instanceof Double) {
+        _matched=true;
+        _switchResult = ((Double) value).doubleValue();
+      }
+    }
+    if (!_matched) {
+      _switchResult = 0;
+    }
+    return _switchResult;
   }
   
   public EnumerationValueDeclaration getEnumValue(final String name) {
@@ -242,8 +290,20 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public float getFloatValue(final String name) {
+    float _switchResult = (float) 0;
     Object _value = this.getValue(name);
-    return (((Float) _value)).floatValue();
+    final Object value = _value;
+    boolean _matched = false;
+    if (!_matched) {
+      if (value instanceof Float) {
+        _matched=true;
+        _switchResult = ((Float) value).floatValue();
+      }
+    }
+    if (!_matched) {
+      _switchResult = 0;
+    }
+    return _switchResult;
   }
   
   public int[] getIntArrayValue(final String name) {
@@ -252,8 +312,20 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public int getIntValue(final String name) {
+    Integer _switchResult = null;
     Object _value = this.getValue(name);
-    return (((Integer) _value)).intValue();
+    final Object value = _value;
+    boolean _matched = false;
+    if (!_matched) {
+      if (value instanceof Integer) {
+        _matched=true;
+        _switchResult = ((Integer)value);
+      }
+    }
+    if (!_matched) {
+      _switchResult = Integer.valueOf(0);
+    }
+    return (_switchResult).intValue();
   }
   
   public long[] getLongArrayValue(final String name) {
@@ -262,8 +334,20 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public long getLongValue(final String name) {
+    long _switchResult = (long) 0;
     Object _value = this.getValue(name);
-    return (((Long) _value)).longValue();
+    final Object value = _value;
+    boolean _matched = false;
+    if (!_matched) {
+      if (value instanceof Long) {
+        _matched=true;
+        _switchResult = ((Long) value).longValue();
+      }
+    }
+    if (!_matched) {
+      _switchResult = 0;
+    }
+    return _switchResult;
   }
   
   public short[] getShortArrayValue(final String name) {
@@ -272,8 +356,20 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
   }
   
   public short getShortValue(final String name) {
+    Short _switchResult = null;
     Object _value = this.getValue(name);
-    return (((Short) _value)).shortValue();
+    final Object value = _value;
+    boolean _matched = false;
+    if (!_matched) {
+      if (value instanceof Short) {
+        _matched=true;
+        _switchResult = ((Short)value);
+      }
+    }
+    if (!_matched) {
+      _switchResult = Short.valueOf(((short) 0));
+    }
+    return (_switchResult).shortValue();
   }
   
   public String[] getStringArrayValue(final String name) {
