@@ -18,6 +18,7 @@ GenericSuperClass.java.txt
 InitializerWithConstructor.java.txt
 InitializerWithoutConstructor.java.txt
 Methods.java.txt
+NestedInterfaces.java.txt
 NestedParameterizedTypes.java.txt
 NestedTypes.java.txt
 ParameterizedMethods.java.txt

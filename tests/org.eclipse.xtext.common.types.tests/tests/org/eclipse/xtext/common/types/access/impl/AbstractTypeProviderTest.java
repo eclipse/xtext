@@ -85,6 +85,7 @@ import org.eclipse.xtext.common.types.testSetups.Fields;
 import org.eclipse.xtext.common.types.testSetups.InitializerWithConstructor;
 import org.eclipse.xtext.common.types.testSetups.InitializerWithoutConstructor;
 import org.eclipse.xtext.common.types.testSetups.Methods;
+import org.eclipse.xtext.common.types.testSetups.NestedInterfaces;
 import org.eclipse.xtext.common.types.testSetups.NestedTypes;
 import org.eclipse.xtext.common.types.testSetups.ParameterizedMethods;
 import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes;
@@ -272,6 +273,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertTrue(type instanceof JvmGenericType);
 		assertEquals(typeName, type.getIdentifier());
 		assertTrue(((JvmDeclaredType) type).isAbstract());
+		assertFalse(((JvmDeclaredType) type).isStatic());
 		diagnose(type);
 		Resource resource = type.eResource();
 		getAndResolveAllFragments(resource);
@@ -723,7 +725,8 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		String typeName = TestEnum.class.getName();
 		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
 		int innerTypesCount = TestEnum.class.getDeclaredClasses().length;
-		assertEquals(0, innerTypesCount);
+		// Nested
+		assertEquals(1, innerTypesCount);
 		int methodCount = TestEnum.class.getDeclaredMethods().length;
 		// TestEnum.values + TestEnum.valueOf
 		assertEquals(2, methodCount);
@@ -1000,6 +1003,48 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertTrue(arrayType.getComponentType() instanceof JvmTypeParameter);
 	}
 
+	@Test public void test_nestedInterface_Outer_01() {
+		String typeName = NestedInterfaces.class.getName() + "$Outer";
+		String expectedSuffix = NestedInterfaces.class.getSimpleName() + "$Outer";
+		assertTrue(typeName + " endsWith " + expectedSuffix, typeName.endsWith(expectedSuffix));
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		assertEquals(typeName, type.getIdentifier());
+		JvmType outerType = (JvmType) type.eContainer();
+		assertEquals(NestedInterfaces.class.getName(), outerType.getIdentifier());
+	}
+	
+	@Test public void test_nestedInterface_Outer_02() {
+		String typeName = NestedInterfaces.class.getName() + "$Outer";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		List<JvmConstructor> constructors = Lists.newArrayList(type.getDeclaredConstructors());
+		assertEquals(0, constructors.size());
+		assertEquals(JvmVisibility.DEFAULT, type.getVisibility());
+		assertTrue(type.isStatic());
+		assertTrue(type.isAbstract());
+	}
+
+	@Test public void test_nestedInterface_Outer_Inner_01() {
+		String typeName = NestedInterfaces.class.getName() + "$Outer$Inner";
+		String expectedSuffix = NestedInterfaces.class.getSimpleName() + "$Outer$Inner";
+		assertTrue(typeName + " endsWith " + expectedSuffix, typeName.endsWith(expectedSuffix));
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		assertEquals(typeName, type.getIdentifier());
+		JvmType outerType = (JvmType) type.eContainer();
+		assertEquals(NestedInterfaces.class.getName() + "$Outer", outerType.getIdentifier());
+	}
+	
+	@Test public void test_nestedInterface_Outer_Inner_02() {
+		String typeName = NestedInterfaces.class.getName() + "$Outer$Inner";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		List<JvmConstructor> constructors = Lists.newArrayList(type.getDeclaredConstructors());
+		assertEquals(0, constructors.size());
+		assertEquals(JvmVisibility.PUBLIC, type.getVisibility());
+		assertTrue(type.isStatic());
+		assertTrue(type.isAbstract());
+	}
+	
 	@Test public void test_nestedTypes_Outer_01() {
 		String typeName = NestedTypes.Outer.class.getName();
 		String expectedSuffix = NestedTypes.class.getSimpleName() + "$" + NestedTypes.Outer.class.getSimpleName();
@@ -1888,6 +1933,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertNotNull(type);
 		assertTrue(type instanceof JvmAnnotationType);
 		assertTrue(((JvmDeclaredType) type).isAbstract());
+		assertFalse(((JvmDeclaredType) type).isStatic());
 		diagnose(type);
 		Resource resource = type.eResource();
 		getAndResolveAllFragments(resource);
@@ -1896,6 +1942,26 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	
 	@Test public void testAnnotationType_02() throws Exception {
 		String typeName = TestAnnotation.class.getName();
+		JvmAnnotationType type = (JvmAnnotationType) getTypeProvider().findTypeByName(typeName);
+		assertEquals(1, type.getSuperTypes().size());
+		assertEquals(Annotation.class.getName(), type.getSuperTypes().get(0).getIdentifier());
+	}
+	
+	@Test public void testNestedAnnotationType_01() throws Exception {
+		String typeName = TestAnnotation.NestedAnnotation.class.getName();
+		JvmType type = getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		assertTrue(type instanceof JvmAnnotationType);
+		assertTrue(((JvmDeclaredType) type).isAbstract());
+		assertTrue(((JvmDeclaredType) type).isStatic());
+		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+	}
+	
+	@Test public void testNestedAnnotationType_02() throws Exception {
+		String typeName = TestAnnotation.NestedAnnotation.class.getName();
 		JvmAnnotationType type = (JvmAnnotationType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(1, type.getSuperTypes().size());
 		assertEquals(Annotation.class.getName(), type.getSuperTypes().get(0).getIdentifier());
@@ -1925,6 +1991,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertNotNull(type);
 		assertTrue(type instanceof JvmEnumerationType);
 		assertTrue(((JvmEnumerationType) type).isFinal());
+		assertFalse(((JvmEnumerationType) type).isStatic());
 		diagnose(type);
 		Resource resource = type.eResource();
 		getAndResolveAllFragments(resource);
@@ -1966,6 +2033,58 @@ public abstract class AbstractTypeProviderTest extends Assert {
 				assertEquals(1, parameters.size()); // synthetic parameters are not returned
 			}
 		}
+		assertTrue(constructorFound);
+	}
+	
+	@Test public void testNestedEnum_01() throws Exception {
+		String typeName = TestEnum.Nested.class.getName();
+		JvmType type = getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		assertTrue(type instanceof JvmEnumerationType);
+		assertTrue(((JvmEnumerationType) type).isFinal());
+		assertTrue(((JvmEnumerationType) type).isStatic());
+		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+	}
+	
+	@Test public void testNestedEnum_02() throws Exception {
+		String typeName = TestEnum.Nested.class.getName();
+		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+		assertEquals(1, type.getSuperTypes().size());
+		assertEquals(Enum.class.getName(), type.getSuperTypes().get(0).getType().getIdentifier());
+		String superTypeName = Enum.class.getName() + "<" + typeName + ">";
+		assertEquals(superTypeName, type.getSuperTypes().get(0).getIdentifier());
+	}
+	
+	@Test public void testNestedEnum_03() throws Exception {
+		String typeName = TestEnum.Nested.class.getName();
+		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+		assertEquals(1, type.getLiterals().size());
+		Set<String> expectedLiterals = Sets.newHashSet(TestEnum.Nested.SINGLETON.name());
+		for(JvmEnumerationLiteral literal: type.getLiterals()) {
+			assertTrue(expectedLiterals.remove(literal.getSimpleName()));
+			assertSame(type, literal.getEnumType());
+			assertEquals(JvmVisibility.PUBLIC, literal.getVisibility());
+		}
+		assertTrue(expectedLiterals.toString(), expectedLiterals.isEmpty());
+	}
+	
+	@Test public void testNestedEnum_04() throws Exception {
+		String typeName = TestEnum.Nested.class.getName();
+		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+		List<JvmMember> members = type.getMembers();
+		boolean constructorFound = false;
+		for(JvmMember member: members) {
+			if (member instanceof JvmConstructor) {
+				assertFalse(constructorFound);
+				constructorFound = true;
+				List<JvmFormalParameter> parameters = ((JvmConstructor) member).getParameters();
+				assertEquals(0, parameters.size()); // synthetic parameters are not returned
+			}
+		}
+		assertTrue(constructorFound);
 	}
 	
 	@Test public void testAnnotations_01() throws Exception {
