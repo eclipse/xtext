@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,29 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.testSetups;
 
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public enum TestEnum {
+public abstract class NestedInterfaces extends TestScenario {
 
-	FirstValue("Zonk") {
-		@Override
-		public String toString() {
-			return super.toString().toLowerCase();
+	interface Outer {
+		
+		interface Inner {
+			
+			void method();
+			
 		}
-	},
-	SecondValue("Bla");
-	
-	String string;
-	
-	TestEnum(String string) {
-		this.string = string;
+		
+		int method();
 	}
 	
-	public enum Nested {
-		SINGLETON {};
-	}
-
 }
-

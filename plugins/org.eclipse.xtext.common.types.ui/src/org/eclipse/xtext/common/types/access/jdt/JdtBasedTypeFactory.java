@@ -992,7 +992,15 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			int length = fqn.length();
 			for (ITypeBinding declaredType : declaredTypes) {
 				if (!declaredType.isAnonymous() && !declaredType.isSynthetic()) {
-					members.addUnique(createType(declaredType, handleIdentifier, path, fqn));
+					JvmDeclaredType nestedType = createType(declaredType, handleIdentifier, path, fqn);
+					if (nestedType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+						if (((JvmGenericType) nestedType).isInterface()) {
+							nestedType.setStatic(true);	
+						}
+					} else {
+						nestedType.setStatic(true);
+					}
+					members.addUnique(nestedType);
 					fqn.setLength(length);
 				}
 			}
