@@ -416,8 +416,7 @@ public class XtendCompiler extends XbaseCompiler {
 	protected void compileAnonymousClass(AnonymousClass anonymousClass, JvmDeclaredType type, ITreeAppendable b) {
 		ITreeAppendable appendable = b.trace(anonymousClass, true);
 		appendable.openScope();
-		appendable.declareVariable(type, "this");
-		appendable.declareVariable(type.getSuperTypes().get(0).getType(), "super");
+		jvmModelGenerator.assignThisAndSuper(appendable, type);
 		jvmModelGenerator.generateBody(type, appendable, generatorConfigProvider.get(anonymousClass));
 		appendable.closeScope();
 	}
