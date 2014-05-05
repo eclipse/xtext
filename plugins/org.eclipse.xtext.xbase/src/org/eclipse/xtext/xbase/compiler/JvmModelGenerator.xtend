@@ -605,18 +605,10 @@ class JvmModelGenerator implements IGenerator {
 						JvmConstructor: Void.TYPE.getTypeForName(op) 
 						default: null
 					}
-					if (expression instanceof XBlockExpression && (expression as XBlockExpression).expressions.size != 1 && returnType instanceof JvmVoid) {
-						val block = expression as XBlockExpression
-						if (block.expressions.isEmpty()) {
-							appendable.append("{}")		
-						} else {
-							compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
-						}
-					} else {
-						appendable.append("{").increaseIndentation
-						compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
-						appendable.decreaseIndentation.newLine.append("}")
-					}
+					appendable.append("{").increaseIndentation
+					appendable.reassignThisInJvmExecutable(op)
+					compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
+					appendable.decreaseIndentation.newLine.append("}")
 				} else {
 					generateBodyWithIssues(appendable, errors)	
 				}
@@ -630,6 +622,22 @@ class JvmModelGenerator implements IGenerator {
 				appendable.append("{").newLine.append("}")
 			}
 		}
+	}
+
+	def protected void reassignThisInJvmExecutable(ITreeAppendable b, JvmExecutable jvmExecutable) {
+		val declaredType = EcoreUtil2.getContainerOfType(jvmExecutable, JvmDeclaredType)
+		if (!declaredType.static && b.hasObject("this")) {
+			val element = b.getObject("this")
+			if (element != declaredType) {
+				if (element instanceof JvmType) {
+					val proposedName = element.simpleName+".this"
+					if (!b.hasObject(proposedName)) {
+						b.declareSyntheticVariable(element, proposedName)
+					}
+				}
+			}
+		}
+		b.declareVariable(declaredType, "this");
 	}
 
 	def generateBodyWithIssues(ITreeAppendable appendable, Iterable<Issue> errors) {
