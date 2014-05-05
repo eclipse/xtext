@@ -17,10 +17,9 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -295,6 +294,7 @@ public class TypeUsageCollector {
 	protected void acceptType(JvmTypeReference ref) {
 		if (ref instanceof XFunctionTypeRef 
 		 || ref instanceof JvmWildcardTypeReference
+		 || ref instanceof JvmGenericArrayTypeReference
 		 || (ref.eContainer() instanceof XFunctionTypeRef 
 				 && ref.eContainmentFeature() == JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT)
 		 || NodeModelUtils.findActualNodeFor(ref) == null) 

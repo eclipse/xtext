@@ -6,6 +6,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.imports.ImportOrganizer
 import org.junit.Test
+import org.junit.Ignore
 
 class OrganizeImportsTest extends AbstractXtendUITestCase {
 	
@@ -26,6 +27,35 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 		for(it: changes.sortBy[offset].reverse)
 			builder.replace(offset, offset + length, text)
 		assertEquals(expected.toString, builder.toString)
+	}
+	
+	@Test def testUnresolvedArrayType() {
+		'''
+			class Foo {
+				Serializable[] elements
+			}
+		'''.assertIsOrganizedTo('''
+			import java.io.Serializable
+			
+			class Foo {
+				Serializable[] elements
+			}
+		''')
+	}
+	
+	@Test def testUnresolvedArrayType2() {
+		'''
+			class Foo {
+				HashSet<Serializable>[] elements
+			}
+		'''.assertIsOrganizedTo('''
+			import java.io.Serializable
+			import java.util.HashSet
+			
+			class Foo {
+				HashSet<Serializable>[] elements
+			}
+		''')
 	}
 	
 	@Test def testUnresolvedType() {
@@ -456,6 +486,8 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 		''')
 	}
 
+	//FIXME
+	@Ignore
 	@Test def void testAnonymousClass_1() {
 		'''
 			class Foo {
