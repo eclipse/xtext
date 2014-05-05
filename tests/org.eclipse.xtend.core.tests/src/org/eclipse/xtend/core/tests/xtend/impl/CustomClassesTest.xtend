@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.tests.xtend.impl
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
@@ -5,6 +12,9 @@ import org.junit.Test
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtend.core.xtend.XtendField
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 class CustomClassesTest extends AbstractXtendTestCase {
 	
 	@Test def void testClassAbstractFinal() {
@@ -45,11 +55,12 @@ class CustomClassesTest extends AbstractXtendTestCase {
 	
 	@Test def void testInterfaceFinalAndStatic() {
 		assertFalse(interfaze('''interface Foo {}''').final)
-		assertTrue(interfaze('''interface Foo {}''').^static)
+		assertFalse(interfaze('''interface Foo {}''').static)
 	}
 	
 	@Test def void testEnumFinalAndStatic() {
-		assertTrue(enumeration('''enum Foo {}''').^static)
+		assertFalse(enumeration('''enum Foo {}''').static)
+		assertTrue(enumeration('''enum Foo {}''').final)
 	}
 	
 	@Test def void testEnumLiteralDefaults() {
@@ -75,7 +86,7 @@ class CustomClassesTest extends AbstractXtendTestCase {
 	}
 	
 	@Test def void testAnnotationTypeStaticAndFinal() {
-		assertTrue(annotationType('''static annotation Foo {}''').^static)
+		assertFalse(annotationType('''static annotation Foo {}''').static)
 		assertFalse(annotationType('''final annotation Foo {}''').final)
 	}
 	
