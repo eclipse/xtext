@@ -634,7 +634,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	 * @param object used for dispatching
 	 */
 	protected void _computeTypes(XStringLiteral object, ITypeComputationState state) {
-		if (object.getValue().length() != 1) {
+		if (object.getValue() != null && object.getValue().length() != 1) {
 			LightweightTypeReference result = getTypeForName(String.class, state);
 			state.acceptActualType(result);
 		} else {
