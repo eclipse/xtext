@@ -26,6 +26,10 @@ public enum TestEnum {
 	TestEnum(String string) {
 		this.string = string;
 	}
+	
+	public enum Nested {
+		SINGLETON {};
+	}
 
 }
 

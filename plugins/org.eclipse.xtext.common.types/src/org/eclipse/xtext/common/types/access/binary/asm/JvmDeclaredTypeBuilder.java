@@ -183,14 +183,12 @@ public class JvmDeclaredTypeBuilder extends ClassVisitor implements Opcodes {
     
     protected void setTypeModifiers(int accessFlags) {
 		result.setAbstract((accessFlags & ACC_ABSTRACT) != 0);
+		result.setStatic((accessFlags & ACC_STATIC) != 0);
 		if (result.eClass() != TypesPackage.Literals.JVM_ENUMERATION_TYPE) {
-			result.setStatic((accessFlags & ACC_STATIC) != 0);
 			if (result.isStatic()) {
 				offset = 0;
 			}
 			result.setFinal((accessFlags & ACC_FINAL) != 0);
-		} else {
-			result.setStatic(true);
 		}
 	}
 
@@ -246,6 +244,16 @@ public class JvmDeclaredTypeBuilder extends ClassVisitor implements Opcodes {
 			super(binaryClass, bytesAccess, classLoader, typeParameters, proxies);
 			this.innerName = innerName;
 			this.offset = offset;
+		}
+		
+		@Override
+		protected void setTypeModifiers(int accessFlags) {
+			super.setTypeModifiers(accessFlags);
+			if (result.eClass() != TypesPackage.Literals.JVM_GENERIC_TYPE) {
+				result.setStatic(true);
+			} else if (((JvmGenericType) result).isInterface()) {
+				result.setStatic(true);
+			}
 		}
 		
 		@Override
