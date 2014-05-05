@@ -89,6 +89,18 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		return result;
 	}
 	
+	public IFeatureScopeSession addNestedTypesToScope(JvmDeclaredType type) {
+		return new FeatureScopeSessionWithNestedTypes(this, type);
+	}
+	
+	public List<JvmDeclaredType> getEnclosingTypes() {
+		return Collections.emptyList();
+	}
+	
+	public Map<QualifiedName, JvmDeclaredType> getNestedTypes() {
+		return Collections.emptyMap();
+	}
+	
 	public IFeatureScopeSession toInstanceContext() {
 		return new InstanceFeatureScopeSession(this);
 	}
