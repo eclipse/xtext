@@ -7,14 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.jvmmodel;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.linking.impl.LinkingHelper;
+import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XbasePackage;
+
+import com.google.inject.Inject;
 
 
 /**
@@ -22,6 +37,40 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  */
 public class AnonymousClassUtil {
 
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
+	
+	@Inject
+	private LazyURIEncoder uriEncoder;
+	
+	@Inject
+	private LinkingHelper linkingHelper;
+	
+	public JvmDeclaredType getSuperTypeNonResolving(AnonymousClass anonymousClass, IScope typeScope) {
+		XConstructorCall constructorCall = anonymousClass.getConstructorCall();
+		EObject constructorProxy = (EObject) constructorCall.eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
+		if (constructorProxy == null)
+			return null;
+		if (!constructorProxy.eIsProxy()) {
+			return getSuperType(anonymousClass);
+		}
+		String fragment = EcoreUtil.getURI(constructorProxy).fragment();
+		INode node = uriEncoder.getNode(constructorCall, fragment);
+		String name = linkingHelper.getCrossRefNodeAsString(node, true);
+		QualifiedName superTypeName = qualifiedNameConverter.toQualifiedName(name);
+		IEObjectDescription description = typeScope.getSingleElement(superTypeName);
+		if (description == null || !EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_DECLARED_TYPE, description.getEClass())) {
+			description = typeScope.getSingleElement(QualifiedName.create("java", "lang", "Object"));
+		}
+		if (description != null && EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_DECLARED_TYPE, description.getEClass())) {
+			JvmDeclaredType type = (JvmDeclaredType) description.getEObjectOrProxy();
+			if (!type.eIsProxy())
+				return type;
+			return (JvmDeclaredType) EcoreUtil.resolve(type, anonymousClass);
+		}
+		return null;
+	}
+	
 	@Nullable
 	public JvmGenericType getSuperType(AnonymousClass anonymousClass) {
 		JvmConstructor constructor = anonymousClass.getConstructorCall().getConstructor();
