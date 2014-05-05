@@ -307,6 +307,104 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
     }
     
     @Test
+    def void testBug426442_EnclosingClassMethodCall() {
+	val expression = expression("enclosingClassMethod", false);
+
+	val enclosingClass = expression.toClass("my.test.EnclosingClass") [
+		members += expression.toMethod("enclosingClassMethod", references.getTypeForName(String, expression)) [
+				body = [append('''return "enclosingClassMethodResult";''')]
+			]
+		members += expression.toClass(qualifiedName + ".InnerClass") [
+			members += expression.toMethod("enclosingClassMethodCall", references.getTypeForName(String, expression)) [
+				body = expression
+			]
+		]
+	]
+
+	val compiledEnclosingClass = compile(expression.eResource, enclosingClass)
+	assertNotNull(compiledEnclosingClass)
+	val compiledInnerClass = compiledEnclosingClass.declaredClasses.findFirst[simpleName == "InnerClass"]
+	assertNotNull(compiledInnerClass)
+	val enclosingClassInstance = compiledEnclosingClass.newInstance
+	assertNotNull(enclosingClassInstance)
+	val innerClassConstructor = compiledInnerClass.getDeclaredConstructor(compiledEnclosingClass);
+	assertNotNull(innerClassConstructor)
+	val innerClassInstance = innerClassConstructor.newInstance(enclosingClassInstance)
+	assertNotNull(innerClassInstance)
+	val enclosingClassMethodCallMethod = compiledInnerClass.getMethod("enclosingClassMethodCall")
+	assertNotNull(enclosingClassMethodCallMethod)
+	val invocationResult = enclosingClassMethodCallMethod.invoke(innerClassInstance)
+	assertNotNull(invocationResult)
+
+	assertEquals("enclosingClassMethodResult", invocationResult)
+    }
+
+    @Test
+    def void testBug426442_InnerClassLocalMethodCall() {
+	val expression = expression("innerClassMethod", false);
+
+	val enclosingClass = expression.toClass("my.test.EnclosingClass") [
+		members += expression.toClass(qualifiedName + ".InnerClass") [
+			members += expression.toMethod("innerClassMethod", references.getTypeForName(String, expression)) [
+				body = [append('''return "innerClassMethodResult";''')]
+			]
+			members += expression.toMethod("innerClassMethodCall", references.getTypeForName(String, expression)) [
+				body = expression
+			]
+		]
+	]
+
+	val compiledEnclosingClass = compile(expression.eResource, enclosingClass)
+	assertNotNull(compiledEnclosingClass)
+	val compiledInnerClass = compiledEnclosingClass.declaredClasses.findFirst[simpleName == "InnerClass"]
+	assertNotNull(compiledInnerClass)
+	val enclosingClassInstance = compiledEnclosingClass.newInstance
+	assertNotNull(enclosingClassInstance)
+	val innerClassConstructor = compiledInnerClass.getDeclaredConstructor(compiledEnclosingClass);
+	assertNotNull(innerClassConstructor)
+	val innerClassInstance = innerClassConstructor.newInstance(enclosingClassInstance)
+	assertNotNull(innerClassInstance)
+	val enclosingClassMethodCallMethod = compiledInnerClass.getMethod("innerClassMethodCall")
+	assertNotNull(enclosingClassMethodCallMethod)
+	val invocationResult = enclosingClassMethodCallMethod.invoke(innerClassInstance)
+	assertNotNull(invocationResult)
+
+	assertEquals("innerClassMethodResult", invocationResult)
+
+    }
+
+    @Test
+    def void testBug426442_InnerStaticClassLocalMethodCall() {
+	val expression = expression("innerStaticClassMethod", false);
+
+	val enclosingClass = expression.toClass("my.test.EnclosingClass") [
+		members += expression.toClass(qualifiedName + ".InnerStaticClass") [
+			static = true
+			members += expression.toMethod("innerStaticClassMethod", references.getTypeForName(String, expression)) [
+				body = [append('''return "innerStaticClassMethodResult";''')]
+			]
+			members += expression.toMethod("innerStaticClassMethodCall", references.getTypeForName(String, expression)) [
+				body = expression
+			]
+		]
+	]
+
+	val compiledEnclosingClass = compile(expression.eResource, enclosingClass)
+	assertNotNull(compiledEnclosingClass)
+	val compiledInnerStaticClass = compiledEnclosingClass.declaredClasses.findFirst[simpleName == "InnerStaticClass"]
+	assertNotNull(compiledInnerStaticClass)
+	val innerStaticClassInstance = compiledInnerStaticClass.newInstance
+	assertNotNull(innerStaticClassInstance)
+	val enclosingClassMethodCallMethod = compiledInnerStaticClass.getMethod("innerStaticClassMethodCall")
+	assertNotNull(enclosingClassMethodCallMethod)
+	val invocationResult = enclosingClassMethodCallMethod.invoke(innerStaticClassInstance)
+	assertNotNull(invocationResult)
+
+	assertEquals("innerStaticClassMethodResult", invocationResult)
+
+    }
+
+    @Test
     def void testNestedAnnotationType(){
         val expression = expression("42")
         val outerClass = expression.toClass('my.outer.Clazz')

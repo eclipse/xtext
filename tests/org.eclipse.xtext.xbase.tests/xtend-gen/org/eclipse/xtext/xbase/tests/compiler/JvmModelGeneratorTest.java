@@ -14,6 +14,7 @@ import com.google.inject.Provider;
 import foo.TestAnnotation;
 import foo.TestAnnotation2;
 import foo.TestAnnotations;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -23,6 +24,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -667,6 +669,216 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Assert.assertNotNull(_field_2);
       Method _method = compiled.getMethod("doStuff");
       Assert.assertNotNull(_method);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug426442_EnclosingClassMethodCall() {
+    try {
+      final XExpression expression = this.expression("enclosingClassMethod", false);
+      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+        public void apply(final JvmGenericType it) {
+          EList<JvmMember> _members = it.getMembers();
+          JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(String.class, expression);
+          final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+            public void apply(final JvmOperation it) {
+              final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                public void apply(final ITreeAppendable it) {
+                  StringConcatenation _builder = new StringConcatenation();
+                  _builder.append("return \"enclosingClassMethodResult\";");
+                  it.append(_builder);
+                }
+              };
+              JvmModelGeneratorTest.this.builder.setBody(it, _function);
+            }
+          };
+          JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "enclosingClassMethod", _typeForName, _function);
+          JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+          EList<JvmMember> _members_1 = it.getMembers();
+          String _qualifiedName = it.getQualifiedName();
+          String _plus = (_qualifiedName + ".InnerClass");
+          final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
+            public void apply(final JvmGenericType it) {
+              EList<JvmMember> _members = it.getMembers();
+              JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(String.class, expression);
+              final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  JvmModelGeneratorTest.this.builder.setBody(it, expression);
+                }
+              };
+              JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "enclosingClassMethodCall", _typeForName, _function);
+              JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+            }
+          };
+          JvmGenericType _class = JvmModelGeneratorTest.this.builder.toClass(expression, _plus, _function_1);
+          JvmModelGeneratorTest.this.builder.<JvmGenericType>operator_add(_members_1, _class);
+        }
+      };
+      final JvmGenericType enclosingClass = this.builder.toClass(expression, "my.test.EnclosingClass", _function);
+      Resource _eResource = expression.eResource();
+      final Class<?> compiledEnclosingClass = this.compile(_eResource, enclosingClass);
+      Assert.assertNotNull(compiledEnclosingClass);
+      Class<?>[] _declaredClasses = compiledEnclosingClass.getDeclaredClasses();
+      final Function1<Class<?>, Boolean> _function_1 = new Function1<Class<?>, Boolean>() {
+        public Boolean apply(final Class<?> it) {
+          String _simpleName = it.getSimpleName();
+          return Boolean.valueOf(Objects.equal(_simpleName, "InnerClass"));
+        }
+      };
+      final Class<?> compiledInnerClass = IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(_declaredClasses)), _function_1);
+      Assert.assertNotNull(compiledInnerClass);
+      final Object enclosingClassInstance = compiledEnclosingClass.newInstance();
+      Assert.assertNotNull(enclosingClassInstance);
+      final Constructor<?> innerClassConstructor = compiledInnerClass.getDeclaredConstructor(compiledEnclosingClass);
+      Assert.assertNotNull(innerClassConstructor);
+      final Object innerClassInstance = innerClassConstructor.newInstance(enclosingClassInstance);
+      Assert.assertNotNull(innerClassInstance);
+      final Method enclosingClassMethodCallMethod = compiledInnerClass.getMethod("enclosingClassMethodCall");
+      Assert.assertNotNull(enclosingClassMethodCallMethod);
+      final Object invocationResult = enclosingClassMethodCallMethod.invoke(innerClassInstance);
+      Assert.assertNotNull(invocationResult);
+      Assert.assertEquals("enclosingClassMethodResult", invocationResult);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug426442_InnerClassLocalMethodCall() {
+    try {
+      final XExpression expression = this.expression("innerClassMethod", false);
+      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+        public void apply(final JvmGenericType it) {
+          EList<JvmMember> _members = it.getMembers();
+          String _qualifiedName = it.getQualifiedName();
+          String _plus = (_qualifiedName + ".InnerClass");
+          final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+            public void apply(final JvmGenericType it) {
+              EList<JvmMember> _members = it.getMembers();
+              JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(String.class, expression);
+              final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                    public void apply(final ITreeAppendable it) {
+                      StringConcatenation _builder = new StringConcatenation();
+                      _builder.append("return \"innerClassMethodResult\";");
+                      it.append(_builder);
+                    }
+                  };
+                  JvmModelGeneratorTest.this.builder.setBody(it, _function);
+                }
+              };
+              JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "innerClassMethod", _typeForName, _function);
+              JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+              EList<JvmMember> _members_1 = it.getMembers();
+              JvmTypeReference _typeForName_1 = JvmModelGeneratorTest.this.references.getTypeForName(String.class, expression);
+              final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  JvmModelGeneratorTest.this.builder.setBody(it, expression);
+                }
+              };
+              JvmOperation _method_1 = JvmModelGeneratorTest.this.builder.toMethod(expression, "innerClassMethodCall", _typeForName_1, _function_1);
+              JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members_1, _method_1);
+            }
+          };
+          JvmGenericType _class = JvmModelGeneratorTest.this.builder.toClass(expression, _plus, _function);
+          JvmModelGeneratorTest.this.builder.<JvmGenericType>operator_add(_members, _class);
+        }
+      };
+      final JvmGenericType enclosingClass = this.builder.toClass(expression, "my.test.EnclosingClass", _function);
+      Resource _eResource = expression.eResource();
+      final Class<?> compiledEnclosingClass = this.compile(_eResource, enclosingClass);
+      Assert.assertNotNull(compiledEnclosingClass);
+      Class<?>[] _declaredClasses = compiledEnclosingClass.getDeclaredClasses();
+      final Function1<Class<?>, Boolean> _function_1 = new Function1<Class<?>, Boolean>() {
+        public Boolean apply(final Class<?> it) {
+          String _simpleName = it.getSimpleName();
+          return Boolean.valueOf(Objects.equal(_simpleName, "InnerClass"));
+        }
+      };
+      final Class<?> compiledInnerClass = IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(_declaredClasses)), _function_1);
+      Assert.assertNotNull(compiledInnerClass);
+      final Object enclosingClassInstance = compiledEnclosingClass.newInstance();
+      Assert.assertNotNull(enclosingClassInstance);
+      final Constructor<?> innerClassConstructor = compiledInnerClass.getDeclaredConstructor(compiledEnclosingClass);
+      Assert.assertNotNull(innerClassConstructor);
+      final Object innerClassInstance = innerClassConstructor.newInstance(enclosingClassInstance);
+      Assert.assertNotNull(innerClassInstance);
+      final Method enclosingClassMethodCallMethod = compiledInnerClass.getMethod("innerClassMethodCall");
+      Assert.assertNotNull(enclosingClassMethodCallMethod);
+      final Object invocationResult = enclosingClassMethodCallMethod.invoke(innerClassInstance);
+      Assert.assertNotNull(invocationResult);
+      Assert.assertEquals("innerClassMethodResult", invocationResult);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug426442_InnerStaticClassLocalMethodCall() {
+    try {
+      final XExpression expression = this.expression("innerStaticClassMethod", false);
+      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+        public void apply(final JvmGenericType it) {
+          EList<JvmMember> _members = it.getMembers();
+          String _qualifiedName = it.getQualifiedName();
+          String _plus = (_qualifiedName + ".InnerStaticClass");
+          final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+            public void apply(final JvmGenericType it) {
+              it.setStatic(true);
+              EList<JvmMember> _members = it.getMembers();
+              JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(String.class, expression);
+              final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                    public void apply(final ITreeAppendable it) {
+                      StringConcatenation _builder = new StringConcatenation();
+                      _builder.append("return \"innerStaticClassMethodResult\";");
+                      it.append(_builder);
+                    }
+                  };
+                  JvmModelGeneratorTest.this.builder.setBody(it, _function);
+                }
+              };
+              JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "innerStaticClassMethod", _typeForName, _function);
+              JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+              EList<JvmMember> _members_1 = it.getMembers();
+              JvmTypeReference _typeForName_1 = JvmModelGeneratorTest.this.references.getTypeForName(String.class, expression);
+              final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  JvmModelGeneratorTest.this.builder.setBody(it, expression);
+                }
+              };
+              JvmOperation _method_1 = JvmModelGeneratorTest.this.builder.toMethod(expression, "innerStaticClassMethodCall", _typeForName_1, _function_1);
+              JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members_1, _method_1);
+            }
+          };
+          JvmGenericType _class = JvmModelGeneratorTest.this.builder.toClass(expression, _plus, _function);
+          JvmModelGeneratorTest.this.builder.<JvmGenericType>operator_add(_members, _class);
+        }
+      };
+      final JvmGenericType enclosingClass = this.builder.toClass(expression, "my.test.EnclosingClass", _function);
+      Resource _eResource = expression.eResource();
+      final Class<?> compiledEnclosingClass = this.compile(_eResource, enclosingClass);
+      Assert.assertNotNull(compiledEnclosingClass);
+      Class<?>[] _declaredClasses = compiledEnclosingClass.getDeclaredClasses();
+      final Function1<Class<?>, Boolean> _function_1 = new Function1<Class<?>, Boolean>() {
+        public Boolean apply(final Class<?> it) {
+          String _simpleName = it.getSimpleName();
+          return Boolean.valueOf(Objects.equal(_simpleName, "InnerStaticClass"));
+        }
+      };
+      final Class<?> compiledInnerStaticClass = IterableExtensions.<Class<?>>findFirst(((Iterable<Class<?>>)Conversions.doWrapArray(_declaredClasses)), _function_1);
+      Assert.assertNotNull(compiledInnerStaticClass);
+      final Object innerStaticClassInstance = compiledInnerStaticClass.newInstance();
+      Assert.assertNotNull(innerStaticClassInstance);
+      final Method enclosingClassMethodCallMethod = compiledInnerStaticClass.getMethod("innerStaticClassMethodCall");
+      Assert.assertNotNull(enclosingClassMethodCallMethod);
+      final Object invocationResult = enclosingClassMethodCallMethod.invoke(innerStaticClassInstance);
+      Assert.assertNotNull(invocationResult);
+      Assert.assertEquals("innerStaticClassMethodResult", invocationResult);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
