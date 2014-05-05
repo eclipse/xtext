@@ -135,6 +135,129 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testThisScoping_01() {'''
+			class C {
+				def newD() {
+					return new D {
+						def m() {
+							return this
+						}
+					}
+				}
+			}
+			class D {}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public D newD() {
+			    @SuppressWarnings("all")
+			    final class __C_1 extends D {
+			      public D m() {
+			        return this;
+			      }
+			    }
+			    
+			    return new __C_1();
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testThisScoping_02() {'''
+			class C {
+				def newD() {
+					return new D {
+						def m() {
+							return toString
+						}
+					}
+				}
+			}
+			class D {}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public D newD() {
+			    @SuppressWarnings("all")
+			    final class __C_1 extends D {
+			      public String m() {
+			        return this.toString();
+			      }
+			    }
+			    
+			    return new __C_1();
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testThisScoping_03() {'''
+			class C {
+				def newD() {
+					return new D {
+						def m() {
+							m2
+						}
+					}
+				}
+				def void m2() {}
+			}
+			class D {}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public D newD() {
+			    @SuppressWarnings("all")
+			    final class __C_1 extends D {
+			      public void m() {
+			        C.this.m2();
+			      }
+			    }
+			    
+			    return new __C_1();
+			  }
+			  
+			  public void m2() {
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testSuperScoping_01() {'''
+			class C extends B {
+				def myMethod() {
+					return new D {
+						override m() {
+							super.m
+						}
+					}
+				}
+				override m() {}
+			}
+			class B { def void m() {} }
+			class D extends E {}
+			class E { def void m() {} }
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C extends B {
+			  public D myMethod() {
+			    return new D() {
+			      public void m() {
+			        super.m();
+			      }
+			    };
+			  }
+			  
+			  public void m() {
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testLocalVar_AdditionalMember() {'''
 			class Foo {
 				def foo() {
