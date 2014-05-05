@@ -41,11 +41,9 @@ public class JvmElementAtOffsetHelper {
     boolean _isEmpty = jvmElements.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      EObject _head = IterableExtensions.<EObject>head(jvmElements);
-      final JvmIdentifiableElement type = ((JvmIdentifiableElement) _head);
-      boolean _notEquals = (!Objects.equal(type, null));
-      if (_notEquals) {
-        return type;
+      final EObject firstElement = IterableExtensions.<EObject>head(jvmElements);
+      if ((firstElement instanceof JvmIdentifiableElement)) {
+        return ((JvmIdentifiableElement)firstElement);
       }
     }
     return null;
