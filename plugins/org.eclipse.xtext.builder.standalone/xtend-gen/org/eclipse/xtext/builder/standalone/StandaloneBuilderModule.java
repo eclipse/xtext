@@ -15,12 +15,10 @@ import com.google.inject.name.Names;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.compiler.EclipseJavaCompiler;
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
-import org.eclipse.xtext.builder.standalone.resource.StandaloneResourceSet;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 
@@ -30,32 +28,30 @@ import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 @SuppressWarnings("all")
 public class StandaloneBuilderModule extends AbstractModule {
   protected void configure() {
-    AnnotatedBindingBuilder<XtextResourceSet> _bind = this.<XtextResourceSet>bind(XtextResourceSet.class);
-    _bind.to(StandaloneResourceSet.class);
-    AnnotatedBindingBuilder<IResourceDescriptions> _bind_1 = this.<IResourceDescriptions>bind(IResourceDescriptions.class);
+    AnnotatedBindingBuilder<IResourceDescriptions> _bind = this.<IResourceDescriptions>bind(IResourceDescriptions.class);
     Named _named = Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE);
-    LinkedBindingBuilder<IResourceDescriptions> _annotatedWith = _bind_1.annotatedWith(_named);
+    LinkedBindingBuilder<IResourceDescriptions> _annotatedWith = _bind.annotatedWith(_named);
     _annotatedWith.to(
       ResourceSetBasedResourceDescriptions.class);
-    AnnotatedBindingBuilder<IResourceDescriptions> _bind_2 = this.<IResourceDescriptions>bind(IResourceDescriptions.class);
+    AnnotatedBindingBuilder<IResourceDescriptions> _bind_1 = this.<IResourceDescriptions>bind(IResourceDescriptions.class);
     Named _named_1 = Names.named(ResourceDescriptionsProvider.LIVE_SCOPE);
-    LinkedBindingBuilder<IResourceDescriptions> _annotatedWith_1 = _bind_2.annotatedWith(_named_1);
+    LinkedBindingBuilder<IResourceDescriptions> _annotatedWith_1 = _bind_1.annotatedWith(_named_1);
     _annotatedWith_1.to(
       ResourceSetBasedResourceDescriptions.class);
-    AnnotatedBindingBuilder<IResourceDescriptions> _bind_3 = this.<IResourceDescriptions>bind(IResourceDescriptions.class);
-    _bind_3.to(ResourceSetBasedResourceDescriptions.class);
-    AnnotatedBindingBuilder<IIssueHandler> _bind_4 = this.<IIssueHandler>bind(IIssueHandler.class);
+    AnnotatedBindingBuilder<IResourceDescriptions> _bind_2 = this.<IResourceDescriptions>bind(IResourceDescriptions.class);
+    _bind_2.to(ResourceSetBasedResourceDescriptions.class);
+    AnnotatedBindingBuilder<IIssueHandler> _bind_3 = this.<IIssueHandler>bind(IIssueHandler.class);
     Class<? extends IIssueHandler> _bindIIssueHandler = this.bindIIssueHandler();
-    _bind_4.to(_bindIIssueHandler);
-    AnnotatedBindingBuilder<AbstractFileSystemAccess> _bind_5 = this.<AbstractFileSystemAccess>bind(AbstractFileSystemAccess.class);
+    _bind_3.to(_bindIIssueHandler);
+    AnnotatedBindingBuilder<AbstractFileSystemAccess> _bind_4 = this.<AbstractFileSystemAccess>bind(AbstractFileSystemAccess.class);
     Class<JavaIoFileSystemAccess> _bindJavaIoFileSystemAccess = this.bindJavaIoFileSystemAccess();
-    _bind_5.to(_bindJavaIoFileSystemAccess);
-    AnnotatedBindingBuilder<IJavaCompiler> _bind_6 = this.<IJavaCompiler>bind(IJavaCompiler.class);
+    _bind_4.to(_bindJavaIoFileSystemAccess);
+    AnnotatedBindingBuilder<IJavaCompiler> _bind_5 = this.<IJavaCompiler>bind(IJavaCompiler.class);
     Class<EclipseJavaCompiler> _bindIJavaCompiler = this.bindIJavaCompiler();
-    _bind_6.to(_bindIJavaCompiler);
-    AnnotatedBindingBuilder<IEncodingProvider> _bind_7 = this.<IEncodingProvider>bind(IEncodingProvider.class);
+    _bind_5.to(_bindIJavaCompiler);
+    AnnotatedBindingBuilder<IEncodingProvider> _bind_6 = this.<IEncodingProvider>bind(IEncodingProvider.class);
     Class<? extends IEncodingProvider> _bindIEncodingProvider = this.bindIEncodingProvider();
-    _bind_7.to(_bindIEncodingProvider);
+    _bind_6.to(_bindIEncodingProvider);
   }
   
   public Class<EclipseJavaCompiler> bindIJavaCompiler() {
