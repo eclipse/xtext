@@ -18,6 +18,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
@@ -56,6 +57,23 @@ public class ValueConverterExceptionProducesErrorTest extends AbstractXtendTestC
     String _message = error.getMessage();
     Assert.assertEquals("String literal is not closed", _message);
     this.assertLiteral("abc", resource);
+  }
+  
+  /**
+   * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=428525
+   */
+  @Test
+  public void testInvalidUnicode() throws Exception {
+    final Resource resource = this.toResource("class C { def m() {\'\\u\'.toString}}");
+    EcoreUtil2.resolveAll(resource);
+    EList<Resource.Diagnostic> _errors = resource.getErrors();
+    int _size = _errors.size();
+    Assert.assertEquals(1, _size);
+    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
+    final Resource.Diagnostic error = IterableExtensions.<Resource.Diagnostic>head(_errors_1);
+    Assert.assertNotNull(error);
+    String _message = error.getMessage();
+    Assert.assertEquals("Malformed \\uxxxx encoding.", _message);
   }
   
   private void assertLiteral(final String expectation, final Resource resource) {
