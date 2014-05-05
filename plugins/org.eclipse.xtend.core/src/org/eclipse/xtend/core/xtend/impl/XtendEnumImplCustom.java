@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.xtend.impl;
 
+import org.eclipse.xtend.core.xtend.XtendFile;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -14,11 +16,11 @@ public class XtendEnumImplCustom extends XtendEnumImpl {
 
 	@Override
 	public boolean isFinal() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isStatic() {
-		return true;
+		return !(eContainer() instanceof XtendFile);
 	}
 }
