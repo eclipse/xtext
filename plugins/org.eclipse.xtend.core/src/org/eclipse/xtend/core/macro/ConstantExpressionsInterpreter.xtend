@@ -45,6 +45,9 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals
 import org.eclipse.xtext.xtype.XComputedTypeReference
 import org.eclipse.xtext.xbase.XbasePackage
+import org.eclipse.xtext.xbase.typesystem.internal.PendingLinkingCandidateResolver
+import org.eclipse.emf.ecore.InternalEObject
+import org.eclipse.xtext.xbase.typesystem.internal.TypeLiteralLinkingCandidateResolver
 
 /**
  * An interpreter for evaluating constant expressions in annotation values.
@@ -183,19 +186,18 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 		if (ctx.visibleFeatures.containsKey(featureName)) {
 			return switch visibleFeature : ctx.visibleFeatures.get(featureName) {
 				JvmEnumerationLiteral : {
-					eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, visibleFeature)
+					resolveFeature(visibleFeature)
 					visibleFeature
 				}
 				JvmField : {
-					eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, visibleFeature)
+					resolveFeature(visibleFeature)
 					evaluateField(it, visibleFeature, ctx)
 				}
 			}
 		}
 		val type = findTypeByName(featureName)
 		if (type != null) {
-			typeLiteral = true
-			eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type)
+			resolveType(type)
 			return toTypeReference(type, 0)
 		}
 		throw new UnresolvableFeatureException("Couldn't resolve feature "+featureName, it)
@@ -221,7 +223,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 							if (enumValue == null) {
 								throw new ConstantExpressionEvaluationException("Couldn't find enum value "+featureName+" on enum "+receiver.simpleName, it)
 							}
-							eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, enumValue)
+							resolveFeature(enumValue)
 							return enumValue
 						}
 						JvmGenericType : {
@@ -229,7 +231,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 							if (field == null) {
 								throw new ConstantExpressionEvaluationException("Couldn't find field "+featureName+" on type "+receiver.simpleName, it)
 							}
-							eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, field)
+							resolveFeature(field)
 							return evaluateField(it,field, ctx)
 						}
 					}
@@ -240,10 +242,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			val typeName = fullName
 			val type = findTypeByName(typeName)
 			if (type != null) {
-				memberCallTarget.setFeature(type)
-				
-				typeLiteral = true
-				eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type)
+				resolveType(type)
 				return toTypeReference(type, 0)
 			} else {
 				throw new UnresolvableFeatureException("Unresolvable type "+typeName, it)
@@ -262,22 +261,6 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 	
 	def dispatch String getFullName(XFeatureCall call) {
 		call.concreteSyntaxFeatureName
-	}
-	
-	def dispatch void setFeature(XExpression call, JvmType type) {
-		throw new ConstantExpressionEvaluationException("The expression '"+call.toText+"' cannot be used as a receiver within a constant expression.")
-	}
-	
-	def dispatch void setFeature(XMemberFeatureCall it, JvmType type) {
-		memberCallTarget.setFeature(type)
-		
-		packageFragment = true
-		eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type)
-	}
-	
-	def dispatch void setFeature(XFeatureCall it, JvmType type) {
-		packageFragment = true
-		eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type)
 	}
 	
 	protected def evaluateField(XAbstractFeatureCall call, JvmField field, Context context) {
@@ -321,6 +304,14 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			return XAnnotation
 		}
 		return classFinder.forName(type.identifier)
+	}
+	
+	protected def resolveType(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature) {
+		new TypeLiteralLinkingCandidateResolver(featureCall).resolveLinkingProxy(featureCall as InternalEObject, feature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE)
+	}
+	
+	protected def resolveFeature(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature) {
+		new PendingLinkingCandidateResolver(featureCall).resolveLinkingProxy(featureCall as InternalEObject, feature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE)
 	}
 
 }

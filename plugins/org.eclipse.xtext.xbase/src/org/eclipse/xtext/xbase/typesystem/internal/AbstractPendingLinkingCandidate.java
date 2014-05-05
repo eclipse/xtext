@@ -13,12 +13,9 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -70,7 +67,9 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public abstract class AbstractPendingLinkingCandidate<Expression extends XExpression> extends AbstractLinkingCandidate<Expression> { 
+public abstract class AbstractPendingLinkingCandidate<Expression extends XExpression> extends AbstractLinkingCandidate<Expression> {
+	
+	private final PendingLinkingCandidateResolver<Expression> pendingLinkingCandidateResolver; 
 	
 	/**
 	 * The backing feature descriptions. It carries the information about the potentially
@@ -84,8 +83,18 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			IIdentifiableElementDescription description,
 			ITypeExpectation expectation,
 			ExpressionTypeComputationState state) {
+		this(expression, description, expectation, state, new PendingLinkingCandidateResolver<Expression>(expression));
+	}
+	
+	protected AbstractPendingLinkingCandidate(
+			Expression expression, 
+			IIdentifiableElementDescription description,
+			ITypeExpectation expectation,
+			ExpressionTypeComputationState state,
+			PendingLinkingCandidateResolver<Expression> pendingLinkingCandidateResolver) {
 		super(expression, expectation, state);
 		this.description = description;
+		this.pendingLinkingCandidateResolver = pendingLinkingCandidateResolver;
 	}
 	
 	/**
@@ -1008,29 +1017,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		if (newFeature.eIsProxy()) {
 			newFeature = (JvmIdentifiableElement) internalView.eResolveProxy((InternalEObject) newFeature);
 		}
-		resolveLinkingProxy(internalView, newFeature, structuralFeature, featureId);
-	}
-
-	protected void resolveLinkingProxy(InternalEObject owner, JvmIdentifiableElement newValue, EReference structuralFeature, int featureId) {
-		EObject oldFeature = (EObject) owner.eGet(structuralFeature, false);
-		if (oldFeature == null || !(oldFeature.eIsProxy())) {
-			throw new IllegalStateException("Feature was already resolved to " + oldFeature);
-		}
-		if (owner.eNotificationRequired()) {
-			boolean wasDeliver = owner.eDeliver();
-			owner.eSetDeliver(false);
-			internalSetValue(owner, structuralFeature, newValue);
-			owner.eSetDeliver(wasDeliver);
-			if (newValue != oldFeature) {
-				owner.eNotify(new ENotificationImpl(owner, Notification.RESOLVE, featureId, oldFeature, newValue));
-			}
-		} else {
-			internalSetValue(owner, structuralFeature, newValue);
-		}
-	}
-
-	protected void internalSetValue(InternalEObject featureCall, EReference structuralFeature, JvmIdentifiableElement newValue) {
-		featureCall.eSet(structuralFeature, newValue);
+		pendingLinkingCandidateResolver.resolveLinkingProxy(internalView, newFeature, structuralFeature, featureId);
 	}
 	
 	protected int getArityMismatch(JvmExecutable executable, List<XExpression> arguments) {
