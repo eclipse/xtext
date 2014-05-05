@@ -1627,6 +1627,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			return true;
 		}
 		if (expression instanceof XSetLiteral) {
+			if (isType(expression, Map.class)) {
+				return false;
+			}
 			XSetLiteral setLiteral = (XSetLiteral) expression;
 			for (XExpression element : setLiteral.getElements()) {
 				if (!internalCanCompileToJavaExpression(element, appendable)) {
