@@ -45,7 +45,7 @@ public class LinkingDiagnosticMessageProvider implements ILinkingDiagnosticMessa
 	public DiagnosticMessage getViolatedBoundsConstraintMessage(ILinkingDiagnosticContext context, int size) {
 		String message = "Too many matches for reference to '" + context.getLinkText() + "'. " 
 				+ "Feature " + context.getReference().getName() + " can only hold " + context.getReference().getUpperBound()
-				+ " reference" + (context.getReference().getUpperBound() != 1 ? "s" : "") + " but found " + size + " candidates" +
+				+ " reference" + (context.getReference().getUpperBound() != 1 ? "s" : "") + " but found " + size + " candidate" +
 				(size!=1 ? "s" : "");
 		return new DiagnosticMessage(message, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);
 	}
