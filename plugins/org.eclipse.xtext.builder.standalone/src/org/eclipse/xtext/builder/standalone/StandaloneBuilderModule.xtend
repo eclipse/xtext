@@ -15,10 +15,8 @@ import org.eclipse.xtext.generator.AbstractFileSystemAccess
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.IResourceDescriptions
-import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions
-import org.eclipse.xtext.builder.standalone.resource.StandaloneResourceSet
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -26,7 +24,6 @@ import org.eclipse.xtext.builder.standalone.resource.StandaloneResourceSet
 class StandaloneBuilderModule extends AbstractModule {
 
 	override protected configure() {
-		bind(XtextResourceSet).to(StandaloneResourceSet)
 		bind(IResourceDescriptions).annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(
 			ResourceSetBasedResourceDescriptions)
 		bind(IResourceDescriptions).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(
