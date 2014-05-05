@@ -64,9 +64,6 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 	private LightweightTypeReference getReturnType(XExpression expression) {
 		return typeResolver.resolveTypes(expression).getReturnType(expression);
 	}
-	private LightweightTypeReference getType(XExpression expression) {
-		return typeResolver.resolveTypes(expression).getActualType(expression);
-	}
 	private LightweightTypeReference getExpectedType(XExpression expression) {
 		return typeResolver.resolveTypes(expression).getExpectedType(expression);
 	}

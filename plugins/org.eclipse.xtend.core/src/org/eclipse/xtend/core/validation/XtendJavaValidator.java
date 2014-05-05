@@ -67,6 +67,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -474,12 +475,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			JvmType superType = superTypeRef.getType();
 			if(superType instanceof JvmGenericType && ((JvmGenericType) superType).isFinal())
 				error("Attempt to override final class", anonymousClass.getConstructorCall(), XCONSTRUCTOR_CALL__CONSTRUCTOR, INSIGNIFICANT_INDEX, OVERRIDDEN_FINAL);
-			if(isInvalidWildcard(superTypeRef)) 
-				error("Anonymous class cannot extend or implement "
-						+ superTypeRef.getIdentifier() 
-						+ ". A supertype may not specify any wildcard",
-						anonymousClass.getConstructorCall(), 
-						XCONSTRUCTOR_CALL__CONSTRUCTOR, INSIGNIFICANT_INDEX, WILDCARD_IN_SUPERTYPE);
 		}
 	}
 	
@@ -501,6 +496,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				if(typeArgument instanceof JvmWildcardTypeReference) 
 					return true;
 			}
+		} else if (typeRef instanceof JvmSpecializedTypeReference) {
+			return isInvalidWildcard(((JvmSpecializedTypeReference) typeRef).getEquivalent());
 		}
 		return false;
 	}

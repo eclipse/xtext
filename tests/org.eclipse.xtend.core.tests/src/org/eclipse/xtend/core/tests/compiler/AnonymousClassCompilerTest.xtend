@@ -52,14 +52,42 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo {
 			  public void foo() {
 			    @SuppressWarnings("all")
-			    final class __Foo_0 implements Runnable {
+			    final class __Foo_1 implements Runnable {
 			      public void run() {
 			      }
 			      
 			      private int baz;
 			    }
 			    
-			    final __Foo_0 bar = new __Foo_0();
+			    final __Foo_1 bar = new __Foo_1();
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testLocalVar_AdditionalMember_Return() {'''
+			class Foo {
+				def foo() {
+					new Runnable() {
+						override run() {}
+						int baz
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public Runnable foo() {
+			    @SuppressWarnings("all")
+			    final class __Foo_1 implements Runnable {
+			      public void run() {
+			      }
+			      
+			      private int baz;
+			    }
+			    
+			    return new __Foo_1();
 			  }
 			}
 		''')
@@ -151,15 +179,15 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  private final Runnable bar = new Function0<Runnable>() {
 			    public Runnable apply() {
 			      @SuppressWarnings("all")
-			      final class __Foo_0 implements Runnable {
+			      final class __Foo_1 implements Runnable {
 			        private int baz;
 			        
 			        public void run() {
 			        }
 			      }
 			      
-			      __Foo_0 ___Foo_0 = new __Foo_0();
-			      return ___Foo_0;
+			      __Foo_1 ___Foo_1 = new __Foo_1();
+			      return ___Foo_1;
 			    }
 			  }.apply();
 			}
@@ -321,13 +349,13 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public Object m() {
 			    @SuppressWarnings("all")
-			    final class __C_0 {
+			    final class __C_1 {
 			      public <T extends Object> T m2() {
 			        return null;
 			      }
 			    }
 			    
-			    return new __C_0();
+			    return new __C_1();
 			  }
 			}
 		''')

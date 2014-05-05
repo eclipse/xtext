@@ -133,7 +133,7 @@ class JvmModelTests extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def testAnonymousClass() {
+	def testAnonymousClass_01() {
 		val operation = '''
 			def foo() {
 				new Runnable() {
@@ -153,16 +153,16 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertEquals(1, anonymous.superTypes.size)
 		assertEquals('java.lang.Runnable', anonymous.superTypes.head.qualifiedName)
 		assertEquals(3, anonymous.members.size)
-		val constructor = anonymous.members.head
+		val constructor = anonymous.members.last
 		assertTrue(constructor instanceof JvmConstructor)
 		assertEquals(0, (constructor as JvmConstructor).parameters.size)
-		assertTrue(anonymous.members.get(1) instanceof JvmField)
-		val overriding = anonymous.members.last
+		assertTrue(anonymous.members.head instanceof JvmField)
+		val overriding = anonymous.members.get(1)
 		assertTrue(overriding instanceof JvmOperation)
 	}
 	
 	@Test
-	def testAnonymousClass_2() {
+	def testAnonymousClass_02() {
 		val operation = '''
 			def foo() {
 				new Runnable() {
@@ -181,15 +181,15 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertEquals(1, anonymous.superTypes.size)
 		assertEquals('java.lang.Runnable', anonymous.superTypes.head.qualifiedName)
 		assertEquals(2, anonymous.members.size)
-		val constructor = anonymous.members.head
+		val constructor = anonymous.members.last
 		assertTrue(constructor instanceof JvmConstructor)
 		assertEquals(0, (constructor as JvmConstructor).parameters.size)
-		val overriding = anonymous.members.last
+		val overriding = anonymous.members.head
 		assertTrue(overriding instanceof JvmOperation)
 	}
 	
 	@Test
-	def testAnonymousClass_3() {
+	def testAnonymousClass_03() {
 		val operation = '''
 			def <T> foo() {
 				new Iterable<T>() {
@@ -209,15 +209,15 @@ class JvmModelTests extends AbstractXtendTestCase {
 		assertEquals(1, anonymous.superTypes.size)
 		assertEquals('java.lang.Iterable<T>', anonymous.superTypes.head.qualifiedName)
 		assertEquals(2, anonymous.members.size)
-		val constructor = anonymous.members.head
+		val constructor = anonymous.members.last
 		assertTrue(constructor instanceof JvmConstructor)
 		assertEquals(0, (constructor as JvmConstructor).typeParameters.size)
-		val overriding = anonymous.members.last
+		val overriding = anonymous.members.head
 		assertTrue(overriding instanceof JvmOperation)
 	}
 	
 	@Test
-	def testNestedClass_0() {
+	def testNestedClass_01() {
 		val clazz = '''
 			class Foo { 
 				static class Nested0 {

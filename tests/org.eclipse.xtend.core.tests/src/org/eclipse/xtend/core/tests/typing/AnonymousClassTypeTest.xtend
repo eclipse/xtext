@@ -22,9 +22,9 @@ import org.eclipse.xtend.core.xtend.AnonymousClass
 class AnonymousClassTypeTest extends AbstractXtendTestCase {
 	
 	@Inject extension IBatchTypeResolver
-	 
+	
 	@Inject extension IXtendJvmAssociations
-	 
+	
 	@Test
 	def void testPlainAnonymous() {
 		val operation = function('''
@@ -54,7 +54,7 @@ class AnonymousClassTypeTest extends AbstractXtendTestCase {
 		assertEquals('Runnable', resolvedTypes.getActualType(operation).toString)	
 		val variable = (function.expression as XBlockExpression).expressions.last
 		val variableType = resolvedTypes.getActualType(variable)
-		assertEquals('__Foo_0', variableType.toString)
+		assertEquals('__Foo_1', variableType.toString)
 		assertTrue(variableType.isSubtypeOf(Runnable))
 	}
 	
