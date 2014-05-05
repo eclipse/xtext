@@ -645,6 +645,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			childSession = session.addLocalElement(IFeatureNames.THIS, thisType, owner);
 		}
 		childSession = addThisTypeToStaticScope(childSession, thisType);
+		childSession = childSession.addNestedTypesToScope(thisType);
 		return childSession;
 	}
 
