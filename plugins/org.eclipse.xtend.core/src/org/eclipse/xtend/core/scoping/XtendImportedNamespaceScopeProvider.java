@@ -9,7 +9,9 @@ package org.eclipse.xtend.core.scoping;
 
 import static java.util.Collections.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
@@ -40,9 +42,11 @@ import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.jvmmodel.NestedTypeCollector;
 import org.eclipse.xtext.xbase.scoping.AbstractNestedTypeAwareImportNormalizer;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.ConstructorTypeScopeWrapper;
+import org.eclipse.xtext.xbase.scoping.batch.NestedTypeScope;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -112,9 +116,12 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				if(inferredAnonymousType != null)
 					result = new LocalTypeScope(singletonList(inferredAnonymousType), result);
 			}
+			// TODO this could be a performance bottleneck, probably due to eagerly collecting the inherited nested types
+			// consider caching those by name in the JvmDeclaredType similar to the members
 			XtendMember syntacticContainer = EcoreUtil2.getContainerOfType(context, XtendMember.class);
 			if (syntacticContainer != null) {
-				result = getContainerScope(syntacticContainer, result);
+				IScope containerScope = getContainerScope(syntacticContainer, result);
+				return containerScope;
 			}
 			return result;
 		} else if (TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(referenceType)) {
@@ -148,10 +155,13 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 		return result;
 	}
 	
-	private AbstractScope getContainerScope(XtendMember syntacticContainer, AbstractScope result) {
+	private IScope getContainerScope(final XtendMember syntacticContainer, AbstractScope result) {
 		List<List<JvmTypeParameter>> typeParameters = null;
-		while(syntacticContainer != null) {
-			Set<EObject> elements = getAssociations().getJvmElements(syntacticContainer);
+		Map<QualifiedName, JvmDeclaredType> nestedTypes = Collections.emptyMap();
+		NestedTypeCollector collector = new NestedTypeCollector();
+		XtendMember workWithMe = syntacticContainer;
+		while(workWithMe != null) {
+			Set<EObject> elements = getAssociations().getJvmElements(workWithMe);
 			for (EObject derivedJvmElement : elements) {
 				// scope for JvmTypeParameterDeclarator
 				if (derivedJvmElement instanceof JvmTypeParameterDeclarator) {
@@ -163,18 +173,31 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 						}
 						typeParameters.add(current);
 					}
+					if (derivedJvmElement instanceof JvmDeclaredType) {
+						if (syntacticContainer != workWithMe) { // prevent stackoverflow / cyclic resolution
+							Map<QualifiedName, JvmDeclaredType> myNestedTypes = collector.collectNestedTypes((JvmDeclaredType) derivedJvmElement);
+							nestedTypes = collector.mergeEnclosingNestedTypes(myNestedTypes, nestedTypes);
+						}
+					}
 				}
 			}
-			EObject container = syntacticContainer;
+			EObject container = workWithMe;
 			do {
 				container = container.eContainer();
 				if (container == null) {
-					if (typeParameters == null)
-						return result;
-					return new TypeParameterScope(typeParameters, result);
+					if (typeParameters == null) {
+						if (nestedTypes.isEmpty())
+							return result;
+						return new NestedTypeScope(result, nestedTypes);
+					}
+					TypeParameterScope typeParameterScope = new TypeParameterScope(typeParameters, result);
+					if (nestedTypes.isEmpty()) {
+						return typeParameterScope;
+					}
+					return new NestedTypeScope(typeParameterScope, nestedTypes);
 				}
 			} while (!(container instanceof XtendMember));
-			syntacticContainer = (XtendMember) container;
+			workWithMe = (XtendMember) container;
 		}
 		return result;
 	}

@@ -8,9 +8,11 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -74,6 +76,16 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 	
 	protected AbstractFeatureScopeSession getParent() {
 		return parent;
+	}
+	
+	@Override
+	public List<JvmDeclaredType> getEnclosingTypes() {
+		return parent.getEnclosingTypes();
+	}
+	
+	@Override
+	public Map<QualifiedName, JvmDeclaredType> getNestedTypes() {
+		return parent.getNestedTypes();
 	}
 	
 	@Nullable
