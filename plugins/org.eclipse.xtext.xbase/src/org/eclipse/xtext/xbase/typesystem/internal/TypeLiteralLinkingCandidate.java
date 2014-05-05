@@ -11,8 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.Keyword;
@@ -28,14 +26,13 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.TypeLiteralLinkingCandidateResolver;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 /**
@@ -51,8 +48,15 @@ public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate
 			XAbstractFeatureCall featureCall, 
 			IIdentifiableElementDescription description,
 			ITypeExpectation expectation, 
-			ExpressionTypeComputationState state) {
-		super(featureCall, description, expectation, state);
+			final ExpressionTypeComputationState state) {
+		super(featureCall, description, expectation, state, new TypeLiteralLinkingCandidateResolver(featureCall) {
+			
+			@Override
+			protected IFeatureLinkingCandidate getLinkingCandidate(XExpression target) {
+				return state.getResolvedTypes().getLinkingCandidate((XAbstractFeatureCall) target);
+			}
+			
+		});
 		if (featureCall.isExplicitOperationCallOrBuilderSyntax()) {
 			throw new IllegalArgumentException("Cannot be a type literal: " + String.valueOf(featureCall));
 		}
@@ -219,31 +223,6 @@ public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate
 	
 	public void applyToModel() {
 		resolveLinkingProxy(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
-	}
-	
-	@Override
-	protected void internalSetValue(InternalEObject featureCall, EReference structuralFeature, JvmIdentifiableElement newValue) {
-		super.internalSetValue(featureCall, structuralFeature, newValue);
-		if (featureCall instanceof XFeatureCall) {
-			XFeatureCall casted = (XFeatureCall) featureCall;
-			if (casted != getExpression()) {
-				casted.setPackageFragment(true);
-			} else {
-				casted.setTypeLiteral(true);
-			}
-		} else if (featureCall instanceof XMemberFeatureCall) {
-			XMemberFeatureCall casted = (XMemberFeatureCall) featureCall;
-			if (casted != getExpression()) {
-				casted.setPackageFragment(true);
-			} else {
-				casted.setTypeLiteral(true);
-			}
-			XExpression target = casted.getMemberCallTarget();
-			IFeatureLinkingCandidate candidate = getState().getResolvedTypes().getLinkingCandidate((XAbstractFeatureCall) target);
-			if (candidate == null || !candidate.isTypeLiteral()) {
-				resolveLinkingProxy((InternalEObject) target, newValue, structuralFeature, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
-			}
-		}
 	}
 
 }
