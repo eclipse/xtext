@@ -494,6 +494,21 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				}
 			}
 		}
+		// No recursive generics
+		for(JvmTypeParameter parameter : sourceTypeParameters){
+			final Set<JvmTypeParameter> forbidden = newHashSet();
+			for (EObject jvmElement: associations.getJvmElements(parameter))
+				if(jvmElement instanceof JvmTypeParameter)
+					forbidden.add((JvmTypeParameter) jvmElement);
+			for(JvmTypeConstraint constraint : parameter.getConstraints()){
+				EcoreUtil2.findCrossReferences(constraint.getTypeReference(), forbidden, new ElementReferenceAcceptor() {
+					public void accept(EObject referrer, EObject referenced, EReference reference, int index) {
+						error("Illegal forward reference to type parameter " + ((JvmTypeParameter)referenced).getSimpleName(),
+								referrer, reference, index, TYPE_PARAMETER_FORWARD_REFERENCE);
+					}
+				});
+			}
+		}
 	}
 	
 	@Check
@@ -1574,5 +1589,4 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_NO_VARIABLE);
 		}
 	}
-	
 }
