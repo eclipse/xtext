@@ -38,6 +38,103 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testNestedTypeScoping_01() {'''
+			class C {
+				def newMap() {
+					return new java.util.AbstractMap<String, String>() {
+						override java.util.Set<Entry<String, String>> entrySet() {
+							newHashSet
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.AbstractMap;
+			import java.util.Map;
+			import java.util.Set;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public AbstractMap<String, String> newMap() {
+			    return new AbstractMap<String, String>() {
+			      public Set<Map.Entry<String, String>> entrySet() {
+			        return CollectionLiterals.<Map.Entry<String, String>>newHashSet();
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testNestedTypeScoping_02() {'''
+			class C {
+				def newMap() {
+					return new java.util.AbstractMap<String, String>() {
+						override entrySet() {
+							<Entry<String, String>>newHashSet
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.AbstractMap;
+			import java.util.Map;
+			import java.util.Set;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public AbstractMap<String, String> newMap() {
+			    return new AbstractMap<String, String>() {
+			      public Set<Map.Entry<String, String>> entrySet() {
+			        return CollectionLiterals.<Map.Entry<String, String>>newHashSet();
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testNestedTypeScoping_03() {'''
+			class C {
+				def newMap() {
+					return new java.util.AbstractMap<String, String>() {
+						override entrySet() {
+							Entry.declaredMethods // doesn't make much sense
+							#{}
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import com.google.common.collect.Sets;
+			import java.util.AbstractMap;
+			import java.util.Collections;
+			import java.util.Map;
+			import java.util.Set;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public AbstractMap<String, String> newMap() {
+			    return new AbstractMap<String, String>() {
+			      public Set<Map.Entry<String, String>> entrySet() {
+			        Set<Map.Entry<String, String>> _xblockexpression = null;
+			        {
+			          Map.Entry.class.getDeclaredMethods();
+			          _xblockexpression = Collections.<Map.Entry<String, String>>unmodifiableSet(Sets.<Map.Entry<String, String>>newHashSet());
+			        }
+			        return _xblockexpression;
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testLocalVar_AdditionalMember() {'''
 			class Foo {
 				def foo() {
@@ -362,4 +459,3 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 }
-
