@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -73,6 +74,8 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
+import org.eclipse.xtext.xbase.typesystem.util.PendingLinkingCandidateResolver;
+import org.eclipse.xtext.xbase.typesystem.util.TypeLiteralLinkingCandidateResolver;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -397,7 +400,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
           _matched_1=true;
           JvmEnumerationLiteral _xblockexpression = null;
           {
-            it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, visibleFeature);
+            this.resolveFeature(it, visibleFeature);
             _xblockexpression = ((JvmEnumerationLiteral)visibleFeature);
           }
           _switchResult_1 = _xblockexpression;
@@ -408,7 +411,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
           _matched_1=true;
           Object _xblockexpression = null;
           {
-            it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, visibleFeature);
+            this.resolveFeature(it, visibleFeature);
             _xblockexpression = this.evaluateField(it, ((JvmField)visibleFeature), ctx);
           }
           _switchResult_1 = _xblockexpression;
@@ -419,8 +422,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     final JvmType type = this.findTypeByName(it, featureName);
     boolean _notEquals = (!Objects.equal(type, null));
     if (_notEquals) {
-      it.setTypeLiteral(true);
-      it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type);
+      this.resolveType(it, type);
       return this.toTypeReference(type, 0);
     }
     throw new UnresolvableFeatureException(("Couldn\'t resolve feature " + featureName), it);
@@ -482,7 +484,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
                 String _plus = ((("Couldn\'t find enum value " + featureName) + " on enum ") + _simpleName);
                 throw new ConstantExpressionEvaluationException(_plus, it);
               }
-              it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, enumValue);
+              this.resolveFeature(it, enumValue);
               return enumValue;
             }
           }
@@ -504,7 +506,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
                 String _plus = ((("Couldn\'t find field " + featureName) + " on type ") + _simpleName);
                 throw new ConstantExpressionEvaluationException(_plus, it);
               }
-              it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, field);
+              this.resolveFeature(it, field);
               return this.evaluateField(it, field, ctx);
             }
           }
@@ -518,10 +520,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         final JvmType type = this.findTypeByName(it, typeName);
         boolean _notEquals = (!Objects.equal(type, null));
         if (_notEquals) {
-          XExpression _memberCallTarget_1 = it.getMemberCallTarget();
-          this.setFeature(_memberCallTarget_1, type);
-          it.setTypeLiteral(true);
-          it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type);
+          this.resolveType(it, type);
           return this.toTypeReference(type, 0);
         } else {
           throw new UnresolvableFeatureException(("Unresolvable type " + typeName), it);
@@ -548,25 +547,6 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   
   protected String _getFullName(final XFeatureCall call) {
     return call.getConcreteSyntaxFeatureName();
-  }
-  
-  protected void _setFeature(final XExpression call, final JvmType type) {
-    String _text = this.toText(call);
-    String _plus = ("The expression \'" + _text);
-    String _plus_1 = (_plus + "\' cannot be used as a receiver within a constant expression.");
-    throw new ConstantExpressionEvaluationException(_plus_1);
-  }
-  
-  protected void _setFeature(final XMemberFeatureCall it, final JvmType type) {
-    XExpression _memberCallTarget = it.getMemberCallTarget();
-    this.setFeature(_memberCallTarget, type);
-    it.setPackageFragment(true);
-    it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type);
-  }
-  
-  protected void _setFeature(final XFeatureCall it, final JvmType type) {
-    it.setPackageFragment(true);
-    it.eSet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, type);
   }
   
   protected Object evaluateField(final XAbstractFeatureCall call, final JvmField field, final Context context) {
@@ -645,6 +625,16 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     return classFinder.forName(_identifier_1);
   }
   
+  protected void resolveType(final XAbstractFeatureCall featureCall, final JvmIdentifiableElement feature) {
+    TypeLiteralLinkingCandidateResolver _typeLiteralLinkingCandidateResolver = new TypeLiteralLinkingCandidateResolver(featureCall);
+    _typeLiteralLinkingCandidateResolver.resolveLinkingProxy(((InternalEObject) featureCall), feature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
+  }
+  
+  protected void resolveFeature(final XAbstractFeatureCall featureCall, final JvmIdentifiableElement feature) {
+    PendingLinkingCandidateResolver<XAbstractFeatureCall> _pendingLinkingCandidateResolver = new PendingLinkingCandidateResolver<XAbstractFeatureCall>(featureCall);
+    _pendingLinkingCandidateResolver.resolveLinkingProxy(((InternalEObject) featureCall), feature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
+  }
+  
   public Object internalEvaluate(final XExpression it, final Context ctx) {
     if (it instanceof XBinaryOperation) {
       return _internalEvaluate((XBinaryOperation)it, ctx);
@@ -686,22 +676,6 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(call).toString());
-    }
-  }
-  
-  public void setFeature(final XExpression it, final JvmType type) {
-    if (it instanceof XFeatureCall) {
-      _setFeature((XFeatureCall)it, type);
-      return;
-    } else if (it instanceof XMemberFeatureCall) {
-      _setFeature((XMemberFeatureCall)it, type);
-      return;
-    } else if (it != null) {
-      _setFeature(it, type);
-      return;
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it, type).toString());
     }
   }
 }

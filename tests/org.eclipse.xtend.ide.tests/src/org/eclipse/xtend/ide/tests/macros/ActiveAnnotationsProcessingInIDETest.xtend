@@ -29,7 +29,6 @@ import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.StringInputStream
-import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
@@ -38,7 +37,6 @@ import org.junit.runner.RunWith
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
-import org.eclipse.emf.ecore.util.EcoreUtil
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
