@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmArrayType;
@@ -83,9 +84,20 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		return super.eGet(featureID, resolve, coreType);
 	}
 
+	protected JvmDeclaredType internalGetDeclaringType() {
+		JvmDeclaredType result = getDeclaringType();
+		if (result == null) {
+			EObject container = eContainer();
+			if (container instanceof JvmFeature) {
+				result = ((JvmFeature) container).getDeclaringType();
+			}
+		}
+		return result;
+	}
+	
 	@Override
 	public String getPackageName() {
-		JvmDeclaredType declaringType = getDeclaringType();
+		JvmDeclaredType declaringType = internalGetDeclaringType();
 		if (declaringType != null)
 			return declaringType.getPackageName();
 		return packageName;
@@ -95,7 +107,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	protected String computeIdentifier() {
 		if (simpleName == null)
 			return null;
-		JvmDeclaredType declaringType = getDeclaringType();
+		JvmDeclaredType declaringType = internalGetDeclaringType();
 		if (declaringType == null) {
 			if (Strings.isEmpty(packageName))
 				return simpleName;

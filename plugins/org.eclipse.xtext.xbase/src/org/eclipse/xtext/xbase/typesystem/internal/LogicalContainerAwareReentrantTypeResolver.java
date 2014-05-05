@@ -499,7 +499,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			unmarkComputing(field.getType());
 		}
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, field);
-		
+		computeLocalTypes(preparedResolvedTypes, childResolvedTypes, featureScopeSession, field);
 		mergeChildTypes(childResolvedTypes);
 	}
 	
@@ -520,8 +520,15 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		for(JvmFormalParameter parameter: constructor.getParameters()) {
 			computeAnnotationTypes(childResolvedTypes, featureScopeSession, parameter);
 		}
-		
+		computeLocalTypes(preparedResolvedTypes, childResolvedTypes, featureScopeSession, constructor);
 		mergeChildTypes(childResolvedTypes);
+	}
+
+	protected void computeLocalTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession, JvmFeature feature) {
+		for(JvmGenericType localClass: feature.getLocalClasses()) {
+			computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, localClass);
+		}
 	}
 	
 	protected void addExtensionProviders(ITypeComputationState state, List<JvmFormalParameter> parameters) {
@@ -556,7 +563,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			unmarkComputing(operation.getReturnType());
 		}
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, operation);
-		
+		computeLocalTypes(preparedResolvedTypes, childResolvedTypes, featureScopeSession, operation);
 		mergeChildTypes(childResolvedTypes);
 	}
 
