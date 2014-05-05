@@ -38,10 +38,13 @@ class LoopExtensions {
 			(T)=>void procedure) {
 		if(elements.size == 1)
 			elements.head => procedure
-		else 
+		else {
+			appendable.append('{')
 			forEach(appendable, elements, [
-				prefix= '{ ' separator = ', ' suffix = ' }'
+				separator = ', '
 			], procedure)
+			appendable.append('}')
+		}
 	}
 }
 
