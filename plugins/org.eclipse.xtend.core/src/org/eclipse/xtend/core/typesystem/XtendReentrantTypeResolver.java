@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.typesystem;
 
-import static com.google.common.collect.Sets.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,14 +14,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -43,19 +39,32 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.linking.impl.LinkingHelper;
+import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
-import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.OperationBodyComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
@@ -70,9 +79,7 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -90,8 +97,11 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		private final IFeatureScopeSession session;
 		private final XtendReentrantTypeResolver typeResolver;
 
-		public DispatchReturnTypeReferenceProvider(JvmOperation operation, ResolvedTypes resolvedTypes,
-				IFeatureScopeSession session, XtendReentrantTypeResolver typeResolver) {
+		public DispatchReturnTypeReferenceProvider(
+				JvmOperation operation,
+				ResolvedTypes resolvedTypes,
+				IFeatureScopeSession session,
+				XtendReentrantTypeResolver typeResolver) {
 			this.operation = operation;
 			this.resolvedTypes = resolvedTypes;
 			this.session = session;
@@ -102,8 +112,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		@Nullable
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 			try {
-				LightweightTypeReference expectedType = typeResolver.getReturnTypeOfOverriddenOperation(operation,
-						resolvedTypes, session);
+				LightweightTypeReference expectedType = typeResolver.getReturnTypeOfOverriddenOperation(operation, resolvedTypes, session);
 				if (expectedType != null) {
 					return typeResolver.toJavaCompliantTypeReference(expectedType, session);
 				}
@@ -117,8 +126,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				TypeConformanceComputer conformanceComputer = typeResolver.getServices().getTypeConformanceComputer();
 				if (types.isEmpty())
 					return null;
-				LightweightTypeReference result = conformanceComputer.getCommonSuperType(types,
-						resolvedTypes.getReferenceOwner());
+				LightweightTypeReference result = conformanceComputer.getCommonSuperType(types, resolvedTypes.getReferenceOwner());
 				if (result == null) {
 					Iterator<LightweightTypeReference> iterator = types.iterator();
 					while (iterator.hasNext()) {
@@ -139,10 +147,14 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 
 		@Override
 		protected JvmTypeReference handleReentrantInvocation(XComputedTypeReferenceImplCustom context) {
-			resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(Severity.WARNING,
+			resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.WARNING,
 					IssueCodes.TOO_LITTLE_TYPE_INFORMATION,
-					"Cannot infer type from recursive usage. Type 'Object' is used.", typeResolver
-							.getSourceElement(operation), null, -1, null));
+					"Cannot infer type from recursive usage. Type 'Object' is used.",
+					typeResolver.getSourceElement(operation),
+					null,
+					-1,
+					null));
 			AnyTypeReference result = new AnyTypeReference(resolvedTypes.getReferenceOwner());
 			return typeResolver.toJavaCompliantTypeReference(result, session);
 		}
@@ -155,8 +167,12 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		private final IFeatureScopeSession session;
 		private final XtendReentrantTypeResolver typeResolver;
 
-		public DispatchParameterTypeReferenceProvider(JvmOperation operation, int idx, ResolvedTypes resolvedTypes,
-				IFeatureScopeSession session, XtendReentrantTypeResolver typeResolver) {
+		public DispatchParameterTypeReferenceProvider(
+				JvmOperation operation,
+				int idx,
+				ResolvedTypes resolvedTypes,
+				IFeatureScopeSession session,
+				XtendReentrantTypeResolver typeResolver) {
 			this.idx = idx;
 			this.operation = operation;
 			this.resolvedTypes = resolvedTypes;
@@ -192,15 +208,15 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 						if (inheritedParameterType != null) {
 							if (caseOperation.eContainer() == operation.eContainer()) {
 								if (!inheritedParameterType.isAssignableFrom(parameterType)) {
-									XtendParameter xtendParameter = (XtendParameter) typeResolver
-											.getSourceElement(parameter);
-									resolvedTypes
-											.addDiagnostic(new EObjectDiagnosticImpl(
-													Severity.ERROR,
-													org.eclipse.xtend.core.validation.IssueCodes.DISPATCH_FUNCTIONS_INVALID_PARAMETER_TYPE,
-													"Dispatch function cannot widen inherited parameter type "
-															+ inheritedParameterType.getSimpleName(), xtendParameter
-															.getParameterType(), null, -1, null));
+									XtendParameter xtendParameter = (XtendParameter) typeResolver.getSourceElement(parameter);
+									resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
+										Severity.ERROR,
+										org.eclipse.xtend.core.validation.IssueCodes.DISPATCH_FUNCTIONS_INVALID_PARAMETER_TYPE,
+										"Dispatch function cannot widen inherited parameter type " + inheritedParameterType.getSimpleName(),
+										xtendParameter.getParameterType(),
+										null,
+										-1,
+										null));
 								}
 							}
 						} else {
@@ -216,8 +232,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 						return typeResolver.toJavaCompliantTypeReference(inheritedParameterType, session);
 					return typeResolver.getServices().getTypeReferences().getTypeForName(Object.class, operation);
 				}
-				LightweightTypeReference parameterType = conformanceComputer.getCommonSuperType(parameterTypes,
-						resolvedTypes.getReferenceOwner());
+				LightweightTypeReference parameterType = conformanceComputer.getCommonSuperType(parameterTypes, resolvedTypes.getReferenceOwner());
 				if (parameterType == null) {
 					throw new IllegalStateException("TODO: handle broken models properly");
 				}
@@ -235,9 +250,12 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		private final Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext;
 		private final XtendReentrantTypeResolver typeResolver;
 
-		public InitializerParameterTypeReferenceProvider(XtendFunction createFunction,
-				Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes,
-				IFeatureScopeSession featureScopeSession, XtendReentrantTypeResolver typeResolver) {
+		public InitializerParameterTypeReferenceProvider(
+				XtendFunction createFunction,
+				Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext,
+				ResolvedTypes resolvedTypes,
+				IFeatureScopeSession featureScopeSession,
+				XtendReentrantTypeResolver typeResolver) {
 			this.createFunction = createFunction;
 			this.resolvedTypesByContext = resolvedTypesByContext;
 			this.resolvedTypes = resolvedTypes;
@@ -254,9 +272,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				LightweightTypeReference actualType = resolvedTypes.getReturnType(expression);
 				if (actualType == null) {
 					JvmOperation operation = typeResolver.associations.getDirectlyInferredOperation(createFunction);
-					IFeatureScopeSession session = operation.isStatic() 
-							? featureScopeSession 
-							: featureScopeSession.toInstanceContext();
+					IFeatureScopeSession session = operation.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext();
 					typeResolver.computeTypes(resolvedTypesByContext, resolvedTypes, session, operation);
 					actualType = resolvedTypes.getReturnType(expression);
 				}
@@ -274,8 +290,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		private final ResolvedTypes resolvedTypes;
 		private final IFeatureScopeSession session;
 
-		public CreateCacheFieldTypeReferenceProvider(JvmOperation createOperation, ResolvedTypes resolvedTypes,
-				IFeatureScopeSession session) {
+		public CreateCacheFieldTypeReferenceProvider(JvmOperation createOperation, ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 			this.createOperation = createOperation;
 			this.resolvedTypes = resolvedTypes;
 			this.session = session;
@@ -306,9 +321,21 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 
 	@Inject
 	private IXtendJvmAssociations associations;
+	
+	@Inject
+	private IJvmModelAssociator associator;
+	
+	@Inject
+	private LazyURIEncoder uriEncoder;
+	
+	@Inject
+	private LinkingHelper linkingHelper;
 
 	@Inject
-	private XtendJvmModelInferrer jvmModelInferrer;
+	private IQualifiedNameConverter qualifiedNameConverter;
+	
+	@Inject
+	private JvmTypesBuilder typesBuilder;
 
 	@Override
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
@@ -324,8 +351,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
 		if (element instanceof XtendTypeDeclaration) {
 			XtendTypeDeclaration typeDeclaration = (XtendTypeDeclaration) element;
-			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession,
-					((XtendTypeDeclaration) element).getAnnotations());
+			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, ((XtendTypeDeclaration) element).getAnnotations());
 			for (XtendMember member : typeDeclaration.getMembers()) {
 				computeTypes(resolvedTypes, featureScopeSession, member);
 			}
@@ -337,9 +363,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				expression = function.getExpression();
 				CreateExtensionInfo createInfo = function.getCreateExtensionInfo();
 				if (createInfo != null) {
-					IFeatureScopeSession session = function.isStatic() 
-							? featureScopeSession 
-							: featureScopeSession.toInstanceContext();
+					IFeatureScopeSession session = function.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext();
 					computeTypes(resolvedTypes, session, createInfo.getCreateExpression());
 				}
 				for (XtendParameter parameter : function.getParameters()) {
@@ -360,19 +384,6 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, member.getAnnotations());
 		} else {
 			super.computeTypes(resolvedTypes, featureScopeSession, element);
-		}
-	}
-
-	public void resolveTypesForLocalClass(AbstractTypeComputationState state, JvmGenericType localClass) {
-		if (localClass.isLocal()) {
-			ResolvedTypes resolvedTypes = state.getResolvedTypes();
-			IFeatureScopeSession featureScopeSession = state.getFeatureScopeSession();
-			Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes = Maps.newHashMapWithExpectedSize(3);
-			doPrepare(resolvedTypes, featureScopeSession, localClass, preparedResolvedTypes);
-			computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, localClass);
-			return;
-		} else {
-			throw new IllegalStateException();
 		}
 	}
 
@@ -431,8 +442,8 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			boolean result = EcoreUtil.isAncestor(getRoot(), identifiableElement);
 			return result;
 		} else if (identifiableElement instanceof JvmFormalParameter
-				&& (identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER || identifiableElement
-						.eContainingFeature() == XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS)) {
+				&& (identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER
+				|| identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS)) {
 			XtendMember member = EcoreUtil2.getContainerOfType(identifiableElement, XtendMember.class);
 			if (member != null && getInferredElements(member).isEmpty()) {
 				return false;
@@ -470,8 +481,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				super._computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, operation);
 				return;
 			}
-			LightweightTypeReference declaredDispatcherType = getReturnTypeOfOverriddenOperation(dispatcher,
-					childResolvedTypes, featureScopeSession);
+			LightweightTypeReference declaredDispatcherType = getReturnTypeOfOverriddenOperation(dispatcher, childResolvedTypes, featureScopeSession);
 			List<JvmOperation> dispatchCases = dispatchHelper.getLocalDispatchCases(dispatcher);
 			List<LightweightTypeReference> dispatchCaseResults = Lists.newArrayListWithCapacity(dispatchCases.size());
 			boolean hasInferredCase = false;
@@ -479,9 +489,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				markComputing(dispatchCase.getReturnType());
 			}
 			for (JvmOperation dispatchCase : dispatchCases) {
-				ResolvedTypes dispatchCaseResolvedTypes = dispatchCase == operation 
-						? childResolvedTypes
-						: preparedResolvedTypes.get(dispatchCase);
+				ResolvedTypes dispatchCaseResolvedTypes = dispatchCase == operation ? childResolvedTypes : preparedResolvedTypes.get(dispatchCase);
 				if (dispatchCaseResolvedTypes == null) {
 					if (preparedResolvedTypes.containsKey(dispatchCase)) {
 						if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
@@ -493,8 +501,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 							dispatchCaseResults.add(childResolvedTypes.getActualType(dispatchCase));
 						}
 					} else {
-						throw new IllegalStateException("No resolved type found. Type was: "
-								+ dispatchCase.getIdentifier());
+						throw new IllegalStateException("No resolved type found. Type was: " + dispatchCase.getIdentifier());
 					}
 				} else {
 					preparedResolvedTypes.put(dispatchCase, null);
@@ -516,6 +523,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 						dispatchCaseResults.add(dispatchCaseResolvedTypes.getActualType(dispatchCase));
 					}
 					computeAnnotationTypes(dispatchCaseResolvedTypes, featureScopeSession, dispatchCase);
+					computeLocalTypes(preparedResolvedTypes, dispatchCaseResolvedTypes, featureScopeSession, dispatchCase);
 					mergeChildTypes(dispatchCaseResolvedTypes);
 				}
 			}
@@ -539,20 +547,11 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		}
 	}
 
-	protected void computeXtendAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
-			List<XAnnotation> annotations) {
+	protected void computeXtendAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, List<XAnnotation> annotations) {
 		for (XAnnotation annotation : annotations) {
 			if (getInferredElements(annotation).isEmpty())
 				computeTypes(resolvedTypes, featureScopeSession, annotation);
 		}
-	}
-
-	@Override
-	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
-			JvmConstructor constructor, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
-		super._doPrepare(resolvedTypes, featureScopeSession, constructor, resolvedTypesByContext);
-		inferAndPrepareContainedAnonymousClasses(resolvedTypes, featureScopeSession, constructor,
-				resolvedTypesByContext);
 	}
 
 	/**
@@ -571,15 +570,21 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 					JvmOperation operation = associations.getDirectlyInferredOperation(function);
 					declareTypeParameters(resolvedTypes, field, resolvedTypesByContext);
 					XComputedTypeReference fieldType = getServices().getXtypeFactory().createXComputedTypeReference();
-					fieldType.setTypeProvider(new CreateCacheFieldTypeReferenceProvider(operation, resolvedTypes,
-							featureScopeSession));
+					fieldType.setTypeProvider(new CreateCacheFieldTypeReferenceProvider(operation, resolvedTypes, featureScopeSession));
 					castedKnownType.setEquivalent(fieldType);
 					return;
 				}
 			}
 		}
 		super._doPrepare(resolvedTypes, featureScopeSession, field, resolvedTypesByContext);
-		inferAndPrepareContainedAnonymousClasses(resolvedTypes, featureScopeSession, field, resolvedTypesByContext);
+		doPrepareLocalTypes(resolvedTypes, featureScopeSession, field, resolvedTypesByContext);
+	}
+	
+	@Override
+	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+			JvmConstructor constructor, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
+		super._doPrepare(resolvedTypes, featureScopeSession, constructor, resolvedTypesByContext);
+		doPrepareLocalTypes(resolvedTypes, featureScopeSession, constructor, resolvedTypesByContext);
 	}
 
 	@Override
@@ -599,16 +604,13 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				JvmTypeReference parameterType = parameter.getParameterType();
 				if (InferredTypeIndicator.isInferred(parameterType)) {
 					XComputedTypeReference casted = (XComputedTypeReference) parameterType;
-					XComputedTypeReference computedParameterType = getServices().getXtypeFactory()
-							.createXComputedTypeReference();
+					XComputedTypeReference computedParameterType = getServices().getXtypeFactory().createXComputedTypeReference();
 					computedParameterType.setTypeProvider(new DispatchParameterTypeReferenceProvider(operation, i,
 							resolvedTypes, featureScopeSession, this));
 					casted.setEquivalent(computedParameterType);
 				} else if (parameterType == null) {
-					XComputedTypeReference computedParameterType = getServices().getXtypeFactory()
-							.createXComputedTypeReference();
-					computedParameterType.setTypeProvider(new DispatchParameterTypeReferenceProvider(operation, i,
-							resolvedTypes, featureScopeSession, this));
+					XComputedTypeReference computedParameterType = getServices().getXtypeFactory().createXComputedTypeReference();
+					computedParameterType.setTypeProvider(new DispatchParameterTypeReferenceProvider(operation, i, resolvedTypes, featureScopeSession, this));
 					parameter.setParameterType(computedParameterType);
 				}
 			}
@@ -621,71 +623,109 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 					JvmTypeReference parameterType = firstParameter.getParameterType();
 					if (InferredTypeIndicator.isInferred(parameterType)) {
 						XComputedTypeReference casted = (XComputedTypeReference) parameterType;
-						XComputedTypeReference computedParameterType = getServices().getXtypeFactory()
-								.createXComputedTypeReference();
-						computedParameterType.setTypeProvider(new InitializerParameterTypeReferenceProvider(function,
-								resolvedTypesByContext, resolvedTypes, featureScopeSession, this));
+						XComputedTypeReference computedParameterType = getServices().getXtypeFactory().createXComputedTypeReference();
+						computedParameterType.setTypeProvider(new InitializerParameterTypeReferenceProvider(function, resolvedTypesByContext, resolvedTypes, featureScopeSession, this));
 						casted.setEquivalent(computedParameterType);
 					}
 				}
 			}
 		}
-		inferAndPrepareContainedAnonymousClasses(resolvedTypes, featureScopeSession, operation, resolvedTypesByContext);
+		doPrepareLocalTypes(resolvedTypes, featureScopeSession, operation, resolvedTypesByContext);
 	}
 
-	protected void inferAndPrepareContainedAnonymousClasses(ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession, JvmFeature container,
+	protected void doPrepareLocalTypes(
+			ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+			JvmFeature container,
 			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
-		XExpression body = getLogicalContainerProvider().getAssociatedExpression(container);
-		if (body != null) {
-			if (!inferAndPrepareLocalClass(body, resolvedTypes, featureScopeSession, container, resolvedTypesByContext)) {
-				for (TreeIterator<EObject> i = body.eAllContents(); i.hasNext();) {
-					EObject current = i.next();
-					if (inferAndPrepareLocalClass(current, resolvedTypes, featureScopeSession, container,
-							resolvedTypesByContext)) {
-						i.prune();
+		List<JvmGenericType> localClasses = container.getLocalClasses();
+		for(JvmGenericType localClass: localClasses) {
+			JvmTypeReference superType = localClass.getSuperTypes().get(0);
+			if (InferredTypeIndicator.isInferred(superType)) {
+				XComputedTypeReference casted = (XComputedTypeReference) superType;
+				InferredTypeIndicator typeProvider = (InferredTypeIndicator) casted.getTypeProvider();
+				AnonymousClass anonymousClass = (AnonymousClass) typeProvider.getExpression();
+				XConstructorCall constructorCall = anonymousClass.getConstructorCall();
+				IScope typeScope = featureScopeSession.getScope(constructorCall, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, resolvedTypes);
+				JvmGenericType type = getSuperType(constructorCall, typeScope);
+				if (type == null) {
+					IEObjectDescription description = typeScope.getSingleElement(QualifiedName.create("java", "lang", "Object"));
+					if (description != null) {
+						type = (JvmGenericType) description.getEObjectOrProxy();
+					}
+				}
+				if (type == null) {
+					break;
+				}
+				JvmParameterizedTypeReference superTypeReference = createSuperTypeReference(type, constructorCall);
+				InferredTypeIndicator.resolveTo(casted, superTypeReference);
+				if(type.isInterface()) {
+					inferAnonymousClassConstructor(anonymousClass, localClass, type);
+				} else {
+					for(JvmMember superMember: type.getMembers()) {
+						if (superMember instanceof JvmConstructor) {
+							JvmConstructor superTypeConstructor = (JvmConstructor) superMember;
+							inferAnonymousClassConstructor(anonymousClass, localClass, superTypeConstructor);
+						}
 					}
 				}
 			}
+			doPrepare(resolvedTypes, featureScopeSession, localClass, resolvedTypesByContext);
 		}
 	}
-
-	protected boolean inferAndPrepareLocalClass(EObject current, ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession, JvmFeature container,
-			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
-		if (current instanceof AnonymousClass) {
-			String localClassName = getLocalClassName(container, resolvedTypesByContext);
-			JvmGenericType inferredLocalClass = jvmModelInferrer.inferLocalClass(
-					(AnonymousClass) current, localClassName, container, featureScopeSession,
-					resolvedTypes);
-			if (inferredLocalClass != null) {
-				doPrepare(resolvedTypes, featureScopeSession, inferredLocalClass, resolvedTypesByContext);
-				return true;
-			}
+	
+	protected JvmParameterizedTypeReference createSuperTypeReference(JvmType superType, XConstructorCall constructorCall) {
+		JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		result.setType(superType);
+		for(JvmTypeReference typeReference: constructorCall.getTypeArguments()) {
+			result.getArguments().add(typesBuilder.cloneWithProxies(typeReference));
 		}
-		return false;
+		return result;
+	}
+	
+	private JvmGenericType getSuperType(XConstructorCall anonymousClassConstructor, IScope typeScope) {
+		EObject constructorProxy = (EObject) anonymousClassConstructor.eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
+		String fragment = EcoreUtil.getURI(constructorProxy).fragment();
+		INode node = uriEncoder.getNode(anonymousClassConstructor, fragment);
+		String name = linkingHelper.getCrossRefNodeAsString(node, true);
+		QualifiedName superTypeName = qualifiedNameConverter.toQualifiedName(name);
+		IEObjectDescription result = typeScope.getSingleElement(superTypeName);
+		if (result != null && result.getEClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+			return (JvmGenericType) result.getEObjectOrProxy();
+		}
+		return null;
+	}
+	
+	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClass anonymousClass, JvmGenericType inferredLocalClass, JvmConstructor superConstructor) {
+		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
+		inferredLocalClass.getMembers().add(constructor);
+		associator.associatePrimary(anonymousClass.getConstructorCall(), constructor);
+		constructor.setVisibility(superConstructor.getVisibility());
+		constructor.setSimpleName(inferredLocalClass.getSimpleName());
+		for(JvmFormalParameter parameter: superConstructor.getParameters()) 
+			constructor.getParameters().add(typesBuilder.cloneWithProxies(parameter));
+		
+		for (JvmTypeReference exception : superConstructor.getExceptions()) 
+			constructor.getExceptions().add(typesBuilder.cloneWithProxies(exception));
+		return constructor;
 	}
 
-	/**
-	 * If an anonymous class defines additional members, it is compiled to a local class instead, so we need a name as
-	 * well.
-	 */
-	protected String getLocalClassName(JvmFeature container,
-			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
-		int uniqueNumber = filter(resolvedTypesByContext.keySet(), new Predicate<JvmIdentifiableElement>() {
-			public boolean apply(JvmIdentifiableElement input) {
-				return input instanceof JvmGenericType && ((JvmGenericType) input).isAnonymous();
-			}
-		}).size();
-		String anonymousClassName = "__"
-				+ ((JvmIdentifiableElement) EcoreUtil.getRootContainer(container)).getSimpleName() + "_" + uniqueNumber;
-		return anonymousClassName;
+	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClass anonymousClass, JvmGenericType inferredLocalClass, JvmGenericType superInterface) {
+		XConstructorCall constructorCall = anonymousClass.getConstructorCall();
+		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
+		inferredLocalClass.getMembers().add(constructor);
+		associator.associatePrimary(constructorCall, constructor);
+		constructor.setVisibility(JvmVisibility.DEFAULT);
+		constructor.setSimpleName(inferredLocalClass.getSimpleName());
+		return constructor;
 	}
-
+	
 	@Override
 	protected AbstractReentrantTypeReferenceProvider createTypeProvider(
-			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession, JvmMember member, boolean returnType) {
+			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext,
+			ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
+			JvmMember member,
+			boolean returnType) {
 		if (member instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) member;
 			if (dispatchHelper.isDispatcherFunction(operation)) {

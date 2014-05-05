@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -39,7 +38,6 @@ public class ValidationBug433213Test extends AbstractXtendTestCase {
   @Inject
   private ParseHelper<XtendFile> parser;
   
-  @Ignore
   @Test
   public void test_01() {
     try {

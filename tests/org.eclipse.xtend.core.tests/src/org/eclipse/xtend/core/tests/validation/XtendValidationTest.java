@@ -1936,7 +1936,19 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "}"
 				+ "class Bar<T> {"
 				+ "}");
-		helper.assertError(file.getXtendTypes().get(0), XCONSTRUCTOR_CALL, WILDCARD_IN_SUPERTYPE);
+		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_WILDCARD_TYPE_REFERENCE, INVALID_USE_OF_WILDCARD);
+	}
+	
+	@Test
+	public void testWildcardSuperType_5() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+				+ " val bar = new Bar<Bar<?>>() {" 
+				+ " }"
+				+ "}"
+				+ "class Bar<T> {"
+				+ "}");
+		helper.assertNoErrors(file.getXtendTypes().get(0));
 	}
 
 	@Test

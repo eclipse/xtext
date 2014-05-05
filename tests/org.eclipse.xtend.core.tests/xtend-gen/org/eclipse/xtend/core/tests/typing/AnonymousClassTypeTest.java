@@ -105,7 +105,7 @@ public class AnonymousClassTypeTest extends AbstractXtendTestCase {
       final XExpression variable = IterableExtensions.<XExpression>last(_expressions);
       final LightweightTypeReference variableType = resolvedTypes.getActualType(variable);
       String _string_1 = variableType.toString();
-      Assert.assertEquals("__Foo_0", _string_1);
+      Assert.assertEquals("__Foo_1", _string_1);
       boolean _isSubtypeOf = variableType.isSubtypeOf(Runnable.class);
       Assert.assertTrue(_isSubtypeOf);
     } catch (Throwable _e) {

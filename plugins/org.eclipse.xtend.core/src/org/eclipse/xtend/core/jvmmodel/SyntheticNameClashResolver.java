@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -37,6 +38,7 @@ public class SyntheticNameClashResolver {
 	public void resolveNameClashes(JvmGenericType type) {
 		Multimap<String, JvmIdentifiableElement> classScope = HashMultimap.create();
 		List<JvmMember> renameableMembers = newArrayList();
+		int i = 1;
 		for (JvmMember member : type.getMembers()) {
 			String simpleName = member.getSimpleName();
 			if (simpleName != null) {
@@ -44,6 +46,11 @@ public class SyntheticNameClashResolver {
 					classScope.put(simpleName, member);
 				else
 					renameableMembers.add(member);
+			}
+			if (member instanceof JvmFeature) {
+				for(JvmGenericType localType: ((JvmFeature) member).getLocalClasses()) {
+					localType.setSimpleName(localType.getSimpleName() + '_' + (i++));
+				}
 			}
 		}
 		for (JvmMember renameable : renameableMembers) {
