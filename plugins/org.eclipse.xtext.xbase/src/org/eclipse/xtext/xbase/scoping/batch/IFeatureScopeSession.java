@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
@@ -80,6 +81,23 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	 * @return a configured session.
 	 */
 	IFeatureScopeSession addToExtensionScope(Map<XExpression, LightweightTypeReference> extensionProviders);
+	
+	/**
+	 * Make inherited and declared nested classes of {@code type} available by their simple names.
+	 */
+	IFeatureScopeSession addNestedTypesToScope(JvmDeclaredType type);
+	
+	/**
+	 * Returns a list of the enclosing types in the current context. The first element in the list
+	 * is the innermost type.
+	 */
+	List<JvmDeclaredType> getEnclosingTypes();
+	
+	/**
+	 * Returns a declared and inherited nested types by name. The name is local to the container type, 
+	 * that is, an outer class is probably not available.
+	 */
+	Map<QualifiedName, JvmDeclaredType> getNestedTypes();
 	
 	/**
 	 * Forks this session with an instance context. References to 'this' are only valid in instance contexts.
