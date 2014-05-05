@@ -32,9 +32,10 @@ class JvmElementAtOffsetHelper {
 			return selectedElement
 		val jvmElements = associations.getJvmElements(selectedElement);
 		if (!jvmElements.isEmpty()) {
-			val type =  jvmElements.head as JvmIdentifiableElement;
-				if(type != null)
-					return type;
+			val firstElement = jvmElements.head
+			if(firstElement instanceof JvmIdentifiableElement){
+				return firstElement;	
+			}
 		}
 		return null;
 	}
