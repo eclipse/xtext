@@ -534,6 +534,30 @@
          </command>
       </menuContribution>
    </extension>  
+   <!-- Open implementation -->
+   <extension point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.navigation.OpenImplementationHandler"
+            commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+            <activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.xbase.Xbase.Editor.opened">
+				</reference>
+			</activeWhen>
+      </handler>
+   </extension>
+ <extension point="org.eclipse.ui.menus">
+       <menuContribution
+            locationURI="menu:navigate?after=open.ext4">
+         <command commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+		<visibleWhen checkEnabled="false">
+              <reference
+                 definitionId="org.eclipse.xtext.xbase.Xbase.Editor.opened">
+              </reference>
+		</visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
     <!-- quickfix marker resolution generator for org.eclipse.xtext.xbase.Xbase -->
     <extension
             point="org.eclipse.ui.ide.markerResolution">
@@ -890,6 +914,30 @@
          </command>
       </menuContribution>
    </extension>  
+   <!-- Open implementation -->
+   <extension point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.navigation.OpenImplementationHandler"
+            commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+            <activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations.Editor.opened">
+				</reference>
+			</activeWhen>
+      </handler>
+   </extension>
+ <extension point="org.eclipse.ui.menus">
+       <menuContribution
+            locationURI="menu:navigate?after=open.ext4">
+         <command commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
+		<visibleWhen checkEnabled="false">
+              <reference
+                 definitionId="org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations.Editor.opened">
+              </reference>
+		</visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
     <!-- quickfix marker resolution generator for org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations -->
     <extension
             point="org.eclipse.ui.ide.markerResolution">
