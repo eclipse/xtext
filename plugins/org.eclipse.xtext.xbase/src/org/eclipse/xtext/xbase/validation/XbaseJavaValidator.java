@@ -1571,6 +1571,27 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 	
+	@Check
+	public void checkExplicitOperationCall(XFeatureCall featureCall) {
+		if (featureCall.getFeature() instanceof JvmOperation && !featureCall.isExplicitOperationCall() && featureCall.getFeatureCallArguments().isEmpty()) {
+			addIssue("Method call without parenthesis", featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, OPERATION_WITHOUT_PARENTHESIS);
+		}
+	}
+	
+	@Check
+	public void checkExplicitOperationCall(XMemberFeatureCall featureCall) {
+		if (featureCall.getFeature() instanceof JvmOperation && !featureCall.isExplicitOperationCall() && featureCall.getMemberCallArguments().isEmpty()) {
+			addIssue("Method call without parenthesis", featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, OPERATION_WITHOUT_PARENTHESIS);
+		}
+	}
+	
+	@Check
+	public void checkExplicitOperationCall(XConstructorCall constructorCall) {
+		if (!constructorCall.isExplicitConstructorCall() && constructorCall.getArguments().isEmpty()) {
+			addIssue("Constructor call without parenthesis", constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, OPERATION_WITHOUT_PARENTHESIS);
+		}
+	}
+	
 	protected void checkAssignment(XExpression expression, EStructuralFeature feature, boolean simpleAssignment) {
 		if (!(expression instanceof XAbstractFeatureCall)) {
 			error("The left-hand side of an assignment must be a variable", expression, null,

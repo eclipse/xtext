@@ -58,6 +58,13 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 
 		Composite unusedCode = createSection("Unnecessary code", composite, nColumns);
 		fillUnusedCodeSection(new ComboBoxBuilder(this, unusedCode, defaultIndent));
+		
+		Composite codingStyle = createSection("Coding style", composite, nColumns);
+		fillCodingStyleSection(new ComboBoxBuilder(this, codingStyle, defaultIndent));
+	}
+	
+	protected void fillCodingStyleSection(ComboBoxBuilder comboBoxBuilder) {
+		comboBoxBuilder.addComboBox(IssueCodes.OPERATION_WITHOUT_PARENTHESIS, "Method/Constructor call without parenthesis:");
 	}
 
 	protected void fillUnusedCodeSection(ComboBoxBuilder comboBoxBuilder) {
