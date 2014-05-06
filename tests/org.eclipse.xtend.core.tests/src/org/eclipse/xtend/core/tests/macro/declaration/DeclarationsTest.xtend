@@ -368,7 +368,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			val annoRef = baseClass.annotations.head
 			
 			assertEquals(2 / 2 + 2 * 3 - 4 % 1, annoRef.getValue("intValue"))
-			assertEquals((42 + 4 + 6 * 42 - 4 / 45) as long, annoRef.getValue("longValue"))
+			assertEquals(42 + 4 + 6 * 42 - 4 / 45, annoRef.getValue("longValue"))
 			assertEquals('foobaz', annoRef.getValue("stringValue"))
 			
 			val bools = annoRef.getValue("booleanArrayValue") as boolean[]
