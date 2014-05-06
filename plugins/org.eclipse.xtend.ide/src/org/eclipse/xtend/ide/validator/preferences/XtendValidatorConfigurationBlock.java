@@ -48,5 +48,11 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 		super.fillPotentialProgrammingProblemsSection(builder);
 		builder.addComboBox(INVALID_OPERATOR_SIGNATURE, "Unexpected operator declaration:");
 	}
+	
+	@Override
+	protected void fillCodingStyleSection(ComboBoxBuilder builder) {
+		super.fillCodingStyleSection(builder);
+		builder.addComboBox(API_TYPE_INFERENCE, "Type inference for API methods/fields");
+	}
 
 }
