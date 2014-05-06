@@ -389,32 +389,36 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 			for (int i = 1; i < typeArguments.size(); i++)
 				acceptor.accept(constructorCallElements.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_2_1_0(), typeArguments.get(i), i);
 		}
+		
 
 		/*
-		 *  (=>'(' 
-		 *    (
-		 *        arguments+=XShortClosure
-		 *      | arguments+=XExpression (',' arguments+=XExpression)*
-		 *    )? 
-		 *  ')')?
-		 *  =>arguments+=XClosure? 
+		 * Constraint:
+		 *      
+		 *     (explicitConstructorCall?='(' (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))?)? 
+		 *     arguments+=XClosure?
+		 *     
 		 */
+		if (constructorCall.isExplicitConstructorCall()) {
+			acceptor.accept(constructorCallElements.getExplicitConstructorCallLeftParenthesisKeyword_4_0_0());
+		}
 		List<XExpression> arguments = constructorCall.getArguments();
 		if (!arguments.isEmpty()) {
-			if (isXShortClosureAndBuilderSyntax(arguments, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
+			if (constructorCall.isExplicitConstructorCall() && isXShortClosureAndBuilderSyntax(arguments, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
 				acceptor.accept(constructorCallElements.getArgumentsXShortClosureParserRuleCall_4_1_0_0(), arguments.get(0), 0);
 				acceptor.accept(constructorCallElements.getArgumentsXClosureParserRuleCall_5_0(), arguments.get(1), 1);
-			} else if (isXShortClosure(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
+			} else if (constructorCall.isExplicitConstructorCall() && isXShortClosure(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
 				acceptor.accept(constructorCallElements.getArgumentsXShortClosureParserRuleCall_4_1_0_0(), arguments.get(0), 0);
 			} else {
 				int diff = 0;
 				if (isBuilderSyntax(arguments, XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS, nodes)) {
 					diff = 1;
 				}
-				if (arguments.size() - diff > 0)
-					acceptor.accept(constructorCallElements.getArgumentsXExpressionParserRuleCall_4_1_1_0_0(), arguments.get(0), 0);
-				for (int i = 1; i < arguments.size() - diff; i++)
-					acceptor.accept(constructorCallElements.getArgumentsXExpressionParserRuleCall_4_1_1_1_1_0(), arguments.get(i), i);
+				if (constructorCall.isExplicitConstructorCall()) {
+					if (arguments.size() - diff > 0)
+						acceptor.accept(constructorCallElements.getArgumentsXExpressionParserRuleCall_4_1_1_0_0(), arguments.get(0), 0);
+					for (int i = 1; i < arguments.size() - diff; i++)
+						acceptor.accept(constructorCallElements.getArgumentsXExpressionParserRuleCall_4_1_1_1_1_0(), arguments.get(i), i);
+				}
 				if (diff != 0) {
 					int lastIdx = arguments.size() - 1;
 					acceptor.accept(constructorCallElements.getArgumentsXClosureParserRuleCall_5_0(), arguments.get(lastIdx), lastIdx);
