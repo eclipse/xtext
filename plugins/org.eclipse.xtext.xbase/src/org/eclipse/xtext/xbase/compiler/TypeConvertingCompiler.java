@@ -102,7 +102,11 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				}
 			}
 			if (expression.eContainer() instanceof XCastedExpression) {
-				return false;
+				XCastedExpression castedExpression = (XCastedExpression) expression.eContainer();
+				LightweightTypeReference castedExpressionType = getResolvedTypes(castedExpression).getActualType(castedExpression);
+				if (castedExpressionType != null) {
+					return actualType.getType() != castedExpressionType.getType();	
+				}
 			}
 			return true;
 		}
