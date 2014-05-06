@@ -12,7 +12,7 @@ package org.eclipse.xtext.xbase.interpreter
  */
 class ConstantOperators {
 	
-	def dispatch minus(Object operand) {
+	def dispatch Object minus(Object operand) {
 		throw new ConstantExpressionEvaluationException("Unsupported operator '-' for operand "+operand);
 	}
 	def dispatch minus(Integer e) { -e } 
@@ -35,7 +35,7 @@ class ConstantOperators {
 		}
 		val booleanOps = #{'<','<=','>','>=','===','!=='}
 		for (op : operators.entrySet) {
-			val returnType = if (booleanOps.contains(op.value)) 'boolean ' else ''
+			val returnType = if (booleanOps.contains(op.value)) 'boolean ' else 'Object '
 			println('''
 				
 				def dispatch «returnType»«op.key»(Object left, Object right) {
@@ -52,52 +52,52 @@ class ConstantOperators {
 	}
 	// generated from output of main (see above)
 
-	def dispatch plus(Object left, Object right) {
+	def dispatch Object plus(Object left, Object right) {
 		throw new ConstantExpressionEvaluationException("Unsupported operator '+' for operands "+left+" and "+right);
 	}
 	
 	
-	def dispatch plus(Byte left, Byte right) { left.byteValue() + right.byteValue() }
-	def dispatch plus(Byte left, Double right) { left.byteValue() + right.doubleValue() }
-	def dispatch plus(Byte left, Float right) { left.byteValue() + right.floatValue() }
-	def dispatch plus(Byte left, Long right) { left.byteValue() + right.longValue() }
-	def dispatch plus(Byte left, Short right) { left.byteValue() + right.shortValue() }
-	def dispatch plus(Byte left, Integer right) { left.byteValue() + right.intValue() }
+	def dispatch Object plus(Byte left, Byte right) { left.byteValue() + right.byteValue() }
+	def dispatch Object plus(Byte left, Double right) { left.byteValue() + right.doubleValue() }
+	def dispatch Object plus(Byte left, Float right) { left.byteValue() + right.floatValue() }
+	def dispatch Object plus(Byte left, Long right) { left.byteValue() + right.longValue() }
+	def dispatch Object plus(Byte left, Short right) { left.byteValue() + right.shortValue() }
+	def dispatch Object plus(Byte left, Integer right) { left.byteValue() + right.intValue() }
 	
-	def dispatch plus(Double left, Byte right) { left.doubleValue() + right.byteValue() }
-	def dispatch plus(Double left, Double right) { left.doubleValue() + right.doubleValue() }
-	def dispatch plus(Double left, Float right) { left.doubleValue() + right.floatValue() }
-	def dispatch plus(Double left, Long right) { left.doubleValue() + right.longValue() }
-	def dispatch plus(Double left, Short right) { left.doubleValue() + right.shortValue() }
-	def dispatch plus(Double left, Integer right) { left.doubleValue() + right.intValue() }
+	def dispatch Object plus(Double left, Byte right) { left.doubleValue() + right.byteValue() }
+	def dispatch Object plus(Double left, Double right) { left.doubleValue() + right.doubleValue() }
+	def dispatch Object plus(Double left, Float right) { left.doubleValue() + right.floatValue() }
+	def dispatch Object plus(Double left, Long right) { left.doubleValue() + right.longValue() }
+	def dispatch Object plus(Double left, Short right) { left.doubleValue() + right.shortValue() }
+	def dispatch Object plus(Double left, Integer right) { left.doubleValue() + right.intValue() }
 	
-	def dispatch plus(Float left, Byte right) { left.floatValue() + right.byteValue() }
-	def dispatch plus(Float left, Double right) { left.floatValue() + right.doubleValue() }
-	def dispatch plus(Float left, Float right) { left.floatValue() + right.floatValue() }
-	def dispatch plus(Float left, Long right) { left.floatValue() + right.longValue() }
-	def dispatch plus(Float left, Short right) { left.floatValue() + right.shortValue() }
-	def dispatch plus(Float left, Integer right) { left.floatValue() + right.intValue() }
+	def dispatch Object plus(Float left, Byte right) { left.floatValue() + right.byteValue() }
+	def dispatch Object plus(Float left, Double right) { left.floatValue() + right.doubleValue() }
+	def dispatch Object plus(Float left, Float right) { left.floatValue() + right.floatValue() }
+	def dispatch Object plus(Float left, Long right) { left.floatValue() + right.longValue() }
+	def dispatch Object plus(Float left, Short right) { left.floatValue() + right.shortValue() }
+	def dispatch Object plus(Float left, Integer right) { left.floatValue() + right.intValue() }
 	
-	def dispatch plus(Long left, Byte right) { left.longValue() + right.byteValue() }
-	def dispatch plus(Long left, Double right) { left.longValue() + right.doubleValue() }
-	def dispatch plus(Long left, Float right) { left.longValue() + right.floatValue() }
-	def dispatch plus(Long left, Long right) { left.longValue() + right.longValue() }
-	def dispatch plus(Long left, Short right) { left.longValue() + right.shortValue() }
-	def dispatch plus(Long left, Integer right) { left.longValue() + right.intValue() }
+	def dispatch Object plus(Long left, Byte right) { left.longValue() + right.byteValue() }
+	def dispatch Object plus(Long left, Double right) { left.longValue() + right.doubleValue() }
+	def dispatch Object plus(Long left, Float right) { left.longValue() + right.floatValue() }
+	def dispatch Object plus(Long left, Long right) { left.longValue() + right.longValue() }
+	def dispatch Object plus(Long left, Short right) { left.longValue() + right.shortValue() }
+	def dispatch Object plus(Long left, Integer right) { left.longValue() + right.intValue() }
 	
-	def dispatch plus(Short left, Byte right) { left.shortValue() + right.byteValue() }
-	def dispatch plus(Short left, Double right) { left.shortValue() + right.doubleValue() }
-	def dispatch plus(Short left, Float right) { left.shortValue() + right.floatValue() }
-	def dispatch plus(Short left, Long right) { left.shortValue() + right.longValue() }
-	def dispatch plus(Short left, Short right) { left.shortValue() + right.shortValue() }
-	def dispatch plus(Short left, Integer right) { left.shortValue() + right.intValue() }
+	def dispatch Object plus(Short left, Byte right) { left.shortValue() + right.byteValue() }
+	def dispatch Object plus(Short left, Double right) { left.shortValue() + right.doubleValue() }
+	def dispatch Object plus(Short left, Float right) { left.shortValue() + right.floatValue() }
+	def dispatch Object plus(Short left, Long right) { left.shortValue() + right.longValue() }
+	def dispatch Object plus(Short left, Short right) { left.shortValue() + right.shortValue() }
+	def dispatch Object plus(Short left, Integer right) { left.shortValue() + right.intValue() }
 	
-	def dispatch plus(Integer left, Byte right) { left.intValue() + right.byteValue() }
-	def dispatch plus(Integer left, Double right) { left.intValue() + right.doubleValue() }
-	def dispatch plus(Integer left, Float right) { left.intValue() + right.floatValue() }
-	def dispatch plus(Integer left, Long right) { left.intValue() + right.longValue() }
-	def dispatch plus(Integer left, Short right) { left.intValue() + right.shortValue() }
-	def dispatch plus(Integer left, Integer right) { left.intValue() + right.intValue() }
+	def dispatch Object plus(Integer left, Byte right) { left.intValue() + right.byteValue() }
+	def dispatch Object plus(Integer left, Double right) { left.intValue() + right.doubleValue() }
+	def dispatch Object plus(Integer left, Float right) { left.intValue() + right.floatValue() }
+	def dispatch Object plus(Integer left, Long right) { left.intValue() + right.longValue() }
+	def dispatch Object plus(Integer left, Short right) { left.intValue() + right.shortValue() }
+	def dispatch Object plus(Integer left, Integer right) { left.intValue() + right.intValue() }
 	
 	def dispatch boolean lessThan(Object left, Object right) {
 		throw new ConstantExpressionEvaluationException("Unsupported operator '<' for operands "+left+" and "+right);
@@ -146,52 +146,52 @@ class ConstantOperators {
 	def dispatch boolean lessThan(Integer left, Short right) { left.intValue() < right.shortValue() }
 	def dispatch boolean lessThan(Integer left, Integer right) { left.intValue() < right.intValue() }
 	
-	def dispatch minus(Object left, Object right) {
+	def dispatch Object minus(Object left, Object right) {
 		throw new ConstantExpressionEvaluationException("Unsupported operator '-' for operands "+left+" and "+right);
 	}
 	
 	
-	def dispatch minus(Byte left, Byte right) { left.byteValue() - right.byteValue() }
-	def dispatch minus(Byte left, Double right) { left.byteValue() - right.doubleValue() }
-	def dispatch minus(Byte left, Float right) { left.byteValue() - right.floatValue() }
-	def dispatch minus(Byte left, Long right) { left.byteValue() - right.longValue() }
-	def dispatch minus(Byte left, Short right) { left.byteValue() - right.shortValue() }
-	def dispatch minus(Byte left, Integer right) { left.byteValue() - right.intValue() }
+	def dispatch Object minus(Byte left, Byte right) { left.byteValue() - right.byteValue() }
+	def dispatch Object minus(Byte left, Double right) { left.byteValue() - right.doubleValue() }
+	def dispatch Object minus(Byte left, Float right) { left.byteValue() - right.floatValue() }
+	def dispatch Object minus(Byte left, Long right) { left.byteValue() - right.longValue() }
+	def dispatch Object minus(Byte left, Short right) { left.byteValue() - right.shortValue() }
+	def dispatch Object minus(Byte left, Integer right) { left.byteValue() - right.intValue() }
 	
-	def dispatch minus(Double left, Byte right) { left.doubleValue() - right.byteValue() }
-	def dispatch minus(Double left, Double right) { left.doubleValue() - right.doubleValue() }
-	def dispatch minus(Double left, Float right) { left.doubleValue() - right.floatValue() }
-	def dispatch minus(Double left, Long right) { left.doubleValue() - right.longValue() }
-	def dispatch minus(Double left, Short right) { left.doubleValue() - right.shortValue() }
-	def dispatch minus(Double left, Integer right) { left.doubleValue() - right.intValue() }
+	def dispatch Object minus(Double left, Byte right) { left.doubleValue() - right.byteValue() }
+	def dispatch Object minus(Double left, Double right) { left.doubleValue() - right.doubleValue() }
+	def dispatch Object minus(Double left, Float right) { left.doubleValue() - right.floatValue() }
+	def dispatch Object minus(Double left, Long right) { left.doubleValue() - right.longValue() }
+	def dispatch Object minus(Double left, Short right) { left.doubleValue() - right.shortValue() }
+	def dispatch Object minus(Double left, Integer right) { left.doubleValue() - right.intValue() }
 	
-	def dispatch minus(Float left, Byte right) { left.floatValue() - right.byteValue() }
-	def dispatch minus(Float left, Double right) { left.floatValue() - right.doubleValue() }
-	def dispatch minus(Float left, Float right) { left.floatValue() - right.floatValue() }
-	def dispatch minus(Float left, Long right) { left.floatValue() - right.longValue() }
-	def dispatch minus(Float left, Short right) { left.floatValue() - right.shortValue() }
-	def dispatch minus(Float left, Integer right) { left.floatValue() - right.intValue() }
+	def dispatch Object minus(Float left, Byte right) { left.floatValue() - right.byteValue() }
+	def dispatch Object minus(Float left, Double right) { left.floatValue() - right.doubleValue() }
+	def dispatch Object minus(Float left, Float right) { left.floatValue() - right.floatValue() }
+	def dispatch Object minus(Float left, Long right) { left.floatValue() - right.longValue() }
+	def dispatch Object minus(Float left, Short right) { left.floatValue() - right.shortValue() }
+	def dispatch Object minus(Float left, Integer right) { left.floatValue() - right.intValue() }
 	
-	def dispatch minus(Long left, Byte right) { left.longValue() - right.byteValue() }
-	def dispatch minus(Long left, Double right) { left.longValue() - right.doubleValue() }
-	def dispatch minus(Long left, Float right) { left.longValue() - right.floatValue() }
-	def dispatch minus(Long left, Long right) { left.longValue() - right.longValue() }
-	def dispatch minus(Long left, Short right) { left.longValue() - right.shortValue() }
-	def dispatch minus(Long left, Integer right) { left.longValue() - right.intValue() }
+	def dispatch Object minus(Long left, Byte right) { left.longValue() - right.byteValue() }
+	def dispatch Object minus(Long left, Double right) { left.longValue() - right.doubleValue() }
+	def dispatch Object minus(Long left, Float right) { left.longValue() - right.floatValue() }
+	def dispatch Object minus(Long left, Long right) { left.longValue() - right.longValue() }
+	def dispatch Object minus(Long left, Short right) { left.longValue() - right.shortValue() }
+	def dispatch Object minus(Long left, Integer right) { left.longValue() - right.intValue() }
 	
-	def dispatch minus(Short left, Byte right) { left.shortValue() - right.byteValue() }
-	def dispatch minus(Short left, Double right) { left.shortValue() - right.doubleValue() }
-	def dispatch minus(Short left, Float right) { left.shortValue() - right.floatValue() }
-	def dispatch minus(Short left, Long right) { left.shortValue() - right.longValue() }
-	def dispatch minus(Short left, Short right) { left.shortValue() - right.shortValue() }
-	def dispatch minus(Short left, Integer right) { left.shortValue() - right.intValue() }
+	def dispatch Object minus(Short left, Byte right) { left.shortValue() - right.byteValue() }
+	def dispatch Object minus(Short left, Double right) { left.shortValue() - right.doubleValue() }
+	def dispatch Object minus(Short left, Float right) { left.shortValue() - right.floatValue() }
+	def dispatch Object minus(Short left, Long right) { left.shortValue() - right.longValue() }
+	def dispatch Object minus(Short left, Short right) { left.shortValue() - right.shortValue() }
+	def dispatch Object minus(Short left, Integer right) { left.shortValue() - right.intValue() }
 	
-	def dispatch minus(Integer left, Byte right) { left.intValue() - right.byteValue() }
-	def dispatch minus(Integer left, Double right) { left.intValue() - right.doubleValue() }
-	def dispatch minus(Integer left, Float right) { left.intValue() - right.floatValue() }
-	def dispatch minus(Integer left, Long right) { left.intValue() - right.longValue() }
-	def dispatch minus(Integer left, Short right) { left.intValue() - right.shortValue() }
-	def dispatch minus(Integer left, Integer right) { left.intValue() - right.intValue() }
+	def dispatch Object minus(Integer left, Byte right) { left.intValue() - right.byteValue() }
+	def dispatch Object minus(Integer left, Double right) { left.intValue() - right.doubleValue() }
+	def dispatch Object minus(Integer left, Float right) { left.intValue() - right.floatValue() }
+	def dispatch Object minus(Integer left, Long right) { left.intValue() - right.longValue() }
+	def dispatch Object minus(Integer left, Short right) { left.intValue() - right.shortValue() }
+	def dispatch Object minus(Integer left, Integer right) { left.intValue() - right.intValue() }
 	
 	def dispatch boolean greaterThan(Object left, Object right) {
 		throw new ConstantExpressionEvaluationException("Unsupported operator '>' for operands "+left+" and "+right);
@@ -240,146 +240,146 @@ class ConstantOperators {
 	def dispatch boolean greaterThan(Integer left, Short right) { left.intValue() > right.shortValue() }
 	def dispatch boolean greaterThan(Integer left, Integer right) { left.intValue() > right.intValue() }
 	
-	def dispatch modulo(Object left, Object right) {
+	def dispatch Object modulo(Object left, Object right) {
 		throw new ConstantExpressionEvaluationException("Unsupported operator '%' for operands "+left+" and "+right);
 	}
 	
 	
-	def dispatch modulo(Byte left, Byte right) { left.byteValue() % right.byteValue() }
-	def dispatch modulo(Byte left, Double right) { left.byteValue() % right.doubleValue() }
-	def dispatch modulo(Byte left, Float right) { left.byteValue() % right.floatValue() }
-	def dispatch modulo(Byte left, Long right) { left.byteValue() % right.longValue() }
-	def dispatch modulo(Byte left, Short right) { left.byteValue() % right.shortValue() }
-	def dispatch modulo(Byte left, Integer right) { left.byteValue() % right.intValue() }
+	def dispatch Object modulo(Byte left, Byte right) { left.byteValue() % right.byteValue() }
+	def dispatch Object modulo(Byte left, Double right) { left.byteValue() % right.doubleValue() }
+	def dispatch Object modulo(Byte left, Float right) { left.byteValue() % right.floatValue() }
+	def dispatch Object modulo(Byte left, Long right) { left.byteValue() % right.longValue() }
+	def dispatch Object modulo(Byte left, Short right) { left.byteValue() % right.shortValue() }
+	def dispatch Object modulo(Byte left, Integer right) { left.byteValue() % right.intValue() }
 	
-	def dispatch modulo(Double left, Byte right) { left.doubleValue() % right.byteValue() }
-	def dispatch modulo(Double left, Double right) { left.doubleValue() % right.doubleValue() }
-	def dispatch modulo(Double left, Float right) { left.doubleValue() % right.floatValue() }
-	def dispatch modulo(Double left, Long right) { left.doubleValue() % right.longValue() }
-	def dispatch modulo(Double left, Short right) { left.doubleValue() % right.shortValue() }
-	def dispatch modulo(Double left, Integer right) { left.doubleValue() % right.intValue() }
+	def dispatch Object modulo(Double left, Byte right) { left.doubleValue() % right.byteValue() }
+	def dispatch Object modulo(Double left, Double right) { left.doubleValue() % right.doubleValue() }
+	def dispatch Object modulo(Double left, Float right) { left.doubleValue() % right.floatValue() }
+	def dispatch Object modulo(Double left, Long right) { left.doubleValue() % right.longValue() }
+	def dispatch Object modulo(Double left, Short right) { left.doubleValue() % right.shortValue() }
+	def dispatch Object modulo(Double left, Integer right) { left.doubleValue() % right.intValue() }
 	
-	def dispatch modulo(Float left, Byte right) { left.floatValue() % right.byteValue() }
-	def dispatch modulo(Float left, Double right) { left.floatValue() % right.doubleValue() }
-	def dispatch modulo(Float left, Float right) { left.floatValue() % right.floatValue() }
-	def dispatch modulo(Float left, Long right) { left.floatValue() % right.longValue() }
-	def dispatch modulo(Float left, Short right) { left.floatValue() % right.shortValue() }
-	def dispatch modulo(Float left, Integer right) { left.floatValue() % right.intValue() }
+	def dispatch Object modulo(Float left, Byte right) { left.floatValue() % right.byteValue() }
+	def dispatch Object modulo(Float left, Double right) { left.floatValue() % right.doubleValue() }
+	def dispatch Object modulo(Float left, Float right) { left.floatValue() % right.floatValue() }
+	def dispatch Object modulo(Float left, Long right) { left.floatValue() % right.longValue() }
+	def dispatch Object modulo(Float left, Short right) { left.floatValue() % right.shortValue() }
+	def dispatch Object modulo(Float left, Integer right) { left.floatValue() % right.intValue() }
 	
-	def dispatch modulo(Long left, Byte right) { left.longValue() % right.byteValue() }
-	def dispatch modulo(Long left, Double right) { left.longValue() % right.doubleValue() }
-	def dispatch modulo(Long left, Float right) { left.longValue() % right.floatValue() }
-	def dispatch modulo(Long left, Long right) { left.longValue() % right.longValue() }
-	def dispatch modulo(Long left, Short right) { left.longValue() % right.shortValue() }
-	def dispatch modulo(Long left, Integer right) { left.longValue() % right.intValue() }
+	def dispatch Object modulo(Long left, Byte right) { left.longValue() % right.byteValue() }
+	def dispatch Object modulo(Long left, Double right) { left.longValue() % right.doubleValue() }
+	def dispatch Object modulo(Long left, Float right) { left.longValue() % right.floatValue() }
+	def dispatch Object modulo(Long left, Long right) { left.longValue() % right.longValue() }
+	def dispatch Object modulo(Long left, Short right) { left.longValue() % right.shortValue() }
+	def dispatch Object modulo(Long left, Integer right) { left.longValue() % right.intValue() }
 	
-	def dispatch modulo(Short left, Byte right) { left.shortValue() % right.byteValue() }
-	def dispatch modulo(Short left, Double right) { left.shortValue() % right.doubleValue() }
-	def dispatch modulo(Short left, Float right) { left.shortValue() % right.floatValue() }
-	def dispatch modulo(Short left, Long right) { left.shortValue() % right.longValue() }
-	def dispatch modulo(Short left, Short right) { left.shortValue() % right.shortValue() }
-	def dispatch modulo(Short left, Integer right) { left.shortValue() % right.intValue() }
+	def dispatch Object modulo(Short left, Byte right) { left.shortValue() % right.byteValue() }
+	def dispatch Object modulo(Short left, Double right) { left.shortValue() % right.doubleValue() }
+	def dispatch Object modulo(Short left, Float right) { left.shortValue() % right.floatValue() }
+	def dispatch Object modulo(Short left, Long right) { left.shortValue() % right.longValue() }
+	def dispatch Object modulo(Short left, Short right) { left.shortValue() % right.shortValue() }
+	def dispatch Object modulo(Short left, Integer right) { left.shortValue() % right.intValue() }
 	
-	def dispatch modulo(Integer left, Byte right) { left.intValue() % right.byteValue() }
-	def dispatch modulo(Integer left, Double right) { left.intValue() % right.doubleValue() }
-	def dispatch modulo(Integer left, Float right) { left.intValue() % right.floatValue() }
-	def dispatch modulo(Integer left, Long right) { left.intValue() % right.longValue() }
-	def dispatch modulo(Integer left, Short right) { left.intValue() % right.shortValue() }
-	def dispatch modulo(Integer left, Integer right) { left.intValue() % right.intValue() }
+	def dispatch Object modulo(Integer left, Byte right) { left.intValue() % right.byteValue() }
+	def dispatch Object modulo(Integer left, Double right) { left.intValue() % right.doubleValue() }
+	def dispatch Object modulo(Integer left, Float right) { left.intValue() % right.floatValue() }
+	def dispatch Object modulo(Integer left, Long right) { left.intValue() % right.longValue() }
+	def dispatch Object modulo(Integer left, Short right) { left.intValue() % right.shortValue() }
+	def dispatch Object modulo(Integer left, Integer right) { left.intValue() % right.intValue() }
 	
-	def dispatch multiply(Object left, Object right) {
+	def dispatch Object multiply(Object left, Object right) {
 		throw new ConstantExpressionEvaluationException("Unsupported operator '*' for operands "+left+" and "+right);
 	}
 	
 	
-	def dispatch multiply(Byte left, Byte right) { left.byteValue() * right.byteValue() }
-	def dispatch multiply(Byte left, Double right) { left.byteValue() * right.doubleValue() }
-	def dispatch multiply(Byte left, Float right) { left.byteValue() * right.floatValue() }
-	def dispatch multiply(Byte left, Long right) { left.byteValue() * right.longValue() }
-	def dispatch multiply(Byte left, Short right) { left.byteValue() * right.shortValue() }
-	def dispatch multiply(Byte left, Integer right) { left.byteValue() * right.intValue() }
+	def dispatch Object multiply(Byte left, Byte right) { left.byteValue() * right.byteValue() }
+	def dispatch Object multiply(Byte left, Double right) { left.byteValue() * right.doubleValue() }
+	def dispatch Object multiply(Byte left, Float right) { left.byteValue() * right.floatValue() }
+	def dispatch Object multiply(Byte left, Long right) { left.byteValue() * right.longValue() }
+	def dispatch Object multiply(Byte left, Short right) { left.byteValue() * right.shortValue() }
+	def dispatch Object multiply(Byte left, Integer right) { left.byteValue() * right.intValue() }
 	
-	def dispatch multiply(Double left, Byte right) { left.doubleValue() * right.byteValue() }
-	def dispatch multiply(Double left, Double right) { left.doubleValue() * right.doubleValue() }
-	def dispatch multiply(Double left, Float right) { left.doubleValue() * right.floatValue() }
-	def dispatch multiply(Double left, Long right) { left.doubleValue() * right.longValue() }
-	def dispatch multiply(Double left, Short right) { left.doubleValue() * right.shortValue() }
-	def dispatch multiply(Double left, Integer right) { left.doubleValue() * right.intValue() }
+	def dispatch Object multiply(Double left, Byte right) { left.doubleValue() * right.byteValue() }
+	def dispatch Object multiply(Double left, Double right) { left.doubleValue() * right.doubleValue() }
+	def dispatch Object multiply(Double left, Float right) { left.doubleValue() * right.floatValue() }
+	def dispatch Object multiply(Double left, Long right) { left.doubleValue() * right.longValue() }
+	def dispatch Object multiply(Double left, Short right) { left.doubleValue() * right.shortValue() }
+	def dispatch Object multiply(Double left, Integer right) { left.doubleValue() * right.intValue() }
 	
-	def dispatch multiply(Float left, Byte right) { left.floatValue() * right.byteValue() }
-	def dispatch multiply(Float left, Double right) { left.floatValue() * right.doubleValue() }
-	def dispatch multiply(Float left, Float right) { left.floatValue() * right.floatValue() }
-	def dispatch multiply(Float left, Long right) { left.floatValue() * right.longValue() }
-	def dispatch multiply(Float left, Short right) { left.floatValue() * right.shortValue() }
-	def dispatch multiply(Float left, Integer right) { left.floatValue() * right.intValue() }
+	def dispatch Object multiply(Float left, Byte right) { left.floatValue() * right.byteValue() }
+	def dispatch Object multiply(Float left, Double right) { left.floatValue() * right.doubleValue() }
+	def dispatch Object multiply(Float left, Float right) { left.floatValue() * right.floatValue() }
+	def dispatch Object multiply(Float left, Long right) { left.floatValue() * right.longValue() }
+	def dispatch Object multiply(Float left, Short right) { left.floatValue() * right.shortValue() }
+	def dispatch Object multiply(Float left, Integer right) { left.floatValue() * right.intValue() }
 	
-	def dispatch multiply(Long left, Byte right) { left.longValue() * right.byteValue() }
-	def dispatch multiply(Long left, Double right) { left.longValue() * right.doubleValue() }
-	def dispatch multiply(Long left, Float right) { left.longValue() * right.floatValue() }
-	def dispatch multiply(Long left, Long right) { left.longValue() * right.longValue() }
-	def dispatch multiply(Long left, Short right) { left.longValue() * right.shortValue() }
-	def dispatch multiply(Long left, Integer right) { left.longValue() * right.intValue() }
+	def dispatch Object multiply(Long left, Byte right) { left.longValue() * right.byteValue() }
+	def dispatch Object multiply(Long left, Double right) { left.longValue() * right.doubleValue() }
+	def dispatch Object multiply(Long left, Float right) { left.longValue() * right.floatValue() }
+	def dispatch Object multiply(Long left, Long right) { left.longValue() * right.longValue() }
+	def dispatch Object multiply(Long left, Short right) { left.longValue() * right.shortValue() }
+	def dispatch Object multiply(Long left, Integer right) { left.longValue() * right.intValue() }
 	
-	def dispatch multiply(Short left, Byte right) { left.shortValue() * right.byteValue() }
-	def dispatch multiply(Short left, Double right) { left.shortValue() * right.doubleValue() }
-	def dispatch multiply(Short left, Float right) { left.shortValue() * right.floatValue() }
-	def dispatch multiply(Short left, Long right) { left.shortValue() * right.longValue() }
-	def dispatch multiply(Short left, Short right) { left.shortValue() * right.shortValue() }
-	def dispatch multiply(Short left, Integer right) { left.shortValue() * right.intValue() }
+	def dispatch Object multiply(Short left, Byte right) { left.shortValue() * right.byteValue() }
+	def dispatch Object multiply(Short left, Double right) { left.shortValue() * right.doubleValue() }
+	def dispatch Object multiply(Short left, Float right) { left.shortValue() * right.floatValue() }
+	def dispatch Object multiply(Short left, Long right) { left.shortValue() * right.longValue() }
+	def dispatch Object multiply(Short left, Short right) { left.shortValue() * right.shortValue() }
+	def dispatch Object multiply(Short left, Integer right) { left.shortValue() * right.intValue() }
 	
-	def dispatch multiply(Integer left, Byte right) { left.intValue() * right.byteValue() }
-	def dispatch multiply(Integer left, Double right) { left.intValue() * right.doubleValue() }
-	def dispatch multiply(Integer left, Float right) { left.intValue() * right.floatValue() }
-	def dispatch multiply(Integer left, Long right) { left.intValue() * right.longValue() }
-	def dispatch multiply(Integer left, Short right) { left.intValue() * right.shortValue() }
-	def dispatch multiply(Integer left, Integer right) { left.intValue() * right.intValue() }
+	def dispatch Object multiply(Integer left, Byte right) { left.intValue() * right.byteValue() }
+	def dispatch Object multiply(Integer left, Double right) { left.intValue() * right.doubleValue() }
+	def dispatch Object multiply(Integer left, Float right) { left.intValue() * right.floatValue() }
+	def dispatch Object multiply(Integer left, Long right) { left.intValue() * right.longValue() }
+	def dispatch Object multiply(Integer left, Short right) { left.intValue() * right.shortValue() }
+	def dispatch Object multiply(Integer left, Integer right) { left.intValue() * right.intValue() }
 	
-	def dispatch divide(Object left, Object right) {
+	def dispatch Object divide(Object left, Object right) {
 		throw new ConstantExpressionEvaluationException("Unsupported operator '/' for operands "+left+" and "+right);
 	}
 	
 	
-	def dispatch divide(Byte left, Byte right) { left.byteValue() / right.byteValue() }
-	def dispatch divide(Byte left, Double right) { left.byteValue() / right.doubleValue() }
-	def dispatch divide(Byte left, Float right) { left.byteValue() / right.floatValue() }
-	def dispatch divide(Byte left, Long right) { left.byteValue() / right.longValue() }
-	def dispatch divide(Byte left, Short right) { left.byteValue() / right.shortValue() }
-	def dispatch divide(Byte left, Integer right) { left.byteValue() / right.intValue() }
+	def dispatch Object divide(Byte left, Byte right) { left.byteValue() / right.byteValue() }
+	def dispatch Object divide(Byte left, Double right) { left.byteValue() / right.doubleValue() }
+	def dispatch Object divide(Byte left, Float right) { left.byteValue() / right.floatValue() }
+	def dispatch Object divide(Byte left, Long right) { left.byteValue() / right.longValue() }
+	def dispatch Object divide(Byte left, Short right) { left.byteValue() / right.shortValue() }
+	def dispatch Object divide(Byte left, Integer right) { left.byteValue() / right.intValue() }
 	
-	def dispatch divide(Double left, Byte right) { left.doubleValue() / right.byteValue() }
-	def dispatch divide(Double left, Double right) { left.doubleValue() / right.doubleValue() }
-	def dispatch divide(Double left, Float right) { left.doubleValue() / right.floatValue() }
-	def dispatch divide(Double left, Long right) { left.doubleValue() / right.longValue() }
-	def dispatch divide(Double left, Short right) { left.doubleValue() / right.shortValue() }
-	def dispatch divide(Double left, Integer right) { left.doubleValue() / right.intValue() }
+	def dispatch Object divide(Double left, Byte right) { left.doubleValue() / right.byteValue() }
+	def dispatch Object divide(Double left, Double right) { left.doubleValue() / right.doubleValue() }
+	def dispatch Object divide(Double left, Float right) { left.doubleValue() / right.floatValue() }
+	def dispatch Object divide(Double left, Long right) { left.doubleValue() / right.longValue() }
+	def dispatch Object divide(Double left, Short right) { left.doubleValue() / right.shortValue() }
+	def dispatch Object divide(Double left, Integer right) { left.doubleValue() / right.intValue() }
 	
-	def dispatch divide(Float left, Byte right) { left.floatValue() / right.byteValue() }
-	def dispatch divide(Float left, Double right) { left.floatValue() / right.doubleValue() }
-	def dispatch divide(Float left, Float right) { left.floatValue() / right.floatValue() }
-	def dispatch divide(Float left, Long right) { left.floatValue() / right.longValue() }
-	def dispatch divide(Float left, Short right) { left.floatValue() / right.shortValue() }
-	def dispatch divide(Float left, Integer right) { left.floatValue() / right.intValue() }
+	def dispatch Object divide(Float left, Byte right) { left.floatValue() / right.byteValue() }
+	def dispatch Object divide(Float left, Double right) { left.floatValue() / right.doubleValue() }
+	def dispatch Object divide(Float left, Float right) { left.floatValue() / right.floatValue() }
+	def dispatch Object divide(Float left, Long right) { left.floatValue() / right.longValue() }
+	def dispatch Object divide(Float left, Short right) { left.floatValue() / right.shortValue() }
+	def dispatch Object divide(Float left, Integer right) { left.floatValue() / right.intValue() }
 	
-	def dispatch divide(Long left, Byte right) { left.longValue() / right.byteValue() }
-	def dispatch divide(Long left, Double right) { left.longValue() / right.doubleValue() }
-	def dispatch divide(Long left, Float right) { left.longValue() / right.floatValue() }
-	def dispatch divide(Long left, Long right) { left.longValue() / right.longValue() }
-	def dispatch divide(Long left, Short right) { left.longValue() / right.shortValue() }
-	def dispatch divide(Long left, Integer right) { left.longValue() / right.intValue() }
+	def dispatch Object divide(Long left, Byte right) { left.longValue() / right.byteValue() }
+	def dispatch Object divide(Long left, Double right) { left.longValue() / right.doubleValue() }
+	def dispatch Object divide(Long left, Float right) { left.longValue() / right.floatValue() }
+	def dispatch Object divide(Long left, Long right) { left.longValue() / right.longValue() }
+	def dispatch Object divide(Long left, Short right) { left.longValue() / right.shortValue() }
+	def dispatch Object divide(Long left, Integer right) { left.longValue() / right.intValue() }
 	
-	def dispatch divide(Short left, Byte right) { left.shortValue() / right.byteValue() }
-	def dispatch divide(Short left, Double right) { left.shortValue() / right.doubleValue() }
-	def dispatch divide(Short left, Float right) { left.shortValue() / right.floatValue() }
-	def dispatch divide(Short left, Long right) { left.shortValue() / right.longValue() }
-	def dispatch divide(Short left, Short right) { left.shortValue() / right.shortValue() }
-	def dispatch divide(Short left, Integer right) { left.shortValue() / right.intValue() }
+	def dispatch Object divide(Short left, Byte right) { left.shortValue() / right.byteValue() }
+	def dispatch Object divide(Short left, Double right) { left.shortValue() / right.doubleValue() }
+	def dispatch Object divide(Short left, Float right) { left.shortValue() / right.floatValue() }
+	def dispatch Object divide(Short left, Long right) { left.shortValue() / right.longValue() }
+	def dispatch Object divide(Short left, Short right) { left.shortValue() / right.shortValue() }
+	def dispatch Object divide(Short left, Integer right) { left.shortValue() / right.intValue() }
 	
-	def dispatch divide(Integer left, Byte right) { left.intValue() / right.byteValue() }
-	def dispatch divide(Integer left, Double right) { left.intValue() / right.doubleValue() }
-	def dispatch divide(Integer left, Float right) { left.intValue() / right.floatValue() }
-	def dispatch divide(Integer left, Long right) { left.intValue() / right.longValue() }
-	def dispatch divide(Integer left, Short right) { left.intValue() / right.shortValue() }
-	def dispatch divide(Integer left, Integer right) { left.intValue() / right.intValue() }
+	def dispatch Object divide(Integer left, Byte right) { left.intValue() / right.byteValue() }
+	def dispatch Object divide(Integer left, Double right) { left.intValue() / right.doubleValue() }
+	def dispatch Object divide(Integer left, Float right) { left.intValue() / right.floatValue() }
+	def dispatch Object divide(Integer left, Long right) { left.intValue() / right.longValue() }
+	def dispatch Object divide(Integer left, Short right) { left.intValue() / right.shortValue() }
+	def dispatch Object divide(Integer left, Integer right) { left.intValue() / right.intValue() }
 	
 	def dispatch boolean same(Object left, Object right) {
 		throw new ConstantExpressionEvaluationException("Unsupported operator '===' for operands "+left+" and "+right);
