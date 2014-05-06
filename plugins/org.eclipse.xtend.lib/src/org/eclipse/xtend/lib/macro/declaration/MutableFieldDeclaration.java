@@ -14,6 +14,8 @@ import com.google.common.annotations.Beta;
 
 /**
  * @author Sven Efftinge
+ * 
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface MutableFieldDeclaration extends MutableMemberDeclaration, FieldDeclaration {
@@ -78,6 +80,13 @@ public interface MutableFieldDeclaration extends MutableMemberDeclaration, Field
 	 * @exception IllegalArgumentException if the <code>initializer</code> is <code>null</code>
 	 */
 	void setInitializer(StringConcatenationClient template);
+	
+	/**
+	 * Indicate that this field is properly initialized in some generated constructor.
+	 * 
+	 * @since 2.6
+	 */
+	void markAsInitialized();
 	
 	/**
 	 * sets the 'type' of this field declaration

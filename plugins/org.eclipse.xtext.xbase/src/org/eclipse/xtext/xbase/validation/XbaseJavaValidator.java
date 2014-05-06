@@ -42,7 +42,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -118,7 +117,6 @@ import org.eclipse.xtext.xbase.util.TypesOrderUtil;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
-import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
@@ -186,6 +184,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private StaticallyImportedMemberProvider staticallyImportedMemberProvider;
+	
+	@Inject
+	private ReadAndWriteTracking readAndWriteTracking;
 	
 	protected CommonTypeComputationServices getServices() {
 		return services;
@@ -544,7 +545,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				checkInitializationRec(expression, finalFields, localInitializedFields, Sets.newLinkedHashSet(localInitializedFields), Sets.newHashSet(constr));
 			}
 			for (JvmField field : finalFields) {
-				if (!localInitializedFields.contains(field)) {
+				if (!localInitializedFields.contains(field) && !readAndWriteTracking.isInitialized(field)) {
 					reportUninitializedField(field);
 				}
 			}
@@ -552,7 +553,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (Iterables.isEmpty(type.getDeclaredConstructors())) {
 			finalFields.removeAll(initializedFields);
 			for (JvmField jvmField : finalFields) {
-				reportUninitializedField(jvmField);
+				if (!readAndWriteTracking.isInitialized(jvmField)) {
+					reportUninitializedField(jvmField);
+				}
 			}
 		}
 	}
@@ -1239,7 +1242,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 		
 	protected boolean isLocallyUsed(EObject target, EObject containerToFindUsage) {
-		return !XbaseUsageCrossReferencer.find(target, containerToFindUsage).isEmpty();
+		return readAndWriteTracking.isRead(target) || !XbaseUsageCrossReferencer.find(target, containerToFindUsage).isEmpty();
 	}
 
 	@Override

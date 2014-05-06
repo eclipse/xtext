@@ -1745,6 +1745,54 @@ abstract class AbstractReusableActiveAnnotationTests {
 			assertTrue(typeLookup.findClass('myusercode.DoesNotExist').simpleName == 'DoesNotExist')
 		]
 	}
+	
+	@Test def void testMarkReadAndInitialized() {
+		assertProcessing(
+			'myannotation/InitAnnotation.xtend' -> "
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+
+				@Active(InitProcessor)
+				annotation Init { }
+				class InitProcessor implements TransformationParticipant<MutableFieldDeclaration> {
+					
+					override doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {
+						annotatedTargetFields.forEach [ field |
+							field.setFinal(true)
+							field.markAsRead
+							field.markAsInitialized
+						]
+						annotatedTargetFields.head.declaringType.addConstructor [
+							body = ['''
+								«FOR f : annotatedTargetFields»
+									this.«f.simpleName» = \"foo\";
+								«ENDFOR»
+							''']
+						]
+					}
+				}
+			",
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				class MyClass {
+					
+					@myannotation.Init String myField
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass('myusercode.MyClass')
+			assertTrue(problemSupport.getProblems(clazz.declaredFields.head).empty)
+		]
+	}
+	
+	
 
 	@Test def void testPropertyAnnotation() {
 		assertProcessing(

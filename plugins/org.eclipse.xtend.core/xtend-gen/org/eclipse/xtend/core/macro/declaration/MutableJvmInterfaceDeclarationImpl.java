@@ -35,9 +35,17 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationImpl implements MutableInterfaceDeclaration {
+  public void markAsRead() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
+    JvmGenericType _delegate = this.getDelegate();
+    _readAndWriteTracking.markReadAccess(_delegate);
+  }
+  
   public MutableMethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     MethodDeclaration _findDeclaredMethod = super.findDeclaredMethod(name, parameterTypes);
     return ((MutableMethodDeclaration) _findDeclaredMethod);

@@ -273,6 +273,10 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 
 class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationImpl implements MutableInterfaceDeclaration {
 	
+	override markAsRead() {
+		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
+	}
+	
 	override MutableMethodDeclaration findDeclaredMethod(String name, TypeReference... parameterTypes) {
 		super.findDeclaredMethod(name, parameterTypes) as MutableMethodDeclaration
 	}
@@ -378,6 +382,10 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 
 class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDeclarationImpl implements MutableAnnotationTypeDeclaration {
 	
+	override markAsRead() {
+		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
+	}
+	
 	override MutableMethodDeclaration findDeclaredMethod(String name, TypeReference... parameterTypes) {
 		super.findDeclaredMethod(name, parameterTypes) as MutableMethodDeclaration
 	}
@@ -466,6 +474,10 @@ class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmAnnotat
 
 class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationTypeDeclarationImpl implements MutableEnumerationTypeDeclaration {
 	
+	override markAsRead() {
+		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
+	}
+	
 	override MutableMethodDeclaration findDeclaredMethod(String name, TypeReference... parameterTypes) {
 		super.findDeclaredMethod(name, parameterTypes) as MutableMethodDeclaration
 	}
@@ -541,6 +553,10 @@ class JvmEnumerationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmEnumer
 }
 
 class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements MutableClassDeclaration {
+	
+	override markAsRead() {
+		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
+	}
 	
 	override MutableMethodDeclaration findDeclaredMethod(String name, TypeReference... parameterTypes) {
 		super.findDeclaredMethod(name, parameterTypes) as MutableMethodDeclaration
@@ -782,6 +798,10 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 
 class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationImpl implements MutableParameterDeclaration {
 	
+	override markAsRead() {
+		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
+	}
+	
 	override MutableExecutableDeclaration getDeclaringExecutable() {
 		super.declaringExecutable as MutableExecutableDeclaration
 	}
@@ -806,6 +826,10 @@ class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmFormalParam
 }
 
 class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implements MutableMethodDeclaration {
+	
+	override markAsRead() {
+		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
+	}
 	
 	override Iterable<? extends MutableParameterDeclaration> getParameters() {
 		super.parameters as Iterable<? extends MutableParameterDeclaration> 
@@ -900,6 +924,10 @@ class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation
 
 class MutableJvmConstructorDeclarationImpl extends JvmConstructorDeclarationImpl implements MutableConstructorDeclaration {
 	
+	override markAsRead() {
+		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
+	}
+	
 	override Iterable<? extends MutableParameterDeclaration> getParameters() {
 		super.parameters as Iterable<? extends MutableParameterDeclaration>
 	}
@@ -924,6 +952,10 @@ class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmCons
 
 class MutableJvmEnumerationValueDeclarationImpl extends JvmEnumerationValueDeclarationImpl implements MutableEnumerationValueDeclaration {
 	
+	override markAsRead() {
+		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
+	}
+	
 	override MutableEnumerationTypeDeclaration getDeclaringType() {
 		super.getDeclaringType() as MutableEnumerationTypeDeclaration
 	}
@@ -943,6 +975,14 @@ class JvmEnumerationValueDeclarationImpl extends JvmMemberDeclarationImpl<JvmEnu
 }
 
 class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements MutableFieldDeclaration {
+	
+	override markAsRead() {
+		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
+	}
+	
+	override markAsInitialized() {
+		compilationUnit.readAndWriteTracking.markInitialized(delegate)
+	}
 	
 	override MutableTypeDeclaration getDeclaringType() {
 		super.declaringType as MutableTypeDeclaration
@@ -1019,6 +1059,10 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 
 class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclarationImpl implements MutableAnnotationTarget, MutableTypeParameterDeclaration {
 	
+	override markAsRead() {
+		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
+	}
+	
 	override MutableTypeParameterDeclarator getTypeParameterDeclarator() {
 		super.typeParameterDeclarator as MutableTypeParameterDeclarator
 	}
@@ -1079,6 +1123,10 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 }
 
 class MutableJvmAnnotationTypeElementDeclarationImpl extends JvmAnnotationTypeElementDeclarationImpl implements MutableAnnotationTypeElementDeclaration {
+
+	override markAsRead() {
+		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
+	}
 	
 	override MutableTypeDeclaration getDeclaringType() {
 		super.declaringType as MutableTypeDeclaration

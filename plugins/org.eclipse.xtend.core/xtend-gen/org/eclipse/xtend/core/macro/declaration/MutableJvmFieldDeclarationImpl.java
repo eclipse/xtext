@@ -23,9 +23,24 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
+import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements MutableFieldDeclaration {
+  public void markAsRead() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
+    JvmField _delegate = this.getDelegate();
+    _readAndWriteTracking.markReadAccess(_delegate);
+  }
+  
+  public void markAsInitialized() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
+    JvmField _delegate = this.getDelegate();
+    _readAndWriteTracking.markInitialized(_delegate);
+  }
+  
   public MutableTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();
     return ((MutableTypeDeclaration) _declaringType);

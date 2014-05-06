@@ -39,9 +39,17 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationTypeDeclarationImpl implements MutableEnumerationTypeDeclaration {
+  public void markAsRead() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
+    JvmEnumerationType _delegate = this.getDelegate();
+    _readAndWriteTracking.markReadAccess(_delegate);
+  }
+  
   public MutableMethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     MethodDeclaration _findDeclaredMethod = super.findDeclaredMethod(name, parameterTypes);
     return ((MutableMethodDeclaration) _findDeclaredMethod);
