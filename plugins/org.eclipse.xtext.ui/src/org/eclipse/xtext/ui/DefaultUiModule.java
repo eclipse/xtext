@@ -85,10 +85,8 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.PresentationRepairer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TokenScanner;
 import org.eclipse.xtext.ui.editor.templates.DefaultTemplateProposalProvider;
@@ -355,6 +353,13 @@ public class DefaultUiModule extends AbstractGenericModule {
 	 */
 	public void configureIResourceDescriptionsLiveScope(Binder binder) {
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(LiveShadowedResourceDescriptions.class);
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void configureIResourceDescriptionsLiveModelScope(Binder binder) {
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_MODEL_SCOPE)).toProvider(LiveShadowedResourceDescriptions.LiveModelShadowedResourceDescriptionsProvider.class);
 	}
 	
 	/**

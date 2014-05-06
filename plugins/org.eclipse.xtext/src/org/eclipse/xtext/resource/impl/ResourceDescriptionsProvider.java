@@ -28,6 +28,12 @@ public class ResourceDescriptionsProvider {
 
 	public static final String LIVE_SCOPE = "org.eclipse.xtext.scoping.LIVE_SCOPE";
 
+	/** @since 2.6 */
+	public static final String PERSISTED_DESCRIPTIONS = "org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource.PERSISTED_DESCRIPTIONS";
+
+	/** @since 2.6 */
+	public static final String LIVE_MODEL_SCOPE = "org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.LIVE_MODEL_SCOPE";
+
 	@Inject
 	@Named(NAMED_BUILDER_SCOPE)
 	private Provider<IResourceDescriptions> builderScopeResourceDescriptions;
@@ -35,6 +41,14 @@ public class ResourceDescriptionsProvider {
 	@Inject
 	@Named(LIVE_SCOPE)
 	private Provider<IResourceDescriptions> liveScopeResourceDescriptions;
+	
+	@Inject
+	@Named(LIVE_MODEL_SCOPE)
+	private Provider<IResourceDescriptions> liveModelScopeResourceDescriptions;
+	
+	@Inject
+	@Named(PERSISTED_DESCRIPTIONS)
+	private Provider<IResourceDescriptions> persistedResourceDescriptions;
 
 	@Inject
 	private Provider<IResourceDescriptions> resourceDescriptions;
@@ -70,14 +84,28 @@ public class ResourceDescriptionsProvider {
 	@NonNull
 	public IResourceDescriptions getResourceDescriptions(@NonNull ResourceSet resourceSet) {
 		Map<Object, Object> loadOptions = resourceSet.getLoadOptions();
-		final IResourceDescriptions result;
-		if (loadOptions.containsKey(NAMED_BUILDER_SCOPE)) {
-			result = createBuilderScopeResourceDescriptions();
-			if (loadOptions.containsKey(LIVE_SCOPE)) {
-				throw new IllegalStateException("Ambiguous scope for the resource set: " + loadOptions);
+		String[] mutualExclusiveFlags = new String[] { NAMED_BUILDER_SCOPE, LIVE_MODEL_SCOPE, LIVE_SCOPE, PERSISTED_DESCRIPTIONS };
+		String flag = null;
+		for (int i = 0; i < mutualExclusiveFlags.length; i++) {
+			String candidate = mutualExclusiveFlags[i];
+			if (loadOptions.containsKey(candidate)) {
+				if (flag == null) {
+					flag = candidate;
+				} else {
+					String msg = "Ambiguous scope for the resource set. Can't combine " + flag + " and " + candidate;
+					throw new IllegalStateException(msg);
+				}
 			}
-		} else if (loadOptions.containsKey(LIVE_SCOPE)) {
+		}
+		final IResourceDescriptions result;
+		if (NAMED_BUILDER_SCOPE.equals(flag)) {
+			result = createBuilderScopeResourceDescriptions();
+		} else if (LIVE_SCOPE.equals(flag)) {
 			result = createLiveScopeResourceDescriptions();
+		} else if (LIVE_MODEL_SCOPE.equals(flag)) {
+			result = createLiveModelScopeResourceDescriptions();
+		} else if (PERSISTED_DESCRIPTIONS.equals(flag)) {
+			result = createPersistedResourceDescriptions();
 		} else {
 			result = createResourceDescriptions();
 		}
@@ -87,15 +115,42 @@ public class ResourceDescriptionsProvider {
 		return result;
 	}
 
+	/**
+	 * The returned IResourceDescriptions represent the Xtext Index' state shadowed by the Editors Dirty State shadowed
+	 * by the current ResourceSets contents.
+	 */
 	public IResourceDescriptions createLiveScopeResourceDescriptions() {
 		return liveScopeResourceDescriptions.get();
 	}
 	
+	/**
+	 * The returned IResourceDescriptions represent the Xtext Index' state shadowed by the current ResourceSets contents.
+	 * 
+	 * @since 2.6
+	 */
+	public IResourceDescriptions createLiveModelScopeResourceDescriptions() {
+		return liveModelScopeResourceDescriptions.get();
+	}
+
+	/**
+	 * The returned IResourceDescriptions are used by the Xtext Builder to update the Index.
+	 */
 	public IResourceDescriptions createBuilderScopeResourceDescriptions() {
 		return builderScopeResourceDescriptions.get();
 	}
 	
+	/**
+	 * The returned IResourceDescriptions represent the Xtext Index' state shadowed by the Editors Dirty State.
+	 */
 	public IResourceDescriptions createResourceDescriptions() {
+		return resourceDescriptions.get();
+	}
+	
+	/**
+	 * The returned IResourceDescriptions represent the Xtext Index' state (not shadowed by anything).
+	 * @since 2.6
+	 */
+	public IResourceDescriptions createPersistedResourceDescriptions() {
 		return resourceDescriptions.get();
 	}
 	
@@ -105,5 +160,26 @@ public class ResourceDescriptionsProvider {
 
 	public void setResourceDescriptions(Provider<IResourceDescriptions> resourceDescriptions) {
 		this.resourceDescriptions = resourceDescriptions;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void setLiveModelScopeResourceDescriptions(Provider<IResourceDescriptions> liveModelScopeResourceDescriptions) {
+		this.liveModelScopeResourceDescriptions = liveModelScopeResourceDescriptions;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void setLiveScopeResourceDescriptions(Provider<IResourceDescriptions> liveScopeResourceDescriptions) {
+		this.liveScopeResourceDescriptions = liveScopeResourceDescriptions;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void setPersistedResourceDescriptions(Provider<IResourceDescriptions> persistedResourceDescriptions) {
+		this.persistedResourceDescriptions = persistedResourceDescriptions;
 	}
 }
