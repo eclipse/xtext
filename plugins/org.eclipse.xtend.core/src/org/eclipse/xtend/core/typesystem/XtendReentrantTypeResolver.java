@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -59,6 +60,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.OperationBodyComputationState;
@@ -474,6 +476,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			List<JvmOperation> dispatchCases = dispatchHelper.getLocalDispatchCases(dispatcher);
 			List<LightweightTypeReference> dispatchCaseResults = Lists.newArrayListWithCapacity(dispatchCases.size());
 			boolean hasInferredCase = false;
+			boolean implicitVoid = false;
 			for (JvmOperation dispatchCase : dispatchCases) {
 				markComputing(dispatchCase.getReturnType());
 			}
@@ -505,11 +508,26 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 					unmarkComputing(dispatchCase.getReturnType());
 					if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
 						if (declaredDispatcherType == null) {
-							dispatchCaseResults.add(dispatchCaseResult.getReturnType());
+							LightweightTypeReference returnType = dispatchCaseResult.getReturnType();
+							if (returnType != null) {
+								if (returnType.isPrimitiveVoid()) {
+									Set<ConformanceHint> conformanceHints = dispatchCaseResult.getConformanceHints();
+									if (!conformanceHints.contains(ConformanceHint.THROWN_EXCEPTION)) {
+										if (conformanceHints.contains(ConformanceHint.NO_IMPLICIT_RETURN)) {
+											dispatchCaseResults.add(returnType);
+										} else {
+											implicitVoid = true;
+										}
+									}
+								} else {
+									dispatchCaseResults.add(returnType);
+								}
+							}
 						}
 						hasInferredCase = true;
 					} else {
-						dispatchCaseResults.add(dispatchCaseResolvedTypes.getActualType(dispatchCase));
+						LightweightTypeReference explicitType = dispatchCaseResolvedTypes.getActualType(dispatchCase);
+						dispatchCaseResults.add(explicitType);
 					}
 					computeAnnotationTypes(dispatchCaseResolvedTypes, featureScopeSession, dispatchCase);
 					computeLocalTypes(preparedResolvedTypes, dispatchCaseResolvedTypes, featureScopeSession, dispatchCase);
@@ -517,23 +535,49 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				}
 			}
 			if (hasInferredCase) {
-				LightweightTypeReference commonDispatchType = declaredDispatcherType != null 
-						? declaredDispatcherType
-						: getServices().getTypeConformanceComputer().getCommonSuperType(dispatchCaseResults, childResolvedTypes.getReferenceOwner());
+				LightweightTypeReference commonDispatchType = normalizeDispatchReturnType(
+						declaredDispatcherType,
+						dispatchCaseResults,
+						implicitVoid,
+						childResolvedTypes);
 				if (commonDispatchType != null) {
-					for (JvmOperation dispatchCase : dispatchCases) {
-						JvmTypeReference returnType = dispatchCase.getReturnType();
-						if (InferredTypeIndicator.isInferred(returnType)) {
-							InferredTypeIndicator.resolveTo(
-									returnType,
-									toJavaCompliantTypeReference(commonDispatchType, featureScopeSession));
-						}
-					}
+					resolveDispatchCaseTypes(dispatchCases, commonDispatchType, featureScopeSession);
 				}
 			}
 		} else {
 			super._computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, operation);
 		}
+	}
+
+	protected void resolveDispatchCaseTypes(List<JvmOperation> dispatchCases, LightweightTypeReference type,
+			IFeatureScopeSession featureScopeSession) {
+		for (JvmOperation dispatchCase : dispatchCases) {
+			JvmTypeReference returnType = dispatchCase.getReturnType();
+			if (InferredTypeIndicator.isInferred(returnType)) {
+				InferredTypeIndicator.resolveTo(
+						returnType,
+						toJavaCompliantTypeReference(type, featureScopeSession));
+			}
+		}
+	}
+
+	protected LightweightTypeReference normalizeDispatchReturnType(LightweightTypeReference declaredType,
+			List<LightweightTypeReference> computedTypes,
+			boolean implicitVoidSeen, ResolvedTypes resolvedTypes) {
+		LightweightTypeReference result = null;
+		if (declaredType != null) {
+			result = declaredType;
+		} else {
+			if (implicitVoidSeen) {
+				List<LightweightTypeReference> wrapped = Lists.newArrayListWithCapacity(computedTypes.size());
+				for(int i = 0; i < computedTypes.size(); i++) {
+					wrapped.add(computedTypes.get(i).getWrapperTypeIfPrimitive());
+				}
+				computedTypes = wrapped;
+			}
+			result = getServices().getTypeConformanceComputer().getCommonSuperType(computedTypes, resolvedTypes.getReferenceOwner());
+		}
+		return result;
 	}
 
 	protected void computeXtendAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, List<XAnnotation> annotations) {
