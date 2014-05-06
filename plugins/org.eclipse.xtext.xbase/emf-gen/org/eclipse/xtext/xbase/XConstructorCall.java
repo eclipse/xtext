@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#isValidFeature <em>Valid Feature</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#isExplicitConstructorCall <em>Explicit Constructor Call</em>}</li>
  * </ul>
  * </p>
  *
@@ -132,5 +133,31 @@ public interface XConstructorCall extends XExpression
 	 * @generated
 	 */
 	boolean isValidFeature();
+
+	/**
+	 * Returns the value of the '<em><b>Explicit Constructor Call</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Explicit Constructor Call</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Explicit Constructor Call</em>' attribute.
+	 * @see #setExplicitConstructorCall(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_ExplicitConstructorCall()
+	 * @model
+	 * @generated
+	 */
+	boolean isExplicitConstructorCall();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XConstructorCall#isExplicitConstructorCall <em>Explicit Constructor Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Explicit Constructor Call</em>' attribute.
+	 * @see #isExplicitConstructorCall()
+	 * @generated
+	 */
+	void setExplicitConstructorCall(boolean value);
 
 } // XConstructorCall

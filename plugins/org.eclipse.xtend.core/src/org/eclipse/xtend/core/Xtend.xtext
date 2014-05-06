@@ -208,7 +208,7 @@ XbaseConstructorCall returns xbase::XConstructorCall:
 	{xbase::XConstructorCall}
 	'new' constructor=[types::JvmConstructor|QualifiedName] 
 	(=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	(=>'(' 
+	(=>explicitConstructorCall?='(' 
 		(
 		    arguments+=XShortClosure
 		  |	arguments+=XExpression (',' arguments+=XExpression)*

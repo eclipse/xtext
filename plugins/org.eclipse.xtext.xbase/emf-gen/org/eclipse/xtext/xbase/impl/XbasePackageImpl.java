@@ -874,6 +874,16 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getXConstructorCall_ExplicitConstructorCall()
+	{
+		return (EAttribute)xConstructorCallEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXBooleanLiteral()
 	{
 		return xBooleanLiteralEClass;
@@ -1616,6 +1626,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		createEReference(xConstructorCallEClass, XCONSTRUCTOR_CALL__TYPE_ARGUMENTS);
 		createEAttribute(xConstructorCallEClass, XCONSTRUCTOR_CALL__INVALID_FEATURE_ISSUE_CODE);
 		createEAttribute(xConstructorCallEClass, XCONSTRUCTOR_CALL__VALID_FEATURE);
+		createEAttribute(xConstructorCallEClass, XCONSTRUCTOR_CALL__EXPLICIT_CONSTRUCTOR_CALL);
 
 		xBooleanLiteralEClass = createEClass(XBOOLEAN_LITERAL);
 		createEAttribute(xBooleanLiteralEClass, XBOOLEAN_LITERAL__IS_TRUE);
@@ -1853,6 +1864,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEReference(getXConstructorCall_TypeArguments(), theTypesPackage.getJvmTypeReference(), null, "typeArguments", null, 0, -1, XConstructorCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXConstructorCall_InvalidFeatureIssueCode(), ecorePackage.getEString(), "invalidFeatureIssueCode", null, 0, 1, XConstructorCall.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXConstructorCall_ValidFeature(), ecorePackage.getEBoolean(), "validFeature", null, 0, 1, XConstructorCall.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXConstructorCall_ExplicitConstructorCall(), ecorePackage.getEBoolean(), "explicitConstructorCall", null, 0, 1, XConstructorCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xBooleanLiteralEClass, XBooleanLiteral.class, "XBooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXBooleanLiteral_IsTrue(), ecorePackage.getEBoolean(), "isTrue", null, 0, 1, XBooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
