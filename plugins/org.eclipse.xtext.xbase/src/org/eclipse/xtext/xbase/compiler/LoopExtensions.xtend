@@ -41,7 +41,9 @@ class LoopExtensions {
 		else {
 			appendable.append('{')
 			forEach(appendable, elements, [
+				prefix = ' '
 				separator = ', '
+				suffix = ' '
 			], procedure)
 			appendable.append('}')
 		}

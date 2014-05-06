@@ -64,7 +64,7 @@ class LoopExtensionsTest extends AbstractXbaseTestCase {
 	def testForEachWithShortcut() {
 		newArrayList('jan', 'hein', 'class', 'pit').assertForEachWithShortcut("{ jan, hein, class, pit }")
 		newArrayList('foo').assertForEachWithShortcut("foo")
-		newArrayList().assertForEachWithShortcut("")
+		newArrayList().assertForEachWithShortcut("{}")
 	}
 
 	def protected assertForEach(Iterable<String> elements, (LoopParams)=>void params, String expectedResult) {

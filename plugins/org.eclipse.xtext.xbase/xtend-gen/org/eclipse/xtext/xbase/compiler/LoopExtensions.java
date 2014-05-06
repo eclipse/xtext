@@ -56,7 +56,9 @@ public class LoopExtensions {
       appendable.append("{");
       final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
         public void apply(final LoopParams it) {
+          it.setPrefix(" ");
           it.setSeparator(", ");
+          it.setSuffix(" ");
         }
       };
       this.<T>forEach(appendable, elements, _function, procedure);
