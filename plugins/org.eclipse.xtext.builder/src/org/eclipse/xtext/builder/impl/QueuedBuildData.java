@@ -214,12 +214,14 @@ public class QueuedBuildData {
 					list = Lists.newLinkedList();
 					projectNameToChangedResource.put(projectName, list);
 				}
-				list.add(uri);
+				if (!list.contains(uri))
+					list.add(uri);
 				associatedWithProject = true;
 			}
 		}
 		if (!associatedWithProject) {
-			this.uris.add(uri);
+			if (!uris.contains(uri))
+				this.uris.add(uri);
 		}
 	}
 
