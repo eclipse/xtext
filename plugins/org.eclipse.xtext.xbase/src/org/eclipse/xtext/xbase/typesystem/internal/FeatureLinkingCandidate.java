@@ -860,7 +860,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		if (featureCall instanceof XMemberFeatureCall) {
 			XMemberFeatureCall casted = (XMemberFeatureCall) featureCall;
 			XExpression syntacticReceiver = casted.getMemberCallTarget();
-			if (isStaticWithDeclaringType(syntacticReceiver)) {
+			if (isStaticWithDeclaringType(syntacticReceiver) || isThisOrSuper()) {
 				casted.setStaticWithDeclaringType(true);
 			}
 		} else if (featureCall instanceof XAssignment) {
@@ -887,6 +887,10 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				}
 			}
 		}
+	}
+	
+	private boolean isThisOrSuper() {
+		return THIS.equals(description.getName()) || SUPER.equals(description.getName());
 	}
 	
 	private boolean isStaticWithDeclaringType(XExpression syntacticReceiver) {

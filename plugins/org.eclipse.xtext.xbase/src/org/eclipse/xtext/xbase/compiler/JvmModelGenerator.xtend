@@ -621,28 +621,48 @@ class JvmModelGenerator implements IGenerator {
 	}
 
 	def void assignThisAndSuper(ITreeAppendable b, JvmDeclaredType declaredType) {
-		b.reassignToType(declaredType, 'this')
 		val superClass = declaredType.superTypes.findFirst[ 
 			val superType = it.type
 			if (superType instanceof JvmGenericType)
 				return !superType.isInterface
 			return false
 		]?.type as JvmDeclaredType
-		b.reassignToType(superClass, 'super')
+		b.reassignSuperType(superClass)
+		b.reassignThisType(declaredType)
 	}
 	
-	private def reassignToType(ITreeAppendable b, JvmDeclaredType declaredType, String name) {
-		if (b.hasObject(name)) {
-			val element = b.getObject(name)
+	private def reassignSuperType(ITreeAppendable b, JvmDeclaredType declaredType) {
+		if (b.hasObject('super')) {
+			/*
+			 * class A {}
+			 * class B extends A { B.super.toString() }
+			 * B.super resolves to A though the name is computed from the current 'this'
+			 */
+			val element = b.getObject('this') // if we have a super, there must be a 'this'
 			if (element instanceof JvmType) {
-				val proposedName = element.simpleName+"."+name
+				val proposedName = element.simpleName+".super"
+				b.declareVariable(b.getObject('super'), proposedName)
+			}
+			if (declaredType != null)
+				b.declareVariable(declaredType, 'super');
+		} else {
+			if (declaredType != null)
+				b.declareVariable(declaredType, 'super');
+		}
+	}
+	
+	private def reassignThisType(ITreeAppendable b, JvmDeclaredType declaredType) {
+		if (b.hasObject('this')) {
+			val element = b.getObject('this')
+			if (element instanceof JvmType) {
+				val proposedName = element.simpleName+'.this'
 				b.declareVariable(element, proposedName)
 			}
 			if (declaredType != null)
-				b.declareVariable(declaredType, name);
+				b.declareVariable(declaredType, 'this');
 		} else {
 			if (declaredType != null)
-				b.declareVariable(declaredType, name);
+				b.declareVariable(declaredType, 'this');
 		}
 	}
 
