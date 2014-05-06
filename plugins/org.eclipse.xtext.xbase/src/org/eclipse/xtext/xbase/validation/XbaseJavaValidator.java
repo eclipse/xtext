@@ -1553,6 +1553,20 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 	
+	@Check
+	public void checkExplicitOperationCall(XFeatureCall featureCall) {
+		if (featureCall.getFeature() instanceof JvmOperation && !featureCall.isExplicitOperationCall()) {
+			addIssue("Please use parenthesis when calling operations", featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, OPERATION_WITHOUT_PARENTHESIS);
+		}
+	}
+	
+	@Check
+	public void checkExplicitOperationCall(XMemberFeatureCall featureCall) {
+		if (featureCall.getFeature() instanceof JvmOperation && !featureCall.isExplicitOperationCall()) {
+			addIssue("Please use parenthesis when calling operations", featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, OPERATION_WITHOUT_PARENTHESIS);
+		}
+	}
+	
 	protected void checkAssignment(XExpression expression, EStructuralFeature feature, boolean simpleAssignment) {
 		if (!(expression instanceof XAbstractFeatureCall)) {
 			error("The left-hand side of an assignment must be a variable", expression, null,

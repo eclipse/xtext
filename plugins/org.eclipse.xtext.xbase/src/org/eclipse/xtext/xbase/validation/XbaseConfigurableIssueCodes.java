@@ -73,6 +73,7 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		iAcceptor.accept(create(IssueCodes.UNREACHABLE_CASE, SeverityConverter.SEVERITY_ERROR));
 		iAcceptor.accept(create(IssueCodes.UNREACHABLE_IF_BLOCK, SeverityConverter.SEVERITY_ERROR));
 		iAcceptor.accept(create(IssueCodes.INCOMPLETE_CASES_ON_ENUM, SeverityConverter.SEVERITY_WARNING));
+		iAcceptor.accept(create(IssueCodes.OPERATION_WITHOUT_PARENTHESIS, SeverityConverter.SEVERITY_IGNORE));
 	}
 
 	protected final PreferenceKey create(String id, String defaultValue) {

@@ -113,6 +113,8 @@ public class IssueCodes {
 	public static final String TYPE_PARAMETER_FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "type_parameter_forward_reference";
 	public static final String INVALID_TYPE_PARAMETER_BOUNDS = ISSUE_CODE_PREFIX + "invalid_type_parameter_bounds";
 	public static final String INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL = ISSUE_CODE_PREFIX + "invalid_type_arguments_on_type_literal";
+
+	public static final String OPERATION_WITHOUT_PARENTHESIS = ISSUE_CODE_PREFIX + "operation_without_parenthesis";
 	
 	private IssueCodes() {
 	}
