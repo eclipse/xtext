@@ -6862,7 +6862,7 @@ finally {
 }
 
 
-RULE_NL : '\n';
+RULE_NL : '\r'? '\n';
 
 RULE_WS : (' '|'\t');
 

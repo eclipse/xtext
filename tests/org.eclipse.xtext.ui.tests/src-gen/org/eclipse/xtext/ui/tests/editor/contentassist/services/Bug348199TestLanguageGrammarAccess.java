@@ -1149,7 +1149,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal NL:
-	//	"\n";
+	//	"\r"? "\n";
 	public TerminalRule getNLRule() {
 		return (tNL != null) ? tNL : (tNL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NL"));
 	} 

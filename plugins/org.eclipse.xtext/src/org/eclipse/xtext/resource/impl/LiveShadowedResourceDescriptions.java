@@ -28,6 +28,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -41,6 +43,25 @@ import com.google.inject.Inject;
  * @since 2.1
  */
 public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDescriptions {
+	
+	/**
+	 * @since 2.6
+	 */
+	public static class LiveModelShadowedResourceDescriptionsProvider implements Provider<LiveShadowedResourceDescriptions> {
+		
+		@Inject
+		@Named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)
+		private IResourceDescriptions resourceDesriptions;
+
+		@Inject
+		private Provider<LiveShadowedResourceDescriptions> provider;
+
+		public LiveShadowedResourceDescriptions get() {
+			LiveShadowedResourceDescriptions descriptions = provider.get();
+			descriptions.globalDescriptions = resourceDesriptions;
+			return descriptions;
+		}
+	}
 
 	@Inject
 	private ResourceSetBasedResourceDescriptions localDescriptions;
@@ -151,6 +172,20 @@ public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDe
 		if (localDescriptions.hasDescription(resourceURI))
 			return localDescriptions.getExportedObjectsByObject(object);
 		return globalDescriptions.getExportedObjectsByObject(object);
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public IResourceDescriptions getLocalDescriptions() {
+		return localDescriptions;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public IResourceDescriptions getGlobalDescriptions() {
+		return globalDescriptions;
 	}
 
 }
