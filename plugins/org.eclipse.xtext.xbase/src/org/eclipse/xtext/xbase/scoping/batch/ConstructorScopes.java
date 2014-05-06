@@ -16,8 +16,10 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -27,6 +29,8 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
+import com.google.inject.Inject;
+
 /**
  * Encapsulates the creation of constructor scopes.
  * 
@@ -35,6 +39,9 @@ import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 public class ConstructorScopes extends DelegatingScopes {
 
 	public static final int CONSTRUCTOR_BUCKET = 1;
+	
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	/**
 	 * Creates the constructor scope for {@link XConstructorCall}.
@@ -76,6 +83,19 @@ public class ConstructorScopes extends DelegatingScopes {
 			}
 			@Override
 			public Iterable<IEObjectDescription> getElements(QualifiedName name) {
+				JvmTypeReference superType = anonymousType.getSuperTypes().get(0);
+				if (superType == null)
+					return Collections.emptyList();
+				JvmType type = superType.getType();
+				if (type == null)
+					return Collections.emptyList();
+				QualifiedName typeName = qualifiedNameConverter.toQualifiedName(type.getQualifiedName());
+				if (typeName.getSegmentCount() > name.getSegmentCount()) {
+					typeName = typeName.skipFirst(typeName.getSegmentCount() - name.getSegmentCount());
+				}
+				if (!typeName.equals(name)) {
+					return Collections.emptyList();
+				}
 				IEObjectDescription typeDescription = EObjectDescription.create(name, anonymousType);
 				return createFeatureDescriptions(Collections.singletonList(typeDescription));
 			}
