@@ -95,6 +95,10 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getCharValue(String name) {
 		switch value : getValue(name) {
+			Byte: {
+				val byteValue = value
+				byteValue as char
+			}
 			Character: value
 			default: 0 as char
 		}
@@ -114,6 +118,30 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getDoubleValue(String name) {
 		switch value : getValue(name) {
+			Character: {
+				val character = value
+				character as double
+			}
+			Byte: { 
+				val byteValue = value
+				byteValue as double
+			}
+			Short: { 
+				val shortValue = value
+				shortValue as double
+			}
+			Integer: { 
+				val integerValue = value
+				integerValue as double
+			}
+			Long: { 
+				val longValue = value
+				longValue as double
+			}
+			Float: { 
+				val floatValue = value
+				floatValue as double
+			}
 			Double: value
 			default: 0 
 		}
@@ -133,6 +161,26 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getFloatValue(String name) {
 		switch value : getValue(name) {
+			Character: {
+				val character = value
+				character as float
+			}
+			Byte: { 
+				val byteValue = value
+				byteValue as float
+			}
+			Short: { 
+				val shortValue = value
+				shortValue as float
+			}
+			Integer: { 
+				val integerValue = value
+				integerValue as float
+			}
+			Long: { 
+				val longValue = value
+				longValue as float
+			}
 			Float: value
 			default: 0 
 		} 
@@ -144,6 +192,18 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getIntValue(String name) {
 		switch value : getValue(name) {
+			Character: {
+				val character = value
+				character as int
+			}
+			Byte: { 
+				val byteValue = value
+				byteValue as int
+			}
+			Short: { 
+				val shortValue = value
+				shortValue as int
+			}
 			Integer: value
 			default: 0 
 		}
@@ -155,6 +215,22 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getLongValue(String name) {
 		switch value : getValue(name) {
+			Character: {
+				val character = value
+				character as long
+			}
+			Byte: { 
+				val byteValue = value
+				byteValue as long
+			}
+			Short: { 
+				val shortValue = value
+				shortValue as long
+			}
+			Integer: { 
+				val integerValue = value
+				integerValue as long
+			}
 			Long: value
 			default: 0 
 		}
@@ -166,6 +242,10 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getShortValue(String name) {
 		switch value : getValue(name) {
+			Byte: { 
+				val byteValue = value
+				byteValue as short
+			}
 			Short: value
 			default: 0 as short
 		}

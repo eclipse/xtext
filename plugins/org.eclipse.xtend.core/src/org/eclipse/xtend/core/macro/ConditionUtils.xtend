@@ -45,8 +45,10 @@ class ConditionUtils {
 	}
 	
 	static def checkTypeName(String typeName, String valueType) {
-		Preconditions.checkArgument(typeName == valueType, '''«valueType» is not applicable at this location. Expected «typeName»''')
+		Preconditions.checkArgument(typeName == valueType, valueType.isNotApplicableMessage(typeName))
 	}
+	
+	static def String isNotApplicableMessage(String valueType, String typeName) '''«valueType» is not applicable at this location. Expected «typeName»'''
 
 	static def isValidQualifiedName(String string) {
 		if (string == null || string.length == 0) {

@@ -88,11 +88,16 @@ public class ConditionUtils {
   
   public static void checkTypeName(final String typeName, final String valueType) {
     boolean _equals = Objects.equal(typeName, valueType);
+    String _isNotApplicableMessage = ConditionUtils.isNotApplicableMessage(valueType, typeName);
+    Preconditions.checkArgument(_equals, _isNotApplicableMessage);
+  }
+  
+  public static String isNotApplicableMessage(final String valueType, final String typeName) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(valueType, "");
     _builder.append(" is not applicable at this location. Expected ");
     _builder.append(typeName, "");
-    Preconditions.checkArgument(_equals, _builder);
+    return _builder.toString();
   }
   
   public static boolean isValidQualifiedName(final String string) {

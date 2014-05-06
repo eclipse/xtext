@@ -9,9 +9,9 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -34,6 +34,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmByteAnnotationValue;
 import org.eclipse.xtext.common.types.JvmCharAnnotationValue;
@@ -41,10 +42,13 @@ import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmShortAnnotationValue;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmType;
@@ -53,7 +57,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -145,7 +148,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     return Iterators.<JvmAnnotationValue>removeIf(_iterator, _function);
   }
   
-  protected JvmOperation findOperation(final String name, final String componentType, final boolean mustBeArray) {
+  protected JvmOperation findOperation(final String name, final boolean mustBeArray) {
     final JvmOperation result = this.findOperation(name);
     JvmTypeReference _returnType = result.getReturnType();
     JvmType _type = null;
@@ -153,70 +156,21 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       _type=_returnType.getType();
     }
     final JvmType returnType = _type;
-    boolean _tripleNotEquals = (componentType != null);
-    if (_tripleNotEquals) {
-      boolean _or = false;
-      if (mustBeArray) {
-        _or = true;
-      } else {
-        EClass _eClass = null;
-        if (returnType!=null) {
-          _eClass=returnType.eClass();
-        }
-        boolean _equals = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
-        _or = _equals;
-      }
-      if (_or) {
-        String _annotationValueTypeName = this.getAnnotationValueTypeName(returnType);
-        ConditionUtils.checkTypeName(_annotationValueTypeName, (componentType + "[]"));
-      } else {
-        String _annotationValueTypeName_1 = this.getAnnotationValueTypeName(returnType);
-        ConditionUtils.checkTypeName(_annotationValueTypeName_1, componentType);
-      }
+    boolean _and = false;
+    if (!mustBeArray) {
+      _and = false;
     } else {
-      boolean _and = false;
-      if (!mustBeArray) {
-        _and = false;
-      } else {
-        EClass _eClass_1 = null;
-        if (returnType!=null) {
-          _eClass_1=returnType.eClass();
-        }
-        boolean _notEquals = (!Objects.equal(_eClass_1, TypesPackage.Literals.JVM_ARRAY_TYPE));
-        _and = _notEquals;
+      EClass _eClass = null;
+      if (returnType!=null) {
+        _eClass=returnType.eClass();
       }
-      if (_and) {
-        throw new IllegalArgumentException("Cannot assign array value to simple annotation property");
-      }
+      boolean _notEquals = (!Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE));
+      _and = _notEquals;
+    }
+    if (_and) {
+      throw new IllegalArgumentException("Cannot assign array value to simple annotation property");
     }
     return result;
-  }
-  
-  private String getAnnotationValueTypeName(final JvmType type) {
-    String _switchResult = null;
-    String _identifier = null;
-    if (type!=null) {
-      _identifier=type.getIdentifier();
-    }
-    final String result = _identifier;
-    boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(result, "java.lang.Class")) {
-        _matched=true;
-        _switchResult = TypeReference.class.getName();
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(result, "java.lang.Class[]")) {
-        _matched=true;
-        String _name = TypeReference.class.getName();
-        _switchResult = (_name + "[]");
-      }
-    }
-    if (!_matched) {
-      _switchResult = result;
-    }
-    return _switchResult;
   }
   
   public void set(final String name, final Object value) {
@@ -314,15 +268,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   protected void _internalSet(final String name, final String[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
     String _name = String.class.getName();
-    final JvmOperation op = this.findOperation(name, _name, mustBeArray);
-    final JvmStringAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
-    newValue.setOperation(op);
-    EList<String> _values = newValue.getValues();
-    CollectionExtensions.<String>addAll(_values, values);
-    this.remove(op);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
-    _explicitValues.add(newValue);
+    this.setValues(name, values, _name, mustBeArray);
   }
   
   protected void _internalSet(final String name, final Boolean value, final boolean mustBeArray) {
@@ -333,15 +279,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _internalSet(final String name, final boolean[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
-    final JvmOperation op = this.findOperation(name, "boolean", mustBeArray);
-    final JvmBooleanAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
-    newValue.setOperation(op);
-    EList<Boolean> _values = newValue.getValues();
-    _values.addAll(((Collection<? extends Boolean>)Conversions.doWrapArray(values)));
-    this.remove(op);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
-    _explicitValues.add(newValue);
+    this.setValues(name, values, "boolean", mustBeArray);
   }
   
   protected void _internalSet(final String name, final Integer value, final boolean mustBeArray) {
@@ -352,15 +290,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _internalSet(final String name, final int[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
-    final JvmOperation op = this.findOperation(name, "int", mustBeArray);
-    final JvmIntAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
-    newValue.setOperation(op);
-    EList<Integer> _values = newValue.getValues();
-    _values.addAll(((Collection<? extends Integer>)Conversions.doWrapArray(values)));
-    this.remove(op);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
-    _explicitValues.add(newValue);
+    this.setValues(name, values, "int", mustBeArray);
   }
   
   protected void _internalSet(final String name, final Short value, final boolean mustBeArray) {
@@ -371,15 +301,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _internalSet(final String name, final short[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
-    final JvmOperation op = this.findOperation(name, "short", mustBeArray);
-    final JvmShortAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
-    newValue.setOperation(op);
-    EList<Short> _values = newValue.getValues();
-    _values.addAll(((Collection<? extends Short>)Conversions.doWrapArray(values)));
-    this.remove(op);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
-    _explicitValues.add(newValue);
+    this.setValues(name, values, "short", mustBeArray);
   }
   
   protected void _internalSet(final String name, final Long value, final boolean mustBeArray) {
@@ -390,15 +312,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _internalSet(final String name, final long[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
-    final JvmOperation op = this.findOperation(name, "long", mustBeArray);
-    final JvmLongAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
-    newValue.setOperation(op);
-    EList<Long> _values = newValue.getValues();
-    _values.addAll(((Collection<? extends Long>)Conversions.doWrapArray(values)));
-    this.remove(op);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
-    _explicitValues.add(newValue);
+    this.setValues(name, values, "long", mustBeArray);
   }
   
   protected void _internalSet(final String name, final Double value, final boolean mustBeArray) {
@@ -409,15 +323,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _internalSet(final String name, final double[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
-    final JvmOperation op = this.findOperation(name, "double", mustBeArray);
-    final JvmDoubleAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
-    newValue.setOperation(op);
-    EList<Double> _values = newValue.getValues();
-    _values.addAll(((Collection<? extends Double>)Conversions.doWrapArray(values)));
-    this.remove(op);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
-    _explicitValues.add(newValue);
+    this.setValues(name, values, "double", mustBeArray);
   }
   
   protected void _internalSet(final String name, final Float value, final boolean mustBeArray) {
@@ -428,15 +334,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _internalSet(final String name, final float[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
-    final JvmOperation op = this.findOperation(name, "float", mustBeArray);
-    final JvmFloatAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
-    newValue.setOperation(op);
-    EList<Float> _values = newValue.getValues();
-    _values.addAll(((Collection<? extends Float>)Conversions.doWrapArray(values)));
-    this.remove(op);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
-    _explicitValues.add(newValue);
+    this.setValues(name, values, "float", mustBeArray);
   }
   
   protected void _internalSet(final String name, final Character value, final boolean mustBeArray) {
@@ -447,15 +345,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _internalSet(final String name, final char[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
-    final JvmOperation op = this.findOperation(name, "char", mustBeArray);
-    final JvmCharAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
-    newValue.setOperation(op);
-    EList<Character> _values = newValue.getValues();
-    _values.addAll(((Collection<? extends Character>)Conversions.doWrapArray(values)));
-    this.remove(op);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
-    _explicitValues.add(newValue);
+    this.setValues(name, values, "char", mustBeArray);
   }
   
   protected void _internalSet(final String name, final Byte value, final boolean mustBeArray) {
@@ -466,15 +356,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _internalSet(final String name, final byte[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
-    final JvmOperation op = this.findOperation(name, "byte", mustBeArray);
-    final JvmByteAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
-    newValue.setOperation(op);
-    EList<Byte> _values = newValue.getValues();
-    _values.addAll(((Collection<? extends Byte>)Conversions.doWrapArray(values)));
-    this.remove(op);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
-    _explicitValues.add(newValue);
+    this.setValues(name, values, "byte", mustBeArray);
   }
   
   protected void _internalSet(final String name, final TypeReference value, final boolean mustBeArray) {
@@ -484,83 +366,25 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   protected void _internalSet(final String name, final TypeReference[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
     String _name = TypeReference.class.getName();
-    final JvmOperation op = this.findOperation(name, _name, mustBeArray);
-    final JvmTypeAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
-    newValue.setOperation(op);
-    final Procedure1<TypeReference> _function = new Procedure1<TypeReference>() {
-      public void apply(final TypeReference it) {
-        boolean _matched = false;
-        if (!_matched) {
-          if (it instanceof TypeReferenceImpl) {
-            _matched=true;
-            EList<JvmTypeReference> _values = newValue.getValues();
-            CompilationUnitImpl _compilationUnit = ((TypeReferenceImpl)it).getCompilationUnit();
-            JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(it);
-            _values.add(_jvmTypeReference);
-          }
-        }
-      }
-    };
-    IterableExtensions.<TypeReference>forEach(((Iterable<TypeReference>)Conversions.doWrapArray(values)), _function);
-    this.remove(op);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
-    _explicitValues.add(newValue);
+    this.setValues(name, values, _name, mustBeArray);
   }
   
   protected void _internalSet(final String name, final EnumerationValueDeclaration[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
-    JvmOperation _xifexpression = null;
-    int _length = values.length;
-    boolean _greaterEqualsThan = (_length >= 1);
-    if (_greaterEqualsThan) {
-      EnumerationValueDeclaration _get = values[0];
-      EnumerationTypeDeclaration _declaringType = _get.getDeclaringType();
-      String _qualifiedName = _declaringType.getQualifiedName();
-      _xifexpression = this.findOperation(name, _qualifiedName, mustBeArray);
-    } else {
-      _xifexpression = this.findOperation(name, null, mustBeArray);
+    EnumerationValueDeclaration _head = IterableExtensions.<EnumerationValueDeclaration>head(((Iterable<EnumerationValueDeclaration>)Conversions.doWrapArray(values)));
+    EnumerationTypeDeclaration _declaringType = null;
+    if (_head!=null) {
+      _declaringType=_head.getDeclaringType();
     }
-    final JvmOperation op = _xifexpression;
-    final JvmEnumAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmEnumAnnotationValue();
-    newValue.setOperation(op);
-    final Procedure1<EnumerationValueDeclaration> _function = new Procedure1<EnumerationValueDeclaration>() {
-      public void apply(final EnumerationValueDeclaration it) {
-        boolean _matched = false;
-        if (!_matched) {
-          if (it instanceof JvmEnumerationValueDeclarationImpl) {
-            _matched=true;
-            EList<JvmEnumerationLiteral> _values = newValue.getValues();
-            JvmEnumerationLiteral _delegate = ((JvmEnumerationValueDeclarationImpl)it).getDelegate();
-            _values.add(_delegate);
-          }
-        }
-        if (!_matched) {
-          if (it instanceof XtendEnumerationValueDeclarationImpl) {
-            _matched=true;
-            throw new IllegalArgumentException("Cannot set source elements.");
-          }
-        }
-      }
-    };
-    IterableExtensions.<EnumerationValueDeclaration>forEach(((Iterable<EnumerationValueDeclaration>)Conversions.doWrapArray(values)), _function);
-    this.remove(op);
-    JvmAnnotationReference _delegate = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
-    _explicitValues.add(newValue);
+    String _qualifiedName = null;
+    if (_declaringType!=null) {
+      _qualifiedName=_declaringType.getQualifiedName();
+    }
+    this.setValues(name, values, _qualifiedName, mustBeArray);
   }
   
   protected void _internalSet(final String name, final XtendAnnotationReferenceImpl value, final boolean mustBeArray) {
-    final JvmOperation op = this.findOperation(name, null, mustBeArray);
-    final JvmCustomAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmCustomAnnotationValue();
-    newValue.setOperation(op);
-    EList<Object> _values = newValue.getValues();
-    XAnnotation _delegate = value.getDelegate();
-    _values.add(_delegate);
-    this.remove(op);
-    JvmAnnotationReference _delegate_1 = this.getDelegate();
-    EList<JvmAnnotationValue> _explicitValues = _delegate_1.getExplicitValues();
-    _explicitValues.add(newValue);
+    this.setValues(name, value, null, mustBeArray);
   }
   
   protected void _internalSet(final String name, final AnnotationReference value, final boolean mustBeArray) {
@@ -569,49 +393,569 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _internalSet(final String name, final AnnotationReference[] values, final boolean mustBeArray) {
     ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(values)), "values");
-    JvmOperation _xifexpression = null;
-    int _length = values.length;
-    boolean _greaterEqualsThan = (_length >= 1);
-    if (_greaterEqualsThan) {
-      AnnotationReference _get = values[0];
-      AnnotationTypeDeclaration _annotationTypeDeclaration = _get.getAnnotationTypeDeclaration();
-      String _qualifiedName = _annotationTypeDeclaration.getQualifiedName();
-      _xifexpression = this.findOperation(name, _qualifiedName, mustBeArray);
-    } else {
-      _xifexpression = this.findOperation(name, null, mustBeArray);
+    AnnotationReference _head = IterableExtensions.<AnnotationReference>head(((Iterable<AnnotationReference>)Conversions.doWrapArray(values)));
+    AnnotationTypeDeclaration _annotationTypeDeclaration = null;
+    if (_head!=null) {
+      _annotationTypeDeclaration=_head.getAnnotationTypeDeclaration();
     }
-    final JvmOperation op = _xifexpression;
-    final JvmAnnotationAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue();
+    String _qualifiedName = null;
+    if (_annotationTypeDeclaration!=null) {
+      _qualifiedName=_annotationTypeDeclaration.getQualifiedName();
+    }
+    this.setValues(name, values, _qualifiedName, mustBeArray);
+  }
+  
+  protected void _internalSet(final String name, final EnumerationValueDeclaration value, final boolean mustBeArray) {
+    this._internalSet(name, new EnumerationValueDeclaration[] { value }, false);
+  }
+  
+  protected void setValues(final String name, final Object values, final String componentType, final boolean mustBeArray) {
+    final JvmOperation op = this.findOperation(name, mustBeArray);
+    final JvmAnnotationValue newValue = this.createAnnotationValue(op, values);
     newValue.setOperation(op);
-    final Procedure1<AnnotationReference> _function = new Procedure1<AnnotationReference>() {
-      public void apply(final AnnotationReference it) {
-        boolean _matched = false;
-        if (!_matched) {
-          if (it instanceof JvmAnnotationReferenceImpl) {
-            _matched=true;
-            EList<JvmAnnotationReference> _values = newValue.getValues();
-            JvmAnnotationReference _delegate = ((JvmAnnotationReferenceImpl)it).getDelegate();
-            JvmAnnotationReference _cloneWithProxies = EcoreUtil2.<JvmAnnotationReference>cloneWithProxies(_delegate);
-            _values.add(_cloneWithProxies);
-          }
-        }
-        if (!_matched) {
-          if (it instanceof XtendAnnotationReferenceImpl) {
-            _matched=true;
-            throw new IllegalArgumentException("Multiple source annotations cannot be set as values. Please the the expression not the value.");
-          }
-        }
-      }
-    };
-    IterableExtensions.<AnnotationReference>forEach(((Iterable<AnnotationReference>)Conversions.doWrapArray(values)), _function);
+    this.setValue(newValue, values, componentType, mustBeArray);
     this.remove(op);
     JvmAnnotationReference _delegate = this.getDelegate();
     EList<JvmAnnotationValue> _explicitValues = _delegate.getExplicitValues();
     _explicitValues.add(newValue);
   }
   
-  protected void _internalSet(final String name, final EnumerationValueDeclaration value, final boolean mustBeArray) {
-    this._internalSet(name, new EnumerationValueDeclaration[] { value }, false);
+  protected JvmAnnotationValue createAnnotationValue(final JvmOperation op, final Object values) {
+    JvmAnnotationValue _xblockexpression = null;
+    {
+      JvmTypeReference _returnType = op.getReturnType();
+      JvmType _type = null;
+      if (_returnType!=null) {
+        _type=_returnType.getType();
+      }
+      final JvmType returnType = _type;
+      JvmAnnotationValue _switchResult = null;
+      JvmType _xifexpression = null;
+      if ((returnType instanceof JvmArrayType)) {
+        _xifexpression = ((JvmArrayType)returnType).getComponentType();
+      } else {
+        _xifexpression = returnType;
+      }
+      final JvmType type = _xifexpression;
+      boolean _matched = false;
+      if (!_matched) {
+        if (type instanceof JvmPrimitiveType) {
+          _matched=true;
+          JvmAnnotationValue _switchResult_1 = null;
+          String _simpleName = ((JvmPrimitiveType)type).getSimpleName();
+          boolean _matched_1 = false;
+          if (!_matched_1) {
+            if (Objects.equal(_simpleName, "boolean")) {
+              _matched_1=true;
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_simpleName, "double")) {
+              _matched_1=true;
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_simpleName, "float")) {
+              _matched_1=true;
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_simpleName, "long")) {
+              _matched_1=true;
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_simpleName, "int")) {
+              _matched_1=true;
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_simpleName, "short")) {
+              _matched_1=true;
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_simpleName, "char")) {
+              _matched_1=true;
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_simpleName, "byte")) {
+              _matched_1=true;
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
+            }
+          }
+          if (!_matched_1) {
+            throw new IllegalStateException(("Unknown type: " + type));
+          }
+          _switchResult = _switchResult_1;
+        }
+      }
+      if (!_matched) {
+        if (type instanceof JvmGenericType) {
+          _matched=true;
+          JvmAnnotationValue _switchResult_1 = null;
+          String _identifier = ((JvmGenericType)type).getIdentifier();
+          boolean _matched_1 = false;
+          if (!_matched_1) {
+            String _name = String.class.getName();
+            if (Objects.equal(_identifier, _name)) {
+              _matched_1=true;
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
+            }
+          }
+          if (!_matched_1) {
+            String _name_1 = Class.class.getName();
+            if (Objects.equal(_identifier, _name_1)) {
+              _matched_1=true;
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
+            }
+          }
+          if (!_matched_1) {
+            throw new IllegalStateException(("Unknown type: " + type));
+          }
+          _switchResult = _switchResult_1;
+        }
+      }
+      if (!_matched) {
+        if (type instanceof JvmEnumerationType) {
+          _matched=true;
+          _switchResult = TypesFactory.eINSTANCE.createJvmEnumAnnotationValue();
+        }
+      }
+      if (!_matched) {
+        if (type instanceof JvmAnnotationType) {
+          _matched=true;
+          JvmAnnotationValue _xifexpression_1 = null;
+          if ((values instanceof XtendAnnotationReferenceImpl)) {
+            _xifexpression_1 = TypesFactory.eINSTANCE.createJvmCustomAnnotationValue();
+          } else {
+            _xifexpression_1 = TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue();
+          }
+          _switchResult = _xifexpression_1;
+        }
+      }
+      if (!_matched) {
+        throw new IllegalStateException(("Unknown type: " + type));
+      }
+      _xblockexpression = _switchResult;
+    }
+    return _xblockexpression;
+  }
+  
+  protected void _setValue(final JvmAnnotationValue it, final Object value, final String componentType, final boolean mustBeArray) {
+    boolean _equals = Objects.equal(componentType, null);
+    if (_equals) {
+      Class<?> _class = value.getClass();
+      String _name = _class.getName();
+      this.throwNotApplicable(it, _name);
+    }
+    boolean _or = false;
+    if (mustBeArray) {
+      _or = true;
+    } else {
+      JvmOperation _operation = it.getOperation();
+      JvmTypeReference _returnType = _operation.getReturnType();
+      JvmType _type = null;
+      if (_returnType!=null) {
+        _type=_returnType.getType();
+      }
+      EClass _eClass = null;
+      if (_type!=null) {
+        _eClass=_type.eClass();
+      }
+      boolean _equals_1 = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
+      _or = _equals_1;
+    }
+    if (_or) {
+      this.throwNotApplicable(it, (componentType + "[]"));
+    }
+    this.throwNotApplicable(it, componentType);
+  }
+  
+  protected void _setValue(final JvmTypeAnnotationValue it, final TypeReference[] value, final String componentType, final boolean mustBeArray) {
+    EList<JvmTypeReference> _values = it.getValues();
+    Iterable<TypeReferenceImpl> _filter = Iterables.<TypeReferenceImpl>filter(((Iterable<?>)Conversions.doWrapArray(value)), TypeReferenceImpl.class);
+    final Function1<TypeReferenceImpl, JvmTypeReference> _function = new Function1<TypeReferenceImpl, JvmTypeReference>() {
+      public JvmTypeReference apply(final TypeReferenceImpl it) {
+        CompilationUnitImpl _compilationUnit = it.getCompilationUnit();
+        return _compilationUnit.toJvmTypeReference(it);
+      }
+    };
+    Iterable<JvmTypeReference> _map = IterableExtensions.<TypeReferenceImpl, JvmTypeReference>map(_filter, _function);
+    Iterables.<JvmTypeReference>addAll(_values, _map);
+  }
+  
+  protected void _setValue(final JvmEnumAnnotationValue it, final EnumerationValueDeclaration[] value, final String componentType, final boolean mustBeArray) {
+    this.checkType(it, componentType, mustBeArray);
+    for (final EnumerationValueDeclaration enumValue : value) {
+      boolean _matched = false;
+      if (!_matched) {
+        if (enumValue instanceof JvmEnumerationValueDeclarationImpl) {
+          _matched=true;
+          EList<JvmEnumerationLiteral> _values = it.getValues();
+          JvmEnumerationLiteral _delegate = ((JvmEnumerationValueDeclarationImpl)enumValue).getDelegate();
+          _values.add(_delegate);
+        }
+      }
+      if (!_matched) {
+        if (enumValue instanceof XtendEnumerationValueDeclarationImpl) {
+          _matched=true;
+          throw new IllegalArgumentException("Cannot set source elements.");
+        }
+      }
+    }
+  }
+  
+  protected void _setValue(final JvmAnnotationAnnotationValue it, final AnnotationReference[] value, final String componentType, final boolean mustBeArray) {
+    this.checkType(it, componentType, mustBeArray);
+    for (final AnnotationReference annotationValue : value) {
+      boolean _matched = false;
+      if (!_matched) {
+        if (annotationValue instanceof JvmAnnotationReferenceImpl) {
+          _matched=true;
+          EList<JvmAnnotationReference> _values = it.getValues();
+          JvmAnnotationReference _delegate = ((JvmAnnotationReferenceImpl)annotationValue).getDelegate();
+          JvmAnnotationReference _cloneWithProxies = EcoreUtil2.<JvmAnnotationReference>cloneWithProxies(_delegate);
+          _values.add(_cloneWithProxies);
+        }
+      }
+      if (!_matched) {
+        if (annotationValue instanceof XtendAnnotationReferenceImpl) {
+          _matched=true;
+          throw new IllegalArgumentException("Multiple source annotations cannot be set as values. Please the the expression not the value.");
+        }
+      }
+    }
+  }
+  
+  protected void _setValue(final JvmCustomAnnotationValue it, final XtendAnnotationReferenceImpl value, final String componentType, final boolean mustBeArray) {
+    EList<Object> _values = it.getValues();
+    XAnnotation _delegate = value.getDelegate();
+    _values.add(_delegate);
+  }
+  
+  protected void _setValue(final JvmStringAnnotationValue it, final String[] value, final String componentType, final boolean mustBeArray) {
+    EList<String> _values = it.getValues();
+    Iterables.<String>addAll(_values, ((Iterable<? extends String>)Conversions.doWrapArray(value)));
+  }
+  
+  protected void _setValue(final JvmBooleanAnnotationValue it, final boolean[] value, final String componentType, final boolean mustBeArray) {
+    EList<Boolean> _values = it.getValues();
+    Iterables.<Boolean>addAll(_values, ((Iterable<? extends Boolean>)Conversions.doWrapArray(value)));
+  }
+  
+  protected void _setValue(final JvmDoubleAnnotationValue it, final double[] value, final String componentType, final boolean mustBeArray) {
+    EList<Double> _values = it.getValues();
+    Iterables.<Double>addAll(_values, ((Iterable<? extends Double>)Conversions.doWrapArray(value)));
+  }
+  
+  protected void _setValue(final JvmDoubleAnnotationValue it, final float[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Float> _function = new Procedure1<Float>() {
+      public void apply(final Float v) {
+        EList<Double> _values = it.getValues();
+        _values.add(Double.valueOf(((double) (v).floatValue())));
+      }
+    };
+    IterableExtensions.<Float>forEach(((Iterable<Float>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmDoubleAnnotationValue it, final long[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Long> _function = new Procedure1<Long>() {
+      public void apply(final Long v) {
+        EList<Double> _values = it.getValues();
+        _values.add(Double.valueOf(((double) (v).longValue())));
+      }
+    };
+    IterableExtensions.<Long>forEach(((Iterable<Long>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmDoubleAnnotationValue it, final int[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Integer> _function = new Procedure1<Integer>() {
+      public void apply(final Integer v) {
+        EList<Double> _values = it.getValues();
+        _values.add(Double.valueOf(((double) (v).intValue())));
+      }
+    };
+    IterableExtensions.<Integer>forEach(((Iterable<Integer>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmDoubleAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Short> _function = new Procedure1<Short>() {
+      public void apply(final Short v) {
+        EList<Double> _values = it.getValues();
+        _values.add(Double.valueOf(((double) (v).shortValue())));
+      }
+    };
+    IterableExtensions.<Short>forEach(((Iterable<Short>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmDoubleAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      public void apply(final Byte v) {
+        EList<Double> _values = it.getValues();
+        _values.add(Double.valueOf(((double) (v).byteValue())));
+      }
+    };
+    IterableExtensions.<Byte>forEach(((Iterable<Byte>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmDoubleAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Character> _function = new Procedure1<Character>() {
+      public void apply(final Character v) {
+        EList<Double> _values = it.getValues();
+        _values.add(Double.valueOf(((double) (v).charValue())));
+      }
+    };
+    IterableExtensions.<Character>forEach(((Iterable<Character>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmFloatAnnotationValue it, final float[] value, final String componentType, final boolean mustBeArray) {
+    EList<Float> _values = it.getValues();
+    Iterables.<Float>addAll(_values, ((Iterable<? extends Float>)Conversions.doWrapArray(value)));
+  }
+  
+  protected void _setValue(final JvmFloatAnnotationValue it, final long[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Long> _function = new Procedure1<Long>() {
+      public void apply(final Long v) {
+        EList<Float> _values = it.getValues();
+        _values.add(Float.valueOf(((float) (v).longValue())));
+      }
+    };
+    IterableExtensions.<Long>forEach(((Iterable<Long>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmFloatAnnotationValue it, final int[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Integer> _function = new Procedure1<Integer>() {
+      public void apply(final Integer v) {
+        EList<Float> _values = it.getValues();
+        _values.add(Float.valueOf(((float) (v).intValue())));
+      }
+    };
+    IterableExtensions.<Integer>forEach(((Iterable<Integer>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmFloatAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Short> _function = new Procedure1<Short>() {
+      public void apply(final Short v) {
+        EList<Float> _values = it.getValues();
+        _values.add(Float.valueOf(((float) (v).shortValue())));
+      }
+    };
+    IterableExtensions.<Short>forEach(((Iterable<Short>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmFloatAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      public void apply(final Byte v) {
+        EList<Float> _values = it.getValues();
+        _values.add(Float.valueOf(((float) (v).byteValue())));
+      }
+    };
+    IterableExtensions.<Byte>forEach(((Iterable<Byte>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmFloatAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Character> _function = new Procedure1<Character>() {
+      public void apply(final Character v) {
+        EList<Float> _values = it.getValues();
+        _values.add(Float.valueOf(((float) (v).charValue())));
+      }
+    };
+    IterableExtensions.<Character>forEach(((Iterable<Character>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmLongAnnotationValue it, final long[] value, final String componentType, final boolean mustBeArray) {
+    EList<Long> _values = it.getValues();
+    Iterables.<Long>addAll(_values, ((Iterable<? extends Long>)Conversions.doWrapArray(value)));
+  }
+  
+  protected void _setValue(final JvmLongAnnotationValue it, final int[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Integer> _function = new Procedure1<Integer>() {
+      public void apply(final Integer v) {
+        EList<Long> _values = it.getValues();
+        _values.add(Long.valueOf(((long) (v).intValue())));
+      }
+    };
+    IterableExtensions.<Integer>forEach(((Iterable<Integer>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmLongAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Short> _function = new Procedure1<Short>() {
+      public void apply(final Short v) {
+        EList<Long> _values = it.getValues();
+        _values.add(Long.valueOf(((long) (v).shortValue())));
+      }
+    };
+    IterableExtensions.<Short>forEach(((Iterable<Short>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmLongAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      public void apply(final Byte v) {
+        EList<Long> _values = it.getValues();
+        _values.add(Long.valueOf(((long) (v).byteValue())));
+      }
+    };
+    IterableExtensions.<Byte>forEach(((Iterable<Byte>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmLongAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Character> _function = new Procedure1<Character>() {
+      public void apply(final Character v) {
+        EList<Long> _values = it.getValues();
+        _values.add(Long.valueOf(((long) (v).charValue())));
+      }
+    };
+    IterableExtensions.<Character>forEach(((Iterable<Character>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmIntAnnotationValue it, final int[] value, final String componentType, final boolean mustBeArray) {
+    EList<Integer> _values = it.getValues();
+    Iterables.<Integer>addAll(_values, ((Iterable<? extends Integer>)Conversions.doWrapArray(value)));
+  }
+  
+  protected void _setValue(final JvmIntAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Short> _function = new Procedure1<Short>() {
+      public void apply(final Short v) {
+        EList<Integer> _values = it.getValues();
+        _values.add(Integer.valueOf(((int) (v).shortValue())));
+      }
+    };
+    IterableExtensions.<Short>forEach(((Iterable<Short>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmIntAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      public void apply(final Byte v) {
+        EList<Integer> _values = it.getValues();
+        _values.add(Integer.valueOf(((int) (v).byteValue())));
+      }
+    };
+    IterableExtensions.<Byte>forEach(((Iterable<Byte>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmIntAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Character> _function = new Procedure1<Character>() {
+      public void apply(final Character v) {
+        EList<Integer> _values = it.getValues();
+        _values.add(Integer.valueOf(((int) (v).charValue())));
+      }
+    };
+    IterableExtensions.<Character>forEach(((Iterable<Character>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmShortAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
+    EList<Short> _values = it.getValues();
+    Iterables.<Short>addAll(_values, ((Iterable<? extends Short>)Conversions.doWrapArray(value)));
+  }
+  
+  protected void _setValue(final JvmShortAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      public void apply(final Byte v) {
+        EList<Short> _values = it.getValues();
+        _values.add(Short.valueOf(((short) (v).byteValue())));
+      }
+    };
+    IterableExtensions.<Byte>forEach(((Iterable<Byte>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmCharAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
+    EList<Character> _values = it.getValues();
+    Iterables.<Character>addAll(_values, ((Iterable<? extends Character>)Conversions.doWrapArray(value)));
+  }
+  
+  protected void _setValue(final JvmCharAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
+    final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      public void apply(final Byte v) {
+        EList<Character> _values = it.getValues();
+        _values.add(Character.valueOf(((char) (v).byteValue())));
+      }
+    };
+    IterableExtensions.<Byte>forEach(((Iterable<Byte>)Conversions.doWrapArray(value)), _function);
+  }
+  
+  protected void _setValue(final JvmByteAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
+    EList<Byte> _values = it.getValues();
+    Iterables.<Byte>addAll(_values, ((Iterable<? extends Byte>)Conversions.doWrapArray(value)));
+  }
+  
+  protected void checkType(final JvmAnnotationValue it, final String componentType, final boolean mustBeArray) {
+    boolean _equals = Objects.equal(componentType, null);
+    if (_equals) {
+      return;
+    }
+    JvmOperation _operation = it.getOperation();
+    JvmTypeReference _returnType = _operation.getReturnType();
+    JvmType _type = null;
+    if (_returnType!=null) {
+      _type=_returnType.getType();
+    }
+    final JvmType returnType = _type;
+    boolean _or = false;
+    if (mustBeArray) {
+      _or = true;
+    } else {
+      EClass _eClass = null;
+      if (returnType!=null) {
+        _eClass=returnType.eClass();
+      }
+      boolean _equals_1 = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
+      _or = _equals_1;
+    }
+    if (_or) {
+      String _annotationValueTypeName = this.getAnnotationValueTypeName(returnType);
+      ConditionUtils.checkTypeName(_annotationValueTypeName, (componentType + "[]"));
+    } else {
+      String _annotationValueTypeName_1 = this.getAnnotationValueTypeName(returnType);
+      ConditionUtils.checkTypeName(_annotationValueTypeName_1, componentType);
+    }
+  }
+  
+  protected void throwNotApplicable(final JvmAnnotationValue it, final String valueType) {
+    JvmOperation _operation = it.getOperation();
+    JvmTypeReference _returnType = _operation.getReturnType();
+    JvmType _type = null;
+    if (_returnType!=null) {
+      _type=_returnType.getType();
+    }
+    String _annotationValueTypeName = this.getAnnotationValueTypeName(_type);
+    String _isNotApplicableMessage = ConditionUtils.isNotApplicableMessage(valueType, _annotationValueTypeName);
+    throw new IllegalArgumentException(_isNotApplicableMessage);
+  }
+  
+  protected String getAnnotationValueTypeName(final JvmType type) {
+    String _switchResult = null;
+    String _identifier = null;
+    if (type!=null) {
+      _identifier=type.getIdentifier();
+    }
+    final String result = _identifier;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(result, "java.lang.Class")) {
+        _matched=true;
+        _switchResult = TypeReference.class.getName();
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(result, "java.lang.Class[]")) {
+        _matched=true;
+        String _name = TypeReference.class.getName();
+        _switchResult = (_name + "[]");
+      }
+    }
+    if (!_matched) {
+      _switchResult = result;
+    }
+    return _switchResult;
   }
   
   public void internalSet(final String name, final Object value, final boolean mustBeArray) {
@@ -699,6 +1043,149 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(name, value, mustBeArray).toString());
+    }
+  }
+  
+  protected void setValue(final JvmAnnotationValue it, final Object value, final String componentType, final boolean mustBeArray) {
+    if (it instanceof JvmCustomAnnotationValue
+         && value instanceof XtendAnnotationReferenceImpl) {
+      _setValue((JvmCustomAnnotationValue)it, (XtendAnnotationReferenceImpl)value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmAnnotationAnnotationValue
+         && value instanceof AnnotationReference[]) {
+      _setValue((JvmAnnotationAnnotationValue)it, (AnnotationReference[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmBooleanAnnotationValue
+         && value instanceof boolean[]) {
+      _setValue((JvmBooleanAnnotationValue)it, (boolean[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmByteAnnotationValue
+         && value instanceof byte[]) {
+      _setValue((JvmByteAnnotationValue)it, (byte[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmCharAnnotationValue
+         && value instanceof byte[]) {
+      _setValue((JvmCharAnnotationValue)it, (byte[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmCharAnnotationValue
+         && value instanceof char[]) {
+      _setValue((JvmCharAnnotationValue)it, (char[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmDoubleAnnotationValue
+         && value instanceof byte[]) {
+      _setValue((JvmDoubleAnnotationValue)it, (byte[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmDoubleAnnotationValue
+         && value instanceof char[]) {
+      _setValue((JvmDoubleAnnotationValue)it, (char[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmDoubleAnnotationValue
+         && value instanceof double[]) {
+      _setValue((JvmDoubleAnnotationValue)it, (double[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmDoubleAnnotationValue
+         && value instanceof float[]) {
+      _setValue((JvmDoubleAnnotationValue)it, (float[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmDoubleAnnotationValue
+         && value instanceof int[]) {
+      _setValue((JvmDoubleAnnotationValue)it, (int[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmDoubleAnnotationValue
+         && value instanceof long[]) {
+      _setValue((JvmDoubleAnnotationValue)it, (long[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmDoubleAnnotationValue
+         && value instanceof short[]) {
+      _setValue((JvmDoubleAnnotationValue)it, (short[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmEnumAnnotationValue
+         && value instanceof EnumerationValueDeclaration[]) {
+      _setValue((JvmEnumAnnotationValue)it, (EnumerationValueDeclaration[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmFloatAnnotationValue
+         && value instanceof byte[]) {
+      _setValue((JvmFloatAnnotationValue)it, (byte[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmFloatAnnotationValue
+         && value instanceof char[]) {
+      _setValue((JvmFloatAnnotationValue)it, (char[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmFloatAnnotationValue
+         && value instanceof float[]) {
+      _setValue((JvmFloatAnnotationValue)it, (float[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmFloatAnnotationValue
+         && value instanceof int[]) {
+      _setValue((JvmFloatAnnotationValue)it, (int[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmFloatAnnotationValue
+         && value instanceof long[]) {
+      _setValue((JvmFloatAnnotationValue)it, (long[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmFloatAnnotationValue
+         && value instanceof short[]) {
+      _setValue((JvmFloatAnnotationValue)it, (short[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmIntAnnotationValue
+         && value instanceof byte[]) {
+      _setValue((JvmIntAnnotationValue)it, (byte[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmIntAnnotationValue
+         && value instanceof char[]) {
+      _setValue((JvmIntAnnotationValue)it, (char[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmIntAnnotationValue
+         && value instanceof int[]) {
+      _setValue((JvmIntAnnotationValue)it, (int[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmIntAnnotationValue
+         && value instanceof short[]) {
+      _setValue((JvmIntAnnotationValue)it, (short[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmLongAnnotationValue
+         && value instanceof byte[]) {
+      _setValue((JvmLongAnnotationValue)it, (byte[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmLongAnnotationValue
+         && value instanceof char[]) {
+      _setValue((JvmLongAnnotationValue)it, (char[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmLongAnnotationValue
+         && value instanceof int[]) {
+      _setValue((JvmLongAnnotationValue)it, (int[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmLongAnnotationValue
+         && value instanceof long[]) {
+      _setValue((JvmLongAnnotationValue)it, (long[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmLongAnnotationValue
+         && value instanceof short[]) {
+      _setValue((JvmLongAnnotationValue)it, (short[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmShortAnnotationValue
+         && value instanceof byte[]) {
+      _setValue((JvmShortAnnotationValue)it, (byte[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmShortAnnotationValue
+         && value instanceof short[]) {
+      _setValue((JvmShortAnnotationValue)it, (short[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmStringAnnotationValue
+         && value instanceof String[]) {
+      _setValue((JvmStringAnnotationValue)it, (String[])value, componentType, mustBeArray);
+      return;
+    } else if (it instanceof JvmTypeAnnotationValue
+         && value instanceof TypeReference[]) {
+      _setValue((JvmTypeAnnotationValue)it, (TypeReference[])value, componentType, mustBeArray);
+      return;
+    } else if (it != null
+         && value != null) {
+      _setValue(it, value, componentType, mustBeArray);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, value, componentType, mustBeArray).toString());
     }
   }
 }

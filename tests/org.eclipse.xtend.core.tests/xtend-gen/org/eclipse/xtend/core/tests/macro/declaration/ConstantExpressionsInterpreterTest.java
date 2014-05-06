@@ -307,6 +307,36 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     this.assertEvaluatesTo(Boolean.valueOf(false), _mappedTo_48, _mappedTo_49, ">");
   }
   
+  @Test
+  public void testOperatorsWithExpectation() {
+    Pair<String, String> _mappedTo = Pair.<String, String>of("boolean", "1 + 1");
+    this.evaluatesTo(_mappedTo, Integer.valueOf(2));
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("boolean", "1 - 1");
+    this.evaluatesTo(_mappedTo_1, Integer.valueOf(0));
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("boolean", "1 * 1");
+    this.evaluatesTo(_mappedTo_2, Integer.valueOf(1));
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("boolean", "1 / 1");
+    this.evaluatesTo(_mappedTo_3, Integer.valueOf(1));
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of("boolean", "1 % 1");
+    this.evaluatesTo(_mappedTo_4, Integer.valueOf(0));
+    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("boolean", "1 < 1");
+    this.evaluatesTo(_mappedTo_5, Boolean.valueOf(false));
+    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("boolean", "1 <= 1");
+    this.evaluatesTo(_mappedTo_6, Boolean.valueOf(true));
+    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("boolean", "1 > 1");
+    this.evaluatesTo(_mappedTo_7, Boolean.valueOf(false));
+    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("boolean", "1 >= 1");
+    this.evaluatesTo(_mappedTo_8, Boolean.valueOf(true));
+    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("boolean", "1 == 1");
+    this.evaluatesTo(_mappedTo_9, Boolean.valueOf(true));
+    Pair<String, String> _mappedTo_10 = Pair.<String, String>of("boolean", "1 != 1");
+    this.evaluatesTo(_mappedTo_10, Boolean.valueOf(false));
+    Pair<String, String> _mappedTo_11 = Pair.<String, String>of("boolean", "1 === 1");
+    this.evaluatesTo(_mappedTo_11, Boolean.valueOf(true));
+    Pair<String, String> _mappedTo_12 = Pair.<String, String>of("boolean", "1 !== 1");
+    this.evaluatesTo(_mappedTo_12, Boolean.valueOf(false));
+  }
+  
   protected void assertEvaluatesTo(final Object expectation, final Pair<String, String> left, final Pair<String, String> right, final String op) {
     try {
       StringConcatenation _builder = new StringConcatenation();

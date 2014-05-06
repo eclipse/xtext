@@ -839,7 +839,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         Object _value = annoRef.getValue("intValue");
         Assert.assertEquals(Integer.valueOf((((2 / 2) + (2 * 3)) - (4 % 1))), _value);
         Object _value_1 = annoRef.getValue("longValue");
-        Assert.assertEquals(Long.valueOf(((long) (((42 + 4) + (6 * 42)) - (4 / 45)))), _value_1);
+        Assert.assertEquals(Integer.valueOf((((42 + 4) + (6 * 42)) - (4 / 45))), _value_1);
         Object _value_2 = annoRef.getValue("stringValue");
         Assert.assertEquals("foobaz", _value_2);
         Object _value_3 = annoRef.getValue("booleanArrayValue");

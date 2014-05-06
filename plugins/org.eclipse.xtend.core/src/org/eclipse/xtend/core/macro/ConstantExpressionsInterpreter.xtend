@@ -137,7 +137,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 	}
 
 	def dispatch Object internalEvaluate(XNumberLiteral it, Context ctx) {
-		val type = if (ctx.expectedType == null) 
+		val type = if (ctx.expectedType == null)
 			javaType
 		else 
 			getJavaType(ctx.expectedType.type,ctx.classFinder) as Class<? extends Number>
