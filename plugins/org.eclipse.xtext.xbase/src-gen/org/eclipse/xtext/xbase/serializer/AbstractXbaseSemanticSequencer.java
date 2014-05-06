@@ -1305,7 +1305,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *     (
 	 *         constructor=[JvmConstructor|QualifiedName] 
 	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
-	 *         (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))? 
+	 *         (explicitConstructorCall?='(' (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))?)? 
 	 *         arguments+=XClosure?
 	 *     )
 	 */

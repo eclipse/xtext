@@ -519,6 +519,7 @@ public class XtendParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXbaseConstructorCallAccess().getConstructorAssignment_2(), "rule__XbaseConstructorCall__ConstructorAssignment_2");
 					put(grammarAccess.getXbaseConstructorCallAccess().getTypeArgumentsAssignment_3_1(), "rule__XbaseConstructorCall__TypeArgumentsAssignment_3_1");
 					put(grammarAccess.getXbaseConstructorCallAccess().getTypeArgumentsAssignment_3_2_1(), "rule__XbaseConstructorCall__TypeArgumentsAssignment_3_2_1");
+					put(grammarAccess.getXbaseConstructorCallAccess().getExplicitConstructorCallAssignment_4_0(), "rule__XbaseConstructorCall__ExplicitConstructorCallAssignment_4_0");
 					put(grammarAccess.getXbaseConstructorCallAccess().getArgumentsAssignment_4_1_0(), "rule__XbaseConstructorCall__ArgumentsAssignment_4_1_0");
 					put(grammarAccess.getXbaseConstructorCallAccess().getArgumentsAssignment_4_1_1_0(), "rule__XbaseConstructorCall__ArgumentsAssignment_4_1_1_0");
 					put(grammarAccess.getXbaseConstructorCallAccess().getArgumentsAssignment_4_1_1_1_1(), "rule__XbaseConstructorCall__ArgumentsAssignment_4_1_1_1_1");
