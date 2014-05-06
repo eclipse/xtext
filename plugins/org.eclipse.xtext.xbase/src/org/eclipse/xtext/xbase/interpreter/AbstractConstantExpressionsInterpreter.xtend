@@ -76,8 +76,11 @@ class AbstractConstantExpressionsInterpreter {
 	}
 
 	def dispatch Object internalEvaluate(XBinaryOperation it, Context ctx) {
-		val left = leftOperand.internalEvaluate(ctx)
-		val right = rightOperand.internalEvaluate(ctx)
+		val context = ctx.cloneWithExpectation(null) 
+		 
+		val left = leftOperand.internalEvaluate(context) 
+		val right = rightOperand.internalEvaluate(context)
+
 		val op = concreteSyntaxFeatureName
 		switch op {
 			case '+': constantOperators.plus(left, right)
@@ -89,10 +92,10 @@ class AbstractConstantExpressionsInterpreter {
 			case '>': constantOperators.greaterThan(left, right)
 			case '<=': constantOperators.lessEquals(left, right)
 			case '>=': constantOperators.greaterEquals(left, right)
+			case '==', 
 			case '===': constantOperators.same(left, right)
+			case '!=',
 			case '!==': constantOperators.notSame(left, right)
-			case '==': constantOperators.same(left, right)
-			case '!=': constantOperators.notSame(left, right)
 			default: throw new ConstantExpressionEvaluationException("Couldn't evaluate binary operator '" + op + "' on values " + left + " and " + right)
 		}
 	}
