@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -89,6 +90,8 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	
 	@Override
 	protected boolean isRawTypeContext() {
+		if (isThisOrSuper())
+			return false;
 		LightweightTypeReference receiverType = getReceiverType();
 		if(receiverType != null && receiverType.isRawType()) {
 			return true;
@@ -186,18 +189,33 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				result.accept(diagnostic);
 				return false;
 			}
-			if (getFeature() instanceof JvmType && !getState().isInstanceContext()) {
-				String featureName = getFeatureCall().getConcreteSyntaxFeatureName();
-				if (!(SELF.getFirstSegment().equals(featureName))) {
-					String message = String.format("Cannot use %s in a static context", getFeatureCall().getConcreteSyntaxFeatureName());
-					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
-							IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER, message, getExpression(),
-							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
-					result.accept(diagnostic);
-					return false;
+			JvmIdentifiableElement feature = getFeature();
+			if (feature instanceof JvmType) {
+				QualifiedName featureName = description.getName();
+				if (!getState().isInstanceContext()) {
+					if (!(SELF.equals(featureName))) {
+						String message = String.format("Cannot use %s in a static context", featureName);
+						AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+								IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER, message, getExpression(),
+								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+						result.accept(diagnostic);
+						return false;
+					}
+				} else if (getExpression() instanceof XMemberFeatureCall && !(SELF.equals(featureName))) {
+					XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) getExpression();
+					XAbstractFeatureCall target = (XAbstractFeatureCall) memberFeatureCall.getMemberCallTarget();
+					JvmType enclosingType = (JvmType) target.getFeature();
+					List<JvmDeclaredType> enclosingTypes = getState().getFeatureScopeSession().getEnclosingTypes();
+					if (!enclosingTypes.contains(enclosingType)) {
+						String message = String.format("No enclosing instance of the type %s is accessible in scope", enclosingType.getSimpleName());
+						AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+								IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, message, getExpression(),
+								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+						result.accept(diagnostic);
+						return false;
+					}
 				}
 			}
-			JvmIdentifiableElement feature = getFeature();
 			if (feature instanceof XVariableDeclaration) {
 				XVariableDeclaration casted = (XVariableDeclaration) feature;
 				if (casted.isWriteable()) {
@@ -873,7 +891,6 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			XBinaryOperation binaryOperation = (XBinaryOperation) featureCall;
 			CommonTypeComputationServices services = getState().getReferenceOwner().getServices();
 			OperatorMapping operatorMapping = services.getOperatorMapping();
-			
 			if (operatorMapping.getCompoundOperators().contains(description.getName())) {
 				JvmIdentifiableElement feature = description.getElementOrProxy();
 				String methodName = feature.getSimpleName();
