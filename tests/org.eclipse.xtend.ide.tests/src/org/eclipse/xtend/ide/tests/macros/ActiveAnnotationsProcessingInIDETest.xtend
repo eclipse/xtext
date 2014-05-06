@@ -100,7 +100,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 				}
 			''') [
 			val xtendClass = xtendFile.xtendTypes.filter(XtendClass).head
-			assertDocumentation('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Comment''', xtendClass)
+			assertDocumentation('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!''', xtendClass)
 			assertDocumentation('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!''', xtendClass.members.filter(XtendField).filter[name.equals("object")].head.type.type)
 		]
 	}

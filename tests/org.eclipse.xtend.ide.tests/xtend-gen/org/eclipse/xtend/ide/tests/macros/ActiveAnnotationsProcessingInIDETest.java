@@ -175,7 +175,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
         final XtendClass xtendClass = IterableExtensions.<XtendClass>head(_filter);
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Comment");
+        _builder.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Hello World!");
         ActiveAnnotationsProcessingInIDETest.this.assertDocumentation(_builder, xtendClass);
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Hello World!");

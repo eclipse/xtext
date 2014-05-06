@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.hover;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +19,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -40,6 +43,14 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 	@Inject
 	private OverrideHelper overrideHelper;
 
+	@Override
+	public String computeDocumentation(EObject object) {
+		if(object instanceof XtendMember){
+			return super.computeDocumentation(getFirst(associations.getJvmElements(object),object));
+		}
+		return super.computeDocumentation(object);
+	}
+	
 	@Override
 	protected JvmDeclaredType getDeclaringType(EObject eObject) {
 		if (eObject instanceof XtendFunction) {
