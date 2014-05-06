@@ -49,16 +49,17 @@ public class AnonymousClassUtil {
 	public JvmDeclaredType getSuperTypeNonResolving(AnonymousClass anonymousClass, IScope typeScope) {
 		XConstructorCall constructorCall = anonymousClass.getConstructorCall();
 		EObject constructorProxy = (EObject) constructorCall.eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
-		if (constructorProxy == null)
-			return null;
-		if (!constructorProxy.eIsProxy()) {
-			return getSuperType(anonymousClass);
+		IEObjectDescription description = null;
+		if (constructorProxy != null) {
+			if (!constructorProxy.eIsProxy()) {
+				return getSuperType(anonymousClass);
+			}
+			String fragment = EcoreUtil.getURI(constructorProxy).fragment();
+			INode node = uriEncoder.getNode(constructorCall, fragment);
+			String name = linkingHelper.getCrossRefNodeAsString(node, true);
+			QualifiedName superTypeName = qualifiedNameConverter.toQualifiedName(name);
+			description = typeScope.getSingleElement(superTypeName);
 		}
-		String fragment = EcoreUtil.getURI(constructorProxy).fragment();
-		INode node = uriEncoder.getNode(constructorCall, fragment);
-		String name = linkingHelper.getCrossRefNodeAsString(node, true);
-		QualifiedName superTypeName = qualifiedNameConverter.toQualifiedName(name);
-		IEObjectDescription description = typeScope.getSingleElement(superTypeName);
 		if (description == null || !EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_DECLARED_TYPE, description.getEClass())) {
 			description = typeScope.getSingleElement(QualifiedName.create("java", "lang", "Object"));
 		}

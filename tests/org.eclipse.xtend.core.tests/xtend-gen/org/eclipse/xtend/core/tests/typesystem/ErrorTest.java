@@ -2596,6 +2596,81 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_95() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def add(T item) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_96() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.LinkedList");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class XList<T extends XType> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val items = new LinkedList<XItem<T>>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def add(T item) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val result = new XItem<T>(this, item)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("items.add(result)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("interface XType {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class XItem<T extends XType> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("XList<T> gen");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("T item");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new(XList<T> gen, T item) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.gen = gen");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.item = item");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");

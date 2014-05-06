@@ -1384,6 +1384,44 @@ class ErrorTest extends AbstractXtendTestCase {
 		'''.processWithoutException
 	}
 	
+	@Test
+	def void testErrorModel_95() throws Exception {
+		'''
+			class C {
+				def add(T item) {
+					new() {
+					}
+				}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_96() throws Exception {
+		'''
+			import java.util.LinkedList
+			
+			class XList<T extends XType> {
+				val items = new LinkedList<XItem<T>>
+				
+				def add(T item) {
+					val result = new XItem<T>(this, item)
+					items.add(result)
+				
+			
+			interface XType {}
+			
+			class XItem<T extends XType> {
+				XList<T> gen
+				T item
+				
+				new(XList<T> gen, T item) {
+					this.gen = gen
+					this.item = item
+				}
+			}
+		'''.processWithoutException
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
