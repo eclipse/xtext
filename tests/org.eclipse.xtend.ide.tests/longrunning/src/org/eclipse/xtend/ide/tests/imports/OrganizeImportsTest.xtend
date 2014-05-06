@@ -6,7 +6,6 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.imports.ImportOrganizer
 import org.junit.Test
-import org.junit.Ignore
 
 class OrganizeImportsTest extends AbstractXtendUITestCase {
 	
@@ -486,8 +485,6 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 		''')
 	}
 
-	//FIXME
-	@Ignore
 	@Test def void testAnonymousClass_1() {
 		'''
 			class Foo {
