@@ -1402,7 +1402,7 @@ public abstract class AbstractXbaseSemanticSequencer extends XtypeSemanticSequen
 	 *         memberCallTarget=XMemberFeatureCall_XMemberFeatureCall_1_1_0_0_0 
 	 *         (nullSafe?='?.' | explicitStatic?='::')? 
 	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
-	 *         feature=[JvmIdentifiableElement|FeatureCallID] 
+	 *         feature=[JvmIdentifiableElement|IdOrSuper] 
 	 *         (explicitOperationCall?='(' (memberCallArguments+=XShortClosure | (memberCallArguments+=XExpression memberCallArguments+=XExpression*))?)? 
 	 *         memberCallArguments+=XClosure?
 	 *     )

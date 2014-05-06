@@ -3,9 +3,9 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pureXbase" nsURI="http://www.eclipse.org/xtext/purexbase/PureXbase"
     nsPrefix="pureXbase">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="importSection" eType="ecore:EClass ../../../../../../org.eclipse.xtext.xbase/model/Xtype.ecore#//XImportSection"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importSection" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore#//XImportSection"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="ecore:EClass ../../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XBlockExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XBlockExpression"
         containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

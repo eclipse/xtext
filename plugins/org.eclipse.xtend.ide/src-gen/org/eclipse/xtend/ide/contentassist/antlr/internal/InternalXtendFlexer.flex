@@ -108,8 +108,6 @@ RICH_TEXT_FINISH="'"("'"("'")?)?
 <YYINITIAL> "::" { return KW_ColonColon; }
 <YYINITIAL> ";" { return KW_Semicolon; }
 <YYINITIAL> "<" { return KW_LessThanSign; }
-<YYINITIAL> "<=" { return KW_LessThanSignEqualsSign; }
-<YYINITIAL> "<=>" { return KW_LessThanSignEqualsSignGreaterThanSign; }
 <YYINITIAL> "<>" { return KW_LessThanSignGreaterThanSign; }
 <YYINITIAL> "=" { return KW_EqualsSign; }
 <YYINITIAL> "==" { return KW_EqualsSignEqualsSign; }

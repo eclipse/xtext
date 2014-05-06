@@ -128,5 +128,9 @@ public class StaticFeatureScope extends AbstractSessionBasedExecutableScope {
 	protected XExpression getReceiver() {
 		return receiver;
 	}
+	
+	protected TypeBucket getBucket() {
+		return bucket;
+	}
 
 }

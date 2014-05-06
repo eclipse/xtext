@@ -30,7 +30,7 @@ ruleOpMultiAssign :
 	'*=' |
 	'/=' |
 	'%=' |
-	'<' '<=' |
+	'<' '<' '=' |
 	'>' '>'? '>='
 ;
 
@@ -94,7 +94,7 @@ ruleXRelationalExpression :
 // Rule OpCompare
 ruleOpCompare :
 	'>=' |
-	'<=' |
+	'<' '=' |
 	'>' |
 	'<'
 ;
@@ -129,11 +129,11 @@ ruleOpOther :
 		) => (
 			'<' '<'
 		) ) |
-		'<'
+		'<' |
+		'=>'
 	) |
 	'<>' |
-	'?:' |
-	'<=>'
+	'?:'
 ;
 
 // Rule XAdditiveExpression
@@ -229,7 +229,7 @@ ruleXMemberFeatureCall :
 			'<' ruleJvmArgumentTypeReference (
 				',' ruleJvmArgumentTypeReference
 			)* '>'
-		)? ruleFeatureCallID (
+		)? ruleIdOrSuper (
 			( (
 			'('
 			) => '(' ) (

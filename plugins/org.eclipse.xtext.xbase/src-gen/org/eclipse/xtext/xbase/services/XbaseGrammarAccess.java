@@ -146,17 +146,18 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cPercentSignEqualsSignKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		private final Group cGroup_5 = (Group)cAlternatives.eContents().get(5);
 		private final Keyword cLessThanSignKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Keyword cLessThanSignEqualsSignKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
+		private final Keyword cLessThanSignKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
+		private final Keyword cEqualsSignKeyword_5_2 = (Keyword)cGroup_5.eContents().get(2);
 		private final Group cGroup_6 = (Group)cAlternatives.eContents().get(6);
 		private final Keyword cGreaterThanSignKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Keyword cGreaterThanSignKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
 		private final Keyword cGreaterThanSignEqualsSignKeyword_6_2 = (Keyword)cGroup_6.eContents().get(2);
 		
 		//OpMultiAssign:
-		//	"+=" | "-=" | "*=" | "/=" | "%=" | "<" "<=" | ">" ">"? ">=";
+		//	"+=" | "-=" | "*=" | "/=" | "%=" | "<" "<" "=" | ">" ">"? ">=";
 		public ParserRule getRule() { return rule; }
 
-		//"+=" | "-=" | "*=" | "/=" | "%=" | "<" "<=" | ">" ">"? ">="
+		//"+=" | "-=" | "*=" | "/=" | "%=" | "<" "<" "=" | ">" ">"? ">="
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"+="
@@ -174,14 +175,17 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//"%="
 		public Keyword getPercentSignEqualsSignKeyword_4() { return cPercentSignEqualsSignKeyword_4; }
 
-		//"<" "<="
+		//"<" "<" "="
 		public Group getGroup_5() { return cGroup_5; }
 
 		//"<"
 		public Keyword getLessThanSignKeyword_5_0() { return cLessThanSignKeyword_5_0; }
 
-		//"<="
-		public Keyword getLessThanSignEqualsSignKeyword_5_1() { return cLessThanSignEqualsSignKeyword_5_1; }
+		//"<"
+		public Keyword getLessThanSignKeyword_5_1() { return cLessThanSignKeyword_5_1; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_5_2() { return cEqualsSignKeyword_5_2; }
 
 		//">" ">"? ">="
 		public Group getGroup_6() { return cGroup_6; }
@@ -507,22 +511,30 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OpCompare");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cGreaterThanSignEqualsSignKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cLessThanSignEqualsSignKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Keyword cLessThanSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final Keyword cGreaterThanSignKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		private final Keyword cLessThanSignKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		
 		//OpCompare:
-		//	">=" | "<=" | ">" | "<";
+		//	">=" | "<" "=" | ">" | "<";
 		public ParserRule getRule() { return rule; }
 
-		//">=" | "<=" | ">" | "<"
+		//">=" | "<" "=" | ">" | "<"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//">="
 		public Keyword getGreaterThanSignEqualsSignKeyword_0() { return cGreaterThanSignEqualsSignKeyword_0; }
 
-		//"<="
-		public Keyword getLessThanSignEqualsSignKeyword_1() { return cLessThanSignEqualsSignKeyword_1; }
+		//"<" "="
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"<"
+		public Keyword getLessThanSignKeyword_1_0() { return cLessThanSignKeyword_1_0; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_1_1() { return cEqualsSignKeyword_1_1; }
 
 		//">"
 		public Keyword getGreaterThanSignKeyword_2() { return cGreaterThanSignKeyword_2; }
@@ -612,15 +624,15 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLessThanSignKeyword_6_1_0_0_0 = (Keyword)cGroup_6_1_0_0.eContents().get(0);
 		private final Keyword cLessThanSignKeyword_6_1_0_0_1 = (Keyword)cGroup_6_1_0_0.eContents().get(1);
 		private final Keyword cLessThanSignKeyword_6_1_1 = (Keyword)cAlternatives_6_1.eContents().get(1);
+		private final Keyword cEqualsSignGreaterThanSignKeyword_6_1_2 = (Keyword)cAlternatives_6_1.eContents().get(2);
 		private final Keyword cLessThanSignGreaterThanSignKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
 		private final Keyword cQuestionMarkColonKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
-		private final Keyword cLessThanSignEqualsSignGreaterThanSignKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
 		
 		//OpOther:
-		//	"->" | "..<" | ">" ".." | ".." | "=>" | ">" (=> (">" ">") | ">") | "<" (=> ("<" "<") | "<") | "<>" | "?:" | "<=>";
+		//	"->" | "..<" | ">" ".." | ".." | "=>" | ">" (=> (">" ">") | ">") | "<" (=> ("<" "<") | "<" | "=>") | "<>" | "?:";
 		public ParserRule getRule() { return rule; }
 
-		//"->" | "..<" | ">" ".." | ".." | "=>" | ">" (=> (">" ">") | ">") | "<" (=> ("<" "<") | "<") | "<>" | "?:" | "<=>"
+		//"->" | "..<" | ">" ".." | ".." | "=>" | ">" (=> (">" ">") | ">") | "<" (=> ("<" "<") | "<" | "=>") | "<>" | "?:"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"->"
@@ -668,13 +680,13 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//">"
 		public Keyword getGreaterThanSignKeyword_5_1_1() { return cGreaterThanSignKeyword_5_1_1; }
 
-		//"<" (=> ("<" "<") | "<")
+		//"<" (=> ("<" "<") | "<" | "=>")
 		public Group getGroup_6() { return cGroup_6; }
 
 		//"<"
 		public Keyword getLessThanSignKeyword_6_0() { return cLessThanSignKeyword_6_0; }
 
-		//=> ("<" "<") | "<"
+		//=> ("<" "<") | "<" | "=>"
 		public Alternatives getAlternatives_6_1() { return cAlternatives_6_1; }
 
 		//=> ("<" "<")
@@ -692,14 +704,14 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//"<"
 		public Keyword getLessThanSignKeyword_6_1_1() { return cLessThanSignKeyword_6_1_1; }
 
+		//"=>"
+		public Keyword getEqualsSignGreaterThanSignKeyword_6_1_2() { return cEqualsSignGreaterThanSignKeyword_6_1_2; }
+
 		//"<>"
 		public Keyword getLessThanSignGreaterThanSignKeyword_7() { return cLessThanSignGreaterThanSignKeyword_7; }
 
 		//"?:"
 		public Keyword getQuestionMarkColonKeyword_8() { return cQuestionMarkColonKeyword_8; }
-
-		//"<=>"
-		public Keyword getLessThanSignEqualsSignGreaterThanSignKeyword_9() { return cLessThanSignEqualsSignGreaterThanSignKeyword_9; }
 	}
 
 	public class XAdditiveExpressionElements extends AbstractParserRuleElementFinder {
@@ -1072,7 +1084,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGreaterThanSignKeyword_1_1_1_3 = (Keyword)cGroup_1_1_1.eContents().get(3);
 		private final Assignment cFeatureAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
 		private final CrossReference cFeatureJvmIdentifiableElementCrossReference_1_1_2_0 = (CrossReference)cFeatureAssignment_1_1_2.eContents().get(0);
-		private final RuleCall cFeatureJvmIdentifiableElementFeatureCallIDParserRuleCall_1_1_2_0_1 = (RuleCall)cFeatureJvmIdentifiableElementCrossReference_1_1_2_0.eContents().get(1);
+		private final RuleCall cFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_1_1_2_0_1 = (RuleCall)cFeatureJvmIdentifiableElementCrossReference_1_1_2_0.eContents().get(1);
 		private final Group cGroup_1_1_3 = (Group)cGroup_1_1.eContents().get(3);
 		private final Assignment cExplicitOperationCallAssignment_1_1_3_0 = (Assignment)cGroup_1_1_3.eContents().get(0);
 		private final Keyword cExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0 = (Keyword)cExplicitOperationCallAssignment_1_1_3_0.eContents().get(0);
@@ -1095,18 +1107,16 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//	feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment | =>
 		//	({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ("<"
 		//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-		//	feature=[types::JvmIdentifiableElement|FeatureCallID] (=> explicitOperationCall?="("
-		//	(memberCallArguments+=XShortClosure | memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?
-		//	memberCallArguments+=XClosure?)*;
+		//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure |
+		//	memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")? memberCallArguments+=XClosure?)*;
 		public ParserRule getRule() { return rule; }
 
 		//XPrimaryExpression (=> ({XAssignment.assignable=current} ("." | explicitStatic?="::")
 		//feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment | =>
 		//({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ("<"
 		//typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-		//feature=[types::JvmIdentifiableElement|FeatureCallID] (=> explicitOperationCall?="("
-		//(memberCallArguments+=XShortClosure | memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?
-		//memberCallArguments+=XClosure?)*
+		//feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure |
+		//memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")? memberCallArguments+=XClosure?)*
 		public Group getGroup() { return cGroup; }
 
 		//XPrimaryExpression
@@ -1115,7 +1125,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//(=> ({XAssignment.assignable=current} ("." | explicitStatic?="::") feature=[types::JvmIdentifiableElement|FeatureCallID]
 		//OpSingleAssign) value=XAssignment | => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." |
 		//explicitStatic?="::")) ("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)*
-		//">")? feature=[types::JvmIdentifiableElement|FeatureCallID] (=> explicitOperationCall?="("
+		//">")? feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="("
 		//(memberCallArguments+=XShortClosure | memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?
 		//memberCallArguments+=XClosure?)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
@@ -1167,9 +1177,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 		//=> ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ("<"
 		//typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-		//feature=[types::JvmIdentifiableElement|FeatureCallID] (=> explicitOperationCall?="("
-		//(memberCallArguments+=XShortClosure | memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?
-		//memberCallArguments+=XClosure?
+		//feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure |
+		//memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")? memberCallArguments+=XClosure?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//=> ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::"))
@@ -1226,14 +1235,14 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//">"
 		public Keyword getGreaterThanSignKeyword_1_1_1_3() { return cGreaterThanSignKeyword_1_1_1_3; }
 
-		//feature=[types::JvmIdentifiableElement|FeatureCallID]
+		//feature=[types::JvmIdentifiableElement|IdOrSuper]
 		public Assignment getFeatureAssignment_1_1_2() { return cFeatureAssignment_1_1_2; }
 
-		//[types::JvmIdentifiableElement|FeatureCallID]
+		//[types::JvmIdentifiableElement|IdOrSuper]
 		public CrossReference getFeatureJvmIdentifiableElementCrossReference_1_1_2_0() { return cFeatureJvmIdentifiableElementCrossReference_1_1_2_0; }
 
-		//FeatureCallID
-		public RuleCall getFeatureJvmIdentifiableElementFeatureCallIDParserRuleCall_1_1_2_0_1() { return cFeatureJvmIdentifiableElementFeatureCallIDParserRuleCall_1_1_2_0_1; }
+		//IdOrSuper
+		public RuleCall getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_1_1_2_0_1() { return cFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_1_1_2_0_1; }
 
 		//(=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure | memberCallArguments+=XExpression (","
 		//memberCallArguments+=XExpression)*)? ")")?
@@ -3413,7 +3422,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OpMultiAssign:
-	//	"+=" | "-=" | "*=" | "/=" | "%=" | "<" "<=" | ">" ">"? ">=";
+	//	"+=" | "-=" | "*=" | "/=" | "%=" | "<" "<" "=" | ">" ">"? ">=";
 	public OpMultiAssignElements getOpMultiAssignAccess() {
 		return (pOpMultiAssign != null) ? pOpMultiAssign : (pOpMultiAssign = new OpMultiAssignElements());
 	}
@@ -3498,7 +3507,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OpCompare:
-	//	">=" | "<=" | ">" | "<";
+	//	">=" | "<" "=" | ">" | "<";
 	public OpCompareElements getOpCompareAccess() {
 		return (pOpCompare != null) ? pOpCompare : (pOpCompare = new OpCompareElements());
 	}
@@ -3519,7 +3528,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OpOther:
-	//	"->" | "..<" | ">" ".." | ".." | "=>" | ">" (=> (">" ">") | ">") | "<" (=> ("<" "<") | "<") | "<>" | "?:" | "<=>";
+	//	"->" | "..<" | ">" ".." | ".." | "=>" | ">" (=> (">" ">") | ">") | "<" (=> ("<" "<") | "<" | "=>") | "<>" | "?:";
 	public OpOtherElements getOpOtherAccess() {
 		return (pOpOther != null) ? pOpOther : (pOpOther = new OpOtherElements());
 	}
@@ -3625,9 +3634,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment | =>
 	//	({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ("<"
 	//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-	//	feature=[types::JvmIdentifiableElement|FeatureCallID] (=> explicitOperationCall?="("
-	//	(memberCallArguments+=XShortClosure | memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?
-	//	memberCallArguments+=XClosure?)*;
+	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure |
+	//	memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")? memberCallArguments+=XClosure?)*;
 	public XMemberFeatureCallElements getXMemberFeatureCallAccess() {
 		return (pXMemberFeatureCall != null) ? pXMemberFeatureCall : (pXMemberFeatureCall = new XMemberFeatureCallElements());
 	}

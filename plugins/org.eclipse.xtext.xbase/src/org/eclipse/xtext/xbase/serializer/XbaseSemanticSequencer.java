@@ -330,7 +330,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 		}
 
 		// feature=[JvmIdentifiableElement|ID]
-		acceptor.accept(memberFeatureCallElements.getFeatureJvmIdentifiableElementFeatureCallIDParserRuleCall_1_1_2_0_1(), featureCall.getFeature());
+		acceptor.accept(memberFeatureCallElements.getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_1_1_2_0_1(), featureCall.getFeature());
 
 		// (explicitOperationCall?='(' (memberCallArguments+=XShortClosure | (memberCallArguments+=XExpression memberCallArguments+=XExpression*))?)? memberCallArguments+=XClosure? 
 		if (featureCall.isExplicitOperationCallOrBuilderSyntax()) {

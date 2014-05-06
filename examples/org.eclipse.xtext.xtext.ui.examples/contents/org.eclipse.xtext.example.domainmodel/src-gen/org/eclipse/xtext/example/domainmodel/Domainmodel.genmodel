@@ -6,7 +6,7 @@
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.domainmodel.edit"
     editorPluginID="org.eclipse.xtext.example.domainmodel.editor" runtimeVersion="2.9"
-    usedGenPackages="../../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase ../../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
+    usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <genPackages prefix="Domainmodel" basePackage="org.eclipse.xtext.example.domainmodel"
       disposableProviderFactory="true" ecorePackage="Domainmodel.ecore#/">
     <genClasses ecoreClass="Domainmodel.ecore#//DomainModel">

@@ -149,6 +149,11 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultUiModu
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {
+		return org.eclipse.xtext.xbase.typesystem.internal.BuilderAwareFeatureScopeTrackerProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.refactoring.IRenameStrategy> bindIRenameStrategy() {
 		return org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy.class;
 	}

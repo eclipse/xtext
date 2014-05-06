@@ -65,6 +65,26 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 		
 	}
 	
+	public static class CompareOperatorsValueConverter extends AbstractValueConverter<String> {
+
+		private final static Set<String> operators = ImmutableSet.of(
+			">=",
+			"<=",
+			">",
+			"<");
+		
+		public String toValue(String string, INode node) throws ValueConverterException {
+			return string;
+		}
+
+		public String toString(String value) throws ValueConverterException {
+			if (!operators.contains(value))
+				throw new ValueConverterException("'" + value + "' is not a valid operator.", null, null);
+			return value;
+		}
+		
+	}
+	
 	public static class MultiAssignOperatorsValueConverter extends AbstractValueConverter<String> {
 
 		private final static Set<String> operators = ImmutableSet.of(
@@ -103,6 +123,9 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 	
 	@Inject
 	private OtherOperatorsValueConverter otherOperatorsValueConverter;
+	
+	@Inject
+	private CompareOperatorsValueConverter compareOperatorsValueConverter;
 	
 	@Inject
 	private MultiAssignOperatorsValueConverter multiAssignOperatorsValueConverter;
@@ -173,7 +196,7 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 	
 	@ValueConverter(rule = "OpCompare")
 	public IValueConverter<String> getOpCompareConverter() {
-		return keywordBasedConverterProvider.get();
+		return compareOperatorsValueConverter;
 	}
 	
 	@ValueConverter(rule = "OpOther")

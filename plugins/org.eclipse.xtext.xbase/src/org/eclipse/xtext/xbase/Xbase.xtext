@@ -26,7 +26,7 @@ OpSingleAssign:
 
 OpMultiAssign:
 	'+=' | '-=' | '*=' | '/=' | '%=' | 
-	'<' '<=' | 
+	'<' '<' '=' | 
 	'>' '>'? '>=';
 
 XOrExpression returns XExpression:
@@ -54,7 +54,7 @@ XRelationalExpression returns XExpression:
 	 =>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpCompare]) rightOperand=XOtherOperatorExpression)*;
 
 OpCompare:
-	'>=' | '<=' | '>' | '<' ;
+	'>=' | '<' '=' | '>' | '<' ;
 
 XOtherOperatorExpression returns XExpression:
 	XAdditiveExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOther])
@@ -67,10 +67,9 @@ OpOther:
 	| '..'
 	| '=>' 
 	| '>' (=>('>' '>') | '>') 
-	| '<' (=>('<' '<') | '<')
+	| '<' (=>('<' '<') | '<' | '=>')
 	| '<>'
-	| '?:' 
-	| '<=>';
+	| '?:';
 
 XAdditiveExpression returns XExpression:
 	XMultiplicativeExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
@@ -109,7 +108,7 @@ XMemberFeatureCall returns XExpression:
 	(=>({XAssignment.assignable=current} ('.'|explicitStatic?="::") feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
 	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|explicitStatic?="::")) 
 		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
-		feature=[types::JvmIdentifiableElement|FeatureCallID] (
+		feature=[types::JvmIdentifiableElement|IdOrSuper] (
 			=>explicitOperationCall?='(' 
 				(
 				    memberCallArguments+=XShortClosure

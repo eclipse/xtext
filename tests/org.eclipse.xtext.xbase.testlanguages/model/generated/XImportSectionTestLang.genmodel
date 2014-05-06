@@ -6,7 +6,7 @@
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xbase.testlanguages.edit"
     editorPluginID="org.eclipse.xtext.xbase.testlanguages.editor" runtimeVersion="2.10"
-    usedGenPackages="../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
+    usedGenPackages="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <genPackages prefix="XImportSectionTestLang" basePackage="org.eclipse.xtext.xbase.testlanguages"
       disposableProviderFactory="true" fileExtensions="__ximportimporttestlang" ecorePackage="XImportSectionTestLang.ecore#/">
     <genClasses ecoreClass="XImportSectionTestLang.ecore#//ImportSectionTestLanguageRoot">

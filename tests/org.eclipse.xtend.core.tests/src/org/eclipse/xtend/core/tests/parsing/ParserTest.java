@@ -19,8 +19,10 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -44,6 +46,16 @@ import com.google.inject.Inject;
 public class ParserTest extends AbstractXtendTestCase {
 	
 	@Inject private IXtendJvmAssociations associations; 
+	
+	@Test
+	public void testBug427257() throws Exception {
+		XtendClass clazz = clazz("class C { def Iterable<=>String> m() { emptyList } }");
+		assertEquals(1, clazz.getMembers().size());
+		XtendFunction m = (XtendFunction) clazz.getMembers().get(0);
+		JvmParameterizedTypeReference returnType = (JvmParameterizedTypeReference) m.getReturnType();
+		JvmTypeReference typeArgument = returnType.getArguments().get(0);
+		assertTrue(typeArgument instanceof XFunctionTypeRef);
+	}
 	
 	@Test
 	public void testExtensionOnLocalVar_01() throws Exception {

@@ -1241,7 +1241,6 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public void assignThisAndSuper(final ITreeAppendable b, final JvmDeclaredType declaredType) {
-    this.reassignToType(b, declaredType, "this");
     EList<JvmTypeReference> _superTypes = declaredType.getSuperTypes();
     final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
       public Boolean apply(final JvmTypeReference it) {
@@ -1259,26 +1258,27 @@ public class JvmModelGenerator implements IGenerator {
       _type=_findFirst.getType();
     }
     final JvmDeclaredType superClass = ((JvmDeclaredType) _type);
-    this.reassignToType(b, superClass, "super");
+    this.reassignSuperType(b, superClass);
+    this.reassignThisType(b, declaredType);
   }
   
-  private String reassignToType(final ITreeAppendable b, final JvmDeclaredType declaredType, final String name) {
+  private String reassignSuperType(final ITreeAppendable b, final JvmDeclaredType declaredType) {
     String _xifexpression = null;
-    boolean _hasObject = b.hasObject(name);
+    boolean _hasObject = b.hasObject("super");
     if (_hasObject) {
       String _xblockexpression = null;
       {
-        final Object element = b.getObject(name);
+        final Object element = b.getObject("this");
         if ((element instanceof JvmType)) {
           String _simpleName = ((JvmType)element).getSimpleName();
-          String _plus = (_simpleName + ".");
-          final String proposedName = (_plus + name);
-          b.declareVariable(element, proposedName);
+          final String proposedName = (_simpleName + ".super");
+          Object _object = b.getObject("super");
+          b.declareVariable(_object, proposedName);
         }
         String _xifexpression_1 = null;
         boolean _notEquals = (!Objects.equal(declaredType, null));
         if (_notEquals) {
-          _xifexpression_1 = b.declareVariable(declaredType, name);
+          _xifexpression_1 = b.declareVariable(declaredType, "super");
         }
         _xblockexpression = _xifexpression_1;
       }
@@ -1287,7 +1287,38 @@ public class JvmModelGenerator implements IGenerator {
       String _xifexpression_1 = null;
       boolean _notEquals = (!Objects.equal(declaredType, null));
       if (_notEquals) {
-        _xifexpression_1 = b.declareVariable(declaredType, name);
+        _xifexpression_1 = b.declareVariable(declaredType, "super");
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
+  }
+  
+  private String reassignThisType(final ITreeAppendable b, final JvmDeclaredType declaredType) {
+    String _xifexpression = null;
+    boolean _hasObject = b.hasObject("this");
+    if (_hasObject) {
+      String _xblockexpression = null;
+      {
+        final Object element = b.getObject("this");
+        if ((element instanceof JvmType)) {
+          String _simpleName = ((JvmType)element).getSimpleName();
+          final String proposedName = (_simpleName + ".this");
+          b.declareVariable(element, proposedName);
+        }
+        String _xifexpression_1 = null;
+        boolean _notEquals = (!Objects.equal(declaredType, null));
+        if (_notEquals) {
+          _xifexpression_1 = b.declareVariable(declaredType, "this");
+        }
+        _xblockexpression = _xifexpression_1;
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      String _xifexpression_1 = null;
+      boolean _notEquals = (!Objects.equal(declaredType, null));
+      if (_notEquals) {
+        _xifexpression_1 = b.declareVariable(declaredType, "this");
       }
       _xifexpression = _xifexpression_1;
     }

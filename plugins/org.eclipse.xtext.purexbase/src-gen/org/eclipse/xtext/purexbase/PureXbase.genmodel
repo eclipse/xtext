@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.xtext.purexbase.editor/src" modelPluginID="org.eclipse.xtext.purexbase"
     forceOverwrite="true" modelName="PureXbase" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.purexbase.edit"
-    editorPluginID="org.eclipse.xtext.purexbase.editor" runtimeVersion="2.9" usedGenPackages="../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase ../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
+    editorPluginID="org.eclipse.xtext.purexbase.editor" runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <genPackages prefix="PureXbase" basePackage="org.eclipse.xtext.purexbase" disposableProviderFactory="true"
       fileExtensions="xbase" ecorePackage="PureXbase.ecore#/">
     <genClasses ecoreClass="PureXbase.ecore#//Model">

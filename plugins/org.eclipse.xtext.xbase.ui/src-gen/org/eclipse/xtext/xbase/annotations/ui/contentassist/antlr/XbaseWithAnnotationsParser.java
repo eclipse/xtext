@@ -126,6 +126,7 @@ public class XbaseWithAnnotationsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXRelationalExpressionAccess().getGroup_1_1(), "rule__XRelationalExpression__Group_1_1__0");
 					put(grammarAccess.getXRelationalExpressionAccess().getGroup_1_1_0(), "rule__XRelationalExpression__Group_1_1_0__0");
 					put(grammarAccess.getXRelationalExpressionAccess().getGroup_1_1_0_0(), "rule__XRelationalExpression__Group_1_1_0_0__0");
+					put(grammarAccess.getOpCompareAccess().getGroup_1(), "rule__OpCompare__Group_1__0");
 					put(grammarAccess.getXOtherOperatorExpressionAccess().getGroup(), "rule__XOtherOperatorExpression__Group__0");
 					put(grammarAccess.getXOtherOperatorExpressionAccess().getGroup_1(), "rule__XOtherOperatorExpression__Group_1__0");
 					put(grammarAccess.getXOtherOperatorExpressionAccess().getGroup_1_0(), "rule__XOtherOperatorExpression__Group_1_0__0");
