@@ -36,14 +36,14 @@ class LoopExtensions {
 	 */
 	def <T> void forEachWithShortcut(ITreeAppendable appendable, Iterable<T> elements,  
 			(T)=>void procedure) {
-		if(elements.size == 1)
+		if (elements.empty)
+			appendable.append('{}')
+		else if(elements.size == 1)
 			elements.head => procedure
 		else {
-			appendable.append('{')
 			forEach(appendable, elements, [
-				separator = ', '
+				prefix= '{ ' separator = ', ' suffix = ' }' 
 			], procedure)
-			appendable.append('}')
 		}
 	}
 }

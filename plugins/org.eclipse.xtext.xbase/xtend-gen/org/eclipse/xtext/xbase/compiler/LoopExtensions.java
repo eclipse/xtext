@@ -47,20 +47,25 @@ public class LoopExtensions {
    * Uses curly braces and comma as delimiters. Doesn't use them for single valued iterables.
    */
   public <T extends Object> void forEachWithShortcut(final ITreeAppendable appendable, final Iterable<T> elements, final Procedure1<? super T> procedure) {
-    int _size = IterableExtensions.size(elements);
-    boolean _equals = (_size == 1);
-    if (_equals) {
-      T _head = IterableExtensions.<T>head(elements);
-      ObjectExtensions.<T>operator_doubleArrow(_head, procedure);
+    boolean _isEmpty = IterableExtensions.isEmpty(elements);
+    if (_isEmpty) {
+      appendable.append("{}");
     } else {
-      appendable.append("{");
-      final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
-        public void apply(final LoopParams it) {
-          it.setSeparator(", ");
-        }
-      };
-      this.<T>forEach(appendable, elements, _function, procedure);
-      appendable.append("}");
+      int _size = IterableExtensions.size(elements);
+      boolean _equals = (_size == 1);
+      if (_equals) {
+        T _head = IterableExtensions.<T>head(elements);
+        ObjectExtensions.<T>operator_doubleArrow(_head, procedure);
+      } else {
+        final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+          public void apply(final LoopParams it) {
+            it.setPrefix("{ ");
+            it.setSeparator(", ");
+            it.setSuffix(" }");
+          }
+        };
+        this.<T>forEach(appendable, elements, _function, procedure);
+      }
     }
   }
 }

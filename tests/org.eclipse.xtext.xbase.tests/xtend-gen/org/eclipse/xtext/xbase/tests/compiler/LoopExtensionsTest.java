@@ -226,7 +226,7 @@ public class LoopExtensionsTest extends AbstractXbaseTestCase {
     ArrayList<String> _newArrayList_1 = CollectionLiterals.<String>newArrayList("foo");
     this.assertForEachWithShortcut(_newArrayList_1, "foo");
     ArrayList<String> _newArrayList_2 = CollectionLiterals.<String>newArrayList();
-    this.assertForEachWithShortcut(_newArrayList_2, "");
+    this.assertForEachWithShortcut(_newArrayList_2, "{}");
   }
   
   protected void assertForEach(final Iterable<String> elements, final Procedure1<? super LoopParams> params, final String expectedResult) {
