@@ -804,5 +804,82 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 			}
 		'''.expression.assertNoIssues
 	}
-
+	
+	@Test def void testBug415770(){
+		'''
+		{
+			val String str = ""
+			val String[] array = null
+			str === array
+		}
+		'''.expression.assertError(XbasePackage.Literals.XBINARY_OPERATION,IssueCodes.INVALID_OPERAND_TYPES)
+	}
+	
+	@Test def void testBug415770_2(){
+		'''
+		{
+			val String str = ""
+			val String[] array = null
+			str !== array
+		}
+		'''.expression.assertError(XbasePackage.Literals.XBINARY_OPERATION,IssueCodes.INVALID_OPERAND_TYPES)
+	}
+	
+	@Test def void testBug415770_3(){
+		'''
+		{
+			val String str = ""
+			val String[] array = null
+			array === str
+		}
+		'''.expression.assertError(XbasePackage.Literals.XBINARY_OPERATION,IssueCodes.INVALID_OPERAND_TYPES)
+	}
+	
+	@Test def void testBug415770_4(){
+		'''
+		{
+			val String str = ""
+			val String[] array = null
+			array !== str
+		}
+		'''.expression.assertError(XbasePackage.Literals.XBINARY_OPERATION,IssueCodes.INVALID_OPERAND_TYPES)
+	}
+	
+	@Test def void testBug415770_5(){
+		'''
+		{
+			val String str = ""
+			str === "SomeString"
+		}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testBug415770_6(){
+		'''
+		{
+			val String str = ""
+			str !== "SomeString"
+		}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testBug415770_7(){
+		'''
+		{
+			val String[] array = null
+			val String[] array2 = null
+			array === array2
+		}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testBug415770_8(){
+		'''
+		{
+			val String[] array = null
+			val String[] array2 = null
+			array !== array2
+		}
+		'''.expression.assertNoErrors
+	}
 }
