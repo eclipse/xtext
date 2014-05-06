@@ -1667,10 +1667,10 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20250:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20250:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20271:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20271:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20250:12: ( '0x' | '0X' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20271:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1698,7 +1698,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20250:13: '0x'
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20271:13: '0x'
                     {
                     match("0x"); 
 
@@ -1706,7 +1706,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20250:18: '0X'
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20271:18: '0X'
                     {
                     match("0X"); 
 
@@ -1716,7 +1716,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20250:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20271:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1754,7 +1754,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20250:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20271:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1763,10 +1763,10 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20250:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20271:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20250:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20271:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1784,7 +1784,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20250:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20271:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -1808,7 +1808,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20250:84: ( 'l' | 'L' )
+                            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20271:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -1847,11 +1847,11 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20252:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20252:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20273:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20273:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20252:21: ( '0' .. '9' | '_' )*
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20273:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -1900,11 +1900,11 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20254:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20254:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20275:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20275:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20254:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20275:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1913,7 +1913,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20254:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20275:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1924,7 +1924,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20254:36: ( '+' | '-' )?
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20275:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1957,7 +1957,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20254:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20275:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -1969,7 +1969,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20254:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20275:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -1993,7 +1993,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20254:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20275:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2026,10 +2026,10 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20256:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20256:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20277:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20277:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20256:11: ( '^' )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20277:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2038,7 +2038,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20256:11: '^'
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20277:11: '^'
                     {
                     match('^'); 
 
@@ -2056,7 +2056,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20256:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20277:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2105,10 +2105,10 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20258:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20258:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20279:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20279:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20258:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20279:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -2126,10 +2126,10 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt13) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20258:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20279:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20258:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20279:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2145,7 +2145,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20258:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20279:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -2161,7 +2161,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20258:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20279:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2186,10 +2186,10 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20258:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20279:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20258:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20279:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop12:
                     do {
                         int alt12=3;
@@ -2205,7 +2205,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
 
                         switch (alt12) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20258:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20279:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -2221,7 +2221,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20258:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20279:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2264,12 +2264,12 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20260:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20260:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20281:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20281:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20260:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20281:24: ( options {greedy=false; } : . )*
             loop14:
             do {
                 int alt14=2;
@@ -2294,7 +2294,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
 
                 switch (alt14) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20260:52: .
+            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20281:52: .
             	    {
             	    matchAny(); 
 
@@ -2324,12 +2324,12 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20262:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20262:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20283:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20283:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20262:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20283:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop15:
             do {
                 int alt15=2;
@@ -2342,7 +2342,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
 
                 switch (alt15) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20262:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20283:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2362,7 +2362,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20262:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20283:40: ( ( '\\r' )? '\\n' )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -2371,9 +2371,9 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
             }
             switch (alt17) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20262:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20283:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20262:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20283:41: ( '\\r' )?
                     int alt16=2;
                     int LA16_0 = input.LA(1);
 
@@ -2382,7 +2382,7 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
                     }
                     switch (alt16) {
                         case 1 :
-                            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20262:41: '\\r'
+                            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20283:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2414,10 +2414,10 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20264:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20264:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20285:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20285:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20264:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20285:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt18=0;
             loop18:
             do {
@@ -2471,8 +2471,8 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20266:16: ( . )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20266:18: .
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20287:16: ( . )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:20287:18: .
             {
             matchAny(); 
 
@@ -3087,8 +3087,8 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
 
     protected DFA19 dfa19 = new DFA19(this);
     static final String DFA19_eotS =
-        "\1\uffff\1\57\1\61\1\63\1\66\1\72\1\75\1\101\1\103\1\105\1\107\1"+
-        "\111\1\113\1\116\1\uffff\5\121\6\uffff\1\121\3\uffff\1\151\6\121"+
+        "\1\uffff\1\57\1\61\1\63\1\66\1\72\1\75\1\101\1\103\1\105\1\107"+
+        "\1\111\1\113\1\116\1\uffff\5\121\6\uffff\1\121\3\uffff\1\151\6\121"+
         "\2\165\1\54\1\uffff\2\54\2\uffff\1\173\26\uffff\1\175\5\uffff\1"+
         "\177\5\uffff\1\121\1\uffff\10\121\1\u008a\3\121\6\uffff\1\u008e"+
         "\5\uffff\1\121\1\u0090\10\121\2\uffff\1\165\11\uffff\1\u009b\1\u009c"+
@@ -3121,37 +3121,37 @@ public class InternalXbaseWithAnnotationsLexer extends Lexer {
         "\uffff\1\156\1\uffff\1\145\2\44\3\uffff\1\156\1\151\1\157\2\uffff"+
         "\1\44\1\172\1\146\1\uffff\1\145\1\44\1\144\1\uffff\1\44\1\uffff";
     static final String DFA19_maxS =
-        "\1\uffff\1\76\1\174\1\46\1\75\1\76\5\75\1\76\1\56\1\72\1\uffff\1"+
-        "\141\1\170\1\171\1\156\1\157\6\uffff\1\163\3\uffff\1\72\1\157\1"+
-        "\141\1\150\1\165\1\171\1\145\1\170\1\154\1\172\1\uffff\2\uffff\2"+
-        "\uffff\1\75\26\uffff\1\75\5\uffff\1\74\5\uffff\1\162\1\uffff\1\164"+
-        "\1\163\1\141\1\160\1\151\1\156\1\160\1\163\1\172\1\154\1\162\1\156"+
-        "\6\uffff\1\172\5\uffff\1\146\1\172\1\164\1\151\1\167\1\154\1\160"+
-        "\1\162\1\171\1\164\2\uffff\1\154\11\uffff\2\172\2\145\1\164\1\145"+
-        "\1\164\1\143\1\157\1\164\1\uffff\1\163\1\172\1\141\1\uffff\1\141"+
-        "\1\uffff\1\145\1\143\1\154\1\172\1\154\1\145\1\157\1\172\1\145\1"+
-        "\165\2\uffff\1\156\1\172\1\151\1\162\1\143\1\150\1\162\1\141\1\145"+
-        "\1\uffff\1\154\1\165\1\172\1\150\1\145\1\uffff\1\172\1\157\1\167"+
-        "\1\uffff\1\172\1\162\1\163\1\uffff\1\143\1\172\1\150\1\162\1\164"+
-        "\1\156\1\172\2\154\1\uffff\2\172\1\uffff\1\146\1\172\1\uffff\1\156"+
-        "\1\163\1\151\1\172\1\uffff\1\172\1\157\1\172\1\143\1\uffff\1\171"+
-        "\1\164\2\uffff\1\172\1\uffff\2\172\1\157\2\uffff\1\156\1\uffff\1"+
-        "\145\2\172\3\uffff\1\156\1\151\1\157\2\uffff\2\172\1\146\1\uffff"+
+        "\1\uffff\1\76\1\174\1\46\1\75\1\76\5\75\1\76\1\56\1\72\1\uffff"+
+        "\1\141\1\170\1\171\1\156\1\157\6\uffff\1\163\3\uffff\1\72\1\157"+
+        "\1\141\1\150\1\165\1\171\1\145\1\170\1\154\1\172\1\uffff\2\uffff"+
+        "\2\uffff\1\75\26\uffff\1\75\5\uffff\1\74\5\uffff\1\162\1\uffff\1"+
+        "\164\1\163\1\141\1\160\1\151\1\156\1\160\1\163\1\172\1\154\1\162"+
+        "\1\156\6\uffff\1\172\5\uffff\1\146\1\172\1\164\1\151\1\167\1\154"+
+        "\1\160\1\162\1\171\1\164\2\uffff\1\154\11\uffff\2\172\2\145\1\164"+
+        "\1\145\1\164\1\143\1\157\1\164\1\uffff\1\163\1\172\1\141\1\uffff"+
+        "\1\141\1\uffff\1\145\1\143\1\154\1\172\1\154\1\145\1\157\1\172\1"+
+        "\145\1\165\2\uffff\1\156\1\172\1\151\1\162\1\143\1\150\1\162\1\141"+
+        "\1\145\1\uffff\1\154\1\165\1\172\1\150\1\145\1\uffff\1\172\1\157"+
+        "\1\167\1\uffff\1\172\1\162\1\163\1\uffff\1\143\1\172\1\150\1\162"+
+        "\1\164\1\156\1\172\2\154\1\uffff\2\172\1\uffff\1\146\1\172\1\uffff"+
+        "\1\156\1\163\1\151\1\172\1\uffff\1\172\1\157\1\172\1\143\1\uffff"+
+        "\1\171\1\164\2\uffff\1\172\1\uffff\2\172\1\157\2\uffff\1\156\1\uffff"+
+        "\1\145\2\172\3\uffff\1\156\1\151\1\157\2\uffff\2\172\1\146\1\uffff"+
         "\1\145\1\172\1\144\1\uffff\1\172\1\uffff";
     static final String DFA19_acceptS =
-        "\16\uffff\1\40\5\uffff\1\50\1\51\1\52\1\53\1\54\1\55\1\uffff\1\60"+
-        "\1\61\1\62\12\uffff\1\117\2\uffff\1\123\1\124\1\uffff\1\23\1\1\1"+
-        "\2\1\111\1\3\1\106\1\4\1\35\1\26\1\5\1\20\1\36\1\27\1\6\1\31\1\30"+
-        "\1\7\1\121\1\122\1\32\1\10\1\33\1\uffff\1\34\1\15\1\16\1\24\1\17"+
-        "\1\uffff\1\37\1\25\1\110\1\105\1\40\1\uffff\1\117\14\uffff\1\50"+
-        "\1\51\1\52\1\53\1\54\1\55\1\uffff\1\60\1\61\1\62\1\107\1\66\12\uffff"+
-        "\1\114\1\115\1\uffff\1\116\1\120\1\123\1\13\1\11\1\14\1\12\1\21"+
-        "\1\22\12\uffff\1\63\3\uffff\1\57\1\uffff\1\73\12\uffff\1\41\1\112"+
-        "\11\uffff\1\71\5\uffff\1\74\3\uffff\1\101\3\uffff\1\64\11\uffff"+
-        "\1\70\2\uffff\1\75\2\uffff\1\113\4\uffff\1\46\4\uffff\1\47\2\uffff"+
-        "\1\104\1\72\1\uffff\1\77\3\uffff\1\43\1\65\1\uffff\1\44\3\uffff"+
-        "\1\76\1\100\1\42\3\uffff\1\102\1\67\3\uffff\1\45\3\uffff\1\56\1"+
-        "\uffff\1\103";
+        "\16\uffff\1\40\5\uffff\1\50\1\51\1\52\1\53\1\54\1\55\1\uffff\1"+
+        "\60\1\61\1\62\12\uffff\1\117\2\uffff\1\123\1\124\1\uffff\1\23\1"+
+        "\1\1\2\1\111\1\3\1\106\1\4\1\35\1\26\1\5\1\20\1\36\1\27\1\6\1\31"+
+        "\1\30\1\7\1\121\1\122\1\32\1\10\1\33\1\uffff\1\34\1\15\1\16\1\24"+
+        "\1\17\1\uffff\1\37\1\25\1\110\1\105\1\40\1\uffff\1\117\14\uffff"+
+        "\1\50\1\51\1\52\1\53\1\54\1\55\1\uffff\1\60\1\61\1\62\1\107\1\66"+
+        "\12\uffff\1\114\1\115\1\uffff\1\116\1\120\1\123\1\13\1\11\1\14\1"+
+        "\12\1\21\1\22\12\uffff\1\63\3\uffff\1\57\1\uffff\1\73\12\uffff\1"+
+        "\41\1\112\11\uffff\1\71\5\uffff\1\74\3\uffff\1\101\3\uffff\1\64"+
+        "\11\uffff\1\70\2\uffff\1\75\2\uffff\1\113\4\uffff\1\46\4\uffff\1"+
+        "\47\2\uffff\1\104\1\72\1\uffff\1\77\3\uffff\1\43\1\65\1\uffff\1"+
+        "\44\3\uffff\1\76\1\100\1\42\3\uffff\1\102\1\67\3\uffff\1\45\3\uffff"+
+        "\1\56\1\uffff\1\103";
     static final String DFA19_specialS =
         "\1\0\50\uffff\1\1\1\2\u00c6\uffff}>";
     static final String[] DFA19_transitionS = {

@@ -693,13 +693,22 @@ public interface XbasePackage extends EPackage
 	int XCONSTRUCTOR_CALL__VALID_FEATURE = XEXPRESSION_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Explicit Constructor Call</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCONSTRUCTOR_CALL__EXPLICIT_CONSTRUCTOR_CALL = XEXPRESSION_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>XConstructor Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XCONSTRUCTOR_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 5;
+	int XCONSTRUCTOR_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl <em>XBoolean Literal</em>}' class.
@@ -2335,6 +2344,17 @@ public interface XbasePackage extends EPackage
 	EAttribute getXConstructorCall_ValidFeature();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XConstructorCall#isExplicitConstructorCall <em>Explicit Constructor Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Explicit Constructor Call</em>'.
+	 * @see org.eclipse.xtext.xbase.XConstructorCall#isExplicitConstructorCall()
+	 * @see #getXConstructorCall()
+	 * @generated
+	 */
+	EAttribute getXConstructorCall_ExplicitConstructorCall();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XBooleanLiteral <em>XBoolean Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3461,6 +3481,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XCONSTRUCTOR_CALL__VALID_FEATURE = eINSTANCE.getXConstructorCall_ValidFeature();
+
+		/**
+		 * The meta object literal for the '<em><b>Explicit Constructor Call</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XCONSTRUCTOR_CALL__EXPLICIT_CONSTRUCTOR_CALL = eINSTANCE.getXConstructorCall_ExplicitConstructorCall();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl <em>XBoolean Literal</em>}' class.
