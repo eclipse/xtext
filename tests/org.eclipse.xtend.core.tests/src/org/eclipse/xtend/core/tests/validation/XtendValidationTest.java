@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.validation.IssueCodes;
@@ -42,6 +43,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,6 +57,9 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Inject
 	protected ValidationTestHelper helper;
+	
+	@Inject
+	private ReadAndWriteTracking readAndWriteTracking;
 	
 	private MapBasedPreferenceValues preferences;
 	
@@ -1342,6 +1347,28 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	@Test public void testUnusedFunction() throws Exception {
 		XtendClass clazz = clazz("class X { def private foo(String a, Integer b) }");
 		helper.assertWarning(clazz, XTEND_FUNCTION, UNUSED_PRIVATE_MEMBER, "method","foo(String, Integer)","never", "used");
+	}
+	
+	@Test public void testSyntheticallyUsedFunction() throws Exception {
+		XtendClass clazz = clazz("class X { def private String foo() {} def bar(){}}");
+		EObject eObject = clazz.eResource().getContents().get(1).eContents().get(2);
+		readAndWriteTracking.markReadAccess(eObject);
+		helper.assertNoIssues(clazz.eContainer());
+	}
+	
+	@Test public void testSyntheticallyUsedField() throws Exception {
+		XtendClass clazz = clazz("class X { String foo }");
+		EObject eObject = clazz.eResource().getContents().get(1).eContents().get(2);
+		readAndWriteTracking.markReadAccess(eObject);
+		helper.assertNoIssues(clazz.eContainer());
+	}
+	
+	@Test public void testSyntheticallyInitializedField() throws Exception {
+		XtendClass clazz = clazz("class X { final String foo }");
+		EObject eObject = clazz.eResource().getContents().get(1).eContents().get(2);
+		readAndWriteTracking.markReadAccess(eObject);
+		readAndWriteTracking.markInitialized(eObject);
+		helper.assertNoIssues(clazz.eContainer());
 	}
 	
 	@Test public void testUsedFunction() throws Exception {
