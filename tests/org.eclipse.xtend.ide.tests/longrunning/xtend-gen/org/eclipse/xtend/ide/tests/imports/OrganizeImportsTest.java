@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -888,7 +887,6 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     this.assertIsOrganizedTo(_builder, _builder_1);
   }
   
-  @Ignore
   @Test
   public void testAnonymousClass_1() {
     StringConcatenation _builder = new StringConcatenation();
