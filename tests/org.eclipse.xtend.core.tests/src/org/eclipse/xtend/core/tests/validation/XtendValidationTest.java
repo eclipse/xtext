@@ -726,6 +726,52 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(clazz);
 	}
 	
+	@Test public void testReturnTypeCompatibility_13() throws Exception {
+		XtendClass clazz = clazz(
+				"class C {\n" + 
+				"	def dispatch void minus(Object operand) {\n" + 
+				"	}\n" + 
+				"	def dispatch minus(Integer e) { return -e }\n" + 
+				"	def dispatch minus(Double e) { -e }\n" + 
+				"}");
+		 helper.assertError(clazz, XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE, "Incompatible return type of dispatch method. Expected double but was void");
+	}
+	
+	@Test public void testReturnTypeCompatibility_14() throws Exception {
+		XtendClass clazz = clazz(
+				"class C {\n" + 
+				"	def dispatch minus(Object operand) {\n" + 
+				"		return\n" + 
+				"	}\n" + 
+				"	def dispatch minus(Integer e) { return -e }\n" + 
+				"	def dispatch minus(Double e) { -e }\n" + 
+				"}");
+		helper.assertError(clazz, XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE, "Incompatible return type of dispatch method. Expected double but was void");
+	}
+	
+	@Test public void testReturnTypeCompatibility_15() throws Exception {
+		XtendClass clazz = clazz(
+				"class C {\n" + 
+				"	def dispatch void minus(Object operand) {\n" + 
+				"	}\n" + 
+				"	def dispatch minus(Integer e) { -e }\n" + 
+				"	def dispatch minus(Double e) { -e }\n" + 
+				"}");
+		helper.assertError(clazz, XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE, "Incompatible return type of dispatch method. Expected double but was void");
+	}
+	
+	@Test public void testReturnTypeCompatibility_16() throws Exception {
+		XtendClass clazz = clazz(
+				"class C {\n" + 
+				"	def dispatch minus(Object operand) {\n" + 
+				"		return\n" + 
+				"	}\n" + 
+				"	def dispatch minus(Integer e) { -e }\n" + 
+				"	def dispatch minus(Double e) { -e }\n" + 
+				"}");
+		helper.assertError(clazz, XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE, "Incompatible return type of dispatch method. Expected double but was void");
+	}
+	
 	@Test public void testThrowsClauseCompatibility_00() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo {" +
