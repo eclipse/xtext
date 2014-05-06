@@ -158,10 +158,6 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		binder.bind(IResourceDescriptions.class).to(ResourceSetBasedResourceDescriptions.class);
 	}
 
-	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
-		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
-	}
-	
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return SimpleNameProvider.class;
 	}
@@ -216,13 +212,25 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	static class IEncodingProviderDispatcher extends DispatchingProvider<IEncodingProvider>{}
 	
+	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
+	}
+	
 	public void configureIResourceDescriptionsLiveScope(Binder binder) {
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
 	}
 	
-	/**
-	 * @since 2.0
-	 */
+	/** @since 2.6 */
+	public void configureIResourceDescriptionsLiveModelScope(Binder binder) {
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_MODEL_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
+	}
+	
+	/** @since 2.6 */
+	public void configureIResourceDescriptionsPersisted(Binder binder) {
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to(ResourceSetBasedResourceDescriptions.class);
+	}
+	
+	/** @since 2.0 */
 	public void configureGenericSemanticSequencer(com.google.inject.Binder binder) {
 		binder.bind(ISemanticSequencer.class).annotatedWith(GenericSequencer.class).to(BacktrackingSemanticSequencer.class);
 	}

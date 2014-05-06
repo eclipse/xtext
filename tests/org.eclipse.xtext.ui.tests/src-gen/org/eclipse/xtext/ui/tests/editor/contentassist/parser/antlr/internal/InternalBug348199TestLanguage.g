@@ -1394,7 +1394,7 @@ ruleTimeDef3 returns [EObject current=null]
 
 
 
-RULE_NL : '\n';
+RULE_NL : '\r'? '\n';
 
 RULE_WS : (' '|'\t');
 
