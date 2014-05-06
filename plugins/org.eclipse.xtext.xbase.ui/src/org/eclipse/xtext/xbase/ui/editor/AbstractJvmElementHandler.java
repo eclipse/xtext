@@ -44,7 +44,7 @@ public abstract class AbstractJvmElementHandler extends AbstractHandler {
 					if (jvmIdentifiable != null) {
 						IJavaElement javaType = javaElementFinder.findElementFor(jvmIdentifiable);
 							if (javaType != null)
-								openPresentation(editor, javaType, null);
+								openPresentation(editor, javaType, jvmIdentifiable);
 					}
 					return null;
 				}
