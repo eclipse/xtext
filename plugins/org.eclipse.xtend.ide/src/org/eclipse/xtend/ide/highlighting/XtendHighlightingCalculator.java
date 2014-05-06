@@ -155,7 +155,9 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		if(annotationType != null && annotationType instanceof JvmAnnotationTarget && Iterables.any(((JvmAnnotationTarget) annotationType).getAnnotations(), new Predicate<JvmAnnotationReference>() {
 
 			public boolean apply(JvmAnnotationReference input) {
-				return input.getAnnotation().getIdentifier().equals(Active.class.getCanonicalName());
+				if(input.getAnnotation() != null && !input.getAnnotation().eIsProxy())
+					return input.getAnnotation().getIdentifier().equals(Active.class.getCanonicalName());
+				return false;
 			}
 		}))
 		{
