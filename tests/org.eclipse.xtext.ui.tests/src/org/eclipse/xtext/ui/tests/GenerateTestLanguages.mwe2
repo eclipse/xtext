@@ -175,7 +175,11 @@ Workflow {
 		}
 		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/TestLanguage.xtext"
-			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder {}
+			fragment = CompositeGeneratorFragment {
+				fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder auto-inject {}
+				fragment = scoping.ImportNamespacesScopingFragment {}
+				fragment = exporting.QualifiedNamesFragment {}
+			}
 		}
 		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/FoldingTestLanguage.xtext"
