@@ -1917,4 +1917,190 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testBug415770() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String str = \"\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String[] array = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("str === array");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INVALID_OPERAND_TYPES);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug415770_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String str = \"\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String[] array = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("str !== array");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INVALID_OPERAND_TYPES);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug415770_3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String str = \"\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String[] array = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("array === str");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INVALID_OPERAND_TYPES);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug415770_4() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String str = \"\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String[] array = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("array !== str");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INVALID_OPERAND_TYPES);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug415770_5() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String str = \"\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("str === \"SomeString\"");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug415770_6() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String str = \"\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("str !== \"SomeString\"");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug415770_7() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String[] array = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String[] array2 = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("array === array2");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug415770_8() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String[] array = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String[] array2 = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("array !== array2");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
