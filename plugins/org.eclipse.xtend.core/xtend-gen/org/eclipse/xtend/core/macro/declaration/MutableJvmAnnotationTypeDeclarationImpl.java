@@ -41,9 +41,17 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDeclarationImpl implements MutableAnnotationTypeDeclaration {
+  public void markAsRead() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
+    JvmAnnotationType _delegate = this.getDelegate();
+    _readAndWriteTracking.markReadAccess(_delegate);
+  }
+  
   public MutableMethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     MethodDeclaration _findDeclaredMethod = super.findDeclaredMethod(name, parameterTypes);
     return ((MutableMethodDeclaration) _findDeclaredMethod);

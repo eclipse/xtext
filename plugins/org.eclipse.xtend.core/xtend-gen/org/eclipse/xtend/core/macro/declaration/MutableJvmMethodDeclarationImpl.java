@@ -21,9 +21,17 @@ import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implements MutableMethodDeclaration {
+  public void markAsRead() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
+    JvmOperation _delegate = this.getDelegate();
+    _readAndWriteTracking.markReadAccess(_delegate);
+  }
+  
   public Iterable<? extends MutableParameterDeclaration> getParameters() {
     Iterable<? extends ParameterDeclaration> _parameters = super.getParameters();
     return ((Iterable<? extends MutableParameterDeclaration>) _parameters);

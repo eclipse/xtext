@@ -42,6 +42,7 @@ class LazyProcessor extends AbstractFieldProcessor {
 
 		// add a getter method which lazily initializes the field
 		field.declaringType.addMethod('get' + field.simpleName.toFirstUpper) [
+			field.markAsRead
 			returnType = field.type
 			body = ['''
 				if («field.simpleName»==null)

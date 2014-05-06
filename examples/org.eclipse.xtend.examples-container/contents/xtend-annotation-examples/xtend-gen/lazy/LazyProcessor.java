@@ -54,6 +54,7 @@ public class LazyProcessor extends AbstractFieldProcessor {
     String _plus_1 = ("get" + _firstUpper);
     final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
       public void apply(final MutableMethodDeclaration it) {
+        field.markAsRead();
         TypeReference _type = field.getType();
         it.setReturnType(_type);
         final CompilationStrategy _function = new CompilationStrategy() {

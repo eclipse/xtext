@@ -181,6 +181,7 @@ import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
@@ -280,6 +281,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Inject
   private FileLocations fileLocations;
   
+  @Inject
+  private ReadAndWriteTracking readAndWriteTracking;
+  
   private final ProblemSupport _problemSupport = new ProblemSupportImpl(this);
   
   public ProblemSupport getProblemSupport() {
@@ -338,6 +342,10 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public FileLocations getFileLocations() {
     return this.fileLocations;
+  }
+  
+  public ReadAndWriteTracking getReadAndWriteTracking() {
+    return this.readAndWriteTracking;
   }
   
   public Path getFilePath() {

@@ -3672,6 +3672,38 @@ public abstract class AbstractReusableActiveAnnotationTests {
   }
   
   @Test
+  public void testMarkReadAndInitialized() {
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/InitAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(InitProcessor)\n\t\t\t\tannotation Init { }\n\t\t\t\tclass InitProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tfield.setFinal(true)\n\t\t\t\t\t\t\tfield.markAsRead\n\t\t\t\t\t\t\tfield.markAsInitialized\n\t\t\t\t\t\t]\n\t\t\t\t\t\tannotatedTargetFields.head.declaringType.addConstructor [\n\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t«FOR f : annotatedTargetFields»\n\t\t\t\t\t\t\t\t\tthis.«f.simpleName» = \"foo\";\n\t\t\t\t\t\t\t\t«ENDFOR»\n\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myusercode");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@myannotation.Init String myField");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
+        ProblemSupport _problemSupport = it.getProblemSupport();
+        Iterable<? extends MutableFieldDeclaration> _declaredFields = clazz.getDeclaredFields();
+        MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
+        List<Problem> _problems = _problemSupport.getProblems(_head);
+        boolean _isEmpty = _problems.isEmpty();
+        Assert.assertTrue(_isEmpty);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
   public void testPropertyAnnotation() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/PropertyAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(typeof(PropertyProcessor))\n\t\t\t\tannotation Property2 { }\n\t\t\t\tclass PropertyProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tval declaringType = field.declaringType \n\t\t\t\t\t\t\tdeclaringType.addMethod(field.getterName) [\n\t\t\t\t\t\t\t\treturnType = field.type\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\treturn this.«field.simpleName»;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\tdeclaringType.addMethod(\'set\'+field.simpleName.toFirstUpper) [\n\t\t\t\t\t\t\t\taddParameter(field.simpleName, field.type)\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\tthis.«field.simpleName» = «field.simpleName»;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t\tdef private String getterName(MutableFieldDeclaration field) {\n\t\t\t\t\t\treturn \'get\'+field.simpleName.toFirstUpper\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
     StringConcatenation _builder = new StringConcatenation();

@@ -113,6 +113,7 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.XListLiteral
+import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -171,6 +172,7 @@ class CompilationUnitImpl implements CompilationUnit {
 
 	@Inject AbstractFileSystemSupport fileSystemSupport
 	@Inject FileLocations fileLocations
+	@Inject ReadAndWriteTracking readAndWriteTracking
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
@@ -210,6 +212,10 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def FileLocations getFileLocations() {
 		fileLocations
+	}
+	
+	def ReadAndWriteTracking getReadAndWriteTracking() {
+		return readAndWriteTracking;
 	}
 	
 	override Path getFilePath() {
