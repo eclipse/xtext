@@ -1546,6 +1546,21 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 	
 	@Check
+	public void checkOperandTypesForTripleEquals(XBinaryOperation binaryOperation) {
+		if(isTripleEqualsOperation(binaryOperation)){
+			LightweightTypeReference left = getActualType(binaryOperation.getLeftOperand());
+			LightweightTypeReference right = getActualType(binaryOperation.getRightOperand());
+			if(!left.isAssignableFrom(right))
+				error("Incompatible operand types " + left.getSimpleName() + " and " + right.getSimpleName(), null, INVALID_OPERAND_TYPES);
+		}
+	}
+	
+	protected boolean isTripleEqualsOperation(XBinaryOperation binaryOperation){
+		String syntax = binaryOperation.getConcreteSyntaxFeatureName();
+		return syntax.equals(OperatorMapping.TRIPLE_EQUALS.toString()) || syntax.equals(OperatorMapping.TRIPLE_NOT_EQUALS.toString());
+	}
+	
+	@Check
 	public void checkAssignment(XPostfixOperation postfixOperation) {
 		if (expressionHelper.isGetAndAssign(postfixOperation)) {
 			XExpression firstArgument = postfixOperation.getActualArguments().get(0);
