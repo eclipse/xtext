@@ -2530,4 +2530,107 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.newLine();
     this.compilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testBug434224_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val bar = new Object");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if (bar instanceof Byte) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("bar as char");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("char _xblockexpression = (char) 0;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("final Object bar = new Object();");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("char _xifexpression = (char) 0;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if ((bar instanceof Byte)) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xifexpression = ((char) ((Byte) bar).byteValue());");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = _xifexpression;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug434224_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch bar : new Object {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Byte: bar as char");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("char _switchResult = (char) 0;");
+      _builder_1.newLine();
+      _builder_1.append("Object _object = new Object();");
+      _builder_1.newLine();
+      _builder_1.append("final Object bar = _object;");
+      _builder_1.newLine();
+      _builder_1.append("boolean _matched = false;");
+      _builder_1.newLine();
+      _builder_1.append("if (!_matched) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if (bar instanceof Byte) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_matched=true;");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_switchResult = ((char) ((Byte) bar).byteValue());");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _switchResult;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

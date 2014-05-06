@@ -1230,5 +1230,50 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(com.google.common.collect.Lists.<Boolean>newArrayList(true, false, true)), _function);
 		''')
 	}
+	
+	@Test def void testBug434224_01() {
+		'''
+			{
+				val bar = new Object
+				if (bar instanceof Byte) {
+					bar as char
+				}
+			}
+		'''.compilesTo('''
+			char _xblockexpression = (char) 0;
+			{
+			  final Object bar = new Object();
+			  char _xifexpression = (char) 0;
+			  if ((bar instanceof Byte)) {
+			    _xifexpression = ((char) ((Byte) bar).byteValue());
+			  }
+			  _xblockexpression = _xifexpression;
+			}
+			return _xblockexpression;
+		''')
+	}
+	
+	@Test def void testBug434224_02() {
+		'''
+			{
+				switch bar : new Object {
+					Byte: bar as char
+				}
+			}
+		'''.compilesTo('''
+			char _switchResult = (char) 0;
+			Object _object = new Object();
+			final Object bar = _object;
+			boolean _matched = false;
+			if (!_matched) {
+			  if (bar instanceof Byte) {
+			    _matched=true;
+			    _switchResult = ((char) ((Byte) bar).byteValue());
+			  }
+			}
+			return _switchResult;
+		''')
+	}
+
 }
 
