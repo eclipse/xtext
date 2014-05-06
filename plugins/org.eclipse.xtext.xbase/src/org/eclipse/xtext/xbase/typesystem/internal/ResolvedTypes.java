@@ -255,6 +255,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		boolean voidSeen = false;
 		ITypeExpectation expectation = null;
 		boolean allNoImplicitReturn = true;
+		boolean allThrownException = true;
 		EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
 	}
 	
@@ -337,6 +338,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				mergeData.references.add(reference);
 			}
 			mergeData.allNoImplicitReturn = mergeData.allNoImplicitReturn && value.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN); 
+			mergeData.allThrownException = mergeData.allThrownException && value.getConformanceHints().contains(ConformanceHint.THROWN_EXCEPTION); 
 			mergeData.mergedHints.addAll(value.getConformanceHints());
 			if (mergeData.expectation == null) {
 				mergeData.expectation = value.getExpectation();
@@ -349,6 +351,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 		if (!mergeData.allNoImplicitReturn) {
 			mergeData.mergedHints.remove(ConformanceHint.NO_IMPLICIT_RETURN);
+		}
+		if (!mergeData.allThrownException) {
+			mergeData.mergedHints.remove(ConformanceHint.THROWN_EXCEPTION);
 		}
 	}
 

@@ -1122,7 +1122,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		ITypeComputationState expressionState = state.withExpectation(throwable);
 		ITypeComputationResult types = expressionState.computeTypes(object.getExpression());
 		LightweightTypeReference thrownException = types.getActualExpressionType();
-		state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN);
+		state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN, ConformanceHint.THROWN_EXCEPTION);
 		
 		if (thrownException != null && !thrownException.isUnknown()) {
 			if (!state.isIgnored(IssueCodes.UNHANDLED_EXCEPTION) && thrownException.isSubtypeOf(Throwable.class)
