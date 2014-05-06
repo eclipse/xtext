@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.impl;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 
 import com.google.inject.Inject;
@@ -20,10 +21,11 @@ import com.google.inject.name.Named;
  */
 public class PersistentDataAwareDirtyResource extends DocumentBasedDirtyResource {
 
-	public static final String PERSISTED_DESCRIPTIONS = "org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource.PERSISTED_DESCRIPTIONS";
+	@Deprecated // use ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS
+	public static final String PERSISTED_DESCRIPTIONS = ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS;
 	
 	@Inject
-	@Named(PERSISTED_DESCRIPTIONS)
+	@Named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)
 	private IResourceDescriptions resourceDesriptions;
 	
 	@Override

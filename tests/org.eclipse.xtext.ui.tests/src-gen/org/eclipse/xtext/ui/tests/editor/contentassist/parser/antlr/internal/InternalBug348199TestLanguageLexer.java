@@ -404,9 +404,27 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_NL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1397:9: ( '\\n' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1397:11: '\\n'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1397:9: ( ( '\\r' )? '\\n' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1397:11: ( '\\r' )? '\\n'
             {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1397:11: ( '\\r' )?
+            int alt1=2;
+            int LA1_0 = input.LA(1);
+
+            if ( (LA1_0=='\r') ) {
+                alt1=1;
+            }
+            switch (alt1) {
+                case 1 :
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1397:11: '\\r'
+                    {
+                    match('\r'); 
+
+                    }
+                    break;
+
+            }
+
             match('\n'); 
 
             }
@@ -456,13 +474,13 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1401:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1401:11: ( '^' )?
-            int alt1=2;
-            int LA1_0 = input.LA(1);
+            int alt2=2;
+            int LA2_0 = input.LA(1);
 
-            if ( (LA1_0=='^') ) {
-                alt1=1;
+            if ( (LA2_0=='^') ) {
+                alt2=1;
             }
-            switch (alt1) {
+            switch (alt2) {
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1401:11: '^'
                     {
@@ -483,17 +501,17 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
                 throw mse;}
 
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1401:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
-            loop2:
+            loop3:
             do {
-                int alt2=2;
-                int LA2_0 = input.LA(1);
+                int alt3=2;
+                int LA3_0 = input.LA(1);
 
-                if ( ((LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='Z')||LA2_0=='_'||(LA2_0>='a' && LA2_0<='z')) ) {
-                    alt2=1;
+                if ( ((LA3_0>='0' && LA3_0<='9')||(LA3_0>='A' && LA3_0<='Z')||LA3_0=='_'||(LA3_0>='a' && LA3_0<='z')) ) {
+                    alt3=1;
                 }
 
 
-                switch (alt2) {
+                switch (alt3) {
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:
             	    {
@@ -511,7 +529,7 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop2;
+            	    break loop3;
                 }
             } while (true);
 
@@ -535,18 +553,18 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1403:12: ( '0' .. '9' )+
             {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1403:12: ( '0' .. '9' )+
-            int cnt3=0;
-            loop3:
+            int cnt4=0;
+            loop4:
             do {
-                int alt3=2;
-                int LA3_0 = input.LA(1);
+                int alt4=2;
+                int LA4_0 = input.LA(1);
 
-                if ( ((LA3_0>='0' && LA3_0<='9')) ) {
-                    alt3=1;
+                if ( ((LA4_0>='0' && LA4_0<='9')) ) {
+                    alt4=1;
                 }
 
 
-                switch (alt3) {
+                switch (alt4) {
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1403:13: '0' .. '9'
             	    {
@@ -556,12 +574,12 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt3 >= 1 ) break loop3;
+            	    if ( cnt4 >= 1 ) break loop4;
                         EarlyExitException eee =
-                            new EarlyExitException(3, input);
+                            new EarlyExitException(4, input);
                         throw eee;
                 }
-                cnt3++;
+                cnt4++;
             } while (true);
 
 
@@ -584,41 +602,41 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1405:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1405:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            int alt6=2;
-            int LA6_0 = input.LA(1);
+            int alt7=2;
+            int LA7_0 = input.LA(1);
 
-            if ( (LA6_0=='\"') ) {
-                alt6=1;
+            if ( (LA7_0=='\"') ) {
+                alt7=1;
             }
-            else if ( (LA6_0=='\'') ) {
-                alt6=2;
+            else if ( (LA7_0=='\'') ) {
+                alt7=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 6, 0, input);
+                    new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
             }
-            switch (alt6) {
+            switch (alt7) {
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1405:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1405:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
-                    loop4:
+                    loop5:
                     do {
-                        int alt4=3;
-                        int LA4_0 = input.LA(1);
+                        int alt5=3;
+                        int LA5_0 = input.LA(1);
 
-                        if ( (LA4_0=='\\') ) {
-                            alt4=1;
+                        if ( (LA5_0=='\\') ) {
+                            alt5=1;
                         }
-                        else if ( ((LA4_0>='\u0000' && LA4_0<='!')||(LA4_0>='#' && LA4_0<='[')||(LA4_0>=']' && LA4_0<='\uFFFF')) ) {
-                            alt4=2;
+                        else if ( ((LA5_0>='\u0000' && LA5_0<='!')||(LA5_0>='#' && LA5_0<='[')||(LA5_0>=']' && LA5_0<='\uFFFF')) ) {
+                            alt5=2;
                         }
 
 
-                        switch (alt4) {
+                        switch (alt5) {
                     	case 1 :
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1405:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
@@ -652,7 +670,7 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop4;
+                    	    break loop5;
                         }
                     } while (true);
 
@@ -665,20 +683,20 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
                     {
                     match('\''); 
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1405:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
-                    loop5:
+                    loop6:
                     do {
-                        int alt5=3;
-                        int LA5_0 = input.LA(1);
+                        int alt6=3;
+                        int LA6_0 = input.LA(1);
 
-                        if ( (LA5_0=='\\') ) {
-                            alt5=1;
+                        if ( (LA6_0=='\\') ) {
+                            alt6=1;
                         }
-                        else if ( ((LA5_0>='\u0000' && LA5_0<='&')||(LA5_0>='(' && LA5_0<='[')||(LA5_0>=']' && LA5_0<='\uFFFF')) ) {
-                            alt5=2;
+                        else if ( ((LA6_0>='\u0000' && LA6_0<='&')||(LA6_0>='(' && LA6_0<='[')||(LA6_0>=']' && LA6_0<='\uFFFF')) ) {
+                            alt6=2;
                         }
 
 
-                        switch (alt5) {
+                        switch (alt6) {
                     	case 1 :
                     	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1405:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
@@ -712,7 +730,7 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop5;
+                    	    break loop6;
                         }
                     } while (true);
 
@@ -745,29 +763,29 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
             match("/*"); 
 
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1407:24: ( options {greedy=false; } : . )*
-            loop7:
+            loop8:
             do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
+                int alt8=2;
+                int LA8_0 = input.LA(1);
 
-                if ( (LA7_0=='*') ) {
-                    int LA7_1 = input.LA(2);
+                if ( (LA8_0=='*') ) {
+                    int LA8_1 = input.LA(2);
 
-                    if ( (LA7_1=='/') ) {
-                        alt7=2;
+                    if ( (LA8_1=='/') ) {
+                        alt8=2;
                     }
-                    else if ( ((LA7_1>='\u0000' && LA7_1<='.')||(LA7_1>='0' && LA7_1<='\uFFFF')) ) {
-                        alt7=1;
+                    else if ( ((LA8_1>='\u0000' && LA8_1<='.')||(LA8_1>='0' && LA8_1<='\uFFFF')) ) {
+                        alt8=1;
                     }
 
 
                 }
-                else if ( ((LA7_0>='\u0000' && LA7_0<=')')||(LA7_0>='+' && LA7_0<='\uFFFF')) ) {
-                    alt7=1;
+                else if ( ((LA8_0>='\u0000' && LA8_0<=')')||(LA8_0>='+' && LA8_0<='\uFFFF')) ) {
+                    alt8=1;
                 }
 
 
-                switch (alt7) {
+                switch (alt8) {
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1407:52: .
             	    {
@@ -777,7 +795,7 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop7;
+            	    break loop8;
                 }
             } while (true);
 
@@ -805,17 +823,17 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
             match("//"); 
 
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1409:24: (~ ( ( '\\n' | '\\r' ) ) )*
-            loop8:
+            loop9:
             do {
-                int alt8=2;
-                int LA8_0 = input.LA(1);
+                int alt9=2;
+                int LA9_0 = input.LA(1);
 
-                if ( ((LA8_0>='\u0000' && LA8_0<='\t')||(LA8_0>='\u000B' && LA8_0<='\f')||(LA8_0>='\u000E' && LA8_0<='\uFFFF')) ) {
-                    alt8=1;
+                if ( ((LA9_0>='\u0000' && LA9_0<='\t')||(LA9_0>='\u000B' && LA9_0<='\f')||(LA9_0>='\u000E' && LA9_0<='\uFFFF')) ) {
+                    alt9=1;
                 }
 
 
-                switch (alt8) {
+                switch (alt9) {
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1409:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
@@ -833,29 +851,29 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop8;
+            	    break loop9;
                 }
             } while (true);
 
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1409:40: ( ( '\\r' )? '\\n' )?
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA10_0=='\n'||LA10_0=='\r') ) {
-                alt10=1;
+            if ( (LA11_0=='\n'||LA11_0=='\r') ) {
+                alt11=1;
             }
-            switch (alt10) {
+            switch (alt11) {
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1409:41: ( '\\r' )? '\\n'
                     {
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1409:41: ( '\\r' )?
-                    int alt9=2;
-                    int LA9_0 = input.LA(1);
+                    int alt10=2;
+                    int LA10_0 = input.LA(1);
 
-                    if ( (LA9_0=='\r') ) {
-                        alt9=1;
+                    if ( (LA10_0=='\r') ) {
+                        alt10=1;
                     }
-                    switch (alt9) {
+                    switch (alt10) {
                         case 1 :
                             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1409:41: '\\r'
                             {
@@ -906,9 +924,9 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
 
     public void mTokens() throws RecognitionException {
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | RULE_NL | RULE_WS | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_ANY_OTHER )
-        int alt11=25;
-        alt11 = dfa11.predict(input);
-        switch (alt11) {
+        int alt12=25;
+        alt12 = dfa12.predict(input);
+        switch (alt12) {
             case 1 :
                 // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1:10: T__12
                 {
@@ -1090,94 +1108,94 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
     }
 
 
-    protected DFA11 dfa11 = new DFA11(this);
-    static final String DFA11_eotS =
-        "\1\uffff\2\33\1\35\1\uffff\1\33\1\uffff\1\42\1\43\1\44\1\45\1\46"+
-        "\1\47\1\50\3\33\2\uffff\1\31\2\uffff\3\31\1\uffff\1\33\1\uffff\1"+
-        "\33\3\uffff\1\33\10\uffff\3\33\5\uffff\11\33\1\100\5\33\1\uffff"+
-        "\2\33\1\110\2\33\1\113\1\33\1\uffff\2\33\1\uffff\6\33\1\125\1\127"+
-        "\1\33\1\uffff\1\33\1\uffff\2\33\1\134\1\33\1\uffff\1\33\1\137\1"+
+    protected DFA12 dfa12 = new DFA12(this);
+    static final String DFA12_eotS =
+        "\1\uffff\2\34\1\36\1\uffff\1\34\1\uffff\1\43\1\44\1\45\1\46\1\47"+
+        "\1\50\1\51\3\34\1\32\2\uffff\1\32\2\uffff\3\32\1\uffff\1\34\1\uffff"+
+        "\1\34\3\uffff\1\34\10\uffff\3\34\5\uffff\11\34\1\101\5\34\1\uffff"+
+        "\2\34\1\111\2\34\1\114\1\34\1\uffff\2\34\1\uffff\6\34\1\126\1\130"+
+        "\1\34\1\uffff\1\34\1\uffff\2\34\1\135\1\34\1\uffff\1\34\1\140\1"+
         "\uffff";
-    static final String DFA11_eofS =
-        "\140\uffff";
-    static final String DFA11_minS =
-        "\1\0\1\145\1\151\1\60\1\uffff\1\164\1\uffff\7\60\2\165\1\145\2\uffff"+
-        "\1\101\2\uffff\2\0\1\52\1\uffff\1\146\1\uffff\1\155\3\uffff\1\150"+
-        "\10\uffff\1\154\1\147\1\160\5\uffff\1\151\2\145\1\171\1\165\1\164"+
-        "\1\156\1\160\1\162\1\60\1\163\4\145\1\uffff\1\164\1\155\1\60\1\162"+
-        "\1\154\1\60\1\142\1\uffff\1\151\1\145\1\uffff\1\145\1\157\1\155"+
-        "\1\162\1\144\1\145\2\60\1\156\1\uffff\1\156\1\uffff\1\164\1\141"+
-        "\1\60\1\155\1\uffff\1\145\1\60\1\uffff";
-    static final String DFA11_maxS =
+    static final String DFA12_eofS =
+        "\141\uffff";
+    static final String DFA12_minS =
+        "\1\0\1\145\1\151\1\60\1\uffff\1\164\1\uffff\7\60\2\165\1\145\1\12"+
+        "\2\uffff\1\101\2\uffff\2\0\1\52\1\uffff\1\146\1\uffff\1\155\3\uffff"+
+        "\1\150\10\uffff\1\154\1\147\1\160\5\uffff\1\151\2\145\1\171\1\165"+
+        "\1\164\1\156\1\160\1\162\1\60\1\163\4\145\1\uffff\1\164\1\155\1"+
+        "\60\1\162\1\154\1\60\1\142\1\uffff\1\151\1\145\1\uffff\1\145\1\157"+
+        "\1\155\1\162\1\144\1\145\2\60\1\156\1\uffff\1\156\1\uffff\1\164"+
+        "\1\141\1\60\1\155\1\uffff\1\145\1\60\1\uffff";
+    static final String DFA12_maxS =
         "\1\uffff\1\145\1\151\1\71\1\uffff\1\164\1\uffff\7\71\2\165\1\145"+
-        "\2\uffff\1\172\2\uffff\2\uffff\1\57\1\uffff\1\146\1\uffff\1\155"+
-        "\3\uffff\1\150\10\uffff\1\154\1\147\1\160\5\uffff\1\151\2\145\1"+
-        "\171\1\165\1\164\1\156\1\160\1\162\1\172\1\163\4\145\1\uffff\1\164"+
-        "\1\155\1\172\1\162\1\154\1\172\1\142\1\uffff\1\151\1\145\1\uffff"+
+        "\1\12\2\uffff\1\172\2\uffff\2\uffff\1\57\1\uffff\1\146\1\uffff\1"+
+        "\155\3\uffff\1\150\10\uffff\1\154\1\147\1\160\5\uffff\1\151\2\145"+
+        "\1\171\1\165\1\164\1\156\1\160\1\162\1\172\1\163\4\145\1\uffff\1"+
+        "\164\1\155\1\172\1\162\1\154\1\172\1\142\1\uffff\1\151\1\145\1\uffff"+
         "\1\145\1\157\1\155\1\162\1\144\1\145\2\172\1\156\1\uffff\1\156\1"+
         "\uffff\1\164\1\141\1\172\1\155\1\uffff\1\145\1\172\1\uffff";
-    static final String DFA11_acceptS =
-        "\4\uffff\1\4\1\uffff\1\7\12\uffff\1\22\1\23\1\uffff\1\24\1\25\3"+
+    static final String DFA12_acceptS =
+        "\4\uffff\1\4\1\uffff\1\7\13\uffff\1\22\1\23\1\uffff\1\24\1\25\3"+
         "\uffff\1\31\1\uffff\1\24\1\uffff\1\3\1\25\1\4\1\uffff\1\7\1\10\1"+
         "\11\1\12\1\13\1\14\1\15\1\16\3\uffff\1\22\1\23\1\26\1\27\1\30\17"+
         "\uffff\1\17\7\uffff\1\1\2\uffff\1\20\11\uffff\1\21\1\uffff\1\2\4"+
         "\uffff\1\6\2\uffff\1\5";
-    static final String DFA11_specialS =
-        "\1\2\25\uffff\1\0\1\1\110\uffff}>";
-    static final String[] DFA11_transitionS = {
-            "\11\31\1\22\1\21\25\31\1\22\1\31\1\26\4\31\1\27\7\31\1\30\1"+
-            "\25\1\3\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\25\7\31\32\24\3"+
-            "\31\1\23\1\24\1\31\1\17\2\24\1\1\5\24\1\16\4\24\1\5\3\24\1\20"+
-            "\1\2\6\24\1\4\1\31\1\6\uff82\31",
-            "\1\32",
-            "\1\34",
-            "\12\36",
+    static final String DFA12_specialS =
+        "\1\1\26\uffff\1\0\1\2\110\uffff}>";
+    static final String[] DFA12_transitionS = {
+            "\11\32\1\23\1\22\2\32\1\21\22\32\1\23\1\32\1\27\4\32\1\30\7"+
+            "\32\1\31\1\26\1\3\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\26\7\32"+
+            "\32\25\3\32\1\24\1\25\1\32\1\17\2\25\1\1\5\25\1\16\4\25\1\5"+
+            "\3\25\1\20\1\2\6\25\1\4\1\32\1\6\uff82\32",
+            "\1\33",
+            "\1\35",
+            "\12\37",
             "",
-            "\1\40",
+            "\1\41",
             "",
-            "\12\36",
-            "\12\36",
-            "\12\36",
-            "\12\36",
-            "\12\36",
-            "\12\36",
-            "\12\36",
-            "\1\51",
+            "\12\37",
+            "\12\37",
+            "\12\37",
+            "\12\37",
+            "\12\37",
+            "\12\37",
+            "\12\37",
             "\1\52",
             "\1\53",
+            "\1\54",
+            "\1\55",
             "",
             "",
-            "\32\33\4\uffff\1\33\1\uffff\32\33",
+            "\32\34\4\uffff\1\34\1\uffff\32\34",
             "",
             "",
-            "\0\56",
-            "\0\56",
-            "\1\57\4\uffff\1\60",
-            "",
-            "\1\61",
+            "\0\57",
+            "\0\57",
+            "\1\60\4\uffff\1\61",
             "",
             "\1\62",
-            "",
-            "",
             "",
             "\1\63",
             "",
             "",
             "",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\64",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
             "\1\65",
             "\1\66",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\67",
+            "",
+            "",
+            "",
+            "",
+            "",
             "\1\70",
             "\1\71",
             "\1\72",
@@ -1186,74 +1204,75 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
             "\1\75",
             "\1\76",
             "\1\77",
-            "\12\33\7\uffff\32\33\4\uffff\1\33\1\uffff\32\33",
-            "\1\101",
+            "\1\100",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
             "\1\102",
             "\1\103",
             "\1\104",
             "\1\105",
-            "",
             "\1\106",
+            "",
             "\1\107",
-            "\12\33\7\uffff\32\33\4\uffff\1\33\1\uffff\32\33",
-            "\1\111",
+            "\1\110",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
             "\1\112",
-            "\12\33\7\uffff\32\33\4\uffff\1\33\1\uffff\32\33",
-            "\1\114",
-            "",
+            "\1\113",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
             "\1\115",
-            "\1\116",
             "",
+            "\1\116",
             "\1\117",
+            "",
             "\1\120",
             "\1\121",
             "\1\122",
             "\1\123",
             "\1\124",
-            "\12\33\7\uffff\32\33\4\uffff\1\33\1\uffff\32\33",
-            "\12\33\7\uffff\32\33\4\uffff\1\126\1\uffff\32\33",
-            "\1\130",
-            "",
+            "\1\125",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
+            "\12\34\7\uffff\32\34\4\uffff\1\127\1\uffff\32\34",
             "\1\131",
             "",
             "\1\132",
-            "\1\133",
-            "\12\33\7\uffff\32\33\4\uffff\1\33\1\uffff\32\33",
-            "\1\135",
             "",
+            "\1\133",
+            "\1\134",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
             "\1\136",
-            "\12\33\7\uffff\32\33\4\uffff\1\33\1\uffff\32\33",
+            "",
+            "\1\137",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
             ""
     };
 
-    static final short[] DFA11_eot = DFA.unpackEncodedString(DFA11_eotS);
-    static final short[] DFA11_eof = DFA.unpackEncodedString(DFA11_eofS);
-    static final char[] DFA11_min = DFA.unpackEncodedStringToUnsignedChars(DFA11_minS);
-    static final char[] DFA11_max = DFA.unpackEncodedStringToUnsignedChars(DFA11_maxS);
-    static final short[] DFA11_accept = DFA.unpackEncodedString(DFA11_acceptS);
-    static final short[] DFA11_special = DFA.unpackEncodedString(DFA11_specialS);
-    static final short[][] DFA11_transition;
+    static final short[] DFA12_eot = DFA.unpackEncodedString(DFA12_eotS);
+    static final short[] DFA12_eof = DFA.unpackEncodedString(DFA12_eofS);
+    static final char[] DFA12_min = DFA.unpackEncodedStringToUnsignedChars(DFA12_minS);
+    static final char[] DFA12_max = DFA.unpackEncodedStringToUnsignedChars(DFA12_maxS);
+    static final short[] DFA12_accept = DFA.unpackEncodedString(DFA12_acceptS);
+    static final short[] DFA12_special = DFA.unpackEncodedString(DFA12_specialS);
+    static final short[][] DFA12_transition;
 
     static {
-        int numStates = DFA11_transitionS.length;
-        DFA11_transition = new short[numStates][];
+        int numStates = DFA12_transitionS.length;
+        DFA12_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA11_transition[i] = DFA.unpackEncodedString(DFA11_transitionS[i]);
+            DFA12_transition[i] = DFA.unpackEncodedString(DFA12_transitionS[i]);
         }
     }
 
-    static class DFA11 extends DFA {
+    static class DFA12 extends DFA {
 
-        public DFA11(BaseRecognizer recognizer) {
+        public DFA12(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 11;
-            this.eot = DFA11_eot;
-            this.eof = DFA11_eof;
-            this.min = DFA11_min;
-            this.max = DFA11_max;
-            this.accept = DFA11_accept;
-            this.special = DFA11_special;
-            this.transition = DFA11_transition;
+            this.decisionNumber = 12;
+            this.eot = DFA12_eot;
+            this.eof = DFA12_eof;
+            this.min = DFA12_min;
+            this.max = DFA12_max;
+            this.accept = DFA12_accept;
+            this.special = DFA12_special;
+            this.transition = DFA12_transition;
         }
         public String getDescription() {
             return "1:1: Tokens : ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | RULE_NL | RULE_WS | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_ANY_OTHER );";
@@ -1263,84 +1282,86 @@ public class InternalBug348199TestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA11_22 = input.LA(1);
+                        int LA12_23 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA11_22>='\u0000' && LA11_22<='\uFFFF')) ) {s = 46;}
+                        if ( ((LA12_23>='\u0000' && LA12_23<='\uFFFF')) ) {s = 47;}
 
-                        else s = 25;
+                        else s = 26;
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA11_23 = input.LA(1);
+                        int LA12_0 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA11_23>='\u0000' && LA11_23<='\uFFFF')) ) {s = 46;}
+                        if ( (LA12_0=='d') ) {s = 1;}
 
-                        else s = 25;
+                        else if ( (LA12_0=='t') ) {s = 2;}
+
+                        else if ( (LA12_0=='1') ) {s = 3;}
+
+                        else if ( (LA12_0=='{') ) {s = 4;}
+
+                        else if ( (LA12_0=='o') ) {s = 5;}
+
+                        else if ( (LA12_0=='}') ) {s = 6;}
+
+                        else if ( (LA12_0=='2') ) {s = 7;}
+
+                        else if ( (LA12_0=='3') ) {s = 8;}
+
+                        else if ( (LA12_0=='4') ) {s = 9;}
+
+                        else if ( (LA12_0=='5') ) {s = 10;}
+
+                        else if ( (LA12_0=='6') ) {s = 11;}
+
+                        else if ( (LA12_0=='7') ) {s = 12;}
+
+                        else if ( (LA12_0=='8') ) {s = 13;}
+
+                        else if ( (LA12_0=='j') ) {s = 14;}
+
+                        else if ( (LA12_0=='a') ) {s = 15;}
+
+                        else if ( (LA12_0=='s') ) {s = 16;}
+
+                        else if ( (LA12_0=='\r') ) {s = 17;}
+
+                        else if ( (LA12_0=='\n') ) {s = 18;}
+
+                        else if ( (LA12_0=='\t'||LA12_0==' ') ) {s = 19;}
+
+                        else if ( (LA12_0=='^') ) {s = 20;}
+
+                        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='b' && LA12_0<='c')||(LA12_0>='e' && LA12_0<='i')||(LA12_0>='k' && LA12_0<='n')||(LA12_0>='p' && LA12_0<='r')||(LA12_0>='u' && LA12_0<='z')) ) {s = 21;}
+
+                        else if ( (LA12_0=='0'||LA12_0=='9') ) {s = 22;}
+
+                        else if ( (LA12_0=='\"') ) {s = 23;}
+
+                        else if ( (LA12_0=='\'') ) {s = 24;}
+
+                        else if ( (LA12_0=='/') ) {s = 25;}
+
+                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 26;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA11_0 = input.LA(1);
+                        int LA12_24 = input.LA(1);
 
                         s = -1;
-                        if ( (LA11_0=='d') ) {s = 1;}
+                        if ( ((LA12_24>='\u0000' && LA12_24<='\uFFFF')) ) {s = 47;}
 
-                        else if ( (LA11_0=='t') ) {s = 2;}
-
-                        else if ( (LA11_0=='1') ) {s = 3;}
-
-                        else if ( (LA11_0=='{') ) {s = 4;}
-
-                        else if ( (LA11_0=='o') ) {s = 5;}
-
-                        else if ( (LA11_0=='}') ) {s = 6;}
-
-                        else if ( (LA11_0=='2') ) {s = 7;}
-
-                        else if ( (LA11_0=='3') ) {s = 8;}
-
-                        else if ( (LA11_0=='4') ) {s = 9;}
-
-                        else if ( (LA11_0=='5') ) {s = 10;}
-
-                        else if ( (LA11_0=='6') ) {s = 11;}
-
-                        else if ( (LA11_0=='7') ) {s = 12;}
-
-                        else if ( (LA11_0=='8') ) {s = 13;}
-
-                        else if ( (LA11_0=='j') ) {s = 14;}
-
-                        else if ( (LA11_0=='a') ) {s = 15;}
-
-                        else if ( (LA11_0=='s') ) {s = 16;}
-
-                        else if ( (LA11_0=='\n') ) {s = 17;}
-
-                        else if ( (LA11_0=='\t'||LA11_0==' ') ) {s = 18;}
-
-                        else if ( (LA11_0=='^') ) {s = 19;}
-
-                        else if ( ((LA11_0>='A' && LA11_0<='Z')||LA11_0=='_'||(LA11_0>='b' && LA11_0<='c')||(LA11_0>='e' && LA11_0<='i')||(LA11_0>='k' && LA11_0<='n')||(LA11_0>='p' && LA11_0<='r')||(LA11_0>='u' && LA11_0<='z')) ) {s = 20;}
-
-                        else if ( (LA11_0=='0'||LA11_0=='9') ) {s = 21;}
-
-                        else if ( (LA11_0=='\"') ) {s = 22;}
-
-                        else if ( (LA11_0=='\'') ) {s = 23;}
-
-                        else if ( (LA11_0=='/') ) {s = 24;}
-
-                        else if ( ((LA11_0>='\u0000' && LA11_0<='\b')||(LA11_0>='\u000B' && LA11_0<='\u001F')||LA11_0=='!'||(LA11_0>='#' && LA11_0<='&')||(LA11_0>='(' && LA11_0<='.')||(LA11_0>=':' && LA11_0<='@')||(LA11_0>='[' && LA11_0<=']')||LA11_0=='`'||LA11_0=='|'||(LA11_0>='~' && LA11_0<='\uFFFF')) ) {s = 25;}
+                        else s = 26;
 
                         if ( s>=0 ) return s;
                         break;
             }
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 11, _s, input);
+                new NoViableAltException(getDescription(), 12, _s, input);
             error(nvae);
             throw nvae;
         }

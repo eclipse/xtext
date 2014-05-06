@@ -41,7 +41,7 @@ import com.google.inject.Inject;
  * @since 2.1
  */
 public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDescriptions {
-
+	
 	@Inject
 	private ResourceSetBasedResourceDescriptions localDescriptions;
 
@@ -151,6 +151,34 @@ public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDe
 		if (localDescriptions.hasDescription(resourceURI))
 			return localDescriptions.getExportedObjectsByObject(object);
 		return globalDescriptions.getExportedObjectsByObject(object);
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public IResourceDescriptions getLocalDescriptions() {
+		return localDescriptions;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public IResourceDescriptions getGlobalDescriptions() {
+		return globalDescriptions;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void setGlobalDescriptions(IResourceDescriptions globalDescriptions) {
+		this.globalDescriptions = globalDescriptions;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void setLocalDescriptions(ResourceSetBasedResourceDescriptions localDescriptions) {
+		this.localDescriptions = localDescriptions;
 	}
 
 }
