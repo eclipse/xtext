@@ -18,13 +18,14 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -48,13 +49,22 @@ public class StaticFeatureOnTypeLiteralScope extends StaticFeatureScope implemen
 	@Override
 	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		if (THIS.equals(name)) {
-			return Collections.singletonList(EObjectDescription.create(name, getTypeLiteral()));
+			ITypeReferenceOwner owner = getReceiverType().getOwner();
+			QualifiedThisOrSuperDescription description = new QualifiedThisOrSuperDescription(name, new ParameterizedTypeReference(owner, getTypeLiteral()), getBucket().getId(), true, getReceiver());
+			return Collections.<IEObjectDescription>singletonList(description);
 		} else if (SUPER.equals(name)) {
 			JvmType receiverRawType = getTypeLiteral();
 			if (receiverRawType instanceof JvmDeclaredType) {
 				JvmTypeReference superType = getExtendedClass((JvmDeclaredType) receiverRawType);
-				if (superType != null)
-					return Collections.singletonList(EObjectDescription.create(name, superType.getType()));
+				if (superType != null) {
+					ITypeReferenceOwner owner = getReceiverType().getOwner();
+					QualifiedThisOrSuperDescription description = new QualifiedThisOrSuperDescription(name, new ParameterizedTypeReference(owner, superType.getType()), getBucket().getId(), true, getReceiver());
+					return Collections.<IEObjectDescription>singletonList(description);
+				} else {
+					ITypeReferenceOwner owner = getReceiverType().getOwner();
+					QualifiedThisOrSuperDescription description = new QualifiedThisOrSuperDescription(name, new ParameterizedTypeReference(owner, receiverRawType), getBucket().getId(), true, getReceiver());
+					return Collections.<IEObjectDescription>singletonList(description);
+				}
 			}
 			return Collections.emptyList();
 		}
