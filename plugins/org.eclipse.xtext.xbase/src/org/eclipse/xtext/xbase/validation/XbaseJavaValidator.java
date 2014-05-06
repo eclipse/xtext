@@ -1571,6 +1571,32 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 	
+	@Check
+	public void checkExplicitOperationCall(XFeatureCall featureCall) {
+		if (featureCall.getFeature() instanceof JvmOperation 
+				&& !featureCall.isExplicitOperationCallOrBuilderSyntax()
+				&& featureCall.getFeature().getSimpleName().equals(featureCall.getConcreteSyntaxFeatureName())) {
+			addIssue("Method call without parentheses", featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, OPERATION_WITHOUT_PARENTHESES);
+		}
+	}
+	
+	@Check
+	public void checkExplicitOperationCall(XMemberFeatureCall featureCall) {
+		if (featureCall.getFeature() instanceof JvmOperation 
+				&& !featureCall.isExplicitOperationCallOrBuilderSyntax()
+				&& featureCall.getFeature().getSimpleName().equals(featureCall.getConcreteSyntaxFeatureName())) {
+			addIssue("Method call without parentheses", featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, OPERATION_WITHOUT_PARENTHESES);
+		}
+	}
+	
+	@Check
+	public void checkExplicitOperationCall(XConstructorCall constructorCall) {
+		if (!constructorCall.isExplicitConstructorCall() 
+				&& constructorCall.getArguments().isEmpty()) {
+			addIssue("Constructor call without parentheses", constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, OPERATION_WITHOUT_PARENTHESES);
+		}
+	}
+	
 	protected void checkAssignment(XExpression expression, EStructuralFeature feature, boolean simpleAssignment) {
 		if (!(expression instanceof XAbstractFeatureCall)) {
 			error("The left-hand side of an assignment must be a variable", expression, null,

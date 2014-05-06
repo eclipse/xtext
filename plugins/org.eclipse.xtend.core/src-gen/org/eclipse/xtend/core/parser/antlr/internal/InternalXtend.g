@@ -3923,11 +3923,27 @@ ruleXbaseConstructorCall returns [EObject current=null]
     {
     	newLeafNode(otherlv_7, grammarAccess.getXbaseConstructorCallAccess().getGreaterThanSignKeyword_3_3());
     }
-)?(((	'(' 
-)=>	otherlv_8='(' 
+)?(((
+(
+	'(' 
+ 
+
+)
+)=>
+(
+		lv_explicitConstructorCall_8_0=	'(' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getXbaseConstructorCallAccess().getLeftParenthesisKeyword_4_0());
+        newLeafNode(lv_explicitConstructorCall_8_0, grammarAccess.getXbaseConstructorCallAccess().getExplicitConstructorCallLeftParenthesisKeyword_4_0_0());
     }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getXbaseConstructorCallRule());
+	        }
+       		setWithLastConsumed($current, "explicitConstructorCall", true, "(");
+	    }
+
+)
 )(((((
 )((
 (

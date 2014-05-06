@@ -1063,9 +1063,9 @@ public class InternalXtypeLexer extends Lexer {
 
     protected DFA11 dfa11 = new DFA11(this);
     static final String DFA11_eotS =
-        "\6\uffff\1\27\3\uffff\1\42\1\uffff\1\42\2\uffff\1\42\1\uffff\1\27"+
-        "\1\uffff\3\27\13\uffff\1\42\2\uffff\2\42\2\uffff\1\42\5\uffff\11"+
-        "\42\1\74\4\42\1\uffff\1\101\1\102\1\103\1\42\3\uffff\1\42\1\106"+
+        "\6\uffff\1\27\3\uffff\1\42\1\uffff\1\42\2\uffff\1\42\1\uffff\1"+
+        "\27\1\uffff\3\27\13\uffff\1\42\2\uffff\2\42\2\uffff\1\42\5\uffff"+
+        "\11\42\1\74\4\42\1\uffff\1\101\1\102\1\103\1\42\3\uffff\1\42\1\106"+
         "\1\uffff";
     static final String DFA11_eofS =
         "\107\uffff";

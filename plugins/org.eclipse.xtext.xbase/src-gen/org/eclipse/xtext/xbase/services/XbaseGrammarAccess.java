@@ -1107,8 +1107,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//	feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment | =>
 		//	({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ("<"
 		//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-		//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure |
-		//	memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")? memberCallArguments+=XClosure?)*;
+		//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure
+		//	| memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")? memberCallArguments+=XClosure?)*;
 		public ParserRule getRule() { return rule; }
 
 		//XPrimaryExpression (=> ({XAssignment.assignable=current} ("." | explicitStatic?="::")
@@ -1320,8 +1320,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		public ParserRule getRule() { return rule; }
 
 		//XConstructorCall | XBlockExpression | XSwitchExpression | XSynchronizedExpression | XFeatureCall | XLiteral |
-		//XIfExpression | XForLoopExpression | XBasicForLoopExpression | XWhileExpression | XDoWhileExpression | XThrowExpression
-		//| XReturnExpression | XTryCatchFinallyExpression | XParenthesizedExpression
+		//XIfExpression | XForLoopExpression | XBasicForLoopExpression | XWhileExpression | XDoWhileExpression |
+		//XThrowExpression | XReturnExpression | XTryCatchFinallyExpression | XParenthesizedExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//XConstructorCall
@@ -1853,8 +1853,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XSwitchExpression returns XExpression:
 		//	{XSwitchExpression} "switch" (=> ("(" declaredParam=JvmFormalParameter ":") switch=XExpression ")" | =>
-		//	(declaredParam=JvmFormalParameter ":")? switch=XExpression) "{" cases+=XCasePart* ("default" ":" default=XExpression)?
-		//	"}";
+		//	(declaredParam=JvmFormalParameter ":")? switch=XExpression) "{" cases+=XCasePart* ("default" ":"
+		//	default=XExpression)? "}";
 		public ParserRule getRule() { return rule; }
 
 		//{XSwitchExpression} "switch" (=> ("(" declaredParam=JvmFormalParameter ":") switch=XExpression ")" | =>
@@ -2530,8 +2530,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		public ParserRule getRule() { return rule; }
 
 		//{XFeatureCall} ("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-		//feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (featureCallArguments+=XShortClosure |
-		//featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)? ")")? featureCallArguments+=XClosure?
+		//feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (featureCallArguments+=XShortClosure
+		//| featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)? ")")? featureCallArguments+=XClosure?
 		public Group getGroup() { return cGroup; }
 
 		//{XFeatureCall}
@@ -2693,7 +2693,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_2_1_0 = (RuleCall)cTypeArgumentsAssignment_3_2_1.eContents().get(0);
 		private final Keyword cGreaterThanSignKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cLeftParenthesisKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cExplicitConstructorCallAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
+		private final Keyword cExplicitConstructorCallLeftParenthesisKeyword_4_0_0 = (Keyword)cExplicitConstructorCallAssignment_4_0.eContents().get(0);
 		private final Alternatives cAlternatives_4_1 = (Alternatives)cGroup_4.eContents().get(1);
 		private final Assignment cArgumentsAssignment_4_1_0 = (Assignment)cAlternatives_4_1.eContents().get(0);
 		private final RuleCall cArgumentsXShortClosureParserRuleCall_4_1_0_0 = (RuleCall)cArgumentsAssignment_4_1_0.eContents().get(0);
@@ -2710,13 +2711,14 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XConstructorCall returns XExpression:
 		//	{XConstructorCall} "new" constructor=[types::JvmConstructor|QualifiedName] ("<"
-		//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")? ("("
-		//	(arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")")? arguments+=XClosure?;
+		//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")? (=>
+		//	explicitConstructorCall?="(" (arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")")?
+		//	arguments+=XClosure?;
 		public ParserRule getRule() { return rule; }
 
 		//{XConstructorCall} "new" constructor=[types::JvmConstructor|QualifiedName] ("<" typeArguments+=JvmArgumentTypeReference
-		//("," typeArguments+=JvmArgumentTypeReference)* ">")? ("(" (arguments+=XShortClosure | arguments+=XExpression (","
-		//arguments+=XExpression)*)? ")")? arguments+=XClosure?
+		//("," typeArguments+=JvmArgumentTypeReference)* ">")? (=> explicitConstructorCall?="(" (arguments+=XShortClosure |
+		//arguments+=XExpression ("," arguments+=XExpression)*)? ")")? arguments+=XClosure?
 		public Group getGroup() { return cGroup; }
 
 		//{XConstructorCall}
@@ -2761,11 +2763,15 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//">"
 		public Keyword getGreaterThanSignKeyword_3_3() { return cGreaterThanSignKeyword_3_3; }
 
-		//(=> "(" (arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")")?
+		//(=> explicitConstructorCall?="(" (arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)?
+		//")")?
 		public Group getGroup_4() { return cGroup_4; }
 
-		//=> "("
-		public Keyword getLeftParenthesisKeyword_4_0() { return cLeftParenthesisKeyword_4_0; }
+		//=> explicitConstructorCall?="("
+		public Assignment getExplicitConstructorCallAssignment_4_0() { return cExplicitConstructorCallAssignment_4_0; }
+
+		//"("
+		public Keyword getExplicitConstructorCallLeftParenthesisKeyword_4_0_0() { return cExplicitConstructorCallLeftParenthesisKeyword_4_0_0; }
 
 		//(arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)?
 		public Alternatives getAlternatives_4_1() { return cAlternatives_4_1; }
@@ -3270,7 +3276,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		/// **
 		// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes, 
 		// * which makes downstream grammars break on classloading, when a rule is removed.
-		// * / StaticQualifier:
+		// * /
+		//StaticQualifier:
 		//	(ValidID "::")+;
 		public ParserRule getRule() { return rule; }
 
@@ -3634,8 +3641,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment | =>
 	//	({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | explicitStatic?="::")) ("<"
 	//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure |
-	//	memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")? memberCallArguments+=XClosure?)*;
+	//	feature=[types::JvmIdentifiableElement|IdOrSuper] (=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure
+	//	| memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")? memberCallArguments+=XClosure?)*;
 	public XMemberFeatureCallElements getXMemberFeatureCallAccess() {
 		return (pXMemberFeatureCall != null) ? pXMemberFeatureCall : (pXMemberFeatureCall = new XMemberFeatureCallElements());
 	}
@@ -3750,8 +3757,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	//XSwitchExpression returns XExpression:
 	//	{XSwitchExpression} "switch" (=> ("(" declaredParam=JvmFormalParameter ":") switch=XExpression ")" | =>
-	//	(declaredParam=JvmFormalParameter ":")? switch=XExpression) "{" cases+=XCasePart* ("default" ":" default=XExpression)?
-	//	"}";
+	//	(declaredParam=JvmFormalParameter ":")? switch=XExpression) "{" cases+=XCasePart* ("default" ":"
+	//	default=XExpression)? "}";
 	public XSwitchExpressionElements getXSwitchExpressionAccess() {
 		return (pXSwitchExpression != null) ? pXSwitchExpression : (pXSwitchExpression = new XSwitchExpressionElements());
 	}
@@ -3898,8 +3905,9 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	//XConstructorCall returns XExpression:
 	//	{XConstructorCall} "new" constructor=[types::JvmConstructor|QualifiedName] ("<"
-	//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")? ("("
-	//	(arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")")? arguments+=XClosure?;
+	//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")? (=>
+	//	explicitConstructorCall?="(" (arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")")?
+	//	arguments+=XClosure?;
 	public XConstructorCallElements getXConstructorCallAccess() {
 		return (pXConstructorCall != null) ? pXConstructorCall : (pXConstructorCall = new XConstructorCallElements());
 	}
@@ -4032,7 +4040,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	/// **
 	// * Dummy rule, for "better" downwards compatibility, since GrammarAccess generates non-static inner classes, 
 	// * which makes downstream grammars break on classloading, when a rule is removed.
-	// * / StaticQualifier:
+	// * /
+	//StaticQualifier:
 	//	(ValidID "::")+;
 	public StaticQualifierElements getStaticQualifierAccess() {
 		return (pStaticQualifier != null) ? pStaticQualifier : (pStaticQualifier = new StaticQualifierElements());
