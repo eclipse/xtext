@@ -226,6 +226,39 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testThisScoping_04() {'''
+			class C {
+				def newD() {
+					return new D {
+						def m() {
+							C.this.m
+						}
+					}
+				}
+				def void m() {}
+			}
+			class D {}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public D newD() {
+			    @SuppressWarnings("all")
+			    final class __C_1 extends D {
+			      public void m() {
+			        C.this.m();
+			      }
+			    }
+			    
+			    return new __C_1();
+			  }
+			  
+			  public void m() {
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testSuperScoping_01() {'''
 			class C extends B {
 				def myMethod() {
@@ -247,6 +280,38 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    return new D() {
 			      public void m() {
 			        super.m();
+			      }
+			    };
+			  }
+			  
+			  public void m() {
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testSuperScoping_02() {'''
+			class C extends B {
+				def myMethod() {
+					return new D {
+						override m() {
+							C.super.m
+						}
+					}
+				}
+				override m() {}
+			}
+			class B { def void m() {} }
+			class D extends E {}
+			class E { def void m() {} }
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C extends B {
+			  public D myMethod() {
+			    return new D() {
+			      public void m() {
+			        C.super.m();
 			      }
 			    };
 			  }

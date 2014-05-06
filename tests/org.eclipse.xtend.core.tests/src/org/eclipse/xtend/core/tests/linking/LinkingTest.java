@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -89,6 +90,82 @@ public class LinkingTest extends AbstractXtendTestCase {
 	
 	@Inject
 	private IBatchTypeResolver typeResolver;
+	
+	@Test public void testQualifiedThis() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"  def void m() { C.this.m2() }\n" +
+				"  def void m2() {}\n" +
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction n = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) n.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("C.m2()", feature.getIdentifier());
+	}
+	
+	@Test public void testQualifiedThisOuter() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"  def void m() { new Object { def m3() { C.this.m2() } } }\n" +
+				"  def void m2() {}\n" +
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression outer = (XBlockExpression) m.getExpression();
+		AnonymousClass anonymousClass = (AnonymousClass) outer.getExpressions().get(0);
+		XtendFunction m3 = (XtendFunction) anonymousClass.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m3.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("C.m2()", feature.getIdentifier());
+	}
+	
+	@Test public void testQualifiedSuper() throws Exception {
+		XtendFile file = file(
+				"class B<T> { def T m1() {} }\n" +
+				"class C extends B<String> {\n" + 
+				"  def void m2() { C.super.m1.subSequence(1, 1) } \n" + 
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(1);
+		XtendFunction n = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) n.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("java.lang.String.subSequence(int,int)", feature.getIdentifier());
+	}
+	
+	@Test public void testQualifiedSuperOuter() throws Exception {
+		XtendFile file = file(
+				"class B<T> { def T m1() {} }\n" +
+				"class C extends B<String> {\n" + 
+				"  def void m2() { new Object { def m3() { C.super.m1.subSequence(1, 1) } } }\n" + 
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(1);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression outer = (XBlockExpression) m.getExpression();
+		AnonymousClass anonymousClass = (AnonymousClass) outer.getExpressions().get(0);
+		XtendFunction m3 = (XtendFunction) anonymousClass.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m3.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("java.lang.String.subSequence(int,int)", feature.getIdentifier());
+	}
+	
+	@Test public void testSuper() throws Exception {
+		XtendFile file = file(
+				"class B<T> { def T m1() {} }\n" +
+				"class C extends B<String> {\n" + 
+				"  def void m2() { super.m1.subSequence(1,1) }\n" + 
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(1);
+		XtendFunction n = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) n.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("java.lang.String.subSequence(int,int)", feature.getIdentifier());
+	}
 	
 	@Test public void testBug426788() throws Exception {
 		XtendFile file = file("class Bug {\n" + 
