@@ -43,4 +43,315 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	def testThrowException() {
+		assertCompilesTo('''
+			class C {
+				def dispatch minus(Object operand) {
+					if (true)
+						throw new RuntimeException();
+					throw new RuntimeException();
+				}
+				def dispatch minus(Integer e) { -e }
+				def dispatch minus(Double e) { -e }
+				def dispatch minus(Long e) { -e }
+				def dispatch minus(Short e) { -e }
+				def dispatch minus(Float e) { -e }
+				def dispatch minus(Byte e) { -e }
+			}
+		''', '''
+			import java.util.Arrays;
+			import org.eclipse.xtext.xbase.lib.DoubleExtensions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  protected double _minus(final Object operand) {
+			    if (true) {
+			      throw new RuntimeException();
+			    }
+			    throw new RuntimeException();
+			  }
+			  
+			  protected double _minus(final Integer e) {
+			    return (-(e).intValue());
+			  }
+			  
+			  protected double _minus(final Double e) {
+			    return DoubleExtensions.operator_minus(e);
+			  }
+			  
+			  protected double _minus(final Long e) {
+			    return (-(e).longValue());
+			  }
+			  
+			  protected double _minus(final Short e) {
+			    return (-(e).shortValue());
+			  }
+			  
+			  protected double _minus(final Float e) {
+			    return (-(e).floatValue());
+			  }
+			  
+			  protected double _minus(final Byte e) {
+			    return (-(e).byteValue());
+			  }
+			  
+			  public double minus(final Object e) {
+			    if (e instanceof Byte) {
+			      return _minus((Byte)e);
+			    } else if (e instanceof Double) {
+			      return _minus((Double)e);
+			    } else if (e instanceof Float) {
+			      return _minus((Float)e);
+			    } else if (e instanceof Integer) {
+			      return _minus((Integer)e);
+			    } else if (e instanceof Long) {
+			      return _minus((Long)e);
+			    } else if (e instanceof Short) {
+			      return _minus((Short)e);
+			    } else if (e != null) {
+			      return _minus(e);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(e).toString());
+			    }
+			  }
+			}
+		''')
+	}
+
+	@Test
+	def testVoidReturn() {
+		assertCompilesTo('''
+			class C {
+				def dispatch minus(Object operand) {
+					return;
+				}
+				def dispatch minus(Integer e) { -e }
+				def dispatch minus(Double e) { -e }
+				def dispatch minus(Long e) { -e }
+				def dispatch minus(Short e) { -e }
+				def dispatch minus(Float e) { -e }
+				def dispatch minus(Byte e) { -e }
+			}
+		''', '''
+			import java.util.Arrays;
+			import org.eclipse.xtext.xbase.lib.DoubleExtensions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  protected void _minus(final Object operand) {
+			    return;
+			  }
+			  
+			  protected void _minus(final Integer e) {
+			    /* (-(e).intValue()); */
+			  }
+			  
+			  protected void _minus(final Double e) {
+			    /* DoubleExtensions.operator_minus(e); */
+			  }
+			  
+			  protected void _minus(final Long e) {
+			    /* (-(e).longValue()); */
+			  }
+			  
+			  protected void _minus(final Short e) {
+			    /* (-(e).shortValue()); */
+			  }
+			  
+			  protected void _minus(final Float e) {
+			    /* (-(e).floatValue()); */
+			  }
+			  
+			  protected void _minus(final Byte e) {
+			    /* (-(e).byteValue()); */
+			  }
+			  
+			  public void minus(final Object e) {
+			    if (e instanceof Byte) {
+			      _minus((Byte)e);
+			      return;
+			    } else if (e instanceof Double) {
+			      _minus((Double)e);
+			      return;
+			    } else if (e instanceof Float) {
+			      _minus((Float)e);
+			      return;
+			    } else if (e instanceof Integer) {
+			      _minus((Integer)e);
+			      return;
+			    } else if (e instanceof Long) {
+			      _minus((Long)e);
+			      return;
+			    } else if (e instanceof Short) {
+			      _minus((Short)e);
+			      return;
+			    } else if (e != null) {
+			      _minus(e);
+			      return;
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(e).toString());
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testVoidExplicit() {
+		assertCompilesTo('''
+			class C {
+				def dispatch void minus(Object operand) {
+				}
+				def dispatch minus(Integer e) { -e }
+				def dispatch minus(Double e) { -e }
+				def dispatch minus(Long e) { -e }
+				def dispatch minus(Short e) { -e }
+				def dispatch minus(Float e) { -e }
+				def dispatch minus(Byte e) { -e }
+			}
+		''', '''
+			import java.util.Arrays;
+			import org.eclipse.xtext.xbase.lib.DoubleExtensions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  protected void _minus(final Object operand) {
+			  }
+			  
+			  protected void _minus(final Integer e) {
+			    /* (-(e).intValue()); */
+			  }
+			  
+			  protected void _minus(final Double e) {
+			    /* DoubleExtensions.operator_minus(e); */
+			  }
+			  
+			  protected void _minus(final Long e) {
+			    /* (-(e).longValue()); */
+			  }
+			  
+			  protected void _minus(final Short e) {
+			    /* (-(e).shortValue()); */
+			  }
+			  
+			  protected void _minus(final Float e) {
+			    /* (-(e).floatValue()); */
+			  }
+			  
+			  protected void _minus(final Byte e) {
+			    /* (-(e).byteValue()); */
+			  }
+			  
+			  public void minus(final Object e) {
+			    if (e instanceof Byte) {
+			      _minus((Byte)e);
+			      return;
+			    } else if (e instanceof Double) {
+			      _minus((Double)e);
+			      return;
+			    } else if (e instanceof Float) {
+			      _minus((Float)e);
+			      return;
+			    } else if (e instanceof Integer) {
+			      _minus((Integer)e);
+			      return;
+			    } else if (e instanceof Long) {
+			      _minus((Long)e);
+			      return;
+			    } else if (e instanceof Short) {
+			      _minus((Short)e);
+			      return;
+			    } else if (e != null) {
+			      _minus(e);
+			      return;
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(e).toString());
+			    }
+			  }
+			}
+		''')
+	}
+
+	@Test
+	def testImplicitReturn() {
+		assertCompilesTo('''
+			class C {
+				def dispatch minus(Object operand) {
+					wait()
+				}
+				def dispatch minus(Integer e) { -e }
+				def dispatch minus(Double e) { -e }
+				def dispatch minus(Long e) { -e }
+				def dispatch minus(Short e) { -e }
+				def dispatch minus(Float e) { -e }
+				def dispatch minus(Byte e) { -e }
+			}
+		''', '''
+			import java.util.Arrays;
+			import org.eclipse.xtext.xbase.lib.DoubleExtensions;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  protected Number _minus(final Object operand) {
+			    try {
+			      this.wait();
+			      return null;
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
+			  
+			  protected Number _minus(final Integer e) {
+			    return (-(e).intValue());
+			  }
+			  
+			  protected Number _minus(final Double e) {
+			    return DoubleExtensions.operator_minus(e);
+			  }
+			  
+			  protected Number _minus(final Long e) {
+			    return (-(e).longValue());
+			  }
+			  
+			  protected Number _minus(final Short e) {
+			    return (-(e).shortValue());
+			  }
+			  
+			  protected Number _minus(final Float e) {
+			    return (-(e).floatValue());
+			  }
+			  
+			  protected Number _minus(final Byte e) {
+			    return (-(e).byteValue());
+			  }
+			  
+			  public Number minus(final Object e) {
+			    if (e instanceof Byte) {
+			      return _minus((Byte)e);
+			    } else if (e instanceof Double) {
+			      return _minus((Double)e);
+			    } else if (e instanceof Float) {
+			      return _minus((Float)e);
+			    } else if (e instanceof Integer) {
+			      return _minus((Integer)e);
+			    } else if (e instanceof Long) {
+			      return _minus((Long)e);
+			    } else if (e instanceof Short) {
+			      return _minus((Short)e);
+			    } else if (e != null) {
+			      return _minus(e);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(e).toString());
+			    }
+			  }
+			}
+		''')
+	}
+		
 }

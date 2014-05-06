@@ -56,7 +56,12 @@ public enum ConformanceHint {
 	/**
 	 * Indicates that the type of this expression is derived from a child which can provide better conformance information.
 	 */
-	PROPAGATED_TYPE;  
+	PROPAGATED_TYPE,
+	
+	/**
+	 * Indicates that the expression will definitely throw an exception.
+	 */
+	THROWN_EXCEPTION;  
 	
 	
 	public static int compareHints(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
