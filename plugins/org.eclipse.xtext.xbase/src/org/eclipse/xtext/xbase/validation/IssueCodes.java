@@ -66,6 +66,7 @@ public class IssueCodes {
 	public static final String OBSOLETE_CAST = ISSUE_CODE_PREFIX + "obsolete_cast";
 	public static final String OBSOLETE_INSTANCEOF = ISSUE_CODE_PREFIX + "obsolete_instanceof";
 	public static final String STATIC_ACCESS_TO_INSTANCE_MEMBER = ISSUE_CODE_PREFIX	+ "static_access_to_instance_member";
+	public static final String NO_ENCLOSING_INSTANCE_AVAILABLE = ISSUE_CODE_PREFIX + "no_enclosing_instance_available";
 	public static final String TOO_LITTLE_TYPE_INFORMATION = ISSUE_CODE_PREFIX + "too_little_type_information";
 	public static final String TOO_MANY_PARAMS_IN_CLOSURE = ISSUE_CODE_PREFIX + "too_many_params_in_closure";
 	public static final String UNEXPECTED_INVOCATION_ON_TYPE_LITERAL = ISSUE_CODE_PREFIX + "unexpected_invocation_on_type_literal";
