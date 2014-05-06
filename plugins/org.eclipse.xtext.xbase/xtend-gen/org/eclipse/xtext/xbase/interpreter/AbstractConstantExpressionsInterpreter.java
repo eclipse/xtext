@@ -105,10 +105,11 @@ public class AbstractConstantExpressionsInterpreter {
   protected Object _internalEvaluate(final XBinaryOperation it, final Context ctx) {
     Object _xblockexpression = null;
     {
+      final Context context = ctx.cloneWithExpectation(null);
       XExpression _leftOperand = it.getLeftOperand();
-      final Object left = this.internalEvaluate(_leftOperand, ctx);
+      final Object left = this.internalEvaluate(_leftOperand, context);
       XExpression _rightOperand = it.getRightOperand();
-      final Object right = this.internalEvaluate(_rightOperand, ctx);
+      final Object right = this.internalEvaluate(_rightOperand, context);
       final String op = it.getConcreteSyntaxFeatureName();
       Object _switchResult = null;
       boolean _matched = false;
@@ -167,26 +168,28 @@ public class AbstractConstantExpressionsInterpreter {
         }
       }
       if (!_matched) {
-        if (Objects.equal(op, "===")) {
-          _matched=true;
-          _switchResult = Boolean.valueOf(this.constantOperators.same(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, "!==")) {
-          _matched=true;
-          _switchResult = Boolean.valueOf(this.constantOperators.notSame(left, right));
-        }
-      }
-      if (!_matched) {
         if (Objects.equal(op, "==")) {
           _matched=true;
+        }
+        if (!_matched) {
+          if (Objects.equal(op, "===")) {
+            _matched=true;
+          }
+        }
+        if (_matched) {
           _switchResult = Boolean.valueOf(this.constantOperators.same(left, right));
         }
       }
       if (!_matched) {
         if (Objects.equal(op, "!=")) {
           _matched=true;
+        }
+        if (!_matched) {
+          if (Objects.equal(op, "!==")) {
+            _matched=true;
+          }
+        }
+        if (_matched) {
           _switchResult = Boolean.valueOf(this.constantOperators.notSame(left, right));
         }
       }

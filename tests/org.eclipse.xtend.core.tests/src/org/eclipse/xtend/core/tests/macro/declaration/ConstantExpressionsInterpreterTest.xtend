@@ -135,6 +135,22 @@ class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
 		assertEvaluatesTo( false , '1'->'int', '1'->'double', '>')
 	}
 	
+	@Test def void testOperatorsWithExpectation() {
+		('boolean'->'1 + 1').evaluatesTo(2)
+		('boolean'->'1 - 1').evaluatesTo(0)
+		('boolean'->'1 * 1').evaluatesTo(1)
+		('boolean'->'1 / 1').evaluatesTo(1)
+		('boolean'->'1 % 1').evaluatesTo(0)
+		('boolean'->'1 < 1').evaluatesTo(false)
+		('boolean'->'1 <= 1').evaluatesTo(true)
+		('boolean'->'1 > 1').evaluatesTo(false)
+		('boolean'->'1 >= 1').evaluatesTo(true)
+		('boolean'->'1 == 1').evaluatesTo(true)
+		('boolean'->'1 != 1').evaluatesTo(false)
+		('boolean'->'1 === 1').evaluatesTo(true)
+		('boolean'->'1 !== 1').evaluatesTo(false)
+	}
+	
 	protected def void assertEvaluatesTo(Object expectation, Pair<String,String> left, Pair<String,String> right, String op) {
 		val file = file('''
 			import static MyConstants.*
