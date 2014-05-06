@@ -242,6 +242,8 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 				} else if (belongsToDeletedElement(next)) {
 					handleDeletedElement(out, deletedSemanticElements, next);
 					ni.prune();
+				} else if (tokenUtil.isToken(next)) {
+					break;
 				}
 			}
 		}
