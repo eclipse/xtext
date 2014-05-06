@@ -159,6 +159,8 @@ public class XExpressionHelper {
 	}
 	
 	protected JvmAnnotationReference findAnnotation(JvmAnnotationTarget feature, String annotationType) {
+		if (feature == null)
+			return null;
 		if (annotationType == null)
 			throw new NullPointerException();
 		List<JvmAnnotationReference> annotations = feature.getAnnotations();
