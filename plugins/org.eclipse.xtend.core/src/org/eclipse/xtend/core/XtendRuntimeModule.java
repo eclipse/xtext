@@ -42,6 +42,7 @@ import org.eclipse.xtend.core.typesystem.XtendTypeComputer;
 import org.eclipse.xtend.core.typing.XtendExpressionHelper;
 import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes;
 import org.eclipse.xtend.core.validation.XtendEarlyExitValidator;
+import org.eclipse.xtend.core.validation.XtendImplicitReturnFinder;
 import org.eclipse.xtend.core.xtend.XtendFactory;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
@@ -94,6 +95,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.validation.EarlyExitValidator;
+import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
 
 import com.google.inject.Binder;
 import com.google.inject.Provider;
@@ -346,5 +348,9 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	@Override
 	public Class<? extends EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
 		return XtendEObjectAtOffsetHelper.class;
+	}
+	
+	public Class<? extends ImplicitReturnFinder> bindImplicitReturnFinder() {
+		return XtendImplicitReturnFinder.class;
 	}
 }
