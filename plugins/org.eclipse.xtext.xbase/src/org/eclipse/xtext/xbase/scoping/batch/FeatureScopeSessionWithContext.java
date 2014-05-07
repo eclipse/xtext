@@ -47,7 +47,8 @@ public class FeatureScopeSessionWithContext extends AbstractNestedFeatureScopeSe
 		boolean result = isVisible(member);
 		if (result && JvmVisibility.PROTECTED == member.getVisibility()) {
 			if (receiverFeature != null) {
-				// TODO how does this work with inner types, e.g.
+				// We bypass this check for qualified.this and qualified.super in the scope provider
+				// they are considered to be always visible
 				/*
 				 * class A {
 				 *   class B {
