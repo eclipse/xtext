@@ -1963,12 +1963,15 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Keyword cCreateKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		private final Keyword cAnnotationKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cAFTERKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cBEFOREKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cSEPARATORKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		
 		//ValidID:
-		//	ID | "create" | "annotation";
+		//	ID | "create" | "annotation" | "AFTER" | "BEFORE" | "SEPARATOR";
 		public ParserRule getRule() { return rule; }
 
-		//ID | "create" | "annotation"
+		//ID | "create" | "annotation" | "AFTER" | "BEFORE" | "SEPARATOR"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ID
@@ -1979,6 +1982,15 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"annotation"
 		public Keyword getAnnotationKeyword_2() { return cAnnotationKeyword_2; }
+
+		//"AFTER"
+		public Keyword getAFTERKeyword_3() { return cAFTERKeyword_3; }
+
+		//"BEFORE"
+		public Keyword getBEFOREKeyword_4() { return cBEFOREKeyword_4; }
+
+		//"SEPARATOR"
+		public Keyword getSEPARATORKeyword_5() { return cSEPARATORKeyword_5; }
 	}
 
 	public class FeatureCallIDElements extends AbstractParserRuleElementFinder {
@@ -2030,16 +2042,19 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cVolatileKeyword_22 = (Keyword)cAlternatives.eContents().get(22);
 		private final Keyword cSynchronizedKeyword_23 = (Keyword)cAlternatives.eContents().get(23);
 		private final Keyword cTransientKeyword_24 = (Keyword)cAlternatives.eContents().get(24);
+		private final Keyword cAFTERKeyword_25 = (Keyword)cAlternatives.eContents().get(25);
+		private final Keyword cBEFOREKeyword_26 = (Keyword)cAlternatives.eContents().get(26);
+		private final Keyword cSEPARATORKeyword_27 = (Keyword)cAlternatives.eContents().get(27);
 		
 		//InnerVarID:
 		//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "final" | "implements"
 		//	| "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" | "throws" |
-		//	"strictfp" | "native" | "volatile" | "synchronized" | "transient";
+		//	"strictfp" | "native" | "volatile" | "synchronized" | "transient" | "AFTER" | "BEFORE" | "SEPARATOR";
 		public ParserRule getRule() { return rule; }
 
 		//ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "final" | "implements" |
 		//"import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" | "throws" | "strictfp"
-		//| "native" | "volatile" | "synchronized" | "transient"
+		//| "native" | "volatile" | "synchronized" | "transient" | "AFTER" | "BEFORE" | "SEPARATOR"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ID
@@ -2116,6 +2131,15 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"transient"
 		public Keyword getTransientKeyword_24() { return cTransientKeyword_24; }
+
+		//"AFTER"
+		public Keyword getAFTERKeyword_25() { return cAFTERKeyword_25; }
+
+		//"BEFORE"
+		public Keyword getBEFOREKeyword_26() { return cBEFOREKeyword_26; }
+
+		//"SEPARATOR"
+		public Keyword getSEPARATORKeyword_27() { return cSEPARATORKeyword_27; }
 	}
 
 	public class ParameterElements extends AbstractParserRuleElementFinder {
@@ -3497,7 +3521,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ValidID:
-	//	ID | "create" | "annotation";
+	//	ID | "create" | "annotation" | "AFTER" | "BEFORE" | "SEPARATOR";
 	public ValidIDElements getValidIDAccess() {
 		return (pValidID != null) ? pValidID : (pValidID = new ValidIDElements());
 	}
@@ -3520,7 +3544,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	//InnerVarID:
 	//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "final" | "implements"
 	//	| "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" | "throws" |
-	//	"strictfp" | "native" | "volatile" | "synchronized" | "transient";
+	//	"strictfp" | "native" | "volatile" | "synchronized" | "transient" | "AFTER" | "BEFORE" | "SEPARATOR";
 	public InnerVarIDElements getInnerVarIDAccess() {
 		return (pInnerVarID != null) ? pInnerVarID : (pInnerVarID = new InnerVarIDElements());
 	}

@@ -45,14 +45,14 @@ tokens {
   KW_Override = 'override' ;
   KW_Create = 'create' ;
   KW_Colon = ':' ;
+  KW_AFTER = 'AFTER' ;
+  KW_BEFORE = 'BEFORE' ;
+  KW_SEPARATOR = 'SEPARATOR' ;
   KW_Import = 'import' ;
   KW_FullStopFullStopFullStop = '...' ;
   KW_Switch = 'switch' ;
   KW_Default = 'default' ;
   KW_FOR = 'FOR' ;
-  KW_BEFORE = 'BEFORE' ;
-  KW_SEPARATOR = 'SEPARATOR' ;
-  KW_AFTER = 'AFTER' ;
   KW_ENDFOR = 'ENDFOR' ;
   KW_IF = 'IF' ;
   KW_ELSE = 'ELSE' ;
@@ -3151,6 +3151,27 @@ ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getValidIDAccess().getAnnotationKeyword_2()); 
     }
+
+    |
+	kw='AFTER' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getValidIDAccess().getAFTERKeyword_3()); 
+    }
+
+    |
+	kw='BEFORE' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getValidIDAccess().getBEFOREKeyword_4()); 
+    }
+
+    |
+	kw='SEPARATOR' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getValidIDAccess().getSEPARATORKeyword_5()); 
+    }
 )
     ;
 
@@ -3385,6 +3406,27 @@ ruleInnerVarID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getInnerVarIDAccess().getTransientKeyword_24()); 
+    }
+
+    |
+	kw='AFTER' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getInnerVarIDAccess().getAFTERKeyword_25()); 
+    }
+
+    |
+	kw='BEFORE' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getInnerVarIDAccess().getBEFOREKeyword_26()); 
+    }
+
+    |
+	kw='SEPARATOR' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getInnerVarIDAccess().getSEPARATORKeyword_27()); 
     }
 )
     ;
@@ -9595,6 +9637,9 @@ ruleXReturnExpression returns [EObject current=null]
  | 	'volatile' 
  | 	'synchronized' 
  | 	'transient' 
+ | 	'AFTER' 
+ | 	'BEFORE' 
+ | 	'SEPARATOR' 
  | 	'extension' 
  | 	'!' 
  | 	'-' 

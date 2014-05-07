@@ -1166,6 +1166,21 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def testEnumBug428707() {
+		'''
+			enum E {
+				AFTER, BEFORE
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public enum E {
+			  AFTER,
+			  
+			  BEFORE;
+			}
+		''')
+	}
+	
 	@Test def testSneakyThrowable() {
 		'''
 			class MyClass {

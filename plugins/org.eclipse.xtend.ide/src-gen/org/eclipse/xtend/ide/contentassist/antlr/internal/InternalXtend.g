@@ -47,14 +47,14 @@ tokens {
   KW_Override = 'override' ;
   KW_Create = 'create' ;
   KW_Colon = ':' ;
+  KW_AFTER = 'AFTER' ;
+  KW_BEFORE = 'BEFORE' ;
+  KW_SEPARATOR = 'SEPARATOR' ;
   KW_Import = 'import' ;
   KW_FullStopFullStopFullStop = '...' ;
   KW_Switch = 'switch' ;
   KW_Default = 'default' ;
   KW_FOR = 'FOR' ;
-  KW_BEFORE = 'BEFORE' ;
-  KW_SEPARATOR = 'SEPARATOR' ;
-  KW_AFTER = 'AFTER' ;
   KW_ENDFOR = 'ENDFOR' ;
   KW_IF = 'IF' ;
   KW_ELSE = 'ELSE' ;
@@ -3755,6 +3755,30 @@ rule__ValidID__Alternatives
 { after(grammarAccess.getValidIDAccess().getAnnotationKeyword_2()); }
 )
 
+    |(
+{ before(grammarAccess.getValidIDAccess().getAFTERKeyword_3()); }
+
+	'AFTER' 
+
+{ after(grammarAccess.getValidIDAccess().getAFTERKeyword_3()); }
+)
+
+    |(
+{ before(grammarAccess.getValidIDAccess().getBEFOREKeyword_4()); }
+
+	'BEFORE' 
+
+{ after(grammarAccess.getValidIDAccess().getBEFOREKeyword_4()); }
+)
+
+    |(
+{ before(grammarAccess.getValidIDAccess().getSEPARATORKeyword_5()); }
+
+	'SEPARATOR' 
+
+{ after(grammarAccess.getValidIDAccess().getSEPARATORKeyword_5()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -3985,6 +4009,30 @@ rule__InnerVarID__Alternatives
 	'transient' 
 
 { after(grammarAccess.getInnerVarIDAccess().getTransientKeyword_24()); }
+)
+
+    |(
+{ before(grammarAccess.getInnerVarIDAccess().getAFTERKeyword_25()); }
+
+	'AFTER' 
+
+{ after(grammarAccess.getInnerVarIDAccess().getAFTERKeyword_25()); }
+)
+
+    |(
+{ before(grammarAccess.getInnerVarIDAccess().getBEFOREKeyword_26()); }
+
+	'BEFORE' 
+
+{ after(grammarAccess.getInnerVarIDAccess().getBEFOREKeyword_26()); }
+)
+
+    |(
+{ before(grammarAccess.getInnerVarIDAccess().getSEPARATORKeyword_27()); }
+
+	'SEPARATOR' 
+
+{ after(grammarAccess.getInnerVarIDAccess().getSEPARATORKeyword_27()); }
 )
 
 ;

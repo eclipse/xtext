@@ -2689,6 +2689,34 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testEnumBug428707() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("enum E {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("AFTER, BEFORE");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public enum E {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("AFTER,");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("BEFORE;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testSneakyThrowable() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class MyClass {");

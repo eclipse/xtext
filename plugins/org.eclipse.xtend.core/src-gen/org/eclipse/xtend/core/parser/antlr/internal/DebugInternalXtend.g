@@ -220,7 +220,10 @@ ruleCreateExtensionInfo :
 ruleValidID :
 	RULE_ID |
 	'create' |
-	'annotation'
+	'annotation' |
+	'AFTER' |
+	'BEFORE' |
+	'SEPARATOR'
 ;
 
 // Rule FeatureCallID
@@ -255,7 +258,10 @@ ruleInnerVarID :
 	'native' |
 	'volatile' |
 	'synchronized' |
-	'transient'
+	'transient' |
+	'AFTER' |
+	'BEFORE' |
+	'SEPARATOR'
 ;
 
 // Rule Parameter
@@ -1026,6 +1032,9 @@ ruleXReturnExpression :
 	'volatile' |
 	'synchronized' |
 	'transient' |
+	'AFTER' |
+	'BEFORE' |
+	'SEPARATOR' |
 	'extension' |
 	'!' |
 	'-' |
