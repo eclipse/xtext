@@ -105,7 +105,14 @@ public class AbstractConstantExpressionsInterpreter {
   protected Object _internalEvaluate(final XBinaryOperation it, final Context ctx) {
     Object _xblockexpression = null;
     {
-      final Context context = ctx.cloneWithExpectation(null);
+      Context _xifexpression = null;
+      boolean _equals = Objects.equal(ctx, null);
+      if (_equals) {
+        _xifexpression = null;
+      } else {
+        _xifexpression = ctx.cloneWithExpectation(null);
+      }
+      final Context context = _xifexpression;
       XExpression _leftOperand = it.getLeftOperand();
       final Object left = this.internalEvaluate(_leftOperand, context);
       XExpression _rightOperand = it.getRightOperand();
