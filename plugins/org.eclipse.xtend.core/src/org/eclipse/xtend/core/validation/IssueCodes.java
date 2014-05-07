@@ -91,4 +91,6 @@ public final class IssueCodes {
 	public static final String ACTIVE_ANNOTAION_IN_SAME_CONTAINER = ISSUE_CODE_PREFIX +  "active_annotation_in_same_project";
 	
 	public static final String API_TYPE_INFERENCE = ISSUE_CODE_PREFIX +  "api_type_inference";
+	public static final String IMPLICIT_RETURN = ISSUE_CODE_PREFIX +  "implicit_return";
+	
 }

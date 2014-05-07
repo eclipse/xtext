@@ -33,5 +33,6 @@ public class XtendConfigurableIssueCodes extends XbaseConfigurableIssueCodes {
 		iAcceptor.accept(createDelegate(IssueCodes.UNUSED_PRIVATE_MEMBER, JavaCore.COMPILER_PB_UNUSED_PRIVATE_MEMBER));
 		iAcceptor.accept(createDelegate(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, JavaCore.COMPILER_PB_INVALID_JAVADOC, SeverityConverter.SEVERITY_IGNORE));
 		iAcceptor.accept(create(IssueCodes.API_TYPE_INFERENCE, SeverityConverter.SEVERITY_IGNORE));
+		iAcceptor.accept(create(IssueCodes.IMPLICIT_RETURN, SeverityConverter.SEVERITY_IGNORE));
 	}
 }
