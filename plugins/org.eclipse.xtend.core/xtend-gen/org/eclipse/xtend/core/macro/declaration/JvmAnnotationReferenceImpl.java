@@ -233,12 +233,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     if (!_matched) {
       if (value instanceof Byte) {
         _matched=true;
-        char _xblockexpression = (char) 0;
-        {
-          final Byte byteValue = ((Byte)value);
-          _xblockexpression = ((char) (byteValue).byteValue());
-        }
-        _switchResult = Character.valueOf(_xblockexpression);
+        _switchResult = Character.valueOf(((char) ((Byte) value).byteValue()));
       }
     }
     if (!_matched) {
@@ -276,67 +271,37 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     if (!_matched) {
       if (value instanceof Character) {
         _matched=true;
-        double _xblockexpression = (double) 0;
-        {
-          final Character character = ((Character)value);
-          _xblockexpression = ((double) (character).charValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((double) ((Character) value).charValue());
       }
     }
     if (!_matched) {
       if (value instanceof Byte) {
         _matched=true;
-        double _xblockexpression = (double) 0;
-        {
-          final Byte byteValue = ((Byte)value);
-          _xblockexpression = ((double) (byteValue).byteValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((double) ((Byte) value).byteValue());
       }
     }
     if (!_matched) {
       if (value instanceof Short) {
         _matched=true;
-        double _xblockexpression = (double) 0;
-        {
-          final Short shortValue = ((Short)value);
-          _xblockexpression = ((double) (shortValue).shortValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((double) ((Short) value).shortValue());
       }
     }
     if (!_matched) {
       if (value instanceof Integer) {
         _matched=true;
-        double _xblockexpression = (double) 0;
-        {
-          final Integer integerValue = ((Integer)value);
-          _xblockexpression = ((double) (integerValue).intValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((double) ((Integer) value).intValue());
       }
     }
     if (!_matched) {
       if (value instanceof Long) {
         _matched=true;
-        double _xblockexpression = (double) 0;
-        {
-          final Long longValue = ((Long)value);
-          _xblockexpression = ((double) (longValue).longValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((double) ((Long) value).longValue());
       }
     }
     if (!_matched) {
       if (value instanceof Float) {
         _matched=true;
-        double _xblockexpression = (double) 0;
-        {
-          final Float floatValue = ((Float)value);
-          _xblockexpression = ((double) (floatValue).floatValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((double) ((Float) value).floatValue());
       }
     }
     if (!_matched) {
@@ -374,56 +339,31 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     if (!_matched) {
       if (value instanceof Character) {
         _matched=true;
-        float _xblockexpression = (float) 0;
-        {
-          final Character character = ((Character)value);
-          _xblockexpression = ((float) (character).charValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((float) ((Character) value).charValue());
       }
     }
     if (!_matched) {
       if (value instanceof Byte) {
         _matched=true;
-        float _xblockexpression = (float) 0;
-        {
-          final Byte byteValue = ((Byte)value);
-          _xblockexpression = ((float) (byteValue).byteValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((float) ((Byte) value).byteValue());
       }
     }
     if (!_matched) {
       if (value instanceof Short) {
         _matched=true;
-        float _xblockexpression = (float) 0;
-        {
-          final Short shortValue = ((Short)value);
-          _xblockexpression = ((float) (shortValue).shortValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((float) ((Short) value).shortValue());
       }
     }
     if (!_matched) {
       if (value instanceof Integer) {
         _matched=true;
-        float _xblockexpression = (float) 0;
-        {
-          final Integer integerValue = ((Integer)value);
-          _xblockexpression = ((float) (integerValue).intValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((float) ((Integer) value).intValue());
       }
     }
     if (!_matched) {
       if (value instanceof Long) {
         _matched=true;
-        float _xblockexpression = (float) 0;
-        {
-          final Long longValue = ((Long)value);
-          _xblockexpression = ((float) (longValue).longValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((float) ((Long) value).longValue());
       }
     }
     if (!_matched) {
@@ -451,34 +391,19 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     if (!_matched) {
       if (value instanceof Character) {
         _matched=true;
-        int _xblockexpression = (int) 0;
-        {
-          final Character character = ((Character)value);
-          _xblockexpression = ((int) (character).charValue());
-        }
-        _switchResult = Integer.valueOf(_xblockexpression);
+        _switchResult = Integer.valueOf(((int) ((Character) value).charValue()));
       }
     }
     if (!_matched) {
       if (value instanceof Byte) {
         _matched=true;
-        int _xblockexpression = (int) 0;
-        {
-          final Byte byteValue = ((Byte)value);
-          _xblockexpression = ((int) (byteValue).byteValue());
-        }
-        _switchResult = Integer.valueOf(_xblockexpression);
+        _switchResult = Integer.valueOf(((int) ((Byte) value).byteValue()));
       }
     }
     if (!_matched) {
       if (value instanceof Short) {
         _matched=true;
-        int _xblockexpression = (int) 0;
-        {
-          final Short shortValue = ((Short)value);
-          _xblockexpression = ((int) (shortValue).shortValue());
-        }
-        _switchResult = Integer.valueOf(_xblockexpression);
+        _switchResult = Integer.valueOf(((int) ((Short) value).shortValue()));
       }
     }
     if (!_matched) {
@@ -506,45 +431,25 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     if (!_matched) {
       if (value instanceof Character) {
         _matched=true;
-        long _xblockexpression = (long) 0;
-        {
-          final Character character = ((Character)value);
-          _xblockexpression = ((long) (character).charValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((long) ((Character) value).charValue());
       }
     }
     if (!_matched) {
       if (value instanceof Byte) {
         _matched=true;
-        long _xblockexpression = (long) 0;
-        {
-          final Byte byteValue = ((Byte)value);
-          _xblockexpression = ((long) (byteValue).byteValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((long) ((Byte) value).byteValue());
       }
     }
     if (!_matched) {
       if (value instanceof Short) {
         _matched=true;
-        long _xblockexpression = (long) 0;
-        {
-          final Short shortValue = ((Short)value);
-          _xblockexpression = ((long) (shortValue).shortValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((long) ((Short) value).shortValue());
       }
     }
     if (!_matched) {
       if (value instanceof Integer) {
         _matched=true;
-        long _xblockexpression = (long) 0;
-        {
-          final Integer integerValue = ((Integer)value);
-          _xblockexpression = ((long) (integerValue).intValue());
-        }
-        _switchResult = _xblockexpression;
+        _switchResult = ((long) ((Integer) value).intValue());
       }
     }
     if (!_matched) {
@@ -572,12 +477,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     if (!_matched) {
       if (value instanceof Byte) {
         _matched=true;
-        short _xblockexpression = (short) 0;
-        {
-          final Byte byteValue = ((Byte)value);
-          _xblockexpression = ((short) (byteValue).byteValue());
-        }
-        _switchResult = Short.valueOf(_xblockexpression);
+        _switchResult = Short.valueOf(((short) ((Byte) value).byteValue()));
       }
     }
     if (!_matched) {
