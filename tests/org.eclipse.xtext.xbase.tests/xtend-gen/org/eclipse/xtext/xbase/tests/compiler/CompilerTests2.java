@@ -1946,7 +1946,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("final java.util.List<Integer> i = java.util.Collections.<Integer>unmodifiableList(com.google.common.collect.Lists.<Integer>newArrayList(_xifexpression));");
+      _builder_1.append("final java.util.List<Integer> i = java.util.Collections.<Integer>unmodifiableList(com.google.common.collect.Lists.<Integer>newArrayList(Integer.valueOf(_xifexpression)));");
       _builder_1.newLine();
       _builder_1.append("Integer _head = org.eclipse.xtext.xbase.lib.IterableExtensions.<Integer>head(i);");
       _builder_1.newLine();
@@ -2526,7 +2526,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.newLine();
     _builder_1.append("};");
     _builder_1.newLine();
-    _builder_1.append("final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(com.google.common.collect.Lists.<Boolean>newArrayList(true, false, true)), _function);");
+    _builder_1.append("final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(com.google.common.collect.Lists.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _function);");
     _builder_1.newLine();
     this.compilesTo(_builder, _builder_1);
   }
@@ -2627,6 +2627,184 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("}");
       _builder_1.newLine();
       _builder_1.append("return _switchResult;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug433573_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val Number element = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if(element instanceof Double) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val Iterable<? extends Number> i = #[element]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final Number element = null;");
+      _builder_1.newLine();
+      _builder_1.append("if ((element instanceof Double)) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(com.google.common.collect.Lists.<Double>newArrayList(((Double)element)));");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug433573_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val Number element = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch element {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Double: {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("val Iterable<? extends Number> i = #[element]");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final Number element = null;");
+      _builder_1.newLine();
+      _builder_1.append("boolean _matched = false;");
+      _builder_1.newLine();
+      _builder_1.append("if (!_matched) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if (element instanceof Double) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_matched=true;");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(com.google.common.collect.Lists.<Double>newArrayList(((Double)element)));");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug433573_03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val Number element = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if(element instanceof Double) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val Iterable<? extends Number> i = #{element}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final Number element = null;");
+      _builder_1.newLine();
+      _builder_1.append("if ((element instanceof Double)) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(com.google.common.collect.Sets.<Double>newHashSet(((Double)element)));");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug433573_04() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val Number element = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch element {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Double: {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("val Iterable<? extends Number> i = #{element}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final Number element = null;");
+      _builder_1.newLine();
+      _builder_1.append("boolean _matched = false;");
+      _builder_1.newLine();
+      _builder_1.append("if (!_matched) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if (element instanceof Double) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_matched=true;");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(com.google.common.collect.Sets.<Double>newHashSet(((Double)element)));");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
       _builder_1.newLine();
       this.compilesTo(_builder, _builder_1);
     } catch (Throwable _e) {
