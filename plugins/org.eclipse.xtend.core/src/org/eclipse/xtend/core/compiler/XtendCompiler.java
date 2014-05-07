@@ -400,7 +400,7 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 	
 	protected void _toJavaExpression(AnonymousClass anonymousClass, ITreeAppendable b) {
-		String varName = getReferenceName(anonymousClass.getConstructorCall(), b);
+		String varName = getReferenceName(anonymousClass, b);
 		if (varName != null) {
 			b.trace(anonymousClass, false).append(varName);
 		} else {
@@ -561,5 +561,14 @@ public class XtendCompiler extends XbaseCompiler {
 			}
 		}
 		return result;
+	}
+	
+	@Override
+	@Nullable
+	protected String getReferenceName(XExpression expr, ITreeAppendable b) {
+		if (expr instanceof AnonymousClass) {
+			return getReferenceName(((AnonymousClass) expr).getConstructorCall(), b);
+		}
+		return super.getReferenceName(expr, b);
 	}
 }
