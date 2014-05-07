@@ -9,11 +9,36 @@ package org.eclipse.xtend.core.tests.compiler
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
+	
+	@Ignore
+	@Test
+	def void testCapturedLocalVar() {'''
+			class Foo {
+				def foo() {
+					val x = ''
+					val bar = new Runnable() {
+						override run() { x.toString }
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo() {
+			    final Runnable bar = new Runnable() {
+			      public void run() {
+			      }
+			    };
+			  }
+			}
+		''')
+	}
 	
 	@Test
 	def void testLocalVar() {'''
@@ -449,7 +474,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testField_AdditionalMember() {'''
+	def void testField_AdditionalMember_01() {'''
 			class Foo {
 				val bar = new Runnable() {
 					int baz
@@ -475,6 +500,77 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			      return ___Foo_1;
 			    }
 			  }.apply();
+			}
+		''')
+	}
+	
+	@Test
+	def void testField_AdditionalMember_02() {'''
+			class C {
+				val secondOuterField = 1
+				val outerField = new Object() {
+					int localField
+				} => [ localField = secondOuterField ]
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  private final int secondOuterField = 1;
+			  
+			  private final Object outerField = new Function0<Object>() {
+			    public Object apply() {
+			      @SuppressWarnings("all")
+			      final class __C_1 {
+			        private int localField;
+			      }
+			      
+			      __C_1 ___C_1 = new __C_1();
+			      final Procedure1<__C_1> _function = new Procedure1<__C_1>() {
+			        public void apply(final __C_1 it) {
+			          it.localField = C.this.secondOuterField;
+			        }
+			      };
+			      __C_1 _doubleArrow = ObjectExtensions.<__C_1>operator_doubleArrow(___C_1, _function);
+			      return _doubleArrow;
+			    }
+			  }.apply();
+			}
+		''')
+	}
+	
+	@Test
+	def void testAdditionalMemberAccess_01() {'''
+			class C {
+				def m() {
+					new Object() {
+						public int f
+					} => [ f = 1 ]
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public Object m() {
+			    @SuppressWarnings("all")
+			    final class __C_1 {
+			      public int f;
+			    }
+			    
+			    __C_1 ___C_1 = new __C_1();
+			    final Procedure1<__C_1> _function = new Procedure1<__C_1>() {
+			      public void apply(final __C_1 it) {
+			        it.f = 1;
+			      }
+			    };
+			    return ObjectExtensions.<__C_1>operator_doubleArrow(___C_1, _function);
+			  }
 			}
 		''')
 	}
