@@ -268,6 +268,7 @@ public class WorkbenchTestHelper extends Assert {
 		IEditorPart openEditor = openEditor(file, getEditorID());
 		XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
 		if (xtextEditor != null) {
+			xtextEditor.selectAndReveal(0, 0);
 			return xtextEditor;
 		} else if (openEditor instanceof ErrorEditorPart) {
 			Field field = openEditor.getClass().getDeclaredField("error");
