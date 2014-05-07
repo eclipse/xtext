@@ -10522,7 +10522,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("Pair<String, Integer> _mappedTo = Pair.<String, Integer>of(\"Banana\", Integer.valueOf(2));");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));");
+    _builder_1.append("final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -10717,7 +10717,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("Pair<String, Integer> _mappedTo = Pair.<String, Integer>of(\"Banana\", Integer.valueOf(2));");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));");
+    _builder_1.append("final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

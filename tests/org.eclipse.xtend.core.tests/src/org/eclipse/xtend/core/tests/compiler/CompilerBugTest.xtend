@@ -916,7 +916,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			        return it.toString();
 			      }
 			    };
-			    List<String> _map = ListExtensions.<Integer, String>map(Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(1, 2, 3)), _function);
+			    List<String> _map = ListExtensions.<Integer, String>map(Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3))), _function);
 			    _map.toString();
 			  }
 			}

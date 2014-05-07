@@ -4765,7 +4765,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    _xsetliteral = Collections.<Object, Object>unmodifiableMap(_tempMap);
 			    final Map<Object, Object> map2 = _xsetliteral;
 			    Pair<String, Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
-			    final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));
+			    final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo));
 			  }
 			  
 			  public Pair<Object, Object> operator_plus(final int operant, final int operand2) {
@@ -4845,7 +4845,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    _xsetliteral = Collections.<Object, Object>unmodifiableMap(_tempMap);
 			    final Map<Object, Object> map2 = _xsetliteral;
 			    Pair<String, Integer> _mappedTo = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
-			    final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet((1 * 2), _mappedTo));
+			    final Set<?> map3 = Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo));
 			  }
 			  
 			  public Pair<Object, Object> operator_plus(final int operant, final int operand2) {
