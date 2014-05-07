@@ -201,7 +201,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 				containerSceleton.getMembers().add(inferredSceleton);
 			acceptor.accept(inferredSceleton);
 			for(XtendMember member: declaration.getMembers()) {
-				if(member instanceof XtendTypeDeclaration && ((XtendTypeDeclaration) member).isStatic())
+				if(member instanceof XtendTypeDeclaration)
 					inferTypeSceleton((XtendTypeDeclaration) member, acceptor, preIndexingPhase, xtendFile, doLater, inferredSceleton);
 			}
 		}

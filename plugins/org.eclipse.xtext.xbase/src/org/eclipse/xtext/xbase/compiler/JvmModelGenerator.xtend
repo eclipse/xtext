@@ -177,7 +177,7 @@ class JvmModelGenerator implements IGenerator {
 				memberAppendable.closeScope
 			])
 		childAppendable.decreaseIndentation.newLine.append('}')
-		if(!anonymous) 
+		if(!anonymous && !(it.eContainer instanceof JvmType)) 
 			appendable.newLine
 	}
 	

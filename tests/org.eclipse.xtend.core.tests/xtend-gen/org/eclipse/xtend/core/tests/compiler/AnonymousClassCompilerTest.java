@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -17,7 +16,56 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
-  @Ignore
+  @Test
+  public void testPlain() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Runnable() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("override run() {}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Runnable m() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return new Runnable() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("public void run() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   @Test
   public void testCapturedLocalVar() {
     StringConcatenation _builder = new StringConcatenation();
@@ -52,10 +100,16 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void foo() {");
     _builder_1.newLine();
     _builder_1.append("    ");
+    _builder_1.append("final String x = \"\";");
+    _builder_1.newLine();
+    _builder_1.append("    ");
     _builder_1.append("final Runnable bar = new Runnable() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("public void run() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("x.toString();");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");

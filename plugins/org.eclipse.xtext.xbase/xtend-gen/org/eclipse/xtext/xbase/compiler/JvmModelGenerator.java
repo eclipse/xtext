@@ -308,9 +308,15 @@ public class JvmModelGenerator implements IGenerator {
       ITreeAppendable _newLine = _decreaseIndentation.newLine();
       _newLine.append("}");
       ITreeAppendable _xifexpression = null;
+      boolean _and = false;
       boolean _isAnonymous_1 = it.isAnonymous();
       boolean _not_1 = (!_isAnonymous_1);
-      if (_not_1) {
+      if (!_not_1) {
+        _and = false;
+      } else {
+        _and = (!(it.eContainer() instanceof JvmType));
+      }
+      if (_and) {
         _xifexpression = appendable.newLine();
       }
       _xblockexpression = _xifexpression;
