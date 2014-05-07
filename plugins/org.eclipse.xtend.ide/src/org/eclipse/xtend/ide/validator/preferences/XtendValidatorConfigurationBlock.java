@@ -52,7 +52,8 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 	@Override
 	protected void fillCodingStyleSection(ComboBoxBuilder builder) {
 		super.fillCodingStyleSection(builder);
-		builder.addComboBox(API_TYPE_INFERENCE, "Type inference for API methods/fields");
+		builder.addComboBox(API_TYPE_INFERENCE, "Type inference for API methods/fields:");
+		builder.addComboBox(IMPLICIT_RETURN, "Implicit return:");
 	}
 
 }
