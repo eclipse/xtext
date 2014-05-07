@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -369,8 +370,19 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			} else if (member instanceof XtendField) {
 				expression = ((XtendField) member).getInitialValue();
 			}
-			if (expression != null && getInferredElements(member).isEmpty()) {
-				computeTypes(resolvedTypes, featureScopeSession, expression);
+			if (expression != null) {
+				if (getInferredElements(member).isEmpty()) {
+					computeTypes(resolvedTypes, featureScopeSession, expression);
+				} else {
+					TreeIterator<EObject> iterator = EcoreUtil2.getAllNonDerivedContents(expression);
+					while(iterator.hasNext()) {
+						EObject next = iterator.next();
+						if (next instanceof AnonymousClass) {
+							computeTypes(resolvedTypes, featureScopeSession, next);
+							iterator.prune();
+						}
+					}
+				}
 			}
 			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, member.getAnnotations());
 		} else {
@@ -476,7 +488,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			List<JvmOperation> dispatchCases = dispatchHelper.getLocalDispatchCases(dispatcher);
 			List<LightweightTypeReference> dispatchCaseResults = Lists.newArrayListWithCapacity(dispatchCases.size());
 			boolean hasInferredCase = false;
-			boolean implicitVoid = false;
+			LightweightTypeReference implicitVoid = null;
 			for (JvmOperation dispatchCase : dispatchCases) {
 				markComputing(dispatchCase.getReturnType());
 			}
@@ -516,7 +528,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 										if (conformanceHints.contains(ConformanceHint.NO_IMPLICIT_RETURN)) {
 											dispatchCaseResults.add(returnType);
 										} else {
-											implicitVoid = true;
+											implicitVoid = returnType;
 										}
 									}
 								} else {
@@ -563,19 +575,23 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 
 	protected LightweightTypeReference normalizeDispatchReturnType(LightweightTypeReference declaredType,
 			List<LightweightTypeReference> computedTypes,
-			boolean implicitVoidSeen, ResolvedTypes resolvedTypes) {
+			LightweightTypeReference implicitVoidOrNull, ResolvedTypes resolvedTypes) {
 		LightweightTypeReference result = null;
 		if (declaredType != null) {
 			result = declaredType;
 		} else {
-			if (implicitVoidSeen) {
+			if (implicitVoidOrNull != null && !computedTypes.isEmpty()) {
 				List<LightweightTypeReference> wrapped = Lists.newArrayListWithCapacity(computedTypes.size());
 				for(int i = 0; i < computedTypes.size(); i++) {
 					wrapped.add(computedTypes.get(i).getWrapperTypeIfPrimitive());
 				}
 				computedTypes = wrapped;
 			}
-			result = getServices().getTypeConformanceComputer().getCommonSuperType(computedTypes, resolvedTypes.getReferenceOwner());
+			if (computedTypes.isEmpty() && implicitVoidOrNull != null) {
+				result = implicitVoidOrNull;
+			} else {
+				result = getServices().getTypeConformanceComputer().getCommonSuperType(computedTypes, resolvedTypes.getReferenceOwner());
+			}
 		}
 		return result;
 	}
