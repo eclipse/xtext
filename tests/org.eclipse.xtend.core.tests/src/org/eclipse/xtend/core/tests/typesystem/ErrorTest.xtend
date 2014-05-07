@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
 import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XCastedExpression
+import org.eclipse.xtext.xbase.junit.typesystem.Oven
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -43,6 +44,8 @@ class ErrorTest extends AbstractXtendTestCase {
 	
 	@Inject
 	IJvmModelAssociations associations
+	
+	@Inject extension Oven
 	
 	@Test
 	def void testErrorModel_01() throws Exception {
@@ -1398,6 +1401,30 @@ class ErrorTest extends AbstractXtendTestCase {
 	@Test
 	def void testErrorModel_96() throws Exception {
 		'''
+			class C {
+				def add(T item) {
+					class D {
+						new(A<B> gen) {
+							this.gen = gen
+						}
+					}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_97() throws Exception {
+		'''
+			class A {
+				def void m(Class<?>... c) {
+				class B extends A {
+			 		override m(Class<? extends Object>... c) {}
+				}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_98() throws Exception {
+		fireproof('''
 			import java.util.LinkedList
 			
 			class XList<T extends XType> {
@@ -1419,7 +1446,54 @@ class ErrorTest extends AbstractXtendTestCase {
 					this.item = item
 				}
 			}
+		''')
+	}
+	
+	@Test
+	def void testErrorModel_99() throws Exception {
+		fireproof('''
+			package x 
+			class Y {  
+				static int j   
+				int i   
+				new() { 
+					this(j   
+					new(int i) {
+						this.i = i
+					}   
+					def static invokeMe() {
+						j = 47 new Y().i
+					}
+				}
+		''')
+	}
+	
+	@Test
+	def void testErrorModel_100() throws Exception {
+		'''
+			package x class Y {def dispatch void recursiveMethod(CharSequence r, java.util.Set<Object> shapes) {}
+			def dispatch vorecursiveMethod(Appendable c, java.util.Set<Object> shapes) {
+				// If method2 is called directly, no NPE is thrown
+				val Object o = method1()
+			}
+			def Object method1() {
+				return method2()
+			}
+			// Inferred return type that causes the NPE
+			def method2() {
+				val java.util.Set<Object> objects = newHashSet()
+				// If the recursive method is not called, no NPE is thrown
+				recursiveMethod(new String(), objects)
+				return objects.findFirst([ Object o | o instanceof CharSequence])
+			}}
 		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_101() throws Exception {
+		fireproof('''
+			package bug411973 class Bug {val ()=>String init new() { this([|"Hello World!"]new(()=>String init) { this.init = init } @Override override toString() { init.apply } }
+		''')
 	}
 	
 	def processWithoutException(CharSequence input) throws Exception {

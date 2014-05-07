@@ -42,7 +42,9 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.junit.typesystem.Oven;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -64,6 +66,10 @@ public class ErrorTest extends AbstractXtendTestCase {
   
   @Inject
   private IJvmModelAssociations associations;
+  
+  @Inject
+  @Extension
+  private Oven _oven;
   
   @Test
   public void testErrorModel_01() throws Exception {
@@ -2619,6 +2625,52 @@ public class ErrorTest extends AbstractXtendTestCase {
   @Test
   public void testErrorModel_96() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def add(T item) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class D {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("new(A<B> gen) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("this.gen = gen");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_97() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Class<?>... c) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("class B extends A {");
+    _builder.newLine();
+    _builder.append(" \t\t");
+    _builder.append("override m(Class<? extends Object>... c) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_98() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.LinkedList");
     _builder.newLine();
     _builder.newLine();
@@ -2668,7 +2720,101 @@ public class ErrorTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
+  @Test
+  public void testErrorModel_99() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x ");
+    _builder.newLine();
+    _builder.append("class Y {  ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static int j   ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int i   ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new() { ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this(j   ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new(int i) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("this.i = i");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}   ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def static invokeMe() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("j = 47 new Y().i");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
+  @Test
+  public void testErrorModel_100() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x class Y {def dispatch void recursiveMethod(CharSequence r, java.util.Set<Object> shapes) {}");
+    _builder.newLine();
+    _builder.append("def dispatch vorecursiveMethod(Appendable c, java.util.Set<Object> shapes) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// If method2 is called directly, no NPE is thrown");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val Object o = method1()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("def Object method1() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return method2()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("// Inferred return type that causes the NPE");
+    _builder.newLine();
+    _builder.append("def method2() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val java.util.Set<Object> objects = newHashSet()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// If the recursive method is not called, no NPE is thrown");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("recursiveMethod(new String(), objects)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return objects.findFirst([ Object o | o instanceof CharSequence])");
+    _builder.newLine();
+    _builder.append("}}");
+    _builder.newLine();
     this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_101() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package bug411973 class Bug {val ()=>String init new() { this([|\"Hello World!\"]new(()=>String init) { this.init = init } @Override override toString() { init.apply } }");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
   }
   
   public XtendFile processWithoutException(final CharSequence input) throws Exception {

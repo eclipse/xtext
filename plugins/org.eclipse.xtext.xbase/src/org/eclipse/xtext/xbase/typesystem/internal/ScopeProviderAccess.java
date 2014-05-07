@@ -142,17 +142,21 @@ public class ScopeProviderAccess {
 
 			final String crossRefString = linkingHelper.getCrossRefNodeAsString(node, true);
 			if (crossRefString != null && !crossRefString.equals("")) {
-				final IScope scope = session.getScope(expression, reference, types);
 				QualifiedName qualifiedLinkName = qualifiedNameConverter.toQualifiedName(crossRefString);
-				Iterable<IEObjectDescription> descriptions = scope.getElements(qualifiedLinkName);
-				if (Iterables.isEmpty(descriptions)) {
-					INode errorNode = getErrorNode(expression, node);
-					if (errorNode != node) {
-						qualifiedLinkName = getErrorName(errorNode);
+				if (!qualifiedLinkName.isEmpty()) {
+					final IScope scope = session.getScope(expression, reference, types);
+					Iterable<IEObjectDescription> descriptions = scope.getElements(qualifiedLinkName);
+					if (Iterables.isEmpty(descriptions)) {
+						INode errorNode = getErrorNode(expression, node);
+						if (errorNode != node) {
+							qualifiedLinkName = getErrorName(errorNode);
+						}
+						return Collections.<IEObjectDescription>singletonList(new ErrorDescription(getErrorNode(expression, node), qualifiedLinkName));
 					}
-					return Collections.<IEObjectDescription>singletonList(new ErrorDescription(getErrorNode(expression, node), qualifiedLinkName));
+					return descriptions;
+				} else {
+					return Collections.<IEObjectDescription>singletonList(new ErrorDescription(null /* followUp problem */));
 				}
-				return descriptions;
 			}
 			return Collections.emptyList();
 		} else {
