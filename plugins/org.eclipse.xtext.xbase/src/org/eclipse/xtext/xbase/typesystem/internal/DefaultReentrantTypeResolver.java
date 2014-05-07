@@ -11,13 +11,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
@@ -158,6 +162,15 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session, XExpression expression) {
 		ExpressionBasedRootTypeComputationState state = new ExpressionBasedRootTypeComputationState(resolvedTypes, session, expression);
 		state.computeTypes();
+	}
+	
+	protected String getInvalidWritableVariableAccessMessage(XVariableDeclaration variable, XAbstractFeatureCall featureCall) {
+		// TODO this should be part of a separate validation service
+		XClosure containingClosure = EcoreUtil2.getContainerOfType(featureCall, XClosure.class);
+		if (containingClosure != null && !EcoreUtil.isAncestor(containingClosure, variable)) {
+			return String.format("Cannot refer to the non-final variable %s inside a lambda expression", variable.getSimpleName());
+		}
+		return null;
 	}
 	
 	protected boolean isShadowingAllowed(QualifiedName name) {

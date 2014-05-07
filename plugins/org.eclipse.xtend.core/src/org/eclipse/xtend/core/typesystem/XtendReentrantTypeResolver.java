@@ -51,9 +51,13 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
@@ -683,40 +687,44 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 	}
 
 	protected void doPrepareLocalTypes(
-			ResolvedTypes resolvedTypes,
+			final ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
 			JvmFeature container,
 			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
 		List<JvmGenericType> localClasses = container.getLocalClasses();
-		for(JvmGenericType localClass: localClasses) {
+		for(final JvmGenericType localClass: localClasses) {
 			JvmTypeReference superType = localClass.getSuperTypes().get(0);
-			IFeatureScopeSession nestedSession = featureScopeSession;
+			final IFeatureScopeSession nestedSession = featureScopeSession;
 			if (InferredTypeIndicator.isInferred(superType)) {
-				XComputedTypeReference casted = (XComputedTypeReference) superType;
+				final XComputedTypeReference casted = (XComputedTypeReference) superType;
 				InferredTypeIndicator typeProvider = (InferredTypeIndicator) casted.getTypeProvider();
-				AnonymousClass anonymousClass = (AnonymousClass) typeProvider.getExpression();
+				final AnonymousClass anonymousClass = (AnonymousClass) typeProvider.getExpression();
 				XConstructorCall constructorCall = anonymousClass.getConstructorCall();
 				IScope typeScope = featureScopeSession.getScope(constructorCall, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, resolvedTypes);
-				JvmDeclaredType type = anonymousClassUtil.getSuperTypeNonResolving(anonymousClass, typeScope);
+				final JvmDeclaredType type = anonymousClassUtil.getSuperTypeNonResolving(anonymousClass, typeScope);
 				if (type == null) {
 					break;
 				}
-				JvmParameterizedTypeReference superTypeReference = createSuperTypeReference(type, constructorCall);
-				InferredTypeIndicator.resolveTo(casted, superTypeReference);
-				nestedSession = addThisAndSuper(featureScopeSession, resolvedTypes.getReferenceOwner(), localClass, superTypeReference);
-				if(type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) type).isInterface()) {
-					inferAnonymousClassConstructor(anonymousClass, localClass, type);
-				} else {
-					for(JvmMember superMember: type.getMembers()) {
-						if (superMember instanceof JvmConstructor) {
-							JvmConstructor superTypeConstructor = (JvmConstructor) superMember;
-							boolean visible = nestedSession.isVisible(superTypeConstructor);
-							inferAnonymousClassConstructor(anonymousClass, localClass, superTypeConstructor, visible);
+				final JvmParameterizedTypeReference superTypeReference = createSuperTypeReference(type, constructorCall);
+				requestCapturedLocalVariables(superTypeReference, localClass, resolvedTypes, resolvedTypesByContext, new IAcceptor<JvmTypeReference>() {
+					public void accept(JvmTypeReference capturingTypeReference) {
+						casted.setEquivalent(capturingTypeReference);
+						IFeatureScopeSession mySession = addThisAndSuper(nestedSession, resolvedTypes.getReferenceOwner(), localClass, superTypeReference, false);
+						if(type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) type).isInterface()) {
+							inferAnonymousClassConstructor(anonymousClass, localClass, type);
+						} else {
+							for(JvmMember superMember: type.getMembers()) {
+								if (superMember instanceof JvmConstructor) {
+									JvmConstructor superTypeConstructor = (JvmConstructor) superMember;
+									boolean visible = mySession.isVisible(superTypeConstructor);
+									inferAnonymousClassConstructor(anonymousClass, localClass, superTypeConstructor, visible);
+								}
+							}
 						}
 					}
-				}
+				});
+				
 			}
-			doPrepare(resolvedTypes, nestedSession, localClass, resolvedTypesByContext);
 		}
 	}
 	
@@ -770,5 +778,31 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			}
 		}
 		return super.createTypeProvider(resolvedTypesByContext, resolvedTypes, featureScopeSession, member, returnType);
+	}
+	
+	@Override
+	protected String getInvalidWritableVariableAccessMessage(XVariableDeclaration variable,
+			XAbstractFeatureCall featureCall) {
+		// TODO this should be part of a separate validation service
+		EObject containingStructure = getNearestClosureOrTypeDeclaration(featureCall);
+		if (containingStructure != null && !EcoreUtil.isAncestor(containingStructure, variable)) {
+			if (containingStructure instanceof XClosure)
+				return String.format("Cannot refer to the non-final variable %s inside a lambda expression", variable.getSimpleName());
+			return String.format("Cannot refer to the non-final variable %s inside a local class", variable.getSimpleName());
+		}
+		return null;
+	}
+	
+	private EObject getNearestClosureOrTypeDeclaration(EObject object) {
+		while(object != null) {
+			if (object instanceof XClosure) {
+				return object;
+			}
+			if (object instanceof XtendTypeDeclaration) {
+				return object;
+			}
+			object = object.eContainer();
+		}
+		return null;
 	}
 }

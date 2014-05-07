@@ -7,16 +7,35 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest
 import org.junit.Test
-import org.junit.Ignore
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	
-	@Ignore
+	@Test
+	def void testPlain() {'''
+			class C {
+				def m() {
+					new Runnable() {
+						override run() {}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public Runnable m() {
+			    return new Runnable() {
+			      public void run() {
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
 	@Test
 	def void testCapturedLocalVar() {'''
 			class Foo {
@@ -31,8 +50,10 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  public void foo() {
+			    final String x = "";
 			    final Runnable bar = new Runnable() {
 			      public void run() {
+			        x.toString();
 			      }
 			    };
 			  }

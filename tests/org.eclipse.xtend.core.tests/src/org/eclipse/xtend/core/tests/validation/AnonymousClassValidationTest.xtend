@@ -104,5 +104,28 @@ class AnonymousClassValidationTest extends AbstractXtendTestCase {
 			}
 		'''.parse.assertError(XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, "No enclosing instance of the type Object is accessible in scope")
 	}
-
+	
+	@Test def void test_09() {'''
+			class C {
+				def m() {
+					var x = ''
+					val f = new Runnable() {
+						override run() { x.toString }
+					}
+				}
+			}
+		'''.parse.assertError(XbasePackage.Literals.XFEATURE_CALL, IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot refer to the non-final variable x inside a local class")
+	}
+	
+	@Test def void test_10() {'''
+			class C {
+				def m() {
+					val x = ''
+					new Runnable() {
+						override run() { x.toString }
+					}
+				}
+			}
+		'''.parse.assertNoIssues()
+	}
 }
