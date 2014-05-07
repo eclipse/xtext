@@ -62,6 +62,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ExtensionsCompilerTest.class,
 	DataCompilerTest.class,
 	Java8OverloadCompilerTest.class,
+	NestedClassCompilerTest.class,
 	OverloadedExtensionCompilerTest.class,
 	ParameterizedTypeCompilerTest.class,
 	PostfixOperatorCompilerTest.class,
