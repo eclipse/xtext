@@ -236,5 +236,6 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.editor.contentassist.bug381381TestLanguage,
  org.eclipse.xtext.ui.tests.editor.contentassist.bug381381TestLanguage.impl,
  org.eclipse.xtext.ui.tests.editor.contentassist.bug381381TestLanguage.util,
- org.eclipse.xtext.ui.tests.quickfix.ui.quickfix
+ org.eclipse.xtext.ui.tests.quickfix.ui.quickfix,
+ org.eclipse.xtext.ui.tests.scoping
 
