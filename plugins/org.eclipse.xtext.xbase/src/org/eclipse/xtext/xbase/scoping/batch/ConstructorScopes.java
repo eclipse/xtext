@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -73,7 +74,7 @@ public class ConstructorScopes extends DelegatingScopes {
 		// we don't care about the type scope since the type is well known here
 		IVisibilityHelper protectedIsVisible = new IVisibilityHelper() {
 			public boolean isVisible(@NonNull JvmMember member) {
-				return member.getVisibility() == JvmVisibility.PROTECTED || member.getVisibility() == JvmVisibility.PUBLIC || session.isVisible(member);
+				return member.getVisibility() != JvmVisibility.PRIVATE;
 			}
 		};
 		return new ConstructorTypeScopeWrapper(context, protectedIsVisible, IScope.NULLSCOPE) {

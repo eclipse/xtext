@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Set;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -77,7 +78,7 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 			return true;
 		}
 		JvmDeclaredType type = member instanceof JvmDeclaredType ? (JvmDeclaredType) member : member.getDeclaringType();
-		if (type == rawContextType) {
+		if (type == rawContextType || EcoreUtil.isAncestor(rawContextType, type)) {
 			return true;
 		}
 		if (type != null && visibility == JvmVisibility.PROTECTED) {
