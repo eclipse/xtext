@@ -951,7 +951,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			} else {
 			  _xifexpression = 2;
 			}
-			final java.util.List<Integer> i = java.util.Collections.<Integer>unmodifiableList(com.google.common.collect.Lists.<Integer>newArrayList(_xifexpression));
+			final java.util.List<Integer> i = java.util.Collections.<Integer>unmodifiableList(com.google.common.collect.Lists.<Integer>newArrayList(Integer.valueOf(_xifexpression)));
 			Integer _head = org.eclipse.xtext.xbase.lib.IterableExtensions.<Integer>head(i);
 			boolean _lessThan = ((_head).intValue() < 10);
 			boolean _while = _lessThan;
@@ -1227,7 +1227,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			    return Boolean.valueOf(_and);
 			  }
 			};
-			final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(com.google.common.collect.Lists.<Boolean>newArrayList(true, false, true)), _function);
+			final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(com.google.common.collect.Lists.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _function);
 		''')
 	}
 	
@@ -1272,6 +1272,82 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			  }
 			}
 			return _switchResult;
+		''')
+	}
+	
+	@Test def void testBug433573_01() {
+		'''
+			{
+				val Number element = null
+				if(element instanceof Double) {
+					val Iterable<? extends Number> i = #[element]
+				}
+			}
+		'''.compilesTo('''
+			final Number element = null;
+			if ((element instanceof Double)) {
+			  final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(com.google.common.collect.Lists.<Double>newArrayList(((Double)element)));
+			}
+		''')
+	}
+	
+	@Test def void testBug433573_02() {
+		'''
+			{
+				val Number element = null
+				switch element {
+					Double: {
+						val Iterable<? extends Number> i = #[element]
+					}
+				}
+			}
+		'''.compilesTo('''
+			final Number element = null;
+			boolean _matched = false;
+			if (!_matched) {
+			  if (element instanceof Double) {
+			    _matched=true;
+			    final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(com.google.common.collect.Lists.<Double>newArrayList(((Double)element)));
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug433573_03() {
+		'''
+			{
+				val Number element = null
+				if(element instanceof Double) {
+					val Iterable<? extends Number> i = #{element}
+				}
+			}
+		'''.compilesTo('''
+			final Number element = null;
+			if ((element instanceof Double)) {
+			  final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(com.google.common.collect.Sets.<Double>newHashSet(((Double)element)));
+			}
+		''')
+	}
+	
+	@Test def void testBug433573_04() {
+		'''
+			{
+				val Number element = null
+				switch element {
+					Double: {
+						val Iterable<? extends Number> i = #{element}
+					}
+				}
+			}
+		'''.compilesTo('''
+			final Number element = null;
+			boolean _matched = false;
+			if (!_matched) {
+			  if (element instanceof Double) {
+			    _matched=true;
+			    final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(com.google.common.collect.Sets.<Double>newHashSet(((Double)element)));
+			  }
+			}
 		''')
 	}
 
