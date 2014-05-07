@@ -703,6 +703,11 @@ public class XbaseTypeComputer implements ITypeComputer {
 				LightweightTypeReference commonListType = services.getTypeConformanceComputer().getCommonSuperType(listTypeCandidates, state.getReferenceOwner());
 				if (commonListType != null) {
 					expectation.acceptActualType(commonListType, ConformanceHint.UNCHECKED);
+					
+					LightweightTypeReference commonElementType = getElementOrComponentType(commonListType, state);
+					for (XExpression element : literal.getElements()) {
+						state.refineExpectedType(element, commonElementType);
+					}
 				} else {
 					expectation.acceptActualType(getTypeForName(Object.class, state), ConformanceHint.UNCHECKED);
 				}
@@ -748,6 +753,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 					expectation.acceptActualType(boundMapType, ConformanceHint.UNCHECKED);
 				} else {
 					expectation.acceptActualType(commonSetType, ConformanceHint.UNCHECKED);
+					for (XExpression element : literal.getElements()) {
+						state.refineExpectedType(element, commonElementType);
+					}
 				}
 			} else {
 				if(expectedType != null && expectedType.isType(Map.class)) {
