@@ -349,8 +349,13 @@ public class XbaseTypeComputer implements ITypeComputer {
 		LightweightTypeReference expressionType = computedType.getActualExpressionType();
 		
 		JvmFormalParameter declaredParam = object.getDeclaredParam();
-		if (declaredParam != null && declaredParam.getParameterType() == null) {
-			allCasePartsState = allCasePartsState.assignType(declaredParam, expressionType);
+		if (declaredParam != null) {
+			if (declaredParam.getParameterType() == null) {
+				allCasePartsState = allCasePartsState.assignType(declaredParam, expressionType);
+			} else {
+				LightweightTypeReference parameterType = state.getConverter().toLightweightReference(declaredParam.getParameterType());
+				allCasePartsState = allCasePartsState.assignType(declaredParam, parameterType);
+			}
 		}
 		allCasePartsState.withinScope(object);
 
