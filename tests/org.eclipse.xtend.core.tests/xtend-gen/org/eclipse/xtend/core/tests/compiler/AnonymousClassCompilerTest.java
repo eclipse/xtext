@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -16,6 +17,60 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
+  @Ignore
+  @Test
+  public void testCapturedLocalVar() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val x = \'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val bar = new Runnable() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("override run() { x.toString }");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void foo() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Runnable bar = new Runnable() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("public void run() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   @Test
   public void testLocalVar() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1030,7 +1085,7 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  public void testField_AdditionalMember() {
+  public void testField_AdditionalMember_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -1095,6 +1150,175 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}.apply();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testField_AdditionalMember_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val secondOuterField = 1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val outerField = new Object() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("int localField");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("} => [ localField = secondOuterField ]");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final int secondOuterField = 1;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final Object outerField = new Function0<Object>() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public Object apply() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("final class __C_1 {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("private int localField;");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("__C_1 ___C_1 = new __C_1();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("final Procedure1<__C_1> _function = new Procedure1<__C_1>() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("public void apply(final __C_1 it) {");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("it.localField = C.this.secondOuterField;");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("__C_1 _doubleArrow = ObjectExtensions.<__C_1>operator_doubleArrow(___C_1, _function);");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return _doubleArrow;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}.apply();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testAdditionalMemberAccess_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Object() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("public int f");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("} => [ f = 1 ]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object m() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final class __C_1 {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("public int f;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("__C_1 ___C_1 = new __C_1();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Procedure1<__C_1> _function = new Procedure1<__C_1>() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("public void apply(final __C_1 it) {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("it.f = 1;");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return ObjectExtensions.<__C_1>operator_doubleArrow(___C_1, _function);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
