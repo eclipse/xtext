@@ -75,6 +75,7 @@
     <sourceLocators rootFolder="${xtext.git.location}/devtools/"/>
     <sourceLocators rootFolder="${xtext.git.location}/releng/"/>
     <sourceLocators rootFolder="${xtext.git.location}/maven/"/>
+    <sourceLocators rootFolder="${xtext.git.location}/examples/org.eclipse.xtend.examples-container/contents"/>
   </setupTasks>
   <setupTasks xsi:type="setup:TargletTask" name="Eclipse TP" activeRepositoryList="galileo">
     <roots id="org.eclipse.jdt.feature.group" versionRange="[3.5.0,3.6.0)"/>
@@ -235,9 +236,6 @@
     <choices value="juno" label="Juno - 4.2"/>
     <choices value="kepler" label="Kepler - 4.3"/>
     <choices value="luna" label="Luna - 4.4"/>
-  </setupTasks>
-  <setupTasks xsi:type="setup:CompoundSetupTask" name="org.eclipse.core.resources">
-    <setupTasks xsi:type="setup:EclipsePreferenceTask" key="/instance/org.eclipse.core.resources/encoding" value="ISO-8859-1"/>
   </setupTasks>
   <branches name="master">
     <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.5 stream API" version="2.5.3" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.5.3/R201402240820/tmf-xtext-SDK-2.5.3.zip&amp;r=1"/>
