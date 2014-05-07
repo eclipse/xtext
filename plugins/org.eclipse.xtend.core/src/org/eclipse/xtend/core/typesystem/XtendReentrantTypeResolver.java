@@ -667,12 +667,14 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 	}
 
 	protected void doPrepareLocalTypes(
-			ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+			ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
 			JvmFeature container,
 			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
 		List<JvmGenericType> localClasses = container.getLocalClasses();
 		for(JvmGenericType localClass: localClasses) {
 			JvmTypeReference superType = localClass.getSuperTypes().get(0);
+			IFeatureScopeSession nestedSession = featureScopeSession;
 			if (InferredTypeIndicator.isInferred(superType)) {
 				XComputedTypeReference casted = (XComputedTypeReference) superType;
 				InferredTypeIndicator typeProvider = (InferredTypeIndicator) casted.getTypeProvider();
@@ -685,18 +687,20 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				}
 				JvmParameterizedTypeReference superTypeReference = createSuperTypeReference(type, constructorCall);
 				InferredTypeIndicator.resolveTo(casted, superTypeReference);
+				nestedSession = addThisAndSuper(featureScopeSession, resolvedTypes.getReferenceOwner(), localClass, superTypeReference);
 				if(type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) type).isInterface()) {
 					inferAnonymousClassConstructor(anonymousClass, localClass, type);
 				} else {
 					for(JvmMember superMember: type.getMembers()) {
 						if (superMember instanceof JvmConstructor) {
 							JvmConstructor superTypeConstructor = (JvmConstructor) superMember;
-							inferAnonymousClassConstructor(anonymousClass, localClass, superTypeConstructor);
+							boolean visible = nestedSession.isVisible(superTypeConstructor);
+							inferAnonymousClassConstructor(anonymousClass, localClass, superTypeConstructor, visible);
 						}
 					}
 				}
 			}
-			doPrepare(resolvedTypes, featureScopeSession, localClass, resolvedTypesByContext);
+			doPrepare(resolvedTypes, nestedSession, localClass, resolvedTypesByContext);
 		}
 	}
 	
@@ -709,11 +713,14 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		return result;
 	}
 	
-	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClass anonymousClass, JvmGenericType inferredLocalClass, JvmConstructor superConstructor) {
+	protected JvmConstructor inferAnonymousClassConstructor(AnonymousClass anonymousClass, JvmGenericType inferredLocalClass, JvmConstructor superConstructor, boolean visible) {
 		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 		inferredLocalClass.getMembers().add(constructor);
 		associator.associatePrimary(anonymousClass.getConstructorCall(), constructor);
-		constructor.setVisibility(superConstructor.getVisibility());
+		if (visible) {
+			constructor.setVisibility(JvmVisibility.DEFAULT);
+		} else
+			constructor.setVisibility(JvmVisibility.PRIVATE);
 		constructor.setSimpleName(inferredLocalClass.getSimpleName());
 		for(JvmFormalParameter parameter: superConstructor.getParameters()) 
 			constructor.getParameters().add(typesBuilder.cloneWithProxies(parameter));
