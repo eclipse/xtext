@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -32,7 +31,6 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
-import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -219,9 +217,8 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			if (feature instanceof XVariableDeclaration) {
 				XVariableDeclaration casted = (XVariableDeclaration) feature;
 				if (casted.isWriteable()) {
-					XClosure containingClosure = EcoreUtil2.getContainerOfType(getExpression(), XClosure.class);
-					if (containingClosure != null && !EcoreUtil.isAncestor(containingClosure, feature)) {
-						String message = String.format("Cannot refer to the non-final variable %s inside a lambda expression", feature.getSimpleName());
+					String message = getState().getResolver().getInvalidWritableVariableAccessMessage(casted, getFeatureCall());
+					if (message != null) {
 						AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
 								IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, message, getExpression(),
 								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);

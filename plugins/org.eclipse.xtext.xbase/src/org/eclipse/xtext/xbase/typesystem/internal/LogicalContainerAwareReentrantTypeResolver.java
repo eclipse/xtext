@@ -41,6 +41,7 @@ import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -53,6 +54,7 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
+import org.eclipse.xtext.xbase.typesystem.LocalVariableCapturer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
@@ -78,6 +80,52 @@ import com.google.inject.Inject;
 @NonNullByDefault
 public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrantTypeResolver {
 
+	protected static class LocalVariableCapturerImpl extends LocalVariableCapturer {
+
+		private JvmDeclaredType localClass;
+		private LogicalContainerAwareReentrantTypeResolver typeResolver;
+		private Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext;
+		private ResolvedTypes resolvedTypes;
+		private IFeatureScopeSession capturedState;
+
+		protected LocalVariableCapturerImpl(
+				JvmTypeReference equivalent,
+				JvmDeclaredType localClass,
+				LogicalContainerAwareReentrantTypeResolver typeResolver,
+				ResolvedTypes resolvedTypes,
+				Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
+			super(equivalent);
+			this.localClass = localClass;
+			this.typeResolver = typeResolver;
+			this.resolvedTypes = resolvedTypes;
+			this.resolvedTypesByContext = resolvedTypesByContext;
+		}
+		
+		@Override
+		protected void awaitCapturing() {
+			super.awaitCapturing();
+		}
+
+		@Override
+		protected void capture(ITypeComputationState state) {
+			this.capturedState = ((AbstractTypeComputationState) state).getFeatureScopeSession();
+			IFeatureScopeSession nestedSession = typeResolver.addThisAndSuper(capturedState, state.getReferenceOwner(), localClass, getEquivalent(), true);
+			typeResolver.doPrepare(resolvedTypes, nestedSession, localClass, resolvedTypesByContext);
+		}
+		
+		protected static IFeatureScopeSession findCapturedState(JvmDeclaredType type) {
+			LocalVariableCapturerImpl capturer = findLocalClassSupertype(type);
+			if (capturer != null) {
+				if (capturer.capturedState == null) {
+					throw new IllegalStateException("Not yet captured");
+				}
+				return capturer.capturedState;
+			}
+			return null;
+		}
+		
+	}
+	
 	public class DemandTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
 		private final JvmMember member;
 		private final ResolvedTypes resolvedTypes;
@@ -524,8 +572,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		mergeChildTypes(childResolvedTypes);
 	}
 
-	protected void computeLocalTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession, JvmFeature feature) {
+	protected void computeLocalTypes(
+			Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes,
+			ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
+			JvmFeature feature) {
 		for(JvmGenericType localClass: feature.getLocalClasses()) {
 			computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, localClass);
 		}
@@ -612,6 +663,10 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(type);
 		if (childResolvedTypes == null)
 			throw new IllegalStateException("No resolved type found. Type was: " + type.getIdentifier());
+		IFeatureScopeSession capturedState = LocalVariableCapturerImpl.findCapturedState(type);
+		if (capturedState != null) {
+			featureScopeSession = capturedState;
+		}
 		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, childResolvedTypes.getReferenceOwner(), type);
 		computeMemberTypes(preparedResolvedTypes, childResolvedTypes, childSession, type);
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, type);
@@ -630,11 +685,15 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, ITypeReferenceOwner owner, JvmDeclaredType type) {
 		JvmTypeReference superType = getExtendedClass(type);
-		return addThisAndSuper(session, owner, type, superType);
+		return addThisAndSuper(session, owner, type, superType, true);
 	}
 
-	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, ITypeReferenceOwner owner, JvmDeclaredType thisType,
-			@Nullable JvmTypeReference superType) {
+	protected IFeatureScopeSession addThisAndSuper(
+			IFeatureScopeSession session,
+			ITypeReferenceOwner owner,
+			JvmDeclaredType thisType,
+			@Nullable JvmTypeReference superType,
+			boolean addNestedTypes) {
 		IFeatureScopeSession childSession;
 		if (superType != null) {
 			ImmutableMap.Builder<QualifiedName, JvmIdentifiableElement> builder = ImmutableMap.builder();
@@ -645,7 +704,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			childSession = session.addLocalElement(IFeatureNames.THIS, thisType, owner);
 		}
 		childSession = addThisTypeToStaticScope(childSession, thisType);
-		childSession = childSession.addNestedTypesToScope(thisType);
+		if (addNestedTypes)
+			childSession = childSession.addNestedTypesToScope(thisType);
 		return childSession;
 	}
 
@@ -768,5 +828,13 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected JvmTypeReference toJavaCompliantTypeReference(LightweightTypeReference result, IFeatureScopeSession session) {
 		return result.toJavaCompliantTypeReference(session);
+	}
+	
+	protected void requestCapturedLocalVariables(JvmTypeReference toBeWrapped, JvmDeclaredType type, ResolvedTypes resolvedTypes, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, IAcceptor<JvmTypeReference> result) {
+		LocalVariableCapturerImpl capturer = new LocalVariableCapturerImpl(toBeWrapped, type, this, resolvedTypes, resolvedTypesByContext);
+		XComputedTypeReference ref = getServices().getXtypeFactory().createXComputedTypeReference();
+		ref.setTypeProvider(capturer);
+		result.accept(ref);
+		capturer.awaitCapturing();
 	}
 }

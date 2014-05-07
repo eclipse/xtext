@@ -26,7 +26,7 @@ public class NestedTypeCollector {
 
 	public Map<QualifiedName, JvmDeclaredType> collectNestedTypes(JvmDeclaredType type) {
 		Set<JvmType> superTypes = new RawSuperTypes().collect(type);
-		Map<QualifiedName, JvmDeclaredType> nestedTypes = null;
+		Map<QualifiedName, JvmDeclaredType> nestedTypes = collectNestedTypes(type, QualifiedName.EMPTY, null);
 		for(JvmType superType: superTypes) {
 			nestedTypes = collectNestedTypes(superType, QualifiedName.EMPTY, nestedTypes);
 		}
