@@ -46,6 +46,39 @@ class AutocastCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def testSwitch_02() {
+		assertCompilesTo('''
+			class C {
+				def void m() {
+					switch Object o: new Object {
+						String: n(o)
+					}
+				}
+				def void n(CharSequence s) {
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m() {
+			    Object _object = new Object();
+			    final Object o = _object;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (o instanceof String) {
+			        _matched=true;
+			        this.n(((CharSequence)o));
+			      }
+			    }
+			  }
+			  
+			  public void n(final CharSequence s) {
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testIf_01() {
 		assertCompilesTo('''
 			class C {
