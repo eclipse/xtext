@@ -12,8 +12,8 @@ import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
-import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.lang.annotation.ElementType;
@@ -119,6 +119,8 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
+import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
+import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder.Acceptor;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 
 import com.google.common.base.Function;
@@ -184,6 +186,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject
 	private OperatorMapping operatorMapping;
+	
+	@Inject
+	private ImplicitReturnFinder implicitReturnFinder;
 	
 	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
 	protected final Map<Class<?>, ElementType> targetInfos;
@@ -1661,7 +1666,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	@Check
 	protected void checkInferedApi(XtendFunction method) {
-		if (isApi(method) && method.getReturnType() == null) {
+		if (isIgnored(API_TYPE_INFERENCE)) return;
+		if (isApi(method) && method.getReturnType() == null && !method.isOverride()) {
 			addIssue("API method needs explicit return type", method, XTEND_FUNCTION__NAME, API_TYPE_INFERENCE);
 		}
 	}
@@ -1688,5 +1694,16 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			api = api && isApi(type.getDeclaringType());
 		}
 		return api;
+	}
+	
+	@Check
+	protected void checkImplicitReturn(final XtendFunction method) {
+		if (isIgnored(IMPLICIT_RETURN)) return;
+		implicitReturnFinder.findImplicitReturns(method.getExpression(), new Acceptor() {
+			public void accept(XExpression implicitReturn) {
+				if (method.getExpression() == implicitReturn) return;
+				addIssue("Implicit return", implicitReturn, IMPLICIT_RETURN);
+			}
+		});
 	}
 }
