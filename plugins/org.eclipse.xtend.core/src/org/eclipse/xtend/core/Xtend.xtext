@@ -176,7 +176,7 @@ CreateExtensionInfo:
 ;
 
 ValidID:
-	ID | 'create' | 'annotation'
+	ID | 'create' | 'annotation' | 'AFTER' | 'BEFORE' | 'SEPARATOR'
 ;
 
 // For feature calls we add 'extension' since there are method such as 'isExtension' or 'getExtension' out there.
@@ -188,6 +188,7 @@ InnerVarID:
 	ID | 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' 
 	   | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' 
 	   | 'protected' | 'static' | 'throws' | 'strictfp' | 'native' | 'volatile' | 'synchronized' | 'transient'
+	   | 'AFTER' | 'BEFORE' | 'SEPARATOR'
 ;
 
 Parameter returns XtendParameter:
