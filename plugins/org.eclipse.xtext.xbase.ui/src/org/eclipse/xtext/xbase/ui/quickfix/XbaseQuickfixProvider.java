@@ -31,8 +31,10 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -75,6 +77,21 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(IssueCodes.IMPORT_DUPLICATE)
 	public void fixDuplicateImport(final Issue issue, IssueResolutionAcceptor acceptor) {
 		organizeImports(issue, acceptor);
+	}
+	
+	@Fix(IssueCodes.OPERATION_WITHOUT_PARENTHESES)
+	public void fixMissingParentheses(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Add parentheses", "Add parentheses", null, new ISemanticModification() {
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				if (element instanceof XMemberFeatureCall) {
+					((XMemberFeatureCall) element).setExplicitOperationCall(true);
+				} else if (element instanceof XFeatureCall) {
+					((XFeatureCall) element).setExplicitOperationCall(true);
+				} else if (element instanceof XConstructorCall) {
+					((XConstructorCall) element).setExplicitConstructorCall(true);
+				}
+			}
+		});
 	}
 
 	@Fix(IssueCodes.IMPORT_UNUSED)

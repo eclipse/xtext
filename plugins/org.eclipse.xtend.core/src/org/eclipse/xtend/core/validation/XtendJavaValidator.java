@@ -1631,7 +1631,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	protected void checkInferedApi(XtendFunction method) {
-		if (isApi(method) && method.getReturnType() == null) {
+		if (isApi(method) && method.getReturnType() == null && !method.isOverride()) {
 			addIssue("API method needs explicit return type", method, XTEND_FUNCTION__NAME, API_TYPE_INFERENCE);
 		}
 	}
