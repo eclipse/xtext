@@ -44,12 +44,41 @@ ruleType :
 
 // Rule AnnotationField
 ruleAnnotationField :
-	ruleXAnnotation* ruleCommonModifier* (
-		ruleFieldModifier ruleCommonModifier* ruleJvmTypeReference? ruleValidID |
-		ruleJvmTypeReference ruleValidID
-	) (
-		'=' ruleXAnnotationElementValue
-	)? ';'?
+	ruleXAnnotation* (
+		(
+			ruleCommonModifier* ruleFieldModifier ruleCommonModifier*
+			ruleJvmTypeReference? ruleValidID |
+			ruleCommonModifier* ruleJvmTypeReference ruleValidID
+		) (
+			'=' ruleXAnnotationElementValue
+		)? ';'? |
+		ruleCommonModifier* 'class' ruleValidID (
+			'<' ruleJvmTypeParameter (
+				',' ruleJvmTypeParameter
+			)* '>'
+		)? (
+			'extends' ruleJvmParameterizedTypeReference
+		)? (
+			'implements' ruleJvmParameterizedTypeReference (
+				',' ruleJvmParameterizedTypeReference
+			)*
+		)? '{' ruleMember* '}' |
+		ruleCommonModifier* 'interface' ruleValidID (
+			'<' ruleJvmTypeParameter (
+				',' ruleJvmTypeParameter
+			)* '>'
+		)? (
+			'extends' ruleJvmParameterizedTypeReference (
+				',' ruleJvmParameterizedTypeReference
+			)*
+		)? '{' ruleMember* '}' |
+		ruleCommonModifier* 'enum' ruleValidID '{' (
+			ruleXtendEnumLiteral (
+				',' ruleXtendEnumLiteral
+			)*
+		)? ';'? '}' |
+		ruleCommonModifier* 'annotation' ruleValidID '{' ruleAnnotationField* '}'
+	)
 ;
 
 // Rule Member

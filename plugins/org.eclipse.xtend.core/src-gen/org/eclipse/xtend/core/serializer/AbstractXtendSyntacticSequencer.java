@@ -18,7 +18,8 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected XtendGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_AnnotationField_SemicolonKeyword_4_q;
+	protected AbstractElementAlias match_AnnotationField_SemicolonKeyword_2_0_2_q;
+	protected AbstractElementAlias match_AnnotationField_SemicolonKeyword_2_3_6_q;
 	protected AbstractElementAlias match_File_SemicolonKeyword_0_2_q;
 	protected AbstractElementAlias match_Member_SemicolonKeyword_2_0_4_q;
 	protected AbstractElementAlias match_Member_SemicolonKeyword_2_1_9_2_q;
@@ -35,7 +36,8 @@ public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticS
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (XtendGrammarAccess) access;
-		match_AnnotationField_SemicolonKeyword_4_q = new TokenAlias(false, true, grammarAccess.getAnnotationFieldAccess().getSemicolonKeyword_4());
+		match_AnnotationField_SemicolonKeyword_2_0_2_q = new TokenAlias(false, true, grammarAccess.getAnnotationFieldAccess().getSemicolonKeyword_2_0_2());
+		match_AnnotationField_SemicolonKeyword_2_3_6_q = new TokenAlias(false, true, grammarAccess.getAnnotationFieldAccess().getSemicolonKeyword_2_3_6());
 		match_File_SemicolonKeyword_0_2_q = new TokenAlias(false, true, grammarAccess.getFileAccess().getSemicolonKeyword_0_2());
 		match_Member_SemicolonKeyword_2_0_4_q = new TokenAlias(false, true, grammarAccess.getMemberAccess().getSemicolonKeyword_2_0_4());
 		match_Member_SemicolonKeyword_2_1_9_2_q = new TokenAlias(false, true, grammarAccess.getMemberAccess().getSemicolonKeyword_2_1_9_2());
@@ -87,8 +89,10 @@ public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticS
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_AnnotationField_SemicolonKeyword_4_q.equals(syntax))
-				emit_AnnotationField_SemicolonKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if(match_AnnotationField_SemicolonKeyword_2_0_2_q.equals(syntax))
+				emit_AnnotationField_SemicolonKeyword_2_0_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_AnnotationField_SemicolonKeyword_2_3_6_q.equals(syntax))
+				emit_AnnotationField_SemicolonKeyword_2_3_6_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_File_SemicolonKeyword_0_2_q.equals(syntax))
 				emit_File_SemicolonKeyword_0_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Member_SemicolonKeyword_2_0_4_q.equals(syntax))
@@ -121,7 +125,15 @@ public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticS
 	 * Syntax:
 	 *     ';'?
 	 */
-	protected void emit_AnnotationField_SemicolonKeyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_AnnotationField_SemicolonKeyword_2_0_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Syntax:
+	 *     ';'?
+	 */
+	protected void emit_AnnotationField_SemicolonKeyword_2_3_6_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

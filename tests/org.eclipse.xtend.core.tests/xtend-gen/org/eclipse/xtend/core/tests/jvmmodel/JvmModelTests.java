@@ -294,6 +294,54 @@ public class JvmModelTests extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testClassInAnnotationIsStatic() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("annotation Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("class C {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendAnnotationType _annotationType = this.annotationType(_string);
+      final JvmAnnotationType inferred = this._iXtendJvmAssociations.getInferredAnnotationType(_annotationType);
+      EList<JvmMember> _members = inferred.getMembers();
+      JvmMember _head = IterableExtensions.<JvmMember>head(_members);
+      final JvmGenericType c = ((JvmGenericType) _head);
+      boolean _isStatic = c.isStatic();
+      Assert.assertTrue(_isStatic);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testClassInInterfaceIsStatic() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("class C {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendInterface _interfaze = this.interfaze(_string);
+      final JvmGenericType inferred = this._iXtendJvmAssociations.getInferredType(_interfaze);
+      EList<JvmMember> _members = inferred.getMembers();
+      JvmMember _head = IterableExtensions.<JvmMember>head(_members);
+      final JvmGenericType c = ((JvmGenericType) _head);
+      boolean _isStatic = c.isStatic();
+      Assert.assertTrue(_isStatic);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testTopLevelInterfaceIsNotStatic() {
     try {
       StringConcatenation _builder = new StringConcatenation();

@@ -318,7 +318,17 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	protected void initialize(XtendClass source, JvmGenericType inferredJvmType) {
 		inferredJvmType.setVisibility(source.getVisibility());
-		inferredJvmType.setStatic(source.isStatic() && !isTopLevel(source));
+		boolean isStatic = source.isStatic() && !isTopLevel(source);
+		if (!isStatic) {
+			JvmDeclaredType declaringType = inferredJvmType.getDeclaringType();
+			if (declaringType instanceof JvmGenericType) {
+				if (((JvmGenericType) declaringType).isInterface())
+					isStatic = true;
+			} else if (declaringType instanceof JvmAnnotationType) {
+				isStatic = true;
+			}
+		}
+		inferredJvmType.setStatic(isStatic);
 		inferredJvmType.setAbstract(source.isAbstract());
 		inferredJvmType.setStrictFloatingPoint(source.isStrictFloatingPoint());
 		if (!inferredJvmType.isAbstract()) {

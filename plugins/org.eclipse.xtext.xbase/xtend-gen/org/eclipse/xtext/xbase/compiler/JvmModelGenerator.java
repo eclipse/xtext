@@ -418,7 +418,12 @@ public class JvmModelGenerator implements IGenerator {
       ITreeAppendable _decreaseIndentation = childAppendable.decreaseIndentation();
       ITreeAppendable _newLine = _decreaseIndentation.newLine();
       _newLine.append("}");
-      _xblockexpression = appendable.newLine();
+      ITreeAppendable _xifexpression = null;
+      EObject _eContainer = it.eContainer();
+      if ((!(_eContainer instanceof JvmType))) {
+        _xifexpression = appendable.newLine();
+      }
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
@@ -452,7 +457,12 @@ public class JvmModelGenerator implements IGenerator {
       }
       ITreeAppendable _newLine = childAppendable.newLine();
       _newLine.append("}");
-      _xblockexpression = appendable.newLine();
+      ITreeAppendable _xifexpression = null;
+      EObject _eContainer = it.eContainer();
+      if ((!(_eContainer instanceof JvmType))) {
+        _xifexpression = appendable.newLine();
+      }
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

@@ -27,10 +27,28 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		clazz('''package class Foo{}''').assertNoErrors
 		clazz('''protected class Foo{}''').assertError(XTEND_CLASS, INVALID_MODIFIER)
 		clazz('''public class Foo{}''').assertNoErrors
-		clazz('''static class Foo{}''').assertNoErrors		
+		clazz('''static class Foo{}''').assertError(XTEND_CLASS, INVALID_MODIFIER)
 		clazz('''abstract class Foo{}''').assertNoErrors
-		clazz('''dispatch class Foo{}''').assertError(XTEND_CLASS, INVALID_MODIFIER)		
-		clazz('''final class Foo{}''').assertNoErrors		
+		clazz('''dispatch class Foo{}''').assertError(XTEND_CLASS, INVALID_MODIFIER)
+		clazz('''final class Foo{}''').assertNoErrors
+	}
+	
+	@Test def void testNestedClassAllowedModifiers() {
+		clazz('''private class Foo{}'''.toNestedType).assertNoErrors(INVALID_MODIFIER)
+		clazz('''package class Foo{}'''.toNestedType).assertNoErrors(INVALID_MODIFIER)
+		clazz('''protected class Foo{}'''.toNestedType).assertNoErrors(INVALID_MODIFIER)
+		clazz('''public class Foo{}'''.toNestedType).assertNoErrors(INVALID_MODIFIER)
+		clazz('''static class Foo{}'''.toNestedType).assertNoErrors(INVALID_MODIFIER)
+		clazz('''abstract class Foo{}'''.toNestedType).assertNoErrors(INVALID_MODIFIER)
+		clazz('''dispatch class Foo{}'''.toNestedType).assertError(XTEND_CLASS, INVALID_MODIFIER)
+		clazz('''final class Foo{}'''.toNestedType).assertNoErrors(INVALID_MODIFIER)
+	}
+	
+	@Test def void testNestedClass() {
+		clazz('''class Foo { class Bar {} }''').assertError(XTEND_CLASS, MISSING_STATIC_MODIFIER)
+		clazz('''class Foo { static class Bar {} }''').assertNoErrors
+		interfaze('''interface Foo { class Bar {} }''').assertNoErrors
+		annotationType('''annotation Foo { class Bar {} }''').assertNoErrors
 	}
 	
 	@Test def void testInterfaceAllowedModifiers() {
@@ -38,10 +56,21 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		interfaze('''package interface Foo{}''').assertNoErrors
 		interfaze('''protected interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)
 		interfaze('''public interface Foo{}''').assertNoErrors
-		interfaze('''static interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)		
+		interfaze('''static interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)
 		interfaze('''abstract interface Foo{}''').assertNoErrors
-		interfaze('''dispatch interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)		
-		interfaze('''final interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)		
+		interfaze('''dispatch interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)
+		interfaze('''final interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)
+	}
+	
+	@Test def void testNestedInterfaceAllowedModifiers() {
+		clazz('''private interface Foo{}'''.toNestedType).assertNoErrors
+		clazz('''package interface Foo{}'''.toNestedType).assertNoErrors
+		clazz('''protected interface Foo{}'''.toNestedType).assertNoErrors
+		clazz('''public interface Foo{}'''.toNestedType).assertNoErrors
+		clazz('''static interface Foo{}'''.toNestedType).assertNoErrors
+		clazz('''abstract interface Foo{}'''.toNestedType).assertNoErrors
+		clazz('''dispatch interface Foo{}'''.toNestedType).assertError(XTEND_INTERFACE, INVALID_MODIFIER)
+		clazz('''final interface Foo{}'''.toNestedType).assertError(XTEND_INTERFACE, INVALID_MODIFIER)
 	}
 	
 	@Test def void testEnumAllowedModifiers() {
@@ -49,10 +78,21 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		enumeration('''package enum Foo{}''').assertNoErrors
 		enumeration('''protected enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)
 		enumeration('''public enum Foo{}''').assertNoErrors
-		enumeration('''static enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)		
+		enumeration('''static enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)
 		enumeration('''abstract enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)
-		enumeration('''dispatch enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)		
-		enumeration('''final enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)		
+		enumeration('''dispatch enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)
+		enumeration('''final enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)
+	}
+	
+	@Test def void testNestedEnumAllowedModifiers() {
+		clazz('''private enum Foo{}'''.toNestedType).assertNoErrors
+		clazz('''package enum Foo{}'''.toNestedType).assertNoErrors
+		clazz('''protected enum Foo{}'''.toNestedType).assertNoErrors
+		clazz('''public enum Foo{}'''.toNestedType).assertNoErrors
+		clazz('''static enum Foo{}'''.toNestedType).assertNoErrors
+		clazz('''abstract enum Foo{}'''.toNestedType).assertError(XTEND_ENUM, INVALID_MODIFIER)
+		clazz('''dispatch enum Foo{}'''.toNestedType).assertError(XTEND_ENUM, INVALID_MODIFIER)
+		clazz('''final enum Foo{}'''.toNestedType).assertError(XTEND_ENUM, INVALID_MODIFIER)
 	}
 	
 	@Test def void testAnnotationTypeAllowedModifiers() {
@@ -61,9 +101,20 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		annotationType('''protected annotation Foo{}''').assertError(XTEND_ANNOTATION_TYPE, INVALID_MODIFIER)
 		annotationType('''public annotation Foo{}''').assertNoErrors
 		annotationType('''static annotation Foo{}''').assertError(XTEND_ANNOTATION_TYPE, INVALID_MODIFIER)
-		annotationType('''abstract annotation Foo{}''').assertNoErrors		
-		annotationType('''dispatch annotation Foo{}''').assertError(XTEND_ANNOTATION_TYPE, INVALID_MODIFIER)		
+		annotationType('''abstract annotation Foo{}''').assertNoErrors
+		annotationType('''dispatch annotation Foo{}''').assertError(XTEND_ANNOTATION_TYPE, INVALID_MODIFIER)
 		annotationType('''final annotation Foo{}''').assertError(XTEND_ANNOTATION_TYPE, INVALID_MODIFIER)
+	}
+	
+	@Test def void testNestedAnnotationTypeAllowedModifiers() {
+		clazz('''private annotation Foo{}'''.toNestedType).assertNoErrors
+		clazz('''package annotation Foo{}'''.toNestedType).assertNoErrors
+		clazz('''protected annotation Foo{}'''.toNestedType).assertNoErrors
+		clazz('''public annotation Foo{}'''.toNestedType).assertNoErrors
+		clazz('''static annotation Foo{}'''.toNestedType).assertNoErrors
+		clazz('''abstract annotation Foo{}'''.toNestedType).assertNoErrors
+		clazz('''dispatch annotation Foo{}'''.toNestedType).assertError(XTEND_ANNOTATION_TYPE, INVALID_MODIFIER)
+		clazz('''final annotation Foo{}'''.toNestedType).assertError(XTEND_ANNOTATION_TYPE, INVALID_MODIFIER)
 	}
 	
 	@Test def void testMethodAllowedModifiers() {
@@ -71,10 +122,10 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		function('''package def foo() {}''').assertNoErrors
 		function('''protected def foo() {}''').assertNoErrors
 		function('''public def foo() {}''').assertNoErrors
-		function('''static def foo() {}''').assertNoErrors		
+		function('''static def foo() {}''').assertNoErrors
 		function('''abstract def foo()''').assertNoError(INVALID_MODIFIER)	
-		function('''dispatch def foo (int i){}''').assertNoErrors		
-		function('''final def foo() {}''').assertNoErrors		
+		function('''dispatch def foo (int i){}''').assertNoErrors
+		function('''final def foo() {}''').assertNoErrors
 	}
 
 	@Test def void testMethodInInterfaceAllowedModifiers() {
@@ -85,7 +136,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		memberInInterface('''override def foo() {}''').assertNoError(INVALID_MODIFIER)
 		memberInInterface('''static def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)	
 		memberInInterface('''abstract def int foo()''').assertNoErrors	
-		memberInInterface('''dispatch def foo (int i){}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
+		memberInInterface('''dispatch def foo (int i){}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		memberInInterface('''final def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		memberInInterface('''strictfp def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		memberInInterface('''synchronized def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
@@ -96,7 +147,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		constructor('''package new() {}''').assertNoErrors
 		constructor('''protected new() {}''').assertNoErrors
 		constructor('''public new() {}''').assertNoErrors
-		constructor('''static new() {}''').assertError(XTEND_CONSTRUCTOR, INVALID_MODIFIER)		
+		constructor('''static new() {}''').assertError(XTEND_CONSTRUCTOR, INVALID_MODIFIER)
 		constructor('''abstract new() {}''').assertError(XTEND_CONSTRUCTOR, INVALID_MODIFIER)
 		constructor('''dispatch new (){}''').assertError(XTEND_CONSTRUCTOR, INVALID_MODIFIER)
 		constructor('''final new() {}''').assertError(XTEND_CONSTRUCTOR, INVALID_MODIFIER)
@@ -109,7 +160,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		field('''package int foo''').assertNoErrors
 		field('''protected int foo''').assertNoErrors
 		field('''public int foo''').assertNoErrors
-		field('''static int foo''').assertNoErrors		
+		field('''static int foo''').assertNoErrors
 		field('''abstract int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		field('''dispatch int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		field('''final int foo = 42''').assertNoErrors
@@ -124,7 +175,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		memberInInterface('''package int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInInterface('''protected int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInInterface('''public int foo = 42''').assertNoErrors
-		memberInInterface('''static int foo = 42''').assertNoErrors		
+		memberInInterface('''static int foo = 42''').assertNoErrors
 		memberInInterface('''abstract int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInInterface('''dispatch int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInInterface('''final int foo = 42''').assertNoErrors
@@ -140,7 +191,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		memberInAnnotation('''package int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInAnnotation('''protected int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInAnnotation('''public int foo''').assertNoErrors
-		memberInAnnotation('''static int foo''').assertNoErrors		
+		memberInAnnotation('''static int foo''').assertNoErrors
 		memberInAnnotation('''abstract int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInAnnotation('''dispatch int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInAnnotation('''final int foo = 42''').assertNoErrors
@@ -155,12 +206,12 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		function('''package package def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		function('''protected protected def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		function('''public public def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
-		function('''static static def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
-		function('''abstract abstract def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
-		function('''dispatch dispatch def foo (int i){}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
-		function('''final final def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
-		function('''strictfp strictfp def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
-		function('''synchronized synchronized def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
+		function('''static static def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		function('''abstract abstract def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		function('''dispatch dispatch def foo (int i){}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		function('''final final def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		function('''strictfp strictfp def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		function('''synchronized synchronized def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 	}
 
 	@Test def void testDuplicateVisibility() {
@@ -213,11 +264,6 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		field('''val final int i=42''').assertNoErrors
 	}
 	
-	@Test def void testNestedClass() {
-		clazz('''class Foo { class Bar {} }''').assertError(XTEND_CLASS, INVALID_MODIFIER)
-		clazz('''class Foo { static class Bar {} }''').assertNoErrors
-	}
-	
 	def protected memberInInterface(String model) {
 		interfaze('''interface Foo { «model» }''').members.get(0)
 	}
@@ -225,5 +271,11 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 	def protected memberInAnnotation(String model) {
 		annotationType('''annotation Foo { «model» }''').members.get(0)
 	}
+	
+	def private String toNestedType(CharSequence input) '''
+		class C {
+			«input»
+		}
+	'''
 }
 

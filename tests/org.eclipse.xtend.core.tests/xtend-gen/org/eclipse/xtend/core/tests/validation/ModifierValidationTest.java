@@ -57,7 +57,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("static class Foo{}");
       XtendClass _clazz_4 = this.clazz(_builder_4.toString());
-      this._validationTestHelper.assertNoErrors(_clazz_4);
+      this._validationTestHelper.assertError(_clazz_4, XtendPackage.Literals.XTEND_CLASS, IssueCodes.INVALID_MODIFIER);
       StringConcatenation _builder_5 = new StringConcatenation();
       _builder_5.append("abstract class Foo{}");
       XtendClass _clazz_5 = this.clazz(_builder_5.toString());
@@ -70,6 +70,78 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_7.append("final class Foo{}");
       XtendClass _clazz_7 = this.clazz(_builder_7.toString());
       this._validationTestHelper.assertNoErrors(_clazz_7);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNestedClassAllowedModifiers() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("private class Foo{}");
+      String _nestedType = this.toNestedType(_builder);
+      XtendClass _clazz = this.clazz(_nestedType);
+      this._validationTestHelper.assertNoErrors(_clazz, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package class Foo{}");
+      String _nestedType_1 = this.toNestedType(_builder_1);
+      XtendClass _clazz_1 = this.clazz(_nestedType_1);
+      this._validationTestHelper.assertNoErrors(_clazz_1, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("protected class Foo{}");
+      String _nestedType_2 = this.toNestedType(_builder_2);
+      XtendClass _clazz_2 = this.clazz(_nestedType_2);
+      this._validationTestHelper.assertNoErrors(_clazz_2, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("public class Foo{}");
+      String _nestedType_3 = this.toNestedType(_builder_3);
+      XtendClass _clazz_3 = this.clazz(_nestedType_3);
+      this._validationTestHelper.assertNoErrors(_clazz_3, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("static class Foo{}");
+      String _nestedType_4 = this.toNestedType(_builder_4);
+      XtendClass _clazz_4 = this.clazz(_nestedType_4);
+      this._validationTestHelper.assertNoErrors(_clazz_4, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("abstract class Foo{}");
+      String _nestedType_5 = this.toNestedType(_builder_5);
+      XtendClass _clazz_5 = this.clazz(_nestedType_5);
+      this._validationTestHelper.assertNoErrors(_clazz_5, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("dispatch class Foo{}");
+      String _nestedType_6 = this.toNestedType(_builder_6);
+      XtendClass _clazz_6 = this.clazz(_nestedType_6);
+      this._validationTestHelper.assertError(_clazz_6, XtendPackage.Literals.XTEND_CLASS, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_7 = new StringConcatenation();
+      _builder_7.append("final class Foo{}");
+      String _nestedType_7 = this.toNestedType(_builder_7);
+      XtendClass _clazz_7 = this.clazz(_nestedType_7);
+      this._validationTestHelper.assertNoErrors(_clazz_7, IssueCodes.INVALID_MODIFIER);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNestedClass() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo { class Bar {} }");
+      XtendClass _clazz = this.clazz(_builder.toString());
+      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CLASS, IssueCodes.MISSING_STATIC_MODIFIER);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("class Foo { static class Bar {} }");
+      XtendClass _clazz_1 = this.clazz(_builder_1.toString());
+      this._validationTestHelper.assertNoErrors(_clazz_1);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("interface Foo { class Bar {} }");
+      XtendInterface _interfaze = this.interfaze(_builder_2.toString());
+      this._validationTestHelper.assertNoErrors(_interfaze);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("annotation Foo { class Bar {} }");
+      XtendAnnotationType _annotationType = this.annotationType(_builder_3.toString());
+      this._validationTestHelper.assertNoErrors(_annotationType);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -116,6 +188,54 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testNestedInterfaceAllowedModifiers() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("private interface Foo{}");
+      String _nestedType = this.toNestedType(_builder);
+      XtendClass _clazz = this.clazz(_nestedType);
+      this._validationTestHelper.assertNoErrors(_clazz);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package interface Foo{}");
+      String _nestedType_1 = this.toNestedType(_builder_1);
+      XtendClass _clazz_1 = this.clazz(_nestedType_1);
+      this._validationTestHelper.assertNoErrors(_clazz_1);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("protected interface Foo{}");
+      String _nestedType_2 = this.toNestedType(_builder_2);
+      XtendClass _clazz_2 = this.clazz(_nestedType_2);
+      this._validationTestHelper.assertNoErrors(_clazz_2);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("public interface Foo{}");
+      String _nestedType_3 = this.toNestedType(_builder_3);
+      XtendClass _clazz_3 = this.clazz(_nestedType_3);
+      this._validationTestHelper.assertNoErrors(_clazz_3);
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("static interface Foo{}");
+      String _nestedType_4 = this.toNestedType(_builder_4);
+      XtendClass _clazz_4 = this.clazz(_nestedType_4);
+      this._validationTestHelper.assertNoErrors(_clazz_4);
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("abstract interface Foo{}");
+      String _nestedType_5 = this.toNestedType(_builder_5);
+      XtendClass _clazz_5 = this.clazz(_nestedType_5);
+      this._validationTestHelper.assertNoErrors(_clazz_5);
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("dispatch interface Foo{}");
+      String _nestedType_6 = this.toNestedType(_builder_6);
+      XtendClass _clazz_6 = this.clazz(_nestedType_6);
+      this._validationTestHelper.assertError(_clazz_6, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_7 = new StringConcatenation();
+      _builder_7.append("final interface Foo{}");
+      String _nestedType_7 = this.toNestedType(_builder_7);
+      XtendClass _clazz_7 = this.clazz(_nestedType_7);
+      this._validationTestHelper.assertError(_clazz_7, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.INVALID_MODIFIER);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testEnumAllowedModifiers() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -156,6 +276,54 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testNestedEnumAllowedModifiers() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("private enum Foo{}");
+      String _nestedType = this.toNestedType(_builder);
+      XtendClass _clazz = this.clazz(_nestedType);
+      this._validationTestHelper.assertNoErrors(_clazz);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package enum Foo{}");
+      String _nestedType_1 = this.toNestedType(_builder_1);
+      XtendClass _clazz_1 = this.clazz(_nestedType_1);
+      this._validationTestHelper.assertNoErrors(_clazz_1);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("protected enum Foo{}");
+      String _nestedType_2 = this.toNestedType(_builder_2);
+      XtendClass _clazz_2 = this.clazz(_nestedType_2);
+      this._validationTestHelper.assertNoErrors(_clazz_2);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("public enum Foo{}");
+      String _nestedType_3 = this.toNestedType(_builder_3);
+      XtendClass _clazz_3 = this.clazz(_nestedType_3);
+      this._validationTestHelper.assertNoErrors(_clazz_3);
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("static enum Foo{}");
+      String _nestedType_4 = this.toNestedType(_builder_4);
+      XtendClass _clazz_4 = this.clazz(_nestedType_4);
+      this._validationTestHelper.assertNoErrors(_clazz_4);
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("abstract enum Foo{}");
+      String _nestedType_5 = this.toNestedType(_builder_5);
+      XtendClass _clazz_5 = this.clazz(_nestedType_5);
+      this._validationTestHelper.assertError(_clazz_5, XtendPackage.Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("dispatch enum Foo{}");
+      String _nestedType_6 = this.toNestedType(_builder_6);
+      XtendClass _clazz_6 = this.clazz(_nestedType_6);
+      this._validationTestHelper.assertError(_clazz_6, XtendPackage.Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_7 = new StringConcatenation();
+      _builder_7.append("final enum Foo{}");
+      String _nestedType_7 = this.toNestedType(_builder_7);
+      XtendClass _clazz_7 = this.clazz(_nestedType_7);
+      this._validationTestHelper.assertError(_clazz_7, XtendPackage.Literals.XTEND_ENUM, IssueCodes.INVALID_MODIFIER);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testAnnotationTypeAllowedModifiers() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -190,6 +358,54 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_7.append("final annotation Foo{}");
       XtendAnnotationType _annotationType_7 = this.annotationType(_builder_7.toString());
       this._validationTestHelper.assertError(_annotationType_7, XtendPackage.Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNestedAnnotationTypeAllowedModifiers() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("private annotation Foo{}");
+      String _nestedType = this.toNestedType(_builder);
+      XtendClass _clazz = this.clazz(_nestedType);
+      this._validationTestHelper.assertNoErrors(_clazz);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package annotation Foo{}");
+      String _nestedType_1 = this.toNestedType(_builder_1);
+      XtendClass _clazz_1 = this.clazz(_nestedType_1);
+      this._validationTestHelper.assertNoErrors(_clazz_1);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("protected annotation Foo{}");
+      String _nestedType_2 = this.toNestedType(_builder_2);
+      XtendClass _clazz_2 = this.clazz(_nestedType_2);
+      this._validationTestHelper.assertNoErrors(_clazz_2);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("public annotation Foo{}");
+      String _nestedType_3 = this.toNestedType(_builder_3);
+      XtendClass _clazz_3 = this.clazz(_nestedType_3);
+      this._validationTestHelper.assertNoErrors(_clazz_3);
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("static annotation Foo{}");
+      String _nestedType_4 = this.toNestedType(_builder_4);
+      XtendClass _clazz_4 = this.clazz(_nestedType_4);
+      this._validationTestHelper.assertNoErrors(_clazz_4);
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("abstract annotation Foo{}");
+      String _nestedType_5 = this.toNestedType(_builder_5);
+      XtendClass _clazz_5 = this.clazz(_nestedType_5);
+      this._validationTestHelper.assertNoErrors(_clazz_5);
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("dispatch annotation Foo{}");
+      String _nestedType_6 = this.toNestedType(_builder_6);
+      XtendClass _clazz_6 = this.clazz(_nestedType_6);
+      this._validationTestHelper.assertError(_clazz_6, XtendPackage.Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
+      StringConcatenation _builder_7 = new StringConcatenation();
+      _builder_7.append("final annotation Foo{}");
+      String _nestedType_7 = this.toNestedType(_builder_7);
+      XtendClass _clazz_7 = this.clazz(_nestedType_7);
+      this._validationTestHelper.assertError(_clazz_7, XtendPackage.Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -703,22 +919,6 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     }
   }
   
-  @Test
-  public void testNestedClass() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("class Foo { class Bar {} }");
-      XtendClass _clazz = this.clazz(_builder.toString());
-      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CLASS, IssueCodes.INVALID_MODIFIER);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("class Foo { static class Bar {} }");
-      XtendClass _clazz_1 = this.clazz(_builder_1.toString());
-      this._validationTestHelper.assertNoErrors(_clazz_1);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
   protected XtendMember memberInInterface(final String model) {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -745,5 +945,17 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private String toNestedType(final CharSequence input) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(input, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder.toString();
   }
 }
