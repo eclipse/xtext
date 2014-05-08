@@ -20,6 +20,8 @@ import org.eclipse.xtext.serializer.sequencertest.Model;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
+import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
+import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
 import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
@@ -374,6 +376,20 @@ public class SequencertestSwitch<T> extends Switch<T>
       {
         OptionalDouble optionalDouble = (OptionalDouble)theEObject;
         T result = caseOptionalDouble(optionalDouble);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.NULL_VALUE:
+      {
+        NullValue nullValue = (NullValue)theEObject;
+        T result = caseNullValue(nullValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.NULL_CROSS_REF:
+      {
+        NullCrossRef nullCrossRef = (NullCrossRef)theEObject;
+        T result = caseNullCrossRef(nullCrossRef);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -985,6 +1001,38 @@ public class SequencertestSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseOptionalDouble(OptionalDouble object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Null Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Null Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNullValue(NullValue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Null Cross Ref</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Null Cross Ref</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNullCrossRef(NullCrossRef object)
   {
     return null;
   }

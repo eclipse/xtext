@@ -293,13 +293,49 @@ public interface SequencertestPackage extends EPackage
   int MODEL__X28 = 24;
 
   /**
+   * The feature id for the '<em><b>X29</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X29 = 25;
+
+  /**
+   * The feature id for the '<em><b>X30</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X30 = 26;
+
+  /**
+   * The feature id for the '<em><b>X31</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X31 = 27;
+
+  /**
+   * The feature id for the '<em><b>X32</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X32 = 28;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 25;
+  int MODEL_FEATURE_COUNT = 29;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1698,6 +1734,80 @@ public interface SequencertestPackage extends EPackage
   int OPTIONAL_DOUBLE_FEATURE_COUNT = 3;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.NullValueImpl <em>Null Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.NullValueImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getNullValue()
+   * @generated
+   */
+  int NULL_VALUE = 38;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NULL_VALUE__VALUE = 0;
+
+  /**
+   * The feature id for the '<em><b>Foo</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NULL_VALUE__FOO = 1;
+
+  /**
+   * The number of structural features of the '<em>Null Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NULL_VALUE_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.NullCrossRefImpl <em>Null Cross Ref</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.NullCrossRefImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getNullCrossRef()
+   * @generated
+   */
+  int NULL_CROSS_REF = 39;
+
+  /**
+   * The feature id for the '<em><b>Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NULL_CROSS_REF__REF = 0;
+
+  /**
+   * The feature id for the '<em><b>Foo</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NULL_CROSS_REF__FOO = 1;
+
+  /**
+   * The number of structural features of the '<em>Null Cross Ref</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NULL_CROSS_REF_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1705,7 +1815,7 @@ public interface SequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDefEnum()
    * @generated
    */
-  int DEF_ENUM = 38;
+  int DEF_ENUM = 40;
 
 
   /**
@@ -1992,6 +2102,50 @@ public interface SequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X28();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX29 <em>X29</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X29</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX29()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X29();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX30 <em>X30</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X30</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX30()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X30();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX31 <em>X31</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X31</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX31()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X31();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX32 <em>X32</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X32</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX32()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X32();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.SimpleGroup <em>Simple Group</em>}'.
@@ -3211,6 +3365,70 @@ public interface SequencertestPackage extends EPackage
   EAttribute getOptionalDouble_Double2();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.NullValue <em>Null Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Null Value</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.NullValue
+   * @generated
+   */
+  EClass getNullValue();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.NullValue#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.NullValue#getValue()
+   * @see #getNullValue()
+   * @generated
+   */
+  EAttribute getNullValue_Value();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.NullValue#getFoo <em>Foo</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Foo</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.NullValue#getFoo()
+   * @see #getNullValue()
+   * @generated
+   */
+  EAttribute getNullValue_Foo();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.NullCrossRef <em>Null Cross Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Null Cross Ref</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.NullCrossRef
+   * @generated
+   */
+  EClass getNullCrossRef();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.serializer.sequencertest.NullCrossRef#getRef <em>Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ref</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.NullCrossRef#getRef()
+   * @see #getNullCrossRef()
+   * @generated
+   */
+  EReference getNullCrossRef_Ref();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.NullCrossRef#getFoo <em>Foo</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Foo</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.NullCrossRef#getFoo()
+   * @see #getNullCrossRef()
+   * @generated
+   */
+  EAttribute getNullCrossRef_Foo();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3452,6 +3670,38 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X28 = eINSTANCE.getModel_X28();
+
+    /**
+     * The meta object literal for the '<em><b>X29</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X29 = eINSTANCE.getModel_X29();
+
+    /**
+     * The meta object literal for the '<em><b>X30</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X30 = eINSTANCE.getModel_X30();
+
+    /**
+     * The meta object literal for the '<em><b>X31</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X31 = eINSTANCE.getModel_X31();
+
+    /**
+     * The meta object literal for the '<em><b>X32</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X32 = eINSTANCE.getModel_X32();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -4438,6 +4688,58 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EAttribute OPTIONAL_DOUBLE__DOUBLE2 = eINSTANCE.getOptionalDouble_Double2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.NullValueImpl <em>Null Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.NullValueImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getNullValue()
+     * @generated
+     */
+    EClass NULL_VALUE = eINSTANCE.getNullValue();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NULL_VALUE__VALUE = eINSTANCE.getNullValue_Value();
+
+    /**
+     * The meta object literal for the '<em><b>Foo</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NULL_VALUE__FOO = eINSTANCE.getNullValue_Foo();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.NullCrossRefImpl <em>Null Cross Ref</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.NullCrossRefImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getNullCrossRef()
+     * @generated
+     */
+    EClass NULL_CROSS_REF = eINSTANCE.getNullCrossRef();
+
+    /**
+     * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NULL_CROSS_REF__REF = eINSTANCE.getNullCrossRef_Ref();
+
+    /**
+     * The meta object literal for the '<em><b>Foo</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NULL_CROSS_REF__FOO = eINSTANCE.getNullCrossRef_Foo();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.

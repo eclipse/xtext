@@ -32,7 +32,11 @@ ruleModel :
 	ruleUnorderedGroupOptional |
 	ruleUnorderedGroupBoolean |
 	ruleComplex1 |
-	ruleOptionalDouble
+	ruleOptionalDouble |
+	ruleNullValueGenerated |
+	ruleNullValueInterpreted |
+	ruleNullCrossRefGenerated |
+	ruleNullCrossRefInterpreted
 ;
 
 // Rule SimpleGroup
@@ -341,6 +345,31 @@ ruleDOUBLE :
 	RULE_INT (
 		'.' RULE_INT
 	)?
+;
+
+// Rule NullValueGenerated
+ruleNullValueGenerated :
+	'#29' ruleNULL_STRING
+;
+
+// Rule NullValueInterpreted
+ruleNullValueInterpreted :
+	'#30' ruleNULL_STRING RULE_ID?
+;
+
+// Rule NULL_STRING
+ruleNULL_STRING :
+	RULE_STRING
+;
+
+// Rule NullCrossRefGenerated
+ruleNullCrossRefGenerated :
+	'#31' RULE_ID
+;
+
+// Rule NullCrossRefInterpreted
+ruleNullCrossRefInterpreted :
+	'#32' RULE_ID RULE_ID?
 ;
 
 // Rule DefEnum1

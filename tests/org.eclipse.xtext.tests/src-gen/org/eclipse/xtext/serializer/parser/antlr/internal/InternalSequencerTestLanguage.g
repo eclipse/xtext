@@ -609,6 +609,82 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX29NullValueGeneratedParserRuleCall_28_0()); 
+	    }
+		lv_x29_28_0=ruleNullValueGenerated		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x29",
+        		lv_x29_28_0, 
+        		"NullValueGenerated");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX30NullValueInterpretedParserRuleCall_29_0()); 
+	    }
+		lv_x30_29_0=ruleNullValueInterpreted		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x30",
+        		lv_x30_29_0, 
+        		"NullValueInterpreted");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX31NullCrossRefGeneratedParserRuleCall_30_0()); 
+	    }
+		lv_x31_30_0=ruleNullCrossRefGenerated		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x31",
+        		lv_x31_30_0, 
+        		"NullCrossRefGenerated");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX32NullCrossRefInterpretedParserRuleCall_31_0()); 
+	    }
+		lv_x32_31_0=ruleNullCrossRefInterpreted		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x32",
+        		lv_x32_31_0, 
+        		"NullCrossRefInterpreted");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -3719,6 +3795,232 @@ ruleDOUBLE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 )?)
     ;
+
+
+
+
+
+// Entry rule entryRuleNullValueGenerated
+entryRuleNullValueGenerated returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNullValueGeneratedRule()); }
+	 iv_ruleNullValueGenerated=ruleNullValueGenerated 
+	 { $current=$iv_ruleNullValueGenerated.current; } 
+	 EOF 
+;
+
+// Rule NullValueGenerated
+ruleNullValueGenerated returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#29' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getNullValueGeneratedAccess().getNumberSignDigitTwoDigitNineKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getNullValueGeneratedAccess().getValueNULL_STRINGParserRuleCall_1_0()); 
+	    }
+		lv_value_1_0=ruleNULL_STRING		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getNullValueGeneratedRule());
+	        }
+       		set(
+       			$current, 
+       			"value",
+        		lv_value_1_0, 
+        		"NULL_STRING");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleNullValueInterpreted
+entryRuleNullValueInterpreted returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNullValueInterpretedRule()); }
+	 iv_ruleNullValueInterpreted=ruleNullValueInterpreted 
+	 { $current=$iv_ruleNullValueInterpreted.current; } 
+	 EOF 
+;
+
+// Rule NullValueInterpreted
+ruleNullValueInterpreted returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#30' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getNullValueInterpretedAccess().getNumberSignDigitThreeDigitZeroKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getNullValueInterpretedAccess().getValueNULL_STRINGParserRuleCall_1_0()); 
+	    }
+		lv_value_1_0=ruleNULL_STRING		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getNullValueInterpretedRule());
+	        }
+       		set(
+       			$current, 
+       			"value",
+        		lv_value_1_0, 
+        		"NULL_STRING");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_foo_2_0=RULE_ID
+		{
+			newLeafNode(lv_foo_2_0, grammarAccess.getNullValueInterpretedAccess().getFooIDTerminalRuleCall_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getNullValueInterpretedRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"foo",
+        		lv_foo_2_0, 
+        		"ID");
+	    }
+
+)
+)?)
+;
+
+
+
+
+
+// Entry rule entryRuleNULL_STRING
+entryRuleNULL_STRING returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNULL_STRINGRule()); } 
+	 iv_ruleNULL_STRING=ruleNULL_STRING 
+	 { $current=$iv_ruleNULL_STRING.current.getText(); }  
+	 EOF 
+;
+
+// Rule NULL_STRING
+ruleNULL_STRING returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+    this_STRING_0=RULE_STRING    {
+		$current.merge(this_STRING_0);
+    }
+
+    { 
+    newLeafNode(this_STRING_0, grammarAccess.getNULL_STRINGAccess().getSTRINGTerminalRuleCall()); 
+    }
+
+    ;
+
+
+
+
+
+// Entry rule entryRuleNullCrossRefGenerated
+entryRuleNullCrossRefGenerated returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNullCrossRefGeneratedRule()); }
+	 iv_ruleNullCrossRefGenerated=ruleNullCrossRefGenerated 
+	 { $current=$iv_ruleNullCrossRefGenerated.current; } 
+	 EOF 
+;
+
+// Rule NullCrossRefGenerated
+ruleNullCrossRefGenerated returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#31' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getNullCrossRefGeneratedAccess().getNumberSignDigitThreeDigitOneKeyword_0());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getNullCrossRefGeneratedRule());
+	        }
+        }
+	otherlv_1=RULE_ID
+	{
+		newLeafNode(otherlv_1, grammarAccess.getNullCrossRefGeneratedAccess().getRefEObjectCrossReference_1_0()); 
+	}
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleNullCrossRefInterpreted
+entryRuleNullCrossRefInterpreted returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNullCrossRefInterpretedRule()); }
+	 iv_ruleNullCrossRefInterpreted=ruleNullCrossRefInterpreted 
+	 { $current=$iv_ruleNullCrossRefInterpreted.current; } 
+	 EOF 
+;
+
+// Rule NullCrossRefInterpreted
+ruleNullCrossRefInterpreted returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#32' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getNullCrossRefInterpretedAccess().getNumberSignDigitThreeDigitTwoKeyword_0());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getNullCrossRefInterpretedRule());
+	        }
+        }
+	otherlv_1=RULE_ID
+	{
+		newLeafNode(otherlv_1, grammarAccess.getNullCrossRefInterpretedAccess().getRefEObjectCrossReference_1_0()); 
+	}
+
+)
+)(
+(
+		lv_foo_2_0=RULE_ID
+		{
+			newLeafNode(lv_foo_2_0, grammarAccess.getNullCrossRefInterpretedAccess().getFooIDTerminalRuleCall_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getNullCrossRefInterpretedRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"foo",
+        		lv_foo_2_0, 
+        		"ID");
+	    }
+
+)
+)?)
+;
 
 
 

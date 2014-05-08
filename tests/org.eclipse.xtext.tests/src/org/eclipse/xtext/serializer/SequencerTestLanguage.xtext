@@ -20,7 +20,8 @@ Model:
 	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference |
 	x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float |
 	x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional |
-	x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble;
+	x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble | 
+	x29=NullValueGenerated | x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted;
 
 SimpleGroup:
 	"#1" val1=ID val2=ID;
@@ -154,3 +155,18 @@ OptionalDouble:
 	
 DOUBLE returns ecore::EDouble:
 	INT ("." INT)?;
+	
+NullValueGenerated returns NullValue:
+	"#29" value=NULL_STRING;
+	
+NullValueInterpreted returns NullValue:
+	"#30" value=NULL_STRING foo=ID?;
+	
+NULL_STRING: 
+	STRING;
+	
+NullCrossRefGenerated returns NullCrossRef:
+	"#31" ref=[ecore::EObject|ID];
+	
+NullCrossRefInterpreted returns NullCrossRef:
+	"#32" ref=[ecore::EObject|ID] foo=ID?;

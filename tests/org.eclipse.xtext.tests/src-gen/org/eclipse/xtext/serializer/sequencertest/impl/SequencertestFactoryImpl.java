@@ -25,6 +25,8 @@ import org.eclipse.xtext.serializer.sequencertest.Model;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
+import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
+import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
 import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestFactory;
@@ -142,6 +144,8 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
       case SequencertestPackage.UNORDERED_GROUP_BOOLEAN: return createUnorderedGroupBoolean();
       case SequencertestPackage.COMPLEX1: return createComplex1();
       case SequencertestPackage.OPTIONAL_DOUBLE: return createOptionalDouble();
+      case SequencertestPackage.NULL_VALUE: return createNullValue();
+      case SequencertestPackage.NULL_CROSS_REF: return createNullCrossRef();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -597,6 +601,28 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     OptionalDoubleImpl optionalDouble = new OptionalDoubleImpl();
     return optionalDouble;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NullValue createNullValue()
+  {
+    NullValueImpl nullValue = new NullValueImpl();
+    return nullValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NullCrossRef createNullCrossRef()
+  {
+    NullCrossRefImpl nullCrossRef = new NullCrossRefImpl();
+    return nullCrossRef;
   }
 
   /**

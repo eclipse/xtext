@@ -26,6 +26,8 @@ import org.eclipse.xtext.serializer.sequencertest.Model;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
+import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
+import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
 import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
@@ -140,6 +142,26 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 			case SequencertestPackage.MULTI_TERMINALS:
 				if(context == grammarAccess.getMultiTerminalsRule()) {
 					sequence_MultiTerminals(context, (MultiTerminals) semanticObject); 
+					return; 
+				}
+				else break;
+			case SequencertestPackage.NULL_CROSS_REF:
+				if(context == grammarAccess.getNullCrossRefGeneratedRule()) {
+					sequence_NullCrossRefGenerated(context, (NullCrossRef) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getNullCrossRefInterpretedRule()) {
+					sequence_NullCrossRefInterpreted(context, (NullCrossRef) semanticObject); 
+					return; 
+				}
+				else break;
+			case SequencertestPackage.NULL_VALUE:
+				if(context == grammarAccess.getNullValueGeneratedRule()) {
+					sequence_NullValueGenerated(context, (NullValue) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getNullValueInterpretedRule()) {
+					sequence_NullValueInterpreted(context, (NullValue) semanticObject); 
 					return; 
 				}
 				else break;
@@ -401,7 +423,11 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         x25=UnorderedGroupOptional | 
 	 *         x26=UnorderedGroupBoolean | 
 	 *         x27=Complex1 | 
-	 *         x28=OptionalDouble
+	 *         x28=OptionalDouble | 
+	 *         x29=NullValueGenerated | 
+	 *         x30=NullValueInterpreted | 
+	 *         x31=NullCrossRefGenerated | 
+	 *         x32=NullCrossRefInterpreted
 	 *     )
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
@@ -432,6 +458,42 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *     (val+=ID1 | val+=ID2)
 	 */
 	protected void sequence_MultiTerminals(EObject context, MultiTerminals semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ref=[EObject|ID]
+	 */
+	protected void sequence_NullCrossRefGenerated(EObject context, NullCrossRef semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ref=[EObject|ID] foo=ID?)
+	 */
+	protected void sequence_NullCrossRefInterpreted(EObject context, NullCrossRef semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     value=NULL_STRING
+	 */
+	protected void sequence_NullValueGenerated(EObject context, NullValue semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (value=NULL_STRING foo=ID?)
+	 */
+	protected void sequence_NullValueInterpreted(EObject context, NullValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

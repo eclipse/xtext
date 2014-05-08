@@ -22,6 +22,8 @@ import org.eclipse.xtext.serializer.sequencertest.Model;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
+import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
+import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
 import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
@@ -300,6 +302,16 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseOptionalDouble(OptionalDouble object)
       {
         return createOptionalDoubleAdapter();
+      }
+      @Override
+      public Adapter caseNullValue(NullValue object)
+      {
+        return createNullValueAdapter();
+      }
+      @Override
+      public Adapter caseNullCrossRef(NullCrossRef object)
+      {
+        return createNullCrossRefAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -889,6 +901,36 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createOptionalDoubleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.NullValue <em>Null Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.NullValue
+   * @generated
+   */
+  public Adapter createNullValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.NullCrossRef <em>Null Cross Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.NullCrossRef
+   * @generated
+   */
+  public Adapter createNullCrossRefAdapter()
   {
     return null;
   }

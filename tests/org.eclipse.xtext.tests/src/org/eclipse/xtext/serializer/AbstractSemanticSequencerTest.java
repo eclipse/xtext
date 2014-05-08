@@ -13,7 +13,10 @@ import org.eclipse.xtext.junit4.serializer.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
+import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.serializer.SequencerTestLanguageSemanticSequencer;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -40,7 +43,7 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 
 	protected abstract ISemanticSequencer getGenericSemanticSequencer();
 
-	private void testSequence(String stringModel) throws Exception {
+	private EObject testSequence(String stringModel) throws Exception {
 		DebugSequenceAcceptor genericActual = new DebugSequenceAcceptor();
 		DebugSequenceAcceptor generatedActual = new DebugSequenceAcceptor();
 		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
@@ -61,23 +64,9 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 		genericSequencer.createSequence(context, model);
 		nmSequencer.createSequence(context, model);
 
-		//		ISyntacticSequencer synSeq = get(PassThroughSyntacticSequencer.class);
-		//		IHiddenTokenSequencer hiddenSeq = get(PassThroughHiddenTokenSequencer.class);
-		//		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
-		//		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(hiddenSeq);
-		//		((ISyntacticSequencerOwner) hiddenSeq).setSyntacticSequencer(synSeq);
-		//
-		//		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(genericSequencer);
-		//		recSequencer.createSequence(context, model, genericActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
-		//
-		//		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(generatedSequencer);
-		//		recSequencer.createSequence(context, model, generatedActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
-		//
-		//		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(nmSequencer);
-		//		recSequencer.createSequence(context, model, expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
-
 		assertEquals(expected.toString(), genericActual.toString());
 		assertEquals(expected.toString(), generatedActual.toString());
+		return model;
 	}
 
 	@Test
@@ -547,6 +536,30 @@ public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 	@Test
 	public void testOptionalDouble1_d() throws Exception {
 		testSequence("#28 0");
+	}
+
+	@Test
+	public void testNullValueInterpreted() throws Exception {
+		EObject model = testSequence("#29 ''");
+		Assert.assertNull(((NullValue) model).getValue());
+	}
+	
+	@Test
+	public void testNullValueGenerated() throws Exception {
+		EObject model = testSequence("#30 ''");
+		Assert.assertNull(((NullValue) model).getValue());
+	}
+
+	@Test
+	public void testNullCrossReferenceGenerated() throws Exception {
+		EObject model = testSequence("#31 null");
+		Assert.assertNull(((NullCrossRef) model).getRef());
+	}
+	
+	@Test
+	public void testNullCrossReferenceInterpreted() throws Exception {
+		EObject model = testSequence("#32 null");
+		Assert.assertNull(((NullCrossRef) model).getRef());
 	}
 
 }

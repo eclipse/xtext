@@ -68,6 +68,10 @@ protected class ThisRootNode extends RootToken {
 			case 35: return new UnorderedGroupBoolean_Group(this, this, 35, inst);
 			case 36: return new Complex1_Group(this, this, 36, inst);
 			case 37: return new OptionalDouble_Group(this, this, 37, inst);
+			case 38: return new NullValueGenerated_Group(this, this, 38, inst);
+			case 39: return new NullValueInterpreted_Group(this, this, 39, inst);
+			case 40: return new NullCrossRefGenerated_Group(this, this, 40, inst);
+			case 41: return new NullCrossRefInterpreted_Group(this, this, 41, inst);
 			default: return null;
 		}	
 	}	
@@ -82,7 +86,8 @@ protected class ThisRootNode extends RootToken {
  * 	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
  * 	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
  * 	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative | x24=UnorderedGroup |
- * 	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble;
+ * 	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble | x29=NullValueGenerated |
+ * 	x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted;
  *
  **/
 
@@ -91,7 +96,8 @@ protected class ThisRootNode extends RootToken {
 // x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals | x13=SingleEnum | x14=SingleCrossReference |
 // x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float |
 // x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 |
-// x28=OptionalDouble
+// x28=OptionalDouble | x29=NullValueGenerated | x30=NullValueInterpreted | x31=NullCrossRefGenerated |
+// x32=NullCrossRefInterpreted
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -134,6 +140,10 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 25: return new Model_X26Assignment_25(lastRuleCallOrigin, this, 25, inst);
 			case 26: return new Model_X27Assignment_26(lastRuleCallOrigin, this, 26, inst);
 			case 27: return new Model_X28Assignment_27(lastRuleCallOrigin, this, 27, inst);
+			case 28: return new Model_X29Assignment_28(lastRuleCallOrigin, this, 28, inst);
+			case 29: return new Model_X30Assignment_29(lastRuleCallOrigin, this, 29, inst);
+			case 30: return new Model_X31Assignment_30(lastRuleCallOrigin, this, 30, inst);
+			case 31: return new Model_X32Assignment_31(lastRuleCallOrigin, this, 31, inst);
 			default: return null;
 		}	
 	}
@@ -1391,6 +1401,186 @@ protected class Model_X28Assignment_27 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getOptionalDoubleRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getX28OptionalDoubleParserRuleCall_27_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x29=NullValueGenerated
+protected class Model_X29Assignment_28 extends AssignmentToken  {
+	
+	public Model_X29Assignment_28(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX29Assignment_28();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullValueGenerated_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x29",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x29");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getNullValueGeneratedRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX29NullValueGeneratedParserRuleCall_28_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x30=NullValueInterpreted
+protected class Model_X30Assignment_29 extends AssignmentToken  {
+	
+	public Model_X30Assignment_29(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX30Assignment_29();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullValueInterpreted_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x30",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x30");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getNullValueInterpretedRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX30NullValueInterpretedParserRuleCall_29_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x31=NullCrossRefGenerated
+protected class Model_X31Assignment_30 extends AssignmentToken  {
+	
+	public Model_X31Assignment_30(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX31Assignment_30();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullCrossRefGenerated_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x31",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x31");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getNullCrossRefGeneratedRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX31NullCrossRefGeneratedParserRuleCall_30_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x32=NullCrossRefInterpreted
+protected class Model_X32Assignment_31 extends AssignmentToken  {
+	
+	public Model_X32Assignment_31(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX32Assignment_31();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullCrossRefInterpreted_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x32",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x32");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getNullCrossRefInterpretedRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX32NullCrossRefInterpretedParserRuleCall_31_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -8564,5 +8754,462 @@ protected class OptionalDouble_Double2Assignment_2_1 extends AssignmentToken  {
 
 /************ end Rule OptionalDouble ****************/
 
+
+
+/************ begin Rule NullValueGenerated ****************
+ *
+ * NullValueGenerated returns NullValue:
+ * 	"#29" value=NULL_STRING;
+ *
+ **/
+
+// "#29" value=NULL_STRING
+protected class NullValueGenerated_Group extends GroupToken {
+	
+	public NullValueGenerated_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getNullValueGeneratedAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullValueGenerated_ValueAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getNullValueGeneratedRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#29"
+protected class NullValueGenerated_NumberSignDigitTwoDigitNineKeyword_0 extends KeywordToken  {
+	
+	public NullValueGenerated_NumberSignDigitTwoDigitNineKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getNullValueGeneratedAccess().getNumberSignDigitTwoDigitNineKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// value=NULL_STRING
+protected class NullValueGenerated_ValueAssignment_1 extends AssignmentToken  {
+	
+	public NullValueGenerated_ValueAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getNullValueGeneratedAccess().getValueAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullValueGenerated_NumberSignDigitTwoDigitNineKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getNullValueGeneratedAccess().getValueNULL_STRINGParserRuleCall_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getNullValueGeneratedAccess().getValueNULL_STRINGParserRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule NullValueGenerated ****************/
+
+
+/************ begin Rule NullValueInterpreted ****************
+ *
+ * NullValueInterpreted returns NullValue:
+ * 	"#30" value=NULL_STRING foo=ID?;
+ *
+ **/
+
+// "#30" value=NULL_STRING foo=ID?
+protected class NullValueInterpreted_Group extends GroupToken {
+	
+	public NullValueInterpreted_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getNullValueInterpretedAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullValueInterpreted_FooAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new NullValueInterpreted_ValueAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getNullValueInterpretedRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#30"
+protected class NullValueInterpreted_NumberSignDigitThreeDigitZeroKeyword_0 extends KeywordToken  {
+	
+	public NullValueInterpreted_NumberSignDigitThreeDigitZeroKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getNullValueInterpretedAccess().getNumberSignDigitThreeDigitZeroKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// value=NULL_STRING
+protected class NullValueInterpreted_ValueAssignment_1 extends AssignmentToken  {
+	
+	public NullValueInterpreted_ValueAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getNullValueInterpretedAccess().getValueAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullValueInterpreted_NumberSignDigitThreeDigitZeroKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getNullValueInterpretedAccess().getValueNULL_STRINGParserRuleCall_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getNullValueInterpretedAccess().getValueNULL_STRINGParserRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// foo=ID?
+protected class NullValueInterpreted_FooAssignment_2 extends AssignmentToken  {
+	
+	public NullValueInterpreted_FooAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getNullValueInterpretedAccess().getFooAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullValueInterpreted_ValueAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("foo",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("foo");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getNullValueInterpretedAccess().getFooIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getNullValueInterpretedAccess().getFooIDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule NullValueInterpreted ****************/
+
+
+
+/************ begin Rule NullCrossRefGenerated ****************
+ *
+ * NullCrossRefGenerated returns NullCrossRef:
+ * 	"#31" ref=[ecore::EObject];
+ *
+ **/
+
+// "#31" ref=[ecore::EObject]
+protected class NullCrossRefGenerated_Group extends GroupToken {
+	
+	public NullCrossRefGenerated_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getNullCrossRefGeneratedAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullCrossRefGenerated_RefAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getNullCrossRefGeneratedRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#31"
+protected class NullCrossRefGenerated_NumberSignDigitThreeDigitOneKeyword_0 extends KeywordToken  {
+	
+	public NullCrossRefGenerated_NumberSignDigitThreeDigitOneKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getNullCrossRefGeneratedAccess().getNumberSignDigitThreeDigitOneKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// ref=[ecore::EObject]
+protected class NullCrossRefGenerated_RefAssignment_1 extends AssignmentToken  {
+	
+	public NullCrossRefGenerated_RefAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getNullCrossRefGeneratedAccess().getRefAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullCrossRefGenerated_NumberSignDigitThreeDigitOneKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ref",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getNullCrossRefGeneratedAccess().getRefEObjectCrossReference_1_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getNullCrossRefGeneratedAccess().getRefEObjectCrossReference_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule NullCrossRefGenerated ****************/
+
+
+/************ begin Rule NullCrossRefInterpreted ****************
+ *
+ * NullCrossRefInterpreted returns NullCrossRef:
+ * 	"#32" ref=[ecore::EObject] foo=ID?;
+ *
+ **/
+
+// "#32" ref=[ecore::EObject] foo=ID?
+protected class NullCrossRefInterpreted_Group extends GroupToken {
+	
+	public NullCrossRefInterpreted_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getNullCrossRefInterpretedAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullCrossRefInterpreted_FooAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new NullCrossRefInterpreted_RefAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getNullCrossRefInterpretedRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#32"
+protected class NullCrossRefInterpreted_NumberSignDigitThreeDigitTwoKeyword_0 extends KeywordToken  {
+	
+	public NullCrossRefInterpreted_NumberSignDigitThreeDigitTwoKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getNullCrossRefInterpretedAccess().getNumberSignDigitThreeDigitTwoKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// ref=[ecore::EObject]
+protected class NullCrossRefInterpreted_RefAssignment_1 extends AssignmentToken  {
+	
+	public NullCrossRefInterpreted_RefAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getNullCrossRefInterpretedAccess().getRefAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullCrossRefInterpreted_NumberSignDigitThreeDigitTwoKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ref",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getNullCrossRefInterpretedAccess().getRefEObjectCrossReference_1_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getNullCrossRefInterpretedAccess().getRefEObjectCrossReference_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+// foo=ID?
+protected class NullCrossRefInterpreted_FooAssignment_2 extends AssignmentToken  {
+	
+	public NullCrossRefInterpreted_FooAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getNullCrossRefInterpretedAccess().getFooAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NullCrossRefInterpreted_RefAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("foo",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("foo");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getNullCrossRefInterpretedAccess().getFooIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getNullCrossRefInterpretedAccess().getFooIDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule NullCrossRefInterpreted ****************/
 
 }

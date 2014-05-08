@@ -37,6 +37,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX26 <em>X26</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX27 <em>X27</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX28 <em>X28</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX29 <em>X29</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX30 <em>X30</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX31 <em>X31</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX32 <em>X32</em>}</li>
  * </ul>
  * </p>
  *
@@ -695,5 +699,109 @@ public interface Model extends EObject
    * @generated
    */
   void setX28(OptionalDouble value);
+
+  /**
+   * Returns the value of the '<em><b>X29</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X29</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X29</em>' containment reference.
+   * @see #setX29(NullValue)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X29()
+   * @model containment="true"
+   * @generated
+   */
+  NullValue getX29();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX29 <em>X29</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X29</em>' containment reference.
+   * @see #getX29()
+   * @generated
+   */
+  void setX29(NullValue value);
+
+  /**
+   * Returns the value of the '<em><b>X30</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X30</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X30</em>' containment reference.
+   * @see #setX30(NullValue)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X30()
+   * @model containment="true"
+   * @generated
+   */
+  NullValue getX30();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX30 <em>X30</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X30</em>' containment reference.
+   * @see #getX30()
+   * @generated
+   */
+  void setX30(NullValue value);
+
+  /**
+   * Returns the value of the '<em><b>X31</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X31</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X31</em>' containment reference.
+   * @see #setX31(NullCrossRef)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X31()
+   * @model containment="true"
+   * @generated
+   */
+  NullCrossRef getX31();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX31 <em>X31</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X31</em>' containment reference.
+   * @see #getX31()
+   * @generated
+   */
+  void setX31(NullCrossRef value);
+
+  /**
+   * Returns the value of the '<em><b>X32</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X32</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X32</em>' containment reference.
+   * @see #setX32(NullCrossRef)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X32()
+   * @model containment="true"
+   * @generated
+   */
+  NullCrossRef getX32();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX32 <em>X32</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X32</em>' containment reference.
+   * @see #getX32()
+   * @generated
+   */
+  void setX32(NullCrossRef value);
 
 } // Model

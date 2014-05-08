@@ -77,6 +77,14 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cX27Complex1ParserRuleCall_26_0 = (RuleCall)cX27Assignment_26.eContents().get(0);
 		private final Assignment cX28Assignment_27 = (Assignment)cAlternatives.eContents().get(27);
 		private final RuleCall cX28OptionalDoubleParserRuleCall_27_0 = (RuleCall)cX28Assignment_27.eContents().get(0);
+		private final Assignment cX29Assignment_28 = (Assignment)cAlternatives.eContents().get(28);
+		private final RuleCall cX29NullValueGeneratedParserRuleCall_28_0 = (RuleCall)cX29Assignment_28.eContents().get(0);
+		private final Assignment cX30Assignment_29 = (Assignment)cAlternatives.eContents().get(29);
+		private final RuleCall cX30NullValueInterpretedParserRuleCall_29_0 = (RuleCall)cX30Assignment_29.eContents().get(0);
+		private final Assignment cX31Assignment_30 = (Assignment)cAlternatives.eContents().get(30);
+		private final RuleCall cX31NullCrossRefGeneratedParserRuleCall_30_0 = (RuleCall)cX31Assignment_30.eContents().get(0);
+		private final Assignment cX32Assignment_31 = (Assignment)cAlternatives.eContents().get(31);
+		private final RuleCall cX32NullCrossRefInterpretedParserRuleCall_31_0 = (RuleCall)cX32Assignment_31.eContents().get(0);
 		
 		//Model:
 		//	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
@@ -84,7 +92,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 		//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
 		//	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative | x24=UnorderedGroup |
-		//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble;
+		//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble | x29=NullValueGenerated |
+		//	x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted;
 		public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities
@@ -92,7 +101,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals | x13=SingleEnum | x14=SingleCrossReference |
 		//x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float |
 		//x23=UnorderedAlternative | x24=UnorderedGroup | x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 |
-		//x28=OptionalDouble
+		//x28=OptionalDouble | x29=NullValueGenerated | x30=NullValueInterpreted | x31=NullCrossRefGenerated |
+		//x32=NullCrossRefInterpreted
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=SimpleGroup
@@ -262,6 +272,30 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//OptionalDouble
 		public RuleCall getX28OptionalDoubleParserRuleCall_27_0() { return cX28OptionalDoubleParserRuleCall_27_0; }
+
+		//x29=NullValueGenerated
+		public Assignment getX29Assignment_28() { return cX29Assignment_28; }
+
+		//NullValueGenerated
+		public RuleCall getX29NullValueGeneratedParserRuleCall_28_0() { return cX29NullValueGeneratedParserRuleCall_28_0; }
+
+		//x30=NullValueInterpreted
+		public Assignment getX30Assignment_29() { return cX30Assignment_29; }
+
+		//NullValueInterpreted
+		public RuleCall getX30NullValueInterpretedParserRuleCall_29_0() { return cX30NullValueInterpretedParserRuleCall_29_0; }
+
+		//x31=NullCrossRefGenerated
+		public Assignment getX31Assignment_30() { return cX31Assignment_30; }
+
+		//NullCrossRefGenerated
+		public RuleCall getX31NullCrossRefGeneratedParserRuleCall_30_0() { return cX31NullCrossRefGeneratedParserRuleCall_30_0; }
+
+		//x32=NullCrossRefInterpreted
+		public Assignment getX32Assignment_31() { return cX32Assignment_31; }
+
+		//NullCrossRefInterpreted
+		public RuleCall getX32NullCrossRefInterpretedParserRuleCall_31_0() { return cX32NullCrossRefInterpretedParserRuleCall_31_0; }
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
@@ -2000,6 +2034,138 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//INT
 		public RuleCall getINTTerminalRuleCall_1_1() { return cINTTerminalRuleCall_1_1; }
 	}
+
+	public class NullValueGeneratedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NullValueGenerated");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitNineKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValueNULL_STRINGParserRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		
+		//NullValueGenerated returns NullValue:
+		//	"#29" value=NULL_STRING;
+		public ParserRule getRule() { return rule; }
+
+		//"#29" value=NULL_STRING
+		public Group getGroup() { return cGroup; }
+
+		//"#29"
+		public Keyword getNumberSignDigitTwoDigitNineKeyword_0() { return cNumberSignDigitTwoDigitNineKeyword_0; }
+
+		//value=NULL_STRING
+		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+
+		//NULL_STRING
+		public RuleCall getValueNULL_STRINGParserRuleCall_1_0() { return cValueNULL_STRINGParserRuleCall_1_0; }
+	}
+
+	public class NullValueInterpretedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NullValueInterpreted");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitThreeDigitZeroKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValueNULL_STRINGParserRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		private final Assignment cFooAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cFooIDTerminalRuleCall_2_0 = (RuleCall)cFooAssignment_2.eContents().get(0);
+		
+		//NullValueInterpreted returns NullValue:
+		//	"#30" value=NULL_STRING foo=ID?;
+		public ParserRule getRule() { return rule; }
+
+		//"#30" value=NULL_STRING foo=ID?
+		public Group getGroup() { return cGroup; }
+
+		//"#30"
+		public Keyword getNumberSignDigitThreeDigitZeroKeyword_0() { return cNumberSignDigitThreeDigitZeroKeyword_0; }
+
+		//value=NULL_STRING
+		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+
+		//NULL_STRING
+		public RuleCall getValueNULL_STRINGParserRuleCall_1_0() { return cValueNULL_STRINGParserRuleCall_1_0; }
+
+		//foo=ID?
+		public Assignment getFooAssignment_2() { return cFooAssignment_2; }
+
+		//ID
+		public RuleCall getFooIDTerminalRuleCall_2_0() { return cFooIDTerminalRuleCall_2_0; }
+	}
+
+	public class NULL_STRINGElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NULL_STRING");
+		private final RuleCall cSTRINGTerminalRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//NULL_STRING:
+		//	STRING;
+		public ParserRule getRule() { return rule; }
+
+		//STRING
+		public RuleCall getSTRINGTerminalRuleCall() { return cSTRINGTerminalRuleCall; }
+	}
+
+	public class NullCrossRefGeneratedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NullCrossRefGenerated");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitThreeDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cRefEObjectCrossReference_1_0 = (CrossReference)cRefAssignment_1.eContents().get(0);
+		private final RuleCall cRefEObjectIDTerminalRuleCall_1_0_1 = (RuleCall)cRefEObjectCrossReference_1_0.eContents().get(1);
+		
+		//NullCrossRefGenerated returns NullCrossRef:
+		//	"#31" ref=[ecore::EObject];
+		public ParserRule getRule() { return rule; }
+
+		//"#31" ref=[ecore::EObject]
+		public Group getGroup() { return cGroup; }
+
+		//"#31"
+		public Keyword getNumberSignDigitThreeDigitOneKeyword_0() { return cNumberSignDigitThreeDigitOneKeyword_0; }
+
+		//ref=[ecore::EObject]
+		public Assignment getRefAssignment_1() { return cRefAssignment_1; }
+
+		//[ecore::EObject]
+		public CrossReference getRefEObjectCrossReference_1_0() { return cRefEObjectCrossReference_1_0; }
+
+		//ID
+		public RuleCall getRefEObjectIDTerminalRuleCall_1_0_1() { return cRefEObjectIDTerminalRuleCall_1_0_1; }
+	}
+
+	public class NullCrossRefInterpretedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NullCrossRefInterpreted");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitThreeDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cRefEObjectCrossReference_1_0 = (CrossReference)cRefAssignment_1.eContents().get(0);
+		private final RuleCall cRefEObjectIDTerminalRuleCall_1_0_1 = (RuleCall)cRefEObjectCrossReference_1_0.eContents().get(1);
+		private final Assignment cFooAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cFooIDTerminalRuleCall_2_0 = (RuleCall)cFooAssignment_2.eContents().get(0);
+		
+		//NullCrossRefInterpreted returns NullCrossRef:
+		//	"#32" ref=[ecore::EObject] foo=ID?;
+		public ParserRule getRule() { return rule; }
+
+		//"#32" ref=[ecore::EObject] foo=ID?
+		public Group getGroup() { return cGroup; }
+
+		//"#32"
+		public Keyword getNumberSignDigitThreeDigitTwoKeyword_0() { return cNumberSignDigitThreeDigitTwoKeyword_0; }
+
+		//ref=[ecore::EObject]
+		public Assignment getRefAssignment_1() { return cRefAssignment_1; }
+
+		//[ecore::EObject]
+		public CrossReference getRefEObjectCrossReference_1_0() { return cRefEObjectCrossReference_1_0; }
+
+		//ID
+		public RuleCall getRefEObjectIDTerminalRuleCall_1_0_1() { return cRefEObjectIDTerminalRuleCall_1_0_1; }
+
+		//foo=ID?
+		public Assignment getFooAssignment_2() { return cFooAssignment_2; }
+
+		//ID
+		public RuleCall getFooIDTerminalRuleCall_2_0() { return cFooIDTerminalRuleCall_2_0; }
+	}
 	
 	
 	public class DefEnum1Elements extends AbstractEnumRuleElementFinder {
@@ -2095,6 +2261,11 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private Complex1Elements pComplex1;
 	private OptionalDoubleElements pOptionalDouble;
 	private DOUBLEElements pDOUBLE;
+	private NullValueGeneratedElements pNullValueGenerated;
+	private NullValueInterpretedElements pNullValueInterpreted;
+	private NULL_STRINGElements pNULL_STRING;
+	private NullCrossRefGeneratedElements pNullCrossRefGenerated;
+	private NullCrossRefInterpretedElements pNullCrossRefInterpreted;
 	
 	private final Grammar grammar;
 
@@ -2140,7 +2311,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 	//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
 	//	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative | x24=UnorderedGroup |
-	//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble;
+	//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble | x29=NullValueGenerated |
+	//	x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -2578,6 +2750,56 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	public ParserRule getDOUBLERule() {
 		return getDOUBLEAccess().getRule();
+	}
+
+	//NullValueGenerated returns NullValue:
+	//	"#29" value=NULL_STRING;
+	public NullValueGeneratedElements getNullValueGeneratedAccess() {
+		return (pNullValueGenerated != null) ? pNullValueGenerated : (pNullValueGenerated = new NullValueGeneratedElements());
+	}
+	
+	public ParserRule getNullValueGeneratedRule() {
+		return getNullValueGeneratedAccess().getRule();
+	}
+
+	//NullValueInterpreted returns NullValue:
+	//	"#30" value=NULL_STRING foo=ID?;
+	public NullValueInterpretedElements getNullValueInterpretedAccess() {
+		return (pNullValueInterpreted != null) ? pNullValueInterpreted : (pNullValueInterpreted = new NullValueInterpretedElements());
+	}
+	
+	public ParserRule getNullValueInterpretedRule() {
+		return getNullValueInterpretedAccess().getRule();
+	}
+
+	//NULL_STRING:
+	//	STRING;
+	public NULL_STRINGElements getNULL_STRINGAccess() {
+		return (pNULL_STRING != null) ? pNULL_STRING : (pNULL_STRING = new NULL_STRINGElements());
+	}
+	
+	public ParserRule getNULL_STRINGRule() {
+		return getNULL_STRINGAccess().getRule();
+	}
+
+	//NullCrossRefGenerated returns NullCrossRef:
+	//	"#31" ref=[ecore::EObject];
+	public NullCrossRefGeneratedElements getNullCrossRefGeneratedAccess() {
+		return (pNullCrossRefGenerated != null) ? pNullCrossRefGenerated : (pNullCrossRefGenerated = new NullCrossRefGeneratedElements());
+	}
+	
+	public ParserRule getNullCrossRefGeneratedRule() {
+		return getNullCrossRefGeneratedAccess().getRule();
+	}
+
+	//NullCrossRefInterpreted returns NullCrossRef:
+	//	"#32" ref=[ecore::EObject] foo=ID?;
+	public NullCrossRefInterpretedElements getNullCrossRefInterpretedAccess() {
+		return (pNullCrossRefInterpreted != null) ? pNullCrossRefInterpreted : (pNullCrossRefInterpreted = new NullCrossRefInterpretedElements());
+	}
+	
+	public ParserRule getNullCrossRefInterpretedRule() {
+		return getNullCrossRefInterpretedAccess().getRule();
 	}
 
 	//terminal ID:

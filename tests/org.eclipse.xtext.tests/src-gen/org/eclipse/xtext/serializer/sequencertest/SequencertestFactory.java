@@ -365,6 +365,24 @@ public interface SequencertestFactory extends EFactory
   OptionalDouble createOptionalDouble();
 
   /**
+   * Returns a new object of class '<em>Null Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Null Value</em>'.
+   * @generated
+   */
+  NullValue createNullValue();
+
+  /**
+   * Returns a new object of class '<em>Null Cross Ref</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Null Cross Ref</em>'.
+   * @generated
+   */
+  NullCrossRef createNullCrossRef();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
