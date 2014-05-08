@@ -1624,4 +1624,33 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		annotationTypeModifierValidator.checkModifiers(annotation, "annotation type " + annotation.getName());
 	}
 	
+	@Check
+	protected void checkInferedApi(XtendFunction method) {
+		if (isApi(method) && method.getReturnType() == null) {
+			addIssue("API method needs explicit return type", method, XTEND_FUNCTION__NAME, API_TYPE_INFERENCE);
+		}
+	}
+	
+	@Check
+	protected void checkInferedApi(XtendField field) {
+		if (isApi(field) && field.getType() == null) {
+			addIssue("API field needs explicit type", field, XTEND_FIELD__NAME, API_TYPE_INFERENCE);
+		}
+	}
+
+	protected boolean isApi(XtendMember member) {
+		if (!isApi(member.getDeclaringType())) return false;
+		return member.getVisibility() == JvmVisibility.PUBLIC 
+				|| member.getVisibility() == JvmVisibility.PROTECTED && !member.getDeclaringType().isFinal();
+	}
+	
+	protected boolean isApi(XtendTypeDeclaration type) {
+		if (type.isAnonymous()) return false;
+		boolean api = type.getVisibility() == JvmVisibility.PUBLIC;
+		if (type.getDeclaringType() != null) {
+			api |= type.getVisibility() == JvmVisibility.PROTECTED && ! type.getDeclaringType().isFinal(); 
+			api &= isApi(type.getDeclaringType());
+		}
+		return api;
+	}
 }
