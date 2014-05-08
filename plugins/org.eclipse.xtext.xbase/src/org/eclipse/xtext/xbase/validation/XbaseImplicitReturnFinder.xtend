@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation
 
-import java.util.List
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XBooleanLiteral
@@ -40,67 +39,6 @@ class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
 	def dispatch findImplicitReturns(XNumberLiteral expression, Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
-<<<<<<< HEAD
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XNumberLiteral expression) {
-		#[expression]
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XBooleanLiteral expression) {
-		#[expression]
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XCollectionLiteral expression) {
-		#[expression]
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XStringLiteral expression) {
-		#[expression]
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XNullLiteral expression) {
-		#[expression]
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XClosure expression) {
-		#[expression]
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XConstructorCall expression) {
-		#[expression]
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XAbstractFeatureCall expression) {
-		#[expression]
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XInstanceOfExpression expression) {
-		#[expression]
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XCastedExpression expression) {
-		#[expression]
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XBlockExpression expression) {
-		findImplicitReturns(expression.expressions.last)
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XSynchronizedExpression expression) {
-		findImplicitReturns(expression.expression)
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XIfExpression expression) {
-		(findImplicitReturns(expression.then) + findImplicitReturns(expression.^else)).toList
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XTryCatchFinallyExpression expression) {
-		(findImplicitReturns(expression.expression) + expression.catchClauses.map[findImplicitReturns(it.expression)].flatten).toList
-	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XSwitchExpression expression) {
-		(expression.cases.map[findImplicitReturns(it.then)].flatten + findImplicitReturns(expression.^default)).toList
-=======
 
 	def dispatch findImplicitReturns(XBooleanLiteral expression, Acceptor acceptor) {
 		acceptor.accept(expression)
@@ -165,7 +103,5 @@ class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
 	def dispatch findImplicitReturns(XSwitchExpression expression, Acceptor acceptor) {
 		expression.cases.forEach[findImplicitReturns(it.then, acceptor)]
 		findImplicitReturns(expression.^default, acceptor)
->>>>>>> 64d8442... fixup returnfinder
 	}
-	
 }
