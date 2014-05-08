@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -101,6 +102,67 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     EList<XtendMember> _members = firstType.getMembers();
     XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
     final XtendFunction firstMember = ((XtendFunction) _head_1);
+    XExpression _expression = firstMember.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    TreeIterator<EObject> _eAllContents = block.eAllContents();
+    Iterator<XAbstractFeatureCall> _filter = Iterators.<XAbstractFeatureCall>filter(_eAllContents, XAbstractFeatureCall.class);
+    final Function1<XAbstractFeatureCall, Boolean> _function_2 = new Function1<XAbstractFeatureCall, Boolean>() {
+      public Boolean apply(final XAbstractFeatureCall it) {
+        boolean _and = false;
+        EStructuralFeature _eContainingFeature = it.eContainingFeature();
+        boolean _notEquals = (!Objects.equal(_eContainingFeature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER));
+        if (!_notEquals) {
+          _and = false;
+        } else {
+          JvmIdentifiableElement _feature = it.getFeature();
+          _and = (_feature instanceof JvmOperation);
+        }
+        return Boolean.valueOf(_and);
+      }
+    };
+    final XAbstractFeatureCall featureCall = IteratorExtensions.<XAbstractFeatureCall>findLast(_filter, _function_2);
+    IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(file);
+    final IFeatureLinkingCandidate linkingCandidate = _resolveTypes.getLinkingCandidate(featureCall);
+    Assert.assertTrue((linkingCandidate instanceof ISuspiciouslyOverloadedCandidate));
+  }
+  
+  protected void assertSuspiciousInInnerClass(final CharSequence contents, final String... messageParts) {
+    final XtendFile file = this.getParsedXtendFile(contents);
+    Resource _eResource = file.eResource();
+    final EList<Resource.Diagnostic> errors = _eResource.getErrors();
+    String _string = errors.toString();
+    int _size = errors.size();
+    Assert.assertEquals(_string, 1, _size);
+    Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(errors);
+    final AbstractDiagnostic singleError = ((AbstractDiagnostic) _head);
+    String _message = singleError.getMessage();
+    String _code = singleError.getCode();
+    Assert.assertEquals(_message, IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, _code);
+    final Function1<String, String> _function = new Function1<String, String>() {
+      public String apply(final String it) {
+        return LineDelimiters.toUnix(it);
+      }
+    };
+    List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(messageParts)), _function);
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
+      public void apply(final String it) {
+        final String message = singleError.getMessage();
+        boolean _contains = message.contains(it);
+        boolean _not = (!_contains);
+        if (_not) {
+          Assert.assertEquals(it, message);
+        }
+      }
+    };
+    IterableExtensions.<String>forEach(_map, _function_1);
+    EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
+    final XtendTypeDeclaration firstType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+    EList<XtendMember> _members = firstType.getMembers();
+    XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
+    final XtendClass innerType = ((XtendClass) _head_1);
+    EList<XtendMember> _members_1 = innerType.getMembers();
+    XtendMember _head_2 = IterableExtensions.<XtendMember>head(_members_1);
+    final XtendFunction firstMember = ((XtendFunction) _head_2);
     XExpression _expression = firstMember.getExpression();
     final XBlockExpression block = ((XBlockExpression) _expression);
     TreeIterator<EObject> _eAllContents = block.eAllContents();
@@ -321,6 +383,46 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testSuspiciousMethods_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class B {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def static void m(CharSequence c) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("m(\'\')");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void m(String s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Suspiciously overloaded method.");
+    _builder_1.newLine();
+    _builder_1.append("The method");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(String) in A");
+    _builder_1.newLine();
+    _builder_1.append("overloads the method");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("m(CharSequence) in B.");
+    this.assertSuspiciousInInnerClass(_builder, _builder_1.toString());
+  }
+  
+  @Test
   public void testValidOverloads_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class B {");
@@ -379,6 +481,62 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertValid(_builder);
+  }
+  
+  @Test
+  public void testValidOverloads_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class B {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def static void m(CharSequence c) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("m(\'\')");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(String s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertValid(_builder);
+  }
+  
+  @Test
+  public void testValidOverloads_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class B {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def void m(CharSequence c) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("m(\'\')");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void m(String s) {}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

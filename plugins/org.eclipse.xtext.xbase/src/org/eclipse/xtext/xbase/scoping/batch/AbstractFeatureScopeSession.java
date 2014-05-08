@@ -144,7 +144,11 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 					}
 				}
 				LightweightTypeReference context = new ParameterizedTypeReference(owner, (JvmType) associatedWithThis);
-				FeatureScopeSessionWithContext contextSession = new FeatureScopeSessionWithContext(this, context);
+				AbstractFeatureScopeSession parent = this;
+				if (!isInstanceContext()) {
+					parent = new FeatureScopeSessionWithoutLocalElements(parent);
+				}
+				FeatureScopeSessionWithContext contextSession = new FeatureScopeSessionWithContext(parent, context);
 				AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(contextSession, elements);
 				return result;
 			}

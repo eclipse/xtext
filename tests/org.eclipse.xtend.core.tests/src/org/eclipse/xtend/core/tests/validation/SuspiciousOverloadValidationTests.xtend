@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ISuspiciouslyOverloadedCan
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.junit4.internal.LineDelimiters
+import org.eclipse.xtend.core.xtend.XtendClass
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -57,6 +58,30 @@ class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
 		assertTrue(linkingCandidate instanceof ISuspiciouslyOverloadedCandidate) 
 	}
 	
+	protected def void assertSuspiciousInInnerClass(CharSequence contents, String... messageParts) {
+		val file = contents.parsedXtendFile
+		val errors = file.eResource.errors
+		assertEquals(errors.toString, 1, errors.size)
+		val singleError = errors.head as AbstractDiagnostic
+		assertEquals(singleError.message, IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, singleError.code)
+		messageParts.map[LineDelimiters.toUnix(it)].forEach [
+			val message = singleError.message
+			if (!message.contains(it)) {
+				assertEquals(it, message)
+			}
+		]
+		val firstType = file.xtendTypes.head
+		val innerType = firstType.members.head as XtendClass
+		val firstMember = innerType.members.head as XtendFunction
+		val block = firstMember.expression as XBlockExpression
+		val featureCall = block.eAllContents.filter(XAbstractFeatureCall).findLast[
+			eContainingFeature != XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER
+			&& feature instanceof JvmOperation
+		]
+		val linkingCandidate = file.resolveTypes.getLinkingCandidate(featureCall)
+		assertTrue(linkingCandidate instanceof ISuspiciouslyOverloadedCandidate) 
+	}
+	
 	protected def void assertValid(CharSequence contents) {
 		val file = contents.parsedXtendFile
 		val errors = file.eResource.errors
@@ -70,7 +95,6 @@ class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
 		assertTrue(errors.toString, errors.empty)
 		EcoreUtil.resolveAll(file)
 		return file
-		
 	}
 	
 	@Test
@@ -157,6 +181,25 @@ class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
+	def void testSuspiciousMethods_05() {
+		'''
+			class A {
+				static class B {
+					def static void m(CharSequence c) {
+						m('')
+					}
+				}
+				def static void m(String s) {}
+			}
+		'''.assertSuspiciousInInnerClass('''
+			Suspiciously overloaded method.
+			The method
+				m(String) in A
+			overloads the method
+				m(CharSequence) in B.''')
+	}
+	
+	@Test
 	def void testValidOverloads_01() {
 		'''
 			class B {
@@ -185,6 +228,34 @@ class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
 			      foo
 			    ]
 			  }
+			}
+		'''.assertValid
+	}
+	
+	@Test
+	def void testValidOverloads_03() {
+		'''
+			class A {
+				static class B {
+					def static void m(CharSequence c) {
+						m('')
+					}
+				}
+				def void m(String s) {}
+			}
+		'''.assertValid
+	}
+	
+	@Test
+	def void testValidOverloads_04() {
+		'''
+			class A {
+				static class B {
+					def void m(CharSequence c) {
+						m('')
+					}
+				}
+				def static void m(String s) {}
 			}
 		'''.assertValid
 	}

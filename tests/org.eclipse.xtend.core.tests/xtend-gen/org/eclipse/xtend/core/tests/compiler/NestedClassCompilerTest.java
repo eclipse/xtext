@@ -54,6 +54,128 @@ public class NestedClassCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testOverloads() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class B {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def void m(CharSequence c) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("m(\'\')");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void m(String s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static class B {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public void m(final CharSequence c) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("this.m(\"\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static void m(final String s) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testOverloadsOuterChosen() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class B {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("def void m(int i) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("m(\'\')");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void m(String s) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static class B {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public void m(final int i) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("A.m(\"\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static void m(final String s) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testDeeplyNested() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");

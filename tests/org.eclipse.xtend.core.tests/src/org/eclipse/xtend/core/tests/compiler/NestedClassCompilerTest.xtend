@@ -33,6 +33,58 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testOverloads() {'''
+			class A {
+				static class B {
+					def void m(CharSequence c) {
+						m('')
+					}
+				}
+				def static void m(String s) {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class A {
+			  @SuppressWarnings("all")
+			  public static class B {
+			    public void m(final CharSequence c) {
+			      this.m("");
+			    }
+			  }
+			  
+			  public static void m(final String s) {
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testOverloadsOuterChosen() {'''
+			class A {
+				static class B {
+					def void m(int i) {
+						m('')
+					}
+				}
+				def static void m(String s) {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class A {
+			  @SuppressWarnings("all")
+			  public static class B {
+			    public void m(final int i) {
+			      A.m("");
+			    }
+			  }
+			  
+			  public static void m(final String s) {
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testDeeplyNested() {'''
 			class A {
 				static interface B {

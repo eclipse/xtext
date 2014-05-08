@@ -403,10 +403,21 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		
 		FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
 		XExpression otherImplicitReceiver = casted.getImplicitReceiver();
-		if (otherImplicitReceiver instanceof XAbstractFeatureCall && getImplicitReceiver() instanceof XAbstractFeatureCall) {
-			JvmIdentifiableElement otherImplicitReceiverFeature = ((XAbstractFeatureCall) otherImplicitReceiver).getFeature();
-			if (otherImplicitReceiverFeature != ((XAbstractFeatureCall) getImplicitReceiver()).getFeature())
-				return CandidateCompareResult.SUSPICIOUS_OTHER;
+		if (otherImplicitReceiver != null) {
+			if (otherImplicitReceiver instanceof XAbstractFeatureCall && getImplicitReceiver() instanceof XAbstractFeatureCall) {
+				JvmIdentifiableElement otherImplicitReceiverFeature = ((XAbstractFeatureCall) otherImplicitReceiver).getFeature();
+				if (otherImplicitReceiverFeature != ((XAbstractFeatureCall) getImplicitReceiver()).getFeature())
+					return CandidateCompareResult.SUSPICIOUS_OTHER;
+			}
+		} else {
+			if (isStatic() && casted.isStatic()) {
+				JvmIdentifiableElement otherFeature = casted.getFeature();
+				if (getFeature().eContainer() != otherFeature.eContainer() && otherFeature.eResource() == getExpression().eResource()) {
+					if (EcoreUtil.isAncestor(otherFeature.eContainer(), getFeature())) {
+						return CandidateCompareResult.SUSPICIOUS_OTHER;
+					}
+				}
+			}
 		}
 		return CandidateCompareResult.OTHER;
 	}

@@ -71,6 +71,7 @@ public class ConstructorScopes {
 	/**
 	 * Custom languages that allow to infer anonymous classes may want to use this helper
 	 * to access the constructors of those classes.
+	 * @param session subtypes may override and use the given session.
 	 */
 	protected IScope createAnonymousClassConstructorScope(final JvmGenericType anonymousType, EObject context, final IFeatureScopeSession session) {
 		// we don't care about the type scope since the type is well known here

@@ -36,7 +36,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	ValidationBug432193Test.class,
 	ValidationBug433213Test.class,
 	AmbiguityValidationSuite.class,
-	AnonymousClassValidationTest.class
+	AnonymousClassValidationTest.class,
+	NestedClassValidationTest.class
 })
 public class ValidationSuite {
 }
