@@ -164,7 +164,7 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 	}
 
 	public void configureIResourceDescriptionsPersisted(com.google.inject.Binder binder) {
-		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(PersistentDataAwareDirtyResource.PERSISTED_DESCRIPTIONS)).to(IBuilderState.class);
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to(IBuilderState.class);
 	}
 
 	public Class<? extends DocumentBasedDirtyResource> bindDocumentBasedDirtyResource() {
