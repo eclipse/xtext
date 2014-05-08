@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation
 
-import java.util.List
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XBooleanLiteral
@@ -37,65 +36,65 @@ class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
 	def dispatch findImplicitReturns(XExpression expression) {
 		#[]
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XNumberLiteral expression) {
+
+	def dispatch findImplicitReturns(XNumberLiteral expression) {
 		#[expression]
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XBooleanLiteral expression) {
+
+	def dispatch findImplicitReturns(XBooleanLiteral expression) {
 		#[expression]
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XCollectionLiteral expression) {
+
+	def dispatch findImplicitReturns(XCollectionLiteral expression) {
 		#[expression]
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XStringLiteral expression) {
+
+	def dispatch findImplicitReturns(XStringLiteral expression) {
 		#[expression]
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XNullLiteral expression) {
+
+	def dispatch findImplicitReturns(XNullLiteral expression) {
 		#[expression]
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XClosure expression) {
+
+	def dispatch findImplicitReturns(XClosure expression) {
 		#[expression]
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XConstructorCall expression) {
+
+	def dispatch findImplicitReturns(XConstructorCall expression) {
 		#[expression]
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XAbstractFeatureCall expression) {
+
+	def dispatch findImplicitReturns(XAbstractFeatureCall expression) {
 		#[expression]
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XInstanceOfExpression expression) {
+
+	def dispatch findImplicitReturns(XInstanceOfExpression expression) {
 		#[expression]
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XCastedExpression expression) {
+
+	def dispatch findImplicitReturns(XCastedExpression expression) {
 		#[expression]
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XBlockExpression expression) {
+
+	def dispatch findImplicitReturns(XBlockExpression expression) {
 		findImplicitReturns(expression.expressions.last)
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XSynchronizedExpression expression) {
+
+	def dispatch findImplicitReturns(XSynchronizedExpression expression) {
 		findImplicitReturns(expression.expression)
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XIfExpression expression) {
+
+	def dispatch findImplicitReturns(XIfExpression expression) {
 		(findImplicitReturns(expression.then) + findImplicitReturns(expression.^else)).toList
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XTryCatchFinallyExpression expression) {
-		(findImplicitReturns(expression.expression) + expression.catchClauses.map[findImplicitReturns(it.expression)].flatten).toList
+
+	def dispatch findImplicitReturns(XTryCatchFinallyExpression expression) {
+		(findImplicitReturns(expression.expression) +
+			expression.catchClauses.map[findImplicitReturns(it.expression)].flatten).toList
 	}
-	
-	def dispatch List<? extends XExpression> findImplicitReturns(XSwitchExpression expression) {
+
+	def dispatch findImplicitReturns(XSwitchExpression expression) {
 		(expression.cases.map[findImplicitReturns(it.then)].flatten + findImplicitReturns(expression.^default)).toList
 	}
-	
 }

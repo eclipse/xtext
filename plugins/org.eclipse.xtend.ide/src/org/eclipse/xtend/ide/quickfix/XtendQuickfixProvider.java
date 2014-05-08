@@ -28,6 +28,7 @@ import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendExecutable;
+import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
@@ -61,9 +62,12 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
@@ -100,6 +104,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	@Inject private CreateMemberQuickfixes createMemberQuickfixes;
 	
 	@Inject private OverrideHelper overrideHelper;
+	
+	@Inject private IBatchTypeResolver batchTypeResolver;
 	
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
 			IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
@@ -449,6 +455,42 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 						internalDoAddAbstractKeyword(element, context);
 					}
 				});
+	}
+	
+	@Fix(IssueCodes.API_TYPE_INFERENCE) 
+	public void specifyTypeExplicitly(Issue issue, IssueResolutionAcceptor acceptor){
+		acceptor.accept(issue, "Infer type", "Infer type", null, new ISemanticModification() {
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				if (element instanceof XtendFunction) {
+					XtendFunction function = (XtendFunction) element;
+					IResolvedTypes types = batchTypeResolver.resolveTypes(function);
+					LightweightTypeReference returnType = types.getReturnType(function.getExpression());
+					if (returnType != null) {
+						function.setReturnType(returnType.toTypeReference());
+					}
+				} else if (element instanceof XtendField){
+					XtendField field = (XtendField) element;
+					IResolvedTypes types = batchTypeResolver.resolveTypes(field);
+					LightweightTypeReference type = types.getReturnType(field.getInitialValue());
+					if (type != null) {
+						field.setType(type.toTypeReference());
+					}
+				}
+			}
+		});
+	}
+	
+
+	@Fix(IssueCodes.IMPLICIT_RETURN) 
+	public void fixImplicitReturn(final Issue issue, IssueResolutionAcceptor acceptor){
+		acceptor.accept(issue, "Add \"return\" keyword", "Add \"return\" keyword", null, new ISemanticModification() {
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				ICompositeNode node = NodeModelUtils.findActualNodeFor(element);
+				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) element.eResource(), node.getOffset(), 0);
+				appendable.append("return ");
+				appendable.commitChanges();
+			}
+		});
 	}
 	
 	protected void internalDoAddAbstractKeyword(EObject element, IModificationContext context)
