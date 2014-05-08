@@ -107,7 +107,7 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
             MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_3);
             final Procedure0 _function_4 = new Procedure0() {
               public void apply() {
-                it.set(null, ((boolean[]) ((boolean[])Conversions.unwrapArray(Collections.<Boolean>unmodifiableList(Lists.<Boolean>newArrayList(true)), boolean.class))));
+                it.set(null, ((boolean[]) ((boolean[])Conversions.unwrapArray(Collections.<Boolean>unmodifiableList(Lists.<Boolean>newArrayList(Boolean.valueOf(true))), boolean.class))));
               }
             };
             MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_4);
@@ -119,7 +119,7 @@ public class CheckMutableInterfaceDeclarationProcessor implements RegisterGlobal
             MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_5);
             final Procedure0 _function_6 = new Procedure0() {
               public void apply() {
-                it.set(null, ((int[]) ((int[])Conversions.unwrapArray(Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(0)), int.class))));
+                it.set(null, ((int[]) ((int[])Conversions.unwrapArray(Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(Integer.valueOf(0))), int.class))));
               }
             };
             MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "name has to be a valid java identifier", _function_6);
