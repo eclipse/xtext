@@ -151,6 +151,12 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	IFeatureScopeSession addLocalElements(Map<QualifiedName, JvmIdentifiableElement> elements, ITypeReferenceOwner owner);
 	
 	/**
+	 * Allows to drop certain local elements from the current scope such as the enclosing {@code this}
+	 * for static inner classes.
+	 */
+	IFeatureScopeSession dropLocalElements();
+	
+	/**
 	 * Find a local element with the given qualified name.
 	 * @return the known element or <code>null</code>.
 	 */

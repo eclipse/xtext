@@ -694,14 +694,17 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			JvmDeclaredType thisType,
 			@Nullable JvmTypeReference superType,
 			boolean addNestedTypes) {
-		IFeatureScopeSession childSession;
+		IFeatureScopeSession childSession = session;
+		if (thisType.eContainer() != null && thisType.isStatic()) {
+			childSession = childSession.dropLocalElements();
+		}
 		if (superType != null) {
 			ImmutableMap.Builder<QualifiedName, JvmIdentifiableElement> builder = ImmutableMap.builder();
 			builder.put(IFeatureNames.THIS, thisType);
 			builder.put(IFeatureNames.SUPER, superType.getType());
-			childSession = session.addLocalElements(builder.build(), owner);
+			childSession = childSession.addLocalElements(builder.build(), owner);
 		} else {
-			childSession = session.addLocalElement(IFeatureNames.THIS, thisType, owner);
+			childSession = childSession.addLocalElement(IFeatureNames.THIS, thisType, owner);
 		}
 		childSession = addThisTypeToStaticScope(childSession, thisType);
 		if (addNestedTypes)
