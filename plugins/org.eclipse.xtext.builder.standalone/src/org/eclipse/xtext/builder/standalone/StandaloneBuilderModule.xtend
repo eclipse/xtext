@@ -8,15 +8,16 @@
 package org.eclipse.xtext.builder.standalone
 
 import com.google.inject.AbstractModule
-import com.google.inject.name.Names
 import org.eclipse.xtext.builder.standalone.compiler.EclipseJavaCompiler
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler
 import org.eclipse.xtext.generator.AbstractFileSystemAccess
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.IResourceDescriptions
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions
+
+import static com.google.inject.name.Names.*
+import static org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.*
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -24,10 +25,9 @@ import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions
 class StandaloneBuilderModule extends AbstractModule {
 
 	override protected configure() {
-		bind(IResourceDescriptions).annotatedWith(Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(
-			ResourceSetBasedResourceDescriptions)
-		bind(IResourceDescriptions).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(
-			ResourceSetBasedResourceDescriptions);
+		bind(IResourceDescriptions).annotatedWith(named(NAMED_BUILDER_SCOPE)).to(ResourceSetBasedResourceDescriptions)
+		bind(IResourceDescriptions).annotatedWith(named(LIVE_SCOPE)).to(ResourceSetBasedResourceDescriptions);
+		bind(IResourceDescriptions).annotatedWith(named(PERSISTED_DESCRIPTIONS)).to(ResourceSetBasedResourceDescriptions)
 		bind(IResourceDescriptions).to(ResourceSetBasedResourceDescriptions)
 
 		// configurable
