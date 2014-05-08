@@ -23,12 +23,12 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KEYWORD_1", "KEYWORD_2", "RULE_ID", "RULE_WS", "RULE_ANY_OTHER"
     };
-    public static final int RULE_ID=6;
-    public static final int RULE_ANY_OTHER=8;
     public static final int KEYWORD_1=4;
+    public static final int RULE_ID=6;
     public static final int KEYWORD_2=5;
     public static final int RULE_WS=7;
     public static final int EOF=-1;
+    public static final int RULE_ANY_OTHER=8;
 
     // delegates
     // delegators

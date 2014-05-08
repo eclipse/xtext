@@ -27,8 +27,8 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
     };
     public static final int RULE_ID=10;
     public static final int RULE_STRING=12;
-    public static final int RULE_ANY_OTHER=16;
     public static final int KEYWORD_6=4;
+    public static final int RULE_ANY_OTHER=16;
     public static final int KEYWORD_1=5;
     public static final int RULE_INT=11;
     public static final int KEYWORD_5=9;

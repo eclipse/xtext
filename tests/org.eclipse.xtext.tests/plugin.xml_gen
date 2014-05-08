@@ -602,6 +602,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/hiddentokensequencertestlanguage" 
+       class = "org.eclipse.xtext.serializer.hiddentokensequencertest.HiddentokensequencertestPackage"
+       genModel = "org/eclipse/xtext/serializer/HiddenTokenSequencerTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/sequencertestlanguage" 
        class = "org.eclipse.xtext.serializer.sequencertest.SequencertestPackage"
        genModel = "org/eclipse/xtext/serializer/SequencerTestLanguage.genmodel" /> 

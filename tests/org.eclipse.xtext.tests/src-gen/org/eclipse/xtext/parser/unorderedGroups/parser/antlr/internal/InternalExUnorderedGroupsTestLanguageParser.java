@@ -25,8 +25,8 @@ public class InternalExUnorderedGroupsTestLanguageParser extends AbstractInterna
     };
     public static final int RULE_ID=26;
     public static final int RULE_ANY_OTHER=32;
-    public static final int KEYWORD_1=13;
     public static final int KEYWORD_19=7;
+    public static final int KEYWORD_1=13;
     public static final int KEYWORD_17=11;
     public static final int KEYWORD_18=12;
     public static final int KEYWORD_15=9;
@@ -39,8 +39,8 @@ public class InternalExUnorderedGroupsTestLanguageParser extends AbstractInterna
     public static final int KEYWORD_2=14;
     public static final int KEYWORD_11=23;
     public static final int KEYWORD_12=24;
-    public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=30;
+    public static final int EOF=-1;
     public static final int KEYWORD_10=22;
     public static final int RULE_ML_COMMENT=29;
     public static final int RULE_STRING=28;
