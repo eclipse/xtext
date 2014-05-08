@@ -357,11 +357,12 @@ public class SequenceFeeder {
 	}
 
 	protected void assertValue(EStructuralFeature feature, Object value) {
-		if (!feature.getEType().isInstance(value)) {
-			String valueType = value == null ? "null" : value.getClass().getSimpleName();
+		if (value != null && !feature.getEType().isInstance(value)) {
+			String valueType = value.getClass().getSimpleName();
 			String featureName = feature.eClass().getName() + "." + feature.getName();
-			throw new RuntimeException("The value of type '" + valueType + "' can not be assigned to feature "
-					+ featureName + " of type  '" + feature.getEType().getName() + "'.");
+			String msg = "The value of type '" + valueType + "' can not be assigned to feature " + featureName
+					+ " of type  '" + feature.getEType().getName() + "'.";
+			throw new RuntimeException(msg);
 		}
 	}
 

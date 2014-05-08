@@ -209,7 +209,9 @@ public class EmfFormatter {
 		return buff.toString();
 	}
 	
-	public static String objPath( EObject obj) {
+	public static String objPath(EObject obj) {
+		if (obj == null)
+			return "null";
 		StringBuffer b = new StringBuffer();
 		objPath(b, obj);
 		return b.toString();

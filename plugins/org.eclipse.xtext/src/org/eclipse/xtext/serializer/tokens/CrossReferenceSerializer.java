@@ -77,7 +77,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 	public String serializeCrossRef(EObject semanticObject, CrossReference crossref, EObject target, INode node,
 			Acceptor errors) {
 
-		if (target.eIsProxy() && node != null)
+		if ((target == null || target.eIsProxy()) && node != null)
 			return tokenUtil.serializeNode(node);
 
 		final EReference ref = GrammarUtil.getReference(crossref, semanticObject.eClass());
@@ -88,7 +88,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 			return null;
 		}
 
-		if (node != null) {
+		if (target != null && node != null) {
 			String text = linkingHelper.getCrossRefNodeAsString(node, true);
 			QualifiedName qn = qualifiedNameConverter.toQualifiedName(text);
 			URI targetURI = EcoreUtil.getURI(target);
