@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XCollectionLiteral;
-import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
@@ -68,9 +67,6 @@ public class XtendImplicitReturnFinder extends XbaseImplicitReturnFinder {
     } else if (expression instanceof XCollectionLiteral) {
       _findImplicitReturns((XCollectionLiteral)expression, acceptor);
       return;
-    } else if (expression instanceof XConstructorCall) {
-      _findImplicitReturns((XConstructorCall)expression, acceptor);
-      return;
     } else if (expression instanceof XIfExpression) {
       _findImplicitReturns((XIfExpression)expression, acceptor);
       return;
@@ -103,6 +99,9 @@ public class XtendImplicitReturnFinder extends XbaseImplicitReturnFinder {
       return;
     } else if (expression == null) {
       _findImplicitReturns((Void)null, acceptor);
+      return;
+    } else if (expression != null) {
+      _findImplicitReturns(expression, acceptor);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +

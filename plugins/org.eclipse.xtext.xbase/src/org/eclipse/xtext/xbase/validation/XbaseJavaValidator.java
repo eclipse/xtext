@@ -1593,7 +1593,19 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkExplicitOperationCall(XConstructorCall constructorCall) {
 		if (!constructorCall.isExplicitConstructorCall() 
 				&& constructorCall.getArguments().isEmpty()) {
-			addIssue("Constructor call without parentheses", constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, OPERATION_WITHOUT_PARENTHESES);
+			INode constructorNode = NodeModelUtils.findNodesForFeature(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR).get(0);
+			int startIndex = constructorNode.getOffset();
+			int endIndex;
+			if (constructorCall.getTypeArguments().isEmpty()) {
+				endIndex = constructorNode.getEndOffset(); 
+			} else {
+				INode node = Iterables.getLast(NodeModelUtils.findNodesForFeature(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__TYPE_ARGUMENTS));
+				do {
+					node = node.getNextSibling();
+				} while (!node.getText().equals(">"));
+				endIndex = node.getEndOffset();
+			}
+			addIssue("Constructor call without parentheses", constructorCall, startIndex, endIndex - startIndex, OPERATION_WITHOUT_PARENTHESES);
 		}
 	}
 	

@@ -104,5 +104,4 @@ class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
 		expression.cases.forEach[findImplicitReturns(it.then, acceptor)]
 		findImplicitReturns(expression.^default, acceptor)
 	}
-	
 }
