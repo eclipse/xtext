@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -73,6 +74,13 @@ public class ValidationTestHelper {
 	public void assertNoErrors(final EObject model, final EClass objectType, final String code,
 			final String... messageParts) {
 		assertNoIssues(model, objectType, code, Severity.ERROR, messageParts);
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void assertNoErrors(final EObject model, final String code) {
+		assertNoIssues(model, EcorePackage.Literals.EOBJECT, code, Severity.ERROR);
 	}
 	
 	/**
