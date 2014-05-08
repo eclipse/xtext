@@ -30,6 +30,7 @@ import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.util.Pair;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -191,6 +192,9 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 			NodeIterator ni = new NodeIterator(from);
 			while (ni.hasNext()) {
 				INode next = ni.next();
+				if (!Iterables.contains(rootNode.getAsTreeIterable(), next)) {
+					break;
+				}
 				if (next == lastEmittedNode) {
 					break;
 				} else if (tokenUtil.isWhitespaceOrCommentNode(next)) {
@@ -206,6 +210,9 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 			NodeIterator ni = new NodeIterator(to);
 			while (ni.hasPrevious()) {
 				INode prev = ni.previous();
+				if (!Iterables.contains(rootNode.getAsTreeIterable(), prev)) {
+					break;
+				}
 				if (prev == lastEmittedNode) {
 					break;
 				} else if (tokenUtil.isWhitespaceOrCommentNode(prev)) {
