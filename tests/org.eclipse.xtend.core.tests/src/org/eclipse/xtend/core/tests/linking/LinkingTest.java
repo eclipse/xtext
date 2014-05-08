@@ -91,6 +91,40 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private IBatchTypeResolver typeResolver;
 	
+	@Test public void testStaticNestedClass_01() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"  static class D {\n" +
+				"    def static void m(CharSequence c) { m('') }\n" +
+				"  }\n" +
+				"  def void m(String s) {}\n" +
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendClass d = (XtendClass) c.getMembers().get(0);
+		XtendFunction m = (XtendFunction) d.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("C$D.m(java.lang.CharSequence)", feature.getIdentifier());
+	}
+	
+	@Test public void testStaticNestedClass_02() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"  static class D {\n" +
+				"    def static void m(CharSequence c) { m('') }\n" +
+				"  }\n" +
+				"  def static void m(String s) {}\n" +
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendClass d = (XtendClass) c.getMembers().get(0);
+		XtendFunction m = (XtendFunction) d.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("C.m(java.lang.String)", feature.getIdentifier());
+	}
+	
 	@Test public void testQualifiedThis() throws Exception {
 		XtendFile file = file(
 				"class C {\n" + 
