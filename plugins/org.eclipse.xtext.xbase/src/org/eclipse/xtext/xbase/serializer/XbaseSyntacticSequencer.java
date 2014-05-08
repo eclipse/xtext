@@ -16,16 +16,12 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.SynStateType;
-import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
-import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XPostfixOperation;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
@@ -49,6 +45,12 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 				if (cnt instanceof XExpression && !(cnt instanceof XBlockExpression)
 						&& !(cnt instanceof XForLoopExpression))
 					acceptUnassignedKeyword(kw, kw.getValue(), null);
+			}
+			if (semanticObject instanceof XConstructorCall) {
+				XConstructorCall call = (XConstructorCall) semanticObject;
+				if (!call.isExplicitConstructorCall() && call.getArguments().isEmpty()) {
+					acceptUnassignedKeyword(kw, kw.getValue(), null);
+				}
 			}
 		}
 		acceptNodes(transition, nodes);
@@ -87,64 +89,4 @@ public class XbaseSyntacticSequencer extends AbstractXbaseSyntacticSequencer {
 		} else
 			acceptNodes(transition, nodes);
 	}
-
-	/**
-	 * XConstructorCall returns XExpression:
-	 *    {XConstructorCall}
-	 *    'new' constructor=[types::JvmConstructor|QualifiedName] 
-	 *    (=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
-	 *    (=>'(' 
-	 *      (
-	 *          arguments+=XShortClosure
-	 *        | arguments+=XExpression (',' arguments+=XExpression)*
-	 *      )? 
-	 *    ')')?
-	 *    =>arguments+=XClosure?;
-	 */
-	@Override
-	protected void emit_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q(
-			EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		if (semanticObject instanceof XConstructorCall) {
-			Keyword kw = grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_4_0();
-			if (nodes != null) {
-				for(INode node: nodes) {
-					if (kw.equals(node.getGrammarElement())) {
-						acceptUnassignedKeyword(kw, kw.getValue(), (ILeafNode) node);
-						return;
-					}
-				}
-			}
-			
-			XConstructorCall constructorCall = (XConstructorCall) semanticObject;
-			if (constructorCall.eContainer() instanceof XMemberFeatureCall) {
-				XMemberFeatureCall container = (XMemberFeatureCall) constructorCall.eContainer();
-				if (container.getMemberCallTarget() == constructorCall && !container.isNullSafe()) {
-					if (constructorCall.getArguments().isEmpty() && constructorCall.getTypeArguments().isEmpty()) {
-						if (nodes != null) {
-							ISynNavigable fromState = transition;
-							RuleCallStack stack = contexts.peek().getStack().clone();
-							List<ISynState> path = fromState.getShortestStackpruningPathTo(grammarAccess.getXParenthesizedExpressionAccess().getRightParenthesisKeyword_2(), stack);
-							if (path != null) {
-								for(ISynState synState: path) {
-									if (synState.getType() != SynStateType.UNASSIGNED_PARSER_RULE_EXIT) {
-										if (synState.getGrammarElement() == grammarAccess.getXParenthesizedExpressionAccess().getRightParenthesisKeyword_2()) {
-											super.emit_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q(semanticObject, transition,	nodes);
-											return;
-										}		
-									}
-								}
-							}
-						}
-						acceptUnassignedKeyword(kw, kw.getValue(), null);
-						return;		
-					}
-				}
-			} else if (constructorCall.getArguments().isEmpty() && constructorCall.getTypeArguments().isEmpty() && nodes == null) {
-				acceptUnassignedKeyword(kw, kw.getValue(), null);
-				return;
-			}
-		}
-		super.emit_XConstructorCall___LeftParenthesisKeyword_4_0_RightParenthesisKeyword_4_2__q(semanticObject, transition,	nodes);
-	}
-	
 }
