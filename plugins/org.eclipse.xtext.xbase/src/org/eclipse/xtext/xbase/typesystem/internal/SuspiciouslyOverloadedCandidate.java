@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -111,24 +112,32 @@ public class SuspiciouslyOverloadedCandidate implements IFeatureLinkingCandidate
 		result.append(feature.getSimpleName());
 		result.append(candidate.getFeatureParameterTypesAsString());
 		XAbstractFeatureCall receiver = (XAbstractFeatureCall) candidate.getImplicitReceiver();
-		JvmIdentifiableElement element = receiver.getFeature();
-		String declarator = getDeclaratorSimpleName(feature);
-		if (declarator != null) {
-			result.append(" in ");
-			if (!(element instanceof JvmType)) {
-				if (candidate.isExtension()) {
-					result.append(FeatureKinds.getTypeName(element));
-					result.append(" extension ");
+		if (receiver != null) {
+			JvmIdentifiableElement element = receiver.getFeature();
+			String declarator = getDeclaratorSimpleName(feature);
+			if (declarator != null) {
+				result.append(" in ");
+				if (!(element instanceof JvmType)) {
+					if (candidate.isExtension()) {
+						result.append(FeatureKinds.getTypeName(element));
+						result.append(" extension ");
+					}
+				}
+				result.append(declarator);
+			}
+			if (element instanceof JvmType) {
+				result.append(" on 'this'");
+			} else {
+				String simpleName = element.getSimpleName();
+				if (simpleName.charAt(0) != '_') {
+					result.append(" on ").append(FeatureKinds.getTypeName(element)).append(" '").append(simpleName).append("'");
 				}
 			}
-			result.append(declarator);
-		}
-		if (element instanceof JvmType) {
-			result.append(" on 'this'");
 		} else {
-			String simpleName = element.getSimpleName();
-			if (simpleName.charAt(0) != '_') {
-				result.append(" on ").append(FeatureKinds.getTypeName(element)).append(" '").append(simpleName).append("'");
+			String declarator = getDeclaratorSimpleName(feature);
+			if (declarator != null) {
+				result.append(" in ");
+				result.append(declarator);
 			}
 		}
 	}
