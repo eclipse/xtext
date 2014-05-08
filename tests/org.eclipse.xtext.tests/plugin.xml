@@ -865,4 +865,27 @@
   </extension>
 
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated GenModelAccessTest -->
+      <package
+            uri="http://xtext.org/genmodeltest-v1.0"
+            class="org.eclipse.xtext.generator.ecore.genmodelaccess.root.RootPackage"
+            genModel="src/org/eclipse/xtext/generator/ecore/GenModelAccessTest.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated GenModelAccessTest -->
+      <package
+            uri="http://xtext.org/genmodeltest-nested-v1.0"
+            class="org.eclipse.xtext.generator.ecore.genmodelaccess.nestedPackage1.NestedPackage1Package"
+            genModel="src/org/eclipse/xtext/generator/ecore/GenModelAccessTest.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated GenModelAccessTest -->
+      <package
+            uri="http://xtext.org/genmodeltest-noliterals-v1.0"
+            class="org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.NoLiteralsPackage"
+            genModel="src/org/eclipse/xtext/generator/ecore/GenModelAccessTest.genmodel"/>
+   </extension>
 </plugin>
