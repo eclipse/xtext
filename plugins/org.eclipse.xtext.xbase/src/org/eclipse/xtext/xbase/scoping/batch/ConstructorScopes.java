@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collections;
-import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -37,12 +36,15 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ConstructorScopes extends DelegatingScopes {
+public class ConstructorScopes {
 
 	public static final int CONSTRUCTOR_BUCKET = 1;
 	
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
+	
+	@Inject
+	private TypeScopes typeScopes;
 	
 	/**
 	 * Creates the constructor scope for {@link XConstructorCall}.
@@ -61,7 +63,7 @@ public class ConstructorScopes extends DelegatingScopes {
 		 * We use a type scope here in order to provide better feedback for users,
 		 * e.g. if the constructor call refers to an interface or a primitive.
 		 */
-		final IScope delegateScope = getDelegate().getScope(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+		final IScope delegateScope = typeScopes.createTypeScope(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, session, resolvedTypes);
 		IScope result = new ConstructorTypeScopeWrapper(context, session, delegateScope);
 		return result;
 	}
@@ -90,7 +92,7 @@ public class ConstructorScopes extends DelegatingScopes {
 				JvmType type = superType.getType();
 				if (type == null)
 					return Collections.emptyList();
-				QualifiedName typeName = qualifiedNameConverter.toQualifiedName(type.getQualifiedName());
+				QualifiedName typeName = qualifiedNameConverter.toQualifiedName(type.getQualifiedName('.'));
 				if (typeName.getSegmentCount() > name.getSegmentCount()) {
 					typeName = typeName.skipFirst(typeName.getSegmentCount() - name.getSegmentCount());
 				}
