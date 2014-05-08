@@ -28,6 +28,7 @@ import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendExecutable;
+import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
@@ -36,6 +37,7 @@ import org.eclipse.xtend.ide.codebuilder.MemberFromSuperImplementor;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -449,6 +451,36 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 						internalDoAddAbstractKeyword(element, context);
 					}
 				});
+	}
+	
+	@Fix(IssueCodes.API_TYPE_INFERENCE) 
+	public void specifyTypeExplicitly(Issue issue, IssueResolutionAcceptor acceptor){
+		acceptor.accept(issue, "Infer type", "Infer type", null, new ISemanticModification() {
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				if (element instanceof XtendFunction) {
+					XtendFunction function = (XtendFunction) element;
+					JvmOperation jvmOperation = associations.getDirectlyInferredOperation(function);
+					function.setReturnType(jvmOperation.getReturnType());
+				} else if (element instanceof XtendField){
+					XtendField field = (XtendField) element;
+					JvmField jvmField = associations.getJvmField(field);
+					field.setType(jvmField.getType());
+				}
+			}
+		});
+	}
+	
+
+	@Fix(IssueCodes.IMPLICIT_RETURN) 
+	public void fixImplicitReturn(final Issue issue, IssueResolutionAcceptor acceptor){
+		acceptor.accept(issue, "Add \"return\" keyword", "Add \"return\" keyword", null, new ISemanticModification() {
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				ICompositeNode node = NodeModelUtils.findActualNodeFor(element);
+				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) element.eResource(), node.getOffset(), 0);
+				appendable.append("return ");
+				appendable.commitChanges();
+			}
+		});
 	}
 	
 	protected void internalDoAddAbstractKeyword(EObject element, IModificationContext context)
