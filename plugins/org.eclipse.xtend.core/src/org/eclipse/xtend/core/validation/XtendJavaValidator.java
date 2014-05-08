@@ -1532,13 +1532,28 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	private ModifierValidator classModifierValidator = new ModifierValidator(
-			newArrayList("public", "package", "static", "final", "abstract", "strictfp"), this);
-		
+			newArrayList("public", "package", "final", "abstract", "strictfp"), this);
+	
 	private ModifierValidator interfaceModifierValidator = new ModifierValidator(
 			newArrayList("public", "package", "abstract", "strictfp"), this);
 		
 	private ModifierValidator enumModifierValidator = new ModifierValidator(
 			newArrayList("public", "package"), this);
+	
+	private ModifierValidator annotationTypeModifierValidator = new ModifierValidator(
+			newArrayList("public", "package", "abstract"), this);
+	
+	private ModifierValidator nestedClassModifierValidator = new ModifierValidator(
+			newArrayList("public", "package", "protected", "private", "static", "final", "abstract", "strictfp"), this);
+	
+	private ModifierValidator nestedInterfaceModifierValidator = new ModifierValidator(
+			newArrayList("public", "package", "protected", "private", "static", "abstract", "strictfp"), this);
+		
+	private ModifierValidator nestedEnumModifierValidator = new ModifierValidator(
+			newArrayList("public", "package", "protected", "private", "static"), this);
+	
+	private ModifierValidator nestedAnnotationTypeModifierValidator = new ModifierValidator(
+			newArrayList("public", "package", "protected", "private", "static", "abstract"), this);
 		
 	private ModifierValidator fieldModifierValidator = new ModifierValidator(
 			newArrayList("public", "protected", "package", "private", "static", "final", "val", "var", "extension", "volatile", "transient"), this);
@@ -1555,25 +1570,50 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	private ModifierValidator methodInInterfaceModifierValidator = new ModifierValidator(
 			newArrayList("public", "abstract", "def", "override"), this);
 		
-	private ModifierValidator annotationTypeModifierValidator = new ModifierValidator(
-			newArrayList("public", "package", "abstract"), this);
-		
 	@Check
 	protected void checkModifiers(XtendClass xtendClass) {
-		classModifierValidator.checkModifiers(xtendClass, "class " + xtendClass.getName());
 		EObject eContainer = xtendClass.eContainer();
-		if(!(eContainer instanceof XtendFile) && !xtendClass.isStatic()) 
-			error("Nested classes must be static", XTEND_TYPE_DECLARATION__NAME, -1, INVALID_MODIFIER);
+		if (eContainer instanceof XtendFile) {
+			classModifierValidator.checkModifiers(xtendClass, "class " + xtendClass.getName());
+		} else {
+			nestedClassModifierValidator.checkModifiers(xtendClass, "class " + xtendClass.getName());
+			// TODO remove this constraint
+			if (!xtendClass.isStatic()) {
+				if (eContainer instanceof XtendClass) { // types in interfaces and annotations are implicitely static
+					error("Nested classes must be static", XTEND_TYPE_DECLARATION__NAME, -1, MISSING_STATIC_MODIFIER);
+				}
+			}
+		}
 	}
 	
 	@Check
 	protected void checkModifiers(XtendInterface xtendInterface) {
-		interfaceModifierValidator.checkModifiers(xtendInterface, "interface " + xtendInterface.getName());
+		EObject eContainer = xtendInterface.eContainer();
+		if (eContainer instanceof XtendFile) {
+			interfaceModifierValidator.checkModifiers(xtendInterface, "interface " + xtendInterface.getName());
+		} else {
+			nestedInterfaceModifierValidator.checkModifiers(xtendInterface, "interface " + xtendInterface.getName());
+		}
 	}
 	
 	@Check
 	protected void checkModifiers(XtendEnum xtendEnum) {
-		enumModifierValidator.checkModifiers(xtendEnum, "enum " + xtendEnum.getName());
+		EObject eContainer = xtendEnum.eContainer();
+		if (eContainer instanceof XtendFile) {
+			enumModifierValidator.checkModifiers(xtendEnum, "enum " + xtendEnum.getName());
+		} else {
+			nestedEnumModifierValidator.checkModifiers(xtendEnum, "enum " + xtendEnum.getName());
+		}
+	}
+	
+	@Check
+	protected void checkModifiers(XtendAnnotationType annotation) {
+		EObject eContainer = annotation.eContainer();
+		if (eContainer instanceof XtendFile) {
+			annotationTypeModifierValidator.checkModifiers(annotation, "annotation type " + annotation.getName());
+		} else {
+			nestedAnnotationTypeModifierValidator.checkModifiers(annotation, "annotation type " + annotation.getName());
+		}
 	}
 	
 	@Check
@@ -1620,11 +1660,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 
 	@Check
-	protected void checkModifiers(XtendAnnotationType annotation) {
-		annotationTypeModifierValidator.checkModifiers(annotation, "annotation type " + annotation.getName());
-	}
-	
-	@Check
 	protected void checkInferedApi(XtendFunction method) {
 		if (isApi(method) && method.getReturnType() == null) {
 			addIssue("API method needs explicit return type", method, XTEND_FUNCTION__NAME, API_TYPE_INFERENCE);
@@ -1645,11 +1680,12 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	protected boolean isApi(XtendTypeDeclaration type) {
-		if (type.isAnonymous()) return false;
+		if (type.isAnonymous())
+			return false;
 		boolean api = type.getVisibility() == JvmVisibility.PUBLIC;
 		if (type.getDeclaringType() != null) {
-			api |= type.getVisibility() == JvmVisibility.PROTECTED && ! type.getDeclaringType().isFinal(); 
-			api &= isApi(type.getDeclaringType());
+			api = api || (type.getVisibility() == JvmVisibility.PROTECTED && ! type.getDeclaringType().isFinal()); 
+			api = api && isApi(type.getDeclaringType());
 		}
 		return api;
 	}

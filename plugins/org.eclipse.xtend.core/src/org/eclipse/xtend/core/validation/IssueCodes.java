@@ -79,6 +79,7 @@ public final class IssueCodes {
 	public static final String ABSTRACT_METHOD_WITH_BODY = ISSUE_CODE_PREFIX + "abstract_method_with_body";
 	
 	public static final String INVALID_MODIFIER = ISSUE_CODE_PREFIX +  "invalid_modifier";
+	public static final String MISSING_STATIC_MODIFIER = ISSUE_CODE_PREFIX +  "missing_static_modifier";
 	
 	public static final String WILDCARD_IN_SUPERTYPE = ISSUE_CODE_PREFIX +  "wildcard_in_supertype";
 

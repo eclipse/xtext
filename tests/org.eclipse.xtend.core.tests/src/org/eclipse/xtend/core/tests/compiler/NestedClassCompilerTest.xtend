@@ -33,6 +33,70 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testDeeplyNested() {'''
+			class A {
+				static interface B {
+					class C {
+						A a
+						B b
+						C c
+						D d
+						static class D {
+							A a
+							B b = new A.B {}
+							C c = new C
+							D d = new B.C.D {}
+						}
+					}
+				}
+				A a
+				B b = new B {}
+				B.C c
+				B.C.D d
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class A {
+			  @SuppressWarnings("all")
+			  public interface B {
+			    @SuppressWarnings("all")
+			    public static class C {
+			      @SuppressWarnings("all")
+			      public static class D {
+			        private A a;
+			        
+			        private A.B b = new A.B() {
+			        };
+			        
+			        private A.B.C c = new A.B.C();
+			        
+			        private A.B.C.D d = new A.B.C.D() {
+			        };
+			      }
+			      
+			      private A a;
+			      
+			      private A.B b;
+			      
+			      private A.B.C c;
+			      
+			      private A.B.C.D d;
+			    }
+			  }
+			  
+			  private A a;
+			  
+			  private A.B b = new A.B() {
+			  };
+			  
+			  private A.B.C c;
+			  
+			  private A.B.C.D d;
+			}
+		''')
+	}
+	
+	@Test
 	def void testOuterMemberAccess() {'''
 			class C {
 				static class X {
@@ -53,6 +117,87 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  private void m() {
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testSiblingAccess() {'''
+			class C {
+				static class X {
+					new(Y y) {
+						y.m
+					}
+				}
+				private static class Y {
+					private def void m() {}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  @SuppressWarnings("all")
+			  public static class X {
+			    public X(final C.Y y) {
+			      y.m();
+			    }
+			  }
+			  
+			  @SuppressWarnings("all")
+			  private static class Y {
+			    private void m() {
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testNestedInterface() {'''
+			class C {
+				interface I {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  @SuppressWarnings("all")
+			  public interface I {
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testNestedEnum() {'''
+			class C {
+				private static enum E {
+					VAL
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  @SuppressWarnings("all")
+			  private enum E {
+			    VAL;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testNestedAnnotation() {'''
+			class C {
+				package annotation A {
+					String value = ''
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  @interface A {
+			    public String value() default "";
 			  }
 			}
 		''')

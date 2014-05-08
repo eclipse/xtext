@@ -51,15 +51,45 @@ Type returns XtendTypeDeclaration :
 	)
 ;
 
-AnnotationField returns XtendField :
-	annotations+=XAnnotation* modifiers+=CommonModifier* 
-	( 
-			modifiers+=FieldModifier modifiers+=CommonModifier*
-			type=JvmTypeReference? name=ValidID
-		|
-			type=JvmTypeReference name=ValidID
+AnnotationField returns XtendMember :
+	{XtendMember} annotations+=XAnnotation* 
+	(
+		(
+				{XtendField.annotationInfo = current} modifiers+=CommonModifier*
+				modifiers+=FieldModifier modifiers+=CommonModifier*
+				type=JvmTypeReference? name=ValidID
+			|	{XtendField.annotationInfo = current} modifiers+=CommonModifier*
+				type=JvmTypeReference name=ValidID
+		) ('=' initialValue=XAnnotationElementValue)? ';'?
+		| (
+			{XtendClass.annotationInfo = current}
+			modifiers+=CommonModifier*
+	  		'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
+	   		("extends" extends=JvmParameterizedTypeReference)? 
+		   	('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
+			   (members+=Member)*
+	   		'}'
+	 	) | (
+			{XtendInterface.annotationInfo = current}
+			modifiers+=CommonModifier*
+		  	'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
+		   	('extends' extends+=JvmParameterizedTypeReference (',' extends+=JvmParameterizedTypeReference)*)?'{'
+			   (members+=Member)*
+		   	'}'
+	 	) | (
+			{XtendEnum.annotationInfo = current}
+			modifiers+=CommonModifier*
+		  	'enum' name=ValidID '{'   
+			   (members+=XtendEnumLiteral (',' members+=XtendEnumLiteral)*)? ';'?
+		   	'}'
+	 	) | (
+		 	{XtendAnnotationType.annotationInfo = current}
+		 	modifiers+=CommonModifier*
+			'annotation' name=ValidID '{'
+			   (members+=AnnotationField)*
+		   	'}'
+	   	)
 	)
-	('=' initialValue=XAnnotationElementValue)? ';'?
 ;
 	
 Member returns XtendMember:
