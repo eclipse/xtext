@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.validation
 
-import java.util.List
 import org.eclipse.xtend.core.xtend.AnonymousClass
 import org.eclipse.xtend.core.xtend.RichString
-import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.validation.XbaseImplicitReturnFinder
 
 /**
@@ -18,11 +16,11 @@ import org.eclipse.xtext.xbase.validation.XbaseImplicitReturnFinder
  */
 class XtendImplicitReturnFinder extends XbaseImplicitReturnFinder {
 
-	def dispatch List<? extends XExpression> findImplicitReturns(AnonymousClass expression) {
+	def dispatch findImplicitReturns(AnonymousClass expression) {
 		#[expression]
 	}
 
-	def dispatch List<? extends XExpression> findImplicitReturns(RichString expression) {
+	def dispatch findImplicitReturns(RichString expression) {
 		#[expression]
 	}
 
