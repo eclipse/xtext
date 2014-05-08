@@ -25,7 +25,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -91,7 +91,7 @@ public class ConflictResolver {
 	}
 	
 	protected Multimap<String, JvmDeclaredType> getLocallyDefinedTypes(XtextResource resource) {
-		Multimap<String, JvmDeclaredType> result = HashMultimap.create();
+		Multimap<String, JvmDeclaredType> result = LinkedHashMultimap.create();
 		for(JvmDeclaredType type: config.getLocallyDefinedTypes(resource)) {
 			String packageName = type.getPackageName();
 			if(isEmpty(packageName)) 
