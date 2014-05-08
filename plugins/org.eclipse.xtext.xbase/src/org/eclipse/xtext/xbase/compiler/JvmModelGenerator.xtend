@@ -211,7 +211,8 @@ class JvmModelGenerator implements IGenerator {
 				generateMember(childAppendable.trace(it), config)
 			])
 		childAppendable.decreaseIndentation.newLine.append("}")
-		appendable.newLine
+		if(!(it.eContainer instanceof JvmType)) 
+			appendable.newLine
 	}
 	
 	def void generateEnumLiteral(JvmEnumerationLiteral it, ITreeAppendable appendable, GeneratorConfig config) {
@@ -234,7 +235,8 @@ class JvmModelGenerator implements IGenerator {
 			generateAnnotationMethod(operation, childAppendable, config)
 		}
 		childAppendable.newLine.append("}")
-		appendable.newLine
+		if(!(it.eContainer instanceof JvmType)) 
+			appendable.newLine
 	}
 	
 	def generateAnnotationMethod(JvmOperation it, ITreeAppendable appendable, GeneratorConfig config) {
