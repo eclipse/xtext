@@ -27,7 +27,7 @@ public class LiveScopeResourceDescriptionsTest extends AbstractScopeResourceDesc
 
 	@Test
 	public void testDirtyStateAware() throws IOException {
-		assertDirtyState(false);
+		assertDirtyState(true);
 	}
 
 	@Test
