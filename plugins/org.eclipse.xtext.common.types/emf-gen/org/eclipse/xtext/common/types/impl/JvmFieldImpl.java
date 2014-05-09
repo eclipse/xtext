@@ -205,7 +205,6 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean isStatic()
 	{
 		return static_;

@@ -112,45 +112,4 @@ public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclara
 	 */
 	void setAnonymous(boolean value);
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmTypeReference>"
-	 * @generated
-	 */
-	Iterable<JvmTypeReference> getExtendedInterfaces();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	JvmTypeReference getExtendedClass();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	boolean isInstantiateable();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmConstructor>" required="true"
-	 * @generated
-	 */
-	Iterable<JvmConstructor> getDeclaredConstructors();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 * @since 2.6
-	 */
-	boolean isLocal();
-
 } // JvmGenericType

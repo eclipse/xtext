@@ -9,11 +9,8 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.xbase.jvmmodel.NestedTypeCollector;
 
 import com.google.common.collect.Lists;
 
@@ -23,24 +20,23 @@ import com.google.common.collect.Lists;
 public class FeatureScopeSessionWithNestedTypes extends AbstractNestedFeatureScopeSession {
 
 	private final List<JvmDeclaredType> enclosingTypes;
-	private final Map<QualifiedName, JvmDeclaredType> nestedTypes;
+	private final List<JvmDeclaredType> nestedTypeDeclarators;
 
 	public FeatureScopeSessionWithNestedTypes(AbstractFeatureScopeSession parent, JvmDeclaredType type) {
 		super(parent);
 		this.enclosingTypes = Lists.newLinkedList();
 		enclosingTypes.add(type);
 		enclosingTypes.addAll(parent.getEnclosingTypes());
-		
-		NestedTypeCollector collector = new NestedTypeCollector();
-		Map<QualifiedName, JvmDeclaredType> myNestedTypes = collector.collectNestedTypes(type);
-		this.nestedTypes = collector.mergeEnclosingNestedTypes(myNestedTypes, parent.getNestedTypes());
-	}
-
-	@Override
-	public Map<QualifiedName, JvmDeclaredType> getNestedTypes() {
-		return Collections.unmodifiableMap(nestedTypes);
+		this.nestedTypeDeclarators = Lists.newLinkedList();
+		nestedTypeDeclarators.add(type);
+		nestedTypeDeclarators.addAll(parent.getNestedTypeDeclarators());
 	}
 	
+	@Override
+	public List<JvmDeclaredType> getNestedTypeDeclarators() {
+		return Collections.unmodifiableList(nestedTypeDeclarators);
+	}
+
 	@Override
 	public List<JvmDeclaredType> getEnclosingTypes() {
 		return Collections.unmodifiableList(enclosingTypes);

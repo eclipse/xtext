@@ -2150,6 +2150,37 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
+		op = addEOperation(jvmDeclaredTypeEClass, null, "getExtendedInterfaces", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getIterable());
+		g2 = createEGenericType(this.getJvmTypeReference());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		addEOperation(jvmDeclaredTypeEClass, this.getJvmTypeReference(), "getExtendedClass", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(jvmDeclaredTypeEClass, ecorePackage.getEBoolean(), "isInstantiateable", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(jvmDeclaredTypeEClass, null, "findAllTypesByName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "simpleName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getIterable());
+		g2 = createEGenericType(this.getJvmDeclaredType());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		addEOperation(jvmDeclaredTypeEClass, ecorePackage.getEBoolean(), "isLocal", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(jvmDeclaredTypeEClass, null, "getDeclaredConstructors", 1, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getIterable());
+		g2 = createEGenericType(this.getJvmConstructor());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = addEOperation(jvmDeclaredTypeEClass, null, "getAllTypes", 1, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getIterable());
+		g2 = createEGenericType(this.getJvmDeclaredType());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
 		initEClass(jvmTypeParameterEClass, JvmTypeParameter.class, "JvmTypeParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJvmTypeParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, JvmTypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJvmTypeParameter_Declarator(), this.getJvmTypeParameterDeclarator(), this.getJvmTypeParameterDeclarator_TypeParameters(), "declarator", null, 0, 1, JvmTypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2190,24 +2221,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEAttribute(getJvmGenericType_Interface(), ecorePackage.getEBoolean(), "interface", null, 0, 1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmGenericType_StrictFloatingPoint(), ecorePackage.getEBoolean(), "strictFloatingPoint", null, 0, 1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmGenericType_Anonymous(), ecorePackage.getEBoolean(), "anonymous", null, 0, 1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(jvmGenericTypeEClass, null, "getExtendedInterfaces", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(this.getIterable());
-		g2 = createEGenericType(this.getJvmTypeReference());
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
-
-		addEOperation(jvmGenericTypeEClass, this.getJvmTypeReference(), "getExtendedClass", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(jvmGenericTypeEClass, ecorePackage.getEBoolean(), "isInstantiateable", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(jvmGenericTypeEClass, null, "getDeclaredConstructors", 1, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(this.getIterable());
-		g2 = createEGenericType(this.getJvmConstructor());
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
-
-		addEOperation(jvmGenericTypeEClass, ecorePackage.getEBoolean(), "isLocal", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(jvmTypeReferenceEClass, JvmTypeReference.class, "JvmTypeReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2456,14 +2469,28 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		   source, 
 		   new String[] 
 		   {
-			 "documentation", "<p>Returns all the fields and operations with the given simple name.</p>\n<p>Overridden features will not be returned.</p>"
+			 "documentation", "<p>Returns all the fields and operations with the given simple name.</p>\n<p>Inherited features will be returend, but overridden features are not contained in the result.</p>"
 		   });	
 		addAnnotation
 		  (jvmDeclaredTypeEClass.getEOperations().get(3), 
 		   source, 
 		   new String[] 
 		   {
-			 "documentation", "<p>Returns all the fields and operations of this type.</p>\n<p>Overridden features will not be returned.</p>"
+			 "documentation", "<p>Returns all the fields and operations of this type.</p>\n<p>Inherited features are included, but overridden features will not be returned.</p>"
+		   });	
+		addAnnotation
+		  (jvmDeclaredTypeEClass.getEOperations().get(7), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>Returns all the nested types with the given simple name.</p>\n<p>Inherited types will be returned, too.</p>"
+		   });	
+		addAnnotation
+		  (jvmDeclaredTypeEClass.getEOperations().get(10), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>Returns all the nested types of this type.</p>\n<p>Inherited types will also be returned.</p>"
 		   });	
 		addAnnotation
 		  (jvmTypeConstraintEClass.getEOperations().get(0), 
