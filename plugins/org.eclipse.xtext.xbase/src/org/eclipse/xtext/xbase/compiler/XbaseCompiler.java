@@ -907,7 +907,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		ILocationData locationWithNewKeyword = getLocationWithNewKeyword(expr);
 		ITreeAppendable appendableWithNewKeyword = locationWithNewKeyword != null ? b.trace(locationWithNewKeyword) : b;
 		appendableWithNewKeyword.append("new ");
-		List<LightweightTypeReference> typeArguments = batchTypeResolver.resolveTypes(expr).getActualTypeArguments(expr);
+		IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(expr);
+		List<LightweightTypeReference> typeArguments = resolvedTypes.getActualTypeArguments(expr);
 		JvmConstructor constructor = expr.getConstructor();
 		List<JvmTypeParameter> constructorTypeParameters = constructor.getTypeParameters();
 		boolean hasTypeArguments = !typeArguments.isEmpty() && (featureLinkHelper.getDeclaredTypeParameters(constructor).size() == typeArguments.size());
@@ -934,7 +935,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				}
 			}
 		}
-		
 		if (!constructorTypeArguments.isEmpty()) {
 			appendableWithNewKeyword.append("<");
 			for(int i = 0; i < constructorTypeArguments.size(); i++) {
@@ -947,19 +947,25 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		ITreeAppendable typeAppendable = appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0);
 		appendConstructedTypeName(expr, typeAppendable);
-		if (hasTypeArguments) {
-			typeAppendable.append("<");
-			for(int i = 0; i < typeArguments.size(); i++) {
-				if (i != 0) {
-					typeAppendable.append(", ");
-				}
-				if (explicitTypeArguments.isEmpty()) {
-					typeAppendable.append(typeArguments.get(i));
-				} else {
-					typeAppendable.trace(explicitTypeArguments.get(i), false).append(typeArguments.get(i));
-				}
+		if (hasTypeArguments || (expr.isAnonymousClassConstructorCall() && !explicitTypeArguments.isEmpty() && ((JvmGenericType) constructor.getDeclaringType()).isAnonymous())) {
+			if (typeArguments.isEmpty()) {
+				LightweightTypeReference createdType = resolvedTypes.getActualType(expr);
+				typeArguments = createdType.getNamedType().getTypeArguments();
 			}
-			typeAppendable.append(">");
+			if (!typeArguments.isEmpty()) {
+				typeAppendable.append("<");
+				for(int i = 0; i < typeArguments.size(); i++) {
+					if (i != 0) {
+						typeAppendable.append(", ");
+					}
+					if (explicitTypeArguments.isEmpty()) {
+						typeAppendable.append(typeArguments.get(i));
+					} else {
+						typeAppendable.trace(explicitTypeArguments.get(i), false).append(typeArguments.get(i));
+					}
+				}
+				typeAppendable.append(">");
+			}
 		}
 		b.append("(");
 		appendArguments(expr.getArguments(), b);

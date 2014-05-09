@@ -69,6 +69,8 @@ public interface IIdentifiableElementDescription extends IEObjectDescription {
 	
 	boolean isTypeLiteral();
 	
+	boolean isAnonymousClassConstructorCall();
+	
 	boolean isExtension();
 
 	int getNumberOfIrrelevantParameters();

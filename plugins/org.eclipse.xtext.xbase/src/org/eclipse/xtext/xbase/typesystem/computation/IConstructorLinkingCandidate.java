@@ -30,6 +30,8 @@ public interface IConstructorLinkingCandidate extends ILinkingCandidate {
 	 
 	@Nullable
 	JvmConstructor getConstructor();
+	
+	boolean isAnonymousClassConstructorCall();
 
 	/**
 	 * The resolved type arguments. If the constructor itself defines type parameters,

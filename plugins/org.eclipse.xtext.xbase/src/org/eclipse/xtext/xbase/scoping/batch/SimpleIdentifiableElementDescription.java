@@ -148,6 +148,10 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 		return false;
 	}
 	
+	public boolean isAnonymousClassConstructorCall() {
+		return false;
+	}
+	
 	public int getNumberOfIrrelevantParameters() {
 		return 0;
 	}
