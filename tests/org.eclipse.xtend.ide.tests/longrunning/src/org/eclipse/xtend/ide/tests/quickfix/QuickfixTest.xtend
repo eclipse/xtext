@@ -2979,4 +2979,160 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 
+	@Test def void implicitReturn() {
+		setSeverity(IMPLICIT_RETURN, "error")
+		create("Foo.xtend",
+		'''
+			class Foo {
+				def foo() {
+					|1
+				}
+			}
+		'''
+		)
+		.assertIssueCodes(IMPLICIT_RETURN)
+		.assertResolutionLabels('''Add "return" keyword''')
+		.assertModelAfterQuickfix(
+		'''
+			class Foo {
+				def foo() {
+					return 1
+				}
+			}
+		''')
+	}
+	
+	@Test def void apiTypeInference01() {
+		setSeverity(API_TYPE_INFERENCE, "error")
+		create("Foo.xtend",
+		'''
+			class Foo {
+				def <T> |foo() {
+					<T>newArrayList
+				}
+			}
+		'''
+		)
+		.assertIssueCodes(API_TYPE_INFERENCE)
+		.assertResolutionLabels('''Infer type''')
+		.assertModelAfterQuickfix(
+		'''
+			import java.util.ArrayList
+			
+			class Foo {
+				def <T> ArrayList<T> foo() {
+					<T>newArrayList
+				}
+			}
+		''')
+	}
+	
+	@Test def void apiTypeInference02() {
+		setSeverity(API_TYPE_INFERENCE, "error")
+		create("Foo.xtend",
+		'''
+			class Foo<T> {
+				public val |foo = <T>newArrayList
+			}
+		'''
+		)
+		.assertIssueCodes(API_TYPE_INFERENCE)
+		.assertResolutionLabels('''Infer type''')
+		.assertModelAfterQuickfix(
+		'''
+			import java.util.ArrayList
+			
+			class Foo<T> {
+				public val ArrayList<T> foo = <T>newArrayList
+			}
+		''')
+	}
+	
+	@Test def void featureCallWithoutParentheses() {
+		setSeverity(OPERATION_WITHOUT_PARENTHESES, "error")
+		create("Foo.xtend",
+		'''
+			class Foo {
+				val foo = newArrayList|
+			}
+		'''
+		)
+		.assertIssueCodes(OPERATION_WITHOUT_PARENTHESES)
+		.assertResolutionLabels('''Add parentheses''')
+		.assertModelAfterQuickfix(
+		'''
+			class Foo {
+				val foo = newArrayList()
+			}
+		''')
+	}
+	
+	@Test def void memberFeatureCallWithoutParentheses() {
+		setSeverity(OPERATION_WITHOUT_PARENTHESES, "error")
+		create("Foo.xtend",
+		'''
+			class Foo {
+				def int foo() {
+					this.foo|
+				}
+			}
+		'''
+		)
+		.assertIssueCodes(OPERATION_WITHOUT_PARENTHESES)
+		.assertResolutionLabels('''Add parentheses''')
+		.assertModelAfterQuickfix(
+		'''
+			class Foo {
+				def int foo() {
+					this.foo()
+				}
+			}
+		''')
+	}
+	
+	@Test def void constructorCallWithoutParentheses() {
+		setSeverity(OPERATION_WITHOUT_PARENTHESES, "error")
+		create("Foo.xtend",
+		'''
+			import java.util.ArrayList
+			
+			class Foo {
+				val foo = new ArrayList|
+			}
+		'''
+		)
+		.assertIssueCodes(OPERATION_WITHOUT_PARENTHESES)
+		.assertResolutionLabels('''Add parentheses''')
+		.assertModelAfterQuickfix(
+		'''
+			import java.util.ArrayList
+			
+			class Foo {
+				val foo = new ArrayList()
+			}
+		''')
+	}
+	
+	@Test def void constructorCallWithoutParentheses02() {
+		setSeverity(OPERATION_WITHOUT_PARENTHESES, "error")
+		create("Foo.xtend",
+		'''
+			import java.util.ArrayList
+			
+			class Foo {
+				val foo = new ArrayList<String   >|
+			}
+		'''
+		)
+		.assertIssueCodes(OPERATION_WITHOUT_PARENTHESES)
+		.assertResolutionLabels('''Add parentheses''')
+		.assertModelAfterQuickfix(
+		'''
+			import java.util.ArrayList
+			
+			class Foo {
+				val foo = new ArrayList<String   >()
+			}
+		''')
+	}
 }

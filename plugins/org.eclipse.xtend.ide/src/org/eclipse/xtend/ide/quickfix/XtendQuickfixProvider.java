@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.BadLocationException;
@@ -28,8 +29,10 @@ import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendExecutable;
+import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtend.ide.codebuilder.MemberFromSuperImplementor;
@@ -37,6 +40,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -45,6 +49,7 @@ import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -61,13 +66,16 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -100,6 +108,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	@Inject private CreateMemberQuickfixes createMemberQuickfixes;
 	
 	@Inject private OverrideHelper overrideHelper;
+	
+	@Inject private IBatchTypeResolver batchTypeResolver;
 	
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
 			IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
@@ -449,6 +459,51 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 						internalDoAddAbstractKeyword(element, context);
 					}
 				});
+	}
+	
+	@Fix(IssueCodes.API_TYPE_INFERENCE)
+	public void specifyTypeExplicitly(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Infer type", "Infer type", null, new ISemanticModification() {
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				EStructuralFeature nameFeature = null;
+				JvmIdentifiableElement jvmElement = null;
+				if (element instanceof XtendFunction) {
+					nameFeature = XtendPackage.Literals.XTEND_FUNCTION__NAME;
+					jvmElement = associations.getDirectlyInferredOperation((XtendFunction) element);
+				} else if (element instanceof XtendField) {
+					nameFeature = XtendPackage.Literals.XTEND_FIELD__NAME;
+					jvmElement = associations.getJvmField((XtendField) element);
+				}
+				
+				LightweightTypeReference type = batchTypeResolver.resolveTypes(element).getActualType(jvmElement);
+				INode node = Iterables.getFirst(NodeModelUtils.findNodesForFeature(element, nameFeature), null);
+				
+				if (node == null) {
+					throw new IllegalStateException("Could not determine node for " + element);
+				}
+				if (type == null) {
+					throw new IllegalStateException("Could not determine type for " + element);
+				}
+				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
+						(XtextResource) element.eResource(), node.getOffset(), 0);
+				appendable.append(type);
+				appendable.append(" ");
+				appendable.commitChanges();
+			}
+		});
+	}
+	
+
+	@Fix(IssueCodes.IMPLICIT_RETURN) 
+	public void fixImplicitReturn(final Issue issue, IssueResolutionAcceptor acceptor){
+		acceptor.accept(issue, "Add \"return\" keyword", "Add \"return\" keyword", null, new ISemanticModification() {
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				ICompositeNode node = NodeModelUtils.findActualNodeFor(element);
+				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) element.eResource(), node.getOffset(), 0);
+				appendable.append("return ");
+				appendable.commitChanges();
+			}
+		});
 	}
 	
 	protected void internalDoAddAbstractKeyword(EObject element, IModificationContext context)
