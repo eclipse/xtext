@@ -78,12 +78,15 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	}
 
-	static class MethodWrapper {
-		public final Method method;
+	/**
+	 * @since 2.6
+	 */
+	protected static class MethodWrapper {
+		private final Method method;
 		private final String s;
 		private final AbstractDeclarativeValidator instance;
 
-		public MethodWrapper(AbstractDeclarativeValidator instance, Method m) {
+		protected MethodWrapper(AbstractDeclarativeValidator instance, Method m) {
 			this.instance = instance;
 			this.method = m;
 			this.s = m.getName() + ":" + m.getParameterTypes()[0].getName();
@@ -118,19 +121,20 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 				} catch (IllegalAccessException e) {
 					log.error(e.getMessage(), e);
 				} catch (InvocationTargetException e) {
-					// ignore GuardException, check is just not evaluated if
-					// guard is false
-					// ignore NullPointerException, as not having to check for
-					// NPEs all the time is a convenience feature
 					Throwable targetException = e.getTargetException();
-					if (!(targetException instanceof GuardException)
-							&& !(targetException instanceof NullPointerException))
-						Exceptions.throwUncheckedException(targetException);
+					handleInvocationTargetException(targetException, state);
 				}
 			} finally {
 				if (wasNull)
 					instance.state.set(null);
 			}
+		}
+		
+		protected void handleInvocationTargetException(Throwable targetException, State state) {
+			// ignore GuardException, check is just not evaluated if guard is false
+			// ignore NullPointerException, as not having to check for NPEs all the time is a convenience feature
+			if (!(targetException instanceof GuardException) && !(targetException instanceof NullPointerException))
+				Exceptions.throwUncheckedException(targetException);
 		}
 
 		@Override
@@ -139,6 +143,14 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 				return false;
 			MethodWrapper mw = (MethodWrapper) obj;
 			return s.equals(mw.s) && instance == mw.instance;
+		}
+		
+		public AbstractDeclarativeValidator getInstance() {
+			return instance;
+		}
+		
+		public Method getMethod() {
+			return method;
 		}
 	}
 
@@ -208,12 +220,19 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		Method[] methods = clazz.getDeclaredMethods();
 		for (Method method : methods) {
 			if (method.getAnnotation(Check.class) != null && method.getParameterTypes().length == 1) {
-				result.add(new MethodWrapper(instanceToUse, method));
+				result.add(createMethodWrapper(instanceToUse, method));
 			}
 		}
 		Class<? extends AbstractDeclarativeValidator> superClass = getSuperClass(clazz);
 		if (superClass != null)
 			collectMethodsImpl(instanceToUse, superClass, visitedClasses, result);
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	protected MethodWrapper createMethodWrapper(AbstractDeclarativeValidator instanceToUse, Method method) {
+		return new MethodWrapper(instanceToUse, method);
 	}
 
 	protected AbstractDeclarativeValidator newInstance(Class<? extends AbstractDeclarativeValidator> clazz) {
