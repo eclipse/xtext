@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -128,13 +129,22 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 		return "constructor";
 	}
 	
+	public boolean isAnonymousClassConstructorCall() {
+		return description.isAnonymousClassConstructorCall();
+	}
+	
 	@Override
 	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
+		if (isAnonymousClassConstructorCall()) {
+			return Collections.emptyList();
+		}
 		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
 	}
 	
 	public void applyToModel() {
 		resolveLinkingProxy(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR);
+		if (isAnonymousClassConstructorCall())
+			getConstructorCall().setAnonymousClassConstructorCall(true);
 	}
 	
 	@Override

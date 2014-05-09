@@ -7,18 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import static java.util.Collections.*;
-
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -90,28 +87,25 @@ public class FeatureLinkHelper {
 	
 	public List<JvmTypeParameter> getDeclaredTypeParameters(JvmConstructor constructor) {
 		List<JvmTypeParameter> constructorTypeParameters = constructor.getTypeParameters();
-		List<JvmTypeParameter> declaringTypeTypeParameters = getTypeParameters(constructor.getDeclaringType());
 		if (constructorTypeParameters.isEmpty()) {
-			if (declaringTypeTypeParameters.isEmpty()) 
-				return Collections.emptyList();
-			else 
-				return declaringTypeTypeParameters;
-		} else if (declaringTypeTypeParameters.isEmpty()) { 
-			return constructorTypeParameters;
+			JvmDeclaredType createdType = constructor.getDeclaringType();
+			if (createdType instanceof JvmTypeParameterDeclarator) {
+				return ((JvmTypeParameterDeclarator) createdType).getTypeParameters();
+			}
 		} else {
-			List<JvmTypeParameter> result = Lists.newArrayList(constructorTypeParameters);
-			result.addAll(declaringTypeTypeParameters);
-			return result;
+			JvmDeclaredType createdType = constructor.getDeclaringType();
+			if (createdType instanceof JvmTypeParameterDeclarator) {
+				List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) createdType).getTypeParameters();
+				if (typeParameters.isEmpty()) {
+					return constructorTypeParameters;
+				}
+				List<JvmTypeParameter> result = Lists.newArrayList(constructorTypeParameters);
+				result.addAll(typeParameters);
+				return result;
+			}
+			return constructorTypeParameters;
 		}
-	}
-	
-	protected List<JvmTypeParameter> getTypeParameters(JvmType type) {
-		if(type instanceof JvmGenericType && ((JvmGenericType) type).isLocal() && !((JvmGenericType)type).getSuperTypes().isEmpty())
-			return getTypeParameters(((JvmGenericType)type).getSuperTypes().get(0).getType());
-		else if(type instanceof JvmTypeParameterDeclarator)
-			return ((JvmTypeParameterDeclarator) type).getTypeParameters();
-		else 
-			return emptyList();
+		return Collections.emptyList();
 	}
 	
 	@Nullable

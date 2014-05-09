@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -43,6 +44,10 @@ public class ResolvedConstructor extends AbstractResolvedReference<XConstructorC
 		return (JvmConstructor) getFeature();
 	}
 	
+	public boolean isAnonymousClassConstructorCall() {
+		return getConstructorCall().isAnonymousClassConstructorCall();
+	}
+	
 	public XConstructorCall getConstructorCall() {
 		return getExpression();
 	}
@@ -54,6 +59,9 @@ public class ResolvedConstructor extends AbstractResolvedReference<XConstructorC
 	
 	@Override
 	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
+		if (isAnonymousClassConstructorCall()) {
+			return Collections.emptyList();
+		}
 		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
 	}
 	
