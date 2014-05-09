@@ -32,6 +32,8 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    <requires>
       <import plugin="com.google.guava"/>
       <import plugin="com.google.guava.source"/>
+      <import plugin="org.apache.commons.lang"/>
+      <import plugin="org.apache.commons.lang.source"/>
    </requires>
 
    <plugin
@@ -120,13 +122,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <plugin
          id="org.eclipse.xtext.xbase.lib.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.apache.commons.lang"
          download-size="0"
          install-size="0"
          version="0.0.0"
