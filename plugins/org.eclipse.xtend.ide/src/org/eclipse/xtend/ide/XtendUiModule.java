@@ -65,6 +65,7 @@ import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
 import org.eclipse.xtend.ide.preferences.XtendPreferenceStoreAccess;
 import org.eclipse.xtend.ide.quickfix.TypeLiteralAwareJavaTypeQuickfixes;
 import org.eclipse.xtend.ide.refactoring.XtendDependentElementsCalculator;
+import org.eclipse.xtend.ide.refactoring.XtendExpressionUtil;
 import org.eclipse.xtend.ide.refactoring.XtendJdtRenameParticipantProcessor;
 import org.eclipse.xtend.ide.refactoring.XtendRefactoringPreferences;
 import org.eclipse.xtend.ide.refactoring.XtendRenameContextFactory;
@@ -145,6 +146,7 @@ import org.eclipse.xtext.xbase.ui.file.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor;
 import org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes;
+import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
 import org.eclipse.xtext.xbase.ui.validation.XbaseIssueSeveritiesProvider;
 
 import com.google.inject.Binder;
@@ -511,4 +513,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends org.eclipse.xtext.ui.editor.hover.IEObjectHover> bindIEObjectHover() {
 		return XtendDispatchingEObjectTextHover.class;
 	}
+	
+	public Class<? extends ExpressionUtil> bindExpressionUtil() {
+		return XtendExpressionUtil.class;
+	}
+	
 }
