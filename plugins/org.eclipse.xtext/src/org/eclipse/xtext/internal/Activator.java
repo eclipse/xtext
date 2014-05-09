@@ -9,17 +9,19 @@ package org.eclipse.xtext.internal;
 
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.Plugin;
+import org.eclipse.emf.common.EMFPlugin;
+import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Activator extends Plugin {
-	@Override
+public class Activator implements BundleActivator {
+	
 	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		initializeResourceServiceProviderRegistry(context);
+		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			initializeResourceServiceProviderRegistry(context);
+		}
 	}
 
 	private void initializeResourceServiceProviderRegistry(BundleContext context) {
@@ -28,6 +30,9 @@ public class Activator extends Plugin {
 		new ContentResourceServiceProviderRegistryReader(eReg, symbolicName).readRegistry();
 		new ExtensionResourceServiceProviderRegistryReader(eReg, symbolicName).readRegistry();
 		new ProtocolResourceServiceProviderRegistryReader(eReg, symbolicName).readRegistry();
+	}
+
+	public void stop(BundleContext context) throws Exception {
 	}
 
 }
