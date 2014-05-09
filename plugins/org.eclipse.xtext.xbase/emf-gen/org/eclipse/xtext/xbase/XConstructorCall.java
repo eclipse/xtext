@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#isValidFeature <em>Valid Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#isExplicitConstructorCall <em>Explicit Constructor Call</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#isAnonymousClassConstructorCall <em>Anonymous Class Constructor Call</em>}</li>
  * </ul>
  * </p>
  *
@@ -159,5 +160,31 @@ public interface XConstructorCall extends XExpression
 	 * @generated
 	 */
 	void setExplicitConstructorCall(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Anonymous Class Constructor Call</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Anonymous Class Constructor Call</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Anonymous Class Constructor Call</em>' attribute.
+	 * @see #setAnonymousClassConstructorCall(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_AnonymousClassConstructorCall()
+	 * @model transient="true"
+	 * @generated
+	 */
+	boolean isAnonymousClassConstructorCall();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XConstructorCall#isAnonymousClassConstructorCall <em>Anonymous Class Constructor Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Anonymous Class Constructor Call</em>' attribute.
+	 * @see #isAnonymousClassConstructorCall()
+	 * @generated
+	 */
+	void setAnonymousClassConstructorCall(boolean value);
 
 } // XConstructorCall

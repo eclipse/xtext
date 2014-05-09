@@ -39,6 +39,10 @@ public class NullConstructorLinkingCandidate extends AbstractNullLinkingCandidat
 		throw new UnsupportedOperationException();
 	}
 	
+	public boolean isAnonymousClassConstructorCall() {
+		return false;
+	}
+	
 	public void applyToComputationState() {
 		for(XExpression argument: getConstructorCall().getArguments()) {
 			state.withNonVoidExpectation().computeTypes(argument);

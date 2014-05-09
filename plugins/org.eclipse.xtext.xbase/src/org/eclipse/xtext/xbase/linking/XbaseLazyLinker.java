@@ -15,6 +15,7 @@ import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xtype.XtypePackage;
@@ -54,6 +55,8 @@ public class XbaseLazyLinker extends LazyLinker {
 			JvmFormalParameter implicitParameter = ((XClosure) obj).getImplicitParameter();
 			if (implicitParameter != null)
 				implicitParameter.setParameterType(null);
+		} else if (obj instanceof XConstructorCall) {
+			((XConstructorCall) obj).setAnonymousClassConstructorCall(false);
 		}
 	}
 

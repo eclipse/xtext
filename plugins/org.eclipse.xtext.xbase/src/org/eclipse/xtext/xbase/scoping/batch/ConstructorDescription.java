@@ -17,12 +17,25 @@ import org.eclipse.xtext.naming.QualifiedName;
 @NonNullByDefault
 public class ConstructorDescription extends BucketedEObjectDescription {
 
+	private final boolean anonymous;
+
 	public ConstructorDescription(
 			QualifiedName qualifiedName, 
 			JvmConstructor constructor,
 			int bucketId,
 			boolean visible) {
+		this(qualifiedName, constructor, bucketId, visible, false);
+	}
+	
+	public ConstructorDescription(
+			QualifiedName qualifiedName, 
+			JvmConstructor constructor,
+			int bucketId,
+			boolean visible,
+			boolean anonymous) {
 		super(qualifiedName, constructor, bucketId, visible);
+		this.
+		anonymous = anonymous;
 	}
 	
 	/**
@@ -34,5 +47,10 @@ public class ConstructorDescription extends BucketedEObjectDescription {
 	
 	public boolean isExtension() {
 		return false;
+	}
+	
+	@Override
+	public boolean isAnonymousClassConstructorCall() {
+		return anonymous;
 	}
 }

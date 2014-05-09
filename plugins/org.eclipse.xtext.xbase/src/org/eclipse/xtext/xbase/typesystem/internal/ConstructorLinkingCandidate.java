@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,10 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
@@ -128,6 +132,10 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 		return "constructor";
 	}
 	
+	public boolean isAnonymousClassConstructorCall() {
+		return description.isAnonymousClassConstructorCall();
+	}
+	
 	@Override
 	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
 		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
@@ -135,10 +143,21 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	
 	public void applyToModel() {
 		resolveLinkingProxy(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR);
+		if (isAnonymousClassConstructorCall())
+			getConstructorCall().setAnonymousClassConstructorCall(true);
 	}
 	
 	@Override
-	public List<JvmTypeParameter> getDeclaredTypeParameters() {
+	protected List<JvmTypeParameter> getDeclaredTypeParameters() {
+		if (isAnonymousClassConstructorCall()) {
+			JvmDeclaredType anonymousType = getConstructor().getDeclaringType();
+			JvmTypeReference superType = anonymousType.getSuperTypes().get(0);
+			JvmType rawSuperType = superType.getType();
+			if (rawSuperType instanceof JvmTypeParameterDeclarator) {
+				return ((JvmTypeParameterDeclarator) rawSuperType).getTypeParameters();
+			}
+			return Collections.emptyList();
+		}
 		return new FeatureLinkHelper().getDeclaredTypeParameters(getConstructor());
 	}
 }

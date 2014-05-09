@@ -75,8 +75,7 @@ public class ConstructorTypeScopeWrapper implements IScope {
 			if (!type.isInterface()) {
 				for(JvmConstructor constructor: type.getDeclaredConstructors()) {
 					boolean visible = visibilityHelper.isVisible(constructor);
-					ConstructorDescription constructorDescription = new ConstructorDescription(
-							typeDescription.getName(), constructor, ConstructorScopes.CONSTRUCTOR_BUCKET, visible);
+					ConstructorDescription constructorDescription = createConstructorDescription(typeDescription, constructor, visible);
 					result.add(constructorDescription);
 				}
 			} else if (!strict) {
@@ -105,11 +104,16 @@ public class ConstructorTypeScopeWrapper implements IScope {
 		List<IEObjectDescription> result = Lists.newArrayListWithCapacity(3);
 		boolean visible = visibilityHelper.isVisible(constructor);
 		for(IEObjectDescription typeDescription: typeDescriptions) {
-			ConstructorDescription constructorDescription = new ConstructorDescription(
-					typeDescription.getName(), constructor, ConstructorScopes.CONSTRUCTOR_BUCKET, visible);
+			ConstructorDescription constructorDescription = createConstructorDescription(typeDescription, constructor, visible);
 			result.add(constructorDescription);
 		}
 		return result;
+	}
+
+	protected ConstructorDescription createConstructorDescription(IEObjectDescription typeDescription, JvmConstructor constructor, boolean visible) {
+		ConstructorDescription constructorDescription = new ConstructorDescription(
+				typeDescription.getName(), constructor, ConstructorScopes.CONSTRUCTOR_BUCKET, visible);
+		return constructorDescription;
 	}
 
 	public Iterable<IEObjectDescription> getElements(QualifiedName name) {

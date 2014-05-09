@@ -37,6 +37,10 @@ public class UnresolvableConstructorCall extends AbstractUnresolvableReferenceWi
 		throw new UnsupportedOperationException("TODO return some error feature that is compatible to everything");
 	}
 	
+	public boolean isAnonymousClassConstructorCall() {
+		return false;
+	}
+	
 	public XConstructorCall getConstructorCall() {
 		return (XConstructorCall) getExpression();
 	}

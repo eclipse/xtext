@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getInvalidFeatureIssueCode <em>Invalid Feature Issue Code</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#isValidFeature <em>Valid Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#isExplicitConstructorCall <em>Explicit Constructor Call</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#isAnonymousClassConstructorCall <em>Anonymous Class Constructor Call</em>}</li>
  * </ul>
  * </p>
  *
@@ -138,6 +139,26 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * @ordered
 	 */
 	protected boolean explicitConstructorCall = EXPLICIT_CONSTRUCTOR_CALL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isAnonymousClassConstructorCall() <em>Anonymous Class Constructor Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAnonymousClassConstructorCall()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ANONYMOUS_CLASS_CONSTRUCTOR_CALL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAnonymousClassConstructorCall() <em>Anonymous Class Constructor Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAnonymousClassConstructorCall()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean anonymousClassConstructorCall = ANONYMOUS_CLASS_CONSTRUCTOR_CALL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -292,6 +313,29 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isAnonymousClassConstructorCall()
+	{
+		return anonymousClassConstructorCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAnonymousClassConstructorCall(boolean newAnonymousClassConstructorCall)
+	{
+		boolean oldAnonymousClassConstructorCall = anonymousClassConstructorCall;
+		anonymousClassConstructorCall = newAnonymousClassConstructorCall;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XCONSTRUCTOR_CALL__ANONYMOUS_CLASS_CONSTRUCTOR_CALL, oldAnonymousClassConstructorCall, anonymousClassConstructorCall));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -328,6 +372,8 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 				return isValidFeature();
 			case XbasePackage.XCONSTRUCTOR_CALL__EXPLICIT_CONSTRUCTOR_CALL:
 				return isExplicitConstructorCall();
+			case XbasePackage.XCONSTRUCTOR_CALL__ANONYMOUS_CLASS_CONSTRUCTOR_CALL:
+				return isAnonymousClassConstructorCall();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -360,6 +406,9 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 			case XbasePackage.XCONSTRUCTOR_CALL__EXPLICIT_CONSTRUCTOR_CALL:
 				setExplicitConstructorCall((Boolean)newValue);
 				return;
+			case XbasePackage.XCONSTRUCTOR_CALL__ANONYMOUS_CLASS_CONSTRUCTOR_CALL:
+				setAnonymousClassConstructorCall((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -389,6 +438,9 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 			case XbasePackage.XCONSTRUCTOR_CALL__EXPLICIT_CONSTRUCTOR_CALL:
 				setExplicitConstructorCall(EXPLICIT_CONSTRUCTOR_CALL_EDEFAULT);
 				return;
+			case XbasePackage.XCONSTRUCTOR_CALL__ANONYMOUS_CLASS_CONSTRUCTOR_CALL:
+				setAnonymousClassConstructorCall(ANONYMOUS_CLASS_CONSTRUCTOR_CALL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -415,6 +467,8 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 				return validFeature != VALID_FEATURE_EDEFAULT;
 			case XbasePackage.XCONSTRUCTOR_CALL__EXPLICIT_CONSTRUCTOR_CALL:
 				return explicitConstructorCall != EXPLICIT_CONSTRUCTOR_CALL_EDEFAULT;
+			case XbasePackage.XCONSTRUCTOR_CALL__ANONYMOUS_CLASS_CONSTRUCTOR_CALL:
+				return anonymousClassConstructorCall != ANONYMOUS_CLASS_CONSTRUCTOR_CALL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -436,6 +490,8 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 		result.append(validFeature);
 		result.append(", explicitConstructorCall: ");
 		result.append(explicitConstructorCall);
+		result.append(", anonymousClassConstructorCall: ");
+		result.append(anonymousClassConstructorCall);
 		result.append(')');
 		return result.toString();
 	}
