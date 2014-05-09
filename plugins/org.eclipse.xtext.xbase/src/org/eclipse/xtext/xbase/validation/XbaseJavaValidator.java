@@ -1593,7 +1593,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkExplicitOperationCall(XConstructorCall constructorCall) {
 		if (!constructorCall.isExplicitConstructorCall() 
 				&& constructorCall.getArguments().isEmpty()) {
-			addIssue("Constructor call without parentheses", constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, OPERATION_WITHOUT_PARENTHESES);
+			addIssue("Constructor call without parentheses", constructorCall, OPERATION_WITHOUT_PARENTHESES);
 		}
 	}
 	

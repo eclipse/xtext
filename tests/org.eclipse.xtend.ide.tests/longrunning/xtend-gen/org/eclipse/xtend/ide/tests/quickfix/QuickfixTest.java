@@ -5663,4 +5663,247 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.newLine();
     _assertModelAfterQuickfix.assertModelAfterQuickfix("Add missing cases", _builder_2);
   }
+  
+  @Test
+  public void implicitReturn() {
+    this.builder.setSeverity(IssueCodes.IMPLICIT_RETURN, "error");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("|1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.IMPLICIT_RETURN);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Add \"return\" keyword");
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels(_builder_1.toString());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def foo() {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("return 1");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_2);
+  }
+  
+  @Test
+  public void apiTypeInference01() {
+    this.builder.setSeverity(IssueCodes.API_TYPE_INFERENCE, "error");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T> |foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<T>newArrayList");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.API_TYPE_INFERENCE);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Infer type");
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels(_builder_1.toString());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("import java.util.ArrayList");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def <T> ArrayList<T> foo() {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("<T>newArrayList");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_2);
+  }
+  
+  @Test
+  public void apiTypeInference02() {
+    this.builder.setSeverity(IssueCodes.API_TYPE_INFERENCE, "error");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public val |foo = <T>newArrayList");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.API_TYPE_INFERENCE);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Infer type");
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels(_builder_1.toString());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("import java.util.ArrayList");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("class Foo<T> {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("public val ArrayList<T> foo = <T>newArrayList");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_2);
+  }
+  
+  @Test
+  public void featureCallWithoutParentheses() {
+    this.builder.setSeverity(org.eclipse.xtext.xbase.validation.IssueCodes.OPERATION_WITHOUT_PARENTHESES, "error");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val foo = newArrayList|");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.OPERATION_WITHOUT_PARENTHESES);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Add parentheses");
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels(_builder_1.toString());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("val foo = newArrayList()");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_2);
+  }
+  
+  @Test
+  public void memberFeatureCallWithoutParentheses() {
+    this.builder.setSeverity(org.eclipse.xtext.xbase.validation.IssueCodes.OPERATION_WITHOUT_PARENTHESES, "error");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def int foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.foo|");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.OPERATION_WITHOUT_PARENTHESES);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Add parentheses");
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels(_builder_1.toString());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def int foo() {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("this.foo()");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_2);
+  }
+  
+  @Test
+  public void constructorCallWithoutParentheses() {
+    this.builder.setSeverity(org.eclipse.xtext.xbase.validation.IssueCodes.OPERATION_WITHOUT_PARENTHESES, "error");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.ArrayList");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val foo = new ArrayList|");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.OPERATION_WITHOUT_PARENTHESES);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Add parentheses");
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels(_builder_1.toString());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("import java.util.ArrayList");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("val foo = new ArrayList()");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_2);
+  }
+  
+  @Test
+  public void constructorCallWithoutParentheses02() {
+    this.builder.setSeverity(org.eclipse.xtext.xbase.validation.IssueCodes.OPERATION_WITHOUT_PARENTHESES, "error");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.ArrayList");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val foo = new ArrayList<String   >|");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.OPERATION_WITHOUT_PARENTHESES);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Add parentheses");
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels(_builder_1.toString());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("import java.util.ArrayList");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("val foo = new ArrayList<String   >()");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_2);
+  }
 }

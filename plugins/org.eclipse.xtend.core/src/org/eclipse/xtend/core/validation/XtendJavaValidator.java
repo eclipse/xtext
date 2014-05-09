@@ -1674,7 +1674,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	protected void checkInferedApi(XtendField field) {
-		if (isApi(field) && field.getType() == null) {
+		if (isApi(field) && field.getType() == null && field.getInitialValue() != null) {
 			addIssue("API field needs explicit type", field, XTEND_FIELD__NAME, API_TYPE_INFERENCE);
 		}
 	}

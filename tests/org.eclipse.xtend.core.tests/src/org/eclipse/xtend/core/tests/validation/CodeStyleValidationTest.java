@@ -127,4 +127,9 @@ public class CodeStyleValidationTest extends AbstractXtendTestCase {
 				+ "}");
 		helper.assertError(file, XTEND_FIELD, API_TYPE_INFERENCE);
 	}
+	
+	@Test public void testInferedApiField07() throws Exception {
+		XtendField field = field("public val f");
+		helper.assertNoIssue(field, XTEND_FIELD, API_TYPE_INFERENCE);
+	}
 }
