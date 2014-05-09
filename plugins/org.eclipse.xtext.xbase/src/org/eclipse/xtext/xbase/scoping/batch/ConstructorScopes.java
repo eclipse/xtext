@@ -24,6 +24,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -98,7 +99,18 @@ public class ConstructorScopes {
 					typeName = typeName.skipFirst(typeName.getSegmentCount() - name.getSegmentCount());
 				}
 				if (!typeName.equals(name)) {
-					return Collections.emptyList();
+					if (name.getSegmentCount() == 1 && name.getFirstSegment().indexOf('$') > 0) {
+						QualifiedName splitted = QualifiedName.create(Strings.split(name.getFirstSegment(), '$'));
+						typeName = qualifiedNameConverter.toQualifiedName(type.getQualifiedName('.'));
+						if (typeName.getSegmentCount() > splitted.getSegmentCount()) {
+							typeName = typeName.skipFirst(typeName.getSegmentCount() - splitted.getSegmentCount());
+						}
+						if (!typeName.equals(splitted)) {
+							return Collections.emptyList();
+						}
+					} else {
+						return Collections.emptyList();
+					}
 				}
 				IEObjectDescription typeDescription = EObjectDescription.create(name, anonymousType);
 				return createFeatureDescriptions(Collections.singletonList(typeDescription));
