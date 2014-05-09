@@ -174,6 +174,10 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		return false;
 	}
 	
+	public boolean isAnonymousClassConstructorCall() {
+		return false;
+	}
+	
 	public int getNumberOfIrrelevantParameters() {
 		if (isExtension())
 			return 1;
