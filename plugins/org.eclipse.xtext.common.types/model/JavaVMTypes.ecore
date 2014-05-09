@@ -52,7 +52,7 @@
     </eOperations>
     <eOperations name="findAllFeaturesByName" lowerBound="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;p>Returns all the fields and operations with the given simple name.&lt;/p>&#xA;&lt;p>Overridden features will not be returned.&lt;/p>"/>
+        <details key="documentation" value="&lt;p>Returns all the fields and operations with the given simple name.&lt;/p>&#xA;&lt;p>Inherited features will be returend, but overridden features are not contained in the result.&lt;/p>"/>
       </eAnnotations>
       <eGenericType eClassifier="#//Iterable">
         <eTypeArguments eClassifier="#//JvmFeature"/>
@@ -61,10 +61,40 @@
     </eOperations>
     <eOperations name="getAllFeatures" lowerBound="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;p>Returns all the fields and operations of this type.&lt;/p>&#xA;&lt;p>Overridden features will not be returned.&lt;/p>"/>
+        <details key="documentation" value="&lt;p>Returns all the fields and operations of this type.&lt;/p>&#xA;&lt;p>Inherited features are included, but overridden features will not be returned.&lt;/p>"/>
       </eAnnotations>
       <eGenericType eClassifier="#//Iterable">
         <eTypeArguments eClassifier="#//JvmFeature"/>
+      </eGenericType>
+    </eOperations>
+    <eOperations name="getExtendedInterfaces">
+      <eGenericType eClassifier="#//Iterable">
+        <eTypeArguments eClassifier="#//JvmTypeReference"/>
+      </eGenericType>
+    </eOperations>
+    <eOperations name="getExtendedClass" eType="#//JvmTypeReference"/>
+    <eOperations name="isInstantiateable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="findAllTypesByName">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns all the nested types with the given simple name.&lt;/p>&#xA;&lt;p>Inherited types will be returned, too.&lt;/p>"/>
+      </eAnnotations>
+      <eGenericType eClassifier="#//Iterable">
+        <eTypeArguments eClassifier="#//JvmDeclaredType"/>
+      </eGenericType>
+      <eParameters name="simpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="isLocal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="getDeclaredConstructors" lowerBound="1">
+      <eGenericType eClassifier="#//Iterable">
+        <eTypeArguments eClassifier="#//JvmConstructor"/>
+      </eGenericType>
+    </eOperations>
+    <eOperations name="getAllTypes" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns all the nested types of this type.&lt;/p>&#xA;&lt;p>Inherited types will also be returned.&lt;/p>"/>
+      </eAnnotations>
+      <eGenericType eClassifier="#//Iterable">
+        <eTypeArguments eClassifier="#//JvmDeclaredType"/>
       </eGenericType>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superTypes" upperBound="-1"
@@ -116,19 +146,6 @@
     <eOperations name="getEnumType" eType="#//JvmEnumerationType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmGenericType" eSuperTypes="#//JvmDeclaredType #//JvmTypeParameterDeclarator">
-    <eOperations name="getExtendedInterfaces">
-      <eGenericType eClassifier="#//Iterable">
-        <eTypeArguments eClassifier="#//JvmTypeReference"/>
-      </eGenericType>
-    </eOperations>
-    <eOperations name="getExtendedClass" eType="#//JvmTypeReference"/>
-    <eOperations name="isInstantiateable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="getDeclaredConstructors" lowerBound="1">
-      <eGenericType eClassifier="#//Iterable">
-        <eTypeArguments eClassifier="#//JvmConstructor"/>
-      </eGenericType>
-    </eOperations>
-    <eOperations name="isLocal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="strictFloatingPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="anonymous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

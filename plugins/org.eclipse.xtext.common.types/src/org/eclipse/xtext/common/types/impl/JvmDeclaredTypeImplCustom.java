@@ -22,10 +22,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -44,6 +46,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Provider;
@@ -143,6 +146,139 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	@Override
 	public Iterable<JvmOperation> getDeclaredOperations() {
 		return Iterables.filter(getMembers(), JvmOperation.class);
+	}
+	
+	@Override
+	public JvmTypeReference getExtendedClass() {
+		for(JvmTypeReference candidate: getSuperTypes()) {
+			if (candidate.getType() instanceof JvmGenericType && !((JvmGenericType) candidate.getType()).isInterface())
+				return candidate;
+		}
+		return null;
+	}
+	
+	@Override
+	public boolean isInstantiateable() {
+		return false;
+	}
+	
+	protected Iterable<JvmTypeReference> extendedInterfaces;
+
+	@Override
+	public Iterable<JvmTypeReference> getExtendedInterfaces() {
+		if (extendedInterfaces == null) {
+			int size = getSuperTypes().size() - 1;
+			List<JvmTypeReference> result;
+			if (size == 0) {
+				result = Collections.emptyList();
+			} else {
+				result = Lists.newArrayListWithExpectedSize(size);
+				for(JvmTypeReference superType: getSuperTypes()) {
+					JvmType type = superType.getType();
+					if (type instanceof JvmGenericType && ((JvmGenericType) type).isInterface()) {
+						result.add(superType);
+					}
+				}
+			}
+			extendedInterfaces = result;
+			requestNotificationOnChange(new Runnable() {
+				public void run() {
+					extendedInterfaces = null;
+				}
+			});
+			return result;
+		}
+		return extendedInterfaces;
+	}
+	
+	@Override
+	public Iterable<JvmConstructor> getDeclaredConstructors() {
+		return Iterables.filter(getMembers(), JvmConstructor.class);
+	}
+	
+	@Override
+	public boolean isLocal() {
+		return eContainingFeature() == TypesPackage.Literals.JVM_FEATURE__LOCAL_CLASSES;
+	}
+	
+	@Override
+	public Iterable<JvmDeclaredType> findAllTypesByName(String simpleName) {
+		Set<JvmDeclaredType> result = getAllTypesMap().get(simpleName);
+		if (result != null)
+			return result;
+		return Collections.emptySet();
+	}
+	
+	@Override
+	public Iterable<JvmDeclaredType> getAllTypes() {
+		List<JvmDeclaredType> result = Lists.newArrayList();
+		for(Set<JvmDeclaredType> types: getAllTypesMap().values()) {
+			result.addAll(types);
+		}
+		return result;
+	}
+	
+	protected Map<String, Set<JvmDeclaredType>> getAllTypesMap() {
+		return internalGetAllTypesMap(null);
+	}
+	
+	protected Map<String, Set<JvmDeclaredType>> allTypesByName;
+
+	protected Map<String, Set<JvmDeclaredType>> internalGetAllTypesMap(final Set<JvmDeclaredType> processedTypes) {
+		if (allTypesByName == null) {
+			final Set<JvmDeclaredType> processedSuperTypes = processedTypes == null ? Sets.<JvmDeclaredType>newHashSet() : processedTypes;
+			allTypesByName = doSynchronized(new Provider<Map<String, Set<JvmDeclaredType>>>() {
+				public Map<String, Set<JvmDeclaredType>> get() {
+					if (allTypesByName != null)
+						return allTypesByName;
+					Map<String, Set<JvmDeclaredType>> result = Maps.newLinkedHashMap();
+					processTypes(result, getMembers());
+					Map<String, Set<JvmDeclaredType>> cumulated = Maps.newLinkedHashMap();
+					for (JvmTypeReference superTypeReference : getSuperTypes()) {
+						JvmType superType = getRawType(superTypeReference);
+						if (superType instanceof JvmDeclaredTypeImplCustom && !superType.eIsProxy()
+								&& !processedSuperTypes.contains(superType)) {
+							processedSuperTypes.add((JvmDeclaredType) superType);
+							Map<String, Set<JvmDeclaredType>> superTypeMap = ((JvmDeclaredTypeImplCustom) superType)
+									.internalGetAllTypesMap(processedSuperTypes);
+							processedSuperTypes.remove(superType);
+							for(Map.Entry<String, Set<JvmDeclaredType>> entry: superTypeMap.entrySet()) {
+								if (!result.containsKey(entry.getKey())) {
+									processTypes(cumulated, entry.getValue());
+								}
+							}
+						}
+					}
+					result.putAll(cumulated);
+					Runnable runnable = new Runnable() {
+						public void run() {
+							doSynchronized(new Provider<Object>() {
+								public Object get() {
+									allTypesByName = null;
+									return null;
+								}});
+						}
+					};
+					requestNotificationOnChange(runnable);
+					return result;
+				}
+			});
+		}
+		return allTypesByName;
+	}
+	
+	protected void processTypes(Map<String, Set<JvmDeclaredType>> result, Collection<? extends JvmMember> members) {
+		for (JvmMember member : members) {
+			if (member instanceof JvmDeclaredType) {
+				Set<JvmDeclaredType> knownTypes = result.get(member.getSimpleName());
+				if (knownTypes == null) {
+					// Sets.newLinkedHashSet(capacity) does not exist
+					knownTypes = new LinkedHashSet<JvmDeclaredType>(2);
+					result.put(member.getSimpleName(), knownTypes);
+				}
+				knownTypes.add((JvmDeclaredType) member);
+			} 
+		}
 	}
 
 	protected Map<String, Set<JvmFeature>> allFeaturesByName;
@@ -294,7 +430,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		JvmTypeChangeDispatcher dispatcher = JvmTypeChangeDispatcher.findResourceChangeDispatcher(notifier);
 		dispatcher.requestNotificationOnChange(this, listener);
 	}
-
+	
 	protected void processMembers(Map<String, Set<JvmFeature>> result, Collection<? extends JvmMember> members) {
 		for (JvmMember member : members) {
 			if (member instanceof JvmOperation || member instanceof JvmField) {

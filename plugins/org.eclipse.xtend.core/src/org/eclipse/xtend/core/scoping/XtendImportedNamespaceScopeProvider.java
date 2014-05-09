@@ -43,11 +43,9 @@ import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.jvmmodel.NestedTypeCollector;
 import org.eclipse.xtext.xbase.scoping.AbstractNestedTypeAwareImportNormalizer;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.ConstructorTypeScopeWrapper;
-import org.eclipse.xtext.xbase.scoping.batch.NestedTypeScope;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -120,8 +118,6 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				if(inferredAnonymousType != null)
 					result = new LocalTypeScope(singletonList(inferredAnonymousType), result);
 			}
-			// TODO this could be a performance bottleneck, probably due to eagerly collecting the inherited nested types
-			// consider caching those by name in the JvmDeclaredType similar to the members
 			XtendMember syntacticContainer = EcoreUtil2.getContainerOfType(context, XtendMember.class);
 			if (syntacticContainer != null) {
 				IScope containerScope = getContainerScope(syntacticContainer, result);
@@ -159,10 +155,64 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 		return result;
 	}
 	
-	private IScope getContainerScope(final XtendMember syntacticContainer, AbstractScope result) {
+//	private IScope getContainerScope(final XtendMember syntacticContainer, AbstractScope result) {
+//		List<List<JvmTypeParameter>> typeParameters = null;
+//		Map<QualifiedName, JvmDeclaredType> nestedTypes = Collections.emptyMap();
+//		XtendMember workWithMe = syntacticContainer;
+//		while(workWithMe != null) {
+//			Set<EObject> elements = getAssociations().getJvmElements(workWithMe);
+//			for (EObject derivedJvmElement : elements) {
+//				// scope for JvmTypeParameterDeclarator
+//				if (derivedJvmElement instanceof JvmTypeParameterDeclarator) {
+//					JvmTypeParameterDeclarator parameterDeclarator = (JvmTypeParameterDeclarator) derivedJvmElement;
+//					List<JvmTypeParameter> current = parameterDeclarator.getTypeParameters();
+//					if (!current.isEmpty()) {
+//						if (typeParameters == null) {
+//							typeParameters = Lists.newArrayListWithCapacity(3);
+//						}
+//						typeParameters.add(current);
+//					}
+//					if (derivedJvmElement instanceof JvmDeclaredType) {
+//						if (syntacticContainer != workWithMe) { // prevent stackoverflow / cyclic resolution
+//							if (workWithMe instanceof AnonymousClass) {
+//								IScope typeScope = getScope(workWithMe, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+//								JvmDeclaredType superType = anonymousClassUtil.getSuperTypeNonResolving((AnonymousClass) workWithMe, typeScope);
+//								if (superType != null) {
+//									Map<QualifiedName, JvmDeclaredType> myNestedTypes = collector.collectNestedTypes(superType);
+//									nestedTypes = collector.mergeEnclosingNestedTypes(myNestedTypes, nestedTypes);
+//								}
+//							} else {
+//								Map<QualifiedName, JvmDeclaredType> myNestedTypes = collector.collectNestedTypes((JvmDeclaredType) derivedJvmElement);
+//								nestedTypes = collector.mergeEnclosingNestedTypes(myNestedTypes, nestedTypes);
+//							}
+//						}
+//					}
+//				}
+//			}
+//			EObject container = workWithMe;
+//			do {
+//				container = container.eContainer();
+//				if (container == null) {
+//					if (typeParameters == null) {
+//						if (nestedTypes.isEmpty())
+//							return result;
+//						return new NestedTypeScope(result, nestedTypes);
+//					}
+//					TypeParameterScope typeParameterScope = new TypeParameterScope(typeParameters, result);
+//					if (nestedTypes.isEmpty()) {
+//						return typeParameterScope;
+//					}
+//					return new NestedTypeScope(typeParameterScope, nestedTypes);
+//				}
+//			} while (!(container instanceof XtendMember));
+//			workWithMe = (XtendMember) container;
+//		}
+//		return result;
+//	}
+	
+	private AbstractScope getContainerScope(XtendMember syntacticContainer, AbstractScope result) {
+		JvmDeclaredType innermost = null;
 		List<List<JvmTypeParameter>> typeParameters = null;
-		Map<QualifiedName, JvmDeclaredType> nestedTypes = Collections.emptyMap();
-		NestedTypeCollector collector = new NestedTypeCollector();
 		XtendMember workWithMe = syntacticContainer;
 		while(workWithMe != null) {
 			Set<EObject> elements = getAssociations().getJvmElements(workWithMe);
@@ -177,19 +227,17 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 						}
 						typeParameters.add(current);
 					}
-					if (derivedJvmElement instanceof JvmDeclaredType) {
-						if (syntacticContainer != workWithMe) { // prevent stackoverflow / cyclic resolution
-							if (workWithMe instanceof AnonymousClass) {
-								IScope typeScope = getScope(workWithMe, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-								JvmDeclaredType superType = anonymousClassUtil.getSuperTypeNonResolving((AnonymousClass) workWithMe, typeScope);
-								if (superType != null) {
-									Map<QualifiedName, JvmDeclaredType> myNestedTypes = collector.collectNestedTypes(superType);
-									nestedTypes = collector.mergeEnclosingNestedTypes(myNestedTypes, nestedTypes);
-								}
-							} else {
-								Map<QualifiedName, JvmDeclaredType> myNestedTypes = collector.collectNestedTypes((JvmDeclaredType) derivedJvmElement);
-								nestedTypes = collector.mergeEnclosingNestedTypes(myNestedTypes, nestedTypes);
+				}
+				if (innermost == null && derivedJvmElement instanceof JvmDeclaredType) {
+					if (syntacticContainer != workWithMe) { // prevent stackoverflow / cyclic resolution
+						if (workWithMe instanceof AnonymousClass) {
+							IScope typeScope = getScope(workWithMe, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+							JvmDeclaredType superType = anonymousClassUtil.getSuperTypeNonResolving((AnonymousClass) workWithMe, typeScope);
+							if (superType != null) {
+								innermost = superType;
 							}
+						} else {
+							innermost = (JvmDeclaredType) derivedJvmElement;
 						}
 					}
 				}
@@ -199,15 +247,15 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				container = container.eContainer();
 				if (container == null) {
 					if (typeParameters == null) {
-						if (nestedTypes.isEmpty())
+						if (innermost == null)
 							return result;
-						return new NestedTypeScope(result, nestedTypes);
+						return new NestedTypesScope(innermost, result);
 					}
 					TypeParameterScope typeParameterScope = new TypeParameterScope(typeParameters, result);
-					if (nestedTypes.isEmpty()) {
+					if (innermost == null) {
 						return typeParameterScope;
 					}
-					return new NestedTypeScope(typeParameterScope, nestedTypes);
+					return new NestedTypesScope(innermost, typeParameterScope);
 				}
 			} while (!(container instanceof XtendMember));
 			workWithMe = (XtendMember) container;

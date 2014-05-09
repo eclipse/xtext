@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -84,8 +83,8 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 	}
 	
 	@Override
-	public Map<QualifiedName, JvmDeclaredType> getNestedTypes() {
-		return parent.getNestedTypes();
+	public List<JvmDeclaredType> getNestedTypeDeclarators() {
+		return parent.getNestedTypeDeclarators();
 	}
 	
 	@Nullable

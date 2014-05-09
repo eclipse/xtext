@@ -29,15 +29,9 @@ public class TypeScopes extends DelegatingScopes {
 	/**
 	 * @param resolvedTypes the currently known resolved types
 	 */
-	public IScope createTypeScope(EObject context, EReference reference,
-			IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+	public IScope createTypeScope(EObject context, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		final IScope delegateScope = getDelegate().getScope(context, reference);
-		final Map<QualifiedName, JvmDeclaredType> nestedTypes = session.getNestedTypes();
-		if (nestedTypes.isEmpty()) {
-			return delegateScope;
-		}
-		// TODO visibility information should be attached to the given type descriptions
-		return new NestedTypeScope(delegateScope, nestedTypes);
+		return new NestedTypesScope(delegateScope, session);
 	}
 
 }

@@ -131,7 +131,6 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public JvmArrayType getType()
 	{
 		// TODO: implement this method
