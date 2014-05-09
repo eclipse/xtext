@@ -18,6 +18,9 @@
    <feature id="org.eclipse.xtext.ui" version="0.0.0">
       <category name="xtext"/>
    </feature>
+   <feature id="org.eclipse.xtext.license" version="0.0.0">
+      <category name="xtext"/>
+   </feature>
    <feature id="org.eclipse.xtext.xtext" version="0.0.0">
       <category name="xtext"/>
    </feature>
@@ -28,6 +31,9 @@
       <category name="xtend"/>
    </feature>
    <feature id="org.eclipse.xtend.gwt" version="0.0.0">
+      <category name="gwt-related"/>
+   </feature>
+   <feature id="org.eclipse.xtext.gwt" version="0.0.0">
       <category name="gwt-related"/>
    </feature>
    <category-def name="xtext" label="Xtext${package.qualifier}">
