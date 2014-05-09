@@ -88,16 +88,15 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	IFeatureScopeSession addNestedTypesToScope(JvmDeclaredType type);
 	
 	/**
-	 * Returns a list of the enclosing types in the current context. The first element in the list
+	 * Returns a list of enclosing types that provide an instance in the current context. The first element in the list
 	 * is the innermost type.
 	 */
 	List<JvmDeclaredType> getEnclosingTypes();
 	
 	/**
-	 * Returns a declared and inherited nested types by name. The name is local to the container type, 
-	 * that is, an outer class is probably not available.
+	 * Returns enclosing types that declare available nested types. The first element in the list is the innermost type.
 	 */
-	Map<QualifiedName, JvmDeclaredType> getNestedTypes();
+	List<JvmDeclaredType> getNestedTypeDeclarators();
 	
 	/**
 	 * Forks this session with an instance context. References to 'this' are only valid in instance contexts.

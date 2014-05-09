@@ -61,9 +61,9 @@ public class LegacyKnownTypesScope extends KnownTypesScope {
 	}
 	
 	@Override
-	protected void doGetDescriptions(JvmType type, JvmType knownType, int i, List<IEObjectDescription> result) {
-		super.doGetDescriptions(type, knownType, i, result);
-		QualifiedName importName = importNames.get(i);
+	protected void doGetDescriptions(JvmType type, JvmType knownType, int index, List<IEObjectDescription> result) {
+		super.doGetDescriptions(type, knownType, index, result);
+		QualifiedName importName = importNames.get(index);
 		if (type == knownType && importName != null) {
 			result.add(EObjectDescription.create(QualifiedName.create(importName.getLastSegment()), type));
 		}
