@@ -29,6 +29,11 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          id="org.eclipse.xtext.ui"
          version="0.0.0"/>
 
+   <requires>
+      <import plugin="com.google.guava"/>
+      <import plugin="com.google.guava.source"/>
+   </requires>
+
    <plugin
          id="org.eclipse.xtend.core"
          download-size="0"
@@ -121,33 +126,12 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          unpack="false"/>
 
    <plugin
-         id="com.google.guava"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.google.guava.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.apache.commons.lang"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-<!-- temporary disabled due to bogus bundle versions from orbit
-   <plugin
-         id="org.apache.commons.lang.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
--->
+
    <plugin
          id="org.eclipse.xtend.standalone"
          download-size="0"

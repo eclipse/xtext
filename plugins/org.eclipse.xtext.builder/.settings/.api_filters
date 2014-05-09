@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.builder" version="2">
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.base.Equivalences">
+        <filter comment="Guava 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.base.Equivalences"/>
+                <message_argument value="org.eclipse.xtext.builder_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.AbstractLinkedIterator">
+        <filter comment="Guava 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.AbstractLinkedIterator"/>
+                <message_argument value="org.eclipse.xtext.builder_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.AsynchronousComputationException">
+        <filter comment="Guava 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.AsynchronousComputationException"/>
+                <message_argument value="org.eclipse.xtext.builder_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.DiscreteDomains">
+        <filter comment="Guava 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.DiscreteDomains"/>
+                <message_argument value="org.eclipse.xtext.builder_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.EvictionListeners">
         <filter comment="Guava Update" id="305422471">
             <message_arguments>
@@ -28,6 +60,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.Ranges">
+        <filter comment="Guava 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.Ranges"/>
+                <message_argument value="org.eclipse.xtext.builder_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.SortedMaps">
         <filter comment="Guava Update" id="305422471">
             <message_arguments>
@@ -38,6 +78,22 @@
         <filter id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.collect.SortedMaps"/>
+                <message_argument value="org.eclipse.xtext.builder_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.io.LimitInputStream">
+        <filter comment="Guava 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.io.LimitInputStream"/>
+                <message_argument value="org.eclipse.xtext.builder_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.io.NullOutputStream">
+        <filter comment="Guava 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.io.NullOutputStream"/>
                 <message_argument value="org.eclipse.xtext.builder_2.5.3"/>
             </message_arguments>
         </filter>
