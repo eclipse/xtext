@@ -35,6 +35,10 @@ import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.RichString;
+import org.eclipse.xtend.core.xtend.RichStringForLoop;
+import org.eclipse.xtend.core.xtend.RichStringIf;
+import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.EcoreUtil2;
@@ -397,8 +401,8 @@ public class ExtractMethodRefactoring extends Refactoring {
 	}
 
 	protected ITextRegion getExpressionsRegion() {
-		ITextRegion firstRegion = locationInFileProvider.getFullTextRegion(firstExpression);
-		ITextRegion lastRegion = locationInFileProvider.getFullTextRegion(lastExpression);
+		ITextRegion firstRegion = expressionUtil.getTextRegion(firstExpression);
+		ITextRegion lastRegion = expressionUtil.getTextRegion(lastExpression);
 		ITextRegion expressionRegion = new TextRegion(firstRegion.getOffset(), lastRegion.getOffset()
 				+ lastRegion.getLength() - firstRegion.getOffset());
 		return expressionRegion;
@@ -410,23 +414,46 @@ public class ExtractMethodRefactoring extends Refactoring {
 				.newLine()
 				.newLine();
 		appendMethodSignature(declarationSection);
-		declarationSection
+		
+		if (firstExpression.eContainer() instanceof RichString && !isRichStringXExpressionOrVarDeclaration()) {
+			declarationSection
+				.increaseIndentation()
+				.newLine()
+				.append("'''");
+		} else {
+			declarationSection
 				.append(" {")
 				.increaseIndentation()
 				.newLine();
+		}
+		
 		declarationSection.append(expressionsAsString, Math.min(0, -expressionIndentLevel));
 		if (isNeedsReturnExpression())
 			declarationSection
 				.newLine()
 				.append(((XFeatureCall) returnExpression).getFeature().getSimpleName());
-		declarationSection
-			.decreaseIndentation()
-			.newLine()
-			.append("}");
+
+		if (firstExpression.eContainer() instanceof RichString && !isRichStringXExpressionOrVarDeclaration()) {
+			declarationSection
+				.append("'''")
+				.decreaseIndentation()
+				.newLine();
+		} else {
+			declarationSection
+				.decreaseIndentation()
+				.newLine()
+				.append("}");
+		}
 	}
 
 	protected String getExtractedMethodBody(ITextRegion expressionsRegion) throws BadLocationException {
 		String methodBody = getMethodBodyWithRenamedParameters(expressionsRegion);
+		if (isRichStringXExpressionOrVarDeclaration()) {
+			int length = methodBody.length();
+			if (length >= 2) {
+				methodBody = methodBody.substring(1, length - 1);
+			}
+		}
 		if(expressions.size() == 1 
 				&& firstExpression instanceof XClosure 
 				&& (!methodBody.startsWith("[") || !methodBody.endsWith("]"))) {
@@ -434,6 +461,14 @@ public class ExtractMethodRefactoring extends Refactoring {
 			return "[" + methodBody + "]";
 		}
 		return methodBody;
+	}
+
+	protected boolean isRichStringXExpressionOrVarDeclaration() {
+		return firstExpression == lastExpression 
+				&& firstExpression.eContainer() instanceof RichString 
+				&& !(firstExpression instanceof RichStringLiteral)
+				&& !(firstExpression instanceof RichStringForLoop)
+				&& !(firstExpression instanceof RichStringIf);
 	}
 
 	protected String getMethodBodyWithRenamedParameters(ITextRegion expressionsRegion) throws BadLocationException {
@@ -468,6 +503,9 @@ public class ExtractMethodRefactoring extends Refactoring {
 	}
 
 	protected void createMethodCallEdit(DocumentRewriter.Section methodCallSection, ITextRegion expressionRegion) throws BadLocationException {
+		if (firstExpression.eContainer() instanceof RichString) {
+			methodCallSection.append("«");
+		}
 		if (isNeedsReturnExpression()) {
 			JvmIdentifiableElement returnFeature = ((XFeatureCall) returnExpression).getFeature();
 			if (isFinalFeature(returnFeature))
@@ -497,6 +535,9 @@ public class ExtractMethodRefactoring extends Refactoring {
 		methodCallSection.append(")");
 		if(needsSurroundingParentheses)
 			methodCallSection.append(")");
+		if (lastExpression.eContainer() instanceof RichString) {
+			methodCallSection.append("»");
+		}
 	}
 
 	protected boolean isEndOfOriginalMethod() {
