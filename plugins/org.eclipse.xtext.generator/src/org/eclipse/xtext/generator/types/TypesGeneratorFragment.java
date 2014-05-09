@@ -55,7 +55,7 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 		 	 .addTypeToType("org.eclipse.xtext.ui.editor.IValidationJobScheduler",
 					 	"org.eclipse.xtext.common.types.xtext.ui.JdtValidationJobScheduler")
 			 .addTypeToType("org.eclipse.xtext.ui.resource.JavaProjectResourceSetInitializer",
-						"org.eclipse.xtext.common.types.access.jdt.JvmJavaProjectResourceSetInitializer")
+						"org.eclipse.xtext.common.types.access.jdt.JvmTypesAwareResourceSetInitializer")
 			 .addTypeToType("org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation", 
 						"org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation.Yes")
 			 .getBindings();

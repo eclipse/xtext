@@ -18,7 +18,7 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.6
  */
-public class JvmJavaProjectResourceSetInitializer extends JavaProjectResourceSetInitializer {
+public class JvmTypesAwareResourceSetInitializer extends JavaProjectResourceSetInitializer {
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
 
