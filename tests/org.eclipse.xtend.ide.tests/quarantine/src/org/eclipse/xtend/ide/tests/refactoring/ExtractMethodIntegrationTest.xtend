@@ -16,7 +16,7 @@ import org.junit.Test
  * @author Jan Koehnlein
  */
 class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
-
+	
 	@Inject extension WorkbenchTestHelper workbenchTestHelper
 
 	@Inject Provider<ExtractMethodRefactoring> refactoringProvider
@@ -488,6 +488,470 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def bar() {
 					"my string"
 				}
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_01() {
+		'''
+			class Foo {
+				def foo() '«»''
+					$Hello World!$
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo() '«»''«'«'»bar()«'»'»'«»''
+				
+				def bar()
+					'«»''
+						Hello World!
+					'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_02() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					$Hello «'«'» /* prefix */ value /* postfix */ «'»'»!$
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''«'«'»bar(value)«'»'»'«»''
+				
+				def bar(String value)
+					'«»''
+						Hello «'«'» /* prefix */ value /* postfix */ «'»'»!
+					'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_03() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					$Hello$ «'«'» /* prefix */ value /* postfix */ «'»'»!
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''«'«'»bar()«'»'»«'«'» /* prefix */ value /* postfix */ «'»'»!
+				'«»''
+				
+				def bar()
+					'«»''
+						Hello '«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_04() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'» /* prefix */ value /* postfix */ «'»'»$!$
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'» /* prefix */ value /* postfix */ «'»'»«'«'»bar()«'»'»'«»''
+				
+				def bar()
+					'«»''!
+						'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_05() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'»$ /* prefix */ value /* postfix */ $«'»'»!
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'»bar(value)«'»'»!
+				'«»''
+				
+				def bar(String value) {
+					 /* prefix */ value /* postfix */ 
+				}
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_06() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'»$ /* prefix */ value /* postfix */ «'»'»$!
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'»bar(value)«'»'»!
+				'«»''
+				
+				def bar(String value) {
+					 /* prefix */ value /* postfix */ 
+				}
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_07() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					Hello $«'«'» /* prefix */ value /* postfix */ $«'»'»!
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'»bar(value)«'»'»!
+				'«»''
+				
+				def bar(String value) {
+					 /* prefix */ value /* postfix */ 
+				}
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_08() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					Hello $«'«'» /* prefix */ value /* postfix */ «'»'»$!
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'»bar(value)«'»'»!
+				'«»''
+				
+				def bar(String value) {
+					 /* prefix */ value /* postfix */ 
+				}
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_09() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					$Hello «'«'» /* prefix */ value /* postfix */ «'»'»$!
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''«'«'»bar(value)«'»'»!
+				'«»''
+				
+				def bar(String value)
+					'«»''
+						Hello «'«'» /* prefix */ value /* postfix */ «'»'»'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_10() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					$Hello «'«'» /* prefix */ value /* postfix */ $«'»'»!
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''«'«'»bar(value)«'»'»!
+				'«»''
+				
+				def bar(String value)
+					'«»''
+						Hello «'«'» /* prefix */ value /* postfix */ «'»'»'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_11() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					$Hello «'«'» /* prefix */ val$ue /* postfix */ «'»'»!
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''«'«'»bar(value)«'»'»!
+				'«»''
+				
+				def bar(String value)
+					'«»''
+						Hello «'«'» /* prefix */ value /* postfix */ «'»'»'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_12() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					$Hello «'«'»$ /* prefix */ value /* postfix */ «'»'»!
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''«'«'»bar(value)«'»'»!
+				'«»''
+				
+				def bar(String value)
+					'«»''
+						Hello «'«'» /* prefix */ value /* postfix */ «'»'»'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_13() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					$Hello $«'«'» /* prefix */ value /* postfix */ «'»'»!
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''«'«'»bar()«'»'»«'«'» /* prefix */ value /* postfix */ «'»'»!
+				'«»''
+				
+				def bar()
+					'«»''
+						Hello '«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_14() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					Hello $«'«'» /* prefix */ value /* postfix */ «'»'»!$
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'»bar(value)«'»'»'«»''
+				
+				def bar(String value)
+					'«»''«'«'» /* prefix */ value /* postfix */ «'»'»!
+						'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_15() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'»$ /* prefix */ value /* postfix */ «'»'»!$
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'»bar(value)«'»'»'«»''
+				
+				def bar(String value)
+					'«»''«'«'» /* prefix */ value /* postfix */ «'»'»!
+						'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_16() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'» /* prefix */ va$lue /* postfix */ «'»'»!$
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'»bar(value)«'»'»'«»''
+				
+				def bar(String value)
+					'«»''«'«'» /* prefix */ value /* postfix */ «'»'»!
+						'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_17() {
+		'''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'» /* prefix */ value /* postfix */ $«'»'»!$
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(String value) '«»''
+					Hello «'«'»bar(value)«'»'»'«»''
+				
+				def bar(String value)
+					'«»''«'«'» /* prefix */ value /* postfix */ «'»'»!
+						'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_18() {
+		'''
+			class Foo {
+				def foo(int i) '«»''
+					$«'«'»FOR j : 1 .. i«'»'»
+						«'«'»j«'»'»
+					«'«'»ENDFOR«'»'»$
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(int i) '«»''
+					«'«'»bar(i)«'»'»
+				'«»''
+				
+				def bar(int i)
+					'«»''«'«'»FOR j : 1 .. i«'»'»
+						«'«'»j»
+					«'«'»ENDFOR«'»'»'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_19() {
+		'''
+			class Foo {
+				def foo(boolean a) '«»''
+					$«'«'»IF a«'»'»
+						«'«'»1«'»'»
+					«'«'»ELSE«'»'»
+						«'«'»2«'»'»
+					«'«'»ENDIF«'»'»$
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(boolean a) '«»''
+					«'«'»bar(a)«'»'»
+				'«»''
+				
+				def bar(boolean a)
+					'«»''«'«'»IF a«'»'»
+						«'«'»1«'»'»
+					«'«'»ELSE«'»'»
+						«'«'»2«'»'»
+					«'«'»ENDIF«'»'»'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_20() {
+		'''
+			class Foo {
+				def foo(int i) '«»''
+					«'«'»FOR j : 1 .. i«'»'»
+						$x   «'«'»j«'»'»$
+					«'«'»ENDFOR«'»'»
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(int i) '«»''
+					«'«'»FOR j : 1 .. i«'»'»«'«'»bar(j)«'»'»
+					«'«'»ENDFOR«'»'»
+				'«»''
+				
+				def bar(Integer j)
+					'«»''
+						x   «'«'»j«'»'»'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_21() {
+		'''
+			class Foo {
+				def foo(int i) '«»''
+					«'«'»FOR j : 1 .. i«'»'»
+						$x   «'«'»j«'»'»$
+					«'«'» /* lalala */ ENDFOR«'»'»
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(int i) '«»''
+					«'«'»FOR j : 1 .. i«'»'»«'«'»bar(j)«'»'»
+					«'«'» /* lalala */ ENDFOR«'»'»
+				'«»''
+				
+				def bar(Integer j)
+					'«»''
+						x   «'«'»j«'»'»'«»''
+				
+			}
+		''')
+	}
+	
+	@Test def testTemplateExpression_22() {
+		'''
+			class Foo {
+				def foo(boolean a) '«»''
+					«'«'»IF a«'»'»
+					$x	«'«'»1«'»'»$
+					«'«'» /* lalala */ ENDIF«'»'»
+				'«»''
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo(boolean a) '«»''
+					«'«'»IF a«'»'»«'«'»bar()«'»'»
+					«'«'» /* lalala */ ENDIF«'»'»
+				'«»''
+				
+				def bar()
+					'«»''
+					x	«'«'»1«'»'»'«»''
+				
 			}
 		''')
 	}

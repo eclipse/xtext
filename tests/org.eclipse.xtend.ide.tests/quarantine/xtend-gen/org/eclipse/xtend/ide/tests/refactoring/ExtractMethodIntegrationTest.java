@@ -1195,6 +1195,1517 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     this.assertAfterExtract(_builder, _function, _builder_1);
   }
   
+  @Test
+  public void testTemplateExpression_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$Hello World!$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() \'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t");
+    _builder_1.append("bar()");
+    _builder_1.append("»", "\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar()");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("Hello World!");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$Hello ");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* prefix */ value /* postfix */ ");
+    _builder.append("»", "\t\t");
+    _builder.append("!$");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t\t");
+    _builder_1.append(" /* prefix */ value /* postfix */ ");
+    _builder_1.append("»", "\t\t\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$Hello$ ");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* prefix */ value /* postfix */ ");
+    _builder.append("»", "\t\t");
+    _builder.append("!");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t");
+    _builder_1.append("bar()");
+    _builder_1.append("»", "\t");
+    _builder_1.append("«", "\t");
+    _builder_1.append(" /* prefix */ value /* postfix */ ");
+    _builder_1.append("»", "\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar()");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("Hello \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Hello ");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* prefix */ value /* postfix */ ");
+    _builder.append("»", "\t\t");
+    _builder.append("$!$");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append(" /* prefix */ value /* postfix */ ");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar()");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar()");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'!");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Hello ");
+    _builder.append("«", "\t\t");
+    _builder.append("$ /* prefix */ value /* postfix */ $");
+    _builder.append("»", "\t\t");
+    _builder.append("!");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t ");
+    _builder_1.append("/* prefix */ value /* postfix */ ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_06() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Hello ");
+    _builder.append("«", "\t\t");
+    _builder.append("$ /* prefix */ value /* postfix */ ");
+    _builder.append("»", "\t\t");
+    _builder.append("$!");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t ");
+    _builder_1.append("/* prefix */ value /* postfix */ ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_07() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Hello $");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* prefix */ value /* postfix */ $");
+    _builder.append("»", "\t\t");
+    _builder.append("!");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t ");
+    _builder_1.append("/* prefix */ value /* postfix */ ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_08() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Hello $");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* prefix */ value /* postfix */ ");
+    _builder.append("»", "\t\t");
+    _builder.append("$!");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t ");
+    _builder_1.append("/* prefix */ value /* postfix */ ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_09() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$Hello ");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* prefix */ value /* postfix */ ");
+    _builder.append("»", "\t\t");
+    _builder.append("$!");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t\t");
+    _builder_1.append(" /* prefix */ value /* postfix */ ");
+    _builder_1.append("»", "\t\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_10() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$Hello ");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* prefix */ value /* postfix */ $");
+    _builder.append("»", "\t\t");
+    _builder.append("!");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t\t");
+    _builder_1.append(" /* prefix */ value /* postfix */ ");
+    _builder_1.append("»", "\t\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_11() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$Hello ");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* prefix */ val$ue /* postfix */ ");
+    _builder.append("»", "\t\t");
+    _builder.append("!");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t\t");
+    _builder_1.append(" /* prefix */ value /* postfix */ ");
+    _builder_1.append("»", "\t\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_12() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$Hello ");
+    _builder.append("«", "\t\t");
+    _builder.append("$ /* prefix */ value /* postfix */ ");
+    _builder.append("»", "\t\t");
+    _builder.append("!");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t\t");
+    _builder_1.append(" /* prefix */ value /* postfix */ ");
+    _builder_1.append("»", "\t\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_13() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$Hello $");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* prefix */ value /* postfix */ ");
+    _builder.append("»", "\t\t");
+    _builder.append("!");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t");
+    _builder_1.append("bar()");
+    _builder_1.append("»", "\t");
+    _builder_1.append("«", "\t");
+    _builder_1.append(" /* prefix */ value /* postfix */ ");
+    _builder_1.append("»", "\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar()");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("Hello \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_14() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Hello $");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* prefix */ value /* postfix */ ");
+    _builder.append("»", "\t\t");
+    _builder.append("!$");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append(" /* prefix */ value /* postfix */ ");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_15() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Hello ");
+    _builder.append("«", "\t\t");
+    _builder.append("$ /* prefix */ value /* postfix */ ");
+    _builder.append("»", "\t\t");
+    _builder.append("!$");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append(" /* prefix */ value /* postfix */ ");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_16() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Hello ");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* prefix */ va$lue /* postfix */ ");
+    _builder.append("»", "\t\t");
+    _builder.append("!$");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append(" /* prefix */ value /* postfix */ ");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_17() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String value) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Hello ");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* prefix */ value /* postfix */ $");
+    _builder.append("»", "\t\t");
+    _builder.append("!$");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(String value) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Hello ");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar(value)");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(String value)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append(" /* prefix */ value /* postfix */ ");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("!");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_18() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(int i) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$");
+    _builder.append("«", "\t\t");
+    _builder.append("FOR j : 1 .. i");
+    _builder.append("»", "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("«", "\t\t\t");
+    _builder.append("j");
+    _builder.append("»", "\t\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("«", "\t\t");
+    _builder.append("ENDFOR");
+    _builder.append("»", "\t\t");
+    _builder.append("$");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(int i) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar(i)");
+    _builder_1.append("»", "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(int i)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("FOR j : 1 .. i");
+    _builder_1.append("»", "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("«", "\t\t\t");
+    _builder_1.append("j»");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("ENDFOR");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_19() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(boolean a) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$");
+    _builder.append("«", "\t\t");
+    _builder.append("IF a");
+    _builder.append("»", "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("«", "\t\t\t");
+    _builder.append("1");
+    _builder.append("»", "\t\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("«", "\t\t");
+    _builder.append("ELSE");
+    _builder.append("»", "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("«", "\t\t\t");
+    _builder.append("2");
+    _builder.append("»", "\t\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("«", "\t\t");
+    _builder.append("ENDIF");
+    _builder.append("»", "\t\t");
+    _builder.append("$");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(boolean a) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar(a)");
+    _builder_1.append("»", "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(boolean a)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("IF a");
+    _builder_1.append("»", "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("«", "\t\t\t");
+    _builder_1.append("1");
+    _builder_1.append("»", "\t\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("ELSE");
+    _builder_1.append("»", "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("«", "\t\t\t");
+    _builder_1.append("2");
+    _builder_1.append("»", "\t\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("ENDIF");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_20() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(int i) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("«", "\t\t");
+    _builder.append("FOR j : 1 .. i");
+    _builder.append("»", "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("$x   ");
+    _builder.append("«", "\t\t\t");
+    _builder.append("j");
+    _builder.append("»", "\t\t\t");
+    _builder.append("$");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("«", "\t\t");
+    _builder.append("ENDFOR");
+    _builder.append("»", "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(int i) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("FOR j : 1 .. i");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar(j)");
+    _builder_1.append("»", "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("ENDFOR");
+    _builder_1.append("»", "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(Integer j)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("x   ");
+    _builder_1.append("«", "\t\t\t");
+    _builder_1.append("j");
+    _builder_1.append("»", "\t\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_21() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(int i) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("«", "\t\t");
+    _builder.append("FOR j : 1 .. i");
+    _builder.append("»", "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t");
+    _builder.append("$x   ");
+    _builder.append("«", "\t\t\t");
+    _builder.append("j");
+    _builder.append("»", "\t\t\t");
+    _builder.append("$");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* lalala */ ENDFOR");
+    _builder.append("»", "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(int i) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("FOR j : 1 .. i");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar(j)");
+    _builder_1.append("»", "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append(" /* lalala */ ENDFOR");
+    _builder_1.append("»", "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar(Integer j)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("x   ");
+    _builder_1.append("«", "\t\t\t");
+    _builder_1.append("j");
+    _builder_1.append("»", "\t\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
+  @Test
+  public void testTemplateExpression_22() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(boolean a) \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("«", "\t\t");
+    _builder.append("IF a");
+    _builder.append("»", "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("$x\t");
+    _builder.append("«", "\t\t");
+    _builder.append("1");
+    _builder.append("»", "\t\t");
+    _builder.append("$");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("«", "\t\t");
+    _builder.append(" /* lalala */ ENDIF");
+    _builder.append("»", "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      public void apply(final ExtractMethodRefactoring it) {
+      }
+    };
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo(boolean a) \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("IF a");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("bar()");
+    _builder_1.append("»", "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append(" /* lalala */ ENDIF");
+    _builder_1.append("»", "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar()");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("x\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("1");
+    _builder_1.append("»", "\t\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _function, _builder_1);
+  }
+  
   protected void assertAfterExtract(final CharSequence input, final Procedure1<? super ExtractMethodRefactoring> initializer, final CharSequence expected) {
     try {
       final String inputString = input.toString();
