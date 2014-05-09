@@ -24,6 +24,10 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
       <import plugin="org.eclipse.xtend"/>
       <import plugin="org.eclipse.xpand"/>
       <import plugin="org.eclipse.xtend.typesystem.emf"/>
+      <import plugin="com.google.guava" version="10.0.1"/>
+      <import plugin="javax.inject" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.google.inject" version="3.0.0" match="greaterOrEqual"/>
+      <import plugin="org.objectweb.asm" version="5.0.1" match="compatible"/>
    </requires>
 
    <plugin
@@ -92,34 +96,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <plugin
          id="org.eclipse.xtext.smap"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.google.guava"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="javax.inject"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.google.inject"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.objectweb.asm"
          download-size="0"
          install-size="0"
          version="0.0.0"

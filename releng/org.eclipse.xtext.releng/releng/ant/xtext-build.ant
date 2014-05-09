@@ -33,13 +33,10 @@
 	<property name="SWTBOT" value="false" />
 
 	<target name="run-buckminster-build" depends="common.cleanup">
-
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
-
 		<antcall target="-buckminster-resolve" />
 		<antcall target="buckminster-zip-compile-bootstrap" />
 		<antcall target="buckminster-package" />
-
 	</target>
 
 	<target name="run-buckminster-tests" depends="common.cleanup">
