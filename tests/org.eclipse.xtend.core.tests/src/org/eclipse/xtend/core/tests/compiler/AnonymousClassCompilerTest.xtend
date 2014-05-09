@@ -763,4 +763,50 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	def void testGeneric6() {'''
+			class C {
+				def <K> m() {
+					new Object {
+						def <V> m2() {
+							new java.util.AbstractMap<K, V> {
+								def Entry<K, V> m() {}
+								override entrySet() {}
+							}
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.AbstractMap;
+			import java.util.Map;
+			import java.util.Set;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <K extends Object> Object m() {
+			    @SuppressWarnings("all")
+			    final class __C_1 {
+			      public <V extends Object> AbstractMap<K, V> m2() {
+			        @SuppressWarnings("all")
+			        final class ____C_1 extends AbstractMap<K, V> {
+			          public Map.Entry<K, V> m() {
+			            return null;
+			          }
+			          
+			          public Set<Map.Entry<K, V>> entrySet() {
+			            return null;
+			          }
+			        }
+			        
+			        return new ____C_1();
+			      }
+			    }
+			    
+			    return new __C_1();
+			  }
+			}
+		''')
+	}
+	
 }

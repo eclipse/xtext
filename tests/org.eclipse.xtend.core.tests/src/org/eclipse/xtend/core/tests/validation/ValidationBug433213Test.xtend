@@ -47,4 +47,143 @@ class ValidationBug433213Test extends AbstractXtendTestCase {
 		helper.assertNoErrors(file)
 	}
 	
+	@Test def void test_02() {
+		val file = parser.parse('''
+			class C {
+				def <T> m() {
+					new Object {
+						def T m2() {}
+					}
+				}
+			}
+		''')
+		val c = file.xtendTypes.head
+		val m = c.members.head as XtendFunction
+		val body = m.expression as XBlockExpression
+		val anon = body.expressions.head as AnonymousClass
+		val m2 = anon.members.head as XtendFunction
+		val returnType = m2.returnType
+		val t = returnType.type
+		assertNotNull('notNull', t)
+		assertFalse('t.eIsProxy', t.eIsProxy)
+		helper.assertNoErrors(file)
+	}
+	
+	@Test def void test_03() {
+		val file = parser.parse('''
+			class C {
+				def m() {
+					new Object {
+						def m2() {
+							new Object {
+								def <T> T m3() {}
+							}
+						}
+					}
+				}
+			}
+		''')
+		val c = file.xtendTypes.head
+		val m = c.members.head as XtendFunction
+		val body = m.expression as XBlockExpression
+		val anon = body.expressions.head as AnonymousClass
+		val m2 = anon.members.head as XtendFunction
+		val body2 = m2.expression as XBlockExpression
+		val anon2 = body2.expressions.head as AnonymousClass
+		val m3 = anon2.members.head as XtendFunction
+		val returnType = m3.returnType
+		val t = returnType.type
+		assertNotNull('notNull', t)
+		assertFalse('t.eIsProxy', t.eIsProxy)
+		helper.assertNoErrors(file)
+	}
+	
+	@Test def void test_04() {
+		val file = parser.parse('''
+			class C {
+				def m() {
+					new Object {
+						def <T> m2() {
+							new Object {
+								def T m3() {}
+							}
+						}
+					}
+				}
+			}
+		''')
+		val c = file.xtendTypes.head
+		val m = c.members.head as XtendFunction
+		val body = m.expression as XBlockExpression
+		val anon = body.expressions.head as AnonymousClass
+		val m2 = anon.members.head as XtendFunction
+		val body2 = m2.expression as XBlockExpression
+		val anon2 = body2.expressions.head as AnonymousClass
+		val m3 = anon2.members.head as XtendFunction
+		val returnType = m3.returnType
+		val t = returnType.type
+		assertNotNull('notNull', t)
+		assertFalse('t.eIsProxy', t.eIsProxy)
+		helper.assertNoErrors(file)
+	}
+	
+	@Test def void test_05() {
+		val file = parser.parse('''
+			class C {
+				def <T> m() {
+					new Object {
+						def m2() {
+							new Object {
+								def T m3() {}
+							}
+						}
+					}
+				}
+			}
+		''')
+		val c = file.xtendTypes.head
+		val m = c.members.head as XtendFunction
+		val body = m.expression as XBlockExpression
+		val anon = body.expressions.head as AnonymousClass
+		val m2 = anon.members.head as XtendFunction
+		val body2 = m2.expression as XBlockExpression
+		val anon2 = body2.expressions.head as AnonymousClass
+		val m3 = anon2.members.head as XtendFunction
+		val returnType = m3.returnType
+		val t = returnType.type
+		assertNotNull('notNull', t)
+		assertFalse('t.eIsProxy', t.eIsProxy)
+		helper.assertNoErrors(file)
+	}
+	
+	@Test def void test_06() {
+		val file = parser.parse('''
+			class C {
+				def <K> m() {
+					new Object {
+						def <V> m2() {
+							new java.util.AbstractMap<K, V> {
+								def Entry<K, V> m() {}
+								override entrySet() {}
+							}
+						}
+					}
+				}
+			}
+		''')
+		val c = file.xtendTypes.head
+		val m = c.members.head as XtendFunction
+		val body = m.expression as XBlockExpression
+		val anon = body.expressions.head as AnonymousClass
+		val m2 = anon.members.head as XtendFunction
+		val body2 = m2.expression as XBlockExpression
+		val anon2 = body2.expressions.head as AnonymousClass
+		val m3 = anon2.members.head as XtendFunction
+		val returnType = m3.returnType
+		val t = returnType.type
+		assertNotNull('notNull', t)
+		assertFalse('t.eIsProxy', t.eIsProxy)
+		helper.assertNoErrors(file)
+	}
+	
 }
