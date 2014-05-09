@@ -76,6 +76,17 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	public void fixDuplicateImport(final Issue issue, IssueResolutionAcceptor acceptor) {
 		organizeImports(issue, acceptor);
 	}
+	
+	@Fix(IssueCodes.OPERATION_WITHOUT_PARENTHESES)
+	public void fixMissingParentheses(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Add parentheses", "Add parentheses", null, new ISemanticModification() {
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) element.eResource(), issue.getOffset() + issue.getLength(), 0);
+				appendable.append("()");
+				appendable.commitChanges();
+			}
+		});
+	}
 
 	@Fix(IssueCodes.IMPORT_UNUSED)
 	public void fixUnusedImport(final Issue issue, IssueResolutionAcceptor acceptor) {
