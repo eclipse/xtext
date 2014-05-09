@@ -39,6 +39,10 @@ public class AmbiguousConstructorLinkingCandidate extends AbstractAmbiguousLinki
 		return getPrimaryCandidate().getConstructor();
 	}
 	
+	public boolean isAnonymousClassConstructorCall() {
+		return getPrimaryCandidate().isAnonymousClassConstructorCall();
+	}
+	
 	@Override
 	protected EStructuralFeature getFeatureToMark() {
 		return XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;

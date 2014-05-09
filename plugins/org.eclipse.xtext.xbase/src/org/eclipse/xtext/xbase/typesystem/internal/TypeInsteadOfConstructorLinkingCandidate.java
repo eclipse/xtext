@@ -63,6 +63,10 @@ public class TypeInsteadOfConstructorLinkingCandidate extends AbstractUnresolvab
 		return null;
 	}
 	
+	public boolean isAnonymousClassConstructorCall() {
+		return false;
+	}
+	
 	@Override
 	protected void applyType() {
 		JvmType type = (JvmType) getFeature();

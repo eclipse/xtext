@@ -85,4 +85,327 @@ public class ValidationBug433213Test extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void test_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def <T> m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Object {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("def T m2() {}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.parser.parse(_builder);
+      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
+      final XtendTypeDeclaration c = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XtendMember> _members = c.getMembers();
+      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFunction m = ((XtendFunction) _head);
+      XExpression _expression = m.getExpression();
+      final XBlockExpression body = ((XBlockExpression) _expression);
+      EList<XExpression> _expressions = body.getExpressions();
+      XExpression _head_1 = IterableExtensions.<XExpression>head(_expressions);
+      final AnonymousClass anon = ((AnonymousClass) _head_1);
+      EList<XtendMember> _members_1 = anon.getMembers();
+      XtendMember _head_2 = IterableExtensions.<XtendMember>head(_members_1);
+      final XtendFunction m2 = ((XtendFunction) _head_2);
+      final JvmTypeReference returnType = m2.getReturnType();
+      final JvmType t = returnType.getType();
+      Assert.assertNotNull("notNull", t);
+      boolean _eIsProxy = t.eIsProxy();
+      Assert.assertFalse("t.eIsProxy", _eIsProxy);
+      this.helper.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test_03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Object {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("def m2() {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("new Object {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("def <T> T m3() {}");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.parser.parse(_builder);
+      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
+      final XtendTypeDeclaration c = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XtendMember> _members = c.getMembers();
+      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFunction m = ((XtendFunction) _head);
+      XExpression _expression = m.getExpression();
+      final XBlockExpression body = ((XBlockExpression) _expression);
+      EList<XExpression> _expressions = body.getExpressions();
+      XExpression _head_1 = IterableExtensions.<XExpression>head(_expressions);
+      final AnonymousClass anon = ((AnonymousClass) _head_1);
+      EList<XtendMember> _members_1 = anon.getMembers();
+      XtendMember _head_2 = IterableExtensions.<XtendMember>head(_members_1);
+      final XtendFunction m2 = ((XtendFunction) _head_2);
+      XExpression _expression_1 = m2.getExpression();
+      final XBlockExpression body2 = ((XBlockExpression) _expression_1);
+      EList<XExpression> _expressions_1 = body2.getExpressions();
+      XExpression _head_3 = IterableExtensions.<XExpression>head(_expressions_1);
+      final AnonymousClass anon2 = ((AnonymousClass) _head_3);
+      EList<XtendMember> _members_2 = anon2.getMembers();
+      XtendMember _head_4 = IterableExtensions.<XtendMember>head(_members_2);
+      final XtendFunction m3 = ((XtendFunction) _head_4);
+      final JvmTypeReference returnType = m3.getReturnType();
+      final JvmType t = returnType.getType();
+      Assert.assertNotNull("notNull", t);
+      boolean _eIsProxy = t.eIsProxy();
+      Assert.assertFalse("t.eIsProxy", _eIsProxy);
+      this.helper.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test_04() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Object {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("def <T> m2() {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("new Object {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("def T m3() {}");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.parser.parse(_builder);
+      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
+      final XtendTypeDeclaration c = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XtendMember> _members = c.getMembers();
+      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFunction m = ((XtendFunction) _head);
+      XExpression _expression = m.getExpression();
+      final XBlockExpression body = ((XBlockExpression) _expression);
+      EList<XExpression> _expressions = body.getExpressions();
+      XExpression _head_1 = IterableExtensions.<XExpression>head(_expressions);
+      final AnonymousClass anon = ((AnonymousClass) _head_1);
+      EList<XtendMember> _members_1 = anon.getMembers();
+      XtendMember _head_2 = IterableExtensions.<XtendMember>head(_members_1);
+      final XtendFunction m2 = ((XtendFunction) _head_2);
+      XExpression _expression_1 = m2.getExpression();
+      final XBlockExpression body2 = ((XBlockExpression) _expression_1);
+      EList<XExpression> _expressions_1 = body2.getExpressions();
+      XExpression _head_3 = IterableExtensions.<XExpression>head(_expressions_1);
+      final AnonymousClass anon2 = ((AnonymousClass) _head_3);
+      EList<XtendMember> _members_2 = anon2.getMembers();
+      XtendMember _head_4 = IterableExtensions.<XtendMember>head(_members_2);
+      final XtendFunction m3 = ((XtendFunction) _head_4);
+      final JvmTypeReference returnType = m3.getReturnType();
+      final JvmType t = returnType.getType();
+      Assert.assertNotNull("notNull", t);
+      boolean _eIsProxy = t.eIsProxy();
+      Assert.assertFalse("t.eIsProxy", _eIsProxy);
+      this.helper.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test_05() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def <T> m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Object {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("def m2() {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("new Object {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("def T m3() {}");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.parser.parse(_builder);
+      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
+      final XtendTypeDeclaration c = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XtendMember> _members = c.getMembers();
+      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFunction m = ((XtendFunction) _head);
+      XExpression _expression = m.getExpression();
+      final XBlockExpression body = ((XBlockExpression) _expression);
+      EList<XExpression> _expressions = body.getExpressions();
+      XExpression _head_1 = IterableExtensions.<XExpression>head(_expressions);
+      final AnonymousClass anon = ((AnonymousClass) _head_1);
+      EList<XtendMember> _members_1 = anon.getMembers();
+      XtendMember _head_2 = IterableExtensions.<XtendMember>head(_members_1);
+      final XtendFunction m2 = ((XtendFunction) _head_2);
+      XExpression _expression_1 = m2.getExpression();
+      final XBlockExpression body2 = ((XBlockExpression) _expression_1);
+      EList<XExpression> _expressions_1 = body2.getExpressions();
+      XExpression _head_3 = IterableExtensions.<XExpression>head(_expressions_1);
+      final AnonymousClass anon2 = ((AnonymousClass) _head_3);
+      EList<XtendMember> _members_2 = anon2.getMembers();
+      XtendMember _head_4 = IterableExtensions.<XtendMember>head(_members_2);
+      final XtendFunction m3 = ((XtendFunction) _head_4);
+      final JvmTypeReference returnType = m3.getReturnType();
+      final JvmType t = returnType.getType();
+      Assert.assertNotNull("notNull", t);
+      boolean _eIsProxy = t.eIsProxy();
+      Assert.assertFalse("t.eIsProxy", _eIsProxy);
+      this.helper.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test_06() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def <K> m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Object {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("def <V> m2() {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("new java.util.AbstractMap<K, V> {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("def Entry<K, V> m() {}");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("override entrySet() {}");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.parser.parse(_builder);
+      EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
+      final XtendTypeDeclaration c = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XtendMember> _members = c.getMembers();
+      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      final XtendFunction m = ((XtendFunction) _head);
+      XExpression _expression = m.getExpression();
+      final XBlockExpression body = ((XBlockExpression) _expression);
+      EList<XExpression> _expressions = body.getExpressions();
+      XExpression _head_1 = IterableExtensions.<XExpression>head(_expressions);
+      final AnonymousClass anon = ((AnonymousClass) _head_1);
+      EList<XtendMember> _members_1 = anon.getMembers();
+      XtendMember _head_2 = IterableExtensions.<XtendMember>head(_members_1);
+      final XtendFunction m2 = ((XtendFunction) _head_2);
+      XExpression _expression_1 = m2.getExpression();
+      final XBlockExpression body2 = ((XBlockExpression) _expression_1);
+      EList<XExpression> _expressions_1 = body2.getExpressions();
+      XExpression _head_3 = IterableExtensions.<XExpression>head(_expressions_1);
+      final AnonymousClass anon2 = ((AnonymousClass) _head_3);
+      EList<XtendMember> _members_2 = anon2.getMembers();
+      XtendMember _head_4 = IterableExtensions.<XtendMember>head(_members_2);
+      final XtendFunction m3 = ((XtendFunction) _head_4);
+      final JvmTypeReference returnType = m3.getReturnType();
+      final JvmType t = returnType.getType();
+      Assert.assertNotNull("notNull", t);
+      boolean _eIsProxy = t.eIsProxy();
+      Assert.assertFalse("t.eIsProxy", _eIsProxy);
+      this.helper.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

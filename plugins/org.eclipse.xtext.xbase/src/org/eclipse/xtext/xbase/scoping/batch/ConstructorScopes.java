@@ -103,7 +103,17 @@ public class ConstructorScopes {
 				IEObjectDescription typeDescription = EObjectDescription.create(name, anonymousType);
 				return createFeatureDescriptions(Collections.singletonList(typeDescription));
 			}
+			
+			@Override
+			protected ConstructorDescription createConstructorDescription(IEObjectDescription typeDescription, JvmConstructor constructor, boolean visible) {
+				return createAnonmousClassConstructorDescription(typeDescription.getName(), constructor, visible);
+			}
 		};
+	}
+	
+	protected ConstructorDescription createAnonmousClassConstructorDescription(QualifiedName name, JvmConstructor constructor, boolean visible) {
+		ConstructorDescription result = new ConstructorDescription(name, constructor, ConstructorScopes.CONSTRUCTOR_BUCKET, visible, true);
+		return result;
 	}
 	
 	public boolean isConstructorCallScope(EReference reference) {
