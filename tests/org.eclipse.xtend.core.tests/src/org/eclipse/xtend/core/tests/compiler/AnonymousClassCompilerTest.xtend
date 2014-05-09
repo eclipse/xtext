@@ -809,4 +809,36 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	def void testGeneric7() {'''
+			class Foo<T>  {
+				def <W extends Foo<W>> foo() {
+					val bar = new Bar<W>() {
+						override bar() {
+							null
+						}
+					}
+				}
+				interface Bar<V extends Foo<V>> {
+					def V bar()
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo<T extends Object> {
+			  @SuppressWarnings("all")
+			  public interface Bar<V extends Foo<V>> {
+			    public abstract V bar();
+			  }
+			  
+			  public <W extends Foo<W>> void foo() {
+			    final Foo.Bar<W> bar = new Foo.Bar<W>() {
+			      public W bar() {
+			        return null;
+			      }
+			    };
+			  }
+			}
+		''')
+	}
 }
