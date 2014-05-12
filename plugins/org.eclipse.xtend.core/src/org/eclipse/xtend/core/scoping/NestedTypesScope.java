@@ -69,7 +69,7 @@ public class NestedTypesScope extends AbstractKnownTypesScope {
 	protected IEObjectDescription doGetSingleElement(QualifiedName name, String firstSegment, int dollarIndex) {
 		JvmDeclaredType declarator = innermost;
 		while(declarator != null) {
-			Iterable<JvmDeclaredType> nestedTypes = declarator.findAllTypesByName(firstSegment);
+			Iterable<JvmDeclaredType> nestedTypes = declarator.findAllNestedTypesByName(firstSegment);
 			for(JvmDeclaredType nested: nestedTypes) {
 				JvmType nestedType = findNestedType(nested, 0, name);
 				if (nestedType != null) {
