@@ -61,6 +61,7 @@ import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xbase.typesystem.util.LocalTypeSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
@@ -187,12 +188,17 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 
 		protected LightweightTypeReference convertLocalType(LightweightTypeReference reference) {
-			JvmType jvmType = reference.getType();
-			if(jvmType instanceof JvmGenericType && ((JvmGenericType) jvmType).isLocal()) {
-				if(reference.getSuperTypes().size() == 1)
-					return reference.getSuperTypes().get(0);
+			if (member instanceof JvmFeature) {
+				List<JvmGenericType> localClasses = ((JvmFeature) member).getLocalClasses();
+				if (localClasses.isEmpty()) {
+					return reference;
+				}
+				LocalTypeSubstitutor substitutor = new LocalTypeSubstitutor(reference.getOwner(), member);
+				LightweightTypeReference result = substitutor.withoutLocalTypes(reference);
+				return result;
+			} else {
+				return reference;
 			}
-			return reference;
 		}
 		
 		@Override

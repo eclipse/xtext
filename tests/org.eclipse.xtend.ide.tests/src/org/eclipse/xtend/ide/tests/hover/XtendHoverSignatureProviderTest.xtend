@@ -118,6 +118,82 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	def testSignatureForAnonymousClassLocalVarTypeTest(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+
+		class C {
+			def m() {
+				val r = new Runnable { override run() {} }
+				r
+			}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val function = clazz.members.get(0) as XtendFunction
+		val body = function.expression as XBlockExpression
+		val variable = body.expressions.head as XVariableDeclaration
+		val signature = signatureProvider.getSignature(variable)
+		assertEquals("new Runnable(){} r",signature)
+	}
+	
+	
+	@Test
+	def testSignatureForAnonymousClassLocalVarTypeTest_02(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+
+		class C {
+			def m() {
+				val r = new Runnable { override run() {} def void m() {} }
+				r
+			}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val function = clazz.members.get(0) as XtendFunction
+		val body = function.expression as XBlockExpression
+		val variable = body.expressions.head as XVariableDeclaration
+		val signature = signatureProvider.getSignature(variable)
+		assertEquals("new Runnable(){} r",signature)
+	}
+	
+	@Test
+	def testSignatureForAnonymousClassLocalVarTypeTest_03(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+
+		class C {
+			def m() {
+				val r = newArrayList(new Runnable { override run() {} })
+				r
+			}
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val function = clazz.members.get(0) as XtendFunction
+		val body = function.expression as XBlockExpression
+		val variable = body.expressions.head as XVariableDeclaration
+		val signature = signatureProvider.getSignature(variable)
+		assertEquals("ArrayList<new Runnable(){}> r",signature)
+	}
+	
+	@Test
+	def testSignatureForAnonymousClassFieldTypeTest(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+
+		class C {
+			val r = new Runnable { override run() {} }
+		}
+		''', resourceSet)
+		val clazz = xtendFile.getXtendTypes.filter(typeof(XtendClass)).head
+		val xtendField = clazz.members.get(0) as XtendField
+		val signature = signatureProvider.getSignature(xtendField)
+		assertEquals("Runnable r",signature)
+	}
+	
+	@Test
 	def testSignatureForExtensionFieldWithoutName(){
 		val xtendFile = parseHelper.parse('''
 		package testPackage

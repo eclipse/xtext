@@ -314,21 +314,17 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(call);
 		List<LightweightTypeReference> typeArguments = resolvedTypes.getActualTypeArguments(call);
 		if (!typeArguments.isEmpty()) {
-			List<JvmTypeReference> resolvedTypeArguments = Lists.newArrayListWithCapacity(typeArguments.size());
 			for(LightweightTypeReference typeArgument: typeArguments) {
 				if (typeArgument.isWildcard()) {
 					return completeFeatureCallAppendable;
 				}
-				JvmTypeReference jvmTypeReference = typeArgument.toJavaCompliantTypeReference();
-				resolvedTypeArguments.add(jvmTypeReference);
 			}
 			completeFeatureCallAppendable.append("<");
-			for (int i = 0; i < resolvedTypeArguments.size(); i++) {
+			for (int i = 0; i < typeArguments.size(); i++) {
 				if (i != 0) {
 					completeFeatureCallAppendable.append(", ");
 				}
-				JvmTypeReference typeArgument = resolvedTypeArguments.get(i);
-				serialize(typeArgument, call, completeFeatureCallAppendable);
+				completeFeatureCallAppendable.append(typeArguments.get(i));
 			}
 			completeFeatureCallAppendable.append(">");
 		}
