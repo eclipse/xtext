@@ -3049,7 +3049,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
-	
+
 	@Test def void apiTypeInference02() {
 		setSeverity(API_TYPE_INFERENCE, "error")
 		create("Foo.xtend",
@@ -3067,6 +3067,27 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			
 			class Foo<T> {
 				public val ArrayList<T> foo = <T>newArrayList
+			}
+		''')
+	}
+		
+	@Test def void apiTypeInference03() {
+		setSeverity(API_TYPE_INFERENCE, "error")
+		create("Foo.xtend",
+		'''
+			class Foo {
+				def <T> create {<T>newArrayList} |foo() {}
+			}
+		'''
+		)
+		.assertIssueCodes(API_TYPE_INFERENCE)
+		.assertResolutionLabels('''Infer type''')
+		.assertModelAfterQuickfix(
+		'''
+			import java.util.ArrayList
+			
+			class Foo {
+				def <T> ArrayList<T> create {<T>newArrayList} foo() {}
 			}
 		''')
 	}
