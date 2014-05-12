@@ -253,7 +253,7 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * @generated
 	 * @since 2.6
 	 */
-	Iterable<JvmDeclaredType> findAllTypesByName(String simpleName);
+	Iterable<JvmDeclaredType> findAllNestedTypesByName(String simpleName);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -284,6 +284,6 @@ public interface JvmDeclaredType extends JvmMember, JvmComponentType
 	 * @generated
 	 * @since 2.6
 	 */
-	Iterable<JvmDeclaredType> getAllTypes();
+	Iterable<JvmDeclaredType> getAllNestedTypes();
 
 } // JvmDeclaredType

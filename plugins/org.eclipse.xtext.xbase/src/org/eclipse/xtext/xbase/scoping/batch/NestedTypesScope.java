@@ -43,7 +43,7 @@ public class NestedTypesScope extends AbstractScope {
 		Iterator<JvmDeclaredType> iterator = nestedTypeDeclarators.iterator();
 		while(iterator.hasNext()) {
 			JvmDeclaredType declarator = iterator.next();
-			for(JvmDeclaredType nestedType: declarator.getAllTypes()) {
+			for(JvmDeclaredType nestedType: declarator.getAllNestedTypes()) {
 				addDescriptions(nestedType, declarator, result);
 			}
 		}
@@ -58,7 +58,7 @@ public class NestedTypesScope extends AbstractScope {
 		List<String> segments = Strings.split(subName, '.');
 		result.add(EObjectDescription.create(QualifiedName.create(segments), type));
 		result.add(EObjectDescription.create(subName.replace('.', '$'), type));
-		for(JvmDeclaredType nestedType: type.getAllTypes()) {
+		for(JvmDeclaredType nestedType: type.getAllNestedTypes()) {
 			addDescriptions(nestedType, declarator, result);
 		}
 	}
@@ -73,7 +73,7 @@ public class NestedTypesScope extends AbstractScope {
 		List<IEObjectDescription> result = null;
 		while(iterator.hasNext()) {
 			JvmDeclaredType declarator = iterator.next();
-			Iterable<JvmDeclaredType> nestedTypes = declarator.findAllTypesByName(simpleName);
+			Iterable<JvmDeclaredType> nestedTypes = declarator.findAllNestedTypesByName(simpleName);
 			if (name.getSegmentCount() == 1 && nestedTypes.iterator().hasNext()) {
 				result = addDescriptions(name, 0, nestedTypes, result);
 			}
@@ -101,7 +101,7 @@ public class NestedTypesScope extends AbstractScope {
 		}
 		String nextSegment = name.getSegment(idx);
 		for(JvmDeclaredType declaredType: declaredTypes) {
-			Iterable<JvmDeclaredType> nestedTypes = declaredType.findAllTypesByName(nextSegment);
+			Iterable<JvmDeclaredType> nestedTypes = declaredType.findAllNestedTypesByName(nextSegment);
 			addDescriptions(name, idx + 1, nestedTypes, result);
 		}
 		return result;

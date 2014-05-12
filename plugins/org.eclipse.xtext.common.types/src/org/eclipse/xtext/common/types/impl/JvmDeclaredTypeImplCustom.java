@@ -45,6 +45,7 @@ import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -167,26 +168,15 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	@Override
 	public Iterable<JvmTypeReference> getExtendedInterfaces() {
 		if (extendedInterfaces == null) {
-			int size = getSuperTypes().size();
-			List<JvmTypeReference> result;
-			if (size == 0) {
-				result = Collections.emptyList();
-			} else {
-				result = Lists.newArrayListWithExpectedSize(size);
-				for(JvmTypeReference superType: getSuperTypes()) {
-					JvmType type = superType.getType();
-					if (type instanceof JvmGenericType && ((JvmGenericType) type).isInterface()) {
-						result.add(superType);
+			extendedInterfaces = Iterables.filter(getSuperTypes(), new Predicate<JvmTypeReference>() {
+				public boolean apply(JvmTypeReference typeReference) {
+					JvmType type = typeReference.getType();
+					if (type != null && type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
+						return ((JvmGenericType) type).isInterface();
 					}
-				}
-			}
-			extendedInterfaces = result;
-			requestNotificationOnChange(new Runnable() {
-				public void run() {
-					extendedInterfaces = null;
+					return false;
 				}
 			});
-			return result;
 		}
 		return extendedInterfaces;
 	}
@@ -202,35 +192,35 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	}
 	
 	@Override
-	public Iterable<JvmDeclaredType> findAllTypesByName(String simpleName) {
-		Set<JvmDeclaredType> result = getAllTypesMap().get(simpleName);
+	public Iterable<JvmDeclaredType> findAllNestedTypesByName(String simpleName) {
+		Set<JvmDeclaredType> result = getAllNestedTypesMap().get(simpleName);
 		if (result != null)
 			return result;
 		return Collections.emptySet();
 	}
 	
 	@Override
-	public Iterable<JvmDeclaredType> getAllTypes() {
+	public Iterable<JvmDeclaredType> getAllNestedTypes() {
 		List<JvmDeclaredType> result = Lists.newArrayList();
-		for(Set<JvmDeclaredType> types: getAllTypesMap().values()) {
+		for(Set<JvmDeclaredType> types: getAllNestedTypesMap().values()) {
 			result.addAll(types);
 		}
 		return result;
 	}
 	
-	protected Map<String, Set<JvmDeclaredType>> getAllTypesMap() {
-		return internalGetAllTypesMap(null);
+	protected Map<String, Set<JvmDeclaredType>> getAllNestedTypesMap() {
+		return internalGetAllNestedTypesMap(null);
 	}
 	
-	protected Map<String, Set<JvmDeclaredType>> allTypesByName;
+	protected Map<String, Set<JvmDeclaredType>> allNestedTypesByName;
 
-	protected Map<String, Set<JvmDeclaredType>> internalGetAllTypesMap(final Set<JvmDeclaredType> processedTypes) {
-		if (allTypesByName == null) {
+	protected Map<String, Set<JvmDeclaredType>> internalGetAllNestedTypesMap(final Set<JvmDeclaredType> processedTypes) {
+		if (allNestedTypesByName == null) {
 			final Set<JvmDeclaredType> processedSuperTypes = processedTypes == null ? Sets.<JvmDeclaredType>newHashSet() : processedTypes;
-			allTypesByName = doSynchronized(new Provider<Map<String, Set<JvmDeclaredType>>>() {
+			allNestedTypesByName = doSynchronized(new Provider<Map<String, Set<JvmDeclaredType>>>() {
 				public Map<String, Set<JvmDeclaredType>> get() {
-					if (allTypesByName != null)
-						return allTypesByName;
+					if (allNestedTypesByName != null)
+						return allNestedTypesByName;
 					Map<String, Set<JvmDeclaredType>> result = Maps.newLinkedHashMap();
 					processTypes(result, getMembers());
 					Map<String, Set<JvmDeclaredType>> cumulated = Maps.newLinkedHashMap();
@@ -240,7 +230,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 								&& !processedSuperTypes.contains(superType)) {
 							processedSuperTypes.add((JvmDeclaredType) superType);
 							Map<String, Set<JvmDeclaredType>> superTypeMap = ((JvmDeclaredTypeImplCustom) superType)
-									.internalGetAllTypesMap(processedSuperTypes);
+									.internalGetAllNestedTypesMap(processedSuperTypes);
 							processedSuperTypes.remove(superType);
 							for(Map.Entry<String, Set<JvmDeclaredType>> entry: superTypeMap.entrySet()) {
 								if (!result.containsKey(entry.getKey())) {
@@ -254,7 +244,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 						public void run() {
 							doSynchronized(new Provider<Object>() {
 								public Object get() {
-									allTypesByName = null;
+									allNestedTypesByName = null;
 									return null;
 								}});
 						}
@@ -264,7 +254,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 				}
 			});
 		}
-		return allTypesByName;
+		return allNestedTypesByName;
 	}
 	
 	protected void processTypes(Map<String, Set<JvmDeclaredType>> result, Collection<? extends JvmMember> members) {

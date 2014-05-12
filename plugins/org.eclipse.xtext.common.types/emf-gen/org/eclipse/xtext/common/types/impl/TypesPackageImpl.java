@@ -2160,7 +2160,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		addEOperation(jvmDeclaredTypeEClass, ecorePackage.getEBoolean(), "isInstantiateable", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(jvmDeclaredTypeEClass, null, "findAllTypesByName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(jvmDeclaredTypeEClass, null, "findAllNestedTypesByName", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "simpleName", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(this.getIterable());
 		g2 = createEGenericType(this.getJvmDeclaredType());
@@ -2175,7 +2175,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		op = addEOperation(jvmDeclaredTypeEClass, null, "getAllTypes", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(jvmDeclaredTypeEClass, null, "getAllNestedTypes", 1, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(this.getIterable());
 		g2 = createEGenericType(this.getJvmDeclaredType());
 		g1.getETypeArguments().add(g2);
