@@ -104,4 +104,64 @@ class AutocastCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test
+	def testField_01() {
+		assertCompilesTo('''
+			class C {
+				val Object o = null
+				def void m() {
+					if (o instanceof String) {
+						n(o)
+					}
+				}
+				def void n(CharSequence s) {
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  private final Object o = null;
+			  
+			  public void m() {
+			    if ((this.o instanceof String)) {
+			      this.n(((CharSequence)this.o));
+			    }
+			  }
+			  
+			  public void n(final CharSequence s) {
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testField_02() {
+		assertCompilesTo('''
+			class C {
+				val Object o = null
+				def void m() {
+					if (C.this.o instanceof String) {
+						n(this.o)
+					}
+				}
+				def void n(CharSequence s) {
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  private final Object o = null;
+			  
+			  public void m() {
+			    if ((this.o instanceof String)) {
+			      this.n(((CharSequence)this.o));
+			    }
+			  }
+			  
+			  public void n(final CharSequence s) {
+			  }
+			}
+		''')
+	}
 }

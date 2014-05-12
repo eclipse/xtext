@@ -10,12 +10,14 @@ package org.eclipse.xtend.ide.hover;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtend.core.xtend.XtendField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover;
 
 import com.google.inject.Inject;
@@ -31,12 +33,13 @@ public class XtendDispatchingEObjectTextHover extends XbaseDispatchingEObjectTex
 	@Override
 	protected Pair<EObject, IRegion> getXtextElementAt(XtextResource resource, int offset) {
 		Pair<EObject, IRegion> original = super.getXtextElementAt(resource,offset);
-		EObject object = eObjectAtOffsetHelper.resolveContainedElementAt(resource, offset);
-		if (object != null && object instanceof XAbstractFeatureCall){
-			JvmIdentifiableElement feature = ((XAbstractFeatureCall) object).getFeature();
-			if(feature instanceof XtendField)
-					if (original != null)
-						return Tuples.create(object, original.getSecond());
+		if (original != null) {
+			EObject object = eObjectAtOffsetHelper.resolveContainedElementAt(resource, offset);
+			if (object != null && object instanceof XAbstractFeatureCall){
+				JvmIdentifiableElement feature = ((XAbstractFeatureCall) object).getFeature();
+				if(feature instanceof XtendField || feature instanceof XVariableDeclaration || feature instanceof JvmFormalParameter)
+					return Tuples.create(object, original.getSecond());
+			}
 		}
 		return original;
 	}
