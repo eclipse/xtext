@@ -10,8 +10,6 @@ package org.eclipse.xtend.core.scoping;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -21,33 +19,30 @@ import org.eclipse.xtext.util.Strings;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class KnownTypesScope extends AbstractScope {
+public class KnownTypesScope extends AbstractKnownTypesScope {
 	
 	private final List<? extends JvmType> types;
-	private final AbstractScope parent;
 
 	public KnownTypesScope(List<? extends JvmType> types, AbstractScope parent) {
+		super(parent);
 		this.types = types;
-		this.parent = parent;
 	}
 	
 	@Override
-	public IEObjectDescription getSingleElement(QualifiedName name) {
-		IEObjectDescription result = doGetSingleElement(name);
-		if (result != null) {
-			return result;
+	protected void doGetElements(JvmType type, List<IEObjectDescription> result) {
+		for(int i = 0; i < types.size(); i++) {
+			JvmType knownType = types.get(i);
+			if (EcoreUtil.isAncestor(knownType, type)) {
+				doGetDescriptions(type, knownType, i, result);
+			}
 		}
-		return parent.getSingleElement(name);
+		super.doGetElements(type, result);
 	}
 	
-	protected IEObjectDescription doGetSingleElement(QualifiedName name) {
-		JvmType result = null;
+	@Override
+	protected IEObjectDescription doGetSingleElement(QualifiedName name, String firstSegment, int dollarIndex) {
 		int index = -1;
-		String firstSegment = name.getFirstSegment();
-		int dollar = firstSegment.indexOf('$');
-		if (dollar > 0) {
-			firstSegment = firstSegment.substring(0, dollar);
-		}
+		JvmType result = null;
 		for(int i = 0; i < types.size(); i++) {
 			JvmType type = types.get(i);
 			JvmType exactMatch = getExactMatch(type, index, name);
@@ -59,20 +54,25 @@ public class KnownTypesScope extends AbstractScope {
 					return null;
 				}
 				if (resolved != result) {
-					result = type;
+					result = resolved;
 					index = i;
 				}
 			}
 		}
+		return toDescription(name, result, dollarIndex, index);
+	}
+	
+	@Override
+	protected IEObjectDescription toDescription(QualifiedName name, JvmType result, int dollarIndex, int index) {
 		if (result != null) {
-			JvmType actualResult = dollar > 0 || name.getSegmentCount() > 0 ? findNestedType(result, index, name) : result;
+			JvmType actualResult = dollarIndex > 0 || name.getSegmentCount() > 0 ? findNestedType(result, index, name) : result;
 			if (actualResult != null) {
 				return EObjectDescription.create(name, actualResult);
 			}
 		}
 		return null;
 	}
-
+	
 	/*
 	 * If we know java.util.Map$Entry exists and we query for the FQN, we assume things are valid.
 	 */
@@ -94,26 +94,13 @@ public class KnownTypesScope extends AbstractScope {
 		}
 		return null;
 	}
-
-	protected JvmType getUnambiguousResult(JvmType current, int currentIndex, JvmType next, int nextIndex, QualifiedName name) {
-		if (current != null && current != next) {
-			return null;
-		}
-		return next;
+	
+	protected boolean isMatch(int index, JvmType type, String simpleName, QualifiedName relativeName) {
+		return simpleName.equals(type.getSimpleName());
 	}
 	
 	@Override
-	protected void doGetElements(JvmType type, List<IEObjectDescription> result) {
-		for(int i = 0; i < types.size(); i++) {
-			JvmType knownType = types.get(i);
-			if (EcoreUtil.isAncestor(knownType, type)) {
-				doGetDescriptions(type, knownType, i, result);
-			}
-		}
-		parent.doGetElements(type, result);
-	}
-
-	protected void doGetDescriptions(JvmType type, JvmType knownType, int i, List<IEObjectDescription> result) {
+	protected void doGetDescriptions(JvmType type, JvmType knownType, int index, List<IEObjectDescription> result) {
 		if (type == knownType) {
 			result.add(EObjectDescription.create(QualifiedName.create(type.getSimpleName()), type));
 		} else if (type.eContainer() == knownType) {
@@ -126,28 +113,6 @@ public class KnownTypesScope extends AbstractScope {
 			result.add(EObjectDescription.create(QualifiedName.create(Strings.split(withDot.substring(knownTypeName.length()), '.')), type));
 			result.add(EObjectDescription.create(QualifiedName.create(withDollar.substring(knownTypeName.length())), type));
 		}
-	}
-
-	protected JvmType findNestedType(JvmType result, int index, QualifiedName name) {
-		List<String> segments = name.getSegmentCount() == 1 ? Strings.split(name.getFirstSegment(), '$') : name.getSegments();
-		for(int i = 1; i < segments.size() && result instanceof JvmDeclaredType; i++) {
-			JvmDeclaredType declaredType = (JvmDeclaredType) result;
-			String simpleName = segments.get(i);
-			for(JvmMember member: declaredType.getMembers()) {
-				if (member instanceof JvmType && simpleName.equals(member.getSimpleName())) {
-					result = (JvmType) member;
-					break;
-				}
-			}
-			if (declaredType == result) {
-				return null;
-			}
-		}
-		return result;
-	}
-
-	protected boolean isMatch(int index, JvmType type, String simpleName, QualifiedName relativeName) {
-		return simpleName.equals(type.getSimpleName());
 	}
 
 }

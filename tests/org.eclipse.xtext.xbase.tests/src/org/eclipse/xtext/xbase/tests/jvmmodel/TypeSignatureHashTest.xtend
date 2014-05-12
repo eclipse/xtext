@@ -36,8 +36,8 @@ class TypeSignatureHashTest extends AbstractXbaseTestCase {
 		val eObject = EcoreFactory::eINSTANCE.createEObject
 		val bar = eObject.toClass('Bar')
 		val foo = eObject.toClass('Foo') [
-				members += bar
-			]
+			members += bar
+		]
 		val hash = foo.hash
 		bar.members += eObject.toConstructor() []
 		assertEquals(hash, foo.hash)

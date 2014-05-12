@@ -97,8 +97,8 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		return Collections.emptyList();
 	}
 	
-	public Map<QualifiedName, JvmDeclaredType> getNestedTypes() {
-		return Collections.emptyMap();
+	public List<JvmDeclaredType> getNestedTypeDeclarators() {
+		return Collections.emptyList();
 	}
 	
 	public IFeatureScopeSession toInstanceContext() {

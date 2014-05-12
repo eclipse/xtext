@@ -77,7 +77,6 @@ public class JvmUnknownTypeReferenceImpl extends JvmTypeReferenceImplCustom impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getQualifiedName()
 	{
 		return qualifiedName;
