@@ -29,6 +29,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
+import com.google.common.base.Strings
 
 class StandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(StandaloneBuilder);
@@ -229,6 +230,7 @@ class StandaloneBuilder {
 			roots.toList,
 			[ input |
 				val matches = nameBasedFilter.matches(input)
+				val pref = Strings.commonPrefix("test.t","test2.t")
 				if (matches) {
 					LOG.debug("Adding file '" + input + "'");
 					resources.add(resourceSet.getResource(input, true));

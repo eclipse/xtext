@@ -2,6 +2,7 @@ package org.eclipse.xtext.builder.standalone;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
@@ -529,6 +530,7 @@ public class StandaloneBuilder {
     final Predicate<URI> _function = new Predicate<URI>() {
       public boolean apply(final URI input) {
         final boolean matches = nameBasedFilter.matches(input);
+        final String pref = Strings.commonPrefix("test.t", "test2.t");
         if (matches) {
           StandaloneBuilder.LOG.debug((("Adding file \'" + input) + "\'"));
           Resource _resource = resourceSet.getResource(input, true);
