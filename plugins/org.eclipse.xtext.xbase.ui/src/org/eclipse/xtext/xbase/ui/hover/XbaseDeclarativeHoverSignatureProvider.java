@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -161,7 +162,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 			}
 			result.append(resolvedOperation.getResolvedReturnType().getSimpleName()).append(' ');
 			JvmOperation operation = resolvedOperation.getDeclaration();
-			result.append(operation.getDeclaringType().getSimpleName()).append('.');
+			result.append(getDeclaratorName(operation)).append('.');
 			result.append(operation.getSimpleName()).append('(');
 			List<LightweightTypeReference> parameterTypes = resolvedOperation.getResolvedParameterTypes();
 			for(int i = 0; i < parameterTypes.size(); i++) {
@@ -185,7 +186,15 @@ public class XbaseDeclarativeHoverSignatureProvider {
 			return result.toString();
 		} else if (feature instanceof JvmConstructor) {
 			// TODO this or super
-			// see ignored tests in 
+			// see ignored tests in
+		} else if (feature instanceof JvmField) {
+			LightweightTypeReference referenceType = typeResolver.resolveTypes(featureCall).getActualType(featureCall);
+			StringBuilder result = new StringBuilder(250);
+			result.append(referenceType.getSimpleName()).append(' ');
+			JvmField field = (JvmField) feature;
+			result.append(getDeclaratorName(field)).append('.');
+			result.append(field.getSimpleName());
+			return result.toString();
 		} else {
 			String simpleName = feature.getSimpleName();
 			String type = typeResolver.resolveTypes(featureCall).getActualType(featureCall).getSimpleName();
@@ -196,6 +205,10 @@ public class XbaseDeclarativeHoverSignatureProvider {
 			}
 		}
 		return getSignature(feature);
+	}
+
+	protected String getDeclaratorName(JvmFeature feature) {
+		return feature.getDeclaringType().getSimpleName();
 	}
 
 	public String getDerivedOrSourceSignature(EObject object) {

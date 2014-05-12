@@ -1339,7 +1339,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       XExpression _head_4 = IterableExtensions.<XExpression>head(_expressions_1);
       final XExpression target = ((XMemberFeatureCall) _head_4).getMemberCallTarget();
       String _signature_1 = this.signatureProvider.getSignature(target);
-      Assert.assertEquals("String c", _signature_1);
+      Assert.assertEquals("String Foo.c", _signature_1);
       EList<XExpression> _expressions_2 = block.getExpressions();
       XExpression _get_1 = _expressions_2.get(1);
       final XSwitchExpression switchExpr = ((XSwitchExpression) _get_1);
@@ -1348,7 +1348,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       XExpression _then = _head_5.getThen();
       final XExpression expr = ((XMemberFeatureCall) _then).getMemberCallTarget();
       String _signature_2 = this.signatureProvider.getSignature(expr);
-      Assert.assertEquals("String c", _signature_2);
+      Assert.assertEquals("String Foo.c", _signature_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

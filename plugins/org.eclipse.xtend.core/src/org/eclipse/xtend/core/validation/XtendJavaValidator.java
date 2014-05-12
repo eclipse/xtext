@@ -62,6 +62,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -681,7 +682,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 										// use source with other operations parameters to avoid confusion
 										// due to name transformations in JVM model inference
 										operation.getSimpleSignature() + " of type "
-										+ operation.getDeclaration().getDeclaringType().getSimpleName() + " but does not override it.",
+										+ getDeclaratorName(operation.getDeclaration()) + " but does not override it.",
 										source, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
 							}
 						}
@@ -736,7 +737,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			List<IResolvedOperation> allInherited = operation.getOverriddenAndImplementedMethods();
 			if (allInherited.isEmpty()) {
 				if (function.isOverride()) {
-					error("The method "+ operation.getSimpleSignature() +" of type "+operation.getDeclaration().getDeclaringType().getSimpleName()+" must override a superclass method.", 
+					error("The method "+ operation.getSimpleSignature() +" of type "+getDeclaratorName(operation.getDeclaration())+" must override a superclass method.", 
 							function, XTEND_MEMBER__MODIFIERS, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
 				}
 			} else {
@@ -773,17 +774,21 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			createExceptionMismatchError(resolved, function, exceptionMismatch);
 		}
 		if (!overrideProblems && !function.isOverride() && !function.isStatic()) {
-			error("The method " + resolved.getSimpleSignature() + " of type " + resolved.getDeclaration().getDeclaringType().getSimpleName() +
+			error("The method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(resolved) +
 					" must use override keyword since it actually overrides a supertype method.", function,
 					XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
 		} 
 		if (!overrideProblems && function.isOverride() && function.isStatic()) {
 			for(IResolvedOperation inherited: allInherited) {
-				error("The method " + resolved.getSimpleSignature() + " of type " + resolved.getDeclaration().getDeclaringType().getSimpleName() + 
-					" shadows the method " + resolved.getSimpleSignature() + " of type " + inherited.getDeclaration().getDeclaringType().getSimpleName() + 
+				error("The method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(resolved) + 
+					" shadows the method " + resolved.getSimpleSignature() + " of type " + getDeclaratorName(inherited) + 
 					", but does not override it.", function, XTEND_FUNCTION__NAME, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
 			}
 		}
+	}
+
+	protected String getDeclaratorName(IResolvedOperation resolved) {
+		return getDeclaratorName(resolved.getDeclaration());
 	}
 	
 	protected void createExceptionMismatchError(IResolvedOperation operation, XtendFunction function,
@@ -818,7 +823,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					message.append(" and ");
 			}
 			IResolvedOperation resolvedOperation = exceptionMismatch.get(i);
-			message.append(resolvedOperation.getDeclaration().getDeclaringType().getSimpleName());
+			message.append(getDeclaratorName(resolvedOperation));
 			message.append('.');
 			message.append(exceptionMismatch.get(i).getSimpleSignature());
 		}
@@ -1350,21 +1355,45 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				return;
 			if (hasAnnotation(((XtendAnnotationTarget)field.eContainer()).getAnnotations(), Data.class))
 				return;
-			if (isLocallyUsed(jvmField, field.eContainer())) 
+			if (isLocallyUsed(jvmField, getOutermostType(field))) 
 				return;
 			String message;
 			if(field.isExtension()) {
 				if(field.getName() == null && jvmField.getType() != null)
 					message = "The extension " + jvmField.getType().getIdentifier() 
-						+ " is not used in " + jvmField.getDeclaringType().getSimpleName();
+						+ " is not used in " + getDeclaratorName(jvmField);
 				else
-					message = "The extension " + jvmField.getDeclaringType().getSimpleName() + "."
+					message = "The extension " + getDeclaratorName(jvmField) + "."
 							+ jvmField.getSimpleName() + " is not used";
 			} else {
-				message = "The value of the field " + jvmField.getDeclaringType().getSimpleName() + "."
+				message = "The value of the field " + getDeclaratorName(jvmField) + "."
 					+ jvmField.getSimpleName() + " is not used";
 			}
 			addIssueToState(UNUSED_PRIVATE_MEMBER, message, XtendPackage.Literals.XTEND_FIELD__NAME);
+		}
+	}
+
+	private EObject getOutermostType(XtendMember member) {
+		XtendTypeDeclaration result = EcoreUtil2.getContainerOfType(member, XtendTypeDeclaration.class);
+		if (result == null) {
+			return member.eContainer();
+		}
+		while(!(result.eContainer() instanceof XtendFile)) {
+			XtendTypeDeclaration next = EcoreUtil2.getContainerOfType(result.eContainer(), XtendTypeDeclaration.class);
+			if (next == null) {
+				return result;
+			}
+			result = next;
+		}
+		return result;
+	}
+
+	protected String getDeclaratorName(JvmFeature feature) {
+		JvmDeclaredType declarator = feature.getDeclaringType();
+		if (declarator.isLocal()) {
+			return "new " + declarator.getSuperTypes().get(0).getType().getSimpleName()+ "(){}";
+		} else {
+			return declarator.getSimpleName();
 		}
 	}
 	
@@ -1372,10 +1401,10 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkLocalUsageOfDeclaredXtendFunction(XtendFunction function){
 		if(doCheckValidMemberName(function) && !isIgnored(UNUSED_PRIVATE_MEMBER)) {
 			JvmOperation jvmOperation = function.isDispatch()?associations.getDispatchOperation(function):associations.getDirectlyInferredOperation(function);
-			if(jvmOperation != null && jvmOperation.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmOperation, function.eContainer())){
+			if(jvmOperation != null && jvmOperation.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmOperation, getOutermostType(function))) {
 				String message = "The method " + jvmOperation.getSimpleName() 
 						+  uiStrings.parameters(jvmOperation)  
-						+ " from the type "+jvmOperation.getDeclaringType().getSimpleName()+" is never used locally.";
+						+ " from the type "+ getDeclaratorName(jvmOperation)+" is never used locally.";
 				addIssueToState(UNUSED_PRIVATE_MEMBER, message, XtendPackage.Literals.XTEND_FUNCTION__NAME);
 			}
 		}

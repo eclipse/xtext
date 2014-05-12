@@ -99,16 +99,16 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 		EObject objectToView = getObjectToView(element);
 		if(objectToView == null || objectToView.eIsProxy())
 			return null;
-		IJavaElement javaElement = null;
-		if (objectToView != element && objectToView instanceof JvmIdentifiableElement) {
-			javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) objectToView);
-		}
 		String html = getHoverInfoAsHtml(element, objectToView, hoverRegion);
 		if (html != null) {
 			StringBuffer buffer = new StringBuffer(html);
 			HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
 			HTMLPrinter.addPageEpilog(buffer);
 			html = buffer.toString();
+			IJavaElement javaElement = null;
+			if (objectToView != element && objectToView instanceof JvmIdentifiableElement) {
+				javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) objectToView);
+			}
 			return new XbaseInformationControlInput(previous, objectToView, javaElement, html, labelProvider);
 		}
 		return null;
