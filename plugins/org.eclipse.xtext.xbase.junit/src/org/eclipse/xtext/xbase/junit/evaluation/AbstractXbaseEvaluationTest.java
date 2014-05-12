@@ -3533,11 +3533,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testListExtensions_02() throws Exception {
-		assertEvaluatesTo(newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sort(a,b|a.compareTo(b))");
+		assertEvaluatesTo(newArrayList("a", "b", "c"), "(newArrayList('c', 'a', 'b') as Iterable<String>).sort(a,b|a.compareTo(b))");
 		assertEvaluatesTo(newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sortInplace(a,b|a.compareTo(b))");
-		assertEvaluatesTo(newArrayList("c", "b", "a"), "newArrayList('c', 'a', 'b').sort(a,b|b.compareTo(a))");
+		assertEvaluatesTo(newArrayList("c", "b", "a"), "(newArrayList('c', 'a', 'b') as Iterable<String>).sort(a,b|b.compareTo(a))");
 		assertEvaluatesTo(newArrayList("c", "b", "a"), "newArrayList('c', 'a', 'b').sortInplace(a,b|b.compareTo(a))");
-		assertEvaluatesTo("a", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sort(a,b|a.compareTo(b)) l.get(1) }");
+		assertEvaluatesTo("a", "{ var l = newArrayList('c', 'a', 'b', 'd') (l as Iterable<String>).sort(a,b|a.compareTo(b)) l.get(1) }");
 		assertEvaluatesTo("b", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sortInplace(a,b|a.compareTo(b)) l.get(1) }");
 	}
 	
