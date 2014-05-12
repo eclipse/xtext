@@ -258,6 +258,19 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
+	
+	@Test
+	@Ignore("indentation increases every time the formatter runs")
+	def prefixedForLoop() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				return <<FOR field : cls.persistentState SEPARATOR "&&">>
+					<<Objects>>.equal(<<field.simpleName>>, other.<<field.simpleName>>)
+				<<ENDFOR>>
+			```
+		''')
+	}
+	
 	@Test def smokeTest() {
 		assertFormattedRichStringExpression('''
 			val x = ```
