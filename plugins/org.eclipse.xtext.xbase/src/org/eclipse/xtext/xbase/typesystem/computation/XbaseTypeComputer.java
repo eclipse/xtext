@@ -53,6 +53,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XListLiteral;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
@@ -66,6 +67,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -1254,6 +1256,23 @@ public class XbaseTypeComputer implements ITypeComputer {
 				JvmIdentifiableElement linkedFeature = candidates.get(0).getFeature();
 				if (isRefinableFeature(linkedFeature)) {
 					return linkedFeature;
+				}
+			}
+		} else if (object instanceof XMemberFeatureCall) {
+			List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates((XMemberFeatureCall)object);
+			if (candidates.size() == 1) {
+				JvmIdentifiableElement linkedFeature = candidates.get(0).getFeature();
+				if (isRefinableFeature(linkedFeature)) {
+					XExpression receiver = ((XMemberFeatureCall) object).getMemberCallTarget();
+					if (receiver instanceof XAbstractFeatureCall) {
+						List<? extends IFeatureLinkingCandidate> receiverCandidates = state.getLinkingCandidates((XAbstractFeatureCall)receiver);
+						if (receiverCandidates.size() == 1) {
+							IFeatureLinkingCandidate receiverCandidate = receiverCandidates.get(0);
+							if (receiverCandidate.getFeature() instanceof JvmType && !receiverCandidate.isTypeLiteral()) {
+								return linkedFeature;
+							}
+						}
+					}
 				}
 			}
 		}
