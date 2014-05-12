@@ -492,6 +492,26 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
   }
   
   @Test
+  @Ignore("indentation increases every time the formatter runs")
+  public void prefixedForLoop() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return <<FOR field : cls.persistentState SEPARATOR \"&&\">>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<<Objects>>.equal(<<field.simpleName>>, other.<<field.simpleName>>)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<<ENDFOR>>");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    this.assertFormattedRichStringExpression(_builder);
+  }
+  
+  @Test
   public void smokeTest() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("val x = ```");
