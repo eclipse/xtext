@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.validation.UIStrings
 import org.eclipse.xtext.xtype.XImportDeclaration
 import org.eclipse.xtext.xtype.XImportSection
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	
@@ -113,9 +114,13 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 		val resolvedTypes = typeResolver.resolveTypes(variableDeclaration)
 		val type = resolvedTypes.getActualType(variableDeclaration as JvmIdentifiableElement)
 		if (type != null)
-			type.getSimpleName + " " + variableDeclaration.name
+			type.toSimpleName + " " + variableDeclaration.name
 		else 
 			variableDeclaration.name
+	}
+	
+	protected def toSimpleName(LightweightTypeReference ref) {
+		ref.simpleName
 	}
 
 	protected def dispatch ImageDescriptor imageDescriptor(JvmTypeParameter parameter) {
@@ -127,7 +132,7 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 		val returnTypeString = if (returnType == null) 
 				"void" 
 			else
-				returnType.getSimpleName
+				returnType.toSimpleName
 		new StyledString(simpleName + uiStrings.parameters(element))
 			.append(new StyledString(" : " + returnTypeString, StyledString.DECORATIONS_STYLER))
 	}
@@ -138,5 +143,9 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 
 	override protected doGetImage(Object element) {
 		element?.imageDescriptor() ?: super.doGetImage(element)
+	}
+	
+	protected def getTypeResolver() {
+		return typeResolver
 	}
 }

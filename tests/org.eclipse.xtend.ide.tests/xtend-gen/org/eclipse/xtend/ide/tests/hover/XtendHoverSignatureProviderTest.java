@@ -217,6 +217,164 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void testSignatureForAnonymousClassLocalVarTypeTest() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val r = new Runnable { override run() {} }");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("r");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendFunction function = ((XtendFunction) _get);
+      XExpression _expression = function.getExpression();
+      final XBlockExpression body = ((XBlockExpression) _expression);
+      EList<XExpression> _expressions = body.getExpressions();
+      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+      final XVariableDeclaration variable = ((XVariableDeclaration) _head);
+      final String signature = this.signatureProvider.getSignature(variable);
+      Assert.assertEquals("new Runnable(){} r", signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSignatureForAnonymousClassLocalVarTypeTest_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val r = new Runnable { override run() {} def void m() {} }");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("r");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendFunction function = ((XtendFunction) _get);
+      XExpression _expression = function.getExpression();
+      final XBlockExpression body = ((XBlockExpression) _expression);
+      EList<XExpression> _expressions = body.getExpressions();
+      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+      final XVariableDeclaration variable = ((XVariableDeclaration) _head);
+      final String signature = this.signatureProvider.getSignature(variable);
+      Assert.assertEquals("new Runnable(){} r", signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSignatureForAnonymousClassLocalVarTypeTest_03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val r = newArrayList(new Runnable { override run() {} })");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("r");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendFunction function = ((XtendFunction) _get);
+      XExpression _expression = function.getExpression();
+      final XBlockExpression body = ((XBlockExpression) _expression);
+      EList<XExpression> _expressions = body.getExpressions();
+      XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+      final XVariableDeclaration variable = ((XVariableDeclaration) _head);
+      final String signature = this.signatureProvider.getSignature(variable);
+      Assert.assertEquals("ArrayList<new Runnable(){}> r", signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSignatureForAnonymousClassFieldTypeTest() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val r = new Runnable { override run() {} }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = clazz.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendField xtendField = ((XtendField) _get);
+      final String signature = this.signatureProvider.getSignature(xtendField);
+      Assert.assertEquals("Runnable r", signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testSignatureForExtensionFieldWithoutName() {
     try {
       StringConcatenation _builder = new StringConcatenation();
