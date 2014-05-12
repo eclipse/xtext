@@ -879,6 +879,17 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(file, XTEND_ANNOTATION_TYPE, DUPLICATE_TYPE_NAME, "type", "already defined");
 	}
 	
+	@Test public void testNestedTypesUniqueNames() throws Exception {
+		XtendFile file = file("class C { static class Foo {} interface Foo {} annotation Foo {} }");
+		helper.assertError(file, XTEND_INTERFACE, DUPLICATE_TYPE_NAME, "Duplicate nested type Foo");
+		helper.assertError(file, XTEND_ANNOTATION_TYPE, DUPLICATE_TYPE_NAME, "Duplicate nested type Foo");
+	}
+	
+	@Test public void testNestedTypesOuterNameShadowing() throws Exception {
+		XtendFile file = file("class C { class C {} }");
+		helper.assertError(file, XTEND_CLASS, INVALID_MEMBER_NAME, "The nested type C cannot hide an enclosing type");
+	}
+	
 	@Test public void testInheritanceCycle() throws Exception {
 		Iterator<XtendTypeDeclaration> types = file("package test "
 				+ "class Foo extends Bar {}"
