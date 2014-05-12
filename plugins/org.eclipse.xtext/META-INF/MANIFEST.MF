@@ -89,6 +89,6 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.9.0";visibility:=ree
  org.eclipse.core.resources;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtend.lib;bundle-version="2.6.0";resolution:=optional
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j;version="1.2.15",org.osgi.framework
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.internal.Activator
