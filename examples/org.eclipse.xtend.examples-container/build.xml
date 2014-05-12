@@ -16,9 +16,10 @@
 	<macrodef name="zip_example">
 		<attribute name="name" default="default" />
 		<attribute name="target" default="${target_xtend}" />
+		<attribute name="excludes" default="bin,bin/**,**/*._trace,.antlr-generator*.jar" />
 		<sequential>
 			<delete file="@{target}/@{name}.zip" />
-			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}" excludes="bin,bin/**,**/*._trace,.antlr-generator*.jar"  />
+			<zip destfile="@{target}/@{name}.zip" basedir="${source}/@{name}" excludes="@{excludes}"  />
 		</sequential>
 	</macrodef>
 
@@ -26,7 +27,7 @@
 		<!-- run task "generate_self" to compose this list -->
 		<zip_example name="xtend-examples"/>
 		<zip_example name="xtend-euler"/>
-		<zip_example name="xtend-annotation-examples"/>
+		<zip_example name="xtend-annotation-examples" excludes="**/*._trace,.antlr-generator*.jar"/>
 		<zip_example name="xtend-annotation-examples-client"/>
 	</target>
 
