@@ -37,6 +37,157 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testNestedLocalClass_01() {'''
+			class C {
+				def m() {
+					return newArrayList(new Runnable() { override run() {} })
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.ArrayList;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public ArrayList<? extends Runnable> m() {
+			    return CollectionLiterals.<Runnable>newArrayList(new Runnable() {
+			      public void run() {
+			      }
+			    });
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testNestedLocalClass_02() {'''
+			class C {
+				def Iterable<Runnable> m() {
+					return newArrayList(new Runnable() { override run() {} })
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public Iterable<Runnable> m() {
+			    return CollectionLiterals.<Runnable>newArrayList(new Runnable() {
+			      public void run() {
+			      }
+			    });
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testNestedLocalClass_03() {'''
+			class C {
+				def m() {
+					return newArrayList(
+						new Runnable() { override run() {} def void m() {} }
+					)
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.ArrayList;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public ArrayList<? extends Runnable> m() {
+			    @SuppressWarnings("all")
+			    final class __C_1 implements Runnable {
+			      public void run() {
+			      }
+			      
+			      public void m() {
+			      }
+			    }
+			    
+			    __C_1 ___C_1 = new __C_1();
+			    return CollectionLiterals.<__C_1>newArrayList(___C_1);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testNestedLocalClass_04() {'''
+			class C {
+				def m() {
+					return newArrayList(
+						new Runnable() { override run() {} def void m() {} },
+						new Runnable() { override run() {} def void m() {} }
+					)
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.ArrayList;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public ArrayList<Runnable> m() {
+			    @SuppressWarnings("all")
+			    final class __C_1 implements Runnable {
+			      public void run() {
+			      }
+			      
+			      public void m() {
+			      }
+			    }
+			    
+			    __C_1 ___C_1 = new __C_1();
+			    @SuppressWarnings("all")
+			    final class __C_2 implements Runnable {
+			      public void run() {
+			      }
+			      
+			      public void m() {
+			      }
+			    }
+			    
+			    __C_2 ___C_2 = new __C_2();
+			    return CollectionLiterals.<Runnable>newArrayList(___C_1, ___C_2);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testNestedLocalClass_05() {'''
+			class C {
+				def m() {
+					return newArrayList(newArrayList(new Runnable() { override run() {} def void m() {} }))
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.ArrayList;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public ArrayList<? extends ArrayList<? extends Runnable>> m() {
+			    @SuppressWarnings("all")
+			    final class __C_1 implements Runnable {
+			      public void run() {
+			      }
+			      
+			      public void m() {
+			      }
+			    }
+			    
+			    __C_1 ___C_1 = new __C_1();
+			    ArrayList<__C_1> _newArrayList = CollectionLiterals.<__C_1>newArrayList(___C_1);
+			    return CollectionLiterals.<ArrayList<__C_1>>newArrayList(_newArrayList);
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testCapturedLocalVar() {'''
 			class Foo {
 				def foo() {
@@ -198,7 +349,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  public D newD() {
 			    @SuppressWarnings("all")
 			    final class __C_1 extends D {
-			      public D m() {
+			      public __C_1 m() {
 			        return this;
 			      }
 			    }

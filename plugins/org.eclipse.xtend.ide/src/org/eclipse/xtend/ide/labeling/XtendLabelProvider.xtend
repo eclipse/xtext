@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.validation.UIStrings
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
 import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 /**
  * Provides labels for Xtend elements.
@@ -161,4 +162,11 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 		}
 		null
 	}
+	
+	override protected toSimpleName(LightweightTypeReference ref) {
+		val result = new StringBuilder
+		ref.accept(new HumanReadableTypeReferenceSerializer(), result)
+		result.toString
+	}
+	
 }

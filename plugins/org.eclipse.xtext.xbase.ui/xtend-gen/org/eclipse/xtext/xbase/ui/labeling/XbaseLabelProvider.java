@@ -185,7 +185,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       String _xifexpression = null;
       boolean _notEquals = (!Objects.equal(type, null));
       if (_notEquals) {
-        String _simpleName = type.getSimpleName();
+        String _simpleName = this.toSimpleName(type);
         String _plus = (_simpleName + " ");
         String _name = variableDeclaration.getName();
         _xifexpression = (_plus + _name);
@@ -195,6 +195,10 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
+  }
+  
+  protected String toSimpleName(final LightweightTypeReference ref) {
+    return ref.getSimpleName();
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmTypeParameter parameter) {
@@ -212,7 +216,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       if (_equals) {
         _xifexpression = "void";
       } else {
-        _xifexpression = returnType.getSimpleName();
+        _xifexpression = this.toSimpleName(returnType);
       }
       final String returnTypeString = _xifexpression;
       String _parameters = this.uiStrings.parameters(element);
@@ -241,6 +245,10 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       _elvis = _doGetImage;
     }
     return _elvis;
+  }
+  
+  protected IBatchTypeResolver getTypeResolver() {
+    return this.typeResolver;
   }
   
   protected ImageDescriptor imageDescriptor(final Object constructor) {
