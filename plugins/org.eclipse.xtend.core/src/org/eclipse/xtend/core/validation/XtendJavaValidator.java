@@ -57,6 +57,7 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -317,24 +318,46 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
+	public void checkNoTypeNameShadowing(XtendTypeDeclaration type) {
+		String name = type.getName();
+		if (name != null && name.length() > 0) {
+			XtendTypeDeclaration outer = EcoreUtil2.getContainerOfType(type.eContainer(), XtendTypeDeclaration.class);
+			while(outer != null) {
+				if (name.equals(outer.getName())) {
+					acceptError("The nested type " + name + " cannot hide an enclosing type",
+							type, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, INSIGNIFICANT_INDEX, INVALID_MEMBER_NAME);
+					return;
+				}
+				outer = EcoreUtil2.getContainerOfType(outer.eContainer(), XtendTypeDeclaration.class);
+			}
+		}
+	}
+	
+	@Check
 	public void checkMemberNamesAreUnique(XtendTypeDeclaration xtendType) {
 		final Multimap<String, XtendField> name2field = HashMultimap.create();
+		final Multimap<String, XtendTypeDeclaration> name2type = HashMultimap.create();
 		final Multimap<JvmType, XtendField> type2extension = HashMultimap.create();
-		for(XtendMember member: xtendType.getMembers()) {
-			if(member instanceof XtendField) {
-				XtendField field = (XtendField)member;
-				 if(isEmpty(field.getName())) {
-					 if(field.isExtension()) {
-						 JvmTypeReference typeReference = field.getType();
-						 if (typeReference != null) {
-							 JvmType type = typeReference.getType();
-							 if(type != null) 
-								 type2extension.put(type, field);
-						 }
-					 }
-				 } else {
-					 name2field.put(field.getName(), field);
-				 }
+		for (XtendMember member : xtendType.getMembers()) {
+			if (member instanceof XtendField) {
+				XtendField field = (XtendField) member;
+				if (isEmpty(field.getName())) {
+					if (field.isExtension()) {
+						JvmTypeReference typeReference = field.getType();
+						if (typeReference != null) {
+							JvmType type = typeReference.getType();
+							if (type != null)
+								type2extension.put(type, field);
+						}
+					}
+				} else {
+					name2field.put(field.getName(), field);
+				}
+			} else if (member instanceof XtendTypeDeclaration) {
+				String name = ((XtendTypeDeclaration) member).getName();
+				if (name != null && name.length() > 0) {
+					name2type.put(name, (XtendTypeDeclaration) member);
+				}
 			}
 		}
 		for(String name: name2field.keySet()) {
@@ -342,6 +365,13 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			if(fields.size() >1) {
 				for(XtendField field: fields)
 					error("Duplicate field " + name, field, XtendPackage.Literals.XTEND_FIELD__NAME, DUPLICATE_FIELD);
+			}
+		}
+		for(String name: name2type.keySet()) {
+			Collection<XtendTypeDeclaration> types = name2type.get(name);
+			if(types.size() >1) {
+				for(XtendTypeDeclaration type: types)
+					error("Duplicate nested type " + name, type, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, DUPLICATE_TYPE_NAME);
 			}
 		}
 		for(JvmType type: type2extension.keySet()) {
