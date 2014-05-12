@@ -23,6 +23,8 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -43,6 +45,17 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 
 	protected String _signature(XtendClass clazz, boolean typeAtEnd) {
 		return clazz.getName() + hoverUiStrings.typeParameters(clazz.getTypeParameters());
+	}
+
+	@Override
+	protected String getDeclaratorName(JvmFeature feature) {
+		JvmDeclaredType declaringType = feature.getDeclaringType();
+		if (declaringType.isLocal()) {
+			String rawName = declaringType.getSuperTypes().get(0).getType().getSimpleName();
+			return "new " + rawName + "(){}";
+		} else {
+			return super.getDeclaratorName(feature);
+		}
 	}
 
 	protected String _signature(XtendFunction function, boolean typeAtEnd) {

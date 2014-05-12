@@ -628,10 +628,10 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val ifexpr = block.expressions.head as XIfExpression
 		val then = ifexpr.getThen()
 		val target = ((then as XBlockExpression).expressions.head as XMemberFeatureCall).memberCallTarget
-		assertEquals("String c", signatureProvider.getSignature(target))
+		assertEquals("String Foo.c", signatureProvider.getSignature(target))
 		val switchExpr = block.expressions.get(1) as XSwitchExpression
 		val expr = (switchExpr.cases.head.getThen() as XMemberFeatureCall).memberCallTarget
-		assertEquals("String c", signatureProvider.getSignature(expr))
+		assertEquals("String Foo.c", signatureProvider.getSignature(expr))
 	}
 	
 	@Test
