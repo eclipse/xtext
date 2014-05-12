@@ -77,7 +77,7 @@ public abstract class AbstractKnownTypesScope extends AbstractScope {
 			JvmDeclaredType declaredType = (JvmDeclaredType) result;
 			String simpleName = segments.get(i);
 			// TODO handle ambiguous types
-			for(JvmMember member: declaredType.findAllTypesByName(simpleName)) {
+			for(JvmMember member: declaredType.findAllNestedTypesByName(simpleName)) {
 				result = (JvmType) member;
 				break;
 			}

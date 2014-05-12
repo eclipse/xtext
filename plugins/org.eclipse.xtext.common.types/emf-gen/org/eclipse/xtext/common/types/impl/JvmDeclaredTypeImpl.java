@@ -446,7 +446,7 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Iterable<JvmDeclaredType> findAllTypesByName(String simpleName)
+	public Iterable<JvmDeclaredType> findAllNestedTypesByName(String simpleName)
 	{
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -482,7 +482,7 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Iterable<JvmDeclaredType> getAllTypes()
+	public Iterable<JvmDeclaredType> getAllNestedTypes()
 	{
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
