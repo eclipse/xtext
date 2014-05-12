@@ -465,18 +465,23 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	public void specifyTypeExplicitly(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Infer type", "Infer type", null, new ISemanticModification() {
 			public void apply(EObject element, IModificationContext context) throws Exception {
-				EStructuralFeature nameFeature = null;
+				EStructuralFeature featureAfterType = null;
 				JvmIdentifiableElement jvmElement = null;
 				if (element instanceof XtendFunction) {
-					nameFeature = XtendPackage.Literals.XTEND_FUNCTION__NAME;
+					XtendFunction function = (XtendFunction) element;
+					if (function.getCreateExtensionInfo() == null) {
+						featureAfterType = XtendPackage.Literals.XTEND_FUNCTION__NAME;
+					} else {
+						featureAfterType = XtendPackage.Literals.XTEND_FUNCTION__CREATE_EXTENSION_INFO;
+					}
 					jvmElement = associations.getDirectlyInferredOperation((XtendFunction) element);
 				} else if (element instanceof XtendField) {
-					nameFeature = XtendPackage.Literals.XTEND_FIELD__NAME;
+					featureAfterType = XtendPackage.Literals.XTEND_FIELD__NAME;
 					jvmElement = associations.getJvmField((XtendField) element);
 				}
 				
 				LightweightTypeReference type = batchTypeResolver.resolveTypes(element).getActualType(jvmElement);
-				INode node = Iterables.getFirst(NodeModelUtils.findNodesForFeature(element, nameFeature), null);
+				INode node = Iterables.getFirst(NodeModelUtils.findNodesForFeature(element, featureAfterType), null);
 				
 				if (node == null) {
 					throw new IllegalStateException("Could not determine node for " + element);

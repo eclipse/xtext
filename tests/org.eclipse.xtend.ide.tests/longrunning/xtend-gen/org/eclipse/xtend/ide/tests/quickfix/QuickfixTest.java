@@ -5776,6 +5776,36 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void apiTypeInference03() {
+    this.builder.setSeverity(IssueCodes.API_TYPE_INFERENCE, "error");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T> create {<T>newArrayList} |foo() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.API_TYPE_INFERENCE);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Infer type");
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels(_builder_1.toString());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("import java.util.ArrayList");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def <T> ArrayList<T> create {<T>newArrayList} foo() {}");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_2);
+  }
+  
+  @Test
   public void featureCallWithoutParentheses() {
     this.builder.setSeverity(org.eclipse.xtext.xbase.validation.IssueCodes.OPERATION_WITHOUT_PARENTHESES, "error");
     StringConcatenation _builder = new StringConcatenation();
