@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.quickfix;
 
 import static com.google.common.collect.Sets.*;
-import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
@@ -267,11 +266,12 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 							ResolvedOperations resolvedOperations = overrideHelper.getResolvedOperations(inferredType);
 							IXtextDocument document = context.getXtextDocument();
 							final int offset = insertionOffsets.getNewMethodInsertOffset(null, clazz);
-							final int currentIndentation = appendableFactory.getIndentationLevelAtOffset(offset, document, (XtextResource) clazz.eResource());
+							int currentIndentation = appendableFactory.getIndentationLevelAtOffset(offset, document, (XtextResource) clazz.eResource());
+							final int indentationToUse = clazz.getMembers().isEmpty() ? currentIndentation + 1 : currentIndentation;
 							ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) clazz.eResource(),
 									offset, 0, new OptionalParameters() {{ 
 										ensureEmptyLinesAround = true;
-										baseIndentationLevel = currentIndentation + 1;	
+										baseIndentationLevel = indentationToUse;	
 									}});
 							boolean isFirst = true;
 							for (String operationUriAsString : issue.getData()) {
@@ -325,7 +325,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 								else
 									appendable.append(", ");
 								for(int i = 0; i < exceptions.size(); i++) {
-									// TODO type ref?
 									appendable.append(exceptions.get(i));
 									if (i != exceptions.size() - 1) {
 										appendable.append(", ");
@@ -399,7 +398,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 								for(JvmType exceptionType: exceptions) {
 									appendable
 										.append("} catch (")
-									// TODO type ref?
 										.append(exceptionType).append(" exc) {").increaseIndentation()
 											.newLine()
 											.append("throw new RuntimeException(\"auto-generated try/catch\", exc)").decreaseIndentation()

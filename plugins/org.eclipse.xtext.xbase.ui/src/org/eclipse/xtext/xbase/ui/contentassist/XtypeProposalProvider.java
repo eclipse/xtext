@@ -73,7 +73,7 @@ public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 						result.append(converter.apply(returnType).getHumanReadableName());
 					}
 					result.append(" - ", StyledString.QUALIFIER_STYLER);
-					result.append(converter.toRawLightweightReference(feature.getDeclaringType()).getSimpleName(), StyledString.QUALIFIER_STYLER);
+					result.append(converter.toRawLightweightReference(feature.getDeclaringType()).getHumanReadableName(), StyledString.QUALIFIER_STYLER);
 					if (!withParenths) {
 						result.append(".", StyledString.QUALIFIER_STYLER);
 						result.append(feature.getSimpleName(), StyledString.QUALIFIER_STYLER);
@@ -83,12 +83,12 @@ public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 					JvmField field = (JvmField) feature;
 					result.append(" : ");
 					if (field.getType() != null) {
-						String fieldType = converter.apply(field.getType()).getSimpleName();
+						String fieldType = converter.apply(field.getType()).getHumanReadableName();
 						if (fieldType != null)
 							result.append(fieldType);
 					}
 					result.append(" - ", StyledString.QUALIFIER_STYLER);
-					result.append(converter.toRawLightweightReference(feature.getDeclaringType()).getSimpleName(), StyledString.QUALIFIER_STYLER);
+					result.append(converter.toRawLightweightReference(feature.getDeclaringType()).getHumanReadableName(), StyledString.QUALIFIER_STYLER);
 				} else if (feature instanceof JvmConstructor) {
 					if (withParenths) {
 						result.append('(');

@@ -35,6 +35,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
@@ -92,7 +93,8 @@ public class ImplementMemberFromSuperAssist {
 		List<IResolvedExecutable> result = newArrayList();
 		ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, operations.getType());
 		addOperationCandidates(operations, contextualVisibilityHelper, result);
-		addConstructorCandidates(operations, contextualVisibilityHelper, result);
+		if (!clazz.isAnonymous())
+			addConstructorCandidates(operations, contextualVisibilityHelper, result);
 		return result;
 	}
 
@@ -161,10 +163,13 @@ public class ImplementMemberFromSuperAssist {
 
 	protected ICompletionProposal createOverrideMethodProposal(XtendTypeDeclaration model, IResolvedExecutable overrideable,
 			final ContentAssistContext context, IProposalConflictHelper conflictHelper) {
-		ReplacingAppendable appendable = appendableFactory.create(context.getDocument(), (XtextResource) model.eResource(), context.getReplaceRegion()
-				.getOffset(), context.getReplaceRegion().getLength(), new OptionalParameters() {{ 
+		IXtextDocument document = context.getDocument();
+		XtextResource resource = (XtextResource) model.eResource();
+		int offset = context.getReplaceRegion().getOffset();
+		final int indentationLevel = appendableFactory.getIndentationLevelAtOffset(offset, document, resource);
+		ReplacingAppendable appendable = appendableFactory.create(document, resource, offset, context.getReplaceRegion().getLength(), new OptionalParameters() {{ 
 					ensureEmptyLinesAround = true;
-					baseIndentationLevel = 1;	
+					baseIndentationLevel = indentationLevel;	
 				}});
 		final String simpleName;
 		JvmExecutable declaration = overrideable.getDeclaration();
