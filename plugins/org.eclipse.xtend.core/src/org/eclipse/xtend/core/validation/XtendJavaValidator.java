@@ -107,6 +107,8 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
@@ -189,6 +191,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject
 	private ImplicitReturnFinder implicitReturnFinder;
+	
+	@Inject
+	private IBatchTypeResolver batchTypeResolver;
 	
 	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
 	protected final Map<Class<?>, ElementType> targetInfos;
@@ -1699,6 +1704,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	protected void checkImplicitReturn(final XtendFunction method) {
 		if (isIgnored(IMPLICIT_RETURN)) return;
+		JvmOperation jvmOperation = associations.getDirectlyInferredOperation(method);
+		IResolvedTypes types = batchTypeResolver.resolveTypes(method);
+		if (types.getActualType(jvmOperation).isPrimitiveVoid()) return;
 		implicitReturnFinder.findImplicitReturns(method.getExpression(), new Acceptor() {
 			public void accept(XExpression implicitReturn) {
 				if (method.getExpression() == implicitReturn) return;

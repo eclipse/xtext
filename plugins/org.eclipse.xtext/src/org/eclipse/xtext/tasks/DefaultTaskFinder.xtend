@@ -42,6 +42,7 @@ class DefaultTaskFinder implements ITaskFinder {
 
 	protected def List<Task> findTasks(ILeafNode node, TaskTags taskTags) {
 		if (node.canContainTaskTags) {
+			//TODO strip comment characters before parsing, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=380449#c13
 			val tasks = parser.parseTasks(node.text, taskTags)
 			tasks.forEach [
 				offset = offset + node.offset
