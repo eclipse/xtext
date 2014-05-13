@@ -914,7 +914,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 								AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 										Severity.ERROR, 
 										IssueCodes.INCOMPATIBLE_TYPES, 
-										String.format("Type mismatch: cannot convert from element type %s to %s", rawArrayComponentType.getSimpleName(), parameterType.getSimpleName()), 
+										String.format("Type mismatch: cannot convert from element type %s to %s", rawArrayComponentType.getHumanReadableName(), parameterType.getHumanReadableName()), 
 										object, 
 										XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION, -1, null);
 								state.addDiagnostic(diagnostic);
@@ -1120,7 +1120,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			state.addDiagnostic(new EObjectDiagnosticImpl(
 					Severity.ERROR,
 					IssueCodes.INVALID_USE_OF_TYPE_PARAMETER,
-					"Cannot perform instanceof check against type parameter "+lightweightReference.getSimpleName()+". Use its erasure "+rawTypeRef.getSimpleName()+" instead since further generic type information will be erased at runtime.",
+					"Cannot perform instanceof check against type parameter "+lightweightReference.getHumanReadableName()+". Use its erasure "+rawTypeRef.getHumanReadableName()+" instead since further generic type information will be erased at runtime.",
 					object.getType(),
 					null,
 					-1,
@@ -1147,18 +1147,20 @@ public class XbaseTypeComputer implements ITypeComputer {
 						declarationFound = true;
 						break;
 					}
-				if (!declarationFound)
+				if (!declarationFound) {
+					JvmType exceptionType = thrownException.getNamedType().getType();
 					state.addDiagnostic(new EObjectDiagnosticImpl(
 							expressionState.getSeverity(IssueCodes.UNHANDLED_EXCEPTION),
 							IssueCodes.UNHANDLED_EXCEPTION,
-							"Unhandled exception type " + thrownException.getSimpleName(),
+							"Unhandled exception type " + exceptionType.getSimpleName(),
 							object,
 							XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION,
 							-1,
 							new String[] { 
-								EcoreUtil.getURI(thrownException.getType()).toString(),
+								EcoreUtil.getURI(exceptionType).toString(),
 								EcoreUtil.getURI(object).toString()
 							}));
+				}
 			}
 		}
 	}
@@ -1205,7 +1207,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			state.addDiagnostic(new EObjectDiagnosticImpl(
 					Severity.ERROR,
 					IssueCodes.INCOMPATIBLE_TYPES,
-					actualParamType.getSimpleName() +  " is not a valid type's argument for the synchronized expression.",
+					actualParamType.getHumanReadableName() +  " is not a valid type's argument for the synchronized expression.",
 					expr.getParam(),
 					null,
 					-1,

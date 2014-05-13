@@ -186,7 +186,7 @@ public class UIStrings {
 		if (reference.isAny()) {
 			return "Object";
 		}
-		return reference.getSimpleName();
+		return reference.getHumanReadableName();
 	}
 
 	protected String parameterTypes(Iterable<JvmFormalParameter> parameters, @SuppressWarnings("unused") boolean isVarArgs) {

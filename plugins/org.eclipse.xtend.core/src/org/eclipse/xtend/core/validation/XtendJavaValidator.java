@@ -265,7 +265,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	protected void checkValidExtensionType(JvmIdentifiableElement identifiable, EObject source, EStructuralFeature feature) {
 		LightweightTypeReference type = getActualType(identifiable);
 		if (type != null && type.isPrimitive()) {
-			error(String.format("The primitive type %s is not a valid extension", type.getSimpleName()), source, feature, INVALID_EXTENSION_TYPE);
+			error(String.format("The primitive type %s is not a valid extension", type.getHumanReadableName()), source, feature, INVALID_EXTENSION_TYPE);
 		}
 	}
 
@@ -807,7 +807,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				else
 					message.append(" and ");
 			}
-			message.append(exceptions.get(i).getSimpleName());
+			message.append(exceptions.get(i).getHumanReadableName());
 		}
 		if (exceptions.size() > 1) {
 			message.append(" are");
@@ -1147,8 +1147,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 										LightweightTypeReference operationType = getActualType(function.getExpression(), jvmOperation);
 										if (!dispatchMethodReturnType.isAssignableFrom(operationType)) {
 											error("Incompatible return type of dispatch method. Expected "
-													+ dispatchMethodReturnType.getSimpleName() + " but was "
-													+ operationType.getSimpleName(), function,
+													+ dispatchMethodReturnType.getHumanReadableName() + " but was "
+													+ operationType.getHumanReadableName(), function,
 													XtendPackage.Literals.XTEND_FUNCTION__RETURN_TYPE,
 													ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_RETURN_TYPE);
 										}

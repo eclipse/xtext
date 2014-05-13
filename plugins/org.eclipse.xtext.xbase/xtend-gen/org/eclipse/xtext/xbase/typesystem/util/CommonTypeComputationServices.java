@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ArrayTypes;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.ExtendedEarlyExitComputer;
+import org.eclipse.xtext.xbase.typesystem.util.HumanReadableTypeNames;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
@@ -161,6 +162,17 @@ public class CommonTypeComputationServices {
   
   public void setEarlyExitComputer(final ExtendedEarlyExitComputer earlyExitComputer) {
     this._earlyExitComputer = earlyExitComputer;
+  }
+  
+  @Inject
+  private HumanReadableTypeNames _humanReadableTypeNames;
+  
+  public HumanReadableTypeNames getHumanReadableTypeNames() {
+    return this._humanReadableTypeNames;
+  }
+  
+  public void setHumanReadableTypeNames(final HumanReadableTypeNames humanReadableTypeNames) {
+    this._humanReadableTypeNames = humanReadableTypeNames;
   }
   
   @Inject(optional = true)

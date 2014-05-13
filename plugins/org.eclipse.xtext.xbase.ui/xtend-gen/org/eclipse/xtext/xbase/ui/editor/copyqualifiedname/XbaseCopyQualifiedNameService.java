@@ -143,7 +143,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
       _and = _not_1;
     }
     if (_and) {
-      return actualType.getSimpleName();
+      return actualType.getHumanReadableName();
     }
     final int index = arguments.indexOf(it);
     boolean _equals = Objects.equal(resolvedExecutable, null);

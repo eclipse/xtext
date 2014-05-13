@@ -247,7 +247,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 //			List list = Collections.emptyList();
 //			if (((List)list).isEmpty()) {}
 		if (toType.getIdentifier().equals(fromType.getIdentifier())) {
-			addIssue("Unnecessary cast from " + fromType.getSimpleName() + " to " + toType.getSimpleName(), concreteSyntax, IssueCodes.OBSOLETE_CAST);
+			addIssue("Unnecessary cast from " + fromType.getHumanReadableName() + " to " + toType.getHumanReadableName(), concreteSyntax, IssueCodes.OBSOLETE_CAST);
 		}
 	}
 	
@@ -389,7 +389,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
 		} else {
 			if (expr.getExpression() == null)
-				error("The function must return a result of type " + expectedReturnType.getSimpleName() + ".", expr, null,
+				error("The function must return a result of type " + expectedReturnType.getHumanReadableName() + ".", expr, null,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
 			else {
 				LightweightTypeReference expressionType = getActualType(expr.getExpression());
@@ -426,7 +426,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkTypes(XCatchClause catchClause) {
 		LightweightTypeReference parameterType = getActualType(catchClause, catchClause.getDeclaredParam());
 		if (parameterType != null && !parameterType.isSubtypeOf(Throwable.class)) {
-			error("No exception of type " + parameterType.getSimpleName()
+			error("No exception of type " + parameterType.getHumanReadableName()
 					+ " can be thrown; an exception type must be a subclass of Throwable",
 					catchClause.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
@@ -1218,7 +1218,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
 				if(leftType != null) {
 					if (leftType.isPrimitive()) { 
-						error("The operator '" + operatorSymbol + "' is undefined for the argument types " + leftType.getSimpleName() + " and null", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+						error("The operator '" + operatorSymbol + "' is undefined for the argument types " + leftType.getHumanReadableName() + " and null", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
 					} else if (equalsComparison) {
 						addIssue("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, EQUALS_WITH_NULL);
 					}
@@ -1228,7 +1228,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				LightweightTypeReference rightType = typeResolver.resolveTypes(right).getActualType(right);
 				if(rightType != null) {
 					if (rightType.isPrimitive()) { 
-						error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getSimpleName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+						error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getHumanReadableName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
 					} else if (equalsComparison && !(right instanceof XNullLiteral)) {
 						addIssue("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, EQUALS_WITH_NULL);
 					}
@@ -1237,7 +1237,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		} else if(expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.ELVIS, ObjectExtensions.class)) {
 			LightweightTypeReference leftType = getActualType(left);
 			if(leftType.isPrimitive()) 
-				error("The operator '" + operatorSymbol + "' is undefined for arguments of type " + leftType.getSimpleName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+				error("The operator '" + operatorSymbol + "' is undefined for arguments of type " + leftType.getHumanReadableName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
 		}
 	}
 		
@@ -1251,7 +1251,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	protected String canonicalName(LightweightTypeReference typeRef) {
-		return (typeRef == null) ? "<null>" : typeRef.getSimpleName();
+		return (typeRef == null) ? "<null>" : typeRef.getHumanReadableName();
 	}
 
 	protected boolean isInterface(JvmType type) {
@@ -1554,7 +1554,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			LightweightTypeReference left = getActualType(binaryOperation.getLeftOperand());
 			LightweightTypeReference right = getActualType(binaryOperation.getRightOperand());
 			if((left.isArray() && !right.isArray()) || (!left.isArray() && right.isArray()))
-				error("Incompatible operand types " + left.getSimpleName() + " and " + right.getSimpleName(), null, INVALID_OPERAND_TYPES);
+				error("Incompatible operand types " + left.getHumanReadableName() + " and " + right.getHumanReadableName(), null, INVALID_OPERAND_TYPES);
 		}
 	}
 	
