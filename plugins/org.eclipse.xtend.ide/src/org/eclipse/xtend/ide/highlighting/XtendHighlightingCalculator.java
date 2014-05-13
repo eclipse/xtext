@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.highlighting;
 
-import static com.google.common.collect.Iterables.*;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
@@ -25,6 +23,7 @@ import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
@@ -35,6 +34,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.Active;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
@@ -113,37 +113,53 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	@Override
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
-		for (XtendAnnotationTarget xtendType : file.getXtendTypes()) {
+		for (XtendTypeDeclaration xtendType : file.getXtendTypes()) {
 			highlightAnnotations(acceptor, xtendType);
-			for (XtendMember member : filter(xtendType.eContents(), XtendMember.class)) {
-				if (member.eClass() == XtendPackage.Literals.XTEND_FUNCTION) {
-					XtendFunction function = (XtendFunction) member;
-					XExpression rootExpression = function.getExpression();
-					highlightRichStrings(rootExpression, acceptor);
-					CreateExtensionInfo createExtensionInfo = function.getCreateExtensionInfo();
-					if (createExtensionInfo != null) {
-						highlightRichStrings(createExtensionInfo.getCreateExpression(), acceptor);
-					}
+			highlightMembers(xtendType, acceptor);
+		}
+		super.doProvideHighlightingFor(resource, acceptor);
+	}
+
+	protected void highlightMembers(XtendTypeDeclaration xtendType, IHighlightedPositionAcceptor acceptor) {
+		for (XtendMember member : xtendType.getMembers()) {
+			if (member.eClass() == XtendPackage.Literals.XTEND_FUNCTION) {
+				XtendFunction function = (XtendFunction) member;
+				XExpression rootExpression = function.getExpression();
+				highlightRichStrings(rootExpression, acceptor);
+				CreateExtensionInfo createExtensionInfo = function.getCreateExtensionInfo();
+				if (createExtensionInfo != null) {
+					highlightRichStrings(createExtensionInfo.getCreateExpression(), acceptor);
 				}
-				if(member.eClass() == XtendPackage.Literals.XTEND_FIELD){
-					XtendField field = (XtendField) member;
-					highlightXtendField(field,acceptor);
-					XExpression initializer = field.getInitialValue();
-					highlightRichStrings(initializer, acceptor);
-				}
-				highlightAnnotations(acceptor, member);
 			}
-			if (xtendType instanceof XtendAnnotationType) {
-				for(XAnnotation annotation: xtendType.getAnnotations()) {
-					JvmType annotationType = annotation.getAnnotationType();
-					if (annotationType != null && !annotationType.eIsProxy() && Active.class.getName().equals(annotationType.getIdentifier())) {
-						highlightObjectAtFeature(acceptor, xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
-						break;
-					}
+			if(member.eClass() == XtendPackage.Literals.XTEND_FIELD){
+				XtendField field = (XtendField) member;
+				highlightXtendField(field,acceptor);
+				XExpression initializer = field.getInitialValue();
+				highlightRichStrings(initializer, acceptor);
+			}
+			if (member instanceof XtendTypeDeclaration) {
+				highlightMembers((XtendTypeDeclaration) member, acceptor);
+			}
+			highlightAnnotations(acceptor, member);
+		}
+		if (xtendType instanceof XtendAnnotationType) {
+			for(XAnnotation annotation: xtendType.getAnnotations()) {
+				JvmType annotationType = annotation.getAnnotationType();
+				if (annotationType != null && !annotationType.eIsProxy() && Active.class.getName().equals(annotationType.getIdentifier())) {
+					highlightObjectAtFeature(acceptor, xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
+					break;
 				}
 			}
 		}
-		super.doProvideHighlightingFor(resource, acceptor);
+	}
+	
+	@Override
+	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
+		if (object instanceof AnonymousClass) {
+			highlightMembers((XtendTypeDeclaration) object, acceptor);
+			return false;
+		}
+		return super.highlightElement(object, acceptor);
 	}
 
 	protected void highlightAnnotations(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target) {
