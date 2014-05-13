@@ -82,10 +82,13 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 		if (result == null) {
 			if (classToParticipant == null) {
 				classToParticipant = Maps.newHashMap();
-				String pluginID = Activator.getDefault().getBundle().getSymbolicName();
-				String extensionPointID = EXTENSION_POINT_ID;
-				BuilderParticipantReader reader = new BuilderParticipantReader(extensionRegistry, pluginID, extensionPointID);
-				reader.readRegistry();
+				Activator activator = Activator.getDefault();
+				if (activator != null) {
+					String pluginID = activator.getBundle().getSymbolicName();
+					String extensionPointID = EXTENSION_POINT_ID;
+					BuilderParticipantReader reader = new BuilderParticipantReader(extensionRegistry, pluginID, extensionPointID);
+					reader.readRegistry();
+				}
 			}
 			result = ImmutableList.copyOf(classToParticipant.values());
 			participants = result;

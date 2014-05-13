@@ -75,7 +75,7 @@ public class DocumentSourceAppender implements ISourceAppender {
 			return whitespaceInformationProvider.getIndentationInformation(resource.getURI()).getIndentString();
 		}
 		
-		protected int getIndentationLevelAtOffset(int offset, IDocument document, XtextResource resource) {
+		public int getIndentationLevelAtOffset(int offset, IDocument document, XtextResource resource) {
 			try {
 				if (offset <= 0)
 					return 0;
