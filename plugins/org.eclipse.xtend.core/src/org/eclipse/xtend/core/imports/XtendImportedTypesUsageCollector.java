@@ -13,15 +13,14 @@ import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.imports.TypeUsageCollector;
+import org.eclipse.xtext.xbase.imports.ImportedTypesCollector;
 
 import com.google.inject.Inject;
 
 /**
- * @author Jan Koehnlein - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtendTypeUsageCollector extends TypeUsageCollector {
-
+public class XtendImportedTypesUsageCollector extends ImportedTypesCollector {
 	@Inject
 	private AnonymousClassUtil anonymousClassUtil;
 	

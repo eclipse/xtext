@@ -13,6 +13,7 @@ import org.eclipse.xtend.core.conversion.StringValueConverter;
 import org.eclipse.xtend.core.conversion.XtendValueConverterService;
 import org.eclipse.xtend.core.documentation.XtendDocumentationProvider;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
+import org.eclipse.xtend.core.imports.XtendImportedTypesUsageCollector;
 import org.eclipse.xtend.core.imports.XtendImportsConfiguration;
 import org.eclipse.xtend.core.imports.XtendTypeUsageCollector;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -87,6 +88,7 @@ import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
+import org.eclipse.xtext.xbase.imports.ImportedTypesCollector;
 import org.eclipse.xtext.xbase.imports.TypeUsageCollector;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
@@ -185,6 +187,10 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public Class<? extends TypeUsageCollector> bindTypeUsageCollector() {
 		return XtendTypeUsageCollector.class;
+	}
+	
+	public Class<? extends ImportedTypesCollector> bindImportedTypesCollector() {
+		return XtendImportedTypesUsageCollector.class;
 	}
 
 	@Override
