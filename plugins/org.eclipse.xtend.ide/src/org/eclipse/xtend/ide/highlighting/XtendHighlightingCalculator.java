@@ -29,6 +29,7 @@ import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -57,13 +58,10 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -135,6 +133,15 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 				}
 				highlightAnnotations(acceptor, member);
 			}
+			if (xtendType instanceof XtendAnnotationType) {
+				for(XAnnotation annotation: xtendType.getAnnotations()) {
+					JvmType annotationType = annotation.getAnnotationType();
+					if (annotationType != null && !annotationType.eIsProxy() && Active.class.getName().equals(annotationType.getIdentifier())) {
+						highlightObjectAtFeature(acceptor, xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
+						break;
+					}
+				}
+			}
 		}
 		super.doProvideHighlightingFor(resource, acceptor);
 	}
@@ -150,20 +157,17 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 
 	@Override
 	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor) {
-		super.highlightAnnotation(annotation, acceptor);
 		JvmType annotationType = annotation.getAnnotationType();
-		if(annotationType != null && annotationType instanceof JvmAnnotationTarget && Iterables.any(((JvmAnnotationTarget) annotationType).getAnnotations(), new Predicate<JvmAnnotationReference>() {
-
-			public boolean apply(JvmAnnotationReference input) {
-				if(input.getAnnotation() != null && !input.getAnnotation().eIsProxy())
-					return input.getAnnotation().getIdentifier().equals(Active.class.getCanonicalName());
-				return false;
+		if (annotationType instanceof JvmAnnotationTarget) {
+			for(JvmAnnotationReference annotationReference: ((JvmAnnotationTarget) annotationType).getAnnotations()) {
+				JvmAnnotationType otherAnnotation = annotationReference.getAnnotation();
+				if (otherAnnotation != null && !otherAnnotation.eIsProxy() && Active.class.getName().equals(otherAnnotation.getIdentifier())) {
+					highlightAnnotation(annotation, acceptor, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
+					return;
+				}
 			}
-		}))
-		{
-			highlightObjectAtFeature(acceptor, annotation, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
 		}
-
+		super.highlightAnnotation(annotation, acceptor);
 	}
 
 	protected void highlightDeprecatedXtendAnnotationTarget(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target, XAnnotation annotation){

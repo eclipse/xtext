@@ -34,8 +34,6 @@ public class XtendHighlightingConfiguration extends XbaseHighlightingConfigurati
 		acceptor.acceptDefaultHighlighting(POTENTIAL_LINE_BREAK, "Potential Line Break (if line is not empty)", insignificantTemplateTextStyle());
 		acceptor.acceptDefaultHighlighting(TEMPLATE_LINE_BREAK, "Template Line Break", richTextStyle());
 		acceptor.acceptDefaultHighlighting(ACTIVE_ANNOTATION, "Active Annotation", activeAnnotationStyle());
-
-		
 	}
 	
 	public TextStyle richTextStyle() {
@@ -55,8 +53,7 @@ public class XtendHighlightingConfiguration extends XbaseHighlightingConfigurati
 	}
 
 	public TextStyle activeAnnotationStyle() {
-		TextStyle textStyle = defaultTextStyle().copy();
-		textStyle.setColor(new RGB(203, 68, 55));
+		TextStyle textStyle = extensionMethodInvocation().copy();
 		return textStyle;
 	}
 
