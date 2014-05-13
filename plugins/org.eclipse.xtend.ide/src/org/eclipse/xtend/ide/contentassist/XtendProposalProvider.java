@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
@@ -34,7 +35,9 @@ import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions.VariableType;
 import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -259,16 +262,44 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeType_Members(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		if (model instanceof XtendClass)
-			overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor, getConflictHelper());
+		if (model instanceof XtendClass) {
+			INode node = context.getCurrentNode();
+			EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
+			if (!(eObject instanceof AnonymousClass))
+				overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor, getConflictHelper());
+		}
+		super.completeType_Members(model, assignment, context, acceptor);
+	}
+	
+	@Override
+	public void completeMember_Members(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (model instanceof XtendClass) {
+			INode node = context.getCurrentNode();
+			EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
+			if (!(eObject instanceof AnonymousClass))
+				overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor, getConflictHelper());
+		} else {
+			INode node = context.getCurrentNode();
+			EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
+			if (eObject instanceof XtendClass)
+				overrideAssist.createOverrideProposals((XtendTypeDeclaration) eObject, context, acceptor, getConflictHelper());
+		}
 		super.completeType_Members(model, assignment, context, acceptor);
 	}
 	
 	@Override
 	public void completeXConstructorCall_Members(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		if (model instanceof AnonymousClass)
+		if (model instanceof AnonymousClass) {
 			overrideAssist.createOverrideProposals((AnonymousClass) model, context, acceptor, getConflictHelper());
+		} else {
+			INode node = context.getCurrentNode();
+			EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
+			if (eObject instanceof AnonymousClass)
+				overrideAssist.createOverrideProposals((XtendTypeDeclaration) eObject, context, acceptor, getConflictHelper());
+		}
+		
 	}
 
 	protected void addGuillemotsProposal(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -306,6 +337,13 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XtendField) {
 			createLocalVariableAndImplicitProposals(context.getPreviousModel(), context, acceptor);
+		} else if (model instanceof AnonymousClass) {
+			ICompositeNode node = NodeModelUtils.getNode(model);
+			if (node.getOffset() >= context.getOffset()) {
+				super.completeXFeatureCall_Feature(model, assignment, context, acceptor);
+			} else {
+				return;
+			}
 		} else {
 			super.completeXFeatureCall_Feature(model, assignment, context, acceptor);
 		}
@@ -356,12 +394,31 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeXbaseConstructorCall_Constructor(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		completeXConstructorCall_Constructor(model, assignment, context, acceptor);
+		completeJavaTypes(
+				context,
+				TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE,
+				true,
+				getQualifiedNameValueConverter(),
+				createVisibilityFilter(context),
+				acceptor);
 	}
 
 	@Override
 	public void completeXSwitchExpression_Default(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.WITHIN, context, acceptor);
+	}
+	
+	@Override
+	protected void completeWithinBlock(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		if (model instanceof AnonymousClass) {
+			ICompositeNode node = NodeModelUtils.getNode(model);
+			if (node.getOffset() >= context.getOffset()) {
+				super.completeWithinBlock(model, context, acceptor);
+			} else {
+				return;
+			}
+		}
+		super.completeWithinBlock(model, context, acceptor);
 	}
 }
