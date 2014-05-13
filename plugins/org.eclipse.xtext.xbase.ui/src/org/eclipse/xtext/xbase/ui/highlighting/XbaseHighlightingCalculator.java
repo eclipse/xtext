@@ -148,9 +148,14 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 
 	protected void highlightReferenceJvmType(IHighlightedPositionAcceptor acceptor, EObject referencer,
 			EReference reference, EObject resolvedReferencedObject) {
+		highlightReferenceJvmType(acceptor, referencer, reference, resolvedReferencedObject, XbaseHighlightingConfiguration.ANNOTATION);
+	}
+	
+	protected void highlightReferenceJvmType(IHighlightedPositionAcceptor acceptor, EObject referencer,
+			EReference reference, EObject resolvedReferencedObject, String highlightingConfiguration) {
 		highlightDeprecation(acceptor, referencer, reference, resolvedReferencedObject);
 		if (resolvedReferencedObject instanceof JvmAnnotationType){
-			highlightObjectAtFeature(acceptor, referencer, reference, XbaseHighlightingConfiguration.ANNOTATION);
+			highlightObjectAtFeature(acceptor, referencer, reference, highlightingConfiguration);
 		}
 	}
 
@@ -232,15 +237,19 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	}
 	
 	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor) {
+		highlightAnnotation(annotation, acceptor, XbaseHighlightingConfiguration.ANNOTATION);
+	}
+	
+	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor, String highlightingConfiguration) {
 		JvmType annotationType = annotation.getAnnotationType();
 		if (annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType) {
 			ICompositeNode xannotationNode = NodeModelUtils.findActualNodeFor(annotation);
 			if (xannotationNode != null) {
 				ILeafNode firstLeafNode = NodeModelUtils.findLeafNodeAtOffset(xannotationNode, xannotationNode.getOffset() );
 				if(firstLeafNode != null)
-					highlightNode(firstLeafNode, XbaseHighlightingConfiguration.ANNOTATION, acceptor);
+					highlightNode(firstLeafNode, highlightingConfiguration, acceptor);
 			}
-			highlightReferenceJvmType(acceptor, annotation, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, annotationType);
+			highlightReferenceJvmType(acceptor, annotation, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, annotationType, highlightingConfiguration);
 		}
 	}
 	

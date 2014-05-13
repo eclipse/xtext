@@ -548,7 +548,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		classDefString = "@Target(ElementType.TYPE) @Active(ObservableCompilationParticipant) annotation Observable {} class ObservableCompilationParticipant extends AbstractClassProcessor { override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {}}";
 		classDefString = classDefString + " @Observable class Bar ";
 		String model = "{}";
-		expect(566, 10, XbaseHighlightingConfiguration.ANNOTATION);
+		expect(565, 1, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
 		expect(566, 10, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
 		highlightActiveAnnotation(model);
 	}
@@ -563,7 +563,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		classDefString = "@Target(ElementType.FIELD) @Active(ObservableCompilationParticipant) annotation Observable {} class ObservableCompilationParticipant extends AbstractFieldProcessor { override doTransform(MutableFieldDeclaration field, extension TransformationContext context) {}}";
 		classDefString = classDefString + "class Bar ";
 		String model = "{} @Observable String myAnnotatedString ";
-		expect(592, 10, XbaseHighlightingConfiguration.ANNOTATION);
+		expect(591, 1, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
 		expect(592, 10, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
 		highlightActiveAnnotation(model);
 	}
