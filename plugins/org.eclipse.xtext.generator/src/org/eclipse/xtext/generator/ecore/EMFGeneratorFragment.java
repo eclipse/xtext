@@ -670,7 +670,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 
 	public String getModelPluginID(XpandExecutionContext ctx) {
 		if ((this.modelPluginID == null || "".equals(this.modelPluginID)) && (ctx.getVariable(MODEL_PLUGIN_ID) != null)) {
-			this.modelPluginID = (String) ctx.getVariable(MODEL_PLUGIN_ID).getValue();
+			return (String) ctx.getVariable(MODEL_PLUGIN_ID).getValue();
 		}
 		return modelPluginID;
 	}
