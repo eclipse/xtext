@@ -146,7 +146,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 						state.addDiagnostic(new EObjectDiagnosticImpl(
 								Severity.ERROR, 
 								IssueCodes.INCOMPATIBLE_TYPES, 
-								"Type mismatch: cannot convert from " + primitiveComponentType + "[] to " + expectation.getSimpleName(), 
+								"Type mismatch: cannot convert from " + primitiveComponentType + "[] to " + expectation.getHumanReadableName(), 
 								value, 
 								null, 
 								-1, null));

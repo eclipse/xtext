@@ -36,6 +36,7 @@ import org.eclipse.xtend.core.scoping.AnonymousClassConstructorScopes;
 import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
 import org.eclipse.xtend.core.serializer.XtendSerializerScopeProvider;
 import org.eclipse.xtend.core.tasks.XtendTaskTagProvider;
+import org.eclipse.xtend.core.typesystem.LocalClassAwareTypeNames;
 import org.eclipse.xtend.core.typesystem.TypeDeclarationAwareBatchTypeResolver;
 import org.eclipse.xtend.core.typesystem.XtendReentrantTypeResolver;
 import org.eclipse.xtend.core.typesystem.XtendTypeComputer;
@@ -93,6 +94,7 @@ import org.eclipse.xtext.xbase.scoping.batch.ConstructorScopes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.util.HumanReadableTypeNames;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.validation.EarlyExitValidator;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
@@ -352,5 +354,9 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public Class<? extends ImplicitReturnFinder> bindImplicitReturnFinder() {
 		return XtendImplicitReturnFinder.class;
+	}
+	
+	public Class<? extends HumanReadableTypeNames> bindHumanReadableTypeNames() {
+		return LocalClassAwareTypeNames.class;
 	}
 }

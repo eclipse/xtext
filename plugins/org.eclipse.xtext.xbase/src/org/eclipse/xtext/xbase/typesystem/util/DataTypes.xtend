@@ -81,6 +81,10 @@ class CommonTypeComputationServices {
 	@Property
 	ExtendedEarlyExitComputer earlyExitComputer
 	
+	@Inject
+	@Property
+	HumanReadableTypeNames humanReadableTypeNames
+	
 	@Inject(optional = true)
 	@Property
 	XtypeFactory xtypeFactory = XtypeFactory.eINSTANCE;

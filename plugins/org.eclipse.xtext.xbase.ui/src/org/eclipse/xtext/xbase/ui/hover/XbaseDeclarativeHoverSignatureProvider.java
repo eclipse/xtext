@@ -104,7 +104,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 				if (i != 0) {
 					result.append(", ");
 				}
-				result.append(typeArguments.get(i).getSimpleName());
+				result.append(typeArguments.get(i).getHumanReadableName());
 			}
 			result.append("> ");
 		}
@@ -115,7 +115,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 				if (i != constructorTypeArgumentCount - typeArgumentCount) {
 					result.append(", ");
 				}
-				result.append(typeArguments.get(i).getSimpleName());
+				result.append(typeArguments.get(i).getHumanReadableName());
 			}
 			result.append(">");
 		}
@@ -125,7 +125,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 			if (i != 0) {
 				result.append(", ");
 			}
-			result.append(parameterTypes.get(i).getSimpleName());
+			result.append(parameterTypes.get(i).getHumanReadableName());
 			result.append(' ').append(constructor.getParameters().get(i).getSimpleName());
 		}
 		result.append(')');
@@ -136,7 +136,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 				if (i != 0) {
 					result.append(", ");
 				}
-				result.append(exceptions.get(i).getSimpleName());
+				result.append(exceptions.get(i).getHumanReadableName());
 			}
 		}
 		return result.toString();
@@ -156,11 +156,11 @@ public class XbaseDeclarativeHoverSignatureProvider {
 					if (i != 0) {
 						result.append(", ");
 					}
-					result.append(typeArguments.get(i).getSimpleName());
+					result.append(typeArguments.get(i).getHumanReadableName());
 				}
 				result.append("> ");
 			}
-			result.append(resolvedOperation.getResolvedReturnType().getSimpleName()).append(' ');
+			result.append(resolvedOperation.getResolvedReturnType().getHumanReadableName()).append(' ');
 			JvmOperation operation = resolvedOperation.getDeclaration();
 			result.append(getDeclaratorName(operation)).append('.');
 			result.append(operation.getSimpleName()).append('(');
@@ -169,7 +169,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 				if (i != 0) {
 					result.append(", ");
 				}
-				result.append(parameterTypes.get(i).getSimpleName());
+				result.append(parameterTypes.get(i).getHumanReadableName());
 				result.append(' ').append(operation.getParameters().get(i).getSimpleName());
 			}
 			result.append(')');
@@ -180,7 +180,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 					if (i != 0) {
 						result.append(", ");
 					}
-					result.append(exceptions.get(i).getSimpleName());
+					result.append(exceptions.get(i).getHumanReadableName());
 				}
 			}
 			return result.toString();
@@ -190,14 +190,14 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		} else if (feature instanceof JvmField) {
 			LightweightTypeReference referenceType = typeResolver.resolveTypes(featureCall).getActualType(featureCall);
 			StringBuilder result = new StringBuilder(250);
-			result.append(referenceType.getSimpleName()).append(' ');
+			result.append(referenceType.getHumanReadableName()).append(' ');
 			JvmField field = (JvmField) feature;
 			result.append(getDeclaratorName(field)).append('.');
 			result.append(field.getSimpleName());
 			return result.toString();
 		} else {
 			String simpleName = feature.getSimpleName();
-			String type = typeResolver.resolveTypes(featureCall).getActualType(featureCall).getSimpleName();
+			String type = typeResolver.resolveTypes(featureCall).getActualType(featureCall).getHumanReadableName();
 			if (simpleName != null) {
 				return type + ' ' + simpleName;
 			} else {
@@ -301,8 +301,8 @@ public class XbaseDeclarativeHoverSignatureProvider {
 				signature += JavaElementLabels.CONCAT_STRING + signatureOfFather;
 			}
 			if (typeAtEnd)
-				return signature + " : " + parameterType.getSimpleName();
-			return parameterType.getSimpleName() + " " + signature;
+				return signature + " : " + parameterType.getHumanReadableName();
+			return parameterType.getHumanReadableName() + " " + signature;
 		}
 		return parameter.getName();
 	}

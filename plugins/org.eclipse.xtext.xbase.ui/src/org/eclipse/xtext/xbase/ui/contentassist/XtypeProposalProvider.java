@@ -70,7 +70,7 @@ public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 					JvmTypeReference returnType = operation.getReturnType();
 					if (returnType != null && returnType.getSimpleName() != null) {
 						result.append(" : ");
-						result.append(converter.apply(returnType).getSimpleName());
+						result.append(converter.apply(returnType).getHumanReadableName());
 					}
 					result.append(" - ", StyledString.QUALIFIER_STYLER);
 					result.append(converter.toRawLightweightReference(feature.getDeclaringType()).getSimpleName(), StyledString.QUALIFIER_STYLER);
@@ -108,11 +108,11 @@ public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 				result.append(", ");
 			if (i == relevantParameters.size() - 1 && executable.isVarArgs() && parameter.getParameterType() instanceof JvmGenericArrayTypeReference) {
 				JvmGenericArrayTypeReference parameterType = (JvmGenericArrayTypeReference) parameter.getParameterType();
-				result.append(ownedConverter.apply(parameterType.getComponentType()).getSimpleName());
+				result.append(ownedConverter.apply(parameterType.getComponentType()).getHumanReadableName());
 				result.append("...");
 			} else {
 				if (parameter.getParameterType()!= null) {
-					String simpleName = ownedConverter.apply(parameter.getParameterType()).getSimpleName();
+					String simpleName = ownedConverter.apply(parameter.getParameterType()).getHumanReadableName();
 					if (simpleName != null) // is null if the file is not on the class path
 						result.append(simpleName);
 				}
