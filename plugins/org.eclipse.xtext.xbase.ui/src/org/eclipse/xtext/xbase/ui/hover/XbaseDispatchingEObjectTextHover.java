@@ -14,6 +14,7 @@ import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -27,7 +28,6 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 
 import com.google.inject.Inject;
@@ -82,9 +82,13 @@ public class XbaseDispatchingEObjectTextHover extends DispatchingEObjectTextHove
 		EObject object = eObjectAtOffsetHelper.resolveContainedElementAt(resource, offset);
 		if (object != null && object instanceof XAbstractFeatureCall){
 			JvmIdentifiableElement feature = ((XAbstractFeatureCall) object).getFeature();
-			if(feature instanceof JvmExecutable || feature instanceof JvmField || object instanceof XConstructorCall || object instanceof XVariableDeclaration || object instanceof JvmFormalParameter)
-					if (original != null)
-						return Tuples.create(object, original.getSecond());
+			if(feature instanceof JvmExecutable 
+					|| feature instanceof JvmField 
+					|| feature instanceof JvmConstructor 
+					|| feature instanceof XVariableDeclaration 
+					|| feature instanceof JvmFormalParameter)
+				if (original != null)
+					return Tuples.create(object, original.getSecond());
 		}
 		return original;
 	}
