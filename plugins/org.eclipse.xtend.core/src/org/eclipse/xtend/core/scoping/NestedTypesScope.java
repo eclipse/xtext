@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -43,14 +44,15 @@ public class NestedTypesScope extends AbstractKnownTypesScope {
 	
 	@Override
 	protected void doGetElements(JvmType type, List<IEObjectDescription> result) {
-		JvmDeclaredType declarator = innermost;
-		while(declarator != null) {
-			if (EcoreUtil.isAncestor(declarator, type)) {
-				doGetDescriptions(type, declarator, 0, result);
+		if (type instanceof JvmDeclaredType) {
+			JvmDeclaredType declarator = innermost;
+			while(declarator != null) {
+				if (declarator != type && EcoreUtil.isAncestor(declarator, type)) {
+					doGetDescriptions(type, declarator, 0, result);
+				}
+				declarator = EcoreUtil2.getContainerOfType(declarator.eContainer(), JvmDeclaredType.class);
 			}
-			declarator = EcoreUtil2.getContainerOfType(declarator.eContainer(), JvmDeclaredType.class);
 		}
-			
 		super.doGetElements(type, result);
 	}
 

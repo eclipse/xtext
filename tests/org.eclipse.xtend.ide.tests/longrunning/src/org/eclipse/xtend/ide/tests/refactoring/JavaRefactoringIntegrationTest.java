@@ -727,6 +727,26 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		renameXtendElement(editor, offset, "operator_minus");
 		assertDocumentContains(editor, xtendModel.replace("operator_plus", "operator_minus").replace("+", "-"));
 	}
+
+	@Test
+	public void testRenameOperatorDef_02() throws Exception {
+		String xtendModel = "class XtendClass { def +(int i) {} def bar() { this + 2 } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		final int offset = xtendModel.indexOf("+");
+		renameXtendElement(editor, offset, "-");
+		assertDocumentContains(editor, xtendModel.replace("+", "-"));
+	}
+	
+	@Test
+	public void testRenameOperatorDef_03() throws Exception {
+		String xtendModel = "class XtendClass { def +(int i, int j) {} def bar() { 1 + 2 } }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		final int offset = xtendModel.indexOf("+");
+		renameXtendElement(editor, offset, "-");
+		assertDocumentContains(editor, xtendModel.replace("+", "-"));
+	}
 	
 	@Test
 	public void testRenameOperatorDefToOperator() throws Exception {
