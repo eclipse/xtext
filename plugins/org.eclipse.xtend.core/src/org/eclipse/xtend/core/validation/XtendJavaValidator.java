@@ -35,6 +35,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
+import org.eclipse.xtend.core.typesystem.LocalClassAwareTypeNames;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
@@ -191,6 +192,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject
 	private ImplicitReturnFinder implicitReturnFinder;
+	
+	@Inject
+	private LocalClassAwareTypeNames localClassAwareTypeNames;
 	
 	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
 	protected final Map<Class<?>, ElementType> targetInfos;
@@ -974,22 +978,25 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkAbstract(XtendFunction function) {
 		if (function.getExpression() == null) {
-			if(function.getDeclaringType() instanceof XtendClass) {
-				XtendClass declarator = (XtendClass) function.getDeclaringType();
+			if(function.getDeclaringType() instanceof XtendClass || function.getDeclaringType() instanceof AnonymousClass) {
+				XtendTypeDeclaration declarator = function.getDeclaringType();
 				if (function.isDispatch()) {
-					error("The dispatch method " + function.getName() + " in type " + declarator.getName() + " must not be abstract",XTEND_FUNCTION__NAME, -1, DISPATCH_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
+					error("The dispatch method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " must not be abstract",XTEND_FUNCTION__NAME, -1, DISPATCH_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
 					return;
 				}
 				if (function.getCreateExtensionInfo() != null) {
-					error("The 'create'-method " + function.getName() + " in type " + declarator.getName() + " must not be abstract",XTEND_FUNCTION__NAME, -1, CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
+					error("The 'create'-method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " must not be abstract",XTEND_FUNCTION__NAME, -1, CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
 					return;
 				}
-				if (!declarator.isAbstract() && !function.isNative()) {
-					error("The abstract method " + function.getName() + " in type " + declarator.getName() + " can only be defined by an abstract class.", 
+				if (declarator.isAnonymous()) {
+					error("The abstract method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " can only be defined by an abstract class.", 
+								XTEND_FUNCTION__NAME, -1, MISSING_ABSTRACT_IN_ANONYMOUS);
+				} else if (!((XtendClass) declarator).isAbstract() && !function.isNative()) {
+					error("The abstract method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " can only be defined by an abstract class.", 
 							XTEND_FUNCTION__NAME, -1, MISSING_ABSTRACT);
 				}
 				if (function.getReturnType() == null && !function.isOverride()) {
-					error("The "+(function.isNative()?"native":"abstract")+" method " + function.getName() + " in type " + declarator.getName() + " must declare a return type",
+					error("The "+(function.isNative()?"native":"abstract")+" method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " must declare a return type",
 							XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
 				}
 			} else if(function.eContainer() instanceof XtendInterface) {
@@ -999,7 +1006,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					return;
 				}
 				if(function.getReturnType() == null && !function.isOverride()) {
-					error("The abstract method " + function.getName() + " in type " + declarator.getName() + " must declare a return type",
+					error("The abstract method " + function.getName() + " in type " + localClassAwareTypeNames.getReadableName(declarator) + " must declare a return type",
 							XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
 				}
 			}

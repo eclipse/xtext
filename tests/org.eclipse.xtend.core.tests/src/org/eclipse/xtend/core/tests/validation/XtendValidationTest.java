@@ -1553,6 +1553,12 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, MISSING_ABSTRACT);
     }
     
+    @Test public void testAbstractMethodsInAnonymousClass() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val f = new Object() { def String test() } }");
+    	helper.assertNoErrors(clazz.getMembers().get(0), XTEND_FUNCTION, MISSING_ABSTRACT);
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, MISSING_ABSTRACT_IN_ANONYMOUS);
+    }
+    
     @Test public void testAbstractMethodWithoutReturnType() throws Exception {
     	XtendClass clazz = clazz("abstract class Foo { def test() }");
     	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, ABSTRACT_METHOD_MISSING_RETURN_TYPE);

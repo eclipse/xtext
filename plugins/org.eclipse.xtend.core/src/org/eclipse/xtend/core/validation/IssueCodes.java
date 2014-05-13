@@ -41,6 +41,7 @@ public final class IssueCodes {
 	public static final String DUPLICATE_FIELD = ISSUE_CODE_PREFIX + "duplicate_field";
 	public static final String DUPLICATE_TYPE_NAME = ISSUE_CODE_PREFIX + "duplicate_class";
 	public static final String MISSING_ABSTRACT = ISSUE_CODE_PREFIX + "missing_abstract";
+	public static final String MISSING_ABSTRACT_IN_ANONYMOUS = ISSUE_CODE_PREFIX + "missing_abstract_in_anonymous";
 	public static final String MISSING_OVERRIDE = ISSUE_CODE_PREFIX + "missing_override";
 	public static final String OBSOLETE_OVERRIDE = ISSUE_CODE_PREFIX + "obsolete_override";
 	public static final String STATIC_PROPERTY = ISSUE_CODE_PREFIX + "static_property";

@@ -7,16 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.typesystem;
 
+import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.HumanReadableTypeNames;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class LocalClassAwareTypeNames extends HumanReadableTypeNames {
 
+	@Inject
+	private AnonymousClassUtil anonymousClassUtil;
+	
 	@Override
 	protected void doVisitParameterizedTypeReference(ParameterizedTypeReference reference, StringBuilder param) {
 		JvmType type = reference.getType();
@@ -30,6 +39,14 @@ public class LocalClassAwareTypeNames extends HumanReadableTypeNames {
 			}
 		}
 		super.doVisitParameterizedTypeReference(reference, param);
+	}
+	
+	public String getReadableName(XtendTypeDeclaration typeDeclaration) {
+		if (typeDeclaration.isAnonymous()) {
+			JvmGenericType superType = anonymousClassUtil.getSuperType((AnonymousClass) typeDeclaration);
+			return "new " + superType.getSimpleName() + "(){}";
+		}
+		return typeDeclaration.getName();
 	}
 	
 }
