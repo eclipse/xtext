@@ -95,7 +95,7 @@ public class UnresolvableFeatureCall extends AbstractUnresolvableReferenceWithNo
 						if (argumentType == null || argumentType.isAny()) {
 							argumentTypesBuilder.append("Object");
 						} else {
-							argumentTypesBuilder.append(argumentType.getSimpleName());
+							argumentTypesBuilder.append(argumentType.getHumanReadableName());
 						}
 					}
 					argumentTypes = argumentTypesBuilder.toString();

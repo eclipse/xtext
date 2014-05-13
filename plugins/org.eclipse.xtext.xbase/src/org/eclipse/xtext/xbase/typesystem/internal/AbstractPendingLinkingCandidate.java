@@ -128,7 +128,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			for(int i=0; i<getArguments().size(); ++i) {
 				LightweightTypeReference actualType = getActualType(getArguments().get(i));
 				if(actualType != null) 
-					b.append(actualType.getSimpleName());
+					b.append(actualType.getHumanReadableName());
 				else 
 					b.append("null");
 				if(i < getArguments().size()-1)
@@ -153,7 +153,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			for(int i=0; i<parameters.size(); ++i) {
 				JvmTypeReference parameterType = parameters.get(i).getParameterType();
 				LightweightTypeReference typeReference = ownedConverter.toLightweightReference(parameterType);
-				b.append(typeReference.getSimpleName());
+				b.append(typeReference.getHumanReadableName());
 				if(i < parameters.size()-1)
 					b.append(", ");
 			}
@@ -206,7 +206,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					b.append(" extends ");
 				} else 
 					b.append(" super ");
-				b.append(typeRef.getSimpleName());
+				b.append(typeRef.getHumanReadableName());
 			}
 		}
 		return b.toString();
@@ -221,7 +221,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			StringBuilder b = new StringBuilder();
 			b.append("<");
 			for(int i=0; i<typeArguments.size(); ++i) {
-				b.append(typeArguments.get(i).getSimpleName());
+				b.append(typeArguments.get(i).getHumanReadableName());
 				if(i < typeArguments.size()-1)
 					b.append(", ");
 			}
@@ -404,7 +404,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 						IterableExtensions.join(unhandledExceptions.subList(0, count - 1), ", "),
 						unhandledExceptions.get(count - 1));
 			} else {
-				message = String.format("Unhandled exception type %s", unhandledExceptions.get(0).getSimpleName());
+				message = String.format("Unhandled exception type %s", unhandledExceptions.get(0).getHumanReadableName());
 			}
 			String[] data = new String[unhandledExceptions.size() + 1];
 			for(int i = 0; i < data.length - 1; i++) {

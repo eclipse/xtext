@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.HumanReadableTypeNames;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
@@ -573,8 +574,26 @@ public abstract class LightweightTypeReference {
 		return getSimpleName();
 	}
 	
+	/**
+	 * Prints the simple name of this type reference. Useful for testing.
+	 */
 	public abstract String getSimpleName();
 	
+	/**
+	 * Prints a human readable name of this type reference. May be specialized
+	 * by means of a custom {@link HumanReadableTypeNames implementation}. This is the variant
+	 * that should be used in the UI.
+	 */
+	public String getHumanReadableName() {
+		StringBuilder result = new StringBuilder();
+		accept(getServices().getHumanReadableTypeNames(), result);
+		return result.toString();
+	}
+	
+	/**
+	 * Returns the identifier of this type reference. Usually the qualified name with
+	 * a dollar delimiter.
+	 */
 	public abstract String getIdentifier();
 	
 	/**
