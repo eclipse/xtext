@@ -897,7 +897,7 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 
 	@Test public void testAnonymousClassMustBeAbstract() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { val foo = new Runnable() {} }");
-		helper.assertError(xtendClass, ANONYMOUS_CLASS, CLASS_MUST_BE_ABSTRACT, "The anonymous subclass of Runnable must be defined abstract");
+		helper.assertError(xtendClass, ANONYMOUS_CLASS, ANONYMOUS_CLASS_MISSING_MEMBERS, "The anonymous subclass of Runnable does not implement run()");
 	}
 
 	@Test public void testAnonymousClassIncompatibleSignature_0() throws Exception {

@@ -1824,6 +1824,49 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void missingConcreteMembers3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val r = new Runnab|le {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("C.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.ANONYMOUS_CLASS_MISSING_MEMBERS);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Add unimplemented methods");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class C {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val r = new Runnable {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("override run() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append(QuickfixTest.defaultBody, "\t\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix("Add unimplemented methods", _builder_1);
+  }
+  
+  @Test
   public void missingOperatorSameClass() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");

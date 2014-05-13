@@ -705,10 +705,11 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (xtendClass.isAnonymous()) {
 			JvmTypeReference superType = inferredType.getSuperTypes().get(0);
 			errorMsg.append("The anonymous subclass of ").append(superType.getSimpleName());
+			errorMsg.append(" does not implement ");
 		} else {
 			errorMsg.append("The class ").append(name);	
+			errorMsg.append(" must be defined abstract because it does not implement ");
 		}
-		errorMsg.append(" must be defined abstract because it does not implement ");
 		boolean needsNewLine = operationsMissingImplementation.size() > 1;
 		IResolvedOperation operation;
 		for(int i=0; i<operationsMissingImplementation.size() && i<3; ++i) {
@@ -725,7 +726,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				return EcoreUtil.getURI(from.getDeclaration()).toString();
 			}
 		});
-		error(errorMsg.toString(), xtendClass, XTEND_TYPE_DECLARATION__NAME, CLASS_MUST_BE_ABSTRACT, 
+		error(errorMsg.toString(), xtendClass, XTEND_TYPE_DECLARATION__NAME, xtendClass.isAnonymous() ? ANONYMOUS_CLASS_MISSING_MEMBERS : CLASS_MUST_BE_ABSTRACT, 
 						toArray(uris, String.class));
 	}
 	

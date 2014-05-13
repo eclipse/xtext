@@ -954,6 +954,29 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
+	@Test
+	def void missingConcreteMembers3() {
+		create('C.xtend', '''
+			class C {
+				val r = new Runnab|le {
+				}
+			}
+		''')
+		.assertIssueCodes(ANONYMOUS_CLASS_MISSING_MEMBERS)
+		.assertResolutionLabels("Add unimplemented methods")
+		.assertModelAfterQuickfix("Add unimplemented methods", '''
+			class C {
+				val r = new Runnable {
+					
+					override run() {
+						«defaultBody»
+					}
+					
+				}
+			}
+		''')
+	}
+	
 	@Test 
 	def void missingOperatorSameClass() {
 		create('Foo.xtend', '''
