@@ -236,7 +236,7 @@ public class ImplementMemberFromSuperAssist {
 		if (executable instanceof IResolvedOperation) {
 			IResolvedOperation resolvedOperation = (IResolvedOperation) executable;
 			return new StyledString(resolvedOperation.getSimpleSignature()).append(
-					" - Override method from " + resolvedOperation.getResolvedDeclarator().getSimpleName(),
+					" - Override method from " + resolvedOperation.getResolvedDeclarator().getHumanReadableName(),
 					StyledString.QUALIFIER_STYLER);
 		} else {
 			return new StyledString("Add constructor 'new " + executable.getSimpleSignature() + "'");

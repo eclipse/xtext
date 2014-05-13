@@ -24,7 +24,6 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtend.ide.labeling.HumanReadableTypeReferenceSerializer;
 import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -41,7 +40,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
@@ -279,17 +277,6 @@ public class XtendLabelProvider extends XbaseLabelProvider {
         }
       }
       _xblockexpression = null;
-    }
-    return _xblockexpression;
-  }
-  
-  protected String toSimpleName(final LightweightTypeReference ref) {
-    String _xblockexpression = null;
-    {
-      final StringBuilder result = new StringBuilder();
-      HumanReadableTypeReferenceSerializer _humanReadableTypeReferenceSerializer = new HumanReadableTypeReferenceSerializer();
-      ref.<StringBuilder>accept(_humanReadableTypeReferenceSerializer, result);
-      _xblockexpression = result.toString();
     }
     return _xblockexpression;
   }

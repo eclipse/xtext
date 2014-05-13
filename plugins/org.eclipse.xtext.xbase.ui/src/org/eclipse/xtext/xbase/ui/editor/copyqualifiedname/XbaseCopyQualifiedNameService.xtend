@@ -66,7 +66,7 @@ class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameService {
 		extension IResolvedTypes resolvedTypes, List<XExpression> arguments) {
 		val actualType = actualType
 		if (actualType != null && !actualType.any && !actualType.unknown) {
-			return actualType.simpleName
+			return actualType.humanReadableName
 		}
 		val index = arguments.indexOf(it)
 		if (resolvedExecutable == null) {
