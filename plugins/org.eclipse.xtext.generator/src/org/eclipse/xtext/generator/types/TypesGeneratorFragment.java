@@ -20,7 +20,7 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class TypesGeneratorFragment extends DefaultGeneratorFragment {
-
+	
 	static {
 		new StandaloneSetup().addRegisterGeneratedEPackage("org.eclipse.xtext.common.types.TypesPackage");
 	}
@@ -63,7 +63,12 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 
 	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
-		return new String[] { "org.eclipse.xtext.common.types" };
+		return new String[] { "org.eclipse.xtext.common.types","org.objectweb.asm" };
+	}
+	
+	@Override
+	public String[] getRequiredBundlesTests(Grammar grammar) {
+		return new String[] { "org.objectweb.asm" };
 	}
 
 	@Override
