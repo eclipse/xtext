@@ -726,8 +726,13 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				return EcoreUtil.getURI(from.getDeclaration()).toString();
 			}
 		});
-		error(errorMsg.toString(), xtendClass, XTEND_TYPE_DECLARATION__NAME, xtendClass.isAnonymous() ? ANONYMOUS_CLASS_MISSING_MEMBERS : CLASS_MUST_BE_ABSTRACT, 
-						toArray(uris, String.class));
+		if (xtendClass.isAnonymous()) {
+			error(errorMsg.toString(), xtendClass, ANONYMOUS_CLASS__CONSTRUCTOR_CALL, ANONYMOUS_CLASS_MISSING_MEMBERS, 
+					toArray(uris, String.class));
+		} else {
+			error(errorMsg.toString(), xtendClass, XTEND_TYPE_DECLARATION__NAME, CLASS_MUST_BE_ABSTRACT, 
+							toArray(uris, String.class));
+		}
 	}
 	
 	protected void doCheckFunctionOverrides(ResolvedOperations resolvedOperations, Set<EObject> flaggedOperations) {
