@@ -110,25 +110,36 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	}
 
 	protected void searchAndHighlightElements(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		TreeIterator<EObject> iterator = EcoreUtil2.eAll(resource.getParseResult().getRootASTElement());
+		EObject element = resource.getParseResult().getRootASTElement();
+		highlightElementRecursively(element, acceptor);
+	}
+
+	protected void highlightElementRecursively(EObject element, IHighlightedPositionAcceptor acceptor) {
+		TreeIterator<EObject> iterator = EcoreUtil2.eAll(element);
 		while (iterator.hasNext()) {
 			EObject object = iterator.next();
-			if (object instanceof XAbstractFeatureCall) {
-				if (((XAbstractFeatureCall) object).isPackageFragment()) {
-					iterator.prune();
-					continue;
-				}
-				computeFeatureCallHighlighting((XAbstractFeatureCall) object, acceptor);
-			}
-			// Handle XAnnotation in a special way because we want the @ highlighted too
-			if (object instanceof XNumberLiteral) {
-				highlightNumberLiterals((XNumberLiteral) object, acceptor);
-			} if (object instanceof XAnnotation) {
-				highlightAnnotation((XAnnotation) object, acceptor);
-			} else {
-				computeReferencedJvmTypeHighlighting(acceptor, object);
+			if (highlightElement(object, acceptor)) {
+				iterator.prune();
 			}
 		}
+	}
+
+	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
+		if (object instanceof XAbstractFeatureCall) {
+			if (((XAbstractFeatureCall) object).isPackageFragment()) {
+				return true;
+			}
+			computeFeatureCallHighlighting((XAbstractFeatureCall) object, acceptor);
+		}
+		// Handle XAnnotation in a special way because we want the @ highlighted too
+		if (object instanceof XNumberLiteral) {
+			highlightNumberLiterals((XNumberLiteral) object, acceptor);
+		} if (object instanceof XAnnotation) {
+			highlightAnnotation((XAnnotation) object, acceptor);
+		} else {
+			computeReferencedJvmTypeHighlighting(acceptor, object);
+		}
+		return false;
 	}
 
 	protected void computeReferencedJvmTypeHighlighting(IHighlightedPositionAcceptor acceptor, EObject referencer) {
