@@ -51,6 +51,7 @@ public final class IssueCodes {
 	public static final String JDK_NOT_ON_CLASSPATH = ISSUE_CODE_PREFIX + "jdk_not_on_classpath";
 
 	public static final String CLASS_MUST_BE_ABSTRACT = ISSUE_CODE_PREFIX + "class_must_be_defined_abstract";
+	public static final String ANONYMOUS_CLASS_MISSING_MEMBERS = ISSUE_CODE_PREFIX + "anonymous_class_missing_members";
 	public static final String DUPLICATE_PARAMETER_NAME = ISSUE_CODE_PREFIX + "duplicate_parameter_name";
 
 	public static final String OVERRIDDEN_FINAL = ISSUE_CODE_PREFIX + "overridden_final";

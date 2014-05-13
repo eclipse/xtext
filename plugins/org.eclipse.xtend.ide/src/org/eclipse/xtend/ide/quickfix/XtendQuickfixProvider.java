@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.quickfix;
 
 import static com.google.common.collect.Sets.*;
+import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtend.ide.codebuilder.MemberFromSuperImplementor;
@@ -241,18 +243,35 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	
 	@Fix(IssueCodes.CLASS_MUST_BE_ABSTRACT)
 	public void implementAbstractMethods(final Issue issue, IssueResolutionAcceptor acceptor) {
+		doImplementAbstractMethods(issue, acceptor);
+		acceptor.accept(issue, "Make class abstract", "Make class abstract", "fix_indent.gif",
+				new ISemanticModification() {
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				internalDoAddAbstractKeyword(element, context);
+			}
+		});
+	}
+
+	@Fix(IssueCodes.ANONYMOUS_CLASS_MISSING_MEMBERS)
+	public void implementAbstractMethodsInAnonymousClass(final Issue issue, IssueResolutionAcceptor acceptor) {
+		doImplementAbstractMethods(issue, acceptor);
+	}
+	
+	protected void doImplementAbstractMethods(final Issue issue, IssueResolutionAcceptor acceptor) {
 		if (issue.getData() != null && issue.getData().length > 0) {
 			acceptor.accept(issue, "Add unimplemented methods", "Add unimplemented methods", "fix_indent.gif",
 					new ISemanticModification() {
 						public void apply(EObject element, IModificationContext context) throws Exception {
-							XtendClass clazz = (XtendClass) element;
-							JvmGenericType inferredType = associations.getInferredType(clazz);
+							XtendTypeDeclaration clazz = (XtendTypeDeclaration) element;
+							JvmGenericType inferredType = (JvmGenericType) associations.getInferredType(clazz);
 							ResolvedOperations resolvedOperations = overrideHelper.getResolvedOperations(inferredType);
 							IXtextDocument document = context.getXtextDocument();
+							final int offset = insertionOffsets.getNewMethodInsertOffset(null, clazz);
+							final int currentIndentation = appendableFactory.getIndentationLevelAtOffset(offset, document, (XtextResource) clazz.eResource());
 							ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) clazz.eResource(),
-									insertionOffsets.getNewMethodInsertOffset(null, clazz), 0, new OptionalParameters() {{ 
+									offset, 0, new OptionalParameters() {{ 
 										ensureEmptyLinesAround = true;
-										baseIndentationLevel = 1;	
+										baseIndentationLevel = currentIndentation + 1;	
 									}});
 							boolean isFirst = true;
 							for (String operationUriAsString : issue.getData()) {
@@ -271,12 +290,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 						}
 					});
 		}
-		acceptor.accept(issue, "Make class abstract", "Make class abstract", "fix_indent.gif",
-				new ISemanticModification() {
-			public void apply(EObject element, IModificationContext context) throws Exception {
-				internalDoAddAbstractKeyword(element, context);
-			}
-		});
 	}
 
 	@Fix(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION)
