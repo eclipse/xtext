@@ -195,16 +195,16 @@ public class RootResolvedTypes extends ResolvedTypes {
 			}
 			if (expression.eContainingFeature() == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT) {
 				return new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, String.format(
-						"Type mismatch: cannot convert implicit first argument from %s to %s", actualType.getSimpleName(), expectedType.getSimpleName()),
+						"Type mismatch: cannot convert implicit first argument from %s to %s", actualType.getHumanReadableName(), expectedType.getHumanReadableName()),
 						expression, null, -1, null);
 			} else {
 				return new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, String.format(
-						"Type mismatch: cannot convert from %s to %s", actualType.getSimpleName(), expectedType.getSimpleName()),
+						"Type mismatch: cannot convert from %s to %s", actualType.getHumanReadableName(), expectedType.getHumanReadableName()),
 						expression, null, -1, null);
 			}
 		} else {
 			return new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, String.format(
-					"Type mismatch: type %s is not applicable at this location", actualType.getSimpleName()), expression, null, -1,
+					"Type mismatch: type %s is not applicable at this location", actualType.getHumanReadableName()), expression, null, -1,
 					null);
 		}
 	}

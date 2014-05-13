@@ -66,6 +66,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.LocalTypeSubstitutor;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
 import org.eclipse.xtext.xbase.ui.quickfix.ILinkingIssueQuickfixProvider;
@@ -282,7 +283,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		LightweightTypeReference returnType = getNewMemberType(call);
 		if(callersType == null || receiverType == null)
 			return;
-		List<LightweightTypeReference> argumentTypes = getResolvedArgumentTypes(call, call.getActualArguments());
+		List<LightweightTypeReference> argumentTypes = getResolvedArgumentTypes(call, logicalContainerProvider.getNearestLogicalContainer(call), call.getActualArguments());
 		newMethodQuickfixes(receiverType, newMemberName, returnType, argumentTypes, call, callersType, issue,
 				issueResolutionAcceptor);
 	}
@@ -396,7 +397,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected void newConstructorQuickfix(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			JvmDeclaredType ownerType, XExpression call, List<XExpression> arguments) {
 		if(ownerType != null) {
-			List<LightweightTypeReference> parameterTypes = getResolvedArgumentTypes(call, arguments);
+			List<LightweightTypeReference> parameterTypes = getResolvedArgumentTypes(call, logicalContainerProvider.getNearestLogicalContainer(call), arguments);
 			AbstractConstructorBuilder constructorBuilder = codeBuilderFactory.createConstructorBuilder(ownerType);
 			constructorBuilder.setContext(call);
 			for(LightweightTypeReference parameterType: parameterTypes) 
@@ -453,7 +454,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		return "null";
 	}
 
-	protected List<LightweightTypeReference> getResolvedArgumentTypes(EObject context, List<XExpression> arguments) {
+	protected List<LightweightTypeReference> getResolvedArgumentTypes(EObject context, JvmIdentifiableElement logicalContainer, List<XExpression> arguments) {
 		List<LightweightTypeReference> argumentTypes = newArrayList();
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(context);
 		for(XExpression argument: arguments) {
@@ -462,7 +463,8 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 				StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
 				argumentTypes.add(new ParameterizedTypeReference(owner, services.getTypeReferences().findDeclaredType(Object.class, context)));
 			} else {
-				argumentTypes.add(resolved);
+				LocalTypeSubstitutor substitutor = new LocalTypeSubstitutor(resolved.getOwner(), logicalContainer);
+				argumentTypes.add(substitutor.withoutLocalTypes(resolved));
 			}
 		}
 		return argumentTypes;

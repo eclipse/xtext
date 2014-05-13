@@ -5,12 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.labeling;
+package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.List;
 
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -25,7 +23,7 @@ import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class HumanReadableTypeReferenceSerializer extends TypeReferenceVisitorWithParameter<StringBuilder> {
+public class HumanReadableTypeNames extends TypeReferenceVisitorWithParameter<StringBuilder> {
 
 	@Override
 	protected void doVisitTypeReference(LightweightTypeReference reference, StringBuilder param) {
@@ -62,17 +60,7 @@ public class HumanReadableTypeReferenceSerializer extends TypeReferenceVisitorWi
 	
 	@Override
 	protected void doVisitParameterizedTypeReference(ParameterizedTypeReference reference, StringBuilder param) {
-		JvmType type = reference.getType();
-		if (type instanceof JvmDeclaredType) {
-			boolean local = ((JvmDeclaredType) type).isLocal();
-			if (local) {
-				param.append("new ");
-				reference.getSuperTypes().get(0).accept(this, param);
-				param.append("(){}");
-				return;
-			}
-		}
-		param.append(type.getSimpleName());
+		param.append(reference.getType().getSimpleName());
 		List<LightweightTypeReference> typeArguments = reference.getTypeArguments();
 		if (!typeArguments.isEmpty()) {
 			param.append("<");

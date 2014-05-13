@@ -214,7 +214,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 									resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
 										Severity.ERROR,
 										org.eclipse.xtend.core.validation.IssueCodes.DISPATCH_FUNCTIONS_INVALID_PARAMETER_TYPE,
-										"Dispatch function cannot widen inherited parameter type " + inheritedParameterType.getSimpleName(),
+										"Dispatch function cannot widen inherited parameter type " + inheritedParameterType.getHumanReadableName(),
 										xtendParameter.getParameterType(),
 										null,
 										-1,
