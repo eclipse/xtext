@@ -28,6 +28,7 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.core.ClasspathAccessRule;
 import org.eclipse.jdt.internal.core.JavaProject;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -35,7 +36,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
-import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -59,9 +59,6 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	@Inject
 	private IJavaElementFinder javaElementFinder;
 	
-	@Inject
-	private OnChangeEvictingCache cache;
-
 	@Override
 	protected List<EPackage> getEPackages() {
 		return newArrayList(TypesPackage.eINSTANCE, XtypePackage.eINSTANCE, XbasePackage.eINSTANCE);
@@ -80,7 +77,10 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	public void checkRestrictedType(XConstructorCall constructorCall) {
 		if (isRestrictionCheckIgnored())
 			return;
-		JvmDeclaredType declaringType = constructorCall.getConstructor().getDeclaringType();
+		JvmConstructor constructor = constructorCall.getConstructor();
+		if (constructor == null)
+			return;
+		JvmDeclaredType declaringType = constructor.getDeclaringType();
 		checkRestrictedType(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, declaringType);
 	}
 
