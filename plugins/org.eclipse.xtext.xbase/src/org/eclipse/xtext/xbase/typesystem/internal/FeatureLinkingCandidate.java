@@ -145,7 +145,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			LightweightTypeReference expectedType = getActualType(getArguments().get(0));
 			if (!expectedType.getIdentifier().equals(actualType.getIdentifier())) {
 				AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, String.format(
-						"Type mismatch: cannot convert from %s to %s", actualType.getSimpleName(), expectedType.getSimpleName()),
+						"Type mismatch: cannot convert from %s to %s", actualType.getHumanReadableName(), expectedType.getHumanReadableName()),
 						getExpression(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 				result.accept(diagnostic);
 				return false;
@@ -243,7 +243,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 					throw new IllegalStateException();
 				}
 				receiverType = receiverType.getTypeArguments().get(0);
-				String message = String.format("The syntax for type literals is typeof(%s) or %s.", receiverType.getSimpleName(), receiverType.getSimpleName());
+				String message = String.format("The syntax for type literals is typeof(%s) or %s.", receiverType.getHumanReadableName(), receiverType.getHumanReadableName());
 				AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 						Severity.ERROR,
 						IssueCodes.UNEXPECTED_INVOCATION_ON_TYPE_LITERAL,
