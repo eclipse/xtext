@@ -9,27 +9,27 @@ package org.eclipse.xtend.core.imports;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
-import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.imports.TypeUsageCollector;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class XtendTypeUsageCollector extends TypeUsageCollector {
 
+	@Inject
+	private AnonymousClassUtil anonymousClassUtil;
+	
 	@Override
 	protected JvmIdentifiableElement getReferencedElement(EObject owner, EReference reference) {
-		JvmIdentifiableElement referencedThing = super.getReferencedElement(owner, reference);
-		if(owner instanceof XConstructorCall && owner.eContainer() instanceof AnonymousClass && referencedThing instanceof JvmConstructor && 
-				((JvmConstructor) referencedThing).getDeclaringType() instanceof JvmGenericType) {
-			JvmGenericType referencedType = (JvmGenericType) ((JvmConstructor) referencedThing).getDeclaringType();
-			if(referencedType.getSuperTypes().size() == 1) 
-				referencedThing = referencedType.getSuperTypes().get(0).getType();
+		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR && owner.eContainer() instanceof AnonymousClass) {
+			return anonymousClassUtil.getSuperType((AnonymousClass) owner.eContainer());
 		}
-		return referencedThing;
+		return super.getReferencedElement(owner, reference);
 	}
 }

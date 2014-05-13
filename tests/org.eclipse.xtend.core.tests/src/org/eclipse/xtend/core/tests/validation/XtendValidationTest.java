@@ -1269,6 +1269,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz("import org.eclipse.xtext.xbase.XbasePackage class X { var x = XbasePackage$Literals::XEXPRESSION }");
 		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
 	}
+	
+	@Test public void testImportUnused_12() throws Exception {
+		XtendClass clazz = clazz("import java.util.ArrayList class X { public val list = new ArrayList<String> {} }");
+		helper.assertNoIssues(clazz.eContainer());
+	}
 
 	@Test public void testStaticImportUnused_0() throws Exception {
 		XtendClass clazz = clazz("import static java.util.Collections.* class X {}");
