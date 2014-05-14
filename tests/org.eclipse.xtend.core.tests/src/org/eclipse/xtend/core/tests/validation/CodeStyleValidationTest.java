@@ -132,4 +132,16 @@ public class CodeStyleValidationTest extends AbstractXtendTestCase {
 		XtendField field = field("public val f");
 		helper.assertNoIssue(field, XTEND_FIELD, API_TYPE_INFERENCE);
 	}
+	
+	@Test public void testNoImplicitReturnForVoidMethods() throws Exception {
+		preferences.put(IssueCodes.IMPLICIT_RETURN, "error");
+		XtendFunction method = function("def m() {println(1)}");
+		helper.assertNoIssue(method, XTEND_FUNCTION, IMPLICIT_RETURN);
+	}
+	
+	@Test public void testNoImplicitReturnForVoidMethods2() throws Exception {
+		preferences.put(IssueCodes.IMPLICIT_RETURN, "error");
+		XtendFunction method = function("def void m(int x) {this.x = x}");
+		helper.assertNoIssue(method, XTEND_FUNCTION, IMPLICIT_RETURN);
+	}
 }
