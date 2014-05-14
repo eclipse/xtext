@@ -148,4 +148,40 @@ class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestCase {
 		'''.parse.assertError(XbasePackage.Literals.XFEATURE_CALL, IssueCodes.ASSIGNMENT_TO_NO_VARIABLE)
 	}
 
+	@Test def void test_9() {
+		'''
+			import static extension compound.IntCompoundExtensions.*
+			
+			class Foo {
+				
+				def foo() {
+					var foo = new Foo
+					foo += new Foo
+				}
+				
+				def operator_plus(Foo other) {
+					other
+				}
+			}
+		'''.parse.assertNoErrors
+	}
+
+	@Test def void test_10() {
+		'''
+			import static extension compound.IntCompoundExtensions.*
+			
+			class Foo {
+				
+				def foo() {
+					var foo = new Foo
+					foo += new Foo
+				}
+				
+				def operator_plus(Foo one, Foo another) {
+					another
+				}
+			}
+		'''.parse.assertNoErrors
+	}
+
 }
