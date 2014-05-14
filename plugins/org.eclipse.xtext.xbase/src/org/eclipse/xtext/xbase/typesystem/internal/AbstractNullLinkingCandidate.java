@@ -44,7 +44,7 @@ public abstract class AbstractNullLinkingCandidate implements ILinkingCandidate 
 	}
 
 	public JvmIdentifiableElement getFeature() {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	public List<LightweightTypeReference> getTypeArguments() {

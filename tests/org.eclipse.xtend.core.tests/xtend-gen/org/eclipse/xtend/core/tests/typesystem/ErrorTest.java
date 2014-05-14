@@ -2817,6 +2817,23 @@ public class ErrorTest extends AbstractXtendTestCase {
     this._oven.fireproof(_builder.toString());
   }
   
+  @Test
+  public void testErrorModel_102() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x class Y {def String rawListGet(java.util.List elements) {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("if (elements.(0) instanceof String) {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\'string\'");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("} else {    \'no string\'  }}}");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");

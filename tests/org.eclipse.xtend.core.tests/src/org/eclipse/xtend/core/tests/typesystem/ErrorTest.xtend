@@ -1496,6 +1496,16 @@ class ErrorTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test
+	def void testErrorModel_102() throws Exception {
+		fireproof('''
+			package x class Y {def String rawListGet(java.util.List elements) {
+			  if (elements.(0) instanceof String) {
+			    'string'
+			  } else {    'no string'  }}}
+		''')
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
