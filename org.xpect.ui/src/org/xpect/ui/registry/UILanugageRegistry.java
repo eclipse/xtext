@@ -15,11 +15,11 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.osgi.framework.internal.core.BundleContextImpl;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.Modules2;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.xpect.registry.AbstractLanguageInfo;
 import org.xpect.registry.IEmfFileExtensionInfo;
@@ -35,7 +35,6 @@ import com.google.inject.Module;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class UILanugageRegistry implements ILanguageInfo.Registry {
 
 	public static class UILanguageInfo extends AbstractLanguageInfo {
@@ -64,7 +63,10 @@ public class UILanugageRegistry implements ILanguageInfo.Registry {
 				try {
 					Class<? extends Module> uiModuleClass = getUIModuleClass();
 					Bundle bundle = FrameworkUtil.getBundle(uiModuleClass);
-					Plugin plugin = ReflectionUtil.readField(BundleContextImpl.class, bundle.getBundleContext(), "activator", Plugin.class);
+					BundleContext context = bundle.getBundleContext();
+					// in Kepler, context.getClass() is org.eclipse.osgi.framework.internal.core.BundleContextImpl
+					// in Luna, context.getClass() is org.eclipse.osgi.internal.framework.BundleContextImpl
+					Plugin plugin = ReflectionUtil.readField(context.getClass(), context, "activator", Plugin.class);
 					if (plugin == null)
 						throw new IllegalStateException("Could not access Activator of bundle '" + bundle.getBundleId() + "'. ");
 					Constructor<?> constructor = uiModuleClass.getConstructor(AbstractUIPlugin.class);
