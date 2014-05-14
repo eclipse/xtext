@@ -10,8 +10,8 @@
  *******************************************************************************/
  package euler
 
-import static extension java.lang.Integer.*
-import static extension java.lang.Math.*
+import static extension java.lang.Integer.parseInt
+import static extension java.lang.Math.max
 
 /**
  * Find the greatest product of five consecutive digits in the 1000-digit number.
