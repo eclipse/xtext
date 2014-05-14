@@ -311,4 +311,90 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void test_9() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import static extension compound.IntCompoundExtensions.*");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def foo() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("var foo = new Foo");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("foo += new Foo");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def operator_plus(Foo other) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("other");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _parse = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test_10() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import static extension compound.IntCompoundExtensions.*");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def foo() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("var foo = new Foo");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("foo += new Foo");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def operator_plus(Foo one, Foo another) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("another");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _parse = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

@@ -1543,8 +1543,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Check
 	public void checkAssignment(XBinaryOperation binaryOperation) {
 		if (binaryOperation.isReassignFirstArgument()) {
-			XExpression firstArgument = binaryOperation.getActualArguments().get(0);
-			checkAssignment(firstArgument, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);	
+			XExpression leftOperand = binaryOperation.getLeftOperand();
+			checkAssignment(leftOperand, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);	
 		}
 	}
 	
