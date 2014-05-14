@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.XSynchronizedExpression
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression
 import org.eclipse.xtext.xbase.XTypeLiteral
-import org.eclipse.xtext.xbase.XAssignment
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -37,9 +36,6 @@ class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
 	def dispatch findImplicitReturns(XExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
 	}
 	
-	def dispatch findImplicitReturns(XAssignment expression, ImplicitReturnFinder.Acceptor acceptor) {
-	}
-
 	def dispatch findImplicitReturns(XNumberLiteral expression, ImplicitReturnFinder.Acceptor acceptor) {
 		acceptor.accept(expression)
 	}
