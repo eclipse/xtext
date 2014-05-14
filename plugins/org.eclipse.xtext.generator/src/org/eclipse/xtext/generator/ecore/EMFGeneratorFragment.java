@@ -533,7 +533,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 
 	public String getEditDirectory(XpandExecutionContext ctx) {
 		if (this.editDirectory == null || "".equals(this.editDirectory)) {
-			this.editDirectory = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.PLUGIN_RT).getPath()
+			return ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.PLUGIN_RT).getPath()
 					+ ".edit/src";
 		}
 		return editDirectory;
@@ -541,7 +541,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 
 	public String getEditorDirectory(XpandExecutionContext ctx) {
 		if (editorDirectory == null || "".equals(editorDirectory)) {
-			editorDirectory = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.PLUGIN_RT).getPath()
+			return ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.PLUGIN_RT).getPath()
 					+ ".editor/src";
 		}
 		return editorDirectory;
@@ -549,14 +549,14 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 
 	protected String getEditorPluginID(XpandExecutionContext ctx) {
 		if ((editorPluginID == null || "".equals(editorPluginID)) && (getModelPluginID(ctx) != null)) {
-			editorPluginID = getModelPluginID(ctx) + ".editor";
+			return getModelPluginID(ctx) + ".editor";
 		}
 		return editorPluginID;
 	}
 
 	public String getEditPluginID(XpandExecutionContext ctx) {
 		if ((editPluginID == null || "".equals(editPluginID)) && (getModelPluginID(ctx) != null)) {
-			editPluginID = getModelPluginID(ctx) + ".edit";
+			return getModelPluginID(ctx) + ".edit";
 		}
 		return editPluginID;
 	}
@@ -670,7 +670,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 
 	public String getModelPluginID(XpandExecutionContext ctx) {
 		if ((this.modelPluginID == null || "".equals(this.modelPluginID)) && (ctx.getVariable(MODEL_PLUGIN_ID) != null)) {
-			this.modelPluginID = (String) ctx.getVariable(MODEL_PLUGIN_ID).getValue();
+			return (String) ctx.getVariable(MODEL_PLUGIN_ID).getValue();
 		}
 		return modelPluginID;
 	}
