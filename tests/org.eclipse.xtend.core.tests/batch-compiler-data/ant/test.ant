@@ -34,7 +34,7 @@
 			<include name="org.eclipse.emf.ecore*.jar" />
 			<include name="org.eclipse.emf.common_*.jar" />
 			<include name="org.eclipse.emf.codegen_*.jar" />
-			<include name="com.google.guava_10*.jar" />
+			<include name="com.google.guava_*.jar" />
 			<include name="com.google.inject_*.jar" />
 			<include name="javax.injec*.jar" />
 			<include name="org.eclipse.equinox.common*.jar" />
