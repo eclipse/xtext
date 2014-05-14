@@ -11,6 +11,7 @@ import java.util.Arrays;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCastedExpression;
@@ -49,6 +50,9 @@ public class XtendImplicitReturnFinder extends XbaseImplicitReturnFinder {
       return;
     } else if (expression instanceof RichString) {
       _findImplicitReturns((RichString)expression, acceptor);
+      return;
+    } else if (expression instanceof XAssignment) {
+      _findImplicitReturns((XAssignment)expression, acceptor);
       return;
     } else if (expression instanceof XAbstractFeatureCall) {
       _findImplicitReturns((XAbstractFeatureCall)expression, acceptor);

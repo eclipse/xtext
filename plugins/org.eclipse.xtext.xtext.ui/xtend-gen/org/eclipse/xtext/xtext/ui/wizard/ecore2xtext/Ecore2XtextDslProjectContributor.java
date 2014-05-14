@@ -408,6 +408,14 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     _builder.append("\t\t\t");
     _builder.append("fragment = xbase.XbaseGeneratorFragment auto-inject {}");
     _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// generates the required bindings only if the grammar inherits from Xtype");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = xbase.XtypeGeneratorFragment auto-inject {}");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("// provides a preference page for template proposals");

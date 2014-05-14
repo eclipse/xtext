@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.validation;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -41,6 +42,9 @@ public class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
   }
   
   protected void _findImplicitReturns(final XExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
+  }
+  
+  protected void _findImplicitReturns(final XAssignment expression, final ImplicitReturnFinder.Acceptor acceptor) {
   }
   
   protected void _findImplicitReturns(final XNumberLiteral expression, final ImplicitReturnFinder.Acceptor acceptor) {
@@ -132,7 +136,10 @@ public class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
   }
   
   public void findImplicitReturns(final XExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
-    if (expression instanceof XAbstractFeatureCall) {
+    if (expression instanceof XAssignment) {
+      _findImplicitReturns((XAssignment)expression, acceptor);
+      return;
+    } else if (expression instanceof XAbstractFeatureCall) {
       _findImplicitReturns((XAbstractFeatureCall)expression, acceptor);
       return;
     } else if (expression instanceof XBlockExpression) {

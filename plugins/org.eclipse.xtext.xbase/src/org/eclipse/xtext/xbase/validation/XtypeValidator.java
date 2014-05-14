@@ -5,13 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping;
-
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+package org.eclipse.xtext.xbase.validation;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
  */
-public class XTypeScopeProvider extends AbstractDeclarativeScopeProvider {
+public class XtypeValidator extends XtypeJavaValidator {
 
 }

@@ -163,6 +163,9 @@ class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContributor 
 					
 					// generates the required bindings only if the grammar inherits from Xbase
 					fragment = xbase.XbaseGeneratorFragment auto-inject {}
+					
+					// generates the required bindings only if the grammar inherits from Xtype
+					fragment = xbase.XtypeGeneratorFragment auto-inject {}
 
 					// provides a preference page for template proposals
 					fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
