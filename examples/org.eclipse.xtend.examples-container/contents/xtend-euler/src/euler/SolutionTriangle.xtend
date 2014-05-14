@@ -10,8 +10,8 @@
  *******************************************************************************/
  package euler
 
-import static extension java.lang.Integer.*
-import static extension java.lang.Math.*
+import static extension java.lang.Integer.parseInt
+import static extension java.lang.Math.max
 import java.util.ArrayList
 import java.util.List
 
