@@ -12,6 +12,6 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 /**
  * @author Stefan Oehme - Initial contribution and API
  */
-public class XTypeQuickfixProvider extends DefaultQuickfixProvider {
+public class XtypeQuickfixProvider extends DefaultQuickfixProvider {
 
 }
