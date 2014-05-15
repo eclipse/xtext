@@ -2062,6 +2062,17 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	/**
+	 * @since 2.6
+	 */
+	@Test public void testXBasicForLoopExpression_16() throws Exception {
+		assertEvaluatesTo(8, 
+				"{\n" +
+				"  for (var i = 0; i < 10; i += 1) { if (i == 8) { return i } };\n" +
+				"  -1\n" +
+				"}");
+	}
+	
 	@Test public void testMemberFeatureCall_01() throws Exception {
 		assertEvaluatesTo("LITERAL", "'literal'.toUpperCase()");
 	}

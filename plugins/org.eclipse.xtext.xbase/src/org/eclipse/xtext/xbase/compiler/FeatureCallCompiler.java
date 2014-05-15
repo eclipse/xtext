@@ -303,6 +303,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	
 	@Override
 	protected boolean internalCanCompileToJavaExpression(XExpression expression, ITreeAppendable appendable) {
+		if (expression instanceof XBinaryOperation) {
+			XBinaryOperation binaryOperation = (XBinaryOperation) expression;
+			if (binaryOperation.isReassignFirstArgument()) {
+				return false;
+			}
+		}
 		if (expression instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expression;
 			for (XExpression arg : featureCall.getActualArguments()) {
