@@ -33,6 +33,52 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testGetSuper_01() {'''
+			class C {
+				def void m2(A a) {
+					a.super.m
+				}
+			}
+			class A {
+				def B getSuper() {
+				}
+			}
+			class B {
+				def void m() {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m2(final A a) {
+			    B _super = a.getSuper();
+			    _super.m();
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testGetSuper_02() {'''
+			class C {
+				def void m2(A it) {
+					super.toString
+				}
+			}
+			class A {
+				def Object getSuper() {
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m2(final A it) {
+			    super.toString();
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testOverloads() {'''
 			class A {
 				static class B {
