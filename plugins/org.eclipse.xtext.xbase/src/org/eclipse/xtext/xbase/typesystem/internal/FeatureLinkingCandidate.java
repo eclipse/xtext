@@ -915,7 +915,10 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	private boolean isThisOrSuper() {
-		return THIS.equals(description.getName()) || SUPER.equals(description.getName());
+		if ((THIS.equals(description.getName()) || SUPER.equals(description.getName())) && (description.getElementOrProxy() instanceof JvmType) && !isSyntacticReceiverPossibleArgument()) {
+			return true;
+		}
+		return false;
 	}
 	
 	private boolean isStaticWithDeclaringType(XExpression syntacticReceiver) {
