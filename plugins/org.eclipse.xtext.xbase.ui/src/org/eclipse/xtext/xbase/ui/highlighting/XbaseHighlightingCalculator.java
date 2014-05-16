@@ -11,7 +11,6 @@ import java.util.BitSet;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -100,30 +99,15 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	
 	@Override
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.doProvideHighlightingFor(resource, acceptor);
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult == null)
 			throw new IllegalStateException("resource#parseResult may not be null");
 		ICompositeNode node = parseResult.getRootNode();
 		highlightSpecialIdentifiers(acceptor, node);
-		searchAndHighlightElements(resource, acceptor);
+		super.doProvideHighlightingFor(resource, acceptor);
 	}
 
-	protected void searchAndHighlightElements(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		EObject element = resource.getParseResult().getRootASTElement();
-		highlightElementRecursively(element, acceptor);
-	}
-
-	protected void highlightElementRecursively(EObject element, IHighlightedPositionAcceptor acceptor) {
-		TreeIterator<EObject> iterator = EcoreUtil2.eAll(element);
-		while (iterator.hasNext()) {
-			EObject object = iterator.next();
-			if (highlightElement(object, acceptor)) {
-				iterator.prune();
-			}
-		}
-	}
-
+	@Override
 	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
 		if (object instanceof XAbstractFeatureCall) {
 			if (((XAbstractFeatureCall) object).isPackageFragment()) {
@@ -166,7 +150,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 			EReference reference, EObject resolvedReferencedObject, String highlightingConfiguration) {
 		highlightDeprecation(acceptor, referencer, reference, resolvedReferencedObject);
 		if (resolvedReferencedObject instanceof JvmAnnotationType){
-			highlightObjectAtFeature(acceptor, referencer, reference, highlightingConfiguration);
+			highlightFeature(acceptor, referencer, reference, highlightingConfiguration);
 		}
 	}
 
@@ -175,7 +159,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 		if (resolvedReferencedObject instanceof JvmAnnotationTarget) {
 			JvmAnnotationTarget annoTarget = (JvmAnnotationTarget) resolvedReferencedObject;
 			if(DeprecationUtil.isDeprecated(annoTarget))
-				highlightObjectAtFeature(acceptor, referencer, reference, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+				highlightFeature(acceptor, referencer, reference, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		}
 	}
 
@@ -243,7 +227,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 			ICompositeNode node = NodeModelUtils.findActualNodeFor(featureCall);
 			highlightNode(node, id, acceptor);
 		} else {
-			highlightObjectAtFeature(acceptor, featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, id);
+			highlightFeature(acceptor, featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, id);
 		}
 	}
 	
@@ -315,32 +299,22 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 		result.put("self", DefaultHighlightingConfiguration.KEYWORD_ID);
 		return result;
 	}
-
+	
 	/**
 	 * Highlights an object at the position of the given {@link EStructuralFeature}
+	 * @deprecated use {@link #highlightFeature(IHighlightedPositionAcceptor, EObject, EStructuralFeature, String...)}
 	 */
+	@Deprecated
 	protected void highlightObjectAtFeature(IHighlightedPositionAcceptor acceptor, EObject object, EStructuralFeature feature, String id) {
-		List<INode> children = NodeModelUtils.findNodesForFeature(object, feature);
-		if (children.size() > 0)
-			highlightNode(children.get(0), id, acceptor);
+		highlightFeature(acceptor, object, feature, id);
 	}
 	
 	/**
 	 * Highlights the non-hidden parts of {@code node} with the style that is associated with {@code id}.
+	 * @deprecated use {@link #highlightNode(IHighlightedPositionAcceptor, INode, String...)}
 	 */
+	@Deprecated
 	protected void highlightNode(INode node, String id, IHighlightedPositionAcceptor acceptor) {
-		if (node == null)
-			return;
-		if (node instanceof ILeafNode) {
-			ITextRegion textRegion = node.getTextRegion();
-			acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), id);
-		} else {
-			for (ILeafNode leaf : node.getLeafNodes()) {
-				if (!leaf.isHidden()) {
-					ITextRegion leafRegion = leaf.getTextRegion();
-					acceptor.addPosition(leafRegion.getOffset(), leafRegion.getLength(), id);
-				}
-			}
-		}
+		highlightNode(acceptor, node, id);
 	}
 }
