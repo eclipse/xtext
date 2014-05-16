@@ -55,7 +55,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypes;
+import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedFeatures;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -74,7 +74,7 @@ public class TypeUsageCollector {
 	private IJvmModelAssociations associations;
 	
 	@Inject
-	private ImplicitlyImportedTypes implicitImports;
+	private ImplicitlyImportedFeatures implicitImports;
 	
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
