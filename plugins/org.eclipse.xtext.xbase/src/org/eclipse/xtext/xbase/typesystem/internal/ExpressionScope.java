@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -39,6 +40,7 @@ import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -109,14 +111,32 @@ public class ExpressionScope implements IExpressionScope {
 	}
 
 	protected IScope createFeatureCallScopeForReceiver(XAbstractFeatureCall receiver) {
-		if (data.size() == 1) {
-			FeatureScopeSessionToResolvedTypes single = data.get(0);
+		List<FeatureScopeSessionToResolvedTypes> dataToUse;
+		if (data.size() == 1)
+			dataToUse = data;
+		else {
+			dataToUse = Lists.newArrayListWithExpectedSize(3);
+			Set<String> seenReceiverTypes = Sets.newHashSet();
+			for(int i = 0; i < data.size(); i++) {
+				FeatureScopeSessionToResolvedTypes next = data.get(i);
+				LightweightTypeReference receiverType = next.getTypes().getActualType(receiver);
+				if (receiverType == null) {
+					if (seenReceiverTypes.add(null)) {
+						dataToUse.add(next);
+					}
+				} else if (seenReceiverTypes.add(receiverType.getIdentifier())) {
+					dataToUse.add(next);
+				}
+			}
+		}
+		if (dataToUse.size() == 1) {
+			FeatureScopeSessionToResolvedTypes single = dataToUse.get(0);
 			IScope result = new Scope(featureScopes.createFeatureCallScopeForReceiver(receiver, (XExpression) context, single.getSession(), single.getTypes()), owner);
 			return result;
 		} else {
 			IScope result = IScope.NULLSCOPE;
-			for(int i = data.size() - 1; i >= 0; i--) {
-				FeatureScopeSessionToResolvedTypes f = data.get(i);
+			for(int i = dataToUse.size() - 1; i >= 0; i--) {
+				FeatureScopeSessionToResolvedTypes f = dataToUse.get(i);
 				result = new DelegateScope(result, featureScopes.createFeatureCallScopeForReceiver(receiver, (XExpression) context, f.getSession(), f.getTypes()));
 			}
 			return new Scope(result, owner);
@@ -124,14 +144,27 @@ public class ExpressionScope implements IExpressionScope {
 	}
 
 	protected IScope createSimpleFeatureCallScope() {
-		if (data.size() == 1) {
-			FeatureScopeSessionToResolvedTypes single = data.get(0);
+		List<FeatureScopeSessionToResolvedTypes> dataToUse;
+		if (data.size() == 1)
+			dataToUse = data;
+		else {
+			dataToUse = Lists.newArrayListWithExpectedSize(3);
+			Set<FeatureScopeSessionToResolvedTypes> seenSessionData = Sets.newHashSet();
+			for(int i = 0; i < data.size(); i++) {
+				FeatureScopeSessionToResolvedTypes next = data.get(i);
+				if (seenSessionData.add(next))
+					dataToUse.add(next);
+			}
+		}
+		
+		if (dataToUse.size() == 1) {
+			FeatureScopeSessionToResolvedTypes single = dataToUse.get(0);
 			IScope result = new Scope(featureScopes.createSimpleFeatureCallScope(context, single.getSession(), single.getTypes()), owner);
 			return result;
 		} else {
 			IScope result = IScope.NULLSCOPE;
-			for(int i = data.size() - 1; i >= 0; i--) {
-				FeatureScopeSessionToResolvedTypes f = data.get(i);
+			for(int i = dataToUse.size() - 1; i >= 0; i--) {
+				FeatureScopeSessionToResolvedTypes f = dataToUse.get(i);
 				result = new DelegateScope(result, featureScopes.createSimpleFeatureCallScope(context, f.getSession(), f.getTypes()));
 			}
 			return new Scope(result, owner);
