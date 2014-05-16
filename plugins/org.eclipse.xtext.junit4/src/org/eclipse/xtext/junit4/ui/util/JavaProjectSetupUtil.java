@@ -42,6 +42,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.osgi.service.prefs.BackingStoreException;
 
@@ -177,7 +178,7 @@ public class JavaProjectSetupUtil {
 		javaProject.save(null, true);
 		addNature(project, JavaCore.NATURE_ID);
 		addSourceFolder(javaProject, "src");
-		addJre15ClasspathEntry(javaProject);
+		addJreClasspathEntry(javaProject);
 		return javaProject;
 	}
 
@@ -261,10 +262,21 @@ public class JavaProjectSetupUtil {
 		}
 	}
 
+	/**
+	 * @deprecated {@link #addJreClasspathEntry(IJavaProject)} should be used insteaf of this method
+	 */
+	@Deprecated
 	public static void addJre15ClasspathEntry(IJavaProject javaProject) throws JavaModelException {
 		IClasspathEntry existingJreContainerClasspathEntry = getJreContainerClasspathEntry(javaProject);
 		if (existingJreContainerClasspathEntry == null) {
 			addToClasspath(javaProject, JavaCore.newContainerEntry(new Path(JRE_CONTAINER_1_5)));
+		}
+	}
+	
+	public static void addJreClasspathEntry(IJavaProject javaProject) throws JavaModelException {
+		IClasspathEntry existingJreContainerClasspathEntry = getJreContainerClasspathEntry(javaProject);
+		if (existingJreContainerClasspathEntry == null) {
+			addToClasspath(javaProject, JREContainerProvider.getDefaultJREContainerEntry());
 		}
 	}
 	
@@ -285,18 +297,7 @@ public class JavaProjectSetupUtil {
 	}
 
 	public static IClasspathEntry getJreContainerClasspathEntry(IJavaProject javaProject) throws JavaModelException {
-		IClasspathEntry[] rawClasspath = javaProject.getRawClasspath();
-		for (IClasspathEntry classpathEntry : rawClasspath) {
-			int entryKind = classpathEntry.getEntryKind();
-			if (entryKind == IClasspathEntry.CPE_CONTAINER) {
-				IPath path = classpathEntry.getPath();
-				String pathAsString = path.toString();
-				if (pathAsString.startsWith(JRE_CONTAINER_1_5)) {
-					return classpathEntry;
-				}
-			}
-		}
-		return null;
+		return JREContainerProvider.getJREContainerEntry(javaProject);
 	}
 
 	public static IClasspathEntry addPlatformJarToClasspath(final Plugin srcPlugin, final String jarFileName,

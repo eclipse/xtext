@@ -28,7 +28,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.xtext.xbase.lib,
  org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.ui.forms;bundle-version="3.4.1",
- org.eclipse.xtend.lib
+ org.eclipse.xtend.lib,
+ org.eclipse.jdt.ui;bundle-version="3.5.2";resolution:=optional
 Bundle-Activator: org.eclipse.xtext.ui.internal.Activator
 Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui,
