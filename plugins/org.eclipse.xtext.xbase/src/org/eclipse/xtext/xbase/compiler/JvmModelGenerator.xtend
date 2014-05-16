@@ -184,7 +184,8 @@ class JvmModelGenerator implements IGenerator {
 	def generateAnnotationsWithSyntheticSuppressWarnings(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		val noSuppressWarningsFilter = [JvmAnnotationReference it | annotation?.identifier != SuppressWarnings.name]
 		annotations.filter(noSuppressWarningsFilter).generateAnnotations(appendable, true, config)
-		appendable.append('''@SuppressWarnings("all")''').newLine
+		if (it.eContainer == null)
+			appendable.append('''@SuppressWarnings("all")''').newLine
 	}
 
 	def dispatch ITreeAppendable generateBody(JvmEnumerationType it, ITreeAppendable appendable, GeneratorConfig config) {
