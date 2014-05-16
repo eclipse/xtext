@@ -33,6 +33,8 @@ class DefaultTaskFinder implements ITaskFinder {
 		if(taskTags.empty) return #[]
 		if (resource instanceof XtextResource) {
 			resource.parseResult?.rootNode?.findTasks(taskTags) ?: #[]
+		} else {
+			#[]
 		}
 	}
 
