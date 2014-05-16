@@ -41,7 +41,7 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 	private IFeatureScopeSession rootSession;
 	
 	@Inject
-	private ImplicitlyImportedTypes implicitlyImportedTypes;
+	private ImplicitlyImportedFeatures implicitlyImportedFeatures;
 	
 	@Inject
 	private FeatureScopes featureScopes;
@@ -97,8 +97,8 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 	}
 	
 	public IFeatureScopeSession newSession(Resource context) {
-		List<JvmType> literalClasses = implicitlyImportedTypes.getStaticImportClasses(context);
-		List<JvmType> extensionClasses = implicitlyImportedTypes.getExtensionClasses(context);
+		List<JvmType> literalClasses = implicitlyImportedFeatures.getStaticImportClasses(context);
+		List<JvmType> extensionClasses = implicitlyImportedFeatures.getExtensionClasses(context);
 		IFeatureScopeSession result = rootSession.addTypesToStaticScope(literalClasses, extensionClasses);
 		if (context.getContents().isEmpty() || !(context instanceof XtextResource))
 			return result;

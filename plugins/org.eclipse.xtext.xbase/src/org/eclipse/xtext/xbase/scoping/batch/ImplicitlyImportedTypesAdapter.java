@@ -22,17 +22,18 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * Adapts the {@link ImplicitlyImportedTypes} to the deprecated {@link ExtensionClassNameProvider}
+ * Adapts the {@link ImplicitlyImportedFeatures} to the deprecated {@link ExtensionClassNameProvider}
  * which is still used by the content assist infrastructure.
  * 
  * @author Ed Merks - Initial implementation and API
+ * @deprecated Use the {@link ImplicitlyImportedFeatures} directly.
  */
-@SuppressWarnings("deprecation")
 @Singleton
+@Deprecated
 public class ImplicitlyImportedTypesAdapter extends StaticImplicitMethodsFeatureForTypeProvider.ExtensionClassNameProvider {
 
 	@Inject
-	private ImplicitlyImportedTypes implicitlyImportedTypes;
+	private ImplicitlyImportedFeatures implicitlyImportedTypes;
 
 	@Override
 	protected Multimap<Class<?>, Class<?>> simpleComputeExtensionClasses() {
