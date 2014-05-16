@@ -9,10 +9,18 @@ package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.tasks.Task;
+import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.inject.Inject;
 
@@ -40,7 +48,12 @@ public class DefaultSemanticHighlightingCalculator implements ISemanticHighlight
 	 * <code>null</code> and refers to an initialized parse result.
 	 * </p>
 	 * <p>
-	 * Clients should override this method in order to perform custom highlighting.
+	 * By default this will visit the elements in the resource recursively and call
+	 * {@link #highlightElement(EObject, IHighlightedPositionAcceptor)} for each of them. As the last step, tasks will
+	 * be highlighted.
+	 * </p>
+	 * <p>
+	 * Clients can override this method if the default recursive approach does not fit their use case
 	 * </p>
 	 * 
 	 * @param resource
@@ -49,13 +62,68 @@ public class DefaultSemanticHighlightingCalculator implements ISemanticHighlight
 	 *            the acceptor. Is never <code>null</code>.
 	 */
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+		searchAndHighlightElements(resource, acceptor);
 		highlightTasks(resource, acceptor);
 	}
-	
+
+	protected void searchAndHighlightElements(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+		IParseResult parseResult = resource.getParseResult();
+		if (parseResult == null)
+			throw new IllegalStateException("resource#parseResult may not be null");
+		EObject element = parseResult.getRootASTElement();
+		highlightElementRecursively(element, acceptor);
+	}
+
+	protected void highlightElementRecursively(EObject element, IHighlightedPositionAcceptor acceptor) {
+		TreeIterator<EObject> iterator = EcoreUtil2.eAll(element);
+		while (iterator.hasNext()) {
+			EObject object = iterator.next();
+			if (highlightElement(object, acceptor)) {
+				iterator.prune();
+			}
+		}
+	}
+
+	/**
+	 * @return true if this element was highlighted (so child elements will be skipped), false otherwise
+	 */
+	protected boolean highlightElement(EObject object, IHighlightedPositionAcceptor acceptor) {
+		return false;
+	}
+
 	protected void highlightTasks(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		List<Task> tasks = taskFinder.findTasks(resource);
 		for (Task task : tasks) {
 			acceptor.addPosition(task.getOffset(), task.getTagLength(), DefaultHighlightingConfiguration.TASK_ID);
+		}
+	}
+
+	/**
+	 * Highlights an object at the position of the given {@link EStructuralFeature}
+	 */
+	protected void highlightObjectAtFeature(IHighlightedPositionAcceptor acceptor, EObject object,
+			EStructuralFeature feature, String id) {
+		List<INode> children = NodeModelUtils.findNodesForFeature(object, feature);
+		if (children.size() > 0)
+			highlightNode(children.get(0), id, acceptor);
+	}
+
+	/**
+	 * Highlights the non-hidden parts of {@code node} with the style that is associated with {@code id}.
+	 */
+	protected void highlightNode(INode node, String id, IHighlightedPositionAcceptor acceptor) {
+		if (node == null)
+			return;
+		if (node instanceof ILeafNode) {
+			ITextRegion textRegion = node.getTextRegion();
+			acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), id);
+		} else {
+			for (ILeafNode leaf : node.getLeafNodes()) {
+				if (!leaf.isHidden()) {
+					ITextRegion leafRegion = leaf.getTextRegion();
+					acceptor.addPosition(leafRegion.getOffset(), leafRegion.getLength(), id);
+				}
+			}
 		}
 	}
 }
