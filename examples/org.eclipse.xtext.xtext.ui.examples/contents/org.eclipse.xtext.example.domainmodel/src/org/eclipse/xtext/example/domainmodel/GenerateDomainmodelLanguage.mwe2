@@ -52,8 +52,8 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 
 			// Generate java classes for Ecore models
-			fragment = ecore.EcoreGeneratorFragment {
-				emfRuntimeVersion = "2.9"
+			fragment = ecore.EMFGeneratorFragment {
+				emfRuntimeVersion = "2.10"
 			}
 
 			// the serialization component
