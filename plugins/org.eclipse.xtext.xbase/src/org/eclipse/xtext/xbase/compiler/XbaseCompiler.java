@@ -72,7 +72,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -113,9 +112,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Inject 
 	private IBatchTypeResolver batchTypeResolver;
-	
-	@Inject
-	private ILogicalContainerProvider logicalContainerProvider;
 	
 	@Inject
 	private XSwitchExpressions switchExpressions;
@@ -1019,7 +1015,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	private LightweightTypeReference findRealReturnType(XExpression expression) {
 		if (expression == null)
 			return null;
-		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getLogicalContainer(expression);
+		JvmIdentifiableElement logicalContainer = getLogicalContainerProvider().getLogicalContainer(expression);
 		if (logicalContainer instanceof JvmOperation) {
 			return getLightweightType(logicalContainer);
 		}
@@ -1770,4 +1766,5 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append(")");
 		}
 	}
+	
 }

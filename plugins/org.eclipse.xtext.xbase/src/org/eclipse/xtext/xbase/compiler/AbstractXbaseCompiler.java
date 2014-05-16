@@ -186,7 +186,7 @@ public abstract class AbstractXbaseCompiler {
 					appendable.append(procedureOrFunction);
 					if (!isPrimitiveVoidExpected) {
 						appendable.append("<");
-						appendable.append(expectedType);
+						appendable.append(expectedType.getWrapperTypeIfPrimitive());
 						appendable.append(">");
 					}
 				} else {
@@ -194,7 +194,7 @@ public abstract class AbstractXbaseCompiler {
 				}
 				appendable.append("() {").increaseIndentation();
 				appendable.newLine().append("public ");
-				appendable.append(expectedType);
+				appendable.append(expectedType.getWrapperTypeIfPrimitive());
 				appendable.append(" apply() {").increaseIndentation();
 				if (needsSneakyThrow) {
 					appendable.newLine().append("try {").increaseIndentation();
@@ -214,6 +214,9 @@ public abstract class AbstractXbaseCompiler {
 				}
 				appendable.decreaseIndentation().newLine().append("}");
 				appendable.decreaseIndentation().newLine().append("}.apply()");
+				if (expectedType.isPrimitive()) {
+					appendable.append(".").append(expectedType.getSimpleName()).append("Value()");
+				}
 			} finally {
 				appendable.closeScope();
 			}

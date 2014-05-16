@@ -68,17 +68,17 @@ import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.ImportingStringConcatenation
+import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
-import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 
 /**
  * A generator implementation that processes the 
@@ -87,12 +87,12 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
  */
 class JvmModelGenerator implements IGenerator {
 
-	@Inject extension ILogicalContainerProvider
-	@Inject extension TypeReferences 
-	@Inject extension TreeAppendableUtil
-	@Inject extension JvmTypeExtensions
-	@Inject extension LoopExtensions
-	@Inject extension ErrorSafeExtensions
+	@Inject protected extension ILogicalContainerProvider
+	@Inject protected extension TypeReferences 
+	@Inject protected extension TreeAppendableUtil
+	@Inject protected extension JvmTypeExtensions
+	@Inject protected extension LoopExtensions
+	@Inject protected extension ErrorSafeExtensions
 	
 	@Inject CommonTypeComputationServices commonServices
 	@Inject XbaseCompiler compiler
@@ -148,37 +148,37 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch ITreeAppendable generateBody(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
-		if(!anonymous) {
-			if(config.generateSyntheticSuppressWarnings)
-				generateAnnotationsWithSyntheticSuppressWarnings(childAppendable, config)
-			else
-				annotations.generateAnnotations(childAppendable, true, config)
-			generateModifier(childAppendable, config)
-			if (isInterface) {
-				childAppendable.append("interface ")
-			} else {
-				childAppendable.append("class ")
-			}
-			childAppendable.traceSignificant(it).append(simpleName)
-			generateTypeParameterDeclaration(childAppendable, config)
-			if (typeParameters.empty)
-				childAppendable.append(" ")
-			generateExtendsClause(childAppendable, config)
+		if(config.generateSyntheticSuppressWarnings)
+			generateAnnotationsWithSyntheticSuppressWarnings(childAppendable, config)
+		else
+			annotations.generateAnnotations(childAppendable, true, config)
+		generateModifier(childAppendable, config)
+		if (isInterface) {
+			childAppendable.append("interface ")
 		} else {
-			childAppendable.append(" ")
+			childAppendable.append("class ")
 		}
-		childAppendable.append('{').increaseIndentation
-		childAppendable.forEach(membersToBeCompiled, [
+		childAppendable.traceSignificant(it).append(simpleName)
+		generateTypeParameterDeclaration(childAppendable, config)
+		if (typeParameters.empty)
+			childAppendable.append(" ")
+		generateExtendsClause(childAppendable, config)
+		generateMembersInBody(childAppendable, config)
+		if(!anonymous && !(it.eContainer instanceof JvmType)) 
+			appendable.newLine
+	}
+	
+	def generateMembersInBody(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
+		appendable.append('{').increaseIndentation
+		appendable.forEach(membersToBeCompiled, [
 				separator = [ITreeAppendable it | newLine]
 			], [
-				val memberAppendable = childAppendable.traceWithComments(it)
+				val memberAppendable = appendable.traceWithComments(it)
 				memberAppendable.openScope
 				generateMember(memberAppendable, config)
 				memberAppendable.closeScope
 			])
-		childAppendable.decreaseIndentation.newLine.append('}')
-		if(!anonymous && !(it.eContainer instanceof JvmType)) 
-			appendable.newLine
+		appendable.decreaseIndentation.newLine.append('}')
 	}
 	
 	def generateAnnotationsWithSyntheticSuppressWarnings(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
@@ -306,7 +306,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def dispatch generateModifier(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.append(visibility.javaName)
+		generateVisibilityModifier(it, appendable)
 		if (!interface) {
 			if (isAbstract)
 				appendable.append("abstract ")
@@ -320,11 +320,11 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def dispatch generateModifier(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.append(visibility.javaName)
+		generateVisibilityModifier(it, appendable)
 	}
 	
 	def dispatch generateModifier(JvmField it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.append(visibility.javaName)
+		generateVisibilityModifier(it, appendable)
 		if (isFinal)
 			appendable.append("final ")
 		if (isStatic)
@@ -336,7 +336,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 		
 	def dispatch generateModifier(JvmOperation it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.append(visibility.javaName)
+		generateVisibilityModifier(it, appendable)
 		if (isAbstract)
 			appendable.append("abstract ")
 		if (isStatic)
@@ -351,8 +351,12 @@ class JvmModelGenerator implements IGenerator {
 			appendable.append("native ")
 	}
 	
+	def generateVisibilityModifier(JvmMember it, ITreeAppendable result) {
+		result.append(visibility.javaName)
+	}
+	
 	def dispatch generateModifier(JvmConstructor it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.append(visibility.javaName)
+		generateVisibilityModifier(it, appendable)
 	}
 	
 	/**
@@ -606,7 +610,7 @@ class JvmModelGenerator implements IGenerator {
 						default: null
 					}
 					appendable.append("{").increaseIndentation
-					compiler.compile(expression, appendable, returnType, op.exceptions.toSet)
+					compile(op, expression, returnType, appendable, config)
 					appendable.decreaseIndentation.newLine.append("}")
 				} else {
 					generateBodyWithIssues(appendable, errors)	
@@ -621,6 +625,10 @@ class JvmModelGenerator implements IGenerator {
 				appendable.append("{").newLine.append("}")
 			}
 		}
+	}
+	
+	def compile(JvmExecutable executable, XExpression expression, JvmTypeReference returnType, ITreeAppendable appendable, GeneratorConfig config) {
+		compiler.compile(expression, appendable, returnType, executable.exceptions.toSet)
 	}
 
 	def void assignThisAndSuper(ITreeAppendable b, JvmDeclaredType declaredType) {
