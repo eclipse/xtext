@@ -15,7 +15,8 @@ import org.junit.Test
 class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
-	def void testPlain() {'''
+	def void testPlain() {
+		'''
 			class C {
 				def m() {
 					new Runnable() {
@@ -37,7 +38,84 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testNestedLocalClass_01() {'''
+	def void testConstructor() {
+		'''
+			class C {
+				def m() {
+					new D(true) {
+					}
+				}
+				static class D {
+					new(boolean b) {}
+					new(int i) {}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  @SuppressWarnings("all")
+			  public static class D {
+			    public D(final boolean b) {
+			    }
+			    
+			    public D(final int i) {
+			    }
+			  }
+			  
+			  public C.D m() {
+			    return new C.D(true) {
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testConstructorAdditionalMember() {
+		'''
+			class C {
+				def m() {
+					new D(true) {
+						def void n() {}
+					}
+				}
+				static class D {
+					new(boolean b) {}
+					new(int i) {}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  @SuppressWarnings("all")
+			  public static class D {
+			    public D(final boolean b) {
+			    }
+			    
+			    public D(final int i) {
+			    }
+			  }
+			  
+			  public C.D m() {
+			    @SuppressWarnings("all")
+			    final class __C_1 extends C.D {
+			      public void n() {
+			      }
+			      
+			      __C_1(final boolean b) {
+			        super(b);
+			      }
+			    }
+			    
+			    return new __C_1(true);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testNestedLocalClass_01() {
+		'''
 			class C {
 				def m() {
 					return newArrayList(new Runnable() { override run() {} })
@@ -60,7 +138,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testNestedLocalClass_02() {'''
+	def void testNestedLocalClass_02() {
+		'''
 			class C {
 				def Iterable<Runnable> m() {
 					return newArrayList(new Runnable() { override run() {} })
@@ -82,7 +161,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testNestedLocalClass_03() {'''
+	def void testNestedLocalClass_03() {
+		'''
 			class C {
 				def m() {
 					return newArrayList(
@@ -114,7 +194,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testNestedLocalClass_04() {'''
+	def void testNestedLocalClass_04() {
+		'''
 			class C {
 				def m() {
 					return newArrayList(
@@ -157,7 +238,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testNestedLocalClass_05() {'''
+	def void testNestedLocalClass_05() {
+		'''
 			class C {
 				def m() {
 					return newArrayList(newArrayList(new Runnable() { override run() {} def void m() {} }))
@@ -188,7 +270,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testCapturedLocalVar() {'''
+	def void testCapturedLocalVar() {
+		'''
 			class Foo {
 				def foo() {
 					val x = ''
@@ -213,7 +296,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testLocalVar() {'''
+	def void testLocalVar() {
+		'''
 			class Foo {
 				def foo() {
 					val bar = new Runnable() {
@@ -235,7 +319,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testNestedTypeScoping_01() {'''
+	def void testNestedTypeScoping_01() {
+		'''
 			class C {
 				def newMap() {
 					return new java.util.AbstractMap<String, String>() {
@@ -265,7 +350,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testNestedTypeScoping_02() {'''
+	def void testNestedTypeScoping_02() {
+		'''
 			class C {
 				def newMap() {
 					return new java.util.AbstractMap<String, String>() {
@@ -295,7 +381,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testNestedTypeScoping_03() {'''
+	def void testNestedTypeScoping_03() {
+		'''
 			class C {
 				def newMap() {
 					return new java.util.AbstractMap<String, String>() {
@@ -332,7 +419,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testThisScoping_01() {'''
+	def void testThisScoping_01() {
+		'''
 			class C {
 				def newD() {
 					return new D {
@@ -361,7 +449,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testThisScoping_02() {'''
+	def void testThisScoping_02() {
+		'''
 			class C {
 				def newD() {
 					return new D {
@@ -390,7 +479,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testThisScoping_03() {'''
+	def void testThisScoping_03() {
+		'''
 			class C {
 				def newD() {
 					return new D {
@@ -423,7 +513,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testThisScoping_04() {'''
+	def void testThisScoping_04() {
+		'''
 			class C {
 				def newD() {
 					return new D {
@@ -456,7 +547,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testSuperScoping_01() {'''
+	def void testSuperScoping_01() {
+		'''
 			class C extends B {
 				def myMethod() {
 					return new D {
@@ -488,7 +580,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testSuperScoping_02() {'''
+	def void testSuperScoping_02() {
+		'''
 			class C extends B {
 				def myMethod() {
 					return new D {
@@ -520,7 +613,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testLocalVar_AdditionalMember() {'''
+	def void testLocalVar_AdditionalMember() {
+		'''
 			class Foo {
 				def foo() {
 					val bar = new Runnable() {
@@ -548,7 +642,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testLocalVar_AdditionalMember_Return() {'''
+	def void testLocalVar_AdditionalMember_Return() {
+		'''
 			class Foo {
 				def foo() {
 					new Runnable() {
@@ -576,7 +671,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testLocalVarInArray_01() {'''
+	def void testLocalVarInArray_01() {
+		'''
 			class Foo {
 				def foo() {
 					val Object[] bar = #[ 
@@ -600,7 +696,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testLocalVarInArray_02() {'''
+	def void testLocalVarInArray_02() {
+		'''
 			class Foo {
 				def foo() {
 					val bar = #[ 
@@ -628,7 +725,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testField() {'''
+	def void testField() {
+		'''
 			class Foo {
 				val bar = new Runnable() {
 					override run() {}
@@ -646,7 +744,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testField_AdditionalMember_01() {'''
+	def void testField_AdditionalMember_01() {
+		'''
 			class Foo {
 				val bar = new Runnable() {
 					int baz
@@ -677,7 +776,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testField_AdditionalMember_02() {'''
+	def void testField_AdditionalMember_02() {
+		'''
 			class C {
 				val secondOuterField = 1
 				val outerField = new Object() {
@@ -715,7 +815,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testAdditionalMemberAccess_01() {'''
+	def void testAdditionalMemberAccess_01() {
+		'''
 			class C {
 				def m() {
 					new Object() {
@@ -748,7 +849,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 
 	@Test
-	def void testGeneric() {'''
+	def void testGeneric() {
+		'''
 			class Foo {
 				def foo() {
 					val bar = new Iterable<String>() {
@@ -775,7 +877,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 
 	@Test
-	def void testGeneric1() {'''
+	def void testGeneric1() {
+		'''
 			class Foo  {
 				def <T> foo() {
 					val bar = new Iterable<T>() {
@@ -802,7 +905,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testGeneric2() {'''
+	def void testGeneric2() {
+		'''
 			import java.util.Iterator
 			
 			class Foo  {
@@ -831,7 +935,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 
 	@Test
-	def void testGeneric3() {'''
+	def void testGeneric3() {
+		'''
 			class Foo<T>  {
 				def <U> foo() {
 					val bar = new Bar<T,U>() {
@@ -860,7 +965,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testGeneric4() {'''
+	def void testGeneric4() {
+		'''
 			class Foo<T>  {
 				def foo() {
 					val bar = new Bar<T>() {
@@ -889,7 +995,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testGeneric5() {'''
+	def void testGeneric5() {
+		'''
 			class C {
 				def m() {
 					new Object {
@@ -915,7 +1022,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testGeneric6() {'''
+	def void testGeneric6() {
+		'''
 			class C {
 				def <K> m() {
 					new Object {
@@ -961,7 +1069,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testGeneric7() {'''
+	def void testGeneric7() {
+		'''
 			class Foo<T>  {
 				def <W extends Foo<W>> foo() {
 					val bar = new Bar<W>() {

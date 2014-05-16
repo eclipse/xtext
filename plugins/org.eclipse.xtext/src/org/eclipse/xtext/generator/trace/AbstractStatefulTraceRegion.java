@@ -34,7 +34,7 @@ public abstract class AbstractStatefulTraceRegion extends AbstractTraceRegion {
 		this.myRegion = myRegion;
 		this.associatedLocations = associatedLocations;
 		if (!isConsistentWithParent()) {
-			throw new IllegalArgumentException("Produced region is inconsisten with parent, this: " + this + ", parent: " + parent);
+			throw new IllegalArgumentException("Produced region is inconsistent with parent, this: " + this + ", parent: " + parent);
 		}
 	}
 	

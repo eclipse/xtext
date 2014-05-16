@@ -1406,7 +1406,7 @@ public class JvmModelGenerator implements IGenerator {
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_documentation);
     boolean _not = (!_isNullOrEmpty);
     if (_not) {
-      final Set<EObject> sourceElements = this.jvmModelAssociations.getSourceElements(it);
+      final Set<EObject> sourceElements = this.getSourceElements(it);
       boolean _and = false;
       int _size = sourceElements.size();
       boolean _equals = (_size == 1);
@@ -1918,6 +1918,27 @@ public class JvmModelGenerator implements IGenerator {
     return IterableExtensions.<JvmMember>filter(_members, _function);
   }
   
+  protected Iterable<JvmMember> _getMembersToBeCompiled(final JvmGenericType it) {
+    Iterable<JvmMember> _xifexpression = null;
+    boolean _isAnonymous = it.isAnonymous();
+    if (_isAnonymous) {
+      EList<JvmMember> _members = it.getMembers();
+      final Function1<JvmMember, Boolean> _function = new Function1<JvmMember, Boolean>() {
+        public Boolean apply(final JvmMember it) {
+          return Boolean.valueOf((!(it instanceof JvmConstructor)));
+        }
+      };
+      _xifexpression = IterableExtensions.<JvmMember>filter(_members, _function);
+    } else {
+      _xifexpression = this._getMembersToBeCompiled(((JvmDeclaredType) it));
+    }
+    return _xifexpression;
+  }
+  
+  protected Set<EObject> getSourceElements(final EObject jvmElement) {
+    return this.jvmModelAssociations.getSourceElements(jvmElement);
+  }
+  
   public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) {
     if (type instanceof JvmDeclaredType) {
       _internalDoGenerate((JvmDeclaredType)type, fsa);
@@ -2027,6 +2048,8 @@ public class JvmModelGenerator implements IGenerator {
   public Iterable<JvmMember> getMembersToBeCompiled(final JvmDeclaredType type) {
     if (type instanceof JvmEnumerationType) {
       return _getMembersToBeCompiled((JvmEnumerationType)type);
+    } else if (type instanceof JvmGenericType) {
+      return _getMembersToBeCompiled((JvmGenericType)type);
     } else if (type != null) {
       return _getMembersToBeCompiled(type);
     } else {
