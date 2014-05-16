@@ -510,7 +510,7 @@ public class XtendCompiler extends XbaseCompiler {
 		if(!inferredLocalClass.isAnonymous()) {
 			b.newLine();
 			compileAnonymousClass(anonymousClass, inferredLocalClass, b);
-		} 
+		}
 		_toJavaStatement(anonymousClass.getConstructorCall(), b, isReferenced);
 	}
 	
@@ -523,6 +523,13 @@ public class XtendCompiler extends XbaseCompiler {
 		if (!isReferenced) {
 			b.newLine();
 			constructorCallToJavaExpression(expr, b);
+			if (expr.eContainer() instanceof AnonymousClass) {
+				JvmConstructor constructor = expr.getConstructor();
+				JvmDeclaredType declaringType = constructor.getDeclaringType();
+				if (declaringType instanceof JvmGenericType && ((JvmGenericType) declaringType).isAnonymous()) {
+					compileAnonymousClass((AnonymousClass) expr.eContainer(), declaringType, b);
+				}
+			}
 			b.append(";");
 		} else if (isVariableDeclarationRequired(expr, b)) {
 			Later later = new Later() {

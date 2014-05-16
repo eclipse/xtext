@@ -23,7 +23,6 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class C {
-			  @SuppressWarnings("all")
 			  public static class X {
 			  }
 			  
@@ -91,7 +90,6 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class A {
-			  @SuppressWarnings("all")
 			  public static class B {
 			    public void m(final CharSequence c) {
 			      this.m("");
@@ -117,7 +115,6 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class A {
-			  @SuppressWarnings("all")
 			  public static class B {
 			    public void m(final int i) {
 			      A.m("");
@@ -155,11 +152,8 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class A {
-			  @SuppressWarnings("all")
 			  public interface B {
-			    @SuppressWarnings("all")
 			    public static class C {
-			      @SuppressWarnings("all")
 			      public static class D {
 			        private A a;
 			        
@@ -219,11 +213,8 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class A {
-			  @SuppressWarnings("all")
 			  public interface B {
-			    @SuppressWarnings("all")
 			    public static class C {
-			      @SuppressWarnings("all")
 			      public static class D {
 			        private A a;
 			        
@@ -272,7 +263,6 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class C {
-			  @SuppressWarnings("all")
 			  public static class X {
 			    public X(final C c) {
 			      c.m();
@@ -300,14 +290,12 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class C {
-			  @SuppressWarnings("all")
 			  public static class X {
 			    public X(final C.Y y) {
 			      y.m();
 			    }
 			  }
 			  
-			  @SuppressWarnings("all")
 			  private static class Y {
 			    private void m() {
 			    }
@@ -324,7 +312,6 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class C {
-			  @SuppressWarnings("all")
 			  public interface I {
 			  }
 			}
@@ -341,7 +328,6 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class C {
-			  @SuppressWarnings("all")
 			  private enum E {
 			    VAL;
 			  }

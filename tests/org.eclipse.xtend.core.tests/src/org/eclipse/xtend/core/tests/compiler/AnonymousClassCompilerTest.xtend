@@ -38,6 +38,78 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testTwoClasses() {
+		'''
+			class C {
+				def void m() {
+					new Runnable() {
+						override run() {}
+					}
+					new Runnable() {
+						override run() {}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m() {
+			    new Runnable() {
+			      public void run() {
+			      }
+			    };
+			    new Runnable() {
+			      public void run() {
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testTwoClassesWithMembers() {
+		'''
+			class C {
+				def void m() {
+					new Runnable() {
+						override run() {}
+						def void m() {}
+					}
+					new Runnable() {
+						override run() {}
+						def void m() {}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m() {
+			    final class __C_1 implements Runnable {
+			      public void run() {
+			      }
+			      
+			      public void m() {
+			      }
+			    }
+			    
+			    new __C_1();
+			    final class __C_2 implements Runnable {
+			      public void run() {
+			      }
+			      
+			      public void m() {
+			      }
+			    }
+			    
+			    new __C_2();
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testConstructor() {
 		'''
 			class C {
@@ -53,7 +125,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class C {
-			  @SuppressWarnings("all")
 			  public static class D {
 			    public D(final boolean b) {
 			    }
@@ -87,7 +158,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class C {
-			  @SuppressWarnings("all")
 			  public static class D {
 			    public D(final boolean b) {
 			    }
@@ -97,7 +167,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public C.D m() {
-			    @SuppressWarnings("all")
 			    final class __C_1 extends C.D {
 			      public void n() {
 			      }
@@ -177,7 +246,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public ArrayList<? extends Runnable> m() {
-			    @SuppressWarnings("all")
 			    final class __C_1 implements Runnable {
 			      public void run() {
 			      }
@@ -211,7 +279,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public ArrayList<Runnable> m() {
-			    @SuppressWarnings("all")
 			    final class __C_1 implements Runnable {
 			      public void run() {
 			      }
@@ -221,7 +288,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			    
 			    __C_1 ___C_1 = new __C_1();
-			    @SuppressWarnings("all")
 			    final class __C_2 implements Runnable {
 			      public void run() {
 			      }
@@ -252,7 +318,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public ArrayList<? extends ArrayList<? extends Runnable>> m() {
-			    @SuppressWarnings("all")
 			    final class __C_1 implements Runnable {
 			      public void run() {
 			      }
@@ -435,7 +500,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public D newD() {
-			    @SuppressWarnings("all")
 			    final class __C_1 extends D {
 			      public __C_1 m() {
 			        return this;
@@ -465,7 +529,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public D newD() {
-			    @SuppressWarnings("all")
 			    final class __C_1 extends D {
 			      public String m() {
 			        return this.toString();
@@ -496,7 +559,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public D newD() {
-			    @SuppressWarnings("all")
 			    final class __C_1 extends D {
 			      public void m() {
 			        C.this.m2();
@@ -530,7 +592,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public D newD() {
-			    @SuppressWarnings("all")
 			    final class __C_1 extends D {
 			      public void m() {
 			        C.this.m();
@@ -627,7 +688,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  public void foo() {
-			    @SuppressWarnings("all")
 			    final class __Foo_1 implements Runnable {
 			      public void run() {
 			      }
@@ -656,7 +716,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  public Runnable foo() {
-			    @SuppressWarnings("all")
 			    final class __Foo_1 implements Runnable {
 			      public void run() {
 			      }
@@ -759,7 +818,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo {
 			  private final Runnable bar = new Function0<Runnable>() {
 			    public Runnable apply() {
-			      @SuppressWarnings("all")
 			      final class __Foo_1 implements Runnable {
 			        private int baz;
 			        
@@ -795,7 +853,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  
 			  private final Object outerField = new Function0<Object>() {
 			    public Object apply() {
-			      @SuppressWarnings("all")
 			      final class __C_1 {
 			        private int localField;
 			      }
@@ -831,7 +888,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Object m() {
-			    @SuppressWarnings("all")
 			    final class __C_1 {
 			      public int f;
 			    }
@@ -1008,7 +1064,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Object m() {
-			    @SuppressWarnings("all")
 			    final class __C_1 {
 			      public <T extends Object> T m2() {
 			        return null;
@@ -1044,10 +1099,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public <K extends Object> Object m() {
-			    @SuppressWarnings("all")
 			    final class __C_1 {
 			      public <V extends Object> AbstractMap<K, V> m2() {
-			        @SuppressWarnings("all")
 			        final class ____C_1 extends AbstractMap<K, V> {
 			          public Map.Entry<K, V> m() {
 			            return null;
@@ -1086,7 +1139,6 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			@SuppressWarnings("all")
 			public class Foo<T extends Object> {
-			  @SuppressWarnings("all")
 			  public interface Bar<V extends Foo<V>> {
 			    public abstract V bar();
 			  }
