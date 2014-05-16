@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
@@ -46,6 +47,12 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  public void testNonXtextResource() {
+    ResourceImpl _resourceImpl = new ResourceImpl();
+    this.assertContainsTasks(_resourceImpl, Collections.<Task>unmodifiableList(Lists.<Task>newArrayList()));
   }
   
   @Test
