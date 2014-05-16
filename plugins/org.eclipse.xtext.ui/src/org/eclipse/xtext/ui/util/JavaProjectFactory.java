@@ -21,6 +21,8 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.launching.IVMInstall;
+import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkingSet;
 
@@ -51,9 +53,14 @@ public class JavaProjectFactory extends ProjectFactory {
 					classpathEntries.add(srcClasspathEntry);
 				}
 
-				classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"))); //$NON-NLS-1$
+				IVMInstall defaultVMInstall = JavaRuntime.getDefaultVMInstall();
+				if (defaultVMInstall == null) {
+					classpathEntries.add(JavaRuntime.getDefaultJREContainerEntry());
+				} else {
+					classpathEntries.add(JavaCore.newContainerEntry(JavaRuntime.newJREContainerPath(defaultVMInstall)));
+				}
 				addMoreClasspathEntriesTo(classpathEntries);
-
+				
 				javaProject.setRawClasspath(classpathEntries.toArray(new IClasspathEntry[classpathEntries.size()]),
 						subMonitor.newChild(1));
 				javaProject.setOutputLocation(new Path("/" + project.getName() + "/bin"), subMonitor.newChild(1)); //$NON-NLS-1$ //$NON-NLS-2$
