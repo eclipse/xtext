@@ -16,7 +16,6 @@ import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.imports.XtendImportedTypesUsageCollector;
 import org.eclipse.xtend.core.imports.XtendImportsConfiguration;
 import org.eclipse.xtend.core.imports.XtendTypeUsageCollector;
-import org.eclipse.xtend.core.jvmmodel.AnonymousClassAwareGenerator;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.linking.Linker;
@@ -53,7 +52,6 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.impl.IDValueConverter;
 import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
-import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
@@ -278,11 +276,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		return JavaIOFileSystemSupport.class;
 	}
 
-	@Override
-	public Class<? extends IGenerator> bindIGenerator() {
-		return XtendGenerator.class;
-	}
-
 	public void configureWorkspaceConfigContribution(Binder binder) {
 		binder.bind(WorkspaceConfig.class).toProvider(RuntimeWorkspaceConfigProvider.class);
 	}
@@ -369,6 +362,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	}
 	
 	public Class<? extends JvmModelGenerator> bindJvmModelGenerator() {
-		return AnonymousClassAwareGenerator.class;
+		return XtendGenerator.class;
 	}
 }

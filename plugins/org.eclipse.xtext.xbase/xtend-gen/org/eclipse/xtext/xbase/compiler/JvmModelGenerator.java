@@ -126,27 +126,27 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 public class JvmModelGenerator implements IGenerator {
   @Inject
   @Extension
-  private ILogicalContainerProvider _iLogicalContainerProvider;
+  protected ILogicalContainerProvider _iLogicalContainerProvider;
   
   @Inject
   @Extension
-  private TypeReferences _typeReferences;
+  protected TypeReferences _typeReferences;
   
   @Inject
   @Extension
-  private TreeAppendableUtil _treeAppendableUtil;
+  protected TreeAppendableUtil _treeAppendableUtil;
   
   @Inject
   @Extension
-  private JvmTypeExtensions _jvmTypeExtensions;
+  protected JvmTypeExtensions _jvmTypeExtensions;
   
   @Inject
   @Extension
-  private LoopExtensions _loopExtensions;
+  protected LoopExtensions _loopExtensions;
   
   @Inject
   @Extension
-  private ErrorSafeExtensions _errorSafeExtensions;
+  protected ErrorSafeExtensions _errorSafeExtensions;
   
   @Inject
   private CommonTypeComputationServices commonServices;
@@ -252,37 +252,52 @@ public class JvmModelGenerator implements IGenerator {
     {
       this.generateJavaDoc(it, appendable, config);
       final ITreeAppendable childAppendable = appendable.trace(it);
-      boolean _isAnonymous = it.isAnonymous();
-      boolean _not = (!_isAnonymous);
-      if (_not) {
-        boolean _isGenerateSyntheticSuppressWarnings = config.isGenerateSyntheticSuppressWarnings();
-        if (_isGenerateSyntheticSuppressWarnings) {
-          this.generateAnnotationsWithSyntheticSuppressWarnings(it, childAppendable, config);
-        } else {
-          EList<JvmAnnotationReference> _annotations = it.getAnnotations();
-          this.generateAnnotations(_annotations, childAppendable, true, config);
-        }
-        this.generateModifier(it, childAppendable, config);
-        boolean _isInterface = it.isInterface();
-        if (_isInterface) {
-          childAppendable.append("interface ");
-        } else {
-          childAppendable.append("class ");
-        }
-        ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, it);
-        String _simpleName = it.getSimpleName();
-        _traceSignificant.append(_simpleName);
-        this.generateTypeParameterDeclaration(it, childAppendable, config);
-        EList<JvmTypeParameter> _typeParameters = it.getTypeParameters();
-        boolean _isEmpty = _typeParameters.isEmpty();
-        if (_isEmpty) {
-          childAppendable.append(" ");
-        }
-        this.generateExtendsClause(it, childAppendable, config);
+      boolean _isGenerateSyntheticSuppressWarnings = config.isGenerateSyntheticSuppressWarnings();
+      if (_isGenerateSyntheticSuppressWarnings) {
+        this.generateAnnotationsWithSyntheticSuppressWarnings(it, childAppendable, config);
       } else {
+        EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+        this.generateAnnotations(_annotations, childAppendable, true, config);
+      }
+      this.generateModifier(it, childAppendable, config);
+      boolean _isInterface = it.isInterface();
+      if (_isInterface) {
+        childAppendable.append("interface ");
+      } else {
+        childAppendable.append("class ");
+      }
+      ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, it);
+      String _simpleName = it.getSimpleName();
+      _traceSignificant.append(_simpleName);
+      this.generateTypeParameterDeclaration(it, childAppendable, config);
+      EList<JvmTypeParameter> _typeParameters = it.getTypeParameters();
+      boolean _isEmpty = _typeParameters.isEmpty();
+      if (_isEmpty) {
         childAppendable.append(" ");
       }
-      ITreeAppendable _append = childAppendable.append("{");
+      this.generateExtendsClause(it, childAppendable, config);
+      this.generateMembersInBody(it, childAppendable, config);
+      ITreeAppendable _xifexpression = null;
+      boolean _and = false;
+      boolean _isAnonymous = it.isAnonymous();
+      boolean _not = (!_isAnonymous);
+      if (!_not) {
+        _and = false;
+      } else {
+        _and = (!(it.eContainer() instanceof JvmType));
+      }
+      if (_and) {
+        _xifexpression = appendable.newLine();
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  public ITreeAppendable generateMembersInBody(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
+    ITreeAppendable _xblockexpression = null;
+    {
+      ITreeAppendable _append = appendable.append("{");
       _append.increaseIndentation();
       Iterable<JvmMember> _membersToBeCompiled = this.getMembersToBeCompiled(it);
       final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
@@ -297,29 +312,16 @@ public class JvmModelGenerator implements IGenerator {
       };
       final Procedure1<JvmMember> _function_1 = new Procedure1<JvmMember>() {
         public void apply(final JvmMember it) {
-          final ITreeAppendable memberAppendable = JvmModelGenerator.this._treeAppendableUtil.traceWithComments(childAppendable, it);
+          final ITreeAppendable memberAppendable = JvmModelGenerator.this._treeAppendableUtil.traceWithComments(appendable, it);
           memberAppendable.openScope();
           JvmModelGenerator.this.generateMember(it, memberAppendable, config);
           memberAppendable.closeScope();
         }
       };
-      this._loopExtensions.<JvmMember>forEach(childAppendable, _membersToBeCompiled, _function, _function_1);
-      ITreeAppendable _decreaseIndentation = childAppendable.decreaseIndentation();
+      this._loopExtensions.<JvmMember>forEach(appendable, _membersToBeCompiled, _function, _function_1);
+      ITreeAppendable _decreaseIndentation = appendable.decreaseIndentation();
       ITreeAppendable _newLine = _decreaseIndentation.newLine();
-      _newLine.append("}");
-      ITreeAppendable _xifexpression = null;
-      boolean _and = false;
-      boolean _isAnonymous_1 = it.isAnonymous();
-      boolean _not_1 = (!_isAnonymous_1);
-      if (!_not_1) {
-        _and = false;
-      } else {
-        _and = (!(it.eContainer() instanceof JvmType));
-      }
-      if (_and) {
-        _xifexpression = appendable.newLine();
-      }
-      _xblockexpression = _xifexpression;
+      _xblockexpression = _newLine.append("}");
     }
     return _xblockexpression;
   }
@@ -574,9 +576,7 @@ public class JvmModelGenerator implements IGenerator {
   protected ITreeAppendable _generateModifier(final JvmGenericType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
-      JvmVisibility _visibility = it.getVisibility();
-      String _javaName = this.javaName(_visibility);
-      appendable.append(_javaName);
+      this.generateVisibilityModifier(it, appendable);
       boolean _isInterface = it.isInterface();
       boolean _not = (!_isInterface);
       if (_not) {
@@ -604,17 +604,13 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   protected ITreeAppendable _generateModifier(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
-    JvmVisibility _visibility = it.getVisibility();
-    String _javaName = this.javaName(_visibility);
-    return appendable.append(_javaName);
+    return this.generateVisibilityModifier(it, appendable);
   }
   
   protected ITreeAppendable _generateModifier(final JvmField it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
-      JvmVisibility _visibility = it.getVisibility();
-      String _javaName = this.javaName(_visibility);
-      appendable.append(_javaName);
+      this.generateVisibilityModifier(it, appendable);
       boolean _isFinal = it.isFinal();
       if (_isFinal) {
         appendable.append("final ");
@@ -640,9 +636,7 @@ public class JvmModelGenerator implements IGenerator {
   protected ITreeAppendable _generateModifier(final JvmOperation it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
-      JvmVisibility _visibility = it.getVisibility();
-      String _javaName = this.javaName(_visibility);
-      appendable.append(_javaName);
+      this.generateVisibilityModifier(it, appendable);
       boolean _isAbstract = it.isAbstract();
       if (_isAbstract) {
         appendable.append("abstract ");
@@ -673,10 +667,14 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  protected ITreeAppendable _generateModifier(final JvmConstructor it, final ITreeAppendable appendable, final GeneratorConfig config) {
+  public ITreeAppendable generateVisibilityModifier(final JvmMember it, final ITreeAppendable result) {
     JvmVisibility _visibility = it.getVisibility();
     String _javaName = this.javaName(_visibility);
-    return appendable.append(_javaName);
+    return result.append(_javaName);
+  }
+  
+  protected ITreeAppendable _generateModifier(final JvmConstructor it, final ITreeAppendable appendable, final GeneratorConfig config) {
+    return this.generateVisibilityModifier(it, appendable);
   }
   
   /**
@@ -1229,9 +1227,7 @@ public class JvmModelGenerator implements IGenerator {
             final JvmTypeReference returnType = _switchResult;
             ITreeAppendable _append_2 = appendable.append("{");
             _append_2.increaseIndentation();
-            EList<JvmTypeReference> _exceptions = op.getExceptions();
-            Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_exceptions);
-            this.compiler.compile(expression, appendable, returnType, _set);
+            this.compile(op, expression, returnType, appendable, config);
             ITreeAppendable _decreaseIndentation_2 = appendable.decreaseIndentation();
             ITreeAppendable _newLine_2 = _decreaseIndentation_2.newLine();
             _newLine_2.append("}");
@@ -1260,6 +1256,12 @@ public class JvmModelGenerator implements IGenerator {
         }
       }
     }
+  }
+  
+  public ITreeAppendable compile(final JvmExecutable executable, final XExpression expression, final JvmTypeReference returnType, final ITreeAppendable appendable, final GeneratorConfig config) {
+    EList<JvmTypeReference> _exceptions = executable.getExceptions();
+    Set<JvmTypeReference> _set = IterableExtensions.<JvmTypeReference>toSet(_exceptions);
+    return this.compiler.compile(expression, appendable, returnType, _set);
   }
   
   public void assignThisAndSuper(final ITreeAppendable b, final JvmDeclaredType declaredType) {
