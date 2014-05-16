@@ -237,7 +237,7 @@ public class WorkbenchTestHelper extends Assert {
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		IJavaProject javaProject = JavaCore.create(result);
 		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
-		JavaProjectSetupUtil.addJre15ClasspathEntry(javaProject);
+		JavaProjectSetupUtil.addJreClasspathEntry(javaProject);
 		return result;
 	}
 	
