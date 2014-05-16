@@ -342,10 +342,16 @@ public class JvmModelGenerator implements IGenerator {
       EList<JvmAnnotationReference> _annotations = it.getAnnotations();
       Iterable<JvmAnnotationReference> _filter = IterableExtensions.<JvmAnnotationReference>filter(_annotations, noSuppressWarningsFilter);
       this.generateAnnotations(_filter, appendable, true, config);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("@SuppressWarnings(\"all\")");
-      ITreeAppendable _append = appendable.append(_builder);
-      _xblockexpression = _append.newLine();
+      ITreeAppendable _xifexpression = null;
+      EObject _eContainer = it.eContainer();
+      boolean _equals = Objects.equal(_eContainer, null);
+      if (_equals) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("@SuppressWarnings(\"all\")");
+        ITreeAppendable _append = appendable.append(_builder);
+        _xifexpression = _append.newLine();
+      }
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
