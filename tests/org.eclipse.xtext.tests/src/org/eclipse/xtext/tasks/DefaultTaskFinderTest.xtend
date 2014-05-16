@@ -16,6 +16,7 @@ import org.junit.Test
 
 import static org.eclipse.xtext.tasks.TaskAssert.*
 import org.eclipse.xtext.junit4.internal.LineDelimiters
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -28,6 +29,11 @@ class DefaultTaskFinderTest extends AbstractXtextTests {
 	def void setup() {
 		with(NoJdtTestLanguageStandaloneSetup)
 		finder = get(DefaultTaskFinder)
+	}
+	
+	@Test
+	def void testNonXtextResource() {
+		new ResourceImpl().assertContainsTasks(#[])
 	}
 
 	@Test

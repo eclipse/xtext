@@ -70,6 +70,8 @@ public class DefaultTaskFinder implements ITaskFinder {
           _elvis = Collections.<Task>unmodifiableList(Lists.<Task>newArrayList());
         }
         _xifexpression = _elvis;
+      } else {
+        _xifexpression = Collections.<Task>unmodifiableList(Lists.<Task>newArrayList());
       }
       _xblockexpression = _xifexpression;
     }
