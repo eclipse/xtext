@@ -51,7 +51,9 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
@@ -345,9 +347,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			}
 		}
 		if (node.getEndOffset() <= context.getOffset()) {
+			if (model instanceof XFeatureCall && model.eContainer() instanceof XClosure)
+				return;
 			createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
 			return;
 		}
+		if (model instanceof XClosure)
+			return;
 		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
 	}
 	
@@ -555,15 +561,26 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			IExpressionScope.Anchor anchor,
 			ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
+		String prefix = contentAssistContext.getPrefix();
+		if (prefix.length() > 0) {
+			if (!Character.isJavaIdentifierStart(prefix.charAt(0))) {
+				return;
+			}
+		}
+		
+//		long time = System.currentTimeMillis(); 
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(getFeatureCallRuleName(), contentAssistContext);
 		IResolvedTypes resolvedTypes = context != null ? typeResolver.resolveTypes(context) : typeResolver.resolveTypes(contentAssistContext.getResource());
 		IExpressionScope expressionScope = resolvedTypes.getExpressionScope(context, anchor);
 		// TODO use the type name information
 		IScope scope = expressionScope.getFeatureScope();
 		getCrossReferenceProposalCreator().lookupCrossReference(scope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, getFeatureDescriptionPredicate(contentAssistContext), proposalFactory);
+//		System.out.printf("XbaseProposalProvider.createLocalVariableAndImplicitProposals = %d\n", System.currentTimeMillis() - time);
+//		time = System.currentTimeMillis();
 		
 		// TODO use the type name information
 		proposeDeclaringTypeForStaticInvocation(context, null /* ignore */, contentAssistContext, acceptor);
+//		System.out.printf("XbaseProposalProvider.proposeDeclaringTypeForStaticInvocation = %d\n", System.currentTimeMillis() - time);
 	}
 
 	protected String getFeatureCallRuleName() {
@@ -579,6 +596,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 
 	protected void createReceiverProposals(XExpression receiver, CrossReference crossReference, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
+//		long time = System.currentTimeMillis();
 		String ruleName = getConcreteSyntaxRuleName(crossReference);
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(ruleName, contentAssistContext);
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(receiver);
@@ -600,6 +618,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			scope = filterByConcreteSyntax(expressionScope.getFeatureScope(), crossReference);
 		}
 		getCrossReferenceProposalCreator().lookupCrossReference(scope, receiver, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, getFeatureDescriptionPredicate(contentAssistContext), proposalFactory);
+//		System.out.printf("XbaseProposalProvider.createReceiverProposals = %d\n", System.currentTimeMillis() - time);
 	}
 	
 	protected IScope filterByConcreteSyntax(IScope parent, AbstractElement syntax) {
