@@ -38,6 +38,174 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testTypeUsed() {
+		'''
+			class C {
+				def m() {
+					val d = new D() {
+						/** comment */
+						final def op1() {
+						}
+						public def op2() {
+						}
+						private def op3() {
+						}
+						override toString() {
+							''
+						}
+					}
+					d.op1
+					d
+				}
+				static class D {
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public static class D {
+			  }
+			  
+			  public C.D m() {
+			    abstract class __C_1 extends C.D {
+			      /**
+			       * comment
+			       */
+			      public abstract Object op1();
+			      
+			      public abstract Object op2();
+			      
+			      abstract Object op3();
+			    }
+			    
+			    __C_1 _xblockexpression = null;
+			    {
+			      final __C_1 d = new __C_1() {
+			        /**
+			         * comment
+			         */
+			        public final Object op1() {
+			          return null;
+			        }
+			        
+			        public Object op2() {
+			          return null;
+			        }
+			        
+			        Object op3() {
+			          return null;
+			        }
+			        
+			        public String toString() {
+			          return "";
+			        }
+			      };
+			      d.op1();
+			      _xblockexpression = d;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testTypeUsedAndConstructor() {
+		'''
+			class C {
+				def m() {
+					val d = new D(true, 1) {
+						final def op1() {
+						}
+					}
+					d.op1
+					d
+				}
+				static class D {
+					new(boolean b, int i) {}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public static class D {
+			    public D(final boolean b, final int i) {
+			    }
+			  }
+			  
+			  public C.D m() {
+			    abstract class __C_1 extends C.D {
+			      __C_1(final boolean b, final int i) {
+			        super(b, i);
+			      }
+			      
+			      public abstract Object op1();
+			    }
+			    
+			    __C_1 _xblockexpression = null;
+			    {
+			      final __C_1 d = new __C_1(true, 1) {
+			        public final Object op1() {
+			          return null;
+			        }
+			      };
+			      d.op1();
+			      _xblockexpression = d;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testTypeUsed_02() {
+		'''
+			class C {
+				def m() {
+					val i = {
+						val i2 = new I() {
+							public def op() {
+							}
+						}
+						i2
+					}
+					i.op
+				}
+				interface I {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public interface I {
+			  }
+			  
+			  public Object m() {
+			    abstract class __C_1 implements C.I {
+			      public abstract Object op();
+			    }
+			    
+			    Object _xblockexpression = null;
+			    {
+			      __C_1 _xblockexpression_1 = null;
+			      {
+			        final __C_1 i2 = new __C_1() {
+			          public Object op() {
+			            return null;
+			          }
+			        };
+			        _xblockexpression_1 = i2;
+			      }
+			      final __C_1 i = _xblockexpression_1;
+			      _xblockexpression = i.op();
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testTwoClasses() {
 		'''
 			class C {
@@ -86,24 +254,28 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
-			    final class __C_1 implements Runnable {
+			    abstract class __C_1 implements Runnable {
+			      public abstract void m();
+			    }
+			    
+			    abstract class __C_2 implements Runnable {
+			      public abstract void m();
+			    }
+			    
+			    new __C_1() {
 			      public void run() {
 			      }
 			      
 			      public void m() {
 			      }
-			    }
-			    
-			    new __C_1();
-			    final class __C_2 implements Runnable {
+			    };
+			    new __C_2() {
 			      public void run() {
 			      }
 			      
 			      public void m() {
 			      }
-			    }
-			    
-			    new __C_2();
+			    };
 			  }
 			}
 		''')
@@ -167,16 +339,18 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public C.D m() {
-			    final class __C_1 extends C.D {
-			      public void n() {
-			      }
-			      
+			    abstract class __C_1 extends C.D {
 			      __C_1(final boolean b) {
 			        super(b);
 			      }
+			      
+			      public abstract void n();
 			    }
 			    
-			    return new __C_1(true);
+			    return new __C_1(true) {
+			      public void n() {
+			      }
+			    };
 			  }
 			}
 		''')
@@ -246,15 +420,17 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public ArrayList<? extends Runnable> m() {
-			    final class __C_1 implements Runnable {
+			    abstract class __C_1 implements Runnable {
+			      public abstract void m();
+			    }
+			    
+			    __C_1 ___C_1 = new __C_1() {
 			      public void run() {
 			      }
 			      
 			      public void m() {
 			      }
-			    }
-			    
-			    __C_1 ___C_1 = new __C_1();
+			    };
 			    return CollectionLiterals.<__C_1>newArrayList(___C_1);
 			  }
 			}
@@ -279,24 +455,28 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public ArrayList<Runnable> m() {
-			    final class __C_1 implements Runnable {
+			    abstract class __C_1 implements Runnable {
+			      public abstract void m();
+			    }
+			    
+			    abstract class __C_2 implements Runnable {
+			      public abstract void m();
+			    }
+			    
+			    __C_1 ___C_1 = new __C_1() {
 			      public void run() {
 			      }
 			      
 			      public void m() {
 			      }
-			    }
-			    
-			    __C_1 ___C_1 = new __C_1();
-			    final class __C_2 implements Runnable {
+			    };
+			    __C_2 ___C_2 = new __C_2() {
 			      public void run() {
 			      }
 			      
 			      public void m() {
 			      }
-			    }
-			    
-			    __C_2 ___C_2 = new __C_2();
+			    };
 			    return CollectionLiterals.<Runnable>newArrayList(___C_1, ___C_2);
 			  }
 			}
@@ -318,15 +498,17 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public ArrayList<? extends ArrayList<? extends Runnable>> m() {
-			    final class __C_1 implements Runnable {
+			    abstract class __C_1 implements Runnable {
+			      public abstract void m();
+			    }
+			    
+			    __C_1 ___C_1 = new __C_1() {
 			      public void run() {
 			      }
 			      
 			      public void m() {
 			      }
-			    }
-			    
-			    __C_1 ___C_1 = new __C_1();
+			    };
 			    ArrayList<__C_1> _newArrayList = CollectionLiterals.<__C_1>newArrayList(___C_1);
 			    return CollectionLiterals.<ArrayList<__C_1>>newArrayList(_newArrayList);
 			  }
@@ -500,13 +682,15 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public D newD() {
-			    final class __C_1 extends D {
+			    abstract class __C_1 extends D {
+			      public abstract __C_1 m();
+			    }
+			    
+			    return new __C_1() {
 			      public __C_1 m() {
 			        return this;
 			      }
-			    }
-			    
-			    return new __C_1();
+			    };
 			  }
 			}
 		''')
@@ -529,13 +713,15 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public D newD() {
-			    final class __C_1 extends D {
+			    abstract class __C_1 extends D {
+			      public abstract String m();
+			    }
+			    
+			    return new __C_1() {
 			      public String m() {
 			        return this.toString();
 			      }
-			    }
-			    
-			    return new __C_1();
+			    };
 			  }
 			}
 		''')
@@ -559,13 +745,15 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public D newD() {
-			    final class __C_1 extends D {
+			    abstract class __C_1 extends D {
+			      public abstract void m();
+			    }
+			    
+			    return new __C_1() {
 			      public void m() {
 			        C.this.m2();
 			      }
-			    }
-			    
-			    return new __C_1();
+			    };
 			  }
 			  
 			  public void m2() {
@@ -592,13 +780,15 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public D newD() {
-			    final class __C_1 extends D {
+			    abstract class __C_1 extends D {
+			      public abstract void m();
+			    }
+			    
+			    return new __C_1() {
 			      public void m() {
 			        C.this.m();
 			      }
-			    }
-			    
-			    return new __C_1();
+			    };
 			  }
 			  
 			  public void m() {
@@ -688,14 +878,14 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  public void foo() {
-			    final class __Foo_1 implements Runnable {
-			      public void run() {
-			      }
-			      
-			      private int baz;
+			    abstract class __Foo_1 implements Runnable {
+			      int baz;
 			    }
 			    
-			    final __Foo_1 bar = new __Foo_1();
+			    final __Foo_1 bar = new __Foo_1() {
+			      public void run() {
+			      }
+			    };
 			  }
 			}
 		''')
@@ -716,14 +906,14 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  public Runnable foo() {
-			    final class __Foo_1 implements Runnable {
-			      public void run() {
-			      }
-			      
-			      private int baz;
+			    abstract class __Foo_1 implements Runnable {
+			      int baz;
 			    }
 			    
-			    return new __Foo_1();
+			    return new __Foo_1() {
+			      public void run() {
+			      }
+			    };
 			  }
 			}
 		''')
@@ -813,19 +1003,19 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			}
 		'''.assertCompilesTo('''
 			import org.eclipse.xtext.xbase.lib.Functions.Function0;
-
+			
 			@SuppressWarnings("all")
 			public class Foo {
 			  private final Runnable bar = new Function0<Runnable>() {
 			    public Runnable apply() {
-			      final class __Foo_1 implements Runnable {
-			        private int baz;
-			        
-			        public void run() {
-			        }
+			      abstract class __Foo_1 implements Runnable {
+			        int baz;
 			      }
 			      
-			      __Foo_1 ___Foo_1 = new __Foo_1();
+			      __Foo_1 ___Foo_1 = new __Foo_1() {
+			        public void run() {
+			        }
+			      };
 			      return ___Foo_1;
 			    }
 			  }.apply();
@@ -853,11 +1043,12 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  
 			  private final Object outerField = new Function0<Object>() {
 			    public Object apply() {
-			      final class __C_1 {
-			        private int localField;
+			      abstract class __C_1 {
+			        int localField;
 			      }
 			      
-			      __C_1 ___C_1 = new __C_1();
+			      __C_1 ___C_1 = new __C_1() {
+			      };
 			      final Procedure1<__C_1> _function = new Procedure1<__C_1>() {
 			        public void apply(final __C_1 it) {
 			          it.localField = C.this.secondOuterField;
@@ -867,6 +1058,113 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			      return _doubleArrow;
 			    }
 			  }.apply();
+			}
+		''')
+	}
+	
+	@Test
+	def void testFieldInitializerUsesCapturedLocal_01() {
+		'''
+			class C {
+				def m() {
+					val s1 = ''
+					val r = new Runnable() {
+						val s2 = s1
+						override run() {
+							s2.toString
+						}
+					}
+					r
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public Runnable m() {
+			    abstract class __C_1 implements Runnable {
+			      String s2;
+			    }
+			    
+			    __C_1 _xblockexpression = null;
+			    {
+			      final String s1 = "";
+			      final __C_1 r = new __C_1() {
+			        {
+			          s2 = s1;
+			        }
+			        public void run() {
+			          this.s2.toString();
+			        }
+			      };
+			      _xblockexpression = r;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testFieldInitializerUsesCapturedLocal_02() {
+		'''
+			class C {
+				def m() {
+					val s = ''
+					val r = new Runnable() {
+						val idx = try {
+							s.substring(1).length
+						} catch(Exception e) {
+							-1
+						}
+						override run() {
+							idx.toString
+						}
+					}
+					r
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public Runnable m() {
+			    abstract class __C_1 implements Runnable {
+			      int idx;
+			    }
+			    
+			    __C_1 _xblockexpression = null;
+			    {
+			      final String s = "";
+			      final __C_1 r = new __C_1() {
+			        {
+			          idx = new Function0<Integer>() {
+			            public Integer apply() {
+			              int _xtrycatchfinallyexpression = (int) 0;
+			              try {
+			                String _substring = s.substring(1);
+			                _xtrycatchfinallyexpression = _substring.length();
+			              } catch (final Throwable _t) {
+			                if (_t instanceof Exception) {
+			                  final Exception e = (Exception)_t;
+			                  _xtrycatchfinallyexpression = (-1);
+			                } else {
+			                  throw Exceptions.sneakyThrow(_t);
+			                }
+			              }
+			              return _xtrycatchfinallyexpression;
+			            }
+			          }.apply().intValue();
+			        }
+			        public void run() {
+			          Integer.valueOf(this.idx).toString();
+			        }
+			      };
+			      _xblockexpression = r;
+			    }
+			    return _xblockexpression;
+			  }
 			}
 		''')
 	}
@@ -888,11 +1186,12 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Object m() {
-			    final class __C_1 {
-			      public int f;
+			    abstract class __C_1 {
+			      int f;
 			    }
 			    
-			    __C_1 ___C_1 = new __C_1();
+			    __C_1 ___C_1 = new __C_1() {
+			    };
 			    final Procedure1<__C_1> _function = new Procedure1<__C_1>() {
 			      public void apply(final __C_1 it) {
 			        it.f = 1;
@@ -1064,13 +1363,15 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public Object m() {
-			    final class __C_1 {
+			    abstract class __C_1 {
+			      public abstract <T extends Object> T m2();
+			    }
+			    
+			    return new __C_1() {
 			      public <T extends Object> T m2() {
 			        return null;
 			      }
-			    }
-			    
-			    return new __C_1();
+			    };
 			  }
 			}
 		''')
@@ -1099,9 +1400,17 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public <K extends Object> Object m() {
-			    final class __C_1 {
+			    abstract class __C_1 {
+			      public abstract <V extends Object> AbstractMap<K, V> m2();
+			    }
+			    
+			    return new __C_1() {
 			      public <V extends Object> AbstractMap<K, V> m2() {
-			        final class ____C_1 extends AbstractMap<K, V> {
+			        abstract class ____C_1 extends AbstractMap<K, V> {
+			          public abstract Map.Entry<K, V> m();
+			        }
+			        
+			        return new ____C_1() {
 			          public Map.Entry<K, V> m() {
 			            return null;
 			          }
@@ -1109,13 +1418,9 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			          public Set<Map.Entry<K, V>> entrySet() {
 			            return null;
 			          }
-			        }
-			        
-			        return new ____C_1();
+			        };
 			      }
-			    }
-			    
-			    return new __C_1();
+			    };
 			  }
 			}
 		''')

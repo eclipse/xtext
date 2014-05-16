@@ -30,8 +30,11 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.generator.trace.LocationData;
@@ -46,7 +49,6 @@ import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider;
-import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -72,7 +74,7 @@ public class XtendCompiler extends XbaseCompiler {
 	private Provider<DefaultIndentationHandler> indentationHandler;
 	
 	@Inject 
-	private JvmModelGenerator jvmModelGenerator;
+	private XtendGenerator jvmModelGenerator;
 	
 	@Inject 
 	private GeneratorConfigProvider generatorConfigProvider;
@@ -340,12 +342,20 @@ public class XtendCompiler extends XbaseCompiler {
 	
 	@Override
 	public void doInternalToJavaStatement(XExpression obj, ITreeAppendable appendable, boolean isReferenced) {
+		prependLocalTypesIfFieldInitializer(obj, appendable, isReferenced);
 		if(obj instanceof AnonymousClass) 
 			_toJavaStatement((AnonymousClass)obj, appendable, isReferenced);
 		else if (obj instanceof RichString)
 			_toJavaStatement((RichString)obj, appendable, isReferenced);
 		else
 			super.doInternalToJavaStatement(obj, appendable, isReferenced);
+	}
+	
+	private void prependLocalTypesIfFieldInitializer(XExpression obj, ITreeAppendable appendable, boolean isReferenced) {
+		JvmIdentifiableElement container = getLogicalContainerProvider().getLogicalContainer(obj);
+		if (container instanceof JvmField) {
+			jvmModelGenerator.compileLocalTypeStubs((JvmFeature) container, appendable, null);
+		}
 	}
 	
 	public void _toJavaStatement(RichString richString, ITreeAppendable b, boolean isReferenced) {
@@ -407,17 +417,16 @@ public class XtendCompiler extends XbaseCompiler {
 			XConstructorCall constructorCall = anonymousClass.getConstructorCall();
 			constructorCallToJavaExpression(constructorCall, b);
 			JvmDeclaredType declaringType = constructorCall.getConstructor().getDeclaringType();
-			if (declaringType instanceof JvmGenericType && ((JvmGenericType) declaringType).isAnonymous()) {
-				compileAnonymousClass(anonymousClass, declaringType, b);
-			}
+			compileAnonymousClassBody(anonymousClass, declaringType, b);
 		}
 	}
 
-	protected void compileAnonymousClass(AnonymousClass anonymousClass, JvmDeclaredType type, ITreeAppendable b) {
+	protected void compileAnonymousClassBody(AnonymousClass anonymousClass, JvmDeclaredType type, ITreeAppendable b) {
 		ITreeAppendable appendable = b.trace(anonymousClass, true);
+		appendable.append(" ");
 		appendable.openScope();
 		jvmModelGenerator.assignThisAndSuper(appendable, type);
-		jvmModelGenerator.generateBody(type, appendable, generatorConfigProvider.get(anonymousClass));
+		jvmModelGenerator.generateMembersInBody(type, appendable, generatorConfigProvider.get(anonymousClass));
 		appendable.closeScope();
 	}
 	
@@ -506,11 +515,6 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 	
 	protected void _toJavaStatement(final AnonymousClass anonymousClass, ITreeAppendable b, final boolean isReferenced) {
-		JvmGenericType inferredLocalClass = associations.getInferredType(anonymousClass);
-		if(!inferredLocalClass.isAnonymous()) {
-			b.newLine();
-			compileAnonymousClass(anonymousClass, inferredLocalClass, b);
-		}
 		_toJavaStatement(anonymousClass.getConstructorCall(), b, isReferenced);
 	}
 	
@@ -526,15 +530,18 @@ public class XtendCompiler extends XbaseCompiler {
 			if (expr.eContainer() instanceof AnonymousClass) {
 				JvmConstructor constructor = expr.getConstructor();
 				JvmDeclaredType declaringType = constructor.getDeclaringType();
-				if (declaringType instanceof JvmGenericType && ((JvmGenericType) declaringType).isAnonymous()) {
-					compileAnonymousClass((AnonymousClass) expr.eContainer(), declaringType, b);
-				}
+				compileAnonymousClassBody((AnonymousClass) expr.eContainer(), declaringType, b);
 			}
 			b.append(";");
 		} else if (isVariableDeclarationRequired(expr, b)) {
 			Later later = new Later() {
 				public void exec(ITreeAppendable appendable) {
 					constructorCallToJavaExpression(expr, appendable);
+					if (expr.eContainer() instanceof AnonymousClass) {
+						JvmConstructor constructor = expr.getConstructor();
+						JvmDeclaredType declaringType = constructor.getDeclaringType();
+						compileAnonymousClassBody((AnonymousClass) expr.eContainer(), declaringType, appendable);
+					}
 				}
 			};
 			declareFreshLocalVariable(expr, b, later);
