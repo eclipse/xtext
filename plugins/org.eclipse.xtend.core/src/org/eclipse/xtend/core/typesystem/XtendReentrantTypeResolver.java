@@ -60,8 +60,10 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
+import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
@@ -746,11 +748,28 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		} else
 			constructor.setVisibility(JvmVisibility.PRIVATE);
 		constructor.setSimpleName(inferredLocalClass.getSimpleName());
-		for(JvmFormalParameter parameter: superConstructor.getParameters()) 
+		final List<JvmFormalParameter> parameters = superConstructor.getParameters();
+		for(JvmFormalParameter parameter: parameters) 
 			constructor.getParameters().add(typesBuilder.cloneWithProxies(parameter));
 		
 		for (JvmTypeReference exception : superConstructor.getExceptions()) 
 			constructor.getExceptions().add(typesBuilder.cloneWithProxies(exception));
+		
+		if (!parameters.isEmpty()) {
+			typesBuilder.setBody(constructor, new Procedures.Procedure1<ITreeAppendable>() {
+				public void apply(ITreeAppendable a) {
+					a.append("super(");
+					for(int i = 0; i < parameters.size(); i++) {
+						if (i != 0) {
+							a.append(", ");
+						}
+						a.append(parameters.get(i).getSimpleName());
+					}
+					a.append(");");
+				}
+				
+			});
+		}
 		return constructor;
 	}
 

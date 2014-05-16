@@ -696,7 +696,7 @@ class JvmModelGenerator implements IGenerator {
 		val adapter = it.eAdapters.filter(DocumentationAdapter).head
 		if(!adapter?.documentation.nullOrEmpty) {
 			// TODO we should track the source of the documentation in the documentation adapter
-			val sourceElements = jvmModelAssociations.getSourceElements(it)
+			val sourceElements = it.sourceElements
 			if (sourceElements.size == 1 && documentationProvider instanceof IEObjectDocumentationProviderExtension) {
 				val documentationNodes = (documentationProvider as IEObjectDocumentationProviderExtension).getDocumentationNodes(sourceElements.head)
 				addJavaDocImports(appendable, documentationNodes)
@@ -916,5 +916,19 @@ class JvmModelGenerator implements IGenerator {
 		members.filter[
 			!(it instanceof JvmConstructor && (it as JvmConstructor).singleSyntheticDefaultConstructor)
 		]
+	}
+	
+	def dispatch Iterable<JvmMember> getMembersToBeCompiled(JvmGenericType it) {
+		if (it.anonymous) {
+			members.filter[
+				!(it instanceof JvmConstructor)
+			]
+		} else {
+			_getMembersToBeCompiled(it as JvmDeclaredType)
+		}
+	}
+	
+	protected def getSourceElements(EObject jvmElement) {
+		return jvmModelAssociations.getSourceElements(jvmElement)
 	}
 }
