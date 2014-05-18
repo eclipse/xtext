@@ -48,15 +48,29 @@ public class PartialParserTest extends AbstractXtendTestCase {
 	@Inject
 	private Provider<ResourceValidatorImpl> resourceValidatorProvider;
 	
+	@Test public void testBug434727_01() throws Exception {
+		String model =
+				"import static\n" + 
+				"class Foo {}";
+		doTestUpdateAtOffset(model, "import static".length(), 0, " ", "Bug434727.xtend");
+	}
+	
+	@Test public void testBug434727_02() throws Exception {
+		String model =
+				"import static  java.util.Collections.*\n" + 
+				"class Foo {}";
+		doTestUpdateAtOffset(model, "import static".length(), 0, " ", "Bug434727.xtend");
+	}
+	
 	@Test public void testNoClassCastException() throws Exception {
 		String model =
 				"package org.eclipse.xtend.core.tests.parsing\n" + 
-				"\n" + 
-				"class NoClassCastException {\n" + 
-				"\n" + 
-				"	String foo(String a, String b) {\n" + 
-				"		if (isUpper(a)) {\n" + 
-				"			another(a,b+'holla')";
+						"\n" + 
+						"class NoClassCastException {\n" + 
+						"\n" + 
+						"	String foo(String a, String b) {\n" + 
+						"		if (isUpper(a)) {\n" + 
+						"			another(a,b+'holla')";
 		doTestUpdateAtEnd(model, '\n', "NoClassCastException.xtend");
 	}
 	

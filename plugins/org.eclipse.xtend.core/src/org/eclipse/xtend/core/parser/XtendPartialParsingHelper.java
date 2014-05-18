@@ -90,7 +90,7 @@ public class XtendPartialParsingHelper implements IPartialParsingHelper {
 		
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(oldRootNode, leftNode, rightNode);
 		ICompositeNode replaceMe = getReplacedNode(parsingPointers);
-		if (replaceMe == null || replaceMe == oldRootNode) {
+		if (replaceMe == null || replaceMe == oldRootNode || replaceMe.getOffset() == 0 && replaceMe.getEndOffset() == oldRootNode.getLength()) {
 			return fullyReparse(parser, previousParseResult, changedRegion);
 		}
 		String reparseRegion = insertChangeIntoReplaceRegion(replaceMe, changedRegion);
