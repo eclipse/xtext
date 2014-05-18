@@ -107,7 +107,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
-import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.ReassignFirstArgument;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -433,8 +433,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (listType == null || listType.getTypeParameters().isEmpty()) {
 			error("Couldn't find a JDK 1.5 or higher on the project's classpath.", xtendFile, XTEND_FILE__PACKAGE,
 					IssueCodes.JDK_NOT_ON_CLASSPATH);
-		} else if (typeReferences.findDeclaredType(Extension.class, xtendFile) == null) {
-			error("Couldn't find the mandatory library 'org.eclipse.xtext.xbase.lib' 2.4.0 or higher on the project's classpath.",
+		} else if (typeReferences.findDeclaredType(ReassignFirstArgument.class, xtendFile) == null) {
+			error("Couldn't find the mandatory library 'org.eclipse.xtext.xbase.lib' 2.6.0 or higher on the project's classpath.",
 					xtendFile, XTEND_FILE__PACKAGE, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
 	}
