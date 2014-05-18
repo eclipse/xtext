@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -18,12 +19,16 @@ import com.google.common.annotations.GwtCompatible;
 /**
  * The annotated function assigns the returned value to the first argument.
  * 
+ * That is, it is required that the first argument is a reference to an assignable
+ * variable or field.
+ * 
  * @author Anton Kosyakov - Initial contribution and API
  * @since 2.6
  */
 @Beta
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = { ElementType.METHOD })
+@Documented
 @GwtCompatible
 public @interface ReassignFirstArgument {
 
