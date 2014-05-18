@@ -218,7 +218,7 @@ component = DirectoryCleaner {
 }
 
 component = DirectoryCleaner {
-	directory = "${runtimeProject}/model"
+	directory = "${runtimeProject}/model/generated"
 }
 
 component = DirectoryCleaner {
