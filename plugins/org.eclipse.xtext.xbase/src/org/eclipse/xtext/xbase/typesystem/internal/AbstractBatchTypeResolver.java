@@ -11,8 +11,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -38,16 +36,16 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 	protected AbstractBatchTypeResolver() {
 	}
 	
-	@NonNull
-	public final IResolvedTypes resolveTypes(final @Nullable EObject object) {
+	/* @NonNull */
+	public final IResolvedTypes resolveTypes(final /* @Nullable */ EObject object) {
 		if (object == null || object.eIsProxy()) {
 			return IResolvedTypes.NULL;
 		}
 		return doResolveTypes(object);
 	}
 	
-	@NonNull
-	public IResolvedTypes resolveTypes(@NonNull Resource resource) {
+	/* @NonNull */
+	public IResolvedTypes resolveTypes(/* @NonNull */ Resource resource) {
 		List<EObject> resourceContents = resource.getContents();
 		if (resourceContents.isEmpty()) {
 			IFeatureScopeSession session = scopeProvider.newSession(resource);
@@ -57,6 +55,6 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 		}
 	}
 
-	@NonNull
-	protected abstract IResolvedTypes doResolveTypes(@NonNull EObject object);
+	/* @NonNull */
+	protected abstract IResolvedTypes doResolveTypes(/* @NonNull */ EObject object);
 }

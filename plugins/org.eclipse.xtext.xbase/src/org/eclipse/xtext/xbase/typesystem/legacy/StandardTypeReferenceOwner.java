@@ -13,8 +13,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -26,13 +24,12 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 
 	private CommonTypeComputationServices services;
 	private ResourceSet context;
 
-	public StandardTypeReferenceOwner(CommonTypeComputationServices services, @Nullable ResourceSet context) {
+	public StandardTypeReferenceOwner(CommonTypeComputationServices services, /* @Nullable */ ResourceSet context) {
 		this.services = services;
 		this.context = context;
 	}

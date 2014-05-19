@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -63,7 +61,6 @@ import com.google.common.collect.Lists;
  * 
  * TODO JavaDoc
  */
-@NonNullByDefault
 public abstract class AbstractTypeComputationState implements ITypeComputationState {
 	protected final ResolvedTypes resolvedTypes;
 	private IFeatureScopeSession featureScopeSession;
@@ -103,7 +100,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	protected abstract LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... conformanceHint);
 	protected abstract LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... conformanceHint);
 	
-	public final ITypeComputationResult computeTypes(@Nullable XExpression expression) {
+	public final ITypeComputationResult computeTypes(/* @Nullable */ XExpression expression) {
 		if (expression != null) {
 			if (expression.eContainer() == null && expression.eResource() == null)
 				throw new IllegalStateException("Dangling expression: " + expression);
@@ -142,7 +139,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	 * Clients who override this method have to be careful with AbstractPendingLinkingCandidate#computeArgumentTypes where
 	 * a subtype of TypeComputationStateWithExpectation is used.
 	 */
-	public TypeComputationStateWithExpectation withExpectation(@Nullable LightweightTypeReference expectation) {
+	public TypeComputationStateWithExpectation withExpectation(/* @Nullable */ LightweightTypeReference expectation) {
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, this, expectation);
 	}
 	
@@ -151,7 +148,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		getResolvedTypes().refineExpectedType(expression, typeExpectation);
 	}
 	
-	public TypeComputationStateWithRootExpectation withRootExpectation(@Nullable LightweightTypeReference expectation) {
+	public TypeComputationStateWithRootExpectation withRootExpectation(/* @Nullable */ LightweightTypeReference expectation) {
 		return new TypeComputationStateWithRootExpectation(resolvedTypes, featureScopeSession, this, expectation);
 	}
 	
@@ -175,7 +172,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, this, null);
 	}
 	
-	public TypeCheckpointComputationState withTypeCheckpoint(@Nullable EObject context) {
+	public TypeCheckpointComputationState withTypeCheckpoint(/* @Nullable */ EObject context) {
 		return new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, this);
 	}
 	
@@ -183,11 +180,11 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new ExpectedExceptionTypeComputationState(resolvedTypes, featureScopeSession, this, declaredExceptionTypes);
 	}
 	
-	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, @Nullable  LightweightTypeReference type) {
+	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, /* @Nullable */  LightweightTypeReference type) {
 		return assignType(element, type, true);
 	}
 	
-	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, @Nullable  LightweightTypeReference type, boolean addToChildScope) {
+	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, /* @Nullable */  LightweightTypeReference type, boolean addToChildScope) {
 		TypeAssigner assigner = assignTypes();
 		assigner.assignType(element, type, addToChildScope);
 		return assigner.getForkedState();
@@ -359,7 +356,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			}
 			
 			@Override
-			@Nullable
+			/* @Nullable */
 			public LightweightTypeReference getActualType(XExpression expression) {
 				LightweightTypeReference type = super.getActualType(expression);
 				if (type == null) {

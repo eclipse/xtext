@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.arguments;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -25,7 +23,6 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class StandardFeatureCallArguments implements IFeatureCallArguments {
 
 	protected final List<JvmFormalParameter> parameters;
@@ -56,7 +53,7 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 		return new SuperfluousFeatureCallArgumentSlot(this, nextUnprocessedArgument);
 	}
 
-	@Nullable
+	/* @Nullable */
 	public XExpression getArgument(int idx) {
 		return internalGetArgument(idx - receiverFixup);
 	}
@@ -69,14 +66,14 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 		return false;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected XExpression internalGetArgument(int idx) {
 		if (idx < 0)
 			return null;
 		return arguments.get(idx);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference internalGetParameterType(int idx) {
 		JvmFormalParameter parameter = parameters.get(idx);
 		return toLightweightTypeReference(parameter);
@@ -96,7 +93,7 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 		this.nextUnprocessedArgument = Math.max(argumentIndex + 1, nextUnprocessedArgument);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference toLightweightTypeReference(JvmFormalParameter parameter) {
 		JvmTypeReference parameterType = parameter.getParameterType();
 		if (parameterType == null) {

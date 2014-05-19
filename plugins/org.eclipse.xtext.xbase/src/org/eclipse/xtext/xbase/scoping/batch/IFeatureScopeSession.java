@@ -13,8 +13,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -43,7 +41,6 @@ import com.google.inject.ImplementedBy;
  * TODO More JavaDoc
  * TODO cleanup
  */
-@NonNullByDefault
 @ImplementedBy(RootFeatureScopeSession.class)
 public interface IFeatureScopeSession extends IVisibilityHelper {
 
@@ -159,7 +156,7 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	 * Find a local element with the given qualified name.
 	 * @return the known element or <code>null</code>.
 	 */
-	@Nullable IEObjectDescription getLocalElement(QualifiedName name);
+	/* @Nullable */ IEObjectDescription getLocalElement(QualifiedName name);
 	
 	/**
 	 * Return all local elements that are known in this session.
@@ -198,6 +195,6 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	 * @param receiverFeature the links the receiver of the feature call to the given member. May be unknown.
 	 * @return <code>true</code> if the feature can be accessed.
 	 */
-	boolean isVisible(JvmMember member, @Nullable LightweightTypeReference receiverType, @Nullable JvmIdentifiableElement receiverFeature);
+	boolean isVisible(JvmMember member, /* @Nullable */ LightweightTypeReference receiverType, /* @Nullable */ JvmIdentifiableElement receiverFeature);
 
 }

@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -29,7 +27,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class FollowUpError extends AbstractUnresolvableReference implements IFeatureLinkingCandidate {
 
 	public FollowUpError(XAbstractFeatureCall featureCall, ExpressionTypeComputationState state) {
@@ -83,7 +80,7 @@ public class FollowUpError extends AbstractUnresolvableReference implements IFea
 		return result;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected XExpression getSyntacticReceiver() {
 		return new FeatureLinkHelper().getSyntacticReceiver(getFeatureCall());
 	}

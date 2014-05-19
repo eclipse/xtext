@@ -13,8 +13,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -48,7 +46,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class TypeInsteadOfConstructorLinkingCandidate extends AbstractUnresolvableReference implements IConstructorLinkingCandidate {
 
 	private final IIdentifiableElementDescription description;
@@ -58,7 +55,7 @@ public class TypeInsteadOfConstructorLinkingCandidate extends AbstractUnresolvab
 		this.description = description;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public JvmConstructor getConstructor() {
 		return null;
 	}
@@ -91,7 +88,7 @@ public class TypeInsteadOfConstructorLinkingCandidate extends AbstractUnresolvab
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public JvmIdentifiableElement getFeature() {
 		return description.getElementOrProxy();
 	}

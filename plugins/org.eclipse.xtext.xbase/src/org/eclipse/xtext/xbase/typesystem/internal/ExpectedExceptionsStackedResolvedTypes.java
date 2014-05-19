@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
@@ -27,7 +25,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@NonNullByDefault
 public class ExpectedExceptionsStackedResolvedTypes extends StackedResolvedTypes {
 
 	private List<LightweightTypeReference> expectedExceptions;
@@ -128,12 +125,12 @@ public class ExpectedExceptionsStackedResolvedTypes extends StackedResolvedTypes
 	}
 
 	@Override
-	public void reassignType(JvmIdentifiableElement identifiable, @Nullable LightweightTypeReference reference) {
+	public void reassignType(JvmIdentifiableElement identifiable, /* @Nullable */ LightweightTypeReference reference) {
 		getParent().reassignType(identifiable, reference);
 	}
 
 	@Override
-	public void reassignTypeWithoutMerge(JvmIdentifiableElement identifiable, @Nullable LightweightTypeReference reference) {
+	public void reassignTypeWithoutMerge(JvmIdentifiableElement identifiable, /* @Nullable */ LightweightTypeReference reference) {
 		getParent().reassignTypeWithoutMerge(identifiable, reference);
 	}
 	

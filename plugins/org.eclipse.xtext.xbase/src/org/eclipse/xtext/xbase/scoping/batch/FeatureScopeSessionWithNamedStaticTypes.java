@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures.Provider;
@@ -21,7 +20,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class FeatureScopeSessionWithNamedStaticTypes extends AbstractFeatureScopeSessionWithStaticTypes<Map<? extends JvmType, Set<String>>> {
 
 	public FeatureScopeSessionWithNamedStaticTypes(AbstractFeatureScopeSession featureScopeSession,

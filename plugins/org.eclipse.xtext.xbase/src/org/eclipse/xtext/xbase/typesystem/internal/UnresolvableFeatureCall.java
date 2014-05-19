@@ -13,8 +13,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
@@ -31,7 +29,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class UnresolvableFeatureCall extends AbstractUnresolvableReferenceWithNode implements IFeatureLinkingCandidate {
 
 	public UnresolvableFeatureCall(XAbstractFeatureCall featureCall, INode node, String text, ExpressionTypeComputationState state) {
@@ -113,7 +110,7 @@ public class UnresolvableFeatureCall extends AbstractUnresolvableReferenceWithNo
 	}
 
 	
-	@Nullable
+	/* @Nullable */
 	protected XExpression getSyntacticReceiver() {
 		return new FeatureLinkHelper().getSyntacticReceiver(getFeatureCall());
 	}

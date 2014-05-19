@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -34,10 +32,9 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class FeatureLinkHelper {
 	
-	@Nullable
+	/* @Nullable */
 	public XExpression getSyntacticReceiver(XExpression expression) {
 		if (expression instanceof XAbstractFeatureCall) {
 			if (expression instanceof XFeatureCall) {
@@ -108,7 +105,7 @@ public class FeatureLinkHelper {
 		return Collections.emptyList();
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getExpectedReceiverType(JvmIdentifiableElement linkedFeature, LightweightTypeReference receiverType) {
 		if (receiverType.isMultiType() && linkedFeature instanceof JvmMember) {
 			ParameterizedTypeReference declaratorReference = new ParameterizedTypeReference(receiverType.getOwner(), ((JvmMember) linkedFeature).getDeclaringType());

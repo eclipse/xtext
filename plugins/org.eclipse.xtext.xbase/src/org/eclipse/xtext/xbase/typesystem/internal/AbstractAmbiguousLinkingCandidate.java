@@ -13,8 +13,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -33,7 +31,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class AbstractAmbiguousLinkingCandidate<Candidate extends AbstractPendingLinkingCandidate<?>> implements ILinkingCandidate, IAmbiguousLinkingCandidate {
 	
 	private final LinkedList<AbstractPendingLinkingCandidate<?>> candidates;
@@ -143,7 +140,7 @@ public abstract class AbstractAmbiguousLinkingCandidate<Candidate extends Abstra
 
 	protected abstract String getSyntaxDescriptions();
 	
-	@Nullable
+	/* @Nullable */
 	protected String getDeclaratorSimpleName(JvmIdentifiableElement element) {
 		if (element instanceof JvmConstructor) {
 			return null;
@@ -156,7 +153,7 @@ public abstract class AbstractAmbiguousLinkingCandidate<Candidate extends Abstra
 	
 	protected abstract EStructuralFeature getFeatureToMark();
 	
-	@Nullable
+	/* @Nullable */
 	public JvmIdentifiableElement getFeature() {
 		return getPrimaryCandidate().getFeature();
 	}

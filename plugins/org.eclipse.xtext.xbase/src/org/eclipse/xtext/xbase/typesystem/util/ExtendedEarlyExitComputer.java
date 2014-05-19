@@ -14,7 +14,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.Switch;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
@@ -54,7 +53,7 @@ public class ExtendedEarlyExitComputer {
 	 *   }
 	 * </pre>
 	 */
-	public boolean isIntentionalEarlyExit(@Nullable XExpression expression) {
+	public boolean isIntentionalEarlyExit(/* @Nullable */ XExpression expression) {
 		if (expression == null) {
 			return true;
 		}

@@ -11,8 +11,6 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -48,7 +46,6 @@ import com.google.common.collect.Lists;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class UnboundTypeReference extends LightweightTypeReference {
 
 	/**
@@ -228,7 +225,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	 * explicitly.
 	 * @return the resolved reference or <code>null</code>.
 	 */
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getResolvedTo() {
 		return internalGetResolvedTo();
 	}
@@ -404,7 +401,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return internalGetResolvedTo() != null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference internalGetResolvedTo() {
 		if (resolvedTo != null) {
 			if (!getOwner().isResolved(handle)) {
@@ -477,7 +474,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public ArrayTypeReference tryConvertToArray() {
 		if (internalIsResolved()) {
 			return resolvedTo.tryConvertToArray();
@@ -486,7 +483,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public FunctionTypeReference tryConvertToFunctionTypeReference(boolean rawType) {
 		if (internalIsResolved()) {
 			return resolvedTo.tryConvertToFunctionTypeReference(rawType);
@@ -495,7 +492,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference tryConvertToListType() {
 		if (internalIsResolved()) {
 			return resolvedTo.tryConvertToListType();
@@ -504,7 +501,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getComponentType() {
 		if (internalIsResolved()) {
 			return resolvedTo.getComponentType();
@@ -529,7 +526,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public Primitive getPrimitiveKind() {
 		if (internalIsResolved()) {
 			return resolvedTo.getPrimitiveKind();
@@ -538,7 +535,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public Primitive getPrimitiveKindIfWrapperType() {
 		if (internalIsResolved()) {
 			return resolvedTo.getPrimitiveKindIfWrapperType();
@@ -571,7 +568,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public JvmType getType() {
 		if (internalIsResolved())
 			return resolvedTo.getType();
@@ -594,7 +591,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSuperType(JvmType rawType) {
 		if (internalIsResolved())
 			return resolvedTo.getSuperType(rawType);
@@ -602,7 +599,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSuperType(Class<?> rawType) {
 		if (internalIsResolved())
 			return resolvedTo.getSuperType(rawType);
@@ -686,7 +683,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
 		if (internalIsResolved()) {
 			return resolvedTo.accept(visitor);
@@ -696,7 +693,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		if (internalIsResolved()) {
 			return resolvedTo.accept(visitor, param);

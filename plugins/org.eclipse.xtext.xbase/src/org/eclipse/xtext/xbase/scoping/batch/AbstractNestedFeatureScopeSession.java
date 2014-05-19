@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -29,7 +27,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * TODO toString
  * TODO more JavaDoc
  */
-@NonNullByDefault
 public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureScopeSession {
 	
 	private final AbstractFeatureScopeSession parent;
@@ -87,7 +84,7 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 		return parent.getNestedTypeDeclarators();
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public IEObjectDescription getLocalElement(QualifiedName name) {
 		return parent.getLocalElement(name);
 	}
@@ -134,7 +131,7 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 		return parent.isVisible(member);
 	}
 	
-	public boolean isVisible(JvmMember member, @Nullable LightweightTypeReference receiverType, @Nullable JvmIdentifiableElement receiverFeature) {
+	public boolean isVisible(JvmMember member, /* @Nullable */ LightweightTypeReference receiverType, /* @Nullable */ JvmIdentifiableElement receiverFeature) {
 		return parent.isVisible(member, receiverType, receiverFeature);
 	}
 	

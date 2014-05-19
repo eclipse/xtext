@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 
@@ -39,17 +37,17 @@ public interface IExpressionScope {
 		WITHIN
 	}
 	
-	@NonNull
+	/* @NonNull */
 	IScope getFeatureScope();
 	
-	@NonNull
-	IScope getFeatureScope(@Nullable XAbstractFeatureCall currentFeatureCall);
+	/* @NonNull */
+	IScope getFeatureScope(/* @Nullable */ XAbstractFeatureCall currentFeatureCall);
 	
 	/**
 	 * Returns the prefix that was used to resolve the feature as 
 	 * a type literal if any. 
 	 */
-	@NonNull
+	/* @NonNull */
 	List<String> getTypeNamePrefix();
 	
 	/**
@@ -67,12 +65,12 @@ public interface IExpressionScope {
 			return IScope.NULLSCOPE;
 		}
 		
-		@NonNull
+		/* @NonNull */
 		public IScope getFeatureScope(XAbstractFeatureCall currentFeatureCall) {
 			return IScope.NULLSCOPE;
 		}
 
-		@NonNull
+		/* @NonNull */
 		public List<String> getTypeNamePrefix() {
 			return Collections.emptyList();
 		}

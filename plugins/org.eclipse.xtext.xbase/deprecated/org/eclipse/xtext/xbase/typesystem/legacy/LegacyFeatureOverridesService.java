@@ -14,7 +14,6 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -173,7 +172,6 @@ public class LegacyFeatureOverridesService extends FeatureOverridesService {
 		return true;
 	}
 	
-	@NonNullByDefault
 	public static class SubstitutingOperationTypeParameterVisitor extends TypeReferenceVisitorWithParameterAndNonNullResult<LightweightTypeReference, Boolean> {
 
 		private JvmOperation overriding;

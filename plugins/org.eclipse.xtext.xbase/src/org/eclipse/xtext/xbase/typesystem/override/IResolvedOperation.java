@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.override;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -25,7 +23,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public interface IResolvedOperation extends IResolvedExecutable {
 
 	/**
@@ -119,7 +116,7 @@ public interface IResolvedOperation extends IResolvedExecutable {
 	 * @see #getOverriddenAndImplementedMethods()
 	 * @return a super implementation or <code>null</code> if none.
 	 */
-	@Nullable
+	/* @Nullable */
 	IResolvedOperation getOverriddenMethod();
 
 	/**

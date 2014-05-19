@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
@@ -28,12 +26,11 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class UnknownTypeReference extends LightweightTypeReference {
 
 	private String name;
 
-	public UnknownTypeReference(ITypeReferenceOwner owner, @Nullable String name) {
+	public UnknownTypeReference(ITypeReferenceOwner owner, /* @Nullable */ String name) {
 		super(owner);
 		this.name = Strings.isEmpty(name) ? "Object" : name;
 	}
@@ -74,7 +71,7 @@ public class UnknownTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	@Nullable
+	/* @Nullable */
 	public JvmType getType() {
 		return null;
 	}
@@ -130,13 +127,13 @@ public class UnknownTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
 		return visitor.doVisitUnknownTypeReference(this);
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		return visitor.doVisitUnknownTypeReference(this, param);
 	}

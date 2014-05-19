@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class ConstraintAwareTypeArgumentCollector extends DeclaratorTypeArgumentCollector {
 
 	private ITypeReferenceOwner owner;

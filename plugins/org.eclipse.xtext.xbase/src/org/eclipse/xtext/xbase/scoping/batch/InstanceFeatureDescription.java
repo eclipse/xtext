@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.EnumSet;
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -23,7 +21,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class InstanceFeatureDescription extends BucketedEObjectDescription {
 
 	private final XExpression receiver;
@@ -54,13 +51,13 @@ public class InstanceFeatureDescription extends BucketedEObjectDescription {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public XExpression getSyntacticReceiver() {
 		return receiver;
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSyntacticReceiverType() {
 		return receiverType;
 	}

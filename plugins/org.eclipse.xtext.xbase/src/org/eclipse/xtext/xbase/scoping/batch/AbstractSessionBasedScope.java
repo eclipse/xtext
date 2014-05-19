@@ -13,7 +13,6 @@ import java.util.Locale;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -108,7 +107,7 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	 * can be used with the result of this method.
 	 * If the given name is invalid, the result is <code>null</code>.
 	 */
-	@Nullable
+	/* @Nullable */
 	protected String tryGetAsPropertyName(String name) {
 		if (name.length() == 1) { // e.g. Point.getX()
 			if (Character.isUpperCase(name.charAt(0))) {

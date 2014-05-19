@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.override;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -32,7 +30,6 @@ import com.google.common.collect.Lists;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class AbstractResolvedOperation extends AbstractResolvedExecutable implements IResolvedOperation {
 	
 	private final JvmOperation declaration;
@@ -67,7 +64,7 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 		return validOverrides = Collections.unmodifiableList(result);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public IResolvedOperation getOverriddenMethod() {
 		if (!declaration.isAbstract() && declaration.getVisibility() != JvmVisibility.PRIVATE) {
 			List<IResolvedOperation> overriddenAndImplemented = getOverriddenAndImplementedMethods();

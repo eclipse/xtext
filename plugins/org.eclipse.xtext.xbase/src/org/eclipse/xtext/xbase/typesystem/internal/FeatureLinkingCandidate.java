@@ -13,8 +13,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -65,7 +63,6 @@ import com.google.common.collect.Lists;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAbstractFeatureCall> implements IFeatureLinkingCandidate, IFeatureNames {
 
 	public FeatureLinkingCandidate(
@@ -436,7 +433,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getSubstitutedExpectedType(int idx) {
 		if (idx == 0) {
 			if (getReceiver() != null) {
@@ -664,7 +661,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected void resolveArgumentType(XExpression argument, @Nullable LightweightTypeReference declaredType, ITypeComputationState argumentState) {
+	protected void resolveArgumentType(XExpression argument, /* @Nullable */ LightweightTypeReference declaredType, ITypeComputationState argumentState) {
 		if (argument == getSyntacticReceiverIfPossibleArgument()) {
 			LightweightTypeReference receiverType = getSyntacticReceiverType();
 			if (receiverType != null) {
@@ -682,7 +679,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 
 	// TODO some code is duplicated in ResolvedFeature - extract delegator
 	protected void resolveKnownArgumentType(XExpression argument, LightweightTypeReference knownType,
-			@Nullable LightweightTypeReference declaredType, ITypeComputationState argumentState) {
+			/* @Nullable */ LightweightTypeReference declaredType, ITypeComputationState argumentState) {
 		if (!(argumentState instanceof AbstractLinkingCandidate.ArgumentTypeComputationState))
 			throw new IllegalArgumentException("argumentState was " + argumentState);
 		AbstractLinkingCandidate<?>.ArgumentTypeComputationState castedArgumentState = (AbstractLinkingCandidate<?>.ArgumentTypeComputationState) argumentState;
@@ -724,7 +721,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return description.getSyntacticReceiverTypeParameterMapping();
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected XExpression getReceiver() {
 		if (isStatic())
 			return null;
@@ -734,7 +731,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return getSyntacticReceiverIfPossibleArgument();
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getReceiverType() {
 		if (isStatic())
 			return null;
@@ -761,7 +758,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	 * Returns the first argument if this is an extension. This may be
 	 * the implicit first argument or the syntactic receiver of the feature call.
 	 */
-	@Nullable
+	/* @Nullable */
 	protected XExpression getFirstArgument() {
 		if (!isExtension())
 			return null;
@@ -771,7 +768,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return getSyntacticReceiverIfPossibleArgument();
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getFirstArgumentType() {
 		if (!isExtension())
 			return null;
@@ -781,17 +778,17 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return getSyntacticReceiverType();
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected XExpression getImplicitReceiver() {
 		return description.getImplicitReceiver();
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getImplicitReceiverType() {
 		return description.getImplicitReceiverType();
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected XExpression getSyntacticReceiver() {
 		return description.getSyntacticReceiver();
 	}
@@ -802,24 +799,24 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	 * is returned as the syntactic receiver of the expression <code>valueOf(..)</code>
 	 * in <code>java.lang.String.valueOf(..)</code>.
 	 */
-	@Nullable
+	/* @Nullable */
 	protected XExpression getSyntacticReceiverIfPossibleArgument() {
 		if (description.isSyntacticReceiverPossibleArgument())
 			return getSyntacticReceiver();
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getSyntacticReceiverType() {
 		return description.getSyntacticReceiverType();
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected XExpression getImplicitFirstArgument() {
 		return description.getImplicitFirstArgument();
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getImplicitFirstArgumentType() {
 		return description.getImplicitFirstArgumentType();
 	}

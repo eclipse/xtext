@@ -11,8 +11,6 @@ import java.lang.reflect.WildcardType;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -30,7 +28,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class WildcardTypeReference extends LightweightTypeReference {
 
 	private List<LightweightTypeReference> upperBounds;
@@ -81,7 +78,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		return lowerBound == null && upperBounds == null || upperBounds.isEmpty();
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getLowerBound() {
 		return lowerBound;
 	}
@@ -172,7 +169,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSuperType(JvmType rawType) {
 		if (isUnbounded()) {
 			if (Object.class.getName().equals(rawType.getIdentifier())) {
@@ -190,7 +187,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSuperType(Class<?> rawType) {
 		if (isUnbounded()) {
 			if (Object.class.equals(rawType)) {
@@ -321,7 +318,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public JvmType getType() {
 		return null;
 	}
@@ -347,13 +344,13 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
 		return visitor.doVisitWildcardTypeReference(this);
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		return visitor.doVisitWildcardTypeReference(this, param);
 	}

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
@@ -47,7 +46,7 @@ public class QualifiedThisOrSuperDescription extends BucketedEObjectDescription 
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSyntacticReceiverType() {
 		return typeReference;
 	}

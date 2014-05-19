@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -19,7 +17,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class TypeComputationStateWithExpectation extends AbstractStackedTypeComputationState {
 
 	private final LightweightTypeReference expectedType;
@@ -28,7 +25,7 @@ public class TypeComputationStateWithExpectation extends AbstractStackedTypeComp
 			ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
 			AbstractTypeComputationState parent,
-			@Nullable LightweightTypeReference typeReference) {
+			/* @Nullable */ LightweightTypeReference typeReference) {
 		super(resolvedTypes, featureScopeSession, parent);
 		this.expectedType = typeReference;
 	}
@@ -39,7 +36,7 @@ public class TypeComputationStateWithExpectation extends AbstractStackedTypeComp
 		return Collections.singletonList(result);
 	}
 	
-	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
+	protected AbstractTypeExpectation createTypeExpectation(/* @Nullable */ LightweightTypeReference expectedType, AbstractTypeComputationState actualState, boolean returnType) {
 		AbstractTypeExpectation result = null;
 		if (expectedType != null) {
 			LightweightTypeReference copied = expectedType.copyInto(actualState.getReferenceOwner());

@@ -14,8 +14,6 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -78,7 +76,6 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrantTypeResolver {
 
 	protected static class LocalVariableCapturerImpl extends LocalVariableCapturer {
@@ -151,7 +148,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 
 		@Override
-		@Nullable
+		/* @Nullable */
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 			try {
 				if (isHandled(expression)) {
@@ -244,7 +241,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 
 		@Override
-		@Nullable
+		/* @Nullable */
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 			try {
 				resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
@@ -411,7 +408,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected DemandTypeReferenceProvider getComputedTypeReference(JvmTypeReference knownType) {
 		if (InferredTypeIndicator.isInferred(knownType)) {
 			XComputedTypeReference casted = (XComputedTypeReference) knownType;
@@ -473,7 +470,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
 			JvmMember member,
-			@Nullable InferredTypeIndicator indicator,
+			/* @Nullable */ InferredTypeIndicator indicator,
 			boolean returnType) {
 		XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
 		if (indicator == null || indicator.getExpression() == null)
@@ -492,7 +489,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected AbstractReentrantTypeReferenceProvider createTypeProvider(
 			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, 
-			@Nullable XExpression expression, boolean returnType) {
+			/* @Nullable */ XExpression expression, boolean returnType) {
 		if (expression != null) {
 			resolvedTypes.markToBeInferred(expression);
 			return new DemandTypeReferenceProvider(member, expression, resolvedTypesByContext, resolvedTypes, featureScopeSession, returnType);
@@ -698,7 +695,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			IFeatureScopeSession session,
 			ITypeReferenceOwner owner,
 			JvmDeclaredType thisType,
-			@Nullable JvmTypeReference superType,
+			/* @Nullable */ JvmTypeReference superType,
 			boolean addNestedTypes) {
 		IFeatureScopeSession childSession = session;
 		if (thisType.eContainer() != null && thisType.isStatic()) {
@@ -722,7 +719,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		return session.addTypesToStaticScope(Collections.singletonList(type), Collections.<JvmDeclaredType>emptyList());
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public JvmTypeReference getExtendedClass(JvmDeclaredType type) {
 		for(JvmTypeReference candidate: type.getSuperTypes()) {
 			if (candidate.getType() instanceof JvmGenericType && !((JvmGenericType) candidate.getType()).isInterface())
@@ -807,7 +804,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	 * Returns <code>null</code> if the given operation declares it's own return type or if it does not override
 	 * another operation.
 	 */
-	@Nullable
+	/* @Nullable */
 	@SuppressWarnings("unused")
 	protected LightweightTypeReference getReturnTypeOfOverriddenOperation(JvmOperation operation, ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 		if (operation.getVisibility() == JvmVisibility.PRIVATE)

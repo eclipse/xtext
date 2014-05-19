@@ -16,9 +16,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
@@ -43,7 +40,6 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharSequence {
 
 	private static final Logger log = Logger.getLogger(TreeAppendable.class);
@@ -84,7 +80,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		 * @param string the visited {@link String}
 		 * @return the original string or a new one.
 		 */
-		protected String visit(@NonNull String string) {
+		protected String visit(/* @NonNull */ String string) {
 			return string;
 		}
 	}
@@ -186,7 +182,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return trace(Collections.singleton(location), useForDebugging);
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected static ILocationData createLocationData(ITraceURIConverter converter, ILocationInFileProvider locationProvider, EObject object, ILocationInFileProviderExtension.RegionDescription query) {
 		ITextRegion textRegion = locationProvider instanceof ILocationInFileProviderExtension ? 
 				((ILocationInFileProviderExtension) locationProvider).getTextRegion(object, query) : locationProvider.getFullTextRegion(object);
@@ -278,7 +274,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	/**
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	public void accept(@Nullable String text) {
+	public void accept(/* @Nullable */ String text) {
 		children.add(text);
 	}
 

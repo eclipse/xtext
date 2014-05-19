@@ -16,8 +16,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -190,7 +188,7 @@ public class RawTypeConformanceComputer {
 			final int[] resultFromSynonyms = new int[] { originalConformance };
 			synonymTypesProvider.collectSynonymTypes(right, new SynonymTypesProvider.Acceptor() {
 				@Override
-				protected boolean accept(@NonNull LightweightTypeReference synonym, @NonNull EnumSet<ConformanceHint> hints) {
+				protected boolean accept(/* @NonNull */ LightweightTypeReference synonym, /* @NonNull */ EnumSet<ConformanceHint> hints) {
 					if (!(hints.contains(ConformanceHint.BOXING) || hints.contains(ConformanceHint.UNBOXING))) {
 						int synonymResult = isConformant(left, synonym, flags & ~ALLOW_SYNONYMS);
 						if ((synonymResult & SUCCESS) != 0) {
@@ -582,7 +580,7 @@ public class RawTypeConformanceComputer {
 				return inferredHintsToProcess.isEmpty() || (laterCount > 1 && inferredAsWildcard) ? hintsToProcess : inferredHintsToProcess;
 			}
 			
-			@Nullable
+			/* @Nullable */
 			LightweightMergedBoundTypeArgument getMergeResult(UnboundTypeReference left) {
 				BoundTypeArgumentMerger merger = left.getOwner().getServices().getBoundTypeArgumentMerger();
 				if (inferredHintsToProcess.size() == 1) {

@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.EnumSet;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -20,7 +19,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class TypeData {
 	private final XExpression expression;
 	private final ITypeExpectation expectation;

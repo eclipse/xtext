@@ -10,9 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.EnumSet;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -24,13 +21,12 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class NoTypeResult implements ITypeComputationResult {
 
 	private EObject context;
 	private ITypeReferenceOwner owner;
 
-	public NoTypeResult(@Nullable EObject context, ITypeReferenceOwner owner) {
+	public NoTypeResult(/* @Nullable */ EObject context, ITypeReferenceOwner owner) {
 		this.context = context;
 		this.owner = owner;
 	}
@@ -39,17 +35,17 @@ public class NoTypeResult implements ITypeComputationResult {
 		return new AnyTypeReference(owner);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public XExpression getExpression() {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getActualExpressionType() {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getExpectedExpressionType() {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
@@ -62,7 +58,7 @@ public class NoTypeResult implements ITypeComputationResult {
 		return EnumSet.noneOf(ConformanceHint.class);
 	}
 	
-	@NonNull
+	/* @NonNull */
 	public EnumSet<ConformanceHint> getCheckedConformanceHints() {
 		return EnumSet.noneOf(ConformanceHint.class);
 	}

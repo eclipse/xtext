@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.typesystem;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.CachingBatchTypeResolver;
@@ -45,8 +43,8 @@ public interface IBatchTypeResolver {
 	 * to query the resolved types.
 	 * @return a handle to resolved types of expressions and identifiables.
 	 */
-	@NonNull
-	IResolvedTypes resolveTypes(@Nullable EObject object);
+	/* @NonNull */
+	IResolvedTypes resolveTypes(/* @Nullable */ EObject object);
 	
 	/**
 	 * Return a handle to resolved types of expressions that are related
@@ -55,7 +53,7 @@ public interface IBatchTypeResolver {
 	 * @param resource the resource that shall be resolved.
 	 * @return a handle to resolved types of expressions and identifiables.
 	 */
-	@NonNull
-	IResolvedTypes resolveTypes(@NonNull Resource resource);
+	/* @NonNull */
+	IResolvedTypes resolveTypes(/* @NonNull */ Resource resource);
 	
 }

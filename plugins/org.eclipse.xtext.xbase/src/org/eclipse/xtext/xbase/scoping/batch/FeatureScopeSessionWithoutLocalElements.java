@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -35,7 +34,7 @@ public class FeatureScopeSessionWithoutLocalElements extends AbstractNestedFeatu
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public IEObjectDescription getLocalElement(QualifiedName name) {
 		return null;
 	}

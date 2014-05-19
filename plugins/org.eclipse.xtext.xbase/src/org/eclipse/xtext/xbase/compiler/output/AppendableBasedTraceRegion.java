@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.compiler.output;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.LocationData;
@@ -22,7 +20,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 	private final List<ILocationData> locations;
 	private int offset;
@@ -37,7 +34,7 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 		return useForDebugging;
 	}
 
-	public AppendableBasedTraceRegion(@Nullable AbstractTraceRegion parent, TreeAppendable delegate, int offset, int lineNumber) {
+	public AppendableBasedTraceRegion(/* @Nullable */ AbstractTraceRegion parent, TreeAppendable delegate, int offset, int lineNumber) {
 		super(parent);
 		this.offset = offset;
 		this.lineNumber = lineNumber;

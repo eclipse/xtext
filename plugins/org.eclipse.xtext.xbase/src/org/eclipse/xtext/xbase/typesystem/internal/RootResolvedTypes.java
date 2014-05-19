@@ -13,8 +13,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -48,7 +46,6 @@ import com.google.common.collect.Sets;
  * TODO guard against unresolved type references
  * TODO toString
  */
-@NonNullByDefault
 public class RootResolvedTypes extends ResolvedTypes {
 
 	private final IFeatureScopeTracker featureScopeTracker;
@@ -86,7 +83,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getExpectedTypeForAssociatedExpression(JvmMember member, XExpression expression) {
 		if (toBeInferredRootExpressions != null && toBeInferredRootExpressions.contains(expression)) {
 			return null;
@@ -109,7 +106,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 		}
 		class DiagnosticAcceptor implements IAcceptor<AbstractDiagnostic> {
 
-			public void accept(@Nullable AbstractDiagnostic diagnostic) {
+			public void accept(/* @Nullable */ AbstractDiagnostic diagnostic) {
 				if (diagnostic instanceof EObjectDiagnosticImpl) {
 					Severity severity = ((EObjectDiagnosticImpl) diagnostic).getSeverity();
 					if (severity == Severity.ERROR) {
@@ -137,7 +134,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 		}
 	}
 
-	protected void addTypeDiagnostic(XExpression expression, @Nullable TypeData typeData, IAcceptor<? super AbstractDiagnostic> acceptor) {
+	protected void addTypeDiagnostic(XExpression expression, /* @Nullable */ TypeData typeData, IAcceptor<? super AbstractDiagnostic> acceptor) {
 		if (typeData != null) {
 			LightweightTypeReference actualType = typeData.getActualType();
 			ITypeExpectation expectation = typeData.getExpectation();
@@ -179,7 +176,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 	 *   }
 	 * </pre>
 	 */
-	protected boolean isIntentionalEarlyExit(@Nullable XExpression expression) {
+	protected boolean isIntentionalEarlyExit(/* @Nullable */ XExpression expression) {
 		ExtendedEarlyExitComputer earlyExitComputer = getReferenceOwner().getServices().getEarlyExitComputer();
 		return earlyExitComputer.isIntentionalEarlyExit(expression);
 	}

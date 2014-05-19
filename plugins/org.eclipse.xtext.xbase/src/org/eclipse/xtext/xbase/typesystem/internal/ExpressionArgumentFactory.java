@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -32,7 +31,6 @@ import com.google.common.collect.Lists;
  * Externalized for testing purpose.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ExpressionArgumentFactory {
 
 	public IFeatureCallArguments createExpressionArguments(XExpression expression, AbstractLinkingCandidate<?> candidate) {

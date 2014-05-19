@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.util;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -35,7 +34,6 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithParameterAndResult<LightweightTraversalData, Boolean> {
 	
 	@Override

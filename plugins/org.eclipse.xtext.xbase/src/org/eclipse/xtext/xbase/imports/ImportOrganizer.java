@@ -13,7 +13,6 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.resource.XtextResource;
@@ -105,7 +104,7 @@ public class ImportOrganizer {
 		}
 	}
 
-	@Nullable
+	/* @Nullable */
 	private ReplaceRegion getReplaceRegion(String nameToUse, String packageLocalName, JvmDeclaredType type,
 			TypeUsage usage, RewritableImportSection importSection) {
 		// if the resource contains two types with the same simple name, we don't add any import

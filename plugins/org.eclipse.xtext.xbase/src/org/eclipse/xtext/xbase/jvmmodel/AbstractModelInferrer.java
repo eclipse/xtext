@@ -12,7 +12,6 @@ import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.util.IAcceptor;
 
@@ -38,7 +37,7 @@ public abstract class AbstractModelInferrer implements IJvmModelInferrer {
 		}
 	}
 	
-	public void infer(EObject e, final @NonNull IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
+	public void infer(EObject e, final /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (oldApiMethod != null) {
 			try {
 				if (!hasLoggedAboutDeprecation) {
@@ -68,7 +67,7 @@ public abstract class AbstractModelInferrer implements IJvmModelInferrer {
 	}
 
 	
-	public void _infer(EObject e, @NonNull IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
+	public void _infer(EObject e, /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		for (EObject child : e.eContents()) {
 			infer(child, acceptor, preIndexingPhase);
 		}

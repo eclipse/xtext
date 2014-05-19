@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -29,7 +27,6 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 
 	@Inject
@@ -75,7 +72,7 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 		return scopeProvider;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public IEObjectDescription getLocalElement(QualifiedName name) {
 		return null;
 	}
@@ -122,7 +119,7 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	 * 
 	 * By default, all public features are considered to be accessible.
 	 */
-	public boolean isVisible(JvmMember member, @Nullable LightweightTypeReference receiverType, @Nullable JvmIdentifiableElement receiverFeature) {
+	public boolean isVisible(JvmMember member, /* @Nullable */ LightweightTypeReference receiverType, /* @Nullable */ JvmIdentifiableElement receiverFeature) {
 		return visibilityHelper.isVisible(member);
 	}
 	

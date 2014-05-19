@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -60,7 +58,6 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class AbstractLinkingCandidate<Expression extends XExpression> implements ILinkingCandidate {
 
 	protected class ArgumentTypeComputationState extends AbstractStackedTypeComputationState {
@@ -69,7 +66,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		private final ConformanceHint defaultHint;
 
 		public ArgumentTypeComputationState(AbstractTypeComputationState parent,
-				LightweightTypeReference expectedType, @Nullable ConformanceHint defaultHint) {
+				LightweightTypeReference expectedType, /* @Nullable */ ConformanceHint defaultHint) {
 			super(parent.getResolvedTypes(), parent.getFeatureScopeSession(), parent);
 			this.expectedType = expectedType;
 			this.defaultHint = defaultHint;
@@ -81,8 +78,8 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			return Collections.singletonList(result);
 		}
 		
-		protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType,
-				AbstractTypeComputationState actualState, boolean returnType, @Nullable ConformanceHint hint) {
+		protected AbstractTypeExpectation createTypeExpectation(/* @Nullable */ LightweightTypeReference expectedType,
+				AbstractTypeComputationState actualState, boolean returnType, /* @Nullable */ ConformanceHint hint) {
 			AbstractTypeExpectation result = null;
 			if (expectedType != null) {
 				LightweightTypeReference copied = expectedType.copyInto(actualState.getReferenceOwner());
@@ -93,7 +90,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			return result;
 		}
 		
-		@Nullable
+		/* @Nullable */
 		protected ConformanceHint getDefaultHint() {
 			return defaultHint;
 		}
@@ -108,7 +105,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 
 		private ConformanceHint conformanceHint;
 
-		public ObservableTypeExpectation(LightweightTypeReference expectedType, AbstractTypeComputationState state, boolean returnType, @Nullable ConformanceHint conformanceHint) {
+		public ObservableTypeExpectation(LightweightTypeReference expectedType, AbstractTypeComputationState state, boolean returnType, /* @Nullable */ ConformanceHint conformanceHint) {
 			super(expectedType, state, returnType);
 			this.conformanceHint = conformanceHint;
 		}
@@ -294,7 +291,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				}
 				
 				@Override
-				@Nullable
+				/* @Nullable */
 				protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type,
 						ConstraintVisitingInfo visiting) {
 					if (getOwner().getDeclaredTypeParameters().contains(type)) {
@@ -304,7 +301,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				}
 				
 				@Override
-				@Nullable
+				/* @Nullable */
 				protected LightweightMergedBoundTypeArgument getBoundTypeArgument(JvmTypeParameter typeParameter,
 						ConstraintVisitingInfo info) {
 					LightweightMergedBoundTypeArgument result = super.getBoundTypeArgument(typeParameter, info);
@@ -485,7 +482,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		} else {
 			UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(getDeclaratorParameterMapping(), state.getReferenceOwner()) {
 				@Override
-				@Nullable
+				/* @Nullable */
 				protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type, Set<JvmTypeParameter> visiting) {
 					if (isBoundTypeArgumentSkipped(type, super.getTypeParameterMapping(), getOwner())) {
 						return null;
@@ -589,13 +586,13 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	 * @param declaredType the declared (expected) type for the given expression.
 	 * @param argumentState the to-be-used state to compute the actual type of the argument. It is already configured with the expectation. 
 	 */
-	protected void resolveArgumentType(XExpression argument, @Nullable LightweightTypeReference declaredType, ITypeComputationState argumentState) {
+	protected void resolveArgumentType(XExpression argument, /* @Nullable */ LightweightTypeReference declaredType, ITypeComputationState argumentState) {
 		argumentState.computeTypes(argument);
 	}
 	
 	protected abstract List<XExpression> getArguments();
 	
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getExpectedType(XExpression expression) {
 		return state.getResolvedTypes().getExpectedType(expression);
 	}
@@ -603,13 +600,13 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	/**
 	 * Returns the actual type of the given element. Does not consider reassigned types.
 	 */
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getActualType(JvmIdentifiableElement element, boolean ignoreReassignedTypes) {
 		return state.getResolvedTypes().doGetActualType(element, ignoreReassignedTypes);
 	}
 	
-	@Nullable
-	protected LightweightTypeReference getActualType(@Nullable XExpression expression) {
+	/* @Nullable */
+	protected LightweightTypeReference getActualType(/* @Nullable */ XExpression expression) {
 		if (expression == null)
 			return null;
 		return state.getResolvedTypes().getActualType(expression);
@@ -620,7 +617,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	 * If the expected type is an unbound type parameter, a reference to the type parameter
 	 * itself is returned. 
 	 */
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getSubstitutedExpectedType(int argumentIndex) {
 		XExpression expression = arguments.getArgument(argumentIndex);
 		if (expression == null)

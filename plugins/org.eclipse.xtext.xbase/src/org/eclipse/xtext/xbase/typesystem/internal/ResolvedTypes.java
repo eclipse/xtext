@@ -17,8 +17,6 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -78,7 +76,6 @@ import com.google.common.collect.Sets;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc
  */
-@NonNullByDefault
 public abstract class ResolvedTypes implements IResolvedTypes {
 
 	protected class Owner implements ITypeReferenceOwner {
@@ -191,36 +188,36 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return getServices().getEarlyExitComputer().getThrownExceptions(obj, this, this.getReferenceOwner());
 	}
 	
-	@Nullable
-	public JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall) {
+	/* @Nullable */
+	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XAbstractFeatureCall featureCall) {
 		return doGetLinkedFeature(featureCall);
 	}
 	
-	@Nullable
-	public JvmIdentifiableElement getLinkedFeature(@Nullable XConstructorCall constructorCall) {
+	/* @Nullable */
+	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XConstructorCall constructorCall) {
 		return doGetLinkedFeature(constructorCall);
 	}
 	
-	@Nullable
-	public IFeatureLinkingCandidate getLinkingCandidate(@Nullable XAbstractFeatureCall featureCall) {
+	/* @Nullable */
+	public IFeatureLinkingCandidate getLinkingCandidate(/* @Nullable */ XAbstractFeatureCall featureCall) {
 		return (IFeatureLinkingCandidate) doGetLinkingCandidate(featureCall);
 	}
 	
-	@Nullable
-	public IConstructorLinkingCandidate getLinkingCandidate(@Nullable XConstructorCall constructorCall) {
+	/* @Nullable */
+	public IConstructorLinkingCandidate getLinkingCandidate(/* @Nullable */ XConstructorCall constructorCall) {
 		return (IConstructorLinkingCandidate) doGetLinkingCandidate(constructorCall);
 	}
 	
-	@Nullable
-	protected ILinkingCandidate doGetLinkingCandidate(@Nullable XExpression featureOrConstructorCall) {
+	/* @Nullable */
+	protected ILinkingCandidate doGetLinkingCandidate(/* @Nullable */ XExpression featureOrConstructorCall) {
 		if (featureLinking == null || featureOrConstructorCall == null)
 			return null;
 		ILinkingCandidate candidate = featureLinking.get(featureOrConstructorCall);
 		return candidate;
 	}
 	
-	@Nullable
-	protected JvmIdentifiableElement doGetLinkedFeature(@Nullable XExpression featureOrConstructorCall) {
+	/* @Nullable */
+	protected JvmIdentifiableElement doGetLinkedFeature(/* @Nullable */ XExpression featureOrConstructorCall) {
 		if (featureLinking == null || featureOrConstructorCall == null)
 			return null;
 		ILinkingCandidate candidate = featureLinking.get(featureOrConstructorCall);
@@ -229,12 +226,12 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return candidate.getFeature();
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected TypeData getTypeData(XExpression expression, boolean returnType) {
 		return getTypeData(expression, returnType, false);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected TypeData getTypeData(XExpression expression, boolean returnType, boolean nullIfEmpty) {
 		Collection<TypeData> values = doGetTypeData(expression);
 		if (values == null) {
@@ -244,7 +241,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return result;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected Collection<TypeData> doGetTypeData(XExpression expression) {
 		List<TypeData> result = basicGetExpressionTypes().get(expression);
 		return result;
@@ -259,7 +256,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected TypeData mergeTypeData(final XExpression expression, Collection<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
 		List<TypeData> values = Lists.newArrayListWithCapacity(allValues.size());
 		collectValues(allValues, returnType, values);
@@ -314,7 +311,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return mergedType;
 	}
 
-	@Nullable
+	/* @Nullable */
 	private LightweightTypeReference getMergedType(MergeData mergeData, List<TypeData> values) {
 		LightweightTypeReference mergedType = !mergeData.references.isEmpty() || !mergeData.voidSeen ? getMergedType(/*mergedHints, */mergeData.references) : values.get(0).getActualType();
 		return mergedType;
@@ -365,7 +362,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getMergedType(List<LightweightTypeReference> types) {
 		if (types.isEmpty()) {
 			return null;
@@ -387,27 +384,27 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return types.get(0);
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getActualType(XExpression expression) {
 		LightweightTypeReference result = doGetActualType(expression);
 		return toOwnedReference(result);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected abstract LightweightTypeReference getExpectedTypeForAssociatedExpression(JvmMember member, XExpression expression);
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getReturnType(XExpression expression) {
 		LightweightTypeReference result = doGetReturnType(expression);
 		return toOwnedReference(result);
 	}
 
-	@Nullable
-	protected LightweightTypeReference toOwnedReference(@Nullable LightweightTypeReference result) {
+	/* @Nullable */
+	protected LightweightTypeReference toOwnedReference(/* @Nullable */ LightweightTypeReference result) {
 		return result != null ? result.copyInto(getReferenceOwner()) : null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference doGetActualType(XExpression expression) {
 		TypeData typeData = getTypeData(expression, false);
 		if (typeData != null)
@@ -415,7 +412,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference doGetReturnType(XExpression expression) {
 		TypeData typeData = getTypeData(expression, true);
 		if (typeData != null)
@@ -423,7 +420,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getExpectedType(XExpression expression) {
 		LightweightTypeReference result = doGetExpectedType(expression, false);
 		return toOwnedReference(result);
@@ -448,7 +445,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return pushExpectedExceptions(exceptions);
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getExpectedReturnType(XExpression expression) {
 		LightweightTypeReference result = doGetExpectedType(expression, true);
 		return toOwnedReference(result);
@@ -468,7 +465,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return true;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference doGetExpectedType(XExpression expression, boolean returnType) {
 		TypeData typeData = getTypeData(expression, returnType, true);
 		if (typeData != null) {
@@ -484,7 +481,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return result;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected List<LightweightTypeReference> doGetActualTypeArguments(XExpression expression) {
 		ILinkingCandidate result = basicGetLinkingCandidates().get(expression);
 		if (result != null) {
@@ -500,7 +497,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 	
-	public void reassignType(JvmIdentifiableElement identifiable, @Nullable LightweightTypeReference reference) {
+	public void reassignType(JvmIdentifiableElement identifiable, /* @Nullable */ LightweightTypeReference reference) {
 		if (reference != null) {
 			LightweightTypeReference actualType = getActualType(identifiable);
 			if (actualType != null) {
@@ -528,7 +525,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return false;
 	}
 	
-	public void reassignTypeWithoutMerge(JvmIdentifiableElement identifiable, @Nullable LightweightTypeReference reference) {
+	public void reassignTypeWithoutMerge(JvmIdentifiableElement identifiable, /* @Nullable */ LightweightTypeReference reference) {
 		ensureReassignedTypesMapExists().put(identifiable, reference);
 	}
 	
@@ -549,7 +546,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		
 		TypeParameterSubstitutor<?> substitutor = new TypeParameterByUnboundSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), referenceOwner) {
 			@Override
-			@Nullable
+			/* @Nullable */
 			protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
 				if (expression instanceof XAbstractFeatureCall || expression instanceof XConstructorCall || expression instanceof XClosure) {
 					return ResolvedTypes.this.createUnboundTypeReference(expression, type);
@@ -664,7 +661,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	public Collection<ILinkingCandidate> getFollowUpErrors() {
 		return Collections2.filter(basicGetLinkingCandidates().values(), new Predicate<ILinkingCandidate>() {
-			public boolean apply(@Nullable ILinkingCandidate input) {
+			public boolean apply(/* @Nullable */ ILinkingCandidate input) {
 				if (input == null)
 					throw new IllegalArgumentException();
 				if (input instanceof FollowUpError)
@@ -674,13 +671,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		});
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 		LightweightTypeReference result = doGetActualType(identifiable, false);
 		return toOwnedReference(result);
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference doGetActualType(JvmIdentifiableElement identifiable, boolean ignoreReassignedTypes) {
 		if (reassignedTypes != null && !ignoreReassignedTypes) {
 			LightweightTypeReference result = reassignedTypes.get(identifiable);
@@ -695,7 +692,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return result;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference doGetDeclaredType(JvmIdentifiableElement identifiable) {
 		if (identifiable instanceof JvmType) {
 			ITypeReferenceOwner owner = getConverter().getOwner();
@@ -715,7 +712,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
 		if (identifiable instanceof JvmOperation) {
 			return ((JvmOperation) identifiable).getReturnType();
@@ -733,12 +730,12 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public IFeatureLinkingCandidate getFeature(XAbstractFeatureCall featureCall) {
 		return (IFeatureLinkingCandidate) basicGetLinkingCandidates().get(featureCall);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public IConstructorLinkingCandidate getConstructor(XConstructorCall constructorCall) {
 		return (IConstructorLinkingCandidate) basicGetLinkingCandidates().get(constructorCall);
 	}
@@ -822,7 +819,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		appendContent(propagatedTypes, "propagatedTypes", result, indentation);
 	}
 
-	protected void appendContent(@Nullable Map<?, ?> map, String prefix, StringBuilder result, String indentation) {
+	protected void appendContent(/* @Nullable */ Map<?, ?> map, String prefix, StringBuilder result, String indentation) {
 		if (map != null) {
 			MapJoiner joiner = Joiner.on("\n  " + indentation).withKeyValueSeparator(" -> ");
 			result.append("\n").append(indentation).append(prefix).append(":\n").append(indentation).append("  ");
@@ -830,7 +827,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 	
-	protected void appendContent(@Nullable Collection<?> values, String prefix, StringBuilder result, String indentation) {
+	protected void appendContent(/* @Nullable */ Collection<?> values, String prefix, StringBuilder result, String indentation) {
 		if (values != null) {
 			Joiner joiner = Joiner.on("\n  " + indentation);
 			result.append("\n").append(indentation).append(prefix).append(":\n").append(indentation).append("  ");
@@ -838,7 +835,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 	
-	protected void appendListMapContent(@Nullable Map<?, ? extends Collection<?>> map, String prefix, StringBuilder result, String indentation) {
+	protected void appendListMapContent(/* @Nullable */ Map<?, ? extends Collection<?>> map, String prefix, StringBuilder result, String indentation) {
 		if (map != null) {
 			MultimapJoiner joiner = new MultimapJoiner(
 					Joiner.on("\n    " + indentation), 
@@ -949,7 +946,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			}
 			
 			@Override
-			@Nullable
+			/* @Nullable */
 			protected LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting) {
 				return reference;
 			}
@@ -1026,7 +1023,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return refinedTypes != null ? refinedTypes : Collections.<XExpression>emptySet();
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected List<JvmTypeParameter> basicGetDeclardTypeParameters() {
 		return declaredTypeParameters;
 	}
@@ -1168,7 +1165,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		if (flattened != null)
 			return new ForwardingResolvedTypes() {
 				@Override
-				@Nullable
+				/* @Nullable */
 				public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 					LightweightTypeReference reassigned = flattened.get(identifiable);
 					if (reassigned != null)

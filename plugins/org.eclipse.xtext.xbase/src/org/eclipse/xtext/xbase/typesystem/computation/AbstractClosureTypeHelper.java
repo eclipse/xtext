@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
@@ -26,7 +24,6 @@ import org.eclipse.xtext.xbase.typesystem.util.ExpectationTypeParameterHintColle
  * @noextend This class is not intended to be subclassed by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class AbstractClosureTypeHelper {
 
 	private final XClosure closure;
@@ -67,7 +64,7 @@ public abstract class AbstractClosureTypeHelper {
 	 * 
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	@Nullable
+	/* @Nullable */
 	public abstract FunctionTypeReference getExpectedClosureType();
 
 	/**
@@ -75,10 +72,10 @@ public abstract class AbstractClosureTypeHelper {
 	 * 
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	@Nullable
+	/* @Nullable */
 	public abstract JvmOperation getOperation();
 
-	protected void deferredBindTypeArgument(@Nullable LightweightTypeReference declared, LightweightTypeReference actual, final BoundTypeArgumentSource source) {
+	protected void deferredBindTypeArgument(/* @Nullable */ LightweightTypeReference declared, LightweightTypeReference actual, final BoundTypeArgumentSource source) {
 		if (declared != null) { 
 			// TODO double check other clients of the ExpectationTypeParameterHintCollector
 			// It may be possible / necessary to use the very same implementation instead of anonymous 

@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -25,7 +24,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ResolvedConstructor extends AbstractResolvedReference<XConstructorCall> implements IConstructorLinkingCandidate {
 
 	public ResolvedConstructor(

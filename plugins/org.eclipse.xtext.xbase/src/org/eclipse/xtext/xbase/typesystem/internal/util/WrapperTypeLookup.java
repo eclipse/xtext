@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
@@ -26,7 +25,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
  */
 public class WrapperTypeLookup {
 
-	@Nullable
+	/* @Nullable */
 	private static LightweightTypeReference findTopLevelType(LightweightTypeReference context, String typeName) {
 		ITypeReferenceOwner owner = context.getOwner();
 		ResourceSet resourceSet = owner.getContextResourceSet();
@@ -41,7 +40,7 @@ public class WrapperTypeLookup {
 		return new ParameterizedTypeReference(owner, type);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public static LightweightTypeReference getWrapperType(LightweightTypeReference context, Primitive primitiveKind) {
 		switch(primitiveKind) {
 			case Boolean:

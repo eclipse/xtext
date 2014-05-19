@@ -16,8 +16,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -43,7 +41,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ParameterizedTypeReference extends LightweightTypeReference {
 
 	private List<LightweightTypeReference> typeArguments;
@@ -263,7 +260,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public Primitive getPrimitiveKind() {
 		if (type.eIsProxy())
 			return null;
@@ -293,7 +290,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public Primitive getPrimitiveKindIfWrapperType() {
 		if (type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 			JvmGenericType casted = (JvmGenericType) type;
@@ -305,8 +302,8 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return null;
 	}
 	
-	@Nullable
-	private Primitive getPrimitiveKind(JvmTypeParameter type, @Nullable RecursionGuard<JvmTypeParameter> guard) {
+	/* @Nullable */
+	private Primitive getPrimitiveKind(JvmTypeParameter type, /* @Nullable */ RecursionGuard<JvmTypeParameter> guard) {
 		if (type.eIsProxy())
 			return null;
 		for(JvmTypeConstraint constraint: type.getConstraints()) {
@@ -338,7 +335,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	private Primitive getPrimitiveKind(JvmGenericType type) {
 		if (type.eIsProxy())
 			return null;
@@ -387,7 +384,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return false;
 	}
 	
-	private boolean isWrapper(JvmTypeParameter typeParameter, @Nullable RecursionGuard<JvmTypeParameter> stack) {
+	private boolean isWrapper(JvmTypeParameter typeParameter, /* @Nullable */ RecursionGuard<JvmTypeParameter> stack) {
 		for(JvmTypeConstraint constraint: typeParameter.getConstraints()) {
 			if (constraint.eClass() == TypesPackage.Literals.JVM_UPPER_BOUND) {
 				JvmTypeReference upperBound = constraint.getTypeReference();
@@ -464,7 +461,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSuperType(Class<?> rawType) {
 		if (isType(rawType)) {
 			return this;
@@ -496,7 +493,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return getSuperTypeByName(typeName, interfaceType);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	private LightweightTypeReference getSuperTypeByName(String typeName, boolean interfaceType) {
 		JvmTypeReference superType = getSuperTypeByName(typeName, interfaceType, type, new RecursionGuard<JvmType>());
 		if (superType != null) {
@@ -519,7 +516,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	private JvmTypeReference getSuperTypeByName(String typeName, boolean interfaceType, JvmType thisType, RecursionGuard<JvmType> guard) {
 		EClass thisTypeEClass = thisType.eClass();
 		if (!interfaceType && thisTypeEClass == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) thisType).isInterface()) {
@@ -568,7 +565,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSuperType(JvmType rawType) {
 		Object rawResult = internalGetSuperType(rawType);
 		if (rawResult instanceof ParameterizedTypeReference) {
@@ -593,7 +590,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getRawSuperType(JvmType rawType) {
 		Object result = internalGetSuperType(rawType);
 		if (result instanceof ParameterizedTypeReference) {
@@ -609,7 +606,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	 * if it is more efficient to create it directly, or a {@link JvmTypeReference} with or without unresolved
 	 * type arguments that can be processed later on.
 	 */
-	@Nullable
+	/* @Nullable */
 	private Object internalGetSuperType(JvmType rawType) {
 		if (rawType == type) {
 			return this;
@@ -643,7 +640,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return superType;
 	}
 
-	@Nullable
+	/* @Nullable */
 	private JvmTypeReference getSuperType(JvmType rawType, boolean interfaceType, JvmType thisType, RecursionGuard<JvmType> guard) {
 		if (thisType == rawType || !interfaceType && thisType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE && ((JvmGenericType) thisType).isInterface()) {
 			return null;
@@ -773,13 +770,13 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
 		return visitor.doVisitParameterizedTypeReference(this);
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		return visitor.doVisitParameterizedTypeReference(this, param);
 	}
@@ -796,7 +793,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	 * @see FunctionTypes#getAsFunctionTypeReference(ParameterizedTypeReference)
 	 */
 	@Override
-	@Nullable
+	/* @Nullable */
 	public FunctionTypeReference getAsFunctionTypeReference() {
 		FunctionTypes functionTypes = getServices().getFunctionTypes();
 		return functionTypes.getAsFunctionTypeReference(this);
@@ -808,7 +805,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	 * @see FunctionTypes#tryConvertToFunctionTypeReference(ParameterizedTypeReference, boolean)
 	 */
 	@Override
-	@Nullable
+	/* @Nullable */
 	public FunctionTypeReference tryConvertToFunctionTypeReference(boolean rawType) {
 		FunctionTypes functionTypes = getServices().getFunctionTypes();
 		return functionTypes.tryConvertToFunctionTypeReference(this, rawType);
@@ -820,14 +817,14 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	 * @see ArrayTypes#tryConvertToArray(ParameterizedTypeReference)
 	 */
 	@Override
-	@Nullable
+	/* @Nullable */
 	public ArrayTypeReference tryConvertToArray() {
 		ArrayTypes arrayTypes = getServices().getArrayTypes();
 		return arrayTypes.tryConvertToArray(this);
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference tryConvertToListType() {
 		if (isAssignableFrom(List.class))
 			return this;

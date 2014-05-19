@@ -7,14 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@NonNullByDefault
 public interface ISourceAppender {
 	
 	ISourceAppender append(CharSequence string);

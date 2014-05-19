@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -20,7 +19,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class FeatureScopeSessionWithDynamicExtensions extends AbstractNestedFeatureScopeSession {
 
 	private final Map<XExpression, LightweightTypeReference> extensionProviders;

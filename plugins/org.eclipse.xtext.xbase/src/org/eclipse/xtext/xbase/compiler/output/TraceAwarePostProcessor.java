@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.compiler.output;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.generator.LineSeparatorHarmonizer;
 
 /**
@@ -16,7 +15,6 @@ import org.eclipse.xtext.generator.LineSeparatorHarmonizer;
  * it can harmonize the line breaks and still maintain the trace information.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class TraceAwarePostProcessor extends LineSeparatorHarmonizer {
 
 	@Override

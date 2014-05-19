@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
@@ -24,7 +23,6 @@ import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class BottomResolvedOperation extends AbstractResolvedOperation {
 	
 	private Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;

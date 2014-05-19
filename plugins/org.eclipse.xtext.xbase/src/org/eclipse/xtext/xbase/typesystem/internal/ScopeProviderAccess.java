@@ -17,9 +17,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -68,8 +65,7 @@ public class ScopeProviderAccess {
 	@Inject
 	private LazyURIEncoder encoder;
 
-	@NonNullByDefault
-	@Nullable
+	/* @Nullable */
 	protected IFeatureLinkingCandidate getKnownFeature(XAbstractFeatureCall featureCall, AbstractTypeComputationState state, ResolvedTypes resolvedTypes) {
 		IFeatureLinkingCandidate result = resolvedTypes.getFeature(featureCall);
 		if (result != null) {
@@ -91,8 +87,7 @@ public class ScopeProviderAccess {
 		return null;
 	}
 	
-	@NonNullByDefault
-	@Nullable
+	/* @Nullable */
 	protected IConstructorLinkingCandidate getKnownConstructor(XConstructorCall constructorCall, AbstractTypeComputationState state,
 			ResolvedTypes resolvedTypes) {
 		IConstructorLinkingCandidate result = resolvedTypes.getConstructor(constructorCall);
@@ -123,8 +118,7 @@ public class ScopeProviderAccess {
 	 * 
 	 * @return the available descriptions.
 	 */
-	@NonNullByDefault
-	public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, @Nullable EObject toBeLinked,
+	public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, /* @Nullable */ EObject toBeLinked,
 			IFeatureScopeSession session, IResolvedTypes types) throws IllegalNodeException {
 		if (toBeLinked == null) {
 			return Collections.emptyList();
@@ -208,7 +202,7 @@ public class ScopeProviderAccess {
 		return node;
 	}
 
-	@Nullable
+	/* @Nullable */
 	private XMemberFeatureCall getLongestTypeLiteralCandidate(XMemberFeatureCall current, boolean mustBeStatic) {
 		if (current.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
 			XMemberFeatureCall container = (XMemberFeatureCall) current.eContainer();
@@ -252,7 +246,7 @@ public class ScopeProviderAccess {
 			this.syntacticReceiverType = null;
 		}
 		
-		public ErrorDescription(@Nullable LightweightTypeReference syntacticReceiverType) {
+		public ErrorDescription(/* @Nullable */ LightweightTypeReference syntacticReceiverType) {
 			this.node = null;
 			this.name = null;
 			this.followUp = true;
@@ -295,12 +289,12 @@ public class ScopeProviderAccess {
 			return Strings.EMPTY_ARRAY;
 		}
 
-		@NonNull 
+		/* @NonNull */ 
 		public JvmIdentifiableElement getElementOrProxy() {
 			throw new UnsupportedOperationException();
 		}
 
-		@NonNull 
+		/* @NonNull */ 
 		public String getShadowingKey() {
 			return "ErrorDescription";
 		}
@@ -309,32 +303,32 @@ public class ScopeProviderAccess {
 			return 0;
 		}
 
-		@Nullable
+		/* @Nullable */
 		public LightweightTypeReference getImplicitReceiverType() {
 			return null;
 		}
 
-		@Nullable
+		/* @Nullable */
 		public XExpression getImplicitReceiver() {
 			return null;
 		}
 
-		@NonNull
+		/* @NonNull */
 		public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitReceiverTypeParameterMapping() {
 			return Collections.emptyMap();
 		}
 		
-		@NonNull
+		/* @NonNull */
 		public EnumSet<ConformanceHint> getImplicitReceiverConformanceHints() {
 			return EnumSet.noneOf(ConformanceHint.class);
 		}
 
-		@Nullable
+		/* @Nullable */
 		public LightweightTypeReference getSyntacticReceiverType() {
 			return syntacticReceiverType;
 		}
 
-		@Nullable
+		/* @Nullable */
 		public XExpression getSyntacticReceiver() {
 			return null;
 		}
@@ -343,32 +337,32 @@ public class ScopeProviderAccess {
 			return false;
 		}
 
-		@NonNull
+		/* @NonNull */
 		public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
 			return Collections.emptyMap();
 		}
 		
-		@NonNull
+		/* @NonNull */
 		public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
 			return EnumSet.noneOf(ConformanceHint.class);
 		}
 
-		@Nullable
+		/* @Nullable */
 		public XExpression getImplicitFirstArgument() {
 			return null;
 		}
 
-		@Nullable
+		/* @Nullable */
 		public LightweightTypeReference getImplicitFirstArgumentType() {
 			return null;
 		}
 
-		@NonNull 
+		/* @NonNull */ 
 		public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitFirstArgumentTypeParameterMapping() {
 			return Collections.emptyMap();
 		}
 		
-		@NonNull
+		/* @NonNull */
 		public EnumSet<ConformanceHint> getImplicitFirstArgumentConformanceHints() {
 			return EnumSet.noneOf(ConformanceHint.class);
 		}

@@ -9,14 +9,12 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collection;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API TODO Javadoc
  */
-@NonNullByDefault
 public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 
 	private final XExpression expression;
