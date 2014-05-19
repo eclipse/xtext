@@ -12,7 +12,10 @@ package org.eclipse.xtext.common.types.xtext.ui;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IMember;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover;
+import org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
@@ -38,8 +41,10 @@ public class JdtHoverProvider implements IEObjectHoverProvider {
 			JvmIdentifiableElement jvmIdentifiableElement = (JvmIdentifiableElement) eObject;
 			IJavaElement javaElement = javaElementFinder.findElementFor(jvmIdentifiableElement);
 			if (javaElement!=null && javaElement.exists()) {
-				javadocHover.setJavaElement(javaElement);
-				final Object hoverInfo2 = javadocHover.getHoverInfo2(viewer, region);
+				final Object hoverInfo2 = (javaElement instanceof IMember)?
+						extractJavaDoc(javaElement):
+						javadocHover.getHoverInfo2(viewer, region);
+
 				return new IInformationControlCreatorProvider2() {
 
 					public IInformationControlCreator getHoverControlCreator() {
@@ -57,6 +62,19 @@ public class JdtHoverProvider implements IEObjectHoverProvider {
 				};
 			}
 		} 
+		return null;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public Object extractJavaDoc(IJavaElement element){
+		try {
+			if (element instanceof IMember) {
+				return JavadocContentAccess2.getHTMLContent((IMember) element, true);
+			}
+		} catch (JavaModelException e) {
+		}
 		return null;
 	}
 	
