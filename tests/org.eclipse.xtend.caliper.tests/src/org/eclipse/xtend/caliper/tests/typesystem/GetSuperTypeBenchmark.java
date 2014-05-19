@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -1016,7 +1015,7 @@ public class GetSuperTypeBenchmark extends TypeBasedSimpleBenchmark {
 			}
 			
 			@Override
-			@Nullable
+			/* @Nullable */
 			LightweightTypeReference getSuperType(LightweightTypeReference typeReference, JvmType rawType) {
 				return typeReference.getSuperType(rawType);
 			}
@@ -1037,7 +1036,7 @@ public class GetSuperTypeBenchmark extends TypeBasedSimpleBenchmark {
 //			}
 //			
 //			@Override
-//			@Nullable
+//			/* @Nullable */
 //			LightweightTypeReference getSuperType(LightweightTypeReference typeReference, JvmType rawType) {
 //				return typeReference.getSuperType(rawType);
 //			}

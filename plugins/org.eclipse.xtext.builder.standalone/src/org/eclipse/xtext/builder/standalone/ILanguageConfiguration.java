@@ -5,8 +5,6 @@ package org.eclipse.xtext.builder.standalone;
 
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.OutputConfiguration;
 
 /**
@@ -15,10 +13,9 @@ import org.eclipse.xtext.generator.OutputConfiguration;
  */
 public interface ILanguageConfiguration {
 	
-	@NonNull
+	/* @NonNull */
 	String getSetup();
 
-	@Nullable
 	Set<OutputConfiguration> getOutputConfigurations();
 	
 	/**

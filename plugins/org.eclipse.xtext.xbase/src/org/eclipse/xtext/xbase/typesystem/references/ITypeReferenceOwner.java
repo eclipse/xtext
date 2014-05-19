@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
@@ -18,7 +17,6 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JAvaDoc, factory (methods?) for lightweight type references
  */
-@NonNullByDefault
 public interface ITypeReferenceOwner {
 	
 	CommonTypeComputationServices getServices();

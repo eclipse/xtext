@@ -11,8 +11,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -22,7 +20,6 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients. TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class TypeResolutionStateAdapter extends AbstractRootedReentrantTypeResolver implements Adapter {
 
 	private final AbstractRootedReentrantTypeResolver context;
@@ -34,7 +31,7 @@ public class TypeResolutionStateAdapter extends AbstractRootedReentrantTypeResol
 		associatedWith.eAdapters().add(this);
 	}
 
-	public boolean isAdapterForType(@Nullable Object type) {
+	public boolean isAdapterForType(/* @Nullable */ Object type) {
 		return TypeResolutionStateAdapter.class.equals(type);
 	}
 
@@ -70,7 +67,7 @@ public class TypeResolutionStateAdapter extends AbstractRootedReentrantTypeResol
 		return context.reentrantResolve();
 	}
 
-	public void notifyChanged(@Nullable Notification notification) {
+	public void notifyChanged(/* @Nullable */ Notification notification) {
 		// Do nothing.
 	}
 
@@ -78,7 +75,7 @@ public class TypeResolutionStateAdapter extends AbstractRootedReentrantTypeResol
 		return target;
 	}
 
-	public void setTarget(@Nullable Notifier newTarget) {
+	public void setTarget(/* @Nullable */ Notifier newTarget) {
 		target = newTarget;
 	}
 

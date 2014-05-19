@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
@@ -24,7 +23,6 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString - delegates to parent except for the reassigned types
  */
-@NonNullByDefault
 public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 	
 	protected ReassigningStackedResolvedTypes(ResolvedTypes parent) {

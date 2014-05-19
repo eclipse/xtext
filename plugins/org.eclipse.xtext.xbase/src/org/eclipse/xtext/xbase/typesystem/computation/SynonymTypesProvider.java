@@ -10,9 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 import java.util.EnumSet;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypes;
@@ -43,7 +40,6 @@ public class SynonymTypesProvider {
 	 * 
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
-	@NonNullByDefault
 	public static abstract class Acceptor {
 		/**
 		 * @return <code>true</code> if the client is interested in more synonyms. <code>false</code> to skip
@@ -59,7 +55,7 @@ public class SynonymTypesProvider {
 		protected abstract boolean accept(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints);
 	}
 	
-	public void collectSynonymTypes(@Nullable LightweightTypeReference type, @NonNull Acceptor acceptor) {
+	public void collectSynonymTypes(/* @Nullable */ LightweightTypeReference type, /* @NonNull */ Acceptor acceptor) {
 		if (type == null || type.isPrimitiveVoid() || type.isType(Void.class)) {
 			return;
 		}
@@ -95,7 +91,6 @@ public class SynonymTypesProvider {
 	/**
 	 * @param type never a primitive or a wrapper type
 	 */
-	@NonNullByDefault
 	protected boolean addArrayAndListSynonyms(LightweightTypeReference type, Acceptor acceptor) {
 		if (type.isArray()) {
 			LightweightTypeReference listType = type.tryConvertToListType();

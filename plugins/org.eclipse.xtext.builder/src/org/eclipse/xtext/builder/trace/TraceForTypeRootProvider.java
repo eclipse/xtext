@@ -17,8 +17,6 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
@@ -47,7 +45,6 @@ import com.google.inject.Singleton;
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
 @Singleton
-@NonNullByDefault
 public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 
 	private static final Logger log = Logger.getLogger(TraceForTypeRootProvider.class);
@@ -124,7 +121,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 		return "jar".equalsIgnoreCase(ext) || "zip".equalsIgnoreCase(ext);
 	}
 
-	@Nullable
+	/* @Nullable */
 	public ITrace getTraceToSource(final ITypeRoot derivedJavaType) {
 		if (lruCache != null && lruCache.getFirst().equals(derivedJavaType))
 			return lruCache.getSecond();
@@ -141,7 +138,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 		throw new IllegalStateException("Unknown type " + derivedJavaType);
 	}
 
-	@Nullable
+	/* @Nullable */
 	public ITrace getTraceToSource(final ICompilationUnit javaFile) {
 		try {
 			IResource resource = javaFile.getUnderlyingResource();
@@ -153,7 +150,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 		return null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public ITrace getTraceToSource(final IClassFile classFile) {
 		IPath sourcePath = getSourcePath(classFile);
 		if (sourcePath == null)

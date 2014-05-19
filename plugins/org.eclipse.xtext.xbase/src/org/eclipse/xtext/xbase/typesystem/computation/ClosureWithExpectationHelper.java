@@ -13,8 +13,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -53,7 +51,6 @@ import com.google.common.collect.Lists;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 
 	private final JvmOperation operation;
@@ -313,7 +310,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 	/**
 	 * Returns <code>true</code> if the expression result is definitely incompatible to the expected type.
 	 */
-	@Nullable
+	/* @Nullable */
 	protected ConformanceHint processExpressionType(ITypeComputationResult expressionResult) {
 		LightweightTypeReference expressionResultType = expressionResult.getReturnType();
 		if (expressionResultType == null || expressionResultType instanceof AnyTypeReference) {
@@ -350,7 +347,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		return null;
 	}
 
-	protected boolean isImplicitReturn(@Nullable XExpression expression) {
+	protected boolean isImplicitReturn(/* @Nullable */ XExpression expression) {
 		if (expression == null) {
 			return true;
 		}

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 /**
@@ -19,7 +18,6 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public interface ISuspiciouslyOverloadedCandidate {
 
 	/**

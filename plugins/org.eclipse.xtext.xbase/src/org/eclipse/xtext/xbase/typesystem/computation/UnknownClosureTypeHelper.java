@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.XClosure;
@@ -23,7 +21,6 @@ import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class UnknownClosureTypeHelper extends AbstractClosureTypeHelper {
 
 	protected UnknownClosureTypeHelper(XClosure closure, ITypeExpectation expectation, ITypeComputationState state) {
@@ -39,13 +36,13 @@ public class UnknownClosureTypeHelper extends AbstractClosureTypeHelper {
 		getExpectation().acceptActualType(new UnknownTypeReference(getExpectation().getReferenceOwner()), ConformanceHint.UNCHECKED);
 	}
 
-	@Nullable
+	/* @Nullable */
 	@Override
 	public FunctionTypeReference getExpectedClosureType() {
 		return null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	@Override
 	public JvmOperation getOperation() {
 		return null;

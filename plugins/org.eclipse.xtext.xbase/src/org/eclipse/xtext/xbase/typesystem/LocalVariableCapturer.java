@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
@@ -76,7 +75,7 @@ public abstract class LocalVariableCapturer implements IJvmTypeReferenceProvider
 	
 	protected abstract void capture(ITypeComputationState state);
 	
-	public JvmTypeReference getTypeReference(@NonNull XComputedTypeReferenceImplCustom context) {
+	public JvmTypeReference getTypeReference(/* @NonNull */ XComputedTypeReferenceImplCustom context) {
 		if (!captured) {
 			throw new IllegalStateException("Not yet captured but navigated: " + this);
 		}

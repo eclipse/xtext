@@ -16,8 +16,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.6.0";visibility:=reexport,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.common.types,
  org.eclipse.xtext.xbase;bundle-version="2.6.0";visibility:=reexport,
- org.eclipse.xtext.xbase.lib;bundle-version="2.6.0";visibility:=reexport,
- org.eclipse.jdt.annotation;bundle-version="1.0.0";resolution:=optional;x-installation:=greedy
+ org.eclipse.xtext.xbase.lib;bundle-version="2.6.0";visibility:=reexport
 Import-Package: org.apache.commons.logging,
  org.apache.log4j;version="1.2.15",
  org.eclipse.xtext.xbase.lib

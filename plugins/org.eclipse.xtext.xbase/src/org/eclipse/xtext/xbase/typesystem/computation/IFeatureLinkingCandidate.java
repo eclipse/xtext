@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 
@@ -19,7 +18,6 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public interface IFeatureLinkingCandidate extends ILinkingCandidate {
 
 	/**

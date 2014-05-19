@@ -11,8 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendMember;
@@ -29,14 +27,13 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  * 
  * @author Jan Koehnlein
  */
-@NonNullByDefault
 @SuppressWarnings("all")
 public class InsertionOffsets {
-  public int getNewTypeInsertOffset(@Nullable final EObject call, final XtendTypeDeclaration ownerType) {
+  public int getNewTypeInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
     return this.after(ownerType);
   }
   
-  public int getNewFieldInsertOffset(@Nullable final EObject call, final XtendTypeDeclaration ownerType) {
+  public int getNewFieldInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
     EList<XtendMember> _members = ownerType.getMembers();
     boolean _isEmpty = _members.isEmpty();
     if (_isEmpty) {
@@ -55,7 +52,7 @@ public class InsertionOffsets {
     }
   }
   
-  public int getNewMethodInsertOffset(@Nullable final EObject call, final XtendTypeDeclaration ownerType) {
+  public int getNewMethodInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
     final XtendMember callingMember = EcoreUtil2.<XtendMember>getContainerOfType(call, XtendMember.class);
     boolean _and = false;
     boolean _notEquals = (!Objects.equal(callingMember, null));
@@ -81,7 +78,7 @@ public class InsertionOffsets {
     }
   }
   
-  public int getNewConstructorInsertOffset(@Nullable final EObject call, final XtendTypeDeclaration ownerType) {
+  public int getNewConstructorInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
     EList<XtendMember> _members = ownerType.getMembers();
     Iterable<XtendConstructor> _filter = Iterables.<XtendConstructor>filter(_members, XtendConstructor.class);
     final XtendConstructor lastDefinedConstructor = IterableExtensions.<XtendConstructor>last(_filter);

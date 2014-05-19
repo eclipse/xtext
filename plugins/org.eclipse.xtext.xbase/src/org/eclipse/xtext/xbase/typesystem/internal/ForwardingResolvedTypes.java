@@ -11,8 +11,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -30,13 +28,12 @@ import com.google.common.collect.ForwardingObject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class ForwardingResolvedTypes extends ForwardingObject implements IResolvedTypes {
 
 	@Override
 	protected abstract IResolvedTypes delegate();
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getActualType(XExpression expression) {
 		return delegate().getActualType(expression);
 	}
@@ -49,17 +46,17 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 		return delegate().isRefinedType(expression);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getReturnType(XExpression expression) {
 		return delegate().getReturnType(expression);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getExpectedReturnType(XExpression expression) {
 		return delegate().getExpectedReturnType(expression);
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 		return delegate().getActualType(identifiable);
 	}
@@ -68,12 +65,12 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 		return delegate().getThrownExceptions(obj);
 	}
 	
-//	@Nullable
+//	/* @Nullable */
 //	public JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
 //		return delegate().getDeclaredType(identifiable);
 //	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getExpectedType(XExpression expression) {
 		return delegate().getExpectedType(expression);
 	}
@@ -90,23 +87,23 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 		return delegate().isVoidTypeAllowed(expression);
 	}
 
-	@Nullable
-	public JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall) {
+	/* @Nullable */
+	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XAbstractFeatureCall featureCall) {
 		return delegate().getLinkedFeature(featureCall);
 	}
 	
-	@Nullable
-	public IFeatureLinkingCandidate getLinkingCandidate(@Nullable XAbstractFeatureCall featureCall) {
+	/* @Nullable */
+	public IFeatureLinkingCandidate getLinkingCandidate(/* @Nullable */ XAbstractFeatureCall featureCall) {
 		return delegate().getLinkingCandidate(featureCall);
 	}
 	
-	@Nullable
-	public JvmIdentifiableElement getLinkedFeature(@Nullable XConstructorCall constructorCall) {
+	/* @Nullable */
+	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XConstructorCall constructorCall) {
 		return delegate().getLinkedFeature(constructorCall);
 	}
 	
-	@Nullable
-	public IConstructorLinkingCandidate getLinkingCandidate(@Nullable XConstructorCall constructorCall) {
+	/* @Nullable */
+	public IConstructorLinkingCandidate getLinkingCandidate(/* @Nullable */ XConstructorCall constructorCall) {
 		return delegate().getLinkingCandidate(constructorCall);
 	}
 	

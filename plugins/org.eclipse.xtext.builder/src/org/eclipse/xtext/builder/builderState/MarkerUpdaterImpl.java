@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.markers.IMarkerContributor;
@@ -53,7 +52,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void updateMarkers(Delta delta, @Nullable ResourceSet resourceSet, IProgressMonitor monitor) {
+	public void updateMarkers(Delta delta, /* @Nullable */ ResourceSet resourceSet, IProgressMonitor monitor) {
 		String lastSegment = delta.getUri().lastSegment();
 		String message = Messages.MarkerUpdaterImpl_Validate + " " + (lastSegment == null ? "resource" : lastSegment);
 		SubMonitor subMonitor = SubMonitor.convert(monitor, message, 1);
@@ -65,7 +64,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 		processDelta(delta, resourceSet, subMonitor.newChild(1));
 	}
 
-	private void processDelta(Delta delta, @Nullable ResourceSet resourceSet, SubMonitor childMonitor) {
+	private void processDelta(Delta delta, /* @Nullable */ ResourceSet resourceSet, SubMonitor childMonitor) {
 		URI uri = delta.getUri();
 		IResourceUIValidatorExtension validatorExtension = getResourceUIValidatorExtension(uri);
 		IMarkerContributor markerContributor = getMarkerContributor(uri);

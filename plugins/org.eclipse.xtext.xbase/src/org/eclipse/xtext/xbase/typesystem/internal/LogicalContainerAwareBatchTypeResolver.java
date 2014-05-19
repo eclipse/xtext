@@ -11,7 +11,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 
 import com.google.common.collect.Lists;
@@ -20,7 +19,6 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class LogicalContainerAwareBatchTypeResolver extends DefaultBatchTypeResolver {
 	
 	@Override

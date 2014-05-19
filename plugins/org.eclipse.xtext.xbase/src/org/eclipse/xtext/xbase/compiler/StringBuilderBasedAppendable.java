@@ -10,10 +10,8 @@ package org.eclipse.xtext.xbase.compiler;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 
-@NonNullByDefault
 public class StringBuilderBasedAppendable extends AbstractStringBuilderBasedAppendable {
 
 	private ImportManager importManager;

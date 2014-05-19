@@ -7,66 +7,63 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class TypeReferenceVisitorWithParameterAndResult<Param, Result> {
 
-	@Nullable
+	/* @Nullable */
 	protected Result doVisitTypeReference(LightweightTypeReference reference, Param param) {
 		throw new UnsupportedOperationException("Missing implementation for " + reference);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected Result doVisitAnyTypeReference(AnyTypeReference reference, Param param) {
 		return doVisitTypeReference(reference, param);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected Result doVisitUnknownTypeReference(UnknownTypeReference reference, Param param) {
 		return doVisitTypeReference(reference, param);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected Result doVisitCompoundTypeReference(CompoundTypeReference reference, Param param) {
 		return doVisitTypeReference(reference, param);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected Result doVisitMultiTypeReference(CompoundTypeReference reference, Param param) {
 		return doVisitCompoundTypeReference(reference, param);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected Result doVisitSynonymTypeReference(CompoundTypeReference reference, Param param) {
 		return doVisitCompoundTypeReference(reference, param);
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected Result doVisitArrayTypeReference(ArrayTypeReference reference, Param param) {
 		return doVisitTypeReference(reference, param);
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected Result doVisitFunctionTypeReference(FunctionTypeReference reference, Param param) {
 		return doVisitParameterizedTypeReference(reference, param);
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected Result doVisitParameterizedTypeReference(ParameterizedTypeReference reference, Param param) {
 		return doVisitTypeReference(reference, param);
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected Result doVisitUnboundTypeReference(UnboundTypeReference reference, Param param) {
 		return doVisitTypeReference(reference, param);
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected Result doVisitWildcardTypeReference(WildcardTypeReference reference, Param param) {
 		return doVisitTypeReference(reference, param);
 	}

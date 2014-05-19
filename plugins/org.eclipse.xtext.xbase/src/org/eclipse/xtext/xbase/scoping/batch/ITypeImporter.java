@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 
 /**
@@ -16,7 +15,6 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.6
  */
-@NonNullByDefault
 public interface ITypeImporter {
 
 	/**

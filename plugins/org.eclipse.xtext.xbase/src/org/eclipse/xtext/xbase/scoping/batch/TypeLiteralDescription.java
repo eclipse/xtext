@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -42,7 +41,7 @@ public class TypeLiteralDescription extends SimpleIdentifiableElementDescription
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSyntacticReceiverType() {
 		return enclosingType;
 	}

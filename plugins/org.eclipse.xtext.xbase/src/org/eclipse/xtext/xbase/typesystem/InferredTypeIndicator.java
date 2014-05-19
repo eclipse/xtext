@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -61,7 +59,7 @@ public class InferredTypeIndicator implements IJvmTypeReferenceProvider {
 		}
 	}
 	
-	public JvmTypeReference getTypeReference(@NonNull XComputedTypeReferenceImplCustom context) {
+	public JvmTypeReference getTypeReference(/* @NonNull */ XComputedTypeReferenceImplCustom context) {
 		Resource resource = context.eResource();
 		IResolvedTypes resolvedTypes = null;
 		if (resource instanceof XtextResource) {
@@ -84,7 +82,7 @@ public class InferredTypeIndicator implements IJvmTypeReferenceProvider {
 		throw new IllegalStateException("equivalent could not be computed");
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public XExpression getExpression() {
 		return expression;
 	}

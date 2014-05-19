@@ -7,14 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.naming.QualifiedName;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class InstanceFeatureDescriptionWithoutReceiver extends BucketedEObjectDescription {
 
 	protected InstanceFeatureDescriptionWithoutReceiver(

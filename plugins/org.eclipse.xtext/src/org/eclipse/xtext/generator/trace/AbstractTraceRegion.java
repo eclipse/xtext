@@ -16,8 +16,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.AbstractTreeIterator;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
@@ -34,7 +32,6 @@ import com.google.common.primitives.Ints;
  * and {@link #hashCode()} contract and delegates some functionality to the parent.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class AbstractTraceRegion {
 
 	private AbstractTraceRegion parent;
@@ -43,7 +40,7 @@ public abstract class AbstractTraceRegion {
 	/**
 	 * Creates a new trace region and adds it to the parent if a parent was given.
 	 */
-	protected AbstractTraceRegion(@Nullable AbstractTraceRegion parent) {
+	protected AbstractTraceRegion(/* @Nullable */ AbstractTraceRegion parent) {
 		setParent(parent);
 	}
 	
@@ -75,7 +72,7 @@ public abstract class AbstractTraceRegion {
 	 * @see #setAsChildIn(AbstractTraceRegion)
 	 * @param parent the parent or <code>null</code> if none.
 	 */
-	public void setParent(@Nullable AbstractTraceRegion parent) {
+	public void setParent(/* @Nullable */ AbstractTraceRegion parent) {
 		this.parent = parent;
 		if (parent != null)
 			setAsChildIn(parent);
@@ -127,7 +124,7 @@ public abstract class AbstractTraceRegion {
 		return result;
 	}
 
-	protected Map<URI, List<Pair<ILocationData, AbstractTraceRegion>>> collectMatchingLocations(@Nullable URI expectedAssociatedPath) {
+	protected Map<URI, List<Pair<ILocationData, AbstractTraceRegion>>> collectMatchingLocations(/* @Nullable */ URI expectedAssociatedPath) {
 		Map<URI, List<Pair<ILocationData, AbstractTraceRegion>>> result = Maps.newHashMapWithExpectedSize(2);
 		Iterator<AbstractTraceRegion> treeIterator = treeIterator();
 		while(treeIterator.hasNext()) {
@@ -147,9 +144,9 @@ public abstract class AbstractTraceRegion {
 		return result;
 	}
 
-	@Nullable
-	protected List<Pair<ILocationData, AbstractTraceRegion>> getCollectingList(@Nullable URI associatedPath,
-			@Nullable URI expectedAssociatedPath, Map<URI, List<Pair<ILocationData, AbstractTraceRegion>>> listsPerURI) {
+	/* @Nullable */
+	protected List<Pair<ILocationData, AbstractTraceRegion>> getCollectingList(/* @Nullable */ URI associatedPath,
+			/* @Nullable */ URI expectedAssociatedPath, Map<URI, List<Pair<ILocationData, AbstractTraceRegion>>> listsPerURI) {
 		List<Pair<ILocationData, AbstractTraceRegion>> result = null;
 		if (associatedPath != null && (expectedAssociatedPath == null || associatedPath.equals(expectedAssociatedPath))) {
 			result = listsPerURI.get(associatedPath);
@@ -165,7 +162,7 @@ public abstract class AbstractTraceRegion {
 		TreeIterator<AbstractTraceRegion> treeIterator = new AbstractTreeIterator<AbstractTraceRegion>(this) {
 			private static final long serialVersionUID = 1L;
 			@Override
-			protected Iterator<? extends AbstractTraceRegion> getChildren(@Nullable Object object) {
+			protected Iterator<? extends AbstractTraceRegion> getChildren(/* @Nullable */ Object object) {
 				if (object == null)
 					return Iterators.emptyIterator();
 				AbstractTraceRegion casted = (AbstractTraceRegion) object;
@@ -184,7 +181,7 @@ public abstract class AbstractTraceRegion {
 
 	protected void inplaceSortByOffset(List<Pair<ILocationData, AbstractTraceRegion>> locations) {
 		Collections.sort(locations, new Comparator<Pair<ILocationData, AbstractTraceRegion>>() {
-			public int compare(@Nullable Pair<ILocationData, AbstractTraceRegion> o1, @Nullable Pair<ILocationData, AbstractTraceRegion> o2) {
+			public int compare(/* @Nullable */ Pair<ILocationData, AbstractTraceRegion> o1, /* @Nullable */ Pair<ILocationData, AbstractTraceRegion> o2) {
 				if (o1 == null || o2 == null)
 					throw new IllegalArgumentException("o1 == null || o2 == null");
 				ILocationData loc1 = o1.getFirst();
@@ -304,7 +301,7 @@ public abstract class AbstractTraceRegion {
 	 * Returns the merged location of all associated locations if
 	 * they belong to the same resource. Otherwise <code>null</code> is returned.
 	 */
-	@Nullable
+	/* @Nullable */
 	public ILocationData getMergedAssociatedLocation() {
 		List<ILocationData> allData = getAssociatedLocations();
 		if (allData.isEmpty()) {
@@ -335,7 +332,7 @@ public abstract class AbstractTraceRegion {
 		return new LocationData(region.getOffset(), region.getLength(), region.getLineNumber(), region.getEndLineNumber(), path);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public URI getAssociatedPath() {
 		ILocationData data = getMergedAssociatedLocation();
 		if (data != null) {
@@ -357,7 +354,7 @@ public abstract class AbstractTraceRegion {
 		return parent.getAssociatedPath();
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public AbstractTraceRegion getParent() {
 		return parent;
 	}
@@ -450,7 +447,7 @@ public abstract class AbstractTraceRegion {
 	 * @return <tt>true</tt> if the specified object is equal to this trace region
 	 */
 	@Override
-	public boolean equals(@Nullable Object obj) {
+	public boolean equals(/* @Nullable */ Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)

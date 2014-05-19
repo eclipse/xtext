@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collections;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class RawTypeSubstitutor extends TypeParameterSubstitutor<Object> {
 	public RawTypeSubstitutor(ITypeReferenceOwner owner) {
 		super(Collections.<JvmTypeParameter,LightweightMergedBoundTypeArgument>emptyMap(), owner);

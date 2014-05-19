@@ -7,12 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ConstructorFeatureScopeSession extends AbstractNestedFeatureScopeSession {
 
 	protected ConstructorFeatureScopeSession(AbstractFeatureScopeSession parent) {

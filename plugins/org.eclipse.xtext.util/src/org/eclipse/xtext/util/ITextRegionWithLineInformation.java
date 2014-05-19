@@ -7,13 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.3
  */
-@NonNullByDefault
 public interface ITextRegionWithLineInformation extends ITextRegion {
 
 	/**

@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.compiler.output;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
@@ -20,7 +19,6 @@ import org.eclipse.xtext.xbase.compiler.ScopeStack;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@NonNullByDefault
 public class SharedAppendableState {
 
 	private int indentationlevel = 0;

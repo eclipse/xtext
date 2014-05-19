@@ -13,8 +13,6 @@ import java.util.Map;
 import java.util.RandomAccess;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -31,7 +29,6 @@ import com.google.common.collect.Maps;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noextend This class is not intended to be subclassed by clients.
  */
-@NonNullByDefault
 public class NodeModelBuilder {
 
 	private static class ArrayInterner<T> implements Interner<T[]> {
@@ -40,7 +37,7 @@ public class NodeModelBuilder {
 			final T[] array;
 			private int hashCode = -1;
 
-			ArrayAsList(@Nullable T[] array) {
+			ArrayAsList(/* @Nullable */ T[] array) {
 				this.array = array;
 			}
 
@@ -48,7 +45,7 @@ public class NodeModelBuilder {
 				return array.length;
 			}
 
-			@Override @Nullable public T get(int index) {
+			@Override /* @Nullable */ public T get(int index) {
 				return array[index];
 			}
 
@@ -59,7 +56,7 @@ public class NodeModelBuilder {
 			}
 
 			@SuppressWarnings("rawtypes")
-			@Override public boolean equals(@Nullable Object o) {
+			@Override public boolean equals(/* @Nullable */ Object o) {
 				if (this == o)
 					return true;
 				return o instanceof ArrayAsList && Arrays.equals(array, ((ArrayAsList) o).array);
@@ -68,7 +65,7 @@ public class NodeModelBuilder {
 
 		private Map<ArrayAsList<T>, T[]> map = Maps.newHashMap();
 
-		public @Nullable T[] intern(@Nullable T[] sample) {
+		public /* @Nullable */ T[] intern(/* @Nullable */ T[] sample) {
 			ArrayAsList<T> key = new ArrayAsList<T>(sample);
 			T[] canonical = map.get(key);
 			if (canonical == null) {
@@ -141,7 +138,7 @@ public class NodeModelBuilder {
 		child.basicSetPreviousSibling(child);
 	}
 
-	protected void checkValidNewChild(@Nullable AbstractNode child) {
+	protected void checkValidNewChild(/* @Nullable */ AbstractNode child) {
 		if (child == null)
 			throw new IllegalArgumentException("child may not be null");
 		if (child.basicGetNextSibling() != null || child.basicGetPreviousSibling() != null)
@@ -167,7 +164,7 @@ public class NodeModelBuilder {
 		return result;
 	}
 
-	public ILeafNode newLeafNode(int offset, int length, EObject grammarElement, boolean isHidden, @Nullable SyntaxErrorMessage errorMessage,
+	public ILeafNode newLeafNode(int offset, int length, EObject grammarElement, boolean isHidden, /* @Nullable */ SyntaxErrorMessage errorMessage,
 			ICompositeNode parent) {
 		LeafNode result = null;
 		if (errorMessage != null) {
@@ -267,7 +264,7 @@ public class NodeModelBuilder {
 		return result;
 	}
 	
-	private @Nullable EObject[] newEObjectArray(@Nullable EObject first, EObject[] rest) {
+	private /* @Nullable */ EObject[] newEObjectArray(/* @Nullable */ EObject first, EObject[] rest) {
 		EObject[] array = new EObject[rest.length + 1];
 		array[0] = first;
 		System.arraycopy(rest, 0, array, 1, rest.length);

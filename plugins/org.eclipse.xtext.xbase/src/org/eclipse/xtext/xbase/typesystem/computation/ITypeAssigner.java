@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -21,14 +19,13 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public interface ITypeAssigner {
 
 	/**
 	 * The given element is tagged with the given type. If this type is <code>null</code>,
 	 * it is treated like an error type.
 	 */
-	void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference actualType);
+	void assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference actualType);
 	
 	/**
 	 * Returns the forked state that knows about the newly assigned types.

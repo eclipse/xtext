@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -43,7 +41,6 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate<XConstructorCall> implements IConstructorLinkingCandidate {
 
 	public ConstructorLinkingCandidate(
@@ -121,7 +118,7 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 		return XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	@Override
 	protected EReference getInvalidArgumentsValidationFeature() {
 		return null;

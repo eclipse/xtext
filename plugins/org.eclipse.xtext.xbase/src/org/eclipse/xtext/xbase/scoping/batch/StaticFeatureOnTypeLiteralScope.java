@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -32,7 +30,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
  */
 public class StaticFeatureOnTypeLiteralScope extends StaticFeatureScope implements IFeatureNames {
 
-	@NonNullByDefault
 	protected StaticFeatureOnTypeLiteralScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall featureCall, XExpression receiver,
 			LightweightTypeReference receiverType, TypeBucket bucket, OperatorMapping operatorMapping) {
 		super(parent, session, featureCall, receiver, receiverType, bucket, operatorMapping);
@@ -71,7 +68,7 @@ public class StaticFeatureOnTypeLiteralScope extends StaticFeatureScope implemen
 		return super.getLocalElementsByName(name);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected JvmTypeReference getExtendedClass(JvmDeclaredType type) {
 		// TODO move JvmGenericType.getExtendedClass to JvmDeclaredType
 		for(JvmTypeReference candidate: type.getSuperTypes()) {

@@ -14,8 +14,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -28,7 +26,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class SimpleIdentifiableElementDescription implements IIdentifiableElementDescription {
 
 	private IEObjectDescription delegate;
@@ -57,7 +54,7 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 		return delegate.getEClass();
 	}
 
-	public String getUserData(@Nullable String key) {
+	public String getUserData(/* @Nullable */ String key) {
 		return delegate.getUserData(key);
 	}
 
@@ -82,12 +79,12 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 		return String.format("%s[%s]", getClass().getSimpleName(), delegate);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getImplicitReceiverType() {
 		return null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public XExpression getImplicitReceiver() {
 		return null;
 	}
@@ -100,12 +97,12 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 		return EnumSet.noneOf(ConformanceHint.class);
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSyntacticReceiverType() {
 		return null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public XExpression getSyntacticReceiver() {
 		return null;
 	}
@@ -122,12 +119,12 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 		return EnumSet.noneOf(ConformanceHint.class);
 	}
 
-	@Nullable
+	/* @Nullable */
 	public XExpression getImplicitFirstArgument() {
 		return null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getImplicitFirstArgumentType() {
 		return null;
 	}

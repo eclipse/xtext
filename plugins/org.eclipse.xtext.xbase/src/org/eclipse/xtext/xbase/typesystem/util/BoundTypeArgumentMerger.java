@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
@@ -38,7 +37,7 @@ public class BoundTypeArgumentMerger {
 	@Inject
 	private TypeConformanceComputer conformanceComputer;
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightMergedBoundTypeArgument merge(Collection<LightweightBoundTypeArgument> allArguments, ITypeReferenceOwner owner) {
 		if (allArguments.isEmpty())
 			return null;

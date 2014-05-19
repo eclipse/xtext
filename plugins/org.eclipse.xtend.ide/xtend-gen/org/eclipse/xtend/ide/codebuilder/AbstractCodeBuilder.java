@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -41,7 +40,6 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 /**
  * @author Jan Koehnlein
  */
-@NonNullByDefault
 @SuppressWarnings("all")
 public abstract class AbstractCodeBuilder implements ICodeBuilder {
   private Object _ownerSource;

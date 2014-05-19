@@ -11,8 +11,6 @@ import java.lang.annotation.Annotation;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -39,8 +37,8 @@ public class AnnotationLookup {
 	@Inject
 	private TypesFactory typesFactory;
 	
-	@Nullable
-	public JvmAnnotationReference findAnnotation(@NonNull JvmAnnotationTarget annotationTarget, @NonNull Class<? extends Annotation> lookupType) {
+	/* @Nullable */
+	public JvmAnnotationReference findAnnotation(/* @NonNull */ JvmAnnotationTarget annotationTarget, /* @NonNull */ Class<? extends Annotation> lookupType) {
 		// avoid creating an empty list for all given targets but check for #eIsSet first
 		if (annotationTarget.eIsSet(TypesPackage.Literals.JVM_ANNOTATION_TARGET__ANNOTATIONS)) {
 			for(JvmAnnotationReference annotation: annotationTarget.getAnnotations()) {
@@ -54,8 +52,8 @@ public class AnnotationLookup {
 	}
 	
 
-	@Nullable
-	public JvmAnnotationReference removeAnnotation(@NonNull JvmAnnotationTarget annotationTarget, @NonNull Class<? extends Annotation> type) {
+	/* @Nullable */
+	public JvmAnnotationReference removeAnnotation(/* @NonNull */ JvmAnnotationTarget annotationTarget, /* @NonNull */ Class<? extends Annotation> type) {
 		JvmAnnotationReference result = findAnnotation(annotationTarget, type);
 		if (result != null) {
 			annotationTarget.getAnnotations().remove(result);
@@ -64,8 +62,8 @@ public class AnnotationLookup {
 		return null;
 	}
 	
-	@Nullable
-	public JvmAnnotationReference findOrAddAnnotation(@NonNull JvmAnnotationTarget annotationTarget, @NonNull Notifier context, @NonNull Class<? extends Annotation> type) {
+	/* @Nullable */
+	public JvmAnnotationReference findOrAddAnnotation(/* @NonNull */ JvmAnnotationTarget annotationTarget, /* @NonNull */ Notifier context, /* @NonNull */ Class<? extends Annotation> type) {
 		JvmAnnotationReference result = findAnnotation(annotationTarget, type);
 		if (result != null)
 			return result;
@@ -78,7 +76,7 @@ public class AnnotationLookup {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	private JvmAnnotationType findAnnotationType(Class<? extends Annotation> type, Notifier context) {
 		ResourceSet resourceSet = EcoreUtil2.getResourceSet(context);
 		if (resourceSet == null)

@@ -8,8 +8,6 @@
 package org.eclipse.xtend.ide.codebuilder
 
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.jdt.annotation.NonNullByDefault
-import org.eclipse.jdt.annotation.Nullable
 import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendMember
@@ -22,14 +20,13 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
  * 
  * @author Jan Koehnlein
  */
-@NonNullByDefault
 class InsertionOffsets {
 
-	def getNewTypeInsertOffset(@Nullable EObject call, XtendTypeDeclaration ownerType) {
+	def getNewTypeInsertOffset(/* @Nullable */ EObject call, XtendTypeDeclaration ownerType) {
 		after(ownerType)
 	}
 
-	def getNewFieldInsertOffset(@Nullable EObject call, XtendTypeDeclaration ownerType) {
+	def getNewFieldInsertOffset(/* @Nullable */ EObject call, XtendTypeDeclaration ownerType) {
 		if (ownerType.members.empty)
 			return inEmpty(ownerType)
 		val lastDefinedField = ownerType.members.filter(XtendField).last
@@ -39,7 +36,7 @@ class InsertionOffsets {
 			return after(lastDefinedField)
 	}
 
-	def getNewMethodInsertOffset(@Nullable EObject call, XtendTypeDeclaration ownerType) {
+	def getNewMethodInsertOffset(/* @Nullable */ EObject call, XtendTypeDeclaration ownerType) {
 		val callingMember = EcoreUtil2.getContainerOfType(call, XtendMember)
 		if (callingMember != null && ownerType.members.contains(callingMember))
 			return after(callingMember)
@@ -49,7 +46,7 @@ class InsertionOffsets {
 			return after(ownerType.members.last)
 	}
 
-	def getNewConstructorInsertOffset(@Nullable EObject call, XtendTypeDeclaration ownerType) {
+	def getNewConstructorInsertOffset(/* @Nullable */ EObject call, XtendTypeDeclaration ownerType) {
 		val lastDefinedConstructor = ownerType.members.filter(XtendConstructor).last
 		if(lastDefinedConstructor == null)
 			return getNewFieldInsertOffset(call, ownerType)		

@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -28,7 +26,6 @@ import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubstitutor<ConstraintVisitingInfo> {
 
 	protected CustomTypeParameterSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
@@ -113,15 +110,15 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 	 * @param type the type parameter that is bound
 	 * @param info the current traversal state
 	 */
-	@Nullable
+	/* @Nullable */
 	protected LightweightMergedBoundTypeArgument getBoundTypeArgument(JvmTypeParameter type, ConstraintVisitingInfo info) {
 		return getTypeParameterMapping().get(type);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected abstract LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting);
 	
-	protected LightweightTypeReference getDeclaredUpperBound(@Nullable JvmTypeParameterDeclarator type, int parameterIndex, ConstraintVisitingInfo visiting) {
+	protected LightweightTypeReference getDeclaredUpperBound(/* @Nullable */ JvmTypeParameterDeclarator type, int parameterIndex, ConstraintVisitingInfo visiting) {
 		if (type != null && type.getTypeParameters().size() > parameterIndex) {
 			JvmTypeParameter typeParameter = type.getTypeParameters().get(parameterIndex);
 			LightweightTypeReference result = getDeclaredUpperBound(typeParameter, visiting);
@@ -136,7 +133,7 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 		return new ParameterizedTypeReference(getOwner(), objectType);
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getDeclaredUpperBound(JvmTypeParameter typeParameter, ConstraintVisitingInfo visiting) {
 		if (!typeParameter.getConstraints().isEmpty()) {
 			JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);

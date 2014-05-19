@@ -14,8 +14,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -45,7 +43,6 @@ import com.google.inject.Singleton;
 /**
  * @author Sebastian Zarnekow
  */
-@NonNullByDefault
 @Singleton
 public class FunctionTypes {
 	
@@ -98,7 +95,7 @@ public class FunctionTypes {
 		return typeParameterMapping;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public JvmOperation findImplementingOperation(LightweightTypeReference functionType) {
 		// TODO use org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations instead (if fast enough)
 		List<JvmType> rawTypes = functionType.getRawTypes();
@@ -170,7 +167,7 @@ public class FunctionTypes {
 			ITypeReferenceOwner owner,
 			LightweightTypeReference functionType, 
 			List<LightweightTypeReference> parameterTypes,
-			@Nullable LightweightTypeReference returnType) {
+			/* @Nullable */ LightweightTypeReference returnType) {
 		JvmType type = functionType.getType();
 		if (type == null)
 			throw new IllegalArgumentException("type may not be null");
@@ -226,7 +223,7 @@ public class FunctionTypes {
 	 * exchangeable implementation of {@link ParameterizedTypeReference#tryConvertToFunctionTypeReference(boolean)}.
 	 * @see #getAsFunctionTypeReference(ParameterizedTypeReference)
 	 */
-	@Nullable
+	/* @Nullable */
 	protected FunctionTypeReference tryConvertToFunctionTypeReference(ParameterizedTypeReference typeReference, boolean rawType) {
 		JvmOperation operation = findImplementingOperation(typeReference);
 		if (operation == null)
@@ -257,7 +254,7 @@ public class FunctionTypes {
 		}
 		UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(mergedTypeParameterMapping, typeReference.getOwner()) {
 			@Override
-			@Nullable
+			/* @Nullable */
 			protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type,
 					Set<JvmTypeParameter> visiting) {
 				LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(type);
@@ -293,7 +290,7 @@ public class FunctionTypes {
 	 * exchangeable implementation of {@link ParameterizedTypeReference#getAsFunctionTypeReference()}.
 	 * @see #tryConvertToFunctionTypeReference(ParameterizedTypeReference, boolean)
 	 */
-	@Nullable
+	/* @Nullable */
 	public FunctionTypeReference getAsFunctionTypeReference(ParameterizedTypeReference typeReference) {
 		FunctionTypeKind functionTypeKind = typeReference.getFunctionTypeKind();
 		if (functionTypeKind == FunctionTypeKind.PROCEDURE) {
@@ -304,7 +301,7 @@ public class FunctionTypes {
 		return null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected FunctionTypeReference getAsFunctionOrNull(ParameterizedTypeReference typeReference) {
 		if (typeReference.isRawType())
 			return null;
@@ -319,7 +316,7 @@ public class FunctionTypes {
 		return functionType;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected FunctionTypeReference getAsProcedureOrNull(ParameterizedTypeReference typeReference) {
 		ITypeReferenceOwner owner = typeReference.getOwner();
 		JvmType type = typeReference.getType();

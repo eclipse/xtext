@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -30,7 +29,7 @@ public interface IVisibilityHelper {
 	 * @param member the member that shall be accessed.
 	 * @return <code>true</code> if the feature can be accessed.
 	 */
-	boolean isVisible(@NonNull JvmMember member);
+	boolean isVisible(/* @NonNull */ JvmMember member);
 	
 	/**
 	 * Treats all members as visible members independently from their own visibility or 
@@ -41,7 +40,7 @@ public interface IVisibilityHelper {
 		/**
 		 * @return always <code>true</code>.
 		 */
-		public boolean isVisible(@NonNull JvmMember member) {
+		public boolean isVisible(/* @NonNull */ JvmMember member) {
 			return true;
 		}
 		

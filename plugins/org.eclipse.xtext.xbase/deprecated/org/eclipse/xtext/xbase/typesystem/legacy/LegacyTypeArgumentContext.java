@@ -12,7 +12,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
@@ -78,7 +77,7 @@ class LegacyTypeArgumentContext implements ITypeArgumentContext {
 		return result.toTypeReference();
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference substitute(JvmTypeReference reference) {
 		Resource resource = this.resource;
 		if (resource == null) {

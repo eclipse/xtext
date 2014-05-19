@@ -49,7 +49,7 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	private IStorage2UriMapper mapper;
 	
 	@Inject(optional=true) 
-	//@Nullable
+	/* @Nullable */
 	private IWorkbench workbench;
 	
 	/**

@@ -11,8 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -39,7 +37,6 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate<XAbstractFeatureCall> implements ITypeLiteralLinkingCandidate {
 
 	private TypeLiteralHelper helper;
@@ -203,7 +200,7 @@ public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate
 	}
 	
 	@Override
-	protected int getTypeArgumentConformanceFailures(@Nullable IAcceptor<? super AbstractDiagnostic> acceptor) {
+	protected int getTypeArgumentConformanceFailures(/* @Nullable */ IAcceptor<? super AbstractDiagnostic> acceptor) {
 		return 0;
 	}
 	

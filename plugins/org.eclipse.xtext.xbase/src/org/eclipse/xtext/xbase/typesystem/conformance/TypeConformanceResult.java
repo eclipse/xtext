@@ -10,13 +10,11 @@ package org.eclipse.xtext.xbase.typesystem.conformance;
 import java.util.Arrays;
 import java.util.EnumSet;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class TypeConformanceResult {
 	
 	private final EnumSet<ConformanceHint> hints;

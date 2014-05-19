@@ -12,8 +12,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
@@ -64,7 +62,6 @@ import com.google.inject.Provider;
  * @author Jan Koehnlein
  * @author Sebastian Zarnekow
  */
-@NonNullByDefault
 public class XtendCompiler extends XbaseCompiler {
 
 	@Inject
@@ -121,7 +118,7 @@ public class XtendCompiler extends XbaseCompiler {
 			}
 		}
 
-		protected void setCurrentAppendable(@Nullable RichStringLiteral origin) {
+		protected void setCurrentAppendable(/* @Nullable */ RichStringLiteral origin) {
 			if (currentAppendable == null && origin != null) {
 				ITextRegionWithLineInformation region = (ITextRegionWithLineInformation) getLocationInFileProvider().getSignificantTextRegion(origin, XbasePackage.Literals.XSTRING_LITERAL__VALUE, 0);
 				currentAppendable = appendable.trace(new LocationData(region, null), true);
@@ -134,7 +131,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 
 		@Override
-		public void acceptSemanticText(CharSequence text, @Nullable RichStringLiteral origin) {
+		public void acceptSemanticText(CharSequence text, /* @Nullable */ RichStringLiteral origin) {
 			setCurrentAppendable(origin);
 			if (text.length() == 0)
 				return;
@@ -207,7 +204,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 
 		@Override
-		public void acceptForLoop(JvmFormalParameter parameter, @Nullable XExpression expression) {
+		public void acceptForLoop(JvmFormalParameter parameter, /* @Nullable */ XExpression expression) {
 			currentAppendable = null;
 			super.acceptForLoop(parameter, expression);
 			if (expression == null)
@@ -246,7 +243,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 		
 		@Override
-		public boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, CharSequence indentation) {
+		public boolean forLoopHasNext(/* @Nullable */ XExpression before, /* @Nullable */ XExpression separator, CharSequence indentation) {
 			currentAppendable = null;
 			if (!super.forLoopHasNext(before, separator, indentation))
 				return false;
@@ -280,7 +277,7 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 		
 		@Override
-		public void acceptEndFor(@Nullable XExpression after, CharSequence indentation) {
+		public void acceptEndFor(/* @Nullable */ XExpression after, CharSequence indentation) {
 			currentAppendable = null;
 			super.acceptEndFor(after, indentation);
 			appendable.decreaseIndentation();
@@ -578,7 +575,7 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected String getReferenceName(XExpression expr, ITreeAppendable b) {
 		if (expr instanceof AnonymousClass) {
 			return getReferenceName(((AnonymousClass) expr).getConstructorCall(), b);

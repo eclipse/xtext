@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
@@ -845,7 +844,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		error(message.toString(), function, XTEND_EXECUTABLE__EXCEPTIONS, INCOMPATIBLE_THROWS_CLAUSE);
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected XtendFunction findXtendFunction(IResolvedOperation operation) {
 		EObject sourceElement = associations.getPrimarySourceElement(operation.getDeclaration());
 		if (sourceElement instanceof XtendFunction)

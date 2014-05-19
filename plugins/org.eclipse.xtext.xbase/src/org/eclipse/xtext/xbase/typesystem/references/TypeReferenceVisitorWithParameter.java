@@ -9,12 +9,9 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class TypeReferenceVisitorWithParameter<Param> {
 
 	protected void doVisitTypeReference(LightweightTypeReference reference, Param param) {

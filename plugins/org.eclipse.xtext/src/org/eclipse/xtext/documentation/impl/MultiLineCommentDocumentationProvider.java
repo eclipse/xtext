@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
@@ -57,8 +56,8 @@ public class MultiLineCommentDocumentationProvider extends AbstractMultiLineComm
 	 * @since 2.3
 	 * @return a list with exactly one node or an empty list if the object is undocumented.
 	 */
-	@NonNull
-	public List<INode> getDocumentationNodes(@NonNull EObject object) {
+	/* @NonNull */
+	public List<INode> getDocumentationNodes(/* @NonNull */ EObject object) {
 		ICompositeNode node = NodeModelUtils.getNode(object);
 		List<INode> result = Collections.emptyList();
 		if (node != null) {

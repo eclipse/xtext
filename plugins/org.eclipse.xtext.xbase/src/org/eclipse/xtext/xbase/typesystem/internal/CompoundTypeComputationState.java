@@ -11,8 +11,6 @@ import java.util.EnumSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -42,7 +40,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class CompoundTypeComputationState implements ITypeComputationState {
 
 	private AbstractTypeComputationState[] components;
@@ -123,7 +120,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 
-	public ITypeComputationState withTypeCheckpoint(@Nullable EObject context) {
+	public ITypeComputationState withTypeCheckpoint(/* @Nullable */ EObject context) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
 			result[i] = components[i].withTypeCheckpoint(context);
@@ -131,7 +128,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 
-	public ITypeComputationResult computeTypes(@Nullable XExpression expression) {
+	public ITypeComputationResult computeTypes(/* @Nullable */ XExpression expression) {
 		if (expression == null) {
 			throw new IllegalArgumentException("XExpression may not be null");
 		}
@@ -167,7 +164,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return 0;
 	}
 
-	public ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type) {
+	public ITypeComputationState assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference type) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
 			result[i] = components[i].assignType(element, type);
@@ -175,7 +172,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 	
-	public ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type, boolean addToChildScope) {
+	public ITypeComputationState assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference type, boolean addToChildScope) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
 			result[i] = components[i].assignType(element, type, addToChildScope);

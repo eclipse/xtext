@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.ui.quickfix;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.validation.Issue;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@NonNullByDefault
 public interface ILinkingIssueQuickfixProvider {
 
 	void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,

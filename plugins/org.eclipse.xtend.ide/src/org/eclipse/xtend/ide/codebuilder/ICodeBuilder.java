@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.codebuilder;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -21,7 +20,6 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender;
  * @author Sebastian Benz - Inspiration
  * @author Jan Koehnlein - Initial contribution and API
  */
-@NonNullByDefault
 public interface ICodeBuilder {
 
 	ISourceAppender build(ISourceAppender appendable);

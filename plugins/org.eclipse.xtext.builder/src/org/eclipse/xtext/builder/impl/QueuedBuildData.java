@@ -18,7 +18,6 @@ import java.util.Queue;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -182,13 +181,13 @@ public class QueuedBuildData {
 		return contribution.needsRebuild(project, deltas);
 	}
 
-	public synchronized void queueChanges(@NonNull List<IResourceDescription.Delta> deltas) {
+	public synchronized void queueChanges(/* @NonNull */ List<IResourceDescription.Delta> deltas) {
 		for (int i = 0, size = deltas.size(); i < size; i++) {
 			queueChange(deltas.get(i));
 		}
 	}
 
-	public synchronized void queueChange(@NonNull IResourceDescription.Delta delta) {
+	public synchronized void queueChange(/* @NonNull */ IResourceDescription.Delta delta) {
 		if (!contribution.queueChange(delta)) {
 			deltas.add(delta);
 		}

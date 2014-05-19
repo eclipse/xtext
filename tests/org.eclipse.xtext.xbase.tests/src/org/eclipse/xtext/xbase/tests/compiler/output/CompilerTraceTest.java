@@ -15,8 +15,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.builder.trace.AbstractTrace;
 import org.eclipse.xtext.builder.trace.LocationInResource;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
@@ -57,14 +55,14 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		}
 		
 		@Override
-		@NonNull
+		/* @NonNull */
 		public IProject getLocalProject() {
 			throw new UnsupportedOperationException();
 		}
 		
 		@Override
-		@Nullable
-		protected ILocationInResource createLocationInResourceFor(@NonNull ILocationData location, @NonNull AbstractTraceRegion traceRegion) {
+		/* @Nullable */
+		protected ILocationInResource createLocationInResourceFor(/* @NonNull */ ILocationData location, /* @NonNull */ AbstractTraceRegion traceRegion) {
 			URI path = location.getPath();
 			if (path == null)
 				path = traceRegion.getAssociatedPath();
@@ -74,20 +72,20 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		}
 
 		@Override
-		@NonNull
+		/* @NonNull */
 		public URI getLocalURI() {
 			throw new UnsupportedOperationException();
 		}
 
 		@Override
-		@NonNull
-		protected IStorage findStorage(@NonNull URI uri, @NonNull IProject project) {
+		/* @NonNull */
+		protected IStorage findStorage(/* @NonNull */ URI uri, /* @NonNull */ IProject project) {
 			throw new UnsupportedOperationException();
 		}
 
 		@Override
-		@NonNull
-		protected InputStream getContents(@NonNull URI uri, @NonNull IProject project) throws CoreException {
+		/* @NonNull */
+		protected InputStream getContents(/* @NonNull */ URI uri, /* @NonNull */ IProject project) throws CoreException {
 			throw new UnsupportedOperationException();
 		}
 		

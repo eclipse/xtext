@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
@@ -97,7 +96,7 @@ public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationT
 		return false;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected String getTypeName(EClass c, EStructuralFeature referingFeature) {
 		if (referingFeature == XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE)
 			return " to an annotation type";

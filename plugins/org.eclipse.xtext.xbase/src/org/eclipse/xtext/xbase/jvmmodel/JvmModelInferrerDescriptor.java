@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.jvmmodel;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -24,7 +23,7 @@ public class JvmModelInferrerDescriptor implements IJvmModelInferrer {
 		this.element = element;
 	}
 
-	public void infer(EObject e, @NonNull IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
+	public void infer(EObject e, /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (delegate == null)
 			delegate = loadDelegate();
 		delegate.infer(e, acceptor, preIndexingPhase);

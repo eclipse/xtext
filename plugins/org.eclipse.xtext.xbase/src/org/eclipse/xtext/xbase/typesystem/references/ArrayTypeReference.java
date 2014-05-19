@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.io.Serializable;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
@@ -27,7 +25,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ArrayTypeReference extends LightweightTypeReference {
 
 	private LightweightTypeReference component;
@@ -111,7 +108,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSuperType(JvmType rawType) {
 		if (rawType.eClass() == TypesPackage.Literals.JVM_ARRAY_TYPE) {
 			JvmComponentType rawComponentType = ((JvmArrayType) rawType).getComponentType();
@@ -134,7 +131,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSuperType(Class<?> rawType) {
 		if (isType(rawType)) {
 			return this;
@@ -202,7 +199,7 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public ArrayTypeReference tryConvertToArray() {
 		return this;
 	}
@@ -258,13 +255,13 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
 		return visitor.doVisitArrayTypeReference(this);
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		return visitor.doVisitArrayTypeReference(this, param);
 	}

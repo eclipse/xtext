@@ -12,9 +12,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
@@ -433,29 +430,27 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	protected TestableState createTypeComputationState() {
 		return new TestableState(new PublicResolvedTypes(reentrantResolver) {
 			@Override
-			@NonNull 
+			/* @NonNull */ 
 			public ITypeReferenceOwner getReferenceOwner() {
 				return ClosureTypeComputerUnitTest.this;
 			}
 		}, new NullFeatureScopeSession());
 	}
 	
-	@NonNullByDefault
 	public void acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
 		state.getResolvedTypes().acceptHint(handle, boundTypeArgument);
 	}
 	
-	@NonNull
+	/* @NonNull */
 	public List<JvmTypeParameter> getDeclaredTypeParameters() {
 		return state.getResolvedTypes().getDeclaredTypeParameters();
 	}
 	
-	@NonNullByDefault
 	public List<LightweightBoundTypeArgument> getAllHints(Object handle) {
 		return state.getResolvedTypes().getAllHints(handle);
 	}
 	
-	public boolean isResolved(@NonNull Object handle) {
+	public boolean isResolved(/* @NonNull */ Object handle) {
 		return state.getResolvedTypes().isResolved(handle);
 	}
 	
@@ -495,17 +490,16 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		return parseHelper.parse(string, resourceSet);
 	}
 
-	@NonNull 
+	/* @NonNull */ 
 	public ResourceSet getContextResourceSet() {
 		return contextResourceSet;
 	}
 	
-	@NonNull 
+	/* @NonNull */ 
 	public CommonTypeComputationServices getServices() {
 		return services;
 	}
 
-	@NonNullByDefault
 	class TestableState extends AbstractTypeComputationState {
 
 		protected TestableState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession) {
@@ -557,18 +551,17 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 	}
 	
-	@NonNullByDefault
 	class NullFeatureScopeSession extends AbstractFeatureScopeSession {
 
 		public boolean isVisible(JvmMember member) {
 			throw new UnsupportedOperationException();
 		}
 		
-		public boolean isVisible(JvmMember member, @Nullable LightweightTypeReference receiverType, @Nullable JvmIdentifiableElement receiverFeature) {
+		public boolean isVisible(JvmMember member, /* @Nullable */ LightweightTypeReference receiverType, /* @Nullable */ JvmIdentifiableElement receiverFeature) {
 			throw new UnsupportedOperationException();
 		}
 
-		@Nullable
+		/* @Nullable */
 		public IEObjectDescription getLocalElement(QualifiedName name) {
 			throw new UnsupportedOperationException();
 		}

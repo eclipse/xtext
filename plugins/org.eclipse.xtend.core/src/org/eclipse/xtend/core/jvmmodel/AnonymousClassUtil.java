@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.jvmmodel;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -72,7 +71,7 @@ public class AnonymousClassUtil {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public JvmGenericType getSuperType(AnonymousClass anonymousClass) {
 		JvmConstructor constructor = anonymousClass.getConstructorCall().getConstructor();
 		if(constructor != null && ! constructor.eIsProxy()) {

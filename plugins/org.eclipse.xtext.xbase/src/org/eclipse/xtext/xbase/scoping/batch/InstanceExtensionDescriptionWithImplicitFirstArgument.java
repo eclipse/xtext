@@ -12,8 +12,6 @@ import java.util.EnumSet;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -25,7 +23,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class InstanceExtensionDescriptionWithImplicitFirstArgument extends InstanceExtensionDescription {
 
 	public InstanceExtensionDescriptionWithImplicitFirstArgument(
@@ -45,13 +42,13 @@ public class InstanceExtensionDescriptionWithImplicitFirstArgument extends Insta
 	}
 
 	@Override
-	@Nullable
+	/* @Nullable */
 	public XExpression getSyntacticReceiver() {
 		return null;
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSyntacticReceiverType() {
 		return null;
 	}
@@ -67,13 +64,13 @@ public class InstanceExtensionDescriptionWithImplicitFirstArgument extends Insta
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public XExpression getImplicitFirstArgument() {
 		return super.getSyntacticReceiver();
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getImplicitFirstArgumentType() {
 		return super.getSyntacticReceiverType();
 	}

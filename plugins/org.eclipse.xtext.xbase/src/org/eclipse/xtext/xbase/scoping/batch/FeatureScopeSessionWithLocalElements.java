@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -20,7 +18,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class FeatureScopeSessionWithLocalElements extends AbstractNestedFeatureScopeSession {
 
 	private final Map<QualifiedName, JvmIdentifiableElement> map;
@@ -30,7 +27,7 @@ public class FeatureScopeSessionWithLocalElements extends AbstractNestedFeatureS
 		this.map = map;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	@Override
 	public IEObjectDescription getLocalElement(QualifiedName name) {
 		JvmIdentifiableElement result = map.get(name);

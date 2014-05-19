@@ -2,7 +2,6 @@ package org.eclipse.xtext.purexbase.jvmmodel
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.jdt.annotation.NonNull
 import org.eclipse.xtext.purexbase.pureXbase.Model
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
@@ -21,7 +20,7 @@ class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
 
 	@Inject extension JvmTypesBuilder
 
-   	def dispatch void infer(Model m, @NonNull IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
+   	def dispatch void infer(Model m, /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
    		val e  = m.block
    		acceptor.accept(e.toClass(e.eResource.name)).initializeLater [
    			members += e.toMethod("myMethod", inferredType) [

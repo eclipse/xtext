@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -24,7 +23,7 @@ public class TextRegionTest extends Assert {
 		assertFalse(location.contains(7));
 	}
 	
-	@NonNull
+	/* @NonNull */
 	protected ITextRegion newTextRegion(int offset, int length) {
 		return new TextRegion(offset, length);
 	}

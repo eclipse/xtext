@@ -13,8 +13,6 @@ import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
@@ -71,7 +69,6 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@NonNullByDefault
 public class FeatureCallCompiler extends LiteralsCompiler {
 
 	@Inject
@@ -247,7 +244,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		});
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected XExpression getActualReceiver(final XAbstractFeatureCall expr) {
 		return expr.getActualReceiver();
 	}
@@ -555,7 +552,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 //								return call;
 //							}
 //
-//							@Nullable
+//							/* @Nullable */
 //							@Override
 //							public JvmTypeParameterDeclarator getNearestDeclarator() {
 //								EObject context = call;
@@ -576,7 +573,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 //								return result;
 //							}
 //
-//							@Nullable
+//							/* @Nullable */
 //							@Override
 //							public JvmTypeReference getDeclaredType() {
 //								if (executable instanceof JvmOperation)
@@ -584,7 +581,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 //								return null;
 //							}
 //
-//							@Nullable
+//							/* @Nullable */
 //							@Override
 //							public JvmTypeReference getReceiverType() {
 //								return receiverType;
@@ -637,7 +634,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return completeFeatureCallAppendable;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected ILocationData getLocationWithoutTypeArguments(XAbstractFeatureCall call) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(call);
 		if (startNode != null) {
@@ -664,7 +661,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected ILocationData getLocationWithTypeArguments(XAbstractFeatureCall call) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(call);
 		if (startNode != null) {
@@ -691,7 +688,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected ILocationData getLocationOfTypeArguments(XAbstractFeatureCall call) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(call);
 		if (startNode != null) {
@@ -722,7 +719,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected ILocationData toLocationData(List<INode> nodes) {
 		ITextRegionWithLineInformation result = ITextRegionWithLineInformation.EMPTY_REGION;
 		for (INode node : nodes) {

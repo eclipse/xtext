@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.conformance;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.RawTypeHelper;
@@ -34,7 +33,6 @@ import com.google.inject.ImplementedBy;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @ImplementedBy(RawTypeHelper.class)
-@NonNullByDefault
 public interface IRawTypeHelper {
 	
 	List<JvmType> getAllRawTypes(LightweightTypeReference reference, ResourceSet resourceSet);

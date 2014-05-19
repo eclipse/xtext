@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.util;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -35,14 +34,14 @@ public class FeatureCallAsTypeLiteralHelper {
 	 * Returns <code>true</code> if the given feature call can be a type literal (structurally). 
 	 * Otherwise <code>false</code>.
 	 */
-	public boolean isPotentialTypeLiteral(XExpression featureCall, @Nullable IResolvedTypes resolvedTypes) {
+	public boolean isPotentialTypeLiteral(XExpression featureCall, /* @Nullable */ IResolvedTypes resolvedTypes) {
 		if (featureCall instanceof XMemberFeatureCall) {
 			return isPotentialTypeLiteralImpl(featureCall, resolvedTypes, ((XMemberFeatureCall) featureCall).isExplicitStatic());	
 		}
 		return isPotentialTypeLiteralImpl(featureCall, resolvedTypes, false);
 	}
 
-	protected boolean isPotentialTypeLiteralImpl(XExpression featureCall, @Nullable IResolvedTypes resolvedTypes, boolean staticNotation) {
+	protected boolean isPotentialTypeLiteralImpl(XExpression featureCall, /* @Nullable */ IResolvedTypes resolvedTypes, boolean staticNotation) {
 		if (featureCall instanceof XMemberFeatureCall) {
 			XMemberFeatureCall casted = (XMemberFeatureCall) featureCall;
 			if (casted.isExplicitOperationCallOrBuilderSyntax() || casted.isNullSafe()) {
@@ -76,7 +75,7 @@ public class FeatureCallAsTypeLiteralHelper {
 	 * Returns <code>null</code> if no such segments exist, e.g. because the member call target
 	 * does not indicate a type reference syntactically, e.g. <code>(java.lang).String</code>.
 	 */
-	@Nullable
+	/* @Nullable */
 	public List<String> getTypeNameSegmentsFromConcreteSyntax(XMemberFeatureCall featureCall) {
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(featureCall, XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET);
 		List<String> prefix = getTypeNameSegmentsFromConcreteSyntax(nodes, featureCall.isExplicitStatic());

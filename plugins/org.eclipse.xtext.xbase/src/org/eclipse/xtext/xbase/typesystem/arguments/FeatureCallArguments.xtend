@@ -8,17 +8,14 @@
 package org.eclipse.xtext.xbase.typesystem.arguments
 
 import java.util.List
-import org.eclipse.jdt.annotation.NonNullByDefault
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.jdt.annotation.Nullable
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noextend This interface is not intended to be extended by clients.
  * @noimplement This interface is not intended to be implemented by clients.
  */
-@NonNullByDefault
 interface IFeatureCallArguments {
 	
 	def boolean hasUnprocessedArguments()
@@ -30,7 +27,7 @@ interface IFeatureCallArguments {
 	 * If there is a receiver, the index {@code 0} returns 
 	 * {@code null}.
 	 */
-	@Nullable
+	/* @Nullable */
 	def XExpression getArgument(int idx)
 	
 	/**
@@ -50,7 +47,6 @@ interface IFeatureCallArguments {
  * @noextend This interface is not intended to be extended by clients.
  * @noimplement This interface is not intended to be implemented by clients.
  */
-@NonNullByDefault
 interface IFeatureCallArgumentSlot {
 	
 	def boolean isVarArg()
@@ -66,13 +62,13 @@ interface IFeatureCallArgumentSlot {
 	/**
 	 * @throws IllegalStateException iff {@link #isVarArg} and the number of arguments is not equal to '1'.
 	 */
-	@Nullable
+	/* @Nullable */
 	def XExpression getArgumentExpression()
 	
 	/**
 	 * @throws IllegalStateException iff {@link #isSuperfluous}
 	 */
-	@Nullable
+	/* @Nullable */
 	def LightweightTypeReference getDeclaredType()
 	
 	def void markProcessed()

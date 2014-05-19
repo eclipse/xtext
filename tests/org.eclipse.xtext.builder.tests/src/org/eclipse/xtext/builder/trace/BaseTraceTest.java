@@ -13,7 +13,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.junit.Assert;
 import org.junit.Before;
@@ -36,26 +35,26 @@ public class BaseTraceTest {
 			}
 			
 			@Override
-			@NonNull
+			/* @NonNull */
 			public IProject getLocalProject() {
 				throw new UnsupportedOperationException();
 			}
 			
 			@Override
-			@NonNull
+			/* @NonNull */
 			public URI getLocalURI() {
 				throw new UnsupportedOperationException();
 			}
 
 			@Override
-			@NonNull
-			protected IStorage findStorage(@NonNull URI uri, @NonNull IProject project) {
+			/* @NonNull */
+			protected IStorage findStorage(/* @NonNull */ URI uri, /* @NonNull */ IProject project) {
 				throw new UnsupportedOperationException();
 			}
 
 			@Override
-			@NonNull
-			protected InputStream getContents(@NonNull URI uri, @NonNull IProject project) throws CoreException {
+			/* @NonNull */
+			protected InputStream getContents(/* @NonNull */ URI uri, /* @NonNull */ IProject project) throws CoreException {
 				throw new UnsupportedOperationException();
 			}
 		};

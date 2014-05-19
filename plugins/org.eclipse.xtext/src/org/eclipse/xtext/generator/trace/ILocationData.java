@@ -8,7 +8,6 @@
 package org.eclipse.xtext.generator.trace;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
 /**
@@ -16,6 +15,6 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
  */
 public interface ILocationData extends ITextRegionWithLineInformation {
 
-	@Nullable URI getPath();
+	/* @Nullable */ URI getPath();
 	
 }

@@ -13,8 +13,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -29,14 +27,13 @@ import com.google.inject.Provider;
  * @noinstantiate This class is not intended to be instantiated by clients.
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 	
 	@Inject
 	private Provider<AbstractRootedReentrantTypeResolver> typeResolverProvider;
 	
 	@Override
-	protected IResolvedTypes doResolveTypes(@Nullable EObject object) {
+	protected IResolvedTypes doResolveTypes(/* @Nullable */ EObject object) {
 		// TODO: remove when we switch to an Xtend scope provider without artificial feature calls  
 		EObject nonArtificialObject = getNonArtificialObject(object);
 		// TODO end

@@ -12,8 +12,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -37,7 +35,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public interface IResolvedTypes {
 
 	/* 
@@ -59,21 +56,21 @@ public interface IResolvedTypes {
 	 * Returns the actually inferred type for the given expression or <code>null</code> if none.
 	 * @param expression expression whose type is queried.
 	 */
-	@Nullable
+	/* @Nullable */
 	LightweightTypeReference getActualType(XExpression expression);
 	
 	/**
 	 * Returns the actually inferred return type for the given expression or <code>null</code> if none.
 	 * @param expression expression whose return type is queried.
 	 */
-	@Nullable
+	/* @Nullable */
 	LightweightTypeReference getReturnType(XExpression expression);
 	
 	/**
 	 * Returns the actually inferred or declared type for the given identifiable or <code>null</code> if none.
 	 * @param identifiable identifiable whose type is queried.
 	 */
-	@Nullable
+	/* @Nullable */
 	LightweightTypeReference getActualType(JvmIdentifiableElement identifiable);
 	
 	List<LightweightTypeReference> getThrownExceptions(XExpression obj);
@@ -82,14 +79,14 @@ public interface IResolvedTypes {
 //	 * Returns the traced declared type for the given identifiable or <code>null</code> if none.
 //	 * @param identifiable identifiable whose type is queried.
 //	 */
-//	@Nullable
+//	/* @Nullable */
 //	JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable);
 	
 	/**
 	 * Returns the actually expected type for the given expression or <code>null</code> if none.
 	 * @param expression expression whose expected type is queried.
 	 */
-	@Nullable
+	/* @Nullable */
 	LightweightTypeReference getExpectedType(XExpression expression);
 	
 	/**
@@ -102,7 +99,7 @@ public interface IResolvedTypes {
 	 * Returns the expected return type for the given expression or <code>null</code> if none.
 	 * @param expression expression whose expected return type is queried.
 	 */
-	@Nullable
+	/* @Nullable */
 	LightweightTypeReference getExpectedReturnType(XExpression expression);
 	
 	/**
@@ -130,8 +127,8 @@ public interface IResolvedTypes {
 	 * @param featureCall the feature call that is queried for the current linking state.
 	 * @return the potentially intermediate linking state or <code>null</code> if none.
 	 */
-	@Nullable
-	JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall);
+	/* @Nullable */
+	JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XAbstractFeatureCall featureCall);
 	
 	/**
 	 * Returns the intermediate linking result for the given constructor call, if any.
@@ -141,8 +138,8 @@ public interface IResolvedTypes {
 	 * @param constructorCall the constructor call that is queried for the current linking state.
 	 * @return the potentially intermediate linking state or <code>null</code> if none.
 	 */
-	@Nullable
-	JvmIdentifiableElement getLinkedFeature(@Nullable XConstructorCall constructorCall);
+	/* @Nullable */
+	JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XConstructorCall constructorCall);
 	
 	/**
 	 * Returns the intermediate linking candidate for the given feature call, if any.
@@ -150,8 +147,8 @@ public interface IResolvedTypes {
 	 * @param featureCall the feature call that is queried for the current linking state.
 	 * @return the potentially intermediate linking state or <code>null</code> if none.
 	 */
-	@Nullable
-	IFeatureLinkingCandidate getLinkingCandidate(@Nullable XAbstractFeatureCall featureCall);
+	/* @Nullable */
+	IFeatureLinkingCandidate getLinkingCandidate(/* @Nullable */ XAbstractFeatureCall featureCall);
 	
 	/**
 	 * Returns the intermediate linking candidate for the given constructor call, if any.
@@ -161,8 +158,8 @@ public interface IResolvedTypes {
 	 * @param constructorCall the constructor call that is queried for the current linking state.
 	 * @return the potentially intermediate linking state or <code>null</code> if none.
 	 */
-	@Nullable
-	IConstructorLinkingCandidate getLinkingCandidate(@Nullable XConstructorCall constructorCall);
+	/* @Nullable */
+	IConstructorLinkingCandidate getLinkingCandidate(/* @Nullable */ XConstructorCall constructorCall);
 	
 	/**
 	 * Returns <code>true</code> if the expression's type is based on a type
@@ -203,12 +200,12 @@ public interface IResolvedTypes {
 			return Collections.emptyList();
 		}
 		
-		@Nullable
+		/* @Nullable */
 		public LightweightTypeReference getExpectedType(XExpression expression) {
 			return null;
 		}
 		
-		@Nullable
+		/* @Nullable */
 		public LightweightTypeReference getExpectedReturnType(XExpression expression) {
 			return null;
 		}
@@ -221,22 +218,22 @@ public interface IResolvedTypes {
 			return Collections.emptyList();
 		}
 		
-		@Nullable
+		/* @Nullable */
 		public LightweightTypeReference getActualType(XExpression expression) {
 			return null;
 		}
 		
-		@Nullable
+		/* @Nullable */
 		public LightweightTypeReference getReturnType(XExpression expression) {
 			return null;
 		}
 
-		@Nullable
+		/* @Nullable */
 		public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 			return null;
 		}
 		
-//		@Nullable
+//		/* @Nullable */
 //		public JvmTypeReference getDeclaredType(JvmIdentifiableElement identifiable) {
 //			return null;
 //		}
@@ -245,23 +242,23 @@ public interface IResolvedTypes {
 			return false;
 		}
 		
-		@Nullable
-		public JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall) {
+		/* @Nullable */
+		public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XAbstractFeatureCall featureCall) {
 			return null;
 		}
 		
-		@Nullable
-		public IFeatureLinkingCandidate getLinkingCandidate(@Nullable XAbstractFeatureCall featureCall) {
+		/* @Nullable */
+		public IFeatureLinkingCandidate getLinkingCandidate(/* @Nullable */ XAbstractFeatureCall featureCall) {
 			return null;
 		}
 		
-		@Nullable
-		public JvmIdentifiableElement getLinkedFeature(@Nullable XConstructorCall constructorCall) {
+		/* @Nullable */
+		public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XConstructorCall constructorCall) {
 			return null;
 		}
 		
-		@Nullable
-		public IConstructorLinkingCandidate getLinkingCandidate(@Nullable XConstructorCall constructorCall) {
+		/* @Nullable */
+		public IConstructorLinkingCandidate getLinkingCandidate(/* @Nullable */ XConstructorCall constructorCall) {
 			return null;
 		}
 		

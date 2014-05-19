@@ -12,7 +12,6 @@ import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.EditorsUI;
@@ -88,7 +87,7 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 	/**
 	 * @since 2.6
 	 */
-	@Nullable
+	/* @Nullable */
 	protected IProject getProject(Object context) {
 		if (context instanceof IFileEditorInput) {
 			return ((IFileEditorInput) context).getFile().getProject();

@@ -12,7 +12,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -74,7 +73,7 @@ public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEdi
 	}
 
 	@Override
-	protected ResourceSet getResourceSet(@Nullable IStorage storage) {
+	protected ResourceSet getResourceSet(/* @Nullable */ IStorage storage) {
 		if (storage instanceof IJarEntryResource) {
 			IPackageFragmentRoot root = ((IJarEntryResource) storage).getPackageFragmentRoot();
 			if (root != null) {

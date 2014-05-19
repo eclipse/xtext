@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -23,7 +21,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class ExpressionTypeComputationState extends AbstractStackedTypeComputationState {
 
 	protected class ExpressionAwareTypeCheckpointComputationState extends TypeCheckpointComputationState {
@@ -39,7 +36,7 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 		}
 		
 		@Override
-		public TypeCheckpointComputationState withTypeCheckpoint(@Nullable EObject context) {
+		public TypeCheckpointComputationState withTypeCheckpoint(/* @Nullable */ EObject context) {
 			return new ExpressionAwareTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), this);
 		}
 	}
@@ -97,7 +94,7 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	}
 	
 	@Override
-	public TypeComputationStateWithExpectation withExpectation(@Nullable LightweightTypeReference expectation) {
+	public TypeComputationStateWithExpectation withExpectation(/* @Nullable */ LightweightTypeReference expectation) {
 		return new ExpressionTypeComputationStateWithExpectation(getResolvedTypes(), getFeatureScopeSession(), this, expectation);
 	}
 	
@@ -107,7 +104,7 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	}
 	
 	@Override
-	public TypeCheckpointComputationState withTypeCheckpoint(@Nullable EObject context) {
+	public TypeCheckpointComputationState withTypeCheckpoint(/* @Nullable */ EObject context) {
 		return new ExpressionAwareTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), this);
 	}
 	

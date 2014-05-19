@@ -18,8 +18,6 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -105,7 +103,6 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Moritz Eysholdt - Support for checked exceptions
  */
-@NonNullByDefault
 public class XbaseTypeComputer implements ITypeComputer {
 
 	@Inject
@@ -307,7 +304,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	 * If the condition is a {@link XInstanceOfExpression type check}, the checked expression
 	 * will be automatically casted in the returned state.
 	 */
-	protected ITypeComputationState reassignCheckedType(XExpression condition, @Nullable XExpression guardedExpression, ITypeComputationState state) {
+	protected ITypeComputationState reassignCheckedType(XExpression condition, /* @Nullable */ XExpression guardedExpression, ITypeComputationState state) {
 		if (condition instanceof XInstanceOfExpression) {
 			XInstanceOfExpression instanceOfExpression = (XInstanceOfExpression) condition;
 			JvmTypeReference castedType = instanceOfExpression.getType();
@@ -327,7 +324,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	@Nullable
+	/* @Nullable */
 	protected XExpression getElse(XIfExpression ifExpression) {
 		return ifExpression.getElse();
 	}
@@ -337,7 +334,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	@Nullable
+	/* @Nullable */
 	protected XExpression getThen(XIfExpression ifExpression) {
 		return ifExpression.getThen();
 	}
@@ -778,7 +775,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 
 	private List<LightweightTypeReference> computeCollectionTypeCandidates(XCollectionLiteral literal, JvmGenericType collectionType,
-			@Nullable LightweightTypeReference elementTypeExpectation, ITypeComputationState state) {
+			/* @Nullable */ LightweightTypeReference elementTypeExpectation, ITypeComputationState state) {
 		if(!literal.getElements().isEmpty()) {
 			List<LightweightTypeReference> elementTypes = newArrayList();
 			for(XExpression element: literal.getElements()) {
@@ -878,11 +875,11 @@ public class XbaseTypeComputer implements ITypeComputer {
 		state.acceptActualType(primitiveVoid);
 	}
 
-	protected ITypeComputationState assignType(JvmFormalParameter param, @Nullable LightweightTypeReference type, ITypeComputationState state) {
+	protected ITypeComputationState assignType(JvmFormalParameter param, /* @Nullable */ LightweightTypeReference type, ITypeComputationState state) {
 		return state.assignType(param, type);
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference computeForLoopParameterType(final XForLoopExpression object,
 			final ITypeComputationState state) {
 		JvmFormalParameter declaredParam = object.getDeclaredParam();
@@ -984,7 +981,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		return iterableOrArray;
 	}
 
-	@Nullable
+	/* @Nullable */
 	private LightweightTypeReference getElementOrComponentType(final LightweightTypeReference iterableOrArray,
 			final ITypeComputationState state) {
 		LightweightTypeReference parameterType;
@@ -1019,7 +1016,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 				return reference.getComponentType();
 			}
 			@Override
-			@Nullable
+			/* @Nullable */
 			protected LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference) {
 				return null;
 			}
@@ -1027,7 +1024,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		return parameterType;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getDeclaredParameterType(JvmFormalParameter declaredParam, final ITypeComputationState state) {
 		JvmTypeReference parameterType = declaredParam.getParameterType();
 		if (parameterType == null)
@@ -1241,7 +1238,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		return result;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected JvmIdentifiableElement getRefinableCandidate(XExpression object, ITypeComputationState state) {
 		if (object instanceof XSwitchExpression) {
 			XSwitchExpression switchExpression = (XSwitchExpression) object;
@@ -1280,7 +1277,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		return null;
 	}
 
-	protected boolean isRefinableFeature(@Nullable JvmIdentifiableElement feature) {
+	protected boolean isRefinableFeature(/* @Nullable */ JvmIdentifiableElement feature) {
 		return feature instanceof XVariableDeclaration
 				|| feature instanceof XSwitchExpression
 				|| feature instanceof JvmFormalParameter 

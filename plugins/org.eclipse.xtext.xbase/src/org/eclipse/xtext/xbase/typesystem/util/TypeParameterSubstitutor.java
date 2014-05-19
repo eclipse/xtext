@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -34,7 +32,6 @@ import com.google.common.collect.Maps;
  * TODO JavaDoc, toString
  * TODO implement as member function on LightweightTypeReference
  */
-@NonNullByDefault
 public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVisitorWithParameterAndNonNullResult<Visiting, LightweightTypeReference> {
 		
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
@@ -112,7 +109,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		return result;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type,
 			Visiting visiting) {
 		LightweightMergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(type);

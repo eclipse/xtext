@@ -12,8 +12,6 @@ import java.util.EnumSet;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -41,7 +39,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class BucketedEObjectDescription extends EObjectDescription implements IIdentifiableElementDescription {
 
 	private final int bucketId;
@@ -103,7 +100,7 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		return bucketId;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getImplicitReceiverType() {
 		return null;
 	}
@@ -112,7 +109,7 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 	 * Returns the actual receiver of this (potential) feature call. It may be <code>null</code>
 	 * even though there is a syntactic receiver available (in case of static features).
 	 */
-	@Nullable
+	/* @Nullable */
 	public XExpression getImplicitReceiver() {
 		return null;
 	}
@@ -125,12 +122,12 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		return EnumSet.noneOf(ConformanceHint.class);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSyntacticReceiverType() {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public XExpression getSyntacticReceiver() {
 		return null;
 	}
@@ -160,12 +157,12 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		return (JvmIdentifiableElement) getEObjectOrProxy();
 	}
 
-	@Nullable
+	/* @Nullable */
 	public XExpression getImplicitFirstArgument() {
 		return null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getImplicitFirstArgumentType() {
 		return null;
 	}

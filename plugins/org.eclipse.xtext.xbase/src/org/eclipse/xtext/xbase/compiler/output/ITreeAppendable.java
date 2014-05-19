@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.compiler.output;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
@@ -20,7 +19,6 @@ import org.eclipse.xtext.xbase.compiler.IAppendable;
  * for the written output.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 
 	/**

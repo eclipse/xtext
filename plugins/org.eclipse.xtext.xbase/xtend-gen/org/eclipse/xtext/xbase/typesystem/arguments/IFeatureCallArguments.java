@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtext.xbase.typesystem.arguments;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 
@@ -17,7 +15,6 @@ import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
  * @noextend This interface is not intended to be extended by clients.
  * @noimplement This interface is not intended to be implemented by clients.
  */
-@NonNullByDefault
 @SuppressWarnings("all")
 public interface IFeatureCallArguments {
   public abstract boolean hasUnprocessedArguments();
@@ -25,11 +22,8 @@ public interface IFeatureCallArguments {
   public abstract IFeatureCallArgumentSlot getNextUnprocessedArgumentSlot();
   
   /**
-   * Returns the argument expression at index {@code idx}.
-   * If there is a receiver, the index {@code 0} returns
-   * {@code null}.
+   * @Nullable
    */
-  @Nullable
   public abstract XExpression getArgument(final int idx);
   
   /**

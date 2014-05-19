@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -39,7 +37,6 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class ForwardingTypeComputationState implements ITypeComputationState {
 
 	private ITypeComputationState delegate;
@@ -82,7 +79,7 @@ public abstract class ForwardingTypeComputationState implements ITypeComputation
 		return newForwardingTypeComputationState(delegate.withoutExpectation());
 	}
 
-	public ITypeComputationState withTypeCheckpoint(@Nullable EObject context) {
+	public ITypeComputationState withTypeCheckpoint(/* @Nullable */ EObject context) {
 		return newForwardingTypeComputationState(delegate.withTypeCheckpoint(context));
 	}
 
@@ -94,15 +91,15 @@ public abstract class ForwardingTypeComputationState implements ITypeComputation
 		return delegate.getExpectedExceptions();
 	}
 
-	public ITypeComputationResult computeTypes(@Nullable XExpression expression) {
+	public ITypeComputationResult computeTypes(/* @Nullable */ XExpression expression) {
 		return delegate.computeTypes(expression);
 	}
 
-	public ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type) {
+	public ITypeComputationState assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference type) {
 		return newForwardingTypeComputationState(delegate.assignType(element, type));
 	}
 
-	public ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type, boolean addToChildScope) {
+	public ITypeComputationState assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference type, boolean addToChildScope) {
 		return newForwardingTypeComputationState(delegate.assignType(element, type, addToChildScope));
 	}
 
@@ -110,7 +107,7 @@ public abstract class ForwardingTypeComputationState implements ITypeComputation
 		final ITypeAssigner result = delegate.assignTypes();
 		return new ITypeAssigner() {
 
-			public void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference actualType) {
+			public void assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference actualType) {
 				result.assignType(element, actualType);
 			}
 

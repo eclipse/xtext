@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -63,7 +62,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedExecutableScope im
 		this.receiverFeature = receiverFeature;
 	}
 	
-	public boolean isVisible(@NonNull JvmMember member) {
+	public boolean isVisible(/* @NonNull */ JvmMember member) {
 		return getSession().isVisible(member, receiverType, receiverFeature);
 	}
 	

@@ -7,13 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ImplicitFirstArgument extends AbstractImplicitFeature {
 
 	protected ImplicitFirstArgument(XAbstractFeatureCall featureCall, XAbstractFeatureCall implicit,

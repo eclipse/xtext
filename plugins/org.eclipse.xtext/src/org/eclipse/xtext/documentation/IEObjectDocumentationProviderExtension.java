@@ -10,7 +10,6 @@ package org.eclipse.xtext.documentation;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.documentation.impl.MultiLineCommentDocumentationProvider;
 import org.eclipse.xtext.nodemodel.INode;
 
@@ -45,7 +44,6 @@ import org.eclipse.xtext.nodemodel.INode;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.3
  */
-@NonNullByDefault
 public interface IEObjectDocumentationProviderExtension {
 
 	/**

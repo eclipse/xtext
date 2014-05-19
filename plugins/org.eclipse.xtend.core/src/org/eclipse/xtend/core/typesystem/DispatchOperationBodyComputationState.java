@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.typesystem;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
@@ -19,7 +17,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class DispatchOperationBodyComputationState extends OperationBodyComputationState {
 
 	private JvmOperation dispatcher;
@@ -30,14 +27,14 @@ public class DispatchOperationBodyComputationState extends OperationBodyComputat
 			IFeatureScopeSession featureScopeSession,
 			JvmOperation operation,
 			JvmOperation dispatcher,
-			@Nullable LightweightTypeReference inheritedExpectedType) {
+			/* @Nullable */ LightweightTypeReference inheritedExpectedType) {
 		super(resolvedTypes, featureScopeSession, operation);
 		this.dispatcher = dispatcher;
 		this.inheritedExpectedType = inheritedExpectedType;
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getExpectedType() {
 		LightweightTypeReference expectedType = super.getExpectedType();
 		if (expectedType != null) {

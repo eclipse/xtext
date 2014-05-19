@@ -11,22 +11,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class AssignmentFeatureCallArguments implements IFeatureCallArguments, IFeatureCallArgumentSlot {
 
 	private XExpression expression;
 	private LightweightTypeReference type;
 	private boolean processed = false;
 	
-	public AssignmentFeatureCallArguments(XExpression expression, @Nullable LightweightTypeReference type) {
+	public AssignmentFeatureCallArguments(XExpression expression, /* @Nullable */ LightweightTypeReference type) {
 		this.expression = expression;
 		this.type = type;
 	}
@@ -69,7 +66,7 @@ public class AssignmentFeatureCallArguments implements IFeatureCallArguments, IF
 		return expression;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getDeclaredType() {
 		return type;
 	}

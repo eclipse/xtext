@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
@@ -21,7 +19,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public abstract class AbstractRootTypeComputationState extends AbstractTypeComputationState {
 	
 	protected AbstractRootTypeComputationState(ResolvedTypes resolvedTypes,
@@ -38,7 +35,7 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	
 	protected abstract ITypeComputationResult createNoTypeResult();
 	
-	@Nullable
+	/* @Nullable */
 	protected abstract XExpression getRootExpression();
 	
 	protected XExpression getNonNullRootExpression() {
@@ -48,7 +45,7 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 		return result;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected abstract LightweightTypeReference getExpectedType();
 	
 	@Override

@@ -7,13 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@NonNullByDefault
 public interface Later {
 	void exec(ITreeAppendable appendable);
 }

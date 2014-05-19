@@ -7,10 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 
-@NonNullByDefault
 public class TextRegion implements ITextRegion {
 	private final int offset;
 
@@ -52,7 +49,7 @@ public class TextRegion implements ITextRegion {
 	}
 	
 	@Override
-	public boolean equals(@Nullable Object obj) {
+	public boolean equals(/* @Nullable */ Object obj) {
 		return obj instanceof ITextRegion && ((ITextRegion)obj).getOffset() == offset && ((ITextRegion)obj).getLength() ==length;
 	}
 	

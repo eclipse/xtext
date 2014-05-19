@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -31,7 +30,6 @@ import com.google.common.collect.Maps;
  * @author Sebastian Zarnekow - Initial contribution and API 
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker {
 
 	protected class ActualParameterizedTypeReferenceTraverser extends ParameterizedTypeReferenceTraverser {

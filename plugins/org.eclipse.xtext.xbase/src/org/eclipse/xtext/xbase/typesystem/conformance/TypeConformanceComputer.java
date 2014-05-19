@@ -15,9 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -214,8 +211,8 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	 * May return <code>null</code> in case one of the types is primitive void but not all 
 	 * of them are.
 	 */
-	@Nullable
-	public LightweightTypeReference getCommonSuperType(final @NonNull List<LightweightTypeReference> types, ITypeReferenceOwner owner) {
+	/* @Nullable */
+	public LightweightTypeReference getCommonSuperType(final /* @NonNull */ List<LightweightTypeReference> types, ITypeReferenceOwner owner) {
 		if (types==null || types.isEmpty())
 			throw new IllegalArgumentException("Types can't be null or empty "+types);
 		if (types.size()==1)
@@ -329,7 +326,6 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	 * Thus the number of steps to {@link java.io.Serializable} is <code>1</code> while 
 	 * {@link CharSequence} requires <code>2</code> hops. 
 	 */
-	@NonNullByDefault
 	protected static class MaxDistanceRawTypeAcceptor implements SuperTypeAcceptor {
 
 		/**
