@@ -146,7 +146,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 			for(XAnnotation annotation: xtendType.getAnnotations()) {
 				JvmType annotationType = annotation.getAnnotationType();
 				if (annotationType != null && !annotationType.eIsProxy() && Active.class.getName().equals(annotationType.getIdentifier())) {
-					highlightObjectAtFeature(acceptor, xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
+					highlightFeature(acceptor, xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
 					break;
 				}
 			}
@@ -190,7 +190,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		JvmType annotationType = annotation.getAnnotationType();
 		if(annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType && DeprecationUtil.isDeprecated((JvmAnnotationType) annotationType)){
 			EStructuralFeature nameFeature = target.eClass().getEStructuralFeature("name");
-			highlightObjectAtFeature(acceptor, target, nameFeature, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+			highlightFeature(acceptor, target, nameFeature, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		}
 	}
 
@@ -230,9 +230,9 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 			if(nodes.size() > 0){
 				INode node = nodes.get(0);
 				if(field.isStatic())
-					highlightNode(node, XbaseHighlightingConfiguration.STATIC_FIELD, acceptor);
+					highlightNode(acceptor, node, XbaseHighlightingConfiguration.STATIC_FIELD);
 				else
-					highlightNode(node, XbaseHighlightingConfiguration.FIELD, acceptor);
+					highlightNode(acceptor, node, XbaseHighlightingConfiguration.FIELD);
 			}
 		}
 	}
