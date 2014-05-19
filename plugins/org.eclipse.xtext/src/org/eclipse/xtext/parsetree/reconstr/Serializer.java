@@ -30,7 +30,10 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  * @author Jan Koehnlein
+ * 
+ * @deprecated use org.eclipse.xtext.serializer.impl.Serializer instead
  */
+@Deprecated
 public class Serializer implements ISerializer {
 	private IParseTreeConstructor parseTreeReconstructor;
 	private IFormatter formatter;
