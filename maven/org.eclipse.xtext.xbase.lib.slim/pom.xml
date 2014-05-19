@@ -17,10 +17,16 @@
 			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
 			<version>[${project.version}]</version>
 			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
+			<artifactId>guava-jdk5</artifactId>
 			<version>${guava.version}</version>
 			<optional>true</optional>
 		</dependency>
@@ -45,8 +51,8 @@
 					</execution>
 				</executions>
 				<configuration>
-          <injar>classes</injar>
-          <outjar>${project.build.finalName}.jar</outjar>
+					<injar>classes</injar>
+					<outjar>${project.build.finalName}.jar</outjar>
 					<options>
 						<option>-dontoptimize</option>
 						<option>-dontnote</option>
@@ -74,7 +80,7 @@
 							</inclusion>
 							<inclusion>
 								<groupId>com.google.guava</groupId>
-								<artifactId>guava</artifactId>
+								<artifactId>guava-jdk5</artifactId>
 							</inclusion>
 						</inclusions>
 					</assembly>
