@@ -14,7 +14,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
 import org.eclipse.xtext.builder.impl.BuildData;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
@@ -100,7 +99,7 @@ public class Bug349445Test extends Assert implements PersistedStateProvider, IMa
 		assertEquals(1, loadCalled);
 	}
 	
-	public void updateMarkers(Delta resourceDescriptionDeltas, @Nullable ResourceSet resourceSet,
+	public void updateMarkers(Delta resourceDescriptionDeltas, /* @Nullable */ ResourceSet resourceSet,
 			IProgressMonitor monitor) {
 		throw new UnsupportedOperationException();
 	}

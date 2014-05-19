@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextInputListener;
@@ -347,7 +346,7 @@ public class XtextReconciler extends Job implements IReconciler {
 	 * 
 	 * @since 2.4
 	 */
-	private void doRun(XtextResource state, @Nullable final IProgressMonitor monitor) {
+	private void doRun(XtextResource state, /* @Nullable */ final IProgressMonitor monitor) {
 		if (log.isDebugEnabled()) {
 			log.debug("Preparing reconciliation."); //$NON-NLS-1$
 		}

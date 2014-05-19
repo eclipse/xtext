@@ -17,12 +17,9 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class TraceMarkers {
 	public final static String MARKER_ID = "org.eclipse.xtext.builder.traceFilePath"; 
 	public final static String ATTR_PATH = "path"; 

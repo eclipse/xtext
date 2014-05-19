@@ -26,8 +26,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
 import org.eclipse.xtext.util.Pair;
@@ -55,15 +53,15 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 		public void initializeCache() {
 			// nothing to do
 		}
-		public boolean isRejected(@NonNull IFolder folder) {
+		public boolean isRejected(/* @NonNull */ IFolder folder) {
 			return false;
 		}
 		@SuppressWarnings("null")
-		@NonNull 
-		public Iterable<Pair<IStorage, IProject>> getStorages(@NonNull URI uri) {
+		/* @NonNull */ 
+		public Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri) {
 			return Collections.emptyList();
 		}
-		public URI getUri(@NonNull IStorage storage) {
+		public URI getUri(/* @NonNull */ IStorage storage) {
 			return null;
 		}
 	};
@@ -115,7 +113,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 							contribution.initializeCache();
 						}
 					}
-					public boolean isRejected(@NonNull IFolder folder) {
+					public boolean isRejected(/* @NonNull */ IFolder folder) {
 						for(int i = 0; i < size; i++) {
 							if (allContributions.get(i).isRejected(folder)) {
 								return true;
@@ -124,17 +122,17 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 						return false;
 					}
 					@SuppressWarnings("null")
-					@NonNull
-					public Iterable<Pair<IStorage, IProject>> getStorages(@NonNull final URI uri) {
+					/* @NonNull */
+					public Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ final URI uri) {
 						return Iterables.concat(Lists.transform(allContributions, new Function<IStorage2UriMapperContribution, Iterable<Pair<IStorage, IProject>>>() {
-							@NonNull
+							/* @NonNull */
 							public Iterable<Pair<IStorage, IProject>> apply(IStorage2UriMapperContribution contribution) {
 								return contribution.getStorages(uri);
 							}
 						}));
 					}
-					@Nullable
-					public URI getUri(@NonNull IStorage storage) {
+					/* @Nullable */
+					public URI getUri(/* @NonNull */ IStorage storage) {
 						for(int i = 0; i < size; i++) {
 							URI result = allContributions.get(i).getUri(storage);
 							if (result != null) {
@@ -207,7 +205,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 		return getStorages(uri, file);
 	}
 
-	private Iterable<Pair<IStorage, IProject>> getStorages(@NonNull URI uri, IFile file) {
+	private Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri, IFile file) {
 		if (file == null || !file.isAccessible()) {
 			return contribution.getStorages(uri);
 		}
@@ -228,7 +226,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 		return null;
 	}
 
-	private URI internalGetUri(@NonNull IStorage storage) {
+	private URI internalGetUri(/* @NonNull */ IStorage storage) {
 		if (storage instanceof IFile) {
 			return URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
 		} 

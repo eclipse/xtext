@@ -24,8 +24,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.trace.AbstractStatefulTraceRegion;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
@@ -49,7 +47,6 @@ import com.google.inject.Provider;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@NonNullByDefault
 public class TraceForStorageProvider implements ITraceForStorageProvider {
 
 	// use TraceFileNameProvider.TRACE_FILE_EXTENSION
@@ -79,7 +76,7 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 	@Inject
 	private ITraceURIConverter traceURIConverter;
 
-	@Nullable
+	/* @Nullable */
 	public ITrace getTraceToSource(final IStorage derivedResource) {
 		StorageAwareTrace result = traceToSourceProvider.get();
 		result.setLocalStorage(derivedResource);
@@ -111,7 +108,7 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 		return result;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public ITrace getTraceToTarget(final IStorage sourceResource) {
 		if (sourceResource instanceof IFile) {
 			try {
@@ -164,7 +161,7 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 									AbstractTraceRegion root = new AbstractStatefulTraceRegion(rootLocation, new ArrayList<ILocationData>(), null) {};
 									Collections.sort(result, new Comparator<AbstractTraceRegion>() {
 										
-										public int compare(@Nullable AbstractTraceRegion o1, @Nullable AbstractTraceRegion o2) {
+										public int compare(/* @Nullable */ AbstractTraceRegion o1, /* @Nullable */ AbstractTraceRegion o2) {
 											if (o1 == null || o2 == null)
 												throw new NullPointerException();
 											return o1.getMyOffset() - o2.getMyOffset();
@@ -194,7 +191,7 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 	/**
 	 * @since 2.3
 	 */
-	public @Nullable IStorage getTraceFile(IStorage storage) {
+	public /* @Nullable */ IStorage getTraceFile(IStorage storage) {
 		if (storage instanceof IFile) {
 			IFile file = (IFile) storage;
 			String originLastSegment = file.getFullPath().lastSegment();
@@ -213,7 +210,7 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 		return traceFileNameProvider.isTraceFileName(originLastSegment);
 	}
 
-	protected @Nullable IStorage getGeneratedFileForTraceFile(IStorage traceFile) {
+	protected /* @Nullable */ IStorage getGeneratedFileForTraceFile(IStorage traceFile) {
 		if (traceFile instanceof IFile) {
 			IFile file = (IFile) traceFile;
 			String lastSegment = traceFile.getFullPath().lastSegment();

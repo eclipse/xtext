@@ -53,7 +53,7 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 	}
 	
 	@Inject(optional = true)
-//	@Nullable
+	/* @Nullable */
 	private IWorkbench workbench;
 	
 	private IContentAssistantExtension2 currentAssistant;

@@ -53,7 +53,6 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.jdt.core" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.hamcrest.core" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.codegen.ecore" version="2.9.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.jdt.annotation" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtend.lib" version="2.6.0" match="greaterOrEqual"/>
       <import plugin="org.apache.ant" version="1.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.pde.core" version="3.5.0" match="greaterOrEqual"/>

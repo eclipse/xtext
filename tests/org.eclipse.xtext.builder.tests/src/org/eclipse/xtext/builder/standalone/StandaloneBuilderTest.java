@@ -15,8 +15,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
@@ -146,12 +144,11 @@ public class StandaloneBuilderTest {
 			this.useOutputPerSource = useOutputPerSource;
 		}
 
-		@NonNull
+		/* @NonNull */
 		public String getSetup() {
 			return "org.eclipse.xtext.builder.tests.BuilderTestLanguageStandaloneSetup";
 		}
 
-		@Nullable
 		public Set<OutputConfiguration> getOutputConfigurations() {
 			OutputConfiguration config = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
 			config.setOutputDirectory("src-gen");

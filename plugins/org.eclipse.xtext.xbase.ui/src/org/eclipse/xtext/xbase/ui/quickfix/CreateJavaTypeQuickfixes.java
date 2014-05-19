@@ -16,8 +16,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
@@ -58,7 +56,6 @@ import com.google.inject.Inject;
  *
  * @author Jan Koehnlein - Initial contribution and API
  */
-@NonNullByDefault
 public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 
 	private static final Logger LOG = Logger.getLogger(CreateJavaTypeQuickfixes.class);
@@ -99,7 +96,7 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		issueResolutionAcceptor.accept(issue, "Create Java interface '" + typeName + "'" + packageDescription,
 				"Opens the new Java interface wizard to create the type '" + typeName + "'" + packageDescription,
 				"java_interface.gif", new IModification() {
-					public void apply(@Nullable IModificationContext context) throws Exception {
+					public void apply(/* @Nullable */ IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
 							public void run() {
 								NewInterfaceWizardPage classWizardPage = new NewInterfaceWizardPage();
@@ -145,7 +142,7 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		issueResolutionAcceptor.accept(issue, "Create Java annotation '@" + typeName + "'" + packageDescription,
 				"Opens the new Java annotation wizard to create the type '@" + typeName + "'" + packageDescription, "java_file.gif",
 				new IModification() {
-					public void apply(@Nullable IModificationContext context) throws Exception {
+					public void apply(/* @Nullable */ IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
 							public void run() {
 								NewAnnotationWizardPage annotationWizardPage = new NewAnnotationWizardPage();
@@ -196,7 +193,7 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		}
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected IJavaProject getJavaProject(URI uri){
 		IProject project = projectUtil.getProject(uri);
 		if(project == null){

@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 public class DefaultEditorImageUtil {
 	
 	@Inject(optional=true)
-//	@Nullable
+	/* @Nullable */
 	private IWorkbench workbench;
 	
 	public ImageDescriptor getDefaultEditorImageDescriptor(String fileName) {

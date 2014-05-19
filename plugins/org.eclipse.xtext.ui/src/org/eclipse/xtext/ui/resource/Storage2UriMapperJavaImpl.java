@@ -31,7 +31,6 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJarEntryResource;
@@ -159,7 +158,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	 * @return <code>true</code> if the folder is a java output folder. Otherwise <code>false</code>.
 	 * @since 2.5
 	 */
-	public boolean isRejected(@NonNull IFolder folder) {
+	public boolean isRejected(/* @NonNull */ IFolder folder) {
 		return jdtHelper.isFromOutputPath(folder);
 	}
 	
@@ -290,8 +289,8 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		return data;
 	}
 	
-	@NonNull
-	public Iterable<Pair<IStorage, IProject>> getStorages(@NonNull URI uri) {
+	/* @NonNull */
+	public Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri) {
 		List<Pair<IStorage, IProject>> result = newArrayListWithCapacity(1);
 		List<PackageFragmentRootData> packageFragmentRootDatas;
 		synchronized(cachedPackageFragmentRootData) {
@@ -340,7 +339,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	/**
 	 * @since 2.5
 	 */
-	public URI getUri(@NonNull IStorage storage) {
+	public URI getUri(/* @NonNull */ IStorage storage) {
 		if (storage instanceof IJarEntryResource) {
 			final IJarEntryResource storage2 = (IJarEntryResource) storage;
 			Map<URI, IStorage> data = getAllEntries(storage2.getPackageFragmentRoot());

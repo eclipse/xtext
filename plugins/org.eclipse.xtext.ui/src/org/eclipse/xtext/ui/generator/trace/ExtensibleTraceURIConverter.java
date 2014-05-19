@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.generator.trace;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
@@ -36,7 +35,7 @@ public class ExtensibleTraceURIConverter extends DefaultTraceURIConverter {
 			this.contributions = contributions;
 		}
 
-		@Nullable
+		/* @Nullable */
 		public URI getURIForTrace(XtextResource context) {
 			for(int i = 0, size = contributions.size(); i < size; i++) {
 				URI result = contributions.get(i).getURIForTrace(context);
@@ -47,7 +46,7 @@ public class ExtensibleTraceURIConverter extends DefaultTraceURIConverter {
 			return null;
 		}
 
-		@Nullable
+		/* @Nullable */
 		public URI getURIForTrace(URI uri) {
 			for(int i = 0, size = contributions.size(); i < size; i++) {
 				URI result = contributions.get(i).getURIForTrace(uri);
@@ -61,12 +60,12 @@ public class ExtensibleTraceURIConverter extends DefaultTraceURIConverter {
 	}
 	public static final class NullContribution implements ITraceURIConverterContribution {
 
-		@Nullable
+		/* @Nullable */
 		public URI getURIForTrace(XtextResource context) {
 			return null;
 		}
 
-		@Nullable
+		/* @Nullable */
 		public URI getURIForTrace(URI uri) {
 			return null;
 		}

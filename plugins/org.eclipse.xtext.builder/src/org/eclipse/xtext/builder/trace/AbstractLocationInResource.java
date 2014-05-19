@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -47,7 +46,7 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	protected abstract int getLineNumber();
 	protected abstract int getEndLineNumber();
 	
-	@NonNull
+	/* @NonNull */
 	public IStorage getStorage() {
 		IStorage result = trace.findStorage(getSrcRelativeResourceURI(), getProject());
 		return result;
@@ -65,12 +64,12 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 		return absoluteURI;
 	}
 	
-	@NonNull
+	/* @NonNull */
 	public InputStream getContents() throws CoreException {
 		return trace.getContents(getSrcRelativeResourceURI(), getProject());
 	}
 	
-	public @NonNull IProject getProject() {
+	public /* @NonNull */ IProject getProject() {
 		return trace.getLocalProject();
 	}
 	

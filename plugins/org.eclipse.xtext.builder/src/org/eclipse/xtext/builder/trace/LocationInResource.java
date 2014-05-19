@@ -8,7 +8,6 @@
 package org.eclipse.xtext.builder.trace;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,7 +31,7 @@ public class LocationInResource extends AbstractLocationInResource {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public URI getSrcRelativeResourceURI() {
 		return srcRelativeResourceURI;
 	}
