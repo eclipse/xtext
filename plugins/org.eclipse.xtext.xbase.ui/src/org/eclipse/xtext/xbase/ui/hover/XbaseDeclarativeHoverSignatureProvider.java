@@ -280,7 +280,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 	protected String enrichWithDeclarator(String signature, EObject o) {
 		EObject object = o.eContainer();
 		if(object instanceof JvmMember){
-			String parentsName = ((JvmMember) object).getSimpleName();
+			String parentsName = getDeclaratorName((JvmFeature) object);
 			return parentsName + "." + signature;
 		}
 		return signature;

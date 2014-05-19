@@ -136,6 +136,10 @@ public class ReceiverFeatureScope extends AbstractSessionBasedExecutableScope im
 				QualifiedName operator = getOperatorMapping().getOperator(featureName);
 				if (operator != null) {
 					allDescriptions.add(createDescription(operator, feature, bucket));
+					QualifiedName compoundOperator = getOperatorMapping().getCompoundOperator(operator);
+					if (compoundOperator != null) {
+						allDescriptions.add(createDescription(compoundOperator, feature, bucket));	
+					}
 				}
 				String propertyName = toProperty(simpleName, feature);
 				if (propertyName != null) {
