@@ -61,10 +61,11 @@ Package declarations can look like those in Java. Two small, optional difference
 <p>
 The ordinary imports of type names are equivalent to the imports known from Java. 
 Again one can escape any names conflicting with keywords using a <span class="inlinecode">^</span>. In contrast to Java, the 
-terminating semicolon is optional. Xtend also features static imports but 
-allows only a wildcard <span class="inlinecode">*</span> at the end, i.e. you cannot import single members using a static 
-import. Non-static wildcard imports are deprecated for the benefit of better usability and well
+terminating semicolon is optional. Non-static wildcard type imports are deprecated for the benefit of better usability and well
 defined dependencies. 
+</p>
+<p>
+Xtend also features static imports for importing static fields and methods. The semantics and syntax are just like in Java. 
 </p>
 <p>
 As in Java all classes from the <span class="inlinecode">java.lang</span> package are implicitly imported.
@@ -72,7 +73,8 @@ As in Java all classes from the <span class="inlinecode">java.lang</span> packag
 <div class="incode">
 <p class="code">
 <span class="keyword">import</span>&nbsp;java.math.BigDecimal<br/>
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;java.util.Collections.*
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;java.util.Collections.sort<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.junit.Assert.*
 </p>
 </div>
 </div>
@@ -364,6 +366,27 @@ could look like this:
 <p>
 Type parameter bounds and constraints are supported and share the same syntax and semantics as defined in the 
 <a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/classes.html#8.4.4">the Java Language Specification</a>
+</p>
+<a name="operatorDeclaration"></a>
+<h3>Operator Declarations</h3>
+<p>
+Xtend support operator overloading based on an operator-name-mapping as explained in <a href="30-expressions.html#operators" title="Go to &quot;Infix Operators and Operator Overloading&quot;" >section operators</a>.
+To declare an operator one can either declare a simple method using the operator&apos;s name or the operator directly like in the
+following:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;Money&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;+&nbsp;(Money&nbsp;other)&nbsp;{&nbsp;...&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;-&nbsp;(Money&nbsp;other)&nbsp;{&nbsp;...&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;*&nbsp;(BigDecimal&nbsp;times)&nbsp;{&nbsp;...&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+}
+</p>
+</div>
+</div>
 </p>
 <a name="polymorphicDispatch"></a>
 <h3>Dispatch Methods</h3>
@@ -729,15 +752,15 @@ thus making all imported static functions available as extensions methods.
 </p>
 <p>
 The following import declaration 
-<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*</span>
+<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.singletonList</span>
 </p>
 <p>
-allows us to use its methods like this:
+allows us to use singletonList methods like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
 <span class="keyword">new</span>&nbsp;MyClass().singletonList()&nbsp;<br/>
-&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;Collections.singletonList(new&nbsp;MyClass())</span>
+<span class="comment">//&nbsp;calls&nbsp;Collections.singletonList(new&nbsp;MyClass())</span>
 </p>
 </div>
 </div>
@@ -816,7 +839,7 @@ Here&apos;s an example:
 <div class="incode">
 <p class="code">
 <span class="keyword">interface</span>&nbsp;MyInterface&lt;T&gt;&nbsp;<span class="keyword">extends</span>&nbsp;OtherInterface&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;CONSTANT&nbsp;=&nbsp;42<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;CONSTANT&nbsp;=&nbsp;42<br/>
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;T&nbsp;doStuff(String&nbsp;...&nbsp;varArg)&nbsp;<span class="keyword">throws</span>&nbsp;SomeException<br/>
 }
 </p>
@@ -834,9 +857,9 @@ with a concise syntax:
 <div class="incode">
 <p class="code">
 <span class="keyword">annotation</span>&nbsp;MyAnnotation&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;String[]&nbsp;value<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isTricky&nbsp;=&nbsp;<span class="keyword">false</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span>[]&nbsp;lotteryNumbers&nbsp;=&nbsp;#[&nbsp;42,&nbsp;137&nbsp;]<br/>
+&nbsp;&nbsp;String[]&nbsp;value<br/>
+&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isTricky&nbsp;=&nbsp;<span class="keyword">false</span><br/>
+&nbsp;&nbsp;<span class="keyword">int</span>[]&nbsp;lotteryNumbers&nbsp;=&nbsp;#[&nbsp;42,&nbsp;137&nbsp;]<br/>
 }
 </p>
 </div>
@@ -852,13 +875,48 @@ Enumeration types are declared like this:
 <div class="incode">
 <p class="code">
 <span class="keyword">enum</span>&nbsp;MyColor&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;GREEN,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;BLUE,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;RED<br/>
+&nbsp;&nbsp;GREEN,<br/>
+&nbsp;&nbsp;BLUE,<br/>
+&nbsp;&nbsp;RED<br/>
 }
 </p>
 </div>
 </div>
+</p>
+<a name="Nested_Type_Declarations"></a>
+<h2>Nested Type Declarations</h2>
+<p>
+Classes, enum, annotation and interface declarations can be nested. Just as in Java nested enums, annotations and interfaces are always static.
+In Xtend nested classes are also always static. Nested types are public by default and can only be nethed within class, interface and annotation declarations.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">class</span>&nbsp;NestedClass&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">annotation</span>&nbsp;NestedAnnotation&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">enum</span>&nbsp;NestedEnum&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">interface</span>&nbsp;NestedInterface&nbsp;{}<br/>
+}<br/>
+<br/>
+<span class="keyword">interface</span>&nbsp;MyInterface&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">class</span>&nbsp;NestedClass&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">annotation</span>&nbsp;NestedAnnotation&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">enum</span>&nbsp;NestedEnum&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">interface</span>&nbsp;NestedInterface&nbsp;{}<br/>
+}<br/>
+<br/>
+<span class="keyword">annotation</span>&nbsp;MyAnnotation&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">class</span>&nbsp;NestedClass&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">annotation</span>&nbsp;NestedAnnotation&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">enum</span>&nbsp;NestedEnum&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">interface</span>&nbsp;NestedInterface&nbsp;{}<br/>
+}
+</p>
+</div>
+</div>
+
 </p>
 </body>
 </html>

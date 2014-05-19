@@ -188,7 +188,7 @@ class Download extends AbstractWebsite {
 				      Note: Xtext relies on the Antlr generator library. Unfortunately, we cannot provide this library on
 				      the official Eclipse release update sites. Instead, Xtext will try to download it on demand. To avoid
 				      this, you can manually install the feature
-				      <strong>  Xtext Antlr-2.0.0
+				      <strong>  Xtext Antlr
 				      </strong> from the itemis update site
 				      (
 				      <a href="http://download.itemis.de/updates/">http://download.itemis.de/updates/</a>).

@@ -120,7 +120,7 @@ td.code pre {
 
 .image_between_p {
 	display: block; 
-	margin-left: auto;  
+	margin-left: 40px;  
 	margin-right: auto; 
 	margin-top: 25px; 
 	margin-bottom : 25px;

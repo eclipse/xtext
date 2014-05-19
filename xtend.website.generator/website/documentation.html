@@ -132,6 +132,7 @@
 	<li><a href="#interfaces">Interface Declaration</a></li>
 	<li><a href="#annotationTypeDeclaration">Annotation Type Declaration</a></li>
 	<li><a href="#enumTypeDeclaration">Enum Type Declaration</a></li>
+	<li><a href="#Nested_Type_Declarations">Nested Type Declarations</a></li>
 </ul>	</li>
 	<li><a href="#Xtend_Expressions">Expressions</a>
 <ul>	<li><a href="#Xtend_Expressions_Literals">Literals</a></li>
@@ -142,14 +143,17 @@
 	<li><a href="#featureCalls">Field Access and Method Invocation</a></li>
 	<li><a href="#constructorCall">Constructor Call</a></li>
 	<li><a href="#lambdas">Lambda Expressions</a></li>
+	<li><a href="#anonymousClasses">Anonymous Classes</a></li>
 	<li><a href="#ifExpression">If Expression</a></li>
 	<li><a href="#switchExpression">Switch Expression</a></li>
 	<li><a href="#forLoop">For Loop</a></li>
+	<li><a href="#traditionalForLoop">Basic For Loop</a></li>
 	<li><a href="#whileExpression">While Loop</a></li>
 	<li><a href="#doWhileExpression">Do-While Loop</a></li>
 	<li><a href="#Xtend_Expressions_Return">Return Expression</a></li>
 	<li><a href="#Xtend_Expressions_Throw">Throwing Exceptions</a></li>
 	<li><a href="#Xtend_Expressions_TryCatch">Try, Catch, Finally</a></li>
+	<li><a href="#Xtend_Expressions_Synchronized">Synchronized</a></li>
 	<li><a href="#templates">Template Expressions</a></li>
 </ul>	</li>
 	<li><a href="#activeAnnotations">Active Annotations</a>
@@ -705,17 +709,19 @@ package com.acme</pre>
 						<p>
 							The ordinary imports of type names are equivalent to the imports known from Java. 
 							Again one can escape any names conflicting with keywords using a <code class="prettyprint lang-xtend">^</code>. In contrast to Java, the 
-							terminating semicolon is optional. Xtend also features static imports but 
-							allows only a wildcard <code class="prettyprint lang-xtend">*</code> at the end, i.e. you cannot import single members using a static 
-							import. Non-static wildcard imports are deprecated for the benefit of better usability and well
+							terminating semicolon is optional. Non-static wildcard type imports are deprecated for the benefit of better usability and well
 							defined dependencies.
+						</p>
+						<p>
+							Xtend also features static imports for importing static fields and methods. The semantics and syntax are just like in Java.
 						</p>
 						<p>
 							As in Java all classes from the <code class="prettyprint lang-xtend">java.lang</code> package are implicitly imported.
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 import java.math.BigDecimal
-import static java.util.Collections.*</pre>
+import static java.util.Collections.sort
+import static org.junit.Assert.*</pre>
 							<p>
 						</p>
 						<p>
@@ -983,6 +989,26 @@ def &lt;T&gt; second(List&lt;T&gt; elements) {
 						<p>
 							Type parameter bounds and constraints are supported and share the same syntax and semantics as defined in the 
 							<a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/classes.html#8.4.4">the Java Language Specification</a>
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="operatorDeclaration" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Operator Declarations</h3>
+						<p>
+							Xtend support operator overloading based on an operator-name-mapping as explained in <a href="#operators"></a>.
+							To declare an operator one can either declare a simple method using the operator's name or the operator directly like in the
+							following:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+class Money {
+											def + (Money other) { ... }
+											def - (Money other) { ... }
+											def * (BigDecimal times) { ... }
+											...
+}</pre>
+							<p>
 						</p>
 						</section>
 						<!-- subsection -->
@@ -1325,15 +1351,15 @@ class MyClass {
 							The following import declaration 
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-import static extension java.util.Collections.*</pre>
+import static extension java.util.Collections.singletonList</pre>
 							<p>
 						</p>
 						<p>
-							allows us to use its methods like this:
+							allows us to use singletonList methods like this:
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 new MyClass().singletonList() 
-  // calls Collections.singletonList(new MyClass())</pre>
+// calls Collections.singletonList(new MyClass())</pre>
 							<p>
 						</p>
 						</section>
@@ -1405,7 +1431,7 @@ person.delete  // calls ep.delete(person)</pre>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 interface MyInterface&lt;T&gt; extends OtherInterface {
-	val CONSTANT = 42
+  val CONSTANT = 42
   def T doStuff(String ... varArg) throws SomeException
 }</pre>
 							<p>
@@ -1422,9 +1448,9 @@ interface MyInterface&lt;T&gt; extends OtherInterface {
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 annotation MyAnnotation {
-	String[] value
-	boolean isTricky = false
-	int[] lotteryNumbers = #[ 42, 137 ]
+  String[] value
+  boolean isTricky = false
+  int[] lotteryNumbers = #[ 42, 137 ]
 }</pre>
 							<p>
 						</p>
@@ -1439,9 +1465,42 @@ annotation MyAnnotation {
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
 enum MyColor {
-	GREEN,
-	BLUE,
-	RED
+  GREEN,
+  BLUE,
+  RED
+}</pre>
+							<p>
+						</p>
+						</section>
+						<!--  section -->
+						<section id="Nested_Type_Declarations" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Nested Type Declarations</h2>
+						<p>
+							Classes, enum, annotation and interface declarations can be nested. Just as in Java nested enums, annotations and interfaces are always static.
+							In Xtend nested classes are also always static. Nested types are public by default and can only be nethed within class, interface and annotation declarations.
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+class MyClass {
+  static class NestedClass {}
+  annotation NestedAnnotation {}
+  enum NestedEnum {}
+  interface NestedInterface {}
+}
+
+interface MyInterface {
+  static class NestedClass {}
+  annotation NestedAnnotation {}
+  enum NestedEnum {}
+  interface NestedInterface {}
+}
+
+annotation MyAnnotation {
+  static class NestedClass {}
+  annotation NestedAnnotation {}
+  enum NestedEnum {}
+  interface NestedInterface {}
 }</pre>
 							<p>
 						</p>
@@ -1912,12 +1971,31 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre>
 						</section>
 						<!-- subsection -->
 						<section id="_12" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Postfix Operators</h3>
+						<p>
+							The two postfix operators <code class="prettyprint lang-xtend">++</code> and <code class="prettyprint lang-xtend">--</code> use the following method mapping:
+						</p>
+						<p>
+							</p>
+							<table class="table table-bordered table-condensed">
+							<tr><td><code class="prettyprint lang-xtend">e1++</code></td>
+							<td><code class="prettyprint lang-xtend">e1.operator_plusPlus()</code></td>
+							</tr>
+							<tr><td><code class="prettyprint lang-xtend">e1--</code></td>
+							<td><code class="prettyprint lang-xtend">e1.operator_minusMinus()</code></td>
+							</tr>
+							</table>
+							<p>
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="_13" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Defined Operators in The Library</h3>
 						<p>
 							Xtend offers operators for common types from the JDK.
 						</p>
 						<!-- subsection -->
-						<section id="_13" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_14" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Equality Operators</h4>
 						<p>
 							In Xtend the equals operators (<code class="prettyprint lang-xtend">==</code>,<code class="prettyprint lang-xtend">!=</code>) are bound to <code class="prettyprint lang-xtend">Object.equals</code>. So you can write:
@@ -1941,7 +2019,7 @@ if (someObject === anotherObject)
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_14" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_15" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Comparison Operators</h4>
 						<p>
 							In Xtend the usual comparison operators (<code class="prettyprint lang-xtend">&gt;</code>,<code class="prettyprint lang-xtend">&lt;</code>,<code class="prettyprint lang-xtend">&gt;=</code>, and <code class="prettyprint lang-xtend">&lt;=</code>) work as expected on the primitive numbers:
@@ -1967,7 +2045,7 @@ if (startTime &lt; arrivalTime)
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_15" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_16" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Arithmetic Operators</h4>
 						<p>
 							The arithmetic operators (<code class="prettyprint lang-xtend">+</code>,<code class="prettyprint lang-xtend">-</code>,<code class="prettyprint lang-xtend">*</code>,<code class="prettyprint lang-xtend">/</code>,<code class="prettyprint lang-xtend">%</code>, and <code class="prettyprint lang-xtend">**</code>) are not only available for
@@ -1983,7 +2061,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_16" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_17" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Elvis Operator</h4>
 						<p>
 							In addition to <a href="#nullSafeFeatureCalls">null-safe feature calls</a> Xtend supports the elvis operator known
@@ -2000,7 +2078,7 @@ val salutation = person.firstName ?: 'Sir/Madam'</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_17" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_18" style="padding-top: 68px; margin-top: -68px;">
 						<h4>With Operator</h4>
 						<p>
 							The with operator is very handy when you want to initialize objects or when you want to use a particular
@@ -2025,7 +2103,7 @@ val person = new Person =&gt; [
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_18" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_19" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Range Operators</h4>
 						<p>
 							There are three different range operators. The most useful ones are <code class="prettyprint lang-xtend">..&lt;</code> and <code class="prettyprint lang-xtend">&gt;..</code> which create exclusive ranges.
@@ -2076,7 +2154,7 @@ list.reverseView.forEach[
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_19" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_20" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Pair Operator</h4>
 						<p>
 							Sometimes you want to use a pair of two elements locally without introducing a new structure. In Xtend you can
@@ -2134,7 +2212,7 @@ myObj.myField = 'foo'</pre>
 						</p>
 						<p>
 							</p>
-							<pre class="prettyprint lang-java linenums">
+							<pre class="prettyprint lang-xtend linenums">
 myObj.myProperty = 'foo' // calls myObj.setMyProperty("foo")</pre>
 							<p>
 						</p>
@@ -2145,6 +2223,48 @@ myObj.myProperty = 'foo' // calls myObj.setMyProperty("foo")</pre>
 						<p>
 							The return type of an assignment is the type of the right hand side, in case it is a simple assignment.
 							If it is translated to a setter method it yields whatever the setter method returns.
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="assignmentOperators" style="padding-top: 68px; margin-top: -68px;">
+						<h4>Assignment Operators</h4>
+						<p>
+							Compound assignment operators can be used as a shorthand for the assignment of a binary expression.
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+var BigDecimal bd = 45bd
+bd += 12bd // equivalent to bd = bd + 12bd
+bd -= 12bd // equivalent to bd = bd - 12bd
+bd /= 12bd // equivalent to bd = bd / 12bd
+bd *= 12bd // equivalent to bd = bd * 12bd</pre>
+							<p>
+						</p>
+						<p>
+							Compound assignments work automatcially when the infix operator is declared. The following compound assignment operators 
+							are supported:
+						</p>
+						<p>
+							</p>
+							<table class="table table-bordered table-condensed">
+							<tr><td><code class="prettyprint lang-xtend">e1 += e2</code></td>
+							<td><code class="prettyprint lang-xtend">+</code></td>
+							</tr>
+							<tr><td><code class="prettyprint lang-xtend">e1 -= e2</code></td>
+							<td><code class="prettyprint lang-xtend">-</code></td>
+							</tr>
+							<tr><td><code class="prettyprint lang-xtend">e1 *= e2</code></td>
+							<td><code class="prettyprint lang-xtend">*</code></td>
+							</tr>
+							<tr><td><code class="prettyprint lang-xtend">e1 /= e2</code></td>
+							<td><code class="prettyprint lang-xtend">/</code></td>
+							</tr>
+							<tr><td><code class="prettyprint lang-xtend">e1 %= e2</code></td>
+							<td><code class="prettyprint lang-xtend">%</code></td>
+							</tr>
+							</table>
+							<p>
 						</p>
 						</section>
 						</section>
@@ -2227,7 +2347,7 @@ myObj.myProperty = 'foo' // calls myObj.setMyProperty("foo")</pre>
 							extension provider</a>).
 						</p>
 						<!-- subsection -->
-						<section id="_20" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_21" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Typing</h3>
 						<p>
 							The type of the variable itself can either be explicitly declared or it can be inferred from the initializer
@@ -2561,6 +2681,32 @@ val stringToStringFunction2 = [ String s | s.toUpperCase ] // inferred type is (
 						</section>
 						</section>
 						<!--  section -->
+						<section id="anonymousClasses" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Anonymous Classes</h2>
+						<p>
+							An anonymous class in Xtend has the very same semantics as in Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5">Java Language Sepcification</a>).
+							Here's an example:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+val tabListener = new ActionBar.TabListener() {
+  override onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+    // show the given tab
+  }
+
+  override onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    // hide the given tab
+  }
+
+  override onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    // probably ignore this event
+  }
+};</pre>
+							<p>
+						</p>
+						</section>
+						<!--  section -->
 						<section id="ifExpression" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">If Expression</h2>
 						<p>
@@ -2653,7 +2799,7 @@ switch myString : someComputation() {
 							<p>
 						</p>
 						<!-- subsection -->
-						<section id="_21" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_22" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Type guards</h3>
 						<p>
 							Instead of or in addition to the case guard you can specify a <strong>type guard</strong>. The case only matches if the 
@@ -2676,6 +2822,25 @@ def length(Object x) {
 						<p>
 							Switches with type guards are a safe and much more readable alternative to instance of / casting cascades you 
 							might know from Java.
+						</p>
+						</section>
+						<!-- subsection -->
+						<section id="_23" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Fall Through</h3>
+						<p>
+							You can have multiple type guards and case separate with a comma, to have all of them share the same then part.
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+def isMale(String salutation) {
+  switch salutation {
+    case "Mr.", 
+    case "Sir" : true
+    default : false
+  }
+}</pre>
+							<p>
 						</p>
 						</section>
 						</section>
@@ -2705,6 +2870,32 @@ for (String s : myStrings) {
 
 for (s : myStrings)
   doSideEffect(s)</pre>
+							<p>
+						</p>
+						</section>
+						<!--  section -->
+						<section id="traditionalForLoop" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Basic For Loop</h2>
+						<p>
+							The traditional for loop 
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+for (&lt;init-expression&gt; ;  &lt;predicate&gt; ; &lt;update-expression&gt;) body-expression</pre>
+							<p>
+							 
+							is very similar to the one known from Java, or even C. When executed, it first executes the <code class="prettyprint lang-xtend">init-expression</code>, 
+							where local variables can be declared. Next the <code class="prettyprint lang-xtend">predicate</code> is executed and if it evaluates to <code class="prettyprint lang-xtend">true</code>, the <code class="prettyprint lang-xtend">body-expression</code> is executed.
+							On any subsequent iterations the <code class="prettyprint lang-xtend">update-expressio</code> is executed instead of the init-expression. This happens until the <code class="prettyprint lang-xtend">predicate</code> returns <code class="prettyprint lang-xtend">false</code>.
+						</p>
+						<p>
+							The type of a for loop is <code class="prettyprint lang-xtend">void</code>.
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+for (val i = 0 ; i &lt; s.length ; i++) {
+  println(s.subString(0,i)
+}</pre>
 							<p>
 						</p>
 						</section>
@@ -2834,6 +3025,30 @@ val name = try {
   } catch (IOException e) {
     "unknown"
   }</pre>
+							<p>
+						</p>
+						</section>
+						<!--  section -->
+						<section id="Xtend_Expressions_Synchronized" style="padding-top: 68px; margin-top: -68px;">
+						<h2 style="padding-top: 15px;">Synchronized</h2>
+						<p>
+							The synchonized expression does the same as it does in Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19">Java Language Specification</a>).
+							The only difference is that in Xtend it is an expression and can therefore be used at more places.
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+synchronized(lock) {
+  println("Hello")
+}</pre>
+							<p>
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+val name = synchronized(lock) { 
+  doStuff() 
+}</pre>
 							<p>
 						</p>
 						</section>
@@ -3539,7 +3754,7 @@ class LazyTest {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_22" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_24" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Wrap Up</h3>
 						<p>
 							<strong>Active Annotations</strong> are a powerful and unique concept that allows to solve a large class of problems that previously had to be solved in cumbersome ways.

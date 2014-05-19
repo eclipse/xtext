@@ -51,6 +51,8 @@
 				</topic>
 				<topic href="contents/20-classes-and-functions.html#genericMethods" label="Generic Methods" >
 				</topic>
+				<topic href="contents/20-classes-and-functions.html#operatorDeclaration" label="Operator Declarations" >
+				</topic>
 				<topic href="contents/20-classes-and-functions.html#polymorphicDispatch" label="Dispatch Methods" >
 					<topic href="contents/20-classes-and-functions.html#polymorphicDispatch_11" label="Dispatch Methods and Inheritance" >
 					</topic>
@@ -75,6 +77,8 @@
 			<topic href="contents/20-classes-and-functions.html#annotationTypeDeclaration" label="Annotation Type Declaration" >
 			</topic>
 			<topic href="contents/20-classes-and-functions.html#enumTypeDeclaration" label="Enum Type Declaration" >
+			</topic>
+			<topic href="contents/20-classes-and-functions.html#Nested_Type_Declarations" label="Nested Type Declarations" >
 			</topic>
 		</topic>
 		<topic href="contents/30-expressions.html#Xtend_Expressions" label="Expressions" >
@@ -101,24 +105,28 @@
 			<topic href="contents/30-expressions.html#operators" label="Infix Operators and Operator Overloading" >
 				<topic href="contents/30-expressions.html#operators_4" label="Short-Circuit Boolean Operators" >
 				</topic>
-				<topic href="contents/30-expressions.html#operators_5" label="Defined Operators in The Library" >
-					<topic href="contents/30-expressions.html#operators_5_2" label="Equality Operators" >
+				<topic href="contents/30-expressions.html#operators_5" label="Postfix Operators" >
+				</topic>
+				<topic href="contents/30-expressions.html#operators_6" label="Defined Operators in The Library" >
+					<topic href="contents/30-expressions.html#operators_6_2" label="Equality Operators" >
 					</topic>
-					<topic href="contents/30-expressions.html#operators_5_3" label="Comparison Operators" >
+					<topic href="contents/30-expressions.html#operators_6_3" label="Comparison Operators" >
 					</topic>
-					<topic href="contents/30-expressions.html#operators_5_4" label="Arithmetic Operators" >
+					<topic href="contents/30-expressions.html#operators_6_4" label="Arithmetic Operators" >
 					</topic>
-					<topic href="contents/30-expressions.html#operators_5_5" label="Elvis Operator" >
+					<topic href="contents/30-expressions.html#operators_6_5" label="Elvis Operator" >
 					</topic>
-					<topic href="contents/30-expressions.html#operators_5_6" label="With Operator" >
+					<topic href="contents/30-expressions.html#operators_6_6" label="With Operator" >
 					</topic>
-					<topic href="contents/30-expressions.html#operators_5_7" label="Range Operators" >
+					<topic href="contents/30-expressions.html#operators_6_7" label="Range Operators" >
 					</topic>
-					<topic href="contents/30-expressions.html#operators_5_8" label="Pair Operator" >
+					<topic href="contents/30-expressions.html#operators_6_8" label="Pair Operator" >
 					</topic>
 				</topic>
 				<topic href="contents/30-expressions.html#assignments" label="Assignments" >
 					<topic href="contents/30-expressions.html#propertyAssignments" label="Setting Properties" >
+					</topic>
+					<topic href="contents/30-expressions.html#assignmentOperators" label="Assignment Operators" >
 					</topic>
 				</topic>
 			</topic>
@@ -144,13 +152,19 @@
 				<topic href="contents/30-expressions.html#closureTypes" label="Typing" >
 				</topic>
 			</topic>
+			<topic href="contents/30-expressions.html#anonymousClasses" label="Anonymous Classes" >
+			</topic>
 			<topic href="contents/30-expressions.html#ifExpression" label="If Expression" >
 			</topic>
 			<topic href="contents/30-expressions.html#switchExpression" label="Switch Expression" >
 				<topic href="contents/30-expressions.html#switchExpression_6" label="Type guards" >
 				</topic>
+				<topic href="contents/30-expressions.html#switchExpression_7" label="Fall Through" >
+				</topic>
 			</topic>
 			<topic href="contents/30-expressions.html#forLoop" label="For Loop" >
+			</topic>
+			<topic href="contents/30-expressions.html#traditionalForLoop" label="Basic For Loop" >
 			</topic>
 			<topic href="contents/30-expressions.html#whileExpression" label="While Loop" >
 			</topic>
@@ -161,6 +175,8 @@
 			<topic href="contents/30-expressions.html#Xtend_Expressions_Throw" label="Throwing Exceptions" >
 			</topic>
 			<topic href="contents/30-expressions.html#Xtend_Expressions_TryCatch" label="Try, Catch, Finally" >
+			</topic>
+			<topic href="contents/30-expressions.html#Xtend_Expressions_Synchronized" label="Synchronized" >
 			</topic>
 			<topic href="contents/30-expressions.html#templates" label="Template Expressions" >
 				<topic href="contents/30-expressions.html#templateIF" label="Conditions in Templates" >

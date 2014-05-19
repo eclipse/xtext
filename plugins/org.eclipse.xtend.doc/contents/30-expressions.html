@@ -647,11 +647,36 @@ Still you can overload these operators for your types or even override it for bo
 both operands are always evaluated and the defined method is invoked, i.e. no short-circuit execution is happening.
 </p>
 <a name="operators_5"></a>
+<h3>Postfix Operators</h3>
+<p>
+The two postfix operators <span class="inlinecode">++</span> and <span class="inlinecode">--</span> use the following method mapping:
+</p>
+<p>
+<table>
+<tr>
+<td>
+<span class="inlinecode">e1++</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_plusPlus()</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1--</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_minusMinus()</span>
+</td>
+</tr>
+</table>
+</p>
+<a name="operators_6"></a>
 <h3>Defined Operators in The Library</h3>
 <p>
 Xtend offers operators for common types from the JDK.
 </p>
-<a name="operators_5_2"></a>
+<a name="operators_6_2"></a>
 <h4>Equality Operators</h4>
 <p>
 In Xtend the equals operators (<span class="inlinecode">==</span>,<span class="inlinecode">!=</span>) are bound to <span class="inlinecode">Object.equals</span>. So you can write:
@@ -679,7 +704,7 @@ Java&apos;s identity equals semantic is mapped to the tripple-equals operators <
 </div>
 </div>
 </p>
-<a name="operators_5_3"></a>
+<a name="operators_6_3"></a>
 <h4>Comparison Operators</h4>
 <p>
 In Xtend the usual comparison operators (<span class="inlinecode">&gt;</span>,<span class="inlinecode">&lt;</span>,<span class="inlinecode">&gt;=</span>, and <span class="inlinecode">&lt;=</span>) work as expected on the primitive numbers:
@@ -709,7 +734,7 @@ also write
 </div>
 </div>
 </p>
-<a name="operators_5_4"></a>
+<a name="operators_6_4"></a>
 <h4>Arithmetic Operators</h4>
 <p>
 The arithmetic operators (<span class="inlinecode">+</span>,<span class="inlinecode">-</span>,<span class="inlinecode">*</span>,<span class="inlinecode">/</span>,<span class="inlinecode">%</span>, and <span class="inlinecode">**</span>) are not only available for
@@ -726,7 +751,7 @@ the primitive types, but also for other reasonable types such as <span class="in
 </div>
 </div>
 </p>
-<a name="operators_5_5"></a>
+<a name="operators_6_5"></a>
 <h4>Elvis Operator</h4>
 <p>
 In addition to <a href="30-expressions.html#nullSafeFeatureCalls" title="Go to &quot;Null-Safe Feature Call&quot;">null-safe feature calls</a> Xtend supports the elvis operator known
@@ -738,7 +763,7 @@ from Groovy.
 <p>
 The right hand side of the expression is only evaluated if the left side was <span class="inlinecode">null</span>.
 </p>
-<a name="operators_5_6"></a>
+<a name="operators_6_6"></a>
 <h4>With Operator</h4>
 <p>
 The with operator is very handy when you want to initialize objects or when you want to use a particular
@@ -764,7 +789,7 @@ Here&apos;s an example:
 </div>
 </div>
 </p>
-<a name="operators_5_7"></a>
+<a name="operators_6_7"></a>
 <h4>Range Operators</h4>
 <p>
 There are three different range operators. The most useful ones are <span class="inlinecode">..&lt;</span> and <span class="inlinecode">&gt;..</span> which create exclusive ranges.
@@ -819,7 +844,7 @@ list.reverseView.forEach[<br/>
 </div>
 </div>
 </p>
-<a name="operators_5_8"></a>
+<a name="operators_6_8"></a>
 <h4>Pair Operator</h4>
 <p>
 Sometimes you want to use a pair of two elements locally without introducing a new structure. In Xtend you can
@@ -881,6 +906,72 @@ The setter is only used if the field is not accessible from the given context. T
 <p>
 The return type of an assignment is the type of the right hand side, in case it is a simple assignment.
 If it is translated to a setter method it yields whatever the setter method returns.
+</p>
+<a name="assignmentOperators"></a>
+<h4>Assignment Operators</h4>
+<p>
+Compound assignment operators can be used as a shorthand for the assignment of a binary expression.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">var</span>&nbsp;BigDecimal&nbsp;bd&nbsp;=&nbsp;45bd<br/>
+bd&nbsp;+=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;bd&nbsp;=&nbsp;bd&nbsp;+&nbsp;12bd<br/>
+</span>bd&nbsp;-=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;bd&nbsp;=&nbsp;bd&nbsp;-&nbsp;12bd<br/>
+</span>bd&nbsp;/=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;bd&nbsp;=&nbsp;bd&nbsp;/&nbsp;12bd<br/>
+</span>bd&nbsp;*=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;bd&nbsp;=&nbsp;bd&nbsp;*&nbsp;12bd</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+Compound assignments work automatcially when the infix operator is declared. The following compound assignment operators 
+are supported:
+</p>
+<p>
+<table>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;+=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">+</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;-=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">-</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;*=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">*</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;/=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">/</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;%=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">%</span>
+</td>
+</tr>
+</table>
 </p>
 <a name="blocks"></a>
 <h2>Blocks</h2>
@@ -1298,6 +1389,33 @@ Checked exceptions that are thrown in the body of a lambda expression but not de
 <a href="20-classes-and-functions.html#declaredExceptions" title="Go to &quot;Declared Exceptions&quot;">sneaky-throw technique</a>.
 Of course you can always <a href="30-expressions.html#Xtend_Expressions_TryCatch" title="Go to &quot;Try, Catch, Finally&quot;">catch and handle</a> them.
 </p>
+<a name="anonymousClasses"></a>
+<h2>Anonymous Classes</h2>
+<p>
+An anonymous class in Xtend has the very same semantics as in Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5">Java Language Sepcification</a>).
+Here&apos;s an example:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;tabListener&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ActionBar.TabListener()&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;onTabSelected(ActionBar.Tab&nbsp;tab,&nbsp;FragmentTransaction&nbsp;ft)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;the&nbsp;given&nbsp;tab<br/>
+</span>&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;onTabUnselected(ActionBar.Tab&nbsp;tab,&nbsp;FragmentTransaction&nbsp;ft)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;hide&nbsp;the&nbsp;given&nbsp;tab<br/>
+</span>&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;onTabReselected(ActionBar.Tab&nbsp;tab,&nbsp;FragmentTransaction&nbsp;ft)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;probably&nbsp;ignore&nbsp;this&nbsp;event<br/>
+</span>&nbsp;&nbsp;}<br/>
+};
+</p>
+</div>
+</div>
+</p>
 <a name="ifExpression"></a>
 <h2>If Expression</h2>
 <p>
@@ -1407,6 +1525,26 @@ predicate and the case body.
 Switches with type guards are a safe and much more readable alternative to instance of / casting cascades you 
 might know from Java.
 </p>
+<a name="switchExpression_7"></a>
+<h3>Fall Through</h3>
+<p>
+You can have multiple type guards and case separate with a comma, to have all of them share the same then part.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;isMale(String&nbsp;salutation)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;salutation&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"Mr."</span>,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"Sir"</span>&nbsp;:&nbsp;<span class="keyword">true</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">false</span><br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
 <a name="forLoop"></a>
 <h2>For Loop</h2>
 <p>
@@ -1429,6 +1567,29 @@ iterable or array that is processed.
 <br/>
 <span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)<br/>
 &nbsp;&nbsp;doSideEffect(s)
+</p>
+</div>
+</div>
+</p>
+<a name="traditionalForLoop"></a>
+<h2>Basic For Loop</h2>
+<p>
+The traditional for loop 
+<span class="inlinecode"><span class="keyword">for</span>&nbsp;(&lt;init-expression&gt;&nbsp;;&nbsp;&nbsp;&lt;predicate&gt;&nbsp;;&nbsp;&lt;update-expression&gt;)&nbsp;body-expression</span> 
+is very similar to the one known from Java, or even C. When executed, it first executes the <span class="inlinecode">init-expression</span>, 
+where local variables can be declared. Next the <span class="inlinecode">predicate</span> is executed and if it evaluates to <span class="inlinecode">true</span>, the <span class="inlinecode">body-expression</span> is executed.
+On any subsequent iterations the <span class="inlinecode">update-expressio</span> is executed instead of the init-expression. This happens until the <span class="inlinecode">predicate</span> returns <span class="inlinecode">false</span>.
+</p>
+<p>
+The type of a for loop is <span class="inlinecode"><span class="keyword">void</span></span>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">for</span>&nbsp;(<span class="keyword">val</span>&nbsp;i&nbsp;=&nbsp;0&nbsp;;&nbsp;i&nbsp;&lt;&nbsp;s.length&nbsp;;&nbsp;i++)&nbsp;{<br/>
+&nbsp;&nbsp;println(s.subString(0,i)<br/>
+}
 </p>
 </div>
 </div>
@@ -1558,6 +1719,34 @@ and do not have to rely on non-final variables:
 &nbsp;&nbsp;}&nbsp;<span class="keyword">catch</span>&nbsp;(IOException&nbsp;e)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"unknown"</span><br/>
 &nbsp;&nbsp;}
+</p>
+</div>
+</div>
+</p>
+<a name="Xtend_Expressions_Synchronized"></a>
+<h2>Synchronized</h2>
+<p>
+The synchonized expression does the same as it does in Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19">Java Language Specification</a>).
+The only difference is that in Xtend it is an expression and can therefore be used at more places.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">synchronized</span>(lock)&nbsp;{<br/>
+&nbsp;&nbsp;println(<span class="string">"Hello"</span>)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;name&nbsp;=&nbsp;<span class="keyword">synchronized</span>(lock)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;doStuff()&nbsp;<br/>
+}
 </p>
 </div>
 </div>
