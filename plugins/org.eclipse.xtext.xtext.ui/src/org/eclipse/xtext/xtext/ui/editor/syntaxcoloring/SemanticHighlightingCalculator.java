@@ -26,13 +26,11 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
-import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 
 import com.google.common.collect.Sets;
@@ -59,16 +57,16 @@ public class SemanticHighlightingCalculator extends  DefaultSemanticHighlighting
 				}
 			} else if (current instanceof AbstractRule) {
 				INode node = getFirstFeatureNode(current, XtextPackage.Literals.ABSTRACT_RULE__NAME);
-				highlightNode(node, SemanticHighlightingConfiguration.RULE_DECLARATION_ID, acceptor);
+				highlightNode(acceptor, node, SemanticHighlightingConfiguration.RULE_DECLARATION_ID);
 				if (current instanceof ParserRule && GrammarUtil.isDatatypeRule((ParserRule) current)) {
-					highlightNode(node, SemanticHighlightingConfiguration.DATA_TYPE_RULE_ID, acceptor);	
+					highlightNode(acceptor, node, SemanticHighlightingConfiguration.DATA_TYPE_RULE_ID);	
 				}
 				if (!calledRules.isEmpty() && !calledRules.contains(current)) {
-					highlightNode(node, SemanticHighlightingConfiguration.NEVER_CALLED_RULE_ID, acceptor);
+					highlightNode(acceptor, node, SemanticHighlightingConfiguration.NEVER_CALLED_RULE_ID);
 				}
 			} else if (current instanceof TypeRef) {
 				INode node = getFirstFeatureNode(current, null);
-				highlightNode(node, SemanticHighlightingConfiguration.TYPE_REFERENCE_ID, acceptor);
+				highlightNode(acceptor, node, SemanticHighlightingConfiguration.TYPE_REFERENCE_ID);
 			} else if (current instanceof RuleCall) {
 				RuleCall call = (RuleCall) current;
 				if ((call.getRule() instanceof TerminalRule ||
@@ -77,34 +75,18 @@ public class SemanticHighlightingCalculator extends  DefaultSemanticHighlighting
 					ParserRule container = GrammarUtil.containingParserRule(call);
 					if (container != null && !GrammarUtil.isDatatypeRule(container)) {
 						INode node = getFirstFeatureNode(call, XtextPackage.Literals.RULE_CALL__RULE);
-						highlightNode(node, SemanticHighlightingConfiguration.UNUSED_VALUE_ID, acceptor);
+						highlightNode(acceptor, node, SemanticHighlightingConfiguration.UNUSED_VALUE_ID);
 					}
 				}
 			} else if(current instanceof Assignment) {
 				if(SPECIAL_ATTRIBUTES.contains(((Assignment) current).getFeature())) {
 					INode featureNode = getFirstFeatureNode(current, XtextPackage.Literals.ASSIGNMENT__FEATURE);
-					highlightNode(featureNode, SemanticHighlightingConfiguration.SPECIAL_ATTRIBUTE_ID, acceptor);
+					highlightNode(acceptor, featureNode, SemanticHighlightingConfiguration.SPECIAL_ATTRIBUTE_ID);
 				}
 			}
 		}
 	}
 	
-	private void highlightNode(INode node, String id, IHighlightedPositionAcceptor acceptor) {
-		if (node == null)
-			return;
-		if (node instanceof ILeafNode) {
-			ITextRegion textRegion = node.getTextRegion();
-			acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), id);
-		} else {
-			for(ILeafNode leaf: node.getLeafNodes()) {
-				if (!leaf.isHidden()) {
-					ITextRegion leafRegion = leaf.getTextRegion();
-					acceptor.addPosition(leafRegion.getOffset(), leafRegion.getLength(), id);
-				}
-			}
-		}
-	}
-
 	public INode getFirstFeatureNode(EObject semantic, EStructuralFeature feature) {
 		if (feature == null)
 			return NodeModelUtils.findActualNodeFor(semantic);
