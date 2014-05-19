@@ -24,7 +24,6 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -207,8 +206,8 @@ public class XbaseDeclarativeHoverSignatureProvider {
 		return getSignature(feature);
 	}
 
-	protected String getDeclaratorName(JvmFeature feature) {
-		return feature.getDeclaringType().getSimpleName();
+	protected String getDeclaratorName(JvmMember member) {
+		return member.getDeclaringType().getSimpleName();
 	}
 
 	public String getDerivedOrSourceSignature(EObject object) {
@@ -278,9 +277,8 @@ public class XbaseDeclarativeHoverSignatureProvider {
 	}
 
 	protected String enrichWithDeclarator(String signature, EObject o) {
-		EObject object = o.eContainer();
-		if(object instanceof JvmMember){
-			String parentsName = ((JvmMember) object).getSimpleName();
+		if(o instanceof JvmMember && ((JvmMember) o).getDeclaringType() != null){
+			String parentsName = getDeclaratorName((JvmMember) o);
 			return parentsName + "." + signature;
 		}
 		return signature;

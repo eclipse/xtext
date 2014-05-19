@@ -24,9 +24,9 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
@@ -48,13 +48,13 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 	}
 
 	@Override
-	protected String getDeclaratorName(JvmFeature feature) {
-		JvmDeclaredType declaringType = feature.getDeclaringType();
+	protected String getDeclaratorName(JvmMember member) {
+		JvmDeclaredType declaringType = member.getDeclaringType();
 		if (declaringType.isLocal()) {
 			String rawName = declaringType.getSuperTypes().get(0).getType().getSimpleName();
 			return "new " + rawName + "(){}";
 		} else {
-			return super.getDeclaratorName(feature);
+			return super.getDeclaratorName(member);
 		}
 	}
 
