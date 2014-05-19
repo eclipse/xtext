@@ -495,6 +495,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			List<LightweightTypeReference> dispatchCaseResults = Lists.newArrayListWithCapacity(dispatchCases.size());
 			boolean hasInferredCase = false;
 			LightweightTypeReference implicitVoid = null;
+			LightweightTypeReference thrownVoid = null;
 			for (JvmOperation dispatchCase : dispatchCases) {
 				markComputing(dispatchCase.getReturnType());
 			}
@@ -536,6 +537,8 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 										} else {
 											implicitVoid = returnType;
 										}
+									} else {
+										thrownVoid = returnType;
 									}
 								} else {
 									dispatchCaseResults.add(returnType);
@@ -557,6 +560,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 						declaredDispatcherType,
 						dispatchCaseResults,
 						implicitVoid,
+						thrownVoid,
 						childResolvedTypes);
 				if (commonDispatchType != null) {
 					resolveDispatchCaseTypes(dispatchCases, commonDispatchType, featureScopeSession);
@@ -581,7 +585,9 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 
 	protected LightweightTypeReference normalizeDispatchReturnType(LightweightTypeReference declaredType,
 			List<LightweightTypeReference> computedTypes,
-			LightweightTypeReference implicitVoidOrNull, ResolvedTypes resolvedTypes) {
+			LightweightTypeReference implicitVoidOrNull,
+			LightweightTypeReference thrownVoidOrNull,
+			ResolvedTypes resolvedTypes) {
 		LightweightTypeReference result = null;
 		if (declaredType != null) {
 			result = declaredType;
@@ -596,7 +602,14 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			if (computedTypes.isEmpty() && implicitVoidOrNull != null) {
 				result = implicitVoidOrNull;
 			} else {
-				result = getServices().getTypeConformanceComputer().getCommonSuperType(computedTypes, resolvedTypes.getReferenceOwner());
+				if (computedTypes.isEmpty()) {
+					if (thrownVoidOrNull == null) {
+						throw new IllegalStateException("thrownVoidOrNull may not be null in this situation");
+					}
+					result = thrownVoidOrNull;
+				} else {
+					result = getServices().getTypeConformanceComputer().getCommonSuperType(computedTypes, resolvedTypes.getReferenceOwner());
+				}
 			}
 		}
 		return result;

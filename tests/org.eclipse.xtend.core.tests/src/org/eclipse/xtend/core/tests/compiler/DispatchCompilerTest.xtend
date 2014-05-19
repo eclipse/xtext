@@ -35,9 +35,52 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public String m(final String s) {
-			    {
-			      return _m(s);
-			    }
+			    return _m(s);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testThrowExceptionSingleDispatchCase_01() {
+		assertCompilesTo('''
+			class C {
+				def dispatch minus(Object operand) {
+					throw new RuntimeException();
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  protected void _minus(final Object operand) {
+			    throw new RuntimeException();
+			  }
+			  
+			  public void minus(final Object operand) {
+			    _minus(operand);
+			    return;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testThrowExceptionSingleDispatchCase_02() {
+		assertCompilesTo('''
+			class C {
+				def dispatch int minus(Object operand) {
+					throw new RuntimeException();
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  protected int _minus(final Object operand) {
+			    throw new RuntimeException();
+			  }
+			  
+			  public int minus(final Object operand) {
+			    return _minus(operand);
 			  }
 			}
 		''')
