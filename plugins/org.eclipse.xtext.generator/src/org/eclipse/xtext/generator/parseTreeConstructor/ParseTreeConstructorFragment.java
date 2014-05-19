@@ -30,7 +30,10 @@ import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstNFAToDot;
  * An {@link org.eclipse.xtext.generator.IGeneratorFragment} to generate model-&gt;text services (aka serializer) for an Xtext language.
  *
  * @author Jan Koehnlein - Javadocs
+ * 
+ * @deprecated use org.eclipse.xtext.generator.serializer.SerializerFragment instead.
  */
+@Deprecated
 public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 
 	private static final Logger log = Logger.getLogger(ParseTreeConstructorFragment.class);
