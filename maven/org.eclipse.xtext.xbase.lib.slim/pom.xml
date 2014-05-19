@@ -45,6 +45,7 @@
 					</execution>
 				</executions>
 				<configuration>
+					<inJar>target/classes</inJar>
 					<options>
 						<option>-dontoptimize</option>
 						<option>-dontnote</option>
