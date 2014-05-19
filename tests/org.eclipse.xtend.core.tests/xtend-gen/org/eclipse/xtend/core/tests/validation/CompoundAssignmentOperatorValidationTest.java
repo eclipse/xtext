@@ -397,4 +397,47 @@ public class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestC
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void test_11() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import static extension compound.IntCompoundExtensions.*");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def foo() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("var foo = new Foo");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("foo += 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def operator_plus(int i) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("this");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _parse = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertNoErrors(_parse);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

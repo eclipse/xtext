@@ -184,4 +184,22 @@ class CompoundAssignmentOperatorValidationTest extends AbstractXtendTestCase {
 		'''.parse.assertNoErrors
 	}
 
+	@Test def void test_11() {
+		'''
+			import static extension compound.IntCompoundExtensions.*
+			
+			class Foo {
+				
+				def foo() {
+					var foo = new Foo
+					foo += 1
+				}
+				
+				def operator_plus(int i) {
+					this
+				}
+			}
+		'''.parse.assertNoErrors
+	}
+
 }
