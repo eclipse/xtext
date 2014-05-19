@@ -50,7 +50,7 @@ public class Download extends AbstractXtendWebsite {
   
   public final static String WIN_32 = "win32";
   
-  private final String currentVersion = "2.5.0";
+  private final String currentVersion = "2.6.0";
   
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
@@ -458,6 +458,57 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("\t\t\t");
     _builder.append("</section>");
     _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<section id=\"downloadLib\" style=\"padding-top: 68px; margin-top: -68px;\">");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("<h2 style=\"padding-top: 15px;\">Download Runtime Libraries</h2>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("<p>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("If you do not use Maven, or some Maven compatible build system you can download the lruntime library from the maven central manually:");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("</p>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("<ul>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("<li><a href=\"http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtext.xbase.lib\">org.eclipse.xtext.xbase.lib (the extensions to JDK and Guava)</a>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("<li><a href=\"http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtend.lib\">org.eclipse.xtend.lib (the active annotations API)</a>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("<li><a href=\"http://search.maven.org/#search%7Cga%7C1%7Ccom.google.guava%20a%3A%22guava%22\">com.google.guava (Google Guava)</a>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("</ul>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("<p>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("Additionally there is a slim version of the library, that includes a proguarded version of Google Guava. This is mainly intended for Android users.");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("</p>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("<ul>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("<li><a href=\"http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtext.xbase.lib.slim\">org.eclipse.xtext.xbase.lib.slim (ProGuarded version includes everything needed)</a>");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("</ul>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("</section>");
+    _builder.newLine();
     _builder.append("\t\t    ");
     _builder.append("<section id=\"MavenSupport\" style=\"padding-top: 68px; margin-top: -68px;\">");
     _builder.newLine();
@@ -620,7 +671,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<p>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("The <a href=\"api/2.4.0/index.html\">runtime library</a> is available from Maven Central, too: <a href=\"http://repo.maven.apache.org/maven2\">http://repo.maven.apache.org/maven2</a>.");
+    _builder.append("The <a href=\"api/2.6.0/index.html\">runtime library</a> is available from Maven Central, too: <a href=\"http://repo.maven.apache.org/maven2\">http://repo.maven.apache.org/maven2</a>.");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("</p>");

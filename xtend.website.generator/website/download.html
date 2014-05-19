@@ -229,6 +229,23 @@
 						Now the features are being downloaded and installed. Eclipse will ask you for a restart when downloading and installation is done.
 					</p>
 			</section>
+			<section id="downloadLib" style="padding-top: 68px; margin-top: -68px;">
+					<h2 style="padding-top: 15px;">Download Runtime Libraries</h2>
+					<p>
+						If you do not use Maven, or some Maven compatible build system you can download the lruntime library from the maven central manually:
+					</p>
+					<ul>
+						<li><a href="http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtext.xbase.lib">org.eclipse.xtext.xbase.lib (the extensions to JDK and Guava)</a>
+						<li><a href="http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtend.lib">org.eclipse.xtend.lib (the active annotations API)</a>
+						<li><a href="http://search.maven.org/#search%7Cga%7C1%7Ccom.google.guava%20a%3A%22guava%22">com.google.guava (Google Guava)</a>
+					</ul>
+					<p>
+						Additionally there is a slim version of the library, that includes a proguarded version of Google Guava. This is mainly intended for Android users.
+					</p>
+					<ul>
+						<li><a href="http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtext.xbase.lib.slim">org.eclipse.xtext.xbase.lib.slim (ProGuarded version includes everything needed)</a>
+					</ul>
+			</section>
 		    <section id="MavenSupport" style="padding-top: 68px; margin-top: -68px;">
 					<h2 style="padding-top: 15px;">Maven Plug-In</h2>
 					<p>
@@ -248,7 +265,7 @@ mvn archetype:generate -DarchetypeGroupId=org.eclipse.xtend -DarchetypeArtifactI
 &lt;plugin&gt;
   &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
   &lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;
-  &lt;version&gt;2.5.0&lt;/version&gt;
+  &lt;version&gt;2.6.0&lt;/version&gt;
   &lt;executions&gt;
     &lt;execution&gt;
       &lt;goals&gt;
@@ -283,7 +300,7 @@ mvn archetype:generate -DarchetypeGroupId=org.eclipse.xtend -DarchetypeArtifactI
 					<section>
 					<h2 style="padding-top: 15px;">Getting the runtime library via Maven</h2>
 					<p>
-						The <a href="api/2.4.0/index.html">runtime library</a> is available from Maven Central, too: <a href="http://repo.maven.apache.org/maven2">http://repo.maven.apache.org/maven2</a>.
+						The <a href="api/2.6.0/index.html">runtime library</a> is available from Maven Central, too: <a href="http://repo.maven.apache.org/maven2">http://repo.maven.apache.org/maven2</a>.
 					</p>
 					The XML for the dependency is :
 					</p>
@@ -293,7 +310,7 @@ mvn archetype:generate -DarchetypeGroupId=org.eclipse.xtend -DarchetypeArtifactI
 &lt;dependency&gt;
   &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
   &lt;artifactId&gt;org.eclipse.xtend.lib&lt;/artifactId&gt;
-  &lt;version&gt;2.5.0&lt;/version&gt;
+  &lt;version&gt;2.6.0&lt;/version&gt;
 &lt;/dependency&gt;</pre>
 						<p>
 					</p>

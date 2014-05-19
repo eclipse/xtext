@@ -298,6 +298,15 @@ ol[
 Still you can overload these operators for your types or even override it for booleans, in which case
 both operands are always evaluated and the defined method is invoked, i.e. no short-circuit execution is happening.
 
+section2[Postfix Operators]
+
+The two postfix operators code[++] and code[--] use the following method mapping:
+
+table[
+  tr[td[code[e1++]]       td[code[e1.operator_plusPlus()]]]
+  tr[td[code[e1--]]       td[code[e1.operator_minusMinus()]]]
+]
+
 section2[Defined Operators in The Library]
 
 Xtend offers operators for common types from the JDK.
@@ -456,7 +465,7 @@ The lack of properties in Java leads to a lot of syntactic noise when working wi
 As Xtend is designed to integrate with existing Java APIs it respects the Java Beans convention,
 hence you can call a setter using an assignment:
 
-code[Java][
+code[Xtend][
   myObj.myProperty = 'foo' // calls myObj.setMyProperty("foo")
 ]
 
@@ -466,6 +475,28 @@ ref:propertyAnnotation[@Property annotation] would rename the local field to cod
 The return type of an assignment is the type of the right hand side, in case it is a simple assignment.
 If it is translated to a setter method it yields whatever the setter method returns.
 
+section3:assignmentOperators[Assignment Operators]
+
+Compound assignment operators can be used as a shorthand for the assignment of a binary expression.
+
+code[Xtend][
+var BigDecimal bd = 45bd
+bd += 12bd // equivalent to bd = bd + 12bd
+bd -= 12bd // equivalent to bd = bd - 12bd
+bd /= 12bd // equivalent to bd = bd / 12bd
+bd *= 12bd // equivalent to bd = bd * 12bd
+]
+
+Compound assignments work automatcially when the infix operator is declared. The following compound assignment operators 
+are supported:
+
+table[
+  tr[td[code[e1 += e2]]       td[code[+]]]
+  tr[td[code[e1 -= e2]]       td[code[-]]]
+  tr[td[code[e1 *= e2]]       td[code[*]]]
+  tr[td[code[e1 /= e2]]       td[code[/]]]
+  tr[td[code[e1 %= e2]]       td[code[%]]]
+]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:blocks[Blocks]
@@ -775,6 +806,27 @@ Checked exceptions that are thrown in the body of a lambda expression but not de
 ref:declaredExceptions[sneaky-throw technique].
 Of course you can always ref:Xtend_Expressions_TryCatch[catch and handle] them.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+section:anonymousClasses[Anonymous Classes]
+
+An anonymous class in Xtend has the very same semantics as in Java (see link[http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5][Java Language Sepcification]).
+Here's an example:
+
+code[Xtend][
+val tabListener = new ActionBar.TabListener() {
+  override onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+    // show the given tab
+  }
+
+  override onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    // hide the given tab
+  }
+
+  override onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    // probably ignore this event
+  }
+};
+]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:ifExpression[If Expression]
@@ -867,6 +919,20 @@ code[Xtend][
 Switches with type guards are a safe and much more readable alternative to instance of / casting cascades you 
 might know from Java.
 
+section2[Fall Through]
+
+You can have multiple type guards and case separate with a comma, to have all of them share the same then part.
+
+code[Xtend][
+  def isMale(String salutation) {
+    switch salutation {
+      case "Mr.", 
+      case "Sir" : true
+      default : false
+    }
+  }
+] 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:forLoop[For Loop]
@@ -890,7 +956,24 @@ code[Xtend][
     doSideEffect(s)
 ]
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+section:traditionalForLoop[Basic For Loop]
 
+The traditional for loop 
+code[Xtend][
+  for (<init-expression> ;  <predicate> ; <update-expression>) body-expression
+] 
+is very similar to the one known from Java, or even C. When executed, it first executes the code[init-expression], 
+where local variables can be declared. Next the code[predicate] is executed and if it evaluates to code[true], the code[body-expression] is executed.
+On any subsequent iterations the code[update-expressio] is executed instead of the init-expression. This happens until the code[predicate] returns code[false].
+
+The type of a for loop is code[Xtend][void].
+
+code[Xtend][
+  for (val i = 0 ; i < s.length ; i++) {
+    println(s.subString(0,i)
+  }
+]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:whileExpression[While Loop]
@@ -998,6 +1081,24 @@ code[Xtend][
     } catch (IOException e) {
       "unknown"
     }
+]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+section:Xtend_Expressions_Synchronized[Synchronized]
+
+The synchonized expression does the same as it does in Java (see link[http://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19][Java Language Specification]).
+The only difference is that in Xtend it is an expression and can therefore be used at more places.
+
+code[Xtend][
+  synchronized(lock) {
+    println("Hello")
+  }
+] 
+
+code[Xtend][
+  val name = synchronized(lock) { 
+    doStuff() 
+  }
 ]
 
 

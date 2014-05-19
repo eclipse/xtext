@@ -555,7 +555,7 @@ public class Download extends AbstractWebsite {
     _builder.append("this, you can manually install the feature");
     _builder.newLine();
     _builder.append("\t\t      ");
-    _builder.append("<strong>  Xtext Antlr-2.0.0");
+    _builder.append("<strong>  Xtext Antlr");
     _builder.newLine();
     _builder.append("\t\t      ");
     _builder.append("</strong> from the itemis update site");

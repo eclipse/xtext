@@ -17,7 +17,7 @@ write a lot of boilerplate manually. For instance, many of the good old design p
 of such patterns in a library and let the compiler do the heavy lifting for you.
 </p>
 <p>
-An <em>Active Annotation</em> is just an annotation declared either in Java or Xtend, which is itself annotated with <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/Active.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.Active" >@Active</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/Active.java" title="View Source Code" >(src)</a>.
+An <em>Active Annotation</em> is just an annotation declared either in Java or Xtend, which is itself annotated with <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/Active.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.Active" >@Active</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/Active.java" title="View Source Code" >(src)</a>.
 <span class="inlinecode">@Active</span> takes a type literal as a parameter pointing to the processor.
 </p>
 <p>
@@ -46,13 +46,13 @@ A processor class must implement one or both of the lifecycle call-back interfac
 There are some base classes for the most common usecases. These implement both interfaces:
 <ul>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/AbstractClassProcessor.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.AbstractClassProcessor" >AbstractClassProcessor</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/AbstractClassProcessor.java" title="View Source Code" >(src)</a> is a base class for class annotations
+		<a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/AbstractClassProcessor.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.AbstractClassProcessor" >AbstractClassProcessor</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/AbstractClassProcessor.java" title="View Source Code" >(src)</a> is a base class for class annotations
 	</li>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/AbstractMethodProcessor.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.AbstractMethodProcessor" >AbstractMethodProcessor</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/AbstractMethodProcessor.java" title="View Source Code" >(src)</a> is a base class for method annotations
+		<a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/AbstractMethodProcessor.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.AbstractMethodProcessor" >AbstractMethodProcessor</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/AbstractMethodProcessor.java" title="View Source Code" >(src)</a> is a base class for method annotations
 	</li>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/AbstractFieldProcessor.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.AbstractFieldProcessor" >AbstractFieldProcessor</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/AbstractFieldProcessor.java" title="View Source Code" >(src)</a> is a base class for field annotations
+		<a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/AbstractFieldProcessor.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.AbstractFieldProcessor" >AbstractFieldProcessor</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/AbstractFieldProcessor.java" title="View Source Code" >(src)</a> is a base class for field annotations
 	</li>
 </ul>
 </p>
@@ -63,7 +63,7 @@ a look at the bases classes and adapt their implementation accordingly.
 <a name="active_annotations_register_globals"></a>
 <h3>Phase 1: Register Globals</h3>
 <p>
-The first phase in the lifecycle of the compiler is about indexing the types as globally available symbols. By implementing a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant" >RegisterGlobalsParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java" title="View Source Code" >(src)</a>
+The first phase in the lifecycle of the compiler is about indexing the types as globally available symbols. By implementing a <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant" >RegisterGlobalsParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java" title="View Source Code" >(src)</a>
 you have the chance to create and register new Java types during this phase. It&apos;s important
 to do this in a first phase so later on the compiler can find and access these types.
 </p>
@@ -91,13 +91,13 @@ For example the ExtractProcessor adds one interface per annotated class:
 </div>
 </p>
 <p>
-The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/RegisterGlobalsContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsContext" >RegisterGlobalsContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsContext.java" title="View Source Code" >(src)</a> provides all the services that are available during 
+The <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/RegisterGlobalsContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsContext" >RegisterGlobalsContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsContext.java" title="View Source Code" >(src)</a> provides all the services that are available during 
 this compilation step. It is passed into the method <span class="inlinecode">doRegisterGlobals()</span> along with a read-only representation of the annotated
 Xtend elements.
 The AbstractClassProcessor in this example is invoked for all classes that are annotated with <span class="inlinecode">@Extract</span>.
 </p>
 <p>
-The compiler calls <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant" >RegisterGlobalsParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java" title="View Source Code" >(src)</a> once per compilation unit
+The compiler calls <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant" >RegisterGlobalsParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java" title="View Source Code" >(src)</a> once per compilation unit
 and provides access to all elements which are annotated with the <em>active annotation</em> this processor
 is registered for. Therefore the <span class="inlinecode">ExtractProcessor</span> is invoked with a list of all classes that are defined in the same Xtend file for
 all the files that are being compiled.
@@ -106,9 +106,9 @@ all the files that are being compiled.
 <h3>Phase 2: Transformation</h3>
 <p>
 In the second phase developers can modify the compiled Java classes and Java code. Annotation processors that implement
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/TransformationParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.TransformationParticipant" >TransformationParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationParticipant.java" title="View Source Code" >(src)</a> participate in this compile step. Similar to the 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant" >RegisterGlobalsParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java" title="View Source Code" >(src)</a> interface the compiler provides two
-arguments: The list of annotated elements and a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/TransformationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext" >TransformationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java" title="View Source Code" >(src)</a>. The context provides services
+<a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/TransformationParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.TransformationParticipant" >TransformationParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationParticipant.java" title="View Source Code" >(src)</a> participate in this compile step. Similar to the 
+<a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant" >RegisterGlobalsParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java" title="View Source Code" >(src)</a> interface the compiler provides two
+arguments: The list of annotated elements and a <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/TransformationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext" >TransformationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java" title="View Source Code" >(src)</a>. The context provides services
 that are specific for this second step.
 </p>
 <p>
@@ -160,7 +160,7 @@ The <span class="inlinecode">ExtractProcessor</span> implements the method <span
 </p>
 <p>
 In the first line, <span class="inlinecode">findInterface</span> retrieves the interface which was registered during the registration of global symbols in the first phase:
-The method is defined in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/TransformationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext" >TransformationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java" title="View Source Code" >(src)</a>
+The method is defined in <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/TransformationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext" >TransformationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java" title="View Source Code" >(src)</a>
 which is used as an <a href="20-classes-and-functions.html#Extension_Provider" title="Go to &quot;Extension Provider&quot;">extension provider</a>.
 </p>
 <p>
@@ -175,16 +175,16 @@ hand side of the assignment is a concatenation of the existing implemented inter
 pointing to the freshly created interface.
 </p>
 <p>
-A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/declaration/TypeReference.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.declaration.TypeReference" >TypeReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/TypeReference.java" title="View Source Code" >(src)</a> can be created using one of the various
-methods from <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/services/TypeReferenceProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.services.TypeReferenceProvider" >TypeReferenceProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/services/TypeReferenceProvider.java" title="View Source Code" >(src)</a> which is a super type
-of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/TransformationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext" >TransformationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java" title="View Source Code" >(src)</a>. These utilities are available as extensions, too.
+A <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/declaration/TypeReference.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.declaration.TypeReference" >TypeReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/TypeReference.java" title="View Source Code" >(src)</a> can be created using one of the various
+methods from <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/services/TypeReferenceProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.services.TypeReferenceProvider" >TypeReferenceProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/services/TypeReferenceProvider.java" title="View Source Code" >(src)</a> which is a super type
+of <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/TransformationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext" >TransformationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java" title="View Source Code" >(src)</a>. These utilities are available as extensions, too.
 </p>
 <a name="active_annotations_code_generation"></a>
 <h3>Phase 3: Code Generation</h3>
 <p>
 A third phase in the lifecycle of the compiler lets you participate in writing and updating the files. In the IDE this phase is only executed on save
 , while the previous two get executed after minor edits in the editor as well. In order to participate your processor needs to implement
- <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/CodeGenerationParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.CodeGenerationParticipant" >CodeGenerationParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/CodeGenerationParticipant.java" title="View Source Code" >(src)</a>. The extract interface example doesn&apos;t make use of this hook, but another example 
+ <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/CodeGenerationParticipant.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.CodeGenerationParticipant" >CodeGenerationParticipant</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/CodeGenerationParticipant.java" title="View Source Code" >(src)</a>. The extract interface example doesn&apos;t make use of this hook, but another example 
  for internationalization which is also included, generates a *.properties file, like this:
 </p>
 <p>
@@ -213,14 +213,14 @@ A third phase in the lifecycle of the compiler lets you participate in writing a
 </div>
 </p>
 <p>
-The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/CodeGenerationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.CodeGenerationContext" >CodeGenerationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/CodeGenerationContext.java" title="View Source Code" >(src)</a> provides all the services that are available during 
+The <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/CodeGenerationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.CodeGenerationContext" >CodeGenerationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/CodeGenerationContext.java" title="View Source Code" >(src)</a> provides all the services that are available during 
 this phase. Have a look at the Java doc for more details.
 </p>
 <a name="active_annotations_expression"></a>
 <h2>On Expressions and Statements</h2>
 <p>
 Most of the generated Java code is represented in the form of in-memory elements. Basically all the structural elements
-are represented as a dedicated <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/declaration/Element.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.declaration.Element" >Element</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/Element.java" title="View Source Code" >(src)</a>.
+are represented as a dedicated <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/declaration/Element.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.declaration.Element" >Element</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/Element.java" title="View Source Code" >(src)</a>.
 If you want to generate the body of a method or the initializer of a field, you have two options.
 </p>
 <a name="active_annotations_compilation_strategies"></a>
@@ -247,8 +247,8 @@ observableType.addMethod(<span class="string">&apos;set&apos;</span>&nbsp;+&nbsp
 </p>
 <p>
 A lambda expression is used to implement the body. This function is invoked later when the actual code is generated.
-It accepts a single parameter which is a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/declaration/CompilationStrategy.CompilationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext" >CompilationStrategy.CompilationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/CompilationStrategy.java" title="View Source Code" >(src)</a>.
-The compilation context provides a convenient way write a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/declaration/TypeReference.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.declaration.TypeReference" >TypeReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/TypeReference.java" title="View Source Code" >(src)</a>
+It accepts a single parameter which is a <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/declaration/CompilationStrategy.CompilationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext" >CompilationStrategy.CompilationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/CompilationStrategy.java" title="View Source Code" >(src)</a>.
+The compilation context provides a convenient way write a <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/declaration/TypeReference.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.declaration.TypeReference" >TypeReference</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/TypeReference.java" title="View Source Code" >(src)</a>
 into a Java source file. It takes existing imports into account and adds new imports on the fly if necessary.
 </p>
 <a name="active_annotations_assigning_expressions"></a>
@@ -312,7 +312,7 @@ possible to use lazy initialization to assign its value. Also a simple check for
 cause trouble with primitive values. A validation for that case would be sensible, too. In order to guide the user dedicated compilation errors should be raised if these constrains are violated.
 </p>
 <p>
-The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/TransformationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext" >TransformationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java" title="View Source Code" >(src)</a> inherits methods for exactly that purpose from the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/macro/services/ProblemSupport.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.services.ProblemSupport" >ProblemSupport</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/services/ProblemSupport.java" title="View Source Code" >(src)</a> service.
+The <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/TransformationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext" >TransformationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java" title="View Source Code" >(src)</a> inherits methods for exactly that purpose from the <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/macro/services/ProblemSupport.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.services.ProblemSupport" >ProblemSupport</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/services/ProblemSupport.java" title="View Source Code" >(src)</a> service.
 </p>
 <p>
 Since the <span class="inlinecode">context</span> is declared as an <a href="20-classes-and-functions.html#Extension_Provider" title="Go to &quot;Extension Provider&quot;">extension provider</a>, those methods can be used as extensions and it allows to implement
@@ -480,7 +480,7 @@ They reside in the <span class="inlinecode">org.eclipse.xtend.lib</span> plug-in
 <a name="propertyAnnotation"></a>
 <h2>@Property</h2>
 <p>
-For fields that are annotated as <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/Property.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.Property" ><span class="inlinecode">@Property</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/Property.java" title="View Source Code" >(src)</a>, the Xtend compiler will generate a Java field, a
+For fields that are annotated as <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/Property.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.Property" ><span class="inlinecode">@Property</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/Property.java" title="View Source Code" >(src)</a>, the Xtend compiler will generate a Java field, a
 getter and, if the field is non-final, a setter method. The name of the Java field will be prefixed with 
 an <span class="inlinecode">_</span> and have the visibility of the Xtend field. The accessor methods are always <span class="inlinecode"><span class="keyword">public</span></span>. 
 Thus, an Xtend field
@@ -511,7 +511,7 @@ will compile to the Java code
 <a name="dataAnnotation"></a>
 <h2>@Data</h2>
 <p>
-The annotation <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtend/lib/Data.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.Data" ><span class="inlinecode">@Data</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/Data.java" title="View Source Code" >(src)</a>, will turn an annotated class into a value object class. A class annotated with <span class="inlinecode">@Data</span> 
+The annotation <a class="jdoc" href="http://www.eclipse.org/xtend/api/2.5.0/org/eclipse/xtend/lib/Data.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.Data" ><span class="inlinecode">@Data</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/Data.java" title="View Source Code" >(src)</a>, will turn an annotated class into a value object class. A class annotated with <span class="inlinecode">@Data</span> 
 is processed according to the following rules:
 </p>
 <p>
