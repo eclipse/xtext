@@ -464,7 +464,7 @@ public class RewritableImportSection {
 		}));
 		Collections.sort(sortMe, new Comparator<XImportDeclaration>() {
 			public int compare(XImportDeclaration o1, XImportDeclaration o2) {
-				return o1.getImportedTypeName().compareTo(o2.getImportedTypeName());
+				return o1.getImportedName().compareTo(o2.getImportedName());
 			}
 		});
 		return sortMe;
