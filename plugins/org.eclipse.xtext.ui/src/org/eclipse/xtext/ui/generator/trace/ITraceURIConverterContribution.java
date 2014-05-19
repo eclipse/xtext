@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.generator.trace;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.common.annotations.Beta;
@@ -27,13 +26,13 @@ public interface ITraceURIConverterContribution {
 	 * resource. Return <code>null</code> if the resource is not handled
 	 * by this contribution.
 	 */
-	@Nullable URI getURIForTrace(XtextResource resource);
+	/* @Nullable */ URI getURIForTrace(XtextResource resource);
 	
 	/**
 	 * Compute the trace URI that points to the location of the given uri.
 	 * Return <code>null</code> if the uri's location is not handled by
 	 * this contribution.
 	 */
-	@Nullable URI getURIForTrace(URI uri);
+	/* @Nullable */ URI getURIForTrace(URI uri);
 	
 }

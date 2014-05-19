@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
@@ -23,7 +21,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class AppliedFeatureLinkingCandidate implements IFeatureLinkingCandidate {
 
 	private final IFeatureLinkingCandidate delegate;
@@ -49,7 +46,7 @@ public class AppliedFeatureLinkingCandidate implements IFeatureLinkingCandidate 
 		return this;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public JvmIdentifiableElement getFeature() {
 		return delegate.getFeature();
 	}

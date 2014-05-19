@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -35,7 +33,6 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class SuspiciouslyOverloadedCandidate implements IFeatureLinkingCandidate, ISuspiciouslyOverloadedCandidate {
 	
 	private final FeatureLinkingCandidate rejectedCandidate;
@@ -146,7 +143,7 @@ public class SuspiciouslyOverloadedCandidate implements IFeatureLinkingCandidate
 		return chosenCandidate.getFeatureTypeName();
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected String getDeclaratorSimpleName(JvmIdentifiableElement element) {
 		if (element instanceof JvmConstructor) {
 			return null;
@@ -157,7 +154,7 @@ public class SuspiciouslyOverloadedCandidate implements IFeatureLinkingCandidate
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public JvmIdentifiableElement getFeature() {
 		return chosenCandidate.getFeature();
 	}

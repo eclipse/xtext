@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -26,7 +24,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class CompoundTypeReference extends LightweightTypeReference {
 
 	private boolean synonym;
@@ -216,7 +213,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public JvmType getType() {
 		if (components != null && components.size() == 1)
 			return components.get(0).getType();
@@ -239,7 +236,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSuperType(JvmType rawType) {
 		if (components == null || components.isEmpty())
 			return null;
@@ -252,7 +249,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSuperType(Class<?> rawType) {
 		if (components == null || components.isEmpty())
 			return null;
@@ -358,7 +355,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
 		if (isSynonym())
 			return visitor.doVisitSynonymTypeReference(this);
@@ -367,7 +364,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		if (isSynonym())
 			return visitor.doVisitSynonymTypeReference(this, param);

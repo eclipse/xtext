@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -22,7 +21,6 @@ import com.google.inject.ImplementedBy;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 @ImplementedBy(DefaultReentrantTypeResolver.class)
 public abstract class AbstractRootedReentrantTypeResolver implements IReentrantTypeResolver {
 

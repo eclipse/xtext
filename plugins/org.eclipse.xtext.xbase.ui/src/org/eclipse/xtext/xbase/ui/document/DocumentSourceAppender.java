@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtext.common.types.JvmArrayType;
@@ -187,7 +186,7 @@ public class DocumentSourceAppender implements ISourceAppender {
 		return this;
 	}
 
-	public void appendType(final @NonNull JvmType type, @NonNull StringBuilder builder) {
+	public void appendType(final /* @NonNull */ JvmType type, /* @NonNull */ StringBuilder builder) {
 		if (type instanceof JvmPrimitiveType || type instanceof JvmVoid || type instanceof JvmTypeParameter) {
 			builder.append(type.getQualifiedName(getInnerTypeSeparator()));
 		} else if (type instanceof JvmArrayType) {
@@ -277,12 +276,12 @@ public class DocumentSourceAppender implements ISourceAppender {
 	}
 	
 	@Override
-	@NonNull
+	/* @NonNull */
 	public String toString() {
 		return builder.toString();
 	}
 
-	@NonNull
+	/* @NonNull */
 	public String getCode() {
 		StringBuilder builder = new StringBuilder();
 		if (whitespaceHelper.getPrefix() != null)

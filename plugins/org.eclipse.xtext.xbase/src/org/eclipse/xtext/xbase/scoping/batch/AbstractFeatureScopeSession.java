@@ -14,8 +14,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -44,7 +42,6 @@ import com.google.common.collect.Lists;
  * 
  * TODO toString, more JavaDoc
  */
-@NonNullByDefault
 public abstract class AbstractFeatureScopeSession implements IFeatureScopeSession {
 
 	public IScope getScope(EObject context, EReference reference, IResolvedTypes types) {
@@ -131,7 +128,7 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		return result;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected AbstractNestedFeatureScopeSession tryCreateNestedSessionWithVisibilityContext(Map<QualifiedName, JvmIdentifiableElement> elements, ITypeReferenceOwner owner,
 			QualifiedName thisName) {
 		if (elements.containsKey(thisName)) {

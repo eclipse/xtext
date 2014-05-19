@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class SuperConstructorDescription extends ConstructorDescription {
 
 	private Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;

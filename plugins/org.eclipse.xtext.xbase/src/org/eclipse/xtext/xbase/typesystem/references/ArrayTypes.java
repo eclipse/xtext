@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -21,7 +19,6 @@ import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ArrayTypes {
 
 	/**
@@ -35,7 +32,7 @@ public class ArrayTypes {
 	 * @param typeReference the to-be-converted reference.
 	 * @return an equivalent {@link ArrayTypeReference} or <code>null</code>.
 	 */
-	@Nullable
+	/* @Nullable */
 	public ArrayTypeReference tryConvertToArray(ParameterizedTypeReference typeReference) {
 		ArrayTypeReference result = doTryConvertToArray(typeReference);
 		if (result != null) {
@@ -57,7 +54,7 @@ public class ArrayTypes {
 	 * 	<li>{@code T extends V, V extends String[]}</li>
 	 * </ul>
 	 */
-	@Nullable
+	/* @Nullable */
 	private ArrayTypeReference doTryConvertToArray(ParameterizedTypeReference typeReference, RecursionGuard<JvmTypeParameter> recursionGuard) {
 		JvmType type = typeReference.getType();
 		if (recursionGuard.tryNext((JvmTypeParameter) type)) {
@@ -83,7 +80,7 @@ public class ArrayTypes {
 		return null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	private ArrayTypeReference doTryConvertToArray(ParameterizedTypeReference typeReference) {
 		LightweightTypeReference parameterizedIterable = typeReference.getSuperType(Iterable.class);
 		if (parameterizedIterable != null) {

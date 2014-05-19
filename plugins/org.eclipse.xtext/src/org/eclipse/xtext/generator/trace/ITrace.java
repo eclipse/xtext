@@ -10,8 +10,6 @@ package org.eclipse.xtext.generator.trace;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.util.ITextRegion;
 
@@ -21,7 +19,6 @@ import org.eclipse.xtext.util.ITextRegion;
  * @noimplement This interface is not intended to be implemented by clients.
  * @noextend This interface is not intended to be extended by clients.
  */
-@NonNullByDefault
 public interface ITrace {
 
 	/**
@@ -45,7 +42,7 @@ public interface ITrace {
 	 * @param localRegion the region in the current resource. May not be <code>null</code>.
 	 * @return the best associated location or <code>null</code> if none.
 	 */
-	@Nullable ILocationInResource getBestAssociatedLocation(ITextRegion localRegion);
+	/* @Nullable */ ILocationInResource getBestAssociatedLocation(ITextRegion localRegion);
 	
 	/**
 	 * Returns all associated {@link ILocationInResource locations} that match the given {@code region}.
@@ -88,14 +85,14 @@ public interface ITrace {
 	 * Returns the language that is associated with the source resource. Never <code>null</code>.
 	 * @return the language that is associated with the source resource. Never <code>null</code>.
 	 */
-	@Nullable LanguageInfo getLanguage();
+	/* @Nullable */ LanguageInfo getLanguage();
 	
 //	/**
 //	 * Returns the source trace for the given storage or <code>null</code> if none.
 //	 * @param associatedStorage the expected target resource. May not be <code>null</code>.
 //	 * @return the source trace for the given storage or <code>null</code> if none.
 //	 */
-//	@Nullable ITrace getAssociatedTrace(IStorage associatedStorage);
+//	/* @Nullable */ ITrace getAssociatedTrace(IStorage associatedStorage);
 
 	/**
 	 * Returns the best {@link ILocationInResource location} that matches the given
@@ -113,7 +110,7 @@ public interface ITrace {
 	 * @param associatedStorage the expected target resource. May not be <code>null</code>.
 	 * @return the best associated location or <code>null</code> if none.
 	 */
-	@Nullable ILocationInResource getBestAssociatedLocation(ITextRegion localRegion, IStorage associatedStorage);
+	/* @Nullable */ ILocationInResource getBestAssociatedLocation(ITextRegion localRegion, IStorage associatedStorage);
 	
 	/**
 	 * Returns all individual {@link ILocationInResource locations} that match the given {@code sourceRegion}
@@ -134,7 +131,7 @@ public interface ITrace {
 	
 	interface Internal {
 		
-		@Nullable
+		/* @Nullable */
 		AbstractTraceRegion getRootTraceRegion();
 		
 	}

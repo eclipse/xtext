@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -21,7 +19,6 @@ import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class FeatureScopeSessionWithContext extends AbstractNestedFeatureScopeSession {
 
 	private ContextualVisibilityHelper visibilityHelper;
@@ -42,7 +39,7 @@ public class FeatureScopeSessionWithContext extends AbstractNestedFeatureScopeSe
 	}
 	
 	@Override
-	public boolean isVisible(JvmMember member, @Nullable LightweightTypeReference receiverType, @Nullable JvmIdentifiableElement receiverFeature) {
+	public boolean isVisible(JvmMember member, /* @Nullable */ LightweightTypeReference receiverType, /* @Nullable */ JvmIdentifiableElement receiverFeature) {
 		// TODO probably bogus implementation
 		boolean result = isVisible(member);
 		if (result && JvmVisibility.PROTECTED == member.getVisibility()) {

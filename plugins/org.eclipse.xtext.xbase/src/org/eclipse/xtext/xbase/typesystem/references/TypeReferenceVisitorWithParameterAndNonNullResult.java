@@ -7,12 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class TypeReferenceVisitorWithParameterAndNonNullResult<Param, Result> extends TypeReferenceVisitorWithParameterAndResult<Param, Result> {
 
 	@Override

@@ -19,8 +19,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -61,7 +59,6 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class AbstractXbaseCompiler {
 
 	@Inject
@@ -88,7 +85,7 @@ public abstract class AbstractXbaseCompiler {
 		return typeResolver;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected JvmType findKnownTopLevelType(Class<?> rawType, Notifier context) {
 		if (rawType.isArray()) {
 			throw new IllegalArgumentException(rawType.getCanonicalName());
@@ -108,7 +105,7 @@ public abstract class AbstractXbaseCompiler {
 		return type;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected JvmType findKnownType(Class<?> rawType, Notifier context) {
 		if (rawType.isArray()) {
 			throw new IllegalArgumentException(rawType.getCanonicalName());
@@ -226,7 +223,7 @@ public abstract class AbstractXbaseCompiler {
 		return parentAppendable;
 	}
 	
-	protected void appendDefaultLiteral(ITreeAppendable b, @Nullable LightweightTypeReference type) {
+	protected void appendDefaultLiteral(ITreeAppendable b, /* @Nullable */ LightweightTypeReference type) {
 		if (type != null && type.isPrimitive()) {
 			Primitive primitiveKind = type.getPrimitiveKind();
 			switch (primitiveKind) {
@@ -265,7 +262,7 @@ public abstract class AbstractXbaseCompiler {
 		return true;
 	}
 	
-	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, @Nullable JvmTypeReference expectedReturnType, @Nullable Set<JvmTypeReference> declaredExceptions) {
+	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, /* @Nullable */ JvmTypeReference expectedReturnType, /* @Nullable */ Set<JvmTypeReference> declaredExceptions) {
 		LightweightTypeReference converted = null;
 		if (expectedReturnType != null) {
 			converted = new OwnedConverter(new StandardTypeReferenceOwner(getTypeComputationServices(), obj)).toLightweightReference(expectedReturnType);
@@ -273,7 +270,7 @@ public abstract class AbstractXbaseCompiler {
 		return compile(obj, parentAppendable, converted, declaredExceptions);
 	}
 	
-	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, @Nullable LightweightTypeReference expectedReturnType, @Nullable Set<JvmTypeReference> declaredExceptions) {
+	public ITreeAppendable compile(XExpression obj, ITreeAppendable parentAppendable, /* @Nullable */ LightweightTypeReference expectedReturnType, /* @Nullable */ Set<JvmTypeReference> declaredExceptions) {
 		if (declaredExceptions == null) {
 			declaredExceptions = newHashSet();
 			assert declaredExceptions != null;
@@ -456,7 +453,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 	
 	protected abstract void internalToConvertedExpression(final XExpression obj, final ITreeAppendable appendable,
-			@Nullable LightweightTypeReference toBeConvertedTo);
+			/* @Nullable */ LightweightTypeReference toBeConvertedTo);
 	
 	protected boolean isPrimitiveVoid(XExpression xExpression) {
 		JvmTypeReference type = getType(xExpression);
@@ -659,7 +656,7 @@ public abstract class AbstractXbaseCompiler {
 	 * @return the variable name under which the result of the expression is stored. Returns <code>null</code> if the
 	 *          expression hasn't been assigned to a local variable before.
 	 */
-	@Nullable
+	/* @Nullable */
 	protected String getReferenceName(XExpression expr, ITreeAppendable b) {
 		if (b.hasName(expr))
 			return b.getName(expr);

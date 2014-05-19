@@ -15,7 +15,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -44,7 +43,7 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 
 	protected String smap;
 
-	protected @Nullable
+	protected /* @Nullable */
 	String generateSmap(AbstractTraceRegion rootTraceRegion, String outputFileName) {
 		List<LineMapping> lineInfo = lineMappingProvider.getLineMapping(rootTraceRegion);
 		if (lineInfo == null || lineInfo.isEmpty())

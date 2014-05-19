@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -17,7 +16,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class StaticFeatureDescriptionWithTypeLiteralReceiver extends StaticFeatureDescriptionWithSyntacticReceiver {
 
 	public StaticFeatureDescriptionWithTypeLiteralReceiver(QualifiedName qualifiedName, JvmFeature feature, XExpression receiver,

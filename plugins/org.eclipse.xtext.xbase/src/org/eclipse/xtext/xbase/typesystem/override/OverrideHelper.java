@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.override;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -43,7 +41,6 @@ import com.google.inject.Singleton;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
-@NonNullByDefault
 public class OverrideHelper {
 
 	@Inject
@@ -76,7 +73,7 @@ public class OverrideHelper {
 	 * }
 	 * </pre>
 	 */
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getReturnTypeOfOverriddenOperation(JvmOperation operation, ITypeReferenceOwner owner, IVisibilityHelper visibilityHelper) {
 		if (operation.getVisibility() == JvmVisibility.PRIVATE || !InferredTypeIndicator.isInferred(operation.getReturnType())) {
 			return null;
@@ -112,7 +109,7 @@ public class OverrideHelper {
 	 * }
 	 * </pre>
 	 */
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getReturnTypeOfOverriddenOperation(JvmOperation operation, LightweightTypeReference context) {
 		if (operation.getVisibility() == JvmVisibility.PRIVATE || !InferredTypeIndicator.isInferred(operation.getReturnType())) {
 			return null;
@@ -125,7 +122,7 @@ public class OverrideHelper {
 		return result;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected JvmOperation findOverriddenOperation(JvmOperation operation, LightweightTypeReference declaringType,
 			TypeParameterSubstitutor<?> substitutor, OwnedConverter converter, IVisibilityHelper visibilityHelper) {
 		int parameterSize = operation.getParameters().size();
@@ -169,7 +166,7 @@ public class OverrideHelper {
 		return substitutor;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public JvmOperation findOverriddenOperation(JvmOperation operation) {
 		if (operation.getVisibility() == JvmVisibility.PRIVATE) {
 			return null;

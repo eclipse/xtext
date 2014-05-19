@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -43,7 +42,6 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 
 	private final FunctionTypes functionTypes;

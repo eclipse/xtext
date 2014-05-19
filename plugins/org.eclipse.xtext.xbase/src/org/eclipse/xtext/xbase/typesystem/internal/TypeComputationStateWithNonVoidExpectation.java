@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -21,7 +19,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class TypeComputationStateWithNonVoidExpectation extends AbstractStackedTypeComputationState {
 
 	protected TypeComputationStateWithNonVoidExpectation(
@@ -37,7 +34,7 @@ public class TypeComputationStateWithNonVoidExpectation extends AbstractStackedT
 		return Collections.singletonList(result);
 	}
 	
-	protected AbstractTypeExpectation createTypeExpectation(@Nullable LightweightTypeReference expectedType, AbstractTypeComputationState actualState) {
+	protected AbstractTypeExpectation createTypeExpectation(/* @Nullable */ LightweightTypeReference expectedType, AbstractTypeComputationState actualState) {
 		AbstractTypeExpectation result = null;
 		if (expectedType != null) {
 			throw new IllegalArgumentException("expectedType should be null");

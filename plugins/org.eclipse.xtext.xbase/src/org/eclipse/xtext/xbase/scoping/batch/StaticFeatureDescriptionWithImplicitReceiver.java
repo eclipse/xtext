@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
@@ -31,7 +30,7 @@ public class StaticFeatureDescriptionWithImplicitReceiver extends StaticFeatureD
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getImplicitReceiverType() {
 		return implicitReceiverType;
 	}

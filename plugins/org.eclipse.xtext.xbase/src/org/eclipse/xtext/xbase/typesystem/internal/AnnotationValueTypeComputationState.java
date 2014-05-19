@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.XExpression;
@@ -23,7 +21,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API 
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class AnnotationValueTypeComputationState extends AbstractRootTypeComputationState {
 
 	private final JvmAnnotationValue annotationValue;
@@ -44,7 +41,7 @@ public class AnnotationValueTypeComputationState extends AbstractRootTypeComputa
 	}
 
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getExpectedType() {
 		JvmOperation operation = annotationValue.getOperation();
 		LightweightTypeReference result = getResolvedTypes().getActualType(operation);

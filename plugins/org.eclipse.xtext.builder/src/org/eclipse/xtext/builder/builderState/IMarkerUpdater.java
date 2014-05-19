@@ -10,7 +10,6 @@ package org.eclipse.xtext.builder.builderState;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 
 import com.google.inject.ImplementedBy;
@@ -33,5 +32,5 @@ public interface IMarkerUpdater {
 	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be
 	 *        reported and that the operation cannot be cancelled.
 	 */
-	public void updateMarkers(Delta delta, @Nullable ResourceSet resourceSet, IProgressMonitor monitor);
+	public void updateMarkers(Delta delta, /* @Nullable */ ResourceSet resourceSet, IProgressMonitor monitor);
 }

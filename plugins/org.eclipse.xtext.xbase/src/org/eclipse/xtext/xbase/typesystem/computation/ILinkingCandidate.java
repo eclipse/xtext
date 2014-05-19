@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
@@ -37,7 +35,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public interface ILinkingCandidate {
 
 	/**
@@ -76,7 +73,7 @@ public interface ILinkingCandidate {
 	/**
 	 * The currently considered feature (if any). Otherwise <code>null</code>.
 	 */
-	@Nullable JvmIdentifiableElement getFeature();
+	/* @Nullable */ JvmIdentifiableElement getFeature();
 	
 	/**
 	 * The current expression that shall be linked.

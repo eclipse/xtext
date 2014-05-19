@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -27,7 +26,6 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ImplicitReceiver extends AbstractImplicitFeature {
 
 	public ImplicitReceiver(XAbstractFeatureCall featureCall, XAbstractFeatureCall implicit,

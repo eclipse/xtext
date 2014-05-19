@@ -9,13 +9,11 @@ package org.eclipse.xtext.generator.trace;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
 /**
  * A trace region that will not be added to the child list of the given parent.
  */
-@NonNullByDefault
 public class TemporaryTraceRegion extends AbstractStatefulTraceRegion {
 	public TemporaryTraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, List<ILocationData> locations,
 			AbstractTraceRegion parent) {

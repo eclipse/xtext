@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmVisibility;
 
@@ -21,7 +20,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
  */
 public class PublicVisibilityHelper implements IVisibilityHelper {
 
-	public boolean isVisible(@NonNull JvmMember member) {
+	public boolean isVisible(/* @NonNull */ JvmMember member) {
 		return member.getVisibility() == JvmVisibility.PUBLIC;
 	}
 	

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -16,7 +15,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class NullFeatureLinkingCandidate extends AbstractNullLinkingCandidate implements IFeatureLinkingCandidate {
 
 	private AbstractTypeComputationState state;

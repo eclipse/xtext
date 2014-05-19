@@ -11,8 +11,6 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.util.Pair;
 
@@ -37,21 +35,21 @@ public interface IStorage2UriMapperContribution {
 	/**
 	 * Allows to reject a given folder, e.g. the bin folder of a {@link IJavaProject java project}.
 	 */
-	boolean isRejected(@NonNull IFolder folder);
+	boolean isRejected(/* @NonNull */ IFolder folder);
 	
 	/**
 	 * Returns all the pairs of {@link IStorage} and {@link IProject} that map to
 	 * the given {@link URI}, e.g. if the uri points to an archive file that is 
 	 * used by different projects, all known references should be returned.
 	 */
-	@NonNull
-	Iterable<Pair<IStorage, IProject>> getStorages(@NonNull URI uri);
+	/* @NonNull */
+	Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri);
 	
 	/**
 	 * Returns the URI for the given storage or <code>null</code> if this contribution
 	 * does no handle the storage explicitly.
 	 */
-	@Nullable
-	URI getUri(@NonNull IStorage storage);
+	/* @Nullable */
+	URI getUri(/* @NonNull */ IStorage storage);
 	
 }

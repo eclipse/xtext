@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
@@ -23,7 +21,6 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
  * @noinstantiate This class is not intended to be instantiated by clients.
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class TypeAssigner implements ITypeAssigner {
 	private final AbstractTypeComputationState state;
 
@@ -35,11 +32,11 @@ public class TypeAssigner implements ITypeAssigner {
 		return state;
 	}
 
-	public void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference actualType) {
+	public void assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference actualType) {
 		assignType(element, actualType, true);
 	}
 	
-	protected void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference actualType, boolean addToChildScope) {
+	protected void assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference actualType, boolean addToChildScope) {
 		if (actualType != null) {
 			state.getResolvedTypes().setType(element, actualType);
 		} else {

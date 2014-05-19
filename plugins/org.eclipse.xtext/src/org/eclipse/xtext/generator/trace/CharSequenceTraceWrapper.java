@@ -9,8 +9,6 @@ package org.eclipse.xtext.generator.trace;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
@@ -20,7 +18,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class CharSequenceTraceWrapper {
 
 	@Inject
@@ -38,7 +35,7 @@ public class CharSequenceTraceWrapper {
 		return wrapWithTraceData(sequence, originResourceURI, originResourceURI.segment(1), originOffset, originLength, originLineNumber, originEndLineNumber);
 	}
 	
-	public CharSequence wrapWithTraceData(CharSequence sequence, URI originURI, @Nullable String originProject, int originOffset, int originLength, int originLineNumber, int originEndLineNumber) {
+	public CharSequence wrapWithTraceData(CharSequence sequence, URI originURI, /* @Nullable */ String originProject, int originOffset, int originLength, int originLineNumber, int originEndLineNumber) {
 		return new CharSequenceBasedTraceRegionProvider(sequence, originURI, originOffset, originLength, originLineNumber, originEndLineNumber);
 	}
 	

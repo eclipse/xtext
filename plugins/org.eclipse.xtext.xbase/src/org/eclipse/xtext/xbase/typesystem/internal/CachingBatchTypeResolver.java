@@ -9,9 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -36,8 +33,8 @@ public class CachingBatchTypeResolver extends AbstractBatchTypeResolver {
 	private DefaultBatchTypeResolver delegate;
 	
 	@Override
-	@NonNull
-	protected IResolvedTypes doResolveTypes(final @Nullable EObject object) {
+	/* @NonNull */
+	protected IResolvedTypes doResolveTypes(final /* @Nullable */ EObject object) {
 		// TODO: remove when we switch to an Xtend scope provider without artificial feature calls  
 		EObject nonArtificialObject = object;
 		if(object.eResource() == null && object instanceof XAbstractFeatureCall) {
@@ -60,7 +57,6 @@ public class CachingBatchTypeResolver extends AbstractBatchTypeResolver {
 		return result;
 	}
 	
-	@NonNullByDefault
 	protected static class LazyResolvedTypes extends ForwardingResolvedTypes {
 
 		private final IReentrantTypeResolver resolver;

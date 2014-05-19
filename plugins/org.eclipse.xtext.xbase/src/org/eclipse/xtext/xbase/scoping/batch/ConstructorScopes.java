@@ -11,7 +11,6 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -77,7 +76,7 @@ public class ConstructorScopes {
 	protected IScope createAnonymousClassConstructorScope(final JvmGenericType anonymousType, EObject context, final IFeatureScopeSession session) {
 		// we don't care about the type scope since the type is well known here
 		IVisibilityHelper protectedIsVisible = new IVisibilityHelper() {
-			public boolean isVisible(@NonNull JvmMember member) {
+			public boolean isVisible(/* @NonNull */ JvmMember member) {
 				return member.getVisibility() != JvmVisibility.PRIVATE;
 			}
 		};

@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -46,7 +44,6 @@ import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
  * 
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public interface ITypeComputationState {
 
 	/**
@@ -143,7 +140,7 @@ public interface ITypeComputationState {
 	 * 
 	 * @param context an indicator that describes the context of this type checkpoint, e.g. an {@link XCasePart}.
 	 */
-	ITypeComputationState withTypeCheckpoint(@Nullable EObject context);
+	ITypeComputationState withTypeCheckpoint(/* @Nullable */ EObject context);
 	
 	ITypeComputationState withExpectedExceptions(List<LightweightTypeReference> declaredExceptionTypes);
 	
@@ -154,7 +151,7 @@ public interface ITypeComputationState {
 	 * 
 	 * @throws IllegalArgumentException if the given expression is the currently computed expression.
 	 */
-	ITypeComputationResult computeTypes(@Nullable XExpression expression);
+	ITypeComputationResult computeTypes(/* @Nullable */ XExpression expression);
 	
 	/**
 	 * Assigns the type to the given element and makes the element available in the scope.
@@ -168,7 +165,7 @@ public interface ITypeComputationState {
 	 * @see #assignTypes()
 	 * @see ITypeAssigner
 	 */
-	ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type);
+	ITypeComputationState assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference type);
 	
 	/**
 	 * Assigns the given type to the given element and optionally adds the element to the scope.
@@ -182,7 +179,7 @@ public interface ITypeComputationState {
 	 * @see #assignTypes()
 	 * @see #addLocalToCurrentScope(JvmIdentifiableElement)
 	 */
-	ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type, boolean addToChildScope);
+	ITypeComputationState assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference type, boolean addToChildScope);
 	
 	/**
 	 * Obtain a new {@link ITypeAssigner} that allows to add a bulk of {@link JvmIdentifiableElement elements} to this computation state.

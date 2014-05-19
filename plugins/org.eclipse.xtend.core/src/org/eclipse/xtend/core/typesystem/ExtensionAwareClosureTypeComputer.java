@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.typesystem;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -28,7 +27,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ExtensionAwareClosureTypeComputer extends ClosureTypeComputer {
 	protected ExtensionAwareClosureTypeComputer(XClosure closure, ITypeExpectation expectation,
 			ITypeComputationState state) {

@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.EnumSet;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
@@ -20,7 +18,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class StaticExtensionFeatureDescriptionWithImplicitFirstArgument extends StaticExtensionFeatureDescription {
 
 	protected StaticExtensionFeatureDescriptionWithImplicitFirstArgument(
@@ -33,13 +30,13 @@ public class StaticExtensionFeatureDescriptionWithImplicitFirstArgument extends 
 	}
 
 	@Override
-	@Nullable
+	/* @Nullable */
 	public XExpression getSyntacticReceiver() {
 		return null;
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSyntacticReceiverType() {
 		return null;
 	}
@@ -50,13 +47,13 @@ public class StaticExtensionFeatureDescriptionWithImplicitFirstArgument extends 
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public XExpression getImplicitFirstArgument() {
 		return super.getSyntacticReceiver();
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getImplicitFirstArgumentType() {
 		return super.getSyntacticReceiverType();
 	}

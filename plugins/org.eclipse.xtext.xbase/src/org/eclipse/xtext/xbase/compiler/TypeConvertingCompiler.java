@@ -11,8 +11,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -38,7 +36,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@NonNullByDefault
 public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	private final static String REASSIGNED_THIS_IN_LAMBDA = "!reassigned_this_for_lambda!";
@@ -52,7 +49,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	@Override
 	protected final void internalToConvertedExpression(final XExpression obj, ITreeAppendable appendable,
-			@Nullable LightweightTypeReference toBeConvertedTo) {
+			/* @Nullable */ LightweightTypeReference toBeConvertedTo) {
 		if (toBeConvertedTo != null) {
 			LightweightTypeReference actualType = getLightweightType(obj);
 			if (actualType.isPrimitiveVoid()) {
@@ -152,7 +149,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		}
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected JvmOperation findImplementingOperation(LightweightTypeReference closureType) {
 		return getTypeComputationServices().getFunctionTypes().findImplementingOperation(closureType);
 	}

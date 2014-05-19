@@ -10,12 +10,10 @@ package org.eclipse.xtext.xbase.compiler;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSerializer;
 
-@NonNullByDefault
 public abstract class AbstractStringBuilderBasedAppendable implements IAppendable {
 
 	private StringBuilder builder = new StringBuilder(8 * 1024);

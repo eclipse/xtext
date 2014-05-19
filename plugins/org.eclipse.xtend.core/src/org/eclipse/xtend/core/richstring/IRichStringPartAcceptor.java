@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.richstring;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XExpression;
@@ -20,20 +18,19 @@ import org.eclipse.xtext.xbase.XExpression;
  * of the {@link RichStringProcessor} by means of {@link #forLoopHasNext()}.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public interface IRichStringPartAcceptor {
 
 	/**
 	 * @param text the semantic text. May not be <code>null</code>.
 	 * @param origin the value holder for the full text or null, if unknown.
 	 */
-	void acceptSemanticText(CharSequence text, @Nullable RichStringLiteral origin);
+	void acceptSemanticText(CharSequence text, /* @Nullable */ RichStringLiteral origin);
 	
 	/**
 	 * @param text the template text. May not be <code>null</code>.
 	 * @param origin the value holder for the full text or null, if unknown.
 	 */
-	void acceptTemplateText(CharSequence text, @Nullable RichStringLiteral origin);
+	void acceptTemplateText(CharSequence text, /* @Nullable */ RichStringLiteral origin);
 
 	/**
 	 * Indicates a semantic line break in a rich string literal.
@@ -86,14 +83,14 @@ public interface IRichStringPartAcceptor {
 	 * @param indentation the additional indentation for any line besides the first one.
 	 * @return <code>true</code> if the for-loop body should be evaluated.
 	 */
-	boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, CharSequence indentation);
+	boolean forLoopHasNext(/* @Nullable */ XExpression before, /* @Nullable */ XExpression separator, CharSequence indentation);
 	
 	/**
 	 * Announces that an <pre>«ENDFOR»</pre> has been consumed.
 	 * @param after the expression that should be evaluated after the last item of the loop, if any.
 	 * @param indentation the additional indentation for any line besides the first one.
 	 */
-	void acceptEndFor(@Nullable XExpression after, CharSequence indentation);
+	void acceptEndFor(/* @Nullable */ XExpression after, CharSequence indentation);
 	
 	/**
 	 * Announces that an <pre>«expression»</pre> has been consumed. If the expression's 

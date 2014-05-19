@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.annotations.Beta;
@@ -21,7 +19,6 @@ import com.google.common.annotations.Beta;
  * @since 2.4
  */
 @Beta
-@NonNullByDefault
 public interface ISynchronizable<Synchronizable> {
 
 	/**
@@ -35,7 +32,7 @@ public interface ISynchronizable<Synchronizable> {
 	 * @param unit the action to perform. May not be <code>null</code>
 	 * @exception Exception the exception that was thrown by the unit.
 	 */
-	@Nullable
+	/* @Nullable */
 	<Result> Result execute(IUnitOfWork<Result, ? super Synchronizable> unit) throws Exception;
 	
 }

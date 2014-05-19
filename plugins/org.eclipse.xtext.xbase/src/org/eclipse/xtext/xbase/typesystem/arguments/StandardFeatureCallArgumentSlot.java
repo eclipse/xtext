@@ -10,15 +10,12 @@ package org.eclipse.xtext.xbase.typesystem.arguments;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class StandardFeatureCallArgumentSlot implements IFeatureCallArgumentSlot {
 
 	protected final StandardFeatureCallArguments parent;
@@ -41,12 +38,12 @@ public class StandardFeatureCallArgumentSlot implements IFeatureCallArgumentSlot
 		return Collections.singletonList(getArgumentExpression());
 	}
 
-	@Nullable
+	/* @Nullable */
 	public XExpression getArgumentExpression() {
 		return parent.internalGetArgument(idx);
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getDeclaredType() {
 		return parent.internalGetParameterType(idx);
 	}

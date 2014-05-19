@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -38,7 +37,6 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeResolver {
 
 	@Inject

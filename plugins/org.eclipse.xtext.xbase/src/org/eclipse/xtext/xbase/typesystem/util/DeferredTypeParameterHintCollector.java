@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -30,7 +29,6 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString - focus on differences to ActualTypeArgumentCollector and UnboundTypeParameterAwareTypeArgumentCollector
  */
-@NonNullByDefault
 public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePairWalker {
 	
 	protected class UnboundTypeParameterHintCollector extends UnboundTypeReferenceTraverser {

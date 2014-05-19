@@ -28,7 +28,7 @@ import com.google.inject.Injector;
 public class GenericResourceServiceProvider implements IResourceServiceProvider {
 
 	@Inject
-//	@Nullable
+	/* @Nullable */
 	private IContainer.Manager containerManager;
 	
 	public IContainer.Manager getContainerManager() {
@@ -43,7 +43,7 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 	}
 
 	@Inject
-//	@Nullable
+	/* @Nullable */
 	private IResourceValidator resourceValidator = IResourceValidator.NULL;
 
 	public IResourceValidator getResourceValidator() {

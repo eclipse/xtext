@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.arguments;
 
 import java.util.List;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -18,7 +16,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @noextend This interface is not intended to be extended by clients.
  * @noimplement This interface is not intended to be implemented by clients.
  */
-@NonNullByDefault
 @SuppressWarnings("all")
 public interface IFeatureCallArgumentSlot {
   public abstract boolean isVarArg();
@@ -32,15 +29,13 @@ public interface IFeatureCallArgumentSlot {
   public abstract List<XExpression> getArgumentExpressions();
   
   /**
-   * @throws IllegalStateException iff {@link #isVarArg} and the number of arguments is not equal to '1'.
+   * @Nullable
    */
-  @Nullable
   public abstract XExpression getArgumentExpression();
   
   /**
-   * @throws IllegalStateException iff {@link #isSuperfluous}
+   * @Nullable
    */
-  @Nullable
   public abstract LightweightTypeReference getDeclaredType();
   
   public abstract void markProcessed();

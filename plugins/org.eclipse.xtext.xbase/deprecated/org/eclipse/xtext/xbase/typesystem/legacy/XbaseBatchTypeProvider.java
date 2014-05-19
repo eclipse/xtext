@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.legacy;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
@@ -30,7 +29,7 @@ public class XbaseBatchTypeProvider implements ITypeProvider {
 	
 	@Inject private IBatchTypeResolver typeResolver;
 	
-	@NonNull
+	/* @NonNull */
 	protected IResolvedTypes getResolvedTypes(EObject object) {
 		return typeResolver.resolveTypes(object);
 	}

@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -26,7 +25,6 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API 
  * TODO JavaDoc, toString, inline into super type if only subtype and super type not used besides in tests
  */
-@NonNullByDefault
 public class UnboundTypeParameterAwareTypeArgumentCollector extends ActualTypeArgumentCollector {
 
 	protected class UnboundTypeParameterAwareUnboundTypeReferenceTraverser extends UnboundTypeReferenceTraverser {

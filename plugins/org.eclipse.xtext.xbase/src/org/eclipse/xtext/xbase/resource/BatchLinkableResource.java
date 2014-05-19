@@ -15,8 +15,6 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -53,7 +51,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	 * Returns the lock of the owning {@link ResourceSet}, if it exposes such a lock.
 	 * Otherwise this resource itself is used as the lock context.
 	 */
-	@NonNull
+	/* @NonNull */
 	public Object getLock() {
 		ResourceSet resourceSet = getResourceSet();
 		if (resourceSet instanceof ISynchronizable<?>) {
@@ -67,8 +65,8 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	 * 
 	 * @since 2.4
 	 */
-	@Nullable
-	public <Result> Result execute(@NonNull IUnitOfWork<Result, ? super BatchLinkableResource> unit) throws Exception {
+	/* @Nullable */
+	public <Result> Result execute(/* @NonNull */ IUnitOfWork<Result, ? super BatchLinkableResource> unit) throws Exception {
 		synchronized (getLock()) {
 			return unit.exec(this);
 		}

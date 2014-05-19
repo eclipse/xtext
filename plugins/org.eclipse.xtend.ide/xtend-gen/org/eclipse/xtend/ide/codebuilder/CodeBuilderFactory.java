@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.codebuilder;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -38,7 +37,6 @@ import org.eclipse.xtend.ide.codebuilder.XtendMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendParameterBuilder;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
@@ -47,7 +45,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
  * @author Sebastian Benz - Inspiration
  * @author Jan Koehnlein - Initial implementation and API
  */
-@NonNullByDefault
 @SuppressWarnings("all")
 public class CodeBuilderFactory {
   @Inject

@@ -31,7 +31,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.builder.trace.TraceMarkers;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
@@ -479,7 +478,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	/**
 	 * @since 2.3
 	 */
-	@Nullable
+	/* @Nullable */
 	protected IFile getTraceFile(IFile file) {
 		IStorage traceFile = fileBasedTraceInformation.getTraceFile(file);
 		if (traceFile instanceof IFile) {

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -24,7 +23,6 @@ import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class LocalTypeSubstitutor extends TypeReferenceVisitorWithParameterAndNonNullResult<VarianceInfo, LocalTypeSubstitutor.SubstitutionResult> {
 	
 	static class SubstitutionResult {

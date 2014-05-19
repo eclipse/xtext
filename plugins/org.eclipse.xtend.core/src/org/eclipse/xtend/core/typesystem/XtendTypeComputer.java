@@ -9,8 +9,6 @@ package org.eclipse.xtend.core.typesystem;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.RichString;
@@ -45,7 +43,6 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 
 	@Inject
@@ -190,7 +187,7 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	}
 	
 	@Override
-	protected ITypeComputationState assignType(JvmFormalParameter param, @Nullable LightweightTypeReference type,
+	protected ITypeComputationState assignType(JvmFormalParameter param, /* @Nullable */ LightweightTypeReference type,
 			ITypeComputationState state) {
 		ITypeComputationState result = super.assignType(param, type, state);
 		if (param instanceof XtendFormalParameter && ((XtendFormalParameter) param).isExtension()) {

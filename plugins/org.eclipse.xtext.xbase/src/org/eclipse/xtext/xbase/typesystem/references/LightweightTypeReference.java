@@ -16,8 +16,6 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -60,7 +58,6 @@ import com.google.common.primitives.Ints;
  * ?? - getFeatures (returns feature handles?)
  *  - getFeatureByName
  */
-@NonNullByDefault
 public abstract class LightweightTypeReference {
 	
 	public static final int KIND_LIGHTWEIGHT_TYPE_REFERENCE = 1;
@@ -87,7 +84,7 @@ public abstract class LightweightTypeReference {
 		private IdentifierFunction() {
 		}
 		
-		public String apply(@Nullable LightweightTypeReference reference) {
+		public String apply(/* @Nullable */ LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");
 			return reference.getIdentifier();
@@ -101,7 +98,7 @@ public abstract class LightweightTypeReference {
 		private UniqueIdentifierFunction() {
 		}
 		
-		public String apply(@Nullable LightweightTypeReference reference) {
+		public String apply(/* @Nullable */ LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");
 			return reference.getUniqueIdentifier();
@@ -115,7 +112,7 @@ public abstract class LightweightTypeReference {
 		private JavaIdentifierFunction() {
 		}
 		
-		public String apply(@Nullable LightweightTypeReference reference) {
+		public String apply(/* @Nullable */ LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");
 			return reference.getJavaIdentifier();
@@ -129,7 +126,7 @@ public abstract class LightweightTypeReference {
 		private SimpleNameFunction() {
 		}
 		
-		public String apply(@Nullable LightweightTypeReference reference) {
+		public String apply(/* @Nullable */ LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");
 			return reference.getSimpleName();
@@ -178,7 +175,7 @@ public abstract class LightweightTypeReference {
 		return owner == getOwner();
 	}
 	
-	protected <T> List<T> expose(@Nullable List<T> list) {
+	protected <T> List<T> expose(/* @Nullable */ List<T> list) {
 		if (list == null) {
 			return Collections.emptyList();
 		}
@@ -217,7 +214,7 @@ public abstract class LightweightTypeReference {
 		return type.toJavaCompliantTypeReference(visibilityHelper);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected List<LightweightTypeReference> getNonInterfaceTypes(List<LightweightTypeReference> components) {
 		List<LightweightTypeReference> nonInterfaceTypes = null;
 		for(LightweightTypeReference component: components) {
@@ -235,7 +232,7 @@ public abstract class LightweightTypeReference {
 		return nonInterfaceTypes;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public abstract JvmType getType();
 	
 	public LightweightTypeReference getWrapperTypeIfPrimitive() {
@@ -246,12 +243,12 @@ public abstract class LightweightTypeReference {
 		return this;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public Primitives.Primitive getPrimitiveKind() {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public Primitives.Primitive getPrimitiveKindIfWrapperType() {
 		return null;
 	}
@@ -333,7 +330,7 @@ public abstract class LightweightTypeReference {
 	 * 
 	 * @return an equivalent list type or <code>null</code>.
 	 */
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference tryConvertToListType() {
 		return null;
 	}
@@ -345,7 +342,7 @@ public abstract class LightweightTypeReference {
 	 * @see #isArray()
 	 * @return the compoent type of the current array or <code>null</code>.
 	 */
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getComponentType() {
 		return null;
 	}
@@ -370,7 +367,7 @@ public abstract class LightweightTypeReference {
 	 * @param rawType the raw type that should be resolved.
 	 * @return the resolved super type.
 	 */
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSuperType(Class<?> rawType) {
 		return null;
 	}
@@ -382,7 +379,7 @@ public abstract class LightweightTypeReference {
 	 * @param rawType the raw type that should be resolved.
 	 * @return the resolved super type.
 	 */
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getSuperType(JvmType rawType) {
 		return null;
 	}
@@ -423,7 +420,7 @@ public abstract class LightweightTypeReference {
 			
 		});
 		Collections.sort(result, new Comparator<LightweightTypeReference>() {
-			public int compare(@Nullable LightweightTypeReference o1, @Nullable LightweightTypeReference o2) {
+			public int compare(/* @Nullable */ LightweightTypeReference o1, /* @Nullable */ LightweightTypeReference o2) {
 				if (o1 == null || o2 == null) {
 					throw new IllegalArgumentException();
 				}
@@ -620,7 +617,7 @@ public abstract class LightweightTypeReference {
 	
 	public abstract String getJavaIdentifier();
 	
-	@Nullable
+	/* @Nullable */
 	protected JvmType findType(Class<?> type) {
 		return getServices().getTypeReferences().findDeclaredType(type, getOwner().getContextResourceSet());
 	}
@@ -628,7 +625,7 @@ public abstract class LightweightTypeReference {
 	/**
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference internalFindTopLevelType(Class<?> rawType) {
 		ResourceSet resourceSet = getOwner().getContextResourceSet();
 		Resource typeResource = resourceSet.getResource(URIHelperConstants.OBJECTS_URI.appendSegment(rawType.getName()), true);
@@ -663,12 +660,12 @@ public abstract class LightweightTypeReference {
 		visitor.doVisitTypeReference(this, param);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
 		return visitor.doVisitTypeReference(this);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		return visitor.doVisitTypeReference(this, param);
 	}
@@ -718,7 +715,7 @@ public abstract class LightweightTypeReference {
 	 * 
 	 * @see #tryConvertToFunctionTypeReference(boolean)
 	 */
-	@Nullable
+	/* @Nullable */
 	public FunctionTypeReference getAsFunctionTypeReference() {
 		return null;
 	}
@@ -729,7 +726,7 @@ public abstract class LightweightTypeReference {
 	 * @param rawType if a raw view on the function type is sufficient.
 	 * @see #getAsFunctionTypeReference()
 	 */
-	@Nullable
+	/* @Nullable */
 	public FunctionTypeReference tryConvertToFunctionTypeReference(boolean rawType) {
 		return null;
 	}
@@ -742,7 +739,7 @@ public abstract class LightweightTypeReference {
 	 * 
 	 * @return an equivalent {@link ArrayTypeReference} or <code>null</code>.
 	 */
-	@Nullable
+	/* @Nullable */
 	public ArrayTypeReference tryConvertToArray() {
 		return null;
 	}

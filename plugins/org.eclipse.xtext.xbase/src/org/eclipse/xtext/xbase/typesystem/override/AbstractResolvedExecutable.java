@@ -11,8 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -36,7 +34,6 @@ import com.google.common.collect.Lists;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class AbstractResolvedExecutable implements IResolvedExecutable {
 
 	private final LightweightTypeReference contextType;
@@ -123,7 +120,7 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 		return result.toString();
 	}
 	
-	protected LightweightTypeReference getResolvedReference(@Nullable JvmTypeReference unresolved) {
+	protected LightweightTypeReference getResolvedReference(/* @Nullable */ JvmTypeReference unresolved) {
 		if (unresolved == null) {
 			ITypeReferenceOwner owner = getContextType().getOwner();
 			JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
@@ -183,7 +180,7 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 				return false;
 			}
 			@Override
-			@Nullable
+			/* @Nullable */
 			protected LightweightMergedBoundTypeArgument getBoundTypeArgument(JvmTypeParameter type,
 					ConstraintVisitingInfo info) {
 				LightweightMergedBoundTypeArgument result = super.getBoundTypeArgument(type, info);

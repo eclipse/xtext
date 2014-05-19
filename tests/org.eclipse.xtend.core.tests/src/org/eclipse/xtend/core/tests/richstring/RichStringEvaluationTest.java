@@ -14,8 +14,6 @@ import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
@@ -81,13 +79,13 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		}
 		
 		@Override
-		public void acceptSemanticText(@NonNull CharSequence text, @Nullable RichStringLiteral origin) {
+		public void acceptSemanticText(/* @NonNull */ CharSequence text, /* @Nullable */ RichStringLiteral origin) {
 			if (!ignore())
 				currentLine.append(text);
 		}
 
 		@Override
-		public void acceptSemanticLineBreak(int length, @NonNull RichStringLiteral origin, boolean controlStructureSeen) {
+		public void acceptSemanticLineBreak(int length, /* @NonNull */ RichStringLiteral origin, boolean controlStructureSeen) {
 			if (!ignore()) {
 				firstLine = false;
 				String newLine = currentLine.append('\n').toString();
@@ -99,7 +97,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		}
 
 		@Override
-		public void acceptIfCondition(@NonNull XExpression condition) {
+		public void acceptIfCondition(/* @NonNull */ XExpression condition) {
 			if (ignore()) {
 				ignoreStack.push(Boolean.TRUE);
 			} else {
@@ -115,7 +113,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		}
 
 		@Override
-		public void acceptElseIfCondition(@NonNull XExpression condition) {
+		public void acceptElseIfCondition(/* @NonNull */ XExpression condition) {
 			if (!internalIgnore()) {
 				if (printElse.peek()) {
 					XBooleanLiteral literal = (XBooleanLiteral) condition;
@@ -154,7 +152,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		}
 
 		@Override
-		public void acceptForLoop(@NonNull JvmFormalParameter parameter, @NonNull XExpression expression) {
+		public void acceptForLoop(/* @NonNull */ JvmFormalParameter parameter, /* @NonNull */ XExpression expression) {
 			if (!ignore()) {
 				XMemberFeatureCall featureCall = (XMemberFeatureCall) expression;
 				XStringLiteral receiver = (XStringLiteral) featureCall.getMemberCallTarget();
@@ -167,7 +165,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		}
 
 		@Override
-		public void acceptEndFor(@Nullable XExpression after, @NonNull CharSequence indentation) {
+		public void acceptEndFor(/* @Nullable */ XExpression after, /* @NonNull */ CharSequence indentation) {
 			if (!ignore()) {
 				if (forLoopStack.pop() != null && after != null) {
 					acceptExpression(after, indentation);
@@ -175,7 +173,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 			}
 		}
 		
-		public boolean forLoopHasNext(@Nullable XExpression before, @Nullable XExpression separator, @NonNull CharSequence indentation) {
+		public boolean forLoopHasNext(/* @Nullable */ XExpression before, /* @Nullable */ XExpression separator, /* @NonNull */ CharSequence indentation) {
 			if (!ignore()) {
 				if (forLoopStack.peek() != null) {
 					int remaining = forLoopStack.peek();
@@ -200,11 +198,11 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		}
 
 		@Override
-		public void acceptExpression(@NonNull XExpression expression, @NonNull CharSequence indentation) {
+		public void acceptExpression(/* @NonNull */ XExpression expression, /* @NonNull */ CharSequence indentation) {
 			acceptExpression(expression, indentation, false);
 		}
 		
-		protected void acceptExpression(@NonNull XExpression expression, @NonNull CharSequence indentation, boolean immediate) {
+		protected void acceptExpression(/* @NonNull */ XExpression expression, /* @NonNull */ CharSequence indentation, boolean immediate) {
 			XStringLiteral literal = (XStringLiteral) expression;
 			String value = literal.getValue();
 			value = value.replaceAll("\\n", "\n" + indentation);

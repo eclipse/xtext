@@ -13,8 +13,6 @@ import static org.eclipse.xtext.util.Strings.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.internal.ui.wizards.NewElementWizard;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -60,7 +58,6 @@ import com.google.inject.Provider;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-@NonNullByDefault
 public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 
 	@Inject
@@ -205,7 +202,7 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 		}
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected XtendTypeDeclaration getAnnotationTarget(EObject eObject) {
 		XtendTypeDeclaration containerType = EcoreUtil2.getContainerOfType(eObject, XtendTypeDeclaration.class);
 		if(containerType != null && containerType.eContainingFeature() == XtendPackage.Literals.XTEND_MEMBER__ANNOTATION_INFO)
@@ -220,7 +217,7 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 		issueResolutionAcceptor.accept(issue, "Create Xtend class '" + typeName + "'" + packageDescription,
 				"Opens the new Xtend class wizard to create the type '" + typeName + "'" + packageDescription, "xtend_file.png",
 				new IModification() {
-					public void apply(@Nullable IModificationContext context) throws Exception {
+					public void apply(/* @Nullable */ IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
 							public void run() {
 								NewElementWizard newXtendClassWizard = newXtendClassWizardProvider.get();
@@ -240,7 +237,7 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 		issueResolutionAcceptor.accept(issue, "Create Xtend interface '" + typeName + "'" + packageDescription,
 				"Opens the new Xtend interface wizard to create the type '" + typeName + "'" + packageDescription, "xtend_file.png",
 				new IModification() {
-					public void apply(@Nullable IModificationContext context) throws Exception {
+					public void apply(/* @Nullable */ IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
 							public void run() {
 								NewElementWizard newXtendInterfaceWizard = newXtendInterfaceWizardProvider.get();
@@ -260,7 +257,7 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 		issueResolutionAcceptor.accept(issue, "Create Xtend annotation '" + typeName + "'" + packageDescription,
 				"Opens the new Xtend annotation wizard to create the type '" + typeName + "'" + packageDescription, "xtend_file.png",
 				new IModification() {
-					public void apply(@Nullable IModificationContext context) throws Exception {
+					public void apply(/* @Nullable */ IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
 							public void run() {
 								NewElementWizard newXtendAnnotationWizard = newXtendAnnotationWizardProvider.get();

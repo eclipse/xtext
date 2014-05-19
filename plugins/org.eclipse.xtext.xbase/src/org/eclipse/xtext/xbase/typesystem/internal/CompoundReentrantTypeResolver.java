@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.RandomAccess;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -35,7 +33,6 @@ import com.google.common.collect.Lists;
  * @noinstantiate This class is not intended to be instantiated by clients.
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> implements IReentrantTypeResolver, IResolvedTypes, RandomAccess {
 
 	private List<AbstractRootedReentrantTypeResolver> resolvers = Lists.newArrayList();
@@ -107,7 +104,7 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		return result;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getActualType(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.getActualType(expression);
@@ -143,13 +140,13 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		return delegate.hasExpressionScope(context, anchor);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getReturnType(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.getReturnType(expression);
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 		for(int i = 0; i < resolvers.size(); i++) {
 			AbstractRootedReentrantTypeResolver resolver = resolvers.get(i);
@@ -161,7 +158,7 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		return null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getExpectedType(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.getExpectedType(expression);
@@ -177,7 +174,7 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		return delegate.isVoidTypeAllowed(expression);
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getExpectedReturnType(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.getExpectedReturnType(expression);
@@ -188,32 +185,32 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		return delegate.getActualTypeArguments(expression);
 	}
 
-	@Nullable
-	public JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall) {
+	/* @Nullable */
+	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XAbstractFeatureCall featureCall) {
 		if (featureCall == null)
 			return null;
 		IResolvedTypes delegate = getDelegate(featureCall);
 		return delegate.getLinkedFeature(featureCall);
 	}
 	
-	@Nullable
-	public JvmIdentifiableElement getLinkedFeature(@Nullable XConstructorCall constructorCall) {
+	/* @Nullable */
+	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XConstructorCall constructorCall) {
 		if (constructorCall == null)
 			return null;
 		IResolvedTypes delegate = getDelegate(constructorCall);
 		return delegate.getLinkedFeature(constructorCall);
 	}
 	
-	@Nullable
-	public IFeatureLinkingCandidate getLinkingCandidate(@Nullable XAbstractFeatureCall featureCall) {
+	/* @Nullable */
+	public IFeatureLinkingCandidate getLinkingCandidate(/* @Nullable */ XAbstractFeatureCall featureCall) {
 		if (featureCall == null)
 			return null;
 		IResolvedTypes delegate = getDelegate(featureCall);
 		return delegate.getLinkingCandidate(featureCall);
 	}
 	
-	@Nullable
-	public IConstructorLinkingCandidate getLinkingCandidate(@Nullable XConstructorCall constructorCall) {
+	/* @Nullable */
+	public IConstructorLinkingCandidate getLinkingCandidate(/* @Nullable */ XConstructorCall constructorCall) {
 		if (constructorCall == null)
 			return null;
 		IResolvedTypes delegate = getDelegate(constructorCall);

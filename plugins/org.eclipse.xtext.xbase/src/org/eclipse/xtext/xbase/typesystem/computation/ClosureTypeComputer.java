@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XClosure;
@@ -27,7 +25,6 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ClosureTypeComputer {
 
 	private final XClosure closure;
@@ -108,7 +105,7 @@ public class ClosureTypeComputer {
 	 * 
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	@Nullable
+	/* @Nullable */
 	public FunctionTypeReference getExpectedClosureType() {
 		if (strategy == null)
 			selectStrategy();
@@ -120,7 +117,7 @@ public class ClosureTypeComputer {
 	 * 
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	@Nullable
+	/* @Nullable */
 	public JvmOperation getOperation() {
 		if (strategy == null)
 			selectStrategy();

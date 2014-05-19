@@ -18,8 +18,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContextProvider;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
@@ -147,7 +145,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	@Inject
 	private CompilerPhases compilerPhases;
 	
-	public void infer(@Nullable EObject object, final @NonNull IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
+	public void infer(/* @Nullable */ EObject object, final /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (!(object instanceof XtendFile))
 			return;
 		XtendFile xtendFile = (XtendFile) object;
@@ -415,12 +413,12 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	protected void addDataObjectMethods(final XtendClass source, final JvmGenericType inferredJvmType) {
 		final Iterable<XtendField> allFields = Iterables.filter(source.getMembers(), XtendField.class);
 		final Iterable<XtendField> fields = Iterables.filter(allFields, new Predicate<XtendField>() {
-			public boolean apply(@Nullable XtendField theField) {
+			public boolean apply(/* @Nullable */ XtendField theField) {
 				return theField != null && !theField.isStatic();
 			}
 		});
 		final Iterable<JvmField> jvmFields = Iterables.filter(inferredJvmType.getDeclaredFields(),new Predicate<JvmField>() {
-			public boolean apply(@Nullable JvmField theField) {
+			public boolean apply(/* @Nullable */ JvmField theField) {
 				return theField != null && !theField.isStatic();
 			}
 		});
@@ -428,7 +426,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		// constructor
 		if ( Iterables.isEmpty(Iterables.filter(source.getMembers(), XtendConstructor.class)) ) {
 			final JvmConstructor constructor = jvmTypesBuilder.toConstructor(source, new Procedure1<JvmConstructor>() {
-				public void apply(final @Nullable JvmConstructor constructor) {
+				public void apply(final /* @Nullable */ JvmConstructor constructor) {
 					if (constructor == null)
 						return;
 					Set<String> names = Sets.newLinkedHashSet();
@@ -453,7 +451,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 						}
 					}
 					jvmTypesBuilder.setBody(constructor, new Procedure1<ITreeAppendable>() {
-						public void apply(@Nullable ITreeAppendable appendable) {
+						public void apply(/* @Nullable */ ITreeAppendable appendable) {
 							if (appendable == null) return;
 							appendable.append("super(");
 							if (superConstructor != null) {
@@ -502,7 +500,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			inferredJvmType.getMembers().add(toString);
 	}
 	
-	protected @Nullable JvmConstructor getSuperConstructor(final XtendClass source) {
+	protected /* @Nullable */ JvmConstructor getSuperConstructor(final XtendClass source) {
 		JvmConstructor superConstructor = null;
 		if (source.getExtends() != null) {
 			JvmType type = source.getExtends().getType();
@@ -568,7 +566,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	/**
 	 * @return a {@link JvmOperation} with common denominator argument types of all given operations
 	 */
-	@Nullable
+	/* @Nullable */
 	protected JvmOperation deriveGenericDispatchOperationSignature(Iterable<JvmOperation> localOperations,
 			JvmGenericType target) {
 		final Iterator<JvmOperation> iterator = localOperations.iterator();
@@ -691,7 +689,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 	
 	protected void transformCreateExtension(XtendFunction source, CreateExtensionInfo createExtensionInfo,
-			JvmGenericType container, JvmOperation operation, @Nullable JvmTypeReference returnType) {
+			JvmGenericType container, JvmOperation operation, /* @Nullable */ JvmTypeReference returnType) {
 		JvmField cacheVar = jvmTypesBuilder.toField(
 				source, CREATE_CHACHE_VARIABLE_PREFIX + source.getName(), jvmTypesBuilder.inferredType());
 		if (cacheVar != null) {
@@ -842,7 +840,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 	
 	private Predicate<XAnnotation> annotationTranslationFilter = new Predicate<XAnnotation>() {
-		public boolean apply(@Nullable XAnnotation annotation) {
+		public boolean apply(/* @Nullable */ XAnnotation annotation) {
 			if (annotation == null || annotation.getAnnotationType() == null)
 				return false;
 			JvmType annotationType = annotation.getAnnotationType();
@@ -874,7 +872,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		return false;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected String computeFieldName(XtendField field) {
 		if (field.getName() != null)
 			return field.getName();

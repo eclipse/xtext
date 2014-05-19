@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.util;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -32,7 +30,6 @@ import com.google.common.collect.Sets;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSubstitutor {
 
 	private final boolean ignoreDeclaredTypeParameters;
@@ -101,7 +98,7 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getDeclaredUpperBound(JvmTypeParameter typeParameter, ConstraintVisitingInfo visiting) {
 		if (!typeParameter.getConstraints().isEmpty() &&
 					((DeclaredConstraintVisitingInfo)visiting).tryVisitDeclaredUpperBoundsOf(typeParameter)) {
@@ -133,7 +130,7 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting) {
 		if (!ignoreDeclaredTypeParameters) {
 			if (isDeclaredTypeParameter(type)) {

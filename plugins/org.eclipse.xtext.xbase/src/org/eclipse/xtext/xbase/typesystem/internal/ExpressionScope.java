@@ -14,8 +14,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -71,17 +69,17 @@ public class ExpressionScope implements IExpressionScope {
 			return this;
 		return new IExpressionScope() {
 
-			@NonNull
+			/* @NonNull */
 			public IScope getFeatureScope() {
 				return ExpressionScope.this.getFeatureScope(anchor);
 			}
 
-			@NonNull
-			public IScope getFeatureScope(@Nullable XAbstractFeatureCall currentFeatureCall) {
+			/* @NonNull */
+			public IScope getFeatureScope(/* @Nullable */ XAbstractFeatureCall currentFeatureCall) {
 				return ExpressionScope.this.getFeatureScope(currentFeatureCall, anchor);
 			}
 
-			@NonNull
+			/* @NonNull */
 			public List<String> getTypeNamePrefix() {
 				return ExpressionScope.this.getTypeNamePrefix();
 			}
@@ -93,7 +91,7 @@ public class ExpressionScope implements IExpressionScope {
 		};
 	}
 
-	@NonNull
+	/* @NonNull */
 	protected IScope getFeatureScope(Anchor anchor) {
 		IScope cached = cachedFeatureScope.get(anchor);
 		if (cached != null)
@@ -172,8 +170,8 @@ public class ExpressionScope implements IExpressionScope {
 		}
 	}
 	
-	@NonNull
-	public IScope getFeatureScope(@Nullable XAbstractFeatureCall currentFeatureCall, Anchor anchor) {
+	/* @NonNull */
+	public IScope getFeatureScope(/* @Nullable */ XAbstractFeatureCall currentFeatureCall, Anchor anchor) {
 		if (anchor == Anchor.RECEIVER) {
 			if (currentFeatureCall == requestedFeatureCall && cachedReceiverFeatureScope != null) {
 				return cachedReceiverFeatureScope;
@@ -185,13 +183,13 @@ public class ExpressionScope implements IExpressionScope {
 		return getFeatureScope(anchor);
 	}
 	
-	@NonNull
+	/* @NonNull */
 	public IScope getFeatureScope() {
 		return getFeatureScope(this.anchor);
 	}
 	
-	@NonNull
-	public IScope getFeatureScope(@Nullable XAbstractFeatureCall currentFeatureCall) {
+	/* @NonNull */
+	public IScope getFeatureScope(/* @Nullable */ XAbstractFeatureCall currentFeatureCall) {
 		return getFeatureScope(currentFeatureCall, this.anchor);
 	}
 	
@@ -207,7 +205,7 @@ public class ExpressionScope implements IExpressionScope {
 		data.add(new FeatureScopeSessionToResolvedTypes(session, prev.getTypes()));
 	}
 
-	@NonNull
+	/* @NonNull */
 	public List<String> getTypeNamePrefix() {
 		return Collections.emptyList();
 	}

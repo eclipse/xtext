@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
@@ -15,7 +14,6 @@ import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class UnboundTypeReferenceResolver extends AbstractReentrantTypeReferenceProvider {
 	private UnboundTypeReference unboundTypeReference;
 

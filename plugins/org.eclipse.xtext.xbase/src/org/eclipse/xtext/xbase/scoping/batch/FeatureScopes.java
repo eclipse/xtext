@@ -13,8 +13,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -142,7 +140,7 @@ public class FeatureScopes implements IFeatureNames {
 		return parent;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected XAbstractFeatureCall asAbstractFeatureCall(EObject context) {
 		return context instanceof XAbstractFeatureCall ? (XAbstractFeatureCall) context : null;
 	}
@@ -160,7 +158,6 @@ public class FeatureScopes implements IFeatureNames {
 
 			int id = 100;
 			
-			@NonNullByDefault
 			@Override
 			protected boolean accept(LightweightTypeReference synonymType, EnumSet<ConformanceHint> hints) {
 				List<JvmType> rawTypes = synonymType.getRawTypes();
@@ -244,7 +241,7 @@ public class FeatureScopes implements IFeatureNames {
 		}
 	}
 
-	@Nullable
+	/* @Nullable */
 	private IScope createTypeLiteralScope(XExpression featureCall, XExpression receiver, IFeatureScopeSession session,
 			IResolvedTypes resolvedTypes, LightweightTypeReference receiverType, JvmIdentifiableElement linkedReceiver) {
 		if (linkedReceiver instanceof JvmDeclaredType) {
@@ -274,7 +271,7 @@ public class FeatureScopes implements IFeatureNames {
 		return false;
 	}
 
-	protected IScope createFollowUpErrorScope(@Nullable final LightweightTypeReference receiverType) {
+	protected IScope createFollowUpErrorScope(/* @Nullable */ final LightweightTypeReference receiverType) {
 		return new SimpleScope(Collections.<IEObjectDescription>emptyList()) {
 			@Override
 			public Iterable<IEObjectDescription> getElements(QualifiedName name) {

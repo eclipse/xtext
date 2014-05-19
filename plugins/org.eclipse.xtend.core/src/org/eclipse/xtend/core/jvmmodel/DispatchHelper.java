@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -186,7 +185,7 @@ public class DispatchHelper {
 		return false;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public JvmOperation getDispatcherOperation(JvmOperation dispatchCase) {
 		EObject sourceElement = associations.getPrimarySourceElement(dispatchCase);
 		if (sourceElement instanceof XtendFunction) {
@@ -207,7 +206,7 @@ public class DispatchHelper {
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public JvmOperation getDispatcherOperation(JvmDeclaredType type, DispatchSignature signature) {
 		Iterable<JvmFeature> allByName = type.findAllFeaturesByName(signature.getSimpleName());
 		for(JvmFeature feature: allByName) {

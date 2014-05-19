@@ -11,7 +11,6 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -78,7 +77,7 @@ public class SynonymTypesProviderTest extends AbstractXbaseTestCase {
 		synonymTypeProvider.collectSynonymTypes(type, new SynonymTypesProvider.Acceptor() {
 			
 			@Override
-			protected boolean accept(@NonNull LightweightTypeReference synonym, @NonNull EnumSet<ConformanceHint> hints) {
+			protected boolean accept(/* @NonNull */ LightweightTypeReference synonym, /* @NonNull */ EnumSet<ConformanceHint> hints) {
 				synonyms.add(synonym);
 				return true;
 			}

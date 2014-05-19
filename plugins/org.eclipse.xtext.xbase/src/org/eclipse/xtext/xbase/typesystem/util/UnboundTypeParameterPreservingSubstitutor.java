@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.util;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -26,7 +24,6 @@ import com.google.common.collect.Sets;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class UnboundTypeParameterPreservingSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeParameter>> {
 	
 	public UnboundTypeParameterPreservingSubstitutor(Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
@@ -41,7 +38,7 @@ public class UnboundTypeParameterPreservingSubstitutor extends TypeParameterSubs
 	}
 
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type, Set<JvmTypeParameter> visiting) {
 		LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(type);
 		if (boundTypeArgument != null) {

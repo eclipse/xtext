@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -18,7 +16,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandida
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class AmbiguousConstructorLinkingCandidate extends AbstractAmbiguousLinkingCandidate<ConstructorLinkingCandidate> implements IConstructorLinkingCandidate {
 
 	protected AmbiguousConstructorLinkingCandidate(ConstructorLinkingCandidate first, AbstractPendingLinkingCandidate<?> second) {
@@ -34,7 +31,7 @@ public class AmbiguousConstructorLinkingCandidate extends AbstractAmbiguousLinki
 		return getPrimaryCandidate().getConstructorCall();
 	}
 
-	@Nullable
+	/* @Nullable */
 	public JvmConstructor getConstructor() {
 		return getPrimaryCandidate().getConstructor();
 	}

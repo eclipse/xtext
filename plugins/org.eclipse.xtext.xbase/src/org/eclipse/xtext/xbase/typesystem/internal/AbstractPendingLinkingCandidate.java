@@ -17,8 +17,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -67,7 +65,6 @@ import com.google.common.collect.Lists;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public abstract class AbstractPendingLinkingCandidate<Expression extends XExpression> extends AbstractLinkingCandidate<Expression> {
 	
 	private final PendingLinkingCandidateResolver<Expression> pendingLinkingCandidateResolver; 
@@ -284,7 +281,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected EReference getInvalidArgumentsValidationFeature() {
 		return XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
 	}
@@ -680,7 +677,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return leftFailures != 0 ? CandidateCompareResult.EQUALLY_INVALID : CandidateCompareResult.AMBIGUOUS;
 	}
 
-	protected int getTypeArgumentConformanceFailures(@Nullable IAcceptor<? super AbstractDiagnostic> acceptor) {
+	protected int getTypeArgumentConformanceFailures(/* @Nullable */ IAcceptor<? super AbstractDiagnostic> acceptor) {
 		List<LightweightTypeReference> typeArguments = getTypeArguments();
 		List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
 		int max = Math.min(typeArguments.size(), typeParameters.size());

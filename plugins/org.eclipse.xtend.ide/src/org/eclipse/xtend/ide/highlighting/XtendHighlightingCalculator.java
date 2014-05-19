@@ -15,8 +15,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
@@ -237,7 +235,6 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		}
 	}
 
-	@NonNullByDefault
 	protected class RichStringHighlighter extends AbstractRichStringPartAcceptor.ForLoopOnce {
 
 		private int currentOffset = -1;
@@ -255,12 +252,12 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		}
 
 		@Override
-		public void acceptSemanticText(CharSequence text, @Nullable RichStringLiteral origin) {
+		public void acceptSemanticText(CharSequence text, /* @Nullable */ RichStringLiteral origin) {
 			resetCurrentOffset(origin);
 			currentOffset += text.length();
 		}
 
-		protected void resetCurrentOffset(@Nullable RichStringLiteral origin) {
+		protected void resetCurrentOffset(/* @Nullable */ RichStringLiteral origin) {
 			if (origin != null && origin != recent) {
 				INode recentNode = null;
 				if (recent != null && currentOffset != -1) {
@@ -341,7 +338,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		}
 
 		@Override
-		public void acceptTemplateText(CharSequence text, @Nullable RichStringLiteral origin) {
+		public void acceptTemplateText(CharSequence text, /* @Nullable */ RichStringLiteral origin) {
 			resetCurrentOffset(origin);
 			if (text.length() > 0) {
 				int length = text.length();
@@ -385,7 +382,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		}
 
 		@Override
-		public void acceptForLoop(JvmFormalParameter parameter, @Nullable XExpression expression) {
+		public void acceptForLoop(JvmFormalParameter parameter, /* @Nullable */ XExpression expression) {
 			highlightRichStrings(expression, acceptor);
 			super.acceptForLoop(parameter, expression);
 		}

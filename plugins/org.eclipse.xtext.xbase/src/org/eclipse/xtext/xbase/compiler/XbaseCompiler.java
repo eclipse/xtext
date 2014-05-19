@@ -17,8 +17,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
@@ -101,7 +99,6 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@NonNullByDefault
 public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Inject 
@@ -188,7 +185,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return resolveType(element, clazz) != null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference resolveType(XExpression element, Class<?> clazz) {
 		LightweightTypeReference elementType = batchTypeResolver.resolveTypes(element).getActualType(element);
 		return elementType != null && elementType.isType(clazz) ? elementType : null;
@@ -973,7 +970,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected ILocationData getLocationWithNewKeyword(XConstructorCall call) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(call);
 		if (startNode != null) {
@@ -1440,7 +1437,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected String getReferenceName(XExpression expr, ITreeAppendable b) {
 		if (expr instanceof XSwitchExpression) {
 			Object key = getSwitchExpressionKey((XSwitchExpression) expr);
@@ -1450,7 +1447,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return super.getReferenceName(expr, b);
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected ILocationData getLocationOfDefault(XSwitchExpression expression) {
 		final ICompositeNode startNode = NodeModelUtils.getNode(expression);
 		if (startNode != null) {

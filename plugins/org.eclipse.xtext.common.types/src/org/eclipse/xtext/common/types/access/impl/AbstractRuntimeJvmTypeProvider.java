@@ -13,7 +13,6 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
@@ -58,7 +57,7 @@ public abstract class AbstractRuntimeJvmTypeProvider extends AbstractJvmTypeProv
 		resourceSet.eAdapters().add(new TypeInResourceSetAdapter());
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected JvmType doTryFindInIndex(String name, boolean binaryNestedTypeDelimiter) {
 		IndexedJvmTypeAccess indexAccess = getIndexedJvmTypeAccess();
 		if (indexAccess != null) {

@@ -10,8 +10,6 @@ package org.eclipse.xtend.core.tests.typesystem;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.RuntimeTestSetup;
 import org.eclipse.xtext.common.types.JvmType;
@@ -47,7 +45,7 @@ public class RuntimeInjectorProviderWithCustomSynonyms extends RuntimeInjectorPr
 	public static class CustomSynonymTypesProvider extends SynonymTypesProvider {
 	
 		@Override
-		protected boolean collectCustomSynonymTypes(@Nullable LightweightTypeReference type, @NonNull Acceptor acceptor) {
+		protected boolean collectCustomSynonymTypes(/* @Nullable */ LightweightTypeReference type, /* @NonNull */ Acceptor acceptor) {
 			if (type.getInvariantBoundSubstitute().isType(BigInteger.class)) {
 				return announceBigDecimal(type, acceptor);
 			}

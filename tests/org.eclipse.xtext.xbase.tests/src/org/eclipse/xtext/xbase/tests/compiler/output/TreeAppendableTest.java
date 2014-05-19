@@ -19,8 +19,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -41,26 +39,25 @@ import com.google.common.collect.AbstractIterator;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("null")
-@NonNullByDefault
 public class TreeAppendableTest extends Assert implements ILocationInFileProvider, IJvmModelAssociations, ITraceURIConverter {
 
 	private Iterator<ITextRegionWithLineInformation> expectedRegions;
 	private EClass content;
 	private Resource resource;
 
-	public ITextRegionWithLineInformation getSignificantTextRegion(@Nullable EObject obj) {
+	public ITextRegionWithLineInformation getSignificantTextRegion(/* @Nullable */ EObject obj) {
 		throw new UnsupportedOperationException();		
 	}
 
-	public ITextRegionWithLineInformation getSignificantTextRegion(@Nullable EObject owner, @Nullable EStructuralFeature feature, int indexInList) {
+	public ITextRegionWithLineInformation getSignificantTextRegion(/* @Nullable */ EObject owner, /* @Nullable */ EStructuralFeature feature, int indexInList) {
 		throw new UnsupportedOperationException();
 	}
 
-	public ITextRegionWithLineInformation getFullTextRegion(@Nullable EObject obj) {
+	public ITextRegionWithLineInformation getFullTextRegion(/* @Nullable */ EObject obj) {
 		return expectedRegions.next();
 	}
 
-	public ITextRegionWithLineInformation getFullTextRegion(@Nullable EObject owner, @Nullable EStructuralFeature feature, int indexInList) {
+	public ITextRegionWithLineInformation getFullTextRegion(/* @Nullable */ EObject owner, /* @Nullable */ EStructuralFeature feature, int indexInList) {
 		throw new UnsupportedOperationException();
 	}
 

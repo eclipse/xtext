@@ -7,14 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.richstring;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-
 /**
  * The indentation handler encapsulates the logic of rich string indentation
  * with respect to template and semantic whitespace per line.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public interface IRichStringIndentationHandler {
 
 	/**

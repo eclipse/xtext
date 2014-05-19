@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.EnumSet;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -30,32 +28,32 @@ public class ResolutionBasedComputationResult implements ITypeComputationResult 
 		this.resolution = resolution;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getActualExpressionType() {
 		return resolution.getActualType(expression);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getReturnType() {
 		return resolution.getReturnType(expression);
 	}
 
-	@NonNull
+	/* @NonNull */
 	public XExpression getExpression() {
 		return expression;
 	}
 
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getExpectedExpressionType() {
 		return resolution.getExpectedType(expression);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getExpectedReturnType() {
 		return resolution.getExpectedReturnType(expression);
 	}
 	
-	@NonNull
+	/* @NonNull */
 	public EnumSet<ConformanceHint> getConformanceHints() {
 		TypeData typeData = resolution.getTypeData(expression, false);
 		if (typeData == null)
@@ -63,7 +61,7 @@ public class ResolutionBasedComputationResult implements ITypeComputationResult 
 		return typeData.getConformanceHints();
 	}
 
-	@NonNull
+	/* @NonNull */
 	public EnumSet<ConformanceHint> getCheckedConformanceHints() {
 		TypeData typeData = resolution.getTypeData(expression, false);
 		if (typeData == null)

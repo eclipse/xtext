@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.override;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -27,7 +26,6 @@ import com.google.common.collect.Maps;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ResolvedOperationInHierarchy extends AbstractResolvedOperation {
 
 	private BottomResolvedOperation bottom;

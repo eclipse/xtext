@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.util;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ContextualVisibilityHelper implements IVisibilityHelper {
 
 	private JvmType rawContextType;

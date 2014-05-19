@@ -9,8 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
@@ -24,7 +22,6 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class FunctionTypeReference extends ParameterizedTypeReference {
 
 	private List<LightweightTypeReference> parameterTypes;
@@ -61,7 +58,7 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 		return expose(parameterTypes);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public LightweightTypeReference getReturnType() {
 		return returnType;
 	}
@@ -164,13 +161,13 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
 		return visitor.doVisitFunctionTypeReference(this);
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
 		return visitor.doVisitFunctionTypeReference(this, param);
 	}

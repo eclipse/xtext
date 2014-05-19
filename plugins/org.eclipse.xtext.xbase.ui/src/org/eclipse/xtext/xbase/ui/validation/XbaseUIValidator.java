@@ -16,8 +16,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IAccessRule;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaElement;
@@ -179,8 +177,8 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		return RestrictionKind.VALID;
 	}
 	
-	@Nullable 
-	protected IClasspathEntry getResolvedClasspathEntry(IJavaProject javaProject, @NonNull IPackageFragmentRoot root) throws JavaModelException {
+	/* @Nullable */ 
+	protected IClasspathEntry getResolvedClasspathEntry(IJavaProject javaProject, /* @NonNull */ IPackageFragmentRoot root) throws JavaModelException {
 		IClasspathEntry result = null;
 		JavaProject castedProject = (JavaProject) javaProject;
 		castedProject.getResolvedClasspath(); // force the resolved entry cache to be populated

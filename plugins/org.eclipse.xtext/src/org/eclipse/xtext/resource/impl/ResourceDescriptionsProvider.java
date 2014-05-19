@@ -11,7 +11,6 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 
 import com.google.inject.Inject;
@@ -92,8 +91,8 @@ public class ResourceDescriptionsProvider {
 	 * 
 	 * @since 2.1
 	 */
-	@NonNull
-	public IResourceDescriptions getResourceDescriptions(@NonNull ResourceSet resourceSet) {
+	/* @NonNull */
+	public IResourceDescriptions getResourceDescriptions(/* @NonNull */ ResourceSet resourceSet) {
 		Map<Object, Object> loadOptions = resourceSet.getLoadOptions();
 		String[] mutualExclusiveFlags = new String[] { NAMED_BUILDER_SCOPE, LIVE_SCOPE, PERSISTED_DESCRIPTIONS };
 		String flag = null;

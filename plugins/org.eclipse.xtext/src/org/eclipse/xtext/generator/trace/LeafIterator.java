@@ -9,8 +9,6 @@ package org.eclipse.xtext.generator.trace;
 
 import java.util.LinkedList;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Lists;
 
@@ -19,7 +17,6 @@ import com.google.common.collect.Lists;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@NonNullByDefault
 public class LeafIterator extends AbstractIterator<AbstractTraceRegion> {
 
 	private AbstractTraceRegion current;

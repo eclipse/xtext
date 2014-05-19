@@ -13,8 +13,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -42,7 +40,6 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public class StackedResolvedTypes extends ResolvedTypes {
 
 	private final ResolvedTypes parent;
@@ -209,7 +206,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected Collection<TypeData> doGetTypeData(XExpression expression) {
 		Collection<TypeData> result = super.doGetTypeData(expression);
 		if (result == null) {
@@ -219,7 +216,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference doGetActualType(JvmIdentifiableElement identifiable, boolean ignoreReassignedTypes) {
 		LightweightTypeReference result = super.doGetActualType(identifiable, ignoreReassignedTypes);
 		if (result == null) {
@@ -237,8 +234,8 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	@Nullable
-	protected ILinkingCandidate doGetLinkingCandidate(@Nullable XExpression featureOrConstructorCall) {
+	/* @Nullable */
+	protected ILinkingCandidate doGetLinkingCandidate(/* @Nullable */ XExpression featureOrConstructorCall) {
 		if (featureOrConstructorCall == null)
 			return null;
 		ILinkingCandidate result = super.doGetLinkingCandidate(featureOrConstructorCall);
@@ -248,8 +245,8 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	@Nullable
-	protected JvmIdentifiableElement doGetLinkedFeature(@Nullable XExpression featureOrConstructorCall) {
+	/* @Nullable */
+	protected JvmIdentifiableElement doGetLinkedFeature(/* @Nullable */ XExpression featureOrConstructorCall) {
 		if (featureOrConstructorCall == null)
 			return null;
 		JvmIdentifiableElement result = super.doGetLinkedFeature(featureOrConstructorCall);
@@ -259,7 +256,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference doGetDeclaredType(JvmIdentifiableElement identifiable) {
 		return null;
 	}
@@ -299,7 +296,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected List<LightweightTypeReference> doGetActualTypeArguments(XExpression expression) {
 		List<LightweightTypeReference> result = super.doGetActualTypeArguments(expression);
 		if (result == null) {
@@ -309,7 +306,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public IFeatureLinkingCandidate getFeature(XAbstractFeatureCall featureCall) {
 		IFeatureLinkingCandidate result = super.getFeature(featureCall);
 		if (result == null) {
@@ -319,7 +316,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	public IConstructorLinkingCandidate getConstructor(XConstructorCall constructorCall) {
 		IConstructorLinkingCandidate result = super.getConstructor(constructorCall);
 		if (result == null) {
@@ -329,7 +326,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	public void reassignType(JvmIdentifiableElement identifiable, @Nullable LightweightTypeReference reference) {
+	public void reassignType(JvmIdentifiableElement identifiable, /* @Nullable */ LightweightTypeReference reference) {
 		super.reassignType(identifiable, reference);
 		if (reference == null) {
 			getParent().reassignType(identifiable, reference);
@@ -418,7 +415,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getExpectedTypeForAssociatedExpression(JvmMember member, XExpression expression) {
 		return parent.getExpectedTypeForAssociatedExpression(member, expression);
 	}

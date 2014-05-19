@@ -9,8 +9,6 @@ package org.eclipse.xtend.core.richstring;
 
 import java.util.LinkedList;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-
 import com.google.common.collect.Lists;
 
 /**
@@ -18,7 +16,6 @@ import com.google.common.collect.Lists;
  * inconsistent indentation.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class DefaultIndentationHandler implements IRichStringIndentationHandler {
 
 	protected static abstract class IndentationData {

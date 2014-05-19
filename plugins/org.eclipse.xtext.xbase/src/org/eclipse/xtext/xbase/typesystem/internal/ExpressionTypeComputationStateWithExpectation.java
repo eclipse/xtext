@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -17,13 +15,12 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class ExpressionTypeComputationStateWithExpectation extends TypeComputationStateWithExpectation {
 	
 	protected ExpressionTypeComputationStateWithExpectation(ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
 			AbstractTypeComputationState parent, 
-			@Nullable LightweightTypeReference expectation) {
+			/* @Nullable */ LightweightTypeReference expectation) {
 		super(resolvedTypes, featureScopeSession, parent, expectation);
 	}
 

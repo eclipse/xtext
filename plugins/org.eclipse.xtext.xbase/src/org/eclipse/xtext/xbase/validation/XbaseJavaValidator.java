@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EcoreUtil2.ElementReferenceAcceptor;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -413,7 +412,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		final StringBuilder result = new StringBuilder(canonicalName(expectedType));
 		getServices().getSynonymTypesProvider().collectSynonymTypes(expectedType, new SynonymTypesProvider.Acceptor() {
 			@Override
-			@NonNullByDefault
 			protected boolean accept(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints) {
 				result.append(" or ").append(canonicalName(synonym));
 				return true;
@@ -818,7 +816,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		return potentialMember.isAssignableFrom(type, new TypeConformanceComputationArgument(false, false, false, true, false, false));
 	}
 
-	@NonNullByDefault
 	protected boolean containsTypeArgs(LightweightTypeReference instanceOfType) {
 		return instanceOfType.accept(new TypeReferenceVisitorWithNonNullResult<Boolean>() {
 			@Override

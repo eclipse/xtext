@@ -15,7 +15,6 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
@@ -45,7 +44,7 @@ public class JavaProjectAwareTraceContribution implements ITraceURIConverterCont
 	@Inject
 	private TraceURIHelper traceURIHelper;
 	
-	@Nullable
+	/* @Nullable */
 	public URI getURIForTrace(XtextResource context) {
 		ResourceSet rs = context.getResourceSet();
 		if (!(rs instanceof XtextResourceSet && ((XtextResourceSet) rs).getClasspathURIContext() instanceof IJavaProject))
@@ -59,7 +58,7 @@ public class JavaProjectAwareTraceContribution implements ITraceURIConverterCont
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	public URI getURIForTrace(URI uri) {
 		if (uri.isPlatform() && uri.segmentCount() > 1) {
 			Iterator<Pair<IStorage, IProject>> storagesIterator = mapper.getStorages(uri).iterator();
@@ -84,7 +83,7 @@ public class JavaProjectAwareTraceContribution implements ITraceURIConverterCont
 		return null;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected URI computeTraceURI(URI uri, IJavaProject javaProject) throws JavaModelException {
 		for (IPackageFragmentRoot root : javaProject.getPackageFragmentRoots()) {
 			if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {

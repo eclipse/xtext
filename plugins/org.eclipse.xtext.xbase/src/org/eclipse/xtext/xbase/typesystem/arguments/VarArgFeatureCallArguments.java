@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.arguments;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XExpression;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class VarArgFeatureCallArguments extends StandardFeatureCallArguments {
 
 	public VarArgFeatureCallArguments(List<XExpression> arguments, List<JvmFormalParameter> parameters, boolean hasReceiver, OwnedConverter converter) {

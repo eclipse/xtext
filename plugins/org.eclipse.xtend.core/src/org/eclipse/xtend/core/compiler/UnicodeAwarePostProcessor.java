@@ -12,8 +12,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.IFilePostProcessorExtension;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
@@ -23,14 +21,14 @@ import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
  */
 public class UnicodeAwarePostProcessor extends TraceAwarePostProcessor implements IFilePostProcessorExtension {
 
-	public CharSequence postProcess(URI fileURI, CharSequence content, @Nullable Charset targetCharset) {
+	public CharSequence postProcess(URI fileURI, CharSequence content, /* @Nullable */ Charset targetCharset) {
 		if (targetCharset != null && "java".equalsIgnoreCase(fileURI.fileExtension())) {
 			final String lineSeparator = getWhitespaceInformationProvider().getLineSeparatorInformation(fileURI).getLineSeparator();
 			final CharsetEncoder encoder = targetCharset.newEncoder();
 			if (content instanceof TreeAppendable) {
 				return ((TreeAppendable) content).acceptVisitor(new TreeAppendable.Visitor() {
 					@Override
-					protected @NonNull String visit(@NonNull String string) {
+					protected /* @NonNull */ String visit(/* @NonNull */ String string) {
 						return replaceLineSeparatorsAndEscapeChars(string, lineSeparator, encoder);
 					}
 				});

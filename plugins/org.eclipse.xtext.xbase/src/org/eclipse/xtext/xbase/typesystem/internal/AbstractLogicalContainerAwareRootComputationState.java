@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -16,7 +15,6 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
  */
-@NonNullByDefault
 public abstract class AbstractLogicalContainerAwareRootComputationState extends AbstractRootTypeComputationState {
 
 	private final JvmMember member;
