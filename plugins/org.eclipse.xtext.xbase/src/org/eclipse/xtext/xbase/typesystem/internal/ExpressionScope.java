@@ -28,6 +28,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
@@ -288,6 +289,11 @@ public class ExpressionScope implements IExpressionScope {
 					if (desc.isExtension()) { // filter extensions by most specific first parameter
 						Maps2.putIntoListMap(getExtensionSignature(desc), desc, extensionSignatures);
 					} else {
+						if (desc.getImplicitReceiver() != null) {
+							if (desc.getSyntacticReceiver() instanceof XMemberFeatureCall) {
+								continue;
+							}
+						}
 						String signature = getSignature(desc);
 						if (!signatures.containsKey(signature)) {
 							signatures.put(signature, desc);
@@ -407,7 +413,7 @@ public class ExpressionScope implements IExpressionScope {
 			List<JvmFormalParameter> parameters = executable.getParameters();
 			int start = extension ? 1 : 0;
 			int end = parameters.size();
-			if (extension || start != end) {
+			if (start != end) {
 				result.append('(');
 				for(int i = start; i < end; i++) {
 					if (i != start) {

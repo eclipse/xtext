@@ -346,8 +346,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				}
 			}
 		}
-		if (node.getEndOffset() <= context.getOffset()) {
-			if (model instanceof XFeatureCall && model.eContainer() instanceof XClosure)
+		int endOffset = node.getEndOffset();
+		if (endOffset <= context.getOffset()) {
+			if (model instanceof XFeatureCall && model.eContainer() instanceof XClosure || endOffset == context.getOffset() && context.getPrefix().length() == 0)
 				return;
 			createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
 			return;

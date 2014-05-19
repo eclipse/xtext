@@ -29,6 +29,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
@@ -129,13 +130,17 @@ public class ReceiverFeatureScope extends AbstractSessionBasedExecutableScope im
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
 		for(JvmFeature feature: allFeatures) {
-			if (!feature.isStatic()) {
+			if (!feature.isStatic() && !(implicit && getFeatureCall() instanceof XMemberFeatureCall)) {
 				String simpleName = feature.getSimpleName();
 				QualifiedName featureName = QualifiedName.create(simpleName);
 				allDescriptions.add(createDescription(featureName, feature, bucket));
 				QualifiedName operator = getOperatorMapping().getOperator(featureName);
 				if (operator != null) {
 					allDescriptions.add(createDescription(operator, feature, bucket));
+					QualifiedName compoundOperator = getOperatorMapping().getCompoundOperator(operator);
+					if (compoundOperator != null) {
+						allDescriptions.add(createDescription(compoundOperator, feature, bucket));	
+					}
 				}
 				String propertyName = toProperty(simpleName, feature);
 				if (propertyName != null) {
