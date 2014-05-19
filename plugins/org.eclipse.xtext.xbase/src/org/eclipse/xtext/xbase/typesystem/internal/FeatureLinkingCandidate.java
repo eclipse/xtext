@@ -141,8 +141,10 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		XAbstractFeatureCall featureCall = getFeatureCall();
 		if (isReassignFirstArgument(featureCall)) {
+			XBinaryOperation binaryOperation = (XBinaryOperation) featureCall;
+			
 			LightweightTypeReference actualType = getDeclaredType(featureCall.getFeature());
-			LightweightTypeReference expectedType = getActualType(getArguments().get(0));
+			LightweightTypeReference expectedType = getActualType(binaryOperation.getLeftOperand());
 			if (!expectedType.getIdentifier().equals(actualType.getIdentifier())) {
 				AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, String.format(
 						"Type mismatch: cannot convert from %s to %s", actualType.getHumanReadableName(), expectedType.getHumanReadableName()),
