@@ -1519,8 +1519,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertIssueCodes(IMPORT_UNUSED)
 		.assertResolutionLabels("Organize imports")
 		.assertModelAfterQuickfix('''
-			import static java.lang.String.valueOf
 			import static java.lang.String.*
+			import static java.lang.String.valueOf
 			
 			class Foo {
 			
@@ -1838,6 +1838,43 @@ class QuickfixTest extends AbstractXtendUITestCase {
 					1.valueOf
 				}
 			
+			}
+		''')
+	}
+	
+	@Test
+	def void duplicateImport_16() {
+		create('Foo.xtend', '''
+			import static java.lang.Integer.valueOf
+			import static java.lang.Integer.valueOf
+			import static java.lang.Integer.MIN_VALUE
+			import static java.lang.In|teger.MIN_VALUE
+			import static java.lang.Integer.parseInt
+			import static java.lang.Integer.parseInt
+			import static java.lang.Integer.*
+			import static java.lang.Integer.*
+			
+			class C {
+				def m() {
+					parseInt('')
+					valueOf('')
+					MAX_VALUE
+				}
+			}
+		''')
+		.assertIssueCodes(IMPORT_UNUSED)
+		.assertResolutionLabels("Organize imports")
+		.assertModelAfterQuickfix('''
+			import static java.lang.Integer.*
+			import static java.lang.Integer.parseInt
+			import static java.lang.Integer.valueOf
+			
+			class C {
+				def m() {
+					parseInt('')
+					valueOf('')
+					MAX_VALUE
+				}
 			}
 		''')
 	}
