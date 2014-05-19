@@ -97,6 +97,7 @@ class OperatorDeclarationTest extends AbstractXtendTestCase {
 			class A {
 				def String !() {
 				}
+				// extension
 				def String !(Object o) {
 				}
 			}
@@ -159,9 +160,10 @@ class OperatorDeclarationTest extends AbstractXtendTestCase {
 	@Test def void testAndOperatorDeclaration_instance() {
 		val file = '''
 			class A {
-				def String &&(Object o, Object p) {
-				}
 				def String &&(Object o) {
+				}
+				// extension
+				def String &&(Object o, Object p) {
 				}
 			}
 		'''.parse
@@ -178,7 +180,7 @@ class OperatorDeclarationTest extends AbstractXtendTestCase {
 		file.assertError(
 			XtendPackage.Literals.XTEND_FUNCTION,
 			IssueCodes.INVALID_OPERATOR_SIGNATURE,
-			"The binary operator '&&' requires at least one additional argument."
+			"The binary operator '&&' requires at least one argument."
 		)		
 	}
 	
@@ -237,47 +239,40 @@ class OperatorDeclarationTest extends AbstractXtendTestCase {
 	@Test def void testPlusOperatorDeclaration_instance() {
 		val file = '''
 			class A {
-				def String &&(Object o, Object p) {
+				// unary
+				def String +() {
 				}
-				def String &&(Object o) {
+				// binary or extension unary
+				def String +(Object o) {
+				}
+				// extension binary
+				def String +(Object o, Object p) {
 				}
 			}
 		'''.parse
 		file.assertNoErrors()		
 	}
 	
-	@Test def void testPlusOperatorDeclaration_instance_error_01() {
+	@Test def void testPlusOperatorDeclaration_instance_error() {
 		val file = '''
 			class A {
-				def String &&() {
+				def String +(Object o, Object p, Object q) {
 				}
 			}
 		'''.parse
 		file.assertError(
 			XtendPackage.Literals.XTEND_FUNCTION,
 			IssueCodes.INVALID_OPERATOR_SIGNATURE,
-			"The binary operator '&&' requires at least one additional argument."
-		)		
-	}
-	
-	@Test def void testPlusOperatorDeclaration_instance_error_02() {
-		val file = '''
-			class A {
-				def String &&(Object o, Object p, Object q) {
-				}
-			}
-		'''.parse
-		file.assertError(
-			XtendPackage.Literals.XTEND_FUNCTION,
-			IssueCodes.INVALID_OPERATOR_SIGNATURE,
-			"The binary operator '&&' allows at most two arguments."
-		)		
+			"The operator '+' allows at most two arguments."
+		)
 	}
 	
 	@Test def void testPlusOperatorDeclaration_static() {
 		val file = '''
 			class A {
-				def static String &&(Object o, Object p) {
+				def static String +(String s) {
+				}
+				def static String +(Object o, Object p) {
 				}
 			}
 		'''.parse
@@ -287,28 +282,65 @@ class OperatorDeclarationTest extends AbstractXtendTestCase {
 	@Test def void testPlusOperatorDeclaration_static_error_01() {
 		val file = '''
 			class A {
-				def static String &&(String s) {
+				def static String +(Object o, Object p, Object q) {
 				}
 			}
 		'''.parse
 		file.assertError(
 			XtendPackage.Literals.XTEND_FUNCTION,
 			IssueCodes.INVALID_OPERATOR_SIGNATURE,
-			"The static binary operator '&&' requires exactly two arguments."
+			"The static operator '+' allows at most two arguments."
 		)		
 	}
 	
-	@Test def void testPlusOperatorDeclaration_static_error_02() {
+	@Test def void testPlusPlusOperatorDeclaration_static() {
 		val file = '''
 			class A {
-				def static String &&(Object o, Object p, Object q) {
+				def static String ++(Object o) {
+				}
+			}
+		'''.parse
+		file.assertNoErrors
+	}
+	
+	@Test def void testPlusPlusOperatorDeclaration_instance() {
+		val file = '''
+			class A {
+				def String ++() {
+				}
+				// extension
+				def String ++(Object o) {
+				}
+			}
+		'''.parse
+		file.assertNoErrors
+	}
+	
+	@Test def void testPlusPlusOperatorDeclaration_static_error_01() {
+		val file = '''
+			class A {
+				def static String ++(Object o, Object p) {
 				}
 			}
 		'''.parse
 		file.assertError(
 			XtendPackage.Literals.XTEND_FUNCTION,
 			IssueCodes.INVALID_OPERATOR_SIGNATURE,
-			"The static binary operator '&&' requires exactly two arguments."
+			"The static unary operator '++' requires exactly one argument."
+		)		
+	}
+	
+	@Test def void testPlusPlusOperatorDeclaration_instance_error_01() {
+		val file = '''
+			class A {
+				def String ++(Object o, Object o2) {
+				}
+			}
+		'''.parse
+		file.assertError(
+			XtendPackage.Literals.XTEND_FUNCTION,
+			IssueCodes.INVALID_OPERATOR_SIGNATURE,
+			"The unary operator '++' allows at most one argument."
 		)		
 	}
 }

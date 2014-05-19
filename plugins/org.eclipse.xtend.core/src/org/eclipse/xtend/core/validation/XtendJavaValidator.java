@@ -1037,32 +1037,33 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				if (operation != null) {
 					int parameterSize = operation.getParameters().size();
 					if (function.isStatic()) {
-						if (OperatorMapping.NOT.equals(operator)) {
-							if (parameterSize != 1) {
-								addIssue("The static unary operator '!' requires exactly one argument.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
-							}
-						} else if (OperatorMapping.PLUS.equals(operator) || OperatorMapping.MINUS.equals(operator)) {
+						if (operatorMapping.isUnaryOperator(operator) && operatorMapping.isBinaryOperator(operator)) {
 							if (parameterSize < 1) {
 								addIssue("The static operator '" + operator + "' requires at least one argument.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
 							} else if (parameterSize > 2) {
 								addIssue("The static operator '" + operator + "' allows at most two arguments.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
 							}
-						} else if (parameterSize != 2) {
+						} else if (operatorMapping.isUnaryOperator(operator)) {
+							if (parameterSize != 1) {
+								addIssue("The static unary operator '"+ operator + "' requires exactly one argument.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
+							}
+						} else  if (parameterSize != 2) {
 							addIssue("The static binary operator '" + operator + "' requires exactly two arguments.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
 						}
 					} else {
-						if (OperatorMapping.NOT.equals(operator)) {
-							if (parameterSize > 1) {
-								addIssue("The unary operator '!' allows at most one argument.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
-							}
-						} else if (OperatorMapping.PLUS.equals(operator) || OperatorMapping.MINUS.equals(operator)) {
+						if (operatorMapping.isUnaryOperator(operator) && operatorMapping.isBinaryOperator(operator)) {
 							if (parameterSize > 2) {
 								addIssue("The operator '" + operator + "' allows at most two arguments.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
 							}
+						} else if (operatorMapping.isUnaryOperator(operator)) {
+							if (parameterSize > 1) {
+								addIssue("The unary operator '"+ operator + "' allows at most one argument.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
+							}
+						} else if (parameterSize == 0) {
+							addIssue("The binary operator '" + operator + "' requires at least one argument.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
+							
 						} else if (parameterSize > 2) {
 							addIssue("The binary operator '" + operator + "' allows at most two arguments.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
-						} else if (parameterSize < 1) {
-							addIssue("The binary operator '" + operator + "' requires at least one additional argument.", function, XtendPackage.Literals.XTEND_FUNCTION__NAME, INVALID_OPERATOR_SIGNATURE);
 						}
 					}
 				}
