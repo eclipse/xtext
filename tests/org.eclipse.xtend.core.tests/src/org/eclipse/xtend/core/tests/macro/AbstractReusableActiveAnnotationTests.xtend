@@ -1105,10 +1105,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 				  }
 				  
 				  public void m(final Base b) {
-				    {
-				      _m(b);
-				      return;
-				    }
+				    _m(b);
+				    return;
 				  }
 				}
 			''',

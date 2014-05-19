@@ -35,9 +35,52 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public String m(final String s) {
-			    {
-			      return _m(s);
-			    }
+			    return _m(s);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testThrowExceptionSingleDispatchCase_01() {
+		assertCompilesTo('''
+			class C {
+				def dispatch minus(Object operand) {
+					throw new RuntimeException();
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  protected void _minus(final Object operand) {
+			    throw new RuntimeException();
+			  }
+			  
+			  public void minus(final Object operand) {
+			    _minus(operand);
+			    return;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testThrowExceptionSingleDispatchCase_02() {
+		assertCompilesTo('''
+			class C {
+				def dispatch int minus(Object operand) {
+					throw new RuntimeException();
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  protected int _minus(final Object operand) {
+			    throw new RuntimeException();
+			  }
+			  
+			  public int minus(final Object operand) {
+			    return _minus(operand);
 			  }
 			}
 		''')
@@ -83,6 +126,56 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			      return _minus((Integer)e);
 			    } else if (e != null) {
 			      return _minus(e);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(e).toString());
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testAllCasesThrowException() {
+		assertCompilesTo('''
+			class C {
+				def dispatch minus(Object operand) {
+					throw new RuntimeException();
+				}
+				def dispatch minus(Integer e) {
+					throw new RuntimeException();
+				}
+				def dispatch minus(Double e) {
+					throw new RuntimeException();
+				}
+			}
+		''', '''
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  protected void _minus(final Object operand) {
+			    throw new RuntimeException();
+			  }
+			  
+			  protected void _minus(final Integer e) {
+			    throw new RuntimeException();
+			  }
+			  
+			  protected void _minus(final Double e) {
+			    throw new RuntimeException();
+			  }
+			  
+			  public void minus(final Object e) {
+			    if (e instanceof Double) {
+			      _minus((Double)e);
+			      return;
+			    } else if (e instanceof Integer) {
+			      _minus((Integer)e);
+			      return;
+			    } else if (e != null) {
+			      _minus(e);
+			      return;
 			    } else {
 			      throw new IllegalArgumentException("Unhandled parameter types: " +
 			        Arrays.<Object>asList(e).toString());

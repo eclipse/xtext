@@ -1506,6 +1506,17 @@ class ErrorTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test
+	def void testErrorModel_103() throws Exception {
+		fireproof('''
+			class C {
+				def static dispatch apply(String element) {
+				    throw new UnsupportedOperationException("missing implementation for " + element.class)
+				}
+			}
+		''')
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
