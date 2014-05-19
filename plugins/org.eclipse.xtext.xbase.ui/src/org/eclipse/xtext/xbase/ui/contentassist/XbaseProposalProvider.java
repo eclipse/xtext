@@ -283,6 +283,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				return;
 			}
 		}
+		if (model instanceof XMemberFeatureCall) {
+			ICompositeNode node = NodeModelUtils.getNode(model);
+			int endOffset = node.getEndOffset();
+			if (endOffset >= context.getOffset()) {
+				return;
+			}
+		}
 		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
 	}
 
@@ -346,15 +353,33 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				}
 			}
 		}
-		if (node.getEndOffset() <= context.getOffset()) {
-			if (model instanceof XFeatureCall && model.eContainer() instanceof XClosure)
+		int endOffset = node.getEndOffset();
+		if (endOffset <= context.getOffset()) {
+			if (model instanceof XFeatureCall && model.eContainer() instanceof XClosure || endOffset == context.getOffset() && context.getPrefix().length() == 0)
+				return;
+			if (isInMemberFeatureCall(model, endOffset, context))
 				return;
 			createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
+			return;
+		} else if (isInMemberFeatureCall(model, endOffset, context)) {
 			return;
 		}
 		if (model instanceof XClosure)
 			return;
 		createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
+	}
+	
+	protected boolean isInMemberFeatureCall(EObject model, int endOffset, ContentAssistContext context) {
+		if (model instanceof XMemberFeatureCall && endOffset >= context.getOffset()) {
+			List<INode> featureNodes = NodeModelUtils.findNodesForFeature(model, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+			if (!featureNodes.isEmpty()) {
+				INode featureNode = featureNodes.get(0);
+				if (featureNode.getTotalOffset() < context.getOffset()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	@Override
