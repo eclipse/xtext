@@ -203,6 +203,17 @@ public class OperatorMapping {
 		return getCompoundOperators().contains(operator);
 	}
 	
+	public boolean isBinaryOperator(QualifiedName operator) {
+		return operator.equals(MINUS) || operator.equals(PLUS) || !isUnaryOperator(operator);
+	}
+	
+	public boolean isUnaryOperator(QualifiedName operator) {
+		return operator.equals(PLUS_PLUS) 
+				|| operator.equals(MINUS_MINUS)
+				|| operator.equals(MINUS)
+				|| operator.equals(PLUS)
+				|| operator.equals(NOT);
+	}
 	/**
 	 * Small utility to keep the JavaDoc in sync.
 	 */
