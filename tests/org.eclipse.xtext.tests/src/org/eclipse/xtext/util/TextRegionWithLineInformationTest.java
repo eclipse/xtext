@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.junit.Test;
 
 /**
@@ -16,12 +15,12 @@ import org.junit.Test;
 public class TextRegionWithLineInformationTest extends TextRegionTest {
 
 	@Override
-	@NonNull
+	/* @NonNull */
 	protected ITextRegionWithLineInformation newTextRegion(int offset, int length) {
 		return newTextRegion(offset, length, 0, 0);
 	}
 	
-	@NonNull
+	/* @NonNull */
 	protected ITextRegionWithLineInformation newTextRegion(int offset, int length, int startLine, int endLine) {
 		return new TextRegionWithLineInformation(offset, length, startLine, endLine);
 	}

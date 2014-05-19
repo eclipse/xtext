@@ -9,8 +9,6 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.util.ITextRegion;
 
 /**
@@ -20,7 +18,6 @@ import org.eclipse.xtext.util.ITextRegion;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.3
  */
-@NonNullByDefault
 public interface ILocationInFileProviderExtension {
 
 	/**
@@ -54,7 +51,7 @@ public interface ILocationInFileProviderExtension {
 	 * @param query the hint about the requested range.
 	 * @return the text region or <code>null</code> if the object does not have an associated text region.
 	 */
-	@Nullable
+	/* @Nullable */
 	ITextRegion getTextRegion(EObject object, RegionDescription query);
 	
 	/**
@@ -65,7 +62,7 @@ public interface ILocationInFileProviderExtension {
 	 * @param query the hint about the requested range.
 	 * @return the text region or <code>null</code> if the object does not have an associated text region.
 	 */
-	@Nullable
+	/* @Nullable */
 	ITextRegion getTextRegion(EObject object, EStructuralFeature feature, int indexInList, RegionDescription query);
 	
 }

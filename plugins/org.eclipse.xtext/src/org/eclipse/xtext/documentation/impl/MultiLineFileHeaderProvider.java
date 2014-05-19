@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -46,7 +45,7 @@ public class MultiLineFileHeaderProvider extends AbstractMultiLineCommentProvide
 	 * @since 2.3
 	 * @return a list with exactly one node or an empty list if there is no header is undocumented.
 	 */
-	@NonNull
+	/* @NonNull */
 	public List<INode> getFileHeaderNodes(Resource resource) {
 		if (resource instanceof XtextResource) {
 			IParseResult parseResult = ((XtextResource) resource).getParseResult();

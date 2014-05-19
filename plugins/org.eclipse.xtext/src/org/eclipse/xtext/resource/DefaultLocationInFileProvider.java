@@ -16,9 +16,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.GrammarUtil;
@@ -60,8 +57,8 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 	/**
 	 * @since 2.3
 	 */
-	@Nullable
-	public ITextRegion getTextRegion(@NonNull EObject object, @NonNull RegionDescription query) {
+	/* @Nullable */
+	public ITextRegion getTextRegion(/* @NonNull */ EObject object, /* @NonNull */ RegionDescription query) {
 		switch(query) {
 			// we delegate the implementation to the existing and potentially overridden methods
 			case SIGNIFICANT: return getSignificantTextRegion(object);
@@ -74,7 +71,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 	/**
 	 * @since 2.3
 	 */
-	protected ITextRegion doGetTextRegion(EObject obj, @NonNull RegionDescription query) {
+	protected ITextRegion doGetTextRegion(EObject obj, /* @NonNull */ RegionDescription query) {
 		ICompositeNode node = findNodeFor(obj);
 		if (node == null) {
 			if (obj.eContainer() == null)
@@ -100,8 +97,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 	/**
 	 * @since 2.3
 	 */
-	@NonNullByDefault
-	@Nullable
+	/* @Nullable */
 	public ITextRegion getTextRegion(EObject object, EStructuralFeature feature, int indexInList,
 			RegionDescription query) {
 		switch(query) {

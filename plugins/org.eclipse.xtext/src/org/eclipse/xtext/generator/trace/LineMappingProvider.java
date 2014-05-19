@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -85,7 +84,7 @@ public class LineMappingProvider {
 
 	}
 
-	@Nullable
+	/* @Nullable */
 	public List<LineMapping> getLineMapping(AbstractTraceRegion rootTraceRegion) {
 		final Set<LineMapping> lineData = newLinkedHashSet();
 		createSmapInfo(rootTraceRegion, lineData);

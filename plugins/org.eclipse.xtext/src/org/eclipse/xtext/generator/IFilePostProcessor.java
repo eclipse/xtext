@@ -8,8 +8,6 @@
 package org.eclipse.xtext.generator;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-
 import com.google.inject.ImplementedBy;
 
 /**
@@ -27,7 +25,6 @@ import com.google.inject.ImplementedBy;
  * @since 2.3
  */
 @ImplementedBy(LineSeparatorHarmonizer.class)
-@NonNullByDefault
 public interface IFilePostProcessor {
 
 	CharSequence postProcess(URI fileURI, CharSequence content);

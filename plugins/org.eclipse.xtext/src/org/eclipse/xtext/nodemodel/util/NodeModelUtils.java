@@ -14,8 +14,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
@@ -63,8 +61,8 @@ public class NodeModelUtils {
 	 * @param leafNodeOffset the offset that is covered by the searched node.
 	 * @return the leaf node at the given offset or <code>null</code>.
 	 */
-	@Nullable
-	public static ILeafNode findLeafNodeAtOffset(@NonNull INode node, int leafNodeOffset) {
+	/* @Nullable */
+	public static ILeafNode findLeafNodeAtOffset(/* @NonNull */ INode node, int leafNodeOffset) {
 		INode localNode = node;
 		while(!(localNode instanceof AbstractNode)) {
 			localNode = localNode.getParent();
@@ -119,8 +117,8 @@ public class NodeModelUtils {
 	 * @return the node that is directly associated with the given object.
 	 * @see NodeModelUtils#findActualNodeFor(EObject)
 	 */
-	@Nullable
-	public static ICompositeNode getNode(@Nullable EObject object) {
+	/* @Nullable */
+	public static ICompositeNode getNode(/* @Nullable */ EObject object) {
 		if (object == null)
 			return null;
 		List<Adapter> adapters = object.eAdapters();
@@ -137,7 +135,7 @@ public class NodeModelUtils {
 	 * 
 	 * @return the list of nodes that were used to assign values to the given feature for the given object.
 	 */
-	@NonNull
+	/* @NonNull */
 	public static List<INode> findNodesForFeature(EObject semanticObject, EStructuralFeature structuralFeature) {
 		ICompositeNode node = findActualNodeFor(semanticObject);
 		if (node != null) {
@@ -211,8 +209,8 @@ public class NodeModelUtils {
 	 * @param semanticObject the semantic object whose node should be provided.
 	 * @return the node that covers all assigned values of the given object.
 	 */
-	@Nullable
-	public static ICompositeNode findActualNodeFor(@Nullable EObject semanticObject) {
+	/* @Nullable */
+	public static ICompositeNode findActualNodeFor(/* @Nullable */ EObject semanticObject) {
 		ICompositeNode node = getNode(semanticObject);
 		if (node != null) {
 			while (GrammarUtil.containingAssignment(node.getGrammarElement()) == null && node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
@@ -229,8 +227,8 @@ public class NodeModelUtils {
 	 * 
 	 * @return the semantic object that is really associated with the actual container node of the given node.
 	 */
-	@Nullable
-	public static EObject findActualSemanticObjectFor(@Nullable INode node) {
+	/* @Nullable */
+	public static EObject findActualSemanticObjectFor(/* @Nullable */ INode node) {
 		if (node == null)
 			return null;
 		if (node.hasDirectSemanticElement())
@@ -264,8 +262,8 @@ public class NodeModelUtils {
 		return findActualSemanticObjectFor(parent);
 	}
 
-	@Nullable
-	private static EObject findActualSemanticObjectInChildren(@NonNull INode node, @Nullable EObject grammarElement) {
+	/* @Nullable */
+	private static EObject findActualSemanticObjectInChildren(/* @NonNull */ INode node, /* @Nullable */ EObject grammarElement) {
 		if (node.hasDirectSemanticElement())
 			return node.getSemanticElement();
 		AbstractRule rule = null;

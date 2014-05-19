@@ -12,8 +12,6 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
@@ -34,23 +32,23 @@ public class ParseResult implements IParseResult {
     private ICompositeNode rootNode;
 	private final boolean hasErrors;
     
-    public ParseResult(@Nullable EObject rootAstElement, @NonNull ICompositeNode rootNode, boolean hasErrors) {
+    public ParseResult(/* @Nullable */ EObject rootAstElement, /* @NonNull */ ICompositeNode rootNode, boolean hasErrors) {
     	Preconditions.checkNotNull(rootNode);
         this.rootAstElement = rootAstElement;
         this.rootNode = rootNode;
 		this.hasErrors = hasErrors;
     }
     
-    public void setRootASTElement(@Nullable EObject rootAstElement) {
+    public void setRootASTElement(/* @Nullable */ EObject rootAstElement) {
         this.rootAstElement = rootAstElement;
     }
 
-    @Nullable
+    /* @Nullable */
     public EObject getRootASTElement() {
         return rootAstElement;
     }
 
-    @NonNull
+    /* @NonNull */
 	public Iterable<INode> getSyntaxErrors() {
 		if (rootNode == null || !hasSyntaxErrors())
 			return Collections.emptyList();
@@ -68,12 +66,12 @@ public class ParseResult implements IParseResult {
 		};
 	}
 	
-    @NonNull
+    /* @NonNull */
 	public ICompositeNode getRootNode() {
 		return rootNode;
 	}
     
-	public void setRootNode(@NonNull ICompositeNode rootNode) {
+	public void setRootNode(/* @NonNull */ ICompositeNode rootNode) {
 		Preconditions.checkNotNull(rootNode);
 		this.rootNode = rootNode;
 	}

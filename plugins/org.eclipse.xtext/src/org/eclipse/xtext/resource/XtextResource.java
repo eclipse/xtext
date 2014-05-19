@@ -25,8 +25,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinker;
@@ -153,7 +151,7 @@ public class XtextResource extends ResourceImpl {
 		super();
 	}
 
-	@Nullable
+	/* @Nullable */
 	public IParseResult getParseResult() {
 		return parseResult;
 	}
@@ -312,7 +310,7 @@ public class XtextResource extends ResourceImpl {
 	 * @see IFragmentProvider
 	 * @since 2.4
 	 */
-	protected EObject basicGetEObject(@NonNull String uriFragment) {
+	protected EObject basicGetEObject(/* @NonNull */ String uriFragment) {
 		if (fragmentProvider != null) {
 			EObject result = fragmentProvider.getEObject(this, uriFragment, fragmentProviderFallback);
 			return result;

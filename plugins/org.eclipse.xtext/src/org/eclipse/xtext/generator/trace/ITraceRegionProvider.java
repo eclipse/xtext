@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
-import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * A trace region provider can be used to obtain a new {@link AbstractTraceRegion}.
@@ -19,6 +18,6 @@ public interface ITraceRegionProvider {
 	 * Returns the a trace region.
 	 * @throws TraceNotFoundException if no trace could be found
 	 */
-	@NonNull AbstractTraceRegion getTraceRegion() throws TraceNotFoundException;
+	/* @NonNull */ AbstractTraceRegion getTraceRegion() throws TraceNotFoundException;
 	
 }

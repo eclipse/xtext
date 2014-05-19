@@ -8,8 +8,6 @@
 package org.eclipse.xtext.generator.trace;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 
@@ -20,16 +18,16 @@ public class LocationData extends TextRegionWithLineInformation implements ILoca
 
 	private final URI path;
 	
-	public LocationData(int offset, int length, int lineNumber, int endLineNumber,  @Nullable URI path) {
+	public LocationData(int offset, int length, int lineNumber, int endLineNumber,  /* @Nullable */ URI path) {
 		super(offset, length, lineNumber, endLineNumber);
 		this.path = path;
 	}
 	
-	public LocationData(@NonNull ITextRegionWithLineInformation region,  @Nullable URI path) {
+	public LocationData(/* @NonNull */ ITextRegionWithLineInformation region,  /* @Nullable */ URI path) {
 		this(region.getOffset(), region.getLength(), region.getLineNumber(), region.getEndLineNumber(), path);
 	}
 
-	@Nullable
+	/* @Nullable */
 	public URI getPath() {
 		return path;
 	}
@@ -43,7 +41,7 @@ public class LocationData extends TextRegionWithLineInformation implements ILoca
 	}
 
 	@Override
-	public boolean equals(@Nullable Object obj) {
+	public boolean equals(/* @Nullable */ Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null || !super.equals(obj))
@@ -60,7 +58,7 @@ public class LocationData extends TextRegionWithLineInformation implements ILoca
 	}
 
 	@Override
-	@NonNull
+	/* @NonNull */
 	public String toString() {
 		return "LocationData [" + super.toString() + "][path=" + path + "]";
 	}

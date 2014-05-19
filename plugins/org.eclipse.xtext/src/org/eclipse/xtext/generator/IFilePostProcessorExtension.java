@@ -10,7 +10,6 @@ package org.eclipse.xtext.generator;
 import java.nio.charset.Charset;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * Extension interface to {@link IFilePostProcessor}. It allows to process
@@ -26,6 +25,6 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 public interface IFilePostProcessorExtension {
 	
-	CharSequence postProcess(URI fileURI, CharSequence content, @Nullable Charset targetCharset);
+	CharSequence postProcess(URI fileURI, CharSequence content, /* @Nullable */ Charset targetCharset);
 	
 }
