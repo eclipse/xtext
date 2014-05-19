@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.codebuilder
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.jdt.annotation.NonNullByDefault
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmType
@@ -30,7 +29,6 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 /** 
  * @author Jan Koehnlein
  */
-@NonNullByDefault
 abstract class AbstractCodeBuilder implements ICodeBuilder {
 
 	@Property Object ownerSource

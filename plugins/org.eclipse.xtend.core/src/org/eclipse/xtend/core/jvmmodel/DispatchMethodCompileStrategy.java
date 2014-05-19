@@ -12,8 +12,6 @@ import static com.google.common.collect.Lists.*;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -34,7 +32,6 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
 
-@NonNullByDefault
 public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITreeAppendable> {
 	
 	@Inject
@@ -55,7 +52,7 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 		this.dispatchOperation = dispatchOperation;
 	}
 
-	public void apply(@Nullable ITreeAppendable a) {
+	public void apply(/* @Nullable */ ITreeAppendable a) {
 		if (a == null)
 			throw new IllegalArgumentException("a is never null");
 		boolean needsElse = true;

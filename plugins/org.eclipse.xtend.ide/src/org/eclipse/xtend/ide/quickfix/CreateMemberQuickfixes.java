@@ -15,8 +15,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
@@ -76,7 +74,6 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@NonNullByDefault
 public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	
 	@Inject 
@@ -194,7 +191,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 			return false;
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getNewMemberType(XAbstractFeatureCall call) {
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(call);
 		if(call instanceof XAssignment) {
@@ -205,7 +202,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		}
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected LightweightTypeReference getReceiverType(XAbstractFeatureCall featureCall) {
 		XExpression actualReceiver = featureCall.getActualReceiver();
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, featureCall);
@@ -223,13 +220,13 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		return null;
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected JvmDeclaredType getCallersType(XExpression call) {
 		JvmIdentifiableElement nearestLogicalContainer = logicalContainerProvider.getNearestLogicalContainer(call);
 		return EcoreUtil2.getContainerOfType(nearestLogicalContainer, JvmDeclaredType.class);
 	}
 	
-	@Nullable
+	/* @Nullable */
 	protected String getOperatorMethodName(XAbstractFeatureCall call) {
 		for(INode node: NodeModelUtils.findNodesForFeature(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE)) {
 			for(ILeafNode leafNode: node.getLeafNodes()) {
@@ -255,7 +252,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		issueResolutionAcceptor.accept(issue, "Create local variable '" + variableName + "'",
 				localVarDescriptionBuilder.toString(), "fix_local_var.png",
 				new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
-					public void apply(@Nullable final EObject element, @Nullable final IModificationContext context) throws Exception {
+					public void apply(/* @Nullable */ final EObject element, /* @Nullable */ final IModificationContext context) throws Exception {
 						if (element != null) {
 							XtendMember xtendMember = EcoreUtil2.getContainerOfType(element, XtendMember.class);
 							if (xtendMember != null) {
@@ -288,7 +285,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 				issueResolutionAcceptor);
 	}
 
-	protected void newMethodQuickfixes(LightweightTypeReference containerType, String name, @Nullable LightweightTypeReference returnType,
+	protected void newMethodQuickfixes(LightweightTypeReference containerType, String name, /* @Nullable */ LightweightTypeReference returnType,
 		List<LightweightTypeReference> argumentTypes, XAbstractFeatureCall call, JvmDeclaredType callersType,
 		final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		boolean isLocal = callersType == containerType.getType();
@@ -310,7 +307,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		}
 	}
 	
-	protected void newMethodQuickfix(JvmDeclaredType containerType, String name, @Nullable LightweightTypeReference returnType,
+	protected void newMethodQuickfix(JvmDeclaredType containerType, String name, /* @Nullable */ LightweightTypeReference returnType,
 		List<LightweightTypeReference> parameterTypes, boolean isStatic, boolean isAbstract, boolean isExtension, boolean isLocal, XAbstractFeatureCall call, 
 		final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		AbstractMethodBuilder methodBuilder = codeBuilderFactory.createMethodBuilder(containerType);
@@ -367,7 +364,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 			newFieldQuickfix(callersType, name, fieldType, isStaticAccess(call), call, issue, issueResolutionAcceptor);
 	}
 
-	protected void newFieldQuickfix(JvmDeclaredType containerType, String name, @Nullable LightweightTypeReference fieldType,
+	protected void newFieldQuickfix(JvmDeclaredType containerType, String name, /* @Nullable */ LightweightTypeReference fieldType,
 			boolean isStatic, XAbstractFeatureCall call, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		AbstractFieldBuilder fieldBuilder = codeBuilderFactory.createFieldBuilder(containerType);
 		fieldBuilder.setFieldName(name);
@@ -443,7 +440,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	/**
 	 * @since 2.3
 	 */
-	protected String getDefaultValueLiteral(@Nullable LightweightTypeReference type) {
+	protected String getDefaultValueLiteral(/* @Nullable */ LightweightTypeReference type) {
 		if (type != null && type.isPrimitive()) {
 			Primitive primitiveKind = primitives.primitiveKind((JvmPrimitiveType) type.getType());
 			if (primitiveKind == Primitive.Boolean)

@@ -9,13 +9,11 @@ package org.eclipse.xtend.ide.codebuilder
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import org.eclipse.jdt.annotation.NonNullByDefault
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder
-import org.eclipse.xtext.xbase.compiler.IAppendable
 
 /** 
  * Creates {@link ICodeBuilder}s to insert Java or Xtend code snippets into an {@link IAppendable}.
@@ -23,7 +21,6 @@ import org.eclipse.xtext.xbase.compiler.IAppendable
  * @author Sebastian Benz - Inspiration
  * @author Jan Koehnlein - Initial implementation and API 
  */
-@NonNullByDefault
 class CodeBuilderFactory {
 	
 	@Inject extension IXtendJvmAssociations

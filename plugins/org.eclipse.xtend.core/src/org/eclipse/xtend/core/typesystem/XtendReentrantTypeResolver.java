@@ -18,8 +18,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -92,7 +90,6 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault
 public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTypeResolver {
 
 	public static class DispatchReturnTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
@@ -113,7 +110,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		}
 
 		@Override
-		@Nullable
+		/* @Nullable */
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 			try {
 				LightweightTypeReference expectedType = typeResolver.getReturnTypeOfOverriddenOperation(operation, resolvedTypes, session);
@@ -185,7 +182,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		}
 
 		@Override
-		@Nullable
+		/* @Nullable */
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 			try {
 				// TODO type parameters on dispatch operations
@@ -268,7 +265,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		}
 
 		@Override
-		@Nullable
+		/* @Nullable */
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 			try {
 				CreateExtensionInfo createExtensionInfo = createFunction.getCreateExtensionInfo();
@@ -301,7 +298,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		}
 
 		@Override
-		@Nullable
+		/* @Nullable */
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 			JvmTypeReference declaredReturnType = createOperation.getReturnType();
 			TypeReferences typeReferences = resolvedTypes.getServices().getTypeReferences();
@@ -431,7 +428,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		return super.isHandled(expression);
 	}
 
-	@Nullable
+	/* @Nullable */
 	protected XAnnotation getOutermostAnnotation(XExpression expression) {
 		XAnnotation annotation = EcoreUtil2.getContainerOfType(expression, XAnnotation.class);
 		while (annotation != null) {
