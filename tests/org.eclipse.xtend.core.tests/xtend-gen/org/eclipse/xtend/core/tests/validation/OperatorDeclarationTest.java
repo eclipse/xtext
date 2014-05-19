@@ -241,6 +241,9 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
+      _builder.append("// extension");
+      _builder.newLine();
+      _builder.append("\t");
       _builder.append("def String !(Object o) {");
       _builder.newLine();
       _builder.append("\t");
@@ -355,13 +358,16 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       _builder.append("class A {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def String &&(Object o, Object p) {");
+      _builder.append("def String &&(Object o) {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def String &&(Object o) {");
+      _builder.append("// extension");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def String &&(Object o, Object p) {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -393,7 +399,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       this._validationTestHelper.assertError(file, 
         XtendPackage.Literals.XTEND_FUNCTION, 
         IssueCodes.INVALID_OPERATOR_SIGNATURE, 
-        "The binary operator \'&&\' requires at least one additional argument.");
+        "The binary operator \'&&\' requires at least one argument.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -499,13 +505,28 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       _builder.append("class A {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def String &&(Object o, Object p) {");
+      _builder.append("// unary");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def String +() {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def String &&(Object o) {");
+      _builder.append("// binary or extension unary");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def String +(Object o) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("// extension binary");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def String +(Object o, Object p) {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -520,13 +541,13 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testPlusOperatorDeclaration_instance_error_01() {
+  public void testPlusOperatorDeclaration_instance_error() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class A {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def String &&() {");
+      _builder.append("def String +(Object o, Object p, Object q) {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -537,31 +558,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       this._validationTestHelper.assertError(file, 
         XtendPackage.Literals.XTEND_FUNCTION, 
         IssueCodes.INVALID_OPERATOR_SIGNATURE, 
-        "The binary operator \'&&\' requires at least one additional argument.");
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
-  public void testPlusOperatorDeclaration_instance_error_02() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("class A {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("def String &&(Object o, Object p, Object q) {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final XtendFile file = this._parseHelper.parse(_builder);
-      this._validationTestHelper.assertError(file, 
-        XtendPackage.Literals.XTEND_FUNCTION, 
-        IssueCodes.INVALID_OPERATOR_SIGNATURE, 
-        "The binary operator \'&&\' allows at most two arguments.");
+        "The operator \'+\' allows at most two arguments.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -574,7 +571,13 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       _builder.append("class A {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def static String &&(Object o, Object p) {");
+      _builder.append("def static String +(String s) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def static String +(Object o, Object p) {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -595,7 +598,7 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       _builder.append("class A {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def static String &&(String s) {");
+      _builder.append("def static String +(Object o, Object p, Object q) {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -606,20 +609,71 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       this._validationTestHelper.assertError(file, 
         XtendPackage.Literals.XTEND_FUNCTION, 
         IssueCodes.INVALID_OPERATOR_SIGNATURE, 
-        "The static binary operator \'&&\' requires exactly two arguments.");
+        "The static operator \'+\' allows at most two arguments.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
   @Test
-  public void testPlusOperatorDeclaration_static_error_02() {
+  public void testPlusPlusOperatorDeclaration_static() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class A {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def static String &&(Object o, Object p, Object q) {");
+      _builder.append("def static String ++(Object o) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testPlusPlusOperatorDeclaration_instance() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def String ++() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("// extension");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def String ++(Object o) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testPlusPlusOperatorDeclaration_static_error_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def static String ++(Object o, Object p) {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -630,7 +684,31 @@ public class OperatorDeclarationTest extends AbstractXtendTestCase {
       this._validationTestHelper.assertError(file, 
         XtendPackage.Literals.XTEND_FUNCTION, 
         IssueCodes.INVALID_OPERATOR_SIGNATURE, 
-        "The static binary operator \'&&\' requires exactly two arguments.");
+        "The static unary operator \'++\' requires exactly one argument.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testPlusPlusOperatorDeclaration_instance_error_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def String ++(Object o, Object o2) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertError(file, 
+        XtendPackage.Literals.XTEND_FUNCTION, 
+        IssueCodes.INVALID_OPERATOR_SIGNATURE, 
+        "The unary operator \'++\' allows at most one argument.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
