@@ -45,7 +45,8 @@
 					</execution>
 				</executions>
 				<configuration>
-					<inJar>target/classes</inJar>
+          <injar>classes</injar>
+          <outjar>${project.build.finalName}.jar</outjar>
 					<options>
 						<option>-dontoptimize</option>
 						<option>-dontnote</option>
