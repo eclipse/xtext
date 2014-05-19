@@ -2326,16 +2326,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_5.append("public void m(final Base b) {");
     _builder_5.newLine();
     _builder_5.append("    ");
-    _builder_5.append("{");
-    _builder_5.newLine();
-    _builder_5.append("      ");
     _builder_5.append("_m(b);");
     _builder_5.newLine();
-    _builder_5.append("      ");
-    _builder_5.append("return;");
-    _builder_5.newLine();
     _builder_5.append("    ");
-    _builder_5.append("}");
+    _builder_5.append("return;");
     _builder_5.newLine();
     _builder_5.append("  ");
     _builder_5.append("}");

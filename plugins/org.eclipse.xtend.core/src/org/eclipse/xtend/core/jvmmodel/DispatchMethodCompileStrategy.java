@@ -115,7 +115,10 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 			}
 			if (laters.isEmpty()) {
 				needsElse = false;
-				operationAppendable.append("{").increaseIndentation();
+				if (sortedDispatchOperations.size() != 1) {
+					operationAppendable.append("{").increaseIndentation();
+					operationAppendable.newLine();
+				}
 			} else {
 				operationAppendable.append("if (");
 				operationAppendable.increaseIndentation().increaseIndentation();
@@ -128,8 +131,8 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 				}
 				operationAppendable.decreaseIndentation().decreaseIndentation();
 				operationAppendable.append(") {").increaseIndentation();
+				operationAppendable.newLine();
 			}
-			operationAppendable.newLine();
 			final boolean isCurrentVoid = typeReferences.is(operation.getReturnType(), Void.TYPE);
 			final boolean isDispatchVoid = typeReferences.is(dispatchOperation.getReturnType(), Void.TYPE);
 			if (isDispatchVoid) {
@@ -146,8 +149,10 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 				}
 				operationAppendable.append(";");
 			}
-			operationAppendable.decreaseIndentation();
-			a.newLine().append("}");
+			if (sortedDispatchOperations.size() != 1) {
+				operationAppendable.decreaseIndentation();
+				a.newLine().append("}");
+			}
 		}
 		if (needsElse) {
 			a.append(" else {").increaseIndentation();

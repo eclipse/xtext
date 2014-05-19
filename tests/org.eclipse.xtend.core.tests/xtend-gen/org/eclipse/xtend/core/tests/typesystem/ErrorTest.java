@@ -2834,6 +2834,25 @@ public class ErrorTest extends AbstractXtendTestCase {
     this._oven.fireproof(_builder.toString());
   }
   
+  @Test
+  public void testErrorModel_103() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static dispatch apply(String element) {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("throw new UnsupportedOperationException(\"missing implementation for \" + element.class)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
