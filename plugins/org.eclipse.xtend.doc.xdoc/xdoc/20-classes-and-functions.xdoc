@@ -452,6 +452,85 @@ dispatch methods is prohibited.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+section2:CreateMethods[Create Methods]
+
+Create methods in Xtend allow to do graph transformation in one pass where it usually needs two passes.
+That means you don't need to separate a translation from one graph to another in the typical two phases:
+tree construction and interlinking the tree nodes. You basically just need to write the whole transformation using
+create methods and the built-in identity preservation will take care of the rest.
+
+Consider you want to create a copy of the following list of persons into a :
+
+code[
+	Fred Flintstone {
+		marriedTo Willma Flintstone
+		friendWith Barny Rubble
+	}
+	Willma Flintstone {
+		marriedTo Fred Flintstone
+	}
+	Barny Rubble {
+		friendWith Fred Flintstone
+	}
+] 
+
+A function like the following could do the trick :
+
+code[Xtend][
+def List<Person> copyPersons(List<Person> persons) {
+	persons.map\[copy\]
+}
+def copy(Person p) {
+	val result = new Person()
+	result.name = p.name
+	// The following is wrong and results in a stack overflow
+	result.friendWith = p.friendWith.map\[copy\]   
+	result.marriedWith = p.marriedWith.map\[copy\]
+}
+]
+
+The problem with that code is that we don't track the origins of the created copies. This is the
+main problem with model transformations. The classic solution is to run the copying in two passes.
+First we create all instances and then we establish the links. Although it works it results in cluttered
+and non coherent code. Xtend's create functions handle this problem by introducing identity perservation by
+tracking the origin of each created instance. Therefore, a create function takes two expressions. One to instantiate the actual
+object and a second one to initialize it.
+ 
+code[Xtend][
+def create result: new Person copy(Person p) {
+	result.name = p.name
+	// now it works	
+	result.friendWith = p.friendWith.map\[copy\]   
+	result.marriedWith = p.marriedWith.map\[copy\]
+}	
+]
+
+If you do not specify the name of the result variable it is assumed to be the implicit receiver variable 
+code[Xtend][it], which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:
+
+code[Xtend][
+def Person create new PersonImpl() copy(Person p) {
+	/* it.*/name = p.name
+	friendWith = p.friendWith.map\[copy\]   
+	marriedWith = p.marriedWith.map\[copy\] 
+}	
+]
+
+section3[How it works]
+
+In addition to the keyword code[Xtend][create] one specifies two expressions.
+The first expression is the factory to create an instance while the second will initialize it further.
+Prior to invoking the factory expression, a cache lookup is performed to find a previously created instance
+for the very same arguments. If there is no such instance, the factory expression is evaluated and the
+result is stored in the cache. Subsequently the main expression (also called the initializer expression) is evaluated.
+This happens only if there was no previously created instance available in the cache. If that expression
+in turn calls the create function transitively using the same set of arguments the previously instantiated and cached object is returned.
+Note that the object is probably currently initialized. That is, its internal state may not yet be available.
+The lifecycle of the cache is attached to the instance of the declaring Xtend class. That is you can control
+how long the cache lives by means of Guice.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:Annotations[Annotations]
 
 Annotations are available on classes, fields, methods and parameters. They are prefixed

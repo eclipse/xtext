@@ -59,6 +59,10 @@
 					<topic href="contents/20-classes-and-functions.html#polymorphicDispatch_12" label="Static Dispatch Methods" >
 					</topic>
 				</topic>
+				<topic href="contents/20-classes-and-functions.html#CreateMethods" label="Create Methods" >
+					<topic href="contents/20-classes-and-functions.html#CreateMethods_9" label="How it works" >
+					</topic>
+				</topic>
 			</topic>
 			<topic href="contents/20-classes-and-functions.html#Annotations" label="Annotations" >
 			</topic>

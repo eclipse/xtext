@@ -1208,6 +1208,100 @@ public String label(final Object it) {
 						</p>
 						</section>
 						</section>
+						<!-- subsection -->
+						<section id="CreateMethods" style="padding-top: 68px; margin-top: -68px;">
+						<h3>Create Methods</h3>
+						<p>
+							Create methods in Xtend allow to do graph transformation in one pass where it usually needs two passes.
+							That means you don't need to separate a translation from one graph to another in the typical two phases:
+							tree construction and interlinking the tree nodes. You basically just need to write the whole transformation using
+							create methods and the built-in identity preservation will take care of the rest.
+						</p>
+						<p>
+							Consider you want to create a copy of the following list of persons into a :
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+Fred Flintstone {
+	marriedTo Willma Flintstone
+	friendWith Barny Rubble
+}
+Willma Flintstone {
+	marriedTo Fred Flintstone
+}
+Barny Rubble {
+	friendWith Fred Flintstone
+}</pre>
+							<p>
+						</p>
+						<p>
+							A function like the following could do the trick :
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+def List&lt;Person&gt; copyPersons(List&lt;Person&gt; persons) {
+	persons.map[copy]
+}
+def copy(Person p) {
+	val result = new Person()
+	result.name = p.name
+	// The following is wrong and results in a stack overflow
+	result.friendWith = p.friendWith.map[copy]   
+	result.marriedWith = p.marriedWith.map[copy]
+}</pre>
+							<p>
+						</p>
+						<p>
+							The problem with that code is that we don't track the origins of the created copies. This is the
+							main problem with model transformations. The classic solution is to run the copying in two passes.
+							First we create all instances and then we establish the links. Although it works it results in cluttered
+							and non coherent code. Xtend's create functions handle this problem by introducing identity perservation by
+							tracking the origin of each created instance. Therefore, a create function takes two expressions. One to instantiate the actual
+							object and a second one to initialize it.
+							 
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+def create result: new Person copy(Person p) {
+	result.name = p.name
+	// now it works	
+	result.friendWith = p.friendWith.map[copy]   
+	result.marriedWith = p.marriedWith.map[copy]
+}</pre>
+							<p>
+						</p>
+						<p>
+							If you do not specify the name of the result variable it is assumed to be the implicit receiver variable 
+							<code class="prettyprint lang-xtend">it</code>, which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:
+						</p>
+						<p>
+							</p>
+							<pre class="prettyprint lang-xtend linenums">
+def Person create new PersonImpl() copy(Person p) {
+	/* it.*/name = p.name
+	friendWith = p.friendWith.map[copy]   
+	marriedWith = p.marriedWith.map[copy] 
+}</pre>
+							<p>
+						</p>
+						<!-- subsection -->
+						<section id="_10" style="padding-top: 68px; margin-top: -68px;">
+						<h4>How it works</h4>
+						<p>
+							In addition to the keyword <code class="prettyprint lang-xtend">create</code> one specifies two expressions.
+							The first expression is the factory to create an instance while the second will initialize it further.
+							Prior to invoking the factory expression, a cache lookup is performed to find a previously created instance
+							for the very same arguments. If there is no such instance, the factory expression is evaluated and the
+							result is stored in the cache. Subsequently the main expression (also called the initializer expression) is evaluated.
+							This happens only if there was no previously created instance available in the cache. If that expression
+							in turn calls the create function transitively using the same set of arguments the previously instantiated and cached object is returned.
+							Note that the object is probably currently initialized. That is, its internal state may not yet be available.
+							The lifecycle of the cache is attached to the instance of the declaring Xtend class. That is you can control
+							how long the cache lives by means of Guice.
+						</p>
+						</section>
+						</section>
 						</section>
 						<!--  section -->
 						<section id="Annotations" style="padding-top: 68px; margin-top: -68px;">
@@ -1317,7 +1411,7 @@ listOfStrings.map[ toUpperCase ] // calls ListExtensions.&lt;T, R&gt;map(List&lt
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_10" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_11" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Local Extension Methods</h3>
 						<p>
 							All visible non-static methods of the current class and its super types are automatically available as extensions. For example
@@ -1945,7 +2039,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre>
 							precedence and associativity.
 						</p>
 						<!-- subsection -->
-						<section id="_11" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_12" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Short-Circuit Boolean Operators</h3>
 						<p>
 							If the operators <code class="prettyprint lang-xtend">||</code>, <code class="prettyprint lang-xtend">&amp;&amp;</code>, and <code class="prettyprint lang-xtend">?:</code> are bound to the library methods 
@@ -1970,7 +2064,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_12" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_13" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Postfix Operators</h3>
 						<p>
 							The two postfix operators <code class="prettyprint lang-xtend">++</code> and <code class="prettyprint lang-xtend">--</code> use the following method mapping:
@@ -1989,13 +2083,13 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_13" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_14" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Defined Operators in The Library</h3>
 						<p>
 							Xtend offers operators for common types from the JDK.
 						</p>
 						<!-- subsection -->
-						<section id="_14" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_15" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Equality Operators</h4>
 						<p>
 							In Xtend the equals operators (<code class="prettyprint lang-xtend">==</code>,<code class="prettyprint lang-xtend">!=</code>) are bound to <code class="prettyprint lang-xtend">Object.equals</code>. So you can write:
@@ -2019,7 +2113,7 @@ if (someObject === anotherObject)
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_15" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_16" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Comparison Operators</h4>
 						<p>
 							In Xtend the usual comparison operators (<code class="prettyprint lang-xtend">&gt;</code>,<code class="prettyprint lang-xtend">&lt;</code>,<code class="prettyprint lang-xtend">&gt;=</code>, and <code class="prettyprint lang-xtend">&lt;=</code>) work as expected on the primitive numbers:
@@ -2045,7 +2139,7 @@ if (startTime &lt; arrivalTime)
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_16" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_17" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Arithmetic Operators</h4>
 						<p>
 							The arithmetic operators (<code class="prettyprint lang-xtend">+</code>,<code class="prettyprint lang-xtend">-</code>,<code class="prettyprint lang-xtend">*</code>,<code class="prettyprint lang-xtend">/</code>,<code class="prettyprint lang-xtend">%</code>, and <code class="prettyprint lang-xtend">**</code>) are not only available for
@@ -2061,7 +2155,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_17" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_18" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Elvis Operator</h4>
 						<p>
 							In addition to <a href="#nullSafeFeatureCalls">null-safe feature calls</a> Xtend supports the elvis operator known
@@ -2078,7 +2172,7 @@ val salutation = person.firstName ?: 'Sir/Madam'</pre>
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_18" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_19" style="padding-top: 68px; margin-top: -68px;">
 						<h4>With Operator</h4>
 						<p>
 							The with operator is very handy when you want to initialize objects or when you want to use a particular
@@ -2103,7 +2197,7 @@ val person = new Person =&gt; [
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_19" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_20" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Range Operators</h4>
 						<p>
 							There are three different range operators. The most useful ones are <code class="prettyprint lang-xtend">..&lt;</code> and <code class="prettyprint lang-xtend">&gt;..</code> which create exclusive ranges.
@@ -2154,7 +2248,7 @@ list.reverseView.forEach[
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_20" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_21" style="padding-top: 68px; margin-top: -68px;">
 						<h4>Pair Operator</h4>
 						<p>
 							Sometimes you want to use a pair of two elements locally without introducing a new structure. In Xtend you can
@@ -2347,7 +2441,7 @@ bd *= 12bd // equivalent to bd = bd * 12bd</pre>
 							extension provider</a>).
 						</p>
 						<!-- subsection -->
-						<section id="_21" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_22" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Typing</h3>
 						<p>
 							The type of the variable itself can either be explicitly declared or it can be inferred from the initializer
@@ -2799,7 +2893,7 @@ switch myString : someComputation() {
 							<p>
 						</p>
 						<!-- subsection -->
-						<section id="_22" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_23" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Type guards</h3>
 						<p>
 							Instead of or in addition to the case guard you can specify a <strong>type guard</strong>. The case only matches if the 
@@ -2825,7 +2919,7 @@ def length(Object x) {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_23" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_24" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Fall Through</h3>
 						<p>
 							You can have multiple type guards and case separate with a comma, to have all of them share the same then part.
@@ -3754,7 +3848,7 @@ class LazyTest {
 						</p>
 						</section>
 						<!-- subsection -->
-						<section id="_24" style="padding-top: 68px; margin-top: -68px;">
+						<section id="_25" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Wrap Up</h3>
 						<p>
 							<strong>Active Annotations</strong> are a powerful and unique concept that allows to solve a large class of problems that previously had to be solved in cumbersome ways.

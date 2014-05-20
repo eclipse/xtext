@@ -606,6 +606,108 @@ The resulting dispatch method in the generated Java class <span class="inlinecod
 Also static dispatch methods are supported. A mixture of static and non-static
 dispatch methods is prohibited.
 </p>
+<a name="CreateMethods"></a>
+<h3>Create Methods</h3>
+<p>
+Create methods in Xtend allow to do graph transformation in one pass where it usually needs two passes.
+That means you don&apos;t need to separate a translation from one graph to another in the typical two phases:
+tree construction and interlinking the tree nodes. You basically just need to write the whole transformation using
+create methods and the built-in identity preservation will take care of the rest.
+</p>
+<p>
+Consider you want to create a copy of the following list of persons into a :
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Fred&nbsp;Flintstone&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;marriedTo&nbsp;Willma&nbsp;Flintstone<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;Barny&nbsp;Rubble<br/>
+}<br/>
+Willma&nbsp;Flintstone&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;marriedTo&nbsp;Fred&nbsp;Flintstone<br/>
+}<br/>
+Barny&nbsp;Rubble&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;Fred&nbsp;Flintstone<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+A function like the following could do the trick :
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;List&lt;Person&gt;&nbsp;copyPersons(List&lt;Person&gt;&nbsp;persons)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;persons.map[copy]<br/>
+}<br/>
+<span class="keyword">def</span>&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.name&nbsp;=&nbsp;p.name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;The&nbsp;following&nbsp;is&nbsp;wrong&nbsp;and&nbsp;results&nbsp;in&nbsp;a&nbsp;stack&nbsp;overflow<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;result.friendWith&nbsp;=&nbsp;p.friendWith.map[copy]&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.marriedWith&nbsp;=&nbsp;p.marriedWith.map[copy]<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The problem with that code is that we don&apos;t track the origins of the created copies. This is the
+main problem with model transformations. The classic solution is to run the copying in two passes.
+First we create all instances and then we establish the links. Although it works it results in cluttered
+and non coherent code. Xtend&apos;s create functions handle this problem by introducing identity perservation by
+tracking the origin of each created instance. Therefore, a create function takes two expressions. One to instantiate the actual
+object and a second one to initialize it.
+ 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;<span class="keyword">create</span>&nbsp;result:&nbsp;<span class="keyword">new</span>&nbsp;Person&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.name&nbsp;=&nbsp;p.name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;now&nbsp;it&nbsp;works&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;result.friendWith&nbsp;=&nbsp;p.friendWith.map[copy]&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.marriedWith&nbsp;=&nbsp;p.marriedWith.map[copy]<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+If you do not specify the name of the result variable it is assumed to be the implicit receiver variable 
+<span class="inlinecode"><span class="keyword">it</span></span>, which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;Person&nbsp;<span class="keyword">create</span>&nbsp;<span class="keyword">new</span>&nbsp;PersonImpl()&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*&nbsp;it.*/</span>name&nbsp;=&nbsp;p.name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;=&nbsp;p.friendWith.map[copy]&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;marriedWith&nbsp;=&nbsp;p.marriedWith.map[copy]&nbsp;<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="CreateMethods_9"></a>
+<h4>How it works</h4>
+<p>
+In addition to the keyword <span class="inlinecode"><span class="keyword">create</span></span> one specifies two expressions.
+The first expression is the factory to create an instance while the second will initialize it further.
+Prior to invoking the factory expression, a cache lookup is performed to find a previously created instance
+for the very same arguments. If there is no such instance, the factory expression is evaluated and the
+result is stored in the cache. Subsequently the main expression (also called the initializer expression) is evaluated.
+This happens only if there was no previously created instance available in the cache. If that expression
+in turn calls the create function transitively using the same set of arguments the previously instantiated and cached object is returned.
+Note that the object is probably currently initialized. That is, its internal state may not yet be available.
+The lifecycle of the cache is attached to the instance of the declaring Xtend class. That is you can control
+how long the cache lives by means of Guice.
+</p>
 <a name="Annotations"></a>
 <h2>Annotations</h2>
 <p>
