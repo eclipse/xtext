@@ -349,7 +349,7 @@ public class ReleaseNotes extends AbstractXtendWebsite {
     _builder.newLine();
     _builder.append("<h2>Task Tags</h2>");
     _builder.newLine();
-    _builder.append("<p>TODO, FIXME, and XXX markers in comments are no recognized by teh IDE as task markers.");
+    _builder.append("<p>TODO, FIXME, and XXX markers in comments are now recognized by the IDE as task markers.");
     _builder.newLine();
     _builder.append("The Xtend editor picks up the preference of JDT for adding new kind of markers or removing existing ones.</p>");
     _builder.newLine();
@@ -360,7 +360,7 @@ public class ReleaseNotes extends AbstractXtendWebsite {
     _builder.newLine();
     _builder.append("<h2>Open Implementation</h2>");
     _builder.newLine();
-    _builder.append("<p>In addition to go to declaration, you can now navigate to existing implementations of a method. It works just like in JDT</p>");
+    _builder.append("<p>In addition to the \"Go to declaration\"-action, you can now navigate to existing implementations of a method. It works just like in JDT</p>");
     _builder.newLine();
     _builder.append("<img class=\"image_between_p\" src=\"images/releasenotes/2_6_0_open_implementation.png\"/>");
     _builder.newLine();

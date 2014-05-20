@@ -387,16 +387,6 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.append("<!-- Navbar End -->");
     _builder.newLine();
-    CharSequence _xtextCONRibbon = this.xtextCONRibbon();
-    _builder.append(_xtextCONRibbon, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public CharSequence xtextCONRibbon() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<div class=\"ribbon-wrapper-red\"><div class=\"ribbon-red\"><a href=\"http://xtextcon.org\">Come to XtextCON 2014!</a></div></div>");
-    _builder.newLine();
     return _builder;
   }
   

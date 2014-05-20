@@ -7,10 +7,6 @@ import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public abstract class AbstractXtendWebsite extends AbstractWebsite {
-  public CharSequence xtextCONRibbon() {
-    return "";
-  }
-  
   public String websiteDescription() {
     return "Xtend is a statically typed programming language sitting on top of Java.";
   }

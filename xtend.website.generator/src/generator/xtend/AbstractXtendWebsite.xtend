@@ -4,9 +4,9 @@ import generator.AbstractWebsite
 
 abstract class AbstractXtendWebsite extends AbstractWebsite {
 	
-	override xtextCONRibbon() {
-		''
-	}
+//	override xtextCONRibbon() {
+//		''
+//	}
 	
 	override websiteDescription() {
 		'Xtend is a statically typed programming language sitting on top of Java.'

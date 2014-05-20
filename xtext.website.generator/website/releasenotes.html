@@ -102,13 +102,195 @@
 		</div>
 	</div>
 	<!-- Navbar End -->
-	<div class="ribbon-wrapper-red"><div class="ribbon-red"><a href="http://xtextcon.org">Come to XtextCON 2014!</a></div></div>
 		<div id="header_wrapper" class="container" >
 		</div>
 		<div id="page">
 	  <div class="inner">
 	    <div class="container clearfix">
-	    <h2>Xtext 2.5.0 Release Notes (December 11th, 2013)</h2>
+	    <h2>Xtext 2.6.0 Release Notes (May 21th, 2014)</h2>
+        <hr>
+        <div class="span1">&nbsp;</div>
+          <div class="span9">
+            <p>
+              Version 2.6 got many bug fixes and performance improvements (<a href="https://bugs.eclipse.org/bugs/buglist.cgi?bug_status=RESOLVED&bug_status=VERIFIED&bug_status=CLOSED&status_whiteboard=v2.6">full bugzilla list</a>). The new features are:
+            </p>
+            
+            <section id="todo_tags" style="padding-top: 68px; margin-top: -68px;">
+<h2>Task Tags</h2>
+<p>TODO, FIXME, and XXX markers in comments are now recognized by the IDE as task markers.
+It will be enabled for all Xtext languages, without any further ado (not even a rebuild is required). 
+To get an corresponding preference page for configuraing the kind of Task markers, a special generator fragment is available.</p>
+<img class="image_between_p" src="images/releasenotes/2_6_0_task_markers.png"/>
+
+</section>
+
+<section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
+ <h2>Gradle Plug-in</h2>
+ <p>A gradle plug-in for easy integration of the Xtext-based languages in any Gradle-based Java projects is now available.<br/>
+The gradle plug-in is hosted <a href="https://github.com/oehme/xtext-gradle-plugin">at github</a>. </p>
+<p>All ou need to do is to add the plugin to your build classpath:</p>
+<pre class="prettyprint lang-xtend linenums">
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.xtext:xtext-gradle-plugin:0.0.2'
+  }
+}
+</pre>
+<p>Add your languages to the xtextTooling configuration</p>
+<pre class="prettyprint lang-xtend linenums">
+dependencies {
+  xtextTooling 'org.example:org.example.hero.core:3.3.3'
+  xtextTooling 'org.example:org.example.villain.core:6.6.6'
+}
+</pre>
+<p>Add code that your models compile against to the xtext configuration. If you use the Java plugin, this configuration will automatically contain everything from compile and testCompile. So in many cases this can be omitted.</p>
+<pre class="prettyprint lang-xtend linenums">
+dependencies {
+  xtext 'com.google.guava:guava:15.0'
+}
+</pre>
+<p>Configure your languages</p>
+<pre class="prettyprint lang-xtend linenums">
+xtext {
+  version = '2.5.3' // the current default, can be omitted
+  encoding = 'UTF-8' //the default, can be omitted
+
+  /* Java sourceDirs are added automatically,
+   * so you only need this element if you have
+   * additional source directories to add
+   */
+  sources {
+    srcDir 'src/main/heroes'
+    srcDir 'src/main/villains'
+  }
+
+  languages{
+    heroes {
+      setup = 'org.example.hero.core.HeroStandaloneSetup'
+      consumesJava = true
+      outputs {
+        DEFAULT_OUTPUT.dir = 'build/heroes'
+        SIDEKICKS.dir = 'build/sidekicks'
+      }
+    }
+
+    villains {
+      setup = 'org.example.villain.core.VillainStandaloneSetup'
+      //equivalent to DEFAULT_OUTPUT.dir
+      output.dir = 'build/villains'
+    }
+  }
+}
+</pre>
+<section id="first_token_syntactic_predicates" style="padding-top: 68px; margin-top: -68px;">
+<h2>First-TokenSet Syntactic Predicates</h2>
+<p>Syntactic predicates are used to solve ambiguities in grammars. Sometimes the predicate needs to be set on a more complex rule call, which might involve consuming a great number of tokens.
+With traditional syntactic predicates using the <code>=&gt;</code> operator, the parser would need to match all of those tokens in order to make te decision. The new operator <code>-&gt;</code>
+tells the parser to only look at the first token and make the decision based on that, which is sufficient in most cases. As a result the parser is faster and does better error recovery.</p>
+
+</section><section id="synchronized_expression" style="padding-top: 68px; margin-top: -68px;">
+<h2>Xbase - Synchronized Expression</h2>
+<p>
+    The synchronized expression works basically like Java's synchronized statement.
+</p>
+<pre class="prettyprint lang-xtend linenums">
+synchronized(lock) {
+    // do stuff
+}
+</pre>
+<p>
+    But of course it is an expression, as everything in Xtend/Xbase. So you can write the following as well:
+</p>
+<pre class="prettyprint lang-xtend linenums">
+someMethodCall(synchronized(lock) { ... })
+</pre>
+
+</section><section id="switch_fall_through" style="padding-top: 68px; margin-top: -68px;">
+<h2>Xbase - Switch Fall Through</h2>
+<p>The switch expression now supports a kind of fall through. Here's an example</p>
+<pre class="prettyprint lang-xtend linenums">
+switch myOperator {
+    case '+',
+    case '-' : handlePlusMinus()    
+    case '*',
+    case '/' : handleDivMultiply()
+    default : throw new IllegalStateException
+}
+</pre>
+</section><section id="compound_assignments" style="padding-top: 68px; margin-top: -68px;">
+<h2>Xbase - Compound Assignments</h2>
+<p>Xtend now supports compound assignment operators.</p>
+<pre class="prettyprint lang-xtend linenums">
+var i = 0
+i += 42
+</pre>
+<p>Compound operators work on overloaded operators as well. That is you don't need to declare '+=' if you have '+' defined. 
+Example:</p>
+<pre class="prettyprint lang-xtend linenums">
+var distance = 15.km
+distance += 5.km
+</pre>
+</section><section id="postfix_operators" style="padding-top: 68px; margin-top: -68px;">
+<h2>Xbase - Postfix Operators</h2>
+<p>Postfix operators for incrementing and decrementing numbers have been added.</p>
+<pre class="prettyprint lang-xtend linenums">
+var i = 0
+while (condition()) {
+    i++
+}
+</pre>
+</section><section id="traditional_for_loop" style="padding-top: 68px; margin-top: -68px;">
+<h2>Xbase - Traditional For-Loop</h2>
+<p>The traditional for-loop from Java is now available in Xtend, too.</p>
+<pre class="prettyprint lang-xtend linenums">
+for (var i = 0; i < 99; i++) {
+    println(''+i+' bottles of beer on the wall.')
+}
+</pre>
+
+</section><section id="multivalued_annotation_sugar" style="padding-top: 68px; margin-top: -68px;">
+<h2>Xbase - Multivalued Annotations Sugar</h2>
+<p>Instead of writing </p>
+<pre class="prettyprint lang-xtend linenums">
+@SurpressWarnings(#["unused", "unchecked"])
+</pre>
+<p> you can write</p>
+<pre class="prettyprint lang-xtend linenums">
+@SurpressWarnings("unused", "unchecked")
+</pre>
+
+<section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
+<h2>Xbase - Open Implementation</h2>
+<p>In addition to go to declaration, you can now navigate to existing implementations of a method. It works just like in JDT</p>
+<img class="image_between_p" src="images/releasenotes/2_6_0_open_implementation.png"/>
+
+</section><section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
+<h2>Xbase - Debug Hover Shows Inspect Dialog</h2>
+<p>In a debug session, when hovering over a local variable or a visible field, the popo up shows the inspection tree of the hovered value.</p>
+<img class="image_between_p" src="images/releasenotes/2_6_0_debug_hover_variable.png"/>
+
+</section><section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
+<h2>Xbase - Hover Shows Annotations</h2>
+<p>The declaration hover now includes the annotations.</p>
+<img class="image_between_p" src="images/releasenotes/2_6_0_annotations_in_hover.png"/>
+
+</section>
+
+</section><section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
+<h2>Treeshaken Xbase Lib for Android</h2>
+<p>For large Android projects there is a need to have as little code packaged as possible. 
+Usually this is achieved by proguarding cour code and the dependencies during the build. 
+For people who find that tedious and want to work with a reduced lib from the get go, we offer a treeshaken version of the library, which is only 300k small.</p>
+<p>The library can be <a href="http://search.maven.org/#search%7Cga%7C1%7Corg.eclipse.xtext.xbase.lib.slim">downloaded from maven central</a>.</p>
+            
+         </div>
+      </div>
+      <div class="inner">
+            <div class="container clearfix">
+        <h2>Xtext 2.5.0 Release Notes (December 11th, 2013)</h2>
 	    <hr>
 	    <div class="span1">&nbsp;</div>
 	      <div class="span9">
