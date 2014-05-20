@@ -62,6 +62,14 @@ public class PartialParserTest extends AbstractXtendTestCase {
 		doTestUpdateAtOffset(model, "import static".length(), 0, " ", "Bug434727.xtend");
 	}
 	
+	@Test public void testBug434727_03() throws Exception {
+		String model =
+				"package p\n" +
+				"import static\n" + 
+				"class Foo {}";
+		doTestUpdateAtOffset(model, "package p\nimport static".length(), 0, " ", "Bug434727.xtend");
+	}
+	
 	@Test public void testNoClassCastException() throws Exception {
 		String model =
 				"package org.eclipse.xtend.core.tests.parsing\n" + 

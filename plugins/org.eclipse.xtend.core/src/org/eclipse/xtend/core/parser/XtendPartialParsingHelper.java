@@ -25,8 +25,10 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
@@ -65,6 +67,9 @@ public class XtendPartialParsingHelper implements IPartialParsingHelper {
 	private FlexerFactory flexerFactory;
 
 	public IParseResult reparse(IParser parser, IParseResult previousParseResult, ReplaceRegion changedRegion) {
+		if (isBrokenPreviousState(previousParseResult)) {
+			return fullyReparse(parser, previousParseResult, changedRegion);
+		}
 		ICompositeNode oldRootNode = previousParseResult.getRootNode();
 		Iterator<ILeafNode> leafNodes = oldRootNode.getLeafNodes().iterator();
 		ILeafNode leftNode = getLeftNode(leafNodes, changedRegion.getOffset());
@@ -114,6 +119,29 @@ public class XtendPartialParsingHelper implements IPartialParsingHelper {
 		changedRegion.applyTo(builder);
 		nodeModelBuilder.setCompleteContent(oldRootNode, builder.toString());
 		return newParseResult;
+	}
+	
+	/**
+	 * Returns true if the previous document state was completely broken, e.g. the parser did not recover at all.
+	 * This may happen for documents like
+	 * <pre>import static class C {}</pre>
+	 * where the class keyword is consumed as an invalid token in the import declaration and everything thereafter
+	 * is unrecoverable.
+	 */
+	private boolean isBrokenPreviousState(IParseResult previousParseResult) {
+		if (previousParseResult.hasSyntaxErrors()) {
+			BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) previousParseResult.getRootNode()).basicIterator();
+			while(iterator.hasPrevious()) {
+				AbstractNode previous = iterator.previous();
+				if (previous.getGrammarElement() == null) {
+					return true;
+				}
+				if (previous instanceof ILeafNode) {
+					break;
+				}
+			}
+		}
+		return false;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
