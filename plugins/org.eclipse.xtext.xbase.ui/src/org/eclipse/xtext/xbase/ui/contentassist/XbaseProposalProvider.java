@@ -286,7 +286,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		if (model instanceof XMemberFeatureCall) {
 			ICompositeNode node = NodeModelUtils.getNode(model);
 			int endOffset = node.getEndOffset();
-			if (endOffset >= context.getOffset()) {
+			if (isInMemberFeatureCall(model, endOffset, context)) {
 				return;
 			}
 		}
@@ -374,7 +374,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			List<INode> featureNodes = NodeModelUtils.findNodesForFeature(model, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
 			if (!featureNodes.isEmpty()) {
 				INode featureNode = featureNodes.get(0);
-				if (featureNode.getTotalOffset() < context.getOffset()) {
+				if (featureNode.getTotalOffset() < context.getOffset() && featureNode.getTotalEndOffset() >= context.getOffset()) {
 					return true;
 				}
 			}

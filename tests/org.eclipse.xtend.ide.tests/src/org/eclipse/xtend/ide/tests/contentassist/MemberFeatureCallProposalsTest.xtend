@@ -38,4 +38,28 @@ class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBugTest {
 			.assertTextAtCursorPosition('em', 2, 'empty', 'emptyList', 'emptyMap', 'emptySet')
 	}
 	
+	@Test def void test_03() throws Exception {
+		newBuilder.append('''
+			class C {
+			  def static void main() {
+			    val it = #[]
+			    println(em)
+			  }
+			}
+		''')
+			.assertTextAtCursorPosition('em', 2, 'empty', 'emptyList', 'emptyMap', 'emptySet')
+	}
+	
+	@Test def void test_04() throws Exception {
+		newBuilder.append('''
+			class C {
+			  def static void main() {
+			    val it = #[]
+			    it.addAll(em)
+			  }
+			}
+		''')
+			.assertTextAtCursorPosition('em', 2, 'empty', 'emptyList', 'emptyMap', 'emptySet')
+	}
+	
 }
