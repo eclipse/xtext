@@ -64,4 +64,52 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
     _append.assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
   }
+  
+  @Test
+  public void test_03() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def static void main() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("val it = #[]");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("println(em)");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
+  }
+  
+  @Test
+  public void test_04() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def static void main() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("val it = #[]");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("it.addAll(em)");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
+  }
 }
