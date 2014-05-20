@@ -312,13 +312,4 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/parser/antlr/AbstractAntlrParser.java" type="org.eclipse.xtext.parser.antlr.AbstractAntlrParser">
-        <filter comment="Added protected method" id="1141899266">
-            <message_arguments>
-                <message_argument value="2.5"/>
-                <message_argument value="2.6"/>
-                <message_argument value="createNodeModelBuilder()"/>
-            </message_arguments>
-        </filter>
-    </resource>
 </component>
