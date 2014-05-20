@@ -1510,7 +1510,7 @@ bd&nbsp;+=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;
 </div>
 </p>
 <p>
-Compound assignments work automatcially when the infix operator is declared. The following compound assignment operators 
+Compound assignments work automatically if the binary operator is declared. The following compound assignment operators 
 are supported:
 </p>
 <p>
@@ -1964,8 +1964,7 @@ the type of the <span class="inlinecode"><span class="keyword">if</span></span> 
 <a name="Xbase_Expressions_SwitchExpression"></a>
 <h4>Switch Expression</h4>
 <p>
-The switch expression is a bit different from Java&apos;s. First, there is no fall through which means only one case is evaluated at most.
-Second, the use of switch is not limited to certain values but can be used for any object reference instead.
+The switch expression is a bit different from Java&apos;s, as the use of switch is not limited to certain values but can be used for any object reference instead.
  
 For a switch expression 
 <div class="literallayout">
@@ -2041,7 +2040,7 @@ unless it is reassigned to a new value.
 <a name="Xbase_Expressions_SwitchExpression_8"></a>
 <h5>Fall Through</h5>
 <p>
-You can have multiple type guards and case separate with a comma, to have all of them share the same then part.
+One can have multiple <em>type guards</em> and <em>cases</em> separated with a comma, to have all of them share the same <em>then-expression</em>.
 </p>
 <p>
 <div class="literallayout">
@@ -2229,7 +2228,7 @@ or the element type of the <a class="jdoc" href="http://download.oracle.com/java
 	</li>
 </ul>
 </p>
-<a name="traditionalForLoop"></a>
+<a name="xbase_Expressions_BasicForLoop"></a>
 <h4>Basic For Loop</h4>
 <p>
 The traditional for loop is very similar to the one known from Java, or even C. 

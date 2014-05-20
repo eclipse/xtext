@@ -487,7 +487,7 @@ bd /= 12bd // equivalent to bd = bd / 12bd
 bd *= 12bd // equivalent to bd = bd * 12bd
 ]
 
-Compound assignments work automatcially when the infix operator is declared. The following compound assignment operators 
+Compound assignments work automatically when the infix operator is declared. The following compound assignment operators 
 are supported:
 
 table[
@@ -866,8 +866,7 @@ code[Xtend][
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:switchExpression[Switch Expression]
 
-The switch expression is very different from Java's switch statement. First, there is no fall through which means 
-only one code[Xtend][case] is evaluated at most. Second, the use of code[Xtend][switch] is not limited 
+The switch expression is very different from Java's switch statement. The use of code[Xtend][switch] is not limited 
 to certain values but can be used for any object reference. code[Object.equals(Object)] is used to
 compare the value in the case with the one you are switching over.
  
@@ -921,7 +920,7 @@ might know from Java.
 
 section2[Fall Through]
 
-You can have multiple type guards and case separate with a comma, to have all of them share the same then part.
+You can have multiple type guards and cases separated with a comma, to have all of them share the same then part.
 
 code[Xtend][
   def isMale(String salutation) {

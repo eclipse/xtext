@@ -995,8 +995,8 @@ def &lt;T&gt; second(List&lt;T&gt; elements) {
 						<section id="operatorDeclaration" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Operator Declarations</h3>
 						<p>
-							Xtend support operator overloading based on an operator-name-mapping as explained in <a href="#operators"></a>.
-							To declare an operator one can either declare a simple method using the operator's name or the operator directly like in the
+							Xtend supports operator overloading based on an operator-name-mapping as explained in <a href="#operators"></a>.
+							To declare an operator one can either declare a simple method using the operator's name or by using the operator directly like in the
 							following:
 						</p>
 						<p>
@@ -1571,7 +1571,7 @@ enum MyColor {
 						<h2 style="padding-top: 15px;">Nested Type Declarations</h2>
 						<p>
 							Classes, enum, annotation and interface declarations can be nested. Just as in Java nested enums, annotations and interfaces are always static.
-							In Xtend nested classes are also always static. Nested types are public by default and can only be nethed within class, interface and annotation declarations.
+							In Xtend nested classes are also always static. Nested types are public by default and can only be nested within a class, an interface or an annotation declaration.
 						</p>
 						<p>
 							</p>
@@ -2336,7 +2336,7 @@ bd *= 12bd // equivalent to bd = bd * 12bd</pre>
 							<p>
 						</p>
 						<p>
-							Compound assignments work automatcially when the infix operator is declared. The following compound assignment operators 
+							Compound assignments work automatically when the infix operator is declared. The following compound assignment operators 
 							are supported:
 						</p>
 						<p>
@@ -2853,8 +2853,7 @@ val name = if (firstName != null) firstName + ' ' + lastName else lastName</pre>
 						<section id="switchExpression" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Switch Expression</h2>
 						<p>
-							The switch expression is very different from Java's switch statement. First, there is no fall through which means 
-							only one <code class="prettyprint lang-xtend">case</code> is evaluated at most. Second, the use of <code class="prettyprint lang-xtend">switch</code> is not limited 
+							The switch expression is very different from Java's switch statement. The use of <code class="prettyprint lang-xtend">switch</code> is not limited 
 							to certain values but can be used for any object reference. <code class="prettyprint lang-xtend">Object.equals(Object)</code> is used to
 							compare the value in the case with the one you are switching over.
 							 
@@ -2922,7 +2921,7 @@ def length(Object x) {
 						<section id="_24" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Fall Through</h3>
 						<p>
-							You can have multiple type guards and case separate with a comma, to have all of them share the same then part.
+							You can have multiple type guards and cases separated with a comma, to have all of them share the same then part.
 						</p>
 						<p>
 							</p>

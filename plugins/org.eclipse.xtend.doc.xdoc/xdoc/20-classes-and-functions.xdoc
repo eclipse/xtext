@@ -268,8 +268,8 @@ link[http://docs.oracle.com/javase/specs/jls/se5.0/html/classes.html#8.4.4][the 
 
 section2:operatorDeclaration[Operator Declarations]
 
-Xtend support operator overloading based on an operator-name-mapping as explained in ref:operators.
-To declare an operator one can either declare a simple method using the operator's name or the operator directly like in the
+Xtend supports operator overloading based on an operator-name-mapping as explained in ref:operators.
+To declare an operator one can either declare a simple method using the operator's name or by using the operator directly like in the
 following:
 
 code[Xtend][
@@ -733,7 +733,7 @@ code[Xtend][
 section:Nested_Type_Declarations[Nested Type Declarations]
 
 Classes, enum, annotation and interface declarations can be nested. Just as in Java nested enums, annotations and interfaces are always static.
-In Xtend nested classes are also always static. Nested types are public by default and can only be nethed within class, interface and annotation declarations.
+In Xtend nested classes are also always static. Nested types are public by default and can only be nested within a class, an interface or an annotation declaration.
 
 code[Xtend][
 class MyClass {

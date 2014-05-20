@@ -216,7 +216,7 @@ bd /= 12bd // equivalent to bd = bd / 12bd
 bd *= 12bd // equivalent to bd = bd * 12bd
 ]
 
-Compound assignments work automatcially when the infix operator is declared. The following compound assignment operators 
+Compound assignments work automatically if the binary operator is declared. The following compound assignment operators 
 are supported:
 
 table[
@@ -552,8 +552,7 @@ ul[
 
 section3:Xbase_Expressions_SwitchExpression[Switch Expression]
 
-The switch expression is a bit different from Java's. First, there is no fall through which means only one case is evaluated at most.
-Second, the use of switch is not limited to certain values but can be used for any object reference instead.
+The switch expression is a bit different from Java's, as the use of switch is not limited to certain values but can be used for any object reference instead.
  
 For a switch expression 
 code[Xbase][
@@ -609,7 +608,7 @@ unless it is reassigned to a new value.
 
 section4[Fall Through]
 
-You can have multiple type guards and case separate with a comma, to have all of them share the same then part.
+One can have multiple e[type guards] and e[cases] separated with a comma, to have all of them share the same e[then-expression].
 
 code[Xtend][
   def isMale(String salutation) {
@@ -747,7 +746,7 @@ ul[
 ]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-section3:traditionalForLoop[Basic For Loop]
+section3:xbase_Expressions_BasicForLoop[Basic For Loop]
 
 The traditional for loop is very similar to the one known from Java, or even C. 
 
