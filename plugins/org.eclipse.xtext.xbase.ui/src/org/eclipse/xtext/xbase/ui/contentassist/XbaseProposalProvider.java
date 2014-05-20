@@ -271,7 +271,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Override
 	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
-		new Exception().printStackTrace();
 		lookupCrossReference(crossReference, contentAssistContext, acceptor, getFeatureDescriptionPredicate(contentAssistContext));
 	}
 	
