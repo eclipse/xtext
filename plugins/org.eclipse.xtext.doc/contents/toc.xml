@@ -130,6 +130,8 @@
 				<topic href="contents/020-grammar-language.html#syntax_8" label="Enum Rules" >
 				</topic>
 				<topic href="contents/020-grammar-language.html#antlr_errors" label="Syntactic Predicates" >
+					<topic href="contents/020-grammar-language.html#antlr_errors_11" label="First Token Set Predicates" >
+					</topic>
 				</topic>
 			</topic>
 			<topic href="contents/020-grammar-language.html#metamodelInference" label="Ecore Model Inference" >
@@ -429,7 +431,11 @@
 						</topic>
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Operators_4" label="Examples" >
 						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Operators_5" label="With Operator" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Operators_5" label="Assignment Operators" >
+						</topic>
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Operators_6" label="Postfix Operators" >
+						</topic>
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Operators_7" label="With Operator" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_PropertyAssignment" label="Assignments" >
@@ -469,9 +475,11 @@
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_SwitchExpression" label="Switch Expression" >
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_SwitchExpression_7" label="Type guards" >
 						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_SwitchExpression_8" label="Typing" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_SwitchExpression_8" label="Fall Through" >
 						</topic>
-						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_SwitchExpression_9" label="Examples" >
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_SwitchExpression_9" label="Typing" >
+						</topic>
+						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_SwitchExpression_10" label="Examples" >
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_VariableDeclaration" label="Variable Declarations" >
@@ -483,6 +491,8 @@
 						</topic>
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_ForLoop" label="For Loop" >
+					</topic>
+					<topic href="contents/199-xtext-and-java.html#traditionalForLoop" label="Basic For Loop" >
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_WhileExpression" label="While Loop" >
 						<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_WhileExpression_2" label="Examples" >
@@ -497,6 +507,8 @@
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Throw" label="Throwing Exceptions" >
 					</topic>
 					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_TryCatch" label="Try, Catch, Finally" >
+					</topic>
+					<topic href="contents/199-xtext-and-java.html#Xbase_Expressions_Synchronized" label="Synchronized" >
 					</topic>
 				</topic>
 				<topic href="contents/199-xtext-and-java.html#xbaseLanguageRef_LibraryExtension" label="Extension Methods" >

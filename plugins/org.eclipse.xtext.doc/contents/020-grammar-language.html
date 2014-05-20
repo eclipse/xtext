@@ -1445,7 +1445,7 @@ The problems becomes more obvious as soon as nested conditions are used:
 <p>
 Where does the <span class="inlinecode"><span class="keyword">else</span></span> branch belong to? This question can be answered by a quick look into the language
 specification which tells that the <span class="inlinecode"><span class="keyword">else</span></span> branch is part of the inner condition. However, the parser
-generator cannot be convinced that easy. We have to guide it to this decision point by means of syntactic
+generator cannot be convinced that easily. We have to guide it to this decision point by means of syntactic
 predicates which are expressed by a leading <span class="inlinecode">=&gt;</span> operator.
 </p>
 <p>
@@ -1466,7 +1466,16 @@ and you don&apos;t know what to do, look for the <span class="inlinecode"><span 
 choose the other option that would start with an <span class="inlinecode"><span class="keyword">else</span></span> keyword, too.
 </p>
 <p>
-Well chosen predicates allow to solve most ambiguities and backtracking can often be disabled. 
+Well chosen predicates allow to solve most ambiguities and backtracking can often be disabled.
+</p>
+<a name="antlr_errors_11"></a>
+<h4>First Token Set Predicates</h4>
+<p>
+Sometimes you need to put a syntactic predicate on a more complex rule, e.g. an expression, which might be very long.
+For disambiguation it often is sufficient to only look at the first token set. In those cases one can use
+the <span class="inlinecode">-&gt;</span> operator instead of <span class="inlinecode">=&gt;</span> which tells the parser to just look at the first token and make the decision based on that.
+This can heavily reduce the lookahead and as a consequence make the parser faster and more robust to syntactic errors. This also affects the behavior 
+of the IDE, such as content assist, in a positive way.
 </p>
 <a name="metamodelInference"></a>
 <h2>Ecore Model Inference</h2>

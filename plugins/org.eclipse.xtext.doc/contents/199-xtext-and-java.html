@@ -1492,6 +1492,97 @@ in short circuit mode, which means that the right hand operand is not evaluated 
 </ul>
 </p>
 <a name="Xbase_Expressions_Operators_5"></a>
+<h5>Assignment Operators</h5>
+<p>
+Compound assignment operators can be used as a shorthand for the assignment of a binary expression.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">var</span>&nbsp;BigDecimal&nbsp;bd&nbsp;=&nbsp;45bd<br/>
+bd&nbsp;+=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;bd&nbsp;=&nbsp;bd&nbsp;+&nbsp;12bd<br/>
+</span>bd&nbsp;-=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;bd&nbsp;=&nbsp;bd&nbsp;-&nbsp;12bd<br/>
+</span>bd&nbsp;/=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;bd&nbsp;=&nbsp;bd&nbsp;/&nbsp;12bd<br/>
+</span>bd&nbsp;*=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;bd&nbsp;=&nbsp;bd&nbsp;*&nbsp;12bd</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+Compound assignments work automatcially when the infix operator is declared. The following compound assignment operators 
+are supported:
+</p>
+<p>
+<table>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;+=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">+</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;-=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">-</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;*=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">*</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;/=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">/</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;%=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">%</span>
+</td>
+</tr>
+</table>
+</p>
+<a name="Xbase_Expressions_Operators_6"></a>
+<h5>Postfix Operators</h5>
+<p>
+The two postfix operators <span class="inlinecode">++</span> and <span class="inlinecode">--</span> use the following method mapping:
+</p>
+<p>
+<table>
+<tr>
+<td>
+<span class="inlinecode">e1++</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_plusPlus()</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1--</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_minusMinus()</span>
+</td>
+</tr>
+</table>
+</p>
+<a name="Xbase_Expressions_Operators_7"></a>
 <h5>With Operator</h5>
 <p>
 The <em>with</em> operator <span class="inlinecode">=&gt;</span> executes the <a href="199-xtext-and-java.html#Xbase_Expressions_Lambda" title="Go to &quot;Lambda Expressions&quot;">lambda expression</a> with a single parameter on the right-hand
@@ -1948,13 +2039,33 @@ the type guard works like an automated cast. All subsequent references to the sw
 unless it is reassigned to a new value.
 </p>
 <a name="Xbase_Expressions_SwitchExpression_8"></a>
+<h5>Fall Through</h5>
+<p>
+You can have multiple type guards and case separate with a comma, to have all of them share the same then part.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;isMale(String&nbsp;salutation)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;salutation&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"Mr."</span>,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"Sir"</span>&nbsp;:&nbsp;true<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;false<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="Xbase_Expressions_SwitchExpression_9"></a>
 <h5>Typing</h5>
 <p>
 The type of a switch expression is computed using the rules defined in the
 section on <a href="199-xtext-and-java.html#Xbase_Types_CommonSuperType" title="Go to &quot;Common Super Type&quot;">common super types</a>. The set of types from which the common 
 super type is computed corresponds to the types of each case expression.
 </p>
-<a name="Xbase_Expressions_SwitchExpression_9"></a>
+<a name="Xbase_Expressions_SwitchExpression_10"></a>
 <h5>Examples</h5>
 <p>
 <ul>
@@ -2118,6 +2229,33 @@ or the element type of the <a class="jdoc" href="http://download.oracle.com/java
 	</li>
 </ul>
 </p>
+<a name="traditionalForLoop"></a>
+<h4>Basic For Loop</h4>
+<p>
+The traditional for loop is very similar to the one known from Java, or even C. 
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">for</span>&nbsp;(&lt;init-expression&gt;&nbsp;;&nbsp;&nbsp;&lt;predicate&gt;&nbsp;;&nbsp;&lt;update-expression&gt;)&nbsp;body-expression</span> 
+</p>
+<p>
+When executed, it first executes the <span class="inlinecode">init-expression</span>, where local variables can be declared. Next the <span class="inlinecode">predicate</span> is executed and if it evaluates to <span class="inlinecode">true</span>, 
+the <span class="inlinecode">body-expression</span> is executed. On any subsequent iterations the <span class="inlinecode">update-expressio</span> is executed instead of the init-expression. 
+This happens until the <span class="inlinecode">predicate</span> returns <span class="inlinecode">false</span>.
+</p>
+<p>
+The type of a for loop is <span class="inlinecode"><span class="keyword">void</span></span>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">for</span>&nbsp;(<span class="keyword">val</span>&nbsp;i&nbsp;=&nbsp;0&nbsp;;&nbsp;i&nbsp;&lt;&nbsp;s.length&nbsp;;&nbsp;i++)&nbsp;{<br/>
+&nbsp;&nbsp;println(s.subString(0,i)<br/>
+}
+</p>
+</div>
+</div>
+</p>
 <a name="Xbase_Expressions_WhileExpression"></a>
 <h4>While Loop</h4>
 <p>
@@ -2236,6 +2374,34 @@ does not complain about a missing throws clause, using the sneaky-throw techniqu
 </span>}&nbsp;<span class="keyword">finally</span>&nbsp;{<br/>
 &nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff<br/>
 </span>}
+</p>
+</div>
+</div>
+</p>
+<a name="Xbase_Expressions_Synchronized"></a>
+<h4>Synchronized</h4>
+<p>
+The synchonized expression does the same as it does in Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19">Java Language Specification</a>).
+The only difference is that in Xtend it is an expression and can therefore be used at more places.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">synchronized</span>(lock)&nbsp;{<br/>
+&nbsp;&nbsp;println(<span class="string">"Hello"</span>)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;name&nbsp;=&nbsp;<span class="keyword">synchronized</span>(lock)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;doStuff()&nbsp;<br/>
+}
 </p>
 </div>
 </div>

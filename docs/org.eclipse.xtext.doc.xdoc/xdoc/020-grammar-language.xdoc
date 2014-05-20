@@ -997,7 +997,7 @@ if (isTrue())
 
 Where does the code[Java][else] branch belong to? This question can be answered by a quick look into the language
 specification which tells that the code[Java][else] branch is part of the inner condition. However, the parser
-generator cannot be convinced that easy. We have to guide it to this decision point by means of syntactic
+generator cannot be convinced that easily. We have to guide it to this decision point by means of syntactic
 predicates which are expressed by a leading code[=>] operator.
 
 code[Xtext][Condition: 
@@ -1010,7 +1010,15 @@ The parser understands the predicate basically like this: If you are at this par
 and you don't know what to do, look for the code[Java][else] keyword and if it's present. Don't try to
 choose the other option that would start with an code[Java][else] keyword, too.
 
-Well chosen predicates allow to solve most ambiguities and backtracking can often be disabled. 
+Well chosen predicates allow to solve most ambiguities and backtracking can often be disabled.
+
+section3[First Token Set Predicates]
+
+Sometimes you need to put a syntactic predicate on a more complex rule, e.g. an expression, which might be very long.
+For disambiguation it often is sufficient to only look at the first token set. In those cases one can use
+the code[->] operator instead of code[=>] which tells the parser to just look at the first token and make the decision based on that.
+This can heavily reduce the lookahead and as a consequence make the parser faster and more robust to syntactic errors. This also affects the behavior 
+of the IDE, such as content assist, in a positive way.
 
 section:metamodelInference[Ecore Model Inference]
 
