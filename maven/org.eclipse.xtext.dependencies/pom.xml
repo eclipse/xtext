@@ -31,16 +31,10 @@
 						<iu>
 							<id>org.eclipse.jdt.core</id>
 						</iu>
-						<iu>
-							<id>org.eclipse.jdt.annotation</id>
-						</iu>
 						
 						<!-- Sources -->
 						<iu>
 							<id>org.eclipse.jdt.core.source</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.jdt.annotation.source</id>
 						</iu>
 					</ius>
 				</configuration>

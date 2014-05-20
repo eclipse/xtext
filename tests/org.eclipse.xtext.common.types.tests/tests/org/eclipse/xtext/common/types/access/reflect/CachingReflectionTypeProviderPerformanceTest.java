@@ -24,7 +24,6 @@ import com.google.inject.Inject;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(RefactoringTestLanguageInjectorProvider.class)
-@SuppressWarnings("deprecation")
 public class CachingReflectionTypeProviderPerformanceTest extends AbstractTypeProviderPerformanceTest {
 
 	@Inject
