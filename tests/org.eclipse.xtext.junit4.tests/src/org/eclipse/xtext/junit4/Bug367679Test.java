@@ -14,7 +14,6 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.validation.CompositeEValidator;
-import org.eclipse.xtext.xtext.XtextValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
