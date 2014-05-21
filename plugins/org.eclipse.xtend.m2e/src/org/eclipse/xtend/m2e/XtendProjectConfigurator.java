@@ -153,13 +153,17 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 		}
 	}
 
-	private String makeProjectRelative(String folder,
+	private String makeProjectRelative(String fileName,
 			ProjectConfigurationRequest request) {
 		try {
-			String baseDir = request.getMavenProject().getBasedir()
-					.getCanonicalPath();
-			String canonicalFolder = new File(folder).getCanonicalPath();
-			String relativePath = StringUtils.prechomp(canonicalFolder, baseDir);
+			String baseDir = request.getMavenProject().getBasedir().getCanonicalPath();
+			File file = new File(fileName);
+			String relativePath;
+			if (file.isAbsolute()) {
+				relativePath = StringUtils.prechomp(file.getCanonicalPath(), baseDir);
+			} else {
+				relativePath = file.getPath();
+			}
 			String unixDelimited = relativePath.replaceAll("\\\\", "/");
 			return StringUtils.prechomp(unixDelimited, "/");
 		} catch (IOException e) {
