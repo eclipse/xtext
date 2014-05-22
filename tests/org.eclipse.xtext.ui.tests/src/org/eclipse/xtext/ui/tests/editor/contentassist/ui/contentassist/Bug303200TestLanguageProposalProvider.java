@@ -12,7 +12,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.util.Strings;
 /**
- * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
+ * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
  */
 public class Bug303200TestLanguageProposalProvider extends AbstractBug303200TestLanguageProposalProvider {
 
