@@ -270,9 +270,9 @@ public class Documentation extends AbstractXdocBaseWebsite {
     _builder.newLine();
     _builder.append("<li style=\"color : #333;\">Additional Resources");
     _builder.newLine();
-    _builder.append("<li><a href=\"documentation/2.5.0/Xtext%20Documentation.pdf\">Documentation <img src=\"images/pdf_icon.gif\"></a>");
+    _builder.append("<li><a href=\"documentation/2.6.0/Xtext%20Documentation.pdf\">Documentation <img src=\"images/pdf_icon.gif\"></a>");
     _builder.newLine();
-    _builder.append("<li><a href=\"http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/\">API Documentation (JavaDoc)</a>");
+    _builder.append("<li><a href=\"http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.6/\">API Documentation (JavaDoc)</a>");
     _builder.newLine();
     return _builder;
   }

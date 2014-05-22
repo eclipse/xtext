@@ -2,7 +2,7 @@ module GenerateSpec
 
 import org.eclipse.emf.mwe.utils.*
 
-var targetDir = "../../xtext.website.generator/website/documentation/2.5.0"
+var targetDir = "../../xtext.website.generator/website/documentation/2.6.0"
 var modelPath = "xdoc"
 
 Workflow {
@@ -11,7 +11,7 @@ Workflow {
 		// or define search scope explicitly
 		modelPath = modelPath
 		targetDir = targetDir
-		document = "Xtext 2.5 Documentation"
+		document = "Xtext Documentation"
 		pdfLatex = "/usr/texbin/pdflatex"
 		release = true
 //		cleanAfterRun = false

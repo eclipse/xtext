@@ -57,7 +57,7 @@ class Documentation extends AbstractXtendWebsite {
 	@Inject extension HtmlExtensions
 	@Inject PostProcessor processor
 	
-	val currentVersion = "2.5.0"
+	val currentVersion = "2.6.0"
 	
 	override website() {
 		processor.postProcess(super.website())

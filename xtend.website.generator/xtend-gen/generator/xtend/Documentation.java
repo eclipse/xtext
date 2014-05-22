@@ -83,7 +83,7 @@ public class Documentation extends AbstractXtendWebsite {
   @Inject
   private PostProcessor processor;
   
-  private final String currentVersion = "2.5.0";
+  private final String currentVersion = "2.6.0";
   
   public CharSequence website() {
     CharSequence _website = super.website();
