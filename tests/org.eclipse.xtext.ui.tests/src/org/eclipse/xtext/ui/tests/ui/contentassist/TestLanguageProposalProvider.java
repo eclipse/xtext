@@ -4,7 +4,7 @@
 package org.eclipse.xtext.ui.tests.ui.contentassist;
 
 /**
- * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
+ * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
  */
 public class TestLanguageProposalProvider extends AbstractTestLanguageProposalProvider {
 

@@ -6,7 +6,7 @@ package org.eclipse.xtext.purexbase.ui.contentassist;
 import org.eclipse.xtext.purexbase.ui.contentassist.AbstractPureXbaseProposalProvider;
 
 /**
- * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
+ * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
  */
 @SuppressWarnings("all")
 public class PureXbaseProposalProvider extends AbstractPureXbaseProposalProvider {

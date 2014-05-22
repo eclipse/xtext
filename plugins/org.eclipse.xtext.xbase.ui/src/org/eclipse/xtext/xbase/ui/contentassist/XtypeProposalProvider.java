@@ -33,7 +33,7 @@ import org.eclipse.xtext.xtype.XImportDeclaration;
 
 import com.google.inject.Inject;
 /**
- * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
+ * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
  */
 public class XtypeProposalProvider extends AbstractXtypeProposalProvider {
 	

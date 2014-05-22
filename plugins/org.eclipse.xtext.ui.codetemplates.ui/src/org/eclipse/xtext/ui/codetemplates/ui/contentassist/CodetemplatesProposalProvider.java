@@ -56,7 +56,7 @@ import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
- * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
+ * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
  */
 public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposalProvider implements ModeAware {
 	
