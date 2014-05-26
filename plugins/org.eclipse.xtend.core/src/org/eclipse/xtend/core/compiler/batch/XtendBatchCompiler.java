@@ -539,7 +539,12 @@ public class XtendBatchCompiler {
 		if (log.isDebugEnabled()) {
 			log.debug("classpath used for Xtend compilation : " + classPathUrls);
 		}
-		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), useCurrentClassLoaderAsParent ? currentClassLoader : null);
+		ClassLoader urlClassLoader;
+		if (useCurrentClassLoaderAsParent) {
+			urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), currentClassLoader);
+		} else {
+			urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), ClassLoader.getSystemClassLoader().getParent());
+		}
 		new ClasspathTypeProvider(urlClassLoader, resourceSet, skipIndexLookup ? null : indexedJvmTypeAccess);
 		((XtextResourceSet) resourceSet).setClasspathURIContext(urlClassLoader);
 		
