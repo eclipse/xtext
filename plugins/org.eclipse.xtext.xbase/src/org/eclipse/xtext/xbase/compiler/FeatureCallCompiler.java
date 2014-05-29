@@ -171,7 +171,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected String getLeftOperandVariable(final XAbstractFeatureCall expr, ITreeAppendable appendable) {
 		XBinaryOperation binaryOperation = (XBinaryOperation) expr;
 		XAbstractFeatureCall leftOperand = (XAbstractFeatureCall) binaryOperation.getLeftOperand();
-		return appendable.getName(leftOperand.getFeature());
+		JvmIdentifiableElement feature = leftOperand.getFeature();
+		if (appendable.hasName(feature))
+			return appendable.getName(feature);
+		return feature.getSimpleName();
 	}
 
 	protected boolean needMultiAssignment(XAbstractFeatureCall expr) {
