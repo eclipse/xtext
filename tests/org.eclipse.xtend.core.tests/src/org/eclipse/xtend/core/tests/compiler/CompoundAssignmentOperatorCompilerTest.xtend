@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -408,4 +409,27 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 
+	@Ignore
+	@Test def void test_13() {
+		'''
+			class Foo {
+				var i = 2
+				def foo() {
+					i += 2
+				}
+			}
+		'''.assertCompilesTo(
+		'''
+			@SuppressWarnings("all")
+			public class Foo {
+			  private int i = 2;
+			  
+			  public int foo() {
+			  	// method body is bogus, the field should be assigned somewhere in this code
+			    int _i = this.i;
+			    return (_i + 2);
+			  }
+			}
+		''')
+	}
 }
