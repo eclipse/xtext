@@ -532,77 +532,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		} else if (call.getFeature() instanceof JvmExecutable) {
 			final JvmExecutable executable = (JvmExecutable) call.getFeature();
 			if (!executable.getTypeParameters().isEmpty()) {
-//				XExpression receiver = getActualReceiver(call);
-//				final JvmTypeReference receiverType = receiver != null ? getType(receiver) : null;
-//				final JvmTypeReference expectedType = getTypeProvider().getExpectedType(call);
-//				final List<JvmTypeReference> argumentTypes = Lists.newArrayList();
-//				for (XExpression argument : getActualArguments(call)) {
-//					argumentTypes.add(getTypeProvider().getType(argument));
-//				}
-//
-//				ITypeArgumentContext typeArgumentContext = getContextProvider().getTypeArgumentContext(
-//						new XbaseTypeArgumentContextProvider.AbstractFeatureCallRequest() {
-//							@Override
-//							public JvmFeature getFeature() {
-//								return executable;
-//							}
-//							
-//							@Override
-//							public XAbstractFeatureCall getFeatureCall() {
-//								return call;
-//							}
-//
-//							/* @Nullable */
-//							@Override
-//							public JvmTypeParameterDeclarator getNearestDeclarator() {
-//								EObject context = call;
-//								JvmTypeParameterDeclarator result = null;
-//								while (context != null && result == null) {
-//									if (context instanceof JvmTypeParameterDeclarator) {
-//										result = (JvmTypeParameterDeclarator) context;
-//									} else {
-//										JvmIdentifiableElement logicalContainer = contextProvider
-//												.getLogicalContainer(context);
-//										if (logicalContainer != null) {
-//											context = logicalContainer;
-//										} else {
-//											context = context.eContainer();
-//										}
-//									}
-//								}
-//								return result;
-//							}
-//
-//							/* @Nullable */
-//							@Override
-//							public JvmTypeReference getDeclaredType() {
-//								if (executable instanceof JvmOperation)
-//									return ((JvmOperation) executable).getReturnType();
-//								return null;
-//							}
-//
-//							/* @Nullable */
-//							@Override
-//							public JvmTypeReference getReceiverType() {
-//								return receiverType;
-//							}
-//
-//							@Override
-//							public JvmTypeReference getExpectedType() {
-//								return expectedType;
-//							}
-//
-//							@Override
-//							public List<JvmTypeReference> getArgumentTypes() {
-//								return argumentTypes;
-//							}
-//
-//							@Override
-//							public String toString() {
-//								return "FeatureCallCompiler.featureCalltoJavaExpression [call=" + call + "]";
-//							}
-//						});
-				
 				List<LightweightTypeReference> typeArguments = getResolvedTypes(call).getActualTypeArguments(call);
 				List<JvmTypeReference> resolvedTypeArguments = Lists.newArrayList();
 				boolean containedUnresolved = false;
@@ -760,6 +689,21 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		XExpression receiver = getActualReceiver(call);
 		if (receiver != null) {
 			internalToJavaExpression(receiver, b);
+			if (receiver instanceof XAbstractFeatureCall) {
+				// some local types have a reference name bound to the empty string
+				// which is the reason why we have to check for an empty string as a valid
+				// reference name here
+				// see AnonymousClassCompilerTest.testCapturedLocalVar_04
+				// if it turns out that we have to deal with generics there too, we may
+				// have to create a field in the synthesized local class with a unique
+				// name that points to 'this'
+				if (((XAbstractFeatureCall) receiver).getFeature() instanceof JvmType) {
+					String referenceName = getReferenceName(receiver, b);
+					if (referenceName != null && referenceName.length() == 0) {
+						return false;
+					}
+				}
+			}
 			return true;
 		} else {
 			return false;

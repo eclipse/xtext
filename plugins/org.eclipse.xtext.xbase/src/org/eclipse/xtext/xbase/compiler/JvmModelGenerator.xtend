@@ -650,7 +650,7 @@ class JvmModelGenerator implements IGenerator {
 			 * B.super resolves to A though the name is computed from the current 'this'
 			 */
 			val element = b.getObject('this') // if we have a super, there must be a 'this'
-			if (element instanceof JvmType) {
+			if (element instanceof JvmDeclaredType) {
 				val proposedName = element.simpleName+".super"
 				b.declareVariable(b.getObject('super'), proposedName)
 			}
@@ -665,9 +665,13 @@ class JvmModelGenerator implements IGenerator {
 	private def reassignThisType(ITreeAppendable b, JvmDeclaredType declaredType) {
 		if (b.hasObject('this')) {
 			val element = b.getObject('this')
-			if (element instanceof JvmType) {
-				val proposedName = element.simpleName+'.this'
-				b.declareVariable(element, proposedName)
+			if (element instanceof JvmDeclaredType) {
+				if (element.local) {
+					b.declareVariable(element, '')
+				} else {
+					val proposedName = element.simpleName+'.this'
+					b.declareVariable(element, proposedName)
+				}
 			}
 			if (declaredType != null)
 				b.declareVariable(declaredType, 'this');

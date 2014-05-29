@@ -7,20 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class FeatureScopeSessionWithoutLocalElements extends AbstractNestedFeatureScopeSession {
+public class FeatureScopeSessionWithCapturedLocalElements extends AbstractNestedFeatureScopeSession {
 
-	protected FeatureScopeSessionWithoutLocalElements(AbstractFeatureScopeSession parent) {
+	protected FeatureScopeSessionWithCapturedLocalElements(AbstractFeatureScopeSession parent) {
 		super(parent);
+	}
+	
+	@Override
+	public IFeatureScopeSession getNextCaptureLayer() {
+		return getParent();
 	}
 	
 	@Override
@@ -36,16 +39,6 @@ public class FeatureScopeSessionWithoutLocalElements extends AbstractNestedFeatu
 	@Override
 	/* @Nullable */
 	public IEObjectDescription getLocalElement(QualifiedName name) {
-		return null;
-	}
-	
-	@Override
-	public List<JvmDeclaredType> getEnclosingTypes() {
-		return Collections.emptyList();
-	}
-	
-	@Override
-	public IFeatureScopeSession getNextCaptureLayer() {
 		return null;
 	}
 
