@@ -40,7 +40,6 @@ public class FeatureScopeSessionWithContext extends AbstractNestedFeatureScopeSe
 	
 	@Override
 	public boolean isVisible(JvmMember member, /* @Nullable */ LightweightTypeReference receiverType, /* @Nullable */ JvmIdentifiableElement receiverFeature) {
-		// TODO probably bogus implementation
 		boolean result = isVisible(member);
 		if (result && JvmVisibility.PROTECTED == member.getVisibility()) {
 			if (receiverFeature != null) {
@@ -60,22 +59,22 @@ public class FeatureScopeSessionWithContext extends AbstractNestedFeatureScopeSe
 						return true;
 					}
 				}
-				JvmType contextType = visibilityHelper.getRawContextType();
-				if (contextType instanceof JvmDeclaredType) {
-					String packageName = ((JvmDeclaredType) contextType).getPackageName();
-					JvmDeclaredType declaringType = member.getDeclaringType();
-					String memberPackageName = declaringType.getPackageName();
-					if (Strings.equal(packageName, memberPackageName)) {
-						return declaringType == receiverType.getType() || receiverType.getRawTypes().contains(contextType);
-					}
-				}
-				return false;
-			} else if (receiverType != null) {
-				JvmType contextType = visibilityHelper.getRawContextType();
-				if (!receiverType.getRawTypes().contains(contextType)) {
-					return false;
+			}
+			JvmType contextType = visibilityHelper.getRawContextType();
+			if (contextType instanceof JvmDeclaredType) {
+				String packageName = ((JvmDeclaredType) contextType).getPackageName();
+				JvmDeclaredType declaringType = member.getDeclaringType();
+				String memberPackageName = declaringType.getPackageName();
+				if (Strings.equal(packageName, memberPackageName)) {
+					return true;
 				}
 			}
+			if (receiverType != null) {
+				if (receiverType.isSubtypeOf(contextType)) {
+					return true;
+				}
+			}
+			return false;
 		}
 		return result;
 	}
