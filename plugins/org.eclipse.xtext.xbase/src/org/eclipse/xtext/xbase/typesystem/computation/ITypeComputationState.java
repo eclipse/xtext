@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
@@ -235,9 +236,9 @@ public interface ITypeComputationState {
 	void addExtensionsToCurrentScope(List<? extends JvmIdentifiableElement> extensionProviders);
 	
 	/**
-	 * If the expression tree contains intermediate objects, e.g. {@link XCasePart}
-	 * or {@link XCatchClause}, one can explicitly record the scope of these
-	 * objects as these won't be processed by the inference infrastructure.
+	 * If the expression tree contains expressions that define a new scope, e.g. add local variables
+	 * to the scope as a {@link XForLoopExpression} would do, the scope for contained expressions may
+	 * be explicitly recorded by announcing that the inference is now done within that newly created scope.
 	 */
 	void withinScope(EObject context);
 	
@@ -268,8 +269,6 @@ public interface ITypeComputationState {
 	 * @param actualType the context type with bound type arguments (possibly unresolved). 
 	 */
 	void assignType(QualifiedName name, JvmType rawType, LightweightTypeReference actualType);
-	
-	void addDiagnostic(AbstractDiagnostic diagnostic);
 	
 	/**
 	 * The result is never empty.
@@ -353,8 +352,20 @@ public interface ITypeComputationState {
 	 */
 	UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter);
 
+	/**
+	 * Adds the given diagnostic to the current state. If this state is later discarded in favor
+	 * of a better solution, the diagnostic is discarded, too.
+	 */
+	void addDiagnostic(AbstractDiagnostic diagnostic);
+	
+	/**
+	 * Returns the severity for the given {@code issueCode}.
+	 */
 	Severity getSeverity(String issueCode);
 	
+	/**
+	 * Returns {@code false} if no issues have to be produced for the given issueCode.
+	 */
 	boolean isIgnored(String issueCode);
 	
 }

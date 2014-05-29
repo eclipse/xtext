@@ -115,11 +115,29 @@ public class FeatureScopes implements IFeatureNames {
 		IScope staticImports = createStaticFeaturesScope(context, root, session);
 		IScope staticMembers = createStaticScope(asAbstractFeatureCall(context), null, null, staticImports, session, resolvedTypes);
 		IScope staticExtensions = createStaticExtensionsScope(null, null, context, staticMembers, session, resolvedTypes);
+		// we don't want to use captured instances of 'IT' as dynamic extension implicit argument
+		// thus the dynamic extension scope only works for the *real* local variables
 		IScope dynamicExtensions = createDynamicExtensionsScope(null, null, context, staticExtensions, session, resolvedTypes);
-		IScope implicitReceivers = createImplicitFeatureCallScope(context, dynamicExtensions, session, resolvedTypes);
-		IScope constructors = createConstructorDelegates(context, implicitReceivers, session, resolvedTypes);
-		IScope localVariables = new LocalVariableScope(constructors, session, asAbstractFeatureCall(context));
+		IScope localVariables = createImplicitFeatureCallAndLocalVariableScope(context, dynamicExtensions, session, resolvedTypes);
 		return localVariables;
+	}
+
+	protected IScope createImplicitFeatureCallAndLocalVariableScope(EObject context, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+		IFeatureScopeSession nextCaptureLayer = session.getNextCaptureLayer();
+		if (nextCaptureLayer != null) {
+			parent = createImplicitFeatureCallAndLocalVariableScope(context, parent, nextCaptureLayer, resolvedTypes);
+		}
+		IScope implicitReceivers = createImplicitFeatureCallScope(context, parent, session, resolvedTypes);
+		IScope constructors = createConstructorDelegates(context, implicitReceivers, session, resolvedTypes);
+		IScope localVariables = createLocalVariableScope(context, constructors, session, resolvedTypes);
+		return localVariables;
+	}
+
+	/**
+	 * @param resolvedTypes may be used by inheritors. 
+	 */
+	protected LocalVariableScope createLocalVariableScope(EObject context, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+		return new LocalVariableScope(parent, session, asAbstractFeatureCall(context));
 	}
 	
 	protected boolean isDefiniteTypeLiteral(XFeatureCall featureCall) {

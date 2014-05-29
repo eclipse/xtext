@@ -153,6 +153,17 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	IFeatureScopeSession dropLocalElements();
 	
 	/**
+	 * Allows to capture the available local elements as if they have been defined on the {@code this} type as a member.
+	 * This will provide a proper scope for non static nested or local classes.
+	 */
+	IFeatureScopeSession captureLocalElements();
+	
+	/**
+	 * Returns the next layer of the captured scopes.
+	 */
+	IFeatureScopeSession getNextCaptureLayer();
+	
+	/**
 	 * Find a local element with the given qualified name.
 	 * @return the known element or <code>null</code>.
 	 */

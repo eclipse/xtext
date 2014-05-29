@@ -517,7 +517,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testCapturedLocalVar() {
+	def void testCapturedLocalVar_01() {
 		'''
 			class Foo {
 				def foo() {
@@ -537,6 +537,306 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			        x.toString();
 			      }
 			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testCapturedLocalVar_02() {
+		'''
+			class Foo {
+				def foo() {
+					var x = ''
+					val bar = new Runnable() {
+						String x
+						override run() { x.toString }
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo() {
+			    abstract class __Foo_1 implements Runnable {
+			      String x;
+			    }
+			    
+			    String x = "";
+			    final __Foo_1 bar = new __Foo_1() {
+			      public void run() {
+			        this.x.toString();
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testCapturedLocalVar_03() {
+		'''
+			class Foo {
+				def foo() {
+					val x = ''
+					val bar = new Runnable() {
+						String x
+						override run() { x.toString }
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo() {
+			    abstract class __Foo_1 implements Runnable {
+			      String x;
+			    }
+			    
+			    final String x = "";
+			    final __Foo_1 bar = new __Foo_1() {
+			      public void run() {
+			        this.x.toString();
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testCapturedLocalVar_04() {
+		'''
+			class Foo {
+				val x = ''
+				def foo() {
+					val x = ''
+					val bar = new Runnable() {
+						String x
+						override run() {
+							new Object() {
+								override toString() {
+									x
+								}
+							}
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final String x = "";
+			  
+			  public void foo() {
+			    abstract class __Foo_1 implements Runnable {
+			      String x;
+			    }
+			    
+			    final String x = "";
+			    final __Foo_1 bar = new __Foo_1() {
+			      public void run() {
+			        new Object() {
+			          public String toString() {
+ллл			          	we may not qualify x here with __Foo_1.this.x
+ллл			          	since that would be invalid Java code
+			            return x;
+			          }
+			        };
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testCapturedLocalVar_05() {
+		'''
+			class Foo {
+				val x = ''
+				def foo() {
+					val bar = new Runnable() {
+						String x
+						override run() {
+							val String x = ''
+							new Object() {
+								override toString() {
+									x
+								}
+							}
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final String x = "";
+			  
+			  public void foo() {
+			    abstract class __Foo_1 implements Runnable {
+			      String x;
+			    }
+			    
+			    final __Foo_1 bar = new __Foo_1() {
+			      public void run() {
+			        final String x = "";
+			        new Object() {
+			          public String toString() {
+			            return x;
+			          }
+			        };
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testCapturedLocalVar_06() {
+		'''
+			class Foo {
+				def foo(String x) {
+					val bar = new Runnable() {
+						String x
+						override run() {
+							x.toString
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo(final String x) {
+			    abstract class __Foo_1 implements Runnable {
+			      String x;
+			    }
+			    
+			    final __Foo_1 bar = new __Foo_1() {
+			      public void run() {
+			        this.x.toString();
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testCapturedLocalVar_07() {
+		'''
+			class Foo {
+				def foo() {
+					val bar = new Runnable() {
+						String x
+						override run() {
+						}
+						def void m(String x) {
+							x.toString
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo() {
+			    abstract class __Foo_1 implements Runnable {
+			      String x;
+			      
+			      public abstract void m(final String x);
+			    }
+			    
+			    final __Foo_1 bar = new __Foo_1() {
+			      public void run() {
+			      }
+			      
+			      public void m(final String x) {
+			        x.toString();
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testCapturedLocalVar_08() {
+		'''
+			class C {
+				Object x
+				def m(String x) {
+					new Object() {
+						override toString() {
+							x.substring(1)
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  private Object x;
+			  
+			  public Object m(final String x) {
+			    return new Object() {
+			      public String toString() {
+			        return x.substring(1);
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testCapturedLocalVar_09() {
+		'''
+			package foo
+			import org.eclipse.xtext.xbase.lib.Functions.Function0
+			class Foo {
+				def foo() {
+					var String name
+					bar(new Function0<String>() {
+						String name
+						override apply() {
+							name
+						}
+					})
+				}
+				def bar(()=>String f) {
+				}
+			}
+		'''.assertCompilesTo('''
+			package foo;
+			
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public Object foo() {
+			    abstract class __Foo_1 implements Function0<String> {
+			      String name;
+			    }
+			    
+			    Object _xblockexpression = null;
+			    {
+			      String name = null;
+			      __Foo_1 ___Foo_1 = new __Foo_1() {
+			        public String apply() {
+			          return this.name;
+			        }
+			      };
+			      _xblockexpression = this.bar(___Foo_1);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public Object bar(final Function0<? extends String> f) {
+			    return null;
 			  }
 			}
 		''')

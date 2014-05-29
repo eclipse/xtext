@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -43,7 +43,7 @@ public class LocalVariableScope extends AbstractSessionBasedScope {
 	}
 	
 	@Override
-	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+	protected List<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		if (!canBeLocalVariable())
 			return Collections.emptyList();
 		IEObjectDescription element = getSession().getLocalElement(name);
@@ -68,12 +68,19 @@ public class LocalVariableScope extends AbstractSessionBasedScope {
 		return false;
 	}
 	
+	/**
+	 * @param localElements subclasses may use that. 
+	 */
+	protected boolean looksLikeLocalVariable(XAbstractFeatureCall featureCall, List<IEObjectDescription> localElements) {
+		return looksLikeLocalVariable(featureCall);
+	}
+	
 	@Override
 	public Iterable<IEObjectDescription> getElements(final QualifiedName name) {
-		Collection<IEObjectDescription> localElements = getLocalElementsByName(name);
+		List<IEObjectDescription> localElements = getLocalElementsByName(name);
 		if (localElements.isEmpty())
 			return getParent().getElements(name);
-		if (looksLikeLocalVariable(getFeatureCall())) {
+		if (looksLikeLocalVariable(getFeatureCall(), localElements)) {
 			return localElements;
 		}
 		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {

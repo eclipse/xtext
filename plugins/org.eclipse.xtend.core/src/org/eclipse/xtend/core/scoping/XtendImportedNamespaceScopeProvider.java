@@ -9,9 +9,7 @@ package org.eclipse.xtend.core.scoping;
 
 import static java.util.Collections.*;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;

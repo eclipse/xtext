@@ -98,6 +98,10 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		return Collections.emptyList();
 	}
 	
+	public IFeatureScopeSession getNextCaptureLayer() {
+		return null;
+	}
+	
 	public IFeatureScopeSession toInstanceContext() {
 		return new InstanceFeatureScopeSession(this);
 	}
@@ -108,6 +112,10 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	
 	public IFeatureScopeSession dropLocalElements() {
 		return new FeatureScopeSessionWithoutLocalElements(this);
+	}
+	
+	public IFeatureScopeSession captureLocalElements() {
+		return new FeatureScopeSessionWithCapturedLocalElements(this);
 	}
 
 	public IFeatureScopeSession addLocalElement(QualifiedName name, JvmIdentifiableElement element, ITypeReferenceOwner owner) {

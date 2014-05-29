@@ -75,6 +75,11 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 	}
 	
 	@Override
+	public IFeatureScopeSession getNextCaptureLayer() {
+		return parent.getNextCaptureLayer();
+	}
+	
+	@Override
 	public List<JvmDeclaredType> getEnclosingTypes() {
 		return parent.getEnclosingTypes();
 	}

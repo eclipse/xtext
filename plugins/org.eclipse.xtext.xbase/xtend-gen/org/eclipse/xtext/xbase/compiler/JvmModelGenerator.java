@@ -1293,8 +1293,8 @@ public class JvmModelGenerator implements IGenerator {
       String _xblockexpression = null;
       {
         final Object element = b.getObject("this");
-        if ((element instanceof JvmType)) {
-          String _simpleName = ((JvmType)element).getSimpleName();
+        if ((element instanceof JvmDeclaredType)) {
+          String _simpleName = ((JvmDeclaredType)element).getSimpleName();
           final String proposedName = (_simpleName + ".super");
           Object _object = b.getObject("super");
           b.declareVariable(_object, proposedName);
@@ -1325,10 +1325,15 @@ public class JvmModelGenerator implements IGenerator {
       String _xblockexpression = null;
       {
         final Object element = b.getObject("this");
-        if ((element instanceof JvmType)) {
-          String _simpleName = ((JvmType)element).getSimpleName();
-          final String proposedName = (_simpleName + ".this");
-          b.declareVariable(element, proposedName);
+        if ((element instanceof JvmDeclaredType)) {
+          boolean _isLocal = ((JvmDeclaredType)element).isLocal();
+          if (_isLocal) {
+            b.declareVariable(element, "");
+          } else {
+            String _simpleName = ((JvmDeclaredType)element).getSimpleName();
+            final String proposedName = (_simpleName + ".this");
+            b.declareVariable(element, proposedName);
+          }
         }
         String _xifexpression_1 = null;
         boolean _notEquals = (!Objects.equal(declaredType, null));
