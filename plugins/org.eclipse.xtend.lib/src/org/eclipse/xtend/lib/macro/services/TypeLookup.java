@@ -26,7 +26,7 @@ public interface TypeLookup {
 
 	/**
 	 * @param qualifiedName
-	 *            - the qualified name of the type to look up
+	 *            the qualified name of the type to look up. Nested class delimiter is expected to be the '.' (dot).
 	 * @return the <code>MutableClassDeclaration</code> with given qualified
 	 *         name, or <code>null</code> if no such class declaration is
 	 *         contained in the currently processed <code>CompilationUnit</code>
@@ -35,7 +35,7 @@ public interface TypeLookup {
 
 	/**
 	 * @param qualifiedName
-	 *            - the qualified name of the type to look up
+	 *            the qualified name of the type to look up. Nested class delimiter is expected to be the '.' (dot).
 	 * @return the <code>MutableInterfaceDeclaration</code> with given qualified
 	 *         name, or <code>null</code> if no such interface declaration is
 	 *         contained in the currently processed <code>CompilationUnit</code>
@@ -44,7 +44,7 @@ public interface TypeLookup {
 
 	/**
 	 * @param qualifiedName
-	 *            - the qualified name of the type to look up
+	 *            the qualified name of the type to look up. Nested class delimiter is expected to be the '.' (dot).
 	 * @return the <code>MutableEnumerationTypeDeclaration</code> with given
 	 *         qualified name, or <code>null</code> if no such class declaration
 	 *         is contained in the currently processed
@@ -54,7 +54,7 @@ public interface TypeLookup {
 
 	/**
 	 * @param qualifiedName
-	 *            - the qualified name of the type to look up
+	 *            the qualified name of the type to look up. Nested class delimiter is expected to be the '.' (dot).
 	 * @return the <code>MutableAnnotationTypeDeclaration</code> with given
 	 *         qualified name, or <code>null</code> if no such class declaration
 	 *         is contained in the currently processed
@@ -64,7 +64,7 @@ public interface TypeLookup {
 
 	/**
 	 * @param clazz
-	 *            - the clazz representing the type to look up
+	 *            the clazz representing the type to look up
 	 * @return the type with the same qualified name as the given
 	 *         <code>Class</code> object, or <code>null</code> if that type
 	 *         couldn't be found on the compilation units classpath.
@@ -73,7 +73,7 @@ public interface TypeLookup {
 
 	/**
 	 * @param typeName
-	 *            - the qualified name of the type to look up
+	 *            the qualified name of the type to look up. Nested class delimiter is expected to be the '.' (dot).
 	 * @return the type with the given qualified name, or <code>null</code> if such a type
 	 *         couldn't be found on the compilation units classpath.
 	 */
