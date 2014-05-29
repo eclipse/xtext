@@ -16,6 +16,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 
@@ -75,13 +76,13 @@ public class ModifierValidator {
 					error("The " + memberName + " can either be abstract or final, not both",
 							member, i);
 				}
-				if(staticSeen) {
+				if(staticSeen && !(member instanceof XtendTypeDeclaration)) {
 					error("The " + memberName + " can either be abstract or static, not both",
 							member, i);
 				}
 				abstractSeen = true;
 			} else if(equal(modifier, "static")) {
-				if(abstractSeen) {
+				if(abstractSeen && !(member instanceof XtendTypeDeclaration)) {
 					error("The " + memberName + " can either be abstract or static, not both",
 							member, i);
 				}

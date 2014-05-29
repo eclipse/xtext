@@ -32,6 +32,20 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testAbstractNestedClass() {'''
+			class C {
+				abstract static class X {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public static abstract class X {
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testGetSuper_01() {'''
 			class C {
 				def void m2(A a) {
