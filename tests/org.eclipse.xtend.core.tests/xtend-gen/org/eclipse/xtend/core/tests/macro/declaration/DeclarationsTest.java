@@ -73,7 +73,6 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
@@ -124,7 +123,6 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       public void apply(final CompilationUnitImpl it) {
@@ -164,7 +162,6 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.append("@test.Annotation2 String foo");
     _builder.newLine();
     _builder.append("}");
-    _builder.newLine();
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
@@ -247,6 +244,46 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         TypeReference _type = field.getType();
         Type _type_1 = _type.getType();
         Assert.assertSame(_findClass, _type_1);
+      }
+    };
+    this.asCompilationUnit(_validFile, _function);
+  }
+  
+  @Test
+  public void testNestedClass() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package p");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Outer {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static class Inner {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        String _packageName = it.getPackageName();
+        Assert.assertEquals("p", _packageName);
+        Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
+        TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
+        final ClassDeclaration outer = ((ClassDeclaration) _head);
+        String _qualifiedName = outer.getQualifiedName();
+        Assert.assertEquals("p.Outer", _qualifiedName);
+        Iterable<? extends ClassDeclaration> _declaredClasses = outer.getDeclaredClasses();
+        final ClassDeclaration inner = IterableExtensions.head(_declaredClasses);
+        String _simpleName = inner.getSimpleName();
+        Assert.assertEquals("Inner", _simpleName);
+        String _qualifiedName_1 = inner.getQualifiedName();
+        Assert.assertEquals("p.Outer.Inner", _qualifiedName_1);
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        MutableClassDeclaration _findClass = _typeLookup.findClass("p.Outer.Inner");
+        Assert.assertNotNull(_findClass);
+        TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
+        Type _findTypeGlobally = _typeLookup_1.findTypeGlobally("p.Outer.Inner");
+        Assert.assertNotNull(_findTypeGlobally);
       }
     };
     this.asCompilationUnit(_validFile, _function);

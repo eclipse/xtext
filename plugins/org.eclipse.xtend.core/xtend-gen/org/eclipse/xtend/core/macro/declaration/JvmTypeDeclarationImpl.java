@@ -67,7 +67,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   
   public String getQualifiedName() {
     T _delegate = this.getDelegate();
-    return _delegate.getIdentifier();
+    return _delegate.getQualifiedName('.');
   }
   
   public boolean isAssignableFrom(final Type otherType) {

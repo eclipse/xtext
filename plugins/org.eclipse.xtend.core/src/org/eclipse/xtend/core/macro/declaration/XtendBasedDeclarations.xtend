@@ -50,6 +50,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 
 import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals.*
+import org.eclipse.xtext.EcoreUtil2
 
 abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedElementImpl<T> {
 	
@@ -89,7 +90,7 @@ abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendAn
 abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends XtendMemberDeclarationImpl<T> implements TypeDeclaration {
 	
 	def getPackageName() {
-		return (delegate.eContainer as XtendFile).getPackage
+		return EcoreUtil2.getContainerOfType(delegate, XtendFile).package
 	}
 	
 	override getSimpleName() {
@@ -97,10 +98,26 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 	}
 	
 	override getQualifiedName() {
-		if (packageName != null)
-			packageName+'.'+simpleName
-		else 
-			simpleName
+		delegate.qualifiedName
+	}
+	
+	def private String getQualifiedName(XtendTypeDeclaration decl) {
+		if (decl.anonymous)
+			return null
+		val container = decl.eContainer
+		if (container instanceof XtendFile) {
+			val package = container.package
+			if (package == null)
+				return decl.name
+			return package + '.' + decl.name
+		}
+		if (container instanceof XtendTypeDeclaration) {
+			val containerName = container.qualifiedName
+			if (containerName == null)
+				return null
+			return containerName + '.' + decl.name
+		}
+		return null
 	}
 	
 	override getVisibility() {
