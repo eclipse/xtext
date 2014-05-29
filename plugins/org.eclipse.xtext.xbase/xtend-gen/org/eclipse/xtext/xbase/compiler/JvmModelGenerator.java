@@ -580,13 +580,13 @@ public class JvmModelGenerator implements IGenerator {
       boolean _isInterface = it.isInterface();
       boolean _not = (!_isInterface);
       if (_not) {
-        boolean _isAbstract = it.isAbstract();
-        if (_isAbstract) {
-          appendable.append("abstract ");
-        }
         boolean _isStatic = it.isStatic();
         if (_isStatic) {
           appendable.append("static ");
+        }
+        boolean _isAbstract = it.isAbstract();
+        if (_isAbstract) {
+          appendable.append("abstract ");
         }
       }
       boolean _isFinal = it.isFinal();
