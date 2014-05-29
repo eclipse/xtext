@@ -31,11 +31,10 @@ class DeclarationsTest extends AbstractXtendTestCase {
 	
 	@Test def testAnnotation() {
 		validFile('''
-		@SuppressWarnings("unused")
-		class MyClass {
-			@com.google.inject.Inject(optional=true) MyClass foo
-		}
-		
+			@SuppressWarnings("unused")
+			class MyClass {
+				@com.google.inject.Inject(optional=true) MyClass foo
+			}
 		''').asCompilationUnit [
 			assertNull(packageName)
 			val clazz = sourceTypeDeclarations.head as ClassDeclaration
@@ -59,10 +58,9 @@ class DeclarationsTest extends AbstractXtendTestCase {
 	
 	@Test def testAnnotation2() {
 		validFile('''
-		class MyClass {
-			@com.google.inject.Inject() MyClass foo
-		}
-		
+			class MyClass {
+				@com.google.inject.Inject() MyClass foo
+			}
 		''').asCompilationUnit [
 			val sourceClazz = sourceTypeDeclarations.head as ClassDeclaration
 			val javaClass = typeLookup.findClass("MyClass")
@@ -78,11 +76,10 @@ class DeclarationsTest extends AbstractXtendTestCase {
 	
 	@Test def testAnnotation3() {
 		validFile('''
-		@test.Annotation
-		class MyClass {
-			@test.Annotation2 String foo
-		}
-		
+			@test.Annotation
+			class MyClass {
+				@test.Annotation2 String foo
+			}
 		''').asCompilationUnit [
 			val anno = typeLookup.findClass("MyClass").annotations.head
 			val anno2 = typeLookup.findClass("MyClass").declaredFields.head.annotations.head
@@ -96,11 +93,11 @@ class DeclarationsTest extends AbstractXtendTestCase {
 	
 	@Test def testSimpleClassWithField() {
 		validFile('''
-		package foo
-		
-		class MyClass extends Object implements java.io.Serializable {
-			MyClass foo
-		}
+			package foo
+			
+			class MyClass extends Object implements java.io.Serializable {
+				MyClass foo
+			}
 		''').asCompilationUnit [
 			assertEquals('foo', packageName)
 			val clazz = sourceTypeDeclarations.head as ClassDeclaration
@@ -110,6 +107,25 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			val field = clazz.declaredMembers.head as FieldDeclaration
 			assertEquals('foo', field.simpleName)
 			assertSame(typeLookup.findClass('foo.MyClass'), field.type.type)
+		]
+	}
+	
+	@Test def testNestedClass() {
+		validFile('''
+			package p
+			
+			class Outer {
+				static class Inner {}
+			}
+		''').asCompilationUnit [
+			assertEquals('p', packageName)
+			val outer = sourceTypeDeclarations.head as ClassDeclaration
+			assertEquals('p.Outer', outer.qualifiedName)
+			val inner = outer.declaredClasses.head
+			assertEquals('Inner', inner.simpleName)
+			assertEquals('p.Outer.Inner', inner.qualifiedName)
+			assertNotNull(typeLookup.findClass('p.Outer.Inner'))
+			assertNotNull(typeLookup.findTypeGlobally('p.Outer.Inner'))
 		]
 	}
 	

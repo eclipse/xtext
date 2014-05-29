@@ -129,9 +129,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 			return null;
 		JvmDeclaredType declaringType = getDeclaringType();
 		if (declaringType == null) {
-			if (Strings.isEmpty(packageName))
-				return simpleName;
-			return packageName + "." + simpleName;
+			return getIdentifier();
 		}
 		String parentName = declaringType.getQualifiedName(innerClassDelimiter);
 		if (parentName == null)

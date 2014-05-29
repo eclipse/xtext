@@ -29,6 +29,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -39,8 +40,8 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends XtendMemberDeclarationImpl<T> implements TypeDeclaration {
   public String getPackageName() {
     T _delegate = this.getDelegate();
-    EObject _eContainer = _delegate.eContainer();
-    return ((XtendFile) _eContainer).getPackage();
+    XtendFile _containerOfType = EcoreUtil2.<XtendFile>getContainerOfType(_delegate, XtendFile.class);
+    return _containerOfType.getPackage();
   }
   
   public String getSimpleName() {
@@ -49,18 +50,35 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   }
   
   public String getQualifiedName() {
-    String _xifexpression = null;
-    String _packageName = this.getPackageName();
-    boolean _notEquals = (!Objects.equal(_packageName, null));
-    if (_notEquals) {
-      String _packageName_1 = this.getPackageName();
-      String _plus = (_packageName_1 + ".");
-      String _simpleName = this.getSimpleName();
-      _xifexpression = (_plus + _simpleName);
-    } else {
-      _xifexpression = this.getSimpleName();
+    T _delegate = this.getDelegate();
+    return this.getQualifiedName(_delegate);
+  }
+  
+  private String getQualifiedName(final XtendTypeDeclaration decl) {
+    boolean _isAnonymous = decl.isAnonymous();
+    if (_isAnonymous) {
+      return null;
     }
-    return _xifexpression;
+    final EObject container = decl.eContainer();
+    if ((container instanceof XtendFile)) {
+      final String package_ = ((XtendFile)container).getPackage();
+      boolean _equals = Objects.equal(package_, null);
+      if (_equals) {
+        return decl.getName();
+      }
+      String _name = decl.getName();
+      return ((package_ + ".") + _name);
+    }
+    if ((container instanceof XtendTypeDeclaration)) {
+      final String containerName = this.getQualifiedName(((XtendTypeDeclaration)container));
+      boolean _equals_1 = Objects.equal(containerName, null);
+      if (_equals_1) {
+        return null;
+      }
+      String _name_1 = decl.getName();
+      return ((containerName + ".") + _name_1);
+    }
+    return null;
   }
   
   public Visibility getVisibility() {

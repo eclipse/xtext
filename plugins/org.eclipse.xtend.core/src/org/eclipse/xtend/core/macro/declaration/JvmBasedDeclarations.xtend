@@ -179,7 +179,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	def getQualifiedName() {
-		delegate.identifier
+		delegate.getQualifiedName('.')
 	}
 	
 	def isAssignableFrom(Type otherType) {
