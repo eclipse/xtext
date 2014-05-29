@@ -812,7 +812,7 @@ public class JvmTypesBuilder {
 	}
 	
 	public /* @Nullable */ JvmOperation toHashCodeMethod(/* @Nullable */ final EObject sourceElement, final boolean extendsSomethingWithProperHashCode, final JvmField ...jvmFields) {
-		if (sourceElement == null)
+		if (sourceElement == null)
 			return null;
 		JvmOperation result = toMethod(sourceElement, "hashCode", this.references.getTypeForName(Integer.TYPE, sourceElement), null);
 		if (result == null)
@@ -831,20 +831,20 @@ public class JvmTypesBuilder {
 				for (JvmField field : jvmFields) {
 					String typeName = field.getType().getIdentifier();
 					if (Boolean.TYPE.getName().equals(typeName)) {
-						p.newLine().append("result = prime * result + (" + field.getSimpleName() +" ? 1231 : 1237);");
+						p.newLine().append("result = prime * result + (this." + field.getSimpleName() +" ? 1231 : 1237);");
 					} else if (Integer.TYPE.getName().equals(typeName)
 							|| Character.TYPE.getName().equals(typeName)
 							|| Byte.TYPE.getName().equals(typeName)
 							|| Short.TYPE.getName().equals(typeName)) {
-						p.newLine().append("result = prime * result + " + field.getSimpleName() +";");
+						p.newLine().append("result = prime * result + this." + field.getSimpleName() +";");
 					} else if (Long.TYPE.getName().equals(typeName)) {
-						p.newLine().append("result = prime * result + (int) (" + field.getSimpleName() +" ^ (" + field.getSimpleName() + " >>> 32));");
+						p.newLine().append("result = prime * result + (int) (this." + field.getSimpleName() +" ^ (this." + field.getSimpleName() + " >>> 32));");
 					} else if (Float.TYPE.getName().equals(typeName)) {
-						p.newLine().append("result = prime * result + Float.floatToIntBits(" + field.getSimpleName() +");");
+						p.newLine().append("result = prime * result + Float.floatToIntBits(this." + field.getSimpleName() +");");
 					} else if (Double.TYPE.getName().equals(typeName)) {
-						p.newLine().append("result = prime * result + (int) (Double.doubleToLongBits(" + field.getSimpleName() +") ^ (Double.doubleToLongBits(" + field.getSimpleName() + ") >>> 32));");
+						p.newLine().append("result = prime * result + (int) (Double.doubleToLongBits(this." + field.getSimpleName() +") ^ (Double.doubleToLongBits(this." + field.getSimpleName() + ") >>> 32));");
 					} else {
-						p.newLine().append("result = prime * result + ((" + field.getSimpleName() +"== null) ? 0 : "+field.getSimpleName()+".hashCode());");
+						p.newLine().append("result = prime * result + ((this." + field.getSimpleName() +"== null) ? 0 : this."+field.getSimpleName()+".hashCode());");
 					}
 				}
 				p.newLine().append("return result;");
@@ -890,21 +890,21 @@ public class JvmTypesBuilder {
 								|| Character.TYPE.getName().equals(typeName)
 								|| Byte.TYPE.getName().equals(typeName)
 								|| Short.TYPE.getName().equals(typeName)) {
-							p.newLine().append("if (other." + field.getSimpleName() +" != " + field.getSimpleName() + ")").increaseIndentation();
+							p.newLine().append("if (other." + field.getSimpleName() +" != this." + field.getSimpleName() + ")").increaseIndentation();
 								p.newLine().append("return false;").decreaseIndentation();
 							
 						} else if (Double.TYPE.getName().equals(typeName)) {
-							p.newLine().append("if (Double.doubleToLongBits(other." + field.getSimpleName() +") != Double.doubleToLongBits(" + field.getSimpleName() + "))").increaseIndentation();
+							p.newLine().append("if (Double.doubleToLongBits(other." + field.getSimpleName() +") != Double.doubleToLongBits(this." + field.getSimpleName() + "))").increaseIndentation();
 							p.newLine().append("return false;").decreaseIndentation();
 						} else if (Float.TYPE.getName().equals(typeName)) {
-							p.newLine().append("if (Float.floatToIntBits(other." + field.getSimpleName() +") != Float.floatToIntBits(" + field.getSimpleName() + "))").increaseIndentation();
+							p.newLine().append("if (Float.floatToIntBits(other." + field.getSimpleName() +") != Float.floatToIntBits(this." + field.getSimpleName() + "))").increaseIndentation();
 							p.newLine().append("return false;").decreaseIndentation();
 						} else {
-							p.newLine().append("if (" + field.getSimpleName() +" == null) {").increaseIndentation();
+							p.newLine().append("if (this." + field.getSimpleName() +" == null) {").increaseIndentation();
 								p.newLine().append("if (other." + field.getSimpleName() +" != null)").increaseIndentation();
 									p.newLine().append("return false;").decreaseIndentation();
 								p.decreaseIndentation();
-							p.newLine().append("} else if (!"+ field.getSimpleName() +".equals(other."+ field.getSimpleName() +"))").increaseIndentation();
+							p.newLine().append("} else if (!this."+ field.getSimpleName() +".equals(other."+ field.getSimpleName() +"))").increaseIndentation();
 								p.newLine().append("return false;").decreaseIndentation();
 						}
 					}
