@@ -26,6 +26,7 @@ import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.AnnotationRulerColumn;
 import org.eclipse.jface.text.source.CompositeRuler;
 import org.eclipse.jface.text.source.IAnnotationAccessExtension;
+import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISharedTextColors;
 import org.eclipse.jface.text.source.SourceViewer;
@@ -270,49 +271,52 @@ public class EmbeddedEditorFactory {
 					if (issueProcessor != null) {
 						issueProcessor.processIssues(issues, monitor);
 					}
-					if (this.annotationIssueProcessor == null) {
-						this.annotationIssueProcessor = new AnnotationIssueProcessor(document, viewer.getAnnotationModel(), new IssueResolutionProvider() {
-
-							public boolean hasResolutionFor(String issueCode) {
-								return issueResolutionProvider.hasResolutionFor(issueCode);
-							}
-
-							public List<IssueResolution> getResolutions(Issue issue) {
-								List<IssueResolution> resolutions = issueResolutionProvider.getResolutions(issue);
-								List<IssueResolution> result = Lists.transform(resolutions, new Function<IssueResolution, IssueResolution>() {
-
-									public IssueResolution apply(final IssueResolution input) {
-										IssueResolution result = new IssueResolution(
-												input.getLabel(), 
-												input.getDescription(), 
-												input.getImage(), 
-												new IModificationContext() {
-													public IXtextDocument getXtextDocument(URI uri) {
-														if (uri.trimFragment().equals(document.getResourceURI()))
-															return document;
-														return input.getModificationContext().getXtextDocument(uri);
-													}
-													
-													public IXtextDocument getXtextDocument() {
-														IModificationContext original = input.getModificationContext();
-														if (original instanceof IssueModificationContext) {
-															URI uri = ((IssueModificationContext) original).getIssue().getUriToProblem();
-															return getXtextDocument(uri);
+					IAnnotationModel annotationModel = viewer.getAnnotationModel();
+					if (annotationModel != null) {
+						if (this.annotationIssueProcessor == null) {
+							this.annotationIssueProcessor = new AnnotationIssueProcessor(document, annotationModel, new IssueResolutionProvider() {
+	
+								public boolean hasResolutionFor(String issueCode) {
+									return issueResolutionProvider.hasResolutionFor(issueCode);
+								}
+	
+								public List<IssueResolution> getResolutions(Issue issue) {
+									List<IssueResolution> resolutions = issueResolutionProvider.getResolutions(issue);
+									List<IssueResolution> result = Lists.transform(resolutions, new Function<IssueResolution, IssueResolution>() {
+	
+										public IssueResolution apply(final IssueResolution input) {
+											IssueResolution result = new IssueResolution(
+													input.getLabel(), 
+													input.getDescription(), 
+													input.getImage(), 
+													new IModificationContext() {
+														public IXtextDocument getXtextDocument(URI uri) {
+															if (uri.trimFragment().equals(document.getResourceURI()))
+																return document;
+															return input.getModificationContext().getXtextDocument(uri);
 														}
-														return original.getXtextDocument();
-													}
-												}, 
-												input.getModification());
-										return result;
-									}
-								});
-								return result;
-							}
-							
-						});
-					}
-					if (this.annotationIssueProcessor != null) {
-						this.annotationIssueProcessor.processIssues(issues, monitor);
+														
+														public IXtextDocument getXtextDocument() {
+															IModificationContext original = input.getModificationContext();
+															if (original instanceof IssueModificationContext) {
+																URI uri = ((IssueModificationContext) original).getIssue().getUriToProblem();
+																return getXtextDocument(uri);
+															}
+															return original.getXtextDocument();
+														}
+													}, 
+													input.getModification());
+											return result;
+										}
+									});
+									return result;
+								}
+								
+							});
+						}
+						if (this.annotationIssueProcessor != null) {
+							this.annotationIssueProcessor.processIssues(issues, monitor);
+						}
 					}
 				}
 			}, CheckMode.FAST_ONLY);
