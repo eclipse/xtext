@@ -20,7 +20,7 @@
     <installableUnits id="org.jboss.tools.m2e.jdt.feature.feature.group"/>
     <installableUnits id="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
     <p2Repositories url="${xtext.nightly.composite}"/>
-    <p2Repositories url="http://findbugs.cs.umd.edu/eclipse-daily"/>
+    <p2Repositories url="http://findbugs.cs.umd.edu/eclipse-candidate"/>
     <p2Repositories url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
     <p2Repositories url="http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler/"/>
   </setupTasks>
@@ -238,7 +238,7 @@
     <choices value="luna" label="Luna - 4.4"/>
   </setupTasks>
   <branches name="master">
-    <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.5 stream API" version="2.5.3" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.5.3/R201402240820/tmf-xtext-SDK-2.5.3.zip&amp;r=1"/>
+    <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.5 stream API" version="2.6.0" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.6.0/R201405210727/tmf-xtext-SDK-2.6.0.zip&amp;r=1"/>
   </branches>
   <branches name="maintenance">
     <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.4 stream API" version="2.4.3" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.4.3/R201309030823/tmf-xtext-SDK-2.4.3.zip&amp;r=1"/>
