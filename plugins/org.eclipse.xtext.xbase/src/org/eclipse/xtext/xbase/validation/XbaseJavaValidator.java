@@ -738,7 +738,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			|| feature == XbasePackage.Literals.XCASE_PART__CASE
 			|| feature == XbasePackage.Literals.XIF_EXPRESSION__IF
 			|| feature == XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE
-			|| feature == XbasePackage.Literals.XBASIC_FOR_LOOP_EXPRESSION__EXPRESSION) {
+			|| feature == XbasePackage.Literals.XBASIC_FOR_LOOP_EXPRESSION__EXPRESSION
+			|| feature == XbasePackage.Literals.XSYNCHRONIZED_EXPRESSION__PARAM) {
 			return true;
 		}
 		if (container instanceof XClosure || logicalContainerProvider.getLogicalContainer(expr) != null) {

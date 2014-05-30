@@ -805,6 +805,17 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertNoIssues
 	}
 	
+	@Test def void testSynchronizedExpression_11() {
+		'''
+			{
+				val foo = "lalala"
+				synchronized (foo) {
+				}
+				foo
+			}
+		'''.expression.assertNoIssues
+	}
+	
 	@Test def void testBug415770(){
 		'''
 		{
