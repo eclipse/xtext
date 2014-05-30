@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -893,7 +892,6 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  @Ignore
   @Test
   public void test_13() {
     StringConcatenation _builder = new StringConcatenation();
@@ -926,14 +924,68 @@ public class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompile
     _builder_1.append("  ");
     _builder_1.append("public int foo() {");
     _builder_1.newLine();
-    _builder_1.append("  \t");
-    _builder_1.append("// method body is bogus, the field should be assigned somewhere in this code");
+    _builder_1.append("    ");
+    _builder_1.append("int _i = this.i;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return i = (_i + 2);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void test_14() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static extension compound.IntCompoundExtensions.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var i = 2");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("i += i *= 2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private int i = 2;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int foo() {");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("int _i = this.i;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return (_i + 2);");
+    _builder_1.append("int _i_1 = this.i;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("int _multiplyAssign = i = _i_1 *= 2;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return i = _i += _multiplyAssign;");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

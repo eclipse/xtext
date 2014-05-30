@@ -134,17 +134,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				for (XExpression arg : getActualArguments(expr)) {
 					prepareExpression(arg, b);
 				}
-				final boolean needMultiAssignment = needMultiAssignment(expr);
 				if (!isReferenced) {
 					b.newLine();
 					if (!expressionHelper.hasSideEffects(expr, false)) {
 						b.append("/* ");
 					}
 					try {
-						if (needMultiAssignment) {
-							String leftOperandVariable = getLeftOperandVariable(expr, b);
-							b.append(leftOperandVariable).append(" = ");
-						}
 						featureCalltoJavaExpression(expr, b, false);
 						b.append(";");
 					} finally {
@@ -155,10 +150,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				} else if (isVariableDeclarationRequired(expr, b)) {
 					Later later = new Later() {
 						public void exec(ITreeAppendable appendable) {
-							if (needMultiAssignment) {
-								String leftOperandVariable = getLeftOperandVariable(expr, appendable);
-								appendable.append(leftOperandVariable).append(" = ");
-							}
 							featureCalltoJavaExpression(expr, appendable, true);
 						}
 					};
@@ -488,6 +479,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (call instanceof XAssignment) {
 			assignmentToJavaExpression((XAssignment) call, b, isExpressionContext);
 		} else {
+			if (needMultiAssignment(call)) {
+				String leftOperandVariable = getLeftOperandVariable(call, b);
+				b.append(leftOperandVariable).append(" = ");
+			}
 			boolean hasReceiver = appendReceiver(call, b, isExpressionContext);
 			if (hasReceiver) {
 				b.append(".");
