@@ -1919,6 +1919,33 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testSynchronizedExpression_11() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val foo = \"lalala\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("synchronized (foo) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoIssues(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testBug415770() {
     try {
       StringConcatenation _builder = new StringConcatenation();
