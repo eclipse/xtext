@@ -5023,6 +5023,37 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	} 
+	
+	@Test def void basicForLoopWithDuplicateSyntheticVariables() {
+		'''
+			class Foo {
+				def foo() {
+					if ('a' == 'b') {
+					}
+					for (;;) {
+						if ('b' == 'c') {
+						}
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import com.google.common.base.Objects;
+
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo() {
+			    boolean _equals = Objects.equal("a", "b");
+			    if (_equals) {
+			    }
+			    for (;;) {
+			      boolean _equals_1 = Objects.equal("b", "c");
+			      if (_equals_1) {
+			      }
+			    }
+			  }
+			}
+		''')
+	} 
 
 }
 
