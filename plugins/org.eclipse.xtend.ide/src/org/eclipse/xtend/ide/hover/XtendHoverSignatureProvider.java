@@ -26,9 +26,14 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 
 import com.google.common.collect.Lists;
@@ -42,9 +47,21 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 
 	@Inject
 	protected IXtendJvmAssociations associations;
+	
+	@Inject
+	protected CommonTypeComputationServices services; 
 
 	protected String _signature(XtendClass clazz, boolean typeAtEnd) {
 		return clazz.getName() + hoverUiStrings.typeParameters(clazz.getTypeParameters());
+	}
+	
+	@Override
+	protected String _signature(JvmGenericType clazz, boolean typeAtEnd) {
+		if (clazz.isLocal()) {
+			String rawName = clazz.getSuperTypes().get(0).getType().getSimpleName();
+			return "new " + rawName + "(){}";
+		}
+		return super._signature(clazz, typeAtEnd);
 	}
 
 	@Override
@@ -66,7 +83,7 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 			if (returnType instanceof JvmAnyTypeReference) {
 				throw new IllegalStateException();
 			} else {
-				returnTypeString = returnType.getSimpleName();
+				returnTypeString = getTypeName(returnType);
 			}
 		}
 		String signature = function.getName() + hoverUiStrings.parameters(inferredOperation)
@@ -80,19 +97,28 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 
 	protected String _signature(XtendField field, boolean typeAtEnd) {
 		if (field.getName() == null && field.isExtension())
-			return field.getType().getSimpleName();
+			return getTypeName(field.getType());
 		JvmField jvmField = associations.getJvmField(field);
 		if (jvmField != null) {
 			JvmTypeReference type = jvmField.getType();
 			if (type != null) {
 				if (field.getName() == null)
-					return type.getSimpleName();
-				return type.getSimpleName() + " " + field.getName();
+					return getTypeName(type);
+				return getTypeName(type) + " " + field.getName();
 			}
 		}
 		if (field.getName() == null)
 			return "";
 		return field.getName();
+	}
+	
+	protected String getTypeName(JvmTypeReference typeReference) {
+		JvmType type = typeReference.getType();
+		if (type instanceof JvmDeclaredType) {
+			OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(services, type));
+			return converter.toLightweightReference(typeReference).getHumanReadableName();
+		}
+		return typeReference.getSimpleName();
 	}
 
 	protected String _signature(XtendParameter parameter, boolean typeAtEnd) {
