@@ -711,7 +711,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	 */
 	protected void toJavaBasicForStatement(XBasicForLoopExpression expr, ITreeAppendable b, boolean isReferenced) {
 		ITreeAppendable loopAppendable = b.trace(expr);
-		loopAppendable.openScope();
+		loopAppendable.openPseudoScope();
 		loopAppendable.newLine().append("for (");
 		
 		EList<XExpression> initExpressions = expr.getInitExpressions();
