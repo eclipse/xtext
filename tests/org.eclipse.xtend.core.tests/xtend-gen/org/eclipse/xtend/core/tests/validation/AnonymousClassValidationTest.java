@@ -289,4 +289,37 @@ public class AnonymousClassValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testBug436248_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Bar {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public val r = new Runnable() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("override run() {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("println(x)");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public val x = 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _parse = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertNoIssues(_parse);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

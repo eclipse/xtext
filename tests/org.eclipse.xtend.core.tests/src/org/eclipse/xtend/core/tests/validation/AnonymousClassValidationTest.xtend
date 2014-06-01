@@ -128,4 +128,17 @@ class AnonymousClassValidationTest extends AbstractXtendTestCase {
 			}
 		'''.parse.assertNoIssues()
 	}
+	
+	@Test def void testBug436248_01() {
+		'''
+			class Bar {
+				public val r = new Runnable() {
+					override run() {
+						println(x)
+					}
+				}
+				public val x = 1
+			}
+		'''.parse.assertNoIssues
+	}
 }
