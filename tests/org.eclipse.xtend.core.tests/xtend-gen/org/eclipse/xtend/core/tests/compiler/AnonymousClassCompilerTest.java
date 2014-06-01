@@ -67,6 +67,64 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testForwardFieldReference() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val r = new Runnable() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("override run() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("println(x)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public val x = 1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final Runnable r = new Runnable() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public void run() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(Bar.this.x));");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public final int x = 1;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testTypeUsed() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");

@@ -38,6 +38,33 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testForwardFieldReference() {
+		'''
+			class Bar {
+				val r = new Runnable() {
+					override run() {
+						println(x)
+					}
+				}
+				public val x = 1
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class Bar {
+			  private final Runnable r = new Runnable() {
+			    public void run() {
+			      InputOutput.<Integer>println(Integer.valueOf(Bar.this.x));
+			    }
+			  };
+			  
+			  public final int x = 1;
+			}
+		''')
+	}
+	
+	@Test
 	def void testTypeUsed() {
 		'''
 			class C {
