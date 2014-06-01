@@ -1788,4 +1788,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			}
 		});
 	}
+	
+	@Override
+	protected boolean isLocalClassSemantics(EObject object) {
+		return super.isLocalClassSemantics(object) || (object instanceof XtendMember && !(object instanceof AnonymousClass));
+	}
 }
