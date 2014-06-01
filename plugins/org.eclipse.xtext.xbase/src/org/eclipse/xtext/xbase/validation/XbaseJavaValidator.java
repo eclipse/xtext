@@ -678,7 +678,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			for (EObject child : expr.eContents()) {
 				checkInitializationRec(child, fields, initializedForSure, initializedMaybe, visited);
 			}
-		} else if (expr instanceof XClosure) {
+		} else if (isLocalClassSemantics(expr)) {
 			// don't go into closures.
 			return;
 		} else {
@@ -742,7 +742,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			|| feature == XbasePackage.Literals.XSYNCHRONIZED_EXPRESSION__PARAM) {
 			return true;
 		}
-		if (container instanceof XClosure || logicalContainerProvider.getLogicalContainer(expr) != null) {
+		if (isLocalClassSemantics(container) || logicalContainerProvider.getLogicalContainer(expr) != null) {
 			LightweightTypeReference expectedReturnType = typeResolver.resolveTypes(expr).getExpectedReturnType(expr);
 			return expectedReturnType == null || !expectedReturnType.isPrimitiveVoid();
 		}
@@ -909,7 +909,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						}
 					}
 				}
-			} else if(partOfArgumentExpression instanceof XClosure) {
+			} else if(isLocalClassSemantics(partOfArgumentExpression)) {
 				iterator.prune();
 			}
 		}
@@ -977,11 +977,15 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						error("Cannot reference the field '" + feature.getSimpleName() + "' before it is defined", 
 								object, null, INSIGNIFICANT_INDEX, ILLEGAL_FORWARD_REFERENCE);
 					}
-				} else if (object instanceof XClosure) {
+				} else if (isLocalClassSemantics(object)) {
 					iterator.prune();
 				}
 			}
 		}
+	}
+
+	protected boolean isLocalClassSemantics(EObject object) {
+		return object instanceof XClosure;
 	}
 
 	@Check
