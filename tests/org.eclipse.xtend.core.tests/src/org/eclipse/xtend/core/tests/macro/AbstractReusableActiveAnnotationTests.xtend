@@ -11,15 +11,70 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
+import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.junit.Ignore
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
 	@Inject XtendGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
+	
+	@Test def void testInferredMethodReturnType() {
+		assertProcessing(
+			'myannotation/MyAnnotation.xtend' -> '''
+				package myannotation
+
+				import org.eclipse.xtend.lib.macro.AbstractMethodProcessor
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
+				
+				@Active(MyAnnotationProcessor)
+				annotation MyAnnotation {
+				}
+				
+				class MyAnnotationProcessor extends AbstractMethodProcessor {
+				
+					override doTransform(MutableMethodDeclaration annotatedMethod, extension TransformationContext context) {
+						annotatedMethod.declaringType.addField(annotatedMethod.simpleName + '_field') [
+							type = annotatedMethod.returnType
+						]
+					}
+				
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+
+				import myannotation.MyAnnotation
+				
+				class Client {
+				
+					@MyAnnotation
+					def bar() {
+						1
+					}
+				
+					@MyAnnotation
+					def create new Integer(1) foo() {
+					}
+				
+				}
+			'''
+		) [
+			val foo = typeLookup.findClass("myusercode.Client")
+			
+			val barType = foo.findDeclaredField('bar_field').type
+			assertEquals(barType, typeReferenceProvider.primitiveInt)
+			assertEquals(barType, foo.findDeclaredMethod('bar').returnType)
+			
+			val fooType = foo.findDeclaredField('foo_field').type
+			assertEquals(fooType, typeReferenceProvider.newTypeReference(Integer))
+			assertEquals(fooType, foo.findDeclaredMethod('foo').returnType)
+		]
+	}
 	
 	@Test def void testSetEmptyListAsAnnotationValue() {
 		assertProcessing(

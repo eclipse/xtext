@@ -58,6 +58,111 @@ public abstract class AbstractReusableActiveAnnotationTests {
   private IGeneratorConfigProvider generatorConfigProvider;
   
   @Test
+  public void testInferredMethodReturnType() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.AbstractMethodProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(MyAnnotationProcessor)");
+    _builder.newLine();
+    _builder.append("annotation MyAnnotation {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class MyAnnotationProcessor extends AbstractMethodProcessor {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(MutableMethodDeclaration annotatedMethod, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("annotatedMethod.declaringType.addField(annotatedMethod.simpleName + \'_field\') [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("type = annotatedMethod.returnType");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/MyAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import myannotation.MyAnnotation");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Client {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@MyAnnotation");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("1");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@MyAnnotation");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def create new Integer(1) foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      public void apply(final CompilationUnitImpl it) {
+        TypeLookupImpl _typeLookup = it.getTypeLookup();
+        final MutableClassDeclaration foo = _typeLookup.findClass("myusercode.Client");
+        MutableFieldDeclaration _findDeclaredField = foo.findDeclaredField("bar_field");
+        final TypeReference barType = _findDeclaredField.getType();
+        TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
+        TypeReference _primitiveInt = _typeReferenceProvider.getPrimitiveInt();
+        Assert.assertEquals(barType, _primitiveInt);
+        MutableMethodDeclaration _findDeclaredMethod = foo.findDeclaredMethod("bar");
+        TypeReference _returnType = _findDeclaredMethod.getReturnType();
+        Assert.assertEquals(barType, _returnType);
+        MutableFieldDeclaration _findDeclaredField_1 = foo.findDeclaredField("foo_field");
+        final TypeReference fooType = _findDeclaredField_1.getType();
+        TypeReferenceProvider _typeReferenceProvider_1 = it.getTypeReferenceProvider();
+        TypeReference _newTypeReference = _typeReferenceProvider_1.newTypeReference(Integer.class);
+        Assert.assertEquals(fooType, _newTypeReference);
+        MutableMethodDeclaration _findDeclaredMethod_1 = foo.findDeclaredMethod("foo");
+        TypeReference _returnType_1 = _findDeclaredMethod_1.getReturnType();
+        Assert.assertEquals(fooType, _returnType_1);
+      }
+    };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
   public void testSetEmptyListAsAnnotationValue() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myannotation");
