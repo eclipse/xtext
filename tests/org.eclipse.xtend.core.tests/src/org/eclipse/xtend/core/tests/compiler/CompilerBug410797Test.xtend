@@ -345,8 +345,8 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			  public int hashCode() {
 			    final int prime = 31;
 			    int result = 1;
-			    result = prime * result + _offset;
-			    result = prime * result + ((_leafs== null) ? 0 : _leafs.hashCode());
+			    result = prime * result + this._offset;
+			    result = prime * result + ((this._leafs== null) ? 0 : this._leafs.hashCode());
 			    return result;
 			  }
 			  
@@ -359,12 +359,12 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			    if (getClass() != obj.getClass())
 			      return false;
 			    HiddenLeafs other = (HiddenLeafs) obj;
-			    if (other._offset != _offset)
+			    if (other._offset != this._offset)
 			      return false;
-			    if (_leafs == null) {
+			    if (this._leafs == null) {
 			      if (other._leafs != null)
 			        return false;
-			    } else if (!_leafs.equals(other._leafs))
+			    } else if (!this._leafs.equals(other._leafs))
 			      return false;
 			    return true;
 			  }
