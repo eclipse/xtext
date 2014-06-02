@@ -71,7 +71,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	public void disposeInput() {
-		// clients may override
+		resource = null;
 	}
 
 	private final XtextDocumentLocker stateAccess = createDocumentLocker();
@@ -136,6 +136,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	protected void notifyModelListeners(XtextResource res) {
+		if (resource == null)
+			return;
 		List<IXtextModelListener> modelListenersCopy;
 		synchronized (modelListeners) {
 			modelListenersCopy = newArrayList(modelListeners);
@@ -282,6 +284,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	@SuppressWarnings("unchecked")
 	public <T> T getAdapter(Class<T> adapterType) {
+		if (resource == null)
+			return null;
 		URI uri = resource.getURI();
 		if ((adapterType == IFile.class || adapterType == IResource.class) && uri.isPlatformResource()) {
 			return (T) ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
