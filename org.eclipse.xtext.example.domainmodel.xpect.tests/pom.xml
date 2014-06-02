@@ -4,13 +4,32 @@
 	<groupId>org.eclipse.xtext.example.domainmodel</groupId>
 	<artifactId>org.eclipse.xtext.example.domainmodel.xpect.tests</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
-	<packaging>eclipse-plugin</packaging>
+	<packaging>eclipse-test-plugin</packaging>
+
+	<properties>
+		<os-jvm-flags />
+		<memory-settings>-Xmx1G</memory-settings>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>macosx-jvm-flags</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
+			<properties>
+				<os-jvm-flags>-XstartOnFirstThread</os-jvm-flags>
+			</properties>
+		</profile>
+	</profiles>
 
 	<build>
-
 		<!-- make sure surefire finds our test classes even though they are in 
 			the "src" folder -->
 		<testOutputDirectory>target/classes</testOutputDirectory>
+
 		<plugins>
 
 			<!-- use tycho -->
@@ -92,8 +111,12 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.16</version>
+				<configuration>
+					<reportsDirectory>${project.build.directory}/surfire-reports-standalone</reportsDirectory>
+				</configuration>
 				<executions>
 					<execution>
+						<phase>test</phase>
 						<goals>
 							<goal>test</goal>
 						</goals>
@@ -106,6 +129,20 @@
 						<version>2.16</version>
 					</dependency>
 				</dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>0.19.0</version>
+				<configuration>
+					<reportsDirectory>${project.build.directory}/surfire-reports-plugin</reportsDirectory>
+					<useUIHarness>true</useUIHarness>
+					<useUIThread>false</useUIThread>
+					<argLine>${memory-settings} ${os-jvm-flags}</argLine>
+				</configuration>
+				<!-- <executions> <execution> <phase>integration-test</phase> <goals> 
+					<goal>test</goal> </goals> </execution> </executions> -->
 			</plugin>
 		</plugins>
 	</build>
