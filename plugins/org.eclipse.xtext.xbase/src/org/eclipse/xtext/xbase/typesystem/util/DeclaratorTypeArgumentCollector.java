@@ -78,10 +78,21 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 		return Boolean.FALSE;
 	}
 	
-	protected Boolean addConstraintMapping(JvmTypeParameter typeParameter, ITypeReferenceOwner owner, LightweightTraversalData data) {
+	protected Boolean addConstraintMapping(final JvmTypeParameter typeParameter, ITypeReferenceOwner owner, LightweightTraversalData data) {
 		List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
 		List<LightweightTypeReference> upperBounds = Lists.newArrayList();
-		OwnedConverter converter = new OwnedConverter(owner);
+		OwnedConverter converter = new OwnedConverter(owner) {
+			@Override
+			protected JvmType getType(JvmTypeReference reference) {
+				// guard against raw type references where the declarator is recursively defined, e.g.
+				// E extends Enum<E> with Class<? extends Enum/* raw */>
+				JvmType type = reference.getType();
+				if (type == typeParameter) {
+					return getObjectType();
+				}
+				return type;
+			}
+		};
 		for(JvmTypeConstraint constraint: constraints) {
 			if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
 				LightweightTypeReference upperBound = converter.toLightweightReference(constraint.getTypeReference());
