@@ -241,9 +241,13 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 	}
 
 	protected ParameterizedTypeReference getObjectReference() {
-		JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
+		JvmType objectType = getObjectType();
 		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, objectType);
 		return result;
+	}
+
+	protected JvmType getObjectType() {
+		return owner.getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
 	}
 	
 	@Override
