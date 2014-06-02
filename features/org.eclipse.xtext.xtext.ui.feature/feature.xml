@@ -22,7 +22,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <requires>
       <import feature="org.eclipse.xtext.ui" version="2.6.0" match="equivalent"/>
-      <import plugin="org.eclipse.emf.mwe2.runtime" version="2.5.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.mwe2.runtime" version="2.6.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
