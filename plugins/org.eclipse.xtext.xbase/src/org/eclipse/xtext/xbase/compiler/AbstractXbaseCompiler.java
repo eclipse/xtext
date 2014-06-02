@@ -456,8 +456,8 @@ public abstract class AbstractXbaseCompiler {
 			/* @Nullable */ LightweightTypeReference toBeConvertedTo);
 	
 	protected boolean isPrimitiveVoid(XExpression xExpression) {
-		JvmTypeReference type = getType(xExpression);
-		return isPrimitiveVoid(type);
+		LightweightTypeReference type = getLightweightType(xExpression);
+		return type != null && type.isPrimitiveVoid();
 	}
 
 	protected final void internalToJavaStatement(XExpression obj, ITreeAppendable builder, boolean isReferenced) {

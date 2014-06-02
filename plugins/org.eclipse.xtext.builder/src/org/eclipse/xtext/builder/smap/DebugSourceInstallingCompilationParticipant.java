@@ -179,7 +179,6 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 		return result;
 	}
 
-	@SuppressWarnings("null")
 	protected AbstractTraceRegion findRootTraceRegion(IFile javaFile) {
 		ITrace traceToSource = traceInformation.getTraceToSource(javaFile);
 		if (!(traceToSource instanceof AbstractTrace))

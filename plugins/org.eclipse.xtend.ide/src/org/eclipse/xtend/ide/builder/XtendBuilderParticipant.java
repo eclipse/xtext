@@ -121,8 +121,12 @@ public class XtendBuilderParticipant extends BuilderParticipant {
 			 if (config.isCleanUpDerivedResources()) {
 				List<IContainer> containerToSearchIn = Lists.newArrayList();
 				for(IPath sourceFolder : sourcePath){
-					IContainer sourcePathBasedContainer = builtProject.getWorkspace().getRoot().getFolder(sourceFolder);
-					containerToSearchIn.add(sourcePathBasedContainer);
+					if (sourceFolder.segmentCount() == 1) {
+						containerToSearchIn.add(builtProject);
+					} else {
+						IContainer sourcePathBasedContainer = builtProject.getWorkspace().getRoot().getFolder(sourceFolder);
+						containerToSearchIn.add(sourcePathBasedContainer);
+					}
 				}
 				Collection<IMarker> markers = Lists.newArrayList();
 				for(IContainer container : containerToSearchIn){
