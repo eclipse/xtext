@@ -91,7 +91,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	private boolean mustInsertTypeCast(XExpression expression, LightweightTypeReference actualType) {
 		IResolvedTypes resolvedTypes = getResolvedTypes(expression);
-		if (resolvedTypes.isRefinedType(expression) || resolvedTypes.getActualType(expression).isMultiType()) {
+		if (mustCheckForMandatoryTypeCast(resolvedTypes, expression)) {
 			if (expression instanceof XAbstractFeatureCall) {
 				LightweightTypeReference featureType = resolvedTypes.getActualType(((XAbstractFeatureCall) expression).getFeature());
 				if (featureType != null && !featureType.isMultiType() && actualType.isAssignableFrom(featureType)) {
@@ -105,6 +105,17 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 					return actualType.getType() != castedExpressionType.getType();	
 				}
 			}
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean mustCheckForMandatoryTypeCast(IResolvedTypes resolvedTypes, XExpression expression) {
+		if (resolvedTypes.isRefinedType(expression)) {
+			return true;
+		}
+		LightweightTypeReference actualType = resolvedTypes.getActualType(expression);
+		if (actualType != null && actualType.isMultiType()) {
 			return true;
 		}
 		return false;
