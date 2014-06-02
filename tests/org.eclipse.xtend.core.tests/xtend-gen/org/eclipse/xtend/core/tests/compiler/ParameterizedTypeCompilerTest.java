@@ -650,4 +650,19 @@ public class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testBug434589_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Node<TNode extends Node<TNode, TValue>, TValue> {}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Node<TNode extends Node<TNode, TValue>, TValue extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
 }

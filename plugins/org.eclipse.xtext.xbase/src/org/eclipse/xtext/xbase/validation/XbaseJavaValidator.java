@@ -24,10 +24,8 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.EcoreUtil2.ElementReferenceAcceptor;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -478,38 +476,24 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	 * Java 5 does not allow forward references in type parameters, so we have to validate this, too
 	 */
 	public void doCheckTypeParameterForwardReference(List<JvmTypeParameter> sourceTypeParameters) {
-		if (sourceTypeParameters.size() > 1) {
-			final Set<JvmTypeParameter> forbidden = newHashSet(); 
-			for (int i=sourceTypeParameters.size()-2; i>=0; --i) {
+		if (sourceTypeParameters.size() >= 1) {
+			final Set<JvmTypeParameter> allowed = newHashSet();
+			for(int i = 0; i < sourceTypeParameters.size(); i++) {
 				JvmTypeParameter current = sourceTypeParameters.get(i);
-				for (EObject jvmElement: associations.getJvmElements(sourceTypeParameters.get(i+1))) 
-					if(jvmElement instanceof JvmTypeParameter)
-						forbidden.add((JvmTypeParameter) jvmElement);
-				for (JvmTypeConstraint constraint: current.getConstraints()) {
-					EcoreUtil2.findCrossReferences(constraint.getTypeReference(), forbidden, new ElementReferenceAcceptor() {
-						public void accept(EObject referrer, EObject referenced, EReference reference, int index) {
-							error("Illegal forward reference to type parameter " + ((JvmTypeParameter)referenced).getSimpleName(), 
-									referrer, reference, index, TYPE_PARAMETER_FORWARD_REFERENCE);
+				for(JvmTypeConstraint constraint: current.getConstraints()) {
+					JvmTypeReference constraintRef = constraint.getTypeReference();
+					if (constraintRef != null) {
+						JvmType constraintType = constraintRef.getType();
+						if (constraintType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
+							EObject sourceElement = associations.getPrimarySourceElement(constraintType);
+							if (sourceElement.eContainer() == current.eContainer() && !allowed.contains(sourceElement)) {
+								error("Illegal forward reference to type parameter " + ((JvmTypeParameter)constraintType).getSimpleName(), 
+										constraintRef, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, TYPE_PARAMETER_FORWARD_REFERENCE);
+							}
 						}
-					});
-				}
-			}
-		}
-		// No recursive generics
-		for(final JvmTypeParameter parameter : sourceTypeParameters){
-			final Set<JvmTypeParameter> forbidden = newHashSet();
-			for (EObject jvmElement: associations.getJvmElements(parameter))
-				if(jvmElement instanceof JvmTypeParameter)
-					forbidden.add((JvmTypeParameter) jvmElement);
-			for(JvmTypeConstraint constraint : parameter.getConstraints()){
-				EcoreUtil2.findCrossReferences(constraint.getTypeReference(), forbidden, new ElementReferenceAcceptor() {
-					public void accept(EObject referrer, EObject referenced, EReference reference, int index) {
-						EObject container = referrer.eContainer();
-						if(container instanceof JvmTypeConstraint && container.eContainer() instanceof JvmTypeParameter)
-							error("Illegal forward reference to type parameter " + ((JvmTypeParameter)referenced).getSimpleName(),
-									referrer, reference, index, TYPE_PARAMETER_FORWARD_REFERENCE);
 					}
-				});
+				}
+				allowed.add(current);
 			}
 		}
 	}
