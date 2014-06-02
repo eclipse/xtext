@@ -3,9 +3,12 @@ package org.eclipse.xtext.m2e;
 import static org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.*;
 import static org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.maven.plugin.MojoExecution;
+import org.codehaus.plexus.util.StringUtils;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -15,6 +18,7 @@ import org.eclipse.m2e.core.project.configurator.ProjectConfigurationRequest;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
+import org.eclipse.xtext.util.RuntimeIOException;
 import org.osgi.service.prefs.BackingStoreException;
 
 import com.google.common.base.Strings;
@@ -34,19 +38,19 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 			Languages languages = getParameterValue("languages", Languages.class, request.getMavenSession(), execution);
 			ProjectScope projectPreferences = new ProjectScope(request.getProject());
 			for (Language language : languages) {
-				configureLanguage(projectPreferences, language);
+				configureLanguage(projectPreferences, language, request);
 			}
 		}
 	}
 
-	private void configureLanguage(ProjectScope projectPreferences, Language language) throws CoreException {
+	private void configureLanguage(ProjectScope projectPreferences, Language language, ProjectConfigurationRequest request) throws CoreException {
 		if (language.getOutputConfigurations().isEmpty()) return;
 		
 		IEclipsePreferences languagePreferences = projectPreferences.getNode(language.name());
 		languagePreferences.putBoolean(OptionsConfigurationBlock.IS_PROJECT_SPECIFIC, true);
 		languagePreferences.putBoolean(PREF_AUTO_BUILDING, true);
 		for (OutputConfiguration outputConfiguration : language.getOutputConfigurations()) {
-			configureOutlet(languagePreferences, outputConfiguration);
+			configureOutlet(languagePreferences, outputConfiguration, request);
 		}
 		try {
 			languagePreferences.flush();
@@ -55,11 +59,11 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 		}
 	}
 
-	private void configureOutlet(IEclipsePreferences languagePreferences, OutputConfiguration mavenConfiguration) {
+	private void configureOutlet(IEclipsePreferences languagePreferences, OutputConfiguration mavenConfiguration, ProjectConfigurationRequest request) {
 		org.eclipse.xtext.generator.OutputConfiguration configuration = mavenConfiguration.toGeneratorConfiguration();
 		languagePreferences.put(getKey(configuration, OUTPUT_NAME), configuration.getName());
 		languagePreferences.put(getKey(configuration, OUTPUT_DESCRIPTION), configuration.getDescription());
-		languagePreferences.put(getKey(configuration, OUTPUT_DIRECTORY), configuration.getOutputDirectory());
+		languagePreferences.put(getKey(configuration, OUTPUT_DIRECTORY), makeProjectRelative(configuration.getOutputDirectory(), request));
 		languagePreferences.putBoolean(getKey(configuration, OUTPUT_DERIVED), configuration.isSetDerivedProperty());
 		languagePreferences.putBoolean(getKey(configuration, OUTPUT_CREATE_DIRECTORY), configuration.isCreateOutputDirectory());
 		languagePreferences.putBoolean(getKey(configuration, OUTPUT_CLEAN_DIRECTORY), configuration.isCanClearOutputDirectory());
@@ -70,10 +74,28 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 		languagePreferences.putBoolean(getKey(configuration, OUTPUT_KEEP_LOCAL_HISTORY), configuration.isKeepLocalHistory());
 		languagePreferences.putBoolean(getKey(configuration, USE_OUTPUT_PER_SOURCE_FOLDER), configuration.isUseOutputPerSourceFolder());
 		for (SourceMapping sourceMapping : configuration.getSourceMappings()) {
-			languagePreferences.put(getOutputForSourceFolderKey(configuration, sourceMapping.getSourceFolder()),
-					Strings.nullToEmpty(sourceMapping.getOutputDirectory()));
-			languagePreferences.putBoolean(getIgnoreSourceFolderKey(configuration, sourceMapping.getSourceFolder()),
+			languagePreferences.put(getOutputForSourceFolderKey(configuration, makeProjectRelative(sourceMapping.getSourceFolder(), request)),
+					makeProjectRelative(Strings.nullToEmpty(sourceMapping.getOutputDirectory()), request));
+			languagePreferences.putBoolean(getIgnoreSourceFolderKey(configuration, makeProjectRelative(sourceMapping.getSourceFolder(), request)),
 					sourceMapping.isIgnore());
+		}
+	}
+	
+	private String makeProjectRelative(String fileName,
+			ProjectConfigurationRequest request) {
+		try {
+			String baseDir = request.getMavenProject().getBasedir().getCanonicalPath();
+			File file = new File(fileName);
+			String relativePath;
+			if (file.isAbsolute()) {
+				relativePath = StringUtils.prechomp(file.getCanonicalPath(), baseDir);
+			} else {
+				relativePath = file.getPath();
+			}
+			String unixDelimited = relativePath.replaceAll("\\\\", "/");
+			return StringUtils.prechomp(unixDelimited, "/");
+		} catch (IOException e) {
+			throw new RuntimeIOException(e);
 		}
 	}
 }
