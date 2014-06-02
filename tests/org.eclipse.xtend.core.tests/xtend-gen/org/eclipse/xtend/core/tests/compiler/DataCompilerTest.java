@@ -125,13 +125,13 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("int result = 1;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((_name== null) ? 0 : _name.hashCode());");
+    _builder_1.append("result = prime * result + ((this._name== null) ? 0 : this._name.hashCode());");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + (_myFlag ? 1231 : 1237);");
+    _builder_1.append("result = prime * result + (this._myFlag ? 1231 : 1237);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((_references== null) ? 0 : _references.hashCode());");
+    _builder_1.append("result = prime * result + ((this._references== null) ? 0 : this._references.hashCode());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return result;");
@@ -169,7 +169,7 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("Foo other = (Foo) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (_name == null) {");
+    _builder_1.append("if (this._name == null) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (other._name != null)");
@@ -178,19 +178,19 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} else if (!_name.equals(other._name))");
+    _builder_1.append("} else if (!this._name.equals(other._name))");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (other._myFlag != _myFlag)");
+    _builder_1.append("if (other._myFlag != this._myFlag)");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (_references == null) {");
+    _builder_1.append("if (this._references == null) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (other._references != null)");
@@ -199,7 +199,7 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} else if (!_references.equals(other._references))");
+    _builder_1.append("} else if (!this._references.equals(other._references))");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
@@ -294,7 +294,7 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("int result = 1;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((_name== null) ? 0 : _name.hashCode());");
+    _builder_1.append("result = prime * result + ((this._name== null) ? 0 : this._name.hashCode());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return result;");
@@ -332,7 +332,7 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("Foo other = (Foo) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (_name == null) {");
+    _builder_1.append("if (this._name == null) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (other._name != null)");
@@ -341,7 +341,7 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} else if (!_name.equals(other._name))");
+    _builder_1.append("} else if (!this._name.equals(other._name))");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
@@ -436,7 +436,7 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("int result = 1;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((_name== null) ? 0 : _name.hashCode());");
+    _builder_1.append("result = prime * result + ((this._name== null) ? 0 : this._name.hashCode());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return result;");
@@ -474,7 +474,7 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("Foo other = (Foo) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (_name == null) {");
+    _builder_1.append("if (this._name == null) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (other._name != null)");
@@ -483,7 +483,7 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} else if (!_name.equals(other._name))");
+    _builder_1.append("} else if (!this._name.equals(other._name))");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
@@ -616,7 +616,7 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("int result = 1;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((_contents== null) ? 0 : _contents.hashCode());");
+    _builder_1.append("result = prime * result + ((this._contents== null) ? 0 : this._contents.hashCode());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return result;");
@@ -654,7 +654,7 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("Node other = (Node) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (_contents == null) {");
+    _builder_1.append("if (this._contents == null) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (other._contents != null)");
@@ -663,7 +663,7 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} else if (!_contents.equals(other._contents))");
+    _builder_1.append("} else if (!this._contents.equals(other._contents))");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");

@@ -58,9 +58,9 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			  public int hashCode() {
 			    final int prime = 31;
 			    int result = 1;
-			    result = prime * result + ((_name== null) ? 0 : _name.hashCode());
-			    result = prime * result + (_myFlag ? 1231 : 1237);
-			    result = prime * result + ((_references== null) ? 0 : _references.hashCode());
+			    result = prime * result + ((this._name== null) ? 0 : this._name.hashCode());
+			    result = prime * result + (this._myFlag ? 1231 : 1237);
+			    result = prime * result + ((this._references== null) ? 0 : this._references.hashCode());
 			    return result;
 			  }
 			  
@@ -73,17 +73,17 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			    if (getClass() != obj.getClass())
 			      return false;
 			    Foo other = (Foo) obj;
-			    if (_name == null) {
+			    if (this._name == null) {
 			      if (other._name != null)
 			        return false;
-			    } else if (!_name.equals(other._name))
+			    } else if (!this._name.equals(other._name))
 			      return false;
-			    if (other._myFlag != _myFlag)
+			    if (other._myFlag != this._myFlag)
 			      return false;
-			    if (_references == null) {
+			    if (this._references == null) {
 			      if (other._references != null)
 			        return false;
-			    } else if (!_references.equals(other._references))
+			    } else if (!this._references.equals(other._references))
 			      return false;
 			    return true;
 			  }
@@ -124,7 +124,7 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			  public int hashCode() {
 			    final int prime = 31;
 			    int result = 1;
-			    result = prime * result + ((_name== null) ? 0 : _name.hashCode());
+			    result = prime * result + ((this._name== null) ? 0 : this._name.hashCode());
 			    return result;
 			  }
 			  
@@ -137,10 +137,10 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			    if (getClass() != obj.getClass())
 			      return false;
 			    Foo other = (Foo) obj;
-			    if (_name == null) {
+			    if (this._name == null) {
 			      if (other._name != null)
 			        return false;
-			    } else if (!_name.equals(other._name))
+			    } else if (!this._name.equals(other._name))
 			      return false;
 			    return true;
 			  }
@@ -181,7 +181,7 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			  public int hashCode() {
 			    final int prime = 31;
 			    int result = 1;
-			    result = prime * result + ((_name== null) ? 0 : _name.hashCode());
+			    result = prime * result + ((this._name== null) ? 0 : this._name.hashCode());
 			    return result;
 			  }
 			  
@@ -194,10 +194,10 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			    if (getClass() != obj.getClass())
 			      return false;
 			    Foo other = (Foo) obj;
-			    if (_name == null) {
+			    if (this._name == null) {
 			      if (other._name != null)
 			        return false;
-			    } else if (!_name.equals(other._name))
+			    } else if (!this._name.equals(other._name))
 			      return false;
 			    return true;
 			  }
@@ -253,7 +253,7 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			  public int hashCode() {
 			    final int prime = 31;
 			    int result = 1;
-			    result = prime * result + ((_contents== null) ? 0 : _contents.hashCode());
+			    result = prime * result + ((this._contents== null) ? 0 : this._contents.hashCode());
 			    return result;
 			  }
 			  
@@ -266,10 +266,10 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			    if (getClass() != obj.getClass())
 			      return false;
 			    Node other = (Node) obj;
-			    if (_contents == null) {
+			    if (this._contents == null) {
 			      if (other._contents != null)
 			        return false;
-			    } else if (!_contents.equals(other._contents))
+			    } else if (!this._contents.equals(other._contents))
 			      return false;
 			    return true;
 			  }

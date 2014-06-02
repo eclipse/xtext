@@ -4058,7 +4058,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("int result = 1;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((_weight== null) ? 0 : _weight.hashCode());");
+    _builder_1.append("result = prime * result + ((this._weight== null) ? 0 : this._weight.hashCode());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return result;");
@@ -4096,7 +4096,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("Weight other = (Weight) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (_weight == null) {");
+    _builder_1.append("if (this._weight == null) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (other._weight != null)");
@@ -4105,7 +4105,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} else if (!_weight.equals(other._weight))");
+    _builder_1.append("} else if (!this._weight.equals(other._weight))");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
@@ -4231,7 +4231,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("int result = 1;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((_weight== null) ? 0 : _weight.hashCode());");
+    _builder_1.append("result = prime * result + ((this._weight== null) ? 0 : this._weight.hashCode());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return result;");
@@ -4269,7 +4269,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("Weight other = (Weight) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (_weight == null) {");
+    _builder_1.append("if (this._weight == null) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (other._weight != null)");
@@ -4278,7 +4278,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} else if (!_weight.equals(other._weight))");
+    _builder_1.append("} else if (!this._weight.equals(other._weight))");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
@@ -4404,7 +4404,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("int result = 1;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((_weight== null) ? 0 : _weight.hashCode());");
+    _builder_1.append("result = prime * result + ((this._weight== null) ? 0 : this._weight.hashCode());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return result;");
@@ -4442,7 +4442,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("Weight other = (Weight) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (_weight == null) {");
+    _builder_1.append("if (this._weight == null) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (other._weight != null)");
@@ -4451,7 +4451,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} else if (!_weight.equals(other._weight))");
+    _builder_1.append("} else if (!this._weight.equals(other._weight))");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
@@ -4577,7 +4577,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("int result = 1;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((_weight== null) ? 0 : _weight.hashCode());");
+    _builder_1.append("result = prime * result + ((this._weight== null) ? 0 : this._weight.hashCode());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return result;");
@@ -4615,7 +4615,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("Weight other = (Weight) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (_weight == null) {");
+    _builder_1.append("if (this._weight == null) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (other._weight != null)");
@@ -4624,7 +4624,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} else if (!_weight.equals(other._weight))");
+    _builder_1.append("} else if (!this._weight.equals(other._weight))");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
@@ -6428,7 +6428,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("int result = 1;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((_nonStaticField== null) ? 0 : _nonStaticField.hashCode());");
+    _builder_1.append("result = prime * result + ((this._nonStaticField== null) ? 0 : this._nonStaticField.hashCode());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return result;");
@@ -6466,7 +6466,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("Foo other = (Foo) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (_nonStaticField == null) {");
+    _builder_1.append("if (this._nonStaticField == null) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (other._nonStaticField != null)");
@@ -6475,7 +6475,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} else if (!_nonStaticField.equals(other._nonStaticField))");
+    _builder_1.append("} else if (!this._nonStaticField.equals(other._nonStaticField))");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
@@ -6578,7 +6578,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("int result = 1;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((__string== null) ? 0 : __string.hashCode());");
+    _builder_1.append("result = prime * result + ((this.__string== null) ? 0 : this.__string.hashCode());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return result;");
@@ -6616,7 +6616,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("UsesExtension other = (UsesExtension) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (__string == null) {");
+    _builder_1.append("if (this.__string == null) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (other.__string != null)");
@@ -6625,7 +6625,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} else if (!__string.equals(other.__string))");
+    _builder_1.append("} else if (!this.__string.equals(other.__string))");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
