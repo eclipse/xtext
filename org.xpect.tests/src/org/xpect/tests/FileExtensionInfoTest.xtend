@@ -102,7 +102,7 @@ class FileExtensionInfoTest {
 			</extension>
 		'''.parse
 		val expected = '''
-			IXtextFileExtensionInfo{fileExtensions=[foo, bar], languageID=org.foo.Foo, runtimeModule=org.foo.FooRuntimeModule, uiModule=org.foo.ui.FooUiModule}
+			IXtextFileExtensionInfo{fileExtensions=[bar, foo], languageID=org.foo.Foo, runtimeModule=org.foo.FooRuntimeModule, uiModule=org.foo.ui.FooUiModule}
 		'''
 		assertEquals(expected, actual)
 	}
@@ -122,7 +122,7 @@ class FileExtensionInfoTest {
 			</extension>
 		'''.parse
 		val expected = '''
-			IXtextFileExtensionInfo{fileExtensions=[foo, bar], resourceFactory=org.foo.ResourceFactory, languageID=org.foo.Foo, runtimeModule=org.foo.RuntimeModule, uiModule=org.foo.uiModle, resourceServiceProvider=org.foo.ResourceServiceProvider, resourceUIServiceProvider=org.foo.ResourceUIServiceProvider}
+			IXtextFileExtensionInfo{fileExtensions=[bar, foo], resourceFactory=org.foo.ResourceFactory, languageID=org.foo.Foo, runtimeModule=org.foo.RuntimeModule, uiModule=org.foo.uiModle, resourceServiceProvider=org.foo.ResourceServiceProvider, resourceUIServiceProvider=org.foo.ResourceUIServiceProvider}
 		'''
 		assertEquals(expected, actual)
 	}
@@ -140,7 +140,7 @@ class FileExtensionInfoTest {
 			</extension>
 		'''.parse
 		val expected = '''
-			IXtextFileExtensionInfo{fileExtensions=[foo, bar], resourceFactory=org.foo.ResourceFactory, languageID=org.foo.Foo, runtimeModule=org.foo.RuntimeModule, resourceServiceProvider=org.foo.ResourceServiceProvider}
+			IXtextFileExtensionInfo{fileExtensions=[bar, foo], resourceFactory=org.foo.ResourceFactory, languageID=org.foo.Foo, runtimeModule=org.foo.RuntimeModule, resourceServiceProvider=org.foo.ResourceServiceProvider}
 		'''
 		assertEquals(expected, actual)
 	}
@@ -194,7 +194,7 @@ class FileExtensionInfoTest {
 			</extension>
 		'''.parse
 		val expected = '''
-			IXtextFileExtensionInfo{fileExtensions=[foo, bar], resourceFactory=org.foo.ResourceFactory, languageID=org.foo.Foo, runtimeModule=org.foo.FooRuntimeModule, uiModule=org.FooUiModule, resourceServiceProvider=org.foo.ResourceServiceProvider, resourceUIServiceProvider=org.foo.ResourceUIServiceProvider}
+			IXtextFileExtensionInfo{fileExtensions=[bar, foo], resourceFactory=org.foo.ResourceFactory, languageID=org.foo.Foo, runtimeModule=org.foo.FooRuntimeModule, uiModule=org.FooUiModule, resourceServiceProvider=org.foo.ResourceServiceProvider, resourceUIServiceProvider=org.foo.ResourceUIServiceProvider}
 		'''
 		assertEquals(expected, actual)
 	}

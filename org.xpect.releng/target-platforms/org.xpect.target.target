@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Xpect Target Definition (Eclipse 3.8 - Juno)" sequenceNumber="22">
+<?pde version="3.8"?><target name="Xpect Target Definition (Eclipse 3.8 - Juno)" sequenceNumber="24">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.8.3.v20130125-0826"/>
@@ -25,6 +25,11 @@
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="de.itemis.statefullexer.feature.group" version="1.0.0.201311181130"/>
 <repository location="http://meysholdt.github.io/xtext_stateful_lexer/updatesite/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xtext.example.arithmetics.sdk.feature.group" version="2.4.0.201406020956"/>
+<unit id="org.eclipse.xtext.example.domainmodel.sdk.feature.group" version="2.4.0.201406020956"/>
+<repository location="http://meysholdt.github.io/xtext_examples/repositories/generated-with-xtext_2_4_0/"/>
 </location>
 </locations>
 <environment>

@@ -16,5 +16,6 @@
 		<module>org.xpect.releng/target-platforms</module>
 		<module>org.xpect.sdk</module>
 		<module>org.xpect.releng/p2-repository</module>
+		<module>org.eclipse.xtext.example.domainmodel.xpect.tests</module>
 	</modules>
 </project>

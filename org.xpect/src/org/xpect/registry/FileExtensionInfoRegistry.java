@@ -88,7 +88,9 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 
 		@Override
 		public String toString() {
-			ToStringHelper result = Objects.toStringHelper(IEmfFileExtensionInfo.class).add("fileExtensions", fileExtensions);
+			List<String> extensions = Lists.newArrayList(fileExtensions);
+			Collections.sort(extensions);
+			ToStringHelper result = Objects.toStringHelper(IEmfFileExtensionInfo.class).add("fileExtensions", extensions);
 			if (resourceFactory != null && !DEFAULT_RESOURCE_FACTORY.equals(resourceFactory.getName()))
 				result.add("resourceFactory", resourceFactory);
 			return result.toString();
@@ -173,7 +175,9 @@ public class FileExtensionInfoRegistry implements IEmfFileExtensionInfo.Registry
 
 		@Override
 		public String toString() {
-			ToStringHelper result = Objects.toStringHelper(IXtextFileExtensionInfo.class).add("fileExtensions", getFileExtensions());
+			List<String> extensions = Lists.newArrayList(getFileExtensions());
+			Collections.sort(extensions);
+			ToStringHelper result = Objects.toStringHelper(IXtextFileExtensionInfo.class).add("fileExtensions", extensions);
 			if (getResourceFactory() != null && !DEFAULT_RESOURCE_FACTORY.equals(getResourceFactory().getName()))
 				result.add("resourceFactory", getResourceFactory());
 			if (languageID != null)
