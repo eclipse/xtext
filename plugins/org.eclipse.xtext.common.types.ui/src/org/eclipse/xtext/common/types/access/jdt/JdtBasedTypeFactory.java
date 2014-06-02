@@ -114,6 +114,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 	
 	private static JdtCompliance getComplianceLevel() {
 		if (isJdtGreaterOrEqual(new Version(3,6,0))) {
+			if (isJdtGreaterOrEqual(new Version(3,10,0))) {
+				return JdtCompliance.LunaOrBetter;
+			}
 			return JdtCompliance.Other;
 		}
 		return JdtCompliance.Galileo;
@@ -152,34 +155,60 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 					String[] path,
 					String name,
 					SegmentSequence signaturex) {
-				if (method.isConstructor() && method.getDeclaringClass().isMember()) {
-					return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex) {
-						@Override
-						protected void setParameterNames(IMethod javaMethod, java.util.List<JvmFormalParameter> parameters) throws JavaModelException {
-							String[] parameterNames = javaMethod.getParameterNames();
-							int size = parameters.size();
-							if (size == parameterNames.length) {
-								super.setParameterNames(javaMethod, parameters);
-							} else if (size == parameterNames.length - 1) {
-								for (int i = 1; i < parameterNames.length; i++) {
-									String string = parameterNames[i];
-									parameters.get(i - 1).setName(string);
+				if (method.isConstructor()) {
+					ITypeBinding declarator = method.getDeclaringClass();
+					if (declarator.isEnum()) {
+						return new EnumConstructorParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
+					}
+					if (declarator.isMember()) {
+						return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex) {
+							@Override
+							protected void setParameterNames(IMethod javaMethod, java.util.List<JvmFormalParameter> parameters) throws JavaModelException {
+								String[] parameterNames = javaMethod.getParameterNames();
+								int size = parameters.size();
+								if (size == parameterNames.length) {
+									super.setParameterNames(javaMethod, parameters);
+								} else if (size == parameterNames.length - 1) {
+									for (int i = 1; i < parameterNames.length; i++) {
+										String string = parameterNames[i];
+										parameters.get(i - 1).setName(string);
+									}
+								} else {
+									throw new IllegalStateException("unmatching arity for java method "+javaMethod.toString()+" and "+getExecutable().getIdentifier());
 								}
-							} else {
-								throw new IllegalStateException("unmatching arity for java method "+javaMethod.toString()+" and "+getExecutable().getIdentifier());
 							}
-						}
-					};
+						};
+					}
+				}
+				return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
+			}
+		},
+		LunaOrBetter {
+			@Override
+			ParameterNameInitializer createParameterNameInitializer(
+					IMethodBinding method,
+					WorkingCopyOwner workingCopyOwner,
+					JvmExecutable result,
+					String handleIdentifier,
+					String[] path,
+					String name,
+					SegmentSequence signaturex) {
+				if (method.isConstructor() && method.getDeclaringClass().isEnum()) {
+					CharSequence withoutSyntheticArgs = signaturex.subSequence("Ljava/lang/String;I".length(), signaturex.length());
+					return new EnumConstructorParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, withoutSyntheticArgs);
 				}
 				return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
 			}
 		},
 		Other {
-
 		};
 		ParameterNameInitializer createParameterNameInitializer(IMethodBinding method, WorkingCopyOwner workingCopyOwner,
 				JvmExecutable result, String handleIdentifier, String[] path, String name, SegmentSequence signaturex) {
-			return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
+			if (method.isConstructor() && method.getDeclaringClass().isEnum()) {
+				return new EnumConstructorParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
+			} else {
+				return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
+			}
 		}
 	}
 	
@@ -295,7 +324,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 	private final Map<ITypeBinding, String> qualifiedNames = new HashMap<ITypeBinding, String>();
 
 	/**
-	 * A cached ASP parser that's reused by top-level type {@link #createType(IType) creation}.
+	 * A cached AST parser that's reused by top-level type {@link #createType(IType) creation}.
 	 */
 	private final ASTParser parser = ASTParser.newParser(AST.JLS3);
 
@@ -383,7 +412,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 
 	private JvmDeclaredType createType(IType type, ITypeBinding binding) {
 		// Maintain a string builder we pass along during recursion 
-		// that contains the prefix for the fully qualified name of binding instance being traversed.
+		// that contains the prefix for the fully qualified name of the binding instance being traversed.
 		//
 		StringBuilder fqn = new StringBuilder(100);
 		IPackageBinding packageBinding = binding.getPackage();
@@ -1185,14 +1214,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 				// Use the key to determine the signature for the method.
 				//
 				SegmentSequence signaturex = getSignatureAsSegmentSequence(method);
-				// String x = "Lx;.x" + key.substring(start, end + 1); //.replace('/', '.');
-				if (method.isConstructor() && declaringClass.isEnum()) {
-					ParameterNameInitializer initializer = new EnumConstructorParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
-					((JvmExecutableImplCustom)result).setParameterNameInitializer(initializer);
-				} else {
-					ParameterNameInitializer initializer = jdtCompliance.createParameterNameInitializer(method, workingCopyOwner, result, handleIdentifier, path, name, signaturex);
-					((JvmExecutableImplCustom)result).setParameterNameInitializer(initializer);
-				}
+				ParameterNameInitializer initializer = jdtCompliance.createParameterNameInitializer(method, workingCopyOwner, result, handleIdentifier, path, name, signaturex);
+				((JvmExecutableImplCustom)result).setParameterNameInitializer(initializer);
 			}
 
 			setParameterNamesAndAnnotations(method, parameterTypes, parameterNames, result);
