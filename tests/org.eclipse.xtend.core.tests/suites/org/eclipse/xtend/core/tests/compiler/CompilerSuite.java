@@ -51,6 +51,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	CompilerBug427637Test.class,
 	CompilerBug427660Test.class,
 	CompilerBug428063Test.class,
+	CompilerBug429376Test.class,
 	CompilerBug430484Test.class,
 	CompilerBug432193Test.class,
 	CompilerBugDependentTypeParametersTest.class,
