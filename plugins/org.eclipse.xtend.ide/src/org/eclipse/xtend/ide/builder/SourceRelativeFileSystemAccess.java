@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.JDTAwareEclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.util.RuntimeIOException;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Multimap;
 
@@ -60,10 +61,12 @@ public class SourceRelativeFileSystemAccess extends JDTAwareEclipseResourceFileS
 		Multimap<URI, IPath> sourceTraces = getSourceTraces();
 		if (sourceTraces != null) {
 			Set<URI> keys = sourceTraces.keySet();
+			String source = getCurrentSource();
+			IContainer container = Strings.isEmpty(source) ? getProject() : getProject().getFolder(source);
 			for (URI uri : keys) {
-				if (uri != null && getCurrentSource() != null) {
+				if (uri != null && source != null) {
 					Collection<IPath> paths = sourceTraces.get(uri);
-					IFile sourceFile = getProject().getFolder(getCurrentSource()).getFile(new Path(uri.toFileString()));
+					IFile sourceFile = container.getFile(new Path(uri.toFileString()));
 					if (sourceFile.exists()) {
 						IPath[] tracePathArray = paths.toArray(new IPath[paths.size()]);
 						getTraceMarkers().installMarker(sourceFile, generatorName, tracePathArray);
