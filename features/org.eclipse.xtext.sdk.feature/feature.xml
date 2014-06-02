@@ -80,6 +80,8 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
       <import plugin="org.eclipse.emf.common" version="2.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore.source" version="2.9.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common.source" version="2.9.0" match="greaterOrEqual"/>
+      <import plugin="com.google.inject.source" version="3.0.0" match="greaterOrEqual"/>
+      <import plugin="javax.inject.source" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
