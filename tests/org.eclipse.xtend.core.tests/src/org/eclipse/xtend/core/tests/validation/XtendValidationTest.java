@@ -2152,7 +2152,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendFile file = file(
 				"class Foo<T extends U, U> {"
 				+ "}");
-		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);
 	}
 	
 	@Test 
@@ -2160,7 +2160,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendFile file = file(
 				"class Foo<T, U extends List<? extends V>, V> {"
 				+ "}");
-		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+		helper.assertNoError(file, TYPE_PARAMETER_FORWARD_REFERENCE);
 	}
 	
 	@Test 
@@ -2176,7 +2176,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendFile file = file(
 				"interface Foo<T extends U, U> {"
 				+ "}");
-		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);
 	}
 	
 	@Test 
@@ -2184,7 +2184,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendFile file = file(
 				"interface Foo<T, U extends List<? extends V>, V> {"
 				+ "}");
-		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+		helper.assertNoError(file, TYPE_PARAMETER_FORWARD_REFERENCE);
 	}
 
 	@Test 
@@ -2202,7 +2202,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"class Foo {"
 				+ "  def <T extends U, U> foo() {}"
 				+ "}");
-		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);
 	}
 	
 	@Test 
@@ -2211,7 +2211,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"class Foo {"
 				+ "  def <T, U extends List<? extends V>, V> foo() {}"
 				+ "}");
-		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+		helper.assertNoError(file, TYPE_PARAMETER_FORWARD_REFERENCE);
 	}
 	
 	@Test 
@@ -2220,7 +2220,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"class Foo {"
 				+ "  def <T extends Enum<T>> foo() {}"
 				+ "}");
-		helper.assertNoError(file, TYPE_PARAMETER_FORWARD_REFERENCE);		
+		helper.assertNoError(file, TYPE_PARAMETER_FORWARD_REFERENCE);
 	}
 	
 	@Test 
@@ -2231,7 +2231,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 						+ "    return typeof(T)"
 						+ "  }"
 						+ "}");
-		helper.assertError(file, XbasePackage.Literals.XTYPE_LITERAL, INVALID_USE_OF_TYPE_PARAMETER);		
+		helper.assertError(file, XbasePackage.Literals.XTYPE_LITERAL, INVALID_USE_OF_TYPE_PARAMETER);
 	}
 	
 	@Test 
@@ -2242,7 +2242,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 						+ "    return T"
 						+ "  }"
 						+ "}");
-		helper.assertError(file, XbasePackage.Literals.XABSTRACT_FEATURE_CALL, INVALID_USE_OF_TYPE_PARAMETER);		
+		helper.assertError(file, XbasePackage.Literals.XABSTRACT_FEATURE_CALL, INVALID_USE_OF_TYPE_PARAMETER);
 	}
 	
 	@Test 
@@ -2253,7 +2253,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 						+ "    return '' instanceof T"
 						+ "  }"
 						+ "}");
-		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE_PARAMETER);		
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE_PARAMETER);
 	}
 	
 	@Test 
@@ -2264,7 +2264,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 						+ "    return '' instanceof T"
 						+ "  }"
 						+ "}");
-		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE_PARAMETER, "CharSequence");		
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE_PARAMETER, "CharSequence");
 	}
 	
 	@Test 
@@ -2275,7 +2275,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 						+ "    return '' instanceof T"
 						+ "  }"
 						+ "}");
-		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE_PARAMETER, "CharSequence & Iterable");		
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE_PARAMETER, "CharSequence & Iterable");
 	}
 	
 	@Test 
@@ -2286,7 +2286,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 						+ "    return switch '' { T : 'foo'  default : 'bla'}"
 						+ "  }"
 						+ "}");
-		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE_PARAMETER);		
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE_PARAMETER);
 	}
 	
 	

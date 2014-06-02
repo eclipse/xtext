@@ -340,4 +340,14 @@ class ParameterizedTypeCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	@Test
+	def testBug434589_01() {
+		assertCompilesTo('''
+			class Node<TNode extends Node<TNode, TValue>, TValue> {}
+		''', '''
+			@SuppressWarnings("all")
+			public class Node<TNode extends Node<TNode, TValue>, TValue extends Object> {
+			}
+		''')
+	}
 }
