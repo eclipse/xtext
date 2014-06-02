@@ -1624,7 +1624,8 @@ public class JvmModelGenerator implements IGenerator {
     if (_notEquals) {
       JvmOperation _operation_1 = it.getOperation();
       String _simpleName = _operation_1.getSimpleName();
-      appendable.append(_simpleName);
+      String _emptyIfNull = Strings.emptyIfNull(_simpleName);
+      appendable.append(_emptyIfNull);
       appendable.append(" = ");
     } else {
       EObject _eContainer = it.eContainer();

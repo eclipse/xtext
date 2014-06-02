@@ -802,7 +802,7 @@ class JvmModelGenerator implements IGenerator {
 	 
 	def void toJava(JvmAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		if (operation != null) {
-			appendable.append(operation.simpleName)
+			appendable.append(Strings.emptyIfNull(operation.simpleName));
 			appendable.append(" = ")
 		} else if ((eContainer as JvmAnnotationReference).explicitValues.size > 1) { // more than one value
 			appendable.append("value = ")

@@ -10,8 +10,8 @@ package org.eclipse.xtext.builder;
 import java.util.List;
 
 import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
 public class JDTAwareSourceFolderProvider implements EclipseSourceFolderProvider {
 
 	public List<? extends IContainer> getSourceFolders(IProject project) {
-		List<IFolder> sourceFolders = Lists.newArrayList();
+		List<IContainer> sourceFolders = Lists.newArrayList();
 		IJavaProject javaProject = JavaCore.create(project);
 		IClasspathEntry[] classpath;
 		try {
@@ -36,7 +36,13 @@ public class JDTAwareSourceFolderProvider implements EclipseSourceFolderProvider
 		}
 		for (IClasspathEntry entry : classpath) {
 			if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
-				sourceFolders.add(project.getWorkspace().getRoot().getFolder(entry.getPath()));
+				IPath path = entry.getPath();
+				// see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=436371
+				if (path.segmentCount() == 1) {
+					sourceFolders.add(project);
+				} else {
+					sourceFolders.add(project.getWorkspace().getRoot().getFolder(entry.getPath()));
+				}
 			}
 		}
 		return sourceFolders;

@@ -254,6 +254,8 @@ public class XExpressionHelper {
 		List<QualifiedName> methodNames = getMethodNames(featureCall, operatorSymbol);
 		for (QualifiedName methodName : methodNames) {
 			JvmDeclaredType definingJvmType = (JvmDeclaredType) typeReferences.findDeclaredType(definingExtensionClass, featureCall);
+			if (definingJvmType == null)
+				return false;
 			Iterable<JvmFeature> operatorImplementations = definingJvmType.findAllFeaturesByName(methodName.getLastSegment());
 			return contains(operatorImplementations, featureCall.getFeature());
 		}
