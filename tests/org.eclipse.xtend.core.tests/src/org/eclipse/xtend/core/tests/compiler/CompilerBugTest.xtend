@@ -1817,7 +1817,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public int hashCode() {
 			    final int prime = 31;
 			    int result = 1;
-			    result = prime * result + ((_weight== null) ? 0 : _weight.hashCode());
+			    result = prime * result + ((this._weight== null) ? 0 : this._weight.hashCode());
 			    return result;
 			  }
 			  
@@ -1830,10 +1830,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    if (getClass() != obj.getClass())
 			      return false;
 			    Weight other = (Weight) obj;
-			    if (_weight == null) {
+			    if (this._weight == null) {
 			      if (other._weight != null)
 			        return false;
-			    } else if (!_weight.equals(other._weight))
+			    } else if (!this._weight.equals(other._weight))
 			      return false;
 			    return true;
 			  }
@@ -1885,7 +1885,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public int hashCode() {
 			    final int prime = 31;
 			    int result = 1;
-			    result = prime * result + ((_weight== null) ? 0 : _weight.hashCode());
+			    result = prime * result + ((this._weight== null) ? 0 : this._weight.hashCode());
 			    return result;
 			  }
 			  
@@ -1898,10 +1898,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    if (getClass() != obj.getClass())
 			      return false;
 			    Weight other = (Weight) obj;
-			    if (_weight == null) {
+			    if (this._weight == null) {
 			      if (other._weight != null)
 			        return false;
-			    } else if (!_weight.equals(other._weight))
+			    } else if (!this._weight.equals(other._weight))
 			      return false;
 			    return true;
 			  }
@@ -1953,7 +1953,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public int hashCode() {
 			    final int prime = 31;
 			    int result = 1;
-			    result = prime * result + ((_weight== null) ? 0 : _weight.hashCode());
+			    result = prime * result + ((this._weight== null) ? 0 : this._weight.hashCode());
 			    return result;
 			  }
 			  
@@ -1966,10 +1966,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    if (getClass() != obj.getClass())
 			      return false;
 			    Weight other = (Weight) obj;
-			    if (_weight == null) {
+			    if (this._weight == null) {
 			      if (other._weight != null)
 			        return false;
-			    } else if (!_weight.equals(other._weight))
+			    } else if (!this._weight.equals(other._weight))
 			      return false;
 			    return true;
 			  }
@@ -2021,7 +2021,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public int hashCode() {
 			    final int prime = 31;
 			    int result = 1;
-			    result = prime * result + ((_weight== null) ? 0 : _weight.hashCode());
+			    result = prime * result + ((this._weight== null) ? 0 : this._weight.hashCode());
 			    return result;
 			  }
 			  
@@ -2034,10 +2034,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    if (getClass() != obj.getClass())
 			      return false;
 			    Weight other = (Weight) obj;
-			    if (_weight == null) {
+			    if (this._weight == null) {
 			      if (other._weight != null)
 			        return false;
-			    } else if (!_weight.equals(other._weight))
+			    } else if (!this._weight.equals(other._weight))
 			      return false;
 			    return true;
 			  }
@@ -2827,7 +2827,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public int hashCode() {
 			    final int prime = 31;
 			    int result = 1;
-			    result = prime * result + ((_nonStaticField== null) ? 0 : _nonStaticField.hashCode());
+			    result = prime * result + ((this._nonStaticField== null) ? 0 : this._nonStaticField.hashCode());
 			    return result;
 			  }
 			  
@@ -2840,10 +2840,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    if (getClass() != obj.getClass())
 			      return false;
 			    Foo other = (Foo) obj;
-			    if (_nonStaticField == null) {
+			    if (this._nonStaticField == null) {
 			      if (other._nonStaticField != null)
 			        return false;
-			    } else if (!_nonStaticField.equals(other._nonStaticField))
+			    } else if (!this._nonStaticField.equals(other._nonStaticField))
 			      return false;
 			    return true;
 			  }
@@ -2886,7 +2886,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public int hashCode() {
 			    final int prime = 31;
 			    int result = 1;
-			    result = prime * result + ((__string== null) ? 0 : __string.hashCode());
+			    result = prime * result + ((this.__string== null) ? 0 : this.__string.hashCode());
 			    return result;
 			  }
 			  
@@ -2899,10 +2899,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    if (getClass() != obj.getClass())
 			      return false;
 			    UsesExtension other = (UsesExtension) obj;
-			    if (__string == null) {
+			    if (this.__string == null) {
 			      if (other.__string != null)
 			        return false;
-			    } else if (!__string.equals(other.__string))
+			    } else if (!this.__string.equals(other.__string))
 			      return false;
 			    return true;
 			  }
