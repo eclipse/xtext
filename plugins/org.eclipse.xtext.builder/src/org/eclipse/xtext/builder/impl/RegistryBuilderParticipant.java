@@ -127,87 +127,100 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 
 		@Override
 		protected void logError(IConfigurationElement element, String text) {
-			IExtension extension = element.getDeclaringExtension();
-			readerLog.error("Plugin " + extension.getContributor().getName() + ", extension " + extension.getExtensionPointUniqueIdentifier()); //$NON-NLS-1$ //$NON-NLS-2$
-			readerLog.error(text);
+			doLogError(element, text);
 		}
-
-		private class DeferredBuilderParticipant implements IXtextBuilderParticipant {
-			private IConfigurationElement element;
-			
-			private IXtextBuilderParticipant delegate;
-			private ImmutableList<String> handledFileExtensions;
-
-			public DeferredBuilderParticipant(IConfigurationElement element) {
-				this.element = element;
-			}
-
-			public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
-				getDelegate(context).build(context, monitor);
-			}
-
-			private IXtextBuilderParticipant getDelegate(IBuildContext context) {
-				if (!interestedIn(context)) {
-					return new NoOpBuilderParticipant();
-				}
-				if (delegate == null) {
-					initDelegate();
-				}
-				return delegate;
-			}
-
-			private synchronized void initDelegate() {
-				if (delegate != null) return;
-				try {
-					Object participant = element.createExecutableExtension(ATT_CLASS);
-					if (participant instanceof IXtextBuilderParticipant) {
-						delegate = (IXtextBuilderParticipant) participant;
-					} else {
-						logError(element, element.getAttribute(ATT_CLASS)
-								+ " did not yield an instance of IXtextBuilderParticipant but " + //$NON-NLS-1$
-								participant.getClass().getName());
-					}
-				} catch (CoreException e) {
-					logError(element, e.getMessage());
-				} catch (NoClassDefFoundError e) {
-					logError(element, e.getMessage());
-				}
-				if (delegate == null) {
-					delegate = new NoOpBuilderParticipant();
-				}
-			}
-
-			private boolean interestedIn(IBuildContext context) {
-				if (getHandledFileExtensions().isEmpty()) {
-					return true;
-				}
-				for (Delta change : context.getDeltas()) {
-					String fileExtension = change.getUri().fileExtension();
-					if (getHandledFileExtensions().contains(fileExtension)) {
-						return true;
-					}
-				}
-				return false;
-			}
-
-			private List<String> getHandledFileExtensions() {
-				if (handledFileExtensions == null) {
-					initHandledFileExtensions();
-				}
-				return handledFileExtensions;
-			}
-
-			private synchronized void initHandledFileExtensions() {
-				if (handledFileExtensions != null) return;
-				String fileExtensionsAtt = Strings.nullToEmpty(element.getAttribute(ATT_FILE_EXTENSIONS));
-				handledFileExtensions = ImmutableList.copyOf(FILE_EXTENSION_SPLITTER.split(fileExtensionsAtt));
-			}
-		}
+	}
+	
+	private static void doLogError(IConfigurationElement element, String text) {
+		IExtension extension = element.getDeclaringExtension();
+		readerLog.error("Plugin " + extension.getContributor().getName() + ", extension " + extension.getExtensionPointUniqueIdentifier()); //$NON-NLS-1$ //$NON-NLS-2$
+		readerLog.error(text);
 	}
 
 	private static class NoOpBuilderParticipant implements IXtextBuilderParticipant {
 		public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		}
+	}
+	
+	public static class DeferredBuilderParticipant implements IXtextBuilderParticipant {
+		private final IConfigurationElement element;
+		private final ImmutableList<String> handledFileExtensions;
+		
+		private IXtextBuilderParticipant delegate;
+
+		public DeferredBuilderParticipant(IConfigurationElement element) {
+			this.element = element;
+			String fileExtensionsAtt = Strings.nullToEmpty(element.getAttribute(ATT_FILE_EXTENSIONS));
+			this.handledFileExtensions = ImmutableList.copyOf(FILE_EXTENSION_SPLITTER.split(fileExtensionsAtt));
+		}
+
+		public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
+			getDelegate(context).build(context, monitor);
+		}
+
+		private IXtextBuilderParticipant getDelegate(IBuildContext context) {
+			if (!interestedIn(context)) {
+				return new NoOpBuilderParticipant();
+			}
+			return getDelegate();
+		}
+		
+		public IXtextBuilderParticipant getDelegate() {
+			if (delegate == null) {
+				initDelegate();
+			}
+			return delegate;
+		}
+
+		private synchronized void initDelegate() {
+			if (delegate != null)
+				return;
+			try {
+				Object participant = element.createExecutableExtension(ATT_CLASS);
+				if (participant instanceof IXtextBuilderParticipant) {
+					delegate = (IXtextBuilderParticipant) participant;
+				} else {
+					doLogError(element, element.getAttribute(ATT_CLASS)
+							+ " did not yield an instance of IXtextBuilderParticipant but " + //$NON-NLS-1$
+							participant.getClass().getName());
+				}
+			} catch (CoreException e) {
+				doLogError(element, e.getMessage());
+			} catch (NoClassDefFoundError e) {
+				doLogError(element, e.getMessage());
+			}
+			if (delegate == null) {
+				delegate = new NoOpBuilderParticipant();
+			}
+		}
+
+		private boolean interestedIn(IBuildContext context) {
+			List<String> extensions = getHandledFileExtensions();
+			if (extensions.isEmpty()) {
+				return true;
+			}
+			for (Delta change : context.getDeltas()) {
+				String fileExtension = change.getUri().fileExtension();
+				if (extensions.contains(fileExtension)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		/**
+		 * Ask the participant whether it is interesting in the given file extension.
+		 * Does not initialize the delegate or the injector of the contributing language.
+		 */
+		public boolean isParticipating(String fileExtension) {
+			List<String> extensions = getHandledFileExtensions();
+			return extensions.isEmpty() || extensions.contains(fileExtension);
+		}
+		
+		private List<String> getHandledFileExtensions() {
+			return handledFileExtensions;
+		}
+
 	}
 
 }
