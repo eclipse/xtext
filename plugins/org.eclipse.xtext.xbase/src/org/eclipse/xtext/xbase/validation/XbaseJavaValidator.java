@@ -1555,8 +1555,18 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if(isTripleEqualsOperation(binaryOperation)){
 			LightweightTypeReference left = getActualType(binaryOperation.getLeftOperand());
 			LightweightTypeReference right = getActualType(binaryOperation.getRightOperand());
-			if((left.isArray() && !right.isArray()) || (!left.isArray() && right.isArray()))
+			if(left.isArray() != right.isArray()) {
+				if (left.isArray()) {
+					if (right.isAny() || right.isType(Object.class) || right.isType(Serializable.class) || right.isType(Cloneable.class)) {
+						return;
+					}
+				} else {
+					if (left.isAny() || left.isType(Object.class) || left.isType(Serializable.class) || left.isType(Cloneable.class)) {
+						return;
+					}
+				}
 				error("Incompatible operand types " + left.getHumanReadableName() + " and " + right.getHumanReadableName(), null, INVALID_OPERAND_TYPES);
+			}
 		}
 	}
 	

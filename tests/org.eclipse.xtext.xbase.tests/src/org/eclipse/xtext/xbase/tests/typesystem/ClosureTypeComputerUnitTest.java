@@ -23,7 +23,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.validation.IssueSeverities;
-import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseFactory;
@@ -65,7 +64,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("null")
 public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implements ITypeReferenceOwner {
 	
 	@Inject
@@ -76,9 +74,6 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	
 	@Inject
 	private PublicReentrantTypeResolver reentrantResolver;
-	
-	@Inject 
-	private IssueSeveritiesProvider issueSeveritiesProvider;
 	
 	private TestableState state;
 	
