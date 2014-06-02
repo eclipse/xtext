@@ -43,6 +43,9 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
             if (_isIndexing) {
               return new IResourceDescriptions.NullImpl();
             }
+            IProject _project = project.getProject();
+            String _name = _project.getName();
+            final String encodedProjectName = URI.encodeSegment(_name, true);
             final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
               public Boolean apply(final URI uri) {
                 boolean _or = false;
@@ -58,9 +61,7 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
                   return false;
                 }
                 String _segment = uri.segment(1);
-                IProject _project = project.getProject();
-                String _name = _project.getName();
-                return Objects.equal(_segment, _name);
+                return Objects.equal(_segment, encodedProjectName);
               }
             };
             return new FilteringResourceDescriptions(result, _function);
@@ -70,6 +71,9 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
     }
     boolean _isIndexing = this.compilerPhases.isIndexing(resourceSet);
     if (_isIndexing) {
+      IProject _project = project.getProject();
+      String _name = _project.getName();
+      final String encodedProjectName = URI.encodeSegment(_name, true);
       final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
         public Boolean apply(final URI uri) {
           boolean _or = false;
@@ -85,9 +89,7 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
             return false;
           }
           String _segment = uri.segment(1);
-          IProject _project = project.getProject();
-          String _name = _project.getName();
-          return (!Objects.equal(_segment, _name));
+          return (!Objects.equal(_segment, encodedProjectName));
         }
       };
       return new FilteringResourceDescriptions(result, _function);

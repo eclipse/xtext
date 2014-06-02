@@ -33,11 +33,12 @@ class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 						if (compilerPhases.isIndexing(resourceSet)) {
 							return new IResourceDescriptions.NullImpl();
 						}
+						val encodedProjectName = URI.encodeSegment(project.project.name, true)
 						return new FilteringResourceDescriptions(result, [ uri |
-							// we expect platform://resource URIs here, where the second segment denotes the project's name.
+							// we expect platform:/resource URIs here, where the second segment denotes the project's name.
 							if (uri == null || uri.segmentCount<2)
 								return false
-							return uri.segment(1) == project.project.name
+							return uri.segment(1) == encodedProjectName 
 						])
 					}
 				}
@@ -45,11 +46,12 @@ class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 		}
 		if (compilerPhases.isIndexing(resourceSet)) {
 			// during indexing we don't want to see any local xtend files
+			val encodedProjectName = URI.encodeSegment(project.project.name, true)
 			return new FilteringResourceDescriptions(result, [ uri |
 				// we expect platform://resource URIs here, where the second segment denotes the project's name.
 				if (uri == null || uri.segmentCount<2)
 					return false
-				return uri.segment(1) != project.project.name
+				return uri.segment(1) != encodedProjectName
 			])
 		} else {
 			return result
