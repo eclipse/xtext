@@ -662,23 +662,30 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		for (XtendParameter parameter : source.getParameters()) {
 			translateParameter(operation, parameter);
 		}
+		XExpression expression = source.getExpression();
+		CreateExtensionInfo createExtensionInfo = source.getCreateExtensionInfo();
+		
 		JvmTypeReference returnType = null;
 		if (source.getReturnType() != null) {
 			returnType = jvmTypesBuilder.cloneWithProxies(source.getReturnType());
+		} else if (createExtensionInfo != null) {
+			returnType = jvmTypesBuilder.inferredType(createExtensionInfo.getCreateExpression());
+		} else if (expression != null) {
+			returnType = jvmTypesBuilder.inferredType(expression);
 		} else {
 			returnType = jvmTypesBuilder.inferredType();
 		}
+		
 		operation.setReturnType(returnType);
 		copyAndFixTypeParameters(source.getTypeParameters(), operation);
 		for (JvmTypeReference exception : source.getExceptions()) {
 			operation.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
 		}
 		translateAnnotationsTo(source.getAnnotations(), operation);
-		CreateExtensionInfo createExtensionInfo = source.getCreateExtensionInfo();
 		if (createExtensionInfo != null) {
 			transformCreateExtension(source, createExtensionInfo, container, operation, returnType);
 		} else {
-			setBody(operation, source.getExpression());
+			setBody(operation, expression);
 		}
 		jvmTypesBuilder.copyDocumentationTo(source, operation);
 	}
