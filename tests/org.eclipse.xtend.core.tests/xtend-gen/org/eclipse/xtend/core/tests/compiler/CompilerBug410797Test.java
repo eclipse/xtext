@@ -844,10 +844,10 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("int result = 1;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + _offset;");
+    _builder_1.append("result = prime * result + this._offset;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("result = prime * result + ((_leafs== null) ? 0 : _leafs.hashCode());");
+    _builder_1.append("result = prime * result + ((this._leafs== null) ? 0 : this._leafs.hashCode());");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return result;");
@@ -885,13 +885,13 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("HiddenLeafs other = (HiddenLeafs) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (other._offset != _offset)");
+    _builder_1.append("if (other._offset != this._offset)");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("if (_leafs == null) {");
+    _builder_1.append("if (this._leafs == null) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("if (other._leafs != null)");
@@ -900,7 +900,7 @@ public class CompilerBug410797Test extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} else if (!_leafs.equals(other._leafs))");
+    _builder_1.append("} else if (!this._leafs.equals(other._leafs))");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return false;");
