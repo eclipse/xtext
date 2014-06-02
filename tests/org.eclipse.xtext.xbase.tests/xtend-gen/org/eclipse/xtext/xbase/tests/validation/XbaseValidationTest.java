@@ -1946,7 +1946,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testBug415770() {
+  public void testBug415770_01() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{");
@@ -1970,7 +1970,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testBug415770_2() {
+  public void testBug415770_02() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{");
@@ -1994,7 +1994,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testBug415770_3() {
+  public void testBug415770_03() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{");
@@ -2018,7 +2018,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testBug415770_4() {
+  public void testBug415770_04() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{");
@@ -2042,7 +2042,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testBug415770_5() {
+  public void testBug415770_05() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{");
@@ -2063,7 +2063,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testBug415770_6() {
+  public void testBug415770_06() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{");
@@ -2084,7 +2084,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testBug415770_7() {
+  public void testBug415770_07() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{");
@@ -2108,7 +2108,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testBug415770_8() {
+  public void testBug415770_08() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{");
@@ -2121,6 +2121,99 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       _builder.append("\t");
       _builder.append("array !== array2");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug415770_09() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String[] array = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("array !== null || array === null");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug415770_10() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val Cloneable c = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String[] array = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("array !== c || array === c || c === array || c !== array");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug415770_11() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val java.io.Serializable s = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String[] array = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("array !== s || array === s || s === array || s !== array");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug415770_12() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val Object o = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String[] array = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("array !== o || array === o || o === array || o !== array");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();

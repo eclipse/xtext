@@ -816,7 +816,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertNoIssues
 	}
 	
-	@Test def void testBug415770(){
+	@Test def void testBug415770_01(){
 		'''
 		{
 			val String str = ""
@@ -826,7 +826,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertError(XbasePackage.Literals.XBINARY_OPERATION,IssueCodes.INVALID_OPERAND_TYPES)
 	}
 	
-	@Test def void testBug415770_2(){
+	@Test def void testBug415770_02(){
 		'''
 		{
 			val String str = ""
@@ -836,7 +836,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertError(XbasePackage.Literals.XBINARY_OPERATION,IssueCodes.INVALID_OPERAND_TYPES)
 	}
 	
-	@Test def void testBug415770_3(){
+	@Test def void testBug415770_03(){
 		'''
 		{
 			val String str = ""
@@ -846,7 +846,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertError(XbasePackage.Literals.XBINARY_OPERATION,IssueCodes.INVALID_OPERAND_TYPES)
 	}
 	
-	@Test def void testBug415770_4(){
+	@Test def void testBug415770_04(){
 		'''
 		{
 			val String str = ""
@@ -856,7 +856,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertError(XbasePackage.Literals.XBINARY_OPERATION,IssueCodes.INVALID_OPERAND_TYPES)
 	}
 	
-	@Test def void testBug415770_5(){
+	@Test def void testBug415770_05(){
 		'''
 		{
 			val String str = ""
@@ -865,7 +865,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertNoErrors
 	}
 	
-	@Test def void testBug415770_6(){
+	@Test def void testBug415770_06(){
 		'''
 		{
 			val String str = ""
@@ -874,7 +874,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertNoErrors
 	}
 	
-	@Test def void testBug415770_7(){
+	@Test def void testBug415770_07(){
 		'''
 		{
 			val String[] array = null
@@ -884,12 +884,51 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertNoErrors
 	}
 	
-	@Test def void testBug415770_8(){
+	@Test def void testBug415770_08(){
 		'''
 		{
 			val String[] array = null
 			val String[] array2 = null
 			array !== array2
+		}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testBug415770_09(){
+		'''
+		{
+			val String[] array = null
+			array !== null || array === null
+		}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testBug415770_10(){
+		'''
+		{
+			val Cloneable c = null
+			val String[] array = null
+			array !== c || array === c || c === array || c !== array
+		}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testBug415770_11(){
+		'''
+		{
+			val java.io.Serializable s = null
+			val String[] array = null
+			array !== s || array === s || s === array || s !== array
+		}
+		'''.expression.assertNoErrors
+	}
+	
+	@Test def void testBug415770_12(){
+		'''
+		{
+			val Object o = null
+			val String[] array = null
+			array !== o || array === o || o === array || o !== array
 		}
 		'''.expression.assertNoErrors
 	}
