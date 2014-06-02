@@ -236,7 +236,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      file.setBody(_string);
+      file.body = _string;
       _xblockexpression = file.toString();
     }
     return _xblockexpression;

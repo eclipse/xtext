@@ -8,11 +8,67 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.base.StandardSystemProperty">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.base.StandardSystemProperty"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.cache.AbstractLoadingCache">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.cache.AbstractLoadingCache"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.cache.CacheBuilderSpec">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.cache.CacheBuilderSpec"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.cache.ForwardingLoadingCache">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.cache.ForwardingLoadingCache"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.cache.LoadingCache">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.cache.LoadingCache"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.cache.Weigher">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.cache.Weigher"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.AbstractLinkedIterator">
         <filter comment="Guava 15" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.collect.AbstractLinkedIterator"/>
                 <message_argument value="org.eclipse.xtext.util_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.AbstractSequentialIterator">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.AbstractSequentialIterator"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
             </message_arguments>
         </filter>
     </resource>
@@ -24,11 +80,27 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.BinaryTreeTraverser">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.BinaryTreeTraverser"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.DiscreteDomains">
         <filter comment="Guava 15" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.collect.DiscreteDomains"/>
                 <message_argument value="org.eclipse.xtext.util_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.EvictingQueue">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.EvictingQueue"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
             </message_arguments>
         </filter>
     </resource>
@@ -46,6 +118,86 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.FluentIterable">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.FluentIterable"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.ForwardingBlockingDeque">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.ForwardingBlockingDeque"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.ForwardingDeque">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.ForwardingDeque"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.ForwardingNavigableMap">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.ForwardingNavigableMap"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.ForwardingNavigableSet">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.ForwardingNavigableSet"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.ForwardingSortedMultiset">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.ForwardingSortedMultiset"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.ImmutableRangeMap">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.ImmutableRangeMap"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.ImmutableRangeSet">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.ImmutableRangeSet"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.ImmutableSortedMultiset">
+        <filter comment="Guava 10 vs 15" id="305426566">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.ImmutableSortedMultiset"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.ImmutableTable">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.ImmutableTable"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.MapEvictionListener">
         <filter comment="Guava Update" id="305422471">
             <message_arguments>
@@ -57,6 +209,30 @@
             <message_arguments>
                 <message_argument value="com.google.common.collect.MapEvictionListener"/>
                 <message_argument value="org.eclipse.xtext.util_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.Queues">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.Queues"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.RangeMap">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.RangeMap"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.RangeSet">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.RangeSet"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
             </message_arguments>
         </filter>
     </resource>
@@ -82,6 +258,238 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.SortedMultiset">
+        <filter comment="Guava 10 vs 15" id="305426566">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.SortedMultiset"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.TreeRangeMap">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.TreeRangeMap"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.TreeRangeSet">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.TreeRangeSet"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.TreeTraverser">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.collect.TreeTraverser"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.escape.ArrayBasedCharEscaper">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.escape.ArrayBasedCharEscaper"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.escape.ArrayBasedEscaperMap">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.escape.ArrayBasedEscaperMap"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.escape.ArrayBasedUnicodeEscaper">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.escape.ArrayBasedUnicodeEscaper"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.escape.CharEscaper">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.escape.CharEscaper"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.escape.CharEscaperBuilder">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.escape.CharEscaperBuilder"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.escape.Escaper">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.escape.Escaper"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.escape.Escapers">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.escape.Escapers"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.escape.UnicodeEscaper">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.escape.UnicodeEscaper"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.hash.BloomFilter">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.hash.BloomFilter"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.hash.Funnel">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.hash.Funnel"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.hash.Funnels">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.hash.Funnels"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.hash.HashCode">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.hash.HashCode"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.hash.HashCodes">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.hash.HashCodes"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.hash.HashFunction">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.hash.HashFunction"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.hash.Hasher">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.hash.Hasher"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.hash.Hashing">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.hash.Hashing"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.hash.PrimitiveSink">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.hash.PrimitiveSink"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.html.HtmlEscapers">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.html.HtmlEscapers"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.io.BaseEncoding">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.io.BaseEncoding"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.io.ByteSink">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.io.ByteSink"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.io.ByteSource">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.io.ByteSource"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.io.CharSink">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.io.CharSink"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.io.CharSource">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.io.CharSource"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.io.Closer">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.io.Closer"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.io.FileWriteMode">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.io.FileWriteMode"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.io.LimitInputStream">
         <filter comment="Guava 15" id="305422471">
             <message_arguments>
@@ -95,6 +503,182 @@
             <message_arguments>
                 <message_argument value="com.google.common.io.NullOutputStream"/>
                 <message_argument value="org.eclipse.xtext.util_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.math.BigIntegerMath">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.math.BigIntegerMath"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.math.DoubleMath">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.math.DoubleMath"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.math.IntMath">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.math.IntMath"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.math.LongMath">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.math.LongMath"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.net.HttpHeaders">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.net.HttpHeaders"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.net.MediaType">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.net.MediaType"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.net.PercentEscaper">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.net.PercentEscaper"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.net.UrlEscapers">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.net.UrlEscapers"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.primitives.UnsignedInteger">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.primitives.UnsignedInteger"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.primitives.UnsignedInts">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.primitives.UnsignedInts"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.primitives.UnsignedLong">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.primitives.UnsignedLong"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.reflect.AbstractInvocationHandler">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.reflect.AbstractInvocationHandler"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.reflect.ClassPath">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.reflect.ClassPath"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.reflect.ImmutableTypeToInstanceMap">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.reflect.ImmutableTypeToInstanceMap"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.reflect.Invokable">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.reflect.Invokable"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.reflect.MutableTypeToInstanceMap">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.reflect.MutableTypeToInstanceMap"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.reflect.Parameter">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.reflect.Parameter"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.reflect.Reflection">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.reflect.Reflection"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.reflect.TypeParameter">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.reflect.TypeParameter"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.reflect.TypeResolver">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.reflect.TypeResolver"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.reflect.TypeToInstanceMap">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.reflect.TypeToInstanceMap"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.reflect.TypeToken">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.reflect.TypeToken"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
             </message_arguments>
         </filter>
     </resource>
@@ -112,6 +696,102 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.AbstractListeningExecutorService">
+        <filter comment="Guava 10 vs 15" id="305426566">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.AbstractListeningExecutorService"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.AbstractScheduledService">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.AbstractScheduledService"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.AsyncFunction">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.AsyncFunction"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.AtomicDouble">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.AtomicDouble"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.AtomicDoubleArray">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.AtomicDoubleArray"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.AtomicLongMap">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.AtomicLongMap"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.CycleDetectingLockFactory">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.CycleDetectingLockFactory"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.FutureFallback">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.FutureFallback"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.ListenableScheduledFuture">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.ListenableScheduledFuture"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.RateLimiter">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.RateLimiter"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.ServiceManager">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.ServiceManager"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.Striped">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.util.concurrent.Striped"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.UninterruptibleFuture">
         <filter comment="Guava Update" id="305422471">
             <message_arguments>
@@ -123,6 +803,14 @@
             <message_arguments>
                 <message_argument value="com.google.common.util.concurrent.UninterruptibleFuture"/>
                 <message_argument value="org.eclipse.xtext.util_2.5.3"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="com.google.common.xml.XmlEscapers">
+        <filter comment="Guava 10 vs 15" id="305422471">
+            <message_arguments>
+                <message_argument value="com.google.common.xml.XmlEscapers"/>
+                <message_argument value="org.eclipse.xtext.util_2.6.0"/>
             </message_arguments>
         </filter>
     </resource>
