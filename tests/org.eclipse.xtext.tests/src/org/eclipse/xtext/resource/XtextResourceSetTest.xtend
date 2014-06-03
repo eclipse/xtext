@@ -203,12 +203,17 @@ abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 		assertEquals(1, rs.URIResourceMap.size)
 		assertEquals(resource, rs.URIResourceMap.get(null))
 		
+		assertEquals(0, rs.getNormalizationMap.size)
+		
 		// set the URI
 		resource.URI = URI::createURI('/a/../foo')
 		assertEquals(2, rs.URIResourceMap.size)
 		assertFalse(rs.URIResourceMap.containsKey(null))
 		assertEquals(resource, rs.URIResourceMap.get(resource.URI))
 		assertEquals(resource, rs.URIResourceMap.get(rs.URIConverter.normalize(resource.URI)))
+		
+		assertEquals(1, rs.getNormalizationMap.size)
+		assertEquals(rs.URIConverter.normalize(resource.URI), rs.getNormalizationMap.get(resource.URI))
 		
 		// set the URI
 		resource.URI = URI::createURI('/a/../bar')
@@ -217,16 +222,23 @@ abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 		assertEquals(resource, rs.URIResourceMap.get(resource.URI))
 		assertEquals(resource, rs.URIResourceMap.get(rs.URIConverter.normalize(resource.URI)))
 		
+		assertEquals(1, rs.getNormalizationMap.size)
+		assertEquals(rs.URIConverter.normalize(resource.URI), rs.getNormalizationMap.get(resource.URI))
+		
 		// set the URI back to null
 		resource.URI = null
 		assertEquals(1, rs.URIResourceMap.size)
 		assertEquals(resource, rs.URIResourceMap.get(null))
+		
+		assertEquals(0, rs.getNormalizationMap.size)
 		
 		// remove the resource
 		rs.resources.remove(resource)
 		
 		assertTrue(resource.eAdapters.empty)
 		assertEquals(0, rs.URIResourceMap.size)
+		
+		assertEquals(0, rs.getNormalizationMap.size)
 	}
 	
 	@Test

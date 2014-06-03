@@ -10,7 +10,9 @@ package org.eclipse.xtext.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -36,6 +38,18 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 public class XtextResourceSet extends ResourceSetImpl {
 	
 	/**
+	 * @since 2.6
+	 */
+	protected Map<URI, URI> normalizationMap = new HashMap<URI, URI>();
+	
+	/**
+	 * @since 2.6
+	 */
+	public Map<URI, URI> getNormalizationMap() {
+		return Collections.unmodifiableMap(normalizationMap);
+	}
+	
+	/**
 	 * @since 2.3
 	 */
 	protected class UriChangeListener extends AdapterImpl {
@@ -45,10 +59,9 @@ public class XtextResourceSet extends ResourceSetImpl {
 			if (map != null && notification.getFeatureID(Resource.class) == Resource.RESOURCE__URI && notification.getNotifier() instanceof Resource) {
 				URI oldOne = (URI) notification.getOldValue();
 				map.remove(oldOne);
-				if (oldOne != null) {
-					URI oldNormalized = getURIConverter().normalize(oldOne);
-					if (!oldOne.equals(oldNormalized))
-						map.remove(oldNormalized);
+				URI oldNormalized = normalizationMap.remove(oldOne);
+				if (oldOne != null && !oldOne.equals(oldNormalized)) {
+					map.remove(oldNormalized);
 				}
 				Resource resource = (Resource) notification.getNotifier();
 				registerURI(resource);
@@ -81,6 +94,7 @@ public class XtextResourceSet extends ResourceSetImpl {
 						throw new IllegalStateException("A resource with the normalized URI '"+normalized+"' was already registered. The resource with the URI '"+previous+"' is no longer registered with the normalized form.");
 					}
 				}
+				normalizationMap.put(uri, normalized);
 			}
 			Resource previous = map.put(uri, resource);
 			if (previous != null && previous != resource) {
@@ -105,6 +119,16 @@ public class XtextResourceSet extends ResourceSetImpl {
 		
 		@Override
 		protected NotificationChain inverseRemove(Resource resource, NotificationChain notifications) {
+			URI uri = resource.getURI();
+			if (uri != null) {
+				URI normalize = getURIConverter().normalize(uri);
+				Iterator<URI> i = normalizationMap.values().iterator();
+				while(i.hasNext()) {
+					if (i.next().equals(normalize)) {
+						i.remove();
+					}
+				}
+			}
 			final NotificationChain inverseRemove = super.inverseRemove(resource, notifications);
 			resource.eAdapters().remove(getUriChangeListener());
 			return inverseRemove;
@@ -118,6 +142,7 @@ public class XtextResourceSet extends ResourceSetImpl {
 			super.doClear();
 			// don't iterate the values of the map per resource but just clear it all at once
 			getURIResourceMap().clear();
+			normalizationMap.clear();
 		}
 
 	}
@@ -177,6 +202,9 @@ public class XtextResourceSet extends ResourceSetImpl {
 		if (resource == null) {
 			URI normalizedURI = getURIConverter().normalize(uri);
 			resource = map.get(normalizedURI);
+			if (resource != null) {
+				normalizationMap.put(uri, normalizedURI);
+			}
 		}
 		if (resource != null) {
 			if (loadOnDemand && !resource.isLoaded()) {
@@ -212,7 +240,11 @@ public class XtextResourceSet extends ResourceSetImpl {
             uriConverter = new ExtensibleURIConverterImpl() {
                 @Override
                 public URI normalize(URI uri) {
-                    if (ClasspathUriUtil.isClasspathUri(uri)) {
+                	URI normalizedURI = normalizationMap.get(uri);
+                	if (normalizedURI != null) {
+                		return normalizedURI;
+                	}
+                	if (ClasspathUriUtil.isClasspathUri(uri)) {
                         URI result = XtextResourceSet.this.resolveClasspathURI(uri);
                         if (ClasspathUriUtil.isClasspathUri(result))
                         	throw new ClasspathUriResolutionException(result);

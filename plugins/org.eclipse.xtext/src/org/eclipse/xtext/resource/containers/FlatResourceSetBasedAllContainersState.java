@@ -9,6 +9,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.common.collect.Lists;
 
@@ -45,6 +46,10 @@ public class FlatResourceSetBasedAllContainersState extends AdapterImpl implemen
 	public Collection<URI> getContainedURIs(String containerHandle) {
 		if (!HANDLE.equals(containerHandle))
 			return Collections.emptySet();
+		if (resourceSet instanceof XtextResourceSet) {
+			XtextResourceSet xtextResourceSet = (XtextResourceSet) resourceSet;
+			return xtextResourceSet.getNormalizationMap().values();
+		}
 		List<URI> uris = Lists.newArrayListWithCapacity(resourceSet.getResources().size());
 		URIConverter uriConverter = resourceSet.getURIConverter();
 		for (Resource r : resourceSet.getResources())
