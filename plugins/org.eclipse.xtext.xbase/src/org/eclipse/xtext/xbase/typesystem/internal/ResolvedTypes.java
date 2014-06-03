@@ -904,6 +904,16 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		LightweightTypeReference boundArgumentWithoutRecursion = new CustomTypeParameterSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), boundTypeArgument.getTypeReference().getOwner()) {
 
 			@Override
+			protected LightweightTypeReference visitTypeArgument(LightweightTypeReference reference, ConstraintVisitingInfo visiting, boolean lowerBound) {
+				if (reference.getKind() == LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
+					if (handle.equals(((UnboundTypeReference) reference).getHandle())) {
+						return doVisitUnboundTypeReference((UnboundTypeReference) reference, visiting);
+					}
+				}
+				return super.visitTypeArgument(reference, visiting, lowerBound);
+			}
+			
+			@Override
 			protected LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference, ConstraintVisitingInfo visiting) {
 				if (!handle.equals(reference.getHandle())) {
 					return reference;

@@ -1517,6 +1517,25 @@ class ErrorTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test
+	def void testErrorModel_104() throws Exception {
+		fireproof('''
+			import com.google.common.base.Optional
+			import static java.lang.Enum.*
+			import java.util.List
+			import java.util.Set
+			class C {
+				def Optional<Object> m2(Object o, List<Object> list, Object context, Set<Object> set) {
+					if (o instanceof String) {
+						val idx = valueOf(null, null)
+						idx.present
+					}
+					return null
+				}
+			}
+		''')
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)

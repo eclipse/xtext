@@ -96,7 +96,7 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 		for(int i = 0; i < reference.getTypeArguments().size(); i++) {
 			LightweightTypeReference argument = reference.getTypeArguments().get(i);
 			visiting.pushInfo(type instanceof JvmTypeParameterDeclarator ? (JvmTypeParameterDeclarator) type : null, i);
-			LightweightTypeReference visitedArgument = argument.accept(this, visiting);
+			LightweightTypeReference visitedArgument = visitTypeArgument(argument, visiting);
 			result.addTypeArgument(visitedArgument);
 		}
 		return result;
@@ -140,7 +140,7 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 			if (constraint instanceof JvmUpperBound) {
 				LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
 				if (visiting.getCurrentDeclarator() != reference.getType()) {
-					return reference.accept(this, visiting);
+					return visitTypeArgument(reference, visiting);
 				}
 				WildcardTypeReference result = new WildcardTypeReference(getOwner());
 				result.addUpperBound(getObjectReference());
@@ -164,7 +164,7 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 			JvmTypeParameter typeParameter = ((UnboundTypeReference) original).getTypeParameter();
 			JvmTypeParameterDeclarator declarator = typeParameter.getDeclarator();
 			visitingInfo.pushInfo(declarator, declarator.getTypeParameters().indexOf(typeParameter));
-			LightweightTypeReference result = original.accept(this, visitingInfo);
+			LightweightTypeReference result = visitTypeArgument(original, visitingInfo);
 			return result;
 		} else {
 			LightweightTypeReference result = original.accept(this, createVisiting());
