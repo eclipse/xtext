@@ -2400,4 +2400,34 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"}");
 		helper.assertWarning(file, XSWITCH_EXPRESSION, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
 	}
+	
+	@Test public void testBug436483_01() throws Exception {
+		XtendFile file = file(
+				"import static java.lang.Enum.*\n" + 
+				"class C {\n" + 
+				" def void m() {\n" + 
+				"  valueOf(null, null)\n" + 
+				" }\n" + 
+				"}");
+		helper.assertError(file, XFEATURE_CALL, TYPE_BOUNDS_MISMATCH, 
+				"Bounds mismatch: The type argument <Enum<?>> is not a valid substitute for the bounded type parameter <T extends Enum<T>> of the method valueOf(Class<T>, String)");
+	}
+	
+	// Probably to be improved such that this is not an error because C#valueOf could be a better match
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=436483
+	// 
+	@Test public void testBug436483_02() throws Exception {
+		XtendFile file = file(
+				"import static java.lang.Enum.*\n" + 
+				"class C {\n" + 
+				" def static void valueOf(Object o, Object context) {\n" + 
+				" }\n" + 
+				" def void m() {\n" + 
+				"  valueOf(null, null)\n" + 
+				" }\n" + 
+				"}");
+		helper.assertError(file, XFEATURE_CALL, TYPE_BOUNDS_MISMATCH, 
+				"Bounds mismatch: The type argument <Enum<?>> is not a valid substitute for the bounded type parameter <T extends Enum<T>> of the method valueOf(Class<T>, String)");
+	}
+	
 }
