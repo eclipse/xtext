@@ -71,7 +71,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	public void disposeInput() {
-		// clients may override
+		resource = null;
 	}
 
 	private final XtextDocumentLocker stateAccess = createDocumentLocker();
@@ -136,6 +136,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	protected void notifyModelListeners(XtextResource res) {
+		if (res == null)
+			return;
 		List<IXtextModelListener> modelListenersCopy;
 		synchronized (modelListeners) {
 			modelListenersCopy = newArrayList(modelListeners);
@@ -201,7 +203,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		protected void afterModify(XtextResource res, Object result, IUnitOfWork<?, XtextResource> work) {
 			ensureThatStateIsNotReturned(result, work);
 			if(!(work instanceof ReconcilingUnitOfWork))
-				notifyModelListeners(resource);
+				notifyModelListeners(res);
 		}
 
 		@Override
@@ -211,6 +213,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 					validationJob.cancel();
 				}
 				Object state = getState();
+				if (state == null) 
+					return null;
 				if (state instanceof ISynchronizable<?>) {
 					synchronized (((ISynchronizable<?>) state).getLock()) {
 						return super.modify(work);
@@ -238,6 +242,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 		@Override
 		public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 			Object state = getState();
+			if (state == null) 
+				return null;
 			if (state instanceof ISynchronizable<?>) {
 				synchronized (((ISynchronizable<?>) state).getLock()) {
 					return super.readOnly(work);
@@ -282,6 +288,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	@SuppressWarnings("unchecked")
 	public <T> T getAdapter(Class<T> adapterType) {
+		if (resource == null)
+			return null;
 		URI uri = resource.getURI();
 		if ((adapterType == IFile.class || adapterType == IResource.class) && uri.isPlatformResource()) {
 			return (T) ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
