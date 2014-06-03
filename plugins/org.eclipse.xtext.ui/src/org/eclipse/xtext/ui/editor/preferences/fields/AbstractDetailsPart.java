@@ -68,8 +68,10 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 	public final boolean performOk() {
 		int changed = 0;
 		for (String prefKey : internalStore.preferenceNames()) {
-			if (!internalStore.isDefault(prefKey)) {
-				masterPreferenceStore.putValue(prefKey, internalStore.getString(prefKey));
+			String value = internalStore.getString(prefKey);
+			String defaultValue = masterPreferenceStore.getDefaultString(prefKey);
+			if (!value.equals(defaultValue)) {
+				masterPreferenceStore.putValue(prefKey, value);
 				changed++;
 			}
 			else {
