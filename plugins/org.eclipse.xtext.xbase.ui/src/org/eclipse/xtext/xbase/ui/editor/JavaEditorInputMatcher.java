@@ -13,11 +13,13 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.jdt.core.ITypeRoot;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorMatchingStrategy;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.ide.ResourceUtil;
+import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
@@ -36,7 +38,7 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 	private static final Logger logger = Logger.getLogger(JavaEditorInputMatcher.class);
 	
 	@Inject
-	private ITraceForStorageProvider traceInformation;
+	private ITraceForTypeRootProvider traceInformation;
 	
 	@Inject
 	private XtextEditorInfo editorInfo;
@@ -55,23 +57,35 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 			IEditorInput newInput = editorInputRedirector.findOriginalSourceForOuputFolderCopy(inputToCheck);
 			IEditorInput currentInput = editorRef.getEditorInput();
 			if (newInput.equals(currentInput)) {
+				if (decisions.decideAccordingToCaller() != Decision.FORCE_JAVA) {
+					ITypeRoot newTypeRoot = editorInputRedirector.getTypeRoot(newInput);
+					if (newTypeRoot != null) {
+						IEditorPart existingEditor = editorRef.getEditor(true);
+						if (existingEditor instanceof XbaseEditor) {
+							((XbaseEditor)existingEditor).markNextSelectionAsJavaOffset(newTypeRoot);
+						}
+					}
+				}
 				return true;
 			}
 			if (decisions.decideAccordingToCaller() == Decision.FORCE_JAVA)
 				return false;
-			IFile newResource = ResourceUtil.getFile(newInput);
-			if (newResource == null) {
+			ITypeRoot newTypeRoot = editorInputRedirector.getTypeRoot(newInput);
+			if (newTypeRoot == null) {
 				return false;
 			}
 			IResource currentResource = ResourceUtil.getResource(currentInput);
-			ITrace traceToSource = traceInformation.getTraceToSource(newResource);
+			if (currentResource == null) {
+				return false;
+			}
+			ITrace traceToSource = traceInformation.getTraceToSource(newTypeRoot);
 			if (traceToSource == null) {
 				return false;
 			}
 			if (isCurrentResource(currentResource, traceToSource)) {
 				IEditorPart existingEditor = editorRef.getEditor(true);
 				if (existingEditor instanceof XbaseEditor) {
-					((XbaseEditor)existingEditor).markNextSelectionAsJavaOffset(newResource);
+					((XbaseEditor)existingEditor).markNextSelectionAsJavaOffset(newTypeRoot);
 					return true;
 				}
 			}
