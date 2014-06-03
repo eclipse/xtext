@@ -452,6 +452,16 @@ public abstract class OptionsConfigurationBlock {
 		preferenceStore.putValue(key, value);
 		return oldValue;
 	}
+	
+	protected String setToDefault(String key) {
+		String value = preferenceStore.getDefaultString(key);
+		if (disabledProjectSettings != null) {
+			return disabledProjectSettings.put(key, value);
+		}
+		String oldValue = getValue(key);
+		preferenceStore.setValue(key, value);
+		return oldValue;
+	}
 
 	public void useProjectSpecificSettings(boolean enable) {
 		boolean hasProjectSpecificOption = disabledProjectSettings == null;
@@ -563,8 +573,7 @@ public abstract class OptionsConfigurationBlock {
 	public void performDefaults() {
 		for (int i = 0; i < keys.length; i++) {
 			String curr = keys[i];
-			String defValue = preferenceStore.getDefaultString(curr);
-			setValue(curr, defValue);
+			setToDefault(curr);
 		}
 		updateControls();
 		validateSettings(null, null, null);
