@@ -2853,6 +2853,45 @@ public class ErrorTest extends AbstractXtendTestCase {
     this._oven.fireproof(_builder.toString());
   }
   
+  @Test
+  public void testErrorModel_104() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import com.google.common.base.Optional");
+    _builder.newLine();
+    _builder.append("import static java.lang.Enum.*");
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import java.util.Set");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Optional<Object> m2(Object o, List<Object> list, Object context, Set<Object> set) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (o instanceof String) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("val idx = valueOf(null, null)");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("idx.present");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
