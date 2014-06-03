@@ -21,6 +21,7 @@ import org.eclipse.xtext.generator.trace.ITraceForStorageProvider
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.ui.editor.XtextReadonlyEditorInput
 import org.eclipse.jdt.core.IClasspathEntry
+import org.eclipse.jdt.core.ITypeRoot
 
 class XbaseEditorInputRedirector {
 
@@ -32,6 +33,13 @@ class XbaseEditorInputRedirector {
 
 	@Inject
 	private FileExtensionProvider fileExtensionProvider
+	
+	def getTypeRoot(IEditorInput it) {
+		val adapter = getAdapter(IJavaElement);
+		if (adapter instanceof ITypeRoot) {
+			adapter
+		}
+	}
 	
 	/**
 	 * @param an input

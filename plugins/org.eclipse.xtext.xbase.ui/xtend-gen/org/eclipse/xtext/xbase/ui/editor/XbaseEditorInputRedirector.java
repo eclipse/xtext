@@ -20,6 +20,7 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jdt.core.ITypeRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.ide.ResourceUtil;
@@ -45,6 +46,19 @@ public class XbaseEditorInputRedirector {
   
   @Inject
   private FileExtensionProvider fileExtensionProvider;
+  
+  public ITypeRoot getTypeRoot(final IEditorInput it) {
+    ITypeRoot _xblockexpression = null;
+    {
+      final Object adapter = it.getAdapter(IJavaElement.class);
+      ITypeRoot _xifexpression = null;
+      if ((adapter instanceof ITypeRoot)) {
+        _xifexpression = ((ITypeRoot)adapter);
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
   
   /**
    * @param an input

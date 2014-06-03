@@ -10,13 +10,9 @@ package org.eclipse.xtext.xbase.ui.editor;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.ITypeRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
@@ -24,20 +20,17 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IMemento;
-import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
+import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.inject.Inject;
 
@@ -53,19 +46,10 @@ public class XbaseEditor extends XtextEditor {
 
 	private final static Logger log = Logger.getLogger(XbaseEditor.class);
 	
-	protected static final String TAG_ASSOCIATED_JAVA_RESOURCE= "javaResourcePath"; //$NON-NLS-1$
+	protected static final String HANDLER_IDENTIFIER = "HANDLER_IDENTIFIER"; //$NON-NLS-1$
 	
 	@Inject
-	private ITraceForStorageProvider traceInformation;
-
-	@Inject
-	private IJvmModelAssociations associations;
-	
-	@Inject
-	private ILocationInFileProvider locationProvider;
-	
-	@Inject
-	private IWorkspace workspace;
+	private ITraceForTypeRootProvider traceInformation;
 	
 	@Inject
 	private StacktraceBasedEditorDecider calleeAnalyzer;
@@ -76,7 +60,7 @@ public class XbaseEditor extends XtextEditor {
 	@Inject
 	private XbaseEditorInputRedirector editorInputRedirector;
 
-	private IResource javaResource = null;
+	private ITypeRoot typeRoot = null;
 	
 	private int expectJavaSelection = 0;
 	private boolean expectLineSelection = false;
@@ -85,20 +69,19 @@ public class XbaseEditor extends XtextEditor {
 	@Override
 	public void saveState(IMemento memento) {
 		super.saveState(memento);
-		if (javaResource != null && javaResource.getFullPath() != null) {
-			memento.putString(TAG_ASSOCIATED_JAVA_RESOURCE, javaResource.getFullPath().toPortableString());
+		if (typeRoot != null) {
+			memento.putString(HANDLER_IDENTIFIER, typeRoot.getHandleIdentifier());
 		}
 	}
 	
 	@Override
 	protected void doRestoreState(IMemento memento) {
 		super.doRestoreState(memento);
-		String pathString = memento.getString(TAG_ASSOCIATED_JAVA_RESOURCE);
-		if (pathString != null) {
-			IPath path = Path.fromPortableString(pathString);
-			IResource foundResource = workspace.getRoot().findMember(path);
-			if (foundResource != null && foundResource.exists()) {
-				javaResource = foundResource;
+		String handleIdentifier = memento.getString(HANDLER_IDENTIFIER);
+		if (handleIdentifier != null) {
+			IJavaElement handle = JavaCore.create(handleIdentifier);
+			if (handle instanceof ITypeRoot && handle.exists()) {
+				typeRoot = (ITypeRoot) handle;
 			}
 		}
 	}
@@ -107,7 +90,7 @@ public class XbaseEditor extends XtextEditor {
 	protected boolean containsSavedState(IMemento memento) {
 		boolean result = super.containsSavedState(memento);
 		if (!result) {
-			return memento.getString(TAG_ASSOCIATED_JAVA_RESOURCE) != null;	
+			return memento.getString(HANDLER_IDENTIFIER) != null;	
 		}
 		return result;
 	}
@@ -118,9 +101,9 @@ public class XbaseEditor extends XtextEditor {
 			// TODO set javaResource to null if input is Xbase file that does not match the Java case (needs reversed trace data)
 			IEditorInput inputToUse = editorInputRedirector.findOriginalSource(input);
 			super.doSetInput(inputToUse);
-			IFile resource = ResourceUtil.getFile(input);
-			if (resource != null && JavaCore.isJavaLikeFileName(resource.getName())) {
-				markNextSelectionAsJavaOffset(resource);
+			ITypeRoot typeRoot = editorInputRedirector.getTypeRoot(input);
+			if (typeRoot != null) {
+				markNextSelectionAsJavaOffset(typeRoot);
 			}
 			return;
 		} catch (CoreException e) {
@@ -131,7 +114,7 @@ public class XbaseEditor extends XtextEditor {
 	
 	private Exception lastCall = null;
 
-	public void markNextSelectionAsJavaOffset(IResource javaResource) {
+	public void markNextSelectionAsJavaOffset(ITypeRoot typeRoot) {
 		if (expectJavaSelection > 0) {
 			if (!isIgnoreCall) {
 				if (lastCall!= null) {
@@ -152,7 +135,7 @@ public class XbaseEditor extends XtextEditor {
 			isIgnoreCall = false;
 		if (calleeAnalyzer.isCalledFromFindReferences())
 			this.expectJavaSelection++;
-		this.javaResource = javaResource;
+		this.typeRoot = typeRoot;
 	}
 	
 	int reentrantCallFromSelf = 0;
@@ -187,7 +170,7 @@ public class XbaseEditor extends XtextEditor {
 						@Override
 						public IDocument getDocument(Object element) {
 							try {
-								String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
+								String string = Files.readStreamIntoString(getLocationInResource(getTraceStorage()).getContents());
 								final Document document = new Document(string);
 								return document;
 							} catch(CoreException e) {
@@ -215,12 +198,12 @@ public class XbaseEditor extends XtextEditor {
 			reentrantCallFromSelf++;
 			if (expectJavaSelection > 0) {
 				try {
-					ITrace traceToSource = traceInformation.getTraceToSource((IStorage) javaResource);
+					ITrace traceToSource = getTraceStorage();
 					if (traceToSource != null) {
-						if (expectLineSelection && javaResource instanceof IStorage) {
+						if (expectLineSelection) {
 							if (isCompiledWithJSR45()) {
 								try {
-									String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
+									String string = Files.readStreamIntoString(getLocationInResource(traceToSource).getContents());
 									Document javaDocument = new Document(string);
 									int line = getLineInJavaDocument(javaDocument, selectionStart, selectionLength);
 									if (line != -1) {
@@ -279,6 +262,23 @@ public class XbaseEditor extends XtextEditor {
 		} finally {
 			reentrantCallFromSelf--;
 		}
+	}
+
+	protected ITrace getTraceStorage() {
+		if (typeRoot == null) {
+			return null;
+		}
+		return traceInformation.getTraceToSource(typeRoot);
+	}
+
+	protected ILocationInResource getLocationInResource(ITrace traceToSource) {
+		if (traceToSource == null) {
+			return null;
+		}
+		for (ILocationInResource locationInResource : traceToSource.getAllAssociatedLocations()) {
+			return locationInResource;
+		}
+		return null;
 	}
 	
 	protected boolean isCompiledWithJSR45() {
