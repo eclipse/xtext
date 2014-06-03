@@ -150,7 +150,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
   
   /**
    * the @SuppressWarnings should be transformed into
-   * a synthetic @SupresssWarnings("all") on class declarations.
+   * a synthetic @SuppressWarnings("all") on class declarations.
    */
   @Test
   public void testUnresolvedAnnotation_2() {
@@ -164,7 +164,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("/* @MyAnnotation(");
+    _builder_1.append("/* @MyAnnotation()");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("*/@SuppressWarnings(\"all\")");

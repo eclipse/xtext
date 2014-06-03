@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.jvmmodel;
 
 import static com.google.common.collect.Lists.*;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -157,7 +158,12 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 			a.increaseIndentation();
 			a.append("throw new IllegalArgumentException(\"Unhandled parameter types: \" +").newLine();
 			JvmType jvmType = typeReferences.findDeclaredType("java.util.Arrays", dispatchOperation);
-			a.append(jvmType).append(".<Object>asList(");
+			if (jvmType != null) {
+				a.append(jvmType);
+			} else {
+				a.append(Arrays.class.getSimpleName());
+			}
+			a.append(".<Object>asList(");
 			Iterator<JvmFormalParameter> iterator = dispatchOperation.getParameters().iterator();
 			while (iterator.hasNext()) {
 				JvmFormalParameter parameter = iterator.next();
