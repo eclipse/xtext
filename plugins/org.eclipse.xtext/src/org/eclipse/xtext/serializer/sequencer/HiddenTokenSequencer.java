@@ -329,8 +329,11 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 				}
 			} else if (tokenUtil.isWhitespaceNode(prev)) {
 				pendingWhitespace.add(prev);
-			} else if (prev instanceof ICompositeNode) {
-				associatedNodes.removeAll(getTrailingCommentsIncludingWhitespace((ICompositeNode) prev));
+			} else {
+				if (prev instanceof ICompositeNode) {
+					associatedNodes.removeAll(getTrailingCommentsIncludingWhitespace((ICompositeNode) prev));
+				}
+				break;
 			}
 		}
 		return associatedNodes;
@@ -353,6 +356,8 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 				}
 			} else if (tokenUtil.isWhitespaceNode(next)) {
 				pendingWhitespace.add(next);
+			} else {
+				break;
 			}
 		}
 		return associatedNodes;
