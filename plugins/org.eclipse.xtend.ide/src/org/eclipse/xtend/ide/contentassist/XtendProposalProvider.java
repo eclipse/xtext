@@ -17,9 +17,11 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendExecutable;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
@@ -277,15 +279,43 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		if (model instanceof XtendClass) {
 			INode node = context.getCurrentNode();
 			EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
-			if (!(eObject instanceof AnonymousClass))
+			if (!(eObject instanceof AnonymousClass)) {
 				overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor, getConflictHelper());
-		} else {
-			INode node = context.getCurrentNode();
-			EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
-			if (eObject instanceof XtendClass)
-				overrideAssist.createOverrideProposals((XtendTypeDeclaration) eObject, context, acceptor, getConflictHelper());
+				return;
+			}
+		} else if (model instanceof XtendField) {
+			/*
+			 * class C {
+			 *   val x = new Object() {
+			 *     toS<|>
+			 *   }
+			 * }
+			 * 
+			 * At this cursor position, we get a field without a name and the type 'toS' as the context.
+			 * If there's a field decl preceding the cursor position, the field will have a name. 
+			 */
+			XtendField field = (XtendField) model;
+			if (field.eContainer() instanceof XtendClass) {
+				overrideAssist.createOverrideProposals((XtendClass) field.eContainer(), context, acceptor, getConflictHelper());
+				return;
+			}
+		} else if (model instanceof XtendExecutable && context.getPrefix().length() == 0 && model.eContainer() instanceof XtendClass) {
+			overrideAssist.createOverrideProposals((XtendClass) model.eContainer(), context, acceptor, getConflictHelper());
+			return;
+		} else if (model instanceof XExpression) {
+			XtendMember member = EcoreUtil2.getContainerOfType(model, XtendMember.class);
+			INode memberNode = NodeModelUtils.findActualNodeFor(member);
+			if (memberNode.getTotalEndOffset() <= context.getOffset()) {
+				if (member.eContainer() instanceof XtendClass) {
+					overrideAssist.createOverrideProposals((XtendClass) member.eContainer(), context, acceptor, getConflictHelper());
+					return;
+				}
+			}
 		}
-		super.completeType_Members(model, assignment, context, acceptor);
+		INode node = context.getCurrentNode();
+		EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
+		if (eObject instanceof XtendClass)
+			overrideAssist.createOverrideProposals((XtendTypeDeclaration) eObject, context, acceptor, getConflictHelper());
 	}
 	
 	@Override
@@ -293,13 +323,40 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof AnonymousClass) {
 			overrideAssist.createOverrideProposals((AnonymousClass) model, context, acceptor, getConflictHelper());
-		} else {
-			INode node = context.getCurrentNode();
-			EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
-			if (eObject instanceof AnonymousClass)
-				overrideAssist.createOverrideProposals((XtendTypeDeclaration) eObject, context, acceptor, getConflictHelper());
+			return;
+		} else if (model instanceof XtendField) {
+			/*
+			 * class C {
+			 *   val x = new Object() {
+			 *     toS<|>
+			 *   }
+			 * }
+			 * 
+			 * At this cursor position, we get a field without a name and the type 'toS' as the context.
+			 * If there's a field decl preceding the cursor position, the field will have a name. 
+			 */
+			XtendField field = (XtendField) model;
+			if (field.eContainer() instanceof AnonymousClass) {
+				overrideAssist.createOverrideProposals((AnonymousClass) field.eContainer(), context, acceptor, getConflictHelper());
+				return;
+			}
+		} else if (model instanceof XtendExecutable && context.getPrefix().length() == 0 && model.eContainer() instanceof AnonymousClass) {
+			overrideAssist.createOverrideProposals((AnonymousClass) model.eContainer(), context, acceptor, getConflictHelper());
+			return;
+		} else if (model instanceof XExpression) {
+			XtendMember member = EcoreUtil2.getContainerOfType(model, XtendMember.class);
+			INode memberNode = NodeModelUtils.findActualNodeFor(member);
+			if (memberNode.getTotalEndOffset() <= context.getOffset()) {
+				if (member.eContainer() instanceof AnonymousClass) {
+					overrideAssist.createOverrideProposals((AnonymousClass) member.eContainer(), context, acceptor, getConflictHelper());
+					return;
+				}
+			}
 		}
-		
+		INode node = context.getCurrentNode();
+		EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
+		if (eObject instanceof AnonymousClass)
+			overrideAssist.createOverrideProposals((XtendTypeDeclaration) eObject, context, acceptor, getConflictHelper());
 	}
 
 	protected void addGuillemotsProposal(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
