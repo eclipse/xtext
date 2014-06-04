@@ -243,6 +243,23 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return null;
 	}
 	
+	public ProposalTester assertProposalDisplayedAtCursor(String displayString) throws Exception {
+		String currentModelToParse = getFullTextToBeParsed();
+		int idx = currentModelToParse.indexOf("<|>");
+		currentModelToParse = currentModelToParse.substring(0, idx) + currentModelToParse.substring(idx + 3);
+		ICompletionProposal[] proposals = computeCompletionProposals(currentModelToParse, idx);
+
+		if (proposals == null)
+			proposals = new ICompletionProposal[0];
+		for(ICompletionProposal proposal: proposals) {
+			if (displayString.equals(proposal.getDisplayString())) {
+				return new ProposalTester(proposal);
+			}
+		}
+		Assert.fail("No such proposal: " + displayString + " Found: " + toDisplayString(proposals));
+		return null;
+	}
+	
 	public ProposalTester assertProposal(String expectedText) throws Exception {
 		String currentModelToParse = getFullTextToBeParsed();
 
@@ -361,6 +378,18 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return getModel()+(this.suffix== null ? "":suffix);
 	}
 
+	public List<String> toDisplayString(ICompletionProposal[] proposals) {
+		if (proposals == null)
+			return Collections.emptyList();
+		List<String> res = new ArrayList<String>(proposals.length);
+		for (ICompletionProposal proposal : proposals) {
+			String proposedText = proposal.getDisplayString();
+			res.add(proposedText);
+		}
+		Collections.sort(res);
+		return res;
+	}
+	
 	public List<String> toString(ICompletionProposal[] proposals) {
 		if (proposals == null)
 			return Collections.emptyList();
