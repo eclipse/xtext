@@ -213,8 +213,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 					validationJob.cancel();
 				}
 				Object state = getState();
-				if (state == null) 
-					return null;
 				if (state instanceof ISynchronizable<?>) {
 					synchronized (((ISynchronizable<?>) state).getLock()) {
 						return super.modify(work);
@@ -242,8 +240,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 		@Override
 		public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 			Object state = getState();
-			if (state == null) 
-				return null;
 			if (state instanceof ISynchronizable<?>) {
 				synchronized (((ISynchronizable<?>) state).getLock()) {
 					return super.readOnly(work);
