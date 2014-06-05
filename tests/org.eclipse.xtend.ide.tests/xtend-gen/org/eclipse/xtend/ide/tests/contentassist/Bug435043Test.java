@@ -848,4 +848,288 @@ public class Bug435043Test extends AbstractXtendContentAssistBugTest {
     ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
     _append.assertProposalDisplayedAtCursor("toString() - Override method from Object");
   }
+  
+  @Test
+  public void test_23() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def static m() {");
+    _builder.newLine();
+    _builder.append("  \t");
+    _builder.append("new Object {");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("val foo = \"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("<|>");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("override toString() {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("\"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("val bar = \"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
+  }
+  
+  @Test
+  public void test_24() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def static m() {");
+    _builder.newLine();
+    _builder.append("  \t");
+    _builder.append("new Object {");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("val foo = \"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("override toString() {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("\"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("<|>\t\t\t");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("val bar = \"\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
+  }
+  
+  @Test
+  public void test_25() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def static m() {");
+    _builder.newLine();
+    _builder.append("  \t");
+    _builder.append("new Object {");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("val foo = \"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("override toString() {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("\"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("val bar = \"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("<|>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
+  }
+  
+  @Test
+  public void test_26() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def static m() {");
+    _builder.newLine();
+    _builder.append("  \t");
+    _builder.append("val x = \'\'");
+    _builder.newLine();
+    _builder.append("  \t");
+    _builder.append("val y = new Object() {");
+    _builder.newLine();
+    _builder.append("  \t\t");
+    _builder.append("val z = <|>");
+    _builder.newLine();
+    _builder.append("  \t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalDisplayedAtCursor("x");
+  }
+  
+  @Test
+  public void test_27() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("static class D {");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("val foo = \"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("<|>");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("override toString() {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("\"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("val bar = \"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
+  }
+  
+  @Test
+  public void test_28() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("static class D {");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("val foo = \"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("override toString() {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("\"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("<|>\t\t\t");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("val bar = \"\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
+  }
+  
+  @Test
+  public void test_29() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("static class D {");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("val foo = \"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("override toString() {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("\"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("val bar = \"\"");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("<|>");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    _append.assertProposalDisplayedAtCursor("equals(Object) - Override method from Object");
+  }
 }

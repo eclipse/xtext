@@ -21,6 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ContentAssistInLambdaTest.class,
 	ContentAssistInLambdaTest2.class,
 	ImplementSuperMemberAssistTest.class,
+	ImportingTypesProposalTests.class,
 	ContentAssistPrioritiesTest.class,
 	Bug348446Test.class,
 	Bug364966Test.class,
