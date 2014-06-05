@@ -43,7 +43,6 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
 	public TextStyle staticMethodInvocation(){
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setStyle(SWT.ITALIC);
-		textStyle.setColor(new RGB(0, 0, 0));
 		return textStyle;
 	}
 	
@@ -75,7 +74,6 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
 	public TextStyle deprecatedMembers(){
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setStyle(TextAttribute.STRIKETHROUGH);
-		textStyle.setColor(new RGB(0, 0, 0));
 		return textStyle;
 	}
 	
