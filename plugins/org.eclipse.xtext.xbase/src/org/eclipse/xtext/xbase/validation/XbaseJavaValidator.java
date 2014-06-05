@@ -115,6 +115,7 @@ import org.eclipse.xtext.xbase.util.TypesOrderUtil;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.util.XSwitchExpressions;
 import org.eclipse.xtext.xbase.util.XbaseUsageCrossReferencer;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
@@ -437,6 +438,15 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check 
 	public void checkTypeParameterNotUsedInStaticContext(JvmTypeReference ref) {
+		if (ref instanceof XFunctionTypeRef) {
+			for (JvmTypeReference paramType : ((XFunctionTypeRef) ref).getParamTypes()) {
+				JvmType type = paramType.getType();
+				if (type instanceof JvmVoid && !type.eIsProxy()) {
+					error("The type 'void' cannot be a function's argument type. ", 
+							paramType, null, -1, INVALID_TYPE);
+				}
+			}
+		}
 		if(ref.getType() instanceof JvmTypeParameter) {
 			JvmTypeParameter typeParameter = (JvmTypeParameter) ref.getType();
 			EObject currentParent = logicalContainerProvider.getNearestLogicalContainer(ref);
