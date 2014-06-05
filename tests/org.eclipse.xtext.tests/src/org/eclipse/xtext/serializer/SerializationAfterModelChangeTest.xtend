@@ -69,8 +69,7 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 				
 				
 				//before inserted element
-			AAA "BBB" end
-		''')
+			AAA "BBB" end''')
 	}
 	
 	/*
@@ -123,8 +122,7 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 		model.assertSerializesTo('''
 			entities
 				Foo "Bar"
-			Baz "Fizzle" end
-		''')
+			Baz "Fizzle" end''')
 	}
 	
 	@Test
@@ -148,8 +146,7 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 				Foo "Bar"
 				
 				//comment before inserted element
-			Baz "Fizzle" end
-		''')
+			Baz "Fizzle" end''')
 	}
 	
 	@Test
@@ -169,8 +166,7 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 		model.assertSerializesTo('''
 			entities
 				Foo "Bar"	//inline comment before inserted element
-			Baz "Fizzle" end
-		''')
+			Baz "Fizzle" end''')
 	}
 	
 	@Test
@@ -194,8 +190,7 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 				Foo "Bar"
 			
 				
-			end
-		''')
+			end''')
 	}
 	
 	@Test
@@ -219,8 +214,7 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 				//unrelated comment before deleted element
 				
 				
-			end
-		''')
+			end''')
 	}
 	
 	@Test
@@ -240,8 +234,7 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 				Foo "Bar" //inline comment before deleted element
 				
 				
-			end
-		''')
+			end''')
 		
 	}
 	
@@ -260,8 +253,7 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 			entities
 				Foo "Bar"
 				
-				end
-		''')
+				end''')
 	}
 	
 	@Test
@@ -276,8 +268,7 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 		model.assertSerializesTo('''
 			entities
 				Foo "Bar" /* the foo */
-			end
-		''')
+			end''')
 	}
 	
 	@Test

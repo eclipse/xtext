@@ -138,7 +138,6 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder_1.append("//before inserted element");
       _builder_1.newLine();
       _builder_1.append("AAA \"BBB\" end");
-      _builder_1.newLine();
       this.assertSerializesTo(model, _builder_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -233,7 +232,6 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder_1.append("Foo \"Bar\"");
       _builder_1.newLine();
       _builder_1.append("Baz \"Fizzle\" end");
-      _builder_1.newLine();
       this.assertSerializesTo(model, _builder_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -281,7 +279,6 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder_1.append("//comment before inserted element");
       _builder_1.newLine();
       _builder_1.append("Baz \"Fizzle\" end");
-      _builder_1.newLine();
       this.assertSerializesTo(model, _builder_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -319,7 +316,6 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder_1.append("Foo \"Bar\"\t//inline comment before inserted element");
       _builder_1.newLine();
       _builder_1.append("Baz \"Fizzle\" end");
-      _builder_1.newLine();
       this.assertSerializesTo(model, _builder_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -368,7 +364,6 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder_1.append("\t");
       _builder_1.newLine();
       _builder_1.append("end");
-      _builder_1.newLine();
       this.assertSerializesTo(model, _builder_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -417,7 +412,6 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder_1.append("\t");
       _builder_1.newLine();
       _builder_1.append("end");
-      _builder_1.newLine();
       this.assertSerializesTo(model, _builder_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -456,7 +450,6 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder_1.append("\t");
       _builder_1.newLine();
       _builder_1.append("end");
-      _builder_1.newLine();
       this.assertSerializesTo(model, _builder_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -494,7 +487,6 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("end");
-      _builder_1.newLine();
       this.assertSerializesTo(model, _builder_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -524,7 +516,6 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder_1.append("Foo \"Bar\" /* the foo */");
       _builder_1.newLine();
       _builder_1.append("end");
-      _builder_1.newLine();
       this.assertSerializesTo(model, _builder_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
