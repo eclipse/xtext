@@ -7,6 +7,8 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.OnChangeEvictingCache
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.ResourceValidatorImpl
+import org.eclipse.xtext.util.IAcceptor
+import org.eclipse.xtext.validation.Issue
 
 class CachingResourceValidatorImpl extends ResourceValidatorImpl {
 
@@ -25,4 +27,13 @@ class CachingResourceValidatorImpl extends ResourceValidatorImpl {
 			return emptyList
 		}
 	}
+	
+	override protected validate(Resource resource, CheckMode mode, CancelIndicator monitor, IAcceptor<Issue> acceptor) {
+		if (monitor.isCanceled())
+			return
+		val head = resource.contents.head
+		if (head != null)
+			validate(resource, head, mode, monitor, acceptor)
+	}
+	
 }

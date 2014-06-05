@@ -58,4 +58,44 @@ public class JvmTypeReferencesValidatorTest extends AbstractXbaseTestCase {
 		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.INVALID_NUMBER_OF_TYPE_ARGUMENTS);
 	}
 	
+	@Test public void testWrongNumberOfTypeArgs_2() throws Exception {
+		XExpression expression = expression("{ val java.lang.Object<String> x = null }");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.TYPE_ARGUMENT_ON_NON_GENERIC_TYPE, 
+				"The type Object is not generic; it cannot be parameterized with arguments <String>");
+	}
+	
+	@Test public void testWrongNumberOfTypeArgs_3() throws Exception {
+		XExpression expression = expression("{ val java.lang.Override<String> x = null }");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.TYPE_ARGUMENT_ON_NON_GENERIC_TYPE);
+	}
+	
+	@Test public void testWrongNumberOfTypeArgs_4() throws Exception {
+		XExpression expression = expression("{ val java.lang.annotation.RetentionPolicy<String> x = null }");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.TYPE_ARGUMENT_ON_NON_GENERIC_TYPE);
+	}
+	
+	@Test public void testWrongNumberOfTypeArgs_5() throws Exception {
+		XExpression expression = expression("{ val int<String, Iterable<? extends Number>, (int, int)=>int> x = null }");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.TYPE_ARGUMENT_ON_NON_GENERIC_TYPE, "<String, Iterable<? extends Number>, (int, int)=>int>");
+	}
+	
+	@Test public void testWrongNumberOfTypeArgs_6() throws Exception {
+		XExpression expression = expression("{ val void<String> x = null }");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.TYPE_ARGUMENT_ON_NON_GENERIC_TYPE);
+	}
+	
+	@Test public void testWrongNumberOfTypeArgs_7() throws Exception {
+		XExpression expression = expression("{ val DoesNotExist<String> x = null }");
+		helper.assertNoErrors(expression, IssueCodes.TYPE_ARGUMENT_ON_NON_GENERIC_TYPE);
+	}
+	
+	@Test public void testWrongNumberOfTypeArgs_8() throws Exception {
+		XExpression expression = expression("{ val String<DoesNotExist> x = null }");
+		helper.assertNoErrors(expression, IssueCodes.TYPE_ARGUMENT_ON_NON_GENERIC_TYPE);
+	}
+	
+	@Test public void testWrongNumberOfTypeArgs_9() throws Exception {
+		XExpression expression = expression("{ val int<String, Iterable<? extends Number & CharSequence>, (int, Iterable<DoesNotExist>)=>int> x = null }");
+		helper.assertNoErrors(expression, IssueCodes.TYPE_ARGUMENT_ON_NON_GENERIC_TYPE);
+	}
 }

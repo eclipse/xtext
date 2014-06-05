@@ -286,7 +286,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		} else if (model instanceof XtendField) {
 			/*
 			 * class C {
-			 *   val x = new Object() {
+			 *   static class C2 {
 			 *     toS<|>
 			 *   }
 			 * }

@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -125,7 +126,9 @@ import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder.Acceptor;
+import org.eclipse.xtext.xbase.validation.ProxyAwareUIStrings;
 import org.eclipse.xtext.xbase.validation.UIStrings;
+import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -176,6 +179,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject
 	private IVisibilityHelper visibilityHelper;
+	
 	@Inject
 	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
 
@@ -199,6 +203,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject
 	private IBatchTypeResolver batchTypeResolver;
+	
+	@Inject
+	private ProxyAwareUIStrings proxyAwareUIStrings;
 	
 	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
 	protected final Map<Class<?>, ElementType> targetInfos;
@@ -244,6 +251,58 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			JvmField jvmField = associations.getJvmField(field);
 			if (jvmField != null) {
 				checkValidExtensionType(jvmField, field, XtendPackage.Literals.XTEND_FIELD__TYPE);
+			}
+		}
+	}
+	
+	@Check
+	public void checkNonRawTypeInferred(XtendField field) {
+		if (field.getType() == null) {
+			JvmField jvmField = associations.getJvmField(field);
+			if (jvmField != null) {
+				JvmTypeReference fieldType = jvmField.getType();
+				validateInferredType(fieldType, field, "The inferred field type ", XTEND_FIELD__NAME);
+			}
+		}
+	}
+	
+	@Check
+	public void checkNonRawTypeInferred(XtendFunction function) {
+		if (function.getReturnType() == null) {
+			JvmOperation operation = associations.getDirectlyInferredOperation(function);
+			JvmTypeReference returnType = operation.getReturnType();
+			validateInferredType(returnType, function, "The inferred return type ", XTEND_FUNCTION__NAME);
+		}
+	}
+
+	protected void validateInferredType(JvmTypeReference inferredType, XtendMember member, String messagePrefix,
+			EAttribute location) {
+		if (inferredType != null) {
+			TreeIterator<EObject> iterator = EcoreUtil2.eAll(inferredType);
+			while(iterator.hasNext()) {
+				EObject next = iterator.next();
+				if (next instanceof JvmParameterizedTypeReference) {
+					JvmParameterizedTypeReference candidate = (JvmParameterizedTypeReference) next;
+					JvmType type = candidate.getType();
+					if (type instanceof JvmGenericType && !((JvmGenericType) type).getTypeParameters().isEmpty()) {
+						if (candidate.getArguments().isEmpty()) {
+							StringBuilder message = new StringBuilder(messagePrefix);
+							message = proxyAwareUIStrings.visit(inferredType, message);
+							if (message != null) {
+								message.append(" uses the raw type ");
+								message.append(type.getSimpleName());
+								message.append(". References to generic type ");
+								message = proxyAwareUIStrings.appendTypeSignature(type, message);
+								message.append(" should be parameterized");
+								warning(message.toString(), member, location, org.eclipse.xtext.xbase.validation.IssueCodes.RAW_TYPE);
+							}
+							return;
+						}
+					}
+				} else if (next instanceof XComputedTypeReference) {
+					validateInferredType(((XComputedTypeReference) next).getEquivalent(), member, messagePrefix, location);
+					iterator.prune();
+				}
 			}
 		}
 	}
