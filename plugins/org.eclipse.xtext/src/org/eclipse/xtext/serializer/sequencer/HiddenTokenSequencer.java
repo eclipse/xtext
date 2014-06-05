@@ -291,6 +291,11 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 		Set<INode> associatedNodes = Sets.newHashSet();
 		associatedNodes.addAll(getLeadingCommentsIncludingWhitespace(node));
 		associatedNodes.addAll(getTrailingCommentsIncludingWhitespace(node));
+		//we want trailing comments to have precedence over leading comments
+		INode previousNode = node.getPreviousSibling();
+		if (previousNode instanceof ICompositeNode) {
+			associatedNodes.removeAll(getTrailingCommentsIncludingWhitespace((ICompositeNode) previousNode));
+		}
 		return associatedNodes;
 	}
 	
@@ -329,10 +334,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 				}
 			} else if (tokenUtil.isWhitespaceNode(prev)) {
 				pendingWhitespace.add(prev);
-			} else {
-				if (prev instanceof ICompositeNode) {
-					associatedNodes.removeAll(getTrailingCommentsIncludingWhitespace((ICompositeNode) prev));
-				}
+			} else if (prev instanceof ILeafNode){
 				break;
 			}
 		}
@@ -356,7 +358,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 				}
 			} else if (tokenUtil.isWhitespaceNode(next)) {
 				pendingWhitespace.add(next);
-			} else {
+			} else if (next instanceof ILeafNode){
 				break;
 			}
 		}
