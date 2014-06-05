@@ -148,12 +148,30 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	public void completeMember_Type(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XtendField) {
-			if(!((XtendField) model).getModifiers().isEmpty()) {
+			XtendField field = (XtendField) model;
+			if(!field.getModifiers().isEmpty()) {
 				// don't propose types everywhere but only if there's already an indicator for fields, e.g. static, extension, var, val
+				if (field.getName() != null) {
+					List<INode> nameNodes = NodeModelUtils.findNodesForFeature(model, XtendPackage.Literals.XTEND_FIELD__NAME);
+					if (nameNodes.size() == 1) {
+						INode node = nameNodes.get(0);
+						if (node.getOffset() < context.getOffset()) {
+							return;
+						}
+					}
+				}
 				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
 						getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
 			}
 		}
+	}
+	
+	@Override
+	public void completeJvmParameterizedTypeReference_Type(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		if (model instanceof XtendField || model instanceof XtendExecutable) // already handled by completeMember_Type
+			return;
+		super.completeJvmParameterizedTypeReference_Type(model, assignment, context, acceptor);
 	}
 	
 	@Override
@@ -393,6 +411,23 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	public void completeXFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XtendField) {
+			if (((XtendField) model).getInitialValue() == null) {
+				if (!"=".equals(context.getLastCompleteNode().getText())) {
+					return;
+				}
+				if (model.eContainer() instanceof AnonymousClass) {
+					createLocalVariableAndImplicitProposals(model.eContainer(), context, acceptor);
+					return;
+				}
+			} else {
+				List<INode> initializerNodes = NodeModelUtils.findNodesForFeature(model, XtendPackage.Literals.XTEND_FIELD__INITIAL_VALUE);
+				if (initializerNodes.size() == 1) {
+					INode node = initializerNodes.get(0);
+					if (node.getEndOffset() <= context.getOffset()) {
+						return;
+					}
+				}
+			}
 			createLocalVariableAndImplicitProposals(context.getPreviousModel(), context, acceptor);
 		} else if (model instanceof AnonymousClass) {
 			ICompositeNode node = NodeModelUtils.getNode(model);
@@ -476,6 +511,17 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 				return;
 			}
 		}
+		if (model instanceof XtendMember && model.eContainer() instanceof AnonymousClass) {
+			return;
+		}
 		super.completeWithinBlock(model, context, acceptor);
+	}
+	
+	@Override
+	protected void completeBinaryOperationFeature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (model instanceof XtendExecutable)
+			return;
+		super.completeBinaryOperationFeature(model, assignment, context, acceptor);
 	}
 }
