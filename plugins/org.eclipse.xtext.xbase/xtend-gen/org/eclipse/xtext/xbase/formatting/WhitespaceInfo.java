@@ -91,7 +91,7 @@ public class WhitespaceInfo extends LeafInfo {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + _offset;
+    result = prime * result + this._offset;
     return result;
   }
   
@@ -106,7 +106,7 @@ public class WhitespaceInfo extends LeafInfo {
     if (!super.equals(obj))
       return false;
     WhitespaceInfo other = (WhitespaceInfo) obj;
-    if (other._offset != _offset)
+    if (other._offset != this._offset)
       return false;
     return true;
   }

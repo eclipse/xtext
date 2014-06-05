@@ -70,7 +70,7 @@ public class Case_0 {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + _id;
+    result = prime * result + this._id;
     return result;
   }
   
@@ -83,7 +83,7 @@ public class Case_0 {
     if (getClass() != obj.getClass())
       return false;
     Case_0 other = (Case_0) obj;
-    if (other._id != _id)
+    if (other._id != this._id)
       return false;
     return true;
   }

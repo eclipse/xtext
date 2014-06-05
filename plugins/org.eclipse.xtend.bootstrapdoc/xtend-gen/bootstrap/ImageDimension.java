@@ -28,8 +28,8 @@ public class ImageDimension {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + _width;
-    result = prime * result + _height;
+    result = prime * result + this._width;
+    result = prime * result + this._height;
     return result;
   }
   
@@ -42,9 +42,9 @@ public class ImageDimension {
     if (getClass() != obj.getClass())
       return false;
     ImageDimension other = (ImageDimension) obj;
-    if (other._width != _width)
+    if (other._width != this._width)
       return false;
-    if (other._height != _height)
+    if (other._height != this._height)
       return false;
     return true;
   }

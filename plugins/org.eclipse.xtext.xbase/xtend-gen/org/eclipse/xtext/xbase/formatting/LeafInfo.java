@@ -37,9 +37,9 @@ public abstract class LeafInfo {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_container== null) ? 0 : _container.hashCode());
-    result = prime * result + ((_node== null) ? 0 : _node.hashCode());
-    result = prime * result + _newLines;
+    result = prime * result + ((this._container== null) ? 0 : this._container.hashCode());
+    result = prime * result + ((this._node== null) ? 0 : this._node.hashCode());
+    result = prime * result + this._newLines;
     return result;
   }
   
@@ -52,17 +52,17 @@ public abstract class LeafInfo {
     if (getClass() != obj.getClass())
       return false;
     LeafInfo other = (LeafInfo) obj;
-    if (_container == null) {
+    if (this._container == null) {
       if (other._container != null)
         return false;
-    } else if (!_container.equals(other._container))
+    } else if (!this._container.equals(other._container))
       return false;
-    if (_node == null) {
+    if (this._node == null) {
       if (other._node != null)
         return false;
-    } else if (!_node.equals(other._node))
+    } else if (!this._node.equals(other._node))
       return false;
-    if (other._newLines != _newLines)
+    if (other._newLines != this._newLines)
       return false;
     return true;
   }

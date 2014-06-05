@@ -43,8 +43,8 @@ public class LightweightTraversalData {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_visited== null) ? 0 : _visited.hashCode());
-    result = prime * result + ((_typeParameterMapping== null) ? 0 : _typeParameterMapping.hashCode());
+    result = prime * result + ((this._visited== null) ? 0 : this._visited.hashCode());
+    result = prime * result + ((this._typeParameterMapping== null) ? 0 : this._typeParameterMapping.hashCode());
     return result;
   }
   
@@ -57,15 +57,15 @@ public class LightweightTraversalData {
     if (getClass() != obj.getClass())
       return false;
     LightweightTraversalData other = (LightweightTraversalData) obj;
-    if (_visited == null) {
+    if (this._visited == null) {
       if (other._visited != null)
         return false;
-    } else if (!_visited.equals(other._visited))
+    } else if (!this._visited.equals(other._visited))
       return false;
-    if (_typeParameterMapping == null) {
+    if (this._typeParameterMapping == null) {
       if (other._typeParameterMapping != null)
         return false;
-    } else if (!_typeParameterMapping.equals(other._typeParameterMapping))
+    } else if (!this._typeParameterMapping.equals(other._typeParameterMapping))
       return false;
     return true;
   }

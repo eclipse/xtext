@@ -41,7 +41,7 @@ public class Speed {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_mmPerMsec== null) ? 0 : _mmPerMsec.hashCode());
+    result = prime * result + ((this._mmPerMsec== null) ? 0 : this._mmPerMsec.hashCode());
     return result;
   }
   
@@ -54,10 +54,10 @@ public class Speed {
     if (getClass() != obj.getClass())
       return false;
     Speed other = (Speed) obj;
-    if (_mmPerMsec == null) {
+    if (this._mmPerMsec == null) {
       if (other._mmPerMsec != null)
         return false;
-    } else if (!_mmPerMsec.equals(other._mmPerMsec))
+    } else if (!this._mmPerMsec.equals(other._mmPerMsec))
       return false;
     return true;
   }

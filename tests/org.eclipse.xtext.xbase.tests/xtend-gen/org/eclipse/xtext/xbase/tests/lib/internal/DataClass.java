@@ -29,8 +29,8 @@ public class DataClass {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_other== null) ? 0 : _other.hashCode());
-    result = prime * result + ((_name== null) ? 0 : _name.hashCode());
+    result = prime * result + ((this._other== null) ? 0 : this._other.hashCode());
+    result = prime * result + ((this._name== null) ? 0 : this._name.hashCode());
     return result;
   }
   
@@ -43,15 +43,15 @@ public class DataClass {
     if (getClass() != obj.getClass())
       return false;
     DataClass other = (DataClass) obj;
-    if (_other == null) {
+    if (this._other == null) {
       if (other._other != null)
         return false;
-    } else if (!_other.equals(other._other))
+    } else if (!this._other.equals(other._other))
       return false;
-    if (_name == null) {
+    if (this._name == null) {
       if (other._name != null)
         return false;
-    } else if (!_name.equals(other._name))
+    } else if (!this._name.equals(other._name))
       return false;
     return true;
   }

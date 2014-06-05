@@ -51,8 +51,8 @@ public class UnknownType implements Type {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_compilationUnit== null) ? 0 : _compilationUnit.hashCode());
-    result = prime * result + ((_qualifiedName== null) ? 0 : _qualifiedName.hashCode());
+    result = prime * result + ((this._compilationUnit== null) ? 0 : this._compilationUnit.hashCode());
+    result = prime * result + ((this._qualifiedName== null) ? 0 : this._qualifiedName.hashCode());
     return result;
   }
   
@@ -65,15 +65,15 @@ public class UnknownType implements Type {
     if (getClass() != obj.getClass())
       return false;
     UnknownType other = (UnknownType) obj;
-    if (_compilationUnit == null) {
+    if (this._compilationUnit == null) {
       if (other._compilationUnit != null)
         return false;
-    } else if (!_compilationUnit.equals(other._compilationUnit))
+    } else if (!this._compilationUnit.equals(other._compilationUnit))
       return false;
-    if (_qualifiedName == null) {
+    if (this._qualifiedName == null) {
       if (other._qualifiedName != null)
         return false;
-    } else if (!_qualifiedName.equals(other._qualifiedName))
+    } else if (!this._qualifiedName.equals(other._qualifiedName))
       return false;
     return true;
   }

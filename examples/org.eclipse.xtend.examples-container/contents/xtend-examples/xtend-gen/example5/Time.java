@@ -81,7 +81,7 @@ public class Time {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_msec== null) ? 0 : _msec.hashCode());
+    result = prime * result + ((this._msec== null) ? 0 : this._msec.hashCode());
     return result;
   }
   
@@ -94,10 +94,10 @@ public class Time {
     if (getClass() != obj.getClass())
       return false;
     Time other = (Time) obj;
-    if (_msec == null) {
+    if (this._msec == null) {
       if (other._msec != null)
         return false;
-    } else if (!_msec.equals(other._msec))
+    } else if (!this._msec.equals(other._msec))
       return false;
     return true;
   }

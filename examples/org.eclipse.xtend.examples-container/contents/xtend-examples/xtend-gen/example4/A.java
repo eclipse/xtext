@@ -29,7 +29,7 @@ public class A extends ContentNode {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((_href== null) ? 0 : _href.hashCode());
+    result = prime * result + ((this._href== null) ? 0 : this._href.hashCode());
     return result;
   }
   
@@ -44,10 +44,10 @@ public class A extends ContentNode {
     if (!super.equals(obj))
       return false;
     A other = (A) obj;
-    if (_href == null) {
+    if (this._href == null) {
       if (other._href != null)
         return false;
-    } else if (!_href.equals(other._href))
+    } else if (!this._href.equals(other._href))
       return false;
     return true;
   }

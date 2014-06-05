@@ -59,11 +59,11 @@ public class Movie {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_title== null) ? 0 : _title.hashCode());
-    result = prime * result + _year;
-    result = prime * result + (int) (Double.doubleToLongBits(_rating) ^ (Double.doubleToLongBits(_rating) >>> 32));
-    result = prime * result + (int) (_numberOfVotes ^ (_numberOfVotes >>> 32));
-    result = prime * result + ((_categories== null) ? 0 : _categories.hashCode());
+    result = prime * result + ((this._title== null) ? 0 : this._title.hashCode());
+    result = prime * result + this._year;
+    result = prime * result + (int) (Double.doubleToLongBits(this._rating) ^ (Double.doubleToLongBits(this._rating) >>> 32));
+    result = prime * result + (int) (this._numberOfVotes ^ (this._numberOfVotes >>> 32));
+    result = prime * result + ((this._categories== null) ? 0 : this._categories.hashCode());
     return result;
   }
   
@@ -76,21 +76,21 @@ public class Movie {
     if (getClass() != obj.getClass())
       return false;
     Movie other = (Movie) obj;
-    if (_title == null) {
+    if (this._title == null) {
       if (other._title != null)
         return false;
-    } else if (!_title.equals(other._title))
+    } else if (!this._title.equals(other._title))
       return false;
-    if (other._year != _year)
+    if (other._year != this._year)
       return false;
-    if (Double.doubleToLongBits(other._rating) != Double.doubleToLongBits(_rating))
+    if (Double.doubleToLongBits(other._rating) != Double.doubleToLongBits(this._rating))
       return false;
-    if (other._numberOfVotes != _numberOfVotes)
+    if (other._numberOfVotes != this._numberOfVotes)
       return false;
-    if (_categories == null) {
+    if (this._categories == null) {
       if (other._categories != null)
         return false;
-    } else if (!_categories.equals(other._categories))
+    } else if (!this._categories.equals(other._categories))
       return false;
     return true;
   }

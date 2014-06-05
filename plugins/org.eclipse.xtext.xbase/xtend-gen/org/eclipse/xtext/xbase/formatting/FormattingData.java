@@ -57,11 +57,11 @@ public abstract class FormattingData {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + _offset;
-    result = prime * result + _length;
-    result = prime * result + _increaseIndentationChange;
-    result = prime * result + _decreaseIndentationChange;
-    result = prime * result + ((_trace== null) ? 0 : _trace.hashCode());
+    result = prime * result + this._offset;
+    result = prime * result + this._length;
+    result = prime * result + this._increaseIndentationChange;
+    result = prime * result + this._decreaseIndentationChange;
+    result = prime * result + ((this._trace== null) ? 0 : this._trace.hashCode());
     return result;
   }
   
@@ -74,18 +74,18 @@ public abstract class FormattingData {
     if (getClass() != obj.getClass())
       return false;
     FormattingData other = (FormattingData) obj;
-    if (other._offset != _offset)
+    if (other._offset != this._offset)
       return false;
-    if (other._length != _length)
+    if (other._length != this._length)
       return false;
-    if (other._increaseIndentationChange != _increaseIndentationChange)
+    if (other._increaseIndentationChange != this._increaseIndentationChange)
       return false;
-    if (other._decreaseIndentationChange != _decreaseIndentationChange)
+    if (other._decreaseIndentationChange != this._decreaseIndentationChange)
       return false;
-    if (_trace == null) {
+    if (this._trace == null) {
       if (other._trace != null)
         return false;
-    } else if (!_trace.equals(other._trace))
+    } else if (!this._trace.equals(other._trace))
       return false;
     return true;
   }

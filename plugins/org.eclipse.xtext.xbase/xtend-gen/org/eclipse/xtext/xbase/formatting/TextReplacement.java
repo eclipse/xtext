@@ -35,9 +35,9 @@ public class TextReplacement {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + _offset;
-    result = prime * result + _length;
-    result = prime * result + ((_text== null) ? 0 : _text.hashCode());
+    result = prime * result + this._offset;
+    result = prime * result + this._length;
+    result = prime * result + ((this._text== null) ? 0 : this._text.hashCode());
     return result;
   }
   
@@ -50,14 +50,14 @@ public class TextReplacement {
     if (getClass() != obj.getClass())
       return false;
     TextReplacement other = (TextReplacement) obj;
-    if (other._offset != _offset)
+    if (other._offset != this._offset)
       return false;
-    if (other._length != _length)
+    if (other._length != this._length)
       return false;
-    if (_text == null) {
+    if (this._text == null) {
       if (other._text != null)
         return false;
-    } else if (!_text.equals(other._text))
+    } else if (!this._text.equals(other._text))
       return false;
     return true;
   }

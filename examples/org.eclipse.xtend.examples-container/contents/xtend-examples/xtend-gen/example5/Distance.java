@@ -77,7 +77,7 @@ public class Distance {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_mm== null) ? 0 : _mm.hashCode());
+    result = prime * result + ((this._mm== null) ? 0 : this._mm.hashCode());
     return result;
   }
   
@@ -90,10 +90,10 @@ public class Distance {
     if (getClass() != obj.getClass())
       return false;
     Distance other = (Distance) obj;
-    if (_mm == null) {
+    if (this._mm == null) {
       if (other._mm != null)
         return false;
-    } else if (!_mm.equals(other._mm))
+    } else if (!this._mm.equals(other._mm))
       return false;
     return true;
   }

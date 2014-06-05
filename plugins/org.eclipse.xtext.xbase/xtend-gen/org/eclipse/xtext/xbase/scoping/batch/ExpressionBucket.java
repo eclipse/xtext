@@ -54,9 +54,9 @@ public class ExpressionBucket {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + _id;
-    result = prime * result + ((_extensionProviders== null) ? 0 : _extensionProviders.hashCode());
-    result = prime * result + ((_resolvedFeaturesProvider== null) ? 0 : _resolvedFeaturesProvider.hashCode());
+    result = prime * result + this._id;
+    result = prime * result + ((this._extensionProviders== null) ? 0 : this._extensionProviders.hashCode());
+    result = prime * result + ((this._resolvedFeaturesProvider== null) ? 0 : this._resolvedFeaturesProvider.hashCode());
     return result;
   }
   
@@ -69,17 +69,17 @@ public class ExpressionBucket {
     if (getClass() != obj.getClass())
       return false;
     ExpressionBucket other = (ExpressionBucket) obj;
-    if (other._id != _id)
+    if (other._id != this._id)
       return false;
-    if (_extensionProviders == null) {
+    if (this._extensionProviders == null) {
       if (other._extensionProviders != null)
         return false;
-    } else if (!_extensionProviders.equals(other._extensionProviders))
+    } else if (!this._extensionProviders.equals(other._extensionProviders))
       return false;
-    if (_resolvedFeaturesProvider == null) {
+    if (this._resolvedFeaturesProvider == null) {
       if (other._resolvedFeaturesProvider != null)
         return false;
-    } else if (!_resolvedFeaturesProvider.equals(other._resolvedFeaturesProvider))
+    } else if (!this._resolvedFeaturesProvider.equals(other._resolvedFeaturesProvider))
       return false;
     return true;
   }

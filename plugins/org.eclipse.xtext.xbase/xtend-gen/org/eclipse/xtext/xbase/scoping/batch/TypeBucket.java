@@ -70,9 +70,9 @@ public class TypeBucket {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + _id;
-    result = prime * result + ((_types== null) ? 0 : _types.hashCode());
-    result = prime * result + ((_resolvedFeaturesProvider== null) ? 0 : _resolvedFeaturesProvider.hashCode());
+    result = prime * result + this._id;
+    result = prime * result + ((this._types== null) ? 0 : this._types.hashCode());
+    result = prime * result + ((this._resolvedFeaturesProvider== null) ? 0 : this._resolvedFeaturesProvider.hashCode());
     return result;
   }
   
@@ -85,17 +85,17 @@ public class TypeBucket {
     if (getClass() != obj.getClass())
       return false;
     TypeBucket other = (TypeBucket) obj;
-    if (other._id != _id)
+    if (other._id != this._id)
       return false;
-    if (_types == null) {
+    if (this._types == null) {
       if (other._types != null)
         return false;
-    } else if (!_types.equals(other._types))
+    } else if (!this._types.equals(other._types))
       return false;
-    if (_resolvedFeaturesProvider == null) {
+    if (this._resolvedFeaturesProvider == null) {
       if (other._resolvedFeaturesProvider != null)
         return false;
-    } else if (!_resolvedFeaturesProvider.equals(other._resolvedFeaturesProvider))
+    } else if (!this._resolvedFeaturesProvider.equals(other._resolvedFeaturesProvider))
       return false;
     return true;
   }

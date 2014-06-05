@@ -26,7 +26,7 @@ public abstract class Chunk {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_text== null) ? 0 : _text.hashCode());
+    result = prime * result + ((this._text== null) ? 0 : this._text.hashCode());
     return result;
   }
   
@@ -39,10 +39,10 @@ public abstract class Chunk {
     if (getClass() != obj.getClass())
       return false;
     Chunk other = (Chunk) obj;
-    if (_text == null) {
+    if (this._text == null) {
       if (other._text != null)
         return false;
-    } else if (!_text.equals(other._text))
+    } else if (!this._text.equals(other._text))
       return false;
     return true;
   }

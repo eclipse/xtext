@@ -71,11 +71,11 @@ public class LightweightBoundTypeArgument {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_typeReference== null) ? 0 : _typeReference.hashCode());
-    result = prime * result + ((_source== null) ? 0 : _source.hashCode());
-    result = prime * result + ((_origin== null) ? 0 : _origin.hashCode());
-    result = prime * result + ((_declaredVariance== null) ? 0 : _declaredVariance.hashCode());
-    result = prime * result + ((_actualVariance== null) ? 0 : _actualVariance.hashCode());
+    result = prime * result + ((this._typeReference== null) ? 0 : this._typeReference.hashCode());
+    result = prime * result + ((this._source== null) ? 0 : this._source.hashCode());
+    result = prime * result + ((this._origin== null) ? 0 : this._origin.hashCode());
+    result = prime * result + ((this._declaredVariance== null) ? 0 : this._declaredVariance.hashCode());
+    result = prime * result + ((this._actualVariance== null) ? 0 : this._actualVariance.hashCode());
     return result;
   }
   
@@ -88,30 +88,30 @@ public class LightweightBoundTypeArgument {
     if (getClass() != obj.getClass())
       return false;
     LightweightBoundTypeArgument other = (LightweightBoundTypeArgument) obj;
-    if (_typeReference == null) {
+    if (this._typeReference == null) {
       if (other._typeReference != null)
         return false;
-    } else if (!_typeReference.equals(other._typeReference))
+    } else if (!this._typeReference.equals(other._typeReference))
       return false;
-    if (_source == null) {
+    if (this._source == null) {
       if (other._source != null)
         return false;
-    } else if (!_source.equals(other._source))
+    } else if (!this._source.equals(other._source))
       return false;
-    if (_origin == null) {
+    if (this._origin == null) {
       if (other._origin != null)
         return false;
-    } else if (!_origin.equals(other._origin))
+    } else if (!this._origin.equals(other._origin))
       return false;
-    if (_declaredVariance == null) {
+    if (this._declaredVariance == null) {
       if (other._declaredVariance != null)
         return false;
-    } else if (!_declaredVariance.equals(other._declaredVariance))
+    } else if (!this._declaredVariance.equals(other._declaredVariance))
       return false;
-    if (_actualVariance == null) {
+    if (this._actualVariance == null) {
       if (other._actualVariance != null)
         return false;
-    } else if (!_actualVariance.equals(other._actualVariance))
+    } else if (!this._actualVariance.equals(other._actualVariance))
       return false;
     return true;
   }
