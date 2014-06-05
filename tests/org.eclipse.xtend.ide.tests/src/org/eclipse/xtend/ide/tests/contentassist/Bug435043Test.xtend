@@ -393,4 +393,130 @@ class Bug435043Test extends AbstractXtendContentAssistBugTest {
 		''')
 			.assertProposalDisplayedAtCursor('toString() - Override method from Object')
 	}
+	
+	@Test def void test_23() throws Exception {
+		newBuilder.append('''
+			class C {
+			  def static m() {
+			  	new Object {
+				  val foo = ""
+				  <|>
+				  override toString() {
+				    ""
+				  }
+				  
+				  val bar = ""
+				  
+				}
+			  }
+			}
+		''')
+			.assertProposalDisplayedAtCursor('equals(Object) - Override method from Object')
+	}
+	
+	@Test def void test_24() throws Exception {
+		newBuilder.append('''
+			class C {
+			  def static m() {
+			  	new Object {
+				  val foo = ""
+				  
+				  override toString() {
+				    ""
+				  }
+				  <|>			
+				  val bar = ""
+				}
+			  }
+			}
+		''')
+			.assertProposalDisplayedAtCursor('equals(Object) - Override method from Object')
+	}
+	
+	@Test def void test_25() throws Exception {
+		newBuilder.append('''
+			class C {
+			  def static m() {
+			  	new Object {
+				  val foo = ""
+				  
+				  override toString() {
+				    ""
+				  }
+				  
+				  val bar = ""
+				  <|>
+				}
+			  }
+			}
+		''')
+			.assertProposalDisplayedAtCursor('equals(Object) - Override method from Object')
+	}
+	
+	@Test def void test_26() throws Exception {
+		newBuilder.append('''
+			class C {
+			  def static m() {
+			  	val x = ''
+			  	val y = new Object() {
+			  		val z = <|>
+			  	}
+			  }
+			}
+		''')
+			.assertProposalDisplayedAtCursor('x')
+	}
+	
+	@Test def void test_27() throws Exception {
+		newBuilder.append('''
+			class C {
+			  static class D {
+				  val foo = ""
+				  <|>
+				  override toString() {
+				    ""
+				  }
+				  
+				  val bar = ""
+				  
+			  }
+			}
+		''')
+			.assertProposalDisplayedAtCursor('equals(Object) - Override method from Object')
+	}
+	
+	@Test def void test_28() throws Exception {
+		newBuilder.append('''
+			class C {
+			  static class D {
+				  val foo = ""
+				  
+				  override toString() {
+				    ""
+				  }
+				  <|>			
+				  val bar = ""
+			  }
+			}
+		''')
+			.assertProposalDisplayedAtCursor('equals(Object) - Override method from Object')
+	}
+	
+	@Test def void test_29() throws Exception {
+		newBuilder.append('''
+			class C {
+			  static class D {
+				  val foo = ""
+				  
+				  override toString() {
+				    ""
+				  }
+				  
+				  val bar = ""
+				  <|>
+			  }
+			}
+		''')
+			.assertProposalDisplayedAtCursor('equals(Object) - Override method from Object')
+	}
 }
