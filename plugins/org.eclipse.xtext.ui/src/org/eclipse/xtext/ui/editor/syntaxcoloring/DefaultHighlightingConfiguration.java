@@ -43,7 +43,7 @@ public class DefaultHighlightingConfiguration implements IHighlightingConfigurat
 	public TextStyle defaultTextStyle() {
 		TextStyle textStyle = new TextStyle();
 	//textStyle.setBackgroundColor(new RGB(255, 255, 255));
-		textStyle.setColor(new RGB(0, 0, 0));
+	//	textStyle.setColor(new RGB(0, 0, 0));
 		return textStyle;
 	}
 	
