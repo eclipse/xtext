@@ -8,10 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
+import static org.eclipse.xtext.ui.editor.preferences.PreferenceConstants.*;
 import static org.eclipse.xtext.ui.editor.syntaxcoloring.CommonPreferenceConstants.*;
 
 import java.util.Arrays;
 
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.resource.JFaceResources;
@@ -21,10 +23,15 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.editors.text.EditorsUI;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.texteditor.AbstractTextEditor;
+import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.ui.editor.preferences.FixedScopedPreferenceStore;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
+import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -35,50 +42,69 @@ import com.google.inject.name.Named;
 public class PreferenceStoreAccessor {
 	private final String PREFERENCE_TAG;
 	private final IPreferenceStoreAccess scopedAccessor;
+	private final String CSS_PREFIX = SYNTAX_COLORER_PREFERENCE_TAG + SEPARATOR;
 
 	@Inject
+	private AbstractUIPlugin plugin;
+	
+	@Inject
 	public PreferenceStoreAccessor(@Named(Constants.LANGUAGE_NAME) String languageName, IPreferenceStoreAccess scopedAccessor) {
-		this.scopedAccessor = scopedAccessor;
 		PREFERENCE_TAG = tokenTypeTag(languageName) + SEPARATOR;
+		this.scopedAccessor = scopedAccessor;
 	}
 
 	public void populateTextStyle(String id, TextStyle style, TextStyle defaults) {
-		// prepare
-		String colorKey = PREFERENCE_TAG + PreferenceStoreAccessor.getTokenColorPreferenceKey(id);
-		String backgroundKey = PREFERENCE_TAG + getTokenBackgroundColorPreferenceKey(id);
-		String fontKey = PREFERENCE_TAG + getTokenFontPreferenceKey(id);
-		String styleKey = PREFERENCE_TAG + getTokenStylePreferenceKey(id);
-
-		// DefaultDefault
 		IPreferenceStore editorsStore = EditorsUI.getPreferenceStore();
-		RGB fontColorDefaultDefault = editorsStore.getBoolean(AbstractTextEditor.PREFERENCE_COLOR_FOREGROUND_SYSTEM_DEFAULT) ? getDisplay()
-				.getSystemColor(SWT.COLOR_LIST_FOREGROUND).getRGB()
+		RGB fontColorDefaultDefault = editorsStore.getBoolean(AbstractTextEditor.PREFERENCE_COLOR_FOREGROUND_SYSTEM_DEFAULT) 
+				? getDisplay().getSystemColor(SWT.COLOR_LIST_FOREGROUND).getRGB()
 				: PreferenceConverter.getColor(editorsStore, AbstractTextEditor.PREFERENCE_COLOR_FOREGROUND);
-		RGB backgrounColorDefaultDefault = editorsStore
-				.getBoolean(AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT) ? getDisplay().getSystemColor(
-				SWT.COLOR_LIST_BACKGROUND).getRGB() : PreferenceConverter.getColor(editorsStore,
-				AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND);
+		RGB backgrounColorDefaultDefault = editorsStore.getBoolean(AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT) 
+				? getDisplay().getSystemColor(SWT.COLOR_LIST_BACKGROUND).getRGB() 
+				: PreferenceConverter.getColor(editorsStore, AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND);
 		FontData[] fontDataDefaultDefault = JFaceResources.getTextFont().getFontData();
 
-		// set defaults
 		IPreferenceStore preferenceStore = getPreferenceStore();
-		if (defaults.getColor() != null)
+		String cssID = CSS_PREFIX + id;
+		IPreferenceStore cssPrefStore = getPluginCssPreferenceStore();
+		
+		String colorKey = PREFERENCE_TAG + getTokenColorPreferenceKey(id);
+		String cssFontColor = cssPrefStore.getString(getTokenColorPreferenceKey(cssID));
+		if(!Strings.isEmpty(cssFontColor)) {
+			preferenceStore.setDefault(colorKey, cssFontColor);
+		} else if (defaults.getColor() != null) {
 			PreferenceConverter.setDefault(preferenceStore, colorKey, defaults.getColor());
-		else {
+		} else {
 			PreferenceConverter.setDefault(preferenceStore, colorKey, fontColorDefaultDefault);
 		}
-		if (defaults.getBackgroundColor() != null)
+		
+		String backgroundKey = PREFERENCE_TAG + getTokenBackgroundColorPreferenceKey(id);
+		String cssBgColor = cssPrefStore.getString(getTokenBackgroundColorPreferenceKey(cssID));
+		if(!Strings.isEmpty(cssBgColor)) {
+			preferenceStore.setDefault(backgroundKey, cssBgColor);
+		} else if (defaults.getBackgroundColor() != null) {
 			PreferenceConverter.setDefault(preferenceStore, backgroundKey, defaults.getBackgroundColor());
-		else {
+		} else {
 			PreferenceConverter.setDefault(preferenceStore, backgroundKey, backgrounColorDefaultDefault);
 		}
-		if (defaults.getFontData() != null)
+		
+		String fontKey = PREFERENCE_TAG + getTokenFontPreferenceKey(id);
+		String cssFont = cssPrefStore.getString(getTokenFontPreferenceKey(cssID));
+		if(!Strings.isEmpty(cssFont)) {
+			preferenceStore.setDefault(fontKey, cssFont);
+		} else if (defaults.getFontData() != null)
 			PreferenceConverter.setDefault(preferenceStore, fontKey, defaults.getFontData());
 		else {
 			PreferenceConverter.setDefault(preferenceStore, fontKey, fontDataDefaultDefault);
 		}
-		preferenceStore.setDefault(styleKey, defaults.getStyle());
-
+		
+		String styleKey = PREFERENCE_TAG + getTokenStylePreferenceKey(id);
+		int cssStyle = cssPrefStore.getInt(getTokenStylePreferenceKey(cssID));
+		if(cssStyle != 0) {
+			preferenceStore.setDefault(styleKey, cssStyle);
+		} else {
+			preferenceStore.setDefault(styleKey, defaults.getStyle());
+		}
+		
 		// populate
 		RGB color = PreferenceConverter.getColor(preferenceStore, colorKey);
 		if (!color.equals(fontColorDefaultDefault))
@@ -91,6 +117,13 @@ public class PreferenceStoreAccessor {
 			style.setFontData(fontDataArray);
 		}
 		style.setStyle(preferenceStore.getInt(styleKey));
+	}
+
+	private ChainedPreferenceStore getPluginCssPreferenceStore() {
+		return new ChainedPreferenceStore(new IPreferenceStore[] {
+				new FixedScopedPreferenceStore(new InstanceScope(), plugin.getBundle().getSymbolicName()),
+				new FixedScopedPreferenceStore(new InstanceScope(), Activator.getDefault().getBundle().getSymbolicName())
+		});
 	}
 
 	private IPreferenceStore getPreferenceStore() {
