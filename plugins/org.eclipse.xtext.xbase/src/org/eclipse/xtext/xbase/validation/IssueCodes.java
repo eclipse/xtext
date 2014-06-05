@@ -11,6 +11,7 @@ package org.eclipse.xtext.xbase.validation;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class IssueCodes {
+	
 	protected static final String ISSUE_CODE_PREFIX = "org.eclipse.xtext.xbase.validation.IssueCodes.";
 
 	public static final String ABSTRACT_CLASS_INSTANTIATION = ISSUE_CODE_PREFIX + "abstract_class_instantiation";
@@ -56,6 +57,16 @@ public class IssueCodes {
 	public static final String INVALID_MUTABLE_VARIABLE_ACCESS = ISSUE_CODE_PREFIX + "invalid_mutable_variable_access";
 	public static final String INVALID_NUMBER_OF_ARGUMENTS = ISSUE_CODE_PREFIX + "invalid_number_of_arguments";
 	public static final String INVALID_NUMBER_OF_TYPE_ARGUMENTS = ISSUE_CODE_PREFIX + "invalid_number_of_type_arguments";
+	/**
+	 * Covers error conditions like the following:
+	 * <ul>
+	 * <li>Object&lt;String&gt;</li>
+	 * <li>int&lt;String&gt;</li>
+	 * <li>MyAnnotation&lt;String&gt;</li>
+	 * <li>MyEnum&lt;String&gt;</li>
+	 * </ul>
+	 */
+	public static final String TYPE_ARGUMENT_ON_NON_GENERIC_TYPE = ISSUE_CODE_PREFIX + "type_argument_on_non_generic_type";
 	public static final String INVALID_RETURN = ISSUE_CODE_PREFIX + "invalid_return";
 	public static final String INVALID_USE_OF_TYPE = ISSUE_CODE_PREFIX + "invalid_use_of_void";
 	public static final String INVALID_USE_OF_WILDCARD = ISSUE_CODE_PREFIX + "invalid_use_of_wild_card";

@@ -39,6 +39,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -271,6 +272,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (eObject instanceof JvmTypeReference) {
 				JvmTypeReference typeRef = (JvmTypeReference) eObject;
 				if (isPrimitiveVoid(typeRef)) {
+					if (typeRef.eClass() == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE) {
+						if (!((JvmParameterizedTypeReference) typeRef).getArguments().isEmpty()) {
+							continue;
+						}
+					}
 					error("Primitive void cannot be used here.", typeRef, null, INVALID_USE_OF_TYPE);
 				}
 			}
