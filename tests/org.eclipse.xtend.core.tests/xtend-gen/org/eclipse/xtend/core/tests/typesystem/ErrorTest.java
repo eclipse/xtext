@@ -2892,6 +2892,91 @@ public class ErrorTest extends AbstractXtendTestCase {
     this._oven.fireproof(_builder.toString());
   }
   
+  @Test
+  public void testErrorModel_105() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C extends Override {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
+  @Test
+  public void testErrorModel_106() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C extends java.lang.annotation.RetentionPolicy {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
+  @Test
+  public void testErrorModel_107() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Override x");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
+  @Test
+  public void testErrorModel_108() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Override<String> x");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
+  @Test
+  public void testErrorModel_109() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Override<String> x() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
+  @Test
+  public void testErrorModel_110() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def x(Override<String> o) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
+  @Test
+  public void testErrorModel_111() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("java.lang.annotation.RetentionPolicy<String> x");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this._oven.fireproof(_builder.toString());
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
