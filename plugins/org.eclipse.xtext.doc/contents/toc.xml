@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<toc topic="contents/xtext.html" label="Xtext 2.5 Documentation" >
-	<topic href="contents/xtext_14.html#Xtext%202.5%20Documentation_14" label="Getting Started" >
+<toc topic="contents/xtext.html" label="Xtext Documentation" >
+	<topic href="contents/xtext_14.html#Xtext%20Documentation_14" label="Getting Started" >
 		<topic href="contents/010-xtext-in-5-minutes.html#FirstFiveMinutes" label="5 Minutes Tutorial" >
 			<topic href="contents/010-xtext-in-5-minutes.html#NewProject" label="Creating A New Xtext Project" >
 			</topic>
@@ -44,7 +44,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/xtext_15.html#Xtext%202.5%20Documentation_15" label="Reference Documentation" >
+	<topic href="contents/xtext_15.html#Xtext%20Documentation_15" label="Reference Documentation" >
 		<topic href="contents/000-introduction.html#Overview" label="Overview" >
 			<topic href="contents/000-introduction.html#Overview_1" label="What is Xtext?" >
 			</topic>
@@ -586,7 +586,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/xtext_16.html#Xtext%202.5%20Documentation_16" label="Appendix" >
+	<topic href="contents/xtext_16.html#Xtext%20Documentation_16" label="Appendix" >
 		<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x" label="Migrating from Xtext 1.0.x to 2.0" >
 			<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_4" label="Take the Shortcut" >
 			</topic>
