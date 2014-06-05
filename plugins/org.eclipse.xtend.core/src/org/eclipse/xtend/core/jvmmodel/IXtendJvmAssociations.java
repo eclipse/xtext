@@ -63,6 +63,15 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 
 	JvmConstructor getInferredConstructor(XtendConstructor xtendConstructor);
 	
+	/**
+	 * Returns the directly inferred operation for the given function.
+	 * If the function is a dispatch function, the dispatch case is returned and not the dispatcher.
+	 * 
+	 * If the function is a create function, the public visible function is returned and not
+	 * the synthetic initializer function.
+	 * 
+	 * @see #getDispatchOperation(XtendFunction)
+	 */
 	JvmOperation getDirectlyInferredOperation(XtendFunction xtendFunction);
 	
 	JvmOperation getDispatchOperation(XtendFunction dispatchFunction);
