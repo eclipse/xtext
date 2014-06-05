@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Lists.*;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -22,8 +21,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives;
@@ -49,6 +46,9 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 	@Inject
 	private IJvmModelAssociations jvmModelAssociations;
 	
+	@Inject
+	private ProxyAwareUIStrings proxyAwareUIStrings;
+	
 	@Override
 	protected List<EPackage> getEPackages() {
 		return newArrayList(TypesPackage.eINSTANCE, XtypePackage.eINSTANCE);
@@ -65,22 +65,48 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 	
 	@Check
 	public void checkTypeArgsAgainstTypeParameters(JvmParameterizedTypeReference typeRef) {
-		if(typeRef.getType() instanceof JvmGenericType) {
-			int numTypeParameters = ((JvmGenericType) typeRef.getType()).getTypeParameters().size();
+		JvmType type = typeRef.getType();
+		if(type instanceof JvmGenericType && !type.eIsProxy()) {
+			int numTypeParameters = ((JvmGenericType) type).getTypeParameters().size();
 			if(typeRef.getArguments().size() > 0) {
-				if(numTypeParameters != typeRef.getArguments().size()) 
-					error("Incorrect number of arguments for type " 
-							+ getTypeSignature(typeRef.getType()) 
-							+ "; it cannot be parameterized with arguments " 
-							+ getTypeArguments(typeRef),
-						IssueCodes.INVALID_NUMBER_OF_TYPE_ARGUMENTS, typeRef);
-			} else {
-				if(numTypeParameters > 0) 
-					warning(typeRef.getType().getSimpleName() 
-							+ " is a raw type. References to generic type " 
-							+ getTypeSignature(typeRef.getType()) 
-							+ " should be parameterized", IssueCodes.RAW_TYPE, typeRef);
+				if (numTypeParameters == 0) {
+					errorTypeIsNotGeneric(type, typeRef);
+				} else if(numTypeParameters != typeRef.getArguments().size()) {
+					StringBuilder message = new StringBuilder(64);
+					message.append("Incorrect number of arguments for type ");
+					message = proxyAwareUIStrings.appendTypeSignature(type, message);
+					message.append("; it cannot be parameterized with arguments ");
+					message = proxyAwareUIStrings.appendTypeArguments(typeRef, message);
+					if (message != null) {
+						error(message.toString(),
+								IssueCodes.INVALID_NUMBER_OF_TYPE_ARGUMENTS, typeRef);
+					}
+				}
+			} else if(numTypeParameters > 0) {
+				warnRawType(type, typeRef);
 			}
+		} else if (type != null && !type.eIsProxy() && !typeRef.getArguments().isEmpty()) {
+			errorTypeIsNotGeneric(type, typeRef);
+		}
+	}
+
+	protected void warnRawType(JvmType type, JvmParameterizedTypeReference typeRef) {
+		StringBuilder message = new StringBuilder(64);
+		message.append(type.getSimpleName());
+		message.append(" is a raw type. References to generic type ");
+		message = proxyAwareUIStrings.appendTypeSignature(type, message);
+		message.append(" should be parameterized");
+		warning(message.toString(), IssueCodes.RAW_TYPE, typeRef);
+	}
+
+	protected void errorTypeIsNotGeneric(JvmType type, JvmParameterizedTypeReference typeRef) {
+		StringBuilder message = new StringBuilder(64);
+		message.append("The type ");
+		message = proxyAwareUIStrings.appendTypeSignature(type, message);
+		message.append(" is not generic; it cannot be parameterized with arguments ");
+		message = proxyAwareUIStrings.appendTypeArguments(typeRef, message);
+		if (message != null) {
+			error(message.toString(), IssueCodes.TYPE_ARGUMENT_ON_NON_GENERIC_TYPE, typeRef);
 		}
 	}
 	
@@ -126,32 +152,6 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 		}
 	}
 	
-	protected String getTypeSignature(JvmType type) {
-		StringBuffer b = new StringBuffer(type.getSimpleName());
-		if(type instanceof JvmTypeParameterDeclarator) {
-			b.append("<");
-			for(Iterator<JvmTypeParameter> i =  ((JvmTypeParameterDeclarator)type).getTypeParameters().iterator(); i.hasNext();) {
-				b.append(i.next().getName());
-				if(i.hasNext())
-					b.append(",");
-			}
-			b.append(">");
-		}
-		return b.toString();
-	}
-	
-	protected String getTypeArguments(JvmParameterizedTypeReference typeRef) {
-		StringBuffer b = new StringBuffer();
-		b.append("<");
-		for(Iterator<JvmTypeReference> i = typeRef.getArguments().iterator(); i.hasNext();) {
-			b.append(i.next().getSimpleName());
-			if(i.hasNext()) 
-				b.append(",");
-		}
-		b.append(">");
-		return b.toString();
-	}
-	
 	@Check
 	public void checkTypeArgumentsNotPrimitive(JvmTypeConstraint typeRef) {
 		checkNotPrimitive(typeRef.getTypeReference());
@@ -169,4 +169,5 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 			error("The primitive 'void' cannot be the type of a parameter", param.getParameterType(), null, IssueCodes.INVALID_USE_OF_TYPE);
 		}
 	}
+	
 }

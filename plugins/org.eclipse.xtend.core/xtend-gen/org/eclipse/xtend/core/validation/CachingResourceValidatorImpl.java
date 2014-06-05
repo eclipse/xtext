@@ -5,14 +5,18 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class CachingResourceValidatorImpl extends ResourceValidatorImpl {
@@ -53,6 +57,19 @@ public class CachingResourceValidatorImpl extends ResourceValidatorImpl {
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
+    }
+  }
+  
+  protected void validate(final Resource resource, final CheckMode mode, final CancelIndicator monitor, final IAcceptor<Issue> acceptor) {
+    boolean _isCanceled = monitor.isCanceled();
+    if (_isCanceled) {
+      return;
+    }
+    EList<EObject> _contents = resource.getContents();
+    final EObject head = IterableExtensions.<EObject>head(_contents);
+    boolean _notEquals = (!Objects.equal(head, null));
+    if (_notEquals) {
+      this.validate(resource, head, mode, monitor, acceptor);
     }
   }
 }

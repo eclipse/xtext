@@ -1536,6 +1536,67 @@ class ErrorTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test
+	def void testErrorModel_105() throws Exception {
+		fireproof('''
+			class C extends Override {
+			}
+		''')
+	}
+	
+	@Test
+	def void testErrorModel_106() throws Exception {
+		fireproof('''
+			class C extends java.lang.annotation.RetentionPolicy {
+			}
+		''')
+	}
+	
+	@Test
+	def void testErrorModel_107() throws Exception {
+		fireproof('''
+			class C {
+				Override x
+			}
+		''')
+	}
+	
+	@Test
+	def void testErrorModel_108() throws Exception {
+		fireproof('''
+			class C {
+				Override<String> x
+			}
+		''')
+	}
+	
+	@Test
+	def void testErrorModel_109() throws Exception {
+		fireproof('''
+			class C {
+				def Override<String> x() {}
+			}
+		''')
+	}
+	
+	@Test
+	def void testErrorModel_110() throws Exception {
+		fireproof('''
+			class C {
+				def x(Override<String> o) {}
+			}
+		''')
+	}
+	
+	@Test
+	def void testErrorModel_111() throws Exception {
+		fireproof('''
+			class C {
+				java.lang.annotation.RetentionPolicy<String> x
+			}
+		''')
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)

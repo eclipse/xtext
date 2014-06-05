@@ -1864,7 +1864,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ ""
 				+ "class Bar<T,U> {"
 				+ "}");
-		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+		helper.assertNoErrors(file.getXtendTypes().get(0), INVALID_NUMBER_OF_TYPE_ARGUMENTS);
 	}
 
 	@Test
@@ -1875,7 +1875,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ ""
 				+ "class Bar<T> {"
 				+ "}");
-		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+		helper.assertNoErrors(file.getXtendTypes().get(0), INVALID_NUMBER_OF_TYPE_ARGUMENTS);
 	}
 
 	@Test
@@ -1886,7 +1886,40 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ ""
 				+ "class Bar {"
 				+ "}");
+		helper.assertNoErrors(file.getXtendTypes().get(0), INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+	}
+	
+	@Test
+	public void testInvalidNumOfTypeParameters_3() throws Exception {
+		XtendFile file = file(
+				"class Foo<T> extends Bar<T> {" 
+				+ "}"
+				+ ""
+				+ "class Bar<T,U> {"
+				+ "}");
 		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+	}
+
+	@Test
+	public void testInvalidNumOfTypeParameters_4() throws Exception {
+		XtendFile file = file(
+				"class Foo<T,U> extends Bar<T,U> {" 
+				+ "}"
+				+ ""
+				+ "class Bar<T> {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+	}
+
+	@Test
+	public void testInvalidNumOfTypeParameters_5() throws Exception {
+		XtendFile file = file(
+				"class Foo<T> extends Bar<T> {" 
+				+ "}"
+				+ ""
+				+ "class Bar {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, TYPE_ARGUMENT_ON_NON_GENERIC_TYPE);
 	}
 
 	@Test
@@ -1911,7 +1944,8 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	public void testRawTypeOnField_02() throws Exception {
 		String fileAsText = "class Foo { public val x = typeof(java.util.Map) }";
 		XtendFile file = file(fileAsText);
-		helper.assertWarning(file, XTEND_FIELD, RAW_TYPE, "Map is a raw type. References to generic type Map<K,V> should be parameterized");
+		helper.assertWarning(file, XTEND_FIELD, RAW_TYPE, 
+				"The inferred field type Class<Map> uses the raw type Map. References to generic type Map<K, V> should be parameterized");
 		List<Issue> issues = helper.validate(file);
 		assertEquals(1, issues.size());
 		assertEquals(fileAsText.indexOf('x'), issues.get(0).getOffset().intValue());
@@ -1929,7 +1963,8 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	public void testRawTypeOnFieldFromTypeLiteral_02() throws Exception {
 		String fileAsText = "class Foo { public val x = java.util.Map }";
 		XtendFile file = file(fileAsText);
-		helper.assertWarning(file, XTEND_FIELD, RAW_TYPE, "Map is a raw type. References to generic type Map<K,V> should be parameterized");
+		helper.assertWarning(file, XTEND_FIELD, RAW_TYPE, 
+				"The inferred field type Class<Map> uses the raw type Map. References to generic type Map<K, V> should be parameterized");
 		List<Issue> issues = helper.validate(file);
 		assertEquals(1, issues.size());
 		assertEquals(fileAsText.indexOf('x'), issues.get(0).getOffset().intValue());
@@ -1969,11 +2004,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ ""
 				+ "class Bar {"
 				+ "}");
-		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, TYPE_ARGUMENT_ON_NON_GENERIC_TYPE);
 	}
 
 	@Test
-	public void testReturnTypeRawType() throws Exception {
+	public void testReturnTypeRawType_01() throws Exception {
 		XtendFile file = file(
 				"class Foo {" 
 				+ " def Bar foo() {}"
@@ -1982,6 +2017,32 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "class Bar<T> {"
 				+ "}");
 		helper.assertWarning(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, RAW_TYPE);
+	}
+	
+	@Test
+	public void testReturnTypeRawType_02() throws Exception {
+		XtendFile file = file(
+				"class Foo {" 
+				+ " def foo() { typeof(Bar) }"
+				+ "}"
+				+ ""
+				+ "class Bar<T> {"
+				+ "}");
+		helper.assertWarning(file.getXtendTypes().get(0), XTEND_FUNCTION, RAW_TYPE,
+				"The inferred return type Class<Bar> uses the raw type Bar. References to generic type Bar<T> should be parameterized");
+	}
+	
+	@Test
+	public void testReturnTypeRawType_03() throws Exception {
+		XtendFile file = file(
+				"class Foo {" 
+				+ " def foo() { Bar }"
+				+ "}"
+				+ ""
+				+ "class Bar<T> {"
+				+ "}");
+		helper.assertWarning(file.getXtendTypes().get(0), XTEND_FUNCTION, RAW_TYPE,
+				"The inferred return type Class<Bar> uses the raw type Bar. References to generic type Bar<T> should be parameterized");
 	}
 
 	@Test
