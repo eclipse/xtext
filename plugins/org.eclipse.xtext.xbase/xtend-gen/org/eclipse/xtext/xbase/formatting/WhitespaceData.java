@@ -28,7 +28,7 @@ public class WhitespaceData extends FormattingData {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((_space== null) ? 0 : _space.hashCode());
+    result = prime * result + ((this._space== null) ? 0 : this._space.hashCode());
     return result;
   }
   
@@ -43,10 +43,10 @@ public class WhitespaceData extends FormattingData {
     if (!super.equals(obj))
       return false;
     WhitespaceData other = (WhitespaceData) obj;
-    if (_space == null) {
+    if (this._space == null) {
       if (other._space != null)
         return false;
-    } else if (!_space.equals(other._space))
+    } else if (!this._space.equals(other._space))
       return false;
     return true;
   }

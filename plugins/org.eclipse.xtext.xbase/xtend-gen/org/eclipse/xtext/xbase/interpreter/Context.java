@@ -62,10 +62,10 @@ public class Context {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_expectedType== null) ? 0 : _expectedType.hashCode());
-    result = prime * result + ((_classFinder== null) ? 0 : _classFinder.hashCode());
-    result = prime * result + ((_visibleFeatures== null) ? 0 : _visibleFeatures.hashCode());
-    result = prime * result + ((_alreadyEvaluating== null) ? 0 : _alreadyEvaluating.hashCode());
+    result = prime * result + ((this._expectedType== null) ? 0 : this._expectedType.hashCode());
+    result = prime * result + ((this._classFinder== null) ? 0 : this._classFinder.hashCode());
+    result = prime * result + ((this._visibleFeatures== null) ? 0 : this._visibleFeatures.hashCode());
+    result = prime * result + ((this._alreadyEvaluating== null) ? 0 : this._alreadyEvaluating.hashCode());
     return result;
   }
   
@@ -78,25 +78,25 @@ public class Context {
     if (getClass() != obj.getClass())
       return false;
     Context other = (Context) obj;
-    if (_expectedType == null) {
+    if (this._expectedType == null) {
       if (other._expectedType != null)
         return false;
-    } else if (!_expectedType.equals(other._expectedType))
+    } else if (!this._expectedType.equals(other._expectedType))
       return false;
-    if (_classFinder == null) {
+    if (this._classFinder == null) {
       if (other._classFinder != null)
         return false;
-    } else if (!_classFinder.equals(other._classFinder))
+    } else if (!this._classFinder.equals(other._classFinder))
       return false;
-    if (_visibleFeatures == null) {
+    if (this._visibleFeatures == null) {
       if (other._visibleFeatures != null)
         return false;
-    } else if (!_visibleFeatures.equals(other._visibleFeatures))
+    } else if (!this._visibleFeatures.equals(other._visibleFeatures))
       return false;
-    if (_alreadyEvaluating == null) {
+    if (this._alreadyEvaluating == null) {
       if (other._alreadyEvaluating != null)
         return false;
-    } else if (!_alreadyEvaluating.equals(other._alreadyEvaluating))
+    } else if (!this._alreadyEvaluating.equals(other._alreadyEvaluating))
       return false;
     return true;
   }

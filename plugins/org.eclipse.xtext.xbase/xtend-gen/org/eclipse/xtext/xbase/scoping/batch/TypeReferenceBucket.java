@@ -44,8 +44,8 @@ public class TypeReferenceBucket {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + _id;
-    result = prime * result + ((_types== null) ? 0 : _types.hashCode());
+    result = prime * result + this._id;
+    result = prime * result + ((this._types== null) ? 0 : this._types.hashCode());
     return result;
   }
   
@@ -58,12 +58,12 @@ public class TypeReferenceBucket {
     if (getClass() != obj.getClass())
       return false;
     TypeReferenceBucket other = (TypeReferenceBucket) obj;
-    if (other._id != _id)
+    if (other._id != this._id)
       return false;
-    if (_types == null) {
+    if (this._types == null) {
       if (other._types != null)
         return false;
-    } else if (!_types.equals(other._types))
+    } else if (!this._types.equals(other._types))
       return false;
     return true;
   }

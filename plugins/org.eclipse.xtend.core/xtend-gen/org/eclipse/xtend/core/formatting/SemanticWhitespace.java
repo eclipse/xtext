@@ -27,7 +27,7 @@ public class SemanticWhitespace extends Chunk {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + _column;
+    result = prime * result + this._column;
     return result;
   }
   
@@ -42,7 +42,7 @@ public class SemanticWhitespace extends Chunk {
     if (!super.equals(obj))
       return false;
     SemanticWhitespace other = (SemanticWhitespace) obj;
-    if (other._column != _column)
+    if (other._column != this._column)
       return false;
     return true;
   }

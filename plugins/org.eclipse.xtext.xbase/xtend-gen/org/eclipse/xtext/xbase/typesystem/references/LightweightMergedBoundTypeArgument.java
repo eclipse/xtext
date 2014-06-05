@@ -41,8 +41,8 @@ public class LightweightMergedBoundTypeArgument {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_typeReference== null) ? 0 : _typeReference.hashCode());
-    result = prime * result + ((_variance== null) ? 0 : _variance.hashCode());
+    result = prime * result + ((this._typeReference== null) ? 0 : this._typeReference.hashCode());
+    result = prime * result + ((this._variance== null) ? 0 : this._variance.hashCode());
     return result;
   }
   
@@ -55,15 +55,15 @@ public class LightweightMergedBoundTypeArgument {
     if (getClass() != obj.getClass())
       return false;
     LightweightMergedBoundTypeArgument other = (LightweightMergedBoundTypeArgument) obj;
-    if (_typeReference == null) {
+    if (this._typeReference == null) {
       if (other._typeReference != null)
         return false;
-    } else if (!_typeReference.equals(other._typeReference))
+    } else if (!this._typeReference.equals(other._typeReference))
       return false;
-    if (_variance == null) {
+    if (this._variance == null) {
       if (other._variance != null)
         return false;
-    } else if (!_variance.equals(other._variance))
+    } else if (!this._variance.equals(other._variance))
       return false;
     return true;
   }

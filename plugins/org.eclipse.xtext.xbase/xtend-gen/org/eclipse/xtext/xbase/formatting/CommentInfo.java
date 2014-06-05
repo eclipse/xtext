@@ -56,7 +56,7 @@ public class CommentInfo extends LeafInfo {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + (_trailing ? 1231 : 1237);
+    result = prime * result + (this._trailing ? 1231 : 1237);
     return result;
   }
   
@@ -71,7 +71,7 @@ public class CommentInfo extends LeafInfo {
     if (!super.equals(obj))
       return false;
     CommentInfo other = (CommentInfo) obj;
-    if (other._trailing != _trailing)
+    if (other._trailing != this._trailing)
       return false;
     return true;
   }

@@ -116,8 +116,8 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_delegate== null) ? 0 : _delegate.hashCode());
-    result = prime * result + ((_filter== null) ? 0 : _filter.hashCode());
+    result = prime * result + ((this._delegate== null) ? 0 : this._delegate.hashCode());
+    result = prime * result + ((this._filter== null) ? 0 : this._filter.hashCode());
     return result;
   }
   
@@ -130,15 +130,15 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     if (getClass() != obj.getClass())
       return false;
     FilteringResourceDescriptions other = (FilteringResourceDescriptions) obj;
-    if (_delegate == null) {
+    if (this._delegate == null) {
       if (other._delegate != null)
         return false;
-    } else if (!_delegate.equals(other._delegate))
+    } else if (!this._delegate.equals(other._delegate))
       return false;
-    if (_filter == null) {
+    if (this._filter == null) {
       if (other._filter != null)
         return false;
-    } else if (!_filter.equals(other._filter))
+    } else if (!this._filter.equals(other._filter))
       return false;
     return true;
   }

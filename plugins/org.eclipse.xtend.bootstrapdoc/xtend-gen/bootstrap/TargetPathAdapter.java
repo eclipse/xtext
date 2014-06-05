@@ -32,8 +32,8 @@ public class TargetPathAdapter extends AdapterImpl {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((_targetPaths== null) ? 0 : _targetPaths.hashCode());
-    result = prime * result + ((_targetFileRoots== null) ? 0 : _targetFileRoots.hashCode());
+    result = prime * result + ((this._targetPaths== null) ? 0 : this._targetPaths.hashCode());
+    result = prime * result + ((this._targetFileRoots== null) ? 0 : this._targetFileRoots.hashCode());
     return result;
   }
   
@@ -48,15 +48,15 @@ public class TargetPathAdapter extends AdapterImpl {
     if (!super.equals(obj))
       return false;
     TargetPathAdapter other = (TargetPathAdapter) obj;
-    if (_targetPaths == null) {
+    if (this._targetPaths == null) {
       if (other._targetPaths != null)
         return false;
-    } else if (!_targetPaths.equals(other._targetPaths))
+    } else if (!this._targetPaths.equals(other._targetPaths))
       return false;
-    if (_targetFileRoots == null) {
+    if (this._targetFileRoots == null) {
       if (other._targetFileRoots != null)
         return false;
-    } else if (!_targetFileRoots.equals(other._targetFileRoots))
+    } else if (!this._targetFileRoots.equals(other._targetFileRoots))
       return false;
     return true;
   }

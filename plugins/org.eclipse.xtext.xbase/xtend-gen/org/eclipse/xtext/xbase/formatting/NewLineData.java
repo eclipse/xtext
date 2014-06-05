@@ -28,7 +28,7 @@ public class NewLineData extends FormattingData {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((_newLines== null) ? 0 : _newLines.hashCode());
+    result = prime * result + ((this._newLines== null) ? 0 : this._newLines.hashCode());
     return result;
   }
   
@@ -43,10 +43,10 @@ public class NewLineData extends FormattingData {
     if (!super.equals(obj))
       return false;
     NewLineData other = (NewLineData) obj;
-    if (_newLines == null) {
+    if (this._newLines == null) {
       if (other._newLines != null)
         return false;
-    } else if (!_newLines.equals(other._newLines))
+    } else if (!this._newLines.equals(other._newLines))
       return false;
     return true;
   }

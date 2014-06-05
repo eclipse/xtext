@@ -51,7 +51,7 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((_typesToNames== null) ? 0 : _typesToNames.hashCode());
+    result = prime * result + ((this._typesToNames== null) ? 0 : this._typesToNames.hashCode());
     return result;
   }
   
@@ -66,10 +66,10 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
     if (!super.equals(obj))
       return false;
     TypeWithRestrictedNamesBucket other = (TypeWithRestrictedNamesBucket) obj;
-    if (_typesToNames == null) {
+    if (this._typesToNames == null) {
       if (other._typesToNames != null)
         return false;
-    } else if (!_typesToNames.equals(other._typesToNames))
+    } else if (!this._typesToNames.equals(other._typesToNames))
       return false;
     return true;
   }

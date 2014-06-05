@@ -40,7 +40,7 @@ public class SynonymTypeBucket extends TypeBucket {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((_hints== null) ? 0 : _hints.hashCode());
+    result = prime * result + ((this._hints== null) ? 0 : this._hints.hashCode());
     return result;
   }
   
@@ -55,10 +55,10 @@ public class SynonymTypeBucket extends TypeBucket {
     if (!super.equals(obj))
       return false;
     SynonymTypeBucket other = (SynonymTypeBucket) obj;
-    if (_hints == null) {
+    if (this._hints == null) {
       if (other._hints != null)
         return false;
-    } else if (!_hints.equals(other._hints))
+    } else if (!this._hints.equals(other._hints))
       return false;
     return true;
   }

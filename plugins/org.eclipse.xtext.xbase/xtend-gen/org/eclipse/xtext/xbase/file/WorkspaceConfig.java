@@ -36,8 +36,8 @@ public class WorkspaceConfig {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_absoluteFileSystemPath== null) ? 0 : _absoluteFileSystemPath.hashCode());
-    result = prime * result + ((_projects== null) ? 0 : _projects.hashCode());
+    result = prime * result + ((this._absoluteFileSystemPath== null) ? 0 : this._absoluteFileSystemPath.hashCode());
+    result = prime * result + ((this._projects== null) ? 0 : this._projects.hashCode());
     return result;
   }
   
@@ -50,15 +50,15 @@ public class WorkspaceConfig {
     if (getClass() != obj.getClass())
       return false;
     WorkspaceConfig other = (WorkspaceConfig) obj;
-    if (_absoluteFileSystemPath == null) {
+    if (this._absoluteFileSystemPath == null) {
       if (other._absoluteFileSystemPath != null)
         return false;
-    } else if (!_absoluteFileSystemPath.equals(other._absoluteFileSystemPath))
+    } else if (!this._absoluteFileSystemPath.equals(other._absoluteFileSystemPath))
       return false;
-    if (_projects == null) {
+    if (this._projects == null) {
       if (other._projects != null)
         return false;
-    } else if (!_projects.equals(other._projects))
+    } else if (!this._projects.equals(other._projects))
       return false;
     return true;
   }

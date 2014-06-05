@@ -29,7 +29,7 @@ public class Contents extends ContentNode {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
-    result = prime * result + ((_text== null) ? 0 : _text.hashCode());
+    result = prime * result + ((this._text== null) ? 0 : this._text.hashCode());
     return result;
   }
   
@@ -44,10 +44,10 @@ public class Contents extends ContentNode {
     if (!super.equals(obj))
       return false;
     Contents other = (Contents) obj;
-    if (_text == null) {
+    if (this._text == null) {
       if (other._text != null)
         return false;
-    } else if (!_text.equals(other._text))
+    } else if (!this._text.equals(other._text))
       return false;
     return true;
   }

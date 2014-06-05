@@ -35,7 +35,7 @@ public class Node {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((_contents== null) ? 0 : _contents.hashCode());
+    result = prime * result + ((this._contents== null) ? 0 : this._contents.hashCode());
     return result;
   }
   
@@ -48,10 +48,10 @@ public class Node {
     if (getClass() != obj.getClass())
       return false;
     Node other = (Node) obj;
-    if (_contents == null) {
+    if (this._contents == null) {
       if (other._contents != null)
         return false;
-    } else if (!_contents.equals(other._contents))
+    } else if (!this._contents.equals(other._contents))
       return false;
     return true;
   }
