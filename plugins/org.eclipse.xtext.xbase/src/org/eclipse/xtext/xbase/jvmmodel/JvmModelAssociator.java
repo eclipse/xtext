@@ -299,10 +299,18 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		task.start();
 		// call primary inferrer
 		JvmDeclaredTypeAcceptor acceptor = new JvmDeclaredTypeAcceptor(resource);
-		inferrer.infer(eObject, acceptor, preIndexingPhase);
+		try {
+			inferrer.infer(eObject, acceptor, preIndexingPhase);
+		} catch (RuntimeException e) {
+			LOG.error("Error calling inferrer", e);
+		}
 		if (!preIndexingPhase) {
 			for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer: acceptor.later) {
-				initializer.getValue().apply(initializer.getKey());
+				try {
+					initializer.getValue().apply(initializer.getKey());
+				} catch (RuntimeException e) {
+					LOG.error("Error calling inferrer", e);
+				}
 			}
 		}
 		task.stop();
