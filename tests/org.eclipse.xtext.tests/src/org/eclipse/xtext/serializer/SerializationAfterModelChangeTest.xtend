@@ -7,28 +7,31 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer
 
-import org.eclipse.xtext.junit4.AbstractXtextTests
-import org.junit.Before
-import org.junit.Test
-import org.eclipse.xtext.serializer.hiddentokensequencertest.Model
+import com.google.inject.Inject
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.serializer.hiddentokensequencertest.HiddentokensequencertestFactory
+import org.eclipse.xtext.serializer.hiddentokensequencertest.Model
 import org.junit.Ignore
+import org.junit.Test
+import org.junit.runner.RunWith
+
+import static org.junit.Assert.*
 
 /**
  * @author Stefan Oehme - Initial contribution and API
  * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=424027
  */
-class SerializationAfterModelChangeTest extends AbstractXtextTests {
-	
-	@Before
-	def void setup() {
-		with(HiddenTokenSequencerTestLanguageStandaloneSetup)
-		injectMembers(this)
-	}
-	
+@RunWith(XtextRunner)
+@InjectWith(HiddenTokenSequencerTestLanguageInjectorProvider)
+class SerializationAfterModelChangeTest {
+	@Inject extension ParseHelper<Model>
+	@Inject extension ISerializer
+
 	@Test
 	def void smokeTest() {
-		val model = getModel('''
+		val model = '''
 			entities
 				//before existing element
 				Foo /* within existing element */ "Bar" /* after existing element*/
@@ -45,7 +48,7 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 				
 				//before inserted element
 			end
-		''') as Model
+		'''.parse
 
 		val event = HiddentokensequencertestFactory.eINSTANCE.createEntity => [
 			name = "AAA"
@@ -54,8 +57,9 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 		model.domainModel.entities.remove(1)
 		model.domainModel.entities.remove(1)
 		model.domainModel.entities.add(event)
-		
-		model.assertSerializesTo('''
+
+		model.assertSerializesTo(
+			'''
 			entities
 				//before existing element
 				Foo /* within existing element */ "Bar" /* after existing element*/
@@ -71,7 +75,7 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 				//before inserted element
 			AAA "BBB" end''')
 	}
-	
+
 	/*
 	 * TODO does not work yet, because HiddenTokenSequencer 
 	 * always searches in one direction, 
@@ -80,7 +84,7 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 	@Test
 	@Ignore
 	def void testMoveElement() {
-		val model = getModel('''
+		val model = '''
 			entities
 				Foo "Bar"
 			
@@ -88,114 +92,117 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 				
 				Baz "Fizzle"
 			end
-		''') as Model
-		
+		'''.parse
+
 		val head = model.domainModel.entities.head
-		
+
 		model.domainModel.entities.move(1, head)
-		
-		model.assertSerializesTo('''
-			entities
-				Baz "Fizzle"
-			
-				//comment between elements
+
+		model.assertSerializesTo(
+			'''
+				entities
+					Baz "Fizzle"
 				
-				Foo "Bar"
-			end
-		''')
+					//comment between elements
+					
+					Foo "Bar"
+				end
+			''')
 	}
-	
+
 	@Test
 	def void testWhiteSpaceOnly() {
-		val model = getModel('''
+		val model = '''
 			entities
 				Foo "Bar"
 			end
-		''') as Model
+		'''.parse
 
 		val event = HiddentokensequencertestFactory.eINSTANCE.createEntity => [
 			name = "Baz"
 			description = "Fizzle"
 		]
 		model.domainModel.entities.add(event)
-		
-		model.assertSerializesTo('''
+
+		model.assertSerializesTo(
+			'''
 			entities
 				Foo "Bar"
 			Baz "Fizzle" end''')
 	}
-	
+
 	@Test
 	def void testCommentBeforeInsertedElement() {
-		val model = getModel('''
+		val model = '''
 			entities
 				Foo "Bar"
 				
 				//comment before inserted element
 			end
-		''') as Model
-		
+		'''.parse
+
 		val event = HiddentokensequencertestFactory.eINSTANCE.createEntity => [
 			name = "Baz"
 			description = "Fizzle"
 		]
 		model.domainModel.entities.add(event)
-		
-		model.assertSerializesTo('''
+
+		model.assertSerializesTo(
+			'''
 			entities
 				Foo "Bar"
 				
 				//comment before inserted element
 			Baz "Fizzle" end''')
 	}
-	
+
 	@Test
 	def void testAddElementAfterInlineComment() {
-		val model = getModel('''
+		val model = '''
 			entities
 				Foo "Bar"	//inline comment before inserted element
 			end
-		''') as Model
-		
+		'''.parse
+
 		val event = HiddentokensequencertestFactory.eINSTANCE.createEntity => [
 			name = "Baz"
 			description = "Fizzle"
 		]
 		model.domainModel.entities.add(event)
-		
-		model.assertSerializesTo('''
+
+		model.assertSerializesTo(
+			'''
 			entities
 				Foo "Bar"	//inline comment before inserted element
 			Baz "Fizzle" end''')
 	}
-	
+
 	@Test
 	def void testCommentOnRemovedElement() {
-		val model = getModel('''
+		val model = '''
 			entities
-				Foo "Bar"
-			
+				Foo "Bar" //inline comment before deleted element
 				//comment on deleted element
 				/**
 				 * another comment on the deleted element
 				 */
 				Baz "Fizzle"
 			end
-		''') as Model
-		
+		'''.parse
+
 		model.domainModel.entities.remove(1)
-		
-		model.assertSerializesTo('''
+
+		model.assertSerializesTo(
+			'''
 			entities
-				Foo "Bar"
+				Foo "Bar" //inline comment before deleted element
 			
-				
 			end''')
 	}
-	
+
 	@Test
 	def void testUnrelatedCommentBeforeRemovedElement() {
-		val model = getModel('''
+		val model = '''
 			entities
 				Foo "Bar"
 				
@@ -203,11 +210,12 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 				
 				Baz "Fizzle"
 			end
-		''') as Model
-		
+		'''.parse
+
 		model.domainModel.entities.remove(1)
-		
-		model.assertSerializesTo('''
+
+		model.assertSerializesTo(
+			'''
 			entities
 				Foo "Bar"
 				
@@ -216,85 +224,89 @@ class SerializationAfterModelChangeTest extends AbstractXtextTests {
 				
 			end''')
 	}
-	
+
 	@Test
 	def void testRemoveElementAfterInlineComment() {
-		val model = getModel('''
+		val model = '''
 			entities
 				Foo "Bar" //inline comment before deleted element
 				
 				Baz "Fizzle"
 			end
-		''') as Model
-		
+		'''.parse
+
 		model.domainModel.entities.remove(1)
-		
-		model.assertSerializesTo('''
+
+		model.assertSerializesTo(
+			'''
 			entities
 				Foo "Bar" //inline comment before deleted element
 				
 				
 			end''')
-		
+
 	}
-	
+
 	@Test
 	def void testRemoveElementWithInlineComment() {
-		val model = getModel('''
+		val model = '''
 			entities
 				Foo "Bar"
 				
 				Baz "Fizzle" //inline comment after deleted element
 			end
-		''') as Model
+		'''.parse
 		model.domainModel.entities.remove(1)
-		
-		model.assertSerializesTo('''
+
+		model.assertSerializesTo(
+			'''
 			entities
 				Foo "Bar"
 				
 				end''')
 	}
-	
+
 	@Test
 	def void testRemoveElementInSameLine() {
-		val model = getModel('''
+		val model = '''
 			entities
 				Foo "Bar" /* the foo */ Baz "Fizzle"
 			end
-		''') as Model
+		'''.parse
 		model.domainModel.entities.remove(1)
-		
-		model.assertSerializesTo('''
+
+		model.assertSerializesTo(
+			'''
 			entities
 				Foo "Bar" /* the foo */
 			end''')
 	}
-	
+
 	@Test
 	def void testAddElementBeforeCommentedElement() {
-		val model = getModel('''
+		val model = '''
 			entities
 				//the comment
 				Foo "Bar"
 			end
-		''') as Model
-		
+		'''.parse
+
 		val event = HiddentokensequencertestFactory.eINSTANCE.createEntity => [
 			name = "Baz"
 			description = "Fizzle"
 		]
 		model.domainModel.entities.add(0, event)
-		
-		model.assertSerializesTo('''
-			entities Baz "Fizzle"
-				//the comment
-				Foo "Bar"
-			end
-		''')
+
+		model.assertSerializesTo(
+			'''
+				entities Baz "Fizzle"
+					//the comment
+					Foo "Bar"
+				end
+			''')
 	}
-	
+
 	private def assertSerializesTo(Model model, CharSequence expectation) {
-		assertEquals(expectation.toString, serialize(model))
+		assertEquals(expectation.toString, model.serialize)
 	}
 }

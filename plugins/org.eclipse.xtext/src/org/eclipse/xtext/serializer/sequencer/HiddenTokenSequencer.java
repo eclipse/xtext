@@ -51,6 +51,10 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	protected INode lastEmittedNode;
 
 	protected INode rootNode;
+	
+	private int rootOffset;
+	
+	private int rootEndOffset;
 
 	protected ISyntacticSequencer sequencer;
 
@@ -191,7 +195,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 			NodeIterator ni = new NodeIterator(from);
 			while (ni.hasNext()) {
 				INode next = ni.next();
-				if (next.getOffset() > rootNode.getEndOffset()) {
+				if (next.getTotalOffset() > rootEndOffset) {
 					break;
 				}
 				if (next == lastEmittedNode) {
@@ -209,7 +213,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 			NodeIterator ni = new NodeIterator(to);
 			while (ni.hasPrevious()) {
 				INode prev = ni.previous();
-				if (prev.getEndOffset()  < rootNode.getOffset()) {
+				if (prev.getTotalEndOffset()  < rootOffset) {
 					break;
 				}
 				if (prev == lastEmittedNode) {
@@ -365,7 +369,8 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	}
 	
 	protected boolean isLeadingCommentFor(INode comment, INode node) {
-		if (!tokenUtil.isCommentNode(comment)) return false;
+		if (!tokenUtil.isCommentNode(comment)) 
+			return false;
 		if (comment.getText().endsWith("\n")) {
 			return node.getStartLine() == comment.getEndLine();
 		} else {
@@ -374,7 +379,10 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	}
 	
 	protected boolean isTrailingCommentFor(INode comment, INode node) {
-		if (!tokenUtil.isCommentNode(comment)) return false;
+		if (!tokenUtil.isCommentNode(comment)) 
+			return false;
+		if (node.getText().endsWith("\n")) 
+			return false;
 		return comment.getStartLine() == node.getEndLine();
 	}
 
@@ -405,6 +413,8 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 		this.delegate = sequenceAcceptor;
 		this.lastNode = NodeModelUtils.findActualNodeFor(semanticObject);
 		this.rootNode = lastNode;
+		this.rootOffset = rootNode.getTotalOffset();
+		this.rootEndOffset = rootNode.getTotalEndOffset();
 	}
 
 	public void leaveAssignedAction(Action action, EObject semanticChild) {
@@ -418,5 +428,4 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
 		delegate.leaveUnssignedParserRuleCall(rc);
 	}
-
 }

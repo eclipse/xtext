@@ -26,6 +26,7 @@ Bundle-ClassPath: lib/simple.jar,
 Import-Package: com.ibm.icu.text;version="4.0.0",
  org.apache.log4j;version="1.2.15",
  org.junit;version="4.5.0",
+ org.junit.rules;version="4.7.0",
  org.junit.runner;version="4.5.0",
  org.junit.runners;version="4.5.0"
 Export-Package: org.eclipse.xtext.generator.ecore,
