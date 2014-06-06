@@ -32,6 +32,9 @@ import org.eclipse.jdt.internal.ui.text.SimpleJavaSourceViewerConfiguration;
 import org.eclipse.jdt.ui.text.IJavaPartitions;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.jface.resource.ColorDescriptor;
+import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
@@ -41,17 +44,25 @@ import org.eclipse.jface.text.source.AnnotationRulerColumn;
 import org.eclipse.jface.text.source.CompositeRuler;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IOverviewRuler;
+import org.eclipse.jface.text.source.ISharedTextColors;
+import org.eclipse.jface.text.source.IVerticalRulerColumn;
 import org.eclipse.jface.text.source.LineNumberRulerColumn;
 import org.eclipse.jface.text.source.OverviewRuler;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPartReference;
+import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.internal.editors.text.EditorsPlugin;
 import org.eclipse.ui.progress.UIJob;
+import org.eclipse.ui.texteditor.AbstractDecoratedTextEditorPreferenceConstants;
+import org.eclipse.ui.texteditor.AbstractTextEditor;
 import org.eclipse.ui.texteditor.AnnotationPreference;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.ui.texteditor.MarkerAnnotationPreferences;
@@ -69,6 +80,7 @@ import org.eclipse.xtext.ui.views.DefaultWorkbenchPartSelection;
 import org.eclipse.xtext.ui.views.IWorkbenchPartSelection;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.base.Function;
@@ -148,12 +160,10 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 			}
 		}
 		annotationRulerColumn.addAnnotationType(Annotation.TYPE_UNKNOWN);
-		LineNumberRulerColumn lineNumberRuleColumn = new LineNumberRulerColumn();
-		lineNumberRuleColumn.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-		lineNumberRuleColumn.setFont(getFont(getViewerFontName()));
+		LineNumberRulerColumn lineNumberRulerColumn = createLineNumberRulerColumn();
 		CompositeRuler compositeRuler = new CompositeRuler();
 		compositeRuler.addDecorator(0, annotationRulerColumn);
-		compositeRuler.addDecorator(1, lineNumberRuleColumn);
+		compositeRuler.addDecorator(1, lineNumberRulerColumn);
 		javaSourceViewer = new JavaSourceViewer(parent, compositeRuler, overviewRuler, true, SWT.V_SCROLL
 				| SWT.H_SCROLL, store);
 		javaSourceViewerConfiguration = new SimpleJavaSourceViewerConfiguration(JavaPlugin.getDefault()
@@ -169,6 +179,38 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 		return javaSourceViewer;
 	}
 
+	private LineNumberRulerColumn createLineNumberRulerColumn() {
+		LineNumberRulerColumn lineNumberRulerColumn = new LineNumberRulerColumn();
+		IPreferenceStore store = preferenceStoreAccess.getPreferenceStore();
+		ISharedTextColors sharedColors=EditorsPlugin.getDefault().getSharedTextColors();
+		RGB fgRgb = getColorFromStore(store, AbstractDecoratedTextEditorPreferenceConstants.EDITOR_LINE_NUMBER_RULER_COLOR);
+		if (fgRgb == null)
+			lineNumberRulerColumn.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+		else 
+			lineNumberRulerColumn.setForeground(sharedColors.getColor(fgRgb));
+
+		// background color: same as editor, or system default
+		RGB rgb;
+		if (store.getBoolean(AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT))
+			rgb = null;
+		else
+			rgb = getColorFromStore(store, AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND);
+		lineNumberRulerColumn.setBackground(sharedColors.getColor(rgb));
+		lineNumberRulerColumn.setFont(getFont(getViewerFontName()));
+		return lineNumberRulerColumn;
+	}
+	
+	private RGB getColorFromStore(IPreferenceStore store, String key) {
+		RGB rgb = null;
+		if (store.contains(key)) {
+			if (store.isDefault(key))
+				rgb = PreferenceConverter.getDefaultColor(store, key);
+			else
+				rgb = PreferenceConverter.getColor(store, key);
+		}
+		return rgb;
+	}
+	
 	@Override
 	protected boolean isValidSelection(IWorkbenchPartSelection workbenchPartSelection) {
 		return super.isValidSelection(workbenchPartSelection)
