@@ -521,5 +521,12 @@ component = Generator {
             </attribute>
         </markerResolutionGenerator>
     </extension>
+	<extension point="org.eclipse.e4.ui.css.swt.theme">	
+      <stylesheet uri="css/e4-dark_xtext_grammar_syntaxhighlighting.css">	
+         <themeid	
+               refid="org.eclipse.e4.ui.css.theme.e4_dark">	
+         </themeid>	
+	  </stylesheet>	
+   </extension>
 
 </plugin>

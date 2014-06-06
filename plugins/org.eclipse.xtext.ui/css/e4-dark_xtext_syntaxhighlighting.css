@@ -1,11 +1,11 @@
 IEclipsePreferences#org-eclipse-xtext-ui {
 	preferences:
 		'syntaxColorer.keyword.color=221,40,103'
-		'syntaxColorer.keyword.style=0' /* SWT.BOLD */
+		'syntaxColorer.keyword.style=1' /* SWT.BOLD */
 		'syntaxColorer.punctuation.color=217,232,247'
 		'syntaxColorer.comment.color=98,98,98'
 		'syntaxColorer.task.color=154,140,124'
-		'syntaxColorer.task.style=0'  /* SWT.BOLD */
+		'syntaxColorer.task.style=1'  /* SWT.BOLD */
 		'syntaxColorer.string.color=41,197,163'
 		'syntaxColorer.number.color=104,151,187'
 		'syntaxColorer.default.color=217,232,247'
