@@ -20,7 +20,7 @@ import org.osgi.service.prefs.BackingStoreException;
 
 /**
  * Mainly copied from {@link org.eclipse.ui.preferences.ScopedPreferenceStore}.
- * It fixes the memory leek described in 
+ * It fixes the memory leak described in 
  * <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=239033">these</a> 
  * <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=362199">bugs</a>.
  * 
