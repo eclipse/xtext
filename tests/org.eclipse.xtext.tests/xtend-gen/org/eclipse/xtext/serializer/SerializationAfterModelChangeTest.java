@@ -7,39 +7,43 @@
  */
 package org.eclipse.xtext.serializer;
 
+import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguageStandaloneSetup;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguageInjectorProvider;
+import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.hiddentokensequencertest.DomainModel;
 import org.eclipse.xtext.serializer.hiddentokensequencertest.Entity;
 import org.eclipse.xtext.serializer.hiddentokensequencertest.HiddentokensequencertestFactory;
 import org.eclipse.xtext.serializer.hiddentokensequencertest.Model;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
  * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=424027
  */
+@RunWith(XtextRunner.class)
+@InjectWith(HiddenTokenSequencerTestLanguageInjectorProvider.class)
 @SuppressWarnings("all")
-public class SerializationAfterModelChangeTest extends AbstractXtextTests {
-  @Before
-  public void setup() {
-    try {
-      this.with(HiddenTokenSequencerTestLanguageStandaloneSetup.class);
-      this.injectMembers(this);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
+public class SerializationAfterModelChangeTest {
+  @Inject
+  @Extension
+  private ParseHelper<Model> _parseHelper;
+  
+  @Inject
+  @Extension
+  private ISerializer _iSerializer;
   
   @Test
   public void smokeTest() {
@@ -86,8 +90,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("end");
       _builder.newLine();
-      EObject _model = this.getModel(_builder.toString());
-      final Model model = ((Model) _model);
+      final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
       final Procedure1<Entity> _function = new Procedure1<Entity>() {
         public void apply(final Entity it) {
@@ -170,8 +173,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("end");
       _builder.newLine();
-      EObject _model = this.getModel(_builder.toString());
-      final Model model = ((Model) _model);
+      final Model model = this._parseHelper.parse(_builder);
       DomainModel _domainModel = model.getDomainModel();
       EList<Entity> _entities = _domainModel.getEntities();
       final Entity head = IterableExtensions.<Entity>head(_entities);
@@ -212,8 +214,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("end");
       _builder.newLine();
-      EObject _model = this.getModel(_builder.toString());
-      final Model model = ((Model) _model);
+      final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
       final Procedure1<Entity> _function = new Procedure1<Entity>() {
         public void apply(final Entity it) {
@@ -254,8 +255,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("end");
       _builder.newLine();
-      EObject _model = this.getModel(_builder.toString());
-      final Model model = ((Model) _model);
+      final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
       final Procedure1<Entity> _function = new Procedure1<Entity>() {
         public void apply(final Entity it) {
@@ -296,8 +296,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("end");
       _builder.newLine();
-      EObject _model = this.getModel(_builder.toString());
-      final Model model = ((Model) _model);
+      final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
       final Procedure1<Entity> _function = new Procedure1<Entity>() {
         public void apply(final Entity it) {
@@ -329,8 +328,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder.append("entities");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("Foo \"Bar\"");
-      _builder.newLine();
+      _builder.append("Foo \"Bar\" //inline comment before deleted element");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("//comment on deleted element");
@@ -349,8 +347,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("end");
       _builder.newLine();
-      EObject _model = this.getModel(_builder.toString());
-      final Model model = ((Model) _model);
+      final Model model = this._parseHelper.parse(_builder);
       DomainModel _domainModel = model.getDomainModel();
       EList<Entity> _entities = _domainModel.getEntities();
       _entities.remove(1);
@@ -358,10 +355,8 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder_1.append("entities");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("Foo \"Bar\"");
+      _builder_1.append("Foo \"Bar\" //inline comment before deleted element");
       _builder_1.newLine();
-      _builder_1.newLine();
-      _builder_1.append("\t");
       _builder_1.newLine();
       _builder_1.append("end");
       this.assertSerializesTo(model, _builder_1);
@@ -391,8 +386,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("end");
       _builder.newLine();
-      EObject _model = this.getModel(_builder.toString());
-      final Model model = ((Model) _model);
+      final Model model = this._parseHelper.parse(_builder);
       DomainModel _domainModel = model.getDomainModel();
       EList<Entity> _entities = _domainModel.getEntities();
       _entities.remove(1);
@@ -434,8 +428,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("end");
       _builder.newLine();
-      EObject _model = this.getModel(_builder.toString());
-      final Model model = ((Model) _model);
+      final Model model = this._parseHelper.parse(_builder);
       DomainModel _domainModel = model.getDomainModel();
       EList<Entity> _entities = _domainModel.getEntities();
       _entities.remove(1);
@@ -472,8 +465,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("end");
       _builder.newLine();
-      EObject _model = this.getModel(_builder.toString());
-      final Model model = ((Model) _model);
+      final Model model = this._parseHelper.parse(_builder);
       DomainModel _domainModel = model.getDomainModel();
       EList<Entity> _entities = _domainModel.getEntities();
       _entities.remove(1);
@@ -504,8 +496,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("end");
       _builder.newLine();
-      EObject _model = this.getModel(_builder.toString());
-      final Model model = ((Model) _model);
+      final Model model = this._parseHelper.parse(_builder);
       DomainModel _domainModel = model.getDomainModel();
       EList<Entity> _entities = _domainModel.getEntities();
       _entities.remove(1);
@@ -536,8 +527,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
       _builder.newLine();
       _builder.append("end");
       _builder.newLine();
-      EObject _model = this.getModel(_builder.toString());
-      final Model model = ((Model) _model);
+      final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
       final Procedure1<Entity> _function = new Procedure1<Entity>() {
         public void apply(final Entity it) {
@@ -568,7 +558,7 @@ public class SerializationAfterModelChangeTest extends AbstractXtextTests {
   
   private void assertSerializesTo(final Model model, final CharSequence expectation) {
     String _string = expectation.toString();
-    String _serialize = this.serialize(model);
+    String _serialize = this._iSerializer.serialize(model);
     Assert.assertEquals(_string, _serialize);
   }
 }

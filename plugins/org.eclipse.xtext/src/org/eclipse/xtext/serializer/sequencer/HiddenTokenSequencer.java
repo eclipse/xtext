@@ -365,7 +365,8 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	}
 	
 	protected boolean isLeadingCommentFor(INode comment, INode node) {
-		if (!tokenUtil.isCommentNode(comment)) return false;
+		if (!tokenUtil.isCommentNode(comment)) 
+			return false;
 		if (comment.getText().endsWith("\n")) {
 			return node.getStartLine() == comment.getEndLine();
 		} else {
@@ -374,7 +375,10 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	}
 	
 	protected boolean isTrailingCommentFor(INode comment, INode node) {
-		if (!tokenUtil.isCommentNode(comment)) return false;
+		if (!tokenUtil.isCommentNode(comment)) 
+			return false;
+		if (node.getText().endsWith("\n")) 
+			return false;;
 		return comment.getStartLine() == node.getEndLine();
 	}
 
