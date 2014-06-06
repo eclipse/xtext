@@ -99,12 +99,17 @@ public class XpectFileRunner implements Filterable, Sortable {
 
 	protected List<AbstractTestRunner> createChildren() {
 		List<AbstractTestRunner> children = Lists.newArrayList();
-		XpectJavaModel xjm = xpectFile.getTest().getTestClassOrSuite();
-		for (XjmMethod method : xjm.getMethods().values())
-			if (method instanceof XjmTestMethod)
-				children.add(createTestRunner(method));
-		for (XpectInvocation inv : xpectFile.getInvocations())
-			children.add(createTestRunner(inv));
+		if (xpectFile != null) {
+			XpectTest test = xpectFile.getTest();
+			if (test != null && !test.eIsProxy()) {
+				XpectJavaModel xjm = test.getTestClassOrSuite();
+				for (XjmMethod method : xjm.getMethods().values())
+					if (method instanceof XjmTestMethod)
+						children.add(createTestRunner(method));
+			}
+			for (XpectInvocation inv : xpectFile.getInvocations())
+				children.add(createTestRunner(inv));
+		}
 		return children;
 	}
 
@@ -303,7 +308,7 @@ public class XpectFileRunner implements Filterable, Sortable {
 		} else if (!allTests.contains(test.getTestClassOrSuite().getTestOrSuite().getJavaClass().getName())) {
 			IReplacement fix = getClassOrSuiteFix(test, allTests);
 			Text doc = new Text(res.getParseResult().getRootNode().getText());
-			String msg = "Java Test class from " + res.getURI() + " is not among the executed test classes.";
+			String msg = "Java Test class from " + res.getURI() + " is not among the executed test classes. All Tests:" + allTests;
 			throw new ComparisonFailure(msg, doc.toString(), doc.with(fix));
 		}
 	}
