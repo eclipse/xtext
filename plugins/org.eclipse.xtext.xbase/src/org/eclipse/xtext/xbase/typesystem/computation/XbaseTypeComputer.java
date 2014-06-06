@@ -582,23 +582,27 @@ public class XbaseTypeComputer implements ITypeComputer {
 			LightweightTypeReference variableType = null;
 			if (lightweightTypeReference != null) {
 				variableType = lightweightTypeReference;
-				ExtendedEarlyExitComputer earlyExitComputer = state.getReferenceOwner().getServices().getEarlyExitComputer();
-				if (earlyExitComputer.isDefiniteEarlyExit(computedType.getExpression())) {
-					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
-							Severity.ERROR,
-							IssueCodes.UNREACHABLE_CODE, 
-							"Dead code: The variable " + object.getSimpleName() + " will never be assigned.",
-							object,
-							XbasePackage.Literals.XVARIABLE_DECLARATION__NAME,
-							-1,
-							null);
-					state.addDiagnostic(diagnostic);
-				}
 			} else {
 				variableType = computedType.getActualExpressionType();
 			}
-			if (variableType != null && variableType.isPrimitiveVoid()) {
-				variableType = new UnknownTypeReference(variableType.getOwner());
+			if (variableType != null) {
+				if (variableType.isPrimitiveVoid()) {
+					variableType = new UnknownTypeReference(variableType.getOwner());
+				}
+				if (object.getRight() != null) {
+					ExtendedEarlyExitComputer earlyExitComputer = state.getReferenceOwner().getServices().getEarlyExitComputer();
+					if (earlyExitComputer.isDefiniteEarlyExit(computedType.getExpression())) {
+						AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
+								Severity.ERROR,
+								IssueCodes.UNREACHABLE_CODE, 
+								"Dead code: The variable " + object.getSimpleName() + " will never be assigned.",
+								object,
+								XbasePackage.Literals.XVARIABLE_DECLARATION__NAME,
+								-1,
+								null);
+						state.addDiagnostic(diagnostic);
+					}
+				}
 			}
 			state.assignType(object, variableType, false);
 		}
