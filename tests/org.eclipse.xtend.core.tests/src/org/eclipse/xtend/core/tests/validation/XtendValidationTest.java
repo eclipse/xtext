@@ -2124,14 +2124,14 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "}");
 		helper.assertError(file.getXtendTypes().get(0), XCONSTRUCTOR_CALL, OVERRIDDEN_FINAL);
 	}
-
+	
 	@Test 
 	public void testVoidInFunctionParams() throws Exception {
 		XtendFile file = file(
 				"class Foo {"
 						+ " public (String, void) => void  x"
 						+ "}");
-		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_TYPE);
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE);
 	}
 	
 	@Test 
@@ -2149,7 +2149,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"class Foo {"
 						+ " def void foo((String, void) => void myParam) {}"
 						+ "}");
-		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_TYPE);
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE);
 	}
 	
 	@Test 
@@ -2160,7 +2160,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 						+ "}");
 		helper.assertNoErrors(file, INVALID_TYPE);
 	}
-	
+
 	@Test 
 	public void testTypeParameterAccessedFromStaticMember_0() throws Exception {
 		XtendFile file = file(
