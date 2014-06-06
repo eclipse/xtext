@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Lists.*;
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.util.List;
 
@@ -22,12 +23,14 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.inject.Inject;
@@ -167,6 +170,17 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 	public void checkJvmFormalParameterNotPrimitiveVoid(JvmFormalParameter param) {
 		if (typeReferences.is(param.getParameterType(), Void.TYPE)) {
 			error("The primitive 'void' cannot be the type of a parameter", param.getParameterType(), null, IssueCodes.INVALID_USE_OF_TYPE);
+		}
+	}
+	
+	@Check
+	public void checkFunctionTypeArgsNonVoid(XFunctionTypeRef typeRef) {
+		for (JvmTypeReference paramType : typeRef.getParamTypes()) {
+			JvmType type = paramType.getType();
+			if (type instanceof JvmVoid && !type.eIsProxy()) {
+				error("The primitive 'void' cannot be the type of a function parameter. ", 
+						paramType, null, -1, INVALID_USE_OF_TYPE);
+			}
 		}
 	}
 	

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.validation;
 
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
+
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
@@ -22,6 +24,18 @@ import com.google.inject.Inject;
 public class JvmTypeReferencesValidatorTest extends AbstractXbaseTestCase {
 	@Inject
 	protected ValidationTestHelper helper;
+	
+	@Test 
+	public void testVoidInFunctionParams() throws Exception {
+		XExpression expression = expression("null as (String, void) => void");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE);
+	}
+	
+	@Test 
+	public void testVoidInFunctionParams_1() throws Exception {
+		XExpression expression = expression("null as (String) => void");
+		helper.assertNoErrors(expression);
+	}
 	
 	@Test public void testNoPrimitivesInTypeArgs() throws Exception {
 		XExpression expression = expression("null as java.util.List<boolean>");
