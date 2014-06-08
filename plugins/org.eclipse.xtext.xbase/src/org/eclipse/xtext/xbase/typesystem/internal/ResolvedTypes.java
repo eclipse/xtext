@@ -502,7 +502,18 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			LightweightTypeReference actualType = getActualType(identifiable);
 			if (actualType != null) {
 				if (actualType.getKind() == LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE && !((UnboundTypeReference) actualType).internalIsResolved()) {
-					((UnboundTypeReference) actualType).acceptHint(reference, BoundTypeArgumentSource.EXPECTATION, identifiable, VarianceInfo.OUT, VarianceInfo.OUT);
+					UnboundTypeReference casted = (UnboundTypeReference) actualType;
+					List<LightweightBoundTypeArgument> hints = getHints(casted.getHandle());
+					boolean canAddHint = true;
+					for(int i = 0; i < hints.size() && canAddHint; i++) {
+						LightweightBoundTypeArgument hint = hints.get(i);
+						if (hint.getTypeReference() == null || (hint.getSource() != BoundTypeArgumentSource.EXPECTATION && hint.getSource() != BoundTypeArgumentSource.INFERRED_CONSTRAINT)) {
+							canAddHint = false;
+						}
+					}
+					if (canAddHint) {
+						casted.acceptHint(reference, BoundTypeArgumentSource.EXPECTATION, identifiable, VarianceInfo.OUT, VarianceInfo.OUT);
+					}
 					ensureReassignedTypesMapExists().put(identifiable, reference);
 				} else if (!reference.isAssignableFrom(actualType)) {
 					if (actualType.isAssignableFrom(reference)) {
