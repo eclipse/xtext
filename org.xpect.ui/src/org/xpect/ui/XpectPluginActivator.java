@@ -16,11 +16,9 @@ import org.xpect.ui.internal.XpectActivator;
 import org.xpect.ui.registry.UIExtensionInfoRegistry;
 import org.xpect.ui.registry.UILanugageRegistry;
 import org.xpect.ui.util.UIBundleInfoRegistry;
-import org.xpect.ui.util.UIFileForClassProvider;
 import org.xpect.ui.util.UIJavaReflectAccess;
 import org.xpect.ui.util.UIXtInjectorProvider;
 import org.xpect.util.IBundleInfo;
-import org.xpect.util.IFileForClassProvider;
 import org.xpect.util.IJavaReflectAccess;
 import org.xpect.util.IXtInjectorProvider;
 
@@ -38,7 +36,6 @@ public class XpectPluginActivator extends XpectActivator {
 
 		((DelegatingExtensionInfoRegistry) IExtensionInfo.Registry.INSTANCE).setDelegate(new UIExtensionInfoRegistry());
 		((DelegatingLanguageRegistry) ILanguageInfo.Registry.INSTANCE).setDelegate(new UILanugageRegistry());
-		((IFileForClassProvider.Delegate) IFileForClassProvider.INSTANCE).setDelegate(new UIFileForClassProvider());
 		((IXtInjectorProvider.Delegate) IXtInjectorProvider.INSTANCE).setDelegate(new UIXtInjectorProvider());
 		((IJavaReflectAccess.Delegate) IJavaReflectAccess.INSTANCE).setDelegate(new UIJavaReflectAccess());
 		((IBundleInfo.Delegate) IBundleInfo.Registry.INSTANCE).setDelegate(new UIBundleInfoRegistry());
