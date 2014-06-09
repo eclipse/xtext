@@ -37,12 +37,12 @@
 					<target>
 						<artifact>
 							<groupId>org.xpect</groupId>
-							<artifactId>org.xpect.target</artifactId>
+							<artifactId>org.xpect.target.eclipse_3_8_2-xtext_2_4_0</artifactId>
 							<version>0.1.0-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<environments>
-						<environment>
+					<!-- 	<environment>
 							<os>linux</os>
 							<ws>gtk</ws>
 							<arch>x86</arch>
@@ -66,7 +66,7 @@
 							<os>win32</os>
 							<ws>win32</ws>
 							<arch>x86_64</arch>
-						</environment>
+						</environment> -->
 						<environment>
 							<os>macosx</os>
 							<ws>cocoa</ws>

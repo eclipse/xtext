@@ -4,7 +4,7 @@
 	<groupId>org.eclipse.xtext.example.domainmodel</groupId>
 	<artifactId>org.eclipse.xtext.example.domainmodel.xpect.tests</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
-	<packaging>eclipse-test-plugin</packaging>
+	<packaging>eclipse-plugin</packaging>
 
 	<properties>
 		<os-jvm-flags />
@@ -49,7 +49,7 @@
 					<target>
 						<artifact>
 							<groupId>org.xpect</groupId>
-							<artifactId>org.xpect.target</artifactId>
+							<artifactId>org.xpect.target.eclipse_3_8_2-xtext_2_4_0</artifactId>
 							<version>0.1.0-SNAPSHOT</version>
 						</artifact>
 					</target>
@@ -130,7 +130,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-
+<!-- 
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
@@ -141,9 +141,7 @@
 					<useUIThread>false</useUIThread>
 					<argLine>${memory-settings} ${os-jvm-flags}</argLine>
 				</configuration>
-				<!-- <executions> <execution> <phase>integration-test</phase> <goals> 
-					<goal>test</goal> </goals> </execution> </executions> -->
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 </project>

@@ -6,16 +6,91 @@
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<parent>
-		<groupId>org.xpect</groupId>
-		<artifactId>org.xpect.parent</artifactId>
-		<version>0.1.0-SNAPSHOT</version>
-		<relativePath>../maven-plugin-parent</relativePath>
-	</parent>
+	<properties>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<os-jvm-flags />
+		<memory-settings>-Xmx1G</memory-settings>
+		<target-platform-artifactId>org.xpect.target.eclipse_3_8_2-xtext_2_4_0</target-platform-artifactId>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>macosx-jvm-flags</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
+			<properties>
+				<os-jvm-flags>-XstartOnFirstThread</os-jvm-flags>
+			</properties>
+		</profile>
+	</profiles>
 
 	<build>
+		<!-- make sure surefire finds our test classes even though they are in 
+			the "src" folder -->
 		<testOutputDirectory>target/classes</testOutputDirectory>
+
 		<plugins>
+
+			<!-- use tycho -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>0.19.0</version>
+				<extensions>true</extensions>
+			</plugin>
+
+			<!-- configure a target platform to make sure all dependencies are available -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>0.19.0</version>
+				<configuration>
+					<target>
+						<artifact>
+							<groupId>org.xpect</groupId>
+							<artifactId>${target-platform-artifactId}</artifactId>
+							<version>0.1.0-SNAPSHOT</version>
+						</artifact>
+					</target>
+					<environments>
+					<!-- 	<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>  -->
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+
+			<!-- Compile Xtend-Classes -->
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
@@ -31,12 +106,20 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Use maven surefire (not tycho surefire!) to run tests as plain JUnit 
+				tests (not Plug-In JUnit tests!) -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.16</version>
+				<configuration>
+					<!-- <debugForkedProcess>true</debugForkedProcess> -->
+					<reportsDirectory>${project.build.directory}/surfire-reports-standalone</reportsDirectory>
+				</configuration>
 				<executions>
 					<execution>
+						<phase>test</phase>
 						<goals>
 							<goal>test</goal>
 						</goals>
@@ -49,6 +132,21 @@
 						<version>2.16</version>
 					</dependency>
 				</dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>0.19.0</version>
+				<configuration>
+					<reportsDirectory>${project.build.directory}/surfire-reports-plugin</reportsDirectory>
+					<useUIHarness>true</useUIHarness>
+					<useUIThread>true</useUIThread>
+					<argLine>${memory-settings} ${os-jvm-flags}</argLine>
+					<!-- <debugPort>5005</debugPort> -->
+				</configuration>
+				<!-- <executions> <execution> <phase>integration-test</phase> <goals> 
+					<goal>test</goal> </goals> </execution> </executions> -->
 			</plugin>
 		</plugins>
 	</build>

@@ -4,11 +4,10 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.xpect</groupId>
-	<artifactId>org.xpect.targets</artifactId>
+	<artifactId>org.xpect.integration-tests</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>eclipse_3_8_2-xtext_2_4_0</module>
-		<module>eclipse_4_4_0-xtext_2_6_0</module>
+		<module>org.xpect.integrationtest.eclipse_4_4_0.xtext_2_6_0</module>
 	</modules>
 </project>

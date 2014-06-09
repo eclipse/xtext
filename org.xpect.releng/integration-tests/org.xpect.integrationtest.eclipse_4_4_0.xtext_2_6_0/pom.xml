@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.xtext.example.domainmodel</groupId>
+	<artifactId>org.xpect.integrationtest.eclipse_4_4_0.xtext_2_6_0</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>eclipse-test-plugin</packaging>
+
+	<parent>
+		<groupId>org.xpect</groupId>
+		<artifactId>org.xpect.test.parent</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+		<relativePath>../../maven-test-parent</relativePath>
+	</parent>
+
+	<properties>
+		<target-platform-artifactId>org.xpect.target.eclipse_4_4_0-xtext_2_6_0</target-platform-artifactId>
+	</properties>
+
+</project>

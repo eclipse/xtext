@@ -8,14 +8,15 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
+		<module>org.xpect.releng/target-platforms</module>
 		<module>org.xpect</module>
 		<module>org.xpect.tests</module>
 		<module>org.xpect.ui</module>
 		<module>org.xpect.xtext.lib</module>
 		<module>org.xpect.xtext.lib.tests</module>
-		<module>org.xpect.releng/target-platforms</module>
 		<module>org.xpect.sdk</module>
-		<module>org.xpect.releng/p2-repository</module>
 		<module>org.eclipse.xtext.example.domainmodel.xpect.tests</module>
+		<module>org.xpect.releng/integration-tests</module>
+		<module>org.xpect.releng/p2-repository</module>
 	</modules>
 </project>
