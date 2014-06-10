@@ -25,7 +25,7 @@ public class AntlrToolFacade {
 		this.loader = loader;
 	}
 
-	private String downloadURL = "http://download.itemis.com/antlr-generator-3.2.0.jar";
+	private String downloadURL = "http://download.itemis.com/antlr-generator-3.2.0-patch.jar";
 	private boolean askBeforeDownload = true;
 
 	public void setAskBeforeDownload(boolean shouldAsk) {
@@ -35,8 +35,36 @@ public class AntlrToolFacade {
 	public void setDownloadFrom(String downloadURL) {
 		this.downloadURL = downloadURL;
 	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void setProxyHost(String proxyHost) {
+		System.getProperties().put("http.proxyHost", proxyHost);
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void setProxyPort(String proxyPort) {
+		System.getProperties().put("http.proxyPort", proxyPort);
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void setProxyUser(String proxyUser) {
+		System.getProperties().put("http.proxyUser", proxyUser);
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	public void setProxyPassword(String proxyPassword) {
+		System.getProperties().put("http.proxyPassword", proxyPassword);
+	}
 
-	private String downloadTo = "./.antlr-generator-3.2.0.jar";
+	private String downloadTo = "./.antlr-generator-3.2.0-patch.jar";
 
 	public void setDownloadTo(String path) {
 		this.downloadTo = path;
@@ -122,6 +150,7 @@ public class AntlrToolFacade {
 			System.err.println("\t\t'http://download.itemis.com/updates/'."); 
 			System.err.println();
 			System.err.println("(see http://www.eclipse.org/Xtext/download.html for details)");
+			System.err.println();
 			return false;
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
