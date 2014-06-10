@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.ui.editor;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.ITypeRoot;
@@ -169,8 +171,15 @@ public class XbaseEditor extends XtextEditor {
 					return new DocumentProviderStub() {
 						@Override
 						public IDocument getDocument(Object element) {
+							if (typeRoot == null) {
+								return XbaseEditor.super.getDocumentProvider().getDocument(element);
+							}
+							IResource javaResource = typeRoot.getResource();
+							if (!(javaResource instanceof IStorage)) {
+								return XbaseEditor.super.getDocumentProvider().getDocument(element);
+							}
 							try {
-								String string = Files.readStreamIntoString(getLocationInResource(getTraceStorage()).getContents());
+								String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
 								final Document document = new Document(string);
 								return document;
 							} catch(CoreException e) {
@@ -200,10 +209,11 @@ public class XbaseEditor extends XtextEditor {
 				try {
 					ITrace traceToSource = getTraceStorage();
 					if (traceToSource != null) {
-						if (expectLineSelection) {
+						IResource javaResource = typeRoot.getResource();
+						if (expectLineSelection && javaResource instanceof IStorage) {
 							if (isCompiledWithJSR45()) {
 								try {
-									String string = Files.readStreamIntoString(getLocationInResource(traceToSource).getContents());
+									String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
 									Document javaDocument = new Document(string);
 									int line = getLineInJavaDocument(javaDocument, selectionStart, selectionLength);
 									if (line != -1) {
