@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -54,6 +56,17 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			LightweightTypeReference actualType = getLightweightType(obj);
 			if (actualType.isPrimitiveVoid()) {
 				actualType = toBeConvertedTo;
+			}
+			if (isToBeCastedAnyType(actualType, obj, appendable)) {
+				if (!toBeConvertedTo.getJavaIdentifier().equals(actualType.getJavaIdentifier())) {
+					doCastConversion(toBeConvertedTo, appendable, new Later() {
+						public void exec(ITreeAppendable appendable) {
+							appendable = appendable.trace(obj, true);
+							internalToConvertedExpression(obj, appendable);
+						}
+					});
+					return;
+				}
 			}
 			if (!toBeConvertedTo.getUniqueIdentifier().equals(actualType.getUniqueIdentifier())) {
 				doConversion(toBeConvertedTo, actualType, appendable, obj, new Later() {
@@ -87,6 +100,30 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		}
 		final ITreeAppendable trace = appendable.trace(obj, true);
 		internalToConvertedExpression(obj, trace);
+	}
+
+	/**
+	 * On Java-level the any-type is represented as java.lang.Object as there is no subtype of everything (i.e. type for null).
+	 * So, when the values are used we need to manually cast them to whatever is expected.
+	 * 
+	 *  This method tells us whether such a cast is needed.
+	 */
+	private boolean isToBeCastedAnyType(LightweightTypeReference actualType, XExpression obj, ITreeAppendable appendable) {
+		if (actualType instanceof AnyTypeReference) {
+			if (getReferenceName(obj, appendable) != null)
+				return true;
+			else if (obj instanceof XBlockExpression) {
+				XBlockExpression blockExpression = (XBlockExpression) obj;
+				EList<XExpression> expressions = blockExpression.getExpressions();
+				if (expressions.isEmpty())
+					return false;
+				if (expressions.size() > 1)
+					return true;
+				XExpression last = expressions.get(0);
+				return isToBeCastedAnyType(actualType, last, appendable);
+			}
+		}
+		return false;
 	}
 
 	private boolean mustInsertTypeCast(XExpression expression, LightweightTypeReference actualType) {

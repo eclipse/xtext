@@ -314,7 +314,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    } else {
 			      final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
 			        public Boolean apply(final String s) {
-			          return true;
+			          return Boolean.valueOf(true);
 			        }
 			      };
 			      return _function;
@@ -986,12 +986,12 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public <T extends Object> T build() {
-			    T _xblockexpression = null;
+			    Object _xblockexpression = null;
 			    {
 			      InputOutput.println();
 			      _xblockexpression = null;
 			    }
-			    return _xblockexpression;
+			    return ((T)_xblockexpression);
 			  }
 			}
 		''')
@@ -1012,12 +1012,12 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C<T extends Object> {
 			  public T build() {
-			    T _xblockexpression = null;
+			    Object _xblockexpression = null;
 			    {
 			      InputOutput.println();
 			      _xblockexpression = null;
 			    }
-			    return _xblockexpression;
+			    return ((T)_xblockexpression);
 			  }
 			}
 		''')
@@ -2589,7 +2589,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class Foo {
 			  protected String testSwitch(final Object e) {
-			    String _switchResult = null;
+			    Object _switchResult = null;
 			    boolean _matched = false;
 			    if (!_matched) {
 			      if (e instanceof String) {
@@ -2600,7 +2600,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    if (!_matched) {
 			      _switchResult = null;
 			    }
-			    return _switchResult;
+			    return ((String)_switchResult);
 			  }
 			}
 		''')
