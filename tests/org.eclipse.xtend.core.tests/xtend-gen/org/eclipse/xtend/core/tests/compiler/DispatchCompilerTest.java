@@ -473,7 +473,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("protected Number _minus(final Integer e) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return (-(e).intValue());");
+    _builder_1.append("return Integer.valueOf((-(e).intValue()));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -484,7 +484,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("protected Number _minus(final Double e) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return DoubleExtensions.operator_minus(e);");
+    _builder_1.append("return Double.valueOf(DoubleExtensions.operator_minus(e));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -607,7 +607,7 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("protected Number _minus(final Double e) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return DoubleExtensions.operator_minus(e);");
+    _builder_1.append("return Double.valueOf(DoubleExtensions.operator_minus(e));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

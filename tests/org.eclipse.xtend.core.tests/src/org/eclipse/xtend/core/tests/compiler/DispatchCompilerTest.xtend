@@ -212,11 +212,11 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  protected Number _minus(final Integer e) {
-			    return (-(e).intValue());
+			    return Integer.valueOf((-(e).intValue()));
 			  }
 			  
 			  protected Number _minus(final Double e) {
-			    return DoubleExtensions.operator_minus(e);
+			    return Double.valueOf(DoubleExtensions.operator_minus(e));
 			  }
 			  
 			  public Number minus(final Object e) {
@@ -266,7 +266,7 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  protected Number _minus(final Double e) {
-			    return DoubleExtensions.operator_minus(e);
+			    return Double.valueOf(DoubleExtensions.operator_minus(e));
 			  }
 			  
 			  public Number minus(final Object e) {
