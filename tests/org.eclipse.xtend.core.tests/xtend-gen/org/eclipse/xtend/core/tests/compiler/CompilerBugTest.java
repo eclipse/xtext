@@ -710,7 +710,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public Boolean apply(final String s) {");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("return true;");
+    _builder_1.append("return Boolean.valueOf(true);");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("}");
@@ -2204,7 +2204,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public <T extends Object> T build() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("T _xblockexpression = null;");
+    _builder_1.append("Object _xblockexpression = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("{");
@@ -2219,7 +2219,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return _xblockexpression;");
+    _builder_1.append("return ((T)_xblockexpression);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -2260,7 +2260,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public T build() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("T _xblockexpression = null;");
+    _builder_1.append("Object _xblockexpression = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("{");
@@ -2275,7 +2275,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return _xblockexpression;");
+    _builder_1.append("return ((T)_xblockexpression);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -5889,7 +5889,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("protected String testSwitch(final Object e) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("String _switchResult = null;");
+    _builder_1.append("Object _switchResult = null;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("boolean _matched = false;");
@@ -5922,7 +5922,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("return _switchResult;");
+    _builder_1.append("return ((String)_switchResult);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

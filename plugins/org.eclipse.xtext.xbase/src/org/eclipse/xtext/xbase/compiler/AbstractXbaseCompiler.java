@@ -293,7 +293,7 @@ public abstract class AbstractXbaseCompiler {
 				if (isPrimitiveVoid && !isPrimitiveVoidExpected) {
 					appendDefaultLiteral(appendable, expectedReturnType);
 				} else {
-					internalToJavaExpression(obj, appendable);
+					internalToConvertedExpression(obj, appendable, expectedReturnType);
 				}
 				appendable.append(";");
 		}
@@ -627,7 +627,7 @@ public abstract class AbstractXbaseCompiler {
 	protected LightweightTypeReference getTypeForVariableDeclaration(XExpression expr) {
 		IResolvedTypes resolvedTypes = getResolvedTypes(expr);
 		LightweightTypeReference actualType = resolvedTypes.getActualType(expr);
-		if (actualType.isAny() || actualType.isPrimitiveVoid()) {
+		if (actualType.isPrimitiveVoid()) {
 			LightweightTypeReference expectedType = resolvedTypes.getExpectedType(expr);
 			if (expectedType == null) {
 				expectedType = resolvedTypes.getExpectedReturnType(expr);
