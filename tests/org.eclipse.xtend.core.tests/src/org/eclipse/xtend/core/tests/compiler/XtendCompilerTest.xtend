@@ -525,16 +525,16 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public String m() {
-			    String _xblockexpression = null;
+			    Object _xblockexpression = null;
 			    {
-			      String _xifexpression = null;
+			      Object _xifexpression = null;
 			      if (false) {
 			        return "";
 			      }
-			      final String x = _xifexpression;
+			      final Object x = _xifexpression;
 			      _xblockexpression = x;
 			    }
-			    return _xblockexpression;
+			    return ((String)_xblockexpression);
 			  }
 			}
 		''')
@@ -602,9 +602,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public String m(final Object x) {
-			    String _xblockexpression = null;
+			    Object _xblockexpression = null;
 			    {
-			      String _switchResult = null;
+			      Object _switchResult = null;
 			      boolean _matched = false;
 			      if (!_matched) {
 			        if (x instanceof String) {
@@ -612,10 +612,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			          return "";
 			        }
 			      }
-			      final String r = _switchResult;
+			      final Object r = _switchResult;
 			      _xblockexpression = r;
 			    }
-			    return _xblockexpression;
+			    return ((String)_xblockexpression);
 			  }
 			}
 		''')
@@ -1559,7 +1559,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		      boolean _or = false;
 		      final Function0<Boolean> _function = new Function0<Boolean>() {
 		        public Boolean apply() {
-		          return (1 == x);
+		          return Boolean.valueOf((1 == x));
 		        }
 		      };
 		      Boolean _apply = _function.apply();
@@ -1830,7 +1830,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		    boolean _switchResult = false;
 		    final Function0<Integer> _function = new Function0<Integer>() {
 		      public Integer apply() {
-		        return 1;
+		        return Integer.valueOf(1);
 		      }
 		    };
 		    Integer _apply = _function.apply();
@@ -1872,7 +1872,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		    if (!_matched) {
 		      final Function0<Integer> _function = new Function0<Integer>() {
 		        public Integer apply() {
-		          return 1;
+		          return Integer.valueOf(1);
 		        }
 		      };
 		      Integer _apply = _function.apply();
@@ -2277,6 +2277,91 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testTryCatch_01() { 
+		assertCompilesTo('''
+			package foo
+			class Bar {
+				def doStuff() {
+					try {
+						'foo'
+					} catch (java.io.IOException e) {
+						println("sideeffect")
+						null
+					}
+				}
+			}
+		''', '''
+			package foo;
+			
+			import java.io.IOException;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class Bar {
+			  public String doStuff() {
+			    String _xtrycatchfinallyexpression = null;
+			    try {
+			      _xtrycatchfinallyexpression = "foo";
+			    } catch (final Throwable _t) {
+			      if (_t instanceof IOException) {
+			        final IOException e = (IOException)_t;
+			        Object _xblockexpression = null;
+			        {
+			          InputOutput.<String>println("sideeffect");
+			          _xblockexpression = null;
+			        }
+			        _xtrycatchfinallyexpression = ((String)_xblockexpression);
+			      } else {
+			        throw Exceptions.sneakyThrow(_t);
+			      }
+			    }
+			    return _xtrycatchfinallyexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testTryCatch_02() { 
+		assertCompilesTo('''
+			package foo
+			class Bar {
+				def doStuff() {
+					try {
+						'foo'
+					} catch (java.io.IOException e) {
+						null
+					}
+				}
+			}
+		''', '''
+			package foo;
+			
+			import java.io.IOException;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class Bar {
+			  public String doStuff() {
+			    String _xtrycatchfinallyexpression = null;
+			    try {
+			      _xtrycatchfinallyexpression = "foo";
+			    } catch (final Throwable _t) {
+			      if (_t instanceof IOException) {
+			        final IOException e = (IOException)_t;
+			        _xtrycatchfinallyexpression = null;
+			      } else {
+			        throw Exceptions.sneakyThrow(_t);
+			      }
+			    }
+			    return _xtrycatchfinallyexpression;
 			  }
 			}
 		''')
@@ -5053,8 +5138,114 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			}
 		''')
+	}
+	 
+	 
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=405142
+	 */
+	@Test def void testBug405142() {
+		'''
+			class Foo {
+				def test() {
+					var a = null
+					Integer::valueOf(a)
+					println(a)
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public Object test() {
+			    Object _xblockexpression = null;
+			    {
+			      Object a = null;
+			      Integer.valueOf(((String)a));
+			      _xblockexpression = InputOutput.<Object>println(a);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	 
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=437027
+	 */
+	@Test def void testBug437027() {
+		'''
+			class Foo {
+				def m() {
+			      val x = 
+			            if(false) {
+			               return ''
+			            }
+			      intExpectation(x)
+			      return x
+			   }
+			   def void intExpectation(Integer s) {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public String m() {
+			    Object _xifexpression = null;
+			    if (false) {
+			      return "";
+			    }
+			    final Object x = _xifexpression;
+			    this.intExpectation(((Integer)x));
+			    return ((String)x);
+			  }
+			  
+			  public void intExpectation(final Integer s) {
+			  }
+			}
+		''')
 	} 
-
+	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=437027
+	 */
+	@Test def void testBug437027_2() {
+		'''
+			class Foo {
+			   def m() {
+			      val x = 
+			         identity(
+			            if(false) {
+			               return ''
+			            }
+			         )
+			      return x
+			   }
+			   
+			   def <T> T identity(T t) {
+			      return t
+			   }
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public Object m() {
+			    Object _xifexpression = null;
+			    if (false) {
+			      return "";
+			    }
+			    final Object x = this.<Object>identity(_xifexpression);
+			    return x;
+			  }
+			  
+			  public <T extends Object> T identity(final T t) {
+			    return t;
+			  }
+			}
+		''')
+	} 
+	
+	
 }
 
 //class XtendCompilerTest extends AbstractXtendCompilerTest {

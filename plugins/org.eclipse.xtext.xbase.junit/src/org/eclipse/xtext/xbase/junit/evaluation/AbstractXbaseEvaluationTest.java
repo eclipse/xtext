@@ -4068,6 +4068,12 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"  catch(Exception e) 'bar'");
 	}
 	
+	@Test public void testTryCatch_09() throws Exception {
+		assertEvaluatesTo("foo", 
+				"try { 'foo' }" +
+						"  catch(RuntimeException e) { e.printStackTrace() null }");
+	}
+	
 	@Test 
 	public void testListLiteral_0() throws Exception {
 		assertEvaluatesTo(newArrayList(), "#[]");
