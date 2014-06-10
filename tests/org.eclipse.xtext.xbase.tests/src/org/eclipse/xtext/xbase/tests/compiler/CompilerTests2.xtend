@@ -133,7 +133,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			    throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_t);
 			  }
 			}
-			return _xtrycatchfinallyexpression;
+			return Integer.valueOf(_xtrycatchfinallyexpression);
 		''')
 	}
 	
@@ -623,8 +623,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			    _switchResult = ((Number)x);
 			  }
 			}
-			return _switchResult;
+			return ((Number)_switchResult);
 		'''
+		//TODO there's an unnecessary cast here
 		)
 	}
 	
@@ -1109,11 +1110,11 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			final int i = 0;
 			for (new org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>() {
 			  public Integer apply() {
-			    return i;
+			    return Integer.valueOf(i);
 			  }
 			}.apply(), new org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>() {
 			  public Integer apply() {
-			    return i;
+			    return Integer.valueOf(i);
 			  }
 			}.apply(); (i < 10);) {
 			}

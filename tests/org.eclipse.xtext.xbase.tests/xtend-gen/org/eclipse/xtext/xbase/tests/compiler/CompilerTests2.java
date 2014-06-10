@@ -255,7 +255,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("return _xtrycatchfinallyexpression;");
+    _builder_1.append("return Integer.valueOf(_xtrycatchfinallyexpression);");
     _builder_1.newLine();
     this.compilesTo(_builder, _builder_1);
   }
@@ -1281,7 +1281,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("return _switchResult;");
+      _builder_1.append("return ((Number)_switchResult);");
       _builder_1.newLine();
       this.compilesTo(_builder, _builder_1);
     } catch (Throwable _e) {
@@ -2270,7 +2270,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("public Integer apply() {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("return i;");
+      _builder_1.append("return Integer.valueOf(i);");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -2281,7 +2281,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("public Integer apply() {");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("return i;");
+      _builder_1.append("return Integer.valueOf(i);");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
