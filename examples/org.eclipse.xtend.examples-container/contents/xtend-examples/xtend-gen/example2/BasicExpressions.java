@@ -128,7 +128,7 @@ public class BasicExpressions {
         counter = (counter + 1);
       }
     }
-    final Iterator<Integer> iterator = Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(1, 2, 3, 4, 5)).iterator();
+    final Iterator<Integer> iterator = Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(4), Integer.valueOf(5))).iterator();
     counter = 1;
     boolean _hasNext = iterator.hasNext();
     boolean _while = _hasNext;
