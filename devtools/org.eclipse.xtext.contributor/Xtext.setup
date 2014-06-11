@@ -76,6 +76,11 @@
     <sourceLocators rootFolder="${xtext.git.location}/releng/"/>
     <sourceLocators rootFolder="${xtext.git.location}/maven/"/>
     <sourceLocators rootFolder="${xtext.git.location}/examples/org.eclipse.xtend.examples-container/contents"/>
+    <sourceLocators rootFolder="${xtext.git.location}/examples/org.eclipse.xtext.xtext.ui.examples/contents">
+      <predicates xsi:type="predicates:NotPredicate">
+        <operand xsi:type="predicates:NamePredicate" pattern=".*gmf.*"/>
+      </predicates>
+    </sourceLocators>
   </setupTasks>
   <setupTasks xsi:type="setup:TargletTask" name="Eclipse TP" activeRepositoryList="galileo">
     <roots id="org.junit4" versionRange="[4.6.0,5.0.0)"/>
@@ -219,6 +224,7 @@
         <operands xsi:type="predicates:RepositoryPredicate" project="org.eclipse.emf.common"/>
         <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.12"/>
         <operands xsi:type="workingsets:ExclusionPredicate" excludedWorkingSets="//@setupTasks.16/@workingSets.0"/>
+        <operands xsi:type="predicates:NamePredicate" pattern="org\.eclipse\.emf.*"/>
       </predicates>
     </workingSets>
     <workingSets name="EMF Features">
