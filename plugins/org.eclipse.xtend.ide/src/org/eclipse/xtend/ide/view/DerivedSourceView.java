@@ -51,6 +51,7 @@ import org.eclipse.jface.text.source.OverviewRuler;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
@@ -116,6 +117,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 	private MarkerAnnotationPreferences markerAnnotationPreferences = EditorsPlugin.getDefault()
 			.getMarkerAnnotationPreferences();
 	private OpenEditorAction openEditorAction;
+	private LineNumberRulerColumn lineNumberRulerColumn;
 
 	IStorage getSelectedSource() {
 		return selectedSource;
@@ -160,7 +162,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 			}
 		}
 		annotationRulerColumn.addAnnotationType(Annotation.TYPE_UNKNOWN);
-		LineNumberRulerColumn lineNumberRulerColumn = createLineNumberRulerColumn();
+		lineNumberRulerColumn = new LineNumberRulerColumn();
 		CompositeRuler compositeRuler = new CompositeRuler();
 		compositeRuler.addDecorator(0, annotationRulerColumn);
 		compositeRuler.addDecorator(1, lineNumberRulerColumn);
@@ -179,36 +181,43 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 		return javaSourceViewer;
 	}
 
-	private LineNumberRulerColumn createLineNumberRulerColumn() {
-		LineNumberRulerColumn lineNumberRulerColumn = new LineNumberRulerColumn();
+	@Override
+	protected void inititalizeColors() {
 		IPreferenceStore store = preferenceStoreAccess.getPreferenceStore();
-		ISharedTextColors sharedColors=EditorsPlugin.getDefault().getSharedTextColors();
-		RGB fgRgb = getColorFromStore(store, AbstractDecoratedTextEditorPreferenceConstants.EDITOR_LINE_NUMBER_RULER_COLOR);
-		if (fgRgb == null)
-			lineNumberRulerColumn.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-		else 
-			lineNumberRulerColumn.setForeground(sharedColors.getColor(fgRgb));
+		getColorRegistry().addListener(this);
+		StyledText textWidget = getSourceViewer().getTextWidget();
+		textWidget.setForeground(
+				getColorFromStore(store, 
+						AbstractTextEditor.PREFERENCE_COLOR_FOREGROUND_SYSTEM_DEFAULT, 
+						SWT.COLOR_WIDGET_FOREGROUND, 
+						AbstractTextEditor.PREFERENCE_COLOR_FOREGROUND));
+		textWidget.setBackground(
+				getColorFromStore(store, 
+						AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT, 
+						SWT.COLOR_INFO_BACKGROUND, 
+						AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND));
 
-		// background color: same as editor, or system default
-		RGB rgb;
-		if (store.getBoolean(AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT))
-			rgb = null;
-		else
-			rgb = getColorFromStore(store, AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND);
-		lineNumberRulerColumn.setBackground(sharedColors.getColor(rgb));
+		lineNumberRulerColumn.setForeground(
+				getColorFromStore(store, 
+						AbstractDecoratedTextEditorPreferenceConstants.EDITOR_LINE_NUMBER_RULER_COLOR,
+						SWT.COLOR_WIDGET_FOREGROUND,
+						AbstractDecoratedTextEditorPreferenceConstants.EDITOR_LINE_NUMBER_RULER_COLOR));
+		lineNumberRulerColumn.setBackground(
+				getColorFromStore(store, 
+						AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT, 
+						SWT.COLOR_WIDGET_BACKGROUND, 
+						AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND));
 		lineNumberRulerColumn.setFont(getFont(getViewerFontName()));
-		return lineNumberRulerColumn;
 	}
 	
-	private RGB getColorFromStore(IPreferenceStore store, String key) {
-		RGB rgb = null;
-		if (store.contains(key)) {
-			if (store.isDefault(key))
-				rgb = PreferenceConverter.getDefaultColor(store, key);
-			else
-				rgb = PreferenceConverter.getColor(store, key);
+	private Color getColorFromStore(IPreferenceStore store, String isDefaultKey, int systemDefault, String key) {
+		String isDefault = store.getString(isDefaultKey);
+		if(Strings.isEmpty(isDefault) || Strings.equal("true", isDefault)) {
+			return getDisplay().getSystemColor(systemDefault);
+		} else {
+			RGB rgb = PreferenceConverter.getColor(store, key);
+			return EditorsPlugin.getDefault().getSharedTextColors().getColor(rgb);
 		}
-		return rgb;
 	}
 	
 	@Override
@@ -219,7 +228,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 
 	@Override
 	protected String getBackgroundColorKey() {
-		return getLanguageName() + "ui.DerivedSourceView.backgroundColor"; //$NON-NLS-1$
+		return getLanguageName() + ".ui.DerivedSourceView.backgroundColor"; //$NON-NLS-1$
 	}
 
 	@Override
