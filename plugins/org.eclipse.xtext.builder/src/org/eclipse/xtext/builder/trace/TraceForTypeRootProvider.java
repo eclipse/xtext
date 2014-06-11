@@ -64,8 +64,6 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	@Inject
 	private ITraceForStorageProvider traceForStorageProvider;
 
-	private Pair<ITypeRoot, ITrace> lruCache = null;
-
 	protected String getPathInFragmentRoot(final ITypeRoot derivedResource) {
 		return derivedResource.getParent().getElementName().replace('.', '/') + "/";
 	}
@@ -123,11 +121,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 
 	/* @Nullable */
 	public ITrace getTraceToSource(final ITypeRoot derivedJavaType) {
-		if (lruCache != null && lruCache.getFirst().equals(derivedJavaType))
-			return lruCache.getSecond();
-		ITrace trace = createTraceToSource(derivedJavaType);
-		lruCache = Tuples.<ITypeRoot, ITrace> create(derivedJavaType, trace);
-		return trace;
+		return createTraceToSource(derivedJavaType);
 	}
 
 	private ITrace createTraceToSource(final ITypeRoot derivedJavaType) {
