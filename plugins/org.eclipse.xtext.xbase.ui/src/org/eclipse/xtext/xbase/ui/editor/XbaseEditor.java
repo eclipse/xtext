@@ -241,7 +241,7 @@ public class XbaseEditor extends XtextEditor {
 									// do nothing
 								}
 							}
-						} else {
+						} else if (selectionStart >= 0 && selectionLength >= 0) {
 							ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
 							if (bestSelection != null) {
 								ILocationInResource bestReveal = bestSelection;
