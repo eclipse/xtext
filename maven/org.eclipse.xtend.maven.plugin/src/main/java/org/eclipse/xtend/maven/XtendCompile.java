@@ -76,6 +76,7 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 			throw new WrappedException(e);
 		}
 		addDependencies(classPath, project.getCompileArtifacts());
+		classPath.remove(project.getBuild().getOutputDirectory());
 		return newArrayList(filter(classPath, FILE_EXISTS));
 	}
 
