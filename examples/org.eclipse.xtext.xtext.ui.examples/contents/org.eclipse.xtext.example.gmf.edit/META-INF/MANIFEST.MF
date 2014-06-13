@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.example.gmf.edit;singleton:=true
-Bundle-Version: 2.6.1.qualifier
+Bundle-Version: 2.7.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipse.xtext.example.gmf.entities.provider.EntitiesEditPlugin$Implementation
 Bundle-Vendor: %providerName
@@ -10,7 +10,7 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.example.gmf.entities.provider
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.5.0",
- org.eclipse.xtext.example.gmf;bundle-version="2.6.1";visibility:=reexport,
+ org.eclipse.xtext.example.gmf;bundle-version="2.7.0";visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

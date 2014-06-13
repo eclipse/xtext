@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xbase Tutorial
 Bundle-SymbolicName: xbase.tutorial
-Bundle-Version: 2.6.1.qualifier
+Bundle-Version: 2.7.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.6.1"
+Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.7.0"
