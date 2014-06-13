@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.ui.navigation;
 
-import java.util.List;
+import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -29,9 +29,8 @@ import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
-import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -87,29 +86,23 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 							if (traceToSource == null) {
 								return null;
 							}
-							Iterable<ILocationInResource> sourceInformation = traceToSource.getAllAssociatedLocations(new TextRegion(selectedWord.getOffset(), selectedWord.getLength()));
-							List<ILocationInResource> sourceInformationAsList = Lists.newArrayList(sourceInformation);
-							if (!canShowMultipleHyperlinks && sourceInformationAsList.size() > 1)
-								return null;
-							List<LinkToOrigin> result = Lists.newArrayListWithCapacity(sourceInformationAsList.size());
-							for(ILocationInResource source: sourceInformationAsList) {
+							ILocationInResource sourceInformation = IterableExtensions.head(traceToSource.getAllAssociatedLocations());
+							if(sourceInformation != null) {
 								try {
-									URI resourceURI = source.getAbsoluteResourceURI();
+									URI resourceURI = sourceInformation.getAbsoluteResourceURI();
 									if (resourceURI != null) {
 										IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceURI);
 										if (serviceProvider == null)
 											return null;
 										LinkToOriginProvider provider = serviceProvider.get(LinkToOriginProvider.class);
-										LinkToOrigin hyperlink = provider.createLinkToOrigin(source, selectedWord, selectedMember, compilationUnit, result);
+										LinkToOrigin hyperlink = provider.createLinkToOrigin(sourceInformation, selectedWord, selectedMember, compilationUnit, Collections.<LinkToOrigin>emptyList());
 										if (hyperlink != null) {
-											result.add(hyperlink);
+											return new IHyperlink[]{hyperlink};
 										}
 									}
 								} catch(IllegalArgumentException e) { /* invalid URI - ignore */ }
 							}
-							if (result.isEmpty())
-								return null;
-							return result.toArray(new IHyperlink[result.size()]);
+							return null;
 						}
 					}
 				}
