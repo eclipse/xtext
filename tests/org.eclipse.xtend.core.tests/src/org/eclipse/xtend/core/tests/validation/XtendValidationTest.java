@@ -440,7 +440,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz("class X { @testdata.Annotation2('foo')  String foo }");
 		helper.assertNoErrors(clazz);
 	}
-	
+
 	@Test public void testAnnotationTarget_02() throws Exception {
 		XtendClass clazz = clazz("class X { @testdata.Annotation2('foo') def String foo() }");
 		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET);
@@ -464,6 +464,26 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	@Test public void testAnnotationTarget_06() throws Exception {
 		XtendAnnotationType annotationType = annotationType("@testdata.Annotation2('foo') annotation X { }");
 		helper.assertError(annotationType, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET, "@Annotation2");
+	}
+	
+	@Test public void testAnnotationTarget_07() throws Exception {
+		XtendAnnotationType annotationType = annotationType("@testdata.Annotation4 annotation A {}");
+		helper.assertNoErrors(annotationType);
+	}
+	
+	@Test public void testAnnotationTarget_08() throws Exception {
+		XtendClass clazz = clazz("@testdata.Annotation4 class C {}");
+		helper.assertNoErrors(clazz);
+	}
+	
+	@Test public void testAnnotationTarget_09() throws Exception {
+		XtendAnnotationType annotationType = annotationType("@testdata.Annotation5 annotation A {}");
+		helper.assertNoErrors(annotationType);
+	}
+	
+	@Test public void testAnnotationTarget_10() throws Exception {
+		XtendClass clazz = clazz("@testdata.Annotation5 class C {}");
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET);
 	}
 	
 	@Test public void testShadowingVariableNames_00() throws Exception {

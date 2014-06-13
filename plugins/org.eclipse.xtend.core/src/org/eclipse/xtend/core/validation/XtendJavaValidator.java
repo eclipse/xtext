@@ -134,6 +134,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -208,14 +209,14 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	private ProxyAwareUIStrings proxyAwareUIStrings;
 	
 	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
-	protected final Map<Class<?>, ElementType> targetInfos;
+	protected final Multimap<Class<?>, ElementType> targetInfos;
 	
 	{
-		ImmutableMap.Builder<Class<?>, ElementType> result = ImmutableMap.builder();
+		ImmutableMultimap.Builder<Class<?>, ElementType> result = ImmutableMultimap.builder();
 		result.put(XtendClass.class, ElementType.TYPE);
 		result.put(XtendInterface.class, ElementType.TYPE);
 		result.put(XtendEnum.class, ElementType.TYPE);
-		result.put(XtendAnnotationType.class, ElementType.ANNOTATION_TYPE);
+		result.putAll(XtendAnnotationType.class, ElementType.ANNOTATION_TYPE, ElementType.TYPE);
 		result.put(XtendField.class, ElementType.FIELD);
 		result.put(XtendFunction.class, ElementType.METHOD);
 		result.put(XtendParameter.class, ElementType.PARAMETER);
@@ -350,9 +351,10 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (targets.isEmpty())
 			return;
 		final EObject eContainer = getContainingAnnotationTarget(annotation);
-		for (Entry<Class<?>, ElementType> mapping : targetInfos.entrySet()) {
+		for (Entry<Class<?>, Collection<ElementType>> mapping : targetInfos.asMap().entrySet()) {
 			if (mapping.getKey().isInstance(eContainer)) {
-				if (!targets.contains(mapping.getValue())) {
+				targets.retainAll(mapping.getValue());
+				if (targets.isEmpty()) {
 					error("The annotation @" + annotation.getAnnotationType().getSimpleName()
 							+ " is disallowed for this location.", annotation, null, INSIGNIFICANT_INDEX,
 							ANNOTATION_WRONG_TARGET);
