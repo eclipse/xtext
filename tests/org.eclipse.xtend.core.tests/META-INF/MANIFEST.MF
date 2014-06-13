@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtend Core Tests
 Bundle-SymbolicName: org.eclipse.xtend.core.tests
-Bundle-Version: 2.6.1.qualifier
+Bundle-Version: 2.7.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtend.core,
@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.xtend.core,
  org.hamcrest.core;bundle-version="1.1.0",
  org.eclipse.emf.codegen.ecore;bundle-version="2.9.0",
  org.eclipse.xtext.builder,
- org.eclipse.xtend.lib;bundle-version="2.6.1",
+ org.eclipse.xtend.lib;bundle-version="2.7.0",
  org.apache.ant;bundle-version="1.8.0",
  org.eclipse.pde.core;bundle-version="3.5.0"
 Import-Package: javax.inject;version="1.0.0",

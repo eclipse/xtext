@@ -13,5 +13,11 @@
                 <message_argument value="org.eclipse.xtend.core"/>
             </message_arguments>
         </filter>
+        <filter comment="reexport" id="927989779">
+            <message_arguments>
+                <message_argument value="2.7.0"/>
+                <message_argument value="org.eclipse.xtend.core"/>
+            </message_arguments>
+        </filter>
     </resource>
 </component>
