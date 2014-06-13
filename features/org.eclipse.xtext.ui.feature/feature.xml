@@ -19,7 +19,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
    <requires>
-      <import feature="org.eclipse.xtext.runtime" version="2.6.0" match="equivalent"/>
+      <import feature="org.eclipse.xtext.runtime" version="2.7.0" match="equivalent"/>
    </requires>
 
    <plugin
