@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.purexbase.tests
 Bundle-Vendor: Eclipse Modeling Project
-Bundle-Version: 2.6.1.qualifier
+Bundle-Version: 2.7.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.purexbase.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.purexbase,
@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.xtext.purexbase,
  org.eclipse.xtext,
  org.eclipse.xtext.junit4,
  org.eclipse.ui.workbench;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.xbase.junit;bundle-version="2.6.1",
+ org.eclipse.xtext.xbase.junit;bundle-version="2.7.0",
  org.eclipse.xtext.builder,
  org.eclipse.jdt.core;bundle-version="3.5.0"
 Import-Package: org.apache.commons.logging,
