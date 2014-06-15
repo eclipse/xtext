@@ -45,10 +45,10 @@ class TextDifferencerTest {
 		val left = #["a\n", "b\n", "c\n"]
 		val right = #["a\n", "d\n", "c\n"]
 		diff(left, right) === '''
-			 a
-			+d
-			-b
-			 c
+			  a
+			+ d
+			- b
+			  c
 		'''
 	}
 
@@ -56,9 +56,9 @@ class TextDifferencerTest {
 		val left = #["a\n", "b\n", "c\n"]
 		val right = #["a\n", "c\n"]
 		diff(left, right) === '''
-			 a
-			-b
-			 c
+			  a
+			- b
+			  c
 		'''
 	}
 
@@ -66,9 +66,9 @@ class TextDifferencerTest {
 		val left = #["a\n", "c\n"]
 		val right = #["a\n", "b\n", "c\n"]
 		diff(left, right) === '''
-			 a
-			+b
-			 c
+			  a
+			+ b
+			  c
 		'''
 	}
 

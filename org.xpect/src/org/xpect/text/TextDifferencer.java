@@ -2,6 +2,7 @@ package org.xpect.text;
 
 import java.util.List;
 
+import org.xpect.text.TextDifferencer.LineDiff;
 import org.xpect.util.DifferencerImpl;
 import org.xpect.util.IDifferencer.Match;
 import org.xpect.util.IDifferencer.MatchKind;
@@ -119,11 +120,11 @@ public class TextDifferencer implements ITextDifferencer {
 		public String toString() {
 			switch (kind) {
 			case EQUAL:
-				return " " + toString(getLeftSegments(), true, true);
+				return "  " + toString(getLeftSegments(), true, true);
 			case LEFT_ONLY:
-				return "-" + toString(getLeftSegments(), true, true);
+				return "- " + toString(getLeftSegments(), true, true);
 			case RIGHT_ONLY:
-				return "+" + toString(getRightSegments(), true, true);
+				return "+ " + toString(getRightSegments(), true, true);
 			case SIMILAR:
 				StringBuilder result = new StringBuilder("|");
 				List<ISegment> left = Lists.newArrayList();
@@ -363,33 +364,17 @@ public class TextDifferencer implements ITextDifferencer {
 		for (Match match : diff) {
 			Segment left = match.getLeft() != Match.NO_INDEX ? leftSegments.get(match.getLeft()) : null;
 			Segment right = match.getRight() != Match.NO_INDEX ? rightSegments.get(match.getRight()) : null;
-			if ((left != null && left.needsWrap()) || (right != null && right.needsWrap()))
-				flushCurrentLine(config, currentLine, result);
+			if ((left != null && left.needsWrap()) || (right != null && right.needsWrap())) {
+				result.add(new LineDiff(currentLine));
+				currentLine.clear();
+			}
 			currentLine.add(new SegmentDiff(match.getKind(), left, right, match.getSimilarity()));
 		}
-		if (!currentLine.isEmpty())
-			flushCurrentLine(config, currentLine, result);
+		if (!currentLine.isEmpty()) {
+			result.add(new LineDiff(currentLine));
+			currentLine.clear();
+		}
 		return new TextDiff(result);
-	}
-
-	protected <T> void flushCurrentLine(ITextDiffConfig<T> config, List<SegmentDiff> currentLine, List<LineDiff> result) {
-		// float similarity = config.similarity(currentLine);
-		// if (similarity < ISimilarityFunction.UPPER_SIMILARITY_BOUND) {
-		result.add(new LineDiff(currentLine));
-		// } else {
-		// List<SegmentDiff> leftLine = Lists.newArrayList(), rightLine = Lists.newArrayList();
-		// for (SegmentDiff d : currentLine) {
-		// Segment l = d.getLeft();
-		// if (l != null)
-		// leftLine.add(new SegmentDiff(MatchKind.LEFT_ONLY, l, null, ISimilarityFunction.UPPER_SIMILARITY_BOUND));
-		// Segment r = d.getRight();
-		// if (r != null)
-		// rightLine.add(new SegmentDiff(MatchKind.RIGHT_ONLY, null, r, ISimilarityFunction.UPPER_SIMILARITY_BOUND));
-		// }
-		// result.add(new LineDiff(leftLine));
-		// result.add(new LineDiff(rightLine));
-		// }
-		currentLine.clear();
 	}
 
 }
