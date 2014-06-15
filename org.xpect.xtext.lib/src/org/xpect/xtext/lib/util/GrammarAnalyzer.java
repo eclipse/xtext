@@ -69,7 +69,7 @@ public class GrammarAnalyzer {
 	}
 
 	public enum XtextLanguageKind {
-		GENRAL, JAVA, XBASE
+		GENERAL, JAVA, XBASE
 	}
 
 	private List<CommentRule> commentRules;
@@ -191,7 +191,7 @@ public class GrammarAnalyzer {
 			return XtextLanguageKind.XBASE;
 		if (java)
 			return XtextLanguageKind.JAVA;
-		return XtextLanguageKind.GENRAL;
+		return XtextLanguageKind.GENERAL;
 	}
 
 	protected AbstractElement resolve(AbstractElement ele) {
