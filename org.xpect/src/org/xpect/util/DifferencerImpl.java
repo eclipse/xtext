@@ -116,7 +116,7 @@ public class DifferencerImpl implements IDifferencer {
 		public int getRight() {
 			if (kind == LEFT_ONLY)
 				return IDifferencer.Match.NO_INDEX;
-			return left;
+			return right;
 		}
 
 		public float getSimilarity() {
@@ -236,7 +236,7 @@ public class DifferencerImpl implements IDifferencer {
 		}
 	}
 
-	public <T> List<IDifferencer.Match> diff(List<T> left, List<T> right, ISimilarityFunction<T> comparator) {
+	public <T> List<IDifferencer.Match> diff(List<T> left, List<T> right, ISimilarityFunction<? super T> similarityFunction) {
 		State<T> state = new State<T>(left, right);
 		DirectionState forward = new DirectionState(state, Direction.FORWARD);
 		DirectionState backward = new DirectionState(state, Direction.BACKWARD);
@@ -259,7 +259,7 @@ public class DifferencerImpl implements IDifferencer {
 				if (forwardRight < rightSize)
 					newMatches.add(new Match(current, RIGHT_ONLY, current.left, forwardRight, UPPER_SIMILARITY_BOUND));
 				if (forwardLeft < leftSize && forwardRight < rightSize) {
-					float similarity = Math.abs(comparator.similarity(left.get(forwardLeft), right.get(forwardRight)));
+					float similarity = Math.abs(similarityFunction.similarity(left.get(forwardLeft), right.get(forwardRight)));
 					if (similarity == ISimilarityFunction.EQUAL)
 						newMatches.add(new Match(current, EQUAL, forwardLeft, forwardRight, similarity));
 					else if (similarity < UPPER_SIMILARITY_BOUND)
@@ -274,7 +274,7 @@ public class DifferencerImpl implements IDifferencer {
 				if (backwardRight >= 0)
 					newMatches.add(new Match(current, RIGHT_ONLY, current.left, backwardRight, UPPER_SIMILARITY_BOUND));
 				if (backwardLeft >= 0 && backwardRight >= 0) {
-					float similarity = Math.abs(comparator.similarity(left.get(backwardLeft), right.get(backwardRight)));
+					float similarity = Math.abs(similarityFunction.similarity(left.get(backwardLeft), right.get(backwardRight)));
 					if (similarity == ISimilarityFunction.EQUAL)
 						newMatches.add(new Match(current, EQUAL, backwardLeft, backwardRight, similarity));
 					else if (similarity < UPPER_SIMILARITY_BOUND)
@@ -298,7 +298,7 @@ public class DifferencerImpl implements IDifferencer {
 					// System.out.println(format(left, right, newSolution.toList()));
 					if (solution == null || newSolution.isBetterThan(solution)) {
 						solution = newSolution;
-						if (state.unvisited.last().cost > old.cost)
+						if (!state.unvisited.isEmpty() && state.unvisited.last().cost > old.cost)
 							state.unvisited = new TreeSet<Match>(state.unvisited.headSet(old, true));
 					}
 				}

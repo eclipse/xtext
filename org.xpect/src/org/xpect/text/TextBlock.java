@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 public class TextBlock implements ITextBlock {
@@ -42,6 +43,11 @@ public class TextBlock implements ITextBlock {
 
 	public List<String> getLines() {
 		return Arrays.asList(lines);
+	}
+
+	@Override
+	public String toString() {
+		return Joiner.on('\n').join(lines);
 	}
 
 }

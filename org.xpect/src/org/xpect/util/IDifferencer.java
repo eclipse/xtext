@@ -32,6 +32,6 @@ public interface IDifferencer {
 		MatchKind getKind();
 	}
 
-	public <T> List<Match> diff(List<T> left, List<T> right, ISimilarityFunction<T> similarityfunction);
+	public <T> List<Match> diff(List<T> left, List<T> right, ISimilarityFunction<? super T> similarityfunction);
 
 }
