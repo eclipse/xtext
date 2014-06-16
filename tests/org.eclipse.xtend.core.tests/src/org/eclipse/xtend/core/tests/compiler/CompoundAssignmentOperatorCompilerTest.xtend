@@ -424,7 +424,7 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			  
 			  public int foo() {
 			    int _i = this.i;
-			    return i = (_i + 2);
+			    return this.i = (_i + 2);
 			  }
 			}
 		''')
@@ -451,10 +451,108 @@ class CompoundAssignmentOperatorCompilerTest extends AbstractXtendCompilerTest {
 			  public int foo() {
 			    int _i = this.i;
 			    int _i_1 = this.i;
-			    int _multiplyAssign = i = _i_1 *= 2;
-			    return i = _i += _multiplyAssign;
+			    int _multiplyAssign = this.i = _i_1 *= 2;
+			    return this.i = _i += _multiplyAssign;
 			  }
 			}
 		''')
 	}
+
+	@Test def void test_15() {
+		'''
+			class Foo {
+
+				int _a
+
+				static def withinStaticContext() {
+					val x = new Foo
+					val y = new Foo
+					x._a += y._a
+				}
+
+			}
+		'''.assertCompilesTo(
+		'''
+			@SuppressWarnings("all")
+			public class Foo {
+			  private int _a;
+			  
+			  public static int withinStaticContext() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      final Foo x = new Foo();
+			      final Foo y = new Foo();
+			      int __a = x._a;
+			      _xblockexpression = x._a = (__a + y._a);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+
+	@Test def void test_16() {
+		'''
+			class Foo {
+
+				int _a
+
+				def withinInstanceContext() {
+					val x = new Foo
+					val y = new Foo
+					x._a += y._a
+				}
+
+			}
+		'''.assertCompilesTo(
+		'''
+			@SuppressWarnings("all")
+			public class Foo {
+			  private int _a;
+			  
+			  public int withinInstanceContext() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      final Foo x = new Foo();
+			      final Foo y = new Foo();
+			      int __a = x._a;
+			      _xblockexpression = x._a = (__a + y._a);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+
+	@Test def void test_17() {
+		'''
+			class Foo {
+
+				int _a
+
+				def withinInstanceContext() {
+					val y = new Foo
+					_a += y._a
+				}
+
+			}
+		'''.assertCompilesTo(
+		'''
+			@SuppressWarnings("all")
+			public class Foo {
+			  private int _a;
+			  
+			  public int withinInstanceContext() {
+			    int _xblockexpression = (int) 0;
+			    {
+			      final Foo y = new Foo();
+			      int __a = this._a;
+			      _xblockexpression = this._a = (__a + y._a);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+
 }
