@@ -932,4 +932,20 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		}
 		'''.expression.assertNoErrors
 	}
+	
+	@Test def void testNullSafePrimitiveNumber(){
+		'''
+		{
+			val x = ""?.hashCode
+		}
+		'''.expression.assertWarning(XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, "hashCode", "0")
+	}
+	
+	@Test def void testNullSafePrimitiveBoolean(){
+		'''
+		{
+			val x = ""?.equals(null)
+		}
+		'''.expression.assertWarning(XbasePackage.Literals.XMEMBER_FEATURE_CALL, IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, "equals", "false")
+	}
 }

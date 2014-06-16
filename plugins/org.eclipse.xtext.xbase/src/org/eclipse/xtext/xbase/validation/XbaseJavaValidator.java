@@ -40,12 +40,15 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -185,6 +188,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private ReadAndWriteTracking readAndWriteTracking;
+	
+	@Inject
+	private Primitives primitives;
 	
 	protected CommonTypeComputationServices getServices() {
 		return services;
@@ -996,10 +1002,23 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			error("Cannot use null-safe feature call on primitive receiver", featureCall,
 					Literals.XMEMBER_FEATURE_CALL__NULL_SAFE, NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE);
 		}
-		if (featureCall.isNullSafe() && getActualType(featureCall).isPrimitive()) {
-			addIssue("Null-safe feature call of feature with primitive type", featureCall, 
-					NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
+		LightweightTypeReference type = getActualType(featureCall);
+		if (featureCall.isNullSafe() && type.isPrimitive()) {
+			addIssue("Null-safe call of primitive-valued feature " + featureCall.getConcreteSyntaxFeatureName() 
+					+ ", default value "+ getDefaultValue(type) +" will be used", 
+					featureCall, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
 		}
+	}
+	
+	String getDefaultValue(LightweightTypeReference type) {
+		if (type != null && type.isPrimitive()) {
+			Primitive primitiveKind = primitives.primitiveKind((JvmPrimitiveType) type.getType());
+			if (primitiveKind == Primitive.Boolean)
+				return "false";
+			else
+				return "0";
+		}
+		return "null";
 	}
 
 	@Check
