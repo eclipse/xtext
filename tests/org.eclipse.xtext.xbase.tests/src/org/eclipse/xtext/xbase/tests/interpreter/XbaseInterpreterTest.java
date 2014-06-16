@@ -132,4 +132,9 @@ public class XbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 		super.testArrays_02();
 	}
 	
+	@Override
+	@Ignore @Test public void testArrays_04() throws Exception {
+		super.testArrays_01();
+	}
+	
 }
