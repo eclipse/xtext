@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -33,7 +34,64 @@ import org.eclipse.xtext.xtype.XtypeFactory;
 @SuppressWarnings("all")
 public class CommonTypeComputationServices {
   @Inject
+  @Property
   private OperatorMapping _operatorMapping;
+  
+  @Inject
+  @Property
+  private XExpressionHelper _expressionHelper;
+  
+  @Inject
+  @Property
+  private TypeReferences _typeReferences;
+  
+  @Inject
+  @Property
+  private TypeConformanceComputer _typeConformanceComputer;
+  
+  @Inject
+  @Property
+  private IRawTypeHelper _rawTypeHelper;
+  
+  @Inject
+  @Property
+  private Primitives _primitives;
+  
+  @Inject
+  @Property
+  private FunctionTypes _functionTypes;
+  
+  @Inject
+  @Property
+  private ArrayTypes _arrayTypes;
+  
+  @Inject
+  @Property
+  private BoundTypeArgumentMerger _boundTypeArgumentMerger;
+  
+  @Inject
+  @Property
+  private SynonymTypesProvider _synonymTypesProvider;
+  
+  @Inject
+  @Property
+  private IJvmModelAssociations _jvmModelAssociations;
+  
+  @Inject
+  @Property
+  private ExtendedEarlyExitComputer _earlyExitComputer;
+  
+  @Inject
+  @Property
+  private HumanReadableTypeNames _humanReadableTypeNames;
+  
+  @Inject(optional = true)
+  @Property
+  private XtypeFactory _xtypeFactory = XtypeFactory.eINSTANCE;
+  
+  @Inject(optional = true)
+  @Property
+  private TypesFactory _typesFactory = TypesFactory.eINSTANCE;
   
   public OperatorMapping getOperatorMapping() {
     return this._operatorMapping;
@@ -43,9 +101,6 @@ public class CommonTypeComputationServices {
     this._operatorMapping = operatorMapping;
   }
   
-  @Inject
-  private XExpressionHelper _expressionHelper;
-  
   public XExpressionHelper getExpressionHelper() {
     return this._expressionHelper;
   }
@@ -53,9 +108,6 @@ public class CommonTypeComputationServices {
   public void setExpressionHelper(final XExpressionHelper expressionHelper) {
     this._expressionHelper = expressionHelper;
   }
-  
-  @Inject
-  private TypeReferences _typeReferences;
   
   public TypeReferences getTypeReferences() {
     return this._typeReferences;
@@ -65,9 +117,6 @@ public class CommonTypeComputationServices {
     this._typeReferences = typeReferences;
   }
   
-  @Inject
-  private TypeConformanceComputer _typeConformanceComputer;
-  
   public TypeConformanceComputer getTypeConformanceComputer() {
     return this._typeConformanceComputer;
   }
@@ -75,9 +124,6 @@ public class CommonTypeComputationServices {
   public void setTypeConformanceComputer(final TypeConformanceComputer typeConformanceComputer) {
     this._typeConformanceComputer = typeConformanceComputer;
   }
-  
-  @Inject
-  private IRawTypeHelper _rawTypeHelper;
   
   public IRawTypeHelper getRawTypeHelper() {
     return this._rawTypeHelper;
@@ -87,9 +133,6 @@ public class CommonTypeComputationServices {
     this._rawTypeHelper = rawTypeHelper;
   }
   
-  @Inject
-  private Primitives _primitives;
-  
   public Primitives getPrimitives() {
     return this._primitives;
   }
@@ -97,9 +140,6 @@ public class CommonTypeComputationServices {
   public void setPrimitives(final Primitives primitives) {
     this._primitives = primitives;
   }
-  
-  @Inject
-  private FunctionTypes _functionTypes;
   
   public FunctionTypes getFunctionTypes() {
     return this._functionTypes;
@@ -109,9 +149,6 @@ public class CommonTypeComputationServices {
     this._functionTypes = functionTypes;
   }
   
-  @Inject
-  private ArrayTypes _arrayTypes;
-  
   public ArrayTypes getArrayTypes() {
     return this._arrayTypes;
   }
@@ -119,9 +156,6 @@ public class CommonTypeComputationServices {
   public void setArrayTypes(final ArrayTypes arrayTypes) {
     this._arrayTypes = arrayTypes;
   }
-  
-  @Inject
-  private BoundTypeArgumentMerger _boundTypeArgumentMerger;
   
   public BoundTypeArgumentMerger getBoundTypeArgumentMerger() {
     return this._boundTypeArgumentMerger;
@@ -131,9 +165,6 @@ public class CommonTypeComputationServices {
     this._boundTypeArgumentMerger = boundTypeArgumentMerger;
   }
   
-  @Inject
-  private SynonymTypesProvider _synonymTypesProvider;
-  
   public SynonymTypesProvider getSynonymTypesProvider() {
     return this._synonymTypesProvider;
   }
@@ -141,9 +172,6 @@ public class CommonTypeComputationServices {
   public void setSynonymTypesProvider(final SynonymTypesProvider synonymTypesProvider) {
     this._synonymTypesProvider = synonymTypesProvider;
   }
-  
-  @Inject
-  private IJvmModelAssociations _jvmModelAssociations;
   
   public IJvmModelAssociations getJvmModelAssociations() {
     return this._jvmModelAssociations;
@@ -153,9 +181,6 @@ public class CommonTypeComputationServices {
     this._jvmModelAssociations = jvmModelAssociations;
   }
   
-  @Inject
-  private ExtendedEarlyExitComputer _earlyExitComputer;
-  
   public ExtendedEarlyExitComputer getEarlyExitComputer() {
     return this._earlyExitComputer;
   }
@@ -163,9 +188,6 @@ public class CommonTypeComputationServices {
   public void setEarlyExitComputer(final ExtendedEarlyExitComputer earlyExitComputer) {
     this._earlyExitComputer = earlyExitComputer;
   }
-  
-  @Inject
-  private HumanReadableTypeNames _humanReadableTypeNames;
   
   public HumanReadableTypeNames getHumanReadableTypeNames() {
     return this._humanReadableTypeNames;
@@ -175,9 +197,6 @@ public class CommonTypeComputationServices {
     this._humanReadableTypeNames = humanReadableTypeNames;
   }
   
-  @Inject(optional = true)
-  private XtypeFactory _xtypeFactory = XtypeFactory.eINSTANCE;
-  
   public XtypeFactory getXtypeFactory() {
     return this._xtypeFactory;
   }
@@ -185,9 +204,6 @@ public class CommonTypeComputationServices {
   public void setXtypeFactory(final XtypeFactory xtypeFactory) {
     this._xtypeFactory = xtypeFactory;
   }
-  
-  @Inject(optional = true)
-  private TypesFactory _typesFactory = TypesFactory.eINSTANCE;
   
   public TypesFactory getTypesFactory() {
     return this._typesFactory;

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
@@ -39,25 +40,11 @@ import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
+  @Property
   private IJvmDeclaredTypeAcceptor _acceptor;
   
-  public IJvmDeclaredTypeAcceptor getAcceptor() {
-    return this._acceptor;
-  }
-  
-  public void setAcceptor(final IJvmDeclaredTypeAcceptor acceptor) {
-    this._acceptor = acceptor;
-  }
-  
+  @Property
   private CompilationUnitImpl _compilationUnit;
-  
-  public CompilationUnitImpl getCompilationUnit() {
-    return this._compilationUnit;
-  }
-  
-  public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
-    this._compilationUnit = compilationUnit;
-  }
   
   public void registerAnnotationType(final String qualifiedName) throws IllegalArgumentException {
     final JvmAnnotationType newType = TypesFactory.eINSTANCE.createJvmAnnotationType();
@@ -249,5 +236,21 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
     return _fileSystemSupport.toURI(path);
+  }
+  
+  public IJvmDeclaredTypeAcceptor getAcceptor() {
+    return this._acceptor;
+  }
+  
+  public void setAcceptor(final IJvmDeclaredTypeAcceptor acceptor) {
+    this._acceptor = acceptor;
+  }
+  
+  public CompilationUnitImpl getCompilationUnit() {
+    return this._compilationUnit;
+  }
+  
+  public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
+    this._compilationUnit = compilationUnit;
   }
 }

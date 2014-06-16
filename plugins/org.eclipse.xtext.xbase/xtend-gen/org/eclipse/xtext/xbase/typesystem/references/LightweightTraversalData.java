@@ -13,6 +13,7 @@ import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 
@@ -25,15 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 public class LightweightTraversalData {
   private final Set<JvmType> _visited = CollectionLiterals.<JvmType>newHashSet();
   
-  public Set<JvmType> getVisited() {
-    return this._visited;
-  }
-  
   private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _typeParameterMapping = CollectionLiterals.<JvmTypeParameter, LightweightMergedBoundTypeArgument>newLinkedHashMap();
-  
-  public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping() {
-    return this._typeParameterMapping;
-  }
   
   public LightweightTraversalData() {
     super();
@@ -49,6 +42,7 @@ public class LightweightTraversalData {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -71,8 +65,19 @@ public class LightweightTraversalData {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public Set<JvmType> getVisited() {
+    return this._visited;
+  }
+  
+  @Pure
+  public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping() {
+    return this._typeParameterMapping;
   }
 }

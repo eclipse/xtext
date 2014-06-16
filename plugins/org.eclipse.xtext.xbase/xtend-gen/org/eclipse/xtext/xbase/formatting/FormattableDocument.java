@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import org.apache.log4j.Logger;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
@@ -22,48 +23,26 @@ import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class FormattableDocument {
   private final static Logger log = Logger.getLogger(FormattableDocument.class);
   
+  @Property
   private final FormattingPreferenceValues _cfg;
   
-  public FormattingPreferenceValues getCfg() {
-    return this._cfg;
-  }
-  
+  @Property
   private final String _document;
   
-  public String getDocument() {
-    return this._document;
-  }
-  
+  @Property
   private final TreeMap<Integer, FormattingData> _formattings;
   
-  public TreeMap<Integer, FormattingData> getFormattings() {
-    return this._formattings;
-  }
-  
+  @Property
   private Throwable _rootTrace = null;
   
-  public Throwable getRootTrace() {
-    return this._rootTrace;
-  }
-  
-  public void setRootTrace(final Throwable rootTrace) {
-    this._rootTrace = rootTrace;
-  }
-  
+  @Property
   private boolean _conflictOccurred = false;
-  
-  public boolean isConflictOccurred() {
-    return this._conflictOccurred;
-  }
-  
-  public void setConflictOccurred(final boolean conflictOccurred) {
-    this._conflictOccurred = conflictOccurred;
-  }
   
   public FormattableDocument(final FormattingPreferenceValues cfg, final String document) {
     this._cfg = cfg;
@@ -230,7 +209,7 @@ public class FormattableDocument {
         }
         _xifexpression = _xblockexpression_1;
       } else {
-        FormattingData _xblockexpression_2 = null;
+        Object _xblockexpression_2 = null;
         {
           this.setConflictOccurred(true);
           boolean _isDebugConflicts = this.isDebugConflicts();
@@ -239,7 +218,7 @@ public class FormattableDocument {
           }
           _xblockexpression_2 = null;
         }
-        _xifexpression = _xblockexpression_2;
+        _xifexpression = ((FormattingData)_xblockexpression_2);
       }
       _xblockexpression = _xifexpression;
     }
@@ -715,5 +694,38 @@ public class FormattableDocument {
       _xifexpression = "";
     }
     return _xifexpression;
+  }
+  
+  @Pure
+  public FormattingPreferenceValues getCfg() {
+    return this._cfg;
+  }
+  
+  @Pure
+  public String getDocument() {
+    return this._document;
+  }
+  
+  @Pure
+  public TreeMap<Integer, FormattingData> getFormattings() {
+    return this._formattings;
+  }
+  
+  @Pure
+  public Throwable getRootTrace() {
+    return this._rootTrace;
+  }
+  
+  public void setRootTrace(final Throwable rootTrace) {
+    this._rootTrace = rootTrace;
+  }
+  
+  @Pure
+  public boolean isConflictOccurred() {
+    return this._conflictOccurred;
+  }
+  
+  public void setConflictOccurred(final boolean conflictOccurred) {
+    this._conflictOccurred = conflictOccurred;
   }
 }

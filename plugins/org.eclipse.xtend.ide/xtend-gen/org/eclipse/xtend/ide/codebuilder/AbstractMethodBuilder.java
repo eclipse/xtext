@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import org.eclipse.xtend.ide.codebuilder.AbstractExecutableBuilder;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -15,7 +16,20 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 @SuppressWarnings("all")
 public abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
+  @Property
   private String _methodName;
+  
+  @Property
+  private LightweightTypeReference _returnType;
+  
+  @Property
+  private boolean _staticFlag;
+  
+  @Property
+  private boolean _abstractFlag;
+  
+  @Property
+  private boolean _overrideFlag;
   
   public String getMethodName() {
     return this._methodName;
@@ -25,8 +39,6 @@ public abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
     this._methodName = methodName;
   }
   
-  private LightweightTypeReference _returnType;
-  
   public LightweightTypeReference getReturnType() {
     return this._returnType;
   }
@@ -34,8 +46,6 @@ public abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
   public void setReturnType(final LightweightTypeReference returnType) {
     this._returnType = returnType;
   }
-  
-  private boolean _staticFlag;
   
   public boolean isStaticFlag() {
     return this._staticFlag;
@@ -45,8 +55,6 @@ public abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
     this._staticFlag = staticFlag;
   }
   
-  private boolean _abstractFlag;
-  
   public boolean isAbstractFlag() {
     return this._abstractFlag;
   }
@@ -54,8 +62,6 @@ public abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
   public void setAbstractFlag(final boolean abstractFlag) {
     this._abstractFlag = abstractFlag;
   }
-  
-  private boolean _overrideFlag;
   
   public boolean isOverrideFlag() {
     return this._overrideFlag;

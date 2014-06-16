@@ -11,29 +11,21 @@ import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 @SuppressWarnings("all")
 public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReferenceImplCustom> implements TypeReference {
+  @Property
   private TypeReference _equivalent;
   
-  public void setEquivalent(final TypeReference equivalent) {
-    this._equivalent = equivalent;
-  }
-  
+  @Property
   private LightweightTypeReference _lightweightTypeReference;
-  
-  public LightweightTypeReference getLightweightTypeReference() {
-    return this._lightweightTypeReference;
-  }
-  
-  public void setLightweightTypeReference(final LightweightTypeReference lightweightTypeReference) {
-    this._lightweightTypeReference = lightweightTypeReference;
-  }
   
   public TypeReference getEquivalent() {
     TypeReference _xblockexpression = null;
@@ -309,5 +301,18 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
   public String toString() {
     XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
     return _delegate.toString();
+  }
+  
+  public void setEquivalent(final TypeReference equivalent) {
+    this._equivalent = equivalent;
+  }
+  
+  @Pure
+  public LightweightTypeReference getLightweightTypeReference() {
+    return this._lightweightTypeReference;
+  }
+  
+  public void setLightweightTypeReference(final LightweightTypeReference lightweightTypeReference) {
+    this._lightweightTypeReference = lightweightTypeReference;
   }
 }

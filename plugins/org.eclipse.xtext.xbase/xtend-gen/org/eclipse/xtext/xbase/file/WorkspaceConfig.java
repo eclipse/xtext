@@ -4,6 +4,7 @@ import java.util.Map;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -11,15 +12,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 public class WorkspaceConfig {
   private final String _absoluteFileSystemPath;
   
-  public String getAbsoluteFileSystemPath() {
-    return this._absoluteFileSystemPath;
-  }
-  
   private final Map<String, ProjectConfig> _projects = CollectionLiterals.<String, ProjectConfig>newLinkedHashMap();
-  
-  public Map<String, ProjectConfig> getProjects() {
-    return this._projects;
-  }
   
   public ProjectConfig addProjectConfig(final ProjectConfig config) {
     Map<String, ProjectConfig> _projects = this.getProjects();
@@ -42,6 +35,7 @@ public class WorkspaceConfig {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -64,8 +58,19 @@ public class WorkspaceConfig {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public String getAbsoluteFileSystemPath() {
+    return this._absoluteFileSystemPath;
+  }
+  
+  @Pure
+  public Map<String, ProjectConfig> getProjects() {
+    return this._projects;
   }
 }

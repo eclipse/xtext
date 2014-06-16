@@ -30,7 +30,7 @@ public class Case_6 {
     ArrayList<EObject> _xblockexpression = null;
     {
       final Object inferredType = null;
-      _xblockexpression = CollectionLiterals.<EObject>newArrayList(((EObject) inferredType));
+      _xblockexpression = CollectionLiterals.<EObject>newArrayList(((EObject) ((EObject)inferredType)));
     }
     return _xblockexpression;
   }

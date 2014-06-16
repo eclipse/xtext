@@ -2,61 +2,27 @@ package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
+  @Property
   private String _name;
   
-  public String getName() {
-    return this._name;
-  }
-  
-  public void setName(final String name) {
-    this._name = name;
-  }
-  
+  @Property
   private LightweightTypeReference _type;
   
-  public LightweightTypeReference getType() {
-    return this._type;
-  }
-  
-  public void setType(final LightweightTypeReference type) {
-    this._type = type;
-  }
-  
+  @Property
   private boolean _varArgsFlag;
   
-  public boolean isVarArgsFlag() {
-    return this._varArgsFlag;
-  }
-  
-  public void setVarArgsFlag(final boolean varArgsFlag) {
-    this._varArgsFlag = varArgsFlag;
-  }
-  
+  @Property
   private boolean _extensionFlag;
   
-  public boolean isExtensionFlag() {
-    return this._extensionFlag;
-  }
-  
-  public void setExtensionFlag(final boolean extensionFlag) {
-    this._extensionFlag = extensionFlag;
-  }
-  
+  @Property
   private boolean _finalFlag;
-  
-  public boolean isFinalFlag() {
-    return this._finalFlag;
-  }
-  
-  public void setFinalFlag(final boolean finalFlag) {
-    this._finalFlag = finalFlag;
-  }
   
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
@@ -111,5 +77,45 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
   
   public String getImage() {
     return "parameter.gif";
+  }
+  
+  public String getName() {
+    return this._name;
+  }
+  
+  public void setName(final String name) {
+    this._name = name;
+  }
+  
+  public LightweightTypeReference getType() {
+    return this._type;
+  }
+  
+  public void setType(final LightweightTypeReference type) {
+    this._type = type;
+  }
+  
+  public boolean isVarArgsFlag() {
+    return this._varArgsFlag;
+  }
+  
+  public void setVarArgsFlag(final boolean varArgsFlag) {
+    this._varArgsFlag = varArgsFlag;
+  }
+  
+  public boolean isExtensionFlag() {
+    return this._extensionFlag;
+  }
+  
+  public void setExtensionFlag(final boolean extensionFlag) {
+    this._extensionFlag = extensionFlag;
+  }
+  
+  public boolean isFinalFlag() {
+    return this._finalFlag;
+  }
+  
+  public void setFinalFlag(final boolean finalFlag) {
+    this._finalFlag = finalFlag;
   }
 }

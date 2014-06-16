@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
@@ -46,25 +47,11 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
   @Extension
   private ValidatorNaming _validatorNaming;
   
+  @Property
   private boolean _inheritImplementation = true;
   
-  public boolean isInheritImplementation() {
-    return this._inheritImplementation;
-  }
-  
-  public void setInheritImplementation(final boolean inheritImplementation) {
-    this._inheritImplementation = inheritImplementation;
-  }
-  
+  @Property
   private boolean _generateStub = true;
-  
-  public boolean isGenerateStub() {
-    return this._generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this._generateStub = generateStub;
-  }
   
   @Inject
   private Grammar grammar;
@@ -414,5 +401,21 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     _builder.append("</extension>");
     _builder.newLine();
     ctx.append(_builder);
+  }
+  
+  public boolean isInheritImplementation() {
+    return this._inheritImplementation;
+  }
+  
+  public void setInheritImplementation(final boolean inheritImplementation) {
+    this._inheritImplementation = inheritImplementation;
+  }
+  
+  public boolean isGenerateStub() {
+    return this._generateStub;
+  }
+  
+  public void setGenerateStub(final boolean generateStub) {
+    this._generateStub = generateStub;
   }
 }

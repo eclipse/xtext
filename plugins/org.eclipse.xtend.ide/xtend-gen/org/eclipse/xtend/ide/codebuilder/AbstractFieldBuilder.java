@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -16,35 +17,14 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 @SuppressWarnings("all")
 public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
+  @Property
   private String _fieldName;
   
-  public String getFieldName() {
-    return this._fieldName;
-  }
-  
-  public void setFieldName(final String fieldName) {
-    this._fieldName = fieldName;
-  }
-  
+  @Property
   private LightweightTypeReference _fieldType;
   
-  public LightweightTypeReference getFieldType() {
-    return this._fieldType;
-  }
-  
-  public void setFieldType(final LightweightTypeReference fieldType) {
-    this._fieldType = fieldType;
-  }
-  
+  @Property
   private boolean _staticFlag;
-  
-  public boolean isStaticFlag() {
-    return this._staticFlag;
-  }
-  
-  public void setStaticFlag(final boolean staticFlag) {
-    this._staticFlag = staticFlag;
-  }
   
   public String getImage() {
     String _switchResult = null;
@@ -68,5 +48,29 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
       _switchResult = "field_default_obj.gif";
     }
     return _switchResult;
+  }
+  
+  public String getFieldName() {
+    return this._fieldName;
+  }
+  
+  public void setFieldName(final String fieldName) {
+    this._fieldName = fieldName;
+  }
+  
+  public LightweightTypeReference getFieldType() {
+    return this._fieldType;
+  }
+  
+  public void setFieldType(final LightweightTypeReference fieldType) {
+    this._fieldType = fieldType;
+  }
+  
+  public boolean isStaticFlag() {
+    return this._staticFlag;
+  }
+  
+  public void setStaticFlag(final boolean staticFlag) {
+    this._staticFlag = staticFlag;
   }
 }

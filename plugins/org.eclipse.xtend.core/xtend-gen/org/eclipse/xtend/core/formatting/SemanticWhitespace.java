@@ -2,15 +2,12 @@ package org.eclipse.xtend.core.formatting;
 
 import org.eclipse.xtend.core.formatting.Chunk;
 import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @Data
 @SuppressWarnings("all")
 public class SemanticWhitespace extends Chunk {
   private final int _column;
-  
-  public int getColumn() {
-    return this._column;
-  }
   
   public String toString() {
     CharSequence _text = this.getText();
@@ -32,6 +29,7 @@ public class SemanticWhitespace extends Chunk {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -45,5 +43,10 @@ public class SemanticWhitespace extends Chunk {
     if (other._column != this._column)
       return false;
     return true;
+  }
+  
+  @Pure
+  public int getColumn() {
+    return this._column;
   }
 }

@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
@@ -69,81 +70,26 @@ public class StandaloneBuilder {
   /**
    * Map key is a file extension provided by Language FileExtensionProvider
    */
+  @Property
   private Map<String, LanguageAccess> _languages;
   
-  /**
-   * Map key is a file extension provided by Language FileExtensionProvider
-   */
-  public Map<String, LanguageAccess> getLanguages() {
-    return this._languages;
-  }
-  
-  /**
-   * Map key is a file extension provided by Language FileExtensionProvider
-   */
-  public void setLanguages(final Map<String, LanguageAccess> languages) {
-    this._languages = languages;
-  }
-  
+  @Property
   private Iterable<String> _sourceDirs;
   
-  public Iterable<String> getSourceDirs() {
-    return this._sourceDirs;
-  }
-  
-  public void setSourceDirs(final Iterable<String> sourceDirs) {
-    this._sourceDirs = sourceDirs;
-  }
-  
+  @Property
   private Iterable<String> _classPathEntries;
   
-  public Iterable<String> getClassPathEntries() {
-    return this._classPathEntries;
-  }
-  
-  public void setClassPathEntries(final Iterable<String> classPathEntries) {
-    this._classPathEntries = classPathEntries;
-  }
-  
+  @Property
   private File _tempDir = Files.createTempDir();
   
-  public File getTempDir() {
-    return this._tempDir;
-  }
-  
-  public void setTempDir(final File tempDir) {
-    this._tempDir = tempDir;
-  }
-  
+  @Property
   private String _encoding;
   
-  public String getEncoding() {
-    return this._encoding;
-  }
-  
-  public void setEncoding(final String encoding) {
-    this._encoding = encoding;
-  }
-  
+  @Property
   private String _classPathLookUpFilter;
   
-  public String getClassPathLookUpFilter() {
-    return this._classPathLookUpFilter;
-  }
-  
-  public void setClassPathLookUpFilter(final String classPathLookUpFilter) {
-    this._classPathLookUpFilter = classPathLookUpFilter;
-  }
-  
+  @Property
   private boolean _failOnValidationError = true;
-  
-  public boolean isFailOnValidationError() {
-    return this._failOnValidationError;
-  }
-  
-  public void setFailOnValidationError(final boolean failOnValidationError) {
-    this._failOnValidationError = failOnValidationError;
-  }
   
   @Inject
   private IndexedJvmTypeAccess jvmTypeAccess;
@@ -640,5 +586,61 @@ public class StandaloneBuilder {
   
   public IJavaCompiler getCompiler() {
     return this.compiler;
+  }
+  
+  public Map<String, LanguageAccess> getLanguages() {
+    return this._languages;
+  }
+  
+  public void setLanguages(final Map<String, LanguageAccess> languages) {
+    this._languages = languages;
+  }
+  
+  public Iterable<String> getSourceDirs() {
+    return this._sourceDirs;
+  }
+  
+  public void setSourceDirs(final Iterable<String> sourceDirs) {
+    this._sourceDirs = sourceDirs;
+  }
+  
+  public Iterable<String> getClassPathEntries() {
+    return this._classPathEntries;
+  }
+  
+  public void setClassPathEntries(final Iterable<String> classPathEntries) {
+    this._classPathEntries = classPathEntries;
+  }
+  
+  public File getTempDir() {
+    return this._tempDir;
+  }
+  
+  public void setTempDir(final File tempDir) {
+    this._tempDir = tempDir;
+  }
+  
+  public String getEncoding() {
+    return this._encoding;
+  }
+  
+  public void setEncoding(final String encoding) {
+    this._encoding = encoding;
+  }
+  
+  public String getClassPathLookUpFilter() {
+    return this._classPathLookUpFilter;
+  }
+  
+  public void setClassPathLookUpFilter(final String classPathLookUpFilter) {
+    this._classPathLookUpFilter = classPathLookUpFilter;
+  }
+  
+  public boolean isFailOnValidationError() {
+    return this._failOnValidationError;
+  }
+  
+  public void setFailOnValidationError(final boolean failOnValidationError) {
+    this._failOnValidationError = failOnValidationError;
   }
 }

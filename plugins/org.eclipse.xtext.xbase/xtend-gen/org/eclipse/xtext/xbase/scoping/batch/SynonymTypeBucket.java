@@ -11,6 +11,7 @@ import java.util.EnumSet;
 import java.util.List;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.scoping.batch.TypeBucket;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -27,10 +28,6 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 public class SynonymTypeBucket extends TypeBucket {
   private final EnumSet<ConformanceHint> _hints;
   
-  public EnumSet<ConformanceHint> getHints() {
-    return this._hints;
-  }
-  
   public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final IResolvedFeatures.Provider resolvedFeaturesProvider, final EnumSet<ConformanceHint> hints) {
     super(id, types, resolvedFeaturesProvider);
     this._hints = hints;
@@ -45,6 +42,7 @@ public class SynonymTypeBucket extends TypeBucket {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -64,8 +62,14 @@ public class SynonymTypeBucket extends TypeBucket {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public EnumSet<ConformanceHint> getHints() {
+    return this._hints;
   }
 }

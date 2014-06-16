@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.formatting.WhitespaceInfo;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -17,15 +18,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 public class HiddenLeafs {
   private final int _offset;
   
-  public int getOffset() {
-    return this._offset;
-  }
-  
   private final List<LeafInfo> _leafs = CollectionLiterals.<LeafInfo>newArrayList();
-  
-  public List<LeafInfo> getLeafs() {
-    return this._leafs;
-  }
   
   public boolean isSingleWhitespace() {
     boolean _or = false;
@@ -110,6 +103,7 @@ public class HiddenLeafs {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -129,8 +123,19 @@ public class HiddenLeafs {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public int getOffset() {
+    return this._offset;
+  }
+  
+  @Pure
+  public List<LeafInfo> getLeafs() {
+    return this._leafs;
   }
 }

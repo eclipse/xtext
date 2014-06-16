@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -42,45 +43,17 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
  */
 @SuppressWarnings("all")
 public abstract class AbstractCodeBuilder implements ICodeBuilder {
+  @Property
   private Object _ownerSource;
   
-  public Object getOwnerSource() {
-    return this._ownerSource;
-  }
-  
-  public void setOwnerSource(final Object ownerSource) {
-    this._ownerSource = ownerSource;
-  }
-  
+  @Property
   private JvmDeclaredType _owner;
   
-  public JvmDeclaredType getOwner() {
-    return this._owner;
-  }
-  
-  public void setOwner(final JvmDeclaredType owner) {
-    this._owner = owner;
-  }
-  
+  @Property
   private JvmVisibility _visibility;
   
-  public JvmVisibility getVisibility() {
-    return this._visibility;
-  }
-  
-  public void setVisibility(final JvmVisibility visibility) {
-    this._visibility = visibility;
-  }
-  
+  @Property
   private EObject _context;
-  
-  public EObject getContext() {
-    return this._context;
-  }
-  
-  public void setContext(final EObject context) {
-    this._context = context;
-  }
   
   @Inject
   @Extension
@@ -275,5 +248,37 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
       _switchResult = false;
     }
     return _switchResult;
+  }
+  
+  public Object getOwnerSource() {
+    return this._ownerSource;
+  }
+  
+  public void setOwnerSource(final Object ownerSource) {
+    this._ownerSource = ownerSource;
+  }
+  
+  public JvmDeclaredType getOwner() {
+    return this._owner;
+  }
+  
+  public void setOwner(final JvmDeclaredType owner) {
+    this._owner = owner;
+  }
+  
+  public JvmVisibility getVisibility() {
+    return this._visibility;
+  }
+  
+  public void setVisibility(final JvmVisibility visibility) {
+    this._visibility = visibility;
+  }
+  
+  public EObject getContext() {
+    return this._context;
+  }
+  
+  public void setContext(final EObject context) {
+    this._context = context;
   }
 }

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.List;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
@@ -31,29 +32,15 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ResolvedTypesTest extends AbstractXbaseTestCase {
   @Inject
+  @Property
   private PublicReentrantTypeResolver _resolver;
-  
-  public PublicReentrantTypeResolver getResolver() {
-    return this._resolver;
-  }
-  
-  public void setResolver(final PublicReentrantTypeResolver resolver) {
-    this._resolver = resolver;
-  }
   
   private TypesFactory typesFactory = TypesFactory.eINSTANCE;
   
   private XbaseFactory xbaseFactory = XbaseFactory.eINSTANCE;
   
+  @Property
   private PublicResolvedTypes _testMe;
-  
-  public PublicResolvedTypes getTestMe() {
-    return this._testMe;
-  }
-  
-  public void setTestMe(final PublicResolvedTypes testMe) {
-    this._testMe = testMe;
-  }
   
   @Before
   public void initResolvedTypes() {
@@ -94,5 +81,21 @@ public class ResolvedTypesTest extends AbstractXbaseTestCase {
   public void testTryGetUnknownUnboundTypeParameter() {
     PublicResolvedTypes _testMe = this.getTestMe();
     _testMe.getUnboundTypeReference("unknown handle");
+  }
+  
+  public PublicReentrantTypeResolver getResolver() {
+    return this._resolver;
+  }
+  
+  public void setResolver(final PublicReentrantTypeResolver resolver) {
+    this._resolver = resolver;
+  }
+  
+  public PublicResolvedTypes getTestMe() {
+    return this._testMe;
+  }
+  
+  public void setTestMe(final PublicResolvedTypes testMe) {
+    this._testMe = testMe;
   }
 }

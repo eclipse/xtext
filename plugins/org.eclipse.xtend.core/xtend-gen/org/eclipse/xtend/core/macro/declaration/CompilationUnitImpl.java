@@ -93,6 +93,7 @@ import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
@@ -176,6 +177,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -244,11 +246,8 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Inject
   private CompilerPhases compilerPhases;
   
+  @Property
   private XtendFile _xtendFile;
-  
-  public XtendFile getXtendFile() {
-    return this._xtendFile;
-  }
   
   @Inject
   private CommonTypeComputationServices services;
@@ -283,29 +282,17 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Inject
   private ReadAndWriteTracking readAndWriteTracking;
   
+  @Property
   private final ProblemSupport _problemSupport = new ProblemSupportImpl(this);
   
-  public ProblemSupport getProblemSupport() {
-    return this._problemSupport;
-  }
-  
+  @Property
   private final TypeReferenceProvider _typeReferenceProvider = new TypeReferenceProviderImpl(this);
   
-  public TypeReferenceProvider getTypeReferenceProvider() {
-    return this._typeReferenceProvider;
-  }
-  
+  @Property
   private final AnnotationReferenceProvider _annotationReferenceProvider = new AnnotationReferenceProviderImpl(this);
   
-  public AnnotationReferenceProvider getAnnotationReferenceProvider() {
-    return this._annotationReferenceProvider;
-  }
-  
+  @Property
   private final TypeLookupImpl _typeLookup = new TypeLookupImpl(this);
-  
-  public TypeLookupImpl getTypeLookup() {
-    return this._typeLookup;
-  }
   
   private Map<EObject, Object> identityCache = CollectionLiterals.<EObject, Object>newHashMap();
   
@@ -1690,5 +1677,30 @@ public class CompilationUnitImpl implements CompilationUnit {
       _xblockexpression = this.translate(_evaluate);
     }
     return _xblockexpression;
+  }
+  
+  @Pure
+  public XtendFile getXtendFile() {
+    return this._xtendFile;
+  }
+  
+  @Pure
+  public ProblemSupport getProblemSupport() {
+    return this._problemSupport;
+  }
+  
+  @Pure
+  public TypeReferenceProvider getTypeReferenceProvider() {
+    return this._typeReferenceProvider;
+  }
+  
+  @Pure
+  public AnnotationReferenceProvider getAnnotationReferenceProvider() {
+    return this._annotationReferenceProvider;
+  }
+  
+  @Pure
+  public TypeLookupImpl getTypeLookup() {
+    return this._typeLookup;
   }
 }
