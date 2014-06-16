@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Strings;
 
 /**
@@ -29,7 +28,7 @@ import com.google.common.base.Strings;
  * @since 2.3
  */
 @Beta
-@GwtCompatible public class ToStringHelper {
+public class ToStringHelper {
 	
 	private static class IndentationAwareStringBuilder {
 		private StringBuilder builder = new StringBuilder();
