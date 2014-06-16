@@ -11,11 +11,13 @@ import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
+import org.eclipse.xtext.ui.editor.IDirtyStateManager
 
 class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	
 	@Inject IJavaProjectProvider projectProvider
 	@Inject CompilerPhases compilerPhases
+	@Inject IDirtyStateManager dirtyStateManager
 	
 	/**
 	 * In the builder we use the Java representation for any upstream resources, so we filter them out here.
@@ -54,7 +56,11 @@ class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 				return uri.segment(1) != encodedProjectName
 			])
 		} else {
-			return result
+			return new FilteringResourceDescriptions(result, [ uri |
+				val resourceURI = uri.trimFragment
+				val dirtyResource = dirtyStateManager.getDirtyResourceDescription(resourceURI)
+				return dirtyResource != null
+			])
 		}
 	}
 }
