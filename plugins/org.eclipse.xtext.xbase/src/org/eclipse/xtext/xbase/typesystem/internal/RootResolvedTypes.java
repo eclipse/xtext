@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.validation.IssueSeverities;
@@ -53,9 +54,9 @@ public class RootResolvedTypes extends ResolvedTypes {
 	private Set<XExpression> toBeInferredRootExpressions;
 	
 	private IssueSeverities issueSeverities;
-	
-	protected RootResolvedTypes(DefaultReentrantTypeResolver resolver) {
-		super(resolver);
+
+	protected RootResolvedTypes(DefaultReentrantTypeResolver resolver, CancelIndicator monitor) {
+		super(resolver, monitor);
 		this.issueSeverities = resolver.getIssueSeverities();
 		this.featureScopeTracker = resolver.createFeatureScopeTracker(); 
 	}

@@ -10,16 +10,19 @@ package org.eclipse.xtext.ui.editor.reconciler;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.Inject;
 
@@ -47,6 +50,8 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	private XtextSpellingReconcileStrategy spellingReconcileStrategy;
 
 	private XtextResource resource;
+	
+	private IProgressMonitor monitor;
 
 	public void reconcile(final IRegion region) {
 		if (log.isTraceEnabled()) {
@@ -82,6 +87,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	 * @since 2.3
 	 */
 	public void setProgressMonitor(IProgressMonitor monitor) {
+		this.monitor = monitor;
 		if (spellingReconcileStrategy != null) {
 			spellingReconcileStrategy.setProgressMonitor(monitor);
 		}
@@ -124,10 +130,45 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 			}
 			resource.update(replaceRegionToBeProcessed.getOffset(), replaceRegionToBeProcessed.getLength(),
 					replaceRegionToBeProcessed.getText());
+			postProcess(resource, monitor);
 			resource.setModificationStamp(replaceRegionToBeProcessed.getModificationStamp());
+		} catch (OperationCanceledException exc) {
+			throw exc;
 		} catch (RuntimeException exc) {
 			log.error("Parsing in reconciler failed.", exc);
 			throw exc;
 		}
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void postProcess(XtextResource resource, final IProgressMonitor monitor) {
+		if(resource instanceof DerivedStateAwareResource) {
+			DerivedStateAwareResource derivedResource = (DerivedStateAwareResource) resource;
+			try {
+				if(!derivedResource.isFullyInitialized()) {
+					// trigger the model inference
+					derivedResource.installDerivedState(false);
+					// trigger type resolution
+					derivedResource.resolveLazyCrossReferences(new CancelIndicator() {
+						public boolean isCanceled() {
+							return monitor != null && monitor.isCanceled();
+						}
+					});
+				}
+			} catch(OperationCanceledException exc) {
+				derivedResource.discardDerivedState();
+				throw exc;
+			}
+		}
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected void cancelPostProcessing() {
+		if(monitor != null) 
+			monitor.setCanceled(true);
 	}
 }
