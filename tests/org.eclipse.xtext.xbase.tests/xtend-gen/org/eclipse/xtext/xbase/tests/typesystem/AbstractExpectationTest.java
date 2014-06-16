@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -68,7 +69,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
       PublicReentrantTypeResolver _resolver = this.getResolver();
       _resolver.initializeFrom(this.rootExpression);
       PublicReentrantTypeResolver _resolver_1 = this.getResolver();
-      IResolvedTypes _reentrantResolve = _resolver_1.reentrantResolve();
+      IResolvedTypes _reentrantResolve = _resolver_1.reentrantResolve(CancelIndicator.NullImpl);
       this.resolvedTypes = _reentrantResolve;
       this.pendingAssert = true;
       return this;

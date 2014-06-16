@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.ImplicitFirstArgument
 import org.eclipse.xtext.xbase.typesystem.internal.TypeInsteadOfConstructorLinkingCandidate
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.ITypeLiteralLinkingCandidate
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sebastian Zarnekow
@@ -54,14 +55,14 @@ class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolver {
 	
 	val mapJoiner = Joiner::on('\n').withKeyValueSeparator('=')
 	
-	override createResolvedTypes() {
-		return new RecordingRootResolvedTypes(this)
+	override createResolvedTypes(CancelIndicator monitor) {
+		return new RecordingRootResolvedTypes(this, CancelIndicator.NullImpl)
 	}
 	
-	override resolve() {
-		val firstResult = super.resolve as RecordingRootResolvedTypes
+	override resolve(CancelIndicator monitor) {
+		val firstResult = super.resolve(monitor) as RecordingRootResolvedTypes
 		val firstRun = firstResult.resolvedProxies
-		val result = super.resolve as RecordingRootResolvedTypes
+		val result = super.resolve(monitor) as RecordingRootResolvedTypes
 		val secondRun = result.resolvedProxies
 		Assert::assertEquals('''
 			«mapJoiner.join(firstRun)»
@@ -232,8 +233,8 @@ class RecordingRootResolvedTypes extends RootResolvedTypes {
 	@Property
 	Map<XExpression, ILinkingCandidate> resolvedProxies
 	
-	new(DefaultReentrantTypeResolver resolver) {
-		super(resolver)
+	new(DefaultReentrantTypeResolver resolver, CancelIndicator monitor) {
+		super(resolver, monitor)
 	}
 	
 	override resolveProxies() {

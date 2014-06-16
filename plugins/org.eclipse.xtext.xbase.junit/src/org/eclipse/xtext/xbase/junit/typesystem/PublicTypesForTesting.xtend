@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,7 +23,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference
 @SuppressWarnings("restriction")
 class PublicResolvedTypes extends RootResolvedTypes {
 	new(DefaultReentrantTypeResolver resolver) {
-		super(resolver)
+		super(resolver, CancelIndicator.NullImpl)
 	}
 	
 	override public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter type) {
