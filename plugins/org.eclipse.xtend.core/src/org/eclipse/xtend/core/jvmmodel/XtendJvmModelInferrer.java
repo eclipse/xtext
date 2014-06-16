@@ -40,6 +40,7 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtend.lib.macro.Active;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -333,7 +334,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			inferredJvmType.setFinal(source.isFinal());
 		}
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
-		boolean isDataObject = hasAnnotation(source, Data.class);
+		boolean isDataObject = isData(source);
 		JvmTypeReference extendsClause = source.getExtends();
 		if (extendsClause == null || extendsClause.getType() == null) {
 			JvmTypeReference typeRefToObject = typeReferences.getTypeForName(Object.class, source);
@@ -400,6 +401,10 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	protected boolean isTopLevel(XtendTypeDeclaration declaration) {
 		return declaration.eContainingFeature() == XtendPackage.Literals.XTEND_FILE__XTEND_TYPES;
+	}
+	
+	private boolean isData(XtendAnnotationTarget source) {
+		return !Data.class.isAnnotationPresent(Active.class) && hasAnnotation(source, Data.class);
 	}
 	
 	protected boolean hasAnnotation(XtendAnnotationTarget source, Class<?> class1) {
@@ -788,7 +793,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			field.setStatic(source.isStatic());
 			field.setTransient(source.isTransient());
 			field.setVolatile(source.isVolatile());
-			final boolean isDataObject = hasAnnotation((XtendAnnotationTarget) source.eContainer(), Data.class);
+			final boolean isDataObject = isData((XtendAnnotationTarget) source.eContainer());
 			if (isDataObject) {
 				if (!field.isStatic())
 					field.setFinal(true);
@@ -804,7 +809,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			for (XAnnotation anno : source.getAnnotations()) {
 				if (!annotationTranslationFilter.apply(anno))
 					continue;
-				if (Property.class.getName().equals(anno.getAnnotationType().getIdentifier())) {
+				if (isProperty(anno)) {
 					isProperty = true;
 				} else {
 					JvmAnnotationReference annotationReference = jvmTypesBuilder.getJvmAnnotationReference(anno);
@@ -834,6 +839,10 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			jvmTypesBuilder.setInitializer(field, source.getInitialValue());
 			initializeLocalTypes(field, source.getInitialValue());
 		}
+	}
+
+	private boolean isProperty(XAnnotation anno) {
+		return Property.class.getName().equals(anno.getAnnotationType().getIdentifier()) && !Property.class.isAnnotationPresent(Active.class);
 	}
 	
 	protected void transform(XtendEnumLiteral literal, JvmEnumerationType container) {
