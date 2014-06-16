@@ -654,7 +654,10 @@ code[Xtend][
   myRef?.doStuff
 ]
 
-Arguments that would be passed to the method are only evaluated if the method will be invoked at all. 
+Arguments that would be passed to the method are only evaluated if the method will be invoked at all.
+
+For primitive types the default value is returned (e.g. 0 for int). This may not be what you want in some cases,
+so a warning will be raised by default. You can turn that off in the preferences if you wish.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
