@@ -16,6 +16,7 @@ import com.google.inject.name.Names;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
@@ -65,15 +67,8 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   
   private boolean srcGenOnly = false;
   
+  @Property
   private boolean _generateXtendStub;
-  
-  public boolean isGenerateXtendStub() {
-    return this._generateXtendStub;
-  }
-  
-  public void setGenerateXtendStub(final boolean generateXtendStub) {
-    this._generateXtendStub = generateXtendStub;
-  }
   
   protected void addLocalBindings(final Binder binder) {
     AnnotatedBindingBuilder<Boolean> _bind = binder.<Boolean>bind(Boolean.class);
@@ -186,5 +181,14 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
       _xifexpression = null;
     }
     return ((String[])Conversions.unwrapArray(_xifexpression, String.class));
+  }
+  
+  @Pure
+  public boolean isGenerateXtendStub() {
+    return this._generateXtendStub;
+  }
+  
+  public void setGenerateXtendStub(final boolean generateXtendStub) {
+    this._generateXtendStub = generateXtendStub;
   }
 }

@@ -12,6 +12,7 @@ import org.eclipse.xtend.core.formatting.TemplateWhitespace;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.xbase.formatting.NodeModelAccess;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
@@ -30,11 +32,8 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   
   private final NodeModelAccess nodeModelAccess;
   
+  @Property
   private final LineModel _model = new LineModel();
-  
-  public LineModel getModel() {
-    return this._model;
-  }
   
   private int offset = (-1);
   
@@ -373,5 +372,10 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     super.acceptEndFor(after, indentation);
     this.outdentThisLine();
     this.startContent();
+  }
+  
+  @Pure
+  public LineModel getModel() {
+    return this._model;
   }
 }

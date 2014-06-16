@@ -7,9 +7,18 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
+import com.google.inject.Inject;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
+import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Test;
 
 /**
@@ -17,6 +26,10 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class PropertyCompilerTest extends AbstractXtendCompilerTest {
+  @Inject
+  @Extension
+  private ValidationTestHelper _validationTestHelper;
+  
   @Test
   public void compileProperty() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
@@ -38,14 +51,25 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("package foo;");
     _builder_1.newLine();
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtend.lib.Property;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pure;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class Bar {");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.append("@Property");
+    _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.append("private boolean _generateExpressions = true;");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public boolean isGenerateExpressions() {");
@@ -87,14 +111,25 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend.lib.Property;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pure;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.append("@Property");
+    _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.append("private final String _string = \"\";");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String getString() {");
@@ -112,51 +147,25 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
   
   @Test
   public void compilePropertyWithoutType() {
-    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class C {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Property");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("var string = \'\'");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("@SuppressWarnings(\"all\")");
-    _builder_1.newLine();
-    _builder_1.append("public class C {");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("private String _string = \"\";");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("public String getString() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return this._string;");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("public void setString(final String string) {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("this._string = string;");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Property");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var string = \'\'");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendClass _clazz = this.clazz(_builder.toString());
+      EList<XtendMember> _members = _clazz.getMembers();
+      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      this._validationTestHelper.assertError(_head, XtendPackage.Literals.XTEND_FIELD, "user.issue", "inferred");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
@@ -174,14 +183,25 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend.lib.Property;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pure;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class C<T extends Object> {");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.append("@Property");
+    _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.append("private T _t;");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public T getT() {");
@@ -210,51 +230,25 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
   
   @Test
   public void compilePropertyWithoutTypeButTypeParameter() {
-    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class C<T> {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Property");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("var iterable = null as Iterable<T>");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("@SuppressWarnings(\"all\")");
-    _builder_1.newLine();
-    _builder_1.append("public class C<T extends Object> {");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("private Iterable<T> _iterable = ((Iterable<T>) null);");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("public Iterable<T> getIterable() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return this._iterable;");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("public void setIterable(final Iterable<T> iterable) {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("this._iterable = iterable;");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Property");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var iterable = null as Iterable<T>");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendClass _clazz = this.clazz(_builder.toString());
+      EList<XtendMember> _members = _clazz.getMembers();
+      XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+      this._validationTestHelper.assertError(_head, XtendPackage.Literals.XTEND_FIELD, "user.issue", "inferred");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
@@ -272,14 +266,25 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend.lib.Property;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pure;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class C<T extends Object> {");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.append("@Property");
+    _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.append("private String[] _array = { \"a\" };");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String[] getArray() {");
@@ -317,14 +322,25 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend.lib.Property;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pure;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class X {");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.append("@Property");
+    _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.append("private final String _x = \"hello\";");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String getX() {");

@@ -18,6 +18,7 @@ import org.eclipse.xtend.core.macro.AnnotationProcessor;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -28,37 +29,21 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge
  */
 @SuppressWarnings("all")
 public class ActiveAnnotationContext {
+  @Property
   private final List<XtendAnnotationTarget> _annotatedSourceElements = CollectionLiterals.<XtendAnnotationTarget>newArrayList();
   
-  public List<XtendAnnotationTarget> getAnnotatedSourceElements() {
-    return this._annotatedSourceElements;
-  }
-  
+  @Property
   private Object _processorInstance;
   
-  public Object getProcessorInstance() {
-    return this._processorInstance;
-  }
-  
-  public void setProcessorInstance(final Object processorInstance) {
-    this._processorInstance = processorInstance;
-  }
-  
+  @Property
   private CompilationUnitImpl _compilationUnit;
-  
-  public CompilationUnitImpl getCompilationUnit() {
-    return this._compilationUnit;
-  }
-  
-  public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
-    this._compilationUnit = compilationUnit;
-  }
   
   public void handleProcessingError(final Resource resource, final Throwable t) {
     try {
@@ -143,5 +128,28 @@ public class ActiveAnnotationContext {
       }
     }
     return getMessage.apply(t);
+  }
+  
+  @Pure
+  public List<XtendAnnotationTarget> getAnnotatedSourceElements() {
+    return this._annotatedSourceElements;
+  }
+  
+  @Pure
+  public Object getProcessorInstance() {
+    return this._processorInstance;
+  }
+  
+  public void setProcessorInstance(final Object processorInstance) {
+    this._processorInstance = processorInstance;
+  }
+  
+  @Pure
+  public CompilationUnitImpl getCompilationUnit() {
+    return this._compilationUnit;
+  }
+  
+  public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
+    this._compilationUnit = compilationUnit;
   }
 }

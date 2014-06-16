@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.Files;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -43,15 +45,8 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   @Inject
+  @Property
   private Provider<WorkspaceConfig> _projectInformationProvider;
-  
-  public Provider<WorkspaceConfig> getProjectInformationProvider() {
-    return this._projectInformationProvider;
-  }
-  
-  public void setProjectInformationProvider(final Provider<WorkspaceConfig> projectInformationProvider) {
-    this._projectInformationProvider = projectInformationProvider;
-  }
   
   public Iterable<? extends Path> getChildren(final Path path) {
     List<Path> _xblockexpression = null;
@@ -233,5 +228,14 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
       return new Path(_plus);
     }
     return null;
+  }
+  
+  @Pure
+  public Provider<WorkspaceConfig> getProjectInformationProvider() {
+    return this._projectInformationProvider;
+  }
+  
+  public void setProjectInformationProvider(final Provider<WorkspaceConfig> projectInformationProvider) {
+    this._projectInformationProvider = projectInformationProvider;
   }
 }

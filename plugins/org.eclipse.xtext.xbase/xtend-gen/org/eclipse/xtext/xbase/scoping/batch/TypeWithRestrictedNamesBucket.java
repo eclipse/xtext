@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.scoping.batch.TypeBucket;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
@@ -27,10 +28,6 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 @SuppressWarnings("all")
 public class TypeWithRestrictedNamesBucket extends TypeBucket {
   private final Map<? extends JvmType, ? extends Set<String>> _typesToNames;
-  
-  public Map<? extends JvmType, ? extends Set<String>> getTypesToNames() {
-    return this._typesToNames;
-  }
   
   public TypeWithRestrictedNamesBucket(final int id, final Map<? extends JvmType, ? extends Set<String>> types, final IResolvedFeatures.Provider resolvedFeaturesProvider) {
     super(id, null, resolvedFeaturesProvider);
@@ -47,7 +44,13 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
     return new ArrayList<JvmType>(_keySet);
   }
   
+  public TypeWithRestrictedNamesBucket(final int id, final List<? extends JvmType> types, final IResolvedFeatures.Provider resolvedFeaturesProvider, final Map<? extends JvmType, ? extends Set<String>> typesToNames) {
+    super(id, types, resolvedFeaturesProvider);
+    this._typesToNames = typesToNames;
+  }
+  
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
@@ -56,6 +59,7 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -75,8 +79,14 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public Map<? extends JvmType, ? extends Set<String>> getTypesToNames() {
+    return this._typesToNames;
   }
 }

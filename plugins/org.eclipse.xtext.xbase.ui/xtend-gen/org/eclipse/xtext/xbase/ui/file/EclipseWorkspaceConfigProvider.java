@@ -13,37 +13,25 @@ import javax.inject.Provider;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.ui.file.EclipseProjectConfig;
 
 @SuppressWarnings("all")
 public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
+  @Property
   @Inject
   private IWorkspaceRoot _workspaceRoot;
   
-  public IWorkspaceRoot getWorkspaceRoot() {
-    return this._workspaceRoot;
-  }
-  
-  public void setWorkspaceRoot(final IWorkspaceRoot workspaceRoot) {
-    this._workspaceRoot = workspaceRoot;
-  }
-  
+  @Property
   @Inject
   private EclipseOutputConfigurationProvider _configurationProvider;
-  
-  public EclipseOutputConfigurationProvider getConfigurationProvider() {
-    return this._configurationProvider;
-  }
-  
-  public void setConfigurationProvider(final EclipseOutputConfigurationProvider configurationProvider) {
-    this._configurationProvider = configurationProvider;
-  }
   
   public WorkspaceConfig get() {
     IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
@@ -63,5 +51,23 @@ public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig>
     };
     IterableExtensions.<IProject>forEach(((Iterable<IProject>)Conversions.doWrapArray(_projects)), _function);
     return result;
+  }
+  
+  @Pure
+  public IWorkspaceRoot getWorkspaceRoot() {
+    return this._workspaceRoot;
+  }
+  
+  public void setWorkspaceRoot(final IWorkspaceRoot workspaceRoot) {
+    this._workspaceRoot = workspaceRoot;
+  }
+  
+  @Pure
+  public EclipseOutputConfigurationProvider getConfigurationProvider() {
+    return this._configurationProvider;
+  }
+  
+  public void setConfigurationProvider(final EclipseOutputConfigurationProvider configurationProvider) {
+    this._configurationProvider = configurationProvider;
   }
 }

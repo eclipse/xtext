@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -42,45 +44,17 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
  */
 @SuppressWarnings("all")
 public abstract class AbstractCodeBuilder implements ICodeBuilder {
+  @Property
   private Object _ownerSource;
   
-  public Object getOwnerSource() {
-    return this._ownerSource;
-  }
-  
-  public void setOwnerSource(final Object ownerSource) {
-    this._ownerSource = ownerSource;
-  }
-  
+  @Property
   private JvmDeclaredType _owner;
   
-  public JvmDeclaredType getOwner() {
-    return this._owner;
-  }
-  
-  public void setOwner(final JvmDeclaredType owner) {
-    this._owner = owner;
-  }
-  
+  @Property
   private JvmVisibility _visibility;
   
-  public JvmVisibility getVisibility() {
-    return this._visibility;
-  }
-  
-  public void setVisibility(final JvmVisibility visibility) {
-    this._visibility = visibility;
-  }
-  
+  @Property
   private EObject _context;
-  
-  public EObject getContext() {
-    return this._context;
-  }
-  
-  public void setContext(final EObject context) {
-    this._context = context;
-  }
   
   @Inject
   @Extension
@@ -275,5 +249,41 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
       _switchResult = false;
     }
     return _switchResult;
+  }
+  
+  @Pure
+  public Object getOwnerSource() {
+    return this._ownerSource;
+  }
+  
+  public void setOwnerSource(final Object ownerSource) {
+    this._ownerSource = ownerSource;
+  }
+  
+  @Pure
+  public JvmDeclaredType getOwner() {
+    return this._owner;
+  }
+  
+  public void setOwner(final JvmDeclaredType owner) {
+    this._owner = owner;
+  }
+  
+  @Pure
+  public JvmVisibility getVisibility() {
+    return this._visibility;
+  }
+  
+  public void setVisibility(final JvmVisibility visibility) {
+    this._visibility = visibility;
+  }
+  
+  @Pure
+  public EObject getContext() {
+    return this._context;
+  }
+  
+  public void setContext(final EObject context) {
+    this._context = context;
   }
 }

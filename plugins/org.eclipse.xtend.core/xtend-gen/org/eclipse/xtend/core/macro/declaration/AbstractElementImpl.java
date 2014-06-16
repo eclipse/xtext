@@ -8,11 +8,18 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public abstract class AbstractElementImpl<T extends Object> {
+  @Property
   private T _delegate;
   
+  @Property
+  private CompilationUnitImpl _compilationUnit;
+  
+  @Pure
   public T getDelegate() {
     return this._delegate;
   }
@@ -21,8 +28,7 @@ public abstract class AbstractElementImpl<T extends Object> {
     this._delegate = delegate;
   }
   
-  private CompilationUnitImpl _compilationUnit;
-  
+  @Pure
   public CompilationUnitImpl getCompilationUnit() {
     return this._compilationUnit;
   }

@@ -9,10 +9,12 @@ package org.eclipse.xtext.xbase.typesystem.util;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper;
@@ -33,8 +35,66 @@ import org.eclipse.xtext.xtype.XtypeFactory;
 @SuppressWarnings("all")
 public class CommonTypeComputationServices {
   @Inject
+  @Property
   private OperatorMapping _operatorMapping;
   
+  @Inject
+  @Property
+  private XExpressionHelper _expressionHelper;
+  
+  @Inject
+  @Property
+  private TypeReferences _typeReferences;
+  
+  @Inject
+  @Property
+  private TypeConformanceComputer _typeConformanceComputer;
+  
+  @Inject
+  @Property
+  private IRawTypeHelper _rawTypeHelper;
+  
+  @Inject
+  @Property
+  private Primitives _primitives;
+  
+  @Inject
+  @Property
+  private FunctionTypes _functionTypes;
+  
+  @Inject
+  @Property
+  private ArrayTypes _arrayTypes;
+  
+  @Inject
+  @Property
+  private BoundTypeArgumentMerger _boundTypeArgumentMerger;
+  
+  @Inject
+  @Property
+  private SynonymTypesProvider _synonymTypesProvider;
+  
+  @Inject
+  @Property
+  private IJvmModelAssociations _jvmModelAssociations;
+  
+  @Inject
+  @Property
+  private ExtendedEarlyExitComputer _earlyExitComputer;
+  
+  @Inject
+  @Property
+  private HumanReadableTypeNames _humanReadableTypeNames;
+  
+  @Inject(optional = true)
+  @Property
+  private XtypeFactory _xtypeFactory = XtypeFactory.eINSTANCE;
+  
+  @Inject(optional = true)
+  @Property
+  private TypesFactory _typesFactory = TypesFactory.eINSTANCE;
+  
+  @Pure
   public OperatorMapping getOperatorMapping() {
     return this._operatorMapping;
   }
@@ -43,9 +103,7 @@ public class CommonTypeComputationServices {
     this._operatorMapping = operatorMapping;
   }
   
-  @Inject
-  private XExpressionHelper _expressionHelper;
-  
+  @Pure
   public XExpressionHelper getExpressionHelper() {
     return this._expressionHelper;
   }
@@ -54,9 +112,7 @@ public class CommonTypeComputationServices {
     this._expressionHelper = expressionHelper;
   }
   
-  @Inject
-  private TypeReferences _typeReferences;
-  
+  @Pure
   public TypeReferences getTypeReferences() {
     return this._typeReferences;
   }
@@ -65,9 +121,7 @@ public class CommonTypeComputationServices {
     this._typeReferences = typeReferences;
   }
   
-  @Inject
-  private TypeConformanceComputer _typeConformanceComputer;
-  
+  @Pure
   public TypeConformanceComputer getTypeConformanceComputer() {
     return this._typeConformanceComputer;
   }
@@ -76,9 +130,7 @@ public class CommonTypeComputationServices {
     this._typeConformanceComputer = typeConformanceComputer;
   }
   
-  @Inject
-  private IRawTypeHelper _rawTypeHelper;
-  
+  @Pure
   public IRawTypeHelper getRawTypeHelper() {
     return this._rawTypeHelper;
   }
@@ -87,9 +139,7 @@ public class CommonTypeComputationServices {
     this._rawTypeHelper = rawTypeHelper;
   }
   
-  @Inject
-  private Primitives _primitives;
-  
+  @Pure
   public Primitives getPrimitives() {
     return this._primitives;
   }
@@ -98,9 +148,7 @@ public class CommonTypeComputationServices {
     this._primitives = primitives;
   }
   
-  @Inject
-  private FunctionTypes _functionTypes;
-  
+  @Pure
   public FunctionTypes getFunctionTypes() {
     return this._functionTypes;
   }
@@ -109,9 +157,7 @@ public class CommonTypeComputationServices {
     this._functionTypes = functionTypes;
   }
   
-  @Inject
-  private ArrayTypes _arrayTypes;
-  
+  @Pure
   public ArrayTypes getArrayTypes() {
     return this._arrayTypes;
   }
@@ -120,9 +166,7 @@ public class CommonTypeComputationServices {
     this._arrayTypes = arrayTypes;
   }
   
-  @Inject
-  private BoundTypeArgumentMerger _boundTypeArgumentMerger;
-  
+  @Pure
   public BoundTypeArgumentMerger getBoundTypeArgumentMerger() {
     return this._boundTypeArgumentMerger;
   }
@@ -131,9 +175,7 @@ public class CommonTypeComputationServices {
     this._boundTypeArgumentMerger = boundTypeArgumentMerger;
   }
   
-  @Inject
-  private SynonymTypesProvider _synonymTypesProvider;
-  
+  @Pure
   public SynonymTypesProvider getSynonymTypesProvider() {
     return this._synonymTypesProvider;
   }
@@ -142,9 +184,7 @@ public class CommonTypeComputationServices {
     this._synonymTypesProvider = synonymTypesProvider;
   }
   
-  @Inject
-  private IJvmModelAssociations _jvmModelAssociations;
-  
+  @Pure
   public IJvmModelAssociations getJvmModelAssociations() {
     return this._jvmModelAssociations;
   }
@@ -153,9 +193,7 @@ public class CommonTypeComputationServices {
     this._jvmModelAssociations = jvmModelAssociations;
   }
   
-  @Inject
-  private ExtendedEarlyExitComputer _earlyExitComputer;
-  
+  @Pure
   public ExtendedEarlyExitComputer getEarlyExitComputer() {
     return this._earlyExitComputer;
   }
@@ -164,9 +202,7 @@ public class CommonTypeComputationServices {
     this._earlyExitComputer = earlyExitComputer;
   }
   
-  @Inject
-  private HumanReadableTypeNames _humanReadableTypeNames;
-  
+  @Pure
   public HumanReadableTypeNames getHumanReadableTypeNames() {
     return this._humanReadableTypeNames;
   }
@@ -175,9 +211,7 @@ public class CommonTypeComputationServices {
     this._humanReadableTypeNames = humanReadableTypeNames;
   }
   
-  @Inject(optional = true)
-  private XtypeFactory _xtypeFactory = XtypeFactory.eINSTANCE;
-  
+  @Pure
   public XtypeFactory getXtypeFactory() {
     return this._xtypeFactory;
   }
@@ -186,9 +220,7 @@ public class CommonTypeComputationServices {
     this._xtypeFactory = xtypeFactory;
   }
   
-  @Inject(optional = true)
-  private TypesFactory _typesFactory = TypesFactory.eINSTANCE;
-  
+  @Pure
   public TypesFactory getTypesFactory() {
     return this._typesFactory;
   }

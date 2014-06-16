@@ -54,6 +54,7 @@ import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -921,6 +922,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
     }
   }
   
+  @Ignore("tracing is currently not supported by the active annotation API")
   @Test
   public void testPropertyJavaElements() {
     try {

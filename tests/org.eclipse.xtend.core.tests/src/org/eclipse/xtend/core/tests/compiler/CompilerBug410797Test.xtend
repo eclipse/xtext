@@ -240,7 +240,7 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			package org.eclipse.xtext.xbase.formatting;
-			
+
 			import com.google.common.collect.Iterables;
 			import java.util.List;
 			import org.eclipse.xtend.lib.Data;
@@ -251,6 +251,7 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Functions.Function2;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			import org.eclipse.xtext.xbase.lib.Pure;
 			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@Data
@@ -258,15 +259,7 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			public class HiddenLeafs {
 			  private final int _offset;
 			  
-			  public int getOffset() {
-			    return this._offset;
-			  }
-			  
 			  private final List<LeafInfo> _leafs = CollectionLiterals.<LeafInfo>newArrayList();
-			  
-			  public List<LeafInfo> getLeafs() {
-			    return this._leafs;
-			  }
 			  
 			  public boolean isSingleWhitespace() {
 			    boolean _or = false;
@@ -342,6 +335,7 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public int hashCode() {
 			    final int prime = 31;
 			    int result = 1;
@@ -351,6 +345,7 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public boolean equals(final Object obj) {
 			    if (this == obj)
 			      return true;
@@ -370,9 +365,20 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
+			  }
+			  
+			  @Pure
+			  public int getOffset() {
+			    return this._offset;
+			  }
+			  
+			  @Pure
+			  public List<LeafInfo> getLeafs() {
+			    return this._leafs;
 			  }
 			}
 		''')

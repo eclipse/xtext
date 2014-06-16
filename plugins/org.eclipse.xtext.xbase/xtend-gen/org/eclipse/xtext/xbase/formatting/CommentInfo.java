@@ -5,15 +5,12 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
 import org.eclipse.xtext.xbase.formatting.LeafInfo;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @Data
 @SuppressWarnings("all")
 public class CommentInfo extends LeafInfo {
   private final boolean _trailing;
-  
-  public boolean isTrailing() {
-    return this._trailing;
-  }
   
   public boolean endsWithNewLine() {
     ILeafNode _node = this.getNode();
@@ -53,6 +50,7 @@ public class CommentInfo extends LeafInfo {
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
@@ -61,6 +59,7 @@ public class CommentInfo extends LeafInfo {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -74,5 +73,10 @@ public class CommentInfo extends LeafInfo {
     if (other._trailing != this._trailing)
       return false;
     return true;
+  }
+  
+  @Pure
+  public boolean isTrailing() {
+    return this._trailing;
   }
 }

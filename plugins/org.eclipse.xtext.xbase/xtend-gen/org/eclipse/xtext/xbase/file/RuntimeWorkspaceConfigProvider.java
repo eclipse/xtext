@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.io.File;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -25,25 +27,11 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
+  @Property
   private File _workspaceRoot = new File(".").getAbsoluteFile().getParentFile();
   
-  public File getWorkspaceRoot() {
-    return this._workspaceRoot;
-  }
-  
-  public void setWorkspaceRoot(final File workspaceRoot) {
-    this._workspaceRoot = workspaceRoot;
-  }
-  
+  @Property
   private WorkspaceConfig _workspaceConfig;
-  
-  public WorkspaceConfig getWorkspaceConfig() {
-    return this._workspaceConfig;
-  }
-  
-  public void setWorkspaceConfig(final WorkspaceConfig workspaceConfig) {
-    this._workspaceConfig = workspaceConfig;
-  }
   
   public WorkspaceConfig get() {
     WorkspaceConfig _workspaceConfig = this.getWorkspaceConfig();
@@ -78,5 +66,23 @@ public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig>
       this.setWorkspaceConfig(_doubleArrow);
     }
     return this.getWorkspaceConfig();
+  }
+  
+  @Pure
+  public File getWorkspaceRoot() {
+    return this._workspaceRoot;
+  }
+  
+  public void setWorkspaceRoot(final File workspaceRoot) {
+    this._workspaceRoot = workspaceRoot;
+  }
+  
+  @Pure
+  public WorkspaceConfig getWorkspaceConfig() {
+    return this._workspaceConfig;
+  }
+  
+  public void setWorkspaceConfig(final WorkspaceConfig workspaceConfig) {
+    this._workspaceConfig = workspaceConfig;
   }
 }
