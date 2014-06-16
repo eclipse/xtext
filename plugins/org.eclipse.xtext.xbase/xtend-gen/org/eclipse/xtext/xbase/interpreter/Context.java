@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -21,27 +22,11 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 public class Context {
   private final JvmTypeReference _expectedType;
   
-  public JvmTypeReference getExpectedType() {
-    return this._expectedType;
-  }
-  
   private final ClassFinder _classFinder;
-  
-  public ClassFinder getClassFinder() {
-    return this._classFinder;
-  }
   
   private final Map<String, JvmIdentifiableElement> _visibleFeatures;
   
-  public Map<String, JvmIdentifiableElement> getVisibleFeatures() {
-    return this._visibleFeatures;
-  }
-  
   private final Set<XExpression> _alreadyEvaluating;
-  
-  public Set<XExpression> getAlreadyEvaluating() {
-    return this._alreadyEvaluating;
-  }
   
   public Context cloneWithExpectation(final JvmTypeReference newExpectation) {
     ClassFinder _classFinder = this.getClassFinder();
@@ -70,6 +55,7 @@ public class Context {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -102,8 +88,29 @@ public class Context {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public JvmTypeReference getExpectedType() {
+    return this._expectedType;
+  }
+  
+  @Pure
+  public ClassFinder getClassFinder() {
+    return this._classFinder;
+  }
+  
+  @Pure
+  public Map<String, JvmIdentifiableElement> getVisibleFeatures() {
+    return this._visibleFeatures;
+  }
+  
+  @Pure
+  public Set<XExpression> getAlreadyEvaluating() {
+    return this._alreadyEvaluating;
   }
 }

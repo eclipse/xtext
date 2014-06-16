@@ -1,9 +1,17 @@
 package org.eclipse.xtext.xbase.compiler;
 
+import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtext.xbase.lib.Pure;
+
 @SuppressWarnings("all")
 public class GeneratorConfig {
+  @Property
   private boolean _generateExpressions = true;
   
+  @Property
+  private boolean _generateSyntheticSuppressWarnings = true;
+  
+  @Pure
   public boolean isGenerateExpressions() {
     return this._generateExpressions;
   }
@@ -12,8 +20,7 @@ public class GeneratorConfig {
     this._generateExpressions = generateExpressions;
   }
   
-  private boolean _generateSyntheticSuppressWarnings = true;
-  
+  @Pure
   public boolean isGenerateSyntheticSuppressWarnings() {
     return this._generateSyntheticSuppressWarnings;
   }

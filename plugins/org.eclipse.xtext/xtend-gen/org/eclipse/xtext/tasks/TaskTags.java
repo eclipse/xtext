@@ -9,8 +9,10 @@ package org.eclipse.xtext.tasks;
 
 import java.util.Iterator;
 import java.util.List;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.tasks.TaskTag;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -18,15 +20,8 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
  */
 @SuppressWarnings("all")
 public class TaskTags implements Iterable<TaskTag> {
+  @Property
   private boolean _caseSensitive;
-  
-  public boolean isCaseSensitive() {
-    return this._caseSensitive;
-  }
-  
-  public void setCaseSensitive(final boolean caseSensitive) {
-    this._caseSensitive = caseSensitive;
-  }
   
   private final List<TaskTag> taskTags = CollectionLiterals.<TaskTag>newArrayList();
   
@@ -36,5 +31,14 @@ public class TaskTags implements Iterable<TaskTag> {
   
   public List<TaskTag> getTaskTags() {
     return this.taskTags;
+  }
+  
+  @Pure
+  public boolean isCaseSensitive() {
+    return this._caseSensitive;
+  }
+  
+  public void setCaseSensitive(final boolean caseSensitive) {
+    this._caseSensitive = caseSensitive;
   }
 }

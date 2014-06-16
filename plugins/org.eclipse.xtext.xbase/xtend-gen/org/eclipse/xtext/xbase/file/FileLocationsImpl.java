@@ -13,10 +13,12 @@ import com.google.inject.Provider;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -24,15 +26,8 @@ import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 @SuppressWarnings("all")
 public class FileLocationsImpl implements FileLocations {
   @Inject
+  @Property
   private Provider<WorkspaceConfig> _projectInformationProvider;
-  
-  public Provider<WorkspaceConfig> getProjectInformationProvider() {
-    return this._projectInformationProvider;
-  }
-  
-  public void setProjectInformationProvider(final Provider<WorkspaceConfig> projectInformationProvider) {
-    this._projectInformationProvider = projectInformationProvider;
-  }
   
   protected ProjectConfig getProjectConfig(final Path path) {
     List<String> _segments = path.getSegments();
@@ -78,5 +73,14 @@ public class FileLocationsImpl implements FileLocations {
   public Path getProjectFolder(final Path path) {
     final ProjectConfig config = this.getProjectConfig(path);
     return config.getRootPath();
+  }
+  
+  @Pure
+  public Provider<WorkspaceConfig> getProjectInformationProvider() {
+    return this._projectInformationProvider;
+  }
+  
+  public void setProjectInformationProvider(final Provider<WorkspaceConfig> projectInformationProvider) {
+    this._projectInformationProvider = projectInformationProvider;
   }
 }

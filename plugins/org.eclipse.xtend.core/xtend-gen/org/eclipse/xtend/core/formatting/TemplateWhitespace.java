@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.formatting;
 
 import org.eclipse.xtend.core.formatting.Chunk;
 import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @Data
 @SuppressWarnings("all")
@@ -24,6 +25,7 @@ public class TemplateWhitespace extends Chunk {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;

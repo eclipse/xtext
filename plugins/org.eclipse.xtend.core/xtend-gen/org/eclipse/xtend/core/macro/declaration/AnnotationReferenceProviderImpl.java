@@ -120,7 +120,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
   }
   
   public AnnotationReference newAnnotationReference(final Type annotationTypeDelcaration, final Procedure1<AnnotationReferenceBuildContext> initializer) {
-    AnnotationReference _xblockexpression = null;
+    Object _xblockexpression = null;
     {
       this.compilationUnit.checkCanceled();
       boolean _notEquals = (!Objects.equal(annotationTypeDelcaration, null));
@@ -166,7 +166,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
       }
       _xblockexpression = null;
     }
-    return _xblockexpression;
+    return ((AnnotationReference)_xblockexpression);
   }
   
   public AnnotationReference newAnnotationReference(final Class<?> annotationClass, final Procedure1<AnnotationReferenceBuildContext> initializer) {
@@ -183,7 +183,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
   }
   
   public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference, final Procedure1<AnnotationReferenceBuildContext> initializer) {
-    AnnotationReference _xblockexpression = null;
+    Object _xblockexpression = null;
     {
       this.compilationUnit.checkCanceled();
       boolean _notEquals = (!Objects.equal(annotationReference, null));
@@ -225,7 +225,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
       }
       _xblockexpression = null;
     }
-    return _xblockexpression;
+    return ((AnnotationReference)_xblockexpression);
   }
   
   protected boolean isArrayOfAnnotations(final JvmAnnotationValue annotationValue) {

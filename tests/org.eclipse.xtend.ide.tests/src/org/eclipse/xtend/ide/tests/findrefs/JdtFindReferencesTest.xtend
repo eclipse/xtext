@@ -30,6 +30,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import org.junit.Ignore
 
 class JdtFindReferencesTest extends AbstractXtendUITestCase {
 	
@@ -278,7 +279,8 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 			assertTrue(exists[it instanceof IField && (it as IField).elementName == 'foo'])
 		]
 	}
-
+	
+	@Ignore("tracing is currently not supported by the active annotation API")
 	@Test def void testPropertyJavaElements() {
 		val field = xtendFile("Xtend.xtend", '''
 			class Xtend {

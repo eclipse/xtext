@@ -1791,16 +1791,13 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.Pure;
 			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@Data
 			@SuppressWarnings("all")
 			public class Weight<T extends Comparable> implements Comparable<Weight<T>> {
 			  private final T _weight;
-			  
-			  public T getWeight() {
-			    return this._weight;
-			  }
 			  
 			  public int compareTo(final Weight w) {
 			    T _weight = this.getWeight();
@@ -1822,6 +1819,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public boolean equals(final Object obj) {
 			    if (this == obj)
 			      return true;
@@ -1839,9 +1837,15 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
+			  }
+			  
+			  @Pure
+			  public T getWeight() {
+			    return this._weight;
 			  }
 			}
 		''')
@@ -1859,16 +1863,13 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.Pure;
 			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@Data
 			@SuppressWarnings("all")
 			public class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {
 			  private final T _weight;
-			  
-			  public T getWeight() {
-			    return this._weight;
-			  }
 			  
 			  public int compareTo(final Weight<T> w) {
 			    T _weight = this.getWeight();
@@ -1890,6 +1891,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public boolean equals(final Object obj) {
 			    if (this == obj)
 			      return true;
@@ -1907,9 +1909,15 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
+			  }
+			  
+			  @Pure
+			  public T getWeight() {
+			    return this._weight;
 			  }
 			}
 		''')
@@ -1927,16 +1935,13 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.Pure;
 			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@Data
 			@SuppressWarnings("all")
 			public class Weight<T extends Comparable> implements Comparable<Weight<T>> {
 			  private final T _weight;
-			  
-			  public T getWeight() {
-			    return this._weight;
-			  }
 			  
 			  public int compareTo(final Weight<T> w) {
 			    T _weight = this.getWeight();
@@ -1958,6 +1963,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public boolean equals(final Object obj) {
 			    if (this == obj)
 			      return true;
@@ -1975,9 +1981,15 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
+			  }
+			  
+			  @Pure
+			  public T getWeight() {
+			    return this._weight;
 			  }
 			}
 		''')
@@ -1995,16 +2007,13 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.Pure;
 			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@Data
 			@SuppressWarnings("all")
 			public class Weight<T extends Comparable> implements Comparable<Weight> {
 			  private final T _weight;
-			  
-			  public T getWeight() {
-			    return this._weight;
-			  }
 			  
 			  public int compareTo(final Weight w) {
 			    T _weight = this.getWeight();
@@ -2026,6 +2035,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public boolean equals(final Object obj) {
 			    if (this == obj)
 			      return true;
@@ -2043,9 +2053,15 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
+			  }
+			  
+			  @Pure
+			  public T getWeight() {
+			    return this._weight;
 			  }
 			}
 		''')
@@ -2758,16 +2774,13 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			}
 		'''.assertCompilesTo('''
 			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.Pure;
 			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@Data
 			@SuppressWarnings("all")
 			public class Foo {
 			  private static String staticField;
-			  
-			  public Foo() {
-			    super();
-			  }
 			  
 			  @Override
 			  public int hashCode() {
@@ -2777,6 +2790,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public boolean equals(final Object obj) {
 			    if (this == obj)
 			      return true;
@@ -2789,6 +2803,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
@@ -2805,6 +2820,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			}
 		'''.assertCompilesTo('''
 			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.Pure;
 			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@Data
@@ -2813,10 +2829,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private static String staticField;
 			  
 			  private final String _nonStaticField;
-			  
-			  public String getNonStaticField() {
-			    return this._nonStaticField;
-			  }
 			  
 			  public Foo(final String nonStaticField) {
 			    super();
@@ -2832,6 +2844,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public boolean equals(final Object obj) {
 			    if (this == obj)
 			      return true;
@@ -2849,9 +2862,15 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
+			  }
+			  
+			  @Pure
+			  public String getNonStaticField() {
+			    return this._nonStaticField;
 			  }
 			}
 		''')
@@ -2865,6 +2884,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			import org.eclipse.xtend.lib.Data;
 			import org.eclipse.xtext.xbase.lib.Extension;
+			import org.eclipse.xtext.xbase.lib.Pure;
 			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@Data
@@ -2872,10 +2892,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			public class UsesExtension {
 			  @Extension
 			  private final String __string;
-			  
-			  public String get_string() {
-			    return this.__string;
-			  }
 			  
 			  public UsesExtension(final String _string) {
 			    super();
@@ -2891,6 +2907,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public boolean equals(final Object obj) {
 			    if (this == obj)
 			      return true;
@@ -2908,9 +2925,15 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  @Override
+			  @Pure
 			  public String toString() {
 			    String result = new ToStringHelper().toString(this);
 			    return result;
+			  }
+			  
+			  @Pure
+			  public String get_string() {
+			    return this.__string;
 			  }
 			}
 		''')

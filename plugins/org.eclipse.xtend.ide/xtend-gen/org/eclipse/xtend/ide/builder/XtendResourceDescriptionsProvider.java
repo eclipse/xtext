@@ -58,10 +58,10 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
                   _or = _lessThan;
                 }
                 if (_or) {
-                  return false;
+                  return Boolean.valueOf(false);
                 }
                 String _segment = uri.segment(1);
-                return Objects.equal(_segment, encodedProjectName);
+                return Boolean.valueOf(Objects.equal(_segment, encodedProjectName));
               }
             };
             return new FilteringResourceDescriptions(result, _function);
@@ -86,10 +86,10 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
             _or = _lessThan;
           }
           if (_or) {
-            return false;
+            return Boolean.valueOf(false);
           }
           String _segment = uri.segment(1);
-          return (!Objects.equal(_segment, encodedProjectName));
+          return Boolean.valueOf((!Objects.equal(_segment, encodedProjectName)));
         }
       };
       return new FilteringResourceDescriptions(result, _function);

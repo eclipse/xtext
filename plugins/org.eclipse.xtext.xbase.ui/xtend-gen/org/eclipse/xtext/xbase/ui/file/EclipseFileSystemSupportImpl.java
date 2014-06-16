@@ -24,6 +24,7 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * A FileSystemSupport implementation which maps to the Eclipse Resources API.
@@ -42,16 +44,9 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  */
 @SuppressWarnings("all")
 public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
+  @Property
   @Inject
   private IWorkspaceRoot _workspaceRoot;
-  
-  public IWorkspaceRoot getWorkspaceRoot() {
-    return this._workspaceRoot;
-  }
-  
-  public void setWorkspaceRoot(final IWorkspaceRoot workspaceRoot) {
-    this._workspaceRoot = workspaceRoot;
-  }
   
   protected IFile getEclipseFile(final Path path) {
     IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot();
@@ -372,5 +367,14 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     org.eclipse.emf.common.util.URI _uRI_2 = res.getURI();
     String _platformString = _uRI_2.toPlatformString(false);
     return new Path(_platformString);
+  }
+  
+  @Pure
+  public IWorkspaceRoot getWorkspaceRoot() {
+    return this._workspaceRoot;
+  }
+  
+  public void setWorkspaceRoot(final IWorkspaceRoot workspaceRoot) {
+    this._workspaceRoot = workspaceRoot;
   }
 }

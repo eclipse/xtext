@@ -2,54 +2,30 @@ package org.eclipse.xtend.core.formatting;
 
 import java.util.List;
 import org.eclipse.xtend.core.formatting.Chunk;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class Line {
+  @Property
   private final int _offset;
   
-  public int getOffset() {
-    return this._offset;
-  }
-  
+  @Property
   private final boolean _leadingSemanticNewLine;
   
-  public boolean isLeadingSemanticNewLine() {
-    return this._leadingSemanticNewLine;
-  }
-  
+  @Property
   private final int _newLineCharCount;
   
-  public int getNewLineCharCount() {
-    return this._newLineCharCount;
-  }
-  
+  @Property
   private final List<Chunk> _chunks = CollectionLiterals.<Chunk>newArrayList();
   
-  public List<Chunk> getChunks() {
-    return this._chunks;
-  }
-  
+  @Property
   private String _content;
   
-  public String getContent() {
-    return this._content;
-  }
-  
-  public void setContent(final String content) {
-    this._content = content;
-  }
-  
+  @Property
   private int _indentLength;
-  
-  public int getIndentLength() {
-    return this._indentLength;
-  }
-  
-  public void setIndentLength(final int indentLength) {
-    this._indentLength = indentLength;
-  }
   
   public Line(final int offset, final boolean leadingSemanticNewLine, final int newLineCharCount) {
     this._offset = offset;
@@ -71,5 +47,43 @@ public class Line {
     String _plus_1 = (_plus + _join);
     String _content = this.getContent();
     return (_plus_1 + _content);
+  }
+  
+  @Pure
+  public int getOffset() {
+    return this._offset;
+  }
+  
+  @Pure
+  public boolean isLeadingSemanticNewLine() {
+    return this._leadingSemanticNewLine;
+  }
+  
+  @Pure
+  public int getNewLineCharCount() {
+    return this._newLineCharCount;
+  }
+  
+  @Pure
+  public List<Chunk> getChunks() {
+    return this._chunks;
+  }
+  
+  @Pure
+  public String getContent() {
+    return this._content;
+  }
+  
+  public void setContent(final String content) {
+    this._content = content;
+  }
+  
+  @Pure
+  public int getIndentLength() {
+    return this._indentLength;
+  }
+  
+  public void setIndentLength(final int indentLength) {
+    this._indentLength = indentLength;
   }
 }

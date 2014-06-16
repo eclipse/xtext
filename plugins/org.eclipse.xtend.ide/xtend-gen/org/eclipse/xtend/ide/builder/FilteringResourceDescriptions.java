@@ -10,6 +10,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -17,15 +18,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 public class FilteringResourceDescriptions implements IResourceDescriptions {
   private final IResourceDescriptions _delegate;
   
-  public IResourceDescriptions getDelegate() {
-    return this._delegate;
-  }
-  
   private final Function1<? super URI, ? extends Boolean> _filter;
-  
-  public Function1<? super URI, ? extends Boolean> getFilter() {
-    return this._filter;
-  }
   
   public Iterable<IResourceDescription> getAllResourceDescriptions() {
     IResourceDescriptions _delegate = this.getDelegate();
@@ -122,6 +115,7 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -144,8 +138,19 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public IResourceDescriptions getDelegate() {
+    return this._delegate;
+  }
+  
+  @Pure
+  public Function1<? super URI, ? extends Boolean> getFilter() {
+    return this._filter;
   }
 }

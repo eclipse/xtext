@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
@@ -23,33 +24,13 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 public class LightweightBoundTypeArgument {
   private final LightweightTypeReference _typeReference;
   
-  public LightweightTypeReference getTypeReference() {
-    return this._typeReference;
-  }
-  
   private final BoundTypeArgumentSource _source;
-  
-  public BoundTypeArgumentSource getSource() {
-    return this._source;
-  }
   
   private final Object _origin;
   
-  public Object getOrigin() {
-    return this._origin;
-  }
-  
   private final VarianceInfo _declaredVariance;
   
-  public VarianceInfo getDeclaredVariance() {
-    return this._declaredVariance;
-  }
-  
   private final VarianceInfo _actualVariance;
-  
-  public VarianceInfo getActualVariance() {
-    return this._actualVariance;
-  }
   
   public boolean isValidVariancePair() {
     VarianceInfo _declaredVariance = this.getDeclaredVariance();
@@ -80,6 +61,7 @@ public class LightweightBoundTypeArgument {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -117,8 +99,34 @@ public class LightweightBoundTypeArgument {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public LightweightTypeReference getTypeReference() {
+    return this._typeReference;
+  }
+  
+  @Pure
+  public BoundTypeArgumentSource getSource() {
+    return this._source;
+  }
+  
+  @Pure
+  public Object getOrigin() {
+    return this._origin;
+  }
+  
+  @Pure
+  public VarianceInfo getDeclaredVariance() {
+    return this._declaredVariance;
+  }
+  
+  @Pure
+  public VarianceInfo getActualVariance() {
+    return this._actualVariance;
   }
 }

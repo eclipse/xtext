@@ -11,6 +11,7 @@ import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractParameterBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.codebuilder.VariableNameAcceptor;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -39,55 +41,20 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   @Extension
   private CodeBuilderFactory _codeBuilderFactory;
   
+  @Property
   private List<AbstractParameterBuilder> _parameterBuilders = CollectionLiterals.<AbstractParameterBuilder>emptyList();
   
-  public List<AbstractParameterBuilder> getParameterBuilders() {
-    return this._parameterBuilders;
-  }
-  
-  public void setParameterBuilders(final List<AbstractParameterBuilder> parameterBuilders) {
-    this._parameterBuilders = parameterBuilders;
-  }
-  
+  @Property
   private List<LightweightTypeReference> _exceptions = CollectionLiterals.<LightweightTypeReference>emptyList();
   
-  public List<LightweightTypeReference> getExceptions() {
-    return this._exceptions;
-  }
-  
-  public void setExceptions(final List<LightweightTypeReference> exceptions) {
-    this._exceptions = exceptions;
-  }
-  
+  @Property
   private List<JvmTypeParameter> _typeParameters = CollectionLiterals.<JvmTypeParameter>emptyList();
   
-  public List<JvmTypeParameter> getTypeParameters() {
-    return this._typeParameters;
-  }
-  
-  public void setTypeParameters(final List<JvmTypeParameter> typeParameters) {
-    this._typeParameters = typeParameters;
-  }
-  
+  @Property
   private String _body;
   
-  public String getBody() {
-    return this._body;
-  }
-  
-  public void setBody(final String body) {
-    this._body = body;
-  }
-  
+  @Property
   private boolean _varArgsFlag;
-  
-  public boolean isVarArgsFlag() {
-    return this._varArgsFlag;
-  }
-  
-  public void setVarArgsFlag(final boolean varArgsFlag) {
-    this._varArgsFlag = varArgsFlag;
-  }
   
   public ISourceAppender appendBody(final ISourceAppender appendable, final String statementSeparator) {
     ISourceAppender _append = appendable.append(" {");
@@ -279,5 +246,50 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
       _and = _isValid;
     }
     return _and;
+  }
+  
+  @Pure
+  public List<AbstractParameterBuilder> getParameterBuilders() {
+    return this._parameterBuilders;
+  }
+  
+  public void setParameterBuilders(final List<AbstractParameterBuilder> parameterBuilders) {
+    this._parameterBuilders = parameterBuilders;
+  }
+  
+  @Pure
+  public List<LightweightTypeReference> getExceptions() {
+    return this._exceptions;
+  }
+  
+  public void setExceptions(final List<LightweightTypeReference> exceptions) {
+    this._exceptions = exceptions;
+  }
+  
+  @Pure
+  public List<JvmTypeParameter> getTypeParameters() {
+    return this._typeParameters;
+  }
+  
+  public void setTypeParameters(final List<JvmTypeParameter> typeParameters) {
+    this._typeParameters = typeParameters;
+  }
+  
+  @Pure
+  public String getBody() {
+    return this._body;
+  }
+  
+  public void setBody(final String body) {
+    this._body = body;
+  }
+  
+  @Pure
+  public boolean isVarArgsFlag() {
+    return this._varArgsFlag;
+  }
+  
+  public void setVarArgsFlag(final boolean varArgsFlag) {
+    this._varArgsFlag = varArgsFlag;
   }
 }

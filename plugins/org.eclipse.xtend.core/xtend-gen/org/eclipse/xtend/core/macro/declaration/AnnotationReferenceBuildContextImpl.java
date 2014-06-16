@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.macro.declaration.JvmEnumerationValueDeclarationIm
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendEnumerationValueDeclarationImpl;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
@@ -61,31 +62,18 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildContext {
+  @Property
   private JvmAnnotationReference _delegate;
   
-  public JvmAnnotationReference getDelegate() {
-    return this._delegate;
-  }
-  
-  public void setDelegate(final JvmAnnotationReference delegate) {
-    this._delegate = delegate;
-  }
-  
+  @Property
   private CompilationUnitImpl _compilationUnit;
-  
-  public CompilationUnitImpl getCompilationUnit() {
-    return this._compilationUnit;
-  }
-  
-  public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
-    this._compilationUnit = compilationUnit;
-  }
   
   protected JvmOperation findOperation(final String name) {
     ConditionUtils.checkJavaIdentifier(name, "name");
@@ -1187,5 +1175,23 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it, value, componentType, mustBeArray).toString());
     }
+  }
+  
+  @Pure
+  public JvmAnnotationReference getDelegate() {
+    return this._delegate;
+  }
+  
+  public void setDelegate(final JvmAnnotationReference delegate) {
+    this._delegate = delegate;
+  }
+  
+  @Pure
+  public CompilationUnitImpl getCompilationUnit() {
+    return this._compilationUnit;
+  }
+  
+  public void setCompilationUnit(final CompilationUnitImpl compilationUnit) {
+    this._compilationUnit = compilationUnit;
   }
 }

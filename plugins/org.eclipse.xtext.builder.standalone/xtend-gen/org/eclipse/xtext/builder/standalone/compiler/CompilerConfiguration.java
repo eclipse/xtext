@@ -7,13 +7,24 @@
  */
 package org.eclipse.xtext.builder.standalone.compiler;
 
+import org.eclipse.xtend.lib.Property;
+import org.eclipse.xtext.xbase.lib.Pure;
+
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class CompilerConfiguration {
+  @Property
   private String _sourceLevel = "1.5";
   
+  @Property
+  private String _targetLevel = "1.5";
+  
+  @Property
+  private boolean _verbose;
+  
+  @Pure
   public String getSourceLevel() {
     return this._sourceLevel;
   }
@@ -22,8 +33,7 @@ public class CompilerConfiguration {
     this._sourceLevel = sourceLevel;
   }
   
-  private String _targetLevel = "1.5";
-  
+  @Pure
   public String getTargetLevel() {
     return this._targetLevel;
   }
@@ -32,8 +42,7 @@ public class CompilerConfiguration {
     this._targetLevel = targetLevel;
   }
   
-  private boolean _verbose;
-  
+  @Pure
   public boolean isVerbose() {
     return this._verbose;
   }

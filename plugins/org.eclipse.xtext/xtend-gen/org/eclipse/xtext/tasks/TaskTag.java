@@ -7,7 +7,9 @@
  */
 package org.eclipse.xtext.tasks;
 
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.tasks.Priority;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -15,8 +17,18 @@ import org.eclipse.xtext.tasks.Priority;
  */
 @SuppressWarnings("all")
 public class TaskTag {
+  @Property
   private String _name;
   
+  @Property
+  private Priority _priority;
+  
+  public int length() {
+    String _name = this.getName();
+    return _name.length();
+  }
+  
+  @Pure
   public String getName() {
     return this._name;
   }
@@ -25,18 +37,12 @@ public class TaskTag {
     this._name = name;
   }
   
-  private Priority _priority;
-  
+  @Pure
   public Priority getPriority() {
     return this._priority;
   }
   
   public void setPriority(final Priority priority) {
     this._priority = priority;
-  }
-  
-  public int length() {
-    String _name = this.getName();
-    return _name.length();
   }
 }

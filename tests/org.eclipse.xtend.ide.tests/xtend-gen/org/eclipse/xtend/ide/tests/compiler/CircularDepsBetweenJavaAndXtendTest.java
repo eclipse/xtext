@@ -220,7 +220,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       _builder_2.append("val foo = provider.get");
       _builder_2.newLine();
       _builder_2.append("\t\t");
-      _builder_2.append("foo.toString");
+      _builder_2.append("println(foo.toString)");
       _builder_2.newLine();
       _builder_2.append("\t");
       _builder_2.append("}");

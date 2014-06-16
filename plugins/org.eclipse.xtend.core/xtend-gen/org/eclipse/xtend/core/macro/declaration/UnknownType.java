@@ -3,6 +3,7 @@ package org.eclipse.xtend.core.macro.declaration;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -10,15 +11,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 public class UnknownType implements Type {
   private final CompilationUnit _compilationUnit;
   
-  public CompilationUnit getCompilationUnit() {
-    return this._compilationUnit;
-  }
-  
   private final String _qualifiedName;
-  
-  public String getQualifiedName() {
-    return this._qualifiedName;
-  }
   
   public boolean isAssignableFrom(final Type otherType) {
     return false;
@@ -57,6 +50,7 @@ public class UnknownType implements Type {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -79,8 +73,19 @@ public class UnknownType implements Type {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public CompilationUnit getCompilationUnit() {
+    return this._compilationUnit;
+  }
+  
+  @Pure
+  public String getQualifiedName() {
+    return this._qualifiedName;
   }
 }

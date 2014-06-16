@@ -259,7 +259,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
   }
   
   protected JvmTypeReference getDisplayedType(final XtendField field) {
-    JvmTypeReference _xblockexpression = null;
+    Object _xblockexpression = null;
     {
       final JvmField jvmField = this._iXtendJvmAssociations.getJvmField(field);
       boolean _notEquals = (!Objects.equal(jvmField, null));
@@ -278,7 +278,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
       }
       _xblockexpression = null;
     }
-    return _xblockexpression;
+    return ((JvmTypeReference)_xblockexpression);
   }
   
   protected ImageDescriptor imageDescriptor(final Object operation) {

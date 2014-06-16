@@ -1,12 +1,36 @@
 package org.eclipse.xtext.xbase.junit.formatter;
 
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class AssertingFormatterData {
+  @Property
   private MapBasedPreferenceValues _config;
   
+  public FormattingPreferenceValues getCfg() {
+    MapBasedPreferenceValues _config = this.getConfig();
+    return new FormattingPreferenceValues(_config);
+  }
+  
+  @Property
+  private CharSequence _expectation;
+  
+  @Property
+  private CharSequence _toBeFormatted;
+  
+  @Property
+  private String _prefix;
+  
+  @Property
+  private String _postfix;
+  
+  @Property
+  private boolean _allowErrors;
+  
+  @Pure
   public MapBasedPreferenceValues getConfig() {
     return this._config;
   }
@@ -15,13 +39,7 @@ public class AssertingFormatterData {
     this._config = config;
   }
   
-  public FormattingPreferenceValues getCfg() {
-    MapBasedPreferenceValues _config = this.getConfig();
-    return new FormattingPreferenceValues(_config);
-  }
-  
-  private CharSequence _expectation;
-  
+  @Pure
   public CharSequence getExpectation() {
     return this._expectation;
   }
@@ -30,8 +48,7 @@ public class AssertingFormatterData {
     this._expectation = expectation;
   }
   
-  private CharSequence _toBeFormatted;
-  
+  @Pure
   public CharSequence getToBeFormatted() {
     return this._toBeFormatted;
   }
@@ -40,8 +57,7 @@ public class AssertingFormatterData {
     this._toBeFormatted = toBeFormatted;
   }
   
-  private String _prefix;
-  
+  @Pure
   public String getPrefix() {
     return this._prefix;
   }
@@ -50,8 +66,7 @@ public class AssertingFormatterData {
     this._prefix = prefix;
   }
   
-  private String _postfix;
-  
+  @Pure
   public String getPostfix() {
     return this._postfix;
   }
@@ -60,8 +75,7 @@ public class AssertingFormatterData {
     this._postfix = postfix;
   }
   
-  private boolean _allowErrors;
-  
+  @Pure
   public boolean isAllowErrors() {
     return this._allowErrors;
   }

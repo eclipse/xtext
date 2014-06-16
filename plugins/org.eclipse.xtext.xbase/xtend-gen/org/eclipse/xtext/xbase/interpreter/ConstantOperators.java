@@ -28,27 +28,27 @@ public class ConstantOperators {
   }
   
   protected Object _minus(final Integer e) {
-    return (-(e).intValue());
+    return Integer.valueOf((-(e).intValue()));
   }
   
   protected Object _minus(final Double e) {
-    return DoubleExtensions.operator_minus(e);
+    return Double.valueOf(DoubleExtensions.operator_minus(e));
   }
   
   protected Object _minus(final Long e) {
-    return (-(e).longValue());
+    return Long.valueOf((-(e).longValue()));
   }
   
   protected Object _minus(final Short e) {
-    return (-(e).shortValue());
+    return Integer.valueOf((-(e).shortValue()));
   }
   
   protected Object _minus(final Float e) {
-    return (-(e).floatValue());
+    return Float.valueOf((-(e).floatValue()));
   }
   
   protected Object _minus(final Byte e) {
-    return (-(e).byteValue());
+    return Integer.valueOf((-(e).byteValue()));
   }
   
   protected Object _plus(final String left, final Object right) {

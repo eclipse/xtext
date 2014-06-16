@@ -17,6 +17,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandFacade;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -46,25 +48,11 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   @Inject
   private Grammar grammar;
   
+  @Property
   private boolean _inheritImplementation = true;
   
-  public boolean isInheritImplementation() {
-    return this._inheritImplementation;
-  }
-  
-  public void setInheritImplementation(final boolean inheritImplementation) {
-    this._inheritImplementation = inheritImplementation;
-  }
-  
+  @Property
   private boolean _generateStub = true;
-  
-  public boolean isGenerateStub() {
-    return this._generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this._generateStub = generateStub;
-  }
   
   @Inject
   @Named("fileHeader")
@@ -203,5 +191,23 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     _create.evaluate2(
       "org::eclipse::xtext::ui::generator::contentAssist::JavaBasedContentAssistFragment::GenProposalProvider", 
       this.grammar, _singletonList);
+  }
+  
+  @Pure
+  public boolean isInheritImplementation() {
+    return this._inheritImplementation;
+  }
+  
+  public void setInheritImplementation(final boolean inheritImplementation) {
+    this._inheritImplementation = inheritImplementation;
+  }
+  
+  @Pure
+  public boolean isGenerateStub() {
+    return this._generateStub;
+  }
+  
+  public void setGenerateStub(final boolean generateStub) {
+    this._generateStub = generateStub;
   }
 }

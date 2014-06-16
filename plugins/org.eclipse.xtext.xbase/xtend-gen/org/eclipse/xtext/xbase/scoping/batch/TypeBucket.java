@@ -14,6 +14,7 @@ import java.util.Set;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
@@ -31,21 +32,9 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 public class TypeBucket {
   private final int _id;
   
-  public int getId() {
-    return this._id;
-  }
-  
   private final List<? extends JvmType> _types;
   
-  public List<? extends JvmType> getTypes() {
-    return this._types;
-  }
-  
   private final IResolvedFeatures.Provider _resolvedFeaturesProvider;
-  
-  public IResolvedFeatures.Provider getResolvedFeaturesProvider() {
-    return this._resolvedFeaturesProvider;
-  }
   
   public EnumSet<ConformanceHint> getHints() {
     return EnumSet.<ConformanceHint>of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
@@ -77,6 +66,7 @@ public class TypeBucket {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -101,8 +91,24 @@ public class TypeBucket {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public int getId() {
+    return this._id;
+  }
+  
+  @Pure
+  public List<? extends JvmType> getTypes() {
+    return this._types;
+  }
+  
+  @Pure
+  public IResolvedFeatures.Provider getResolvedFeaturesProvider() {
+    return this._resolvedFeaturesProvider;
   }
 }

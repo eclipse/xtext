@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -21,15 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 public class LightweightMergedBoundTypeArgument {
   private final LightweightTypeReference _typeReference;
   
-  public LightweightTypeReference getTypeReference() {
-    return this._typeReference;
-  }
-  
   private final VarianceInfo _variance;
-  
-  public VarianceInfo getVariance() {
-    return this._variance;
-  }
   
   public LightweightMergedBoundTypeArgument(final LightweightTypeReference typeReference, final VarianceInfo variance) {
     super();
@@ -47,6 +40,7 @@ public class LightweightMergedBoundTypeArgument {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -69,8 +63,19 @@ public class LightweightMergedBoundTypeArgument {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public LightweightTypeReference getTypeReference() {
+    return this._typeReference;
+  }
+  
+  @Pure
+  public VarianceInfo getVariance() {
+    return this._variance;
   }
 }
