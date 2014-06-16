@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ISelectable;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 
 /**
  * An implementation of {@link IDirtyStateManager} can be used to register
@@ -23,14 +24,15 @@ public interface IDirtyStateManager extends ISelectable, IExternalContentSupport
 	 * The {@link IDirtyStateManager} will raise specialized events that provide
 	 * direct type-safe access to the source as {@link IDirtyStateManager}.
 	 * @author Sebastian Zarnekow - Initial contribution and API
+	 * @deprecated No longer used. {@link ResourceDescriptionChangeEvent}s are fired instead.
 	 */
+	@Deprecated
 	interface Event extends IResourceDescription.Event {
 		
 		/**
 		 * The sender is guaranteed to be of type {@link IDirtyStateManager}.
 		 */
 		IDirtyStateManager getSender();
-		
 	}
 	
 	/**

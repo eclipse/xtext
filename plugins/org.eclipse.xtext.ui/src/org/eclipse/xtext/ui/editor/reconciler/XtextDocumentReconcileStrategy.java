@@ -16,6 +16,7 @@ import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -124,6 +125,13 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 			}
 			resource.update(replaceRegionToBeProcessed.getOffset(), replaceRegionToBeProcessed.getLength(),
 					replaceRegionToBeProcessed.getText());
+			if(resource instanceof DerivedStateAwareResource) {
+				DerivedStateAwareResource derivedResource = (DerivedStateAwareResource) resource;
+				if(!derivedResource.isFullyInitialized()) {
+					// trigger the model inference
+					derivedResource.installDerivedState(false);
+				}
+			}
 			resource.setModificationStamp(replaceRegionToBeProcessed.getModificationStamp());
 		} catch (RuntimeException exc) {
 			log.error("Parsing in reconciler failed.", exc);
