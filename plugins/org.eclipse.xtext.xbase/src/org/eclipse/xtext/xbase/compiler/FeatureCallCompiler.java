@@ -863,7 +863,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				if (index > numberArguments+numberImports) {
 					List<LightweightTypeReference> typeArguments = resolvedTypes.getActualTypeArguments(call);
 					LightweightTypeReference typeArgument = typeArguments.get(index - (numberArguments+numberImports+1));
-					serialize(typeArgument.getUpperBoundSubstitute().toTypeReference(), call, b);
+					serialize(typeArgument.getRawTypeReference().toTypeReference(), call, b);
 				} else if (index >= numberArguments && index < numberArguments + numberImports) {
 					serialize(importedTypes.get(index - numberArguments), call, b);
 				} else if (index == numberArguments + numberImports) {
