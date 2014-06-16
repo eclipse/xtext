@@ -24,17 +24,36 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 public class BuilderAwareFeatureScopeTrackerProvider implements IFeatureScopeTracker.Provider {
 
 	public IFeatureScopeTracker track(EObject root) {
-		if (isBuilderScope(root))
-			return IFeatureScopeTracker.NULL;
+		Resource resource = root.eResource();
+		if (resource != null) {
+			ResourceSet resourceSet = resource.getResourceSet();
+			if (resourceSet != null) {
+				Map<Object, Object> loadOptions = resourceSet.getLoadOptions();
+				if (isBuilderScope(loadOptions)) {
+					return IFeatureScopeTracker.NULL;
+				}
+				if (isLiveScope(loadOptions)) {
+					return IFeatureScopeTracker.NULL;
+				}
+				if (!isPrimaryResource(resourceSet, resource)) {
+					return IFeatureScopeTracker.NULL;
+				}
+			}
+		}
 		return new FeatureScopeTracker();
 	}
 
-	protected boolean isBuilderScope(EObject root) {
-		Resource resource = root.eResource();
-		if (resource == null)
-			return false;
-		ResourceSet resourceSet = resource.getResourceSet();
-		Map<Object, Object> loadOptions = resourceSet.getLoadOptions();
+	protected boolean isLiveScope(Map<Object, Object> loadOptions) {
+		boolean liveScope = loadOptions.containsKey(ResourceDescriptionsProvider.LIVE_SCOPE);
+		return liveScope;
+	}
+
+	protected boolean isPrimaryResource(ResourceSet resourceSet, Resource resource) {
+		boolean result = resourceSet.getResources().get(0) == resource;
+		return result;
+	}
+
+	protected boolean isBuilderScope(Map<Object, Object> loadOptions) {
 		boolean builderScope = loadOptions.containsKey(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE);
 		return builderScope;
 	}
