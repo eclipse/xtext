@@ -10,8 +10,10 @@ import org.eclipse.xtend.ide.builder.FilteringResourceDescriptions;
 import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.resource.CompilerPhases;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 @SuppressWarnings("all")
@@ -21,6 +23,9 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
   
   @Inject
   private CompilerPhases compilerPhases;
+  
+  @Inject
+  private IDirtyStateManager dirtyStateManager;
   
   /**
    * In the builder we use the Java representation for any upstream resources, so we filter them out here.
@@ -94,7 +99,14 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
       };
       return new FilteringResourceDescriptions(result, _function);
     } else {
-      return result;
+      final Function1<URI, Boolean> _function_1 = new Function1<URI, Boolean>() {
+        public Boolean apply(final URI uri) {
+          final URI resourceURI = uri.trimFragment();
+          final IResourceDescription dirtyResource = XtendResourceDescriptionsProvider.this.dirtyStateManager.getDirtyResourceDescription(resourceURI);
+          return (!Objects.equal(dirtyResource, null));
+        }
+      };
+      return new FilteringResourceDescriptions(result, _function_1);
     }
   }
 }

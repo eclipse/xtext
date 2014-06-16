@@ -36,6 +36,7 @@ import org.eclipse.xtend.ide.editor.OverrideIndicatorRulerAction;
 import org.eclipse.xtend.ide.editor.RichStringAwareSourceViewer;
 import org.eclipse.xtend.ide.editor.RichStringAwareToggleCommentAction;
 import org.eclipse.xtend.ide.editor.SingleLineCommentHelper;
+import org.eclipse.xtend.ide.editor.XtendDirtyStateEditorSupport;
 import org.eclipse.xtend.ide.editor.XtendDoubleClickStrategyProvider;
 import org.eclipse.xtend.ide.editor.XtendFoldingRegionProvider;
 import org.eclipse.xtend.ide.editor.XtendNatureAddingEditorCallback;
@@ -85,6 +86,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter;
+import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
@@ -510,6 +512,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends ExpressionUtil> bindExpressionUtil() {
 		return XtendExpressionUtil.class;
+	}
+	
+	public Class<? extends DirtyStateEditorSupport> bindDirtyStateEditorSupport() {
+		return XtendDirtyStateEditorSupport.class;
 	}
 	
 }
