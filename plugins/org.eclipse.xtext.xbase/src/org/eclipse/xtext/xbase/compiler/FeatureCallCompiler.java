@@ -159,13 +159,18 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-	protected String getLeftOperandVariable(final XAbstractFeatureCall expr, ITreeAppendable appendable) {
+	protected ITreeAppendable appendLeftOperand(final XAbstractFeatureCall expr, ITreeAppendable appendable, boolean isExpressionContext) {
 		XBinaryOperation binaryOperation = (XBinaryOperation) expr;
 		XAbstractFeatureCall leftOperand = (XAbstractFeatureCall) binaryOperation.getLeftOperand();
 		JvmIdentifiableElement feature = leftOperand.getFeature();
-		if (appendable.hasName(feature))
-			return appendable.getName(feature);
-		return feature.getSimpleName();
+		if (appendable.hasName(feature)) {
+			return appendable.append(appendable.getName(feature));
+		}
+		boolean hasReceiver = appendReceiver(leftOperand, appendable, isExpressionContext);
+		if (hasReceiver) {
+			appendable.append(".");
+		}
+		return appendable.append(feature.getSimpleName());
 	}
 
 	protected boolean needMultiAssignment(XAbstractFeatureCall expr) {
@@ -480,8 +485,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			assignmentToJavaExpression((XAssignment) call, b, isExpressionContext);
 		} else {
 			if (needMultiAssignment(call)) {
-				String leftOperandVariable = getLeftOperandVariable(call, b);
-				b.append(leftOperandVariable).append(" = ");
+				appendLeftOperand(call, b, isExpressionContext).append(" = ");
 			}
 			boolean hasReceiver = appendReceiver(call, b, isExpressionContext);
 			if (hasReceiver) {
