@@ -119,7 +119,7 @@ class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase {
 				
 				def void doStuff(FooProvider provider) {
 					val foo = provider.get
-					foo.toString
+					println(foo.toString)
 				}
 			}
 		''')

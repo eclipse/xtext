@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -56,7 +55,6 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
-import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -133,7 +131,6 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -1434,10 +1431,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			JvmField jvmField = associations.getJvmField(field);
 			if (jvmField == null || jvmField.getVisibility() != JvmVisibility.PRIVATE || jvmField.eContainer() == null)
 				return;
-			if (hasAnnotation(field.getAnnotations(), Property.class))
-				return;
-			if (hasAnnotation(((XtendAnnotationTarget)field.eContainer()).getAnnotations(), Data.class))
-				return;
 			if (isLocallyUsed(jvmField, getOutermostType(field))) 
 				return;
 			String message;
@@ -1625,12 +1618,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		JvmGenericType inferredType = associations.getInferredType(clazz);
 		if (inferredType == null)
 			return;
-		JvmConstructor inferredConstructor = associations.getInferredConstructor(clazz);
-		if(inferredConstructor != null)
-			for (XAnnotation anno : clazz.getAnnotations()) {
-				if (anno.getAnnotationType() != null && Data.class.getName().equals(anno.getAnnotationType().getIdentifier()))
-					return;
-			}
 		super.checkFinalFieldInitialization(inferredType);
 	}
 	
