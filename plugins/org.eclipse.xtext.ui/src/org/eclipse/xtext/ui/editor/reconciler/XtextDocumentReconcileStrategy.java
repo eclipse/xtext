@@ -147,4 +147,12 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	 */
 	protected void postParse(XtextResource resource, IProgressMonitor monitor) {
 	}
+
+	/**
+	 * @since 2.7
+	 */
+	public void cancelPostProcessing() {
+		if(monitor != null)
+			monitor.setCanceled(true);
+	}
 }
