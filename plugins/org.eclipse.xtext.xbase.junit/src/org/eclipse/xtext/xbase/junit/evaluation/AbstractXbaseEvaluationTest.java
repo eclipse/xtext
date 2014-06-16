@@ -3216,7 +3216,8 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"  a.set(40, 4)" + 
 				"  a.length - a.get(40)" +
 				"}");
-	}
+ 	}
+	
 	
 	@Test public void testArrays_03() throws Exception {
 		assertEvaluatesTo('x', 
@@ -3224,6 +3225,15 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"  var a = newCharArrayOfSize(42)" + 
 				"  a.set(40, 'x')" + 
 				"  a.get(40)" +
+				"}");
+	}
+	
+	@Test public void testArrays_04() throws Exception {
+		assertEvaluatesTo("foo", 
+				"{" +
+						"  var java.util.List<String>[] a = newArrayOfSize(42)" + 
+						"  a.set(40, #['foo'])" + 
+						"  a.get(40).head" +
 				"}");
 	}
 	
