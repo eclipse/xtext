@@ -281,7 +281,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 }
 
                 // Release memory
-                if (!queue.isEmpty())
+                if (!queue.isEmpty() && !clusteringPolicy.continueProcessing(resourceSet, null, clusterIndex))
                     clearResourceSet(resourceSet);
             }
         } finally {
