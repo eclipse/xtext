@@ -7,96 +7,299 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
+import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtext.xtype.XComputedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 @SuppressWarnings("all")
-public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReference> implements TypeReference {
-  public List<TypeReference> getActualTypeArguments() {
-    String _message = this.message("getActualTypeArguments()");
-    throw new UnsupportedOperationException(_message);
+public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReferenceImplCustom> implements TypeReference {
+  private TypeReference _equivalent;
+  
+  public void setEquivalent(final TypeReference equivalent) {
+    this._equivalent = equivalent;
+  }
+  
+  private LightweightTypeReference _lightweightTypeReference;
+  
+  public LightweightTypeReference getLightweightTypeReference() {
+    return this._lightweightTypeReference;
+  }
+  
+  public void setLightweightTypeReference(final LightweightTypeReference lightweightTypeReference) {
+    this._lightweightTypeReference = lightweightTypeReference;
+  }
+  
+  public TypeReference getEquivalent() {
+    TypeReference _xblockexpression = null;
+    {
+      boolean _equals = Objects.equal(this._equivalent, null);
+      if (_equals) {
+        XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
+        boolean _isEquivalentComputed = _delegate.isEquivalentComputed();
+        if (_isEquivalentComputed) {
+          CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+          OwnedConverter _typeRefConverter = _compilationUnit.getTypeRefConverter();
+          XComputedTypeReferenceImplCustom _delegate_1 = this.getDelegate();
+          LightweightTypeReference _lightweightReference = _typeRefConverter.toLightweightReference(_delegate_1);
+          this._lightweightTypeReference = _lightweightReference;
+          CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+          TypeReference _typeReference = _compilationUnit_1.toTypeReference(this._lightweightTypeReference);
+          this._equivalent = _typeReference;
+        }
+      }
+      _xblockexpression = this._equivalent;
+    }
+    return _xblockexpression;
   }
   
   private String message(final String methodName) {
-    return (("Cannot call method \'" + methodName) + "\' on a inferred type reference. Check isInferred() before calling any methods.");
+    return (("Cannot call method \'" + methodName) + "\' on a inferred type reference before the compilation phase. Check isInferred() before calling any methods.");
+  }
+  
+  public List<TypeReference> getActualTypeArguments() {
+    List<TypeReference> _xblockexpression = null;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("getActualTypeArguments()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.getActualTypeArguments();
+    }
+    return _xblockexpression;
   }
   
   public TypeReference getArrayComponentType() {
-    String _message = this.message("getArrayComponentType()");
-    throw new UnsupportedOperationException(_message);
+    TypeReference _xblockexpression = null;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("getArrayComponentType()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.getArrayComponentType();
+    }
+    return _xblockexpression;
   }
   
   public TypeReference getLowerBound() {
-    String _message = this.message("getLowerBound()");
-    throw new UnsupportedOperationException(_message);
+    TypeReference _xblockexpression = null;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("getLowerBound()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.getLowerBound();
+    }
+    return _xblockexpression;
   }
   
   public String getName() {
-    String _message = this.message("getName()");
-    throw new UnsupportedOperationException(_message);
+    String _xblockexpression = null;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("getName()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.getName();
+    }
+    return _xblockexpression;
   }
   
   public TypeReference getPrimitiveIfWrapper() {
-    String _message = this.message("getPrimitiveIfWrapper()");
-    throw new UnsupportedOperationException(_message);
+    TypeReference _xblockexpression = null;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("getPrimitiveIfWrapper()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.getPrimitiveIfWrapper();
+    }
+    return _xblockexpression;
   }
   
   public String getSimpleName() {
-    String _message = this.message("getSimpleName()");
-    throw new UnsupportedOperationException(_message);
+    String _xblockexpression = null;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("getSimpleName()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.getSimpleName();
+    }
+    return _xblockexpression;
   }
   
   public Type getType() {
-    String _message = this.message("getType()");
-    throw new UnsupportedOperationException(_message);
+    Type _xblockexpression = null;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("getType()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.getType();
+    }
+    return _xblockexpression;
   }
   
   public TypeReference getUpperBound() {
-    String _message = this.message("getUpperBound()");
-    throw new UnsupportedOperationException(_message);
+    TypeReference _xblockexpression = null;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("getUpperBound()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.getUpperBound();
+    }
+    return _xblockexpression;
   }
   
   public TypeReference getWrapperIfPrimitive() {
-    String _message = this.message("getWrapperIfPrimitive()");
-    throw new UnsupportedOperationException(_message);
+    TypeReference _xblockexpression = null;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("getWrapperIfPrimitive()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.getWrapperIfPrimitive();
+    }
+    return _xblockexpression;
   }
   
   public boolean isAnyType() {
-    String _message = this.message("isAnyType()");
-    throw new UnsupportedOperationException(_message);
+    boolean _xblockexpression = false;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("isAnyType()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.isAnyType();
+    }
+    return _xblockexpression;
   }
   
   public boolean isArray() {
-    String _message = this.message("isArray()");
-    throw new UnsupportedOperationException(_message);
+    boolean _xblockexpression = false;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("isArray()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.isArray();
+    }
+    return _xblockexpression;
   }
   
   public boolean isAssignableFrom(final TypeReference typeReference) {
-    String _message = this.message("isAssignableFrom()");
-    throw new UnsupportedOperationException(_message);
+    boolean _xblockexpression = false;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("isAssignableFrom()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.isAssignableFrom(typeReference);
+    }
+    return _xblockexpression;
   }
   
   public boolean isPrimitive() {
-    String _message = this.message("isPrimitive()");
-    throw new UnsupportedOperationException(_message);
+    boolean _xblockexpression = false;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("isPrimitive()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.isPrimitive();
+    }
+    return _xblockexpression;
   }
   
   public boolean isVoid() {
-    String _message = this.message("isVoid()");
-    throw new UnsupportedOperationException(_message);
+    boolean _xblockexpression = false;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("isVoid()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.isVoid();
+    }
+    return _xblockexpression;
   }
   
   public boolean isWildCard() {
-    String _message = this.message("isWildCard()");
-    throw new UnsupportedOperationException(_message);
+    boolean _xblockexpression = false;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("isWildCard()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.isWildCard();
+    }
+    return _xblockexpression;
   }
   
   public boolean isWrapper() {
-    String _message = this.message("isWrapper()");
-    throw new UnsupportedOperationException(_message);
+    boolean _xblockexpression = false;
+    {
+      TypeReference _equivalent = this.getEquivalent();
+      boolean _equals = Objects.equal(_equivalent, null);
+      if (_equals) {
+        String _message = this.message("isWrapper()");
+        throw new UnsupportedOperationException(_message);
+      }
+      TypeReference _equivalent_1 = this.getEquivalent();
+      _xblockexpression = _equivalent_1.isWrapper();
+    }
+    return _xblockexpression;
   }
   
   public boolean isInferred() {
@@ -104,7 +307,7 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
   }
   
   public String toString() {
-    XComputedTypeReference _delegate = this.getDelegate();
+    XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
     return _delegate.toString();
   }
 }

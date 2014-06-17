@@ -182,7 +182,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
-import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 @SuppressWarnings("all")
@@ -367,6 +366,10 @@ public class CompilationUnitImpl implements CompilationUnit {
       OwnedConverter _ownedConverter = new OwnedConverter(standardTypeReferenceOwner);
       this.typeRefConverter = _ownedConverter;
     }
+  }
+  
+  public OwnedConverter getTypeRefConverter() {
+    return this.typeRefConverter;
   }
   
   public boolean isIndexing() {
@@ -856,7 +859,7 @@ public class CompilationUnitImpl implements CompilationUnit {
                 InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
                 final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
                   public void apply(final InferredTypeReferenceImpl it) {
-                    it.setDelegate(((XComputedTypeReference)delegate));
+                    it.setDelegate(((XComputedTypeReferenceImplCustom)delegate));
                     it.setCompilationUnit(CompilationUnitImpl.this);
                   }
                 };
@@ -1088,8 +1091,8 @@ public class CompilationUnitImpl implements CompilationUnit {
     if (!_matched) {
       if (typeRef instanceof InferredTypeReferenceImpl) {
         _matched=true;
-        XComputedTypeReference _delegate = ((InferredTypeReferenceImpl)typeRef).getDelegate();
-        _switchResult = EcoreUtil.<XComputedTypeReference>copy(_delegate);
+        XComputedTypeReferenceImplCustom _delegate = ((InferredTypeReferenceImpl)typeRef).getDelegate();
+        _switchResult = EcoreUtil.<XComputedTypeReferenceImplCustom>copy(_delegate);
       }
     }
     return _switchResult;
@@ -1108,7 +1111,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     if (!_matched) {
       if (typeRef instanceof InferredTypeReferenceImpl) {
         _matched=true;
-        _switchResult = null;
+        _switchResult = ((InferredTypeReferenceImpl)typeRef).getLightweightTypeReference();
       }
     }
     return _switchResult;

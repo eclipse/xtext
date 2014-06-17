@@ -232,6 +232,10 @@ class CompilationUnitImpl implements CompilationUnit {
 		}
 	}
 	
+	def getTypeRefConverter() {
+		typeRefConverter
+	}
+	
 	def isIndexing() {
 		compilerPhases.isIndexing(xtendFile)
 	}
@@ -569,7 +573,7 @@ class CompilationUnitImpl implements CompilationUnit {
 		checkCanceled
 		return switch typeRef {
 			TypeReferenceImpl : typeRef.lightWeightTypeReference
-			InferredTypeReferenceImpl : null
+			InferredTypeReferenceImpl : typeRef.lightweightTypeReference
 		}
 	}
 	

@@ -22,7 +22,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.xtext.xtype.XComputedTypeReference
+import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
 
 abstract class AbstractElementImpl<T> {
 	@Property T delegate
@@ -142,74 +142,134 @@ class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> im
 	
 }
 
-class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReference> implements TypeReference {
+class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReferenceImplCustom> implements TypeReference {
+	@Property TypeReference equivalent
+	@Property LightweightTypeReference lightweightTypeReference
 	
-	override getActualTypeArguments() {
-		throw new UnsupportedOperationException(message('getActualTypeArguments()'))
+	def TypeReference getEquivalent() {
+		if (_equivalent == null) {
+			if (delegate.equivalentComputed) {
+				_lightweightTypeReference = compilationUnit.typeRefConverter.toLightweightReference(delegate)
+				_equivalent = 	compilationUnit.toTypeReference(_lightweightTypeReference)
+			}
+		}
+		_equivalent
 	}
 	
 	private def String message(String methodName) {
-		"Cannot call method '"+methodName+"' on a inferred type reference. Check isInferred() before calling any methods."
+		"Cannot call method '"+methodName+"' on a inferred type reference before the compilation phase. Check isInferred() before calling any methods."
+	}
+	
+	override getActualTypeArguments() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getActualTypeArguments()'))
+		}
+		equivalent.actualTypeArguments
 	}
 	
 	override getArrayComponentType() {
-		throw new UnsupportedOperationException(message('getArrayComponentType()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getArrayComponentType()'))
+		}
+		equivalent.arrayComponentType
 	}
 	
 	override getLowerBound() {
-		throw new UnsupportedOperationException(message('getLowerBound()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getLowerBound()'))
+		}
+		equivalent.lowerBound
 	}
 	
 	override getName() {
-		throw new UnsupportedOperationException(message('getName()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getName()'))
+		}
+		equivalent.name
 	}
 	
 	override getPrimitiveIfWrapper() {
-		throw new UnsupportedOperationException(message('getPrimitiveIfWrapper()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getPrimitiveIfWrapper()'))
+		}
+		equivalent.primitiveIfWrapper
 	}
 	
 	override getSimpleName() {
-		throw new UnsupportedOperationException(message('getSimpleName()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getSimpleName()'))
+		}
+		equivalent.simpleName
 	}
 	
 	override getType() {
-		throw new UnsupportedOperationException(message('getType()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getType()'))
+		}
+		equivalent.type
 	}
 	
 	override getUpperBound() {
-		throw new UnsupportedOperationException(message('getUpperBound()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getUpperBound()'))
+		}
+		equivalent.upperBound
 	}
 	
 	override getWrapperIfPrimitive() {
-		throw new UnsupportedOperationException(message('getWrapperIfPrimitive()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getWrapperIfPrimitive()'))
+		}
+		equivalent.wrapperIfPrimitive
 	}
 	
 	override isAnyType() {
-		throw new UnsupportedOperationException(message('isAnyType()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isAnyType()'))
+		}
+		equivalent.anyType
 	}
 	
 	override isArray() {
-		throw new UnsupportedOperationException(message('isArray()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isArray()'))
+		}
+		equivalent.array
 	}
 	
 	override isAssignableFrom(TypeReference typeReference) {
-		throw new UnsupportedOperationException(message('isAssignableFrom()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isAssignableFrom()'))
+		}
+		equivalent.isAssignableFrom(typeReference)
 	}
 	
 	override isPrimitive() {
-		throw new UnsupportedOperationException(message('isPrimitive()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isPrimitive()'))
+		}
+		equivalent.primitive
 	}
 	
 	override isVoid() {
-		throw new UnsupportedOperationException(message('isVoid()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isVoid()'))
+		}
+		equivalent.isVoid
 	}
 	
 	override isWildCard() {
-		throw new UnsupportedOperationException(message('isWildCard()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isWildCard()'))
+		}
+		equivalent.wildCard
 	}
 	
 	override isWrapper() {
-		throw new UnsupportedOperationException(message('isWrapper()'))
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isWrapper()'))
+		}
+		equivalent.wrapper
 	}
 	
 	override isInferred() {
