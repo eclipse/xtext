@@ -6,5 +6,6 @@
 	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="src" path="src-longrunning"/>
 	<classpathentry kind="src" path="src-no-jdt"/>
+	<classpathentry kind="src" path="src-standalone"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

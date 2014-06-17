@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
@@ -111,6 +113,21 @@ public class StandaloneBuilderTest {
 		assertFalse(unexpectedFile.exists());
 		unexpectedFile = getFile("src2-gen/Foo.txt");
 		assertFalse(unexpectedFile.exists());
+	}
+
+	@Test
+	public void testJarToPlatformMapping() {
+		initBuilder(new TestLanguageConfiguration(false));
+		builder.setSourceDirs(ImmutableList.of("test-data/standalone.with.reference/model"));
+		builder.setClassPathEntries(ImmutableList.of("test-data/standalone.with.reference/target/classes/",
+				"test-data/model.in.eclipse.project.jar"));
+
+		assertTrue("Builder launch returned false", builder.launch());
+		URI uri = EcorePlugin.getPlatformResourceMap().get("model.in.eclipse.project");
+		assertNotNull("No platform mapping found for 'model.in.eclipse.project'", uri);
+		assertTrue("Platform mapping is archive", uri.toString().startsWith("archive:file:/"));
+		assertTrue("Platform mapping points to jared project",
+				uri.toString().endsWith("test-data/model.in.eclipse.project.jar!/"));
 	}
 
 	private File getFile(String projectRelativePath) {
