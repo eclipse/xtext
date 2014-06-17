@@ -1,6 +1,6 @@
 @GenModel(modelDirectory="./src-gen" )
 
-package org.eclipse.xcore.test
+package org.eclipse.xcoretest
 
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.common.types.JvmType

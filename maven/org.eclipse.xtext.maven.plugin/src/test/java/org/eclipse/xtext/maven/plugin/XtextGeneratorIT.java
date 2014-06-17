@@ -70,7 +70,8 @@ public class XtextGeneratorIT {
 	@Test
 	public void xcore() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/xcore-lang");
-		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcore/test/MyClass2.java");
+		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyClass2.java");
+		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/org/eclipse/xcoretest/MyClass2.class");
 	}
 
 	private Verifier verifyErrorFreeLog(String pathToTestProject) throws IOException, VerificationException {
