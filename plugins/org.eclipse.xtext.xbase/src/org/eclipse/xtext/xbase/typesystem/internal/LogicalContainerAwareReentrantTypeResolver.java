@@ -124,7 +124,24 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		
 	}
 	
-	public class DemandTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
+	protected static abstract class AbstractDemandTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
+
+		/*
+		 * Allows invocation from within the context of the class
+		 */
+		@Override
+		protected void markComputing() {
+			super.markComputing();
+		}
+		
+		@Override
+		protected void unmarkComputing() {
+			super.unmarkComputing();
+		}
+		
+	}
+	
+	public class DemandTypeReferenceProvider extends AbstractDemandTypeReferenceProvider {
 		private final JvmMember member;
 		private final ResolvedTypes resolvedTypes;
 		private final boolean returnType;
@@ -212,19 +229,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 					null));
 			AnyTypeReference result = new AnyTypeReference(resolvedTypes.getReferenceOwner());
 			return toJavaCompliantTypeReference(result, session);
-		}
-
-		/*
-		 * Allows invocation from within the context of the class
-		 */
-		@Override
-		protected void markComputing() {
-			super.markComputing();
-		}
-		
-		@Override
-		protected void unmarkComputing() {
-			super.unmarkComputing();
 		}
 		
 	}
@@ -409,14 +413,14 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	/* @Nullable */
-	protected DemandTypeReferenceProvider getComputedTypeReference(JvmTypeReference knownType) {
+	protected AbstractDemandTypeReferenceProvider getComputedTypeReference(JvmTypeReference knownType) {
 		if (InferredTypeIndicator.isInferred(knownType)) {
 			XComputedTypeReference casted = (XComputedTypeReference) knownType;
 			JvmTypeReference equivalent = casted.getEquivalent();
 			if (equivalent instanceof XComputedTypeReference) {
 				IJvmTypeReferenceProvider typeProvider = ((XComputedTypeReference) equivalent).getTypeProvider();
-				if (typeProvider instanceof DemandTypeReferenceProvider) {
-					return (DemandTypeReferenceProvider) typeProvider;
+				if (typeProvider instanceof AbstractDemandTypeReferenceProvider) {
+					return (AbstractDemandTypeReferenceProvider) typeProvider;
 				}
 			}
 		}
@@ -424,14 +428,14 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	protected void markComputing(JvmTypeReference knownType) {
-		DemandTypeReferenceProvider demandTypeReferenceProvider = getComputedTypeReference(knownType);
+		AbstractDemandTypeReferenceProvider demandTypeReferenceProvider = getComputedTypeReference(knownType);
 		if (demandTypeReferenceProvider != null) {
 			demandTypeReferenceProvider.markComputing();
 		}
 	}
 	
 	protected void unmarkComputing(JvmTypeReference knownType) {
-		DemandTypeReferenceProvider demandTypeReferenceProvider = getComputedTypeReference(knownType);
+		AbstractDemandTypeReferenceProvider demandTypeReferenceProvider = getComputedTypeReference(knownType);
 		if (demandTypeReferenceProvider != null) {
 			demandTypeReferenceProvider.unmarkComputing();
 		}
