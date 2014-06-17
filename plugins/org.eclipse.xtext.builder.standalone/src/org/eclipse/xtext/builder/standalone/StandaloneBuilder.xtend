@@ -1,6 +1,5 @@
 package org.eclipse.xtext.builder.standalone
 
-import static extension org.eclipse.emf.common.util.URI.createFileURI
 import com.google.common.io.Files
 import com.google.inject.Inject
 import com.google.inject.Provider
@@ -11,8 +10,12 @@ import java.util.ArrayList
 import java.util.Collection
 import java.util.List
 import java.util.Map
+import java.util.jar.JarFile
+import java.util.jar.Manifest
 import java.util.regex.Pattern
+import java.util.zip.ZipException
 import org.apache.log4j.Logger
+import org.eclipse.emf.ecore.plugin.EcorePlugin
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.EcoreUtil2
@@ -29,6 +32,9 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
+
+import static extension org.eclipse.emf.common.util.URI.createFileURI
+import org.eclipse.emf.common.util.URI
 
 class StandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(StandaloneBuilder);
@@ -174,14 +180,12 @@ class StandaloneBuilder {
 			languageAccess.generator.doGenerate(it, languageAccess.fileSystemAccess);
 		}
 	}
-	
+
 	def protected registerCurrentSource(Resource resource) {
 		val fsa = resource.languageAccess.fileSystemAccess
-		val absoluteSource = sourceDirs
-			.map[new File(it).absolutePath.createFileURI.toString]
-			.filter[resource.URI.toString.startsWith(it)]
-			.reduce[longest, current| if(current.length > longest.length) current else longest]
-			?.createFileURI
+		val absoluteSource = sourceDirs.map[new File(it).absolutePath.createFileURI.toString].filter[
+			resource.URI.toString.startsWith(it)].reduce[longest, current|
+			if(current.length > longest.length) current else longest]?.createFileURI
 		if (absoluteSource == null) {
 			throw new IllegalStateException(
 				'''Resource «resource.URI» is not contained in any of the known source folders «sourceDirs».''')
@@ -194,7 +198,7 @@ class StandaloneBuilder {
 			}
 		}
 	}
-	
+
 	def private languageAccess(Resource resource) {
 		languages.get(resource.URI.fileExtension)
 	}
@@ -225,7 +229,7 @@ class StandaloneBuilder {
 		nameBasedFilter.setRegularExpression(".*\\.(?:(" + extensions + "))$");
 		val List<Resource> resources = newArrayList();
 
-		new PathTraverser().resolvePathes(
+		val modelsFound = new PathTraverser().resolvePathes(
 			roots.toList,
 			[ input |
 				val matches = nameBasedFilter.matches(input)
@@ -236,7 +240,46 @@ class StandaloneBuilder {
 				return matches
 			]
 		)
+		modelsFound.asMap.forEach [ uri, resource |
+			val file = new File(uri)
+			if (resource != null && !file.directory && file.name.endsWith(".jar")) {
+				registerBundle(file)
+			}
+		]
 		return resources;
+	}
+
+	def protected registerBundle(File file) {
+		// copied from org.eclipse.emf.mwe.utils.StandaloneSetup.registerBundle(File)
+		var JarFile jarFile = null;
+		try {
+			jarFile = new JarFile(file);
+			val Manifest manifest = jarFile.getManifest();
+			if (manifest == null)
+				return;
+			var String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
+			if (name != null) {
+				val int indexOf = name.indexOf(';');
+				if (indexOf > 0)
+					name = name.substring(0, indexOf);
+				if (EcorePlugin.getPlatformResourceMap().containsKey(name))
+					return;
+				val String path = "archive:" + file.toURI() + "!/";
+				val URI uri = URI.createURI(path);
+				EcorePlugin.getPlatformResourceMap().put(name, uri);
+			}
+		} catch (ZipException e) {
+			LOG.debug("Could not open Jar file " + file.getAbsolutePath() + ".");
+		} catch (Exception e) {
+			LOG.error(file.absolutePath, e);
+		} finally {
+			try {
+				if (jarFile != null)
+					jarFile.close();
+			} catch (IOException e) {
+				LOG.error(jarFile, e);
+			}
+		}
 	}
 
 	def getCompiler() {
