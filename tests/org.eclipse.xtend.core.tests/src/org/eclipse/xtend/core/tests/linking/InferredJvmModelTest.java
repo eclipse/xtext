@@ -171,7 +171,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
 		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "doStuff", ENamedElement.class);
 		// TODO ultimately this should be List<? extends NamedElement>
-		assertEquals("java.lang.Object", dispatch.getReturnType().getIdentifier());
+		assertEquals("java.util.List<? extends java.lang.Object>", dispatch.getReturnType().getIdentifier());
 
 		// three internal case methods
 		JvmOperation eClassParam = findByNameAndFirstParameterType(operations, "_doStuff", EClass.class);
@@ -308,6 +308,64 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		assertEquals("EObject", firstParameter.getParameterType().getSimpleName());
 		String returnType = dispatcher.getReturnType().getIdentifier();
 		assertEquals("void", returnType);
+	}
+	
+	@Test public void testDispatchFunction_10() throws Exception {
+		XtendFile xtendFile = file(
+			"class Foo {\n" +
+			"	def dispatch String someMethod(String o) {\n" +
+			"		\"String\".someMethod\n" +
+			"	}\n" +
+			"	def dispatch someMethod(Object o) {\n" +
+			"		\"String\"" +
+			"	}\n" +
+			"	def dispatch someMethod(Double o) {\n" +
+			"		\"String\""+
+			"	}\n" +
+			"}");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		
+		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
+		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "someMethod", Object.class);
+		assertEquals("java.lang.String", dispatch.getReturnType().getIdentifier());
+
+		JvmOperation dispatchCase = findByNameAndFirstParameterType(operations, "_someMethod", Object.class);
+		assertEquals("java.lang.String", dispatchCase.getReturnType().getIdentifier());
+		
+		JvmOperation dispatchCase2 = findByNameAndFirstParameterType(operations, "_someMethod", String.class);
+		assertEquals("java.lang.String", dispatchCase2.getReturnType().getIdentifier());
+		
+		JvmOperation dispatchCase3 = findByNameAndFirstParameterType(operations, "_someMethod", Double.class);
+		assertEquals("java.lang.String", dispatchCase3.getReturnType().getIdentifier());
+	}
+	
+	@Test public void testDispatchFunction_11() throws Exception {
+		XtendFile xtendFile = file(
+			"class Foo {\n" +
+			"	def dispatch someMethod(Object o) {\n" +
+			"		\"String\"" +
+			"	}\n" +
+			"	def dispatch String someMethod(String o) {\n" +
+			"		\"String\".someMethod\n" +
+			"	}\n" +
+			"	def dispatch someMethod(Double o) {\n" +
+			"		\"String\""+
+			"	}\n" +
+			"}");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		
+		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
+		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "someMethod", Object.class);
+		assertEquals("java.lang.String", dispatch.getReturnType().getIdentifier());
+
+		JvmOperation dispatchCase = findByNameAndFirstParameterType(operations, "_someMethod", Object.class);
+		assertEquals("java.lang.String", dispatchCase.getReturnType().getIdentifier());
+		
+		JvmOperation dispatchCase2 = findByNameAndFirstParameterType(operations, "_someMethod", String.class);
+		assertEquals("java.lang.String", dispatchCase2.getReturnType().getIdentifier());
+		
+		JvmOperation dispatchCase3 = findByNameAndFirstParameterType(operations, "_someMethod", Double.class);
+		assertEquals("java.lang.String", dispatchCase3.getReturnType().getIdentifier());
 	}
 	
 	@Test public void testBug_340611() throws Exception {
