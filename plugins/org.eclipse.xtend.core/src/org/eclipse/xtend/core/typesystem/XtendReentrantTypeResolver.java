@@ -92,7 +92,7 @@ import com.google.inject.Inject;
  */
 public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTypeResolver {
 
-	public static class DispatchReturnTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
+	public static class DispatchReturnTypeReferenceProvider extends AbstractDemandTypeReferenceProvider {
 		private final JvmOperation operation;
 		private final ResolvedTypes resolvedTypes;
 		private final IFeatureScopeSession session;
@@ -487,72 +487,96 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				super._computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, operation);
 				return;
 			}
-			LightweightTypeReference declaredDispatcherType = getReturnTypeOfOverriddenOperation(dispatcher, childResolvedTypes, featureScopeSession);
+			List<JvmOperation> dispatchCasesWithDeclaredReturnType = new ArrayList<JvmOperation>();
+			List<JvmOperation> dispatchCasesWithInferredReturnType = new ArrayList<JvmOperation>();
+			
 			List<JvmOperation> dispatchCases = dispatchHelper.getLocalDispatchCases(dispatcher);
-			List<LightweightTypeReference> dispatchCaseResults = Lists.newArrayListWithCapacity(dispatchCases.size());
-			boolean hasInferredCase = false;
-			LightweightTypeReference implicitVoid = null;
-			LightweightTypeReference thrownVoid = null;
 			for (JvmOperation dispatchCase : dispatchCases) {
-				markComputing(dispatchCase.getReturnType());
-			}
-			for (JvmOperation dispatchCase : dispatchCases) {
-				ResolvedTypes dispatchCaseResolvedTypes = dispatchCase == operation ? childResolvedTypes : preparedResolvedTypes.get(dispatchCase);
-				if (dispatchCaseResolvedTypes == null) {
-					if (preparedResolvedTypes.containsKey(dispatchCase)) {
-						if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
-							if (declaredDispatcherType == null) {
-								dispatchCaseResults.add(childResolvedTypes.getActualType(dispatchCase));
-							}
-							hasInferredCase = true;
-						} else {
-							dispatchCaseResults.add(childResolvedTypes.getActualType(dispatchCase));
-						}
-					} else {
-						throw new IllegalStateException("No resolved type found. Type was: " + dispatchCase.getIdentifier());
-					}
+				if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
+					dispatchCasesWithInferredReturnType.add(dispatchCase);
 				} else {
-					preparedResolvedTypes.put(dispatchCase, null);
-					OperationBodyComputationState state = new DispatchOperationBodyComputationState(
-							dispatchCaseResolvedTypes,
-							dispatchCase.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(),
-							dispatchCase,
-							dispatcher,
-							declaredDispatcherType);
-					addExtensionProviders(state, dispatchCase.getParameters());
-					ITypeComputationResult dispatchCaseResult = state.computeTypes();
-					unmarkComputing(dispatchCase.getReturnType());
-					if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
-						if (declaredDispatcherType == null) {
-							LightweightTypeReference returnType = dispatchCaseResult.getReturnType();
-							if (returnType != null) {
-								if (returnType.isPrimitiveVoid()) {
-									Set<ConformanceHint> conformanceHints = dispatchCaseResult.getConformanceHints();
-									if (!conformanceHints.contains(ConformanceHint.THROWN_EXCEPTION)) {
-										if (conformanceHints.contains(ConformanceHint.NO_IMPLICIT_RETURN)) {
-											dispatchCaseResults.add(returnType);
-										} else {
-											implicitVoid = returnType;
-										}
-									} else {
-										thrownVoid = returnType;
-									}
-								} else {
-									dispatchCaseResults.add(returnType);
-								}
-							}
-						}
-						hasInferredCase = true;
-					} else {
-						LightweightTypeReference explicitType = dispatchCaseResolvedTypes.getActualType(dispatchCase);
-						dispatchCaseResults.add(explicitType);
-					}
-					computeAnnotationTypes(dispatchCaseResolvedTypes, featureScopeSession, dispatchCase);
-					computeLocalTypes(preparedResolvedTypes, dispatchCaseResolvedTypes, featureScopeSession, dispatchCase);
-					mergeChildTypes(dispatchCaseResolvedTypes);
+					dispatchCasesWithDeclaredReturnType.add(dispatchCase);
 				}
 			}
-			if (hasInferredCase) {
+
+			try {
+				markComputing(dispatcher.getReturnType());
+				LightweightTypeReference declaredDispatcherType = getReturnTypeOfOverriddenOperation(dispatcher, childResolvedTypes, featureScopeSession);				
+				List<LightweightTypeReference> dispatchCaseResults = Lists.newArrayListWithCapacity(dispatchCases.size());
+				LightweightTypeReference implicitVoid = null;
+				LightweightTypeReference thrownVoid = null;
+				for (JvmOperation dispatchCase : dispatchCasesWithDeclaredReturnType) {
+					ResolvedTypes dispatchCaseResolvedTypes = preparedResolvedTypes.get(dispatchCase);
+					if (dispatchCaseResolvedTypes == null) {
+						if (preparedResolvedTypes.containsKey(dispatchCase)) {
+							dispatchCaseResolvedTypes = childResolvedTypes;
+						}
+					}
+					if (dispatchCaseResolvedTypes == null) {
+						throw new IllegalStateException("No resolved type found. Type was: " + dispatchCase.getIdentifier());
+					}
+					dispatchCaseResults.add(dispatchCaseResolvedTypes.getActualType(dispatchCase));
+				}
+				
+				for (JvmOperation dispatchCase : dispatchCasesWithInferredReturnType) {
+					ResolvedTypes dispatchCaseResolvedTypes = dispatchCase == operation ? childResolvedTypes : preparedResolvedTypes.get(dispatchCase);
+					if (dispatchCaseResolvedTypes == null) {
+						if (preparedResolvedTypes.containsKey(dispatchCase)) {
+							if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
+								if (declaredDispatcherType == null) {
+									dispatchCaseResults.add(childResolvedTypes.getActualType(dispatchCase));
+								}
+							} else {
+								dispatchCaseResults.add(childResolvedTypes.getActualType(dispatchCase));
+							}
+						} else {
+							throw new IllegalStateException("No resolved type found. Type was: " + dispatchCase.getIdentifier());
+						}
+					} else {
+						preparedResolvedTypes.put(dispatchCase, null);
+						OperationBodyComputationState state = new DispatchOperationBodyComputationState(
+								dispatchCaseResolvedTypes,
+								dispatchCase.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(),
+								dispatchCase,
+								dispatcher,
+								declaredDispatcherType);
+						addExtensionProviders(state, dispatchCase.getParameters());
+						ITypeComputationResult dispatchCaseResult = null;
+						try {
+							markComputing(dispatchCase.getReturnType());
+							dispatchCaseResult = state.computeTypes();
+						} finally {
+							unmarkComputing(dispatchCase.getReturnType());
+						}
+						if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
+							if (declaredDispatcherType == null) {
+								LightweightTypeReference returnType = dispatchCaseResult.getReturnType();
+								if (returnType != null) {
+									if (returnType.isPrimitiveVoid()) {
+										Set<ConformanceHint> conformanceHints = dispatchCaseResult.getConformanceHints();
+										if (!conformanceHints.contains(ConformanceHint.THROWN_EXCEPTION)) {
+											if (conformanceHints.contains(ConformanceHint.NO_IMPLICIT_RETURN)) {
+												dispatchCaseResults.add(returnType);
+											} else {
+												implicitVoid = returnType;
+											}
+										} else {
+											thrownVoid = returnType;
+										}
+									} else {
+										dispatchCaseResults.add(returnType);
+									}
+								}
+							}
+						} else {
+							LightweightTypeReference explicitType = dispatchCaseResolvedTypes.getActualType(dispatchCase);
+							dispatchCaseResults.add(explicitType);
+						}
+						computeAnnotationTypes(dispatchCaseResolvedTypes, featureScopeSession, dispatchCase);
+						computeLocalTypes(preparedResolvedTypes, dispatchCaseResolvedTypes, featureScopeSession, dispatchCase);
+						mergeChildTypes(dispatchCaseResolvedTypes);
+					}
+				}
 				LightweightTypeReference commonDispatchType = normalizeDispatchReturnType(
 						declaredDispatcherType,
 						dispatchCaseResults,
@@ -560,22 +584,24 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 						thrownVoid,
 						childResolvedTypes);
 				if (commonDispatchType != null) {
-					resolveDispatchCaseTypes(dispatchCases, commonDispatchType, featureScopeSession);
+					resolveDispatchCaseTypes(dispatcher, dispatchCasesWithInferredReturnType, commonDispatchType, featureScopeSession);
 				}
+			} finally {
+				unmarkComputing(dispatcher.getReturnType());
 			}
 		} else {
 			super._computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, operation);
 		}
 	}
 
-	protected void resolveDispatchCaseTypes(List<JvmOperation> dispatchCases, LightweightTypeReference type,
+	protected void resolveDispatchCaseTypes(JvmOperation dispatcher, List<JvmOperation> dispatchCases, LightweightTypeReference type,
 			IFeatureScopeSession featureScopeSession) {
+		if (InferredTypeIndicator.isInferred(dispatcher.getReturnType())) {
+			InferredTypeIndicator.resolveTo(dispatcher.getReturnType(), toJavaCompliantTypeReference(type, featureScopeSession));
+		}
 		for (JvmOperation dispatchCase : dispatchCases) {
-			JvmTypeReference returnType = dispatchCase.getReturnType();
-			if (InferredTypeIndicator.isInferred(returnType)) {
-				InferredTypeIndicator.resolveTo(
-						returnType,
-						toJavaCompliantTypeReference(type, featureScopeSession));
+			if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
+				InferredTypeIndicator.resolveTo(dispatchCase.getReturnType(), toJavaCompliantTypeReference(type, featureScopeSession));
 			}
 		}
 	}
