@@ -404,7 +404,19 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 	
 	private boolean isData(XtendAnnotationTarget source) {
-		return !Data.class.isAnnotationPresent(Active.class) && hasAnnotation(source, Data.class);
+		JvmAnnotationType dataType = (JvmAnnotationType) typeReferences.findDeclaredType(Data.class, source);
+		return !isActiveAnnotation(dataType) && hasAnnotation(source, Data.class);
+	}
+
+	private boolean isActiveAnnotation(JvmAnnotationType annotationType) {
+		if (annotationType == null)
+			return false;
+		for (JvmAnnotationReference annotation : annotationType.getAnnotations()) {
+			if (annotation.getAnnotation().getQualifiedName().equals(Active.class.getName())) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	protected boolean hasAnnotation(XtendAnnotationTarget source, Class<?> class1) {
@@ -842,7 +854,8 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 
 	private boolean isProperty(XAnnotation anno) {
-		return Property.class.getName().equals(anno.getAnnotationType().getIdentifier()) && !Property.class.isAnnotationPresent(Active.class);
+		JvmAnnotationType propertyType = (JvmAnnotationType) typeReferences.findDeclaredType(Property.class, anno);
+		return !isActiveAnnotation(propertyType) && Property.class.getName().equals(anno.getAnnotationType().getIdentifier());
 	}
 	
 	protected void transform(XtendEnumLiteral literal, JvmEnumerationType container) {
