@@ -80,6 +80,8 @@ public class Text {
 	}
 
 	public String findIndentation(String prefix, int offset, int end) {
+		if (end <= offset)
+			return "";
 		prefix = trimRight(prefix);
 		List<String> prefixed = Lists.newArrayList(), unprefixed = Lists.newArrayList();
 		for (String line : new Text(text.subSequence(offset, end)).splitIntoLines())
