@@ -2,11 +2,11 @@
 
 /* XPECT delete 'entity MyEntity2' ---
     package modification_test {
-      entity MyEntity1 {
-  |     myEnt1:[MyEntity2|void]
-      }
-  -   entity MyEntity2 {
-  -   }
+    	entity MyEntity1 {
+  |		myEnt1:[MyEntity2|void]
+    	}
+  - 	entity MyEntity2 {
+  - 	}
     }
 --- */
 
