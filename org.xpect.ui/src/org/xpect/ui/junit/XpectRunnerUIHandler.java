@@ -52,6 +52,8 @@ public class XpectRunnerUIHandler implements IRunnerUIHandler {
 
 	public StyledString getStyledLabel(ViewPart part, ITestElement element, int layout) {
 		String label = TestDataUIUtil.parse(element).getTitle();
+		if (label == null)
+			return new StyledString("???");
 		int colon = label.indexOf(':');
 		if (colon >= 0) {
 			StyledString title = new StyledString(label.substring(0, colon));
