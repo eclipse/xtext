@@ -79,19 +79,32 @@ public class Text {
 		return result.toString();
 	}
 
-	public String findIndentation(String prefix, int offset) {
+	public String findIndentation(String prefix, int offset, int end) {
 		prefix = trimRight(prefix);
-		int nl = text.toString().lastIndexOf("\n", offset);
-		if (nl < 0)
-			nl = 0;
-		StringBuilder result = new StringBuilder();
-		if (text.subSequence(nl + 1, nl + 1 + prefix.length()).toString().equals(prefix)) {
-			result.append(prefix);
-			nl += prefix.length();
+		List<String> prefixed = Lists.newArrayList(), unprefixed = Lists.newArrayList();
+		for (String line : new Text(text.subSequence(offset, end)).splitIntoLines())
+			if (line.startsWith(prefix))
+				prefixed.add(line.substring(prefix.length()));
+			else
+				unprefixed.add(line);
+		if (prefix.isEmpty() && unprefixed.isEmpty())
+			return "";
+		List<String> lines = prefixed.size() > unprefixed.size() ? prefixed : unprefixed;
+		StringBuilder result = new StringBuilder(prefixed.size() > unprefixed.size() ? prefix : "");
+		for (int i = 0; true; i++) {
+			String first = lines.get(0);
+			if (i >= first.length())
+				return result.toString();
+			char c = first.charAt(i);
+			if (!Character.isWhitespace(c) || c == '\n')
+				return result.toString();
+			for (int j = 1; j < lines.size(); j++) {
+				String l = lines.get(j);
+				if (i >= l.length() || c != l.charAt(i))
+					return result.toString();
+			}
+			result.append(c);
 		}
-		for (int i = nl + 1; i < text.length() && Character.isWhitespace(text.charAt(i)) && text.charAt(i) != '\n'; i++)
-			result.append(text.charAt(i));
-		return result.toString();
 	}
 
 	public String getNL() {
