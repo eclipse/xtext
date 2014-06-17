@@ -9,9 +9,9 @@
 	<properties>
 		<xtext-version>IT-SNAPSHOT</xtext-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<ecore-xtext-version>1.1.0-SNAPSHOT</ecore-xtext-version>
-		<ecore-xcore-lib-version>1.1.0-SNAPSHOT</ecore-xcore-lib-version>
-		<ecore-xcore-version>1.2.1-SNAPSHOT</ecore-xcore-version>
+		<ecore-xtext-version>[1.1.1-SNAPSHOT,)</ecore-xtext-version>
+		<ecore-xcore-lib-version>[1.1.0-SNAPSHOT,)</ecore-xcore-lib-version>
+		<ecore-xcore-version>[1.2.1-SNAPSHOT,)</ecore-xcore-version>
 	</properties>
 	<build>
 		<plugins>
@@ -129,7 +129,7 @@
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore.xcore.lib</artifactId>
-			<version>[1.0.0,)</version>
+			<version>[1.1.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>

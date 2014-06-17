@@ -3,6 +3,7 @@ package org.eclipse.xtext.builder.standalone;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -15,11 +16,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.ZipException;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -52,7 +58,9 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 @SuppressWarnings("all")
 public class StandaloneBuilder {
@@ -537,8 +545,97 @@ public class StandaloneBuilder {
         return matches;
       }
     };
-    _pathTraverser.resolvePathes(_list, _function);
+    final Multimap<String, URI> modelsFound = _pathTraverser.resolvePathes(_list, _function);
+    Map<String, Collection<URI>> _asMap = modelsFound.asMap();
+    final Procedure2<String, Collection<URI>> _function_1 = new Procedure2<String, Collection<URI>>() {
+      public void apply(final String uri, final Collection<URI> resource) {
+        final File file = new File(uri);
+        boolean _and = false;
+        boolean _and_1 = false;
+        boolean _notEquals = (!Objects.equal(resource, null));
+        if (!_notEquals) {
+          _and_1 = false;
+        } else {
+          boolean _isDirectory = file.isDirectory();
+          boolean _not = (!_isDirectory);
+          _and_1 = _not;
+        }
+        if (!_and_1) {
+          _and = false;
+        } else {
+          String _name = file.getName();
+          boolean _endsWith = _name.endsWith(".jar");
+          _and = _endsWith;
+        }
+        if (_and) {
+          StandaloneBuilder.this.registerBundle(file);
+        }
+      }
+    };
+    MapExtensions.<String, Collection<URI>>forEach(_asMap, _function_1);
     return resources;
+  }
+  
+  protected void registerBundle(final File file) {
+    JarFile jarFile = null;
+    try {
+      JarFile _jarFile = new JarFile(file);
+      jarFile = _jarFile;
+      final Manifest manifest = jarFile.getManifest();
+      boolean _equals = Objects.equal(manifest, null);
+      if (_equals) {
+        return;
+      }
+      Attributes _mainAttributes = manifest.getMainAttributes();
+      String name = _mainAttributes.getValue("Bundle-SymbolicName");
+      boolean _notEquals = (!Objects.equal(name, null));
+      if (_notEquals) {
+        final int indexOf = name.indexOf(";");
+        if ((indexOf > 0)) {
+          String _substring = name.substring(0, indexOf);
+          name = _substring;
+        }
+        Map<String, URI> _platformResourceMap = EcorePlugin.getPlatformResourceMap();
+        boolean _containsKey = _platformResourceMap.containsKey(name);
+        if (_containsKey) {
+          return;
+        }
+        java.net.URI _uRI = file.toURI();
+        String _plus = ("archive:" + _uRI);
+        final String path = (_plus + "!/");
+        final URI uri = URI.createURI(path);
+        Map<String, URI> _platformResourceMap_1 = EcorePlugin.getPlatformResourceMap();
+        _platformResourceMap_1.put(name, uri);
+      }
+    } catch (final Throwable _t) {
+      if (_t instanceof ZipException) {
+        final ZipException e = (ZipException)_t;
+        String _absolutePath = file.getAbsolutePath();
+        String _plus_1 = ("Could not open Jar file " + _absolutePath);
+        String _plus_2 = (_plus_1 + ".");
+        StandaloneBuilder.LOG.debug(_plus_2);
+      } else if (_t instanceof Exception) {
+        final Exception e_1 = (Exception)_t;
+        String _absolutePath_1 = file.getAbsolutePath();
+        StandaloneBuilder.LOG.error(_absolutePath_1, e_1);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    } finally {
+      try {
+        boolean _notEquals_1 = (!Objects.equal(jarFile, null));
+        if (_notEquals_1) {
+          jarFile.close();
+        }
+      } catch (final Throwable _t_1) {
+        if (_t_1 instanceof IOException) {
+          final IOException e_2 = (IOException)_t_1;
+          StandaloneBuilder.LOG.error(jarFile, e_2);
+        } else {
+          throw Exceptions.sneakyThrow(_t_1);
+        }
+      }
+    }
   }
   
   public IJavaCompiler getCompiler() {
