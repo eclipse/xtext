@@ -10,6 +10,7 @@ import java.util.List;
 import org.eclipse.xtext.util.internal.FormattingMigrator;
 import org.junit.ComparisonFailure;
 import org.xpect.XpectInvocation;
+import org.xpect.expectation.IStringDiffExpectation.IToken;
 import org.xpect.expectation.IStringDiffExpectation.ITokenAdapter;
 import org.xpect.expectation.StringDiffExpectation.StringDiffExpectationParser;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
@@ -36,7 +37,6 @@ public @interface StringDiffExpectation {
 	public static class GenericTextDiffConfig<T> implements ITextDiffConfig<T> {
 
 		private final ITokenAdapter<T> delegate;
-
 		private final List<T> left;
 		private final List<T> right;
 
@@ -71,12 +71,23 @@ public @interface StringDiffExpectation {
 			this.annotation = annotation;
 		}
 
+		public <T extends IToken<? super T>> void assertDiffEquals(Iterable<T> leftTokens, Iterable<T> rightTokens) {
+			List<T> left = ImmutableList.copyOf(leftTokens);
+			List<T> right = ImmutableList.copyOf(rightTokens);
+			ITextDiffConfig<T> config = createDiffConfig(left, right);
+			assertDiffEquals(left, right, config);
+		}
+
 		public <T> void assertDiffEquals(Iterable<T> leftTokens, Iterable<T> rightTokens, ITokenAdapter<T> adapter) {
 			Preconditions.checkNotNull(adapter);
 			List<T> left = ImmutableList.copyOf(leftTokens);
 			List<T> right = ImmutableList.copyOf(rightTokens);
-			ITextDifferencer differencer = createDifferencer();
 			ITextDiffConfig<T> config = createDiffConfig(left, right, adapter);
+			assertDiffEquals(left, right, config);
+		}
+
+		protected <T> void assertDiffEquals(List<T> left, List<T> right, ITextDiffConfig<T> config) throws ComparisonFailure {
+			ITextDifferencer differencer = createDifferencer();
 			ITextDiff diff = differencer.diff(left, right, config);
 			String actual = diff.toString();
 			String escapedActual = getTargetSyntaxLiteral().escape(actual);
@@ -101,28 +112,16 @@ public @interface StringDiffExpectation {
 			Function<String, ? extends Iterable<String>> tokenizer = createTokenizer();
 			List<String> leftTokens = ImmutableList.copyOf(tokenizer.apply(left));
 			List<String> rightTokens = ImmutableList.copyOf(tokenizer.apply(right));
-			ITextDifferencer differencer = createDifferencer();
 			ITextDiffConfig<String> config = createDiffConfig();
-			ITextDiff diff = differencer.diff(leftTokens, rightTokens, config);
-			String actual = diff.toString();
-			String escapedActual = getTargetSyntaxLiteral().escape(actual);
-			String originalExpectation = getExpectation();
-			String migratedExpectation;
-			if (!annotation.whitespaceSensitive()) {
-				FormattingMigrator migrator = new FormattingMigrator();
-				migratedExpectation = migrator.migrate(escapedActual, originalExpectation);
-			} else {
-				migratedExpectation = originalExpectation;
-			}
-			if (!migratedExpectation.equals(escapedActual)) {
-				String expDoc = replaceInDocument(migratedExpectation);
-				String actDoc = replaceInDocument(escapedActual);
-				throw new ComparisonFailure("", expDoc, actDoc);
-			}
+			assertDiffEquals(leftTokens, rightTokens, config);
 		}
 
 		protected ITextDifferencer.ITextDiffConfig<String> createDiffConfig() {
 			return new StringTextDiffConfig(new StringEndsSimilarityFunction(), annotation.whitespaceSensitive());
+		}
+
+		protected <T extends IToken<? super T>> ITextDifferencer.ITextDiffConfig<T> createDiffConfig(List<T> left, List<T> right) {
+			return new TokenTextDiffConfig<T>(left, right);
 		}
 
 		protected <T> ITextDifferencer.ITextDiffConfig<T> createDiffConfig(List<T> left, List<T> right, ITokenAdapter<T> adapter) {
@@ -212,6 +211,33 @@ public @interface StringDiffExpectation {
 		public Iterable<String> toSegments(String token) {
 			return Collections.singleton(token);
 		}
+	}
+
+	public static class TokenTextDiffConfig<T extends IToken<? super T>> implements ITextDiffConfig<T> {
+
+		private final List<T> left;
+		private final List<T> right;
+
+		public TokenTextDiffConfig(List<T> left, List<T> right) {
+			super();
+			this.left = left;
+			this.right = right;
+		}
+
+		public boolean isHidden(T token, String segment) {
+			return token.isHidden(segment);
+		}
+
+		public float similarity(ISegment object1, ISegment object2) {
+			T l = left.get(object1.getTokenIndex());
+			T r = right.get(object2.getTokenIndex());
+			return l.similarity(object1.toString(), r, object2.toString());
+		}
+
+		public Iterable<String> toSegments(T token) {
+			return token.splitIntoSegments();
+		}
+
 	}
 
 	Class<? extends Function<String, ? extends Iterable<String>>> tokenizer() default GenericTokenizer.class;

@@ -51,7 +51,7 @@ public class DeleteUtilTest {
 		deleteUtil.deleteEntity((Entity) arg1);
 
 		List<Token> afterDeletion = serializer.serialize(root);
-		expectation.assertDiffEquals(beforeDeletion, afterDeletion, new TokenSerializer.TokenAdapter());
+		expectation.assertDiffEquals(beforeDeletion, afterDeletion);
 	}
 
 }

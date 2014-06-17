@@ -6,6 +6,7 @@
   |     myEnt1:[MyEntity2|void]
       }
   -   entity MyEntity2 {
+  -   }
     }
 --- */
 

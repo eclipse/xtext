@@ -18,42 +18,23 @@ import org.xpect.text.Table.Column;
 import org.xpect.text.Table.Row;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
 
 public class DifferencerImpl implements IDifferencer {
 
-	private static String format(List<?> left, List<?> right, Collection<?> matches) {
-		Table table = new Table();
-		table.setMaxCellWidth(5);
-		table.setRowSeparatorHeight(0);
-		table.setSeparatorCrossingBackground("+");
-		Row topHeader = table.getRow(0);
-		Row topIndex = table.getRow(1);
-		topIndex.getBottomSeparator().setBackground("-").setHeight(1);
-		topIndex.getCell(2).setText("-1");
-		for (int i = 0; i < right.size(); i++) {
-			topHeader.getCell(i + 3).setText(right.get(i));
-			topIndex.getCell(i + 3).setText(i);
-		}
-		Column leftHeader = table.getColumn(0);
-		Column leftIndex = table.getColumn(1);
-		// leftHeader.getRightSeparator().setWidth(0);
-		leftIndex.getRightSeparator().setBackground("|");
-		leftIndex.getCell(2).setText("-1");
-		for (int i = 0; i < left.size(); i++) {
-			leftHeader.getCell(i + 3).setText(left.get(i));
-			leftIndex.getCell(i + 3).setText(i);
-		}
-		for (Object o : matches) {
-			Match match = (Match) o;
-			String dir = String.valueOf(match.direction.direction.name().charAt(0));
-			table.getCell(match.left + 3, match.right + 3).setText(match.cost + dir);
-		}
-		return table.toString();
-	}
-
 	private enum Direction {
 		BACKWARD, FORWARD
+	}
+
+	private static class DirectionState {
+		private final Direction direction;
+
+		private final State<?> state;
+
+		public DirectionState(State<?> state, Direction direction) {
+			super();
+			this.state = state;
+			this.direction = direction;
+		}
 	}
 
 	private static class Match implements IDifferencer.Match, Comparable<Match> {
@@ -78,6 +59,8 @@ public class DifferencerImpl implements IDifferencer {
 
 		public Match(Match previous, MatchKind kind, int left, int right, float similarity) {
 			super();
+			// Preconditions.checkPositionIndex(Math.abs(previous.left - left), 1);
+			// Preconditions.checkPositionIndex(Math.abs(previous.right - right), 1);
 			this.direction = previous.direction;
 			this.kind = kind;
 			this.previous = previous;
@@ -92,6 +75,21 @@ public class DifferencerImpl implements IDifferencer {
 				return -1;
 			if (cost > o.cost)
 				return 1;
+			switch (kind) {
+			case LEFT_ONLY:
+				switch (o.kind) {
+				case RIGHT_ONLY:
+					return direction.direction == Direction.FORWARD ? -1 : 1;
+				default:
+				}
+			case RIGHT_ONLY:
+				switch (o.kind) {
+				case LEFT_ONLY:
+					return direction.direction == Direction.FORWARD ? 1 : -1;
+				default:
+				}
+			default:
+			}
 			if (left < o.left)
 				return -1;
 			if (left > o.left)
@@ -149,10 +147,10 @@ public class DifferencerImpl implements IDifferencer {
 	}
 
 	private static class Solution<T> {
-		private final State<T> state;
 		private final Match backwardsEnd;
 		private final float cost;
 		private final Match forwardEnd;
+		private final State<T> state;
 
 		public Solution(State<T> state, Match match1, Match match2) {
 			Preconditions.checkArgument(match1.direction.state == state);
@@ -166,22 +164,6 @@ public class DifferencerImpl implements IDifferencer {
 			this.state = state;
 		}
 
-		public boolean isBetterThan(Solution<T> o) {
-			if (cost < o.cost)
-				return true;
-			if (cost > o.cost)
-				return false;
-			if (forwardEnd.left < o.forwardEnd.left)
-				return true;
-			if (forwardEnd.left > o.forwardEnd.left)
-				return false;
-			if (forwardEnd.right < o.forwardEnd.right)
-				return true;
-			if (forwardEnd.right > o.forwardEnd.right)
-				return false;
-			return false;
-		}
-
 		private int getlastLeft(Match m) {
 			return m.kind == RIGHT_ONLY ? getlastLeft(m.previous) : m.left;
 		}
@@ -190,8 +172,25 @@ public class DifferencerImpl implements IDifferencer {
 			return m.kind == LEFT_ONLY ? getlastRight(m.previous) : m.right;
 		}
 
+		public boolean isBetterThan(Solution<T> o) {
+			if (cost < o.cost)
+				return true;
+			if (cost > o.cost)
+				return false;
+			return false;
+			// if (forwardEnd.left < o.forwardEnd.left)
+			// return true;
+			// if (forwardEnd.left > o.forwardEnd.left)
+			// return false;
+			// if (forwardEnd.right < o.forwardEnd.right)
+			// return true;
+			// if (forwardEnd.right > o.forwardEnd.right)
+			// return false;
+			// return false;
+		}
+
 		public List<IDifferencer.Match> toList() {
-			List<IDifferencer.Match> result = new ArrayList<IDifferencer.Match>();
+			List<IDifferencer.Match> result = new ToStrList(state.left, state.right);
 			List<IDifferencer.Match> temp = new ArrayList<IDifferencer.Match>();
 			for (Match m = forwardEnd; m.previous != null; m = m.previous)
 				temp.add(m);
@@ -200,29 +199,39 @@ public class DifferencerImpl implements IDifferencer {
 			int lastLeft = getlastLeft(forwardEnd);
 			int lastRight = getlastRight(forwardEnd);
 			for (Match m = backwardsEnd; m.previous != null; m = m.previous)
-				if ((m.kind == RIGHT_ONLY || m.left > lastLeft) && (m.kind == LEFT_ONLY || m.right > lastRight))
-					result.add(m);
-			return ImmutableList.copyOf(result);
+				switch (m.kind) {
+				case LEFT_ONLY:
+					if (m.left > lastLeft)
+						result.add(m);
+					break;
+				case RIGHT_ONLY:
+					if (m.right > lastRight)
+						result.add(m);
+					break;
+				default:
+					if (m.left > lastLeft && m.right > lastRight)
+						result.add(m);
+					else if (m.left > lastLeft)
+						result.add(new Match(m.previous, MatchKind.LEFT_ONLY, m.left, IDifferencer.Match.NO_INDEX, m.similarity));
+					else if (m.right > lastRight)
+						result.add(new Match(m.previous, MatchKind.RIGHT_ONLY, IDifferencer.Match.NO_INDEX, m.right, m.similarity));
+					break;
+				}
+			return result;
 		}
 
-	}
-
-	private static class DirectionState {
-		public DirectionState(State<?> state, Direction direction) {
-			super();
-			this.state = state;
-			this.direction = direction;
+		@Override
+		public String toString() {
+			return toList().toString();
 		}
 
-		private final State<?> state;
-		private final Direction direction;
 	}
 
 	private static class State<T> {
 		private final List<T> left;
 		private final List<T> right;
-		private final HashMap<Long, Match> visited = new HashMap<Long, Match>();
 		private TreeSet<Match> unvisited = new TreeSet<Match>();
+		private final HashMap<Long, Match> visited = new HashMap<Long, Match>();
 
 		public State(List<T> left, List<T> right) {
 			super();
@@ -234,6 +243,53 @@ public class DifferencerImpl implements IDifferencer {
 		public String toString() {
 			return format(left, right, unvisited);
 		}
+	}
+
+	@SuppressWarnings("serial")
+	private static class ToStrList extends ArrayList<IDifferencer.Match> {
+		private final List<?> left;
+		private final List<?> right;
+
+		private ToStrList(List<?> left, List<?> right) {
+			super();
+			this.left = left;
+			this.right = right;
+		}
+
+		@Override
+		public String toString() {
+			return format(left, right, this);
+		}
+	}
+
+	private static String format(List<?> left, List<?> right, Collection<?> matches) {
+		Table table = new Table();
+		table.setMaxCellWidth(5);
+		table.setRowSeparatorHeight(0);
+		table.setSeparatorCrossingBackground("+");
+		Row topHeader = table.getRow(0);
+		Row topIndex = table.getRow(1);
+		topIndex.getBottomSeparator().setBackground("-").setHeight(1);
+		topIndex.getCell(2).setText("-1");
+		for (int i = 0; i < right.size(); i++) {
+			topHeader.getCell(i + 3).setText(right.get(i));
+			topIndex.getCell(i + 3).setText(i);
+		}
+		Column leftHeader = table.getColumn(0);
+		Column leftIndex = table.getColumn(1);
+		// leftHeader.getRightSeparator().setWidth(0);
+		leftIndex.getRightSeparator().setBackground("|");
+		leftIndex.getCell(2).setText("-1");
+		for (int i = 0; i < left.size(); i++) {
+			leftHeader.getCell(i + 3).setText(left.get(i));
+			leftIndex.getCell(i + 3).setText(i);
+		}
+		for (Object o : matches) {
+			Match match = (Match) o;
+			String dir = String.valueOf(match.direction.direction.name().charAt(0));
+			table.getCell(match.left + 3, match.right + 3).setText(match.cost + dir);
+		}
+		return table.toString();
 	}
 
 	public <T> List<IDifferencer.Match> diff(List<T> left, List<T> right, ISimilarityFunction<? super T> similarityFunction) {
@@ -307,6 +363,7 @@ public class DifferencerImpl implements IDifferencer {
 			// System.out.println();
 			// System.out.println(state);
 		}
-		return solution.toList();
+		List<IDifferencer.Match> result = solution.toList();
+		return result;
 	}
 }

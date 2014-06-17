@@ -1,8 +1,8 @@
 package org.xpect.text;
 
+import java.util.Arrays;
 import java.util.List;
 
-import org.xpect.text.TextDifferencer.LineDiff;
 import org.xpect.util.DifferencerImpl;
 import org.xpect.util.IDifferencer.Match;
 import org.xpect.util.IDifferencer.MatchKind;
@@ -31,6 +31,8 @@ public class TextDifferencer implements ITextDifferencer {
 				case SIMILAR:
 					return MatchKind.SIMILAR;
 				case EQUAL:
+					if (hasLeft != hasRight)
+						return MatchKind.SIMILAR;
 					hasLeft = true;
 					hasRight = true;
 					break;
@@ -126,6 +128,25 @@ public class TextDifferencer implements ITextDifferencer {
 			case RIGHT_ONLY:
 				return "+ " + toString(getRightSegments(), true, true);
 			case SIMILAR:
+				// int equalLenght = 0;
+				// int unequalLenght = 0;
+				// for (ISegmentDiff diff : segmentDiffs)
+				// switch (diff.getKind()) {
+				// case LEFT_ONLY:
+				// unequalLenght += diff.getLeft().toString().length();
+				// break;
+				// case RIGHT_ONLY:
+				// unequalLenght += diff.getRight().toString().length();
+				// break;
+				// case EQUAL:
+				// equalLenght += diff.getLeft().toString().length();
+				// break;
+				// case SIMILAR:
+				// unequalLenght += diff.getRight().toString().length();
+				// unequalLenght += diff.getLeft().toString().length();
+				// break;
+				// }
+				// if (true /* equalLenght > unequalLenght */) {
 				StringBuilder result = new StringBuilder("|");
 				List<ISegment> left = Lists.newArrayList();
 				List<ISegment> right = Lists.newArrayList();
@@ -147,22 +168,30 @@ public class TextDifferencer implements ITextDifferencer {
 						left.add(match.getLeft());
 						break;
 					}
-					boolean last = i == segmentDiffs.size() - 1;
-					if (match.getKind() == MatchKind.EQUAL || last) {
+					if (match.getKind() == MatchKind.EQUAL) {
 						if (left.size() > 0 || right.size() > 0) {
 							result.append("[" + toString(left, false, false) + "|" + toString(right, false, false) + "]");
 							left.clear();
 							right.clear();
 						}
 					}
-					if (match.getKind() != MatchKind.EQUAL || last) {
+					if (match.getKind() != MatchKind.EQUAL) {
 						if (equal.size() > 0) {
 							result.append(toString(equal, true, true));
 							equal.clear();
 						}
 					}
+					if (i == segmentDiffs.size() - 1) {
+						if (left.size() > 0 || right.size() > 0)
+							result.append("[" + toString(left, false, false) + "|" + toString(right, false, false) + "]");
+						if (equal.size() > 0)
+							result.append(toString(equal, true, true));
+					}
 				}
 				return result.toString();
+				// } else {
+				// return "- " + toString(getLeftSegments(), true, true) + "\n" + "+ " + toString(getRightSegments(), true, true);
+				// }
 			}
 			return super.toString();
 		}
@@ -311,7 +340,37 @@ public class TextDifferencer implements ITextDifferencer {
 
 		@Override
 		public String toString() {
-			return Joiner.on('\n').join(lines);
+			final int treshold = 4;
+			boolean enabled[] = new boolean[lines.size()];
+			Arrays.fill(enabled, false);
+			int l = -treshold;
+			for (int i = 0; i < enabled.length; i++) {
+				if (lines.get(i).getKind() != MatchKind.EQUAL)
+					l = i;
+				if (i - l < treshold)
+					enabled[i] = true;
+			}
+			l = enabled.length + treshold;
+			for (int i = enabled.length - 1; i >= 0; i--) {
+				if (lines.get(i).getKind() != MatchKind.EQUAL)
+					l = i;
+				if (l - i < treshold)
+					enabled[i] = true;
+			}
+			List<String> filtered = Lists.newArrayList();
+			boolean out = false;
+			for (int i = 0; i < enabled.length; i++) {
+				if (enabled[i]) {
+					filtered.add(this.lines.get(i).toString());
+					out = false;
+				} else {
+					if (!out) {
+						filtered.add("(...)");
+						out = true;
+					}
+				}
+			}
+			return Joiner.on('\n').join(filtered);
 		}
 
 	}
@@ -367,14 +426,17 @@ public class TextDifferencer implements ITextDifferencer {
 			if ((left != null && left.needsWrap()) || (right != null && right.needsWrap())) {
 				result.add(new LineDiff(currentLine));
 				currentLine.clear();
+				// System.out.println("<flush>");
 			}
+			// System.out.println(left + "<>" + right);
 			currentLine.add(new SegmentDiff(match.getKind(), left, right, match.getSimilarity()));
 		}
 		if (!currentLine.isEmpty()) {
 			result.add(new LineDiff(currentLine));
 			currentLine.clear();
 		}
-		return new TextDiff(result);
+		TextDiff textDiff = new TextDiff(result);
+		return textDiff;
 	}
 
 }

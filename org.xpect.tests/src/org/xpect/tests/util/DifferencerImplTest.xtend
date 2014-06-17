@@ -5,6 +5,7 @@ import org.junit.Test
 import org.xpect.util.DifferencerImpl
 import org.junit.Assert
 import com.google.common.collect.Sets
+import org.junit.Ignore
 
 class DifferencerImplTest {
 
@@ -63,6 +64,16 @@ class DifferencerImplTest {
 			[1==1]
 			[---2]
 		''' === diff(#["A", "B"], #["A", "B", "C"])
+	}
+
+	@Test @Ignore def void testRemoveMiddle() {
+		'''
+			[0==0]
+			[1---]
+			[2---]
+			[3---]
+			[4==1]
+		''' === diff(#["A", "B", "B", "B", "C"], #["A", "C"])
 	}
 
 	def operator_tripleEquals(Object o1, Object o2) {
