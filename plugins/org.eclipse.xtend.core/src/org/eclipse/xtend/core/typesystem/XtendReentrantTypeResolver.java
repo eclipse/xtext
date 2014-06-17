@@ -494,9 +494,6 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			LightweightTypeReference implicitVoid = null;
 			LightweightTypeReference thrownVoid = null;
 			for (JvmOperation dispatchCase : dispatchCases) {
-				markComputing(dispatchCase.getReturnType());
-			}
-			for (JvmOperation dispatchCase : dispatchCases) {
 				ResolvedTypes dispatchCaseResolvedTypes = dispatchCase == operation ? childResolvedTypes : preparedResolvedTypes.get(dispatchCase);
 				if (dispatchCaseResolvedTypes == null) {
 					if (preparedResolvedTypes.containsKey(dispatchCase)) {
@@ -520,8 +517,13 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 							dispatcher,
 							declaredDispatcherType);
 					addExtensionProviders(state, dispatchCase.getParameters());
-					ITypeComputationResult dispatchCaseResult = state.computeTypes();
-					unmarkComputing(dispatchCase.getReturnType());
+					ITypeComputationResult dispatchCaseResult = null;
+					try {
+						markComputing(dispatchCase.getReturnType());
+						dispatchCaseResult = state.computeTypes();
+					} finally {
+						unmarkComputing(dispatchCase.getReturnType());
+					}
 					if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
 						if (declaredDispatcherType == null) {
 							LightweightTypeReference returnType = dispatchCaseResult.getReturnType();
