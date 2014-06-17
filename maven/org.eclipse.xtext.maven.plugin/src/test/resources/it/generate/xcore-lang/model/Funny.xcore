@@ -1,0 +1,14 @@
+@GenModel(modelDirectory="./src-gen" )
+
+package org.eclipse.xcore.test
+
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.emf.ecore.EObject
+
+class MyClass2 {
+	String name2
+	contains EObject[] eObjs
+	refers JvmType types
+	contains XExpression value
+}
