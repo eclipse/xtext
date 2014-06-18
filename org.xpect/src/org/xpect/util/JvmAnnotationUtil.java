@@ -96,8 +96,7 @@ public class JvmAnnotationUtil {
 		return getAnnotationValue(type, ann, null, c);
 	}
 
-	public static <A extends JvmAnnotationValue> A getAnnotationValue(JvmAnnotationTarget t, Class<? extends Annotation> a, String n,
-			Class<A> c) {
+	public static <A extends JvmAnnotationValue> A getAnnotationValue(JvmAnnotationTarget t, Class<? extends Annotation> a, String n, Class<A> c) {
 		return getAnnotationValue(getAnnotation(t, a), n, c);
 	}
 
@@ -112,6 +111,8 @@ public class JvmAnnotationUtil {
 
 	public static Annotation newInstance(final JvmAnnotationReference ref) {
 		Class<?> annotation = IJavaReflectAccess.INSTANCE.getRawType(ref.getAnnotation());
+		if (annotation == null)
+			return null;
 		return (Annotation) Proxy.newProxyInstance(annotation.getClassLoader(), new Class<?>[] { annotation }, new InvocationHandler() {
 			protected Object getValue(JvmAnnotationValue value) {
 				if (value instanceof JvmStringAnnotationValue)
@@ -179,7 +180,7 @@ public class JvmAnnotationUtil {
 		if (type == null || type.eIsProxy())
 			return Collections.emptyList();
 		List<T> result = Lists.newArrayList();
-		for (JvmAnnotationReference ref : type.getAnnotations()) {
+		REF: for (JvmAnnotationReference ref : type.getAnnotations()) {
 			if (ref.getAnnotation() == null || ref.getAnnotation().eIsProxy())
 				continue;
 			JvmTypeAnnotationValue value = getAnnotationValue(ref.getAnnotation(), ann, JvmTypeAnnotationValue.class);
@@ -191,6 +192,10 @@ public class JvmAnnotationUtil {
 					if (adapter != null) {
 						try {
 							Annotation param = newInstance(ref);
+							if (param == null) {
+								logger.error("Coult not load " + ref);
+								continue REF;
+							}
 							for (Constructor<?> cons : adapter.getConstructors()) {
 								Class<?>[] parameterTypes = cons.getParameterTypes();
 								if (parameterTypes.length == 1 && parameterTypes[0].isInstance(param)) {
