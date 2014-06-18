@@ -8,4 +8,6 @@
 	<md:property key="target.ws" value="*" />
 	<md:mspecNode namePattern="org\.junit.*" materializer="p2"
 		componentType="osgi.bundle" exclude="false" />
+	<md:mspecNode namePattern="org\.eclipse\.emf*"
+		materializer="p2" componentType="osgi.bundle" exclude="false" />
 </md:mspec>
