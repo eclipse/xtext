@@ -4,7 +4,6 @@
         <cs:dependency name="com.google.guava.source" componentType="osgi.bundle"/>
         <cs:dependency name="com.google.inject" componentType="osgi.bundle" versionDesignator="3.0.0"/>
         <cs:dependency name="com.google.inject.source" componentType="osgi.bundle" versionDesignator="3.0.0"/>
-        <cs:dependency name="de.itemis.xtext.antlr.feature" componentType="eclipse.feature" filter="(WITH.MWE2=true)"/>
         <cs:dependency name="javax.inject" componentType="osgi.bundle"/>
         <cs:dependency name="javax.inject.source" componentType="osgi.bundle"/>
         <cs:dependency name="org.antlr.runtime.source" componentType="osgi.bundle"/>
@@ -15,7 +14,6 @@
         <cs:dependency name="org.apache.log4j.source" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.debug.ui" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.draw2d" componentType="eclipse.feature"/>
-        <cs:dependency name="org.eclipse.egit.core" componentType="osgi.bundle" filter="(ECLIPSE.TARGET.ALIAS=Stable)"/>
         <cs:dependency name="org.eclipse.emf.common" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.emf.common.source" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.emf.ecore" componentType="osgi.bundle"/>
@@ -23,16 +21,20 @@
         <cs:dependency name="org.eclipse.emf.ecore.source" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.emf.mwe.core" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.emf.mwe.utils" componentType="osgi.bundle"/>
-        <cs:dependency name="org.eclipse.emf.mwe2.launch" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.emf.mwe2.lib" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.emf.mwe2.runtime" componentType="osgi.bundle"/>
+        
+        <cs:dependency name="org.eclipse.emf.mwe2.launch" componentType="osgi.bundle" filter="(WITH.MWE2=true)"/>
+        <cs:dependency name="de.itemis.xtext.antlr.feature" componentType="eclipse.feature" filter="(WITH.MWE2=true)"/>
+        <cs:dependency name="org.eclipse.egit.core" componentType="osgi.bundle"  filter="(ECLIPSE.TARGET.ALIAS=Stable)"/>
+        <cs:dependency name="org.eclipse.jgit" componentType="eclipse.feature"  filter="(ECLIPSE.TARGET.ALIAS=Stable)"/>
+        
         <cs:dependency name="org.eclipse.jdt" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.jdt.annotation" componentType="osgi.bundle" versionDesignator="1.0.0"/>
         <cs:dependency name="org.eclipse.jdt.core.source" componentType="osgi.bundle"/>
+        <cs:dependency name="org.eclipse.jdt.launching.macosx" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.jdt.junit" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.jdt.junit4.runtime" componentType="osgi.bundle"/>
-        <cs:dependency name="org.eclipse.jdt.launching.macosx" componentType="osgi.bundle"/>
-        <cs:dependency name="org.eclipse.jgit" componentType="eclipse.feature" filter="(ECLIPSE.TARGET.ALIAS=Stable)"/>
         <cs:dependency name="org.eclipse.m2e.core" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.pde.core" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.pde.junit.runtime" componentType="osgi.bundle"/>

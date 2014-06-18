@@ -4,4 +4,5 @@
     <cq:property key="target.os" value="*"/>
     <cq:property key="target.ws" value="*"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xtext\.license$" skipComponent="true"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.emf\.mwe2\..*$" skipComponent="true"/>
 </cq:componentQuery>
