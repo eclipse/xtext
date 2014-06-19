@@ -150,7 +150,7 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultUiModu
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {
-		return org.eclipse.xtext.xbase.typesystem.internal.BuilderAwareFeatureScopeTrackerProvider.class;
+		return org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment

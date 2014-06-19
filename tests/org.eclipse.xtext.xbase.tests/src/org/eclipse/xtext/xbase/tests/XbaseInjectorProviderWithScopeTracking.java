@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.tests;
 
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
-import org.eclipse.xtext.xbase.typesystem.internal.BuilderAwareFeatureScopeTrackerProvider;
+import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
 import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker;
 
 import com.google.inject.Guice;
@@ -32,7 +32,7 @@ public class XbaseInjectorProviderWithScopeTracking extends XbaseInjectorProvide
 				@Override
 				public void configure(com.google.inject.Binder binder) {
 					super.configure(binder);
-					binder.bind(IFeatureScopeTracker.Provider.class).to(BuilderAwareFeatureScopeTrackerProvider.class);
+					binder.bind(IFeatureScopeTracker.Provider.class).to(OptimizingFeatureScopeTrackerProvider.class);
 				}
 				
 			});
