@@ -56,6 +56,11 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		}
 	}
 	
+	public IFeatureScopeSession addContext(JvmType context, ITypeReferenceOwner referenceOwner) {
+		LightweightTypeReference reference = new ParameterizedTypeReference(referenceOwner, context);
+		return new FeatureScopeSessionWithContext(this, reference);
+	}
+	
 	public IFeatureScopeSession addTypesToStaticScope(List<? extends JvmType> staticFeatureProviders,
 			List<? extends JvmType> extensionProviders) {
 		if (staticFeatureProviders.isEmpty() && extensionProviders.isEmpty())
