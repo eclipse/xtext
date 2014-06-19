@@ -263,7 +263,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper",
 					 	"org.eclipse.xtext.xbase.ui.navigation.TypeLiteralAwareHyperlinkHelper")
 				.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider",
-					 	"org.eclipse.xtext.xbase.typesystem.internal.BuilderAwareFeatureScopeTrackerProvider");
+					 	"org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider");
 		if (useInferredJvmModel) {
 			// rename refactoring
 			bindFactory = bindFactory

@@ -16,12 +16,13 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 
 /**
  * An internal provider for {@link IFeatureScopeTracker feature scope trackers} that disables
- * the feature scope tracking for the builder's resource set, since the tracking is only
- * necessary in the editor.
+ * the feature scope tracking for the builder's resource set, since feature scopes are not used there.
+ * 
+ * For the editor it only installs them for the primary resource.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class BuilderAwareFeatureScopeTrackerProvider implements IFeatureScopeTracker.Provider {
+public class OptimizingFeatureScopeTrackerProvider implements IFeatureScopeTracker.Provider {
 
 	public IFeatureScopeTracker track(EObject root) {
 		Resource resource = root.eResource();
@@ -32,10 +33,7 @@ public class BuilderAwareFeatureScopeTrackerProvider implements IFeatureScopeTra
 				if (isBuilderScope(loadOptions)) {
 					return IFeatureScopeTracker.NULL;
 				}
-				if (isLiveScope(loadOptions)) {
-					return IFeatureScopeTracker.NULL;
-				}
-				if (!isPrimaryResource(resourceSet, resource)) {
+				if (!isLiveScope(loadOptions) && !isPrimaryResource(resourceSet, resource)) {
 					return IFeatureScopeTracker.NULL;
 				}
 			}
