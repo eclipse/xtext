@@ -336,16 +336,15 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
-		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, resolvedTypes.getReferenceOwner(), type);
-		prepareMembers(resolvedTypes, childSession, type, resolvedTypesByType);
+		prepareMembers(resolvedTypes, featureScopeSession, type, resolvedTypesByType);
 	}
 
 	protected void prepareMembers(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
-		IFeatureScopeSession childSession = addExtensionsToMemberSession(resolvedTypes, featureScopeSession, type);
-		
-		StackedResolvedTypes childResolvedTypes = declareTypeParameters(resolvedTypes, type, resolvedTypesByType);
+		IFeatureScopeSession staticMemberSession = addStaticMemberSession(type, resolvedTypes, featureScopeSession);
+		IFeatureScopeSession instanceMemberSession = addInstanceMemberSession(type, resolvedTypes, staticMemberSession);
 		
 		JvmTypeReference superType = getExtendedClass(type);
+		StackedResolvedTypes childResolvedTypes = declareTypeParameters(resolvedTypes, type, resolvedTypesByType);
 		if (superType != null) {
 			LightweightTypeReference lightweightSuperType = resolvedTypes.getConverter().toLightweightReference(superType);
 			childResolvedTypes.reassignTypeWithoutMerge(superType.getType(), lightweightSuperType);
@@ -366,7 +365,12 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		List<JvmMember> members = type.getMembers();
 		int size = members.size();
 		for(int i = 0; i < size; i++) {
-			doPrepare(childResolvedTypes, childSession, members.get(i), resolvedTypesByType);
+			JvmMember member = members.get(i);
+			if (isStatic(member)) {
+				doPrepare(childResolvedTypes, staticMemberSession, member, resolvedTypesByType);
+			} else {
+				doPrepare(childResolvedTypes, instanceMemberSession, member, resolvedTypesByType);
+			}
 		}
 	}
 
@@ -375,7 +379,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		StackedResolvedTypes childResolvedTypes = resolvedTypes.pushTypes();
 		if (declarator instanceof JvmTypeParameterDeclarator) {
 			JvmTypeParameterDeclarator casted = (JvmTypeParameterDeclarator) declarator;
-			if (isStatic(declarator) && !(declarator instanceof JvmConstructor)) {
+			if (isStatic(declarator)) {
 				childResolvedTypes.replaceDeclaredTypeParameters(casted.getTypeParameters());
 			} else {
 				childResolvedTypes.addDeclaredTypeParameters(casted.getTypeParameters());
@@ -386,6 +390,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	protected boolean isStatic(JvmIdentifiableElement declarator) {
+		if (declarator instanceof JvmConstructor) {
+			return false;
+		}
 		if (declarator instanceof JvmFeature) {
 			return ((JvmFeature) declarator).isStatic();
 		}
@@ -674,20 +681,47 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		if (capturedState != null) {
 			featureScopeSession = capturedState;
 		}
-		IFeatureScopeSession childSession = addThisAndSuper(featureScopeSession, childResolvedTypes.getReferenceOwner(), type);
-		computeMemberTypes(preparedResolvedTypes, childResolvedTypes, childSession, type);
+		computeMemberTypes(preparedResolvedTypes, childResolvedTypes, featureScopeSession, type);
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, type);
-		
 		mergeChildTypes(childResolvedTypes);
 	}
 
 	protected void computeMemberTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
 			JvmDeclaredType type) {
-		IFeatureScopeSession childSession = addExtensionsToMemberSession(resolvedTypes, featureScopeSession, type);
+		IFeatureScopeSession staticMemberSession = addStaticMemberSession(type, resolvedTypes, featureScopeSession);
+		IFeatureScopeSession instanceMemberSession = addInstanceMemberSession(type, resolvedTypes, staticMemberSession);
+		
 		List<JvmMember> members = type.getMembers();
 		for(int i = 0; i < members.size(); i++) {
-			computeTypes(preparedResolvedTypes, resolvedTypes, childSession, members.get(i));
+			JvmMember member = members.get(i);
+			if (isStatic(member)) {
+				computeTypes(preparedResolvedTypes, resolvedTypes, staticMemberSession, member);
+			} else {
+				computeTypes(preparedResolvedTypes, resolvedTypes, instanceMemberSession, member);
+			}
 		}
+	}
+
+	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession parent, JvmDeclaredType type, ResolvedTypes resolvedTypes) {
+		IFeatureScopeSession thisAndSuperSession = parent;
+		if (type.eContainer() != null) {
+			if (type.isStatic()) {
+				thisAndSuperSession = thisAndSuperSession.dropLocalElements();
+			} else {
+				thisAndSuperSession = thisAndSuperSession.captureLocalElements();
+			}
+		}
+		JvmTypeReference superType = getExtendedClass(type);
+		ITypeReferenceOwner owner = resolvedTypes.getReferenceOwner();
+		if (superType != null) {
+			ImmutableMap.Builder<QualifiedName, JvmIdentifiableElement> builder = ImmutableMap.builder();
+			builder.put(IFeatureNames.THIS, type);
+			builder.put(IFeatureNames.SUPER, superType.getType());
+			thisAndSuperSession = thisAndSuperSession.addLocalElements(builder.build(), owner);
+		} else {
+			thisAndSuperSession = thisAndSuperSession.addLocalElement(IFeatureNames.THIS, type, owner);
+		}
+		return thisAndSuperSession;
 	}
 	
 	protected IFeatureScopeSession addThisAndSuper(IFeatureScopeSession session, ITypeReferenceOwner owner, JvmDeclaredType type) {
@@ -735,6 +769,24 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 		return null;
 	}
+
+	protected IFeatureScopeSession addStaticMemberSession(JvmDeclaredType type, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession) {
+		IFeatureScopeSession staticSession = featureScopeSession.addContext(type, resolvedTypes.getReferenceOwner());
+		IFeatureScopeSession staticMembersSession = addThisTypeToStaticScope(staticSession, type).addNestedTypesToScope(type);
+		IFeatureScopeSession staticExtensionsSession = addStaticExtensions(type, resolvedTypes, staticMembersSession);
+		return staticExtensionsSession;
+	}
+
+	protected IFeatureScopeSession addInstanceMemberSession(JvmDeclaredType type, ResolvedTypes resolvedTypes, IFeatureScopeSession staticExtensionsSession) {
+		IFeatureScopeSession thisAndSuperSession = addThisAndSuper(staticExtensionsSession, type, resolvedTypes);
+		IFeatureScopeSession instanceExtensionsSession = addExtensionsToMemberSession(resolvedTypes, thisAndSuperSession, type);
+		return instanceExtensionsSession;
+	}
+
+	protected IFeatureScopeSession addStaticExtensions(JvmDeclaredType type, ResolvedTypes resolvedTypes, IFeatureScopeSession parent) {
+		return addExtensionFieldsToMemberSession(resolvedTypes, parent, type, type, 
+				Sets.<String>newHashSetWithExpectedSize(8), Sets.<JvmType>newHashSetWithExpectedSize(4), true);
+	}
 	
 	protected IFeatureScopeSession addExtensionsToMemberSession(ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
@@ -744,7 +796,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 		JvmIdentifiableElement thisFeature = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
 		IFeatureScopeSession childSession = addExtensionFieldsToMemberSession(
-				resolvedTypes, featureScopeSession, type, thisFeature, Sets.<String>newHashSetWithExpectedSize(8), Sets.<JvmType>newHashSetWithExpectedSize(4));
+				resolvedTypes, featureScopeSession, type, thisFeature, Sets.<String>newHashSetWithExpectedSize(8), Sets.<JvmType>newHashSetWithExpectedSize(4), false);
 		XFeatureCall thisAccess = getXbaseFactory().createXFeatureCall();
 		thisAccess.setFeature(thisFeature);
 		LightweightTypeReference thisType = resolvedTypes.getActualType(thisFeature);
@@ -758,13 +810,14 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				JvmDeclaredType type, 
 				JvmIdentifiableElement thisFeature,
 				Set<String> seenNames,
-				Set<JvmType> seenTypes) {
+				Set<JvmType> seenTypes,
+				boolean staticMember) {
 		if (seenTypes.add(type)) {
 			Iterable<JvmField> fields = type.getDeclaredFields();
 			// collect local fields first, to populate the set of names
 			Map<XExpression, LightweightTypeReference> extensionProviders = null;
 			for(JvmField field: fields) {
-				if (featureScopeSession.isVisible(field) && seenNames.add(field.getSimpleName()) && isExtensionProvider(field)) {
+				if (field.isStatic() == staticMember && featureScopeSession.isVisible(field) && seenNames.add(field.getSimpleName()) && isExtensionProvider(field)) {
 					if (extensionProviders == null) {
 						extensionProviders = Maps2.newLinkedHashMapWithExpectedSize(3);
 					}
@@ -777,7 +830,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			JvmTypeReference superType = getExtendedClass(type);
 			IFeatureScopeSession result = featureScopeSession;
 			if (superType != null) {
-				result = addExtensionFieldsToMemberSession(resolvedTypes, featureScopeSession, (JvmDeclaredType) superType.getType(), thisFeature, seenNames, seenTypes);
+				result = addExtensionFieldsToMemberSession(resolvedTypes, featureScopeSession, (JvmDeclaredType) superType.getType(), thisFeature, seenNames, seenTypes, staticMember);
 			}
 			if (extensionProviders != null) {
 				result = result.addToExtensionScope(extensionProviders);

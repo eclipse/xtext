@@ -53,6 +53,11 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	 * @see IScopeProvider#getScope(EObject, EReference)
 	 */
 	IScope getScope(EObject context, EReference reference, IResolvedTypes types);
+
+	/**
+	 * Add the given type as a context. 
+	 */
+	IFeatureScopeSession addContext(JvmType context, ITypeReferenceOwner referenceOwner);
 	
 	/**
 	 * Add types to the session that are imported statically either as plain static imports 
