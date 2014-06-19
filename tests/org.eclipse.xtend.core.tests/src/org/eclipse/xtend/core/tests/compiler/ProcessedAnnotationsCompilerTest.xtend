@@ -15,12 +15,6 @@ import org.junit.Test
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@ValueObject
-@Wither
-class Foo {
-	String bar
-	int baz
-}
 class DataCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
