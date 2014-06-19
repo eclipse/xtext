@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.xtend.lib.PropertyProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -75,8 +74,8 @@ public class DataProcessor extends AbstractClassProcessor {
       this.addReflectiveToString(it, context);
     }
     Iterable<? extends MutableFieldDeclaration> _instanceFields_2 = this.getInstanceFields(it);
-    final Consumer<MutableFieldDeclaration> _function = new Consumer<MutableFieldDeclaration>() {
-      public void accept(final MutableFieldDeclaration it) {
+    final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
+      public void apply(final MutableFieldDeclaration it) {
         boolean _hasGetter = DataProcessor.this._propertyProcessor.hasGetter(it);
         boolean _not = (!_hasGetter);
         if (_not) {
@@ -89,7 +88,7 @@ public class DataProcessor extends AbstractClassProcessor {
         it.setSimpleName(_plus);
       }
     };
-    _instanceFields_2.forEach(_function);
+    IterableExtensions.forEach(_instanceFields_2, _function);
   }
   
   public boolean hasDataConstructor(final ClassDeclaration cls) {
@@ -152,15 +151,15 @@ public class DataProcessor extends AbstractClassProcessor {
           _elvis = Collections.<ParameterDeclaration>unmodifiableList(Lists.<ParameterDeclaration>newArrayList());
         }
         final Iterable<? extends ParameterDeclaration> superParameters = _elvis;
-        final Consumer<ParameterDeclaration> _function = new Consumer<ParameterDeclaration>() {
-          public void accept(final ParameterDeclaration it) {
+        final Procedure1<ParameterDeclaration> _function = new Procedure1<ParameterDeclaration>() {
+          public void apply(final ParameterDeclaration it) {
             String _simpleName = it.getSimpleName();
             TypeReference _type = it.getType();
             final MutableParameterDeclaration param = constructor.addParameter(_simpleName, _type);
             fieldToParameter.put(it, param);
           }
         };
-        superParameters.forEach(_function);
+        IterableExtensions.forEach(superParameters, _function);
         Iterable<? extends MutableFieldDeclaration> _constructedFields = DataProcessor.this.constructedFields(cls);
         final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
           public void apply(final MutableFieldDeclaration it) {
