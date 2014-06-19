@@ -10,7 +10,7 @@ import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
-import org.eclipse.xtext.xbase.typesystem.internal.BuilderAwareFeatureScopeTrackerProvider;
+import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
 import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker;
 import org.eclipse.xtext.xbase.ui.editor.copyqualifiedname.XbaseCopyQualifiedNameService;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
@@ -60,7 +60,7 @@ public class XbaseUiModule extends org.eclipse.xtext.xbase.ui.AbstractXbaseUiMod
 	}
 	
 	public Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {
-		return BuilderAwareFeatureScopeTrackerProvider.class;
+		return OptimizingFeatureScopeTrackerProvider.class;
 	}
 	
 }

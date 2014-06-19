@@ -59,11 +59,11 @@ public interface IFeatureScopeTracker {
 	IFeatureScopeTracker NULL = new IFeatureScopeTracker() {
 
 		public IExpressionScope getExpressionScope(EObject context, Anchor anchor) {
-			return IExpressionScope.NULL;
+			throw new UnsupportedOperationException("The resource '"+context.eResource().getURI()+"' has been loaded without tracking the feature scope. Please check the implementation of IFeatureScopeTracker.Provider.");
 		}
 
 		public boolean hasExpressionScope(EObject context, Anchor anchor) {
-			return false;
+			throw new UnsupportedOperationException("The resource '"+context.eResource().getURI()+"' has been loaded without tracking the feature scope. Please check the implementation of IFeatureScopeTracker.Provider.");
 		}
 
 		public void addExpressionScope(ResolvedTypes current, EObject context, IFeatureScopeSession session, Anchor anchor) {
