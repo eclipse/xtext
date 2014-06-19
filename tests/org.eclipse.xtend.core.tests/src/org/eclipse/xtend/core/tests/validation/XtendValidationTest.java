@@ -2547,4 +2547,25 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"Bounds mismatch: The type argument <Enum<?>> is not a valid substitute for the bounded type parameter <T extends Enum<T>> of the method valueOf(Class<T>, String)");
 	}
 	
+	@Test public void testBug437678_01() throws Exception {
+		XtendFile file = file(
+				"class Foo {\n"	+
+				"	def static void bar() {\n" +
+				"		foo\n" +
+				"	}\n" +
+				"	def static foo(Object object) {}\n" +
+				"}");
+		helper.assertError(file, XFEATURE_CALL, INVALID_NUMBER_OF_ARGUMENTS);
+	}
+	
+	@Test public void testBug437678_02() throws Exception {
+		XtendFile file = file(
+				"class Foo {\n"	+
+				"	private static val privateField = 1\n" +
+				"	private static def privateMethod() { 2 }\n" +
+				"	def static foo() { privateField + privateMethod }\n" +
+				"}");
+		helper.assertNoIssues(file);
+	}
+	
 }
