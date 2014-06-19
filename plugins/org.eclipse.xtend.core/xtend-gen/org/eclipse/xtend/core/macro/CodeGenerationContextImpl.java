@@ -9,35 +9,23 @@ package org.eclipse.xtend.core.macro;
 
 import java.io.InputStream;
 import java.net.URI;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend.lib.macro.CodeGenerationContext;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class CodeGenerationContextImpl implements CodeGenerationContext {
+  @Property
   private MutableFileSystemSupport _fileSystemSupport;
   
-  public MutableFileSystemSupport getFileSystemSupport() {
-    return this._fileSystemSupport;
-  }
-  
-  public void setFileSystemSupport(final MutableFileSystemSupport fileSystemSupport) {
-    this._fileSystemSupport = fileSystemSupport;
-  }
-  
+  @Property
   private FileLocations _fileLocations;
-  
-  public FileLocations getFileLocations() {
-    return this._fileLocations;
-  }
-  
-  public void setFileLocations(final FileLocations fileLocations) {
-    this._fileLocations = fileLocations;
-  }
   
   public boolean delete(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
@@ -117,5 +105,23 @@ public class CodeGenerationContextImpl implements CodeGenerationContext {
   public URI toURI(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
     return _fileSystemSupport.toURI(path);
+  }
+  
+  @Pure
+  public MutableFileSystemSupport getFileSystemSupport() {
+    return this._fileSystemSupport;
+  }
+  
+  public void setFileSystemSupport(final MutableFileSystemSupport fileSystemSupport) {
+    this._fileSystemSupport = fileSystemSupport;
+  }
+  
+  @Pure
+  public FileLocations getFileLocations() {
+    return this._fileLocations;
+  }
+  
+  public void setFileLocations(final FileLocations fileLocations) {
+    this._fileLocations = fileLocations;
   }
 }

@@ -22,6 +22,7 @@ import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.Element;
@@ -44,21 +45,15 @@ import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class TransformationContextImpl implements TransformationContext {
   @Inject
   private IXtendJvmAssociations associations;
   
+  @Property
   private CompilationUnitImpl _unit;
-  
-  public CompilationUnitImpl getUnit() {
-    return this._unit;
-  }
-  
-  public void setUnit(final CompilationUnitImpl unit) {
-    this._unit = unit;
-  }
   
   public boolean isExternal(final NamedElement element) {
     boolean _and = false;
@@ -414,5 +409,14 @@ public class TransformationContextImpl implements TransformationContext {
     CompilationUnitImpl _unit = this.getUnit();
     AnnotationReferenceProvider _annotationReferenceProvider = _unit.getAnnotationReferenceProvider();
     return _annotationReferenceProvider.newAnnotationReference(annotationReference, initializer);
+  }
+  
+  @Pure
+  public CompilationUnitImpl getUnit() {
+    return this._unit;
+  }
+  
+  public void setUnit(final CompilationUnitImpl unit) {
+    this._unit = unit;
   }
 }

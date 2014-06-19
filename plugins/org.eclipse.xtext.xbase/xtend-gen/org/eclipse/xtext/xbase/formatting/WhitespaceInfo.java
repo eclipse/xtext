@@ -7,15 +7,12 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.xbase.formatting.CommentInfo;
 import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
 import org.eclipse.xtext.xbase.formatting.LeafInfo;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @Data
 @SuppressWarnings("all")
 public class WhitespaceInfo extends LeafInfo {
   private final int _offset;
-  
-  public int getOffset() {
-    return this._offset;
-  }
   
   public int getLength() {
     ILeafNode _node = this.getNode();
@@ -88,6 +85,7 @@ public class WhitespaceInfo extends LeafInfo {
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
@@ -96,6 +94,7 @@ public class WhitespaceInfo extends LeafInfo {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -109,5 +108,10 @@ public class WhitespaceInfo extends LeafInfo {
     if (other._offset != this._offset)
       return false;
     return true;
+  }
+  
+  @Pure
+  public int getOffset() {
+    return this._offset;
   }
 }

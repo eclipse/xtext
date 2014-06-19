@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.Map;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -27,21 +28,9 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class ExpressionBucket {
   private final int _id;
   
-  public int getId() {
-    return this._id;
-  }
-  
   private final Map<XExpression, LightweightTypeReference> _extensionProviders;
   
-  public Map<XExpression, LightweightTypeReference> getExtensionProviders() {
-    return this._extensionProviders;
-  }
-  
   private final IResolvedFeatures.Provider _resolvedFeaturesProvider;
-  
-  public IResolvedFeatures.Provider getResolvedFeaturesProvider() {
-    return this._resolvedFeaturesProvider;
-  }
   
   public ExpressionBucket(final int id, final Map<XExpression, LightweightTypeReference> extensionProviders, final IResolvedFeatures.Provider resolvedFeaturesProvider) {
     super();
@@ -51,6 +40,7 @@ public class ExpressionBucket {
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -61,6 +51,7 @@ public class ExpressionBucket {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -85,8 +76,24 @@ public class ExpressionBucket {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public int getId() {
+    return this._id;
+  }
+  
+  @Pure
+  public Map<XExpression, LightweightTypeReference> getExtensionProviders() {
+    return this._extensionProviders;
+  }
+  
+  @Pure
+  public IResolvedFeatures.Provider getResolvedFeaturesProvider() {
+    return this._resolvedFeaturesProvider;
   }
 }

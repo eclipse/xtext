@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.scoping.batch;
 import java.util.List;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 /**
@@ -24,15 +25,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 public class TypeReferenceBucket {
   private final int _id;
   
-  public int getId() {
-    return this._id;
-  }
-  
   private final List<JvmTypeReference> _types;
-  
-  public List<JvmTypeReference> getTypes() {
-    return this._types;
-  }
   
   public TypeReferenceBucket(final int id, final List<JvmTypeReference> types) {
     super();
@@ -41,6 +34,7 @@ public class TypeReferenceBucket {
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -50,6 +44,7 @@ public class TypeReferenceBucket {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -69,8 +64,19 @@ public class TypeReferenceBucket {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public int getId() {
+    return this._id;
+  }
+  
+  @Pure
+  public List<JvmTypeReference> getTypes() {
+    return this._types;
   }
 }

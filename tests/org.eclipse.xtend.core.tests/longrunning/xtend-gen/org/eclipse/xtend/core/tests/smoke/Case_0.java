@@ -6,16 +6,13 @@ import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
 @SuppressWarnings("all")
 public class Case_0 {
   private final int _id;
-  
-  public int getId() {
-    return this._id;
-  }
   
   public String foo(final String a, final String b) {
     String _xblockexpression = null;
@@ -67,6 +64,7 @@ public class Case_0 {
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -75,6 +73,7 @@ public class Case_0 {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -89,8 +88,14 @@ public class Case_0 {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public int getId() {
+    return this._id;
   }
 }

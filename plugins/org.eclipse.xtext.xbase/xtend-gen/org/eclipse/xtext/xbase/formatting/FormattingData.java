@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.formatting;
 
 import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -8,33 +9,13 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 public abstract class FormattingData {
   private final int _offset;
   
-  public int getOffset() {
-    return this._offset;
-  }
-  
   private final int _length;
-  
-  public int getLength() {
-    return this._length;
-  }
   
   private final int _increaseIndentationChange;
   
-  public int getIncreaseIndentationChange() {
-    return this._increaseIndentationChange;
-  }
-  
   private final int _decreaseIndentationChange;
   
-  public int getDecreaseIndentationChange() {
-    return this._decreaseIndentationChange;
-  }
-  
   private final Throwable _trace;
-  
-  public Throwable getTrace() {
-    return this._trace;
-  }
   
   public abstract boolean isEmpty();
   
@@ -54,6 +35,7 @@ public abstract class FormattingData {
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -66,6 +48,7 @@ public abstract class FormattingData {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -91,8 +74,34 @@ public abstract class FormattingData {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public int getOffset() {
+    return this._offset;
+  }
+  
+  @Pure
+  public int getLength() {
+    return this._length;
+  }
+  
+  @Pure
+  public int getIncreaseIndentationChange() {
+    return this._increaseIndentationChange;
+  }
+  
+  @Pure
+  public int getDecreaseIndentationChange() {
+    return this._decreaseIndentationChange;
+  }
+  
+  @Pure
+  public Throwable getTrace() {
+    return this._trace;
   }
 }

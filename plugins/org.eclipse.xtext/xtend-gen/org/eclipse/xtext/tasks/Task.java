@@ -7,7 +7,9 @@
  */
 package org.eclipse.xtext.tasks;
 
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.tasks.TaskTag;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -15,45 +17,17 @@ import org.eclipse.xtext.tasks.TaskTag;
  */
 @SuppressWarnings("all")
 public final class Task {
+  @Property
   private TaskTag _tag;
   
-  public TaskTag getTag() {
-    return this._tag;
-  }
-  
-  public void setTag(final TaskTag tag) {
-    this._tag = tag;
-  }
-  
+  @Property
   private String _description;
   
-  public String getDescription() {
-    return this._description;
-  }
-  
-  public void setDescription(final String description) {
-    this._description = description;
-  }
-  
+  @Property
   private int _lineNumber;
   
-  public int getLineNumber() {
-    return this._lineNumber;
-  }
-  
-  public void setLineNumber(final int lineNumber) {
-    this._lineNumber = lineNumber;
-  }
-  
+  @Property
   private int _offset;
-  
-  public int getOffset() {
-    return this._offset;
-  }
-  
-  public void setOffset(final int offset) {
-    this._offset = offset;
-  }
   
   public String getFullText() {
     TaskTag _tag = this.getTag();
@@ -70,5 +44,41 @@ public final class Task {
   public int getTagLength() {
     TaskTag _tag = this.getTag();
     return _tag.length();
+  }
+  
+  @Pure
+  public TaskTag getTag() {
+    return this._tag;
+  }
+  
+  public void setTag(final TaskTag tag) {
+    this._tag = tag;
+  }
+  
+  @Pure
+  public String getDescription() {
+    return this._description;
+  }
+  
+  public void setDescription(final String description) {
+    this._description = description;
+  }
+  
+  @Pure
+  public int getLineNumber() {
+    return this._lineNumber;
+  }
+  
+  public void setLineNumber(final int lineNumber) {
+    this._lineNumber = lineNumber;
+  }
+  
+  @Pure
+  public int getOffset() {
+    return this._offset;
+  }
+  
+  public void setOffset(final int offset) {
+    this._offset = offset;
   }
 }

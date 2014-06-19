@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
@@ -14,28 +15,15 @@ import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.formatting.TextReplacement;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public abstract class AbstractFormatter implements IBasicFormatter {
+  @Property
   private boolean _allowIdentityEdits = false;
   
-  public boolean isAllowIdentityEdits() {
-    return this._allowIdentityEdits;
-  }
-  
-  public void setAllowIdentityEdits(final boolean allowIdentityEdits) {
-    this._allowIdentityEdits = allowIdentityEdits;
-  }
-  
+  @Property
   private boolean _diagnoseConflicts = true;
-  
-  public boolean isDiagnoseConflicts() {
-    return this._diagnoseConflicts;
-  }
-  
-  public void setDiagnoseConflicts(final boolean diagnoseConflicts) {
-    this._diagnoseConflicts = diagnoseConflicts;
-  }
   
   private boolean conflictOccurred = false;
   
@@ -113,5 +101,23 @@ public abstract class AbstractFormatter implements IBasicFormatter {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(expr, format).toString());
     }
+  }
+  
+  @Pure
+  public boolean isAllowIdentityEdits() {
+    return this._allowIdentityEdits;
+  }
+  
+  public void setAllowIdentityEdits(final boolean allowIdentityEdits) {
+    this._allowIdentityEdits = allowIdentityEdits;
+  }
+  
+  @Pure
+  public boolean isDiagnoseConflicts() {
+    return this._diagnoseConflicts;
+  }
+  
+  public void setDiagnoseConflicts(final boolean diagnoseConflicts) {
+    this._diagnoseConflicts = diagnoseConflicts;
   }
 }

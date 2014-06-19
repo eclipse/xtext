@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.tests.lib.internal;
 
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.util.Wrapper;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -9,15 +10,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 public class DataClass {
   public final Wrapper<DataClass> _other;
   
-  public Wrapper<DataClass> getOther() {
-    return this._other;
-  }
-  
   public final String _name;
-  
-  public String getName() {
-    return this._name;
-  }
   
   public DataClass(final Wrapper<DataClass> other, final String name) {
     super();
@@ -26,6 +19,7 @@ public class DataClass {
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -35,6 +29,7 @@ public class DataClass {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -57,8 +52,19 @@ public class DataClass {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public Wrapper<DataClass> getOther() {
+    return this._other;
+  }
+  
+  @Pure
+  public String getName() {
+    return this._name;
   }
 }

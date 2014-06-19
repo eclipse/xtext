@@ -91,7 +91,7 @@ public class MutableAssert extends Assert {
   }
   
   public static <T extends Throwable> T assertThrowable(final Class<T> clazz, final Procedure0 codeToTest) {
-    T _xblockexpression = null;
+    Object _xblockexpression = null;
     {
       try {
         codeToTest.apply();
@@ -114,6 +114,6 @@ public class MutableAssert extends Assert {
       Assert.fail(_builder.toString());
       _xblockexpression = null;
     }
-    return _xblockexpression;
+    return ((T)_xblockexpression);
   }
 }

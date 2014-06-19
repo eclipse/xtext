@@ -15,17 +15,16 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
+import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class ActiveAnnotationContexts extends AdapterImpl {
+  @Property
   private final Map<JvmAnnotationType, ActiveAnnotationContext> _contexts = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newLinkedHashMap();
-  
-  public Map<JvmAnnotationType, ActiveAnnotationContext> getContexts() {
-    return this._contexts;
-  }
   
   public static ActiveAnnotationContexts installNew(final Resource resource) {
     EList<Adapter> _eAdapters = resource.eAdapters();
@@ -48,5 +47,10 @@ public class ActiveAnnotationContexts extends AdapterImpl {
     EList<Adapter> _eAdapters = resource.eAdapters();
     Iterable<ActiveAnnotationContexts> _filter = Iterables.<ActiveAnnotationContexts>filter(_eAdapters, ActiveAnnotationContexts.class);
     return IterableExtensions.<ActiveAnnotationContexts>head(_filter);
+  }
+  
+  @Pure
+  public Map<JvmAnnotationType, ActiveAnnotationContext> getContexts() {
+    return this._contexts;
   }
 }
