@@ -512,6 +512,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -538,6 +540,9 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int testFunction1(final Object i) {");
@@ -615,6 +620,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -630,6 +637,9 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int testFunction1(final Object d) {");
@@ -722,6 +732,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -748,6 +760,9 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int testFunction1(final Object d) {");
@@ -846,6 +861,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -872,6 +889,9 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int testFunction1(final Object i) {");
@@ -6524,6 +6544,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -6544,6 +6566,9 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void foo(final Object s) {");
@@ -6610,6 +6635,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -6638,6 +6665,9 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void foo(final Object s, final Object other) {");
@@ -6722,6 +6752,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -6750,6 +6782,9 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void foo(final Object s, final Object other) {");
@@ -6831,6 +6866,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -6851,6 +6888,9 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void foo(final Object s, final boolean b, final String other) {");
@@ -10991,6 +11031,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -11017,6 +11059,9 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int bug(final Element<?> a) {");

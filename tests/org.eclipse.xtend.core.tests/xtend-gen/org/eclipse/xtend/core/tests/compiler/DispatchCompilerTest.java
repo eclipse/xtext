@@ -38,6 +38,8 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Extension;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -53,6 +55,9 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String m(final String s) {");
@@ -85,6 +90,9 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class C {");
@@ -99,6 +107,9 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void minus(final Object operand) {");
@@ -134,6 +145,9 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class C {");
@@ -148,6 +162,9 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public int minus(final Object operand) {");
@@ -196,6 +213,8 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.DoubleExtensions;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -242,6 +261,9 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public double minus(final Object e) {");
@@ -321,6 +343,8 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -358,6 +382,9 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void minus(final Object e) {");
@@ -438,6 +465,8 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Exceptions;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -490,6 +519,9 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Number minus(final Object e) {");
@@ -561,6 +593,8 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Exceptions;");
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
+    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -613,6 +647,9 @@ public class DispatchCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Number minus(final Object e) {");
