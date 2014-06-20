@@ -27,6 +27,8 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
@@ -114,32 +116,33 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping, ExpressionBucket bucket, List<IEObjectDescription> result) {
 		String simpleName = feature.getSimpleName();
 		QualifiedName featureName = QualifiedName.create(simpleName);
+		boolean validStaticState = isValidStaticState(receiver);
 		if (firstArgument != null && helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
-			IEObjectDescription description = doCreateExtensionDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket);
+			IEObjectDescription description = doCreateExtensionDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState);
 			if (description != null) {
 				result.add(description);
 				String propertyName = toProperty(simpleName, feature);
 				if (propertyName != null) {
-					result.add(doCreateExtensionDescription(QualifiedName.create(propertyName), feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
+					result.add(doCreateExtensionDescription(QualifiedName.create(propertyName), feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState));
 				}
 			}
 		}
 		if (implicit) {
-			IEObjectDescription description = createReceiverDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket);
+			IEObjectDescription description = createReceiverDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState);
 			if (description != null) {
 				result.add(description);
 				String propertyName = toProperty(simpleName, feature);
 				if (propertyName != null) {
-					result.add(createReceiverDescription(QualifiedName.create(propertyName), feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
+					result.add(createReceiverDescription(QualifiedName.create(propertyName), feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState));
 				}
 			}
 		}
 		QualifiedName operator = getOperatorMapping().getOperator(featureName);
 		if (operator != null) {
 			if (firstArgument != null)
-				result.add(doCreateExtensionDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
+				result.add(doCreateExtensionDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState));
 			if (implicit) {
-				result.add(createReceiverDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
+				result.add(createReceiverDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState));
 			}
 		}
 	}
@@ -180,13 +183,15 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 					Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(extensionType);
 					for(JvmFeature feature: allFeatures) {
 						if (!feature.isStatic()) {
+							XExpression receiver = extensionProvider.getKey();
+							boolean validStaticState = isValidStaticState(receiver);
 							if (firstArgument != null) {
-								IIdentifiableElementDescription description = createExtensionDescription(name, feature, extensionProvider.getKey(), extensionType, receiverTypeParameterMapping, bucket);
+								IIdentifiableElementDescription description = createExtensionDescription(name, feature, receiver, extensionType, receiverTypeParameterMapping, bucket, validStaticState);
 								if (description != null)
 									result.add(description);
 							}
 							if (implicit) {
-								result.add(createReceiverDescription(name, feature, extensionProvider.getKey(), extensionType, receiverTypeParameterMapping, bucket));
+								result.add(createReceiverDescription(name, feature, receiver, extensionType, receiverTypeParameterMapping, bucket, validStaticState));
 							}
 						}
 					}
@@ -195,18 +200,29 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 		}
 		return result;
 	}
+
+	protected boolean isValidStaticState(XExpression receiver) {
+		boolean validStaticState = true;
+		if (receiver instanceof XMemberFeatureCall) {
+			XExpression thisReference = ((XMemberFeatureCall) receiver).getMemberCallTarget();
+			if (thisReference instanceof XFeatureCall && ((XFeatureCall) thisReference).getFeature() instanceof JvmType) {
+				validStaticState = getSession().isInstanceContext();
+			}
+		}
+		return validStaticState;
+	}
 	
 	protected BucketedEObjectDescription createExtensionDescription(QualifiedName name, JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType,
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping, ExpressionBucket bucket) {
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping, ExpressionBucket bucket, boolean validStaticState) {
 		if (helper == null || !helper.isPossibleExtension(feature)) {
 			return null;
 		}
-		return doCreateExtensionDescription(name, feature, receiver, receiverType, receiverTypeParameterMapping, bucket);
+		return doCreateExtensionDescription(name, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState);
 	}
 
 	protected BucketedEObjectDescription doCreateExtensionDescription(QualifiedName name, JvmFeature feature, XExpression receiver,
 			LightweightTypeReference receiverType, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping,
-			ExpressionBucket bucket) {
+			ExpressionBucket bucket, boolean validStaticState) {
 		if (implicit) {
 			return new InstanceExtensionDescriptionWithImplicitFirstArgument(
 					name,
@@ -219,7 +235,8 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 					argumentType,
 					getArgumentTypeParameterMapping(),
 					bucket.getId(), 
-					getSession().isVisible(feature));
+					getSession().isVisible(feature),
+					validStaticState);
 		}
 		return new InstanceExtensionDescription(
 				name,
@@ -233,11 +250,12 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 				getArgumentTypeParameterMapping(),
 				EnumSet.of(ConformanceHint.UNCHECKED),
 				bucket.getId(),
-				getSession().isVisible(feature));
+				getSession().isVisible(feature),
+				validStaticState);
 	}
 	
 	protected BucketedEObjectDescription createReceiverDescription(QualifiedName name, JvmFeature feature, XExpression receiver,
-			LightweightTypeReference receiverType, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping, ExpressionBucket bucket) {
+			LightweightTypeReference receiverType, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping, ExpressionBucket bucket, boolean validStaticState) {
 		return new InstanceFeatureDescriptionWithImplicitReceiver(
 				name,
 				feature,
@@ -246,7 +264,8 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 				receiverTypeParameterMapping,
 				EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED),
 				bucket.getId(),
-				getSession().isVisible(feature));
+				getSession().isVisible(feature),
+				validStaticState);
 	}
 	
 	@Override

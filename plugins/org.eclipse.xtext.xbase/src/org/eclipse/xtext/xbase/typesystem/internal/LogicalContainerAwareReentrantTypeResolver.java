@@ -41,6 +41,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -768,7 +769,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 					if (extensionProviders == null) {
 						extensionProviders = Maps2.newLinkedHashMapWithExpectedSize(3);
 					}
-					XMemberFeatureCall extensionProvider = createExtensionProvider(thisFeature, field);
+					XAbstractFeatureCall extensionProvider = createExtensionProvider(thisFeature, field);
 					LightweightTypeReference fieldType = resolvedTypes.getActualType(field);
 					extensionProviders.put(extensionProvider, fieldType);
 				}
@@ -787,13 +788,19 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		return featureScopeSession;
 	}
 	
-	protected XMemberFeatureCall createExtensionProvider(JvmIdentifiableElement thisFeature, JvmField field) {
-		XMemberFeatureCall extensionProvider = getXbaseFactory().createXMemberFeatureCall();
-		extensionProvider.setFeature(field);
-		XFeatureCall thisAccess = getXbaseFactory().createXFeatureCall();
-		thisAccess.setFeature(thisFeature);
-		extensionProvider.setMemberCallTarget(thisAccess);
-		return extensionProvider;
+	protected XAbstractFeatureCall createExtensionProvider(JvmIdentifiableElement thisFeature, JvmField field) {
+		if (field.isStatic()) {
+			XFeatureCall extensionProvider = getXbaseFactory().createXFeatureCall();
+			extensionProvider.setFeature(field);
+			return extensionProvider;
+		} else {
+			XMemberFeatureCall extensionProvider = getXbaseFactory().createXMemberFeatureCall();
+			extensionProvider.setFeature(field);
+			XFeatureCall thisAccess = getXbaseFactory().createXFeatureCall();
+			thisAccess.setFeature(thisFeature);
+			extensionProvider.setMemberCallTarget(thisAccess);
+			return extensionProvider;
+		}
 	}
 	
 	protected boolean isExtensionProvider(JvmAnnotationTarget annotatedElement) {

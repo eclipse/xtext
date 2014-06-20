@@ -36,9 +36,10 @@ public class InstanceExtensionDescriptionWithImplicitFirstArgument extends Insta
 			LightweightTypeReference firstArgumentType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> firstArgumentTypeParameterMapping,
 			int bucketId,
-			boolean visible) {
+			boolean visible,
+			boolean validStaticState) {
 		super(qualifiedName, feature, receiver, receiverType, receiverTypeParameterMapping, receiverConformanceHints, EcoreUtil.copy(firstArgument), firstArgumentType,
-				firstArgumentTypeParameterMapping, EnumSet.noneOf(ConformanceHint.class), bucketId, visible);
+				firstArgumentTypeParameterMapping, EnumSet.noneOf(ConformanceHint.class), bucketId, visible, validStaticState);
 	}
 
 	@Override

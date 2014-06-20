@@ -25,6 +25,8 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 public class InstanceFeatureDescriptionWithImplicitReceiver extends InstanceFeatureDescription {
 
+	private final boolean validStaticState;
+
 	protected InstanceFeatureDescriptionWithImplicitReceiver(
 			QualifiedName qualifiedName,
 			JvmFeature feature,
@@ -33,8 +35,10 @@ public class InstanceFeatureDescriptionWithImplicitReceiver extends InstanceFeat
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
 			EnumSet<ConformanceHint> receiverConformanceHints,
 			int bucketId,
-			boolean visible) {
+			boolean visible,
+			boolean validStaticState) {
 		super(qualifiedName, feature, EcoreUtil.copy(receiver), receiverType, typeParameterMapping, receiverConformanceHints, bucketId, visible);
+		this.validStaticState = validStaticState;
 	}
 	
 	@Override
@@ -79,5 +83,10 @@ public class InstanceFeatureDescriptionWithImplicitReceiver extends InstanceFeat
 	@Override
 	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
 		return EnumSet.noneOf(ConformanceHint.class);
+	}
+	
+	@Override
+	public boolean isValidStaticState() {
+		return validStaticState;
 	}
 }
