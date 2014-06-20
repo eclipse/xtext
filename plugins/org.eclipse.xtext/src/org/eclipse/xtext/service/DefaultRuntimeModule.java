@@ -21,6 +21,7 @@ import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
+import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -230,5 +231,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		binder.bind(ISemanticSequencer.class).annotatedWith(GenericSequencer.class).to(BacktrackingSemanticSequencer.class);
 	}
 	
-
+	/**
+	 * @since 2.7
+	 */
+	public void configureUseIndexFragmentsForLazyLinking(com.google.inject.Binder binder) {
+		binder.bind(Boolean.TYPE).annotatedWith(Names.named(LazyURIEncoder.USE_INDEXED_FRAGMENTS_BINDING)).toInstance(Boolean.TRUE);
+	}
 }

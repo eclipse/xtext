@@ -11,12 +11,16 @@ package org.eclipse.xtext.linking.impl;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.AbstractTreeIterator;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.internal.Stopwatches;
@@ -62,17 +66,44 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 	protected abstract void doLinkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer);
 
 	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
-		clearAllReferences(model);
-		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(model.eResource());
+		Resource resource = model.eResource();
+		if (resource instanceof LazyLinkingResource) {
+			((LazyLinkingResource) resource).clearLazyProxyInformation();
+		}
+		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(resource);
 		if (adapter!=null)
 			adapter.clear();
 	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected boolean isClearAllReferencesRequired(Resource resource) {
+		return true;
+	}
 
+	/**
+	 * @deprecated no longer called, override {@link #clearReferences(EObject)} instead
+	 */
+	@Deprecated
 	protected void clearAllReferences(EObject model) {
 		clearReferences(model);
-		final Iterator<EObject> iter = model.eAllContents();
+		final Iterator<EObject> iter = getAllLinkableContents(model);
 		while (iter.hasNext())
 			clearReferences(iter.next());
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	@SuppressWarnings("serial")
+	protected TreeIterator<EObject> getAllLinkableContents(EObject model) {
+		return new AbstractTreeIterator<EObject>(model) {
+			@Override
+			public Iterator<EObject> getChildren(Object object) {
+				return ((EObject) object).eContents().iterator();
+			}
+		};
 	}
 
 	protected void clearReferences(EObject obj) {
