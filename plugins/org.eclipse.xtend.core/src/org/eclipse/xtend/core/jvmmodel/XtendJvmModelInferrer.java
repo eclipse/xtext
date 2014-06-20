@@ -76,6 +76,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 
 import com.google.common.base.Predicate;
@@ -447,6 +448,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		JvmOperation first = iterator.next();
 		JvmOperation result = typesFactory.createJvmOperation();
 		target.getMembers().add(result);
+		result.getAnnotations().add(jvmTypesBuilder.toAnnotation(result, Synthetic.class));
 		for (int i = 0; i < first.getParameters().size(); i++) {
 			JvmFormalParameter parameter = typesFactory.createJvmFormalParameter();
 			result.getParameters().add(parameter);
