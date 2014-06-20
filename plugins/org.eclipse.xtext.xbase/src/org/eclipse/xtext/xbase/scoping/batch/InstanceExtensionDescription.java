@@ -28,6 +28,7 @@ public class InstanceExtensionDescription extends InstanceFeatureDescription {
 	private final LightweightTypeReference firstArgumentType;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> firstArgumentTypeParameterMapping;
 	private final EnumSet<ConformanceHint> firstArgumentConformanceHints;
+	private final boolean validStaticState;
 
 	protected InstanceExtensionDescription(
 			QualifiedName qualifiedName, 
@@ -41,12 +42,14 @@ public class InstanceExtensionDescription extends InstanceFeatureDescription {
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> firstArgumentTypeParameterMapping,
 			EnumSet<ConformanceHint> firstArgumentConformanceHints,
 			int bucketId,
-			boolean visible) {
+			boolean visible,
+			boolean validStaticState) {
 		super(qualifiedName, feature, EcoreUtil.copy(receiver), receiverType, typeParameterMapping, receiverConformanceHints, bucketId, visible);
 		this.firstArgument = firstArgument;
 		this.firstArgumentType = firstArgumentType;
 		this.firstArgumentTypeParameterMapping = firstArgumentTypeParameterMapping;
 		this.firstArgumentConformanceHints = firstArgumentConformanceHints;
+		this.validStaticState = validStaticState;
 	}
 	
 	@Override
@@ -98,4 +101,8 @@ public class InstanceExtensionDescription extends InstanceFeatureDescription {
 		return firstArgumentConformanceHints;
 	}
 
+	@Override
+	public boolean isValidStaticState() {
+		return validStaticState;
+	}
 }

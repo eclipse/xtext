@@ -170,7 +170,8 @@ public class FeatureScopes implements IFeatureNames {
 			final EObject featureCall,
 			final IFeatureScopeSession session,
 			final JvmIdentifiableElement receiverFeature,
-			IScope parent) {
+			IScope parent, 
+			final boolean validStaticScope) {
 		final Wrapper<IScope> wrapper = Wrapper.wrap(parent);
 		synonymProvider.collectSynonymTypes(featureDeclarator, new SynonymTypesProvider.Acceptor() {
 
@@ -183,7 +184,7 @@ public class FeatureScopes implements IFeatureNames {
 				CompoundTypeReference compoundTypeReference = new CompoundTypeReference(synonymType.getOwner(), true);
 				compoundTypeReference.addComponent(featureDeclarator);
 				compoundTypeReference.addComponent(synonymType);
-				wrapper.set(new ReceiverFeatureScope(wrapper.get(), session, receiver, compoundTypeReference, implicit, asAbstractFeatureCall(featureCall), bucket, receiverFeature, operatorMapping));
+				wrapper.set(new ReceiverFeatureScope(wrapper.get(), session, receiver, compoundTypeReference, implicit, asAbstractFeatureCall(featureCall), bucket, receiverFeature, operatorMapping, validStaticScope));
 				return true;
 			}
 			
@@ -195,13 +196,13 @@ public class FeatureScopes implements IFeatureNames {
 				LightweightTypeReference component = components.get(i);
 				List<JvmType> rawTypes = component.getRawTypes();
 				TypeBucket typeBucket = new TypeBucket(-1 - i, rawTypes, resolvedFeaturesProvider);
-				result = new ReceiverFeatureScope(result, session, receiver, featureDeclarator, implicit, asAbstractFeatureCall(featureCall), typeBucket, receiverFeature, operatorMapping);
+				result = new ReceiverFeatureScope(result, session, receiver, featureDeclarator, implicit, asAbstractFeatureCall(featureCall), typeBucket, receiverFeature, operatorMapping, validStaticScope);
 			}
 			return result;
 		} else {
 			List<JvmType> rawTypes = featureDeclarator.getRawTypes();
 			TypeBucket typeBucket = new TypeBucket(-1, rawTypes, resolvedFeaturesProvider);
-			IScope result = new ReceiverFeatureScope(wrapper.get(), session, receiver, featureDeclarator, implicit, asAbstractFeatureCall(featureCall), typeBucket, receiverFeature, operatorMapping);
+			IScope result = new ReceiverFeatureScope(wrapper.get(), session, receiver, featureDeclarator, implicit, asAbstractFeatureCall(featureCall), typeBucket, receiverFeature, operatorMapping, validStaticScope);
 			return result;
 		}
 	}
@@ -242,10 +243,10 @@ public class FeatureScopes implements IFeatureNames {
 				IScope extensionScope = createDynamicExtensionsScope(receiver, receiverType, featureCall, staticExtensionScope, session, resolvedTypes);
 				
 				// instance members, e.g. this.toString
-				return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, linkedReceiver, extensionScope);
+				return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, linkedReceiver, extensionScope, true);
 			} else {
 				// put only instance members into the scope
-				return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, linkedReceiver, IScope.NULLSCOPE);
+				return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, linkedReceiver, IScope.NULLSCOPE, true);
 			}
 		} else if (typeLiteralHelper.isPotentialTypeLiteral(featureCall, resolvedTypes)) {
 			IScope errorScope = createFollowUpErrorScope(receiverType);
@@ -316,7 +317,9 @@ public class FeatureScopes implements IFeatureNames {
 		IScope result = parent;
 		if (receiver == null) {
 			// 'this' is a valid implicit first argument, e.g. implementations of Iterable may use #filter on themselves
-			result = createImplicitExtensionScope(THIS, featureCall, session, resolvedTypes, result);
+			if (session.isInstanceContext()) {
+				result = createImplicitExtensionScope(THIS, featureCall, session, resolvedTypes, result);
+			}
 			// 'it' has a higher priority than 'this' as implicit first argument
 			result = createImplicitExtensionScope(IT, featureCall, session, resolvedTypes, result);
 			return result;
@@ -333,7 +336,9 @@ public class FeatureScopes implements IFeatureNames {
 			IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		IScope result = parent;
 		if (receiver == null) {
-			result = createImplicitStaticScope(THIS, featureCall, session, resolvedTypes, result);
+			if (session.isInstanceContext()) {
+				result = createImplicitStaticScope(THIS, featureCall, session, resolvedTypes, result);
+			}
 			result = createImplicitStaticScope(IT, featureCall, session, resolvedTypes, result);
 			return result;
 		} else {
@@ -355,7 +360,9 @@ public class FeatureScopes implements IFeatureNames {
 		}
 		IScope result = parent;
 		if (firstArgument == null) {
-			result = createDynamicExtensionsScope(THIS, featureCall, session, resolvedTypes, result);
+			if (session.isInstanceContext()) {
+				result = createDynamicExtensionsScope(THIS, featureCall, session, resolvedTypes, result);
+			}
 			result = createDynamicExtensionsScope(IT, featureCall, session, resolvedTypes, result);
 			return result;
 		} else {
@@ -405,13 +412,13 @@ public class FeatureScopes implements IFeatureNames {
 	
 	protected IScope createImplicitFeatureCallScope(EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		IScope result = parent;
-		result = createImplicitFeatureCallScope(THIS, featureCall, session, resolvedTypes, result);
-		result = createImplicitFeatureCallScope(IT, featureCall, session, resolvedTypes, result);
+		result = createImplicitFeatureCallScope(THIS, featureCall, session, resolvedTypes, result, session.isInstanceContext());
+		result = createImplicitFeatureCallScope(IT, featureCall, session, resolvedTypes, result, true);
 		return result;
 	}
 
 	protected IScope createImplicitFeatureCallScope(QualifiedName implicitName, EObject featureCall,
-			IFeatureScopeSession session, IResolvedTypes resolvedTypes, IScope parent) {
+			IFeatureScopeSession session, IResolvedTypes resolvedTypes, IScope parent, boolean validStaticScope) {
 		IEObjectDescription thisDescription = session.getLocalElement(implicitName);
 		if (thisDescription != null) {
 			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
@@ -419,7 +426,7 @@ public class FeatureScopes implements IFeatureNames {
 			if (type !=null && !type.isUnknown()) {
 				XFeatureCall implicitReceiver = xbaseFactory.createXFeatureCall();
 				implicitReceiver.setFeature(thisElement);
-				return createFeatureScopeForTypeRef(implicitReceiver, type, true, featureCall, session, thisElement, parent);
+				return createFeatureScopeForTypeRef(implicitReceiver, type, true, featureCall, session, thisElement, parent, validStaticScope);
 			}
 		}
 		return parent;
