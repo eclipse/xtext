@@ -130,8 +130,8 @@ public class TypeChooser {
 
 		public Dialog(Shell parent, ILabelProvider labelProvider, IStructuredContentProvider contentProvider) {
 			super(parent);
-			setTitle("Organize Imports");
-			setMessage("Choose type to import:");
+			setTitle(Messages.OrganizeImports); //$NON-NLS-1$
+			setMessage(Messages.TypeChooser_dialogTitle);
 			setAddCancelButton(true);
 			setContentProvider(contentProvider);
 			setLabelProvider(labelProvider);
