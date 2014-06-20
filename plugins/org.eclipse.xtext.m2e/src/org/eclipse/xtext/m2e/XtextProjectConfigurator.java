@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.osgi.service.prefs.BackingStoreException;
 
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 
@@ -83,19 +84,15 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 	
 	private String makeProjectRelative(String fileName,
 			ProjectConfigurationRequest request) {
-		try {
-			String baseDir = request.getMavenProject().getBasedir().getCanonicalPath();
-			File file = new File(fileName);
-			String relativePath;
-			if (file.isAbsolute()) {
-				relativePath = StringUtils.prechomp(file.getCanonicalPath(), baseDir);
-			} else {
-				relativePath = file.getPath();
-			}
-			String unixDelimited = relativePath.replaceAll("\\\\", "/");
-			return StringUtils.prechomp(unixDelimited, "/");
-		} catch (IOException e) {
-			throw new RuntimeIOException(e);
+		File baseDir = request.getMavenProject().getBasedir();
+		File file = new File(fileName);
+		String relativePath;
+		if (file.isAbsolute()) {
+			relativePath = baseDir.toURI().relativize(file.toURI()).getPath();
+		} else {
+			relativePath = file.getPath();
 		}
+		String unixDelimited = relativePath.replaceAll("\\\\", "/");
+		return CharMatcher.is('/').trimFrom(unixDelimited);
 	}
 }
