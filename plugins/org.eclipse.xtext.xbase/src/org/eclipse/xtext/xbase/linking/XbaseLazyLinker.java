@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.linking;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
@@ -60,4 +62,9 @@ public class XbaseLazyLinker extends LazyLinker {
 		}
 	}
 
+	
+	@Override
+	protected TreeIterator<EObject> getAllLinkableContents(EObject model) {
+		return EcoreUtil2.getAllNonDerivedContents(model, true);
+	}
 }
