@@ -23,4 +23,9 @@ public class LazyLinkingTestLanguageRuntimeModule extends org.eclipse.xtext.link
 	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(ImportedNamespaceAwareLocalScopeProvider.class);
 	}
+	
+	@Override
+	public void configureUseIndexFragmentsForLazyLinking(Binder binder) {
+		binder.bind(Boolean.TYPE).annotatedWith(Names.named(LazyURIEncoder.USE_INDEXED_FRAGMENTS_BINDING)).toInstance(Boolean.FALSE);
+	}
 }

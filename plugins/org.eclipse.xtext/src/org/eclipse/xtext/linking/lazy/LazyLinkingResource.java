@@ -8,8 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
+import static com.google.common.collect.Lists.*;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -40,6 +43,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -450,4 +454,47 @@ public class LazyLinkingResource extends XtextResource {
 				});
 		return unresolveableProxies;
 	}
+	
+	private ArrayList<Triple<EObject, EReference, INode>> proxyInformation = newArrayList();
+	
+	/**
+	 * @since 2.7
+	 */
+	public int addLazyProxyInformation(EObject obj, EReference ref, INode node) {
+		int index = proxyInformation.size();
+		proxyInformation.add(Tuples.create(obj, ref, node));
+		return index;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public boolean hasLazyProxyInformation(int idx) {
+		return proxyInformation.get(idx) != null;
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public Triple<EObject,EReference,INode> getLazyProxyInformation(int idx) {
+		if (!hasLazyProxyInformation(idx)) {
+			throw new IllegalArgumentException("No proxy information for index '"+idx+"' available.");
+		}
+		return proxyInformation.get(idx);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public Triple<EObject,EReference,INode> removeLazyProxyInformation(int idx) {
+		return proxyInformation.set(idx, null);
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public void clearLazyProxyInformation() {
+		proxyInformation = newArrayListWithCapacity(proxyInformation.size());
+	}
+	
 }

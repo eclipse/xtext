@@ -312,4 +312,13 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/linking/lazy/LazyURIEncoder.java" type="org.eclipse.xtext.linking.lazy.LazyURIEncoder">
+        <filter id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.linking.lazy.LazyURIEncoder"/>
+                <message_argument value="XTEXT_LINK"/>
+                <message_argument value="xtextLink_"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
