@@ -14,6 +14,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
@@ -57,6 +58,10 @@ import com.google.inject.Singleton;
 public class MultiOrganizeImportsHandler extends AbstractHandler {
 	@Inject
 	private FileExtensionProvider fileExtensions;
+	
+	/**
+	 * Provider to lazy load injected fields in MultiImportOrganizer (~2 sec in context menu is to slow)
+	 */
 	@Inject
 	private Provider<MultiImportOrganizer> importOrganizerProvider;
 
@@ -83,8 +88,7 @@ public class MultiOrganizeImportsHandler extends AbstractHandler {
 					mon.beginTask(Messages.OrganizeImports, totalWork);
 					for (int i = 0; !mon.isCanceled() && i < organizeImports.size(); i++) {
 						Change change = organizeImports.get(i);
-						mon.setTaskName(Messages.OrganizeImports + " - Xtend (" + (i + 1)
-								+ " of " + totalWork + ")");
+						mon.setTaskName(Messages.OrganizeImports + " - Xtend (" + (i + 1) + " of " + totalWork + ")");
 						try {
 							mon.subTask(change.getName());
 							change.perform(new SubProgressMonitor(mon, 1));
@@ -167,6 +171,8 @@ public class MultiOrganizeImportsHandler extends AbstractHandler {
 				for (int j = 0; j < elements.length; j++) {
 					collectRelevantFiles(elements[j], result);
 				}
+			} else if (element instanceof IFile) {
+				collectIFiles(result, new Object[] { element });
 			}
 		} catch (JavaModelException e) {
 			e.printStackTrace();
@@ -175,7 +181,16 @@ public class MultiOrganizeImportsHandler extends AbstractHandler {
 
 	private void collectRelevantFiles(IPackageFragment element, Multimap<IProject, IFile> result)
 			throws JavaModelException {
-		collectIFiles(result, element.getNonJavaResources());
+		if (!element.isDefaultPackage()) {
+			collectIFiles(result, element.getNonJavaResources());
+		} else if (element.getResource() instanceof IFolder) {
+			IFolder folder = (IFolder) element.getResource();
+			try {
+				collectIFiles(result, folder.members());
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void collectRelevantFiles(IPackageFragmentRoot root, Multimap<IProject, IFile> result)
@@ -185,6 +200,7 @@ public class MultiOrganizeImportsHandler extends AbstractHandler {
 			for (int i = 0; i < children.length; i++) {
 				collectRelevantFiles((IPackageFragment) children[i], result);
 			}
+
 		}
 	}
 
