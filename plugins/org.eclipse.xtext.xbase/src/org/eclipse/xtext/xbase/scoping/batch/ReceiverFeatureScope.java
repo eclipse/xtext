@@ -51,15 +51,17 @@ public class ReceiverFeatureScope extends AbstractSessionBasedExecutableScope im
 	private final boolean implicit;
 	private final JvmIdentifiableElement receiverFeature;
 	private Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping;
+	private final boolean validStaticState;
 
 	protected ReceiverFeatureScope(IScope parent, IFeatureScopeSession session, XExpression receiver, LightweightTypeReference receiverType, boolean implicit,
-			XAbstractFeatureCall featureCall, TypeBucket bucket, JvmIdentifiableElement receiverFeature, OperatorMapping operatorMapping) {
+			XAbstractFeatureCall featureCall, TypeBucket bucket, JvmIdentifiableElement receiverFeature, OperatorMapping operatorMapping, boolean validStaticState) {
 		super(parent, session, featureCall, operatorMapping);
 		this.receiver = receiver;
 		this.receiverType = receiverType;
 		this.implicit = implicit;
 		this.bucket = bucket;
 		this.receiverFeature = receiverFeature;
+		this.validStaticState = validStaticState;
 	}
 	
 	public boolean isVisible(/* @NonNull */ JvmMember member) {
@@ -99,7 +101,7 @@ public class ReceiverFeatureScope extends AbstractSessionBasedExecutableScope im
 	protected IEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
 		EnumSet<ConformanceHint> conformanceHints = bucket.getHints();
 		if (implicit) {
-			return new InstanceFeatureDescriptionWithImplicitReceiver(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), conformanceHints, bucket.getId(), isVisible(feature));
+			return new InstanceFeatureDescriptionWithImplicitReceiver(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), conformanceHints, bucket.getId(), isVisible(feature), validStaticState);
 		} else {
 			return new InstanceFeatureDescription(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), conformanceHints, bucket.getId(), isVisible(feature));
 		}

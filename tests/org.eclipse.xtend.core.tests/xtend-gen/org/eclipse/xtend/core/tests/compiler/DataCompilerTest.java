@@ -11,6 +11,9 @@ import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.junit.Test;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class DataCompilerTest extends AbstractXtendCompilerTest {
   @Test

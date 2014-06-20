@@ -288,11 +288,19 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	
 	protected boolean validateArity(IAcceptor<? super AbstractDiagnostic> result) {
 		if (getArityMismatch() != 0) {
-			String message = String.format("Invalid number of arguments. The %1$s %2$s%3$s is not applicable for the arguments %4$s" , 
-					getFeatureTypeName(), 
-					getFeature().getSimpleName(), 
-					getFeatureParameterTypesAsString(), 
-					getArgumentTypesAsString());
+			String message; 
+			if (getArguments().isEmpty()) {
+				message = String.format("Invalid number of arguments. The %1$s %2$s%3$s is not applicable without arguments" , 
+						getFeatureTypeName(), 
+						getFeature().getSimpleName(), 
+						getFeatureParameterTypesAsString());
+			} else {
+				message = String.format("Invalid number of arguments. The %1$s %2$s%3$s is not applicable for the arguments %4$s" , 
+						getFeatureTypeName(), 
+						getFeature().getSimpleName(), 
+						getFeatureParameterTypesAsString(), 
+						getArgumentTypesAsString());
+			}
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 					Severity.ERROR, 
 					IssueCodes.INVALID_NUMBER_OF_ARGUMENTS, 
