@@ -13,10 +13,13 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.internal.Stopwatches;
@@ -62,15 +65,27 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 	protected abstract void doLinkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer);
 
 	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
-		clearAllReferences(model);
-		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(model.eResource());
+		Resource resource = model.eResource();
+		if (resource instanceof LazyLinkingResource) {
+			((LazyLinkingResource) resource).clearLazyProxyInformation();
+		}
+		if (isClearAllReferencesRequired(resource))
+			clearAllReferences(model);
+		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(resource);
 		if (adapter!=null)
 			adapter.clear();
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	protected boolean isClearAllReferencesRequired(Resource resource) {
+		return true;
 	}
 
 	protected void clearAllReferences(EObject model) {
 		clearReferences(model);
-		final Iterator<EObject> iter = model.eAllContents();
+		final Iterator<EObject> iter = EcoreUtil2.getAllNonDerivedContents(model, true);
 		while (iter.hasNext())
 			clearReferences(iter.next());
 	}

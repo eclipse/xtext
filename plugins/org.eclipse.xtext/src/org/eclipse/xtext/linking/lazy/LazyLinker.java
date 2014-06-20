@@ -90,8 +90,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 		cache.execWithoutCacheClear(model.eResource(), new IUnitOfWork.Void<Resource>() {
 			@Override
 			public void process(Resource state) throws Exception {
-				installProxies(model, producer, settingsToLink);
-				TreeIterator<EObject> iterator = model.eAllContents();
+				TreeIterator<EObject> iterator = EcoreUtil2.getAllNonDerivedContents(model, true);
 				while (iterator.hasNext()) {
 					EObject eObject = iterator.next();
 					installProxies(eObject, producer, settingsToLink);
@@ -131,12 +130,20 @@ public class LazyLinker extends AbstractCleaningLinker {
 					settingsToLink.put(new SettingDelegate(setting), node);
 				} else {
 					createAndSetProxy(obj, node, eRef);
+					afterCreateAndSetProxy(obj, node, eRef, crossReference, producer);
 				}
 			}
 		}
 		if (shouldCheckParentNode(parentNode)) {
 			installProxies(obj, producer, settingsToLink, parentNode.getParent());
 		}
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void afterCreateAndSetProxy(EObject obj, INode node, EReference eRef, CrossReference crossReference,
+			IDiagnosticProducer producer) {
 	}
 
 	/**
@@ -182,11 +189,19 @@ public class LazyLinker extends AbstractCleaningLinker {
 			throw new IllegalStateException("object must be contained in a resource");
 		final URI uri = resource.getURI();
 		final URI encodedLink = uri.appendFragment(encoder.encode(obj, eRef, node));
-		EClass referenceType = ecoreGenericsUtil.getReferenceType(eRef, obj.eClass());
-		EClass instantiableType = instantiableSubTypes.get(referenceType);
-		final EObject proxy = EcoreUtil.create(instantiableType);
+		EClass referenceType = getProxyType(obj, eRef);
+		final EObject proxy = EcoreUtil.create(referenceType);
 		((InternalEObject) proxy).eSetProxyURI(encodedLink);
 		return proxy;
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected EClass getProxyType(EObject obj, EReference eRef) {
+		EClass referenceType = ecoreGenericsUtil.getReferenceType(eRef, obj.eClass());
+		EClass instantiableType = instantiableSubTypes.get(referenceType);
+		return instantiableType;
 	}
 
 	protected EClass findInstantiableCompatible(EClass eType) {
