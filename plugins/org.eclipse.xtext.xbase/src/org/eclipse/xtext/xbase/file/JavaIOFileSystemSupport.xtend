@@ -72,20 +72,19 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 		}
 	}
 	
-	override boolean mkdir(Path path) {
+	override void mkdir(Path path) {
 		if (path.exists)
-			return false;
+			return;
 		val parent = path.parent
 		if (parent != null) {
 			parent.mkdir
 		}
 		path.javaIOFile.mkdir
-		return true
 	}
 	
-	override boolean delete(Path path) {
-		if (!path.exists)
-			return false;
+	override void delete(Path path) {
+		if (!path.exists) 
+			return;
 		if (path.javaIOFile.directory) {
 			try {
 				Files.sweepFolder(path.javaIOFile)
@@ -94,7 +93,6 @@ class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
 			}
 		}
 		path.javaIOFile.delete
-		return true
 	}
 
 	override void setContentsAsStream(Path path, InputStream stream) {
