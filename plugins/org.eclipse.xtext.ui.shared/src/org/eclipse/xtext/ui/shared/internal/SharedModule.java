@@ -38,6 +38,7 @@ import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
 import org.eclipse.xtext.ui.editor.DirtyStateManager;
@@ -95,7 +96,7 @@ public class SharedModule extends AbstractModule {
 			@Override
 			protected void configure() {
 				bind(IResourceSetProvider.class).to(XtextResourceSetProvider.class);
-				bind(XtextResourceSet.class);
+				bind(XtextResourceSet.class).to(SynchronizedXtextResourceSet.class);
 				expose(IResourceSetProvider.class);
 			}
 		});
