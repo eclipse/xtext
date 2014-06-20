@@ -31,6 +31,7 @@ import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.hamcrest.Matcher;
 import org.hamcrest.core.Is;
@@ -53,7 +54,8 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   protected IFilePostProcessor postProcessor;
   
   @Inject
-  private CompilationTestHelper compilationTestHelper;
+  @Extension
+  protected CompilationTestHelper compilationTestHelper;
   
   protected boolean useJavaCompiler = false;
   

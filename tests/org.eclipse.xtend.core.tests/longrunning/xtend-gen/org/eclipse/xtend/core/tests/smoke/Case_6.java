@@ -45,7 +45,7 @@ public class Case_6 {
     return ListExtensions.<ETypeParameter, Object>map(_eTypeParameters, _function);
   }
   
-  public Object transform(final ENamedElement model) {
+  public List<?> transform(final ENamedElement model) {
     if (model instanceof EClass) {
       return _transform((EClass)model);
     } else if (model instanceof EStructuralFeature) {

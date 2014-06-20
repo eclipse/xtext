@@ -7,9 +7,7 @@ import java.lang.annotation.Target
 import org.eclipse.xtend.lib.macro.AbstractFieldProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
-import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
-import org.eclipse.xtend.lib.macro.declaration.TypeReference
 
 /**
  * @author Sven Efftinge
@@ -28,59 +26,16 @@ annotation Property {
  */
 @Beta
 class PropertyProcessor extends AbstractFieldProcessor {
-
+	
 	override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {
+		extension val getterUtil = new GetterProcessor.Util(context)
+		extension val setterUtil = new SetterProcessor.Util(context)
 		if (!hasGetter) {
-			addGetter(context)
+			addGetter
 		}
 		if (!final && !hasSetter) {
-			addSetter(context)
+			addSetter
 		}
 		simpleName = "_" + simpleName.toFirstLower
-	}
-
-	def hasGetter(FieldDeclaration it) {
-		declaringType.findDeclaredMethod(getterName) !== null
-	}
-
-	def getGetterName(FieldDeclaration it) {
-		(if(type.booleanType) "is" else "get") + simpleName.toFirstUpper
-	}
-
-	def void addGetter(MutableFieldDeclaration field, extension TransformationContext context) {
-		field.markAsRead
-		field.declaringType.addMethod(field.getterName) [
-			addAnnotation(newAnnotationReference(Pure))
-			returnType = field.type
-			body = '''return this.«field.simpleName»;'''
-		]
-	}
-
-	def hasSetter(FieldDeclaration it) {
-		declaringType.findDeclaredMethod(setterName, type) !== null
-	}
-
-	def getSetterName(FieldDeclaration it) {
-		"set" + simpleName.toFirstUpper
-	}
-
-	def void addSetter(MutableFieldDeclaration field, extension TransformationContext context) {
-		if (field.final) {
-			field.addError("Cannot set a final field")
-			return
-		}
-		if (field.type.inferred) {
-			field.addError("Type cannot be inferred.")
-			return
-		}
-		field.declaringType.addMethod(field.setterName) [
-			returnType = primitiveVoid
-			val param = addParameter(field.simpleName, field.type)
-			body = '''this.«field.simpleName» = «param.simpleName»;'''
-		]
-	}
-
-	def isBooleanType(TypeReference it) {
-		!inferred && (name == Boolean.name || name == Boolean.TYPE.name)
 	}
 }
