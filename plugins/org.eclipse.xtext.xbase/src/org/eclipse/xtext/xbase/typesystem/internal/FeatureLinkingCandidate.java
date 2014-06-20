@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -256,6 +257,20 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	protected boolean validateArity(IAcceptor<? super AbstractDiagnostic> result) {
+		if (getFeatureCall() instanceof XFeatureCall) {
+			XExpression implicitReceiver = getImplicitReceiver();
+			if (implicitReceiver instanceof XFeatureCall) {
+				JvmIdentifiableElement feature = ((XFeatureCall) implicitReceiver).getFeature();
+				if (feature instanceof JvmType && !getState().isInstanceContext()) {
+					return false;
+				}
+			}
+		}
+		return super.validateArity(result);
 	}
 
 	protected boolean isReassignFirstArgument(XAbstractFeatureCall featureCall) {

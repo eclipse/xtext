@@ -60,7 +60,7 @@ public class ImplicitReceiver extends AbstractImplicitFeature {
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		if (!getState().isInstanceContext()) {
 			JvmIdentifiableElement implicitFeature = getFeature();
-			if (implicitFeature instanceof JvmType && !getState().isInstanceContext()) {
+			if (implicitFeature instanceof JvmType) {
 				JvmIdentifiableElement feature = getState().getResolvedTypes().getLinkedFeature(getOwner());
 				if (feature == null || feature.eIsProxy() || !(feature instanceof JvmFeature))
 					return true;

@@ -25,7 +25,8 @@ public class StaticExtensionFeatureDescriptionWithImplicitFirstArgument extends 
 			JvmFeature feature, 
 			XExpression firstArgument,
 			LightweightTypeReference firstArgumentType,
-			int bucketId, boolean visible) {
+			int bucketId,
+			boolean visible) {
 		super(qualifiedName, feature, firstArgument, firstArgumentType, bucketId, visible);
 	}
 
