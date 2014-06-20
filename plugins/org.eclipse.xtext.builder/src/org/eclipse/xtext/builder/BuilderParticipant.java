@@ -257,7 +257,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			cause = cause.getCause();
 		}
 		if (delta == null) {
-			logger.error("Error during compilation of.", e);
+			logger.error("Error during compilation.", e);
 		} else {
 			logger.error("Error during compilation of '" + delta.getUri() + "'.", e);
 		}
