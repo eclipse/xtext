@@ -11,11 +11,15 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class DataCompilerTest extends AbstractXtendCompilerTest {
+	
+	@Inject
+	extension ValidationTestHelper
 	
 	@Test
 	def testDataClasses_01() { 
@@ -231,6 +235,144 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	def void testExistingDataConstructor() {
+		'''
+			@Data class Foo {
+				int foo
+				new (int foo) {
+					_foo = foo * 2
+				}
+			}
+		'''.compile[
+			val instance = compiledClass.getDeclaredConstructor(int).newInstance(2)
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			assertEquals(4, getFoo.invoke(instance))
+		]
+	}
+	
+	@Test
+	def void testExistingGetter() {
+		'''
+			@Data class Foo {
+				int foo
+				def getFoo() {
+					5
+				}
+			}
+		'''.compile[
+			val instance = compiledClass.getDeclaredConstructor(int).newInstance(2)
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			assertEquals(5, getFoo.invoke(instance))
+		]
+	}
+	
+	@Test
+	def void testExistingToString() {
+		'''
+			@Data class Foo {
+				int foo
+				override toString() {
+					"5"
+				}
+			}
+		'''.compile[
+			val instance = compiledClass.getDeclaredConstructor(int).newInstance(2)
+			val toString = compiledClass.getDeclaredMethod("toString")
+			assertEquals("5", toString.invoke(instance))
+		]
+	}
+	
+	@Test
+	def void testExistingEquals() {
+		'''
+			@Data class Foo {
+				int foo
+				override equals(Object o) {
+					true
+				}
+			}
+		'''.compile[
+			val instance = compiledClass.getDeclaredConstructor(int).newInstance(2)
+			val equals = compiledClass.getDeclaredMethod("equals", Object)
+			assertEquals(true, equals.invoke(instance, 1))
+		]
+	}
+	
+	@Test
+	def void testExistingHashCode() {
+		'''
+			@Data class Foo {
+				int foo
+				override hashCode() {
+					0
+				}
+			}
+		'''.compile[
+			val instance = compiledClass.getDeclaredConstructor(int).newInstance(2)
+			val hashCode = compiledClass.getDeclaredMethod("hashCode")
+			assertEquals(0, hashCode.invoke(instance))
+		]
+	}
+	
+	@Test
+	def void testExistingMethodsNotMatchingExactly() {
+		'''
+			@Data class Foo {
+				int foo
+				
+				new(String bar) {
+					_foo = 1
+				}
+				
+				def getFoo(String bar) {
+					1
+				}
+				
+				def toString(String bar) {
+					"1"
+				}
+				
+				def hashCode(String bar) {
+					1
+				}
+				
+				def equals(String bar) {
+					true
+				}
+				
+				def equals(Object foo, String bar) {
+					true
+				}
+			}
+		'''.compile[
+			compiledClass=>[
+				getDeclaredConstructor(int)
+				getDeclaredMethod("equals", Object)
+				getDeclaredMethod("hashCode")
+				getDeclaredMethod("toString")
+				getDeclaredMethod("getFoo")
+			]
+		]
+	}
+	
+	
+	
+	@Ignore
+	@Test
+	def void testWithCreateExtension() {
+		val text = '''
+			@Data class Foo {
+				def create {} foo() {
+				}
+			}
+		'''
+		clazz(text).assertNoIssues
+		text.compile[
+			assertFalse(compiledClass.declaredMethods.exists[name.startsWith("get")])
+		]
+	}
+	
 	@Test def testThreeDataClassesExtendingEachOther() {
 		'''
 			import java.util.ArrayList
@@ -306,6 +448,54 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			  }
 			}
 		''')
+	}
+	
+	@Test
+	def testDataClassWithStaticField() {
+		'''
+			@Data class Foo {
+				static int foo = 1
+			}
+		'''.compile[
+			compiledClass => [
+				assertTrue(declaredFields.exists[name == "foo"])
+				assertFalse(declaredMethods.exists[name == "getFoo"])
+				assertTrue(declaredConstructors.exists[parameterTypes.length == 0])
+			]
+		]
+	}
+	
+	@Test
+	def testBooleanProperties() {
+		'''
+			@Data class Foo {
+				boolean foo
+				Boolean bar
+			}
+		'''.compile[
+			compiledClass => [
+				assertTrue(declaredFields.exists[name == "_foo"])
+				assertTrue(declaredFields.exists[name == "_bar"])
+				assertTrue(declaredMethods.exists[name == "isFoo"])
+				assertTrue(declaredMethods.exists[name == "isBar"])
+			]
+		]
+	}
+	
+	@Test
+	def testParametrizedSuperConstructor() {
+		'''
+			@Data class Foo {
+				int foo
+			}
+			@Data class Bar extends Foo {
+				String bar
+			}
+		'''.compile[
+			getCompiledClass("Bar") => [
+				assertTrue(declaredConstructors.exists[parameterTypes.toList == #[int, String]])
+			]
+		]
 	}
 }
 
@@ -485,4 +675,468 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 			''')
 	}
 	
+	@Test
+	def void testExistingGetter() {
+		'''
+			class Foo {
+				@Property int foo
+				def getFoo() {
+					5
+				}
+			}
+		'''.compile[
+			val instance = compiledClass.newInstance
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			assertEquals(5, getFoo.invoke(instance))
+		]
+	}
+	
+	@Test
+	def void testExistingSetter() {
+		'''
+			class Foo {
+				@Property int foo
+				def setFoo(int foo) {
+					_foo = 5
+				}
+			}
+		'''.compile[
+			val instance = compiledClass.newInstance
+			val setFoo = compiledClass.getDeclaredMethod("setFoo", int)
+			setFoo.invoke(instance, 1)
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			assertEquals(5, getFoo.invoke(instance))
+		]
+	}
+}
+
+class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
+	@Inject
+	extension ValidationTestHelper
+	
+	@Test
+	def void testEqualsHashCode() {
+		'''
+			@EqualsHashCode class Foo {
+				static String ignoreMe
+				transient String ignoreMe2
+				
+				int a = 1
+				char b = 'a'
+				short c = 2 as short
+				byte d = 3 as byte
+				long e = 4
+				float f = 5
+				double g = 6
+				boolean h = true
+				Object i = "Foo"
+			}
+		'''.compile [
+			val first = compiledClass.newInstance
+			val second = compiledClass.newInstance
+			compiledClass.getDeclaredField("ignoreMe") => [
+				accessible = true
+				set(null, "Bar")
+			]
+			compiledClass.getDeclaredField("ignoreMe2") => [
+				accessible = true
+				set(second, "Bar")
+			]
+			val third = compiledClass.newInstance
+			compiledClass.getDeclaredField("i") => [
+				accessible = true
+				set(third, "Bar")
+			]
+			
+			assertEquals(first, second)
+			assertNotEquals(first, third)
+			assertEquals(first.hashCode, second.hashCode)
+			assertNotEquals(first.hashCode, third.hashCode)
+		]
+	}
+	
+	@Test
+	def void testEqualsWithSuperClass() {
+		'''
+			@EqualsHashCode class Foo {
+				int foo = 1
+			}
+			@EqualsHashCode class Bar extends Foo{
+				String bar = "Foo"
+			}
+		'''.compile[
+			val foo = getCompiledClass("Foo")
+			val bar = getCompiledClass("Bar")
+			
+			val first = bar.newInstance 
+			val second = bar.newInstance
+			val third = bar.newInstance
+			bar.getDeclaredField("bar") => [
+				accessible = true
+				set(third, "Bar")
+			]
+			val fourth = foo.newInstance
+			
+			assertEquals(first, second)
+			assertNotEquals(first, third)
+			assertNotEquals(first, fourth)
+			assertNotEquals(fourth, first)
+		]
+	}
+	
+	@Test
+	def void testExistingEquals() {
+		val text = '''
+			@EqualsHashCode class Foo {
+				int a = 1
+				override equals(Object o) {
+					true
+				}
+			}
+		'''
+		text.clazz.assertWarning(XtendPackage.Literals.XTEND_CLASS,"user.issue", "no effect")
+		text.compile [
+			val instance = compiledClass.newInstance
+			assertEquals(instance, "foo")
+		]
+	}
+	
+	@Test
+	def void testExistingHashCode() {
+		val text = '''
+			@EqualsHashCode class Foo {
+				int a = 1
+				override hashCode() {
+					0
+				}
+			}
+		'''
+		text.clazz.assertWarning(XtendPackage.Literals.XTEND_CLASS,"user.issue", "no effect")
+		text.compile [
+			val instance = compiledClass.newInstance
+			assertEquals(0, instance.hashCode)
+		]
+	}
+}
+
+class ToStringCompilerTest extends AbstractXtendCompilerTest {
+	@Inject
+	extension ValidationTestHelper
+	
+	@Test
+	def void testToString() {
+		'''
+			@ToString class Foo {
+				static String ignoreMe
+				transient String ignoreMe2
+				int a = 1
+			}
+		'''.compile [
+			val instance = compiledClass.newInstance
+			
+			assertEquals("Foo{a=1}", instance.toString)
+		]
+	}
+	
+	@Test
+	def void testToStringWithSuperClass() {
+		'''
+			class Foo {
+				int a = 1
+			}
+			@ToString class Bar extends Foo {
+				String b = "Bar"
+			}
+		'''.compile [
+			val instance = getCompiledClass("Bar").newInstance
+			
+			assertEquals('Bar [\n'+'  b = "Bar"\n' +'  a = 1\n' + ']', instance.toString)
+		]
+	}
+	
+	@Test
+	def void testExistingToString() {
+		val text = '''
+			@ToString class Foo {
+				int a = 1
+				override toString() {
+					"foo"
+				}
+			}
+		'''
+		text.clazz.assertWarning(XtendPackage.Literals.XTEND_CLASS,"user.issue", "no effect")
+		text.compile [
+			val instance = compiledClass.newInstance
+			assertEquals("foo", instance.toString)
+		]
+	}
+}
+
+class GetterCompilerTest extends AbstractXtendCompilerTest {
+	@Inject
+	extension ValidationTestHelper
+
+	@Test
+	def void testCreateSingleGetter() {
+		'''
+			class Foo {
+				@Getter int foo = 1
+			}
+		'''.compile[
+			val instance = compiledClass.newInstance
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			assertEquals(1, getFoo.invoke(instance))
+		]
+	}
+
+	@Test
+	def void testCreateAllGetters() {
+		'''
+			@Getter class Foo {
+				static String ignoreMe
+				int foo = 1
+				String bar = "bar"
+				
+				def getFoo() {
+					2
+				}
+			}
+		'''.compile[
+			assertFalse(compiledClass.declaredMethods.exists[name == "getIgnoreMe"])
+			val instance = compiledClass.newInstance
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			val getBar = compiledClass.getDeclaredMethod("getBar")
+			assertEquals(2, getFoo.invoke(instance))
+			assertEquals("bar", getBar.invoke(instance))
+		]
+	}
+
+	@Test
+	def void testExistingGetter() {
+		val text = '''
+			class Foo {
+				@Getter int foo = 1
+				def getFoo() {
+					2
+				}
+			}
+		'''
+		text.clazz.assertWarning(XtendPackage.Literals.XTEND_FIELD, "user.issue", "no effect")
+		text.compile[
+			val instance = compiledClass.newInstance
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			assertEquals(2, getFoo.invoke(instance))
+		]
+	}
+}
+
+class SetterCompilerTest extends AbstractXtendCompilerTest {
+	@Inject
+	extension ValidationTestHelper
+
+	@Test
+	def void testCreateSingleSetter() {
+		'''
+			class Foo {
+				@Setter int foo
+			}
+		'''.compile[
+			val instance = compiledClass.newInstance
+			val setFoo = compiledClass.getDeclaredMethod("setFoo", int)
+			val fooField = compiledClass.getDeclaredField("foo") => [
+				accessible = true
+			]
+			setFoo.invoke(instance, 1)
+			assertEquals(1, fooField.get(instance))
+		]
+	}
+
+	@Test
+	def void testCreateAllSetters() {
+		'''
+			@Setter class Foo {
+				static String ignoreMe
+				int foo
+				String bar
+				
+				def setFoo(int foo) {
+					this.foo = 2
+				}
+			}
+		'''.compile[
+			assertFalse(compiledClass.declaredMethods.exists[name == "setIgnoreMe"])
+			val instance = compiledClass.newInstance
+			val setFoo = compiledClass.getDeclaredMethod("setFoo", int)
+			val fooField = compiledClass.getDeclaredField("foo") => [accessible = true]
+			val setBar = compiledClass.getDeclaredMethod("setBar", String)
+			val barField = compiledClass.getDeclaredField("bar") => [accessible = true]
+			setFoo.invoke(instance, 1)
+			setBar.invoke(instance, "bar")
+			assertEquals(2, fooField.get(instance))
+			assertEquals("bar", barField.get(instance))
+		]
+	}
+
+	@Test
+	def void testExistingGetter() {
+		val text = '''
+			class Foo {
+				@Setter int foo
+				def setFoo(int foo) {
+					this.foo = 2
+				}
+			}
+		'''
+		text.clazz.assertWarning(XtendPackage.Literals.XTEND_FIELD, "user.issue", "no effect")
+		text.compile[
+			val instance = compiledClass.newInstance
+			val setFoo = compiledClass.getDeclaredMethod("setFoo", int)
+			val fooField = compiledClass.getDeclaredField("foo") => [accessible = true]
+			setFoo.invoke(instance, 1)
+			assertEquals(2, fooField.get(instance))
+		]
+	}
+
+	@Test
+	def void testFinalField() {
+		val text = '''
+			class Foo {
+				@Setter val int foo
+			}
+		'''
+		text.clazz.assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "final")
+	}
+}
+
+class WitherCompilerTest extends AbstractXtendCompilerTest {
+	@Inject
+	extension ValidationTestHelper
+	
+	@Test
+	def void testCreateSingleWither() {
+		'''
+			class Foo {
+				static String ignoreMe
+				transient String ignoreMe2
+				@Wither String foo
+				new(String foo) {
+					this.foo = foo
+				}
+				def getFoo() {
+					foo
+				}
+			}
+		'''.compile[
+			val first= compiledClass.getDeclaredConstructor(String).newInstance("foo")
+			val withFoo = compiledClass.getDeclaredMethod("withFoo", String)
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			val second = withFoo.invoke(first, "bar")
+			
+			assertNotSame(first, second)
+			assertEquals("bar", getFoo.invoke(second))
+		]
+	}
+	
+	@Test
+	def void testCreateAllWithers() {
+		'''
+			@Wither
+			class Foo {
+				static String ignoreMe
+				transient String ignoreMe2
+				String foo
+				int x
+				new(String foo, int x) {
+					this.foo = foo
+					this.x = x
+				}
+				
+				def withX(int x) {
+					new Foo(foo, 5)
+				}
+				
+				def getFoo() {
+					foo
+				}
+				
+				def getX() {
+					x
+				}
+			}
+		'''.compile[
+			val first= compiledClass.getDeclaredConstructor(String, int).newInstance("foo", 1)
+			val withFoo = compiledClass.getDeclaredMethod("withFoo", String)
+			val withX = compiledClass.getDeclaredMethod("withX", int)
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			val getX = compiledClass.getDeclaredMethod("getX")
+			val second = withX.invoke(withFoo.invoke(first, "bar"), 2)
+			
+			assertEquals("bar", getFoo.invoke(second))
+			assertEquals(5, getX.invoke(second))
+		]
+	}
+	
+	@Test
+	def void testExstingWither() {
+		val text = '''
+			class Foo {
+				@Wither int x
+				
+				new(int x) {
+					this.x = x
+				}
+				
+				def withX(int x) {
+					new Foo(5)
+				}
+				
+				def getX() {
+					x
+				}
+			}
+		'''
+		text.clazz.assertWarning(XtendPackage.Literals.XTEND_FIELD, "user.issue", "no effect")
+		text.compile[
+			val first= compiledClass.getDeclaredConstructor(int).newInstance(1)
+			val withX = compiledClass.getDeclaredMethod("withX", int)
+			val getX = compiledClass.getDeclaredMethod("getX")
+			val second = withX.invoke(first , 2)
+			
+			assertEquals(5, getX.invoke(second))
+		]
+	}
+	
+	@Test
+	def void testExstingMethodNotMatching() {
+		'''
+			class Foo {
+				@Wither String foo
+				new(String foo) {
+					this.foo = foo
+				}
+				def withFoo() {
+					null
+				}
+				def withFoo(int x) {
+					null
+				}
+			}
+		'''.compile[
+			compiledClass.getDeclaredMethod("withFoo", String)
+		]
+	}
+	
+	@Test
+	def void testInferredType() {
+		val text = '''
+			class Foo {
+				@Wither var x = 1
+				
+				new(int x) {
+					this.x = x
+				}
+			}
+		'''
+		text.clazz.assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "inferred")
+	}
 }
