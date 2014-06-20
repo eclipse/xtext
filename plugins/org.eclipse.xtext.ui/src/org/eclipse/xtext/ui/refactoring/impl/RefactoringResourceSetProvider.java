@@ -16,12 +16,11 @@ import org.eclipse.xtext.ui.resource.XtextLiveScopeResourceSetProvider;
  * 
  * It's based on the dirty state, i.e. the content of unsaved editors can be accessed. Furthermore changed resources
  * inside the resource set shadow existing ones.
+ * @deprecated  since 2.6, use {@link org.eclipse.xtext.ui.resource.XtextLiveScopeResourceSetProvider} instead
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 @Deprecated
-// deprecated since 2.6
-// use org.eclipse.xtext.ui.resource.XtextLiveScopeResourceSetProvider instead
 public class RefactoringResourceSetProvider extends XtextLiveScopeResourceSetProvider {
 
 	@Override
