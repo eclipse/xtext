@@ -48,15 +48,15 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def void testTransientField() {
+	def void testIgnoredFields() {
 		'''
 			@ValueObject class Foo {
 				transient int foo
+				def create {} ignoreMe() {}
 			}
 		'''.compile[
 			compiledClass.getDeclaredConstructor
-			assertTrue(compiledClass.declaredFields.exists[name == "foo"])
-			assertFalse(compiledClass.declaredMethods.exists[name == "getFoo"])
+			assertFalse(compiledClass.declaredMethods.exists[name.startsWith("get")])
 		]
 	}
 	

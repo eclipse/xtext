@@ -32,6 +32,7 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 		'''
 			@Getter class Foo {
 				static String ignoreMe
+				def create {} ignoreMe2() {}
 				int foo = 1
 				String bar = "bar"
 				

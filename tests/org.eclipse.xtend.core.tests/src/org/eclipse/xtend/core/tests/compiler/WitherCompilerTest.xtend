@@ -22,6 +22,7 @@ class WitherCompilerTest extends AbstractXtendCompilerTest {
 			class Foo {
 				static String ignoreMe
 				transient String ignoreMe2
+				def create {} ignoreMe3() {}
 				@Wither String foo
 				new(String foo) {
 					this.foo = foo
