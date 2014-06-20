@@ -29,15 +29,15 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 
 	override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
 		extension val util = new Util(context)
+		val extension voUtil = new ValueObjectProcessor.Util(context)
 		if (hasEquals) {
 			addWarning("equals is already defined, this annotation has no effect")
 		} else if (hasHashCode) {
 			addWarning("hashCode is already defined, this annotation has no effect")
 		} else {
 			val hasSuperClass = extendedClass != object
-			val includedFields = declaredFields.filter[!static && !transient]
-			addEquals(includedFields, hasSuperClass)
-			addHashCode(includedFields, hasSuperClass)
+			addEquals(valueObjectFields, hasSuperClass)
+			addHashCode(valueObjectFields, hasSuperClass)
 		}
 	}
 

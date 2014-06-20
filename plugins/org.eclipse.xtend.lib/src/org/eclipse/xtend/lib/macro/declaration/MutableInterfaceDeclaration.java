@@ -10,6 +10,7 @@ package org.eclipse.xtend.lib.macro.declaration;
 /**
  * 
  * @author Sven Efftinge
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface MutableInterfaceDeclaration extends MutableTypeParameterDeclarator, MutableTypeDeclaration, InterfaceDeclaration {
 

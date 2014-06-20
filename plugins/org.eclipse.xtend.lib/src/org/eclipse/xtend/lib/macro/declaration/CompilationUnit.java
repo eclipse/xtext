@@ -16,6 +16,7 @@ import com.google.common.annotations.Beta;
  * Represents a single Xtend file and the root element of the AST.
  * 
  * @author Sven Efftinge
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface CompilationUnit extends AnnotationTarget {

@@ -36,21 +36,21 @@ class WitherProcessor implements TransformationParticipant<MutableMemberDeclarat
 
 	protected def dispatch void transform(MutableClassDeclaration cls, extension TransformationContext context) {
 		val extension util = new WitherProcessor.Util(context)
-		val constructorFields = cls.declaredFields.filter[!static && !transient]
-		constructorFields.forEach [
+		val extension voUtil = new ValueObjectProcessor.Util(context)
+		cls.valueObjectConstructorFields.forEach [
 			if (!hasWither) {
-				addWither(constructorFields)
+				addWither(cls.valueObjectConstructorFields)
 			}
 		]
 	}
 
 	protected def dispatch void transform(MutableFieldDeclaration it, extension TransformationContext context) {
 		val extension util = new WitherProcessor.Util(context)
-		val constructorFields = declaringType.declaredFields.filter[!static && !transient]
+		val extension voUtil = new ValueObjectProcessor.Util(context)
 		if (hasWither) {
 			addWarning("A wither is already defined, this annotation has no effect")
 		} else {
-			addWither(constructorFields)
+			addWither(declaringType.valueObjectConstructorFields)
 		}
 	}
 

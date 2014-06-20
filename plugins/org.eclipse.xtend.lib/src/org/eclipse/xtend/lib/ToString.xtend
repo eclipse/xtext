@@ -28,12 +28,13 @@ class ToStringProcessor extends AbstractClassProcessor {
 
 	override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
 		val extension util = new Util(context)
+		val extension voUtil = new ValueObjectProcessor.Util(context)
 		if (hasToString) {
 			addWarning("toString is already defined, this annotation has no effect.")
 		} else if (extendedClass != object) {
 			addReflectiveToString
 		} else {
-			addToString(declaredFields.filter[!static && !transient])
+			addToString(valueObjectFields)
 		}
 	}
 

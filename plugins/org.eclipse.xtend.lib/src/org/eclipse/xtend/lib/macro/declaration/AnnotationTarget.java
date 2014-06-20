@@ -13,6 +13,7 @@ import com.google.common.annotations.Beta;
  * An element that can be annotated
  * 
  * @author Sven Efftinge
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface AnnotationTarget extends NamedElement {

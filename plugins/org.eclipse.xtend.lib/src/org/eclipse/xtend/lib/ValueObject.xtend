@@ -8,6 +8,7 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 
 /**
  * @since 2.7
@@ -87,12 +88,12 @@ class ValueObjectProcessor extends AbstractClassProcessor {
 			]
 		}
 
-		def getValueObjectConstructorFields(MutableClassDeclaration cls) {
-			cls.valueObjectFields.filter[initializer === null]
+		def getValueObjectConstructorFields(MutableTypeDeclaration it) {
+			valueObjectFields.filter[initializer === null]
 		}
 
-		def getValueObjectFields(MutableClassDeclaration it) {
-			declaredFields.filter[!static && !transient]
+		def getValueObjectFields(MutableTypeDeclaration it) {
+			declaredFields.filter[!static && !transient && isThePrimaryGeneratedJavaElement]
 		}
 	}
 }

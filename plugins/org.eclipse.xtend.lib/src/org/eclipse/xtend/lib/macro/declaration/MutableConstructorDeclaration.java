@@ -14,6 +14,7 @@ import com.google.common.annotations.Beta;
  * A mutable constructor declaration
  * 
  * @author Sven Efftinge
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface MutableConstructorDeclaration extends MutableExecutableDeclaration, ConstructorDeclaration {

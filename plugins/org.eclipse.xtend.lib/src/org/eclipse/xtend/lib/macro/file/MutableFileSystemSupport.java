@@ -15,6 +15,7 @@ import com.google.common.annotations.Beta;
  * Allows modifications on the file system.
  * 
  * @author Sven Efftinge
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface MutableFileSystemSupport extends FileSystemSupport {

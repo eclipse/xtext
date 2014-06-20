@@ -13,6 +13,7 @@ import com.google.common.annotations.Beta;
  * A service which provides information about the location of a path.
  * 
  * @author Sven Efftinge
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface FileLocations {
