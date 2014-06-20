@@ -117,36 +117,30 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 		}
 	}
 	
-	override delete(Path path) {
+	override void delete(Path path) {
 		try {
 			if (path.exists) {
 				path.findResource.delete(true, null)
-				return true
 			}
-			return false
 		} catch (CoreException exc) {
 			throw new IllegalArgumentException(exc.message, exc)
 		}
 	}
 	
-	override mkdir(Path path) {
+	override void mkdir(Path path) {
 		if (path.exists)
-			return false;
+			return;
 		if (!path.parent.exists) {
 			path.parent.mkdir
 		}
 		try {
 			switch container : path.eclipseContainer {
 				IFolder: {
-						container.create(true, true, null)
-					true
+					container.create(true, true, null)
 				}
 				IProject: {
 					container.create(null)
-					true
 				}
-				default: 
-					false
 			}
 		} catch (CoreException exc) {
 			throw new IllegalArgumentException(exc.message, exc)

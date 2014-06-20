@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.ShadowedTypeException;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -130,6 +131,16 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 
 	/* @Nullable */
 	private JvmType findObjectType(/* @NonNull */ String signature, /* @NonNull */ URI resourceURI) {
+		ResourceSet resourceSet = getResourceSet();
+		if (resourceSet instanceof SynchronizedXtextResourceSet) {
+			synchronized (((SynchronizedXtextResourceSet) resourceSet).getLock()) {
+				return doFindObjectType(signature, resourceURI);		
+			}
+		}
+		return doFindObjectType(signature, resourceURI);
+	}
+
+	private JvmType doFindObjectType(String signature, URI resourceURI) {
 		TypeResource resource = getLoadedResourceForJavaURI(resourceURI);
 		try {
 			JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI, resource);

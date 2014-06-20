@@ -7,21 +7,18 @@
                 <message_argument value="2.5.3"/>
             </message_arguments>
         </filter>
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="2.7.0"/>
+                <message_argument value="2.6.0"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference">
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference"/>
                 <message_argument value="org.eclipse.xtend.lib_2.6.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtend/lib/macro/TransformationContext.java" type="org.eclipse.xtend.lib.macro.TransformationContext">
-        <filter id="403984517">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtend.lib.macro.TransformationContext"/>
-                <message_argument value="org.eclipse.xtend.lib.macro.services.AnnotationReferenceProvider"/>
-                <message_argument value="newAnnotationReference(String)"/>
             </message_arguments>
         </filter>
     </resource>

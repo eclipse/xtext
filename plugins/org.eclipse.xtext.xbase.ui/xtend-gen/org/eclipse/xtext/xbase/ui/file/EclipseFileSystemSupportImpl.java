@@ -223,15 +223,13 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     return _xtrycatchfinallyexpression;
   }
   
-  public boolean delete(final Path path) {
+  public void delete(final Path path) {
     try {
       boolean _exists = this.exists(path);
       if (_exists) {
         IResource _findResource = this.findResource(path);
         _findResource.delete(true, null);
-        return true;
       }
-      return false;
     } catch (final Throwable _t) {
       if (_t instanceof CoreException) {
         final CoreException exc = (CoreException)_t;
@@ -243,64 +241,43 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     }
   }
   
-  public boolean mkdir(final Path path) {
-    boolean _xblockexpression = false;
-    {
-      boolean _exists = this.exists(path);
-      if (_exists) {
-        return false;
-      }
-      Path _parent = path.getParent();
-      boolean _exists_1 = this.exists(_parent);
-      boolean _not = (!_exists_1);
-      if (_not) {
-        Path _parent_1 = path.getParent();
-        this.mkdir(_parent_1);
-      }
-      boolean _xtrycatchfinallyexpression = false;
-      try {
-        boolean _switchResult = false;
-        IContainer _eclipseContainer = this.getEclipseContainer(path);
-        final IContainer container = _eclipseContainer;
-        boolean _matched = false;
-        if (!_matched) {
-          if (container instanceof IFolder) {
-            _matched=true;
-            boolean _xblockexpression_1 = false;
-            {
-              ((IFolder)container).create(true, true, null);
-              _xblockexpression_1 = true;
-            }
-            _switchResult = _xblockexpression_1;
-          }
-        }
-        if (!_matched) {
-          if (container instanceof IProject) {
-            _matched=true;
-            boolean _xblockexpression_1 = false;
-            {
-              ((IProject)container).create(null);
-              _xblockexpression_1 = true;
-            }
-            _switchResult = _xblockexpression_1;
-          }
-        }
-        if (!_matched) {
-          _switchResult = false;
-        }
-        _xtrycatchfinallyexpression = _switchResult;
-      } catch (final Throwable _t) {
-        if (_t instanceof CoreException) {
-          final CoreException exc = (CoreException)_t;
-          String _message = exc.getMessage();
-          throw new IllegalArgumentException(_message, exc);
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
-      }
-      _xblockexpression = _xtrycatchfinallyexpression;
+  public void mkdir(final Path path) {
+    boolean _exists = this.exists(path);
+    if (_exists) {
+      return;
     }
-    return _xblockexpression;
+    Path _parent = path.getParent();
+    boolean _exists_1 = this.exists(_parent);
+    boolean _not = (!_exists_1);
+    if (_not) {
+      Path _parent_1 = path.getParent();
+      this.mkdir(_parent_1);
+    }
+    try {
+      IContainer _eclipseContainer = this.getEclipseContainer(path);
+      final IContainer container = _eclipseContainer;
+      boolean _matched = false;
+      if (!_matched) {
+        if (container instanceof IFolder) {
+          _matched=true;
+          ((IFolder)container).create(true, true, null);
+        }
+      }
+      if (!_matched) {
+        if (container instanceof IProject) {
+          _matched=true;
+          ((IProject)container).create(null);
+        }
+      }
+    } catch (final Throwable _t) {
+      if (_t instanceof CoreException) {
+        final CoreException exc = (CoreException)_t;
+        String _message = exc.getMessage();
+        throw new IllegalArgumentException(_message, exc);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
   }
   
   public void setContentsAsStream(final Path path, final InputStream stream) {
