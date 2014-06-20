@@ -20,6 +20,7 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 			@EqualsHashCode class Foo {
 				static String ignoreMe
 				transient String ignoreMe2
+				def create {} ignoreMe3() {}
 				
 				int a = 1
 				char b = 'a'

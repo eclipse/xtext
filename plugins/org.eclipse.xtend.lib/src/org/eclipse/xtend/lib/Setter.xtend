@@ -45,7 +45,7 @@ class SetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 
 	protected def dispatch transform(MutableClassDeclaration it, extension TransformationContext context) {
 		extension val util = new Util(context)
-		declaredFields.filter[!static].forEach [
+		declaredFields.filter[!static && isThePrimaryGeneratedJavaElement].forEach [
 			if (!hasSetter) {
 				addSetter
 			}

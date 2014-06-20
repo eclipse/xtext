@@ -42,6 +42,9 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("transient String ignoreMe2");
       _builder.newLine();
       _builder.append("\t");
+      _builder.append("def create {} ignoreMe3() {}");
+      _builder.newLine();
+      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("int a = 1");

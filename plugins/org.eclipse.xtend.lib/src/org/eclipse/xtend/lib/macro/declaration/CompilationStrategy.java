@@ -15,6 +15,7 @@ import com.google.common.annotations.Beta;
  * It's used to take control over generating Java statements and expressions directly.
  * 
  * @author Sven Efftinge
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface CompilationStrategy {

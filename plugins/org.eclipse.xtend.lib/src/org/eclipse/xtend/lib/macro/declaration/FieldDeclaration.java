@@ -13,6 +13,7 @@ import com.google.common.annotations.Beta;
 
 /**
  * @author Sven Efftinge
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface FieldDeclaration extends MemberDeclaration {

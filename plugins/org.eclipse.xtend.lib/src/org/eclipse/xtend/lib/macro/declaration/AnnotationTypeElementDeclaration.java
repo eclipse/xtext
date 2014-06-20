@@ -15,6 +15,7 @@ import com.google.common.annotations.Beta;
  * Represents an annotation property.
  * 
  * @author Sven Efftinge
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface AnnotationTypeElementDeclaration extends MemberDeclaration {

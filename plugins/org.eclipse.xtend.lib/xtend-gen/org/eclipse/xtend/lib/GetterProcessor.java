@@ -139,8 +139,16 @@ public class GetterProcessor implements TransformationParticipant<MutableMemberD
     Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
     final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
       public Boolean apply(final MutableFieldDeclaration it) {
+        boolean _and = false;
         boolean _isStatic = it.isStatic();
-        return Boolean.valueOf((!_isStatic));
+        boolean _not = (!_isStatic);
+        if (!_not) {
+          _and = false;
+        } else {
+          boolean _isThePrimaryGeneratedJavaElement = context.isThePrimaryGeneratedJavaElement(it);
+          _and = _isThePrimaryGeneratedJavaElement;
+        }
+        return Boolean.valueOf(_and);
       }
     };
     Iterable<? extends MutableFieldDeclaration> _filter = IterableExtensions.filter(_declaredFields, _function);

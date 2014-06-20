@@ -12,6 +12,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -101,8 +102,8 @@ public class ValueObjectProcessor extends AbstractClassProcessor {
       return cls.addConstructor(_function);
     }
     
-    public Iterable<? extends MutableFieldDeclaration> getValueObjectConstructorFields(final MutableClassDeclaration cls) {
-      Iterable<? extends MutableFieldDeclaration> _valueObjectFields = this.getValueObjectFields(cls);
+    public Iterable<? extends MutableFieldDeclaration> getValueObjectConstructorFields(final MutableTypeDeclaration it) {
+      Iterable<? extends MutableFieldDeclaration> _valueObjectFields = this.getValueObjectFields(it);
       final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
         public Boolean apply(final MutableFieldDeclaration it) {
           Expression _initializer = it.getInitializer();
@@ -112,19 +113,26 @@ public class ValueObjectProcessor extends AbstractClassProcessor {
       return IterableExtensions.filter(_valueObjectFields, _function);
     }
     
-    public Iterable<? extends MutableFieldDeclaration> getValueObjectFields(final MutableClassDeclaration it) {
+    public Iterable<? extends MutableFieldDeclaration> getValueObjectFields(final MutableTypeDeclaration it) {
       Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
       final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
         public Boolean apply(final MutableFieldDeclaration it) {
           boolean _and = false;
+          boolean _and_1 = false;
           boolean _isStatic = it.isStatic();
           boolean _not = (!_isStatic);
           if (!_not) {
-            _and = false;
+            _and_1 = false;
           } else {
             boolean _isTransient = it.isTransient();
             boolean _not_1 = (!_isTransient);
-            _and = _not_1;
+            _and_1 = _not_1;
+          }
+          if (!_and_1) {
+            _and = false;
+          } else {
+            boolean _isThePrimaryGeneratedJavaElement = Util.this.context.isThePrimaryGeneratedJavaElement(it);
+            _and = _isThePrimaryGeneratedJavaElement;
           }
           return Boolean.valueOf(_and);
         }

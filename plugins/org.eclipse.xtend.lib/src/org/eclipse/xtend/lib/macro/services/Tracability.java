@@ -19,6 +19,8 @@ import com.google.common.annotations.Beta;
  * and the corresponding Java elements derived from that.
  * 
  * @author Sven Efftinge
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @see Associator
  */
 @Beta
 public interface Tracability {
@@ -46,21 +48,17 @@ public interface Tracability {
 	 * @return the primary generated element (Java) derived from the given source element (Xtend).
 	 */
 	MutableNamedElement getPrimaryGeneratedJavaElement(NamedElement source);
+	/**
+	 * @since 2.7
+	 * @param target
+	 * @return whether this element was already present in the Xtend source AST.
+	 */
+	boolean isThePrimaryGeneratedJavaElement(NamedElement target);
 	
-//	
-//	/**
-//	 * @param source
-//	 * @return the primary generated Java class derived from the given source Xtend class element.
-//	 */
-//	MutableClassDeclaration getGeneratedClass(ClassDeclaration source);
-//	
-//	/**
-//	 * @param source
-//	 * @return the primary generated Java method derived from the given source Xtend method.
-//	 */
-//	MutableMethodDeclaration getGeneratedMethod(MethodDeclaration source);
-//	
-//	
-//	MutableConstructorDeclaration getGeneratedConstructor(ConstructorDeclaration source);
-//	MutableFieldDeclaration getGeneratedField(FieldDeclaration source);
+	/**
+	 * @param target
+	 * @return the source element (Xtend) the given target (Java) element is derived from
+	 * @since 2.7
+	 */
+	NamedElement getPrimarySourceElement(NamedElement target);
 }

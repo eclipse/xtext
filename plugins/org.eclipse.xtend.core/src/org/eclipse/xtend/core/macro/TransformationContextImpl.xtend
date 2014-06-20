@@ -23,10 +23,15 @@ import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1
 import org.eclipse.xtend.lib.macro.services.AnnotationReferenceBuildContext
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
+import org.eclipse.xtend.core.xtend.XtendMember
+import org.eclipse.xtend.core.xtend.XtendParameter
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
 
 class TransformationContextImpl implements TransformationContext {
 
 	@Inject IXtendJvmAssociations associations
+	
+	@Inject IJvmModelAssociator associator
 
 	@Property CompilationUnitImpl unit
 
@@ -57,7 +62,34 @@ class TransformationContextImpl implements TransformationContext {
 		}
 		return null
 	}
+	
+	override getPrimarySourceElement(NamedElement target) {
+		if (isGenerated(target)) {
+			val sourceElement = associations.getSourceElements((target as JvmNamedElementImpl<?>).delegate).head
+			if (sourceElement instanceof XtendMember) {
+				return unit.toXtendMemberDeclaration(sourceElement)
+			} else if (sourceElement instanceof XtendParameter) {
+				return unit.toXtendParameterDeclaration(sourceElement)
+			}
+		}
+		return null
+	}
 
+	override isThePrimaryGeneratedJavaElement(NamedElement target) {
+		val source = target.primarySourceElement
+		if (source === null)
+			return false;
+		source.getPrimaryGeneratedJavaElement == target
+	}
+	
+	override setPrimarySourceElement(NamedElement generatedElement, NamedElement sourceElement) {
+		if (!isGenerated(generatedElement))
+			throw new IllegalArgumentException(generatedElement + "is not a generated element")
+		if (!isSource(sourceElement))
+			throw new IllegalArgumentException(sourceElement + "is not a source element")
+		associator.associatePrimary((sourceElement as XtendNamedElementImpl<?>).delegate, (generatedElement as JvmNamedElementImpl<?>).delegate)
+	}
+	
 	override addError(Element element, String message) {
 		unit.problemSupport.addError(element, message)
 	}

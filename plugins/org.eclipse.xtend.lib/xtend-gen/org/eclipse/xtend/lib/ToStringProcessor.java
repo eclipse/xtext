@@ -2,6 +2,7 @@ package org.eclipse.xtend.lib;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
+import org.eclipse.xtend.lib.ValueObjectProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -14,8 +15,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
@@ -124,6 +123,8 @@ public class ToStringProcessor extends AbstractClassProcessor {
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     @Extension
     final ToStringProcessor.Util util = new ToStringProcessor.Util(context);
+    @Extension
+    final ValueObjectProcessor.Util voUtil = new ValueObjectProcessor.Util(context);
     boolean _hasToString = util.hasToString(it);
     if (_hasToString) {
       context.addWarning(it, "toString is already defined, this annotation has no effect.");
@@ -134,24 +135,8 @@ public class ToStringProcessor extends AbstractClassProcessor {
       if (_notEquals) {
         util.addReflectiveToString(it);
       } else {
-        Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
-        final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
-          public Boolean apply(final MutableFieldDeclaration it) {
-            boolean _and = false;
-            boolean _isStatic = it.isStatic();
-            boolean _not = (!_isStatic);
-            if (!_not) {
-              _and = false;
-            } else {
-              boolean _isTransient = it.isTransient();
-              boolean _not_1 = (!_isTransient);
-              _and = _not_1;
-            }
-            return Boolean.valueOf(_and);
-          }
-        };
-        Iterable<? extends MutableFieldDeclaration> _filter = IterableExtensions.filter(_declaredFields, _function);
-        util.addToString(it, _filter);
+        Iterable<? extends MutableFieldDeclaration> _valueObjectFields = voUtil.getValueObjectFields(it);
+        util.addToString(it, _valueObjectFields);
       }
     }
   }

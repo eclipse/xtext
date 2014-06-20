@@ -110,13 +110,16 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  public void testTransientField() {
+  public void testIgnoredFields() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("@ValueObject class Foo {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("transient int foo");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def create {} ignoreMe() {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -126,25 +129,15 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
             Class<?> _compiledClass = it.getCompiledClass();
             _compiledClass.getDeclaredConstructor();
             Class<?> _compiledClass_1 = it.getCompiledClass();
-            Field[] _declaredFields = _compiledClass_1.getDeclaredFields();
-            final Function1<Field, Boolean> _function = new Function1<Field, Boolean>() {
-              public Boolean apply(final Field it) {
-                String _name = it.getName();
-                return Boolean.valueOf(Objects.equal(_name, "foo"));
-              }
-            };
-            boolean _exists = IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields)), _function);
-            Assert.assertTrue(_exists);
-            Class<?> _compiledClass_2 = it.getCompiledClass();
-            Method[] _declaredMethods = _compiledClass_2.getDeclaredMethods();
-            final Function1<Method, Boolean> _function_1 = new Function1<Method, Boolean>() {
+            Method[] _declaredMethods = _compiledClass_1.getDeclaredMethods();
+            final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
               public Boolean apply(final Method it) {
                 String _name = it.getName();
-                return Boolean.valueOf(Objects.equal(_name, "getFoo"));
+                return Boolean.valueOf(_name.startsWith("get"));
               }
             };
-            boolean _exists_1 = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function_1);
-            Assert.assertFalse(_exists_1);
+            boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function);
+            Assert.assertFalse(_exists);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }

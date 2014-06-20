@@ -38,6 +38,7 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 		'''
 			@Setter class Foo {
 				static String ignoreMe
+				def create {} ignoreMe2() {}
 				int foo
 				String bar
 				

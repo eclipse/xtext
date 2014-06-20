@@ -22,6 +22,8 @@ import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -43,6 +45,7 @@ import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -51,6 +54,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class TransformationContextImpl implements TransformationContext {
   @Inject
   private IXtendJvmAssociations associations;
+  
+  @Inject
+  private IJvmModelAssociator associator;
   
   @Property
   private CompilationUnitImpl _unit;
@@ -109,6 +115,57 @@ public class TransformationContextImpl implements TransformationContext {
       }
     }
     return null;
+  }
+  
+  public NamedElement getPrimarySourceElement(final NamedElement target) {
+    boolean _isGenerated = this.isGenerated(target);
+    if (_isGenerated) {
+      JvmIdentifiableElement _delegate = ((JvmNamedElementImpl<?>) target).getDelegate();
+      Set<EObject> _sourceElements = this.associations.getSourceElements(_delegate);
+      final EObject sourceElement = IterableExtensions.<EObject>head(_sourceElements);
+      if ((sourceElement instanceof XtendMember)) {
+        CompilationUnitImpl _unit = this.getUnit();
+        return _unit.toXtendMemberDeclaration(((XtendMember)sourceElement));
+      } else {
+        if ((sourceElement instanceof XtendParameter)) {
+          CompilationUnitImpl _unit_1 = this.getUnit();
+          return _unit_1.toXtendParameterDeclaration(((XtendParameter)sourceElement));
+        }
+      }
+    }
+    return null;
+  }
+  
+  public boolean isThePrimaryGeneratedJavaElement(final NamedElement target) {
+    boolean _xblockexpression = false;
+    {
+      final NamedElement source = this.getPrimarySourceElement(target);
+      boolean _tripleEquals = (source == null);
+      if (_tripleEquals) {
+        return false;
+      }
+      MutableNamedElement _primaryGeneratedJavaElement = this.getPrimaryGeneratedJavaElement(source);
+      _xblockexpression = Objects.equal(_primaryGeneratedJavaElement, target);
+    }
+    return _xblockexpression;
+  }
+  
+  public void setPrimarySourceElement(final NamedElement generatedElement, final NamedElement sourceElement) {
+    boolean _isGenerated = this.isGenerated(generatedElement);
+    boolean _not = (!_isGenerated);
+    if (_not) {
+      String _plus = (generatedElement + "is not a generated element");
+      throw new IllegalArgumentException(_plus);
+    }
+    boolean _isSource = this.isSource(sourceElement);
+    boolean _not_1 = (!_isSource);
+    if (_not_1) {
+      String _plus_1 = (sourceElement + "is not a source element");
+      throw new IllegalArgumentException(_plus_1);
+    }
+    EObject _delegate = ((XtendNamedElementImpl<?>) sourceElement).getDelegate();
+    JvmIdentifiableElement _delegate_1 = ((JvmNamedElementImpl<?>) generatedElement).getDelegate();
+    this.associator.associatePrimary(_delegate, _delegate_1);
   }
   
   public void addError(final Element element, final String message) {

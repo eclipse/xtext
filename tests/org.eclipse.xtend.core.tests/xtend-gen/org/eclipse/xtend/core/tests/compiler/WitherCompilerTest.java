@@ -41,6 +41,9 @@ public class WitherCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("transient String ignoreMe2");
       _builder.newLine();
       _builder.append("\t");
+      _builder.append("def create {} ignoreMe3() {}");
+      _builder.newLine();
+      _builder.append("\t");
       _builder.append("@Wither String foo");
       _builder.newLine();
       _builder.append("\t");

@@ -18,6 +18,7 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  * 
  * @see RegisterGlobalsParticipant
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface RegisterGlobalsContext extends FileSystemSupport, FileLocations {

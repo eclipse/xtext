@@ -2,6 +2,7 @@ package org.eclipse.xtend.lib;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
+import org.eclipse.xtend.lib.ValueObjectProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -398,6 +399,8 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     @Extension
     final EqualsHashCodeProcessor.Util util = new EqualsHashCodeProcessor.Util(context);
+    @Extension
+    final ValueObjectProcessor.Util voUtil = new ValueObjectProcessor.Util(context);
     boolean _hasEquals = util.hasEquals(it);
     if (_hasEquals) {
       context.addWarning(it, "equals is already defined, this annotation has no effect");
@@ -409,25 +412,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
         TypeReference _extendedClass = it.getExtendedClass();
         TypeReference _object = context.getObject();
         final boolean hasSuperClass = (!Objects.equal(_extendedClass, _object));
-        Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
-        final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
-          public Boolean apply(final MutableFieldDeclaration it) {
-            boolean _and = false;
-            boolean _isStatic = it.isStatic();
-            boolean _not = (!_isStatic);
-            if (!_not) {
-              _and = false;
-            } else {
-              boolean _isTransient = it.isTransient();
-              boolean _not_1 = (!_isTransient);
-              _and = _not_1;
-            }
-            return Boolean.valueOf(_and);
-          }
-        };
-        final Iterable<? extends MutableFieldDeclaration> includedFields = IterableExtensions.filter(_declaredFields, _function);
-        util.addEquals(it, includedFields, hasSuperClass);
-        util.addHashCode(it, includedFields, hasSuperClass);
+        Iterable<? extends MutableFieldDeclaration> _valueObjectFields = voUtil.getValueObjectFields(it);
+        util.addEquals(it, _valueObjectFields, hasSuperClass);
+        Iterable<? extends MutableFieldDeclaration> _valueObjectFields_1 = voUtil.getValueObjectFields(it);
+        util.addHashCode(it, _valueObjectFields_1, hasSuperClass);
       }
     }
   }

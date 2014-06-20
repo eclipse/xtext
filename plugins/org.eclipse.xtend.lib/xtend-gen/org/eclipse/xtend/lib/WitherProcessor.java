@@ -5,6 +5,7 @@ import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.eclipse.xtend.lib.ValueObjectProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -124,61 +125,34 @@ public class WitherProcessor implements TransformationParticipant<MutableMemberD
   protected void _transform(final MutableClassDeclaration cls, @Extension final TransformationContext context) {
     @Extension
     final WitherProcessor.Util util = new WitherProcessor.Util(context);
-    Iterable<? extends MutableFieldDeclaration> _declaredFields = cls.getDeclaredFields();
-    final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
-      public Boolean apply(final MutableFieldDeclaration it) {
-        boolean _and = false;
-        boolean _isStatic = it.isStatic();
-        boolean _not = (!_isStatic);
-        if (!_not) {
-          _and = false;
-        } else {
-          boolean _isTransient = it.isTransient();
-          boolean _not_1 = (!_isTransient);
-          _and = _not_1;
-        }
-        return Boolean.valueOf(_and);
-      }
-    };
-    final Iterable<? extends MutableFieldDeclaration> constructorFields = IterableExtensions.filter(_declaredFields, _function);
-    final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
+    @Extension
+    final ValueObjectProcessor.Util voUtil = new ValueObjectProcessor.Util(context);
+    Iterable<? extends MutableFieldDeclaration> _valueObjectConstructorFields = voUtil.getValueObjectConstructorFields(cls);
+    final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
       public void apply(final MutableFieldDeclaration it) {
         boolean _hasWither = util.hasWither(it);
         boolean _not = (!_hasWither);
         if (_not) {
-          util.addWither(it, constructorFields);
+          Iterable<? extends MutableFieldDeclaration> _valueObjectConstructorFields = voUtil.getValueObjectConstructorFields(cls);
+          util.addWither(it, _valueObjectConstructorFields);
         }
       }
     };
-    IterableExtensions.forEach(constructorFields, _function_1);
+    IterableExtensions.forEach(_valueObjectConstructorFields, _function);
   }
   
   protected void _transform(final MutableFieldDeclaration it, @Extension final TransformationContext context) {
     @Extension
     final WitherProcessor.Util util = new WitherProcessor.Util(context);
-    MutableTypeDeclaration _declaringType = it.getDeclaringType();
-    Iterable<? extends MutableFieldDeclaration> _declaredFields = _declaringType.getDeclaredFields();
-    final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
-      public Boolean apply(final MutableFieldDeclaration it) {
-        boolean _and = false;
-        boolean _isStatic = it.isStatic();
-        boolean _not = (!_isStatic);
-        if (!_not) {
-          _and = false;
-        } else {
-          boolean _isTransient = it.isTransient();
-          boolean _not_1 = (!_isTransient);
-          _and = _not_1;
-        }
-        return Boolean.valueOf(_and);
-      }
-    };
-    final Iterable<? extends MutableFieldDeclaration> constructorFields = IterableExtensions.filter(_declaredFields, _function);
+    @Extension
+    final ValueObjectProcessor.Util voUtil = new ValueObjectProcessor.Util(context);
     boolean _hasWither = util.hasWither(it);
     if (_hasWither) {
       context.addWarning(it, "A wither is already defined, this annotation has no effect");
     } else {
-      util.addWither(it, constructorFields);
+      MutableTypeDeclaration _declaringType = it.getDeclaringType();
+      Iterable<? extends MutableFieldDeclaration> _valueObjectConstructorFields = voUtil.getValueObjectConstructorFields(_declaringType);
+      util.addWither(it, _valueObjectConstructorFields);
     }
   }
   

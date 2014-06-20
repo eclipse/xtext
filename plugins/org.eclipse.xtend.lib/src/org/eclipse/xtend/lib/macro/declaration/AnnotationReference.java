@@ -17,6 +17,7 @@ import com.google.common.annotations.Beta;
  * Represents an annotation.
  * 
  * @author Sven Efftinge
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface AnnotationReference extends Element {

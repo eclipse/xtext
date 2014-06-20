@@ -72,6 +72,9 @@ public class GetterCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("static String ignoreMe");
       _builder.newLine();
       _builder.append("\t");
+      _builder.append("def create {} ignoreMe2() {}");
+      _builder.newLine();
+      _builder.append("\t");
       _builder.append("int foo = 1");
       _builder.newLine();
       _builder.append("\t");
