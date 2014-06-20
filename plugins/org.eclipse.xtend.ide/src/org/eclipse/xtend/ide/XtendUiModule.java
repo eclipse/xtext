@@ -16,7 +16,7 @@ import org.eclipse.xtend.ide.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtend.ide.builder.JavaProjectPreferencesInitializer;
 import org.eclipse.xtend.ide.builder.SourceRelativeFileSystemAccess;
-import org.eclipse.xtend.ide.builder.XtendBuilderParticipant;
+import org.eclipse.xtend.ide.builder.XtendParallelBuilderParticipant;
 import org.eclipse.xtend.ide.builder.XtendResourceDescriptionsProvider;
 import org.eclipse.xtend.ide.codetemplates.ui.highlighting.FlexerBasedTemplateBodyHighlighter;
 import org.eclipse.xtend.ide.contentassist.EscapeSequenceAwarePrefixMatcher;
@@ -263,7 +263,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	@Override
 	public Class<? extends IXtextBuilderParticipant> bindIXtextBuilderParticipant() {
-		return XtendBuilderParticipant.class;
+		return XtendParallelBuilderParticipant.class;
 	}
 
 	@Override
