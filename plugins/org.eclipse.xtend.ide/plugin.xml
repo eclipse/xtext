@@ -1338,8 +1338,38 @@
 				</reference>
 			</activeWhen>
       </handler>
+      <handler
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.imports.MultiOrganizeImportsHandler"
+            commandId="org.eclipse.xtext.xbase.ui.multiOrganizeImports">
+      </handler>
    </extension>
    <extension point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?before=org.eclipse.jdt.ui.refactoring.menu">
+         <menu
+               id="org.eclipse.jdt.ui.source.menu"
+               label="Source">
+            <command
+                  commandId="org.eclipse.xtext.xbase.ui.multiOrganizeImports"
+                  label="Organize Xtend Imports"
+                  style="push">
+               <visibleWhen>
+					   <or>
+					      <with variable="selection">
+					         <iterate
+                    ifEmpty="false">
+					           <reference definitionId="org.eclipse.xtend.fileDef"/>
+					         </iterate>
+					      </with>
+					      <with variable="activeEditorInput">
+					        <reference definitionId="org.eclipse.xtend.fileDef"/>
+					      </with>
+					   </or>
+					</visibleWhen>
+            </command>
+         </menu>
+      </menuContribution>
        <menuContribution
             locationURI="menu:navigate?after=open.ext4">
          <command commandId="org.eclipse.xtext.xbase.ui.OpenImplementationCommand">
@@ -1350,6 +1380,15 @@
 		</visibleWhen>
          </command>
       </menuContribution>
+       <menuContribution
+             allPopups="false"
+             locationURI="popup:org.eclipse.jdt.ui.source.menu?endof=importGroup">
+          <command
+                commandId="org.eclipse.xtext.xbase.ui.multiOrganizeImports"
+                label="Organize Xtend Imports"
+                style="push">
+          </command>
+       </menuContribution>
    </extension>
    <extension point="org.eclipse.e4.ui.css.swt.theme">	
       <stylesheet uri="css/e4-dark_xtend_syntaxhighlighting.css">	
@@ -1357,5 +1396,16 @@
                refid="org.eclipse.e4.ui.css.theme.e4_dark">	
          </themeid>	
 	  </stylesheet>	
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="org.eclipse.xtend.fileDef">
+             <adapt type="org.eclipse.core.resources.IResource">
+             <test property="org.eclipse.core.resources.extension"
+                   value="xtend">
+             </test>
+      </adapt>
+      </definition>
    </extension>
 </plugin>
