@@ -124,10 +124,10 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     }
   }
   
-  public boolean mkdir(final Path path) {
+  public void mkdir(final Path path) {
     boolean _exists = this.exists(path);
     if (_exists) {
-      return false;
+      return;
     }
     final Path parent = path.getParent();
     boolean _notEquals = (!Objects.equal(parent, null));
@@ -136,14 +136,13 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     }
     File _javaIOFile = this.getJavaIOFile(path);
     _javaIOFile.mkdir();
-    return true;
   }
   
-  public boolean delete(final Path path) {
+  public void delete(final Path path) {
     boolean _exists = this.exists(path);
     boolean _not = (!_exists);
     if (_not) {
-      return false;
+      return;
     }
     File _javaIOFile = this.getJavaIOFile(path);
     boolean _isDirectory = _javaIOFile.isDirectory();
@@ -163,7 +162,6 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     }
     File _javaIOFile_2 = this.getJavaIOFile(path);
     _javaIOFile_2.delete();
-    return true;
   }
   
   public void setContentsAsStream(final Path path, final InputStream stream) {
