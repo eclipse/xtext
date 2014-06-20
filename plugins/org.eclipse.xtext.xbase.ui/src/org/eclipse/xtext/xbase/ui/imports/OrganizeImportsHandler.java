@@ -67,7 +67,7 @@ public class OrganizeImportsHandler extends AbstractHandler {
 				((IDocumentExtension4)document).stopRewriteSession(session);
 			}
 		} catch (BadLocationException e) {
-			LOG.error("Error organizing imports:", e);
+			LOG.error(Messages.OrganizeImportsHandler_organizeImportsErrorMessage, e);
 		}
 	}
 

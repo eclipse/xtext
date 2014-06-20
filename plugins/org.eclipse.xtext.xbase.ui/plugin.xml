@@ -15,19 +15,6 @@
             uriExtension="___xbase">
         </resourceServiceProvider>
     </extension>
-    <extension
-		point="org.eclipse.ui.commands">
-		<command
-			description="%OpenTypeHierarchyCommand_description"
-			id="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
-			name="%OpenTypeHierarchyCommand_name">
-		</command>
-		<command
-			description="%OpenCallHierarchyCommand_description"
-			id="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy"
-			name="%OpenCallHierarchyCommand_name">
-		</command>
-	</extension>
 	<extension
 		point="org.eclipse.ui.bindings">
 		<key
@@ -49,6 +36,7 @@
 			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy">
 		</key>
 	</extension>
+	
 	<extension point="org.eclipse.search.searchResultViewPages">
     	<viewPage
           class="org.eclipse.jdt.internal.ui.search.JavaSearchResultPage"
@@ -58,8 +46,18 @@
     	</viewPage>
  	</extension>
  	
-   <!-- extract local variable refactoring -->
    <extension point="org.eclipse.ui.commands">
+    <command
+			description="%OpenTypeHierarchyCommand_description"
+			id="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
+			name="%OpenTypeHierarchyCommand_name">
+		</command>
+		<command
+			description="%OpenCallHierarchyCommand_description"
+			id="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy"
+			name="%OpenCallHierarchyCommand_name">
+		</command>
+   <!-- extract local variable refactoring -->
       <command
               id="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable"
               name="%ExtractLocalVariableRefactoring_name"
@@ -69,6 +67,17 @@
             id="org.eclipse.xtext.xbase.ui.organizeImports"
             name="Organize Imports">
             description="Organize Imports"
+      </command>
+      <command
+            categoryId="org.eclipse.jdt.ui.category.source"
+            id="org.eclipse.xtext.xbase.ui.multiOrganizeImports"
+            name="Organize All Imports">
+      </command>
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            description="%OpenImplementation_description"
+            id="org.eclipse.xtext.xbase.ui.OpenImplementationCommand"
+            name="%OpenImplementation_name">
       </command>
    </extension>
     
@@ -120,12 +129,4 @@
             contextId="org.eclipse.xtext.ui.XtextEditorScope"
             platform="gtk"/>
     </extension>
-	<extension point="org.eclipse.ui.commands">
-      <command
-            categoryId="org.eclipse.ui.category.window"
-            description="%OpenImplementation_description"
-            id="org.eclipse.xtext.xbase.ui.OpenImplementationCommand"
-            name="%OpenImplementation_name">
-      </command>
-	   </extension>
 </plugin>
