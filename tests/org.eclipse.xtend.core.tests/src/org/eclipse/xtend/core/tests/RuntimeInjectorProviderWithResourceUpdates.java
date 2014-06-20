@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.linking.Linker;
-import org.eclipse.xtend.core.linking.LinkingProxyAwareResource;
 import org.eclipse.xtext.linking.ILinker;
 
 import com.google.inject.Guice;
@@ -36,7 +36,7 @@ public class RuntimeInjectorProviderWithResourceUpdates extends RuntimeInjectorP
 	
 	public static class LinkerWithResourceUpdates extends Linker {
 		@Override
-		protected boolean isClearReferencesRequired(LinkingProxyAwareResource resource) {
+		protected boolean isClearAllReferencesRequired(Resource resource) {
 			return true;
 		}
 	}
