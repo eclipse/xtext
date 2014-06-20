@@ -7,9 +7,7 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
-import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 
 /**
  * This annotation is used by the Xtend compiler.
@@ -33,198 +31,95 @@ annotation Data {
  */
 @Beta
 class DataProcessor extends AbstractClassProcessor {
-	extension PropertyProcessor = new PropertyProcessor
-
 	override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
+		extension val util = new DataProcessor.Util(context)
+		extension val getterUtil = new GetterProcessor.Util(context)
+		extension val ehUtil = new EqualsHashCodeProcessor.Util(context)
+		extension val toStringUtil = new ToStringProcessor.Util(context)
+
 		if (!hasDataConstructor) {
-			addDataConstructor(context)
+			addDataConstructor
 		}
 		if (!hasHashCode) {
-			addHashCode(instanceFields, superConstructor !== null, context)
+			addHashCode(dataFields, superConstructor !== null)
 		}
 		if (!hasEquals) {
-			addEquals(instanceFields, superConstructor !== null, context)
+			addEquals(dataFields, superConstructor !== null)
 		}
 		if (!hasToString) {
-			addReflectiveToString(context)
+			addReflectiveToString
 		}
-		instanceFields.forEach [
+		dataFields.forEach [
 			if (!hasGetter) {
-				addGetter(context)
+				addGetter
 			}
 			final = true
 			simpleName = "_" + simpleName.toFirstLower
 		]
 	}
 
-	def hasDataConstructor(ClassDeclaration cls) {
-		cls.declaredConstructors.exists [
-			val expectedTypes = newArrayList
-			if (cls.superConstructor !== null) {
-				expectedTypes += cls.superConstructor.parameters.map[type]
-			}
-			expectedTypes += cls.instanceFields.map[type]
-			parameters.map[type].toList == expectedTypes
-		]
-	}
+	/**
+	 * @since 2.7
+ 	 */
+	@Beta
+	static class Util {
 
-	def addDataConstructor(MutableClassDeclaration cls, TransformationContext ctx) {
-		cls.addConstructor [ constructor |
-			val fieldToParameter = newHashMap
-			val superParameters = cls.superConstructor?.parameters ?: #[]
-			superParameters.forEach [
-				val param = constructor.addParameter(simpleName, type)
-				fieldToParameter.put(it, param)
+		extension TransformationContext context
+
+		new(TransformationContext context) {
+			this.context = context
+		}
+
+		def hasDataConstructor(ClassDeclaration cls) {
+			cls.declaredConstructors.exists [
+				val expectedTypes = newArrayList
+				if (cls.superConstructor !== null) {
+					expectedTypes += cls.superConstructor.parameters.map[type]
+				}
+				expectedTypes += cls.dataFields.map[type]
+				parameters.map[type].toList == expectedTypes
 			]
-			cls.constructedFields.forEach [
-				val param = constructor.addParameter(simpleName, type)
-				markAsInitialized
-				fieldToParameter.put(it, param)
+		}
+
+		def addDataConstructor(MutableClassDeclaration cls) {
+			cls.addConstructor [ constructor |
+				val fieldToParameter = newHashMap
+				val superParameters = cls.superConstructor?.parameters ?: #[]
+				superParameters.forEach [
+					val param = constructor.addParameter(simpleName, type)
+					fieldToParameter.put(it, param)
+				]
+				cls.dataConstructorFields.forEach [
+					val param = constructor.addParameter(simpleName, type)
+					markAsInitialized
+					fieldToParameter.put(it, param)
+				]
+				constructor.body = '''
+					super(«superParameters.join(", ")[simpleName]»);
+					«FOR field : cls.dataConstructorFields»
+						this.«field.simpleName» = «fieldToParameter.get(field).simpleName»;
+					«ENDFOR»
+				'''
 			]
-			constructor.body = '''
-				super(«superParameters.join(", ")[simpleName]»);
-				«FOR field : cls.constructedFields»
-					this.«field.simpleName» = «fieldToParameter.get(field).simpleName»;
-				«ENDFOR»
-			'''
-		]
-	}
+		}
 
-	def constructedFields(MutableClassDeclaration it) {
-		instanceFields.filter[initializer == null]
-	}
+		def getDataConstructorFields(MutableClassDeclaration it) {
+			dataFields.filter[initializer == null]
+		}
 
-	def getSuperConstructor(ClassDeclaration it) {
-		if (extendedClass == null || extendedClass.name == Object.name)
-			return null;
-		return (extendedClass.type as ClassDeclaration).declaredConstructors.head
-	}
+		def getSuperConstructor(ClassDeclaration it) {
+			if (extendedClass == object)
+				return null;
+			return (extendedClass.type as ClassDeclaration).declaredConstructors.head
+		}
 
-	def hasHashCode(ClassDeclaration it) {
-		findDeclaredMethod("hashCode") !== null
-	}
+		def getDataFields(ClassDeclaration it) {
+			declaredFields.filter[!static]
+		}
 
-	def hasEquals(ClassDeclaration it) {
-		declaredMethods.exists [
-			simpleName == "equals" && parameters.size == 1 && parameters.head.type.name == "java.lang.Object"
-		]
-	}
-
-	def hasToString(ClassDeclaration it) {
-		findDeclaredMethod("toString") !== null
-	}
-
-	def getInstanceFields(ClassDeclaration it) {
-		declaredFields.filter[!static]
-	}
-
-	def getInstanceFields(MutableClassDeclaration it) {
-		declaredFields.filter[!static]
-	}
-
-	def void addHashCode(MutableClassDeclaration cls, Iterable<? extends FieldDeclaration> includedFields,
-		boolean includeSuper, extension TransformationContext context) {
-		cls.addMethod("hashCode") [
-			returnType = primitiveInt
-			addAnnotation(newAnnotationReference(Override))
-			addAnnotation(newAnnotationReference(Pure))
-			body = '''
-				final int prime = 31;
-				int result = «IF includeSuper»super.hashCode()«ELSE»1«ENDIF»;
-				«FOR field : includedFields»
-					«field.contributeToHashCode(context)»
-				«ENDFOR»
-				return result;
-			'''
-		]
-	}
-
-	private def contributeToHashCode(FieldDeclaration it, extension TransformationContext context) {
-		return switch (type.name) {
-			case Double.TYPE.name:
-				"result = prime * result + (int) (Double.doubleToLongBits(this." + simpleName +
-					") ^ (Double.doubleToLongBits(this." + simpleName + ") >>> 32));"
-			case Float.TYPE.name:
-				"result = prime * result + Float.floatToIntBits(this." + simpleName + ");"
-			case Boolean.TYPE.name:
-				"result = prime * result + (this." + simpleName + " ? 1231 : 1237);"
-			case Integer.TYPE.name,
-			case Character.TYPE.name,
-			case Byte.TYPE.name,
-			case Short.TYPE.name:
-				"result = prime * result + this." + simpleName + ";"
-			case Long.TYPE.name:
-				"result = prime * result + (int) (this." + simpleName + " ^ (this." + simpleName + " >>> 32));"
-			default:
-				"result = prime * result + ((this." + simpleName + "== null) ? 0 : this." + simpleName + ".hashCode());"
+		def getDataFields(MutableClassDeclaration it) {
+			declaredFields.filter[!static]
 		}
 	}
 
-	def void addEquals(MutableClassDeclaration cls, Iterable<? extends FieldDeclaration> includedFields,
-		boolean includeSuper, extension TransformationContext context) {
-		cls.addMethod("equals") [
-			returnType = primitiveBoolean
-			addAnnotation(newAnnotationReference(Override))
-			addAnnotation(newAnnotationReference(Pure))
-			addParameter("obj", object)
-			body = '''
-				if (this == obj)
-				  return true;
-				if (obj == null)
-				  return false;
-				if (getClass() != obj.getClass())
-				  return false;
-				«IF includeSuper»
-					if (!super.equals(obj))
-					  return false;
-				«ENDIF»
-				«cls.simpleName» other = («cls.simpleName») obj;
-				«FOR field : includedFields»
-					«field.contributeToEquals(context)»
-				«ENDFOR»
-				return true;
-			'''
-		]
-	}
-
-	private def contributeToEquals(FieldDeclaration it, extension TransformationContext context) {
-		return switch (type.name) {
-			case Double.TYPE.name: '''
-				if (Double.doubleToLongBits(other.«simpleName») != Double.doubleToLongBits(this.«simpleName»))
-				  return false; 
-			'''
-			case Float.TYPE.name: '''
-				if (Float.floatToLongBits(other.«simpleName») != Float.floatToLongBits(this.«simpleName»))
-				  return false; 
-			'''
-			case Boolean.TYPE.name,
-			case Integer.TYPE.name,
-			case Character.TYPE.name,
-			case Byte.TYPE.name,
-			case Short.TYPE.name,
-			case Long.TYPE.name: '''
-				if (other.«simpleName» != this.«simpleName»)
-				  return false;
-			'''
-			default: '''
-				if (this.«simpleName» == null) {
-				  if (other.«simpleName» != null)
-				    return false;
-				} else if (!this.«simpleName».equals(other.«simpleName»))
-				  return false;
-			'''
-		}
-	}
-
-	def void addReflectiveToString(MutableClassDeclaration cls, extension TransformationContext context) {
-		cls.addMethod("toString") [
-			returnType = string
-			addAnnotation(newAnnotationReference(Override))
-			addAnnotation(newAnnotationReference(Pure))
-			body = '''
-				String result = new «ToStringHelper»().toString(this);
-				return result;
-			'''
-		]
-	}
 }
