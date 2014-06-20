@@ -10,10 +10,10 @@ import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 
 /**
- * @author Sven Efftinge
- * 
  * Creates a getter and setter method for the annotated field.
  * Prepends the field name with an underscore (e.g. <code>_myField</code>)
+ * 
+ * @author Sven Efftinge
  */
 @GwtCompatible
 @Target(ElementType.FIELD)
