@@ -99,6 +99,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IFileHeaderProvider
+import org.eclipse.xtext.generator.FileSystemAccessQueue
 import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
@@ -106,6 +107,7 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XListLiteral
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
+import org.eclipse.xtext.xbase.file.ParallelFileSystemSupport
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
@@ -215,8 +217,17 @@ class CompilationUnitImpl implements CompilationUnit {
 		typeExtensions
 	}
 	
+	ParallelFileSystemSupport parallelFileSystemSupport
+	
 	def MutableFileSystemSupport getFileSystemSupport() {
-		fileSystemSupport
+		if (parallelFileSystemSupport == null) {
+			val fileSystemAccessQueue = xtendFile.eResource.resourceSet.eAdapters.filter(FileSystemAccessQueue).head
+			if (fileSystemAccessQueue == null) {
+				return fileSystemSupport
+			}
+			parallelFileSystemSupport = new ParallelFileSystemSupport(xtendFile.eResource.URI, fileSystemSupport, fileSystemAccessQueue)
+		}
+		parallelFileSystemSupport
 	}
 	
 	def FileLocations getFileLocations() {

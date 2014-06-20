@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CancellationException;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -160,6 +161,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
+import org.eclipse.xtext.generator.FileSystemAccessQueue;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
@@ -169,6 +171,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
+import org.eclipse.xtext.xbase.file.ParallelFileSystemSupport;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
@@ -336,8 +339,32 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this.typeExtensions;
   }
   
+  private ParallelFileSystemSupport parallelFileSystemSupport;
+  
   public MutableFileSystemSupport getFileSystemSupport() {
-    return this.fileSystemSupport;
+    ParallelFileSystemSupport _xblockexpression = null;
+    {
+      boolean _equals = Objects.equal(this.parallelFileSystemSupport, null);
+      if (_equals) {
+        XtendFile _xtendFile = this.getXtendFile();
+        Resource _eResource = _xtendFile.eResource();
+        ResourceSet _resourceSet = _eResource.getResourceSet();
+        EList<Adapter> _eAdapters = _resourceSet.eAdapters();
+        Iterable<FileSystemAccessQueue> _filter = Iterables.<FileSystemAccessQueue>filter(_eAdapters, FileSystemAccessQueue.class);
+        final FileSystemAccessQueue fileSystemAccessQueue = IterableExtensions.<FileSystemAccessQueue>head(_filter);
+        boolean _equals_1 = Objects.equal(fileSystemAccessQueue, null);
+        if (_equals_1) {
+          return this.fileSystemSupport;
+        }
+        XtendFile _xtendFile_1 = this.getXtendFile();
+        Resource _eResource_1 = _xtendFile_1.eResource();
+        URI _uRI = _eResource_1.getURI();
+        ParallelFileSystemSupport _parallelFileSystemSupport = new ParallelFileSystemSupport(_uRI, this.fileSystemSupport, fileSystemAccessQueue);
+        this.parallelFileSystemSupport = _parallelFileSystemSupport;
+      }
+      _xblockexpression = this.parallelFileSystemSupport;
+    }
+    return _xblockexpression;
   }
   
   public FileLocations getFileLocations() {

@@ -24,38 +24,43 @@ public interface MutableFileSystemSupport extends FileSystemSupport {
 	 * Writes the given contents to the given path.
 	 * It will create the file if it doesn't exist, and create folders for all parents if the don't exist.
 	 * 
+	 * Implementors may decide to perform this method asynchronously. Clients should not rely on invocation timing. 
+	 * 
 	 * @param path the path to write the contents to
 	 * @param contents the contents of the file
-	 * @throws IllegalArgumentException - if the given path points to a folder
 	 */
 	void setContents(Path path, CharSequence contents);
 	
 	/**
 	 * Sets the contents of this file to the bytes in the given input stream.
 	 * The stream will be closed after the operation has finished.
+	 * 
+	 * Implementors may decide to perform this method asynchronously. Clients should not rely on invocation timing.
 	 *
 	 * @param path the path to the file
 	 * @param source an input stream containing the new contents of the file
-	 * @throws IllegalArgumentException if it is not possible to set content for a given path for some reason
 	 */
 	void setContentsAsStream(Path path, InputStream source);
 	
 	/**
 	 * Creates a directory for the given path and all its parents if necessary.
+	 * 
+	 * Implementors may decide to perform this method asynchronously. Clients should not rely on invocation timing.
+	 * 
 	 * @param path the path to the file
-	 * @return <code>true</code> if the folder has been created <code>false</code> if it already existed
-	 * @throws IllegalArgumentException if the given path points to an existent file
+	 * @since 2.7
 	 */
-	boolean mkdir(Path path);
+	void mkdir(Path path);
 	
 	/**
 	 * Deletes the file or folder the given path points to. 
 	 * If path points to a folder this method will also delete all its contents.
 	 * 
+	 * Implementors may decide to perform this method asynchronously. Clients should not rely on invocation timing.
+	 * 
 	 * @param path
-	 * @return <code>true</code> if the resource was deleted, <code>false</code> if it didn't exist
-	 * @throws IllegalArgumentException if it is not possible to delete a resource for a given path for some reason 
+	 * @since 2.7
 	 */
-	boolean delete(Path path);
+	void delete(Path path);
 
 }
