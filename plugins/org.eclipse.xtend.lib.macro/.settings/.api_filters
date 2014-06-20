@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<component id="org.eclipse.xtend.lib" version="2">
+<component id="org.eclipse.xtend.lib.macro" version="2">
     <resource path="META-INF/MANIFEST.MF">
         <filter id="923795461">
             <message_arguments>
@@ -67,6 +67,20 @@
         <filter id="1211105284">
             <message_arguments>
                 <message_argument value="removeAnnotation(AnnotationReference)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtend/lib/macro/file/MutableFileSystemSupport.java" type="org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport">
+        <filter id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport"/>
+                <message_argument value="delete(Path)"/>
+            </message_arguments>
+        </filter>
+        <filter id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport"/>
+                <message_argument value="mkdir(Path)"/>
             </message_arguments>
         </filter>
     </resource>

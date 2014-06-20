@@ -43,19 +43,19 @@ public interface MutableFileSystemSupport extends FileSystemSupport {
 	/**
 	 * Creates a directory for the given path and all its parents if necessary.
 	 * @param path the path to the file
-	 * @return <code>true</code> if the folder has been created <code>false</code> if it already existed
 	 * @throws IllegalArgumentException if the given path points to an existent file
+	 * @since 2.7
 	 */
-	boolean mkdir(Path path);
+	void mkdir(Path path);
 	
 	/**
 	 * Deletes the file or folder the given path points to. 
 	 * If path points to a folder this method will also delete all its contents.
 	 * 
 	 * @param path
-	 * @return <code>true</code> if the resource was deleted, <code>false</code> if it didn't exist
 	 * @throws IllegalArgumentException if it is not possible to delete a resource for a given path for some reason 
+	 * @since 2.7
 	 */
-	boolean delete(Path path);
+	void delete(Path path);
 
 }

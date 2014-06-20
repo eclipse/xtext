@@ -27,14 +27,14 @@ public class CodeGenerationContextImpl implements CodeGenerationContext {
   @Property
   private FileLocations _fileLocations;
   
-  public boolean delete(final Path path) {
+  public void delete(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    return _fileSystemSupport.delete(path);
+    _fileSystemSupport.delete(path);
   }
   
-  public boolean mkdir(final Path path) {
+  public void mkdir(final Path path) {
     MutableFileSystemSupport _fileSystemSupport = this.getFileSystemSupport();
-    return _fileSystemSupport.mkdir(path);
+    _fileSystemSupport.mkdir(path);
   }
   
   public void setContents(final Path path, final CharSequence contents) {
