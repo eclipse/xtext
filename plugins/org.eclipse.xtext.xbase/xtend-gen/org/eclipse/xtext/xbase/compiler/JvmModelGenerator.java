@@ -1318,7 +1318,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xifexpression;
   }
   
-  private String reassignThisType(final ITreeAppendable b, final JvmDeclaredType declaredType) {
+  protected String reassignThisType(final ITreeAppendable b, final JvmDeclaredType declaredType) {
     String _xifexpression = null;
     boolean _hasObject = b.hasObject("this");
     if (_hasObject) {

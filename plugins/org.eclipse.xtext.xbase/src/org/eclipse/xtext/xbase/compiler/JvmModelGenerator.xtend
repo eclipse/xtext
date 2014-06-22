@@ -662,7 +662,7 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 	
-	private def reassignThisType(ITreeAppendable b, JvmDeclaredType declaredType) {
+	protected def reassignThisType(ITreeAppendable b, JvmDeclaredType declaredType) {
 		if (b.hasObject('this')) {
 			val element = b.getObject('this')
 			if (element instanceof JvmDeclaredType) {

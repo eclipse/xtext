@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -77,9 +76,6 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 	
 	@Inject 
 	private IXtendJvmAssociations associations;
-	
-	@Inject
-	private AnonymousClassUtil anonymousClassUtil;
 	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
@@ -153,61 +149,6 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 		return result;
 	}
 	
-//	private IScope getContainerScope(final XtendMember syntacticContainer, AbstractScope result) {
-//		List<List<JvmTypeParameter>> typeParameters = null;
-//		Map<QualifiedName, JvmDeclaredType> nestedTypes = Collections.emptyMap();
-//		XtendMember workWithMe = syntacticContainer;
-//		while(workWithMe != null) {
-//			Set<EObject> elements = getAssociations().getJvmElements(workWithMe);
-//			for (EObject derivedJvmElement : elements) {
-//				// scope for JvmTypeParameterDeclarator
-//				if (derivedJvmElement instanceof JvmTypeParameterDeclarator) {
-//					JvmTypeParameterDeclarator parameterDeclarator = (JvmTypeParameterDeclarator) derivedJvmElement;
-//					List<JvmTypeParameter> current = parameterDeclarator.getTypeParameters();
-//					if (!current.isEmpty()) {
-//						if (typeParameters == null) {
-//							typeParameters = Lists.newArrayListWithCapacity(3);
-//						}
-//						typeParameters.add(current);
-//					}
-//					if (derivedJvmElement instanceof JvmDeclaredType) {
-//						if (syntacticContainer != workWithMe) { // prevent stackoverflow / cyclic resolution
-//							if (workWithMe instanceof AnonymousClass) {
-//								IScope typeScope = getScope(workWithMe, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-//								JvmDeclaredType superType = anonymousClassUtil.getSuperTypeNonResolving((AnonymousClass) workWithMe, typeScope);
-//								if (superType != null) {
-//									Map<QualifiedName, JvmDeclaredType> myNestedTypes = collector.collectNestedTypes(superType);
-//									nestedTypes = collector.mergeEnclosingNestedTypes(myNestedTypes, nestedTypes);
-//								}
-//							} else {
-//								Map<QualifiedName, JvmDeclaredType> myNestedTypes = collector.collectNestedTypes((JvmDeclaredType) derivedJvmElement);
-//								nestedTypes = collector.mergeEnclosingNestedTypes(myNestedTypes, nestedTypes);
-//							}
-//						}
-//					}
-//				}
-//			}
-//			EObject container = workWithMe;
-//			do {
-//				container = container.eContainer();
-//				if (container == null) {
-//					if (typeParameters == null) {
-//						if (nestedTypes.isEmpty())
-//							return result;
-//						return new NestedTypeScope(result, nestedTypes);
-//					}
-//					TypeParameterScope typeParameterScope = new TypeParameterScope(typeParameters, result);
-//					if (nestedTypes.isEmpty()) {
-//						return typeParameterScope;
-//					}
-//					return new NestedTypeScope(typeParameterScope, nestedTypes);
-//				}
-//			} while (!(container instanceof XtendMember));
-//			workWithMe = (XtendMember) container;
-//		}
-//		return result;
-//	}
-	
 	private AbstractScope getContainerScope(XtendMember syntacticContainer, AbstractScope result) {
 		JvmDeclaredType innermost = null;
 		List<List<JvmTypeParameter>> typeParameters = null;
@@ -228,15 +169,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				}
 				if (innermost == null && derivedJvmElement instanceof JvmDeclaredType) {
 					if (syntacticContainer != workWithMe) { // prevent stackoverflow / cyclic resolution
-						if (workWithMe instanceof AnonymousClass) {
-							IScope typeScope = getScope(workWithMe, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
-							JvmDeclaredType superType = anonymousClassUtil.getSuperTypeNonResolving((AnonymousClass) workWithMe, typeScope);
-							if (superType != null) {
-								innermost = superType;
-							}
-						} else {
-							innermost = (JvmDeclaredType) derivedJvmElement;
-						}
+						innermost = (JvmDeclaredType) derivedJvmElement;
 					}
 				}
 			}

@@ -16,7 +16,9 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.compiler.MacroAwareStringConcatenation;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts;
@@ -26,12 +28,14 @@ import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.CodeGenerationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -49,6 +53,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
@@ -63,6 +68,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 
@@ -71,6 +77,9 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
  */
 @SuppressWarnings("all")
 public class XtendGenerator extends JvmModelGenerator {
+  private static class StopCollecting extends Exception {
+  }
+  
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     super.doGenerate(input, fsa);
     this.callMacroProcessors(input);
@@ -195,6 +204,50 @@ public class XtendGenerator extends JvmModelGenerator {
     return _xblockexpression;
   }
   
+  public String reassignThisType(final ITreeAppendable b, final JvmDeclaredType declaredType) {
+    String _xifexpression = null;
+    boolean _hasObject = b.hasObject("this");
+    if (_hasObject) {
+      String _xblockexpression = null;
+      {
+        final Object element = b.getObject("this");
+        if ((element instanceof JvmDeclaredType)) {
+          boolean _isLocal = ((JvmDeclaredType)element).isLocal();
+          if (_isLocal) {
+            Pair<String, JvmDeclaredType> _mappedTo = Pair.<String, JvmDeclaredType>of("this", ((JvmDeclaredType)element));
+            boolean _hasName = b.hasName(_mappedTo);
+            if (_hasName) {
+              Pair<String, JvmDeclaredType> _mappedTo_1 = Pair.<String, JvmDeclaredType>of("this", ((JvmDeclaredType)element));
+              String _name = b.getName(_mappedTo_1);
+              b.declareVariable(element, _name);
+            } else {
+              b.declareVariable(element, "");
+            }
+          } else {
+            String _simpleName = ((JvmDeclaredType)element).getSimpleName();
+            final String proposedName = (_simpleName + ".this");
+            b.declareVariable(element, proposedName);
+          }
+        }
+        String _xifexpression_1 = null;
+        boolean _notEquals = (!Objects.equal(declaredType, null));
+        if (_notEquals) {
+          _xifexpression_1 = b.declareVariable(declaredType, "this");
+        }
+        _xblockexpression = _xifexpression_1;
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      String _xifexpression_1 = null;
+      boolean _notEquals = (!Objects.equal(declaredType, null));
+      if (_notEquals) {
+        _xifexpression_1 = b.declareVariable(declaredType, "this");
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
+  }
+  
   public void compileLocalTypeStubs(final JvmFeature feature, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<JvmGenericType> _localClasses = feature.getLocalClasses();
     final Function1<JvmGenericType, Boolean> _function = new Function1<JvmGenericType, Boolean>() {
@@ -223,6 +276,21 @@ public class XtendGenerator extends JvmModelGenerator {
         XtendGenerator.this.generateExtendsClause(it, childAppendable, null);
         ITreeAppendable _append = childAppendable.append("{");
         _append.increaseIndentation();
+        boolean _needSyntheticThisVariable = XtendGenerator.this.needSyntheticThisVariable(anonymousClass, it);
+        if (_needSyntheticThisVariable) {
+          Pair<String, JvmGenericType> _mappedTo = Pair.<String, JvmGenericType>of("this", it);
+          String _simpleName_1 = it.getSimpleName();
+          String _plus = ("_this" + _simpleName_1);
+          final String thisName = childAppendable.declareSyntheticVariable(_mappedTo, _plus);
+          ITreeAppendable _newLine = childAppendable.newLine();
+          ITreeAppendable _append_1 = _newLine.append("final ");
+          String _simpleName_2 = it.getSimpleName();
+          ITreeAppendable _append_2 = _append_1.append(_simpleName_2);
+          ITreeAppendable _append_3 = _append_2.append(" ");
+          ITreeAppendable _append_4 = _append_3.append(thisName);
+          ITreeAppendable _append_5 = _append_4.append(" = this;");
+          _append_5.newLine();
+        }
         ArrayList<JvmMember> _addedDeclarations = XtendGenerator.this.getAddedDeclarations(it, anonymousClass);
         final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
           public void apply(final LoopParams it) {
@@ -285,12 +353,63 @@ public class XtendGenerator extends JvmModelGenerator {
         };
         XtendGenerator.this._loopExtensions.<JvmMember>forEach(childAppendable, _addedDeclarations, _function, _function_1);
         ITreeAppendable _decreaseIndentation = childAppendable.decreaseIndentation();
-        ITreeAppendable _newLine = _decreaseIndentation.newLine();
-        _newLine.append("}");
+        ITreeAppendable _newLine_1 = _decreaseIndentation.newLine();
+        _newLine_1.append("}");
         appendable.newLine();
       }
     };
     IterableExtensions.<JvmGenericType>forEach(_filter, _function_1);
+  }
+  
+  private boolean needSyntheticThisVariable(final AnonymousClass anonymousClass, final JvmDeclaredType localType) {
+    final ArrayList<EObject> references = CollectionLiterals.<EObject>newArrayList();
+    try {
+      final EcoreUtil2.ElementReferenceAcceptor acceptor = new EcoreUtil2.ElementReferenceAcceptor() {
+        public void accept(final EObject referrer, final EObject referenced, final EReference reference, final int index) {
+          try {
+            final XtendTypeDeclaration enclosingType = EcoreUtil2.<XtendTypeDeclaration>getContainerOfType(referrer, XtendTypeDeclaration.class);
+            boolean _and = false;
+            boolean _notEquals = (!Objects.equal(enclosingType, null));
+            if (!_notEquals) {
+              _and = false;
+            } else {
+              boolean _notEquals_1 = (!Objects.equal(enclosingType, anonymousClass));
+              _and = _notEquals_1;
+            }
+            if (_and) {
+              references.add(referrer);
+              throw new XtendGenerator.StopCollecting();
+            } else {
+              final XClosure enclosingLambda = EcoreUtil2.<XClosure>getContainerOfType(referrer, XClosure.class);
+              boolean _and_1 = false;
+              boolean _notEquals_2 = (!Objects.equal(enclosingLambda, null));
+              if (!_notEquals_2) {
+                _and_1 = false;
+              } else {
+                boolean _isAncestor = EcoreUtil.isAncestor(anonymousClass, enclosingLambda);
+                _and_1 = _isAncestor;
+              }
+              if (_and_1) {
+                references.add(referrer);
+                throw new XtendGenerator.StopCollecting();
+              }
+            }
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      Set<JvmDeclaredType> _newImmutableSet = CollectionLiterals.<JvmDeclaredType>newImmutableSet(localType);
+      EcoreUtil2.findCrossReferences(anonymousClass, _newImmutableSet, acceptor);
+    } catch (final Throwable _t) {
+      if (_t instanceof XtendGenerator.StopCollecting) {
+        final XtendGenerator.StopCollecting e = (XtendGenerator.StopCollecting)_t;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    boolean _isEmpty = references.isEmpty();
+    return (!_isEmpty);
   }
   
   public ITreeAppendable generateVisibilityModifier(final JvmMember it, final ITreeAppendable result) {
