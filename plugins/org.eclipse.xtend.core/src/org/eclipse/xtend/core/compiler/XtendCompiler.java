@@ -51,6 +51,7 @@ import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Lists;
@@ -582,4 +583,27 @@ public class XtendCompiler extends XbaseCompiler {
 		}
 		return super.getReferenceName(expr, b);
 	}
+	
+	/**
+	 * Symmetric to {@link XtendGenerator#reassignThisType(ITreeAppendable, JvmDeclaredType)}
+	 */
+	@Override
+	protected void doReassignThisInClosure(ITreeAppendable b, JvmType prevType) {
+		if (prevType instanceof JvmDeclaredType && ((JvmDeclaredType) prevType).isLocal()) {
+			if (b.hasName(Pair.of("this", prevType))) {
+				b.declareVariable(prevType, b.getName(Pair.of("this", prevType)));
+			} else {
+				b.declareSyntheticVariable(prevType, "");
+			}
+			if (b.hasObject("super")) {
+				Object superElement = b.getObject("super");
+				if (superElement instanceof JvmType) {
+					b.declareSyntheticVariable(superElement, prevType.getSimpleName()+".super");
+				}
+			}
+		} else {
+			super.doReassignThisInClosure(b, prevType);
+		}
+	}
+	
 }

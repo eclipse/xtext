@@ -32,6 +32,12 @@ import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 import org.eclipse.xtext.common.types.JvmFeature
 import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtext.xbase.XClosure
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -107,6 +113,29 @@ class XtendGenerator extends JvmModelGenerator {
 		super.compile(executable, expression, returnType, appendable, config)
 	}
 	
+	override reassignThisType(ITreeAppendable b, JvmDeclaredType declaredType) {
+		if (b.hasObject('this')) {
+			val element = b.getObject('this')
+			if (element instanceof JvmDeclaredType) {
+				if (element.local) {
+					if (b.hasName('this'->element)) {
+						b.declareVariable(element, b.getName('this'->element))
+					} else {
+						b.declareVariable(element, '')
+					}
+				} else {
+					val proposedName = element.simpleName+'.this'
+					b.declareVariable(element, proposedName)
+				}
+			}
+			if (declaredType != null)
+				b.declareVariable(declaredType, 'this');
+		} else {
+			if (declaredType != null)
+				b.declareVariable(declaredType, 'this');
+		}
+	}
+	
 	def compileLocalTypeStubs(JvmFeature feature, ITreeAppendable appendable, GeneratorConfig config) {
 		feature.localClasses.filter[ !anonymous ].forEach[
 			appendable.newLine
@@ -119,8 +148,13 @@ class XtendGenerator extends JvmModelGenerator {
 			generateExtendsClause(childAppendable, null)
 		
 			childAppendable.append('{').increaseIndentation
+			
+			if (needSyntheticThisVariable(anonymousClass, it)) {
+				val thisName = childAppendable.declareSyntheticVariable('this' -> it, '_this' + it.simpleName)
+				childAppendable.newLine.append("final ").append(simpleName).append(' ').append(thisName).append(' = this;').newLine
+			}
 			childAppendable.forEach(getAddedDeclarations(anonymousClass), [
-					separator = [ITreeAppendable it | newLine]
+					separator = [newLine]
 				], [
 					val memberAppendable = childAppendable.traceWithComments(it)
 					memberAppendable.openScope
@@ -160,6 +194,35 @@ class XtendGenerator extends JvmModelGenerator {
 			childAppendable.decreaseIndentation.newLine.append('}')
 			appendable.newLine
 		]
+	}
+	
+	private def boolean needSyntheticThisVariable(AnonymousClass anonymousClass, JvmDeclaredType localType) {
+		val references = newArrayList
+		try {
+			val acceptor = new EcoreUtil2.ElementReferenceAcceptor() {
+				override accept(EObject referrer, EObject referenced, EReference reference, int index) {
+					val enclosingType = EcoreUtil2.getContainerOfType(referrer, XtendTypeDeclaration)
+					if (enclosingType != null && enclosingType != anonymousClass) {
+						references.add(referrer)
+						throw new StopCollecting
+					} else {
+						val enclosingLambda = EcoreUtil2.getContainerOfType(referrer, XClosure)
+						if (enclosingLambda != null && EcoreUtil.isAncestor(anonymousClass, enclosingLambda)) {
+							references.add(referrer)
+							throw new StopCollecting
+						}
+					}
+				}
+			}
+			EcoreUtil2.findCrossReferences(anonymousClass, newImmutableSet(localType), acceptor)
+		} catch(StopCollecting e) {
+			// ok
+		}
+		
+		return !references.empty
+	}
+	
+	private static class StopCollecting extends Exception {
 	}
 	
 	override generateVisibilityModifier(JvmMember it, ITreeAppendable result) {

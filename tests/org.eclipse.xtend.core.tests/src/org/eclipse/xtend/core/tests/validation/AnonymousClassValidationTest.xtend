@@ -141,4 +141,16 @@ class AnonymousClassValidationTest extends AbstractXtendTestCase {
 			}
 		'''.parse.assertNoIssues
 	}
+	
+	@Test def void testInvalidSuper() {
+		'''
+			class Bar {
+				public val r = new Runnable() {
+					override run() {
+						[| super.toString ].apply
+					}
+				}
+			}
+		'''.parse.assertError(XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.INVALID_SUPER_CALL, 'Cannot call super of an anonymous class from a lambda expression.')
+	}
 }

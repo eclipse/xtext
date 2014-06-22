@@ -13,23 +13,28 @@ import java.util.List;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class NestedTypesScope extends AbstractKnownTypesScope {
 
-	private JvmDeclaredType innermost;
+	private final JvmDeclaredType innermost;
+	private final XtendImportedNamespaceScopeProvider typeScopeProvider;
 
-	public NestedTypesScope(JvmDeclaredType innermost, AbstractScope parent) {
+	public NestedTypesScope(JvmDeclaredType innermost, XtendImportedNamespaceScopeProvider typeScopeProvider, AbstractScope parent) {
 		super(parent);
 		this.innermost = innermost;
+		this.typeScopeProvider = typeScopeProvider;
 	}
 	
 	@Override
@@ -68,25 +73,62 @@ public class NestedTypesScope extends AbstractKnownTypesScope {
 
 	@Override
 	protected IEObjectDescription doGetSingleElement(QualifiedName name, String firstSegment, int dollarIndex) {
-		JvmDeclaredType declarator = innermost;
-		while(declarator != null) {
-			Iterable<JvmDeclaredType> nestedTypes = declarator.findAllNestedTypesByName(firstSegment);
-			for(JvmDeclaredType nested: nestedTypes) {
-				JvmType nestedType = findNestedType(nested, 0, name);
-				if (nestedType != null) {
-					return toDescription(name, nestedType, dollarIndex, 0);
-				}
+		JvmDeclaredType declaredType = innermost;
+		while(declaredType != null) {
+			IEObjectDescription result = doGetSingleElement(declaredType, name, firstSegment, dollarIndex);
+			if (result != null) {
+				return result;
 			}
-			declarator = EcoreUtil2.getContainerOfType(declarator.eContainer(), JvmDeclaredType.class);
+			declaredType = EcoreUtil2.getContainerOfType(declaredType.eContainer(), JvmDeclaredType.class);
 		}
 		if (dollarIndex > 0 && name.getSegmentCount() == 1) {
 			QualifiedName splitted = QualifiedName.create(Strings.split(name.getFirstSegment(), '$'));
-			IEObjectDescription result = doGetSingleElement(splitted);
+			IEObjectDescription result = doGetSingleElement(splitted, splitted.getFirstSegment(), -1);
 			if (result != null) {
 				return new AliasedEObjectDescription(name, result);
 			}
 		}
 		return null;
+	}
+		
+	protected IEObjectDescription doGetSingleElement(JvmDeclaredType declarator, QualifiedName name, String firstSegment, int dollarIndex) {
+		if (declarator.isLocal()) {
+			JvmTypeReference superTypeReference = declarator.getSuperTypes().get(0);
+			if (InferredTypeIndicator.isInferred(superTypeReference))
+				return findNestedTypeInLocalTypeNonResolving(declarator, name, firstSegment, dollarIndex);
+		}
+		
+		Iterable<JvmDeclaredType> nestedTypes = declarator.findAllNestedTypesByName(firstSegment);
+		for(JvmDeclaredType nested: nestedTypes) {
+			JvmType nestedType = findNestedType(nested, 0, name);
+			if (nestedType != null) {
+				return toDescription(name, nestedType, dollarIndex, 0);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * We have to be careful to keep the unresolved super type of a local type which may depend on type resolution.
+	 * Therefore these types are treated differently from other types.
+	 */
+	protected IEObjectDescription findNestedTypeInLocalTypeNonResolving(JvmDeclaredType localType, QualifiedName name,
+			String firstSegment, int dollarIndex) {
+		List<JvmMember> members = localType.getMembers();
+		for(int i = 0; i < members.size(); i++) {
+			JvmMember member = members.get(i);
+			if (member instanceof JvmDeclaredType) {
+				JvmDeclaredType nestedType = (JvmDeclaredType) member;
+				if (firstSegment.equals(nestedType.getSimpleName())) {
+					JvmType candidate = findNestedType(nestedType, 0, name);
+					if (candidate != null) {
+						return toDescription(name, candidate, dollarIndex, 0);
+					}
+				}
+			}
+		}
+		JvmDeclaredType superType = typeScopeProvider.getSuperTypeOfLocalTypeNonResolving(localType);
+		return doGetSingleElement(superType, name, firstSegment, dollarIndex);
 	}
 
 }

@@ -365,4 +365,278 @@ class NestedClassCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test
+	def void testBugNotAnEnclosingInstance_01() {
+		'''
+			class Account {
+			    def Iterable<Boolean> transferAReq(int _amount, Account _account) {
+			        return new Iterable<Boolean>() {
+			            val dis = this;
+			            val depositExceptionHandler = new com.google.common.collect.AbstractIterator<Boolean>() {
+			                override Boolean computeNext() {
+			                    return false;
+			                }
+			            };
+			            override java.util.Iterator<Boolean> iterator() {
+			                send([dis.processAsyncResponse(true)]);
+			                null
+			            }
+			            def void send((Object)=>void p) {}
+			            def void processAsyncResponse(boolean o) {}
+			        };
+			    }
+			    def Object depositSReq(int amount) {}
+			}
+		'''.assertCompilesTo('''
+			import com.google.common.collect.AbstractIterator;
+			import java.util.Iterator;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public class Account {
+			  public Iterable<Boolean> transferAReq(final int _amount, final Account _account) {
+			    abstract class __Account_1 implements Iterable<Boolean> {
+			      final __Account_1 _this__Account_1 = this;
+			      
+			      __Account_1 dis;
+			      
+			      AbstractIterator<Boolean> depositExceptionHandler;
+			      
+			      public abstract void send(final Procedure1<? super Object> p);
+			      
+			      public abstract void processAsyncResponse(final boolean o);
+			    }
+			    
+			    return new __Account_1() {
+			      {
+			        dis = this;
+			        
+			        depositExceptionHandler = new AbstractIterator<Boolean>() {
+			          public Boolean computeNext() {
+			            return Boolean.valueOf(false);
+			          }
+			        };
+			      }
+			      public Iterator<Boolean> iterator() {
+			        Object _xblockexpression = null;
+			        {
+			          final Procedure1<Object> _function = new Procedure1<Object>() {
+			            public void apply(final Object it) {
+			              _this__Account_1.dis.processAsyncResponse(true);
+			            }
+			          };
+			          this.send(_function);
+			          _xblockexpression = null;
+			        }
+			        return ((Iterator<Boolean>)_xblockexpression);
+			      }
+			      
+			      public void send(final Procedure1<? super Object> p) {
+			      }
+			      
+			      public void processAsyncResponse(final boolean o) {
+			      }
+			    };
+			  }
+			  
+			  public Object depositSReq(final int amount) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testBugNotAnEnclosingInstance_02() {
+		'''
+			class C {
+				def void m1(String s) {}
+				def void m2() {
+					new Object() {
+						def void m1(int i) {}
+						def void m2() {
+							val I i = [
+								m1(1)
+								m1('')
+							]
+						}
+					}
+				}
+				interface I {
+					def void m1(int i)
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public interface I {
+			    public abstract void m1(final int i);
+			  }
+			  
+			  public void m1(final String s) {
+			  }
+			  
+			  public void m2() {
+			    abstract class __C_1 {
+			      final __C_1 _this__C_1 = this;
+			      
+			      public abstract void m1(final int i);
+			      
+			      public abstract void m2();
+			    }
+			    
+			    new __C_1() {
+			      public void m1(final int i) {
+			      }
+			      
+			      public void m2() {
+			        final C.I _function = new C.I() {
+			          public void m1(final int it) {
+			            _this__C_1.m1(1);
+			            C.this.m1("");
+			          }
+			        };
+			        final C.I i = _function;
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testBugNotAnEnclosingInstance_03() {
+		'''
+			class C {
+				def void m1(String s) {}
+				def void m2() {
+					new Object() {
+						def void m1(int i) {}
+						def void m2() {
+							val I i = new I() {
+								override void m1() {
+									m1(1)
+									m1('')
+									m1()
+								}
+							}
+						}
+					}
+				}
+				interface I {
+					def void m1()
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public interface I {
+			    public abstract void m1();
+			  }
+			  
+			  public void m1(final String s) {
+			  }
+			  
+			  public void m2() {
+			    abstract class __C_1 {
+			      final __C_1 _this__C_1 = this;
+			      
+			      public abstract void m1(final int i);
+			      
+			      public abstract void m2();
+			    }
+			    
+			    new __C_1() {
+			      public void m1(final int i) {
+			      }
+			      
+			      public void m2() {
+			        final C.I i = new C.I() {
+			          public void m1() {
+			            _this__C_1.m1(1);
+			            C.this.m1("");
+			            this.m1();
+			          }
+			        };
+			      }
+			    };
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testBugNotAnEnclosingInstance_04() {
+		'''
+			class C {
+				def void m1(String s) {}
+				def void m2() {
+					new D() {
+						def void m2() {
+							val I i = [
+								self.m1(1)
+								
+								m1(1)
+								this.m1(1)
+								m1('')
+								C.this.m1('')
+								
+								m2()
+								this.m2()
+								C.this.m2
+							]
+						}
+					}
+				}
+				interface I {
+					def void m1(int i)
+				}
+				static class D {
+					def void m1(int i) {}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public interface I {
+			    public abstract void m1(final int i);
+			  }
+			  
+			  public static class D {
+			    public void m1(final int i) {
+			    }
+			  }
+			  
+			  public void m1(final String s) {
+			  }
+			  
+			  public void m2() {
+			    abstract class __C_1 extends C.D {
+			      final __C_1 _this__C_1 = this;
+			      
+			      public abstract void m2();
+			    }
+			    
+			    new __C_1() {
+			      public void m2() {
+			        final C.I _function = new C.I() {
+			          public void m1(final int it) {
+			            this.m1(1);
+			            _this__C_1.m1(1);
+			            _this__C_1.m1(1);
+			            C.this.m1("");
+			            C.this.m1("");
+			            _this__C_1.m2();
+			            _this__C_1.m2();
+			            C.this.m2();
+			          }
+			        };
+			        final C.I i = _function;
+			      }
+			    };
+			  }
+			}
+		''')
+	}
 }
