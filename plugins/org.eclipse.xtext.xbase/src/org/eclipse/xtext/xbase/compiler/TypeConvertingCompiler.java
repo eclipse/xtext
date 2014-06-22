@@ -330,16 +330,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		if (b.hasObject("this") && !isAlreadyInALambda) {
 			Object element = b.getObject("this");
 			if (element instanceof JvmType) {
-				final String proposedName = ((JvmType) element).getSimpleName()+".this";
-				if (!b.hasObject(proposedName)) {
-					b.declareSyntheticVariable(element, proposedName);
-					if (b.hasObject("super")) {
-						Object superElement = b.getObject("super");
-						if (superElement instanceof JvmType) {
-							b.declareSyntheticVariable(superElement, ((JvmType) element).getSimpleName()+".super");
-						}
-					}
-				}
+				doReassignThisInClosure(b, (JvmType) element);
 			} else {
 				registerClosureAsThis = false;
 			}
@@ -350,6 +341,19 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		}
 		if (registerClosureAsThis) {
 			b.declareVariable(rawClosureType, "this");
+		}
+	}
+
+	protected void doReassignThisInClosure(final ITreeAppendable b, JvmType prevType) {
+		final String proposedName = prevType.getSimpleName()+".this";
+		if (!b.hasObject(proposedName)) {
+			b.declareSyntheticVariable(prevType, proposedName);
+			if (b.hasObject("super")) {
+				Object superElement = b.getObject("super");
+				if (superElement instanceof JvmType) {
+					b.declareSyntheticVariable(superElement, prevType.getSimpleName()+".super");
+				}
+			}
 		}
 	}
 
