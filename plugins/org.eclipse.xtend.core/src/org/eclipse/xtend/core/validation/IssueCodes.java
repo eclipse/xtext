@@ -96,4 +96,6 @@ public final class IssueCodes {
 	public static final String API_TYPE_INFERENCE = ISSUE_CODE_PREFIX +  "api_type_inference";
 	
 	public static final String IMPLICIT_RETURN = ISSUE_CODE_PREFIX +  "implicit_return";
+	
+	public static final String INVALID_SUPER_CALL = ISSUE_CODE_PREFIX +  "invalid_super_call";
 }

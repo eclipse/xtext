@@ -1841,6 +1841,24 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		});
 	}
 	
+	@Check
+	protected void checkSuperCallToLocalClassFromClosure(final XFeatureCall featureCall) {
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		if (feature instanceof JvmType && featureCall.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+			AnonymousClass anon = EcoreUtil2.getContainerOfType(featureCall, AnonymousClass.class);
+			if (anon != null) {
+				JvmIdentifiableElement logicalContainer = getLogicalContainerProvider().getNearestLogicalContainer(featureCall);
+				JvmDeclaredType declaringType = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
+				if (declaringType != feature && declaringType.isLocal() && IFeatureNames.SUPER.getFirstSegment().equals(featureCall.getConcreteSyntaxFeatureName())) {
+					XClosure closure = EcoreUtil2.getContainerOfType(featureCall, XClosure.class);
+					if (closure != null && EcoreUtil.isAncestor(anon, closure)) {
+						error("Cannot call super of an anonymous class from a lambda expression.", featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IssueCodes.INVALID_SUPER_CALL);
+					}
+				}
+			}
+		}
+	}
+	
 	@Override
 	protected boolean isLocalClassSemantics(EObject object) {
 		return super.isLocalClassSemantics(object) || (object instanceof XtendMember && !(object instanceof AnonymousClass));

@@ -1555,6 +1555,11 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("abstract class __Foo_1 implements Runnable {");
     _builder_1.newLine();
     _builder_1.append("      ");
+    _builder_1.append("final __Foo_1 _this__Foo_1 = this;");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.newLine();
+    _builder_1.append("      ");
     _builder_1.append("String x;");
     _builder_1.newLine();
     _builder_1.append("    ");
@@ -1578,7 +1583,7 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public String toString() {");
     _builder_1.newLine();
     _builder_1.append("            ");
-    _builder_1.append("return x;");
+    _builder_1.append("return _this__Foo_1.x;");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("}");

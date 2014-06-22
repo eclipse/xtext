@@ -1658,4 +1658,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_NO_VARIABLE);
 		}
 	}
+	
+	protected ILogicalContainerProvider getLogicalContainerProvider() {
+		return logicalContainerProvider;
+	}
 }

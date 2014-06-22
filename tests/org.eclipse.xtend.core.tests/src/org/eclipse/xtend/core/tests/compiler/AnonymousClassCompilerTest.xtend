@@ -657,6 +657,8 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			  
 			  public void foo() {
 			    abstract class __Foo_1 implements Runnable {
+			      final __Foo_1 _this__Foo_1 = this;
+			      
 			      String x;
 			    }
 			    
@@ -665,9 +667,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			      public void run() {
 			        new Object() {
 			          public String toString() {
-ллл			          	we may not qualify x here with __Foo_1.this.x
-ллл			          	since that would be invalid Java code
-			            return x;
+			            return _this__Foo_1.x;
 			          }
 			        };
 			      }
