@@ -9,12 +9,12 @@
 package org.eclipse.xtext.linking.impl;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -57,7 +57,7 @@ public class Linker extends AbstractCleaningLinker {
 		producer.setNode(node);
 		setDefaultValues(obj, handledReferences, producer);
 	}
-
+	
 	private void ensureLinked(EObject obj, IDiagnosticProducer producer, ICompositeNode node,
 			Set<EReference> handledReferences) {
 		for(INode abstractNode = node.getFirstChild(); abstractNode != null; abstractNode = abstractNode.getNextSibling()) {
@@ -228,10 +228,15 @@ public class Linker extends AbstractCleaningLinker {
 	}
 
 	protected void ensureModelLinked(EObject model, final IDiagnosticProducer producer) {
-		ensureLinked(model, producer);
-		final Iterator<EObject> allContents = model.eAllContents();
-		while (allContents.hasNext())
-			ensureLinked(allContents.next(), producer);
+		boolean clearAllReferencesRequired = isClearAllReferencesRequired(model.eResource());
+		TreeIterator<EObject> iterator = getAllLinkableContents(model);
+		while(iterator.hasNext()) {
+			EObject next = iterator.next();
+			if (clearAllReferencesRequired) {
+				clearReferences(next);
+			}
+			ensureLinked(next, producer);
+		}
 	}
 
 	public void setDiagnosticMessageProvider(ILinkingDiagnosticMessageProvider.Extended diagnosticMessageProvider) {
