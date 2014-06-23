@@ -356,9 +356,7 @@ public class FeatureScopes implements IFeatureNames {
 		}
 		IScope result = parent;
 		if (firstArgument == null) {
-			if (session.isInstanceContext()) {
-				result = createDynamicExtensionsScope(THIS, featureCall, session, resolvedTypes, result);
-			}
+			result = createDynamicExtensionsScope(THIS, featureCall, session, resolvedTypes, result);
 			result = createDynamicExtensionsScope(IT, featureCall, session, resolvedTypes, result);
 			return result;
 		} else {
@@ -372,6 +370,9 @@ public class FeatureScopes implements IFeatureNames {
 		IEObjectDescription firstArgumentDescription = session.getLocalElement(implicitFirstArgumentName);
 		if (firstArgumentDescription != null) {
 			JvmIdentifiableElement feature = (JvmIdentifiableElement) firstArgumentDescription.getEObjectOrProxy();
+			if (feature instanceof JvmType && THIS.equals(implicitFirstArgumentName) && !session.isInstanceContext()) {
+				return parent;
+			}
 			LightweightTypeReference type = resolvedTypes.getActualType(feature);
 			if (type != null && !type.isUnknown()) {
 				XFeatureCall implicitArgument = xbaseFactory.createXFeatureCall();
@@ -408,16 +409,20 @@ public class FeatureScopes implements IFeatureNames {
 	
 	protected IScope createImplicitFeatureCallScope(EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		IScope result = parent;
-		result = createImplicitFeatureCallScope(THIS, featureCall, session, resolvedTypes, result, session.isInstanceContext());
-		result = createImplicitFeatureCallScope(IT, featureCall, session, resolvedTypes, result, true);
+		result = createImplicitFeatureCallScope(THIS, featureCall, session, resolvedTypes, result);
+		result = createImplicitFeatureCallScope(IT, featureCall, session, resolvedTypes, result);
 		return result;
 	}
 
 	protected IScope createImplicitFeatureCallScope(QualifiedName implicitName, EObject featureCall,
-			IFeatureScopeSession session, IResolvedTypes resolvedTypes, IScope parent, boolean validStaticScope) {
+			IFeatureScopeSession session, IResolvedTypes resolvedTypes, IScope parent) {
 		IEObjectDescription thisDescription = session.getLocalElement(implicitName);
 		if (thisDescription != null) {
 			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
+			boolean validStaticScope = true;
+			if (thisElement instanceof JvmType && THIS.equals(implicitName) && !session.isInstanceContext()) {
+				validStaticScope = false;
+			}
 			LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
 			if (type !=null && !type.isUnknown()) {
 				XFeatureCall implicitReceiver = xbaseFactory.createXFeatureCall();
