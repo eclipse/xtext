@@ -18,6 +18,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -117,6 +118,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
     return _xblockexpression;
   }
   
+  @Synthetic
   public String getQualifiedName(final EObject it, final EObject context) {
     if (it != null
          && context != null) {

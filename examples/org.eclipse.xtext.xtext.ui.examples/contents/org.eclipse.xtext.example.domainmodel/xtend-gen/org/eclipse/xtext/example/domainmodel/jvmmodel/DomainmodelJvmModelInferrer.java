@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 
 @SuppressWarnings("all")
 public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
@@ -148,6 +149,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
     _accept.initializeLater(_function);
   }
   
+  @Synthetic
   public void infer(final EObject entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     if (entity instanceof Entity) {
       _infer((Entity)entity, acceptor, prelinkingPhase);

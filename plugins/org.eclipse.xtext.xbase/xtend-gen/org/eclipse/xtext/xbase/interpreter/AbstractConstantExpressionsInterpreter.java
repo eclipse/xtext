@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.interpreter.Context;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -261,6 +262,7 @@ public class AbstractConstantExpressionsInterpreter {
     return _node.getText();
   }
   
+  @Synthetic
   public Object internalEvaluate(final XExpression it, final Context ctx) {
     if (it instanceof XBinaryOperation) {
       return _internalEvaluate((XBinaryOperation)it, ctx);

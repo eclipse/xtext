@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 
 /**
  * @since 2.7
@@ -164,6 +165,7 @@ public class GetterProcessor implements TransformationParticipant<MutableMemberD
     IterableExtensions.forEach(_filter, _function_1);
   }
   
+  @Synthetic
   protected void transform(final MutableMemberDeclaration it, final TransformationContext context) {
     if (it instanceof MutableClassDeclaration) {
       _transform((MutableClassDeclaration)it, context);

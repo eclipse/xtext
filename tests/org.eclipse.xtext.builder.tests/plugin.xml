@@ -7,7 +7,7 @@
     <package 
        uri = "http://eclipse.org/xtext/builderTestLanguage" 
        class = "org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage"
-       genModel = "org/eclipse/xtext/builder/tests/BuilderTestLanguage.genmodel" /> 
+       genModel = "model/generated/BuilderTestLanguage.genmodel" /> 
 	
   </extension>
 

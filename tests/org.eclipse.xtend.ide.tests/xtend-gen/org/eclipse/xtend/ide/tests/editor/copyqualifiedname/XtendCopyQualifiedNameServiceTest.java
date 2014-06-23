@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -1041,6 +1042,7 @@ public class XtendCopyQualifiedNameServiceTest extends AbstractXtendUITestCase {
     return _instance.get(_project);
   }
   
+  @Synthetic
   public void assertCopyQualifiedName(final EObject featureCall, final String expectedQualifiedName) {
     if (featureCall instanceof XAbstractFeatureCall) {
       _assertCopyQualifiedName((XAbstractFeatureCall)featureCall, expectedQualifiedName);
