@@ -352,7 +352,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         newState.register(new DefaultResourceDescriptionDelta(oldState.getResourceDescription(uri), copiedDescription));
                         buildData.queueURI(uri);
                     }
-                } catch (final WrappedException ex) {
+                } catch (final RuntimeException ex) {
                     if(ex instanceof LoadOperationException) {
                         uri = ((LoadOperationException) ex).getUri();
                     }
