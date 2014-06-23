@@ -9,6 +9,7 @@ package example4;
 
 import example4.ContentNode;
 import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -16,16 +17,13 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 public class A extends ContentNode {
   private final String _href;
   
-  public String getHref() {
-    return this._href;
-  }
-  
   public A(final String href) {
     super();
     this._href = href;
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
@@ -34,6 +32,7 @@ public class A extends ContentNode {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -53,8 +52,14 @@ public class A extends ContentNode {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public String getHref() {
+    return this._href;
   }
 }

@@ -11,6 +11,7 @@ package example6;
 
 import java.util.Set;
 import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -18,33 +19,13 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 public class Movie {
   private final String _title;
   
-  public String getTitle() {
-    return this._title;
-  }
-  
   private final int _year;
-  
-  public int getYear() {
-    return this._year;
-  }
   
   private final double _rating;
   
-  public double getRating() {
-    return this._rating;
-  }
-  
   private final long _numberOfVotes;
   
-  public long getNumberOfVotes() {
-    return this._numberOfVotes;
-  }
-  
   private final Set<String> _categories;
-  
-  public Set<String> getCategories() {
-    return this._categories;
-  }
   
   public Movie(final String title, final int year, final double rating, final long numberOfVotes, final Set<String> categories) {
     super();
@@ -56,6 +37,7 @@ public class Movie {
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -68,6 +50,7 @@ public class Movie {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -84,7 +67,7 @@ public class Movie {
     if (other._year != this._year)
       return false;
     if (Double.doubleToLongBits(other._rating) != Double.doubleToLongBits(this._rating))
-      return false;
+      return false; 
     if (other._numberOfVotes != this._numberOfVotes)
       return false;
     if (this._categories == null) {
@@ -96,8 +79,34 @@ public class Movie {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public String getTitle() {
+    return this._title;
+  }
+  
+  @Pure
+  public int getYear() {
+    return this._year;
+  }
+  
+  @Pure
+  public double getRating() {
+    return this._rating;
+  }
+  
+  @Pure
+  public long getNumberOfVotes() {
+    return this._numberOfVotes;
+  }
+  
+  @Pure
+  public Set<String> getCategories() {
+    return this._categories;
   }
 }

@@ -14,16 +14,13 @@ import example5.Time;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
 @SuppressWarnings("all")
 public class Speed {
   private final BigDecimal _mmPerMsec;
-  
-  public BigDecimal getMmPerMsec() {
-    return this._mmPerMsec;
-  }
   
   public static Speed operator_divide(final Distance d, final Time t) {
     BigDecimal _mm = d.getMm();
@@ -38,6 +35,7 @@ public class Speed {
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -46,6 +44,7 @@ public class Speed {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -63,8 +62,14 @@ public class Speed {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public BigDecimal getMmPerMsec() {
+    return this._mmPerMsec;
   }
 }

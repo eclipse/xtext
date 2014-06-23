@@ -10,16 +10,13 @@ package example4;
 import java.util.ArrayList;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
 @SuppressWarnings("all")
 public class Node {
   private final ArrayList<Node> _contents = CollectionLiterals.<Node>newArrayList();
-  
-  public ArrayList<Node> getContents() {
-    return this._contents;
-  }
   
   public String tagName() {
     Class<? extends Node> _class = this.getClass();
@@ -32,6 +29,7 @@ public class Node {
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -40,6 +38,7 @@ public class Node {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -57,8 +56,14 @@ public class Node {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public ArrayList<Node> getContents() {
+    return this._contents;
   }
 }

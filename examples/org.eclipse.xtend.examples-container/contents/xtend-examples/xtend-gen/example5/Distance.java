@@ -12,16 +12,13 @@ package example5;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import org.eclipse.xtend.lib.Data;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
 @SuppressWarnings("all")
 public class Distance {
   private final BigDecimal _mm;
-  
-  public BigDecimal getMm() {
-    return this._mm;
-  }
   
   public Distance operator_plus(final Distance other) {
     BigDecimal _mm = this.getMm();
@@ -74,6 +71,7 @@ public class Distance {
   }
   
   @Override
+  @Pure
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -82,6 +80,7 @@ public class Distance {
   }
   
   @Override
+  @Pure
   public boolean equals(final Object obj) {
     if (this == obj)
       return true;
@@ -99,8 +98,14 @@ public class Distance {
   }
   
   @Override
+  @Pure
   public String toString() {
     String result = new ToStringHelper().toString(this);
     return result;
+  }
+  
+  @Pure
+  public BigDecimal getMm() {
+    return this._mm;
   }
 }
