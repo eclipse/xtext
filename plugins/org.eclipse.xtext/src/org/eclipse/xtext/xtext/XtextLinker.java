@@ -176,11 +176,18 @@ public class XtextLinker extends Linker {
 		return transformer;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		discardGeneratedPackages(model);
+		clearAllReferences(model);
 		super.beforeModelLinked(model, diagnosticsConsumer);
 		cache.getOrCreate(model.eResource()).ignoreNotifications();
+	}
+	
+	@Override
+	protected boolean isClearAllReferencesRequired(Resource resource) {
+		return false;
 	}
 
 	void discardGeneratedPackages(EObject root) {

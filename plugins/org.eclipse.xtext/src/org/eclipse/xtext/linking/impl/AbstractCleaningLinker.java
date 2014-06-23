@@ -87,7 +87,6 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 	 */
 	@Deprecated
 	protected void clearAllReferences(EObject model) {
-		clearReferences(model);
 		final Iterator<EObject> iter = getAllLinkableContents(model);
 		while (iter.hasNext())
 			clearReferences(iter.next());
