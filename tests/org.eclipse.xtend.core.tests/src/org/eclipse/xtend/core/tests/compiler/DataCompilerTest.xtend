@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.tests.compiler
 import com.google.inject.Inject
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
-import org.junit.Ignore
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -355,7 +355,6 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 	
 	
 	
-	@Ignore
 	@Test
 	def void testWithCreateExtension() {
 		val text = '''
