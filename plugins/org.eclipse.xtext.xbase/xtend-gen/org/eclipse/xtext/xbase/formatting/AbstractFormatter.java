@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.formatting.TextReplacement;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 
 @SuppressWarnings("all")
 public abstract class AbstractFormatter implements IBasicFormatter {
@@ -90,6 +91,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
   protected void _format(final EObject expr, final FormattableDocument format) {
   }
   
+  @Synthetic
   protected void format(final EObject expr, final FormattableDocument format) {
     if (expr != null) {
       _format(expr, format);

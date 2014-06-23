@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 
 /**
  * @since 2.7
@@ -156,6 +157,7 @@ public class WitherProcessor implements TransformationParticipant<MutableMemberD
     }
   }
   
+  @Synthetic
   protected void transform(final MutableMemberDeclaration cls, final TransformationContext context) {
     if (cls instanceof MutableClassDeclaration) {
       _transform((MutableClassDeclaration)cls, context);

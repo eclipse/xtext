@@ -71,6 +71,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
@@ -3592,6 +3593,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     format.operator_add(_prepend_1);
   }
   
+  @Synthetic
   protected void format(final EObject ref, final FormattableDocument document) {
     if (ref instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)ref, document);
@@ -3695,6 +3697,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     }
   }
   
+  @Synthetic
   protected boolean isMultiParamInOwnLine(final XExpression fc, final FormattableDocument doc) {
     if (fc instanceof XFeatureCall) {
       return _isMultiParamInOwnLine((XFeatureCall)fc, doc);

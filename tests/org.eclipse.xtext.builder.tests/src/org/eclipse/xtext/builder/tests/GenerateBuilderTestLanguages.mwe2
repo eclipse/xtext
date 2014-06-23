@@ -35,7 +35,7 @@ Workflow {
 		activator = "org.eclipse.xtext.builder.tests.Activator" 
 		
 		language = auto-inject {
-			fragment = ecore.EcoreGeneratorFragment {
+			fragment = ecore.EMFGeneratorFragment {
 				emfRuntimeVersion = "2.9"
 			}
 			fragment = grammarAccess.GrammarAccessFragment {}

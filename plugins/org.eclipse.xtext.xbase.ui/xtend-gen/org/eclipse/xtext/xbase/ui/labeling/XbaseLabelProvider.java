@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -247,6 +248,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     return this.typeResolver;
   }
   
+  @Synthetic
   protected ImageDescriptor imageDescriptor(final Object constructor) {
     if (constructor instanceof JvmConstructor) {
       return _imageDescriptor((JvmConstructor)constructor);

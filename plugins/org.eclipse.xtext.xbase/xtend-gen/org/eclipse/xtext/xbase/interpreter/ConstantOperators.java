@@ -17,6 +17,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -2564,6 +2565,7 @@ public class ConstantOperators {
     return (_intValue != _intValue_1);
   }
   
+  @Synthetic
   public Object minus(final Object e) {
     if (e instanceof Byte) {
       return _minus((Byte)e);
@@ -2585,6 +2587,7 @@ public class ConstantOperators {
     }
   }
   
+  @Synthetic
   public Object plus(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -2706,6 +2709,7 @@ public class ConstantOperators {
     }
   }
   
+  @Synthetic
   public boolean lessThan(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -2824,6 +2828,7 @@ public class ConstantOperators {
     }
   }
   
+  @Synthetic
   public Object minus(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -2942,6 +2947,7 @@ public class ConstantOperators {
     }
   }
   
+  @Synthetic
   public boolean greaterThan(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3060,6 +3066,7 @@ public class ConstantOperators {
     }
   }
   
+  @Synthetic
   public Object modulo(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3178,6 +3185,7 @@ public class ConstantOperators {
     }
   }
   
+  @Synthetic
   public Object multiply(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3296,6 +3304,7 @@ public class ConstantOperators {
     }
   }
   
+  @Synthetic
   public Object divide(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3414,6 +3423,7 @@ public class ConstantOperators {
     }
   }
   
+  @Synthetic
   public boolean same(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3532,6 +3542,7 @@ public class ConstantOperators {
     }
   }
   
+  @Synthetic
   public boolean lessEquals(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3650,6 +3661,7 @@ public class ConstantOperators {
     }
   }
   
+  @Synthetic
   public boolean greaterEquals(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {
@@ -3768,6 +3780,7 @@ public class ConstantOperators {
     }
   }
   
+  @Synthetic
   public boolean notSame(final Object left, final Object right) {
     if (left instanceof Byte
          && right instanceof Byte) {

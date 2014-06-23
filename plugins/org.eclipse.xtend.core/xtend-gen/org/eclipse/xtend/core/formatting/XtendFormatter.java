@@ -78,6 +78,7 @@ import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -970,6 +971,7 @@ public class XtendFormatter extends XbaseFormatter2 {
     document.operator_add(_append_11);
   }
   
+  @Synthetic
   protected void format(final EObject anonymousClass, final FormattableDocument format) {
     if (anonymousClass instanceof AnonymousClass) {
       _format((AnonymousClass)anonymousClass, format);

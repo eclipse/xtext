@@ -39,6 +39,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
@@ -281,6 +282,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
     return ((JvmTypeReference)_xblockexpression);
   }
   
+  @Synthetic
   protected ImageDescriptor imageDescriptor(final Object operation) {
     if (operation instanceof JvmConstructor) {
       return _imageDescriptor((JvmConstructor)operation);
