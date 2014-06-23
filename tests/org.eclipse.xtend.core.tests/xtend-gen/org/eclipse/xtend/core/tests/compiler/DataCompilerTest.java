@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -896,7 +895,6 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     }
   }
   
-  @Ignore
   @Test
   public void testWithCreateExtension() {
     try {

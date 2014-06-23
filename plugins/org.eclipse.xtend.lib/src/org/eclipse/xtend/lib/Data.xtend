@@ -114,11 +114,11 @@ class DataProcessor extends AbstractClassProcessor {
 		}
 
 		def getDataFields(ClassDeclaration it) {
-			declaredFields.filter[!static]
+			declaredFields.filter[!static && isThePrimaryGeneratedJavaElement]
 		}
 
 		def getDataFields(MutableClassDeclaration it) {
-			declaredFields.filter[!static]
+			declaredFields.filter[!static && isThePrimaryGeneratedJavaElement]
 		}
 	}
 

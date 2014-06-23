@@ -143,133 +143,25 @@ class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> im
 }
 
 class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReferenceImplCustom> implements TypeReference {
-	@Property TypeReference equivalent
-	@Property LightweightTypeReference lightweightTypeReference
+	TypeReference equivalent
+	@Getter LightweightTypeReference lightweightTypeReference
+	
+	@Delegate
+	private def TypeReference getEquivalent(String methodName) {
+		if (getEquivalent == null) {
+			throw new UnsupportedOperationException("Cannot call method '"+methodName+"()' on a inferred type reference before the compilation phase. Check isInferred() before calling any methods.")
+		}
+		getEquivalent
+	}
 	
 	def TypeReference getEquivalent() {
-		if (_equivalent == null) {
+		if (equivalent == null) {
 			if (delegate.equivalentComputed) {
-				_lightweightTypeReference = compilationUnit.typeRefConverter.toLightweightReference(delegate)
-				_equivalent = 	compilationUnit.toTypeReference(_lightweightTypeReference)
+				lightweightTypeReference = compilationUnit.typeRefConverter.toLightweightReference(delegate)
+				equivalent = 	compilationUnit.toTypeReference(lightweightTypeReference)
 			}
 		}
-		_equivalent
-	}
-	
-	private def String message(String methodName) {
-		"Cannot call method '"+methodName+"' on a inferred type reference before the compilation phase. Check isInferred() before calling any methods."
-	}
-	
-	override getActualTypeArguments() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('getActualTypeArguments()'))
-		}
-		equivalent.actualTypeArguments
-	}
-	
-	override getArrayComponentType() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('getArrayComponentType()'))
-		}
-		equivalent.arrayComponentType
-	}
-	
-	override getLowerBound() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('getLowerBound()'))
-		}
-		equivalent.lowerBound
-	}
-	
-	override getName() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('getName()'))
-		}
-		equivalent.name
-	}
-	
-	override getPrimitiveIfWrapper() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('getPrimitiveIfWrapper()'))
-		}
-		equivalent.primitiveIfWrapper
-	}
-	
-	override getSimpleName() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('getSimpleName()'))
-		}
-		equivalent.simpleName
-	}
-	
-	override getType() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('getType()'))
-		}
-		equivalent.type
-	}
-	
-	override getUpperBound() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('getUpperBound()'))
-		}
-		equivalent.upperBound
-	}
-	
-	override getWrapperIfPrimitive() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('getWrapperIfPrimitive()'))
-		}
-		equivalent.wrapperIfPrimitive
-	}
-	
-	override isAnyType() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('isAnyType()'))
-		}
-		equivalent.anyType
-	}
-	
-	override isArray() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('isArray()'))
-		}
-		equivalent.array
-	}
-	
-	override isAssignableFrom(TypeReference typeReference) {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('isAssignableFrom()'))
-		}
-		equivalent.isAssignableFrom(typeReference)
-	}
-	
-	override isPrimitive() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('isPrimitive()'))
-		}
-		equivalent.primitive
-	}
-	
-	override isVoid() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('isVoid()'))
-		}
-		equivalent.isVoid
-	}
-	
-	override isWildCard() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('isWildCard()'))
-		}
-		equivalent.wildCard
-	}
-	
-	override isWrapper() {
-		if (equivalent == null) {
-			throw new UnsupportedOperationException(message('isWrapper()'))
-		}
-		equivalent.wrapper
+		equivalent
 	}
 	
 	override isInferred() {
