@@ -92,6 +92,8 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 	
 	XtendField getXtendField(JvmField jvmField);
 	
+	AnonymousClass getAnonymousClass(JvmDeclaredType type);
+	
 	@Singleton
 	static class Impl extends JvmModelAssociator implements IXtendJvmAssociations {
 
@@ -168,6 +170,13 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 			final EObject primarySourceElement = getPrimarySourceElement(jvmType);
 			if (primarySourceElement instanceof XtendClass) 
 				return (XtendClass) primarySourceElement;
+			return null;
+		}
+		
+		public AnonymousClass getAnonymousClass(JvmDeclaredType type) {
+			final EObject primarySourceElement = getPrimarySourceElement(type);
+			if (primarySourceElement instanceof AnonymousClass) 
+				return (AnonymousClass) primarySourceElement;
 			return null;
 		}
 

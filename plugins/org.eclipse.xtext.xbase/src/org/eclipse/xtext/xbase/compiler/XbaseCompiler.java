@@ -1528,7 +1528,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected ITreeAppendable toAnonymousClass(final XClosure closure, final ITreeAppendable b, LightweightTypeReference type) {
 		b.append("new ");
-		// TODO parameters in type arguments are safe to be a wildcard
 		b.append(type);
 		b.append("() {");
 		b.increaseIndentation();
