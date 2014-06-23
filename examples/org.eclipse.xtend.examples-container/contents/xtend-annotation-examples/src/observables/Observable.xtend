@@ -48,6 +48,7 @@ class ObservableCompilationParticipant extends AbstractClassProcessor {
 						_propertyChangeSupport.firePropertyChange("«fieldName»", _oldValue, «fieldName»);
 					''']
 			]
+			f.markAsRead
 		}
 
 		// generated field to hold listeners, addPropertyChangeListener() and removePropertyChangeListener() 
