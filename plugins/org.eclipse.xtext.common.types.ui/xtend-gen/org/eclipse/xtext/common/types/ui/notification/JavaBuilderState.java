@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 
 /**
  * @since 2.5
@@ -386,6 +387,7 @@ public class JavaBuilderState {
     }
   }
   
+  @Synthetic
   public LinkedHashSet<String> getQualifiedTypeNames(final Object it) {
     if (it instanceof ICompilationUnit) {
       return _getQualifiedTypeNames((ICompilationUnit)it);

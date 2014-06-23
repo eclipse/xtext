@@ -7,6 +7,7 @@ import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot;
 
 /**
@@ -52,6 +53,7 @@ public class XImportSectionTestLangJvmModelInferrer extends AbstractModelInferre
   protected void _infer(final ImportSectionTestLanguageRoot element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
   }
   
+  @Synthetic
   public void infer(final EObject element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
     if (element instanceof ImportSectionTestLanguageRoot) {
       _infer((ImportSectionTestLanguageRoot)element, acceptor, isPreIndexingPhase);

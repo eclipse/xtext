@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.validation.ConstantExpressionValidator;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xbase.validation.NotResolvedFeatureException;
@@ -82,6 +83,7 @@ public class AnnotationValueValidator extends ConstantExpressionValidator {
     return super.isConstant(expression);
   }
   
+  @Synthetic
   protected boolean isValidAnnotationValue(final XExpression expression) {
     if (expression instanceof XListLiteral) {
       return _isValidAnnotationValue((XListLiteral)expression);

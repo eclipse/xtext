@@ -42,6 +42,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 
 /**
  * cases to distinguish:
@@ -422,6 +423,7 @@ public class RichStringFormatter {
     doc.operator_add(_surround_5);
   }
   
+  @Synthetic
   protected void fmt(final Procedure2<? super EObject, ? super FormattableDocument> formatter, final FormattableDocument doc, final EObject expr) {
     if (formatter != null
          && expr instanceof RichString) {

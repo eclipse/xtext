@@ -79,6 +79,7 @@ public class ObservableCompilationParticipant extends AbstractClassProcessor {
           }
         };
         clazz.addMethod(_plus_1, _function_1);
+        f.markAsRead();
       }
     }
     final TypeReference changeSupportType = context.newTypeReference(PropertyChangeSupport.class);

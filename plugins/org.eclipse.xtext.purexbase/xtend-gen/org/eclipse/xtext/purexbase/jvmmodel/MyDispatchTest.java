@@ -2,6 +2,7 @@ package org.eclipse.xtext.purexbase.jvmmodel;
 
 import java.util.Arrays;
 import org.eclipse.xtext.purexbase.jvmmodel.CharSequenceExtension;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 
 @SuppressWarnings("all")
 public class MyDispatchTest implements CharSequenceExtension {
@@ -17,6 +18,7 @@ public class MyDispatchTest implements CharSequenceExtension {
     return null;
   }
   
+  @Synthetic
   public String operator_plus(final CharSequence a, final CharSequence b) {
     if (a instanceof StringBuilder) {
       return _operator_plus((StringBuilder)a, b);

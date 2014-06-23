@@ -113,6 +113,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
@@ -1958,6 +1959,7 @@ public class JvmModelGenerator implements IGenerator {
     return this.jvmModelAssociations.getSourceElements(jvmElement);
   }
   
+  @Synthetic
   public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) {
     if (type instanceof JvmDeclaredType) {
       _internalDoGenerate((JvmDeclaredType)type, fsa);
@@ -1971,6 +1973,7 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
+  @Synthetic
   public ITreeAppendable generateBody(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     if (it instanceof JvmAnnotationType) {
       return _generateBody((JvmAnnotationType)it, appendable, config);
@@ -1984,6 +1987,7 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
+  @Synthetic
   public ITreeAppendable generateModifier(final JvmMember it, final ITreeAppendable appendable, final GeneratorConfig config) {
     if (it instanceof JvmConstructor) {
       return _generateModifier((JvmConstructor)it, appendable, config);
@@ -2001,6 +2005,7 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
+  @Synthetic
   public ITreeAppendable generateMember(final JvmMember it, final ITreeAppendable appendable, final GeneratorConfig config) {
     if (it instanceof JvmConstructor) {
       return _generateMember((JvmConstructor)it, appendable, config);
@@ -2018,6 +2023,7 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
+  @Synthetic
   public void toJavaLiteral(final JvmAnnotationValue value, final ITreeAppendable appendable, final GeneratorConfig config) {
     if (value instanceof JvmAnnotationAnnotationValue) {
       _toJavaLiteral((JvmAnnotationAnnotationValue)value, appendable, config);
@@ -2064,6 +2070,7 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
+  @Synthetic
   public Iterable<JvmMember> getMembersToBeCompiled(final JvmDeclaredType type) {
     if (type instanceof JvmEnumerationType) {
       return _getMembersToBeCompiled((JvmEnumerationType)type);

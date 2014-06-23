@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Synthetic;
 
 /**
  * <p>Infers a JVM model from the source model.</p>
@@ -67,6 +68,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
     return s.substring(0, _minus);
   }
   
+  @Synthetic
   public void infer(final EObject m, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     if (m instanceof Model) {
       _infer((Model)m, acceptor, prelinkingPhase);
