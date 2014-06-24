@@ -3,8 +3,6 @@
 */
 package org.eclipse.xtext.xbase.ui.outline;
 
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 
 /**
@@ -12,11 +10,4 @@ import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
  * 
  */
 public class XbaseOutlineTreeProvider extends DefaultOutlineTreeProvider {
-	
-	@Override
-	public IOutlineNode createRoot(IXtextDocument document) {
-		// TODO Auto-generated method stub
-		return super.createRoot(document);
-	}
-	
 }

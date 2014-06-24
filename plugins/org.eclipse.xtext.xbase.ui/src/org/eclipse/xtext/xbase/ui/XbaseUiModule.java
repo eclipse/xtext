@@ -59,6 +59,7 @@ public class XbaseUiModule extends org.eclipse.xtext.xbase.ui.AbstractXbaseUiMod
 		return XbaseCopyQualifiedNameService.class;
 	}
 	
+	@Override
 	public Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {
 		return OptimizingFeatureScopeTrackerProvider.class;
 	}

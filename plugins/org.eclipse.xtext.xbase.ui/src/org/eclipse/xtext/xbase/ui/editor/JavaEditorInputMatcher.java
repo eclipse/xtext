@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.ui.editor;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.jdt.core.ITypeRoot;
@@ -22,7 +21,6 @@ import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.xbase.ui.editor.StacktraceBasedEditorDecider.Decision;
 
