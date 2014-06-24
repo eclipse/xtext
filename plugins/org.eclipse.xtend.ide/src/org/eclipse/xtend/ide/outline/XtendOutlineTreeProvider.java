@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.ui.JavaElementImageDescriptor;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -26,6 +27,7 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.labeling.XtendImages;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -72,18 +74,15 @@ public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider impl
 	@Inject
 	private JvmTypeExtensions typeExtensions;
 
-	@Inject 
-	private XtendOutlineNodeFactory factory;
-	
 	@Override
 	protected void internalCreateChildren(DocumentRootNode parentNode, EObject modelElement) {
 		if(modelElement instanceof XtendFile) {
 			XtendFile xtendFile = (XtendFile) modelElement;
 			if (xtendFile.getPackage() != null)
-				factory.createEStructuralFeatureNode(parentNode, xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE,
+				getOutlineNodeFactory().createEStructuralFeatureNode(parentNode, xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE,
 						images.forPackage(), xtendFile.getPackage(), true);
 			if (xtendFile.getImportSection() != null && !xtendFile.getImportSection().getImportDeclarations().isEmpty())
-				factory.createEStructuralFeatureNode(parentNode, xtendFile.getImportSection(),
+				getOutlineNodeFactory().createEStructuralFeatureNode(parentNode, xtendFile.getImportSection(),
 						XtypePackage.Literals.XIMPORT_SECTION__IMPORT_DECLARATIONS, images.forImportContainer(),
 						"import declarations", false);
 			for (XtendTypeDeclaration xtendType : xtendFile.getXtendTypes()) {
@@ -157,8 +156,21 @@ public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider impl
 		for (JvmFeature feature : filter(inferredType.getMembers(), JvmFeature.class)) {
 			if (!processedFeatures.contains(feature)) {
 				EObject primarySourceElement = associations.getPrimarySourceElement(feature);
-				createNodeForFeature(parentNode, baseType, feature,
+				if (feature instanceof JvmConstructor && feature.getDeclaringType().isLocal()) {
+					continue;
+				}
+				XtendFeatureNode featureNode = createNodeForFeature(parentNode, baseType, feature,
 						primarySourceElement != null ? primarySourceElement : feature, inheritanceDepth);
+				EList<JvmGenericType> localClasses = feature.getLocalClasses();
+				if (!localClasses.isEmpty()) {
+					for (JvmGenericType jvmGenericType : localClasses) {
+						Set<EObject> sourceElements = associations.getSourceElements(jvmGenericType);
+						for (EObject eObject : sourceElements) {
+							if(eObject instanceof XtendTypeDeclaration)
+								createNodeForType(featureNode, (XtendTypeDeclaration) eObject);
+						}
+					}
+				}
 				addJvmFeature(processedFeatures, feature);
 			}
 		}
@@ -225,11 +237,11 @@ public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider impl
 						text.toString());
 				label.append(new StyledString(" - " + jvmFeature.getDeclaringType().getIdentifier(),
 						StyledString.QUALIFIER_STYLER));
-				return factory.createXtendFeatureNode(parentNode, jvmFeature, image, label, true, synthetic, inheritanceDepth);
+				return getOutlineNodeFactory().createXtendFeatureNode(parentNode, jvmFeature, image, label, true, synthetic, inheritanceDepth);
 			}
 			return null;
 		} else {
-			return factory.createXtendFeatureNode(parentNode, semanticFeature, image, text, true, synthetic, inheritanceDepth);
+			return getOutlineNodeFactory().createXtendFeatureNode(parentNode, semanticFeature, image, text, true, synthetic, inheritanceDepth);
 		}
 	}
 
@@ -259,5 +271,10 @@ public class XtendOutlineTreeProvider extends BackgroundOutlineTreeProvider impl
 			return ((XtendTypeDeclaration) modelElement).getMembers().isEmpty();
 		}
 		return super.isLeaf(modelElement);
+	}
+
+	@Override
+	protected XtendOutlineNodeFactory getOutlineNodeFactory() {
+		return (XtendOutlineNodeFactory) super.getOutlineNodeFactory();
 	}
 }

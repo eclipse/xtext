@@ -14,6 +14,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -25,6 +26,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.labeling.XtendImages;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -33,12 +35,14 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
@@ -118,6 +122,14 @@ public class XtendLabelProvider extends XbaseLabelProvider {
     return this.images.forOperation(_visibility, _get);
   }
   
+  protected ImageDescriptor _imageDescriptor(final AnonymousClass element) {
+    JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
+    JvmVisibility _visibility = _inferredType.getVisibility();
+    JvmGenericType _inferredType_1 = this._iXtendJvmAssociations.getInferredType(element);
+    int _get = this.adornments.get(_inferredType_1);
+    return this.images.forClass(_visibility, _get);
+  }
+  
   protected ImageDescriptor _imageDescriptor(final JvmOperation operation) {
     ImageDescriptor _xifexpression = null;
     boolean _isDispatcherFunction = this._dispatchHelper.isDispatcherFunction(operation);
@@ -193,6 +205,33 @@ public class XtendLabelProvider extends XbaseLabelProvider {
     return element.getName();
   }
   
+  protected String text(final AnonymousClass element) {
+    JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
+    return this.text(_inferredType);
+  }
+  
+  protected String text(final JvmGenericType element) {
+    String _xblockexpression = null;
+    {
+      final boolean local = element.isLocal();
+      if (local) {
+        EList<JvmTypeReference> _superTypes = element.getSuperTypes();
+        JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_superTypes);
+        final JvmType supertype = _head.getType();
+        if ((supertype instanceof JvmGenericType)) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("new () ");
+          String _text = this.text(((JvmGenericType)supertype));
+          _builder.append(_text, "");
+          _builder.append(" {...}");
+          return _builder.toString();
+        }
+      }
+      _xblockexpression = element.getSimpleName();
+    }
+    return _xblockexpression;
+  }
+  
   protected String text(final XtendConstructor element) {
     JvmConstructor _inferredConstructor = this._iXtendJvmAssociations.getInferredConstructor(element);
     String _parameters = this.uiStrings.parameters(_inferredConstructor);
@@ -234,7 +273,8 @@ public class XtendLabelProvider extends XbaseLabelProvider {
       if (_and) {
         JvmTypeReference _type = element.getType();
         String _referenceToString = this.uiStrings.referenceToString(_type, "extension");
-        return new StyledString(_referenceToString, StyledString.DECORATIONS_STYLER);
+        return new StyledString(_referenceToString, 
+          StyledString.DECORATIONS_STYLER);
       }
       final JvmTypeReference fieldType = this.getDisplayedType(element);
       boolean _notEquals = (!Objects.equal(fieldType, null));
@@ -296,6 +336,8 @@ public class XtendLabelProvider extends XbaseLabelProvider {
       return _imageDescriptor((JvmField)operation);
     } else if (operation instanceof JvmGenericType) {
       return _imageDescriptor((JvmGenericType)operation);
+    } else if (operation instanceof AnonymousClass) {
+      return _imageDescriptor((AnonymousClass)operation);
     } else if (operation instanceof XtendAnnotationType) {
       return _imageDescriptor((XtendAnnotationType)operation);
     } else if (operation instanceof XtendClass) {
