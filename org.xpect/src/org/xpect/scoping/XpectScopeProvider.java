@@ -18,6 +18,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -36,7 +37,6 @@ import org.xpect.XjmSetup;
 import org.xpect.XjmTest;
 import org.xpect.XpectFile;
 import org.xpect.XpectJavaModel;
-import org.xpect.XpectJavaModelPackage;
 import org.xpect.XpectPackage;
 import org.xpect.XpectTest;
 
@@ -48,11 +48,15 @@ import com.google.inject.name.Named;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class XpectScopeProvider extends AbstractScopeProvider {
 
 	@Inject
 	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
 	private IScopeProvider delegate;
+
+	@Inject
+	private IJvmTypeProvider.Factory typeProviderFactory;
 
 	private String getAssignmentTargetFeatureName(JvmFeature feature) {
 		if (feature instanceof JvmOperation) {
@@ -83,9 +87,8 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 	}
 
 	private IScope getScopeForTestClassOrSuite(XpectFile xpectFile) {
-		IScope scope = delegate.getScope(xpectFile, XpectJavaModelPackage.Literals.XJM_CLASS__JVM_CLASS);
 		ResourceSet resourceSet = xpectFile.eResource().getResourceSet();
-		return new XpectJavaModelScope(resourceSet, scope);
+		return new XpectJavaModelScope(resourceSet, typeProviderFactory.findOrCreateTypeProvider(resourceSet));
 	}
 
 	private IScope getScopeForAssignmentTarget(AbstractComponent owner) {
