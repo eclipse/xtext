@@ -125,12 +125,10 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	protected override text(JvmGenericType element) {
 		val local = element.isLocal()
 		if (local) {
-			val supertype = element.superTypes.head.type
-			if (supertype instanceof JvmGenericType)
-				return '''new () «text(supertype)» {...}'''
+			val supertype = element.superTypes.head
+			return '''new «supertype.simpleName»() {...}'''
 		}
 		element.simpleName
-
 	}
 
 	protected def text(XtendConstructor element) {

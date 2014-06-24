@@ -35,7 +35,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -216,16 +215,13 @@ public class XtendLabelProvider extends XbaseLabelProvider {
       final boolean local = element.isLocal();
       if (local) {
         EList<JvmTypeReference> _superTypes = element.getSuperTypes();
-        JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_superTypes);
-        final JvmType supertype = _head.getType();
-        if ((supertype instanceof JvmGenericType)) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("new () ");
-          String _text = this.text(((JvmGenericType)supertype));
-          _builder.append(_text, "");
-          _builder.append(" {...}");
-          return _builder.toString();
-        }
+        final JvmTypeReference supertype = IterableExtensions.<JvmTypeReference>head(_superTypes);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("new ");
+        String _simpleName = supertype.getSimpleName();
+        _builder.append(_simpleName, "");
+        _builder.append("() {...}");
+        return _builder.toString();
       }
       _xblockexpression = element.getSimpleName();
     }

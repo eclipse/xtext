@@ -33,7 +33,6 @@ import org.eclipse.ltk.core.refactoring.participants.SharableParticipants;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.ui.refactoring.JdtRenameRefactoringProcessorFactory;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant;
-import org.eclipse.xtext.common.types.ui.refactoring.participant.TextChangeCombiner;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
@@ -52,9 +51,6 @@ public class CombinedJvmJdtRenameProcessor extends RenameElementProcessor {
 
 	@Inject
 	private JdtRenameRefactoringProcessorFactory jdtRefactoringFactory;
-
-	@Inject
-	private TextChangeCombiner textChangeCombiner;
 
 	private Map<URI, JavaRenameProcessor> jvmElements2jdtProcessors;
 	

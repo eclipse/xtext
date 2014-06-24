@@ -182,6 +182,14 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 		bar.child(2, "bar() : Object").numChildren(0);
 	}
 	
+	@Test public void testAnonymousTypes() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo<T> { def Foo<String> bar() { new Foo<String>() { override bar() { } } } }");
+		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo<T>").numChildren(1);
+		AssertBuilder bar = foo.child(0, "bar() : Foo<String>").numChildren(1);
+		AssertBuilder barBar = bar.child(0, "new Foo<String>() {...}").numChildren(1);
+		barBar.child(0, "bar() : Foo<String>").numChildren(0);
+	}
+	
 
 	protected AssertBuilder newAssertBuilder(String model) throws Exception, CoreException {
 		XtendFile file = workbenchTestHelper.xtendFile("Foo", model);
