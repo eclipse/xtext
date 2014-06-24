@@ -14,14 +14,16 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendInterface
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider
 import org.eclipse.xtext.xbase.validation.UIStrings
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
-import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
-import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtend.core.xtend.AnonymousClass
 
 /**
  * Provides labels for Xtend elements.
@@ -29,17 +31,17 @@ import org.eclipse.xtext.naming.QualifiedName
  * @author Jan Koehnlein
  */
 public class XtendLabelProvider extends XbaseLabelProvider {
-	
+
 	@Inject UIStrings uiStrings
 
 	@Inject XtendImages images
 
 	@Inject extension IXtendJvmAssociations
-	
+
 	@Inject XbaseImageAdornments adornments
-	
+
 	@Inject extension DispatchHelper
-	
+
 	@Inject OperatorMapping operatorMapping
 
 	@Inject
@@ -70,14 +72,18 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	protected def dispatch imageDescriptor(XtendFunction element) {
 		images.forOperation(element.visibility, adornments.get(element.directlyInferredOperation))
 	}
+	
+	protected def dispatch imageDescriptor(AnonymousClass element) {
+		images.forClass(element.inferredType.visibility, adornments.get(element.inferredType))
+	}
 
 	protected override dispatch imageDescriptor(JvmOperation operation) {
-		if(operation.dispatcherFunction) 
+		if (operation.dispatcherFunction)
 			images.forDispatcherFunction(operation.visibility, adornments.get(operation))
-		else 
+		else
 			images.forOperation(operation.visibility, adornments.get(operation))
 	}
-	
+
 	protected def dispatch imageDescriptor(XtendConstructor element) {
 		images.forConstructor(element.visibility, adornments.get(element.inferredConstructor))
 	}
@@ -85,26 +91,26 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	protected def dispatch imageDescriptor(XtendField element) {
 		images.forField(element.visibility, adornments.get(element.jvmField))
 	}
-	
+
 	protected def dispatch imageDescriptor(XtendEnumLiteral element) {
 		images.forField(element.visibility, adornments.get(element.jvmField))
 	}
-	
+
 	protected def text(XtendFile element) {
 		element.eResource.URI.trimFileExtension.lastSegment
 	}
 
 	protected def text(XtendClass element) {
-		element.name + if(element.typeParameters.empty)  
-			"" 
-		else 
+		element.name + if (element.typeParameters.empty)
+			""
+		else
 			uiStrings.typeParameters(element.typeParameters)
 	}
 
 	protected def text(XtendInterface element) {
-		element.name + if(element.typeParameters.empty)  
-			"" 
-		else 
+		element.name + if (element.typeParameters.empty)
+			""
+		else
 			uiStrings.typeParameters(element.typeParameters)
 	}
 
@@ -112,10 +118,25 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 		element.name
 	}
 
+	protected def text(AnonymousClass element) {
+		text(element.inferredType)
+	}
+
+	protected override text(JvmGenericType element) {
+		val local = element.isLocal()
+		if (local) {
+			val supertype = element.superTypes.head.type
+			if (supertype instanceof JvmGenericType)
+				return '''new () «text(supertype)» {...}'''
+		}
+		element.simpleName
+
+	}
+
 	protected def text(XtendConstructor element) {
 		"new" + uiStrings.parameters(element.inferredConstructor)
 	}
-	
+
 	protected def text(XtendFunction element) {
 		val simpleName = element.name
 		if (simpleName != null) {
@@ -129,15 +150,17 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 		}
 		return signature(element.name, element.directlyInferredOperation)
 	}
-	
+
 	protected def text(XtendField element) {
-		if (element.name == null && element.extension) 
-			return new StyledString(uiStrings.referenceToString(element.type, "extension"), StyledString.DECORATIONS_STYLER)
+		if (element.name == null && element.extension)
+			return new StyledString(uiStrings.referenceToString(element.type, "extension"),
+				StyledString.DECORATIONS_STYLER)
 		val fieldType = element.displayedType
 		if (fieldType != null) {
 			val type = uiStrings.referenceToString(fieldType, "")
 			if (type.length != 0) {
-				return new StyledString(element.name).append(new StyledString(" : " + type,StyledString.DECORATIONS_STYLER))
+				return new StyledString(element.name).append(
+					new StyledString(" : " + type, StyledString.DECORATIONS_STYLER))
 			}
 		}
 		new StyledString(element.name)
@@ -153,13 +176,13 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 			return jvmField.getType
 		} else {
 			val i = field.jvmElements.iterator
-			if(i.hasNext) {
+			if (i.hasNext) {
 				val next = i.next
-				if(next instanceof JvmOperation)
+				if (next instanceof JvmOperation)
 					return next.getReturnType
 			}
 		}
 		null
 	}
-	
+
 }

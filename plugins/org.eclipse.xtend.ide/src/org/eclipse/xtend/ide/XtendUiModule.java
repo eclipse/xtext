@@ -58,6 +58,7 @@ import org.eclipse.xtend.ide.labeling.XtendLabelProvider;
 import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider;
 import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
+import org.eclipse.xtend.ide.outline.XtendOutlineNodeFactory;
 import org.eclipse.xtend.ide.outline.XtendOutlinePage;
 import org.eclipse.xtend.ide.outline.XtendQuickOutlineFilterAndSorter;
 import org.eclipse.xtend.ide.preferences.XtendPreferenceStoreAccess;
@@ -117,6 +118,7 @@ import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeFactory;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.QuickOutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
@@ -507,4 +509,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return XtendExpressionUtil.class;
 	}
 	
+	public Class<? extends OutlineNodeFactory> bindOutlineNodeFactory() {
+		return XtendOutlineNodeFactory.class;
+	}
 }
