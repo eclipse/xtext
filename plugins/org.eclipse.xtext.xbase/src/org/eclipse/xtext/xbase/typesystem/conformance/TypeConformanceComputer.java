@@ -93,6 +93,9 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 		if ((result & SYNONYM) != 0) {
 			resultFlags.add(ConformanceHint.SYNONYM);
 		}
+		if ((result & UNKNOWN_TYPE_PARTICIPATED) != 0) {
+			resultFlags.add(ConformanceHint.UNKNOWN_TYPE_PARTICIPATED);
+		}
 		return resultFlags;
 	}
 
