@@ -109,6 +109,10 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	}
 
 	protected void fastAddDescriptions(JvmFeature feature, TypeBucket bucket, List<IEObjectDescription> result) {
+		if (receiverType != null && !receiverType.isResolved()) {
+			return;
+		}
+		
 		String simpleName = feature.getSimpleName();
 		QualifiedName featureName = QualifiedName.create(simpleName);
 		BucketedEObjectDescription description = doCreateDescription(featureName, feature, bucket);
