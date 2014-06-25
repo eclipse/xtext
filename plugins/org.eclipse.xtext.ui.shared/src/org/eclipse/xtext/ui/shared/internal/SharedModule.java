@@ -18,7 +18,6 @@ import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.builderState.IMarkerUpdater;
 import org.eclipse.xtext.builder.builderState.PersistedStateProvider;
 import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
-import org.eclipse.xtext.builder.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.builder.impl.BuildScheduler;
 import org.eclipse.xtext.builder.impl.DirtyStateAwareResourceDescriptions;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
@@ -177,7 +176,8 @@ public class SharedModule extends AbstractModule {
 		
 		bind(IMarkerUpdater.class);
 		bind(PersistedStateProvider.class);
-		bind(IResourceClusteringPolicy.class);
+		bind(org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy.class).to(org.eclipse.xtext.builder.clustering.IResourceClusteringPolicy.class);
+		bind(org.eclipse.xtext.builder.clustering.IResourceClusteringPolicy.class);
 		bind(CompilerPhases.class);
 		bind(RegistryBuilderParticipant.class);
 		bind(IResourceLoader.Sorter.class);
