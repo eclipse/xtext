@@ -17,9 +17,11 @@ import com.google.inject.ImplementedBy;
  * be unloaded during the build.
  * 
  * @author Knut Wannheden - Initial contribution and API
+ * @Deprecated Use org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy instead
  */
+
 @ImplementedBy(DisabledClusteringPolicy.class)
-public interface IResourceClusteringPolicy {
+public interface IResourceClusteringPolicy extends org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy {
 
 	/**
 	 * Determine whether another resource should be loaded into the resource set and be processed.

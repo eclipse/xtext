@@ -7,69 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.clustering;
 
-import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
  */
-public class DynamicResourceClusteringPolicy implements IResourceClusteringPolicy {
-
-	public static final String MINIMUM_CLUSTER_SIZE = "org.eclipse.xtext.builder.clustering.DynamicResourceClusteringPolicy.minimumClusterSize";
-	public static final String MINIMUM_PERCENT_FREE_MEMORY = "org.eclipse.xtext.builder.clustering.DynamicResourceClusteringPolicy.minimumPercentFreeMemory";
-
-	private static final Logger LOGGER = Logger.getLogger(DynamicResourceClusteringPolicy.class);
-	
-	/** We want at least 10MB free memory. */
-	private static final long MINIMUM_FREE_MEMORY = 10 * 1 << 20;
-
-	/** Minimum cluster size. To force garbage collector to kick in. */
-	@Inject(optional = true)
-	@Named(MINIMUM_CLUSTER_SIZE)
-	private final int minimumClusterSize = 20;
-
-	/** Minimum percentage of memory that must be free before trying to load another resource. */
-	@Inject(optional = true)
-	@Named(MINIMUM_PERCENT_FREE_MEMORY)
-	private final long minimumPercentFreeMemory = 15;
-
-	public boolean continueProcessing(ResourceSet resourceSet, URI next, int alreadyProcessed) {
-		if (alreadyProcessed == 0)
-			return true;
-		final long maxMemory = Runtime.getRuntime().maxMemory();
-		if (maxMemory > Runtime.getRuntime().totalMemory() + MINIMUM_FREE_MEMORY)
-			return true;
-		final long freeMemory = Runtime.getRuntime().freeMemory();
-		if (freeMemory < MINIMUM_FREE_MEMORY) {
-			logClusterCapped(resourceSet, alreadyProcessed, freeMemory, maxMemory);
-			return false;
-		} else if (alreadyProcessed < minimumClusterSize) {
-			return true;
-		} else if (freeMemory < maxMemory / 100 * minimumPercentFreeMemory) {
-			logClusterCapped(resourceSet, alreadyProcessed, freeMemory, maxMemory);
-			return false;
-		}
-
-		return true;
-	}
-	
-	private static boolean hasLoggedAboutIncreasingHeap = false;
-	
-	protected void logClusterCapped(ResourceSet resourceSet, int alreadyProcessed, final long freeMemory,
-			final long totalMemory) {
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Cluster capped at " + alreadyProcessed + '/' + resourceSet.getResources().size()
-					+ " processed/loaded resources; " + (freeMemory >> 20) + "/" + (totalMemory >> 20)
-					+ " free/total memory");
-		}
-		if (!hasLoggedAboutIncreasingHeap) {
-			hasLoggedAboutIncreasingHeap = true;
-			LOGGER.error("Your total heap size ("+(totalMemory >> 20)+"m) is too small. Please increase the maximum heap for your running Eclipse! See http://wiki.eclipse.org/FAQ_How_do_I_increase_the_heap_size_available_to_Eclipse%3F");
-		}
-	}
+@Deprecated
+public class DynamicResourceClusteringPolicy extends org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy implements IResourceClusteringPolicy {
 	
 }
