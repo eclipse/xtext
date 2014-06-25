@@ -45,6 +45,15 @@ public class XtextGeneratorIT {
 	}
 	
 	@Test
+	public void clustering() throws Exception {
+		Verifier verifier = verifyErrorFreeLog(ROOT + "/clustering");
+		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/IntegrationTestXbase.java");
+		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/IntegrationTestXbase2.java");
+		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase.class");
+		verifier.assertFilePresent(verifier.getBasedir() + "/target/xtext-temp/classes/IntegrationTestXbase2.class");
+	}
+
+	@Test
 	public void outputPerSource() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/output-per-source");
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/IntegrationTestXbase.java");
