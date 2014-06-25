@@ -64,6 +64,13 @@ public class ContentAssistInLambdaTest2 extends ContentAssistTest {
 	}
 	
 	@Override
+	protected String[] baseGetKeywordsAndStatics() {
+		List<String> result = Lists.newArrayList(super.baseGetKeywordsAndStatics());
+		result.add("mySpecialLocalVariable");
+		return result.toArray(new String[result.size()]);
+	}
+	
+	@Override
 	protected String[] getKeywordsAndStatics() {
 		List<String> result = Lists.newArrayList(super.getKeywordsAndStatics());
 		result.add("it");
