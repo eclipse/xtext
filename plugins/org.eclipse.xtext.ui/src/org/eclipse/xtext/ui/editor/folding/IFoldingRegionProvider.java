@@ -15,6 +15,10 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Compute the folding regions in the given document. This is a blocking
+ * action when opening the editor in e4, so clients should be careful to
+ * not resolve too many cross references in their implementation.
+ * 
  * @author Michael Clay - Initial contribution and API
  * @author Sebastian Zarnekow - Refactoring, introduced FoldedPosition
  */
