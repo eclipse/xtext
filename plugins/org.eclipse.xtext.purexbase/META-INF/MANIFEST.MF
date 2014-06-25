@@ -18,8 +18,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.7.0";visibility:=reexport,
  org.eclipse.xtext.xbase;bundle-version="2.7.0";visibility:=reexport,
  org.eclipse.xtext.xbase.lib;bundle-version="2.7.0";visibility:=reexport
 Import-Package: org.apache.commons.logging,
- org.apache.log4j;version="1.2.15",
- org.eclipse.xtext.xbase.lib
+ org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.purexbase,
  org.eclipse.xtext.purexbase.formatting,
