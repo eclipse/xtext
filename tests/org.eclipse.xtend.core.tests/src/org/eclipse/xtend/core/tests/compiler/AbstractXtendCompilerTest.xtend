@@ -36,7 +36,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	@Inject protected JvmModelGenerator generator
 	@Inject protected IGeneratorConfigProvider generatorConfigProvider
 	@Inject protected IFilePostProcessor postProcessor
-	@Inject extension protected CompilationTestHelper compilationTestHelper
+	@Inject protected extension CompilationTestHelper compilationTestHelper
 	
 	protected boolean useJavaCompiler = false
 	
