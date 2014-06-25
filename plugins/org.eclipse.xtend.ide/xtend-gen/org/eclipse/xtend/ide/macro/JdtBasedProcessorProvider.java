@@ -26,6 +26,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
+import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -141,12 +142,16 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
           }
         }
       }
-      Class<? extends JdtBasedProcessorProvider> _class = this.getClass();
-      ClassLoader _classLoader = _class.getClassLoader();
-      return new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
+      ClassLoader _parentClassLoader = this.getParentClassLoader();
+      return new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _parentClassLoader);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected ClassLoader getParentClassLoader() {
+    final ClassLoader bundleClassLoader = TransformationContext.class.getClassLoader();
+    return bundleClassLoader;
   }
   
   private IWorkspaceRoot getWorkspaceRoot(final IJavaProject javaProject) {

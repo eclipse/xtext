@@ -34,10 +34,11 @@ import org.osgi.framework.Version;
 final public class XtendClasspathContainer implements IClasspathContainer {
 
 	private static final String XTEXT_XBASE_LIB_BUNDLE_ID = "org.eclipse.xtext.xbase.lib";
+	private static final String XTEND_LIB_MACRO_BUNDLE_ID = "org.eclipse.xtend.lib.macro";
 	private static final String XTEND_LIB_BUNDLE_ID = "org.eclipse.xtend.lib";
 
 	public static final String[] BUNDLE_IDS_TO_INCLUDE = new String[] { "com.google.guava", XTEXT_XBASE_LIB_BUNDLE_ID,
-			XTEND_LIB_BUNDLE_ID };
+			XTEND_LIB_BUNDLE_ID, XTEND_LIB_MACRO_BUNDLE_ID };
 
 	private static final String SOURCE_SUFIX = ".source"; //$NON-NLS-1$
 	private static final Logger LOG = Logger.getLogger(XtendClasspathContainer.class);
@@ -70,7 +71,8 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 			IPath sourceBundlePath = calculateSourceBundlePath(bundle, bundlePath);
 			IClasspathAttribute[] extraAttributes = null;
 			if (XtendClasspathContainer.XTEXT_XBASE_LIB_BUNDLE_ID.equals(bundleId)
-					|| XtendClasspathContainer.XTEND_LIB_BUNDLE_ID.equals(bundleId)) {
+					|| XtendClasspathContainer.XTEND_LIB_BUNDLE_ID.equals(bundleId)
+					|| XtendClasspathContainer.XTEND_LIB_MACRO_BUNDLE_ID.equals(bundleId)) {
 				extraAttributes = new IClasspathAttribute[] { JavaCore.newClasspathAttribute(
 						IClasspathAttribute.JAVADOC_LOCATION_ATTRIBUTE_NAME, calculateJavadocURL()) };
 			}
