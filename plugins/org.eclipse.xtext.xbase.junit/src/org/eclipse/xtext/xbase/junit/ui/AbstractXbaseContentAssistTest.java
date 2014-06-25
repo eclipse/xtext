@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.junit.ui;
 
 import java.io.InputStream;
 import java.lang.reflect.Modifier;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -74,8 +75,10 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		if (demandFeatureComputation) {
 			STATIC_CLASS_FEATURES = null;
 			STATIC_STRING_FEATURES = null;
+			STATIC_BIGDECIMAL_FEATURES = null;
 			CLASS_FEATURES = null;
 			STRING_FEATURES = null;
+			BIGDECIMAL_FEATURES = null;
 			demandFeatureComputation = false;
 		}
 	}
@@ -185,6 +188,8 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	
 	protected static String[] STRING_FEATURES;
 	protected static String[] STATIC_STRING_FEATURES;
+	protected static String[] BIGDECIMAL_FEATURES;
+	protected static String[] STATIC_BIGDECIMAL_FEATURES;
 	protected static String[] CLASS_FEATURES;
 	protected static String[] STATIC_CLASS_FEATURES;
 	
@@ -200,6 +205,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		try {
 			doInitStringFeatures(javaProject);
 			doInitClassFeatures(javaProject);
+			doInitBigDecimalFeatures(javaProject);
 		} catch (JavaModelException e) {
 			throw new RuntimeException(e);
 		}
@@ -225,6 +231,24 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		features.add("identityEquals()");
 		STRING_FEATURES = features.toArray(new String[features.size()]);
 		STATIC_STRING_FEATURES = staticFeatures.toArray(new String[staticFeatures.size()]);
+	}
+	
+	protected static void doInitBigDecimalFeatures(IJavaProject javaProject) throws JavaModelException {
+		IType bigDecimalType = javaProject.findType(BigDecimal.class.getName());
+		Set<String> featuresOrTypes = Sets.newHashSet();
+		List<String> features = Lists.newArrayList();
+		List<String> staticFeatures = Lists.newArrayList();
+		addMethods(bigDecimalType, features, staticFeatures, featuresOrTypes);
+		// compareTo(T) is actually overridden by compareTo(String) but contained twice in String.class#getMethods
+		features.remove("compareTo()");
+		Set<String> featuresAsSet = Sets.newHashSet(features);
+		Set<String> staticFeaturesAsSet = Sets.newHashSet(staticFeatures);
+		Set<String> types = Sets.newHashSet();
+		addFields(bigDecimalType, features, staticFeatures, featuresAsSet, staticFeaturesAsSet, types);
+		// Object extensions
+		features.add("identityEquals()");
+		BIGDECIMAL_FEATURES = features.toArray(new String[features.size()]);
+		STATIC_BIGDECIMAL_FEATURES = staticFeatures.toArray(new String[staticFeatures.size()]);
 	}
 	
 	protected static void doInitClassFeatures(IJavaProject javaProject) throws JavaModelException {
@@ -286,22 +310,32 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 				String methodName = method.getElementName();
 				if (Flags.isPublic(method.getFlags()) &&  !method.isConstructor() && !"<clinit>".equals(methodName) && !"<init>".equals(methodName) && !Flags.isSynthetic(method.getFlags())) {
 					if (method.getParameterTypes().length == 0) {
-						if (methodName.startsWith("get") && method.getParameterTypes().length == 0) {
+						if (methodName.startsWith("get") && methodName.length() > 3) {
 							String propertyName = Strings.toFirstLower(methodName.substring(3));
 							if (featuresOrTypes.add(propertyName + method.getSignature()))
 								list.add(propertyName);
-						} else if (methodName.startsWith("is") && method.getParameterTypes().length == 0) {
+						} else if (methodName.startsWith("is") && methodName.length() > 2) {
 							String propertyName = Strings.toFirstLower(methodName.substring(2));
 							if (featuresOrTypes.add(propertyName + method.getSignature()))
 								list.add(propertyName);
-						} else {
+						}  else {
 							if (featuresOrTypes.add(methodName + method.getSignature()))
 								list.add(methodName);
+						}
+					} else if (method.getParameterTypes().length == 1) {
+						if (methodName.startsWith("set") && methodName.length() > 3) {
+							String propertyName = Strings.toFirstLower(methodName.substring(3)) + "()";
+							if (featuresOrTypes.add(propertyName + method.getSignature()))
+								list.add(propertyName);
+						} else {
+							methodName = methodName + "()";
+							if (featuresOrTypes.add(methodName + method.getSignature()))
+								list.add(methodName);	
 						}
 					} else {
 						methodName = methodName + "()";
 						if (featuresOrTypes.add(methodName + method.getSignature()))
-							list.add(methodName);				
+							list.add(methodName);
 					}
 				}
 			}
@@ -332,6 +366,14 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	
 	public String[] getStaticStringFeatures() {
 		return STATIC_STRING_FEATURES;
+	}
+	
+	public String[] getBigDecimalFeatures() {
+		return BIGDECIMAL_FEATURES;
+	}
+	
+	public String[] getStaticBigDecimalFeatures() {
+		return STATIC_BIGDECIMAL_FEATURES;
 	}
 	
 	public String[] getClassFeatures() {
@@ -606,6 +648,18 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	
 	@Test public void testClosure_01() throws Exception {
 		newBuilder().append("[String a, String b|").assertText(expect(new String[]{"a", "b"}, getKeywordsAndStatics(), new String[] {"val", "var"}));
+	}
+	
+	@Test public void testClosure_02() throws Exception {
+		newBuilder().append("#['a', 'b'].filter[it==it]").assertTextAtCursorPosition("it==", expect(new String[]{"it", "var", "val", "self"}, getKeywordsAndStatics(), getStringFeatures()));
+	}
+
+	@Test public void testClosure_03() throws Exception {
+		newBuilder().append("{val slow = #['a', 'b'].filter[it==it] }").assertTextAtCursorPosition("it==", expect(new String[]{"it", "var", "val", "self"}, getKeywordsAndStatics(), getStringFeatures()));
+	}
+	
+	@Test public void testClosure_04() throws Exception {
+		newBuilder().append("{val slow = #[0bd, 1bd].filter[i > 0]}").assertTextAtCursorPosition("i ", expect(new String[]{"it", "var", "val", "self"}, getKeywordsAndStatics(), getBigDecimalFeatures()));
 	}
 	
 	@Test public void testCatchParameter_01() throws Exception {

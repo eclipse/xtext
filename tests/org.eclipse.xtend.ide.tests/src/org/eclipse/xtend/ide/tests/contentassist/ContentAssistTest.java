@@ -150,6 +150,40 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 	public void testClosure_01() throws Exception {
 		newBuilder().append("[String a, String b|").assertText(expect(new String[]{"a", "b"}, getKeywordsAndStatics(), VARIABLE_DECL));
 	}
+	
+	@Override
+	@Test
+	public void testClosure_02() throws Exception {
+		newBuilder().append("#['a', 'b'].filter[it==it]").assertTextAtCursorPosition("it==", expect(
+				new String[]{"it", "self", "this", "super", "finalize" /* this.finalize() */, "clone" /* this.clone() */}, 
+				VARIABLE_DECL, 
+				baseGetKeywordsAndStatics(), // no other members of this. because they are made available via it.
+				getStringFeatures()));
+	}
+
+	@Override
+	@Test
+	public void testClosure_03() throws Exception {
+		newBuilder().append("{val slow = #['a', 'b'].filter[it==it] }").assertTextAtCursorPosition("it==", expect(
+				new String[]{"it", "self", "this", "super", "finalize" /* this.finalize() */, "clone" /* this.clone() */}, 
+				VARIABLE_DECL, 
+				baseGetKeywordsAndStatics(), // no other members of this. because they are made available via it.
+				getStringFeatures()));
+	}
+	
+	@Override
+	@Test
+	public void testClosure_04() throws Exception {
+		newBuilder().append("{val slow = #[0bd, 1bd].filter[i > 0]}").assertTextAtCursorPosition("i ", expect(
+				new String[]{"it", "self", "this", "super", "finalize" /* this.finalize() */, "clone" /* this.clone() */}, 
+				VARIABLE_DECL, 
+				baseGetKeywordsAndStatics(), // no other members of this. because they are made available via it.
+				getBigDecimalFeatures()));
+	}
+	
+	protected String[] baseGetKeywordsAndStatics() {
+		return super.getKeywordsAndStatics();
+	}
 		
 	@Override
 	protected String[] getKeywordsAndStatics() {
