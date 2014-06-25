@@ -38,26 +38,28 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 			'''
 				package myannotation
 				
-				import org.eclipse.xtend.core.macro.declaration.XtendClassDeclarationImpl
 				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 				import org.eclipse.xtend.lib.macro.Active
 				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
 				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 				import org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl
+				import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 				
 				@Active(MyAnnotationProcessor)
 				annotation MyAnnotation {
 				}
 				
 				class MyAnnotationProcessor extends AbstractClassProcessor {
+					
+					extension ReflectExtensions _reflectExtensions = new ReflectExtensions()
 				
 					override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {
-						val xtendClass = (annotatedClass as XtendClassDeclarationImpl).delegate
-						if (!(xtendClass.extends as JvmParameterizedTypeReferenceImpl).basicGetType.eIsProxy) {
+						val xtendClass = annotatedClass.invoke('getDelegate')
+						if (!(xtendClass.invoke('getExtends').invoke('basicGetType').invoke('eIsProxy') as Boolean)) {
 							throw new IllegalStateException("Before: Type should be a proxy.")
 						}
 						annotatedClass.extendedClass
-						if (!(xtendClass.extends as JvmParameterizedTypeReferenceImpl).basicGetType.eIsProxy) {
+						if (!(xtendClass.invoke('getExtends').invoke('basicGetType').invoke('eIsProxy') as Boolean)) {
 							throw new IllegalStateException("After: Type should be a proxy.")
 						}
 					}
@@ -95,12 +97,12 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 				package myannotation
 
 				import org.eclipse.emf.ecore.EObject
-				import org.eclipse.xtend.core.macro.declaration.XtendAnnotationReferenceImpl
 				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 				import org.eclipse.xtend.lib.macro.Active
 				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
 				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 				import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+				import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 				import org.junit.Assert
 				
 				import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals.*
@@ -110,18 +112,19 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 				}
 				
 				class MyAnnotationProcessor extends AbstractClassProcessor {
+					extension ReflectExtensions _reflectExtensions = new ReflectExtensions()
 				
 					override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {
 						val annotation = annotatedClass.annotations.head
-						val delegate = (annotation as XtendAnnotationReferenceImpl).delegate
+						val delegate = annotation.invoke('getDelegate')
 						delegate.assertProxies("Before")
 						Assert.assertNotNull(annotation.annotationTypeDeclaration)
 						delegate.assertProxies("After")
 					}
 				
-					def void assertProxies(XAnnotation it, String message) {
-						val type = eGet(XANNOTATION__ANNOTATION_TYPE, false) as EObject
-						Assert.assertTrue(message + ": Type should be a proxy: " + it.class.name + ".", type == null || type.eIsProxy)
+					def void assertProxies(Object it, String message) {
+						val type = it.invoke('basicGetAnnotationType')
+						Assert.assertTrue(message + ": Type should be a proxy: " + it.class.name + ".", type == null || (type.invoke('eIsProxy') as Boolean))
 					}
 				
 				}
@@ -198,7 +201,6 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 				package myannotation
 
 				import org.eclipse.emf.ecore.EObject
-				import org.eclipse.xtend.core.macro.declaration.XtendFieldDeclarationImpl
 				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 				import org.eclipse.xtend.lib.macro.Active
 				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
@@ -209,6 +211,7 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 				import org.eclipse.xtext.xtype.XFunctionTypeRef
 				import org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl
 				import org.junit.Assert
+				import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 				
 				import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
 				import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
@@ -219,31 +222,25 @@ class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
 				
 				class MyAnnotationProcessor extends AbstractClassProcessor {
 				
+					extension ReflectExtensions _reflectExtensions = new ReflectExtensions()
+				
 					override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {
 						val declaredField = annotatedClass.declaredFields.head
-						val returnType = ((declaredField as XtendFieldDeclarationImpl).delegate.type as XFunctionTypeRefImpl).returnType
+						val returnType = declaredField.invoke('getDelegate').invoke('getType').invoke('getReturnType')
 						returnType.assertProxies("Before")
 						val type = declaredField.type
 						«expectations»
 						returnType.assertProxies("After")
 					}
 				
-					def dispatch void assertProxies(JvmParameterizedTypeReference it, String message) {
-						val type = eGet(JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, false) as EObject
-						Assert.assertTrue(message + ": Type should be a proxy: " + it.class.name + ".", type == null || type.eIsProxy)
-					}
-				
-					def dispatch void assertProxies(XFunctionTypeRef it, String message) {
-						val type = eGet(XFUNCTION_TYPE_REF__TYPE, false) as EObject
-						Assert.assertTrue(message + ": Type should be a proxy: " + it.class.name + ".", type == null || type.eIsProxy)
-					}
-				
-					def dispatch void assertProxies(JvmGenericArrayTypeReference it, String message) {
-						componentType.assertProxies(message)
-					}
-				
-					def dispatch void assertProxies(JvmTypeReference it, String message) {
-						throw new UnsupportedOperationException
+					def void assertProxies(Object it, String message) {
+						val receiver = if (it.getClass.simpleName.contains('JvmGenericArrayTypeReference')) {
+								it.invoke('getComponentType')
+							} else {
+								it
+							}
+						val type = receiver.invoke('basicGetType')
+						Assert.assertTrue(message + ": Type should be a proxy: " + it.class.name + ".", type == null || (type.invoke('eIsProxy') as Boolean))
 					}
 				
 				}

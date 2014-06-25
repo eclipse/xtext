@@ -18,6 +18,7 @@ import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
+import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.XtextResourceSet
 
@@ -81,7 +82,12 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 				urls.add(url);
 			}
 		}
-		return new URLClassLoader(urls, getClass().getClassLoader())
+		return new URLClassLoader(urls, getParentClassLoader())
+	}
+	
+	protected def getParentClassLoader() {
+		val bundleClassLoader = TransformationContext.classLoader
+		return bundleClassLoader
 	}
 	
 	def private getWorkspaceRoot(IJavaProject javaProject) {
