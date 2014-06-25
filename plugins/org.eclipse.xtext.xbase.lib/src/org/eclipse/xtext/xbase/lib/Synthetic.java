@@ -12,9 +12,14 @@ import static java.lang.annotation.ElementType.*;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.lang.reflect.Method;
 
 /**
- * Annotated element is considered as not presented into the code. 
+ * Xtend Compiler annotation. The following holds only for members compiled from Xtend:
+ * 
+ * Annotated element is considered synthetic and will be marked as such in the byte code.
+ * I.e. during debugging the annotated member will be skipped and {@link Method#isSynthetic()}
+ * will return <code>true</code> for such members.
  * 
  * @author kosyakov - Initial contribution and API
  * @since 2.7
