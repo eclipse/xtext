@@ -25,49 +25,4 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtend/lib/macro/declaration/MutableAnnotationTarget.java" type="org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget">
-        <filter id="403804204">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget"/>
-                <message_argument value="addAnnotation(AnnotationReference)"/>
-            </message_arguments>
-        </filter>
-        <filter id="403804204">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget"/>
-                <message_argument value="removeAnnotation(AnnotationReference)"/>
-            </message_arguments>
-        </filter>
-        <filter id="405901410">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget"/>
-                <message_argument value="addAnnotation(Type)"/>
-            </message_arguments>
-        </filter>
-        <filter id="405901410">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget"/>
-                <message_argument value="findAnnotation(Type)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtend/lib/macro/declaration/MutableTypeParameterDeclaration.java" type="org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration">
-        <filter id="403804204">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration"/>
-                <message_argument value="removeAnnotation(AnnotationReference)"/>
-            </message_arguments>
-        </filter>
-        <filter id="405901410">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration"/>
-                <message_argument value="addAnnotation(Type)"/>
-            </message_arguments>
-        </filter>
-        <filter id="1211105284">
-            <message_arguments>
-                <message_argument value="removeAnnotation(AnnotationReference)"/>
-            </message_arguments>
-        </filter>
-    </resource>
 </component>
