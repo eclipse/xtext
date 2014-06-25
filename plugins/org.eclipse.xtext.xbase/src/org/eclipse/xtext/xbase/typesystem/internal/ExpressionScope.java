@@ -27,6 +27,7 @@ import org.eclipse.xtext.scoping.impl.AbstractScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
@@ -217,6 +218,8 @@ public class ExpressionScope implements IExpressionScope {
 	public static class DelegateScope extends AbstractScope {
 
 		private IScope delegate;
+		private Set<String> containedKeys;
+		private List<IEObjectDescription> containedElements;
 
 		protected DelegateScope(IScope parent, IScope delegate) {
 			super(parent, false);
@@ -225,7 +228,38 @@ public class ExpressionScope implements IExpressionScope {
 
 		@Override
 		protected Iterable<IEObjectDescription> getAllLocalElements() {
-			return delegate.getAllElements();
+			if (containedElements == null) {
+				if (getParent() != IScope.NULLSCOPE) {
+					Iterable<IEObjectDescription> result = delegate.getAllElements();
+					List<IEObjectDescription> list = Lists.newArrayList(result);
+					Set<String> keys = Sets.newHashSet();
+					for(IEObjectDescription desc: result) {
+						list.add(desc);
+						keys.add(getShadowingKey(desc));
+					}
+					containedKeys = keys;
+					containedElements = list;
+					return list;
+				} else {
+					return delegate.getAllElements();
+				}
+			}
+			return containedElements;
+		}
+		
+		@Override
+		protected boolean isShadowed(IEObjectDescription fromParent) {
+			if (containedKeys == null) {
+				return super.isShadowed(fromParent);
+			}
+			return containedKeys.contains(getShadowingKey(fromParent));
+		}
+		
+		protected String getShadowingKey(IEObjectDescription description) {
+			if (description instanceof BucketedEObjectDescription) {
+				return ((BucketedEObjectDescription) description).getShadowingKey();
+			}
+			return description.getName().toString();
 		}
 		
 	}
@@ -263,6 +297,11 @@ public class ExpressionScope implements IExpressionScope {
 
 		public Iterable<IEObjectDescription> getElements(EObject object) {
 			return delegate.getElements(object);
+		}
+		
+		public Iterable<IEObjectDescription> getAllElements() {
+			ensureInitialized();
+			return allElements;
 		}
 		
 		protected void ensureInitialized() {
@@ -426,12 +465,6 @@ public class ExpressionScope implements IExpressionScope {
 				}
 				result.append(')');
 			}
-		}
-
-
-		public Iterable<IEObjectDescription> getAllElements() {
-			ensureInitialized();
-			return allElements;
 		}
 		
 	}
