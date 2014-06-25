@@ -6,7 +6,6 @@ import com.google.inject.Provider
 import java.io.File
 import java.io.IOException
 import java.net.URLClassLoader
-import java.util.ArrayList
 import java.util.Collection
 import java.util.List
 import java.util.Map
@@ -15,6 +14,7 @@ import java.util.jar.Manifest
 import java.util.regex.Pattern
 import java.util.zip.ZipException
 import org.apache.log4j.Logger
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.plugin.EcorePlugin
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -29,12 +29,13 @@ import org.eclipse.xtext.mwe.NameBasedFilter
 import org.eclipse.xtext.mwe.PathTraverser
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy
+import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 
 import static extension org.eclipse.emf.common.util.URI.createFileURI
-import org.eclipse.emf.common.util.URI
 
 class StandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(StandaloneBuilder);
@@ -47,6 +48,7 @@ class StandaloneBuilder {
 	@Property String encoding
 	@Property String classPathLookUpFilter
 	@Property boolean failOnValidationError = true
+	@Property ClusteringConfig clusteringConfig = null
 
 	@Inject IndexedJvmTypeAccess jvmTypeAccess
 	@Inject Provider<XtextResourceSet> resourceSetProvider
@@ -84,7 +86,8 @@ class StandaloneBuilder {
 			LOG.info(
 				"Investigating " + rootsToTravers.length + " of " + classPathEntries.length + " class path entries.");
 		}
-		collectResources((sourceDirs + rootsToTravers), resourceSet)
+		val sourceResourceURIs = collectResources(sourceDirs, resourceSet)
+		val allResourcesURIs = sourceResourceURIs + collectResources(rootsToTravers,resourceSet)
 		LOG.debug("Finished collecting source models. Took: " + (System.currentTimeMillis - startedAt) + " ms.")
 
 		val allClassPathEntries = (sourceDirs + classPathEntries)
@@ -92,22 +95,76 @@ class StandaloneBuilder {
 			LOG.info("Installing type provider.")
 			installTypeProvider(allClassPathEntries, resourceSet, null)
 		}
-		val index = fillIndex(resourceSet)
-		val sourceResources = collectResources(sourceDirs, resourceSet)
+		val strategy = if(clusteringConfig != null){
+			LOG.info("Clustering configured.")
+			new DynamicResourceClusteringPolicy=>[]
+		} else new DisabledClusteringPolicy
+		// Fill index
+		var ResourceDescriptionsData index = new ResourceDescriptionsData(newArrayList());
+		var allResourceIterator =  allResourcesURIs.iterator
+		while(allResourceIterator.hasNext){
+			var List<Resource> resources = newArrayList()
+			var int clusterIndex = 0
+			var continue = true
+			while(allResourceIterator.hasNext && continue){
+				val uri = allResourceIterator.next
+				val resource = resourceSet.getResource(uri,true)
+				resources.add(resource)
+				fillIndex(uri, resource, index)
+				clusterIndex++
+				if(!strategy.continueProcessing(resourceSet,null,clusterIndex)){
+					continue = false
+				}
+			}
+			if(!continue)
+				resourceSet.clearResourceSet
+		}
+		installIndex(resourceSet, index)
+		// Generate Stubs
 		if (needsJava) {
-			val stubsClasses = compileStubs(generateStubs(index, sourceResources))
+			val stubsClasses = compileStubs(generateStubs(index, sourceResourceURIs))
 			LOG.info("Installing type provider for stubs.")
 			installTypeProvider(allClassPathEntries + newArrayList(stubsClasses), resourceSet, jvmTypeAccess)
 		}
-		sourceResources.forEach[contents] // full initialize
-		sourceResources.forEach[EcoreUtil2.resolveLazyCrossReferences(it, CancelIndicator.NullImpl)]
-
-		val isErrorFree = validate(sourceResources)
-		if (failOnValidationError && !isErrorFree) {
-			return isErrorFree
+		// Validate and generate
+		val sourceResourceIterator =  sourceResourceURIs.iterator
+		var isErrorFree = true
+		while(sourceResourceIterator.hasNext){
+			var List<Resource> resources = newArrayList()
+			var int clusterIndex = 0
+			var continue = true
+			while(sourceResourceIterator.hasNext && continue){
+				val uri = sourceResourceIterator.next
+				val resource = resourceSet.getResource(uri,true)
+				resources.add(resource)
+				resource.contents // full initialize
+				EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl)
+				clusterIndex++
+				if(!strategy.continueProcessing(resourceSet,null,clusterIndex)){
+					continue = false
+				}
+			}
+			isErrorFree = validateAndGenerate(resources)
+			if (failOnValidationError && !isErrorFree) {
+				return isErrorFree
+			}
+			
+			if(!continue)
+				resourceSet.clearResourceSet
 		}
-		generate(sourceResources)
 		return isErrorFree
+	}
+	
+	def fillIndex(URI uri, Resource resource, ResourceDescriptionsData index) {
+		val description = languageAccess(uri).resourceDescriptionManager.getResourceDescription(resource)
+		index.addDescription(uri, description)
+	}
+	
+	def validateAndGenerate(List<Resource> resources){
+			val isErrorFree = validate(resources)
+			if(isErrorFree)
+				generate(resources)
+			isErrorFree
 	}
 
 	def fileEncodingSetup(Collection<LanguageAccess> langs, String encoding) {
@@ -125,13 +182,8 @@ class StandaloneBuilder {
 		}
 	}
 
-	def protected fillIndex(XtextResourceSet set) {
-		val descriptions = new ArrayList<Resource>(set.resources).map [
-			languageAccess(it).resourceDescriptionManager.getResourceDescription(it)
-		]
-		val index = new ResourceDescriptionsData(descriptions)
-		ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(set, index)
-		return index
+	def protected installIndex(XtextResourceSet resourceSet, ResourceDescriptionsData index){
+		ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index)
 	}
 
 	def protected compileStubs(File stubsDir) {
@@ -150,15 +202,15 @@ class StandaloneBuilder {
 		return stubsClasses.absolutePath
 	}
 
-	def protected generateStubs(ResourceDescriptionsData data, List<? extends Resource> resources) {
+	def protected generateStubs(ResourceDescriptionsData data, List<URI> sourceResourceURIs) {
 		val stubsDir = createTempDir("stubs")
 		LOG.info("Generating stubs into " + stubsDir.absolutePath)
 		if (encoding != null)
 			encodingProvider.setDefaultEncoding(encoding)
 		commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, stubsDir.absolutePath)
-		val generateStubs = resources.filter[languageAccess.linksAgainstJava]
+		val generateStubs = sourceResourceURIs.filter[languageAccess.linksAgainstJava]
 		generateStubs.forEach [
-			languageAccess.stubGenerator.doGenerateStubs(commonFileAccess, data.getResourceDescription(URI))
+			languageAccess.stubGenerator.doGenerateStubs(commonFileAccess, data.getResourceDescription(it))
 		]
 		return stubsDir
 	}
@@ -166,7 +218,7 @@ class StandaloneBuilder {
 	def protected validate(List<Resource> sourceResources) {
 		val allIssues = newArrayList()
 		for (Resource resource : sourceResources) {
-			val resourceValidator = languageAccess(resource).getResourceValidator();
+			val resourceValidator = languageAccess(resource.URI).getResourceValidator();
 			val validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
 			allIssues.addAll(validationResult)
 		}
@@ -176,19 +228,20 @@ class StandaloneBuilder {
 	def protected generate(List<Resource> sourceResources) {
 		for (Resource it : sourceResources) {
 			LOG.info("Starting generator for input: '" + getURI().lastSegment() + "'");
-			registerCurrentSource(it)
-			languageAccess.generator.doGenerate(it, languageAccess.fileSystemAccess);
+			registerCurrentSource(it.URI)
+			val access = URI.languageAccess
+			access.generator.doGenerate(it, access.fileSystemAccess);
 		}
 	}
 
-	def protected registerCurrentSource(Resource resource) {
-		val fsa = resource.languageAccess.fileSystemAccess
+	def protected registerCurrentSource(URI uri) {
+		val fsa = uri.languageAccess.fileSystemAccess
 		val absoluteSource = sourceDirs.map[new File(it).absolutePath.createFileURI.toString].filter[
-			resource.URI.toString.startsWith(it)].reduce[longest, current|
+			uri.toString.startsWith(it)].reduce[longest, current|
 			if(current.length > longest.length) current else longest]?.createFileURI
 		if (absoluteSource == null) {
 			throw new IllegalStateException(
-				'''Resource «resource.URI» is not contained in any of the known source folders «sourceDirs».''')
+				'''Resource «uri» is not contained in any of the known source folders «sourceDirs».''')
 		}
 		for (output : fsa.outputConfigurations.values) {
 			for (relativeSource : output.sourceFolders) {
@@ -199,8 +252,8 @@ class StandaloneBuilder {
 		}
 	}
 
-	def private languageAccess(Resource resource) {
-		languages.get(resource.URI.fileExtension)
+	def private languageAccess(URI uri) {
+		languages.get(uri.fileExtension)
 	}
 
 	def protected createTempDir(String subDir) {
@@ -221,13 +274,13 @@ class StandaloneBuilder {
 		return new URLClassLoader(classPathUrls)
 	}
 
-	def protected List<Resource> collectResources(Iterable<String> roots, ResourceSet resourceSet) {
+	def protected List<URI> collectResources(Iterable<String> roots, ResourceSet resourceSet) {
 		val extensions = languages.keySet.join("|")
 		val nameBasedFilter = new NameBasedFilter
 
 		//TODO test with whitespaced file extensions
 		nameBasedFilter.setRegularExpression(".*\\.(?:(" + extensions + "))$");
-		val List<Resource> resources = newArrayList();
+		val List<URI> resources = newArrayList();
 
 		val modelsFound = new PathTraverser().resolvePathes(
 			roots.toList,
@@ -235,7 +288,7 @@ class StandaloneBuilder {
 				val matches = nameBasedFilter.matches(input)
 				if (matches) {
 					LOG.debug("Adding file '" + input + "'");
-					resources.add(resourceSet.getResource(input, true));
+					resources.add(input);
 				}
 				return matches
 			]
@@ -285,4 +338,18 @@ class StandaloneBuilder {
 	def getCompiler() {
 		compiler
 	}
+
+     /**
+     * Clears the content of the resource set without sending notifications.
+     * This avoids unnecessary, explicit unloads.
+     */
+    def void clearResourceSet(ResourceSet resourceSet) {
+        val wasDeliver = resourceSet.eDeliver();
+        try {
+            resourceSet.eSetDeliver(false);
+            resourceSet.getResources().clear();
+        } finally {
+            resourceSet.eSetDeliver(wasDeliver);
+        }
+    }
 }
