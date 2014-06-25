@@ -13,6 +13,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.eclipse.xtext.builder.standalone.ClusteringConfig;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.LanguageAccessFactory;
 import org.eclipse.xtext.builder.standalone.StandaloneBuilder;
@@ -108,6 +109,13 @@ public class XtextGenerator extends AbstractMojo {
 	 */
 	private String classPathLookupFilter;
 
+	/**
+	 * Clustering configuration to avoid OOME
+	 *
+	 * @parameter
+	 */
+	private ClusteringConfig clusteringConfig;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -142,6 +150,7 @@ public class XtextGenerator extends AbstractMojo {
 		builder.setSourceDirs(sourceRoots);
 		builder.setFailOnValidationError(failOnValidationError);
 		builder.setTempDir(createTempDir().getAbsolutePath());
+		builder.setClusteringConfig(clusteringConfig);
 		configureCompiler(builder.getCompiler());
 		logState();
 		boolean errorDetected = !builder.launch();
