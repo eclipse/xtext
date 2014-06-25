@@ -19,8 +19,7 @@ Require-Bundle: org.eclipse.xtext.purexbase;visibility:=reexport,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare
 Import-Package: org.apache.log4j;version="1.2.15",
- org.apache.commons.logging,
- org.eclipse.xtext.xbase.lib
+ org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.purexbase.ui,
  org.eclipse.xtext.purexbase.ui.autoedit,

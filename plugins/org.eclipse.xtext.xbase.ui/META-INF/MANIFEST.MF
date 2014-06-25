@@ -29,8 +29,7 @@ Require-Bundle: org.eclipse.xtext.xbase;bundle-version="2.7.0";visibility:=reexp
  org.eclipse.core.filesystem;bundle-version="1.2.1"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtext.xbase.ui.internal.XtypeActivator
-Import-Package: org.apache.log4j;version="1.2.15",
- org.eclipse.xtext.xbase.lib
+Import-Package: org.apache.log4j;version="1.2.15"
 Export-Package: org.eclipse.xtext.xbase.annotations.ui;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.ui.contentassist;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.ui.contentassist.antlr;x-internal:=true,
