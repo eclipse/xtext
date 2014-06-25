@@ -26,6 +26,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	Bug348446Test.class,
 	Bug364966Test.class,
 	Bug365368Test.class,
+	Bug370955Test.class,
 	Bug402876Test.class,
 	Bug434709Test.class,
 	Bug435043Test.class,

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.Flags;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jface.text.BadLocationException;
@@ -290,8 +291,22 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		if (model instanceof XtendClass) {
 			INode node = context.getCurrentNode();
 			EObject eObject = NodeModelUtils.findActualSemanticObjectFor(node);
-			if (!(eObject instanceof AnonymousClass))
+			if (!(eObject instanceof AnonymousClass)) {
+				// due to some optimizations in the CA parser, we get some bogus context here and have to
+				// double check that an override proposal would be valid at this location
+				// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=370955
+				EObject prevModel = context.getPreviousModel();
+				if (prevModel instanceof XExpression) {
+					XtendMember containingMember = EcoreUtil2.getContainerOfType(prevModel, XtendMember.class);
+					XBlockExpression blockExpression = EcoreUtil2.getContainerOfType(prevModel, XBlockExpression.class);
+					if (blockExpression != null && blockExpression != prevModel) {
+						if (EcoreUtil.isAncestor(containingMember, blockExpression)) { // still inside block
+							return;
+						}
+					}
+				}
 				overrideAssist.createOverrideProposals((XtendClass) model, context, acceptor, getConflictHelper());
+			}
 		}
 		super.completeType_Members(model, assignment, context, acceptor);
 	}
