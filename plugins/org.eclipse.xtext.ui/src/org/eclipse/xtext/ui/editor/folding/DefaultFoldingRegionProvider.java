@@ -17,11 +17,13 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.AssertionFailedException;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPartitioningException;
 import org.eclipse.jface.text.IDocumentExtension3;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapperExtension;
@@ -71,6 +73,13 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 		});
 	}
 
+	/**
+	 * Compute the folding region. This method is executed in a {@link IUnitOfWork} so it's save to use the
+	 * given resource. However, since this is a blocking action when opening editors in e4, implementors
+	 * should be careful to not resolve too many cross references. Users of the {@link DerivedStateAwareResource}
+	 * should consider to access the resource via {@link XtextResource#getParseResult() getParseResult().getRootAstElement()}
+	 * rather than {@link Resource#getContents() getContents().get(0)}.
+	 */
 	protected Collection<FoldedPosition> doGetFoldingRegions(IXtextDocument xtextDocument, XtextResource xtextResource) {
 		Collection<FoldedPosition> result = Sets.newLinkedHashSet();
 		IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor = createAcceptor(xtextDocument, result);
