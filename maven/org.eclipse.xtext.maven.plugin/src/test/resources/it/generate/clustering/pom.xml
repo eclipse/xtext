@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.xtext</groupId>
 	<version>1.0.0-SNAPSHOT</version>
-	<artifactId>purexbase-test</artifactId>
+	<artifactId>clustering-test</artifactId>
 	<packaging>jar</packaging>
 	<properties>
 		<tycho-version>0.18.0</tycho-version>
@@ -66,9 +66,9 @@
 						</language>
 					</languages>
 					<clusteringConfig>
-						<minimunFreeMemory>10000000</minimunFreeMemory>
-						<minimumClusterSize>30</minimumClusterSize>
-						<minimumPercentFreeMemory>20</minimumPercentFreeMemory>
+						<minimunFreeMemory>1000</minimunFreeMemory>
+						<minimumClusterSize>1</minimumClusterSize>
+						<minimumPercentFreeMemory>100</minimumPercentFreeMemory>
 					</clusteringConfig>
 				</configuration>
 				<dependencies>
