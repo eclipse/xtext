@@ -32,8 +32,6 @@ public enum ConformanceHint {
 	SEALED, // conformance computed and fix, e.g. a literal can provide a sealed type 
 	UNCHECKED, // nothing computed
 	
-//	UNDECIDED, // more than one type computed, results should not be merged but the better one should be used
-	
 	RAW, // only raw conformance computed
 	LAMBDA_RAW_COMPATIBLE, // incompatible but raw types are compatible
 	LAMBDA_PARAMETER_COMPATIBLE, // incompatible but parameter list is compatible
@@ -61,7 +59,12 @@ public enum ConformanceHint {
 	/**
 	 * Indicates that the expression will definitely throw an exception.
 	 */
-	THROWN_EXCEPTION;  
+	THROWN_EXCEPTION,
+	
+	/**
+	 * Two types are considered conformant if one of the participants is the unknown type. This flag indicates this situation.
+	 */
+	UNKNOWN_TYPE_PARTICIPATED;  
 	
 	
 	public static int compareHints(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {

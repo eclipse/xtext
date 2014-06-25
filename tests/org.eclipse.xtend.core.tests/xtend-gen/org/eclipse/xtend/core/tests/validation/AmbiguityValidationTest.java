@@ -45,15 +45,15 @@ import org.junit.Assert;
 public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
   @Inject
   @Extension
-  private ParseHelper<XtendFile> _parseHelper;
+  protected ParseHelper<XtendFile> _parseHelper;
   
   @Inject
   @Extension
-  private IBatchTypeResolver _iBatchTypeResolver;
+  protected IBatchTypeResolver _iBatchTypeResolver;
   
   @Inject
   @Extension
-  private ValidationTestHelper _validationTestHelper;
+  protected ValidationTestHelper _validationTestHelper;
   
   protected void assertAmbiguous(final CharSequence contents, final String... messageParts) {
     final XtendFile file = this.getParsedXtendFile(contents);
@@ -109,7 +109,7 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
     this._validationTestHelper.assertNoErrors(file);
   }
   
-  private XtendFile getParsedXtendFile(final CharSequence contents) {
+  protected XtendFile getParsedXtendFile(final CharSequence contents) {
     try {
       final XtendFile file = this._parseHelper.parse(contents);
       Resource _eResource = file.eResource();

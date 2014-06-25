@@ -28,9 +28,9 @@ import org.eclipse.xtext.junit4.internal.LineDelimiters
  */
 abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
 	
-	@Inject extension ParseHelper<XtendFile>
-	@Inject extension IBatchTypeResolver
-	@Inject extension ValidationTestHelper
+	@Inject protected extension ParseHelper<XtendFile>
+	@Inject protected extension IBatchTypeResolver
+	@Inject protected extension ValidationTestHelper
 	
 	protected def void assertAmbiguous(CharSequence contents, String... messageParts) {
 		val file = contents.parsedXtendFile
@@ -59,13 +59,12 @@ abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
 		file.assertNoErrors
 	}
 	
-	private def getParsedXtendFile(CharSequence contents) {
+	protected def getParsedXtendFile(CharSequence contents) {
 		val file = contents.parse
 		val errors = file.eResource.errors
 		assertTrue(errors.toString, errors.empty)
 		EcoreUtil.resolveAll(file)
 		return file
-		
 	}
 	
 }

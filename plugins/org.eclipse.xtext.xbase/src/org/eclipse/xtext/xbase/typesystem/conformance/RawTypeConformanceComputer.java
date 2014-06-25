@@ -162,6 +162,11 @@ public class RawTypeConformanceComputer {
 	 * If a synonym conversion was necessary, this bit is set in the result value.
 	 */
 	public final static int SYNONYM = RAW_TYPE_CONVERSION << 1;
+	
+	/**
+	 * If one of the compared types was an unknown type, this bit is set in the result value.
+	 */
+	public final static int UNKNOWN_TYPE_PARTICIPATED = SYNONYM << 1;
 
 	private SynonymTypesProvider synonymTypesProvider;
 	/**
@@ -237,7 +242,7 @@ public class RawTypeConformanceComputer {
 		int rightKind = right.getKind();
 		switch(rightKind) {
 			case KIND_UNKNOWN_TYPE_REFERENCE:
-				return flags | SUCCESS;
+				return flags | SUCCESS | UNKNOWN_TYPE_PARTICIPATED;
 			case KIND_UNBOUND_TYPE_REFERENCE: {
 				UnboundTypeReference castedRight = (UnboundTypeReference) right;
 				LightweightTypeReference resolved = castedRight.internalGetResolvedTo();
@@ -270,7 +275,7 @@ public class RawTypeConformanceComputer {
 			}
 			default: switch(left.getKind()) {
 				case KIND_UNKNOWN_TYPE_REFERENCE: {
-					return flags | SUCCESS;
+					return flags | SUCCESS | UNKNOWN_TYPE_PARTICIPATED;
 				}
 				case KIND_FUNCTION_TYPE_REFERENCE: {
 					switch(rightKind) {

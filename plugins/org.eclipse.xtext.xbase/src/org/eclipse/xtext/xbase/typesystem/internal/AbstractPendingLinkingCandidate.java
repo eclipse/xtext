@@ -745,6 +745,8 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		int rightVarArgs = 0;
 		int leftDemand = 0;
 		int rightDemand = 0;
+		int leftUnknown = 0;
+		int rightUnknown = 0;
 		boolean invalid = false;
 		for(int i = 0; i < upTo; i++) {
 			EnumSet<ConformanceHint> leftConformance = getConformanceHints(i, recompute);
@@ -780,6 +782,15 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				if (rightConformance.contains(ConformanceHint.BOXING) || rightConformance.contains(ConformanceHint.UNBOXING)) {
 					rightBoxing++;
 				}
+				if (leftConformance.contains(ConformanceHint.UNKNOWN_TYPE_PARTICIPATED)) {
+					leftUnknown++;
+				}
+				if (rightConformance.contains(ConformanceHint.UNKNOWN_TYPE_PARTICIPATED)) {
+					rightUnknown++;
+				}
+			} else if (leftConformance.contains(ConformanceHint.UNKNOWN_TYPE_PARTICIPATED)) {
+				leftUnknown++;
+				rightUnknown++;
 			}
 		}
 		if (isExtension() == right.isExtension()) {
@@ -798,9 +809,16 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		}
 		CandidateCompareResult result = compareByArgumentTypes(right, leftBoxing, rightBoxing, leftDemand, rightDemand);
 		switch(result) {
-			case AMBIGUOUS:
+			case AMBIGUOUS: {
 				if (invalid)
 					return CandidateCompareResult.EQUALLY_INVALID;
+				if (leftUnknown != 0 || rightUnknown != 0) {
+					if (leftUnknown <= rightUnknown) {
+						return CandidateCompareResult.THIS;
+					}
+					return CandidateCompareResult.OTHER;
+				}
+			}
 			default:
 				return result;
 		}
