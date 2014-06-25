@@ -58,6 +58,9 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 		if (buckets.isEmpty()) {
 			return Collections.emptyList();
 		}
+		if (receiverType != null && !receiverType.isResolved()) {
+			return Collections.emptyList();
+		}
 		List<IEObjectDescription> result = Lists.newArrayList();
 		for(TypeBucket bucket: buckets) {
 			if (bucket.isRestrictingNames()) {
@@ -109,10 +112,6 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	}
 
 	protected void fastAddDescriptions(JvmFeature feature, TypeBucket bucket, List<IEObjectDescription> result) {
-		if (receiverType != null && !receiverType.isResolved()) {
-			return;
-		}
-		
 		String simpleName = feature.getSimpleName();
 		QualifiedName featureName = QualifiedName.create(simpleName);
 		BucketedEObjectDescription description = doCreateDescription(featureName, feature, bucket);
