@@ -28,8 +28,7 @@ Require-Bundle: org.eclipse.xtend.core;visibility:=reexport,
  org.eclipse.jdt.launching;bundle-version="3.5.0",
  org.eclipse.core.expressions;bundle-version="3.3.0"
 Import-Package: com.ibm.icu.text,
- org.apache.log4j;version="1.2.15",
- org.eclipse.xtext.xbase.lib
+ org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtend.ide.internal.XtendActivator
 Export-Package: org.eclipse.xtend.ide;x-internal:=true,
