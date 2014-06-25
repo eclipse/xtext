@@ -13,6 +13,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,6 +32,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.builder.standalone.ClusteringConfig;
 import org.eclipse.xtext.builder.standalone.IIssueHandler;
 import org.eclipse.xtext.builder.standalone.LanguageAccess;
 import org.eclipse.xtext.builder.standalone.compiler.IJavaCompiler;
@@ -47,6 +49,9 @@ import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy;
+import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
+import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
@@ -58,8 +63,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -91,6 +96,9 @@ public class StandaloneBuilder {
   
   @Property
   private boolean _failOnValidationError = true;
+  
+  @Property
+  private ClusteringConfig _clusteringConfig = null;
   
   @Inject
   private IndexedJvmTypeAccess jvmTypeAccess;
@@ -169,13 +177,14 @@ public class StandaloneBuilder {
       StandaloneBuilder.LOG.info(_plus_3);
     }
     Iterable<String> _sourceDirs = this.getSourceDirs();
-    Iterable<String> _plus_4 = Iterables.<String>concat(_sourceDirs, rootsToTravers);
-    this.collectResources(_plus_4, resourceSet);
+    final List<URI> sourceResourceURIs = this.collectResources(_sourceDirs, resourceSet);
+    List<URI> _collectResources = this.collectResources(rootsToTravers, resourceSet);
+    final Iterable<URI> allResourcesURIs = Iterables.<URI>concat(sourceResourceURIs, _collectResources);
     long _currentTimeMillis = System.currentTimeMillis();
     long _minus = (_currentTimeMillis - startedAt);
-    String _plus_5 = ("Finished collecting source models. Took: " + Long.valueOf(_minus));
-    String _plus_6 = (_plus_5 + " ms.");
-    StandaloneBuilder.LOG.debug(_plus_6);
+    String _plus_4 = ("Finished collecting source models. Took: " + Long.valueOf(_minus));
+    String _plus_5 = (_plus_4 + " ms.");
+    StandaloneBuilder.LOG.debug(_plus_5);
     Iterable<String> _sourceDirs_1 = this.getSourceDirs();
     Iterable<String> _classPathEntries_2 = this.getClassPathEntries();
     final Iterable<String> allClassPathEntries = Iterables.<String>concat(_sourceDirs_1, _classPathEntries_2);
@@ -183,42 +192,160 @@ public class StandaloneBuilder {
       StandaloneBuilder.LOG.info("Installing type provider.");
       this.installTypeProvider(allClassPathEntries, resourceSet, null);
     }
-    final ResourceDescriptionsData index = this.fillIndex(resourceSet);
-    Iterable<String> _sourceDirs_2 = this.getSourceDirs();
-    final List<Resource> sourceResources = this.collectResources(_sourceDirs_2, resourceSet);
+    IResourceClusteringPolicy _xifexpression = null;
+    ClusteringConfig _clusteringConfig = this.getClusteringConfig();
+    boolean _notEquals_2 = (!Objects.equal(_clusteringConfig, null));
+    if (_notEquals_2) {
+      DynamicResourceClusteringPolicy _xblockexpression = null;
+      {
+        StandaloneBuilder.LOG.info("Clustering configured.");
+        DynamicResourceClusteringPolicy _dynamicResourceClusteringPolicy = new DynamicResourceClusteringPolicy();
+        final Procedure1<DynamicResourceClusteringPolicy> _function_2 = new Procedure1<DynamicResourceClusteringPolicy>() {
+          public void apply(final DynamicResourceClusteringPolicy it) {
+            ClusteringConfig _clusteringConfig = StandaloneBuilder.this.getClusteringConfig();
+            long _minimumFreeMemory = _clusteringConfig.getMinimumFreeMemory();
+            long _multiply = (_minimumFreeMemory * 1024);
+            long _multiply_1 = (_multiply * 1024);
+            it.setMinimumFreeMemory(_multiply_1);
+            ClusteringConfig _clusteringConfig_1 = StandaloneBuilder.this.getClusteringConfig();
+            int _minimumClusterSize = _clusteringConfig_1.getMinimumClusterSize();
+            it.setMinimumClusterSize(_minimumClusterSize);
+            ClusteringConfig _clusteringConfig_2 = StandaloneBuilder.this.getClusteringConfig();
+            long _minimumPercentFreeMemory = _clusteringConfig_2.getMinimumPercentFreeMemory();
+            it.setMinimumPercentFreeMemory(_minimumPercentFreeMemory);
+          }
+        };
+        _xblockexpression = ObjectExtensions.<DynamicResourceClusteringPolicy>operator_doubleArrow(_dynamicResourceClusteringPolicy, _function_2);
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      _xifexpression = new DisabledClusteringPolicy();
+    }
+    final IResourceClusteringPolicy strategy = _xifexpression;
+    ArrayList<IResourceDescription> _newArrayList = CollectionLiterals.<IResourceDescription>newArrayList();
+    ResourceDescriptionsData index = new ResourceDescriptionsData(_newArrayList);
+    Iterator<URI> allResourceIterator = allResourcesURIs.iterator();
+    boolean _hasNext = allResourceIterator.hasNext();
+    boolean _while = _hasNext;
+    while (_while) {
+      {
+        List<Resource> resources = CollectionLiterals.<Resource>newArrayList();
+        int clusterIndex = 0;
+        boolean continue_ = true;
+        boolean _and = false;
+        boolean _hasNext_1 = allResourceIterator.hasNext();
+        if (!_hasNext_1) {
+          _and = false;
+        } else {
+          _and = continue_;
+        }
+        boolean _while_1 = _and;
+        while (_while_1) {
+          {
+            final URI uri = allResourceIterator.next();
+            final Resource resource = resourceSet.getResource(uri, true);
+            resources.add(resource);
+            this.fillIndex(uri, resource, index);
+            clusterIndex++;
+            boolean _continueProcessing = strategy.continueProcessing(resourceSet, null, clusterIndex);
+            boolean _not = (!_continueProcessing);
+            if (_not) {
+              continue_ = false;
+            }
+          }
+          boolean _and_1 = false;
+          boolean _hasNext_2 = allResourceIterator.hasNext();
+          if (!_hasNext_2) {
+            _and_1 = false;
+          } else {
+            _and_1 = continue_;
+          }
+          _while_1 = _and_1;
+        }
+        if ((!continue_)) {
+          this.clearResourceSet(resourceSet);
+        }
+      }
+      boolean _hasNext_1 = allResourceIterator.hasNext();
+      _while = _hasNext_1;
+    }
+    this.installIndex(resourceSet, index);
     if (needsJava) {
-      File _generateStubs = this.generateStubs(index, sourceResources);
+      File _generateStubs = this.generateStubs(index, sourceResourceURIs);
       final String stubsClasses = this.compileStubs(_generateStubs);
       StandaloneBuilder.LOG.info("Installing type provider for stubs.");
-      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(stubsClasses);
-      Iterable<String> _plus_7 = Iterables.<String>concat(allClassPathEntries, _newArrayList);
-      this.installTypeProvider(_plus_7, resourceSet, this.jvmTypeAccess);
+      ArrayList<String> _newArrayList_1 = CollectionLiterals.<String>newArrayList(stubsClasses);
+      Iterable<String> _plus_6 = Iterables.<String>concat(allClassPathEntries, _newArrayList_1);
+      this.installTypeProvider(_plus_6, resourceSet, this.jvmTypeAccess);
     }
-    final Procedure1<Resource> _function_2 = new Procedure1<Resource>() {
-      public void apply(final Resource it) {
-        it.getContents();
+    final Iterator<URI> sourceResourceIterator = sourceResourceURIs.iterator();
+    boolean isErrorFree = true;
+    boolean _hasNext_1 = sourceResourceIterator.hasNext();
+    boolean _while_1 = _hasNext_1;
+    while (_while_1) {
+      {
+        List<Resource> resources = CollectionLiterals.<Resource>newArrayList();
+        int clusterIndex = 0;
+        boolean continue_ = true;
+        boolean _and = false;
+        boolean _hasNext_2 = sourceResourceIterator.hasNext();
+        if (!_hasNext_2) {
+          _and = false;
+        } else {
+          _and = continue_;
+        }
+        boolean _while_2 = _and;
+        while (_while_2) {
+          {
+            final URI uri = sourceResourceIterator.next();
+            final Resource resource = resourceSet.getResource(uri, true);
+            resources.add(resource);
+            resource.getContents();
+            EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
+            boolean _validate = this.validate(resource);
+            isErrorFree = _validate;
+            clusterIndex++;
+            boolean _continueProcessing = strategy.continueProcessing(resourceSet, null, clusterIndex);
+            boolean _not = (!_continueProcessing);
+            if (_not) {
+              continue_ = false;
+            }
+          }
+          boolean _and_1 = false;
+          boolean _hasNext_3 = sourceResourceIterator.hasNext();
+          if (!_hasNext_3) {
+            _and_1 = false;
+          } else {
+            _and_1 = continue_;
+          }
+          _while_2 = _and_1;
+        }
+        boolean _and_1 = false;
+        boolean _isFailOnValidationError = this.isFailOnValidationError();
+        if (!_isFailOnValidationError) {
+          _and_1 = false;
+        } else {
+          _and_1 = (!isErrorFree);
+        }
+        if (_and_1) {
+          return isErrorFree;
+        }
+        this.generate(resources);
+        if ((!continue_)) {
+          this.clearResourceSet(resourceSet);
+        }
       }
-    };
-    IterableExtensions.<Resource>forEach(sourceResources, _function_2);
-    final Procedure1<Resource> _function_3 = new Procedure1<Resource>() {
-      public void apply(final Resource it) {
-        EcoreUtil2.resolveLazyCrossReferences(it, CancelIndicator.NullImpl);
-      }
-    };
-    IterableExtensions.<Resource>forEach(sourceResources, _function_3);
-    final boolean isErrorFree = this.validate(sourceResources);
-    boolean _and = false;
-    boolean _isFailOnValidationError = this.isFailOnValidationError();
-    if (!_isFailOnValidationError) {
-      _and = false;
-    } else {
-      _and = (!isErrorFree);
+      boolean _hasNext_2 = sourceResourceIterator.hasNext();
+      _while_1 = _hasNext_2;
     }
-    if (_and) {
-      return isErrorFree;
-    }
-    this.generate(sourceResources);
     return isErrorFree;
+  }
+  
+  public void fillIndex(final URI uri, final Resource resource, final ResourceDescriptionsData index) {
+    LanguageAccess _languageAccess = this.languageAccess(uri);
+    IResourceDescription.Manager _resourceDescriptionManager = _languageAccess.getResourceDescriptionManager();
+    final IResourceDescription description = _resourceDescriptionManager.getResourceDescription(resource);
+    index.addDescription(uri, description);
   }
   
   public void fileEncodingSetup(final Collection<LanguageAccess> langs, final String encoding) {
@@ -240,20 +367,8 @@ public class StandaloneBuilder {
     }
   }
   
-  protected ResourceDescriptionsData fillIndex(final XtextResourceSet set) {
-    EList<Resource> _resources = set.getResources();
-    ArrayList<Resource> _arrayList = new ArrayList<Resource>(_resources);
-    final Function1<Resource, IResourceDescription> _function = new Function1<Resource, IResourceDescription>() {
-      public IResourceDescription apply(final Resource it) {
-        LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
-        IResourceDescription.Manager _resourceDescriptionManager = _languageAccess.getResourceDescriptionManager();
-        return _resourceDescriptionManager.getResourceDescription(it);
-      }
-    };
-    final List<IResourceDescription> descriptions = ListExtensions.<Resource, IResourceDescription>map(_arrayList, _function);
-    final ResourceDescriptionsData index = new ResourceDescriptionsData(descriptions);
-    ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(set, index);
-    return index;
+  protected void installIndex(final XtextResourceSet resourceSet, final ResourceDescriptionsData index) {
+    ResourceDescriptionsData.ResourceSetAdapter.installResourceDescriptionsData(resourceSet, index);
   }
   
   protected String compileStubs(final File stubsDir) {
@@ -286,7 +401,7 @@ public class StandaloneBuilder {
     return stubsClasses.getAbsolutePath();
   }
   
-  protected File generateStubs(final ResourceDescriptionsData data, final List<? extends Resource> resources) {
+  protected File generateStubs(final ResourceDescriptionsData data, final List<URI> sourceResourceURIs) {
     final File stubsDir = this.createTempDir("stubs");
     String _absolutePath = stubsDir.getAbsolutePath();
     String _plus = ("Generating stubs into " + _absolutePath);
@@ -299,37 +414,31 @@ public class StandaloneBuilder {
     }
     String _absolutePath_1 = stubsDir.getAbsolutePath();
     this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_1);
-    final Function1<Resource, Boolean> _function = new Function1<Resource, Boolean>() {
-      public Boolean apply(final Resource it) {
+    final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+      public Boolean apply(final URI it) {
         LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
         return Boolean.valueOf(_languageAccess.isLinksAgainstJava());
       }
     };
-    final Iterable<? extends Resource> generateStubs = IterableExtensions.filter(resources, _function);
-    final Procedure1<Resource> _function_1 = new Procedure1<Resource>() {
-      public void apply(final Resource it) {
+    final Iterable<URI> generateStubs = IterableExtensions.<URI>filter(sourceResourceURIs, _function);
+    final Procedure1<URI> _function_1 = new Procedure1<URI>() {
+      public void apply(final URI it) {
         LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
         IStubGenerator _stubGenerator = _languageAccess.getStubGenerator();
-        URI _uRI = it.getURI();
-        IResourceDescription _resourceDescription = data.getResourceDescription(_uRI);
+        IResourceDescription _resourceDescription = data.getResourceDescription(it);
         _stubGenerator.doGenerateStubs(StandaloneBuilder.this.commonFileAccess, _resourceDescription);
       }
     };
-    IterableExtensions.forEach(generateStubs, _function_1);
+    IterableExtensions.<URI>forEach(generateStubs, _function_1);
     return stubsDir;
   }
   
-  protected boolean validate(final List<Resource> sourceResources) {
-    final ArrayList<Issue> allIssues = CollectionLiterals.<Issue>newArrayList();
-    for (final Resource resource : sourceResources) {
-      {
-        LanguageAccess _languageAccess = this.languageAccess(resource);
-        final IResourceValidator resourceValidator = _languageAccess.getResourceValidator();
-        final List<Issue> validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
-        allIssues.addAll(validationResult);
-      }
-    }
-    return this.issueHandler.handleIssue(allIssues);
+  protected boolean validate(final Resource resource) {
+    URI _uRI = resource.getURI();
+    LanguageAccess _languageAccess = this.languageAccess(_uRI);
+    final IResourceValidator resourceValidator = _languageAccess.getResourceValidator();
+    final List<Issue> validationResult = resourceValidator.validate(resource, CheckMode.ALL, null);
+    return this.issueHandler.handleIssue(validationResult);
   }
   
   protected void generate(final List<Resource> sourceResources) {
@@ -340,18 +449,19 @@ public class StandaloneBuilder {
         String _plus = ("Starting generator for input: \'" + _lastSegment);
         String _plus_1 = (_plus + "\'");
         StandaloneBuilder.LOG.info(_plus_1);
-        this.registerCurrentSource(it);
-        LanguageAccess _languageAccess = this.languageAccess(it);
-        IGenerator _generator = _languageAccess.getGenerator();
-        LanguageAccess _languageAccess_1 = this.languageAccess(it);
-        JavaIoFileSystemAccess _fileSystemAccess = _languageAccess_1.getFileSystemAccess();
+        URI _uRI_1 = it.getURI();
+        this.registerCurrentSource(_uRI_1);
+        URI _uRI_2 = it.getURI();
+        final LanguageAccess access = this.languageAccess(_uRI_2);
+        IGenerator _generator = access.getGenerator();
+        JavaIoFileSystemAccess _fileSystemAccess = access.getFileSystemAccess();
         _generator.doGenerate(it, _fileSystemAccess);
       }
     }
   }
   
-  protected void registerCurrentSource(final Resource resource) {
-    LanguageAccess _languageAccess = this.languageAccess(resource);
+  protected void registerCurrentSource(final URI uri) {
+    LanguageAccess _languageAccess = this.languageAccess(uri);
     final JavaIoFileSystemAccess fsa = _languageAccess.getFileSystemAccess();
     Iterable<String> _sourceDirs = this.getSourceDirs();
     final Function1<String, String> _function = new Function1<String, String>() {
@@ -365,8 +475,7 @@ public class StandaloneBuilder {
     Iterable<String> _map = IterableExtensions.<String, String>map(_sourceDirs, _function);
     final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
       public Boolean apply(final String it) {
-        URI _uRI = resource.getURI();
-        String _string = _uRI.toString();
+        String _string = uri.toString();
         return Boolean.valueOf(_string.startsWith(it));
       }
     };
@@ -395,8 +504,7 @@ public class StandaloneBuilder {
     if (_equals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Resource ");
-      URI _uRI = resource.getURI();
-      _builder.append(_uRI, "");
+      _builder.append(uri, "");
       _builder.append(" is not contained in any of the known source folders ");
       Iterable<String> _sourceDirs_1 = this.getSourceDirs();
       _builder.append(_sourceDirs_1, "");
@@ -417,10 +525,9 @@ public class StandaloneBuilder {
     }
   }
   
-  private LanguageAccess languageAccess(final Resource resource) {
+  private LanguageAccess languageAccess(final URI uri) {
     Map<String, LanguageAccess> _languages = this.getLanguages();
-    URI _uRI = resource.getURI();
-    String _fileExtension = _uRI.fileExtension();
+    String _fileExtension = uri.fileExtension();
     return _languages.get(_fileExtension);
   }
   
@@ -472,13 +579,13 @@ public class StandaloneBuilder {
     return new URLClassLoader(((URL[])Conversions.unwrapArray(classPathUrls, URL.class)));
   }
   
-  protected List<Resource> collectResources(final Iterable<String> roots, final ResourceSet resourceSet) {
+  protected List<URI> collectResources(final Iterable<String> roots, final ResourceSet resourceSet) {
     Map<String, LanguageAccess> _languages = this.getLanguages();
     Set<String> _keySet = _languages.keySet();
     final String extensions = IterableExtensions.join(_keySet, "|");
     final NameBasedFilter nameBasedFilter = new NameBasedFilter();
     nameBasedFilter.setRegularExpression(((".*\\.(?:(" + extensions) + "))$"));
-    final List<Resource> resources = CollectionLiterals.<Resource>newArrayList();
+    final List<URI> resources = CollectionLiterals.<URI>newArrayList();
     PathTraverser _pathTraverser = new PathTraverser();
     List<String> _list = IterableExtensions.<String>toList(roots);
     final Predicate<URI> _function = new Predicate<URI>() {
@@ -486,8 +593,7 @@ public class StandaloneBuilder {
         final boolean matches = nameBasedFilter.matches(input);
         if (matches) {
           StandaloneBuilder.LOG.debug((("Adding file \'" + input) + "\'"));
-          Resource _resource = resourceSet.getResource(input, true);
-          resources.add(_resource);
+          resources.add(input);
         }
         return matches;
       }
@@ -589,6 +695,21 @@ public class StandaloneBuilder {
     return this.compiler;
   }
   
+  /**
+   * Clears the content of the resource set without sending notifications.
+   * This avoids unnecessary, explicit unloads.
+   */
+  public void clearResourceSet(final ResourceSet resourceSet) {
+    final boolean wasDeliver = resourceSet.eDeliver();
+    try {
+      resourceSet.eSetDeliver(false);
+      EList<Resource> _resources = resourceSet.getResources();
+      _resources.clear();
+    } finally {
+      resourceSet.eSetDeliver(wasDeliver);
+    }
+  }
+  
   @Pure
   public Map<String, LanguageAccess> getLanguages() {
     return this._languages;
@@ -650,5 +771,14 @@ public class StandaloneBuilder {
   
   public void setFailOnValidationError(final boolean failOnValidationError) {
     this._failOnValidationError = failOnValidationError;
+  }
+  
+  @Pure
+  public ClusteringConfig getClusteringConfig() {
+    return this._clusteringConfig;
+  }
+  
+  public void setClusteringConfig(final ClusteringConfig clusteringConfig) {
+    this._clusteringConfig = clusteringConfig;
   }
 }

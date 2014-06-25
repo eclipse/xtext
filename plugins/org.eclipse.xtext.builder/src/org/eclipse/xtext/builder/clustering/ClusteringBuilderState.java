@@ -68,7 +68,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     private IResourceServiceProvider.Registry managerRegistry;
 
     @Inject
-    private IResourceClusteringPolicy clusteringPolicy;
+    private org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy clusteringPolicy;
 
     @Inject
     @Named(RESOURCELOADER_GLOBAL_INDEX)
