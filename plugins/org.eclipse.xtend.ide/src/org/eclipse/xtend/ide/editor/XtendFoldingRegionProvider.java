@@ -9,7 +9,6 @@ package org.eclipse.xtend.ide.editor;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IRegion;
@@ -17,6 +16,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionAcceptor;
 import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionProvider;
@@ -57,9 +57,9 @@ public class XtendFoldingRegionProvider extends DefaultFoldingRegionProvider {
 	}
 	
 	protected void computeImportFolding(XtextResource xtextResource, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor) {
-		EList<EObject> contents = xtextResource.getContents();
-		if(!contents.isEmpty()) {
-			XtendFile xtendFile = (XtendFile) contents.get(0);
+		IParseResult parseResult = xtextResource.getParseResult();
+		if(parseResult != null && parseResult.getRootASTElement() instanceof XtendFile) {
+			XtendFile xtendFile = (XtendFile) parseResult.getRootASTElement();
 			// Only if we have at least 2 imports
 			if(xtendFile.getImportSection() != null 
 				&& xtendFile.getImportSection().getImportDeclarations().size() >1) {
