@@ -27,6 +27,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -115,6 +116,15 @@ public class SyncUtil {
 			workspace.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, monitor);
 		} catch (CoreException e) {
 			throw new OperationCanceledException(e.getMessage());
+		}
+	}
+	
+	public void waitForDirtyStateUpdater(XtextEditor editor) {
+		DirtyStateEditorSupport dirtyStateEditorSupport = editor.getXtextEditorCallback().getDirtyStateEditorSupport();
+		try {
+			dirtyStateEditorSupport.waitForUpdateEditorJob();
+		} catch (InterruptedException e) {
+			// ignore
 		}
 	}
 
