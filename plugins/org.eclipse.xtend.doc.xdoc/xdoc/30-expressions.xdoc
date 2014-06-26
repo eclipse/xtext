@@ -972,7 +972,7 @@ On any subsequent iterations the code[update-expressio] is executed instead of t
 The type of a for loop is code[Xtend][void].
 
 code[Xtend][
-  for (val i = 0 ; i < s.length ; i++) {
+  for (var i = 0 ; i < s.length ; i++) {
     println(s.subString(0,i)
   }
 ]
