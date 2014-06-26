@@ -25,19 +25,21 @@ annotation EqualsHashCode {
  * @since 2.7
  */
 @Beta
+@GwtCompatible
 class EqualsHashCodeProcessor extends AbstractClassProcessor {
 
 	override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
 		extension val util = new Util(context)
 		val extension voUtil = new ValueObjectProcessor.Util(context)
 		if (hasEquals) {
-			addWarning("equals is already defined, this annotation has no effect")
+			val annotation = findAnnotation(EqualsHashCode.findTypeGlobally)
+			annotation. addWarning("equals is already defined, this annotation has no effect")
 		} else if (hasHashCode) {
 			addWarning("hashCode is already defined, this annotation has no effect")
 		} else {
-			val hasSuperClass = extendedClass != object
-			addEquals(valueObjectFields, hasSuperClass)
-			addHashCode(valueObjectFields, hasSuperClass)
+			val hasSuperEquals= hasSuperEquals
+			addEquals(valueObjectFields, hasSuperEquals)
+			addHashCode(valueObjectFields, hasSuperEquals)
 		}
 	}
 
@@ -45,6 +47,7 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 	 * @since 2.7
  	 */
 	@Beta
+	@GwtCompatible
 	static class Util {
 
 		extension TransformationContext context
@@ -61,6 +64,15 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 			declaredMethods.exists [
 				simpleName == "equals" && parameters.size == 1 && parameters.head.type.name == "java.lang.Object"
 			]
+		}
+		
+		def boolean hasSuperEquals(ClassDeclaration cls) {
+			if (cls.newTypeReference == object) 
+				false
+			else if (cls.hasEquals)
+				true
+			else
+				(cls.extendedClass.type as ClassDeclaration).hasSuperEquals 
 		}
 
 		def void addEquals(MutableClassDeclaration cls, Iterable<? extends FieldDeclaration> includedFields,
@@ -90,7 +102,7 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 			]
 		}
 
-		private def contributeToEquals(FieldDeclaration it) {
+		def contributeToEquals(FieldDeclaration it) {
 			return switch (type.name) {
 				case Double.TYPE.name: '''
 					if (Double.doubleToLongBits(other.«simpleName») != Double.doubleToLongBits(this.«simpleName»))
@@ -136,7 +148,7 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 			]
 		}
 
-		private def contributeToHashCode(FieldDeclaration it) {
+		def contributeToHashCode(FieldDeclaration it) {
 			return switch (type.name) {
 				case Double.TYPE.name:
 					"result = prime * result + (int) (Double.doubleToLongBits(this." + simpleName +
