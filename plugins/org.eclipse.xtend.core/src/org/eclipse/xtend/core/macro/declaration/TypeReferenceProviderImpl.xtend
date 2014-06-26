@@ -11,6 +11,7 @@ import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator
 
 class TypeReferenceProviderImpl implements TypeReferenceProvider {
 	
@@ -168,6 +169,14 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 	
 	override newTypeReference(Class<? extends Object> clazz, TypeReference... typeArguments) {
 		newTypeReference(clazz.name, typeArguments)
+	}
+	
+	override selfTypeReference(Type typeDeclaration) {
+		if (typeDeclaration instanceof TypeParameterDeclarator) {
+			newTypeReference(typeDeclaration, typeDeclaration.typeParameters.map[newTypeReference])
+		} else {
+			newTypeReference(typeDeclaration)
+		}
 	}
 	
 }

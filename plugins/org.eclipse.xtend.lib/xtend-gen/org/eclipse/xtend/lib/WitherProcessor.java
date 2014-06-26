@@ -1,11 +1,13 @@
 package org.eclipse.xtend.lib;
 
 import com.google.common.annotations.Beta;
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.xtend.lib.ValueObjectProcessor;
+import org.eclipse.xtend.lib.Wither;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -18,6 +20,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -34,12 +37,14 @@ import org.eclipse.xtext.xbase.lib.Synthetic;
  * @since 2.7
  */
 @Beta
+@GwtCompatible
 @SuppressWarnings("all")
 public class WitherProcessor implements TransformationParticipant<MutableMemberDeclaration> {
   /**
    * @since 2.7
    */
   @Beta
+  @GwtCompatible
   public static class Util {
     @Extension
     private TransformationContext context;
@@ -69,6 +74,11 @@ public class WitherProcessor implements TransformationParticipant<MutableMemberD
         this.context.addError(field, "Type cannot be inferred.");
         return;
       }
+      boolean _isStatic = field.isStatic();
+      if (_isStatic) {
+        this.context.addError(field, "Cannot add a Wither for a static field");
+        return;
+      }
       MutableTypeDeclaration _declaringType = field.getDeclaringType();
       final MutableClassDeclaration cls = ((MutableClassDeclaration) _declaringType);
       String _witherName = this.getWitherName(field);
@@ -76,8 +86,8 @@ public class WitherProcessor implements TransformationParticipant<MutableMemberD
         public void apply(final MutableMethodDeclaration it) {
           AnnotationReference _newAnnotationReference = Util.this.context.newAnnotationReference(Pure.class);
           it.addAnnotation(_newAnnotationReference);
-          TypeReference _newTypeReference = Util.this.context.newTypeReference(cls);
-          it.setReturnType(_newTypeReference);
+          TypeReference _selfTypeReference = Util.this.context.selfTypeReference(cls);
+          it.setReturnType(_selfTypeReference);
           String _simpleName = field.getSimpleName();
           TypeReference _type = field.getType();
           final MutableParameterDeclaration param = it.addParameter(_simpleName, _type);
@@ -94,7 +104,8 @@ public class WitherProcessor implements TransformationParticipant<MutableMemberD
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
               _builder.append("return new ");
-              _builder.append(cls, "");
+              TypeReference _selfTypeReference = Util.this.context.selfTypeReference(cls);
+              _builder.append(_selfTypeReference, "");
               _builder.append("(");
               final Function1<Declaration, String> _function = new Function1<Declaration, String>() {
                 public String apply(final Declaration it) {
@@ -149,7 +160,9 @@ public class WitherProcessor implements TransformationParticipant<MutableMemberD
     final ValueObjectProcessor.Util voUtil = new ValueObjectProcessor.Util(context);
     boolean _hasWither = util.hasWither(it);
     if (_hasWither) {
-      context.addWarning(it, "A wither is already defined, this annotation has no effect");
+      Type _findTypeGlobally = context.findTypeGlobally(Wither.class);
+      final AnnotationReference annotation = it.findAnnotation(_findTypeGlobally);
+      context.addWarning(annotation, "A wither is already defined, this annotation has no effect");
     } else {
       MutableTypeDeclaration _declaringType = it.getDeclaringType();
       Iterable<? extends MutableFieldDeclaration> _valueObjectConstructorFields = voUtil.getValueObjectConstructorFields(_declaringType);
