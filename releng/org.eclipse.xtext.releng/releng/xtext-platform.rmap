@@ -23,6 +23,7 @@
   <rm:locator pattern="^org\.eclipse\.xtext$" searchPathRef="mwe2-gen"/>
   <rm:locator pattern="^org\.eclipse\.xtext\.common\.types$" searchPathRef="mwe2-gen"/>
   <rm:locator pattern="^org\.eclipse\.xtend\.lib$" searchPathRef="mwe2-gen"/>
+  <rm:locator pattern="^org\.eclipse\.xtend\.lib\.macro$" searchPathRef="mwe2-gen"/>
   <rm:locator pattern="^org\.eclipse\.xtext\.xbase\.lib$" searchPathRef="mwe2-gen"/>
   <rm:locator pattern="^org\.eclipse\.xtext\.util$" searchPathRef="mwe2-gen"/>
   <rm:locator pattern="^de\.itemis\.xtext\.antlr(?:\..+)?$" searchPathRef="mwe2-gen"/>
