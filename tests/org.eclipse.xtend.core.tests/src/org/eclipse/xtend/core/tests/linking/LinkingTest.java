@@ -91,6 +91,24 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private IBatchTypeResolver typeResolver;
 	
+	@Test public void testOverloadStaticInstance_01() throws Exception {
+		XtendFile file = file(
+				"class C {\n" + 
+				"	def void m(CharSequence c) {\n" + 
+				"		m('')\n" + 
+				"	}\n" + 
+				"	def static void m(String s) {}\n" + 
+				"}");
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		assertEquals("C.m(java.lang.String)", feature.getIdentifier());
+		assertNull(featureCall.getImplicitReceiver());
+		assertNull(featureCall.getImplicitFirstArgument());
+	}
+	
 	@Test public void testStaticNestedClass_01() throws Exception {
 		XtendFile file = file(
 				"class C {\n" + 
