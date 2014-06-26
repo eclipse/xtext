@@ -142,7 +142,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				}
 				return typeResolver.toJavaCompliantTypeReference(result, session);
 			} finally {
-				context.setTypeProvider(null);
+				context.unsetTypeProviderWithoutNotification();
 			}
 		}
 
@@ -239,7 +239,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				}
 				return typeResolver.toJavaCompliantTypeReference(parameterType, session);
 			} finally {
-				context.setTypeProvider(null);
+				context.unsetTypeProviderWithoutNotification();
 			}
 		}
 	}
@@ -281,7 +281,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 					return null;
 				return typeResolver.toJavaCompliantTypeReference(actualType, featureScopeSession);
 			} finally {
-				context.setTypeProvider(null);
+				context.unsetTypeProviderWithoutNotification();
 			}
 		}
 	}
