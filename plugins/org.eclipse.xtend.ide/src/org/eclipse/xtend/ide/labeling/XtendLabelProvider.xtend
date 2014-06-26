@@ -14,7 +14,6 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendInterface
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmTypeReference
@@ -114,10 +113,6 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 			uiStrings.typeParameters(element.typeParameters)
 	}
 
-	protected def text(XtendTypeDeclaration element) {
-		element.name
-	}
-
 	protected def text(AnonymousClass element) {
 		text(element.inferredType)
 	}
@@ -128,7 +123,10 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 			val supertype = element.superTypes.head
 			return '''new «supertype.simpleName»() {...}'''
 		}
-		element.simpleName
+		element.simpleName + if (element.typeParameters.empty)
+			""
+		else
+			uiStrings.typeParameters(element.typeParameters)
 	}
 
 	protected def text(XtendConstructor element) {
