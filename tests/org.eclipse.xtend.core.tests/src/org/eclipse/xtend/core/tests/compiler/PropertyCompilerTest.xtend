@@ -221,4 +221,18 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 			assertEquals(5, getFoo.invoke(instance))
 		]
 	}
+	
+	@Test
+	def void testStaticProperty() {
+		'''
+			class Foo {
+				@Property static int foo = 1
+			}
+		'''.compile[
+			val setFoo = compiledClass.getDeclaredMethod("setFoo", int)
+			setFoo.invoke(null, 1)
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			assertEquals(1, getFoo.invoke(null))
+		]
+	}
 }

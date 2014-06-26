@@ -11,6 +11,7 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
 class SetterCompilerTest extends AbstractXtendCompilerTest {
 	@Inject
@@ -30,6 +31,22 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 			]
 			setFoo.invoke(instance, 1)
 			assertEquals(1, fooField.get(instance))
+		]
+	}
+	
+	@Test
+	def void testCreateStaticSetter() {
+		'''
+			class Foo {
+				@Setter static int foo
+			}
+		'''.compile[
+			val setFoo = compiledClass.getDeclaredMethod("setFoo", int)
+			val fooField = compiledClass.getDeclaredField("foo") => [
+				accessible = true
+			]
+			setFoo.invoke(null, 1)
+			assertEquals(1, fooField.get(null))
 		]
 	}
 
@@ -70,7 +87,7 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		'''
-		text.clazz.assertWarning(XtendPackage.Literals.XTEND_FIELD, "user.issue", "no effect")
+		text.clazz.assertWarning(XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no effect")
 		text.compile[
 			val instance = compiledClass.newInstance
 			val setFoo = compiledClass.getDeclaredMethod("setFoo", int)

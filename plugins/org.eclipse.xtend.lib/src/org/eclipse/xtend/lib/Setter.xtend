@@ -28,6 +28,7 @@ annotation Setter {
  * @since 2.7
  */
 @Beta
+@GwtCompatible
 class SetterProcessor implements TransformationParticipant<MutableMemberDeclaration> {
 
 	override doTransform(List<? extends MutableMemberDeclaration> elements, extension TransformationContext context) {
@@ -37,7 +38,8 @@ class SetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 	protected def dispatch transform(MutableFieldDeclaration it, extension TransformationContext context) {
 		extension val util = new Util(context)
 		if (hasSetter) {
-			addWarning("A setter is already defined, this annotation has no effect")
+			val annotation = findAnnotation(Setter.findTypeGlobally)
+			annotation.addWarning("A setter is already defined, this annotation has no effect")
 		} else {
 			addSetter
 		}
@@ -56,6 +58,7 @@ class SetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 	* @since 2.7
 	*/
 	@Beta
+	@GwtCompatible
 	static class Util {
 		extension TransformationContext context
 
@@ -83,8 +86,13 @@ class SetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 			field.declaringType.addMethod(field.setterName) [
 				returnType = primitiveVoid
 				val param = addParameter(field.simpleName, field.type)
-				body = '''this.«field.simpleName» = «param.simpleName»;'''
+				body = '''«field.fieldOwner».«field.simpleName» = «param.simpleName»;'''
+				static = field.static
 			]
+		}
+		
+		private def fieldOwner(MutableFieldDeclaration it) {
+			if (static) declaringType.newTypeReference else "this"
 		}
 	}
 }
