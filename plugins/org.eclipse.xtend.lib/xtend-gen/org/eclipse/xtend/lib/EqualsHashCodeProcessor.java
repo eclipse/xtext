@@ -16,9 +16,11 @@ import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -142,11 +144,11 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
                   _builder.newLine();
                 }
               }
-              String _simpleName = cls.getSimpleName();
-              _builder.append(_simpleName, "");
+              TypeReference _newWildCardSelfTypeReference = Util.this.newWildCardSelfTypeReference(cls);
+              _builder.append(_newWildCardSelfTypeReference, "");
               _builder.append(" other = (");
-              String _simpleName_1 = cls.getSimpleName();
-              _builder.append(_simpleName_1, "");
+              TypeReference _newWildCardSelfTypeReference_1 = Util.this.newWildCardSelfTypeReference(cls);
+              _builder.append(_newWildCardSelfTypeReference_1, "");
               _builder.append(") obj;");
               _builder.newLineIfNotEmpty();
               {
@@ -164,6 +166,18 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
         }
       };
       cls.addMethod("equals", _function);
+    }
+    
+    private TypeReference newWildCardSelfTypeReference(final ClassDeclaration cls) {
+      Iterable<? extends TypeParameterDeclaration> _typeParameters = cls.getTypeParameters();
+      final Function1<TypeParameterDeclaration, TypeReference> _function = new Function1<TypeParameterDeclaration, TypeReference>() {
+        public TypeReference apply(final TypeParameterDeclaration it) {
+          TypeReference _object = Util.this.context.getObject();
+          return Util.this.context.newWildcardTypeReference(_object);
+        }
+      };
+      Iterable<TypeReference> _map = IterableExtensions.map(_typeParameters, _function);
+      return this.context.newTypeReference(cls, ((TypeReference[])Conversions.unwrapArray(_map, TypeReference.class)));
     }
     
     public String contributeToEquals(final FieldDeclaration it) {
