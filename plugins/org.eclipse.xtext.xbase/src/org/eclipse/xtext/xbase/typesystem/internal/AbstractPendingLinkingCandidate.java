@@ -748,7 +748,6 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	
 	@SuppressWarnings("incomplete-switch")
 	protected CandidateCompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, boolean recompute) {
-		int upTo = Math.max(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		int leftBoxing = 0;
 		int rightBoxing = 0;
 		int leftVarArgs = 0;
@@ -758,10 +757,11 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		int leftUnknown = 0;
 		int rightUnknown = 0;
 		boolean invalid = false;
-		for(int i = 0; i < upTo; i++) {
-			EnumSet<ConformanceHint> leftConformance = getConformanceHints(i, recompute);
-			EnumSet<ConformanceHint> rightConformance = right.getConformanceHints(i, recompute);
-			CandidateCompareResult hintCompareResult = compareByArgumentTypes(right, i, leftConformance, rightConformance);
+		int upTo = Math.max(arguments.getArgumentCount(), right.arguments.getArgumentCount());
+		for(int leftIdx = hasReceiver() ? 0 : -1, rightIdx = right.hasReceiver() ? 0 : -1; leftIdx < upTo || rightIdx < upTo; leftIdx++, rightIdx++) {
+			EnumSet<ConformanceHint> leftConformance = getConformanceHints(leftIdx, recompute);
+			EnumSet<ConformanceHint> rightConformance = right.getConformanceHints(rightIdx, recompute);
+			CandidateCompareResult hintCompareResult = compareByArgumentTypes(right, leftIdx, rightIdx, leftConformance, rightConformance);
 			switch(hintCompareResult) {
 				case SUSPICIOUS_OTHER:
 					throw new IllegalStateException();
@@ -835,7 +835,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 
 	/**
-	 * Compare this linking candidate with the given {@code other} candidate at {@code argumentIndex}
+	 * Compare this linking candidate with the given {@code other} candidate at {@code leftIdx} and  {@code rightIdx} respectively.
 	 * 
 	 * Returns {@code CandidateCompareResult#THIS} if this candidate is better, {@code CandidateCompareResult#OTHER} if the 
 	 * right candidate was better, {@code CandidateCompareResult#AMBIGUOUS} if both candidates are valid
@@ -843,11 +843,17 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * ambiguous but erroneous.
 	 * 
 	 * @param other the other candidate
-	 * @param argumentIndex the semantic argument index
+	 * @param leftIdx the semantic argument index on this candidate
+	 * @param rightIdx the semantic argument index on the other candidate
 	 * @param leftConformance the computed conformance in this linking candidate
 	 * @param rightConformance the computed conformance if the other candidate was chosen  
 	 */
-	protected CandidateCompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> other, int argumentIndex, EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
+	protected CandidateCompareResult compareByArgumentTypes(
+			AbstractPendingLinkingCandidate<?> other,
+			int leftIdx,
+			int rightIdx,
+			EnumSet<ConformanceHint> leftConformance,
+			EnumSet<ConformanceHint> rightConformance) {
 		int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
 		if (hintCompareResult == 0) {
 			if (leftConformance.contains(ConformanceHint.SUCCESS)) {
@@ -906,10 +912,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 
 	protected CandidateCompareResult compareExpectedArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
 		int result = 0;
-		int upTo = Math.min(arguments.getArgumentCount(), right.arguments.getArgumentCount());
-		for(int i = 0; i < upTo; i++) {
-			LightweightTypeReference expectedArgumentType = getSubstitutedExpectedType(i);
-			LightweightTypeReference rightExpectedArgumentType = right.getSubstitutedExpectedType(i);
+		int upTo = Math.max(arguments.getArgumentCount(), right.arguments.getArgumentCount());
+		for(int leftIdx = hasReceiver() ? 0 : -1, rightIdx = right.hasReceiver() ? 0 : -1; leftIdx < upTo && rightIdx < upTo; leftIdx++, rightIdx++) {
+			LightweightTypeReference expectedArgumentType = getSubstitutedExpectedType(leftIdx);
+			LightweightTypeReference rightExpectedArgumentType = right.getSubstitutedExpectedType(rightIdx);
 			if (expectedArgumentType == null) {
 				if (rightExpectedArgumentType != null)
 					return CandidateCompareResult.OTHER;
@@ -1014,9 +1020,9 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				return CandidateCompareResult.THIS;
 			if (Math.abs(leftArityMismatch) > Math.abs(rightArityMismatch))
 				return CandidateCompareResult.OTHER;
-			if (leftArityMismatch > 0)
+			if (leftArityMismatch < 0)
 				return CandidateCompareResult.THIS;
-			if (rightArityMismatch > 0)
+			if (rightArityMismatch < 0)
 				return CandidateCompareResult.OTHER;
 		}
 		return leftArityMismatch == 0 ? CandidateCompareResult.AMBIGUOUS : CandidateCompareResult.EQUALLY_INVALID;

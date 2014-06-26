@@ -222,6 +222,18 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals("testdata.FieldAccessSub.stringField()",((JvmOperation)call2.getFeature()).getIdentifier());
 	}
 	
+	@Test public void testFeatureCall_1_b() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{" +
+				"  val this = new testdata.FieldAccessSub();" +
+				"  stringField();" +
+				"  stringField;" +
+				"}");
+		XFeatureCall call1 = (XFeatureCall) block.getExpressions().get(1);
+		XFeatureCall call2 = (XFeatureCall) block.getExpressions().get(2);
+		assertEquals("testdata.FieldAccessSub.stringField()",((JvmOperation)call1.getFeature()).getIdentifier());
+		assertEquals("testdata.FieldAccessSub.stringField",call2.getFeature().getIdentifier());
+	}
+	
 	@Test public void testFeatureCall_2() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{" +
 				"  val this = new testdata.FieldAccessSub();" +
@@ -891,6 +903,12 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		final XBlockExpression block = (XBlockExpression) expression("{ var this = newArrayList('').map(s|1).toList() this.map(i|i+1) }");
 		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) block.getExpressions().get(1);
 		assertEquals("org.eclipse.xtext.xbase.lib.ListExtensions.map(java.util.List,org.eclipse.xtext.xbase.lib.Functions$Function1)", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testExtensionMethodOnArray_01() throws Exception {
+		final XBlockExpression block = (XBlockExpression) expression("{ (null as String[]).size }");
+		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) block.getExpressions().get(0);
+		assertEquals("java.util.List.size()", featureCall.getFeature().getIdentifier());
 	}
 	
 	@Test public void testExtensionMethod_Map() throws Exception {
