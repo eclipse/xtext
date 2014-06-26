@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.clustering;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 
 /**
  * A clustering policy that effectively disables the clustering.
@@ -16,14 +14,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.4
  */
-public class DisabledClusteringPolicy implements IResourceClusteringPolicy  {
+@Deprecated
+public class DisabledClusteringPolicy extends org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy implements IResourceClusteringPolicy  {
 
-	/**
-	 * Returns always {@code true} to continue the processing in the very same resource set.
-	 * @return {@code true}.
-	 */
-	public boolean continueProcessing(ResourceSet resourceSet, URI next, int alreadyProcessed) {
-		return true;
-	}
+
 
 }
