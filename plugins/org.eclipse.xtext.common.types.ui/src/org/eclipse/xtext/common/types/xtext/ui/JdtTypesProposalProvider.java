@@ -184,7 +184,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 						}
 						fqName.append(simpleTypeName);
 						String fqNameAsString = fqName.toString();
-						return !superTypes.contains(fqNameAsString);
+						return !superTypeNames.contains(fqNameAsString);
 					}
 					
 					public int getSearchFor() {

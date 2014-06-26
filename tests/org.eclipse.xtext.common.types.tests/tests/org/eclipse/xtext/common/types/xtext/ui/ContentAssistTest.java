@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.xtext.ui;
 
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
@@ -146,6 +147,17 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	
 	@Test public void testSubtypeBlockingQueue_03() throws Exception {
 		newBuilder().append("import java.* subtype concurrent.BlockingQ").assertText("util.concurrent.BlockingQueue");
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=438191
+	 */
+	@Test public void testSubtypeProposals() throws Exception {
+		ICompletionProposal[] proposals = newBuilder().append("import java.util.* subtype I").computeCompletionProposals();
+		for (ICompletionProposal iCompletionProposal : proposals) {
+			String displayString = iCompletionProposal.getDisplayString();
+			assertFalse(displayString, displayString.contains(Iterable.class.getSimpleName()));
+		}
 	}
 	
 	@Test public void testMap_01() throws Exception {
