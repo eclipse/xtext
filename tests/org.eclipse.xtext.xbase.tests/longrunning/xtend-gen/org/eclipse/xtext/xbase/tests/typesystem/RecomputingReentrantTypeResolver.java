@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -56,15 +57,15 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   
   private final Joiner.MapJoiner mapJoiner = Joiner.on("\n").withKeyValueSeparator("=");
   
-  public RootResolvedTypes createResolvedTypes() {
-    return new RecordingRootResolvedTypes(this);
+  public RootResolvedTypes createResolvedTypes(final CancelIndicator monitor) {
+    return new RecordingRootResolvedTypes(this, CancelIndicator.NullImpl);
   }
   
-  public IResolvedTypes resolve() {
-    IResolvedTypes _resolve = super.resolve();
+  public IResolvedTypes resolve(final CancelIndicator monitor) {
+    IResolvedTypes _resolve = super.resolve(monitor);
     final RecordingRootResolvedTypes firstResult = ((RecordingRootResolvedTypes) _resolve);
     final Map<XExpression, ILinkingCandidate> firstRun = firstResult.getResolvedProxies();
-    IResolvedTypes _resolve_1 = super.resolve();
+    IResolvedTypes _resolve_1 = super.resolve(monitor);
     final RecordingRootResolvedTypes result = ((RecordingRootResolvedTypes) _resolve_1);
     final Map<XExpression, ILinkingCandidate> secondRun = result.getResolvedProxies();
     StringConcatenation _builder = new StringConcatenation();

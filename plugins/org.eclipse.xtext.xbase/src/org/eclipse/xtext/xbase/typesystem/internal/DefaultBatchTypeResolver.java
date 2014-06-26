@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -33,12 +34,12 @@ public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 	private Provider<AbstractRootedReentrantTypeResolver> typeResolverProvider;
 	
 	@Override
-	protected IResolvedTypes doResolveTypes(/* @Nullable */ EObject object) {
+	protected IResolvedTypes doResolveTypes(/* @Nullable */ EObject object,  /* @Nullable */ CancelIndicator monitor) {
 		// TODO: remove when we switch to an Xtend scope provider without artificial feature calls  
 		EObject nonArtificialObject = getNonArtificialObject(object);
 		// TODO end
 		IReentrantTypeResolver reentrantResolver = getTypeResolver(nonArtificialObject);
-		return reentrantResolver.reentrantResolve();
+		return reentrantResolver.reentrantResolve(monitor == null ? CancelIndicator.NullImpl : monitor);
 	}
 
 	private EObject getNonArtificialObject(EObject object) {
@@ -79,11 +80,11 @@ public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 				
 				private int reentrance = 0;
 				
-				public IResolvedTypes reentrantResolve() {
+				public IResolvedTypes reentrantResolve(CancelIndicator monitor) {
 					RuntimeException e = null;
 					try {
 						reentrance++;
-						IResolvedTypes result = newResolver.reentrantResolve();
+						IResolvedTypes result = newResolver.reentrantResolve(monitor);
 						return result;
 					} catch(RuntimeException caught) {
 						e = caught;

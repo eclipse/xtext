@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.junit.typesystem;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
@@ -23,7 +24,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 @SuppressWarnings("all")
 public class PublicResolvedTypes extends RootResolvedTypes {
   public PublicResolvedTypes(final DefaultReentrantTypeResolver resolver) {
-    super(resolver);
+    super(resolver, CancelIndicator.NullImpl);
   }
   
   public UnboundTypeReference createUnboundTypeReference(final XExpression expression, final JvmTypeParameter type) {

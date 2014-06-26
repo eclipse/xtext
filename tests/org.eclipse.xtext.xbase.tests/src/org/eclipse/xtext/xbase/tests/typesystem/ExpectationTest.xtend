@@ -25,6 +25,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -46,7 +47,7 @@ abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
 	def expects(String input) {
 		rootExpression = expression(input, false)
 		resolver.initializeFrom(rootExpression)
-		resolvedTypes = resolver.reentrantResolve
+		resolvedTypes = resolver.reentrantResolve(CancelIndicator.NullImpl)
 		pendingAssert = true
 		return this
 	}

@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.validation.IssueSeverities;
@@ -105,7 +106,7 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		return issueSeveritiesProvider.getIssueSeverities(resource);
 	}
 	
-	public IResolvedTypes reentrantResolve() {
+	public IResolvedTypes reentrantResolve(CancelIndicator monitor) {
 		if (resolving) {
 			throw new UnsupportedOperationException("TODO: import a functional handle on the type resolution that delegates to the best available (current, but evolving) result");
 		}
@@ -113,18 +114,18 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		try {
 			task.start();
 			resolving = true;
-			return resolve();
+			return resolve(monitor);
 		} finally {
 			resolving = false;
 			task.stop();
 		}
 	}
 	
-	protected IResolvedTypes resolve() {
+	protected IResolvedTypes resolve(CancelIndicator monitor) {
 		if (isInvalidRoot()) {
 			return IResolvedTypes.NULL;
 		}
-		RootResolvedTypes result = createResolvedTypes();
+		RootResolvedTypes result = createResolvedTypes(monitor);
 		IFeatureScopeSession session = batchScopeProvider.newSession(root.eResource());
 		computeTypes(result, session);
 		result.resolveUnboundTypeParameters();
@@ -137,8 +138,8 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		return root == null || root.eResource() == null || root.eResource().getResourceSet() == null;
 	}
 
-	protected RootResolvedTypes createResolvedTypes() {
-		return new RootResolvedTypes(this);
+	protected RootResolvedTypes createResolvedTypes(CancelIndicator monitor) {
+		return new RootResolvedTypes(this, monitor);
 	}
 	
 	protected IFeatureScopeTracker createFeatureScopeTracker() {
