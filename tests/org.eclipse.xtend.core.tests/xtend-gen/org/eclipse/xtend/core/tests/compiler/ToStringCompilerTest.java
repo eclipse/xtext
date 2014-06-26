@@ -10,10 +10,10 @@ package org.eclipse.xtend.core.tests.compiler;
 import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -122,7 +122,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final String text = _builder.toString();
       XtendClass _clazz = this.clazz(text);
-      this._validationTestHelper.assertWarning(_clazz, XtendPackage.Literals.XTEND_CLASS, "user.issue", "no effect");
+      this._validationTestHelper.assertWarning(_clazz, XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no effect");
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
         public void accept(final CompilationTestHelper.Result it) {
           try {

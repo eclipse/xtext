@@ -11,6 +11,7 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
 class WitherCompilerTest extends AbstractXtendCompilerTest {
 	@Inject
@@ -100,7 +101,7 @@ class WitherCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		'''
-		text.clazz.assertWarning(XtendPackage.Literals.XTEND_FIELD, "user.issue", "no effect")
+		text.clazz.assertWarning(XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no effect")
 		text.compile[
 			val first= compiledClass.getDeclaredConstructor(int).newInstance(1)
 			val withX = compiledClass.getDeclaredMethod("withX", int)
@@ -128,6 +129,20 @@ class WitherCompilerTest extends AbstractXtendCompilerTest {
 			}
 		'''.compile[
 			compiledClass.getDeclaredMethod("withFoo", String)
+		]
+	}
+	
+	@Test
+	def void testGenericClass() {
+		'''
+			class Foo<T> {
+				@Wither T foo
+				new(T foo) {
+					this.foo = foo
+				}
+			}
+		'''.compile[
+			assertTrue(singleGeneratedCode.contains("Foo<T> withFoo(final T foo)"))
 		]
 	}
 	
