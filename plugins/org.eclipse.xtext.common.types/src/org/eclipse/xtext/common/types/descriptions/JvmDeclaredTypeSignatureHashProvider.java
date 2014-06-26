@@ -30,6 +30,8 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.IMirrorExtension;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -114,6 +116,15 @@ public class JvmDeclaredTypeSignatureHashProvider {
 
 		public SignatureHashBuilder appendSignature(JvmDeclaredType type) {
 			if (type.getVisibility() != JvmVisibility.PRIVATE) {
+				if(type.eResource() instanceof DerivedStateAwareResource) {
+					DerivedStateAwareResource resource = (DerivedStateAwareResource) type.eResource();
+					if(!resource.isChangingDerivedState() && !resource.hasDerivedState()) {
+						ICompositeNode rootNode = resource.getParseResult().getRootNode();
+						if(rootNode != null)
+							append(rootNode.getText());
+						return this;
+					}
+				}
 				appendAnnotationReferences(type);
 				appendVisibility(type.getVisibility()).append(" ");
 				if (type.isAbstract())
