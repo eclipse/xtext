@@ -149,7 +149,8 @@ public class XtextGenerator extends AbstractMojo {
 		builder.setSourceDirs(sourceRoots);
 		builder.setFailOnValidationError(failOnValidationError);
 		builder.setTempDir(createTempDir().getAbsolutePath());
-		builder.setClusteringConfig(clusteringConfig.convertToStandaloneConfig());
+		if(clusteringConfig != null)
+			builder.setClusteringConfig(clusteringConfig.convertToStandaloneConfig());
 		configureCompiler(builder.getCompiler());
 		logState();
 		boolean errorDetected = !builder.launch();
