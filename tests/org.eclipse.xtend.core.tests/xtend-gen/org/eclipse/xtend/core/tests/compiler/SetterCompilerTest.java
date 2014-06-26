@@ -17,6 +17,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -62,6 +63,44 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
             final Field fooField = ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function);
             setFoo.invoke(instance, Integer.valueOf(1));
             Object _get = fooField.get(instance);
+            Assert.assertEquals(Integer.valueOf(1), _get);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCreateStaticSetter() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Setter static int foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            Class<?> _compiledClass = it.getCompiledClass();
+            final Method setFoo = _compiledClass.getDeclaredMethod("setFoo", int.class);
+            Class<?> _compiledClass_1 = it.getCompiledClass();
+            Field _declaredField = _compiledClass_1.getDeclaredField("foo");
+            final Procedure1<Field> _function = new Procedure1<Field>() {
+              public void apply(final Field it) {
+                it.setAccessible(true);
+              }
+            };
+            final Field fooField = ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function);
+            setFoo.invoke(null, Integer.valueOf(1));
+            Object _get = fooField.get(null);
             Assert.assertEquals(Integer.valueOf(1), _get);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
@@ -179,7 +218,7 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final String text = _builder.toString();
       XtendClass _clazz = this.clazz(text);
-      this._validationTestHelper.assertWarning(_clazz, XtendPackage.Literals.XTEND_FIELD, "user.issue", "no effect");
+      this._validationTestHelper.assertWarning(_clazz, XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no effect");
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
         public void accept(final CompilationTestHelper.Result it) {
           try {

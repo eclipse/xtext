@@ -442,4 +442,36 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testStaticProperty() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Property static int foo = 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            Class<?> _compiledClass = it.getCompiledClass();
+            final Method setFoo = _compiledClass.getDeclaredMethod("setFoo", int.class);
+            setFoo.invoke(null, Integer.valueOf(1));
+            Class<?> _compiledClass_1 = it.getCompiledClass();
+            final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
+            Object _invoke = getFoo.invoke(null);
+            Assert.assertEquals(Integer.valueOf(1), _invoke);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
