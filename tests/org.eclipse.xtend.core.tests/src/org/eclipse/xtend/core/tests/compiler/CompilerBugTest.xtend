@@ -1828,7 +1828,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return false;
 			    if (getClass() != obj.getClass())
 			      return false;
-			    Weight other = (Weight) obj;
+			    Weight<?> other = (Weight<?>) obj;
 			    if (this._weight == null) {
 			      if (other._weight != null)
 			        return false;
@@ -1901,7 +1901,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return false;
 			    if (getClass() != obj.getClass())
 			      return false;
-			    Weight other = (Weight) obj;
+			    Weight<?> other = (Weight<?>) obj;
 			    if (this._weight == null) {
 			      if (other._weight != null)
 			        return false;
@@ -1974,7 +1974,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return false;
 			    if (getClass() != obj.getClass())
 			      return false;
-			    Weight other = (Weight) obj;
+			    Weight<?> other = (Weight<?>) obj;
 			    if (this._weight == null) {
 			      if (other._weight != null)
 			        return false;
@@ -2047,7 +2047,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return false;
 			    if (getClass() != obj.getClass())
 			      return false;
-			    Weight other = (Weight) obj;
+			    Weight<?> other = (Weight<?>) obj;
 			    if (this._weight == null) {
 			      if (other._weight != null)
 			        return false;

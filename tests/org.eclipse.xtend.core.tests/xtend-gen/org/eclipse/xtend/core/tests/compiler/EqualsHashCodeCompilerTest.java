@@ -314,4 +314,29 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testGenericClass() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("@EqualsHashCode class Foo<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("int a = 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String text = _builder.toString();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          String _singleGeneratedCode = it.getSingleGeneratedCode();
+          boolean _contains = _singleGeneratedCode.contains("Foo<?> other = (Foo<?>) obj");
+          Assert.assertTrue(_contains);
+        }
+      };
+      this.compilationTestHelper.compile(text, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
