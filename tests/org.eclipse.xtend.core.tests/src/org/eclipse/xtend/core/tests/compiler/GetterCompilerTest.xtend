@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 import com.google.inject.Inject
-import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+
 class GetterCompilerTest extends AbstractXtendCompilerTest {
 	@Inject
 	extension ValidationTestHelper
@@ -24,6 +25,17 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 			val instance = compiledClass.newInstance
 			val getFoo = compiledClass.getDeclaredMethod("getFoo")
 			assertEquals(1, getFoo.invoke(instance))
+		]
+	}
+	@Test
+	def void testCreateStaticGetter() {
+		'''
+			class Foo {
+				@Getter static int foo = 1
+			}
+		'''.compile[
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			assertEquals(1, getFoo.invoke(null))
 		]
 	}
 
@@ -60,7 +72,7 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		'''
-		text.clazz.assertWarning(XtendPackage.Literals.XTEND_FIELD, "user.issue", "no effect")
+		text.clazz.assertWarning(XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no effect")
 		text.compile[
 			val instance = compiledClass.newInstance
 			val getFoo = compiledClass.getDeclaredMethod("getFoo")
