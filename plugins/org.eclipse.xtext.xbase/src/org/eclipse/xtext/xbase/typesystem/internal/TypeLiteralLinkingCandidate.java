@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.TypeLiteralLinkingCandidateResolver;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
@@ -121,6 +123,19 @@ public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate
 	@Override
 	protected List<LightweightTypeReference> getSyntacticTypeArguments() {
 		return Collections.emptyList();
+	}
+	
+	@Override
+	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
+		if (idx == -1) {
+			return EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED);
+		}
+		return super.getConformanceHints(idx, recompute);
+	}
+	
+	@Override
+	protected LightweightTypeReference getSubstitutedExpectedType(int argumentIndex) {
+		return null;
 	}
 	
 	@Override
