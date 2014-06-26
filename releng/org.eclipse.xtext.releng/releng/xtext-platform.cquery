@@ -4,8 +4,8 @@
     <cq:property key="target.os" value="*"/>
     <cq:property key="target.ws" value="*"/>
     <cq:advisorNode namePattern="^org\.eclipse\.emf\.common$" filter="(ECLIPSE.TARGET.ALIAS=Latest)" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="2.9.0"/>
-    <cq:advisorNode namePattern="^org\.eclipse\.emf\.common$"  filter="(!(ECLIPSE.TARGET.ALIAS=Latest))" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[2.9.0,2.10.0)"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.emf\.common$" filter="(!(ECLIPSE.TARGET.ALIAS=Latest))" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[2.9.0,2.11.0)"/>
     <cq:advisorNode namePattern="^com\.google\.guava(?:\..+)?$" filter="(ECLIPSE.TARGET.ALIAS=Galileo)" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[10.0.1,11.0.0)"/>
     <cq:advisorNode namePattern="^com\.google\.guava(?:\..+)?$" filter="(!(ECLIPSE.TARGET.ALIAS=Galileo))" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[10.0.1,16.0.0)"/>
-   <cq:advisorNode namePattern="^" useTargetPlatform="false"/>
+    <cq:advisorNode namePattern="^" useTargetPlatform="false"/>
 </cq:componentQuery>
