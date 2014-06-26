@@ -24,7 +24,6 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -200,10 +199,6 @@ public class XtendLabelProvider extends XbaseLabelProvider {
     return (_name + _xifexpression);
   }
   
-  protected String text(final XtendTypeDeclaration element) {
-    return element.getName();
-  }
-  
   protected String text(final AnonymousClass element) {
     JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
     return this.text(_inferredType);
@@ -223,7 +218,17 @@ public class XtendLabelProvider extends XbaseLabelProvider {
         _builder.append("() {...}");
         return _builder.toString();
       }
-      _xblockexpression = element.getSimpleName();
+      String _simpleName_1 = element.getSimpleName();
+      String _xifexpression = null;
+      EList<JvmTypeParameter> _typeParameters = element.getTypeParameters();
+      boolean _isEmpty = _typeParameters.isEmpty();
+      if (_isEmpty) {
+        _xifexpression = "";
+      } else {
+        EList<JvmTypeParameter> _typeParameters_1 = element.getTypeParameters();
+        _xifexpression = this.uiStrings.typeParameters(_typeParameters_1);
+      }
+      _xblockexpression = (_simpleName_1 + _xifexpression);
     }
     return _xblockexpression;
   }

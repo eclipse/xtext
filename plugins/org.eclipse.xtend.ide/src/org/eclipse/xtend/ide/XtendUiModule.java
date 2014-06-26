@@ -57,6 +57,7 @@ import org.eclipse.xtend.ide.hyperlinking.XtendHyperlinkHelper;
 import org.eclipse.xtend.ide.labeling.XtendLabelProvider;
 import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider;
 import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
+import org.eclipse.xtend.ide.outline.SwitchOutlineModeContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeFactory;
 import org.eclipse.xtend.ide.outline.XtendOutlinePage;
@@ -523,5 +524,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends XtextDocumentReconcileStrategy> bindXtextDocumentReconcileStrategy() {
 		return XbaseDocumentReconcileStrategy.class;
+	}
+	
+	public void configureSwitchOutlineModeContribution(Binder binder) {
+		binder.bind(IOutlineContribution.class).annotatedWith(Names.named("SwitchOutlineModeContribution"))
+		.to(SwitchOutlineModeContribution.class);
 	}
 }
