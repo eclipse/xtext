@@ -10,6 +10,8 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+
 class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 	@Inject
 	extension ValidationTestHelper
@@ -85,6 +87,19 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 		]
 	}
 	
+	@Test def void testSuperClassWithoutEquals() {
+		'''
+			class Foo {
+			}
+			@EqualsHashCode class Bar extends Foo {
+				String bar = "Foo"
+			}
+		'''.compile[
+			assertFalse(getGeneratedCode("Bar"),getGeneratedCode("Bar").contains("super.equals"))
+			assertFalse(getGeneratedCode("Bar").contains("super.hashCode"))
+		]
+	}
+	
 	@Test
 	def void testExistingEquals() {
 		val text = '''
@@ -95,7 +110,7 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		'''
-		text.clazz.assertWarning(XtendPackage.Literals.XTEND_CLASS,"user.issue", "no effect")
+		text.clazz.assertWarning(XAnnotationsPackage.Literals.XANNOTATION,"user.issue", "no effect")
 		text.compile [
 			val instance = compiledClass.newInstance
 			assertEquals(instance, "foo")
