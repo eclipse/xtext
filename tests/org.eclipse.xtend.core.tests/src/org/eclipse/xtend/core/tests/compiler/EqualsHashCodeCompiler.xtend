@@ -133,4 +133,16 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 			assertEquals(0, instance.hashCode)
 		]
 	}
+	
+	@Test
+	def void testGenericClass() {
+		val text = '''
+			@EqualsHashCode class Foo<T> {
+				int a = 1
+			}
+		'''
+		text.compile [
+			assertTrue(singleGeneratedCode.contains("Foo<?> other = (Foo<?>) obj"))
+		]
+	}
 }

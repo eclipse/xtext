@@ -44,7 +44,6 @@ public final class IssueCodes {
 	public static final String MISSING_ABSTRACT_IN_ANONYMOUS = ISSUE_CODE_PREFIX + "missing_abstract_in_anonymous";
 	public static final String MISSING_OVERRIDE = ISSUE_CODE_PREFIX + "missing_override";
 	public static final String OBSOLETE_OVERRIDE = ISSUE_CODE_PREFIX + "obsolete_override";
-	public static final String STATIC_PROPERTY = ISSUE_CODE_PREFIX + "static_property";
 	public static final String INCONSISTENT_INDENTATION = ISSUE_CODE_PREFIX + "inconsistent_indentation";
 
 	public static final String XBASE_LIB_NOT_ON_CLASSPATH = ISSUE_CODE_PREFIX + "xbase_lib_not_on_classpath";
