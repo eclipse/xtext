@@ -207,4 +207,48 @@ public class AmbiguousOperatorsTest extends AmbiguityValidationTest {
     _builder.newLine();
     this.assertUnambiguous(_builder);
   }
+  
+  @Test
+  public void testUnambiguousOperators_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n(String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s+s");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void operator_plus(String s1, String s2) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
+  
+  @Test
+  public void testUnambiguousOperators_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void n(String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s+s");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static void +(String s1, String s2) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertUnambiguous(_builder);
+  }
 }

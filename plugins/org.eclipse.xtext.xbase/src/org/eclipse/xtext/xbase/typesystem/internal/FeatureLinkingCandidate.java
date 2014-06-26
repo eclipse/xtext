@@ -175,7 +175,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			result.accept(diagnostic);
 			return false;
 		} else if (super.validate(result)) {
-			if (isExplicitOperationCallOrBuilderSyntax() && !(getFeature() instanceof JvmExecutable)) {
+			if (isOperationCallSyntax() && !(getFeature() instanceof JvmExecutable)) {
 				String typeName = getFeatureTypeName();
 				String code = IssueCodes.FIELD_ACCESS_WITH_PARENTHESES;
 				if (!(getFeature() instanceof JvmField)) {
@@ -315,7 +315,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return expression instanceof XAbstractFeatureCall && ((XAbstractFeatureCall) expression).isTypeLiteral();
 	}
 
-	protected boolean isExplicitOperationCallOrBuilderSyntax() {
+	protected boolean isOperationCallSyntax() {
 		XAbstractFeatureCall featureCall = getFeatureCall();
 		if (featureCall instanceof XBinaryOperation || featureCall instanceof XAssignment) {
 			return false;
@@ -364,18 +364,6 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	public int getArityMismatch() {
-		int result = super.getArityMismatch();
-		if (isStatic() && (getImplicitReceiver() != null || getSyntacticReceiverIfPossibleArgument() != null && !isExtension())) {
-			if (result < 0)
-				result--;
-			else
-				result++;
-		}
-		return result;
-	}
-	
-	@Override
 	protected List<XExpression> getSyntacticArguments() {
 		return new FeatureLinkHelper().getSyntacticArguments(getFeatureCall());
 	}
@@ -418,10 +406,12 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
 		XExpression otherImplicitReceiver = casted.getImplicitReceiver();
 		if (otherImplicitReceiver != null) {
-			if (otherImplicitReceiver instanceof XAbstractFeatureCall && getImplicitReceiver() instanceof XAbstractFeatureCall) {
-				JvmIdentifiableElement otherImplicitReceiverFeature = ((XAbstractFeatureCall) otherImplicitReceiver).getFeature();
-				if (otherImplicitReceiverFeature != ((XAbstractFeatureCall) getImplicitReceiver()).getFeature())
-					return CandidateCompareResult.SUSPICIOUS_OTHER;
+			if (isStatic() == casted.isStatic()) {
+				if (otherImplicitReceiver instanceof XAbstractFeatureCall && getImplicitReceiver() instanceof XAbstractFeatureCall) {
+					JvmIdentifiableElement otherImplicitReceiverFeature = ((XAbstractFeatureCall) otherImplicitReceiver).getFeature();
+					if (otherImplicitReceiverFeature != ((XAbstractFeatureCall) getImplicitReceiver()).getFeature())
+						return CandidateCompareResult.SUSPICIOUS_OTHER;
+				}
 			}
 		} else {
 			if (isStatic() && casted.isStatic()) {
@@ -438,6 +428,11 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	
 	@Override
 	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
+		if (isStatic()) {
+			if (idx == -1) {
+				return EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED);	
+			}
+		}
 		if (idx == 0) {
 			if (getReceiver() != null) {
 				EnumSet<ConformanceHint> result = getReceiverConformanceHints();
@@ -450,6 +445,9 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	@Override
 	/* @Nullable */
 	protected LightweightTypeReference getSubstitutedExpectedType(int idx) {
+		if (idx == -1) {
+			return null;
+		}
 		if (idx == 0) {
 			if (getReceiver() != null) {
 				return null;
@@ -479,6 +477,47 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return CandidateCompareResult.OTHER;
 	}
 	
+	@Override
+	protected CandidateCompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
+		CandidateCompareResult result = super.compareByArgumentTypes(right);
+		if (result == CandidateCompareResult.AMBIGUOUS) {
+			result = compareByNameAndStaticFlag(right);
+		}
+		return result;
+	}
+	
+	protected CandidateCompareResult compareByNameAndStaticFlag(AbstractPendingLinkingCandidate<?> right) {
+		if (!getFeature().getSimpleName().equals(right.getFeature().getSimpleName())) {
+			// If the features have different names, it is possible to disambiguate them in the generated Java code
+			// prefer the instance feature
+			if (isStatic() != right.description.isStatic()) {
+				if (isStatic()) {
+					return CandidateCompareResult.OTHER;
+				}
+				return CandidateCompareResult.THIS;
+			}
+		}
+		// for assignments we prefer fields, otherwise we use the explicitOperationCall flag to decide if we prefer exectuables
+		if (!(getExpression() instanceof XAssignment) && isExplicitOperationCall()) {
+			if (getFeature() instanceof JvmExecutable) {
+				if (!(right.getFeature() instanceof JvmExecutable)) {
+					return CandidateCompareResult.THIS;	
+				}
+			} else if (right.getFeature() instanceof JvmExecutable) {
+				return CandidateCompareResult.OTHER;
+			}
+		} else {
+			if (getFeature() instanceof JvmExecutable) {
+				if (!(right.getFeature() instanceof JvmExecutable)) {
+					return CandidateCompareResult.OTHER;	
+				}
+			} else if (right.getFeature() instanceof JvmExecutable) {
+				return CandidateCompareResult.THIS;
+			}
+		}
+		return CandidateCompareResult.AMBIGUOUS;
+	}
+
 	protected boolean isCompoundOperator() {
 		if (!(getFeatureCall() instanceof XBinaryOperation)) {
 			return false;
@@ -511,7 +550,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			if (otherImplicitReceiver instanceof XAbstractFeatureCall) {
 				JvmIdentifiableElement feature = ((XAbstractFeatureCall) implicitReceiver).getFeature();
 				JvmIdentifiableElement otherFeature = ((XAbstractFeatureCall) otherImplicitReceiver).getFeature();
-				// e.g. two local variables in same block
+				// e.g. two local extension variables in same block
 				if (feature.eContainer() == otherFeature.eContainer()) {
 					return true;
 				}
@@ -526,30 +565,28 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		if (result == CandidateCompareResult.AMBIGUOUS) {
 			boolean isExecutable = getFeature() instanceof JvmExecutable;
 			if (isExecutable != right.getFeature() instanceof JvmExecutable && isVisible() == right.isVisible() && isTypeLiteral() == right.isTypeLiteral()) {
-				// TODO this code looks bogus to me (we need to verify why / if we need this)
-				if (getExpression() instanceof XAssignment) {
+				// XAssignments return true from #isExplicitOperationCall though they may link to
+				// a field or local variable
+				if (!(getExpression() instanceof XAssignment) && isExplicitOperationCall()) {
 					if (isExecutable)
-						return CandidateCompareResult.OTHER;
-					return CandidateCompareResult.THIS;
-				} else {
-					if (isExplicitOperationCall()) {
-						if (isExecutable)
-							return CandidateCompareResult.THIS;
-						return CandidateCompareResult.OTHER;
-					} else {
-						if (isExecutable)
-							return CandidateCompareResult.OTHER;
 						return CandidateCompareResult.THIS;
-					}
+					return CandidateCompareResult.OTHER;
 				}
 			} else if (getFeature() == right.getFeature() && right instanceof FeatureLinkingCandidate) {
 				FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
-				// we link to identical static features with equal assumptions
-				// stop comparison and take this one
-				if (isStatic() && casted.isStatic() 
-						&& getReceiver() == casted.getReceiver() 
-						&& isSyntacticReceiverPossibleArgument() == casted.isSyntacticReceiverPossibleArgument()) {
-					return CandidateCompareResult.THIS;
+				if (isStatic() && casted.isStatic()) {
+					if (getImplicitReceiver() != casted.getImplicitReceiver()) {
+						if (getImplicitReceiver() != null) {
+							return CandidateCompareResult.OTHER;
+						}
+						return CandidateCompareResult.THIS;
+					}
+					// we link to identical static features with equal assumptions
+					// stop comparison and take this one
+					if (getReceiver() == casted.getReceiver() 
+							&& isSyntacticReceiverPossibleArgument() == casted.isSyntacticReceiverPossibleArgument()) {
+						return CandidateCompareResult.THIS; 
+					}
 				}
 			}
 		}
@@ -557,15 +594,19 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected CandidateCompareResult compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int argumentIndex, EnumSet<ConformanceHint> leftConformance,
+	protected CandidateCompareResult compareByArgumentTypes(
+			AbstractPendingLinkingCandidate<?> right,
+			int leftIdx,
+			int rightIdx,
+			EnumSet<ConformanceHint> leftConformance,
 			EnumSet<ConformanceHint> rightConformance) {
-		CandidateCompareResult result = super.compareByArgumentTypes(right, argumentIndex, leftConformance, rightConformance);
+		CandidateCompareResult result = super.compareByArgumentTypes(right, leftIdx, rightIdx, leftConformance, rightConformance);
 		if ((result != CandidateCompareResult.EQUALLY_INVALID && result != CandidateCompareResult.AMBIGUOUS) 
 				|| leftConformance.contains(ConformanceHint.SUCCESS) || !(right instanceof FeatureLinkingCandidate))
 			return result;
 		// both types do not match - pick the one which is not an extension
-		boolean firstArgumentMismatch = isFirstArgument(argumentIndex);
-		boolean rightFirstArgumentMismatch = ((FeatureLinkingCandidate) right).isFirstArgument(argumentIndex);
+		boolean firstArgumentMismatch = isFirstArgument(leftIdx);
+		boolean rightFirstArgumentMismatch = ((FeatureLinkingCandidate) right).isFirstArgument(rightIdx);
 		if (firstArgumentMismatch != rightFirstArgumentMismatch) {
 			if (firstArgumentMismatch)
 				return CandidateCompareResult.OTHER;
@@ -591,32 +632,55 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		}
 		if (right instanceof FeatureLinkingCandidate) {
 			FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
-			if (isExtension() != casted.isExtension()) {
-				if (isExtension())
-					return CandidateCompareResult.OTHER;
-				return CandidateCompareResult.THIS;
-			}
-			if (isStatic() != casted.isStatic()) {
-				if (isSyntacticReceiverPossibleArgument() == casted.isSyntacticReceiverPossibleArgument()) {
-					if (isStatic()) {
-						return CandidateCompareResult.OTHER;
-					}
-					return CandidateCompareResult.THIS;
-				} else {
-					if (isStatic() && !isSyntacticReceiverPossibleArgument())
-						return CandidateCompareResult.THIS;
-					if (casted.isStatic() && !casted.isSyntacticReceiverPossibleArgument()) {
-						return CandidateCompareResult.OTHER;
-					}
-				}
-			}
+			return compareByArgumentTypes(casted, leftBoxing, rightBoxing);
 		}
+		return compareByBoxing(leftBoxing, rightBoxing);
+	}
+
+	protected CandidateCompareResult compareByBoxing(int leftBoxing, int rightBoxing) {
 		if (leftBoxing != rightBoxing) {
 			if (leftBoxing < rightBoxing)
 				return CandidateCompareResult.THIS;
 			return CandidateCompareResult.OTHER;
 		}
 		return CandidateCompareResult.AMBIGUOUS;
+	}
+
+	protected CandidateCompareResult compareByArgumentTypes(FeatureLinkingCandidate right, int leftBoxing, int rightBoxing) {
+		if (isExtension() != right.isExtension()) {
+			if (isExtension())
+				return CandidateCompareResult.OTHER;
+			return CandidateCompareResult.THIS;
+		} else if (isExtension() && isStatic() != right.isStatic()){
+			if (isStatic()) {
+				return CandidateCompareResult.OTHER;
+			}
+			return CandidateCompareResult.THIS;
+		}
+		return compareByArgumentTypesAndStaticFlag(right, leftBoxing, rightBoxing);
+	}
+
+	protected CandidateCompareResult compareByArgumentTypesAndStaticFlag(FeatureLinkingCandidate right, int leftBoxing, int rightBoxing) {
+		if (isStatic() != right.isStatic()) {
+			if (isSyntacticReceiverPossibleArgument() != right.isSyntacticReceiverPossibleArgument()) {
+				if (isStatic() && !isSyntacticReceiverPossibleArgument())
+					return CandidateCompareResult.THIS;
+				if (right.isStatic() && !right.isSyntacticReceiverPossibleArgument()) {
+					return CandidateCompareResult.OTHER;
+				}
+			} else {
+				if (isStatic()) {
+					if (getImplicitReceiver() != null && right.getImplicitReceiver() == null) {
+						return CandidateCompareResult.OTHER;
+					}
+				} else {
+					if (getImplicitReceiver() != null && right.getImplicitReceiver() == null) {
+						return CandidateCompareResult.THIS;
+					}
+				}
+			}
+		}
+		return compareByBoxing(leftBoxing, rightBoxing);
 	}
 	
 	@Override

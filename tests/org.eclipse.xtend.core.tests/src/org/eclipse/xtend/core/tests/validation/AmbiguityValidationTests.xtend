@@ -918,6 +918,30 @@ class AmbiguousOperatorsTest extends AmbiguityValidationTest {
 			}
 		'''.assertUnambiguous
 	}
+	
+	@Test
+	def void testUnambiguousOperators_03() {
+		'''
+			class C {
+				def void n(String s) {
+					s+s
+				}
+				def static void operator_plus(String s1, String s2) {}
+			}
+		'''.assertUnambiguous
+	}
+	
+	@Test
+	def void testUnambiguousOperators_04() {
+		'''
+			class C {
+				def void n(String s) {
+					s+s
+				}
+				def static void +(String s1, String s2) {}
+			}
+		'''.assertUnambiguous
+	}
 }
 
 /**
