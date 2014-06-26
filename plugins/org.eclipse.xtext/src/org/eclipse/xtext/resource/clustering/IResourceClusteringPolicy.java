@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.clustering;
+package org.eclipse.xtext.resource.clustering;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -17,11 +17,10 @@ import com.google.inject.ImplementedBy;
  * be unloaded during the build.
  * 
  * @author Knut Wannheden - Initial contribution and API
- * @Deprecated Use org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy instead
+ * @since 2.7
  */
-
 @ImplementedBy(DisabledClusteringPolicy.class)
-public interface IResourceClusteringPolicy extends org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy {
+public interface IResourceClusteringPolicy {
 
 	/**
 	 * Determine whether another resource should be loaded into the resource set and be processed.
