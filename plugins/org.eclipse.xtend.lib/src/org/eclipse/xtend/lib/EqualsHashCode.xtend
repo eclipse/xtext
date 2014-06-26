@@ -93,7 +93,7 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 						if (!super.equals(obj))
 						  return false;
 					«ENDIF»
-					«cls.simpleName» other = («cls.simpleName») obj;
+					«cls.selfTypeReference» other = («cls.selfTypeReference») obj;
 					«FOR field : includedFields»
 						«field.contributeToEquals»
 					«ENDFOR»

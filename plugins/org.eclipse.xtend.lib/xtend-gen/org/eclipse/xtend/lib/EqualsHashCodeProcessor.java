@@ -142,11 +142,11 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
                   _builder.newLine();
                 }
               }
-              String _simpleName = cls.getSimpleName();
-              _builder.append(_simpleName, "");
+              TypeReference _selfTypeReference = Util.this.context.selfTypeReference(cls);
+              _builder.append(_selfTypeReference, "");
               _builder.append(" other = (");
-              String _simpleName_1 = cls.getSimpleName();
-              _builder.append(_simpleName_1, "");
+              TypeReference _selfTypeReference_1 = Util.this.context.selfTypeReference(cls);
+              _builder.append(_selfTypeReference_1, "");
               _builder.append(") obj;");
               _builder.newLineIfNotEmpty();
               {
