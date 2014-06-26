@@ -14,6 +14,8 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.PrimitiveType;
 import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.EcoreUtil2;
@@ -32,6 +34,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
@@ -314,5 +317,22 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
   public TypeReference newTypeReference(final Class<?> clazz, final TypeReference... typeArguments) {
     String _name = clazz.getName();
     return this.newTypeReference(_name, typeArguments);
+  }
+  
+  public TypeReference selfTypeReference(final Type typeDeclaration) {
+    TypeReference _xifexpression = null;
+    if ((typeDeclaration instanceof TypeParameterDeclarator)) {
+      Iterable<? extends TypeParameterDeclaration> _typeParameters = ((TypeParameterDeclarator)typeDeclaration).getTypeParameters();
+      final Function1<TypeParameterDeclaration, TypeReference> _function = new Function1<TypeParameterDeclaration, TypeReference>() {
+        public TypeReference apply(final TypeParameterDeclaration it) {
+          return TypeReferenceProviderImpl.this.newTypeReference(it);
+        }
+      };
+      Iterable<TypeReference> _map = IterableExtensions.map(_typeParameters, _function);
+      _xifexpression = this.newTypeReference(typeDeclaration, ((TypeReference[])Conversions.unwrapArray(_map, TypeReference.class)));
+    } else {
+      _xifexpression = this.newTypeReference(typeDeclaration);
+    }
+    return _xifexpression;
   }
 }
