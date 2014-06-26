@@ -11,8 +11,9 @@
 	<packaging>pom</packaging>
 	<version>2.7.0-SNAPSHOT</version>
 	<modules>
-		<module>../../plugins/org.eclipse.xtend.lib</module>
 		<module>../../plugins/org.eclipse.xtext.xbase.lib</module>
+		<module>../../plugins/org.eclipse.xtend.lib.macro</module>
+		<module>../../plugins/org.eclipse.xtend.lib</module>
 		<module>../../plugins/org.eclipse.xtend.lib.gwt</module>
 		<module>../../plugins/org.eclipse.xtext.xbase.lib.gwt</module>
 

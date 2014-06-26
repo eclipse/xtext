@@ -8,9 +8,9 @@
     </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.xtend</groupId>
-	<artifactId>org.eclipse.xtend.lib</artifactId>
-	<name>Eclipse Xtend Runtime Library</name>
-	<description>The runtime library for the Xtend programming language.</description>
+	<artifactId>org.eclipse.xtend.lib.macro</artifactId>
+	<name>Eclipse Xtend Macro Library</name>
+	<description>The macros library for the Xtend programming language.</description>
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>

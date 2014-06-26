@@ -2529,6 +2529,7 @@ org.eclipse.xtext.xbase.lib.StringExtensions -> org.eclipse.xtext.xbase.lib.Stri
     62:62:boolean isNullOrEmpty(java.lang.String) -> isNullOrEmpty
     76:82:java.lang.String toFirstUpper(java.lang.String) -> toFirstUpper
     96:102:java.lang.String toFirstLower(java.lang.String) -> toFirstLower
+org.eclipse.xtext.xbase.lib.Synthetic -> org.eclipse.xtext.xbase.lib.Synthetic:
 org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate -> org.eclipse.xtext.xbase.lib.internal.BooleanFunctionDelegate:
     org.eclipse.xtext.xbase.lib.Functions$Function1 delegate -> delegate
     40:41:boolean apply(java.lang.Object) -> apply
@@ -2546,23 +2547,23 @@ org.eclipse.xtext.xbase.lib.util.ReflectExtensions -> org.eclipse.xtext.xbase.li
     152:162:java.lang.Class wrapperTypeFor(java.lang.Class) -> wrapperTypeFor
 org.eclipse.xtext.xbase.lib.util.ToStringHelper -> org.eclipse.xtext.xbase.lib.util.ToStringHelper:
     java.lang.ThreadLocal currentlyProcessed -> currentlyProcessed
-    83:84:boolean startProcessing(java.lang.Object) -> startProcessing
-    88:90:void endProcessing(java.lang.Object) -> endProcessing
-    99:119:java.lang.String toString(java.lang.Object) -> toString
-    124:124:java.lang.String toSimpleReferenceString(java.lang.Object) -> toSimpleReferenceString
-    134:144:void addField(java.lang.reflect.Field,java.lang.Object,org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder) -> addField
-    152:196:void internalToString(java.lang.Object,org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder) -> internalToString
-    205:210:java.util.List getAllDeclaredFields(java.lang.Class) -> getAllDeclaredFields
+    82:83:boolean startProcessing(java.lang.Object) -> startProcessing
+    87:89:void endProcessing(java.lang.Object) -> endProcessing
+    98:118:java.lang.String toString(java.lang.Object) -> toString
+    123:123:java.lang.String toSimpleReferenceString(java.lang.Object) -> toSimpleReferenceString
+    133:143:void addField(java.lang.reflect.Field,java.lang.Object,org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder) -> addField
+    151:195:void internalToString(java.lang.Object,org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder) -> internalToString
+    204:209:java.util.List getAllDeclaredFields(java.lang.Class) -> getAllDeclaredFields
 org.eclipse.xtext.xbase.lib.util.ToStringHelper$1 -> org.eclipse.xtext.xbase.lib.util.ToStringHelper$1:
-    75:75:java.util.IdentityHashMap initialValue() -> initialValue
+    74:74:java.util.IdentityHashMap initialValue() -> initialValue
     1:1:java.lang.Object initialValue() -> initialValue
 org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder -> org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder:
     java.lang.StringBuilder builder -> builder
     int indentation -> indentation
     java.lang.String indentationString -> indentationString
     java.lang.String newLineString -> newLineString
-    41:42:org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder increaseIndent() -> increaseIndent
-    46:47:org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder decreaseIndent() -> decreaseIndent
-    51:58:org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder append(java.lang.CharSequence) -> append
-    62:63:org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder newLine() -> newLine
-    68:68:java.lang.String toString() -> toString
+    40:41:org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder increaseIndent() -> increaseIndent
+    45:46:org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder decreaseIndent() -> decreaseIndent
+    50:57:org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder append(java.lang.CharSequence) -> append
+    61:62:org.eclipse.xtext.xbase.lib.util.ToStringHelper$IndentationAwareStringBuilder newLine() -> newLine
+    67:67:java.lang.String toString() -> toString
