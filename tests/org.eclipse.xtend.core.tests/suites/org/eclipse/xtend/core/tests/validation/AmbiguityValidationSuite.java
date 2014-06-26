@@ -23,6 +23,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	AmbiguousRawFeatureCallTest.class,
 	AmbiguityBug421831Test.class,
 	AmbiguityBug426779Test.class,
+	AmbiguityBug427352Test.class,
 	AmbiguityBug429623Test.class
 })
 public class AmbiguityValidationSuite {

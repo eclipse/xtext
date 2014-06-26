@@ -388,6 +388,21 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz("class X { def static setFoo(String x) {} def static meth() { setFoo('') } }");
 		helper.assertNoErrors(clazz);
 	}
+	
+	@Test public void testXFeatureCallOperation5() throws Exception {
+		XtendClass clazz = clazz(
+				"class C {\n" + 
+				"	def int m(D it) {\n" + 
+				"		d('')\n" + 
+				"	}\n" + 
+				"	static class D {\n" + 
+				"		def String d(CharSequence c) {}\n" + 
+				"		def static int d(String s) { 0 }\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER);
+	}
 
 	@Test public void testXMemberFeatureCallOperation1() throws Exception {
 		XtendClass clazz = clazz("class X { def setFoo(String x) {} def meth() { new X().setFoo('') } }");
@@ -410,7 +425,19 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
 				org.eclipse.xtext.xbase.validation.IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
-
+	
+	@Test public void testXMemberFeatureCallOperation5() throws Exception {
+		XtendClass clazz = clazz(
+				"class C {\n" + 
+				"	def void m(CharSequence c) {\n" + 
+				"		this.m('')\n" + 
+				"	}\n" + 
+				"	def static void m(String s) {}\n" + 
+				"}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER);
+	}
+	
 	@Test public void testXAssignmentOperation1() throws Exception {
 		XtendClass clazz = clazz("class X { def setFoo(String x) {} def meth() { foo = '' } }");
 		helper.assertNoErrors(clazz);

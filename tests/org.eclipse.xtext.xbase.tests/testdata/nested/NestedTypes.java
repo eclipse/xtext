@@ -18,4 +18,14 @@ public class NestedTypes {
 	public static boolean isInterface() {
 		return true;
 	}
+	
+	public static class primitive {
+	}
+	public static int getPrimitive() {
+		return 1;
+	}
+	
+	public static class annotation {
+	}
+	public static int annotation = 1;
 }
