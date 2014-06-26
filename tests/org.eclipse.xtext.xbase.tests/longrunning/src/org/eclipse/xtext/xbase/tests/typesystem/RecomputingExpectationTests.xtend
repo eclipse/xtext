@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sebastian Zarnekow
@@ -31,11 +32,11 @@ class RecomputingExpectationTest extends AbstractExpectationTest {
  */
 class RecordingRecomputingReentrantTypeResolver extends RecomputingReentrantTypeResolver {
 	
-	override createResolvedTypes() {
+	override createResolvedTypes(CancelIndicator monitor) {
 		val recorder = typeComputer as ExpectationTestingTypeComputer
 		val test = recorder.test
 		test.clearData
-		super.createResolvedTypes()
+		super.createResolvedTypes(monitor)
 	}
 	
 }
