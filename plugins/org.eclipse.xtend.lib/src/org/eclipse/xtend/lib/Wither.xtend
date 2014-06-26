@@ -28,6 +28,7 @@ annotation Wither {
  * @since 2.7
  */
 @Beta
+@GwtCompatible
 class WitherProcessor implements TransformationParticipant<MutableMemberDeclaration> {
 
 	override doTransform(List<? extends MutableMemberDeclaration> elements, extension TransformationContext context) {
@@ -48,7 +49,8 @@ class WitherProcessor implements TransformationParticipant<MutableMemberDeclarat
 		val extension util = new WitherProcessor.Util(context)
 		val extension voUtil = new ValueObjectProcessor.Util(context)
 		if (hasWither) {
-			addWarning("A wither is already defined, this annotation has no effect")
+			val annotation = findAnnotation(Wither.findTypeGlobally)
+			annotation.addWarning("A wither is already defined, this annotation has no effect")
 		} else {
 			addWither(declaringType.valueObjectConstructorFields)
 		}
@@ -58,6 +60,7 @@ class WitherProcessor implements TransformationParticipant<MutableMemberDeclarat
 	 * @since 2.7
 	 */
 	@Beta
+	@GwtCompatible
 	static class Util {
 		extension TransformationContext context
 
@@ -78,10 +81,14 @@ class WitherProcessor implements TransformationParticipant<MutableMemberDeclarat
 				field.addError("Type cannot be inferred.")
 				return
 			}
+			if (field.static) {
+				field.addError("Cannot add a Wither for a static field")
+				return
+			}
 			val cls = field.declaringType as MutableClassDeclaration
 			cls.addMethod(field.witherName) [
 				addAnnotation(newAnnotationReference(Pure))
-				returnType = cls.newTypeReference
+				returnType = cls.newSelfTypeReference
 				val param = addParameter(field.simpleName, field.type)
 				val constructorArguments = <Declaration>newArrayList
 				for (otherField : constructorFields) {
@@ -92,7 +99,7 @@ class WitherProcessor implements TransformationParticipant<MutableMemberDeclarat
 					}
 				}
 				body = '''
-					return new «cls»(«constructorArguments.join(", ")[simpleName]»);
+					return new «cls.newSelfTypeReference»(«constructorArguments.join(", ")[simpleName]»);
 				'''
 			]
 		}

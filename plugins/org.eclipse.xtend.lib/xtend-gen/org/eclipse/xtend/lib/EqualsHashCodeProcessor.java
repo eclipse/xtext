@@ -149,6 +149,13 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
               _builder.append(_simpleName_1, "");
               _builder.append(") obj;");
               _builder.newLineIfNotEmpty();
+              TypeReference _newSelfTypeReference = Util.this.context.newSelfTypeReference(cls);
+              _builder.append(_newSelfTypeReference, "");
+              _builder.append(" other = (");
+              TypeReference _newSelfTypeReference_1 = Util.this.context.newSelfTypeReference(cls);
+              _builder.append(_newSelfTypeReference_1, "");
+              _builder.append(") obj;");
+              _builder.newLineIfNotEmpty();
               {
                 for(final FieldDeclaration field : includedFields) {
                   String _contributeToEquals = Util.this.contributeToEquals(field);

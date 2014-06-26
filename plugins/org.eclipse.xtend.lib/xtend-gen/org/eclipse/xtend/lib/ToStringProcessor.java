@@ -1,7 +1,9 @@
 package org.eclipse.xtend.lib;
 
 import com.google.common.annotations.Beta;
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
+import org.eclipse.xtend.lib.ToString;
 import org.eclipse.xtend.lib.ValueObjectProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -12,6 +14,7 @@ import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -23,12 +26,14 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
  * @since 2.7
  */
 @Beta
+@GwtCompatible
 @SuppressWarnings("all")
 public class ToStringProcessor extends AbstractClassProcessor {
   /**
    * @since 2.7
    */
   @Beta
+  @GwtCompatible
   public static class Util {
     @Extension
     private TransformationContext context;
@@ -127,7 +132,9 @@ public class ToStringProcessor extends AbstractClassProcessor {
     final ValueObjectProcessor.Util voUtil = new ValueObjectProcessor.Util(context);
     boolean _hasToString = util.hasToString(it);
     if (_hasToString) {
-      context.addWarning(it, "toString is already defined, this annotation has no effect.");
+      Type _findTypeGlobally = context.findTypeGlobally(ToString.class);
+      final AnnotationReference annotation = it.findAnnotation(_findTypeGlobally);
+      context.addWarning(annotation, "toString is already defined, this annotation has no effect.");
     } else {
       TypeReference _extendedClass = it.getExtendedClass();
       TypeReference _object = context.getObject();
