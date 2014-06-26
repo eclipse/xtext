@@ -55,7 +55,6 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
-import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -227,14 +226,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		return ePackages;
 	}
 
-	@Check
-	public void checkPropertyAnnotation(XtendField field) {
-		if (hasAnnotation(field, Property.class) && field.isStatic()) {
-			error("A property must not be static", XtendPackage.Literals.XTEND_MEMBER__MODIFIERS, 
-					field.getModifiers().indexOf("static"), STATIC_PROPERTY);
-		}
-	}
-	
 	protected boolean hasAnnotation(XtendAnnotationTarget source, Class<?> class1) {
 		for (XAnnotation anno : source.getAnnotations()) {
 			if (anno != null && anno.getAnnotationType() != null && class1.getName().equals(anno.getAnnotationType().getIdentifier()))
