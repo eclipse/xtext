@@ -513,6 +513,20 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
 	}
 	
+	@Test public void testStaticFeatureCall_29() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val int x = nested.NestedTypes.array }");
+		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) variable.getRight();
+		assertEquals("nested.NestedTypes$array", featureCall.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticFeatureCall_30() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val boolean x = nested.NestedTypes.isInterface}");
+		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) variable.getRight();
+		assertEquals("nested.NestedTypes.isInterface()", featureCall.getFeature().getIdentifier());
+	}
+	
 	
 	@Test public void testGenerics() throws Exception {
 		expression("new testdata.GenericType1<String>() += 'foo'", true);
