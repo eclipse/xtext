@@ -39,9 +39,8 @@ class GetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 	protected def dispatch transform(MutableFieldDeclaration it, extension TransformationContext context) {
 		extension val util = new Util(context)
 		if (hasGetter) {
-			val annotation = findAnnotation(Getter.findTypeGlobally)
-			annotation.addWarning("A getter is already defined, this annotation has no effect")
-		} else {
+			findAnnotation(Getter.findTypeGlobally).addWarning("A getter is already defined, this annotation has no effect")
+		} else if (canAddGetter) {
 			addGetter
 		}
 	}
@@ -49,7 +48,7 @@ class GetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 	protected def dispatch transform(MutableClassDeclaration it, extension TransformationContext context) {
 		extension val util = new Util(context)
 		declaredFields.filter[!static && isThePrimaryGeneratedJavaElement].forEach [
-			if (!hasGetter) {
+			if (!hasGetter && canAddGetter) {
 				addGetter
 			}
 		]
@@ -69,6 +68,28 @@ class GetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 
 		def hasGetter(FieldDeclaration it) {
 			declaringType.findDeclaredMethod(getterName) !== null
+		}
+		
+		def canAddGetter(MutableFieldDeclaration field) {
+			val overriddenGetter = field.declaringType.newSelfTypeReference.allResolvedMethods.findFirst[
+				declaration.simpleName == field.getterName
+				&& resolvedParameters.empty
+			]
+			if (overriddenGetter == null)
+				return true
+			val overriddenDeclaration = overriddenGetter.declaration
+			if (overriddenDeclaration.final) {
+				field.addError('''Cannot override the final method «overriddenGetter.simpleSignature» in «overriddenDeclaration.declaringType.simpleName»''')
+				return false
+			}
+			if (!overriddenGetter.resolvedReturnType.isAssignableFrom(field.type)) {
+				field.addError('''
+					Cannot override the method «overriddenGetter.simpleSignature» in «overriddenDeclaration.declaringType.simpleName», 
+					because its return type is incompatible with «field.type.simpleName»
+				''')
+				return false
+			}
+			return true
 		}
 
 		def getGetterName(FieldDeclaration it) {

@@ -15,14 +15,14 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Declaration;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
+import org.eclipse.xtend.lib.macro.declaration.ResolvedParameter;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -58,17 +58,17 @@ public class DataProcessor extends AbstractClassProcessor {
           boolean _xblockexpression = false;
           {
             final ArrayList<TypeReference> expectedTypes = CollectionLiterals.<TypeReference>newArrayList();
-            ConstructorDeclaration _superConstructor = Util.this.getSuperConstructor(cls);
+            ResolvedConstructor _superConstructor = Util.this.getSuperConstructor(cls);
             boolean _tripleNotEquals = (_superConstructor != null);
             if (_tripleNotEquals) {
-              ConstructorDeclaration _superConstructor_1 = Util.this.getSuperConstructor(cls);
-              Iterable<? extends ParameterDeclaration> _parameters = _superConstructor_1.getParameters();
-              final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
-                public TypeReference apply(final ParameterDeclaration it) {
-                  return it.getType();
+              ResolvedConstructor _superConstructor_1 = Util.this.getSuperConstructor(cls);
+              Iterable<? extends ResolvedParameter> _resolvedParameters = _superConstructor_1.getResolvedParameters();
+              final Function1<ResolvedParameter, TypeReference> _function = new Function1<ResolvedParameter, TypeReference>() {
+                public TypeReference apply(final ResolvedParameter it) {
+                  return it.getResolvedType();
                 }
               };
-              Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
+              Iterable<TypeReference> _map = IterableExtensions.map(_resolvedParameters, _function);
               Iterables.<TypeReference>addAll(expectedTypes, _map);
             }
             Iterable<? extends FieldDeclaration> _dataFields = Util.this.getDataFields(cls);
@@ -79,13 +79,13 @@ public class DataProcessor extends AbstractClassProcessor {
             };
             Iterable<TypeReference> _map_1 = IterableExtensions.map(_dataFields, _function_1);
             Iterables.<TypeReference>addAll(expectedTypes, _map_1);
-            Iterable<? extends ParameterDeclaration> _parameters_1 = it.getParameters();
+            Iterable<? extends ParameterDeclaration> _parameters = it.getParameters();
             final Function1<ParameterDeclaration, TypeReference> _function_2 = new Function1<ParameterDeclaration, TypeReference>() {
               public TypeReference apply(final ParameterDeclaration it) {
                 return it.getType();
               }
             };
-            Iterable<TypeReference> _map_2 = IterableExtensions.map(_parameters_1, _function_2);
+            Iterable<TypeReference> _map_2 = IterableExtensions.map(_parameters, _function_2);
             List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map_2);
             _xblockexpression = Objects.equal(_list, expectedTypes);
           }
@@ -98,24 +98,25 @@ public class DataProcessor extends AbstractClassProcessor {
     public MutableConstructorDeclaration addDataConstructor(final MutableClassDeclaration cls) {
       final Procedure1<MutableConstructorDeclaration> _function = new Procedure1<MutableConstructorDeclaration>() {
         public void apply(final MutableConstructorDeclaration constructor) {
-          final HashMap<Declaration, MutableParameterDeclaration> fieldToParameter = CollectionLiterals.<Declaration, MutableParameterDeclaration>newHashMap();
-          Iterable<? extends ParameterDeclaration> _elvis = null;
-          ConstructorDeclaration _superConstructor = Util.this.getSuperConstructor(cls);
-          Iterable<? extends ParameterDeclaration> _parameters = null;
+          final HashMap<Object, MutableParameterDeclaration> fieldToParameter = CollectionLiterals.<Object, MutableParameterDeclaration>newHashMap();
+          Iterable<? extends ResolvedParameter> _elvis = null;
+          ResolvedConstructor _superConstructor = Util.this.getSuperConstructor(cls);
+          Iterable<? extends ResolvedParameter> _resolvedParameters = null;
           if (_superConstructor!=null) {
-            _parameters=_superConstructor.getParameters();
+            _resolvedParameters=_superConstructor.getResolvedParameters();
           }
-          if (_parameters != null) {
-            _elvis = _parameters;
+          if (_resolvedParameters != null) {
+            _elvis = _resolvedParameters;
           } else {
-            _elvis = Collections.<ParameterDeclaration>unmodifiableList(Lists.<ParameterDeclaration>newArrayList());
+            _elvis = Collections.<ResolvedParameter>unmodifiableList(Lists.<ResolvedParameter>newArrayList());
           }
-          final Iterable<? extends ParameterDeclaration> superParameters = _elvis;
-          final Procedure1<ParameterDeclaration> _function = new Procedure1<ParameterDeclaration>() {
-            public void apply(final ParameterDeclaration it) {
-              String _simpleName = it.getSimpleName();
-              TypeReference _type = it.getType();
-              final MutableParameterDeclaration param = constructor.addParameter(_simpleName, _type);
+          final Iterable<? extends ResolvedParameter> superParameters = _elvis;
+          final Procedure1<ResolvedParameter> _function = new Procedure1<ResolvedParameter>() {
+            public void apply(final ResolvedParameter it) {
+              ParameterDeclaration _declaration = it.getDeclaration();
+              String _simpleName = _declaration.getSimpleName();
+              TypeReference _resolvedType = it.getResolvedType();
+              final MutableParameterDeclaration param = constructor.addParameter(_simpleName, _resolvedType);
               fieldToParameter.put(it, param);
             }
           };
@@ -135,9 +136,10 @@ public class DataProcessor extends AbstractClassProcessor {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
               _builder.append("super(");
-              final Function1<ParameterDeclaration, String> _function = new Function1<ParameterDeclaration, String>() {
-                public String apply(final ParameterDeclaration it) {
-                  return it.getSimpleName();
+              final Function1<ResolvedParameter, String> _function = new Function1<ResolvedParameter, String>() {
+                public String apply(final ResolvedParameter it) {
+                  ParameterDeclaration _declaration = it.getDeclaration();
+                  return _declaration.getSimpleName();
                 }
               };
               String _join = IterableExtensions.join(superParameters, ", ", _function);
@@ -177,7 +179,7 @@ public class DataProcessor extends AbstractClassProcessor {
       return IterableExtensions.filter(_dataFields, _function);
     }
     
-    public ConstructorDeclaration getSuperConstructor(final ClassDeclaration it) {
+    public ResolvedConstructor getSuperConstructor(final ClassDeclaration it) {
       TypeReference _extendedClass = it.getExtendedClass();
       TypeReference _object = this.context.getObject();
       boolean _equals = Objects.equal(_extendedClass, _object);
@@ -185,9 +187,8 @@ public class DataProcessor extends AbstractClassProcessor {
         return null;
       }
       TypeReference _extendedClass_1 = it.getExtendedClass();
-      Type _type = _extendedClass_1.getType();
-      Iterable<? extends ConstructorDeclaration> _declaredConstructors = ((ClassDeclaration) _type).getDeclaredConstructors();
-      return IterableExtensions.head(_declaredConstructors);
+      Iterable<? extends ResolvedConstructor> _declaredResolvedConstructors = _extendedClass_1.getDeclaredResolvedConstructors();
+      return IterableExtensions.head(_declaredResolvedConstructors);
     }
     
     public Iterable<? extends FieldDeclaration> getDataFields(final ClassDeclaration it) {
@@ -247,7 +248,7 @@ public class DataProcessor extends AbstractClassProcessor {
     boolean _not_1 = (!_hasHashCode);
     if (_not_1) {
       Iterable<? extends MutableFieldDeclaration> _dataFields = util.getDataFields(it);
-      ConstructorDeclaration _superConstructor = util.getSuperConstructor(it);
+      ResolvedConstructor _superConstructor = util.getSuperConstructor(it);
       boolean _tripleNotEquals = (_superConstructor != null);
       ehUtil.addHashCode(it, _dataFields, _tripleNotEquals);
     }
@@ -255,7 +256,7 @@ public class DataProcessor extends AbstractClassProcessor {
     boolean _not_2 = (!_hasEquals);
     if (_not_2) {
       Iterable<? extends MutableFieldDeclaration> _dataFields_1 = util.getDataFields(it);
-      ConstructorDeclaration _superConstructor_1 = util.getSuperConstructor(it);
+      ResolvedConstructor _superConstructor_1 = util.getSuperConstructor(it);
       boolean _tripleNotEquals_1 = (_superConstructor_1 != null);
       ehUtil.addEquals(it, _dataFields_1, _tripleNotEquals_1);
     }

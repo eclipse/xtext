@@ -25,7 +25,6 @@ import com.google.common.annotations.Beta;
  * @param <T> the type which this processor processes.
  * 
  * @author Sven Efftinge
- * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface TransformationParticipant<T extends MutableNamedElement> {

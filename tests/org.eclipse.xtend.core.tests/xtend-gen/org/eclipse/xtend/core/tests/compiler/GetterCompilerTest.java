@@ -12,6 +12,8 @@ import com.google.inject.Inject;
 import java.lang.reflect.Method;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
@@ -51,6 +53,40 @@ public class GetterCompilerTest extends AbstractXtendCompilerTest {
             final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
             Object _invoke = getFoo.invoke(instance);
             Assert.assertEquals(Integer.valueOf(1), _invoke);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCreateGenericGetter() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Getter T foo = null");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            String _singleGeneratedCode = it.getSingleGeneratedCode();
+            boolean _contains = _singleGeneratedCode.contains("T getFoo");
+            Assert.assertTrue(_contains);
+            Class<?> _compiledClass = it.getCompiledClass();
+            final Object instance = _compiledClass.newInstance();
+            Class<?> _compiledClass_1 = it.getCompiledClass();
+            final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
+            Object _invoke = getFoo.invoke(instance);
+            Assert.assertEquals(null, _invoke);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -194,6 +230,84 @@ public class GetterCompilerTest extends AbstractXtendCompilerTest {
         }
       };
       this.compilationTestHelper.compile(text, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCannotOverrideFinalGetter() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Fizz {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def final String getFoo() {\"foo\"}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Buzz extends Fizz {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Getter String foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "final", "Fizz", "getFoo");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCannotOverrideWithConflictingReturnType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def String getFoo() {\"foo\"}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Bar extends Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Getter int foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "incompatible", "Foo", "getFoo");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCanSpecializeReturnType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def CharSequence getFoo() {\"foo\"}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Bar extends Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Getter String foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertNoErrors(_file);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

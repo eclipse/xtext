@@ -28,14 +28,21 @@ public class PropertyProcessor extends AbstractFieldProcessor {
       getterUtil.addGetter(it);
     }
     boolean _and = false;
+    boolean _and_1 = false;
     boolean _isFinal = it.isFinal();
     boolean _not_1 = (!_isFinal);
     if (!_not_1) {
-      _and = false;
+      _and_1 = false;
     } else {
       boolean _hasSetter = setterUtil.hasSetter(it);
       boolean _not_2 = (!_hasSetter);
-      _and = _not_2;
+      _and_1 = _not_2;
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      boolean _canAddSetter_Old = setterUtil.canAddSetter_Old(it);
+      _and = _canAddSetter_Old;
     }
     if (_and) {
       setterUtil.addSetter(it);
