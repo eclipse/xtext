@@ -11,6 +11,7 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 
 class ToStringCompilerTest extends AbstractXtendCompilerTest {
 	@Inject
@@ -58,7 +59,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		'''
-		text.clazz.assertWarning(XtendPackage.Literals.XTEND_CLASS,"user.issue", "no effect")
+		text.clazz.assertWarning(XAnnotationsPackage.Literals.XANNOTATION,"user.issue", "no effect")
 		text.compile [
 			val instance = compiledClass.newInstance
 			assertEquals("foo", instance.toString)

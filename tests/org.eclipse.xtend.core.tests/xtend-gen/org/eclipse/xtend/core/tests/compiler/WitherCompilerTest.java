@@ -16,6 +16,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -235,7 +236,7 @@ public class WitherCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final String text = _builder.toString();
       XtendClass _clazz = this.clazz(text);
-      this._validationTestHelper.assertWarning(_clazz, XtendPackage.Literals.XTEND_FIELD, "user.issue", "no effect");
+      this._validationTestHelper.assertWarning(_clazz, XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no effect");
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
         public void accept(final CompilationTestHelper.Result it) {
           try {
@@ -306,6 +307,39 @@ public class WitherCompilerTest extends AbstractXtendCompilerTest {
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testGenericClass() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Wither T foo");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new(T foo) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("this.foo = foo");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          String _singleGeneratedCode = it.getSingleGeneratedCode();
+          boolean _contains = _singleGeneratedCode.contains("Foo<T> withFoo(final T foo)");
+          Assert.assertTrue(_contains);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);

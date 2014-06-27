@@ -1,6 +1,7 @@
 package org.eclipse.xtend.lib
 
 import com.google.common.annotations.Beta
+import com.google.common.annotations.GwtCompatible
 import java.lang.annotation.ElementType
 import java.lang.annotation.Target
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
@@ -17,6 +18,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 @Beta
 @Target(ElementType.TYPE)
 @Active(ToStringProcessor)
+@GwtCompatible
 annotation ToString {
 }
 
@@ -24,13 +26,15 @@ annotation ToString {
  * @since 2.7
  */
 @Beta
+@GwtCompatible
 class ToStringProcessor extends AbstractClassProcessor {
 
 	override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
-		val extension util = new Util(context)
+		val extension util = new ToStringProcessor.Util(context)
 		val extension voUtil = new ValueObjectProcessor.Util(context)
 		if (hasToString) {
-			addWarning("toString is already defined, this annotation has no effect.")
+			val annotation = findAnnotation(ToString.findTypeGlobally)
+			annotation.addWarning("toString is already defined, this annotation has no effect.")
 		} else if (extendedClass != object) {
 			addReflectiveToString
 		} else {
@@ -42,6 +46,7 @@ class ToStringProcessor extends AbstractClassProcessor {
 	* @since 2.7
 	*/
 	@Beta
+	@GwtCompatible
 	static class Util {
 		extension TransformationContext context
 

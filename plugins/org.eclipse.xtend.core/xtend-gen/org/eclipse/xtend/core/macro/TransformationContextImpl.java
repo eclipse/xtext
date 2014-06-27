@@ -468,6 +468,12 @@ public class TransformationContextImpl implements TransformationContext {
     return _annotationReferenceProvider.newAnnotationReference(annotationReference, initializer);
   }
   
+  public TypeReference newSelfTypeReference(final Type typeDeclaration) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
+    return _typeReferenceProvider.newSelfTypeReference(typeDeclaration);
+  }
+  
   @Pure
   public CompilationUnitImpl getUnit() {
     return this._unit;

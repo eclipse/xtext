@@ -1,6 +1,7 @@
 package org.eclipse.xtend.lib;
 
 import com.google.common.annotations.Beta;
+import com.google.common.annotations.GwtCompatible;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 import org.eclipse.xtend.lib.ToStringProcessor;
@@ -12,5 +13,6 @@ import org.eclipse.xtend.lib.macro.Active;
 @Beta
 @Target(ElementType.TYPE)
 @Active(ToStringProcessor.class)
+@GwtCompatible
 public @interface ToString {
 }
