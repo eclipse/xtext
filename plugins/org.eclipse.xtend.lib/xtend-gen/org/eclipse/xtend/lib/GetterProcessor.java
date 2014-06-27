@@ -1,9 +1,11 @@
 package org.eclipse.xtend.lib;
 
 import com.google.common.annotations.Beta;
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.List;
+import org.eclipse.xtend.lib.Getter;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -14,6 +16,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -29,12 +32,14 @@ import org.eclipse.xtext.xbase.lib.Synthetic;
  * @since 2.7
  */
 @Beta
+@GwtCompatible
 @SuppressWarnings("all")
 public class GetterProcessor implements TransformationParticipant<MutableMemberDeclaration> {
   /**
    * @since 2.7
    */
   @Beta
+  @GwtCompatible
   public static class Util {
     @Extension
     private TransformationContext context;
@@ -77,16 +82,33 @@ public class GetterProcessor implements TransformationParticipant<MutableMemberD
           StringConcatenationClient _client = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("return this.");
+              _builder.append("return ");
+              Object _fieldOwner = Util.this.fieldOwner(field);
+              _builder.append(_fieldOwner, "");
+              _builder.append(".");
               String _simpleName = field.getSimpleName();
               _builder.append(_simpleName, "");
               _builder.append(";");
             }
           };
           it.setBody(_client);
+          boolean _isStatic = field.isStatic();
+          it.setStatic(_isStatic);
         }
       };
       _declaringType.addMethod(_getterName, _function);
+    }
+    
+    private Object fieldOwner(final MutableFieldDeclaration it) {
+      Object _xifexpression = null;
+      boolean _isStatic = it.isStatic();
+      if (_isStatic) {
+        MutableTypeDeclaration _declaringType = it.getDeclaringType();
+        _xifexpression = this.context.newTypeReference(_declaringType);
+      } else {
+        _xifexpression = "this";
+      }
+      return _xifexpression;
     }
     
     public boolean isBooleanType(final TypeReference it) {
@@ -128,7 +150,9 @@ public class GetterProcessor implements TransformationParticipant<MutableMemberD
     final GetterProcessor.Util util = new GetterProcessor.Util(context);
     boolean _hasGetter = util.hasGetter(it);
     if (_hasGetter) {
-      context.addWarning(it, "A getter is already defined, this annotation has no effect");
+      Type _findTypeGlobally = context.findTypeGlobally(Getter.class);
+      final AnnotationReference annotation = it.findAnnotation(_findTypeGlobally);
+      context.addWarning(annotation, "A getter is already defined, this annotation has no effect");
     } else {
       util.addGetter(it);
     }

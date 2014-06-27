@@ -29,6 +29,7 @@ annotation Getter {
  * @since 2.7
  */
 @Beta
+@GwtCompatible
 class GetterProcessor implements TransformationParticipant<MutableMemberDeclaration> {
 
 	override doTransform(List<? extends MutableMemberDeclaration> elements, extension TransformationContext context) {
@@ -38,7 +39,8 @@ class GetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 	protected def dispatch transform(MutableFieldDeclaration it, extension TransformationContext context) {
 		extension val util = new Util(context)
 		if (hasGetter) {
-			addWarning("A getter is already defined, this annotation has no effect")
+			val annotation = findAnnotation(Getter.findTypeGlobally)
+			annotation.addWarning("A getter is already defined, this annotation has no effect")
 		} else {
 			addGetter
 		}
@@ -57,6 +59,7 @@ class GetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 	 * @since 2.7
 	 */
 	@Beta
+	@GwtCompatible
 	static class Util {
 		extension TransformationContext context
 
@@ -77,8 +80,13 @@ class GetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 			field.declaringType.addMethod(field.getterName) [
 				addAnnotation(newAnnotationReference(Pure))
 				returnType = field.type
-				body = '''return this.«field.simpleName»;'''
+				body = '''return «field.fieldOwner».«field.simpleName»;'''
+				static = field.static
 			]
+		}
+		
+		private def fieldOwner(MutableFieldDeclaration it) {
+			if (static) declaringType.newTypeReference else "this"
 		}
 
 		def isBooleanType(TypeReference it) {
