@@ -23,6 +23,17 @@ import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
+import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod
+import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ResolvedParameter
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor
+import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedExecutable
+import org.eclipse.xtend.lib.macro.declaration.ResolvedExecutable
+import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
 
 abstract class AbstractElementImpl<T> {
 	@Property T delegate
@@ -35,6 +46,59 @@ abstract class AbstractNamedElementImpl<T extends EObject> extends AbstractEleme
 		class.name+"["+simpleName+"]"
 	}
 	
+}
+
+@Data
+class ResolvedParameterImpl implements ResolvedParameter {
+	ParameterDeclaration declaration
+	TypeReference resolvedType
+	
+	override toString() {
+		'''«resolvedType» «declaration.simpleName»'''
+	}
+}
+
+class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends ExecutableDeclaration> extends AbstractElementImpl<T> implements ResolvedExecutable {
+	
+	Iterable<? extends ResolvedParameter> resolvedParameters 
+	
+	override getResolvedParameters() {
+		if (resolvedParameters === null) {
+			resolvedParameters = (0 ..< delegate.declaration.parameters.size).map[i|
+				new ResolvedParameterImpl(
+					compilationUnit.toParameterDeclaration(delegate.declaration.parameters.get(i)), 
+					compilationUnit.toTypeReference(delegate.resolvedParameterTypes.get(i))
+				)
+			]
+			
+		}
+		resolvedParameters
+	}
+	
+	override getResolvedExceptions() {
+		delegate.resolvedExceptions.map[compilationUnit.toTypeReference(it)]
+	}
+	
+	override D getDeclaration() {
+		compilationUnit.toMemberDeclaration(delegate.declaration) as D
+	}
+	
+	override toString() {
+		delegate.toString
+	}
+}
+
+class ResolvedMethodImpl extends ResolvedExecutableImpl<IResolvedOperation, MethodDeclaration> implements ResolvedMethod {
+	override getResolvedReturnType() {
+		compilationUnit.toTypeReference(delegate.resolvedReturnType)
+	}
+	
+	override getResolvedTypeParameters() {
+		delegate.resolvedTypeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
+	}
+}
+
+class ResolvedConstructorImpl extends ResolvedExecutableImpl<IResolvedConstructor, ConstructorDeclaration> implements ResolvedConstructor {
 }
 
 class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> implements TypeReference {
@@ -119,6 +183,20 @@ class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> im
 	
 	def LightweightTypeReference getLightWeightTypeReference() {
 		delegate
+	}
+	
+	override getSuperTypes() {
+		delegate.superTypes.map[compilationUnit.toTypeReference(it)]
+	}
+	
+	override getDeclaredResolvedMethods() {
+		compilationUnit.overrideHelper.getResolvedOperations(delegate)
+			.declaredOperations.map[compilationUnit.toResolvedMethod(it)]
+	}
+	
+	override getDeclaredResolvedConstructors() {
+		compilationUnit.overrideHelper.getResolvedOperations(delegate)
+			.declaredConstructors.map[compilationUnit.toResolvedConstructor(it)]
 	}
 	
 	override equals(Object obj) {

@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -1283,6 +1284,63 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
             }
           };
           ObjectExtensions.<Class<?>>operator_doubleArrow(_compiledClass, _function);
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSuperClassWithTypeParameters() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("@Data class Foo<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("T foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("@Data class Bar extends Foo<String> {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          String _generatedCode = it.getGeneratedCode("Bar");
+          boolean _contains = _generatedCode.contains("public Bar(final String foo) {");
+          Assert.assertTrue(_contains);
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  @Ignore("DeclaredConstructor has correct context type, but still returns Object")
+  public void testClassAndSuperClassWithTypeParameters() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("@Data class Foo<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("T foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("@Data class Bar<X> extends Foo<X> {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          String _generatedCode = it.getGeneratedCode("Bar");
+          boolean _contains = _generatedCode.contains("public Bar(final X foo) {");
+          Assert.assertTrue(_contains);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);

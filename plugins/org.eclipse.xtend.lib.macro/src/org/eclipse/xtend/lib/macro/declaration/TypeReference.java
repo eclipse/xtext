@@ -131,4 +131,19 @@ public interface TypeReference extends Element {
 	boolean isInferred();
 	
 	// TODO super types, features
+	
+	/**
+	 * @since 2.7
+	 */
+	Iterable<? extends TypeReference> getSuperTypes();
+	
+	/**
+	 * @since 2.7
+	 */
+	Iterable<? extends ResolvedMethod> getDeclaredResolvedMethods();
+	
+	/**
+	 * @since 2.7
+	 */
+	Iterable<? extends ResolvedConstructor> getDeclaredResolvedConstructors();
 }

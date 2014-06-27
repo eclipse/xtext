@@ -14,6 +14,7 @@ import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
+import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -398,7 +399,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("class C implements A{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("@Delegate def B delegate(String name, Object... args) {null}");
+      _builder.append("@Delegate def B delegate(String name, Class<?>[] argTypes, Object... args) {null}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -933,6 +934,175 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
         }
       };
       this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testGenericInterface() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface I<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def T foo(T foo)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class B implements I<String> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override String foo(String foo) {foo}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class C implements I<String> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Delegate(#[I]) B delegate = new B");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String text = _builder.toString();
+      XtendFile _file = this.file(text);
+      this._validationTestHelper.assertNoIssues(_file);
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            String _generatedCode = it.getGeneratedCode("C");
+            boolean _contains = _generatedCode.contains("String foo(final String foo)");
+            Assert.assertTrue(_contains);
+            Class<?> _compiledClass = it.getCompiledClass("C");
+            final Object instance = _compiledClass.newInstance();
+            Class<?> _compiledClass_1 = it.getCompiledClass("C");
+            final Method method = _compiledClass_1.getDeclaredMethod("foo", String.class);
+            Object _invoke = method.invoke(instance, "bar");
+            Assert.assertEquals("bar", _invoke);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(text, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testGenericInterfaceAndClass() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface I<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def T foo(T foo)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class B<X> implements I<X> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override X foo(X foo) {foo}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class C<Y extends CharSequence> implements I<Y> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Delegate B<Y> delegate = new B<Y>");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String text = _builder.toString();
+      XtendFile _file = this.file(text);
+      this._validationTestHelper.assertNoIssues(_file);
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            String _generatedCode = it.getGeneratedCode("C");
+            boolean _contains = _generatedCode.contains("Y foo(final Y foo)");
+            Assert.assertTrue(_contains);
+            Class<?> _compiledClass = it.getCompiledClass("C");
+            final Object instance = _compiledClass.newInstance();
+            Class<?> _compiledClass_1 = it.getCompiledClass("C");
+            final Method method = _compiledClass_1.getDeclaredMethod("foo", CharSequence.class);
+            Object _invoke = method.invoke(instance, "bar");
+            Assert.assertEquals("bar", _invoke);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(text, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testGenericSignatureNotMatching() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface I<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def T foo(T foo)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class B implements I<Integer> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override Integer foo(Integer foo) {1}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class C implements I<String> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Delegate B delegate");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "no", "common", "interfaces");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testMethodAlreadyDefined() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface I<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def T foo(T foo)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class B implements I<String> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override String foo(String foo) {\"\"}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class C implements I<String> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Delegate B delegate");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override String foo(String foo) {\"\"}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertWarning(_file, XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER, "delegate");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

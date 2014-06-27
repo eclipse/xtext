@@ -33,6 +33,24 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 			assertEquals(1, fooField.get(instance))
 		]
 	}
+
+	@Test
+	def void testCreateGenericSingleSetter() {
+		'''
+			class Foo<T extends CharSequence> {
+				@Setter T foo
+			}
+		'''.compile[
+			assertTrue(singleGeneratedCode.contains("setFoo(final T foo)"))
+			val instance = compiledClass.newInstance
+			val setFoo = compiledClass.getDeclaredMethod("setFoo", CharSequence)
+			val fooField = compiledClass.getDeclaredField("foo") => [
+				accessible = true
+			]
+			setFoo.invoke(instance, "bar")
+			assertEquals("bar", fooField.get(instance))
+		]
+	}
 	
 	@Test
 	def void testCreateStaticSetter() {

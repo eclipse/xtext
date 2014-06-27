@@ -27,6 +27,20 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 			assertEquals(1, getFoo.invoke(instance))
 		]
 	}
+
+	@Test
+	def void testCreateGenericGetter() {
+		'''
+			class Foo<T> {
+				@Getter T foo = null
+			}
+		'''.compile[
+			assertTrue(singleGeneratedCode.contains("T getFoo"))
+			val instance = compiledClass.newInstance
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			assertEquals(null, getFoo.invoke(instance))
+		]
+	}
 	@Test
 	def void testCreateStaticGetter() {
 		'''
