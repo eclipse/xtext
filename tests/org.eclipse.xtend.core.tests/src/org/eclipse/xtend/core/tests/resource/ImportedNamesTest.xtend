@@ -76,4 +76,19 @@ class ImportedNamesTest extends AbstractXtendTestCase {
 		assertTrue('' + importedNames, importedNames.exists[it.lastSegment.equals('runnable')]);
 	}
 	
+	@Test
+	def void testNestedTypesIncluded() {
+		val file = file('''
+			package foo
+			
+			class Foo {
+				val foo = types.StaticOuterClass.StaticMiddleClass.StaticInnerClass.CONSTANT
+			}
+		''')
+		val description = resourceDescriptionManager.getResourceDescription(file.eResource)
+		val importedNames = description.importedNames
+		assertTrue('' + importedNames, importedNames.exists[toString == 'types.StaticOuterClass$StaticMiddleClass$StaticInnerClass'.toLowerCase]);
+		assertTrue('' + importedNames, importedNames.exists[toString == 'types.StaticOuterClass.StaticMiddleClass.StaticInnerClass'.toLowerCase]);
+	}
+	
 }

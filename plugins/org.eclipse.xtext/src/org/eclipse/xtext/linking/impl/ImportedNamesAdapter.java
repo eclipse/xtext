@@ -38,6 +38,18 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 		}
 		return null;
 	}
+	
+	/**
+	 * @since 2.7
+	 */
+	public static ImportedNamesAdapter findOrInstall(Resource resource) {
+		ImportedNamesAdapter adapter = find(resource);
+		if (adapter!=null)
+			return adapter;
+		ImportedNamesAdapter importedNamesAdapter = new ImportedNamesAdapter();
+		resource.eAdapters().add(importedNamesAdapter);
+		return importedNamesAdapter;
+	}
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
