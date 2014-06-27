@@ -13,6 +13,8 @@ import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.Delegate;
 import org.eclipse.xtend.lib.Getter;
+import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
+import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -86,6 +88,14 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     return this.getEquivalent("getArrayComponentType").getArrayComponentType();
   }
   
+  public Iterable<? extends ResolvedConstructor> getDeclaredResolvedConstructors() {
+    return this.getEquivalent("getDeclaredResolvedConstructors").getDeclaredResolvedConstructors();
+  }
+  
+  public Iterable<? extends ResolvedMethod> getDeclaredResolvedMethods() {
+    return this.getEquivalent("getDeclaredResolvedMethods").getDeclaredResolvedMethods();
+  }
+  
   public TypeReference getLowerBound() {
     return this.getEquivalent("getLowerBound").getLowerBound();
   }
@@ -100,6 +110,10 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
   
   public String getSimpleName() {
     return this.getEquivalent("getSimpleName").getSimpleName();
+  }
+  
+  public Iterable<? extends TypeReference> getSuperTypes() {
+    return this.getEquivalent("getSuperTypes").getSuperTypes();
   }
   
   public Type getType() {

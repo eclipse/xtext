@@ -63,6 +63,8 @@ import org.eclipse.xtend.core.macro.declaration.MutableJvmParameterDeclarationIm
 import org.eclipse.xtend.core.macro.declaration.MutableJvmTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
+import org.eclipse.xtend.core.macro.declaration.ResolvedConstructorImpl;
+import org.eclipse.xtend.core.macro.declaration.ResolvedMethodImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceProviderImpl;
@@ -102,6 +104,8 @@ import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
+import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
@@ -179,6 +183,9 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -274,6 +281,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   private JvmTypeExtensions typeExtensions;
   
   @Inject
+  private OverrideHelper overrideHelper;
+  
+  @Inject
   private AbstractFileSystemSupport fileSystemSupport;
   
   @Inject
@@ -294,7 +304,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Property
   private final TypeLookupImpl _typeLookup = new TypeLookupImpl(this);
   
-  private Map<EObject, Object> identityCache = CollectionLiterals.<EObject, Object>newHashMap();
+  private Map<Object, Object> identityCache = CollectionLiterals.<Object, Object>newHashMap();
   
   private OwnedConverter typeRefConverter;
   
@@ -304,6 +314,10 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public TypeReferences getTypeReferences() {
     return this.typeReferences;
+  }
+  
+  public OverrideHelper getOverrideHelper() {
+    return this.overrideHelper;
   }
   
   public IEObjectDocumentationProvider getDocumentationProvider() {
@@ -364,7 +378,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     return this.compilerPhases.isIndexing(_xtendFile);
   }
   
-  private <IN extends EObject, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN, ? extends OUT> provider) {
+  private <IN extends Object, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN, ? extends OUT> provider) {
     this.checkCanceled();
     boolean _equals = Objects.equal(in, null);
     if (_equals) {
@@ -401,6 +415,38 @@ public class CompilationUnitImpl implements CompilationUnit {
       }
     }
     return _switchResult;
+  }
+  
+  public ResolvedMethod toResolvedMethod(final IResolvedOperation delegate) {
+    final Function1<IResolvedOperation, ResolvedMethodImpl> _function = new Function1<IResolvedOperation, ResolvedMethodImpl>() {
+      public ResolvedMethodImpl apply(final IResolvedOperation it) {
+        ResolvedMethodImpl _resolvedMethodImpl = new ResolvedMethodImpl();
+        final Procedure1<ResolvedMethodImpl> _function = new Procedure1<ResolvedMethodImpl>() {
+          public void apply(final ResolvedMethodImpl it) {
+            it.setDelegate(delegate);
+            it.setCompilationUnit(CompilationUnitImpl.this);
+          }
+        };
+        return ObjectExtensions.<ResolvedMethodImpl>operator_doubleArrow(_resolvedMethodImpl, _function);
+      }
+    };
+    return this.<IResolvedOperation, ResolvedMethodImpl>getOrCreate(delegate, _function);
+  }
+  
+  public ResolvedConstructor toResolvedConstructor(final IResolvedConstructor delegate) {
+    final Function1<CompilationUnitImpl, ResolvedConstructorImpl> _function = new Function1<CompilationUnitImpl, ResolvedConstructorImpl>() {
+      public ResolvedConstructorImpl apply(final CompilationUnitImpl it) {
+        ResolvedConstructorImpl _resolvedConstructorImpl = new ResolvedConstructorImpl();
+        final Procedure1<ResolvedConstructorImpl> _function = new Procedure1<ResolvedConstructorImpl>() {
+          public void apply(final ResolvedConstructorImpl it) {
+            it.setDelegate(delegate);
+            it.setCompilationUnit(CompilationUnitImpl.this);
+          }
+        };
+        return ObjectExtensions.<ResolvedConstructorImpl>operator_doubleArrow(_resolvedConstructorImpl, _function);
+      }
+    };
+    return this.<CompilationUnitImpl, ResolvedConstructorImpl>getOrCreate(this, _function);
   }
   
   public Type toType(final JvmType delegate) {
