@@ -32,6 +32,7 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -580,6 +581,15 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			if (isVarArgs())
 				return CandidateCompareResult.OTHER;
 			return CandidateCompareResult.THIS;
+		}
+		// member feature calls done on type literals have precedence over instance calls, i.e. R.array binds to R$array rather than Class.isArray()
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=437660
+		if (getExpression() instanceof XMemberFeatureCall) {
+			if (isTypeLiteral() && !right.isTypeLiteral()) {
+				return CandidateCompareResult.THIS;
+			} else if (right.isTypeLiteral() && !isTypeLiteral()){
+				return CandidateCompareResult.OTHER;
+			}
 		}
 		if(isTypeLiteral() && !right.isTypeLiteral()) {
 			return CandidateCompareResult.OTHER;
