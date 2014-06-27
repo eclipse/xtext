@@ -290,4 +290,8 @@ class TransformationContextImpl implements TransformationContext {
 		unit.annotationReferenceProvider.newAnnotationReference(annotationReference, initializer)
 	}
 	
+	override newSelfTypeReference(Type typeDeclaration) {
+		unit.typeReferenceProvider.newSelfTypeReference(typeDeclaration)
+	}
+	
 }
