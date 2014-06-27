@@ -15,5 +15,4 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface ConstructorDeclaration extends ExecutableDeclaration {
-	
 }
