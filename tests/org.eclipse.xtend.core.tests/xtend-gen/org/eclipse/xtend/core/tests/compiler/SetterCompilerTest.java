@@ -76,6 +76,49 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testCreateGenericSingleSetter() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo<T extends CharSequence> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Setter T foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            String _singleGeneratedCode = it.getSingleGeneratedCode();
+            boolean _contains = _singleGeneratedCode.contains("setFoo(final T foo)");
+            Assert.assertTrue(_contains);
+            Class<?> _compiledClass = it.getCompiledClass();
+            final Object instance = _compiledClass.newInstance();
+            Class<?> _compiledClass_1 = it.getCompiledClass();
+            final Method setFoo = _compiledClass_1.getDeclaredMethod("setFoo", CharSequence.class);
+            Class<?> _compiledClass_2 = it.getCompiledClass();
+            Field _declaredField = _compiledClass_2.getDeclaredField("foo");
+            final Procedure1<Field> _function = new Procedure1<Field>() {
+              public void apply(final Field it) {
+                it.setAccessible(true);
+              }
+            };
+            final Field fooField = ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function);
+            setFoo.invoke(instance, "bar");
+            Object _get = fooField.get(instance);
+            Assert.assertEquals("bar", _get);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testCreateStaticSetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();

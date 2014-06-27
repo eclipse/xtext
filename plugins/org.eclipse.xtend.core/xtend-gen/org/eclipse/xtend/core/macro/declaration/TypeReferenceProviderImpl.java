@@ -10,6 +10,7 @@ import org.eclipse.xtend.core.macro.declaration.JvmTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.VoidTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.XtendTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.PrimitiveType;
@@ -212,6 +213,12 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         if (typeDeclaration instanceof JvmTypeParameterDeclarationImpl) {
           _matched=true;
           _switchResult = ((JvmTypeParameterDeclarationImpl)typeDeclaration).getDelegate();
+        }
+      }
+      if (!_matched) {
+        if (typeDeclaration instanceof XtendTypeParameterDeclarationImpl) {
+          _matched=true;
+          _switchResult = ((XtendTypeParameterDeclarationImpl)typeDeclaration).getDelegate();
         }
       }
       if (!_matched) {

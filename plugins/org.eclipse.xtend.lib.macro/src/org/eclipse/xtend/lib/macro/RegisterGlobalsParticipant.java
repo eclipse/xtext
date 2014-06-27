@@ -23,7 +23,6 @@ import com.google.common.annotations.Beta;
  * 
  * @param <T>
  *            the type of the annotated elements
- * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
 public interface RegisterGlobalsParticipant<T extends NamedElement> {
