@@ -139,12 +139,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 	}
 	
 	protected ImportedNamesAdapter getImportedNamesAdapter(Resource resource) {
-		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(resource);
-		if (adapter!=null)
-			return adapter;
-		ImportedNamesAdapter importedNamesAdapter = new ImportedNamesAdapter();
-		resource.eAdapters().add(importedNamesAdapter);
-		return importedNamesAdapter;
+		return ImportedNamesAdapter.findOrInstall(resource);
 	}
 
 	protected XtendFile getXtendFile(final EObject context) {

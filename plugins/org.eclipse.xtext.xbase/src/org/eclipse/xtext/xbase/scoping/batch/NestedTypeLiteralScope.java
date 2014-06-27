@@ -11,14 +11,18 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.mwe2.language.scoping.QualifiedNameProvider;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -32,15 +36,23 @@ public class NestedTypeLiteralScope extends AbstractSessionBasedScope {
 
 	private final JvmType outerType;
 	private final LightweightTypeReference receiverType;
+	private final Set<QualifiedName> importedNames;
+	private final QualifiedName outerTypeName;
+	private final QualifiedName outerTypeBinaryName;
 
 	protected NestedTypeLiteralScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall featureCall, LightweightTypeReference receiverType, JvmType outerType) {
 		super(parent, session, featureCall);
 		this.outerType = outerType;
 		this.receiverType = receiverType;
+		this.importedNames = ImportedNamesAdapter.findOrInstall(featureCall.eResource()).getImportedNames();
+		this.outerTypeName = QualifiedName.create(outerType.getQualifiedName('.').split("\\."));
+		this.outerTypeBinaryName = QualifiedName.create(outerType.getQualifiedName('$').split("\\."));
 	}
 
 	@Override
 	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+		importedNames.add(outerTypeName.append(name).toLowerCase());
+		importedNames.add(outerTypeBinaryName.skipLast(1).append(outerTypeBinaryName.getLastSegment()+"$"+name).toLowerCase());
 		XAbstractFeatureCall featureCall = getFeatureCall();
 		if (featureCall.isExplicitOperationCallOrBuilderSyntax())
 			return Collections.emptyList();
