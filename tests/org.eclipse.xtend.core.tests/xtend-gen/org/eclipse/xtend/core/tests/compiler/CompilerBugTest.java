@@ -4090,7 +4090,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Weight other = (Weight) obj;");
+    _builder_1.append("Weight<?> other = (Weight<?>) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (this._weight == null) {");
@@ -4277,7 +4277,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Weight other = (Weight) obj;");
+    _builder_1.append("Weight<?> other = (Weight<?>) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (this._weight == null) {");
@@ -4464,7 +4464,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Weight other = (Weight) obj;");
+    _builder_1.append("Weight<?> other = (Weight<?>) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (this._weight == null) {");
@@ -4651,7 +4651,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("return false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Weight other = (Weight) obj;");
+    _builder_1.append("Weight<?> other = (Weight<?>) obj;");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (this._weight == null) {");

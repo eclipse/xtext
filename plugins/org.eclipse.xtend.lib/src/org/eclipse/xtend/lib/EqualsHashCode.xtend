@@ -93,13 +93,17 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 						if (!super.equals(obj))
 						  return false;
 					«ENDIF»
-					«cls.simpleName» other = («cls.simpleName») obj;
+					«cls.newWildCardSelfTypeReference» other = («cls.newWildCardSelfTypeReference») obj;
 					«FOR field : includedFields»
 						«field.contributeToEquals»
 					«ENDFOR»
 					return true;
 				'''
 			]
+		}
+		
+		private def newWildCardSelfTypeReference(ClassDeclaration cls) {
+			cls.newTypeReference(cls.typeParameters.map[object.newWildcardTypeReference])
 		}
 
 		def contributeToEquals(FieldDeclaration it) {
