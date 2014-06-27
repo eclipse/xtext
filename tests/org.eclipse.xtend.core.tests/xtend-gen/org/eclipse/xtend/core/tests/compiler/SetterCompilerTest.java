@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
@@ -64,6 +65,49 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
             setFoo.invoke(instance, Integer.valueOf(1));
             Object _get = fooField.get(instance);
             Assert.assertEquals(Integer.valueOf(1), _get);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCreateGenericSingleSetter() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo<T extends CharSequence> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Setter T foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            String _singleGeneratedCode = it.getSingleGeneratedCode();
+            boolean _contains = _singleGeneratedCode.contains("setFoo(final T foo)");
+            Assert.assertTrue(_contains);
+            Class<?> _compiledClass = it.getCompiledClass();
+            final Object instance = _compiledClass.newInstance();
+            Class<?> _compiledClass_1 = it.getCompiledClass();
+            final Method setFoo = _compiledClass_1.getDeclaredMethod("setFoo", CharSequence.class);
+            Class<?> _compiledClass_2 = it.getCompiledClass();
+            Field _declaredField = _compiledClass_2.getDeclaredField("foo");
+            final Procedure1<Field> _function = new Procedure1<Field>() {
+              public void apply(final Field it) {
+                it.setAccessible(true);
+              }
+            };
+            final Field fooField = ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function);
+            setFoo.invoke(instance, "bar");
+            Object _get = fooField.get(instance);
+            Assert.assertEquals("bar", _get);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -262,6 +306,84 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
       final String text = _builder.toString();
       XtendClass _clazz = this.clazz(text);
       this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_FIELD, "user.issue", "final");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCannotOverrideFinalSetter() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def final void setFoo(String foo) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Bar extends Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Setter String foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "final", "Foo", "setFoo(String)");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCannotOverrideSetterWithIncompatibleReturnType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def Object setFoo(String foo) {null}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Bar extends Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Setter String foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertError(_file, XtendPackage.Literals.XTEND_FIELD, "user.issue", "not void", "Foo", "setFoo(String)");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNoErrorsOnOverloads() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def Object setFoo(String foo) {null}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Bar extends Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Setter int foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertNoErrors(_file);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

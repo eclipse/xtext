@@ -50,7 +50,7 @@ class DataProcessor extends AbstractClassProcessor {
 			addReflectiveToString
 		}
 		dataFields.forEach [
-			if (!hasGetter) {
+			if (!hasGetter && canAddGetter) {
 				addGetter
 			}
 			final = true
@@ -74,7 +74,7 @@ class DataProcessor extends AbstractClassProcessor {
 			cls.declaredConstructors.exists [
 				val expectedTypes = newArrayList
 				if (cls.superConstructor !== null) {
-					expectedTypes += cls.superConstructor.parameters.map[type]
+					expectedTypes += cls.superConstructor.resolvedParameters.map[resolvedType]
 				}
 				expectedTypes += cls.dataFields.map[type]
 				parameters.map[type].toList == expectedTypes
@@ -84,9 +84,9 @@ class DataProcessor extends AbstractClassProcessor {
 		def addDataConstructor(MutableClassDeclaration cls) {
 			cls.addConstructor [ constructor |
 				val fieldToParameter = newHashMap
-				val superParameters = cls.superConstructor?.parameters ?: #[]
+				val superParameters = cls.superConstructor?.resolvedParameters ?: #[]
 				superParameters.forEach [
-					val param = constructor.addParameter(simpleName, type)
+					val param = constructor.addParameter(declaration.simpleName, resolvedType)
 					fieldToParameter.put(it, param)
 				]
 				cls.dataConstructorFields.forEach [
@@ -95,7 +95,7 @@ class DataProcessor extends AbstractClassProcessor {
 					fieldToParameter.put(it, param)
 				]
 				constructor.body = '''
-					super(«superParameters.join(", ")[simpleName]»);
+					super(«superParameters.join(", ")[declaration.simpleName]»);
 					«FOR field : cls.dataConstructorFields»
 						this.«field.simpleName» = «fieldToParameter.get(field).simpleName»;
 					«ENDFOR»
@@ -110,7 +110,7 @@ class DataProcessor extends AbstractClassProcessor {
 		def getSuperConstructor(ClassDeclaration it) {
 			if (extendedClass == object)
 				return null;
-			return (extendedClass.type as ClassDeclaration).declaredConstructors.head
+			return extendedClass.declaredResolvedConstructors.head
 		}
 
 		def getDataFields(ClassDeclaration it) {

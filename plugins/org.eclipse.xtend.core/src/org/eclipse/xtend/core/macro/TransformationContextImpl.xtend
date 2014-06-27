@@ -82,12 +82,12 @@ class TransformationContextImpl implements TransformationContext {
 		source.getPrimaryGeneratedJavaElement == target
 	}
 	
-	override setPrimarySourceElement(NamedElement generatedElement, NamedElement sourceElement) {
+	override setPrimarySourceElement(MutableNamedElement generatedElement, NamedElement sourceElement) {
 		if (!isGenerated(generatedElement))
 			throw new IllegalArgumentException(generatedElement + "is not a generated element")
 		if (!isSource(sourceElement))
 			throw new IllegalArgumentException(sourceElement + "is not a source element")
-		associator.associatePrimary((sourceElement as XtendNamedElementImpl<?>).delegate, (generatedElement as JvmNamedElementImpl<?>).delegate)
+		associator.associate((sourceElement as XtendNamedElementImpl<?>).delegate, (generatedElement as JvmNamedElementImpl<?>).delegate)
 	}
 	
 	override addError(Element element, String message) {

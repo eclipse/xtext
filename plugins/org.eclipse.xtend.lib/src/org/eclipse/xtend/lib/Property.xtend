@@ -31,10 +31,10 @@ class PropertyProcessor extends AbstractFieldProcessor {
 	override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {
 		extension val getterUtil = new GetterProcessor.Util(context)
 		extension val setterUtil = new SetterProcessor.Util(context)
-		if (!hasGetter) {
+		if (!hasGetter /*&& canAddGetter*/) {
 			addGetter
 		}
-		if (!final && !hasSetter) {
+		if (!final && !hasSetter && canAddSetter_Old) {
 			addSetter
 		}
 		simpleName = "_" + simpleName.toFirstLower

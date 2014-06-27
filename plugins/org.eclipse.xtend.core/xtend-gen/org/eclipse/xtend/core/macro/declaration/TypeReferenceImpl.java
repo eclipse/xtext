@@ -12,11 +12,17 @@ import java.util.List;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.UnknownType;
+import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
+import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
+import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
@@ -168,6 +174,63 @@ public class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeRefere
   
   public LightweightTypeReference getLightWeightTypeReference() {
     return this.getDelegate();
+  }
+  
+  public Iterable<? extends TypeReference> getDeclaredSuperTypes() {
+    LightweightTypeReference _delegate = this.getDelegate();
+    List<LightweightTypeReference> _superTypes = _delegate.getSuperTypes();
+    final Function1<LightweightTypeReference, TypeReference> _function = new Function1<LightweightTypeReference, TypeReference>() {
+      public TypeReference apply(final LightweightTypeReference it) {
+        CompilationUnitImpl _compilationUnit = TypeReferenceImpl.this.getCompilationUnit();
+        return _compilationUnit.toTypeReference(it);
+      }
+    };
+    return ListExtensions.<LightweightTypeReference, TypeReference>map(_superTypes, _function);
+  }
+  
+  public Iterable<? extends ResolvedMethod> getDeclaredResolvedMethods() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    OverrideHelper _overrideHelper = _compilationUnit.getOverrideHelper();
+    LightweightTypeReference _delegate = this.getDelegate();
+    ResolvedOperations _resolvedOperations = _overrideHelper.getResolvedOperations(_delegate);
+    List<IResolvedOperation> _declaredOperations = _resolvedOperations.getDeclaredOperations();
+    final Function1<IResolvedOperation, ResolvedMethod> _function = new Function1<IResolvedOperation, ResolvedMethod>() {
+      public ResolvedMethod apply(final IResolvedOperation it) {
+        CompilationUnitImpl _compilationUnit = TypeReferenceImpl.this.getCompilationUnit();
+        return _compilationUnit.toResolvedMethod(it);
+      }
+    };
+    return ListExtensions.<IResolvedOperation, ResolvedMethod>map(_declaredOperations, _function);
+  }
+  
+  public Iterable<? extends ResolvedConstructor> getDeclaredResolvedConstructors() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    OverrideHelper _overrideHelper = _compilationUnit.getOverrideHelper();
+    LightweightTypeReference _delegate = this.getDelegate();
+    ResolvedOperations _resolvedOperations = _overrideHelper.getResolvedOperations(_delegate);
+    List<IResolvedConstructor> _declaredConstructors = _resolvedOperations.getDeclaredConstructors();
+    final Function1<IResolvedConstructor, ResolvedConstructor> _function = new Function1<IResolvedConstructor, ResolvedConstructor>() {
+      public ResolvedConstructor apply(final IResolvedConstructor it) {
+        CompilationUnitImpl _compilationUnit = TypeReferenceImpl.this.getCompilationUnit();
+        return _compilationUnit.toResolvedConstructor(it);
+      }
+    };
+    return ListExtensions.<IResolvedConstructor, ResolvedConstructor>map(_declaredConstructors, _function);
+  }
+  
+  public Iterable<? extends ResolvedMethod> getAllResolvedMethods() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    OverrideHelper _overrideHelper = _compilationUnit.getOverrideHelper();
+    LightweightTypeReference _delegate = this.getDelegate();
+    ResolvedOperations _resolvedOperations = _overrideHelper.getResolvedOperations(_delegate);
+    List<IResolvedOperation> _allOperations = _resolvedOperations.getAllOperations();
+    final Function1<IResolvedOperation, ResolvedMethod> _function = new Function1<IResolvedOperation, ResolvedMethod>() {
+      public ResolvedMethod apply(final IResolvedOperation it) {
+        CompilationUnitImpl _compilationUnit = TypeReferenceImpl.this.getCompilationUnit();
+        return _compilationUnit.toResolvedMethod(it);
+      }
+    };
+    return ListExtensions.<IResolvedOperation, ResolvedMethod>map(_allOperations, _function);
   }
   
   public boolean equals(final Object obj) {
