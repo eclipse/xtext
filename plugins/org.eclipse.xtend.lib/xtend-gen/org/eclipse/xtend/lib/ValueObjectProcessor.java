@@ -1,6 +1,7 @@
 package org.eclipse.xtend.lib;
 
 import com.google.common.annotations.Beta;
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.xtend.lib.EqualsHashCodeProcessor;
@@ -25,12 +26,14 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  * @since 2.7
  */
 @Beta
+@GwtCompatible
 @SuppressWarnings("all")
 public class ValueObjectProcessor extends AbstractClassProcessor {
   /**
    * @since 2.7
    */
   @Beta
+  @GwtCompatible
   public static class Util {
     @Extension
     private TransformationContext context;

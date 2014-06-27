@@ -150,7 +150,7 @@ public class TransformationContextImpl implements TransformationContext {
     return _xblockexpression;
   }
   
-  public void setPrimarySourceElement(final NamedElement generatedElement, final NamedElement sourceElement) {
+  public void setPrimarySourceElement(final MutableNamedElement generatedElement, final NamedElement sourceElement) {
     boolean _isGenerated = this.isGenerated(generatedElement);
     boolean _not = (!_isGenerated);
     if (_not) {
@@ -165,7 +165,7 @@ public class TransformationContextImpl implements TransformationContext {
     }
     EObject _delegate = ((XtendNamedElementImpl<?>) sourceElement).getDelegate();
     JvmIdentifiableElement _delegate_1 = ((JvmNamedElementImpl<?>) generatedElement).getDelegate();
-    this.associator.associatePrimary(_delegate, _delegate_1);
+    this.associator.associate(_delegate, _delegate_1);
   }
   
   public void addError(final Element element, final String message) {

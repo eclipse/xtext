@@ -1,5 +1,6 @@
 package org.eclipse.xtend.lib.macro.services;
 
+import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 
 /**
@@ -14,5 +15,5 @@ public interface Associator {
 	 * @param sourceElement the source Xtend element
 	 * @throws IllegalArgumentException if generatedElement is note a Java element or sourceElement is not an Xtend element 
 	 */
-	void setPrimarySourceElement(NamedElement generatedElement, NamedElement sourceElement);
+	void setPrimarySourceElement(MutableNamedElement generatedElement, NamedElement sourceElement);
 }
