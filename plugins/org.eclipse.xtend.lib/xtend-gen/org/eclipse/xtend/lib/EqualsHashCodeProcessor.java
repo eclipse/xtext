@@ -1,7 +1,9 @@
 package org.eclipse.xtend.lib;
 
 import com.google.common.annotations.Beta;
+import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
+import org.eclipse.xtend.lib.EqualsHashCode;
 import org.eclipse.xtend.lib.ValueObjectProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -13,6 +15,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -26,12 +29,14 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @since 2.7
  */
 @Beta
+@GwtCompatible
 @SuppressWarnings("all")
 public class EqualsHashCodeProcessor extends AbstractClassProcessor {
   /**
    * @since 2.7
    */
   @Beta
+  @GwtCompatible
   public static class Util {
     @Extension
     private TransformationContext context;
@@ -75,6 +80,28 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
         }
       };
       return IterableExtensions.exists(_declaredMethods, _function);
+    }
+    
+    public boolean hasSuperEquals(final ClassDeclaration cls) {
+      boolean _xifexpression = false;
+      TypeReference _newTypeReference = this.context.newTypeReference(cls);
+      TypeReference _object = this.context.getObject();
+      boolean _equals = Objects.equal(_newTypeReference, _object);
+      if (_equals) {
+        _xifexpression = false;
+      } else {
+        boolean _xifexpression_1 = false;
+        boolean _hasEquals = this.hasEquals(cls);
+        if (_hasEquals) {
+          _xifexpression_1 = true;
+        } else {
+          TypeReference _extendedClass = cls.getExtendedClass();
+          Type _type = _extendedClass.getType();
+          _xifexpression_1 = this.hasSuperEquals(((ClassDeclaration) _type));
+        }
+        _xifexpression = _xifexpression_1;
+      }
+      return _xifexpression;
     }
     
     public void addEquals(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> includedFields, final boolean includeSuper) {
@@ -139,7 +166,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       cls.addMethod("equals", _function);
     }
     
-    private String contributeToEquals(final FieldDeclaration it) {
+    public String contributeToEquals(final FieldDeclaration it) {
       String _switchResult = null;
       TypeReference _type = it.getType();
       String _name = _type.getName();
@@ -306,7 +333,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       cls.addMethod("hashCode", _function);
     }
     
-    private String contributeToHashCode(final FieldDeclaration it) {
+    public String contributeToHashCode(final FieldDeclaration it) {
       String _switchResult = null;
       TypeReference _type = it.getType();
       String _name = _type.getName();
@@ -403,19 +430,19 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     final ValueObjectProcessor.Util voUtil = new ValueObjectProcessor.Util(context);
     boolean _hasEquals = util.hasEquals(it);
     if (_hasEquals) {
-      context.addWarning(it, "equals is already defined, this annotation has no effect");
+      Type _findTypeGlobally = context.findTypeGlobally(EqualsHashCode.class);
+      final AnnotationReference annotation = it.findAnnotation(_findTypeGlobally);
+      context.addWarning(annotation, "equals is already defined, this annotation has no effect");
     } else {
       boolean _hasHashCode = util.hasHashCode(it);
       if (_hasHashCode) {
         context.addWarning(it, "hashCode is already defined, this annotation has no effect");
       } else {
-        TypeReference _extendedClass = it.getExtendedClass();
-        TypeReference _object = context.getObject();
-        final boolean hasSuperClass = (!Objects.equal(_extendedClass, _object));
+        final boolean hasSuperEquals = util.hasSuperEquals(it);
         Iterable<? extends MutableFieldDeclaration> _valueObjectFields = voUtil.getValueObjectFields(it);
-        util.addEquals(it, _valueObjectFields, hasSuperClass);
+        util.addEquals(it, _valueObjectFields, hasSuperEquals);
         Iterable<? extends MutableFieldDeclaration> _valueObjectFields_1 = voUtil.getValueObjectFields(it);
-        util.addHashCode(it, _valueObjectFields_1, hasSuperClass);
+        util.addHashCode(it, _valueObjectFields_1, hasSuperEquals);
       }
     }
   }

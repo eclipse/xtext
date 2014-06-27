@@ -15,6 +15,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -202,6 +203,38 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testSuperClassWithoutEquals() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("@EqualsHashCode class Bar extends Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("String bar = \"Foo\"");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          String _generatedCode = it.getGeneratedCode("Bar");
+          String _generatedCode_1 = it.getGeneratedCode("Bar");
+          boolean _contains = _generatedCode_1.contains("super.equals");
+          Assert.assertFalse(_generatedCode, _contains);
+          String _generatedCode_2 = it.getGeneratedCode("Bar");
+          boolean _contains_1 = _generatedCode_2.contains("super.hashCode");
+          Assert.assertFalse(_contains_1);
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testExistingEquals() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -223,7 +256,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final String text = _builder.toString();
       XtendClass _clazz = this.clazz(text);
-      this._validationTestHelper.assertWarning(_clazz, XtendPackage.Literals.XTEND_CLASS, "user.issue", "no effect");
+      this._validationTestHelper.assertWarning(_clazz, XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no effect");
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
         public void accept(final CompilationTestHelper.Result it) {
           try {
