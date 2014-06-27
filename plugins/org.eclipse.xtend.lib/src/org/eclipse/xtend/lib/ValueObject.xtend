@@ -24,6 +24,7 @@ annotation ValueObject {
  * @since 2.7
  */
 @Beta
+@GwtCompatible
 class ValueObjectProcessor extends AbstractClassProcessor {
 
 	override doTransform(MutableClassDeclaration cls, extension TransformationContext context) {
@@ -31,7 +32,7 @@ class ValueObjectProcessor extends AbstractClassProcessor {
 		val extension getterUtil = new GetterProcessor.Util(context)
 		val extension ehUtil = new EqualsHashCodeProcessor.Util(context)
 		val extension toStringUtil = new ToStringProcessor.Util(context)
-
+		
 		cls.final = true
 		if (cls.extendedClass != object) {
 			cls.addError("Inheritance is forbidden for value objects")
@@ -61,6 +62,7 @@ class ValueObjectProcessor extends AbstractClassProcessor {
 	 * @since 2.7
  	 */
 	@Beta
+	@GwtCompatible
 	static class Util {
 		extension TransformationContext context
 

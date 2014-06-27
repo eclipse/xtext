@@ -10,14 +10,15 @@ import java.util.Set
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.TransformationParticipant
-import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration
-import org.eclipse.xtend.lib.macro.declaration.Type
+import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
+import java.util.Map
 
 /**
  * @since 2.7
@@ -33,6 +34,8 @@ annotation Delegate {
 /**
  * @since 2.7
  */
+@Beta
+@GwtCompatible
 class DelegateProcessor implements TransformationParticipant<MutableMemberDeclaration> {
 
 	override doTransform(List<? extends MutableMemberDeclaration> elements, extension TransformationContext context) {
@@ -47,6 +50,8 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 	/**
 	 * @since 2.7
  	*/
+ 	@Beta
+@GwtCompatible
 	static class Util {
 		extension TransformationContext context
 
@@ -82,11 +87,13 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 		def hasValidSignature(MethodDeclaration it) {
 			switch parameters.map[type].toList {
 				case #[],
+				//TODO remove these two cases as soon as everyone has the nightly
 				case #[string],
-				case #[string, object.newArrayTypeReference]:
+				case #[string, object.newArrayTypeReference],
+				case #[string, Class.newTypeReference.newArrayTypeReference, object.newArrayTypeReference]:
 					true
 				default: {
-					addError("Not a valid delegate signature, use (), (String) or (String, Object[])")
+					addError("Not a valid delegate signature, use () or (String methodName, Class<?>[] argumentTypes, Object[] arguments)")
 					false
 				}
 			}
@@ -107,20 +114,13 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 		}
 		
 		def otherDelegates(MemberDeclaration delegate) {
-			delegate.originalDeclaringType.delegates.filter[it != delegate.primarySourceElement]
+			delegate.declaringType.delegates.filter[it != delegate]
 		}
 
-		def originalDeclaringType(MemberDeclaration it) {
-			if (source) 
-				declaringType 
-			else
-				(primarySourceElement as MemberDeclaration).declaringType
-		}
-		
 		def areListedInterfacesValid(MemberDeclaration delegate) {
-			val declaringType = delegate.originalDeclaringType
-			val interfacesOfDeclaringType = declaringType.implementedInterfaces.map[newTypeReference].toSet
-			val availableInterfaces = delegate.type.type.implementedInterfaces.map[newTypeReference].toSet
+			val declaringType = delegate.declaringType.newSelfTypeReference
+			val interfacesOfDeclaringType = declaringType.implementedInterfaces
+			val availableInterfaces = delegate.type.implementedInterfaces
 			val listedInterfaces = delegate.listedInterfaces
 			var valid = true
 			for(iface : listedInterfaces) {
@@ -148,57 +148,70 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 			findAnnotation(findTypeGlobally(Delegate)).getClassArrayValue("value").toSet
 		}
 
-		def dispatch Set<? extends InterfaceDeclaration> getImplementedInterfaces(Type it) {
-			#{}
-		}
-
-		def dispatch Set<? extends InterfaceDeclaration> getImplementedInterfaces(InterfaceDeclaration it) {
-			(#[it] + extendedInterfaces.map[type.implementedInterfaces].flatten).toSet
-		}
-
-		def dispatch Set<? extends InterfaceDeclaration> getImplementedInterfaces(ClassDeclaration it) {
-			implementedInterfaces.map[type.implementedInterfaces].flatten.toSet
+		def Set<? extends TypeReference> getImplementedInterfaces(TypeReference it) {
+			(#[it] + declaredSuperTypes.map[implementedInterfaces].flatten).filter[type instanceof InterfaceDeclaration].toSet 
 		}
 
 		def getDelegatedInterfaces(MemberDeclaration delegate) {
-			val interfacesOfDeclaringType = delegate.originalDeclaringType.implementedInterfaces
+			val interfacesOfDeclaringType = delegate.declaringType.newSelfTypeReference.implementedInterfaces
 			val listedInterfaces = delegate.listedInterfaces
-			val availableInterfaces = delegate.type.type.implementedInterfaces
+			val availableInterfaces = delegate.type.implementedInterfaces
 			availableInterfaces.filter[iface|
 				interfacesOfDeclaringType.contains(iface)
-				&& (listedInterfaces.empty || listedInterfaces.exists[iface.newTypeReference.isAssignableFrom(it)])
+				&& (listedInterfaces.empty || listedInterfaces.exists[iface.isAssignableFrom(it)])
 			].toSet
 		}
 
 		def getMethodsToImplement(MemberDeclaration delegate) {
-			delegate.delegatedInterfaces.map[declaredMethods].flatten
-				.filter[delegate.originalDeclaringType.findDeclaredMethod(simpleName, parameters.map[type]) == null]
+			delegate.delegatedInterfaces.map[declaredResolvedMethods].flatten
+				.filter[delegate.declaringType.findDeclaredMethod(declaration.simpleName, resolvedParameters.map[resolvedType]) == null]
 				.filter[!isObjectMethod]
 				.toSet
 		}
 	
-		def isObjectMethod(MethodDeclaration it) {
-			simpleName == "hashCode" && parameters.empty
-			|| simpleName == "toString" && parameters.empty
-			|| simpleName == "equals" && parameters.map[type].toList == #[object]
-			|| simpleName == "finalize" && parameters.empty
-			|| simpleName == "clone" && parameters.empty
+		def isObjectMethod(ResolvedMethod it) {
+			val name = declaration.simpleName
+			val parameterTypes = resolvedParameters.map[resolvedType].toList
+			
+			name == "hashCode" && parameterTypes.empty
+			|| name == "toString" && parameterTypes.empty
+			|| name == "equals" && parameterTypes == #[object]
+			|| name == "finalize" && parameterTypes.empty
+			|| name == "clone" && parameterTypes.empty
 		}
 
-		def implementMethod(MutableMemberDeclaration delegate, MethodDeclaration method) {
+		def implementMethod(MutableMemberDeclaration delegate, ResolvedMethod resolvedMethod) {
 			delegate.markAsRead
-			delegate.declaringType.addMethod(method.simpleName) [ impl |
-				//TODO type parameters
-				impl.exceptions = method.exceptions
-				impl.varArgs = method.varArgs
-				impl.returnType = method.returnType
-				method.parameters.forEach[impl.addParameter(simpleName, type)]
+			val declaration = resolvedMethod.declaration
+			delegate.declaringType.addMethod(declaration.simpleName) [ impl |
+				val typeParameterMappings = newHashMap
+				resolvedMethod.resolvedTypeParameters.forEach[param|
+					val copy = impl.addTypeParameter(param.declaration.simpleName, param.resolvedUpperBounds)
+					typeParameterMappings.put(param.declaration.newTypeReference, copy.newTypeReference)
+				]
+				impl.exceptions = resolvedMethod.resolvedExceptionTypes.map[replace(typeParameterMappings)]
+				impl.varArgs = declaration.varArgs
+				impl.returnType = resolvedMethod.resolvedReturnType.replace(typeParameterMappings)
+				resolvedMethod.resolvedParameters.forEach[p|impl.addParameter(p.declaration.simpleName, p.resolvedType.replace(typeParameterMappings))]
 				impl.body = '''
-					«method.returnIfNeeded» «delegate.delegateAccess(method)».«method.simpleName»(«method.parameters.join(", ")[simpleName]»);
+					«resolvedMethod.returnIfNeeded»«delegate.delegateAccess(declaration)».«declaration.simpleName»(«declaration.parameters.join(", ")[simpleName]»);
 				'''
 			]
 		}
-
+		
+		def TypeReference replace(TypeReference target, Map<? extends TypeReference, ? extends TypeReference> mappings) {
+			mappings.entrySet.fold(target)[result, mapping|result.replace(mapping.key, mapping.value)]
+		}
+		
+		def TypeReference replace(TypeReference target, TypeReference oldType, TypeReference newType) {
+			if (target == oldType) 
+				return newType
+			if (target.actualTypeArguments.contains(oldType)) {
+				return newTypeReference(target.type, target.actualTypeArguments.map[replace(oldType, newType)])
+			}
+			return target
+		}
+		
 		def dispatch delegateAccess(FieldDeclaration it, MethodDeclaration method) {
 			'''this.«simpleName»'''
 		}
@@ -207,17 +220,21 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 			switch parameters.map[type].toList {
 				case #[]: 
 					'''this.«simpleName»()'''
+				//TODO remove these two cases as soon as everyone has the nightly
 				case #[string]: 
 					'''this.«simpleName»("«method.simpleName»")'''
 				case #[string, object.newArrayTypeReference]: 
 					'''this.«simpleName»("«method.simpleName»", new Object[]{«method.parameters.join(", ")[simpleName]»})'''
+				case #[string, Class.newTypeReference.newArrayTypeReference, object.newArrayTypeReference]: {
+					'''this.«simpleName»("«method.simpleName»", new Class[]{«method.parameters.join(", ")[type.type.simpleName + ".class"]»}, new Object[]{«method.parameters.join(", ")[simpleName]»})'''
+				}
 				default:
 					throw new IllegalArgumentException("delegate signature")
 			}
 		}
 
-		def returnIfNeeded(MethodDeclaration it) {
-			if(returnType.isVoid) "" else "return"
+		def returnIfNeeded(ResolvedMethod it) {
+			if(resolvedReturnType.isVoid) "" else "return "
 		}
 	}
 

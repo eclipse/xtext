@@ -33,6 +33,24 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 			assertEquals(1, fooField.get(instance))
 		]
 	}
+
+	@Test
+	def void testCreateGenericSingleSetter() {
+		'''
+			class Foo<T extends CharSequence> {
+				@Setter T foo
+			}
+		'''.compile[
+			assertTrue(singleGeneratedCode.contains("setFoo(final T foo)"))
+			val instance = compiledClass.newInstance
+			val setFoo = compiledClass.getDeclaredMethod("setFoo", CharSequence)
+			val fooField = compiledClass.getDeclaredField("foo") => [
+				accessible = true
+			]
+			setFoo.invoke(instance, "bar")
+			assertEquals("bar", fooField.get(instance))
+		]
+	}
 	
 	@Test
 	def void testCreateStaticSetter() {
@@ -105,5 +123,44 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 			}
 		'''
 		text.clazz.assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "final")
+	}
+
+	@Test
+	def void testCannotOverrideFinalSetter() {
+		file('''
+			class Foo {
+				def final void setFoo(String foo) {}
+			}
+			
+			class Bar extends Foo {
+				@Setter String foo
+			}
+		''').assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "final", "Foo", "setFoo(String)")
+	}
+
+	@Test
+	def void testCannotOverrideSetterWithIncompatibleReturnType() {
+		file('''
+			class Foo {
+				def Object setFoo(String foo) {null}
+			}
+			
+			class Bar extends Foo {
+				@Setter String foo
+			}
+		''').assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "not void", "Foo", "setFoo(String)")
+	}
+
+	@Test
+	def void testNoErrorsOnOverloads() {
+		file('''
+			class Foo {
+				def Object setFoo(String foo) {null}
+			}
+			
+			class Bar extends Foo {
+				@Setter int foo
+			}
+		''').assertNoErrors
 	}
 }

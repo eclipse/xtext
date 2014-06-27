@@ -23,6 +23,19 @@ import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
+import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod
+import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ResolvedParameter
+import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor
+import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedExecutable
+import org.eclipse.xtend.lib.macro.declaration.ResolvedExecutable
+import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
+import org.eclipse.xtend.lib.macro.declaration.ResolvedTypeParameter
+import java.util.List
 
 abstract class AbstractElementImpl<T> {
 	@Property T delegate
@@ -35,6 +48,90 @@ abstract class AbstractNamedElementImpl<T extends EObject> extends AbstractEleme
 		class.name+"["+simpleName+"]"
 	}
 	
+}
+
+@Data
+class ResolvedParameterImpl implements ResolvedParameter {
+	ParameterDeclaration declaration
+	TypeReference resolvedType
+	
+	override toString() {
+		'''«resolvedType» «declaration.simpleName»'''
+	}
+}
+
+class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends ExecutableDeclaration> extends AbstractElementImpl<T> implements ResolvedExecutable {
+	
+	Iterable<? extends ResolvedParameter> resolvedParameters 
+	
+	override getResolvedParameters() {
+		if (resolvedParameters === null) {
+			resolvedParameters = (0 ..< delegate.declaration.parameters.size).map[i|
+				new ResolvedParameterImpl(
+					compilationUnit.toParameterDeclaration(delegate.declaration.parameters.get(i)), 
+					compilationUnit.toTypeReference(delegate.resolvedParameterTypes.get(i))
+				)
+			]
+			
+		}
+		resolvedParameters
+	}
+	
+	override getResolvedExceptionTypes() {
+		delegate.resolvedExceptions.map[compilationUnit.toTypeReference(it)]
+	}
+	
+	override D getDeclaration() {
+		compilationUnit.toMemberDeclaration(delegate.declaration) as D
+	}
+	
+	override getSimpleSignature() {
+		delegate.simpleSignature
+	}
+	
+	override toString() {
+		delegate.toString
+	}
+}
+
+class ResolvedMethodImpl extends ResolvedExecutableImpl<IResolvedOperation, MethodDeclaration> implements ResolvedMethod {
+	override getResolvedReturnType() {
+		compilationUnit.toTypeReference(delegate.resolvedReturnType)
+	}
+	
+	override getResolvedTypeParameters() {
+		val resolvedTypeParameters = newArrayList
+		for (var i = 0; i < delegate.resolvedTypeParameters.size; i++) {
+			resolvedTypeParameters += new ResolvedTypeParameterImpl(
+				compilationUnit.toTypeParameterDeclaration(delegate.resolvedTypeParameters.get(i)),
+				delegate.getResolvedTypeParameterConstraints(i).map[compilationUnit.toTypeReference(it)].toList
+			)
+		}
+		resolvedTypeParameters
+	}
+}
+
+class ResolvedTypeParameterImpl implements ResolvedTypeParameter {
+	
+	TypeParameterDeclaration declaration
+	List<? extends TypeReference> resolvedUpperBounds
+	
+	new(TypeParameterDeclaration declaration, List<? extends TypeReference> resolvedUpperBounds) {
+		this.declaration = declaration
+		this.resolvedUpperBounds = resolvedUpperBounds
+	}
+	
+	override TypeParameterDeclaration getDeclaration() {
+		declaration
+	}
+	
+	override List<? extends TypeReference> getResolvedUpperBounds() {
+		resolvedUpperBounds
+	}
+	
+}
+
+class ResolvedConstructorImpl extends ResolvedExecutableImpl<IResolvedConstructor, ConstructorDeclaration> implements ResolvedConstructor {
 }
 
 class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> implements TypeReference {
@@ -121,6 +218,25 @@ class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> im
 		delegate
 	}
 	
+	override getDeclaredSuperTypes() {
+		delegate.superTypes.map[compilationUnit.toTypeReference(it)]
+	}
+	
+	override getDeclaredResolvedMethods() {
+		compilationUnit.overrideHelper.getResolvedOperations(delegate)
+			.declaredOperations.map[compilationUnit.toResolvedMethod(it)]
+	}
+	
+	override getDeclaredResolvedConstructors() {
+		compilationUnit.overrideHelper.getResolvedOperations(delegate)
+			.declaredConstructors.map[compilationUnit.toResolvedConstructor(it)]
+	}
+	
+	override getAllResolvedMethods() {
+		compilationUnit.overrideHelper.getResolvedOperations(delegate)
+			.allOperations.map[compilationUnit.toResolvedMethod(it)]
+	}
+	
 	override equals(Object obj) {
 		if (obj === this)
 			return true
@@ -143,25 +259,165 @@ class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> im
 }
 
 class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedTypeReferenceImplCustom> implements TypeReference {
-	TypeReference equivalent
-	@Getter LightweightTypeReference lightweightTypeReference
+	@Property TypeReference equivalent
+	LightweightTypeReference lightweightTypeReference
 	
-	@Delegate
-	private def TypeReference getEquivalent(String methodName) {
-		if (getEquivalent == null) {
-			throw new UnsupportedOperationException("Cannot call method '"+methodName+"()' on a inferred type reference before the compilation phase. Check isInferred() before calling any methods.")
-		}
-		getEquivalent
+	def LightweightTypeReference getLightweightTypeReference() {
+		lightweightTypeReference
 	}
 	
 	def TypeReference getEquivalent() {
-		if (equivalent == null) {
+		if (_equivalent == null) {
 			if (delegate.equivalentComputed) {
 				lightweightTypeReference = compilationUnit.typeRefConverter.toLightweightReference(delegate)
-				equivalent = 	compilationUnit.toTypeReference(lightweightTypeReference)
+				_equivalent = 	compilationUnit.toTypeReference(lightweightTypeReference)
 			}
 		}
-		equivalent
+		_equivalent
+	}
+	
+	private def String message(String methodName) {
+		"Cannot call method '"+methodName+"' on a inferred type reference before the compilation phase. Check isInferred() before calling any methods."
+	}
+	
+	override getActualTypeArguments() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getActualTypeArguments()'))
+		}
+		equivalent.actualTypeArguments
+	}
+	
+	override getArrayComponentType() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getArrayComponentType()'))
+		}
+		equivalent.arrayComponentType
+	}
+	
+	override getLowerBound() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getLowerBound()'))
+		}
+		equivalent.lowerBound
+	}
+	
+	override getName() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getName()'))
+		}
+		equivalent.name
+	}
+	
+	override getPrimitiveIfWrapper() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getPrimitiveIfWrapper()'))
+		}
+		equivalent.primitiveIfWrapper
+	}
+	
+	override getSimpleName() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getSimpleName()'))
+		}
+		equivalent.simpleName
+	}
+	
+	override getType() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getType()'))
+		}
+		equivalent.type
+	}
+	
+	override getUpperBound() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getUpperBound()'))
+		}
+		equivalent.upperBound
+	}
+	
+	override getWrapperIfPrimitive() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getWrapperIfPrimitive()'))
+		}
+		equivalent.wrapperIfPrimitive
+	}
+	
+	override isAnyType() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isAnyType()'))
+		}
+		equivalent.anyType
+	}
+	
+	override isArray() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isArray()'))
+		}
+		equivalent.array
+	}
+	
+	override isAssignableFrom(TypeReference typeReference) {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isAssignableFrom()'))
+		}
+		equivalent.isAssignableFrom(typeReference)
+	}
+	
+	override isPrimitive() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isPrimitive()'))
+		}
+		equivalent.primitive
+	}
+	
+	override isVoid() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isVoid()'))
+		}
+		equivalent.isVoid
+	}
+	
+	override isWildCard() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isWildCard()'))
+		}
+		equivalent.wildCard
+	}
+	
+	override isWrapper() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('isWrapper()'))
+		}
+		equivalent.wrapper
+	}
+	
+	override getDeclaredSuperTypes() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getDeclaredSuperTypes()'))
+		}
+		equivalent.declaredSuperTypes
+	}
+	
+	override getDeclaredResolvedMethods() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getDeclaredResolvedMethods()'))
+		}
+		equivalent.declaredResolvedMethods
+	}
+	
+	override getDeclaredResolvedConstructors() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getDeclaredResolvedConstructors()'))
+		}
+		equivalent.declaredResolvedConstructors
+	}
+	
+	override getAllResolvedMethods() {
+		if (equivalent == null) {
+			throw new UnsupportedOperationException(message('getAllResolvedMethods()'))
+		}
+		equivalent.allResolvedMethods
 	}
 	
 	override isInferred() {

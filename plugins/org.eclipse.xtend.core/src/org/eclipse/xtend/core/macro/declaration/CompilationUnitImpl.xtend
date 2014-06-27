@@ -45,6 +45,8 @@ import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor
+import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
@@ -92,6 +94,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.JvmVoid
+import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
@@ -100,20 +103,22 @@ import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XListLiteral
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
+import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
 import org.eclipse.xtext.xbase.typesystem.references.IndexingOwnedConverter
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
-import org.eclipse.xtext.common.types.TypesFactory
-import org.eclipse.xtext.xbase.XListLiteral
 import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking
+import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -169,6 +174,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject IEObjectDocumentationProvider documentationProvider
 	@Inject IFileHeaderProvider fileHeaderProvider
 	@Inject JvmTypeExtensions typeExtensions
+	@Inject OverrideHelper overrideHelper
 
 	@Inject AbstractFileSystemSupport fileSystemSupport
 	@Inject FileLocations fileLocations
@@ -179,7 +185,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Property val AnnotationReferenceProvider annotationReferenceProvider = new AnnotationReferenceProviderImpl(this)
 	@Property val TypeLookupImpl typeLookup = new TypeLookupImpl(this)
 	
-	Map<EObject, Object> identityCache = newHashMap
+	Map<Object, Object> identityCache = newHashMap
 	OwnedConverter typeRefConverter
 	
 	def IXtendJvmAssociations getJvmAssociations() {
@@ -190,6 +196,9 @@ class CompilationUnitImpl implements CompilationUnit {
 		typeReferences
 	}
 	
+	def OverrideHelper getOverrideHelper() {
+		overrideHelper
+	}
 	def IEObjectDocumentationProvider getDocumentationProvider() {
 		documentationProvider
 	}
@@ -240,7 +249,7 @@ class CompilationUnitImpl implements CompilationUnit {
 		compilerPhases.isIndexing(xtendFile)
 	}
 
-	def private <IN extends EObject, OUT> OUT getOrCreate(IN in, (IN)=>OUT provider) {
+	def private <IN, OUT> OUT getOrCreate(IN in, (IN)=>OUT provider) {
 		checkCanceled
 		if (in == null)
 			return null
@@ -258,6 +267,24 @@ class CompilationUnitImpl implements CompilationUnit {
 			case JvmVisibility.PROTECTED: Visibility.PROTECTED
 			case JvmVisibility.PUBLIC: Visibility.PUBLIC
 		}
+	}
+	
+	def ResolvedMethod toResolvedMethod(IResolvedOperation delegate) {
+		getOrCreate(delegate) [
+			new ResolvedMethodImpl => [
+				it.delegate = delegate
+				compilationUnit = this
+			]
+		]
+	}
+	
+	def ResolvedConstructor toResolvedConstructor(IResolvedConstructor delegate) {
+		getOrCreate[
+			new ResolvedConstructorImpl => [
+				it.delegate = delegate
+				compilationUnit = this
+			]
+		]
 	}
 
 	def Type toType(JvmType delegate) {

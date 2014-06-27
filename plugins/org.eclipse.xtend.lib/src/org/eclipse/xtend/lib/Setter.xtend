@@ -40,7 +40,7 @@ class SetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 		if (hasSetter) {
 			val annotation = findAnnotation(Setter.findTypeGlobally)
 			annotation.addWarning("A setter is already defined, this annotation has no effect")
-		} else {
+		} else if (canAddSetter) {
 			addSetter
 		}
 	}
@@ -48,7 +48,7 @@ class SetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 	protected def dispatch transform(MutableClassDeclaration it, extension TransformationContext context) {
 		extension val util = new Util(context)
 		declaredFields.filter[!static && isThePrimaryGeneratedJavaElement].forEach [
-			if (!hasSetter) {
+			if (!hasSetter && canAddSetter) {
 				addSetter
 			}
 		]
@@ -73,16 +73,39 @@ class SetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 		def getSetterName(FieldDeclaration it) {
 			"set" + simpleName.toFirstUpper
 		}
-
-		def void addSetter(MutableFieldDeclaration field) {
+		
+		def canAddSetter(MutableFieldDeclaration field) {
 			if (field.final) {
 				field.addError("Cannot set a final field")
-				return
+				return false
 			}
 			if (field.type.inferred) {
 				field.addError("Type cannot be inferred.")
-				return
+				return false
 			}
+			
+			val overriddenSetter = field.declaringType.newSelfTypeReference.allResolvedMethods.findFirst[
+				declaration.simpleName == field.setterName
+				&& resolvedParameters.size == 1
+				&& field.type.isAssignableFrom(resolvedParameters.head.resolvedType)
+			]
+			if (overriddenSetter == null)
+				return true
+			val overriddenDeclaration = overriddenSetter.declaration
+			if (overriddenDeclaration.final) {
+				field.addError('''Cannot override the final method «overriddenSetter.simpleSignature» in «overriddenDeclaration.declaringType.simpleName»''')
+				return false
+			}
+			if (!overriddenSetter.resolvedReturnType.isVoid) {
+				field.addError('''
+					Cannot override the method «overriddenSetter.simpleSignature» in «overriddenDeclaration.declaringType.simpleName», because its return type is not void»
+				''')
+				return false
+			}
+			return true
+		}
+
+		def void addSetter(MutableFieldDeclaration field) {
 			field.declaringType.addMethod(field.setterName) [
 				returnType = primitiveVoid
 				val param = addParameter(field.simpleName, field.type)
