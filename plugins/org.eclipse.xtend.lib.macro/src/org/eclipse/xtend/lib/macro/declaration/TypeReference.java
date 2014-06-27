@@ -130,5 +130,44 @@ public interface TypeReference extends Element {
 	 */
 	boolean isInferred();
 	
-	// TODO super types, features
+	/**
+	 * @return the supertypes (superclass and interfaces) directly implemented/extended by this type
+	 * @since 2.7
+	 */
+	Iterable<? extends TypeReference> getDeclaredSuperTypes();
+	
+	/**
+	 * @return the resolved methods directly declared by this type
+	 * @since 2.7
+	 */
+	Iterable<? extends ResolvedMethod> getDeclaredResolvedMethods();
+	
+	/**
+	 * @return the resolved constructors directly declared by this type
+	 * @since 2.7
+	 */
+	Iterable<? extends ResolvedConstructor> getDeclaredResolvedConstructors();
+	
+	/**
+	 * Computes all the resolved methods that can be called on this type, either because they were
+	 * declared directly by the type or by one of its supertypes.
+	 * For overloaded methods, the one declared closest to this type is used. E.g. when
+	 * called on the class <code>C</code> in this hierarchy:
+	 * 
+	 * <pre>
+	 * class A {
+	 *  def CharSequence foo()
+	 * }
+	 * class B extends A {
+	 *  override String foo()
+	 * }
+	 * class C extends B {}
+	 * <pre>
+	 * 
+	 * B#foo() would be contained, but not A#foo().
+	 * 
+	 * @return the resolved methods declared in this type and its supertypes. 
+	 * @since 2.7
+	 */
+	Iterable<? extends ResolvedMethod> getAllResolvedMethods();
 }
