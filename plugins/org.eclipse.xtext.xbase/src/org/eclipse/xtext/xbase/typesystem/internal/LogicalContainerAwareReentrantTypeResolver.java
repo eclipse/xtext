@@ -174,7 +174,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				}
 				return doGetTypReferenceWithAnotherTypeReference();
 			} finally {
-				context.unsetTypeProviderWithoutNotification();
+				context.setTypeProvider(null);
 			}
 		}
 
@@ -259,7 +259,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 						null));
 				return TypesFactory.eINSTANCE.createJvmAnyTypeReference();
 			} finally {
-				context.unsetTypeProviderWithoutNotification();
+				context.setTypeProvider(null);
 			}
 		}
 	}
