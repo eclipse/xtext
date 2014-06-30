@@ -15,7 +15,6 @@ import java.util.RandomAccess;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -40,7 +39,6 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 	private IResolvedTypes[] delegates;
 	private boolean sealed = false;
 	private int next;
-	private CancelIndicator monitor;
 	
 	protected void addResolver(AbstractRootedReentrantTypeResolver resolver) {
 		if (sealed)
@@ -52,8 +50,7 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		throw new IllegalStateException();
 	}
 	
-	public IResolvedTypes reentrantResolve(CancelIndicator monitor) {
-		this.monitor = monitor;
+	public IResolvedTypes reentrantResolve() {
 		if (!sealed) {
 			sealed = true;
 			delegates = new IResolvedTypes[resolvers.size()];
@@ -63,25 +60,21 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		while(next < delegates.length) {
 			int next = this.next;
 			if (delegates[next] == null)
-				delegates[next] = resolvers.get(next).reentrantResolve(monitor);
+				delegates[next] = resolvers.get(next).reentrantResolve();
 			this.next++;
 		}
 		return this;
 	}
 	
-	protected CancelIndicator getMonitor() {
-		return monitor != null ? monitor : CancelIndicator.NullImpl;
-	}
-	
 	protected IResolvedTypes getDelegate(int idx) {
 		if (!sealed) {
-			reentrantResolve(getMonitor());
+			reentrantResolve();
 		}
 		if (idx < delegates.length) {
 			IResolvedTypes result = delegates[idx];
 			if (result == null) {
 				if (next != idx) {
-					return delegates[idx] = resolvers.get(idx).reentrantResolve(getMonitor());
+					return delegates[idx] = resolvers.get(idx).reentrantResolve();
 				}
 				return IResolvedTypes.NULL;
 			}

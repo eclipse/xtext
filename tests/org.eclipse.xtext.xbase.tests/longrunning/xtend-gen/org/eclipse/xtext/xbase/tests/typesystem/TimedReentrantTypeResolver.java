@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.tests.typesystem.TimedRootResolvedTypes;
 import org.eclipse.xtext.xbase.tests.typesystem.TypeResolutionTimes;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
@@ -18,8 +17,8 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
  */
 @SuppressWarnings("all")
 public class TimedReentrantTypeResolver extends DefaultReentrantTypeResolver {
-  public RootResolvedTypes createResolvedTypes(final CancelIndicator monitor) {
+  public RootResolvedTypes createResolvedTypes() {
     TypeResolutionTimes _typeResolutionTimes = new TypeResolutionTimes();
-    return new TimedRootResolvedTypes(this, _typeResolutionTimes, monitor);
+    return new TimedRootResolvedTypes(this, _typeResolutionTimes);
   }
 }

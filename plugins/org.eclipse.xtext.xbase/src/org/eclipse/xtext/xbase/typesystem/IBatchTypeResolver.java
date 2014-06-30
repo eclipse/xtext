@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.CachingBatchTypeResolver;
 
@@ -57,28 +56,4 @@ public interface IBatchTypeResolver {
 	/* @NonNull */
 	IResolvedTypes resolveTypes(/* @NonNull */ Resource resource);
 	
-	/**
-	 * Return a handle to resolved types of expressions that are related
-	 * to the given {@code object}.
-	 * 
-	 * @param object the context that describes the expressions that will be used
-	 * to query the resolved types.
-	 * @param monitor used to cancel type resolution, e.g. by the reconciler.
-	 * @return a handle to resolved types of expressions and identifiables.
-	 * @since 2.7
-	 */
-	/* @NonNull */
-	IResolvedTypes resolveTypes(/* @Nullable */ EObject object, CancelIndicator monitor);
-	
-	/**
-	 * Return a handle to resolved types of expressions that are related
-	 * to the given {@code object}.
-	 * 
-	 * @param resource the resource that shall be resolved.
-	 * @param monitor used to cancel type resolution, e.g. by the reconciler.
-	 * @return a handle to resolved types of expressions and identifiables.
-	 * @since 2.7
-	 */
-	/* @NonNull */
-	IResolvedTypes resolveTypes(/* @NonNull */ Resource resource, CancelIndicator monitor);
 }

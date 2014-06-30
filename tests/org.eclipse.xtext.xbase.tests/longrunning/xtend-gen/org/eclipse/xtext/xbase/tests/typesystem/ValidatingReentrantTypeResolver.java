@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.tests.typesystem.ValidatingRootResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
@@ -17,7 +16,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
  */
 @SuppressWarnings("all")
 public class ValidatingReentrantTypeResolver extends DefaultReentrantTypeResolver {
-  public RootResolvedTypes createResolvedTypes(final CancelIndicator monitor) {
-    return new ValidatingRootResolvedTypes(this, monitor);
+  public RootResolvedTypes createResolvedTypes() {
+    return new ValidatingRootResolvedTypes(this);
   }
 }

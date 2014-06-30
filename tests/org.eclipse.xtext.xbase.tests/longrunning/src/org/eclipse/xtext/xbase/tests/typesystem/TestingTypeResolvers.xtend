@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.typesystem.internal.ReassigningStackedResolvedTyp
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes
-import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sebastian Zarnekow
@@ -102,8 +101,8 @@ class EagerReentrantTypeResolver extends DefaultReentrantTypeResolver {
  */
 class InvariantCheckingEagerReentrantTypeResolver extends EagerReentrantTypeResolver {
 	
-	override protected createResolvedTypes(CancelIndicator monitor) {
-		return new ValidatingRootResolvedTypes(this, monitor)
+	override protected createResolvedTypes() {
+		return new ValidatingRootResolvedTypes(this)
 	}
 	
 }
@@ -143,8 +142,8 @@ class TimedBatchTypeResolver extends DefaultBatchTypeResolver {
  */
 class TimedReentrantTypeResolver extends DefaultReentrantTypeResolver {
 	
-	override createResolvedTypes(CancelIndicator monitor) {
-		return new TimedRootResolvedTypes(this, new TypeResolutionTimes(), monitor)
+	override createResolvedTypes() {
+		return new TimedRootResolvedTypes(this, new TypeResolutionTimes())
 	}
 	
 }
@@ -165,8 +164,8 @@ class TimedRootResolvedTypes extends RootResolvedTypes {
 	
 	TypeResolutionTimes times
 	
-	new(DefaultReentrantTypeResolver resolver, TypeResolutionTimes times, CancelIndicator monitor) {
-		super(resolver, monitor)
+	new(DefaultReentrantTypeResolver resolver, TypeResolutionTimes times) {
+		super(resolver)
 		this.times = times
 	}
 	

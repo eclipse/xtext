@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.typesystem.TimedExpressionAwareResolvedTypes;
 import org.eclipse.xtext.xbase.tests.typesystem.TimedReassigningResolvedTypes;
@@ -25,8 +24,8 @@ import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes;
 public class TimedRootResolvedTypes extends RootResolvedTypes {
   private TypeResolutionTimes times;
   
-  public TimedRootResolvedTypes(final DefaultReentrantTypeResolver resolver, final TypeResolutionTimes times, final CancelIndicator monitor) {
-    super(resolver, monitor);
+  public TimedRootResolvedTypes(final DefaultReentrantTypeResolver resolver, final TypeResolutionTimes times) {
+    super(resolver);
     this.times = times;
   }
   

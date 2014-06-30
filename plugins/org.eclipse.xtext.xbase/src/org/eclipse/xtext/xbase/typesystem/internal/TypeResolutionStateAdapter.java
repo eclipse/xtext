@@ -12,7 +12,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
@@ -64,8 +63,8 @@ public class TypeResolutionStateAdapter extends AbstractRootedReentrantTypeResol
 		throw new IllegalStateException("Attempt to reinitialize the root resolver");
 	}
 
-	public IResolvedTypes reentrantResolve(CancelIndicator monitor) {
-		return context.reentrantResolve(monitor);
+	public IResolvedTypes reentrantResolve() {
+		return context.reentrantResolve();
 	}
 
 	public void notifyChanged(/* @Nullable */ Notification notification) {

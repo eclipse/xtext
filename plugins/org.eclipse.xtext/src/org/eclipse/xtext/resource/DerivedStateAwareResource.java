@@ -35,13 +35,6 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	protected volatile boolean isInitializing = false;
 
 	/**
-	 * @since 2.7
-	 */
-	public boolean isFullyInitialized() {
-		return fullyInitialized;
-	}
-	
-	/**
 	 * {@inheritDoc}
 	 * <p>
 	 * As soon as an external client tries to access the content of the resource,

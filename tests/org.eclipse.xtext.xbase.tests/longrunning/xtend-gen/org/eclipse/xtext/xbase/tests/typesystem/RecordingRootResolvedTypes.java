@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import java.util.Map;
 import org.eclipse.xtend.lib.Property;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -24,8 +23,8 @@ public class RecordingRootResolvedTypes extends RootResolvedTypes {
   @Property
   private Map<XExpression, ILinkingCandidate> _resolvedProxies;
   
-  public RecordingRootResolvedTypes(final DefaultReentrantTypeResolver resolver, final CancelIndicator monitor) {
-    super(resolver, monitor);
+  public RecordingRootResolvedTypes(final DefaultReentrantTypeResolver resolver) {
+    super(resolver);
   }
   
   public void resolveProxies() {

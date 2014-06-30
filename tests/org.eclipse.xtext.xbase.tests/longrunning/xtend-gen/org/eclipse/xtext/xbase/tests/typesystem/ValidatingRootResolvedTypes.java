@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import java.util.Collection;
 import java.util.List;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -35,8 +34,8 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
  */
 @SuppressWarnings("all")
 public class ValidatingRootResolvedTypes extends RootResolvedTypes {
-  public ValidatingRootResolvedTypes(final DefaultReentrantTypeResolver resolver, final CancelIndicator monitor) {
-    super(resolver, monitor);
+  public ValidatingRootResolvedTypes(final DefaultReentrantTypeResolver resolver) {
+    super(resolver);
   }
   
   public StackedResolvedTypes pushReassigningTypes() {
