@@ -5,6 +5,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtend.core.xtend.AnonymousClass
 import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
@@ -14,7 +15,8 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendInterface
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral
+import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmTypeReference
@@ -23,7 +25,6 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider
 import org.eclipse.xtext.xbase.validation.UIStrings
-import org.eclipse.xtend.core.xtend.AnonymousClass
 
 /**
  * Provides labels for Xtend elements.
@@ -72,7 +73,7 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	protected def dispatch imageDescriptor(XtendFunction element) {
 		images.forOperation(element.visibility, adornments.get(element.directlyInferredOperation))
 	}
-	
+
 	protected def dispatch imageDescriptor(AnonymousClass element) {
 		images.forClass(element.inferredType.visibility, adornments.get(element.inferredType))
 	}
@@ -114,10 +115,6 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 			uiStrings.typeParameters(element.typeParameters)
 	}
 
-	protected def text(XtendTypeDeclaration element) {
-		element.name
-	}
-
 	protected def text(AnonymousClass element) {
 		text(element.inferredType)
 	}
@@ -128,7 +125,10 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 			val supertype = element.superTypes.head
 			return '''new «supertype.simpleName»() {...}'''
 		}
-		element.simpleName
+		element.simpleName + if (element.typeParameters.empty)
+			""
+		else
+			uiStrings.typeParameters(element.typeParameters)
 	}
 
 	protected def text(XtendConstructor element) {
@@ -164,8 +164,17 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 		new StyledString(element.name)
 	}
 
+	protected override text(JvmField element) {
+		return new StyledString(element.simpleName).append(
+			new StyledString(" : " + element.type.simpleName, StyledString.DECORATIONS_STYLER))
+	}
+
 	protected def text(XtendEnumLiteral element) {
 		element.name
+	}
+	
+	protected def text(JvmEnumerationLiteral element) {
+		element.simpleName
 	}
 
 	protected def JvmTypeReference getDisplayedType(XtendField field) {

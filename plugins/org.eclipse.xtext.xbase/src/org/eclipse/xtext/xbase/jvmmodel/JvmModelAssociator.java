@@ -47,45 +47,45 @@ import com.google.inject.name.Named;
  */
 @Singleton
 public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator, ILogicalContainerProvider, IDerivedStateComputer {
-	
+
 	private final static Logger LOG = Logger.getLogger(JvmModelAssociator.class);
-	
+
 	@Inject
-	@Named(Constants.LANGUAGE_NAME) 
+	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
-	
-	@Inject 
+
+	@Inject
 	private JvmElementsProxifyingUnloader unloader;
-	
+
 	@Inject
 	private IJvmModelInferrer inferrer;
-	
+
 	@Inject
 	private JvmModelInferrerRegistry inferrerRegistry;
-	
-	@Inject 
+
+	@Inject
 	private JvmModelCompleter completer;
-	
+
 	public void setCompleter(JvmModelCompleter completer) {
 		this.completer = completer;
 	}
-	
+
 	public void setInferrer(IJvmModelInferrer inferrer) {
 		this.inferrer = inferrer;
 	}
-	
+
 	protected static class Adapter extends AdapterImpl {
-		
+
 		public Map<EObject, Set<EObject>> sourceToTargetMap = Maps2.newLinkedHashMapWithExpectedSize(40);
 		public Map<EObject, Set<EObject>> targetToSourceMap = Maps2.newLinkedHashMapWithExpectedSize(40);
 		public Map<EObject, JvmIdentifiableElement> logicalContainerMap = Maps2.newLinkedHashMapWithExpectedSize(40);
-		
+
 		@Override
 		public boolean isAdapterForType(Object type) {
 			return Adapter.class == type;
 		}
 	}
-	
+
 	protected Adapter getOrInstall(Resource resource) {
 		if (!(resource instanceof XtextResource))
 			return new Adapter();
@@ -98,11 +98,11 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		}
 		return adapter;
 	}
-	
+
 	protected Map<EObject, JvmIdentifiableElement> getLogicalContainerMapping(Resource resource) {
 		return getOrInstall(resource).logicalContainerMap;
 	}
-	
+
 	public XExpression getAssociatedExpression(JvmIdentifiableElement element) {
 		if (element == null)
 			return null;
@@ -157,7 +157,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		final Map<EObject, JvmIdentifiableElement> mapping = getLogicalContainerMapping(logicalChild.eResource());
 		mapping.put(logicalChild, element);
 	}
-	
+
 	public void removeLogicalChildAssociation(JvmIdentifiableElement container) {
 		if (container == null)
 			return;
@@ -174,7 +174,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	protected Map<EObject, Set<EObject>> sourceToTargetMap(Resource res) {
 		return getOrInstall(res).sourceToTargetMap;
 	}
-	
+
 	protected Map<EObject, Set<EObject>> targetToSourceMap(Resource res) {
 		return getOrInstall(res).targetToSourceMap;
 	}
@@ -187,8 +187,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			res = (Resource) ctx;
 		}
 		if (res == null) {
-			throw new IllegalArgumentException(
-					"Argument must either be an EObject (cotained in a resource) or a resource. But was " + ctx);
+			throw new IllegalArgumentException("Argument must either be an EObject (cotained in a resource) or a resource. But was " + ctx);
 		}
 		return res;
 	}
@@ -212,7 +211,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			putIntoSmallSetMap(jvmElement, sourceElement, targetToSourceMap, true);
 		}
 	}
-	
+
 	public static <K, V> void putIntoSmallSetMap(K key, V value, Map<? super K, Set<V>> map) {
 		Set<V> set = map.get(key);
 		if (set == null) {
@@ -221,7 +220,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		}
 		set.add(value);
 	}
-	
+
 	public static <K, V> void putIntoSmallSetMap(K key, V value, Map<? super K, Set<V>> map, boolean head) {
 		if (head) {
 			Set<V> list = map.get(key);
@@ -230,23 +229,23 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 				map.put(key, list);
 			}
 			list.remove(value);
-			((ListBasedSet<V>)list).elements.addFirst(value);
+			((ListBasedSet<V>) list).elements.addFirst(value);
 		} else {
 			putIntoSmallSetMap(key, value, map);
 		}
 	}
-	
+
 	protected static class ListBasedSet<E> extends AbstractSet<E> {
 
 		private LinkedList<E> elements = Lists.newLinkedList();
-		
+
 		@Override
 		public boolean add(E e) {
 			if (elements.contains(e))
 				return false;
 			return elements.add(e);
 		}
-		
+
 		@Override
 		public Iterator<E> iterator() {
 			return elements.iterator();
@@ -256,7 +255,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		public int size() {
 			return elements.size();
 		}
-		
+
 	}
 
 	public Set<EObject> getJvmElements(EObject sourceElement) {
@@ -294,7 +293,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		if (resource.getContents().isEmpty())
 			return;
 		EObject eObject = resource.getContents().get(0);
-		
+
 		StoppedTask task = Stopwatches.forTask("primary JVM Model inference (JvmModelAssociator.installDerivedState)");
 		task.start();
 		// call primary inferrer
@@ -305,7 +304,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			LOG.error("Error calling inferrer", e);
 		}
 		if (!preIndexingPhase) {
-			for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer: acceptor.later) {
+			for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer : acceptor.later) {
 				try {
 					initializer.getValue().apply(initializer.getKey());
 				} catch (RuntimeException e) {
@@ -314,7 +313,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			}
 		}
 		task.stop();
-		
+
 		task = Stopwatches.forTask("secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)");
 		task.start();
 		// call secondary inferrers
@@ -325,17 +324,17 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			try {
 				secondaryInferrer.infer(eObject, acceptor, preIndexingPhase);
 				if (!preIndexingPhase) {
-					for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer: acceptor.later) {
+					for (Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer : acceptor.later) {
 						initializer.getValue().apply(initializer.getKey());
 					}
 				}
 			} catch (Exception e) {
 				inferrerRegistry.deregister(fileExtension, secondaryInferrer);
-				LOG.info("Removed errorneous model inferrer for *."+ fileExtension+". - "+secondaryInferrer, e);
+				LOG.info("Removed errorneous model inferrer for *." + fileExtension + ". - " + secondaryInferrer, e);
 			}
 		}
 		task.stop();
-		
+
 		if (!preIndexingPhase) {
 			for (EObject object : resource.getContents()) {
 				if (object instanceof JvmIdentifiableElement) {
@@ -353,7 +352,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	public void cleanAssociationState(Resource resource) {
 		List<EObject> derived = Lists.newArrayList();
 		EList<EObject> resourcesContentsList = resource.getContents();
-		for (int i = 1; i< resourcesContentsList.size(); i++) {
+		for (int i = 1; i < resourcesContentsList.size(); i++) {
 			EObject eObject = resourcesContentsList.get(i);
 			unloader.unloadRoot(eObject);
 			derived.add(eObject);
@@ -363,7 +362,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		targetToSourceMap(resource).clear();
 		getLogicalContainerMapping(resource).clear();
 	}
-	
+
 	public static class JvmDeclaredTypeAcceptor implements IJvmDeclaredTypeAcceptor {
 		public List<Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>>> later = Lists.newArrayList();
 		private DerivedStateAwareResource resource;
@@ -374,11 +373,11 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 		@SuppressWarnings("unchecked")
 		public <T extends JvmDeclaredType> IPostIndexingInitializing<T> accept(T type) {
-			if(type != null && type.eContainer() == null)
+			if (type != null && type.eContainer() == null)
 				resource.getContents().add(type);
 			return (IPostIndexingInitializing<T>) new JvmPostIndexingInitializing(type);
 		}
-		
+
 		private class JvmPostIndexingInitializing implements IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmDeclaredType> {
 
 			private JvmDeclaredType type;
@@ -392,10 +391,22 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 					later.add(new Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>>(type, lateInitialization));
 				}
 			}
-			
+
 		}
 
 	}
 
-}
+	public EObject getPrimaryJvmElement(EObject sourceElement) {
+		return getJvmElements(sourceElement).iterator().next();
+	}
 
+	public boolean isPrimaryJvmElement(EObject jvmElement) {
+		Set<EObject> sourceElements = getSourceElements(jvmElement);
+		if (!sourceElements.isEmpty()) {
+			EObject primaryJvmElement = getPrimaryJvmElement(sourceElements.iterator().next());
+			return jvmElement.equals(primaryJvmElement);
+		}
+		return false;
+	}
+
+}
