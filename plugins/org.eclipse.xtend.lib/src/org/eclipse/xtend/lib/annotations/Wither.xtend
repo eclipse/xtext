@@ -1,4 +1,4 @@
-package org.eclipse.xtend.lib
+package org.eclipse.xtend.lib.annotations
 
 import com.google.common.annotations.Beta
 import java.lang.annotation.ElementType
