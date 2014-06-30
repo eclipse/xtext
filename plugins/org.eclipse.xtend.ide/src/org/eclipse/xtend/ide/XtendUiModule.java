@@ -57,6 +57,7 @@ import org.eclipse.xtend.ide.hyperlinking.XtendHyperlinkHelper;
 import org.eclipse.xtend.ide.labeling.XtendLabelProvider;
 import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider;
 import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
+import org.eclipse.xtend.ide.outline.SwitchOutlineModeContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeFactory;
 import org.eclipse.xtend.ide.outline.XtendOutlinePage;
@@ -117,6 +118,7 @@ import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer;
+import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeFactory;
@@ -524,4 +526,14 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends XtextDocumentReconcileStrategy> bindXtextDocumentReconcileStrategy() {
 		return XbaseDocumentReconcileStrategy.class;
 	}
+	
+	public Class<? extends IOutlineTreeProvider.ModeAware> bindIOutlineTreeProvider_ModeAware() {
+		return org.eclipse.xtend.ide.outline.AbstractMultiModeOutlineTreeProvider.XtendOutlineModes.class;
+	}
+	
+	public void configureSwitchOutlineModeContribution(Binder binder) {
+		binder.bind(IOutlineContribution.class).annotatedWith(Names.named("SwitchOutlineModeContribution"))
+		.to(SwitchOutlineModeContribution.class);
+	}
+
 }

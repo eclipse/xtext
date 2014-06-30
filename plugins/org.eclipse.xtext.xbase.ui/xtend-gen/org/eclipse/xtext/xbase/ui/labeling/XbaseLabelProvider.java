@@ -116,7 +116,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     return this.images.forField(_visibility, _get);
   }
   
-  protected String text(final JvmField field) {
+  protected Object text(final JvmField field) {
     String _simpleName = field.getSimpleName();
     String _plus = (_simpleName + " : ");
     JvmTypeReference _type = field.getType();
