@@ -30,10 +30,10 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.IMirrorExtension;
 import org.eclipse.xtext.common.types.access.TypeResource;
-import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Tuples;
 
@@ -75,13 +75,6 @@ public class JvmDeclaredTypeSignatureHashProvider {
 		});
 	}
 	
-	public String getTextHash(final XtextResource resource) {
-		IParseResult parseResult = resource.getParseResult();
-		String text = (parseResult != null) ? parseResult.getRootNode().getText() : "";
-		String hash = signatureBuilderProvider.get().append(text).hash();
-		return hash;
-	}
-	
 	public static class SignatureHashBuilder {
 
 		@Inject
@@ -109,7 +102,7 @@ public class JvmDeclaredTypeSignatureHashProvider {
 			}
 		}
 
-		public SignatureHashBuilder append(String s) {
+		protected SignatureHashBuilder append(String s) {
 			if(digest != null)
 				try {
 					digest.update(s.getBytes("UTF8"));
@@ -123,6 +116,15 @@ public class JvmDeclaredTypeSignatureHashProvider {
 
 		public SignatureHashBuilder appendSignature(JvmDeclaredType type) {
 			if (type.getVisibility() != JvmVisibility.PRIVATE) {
+				if(type.eResource() instanceof DerivedStateAwareResource) {
+					DerivedStateAwareResource resource = (DerivedStateAwareResource) type.eResource();
+					if(!resource.isChangingDerivedState() && !resource.hasDerivedState()) {
+						ICompositeNode rootNode = resource.getParseResult().getRootNode();
+						if(rootNode != null)
+							append(rootNode.getText());
+						return this;
+					}
+				}
 				appendAnnotationReferences(type);
 				appendVisibility(type.getVisibility()).append(" ");
 				if (type.isAbstract())

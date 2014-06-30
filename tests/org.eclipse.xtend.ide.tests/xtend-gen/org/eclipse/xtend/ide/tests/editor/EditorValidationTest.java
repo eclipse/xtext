@@ -35,7 +35,7 @@ import org.junit.Test;
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
+public class EditorValidationTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper helper;
@@ -114,7 +114,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
               return false;
             }
           };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
           String _string = issues.toString();
           boolean _isEmpty = issues.isEmpty();
           Assert.assertTrue(_string, _isEmpty);
@@ -183,7 +183,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
               return false;
             }
           };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
           String _string = issues.toString();
           int _length = ((Object[])Conversions.unwrapArray(issues, Object.class)).length;
           Assert.assertEquals(_string, 3, _length);
@@ -202,7 +202,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
               return false;
             }
           };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
           String _string = issues.toString();
           boolean _isEmpty = issues.isEmpty();
           Assert.assertTrue(_string, _isEmpty);
@@ -255,7 +255,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
               return false;
             }
           };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
           String _string = issues.toString();
           boolean _isEmpty = issues.isEmpty();
           Assert.assertTrue(_string, _isEmpty);
@@ -275,33 +275,13 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
               return false;
             }
           };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
           int _size = issues.size();
           Assert.assertEquals(1, _size);
           return null;
         }
       };
       _document_2.<Object>readOnly(_function_1);
-      IXtextDocument _document_3 = interfaceEditor.getDocument();
-      _document_3.set(interface_);
-      this._syncUtil.waitForReconciler(interfaceEditor);
-      this._syncUtil.waitForDirtyStateUpdater(classEditor);
-      IXtextDocument _document_4 = classEditor.getDocument();
-      final IUnitOfWork<Object, XtextResource> _function_2 = new IUnitOfWork<Object, XtextResource>() {
-        public Object exec(final XtextResource it) throws Exception {
-          final CancelIndicator _function = new CancelIndicator() {
-            public boolean isCanceled() {
-              return false;
-            }
-          };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
-          String _string = issues.toString();
-          boolean _isEmpty = issues.isEmpty();
-          Assert.assertTrue(_string, _isEmpty);
-          return null;
-        }
-      };
-      _document_4.<Object>readOnly(_function_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -353,7 +333,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
               return false;
             }
           };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
           String _string = issues.toString();
           boolean _isEmpty = issues.isEmpty();
           Assert.assertTrue(_string, _isEmpty);
@@ -373,7 +353,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
               return false;
             }
           };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
+          final List<Issue> issues = EditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
           String _string = issues.toString();
           int _size = issues.size();
           Assert.assertEquals(_string, 2, _size);
@@ -381,26 +361,6 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
         }
       };
       _document_2.<Object>readOnly(_function_1);
-      IXtextDocument _document_3 = interfaceEditor.getDocument();
-      _document_3.set(interface_);
-      this._syncUtil.waitForReconciler(interfaceEditor);
-      this._syncUtil.waitForDirtyStateUpdater(classEditor);
-      IXtextDocument _document_4 = classEditor.getDocument();
-      final IUnitOfWork<Object, XtextResource> _function_2 = new IUnitOfWork<Object, XtextResource>() {
-        public Object exec(final XtextResource it) throws Exception {
-          final CancelIndicator _function = new CancelIndicator() {
-            public boolean isCanceled() {
-              return false;
-            }
-          };
-          final List<Issue> issues = DirtyStateEditorValidationTest.this.validator.validate(it, CheckMode.NORMAL_AND_FAST, _function);
-          String _string = issues.toString();
-          boolean _isEmpty = issues.isEmpty();
-          Assert.assertTrue(_string, _isEmpty);
-          return null;
-        }
-      };
-      _document_4.<Object>readOnly(_function_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
