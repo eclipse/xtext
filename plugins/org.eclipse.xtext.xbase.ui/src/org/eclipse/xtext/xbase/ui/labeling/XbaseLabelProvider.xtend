@@ -82,7 +82,7 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 		images.forField(field.visibility, adornments.get(field))
 	}
 
-	protected def String text(JvmField field) {
+	protected def Object text(JvmField field) {
 		field.simpleName + " : " + field.type.simpleName
 	}
 

@@ -107,4 +107,12 @@ public class UnicodeAwarePostProcessorTest extends Assert implements IJvmModelAs
 	public ITextRegion getFullTextRegion(EObject owner, EStructuralFeature feature, int indexInList) {
 		return getDummyTextRegion();
 	}
+
+	public EObject getPrimaryJvmElement(EObject sourceElement) {
+		return null;
+	}
+
+	public boolean isPrimaryJvmElement(EObject jvmElement) {
+		return false;
+	}
 }

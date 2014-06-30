@@ -24,7 +24,6 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -200,10 +199,6 @@ public class XtendLabelProvider extends XbaseLabelProvider {
     return (_name + _xifexpression);
   }
   
-  protected String text(final XtendTypeDeclaration element) {
-    return element.getName();
-  }
-  
   protected String text(final AnonymousClass element) {
     JvmGenericType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
     return this.text(_inferredType);
@@ -223,7 +218,17 @@ public class XtendLabelProvider extends XbaseLabelProvider {
         _builder.append("() {...}");
         return _builder.toString();
       }
-      _xblockexpression = element.getSimpleName();
+      String _simpleName_1 = element.getSimpleName();
+      String _xifexpression = null;
+      EList<JvmTypeParameter> _typeParameters = element.getTypeParameters();
+      boolean _isEmpty = _typeParameters.isEmpty();
+      if (_isEmpty) {
+        _xifexpression = "";
+      } else {
+        EList<JvmTypeParameter> _typeParameters_1 = element.getTypeParameters();
+        _xifexpression = this.uiStrings.typeParameters(_typeParameters_1);
+      }
+      _xblockexpression = (_simpleName_1 + _xifexpression);
     }
     return _xblockexpression;
   }
@@ -232,6 +237,17 @@ public class XtendLabelProvider extends XbaseLabelProvider {
     JvmConstructor _inferredConstructor = this._iXtendJvmAssociations.getInferredConstructor(element);
     String _parameters = this.uiStrings.parameters(_inferredConstructor);
     return ("new" + _parameters);
+  }
+  
+  protected String text(final JvmConstructor constructor) {
+    StringConcatenation _builder = new StringConcatenation();
+    JvmDeclaredType _declaringType = constructor.getDeclaringType();
+    String _simpleName = _declaringType.getSimpleName();
+    _builder.append(_simpleName, "");
+    _builder.append(" ");
+    String _parameters = this.uiStrings.parameters(constructor);
+    _builder.append(_parameters, "");
+    return _builder.toString();
   }
   
   protected StyledString text(final XtendFunction element) {
@@ -289,6 +305,16 @@ public class XtendLabelProvider extends XbaseLabelProvider {
       _xblockexpression = new StyledString(_name_2);
     }
     return _xblockexpression;
+  }
+  
+  protected Object text(final JvmField element) {
+    String _simpleName = element.getSimpleName();
+    StyledString _styledString = new StyledString(_simpleName);
+    JvmTypeReference _type = element.getType();
+    String _simpleName_1 = _type.getSimpleName();
+    String _plus = (" : " + _simpleName_1);
+    StyledString _styledString_1 = new StyledString(_plus, StyledString.DECORATIONS_STYLER);
+    return _styledString.append(_styledString_1);
   }
   
   protected String text(final XtendEnumLiteral element) {
