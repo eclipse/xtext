@@ -20,6 +20,7 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCreateSingleSetter() {
 		'''
+			import org.eclipse.xtend.lib.annotations.Setter
 			class Foo {
 				@Setter int foo
 			}
@@ -37,6 +38,7 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCreateGenericSingleSetter() {
 		'''
+			import org.eclipse.xtend.lib.annotations.Setter
 			class Foo<T extends CharSequence> {
 				@Setter T foo
 			}
@@ -55,6 +57,7 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCreateStaticSetter() {
 		'''
+			import org.eclipse.xtend.lib.annotations.Setter
 			class Foo {
 				@Setter static int foo
 			}
@@ -71,6 +74,7 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCreateAllSetters() {
 		'''
+			import org.eclipse.xtend.lib.annotations.Setter
 			@Setter class Foo {
 				static String ignoreMe
 				def create {} ignoreMe2() {}
@@ -98,6 +102,7 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExistingSetter() {
 		val text = '''
+			import org.eclipse.xtend.lib.annotations.Setter
 			class Foo {
 				@Setter int foo
 				def setFoo(int foo) {
@@ -118,6 +123,7 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testFinalField() {
 		val text = '''
+			import org.eclipse.xtend.lib.annotations.Setter
 			class Foo {
 				@Setter val int foo
 			}
@@ -128,6 +134,7 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCannotOverrideFinalSetter() {
 		file('''
+			import org.eclipse.xtend.lib.annotations.Setter
 			class Foo {
 				def final void setFoo(String foo) {}
 			}
@@ -141,6 +148,7 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCannotOverrideSetterWithIncompatibleReturnType() {
 		file('''
+			import org.eclipse.xtend.lib.annotations.Setter
 			class Foo {
 				def Object setFoo(String foo) {null}
 			}
@@ -154,6 +162,7 @@ class SetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testNoErrorsOnOverloads() {
 		file('''
+			import org.eclipse.xtend.lib.annotations.Setter
 			class Foo {
 				def Object setFoo(String foo) {null}
 			}

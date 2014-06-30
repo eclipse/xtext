@@ -20,6 +20,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testToString() {
 		'''
+			import org.eclipse.xtend.lib.annotations.ToString
 			@ToString class Foo {
 				static String ignoreMe
 				transient String ignoreMe2
@@ -36,6 +37,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testToStringWithSuperClass() {
 		'''
+			import org.eclipse.xtend.lib.annotations.ToString
 			class Foo {
 				int a = 1
 			}
@@ -52,6 +54,7 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExistingToString() {
 		val text = '''
+			import org.eclipse.xtend.lib.annotations.ToString
 			@ToString class Foo {
 				int a = 1
 				override toString() {
