@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
+import static com.google.common.collect.Sets.*;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -34,12 +36,16 @@ import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
+import org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.util.RawSuperTypes;
+import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -59,6 +65,7 @@ import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.Sets;
@@ -141,7 +148,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		}
 	}
 	
-	public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory, 
+	public void createSubTypeProposals(final JvmType superType, ICompletionProposalFactory proposalFactory, 
 			ContentAssistContext context, EReference typeReference, final Filter filter, IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor) {
 		if (superType == null || superType.eIsProxy())
 			return;
@@ -164,12 +171,14 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			superTypeNames.add(collectedSuperType.getIdentifier());
 		}
 		superTypeNames.remove(fqn);
+		final IJdtTypeProvider provider = jdtTypeProviderFatory.createTypeProvider(superType.eResource().getResourceSet());
 		try {
 			IType type = project.findType(fqn);
 			if (type != null) {
 				IJavaSearchScope hierarchyScope = SearchEngine.createHierarchyScope(type);
 				IJavaSearchScope projectScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { project });
 				IJavaSearchScope scope = new IntersectingJavaSearchScope(projectScope, hierarchyScope);
+				final Set<String> alreadyAccepted = newHashSet(); 
 				searchAndCreateProposals(scope, proposalFactory, context, typeReference, TypeMatchFilters.and(filter, new ITypesProposalProvider.Filter() {
 					public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 							char[][] enclosingTypeNames, String path) {
@@ -184,7 +193,17 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 						}
 						fqName.append(simpleTypeName);
 						String fqNameAsString = fqName.toString();
-						return !superTypeNames.contains(fqNameAsString);
+						// the dirty state proposals
+						if (!alreadyAccepted.contains(fqName) && !(path.endsWith(".class") || path.endsWith(".java"))) {
+							JvmType type = provider.findTypeByName(fqNameAsString);
+							return superTypeCollector.collect(type).contains(superType);
+						} else {
+							boolean b = !superTypeNames.contains(fqNameAsString);
+							if (b) {
+								alreadyAccepted.add(fqNameAsString);
+							}
+							return b;
+						}
 					}
 					
 					public int getSearchFor() {
