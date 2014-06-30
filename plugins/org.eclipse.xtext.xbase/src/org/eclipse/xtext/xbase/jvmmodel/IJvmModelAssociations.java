@@ -18,11 +18,15 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(JvmModelAssociator.class)
 public interface IJvmModelAssociations {
-	
+
 	Set<EObject> getSourceElements(EObject jvmElement);
 
 	Set<EObject> getJvmElements(EObject sourceElement);
 
 	EObject getPrimarySourceElement(EObject jvmElement);
+
+	EObject getPrimaryJvmElement(EObject sourceElement);
+
+	boolean isPrimaryJvmElement(EObject jvmElement);
 
 }
