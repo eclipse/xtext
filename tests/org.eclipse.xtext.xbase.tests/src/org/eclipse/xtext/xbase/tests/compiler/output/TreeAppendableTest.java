@@ -285,5 +285,13 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	public URI getURIForTrace(URI uri) {
 		return uri;
 	}
+
+	public EObject getPrimaryJvmElement(EObject sourceElement) {
+		return null;
+	}
+
+	public boolean isPrimaryJvmElement(EObject jvmElement) {
+		return false;
+	}
 	
 }
