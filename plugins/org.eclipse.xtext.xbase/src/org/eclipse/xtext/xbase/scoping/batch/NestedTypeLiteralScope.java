@@ -42,15 +42,23 @@ public class NestedTypeLiteralScope extends AbstractSessionBasedScope {
 		super(parent, session, featureCall);
 		this.outerType = outerType;
 		this.receiverType = receiverType;
-		this.importedNames = ImportedNamesAdapter.findOrInstall(featureCall.eResource()).getImportedNames();
-		this.outerTypeName = QualifiedName.create(outerType.getQualifiedName('.').split("\\."));
-		this.outerTypeBinaryName = QualifiedName.create(outerType.getQualifiedName('$').split("\\."));
+		if (featureCall != null) {
+			this.importedNames = ImportedNamesAdapter.findOrInstall(featureCall.eResource()).getImportedNames();
+			this.outerTypeName = QualifiedName.create(outerType.getQualifiedName('.').split("\\."));
+			this.outerTypeBinaryName = QualifiedName.create(outerType.getQualifiedName('$').split("\\."));
+		} else {
+			this.importedNames = null;
+			this.outerTypeName = null;
+			this.outerTypeBinaryName = null;
+		}
 	}
 
 	@Override
 	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
-		importedNames.add(outerTypeName.append(name).toLowerCase());
-		importedNames.add(outerTypeBinaryName.skipLast(1).append(outerTypeBinaryName.getLastSegment()+"$"+name).toLowerCase());
+		if (importedNames != null) {
+			importedNames.add(outerTypeName.append(name).toLowerCase());
+			importedNames.add(outerTypeBinaryName.skipLast(1).append(outerTypeBinaryName.getLastSegment()+"$"+name).toLowerCase());
+		}
 		XAbstractFeatureCall featureCall = getFeatureCall();
 		if (featureCall.isExplicitOperationCallOrBuilderSyntax())
 			return Collections.emptyList();
