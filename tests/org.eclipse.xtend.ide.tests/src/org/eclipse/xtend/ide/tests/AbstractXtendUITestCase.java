@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests;
 
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtend.ide.internal.XtendActivator;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
