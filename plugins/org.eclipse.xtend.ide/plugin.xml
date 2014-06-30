@@ -1355,17 +1355,12 @@
                   label="Organize Xtend Imports"
                   style="push">
                <visibleWhen>
-					   <or>
 					      <with variable="selection">
-					         <iterate
-                    ifEmpty="false">
-					           <reference definitionId="org.eclipse.xtend.fileDef"/>
+					         <iterate ifEmpty="false" operator="or">
+					           <reference
+                      definitionId="org.eclipse.xtend.fileDef"/>
 					         </iterate>
 					      </with>
-					      <with variable="activeEditorInput">
-					        <reference definitionId="org.eclipse.xtend.fileDef"/>
-					      </with>
-					   </or>
 					</visibleWhen>
             </command>
          </menu>
@@ -1387,6 +1382,29 @@
                 commandId="org.eclipse.xtext.xbase.ui.multiOrganizeImports"
                 label="Organize Xtend Imports"
                 style="push">
+             <visibleWhen>
+             			<and>
+					       <with variable="selection">
+					         <iterate
+			                    ifEmpty="false"
+			                    operator="or">
+					         <or>
+					         	<adapt type="org.eclipse.jdt.core.IJavaProject"/>
+					         	<adapt type="org.eclipse.jdt.core.IPackageFragment"/>
+					         	<adapt type="org.eclipse.jdt.core.IPackageFragmentRoot"/>
+					    		<adapt type="org.eclipse.ui.IWorkingSet"/>
+					            <reference definitionId="org.eclipse.xtend.fileDef"/>
+					         </or>
+					         </iterate>
+					      </with>
+						<with
+				            variable="activePartId">
+				         <equals
+				               value="org.eclipse.jdt.ui.PackageExplorer">
+				         </equals>
+						</with>
+					  </and>
+					</visibleWhen>
           </command>
        </menuContribution>
    </extension>
@@ -1402,10 +1420,10 @@
       <definition
             id="org.eclipse.xtend.fileDef">
              <adapt type="org.eclipse.core.resources.IResource">
-             <test property="org.eclipse.core.resources.extension"
-                   value="xtend">
-             </test>
-      </adapt>
+	             <test property="org.eclipse.core.resources.extension"
+	                   value="xtend">
+	             </test>
+     		 </adapt>
       </definition>
    </extension>
 </plugin>
