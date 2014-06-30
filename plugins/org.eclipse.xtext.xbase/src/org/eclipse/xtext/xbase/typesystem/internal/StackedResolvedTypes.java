@@ -45,7 +45,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	private final ResolvedTypes parent;
 
 	protected StackedResolvedTypes(ResolvedTypes parent) {
-		super(parent.getResolver(), parent.getMonitor());
+		super(parent.getResolver());
 		this.parent = parent;
 	}
 	

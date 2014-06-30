@@ -142,7 +142,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	public void resolveLazyCrossReferences(CancelIndicator monitor) {
 		IParseResult parseResult = getParseResult();
 		if (parseResult != null) {
-			batchLinkingService.resolveBatched(parseResult.getRootASTElement(), monitor);
+			batchLinkingService.resolveBatched(parseResult.getRootASTElement());
 		}
 		if (monitor == null || !monitor.isCanceled())
 			super.resolveLazyCrossReferences(monitor);

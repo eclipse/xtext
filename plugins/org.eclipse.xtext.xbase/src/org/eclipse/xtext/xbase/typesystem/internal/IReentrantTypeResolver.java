@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.inject.ImplementedBy;
@@ -23,11 +22,11 @@ public interface IReentrantTypeResolver {
 
 	void initializeFrom(EObject root);
 
-	IResolvedTypes reentrantResolve(CancelIndicator monitor);
+	IResolvedTypes reentrantResolve();
 	
 	IReentrantTypeResolver NULL = new IReentrantTypeResolver() {
 		
-		public IResolvedTypes reentrantResolve(CancelIndicator monitor) {
+		public IResolvedTypes reentrantResolve() {
 			return IResolvedTypes.NULL;
 		}
 		
