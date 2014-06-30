@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests;
 
+import static com.google.common.collect.ImmutableList.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 
@@ -57,6 +58,7 @@ import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Assert;
 
+import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
@@ -71,6 +73,9 @@ public class WorkbenchTestHelper extends Assert {
 	public static final Logger log = Logger.getLogger(WorkbenchTestHelper.class);
 
 	public static final String TESTPROJECT_NAME = "test.project";
+
+	public static final ImmutableList<String> DEFAULT_REQ_BUNDLES = of("com.google.inject", "org.eclipse.xtend.lib",
+			"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit");
 
 	private Set<IFile> files = newHashSet();
 
@@ -95,7 +100,7 @@ public class WorkbenchTestHelper extends Assert {
 	public void tearDown() throws Exception {
 		workbench.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 		new WorkspaceModifyOperation() {
-			
+
 			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 					InterruptedException {
@@ -193,6 +198,15 @@ public class WorkbenchTestHelper extends Assert {
 		return xtendFile;
 	}
 
+	public XtendFile xtendFile(IProject project, String fileName, String content) throws Exception {
+		IFile file = createFileImpl(project.getName() + "/src/" + fileName, content);
+		Resource resource = resourceSetProvider.get(project).createResource(uri(file));
+		resource.load(new StringInputStream(content), null);
+		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+		XtendFile xtendFile = (XtendFile) resource.getContents().get(0);
+		return xtendFile;
+	}
+
 	public ResourceSet getResourceSet() {
 		ResourceSet resourceSet = resourceSetProvider.get(getProject());
 		return resourceSet;
@@ -220,8 +234,7 @@ public class WorkbenchTestHelper extends Assert {
 	}
 
 	public static IProject createPluginProject(String name) throws CoreException {
-		return createPluginProject(name, "com.google.inject", "org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib",
-				"org.eclipse.xtend.ide.tests.data", "org.junit");
+		return createPluginProject(name, DEFAULT_REQ_BUNDLES.toArray(new String[] {}));
 	}
 
 	public static IProject createPluginProject(String name, String... requiredBundles) throws CoreException {
