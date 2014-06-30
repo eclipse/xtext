@@ -34,6 +34,8 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
   public void testEqualsHashCode() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.EqualsHashCode");
+      _builder.newLine();
       _builder.append("@EqualsHashCode class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -149,6 +151,8 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
   public void testEqualsWithSuperClass() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.EqualsHashCode");
+      _builder.newLine();
       _builder.append("@EqualsHashCode class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -206,6 +210,8 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
   public void testSuperClassWithoutEquals() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.EqualsHashCode");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("}");
@@ -238,6 +244,8 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingEquals() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.EqualsHashCode");
+      _builder.newLine();
       _builder.append("@EqualsHashCode class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -278,6 +286,8 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingHashCode() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.EqualsHashCode");
+      _builder.newLine();
       _builder.append("@EqualsHashCode class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -319,6 +329,8 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
   public void testGenericClass() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.EqualsHashCode");
+      _builder.newLine();
       _builder.append("@EqualsHashCode class Foo<T> {");
       _builder.newLine();
       _builder.append("\t");

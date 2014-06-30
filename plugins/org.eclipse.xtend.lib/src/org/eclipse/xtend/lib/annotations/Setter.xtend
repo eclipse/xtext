@@ -1,4 +1,4 @@
-package org.eclipse.xtend.lib
+package org.eclipse.xtend.lib.annotations
 
 import com.google.common.annotations.Beta
 import com.google.common.annotations.GwtCompatible
@@ -75,7 +75,7 @@ class SetterProcessor implements TransformationParticipant<MutableMemberDeclarat
 		}
 
 		//TODO remove this as soon as everyone has the nightly containing the new resolved method API
-		package def canAddSetter_Old(MutableFieldDeclaration field) {
+		def canAddSetter_Old(MutableFieldDeclaration field) {
 			if (field.final) {
 				field.addError("Cannot set a final field")
 				return false

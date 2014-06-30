@@ -19,6 +19,7 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testEqualsHashCode() {
 		'''
+			import org.eclipse.xtend.lib.annotations.EqualsHashCode
 			@EqualsHashCode class Foo {
 				static String ignoreMe
 				transient String ignoreMe2
@@ -61,6 +62,7 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testEqualsWithSuperClass() {
 		'''
+			import org.eclipse.xtend.lib.annotations.EqualsHashCode
 			@EqualsHashCode class Foo {
 				int foo = 1
 			}
@@ -89,6 +91,7 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test def void testSuperClassWithoutEquals() {
 		'''
+			import org.eclipse.xtend.lib.annotations.EqualsHashCode
 			class Foo {
 			}
 			@EqualsHashCode class Bar extends Foo {
@@ -103,6 +106,7 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExistingEquals() {
 		val text = '''
+			import org.eclipse.xtend.lib.annotations.EqualsHashCode
 			@EqualsHashCode class Foo {
 				int a = 1
 				override equals(Object o) {
@@ -120,6 +124,7 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExistingHashCode() {
 		val text = '''
+			import org.eclipse.xtend.lib.annotations.EqualsHashCode
 			@EqualsHashCode class Foo {
 				int a = 1
 				override hashCode() {
@@ -137,6 +142,7 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testGenericClass() {
 		val text = '''
+			import org.eclipse.xtend.lib.annotations.EqualsHashCode
 			@EqualsHashCode class Foo<T> {
 				int a = 1
 			}

@@ -1,12 +1,12 @@
-package org.eclipse.xtend.lib;
+package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.base.Objects;
 import java.util.List;
-import org.eclipse.xtend.lib.EqualsHashCodeProcessor;
-import org.eclipse.xtend.lib.GetterProcessor;
-import org.eclipse.xtend.lib.ToStringProcessor;
+import org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor;
+import org.eclipse.xtend.lib.annotations.GetterProcessor;
+import org.eclipse.xtend.lib.annotations.ToStringProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;

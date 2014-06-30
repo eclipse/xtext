@@ -20,6 +20,7 @@ class WitherCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCreateSingleWither() {
 		'''
+			import org.eclipse.xtend.lib.annotations.Wither
 			class Foo {
 				static String ignoreMe
 				transient String ignoreMe2
@@ -46,6 +47,7 @@ class WitherCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCreateAllWithers() {
 		'''
+			import org.eclipse.xtend.lib.annotations.Wither
 			@Wither
 			class Foo {
 				static String ignoreMe
@@ -85,6 +87,7 @@ class WitherCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExstingWither() {
 		val text = '''
+			import org.eclipse.xtend.lib.annotations.Wither
 			class Foo {
 				@Wither int x
 				
@@ -115,6 +118,7 @@ class WitherCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExstingMethodNotMatching() {
 		'''
+			import org.eclipse.xtend.lib.annotations.Wither
 			class Foo {
 				@Wither String foo
 				new(String foo) {
@@ -135,6 +139,7 @@ class WitherCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testGenericClass() {
 		'''
+			import org.eclipse.xtend.lib.annotations.Wither
 			class Foo<T> {
 				@Wither T foo
 				new(T foo) {
@@ -149,6 +154,7 @@ class WitherCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testInferredType() {
 		val text = '''
+			import org.eclipse.xtend.lib.annotations.Wither
 			class Foo {
 				@Wither var x = 1
 				

@@ -19,6 +19,7 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCreateSingleGetter() {
 		'''
+			import org.eclipse.xtend.lib.annotations.Getter
 			class Foo {
 				@Getter int foo = 1
 			}
@@ -32,6 +33,7 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCreateGenericGetter() {
 		'''
+			import org.eclipse.xtend.lib.annotations.Getter
 			class Foo<T> {
 				@Getter T foo = null
 			}
@@ -45,6 +47,7 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCreateStaticGetter() {
 		'''
+			import org.eclipse.xtend.lib.annotations.Getter
 			class Foo {
 				@Getter static int foo = 1
 			}
@@ -57,6 +60,7 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCreateAllGetters() {
 		'''
+			import org.eclipse.xtend.lib.annotations.Getter
 			@Getter class Foo {
 				static String ignoreMe
 				def create {} ignoreMe2() {}
@@ -80,6 +84,7 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExistingGetter() {
 		val text = '''
+			import org.eclipse.xtend.lib.annotations.Getter
 			class Foo {
 				@Getter int foo = 1
 				def getFoo() {
@@ -98,6 +103,7 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCannotOverrideFinalGetter() {
 		file('''
+			import org.eclipse.xtend.lib.annotations.Getter
 			class Fizz {
 				def final String getFoo() {"foo"}
 			}
@@ -111,6 +117,7 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCannotOverrideWithConflictingReturnType() {
 		file('''
+			import org.eclipse.xtend.lib.annotations.Getter
 			class Foo {
 				def String getFoo() {"foo"}
 			}
@@ -124,6 +131,7 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testCanSpecializeReturnType() {
 		file('''
+			import org.eclipse.xtend.lib.annotations.Getter
 			class Foo {
 				def CharSequence getFoo() {"foo"}
 			}

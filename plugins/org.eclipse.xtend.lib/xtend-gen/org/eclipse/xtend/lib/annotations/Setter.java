@@ -1,10 +1,10 @@
-package org.eclipse.xtend.lib;
+package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
-import org.eclipse.xtend.lib.SetterProcessor;
+import org.eclipse.xtend.lib.annotations.SetterProcessor;
 import org.eclipse.xtend.lib.macro.Active;
 
 /**

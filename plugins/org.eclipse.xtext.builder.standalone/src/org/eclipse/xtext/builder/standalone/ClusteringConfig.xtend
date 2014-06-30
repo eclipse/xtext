@@ -10,20 +10,37 @@ package org.eclipse.xtext.builder.standalone
 /**
  * @author Holger Schill - Initial contribution and API
  */
-@ValueObject
 class ClusteringConfig {
 	/**
 	 * Minimum free memory in MB.
 	 */
-	private long minimumFreeMemory;
+	long minimumFreeMemory;
 
 	/**
 	 * Minimum cluster size. To force garbage collector to kick in.
 	 */
-	private int minimumClusterSize;
+	int minimumClusterSize;
 
 	/**
 	 * Minimum percentage of memory that must be free before trying to load another resource.
 	 */
-	private long minimumPercentFreeMemory;
+	long minimumPercentFreeMemory;
+	
+	new(long minimumFreeMemory, int minimumClusterSize, long minimumPercentFreeMemory) {
+		this.minimumFreeMemory = minimumFreeMemory
+		this.minimumClusterSize = minimumClusterSize
+		this.minimumPercentFreeMemory = minimumPercentFreeMemory
+	}
+	
+	def getMinimumFreeMemory() {
+		this.minimumFreeMemory
+	}
+	
+	def getMinimumClusterSize() {
+		this.minimumClusterSize
+	}
+	
+	def getMinimumPercentFreeMemory() {
+		this.minimumPercentFreeMemory
+	}
 }

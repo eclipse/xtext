@@ -30,6 +30,8 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
   public void testToString() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ToString");
+      _builder.newLine();
       _builder.append("@ToString class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -68,6 +70,8 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
   public void testToStringWithSuperClass() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ToString");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -104,6 +108,8 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingToString() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ToString");
+      _builder.newLine();
       _builder.append("@ToString class Foo {");
       _builder.newLine();
       _builder.append("\t");

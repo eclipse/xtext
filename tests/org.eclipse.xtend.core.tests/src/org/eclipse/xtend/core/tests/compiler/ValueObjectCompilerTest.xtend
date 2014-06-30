@@ -21,6 +21,7 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExistingValueObjectConstructor() {
 		'''
+			import org.eclipse.xtend.lib.annotations.ValueObject
 			@ValueObject class Foo {
 				int foo
 				new (int foo) {
@@ -37,6 +38,7 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testInitializedField() {
 		'''
+			import org.eclipse.xtend.lib.annotations.ValueObject
 			@ValueObject class Foo {
 				int foo = 2
 			}
@@ -50,6 +52,7 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testIgnoredFields() {
 		'''
+			import org.eclipse.xtend.lib.annotations.ValueObject
 			@ValueObject class Foo {
 				transient int foo
 				def create {} ignoreMe() {}
@@ -63,6 +66,7 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExistingGetter() {
 		'''
+			import org.eclipse.xtend.lib.annotations.ValueObject
 			@ValueObject class Foo {
 				int foo
 				def getFoo() {
@@ -79,6 +83,7 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExistingToString() {
 		'''
+			import org.eclipse.xtend.lib.annotations.ValueObject
 			@ValueObject class Foo {
 				int foo
 				override toString() {
@@ -95,6 +100,7 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExistingEquals() {
 		'''
+			import org.eclipse.xtend.lib.annotations.ValueObject
 			@ValueObject class Foo {
 				int foo
 				override equals(Object o) {
@@ -111,6 +117,7 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExistingHashCode() {
 		'''
+			import org.eclipse.xtend.lib.annotations.ValueObject
 			@ValueObject class Foo {
 				int foo
 				override hashCode() {
@@ -127,6 +134,7 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testExistingMethodsNotMatchingExactly() {
 		'''
+			import org.eclipse.xtend.lib.annotations.ValueObject
 			@ValueObject class Foo {
 				int foo
 				
@@ -171,6 +179,7 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testWithCreateExtension() {
 		val text = '''
+			import org.eclipse.xtend.lib.annotations.ValueObject
 			@ValueObject class Foo {
 				def create {} foo() {
 				}
@@ -185,6 +194,7 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	@Test def testInheritanceForbidden() {
 		clazz('''
 			import java.util.ArrayList
+			import org.eclipse.xtend.lib.annotations.ValueObject
 			
 			@ValueObject class Foo extends ArrayList{
 				String foo
@@ -195,6 +205,7 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testValueObjectWithStaticField() {
 		'''
+			import org.eclipse.xtend.lib.annotations.ValueObject
 			@ValueObject class Foo {
 				static int foo = 1
 			}
@@ -210,6 +221,7 @@ class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testBooleanProperties() {
 		'''
+			import org.eclipse.xtend.lib.annotations.ValueObject
 			@ValueObject class Foo {
 				boolean foo
 				Boolean bar

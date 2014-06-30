@@ -5,6 +5,7 @@ Bundle-Name: Xtend Runtime Library
 Bundle-Vendor: Eclipse Xtend
 Bundle-Version: 2.7.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.xtend.lib
+Export-Package: org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.annotations
 Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.7.0";visibility:=reexport,
  org.eclipse.xtend.lib.macro;bundle-version="2.7.0";visibility:=reexport

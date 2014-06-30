@@ -40,6 +40,8 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingValueObjectConstructor() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.newLine();
       _builder.append("@ValueObject class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -81,6 +83,8 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testInitializedField() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.newLine();
       _builder.append("@ValueObject class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -113,6 +117,8 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testIgnoredFields() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.newLine();
       _builder.append("@ValueObject class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -153,6 +159,8 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingGetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.newLine();
       _builder.append("@ValueObject class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -194,6 +202,8 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingToString() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.newLine();
       _builder.append("@ValueObject class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -235,6 +245,8 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingEquals() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.newLine();
       _builder.append("@ValueObject class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -276,6 +288,8 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingHashCode() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.newLine();
       _builder.append("@ValueObject class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -317,6 +331,8 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingMethodsNotMatchingExactly() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.newLine();
       _builder.append("@ValueObject class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -420,6 +436,8 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testWithCreateExtension() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.newLine();
       _builder.append("@ValueObject class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -459,6 +477,8 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("import java.util.ArrayList");
       _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.newLine();
       _builder.newLine();
       _builder.append("@ValueObject class Foo extends ArrayList{");
       _builder.newLine();
@@ -478,6 +498,8 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testValueObjectWithStaticField() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.newLine();
       _builder.append("@ValueObject class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -533,6 +555,8 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testBooleanProperties() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.newLine();
       _builder.append("@ValueObject class Foo {");
       _builder.newLine();
       _builder.append("\t");

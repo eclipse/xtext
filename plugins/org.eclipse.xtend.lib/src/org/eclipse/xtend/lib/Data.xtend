@@ -3,6 +3,9 @@ package org.eclipse.xtend.lib
 import com.google.common.annotations.Beta
 import java.lang.annotation.ElementType
 import java.lang.annotation.Target
+import org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor
+import org.eclipse.xtend.lib.annotations.GetterProcessor
+import org.eclipse.xtend.lib.annotations.ToStringProcessor
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext

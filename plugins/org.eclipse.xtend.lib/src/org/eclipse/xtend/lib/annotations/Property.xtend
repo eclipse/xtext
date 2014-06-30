@@ -1,4 +1,4 @@
-package org.eclipse.xtend.lib
+package org.eclipse.xtend.lib.annotations
 
 import com.google.common.annotations.Beta
 import com.google.common.annotations.GwtCompatible
@@ -13,9 +13,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 
 /**
  * Creates a getter and setter method for the annotated field.
- * Prepends the field name with an underscore (e.g. <code>_myField</code>)
- * 
- * @author Sven Efftinge
+ * @since 2.7
  */
 @GwtCompatible
 @Target(ElementType.FIELD)
@@ -33,12 +31,11 @@ class PropertyProcessor extends AbstractFieldProcessor {
 	override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {
 		extension val getterUtil = new GetterProcessor.Util(context)
 		extension val setterUtil = new SetterProcessor.Util(context)
-		if (!hasGetter /*&& canAddGetter*/) {
+		if (!hasGetter && canAddGetter) {
 			addGetter
 		}
-		if (!final && !hasSetter && canAddSetter_Old) {
+		if (!final && !hasSetter && canAddSetter) {
 			addSetter
 		}
-		simpleName = "_" + simpleName.toFirstLower
 	}
 }

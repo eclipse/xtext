@@ -40,6 +40,8 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCreateSingleSetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Setter");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -80,6 +82,8 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCreateGenericSingleSetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Setter");
+      _builder.newLine();
       _builder.append("class Foo<T extends CharSequence> {");
       _builder.newLine();
       _builder.append("\t");
@@ -123,6 +127,8 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCreateStaticSetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Setter");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -161,6 +167,8 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCreateAllSetters() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Setter");
+      _builder.newLine();
       _builder.append("@Setter class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -244,6 +252,8 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingSetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Setter");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -296,6 +306,8 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
   public void testFinalField() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Setter");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -315,6 +327,8 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCannotOverrideFinalSetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Setter");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -341,6 +355,8 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCannotOverrideSetterWithIncompatibleReturnType() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Setter");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -367,6 +383,8 @@ public class SetterCompilerTest extends AbstractXtendCompilerTest {
   public void testNoErrorsOnOverloads() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Setter");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");

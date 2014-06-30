@@ -24,6 +24,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testDelegateField() {
 		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface A {
 				def void m()
 			}
@@ -42,6 +43,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testMethodWithReturnType() {
 		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface A {
 				def int m()
 			}
@@ -60,6 +62,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def void testMethodWithParameters() {
 		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface A {
 				def void m(String foo, Object bar)
 			}
@@ -79,6 +82,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testDelegateMethod() {
 		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface A {
 				def void m()
 			}
@@ -98,6 +102,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testDelegateMethod2() {
 		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface A {
 				def void m()
 			}
@@ -117,6 +122,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testDelegateMethod3() {
 		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface A {
 				def void m()
 			}
@@ -136,6 +142,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testDelegateMethodWithParameters() {
 		val text = ''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface A {
 				def void m(String foo)
 			}
@@ -156,6 +163,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	def testIllegalDelegateSignature() {
 		file(
 			''' 
+				import org.eclipse.xtend.lib.annotations.Delegate
 				interface A {
 					def void m()
 				}
@@ -172,6 +180,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	def void testInterfacesAreImplementedTransitively() {
 		file(
 			''' 
+				import org.eclipse.xtend.lib.annotations.Delegate
 				interface A {
 					def void m()
 				}
@@ -192,6 +201,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	def testDuplicateInterfacesAreDetected() {
 		file(
 			''' 
+				import org.eclipse.xtend.lib.annotations.Delegate
 				interface A {
 					def void m()
 				}
@@ -221,6 +231,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	def testIgnoreNonDelegates() {
 		file(
 			''' 
+				import org.eclipse.xtend.lib.annotations.Delegate
 				interface A {
 					def void m()
 				}
@@ -240,6 +251,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testIgnoreInterfacesNotDeclaredOnTargetClass() {
 		''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface A {
 				def void m()
 			}
@@ -261,6 +273,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testInferredType() {
 		file(''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface A {
 				def void m()
 			}
@@ -276,6 +289,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testListedInterfaceNotImplemented() {
 		val file = file(''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface A {
 				def void m()
 			}
@@ -297,6 +311,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	def testExplicitInterfaceListing() {
 		file(
 			''' 
+				import org.eclipse.xtend.lib.annotations.Delegate
 				interface A {
 					def void m()
 				}
@@ -322,6 +337,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	def void testNoCommonInterfaces() {
 		file(
 			''' 
+				import org.eclipse.xtend.lib.annotations.Delegate
 				interface A {
 					def void m()
 				}
@@ -336,6 +352,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testObjectMethodsAreIgnored() {
 		''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface A {
 				override int hashCode()
 				override boolean equals(Object other)
@@ -358,6 +375,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testObjectMethodsAreIgnored2() {
 		''' 
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface A {
 				override Object clone() throws CloneNotSupportedException
 				override void finalize() throws Throwable
@@ -376,7 +394,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 		'''.compile [
 			assertEquals(
 			'''
-				import org.eclipse.xtend.lib.Delegate;
+				import org.eclipse.xtend.lib.annotations.Delegate;
 
 				@SuppressWarnings("all")
 				public class C implements A {
@@ -390,6 +408,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testGenericInterface() {
 		val text = '''
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface I<T, U extends T, E extends Throwable> {
 				def <V extends T> T foo(U foo, V bar) throws E
 			}
@@ -416,6 +435,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testGenericInterfaceAndClass() {
 		val text = '''
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface I<T> {
 				def T foo(T foo)
 			}
@@ -438,6 +458,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test 
 	def testGenericSignatureNotMatching() {
 		file('''
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface I<T> {
 				def T foo(T foo)
 			}
@@ -453,6 +474,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 	@Test 
 	def testMethodAlreadyDefined() {
 		file('''
+			import org.eclipse.xtend.lib.annotations.Delegate
 			interface I<T> {
 				def T foo(T foo)
 			}

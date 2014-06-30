@@ -1,4 +1,4 @@
-package org.eclipse.xtend.lib;
+package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.xtend.lib.Delegate;
+import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;

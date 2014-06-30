@@ -37,6 +37,8 @@ public class GetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCreateSingleGetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Getter");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -68,6 +70,8 @@ public class GetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCreateGenericGetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Getter");
+      _builder.newLine();
       _builder.append("class Foo<T> {");
       _builder.newLine();
       _builder.append("\t");
@@ -102,6 +106,8 @@ public class GetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCreateStaticGetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Getter");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -131,6 +137,8 @@ public class GetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCreateAllGetters() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Getter");
+      _builder.newLine();
       _builder.append("@Getter class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -196,6 +204,8 @@ public class GetterCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingGetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Getter");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -239,6 +249,8 @@ public class GetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCannotOverrideFinalGetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Getter");
+      _builder.newLine();
       _builder.append("class Fizz {");
       _builder.newLine();
       _builder.append("\t");
@@ -265,6 +277,8 @@ public class GetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCannotOverrideWithConflictingReturnType() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Getter");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -291,6 +305,8 @@ public class GetterCompilerTest extends AbstractXtendCompilerTest {
   public void testCanSpecializeReturnType() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Getter");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");

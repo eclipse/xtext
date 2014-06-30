@@ -33,6 +33,8 @@ public class WitherCompilerTest extends AbstractXtendCompilerTest {
   public void testCreateSingleWither() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Wither");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -96,6 +98,8 @@ public class WitherCompilerTest extends AbstractXtendCompilerTest {
   public void testCreateAllWithers() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Wither");
+      _builder.newLine();
       _builder.append("@Wither");
       _builder.newLine();
       _builder.append("class Foo {");
@@ -194,6 +198,8 @@ public class WitherCompilerTest extends AbstractXtendCompilerTest {
   public void testExstingWither() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Wither");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -265,6 +271,8 @@ public class WitherCompilerTest extends AbstractXtendCompilerTest {
   public void testExstingMethodNotMatching() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Wither");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
@@ -319,6 +327,8 @@ public class WitherCompilerTest extends AbstractXtendCompilerTest {
   public void testGenericClass() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Wither");
+      _builder.newLine();
       _builder.append("class Foo<T> {");
       _builder.newLine();
       _builder.append("\t");
@@ -352,6 +362,8 @@ public class WitherCompilerTest extends AbstractXtendCompilerTest {
   public void testInferredType() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Wither");
+      _builder.newLine();
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");

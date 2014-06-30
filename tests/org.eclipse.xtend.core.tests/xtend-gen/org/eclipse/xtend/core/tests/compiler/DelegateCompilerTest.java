@@ -42,6 +42,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testDelegateField() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -107,6 +109,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testMethodWithReturnType() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -172,6 +176,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testMethodWithParameters() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -238,6 +244,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testDelegateMethod() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -286,6 +294,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testDelegateMethod2() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -334,6 +344,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testDelegateMethod3() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -382,6 +394,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testDelegateMethodWithParameters() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -430,6 +444,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testIllegalDelegateSignature() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -462,6 +478,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testInterfacesAreImplementedTransitively() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -504,6 +522,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testDuplicateInterfacesAreDetected() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -569,6 +589,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testIgnoreNonDelegates() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -611,6 +633,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testIgnoreInterfacesNotDeclaredOnTargetClass() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -666,6 +690,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testInferredType() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -698,6 +724,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testListedInterfaceNotImplemented() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -738,6 +766,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testExplicitInterfaceListing() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -793,6 +823,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testNoCommonInterfaces() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -822,6 +854,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testObjectMethodsAreIgnored() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -871,6 +905,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testObjectMethodsAreIgnored2() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
@@ -913,7 +949,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
         public void accept(final CompilationTestHelper.Result it) {
           StringConcatenation _builder = new StringConcatenation();
-          _builder.append("import org.eclipse.xtend.lib.Delegate;");
+          _builder.append("import org.eclipse.xtend.lib.annotations.Delegate;");
           _builder.newLine();
           _builder.newLine();
           _builder.append("@SuppressWarnings(\"all\")");
@@ -943,6 +979,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testGenericInterface() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface I<T, U extends T, E extends Throwable> {");
       _builder.newLine();
       _builder.append("\t");
@@ -1006,6 +1044,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testGenericInterfaceAndClass() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface I<T> {");
       _builder.newLine();
       _builder.append("\t");
@@ -1057,6 +1097,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testGenericSignatureNotMatching() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface I<T> {");
       _builder.newLine();
       _builder.append("\t");
@@ -1089,6 +1131,8 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
   public void testMethodAlreadyDefined() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
+      _builder.newLine();
       _builder.append("interface I<T> {");
       _builder.newLine();
       _builder.append("\t");
