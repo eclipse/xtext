@@ -18,9 +18,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.smap.SDEInstaller;
 import org.eclipse.xtext.smap.SmapGenerator;
 import org.eclipse.xtext.smap.SmapStratum;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 import com.google.inject.Inject;
 
@@ -28,6 +32,27 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
+	
+	public static class SmapClassAdapter extends ClassVisitor {
+
+		private final String smap;
+
+		public SmapClassAdapter(ClassVisitor cv, String smap) {
+			super(Opcodes.ASM5, cv);
+			this.smap = smap;
+		}
+		
+		@Override
+		public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+			return new SyntheticMethodVisitor(Opcodes.ASM5, super.visitMethod(access, name, desc, signature, exceptions));
+		}
+
+		@Override
+		public void visitSource(String source, String debug) {
+			super.visitSource(source, smap);
+		}
+	
+	}
 
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(TraceAsSmapInstaller.class);
@@ -70,8 +95,11 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 	public byte[] installTrace(byte[] javaClassBytecode) throws IOException {
 		if (smap == null)
 			return null;
-		byte[] updatedByteCode = new SDEInstaller(javaClassBytecode, smap.getBytes()).getUpdatedByteCode();
-		return updatedByteCode;
+		ClassReader reader = new ClassReader(javaClassBytecode);
+		ClassWriter writer = new ClassWriter(0);
+		SmapClassAdapter adapter = new SmapClassAdapter(writer, smap);
+		reader.accept(adapter, 0);
+		return writer.toByteArray();
 	}
 
 	public void setTrace(String javaFileName, AbstractTraceRegion trace) {

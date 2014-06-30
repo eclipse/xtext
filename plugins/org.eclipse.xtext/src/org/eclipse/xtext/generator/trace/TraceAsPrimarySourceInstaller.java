@@ -13,9 +13,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
-import org.objectweb.asm.AnnotationVisitor;
-import org.objectweb.asm.Attribute;
-import org.objectweb.asm.ByteVector;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
@@ -68,7 +65,7 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 		}
 	}
 
-	public static class XtextMethodAdapter extends MethodVisitor {
+	public static class XtextMethodAdapter extends SyntheticMethodVisitor {
 
 		private XtextClassAdapter context;
 
@@ -79,14 +76,6 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 
 		public XtextClassAdapter getContext() {
 			return context;
-		}
-
-		@Override
-		public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
-			if (desc.equals("Lorg/eclipse/xtext/xbase/lib/Synthetic;")) {
-				super.visitAttribute(new SyntheticAttribute());
-			}
-			return super.visitAnnotation(desc, visible);
 		}
 
 		@Override
@@ -163,25 +152,6 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 
 	public void setTrace(String javaFileName, AbstractTraceRegion trace) {
 		this.trace = trace;
-	}
-
-}
-
-class SyntheticAttribute extends Attribute {
-
-	public SyntheticAttribute() {
-		super("Synthetic");
-	}
-
-	@Override
-	public boolean isUnknown() {
-		return false;
-	}
-
-	@Override
-	protected ByteVector write(final ClassWriter cw, final byte[] code, final int len, final int maxStack,
-			final int maxLocals) {
-		return new ByteVector();
 	}
 
 }
