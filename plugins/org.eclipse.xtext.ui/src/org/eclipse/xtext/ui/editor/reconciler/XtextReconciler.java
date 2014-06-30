@@ -35,7 +35,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
@@ -66,7 +65,6 @@ public class XtextReconciler extends Job implements IReconciler {
 	private boolean isInstalled;
 	private boolean shouldInstallCompletionListener;
 	private volatile boolean paused;
-	private XtextEditor editor;
 	private ITextViewer textViewer;
 	private TextInputListener textInputListener;
 	private final DocumentListener documentListener;
@@ -359,9 +357,7 @@ public class XtextReconciler extends Job implements IReconciler {
 						: new NullProgressMonitor());
 			}
 			if (strategy instanceof XtextDocumentReconcileStrategy) {
-				XtextDocumentReconcileStrategy xtextDocumentReconcileStrategy = (XtextDocumentReconcileStrategy) strategy;
-				xtextDocumentReconcileStrategy.setResource(state);
-				xtextDocumentReconcileStrategy.setEditor(editor);
+				((XtextDocumentReconcileStrategy) strategy).setResource(state);
 			}
 			strategy.reconcile(replaceRegionToBeProcessed);
 			if (log.isDebugEnabled()) { 
@@ -370,12 +366,5 @@ public class XtextReconciler extends Job implements IReconciler {
 				debugger.assertResouceParsedCorrectly(state, replaceRegionToBeProcessed);
 			}
 		}
-	}
-	
-	/**
-	 * @since 2.7
-	 */
-	public void setEditor(XtextEditor editor) {
-		this.editor = editor;
 	}
 }

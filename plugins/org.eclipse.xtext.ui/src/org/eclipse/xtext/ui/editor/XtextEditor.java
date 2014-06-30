@@ -285,7 +285,7 @@ public class XtextEditor extends TextEditor {
 		super.doRevertToSaved();
 		callback.afterSave(this);
 	}
-	
+
 	/**
 	 * Set key binding scope. Required for custom key bindings (e.g. F3).
 	 */
@@ -697,13 +697,6 @@ public class XtextEditor extends TextEditor {
 	 */
 	public void setXtextEditorCallback(CompoundXtextEditorCallback callback) {
 		this.callback = callback;
-	}
-
-	/**
-	 * @since 2.7
-	 */
-	public CompoundXtextEditorCallback getXtextEditorCallback() {
-		return callback;
 	}
 
 	/**
