@@ -18,7 +18,6 @@ import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
@@ -49,8 +48,6 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 
 	private XtextResource resource;
 
-	private IProgressMonitor monitor;
-
 	public void reconcile(final IRegion region) {
 		if (log.isTraceEnabled()) {
 			log.trace("reconcile region: " + region);
@@ -63,12 +60,6 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 
 	public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion) {
 		reconcile(subRegion);
-	}
-	
-	/**
-	 * @since 2.7
-	 */
-	public void setEditor(XtextEditor editor) {
 	}
 
 	public void setDocument(IDocument document) {
@@ -91,7 +82,6 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	 * @since 2.3
 	 */
 	public void setProgressMonitor(IProgressMonitor monitor) {
-		this.monitor = monitor;
 		if (spellingReconcileStrategy != null) {
 			spellingReconcileStrategy.setProgressMonitor(monitor);
 		}
@@ -135,16 +125,9 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 			resource.update(replaceRegionToBeProcessed.getOffset(), replaceRegionToBeProcessed.getLength(),
 					replaceRegionToBeProcessed.getText());
 			resource.setModificationStamp(replaceRegionToBeProcessed.getModificationStamp());
-			postParse(resource, monitor);
 		} catch (RuntimeException exc) {
 			log.error("Parsing in reconciler failed.", exc);
 			throw exc;
 		}
-	}
-
-	/**
-	 * @since 2.7
-	 */
-	protected void postParse(XtextResource resource, IProgressMonitor monitor) {
 	}
 }

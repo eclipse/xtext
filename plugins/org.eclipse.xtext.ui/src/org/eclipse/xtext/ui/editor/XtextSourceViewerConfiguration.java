@@ -37,7 +37,6 @@ import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.quickfix.XtextQuickAssistAssistant;
-import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 
 import com.google.inject.Inject;
@@ -132,8 +131,6 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	@Override
 	public IReconciler getReconciler(ISourceViewer sourceViewer) {
 		IReconciler reconciler = reconcilerProvider.get();
-		if (reconciler instanceof XtextReconciler && editor instanceof XtextEditor) 
-			((XtextReconciler) reconciler).setEditor((XtextEditor) editor);
 		return reconciler;
 	}
 

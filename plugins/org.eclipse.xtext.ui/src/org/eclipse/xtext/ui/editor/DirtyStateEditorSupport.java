@@ -422,14 +422,6 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		}
 		job.scheduleFor(event); 
 	}
-	
-	/**
-	 * @since 2.7
-	 */
-	public void waitForUpdateEditorJob() throws InterruptedException {
-		if(updateEditorStateJob != null)
-				updateEditorStateJob.join();
-	}
 
 	protected UpdateEditorStateJob createUpdateEditorJob() {
 		// default is sequential execution to ensure a minimum number of

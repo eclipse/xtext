@@ -92,10 +92,4 @@ public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEdi
 			widget.removeVerifyListener(listener);
 	}
 	
-	/**
-	 * @since 2.7
-	 */
-	public DirtyStateEditorSupport getDirtyStateEditorSupport() {
-		return editorSupport;
-	}
 }
