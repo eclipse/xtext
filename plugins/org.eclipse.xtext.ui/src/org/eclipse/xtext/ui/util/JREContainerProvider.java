@@ -26,6 +26,8 @@ import static org.eclipse.jdt.launching.JavaRuntime.*;
  */
 public class JREContainerProvider {
 
+	private static IVMInstall defaultVMInstall = getDefaultVMInstall();
+
 	/**
 	 * @since 2.6
 	 */
@@ -38,7 +40,6 @@ public class JREContainerProvider {
 	 * @since 2.6
 	 */
 	public static IPath getDefaultJREContainerPath() {
-		IVMInstall defaultVMInstall = getDefaultVMInstall();
 		if (defaultVMInstall == null) {
 			return newJRE15ContainerPath();
 		}
