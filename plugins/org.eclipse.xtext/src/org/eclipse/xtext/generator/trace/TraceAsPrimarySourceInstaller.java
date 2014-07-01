@@ -65,7 +65,7 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 		}
 	}
 
-	public static class XtextMethodAdapter extends SyntheticMethodVisitor {
+	public static class XtextMethodAdapter extends MethodVisitor {
 
 		private XtextClassAdapter context;
 
