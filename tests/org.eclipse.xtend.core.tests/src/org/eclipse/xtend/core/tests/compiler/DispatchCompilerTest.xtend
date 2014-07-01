@@ -27,7 +27,6 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import org.eclipse.xtext.xbase.lib.Extension;
-			import org.eclipse.xtext.xbase.lib.Synthetic;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -35,7 +34,6 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    return s.substring(4);
 			  }
 			  
-			  @Synthetic
 			  public String m(final String s) {
 			    return _m(s);
 			  }
@@ -52,15 +50,12 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import org.eclipse.xtext.xbase.lib.Synthetic;
-			
 			@SuppressWarnings("all")
 			public class C {
 			  protected void _minus(final Object operand) {
 			    throw new RuntimeException();
 			  }
 			  
-			  @Synthetic
 			  public void minus(final Object operand) {
 			    _minus(operand);
 			    return;
@@ -78,15 +73,12 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import org.eclipse.xtext.xbase.lib.Synthetic;
-			
 			@SuppressWarnings("all")
 			public class C {
 			  protected int _minus(final Object operand) {
 			    throw new RuntimeException();
 			  }
 			  
-			  @Synthetic
 			  public int minus(final Object operand) {
 			    return _minus(operand);
 			  }
@@ -109,7 +101,6 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			import java.util.Arrays;
 			import org.eclipse.xtext.xbase.lib.DoubleExtensions;
-			import org.eclipse.xtext.xbase.lib.Synthetic;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -128,7 +119,6 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    return DoubleExtensions.operator_minus(e);
 			  }
 			  
-			  @Synthetic
 			  public double minus(final Object e) {
 			    if (e instanceof Double) {
 			      return _minus((Double)e);
@@ -161,7 +151,6 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Synthetic;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -177,7 +166,6 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    throw new RuntimeException();
 			  }
 			  
-			  @Synthetic
 			  public void minus(final Object e) {
 			    if (e instanceof Double) {
 			      _minus((Double)e);
@@ -211,7 +199,6 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			import java.util.Arrays;
 			import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
-			import org.eclipse.xtext.xbase.lib.Synthetic;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -232,7 +219,6 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    return Double.valueOf(DoubleExtensions.operator_minus(e));
 			  }
 			  
-			  @Synthetic
 			  public Number minus(final Object e) {
 			    if (e instanceof Double) {
 			      return _minus((Double)e);
@@ -263,7 +249,6 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			import java.util.Arrays;
 			import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 			import org.eclipse.xtext.xbase.lib.Exceptions;
-			import org.eclipse.xtext.xbase.lib.Synthetic;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -284,7 +269,6 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			    return Double.valueOf(DoubleExtensions.operator_minus(e));
 			  }
 			  
-			  @Synthetic
 			  public Number minus(final Object e) {
 			    if (e instanceof Double) {
 			      return _minus((Double)e);

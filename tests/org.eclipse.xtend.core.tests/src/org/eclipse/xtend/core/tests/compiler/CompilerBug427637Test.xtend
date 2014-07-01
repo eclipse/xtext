@@ -1191,7 +1191,6 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-			import org.eclipse.xtext.xbase.lib.Synthetic;
 			
 			@SuppressWarnings("all")
 			public class FormattingDataFactory {
@@ -1753,7 +1752,6 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			    return _function;
 			  }
 			  
-			  @Synthetic
 			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataInit it) {
 			    if (key instanceof BlankLineKey) {
 			      return _newFormattingData(leafs, (BlankLineKey)key, it);
