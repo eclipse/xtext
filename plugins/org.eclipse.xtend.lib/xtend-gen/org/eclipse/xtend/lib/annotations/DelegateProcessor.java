@@ -24,6 +24,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedParameter;
@@ -158,19 +159,11 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         }
         if (!_matched) {
           TypeReference _string_1 = this.context.getString();
-          TypeReference _object = this.context.getObject();
-          TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_object);
-          if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_string_1, _newArrayTypeReference)))) {
-            _matched=true;
-          }
-        }
-        if (!_matched) {
-          TypeReference _string_2 = this.context.getString();
           TypeReference _newTypeReference = this.context.newTypeReference(Class.class);
-          TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_newTypeReference);
-          TypeReference _object_1 = this.context.getObject();
-          TypeReference _newArrayTypeReference_2 = this.context.newArrayTypeReference(_object_1);
-          if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_string_2, _newArrayTypeReference_1, _newArrayTypeReference_2)))) {
+          TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_newTypeReference);
+          TypeReference _object = this.context.getObject();
+          TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_object);
+          if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
             _matched=true;
           }
         }
@@ -181,7 +174,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       if (!_matched) {
         boolean _xblockexpression = false;
         {
-          this.context.addError(it, "Not a valid delegate signature, use () or (String methodName, Class<?>[] argumentTypes, Object[] arguments)");
+          this.context.addError(it, "Not a valid delegate signature, use () or (String methodName) or (String methodName, Class<?>[] argumentTypes, Object[] arguments)");
           _xblockexpression = false;
         }
         _switchResult = _xblockexpression;
@@ -502,6 +495,8 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         String _simpleName = declaration.getSimpleName();
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
           public void apply(final MutableMethodDeclaration impl) {
+            NamedElement _primarySourceElement = Util.this.context.getPrimarySourceElement(delegate);
+            Util.this.context.setPrimarySourceElement(impl, _primarySourceElement);
             final HashMap<TypeReference, TypeReference> typeParameterMappings = CollectionLiterals.<TypeReference, TypeReference>newHashMap();
             Iterable<? extends ResolvedTypeParameter> _resolvedTypeParameters = resolvedMethod.getResolvedTypeParameters();
             final Procedure1<ResolvedTypeParameter> _function = new Procedure1<ResolvedTypeParameter>() {
@@ -636,8 +631,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         }
       }
       if (!_matched) {
-        TypeReference _string = this.context.getString();
-        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_string)))) {
+        if (Objects.equal(_list, Collections.<Object>unmodifiableList(Lists.<Object>newArrayList()))) {
           _matched=true;
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("this.");
@@ -651,10 +645,12 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         }
       }
       if (!_matched) {
-        TypeReference _string_1 = this.context.getString();
+        TypeReference _string = this.context.getString();
+        TypeReference _newTypeReference = this.context.newTypeReference(Class.class);
+        TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_newTypeReference);
         TypeReference _object = this.context.getObject();
-        TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_object);
-        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_string_1, _newArrayTypeReference)))) {
+        TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_object);
+        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_string, _newArrayTypeReference, _newArrayTypeReference_1)))) {
           _matched=true;
           StringConcatenation _builder_2 = new StringConcatenation();
           _builder_2.append("this.");
@@ -663,37 +659,9 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           _builder_2.append("(\"");
           String _simpleName_4 = method.getSimpleName();
           _builder_2.append(_simpleName_4, "");
-          _builder_2.append("\", new Object[]{");
+          _builder_2.append("\", new Class[]{");
           Iterable<? extends ParameterDeclaration> _parameters_1 = method.getParameters();
           final Function1<ParameterDeclaration, String> _function_1 = new Function1<ParameterDeclaration, String>() {
-            public String apply(final ParameterDeclaration it) {
-              return it.getSimpleName();
-            }
-          };
-          String _join = IterableExtensions.join(_parameters_1, ", ", _function_1);
-          _builder_2.append(_join, "");
-          _builder_2.append("})");
-          _switchResult = _builder_2;
-        }
-      }
-      if (!_matched) {
-        TypeReference _string_2 = this.context.getString();
-        TypeReference _newTypeReference = this.context.newTypeReference(Class.class);
-        TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_newTypeReference);
-        TypeReference _object_1 = this.context.getObject();
-        TypeReference _newArrayTypeReference_2 = this.context.newArrayTypeReference(_object_1);
-        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_string_2, _newArrayTypeReference_1, _newArrayTypeReference_2)))) {
-          _matched=true;
-          StringConcatenation _builder_3 = new StringConcatenation();
-          _builder_3.append("this.");
-          String _simpleName_5 = it.getSimpleName();
-          _builder_3.append(_simpleName_5, "");
-          _builder_3.append("(\"");
-          String _simpleName_6 = method.getSimpleName();
-          _builder_3.append(_simpleName_6, "");
-          _builder_3.append("\", new Class[]{");
-          Iterable<? extends ParameterDeclaration> _parameters_2 = method.getParameters();
-          final Function1<ParameterDeclaration, String> _function_2 = new Function1<ParameterDeclaration, String>() {
             public String apply(final ParameterDeclaration it) {
               TypeReference _type = it.getType();
               Type _type_1 = _type.getType();
@@ -701,19 +669,19 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
               return (_simpleName + ".class");
             }
           };
-          String _join_1 = IterableExtensions.join(_parameters_2, ", ", _function_2);
-          _builder_3.append(_join_1, "");
-          _builder_3.append("}, new Object[]{");
-          Iterable<? extends ParameterDeclaration> _parameters_3 = method.getParameters();
-          final Function1<ParameterDeclaration, String> _function_3 = new Function1<ParameterDeclaration, String>() {
+          String _join = IterableExtensions.join(_parameters_1, ", ", _function_1);
+          _builder_2.append(_join, "");
+          _builder_2.append("}, new Object[]{");
+          Iterable<? extends ParameterDeclaration> _parameters_2 = method.getParameters();
+          final Function1<ParameterDeclaration, String> _function_2 = new Function1<ParameterDeclaration, String>() {
             public String apply(final ParameterDeclaration it) {
               return it.getSimpleName();
             }
           };
-          String _join_2 = IterableExtensions.join(_parameters_3, ", ", _function_3);
-          _builder_3.append(_join_2, "");
-          _builder_3.append("})");
-          _switchResult = _builder_3;
+          String _join_1 = IterableExtensions.join(_parameters_2, ", ", _function_2);
+          _builder_2.append(_join_1, "");
+          _builder_2.append("})");
+          _switchResult = _builder_2;
         }
       }
       if (!_matched) {

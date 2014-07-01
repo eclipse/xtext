@@ -7,10 +7,11 @@ import java.lang.annotation.Target
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 
 /**
  * @since 2.7
@@ -20,6 +21,48 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 @Active(ToStringProcessor)
 @GwtCompatible
 annotation ToString {
+	val skipNulls = false
+	val singleLine = false
+	val hideFieldNames = false
+}
+
+/**
+ * @since 2.7
+ */
+@Beta
+@GwtCompatible
+class ToStringConfiguration {
+	val boolean skipNulls
+	val boolean singleLine
+	val boolean hideFieldNames
+	
+	new() {
+		this(false, false, false)
+	}
+
+	new(boolean skipNulls, boolean singleLine, boolean hideFieldNames) {
+		this.skipNulls = skipNulls
+		this.singleLine = singleLine
+		this.hideFieldNames = hideFieldNames
+	}
+
+	new(AnnotationReference annotation) {
+		this.skipNulls = annotation.getBooleanValue("skipNulls")
+		this.singleLine = annotation.getBooleanValue("singleLine")
+		this.hideFieldNames = annotation.getBooleanValue("hideFieldNames")
+	}
+
+	def isSkipNulls() {
+		skipNulls
+	}
+
+	def isSingleLine() {
+		singleLine
+	}
+
+	def isHideFieldNames() {
+		hideFieldNames
+	}
 }
 
 /**
@@ -30,15 +73,18 @@ annotation ToString {
 class ToStringProcessor extends AbstractClassProcessor {
 
 	override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
+		if (findAnnotation(Data.findTypeGlobally) !== null) {
+			return
+		}
 		val extension util = new ToStringProcessor.Util(context)
-		val extension voUtil = new ValueObjectProcessor.Util(context)
+		val annotation = findAnnotation(ToString.findTypeGlobally)
+		val configuration = new ToStringConfiguration(annotation)
 		if (hasToString) {
-			val annotation = findAnnotation(ToString.findTypeGlobally)
 			annotation.addWarning("toString is already defined, this annotation has no effect.")
 		} else if (extendedClass != object) {
-			addReflectiveToString
+			addReflectiveToString(configuration)
 		} else {
-			addToString(valueObjectFields)
+			addToString(declaredFields.filter[thePrimaryGeneratedJavaElement && ! static && !transient], configuration)
 		}
 	}
 
@@ -58,31 +104,44 @@ class ToStringProcessor extends AbstractClassProcessor {
 			findDeclaredMethod("toString") !== null
 		}
 
-		def void addReflectiveToString(MutableClassDeclaration cls) {
+		def getToStringConfig(ClassDeclaration it) {
+			val anno = findAnnotation(ToString.findTypeGlobally)
+			if (anno === null) null else new ToStringConfiguration(anno)
+		}
+
+		def void addReflectiveToString(MutableClassDeclaration cls, ToStringConfiguration config) {
 			cls.addMethod("toString") [
+				primarySourceElement = cls.primarySourceElement
 				returnType = string
 				addAnnotation(newAnnotationReference(Override))
 				addAnnotation(newAnnotationReference(Pure))
 				body = '''
-					String result = new «ToStringHelper»().toString(this);
+					String result = new «ToStringBuilder»(this)
+						.addAllFields()
+						«IF config.skipNulls».skipNulls()«ENDIF»
+						«IF config.singleLine».singleLine()«ENDIF»
+						«IF config.hideFieldNames».hideFieldNames()«ENDIF»
+						.toString();
 					return result;
 				'''
 			]
 		}
 
-		def void addToString(MutableClassDeclaration cls, Iterable<? extends FieldDeclaration> fields) {
+		def void addToString(MutableClassDeclaration cls, Iterable<? extends FieldDeclaration> fields,
+			ToStringConfiguration config) {
 			cls.addMethod("toString") [
+				primarySourceElement = cls.primarySourceElement
 				returnType = string
 				addAnnotation(newAnnotationReference(Override))
 				addAnnotation(newAnnotationReference(Pure))
 				body = '''
-					StringBuilder b = new StringBuilder("«cls.simpleName»");
-					b.append("{");
-					«FOR field : fields SEPARATOR '\nb.append(", ");'»
-						b.append("«field.simpleName»=");
-						b.append(this.«field.simpleName»);
+					«ToStringBuilder» b = new «ToStringBuilder»(this);
+					«IF config.skipNulls»b.skipNulls();«ENDIF»
+					«IF config.singleLine»b.singleLine();«ENDIF»
+					«IF config.hideFieldNames»b.hideFieldNames();«ENDIF»
+					«FOR field : fields»
+						b.add("«field.simpleName»", this.«field.simpleName»);
 					«ENDFOR»
-					b.append("}");
 					return b.toString();
 				'''
 			]

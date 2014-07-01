@@ -98,46 +98,6 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 			assertTrue(compiledClass.declaredMethods.exists[name == "m"])
 		]
 	}
-
-	@Test
-	def testDelegateMethod2() {
-		val text = ''' 
-			import org.eclipse.xtend.lib.annotations.Delegate
-			interface A {
-				def void m()
-			}
-			class B implements A {
-				override m() {}
-			}
-			class C implements A{
-				@Delegate def B delegate(String name) {null}
-			}
-		'''
-		text.file.assertNoIssues
-		text.compile [
-			assertTrue(compiledClass.declaredMethods.exists[name == "m"])
-		]
-	}
-
-	@Test
-	def testDelegateMethod3() {
-		val text = ''' 
-			import org.eclipse.xtend.lib.annotations.Delegate
-			interface A {
-				def void m()
-			}
-			class B implements A {
-				override m() {}
-			}
-			class C implements A{
-				@Delegate def B delegate(String name, Object... args) {null}
-			}
-		'''
-		text.file.assertNoIssues
-		text.compile [
-			assertTrue(compiledClass.declaredMethods.exists[name == "m"])
-		]
-	}
 	
 	@Test
 	def testDelegateMethodWithParameters() {

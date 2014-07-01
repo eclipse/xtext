@@ -11,6 +11,7 @@ import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
@@ -27,7 +28,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
   private ValidationTestHelper _validationTestHelper;
   
   @Test
-  public void testToString() {
+  public void testDefault() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("import org.eclipse.xtend.lib.annotations.ToString");
@@ -53,8 +54,147 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
             final Object instance = _compiledClass.newInstance();
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("Foo [");
+            _builder.newLine();
+            _builder.append("  ");
+            _builder.append("a = 1");
+            _builder.newLine();
+            _builder.append("]");
+            String _unix = LineDelimiters.toUnix(_builder.toString());
             String _string = instance.toString();
-            Assert.assertEquals("Foo{a=1}", _string);
+            Assert.assertEquals(_unix, _string);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSingleLine() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ToString");
+      _builder.newLine();
+      _builder.append("@ToString(singleLine=true) class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static String ignoreMe");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("transient String ignoreMe2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def create {} ignoreMe3() {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("int a = 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            Class<?> _compiledClass = it.getCompiledClass();
+            final Object instance = _compiledClass.newInstance();
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("Foo [a = 1]");
+            String _unix = LineDelimiters.toUnix(_builder.toString());
+            String _string = instance.toString();
+            Assert.assertEquals(_unix, _string);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testHideFieldNames() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ToString");
+      _builder.newLine();
+      _builder.append("@ToString(singleLine=true, hideFieldNames = true) class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static String ignoreMe");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("transient String ignoreMe2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def create {} ignoreMe3() {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("int a = 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            Class<?> _compiledClass = it.getCompiledClass();
+            final Object instance = _compiledClass.newInstance();
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("Foo [1]");
+            String _unix = LineDelimiters.toUnix(_builder.toString());
+            String _string = instance.toString();
+            Assert.assertEquals(_unix, _string);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSkipNulls() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ToString");
+      _builder.newLine();
+      _builder.append("@ToString(skipNulls = true) class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static String ignoreMe");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("transient String ignoreMe2");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def create {} ignoreMe3() {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Integer b = null");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            Class<?> _compiledClass = it.getCompiledClass();
+            final Object instance = _compiledClass.newInstance();
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("Foo [");
+            _builder.newLine();
+            _builder.append("]");
+            String _unix = LineDelimiters.toUnix(_builder.toString());
+            String _string = instance.toString();
+            Assert.assertEquals(_unix, _string);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
@@ -142,6 +282,39 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
         }
       };
       this.compilationTestHelper.compile(text, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testIntegrationWithData() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.ToString");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+      _builder.newLine();
+      _builder.append("@ToString(hideFieldNames=true) @Data class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("String b = \"Bar\"");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            Class<?> _compiledClass = it.getCompiledClass();
+            final Object instance = _compiledClass.newInstance();
+            String _string = instance.toString();
+            Assert.assertEquals((("Foo [\n" + "  \"Bar\"\n") + "]"), _string);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

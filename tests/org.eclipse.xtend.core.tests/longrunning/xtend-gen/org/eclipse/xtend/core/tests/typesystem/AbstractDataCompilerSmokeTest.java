@@ -8,7 +8,7 @@
 package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.inject.Inject;
-import org.eclipse.xtend.core.tests.compiler.DataCompilerTest;
+import org.eclipse.xtend.core.tests.compiler.OldDataCompilerTest;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.junit.typesystem.Oven;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public abstract class AbstractDataCompilerSmokeTest extends DataCompilerTest {
+public abstract class AbstractDataCompilerSmokeTest extends OldDataCompilerTest {
   @Inject
   @Extension
   private Oven _oven;
