@@ -10,6 +10,7 @@ import com.google.inject.Inject
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+import org.eclipse.xtend.core.xtend.XtendPackage
 
 class GetterCompilerTest extends AbstractXtendCompilerTest {
 	@Inject
@@ -25,6 +26,20 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 			val instance = compiledClass.newInstance
 			val getFoo = compiledClass.getDeclaredMethod("getFoo")
 			assertEquals(1, getFoo.invoke(instance))
+		]
+	}
+
+	@Test
+	def void testCreateGenericGetter() {
+		'''
+			class Foo<T> {
+				@Getter T foo = null
+			}
+		'''.compile[
+			assertTrue(singleGeneratedCode.contains("T getFoo"))
+			val instance = compiledClass.newInstance
+			val getFoo = compiledClass.getDeclaredMethod("getFoo")
+			assertEquals(null, getFoo.invoke(instance))
 		]
 	}
 	@Test
@@ -78,5 +93,44 @@ class GetterCompilerTest extends AbstractXtendCompilerTest {
 			val getFoo = compiledClass.getDeclaredMethod("getFoo")
 			assertEquals(2, getFoo.invoke(instance))
 		]
+	}
+	
+	@Test
+	def void testCannotOverrideFinalGetter() {
+		file('''
+			class Fizz {
+				def final String getFoo() {"foo"}
+			}
+			
+			class Buzz extends Fizz {
+				@Getter String foo
+			}
+		''').assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "final","Fizz", "getFoo")
+	}
+	
+	@Test
+	def void testCannotOverrideWithConflictingReturnType() {
+		file('''
+			class Foo {
+				def String getFoo() {"foo"}
+			}
+			
+			class Bar extends Foo {
+				@Getter int foo
+			}
+		''').assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "incompatible","Foo", "getFoo")
+	}
+	
+	@Test
+	def void testCanSpecializeReturnType() {
+		file('''
+			class Foo {
+				def CharSequence getFoo() {"foo"}
+			}
+			
+			class Bar extends Foo {
+				@Getter String foo
+			}
+		''').assertNoErrors
 	}
 }

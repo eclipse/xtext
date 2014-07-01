@@ -2,6 +2,7 @@ package org.eclipse.xtend.lib;
 
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
+import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.xtend.lib.Setter;
@@ -16,9 +17,12 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.ResolvedMethod;
+import org.eclipse.xtend.lib.macro.declaration.ResolvedParameter;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -61,18 +65,99 @@ public class SetterProcessor implements TransformationParticipant<MutableMemberD
       return ("set" + _firstUpper);
     }
     
-    public void addSetter(final MutableFieldDeclaration field) {
+    boolean canAddSetter_Old(final MutableFieldDeclaration field) {
       boolean _isFinal = field.isFinal();
       if (_isFinal) {
         this.context.addError(field, "Cannot set a final field");
-        return;
+        return false;
       }
       TypeReference _type = field.getType();
       boolean _isInferred = _type.isInferred();
       if (_isInferred) {
         this.context.addError(field, "Type cannot be inferred.");
-        return;
+        return false;
       }
+      return true;
+    }
+    
+    public boolean canAddSetter(final MutableFieldDeclaration field) {
+      boolean _canAddSetter_Old = this.canAddSetter_Old(field);
+      boolean _not = (!_canAddSetter_Old);
+      if (_not) {
+        return false;
+      }
+      MutableTypeDeclaration _declaringType = field.getDeclaringType();
+      TypeReference _newSelfTypeReference = this.context.newSelfTypeReference(_declaringType);
+      Iterable<? extends ResolvedMethod> _allResolvedMethods = _newSelfTypeReference.getAllResolvedMethods();
+      final Function1<ResolvedMethod, Boolean> _function = new Function1<ResolvedMethod, Boolean>() {
+        public Boolean apply(final ResolvedMethod it) {
+          boolean _and = false;
+          boolean _and_1 = false;
+          MethodDeclaration _declaration = it.getDeclaration();
+          String _simpleName = _declaration.getSimpleName();
+          String _setterName = Util.this.getSetterName(field);
+          boolean _equals = Objects.equal(_simpleName, _setterName);
+          if (!_equals) {
+            _and_1 = false;
+          } else {
+            Iterable<? extends ResolvedParameter> _resolvedParameters = it.getResolvedParameters();
+            int _size = IterableExtensions.size(_resolvedParameters);
+            boolean _equals_1 = (_size == 1);
+            _and_1 = _equals_1;
+          }
+          if (!_and_1) {
+            _and = false;
+          } else {
+            TypeReference _type = field.getType();
+            Iterable<? extends ResolvedParameter> _resolvedParameters_1 = it.getResolvedParameters();
+            ResolvedParameter _head = IterableExtensions.head(_resolvedParameters_1);
+            TypeReference _resolvedType = _head.getResolvedType();
+            boolean _isAssignableFrom = _type.isAssignableFrom(_resolvedType);
+            _and = _isAssignableFrom;
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      final ResolvedMethod overriddenSetter = IterableExtensions.findFirst(_allResolvedMethods, _function);
+      boolean _equals = Objects.equal(overriddenSetter, null);
+      if (_equals) {
+        return true;
+      }
+      final MethodDeclaration overriddenDeclaration = overriddenSetter.getDeclaration();
+      boolean _isFinal = overriddenDeclaration.isFinal();
+      if (_isFinal) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Cannot override the final method ");
+        String _simpleSignature = overriddenSetter.getSimpleSignature();
+        _builder.append(_simpleSignature, "");
+        _builder.append(" in ");
+        TypeDeclaration _declaringType_1 = overriddenDeclaration.getDeclaringType();
+        String _simpleName = _declaringType_1.getSimpleName();
+        _builder.append(_simpleName, "");
+        this.context.addError(field, _builder.toString());
+        return false;
+      }
+      TypeReference _resolvedReturnType = overriddenSetter.getResolvedReturnType();
+      boolean _isVoid = _resolvedReturnType.isVoid();
+      boolean _not_1 = (!_isVoid);
+      if (_not_1) {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("Cannot override the method ");
+        String _simpleSignature_1 = overriddenSetter.getSimpleSignature();
+        _builder_1.append(_simpleSignature_1, "");
+        _builder_1.append(" in ");
+        TypeDeclaration _declaringType_2 = overriddenDeclaration.getDeclaringType();
+        String _simpleName_1 = _declaringType_2.getSimpleName();
+        _builder_1.append(_simpleName_1, "");
+        _builder_1.append(", because its return type is not void»");
+        _builder_1.newLineIfNotEmpty();
+        this.context.addError(field, _builder_1.toString());
+        return false;
+      }
+      return true;
+    }
+    
+    public void addSetter(final MutableFieldDeclaration field) {
       MutableTypeDeclaration _declaringType = field.getDeclaringType();
       String _setterName = this.getSetterName(field);
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
@@ -135,7 +220,10 @@ public class SetterProcessor implements TransformationParticipant<MutableMemberD
       final AnnotationReference annotation = it.findAnnotation(_findTypeGlobally);
       context.addWarning(annotation, "A setter is already defined, this annotation has no effect");
     } else {
-      util.addSetter(it);
+      boolean _canAddSetter = util.canAddSetter(it);
+      if (_canAddSetter) {
+        util.addSetter(it);
+      }
     }
   }
   
@@ -160,9 +248,16 @@ public class SetterProcessor implements TransformationParticipant<MutableMemberD
     Iterable<? extends MutableFieldDeclaration> _filter = IterableExtensions.filter(_declaredFields, _function);
     final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
       public void apply(final MutableFieldDeclaration it) {
+        boolean _and = false;
         boolean _hasSetter = util.hasSetter(it);
         boolean _not = (!_hasSetter);
-        if (_not) {
+        if (!_not) {
+          _and = false;
+        } else {
+          boolean _canAddSetter = util.canAddSetter(it);
+          _and = _canAddSetter;
+        }
+        if (_and) {
           util.addSetter(it);
         }
       }
