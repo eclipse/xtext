@@ -8,9 +8,10 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import com.google.inject.Inject
+import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
-import org.eclipse.xtend.core.xtend.XtendPackage
+import org.eclipse.xtend.core.validation.IssueCodes
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -142,7 +143,7 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 				override m(String foo) {}
 			}
 			class C implements A{
-				@Delegate def B delegate(String name, Object... args) {null}
+				@Delegate def B delegate(String name, Class<?>[] argTypes, Object... args) {null}
 			}
 		'''
 		text.file.assertNoIssues
@@ -384,5 +385,84 @@ class DelegateCompilerTest extends AbstractXtendCompilerTest {
 				}
 			'''.toString, getGeneratedCode("C"))
 		]
+	}
+	
+	@Test
+	def testGenericInterface() {
+		val text = '''
+			interface I<T, U extends T, E extends Throwable> {
+				def <V extends T> T foo(U foo, V bar) throws E
+			}
+			class B implements I<CharSequence, String, Exception> {
+				override <V extends CharSequence> foo(String foo, V bar) throws Exception {foo}
+			}
+			class C implements I<CharSequence, String, Exception> {
+				@Delegate(#[I]) B delegate = new B
+			}
+		'''
+		text.file.assertNoIssues
+		text.compile[
+			assertTrue(getGeneratedCode("C"), getGeneratedCode("C").contains("<V extends CharSequence> CharSequence foo(final String foo, final V bar) throws Exception"))
+			val instance = getCompiledClass("C").newInstance
+			val method = getCompiledClass("C").getDeclaredMethod("foo", String, CharSequence)
+			assertEquals("bar", method.invoke(instance, "bar", "bar"))
+			assertEquals(Exception, method.exceptionTypes.head)
+			assertEquals(CharSequence, method.returnType)
+			assertEquals(String, method.parameterTypes.head)
+			assertEquals(CharSequence, method.parameterTypes.get(1))
+		]
+	}
+	
+	@Test
+	def testGenericInterfaceAndClass() {
+		val text = '''
+			interface I<T> {
+				def T foo(T foo)
+			}
+			class B<X> implements I<X> {
+				override X foo(X foo) {foo}
+			}
+			class C<Y extends CharSequence> implements I<Y> {
+				@Delegate B<Y> delegate = new B<Y>
+			}
+		'''
+		text.file.assertNoIssues
+		text.compile[
+			assertTrue(getGeneratedCode("C").contains("Y foo(final Y foo)"))
+			val instance = getCompiledClass("C").newInstance
+			val method = getCompiledClass("C").getDeclaredMethod("foo", CharSequence)
+			assertEquals("bar", method.invoke(instance, "bar"))
+		]
+	}
+	
+	@Test 
+	def testGenericSignatureNotMatching() {
+		file('''
+			interface I<T> {
+				def T foo(T foo)
+			}
+			class B implements I<Integer> {
+				override Integer foo(Integer foo) {1}
+			}
+			class C implements I<String> {
+				@Delegate B delegate
+			}
+		''').assertError(XtendPackage.Literals.XTEND_FIELD, "user.issue", "no", "common", "interfaces")
+	}
+	
+	@Test 
+	def testMethodAlreadyDefined() {
+		file('''
+			interface I<T> {
+				def T foo(T foo)
+			}
+			class B implements I<String> {
+				override String foo(String foo) {""}
+			}
+			class C implements I<String> {
+				@Delegate B delegate
+				override String foo(String foo) {""}
+			}
+		''').assertWarning(XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER, "delegate")
 	}
 }

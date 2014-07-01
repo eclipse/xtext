@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.compiler
 import com.google.inject.Inject
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -491,6 +492,34 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 			getCompiledClass("Bar") => [
 				assertTrue(declaredConstructors.exists[parameterTypes.toList == #[int, String]])
 			]
+		]
+	}
+	
+	@Test
+	@Ignore("Switched the check of, because the necessary API needs to be distributed as a nightly first")
+	def testSuperClassWithTypeParameters() {
+		'''
+			@Data class Foo<T> {
+				T foo
+			}
+			@Data class Bar extends Foo<String> {
+			}
+		'''.compile [
+			assertTrue(getGeneratedCode("Bar").contains("public Bar(final String foo) {"))
+		]
+	}
+	
+	@Test
+	@Ignore("DeclaredConstructor has correct context type, but still returns Object")
+	def testClassAndSuperClassWithTypeParameters() {
+		'''
+			@Data class Foo<T> {
+				T foo
+			}
+			@Data class Bar<X> extends Foo<X> {
+			}
+		'''.compile [
+			assertTrue(getGeneratedCode("Bar").contains("public Bar(final X foo) {"))
 		]
 	}
 }
