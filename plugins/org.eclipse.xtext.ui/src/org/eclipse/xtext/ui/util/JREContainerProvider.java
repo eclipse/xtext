@@ -26,6 +26,9 @@ import static org.eclipse.jdt.launching.JavaRuntime.*;
  */
 public class JREContainerProvider {
 
+	private static IVMInstall defaultVMInstall = null;
+	private static boolean defaultVMinitialized = false;
+
 	/**
 	 * @since 2.6
 	 */
@@ -38,8 +41,11 @@ public class JREContainerProvider {
 	 * @since 2.6
 	 */
 	public static IPath getDefaultJREContainerPath() {
-		IVMInstall defaultVMInstall = getDefaultVMInstall();
 		if (defaultVMInstall == null) {
+			if (!defaultVMinitialized) {
+				defaultVMInstall = getDefaultVMInstall();
+				defaultVMinitialized = true;
+			}
 			return newJRE15ContainerPath();
 		}
 		IExecutionEnvironmentsManager executionEnvironmentsManager = JavaRuntime.getExecutionEnvironmentsManager();
@@ -69,5 +75,4 @@ public class JREContainerProvider {
 		}
 		return null;
 	}
-
 }
