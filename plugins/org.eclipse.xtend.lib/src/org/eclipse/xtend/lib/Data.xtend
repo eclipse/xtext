@@ -1,16 +1,18 @@
 package org.eclipse.xtend.lib
 
-import com.google.common.annotations.Beta
 import java.lang.annotation.ElementType
 import java.lang.annotation.Target
+import org.eclipse.xtend.lib.annotations.AccessorsProcessor
 import org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor
-import org.eclipse.xtend.lib.annotations.GetterProcessor
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructorProcessor
 import org.eclipse.xtend.lib.annotations.ToStringProcessor
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.Visibility
+import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 
 /**
  * This annotation is used by the Xtend compiler.
@@ -23,25 +25,31 @@ import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
  * {@link Object#toString()} implementation is added.  
  * 
  * @author Sven Efftinge
+ * @deprecated use {@link org.eclipse.xtend.lib.annotations.Data} instead
  */
 @Target(ElementType.TYPE)
 @Active(DataProcessor)
+@Deprecated
 annotation Data {
 }
 
 /**
  * @since 2.7
  */
-@Beta
+@Deprecated
 class DataProcessor extends AbstractClassProcessor {
 	override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
 		extension val util = new DataProcessor.Util(context)
-		extension val getterUtil = new GetterProcessor.Util(context)
+		extension val getterUtil = new AccessorsProcessor.Util(context)
 		extension val ehUtil = new EqualsHashCodeProcessor.Util(context)
 		extension val toStringUtil = new ToStringProcessor.Util(context)
+		extension val requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context)
 
-		if (!hasDataConstructor) {
-			addDataConstructor
+		dataFields.forEach [
+			final = true
+		]
+		if (!hasUserDefinedConstructor && !hasFinalFieldsConstructor) {
+			addFinalFieldsConstructor
 		}
 		if (!hasHashCode) {
 			addHashCode(dataFields, superConstructor !== null)
@@ -50,13 +58,12 @@ class DataProcessor extends AbstractClassProcessor {
 			addEquals(dataFields, superConstructor !== null)
 		}
 		if (!hasToString) {
-			addReflectiveToString
+			addDataToString
 		}
 		dataFields.forEach [
-			if (!hasGetter) {
-				addGetter
+			if (shouldAddGetter && canAddGetter) {
+				addGetter(Visibility.PUBLIC)
 			}
-			final = true
 			simpleName = "_" + simpleName.toFirstLower
 		]
 	}
@@ -64,7 +71,7 @@ class DataProcessor extends AbstractClassProcessor {
 	/**
 	 * @since 2.7
  	 */
-	@Beta
+	@Deprecated
 	static class Util {
 
 		extension TransformationContext context
@@ -73,55 +80,25 @@ class DataProcessor extends AbstractClassProcessor {
 			this.context = context
 		}
 
-		def hasDataConstructor(ClassDeclaration cls) {
-			cls.declaredConstructors.exists [
-				val expectedTypes = newArrayList
-				if (cls.superConstructor !== null) {
-					expectedTypes += cls.superConstructor.parameters.map[type]
-				}
-				expectedTypes += cls.dataFields.map[type]
-				parameters.map[type].toList == expectedTypes
-			]
-		}
-
-		def addDataConstructor(MutableClassDeclaration cls) {
-			cls.addConstructor [ constructor |
-				val fieldToParameter = newHashMap
-				val superParameters = cls.superConstructor?.parameters ?: #[]
-				superParameters.forEach [
-					val param = constructor.addParameter(simpleName, type)
-					fieldToParameter.put(it, param)
-				]
-				cls.dataConstructorFields.forEach [
-					val param = constructor.addParameter(simpleName, type)
-					markAsInitializedBy(constructor)
-					fieldToParameter.put(it, param)
-				]
-				constructor.body = '''
-					super(«superParameters.join(", ")[simpleName]»);
-					«FOR field : cls.dataConstructorFields»
-						this.«field.simpleName» = «fieldToParameter.get(field).simpleName»;
-					«ENDFOR»
-				'''
-			]
-		}
-
-		def getDataConstructorFields(MutableClassDeclaration it) {
-			dataFields.filter[initializer == null]
-		}
-
-		def getSuperConstructor(ClassDeclaration it) {
-			if (extendedClass == object)
-				return null;
-			return (extendedClass.type as ClassDeclaration).declaredConstructors.head
-		}
-
 		def getDataFields(ClassDeclaration it) {
 			declaredFields.filter[!static && isThePrimaryGeneratedJavaElement]
 		}
 
 		def getDataFields(MutableClassDeclaration it) {
 			declaredFields.filter[!static && isThePrimaryGeneratedJavaElement]
+		}
+		
+		def void addDataToString(MutableClassDeclaration cls) {
+			cls.addMethod("toString") [
+				primarySourceElement = cls.primarySourceElement
+				returnType = string
+				addAnnotation(newAnnotationReference(Override))
+				addAnnotation(newAnnotationReference(Pure))
+				body = '''
+					String result = new «ToStringHelper»().toString(this);
+					return result;
+				'''
+			]
 		}
 	}
 
