@@ -15,7 +15,6 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -36,7 +35,7 @@ public class XbaseWithAnnotationsProposalProvider extends AbstractXbaseWithAnnot
 	public void completeXAnnotation_AnnotationType(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		completeJavaTypes(context, XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, 
-				TypeMatchFilters.all(IJavaSearchConstants.ANNOTATION_TYPE), acceptor);
+				createVisibilityFilter(context, IJavaSearchConstants.ANNOTATION_TYPE), acceptor);
 	}
 	
 	@Override

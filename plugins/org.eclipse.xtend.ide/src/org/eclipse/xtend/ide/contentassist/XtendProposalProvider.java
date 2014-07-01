@@ -117,7 +117,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	public void completeTypeReferenceNoTypeArgs_Type(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals() || getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
-			completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
+			completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, createVisibilityFilter(context), acceptor);
 		}
 	}
 	
@@ -130,6 +130,9 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 					char[][] enclosingTypeNames, String path) {
 				if (super.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
+					if ("org.eclipse.xtend.lib".equals(String.valueOf(packageName)) && "Property".equals(String.valueOf(simpleTypeName))) {
+						return false;
+					}
 					if (Flags.isPublic(modifiers)) {
 						return true;
 					}
@@ -162,7 +165,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 					}
 				}
 				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
-						getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
+						getQualifiedNameValueConverter(), createVisibilityFilter(context), acceptor);
 			}
 		}
 	}
@@ -188,7 +191,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			AbstractRule rule = GrammarUtil.containingRule(previousGrammarElement);
 			if (rule != grammarAccess.getValidIDRule()) {
 				completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
-						getQualifiedNameValueConverter(), new TypeMatchFilters.All(IJavaSearchConstants.TYPE), acceptor);
+						getQualifiedNameValueConverter(), createVisibilityFilter(context), acceptor);
 			}
 		}
 	}
@@ -282,7 +285,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	public void completeType_Implements(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true, getQualifiedNameValueConverter(),
-				TypeMatchFilters.all(IJavaSearchConstants.INTERFACE), acceptor);
+				createVisibilityFilter(context, IJavaSearchConstants.INTERFACE), acceptor);
 	}
 
 	@Override

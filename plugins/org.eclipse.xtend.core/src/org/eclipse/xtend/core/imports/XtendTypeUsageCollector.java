@@ -10,7 +10,9 @@ package org.eclipse.xtend.core.imports;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
+import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.imports.TypeUsageCollector;
@@ -31,5 +33,12 @@ public class XtendTypeUsageCollector extends TypeUsageCollector {
 			return anonymousClassUtil.getSuperType((AnonymousClass) owner.eContainer());
 		}
 		return super.getReferencedElement(owner, reference);
+	}
+	
+	@Override
+	protected PreferredType findPreferredType(JvmDeclaredType referencedType, String text) {
+		if (referencedType != null && referencedType.getQualifiedName().equals(XtendImportedNamespaceScopeProvider.OLD_PROPERTY_ANNOTATION.toString("."))) 
+			return new PreferredType("Property");
+		return super.findPreferredType(referencedType, text);
 	}
 }
