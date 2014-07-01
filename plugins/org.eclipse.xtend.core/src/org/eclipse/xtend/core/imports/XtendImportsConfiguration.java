@@ -94,7 +94,6 @@ public class XtendImportsConfiguration extends DefaultImportsConfiguration imple
 	@Override
 	public Set<String> getImplicitlyImportedPackages(XtextResource resource) {
 		Set<String> implicitlyImportedPackages = super.getImplicitlyImportedPackages(resource);
-		implicitlyImportedPackages.add(XtendImportedNamespaceScopeProvider.XTEND_LIB.toString("."));
 		implicitlyImportedPackages.add(XtendImportedNamespaceScopeProvider.XBASE_LIB.toString("."));
 		XtendFile xtendFile = getXtendFile(resource);
 		String commonPackageName = xtendFile == null ? null : xtendFile.getPackage();

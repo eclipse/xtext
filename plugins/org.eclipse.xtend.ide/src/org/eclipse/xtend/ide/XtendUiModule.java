@@ -23,6 +23,7 @@ import org.eclipse.xtend.ide.contentassist.EscapeSequenceAwarePrefixMatcher;
 import org.eclipse.xtend.ide.contentassist.OperatorAwareComparator;
 import org.eclipse.xtend.ide.contentassist.TemplateProposalProvider;
 import org.eclipse.xtend.ide.contentassist.XtendContentAssistFactory;
+import org.eclipse.xtend.ide.contentassist.XtendImportingTypesProposalProvider;
 import org.eclipse.xtend.ide.contentassist.antlr.DisabledInternalLexer;
 import org.eclipse.xtend.ide.contentassist.antlr.FlexProposalConflictHelper;
 import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedContentAssistContextFactory;
@@ -79,6 +80,7 @@ import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.JDTAwareSourceFolderProvider;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
+import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
@@ -511,5 +513,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends OutlineNodeFactory> bindOutlineNodeFactory() {
 		return XtendOutlineNodeFactory.class;
+	}
+	
+	@Override
+	public Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
+		return XtendImportingTypesProposalProvider.class;
 	}
 }
