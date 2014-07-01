@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -23,6 +24,8 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
  * TODO - remove Adapter interface, it's not used.
  */
 public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
+	
+	private final static Logger LOG = Logger.getLogger(JdtTypeMirror.class);
 
 	private IType mirroredType;
 	private final ITypeFactory<IType, JvmDeclaredType> typeFactory;
@@ -34,7 +37,12 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 	}
 	
 	public void initialize(TypeResource typeResource) {
-		typeResource.getContents().add(typeFactory.createType(mirroredType));
+		try {
+			typeResource.getContents().add(typeFactory.createType(mirroredType));
+		} catch (RuntimeException e) {
+			LOG.error("Error initializing type "+typeResource.getURI(), e);
+			throw e;
+		}
 		this.typeResource = typeResource;
 	}
 

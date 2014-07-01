@@ -10,6 +10,7 @@ Bug347739ThreeTypeParamsSuper.java.txt
 Bug347739ThreeTypeParamsSuperSuper.java.txt
 Bug427098.java.txt
 Bug428340.java.txt
+ClassContainingEnum.java.txt
 ClassWithVarArgs.java.txt
 Concrete.java.txt
 EmptyAbstractClass.java.txt
