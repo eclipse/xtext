@@ -53,8 +53,6 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
-    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -75,9 +73,6 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void m(final Object o) {");
@@ -212,8 +207,6 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
-    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -243,9 +236,6 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public T test(final Ausdruck a) {");
@@ -347,8 +337,6 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
-    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -364,9 +352,6 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String test(final Ausdruck a) {");

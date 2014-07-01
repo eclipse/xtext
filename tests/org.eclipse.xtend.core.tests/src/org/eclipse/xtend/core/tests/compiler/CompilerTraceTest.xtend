@@ -670,7 +670,6 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 			}
 		'''.tracesTo('''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Synthetic;
 
 			@SuppressWarnings("all")
 			public class Zonk {
@@ -680,7 +679,6 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 			  protected void _method(final Integer i) {
 			  }
 			  
-			  @Synthetic
 			  public void method(final Object i) {
 			    if (i instanceof Integer) {
 			      _method((Integer)i);
@@ -706,7 +704,6 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 			}
 		'''.tracesTo('''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Synthetic;
 
 			@SuppressWarnings("all")
 			public class Zonk {
@@ -716,7 +713,6 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 			  protected void _method(final Integer i) {
 			  }
 			  
-			  @Synthetic
 			  public void #method#(final Object i) {
 			    if (i instanceof Integer) {
 			      _method((Integer)i);
@@ -742,7 +738,6 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 			}
 		'''.tracesTo('''
 			import java.util.Arrays;
-			import org.eclipse.xtext.xbase.lib.Synthetic;
 
 			@SuppressWarnings("all")
 			public class Zonk {
@@ -752,7 +747,6 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 			  protected void _method(final Integer i) {
 			  }
 			  
-			  @Synthetic
 			  public void method(final Object i) {
 			    if (i instanceof Integer) {
 			      _method((Integer)i);

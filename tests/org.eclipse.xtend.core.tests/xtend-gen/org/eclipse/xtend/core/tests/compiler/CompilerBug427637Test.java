@@ -2831,8 +2831,6 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Synthetic;");
-    _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
@@ -4497,9 +4495,6 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("@Synthetic");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataInit it) {");
