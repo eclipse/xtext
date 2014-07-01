@@ -31,7 +31,7 @@ public class XtendImportingTypesProposalProvider extends ImportingTypesProposalP
       final Predicate<IEObjectDescription> _function = new Predicate<IEObjectDescription>() {
         public boolean apply(final IEObjectDescription it) {
           QualifiedName _name = it.getName();
-          return (!Objects.equal(_name, XtendImportedNamespaceScopeProvider.OLD_PROPERTY_ANNOTATION));
+          return (!Objects.equal(_name, XtendImportedNamespaceScopeProvider.OLD_DATA_ANNOTATION));
         }
       };
       final FilteringScope scope = new FilteringScope(typeScope, _function);

@@ -2858,6 +2858,9 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.append("package foo.bar");
     _builder_1.newLine();
     _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtend.lib.Property");
+    _builder_1.newLine();
+    _builder_1.newLine();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");

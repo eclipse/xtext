@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider
 class XtendImportingTypesProposalProvider extends ImportingTypesProposalProvider {
 	
 	override protected createTextApplier(ContentAssistContext context, IScope typeScope, IQualifiedNameConverter qualifiedNameConverter, IValueConverter<String> valueConverter) {
-		val scope = new FilteringScope(typeScope)[name != XtendImportedNamespaceScopeProvider.OLD_PROPERTY_ANNOTATION]
+		val scope = new FilteringScope(typeScope)[name != XtendImportedNamespaceScopeProvider.OLD_DATA_ANNOTATION]
 		super.createTextApplier(context, scope, qualifiedNameConverter, valueConverter)
 	}
 	

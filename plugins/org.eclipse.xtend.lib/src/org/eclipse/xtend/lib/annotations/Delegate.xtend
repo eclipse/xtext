@@ -51,7 +51,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 	 * @since 2.7
  	*/
  	@Beta
-@GwtCompatible
+	@GwtCompatible
 	static class Util {
 		extension TransformationContext context
 
@@ -87,13 +87,11 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 		def hasValidSignature(MethodDeclaration it) {
 			switch parameters.map[type].toList {
 				case #[],
-				//TODO remove these two cases as soon as everyone has the nightly
 				case #[string],
-				case #[string, object.newArrayTypeReference],
 				case #[string, Class.newTypeReference.newArrayTypeReference, object.newArrayTypeReference]:
 					true
 				default: {
-					addError("Not a valid delegate signature, use () or (String methodName, Class<?>[] argumentTypes, Object[] arguments)")
+					addError("Not a valid delegate signature, use () or (String methodName) or (String methodName, Class<?>[] argumentTypes, Object[] arguments)")
 					false
 				}
 			}
@@ -184,6 +182,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 			delegate.markAsRead
 			val declaration = resolvedMethod.declaration
 			delegate.declaringType.addMethod(declaration.simpleName) [ impl |
+				impl.primarySourceElement = delegate.primarySourceElement
 				val typeParameterMappings = newHashMap
 				resolvedMethod.resolvedTypeParameters.forEach[param|
 					val copy = impl.addTypeParameter(param.declaration.simpleName, param.resolvedUpperBounds)
@@ -220,11 +219,8 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 			switch parameters.map[type].toList {
 				case #[]: 
 					'''this.«simpleName»()'''
-				//TODO remove these two cases as soon as everyone has the nightly
 				case #[string]: 
 					'''this.«simpleName»("«method.simpleName»")'''
-				case #[string, object.newArrayTypeReference]: 
-					'''this.«simpleName»("«method.simpleName»", new Object[]{«method.parameters.join(", ")[simpleName]»})'''
 				case #[string, Class.newTypeReference.newArrayTypeReference, object.newArrayTypeReference]: {
 					'''this.«simpleName»("«method.simpleName»", new Class[]{«method.parameters.join(", ")[type.type.simpleName + ".class"]»}, new Object[]{«method.parameters.join(", ")[simpleName]»})'''
 				}
