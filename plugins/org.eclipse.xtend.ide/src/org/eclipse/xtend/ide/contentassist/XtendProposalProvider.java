@@ -130,8 +130,10 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 					char[][] enclosingTypeNames, String path) {
 				if (super.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
-					if ("org.eclipse.xtend.lib".equals(String.valueOf(packageName)) && "Property".equals(String.valueOf(simpleTypeName))) {
-						return false;
+					if ("org.eclipse.xtend.lib".equals(String.valueOf(packageName))) {
+						if ("Property".equals(String.valueOf(simpleTypeName))||"Data".equals(String.valueOf(simpleTypeName))) {
+							return false;
+						}
 					}
 					if (Flags.isPublic(modifiers)) {
 						return true;

@@ -8,17 +8,17 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import com.google.inject.Inject
-import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+import static org.eclipse.xtext.junit4.internal.LineDelimiters.*
 
 class ToStringCompilerTest extends AbstractXtendCompilerTest {
 	@Inject
 	extension ValidationTestHelper
 	
 	@Test
-	def void testToString() {
+	def void testDefault() {
 		'''
 			import org.eclipse.xtend.lib.annotations.ToString
 			@ToString class Foo {
@@ -30,7 +30,63 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 		'''.compile [
 			val instance = compiledClass.newInstance
 			
-			assertEquals("Foo{a=1}", instance.toString)
+			assertEquals(toUnix('''
+				Foo [
+				  a = 1
+				]'''), instance.toString)
+		]
+	}
+	
+	@Test
+	def void testSingleLine() {
+		'''
+			import org.eclipse.xtend.lib.annotations.ToString
+			@ToString(singleLine=true) class Foo {
+				static String ignoreMe
+				transient String ignoreMe2
+				def create {} ignoreMe3() {}
+				int a = 1
+			}
+		'''.compile [
+			val instance = compiledClass.newInstance
+			
+			assertEquals(toUnix('''Foo [a = 1]'''), instance.toString)
+		]
+	}
+	
+	@Test
+	def void testHideFieldNames() {
+		'''
+			import org.eclipse.xtend.lib.annotations.ToString
+			@ToString(singleLine=true, hideFieldNames = true) class Foo {
+				static String ignoreMe
+				transient String ignoreMe2
+				def create {} ignoreMe3() {}
+				int a = 1
+			}
+		'''.compile [
+			val instance = compiledClass.newInstance
+			
+			assertEquals(toUnix('''Foo [1]'''), instance.toString)
+		]
+	}
+	
+	@Test
+	def void testSkipNulls() {
+		'''
+			import org.eclipse.xtend.lib.annotations.ToString
+			@ToString(skipNulls = true) class Foo {
+				static String ignoreMe
+				transient String ignoreMe2
+				def create {} ignoreMe3() {}
+				Integer b = null
+			}
+		'''.compile [
+			val instance = compiledClass.newInstance
+			
+			assertEquals(toUnix('''
+				Foo [
+				]'''), instance.toString)
 		]
 	}
 	
@@ -66,6 +122,21 @@ class ToStringCompilerTest extends AbstractXtendCompilerTest {
 		text.compile [
 			val instance = compiledClass.newInstance
 			assertEquals("foo", instance.toString)
+		]
+	}
+	
+	@Test
+	def void testIntegrationWithData() {
+		'''
+			import org.eclipse.xtend.lib.annotations.ToString
+			import org.eclipse.xtend.lib.annotations.Data
+			@ToString(hideFieldNames=true) @Data class Foo {
+				String b = "Bar"
+			}
+		'''.compile [
+			val instance = compiledClass.newInstance
+			
+			assertEquals('Foo [\n'+'  "Bar"\n' +']', instance.toString)
 		]
 	}
 }

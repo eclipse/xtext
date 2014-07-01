@@ -15,7 +15,7 @@ import org.antlr.runtime.CommonToken
 import org.antlr.runtime.Token
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
-import org.eclipse.xtend.core.tests.compiler.DataCompilerTest
+import org.eclipse.xtend.core.tests.compiler.OldDataCompilerTest
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.resource.XtextResource
@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.junit.typesystem.Oven
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-abstract class AbstractDataCompilerSmokeTest extends DataCompilerTest {
+abstract class AbstractDataCompilerSmokeTest extends OldDataCompilerTest {
 	
 	@Inject extension Oven
 	
