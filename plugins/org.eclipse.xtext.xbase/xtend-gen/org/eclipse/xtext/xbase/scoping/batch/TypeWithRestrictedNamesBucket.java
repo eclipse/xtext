@@ -44,11 +44,6 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
     return new ArrayList<JvmType>(_keySet);
   }
   
-  public TypeWithRestrictedNamesBucket(final int id, final List<? extends JvmType> types, final IResolvedFeatures.Provider resolvedFeaturesProvider, final Map<? extends JvmType, ? extends Set<String>> typesToNames) {
-    super(id, types, resolvedFeaturesProvider);
-    this._typesToNames = typesToNames;
-  }
-  
   @Override
   @Pure
   public int hashCode() {

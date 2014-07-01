@@ -8,13 +8,15 @@
 package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Collections;
+import java.util.List;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
@@ -27,22 +29,268 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
+public class NewDataCompilerTest extends AbstractXtendCompilerTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
   
   @Test
-  public void testExistingValueObjectConstructor() {
+  public void testDataClasses_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+    _builder.newLine();
+    _builder.append("@Data class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String name");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("boolean myFlag");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("java.lang.Iterable<? extends Foo> references");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend.lib.annotations.Data;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pure;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@Data");
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final String name;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final boolean myFlag;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final Iterable<? extends Foo> references;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Foo(final String name, final boolean myFlag, final Iterable<? extends Foo> references) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("super();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.name = name;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.myFlag = myFlag;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.references = references;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int hashCode() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final int prime = 31;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("int result = 1;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("result = prime * result + ((this.name== null) ? 0 : this.name.hashCode());");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("result = prime * result + (this.myFlag ? 1231 : 1237);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("result = prime * result + ((this.references== null) ? 0 : this.references.hashCode());");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return result;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public boolean equals(final Object obj) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (this == obj)");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return true;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (obj == null)");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return false;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (getClass() != obj.getClass())");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return false;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Foo other = (Foo) obj;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (this.name == null) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("if (other.name != null)");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("return false;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else if (!this.name.equals(other.name))");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return false;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (other.myFlag != this.myFlag)");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return false;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (this.references == null) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("if (other.references != null)");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("return false;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else if (!this.references.equals(other.references))");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return false;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return true;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String toString() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("ToStringBuilder b = new ToStringBuilder(this);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("b.add(\"name\", this.name);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("b.add(\"myFlag\", this.myFlag);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("b.add(\"references\", this.references);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return b.toString();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String getName() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this.name;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public boolean isMyFlag() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this.myFlag;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Pure");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Iterable<? extends Foo> getReferences() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this.references;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testExistingDataConstructor() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
       _builder.newLine();
-      _builder.append("@ValueObject class Foo {");
+      _builder.append("@Data class Foo {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("int foo");
@@ -80,88 +328,12 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  public void testInitializedField() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
-      _builder.newLine();
-      _builder.append("@ValueObject class Foo {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("int foo = 2");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            Constructor<?> _declaredConstructor = _compiledClass.getDeclaredConstructor();
-            final Object instance = _declaredConstructor.newInstance();
-            Class<?> _compiledClass_1 = it.getCompiledClass();
-            final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
-            Object _invoke = getFoo.invoke(instance);
-            Assert.assertEquals(Integer.valueOf(2), _invoke);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        }
-      };
-      this.compilationTestHelper.compile(_builder, _function);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
-  public void testIgnoredFields() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
-      _builder.newLine();
-      _builder.append("@ValueObject class Foo {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("transient int foo");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("def create {} ignoreMe() {}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            _compiledClass.getDeclaredConstructor();
-            Class<?> _compiledClass_1 = it.getCompiledClass();
-            Method[] _declaredMethods = _compiledClass_1.getDeclaredMethods();
-            final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
-              public Boolean apply(final Method it) {
-                String _name = it.getName();
-                return Boolean.valueOf(_name.startsWith("get"));
-              }
-            };
-            boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function);
-            Assert.assertFalse(_exists);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        }
-      };
-      this.compilationTestHelper.compile(_builder, _function);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
   public void testExistingGetter() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
       _builder.newLine();
-      _builder.append("@ValueObject class Foo {");
+      _builder.append("@Data class Foo {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("int foo");
@@ -202,9 +374,9 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingToString() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
       _builder.newLine();
-      _builder.append("@ValueObject class Foo {");
+      _builder.append("@Data class Foo {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("int foo");
@@ -245,9 +417,9 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingEquals() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
       _builder.newLine();
-      _builder.append("@ValueObject class Foo {");
+      _builder.append("@Data class Foo {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("int foo");
@@ -288,9 +460,9 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingHashCode() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
       _builder.newLine();
-      _builder.append("@ValueObject class Foo {");
+      _builder.append("@Data class Foo {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("int foo");
@@ -331,23 +503,12 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testExistingMethodsNotMatchingExactly() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
       _builder.newLine();
-      _builder.append("@ValueObject class Foo {");
+      _builder.append("@Data class Foo {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("int foo");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("new(String bar) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("foo = 1");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
@@ -431,14 +592,13 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
     }
   }
   
-  @Ignore
   @Test
   public void testWithCreateExtension() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
       _builder.newLine();
-      _builder.append("@ValueObject class Foo {");
+      _builder.append("@Data class Foo {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("def create {} foo() {");
@@ -472,35 +632,12 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  public void testInheritanceForbidden() {
+  public void testDataClassWithStaticField() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import java.util.ArrayList");
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
       _builder.newLine();
-      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("@ValueObject class Foo extends ArrayList{");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("String foo");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      XtendClass _clazz = this.clazz(_builder.toString());
-      this._validationTestHelper.assertError(_clazz, XtendPackage.Literals.XTEND_CLASS, "user.issue", "inheritance");
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
-  public void testValueObjectWithStaticField() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
-      _builder.newLine();
-      _builder.append("@ValueObject class Foo {");
+      _builder.append("@Data class Foo {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("static int foo = 1");
@@ -555,9 +692,9 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
   public void testBooleanProperties() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtend.lib.annotations.ValueObject");
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
       _builder.newLine();
-      _builder.append("@ValueObject class Foo {");
+      _builder.append("@Data class Foo {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("boolean foo");
@@ -611,6 +748,112 @@ public class ValueObjectCompilerTest extends AbstractXtendCompilerTest {
             }
           };
           ObjectExtensions.<Class<?>>operator_doubleArrow(_compiledClass, _function);
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testParametrizedSuperConstructor() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+      _builder.newLine();
+      _builder.append("@Data class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("int foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("@Data class Bar extends Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("String bar");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          Class<?> _compiledClass = it.getCompiledClass("Bar");
+          final Procedure1<Class<?>> _function = new Procedure1<Class<?>>() {
+            public void apply(final Class<?> it) {
+              Constructor<?>[] _declaredConstructors = it.getDeclaredConstructors();
+              final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
+                public Boolean apply(final Constructor<?> it) {
+                  Class<?>[] _parameterTypes = it.getParameterTypes();
+                  List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+                  return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(Lists.<Class<? extends Object>>newArrayList(int.class, String.class))));
+                }
+              };
+              boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function);
+              Assert.assertTrue(_exists);
+            }
+          };
+          ObjectExtensions.<Class<?>>operator_doubleArrow(_compiledClass, _function);
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSuperClassWithTypeParameters() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+      _builder.newLine();
+      _builder.append("@Data class Foo<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("T foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("@Data class Bar extends Foo<String> {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          String _generatedCode = it.getGeneratedCode("Bar");
+          boolean _contains = _generatedCode.contains("public Bar(final String foo) {");
+          Assert.assertTrue(_contains);
+        }
+      };
+      this.compilationTestHelper.compile(_builder, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testClassAndSuperClassWithTypeParameters() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+      _builder.newLine();
+      _builder.append("@Data class Foo<T> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("T foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("@Data class Bar<X> extends Foo<X> {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          String _generatedCode = it.getGeneratedCode("Bar");
+          boolean _contains = _generatedCode.contains("public Bar(final X foo) {");
+          Assert.assertTrue(_contains);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);

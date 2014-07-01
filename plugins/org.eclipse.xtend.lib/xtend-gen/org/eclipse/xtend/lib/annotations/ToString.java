@@ -15,4 +15,7 @@ import org.eclipse.xtend.lib.macro.Active;
 @Active(ToStringProcessor.class)
 @GwtCompatible
 public @interface ToString {
+  public boolean skipNulls() default false;
+  public boolean singleLine() default false;
+  public boolean hideFieldNames() default false;
 }

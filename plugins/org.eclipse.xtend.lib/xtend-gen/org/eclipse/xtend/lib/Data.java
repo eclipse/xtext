@@ -16,8 +16,10 @@ import org.eclipse.xtend.lib.macro.Active;
  * {@link Object#toString()} implementation is added.
  * 
  * @author Sven Efftinge
+ * @deprecated use {@link org.eclipse.xtend.lib.annotations.Data} instead
  */
 @Target(ElementType.TYPE)
 @Active(DataProcessor.class)
+@Deprecated
 public @interface Data {
 }

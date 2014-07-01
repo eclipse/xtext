@@ -181,18 +181,9 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 		if (getResolvedTypeParameters().contains(typeParameter)) {
 			return true;
 		}
-		return isResolvedTypeParameter(getContextType(), typeParameter);
+		return super.isResolvedTypeParameter(typeParameter);
 	}
 	
-	protected boolean isResolvedTypeParameter(LightweightTypeReference typeReference, JvmTypeParameter typeParameter) {
-		for (LightweightTypeReference typeArgument : typeReference.getTypeArguments()) {
-			if (typeParameter.equals(typeArgument.getType()) || isResolvedTypeParameter(typeArgument, typeParameter)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	protected abstract BottomResolvedOperation getBottom();
 	
 	protected OverrideTester getOverrideTester() {

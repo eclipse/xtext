@@ -349,56 +349,6 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("interface A {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def void m()");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("class B implements A {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("override m() {}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("class C implements A{");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("@Delegate def B delegate(String name, Object... args) {null}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final String text = _builder.toString();
-      XtendFile _file = this.file(text);
-      this._validationTestHelper.assertNoIssues(_file);
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        public void accept(final CompilationTestHelper.Result it) {
-          Class<?> _compiledClass = it.getCompiledClass();
-          Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
-          final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
-            public Boolean apply(final Method it) {
-              String _name = it.getName();
-              return Boolean.valueOf(Objects.equal(_name, "m"));
-            }
-          };
-          boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function);
-          Assert.assertTrue(_exists);
-        }
-      };
-      this.compilationTestHelper.compile(text, _function);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
-  public void testDelegateMethodWithParameters() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("import org.eclipse.xtend.lib.annotations.Delegate");
-      _builder.newLine();
-      _builder.append("interface A {");
-      _builder.newLine();
-      _builder.append("\t");
       _builder.append("def void m(String foo)");
       _builder.newLine();
       _builder.append("}");

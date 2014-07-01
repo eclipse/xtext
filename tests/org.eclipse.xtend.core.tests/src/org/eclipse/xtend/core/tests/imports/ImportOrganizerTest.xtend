@@ -1460,6 +1460,8 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		'''.assertIsOrganizedTo('''
 			package foo.bar
 			
+			import org.eclipse.xtend.lib.Property
+			
 			class Foo {
 			  @Property int prop
 			}

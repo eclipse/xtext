@@ -1,40 +1,33 @@
-package org.eclipse.xtend.lib;
+package org.eclipse.xtend.lib.annotations;
 
+import com.google.common.annotations.Beta;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.AccessorsProcessor;
 import org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructorProcessor;
+import org.eclipse.xtend.lib.annotations.ToStringConfiguration;
 import org.eclipse.xtend.lib.annotations.ToStringProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
-import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
-import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
-import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 /**
  * @since 2.7
  */
-@Deprecated
+@Beta
 @SuppressWarnings("all")
 public class DataProcessor extends AbstractClassProcessor {
   /**
    * @since 2.7
    */
-  @Deprecated
+  @Beta
   public static class Util {
     @Extension
     private TransformationContext context;
@@ -43,33 +36,22 @@ public class DataProcessor extends AbstractClassProcessor {
       this.context = context;
     }
     
-    public Iterable<? extends FieldDeclaration> getDataFields(final ClassDeclaration it) {
-      Iterable<? extends FieldDeclaration> _declaredFields = it.getDeclaredFields();
-      final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
-        public Boolean apply(final FieldDeclaration it) {
-          boolean _and = false;
-          boolean _isStatic = it.isStatic();
-          boolean _not = (!_isStatic);
-          if (!_not) {
-            _and = false;
-          } else {
-            boolean _isThePrimaryGeneratedJavaElement = Util.this.context.isThePrimaryGeneratedJavaElement(it);
-            _and = _isThePrimaryGeneratedJavaElement;
-          }
-          return Boolean.valueOf(_and);
-        }
-      };
-      return IterableExtensions.filter(_declaredFields, _function);
-    }
-    
     public Iterable<? extends MutableFieldDeclaration> getDataFields(final MutableClassDeclaration it) {
       Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
       final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
         public Boolean apply(final MutableFieldDeclaration it) {
           boolean _and = false;
+          boolean _and_1 = false;
           boolean _isStatic = it.isStatic();
           boolean _not = (!_isStatic);
           if (!_not) {
+            _and_1 = false;
+          } else {
+            boolean _isTransient = it.isTransient();
+            boolean _not_1 = (!_isTransient);
+            _and_1 = _not_1;
+          }
+          if (!_and_1) {
             _and = false;
           } else {
             boolean _isThePrimaryGeneratedJavaElement = Util.this.context.isThePrimaryGeneratedJavaElement(it);
@@ -79,34 +61,6 @@ public class DataProcessor extends AbstractClassProcessor {
         }
       };
       return IterableExtensions.filter(_declaredFields, _function);
-    }
-    
-    public void addDataToString(final MutableClassDeclaration cls) {
-      final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
-        public void apply(final MutableMethodDeclaration it) {
-          NamedElement _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
-          Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
-          TypeReference _string = Util.this.context.getString();
-          it.setReturnType(_string);
-          AnnotationReference _newAnnotationReference = Util.this.context.newAnnotationReference(Override.class);
-          it.addAnnotation(_newAnnotationReference);
-          AnnotationReference _newAnnotationReference_1 = Util.this.context.newAnnotationReference(Pure.class);
-          it.addAnnotation(_newAnnotationReference_1);
-          StringConcatenationClient _client = new StringConcatenationClient() {
-            @Override
-            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("String result = new ");
-              _builder.append(ToStringHelper.class, "");
-              _builder.append("().toString(this);");
-              _builder.newLineIfNotEmpty();
-              _builder.append("return result;");
-              _builder.newLine();
-            }
-          };
-          it.setBody(_client);
-        }
-      };
-      cls.addMethod("toString", _function);
     }
   }
   
@@ -160,9 +114,32 @@ public class DataProcessor extends AbstractClassProcessor {
     boolean _hasToString = toStringUtil.hasToString(it);
     boolean _not_4 = (!_hasToString);
     if (_not_4) {
-      util.addDataToString(it);
+      ResolvedConstructor _superConstructor_2 = requiredArgsUtil.getSuperConstructor(it);
+      boolean _tripleEquals = (_superConstructor_2 == null);
+      if (_tripleEquals) {
+        Iterable<? extends MutableFieldDeclaration> _dataFields_3 = util.getDataFields(it);
+        ToStringConfiguration _elvis = null;
+        ToStringConfiguration _toStringConfig = toStringUtil.getToStringConfig(it);
+        if (_toStringConfig != null) {
+          _elvis = _toStringConfig;
+        } else {
+          ToStringConfiguration _toStringConfiguration = new ToStringConfiguration();
+          _elvis = _toStringConfiguration;
+        }
+        toStringUtil.addToString(it, _dataFields_3, _elvis);
+      } else {
+        ToStringConfiguration _elvis_1 = null;
+        ToStringConfiguration _toStringConfig_1 = toStringUtil.getToStringConfig(it);
+        if (_toStringConfig_1 != null) {
+          _elvis_1 = _toStringConfig_1;
+        } else {
+          ToStringConfiguration _toStringConfiguration_1 = new ToStringConfiguration();
+          _elvis_1 = _toStringConfiguration_1;
+        }
+        toStringUtil.addReflectiveToString(it, _elvis_1);
+      }
     }
-    Iterable<? extends MutableFieldDeclaration> _dataFields_3 = util.getDataFields(it);
+    Iterable<? extends MutableFieldDeclaration> _dataFields_4 = util.getDataFields(it);
     final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
       public void apply(final MutableFieldDeclaration it) {
         boolean _and = false;
@@ -174,14 +151,21 @@ public class DataProcessor extends AbstractClassProcessor {
           _and = _canAddGetter;
         }
         if (_and) {
-          getterUtil.addGetter(it, Visibility.PUBLIC);
+          Visibility _elvis = null;
+          AccessorType _getterType = getterUtil.getGetterType(it);
+          Visibility _visibility = null;
+          if (_getterType!=null) {
+            _visibility=getterUtil.toVisibility(_getterType);
+          }
+          if (_visibility != null) {
+            _elvis = _visibility;
+          } else {
+            _elvis = Visibility.PUBLIC;
+          }
+          getterUtil.addGetter(it, _elvis);
         }
-        String _simpleName = it.getSimpleName();
-        String _firstLower = StringExtensions.toFirstLower(_simpleName);
-        String _plus = ("_" + _firstLower);
-        it.setSimpleName(_plus);
       }
     };
-    IterableExtensions.forEach(_dataFields_3, _function_1);
+    IterableExtensions.forEach(_dataFields_4, _function_1);
   }
 }
