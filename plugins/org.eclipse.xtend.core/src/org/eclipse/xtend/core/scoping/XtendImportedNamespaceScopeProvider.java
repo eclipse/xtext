@@ -59,7 +59,8 @@ import com.google.inject.Provider;
  */
 public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespaceScopeProvider {
 
-	public static final QualifiedName XTEND_LIB = QualifiedName.create("org","eclipse","xtend","lib");
+	public static final QualifiedName OLD_DATA_ANNOTATION = QualifiedName.create("org","eclipse","xtend","lib", "Data");
+	public static final QualifiedName OLD_PROPERTY_ANNOTATION = QualifiedName.create("org","eclipse","xtend","lib", "Property");
 	public static final QualifiedName XBASE_LIB = XImportSectionNamespaceScopeProvider.XBASE_LIB;
 	public static final QualifiedName JAVA_LANG = XImportSectionNamespaceScopeProvider.JAVA_LANG;
 	
@@ -306,7 +307,8 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				{
 					AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(JAVA_LANG, true, false),
 					AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(XBASE_LIB, true, false),
-					AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(XTEND_LIB, true, false),
+					AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(OLD_DATA_ANNOTATION, false, false),
+					AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(OLD_PROPERTY_ANNOTATION, false, false),
 				}
 			};
 		} else {
@@ -314,7 +316,8 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				{
 					AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(JAVA_LANG, true, false),
 					AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(XBASE_LIB, true, false),
-					AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(XTEND_LIB, true, false),
+					AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(OLD_DATA_ANNOTATION, false, false),
+					AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(OLD_PROPERTY_ANNOTATION, false, false),
 				}
 			};
 		}
