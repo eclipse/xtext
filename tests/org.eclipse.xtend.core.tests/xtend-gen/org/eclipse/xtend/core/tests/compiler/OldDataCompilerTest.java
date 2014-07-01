@@ -29,14 +29,13 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class DataCompilerTest extends AbstractXtendCompilerTest {
+public class OldDataCompilerTest extends AbstractXtendCompilerTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
@@ -307,17 +306,6 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public Foo() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("super();");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.append("@Override");
     _builder_1.newLine();
     _builder_1.append("  ");
@@ -459,17 +447,6 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("private final String _name = \"foo\";");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("public Foo() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("super();");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.newLine();
@@ -806,17 +783,6 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("new(String bar) {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("_foo = 1");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
       _builder.append("def getFoo(String bar) {");
       _builder.newLine();
       _builder.append("\t\t");
@@ -994,17 +960,6 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return _simpleName.toLowerCase();");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("public Node() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("super();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1293,7 +1248,6 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  @Ignore("Switched the check of, because the necessary API needs to be distributed as a nightly first")
   public void testSuperClassWithTypeParameters() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -1322,7 +1276,6 @@ public class DataCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  @Ignore("DeclaredConstructor has correct context type, but still returns Object")
   public void testClassAndSuperClassWithTypeParameters() {
     try {
       StringConcatenation _builder = new StringConcatenation();

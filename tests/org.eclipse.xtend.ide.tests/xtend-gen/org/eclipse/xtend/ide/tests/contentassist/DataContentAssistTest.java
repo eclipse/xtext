@@ -15,11 +15,11 @@ import org.junit.Test;
  * @author Stefan Oehme - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class PropertyContentAssistTest extends AbstractXtendContentAssistBugTest {
+public class DataContentAssistTest extends AbstractXtendContentAssistBugTest {
   @Test
   public void testPropertyAnnotation() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
-    ContentAssistProcessorTestBuilder _append = _newBuilder.append("@Property");
-    _append.assertText("org.eclipse.xtend.lib.annotations.Property");
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append("@Data");
+    _append.assertText("org.eclipse.xtend.lib.annotations.Data");
   }
 }

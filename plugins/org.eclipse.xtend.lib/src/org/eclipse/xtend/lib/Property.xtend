@@ -1,43 +1,44 @@
 package org.eclipse.xtend.lib
 
-import com.google.common.annotations.Beta
 import com.google.common.annotations.GwtCompatible
 import java.lang.annotation.ElementType
 import java.lang.annotation.Target
-import org.eclipse.xtend.lib.annotations.GetterProcessor
-import org.eclipse.xtend.lib.annotations.SetterProcessor
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.AccessorsProcessor
 import org.eclipse.xtend.lib.macro.AbstractFieldProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+import org.eclipse.xtend.lib.macro.declaration.Visibility
 
 /**
  * Creates a getter and setter method for the annotated field.
  * Prepends the field name with an underscore (e.g. <code>_myField</code>)
  * 
  * @author Sven Efftinge
+ * @deprecated use {@link Accessors} instead
  */
 @GwtCompatible
 @Target(ElementType.FIELD)
 @Active(PropertyProcessor)
+@Deprecated
 annotation Property {
 }
 
 /**
  * @since 2.7
  */
-@Beta
+@Deprecated
 @GwtCompatible
 class PropertyProcessor extends AbstractFieldProcessor {
 	
 	override doTransform(MutableFieldDeclaration it, extension TransformationContext context) {
-		extension val getterUtil = new GetterProcessor.Util(context)
-		extension val setterUtil = new SetterProcessor.Util(context)
-		if (!hasGetter /*&& canAddGetter*/) {
-			addGetter
+		extension val util = new AccessorsProcessor.Util(context)
+		if (!hasGetter && canAddGetter) {
+			addGetter(Visibility.PUBLIC)
 		}
-		if (!final && !hasSetter && canAddSetter_Old) {
-			addSetter
+		if (!final && !hasSetter && canAddSetter) {
+			addSetter(Visibility.PUBLIC)
 		}
 		simpleName = "_" + simpleName.toFirstLower
 	}

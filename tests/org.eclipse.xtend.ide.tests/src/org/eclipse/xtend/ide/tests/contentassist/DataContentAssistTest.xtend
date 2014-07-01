@@ -13,8 +13,8 @@ import org.junit.Test
 /**
  * @author Stefan Oehme - Initial contribution and API
  */
-class PropertyContentAssistTest extends AbstractXtendContentAssistBugTest {
+class DataContentAssistTest extends AbstractXtendContentAssistBugTest {
 	@Test def void testPropertyAnnotation() throws Exception {
-		newBuilder().append("@Property").assertText("org.eclipse.xtend.lib.annotations.Property");
+		newBuilder().append("@Data").assertText("org.eclipse.xtend.lib.annotations.Data");
 	}
 }

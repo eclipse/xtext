@@ -29,17 +29,20 @@ annotation EqualsHashCode {
 class EqualsHashCodeProcessor extends AbstractClassProcessor {
 
 	override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
+		if (findAnnotation(Data.findTypeGlobally) !== null) {
+			return
+		}
 		extension val util = new Util(context)
-		val extension voUtil = new ValueObjectProcessor.Util(context)
 		if (hasEquals) {
 			val annotation = findAnnotation(EqualsHashCode.findTypeGlobally)
-			annotation. addWarning("equals is already defined, this annotation has no effect")
+			annotation.addWarning("equals is already defined, this annotation has no effect")
 		} else if (hasHashCode) {
 			addWarning("hashCode is already defined, this annotation has no effect")
 		} else {
-			val hasSuperEquals= hasSuperEquals
-			addEquals(valueObjectFields, hasSuperEquals)
-			addHashCode(valueObjectFields, hasSuperEquals)
+			val hasSuperEquals = hasSuperEquals
+			val fields = declaredFields.filter[!static && !transient && thePrimaryGeneratedJavaElement]
+			addEquals(fields, hasSuperEquals)
+			addHashCode(fields, hasSuperEquals)
 		}
 	}
 
@@ -65,19 +68,20 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 				simpleName == "equals" && parameters.size == 1 && parameters.head.type.name == "java.lang.Object"
 			]
 		}
-		
+
 		def boolean hasSuperEquals(ClassDeclaration cls) {
-			if (cls.newTypeReference == object) 
+			if (cls.newTypeReference == object)
 				false
 			else if (cls.hasEquals)
 				true
 			else
-				(cls.extendedClass.type as ClassDeclaration).hasSuperEquals 
+				(cls.extendedClass.type as ClassDeclaration).hasSuperEquals
 		}
 
 		def void addEquals(MutableClassDeclaration cls, Iterable<? extends FieldDeclaration> includedFields,
 			boolean includeSuper) {
 			cls.addMethod("equals") [
+				primarySourceElement = cls.primarySourceElement
 				returnType = primitiveBoolean
 				addAnnotation(newAnnotationReference(Override))
 				addAnnotation(newAnnotationReference(Pure))
@@ -101,7 +105,7 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 				'''
 			]
 		}
-		
+
 		private def newWildCardSelfTypeReference(ClassDeclaration cls) {
 			cls.newTypeReference(cls.typeParameters.map[object.newWildcardTypeReference])
 		}
@@ -138,6 +142,7 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 		def void addHashCode(MutableClassDeclaration cls, Iterable<? extends FieldDeclaration> includedFields,
 			boolean includeSuper) {
 			cls.addMethod("hashCode") [
+				primarySourceElement = cls.primarySourceElement
 				returnType = primitiveInt
 				addAnnotation(newAnnotationReference(Override))
 				addAnnotation(newAnnotationReference(Pure))
