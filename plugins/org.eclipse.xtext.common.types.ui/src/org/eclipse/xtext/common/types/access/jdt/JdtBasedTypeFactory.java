@@ -194,7 +194,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 					String name,
 					SegmentSequence signaturex) {
 				if (method.isConstructor() && method.getDeclaringClass().isEnum()) {
-					CharSequence withoutSyntheticArgs = signaturex.subSequence("Ljava/lang/String;I".length(), signaturex.length());
+					String syntheticParams = "Ljava/lang/String;I";
+					String withoutSyntheticArgs = signaturex.toString();
+					// sometimes (don't really know when... JDT bug?) an enum constructor comes without synthetic arguments
+					// this solution might wrongly strip off a (String,int) signature, but I don't see how this can be done differently here.
+					if (withoutSyntheticArgs.startsWith(syntheticParams)) {
+						withoutSyntheticArgs = withoutSyntheticArgs.substring(syntheticParams.length());
+					}
 					return new EnumConstructorParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, withoutSyntheticArgs);
 				}
 				return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
