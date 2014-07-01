@@ -79,6 +79,7 @@ import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuper;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
 import org.eclipse.xtext.common.types.testSetups.Bug427098;
 import org.eclipse.xtext.common.types.testSetups.Bug428340;
+import org.eclipse.xtext.common.types.testSetups.ClassContainingEnum;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
 import org.eclipse.xtext.common.types.testSetups.Fields;
@@ -2085,6 +2086,19 @@ public abstract class AbstractTypeProviderTest extends Assert {
 			}
 		}
 		assertTrue(constructorFound);
+	}
+	
+	@Test public void testNestedEnum_05() throws Exception {
+		String typeName = ClassContainingEnum.InnerEnumWithInt.class.getName();
+		JvmType type = getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		assertTrue(type instanceof JvmEnumerationType);
+		assertTrue(((JvmEnumerationType) type).isFinal());
+		assertTrue(((JvmEnumerationType) type).isStatic());
+		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 	
 	@Test public void testAnnotations_01() throws Exception {
