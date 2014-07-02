@@ -202,15 +202,38 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       };
       boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
       Assert.assertTrue(("" + importedNames), _exists);
-      final Function1<QualifiedName, Boolean> _function_1 = new Function1<QualifiedName, Boolean>() {
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNestedTypesIncludedOnUnresolvedFeatures() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val foo = types.StaticOuterClass.Unknown.StaticInnerClass.CONSTANT");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile file = this.file(_builder.toString());
+      Resource _eResource = file.eResource();
+      final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
+      final Iterable<QualifiedName> importedNames = description.getImportedNames();
+      final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
         public Boolean apply(final QualifiedName it) {
           String _string = it.toString();
-          String _lowerCase = "types.StaticOuterClass.StaticMiddleClass.StaticInnerClass".toLowerCase();
+          String _lowerCase = "types.StaticOuterClass$Unknown".toLowerCase();
           return Boolean.valueOf(Objects.equal(_string, _lowerCase));
         }
       };
-      boolean _exists_1 = IterableExtensions.<QualifiedName>exists(importedNames, _function_1);
-      Assert.assertTrue(("" + importedNames), _exists_1);
+      boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
+      Assert.assertTrue(("" + importedNames), _exists);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

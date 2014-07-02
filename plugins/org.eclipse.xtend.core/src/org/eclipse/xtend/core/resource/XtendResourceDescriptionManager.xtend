@@ -17,6 +17,8 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.xbase.XAbstractFeatureCall
+import org.eclipse.xtext.xbase.XMemberFeatureCall
 
 class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager {
 	
@@ -53,32 +55,58 @@ class XtendResourceDescription extends DefaultResourceDescription {
 
 	def override Iterable<QualifiedName> getImportedNames() {
 		val result = newHashSet()
-		for (eobject : resource.contents) {
-			val types = typeResolver.resolveTypes(eobject)
-			val actualTypes = EcoreUtil.getAllContents(eobject, true).filter(XExpression).map[types.getActualType(it)].toIterable
-			for (typeRef : actualTypes) {
+		val astRoot = resource.contents.head
+		if (astRoot != null) {
+			val types = typeResolver.resolveTypes(astRoot)
+			for (expression : EcoreUtil.getAllContents(astRoot, true).toIterable.filter(XExpression)) {
+				switch expression {
+					// an unresolved member feature call, where the receiver is a type literal could potentially become
+					// a reference to a nested type
+					XMemberFeatureCall case expression.feature.eIsProxy && !expression.explicitOperationCall: {
+						val receiver = expression.actualReceiver
+						switch receiver {
+							XAbstractFeatureCall case receiver.typeLiteral : {
+								val type = receiver.feature
+								result += nameConverter.toQualifiedName(type.identifier+"$"+expression.concreteSyntaxFeatureName).toLowerCase
+							}
+						}
+					}
+					// register resolved type literals
+					XAbstractFeatureCall case expression.typeLiteral: {
+						val type = expression.feature
+						if (type instanceof JvmDeclaredType) {
+							registerAllTypes(type) [
+								result += nameConverter.toQualifiedName(it).toLowerCase
+							]
+						}
+					} 
+				}
+				val typeRef = types.getActualType(expression)
 				if (typeRef != null) {
 					registerAllTypes(typeRef.type) [
 						result += nameConverter.toQualifiedName(it).toLowerCase
 					]
 				}
 			}
-			val typesOfIdentifiables = EcoreUtil.getAllContents(eobject, true).filter(JvmIdentifiableElement).map[
-				if (!(it instanceof JvmType) || it instanceof JvmDeclaredType)
-					types.getActualType(it)
-			].toIterable
-			for (typeRef : typesOfIdentifiables) {
-				if (typeRef != null) {
-					registerAllTypes(typeRef.type) [
-						result += nameConverter.toQualifiedName(it).toLowerCase
-					]
+			for (eobject : resource.contents.drop(1)) {
+				val typesOfIdentifiables = EcoreUtil.getAllContents(eobject, true).filter(JvmIdentifiableElement).map[
+					if (!(it instanceof JvmType) || it instanceof JvmDeclaredType)
+						types.getActualType(it)
+				].toIterable
+				for (typeRef : typesOfIdentifiables) {
+					if (typeRef != null) {
+						registerAllTypes(typeRef.type) [
+							result += nameConverter.toQualifiedName(it).toLowerCase
+						]
+					}
 				}
 			}
 		}
 		result.addAll(super.getImportedNames())
-		return result.filter [
+		val finalResult = result.filter [
 			!primitivesFilter.contains(it.lastSegment)
-		].toSet
+		].toSet 
+		return finalResult
 	}
 	
 	def void registerAllTypes(JvmType type, (String)=>boolean acceptor) {
