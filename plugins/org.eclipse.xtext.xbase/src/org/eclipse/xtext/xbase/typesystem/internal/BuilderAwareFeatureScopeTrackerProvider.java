@@ -32,10 +32,7 @@ public class BuilderAwareFeatureScopeTrackerProvider implements IFeatureScopeTra
 				if (isBuilderScope(loadOptions)) {
 					return IFeatureScopeTracker.NULL;
 				}
-				if (isLiveScope(loadOptions)) {
-					return IFeatureScopeTracker.NULL;
-				}
-				if (!isPrimaryResource(resourceSet, resource)) {
+				if (!isLiveScope(loadOptions) && !isPrimaryResource(resourceSet, resource)) {
 					return IFeatureScopeTracker.NULL;
 				}
 			}
