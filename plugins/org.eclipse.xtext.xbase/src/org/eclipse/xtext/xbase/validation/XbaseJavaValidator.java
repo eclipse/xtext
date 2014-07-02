@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -87,6 +88,8 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
+import org.eclipse.xtext.xbase.compiler.CompilationTemplateAdapter;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.imports.ImportedTypesCollector;
@@ -96,8 +99,10 @@ import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
 import org.eclipse.xtext.xbase.interpreter.SwitchConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -191,6 +196,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private Primitives primitives;
+	
+	@Inject
+	private JvmTypeExtensions jvmTypeExtensions; 
 	
 	protected CommonTypeComputationServices getServices() {
 		return services;
@@ -532,39 +540,73 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			}
 
 		}));
-		for (JvmConstructor constr : type.getDeclaredConstructors()) {
-			final Set<JvmField> localInitializedFields = Sets.newLinkedHashSet(initializedFields);
-			XExpression expression = logicalContainerProvider.getAssociatedExpression(constr);
-			if (expression != null) {
-				checkInitializationRec(expression, finalFields, localInitializedFields, Sets.newLinkedHashSet(localInitializedFields), Sets.newHashSet(constr));
-			}
-			for (JvmField field : finalFields) {
-				if (!localInitializedFields.contains(field) && !readAndWriteTracking.isInitialized(field)) {
-					reportUninitializedField(field);
-				}
-			}
-		}
-		if (Iterables.isEmpty(type.getDeclaredConstructors())) {
+		Iterable<JvmConstructor> declaredConstructors = type.getDeclaredConstructors();
+		if (Iterables.size(declaredConstructors) == 1 && jvmTypeExtensions.isSingleSyntheticDefaultConstructor(declaredConstructors.iterator().next())) {
 			finalFields.removeAll(initializedFields);
 			for (JvmField jvmField : finalFields) {
-				if (!readAndWriteTracking.isInitialized(jvmField)) {
-					reportUninitializedField(jvmField);
+				reportUninitializedField(jvmField);
+			}
+		} else {
+			for (JvmConstructor constr : declaredConstructors) {
+				if (hasConstructorCallWithThis(constr)) {
+					continue;
+				}
+				final Set<JvmField> localInitializedFields = Sets.newLinkedHashSet(initializedFields);
+				XExpression expression = logicalContainerProvider.getAssociatedExpression(constr);
+				if (expression != null) {
+					checkInitializationRec(expression, finalFields, localInitializedFields, Sets.newLinkedHashSet(localInitializedFields), Sets.newHashSet(constr));
+				}
+				for (JvmField field : finalFields) {
+					if (!localInitializedFields.contains(field) && !readAndWriteTracking.isInitialized(field, constr)) {
+						reportUninitializedField(field, constr);
+					}
 				}
 			}
 		}
 	}
-	
+
+	protected boolean hasConstructorCallWithThis(JvmConstructor constr) {
+		XExpression associatedExpression = logicalContainerProvider.getAssociatedExpression(constr);
+		if (associatedExpression == null) {
+			return false;
+		}
+		TreeIterator<EObject> contents = associatedExpression.eAllContents();
+		while (contents.hasNext()) {
+			EObject next = contents.next();
+			if (next instanceof XFeatureCall) {
+				XFeatureCall featureCall = (XFeatureCall) next;
+				if (featureCall.getFeature() instanceof JvmConstructor && featureCall.getConcreteSyntaxFeatureName().equals(IFeatureNames.THIS.toString())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	protected boolean isInitialized(JvmField input) {
-		return logicalContainerProvider.getAssociatedExpression(input) != null;
+		if (logicalContainerProvider.getAssociatedExpression(input) != null) {
+			return true;
+		}
+		for (Adapter adapter : input.eAdapters()) {
+			if (adapter instanceof CompilationStrategyAdapter) {
+				return true;
+			}
+			if (adapter instanceof CompilationTemplateAdapter) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	protected void reportUninitializedField(@SuppressWarnings("unused") JvmField field) {
+	}
+	
+	protected void reportUninitializedField(@SuppressWarnings("unused") JvmField field, @SuppressWarnings("unused") JvmConstructor constructor) {
 	}
 
 	protected void reportFieldAlreadyInitialized(XAssignment assignment, JvmField field) {
 		error("The final field "+field.getSimpleName()+" may already have been assigned", assignment, null, FIELD_ALREADY_INITIALIZED );
 	}
-	
 	
 	protected void checkInitializationRec(EObject expr, Set<JvmField> fields, Set<JvmField> initializedForSure, Set<JvmField> initializedMaybe, Set<JvmConstructor> visited) {
 		if (expr instanceof XAssignment) {

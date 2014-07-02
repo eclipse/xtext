@@ -980,8 +980,21 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 		compilationUnit.readAndWriteTracking.markReadAccess(delegate)
 	}
 	
+	// TODO: remove this method
 	override markAsInitialized() {
-		compilationUnit.readAndWriteTracking.markInitialized(delegate)
+	}
+	
+	override markAsInitializedBy(ConstructorDeclaration constructorDeclaration) {
+		val constructor = switch constructorDeclaration {
+			JvmConstructorDeclarationImpl: constructorDeclaration.delegate
+			XtendConstructorDeclarationImpl: {
+				val jvmElement = compilationUnit.jvmAssociations.getPrimaryJvmElement(constructorDeclaration.delegate)
+				if (jvmElement instanceof JvmConstructor) {
+					jvmElement
+				}
+			}
+		}
+		compilationUnit.readAndWriteTracking.markInitialized(delegate, constructor)
 	}
 	
 	override MutableTypeDeclaration getDeclaringType() {

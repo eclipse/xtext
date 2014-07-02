@@ -77,7 +77,7 @@ public class ValueObjectProcessor extends AbstractClassProcessor {
               String _simpleName = it.getSimpleName();
               TypeReference _type = it.getType();
               constructor.addParameter(_simpleName, _type);
-              it.markAsInitialized();
+              it.markAsInitializedBy(constructor);
             }
           };
           IterableExtensions.forEach(_valueObjectConstructorFields, _function);
