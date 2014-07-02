@@ -94,7 +94,7 @@ class DataProcessor extends AbstractClassProcessor {
 				]
 				cls.dataConstructorFields.forEach [
 					val param = constructor.addParameter(simpleName, type)
-					markAsInitialized
+					markAsInitializedBy(constructor)
 					fieldToParameter.put(it, param)
 				]
 				constructor.body = '''
