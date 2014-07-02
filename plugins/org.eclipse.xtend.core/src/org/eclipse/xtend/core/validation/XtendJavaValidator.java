@@ -1643,8 +1643,21 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	protected void reportUninitializedField(JvmField field) {
 		EObject element = associations.getPrimarySourceElement(field);
 		if (element instanceof XtendField) {
-			XtendField xtendField = (XtendField) element;
-			error("The blank final field "+xtendField.getName()+" may not have been initialized.", xtendField, XTEND_FIELD__NAME, FIELD_NOT_INITIALIZED);
+			error("The blank final field " + field.getSimpleName() + " may not have been initialized.", element, XTEND_FIELD__NAME, FIELD_NOT_INITIALIZED);
+		} else {
+			error("The blank final derived field " + field.getSimpleName() + " may not have been initialized.", element, null, FIELD_NOT_INITIALIZED);
+		}
+	}
+	
+	@Override
+	protected void reportUninitializedField(JvmField field, JvmConstructor constructor) {
+		XtendConstructor xtendConstructor = associations.getXtendConstructor(constructor);
+		if (xtendConstructor != null) {
+			if (associations.getXtendField(field) != null) {
+				error("The blank final field " + field.getSimpleName() + " may not have been initialized.", xtendConstructor, null, FIELD_NOT_INITIALIZED);
+			} else {
+				error("The blank final derived field " + field.getSimpleName() + " may not have been initialized.", xtendConstructor, null, FIELD_NOT_INITIALIZED);
+			}
 		}
 	}
 	
