@@ -243,13 +243,13 @@
     <choices value="luna" label="Luna - 4.4"/>
   </setupTasks>
   <branches name="master">
-    <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.5 stream API" version="2.6.0" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.6.0/R201405210727/tmf-xtext-SDK-2.6.0.zip&amp;r=1"/>
+    <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.6 stream API" version="2.6" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.6.0/R201405210727/tmf-xtext-SDK-2.6.0.zip&amp;r=1"/>
   </branches>
   <branches name="maintenance">
-    <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.4 stream API" version="2.4.3" zipLocation="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.4.3/R201309030823/tmf-xtext-SDK-2.4.3.zip&amp;r=1"/>
-    <setupTasks xsi:type="setup:ContextVariableTask" name="xtext.git.branch" value="maintenance"/>
-    <setupTasks xsi:type="setup:ContextVariableTask" name="emf.git.branch" value="R2_9_maintenance" label=""/>
+    <setupTasks xsi:type="setup:ApiBaselineTask" documentation="Xtext 2.5 stream API" version="2.5" zipLocation="http://download.eclipse.org/modeling/tmf/xtext/downloads/drops/2.5.3/R201402240820/tmf-xtext-SDK-2.5.3.zip"/>
+    <setupTasks xsi:type="setup:ContextVariableTask" name="xtext.git.branch" value="v2.6.x_Maintenance"/>
+    <setupTasks xsi:type="setup:ContextVariableTask" name="emf.git.branch" value="R2_10_maintenance" label=""/>
     <setupTasks xsi:type="setup:ContextVariableTask" name="xtext.nightly.composite" value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
-    <setupTasks xsi:type="setup:ContextVariableTask" name="emf.update.site" value="http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/"/>
+    <setupTasks xsi:type="setup:ContextVariableTask" name="emf.update.site" value="http://download.eclipse.org/modeling/emf/emf/updates/2.10/"/>
   </branches>
 </setup:Project>
