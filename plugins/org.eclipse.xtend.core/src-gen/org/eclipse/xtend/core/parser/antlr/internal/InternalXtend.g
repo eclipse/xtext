@@ -21,10 +21,11 @@ tokens {
   KW_Interface = 'interface' ;
   KW_Enum = 'enum' ;
   KW_Annotation = 'annotation' ;
-  KW_EqualsSign = '=' ;
-  KW_Extension = 'extension' ;
   KW_LeftParenthesis = '(' ;
   KW_RightParenthesis = ')' ;
+  KW_EqualsSignGreaterThanSign = '=>' ;
+  KW_EqualsSign = '=' ;
+  KW_Extension = 'extension' ;
   KW_Throws = 'throws' ;
   KW_New = 'new' ;
   KW_Public = 'public' ;
@@ -78,7 +79,6 @@ tokens {
   KW_HyphenMinusGreaterThanSign = '->' ;
   KW_FullStopFullStopLessThanSign = '..<' ;
   KW_FullStopFullStop = '..' ;
-  KW_EqualsSignGreaterThanSign = '=>' ;
   KW_LessThanSignGreaterThanSign = '<>' ;
   KW_QuestionMarkColon = '?:' ;
   KW_PlusSign = '+' ;
@@ -414,9 +414,9 @@ ruleType returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTypeAccess().getImplementsJvmParameterizedTypeReferenceParserRuleCall_2_0_6_1_0()); 
+	        newCompositeNode(grammarAccess.getTypeAccess().getImplementsJvmSuperTypeReferenceParserRuleCall_2_0_6_1_0()); 
 	    }
-		lv_implements_14_0=ruleJvmParameterizedTypeReference		{
+		lv_implements_14_0=ruleJvmSuperTypeReference		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTypeRule());
 	        }
@@ -424,7 +424,7 @@ ruleType returns [EObject current=null]
        			$current, 
        			"implements",
         		lv_implements_14_0, 
-        		"JvmParameterizedTypeReference");
+        		"JvmSuperTypeReference");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -436,9 +436,9 @@ ruleType returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTypeAccess().getImplementsJvmParameterizedTypeReferenceParserRuleCall_2_0_6_2_1_0()); 
+	        newCompositeNode(grammarAccess.getTypeAccess().getImplementsJvmSuperTypeReferenceParserRuleCall_2_0_6_2_1_0()); 
 	    }
-		lv_implements_16_0=ruleJvmParameterizedTypeReference		{
+		lv_implements_16_0=ruleJvmSuperTypeReference		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTypeRule());
 	        }
@@ -446,7 +446,7 @@ ruleType returns [EObject current=null]
        			$current, 
        			"implements",
         		lv_implements_16_0, 
-        		"JvmParameterizedTypeReference");
+        		"JvmSuperTypeReference");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -579,9 +579,9 @@ ruleType returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTypeAccess().getExtendsJvmParameterizedTypeReferenceParserRuleCall_2_1_5_1_0()); 
+	        newCompositeNode(grammarAccess.getTypeAccess().getExtendsJvmSuperTypeReferenceParserRuleCall_2_1_5_1_0()); 
 	    }
-		lv_extends_30_0=ruleJvmParameterizedTypeReference		{
+		lv_extends_30_0=ruleJvmSuperTypeReference		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTypeRule());
 	        }
@@ -589,7 +589,7 @@ ruleType returns [EObject current=null]
        			$current, 
        			"extends",
         		lv_extends_30_0, 
-        		"JvmParameterizedTypeReference");
+        		"JvmSuperTypeReference");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -601,9 +601,9 @@ ruleType returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTypeAccess().getExtendsJvmParameterizedTypeReferenceParserRuleCall_2_1_5_2_1_0()); 
+	        newCompositeNode(grammarAccess.getTypeAccess().getExtendsJvmSuperTypeReferenceParserRuleCall_2_1_5_2_1_0()); 
 	    }
-		lv_extends_32_0=ruleJvmParameterizedTypeReference		{
+		lv_extends_32_0=ruleJvmSuperTypeReference		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTypeRule());
 	        }
@@ -611,7 +611,7 @@ ruleType returns [EObject current=null]
        			$current, 
        			"extends",
         		lv_extends_32_0, 
-        		"JvmParameterizedTypeReference");
+        		"JvmSuperTypeReference");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -815,6 +815,148 @@ ruleType returns [EObject current=null]
     	newLeafNode(otherlv_52, grammarAccess.getTypeAccess().getRightCurlyBracketKeyword_2_3_6());
     }
 )))
+;
+
+
+
+
+
+// Entry rule entryRuleJvmSuperTypeReference
+entryRuleJvmSuperTypeReference returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getJvmSuperTypeReferenceRule()); }
+	 iv_ruleJvmSuperTypeReference=ruleJvmSuperTypeReference 
+	 { $current=$iv_ruleJvmSuperTypeReference.current; } 
+	 EOF 
+;
+
+// Rule JvmSuperTypeReference
+ruleJvmSuperTypeReference returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getJvmSuperTypeReferenceAccess().getJvmParameterizedTypeReferenceParserRuleCall_0()); 
+    }
+    this_JvmParameterizedTypeReference_0=ruleJvmParameterizedTypeReference
+    { 
+        $current = $this_JvmParameterizedTypeReference_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getJvmSuperTypeReferenceAccess().getXFunctionSuperTypeRefParserRuleCall_1()); 
+    }
+    this_XFunctionSuperTypeRef_1=ruleXFunctionSuperTypeRef
+    { 
+        $current = $this_XFunctionSuperTypeRef_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleXFunctionSuperTypeRef
+entryRuleXFunctionSuperTypeRef returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getXFunctionSuperTypeRefRule()); }
+	 iv_ruleXFunctionSuperTypeRef=ruleXFunctionSuperTypeRef 
+	 { $current=$iv_ruleXFunctionSuperTypeRef.current; } 
+	 EOF 
+;
+
+// Rule XFunctionSuperTypeRef
+ruleXFunctionSuperTypeRef returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(((
+(
+		lv_instanceContext_0_0=	'(' 
+    {
+        newLeafNode(lv_instanceContext_0_0, grammarAccess.getXFunctionSuperTypeRefAccess().getInstanceContextLeftParenthesisKeyword_0_0_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getXFunctionSuperTypeRefRule());
+	        }
+       		setWithLastConsumed($current, "instanceContext", true, "(");
+	    }
+
+)
+)((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getXFunctionSuperTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_0_0()); 
+	    }
+		lv_paramTypes_1_0=ruleJvmTypeReference		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getXFunctionSuperTypeRefRule());
+	        }
+       		add(
+       			$current, 
+       			"paramTypes",
+        		lv_paramTypes_1_0, 
+        		"JvmTypeReference");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_2=',' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getXFunctionSuperTypeRefAccess().getCommaKeyword_0_1_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getXFunctionSuperTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_1_1_0()); 
+	    }
+		lv_paramTypes_3_0=ruleJvmTypeReference		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getXFunctionSuperTypeRefRule());
+	        }
+       		add(
+       			$current, 
+       			"paramTypes",
+        		lv_paramTypes_3_0, 
+        		"JvmTypeReference");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)?	otherlv_4=')' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getXFunctionSuperTypeRefAccess().getRightParenthesisKeyword_0_2());
+    }
+)?	otherlv_5='=>' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getXFunctionSuperTypeRefAccess().getEqualsSignGreaterThanSignKeyword_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getXFunctionSuperTypeRefAccess().getReturnTypeJvmTypeReferenceParserRuleCall_2_0()); 
+	    }
+		lv_returnType_6_0=ruleJvmTypeReference		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getXFunctionSuperTypeRefRule());
+	        }
+       		set(
+       			$current, 
+       			"returnType",
+        		lv_returnType_6_0, 
+        		"JvmTypeReference");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
 ;
 
 

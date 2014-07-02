@@ -5245,6 +5245,194 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	} 
 	
+	@Test def void testXFunctionTypeRefAsSuperType_01() {
+		'''
+			class Foo implements ()=>void {
+			
+				override apply() {
+					
+				}
+			
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+			
+			@SuppressWarnings("all")
+			public class Foo implements Procedure0 {
+			  public void apply() {
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testXFunctionTypeRefAsSuperType_02() {
+		'''
+			interface Foo extends ()=>void {
+			
+				override void apply();
+			
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+			
+			@SuppressWarnings("all")
+			public interface Foo extends Procedure0 {
+			  public abstract void apply();
+			}
+		''')
+	} 
+	
+	@Test def void testXFunctionTypeRefAsSuperType_03() {
+		'''
+			class Foo implements (String)=>void {
+			
+				override apply(String value) {
+					
+				}
+			
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+
+			@SuppressWarnings("all")
+			public class Foo implements Procedure1<String> {
+			  public void apply(final String value) {
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testXFunctionTypeRefAsSuperType_04() {
+		'''
+			interface Foo extends (String)=>void {
+			
+				override void apply(String value);
+			
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+
+			@SuppressWarnings("all")
+			public interface Foo extends Procedure1<String> {
+			  public abstract void apply(final String value);
+			}
+		''')
+	} 
+	
+	@Test def void testXFunctionTypeRefAsSuperType_05() {
+		'''
+			class Foo implements ((String)=>void)=>void {
+			
+				override apply((String)=>void procedure) {
+					
+				}
+			
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+
+			@SuppressWarnings("all")
+			public class Foo implements Procedure1<Procedure1<? super String>> {
+			  public void apply(final Procedure1<? super String> procedure) {
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testXFunctionTypeRefAsSuperType_06() {
+		'''
+			interface Foo extends ((String)=>void)=>void {
+			
+				override void apply((String)=>void procedure);
+			
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public interface Foo extends Procedure1<Procedure1<? super String>> {
+			  public abstract void apply(final Procedure1<? super String> procedure);
+			}
+		''')
+	} 
+	
+	@Test def void testXFunctionTypeRefAsSuperType_07() {
+		'''
+			class Foo implements ()=>String {
+			
+				override apply() {
+					
+				}
+			
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			
+			@SuppressWarnings("all")
+			public class Foo implements Function0<String> {
+			  public String apply() {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testXFunctionTypeRefAsSuperType_08() {
+		'''
+			interface Foo extends ()=>String {
+			
+				override String apply();
+			
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+
+			@SuppressWarnings("all")
+			public interface Foo extends Function0<String> {
+			  public abstract String apply();
+			}
+		''')
+	} 
+	
+	@Test def void testXFunctionTypeRefAsSuperType_09() {
+		'''
+			class Foo implements ()=>(String)=>void {
+			
+				override apply() {
+					
+				}
+			
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public class Foo implements Function0<Procedure1<? super String>> {
+			  public Procedure1<? super String> apply() {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testXFunctionTypeRefAsSuperType_10() {
+		'''
+			interface Foo extends ()=>(String)=>void {
+			
+				override (String)=>void apply();
+			
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+
+			@SuppressWarnings("all")
+			public interface Foo extends Function0<Procedure1<? super String>> {
+			  public abstract Procedure1<? super String> apply();
+			}
+		''')
+	}
 	
 }
 

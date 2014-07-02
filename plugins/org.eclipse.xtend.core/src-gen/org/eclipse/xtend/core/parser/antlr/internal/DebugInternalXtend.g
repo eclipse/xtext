@@ -20,8 +20,8 @@ ruleType :
 		)? (
 			'extends' ruleJvmParameterizedTypeReference
 		)? (
-			'implements' ruleJvmParameterizedTypeReference (
-				',' ruleJvmParameterizedTypeReference
+			'implements' ruleJvmSuperTypeReference (
+				',' ruleJvmSuperTypeReference
 			)*
 		)? '{' ruleMember* '}' |
 		ruleCommonModifier* 'interface' ruleValidID (
@@ -29,8 +29,8 @@ ruleType :
 				',' ruleJvmTypeParameter
 			)* '>'
 		)? (
-			'extends' ruleJvmParameterizedTypeReference (
-				',' ruleJvmParameterizedTypeReference
+			'extends' ruleJvmSuperTypeReference (
+				',' ruleJvmSuperTypeReference
 			)*
 		)? '{' ruleMember* '}' |
 		ruleCommonModifier* 'enum' ruleValidID '{' (
@@ -40,6 +40,23 @@ ruleType :
 		)? ';'? '}' |
 		ruleCommonModifier* 'annotation' ruleValidID '{' ruleAnnotationField* '}'
 	)
+;
+
+// Rule JvmSuperTypeReference
+ruleJvmSuperTypeReference :
+	ruleJvmParameterizedTypeReference |
+	ruleXFunctionSuperTypeRef
+;
+
+// Rule XFunctionSuperTypeRef
+ruleXFunctionSuperTypeRef :
+	(
+		'(' (
+			ruleJvmTypeReference (
+				',' ruleJvmTypeReference
+			)*
+		)? ')'
+	)? '=>' ruleJvmTypeReference
 ;
 
 // Rule AnnotationField
