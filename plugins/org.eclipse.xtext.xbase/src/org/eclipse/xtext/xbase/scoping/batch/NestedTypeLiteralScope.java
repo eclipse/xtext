@@ -11,12 +11,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -34,31 +32,15 @@ public class NestedTypeLiteralScope extends AbstractSessionBasedScope {
 
 	private final JvmType outerType;
 	private final LightweightTypeReference receiverType;
-	private final Set<QualifiedName> importedNames;
-	private final QualifiedName outerTypeName;
-	private final QualifiedName outerTypeBinaryName;
 
 	protected NestedTypeLiteralScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall featureCall, LightweightTypeReference receiverType, JvmType outerType) {
 		super(parent, session, featureCall);
 		this.outerType = outerType;
 		this.receiverType = receiverType;
-		if (featureCall != null) {
-			this.importedNames = ImportedNamesAdapter.findOrInstall(featureCall.eResource()).getImportedNames();
-			this.outerTypeName = QualifiedName.create(outerType.getQualifiedName('.').split("\\."));
-			this.outerTypeBinaryName = QualifiedName.create(outerType.getQualifiedName('$').split("\\."));
-		} else {
-			this.importedNames = null;
-			this.outerTypeName = null;
-			this.outerTypeBinaryName = null;
-		}
 	}
 
 	@Override
 	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
-		if (importedNames != null) {
-			importedNames.add(outerTypeName.append(name).toLowerCase());
-			importedNames.add(outerTypeBinaryName.skipLast(1).append(outerTypeBinaryName.getLastSegment()+"$"+name).toLowerCase());
-		}
 		XAbstractFeatureCall featureCall = getFeatureCall();
 		if (featureCall.isExplicitOperationCallOrBuilderSyntax())
 			return Collections.emptyList();
