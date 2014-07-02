@@ -88,7 +88,34 @@ class ImportedNamesTest extends AbstractXtendTestCase {
 		val description = resourceDescriptionManager.getResourceDescription(file.eResource)
 		val importedNames = description.importedNames
 		assertTrue('' + importedNames, importedNames.exists[toString == 'types.StaticOuterClass$StaticMiddleClass$StaticInnerClass'.toLowerCase]);
-		assertTrue('' + importedNames, importedNames.exists[toString == 'types.StaticOuterClass.StaticMiddleClass.StaticInnerClass'.toLowerCase]);
+	}
+	
+	@Test
+	def void testNestedTypesIncludedOnUnresolvedFeatures() {
+		val file = file('''
+			package foo
+			
+			class Foo {
+				val foo = types.StaticOuterClass.Unknown.StaticInnerClass.CONSTANT
+			}
+		''')
+		val description = resourceDescriptionManager.getResourceDescription(file.eResource)
+		val importedNames = description.importedNames
+		assertTrue('' + importedNames, importedNames.exists[toString == 'types.StaticOuterClass$Unknown'.toLowerCase]);
+	}
+	
+	@Test
+	def void testNestedTypesIncludedOnUnresolvedFeatures_02() {
+		val file = file('''
+			package foo
+			
+			class Foo {
+				val foo = types.StaticOuterClass.StaticMiddleClass.Unknown
+			}
+		''')
+		val description = resourceDescriptionManager.getResourceDescription(file.eResource)
+		val importedNames = description.importedNames
+		assertTrue('' + importedNames, importedNames.exists[toString == 'types.StaticOuterClass$StaticMiddleClass$Unknown'.toLowerCase]);
 	}
 	
 }
