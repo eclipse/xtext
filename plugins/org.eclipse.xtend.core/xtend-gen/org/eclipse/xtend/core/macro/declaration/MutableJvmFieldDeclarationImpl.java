@@ -9,16 +9,23 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmConstructorDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmFieldDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.XtendConstructorDeclarationImpl;
+import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
+import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
@@ -35,10 +42,40 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   }
   
   public void markAsInitialized() {
+  }
+  
+  public void markAsInitializedBy(final ConstructorDeclaration constructorDeclaration) {
+    JvmConstructor _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (constructorDeclaration instanceof JvmConstructorDeclarationImpl) {
+        _matched=true;
+        _switchResult = ((JvmConstructorDeclarationImpl)constructorDeclaration).getDelegate();
+      }
+    }
+    if (!_matched) {
+      if (constructorDeclaration instanceof XtendConstructorDeclarationImpl) {
+        _matched=true;
+        JvmConstructor _xblockexpression = null;
+        {
+          CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+          IXtendJvmAssociations _jvmAssociations = _compilationUnit.getJvmAssociations();
+          XtendConstructor _delegate = ((XtendConstructorDeclarationImpl)constructorDeclaration).getDelegate();
+          final EObject jvmElement = _jvmAssociations.getPrimaryJvmElement(_delegate);
+          JvmConstructor _xifexpression = null;
+          if ((jvmElement instanceof JvmConstructor)) {
+            _xifexpression = ((JvmConstructor)jvmElement);
+          }
+          _xblockexpression = _xifexpression;
+        }
+        _switchResult = _xblockexpression;
+      }
+    }
+    final JvmConstructor constructor = _switchResult;
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     ReadAndWriteTracking _readAndWriteTracking = _compilationUnit.getReadAndWriteTracking();
     JvmField _delegate = this.getDelegate();
-    _readAndWriteTracking.markInitialized(_delegate);
+    _readAndWriteTracking.markInitialized(_delegate, constructor);
   }
   
   public MutableTypeDeclaration getDeclaringType() {

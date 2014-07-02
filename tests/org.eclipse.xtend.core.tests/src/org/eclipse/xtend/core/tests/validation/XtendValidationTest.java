@@ -33,6 +33,7 @@ import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
@@ -1391,10 +1392,12 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testSyntheticallyInitializedField() throws Exception {
-		XtendClass clazz = clazz("class X { final String foo }");
-		EObject eObject = clazz.eResource().getContents().get(1).eContents().get(2);
-		readAndWriteTracking.markReadAccess(eObject);
-		readAndWriteTracking.markInitialized(eObject);
+		XtendClass clazz = clazz("class X { new() {} final String foo }");
+		EObject jvmType = clazz.eResource().getContents().get(1);
+		JvmConstructor constructor = (JvmConstructor) jvmType.eContents().get(1);
+		EObject field = jvmType.eContents().get(2);
+		readAndWriteTracking.markReadAccess(field);
+		readAndWriteTracking.markInitialized(field, constructor);
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
@@ -1618,17 +1621,17 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     @Test public void testFinalFieldInit_06() throws Exception {
     	XtendClass clazz = clazz("class Foo { val String test new() { for (x : newArrayList('x')) test = 'foo' }}");
     	helper.assertError(clazz.getMembers().get(0), XASSIGNMENT, FIELD_ALREADY_INITIALIZED);
-    	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, FIELD_NOT_INITIALIZED);
+    	helper.assertError(clazz.getMembers().get(1), XTEND_CONSTRUCTOR, FIELD_NOT_INITIALIZED);
     }
     
     @Test public void testFinalFieldInit_07() throws Exception {
     	XtendClass clazz = clazz("class Foo { val String test new() { if ('foo' == 'bar') test = 'foo' }}");
-    	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, FIELD_NOT_INITIALIZED);
+    	helper.assertError(clazz.getMembers().get(1), XTEND_CONSTRUCTOR, FIELD_NOT_INITIALIZED);
     }
     
     @Test public void testFinalFieldInit_08() throws Exception {
     	XtendClass clazz = clazz("class Foo { val String test new() { switch 'foo' { case 'bar' : test = 'foo' }}}");
-    	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, FIELD_NOT_INITIALIZED);
+    	helper.assertError(clazz.getMembers().get(1), XTEND_CONSTRUCTOR, FIELD_NOT_INITIALIZED);
     }
     
     @Test public void testFinalFieldInit_09() throws Exception {
@@ -1637,9 +1640,9 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     }
     
     @Test public void testFinalFieldInit_10() throws Exception {
-    	XtendClass clazz = clazz("class Foo { val test new() { while ('x'=='bar') test = 'foo' }}");
+    	XtendClass clazz = clazz("class Foo { val String test new() { while ('x'=='bar') test = 'foo' }}");
     	helper.assertError(clazz.getMembers().get(0), XASSIGNMENT, FIELD_ALREADY_INITIALIZED);
-    	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, FIELD_NOT_INITIALIZED);
+    	helper.assertError(clazz.getMembers().get(1), XTEND_CONSTRUCTOR, FIELD_NOT_INITIALIZED);
     }
     
     @Test public void testFinalFieldInit_11() throws Exception {
@@ -1655,12 +1658,38 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     
     @Test public void testFinalFieldInit_13() throws Exception {
     	XtendClass clazz = clazz("class Foo { val String test new() { this('foo') } new(String x) { test = x } }");
-    	helper.assertNoError(clazz.getMembers().get(0), FIELD_NOT_INITIALIZED);
+    	helper.assertNoError(clazz, FIELD_NOT_INITIALIZED);
     }
     
     @Test public void testFinalFieldInit_14() throws Exception {
     	XtendClass clazz = clazz("class Foo { val String test new() { this('foo') } new(String x) {  } }");
-    	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, FIELD_NOT_INITIALIZED);
+    	helper.assertError(clazz.getMembers().get(2), XTEND_CONSTRUCTOR, FIELD_NOT_INITIALIZED);
+    }
+    
+    @Test public void testFinalFieldInit_15() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test new() { println('lalala') this('foo') } new(String x) {  } }");
+    	helper.assertError(clazz.getMembers().get(2), XTEND_CONSTRUCTOR, FIELD_NOT_INITIALIZED);
+    }
+    
+    @Test public void testFinalFieldInit_16() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test new() { } new(String x) {  } }");
+    	helper.assertError(clazz.getMembers().get(1), XTEND_CONSTRUCTOR, FIELD_NOT_INITIALIZED);
+    	helper.assertError(clazz.getMembers().get(2), XTEND_CONSTRUCTOR, FIELD_NOT_INITIALIZED);
+    }
+    
+    @Test public void testFinalFieldInit_17() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test new() { x = 'lalala' } new(String x) {  } }");
+    	helper.assertError(clazz.getMembers().get(2), XTEND_CONSTRUCTOR, FIELD_NOT_INITIALIZED);
+    }
+    
+    @Test public void testFinalFieldInit_18() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test new() { } new(String x) { test = x } }");
+    	helper.assertError(clazz.getMembers().get(1), XTEND_CONSTRUCTOR, FIELD_NOT_INITIALIZED);
+    }
+    
+    @Test public void testFinalFieldInit_19() throws Exception {
+    	XtendClass clazz = clazz("class Foo { val String test new() { test = 'lalala' } new(String x) { test = x } }");
+    	helper.assertNoErrors(clazz);
     }
     
     @Test public void testFieldTypeInference_01() throws Exception {
@@ -1685,8 +1714,14 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 
     @Test public void testBug378226_Error() throws Exception {
 		XtendClass clazz = clazz("@Data class Foo { int id  new(int a){} }");
-		helper.assertError(clazz.getMembers().get(0), XTEND_FIELD , FIELD_NOT_INITIALIZED);
+		helper.assertError(clazz.getMembers().get(1), XTEND_CONSTRUCTOR , FIELD_NOT_INITIALIZED);
     }
+
+    @Test public void testBug378226_NoError_2() throws Exception {
+		XtendClass clazz = clazz("@Data class Foo { int id  new(int a){ _id = a } }");
+		helper.assertNoErrors(clazz);
+    }
+    
     @Test public void testBug378211_NoException() throws Exception{
     	String model = "@Data class Foo { int id  def }";
     	XtextResourceSet set = getResourceSet();

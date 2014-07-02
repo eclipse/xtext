@@ -7,16 +7,33 @@
  */
 package org.eclipse.xtext.xbase.validation;
 
+import com.google.common.collect.Iterables;
+import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class ReadAndWriteTracking {
+  protected static class InitializedMarker extends AdapterImpl {
+    private Set<JvmConstructor> byConstructors = CollectionLiterals.<JvmConstructor>newHashSet();
+    
+    public boolean isInitialized(final JvmConstructor constructor) {
+      return this.byConstructors.contains(constructor);
+    }
+    
+    public boolean markInitialized(final JvmConstructor constructor) {
+      return this.byConstructors.add(constructor);
+    }
+  }
+  
   public boolean markReadAccess(final EObject object) {
     boolean _xifexpression = false;
     boolean _isRead = this.isRead(object);
@@ -33,25 +50,49 @@ public class ReadAndWriteTracking {
     return _eAdapters.contains(ReadAndWriteTracking.READ_MARKER);
   }
   
-  public boolean markInitialized(final EObject object) {
-    boolean _xifexpression = false;
-    boolean _isInitialized = this.isInitialized(object);
-    boolean _not = (!_isInitialized);
-    if (_not) {
-      EList<Adapter> _eAdapters = object.eAdapters();
-      _xifexpression = _eAdapters.add(ReadAndWriteTracking.INITIALIZED_MARKER);
-    }
-    return _xifexpression;
-  }
-  
-  public boolean isInitialized(final EObject object) {
-    EList<Adapter> _eAdapters = object.eAdapters();
-    return _eAdapters.contains(ReadAndWriteTracking.INITIALIZED_MARKER);
-  }
-  
   private final static AdapterImpl READ_MARKER = new AdapterImpl() {
   };
   
-  private final static AdapterImpl INITIALIZED_MARKER = new AdapterImpl() {
-  };
+  public boolean markInitialized(final EObject it, final JvmConstructor constructor) {
+    boolean _xblockexpression = false;
+    {
+      ReadAndWriteTracking.InitializedMarker _elvis = null;
+      ReadAndWriteTracking.InitializedMarker _initializedMarker = this.getInitializedMarker(it);
+      if (_initializedMarker != null) {
+        _elvis = _initializedMarker;
+      } else {
+        ReadAndWriteTracking.InitializedMarker _newInitalizedMarker = this.newInitalizedMarker(it);
+        _elvis = _newInitalizedMarker;
+      }
+      ReadAndWriteTracking.InitializedMarker initializedMarker = _elvis;
+      _xblockexpression = initializedMarker.markInitialized(constructor);
+    }
+    return _xblockexpression;
+  }
+  
+  public boolean isInitialized(final EObject it, final JvmConstructor constructor) {
+    ReadAndWriteTracking.InitializedMarker _initializedMarker = this.getInitializedMarker(it);
+    boolean _isInitialized = false;
+    if (_initializedMarker!=null) {
+      _isInitialized=_initializedMarker.isInitialized(constructor);
+    }
+    return _isInitialized;
+  }
+  
+  protected ReadAndWriteTracking.InitializedMarker newInitalizedMarker(final EObject it) {
+    ReadAndWriteTracking.InitializedMarker _xblockexpression = null;
+    {
+      final ReadAndWriteTracking.InitializedMarker initializedMarker = new ReadAndWriteTracking.InitializedMarker();
+      EList<Adapter> _eAdapters = it.eAdapters();
+      _eAdapters.add(initializedMarker);
+      _xblockexpression = initializedMarker;
+    }
+    return _xblockexpression;
+  }
+  
+  protected ReadAndWriteTracking.InitializedMarker getInitializedMarker(final EObject object) {
+    EList<Adapter> _eAdapters = object.eAdapters();
+    Iterable<ReadAndWriteTracking.InitializedMarker> _filter = Iterables.<ReadAndWriteTracking.InitializedMarker>filter(_eAdapters, ReadAndWriteTracking.InitializedMarker.class);
+    return IterableExtensions.<ReadAndWriteTracking.InitializedMarker>head(_filter);
+  }
 }

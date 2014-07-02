@@ -80,7 +80,7 @@ class ValueObjectProcessor extends AbstractClassProcessor {
 			cls.addConstructor [ constructor |
 				cls.valueObjectConstructorFields.forEach [
 					constructor.addParameter(simpleName, type)
-					markAsInitialized
+					markAsInitializedBy(constructor)
 				]
 				constructor.body = '''
 					«FOR field : cls.valueObjectConstructorFields»

@@ -126,7 +126,7 @@ public class DataProcessor extends AbstractClassProcessor {
               String _simpleName = it.getSimpleName();
               TypeReference _type = it.getType();
               final MutableParameterDeclaration param = constructor.addParameter(_simpleName, _type);
-              it.markAsInitialized();
+              it.markAsInitializedBy(constructor);
               fieldToParameter.put(it, param);
             }
           };
