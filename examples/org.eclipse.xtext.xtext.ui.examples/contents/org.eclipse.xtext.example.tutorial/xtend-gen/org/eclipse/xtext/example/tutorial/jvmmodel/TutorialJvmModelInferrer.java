@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 
 /**
  * <p>Translates entities to Java classes.</p>
@@ -82,7 +81,6 @@ public class TutorialJvmModelInferrer extends AbstractModelInferrer {
     return _xblockexpression;
   }
   
-  @Synthetic
   public void infer(final EObject entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexingPhase) {
     if (entity instanceof Entity) {
       _infer((Entity)entity, acceptor, preIndexingPhase);

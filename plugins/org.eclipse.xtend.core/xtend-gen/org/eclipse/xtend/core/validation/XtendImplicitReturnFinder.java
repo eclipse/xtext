@@ -27,7 +27,6 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
 import org.eclipse.xtext.xbase.validation.XbaseImplicitReturnFinder;
 
@@ -44,7 +43,6 @@ public class XtendImplicitReturnFinder extends XbaseImplicitReturnFinder {
     acceptor.accept(expression);
   }
   
-  @Synthetic
   public void findImplicitReturns(final XExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
     if (expression instanceof AnonymousClass) {
       _findImplicitReturns((AnonymousClass)expression, acceptor);
