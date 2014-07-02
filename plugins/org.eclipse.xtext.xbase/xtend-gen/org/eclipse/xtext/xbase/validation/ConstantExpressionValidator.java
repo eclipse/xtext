@@ -38,7 +38,6 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.validation.NotResolvedFeatureException;
 
@@ -251,7 +250,6 @@ public class ConstantExpressionValidator {
     return _switchResult;
   }
   
-  @Synthetic
   public boolean isConstant(final XExpression expression) {
     if (expression instanceof XAbstractFeatureCall) {
       return _isConstant((XAbstractFeatureCall)expression);
@@ -273,7 +271,6 @@ public class ConstantExpressionValidator {
     }
   }
   
-  @Synthetic
   public boolean isConstantExpression(final XExpression it) {
     if (it instanceof XAbstractFeatureCall) {
       return _isConstantExpression((XAbstractFeatureCall)it);

@@ -33,7 +33,6 @@ import org.eclipse.xtext.xbase.interpreter.Context;
 import org.eclipse.xtext.xbase.interpreter.UnresolvableFeatureException;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 
 /**
@@ -157,7 +156,6 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
     return _switchResult;
   }
   
-  @Synthetic
   public Object internalEvaluate(final XExpression it, final Context ctx) {
     if (it instanceof XBinaryOperation) {
       return _internalEvaluate((XBinaryOperation)it, ctx);

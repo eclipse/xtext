@@ -17,7 +17,6 @@ import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceSerializer;
@@ -94,7 +93,6 @@ public class ImportingStringConcatenation extends StringConcatenation {
     return result;
   }
   
-  @Synthetic
   protected String getStringRepresentation(final Object object) {
     if (object instanceof JvmType) {
       return _getStringRepresentation((JvmType)object);

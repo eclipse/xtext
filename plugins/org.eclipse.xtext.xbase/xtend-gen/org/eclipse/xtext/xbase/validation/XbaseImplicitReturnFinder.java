@@ -30,7 +30,6 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
 
 /**
@@ -132,7 +131,6 @@ public class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
     this.findImplicitReturns(_default, acceptor);
   }
   
-  @Synthetic
   public void findImplicitReturns(final XExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
     if (expression instanceof XAbstractFeatureCall) {
       _findImplicitReturns((XAbstractFeatureCall)expression, acceptor);

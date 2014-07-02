@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 
 @SuppressWarnings("all")
 public class XbaseEditorInputRedirector {
@@ -235,7 +234,6 @@ public class XbaseEditorInputRedirector {
     throw new IllegalStateException("couldn\'t find source package fragment root.");
   }
   
-  @Synthetic
   public IPackageFragmentRoot getPackageFragmentRoot(final IJavaElement element) {
     if (element instanceof IPackageFragmentRoot) {
       return _getPackageFragmentRoot((IPackageFragmentRoot)element);

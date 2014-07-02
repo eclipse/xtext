@@ -28,7 +28,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.RecordingRootResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -412,7 +411,6 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     }
   }
   
-  @Synthetic
   public void assertEqualLinkingData(final ILinkingCandidate left, final ILinkingCandidate right) {
     if (left instanceof ImplicitFirstArgument
          && right instanceof ImplicitFirstArgument) {

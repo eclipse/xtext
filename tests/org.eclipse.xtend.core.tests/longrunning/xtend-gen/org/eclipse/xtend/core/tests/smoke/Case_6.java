@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 
 @SuppressWarnings("all")
 public class Case_6 {
@@ -46,7 +45,6 @@ public class Case_6 {
     return ListExtensions.<ETypeParameter, Object>map(_eTypeParameters, _function);
   }
   
-  @Synthetic
   public List<?> transform(final ENamedElement model) {
     if (model instanceof EClass) {
       return _transform((EClass)model);
