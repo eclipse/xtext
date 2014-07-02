@@ -107,6 +107,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE:
 				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
 				   context == grammarAccess.getJvmParameterizedTypeReferenceRule() ||
+				   context == grammarAccess.getJvmSuperTypeReferenceRule() ||
 				   context == grammarAccess.getJvmTypeReferenceRule() ||
 				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
 					sequence_JvmParameterizedTypeReference(context, (JvmParameterizedTypeReference) semanticObject); 
@@ -1621,7 +1622,12 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 			}
 		else if(semanticObject.eClass().getEPackage() == XtypePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case XtypePackage.XFUNCTION_TYPE_REF:
-				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
+				if(context == grammarAccess.getJvmSuperTypeReferenceRule() ||
+				   context == grammarAccess.getXFunctionSuperTypeRefRule()) {
+					sequence_XFunctionSuperTypeRef(context, (XFunctionTypeRef) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
 				   context == grammarAccess.getJvmTypeReferenceRule() ||
 				   context == grammarAccess.getXFunctionTypeRefRule()) {
 					sequence_XFunctionTypeRef(context, (XFunctionTypeRef) semanticObject); 
@@ -2136,7 +2142,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         ((annotationInfo=Type_XtendClass_2_0_0 modifiers+=CommonModifier* name=ValidID) | (annotationInfo=Type_XtendClass_2_0_0 name=ValidID)) 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
 	 *         extends=JvmParameterizedTypeReference? 
-	 *         (implements+=JvmParameterizedTypeReference implements+=JvmParameterizedTypeReference*)? 
+	 *         (implements+=JvmSuperTypeReference implements+=JvmSuperTypeReference*)? 
 	 *         members+=Member*
 	 *     )
 	 */
@@ -2162,7 +2168,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     (
 	 *         ((annotationInfo=Type_XtendInterface_2_1_0 modifiers+=CommonModifier* name=ValidID) | (annotationInfo=Type_XtendInterface_2_1_0 name=ValidID)) 
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)? 
-	 *         (extends+=JvmParameterizedTypeReference extends+=JvmParameterizedTypeReference*)? 
+	 *         (extends+=JvmSuperTypeReference extends+=JvmSuperTypeReference*)? 
 	 *         members+=Member*
 	 *     )
 	 */
@@ -2176,6 +2182,15 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     ((constructorCall=XConstructorCall_AnonymousClass_1_0_0_0 members+=Member*) | constructorCall=XConstructorCall_AnonymousClass_1_0_0_0)
 	 */
 	protected void sequence_XConstructorCall(EObject context, AnonymousClass semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((instanceContext?='(' (paramTypes+=JvmTypeReference paramTypes+=JvmTypeReference*)?)? returnType=JvmTypeReference)
+	 */
+	protected void sequence_XFunctionSuperTypeRef(EObject context, XFunctionTypeRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

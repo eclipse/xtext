@@ -38,6 +38,7 @@ public class XtendParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getTypeAccess().getAlternatives_2(), "rule__Type__Alternatives_2");
+					put(grammarAccess.getJvmSuperTypeReferenceAccess().getAlternatives(), "rule__JvmSuperTypeReference__Alternatives");
 					put(grammarAccess.getAnnotationFieldAccess().getAlternatives_2(), "rule__AnnotationField__Alternatives_2");
 					put(grammarAccess.getAnnotationFieldAccess().getAlternatives_2_0_0(), "rule__AnnotationField__Alternatives_2_0_0");
 					put(grammarAccess.getMemberAccess().getAlternatives_2(), "rule__Member__Alternatives_2");
@@ -122,6 +123,10 @@ public class XtendParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeAccess().getGroup_2_2_5(), "rule__Type__Group_2_2_5__0");
 					put(grammarAccess.getTypeAccess().getGroup_2_2_5_1(), "rule__Type__Group_2_2_5_1__0");
 					put(grammarAccess.getTypeAccess().getGroup_2_3(), "rule__Type__Group_2_3__0");
+					put(grammarAccess.getXFunctionSuperTypeRefAccess().getGroup(), "rule__XFunctionSuperTypeRef__Group__0");
+					put(grammarAccess.getXFunctionSuperTypeRefAccess().getGroup_0(), "rule__XFunctionSuperTypeRef__Group_0__0");
+					put(grammarAccess.getXFunctionSuperTypeRefAccess().getGroup_0_1(), "rule__XFunctionSuperTypeRef__Group_0_1__0");
+					put(grammarAccess.getXFunctionSuperTypeRefAccess().getGroup_0_1_1(), "rule__XFunctionSuperTypeRef__Group_0_1_1__0");
 					put(grammarAccess.getAnnotationFieldAccess().getGroup(), "rule__AnnotationField__Group__0");
 					put(grammarAccess.getAnnotationFieldAccess().getGroup_2_0(), "rule__AnnotationField__Group_2_0__0");
 					put(grammarAccess.getAnnotationFieldAccess().getGroup_2_0_0_0(), "rule__AnnotationField__Group_2_0_0_0__0");
@@ -433,6 +438,10 @@ public class XtendParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeAccess().getModifiersAssignment_2_3_1(), "rule__Type__ModifiersAssignment_2_3_1");
 					put(grammarAccess.getTypeAccess().getNameAssignment_2_3_3(), "rule__Type__NameAssignment_2_3_3");
 					put(grammarAccess.getTypeAccess().getMembersAssignment_2_3_5(), "rule__Type__MembersAssignment_2_3_5");
+					put(grammarAccess.getXFunctionSuperTypeRefAccess().getInstanceContextAssignment_0_0(), "rule__XFunctionSuperTypeRef__InstanceContextAssignment_0_0");
+					put(grammarAccess.getXFunctionSuperTypeRefAccess().getParamTypesAssignment_0_1_0(), "rule__XFunctionSuperTypeRef__ParamTypesAssignment_0_1_0");
+					put(grammarAccess.getXFunctionSuperTypeRefAccess().getParamTypesAssignment_0_1_1_1(), "rule__XFunctionSuperTypeRef__ParamTypesAssignment_0_1_1_1");
+					put(grammarAccess.getXFunctionSuperTypeRefAccess().getReturnTypeAssignment_2(), "rule__XFunctionSuperTypeRef__ReturnTypeAssignment_2");
 					put(grammarAccess.getAnnotationFieldAccess().getAnnotationsAssignment_1(), "rule__AnnotationField__AnnotationsAssignment_1");
 					put(grammarAccess.getAnnotationFieldAccess().getModifiersAssignment_2_0_0_0_1(), "rule__AnnotationField__ModifiersAssignment_2_0_0_0_1");
 					put(grammarAccess.getAnnotationFieldAccess().getModifiersAssignment_2_0_0_0_2(), "rule__AnnotationField__ModifiersAssignment_2_0_0_0_2");

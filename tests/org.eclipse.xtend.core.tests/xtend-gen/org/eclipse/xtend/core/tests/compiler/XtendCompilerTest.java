@@ -11635,4 +11635,334 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testXFunctionTypeRefAsSuperType_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo implements ()=>void {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override apply() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo implements Procedure0 {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void apply() {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testXFunctionTypeRefAsSuperType_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface Foo extends ()=>void {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override void apply();");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public interface Foo extends Procedure0 {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public abstract void apply();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testXFunctionTypeRefAsSuperType_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo implements (String)=>void {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override apply(String value) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo implements Procedure1<String> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void apply(final String value) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testXFunctionTypeRefAsSuperType_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface Foo extends (String)=>void {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override void apply(String value);");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public interface Foo extends Procedure1<String> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public abstract void apply(final String value);");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testXFunctionTypeRefAsSuperType_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo implements ((String)=>void)=>void {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override apply((String)=>void procedure) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo implements Procedure1<Procedure1<? super String>> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void apply(final Procedure1<? super String> procedure) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testXFunctionTypeRefAsSuperType_06() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface Foo extends ((String)=>void)=>void {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override void apply((String)=>void procedure);");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public interface Foo extends Procedure1<Procedure1<? super String>> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public abstract void apply(final Procedure1<? super String> procedure);");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testXFunctionTypeRefAsSuperType_07() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo implements ()=>String {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override apply() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo implements Function0<String> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String apply() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testXFunctionTypeRefAsSuperType_08() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface Foo extends ()=>String {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override String apply();");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public interface Foo extends Function0<String> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public abstract String apply();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testXFunctionTypeRefAsSuperType_09() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo implements ()=>(String)=>void {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override apply() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo implements Function0<Procedure1<? super String>> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Procedure1<? super String> apply() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testXFunctionTypeRefAsSuperType_10() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface Foo extends ()=>(String)=>void {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override (String)=>void apply();");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public interface Foo extends Function0<Procedure1<? super String>> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public abstract Procedure1<? super String> apply();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
 }

@@ -26,14 +26,14 @@ Type returns XtendTypeDeclaration :
 		modifiers+=CommonModifier*
 	  	'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
 	   	("extends" extends=JvmParameterizedTypeReference)? 
-	   	('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
+	   	('implements' implements+=JvmSuperTypeReference (',' implements+=JvmSuperTypeReference)*)?'{'
 		   (members+=Member)*
 	   	'}'
 	 |
 		{XtendInterface.annotationInfo = current}
 		modifiers+=CommonModifier*
 	  	'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
-	   	('extends' extends+=JvmParameterizedTypeReference (',' extends+=JvmParameterizedTypeReference)*)?'{'
+	   	('extends' extends+=JvmSuperTypeReference (',' extends+=JvmSuperTypeReference)*)?'{'
 		   (members+=Member)*
 	   	'}'
 	 |
@@ -50,6 +50,14 @@ Type returns XtendTypeDeclaration :
 	   	'}'
 	)
 ;
+
+JvmSuperTypeReference returns types::JvmTypeReference:
+	JvmParameterizedTypeReference | XFunctionSuperTypeRef
+;
+
+XFunctionSuperTypeRef returns xtype::XFunctionTypeRef:
+  (instanceContext?='(' (paramTypes+=JvmTypeReference (',' paramTypes+=JvmTypeReference)*)? ')')? '=>' returnType=JvmTypeReference;
+
 
 AnnotationField returns XtendMember :
 	{XtendMember} annotations+=XAnnotation* 
