@@ -407,6 +407,18 @@ class PerformanceTest extends AbstractXtendTestCase {
 	Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (339 measurements).
 	Task 'ResourceValidatorImpl.validation' took 3611ms (171 measurements).
 	Task 'DefaultReentrantTypeResolver.resolve' took 2493ms (342 measurements).
+	-------------------------------------------------------------------------------------------------------------------------
+	With old @Data annotation added
+	Test 'doCompileThreeTimes(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+	-------------------------------------------------------------------------------------------------------------------------
+	Task 'PerformanceTest.doCompile' took 4938ms (3 measurements).
+	Task 'AbstractParser.parse' took 448ms (171 measurements).
+	Task 'installing proxies (AbstractCleaningLinker.linkModel)' took 224ms (171 measurements).
+	Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 633ms (339 measurements).
+	Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 208ms (339 measurements).
+	Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 2ms (339 measurements).
+	Task 'ResourceValidatorImpl.validation' took 3749ms (171 measurements).
+	Task 'DefaultReentrantTypeResolver.resolve' took 2536ms (342 measurements).
 	------------------------------------------------------------------------------------------------------------------------- 
 	 */
 	@Test def void doCompile() {
