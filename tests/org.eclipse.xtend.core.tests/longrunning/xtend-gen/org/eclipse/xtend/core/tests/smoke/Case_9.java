@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.tests.smoke.Case_8;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 
 @SuppressWarnings("all")
 public class Case_9 extends Case_8 {
@@ -48,7 +47,6 @@ public class Case_9 extends Case_8 {
     return null;
   }
   
-  @Synthetic
   public CharSequence generateTypeRef(final EObject c) {
     if (c instanceof ENamedElement) {
       return _generateTypeRef((ENamedElement)c);

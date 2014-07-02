@@ -26,7 +26,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
@@ -248,7 +247,6 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     return _head;
   }
   
-  @Synthetic
   public String getQualifiedName(final EObject constructor, final EObject constructorCall) {
     if (constructor instanceof JvmConstructor
          && constructorCall instanceof XConstructorCall) {
@@ -280,7 +278,6 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     }
   }
   
-  @Synthetic
   protected IResolvedExecutable resolveExecutable(final JvmExecutable consturctor, final XExpression it, final IResolvedTypes resolvedTypes) {
     if (consturctor instanceof JvmConstructor
          && it instanceof XAbstractFeatureCall) {

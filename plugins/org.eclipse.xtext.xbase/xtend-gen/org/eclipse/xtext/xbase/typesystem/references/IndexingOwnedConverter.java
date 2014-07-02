@@ -26,7 +26,6 @@ import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImplCustom;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -213,7 +212,6 @@ public class IndexingOwnedConverter extends OwnedConverter {
     return new ParameterizedTypeReference(_owner, _findDeclaredType);
   }
   
-  @Synthetic
   public JvmType getType(final JvmTypeReference it) {
     if (it instanceof XFunctionTypeRefImplCustom) {
       return _getType((XFunctionTypeRefImplCustom)it);

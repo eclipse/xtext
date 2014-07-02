@@ -14,7 +14,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Synthetic;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 
 @SuppressWarnings("all")
@@ -122,7 +121,6 @@ public class XbaseImageAdornments {
     return _xifexpression;
   }
   
-  @Synthetic
   public int get(final JvmIdentifiableElement it) {
     if (it instanceof JvmConstructor) {
       return _get((JvmConstructor)it);
