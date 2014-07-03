@@ -45,6 +45,8 @@ public class DynamicResourceClusteringPolicy implements IResourceClusteringPolic
 	private long minimumPercentFreeMemory = 15;
 
 	public boolean continueProcessing(ResourceSet resourceSet, URI next, int alreadyProcessed) {
+		if (next != null && resourceSet.getResource(next, false) != null)
+			return true;
 		if (alreadyProcessed == 0)
 			return true;
 		final long maxMemory = Runtime.getRuntime().maxMemory();
