@@ -506,7 +506,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						JvmType constraintType = constraintRef.getType();
 						if (constraintType.eClass() == TypesPackage.Literals.JVM_TYPE_PARAMETER) {
 							EObject sourceElement = associations.getPrimarySourceElement(constraintType);
-							if (sourceElement.eContainer() == current.eContainer() && !allowed.contains(sourceElement)) {
+							if (sourceElement!=null && sourceElement.eContainer() == current.eContainer() && !allowed.contains(sourceElement)) {
 								error("Illegal forward reference to type parameter " + ((JvmTypeParameter)constraintType).getSimpleName(), 
 										constraintRef, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, TYPE_PARAMETER_FORWARD_REFERENCE);
 							}
