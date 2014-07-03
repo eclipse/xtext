@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builder.DerivedResourceMarkers.GeneratorIdProvider;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2.IFileCallback;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
@@ -61,6 +62,9 @@ import com.google.inject.Provider;
 public class BuilderParticipant implements IXtextBuilderParticipant {
 
 	private final static Logger logger = Logger.getLogger(BuilderParticipant.class);
+
+	@Inject
+	private org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy clusteringPolicy;
 
 	@Inject
 	private Provider<EclipseResourceFileSystemAccess2> fileSystemAccessProvider;
@@ -201,22 +205,46 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		final int numberOfDeltas = deltas.size();
 		SubMonitor subMonitor = SubMonitor.convert(progressMonitor, 2 * numberOfDeltas);
 		
+		int clusterIndex = 0;
 		for (int i = 0; i < numberOfDeltas; i++) {
 			IResourceDescription.Delta delta = deltas.get(i);
 			
-			if (subMonitor.isCanceled())
+			if (subMonitor.isCanceled()) {
 				throw new OperationCanceledException();
+			}
 			subMonitor.subTask("Compiling " + delta.getUri().lastSegment() + " (" + i + " of " + numberOfDeltas + ")");
 			access.setMonitor(subMonitor.newChild(1));
+			
+			if (delta.getNew() != null && !clusteringPolicy.continueProcessing(context.getResourceSet(), delta.getUri(), clusterIndex)) {
+				clearResourceSet(context.getResourceSet());
+				clusterIndex = 0;
+			}
 
 			Set<IFile> derivedResources = getDerivedResources(delta, outputConfigurations, generatorMarkers);
 			access.setPostProcessor(getPostProcessor(delta, context, derivedResources));
 			
-			doGenerate(delta, context, access);
-			access.flushSourceTraces();
+			if (doGenerate(delta, context, access)) {
+				clusterIndex++;
+				access.flushSourceTraces();
+			}
 			
 			SubMonitor deleteMonitor = SubMonitor.convert(subMonitor.newChild(1), derivedResources.size());
 			cleanDerivedResources(delta, derivedResources, context, access, deleteMonitor);
+		}
+	}
+
+	/**
+	 * Clears the content of the resource set without sending notifications.
+	 * This avoids unnecessary, explicit unloads.
+	 * @since 2.7
+	 */
+	protected void clearResourceSet(ResourceSet resourceSet) {
+		boolean wasDeliver = resourceSet.eDeliver();
+		try {
+			resourceSet.eSetDeliver(false);
+			resourceSet.getResources().clear();
+		} finally {
+			resourceSet.eSetDeliver(wasDeliver);
 		}
 	}
 
@@ -394,7 +422,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	/**
 	 * @since 2.7
 	 */
-	protected void doGenerate(IResourceDescription.Delta delta, final IBuildContext context, IFileSystemAccess access) {
+	protected boolean doGenerate(IResourceDescription.Delta delta, IBuildContext context, IFileSystemAccess access) {
 		if (delta.getNew() != null) {
 			try {
 				handleChangedContents(delta, context, access);
@@ -403,7 +431,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			} catch (Exception e) {
 				logErrorDuringCompilation(delta, e);
 			}
+			return true;
 		}
+		return false;
 	}
 
 	/**
