@@ -31,8 +31,10 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.builder.DerivedResourceMarkers.GeneratorIdProvider;
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2.IFileCallback;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
+import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
@@ -53,6 +55,7 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
+ * @author Anton Kosyakov
  * @since 2.1
  */
 public class BuilderParticipant implements IXtextBuilderParticipant {
@@ -164,18 +167,16 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		if (deltas.isEmpty()) {
 			return;
 		}
-
-		final int numberOfDeltas = deltas.size();
-
+		
 		// monitor handling
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
-		SubMonitor subMonitor = SubMonitor.convert(monitor, numberOfDeltas + 3);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 
 		EclipseResourceFileSystemAccess2 access = fileSystemAccessProvider.get();
-		final IProject builtProject = context.getBuiltProject();
+		IProject builtProject = context.getBuiltProject();
 		access.setProject(builtProject);
-		final Map<String, OutputConfiguration> outputConfigurations = getOutputConfigurations(context);
+		Map<String, OutputConfiguration> outputConfigurations = getOutputConfigurations(context);
 		refreshOutputFolders(context, outputConfigurations, subMonitor.newChild(1));
 		access.setOutputConfigurations(outputConfigurations);
 		if (context.getBuildType() == BuildType.CLEAN || context.getBuildType() == BuildType.RECOVERY) {
@@ -186,77 +187,125 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			if (context.getBuildType() == BuildType.CLEAN)
 				return;
 		}
-		Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = getGeneratorMarkers(builtProject,
-				outputConfigurations.values());
-		for (int i = 0; i < numberOfDeltas; i++) {
-			final IResourceDescription.Delta delta = deltas.get(i);
+		Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = getGeneratorMarkers(builtProject, outputConfigurations.values());
+		doBuild(deltas, outputConfigurations, generatorMarkers, context, access, monitor);
+	}
 
-			// monitor handling
+	/**
+	 * @since 2.7
+	 */
+	protected void doBuild(List<IResourceDescription.Delta> deltas, 
+			Map<String, OutputConfiguration> outputConfigurations,
+			Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers, IBuildContext context,
+			EclipseResourceFileSystemAccess2 access, IProgressMonitor progressMonitor) throws CoreException {
+		final int numberOfDeltas = deltas.size();
+		SubMonitor subMonitor = SubMonitor.convert(progressMonitor, 2 * numberOfDeltas);
+		
+		for (int i = 0; i < numberOfDeltas; i++) {
+			IResourceDescription.Delta delta = deltas.get(i);
+			
 			if (subMonitor.isCanceled())
 				throw new OperationCanceledException();
 			subMonitor.subTask("Compiling " + delta.getUri().lastSegment() + " (" + i + " of " + numberOfDeltas + ")");
 			access.setMonitor(subMonitor.newChild(1));
 
-			final String uri = delta.getUri().toString();
-			final Set<IFile> derivedResources = newLinkedHashSet();
-			for (OutputConfiguration config : outputConfigurations.values()) {
-				if (config.isCleanUpDerivedResources()) {
-					Iterable<IMarker> markers = generatorMarkers.get(config);
-					for (IMarker marker : markers) {
-						String source = derivedResourceMarkers.getSource(marker);
-						if (source != null && source.equals(uri))
-							derivedResources.add((IFile) marker.getResource());
-					}
-				}
-			}
-			access.setPostProcessor(new EclipseResourceFileSystemAccess2.IFileCallback() {
-
-				public boolean beforeFileDeletion(IFile file) {
-					derivedResources.remove(file);
-					context.needRebuild();
-					return true;
-				}
-
-				public void afterFileUpdate(IFile file) {
-					handleFileAccess(file);
-				}
-
-				public void afterFileCreation(IFile file) {
-					handleFileAccess(file);
-				}
-
-				protected void handleFileAccess(IFile file) {
-					try {
-						derivedResources.remove(file);
-						derivedResourceMarkers.installMarker(file, uri);
-						context.needRebuild();
-					} catch (CoreException e) {
-						throw new RuntimeException(e);
-					}
-				}
-
-			});
-			if (delta.getNew() != null) {
-				try {
-					handleChangedContents(delta, context, access);
-				} catch (OperationCanceledException e) {
-					throw e;
-				} catch (Exception e) {
-					logger.error("Error during compilation of '" + delta.getUri() + "'.", e);
-				}
-			}
+			Set<IFile> derivedResources = getDerivedResources(delta, outputConfigurations, generatorMarkers);
+			access.setPostProcessor(getPostProcessor(delta, context, derivedResources));
+			
+			doGenerate(delta, context, access);
 			access.flushSourceTraces();
+			
 			SubMonitor deleteMonitor = SubMonitor.convert(subMonitor.newChild(1), derivedResources.size());
-			for (IFile iFile : newLinkedHashSet(derivedResources)) {
-				IMarker marker = derivedResourceMarkers.findDerivedResourceMarker(iFile, uri);
-				if (marker != null)
-					marker.delete();
-				if (derivedResourceMarkers.findDerivedResourceMarkers(iFile).length == 0) {
-					access.deleteFile(iFile, deleteMonitor);
+			cleanDerivedResources(delta, derivedResources, context, access, deleteMonitor);
+		}
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void logErrorDuringCompilation(final IResourceDescription.Delta delta, Throwable e) {
+		Throwable cause = e;
+		if (cause instanceof CoreException) {
+			cause = cause.getCause();
+		}
+		if (delta == null) {
+			logger.error("Error during compilation of.", e);
+		} else {
+			logger.error("Error during compilation of '" + delta.getUri() + "'.", e);
+		}
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void cleanDerivedResources(Delta delta, Set<IFile> derivedResources, IBuildContext context,
+			EclipseResourceFileSystemAccess2 access, IProgressMonitor deleteMonitor) throws CoreException {
+		String uri = delta.getUri().toString();
+		for (IFile iFile : newLinkedHashSet(derivedResources)) {
+			IMarker marker = derivedResourceMarkers.findDerivedResourceMarker(iFile, uri);
+			if (marker != null)
+				marker.delete();
+			if (derivedResourceMarkers.findDerivedResourceMarkers(iFile).length == 0) {
+				access.deleteFile(iFile, deleteMonitor);
+				context.needRebuild();
+			}
+		}
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected IFileCallback getPostProcessor(Delta delta, final IBuildContext context,
+			final Set<IFile> derivedResources) {
+		final String uri = delta.getUri().toString();
+		return new EclipseResourceFileSystemAccess2.IFileCallback() {
+
+			public boolean beforeFileDeletion(IFile file) {
+				derivedResources.remove(file);
+				context.needRebuild();
+				return true;
+			}
+
+			public void afterFileUpdate(IFile file) {
+				handleFileAccess(file);
+			}
+
+			public void afterFileCreation(IFile file) {
+				handleFileAccess(file);
+			}
+
+			protected void handleFileAccess(IFile file) {
+				try {
+					derivedResources.remove(file);
+					derivedResourceMarkers.installMarker(file, uri);
 					context.needRebuild();
+				} catch (CoreException e) {
+					throw new RuntimeException(e);
+				}
+			}
+
+		};
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected Set<IFile> getDerivedResources(Delta delta, 
+			final Map<String, OutputConfiguration> outputConfigurations,
+			Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers) {
+		String uri = delta.getUri().toString();
+		Set<IFile> derivedResources = newLinkedHashSet();
+		for (OutputConfiguration config : outputConfigurations.values()) {
+			if (config.isCleanUpDerivedResources()) {
+				Iterable<IMarker> markers = generatorMarkers.get(config);
+				for (IMarker marker : markers) {
+					String source = derivedResourceMarkers.getSource(marker);
+					if (source != null && source.equals(uri))
+						derivedResources.add((IFile) marker.getResource());
 				}
 			}
 		}
+		return derivedResources;
 	}
 
 	protected boolean isEnabled(final IBuildContext context) {
@@ -342,6 +391,28 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		}
 	}
 
+	/**
+	 * @since 2.7
+	 */
+	protected void doGenerate(IResourceDescription.Delta delta, final IBuildContext context, IFileSystemAccess access) {
+		if (delta.getNew() != null) {
+			try {
+				handleChangedContents(delta, context, access);
+			} catch (OperationCanceledException e) {
+				throw e;
+			} catch (Exception e) {
+				logErrorDuringCompilation(delta, e);
+			}
+		}
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected void handleChangedContents(Delta delta, IBuildContext context, IFileSystemAccess access) throws CoreException {
+		handleChangedContents(delta, context, (EclipseResourceFileSystemAccess2) access);
+	}
+
 	protected void handleChangedContents(Delta delta, IBuildContext context,
 			EclipseResourceFileSystemAccess2 fileSystemAccess) throws CoreException {
 		// TODO: we will run out of memory here if the number of deltas is large enough
@@ -363,20 +434,30 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	 * @since 2.6
 	 */
 	protected void registerCurrentSourceFolder(IBuildContext context, Delta delta, EclipseResourceFileSystemAccess2 fileSystemAccess) {
-		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(delta.getUri());
-		for (Pair<IStorage, IProject> pair : storages) {
+		String sourceFolder = getCurrentSourceFolder(context, delta);
+		if (sourceFolder != null) {
+			fileSystemAccess.setCurrentSource(sourceFolder);
+		}
+	}
+
+	/**
+	 * @since 2.7
+	 */
+	protected String getCurrentSourceFolder(IBuildContext context, Delta delta) {
+		Iterable<org.eclipse.xtext.util.Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(delta.getUri());
+		for (org.eclipse.xtext.util.Pair<IStorage, IProject> pair : storages) {
 			final IResource resource = (IResource) pair.getFirst();
 			IProject project = pair.getSecond();
 			for (OutputConfiguration output : getOutputConfigurations(context).values()) {
 				for (SourceMapping sourceMapping : output.getSourceMappings()) {
 					IContainer folder = ResourceUtil.getContainer(project, sourceMapping.getSourceFolder());
 					if (folder.contains(resource)) {
-						fileSystemAccess.setCurrentSource(sourceMapping.getSourceFolder());
-						return;
+						return sourceMapping.getSourceFolder();
 					}
 				}
 			}
 		}
+		return null;
 	}
 
 	protected boolean shouldGenerate(Resource resource, IBuildContext context) {
