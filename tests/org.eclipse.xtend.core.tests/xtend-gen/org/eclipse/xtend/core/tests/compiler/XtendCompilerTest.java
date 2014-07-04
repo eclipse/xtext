@@ -28,6 +28,95 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   protected IFilePostProcessor postProcessor;
   
   @Test
+  public void testClosureNoArgs() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("val thread = new Thread []");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final Thread thread = new Thread(new Runnable() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("public void run() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("});");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testClosureTwoArgs() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(java.util.List<String> list) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("java.util.Collections.sort(list) [ return 0 ]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Collections;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Comparator;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.List;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m(final List<String> list) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Comparator<String> _function = new Comparator<String>() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("public int compare(final String $0, final String $1) {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("return 0;");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Collections.<String>sort(list, _function);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testInnerTypeImports() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo extends types.SomeClassWithNestedInterface implements types.SomeClassWithNestedInterface.NestedInterface {}");

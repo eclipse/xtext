@@ -274,6 +274,44 @@ class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
 	}
 	
 	@Test
+	def void testAmbiguousMethods_12() {
+		'''
+			import java.util.*
+			class C {
+				def void n() {
+					m []
+				}
+				def void m((int, int, int)=>void p) {}
+				def void m((int, int)=>void p) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m((int, int, int)=>void) in C and
+				m((int, int)=>void) in C
+			both match.''')
+	}
+	
+	@Test
+	def void testAmbiguousMethods_13() {
+		'''
+			import java.util.*
+			class C {
+				def void n() {
+					m []
+				}
+				def void m(()=>void p) {}
+				def void m((int, int)=>void p) {}
+			}
+		'''.assertAmbiguous('''
+			Ambiguous feature call.
+			The methods
+				m(()=>void) in C and
+				m((int, int)=>void) in C
+			both match.''')
+	}
+	
+	@Test
 	def void testUnambiguousMethods_01() {
 		'''
 			class C {
@@ -531,7 +569,34 @@ class AmbiguousPlainFeatureCallTest extends AmbiguityValidationTest {
 			}
 		'''.assertUnambiguous
 	}
-	
+
+	@Test
+	def void testUnambiguousMethods_20() {
+		'''
+			import java.util.*
+			class C {
+				def void n() {
+					m []
+				}
+				def void m(()=>void p) {}
+				def void m((int)=>void p) {}
+			}
+		'''.assertUnambiguous
+	}	
+
+	@Test
+	def void testUnambiguousMethods_21() {
+		'''
+			import java.util.*
+			class C {
+				def void n() {
+					m []
+				}
+				def void m((int, int)=>void p) {}
+				def void m((int)=>void p) {}
+			}
+		'''.assertUnambiguous
+	}	
 }
 
 /**

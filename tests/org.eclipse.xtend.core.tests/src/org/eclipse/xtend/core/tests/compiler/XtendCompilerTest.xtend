@@ -16,6 +16,50 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 
 	@Inject protected IFilePostProcessor postProcessor
 
+	@Test
+	def testClosureNoArgs() {
+		assertCompilesTo('''
+			class Foo {
+			   val thread = new Thread []
+			}
+		''','''
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final Thread thread = new Thread(new Runnable() {
+			    public void run() {
+			    }
+			  });
+			}
+		''')
+	}
+	
+	@Test
+	def testClosureTwoArgs() {
+		assertCompilesTo('''
+			class Foo {
+				def void m(java.util.List<String> list) {
+					java.util.Collections.sort(list) [ return 0 ]
+				}
+			}
+		''','''
+			import java.util.Collections;
+			import java.util.Comparator;
+			import java.util.List;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void m(final List<String> list) {
+			    final Comparator<String> _function = new Comparator<String>() {
+			      public int compare(final String $0, final String $1) {
+			        return 0;
+			      }
+			    };
+			    Collections.<String>sort(list, _function);
+			  }
+			}
+		''')
+	}
+
 	@Test def testInnerTypeImports() {
 		assertCompilesTo('''
 			class Foo extends types.SomeClassWithNestedInterface implements types.SomeClassWithNestedInterface.NestedInterface {}

@@ -3085,6 +3085,37 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("hello", "{ val (Object)=>String x = [ if (it instanceof String) return it ] x.apply('hello') }");
 	}
 	
+	/**
+	 * @since 2.7
+	 */
+	@Test public void testClosure_35() throws Exception {
+		assertEvaluatesTo(newArrayList("foo"), 
+				"{ val (java.util.List<String>,String)=>java.util.List<String> functionReturningList = [$0 += $1 return $0 ] "
+						+ "#['foo'].fold(newArrayList, functionReturningList) }");
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	@Test public void testClosure_36() throws Exception {
+		assertEvaluatesTo(Collections.singletonList("literal"), 
+				"{" +
+				"  val result = newArrayList" +
+				"  val =>void runMe = [result.add('literal')]" +
+				"  new testdata.ClosureClient().useRunnable(runMe)" +
+				"  result" +
+				"}");
+	}
+	
+	/**
+	 * @since 2.7
+	 */
+	@Test public void testClosure_37() throws Exception {
+		assertEvaluatesTo("LITERAL", 
+				"new testdata.ClosureClient().invoke2(" +
+				"[$1.toUpperCase], null, 'literal')");
+	}
+	
 	@Test public void testExceptionOnClosure() throws Exception {
 		assertEvaluatesWithException(java.beans.PropertyVetoException.class, 
 				"{ val java.beans.VetoableChangeListener x = [ throw new java.beans.PropertyVetoException('', it) ] x.vetoableChange(null) true }");

@@ -9,6 +9,8 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +26,6 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
@@ -55,83 +56,80 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     AbstractIdentifiableTypeTest.seenExpressions = null;
   }
   
-  protected List<JvmIdentifiableElement> findIdentifiables(final CharSequence expression) {
-    try {
-      final XExpression xExpression = this.expression(expression, false);
-      TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
-      final Function1<EObject, EObject> _function = new Function1<EObject, EObject>() {
-        public EObject apply(final EObject it) {
-          EObject _switchResult = null;
+  protected List<JvmIdentifiableElement> findIdentifiables(final XExpression expression) {
+    TreeIterator<EObject> _eAll = EcoreUtil2.eAll(expression);
+    final Function1<EObject, List<? extends EObject>> _function = new Function1<EObject, List<? extends EObject>>() {
+      public List<? extends EObject> apply(final EObject it) {
+        List<? extends EObject> _switchResult = null;
+        boolean _matched = false;
+        if (!_matched) {
+          if (it instanceof XClosure) {
+            _matched=true;
+            _switchResult = ((XClosure)it).getImplicitFormalParameters();
+          }
+        }
+        if (!_matched) {
+          _switchResult = Collections.<EObject>unmodifiableList(Lists.<EObject>newArrayList(it));
+        }
+        return _switchResult;
+      }
+    };
+    Iterator<List<? extends EObject>> _map = IteratorExtensions.<EObject, List<? extends EObject>>map(_eAll, _function);
+    Iterable<List<? extends EObject>> _iterable = IteratorExtensions.<List<? extends EObject>>toIterable(_map);
+    Iterable<EObject> _flatten = Iterables.<EObject>concat(_iterable);
+    Set<EObject> _set = IterableExtensions.<EObject>toSet(_flatten);
+    final Function1<EObject, Boolean> _function_1 = new Function1<EObject, Boolean>() {
+      public Boolean apply(final EObject it) {
+        boolean _and = false;
+        boolean _notEquals = (!Objects.equal(it, null));
+        if (!_notEquals) {
+          _and = false;
+        } else {
+          boolean _switchResult = false;
           boolean _matched = false;
           if (!_matched) {
-            if (it instanceof XClosure) {
+            if (it instanceof XVariableDeclaration) {
               _matched=true;
-              _switchResult = ((XClosure)it).getImplicitParameter();
+              _switchResult = true;
             }
           }
           if (!_matched) {
-            _switchResult = it;
+            if (it instanceof JvmFormalParameter) {
+              _matched=true;
+              _switchResult = true;
+            }
           }
-          return _switchResult;
+          if (!_matched) {
+            _switchResult = false;
+          }
+          _and = _switchResult;
         }
-      };
-      Iterator<EObject> _map = IteratorExtensions.<EObject, EObject>map(_eAll, _function);
-      Set<EObject> _set = IteratorExtensions.<EObject>toSet(_map);
-      final Function1<EObject, Boolean> _function_1 = new Function1<EObject, Boolean>() {
-        public Boolean apply(final EObject it) {
-          boolean _and = false;
-          boolean _notEquals = (!Objects.equal(it, null));
-          if (!_notEquals) {
-            _and = false;
+        return Boolean.valueOf(_and);
+      }
+    };
+    Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_set, _function_1);
+    Iterable<JvmIdentifiableElement> _filter_1 = Iterables.<JvmIdentifiableElement>filter(_filter, JvmIdentifiableElement.class);
+    final List<JvmIdentifiableElement> identifiables = IterableExtensions.<JvmIdentifiableElement>toList(_filter_1);
+    final Function1<JvmIdentifiableElement, Integer> _function_2 = new Function1<JvmIdentifiableElement, Integer>() {
+      public Integer apply(final JvmIdentifiableElement it) {
+        int _xblockexpression = (int) 0;
+        {
+          final ICompositeNode node = NodeModelUtils.findActualNodeFor(it);
+          int _xifexpression = (int) 0;
+          boolean _notEquals = (!Objects.equal(node, null));
+          if (_notEquals) {
+            _xifexpression = node.getOffset();
           } else {
-            boolean _switchResult = false;
-            boolean _matched = false;
-            if (!_matched) {
-              if (it instanceof XVariableDeclaration) {
-                _matched=true;
-                _switchResult = true;
-              }
-            }
-            if (!_matched) {
-              if (it instanceof JvmFormalParameter) {
-                _matched=true;
-                _switchResult = true;
-              }
-            }
-            if (!_matched) {
-              _switchResult = false;
-            }
-            _and = _switchResult;
+            EObject _eContainer = it.eContainer();
+            ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(_eContainer);
+            _xifexpression = _findActualNodeFor.getOffset();
           }
-          return Boolean.valueOf(_and);
+          _xblockexpression = _xifexpression;
         }
-      };
-      Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_set, _function_1);
-      Iterable<JvmIdentifiableElement> _filter_1 = Iterables.<JvmIdentifiableElement>filter(_filter, JvmIdentifiableElement.class);
-      final List<JvmIdentifiableElement> identifiables = IterableExtensions.<JvmIdentifiableElement>toList(_filter_1);
-      final Function1<JvmIdentifiableElement, Integer> _function_2 = new Function1<JvmIdentifiableElement, Integer>() {
-        public Integer apply(final JvmIdentifiableElement it) {
-          int _xblockexpression = (int) 0;
-          {
-            final ICompositeNode node = NodeModelUtils.findActualNodeFor(it);
-            int _xifexpression = (int) 0;
-            boolean _notEquals = (!Objects.equal(node, null));
-            if (_notEquals) {
-              _xifexpression = node.getOffset();
-            } else {
-              EObject _eContainer = it.eContainer();
-              ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(_eContainer);
-              _xifexpression = _findActualNodeFor.getOffset();
-            }
-            _xblockexpression = _xifexpression;
-          }
-          return Integer.valueOf(_xblockexpression);
-        }
-      };
-      return IterableExtensions.<JvmIdentifiableElement, Integer>sortBy(identifiables, _function_2);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+        return Integer.valueOf(_xblockexpression);
+      }
+    };
+    return IterableExtensions.<JvmIdentifiableElement, Integer>sortBy(identifiables, _function_2);
   }
   
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {

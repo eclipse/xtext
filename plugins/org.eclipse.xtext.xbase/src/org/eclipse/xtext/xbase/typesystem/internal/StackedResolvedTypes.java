@@ -21,9 +21,9 @@ import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -132,10 +132,10 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	protected void mergeLinkingCandidatesIntoParent(ResolvedTypes parent) {
-		Map<XExpression, ILinkingCandidate> linkingCandidates = basicGetLinkingCandidates();
+		Map<XExpression, IApplicableCandidate> linkingCandidates = basicGetLinkingMap();
 		if (!linkingCandidates.isEmpty()) {
-			for(Map.Entry<XExpression, ILinkingCandidate> entry: linkingCandidates.entrySet()) {
-				parent.acceptLinkingInformation(entry.getKey(), entry.getValue());
+			for(Map.Entry<XExpression, IApplicableCandidate> entry: linkingCandidates.entrySet()) {
+				parent.acceptCandidate(entry.getKey(), entry.getValue());
 			}
 		}
 	}
@@ -235,13 +235,13 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	
 	@Override
 	/* @Nullable */
-	protected ILinkingCandidate doGetLinkingCandidate(/* @Nullable */ XExpression featureOrConstructorCall) {
+	protected IApplicableCandidate doGetCandidate(/* @Nullable */ XExpression featureOrConstructorCall) {
 		if (featureOrConstructorCall == null)
 			return null;
-		ILinkingCandidate result = super.doGetLinkingCandidate(featureOrConstructorCall);
+		IApplicableCandidate result = super.doGetCandidate(featureOrConstructorCall);
 		if (result != null)
 			return result;
-		return parent.doGetLinkingCandidate(featureOrConstructorCall);
+		return parent.doGetCandidate(featureOrConstructorCall);
 	}
 	
 	@Override

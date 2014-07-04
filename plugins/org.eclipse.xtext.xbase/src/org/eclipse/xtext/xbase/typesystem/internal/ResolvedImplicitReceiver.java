@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -37,7 +38,7 @@ public class ResolvedImplicitReceiver extends ImplicitReceiver {
 	}
 	
 	@Override
-	public void applyToModel() {
+	public void applyToModel(IResolvedTypes resolvedTypes) {
 		// nothing to do
 	}
 

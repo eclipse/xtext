@@ -14,7 +14,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -50,8 +50,8 @@ public class ExpectedExceptionsStackedResolvedTypes extends StackedResolvedTypes
 	}
 	
 	@Override
-	public void acceptLinkingInformation(XExpression expression, ILinkingCandidate candidate) {
-		getParent().acceptLinkingInformation(expression, candidate);
+	protected void acceptCandidate(XExpression expression, IApplicableCandidate candidate) {
+		getParent().acceptCandidate(expression, candidate);
 	}
 
 	@Override

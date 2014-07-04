@@ -14,6 +14,7 @@ import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -33,7 +34,7 @@ public class AppliedFeatureLinkingCandidate implements IFeatureLinkingCandidate 
 		// nothing to do
 	}
 
-	public void applyToModel() {
+	public void applyToModel(IResolvedTypes resolvedTypes) {
 		// nothing to do
 	}
 	

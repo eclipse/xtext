@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -157,7 +158,7 @@ public class TypeInsteadOfConstructorLinkingCandidate extends AbstractUnresolvab
 		return result;
 	}
 	
-	public void applyToModel() {
+	public void applyToModel(IResolvedTypes resolvedTypes) {
 		Resource resource = getExpression().eResource();
 		if (resource instanceof LazyLinkingResource) {
 			LazyLinkingResource lazyLinkingResource = (LazyLinkingResource) resource;

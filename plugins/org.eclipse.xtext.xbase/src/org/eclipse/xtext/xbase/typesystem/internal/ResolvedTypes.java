@@ -34,9 +34,11 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -119,7 +121,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	private Map<JvmIdentifiableElement, LightweightTypeReference> types;
 	private Map<JvmIdentifiableElement, LightweightTypeReference> reassignedTypes;
 	private Map<XExpression, List<TypeData>> expressionTypes;
-	private Map<XExpression, ILinkingCandidate> featureLinking;
+	private Map<XExpression, IApplicableCandidate> linkingMap;
 	private Map<Object, UnboundTypeReference> unboundTypeParameters;
 	private Map<Object, List<LightweightBoundTypeArgument>> typeParameterHints;
 	private Set<Object> resolvedTypeParameters;
@@ -137,7 +139,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		types = null;
 		reassignedTypes = null;
 		expressionTypes = null;
-		featureLinking = null;
+		linkingMap = null;
 		unboundTypeParameters = null;
 		typeParameterHints = null;
 		resolvedTypeParameters = null;
@@ -200,30 +202,30 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	/* @Nullable */
 	public IFeatureLinkingCandidate getLinkingCandidate(/* @Nullable */ XAbstractFeatureCall featureCall) {
-		return (IFeatureLinkingCandidate) doGetLinkingCandidate(featureCall);
+		return (IFeatureLinkingCandidate) doGetCandidate(featureCall);
 	}
 	
 	/* @Nullable */
 	public IConstructorLinkingCandidate getLinkingCandidate(/* @Nullable */ XConstructorCall constructorCall) {
-		return (IConstructorLinkingCandidate) doGetLinkingCandidate(constructorCall);
+		return (IConstructorLinkingCandidate) doGetCandidate(constructorCall);
 	}
 	
 	/* @Nullable */
-	protected ILinkingCandidate doGetLinkingCandidate(/* @Nullable */ XExpression featureOrConstructorCall) {
-		if (featureLinking == null || featureOrConstructorCall == null)
+	protected IApplicableCandidate doGetCandidate(/* @Nullable */ XExpression featureOrConstructorCall) {
+		if (linkingMap == null || featureOrConstructorCall == null)
 			return null;
-		ILinkingCandidate candidate = featureLinking.get(featureOrConstructorCall);
+		IApplicableCandidate candidate = linkingMap.get(featureOrConstructorCall);
 		return candidate;
 	}
 	
 	/* @Nullable */
 	protected JvmIdentifiableElement doGetLinkedFeature(/* @Nullable */ XExpression featureOrConstructorCall) {
-		if (featureLinking == null || featureOrConstructorCall == null)
+		if (linkingMap == null || featureOrConstructorCall == null || featureOrConstructorCall.eClass() == XbasePackage.Literals.XCLOSURE)
 			return null;
-		ILinkingCandidate candidate = featureLinking.get(featureOrConstructorCall);
+		IApplicableCandidate candidate = linkingMap.get(featureOrConstructorCall);
 		if (candidate == null)
 			return null;
-		return candidate.getFeature();
+		return ((ILinkingCandidate) candidate).getFeature();
 	}
 
 	/* @Nullable */
@@ -483,7 +485,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	/* @Nullable */
 	protected List<LightweightTypeReference> doGetActualTypeArguments(XExpression expression) {
-		ILinkingCandidate result = basicGetLinkingCandidates().get(expression);
+		if (expression == null || expression.eClass() == XbasePackage.Literals.XCLOSURE) {
+			return Collections.emptyList();
+		}
+		ILinkingCandidate result = (ILinkingCandidate) basicGetLinkingMap().get(expression);
 		if (result != null) {
 			return result.getTypeArguments();
 		}
@@ -662,20 +667,20 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return typeParameterHints;
 	}
 
-	private Map<XExpression, ILinkingCandidate> ensureLinkingMapExists() {
-		if (featureLinking == null) {
-			featureLinking = Maps.newLinkedHashMap();
+	private Map<XExpression, IApplicableCandidate> ensureLinkingMapExists() {
+		if (linkingMap == null) {
+			linkingMap = Maps.newLinkedHashMap();
 		}
-		return featureLinking;
+		return linkingMap;
 	}
 	
-	protected Map<XExpression, ILinkingCandidate> basicGetLinkingCandidates() {
-		return featureLinking != null ? featureLinking : Collections.<XExpression, ILinkingCandidate>emptyMap();
+	protected Map<XExpression, IApplicableCandidate> basicGetLinkingMap() {
+		return linkingMap != null ? linkingMap : Collections.<XExpression, IApplicableCandidate>emptyMap();
 	}
 	
 	public Collection<ILinkingCandidate> getFollowUpErrors() {
-		return Collections2.filter(basicGetLinkingCandidates().values(), new Predicate<ILinkingCandidate>() {
-			public boolean apply(/* @Nullable */ ILinkingCandidate input) {
+		Collection<?> rawResult = Collections2.filter(basicGetLinkingMap().values(), new Predicate<IApplicableCandidate>() {
+			public boolean apply(/* @Nullable */ IApplicableCandidate input) {
 				if (input == null)
 					throw new IllegalArgumentException();
 				if (input instanceof FollowUpError)
@@ -683,6 +688,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				return false;
 			}
 		});
+		@SuppressWarnings("unchecked") // cast is safe
+		Collection<ILinkingCandidate> result = (Collection<ILinkingCandidate>) rawResult;
+		return result;
 	}
 	
 	/* @Nullable */
@@ -746,23 +754,23 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	/* @Nullable */
 	public IFeatureLinkingCandidate getFeature(XAbstractFeatureCall featureCall) {
-		return (IFeatureLinkingCandidate) basicGetLinkingCandidates().get(featureCall);
+		return (IFeatureLinkingCandidate) basicGetLinkingMap().get(featureCall);
 	}
 	
 	/* @Nullable */
 	public IConstructorLinkingCandidate getConstructor(XConstructorCall constructorCall) {
-		return (IConstructorLinkingCandidate) basicGetLinkingCandidates().get(constructorCall);
+		return (IConstructorLinkingCandidate) basicGetLinkingMap().get(constructorCall);
 	}
-
-	public void acceptLinkingInformation(XExpression expression, ILinkingCandidate candidate) {
-		ILinkingCandidate prev = ensureLinkingMapExists().put(expression, candidate); 
+	
+	protected void acceptCandidate(XExpression expression, IApplicableCandidate candidate) {
+		IApplicableCandidate prev = ensureLinkingMapExists().put(expression, candidate); 
 		if (prev != null) {
 			throw new IllegalStateException("Expression " + expression + " was already linked to: " + prev + "\nCannot relink to: " + candidate);
 		}
 	}
 	
-	void reassignLinkingInformation(XExpression expression, ILinkingCandidate candidate) {
-		ILinkingCandidate prev = ensureLinkingMapExists().put(expression, candidate); 
+	void reassignLinkingInformation(XExpression expression, IApplicableCandidate candidate) {
+		IApplicableCandidate prev = ensureLinkingMapExists().put(expression, candidate); 
 		if (prev == null) {
 			throw new IllegalStateException("Expression " + expression + " was never linked, cannot replace linking information");
 		}
@@ -825,7 +833,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		appendContent(types, "types", result, indentation);
 		appendContent(reassignedTypes, "reassignedTypes", result, indentation);
 		appendListMapContent(expressionTypes, "expressionTypes", result, indentation);
-		appendContent(featureLinking, "featureLinking", result, indentation);
+		appendContent(linkingMap, "featureLinking", result, indentation);
 		appendContent(unboundTypeParameters, "unboundTypeParameters", result, indentation);
 		appendListMapContent(typeParameterHints, "typeParameterHints", result, indentation);
 		appendContent(declaredTypeParameters, "declaredTypeParameters", result, indentation);

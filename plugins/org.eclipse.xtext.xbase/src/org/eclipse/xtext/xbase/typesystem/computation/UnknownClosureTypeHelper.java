@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.XClosure;
-import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -23,6 +25,8 @@ import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
  */
 public class UnknownClosureTypeHelper extends AbstractClosureTypeHelper {
 
+	private List<JvmFormalParameter> implicitParameters;
+	
 	protected UnknownClosureTypeHelper(XClosure closure, ITypeExpectation expectation, ITypeComputationState state) {
 		super(closure, expectation, state);
 	}
@@ -53,20 +57,42 @@ public class UnknownClosureTypeHelper extends AbstractClosureTypeHelper {
 		result.withinScope(getClosure());
 		return result;
 	}
-
-	protected ITypeComputationState assignParameters(ITypeAssigner typeAssigner) {
-		List<JvmFormalParameter> closureParameters = getClosure().getFormalParameters();
-		int paramCount = closureParameters.size();
-		for(int i = 0; i < paramCount; i++) {
-			JvmFormalParameter closureParameter = closureParameters.get(i);
-			if (closureParameter.eContainingFeature() != XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER && closureParameter.getParameterType() != null) {
-				final LightweightTypeReference closureParameterType = typeAssigner.toLightweightTypeReference(closureParameter.getParameterType());
-				typeAssigner.assignType(closureParameter, closureParameterType);
-			} else {
-				typeAssigner.assignType(closureParameter, new UnknownTypeReference(typeAssigner.getReferenceOwner()));
-			}
+	
+	@Override
+	public List<JvmFormalParameter> getParameters() {
+		XClosure closure = getClosure();
+		if (closure.isExplicitSyntax()) {
+			return closure.getDeclaredFormalParameters();
 		}
-		ITypeComputationState result = typeAssigner.getForkedState();
-		return result;
+		if (implicitParameters != null)
+			return implicitParameters;
+		return closure.getImplicitFormalParameters();
+	}
+	
+	protected ITypeComputationState assignParameters(ITypeAssigner typeAssigner) {
+		XClosure closure = getClosure();
+		if (closure.isExplicitSyntax() || !closure.getImplicitFormalParameters().isEmpty()) {
+			List<JvmFormalParameter> closureParameters = closure.getFormalParameters();
+			int paramCount = closureParameters.size();
+			for(int i = 0; i < paramCount; i++) {
+				JvmFormalParameter closureParameter = closureParameters.get(i);
+				if (closureParameter.getParameterType() != null) {
+					final LightweightTypeReference closureParameterType = typeAssigner.toLightweightTypeReference(closureParameter.getParameterType());
+					typeAssigner.assignType(closureParameter, closureParameterType);
+				} else {
+					UnknownTypeReference unknownType = new UnknownTypeReference(typeAssigner.getReferenceOwner());
+					typeAssigner.assignType(closureParameter, unknownType);
+				}
+			}
+			ITypeComputationState result = typeAssigner.getForkedState();
+			return result;
+		} else {
+			JvmFormalParameter implicitParameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
+			implicitParameter.setName(IFeatureNames.IT.getFirstSegment());
+			implicitParameters = Collections.singletonList(implicitParameter);
+			typeAssigner.assignType(implicitParameter, new UnknownTypeReference(typeAssigner.getReferenceOwner()));
+			ITypeComputationState result = typeAssigner.getForkedState();
+			return result;
+		}
 	}
 }

@@ -19,6 +19,7 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
+import org.eclipse.xtext.xbase.XExpression
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -39,22 +40,20 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 		seenExpressions = null
 	}
 	
-	def protected findIdentifiables(CharSequence expression) {
-		val xExpression = expression(expression, false)
-		
-		val identifiables = EcoreUtil2::eAll(xExpression).map[
+	def protected findIdentifiables(XExpression expression) {
+		val identifiables = EcoreUtil2::eAll(expression).map[
 			switch(it) {
 				// derived features are not part of eContents thus we add it here explicitly
-				XClosure: it.implicitParameter
-				default: it 
+				XClosure: it.implicitFormalParameters
+				default: #[it] 
 			}
-		].toSet.filter [
+		].toIterable.flatten.toSet.filter [
 			it != null && switch(it) {
 				XVariableDeclaration: true
 				JvmFormalParameter: true
 				default: false
 			}
-		].filter(typeof(JvmIdentifiableElement)).toList
+		].filter(JvmIdentifiableElement).toList
 		return identifiables.sortBy [ 
 			val node = NodeModelUtils::findActualNodeFor(it)
 			if (node != null) 

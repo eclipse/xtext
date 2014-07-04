@@ -293,10 +293,11 @@ class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
 	
 	override resolvesIdentifiablesTo(String expression, String... types) {
 		val expressionWithQualifiedNames = expression.replace('$$', 'org::eclipse::xtext::xbase::lib::')
-		val identifiables = expressionWithQualifiedNames.findIdentifiables
+		val xExpression = expression(expressionWithQualifiedNames, false)
+		val resolvedTypes = typeResolver.resolveTypes(xExpression)
+		val identifiables = xExpression.findIdentifiables
 		assertFalse(identifiables.empty)
 		assertEquals(types.size, identifiables.size)
-		val resolvedTypes = typeResolver.resolveTypes(identifiables.head)
 		identifiables.forEach [ identifiable, index |
 			val type = resolvedTypes.getActualType(identifiable)
 			assertNotNull(type)

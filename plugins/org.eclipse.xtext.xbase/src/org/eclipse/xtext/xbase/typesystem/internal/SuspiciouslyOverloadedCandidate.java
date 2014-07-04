@@ -19,6 +19,7 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ISuspiciouslyOverloadedCandidate;
@@ -80,8 +81,8 @@ public class SuspiciouslyOverloadedCandidate implements IFeatureLinkingCandidate
 		chosenCandidate.applyToComputationState();
 	}
 
-	public void applyToModel() {
-		chosenCandidate.applyToModel();
+	public void applyToModel(IResolvedTypes resolvedTypes) {
+		chosenCandidate.applyToModel(resolvedTypes);
 	}
 
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {

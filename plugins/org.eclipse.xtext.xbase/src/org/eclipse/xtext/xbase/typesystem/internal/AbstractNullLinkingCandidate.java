@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -28,7 +29,7 @@ public abstract class AbstractNullLinkingCandidate implements ILinkingCandidate 
 		this.featureOrConstructorCall = featureOrConstructorCall;
 	}
 	
-	public void applyToModel() {
+	public void applyToModel(IResolvedTypes resolvedTypes) {
 		// no op
 	}
 	

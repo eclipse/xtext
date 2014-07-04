@@ -292,6 +292,16 @@ public interface ITypeComputationState {
 	void acceptActualType(LightweightTypeReference type);
 	
 	/**
+	 * Allows to register a candidate that gets the chance to validate or change the state
+	 * of the AST in a subsequent processing step.
+	 * 
+	 * @param expression the expression that the given candidate is associated with.
+	 * @param candidate the candidate to validate if it is still present at the root of the decision tree.
+	 * @see IClosureCandidate
+	 */
+	void acceptCandidate(XExpression expression, IApplicableCandidate candidate);
+	
+	/**
 	 * Annotates the currently considered expression(s) with the given type.
 	 * It is assumed that the type does not depend on the expectation.
 	 * 

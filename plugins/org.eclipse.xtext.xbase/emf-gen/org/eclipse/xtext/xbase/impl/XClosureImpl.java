@@ -38,7 +38,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XClosureImpl#getDeclaredFormalParameters <em>Declared Formal Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XClosureImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XClosureImpl#isExplicitSyntax <em>Explicit Syntax</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XClosureImpl#getImplicitParameter <em>Implicit Parameter</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XClosureImpl#getImplicitFormalParameters <em>Implicit Formal Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -87,14 +87,14 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	protected boolean explicitSyntax = EXPLICIT_SYNTAX_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getImplicitParameter() <em>Implicit Parameter</em>}' containment reference.
+	 * The cached value of the '{@link #getImplicitFormalParameters() <em>Implicit Formal Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getImplicitParameter()
+	 * @see #getImplicitFormalParameters()
 	 * @generated
 	 * @ordered
 	 */
-	protected JvmFormalParameter implicitParameter;
+	protected EList<JvmFormalParameter> implicitFormalParameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,47 +207,13 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmFormalParameter getImplicitParameter()
+	public EList<JvmFormalParameter> getImplicitFormalParameters()
 	{
-		return implicitParameter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetImplicitParameter(JvmFormalParameter newImplicitParameter, NotificationChain msgs)
-	{
-		JvmFormalParameter oldImplicitParameter = implicitParameter;
-		implicitParameter = newImplicitParameter;
-		if (eNotificationRequired())
+		if (implicitFormalParameters == null)
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XbasePackage.XCLOSURE__IMPLICIT_PARAMETER, oldImplicitParameter, newImplicitParameter);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			implicitFormalParameters = new EObjectContainmentEList<JvmFormalParameter>(JvmFormalParameter.class, this, XbasePackage.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setImplicitParameter(JvmFormalParameter newImplicitParameter)
-	{
-		if (newImplicitParameter != implicitParameter)
-		{
-			NotificationChain msgs = null;
-			if (implicitParameter != null)
-				msgs = ((InternalEObject)implicitParameter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XCLOSURE__IMPLICIT_PARAMETER, null, msgs);
-			if (newImplicitParameter != null)
-				msgs = ((InternalEObject)newImplicitParameter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XCLOSURE__IMPLICIT_PARAMETER, null, msgs);
-			msgs = basicSetImplicitParameter(newImplicitParameter, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XCLOSURE__IMPLICIT_PARAMETER, newImplicitParameter, newImplicitParameter));
+		return implicitFormalParameters;
 	}
 
 	/**
@@ -276,8 +242,8 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 				return ((InternalEList<?>)getDeclaredFormalParameters()).basicRemove(otherEnd, msgs);
 			case XbasePackage.XCLOSURE__EXPRESSION:
 				return basicSetExpression(null, msgs);
-			case XbasePackage.XCLOSURE__IMPLICIT_PARAMETER:
-				return basicSetImplicitParameter(null, msgs);
+			case XbasePackage.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS:
+				return ((InternalEList<?>)getImplicitFormalParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -298,8 +264,8 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 				return getExpression();
 			case XbasePackage.XCLOSURE__EXPLICIT_SYNTAX:
 				return isExplicitSyntax();
-			case XbasePackage.XCLOSURE__IMPLICIT_PARAMETER:
-				return getImplicitParameter();
+			case XbasePackage.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS:
+				return getImplicitFormalParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -325,8 +291,9 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 			case XbasePackage.XCLOSURE__EXPLICIT_SYNTAX:
 				setExplicitSyntax((Boolean)newValue);
 				return;
-			case XbasePackage.XCLOSURE__IMPLICIT_PARAMETER:
-				setImplicitParameter((JvmFormalParameter)newValue);
+			case XbasePackage.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS:
+				getImplicitFormalParameters().clear();
+				getImplicitFormalParameters().addAll((Collection<? extends JvmFormalParameter>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -351,8 +318,8 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 			case XbasePackage.XCLOSURE__EXPLICIT_SYNTAX:
 				setExplicitSyntax(EXPLICIT_SYNTAX_EDEFAULT);
 				return;
-			case XbasePackage.XCLOSURE__IMPLICIT_PARAMETER:
-				setImplicitParameter((JvmFormalParameter)null);
+			case XbasePackage.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS:
+				getImplicitFormalParameters().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -374,8 +341,8 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 				return expression != null;
 			case XbasePackage.XCLOSURE__EXPLICIT_SYNTAX:
 				return explicitSyntax != EXPLICIT_SYNTAX_EDEFAULT;
-			case XbasePackage.XCLOSURE__IMPLICIT_PARAMETER:
-				return implicitParameter != null;
+			case XbasePackage.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS:
+				return implicitFormalParameters != null && !implicitFormalParameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

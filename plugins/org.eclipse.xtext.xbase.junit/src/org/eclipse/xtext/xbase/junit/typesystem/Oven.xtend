@@ -64,9 +64,9 @@ class Oven extends Assert {
 						}
 						XClosure: {
 							assertExpressionTypeIsResolved(content, resolvedTypes)
-							if (content.implicitParameter != null) {
-								assertIdentifiableTypeIsResolved(content.implicitParameter, resolvedTypes)
-							}
+							content.implicitFormalParameters.forEach [
+								assertIdentifiableTypeIsResolved(resolvedTypes)
+							]
 						}
 						XExpression: {
 							assertExpressionTypeIsResolved(content, resolvedTypes)

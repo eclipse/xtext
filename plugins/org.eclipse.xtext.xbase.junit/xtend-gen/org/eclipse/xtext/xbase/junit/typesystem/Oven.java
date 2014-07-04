@@ -12,6 +12,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.lang.reflect.Method;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -24,7 +25,9 @@ import org.eclipse.xtext.xbase.junit.typesystem.SimpleBloomFilter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -95,12 +98,13 @@ public class Oven extends Assert {
             if (content instanceof XClosure) {
               _matched=true;
               this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
-              JvmFormalParameter _implicitParameter = ((XClosure)content).getImplicitParameter();
-              boolean _notEquals_1 = (!Objects.equal(_implicitParameter, null));
-              if (_notEquals_1) {
-                JvmFormalParameter _implicitParameter_1 = ((XClosure)content).getImplicitParameter();
-                this.assertIdentifiableTypeIsResolved(_implicitParameter_1, resolvedTypes);
-              }
+              EList<JvmFormalParameter> _implicitFormalParameters = ((XClosure)content).getImplicitFormalParameters();
+              final Procedure1<JvmFormalParameter> _function = new Procedure1<JvmFormalParameter>() {
+                public void apply(final JvmFormalParameter it) {
+                  Oven.this.assertIdentifiableTypeIsResolved(it, resolvedTypes);
+                }
+              };
+              IterableExtensions.<JvmFormalParameter>forEach(_implicitFormalParameters, _function);
             }
           }
           if (!_matched) {

@@ -146,7 +146,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> initializeTypeParameterMapping() {
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
-		state.getResolvedTypes().acceptLinkingInformation(expression, this);
+		state.acceptCandidate(expression, this);
 		List<JvmTypeParameter> declaredTypeParameters = getDeclaredTypeParameters();
 		if (declaredTypeParameters.isEmpty()) {
 			typeParameterMapping = Collections.emptyMap();

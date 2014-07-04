@@ -11,7 +11,7 @@ import java.util.Map;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
 
@@ -21,24 +21,24 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
 @SuppressWarnings("all")
 public class RecordingRootResolvedTypes extends RootResolvedTypes {
   @Property
-  private Map<XExpression, ILinkingCandidate> _resolvedProxies;
+  private Map<XExpression, IApplicableCandidate> _resolvedProxies;
   
   public RecordingRootResolvedTypes(final DefaultReentrantTypeResolver resolver) {
     super(resolver);
   }
   
   public void resolveProxies() {
-    Map<XExpression, ILinkingCandidate> _basicGetLinkingCandidates = this.basicGetLinkingCandidates();
-    this.setResolvedProxies(_basicGetLinkingCandidates);
+    Map<XExpression, IApplicableCandidate> _basicGetLinkingMap = this.basicGetLinkingMap();
+    this.setResolvedProxies(_basicGetLinkingMap);
     super.resolveProxies();
   }
   
   @Pure
-  public Map<XExpression, ILinkingCandidate> getResolvedProxies() {
+  public Map<XExpression, IApplicableCandidate> getResolvedProxies() {
     return this._resolvedProxies;
   }
   
-  public void setResolvedProxies(final Map<XExpression, ILinkingCandidate> resolvedProxies) {
+  public void setResolvedProxies(final Map<XExpression, IApplicableCandidate> resolvedProxies) {
     this._resolvedProxies = resolvedProxies;
   }
 }
