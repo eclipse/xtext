@@ -18,6 +18,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtend.ide.outline.SwitchOutlineModeContribution;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.util.Files;
@@ -145,6 +146,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
 		deps.add(WorkbenchTestHelper.TESTPROJECT_NAME);
 		final IProject clientProj = WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME
 				+ "-client", Iterables.toArray(deps, String.class));
+		IResourcesSetupUtil.waitForAutoBuild();
 		XtendFile xtendFile = getWorkbenchTestHelper().xtendFile(clientProj, "clienttest/TestAAClient.xtend",
 				"package clienttest @aatest.TestAAnnotation class AAOutlineTest { override void myPublicMethod() {}}");
 		AssertBuilder clientAAFile = newAssertBuilder(xtendFile).numChildren(3);
