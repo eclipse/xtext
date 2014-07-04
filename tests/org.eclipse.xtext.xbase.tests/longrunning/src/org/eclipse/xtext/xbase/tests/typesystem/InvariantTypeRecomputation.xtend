@@ -29,6 +29,9 @@ import org.eclipse.xtext.xbase.typesystem.internal.ImplicitFirstArgument
 import org.eclipse.xtext.xbase.typesystem.internal.TypeInsteadOfConstructorLinkingCandidate
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.ITypeLiteralLinkingCandidate
+import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate
+import org.eclipse.xtext.xbase.typesystem.computation.IClosureCandidate
+import org.eclipse.xtext.xbase.XbasePackage
 
 /**
  * @author Sebastian Zarnekow
@@ -84,6 +87,20 @@ class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolver {
 			Assert::assertEquals(firstResult.isRefinedType(expression), result.isRefinedType(expression))
 		]
 		return result
+	}
+	
+	def dispatch void assertEqualLinkingData(IApplicableCandidate left, IApplicableCandidate right) {
+		Assert::fail('''«left» vs «right»''')
+	}
+	
+	def dispatch void assertEqualLinkingData(IClosureCandidate left, IClosureCandidate right) {
+		Assert::assertEquals('type', left.parameters.size, right.parameters.size)
+		left.parameters.forEach [ leftParam, idx |
+			val rightParam = right.parameters.get(idx)
+			Assert::assertEquals(leftParam.name, rightParam.name)
+			if (leftParam.eContainingFeature != XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS)
+				Assert::assertEquals(leftParam.parameterType.identifier, rightParam.parameterType.identifier)
+		]
 	}
 	
 	def dispatch void assertEqualLinkingData(ITypeLiteralLinkingCandidate left, ITypeLiteralLinkingCandidate right) {
@@ -230,14 +247,14 @@ class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolver {
 class RecordingRootResolvedTypes extends RootResolvedTypes {
 	
 	@Property
-	Map<XExpression, ILinkingCandidate> resolvedProxies
+	Map<XExpression, IApplicableCandidate> resolvedProxies
 	
 	new(DefaultReentrantTypeResolver resolver) {
 		super(resolver)
 	}
 	
 	override resolveProxies() {
-		resolvedProxies = basicGetLinkingCandidates
+		resolvedProxies = basicGetLinkingMap
 		super.resolveProxies()
 	}
 	

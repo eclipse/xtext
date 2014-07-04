@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.linking;
 
+import java.util.List;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -20,6 +23,7 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 /**
@@ -54,14 +58,11 @@ public class XbaseLazyLinker extends LazyLinker {
 			}
 		} else if (obj instanceof XClosure) {
 			// EMF 2.5 does not dive into derived contained things thus we do it explicitly
-			JvmFormalParameter implicitParameter = ((XClosure) obj).getImplicitParameter();
-			if (implicitParameter != null)
-				implicitParameter.setParameterType(null);
+			obj.eUnset(XbasePackage.Literals.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS);
 		} else if (obj instanceof XConstructorCall) {
 			((XConstructorCall) obj).setAnonymousClassConstructorCall(false);
 		}
 	}
-
 	
 	@Override
 	protected TreeIterator<EObject> getAllLinkableContents(EObject model) {

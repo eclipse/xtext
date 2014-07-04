@@ -13,10 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
@@ -25,7 +22,7 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -67,18 +64,9 @@ public class RootResolvedTypes extends ResolvedTypes {
 	}
 
 	public void resolveProxies() {
-		Map<XExpression, ILinkingCandidate> candidates = basicGetLinkingCandidates();
-		for(ILinkingCandidate candidate: candidates.values()) {
-			candidate.applyToModel();
-		}
-		for(Map.Entry<JvmIdentifiableElement, LightweightTypeReference> entry: basicGetTypes().entrySet()) {
-			JvmIdentifiableElement identifiable = entry.getKey();
-			if (identifiable instanceof JvmFormalParameter && identifiable.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER) {
-				final JvmFormalParameter implicitLambdaParameter = (JvmFormalParameter) identifiable;
-				JvmTypeReference typeReference = entry.getValue().toTypeReference();
-				// is unset in XbaseLazyLinker again
-				implicitLambdaParameter.setParameterType(typeReference);
-			}
+		Map<XExpression, IApplicableCandidate> candidates = basicGetLinkingMap();
+		for(IApplicableCandidate candidate: candidates.values()) {
+			candidate.applyToModel(this);
 		}
 	}
 	
@@ -217,8 +205,8 @@ public class RootResolvedTypes extends ResolvedTypes {
 	}
 	
 	protected void addLinkingDiagnostics(IAcceptor<? super AbstractDiagnostic> acceptor) {
-		Map<XExpression, ILinkingCandidate> candidates = basicGetLinkingCandidates();
-		for(ILinkingCandidate candidate: candidates.values()) {
+		Map<XExpression, IApplicableCandidate> candidates = basicGetLinkingMap();
+		for(IApplicableCandidate candidate: candidates.values()) {
 			candidate.validate(acceptor);
 		}
 	}

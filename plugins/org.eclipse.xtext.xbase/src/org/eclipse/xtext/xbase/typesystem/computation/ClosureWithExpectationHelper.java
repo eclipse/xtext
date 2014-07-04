@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -54,11 +55,13 @@ import com.google.common.collect.Lists;
 public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 
 	private final JvmOperation operation;
-
+	
+	private List<JvmFormalParameter> implicitParameters;
 	private FunctionTypeReference expectedClosureType;
 	private FunctionTypeReference resultClosureType;
 
 	private boolean validParameterTypes = true;
+	private boolean preferredSugar = false;
 
 	protected ClosureWithExpectationHelper(XClosure closure, JvmOperation operation, ITypeExpectation expectation, ITypeComputationState state) {
 		super(closure, expectation, state);
@@ -113,25 +116,47 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 	}
 
 	protected void markUncheckedValid() {
-		getExpectation().acceptActualType(resultClosureType, ConformanceHint.UNCHECKED);
+		if (preferredSugar) {
+			getExpectation().acceptActualType(resultClosureType, ConformanceHint.UNCHECKED, ConformanceHint.PREFERRED_LAMBDA_SUGAR);
+		} else {
+			getExpectation().acceptActualType(resultClosureType, ConformanceHint.UNCHECKED);
+		}
 	}
 
 	protected void markIncompatibleParameterList() {
-		getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.SEALED);
+		if (preferredSugar) {
+			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.SEALED, ConformanceHint.PREFERRED_LAMBDA_SUGAR);
+		} else {
+			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.SEALED);
+		}
 	}
-	
+
 	protected void markCompatibleParameterList() {
-		getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.LAMBDA_PARAMETER_COMPATIBLE, ConformanceHint.SEALED);
+		if (preferredSugar) {
+			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.LAMBDA_PARAMETER_COMPATIBLE, ConformanceHint.SEALED, ConformanceHint.PREFERRED_LAMBDA_SUGAR);
+		} else {
+			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.LAMBDA_PARAMETER_COMPATIBLE, ConformanceHint.SEALED);
+		}
 	}
 
 	protected void markIncompatible() {
-		getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.PROPAGATED_TYPE,
-				ConformanceHint.SEALED);
+		if (preferredSugar) {
+			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.PROPAGATED_TYPE,
+					ConformanceHint.SEALED, ConformanceHint.PREFERRED_LAMBDA_SUGAR);
+		} else {
+			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.PROPAGATED_TYPE,
+					ConformanceHint.SEALED);
+		}
 	}
 
 	protected void markRawCompatible() {
-		getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.LAMBDA_RAW_COMPATIBLE, ConformanceHint.PROPAGATED_TYPE,
-				ConformanceHint.SEALED);
+		if (preferredSugar) {
+			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.LAMBDA_RAW_COMPATIBLE,
+					ConformanceHint.PROPAGATED_TYPE, ConformanceHint.SEALED, ConformanceHint.PREFERRED_LAMBDA_SUGAR);
+		} else {
+			getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.LAMBDA_RAW_COMPATIBLE,
+					ConformanceHint.PROPAGATED_TYPE, ConformanceHint.SEALED);
+		}
 	}
 
 	/**
@@ -214,10 +239,45 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		result.withinScope(getClosure());
 		return result.withExpectedExceptions(expectedExceptions);
 	}
+	
+	@Override
+	public List<JvmFormalParameter> getParameters() {
+		XClosure closure = getClosure();
+		if (closure.isExplicitSyntax()) {
+			return closure.getDeclaredFormalParameters();
+		}
+		if (implicitParameters != null)
+			return implicitParameters;
+		return closure.getImplicitFormalParameters();
+	}
 
 	protected ITypeComputationState assignParameters(ITypeAssigner typeAssigner) {
 		List<LightweightTypeReference> operationParameterTypes = expectedClosureType.getParameterTypes();
-		List<JvmFormalParameter> closureParameters = getClosure().getFormalParameters();
+		XClosure closure = getClosure();
+		List<JvmFormalParameter> closureParameters;
+		boolean explicit = closure.isExplicitSyntax();
+		if (explicit) {
+			closureParameters = closure.getDeclaredFormalParameters();
+		} else if (closure.getImplicitFormalParameters().isEmpty()) {
+			implicitParameters = Lists.newArrayListWithCapacity(operationParameterTypes.size());
+			for(int i = 0; i < operationParameterTypes.size(); i++) {
+				JvmFormalParameter parameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
+				if (operationParameterTypes.size() == 1) {
+					parameter.setName(IFeatureNames.IT.getFirstSegment());
+					preferredSugar = true;
+				} else {
+					parameter.setName("$" + i);
+				}
+				implicitParameters.add(parameter);
+			}
+			closureParameters = implicitParameters;
+		} else {
+			closureParameters = closure.getImplicitFormalParameters();
+			if (closureParameters.size() == 1) {
+				preferredSugar = true;
+			}
+		}
+		
 		Object skippedHandle = null;
 		LightweightTypeReference returnType = expectedClosureType.getReturnType();
 		if (returnType.getKind() == LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
@@ -236,7 +296,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 					casted.acceptHint(VarianceInfo.IN);
 				}
 			}
-			if (closureParameter.eContainingFeature() != XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER && closureParameter.getParameterType() != null) {
+			if (explicit && closureParameter.getParameterType() != null) {
 				final LightweightTypeReference closureParameterType = typeAssigner.toLightweightTypeReference(closureParameter.getParameterType());
 				new DeferredTypeParameterHintCollector(getExpectation().getReferenceOwner()) {
 					@Override
@@ -308,7 +368,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 	}
 
 	/**
-	 * Returns <code>true</code> if the expression result is definitely incompatible to the expected type.
+	 * Returns an indicator how compatible the expression type result is to the expected type.
 	 */
 	/* @Nullable */
 	protected ConformanceHint processExpressionType(ITypeComputationResult expressionResult) {

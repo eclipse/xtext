@@ -857,7 +857,13 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
 		if (hintCompareResult == 0) {
 			if (leftConformance.contains(ConformanceHint.SUCCESS)) {
-				return CandidateCompareResult.AMBIGUOUS;
+				if (leftConformance.contains(ConformanceHint.PREFERRED_LAMBDA_SUGAR) == rightConformance.contains(ConformanceHint.PREFERRED_LAMBDA_SUGAR)) {
+					return CandidateCompareResult.AMBIGUOUS;
+				} else if (leftConformance.contains(ConformanceHint.PREFERRED_LAMBDA_SUGAR)) {
+					return CandidateCompareResult.THIS;
+				} else {
+					return CandidateCompareResult.OTHER;
+				}
 			} else {
 				return CandidateCompareResult.EQUALLY_INVALID;
 			}

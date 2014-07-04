@@ -64,7 +64,13 @@ public enum ConformanceHint {
 	/**
 	 * Two types are considered conformant if one of the participants is the unknown type. This flag indicates this situation.
 	 */
-	UNKNOWN_TYPE_PARTICIPATED;  
+	UNKNOWN_TYPE_PARTICIPATED,
+	
+	/**
+	 * A method is overloaded with various function interfaces. The variant with a single-arg lambda is the prefered sugar version.
+	 */
+	PREFERRED_LAMBDA_SUGAR,
+	;  
 	
 	
 	public static int compareHints(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {

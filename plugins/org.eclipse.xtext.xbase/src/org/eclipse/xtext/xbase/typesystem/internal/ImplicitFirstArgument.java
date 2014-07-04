@@ -16,6 +16,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 /**
@@ -28,7 +29,7 @@ public class ImplicitFirstArgument extends AbstractImplicitFeature {
 		super(featureCall, implicit, state);
 	}
 
-	public void applyToModel() {
+	public void applyToModel(IResolvedTypes resolvedTypes) {
 		getOwner().setImplicitFirstArgument(getFeatureCall());
 	}
 	

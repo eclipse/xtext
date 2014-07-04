@@ -20,6 +20,7 @@ import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,7 +35,7 @@ public abstract class AbstractUnresolvableReferenceWithNode extends AbstractUnre
 		this.text = text;
 	}
 
-	public void applyToModel() {
+	public void applyToModel(IResolvedTypes resolvedTypes) {
 		Resource resource = getExpression().eResource();
 		if (resource instanceof LazyLinkingResource) {
 			LazyLinkingResource lazyLinkingResource = (LazyLinkingResource) resource;
