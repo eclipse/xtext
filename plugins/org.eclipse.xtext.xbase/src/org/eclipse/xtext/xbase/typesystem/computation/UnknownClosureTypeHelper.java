@@ -59,7 +59,7 @@ public class UnknownClosureTypeHelper extends AbstractClosureTypeHelper {
 		int paramCount = closureParameters.size();
 		for(int i = 0; i < paramCount; i++) {
 			JvmFormalParameter closureParameter = closureParameters.get(i);
-			if (closureParameter.eContainingFeature() != XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER && closureParameter.getParameterType() != null) {
+			if (closureParameter.eContainingFeature() != XbasePackage.Literals.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS && closureParameter.getParameterType() != null) {
 				final LightweightTypeReference closureParameterType = typeAssigner.toLightweightTypeReference(closureParameter.getParameterType());
 				typeAssigner.assignType(closureParameter, closureParameterType);
 			} else {

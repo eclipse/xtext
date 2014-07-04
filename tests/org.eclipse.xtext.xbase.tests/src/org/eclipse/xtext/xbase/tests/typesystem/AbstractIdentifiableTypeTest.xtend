@@ -45,16 +45,16 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 		val identifiables = EcoreUtil2::eAll(xExpression).map[
 			switch(it) {
 				// derived features are not part of eContents thus we add it here explicitly
-				XClosure: it.implicitParameter
-				default: it 
+				XClosure: it.implicitFormalParameters
+				default: #[it] 
 			}
-		].toSet.filter [
+		].toIterable.flatten.toSet.filter [
 			it != null && switch(it) {
 				XVariableDeclaration: true
 				JvmFormalParameter: true
 				default: false
 			}
-		].filter(typeof(JvmIdentifiableElement)).toList
+		].filter(JvmIdentifiableElement).toList
 		return identifiables.sortBy [ 
 			val node = NodeModelUtils::findActualNodeFor(it)
 			if (node != null) 

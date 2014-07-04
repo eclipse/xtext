@@ -73,7 +73,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 		}
 		for(Map.Entry<JvmIdentifiableElement, LightweightTypeReference> entry: basicGetTypes().entrySet()) {
 			JvmIdentifiableElement identifiable = entry.getKey();
-			if (identifiable instanceof JvmFormalParameter && identifiable.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER) {
+			if (identifiable instanceof JvmFormalParameter && identifiable.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS) {
 				final JvmFormalParameter implicitLambdaParameter = (JvmFormalParameter) identifiable;
 				JvmTypeReference typeReference = entry.getValue().toTypeReference();
 				// is unset in XbaseLazyLinker again

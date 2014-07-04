@@ -236,7 +236,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 					casted.acceptHint(VarianceInfo.IN);
 				}
 			}
-			if (closureParameter.eContainingFeature() != XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER && closureParameter.getParameterType() != null) {
+			if (closureParameter.eContainingFeature() != XbasePackage.Literals.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS && closureParameter.getParameterType() != null) {
 				final LightweightTypeReference closureParameterType = typeAssigner.toLightweightTypeReference(closureParameter.getParameterType());
 				new DeferredTypeParameterHintCollector(getExpectation().getReferenceOwner()) {
 					@Override

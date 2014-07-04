@@ -22,7 +22,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
  *   <li>{@link org.eclipse.xtext.xbase.XClosure#getDeclaredFormalParameters <em>Declared Formal Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XClosure#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XClosure#isExplicitSyntax <em>Explicit Syntax</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XClosure#getImplicitParameter <em>Implicit Parameter</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XClosure#getImplicitFormalParameters <em>Implicit Formal Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,30 +101,20 @@ public interface XClosure extends XExpression
 	void setExplicitSyntax(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Implicit Parameter</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Implicit Formal Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmFormalParameter}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Implicit Parameter</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Implicit Formal Parameters</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Implicit Parameter</em>' containment reference.
-	 * @see #setImplicitParameter(JvmFormalParameter)
-	 * @see org.eclipse.xtext.xbase.XbasePackage#getXClosure_ImplicitParameter()
+	 * @return the value of the '<em>Implicit Formal Parameters</em>' containment reference list.
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXClosure_ImplicitFormalParameters()
 	 * @model containment="true" transient="true" derived="true"
 	 * @generated
 	 */
-	JvmFormalParameter getImplicitParameter();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XClosure#getImplicitParameter <em>Implicit Parameter</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Implicit Parameter</em>' containment reference.
-	 * @see #getImplicitParameter()
-	 * @generated
-	 */
-	void setImplicitParameter(JvmFormalParameter value);
+	EList<JvmFormalParameter> getImplicitFormalParameters();
 
 	/**
 	 * <!-- begin-user-doc -->

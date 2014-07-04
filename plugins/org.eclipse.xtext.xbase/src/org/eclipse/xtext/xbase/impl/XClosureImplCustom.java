@@ -7,12 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.impl;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 
 import com.google.common.base.Joiner;
@@ -21,6 +24,8 @@ import com.google.common.base.Joiner;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XClosureImplCustom extends XClosureImpl {
+
+	private boolean linked;
 
 	@Override
 	public String toString() {
@@ -34,15 +39,40 @@ public class XClosureImplCustom extends XClosureImpl {
 	
 	@Override
 	public EList<JvmFormalParameter> getFormalParameters() {
-		EList<JvmFormalParameter> parameters = getDeclaredFormalParameters();
-		if (expression != null && parameters.isEmpty() && !isExplicitSyntax()) {
-			BasicEList<JvmFormalParameter> result = new BasicEList<JvmFormalParameter>(1);
-			result.add(getImplicitParameter());
-			return result;
+		if (isExplicitSyntax()) {
+			return getDeclaredFormalParameters();
 		}
-		return parameters;
+		ensureLinked();
+		return getImplicitFormalParameters();
 	}
 
+	private void ensureLinked() {
+		if (!linked) {
+			Resource resource = eResource();
+			if (resource != null) {
+				if (resource instanceof BatchLinkableResource) {
+					((BatchLinkableResource) resource).resolveLazyCrossReferences(null);
+				} else {
+					EcoreUtil.resolveAll(resource);
+				}
+				linked = true;
+			}
+		}
+	}
+
+	@Override
+	public void eUnset(int featureID)
+	{
+		switch (featureID)
+		{
+			case XbasePackage.XCLOSURE__DECLARED_FORMAL_PARAMETERS:
+				linked = false;
+				getDeclaredFormalParameters().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+	
 	/**
 	 * Sets the closure's expression.
 	 * ATTENTION! Also sets an implicit receiver if {@link #isExplicitSyntax()} wasn't set to true.
@@ -60,8 +90,8 @@ public class XClosureImplCustom extends XClosureImpl {
 		if (!isExplicitSyntax()) {
 			JvmFormalParameter implicitParameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
 			implicitParameter.setName(IFeatureNames.IT.toString());
-			super.setImplicitParameter(implicitParameter);
+			getImplicitFormalParameters().add(implicitParameter);
 		}
 	}
-	
+
 }

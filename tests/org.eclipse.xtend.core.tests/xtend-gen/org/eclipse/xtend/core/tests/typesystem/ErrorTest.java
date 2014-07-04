@@ -556,7 +556,8 @@ public class ErrorTest extends AbstractXtendTestCase {
     EList<XExpression> _memberCallArguments = initializer.getMemberCallArguments();
     XExpression _head_1 = IterableExtensions.<XExpression>head(_memberCallArguments);
     final XClosure closure = ((XClosure) _head_1);
-    final JvmFormalParameter implicit = closure.getImplicitParameter();
+    EList<JvmFormalParameter> _implicitFormalParameters = closure.getImplicitFormalParameters();
+    final JvmFormalParameter implicit = IterableExtensions.<JvmFormalParameter>head(_implicitFormalParameters);
     Assert.assertNotNull(implicit);
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(implicit);
     LightweightTypeReference _actualType = resolvedTypes.getActualType(implicit);

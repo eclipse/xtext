@@ -448,7 +448,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 			boolean result = EcoreUtil.isAncestor(getRoot(), identifiableElement);
 			return result;
 		} else if (identifiableElement instanceof JvmFormalParameter
-				&& (identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER
+				&& (identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_FORMAL_PARAMETERS
 				|| identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS)) {
 			XtendMember member = EcoreUtil2.getContainerOfType(identifiableElement, XtendMember.class);
 			if (member != null && getInferredElements(member).isEmpty()) {
