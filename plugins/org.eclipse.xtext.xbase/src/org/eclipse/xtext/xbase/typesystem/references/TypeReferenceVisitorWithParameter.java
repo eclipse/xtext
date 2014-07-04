@@ -14,6 +14,9 @@ import java.util.List;
  */
 public abstract class TypeReferenceVisitorWithParameter<Param> {
 
+	/**
+	 * @param param some parameter.
+	 */
 	protected void doVisitTypeReference(LightweightTypeReference reference, Param param) {
 		throw new UnsupportedOperationException("Missing implementation for " + reference);
 	}

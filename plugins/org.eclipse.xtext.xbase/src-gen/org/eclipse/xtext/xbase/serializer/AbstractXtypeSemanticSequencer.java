@@ -43,7 +43,11 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 				}
 				else break;
 			case TypesPackage.JVM_LOWER_BOUND:
-				if(context == grammarAccess.getJvmLowerBoundRule()) {
+				if(context == grammarAccess.getJvmLowerBoundAndedRule()) {
+					sequence_JvmLowerBoundAnded(context, (JvmLowerBound) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getJvmLowerBoundRule()) {
 					sequence_JvmLowerBound(context, (JvmLowerBound) semanticObject); 
 					return; 
 				}
@@ -110,6 +114,15 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 * Constraint:
 	 *     typeReference=JvmTypeReference
 	 */
+	protected void sequence_JvmLowerBoundAnded(EObject context, JvmLowerBound semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     typeReference=JvmTypeReference
+	 */
 	protected void sequence_JvmLowerBound(EObject context, JvmLowerBound semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
@@ -169,7 +182,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	
 	/**
 	 * Constraint:
-	 *     ((constraints+=JvmUpperBound | constraints+=JvmLowerBound)?)
+	 *     (((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | (constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*))?)
 	 */
 	protected void sequence_JvmWildcardTypeReference(EObject context, JvmWildcardTypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

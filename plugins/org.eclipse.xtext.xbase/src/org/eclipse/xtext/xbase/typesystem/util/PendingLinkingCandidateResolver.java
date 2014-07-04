@@ -16,7 +16,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
- * @author kosyakov - Initial contribution and API
+ * @author Anton Kosyakov - Initial contribution and API
  */
 public class PendingLinkingCandidateResolver<Expression extends XExpression> {
 	
