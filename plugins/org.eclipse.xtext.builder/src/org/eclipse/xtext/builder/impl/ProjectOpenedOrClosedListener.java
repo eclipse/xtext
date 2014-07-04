@@ -107,7 +107,7 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 							return false;
 						}
 					});
-					buildScheduler.scheduleBuildIfNecessary(toUpdate);
+					buildScheduler.scheduleBuildIfNecessary(toUpdate, IBuildFlag.FORGET_BUILD_STATE_ONLY);
 				} catch (CoreException e) {
 					log.error(e.getMessage(), e);
 				}

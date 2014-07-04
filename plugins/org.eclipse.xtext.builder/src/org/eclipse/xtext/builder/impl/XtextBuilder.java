@@ -71,6 +71,10 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
+		if (IBuildFlag.FORGET_BUILD_STATE_ONLY.isSet(args)) {
+			forgetLastBuiltState();
+			return new IProject[0];
+		}
 		long startTime = System.currentTimeMillis();
 		StoppedTask task = Stopwatches.forTask(String.format("XtextBuilder.build[%s]", getKindAsString(kind)));
 		try {
