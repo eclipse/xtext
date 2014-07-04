@@ -313,7 +313,7 @@ class ErrorTest extends AbstractXtendTestCase {
 		val field = client.members.head as XtendField
 		val initializer = field.initialValue as XMemberFeatureCall
 		val closure = initializer.memberCallArguments.head as XClosure
-		val implicit = closure.implicitParameter
+		val implicit = closure.implicitFormalParameters.head
 		assertNotNull(implicit)
 		val resolvedTypes = typeResolver.resolveTypes(implicit)
 		assertNotNull(resolvedTypes.getActualType(implicit))
