@@ -21,6 +21,12 @@ public interface IBuildFlag {
 	 * execution will not be built again. 
 	 */
 	static final IBuildFlag RECOVERY_BUILD = new Impl("RecoveryBuild");
+	/**
+	 * Indicates that the builder should not actually build anything, but just discard its state.
+	 * This means that the next build will be a full build, even if only an incremental build is
+	 * requested.
+	 */
+	static final IBuildFlag FORGET_BUILD_STATE_ONLY = new Impl("ForgetBuildState");
 
 	void addToMap(Map buildArgs);
 
