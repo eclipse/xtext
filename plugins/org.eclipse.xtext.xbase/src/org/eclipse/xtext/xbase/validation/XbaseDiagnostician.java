@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.xbase.XClosure;
 
@@ -50,30 +51,36 @@ public class XbaseDiagnostician extends CancelableDiagnostician {
 	 * Validates the implicit first parameter explicitly if it was not contained in {@link EObject#eContents()}.
 	 */
 	protected boolean doValidateLambdaContents(XClosure closure, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		JvmFormalParameter implicitParameter = closure.getImplicitParameter();
-		boolean parameterVisited = implicitParameter == null;
+		List<JvmFormalParameter> implicitParameters = closure.getImplicitFormalParameters();
+		boolean parameterVisited = implicitParameters.isEmpty();
 		List<EObject> eContents = closure.eContents();
 		if (!eContents.isEmpty()) {
 			Iterator<EObject> i = eContents.iterator();
 			EObject child = i.next();
-			if (child != null && child == implicitParameter) {
+			if (child != null && child.eClass() == TypesPackage.Literals.JVM_FORMAL_PARAMETER && implicitParameters.contains(child)) {
 				parameterVisited = true;
 			}
 			boolean result = validate(child, diagnostics, context);
 			while (i.hasNext() && (result || diagnostics != null)) {
 				child = i.next();
-				if (child != null && child == implicitParameter) {
+				if (child != null && child.eClass() == TypesPackage.Literals.JVM_FORMAL_PARAMETER && implicitParameters.contains(child)) {
 					parameterVisited = true;
 				}
 				result &= validate(child, diagnostics, context);
 			}
 			if (!parameterVisited) {
-				result &= validate(implicitParameter, diagnostics, context);
+				for(int idx = 0; idx < implicitParameters.size(); idx++) {
+					result &= validate(implicitParameters.get(idx), diagnostics, context);
+				}
 			}
 			return result;
 		} else {
 			if (!parameterVisited) {
-				return validate(implicitParameter, diagnostics, context);
+				boolean result = true;
+				for(int idx = 0; idx < implicitParameters.size(); idx++) {
+					result &= validate(implicitParameters.get(idx), diagnostics, context);
+				}
+				return result;
 			}
 			return true;
 		}

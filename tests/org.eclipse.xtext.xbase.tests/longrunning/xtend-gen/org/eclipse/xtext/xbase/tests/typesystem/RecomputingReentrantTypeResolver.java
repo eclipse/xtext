@@ -8,29 +8,37 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.RecordingRootResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.IClosureCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -62,10 +70,10 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   public IResolvedTypes resolve() {
     IResolvedTypes _resolve = super.resolve();
     final RecordingRootResolvedTypes firstResult = ((RecordingRootResolvedTypes) _resolve);
-    final Map<XExpression, ILinkingCandidate> firstRun = firstResult.getResolvedProxies();
+    final Map<XExpression, IApplicableCandidate> firstRun = firstResult.getResolvedProxies();
     IResolvedTypes _resolve_1 = super.resolve();
     final RecordingRootResolvedTypes result = ((RecordingRootResolvedTypes) _resolve_1);
-    final Map<XExpression, ILinkingCandidate> secondRun = result.getResolvedProxies();
+    final Map<XExpression, IApplicableCandidate> secondRun = result.getResolvedProxies();
     StringConcatenation _builder = new StringConcatenation();
     String _join = this.mapJoiner.join(firstRun);
     _builder.append(_join, "");
@@ -103,17 +111,53 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     Set<XExpression> _keySet_2 = firstRun.keySet();
     Set<XExpression> _keySet_3 = secondRun.keySet();
     Assert.assertEquals(_builder_1.toString(), _keySet_2, _keySet_3);
-    final Procedure2<XExpression, ILinkingCandidate> _function = new Procedure2<XExpression, ILinkingCandidate>() {
-      public void apply(final XExpression expression, final ILinkingCandidate firstLinkingData) {
-        final ILinkingCandidate secondLinkingData = secondRun.get(expression);
+    final Procedure2<XExpression, IApplicableCandidate> _function = new Procedure2<XExpression, IApplicableCandidate>() {
+      public void apply(final XExpression expression, final IApplicableCandidate firstLinkingData) {
+        final IApplicableCandidate secondLinkingData = secondRun.get(expression);
         RecomputingReentrantTypeResolver.this.assertEqualLinkingData(firstLinkingData, secondLinkingData);
         boolean _isRefinedType = firstResult.isRefinedType(expression);
         boolean _isRefinedType_1 = result.isRefinedType(expression);
         Assert.assertEquals(Boolean.valueOf(_isRefinedType), Boolean.valueOf(_isRefinedType_1));
       }
     };
-    MapExtensions.<XExpression, ILinkingCandidate>forEach(firstRun, _function);
+    MapExtensions.<XExpression, IApplicableCandidate>forEach(firstRun, _function);
     return result;
+  }
+  
+  protected void _assertEqualLinkingData(final IApplicableCandidate left, final IApplicableCandidate right) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(left, "");
+    _builder.append(" vs ");
+    _builder.append(right, "");
+    Assert.fail(_builder.toString());
+  }
+  
+  protected void _assertEqualLinkingData(final IClosureCandidate left, final IClosureCandidate right) {
+    List<JvmFormalParameter> _parameters = left.getParameters();
+    int _size = _parameters.size();
+    List<JvmFormalParameter> _parameters_1 = right.getParameters();
+    int _size_1 = _parameters_1.size();
+    Assert.assertEquals("type", _size, _size_1);
+    List<JvmFormalParameter> _parameters_2 = left.getParameters();
+    final Procedure2<JvmFormalParameter, Integer> _function = new Procedure2<JvmFormalParameter, Integer>() {
+      public void apply(final JvmFormalParameter leftParam, final Integer idx) {
+        List<JvmFormalParameter> _parameters = right.getParameters();
+        final JvmFormalParameter rightParam = _parameters.get((idx).intValue());
+        String _name = leftParam.getName();
+        String _name_1 = rightParam.getName();
+        Assert.assertEquals(_name, _name_1);
+        EStructuralFeature _eContainingFeature = leftParam.eContainingFeature();
+        boolean _notEquals = (!Objects.equal(_eContainingFeature, XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS));
+        if (_notEquals) {
+          JvmTypeReference _parameterType = leftParam.getParameterType();
+          String _identifier = _parameterType.getIdentifier();
+          JvmTypeReference _parameterType_1 = rightParam.getParameterType();
+          String _identifier_1 = _parameterType_1.getIdentifier();
+          Assert.assertEquals(_identifier, _identifier_1);
+        }
+      }
+    };
+    IterableExtensions.<JvmFormalParameter>forEach(_parameters_2, _function);
   }
   
   protected void _assertEqualLinkingData(final ITypeLiteralLinkingCandidate left, final ITypeLiteralLinkingCandidate right) {
@@ -411,7 +455,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     }
   }
   
-  public void assertEqualLinkingData(final ILinkingCandidate left, final ILinkingCandidate right) {
+  public void assertEqualLinkingData(final IApplicableCandidate left, final IApplicableCandidate right) {
     if (left instanceof ImplicitFirstArgument
          && right instanceof ImplicitFirstArgument) {
       _assertEqualLinkingData((ImplicitFirstArgument)left, (ImplicitFirstArgument)right);
@@ -437,8 +481,8 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
       _assertEqualLinkingData((TypeInsteadOfConstructorLinkingCandidate)left, (IConstructorLinkingCandidate)right);
       return;
     } else if (left instanceof ITypeLiteralLinkingCandidate
-         && right != null) {
-      _assertEqualLinkingData((ITypeLiteralLinkingCandidate)left, right);
+         && right instanceof ILinkingCandidate) {
+      _assertEqualLinkingData((ITypeLiteralLinkingCandidate)left, (ILinkingCandidate)right);
       return;
     } else if (left instanceof IFeatureLinkingCandidate
          && right instanceof ImplicitReceiver) {
@@ -456,9 +500,17 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
          && right instanceof IFeatureLinkingCandidate) {
       _assertEqualLinkingData((IFeatureLinkingCandidate)left, (IFeatureLinkingCandidate)right);
       return;
-    } else if (left != null
+    } else if (left instanceof ILinkingCandidate
          && right instanceof ITypeLiteralLinkingCandidate) {
-      _assertEqualLinkingData(left, (ITypeLiteralLinkingCandidate)right);
+      _assertEqualLinkingData((ILinkingCandidate)left, (ITypeLiteralLinkingCandidate)right);
+      return;
+    } else if (left instanceof IClosureCandidate
+         && right instanceof IClosureCandidate) {
+      _assertEqualLinkingData((IClosureCandidate)left, (IClosureCandidate)right);
+      return;
+    } else if (left != null
+         && right != null) {
+      _assertEqualLinkingData(left, right);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +

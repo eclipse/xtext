@@ -11,9 +11,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractPendingLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractResolvedReference;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractUnresolvableReferenceWithNode;
@@ -35,7 +35,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ILinkingCandidate {
+public interface ILinkingCandidate extends IApplicableCandidate {
 
 	/**
 	 * Apply this candidate to the current computation state model. This propagates
@@ -49,24 +49,14 @@ public interface ILinkingCandidate {
 	 * {@link EcoreUtil#resolve(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EObject) resolve}
 	 * of EMF. This implies that the linked feature call may still point to a proxy afterwards.
 	 */
-	void applyToModel();
-	
-	// TODO we should use a smarter acceptor here
-	// e.g. it should be possible to suppress diagnostics for children of certain expressions
-	// and therefore it should expose something like 'isSuppressed()'
-	/**
-	 * Produce diagnostics for this condidate. It is not the responsibility of this
-	 * candidate to propagate the acceptor to its children.
-	 * @return <code>true</code> if further validation should be performed.
-	 */
-	boolean validate(IAcceptor<? super AbstractDiagnostic> result);
+	void applyToModel(IResolvedTypes resolvedTypes);
 	
 	/**
 	 * Produces the best candidate for the current two candidates. It may turn out
 	 * that both candidates (<code>this</code> and <code>other</code>) are ambiguous 
 	 * so no prefered candidate can be chosen. In that case, a new linking candidate
 	 * may be produced that carries this information and will use that on {@link #applyToComputationState()},
-	 * {@link #applyToModel()}, and {@link #validate(IAcceptor)}.
+	 * {@link #applyToModel(IResolvedTypes)}, and {@link #validate(IAcceptor)}.
 	 */
 	ILinkingCandidate getPreferredCandidate(ILinkingCandidate other);
 	

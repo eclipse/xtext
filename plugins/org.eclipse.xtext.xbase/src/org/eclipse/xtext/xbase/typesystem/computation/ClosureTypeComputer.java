@@ -46,6 +46,7 @@ public class ClosureTypeComputer {
 	public void computeTypes() {
 		selectStrategy();
 		strategy.computeTypes();
+		state.acceptCandidate(closure, strategy);
 	}
 	
 	/**
@@ -60,7 +61,14 @@ public class ClosureTypeComputer {
 		} else {
 			JvmOperation operation = functionTypes.findImplementingOperation(expectedType);
 			JvmType type = expectedType.getType();
-			int closureParameterSize = closure.getFormalParameters().size();
+			int closureParameterSize;
+			if (closure.isExplicitSyntax()) {
+				closureParameterSize = closure.getDeclaredFormalParameters().size();
+			} else if (operation != null) {
+				closureParameterSize = operation.getParameters().size();
+			} else {
+				closureParameterSize = 1;
+			}
 			if (operation == null || operation.getParameters().size() != closureParameterSize || type == null) {
 				strategy = getClosureWithoutExpectationHelper();
 			} else {

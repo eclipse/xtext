@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.internal.util.FeatureKinds;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -52,7 +53,7 @@ public class ImplicitReceiver extends AbstractImplicitFeature {
 		}
 	}
 
-	public void applyToModel() {
+	public void applyToModel(IResolvedTypes resolvedTypes) {
 		getOwner().setImplicitReceiver(getFeatureCall());
 	}
 	

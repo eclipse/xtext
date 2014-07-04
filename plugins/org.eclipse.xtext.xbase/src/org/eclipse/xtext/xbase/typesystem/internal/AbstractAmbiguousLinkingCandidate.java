@@ -21,6 +21,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -84,8 +85,8 @@ public abstract class AbstractAmbiguousLinkingCandidate<Candidate extends Abstra
 		candidate.applyToComputationState();
 	}
 
-	public void applyToModel() {
-		getPrimaryCandidate().applyToModel();
+	public void applyToModel(IResolvedTypes resolvedTypes) {
+		getPrimaryCandidate().applyToModel(resolvedTypes);
 	}
 
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {

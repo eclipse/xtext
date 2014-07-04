@@ -66,7 +66,8 @@ public class BeforeLinkingTest extends AbstractXbaseTestCase {
       final XVariableDeclaration assignment = ((XVariableDeclaration) _head);
       XExpression _right = assignment.getRight();
       final XClosure lambda = ((XClosure) _right);
-      final JvmFormalParameter implicitParameter = lambda.getImplicitParameter();
+      EList<JvmFormalParameter> _implicitFormalParameters = lambda.getImplicitFormalParameters();
+      final JvmFormalParameter implicitParameter = IterableExtensions.<JvmFormalParameter>head(_implicitFormalParameters);
       JvmTypeReference _parameterType = implicitParameter.getParameterType();
       String _simpleName = _parameterType.getSimpleName();
       Assert.assertEquals("String", _simpleName);

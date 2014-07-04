@@ -39,7 +39,7 @@ public abstract class AbstractImplicitFeature implements IFeatureLinkingCandidat
 	}
 	
 	public void applyToComputationState() {
-		state.getResolvedTypes().acceptLinkingInformation(implicit, this);
+		state.acceptCandidate(implicit, this);
 		getState().markAsRefinedTypeIfNecessary(this);
 	}
 	

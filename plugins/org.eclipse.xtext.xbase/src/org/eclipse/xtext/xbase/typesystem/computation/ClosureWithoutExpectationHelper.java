@@ -16,8 +16,9 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.XClosure;
-import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes;
@@ -44,6 +45,7 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor
  */
 public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 
+	private List<JvmFormalParameter> implicitParameters;
 	private final FunctionTypes functionTypes;
 	
 	protected ClosureWithoutExpectationHelper(XClosure closure, ITypeExpectation expectation, ITypeComputationState state) {
@@ -81,10 +83,18 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	protected FunctionTypeReference getFunctionTypeReference(boolean isProcedure) {
-		FunctionTypeReference result = functionTypes.createRawFunctionTypeRef(
-				getExpectation().getReferenceOwner(), getClosure(), getClosure().getFormalParameters().size(), isProcedure);
-		initClosureType(result, isProcedure);
-		return result;
+		XClosure closure = getClosure();
+		ITypeReferenceOwner referenceOwner = getExpectation().getReferenceOwner();
+		if (closure.isExplicitSyntax()) {
+			int parameters = closure.getDeclaredFormalParameters().size();
+			FunctionTypeReference result = functionTypes.createRawFunctionTypeRef(referenceOwner, closure, parameters, isProcedure);
+			initClosureType(result, isProcedure);
+			return result;	
+		} else {
+			FunctionTypeReference result = functionTypes.createRawFunctionTypeRef(referenceOwner, closure, 1, isProcedure);
+			initClosureType(result, isProcedure);
+			return result;
+		}
 	}
 	
 	protected void initClosureType(FunctionTypeReference result, boolean isProcedure) {
@@ -117,53 +127,80 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 
 	protected ITypeComputationState getClosureBodyTypeComputationState(ITypeAssigner typeAssigner, FunctionTypeReference incompleteClosureType) {
 		ITypeComputationState result = assignParameters(typeAssigner, incompleteClosureType);
-//		JvmType knownType = incompleteClosureType.getType();
-//		if (knownType != null && knownType instanceof JvmGenericType) {
-//			result.assignType(IFeatureNames.SELF, knownType, incompleteClosureType);
-//		}
 		result.withinScope(getClosure());
 		return result;
 	}
-
+	
+	@Override
+	public List<JvmFormalParameter> getParameters() {
+		XClosure closure = getClosure();
+		if (closure.isExplicitSyntax()) {
+			return closure.getDeclaredFormalParameters();
+		}
+		if (implicitParameters != null)
+			return implicitParameters;
+		return closure.getImplicitFormalParameters();
+	}
+	
 	protected ITypeComputationState assignParameters(ITypeAssigner typeAssigner, FunctionTypeReference incompleteClosureType) {
 		List<LightweightTypeReference> operationParameterTypes = incompleteClosureType.getTypeArguments();
-		List<JvmFormalParameter> closureParameters = getClosure().getFormalParameters();
-		
-		// just in case we have more than 6 closure parameters
-		int paramCount = Math.min(closureParameters.size(), operationParameterTypes.size());
-		// TODO validate parameter count - check against operation if available
-		for(int i = 0; i < paramCount; i++) {
-			JvmFormalParameter closureParameter = closureParameters.get(i);
-			final LightweightTypeReference operationParameterType = operationParameterTypes.get(i);
-			if (closureParameter.eContainingFeature() != XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER && closureParameter.getParameterType() != null) {
-				final LightweightTypeReference closureParameterType = typeAssigner.toLightweightTypeReference(closureParameter.getParameterType());
-				new DeferredTypeParameterHintCollector(getExpectation().getReferenceOwner()) {
-					@Override
-					protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
-						LightweightTypeReference wrapped = reference.getWrapperTypeIfPrimitive();
-						typeParameter.acceptHint(wrapped, BoundTypeArgumentSource.RESOLVED, getOrigin(), getExpectedVariance(), getActualVariance());
-					}
-				}.processPairedReferences(operationParameterType, closureParameterType);
-				typeAssigner.assignType(closureParameter, closureParameterType);
-				incompleteClosureType.addParameterType(closureParameterType);
+		XClosure closure = getClosure();
+		boolean explicit = closure.isExplicitSyntax();
+		if (explicit || !closure.getImplicitFormalParameters().isEmpty()) {
+			List<JvmFormalParameter> closureParameters;
+			if (explicit) {
+				closureParameters = closure.getDeclaredFormalParameters();
 			} else {
-				typeAssigner.assignType(closureParameter, operationParameterType);
-				incompleteClosureType.addParameterType(operationParameterType);
+				closureParameters = closure.getImplicitFormalParameters();	
 			}
-		}
-		for(int i = paramCount; i < closureParameters.size(); i++) {
-			JvmFormalParameter closureParameter = closureParameters.get(i);
-			JvmTypeReference parameterType = closureParameter.getParameterType();
-			if (parameterType != null) {
-				LightweightTypeReference lightweight = typeAssigner.toLightweightTypeReference(parameterType);
-				typeAssigner.assignType(closureParameter, lightweight);
-			} else {
-				LightweightTypeReference objectType = typeAssigner.toLightweightTypeReference(getServices().getTypeReferences().getTypeForName(Object.class, closureParameter));
-				typeAssigner.assignType(closureParameter, objectType);
+			// just in case we have more than 6 closure parameters
+			int paramCount = Math.min(closureParameters.size(), operationParameterTypes.size());
+			// TODO validate parameter count - check against operation if available
+			for(int i = 0; i < paramCount; i++) {
+				JvmFormalParameter closureParameter = closureParameters.get(i);
+				final LightweightTypeReference operationParameterType = operationParameterTypes.get(i);
+				if (explicit && closureParameter.getParameterType() != null) {
+					final LightweightTypeReference closureParameterType = typeAssigner.toLightweightTypeReference(closureParameter.getParameterType());
+					new DeferredTypeParameterHintCollector(getExpectation().getReferenceOwner()) {
+						@Override
+						protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
+							LightweightTypeReference wrapped = reference.getWrapperTypeIfPrimitive();
+							typeParameter.acceptHint(wrapped, BoundTypeArgumentSource.RESOLVED, getOrigin(), getExpectedVariance(), getActualVariance());
+						}
+					}.processPairedReferences(operationParameterType, closureParameterType);
+					typeAssigner.assignType(closureParameter, closureParameterType);
+					incompleteClosureType.addParameterType(closureParameterType);
+				} else {
+					typeAssigner.assignType(closureParameter, operationParameterType);
+					incompleteClosureType.addParameterType(operationParameterType);
+				}
 			}
+			for(int i = paramCount; i < closureParameters.size(); i++) {
+				JvmFormalParameter closureParameter = closureParameters.get(i);
+				JvmTypeReference parameterType = closureParameter.getParameterType();
+				if (parameterType != null) {
+					LightweightTypeReference lightweight = typeAssigner.toLightweightTypeReference(parameterType);
+					typeAssigner.assignType(closureParameter, lightweight);
+				} else {
+					LightweightTypeReference objectType = typeAssigner.toLightweightTypeReference(getServices().getTypeReferences().getTypeForName(Object.class, closureParameter));
+					typeAssigner.assignType(closureParameter, objectType);
+				}
+			}
+			ITypeComputationState result = typeAssigner.getForkedState();
+			return result;
+		} else {
+			if (operationParameterTypes.size() != 1) {
+				throw new IllegalStateException();
+			}
+			JvmFormalParameter implicitParameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
+			implicitParameter.setName(IFeatureNames.IT.getFirstSegment());
+			implicitParameters = Collections.singletonList(implicitParameter);
+			LightweightTypeReference operationParameterType = operationParameterTypes.get(0);
+			typeAssigner.assignType(implicitParameter, operationParameterType);
+			incompleteClosureType.addParameterType(operationParameterType);
+			ITypeComputationState result = typeAssigner.getForkedState();
+			return result;
 		}
-		ITypeComputationState result = typeAssigner.getForkedState();
-		return result;
 	}
 
 	protected FunctionTypeReference processExpressionType(FunctionTypeReference incompleteClosureType, ITypeComputationResult expressionResult) {

@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
+import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
@@ -254,6 +255,12 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 			result.addAll(components[i].getExpectations());
 		}
 		return result;
+	}
+	
+	public void acceptCandidate(XExpression expression, IApplicableCandidate candidate) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].acceptCandidate(expression, candidate);
+		}
 	}
 
 	public void acceptActualType(LightweightTypeReference type) {

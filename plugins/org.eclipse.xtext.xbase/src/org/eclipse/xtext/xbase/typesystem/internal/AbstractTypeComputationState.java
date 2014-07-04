@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.scoping.batch.ITypeImporter;
 import org.eclipse.xtext.xbase.scoping.batch.SimpleIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
@@ -313,6 +314,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	protected abstract List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState);
 	
 	protected abstract List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asActualExpectation);
+	
+	public void acceptCandidate(XExpression expression, IApplicableCandidate candidate) {
+		getResolvedTypes().acceptCandidate(expression, candidate);
+	}
 	
 	public void acceptActualType(LightweightTypeReference type) {
 		for(ITypeExpectation expectation: getExpectations()) {

@@ -1044,7 +1044,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXClosure_ImplicitParameter()
+	public EReference getXClosure_ImplicitFormalParameters()
 	{
 		return (EReference)xClosureEClass.getEStructuralFeatures().get(3);
 	}
@@ -1661,7 +1661,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		createEReference(xClosureEClass, XCLOSURE__DECLARED_FORMAL_PARAMETERS);
 		createEReference(xClosureEClass, XCLOSURE__EXPRESSION);
 		createEAttribute(xClosureEClass, XCLOSURE__EXPLICIT_SYNTAX);
-		createEReference(xClosureEClass, XCLOSURE__IMPLICIT_PARAMETER);
+		createEReference(xClosureEClass, XCLOSURE__IMPLICIT_FORMAL_PARAMETERS);
 
 		xCastedExpressionEClass = createEClass(XCASTED_EXPRESSION);
 		createEReference(xCastedExpressionEClass, XCASTED_EXPRESSION__TYPE);
@@ -1900,7 +1900,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEReference(getXClosure_DeclaredFormalParameters(), theTypesPackage.getJvmFormalParameter(), null, "declaredFormalParameters", null, 0, -1, XClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXClosure_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXClosure_ExplicitSyntax(), ecorePackage.getEBoolean(), "explicitSyntax", null, 0, 1, XClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXClosure_ImplicitParameter(), theTypesPackage.getJvmFormalParameter(), null, "implicitParameter", null, 0, 1, XClosure.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getXClosure_ImplicitFormalParameters(), theTypesPackage.getJvmFormalParameter(), null, "implicitFormalParameters", null, 0, -1, XClosure.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		addEOperation(xClosureEClass, theTypesPackage.getJvmFormalParameter(), "getFormalParameters", 0, -1, IS_UNIQUE, IS_ORDERED);
 
